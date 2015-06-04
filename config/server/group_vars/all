@@ -2,7 +2,7 @@
 # DATABASE
 drupal_mysql_drupal_user: "drupal"
 drupal_mysql_drupal_password: "root"
-drupal_mysql_database: "***DRUPAL_MACHINE_NAME***"
+drupal_mysql_database: "pece"
 mysql_root_password: "root"
 
 # DRUPAL
@@ -14,15 +14,15 @@ node_version: "0.12.2"
 nginx_log_dir: "/var/log/nginx"
 
 # ROLE: KRAFTWAGEN
-drupal_path: "/home/{{ www_owner }}/***DRUPAL_MACHINE_NAME***/build"
-drupal_project_path: "/home/{{ www_owner }}/***DRUPAL_MACHINE_NAME***/"
-drupal_source: https://github.com/TallerWebSolutions/***DRUPAL_MACHINE_NAME***.git
+drupal_path: "/home/{{ www_owner }}/pece/build"
+drupal_project_path: "/home/{{ www_owner }}/pece/"
+drupal_source: https://github.com/TallerWebSolutions/pece.git
 drupal_www_owner: "{{ www_owner }}"
 drupal_admin_password: "root"
 drupal_admin_email: admin@localhost.com
-drupal_site_name: "***DRUPAL_SITE_NAME***"
-drupal_kw_name: ***DRUPAL_MACHINE_NAME***
-drupal_kw_human_name: "***KW_MACHINE_NAME***"
+drupal_site_name: "Pece Drupal Distro"
+drupal_kw_name: pece
+drupal_kw_human_name: "pece"
 drupal_kw_source: https://github.com/TallerWebSolutions/kraftwagen.git
 drupal_kw_source_branch: taller
 drupal_kw_skeleton_source: https://github.com/TallerWebSolutions/kraftwagen-default-skeleton.git

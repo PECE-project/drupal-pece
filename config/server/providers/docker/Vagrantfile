@@ -8,16 +8,16 @@ ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.define "***DRUPAL_MACHINE_NAME***" do |a|
+  config.vm.define "pece" do |a|
     a.vm.provider "docker" do |d|
       d.build_dir = "."
       d.ports = ["80:80"]
-      d.name = "***DRUPAL_MACHINE_NAME***"
+      d.name = "pece"
       d.has_ssh = true
     end
-    a.vm.hostname = "***DRUPAL_MACHINE_NAME***.local"
+    a.vm.hostname = "pece.local"
 
-    a.vm.synced_folder "../../../../", "/home/vagrant/***DRUPAL_MACHINE_NAME***"
+    a.vm.synced_folder "../../../../", "/home/vagrant/pece"
 
     a.ssh.port = 22
     a.vm.provision "ansible" do |ansible|
