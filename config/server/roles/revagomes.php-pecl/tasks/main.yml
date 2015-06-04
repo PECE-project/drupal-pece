@@ -1,0 +1,17 @@
+---
+- name: Install PECL libaries.
+  shell: echo "" | pecl install {{ item }}
+  register: pecl_result
+  changed_when: "pecl_result.rc == 0"
+  failed_when: "not (('already installed' in pecl_result.stdout) or ('install ok:' in pecl_result.stdout))"
+  with_items: php_pecl_extensions
+  tags: [packages,php]
+
+- name: Create PECL extensions .ini files (RedHat).
+  template: src=extension.ini.j2 dest=/etc/php.d/{{ item }}.ini owner=root group=root mode=0644
+  with_items: php_pecl_extensions
+  when: ansible_os_family == "RedHat"
+  notify:
+    - restart php-fpm
+    - restart apache
+  tags: [packages,php]

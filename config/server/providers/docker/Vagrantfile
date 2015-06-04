@@ -1,0 +1,30 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.define "***DRUPAL_MACHINE_NAME***" do |a|
+    a.vm.provider "docker" do |d|
+      d.build_dir = "."
+      d.ports = ["80:80"]
+      d.name = "***DRUPAL_MACHINE_NAME***"
+      d.has_ssh = true
+    end
+    a.vm.hostname = "***DRUPAL_MACHINE_NAME***.local"
+
+    a.vm.synced_folder "../../../../", "/home/vagrant/***DRUPAL_MACHINE_NAME***"
+
+    a.ssh.port = 22
+    a.vm.provision "ansible" do |ansible|
+      ansible.playbook = "../../playbook.yml"
+      ansible.inventory_path = "inventory"
+      # ansible.verbose = 'vvvv'
+      #ansible.start_at_task = "Check if Drupal is booting."
+    end
+  end
+end

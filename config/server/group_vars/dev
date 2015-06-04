@@ -1,0 +1,14 @@
+---
+drupal_path: /home/ubuntu/***DRUPAL_MACHINE_NAME***/build
+www_owner: ubuntu
+app_user: ubuntu
+www_group: www-data
+enable_debug: no
+drupal_mysql_drupal_user: drupal
+drupal_mysql_drupal_password: "***CHANGE_THIS***"
+drupal_mysql_database: ***DRUPAL_MACHINE_NAME***
+mysql_root_password: "***CHANGE_THIS***"
+nginx_log_dir: /var/log/nginx
+drupal_deploy_key: >
+  ***CHANGE_THIS***
+build_only: true

@@ -1,0 +1,381 @@
+---
+- hosts: database
+  sudo: yes
+
+  pre_tasks:
+    - name: Install apt repositories.
+      command: apt-get install python-apt -y
+
+  roles:
+    - role: geerlingguy.mysql
+      mysql_databases:
+       - name: "{{ drupal_mysql_database }}"
+         encoding: utf8
+         collation: utf8_unicode_ci
+      mysql_users:
+       - name: "{{ drupal_mysql_drupal_user }}"
+         host: "%"
+         password: "{{ drupal_mysql_drupal_password }}"
+         priv: "{{ drupal_mysql_database }}.*:ALL"
+
+- hosts: test
+  sudo: yes
+
+  pre_tasks:
+    - name: Install apt repositories.
+      command: apt-get install python-apt -y
+
+  roles:
+    - role: g-div.nvm
+      nvm_user: "{{ app_user }}"
+      nvm_version: "v0.24.0"
+      nvm_node_version: "{{ node_version }}"
+      nvm_profile_file: "/home/{{ app_user }}/.profile"
+      nvm_packages: ['protractor']
+
+    - role: geerlingguy.java
+
+- hosts: drupal
+  sudo: yes
+
+  pre_tasks:
+    - name: Install apt repositories.
+      command: apt-get install python-apt -y
+
+    - name: "Add the deploy key to authorized_keys file."
+      authorized_key: >
+        user={{ www_owner }}
+        key="{{ drupal_deploy_key }}"
+      tags:
+        - system
+      when: drupal_deploy_key is defined
+
+
+    - name: Install dependencies.
+      apt: "pkg={{item}}"
+      with_items:
+        - curl
+        - sendmail
+        - unzip
+        - htop
+        - mytop
+        - xclip
+        - ruby2.0-dev
+        - bundler
+
+    - name: Grant ngix directory exists
+      file: path=/etc/nginx state=directory
+
+    - name: Custom configuration for Nginx.
+      template: >
+        src=templates/post-config.nginx.j2
+        dest=/etc/nginx/post-config.conf
+
+  roles:
+    - role: geerlingguy.git
+      git_packages:
+        - git
+
+    # Install: Nginx with extras.
+    - role: jdauphant.nginx
+      nginx_http_params:
+        - sendfile "on"
+        - tcp_nopush "on"
+        - tcp_nodelay "on"
+        - keepalive_timeout "65"
+        - access_log "{{nginx_log_dir}}/access.log"
+        - error_log "{{nginx_log_dir}}/error.log"
+        - types_hash_max_size "2048"
+        - types_hash_bucket_size "32"
+      ubuntu_pkg:
+        - python-selinux
+        - nginx-extras
+
+    # Install and configure: PHP-FPM with 3 pools.
+    - role: nbz4live.php-fpm
+      php_fpm_apt_packages:
+        - php5-fpm
+        - php5-cli
+        - php5-gd
+        - php5-mysql
+        - php5-mcrypt
+        - php5-dev
+        - php-pear
+        - php-apc
+        - php5-curl
+        - php-mail
+
+      php_fpm_config:
+        - option: "emergency_restart_threshold"
+          section: "global"
+          value: "10"
+        - option: "emergency_restart_interval"
+          section: "global"
+          value: "1m"
+        - option: "process_control_timeout"
+          section: "global"
+          value: "5"
+        - option: "daemonize"
+          section: "global"
+          value: "no"
+
+      php_fpm_ini:
+        - option: "memory_limit"
+          section: "PHP"
+          value: "512M"
+        - option: "engine"
+          section: "PHP"
+          value: "1"
+        - option: "error_reporting"
+          section: "PHP"
+          value: "E_ALL & ~E_DEPRECATED & ~E_STRICT"
+        - option: "ldap.max_links"
+          section: "ldap"
+          value: "1"
+        - option: "max_execution_time"
+          section: "PHP"
+          value: "60"
+        - option: "upload_max_filesize"
+          section: "PHP"
+          value: "64M"
+        - option: "date.timezone"
+          section: "Date"
+          value: "America/Sao_Paulo"
+          # APC related configuration.
+        - option: "apc.shm_size"
+          section: "APC"
+          value: "96M"
+        - option: "apc.shm_segments"
+          section: "APC"
+          value: "1"
+        - option: "apc.num_files_hint"
+          section: "APC"
+          value: "2048"
+        - option: "apc.user_entries_hint"
+          section: "APC"
+          value: "4096"
+        - option: "apc.ttl"
+          section: "APC"
+          value: "7200"
+        - option: "apc.use_request_time"
+          section: "APC"
+          value: "1"
+        - option: "apc.user_ttl"
+          section: "APC"
+          value: "7200"
+        - option: "apc.gc_ttl"
+          section: "APC"
+          value: "3600"
+        - option: "apc.mmap_file_mask"
+          section: "APC"
+          value: "/tmp/apc.XXXXXX"
+        - option: "apc.file_update_protection"
+          section: "APC"
+          value: "2"
+        - option: "apc.enable_cli"
+          section: "APC"
+          value: "1"
+        - option: "apc.max_file_size"
+          section: "APC"
+          value: "1M"
+        - option: "apc.stat"
+          section: "APC"
+          value: "1"
+        - option: "apc.stat_ctime"
+          section: "APC"
+          value: "0"
+        - option: "apc.canonicalize"
+          section: "APC"
+          value: "0"
+        - option: "apc.write_lock"
+          section: "APC"
+          value: "1"
+        - option: "apc.report_autofilter"
+          section: "APC"
+          value: "0"
+        - option: "apc.rfc1867"
+          section: "APC"
+          value: "1"
+        - option: "apc.rfc1867_prefix"
+          section: "APC"
+          value: "upload_"
+        - option: "apc.rfc1867_name"
+          section: "APC"
+          value: "APC_UPLOAD_PROGRESS"
+        - option: "apc.rfc1867_freq"
+          section: "APC"
+          value: "0"
+        - option: "apc.rfc1867_ttl"
+          section: "APC"
+          value: "3600"
+        - option: "apc.include_once_override"
+          section: "APC"
+          value: "0"
+        - option: "apc.lazy_classes"
+          section: "APC"
+          value: "0"
+        - option: "apc.lazy_functions"
+          section: "APC"
+          value: "0"
+        - option: "apc.coredump_unmap"
+          section: "APC"
+          value: "0"
+        - option: "apc.file_md5"
+          section: "APC"
+          value: "0"
+
+      php_fpm_pools:
+        - name: www0
+          listen: /var/run/php-fpm.sock
+          user: "{{ www_owner }}"
+          group: "{{ www_group }}"
+          listen.owner: "{{ www_owner }}"
+          listen.group: "{{ www_group }}"
+          pm: dynamic
+          pm.max_children: 5
+          pm.start_servers: 2
+          pm.min_spare_servers: 1
+          pm.max_spare_servers: 3
+          chdir: /
+
+        - name: www1
+          listen: /var/run/php-fpm-zwei.sock
+          user: "{{ www_owner }}"
+          group: "{{ www_group }}"
+          listen.owner: "{{ www_owner }}"
+          listen.group: "{{ www_group }}"
+          pm: dynamic
+          pm.max_children: 5
+          pm.start_servers: 2
+          pm.min_spare_servers: 1
+          pm.max_spare_servers: 3
+          chdir: /
+
+        - name: www-bkp
+          listen: /var/run/php-fpm-bkp.sock
+          user: "{{ www_owner }}"
+          group: "{{ www_group }}"
+          listen.owner: "{{ www_owner }}"
+          listen.group: "{{ www_group }}"
+          pm: dynamic
+          pm.max_children: 5
+          pm.start_servers: 2
+          pm.min_spare_servers: 1
+          pm.max_spare_servers: 3
+          chdir: /
+
+    # Install: Perusio's Nginx configurations.
+    - role: pbuyle.nginx-drupal
+      nginx_http_pre_params:
+        - types_hash_max_size "2048"
+        - types_hash_bucket_size "32"
+      nginx_drupal_use_drush: false
+      nginx_drupal_microcache: false
+      nginx_drupal_flv_streaming: false
+      nginx_drupal_mp4_streaming: false
+      nginx_drupal_aio: false
+      nginx_drupal_http_core:
+        client_max_body_size: "10m"
+      nginx_drupal_upstream_servers:
+        - "unix:/var/run/php-fpm.sock"
+        - "unix:/var/run/php-fpm-zwei.sock"
+      nginx_drupal_upstream_backup_servers:
+        - "unix:/var/run/php-fpm-bkp.sock"
+      nginx_drupal_sites:
+        - file_name: default
+          root: "{{ drupal_path }}"
+          http:
+            port: 80
+          server_name: "_"
+          default: true
+          not_allowed_methods: none
+
+    # Install: PHP Composer.
+    - role: pbuyle.php-composer
+      composer_user: "{{ www_owner }}"
+      composer_user_home: "/home/{{ www_owner}}"
+
+    # Install: Drush.
+    - role: geerlingguy.drush
+      composer_user: "{{ www_owner}}"
+      composer_user_home: "/home/{{ www_owner}}"
+
+    # Install: Drupal Project.
+    - role: taller.drupal-kw
+      when: build_only is not defined
+
+  tasks:
+    # - name: Install Kraftwagen Drush module.
+    #   git: >
+    #     repo=https://github.com/kraftwagen/kraftwagen.git
+    #     accept_hostkey=yes
+    #     dest=/home/{{ drupal_www_owner }}/.drush/kraftwagen
+    #   sudo: yes
+    #   sudo_user: "{{ drupal_www_owner }}"
+    #   when: build_only is defined
+
+    - name: Clear the Drush cache.
+      command: >
+        /usr/local/bin/drush cc drush
+      sudo: yes
+      sudo_user: "{{ drupal_www_owner }}"
+      when: build_only is defined
+
+    # - name: Update webdriver.
+    #   sudo: yes
+    #   sudo_user: "{{ app_user }}"
+    #   shell: ./webdriver-manager update
+    #   args:
+    #     chdir: "/home/{{ app_user }}/.nvm/versions/node/v{{ nvm_node_version }}/bin/"
+    #   #shell: "/home/{{ app_user }}/.nvm/versions/node/v{{ nvm_node_version }}/bin/webdriver-manager update"
+
+    - name: Install Xdebug for PHP.
+      apt: pkg=php5-xdebug
+      when: enable_debug == 'yes'
+
+- hosts: solr
+  sudo: yes
+
+  pre_tasks:
+    - name: Install python-apt.
+      command: apt-get install python-apt -y
+
+  roles:
+    - geerlingguy.java
+    - geerlingguy.tomcat6
+    - role: geerlingguy.solr
+      # @TODO: If the version is changed afted previous provision
+      # it needs to remove: /opt/solr and /root/solr/solr-x.x.x dirs.
+      solr_version: "4.5.1"
+
+  # tasks:
+    # @TODO: Not working yet, cp cannot stat the drupal_path.
+    # - name: Copy the Search API Solr's configuration files.
+    #   template: >
+    #     src=templates/solr/v{{ solr_version.split('.')[0] }}.x/schema.xml.j2
+    #     dest={{ solr_path }}/cores/core0/conf/
+    #     owner={{ tomcat_user }}
+    #     group={{ tomcat_user }}
+    #     mode=755
+    #     backup=yes
+    #   when: solr_file.stat.exists == false
+    #   notify: restart tomcat
+    #   command: >
+    #     cp {{ drupal_path }}/profiles/MY_SITE/modules/contrib/search_api_solr/solr-conf/3.x/* {{ solr_path }}/cores/core0/conf/
+    #   notify: restart tomcat
+
+- hosts: nodejs
+  sudo: yes
+
+  pre_tasks:
+    - name: Install apt repositories.
+      command: apt-get install python-apt -y
+
+  roles:
+    - role: g-div.nvm
+      nvm_user: "{{ app_user }}"
+      nvm_version: "v0.24.0"
+      nvm_node_version: "{{ node_version }}"
+      nvm_profile_file: "/home/{{ app_user }}/.profile"
+      nvm_packages:
+        - npm

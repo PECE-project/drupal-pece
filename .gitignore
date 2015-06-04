@@ -1,0 +1,75 @@
+# Sensitive information #
+#########################
+# Ignore configuration files that may contain sensitive information.
+
+# Kraftwagen specific #
+#######################
+# Ignore all folder krftwagen generates.
+/cnf
+builds/
+build
+
+# Node specific #
+#######################
+# Ignore node modules.
+/node_modules
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.svn
+
+# Logs and databases #
+######################
+databases/local/*
+
+# OS generated files #
+######################
+.DS_Store*
+*.Trash*
+ehthumbs.db
+Icon?
+Thumbs.db
+*.orig
+*.swo
+*cwatch.pid
+
+# Editors generated files #
+###########################
+.project
+.settings
+*~
+*.sublime-project
+*.sublime-workspace
+*.sublime-projectcompletions
+.Drupal.sublime-projectcomplections
+nbproject
+.buildpath
+.sass-cache
+.idea
+.idea/*
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Virtual machines
+.vagrant
+.vagrant/*
+
+# Local files #
+###############
+conf.local.js
+

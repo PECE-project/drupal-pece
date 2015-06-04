@@ -1,0 +1,21 @@
+---
+# NGINX: DRUPAL
+nginx_drupal_upstream_servers:
+  - "unix:/var/run/php-fpm.sock"
+nginx_drupal_upstream_backup_servers: []
+
+# PHP-FPM
+php_fpm_memory_limit: "1024M"
+php_fpm_pools:
+  - name: www0
+    listen: /var/run/php-fpm.sock
+    user: "{{ www_owner }}"
+    group: "{{ www_group }}"
+    listen.owner: "{{ www_owner }}"
+    listen.group: "{{ www_group }}"
+    pm: dynamic
+    pm.max_children: 5
+    pm.start_servers: 2
+    pm.min_spare_servers: 1
+    pm.max_spare_servers: 3
+    chdir: /

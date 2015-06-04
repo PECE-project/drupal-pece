@@ -1,0 +1,33 @@
+---
+# Assemble the local settings.
+- name: Create directory with local settings.
+  file: >
+    path={{ drupal_project_path }}/cnf/settings.d
+    state=directory
+
+- name: Database local settings.
+  template: >
+    src=settings.db.j2
+    dest={{ drupal_project_path }}/cnf/settings.d/database
+
+- name: Drupal hash salt in settings.
+  shell: >
+    php scripts/password-hash.sh '123456'
+    | cut -d':' -f3
+    | tr -d ' '
+    > {{ drupal_project_path }}/cnf/settings.d/salting
+    creates={{ drupal_project_path }}/cnf/settings.d/salting
+
+- name: Create local settings.local.php file with local info like database.
+  assemble: >
+    src={{ drupal_project_path }}/cnf/settings.d
+    dest={{ drupal_project_path }}/cnf/settings.local.php
+    mode=644
+
+# Insert <?php tag.
+- lineinfile: >
+    line='<?php'
+    dest={{ drupal_project_path }}/cnf/settings.local.php
+    insertafter=BOF
+    state=present
+  when: drupal_db.database != "" and drupal_db.host != ""
