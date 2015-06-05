@@ -45,7 +45,7 @@
 # Setup the project.
 - name: Setup the new Kraftwagen project.
   command: >
-    /usr/local/bin/drush kw-setup --env=local
+    /usr/local/bin/drush kw-setup --env={{ drupal_env }}
     chdir={{ drupal_project_path }}
     creates={{ drupal_project_path }}/cnf
   sudo: yes

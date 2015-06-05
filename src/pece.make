@@ -60,3 +60,16 @@ projects[radix_layouts][subdir] = radix
 ;projects[radix_views][subdir] = radix
 ;projects[radix_colorizer][version] = 1.x-dev
 ;projects[radix_colorizer][subdir] = radix
+
+; Coffee
+projects[coffee][version] = "2.2"
+projects[coffee][subdir]  = "contrib"
+
+; ECK
+projects[eck][version] = "2.0-rc7"
+projects[eck][subdir]  = "contrib"
+
+; Inline Entity Form
+projects[inline_entity_form][version] = "1.5"
+projects[inline_entity_form][subdir]  = "contrib"
+

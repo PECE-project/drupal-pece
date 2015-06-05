@@ -17,3 +17,30 @@ function pece_install() {
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
 }
+
+/**
+ * Implements hook_kw_manifests_info().
+ */
+function pece_kw_manifests_info() {
+  $manifests = array();
+
+  $manifests['change_modules'] = array(
+    'callback' => 'pece_manifest_change_modules',
+  );
+
+  $manifests['enable_devel_modules'] = array(
+    'callback' => 'pece_manifest_enable_devel_modules',
+    'require environment' => array('development', 'local'),
+  );
+
+}
+
+/**
+ * Enable DEV modules.
+ */
+function adoromaquiagem_drupal_manifest_enable_devel_modules() {
+  module_enable(array(
+    'devel',
+    'search_krumo',
+  ), TRUE);
+}
