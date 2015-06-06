@@ -12,7 +12,6 @@ projects[kw_itemnames][download][url] = "git://github.com/kraftwagen/kw-itemname
 projects[kw_itemnames][subdir] = "kraftwagen"
 
 ; The Panopoly Foundation
-
 projects[panopoly_core][version] = 1.21
 projects[panopoly_core][subdir] = panopoly
 
@@ -35,7 +34,6 @@ projects[panopoly_users][version] = 1.21
 projects[panopoly_users][subdir] = panopoly
 
 ; The Panopoly Toolset
-
 projects[panopoly_pages][version] = 1.21
 projects[panopoly_pages][subdir] = panopoly
 
@@ -46,7 +44,6 @@ projects[panopoly_search][version] = 1.21
 projects[panopoly_search][subdir] = panopoly
 
 ; For running the automated tests.
-
 projects[panopoly_test][version] = 1.21
 projects[panopoly_test][subdir] = panopoly
 
@@ -73,3 +70,20 @@ projects[eck][subdir]  = "contrib"
 projects[inline_entity_form][version] = "1.5"
 projects[inline_entity_form][subdir]  = "contrib"
 
+; Rules
+projects[rules][subdir] = "contrib"
+projects[rules][version] = 2.9
+
+; Translation
+projects[l10n_update][subdir] = "contrib"
+projects[l10n_update][version] = 2.0
+
+; XAutoload
+projects[xautoload][version] = "5.1"
+projects[xautoload][subdir]  = "contrib"
+projects[xautoload][patch][] = "https://www.drupal.org/files/issues/xautoload-7.x-5.x-profile-2393205-6.patch"
+projects[xautoload][patch][] = "https://www.drupal.org/files/issues/base_table_or_view_not-2393205-2.patch"
+
+; jQuery update recent version
+projects[jquery_update][version] = 2.5
+projects[jquery_update][subdir] = contrib

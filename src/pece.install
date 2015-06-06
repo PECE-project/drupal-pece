@@ -36,11 +36,77 @@ function pece_kw_manifests_info() {
 }
 
 /**
+ * Enable modules.
+ */
+function pece_manifest_change_modules() {
+  // $modules_to_disable = array(
+  //   'date_popup_authored',
+  //   'linkit',
+  //   'search_api_autocomplete',
+  // );
+
+  // Contrib modules.
+  module_enable(array(
+    'radix_layouts',
+    'panopoly_theme',
+    'panopoly_admin',
+    'panopoly_search',
+    'xautoload',
+    'block',
+    'coffee',
+    'eck',
+    'inline_entity_form',
+    'search_api',
+    // 'search_api_solr',
+    // 'search_api_facetapi',
+    // 'search_autocomplete',
+    // 'search_api_override',
+    // 'metatag',
+    // 'metatag_facebook',
+    // 'metatag_google_plus',
+    // 'metatag_opengraph',
+    // 'metatag_panels',
+    // 'views_litepager',
+    'syslog',
+    // 'views_litepager',
+    // 'seckit',
+    // 'username_enumeration_prevention',
+    // 'password_policy',
+    // 'variable',
+    // 'easy_social',
+    // 'redirect',
+    'locale',
+    'translation',
+    // 'better_exposed_filters',
+    // 'views_filters_selective',
+    // 'imageapi_optimize',
+    'rules',
+    'rules_admin',
+    'l10n_update',
+  ), TRUE);
+
+  // Sandbox modules.
+  // module_enable(array(
+  // ), TRUE);
+
+  // PECE Core modules.
+  // module_enable(array(
+  //   'pece',
+  // ), TRUE);
+
+  foreach ($modules_to_disable as $module_name) {
+    if (module_exists($module_name)) {
+      module_disable(array($module_name));
+      drupal_uninstall_modules(array($module_name));
+    }
+  }
+}
+
+/**
  * Enable DEV modules.
  */
-function adoromaquiagem_drupal_manifest_enable_devel_modules() {
+function pece_manifest_enable_devel_modules() {
   module_enable(array(
     'devel',
-    'search_krumo',
   ), TRUE);
 }
