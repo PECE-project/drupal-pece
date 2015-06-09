@@ -25,7 +25,7 @@ fi
 
 if [ -d "profiles/pece/themes/contrib/ember" ]; then
   (
-    cd profiles/pece/themes/ember
+    cd profiles/pece/themes/contrib/ember
     bundle install
     bundle exec compass compile
   )
