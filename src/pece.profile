@@ -9,15 +9,6 @@ function pece_install_tasks(&$install_state) {
   // Add our custom CSS file for the installation process
   drupal_add_css(drupal_get_path('profile', 'pece') . '/panopoly.css');
 
-  // Add the Panopoly app selection to the installation process
-  $panopoly_server = array(
-    'machine name' => 'panopoly',
-    'default apps' => array('panopoly_demo'),
-    'default content callback' => 'pece_default_content',
-  );
-  require_once(drupal_get_path('module', 'apps') . '/apps.profile.inc');
-  $tasks = $tasks + apps_profile_install_tasks($install_state, $panopoly_server);
-
   // Add the Panopoly theme selection to the installation process
   require_once(drupal_get_path('module', 'panopoly_theme') . '/panopoly_theme.profile.inc');
   $tasks = $tasks + panopoly_theme_profile_theme_selection_install_task($install_state);
@@ -49,7 +40,7 @@ function pece_form_install_configure_form_alter(&$form, $form_state) {
   drupal_get_messages('warning');
 
   // Set reasonable defaults for site configuration form
-  $form['site_information']['site_name']['#default_value'] = 'pece';
+  $form['site_information']['site_name']['#default_value'] = 'Adoro Maquiagem';
   $form['admin_account']['account']['name']['#default_value'] = 'admin';
   $form['server_settings']['site_default_country']['#default_value'] = 'US';
   $form['server_settings']['date_default_timezone']['#default_value'] = 'America/Los_Angeles'; // West coast, best coast
@@ -77,33 +68,6 @@ function pece_form_apps_profile_apps_select_form_alter(&$form, $form_state) {
       if ($name != '#theme') {
         $form['apps_fieldset']['apps']['#options'][$name] = '<strong>' . $app['name'] . '</strong><p><div class="admin-options"><div class="form-item">' . theme('image', array('path' => $app['logo']['path'], 'height' => '32', 'width' => '32')) . '</div>' . $app['description'] . '</div></p>';
       }
-    }
-  }
-}
-
-/**
- * Apps installer default content callback.
- */
-function pece_default_content(&$modules) {
-  // TODO: It would be better to figure out which apps have demo content
-  // modules by looking at the app manifest. Unfortunately, this doesn't qute
-  // work because the manifest doesn't know about the default content module
-  // until the app has actually been enabled, since that data only comes in
-  // from hook_apps_app_info().
-  //
-  // apps_include('manifest');
-  // $apps = apps_apps('panopoly');
-  // foreach ($modules as $module) {
-  //   if (!empty($apps[$module]['demo content module'])) {
-  //     $modules[] = $apps[$module]['demo content module'];
-  //   }
-  // }
-  //
-  // This workaround assumes a pattern MYMODULE_demo.
-  $files = system_rebuild_module_data();
-  foreach($modules as $module) {
-    if (isset($files[$module . '_demo'])) {
-      $modules[] = $module . '_demo';
     }
   }
 }

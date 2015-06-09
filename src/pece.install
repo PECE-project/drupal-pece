@@ -33,17 +33,22 @@ function pece_kw_manifests_info() {
     'require environment' => array('development', 'local'),
   );
 
+  $manifests['themes'] = array(
+    'callback' => 'pece_manifest_define_themes',
+  );
+
+  return $manifests;
 }
 
 /**
  * Enable modules.
  */
 function pece_manifest_change_modules() {
-  // $modules_to_disable = array(
-  //   'date_popup_authored',
-  //   'linkit',
-  //   'search_api_autocomplete',
-  // );
+  $modules_to_disable = array(
+    // 'date_popup_authored',
+    // 'linkit',
+    // 'search_api_autocomplete',
+  );
 
   // Contrib modules.
   module_enable(array(
@@ -109,4 +114,38 @@ function pece_manifest_enable_devel_modules() {
   module_enable(array(
     'devel',
   ), TRUE);
+}
+
+/**
+ * Set default themes.
+ */
+function pece_manifest_define_themes() {
+  $themes = array(
+    'ember',
+    'radix',
+    // 'pece',
+  );
+
+  foreach ($themes as $theme) {
+    if (!_is_theme_enabled($theme)) {
+      theme_enable(array($theme));
+    }
+  }
+
+  variable_set('admin_theme', 'ember');
+  variable_set('theme_default', 'radix');
+  variable_set('node_admin_theme', 1);
+
+  // Clean Breakpoints settings.
+  // breakpoints_flush_caches();
+}
+
+/**
+ * Check if theme is enabled.
+ *
+ * Because Drupal does not in theme_enable.
+ */
+function _is_theme_enabled($theme_name) {
+  $themes = list_themes();
+  return isset($themes[$theme_name]) && $themes[$theme_name]->status == 1;
 }

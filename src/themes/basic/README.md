@@ -1,1 +1,0 @@
-Basic is the default theme for pece.
