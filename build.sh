@@ -23,7 +23,7 @@ if [ -d "profiles/pece/themes/pece/assets/sass/" ]; then
   )
 fi
 
-if [ -d "profiles/pece/themes/ember" ]; then
+if [ -d "profiles/pece/themes/contrib/ember" ]; then
   (
     cd profiles/pece/themes/ember
     bundle install

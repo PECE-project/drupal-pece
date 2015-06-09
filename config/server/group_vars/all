@@ -16,8 +16,9 @@ nginx_log_dir: "/var/log/nginx"
 # ROLE: KRAFTWAGEN
 drupal_path: "/home/{{ www_owner }}/pece/build"
 drupal_project_path: "/home/{{ www_owner }}/pece/"
-drupal_source: https://github.com/TallerWebSolutions/pece.git
+drupal_source: git@github.com:PECE-project/drupal-pece.git
 drupal_www_owner: "{{ www_owner }}"
+drupal_www_group: "{{ www_group }}"
 drupal_admin_password: "root"
 drupal_admin_email: admin@localhost.com
 drupal_site_name: "Pece Drupal Distro"

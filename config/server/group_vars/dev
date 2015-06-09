@@ -1,5 +1,7 @@
 ---
-drupal_path: /home/ubuntu/pece/build
+drupal_project_path: /home/ubuntu/pece-project_drupal-pece
+drupal_path: "{{ drupal_project_path }}/build"
+drupal_project_branch: dev
 www_owner: ubuntu
 app_user: ubuntu
 www_group: www-data
@@ -11,4 +13,4 @@ mysql_root_password: "Nh9Sn2!8Sh"
 nginx_log_dir: /var/log/nginx
 drupal_deploy_key: >
   ssh-dss AAAAB3NzaC1kc3MAAACBANOhHUOKhnrAFUxAu/LTuMSLW5YlPYdJtfcWZXYwt7Pcp/vfMaOFb8roX5F8YOLNYUeu1WFN0csbLjeghj/x9sgofJH6N01l2E6L4DDF4itvjPObQpAjBBTiaI3L80f4RLMsHQUtp6Lrp0QYYuVydWIh8Q3cAM/L4Uaa4xqedI8PAAAAFQDSUipUYnzNpC3dkQxwqxQr+lK3/QAAAIB3X7bh+SNwNE8DCNNyF1ZK4MTZRwZaAoCSWuSPVrV1GEa+jmDw/WcCoa0QvsT35VsH7ZYhHRZU1plX2pn57KsUlPhYGkC4zfvSPzMsfmR3pnFKiYkIZCGsrxS6jIpnwGBpE8dcGGVCn8wuM4K9yS8MzcxJpcHFG7A6lOUvxHDIIgAAAIAvrSFoUIT5NG0dDqhUjV/wSHGAYOaxLWdHVXaBqRZSkTtlhV8oqpVvF2enEeCDx9HkmRSvg3CAt+k/NhR+gmtNRTy34sMutVJ8qql9k5UJSOoNwEuXZiy4Y6rHZ8errr5s2g/8Pq+j6LmySD6IIgVqQi3/82aol8py0BbMA3GK+A== pece-project/drupal-pece-sebas@taller.net.br
-build_only: true
+# build_only: true

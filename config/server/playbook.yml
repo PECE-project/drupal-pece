@@ -303,6 +303,8 @@
     # Install: Drupal Project.
     - role: taller.drupal-kw
       when: build_only is not defined
+      tags:
+        - drupal-kw
 
   tasks:
     # - name: Install Kraftwagen Drush module.
