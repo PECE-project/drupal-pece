@@ -23,6 +23,24 @@
   register: drupal_is_booting
   ignore_errors: True
 
+- name: Check if the src directory is already there.
+  stat: "path={{ drupal_project_path }}/src"
+  register: drupal_project_destination_status
+
+# Project from Git.
+- name: Add project from Git.
+  include: git.yml
+  when: drupal_source | match("^(git|ssh|(http(s)?)).+\.git$")
+  sudo: yes
+  sudo_user: "{{ drupal_www_owner }}"
+
+- name: Ensure Drupal project directory exist.
+  file:
+    path: "{{ drupal_project_path }}"
+    state: directory
+    owner: "{{ drupal_www_owner }}"
+    group: "{{ drupal_www_owner }}"
+
 # New project.
 - name: Create new Kraftwagen project.
   command: >
@@ -32,15 +50,10 @@
       --name={{ drupal_kw_name }}
       --human-name="{{ drupal_kw_human_name }}"
     chdir={{ drupal_project_path }}
+    creates={{ drupal_project_path }}/src/{{ drupal_kw_name }}.profile
   sudo: yes
   sudo_user: "{{ drupal_www_owner }}"
-
-# Project from Git.
-- name: Add project from Git.
-  include: git.yml
-  when: drupal_source | match("^(git|ssh|(http(s)?)).+\.git$")
-  sudo: yes
-  sudo_user: "{{ drupal_www_owner }}"
+  when: drupal_project_destination_status.stat.exists == false
 
 # Setup the project.
 - name: Setup the new Kraftwagen project.
@@ -56,7 +69,6 @@
   command: >
     /usr/local/bin/drush kw-b
     chdir={{ drupal_project_path }}
-    creates={{ drupal_project_path }}/build/sites/default/settings.local.php
   sudo: yes
   sudo_user: "{{ drupal_www_owner }}"
 

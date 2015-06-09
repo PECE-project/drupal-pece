@@ -1,30 +1,13 @@
 ---
 - name: Check if the project is already cloned.
-  stat: "path={{ drupal_project_path }}/src/.git"
+  stat: "path={{ drupal_project_path }}/.git"
   register: drupal_project_cloned_status
-
-- name: Check if the project destination directory is already there.
-  stat: "path={{ drupal_project_path }}/src"
-  register: drupal_project_destination_status
-
-- name: Git init project
-  command: "git init"
-  when: drupal_project_cloned_status.stat.exists == false
-  args:
-    chdir: "{{ drupal_project_path }}/src"
-
-- name: Add git remote.
-  command: "git remote add origin {{drupal_source}}"
-  when: drupal_project_cloned_status.stat.exists == false
-  args:
-    chdir: "{{ drupal_project_path }}/src/"
 
 - name: Download Drupal from Git repository. This may take a few minutes...
   git: >
     repo={{ drupal_source }}
     version={{ drupal_project_branch }}
-    update=no
     accept_hostkey=yes
-    dest={{ drupal_project_path }}/src
+    dest={{ drupal_project_path }}
   register: drupal_project_cloned_status
   when: drupal_project_cloned_status.stat.exists == false
