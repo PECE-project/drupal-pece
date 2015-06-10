@@ -21,15 +21,15 @@ function pece_groups_defaultconfig_features() {
 function pece_groups_defaultconfig_user_default_roles() {
   $roles = array();
 
-  // Exported role: Contributor.
-  $roles['Contributor'] = array(
-    'name' => 'Contributor',
+  // Exported role: Contributors.
+  $roles['Contributors'] = array(
+    'name' => 'Contributors',
     'weight' => 5,
   );
 
-  // Exported role: Researcher.
-  $roles['Researcher'] = array(
-    'name' => 'Researcher',
+  // Exported role: Researches.
+  $roles['Researches'] = array(
+    'name' => 'Researches',
     'weight' => 4,
   );
 
