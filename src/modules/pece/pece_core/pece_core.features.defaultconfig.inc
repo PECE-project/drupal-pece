@@ -1,15 +1,15 @@
 <?php
 /**
  * @file
- * pece_groups.features.defaultconfig.inc
+ * pece_core.features.defaultconfig.inc
  */
 
 /**
  * Implements hook_defaultconfig_features().
  */
-function pece_groups_defaultconfig_features() {
+function pece_core_defaultconfig_features() {
   return array(
-    'pece_groups' => array(
+    'pece_core' => array(
       'user_default_roles' => 'user_default_roles',
     ),
   );
@@ -18,7 +18,7 @@ function pece_groups_defaultconfig_features() {
 /**
  * Implements hook_defaultconfig_user_default_roles().
  */
-function pece_groups_defaultconfig_user_default_roles() {
+function pece_core_defaultconfig_user_default_roles() {
   $roles = array();
 
   // Exported role: Contributor.

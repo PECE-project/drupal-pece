@@ -10,13 +10,13 @@
 function pece_groups_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'group_group'
-  $field_bases['group_group'] = array(
+  // Exported field_base: 'og_roles_permissions'
+  $field_bases['og_roles_permissions'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'group_group',
+    'field_name' => 'og_roles_permissions',
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -26,8 +26,8 @@ function pece_groups_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => 'Not a group',
-        1 => 'Group',
+        0 => 'Use default roles and permissions',
+        1 => 'Override default roles and permissions',
       ),
       'allowed_values_function' => '',
     ),
