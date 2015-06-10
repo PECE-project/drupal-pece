@@ -40,6 +40,8 @@
     state: directory
     owner: "{{ drupal_www_owner }}"
     group: "{{ drupal_www_owner }}"
+  ignore_errors: True
+  
 
 # New project.
 - name: Create new Kraftwagen project.

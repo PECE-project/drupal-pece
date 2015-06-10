@@ -1,0 +1,10 @@
+name = PECE Core
+core = 7.x
+package = PECE
+version = 7.x-1.0-alpha1
+project = pece_core
+dependencies[] = email
+dependencies[] = features
+features[features_api][] = api:2
+features[field_base][] = field_email
+project path = sites/all/modules/features

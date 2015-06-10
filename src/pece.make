@@ -1,15 +1,15 @@
 core = 7.x
 api = 2
 
-projects[kw_manifests][type] = "module"
-projects[kw_manifests][download][type] = "git"
+projects[kw_manifests][type] = module
+projects[kw_manifests][download][type] = git
 projects[kw_manifests][download][url] = "git://github.com/kraftwagen/kw-manifests.git"
-projects[kw_manifests][subdir] = "kraftwagen"
+projects[kw_manifests][subdir] = kraftwagen
 
-projects[kw_itemnames][type] = "module"
-projects[kw_itemnames][download][type] = "git"
+projects[kw_itemnames][type] = module
+projects[kw_itemnames][download][type] = git
 projects[kw_itemnames][download][url] = "git://github.com/kraftwagen/kw-itemnames.git"
-projects[kw_itemnames][subdir] = "kraftwagen"
+projects[kw_itemnames][subdir] = kraftwagen
 
 ; The Panopoly Foundation
 projects[panopoly_core][version] = 1.21
@@ -60,28 +60,28 @@ projects[radix_layouts][subdir] = contrib
 ;projects[radix_colorizer][subdir] = radix
 
 ; Coffee
-projects[coffee][version] = "2.2"
-projects[coffee][subdir]  = "contrib"
+projects[coffee][version] = 2.2
+projects[coffee][subdir]  = contrib
 
 ; ECK
-projects[eck][version] = "2.0-rc7"
-projects[eck][subdir]  = "contrib"
+projects[eck][version] = 2.0-rc7
+projects[eck][subdir]  = contrib
 
 ; Inline Entity Form
-projects[inline_entity_form][version] = "1.5"
-projects[inline_entity_form][subdir]  = "contrib"
+projects[inline_entity_form][version] = 1.5
+projects[inline_entity_form][subdir]  = contrib
 
 ; Rules
-projects[rules][subdir] = "contrib"
+projects[rules][subdir] = contrib
 projects[rules][version] = 2.9
 
 ; Translation
-projects[l10n_update][subdir] = "contrib"
+projects[l10n_update][subdir] = contrib
 projects[l10n_update][version] = 2.0
 
 ; XAutoload
-projects[xautoload][version] = "5.1"
-projects[xautoload][subdir]  = "contrib"
+projects[xautoload][version] = 5.1
+projects[xautoload][subdir]  = contrib
 projects[xautoload][patch][] = "https://www.drupal.org/files/issues/xautoload-7.x-5.x-profile-2393205-6.patch"
 projects[xautoload][patch][] = "https://www.drupal.org/files/issues/base_table_or_view_not-2393205-2.patch"
 
@@ -90,5 +90,13 @@ projects[jquery_update][version] = 2.5
 projects[jquery_update][subdir] = contrib
 
 ; Ember for admin
-projects[ember][version] = "2.0-alpha3"
+projects[ember][version] = 2.0-alpha3
 projects[ember][subdir] = contrib
+
+; Organic groups
+projects[og][subdir] = contrib
+projects[og][version] = 2.7
+
+; Email
+projects[email][subdir] = contrib
+projects[email][version] = 1.3
