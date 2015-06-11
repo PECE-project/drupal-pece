@@ -106,3 +106,7 @@ libraries[phpmailer][download][branch] = master
 ; Email
 projects[email][subdir] = contrib
 projects[email][version] = 1.3
+
+; Location
+projects[location][subdir] = contrib
+projects[location][version] = 3.6
