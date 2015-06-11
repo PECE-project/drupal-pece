@@ -66,51 +66,6 @@ function pece_groups_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_group-field_email'
-  $field_instances['node-pece_group-field_email'] = array(
-    'bundle' => 'pece_group',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'email',
-        'settings' => array(),
-        'type' => 'email_default',
-        'weight' => 2,
-      ),
-      'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_email',
-    'label' => 'Email',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'email',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'email_textfield',
-      'weight' => 3,
-    ),
-  );
-
   // Exported field_instance: 'node-pece_group-group_access'
   $field_instances['node-pece_group-group_access'] = array(
     'bundle' => 'pece_group',
@@ -127,7 +82,7 @@ function pece_groups_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'featured' => array(
         'label' => 'above',
@@ -163,7 +118,7 @@ function pece_groups_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 5,
+      'weight' => 2,
     ),
     'widget_type' => 'options_select',
   );
@@ -184,7 +139,7 @@ function pece_groups_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 4,
+        'weight' => 8,
       ),
       'featured' => array(
         'label' => 'above',
@@ -220,9 +175,52 @@ function pece_groups_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 4,
     ),
     'widget_type' => 'options_select',
+  );
+
+  // Exported field_instance: 'node-pece_group-group_email'
+  $field_instances['node-pece_group-group_email'] = array(
+    'bundle' => 'pece_group',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Choose an email address prefix for your group. It may contain only lowercase letters, numbers, dashes and underscores. e.g. "my-group".',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'og_mailinglist',
+        'settings' => array(),
+        'type' => 'group_email',
+        'weight' => 4,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'group_email',
+    'label' => 'Group Email',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'og_mailinglist',
+      'settings' => array(),
+      'type' => 'group_email',
+      'weight' => 1,
+    ),
   );
 
   // Exported field_instance: 'node-pece_group-group_group'
@@ -243,7 +241,7 @@ function pece_groups_field_default_field_instances() {
           'field_name' => FALSE,
         ),
         'type' => 'og_group_subscribe',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'featured' => array(
         'label' => 'above',
@@ -285,66 +283,8 @@ function pece_groups_field_default_field_instances() {
         'og_hide' => TRUE,
       ),
       'type' => 'options_onoff',
-      'weight' => 4,
+      'weight' => 0,
     ),
-  );
-
-  // Exported field_instance: 'node-pece_group-group_register'
-  $field_instances['node-pece_group-group_register'] = array(
-    'bundle' => 'pece_group',
-    'default_value' => array(
-      0 => array(
-        'value' => 1,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 6,
-      ),
-      'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'group_register',
-    'label' => 'Group register',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'view modes' => array(
-      'full' => array(
-        'label' => 'above',
-        'type' => 'options_onoff',
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'type' => 'options_onoff',
-      ),
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 6,
-    ),
-    'widget_type' => 'options_select',
   );
 
   // Exported field_instance: 'node-pece_group-og_group_ref'
@@ -359,7 +299,7 @@ function pece_groups_field_default_field_instances() {
         'module' => 'og_ui',
         'settings' => array(),
         'type' => 'og_list_default',
-        'weight' => 3,
+        'weight' => 7,
       ),
       'featured' => array(
         'label' => 'above',
@@ -408,18 +348,77 @@ function pece_groups_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 8,
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-pece_group-og_roles_permissions'
+  $field_instances['node-pece_group-og_roles_permissions'] = array(
+    'bundle' => 'pece_group',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 5,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'og_roles_permissions',
+    'label' => 'Group roles and permissions',
+    'required' => TRUE,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'view modes' => array(
+      'full' => array(
+        'custom settings' => FALSE,
+        'label' => 'Full',
+        'type' => 'list_default',
+      ),
+      'teaser' => array(
+        'custom settings' => FALSE,
+        'label' => 'Teaser',
+        'type' => 'list_default',
+      ),
+    ),
+    'widget' => array(
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 5,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Choose an email address prefix for your group. It may contain only lowercase letters, numbers, dashes and underscores. e.g. "my-group".');
   t('Description');
   t('Determine if this is an OG group.');
-  t('Email');
   t('Group');
+  t('Group Email');
   t('Group content visibility');
-  t('Group register');
+  t('Group roles and permissions');
   t('Group visibility');
   t('Groups audience');
 

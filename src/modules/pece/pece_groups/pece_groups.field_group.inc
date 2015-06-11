@@ -24,10 +24,11 @@ function pece_groups_field_group_info() {
     'weight' => '5',
     'children' => array(
       0 => 'group_group',
-      1 => 'og_group_ref',
-      2 => 'group_content_access',
+      1 => 'group_email',
+      2 => 'og_roles_permissions',
       3 => 'group_access',
-      4 => 'group_register',
+      4 => 'og_group_ref',
+      5 => 'group_content_access',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

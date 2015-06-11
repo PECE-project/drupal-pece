@@ -12,39 +12,39 @@ projects[kw_itemnames][download][url] = "git://github.com/kraftwagen/kw-itemname
 projects[kw_itemnames][subdir] = kraftwagen
 
 ; The Panopoly Foundation
-projects[panopoly_core][version] = 1.21
+projects[panopoly_core][version] = 1.22
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.21
+projects[panopoly_images][version] = 1.22
 projects[panopoly_images][subdir] = contrib
 
-projects[panopoly_theme][version] = 1.21
+projects[panopoly_theme][version] = 1.22
 projects[panopoly_theme][subdir] = contrib
 
-projects[panopoly_magic][version] = 1.21
+projects[panopoly_magic][version] = 1.22
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.21
+projects[panopoly_widgets][version] = 1.22
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_admin][version] = 1.21
+projects[panopoly_admin][version] = 1.22
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_users][version] = 1.21
+projects[panopoly_users][version] = 1.22
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.21
+projects[panopoly_pages][version] = 1.22
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_wysiwyg][version] = 1.21
+projects[panopoly_wysiwyg][version] = 1.22
 projects[panopoly_wysiwyg][subdir] = contrib
 
-projects[panopoly_search][version] = 1.21
+projects[panopoly_search][version] = 1.22
 projects[panopoly_search][subdir] = contrib
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.21
+projects[panopoly_test][version] = 1.22
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
@@ -96,6 +96,12 @@ projects[ember][subdir] = contrib
 ; Organic groups
 projects[og][subdir] = contrib
 projects[og][version] = 2.7
+projects[og_mailinglist][subdir] = contrib
+projects[og_mailinglist][version] = 1.1-alpha2
+libraries[phpmailer][download][type] = git
+libraries[phpmailer][download][url] = https://github.com/Synchro/PHPMailer.git
+libraries[phpmailer][download][revision] = d3802c597bff8f6c2ccfa3eab2a511aa01b8d68f
+libraries[phpmailer][download][branch] = master
 
 ; Email
 projects[email][subdir] = contrib
