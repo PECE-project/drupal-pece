@@ -110,3 +110,11 @@ projects[email][version] = 1.3
 ; Location
 projects[location][subdir] = contrib
 projects[location][version] = 3.6
+
+; Bundle Inherit
+projects[bundle_inherit][subdir] = contrib
+projects[bundle_inherit][version] = 1.0-alpha2
+
+; Publication date
+projects[publication_date][subdir] = contrib
+projects[publication_date][version] = 2.2

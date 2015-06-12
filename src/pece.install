@@ -51,6 +51,7 @@ function pece_manifest_change_modules() {
   );
 
   // Contrib modules.
+  // @TODO: Move dependencies to the given features.
   module_enable(array(
     'radix_layouts',
     'panopoly_theme',
@@ -58,6 +59,10 @@ function pece_manifest_change_modules() {
     'panopoly_search',
     'pece_core',
     'pece_groups',
+    'pece_annotations',
+    'pece_artifacts',
+    'pece_artifacts_docs',
+    'pece_projects',
     'xautoload',
     'block',
     'coffee',

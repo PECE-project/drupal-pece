@@ -47,7 +47,7 @@ function pece_core_views_default_views() {
   );
 
   /* Display: Researcher */
-  $handler = $view->new_display('entityreference', 'Researcher', 'entityreference_1');
+  $handler = $view->new_display('entityreference', 'Researcher', 'entityreference_researcher');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
@@ -59,6 +59,29 @@ function pece_core_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'entityreference_fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+
+  /* Display: Contributor */
+  $handler = $view->new_display('entityreference', 'Contributor', 'entityreference_contributor');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'entityreference_style';
+  $handler->display->display_options['style_options']['search_fields'] = array(
+    'name' => 'name',
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'entityreference_fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: User: Roles */
+  $handler->display->display_options['filters']['rid']['id'] = 'rid';
+  $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
+  $handler->display->display_options['filters']['rid']['field'] = 'rid';
+  $handler->display->display_options['filters']['rid']['value'] = array(
+    5 => '5',
+  );
   $translatables['users_field_ref'] = array(
     t('Master'),
     t('more'),
@@ -75,6 +98,7 @@ function pece_core_views_default_views() {
     t('next ›'),
     t('last »'),
     t('Researcher'),
+    t('Contributor'),
   );
   $export['users_field_ref'] = $view;
 
