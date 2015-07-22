@@ -63,58 +63,7 @@ function pece_artifacts_docs_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-pece_artifact_fieldnote-field_pece_annotations'
-  $field_instances['node-pece_artifact_fieldnote-field_pece_annotations'] = array(
-    'bundle' => 'pece_artifact_fieldnote',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 4,
-      ),
-      'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_pece_annotations',
-    'label' => 'Annotations',
-    'locked' => TRUE,
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'entityreference',
-      'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
-        'size' => 60,
-      ),
-      'type' => 'entityreference_autocomplete',
-      'weight' => 9,
+      'weight' => 3,
     ),
   );
 
@@ -165,7 +114,7 @@ function pece_artifacts_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 7,
+      'weight' => 5,
     ),
   );
 
@@ -216,12 +165,12 @@ function pece_artifacts_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_fieldnote-field_pece_lisence'
-  $field_instances['node-pece_artifact_fieldnote-field_pece_lisence'] = array(
+  // Exported field_instance: 'node-pece_artifact_fieldnote-field_pece_tags'
+  $field_instances['node-pece_artifact_fieldnote-field_pece_tags'] = array(
     'bundle' => 'pece_artifact_fieldnote',
     'default_value' => NULL,
     'deleted' => 0,
@@ -229,12 +178,10 @@ function pece_artifacts_docs_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 3,
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 8,
       ),
       'featured' => array(
         'label' => 'above',
@@ -250,73 +197,21 @@ function pece_artifacts_docs_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_pece_lisence',
-    'label' => 'Lisence',
-    'locked' => TRUE,
+    'field_name' => 'field_pece_tags',
+    'label' => 'Tags',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'entityreference',
+      'active' => 0,
+      'module' => 'taxonomy',
       'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
+        'autocomplete_path' => 'taxonomy/autocomplete',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete',
+      'type' => 'taxonomy_autocomplete',
       'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance: 'node-pece_artifact_fieldnote-field_pece_project'
-  $field_instances['node-pece_artifact_fieldnote-field_pece_project'] = array(
-    'bundle' => 'pece_artifact_fieldnote',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 6,
-      ),
-      'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_pece_project',
-    'label' => 'Project',
-    'locked' => TRUE,
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'entityreference',
-      'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
-        'size' => 60,
-      ),
-      'type' => 'entityreference_autocomplete',
-      'weight' => 2,
     ),
   );
 
@@ -350,7 +245,7 @@ function pece_artifacts_docs_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_pece_uri',
     'label' => 'URI',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'linkit' => array(
         'button_text' => 'Search',
@@ -367,7 +262,7 @@ function pece_artifacts_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -441,12 +336,10 @@ function pece_artifacts_docs_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Annotations');
   t('Contributors');
   t('Fieldsite');
   t('Groups audience');
-  t('Lisence');
-  t('Project');
+  t('Tags');
   t('Text');
   t('URI');
 

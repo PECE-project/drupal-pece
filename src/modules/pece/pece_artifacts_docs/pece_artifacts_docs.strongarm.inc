@@ -80,7 +80,7 @@ function pece_artifacts_docs_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
-          'weight' => '8',
+          'weight' => '7',
         ),
         'title' => array(
           'weight' => '1',

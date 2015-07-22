@@ -40,7 +40,7 @@ function pece_form_install_configure_form_alter(&$form, $form_state) {
   drupal_get_messages('warning');
 
   // Set reasonable defaults for site configuration form
-  $form['site_information']['site_name']['#default_value'] = 'Adoro Maquiagem';
+  $form['site_information']['site_name']['#default_value'] = 'PECE';
   $form['admin_account']['account']['name']['#default_value'] = 'admin';
   $form['server_settings']['site_default_country']['#default_value'] = 'US';
   $form['server_settings']['date_default_timezone']['#default_value'] = 'America/Los_Angeles'; // West coast, best coast

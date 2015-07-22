@@ -5,3 +5,18 @@
  */
 
 include_once 'pece_artifacts_docs.features.inc';
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_artifacts_docs_form_pece_artifact_fieldnote_node_form_alter(&$form, &$form_state) {
+  $node = $form['#node'];
+
+  // Title isn't used in field note contents so it can be omitted from the form.
+  $form['title']['#required'] = FALSE;
+  $form['title']['#default_value'] = 'pece_artifact_fieldnote_' . $node->created;
+  $form['title']['#attributes']['class'][] = 'element-invisible';
+
+  // Hide the comment settings fieldset.
+  $form['comment_settings']['#access'] = FALSE;
+}
