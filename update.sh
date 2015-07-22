@@ -1,5 +1,4 @@
-cd ~/pece/build
-drush cc all
+cd ./build
 drush updb -y
 drush fra -y
 drush kw-m

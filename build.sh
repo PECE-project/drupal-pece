@@ -1,10 +1,11 @@
+#!/usr/bin/env bash
 drush kw-b
 cd build
+drush sql-drop -y
+drush kw-id
 drush kw-m
 drush cc all
-drush updb -y
-drush fra -y
-## Uncomment for CM left sync. 
+## Uncomment for CM left sync.
 # drush clsyn
 
 if [ -d "profiles/pece/themes/taller/assets/sass/" ]; then
