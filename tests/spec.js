@@ -3,7 +3,7 @@ browser.ignoreSynchronization = true;
 
 describe('PECE', function () {
 
-  it('shoudl have posts on front page', function () {
+  it('should have posts on front page', function () {
 
     browser.get('/');
 
