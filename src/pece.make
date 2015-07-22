@@ -118,3 +118,7 @@ projects[bundle_inherit][version] = 1.0-alpha2
 ; Publication date
 projects[publication_date][subdir] = contrib
 projects[publication_date][version] = 2.2
+
+; Diff
+projects[diff][subdir] = contrib
+projects[diff][version] = 3.2
