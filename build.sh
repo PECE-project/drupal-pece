@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 drush kw-b
 cd build
-drush sql-drop -y
-drush kw-id
+
+PASSWORD=${PECE_DRUPAL_ADMIN_PASS:-impossiblepassword}
+# drush kw-id
+drush si pece --account-pass=${PASSWORD} -y
 drush kw-m
 drush cc all
 ## Uncomment for CM left sync.
