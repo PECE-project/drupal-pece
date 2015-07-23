@@ -100,6 +100,38 @@ function pece_core_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
+  // Exported field_base: 'field_pece_license'
+  $field_bases['field_pece_license'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_pece_license',
+    'indexes' => array(
+      'licence' => array(
+        0 => 'licence',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'creative_commons',
+    'settings' => array(
+      'allowed_values' => array(
+        1 => 1,
+        8 => 8,
+        9 => 9,
+        2 => 2,
+        3 => 3,
+        4 => 4,
+        5 => 5,
+        6 => 6,
+        7 => 7,
+      ),
+      'jurisdiction' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'creative_commons',
+  );
+
   // Exported field_base: 'field_pece_lisence'
   $field_bases['field_pece_lisence'] = array(
     'active' => 1,

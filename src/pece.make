@@ -122,3 +122,8 @@ projects[publication_date][version] = 2.2
 ; Diff
 projects[diff][subdir] = contrib
 projects[diff][version] = 3.2
+
+; Creative Commons Field
+projects[creative_commons][subdir] = contrib
+projects[creative_commons][version] = 1.2
+
