@@ -21,6 +21,7 @@ exports.config = {
   specs: [
     'spec.js'
     , 'authentication.spec.js'
+    , 'fieldnote.spec.js'
   ],
 
   // Browser configuration.
