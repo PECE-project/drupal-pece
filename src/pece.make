@@ -127,3 +127,6 @@ projects[diff][version] = 3.2
 projects[creative_commons][subdir] = contrib
 projects[creative_commons][version] = 1.2
 
+; Legal
+projects[legal][subdir] = contrib
+projects[legal][version] = 1.5
