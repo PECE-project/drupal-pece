@@ -1,5 +1,5 @@
-[solr]
-pece_solr ansible_ssh_host=localhost ansible_ssh_port=2223
+; [solr]
+; pece_solr ansible_ssh_host=localhost ansible_ssh_port=2223
 
 [database]
 pece ansible_ssh_host=localhost ansible_ssh_port=2222
@@ -7,7 +7,11 @@ pece ansible_ssh_host=localhost ansible_ssh_port=2222
 [drupal]
 pece ansible_ssh_host=localhost ansible_ssh_port=2222
 
+; [nodejs]
+; pece ansible_ssh_host=localhost ansible_ssh_port=2222
+
 [docker:children]
 solr
 database
 drupal
+nodejs

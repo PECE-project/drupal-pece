@@ -1,5 +1,5 @@
-[solr]
-default ansible_ssh_host=192.168.22.11
+; [solr]
+: default ansible_ssh_host=192.168.22.11
 
 [database]
 default ansible_ssh_host=192.168.22.11
@@ -7,7 +7,11 @@ default ansible_ssh_host=192.168.22.11
 [drupal]
 default ansible_ssh_host=192.168.22.11
 
+; [nodejs]
+; default ansible_ssh_host=192.168.22.11
+
 [vbox:children]
 solr
 database
 drupal
+nodejs
