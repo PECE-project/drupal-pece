@@ -3,9 +3,7 @@
 */
 
 // Require authentication page object.
-var RegistrationPage = require('./pages/registration.page');
-var AuthenticationPage = require('./pages/authentication.page');
-var SamplePage = require('./pages/sample.page');
+var AllPages= require('./pages/all.page');
 
 // Used for non-angular apps
 browser.ignoreSynchronization = true;
@@ -13,15 +11,19 @@ browser.ignoreSynchronization = true;
 // For each spec file is recommended to have just one describe.
 // A describe may the the description of a functionality/feature or even a web page, like home page, contact page, etc. It depends on the team work agreement
 describe ('Registration' , function () {
+  beforeEach(function () {
+    AllPages.AuthenticationPage.logout();
+  });
+
   it ('should be not accomplished', function () {
-    RegistrationPage.register('foo', 'foo@bar.baz');
+    AllPages.RegistrationPage.register('foo', 'foo@bar.baz', false);
     // Check that the error message is present.
-    expect(SamplePage.body.getText()).toContain('Accept Terms & Conditions of Use field is required.');
+    expect(AllPages.SamplePage.body.getText()).toContain('Accept Terms & Conditions of Use field is required.');
   });
 
   it ('should be succesfuly done', function () {
-    RegistrationPage.register('foo', 'foo@bar.baz', true);
+    AllPages.RegistrationPage.register('foobr', 'foobr@bar.baz', true);
     // Check that user is logged in.
-    expect(AuthenticationPage.loggedIn.isPresent()).toBe(true);
+    expect(AllPages.SamplePage.body.getText()).toContain('Thank you for applying for an account.');
   });
 });

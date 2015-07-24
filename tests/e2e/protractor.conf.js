@@ -20,8 +20,6 @@ exports.config = {
   // The test files are stored into the specs array, separated by comma.
   specs: [
     'spec.js'
-    , 'authentication.spec.js'
-    , 'fieldnote.spec.js'
   ],
 
   // Browser configuration.

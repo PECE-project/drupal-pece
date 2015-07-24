@@ -9,6 +9,7 @@ var RegistrationPage = function () {
   this.usernameField = element(by.css('input#edit-name'));
   this.emailField = element(by.css('input#edit-mail'));
   this.tosField = element(by.css('input#edit-legal-accept'));
+  this.submitButton = element(by.css('input#edit-submit'));
 
   // Define authentication methods.
   this.get = function () {
@@ -19,9 +20,10 @@ var RegistrationPage = function () {
     this.get();
     this.usernameField.sendKeys(user);
     this.emailField.sendKeys(email);
-    if (tos != 'undefined') {
+    if (tos == true) {
       this.tosField.click();
     }
+    this.submitButton.click();
   }
 }
 
