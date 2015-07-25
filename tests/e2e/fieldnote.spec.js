@@ -3,8 +3,7 @@
 */
 
 // Require fieldnote page object.
-var FieldnotePage = require('./pages/fieldnote.page');
-var AuthenticationPage = require('./pages/authentication.page');
+var AllPages = require('./pages/all.page');
 
 // Used for non-angular apps
 browser.ignoreSynchronization = true;
@@ -13,13 +12,13 @@ browser.ignoreSynchronization = true;
 // A describe may the the description of a functionality/feature or even a web page, like home page, contact page, etc. It depends on the team work agreement
 describe ('Fieldnote' , function () {
   // This is the pre-condition step of each test.
-	beforeEach(function () {
-    AuthenticationPage.logout();
-    AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-    FieldnotePage.get();
+  beforeEach(function () {
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    AllPages.FieldnotePage.get();
   });
 
-	it ('verify main elements presence', function () {
-    FieldnotePage.checkMainElementsPresence();
-	});
+  it ('verify main elements presence', function () {
+    AllPages.FieldnotePage.checkMainElementsPresence();
+  });
 });

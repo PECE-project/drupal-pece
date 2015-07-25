@@ -8,6 +8,9 @@ exports.config = {
   // The selenium address where the selenium server will be running.
   seleniumAddress: 'http://localhost:4444/wd/hub',
 
+  // In order to user the beforeAll we must set the frameword attribute.
+  framework: 'jasmine2',
+
   // Parameters that can be used in the tests.
   params: {
     // Here is where you set the user credentials for tests usage.
