@@ -213,54 +213,6 @@ function pece_artifacts_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact-field_pece_project'
-  $field_instances['node-pece_artifact-field_pece_project'] = array(
-    'bundle' => 'pece_artifact',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 6,
-      ),
-      'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_pece_project',
-    'label' => 'Project',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'entityreference',
-      'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
-        'size' => 60,
-      ),
-      'type' => 'entityreference_autocomplete',
-      'weight' => 3,
-    ),
-  );
 
   // Exported field_instance: 'node-pece_artifact-og_group_ref'
   $field_instances['node-pece_artifact-og_group_ref'] = array(
@@ -335,7 +287,6 @@ function pece_artifacts_field_default_field_instances() {
   t('Contributors');
   t('Fieldsite');
   t('Groups audience');
-  t('Project');
   t('Text');
 
   return $field_instances;
