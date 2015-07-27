@@ -28,3 +28,4 @@ describe ('Drupal home page' , function () {
 require('./authentication.spec.js');
 require('./registration.spec.js');
 require('./fieldnote.spec.js');
+require('./license.spec.js');

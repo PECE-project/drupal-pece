@@ -4,6 +4,8 @@ var RegistrationPage = require('./registration.page');
 var AuthenticationPage = require('./authentication.page');
 var FieldnotePage = require('./fieldnote.page');
 var LegalPage = require('./legal.page');
+var PeceArtifactPage = require('./pece.artifact.page');
+var AddTypesPage = require('./add.types.page');
 
 module.exports = {
   'SamplePage': SamplePage
@@ -11,4 +13,6 @@ module.exports = {
   , 'AuthenticationPage': AuthenticationPage
   , 'FieldnotePage': FieldnotePage
   , 'LegalPage': LegalPage
+  , 'PeceArtifactPage': PeceArtifactPage
+  , 'AddTypesPage': AddTypesPage
 }
