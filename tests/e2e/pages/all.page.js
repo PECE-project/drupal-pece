@@ -6,6 +6,7 @@ var FieldnotePage = require('./fieldnote.page');
 var LegalPage = require('./legal.page');
 var PeceArtifactPage = require('./pece.artifact.page');
 var AddTypesPage = require('./add.types.page');
+var ContentPage = require('./content.page')
 
 module.exports = {
   'SamplePage': SamplePage
@@ -15,4 +16,5 @@ module.exports = {
   , 'LegalPage': LegalPage
   , 'PeceArtifactPage': PeceArtifactPage
   , 'AddTypesPage': AddTypesPage
+  , 'ContentPage': ContentPage
 }

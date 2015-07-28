@@ -15,10 +15,22 @@ describe ('Fieldnote' , function () {
   beforeEach(function () {
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-    AllPages.FieldnotePage.get();
   });
 
   it ('verify main elements presence', function () {
+		AllPages.FieldnotePage.get();
     AllPages.FieldnotePage.checkMainElementsPresence();
   });
+
+	it ('add a fieldnote artifact', function () {
+		AllPages.FieldnotePage.get();
+		AllPages.FieldnotePage.add('Fieldnote text');
+		expect(AllPages.SamplePage.body.getText()).toContain('has been created.');
+	});
+
+	it ('remove the just created fieldnote artifact', function () {
+		AllPages.ContentPage.get();
+		AllPages.ContentPage.remove('pece_artifact_fieldnote');
+		expect(AllPages.SamplePage.body.getText()).toContain('has been deleted.');
+	});
 });

@@ -14,8 +14,6 @@ var FieldnotePage = function () {
     contributorsFields : element(by.css('#pece-artifact-fieldnote-node-form #edit-field-pece-contributors-und-0-target-id')),
     tagsField : element(by.css('#pece-artifact-fieldnote-node-form #edit-field-pece-tags-und')),
     licenceField : element(by.css('#pece-artifact-fieldnote-node-form #edit-field-pece-license-und-0-licence')),
-    groupsField : element(by.css('#pece-artifact-fieldnote-node-form #edit-og-group-ref-und #edit-og-group-ref-und-0-default')),
-    otherGroupsField : element(by.css('#pece-artifact-fieldnote-node-form #edit-og-group-ref-und #edit-og-group-ref-und-0-admin-0-target-id')),
 
     // Right side form elements.
     publishedOnDateField : element(by.css('#pece-artifact-fieldnote-node-form .radix-layouts-sidebar #edit-pubdate-datepicker-popup-0')),
@@ -25,6 +23,10 @@ var FieldnotePage = function () {
 
   };
 
+  this.editorSelectField = element(by.css('#edit-body-und-0-format--2'));
+  this.plaintextOption = element(by.css('#edit-body-und-0-format--2 option[value="plain_text"]'));
+  this.publishButton = element(by.css('#edit-submit'));
+
 	//Define fieldnote pageobject methods.
 	this.get = function () {
     browser.get('node/add/pece-artifact-fieldnote');
@@ -32,8 +34,23 @@ var FieldnotePage = function () {
 
   this.checkMainElementsPresence = function () {
     for (var key in this.mainElements) {
+      browser.driver.sleep(2000);
       expect(this.mainElements[key].isPresent()).toBe(true);
     }
+  };
+
+  this.add = function (fieldNoteText) {
+    browser.driver.sleep(100);
+    this.mainElements.uriField.sendKeys('uri1');
+    browser.driver.sleep(100);
+    this.editorSelectField.click();
+    browser.driver.sleep(1000);
+    this.plaintextOption.click();
+    browser.driver.sleep(1000);
+    element(by.css('#edit-body-und-0-value')).sendKeys(fieldNoteText);
+    browser.driver.sleep(100);
+    this.publishButton.click();
+    browser.driver.sleep(1000);
   };
 
 };
