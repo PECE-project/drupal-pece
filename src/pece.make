@@ -130,3 +130,7 @@ projects[creative_commons][version] = 1.2
 ; Legal
 projects[legal][subdir] = contrib
 projects[legal][version] = 1.5
+
+; Profile 2
+projects[profile2][subdir] = contrib
+projects[profile2][version] = 1.3

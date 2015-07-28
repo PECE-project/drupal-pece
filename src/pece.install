@@ -7,8 +7,12 @@
  */
 function pece_install() {
   // Enable some standard blocks.
-  $default_theme = 'basic';
+  $default_theme = 'radix';
+  $admin_theme = 'ember';
+  theme_enable($default_theme);
   variable_set('theme_default', $default_theme);
+  variable_set('admin_theme', $admin_theme);
+  variable_set('node_admin_theme', 1);
 
   // Allow visitor account creation, but with administrative approval.
   variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
@@ -24,144 +28,11 @@ function pece_install() {
 function pece_kw_manifests_info() {
   $manifests = array();
 
-  $manifests['change_modules'] = array(
-    'callback' => 'pece_manifest_change_modules',
-  );
-
-  $manifests['enable_devel_modules'] = array(
-    'callback' => 'pece_manifest_enable_devel_modules',
-    'require environment' => array('development', 'local'),
-  );
-
-  $manifests['themes'] = array(
-    'callback' => 'pece_manifest_define_themes',
-  );
+//  $manifests['enable_devel_modules'] = array(
+//    'callback' => 'pece_manifest_enable_devel_modules',
+//    'require environment' => array('development', 'local'),
+//  );
 
   return $manifests;
 }
 
-/**
- * Enable modules.
- */
-function pece_manifest_change_modules() {
-  $modules_to_disable = array(
-    // 'date_popup_authored',
-    // 'linkit',
-    // 'search_api_autocomplete',
-  );
-
-  // Contrib modules.
-  // @TODO: Move dependencies to the given features.
-  module_enable(array(
-    'radix_layouts',
-    'creative_commons',
-    'panopoly_theme',
-    'panopoly_admin',
-    'panopoly_search',
-    'pece_core',
-    'pece_groups',
-    'pece_annotations',
-    'pece_artifacts',
-    'pece_artifacts_docs',
-    'xautoload',
-    'block',
-    'coffee',
-    'diff',
-    'eck',
-    'inline_entity_form',
-    'search_api',
-    // 'search_api_solr',
-    // 'search_api_facetapi',
-    // 'search_autocomplete',
-    // 'search_api_override',
-    // 'metatag',
-    // 'metatag_facebook',
-    // 'metatag_google_plus',
-    // 'metatag_opengraph',
-    // 'metatag_panels',
-    // 'views_litepager',
-    'syslog',
-    // 'views_litepager',
-    // 'seckit',
-    // 'username_enumeration_prevention',
-    // 'password_policy',
-    // 'variable',
-    // 'easy_social',
-    // 'redirect',
-    'locale',
-    'legal',
-    'translation',
-    // 'better_exposed_filters',
-    // 'views_filters_selective',
-    // 'imageapi_optimize',
-    'email',
-    'rules',
-    'rules_admin',
-    'l10n_update',
-    'og',
-    'og_access',
-    'og_ui',
-    'og_register',
-    'og_mailinglist',
-    'location',
-  ), TRUE);
-
-  // Sandbox modules.
-  // module_enable(array(
-  // ), TRUE);
-
-  // PECE Core modules.
-  // module_enable(array(
-  //   'pece',
-  // ), TRUE);
-
-  foreach ($modules_to_disable as $module_name) {
-    if (module_exists($module_name)) {
-      module_disable(array($module_name));
-      drupal_uninstall_modules(array($module_name));
-    }
-  }
-}
-
-/**
- * Enable DEV modules.
- */
-function pece_manifest_enable_devel_modules() {
-  module_enable(array(
-    'devel',
-  ), TRUE);
-}
-
-/**
- * Set default themes.
- */
-function pece_manifest_define_themes() {
-  $themes = array(
-    'ember',
-    'radix',
-    // 'pece',
-  );
-
-  foreach ($themes as $theme) {
-    if (!_is_theme_enabled($theme)) {
-      theme_enable(array($theme));
-    }
-  }
-
-  variable_set('admin_theme', 'ember');
-  variable_set('theme_default', 'radix');
-  variable_set('node_admin_theme', 1);
-
-  // Clean Breakpoints settings.
-  // breakpoints_flush_caches();
-}
-
-/**
- * Check if theme is enabled.
- *
- * Because Drupal does not in theme_enable.
- */
-function _is_theme_enabled($theme_name) {
-  $themes = list_themes();
-  return isset($themes[$theme_name]) && $themes[$theme_name]->status == 1;
-}
