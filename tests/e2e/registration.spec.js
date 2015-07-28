@@ -30,6 +30,6 @@ describe ('Registration' , function () {
   it ('should be succesfuly done', function () {
     AllPages.RegistrationPage.register('foobar', 'foobar@bar.baz', true);
     // Check that user is logged in.
-    expect(AllPages.SamplePage.body.getText()).toContain('Thank you for applying for an account.');
+    expect(AllPages.SamplePage.body.getText()).toContain('Your account is currently pending approval by the site administrator.');
   });
 });
