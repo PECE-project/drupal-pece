@@ -6,13 +6,6 @@
  * Perform actions to set up the site for this profile.
  */
 function pece_install() {
-  // Enable some standard blocks.
-  $default_theme = 'radix';
-  $admin_theme = 'ember';
-  theme_enable($default_theme);
-  variable_set('theme_default', $default_theme);
-  variable_set('admin_theme', $admin_theme);
-  variable_set('node_admin_theme', 1);
 
   // Allow visitor account creation, but with administrative approval.
   variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
@@ -22,11 +15,29 @@ function pece_install() {
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
 }
 
+
+/**
+ * Set the default theme.
+ */
+function _pece_set_up_theme() {
+  $theme = 'radix';
+  $admin_theme = 'ember';
+  theme_enable(array($theme));
+  variable_set('theme_default', $theme);
+  variable_set('admin_theme', $admin_theme);
+  variable_set('node_admin_theme', 1);
+  theme_disable(array('responsive_bartik', 'bartik'));
+}
+
 /**
  * Implements hook_kw_manifests_info().
  */
 function pece_kw_manifests_info() {
   $manifests = array();
+
+  $manifests['themes'] = array(
+    'callback' => 'pece_manifest_define_themes',
+  );
 
 //  $manifests['enable_devel_modules'] = array(
 //    'callback' => 'pece_manifest_enable_devel_modules',
@@ -36,3 +47,11 @@ function pece_kw_manifests_info() {
   return $manifests;
 }
 
+
+/**
+ * Set default themes.
+ */
+function pece_manifest_define_themes() {
+  // set the default theme
+  _pece_set_up_theme();
+}
