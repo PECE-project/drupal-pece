@@ -6,8 +6,8 @@ var FieldnotePage = require('./fieldnote.page');
 var LegalPage = require('./legal.page');
 var PeceArtifactPage = require('./pece.artifact.page');
 var AddTypesPage = require('./add.types.page');
-var ContentPage = require('./content.page')
-var UserProfilePage = require('./user_profile.page')
+var ContentPage = require('./content.page');
+var PeoplePage = require('./people.page');
 
 module.exports = {
   'SamplePage': SamplePage
@@ -18,5 +18,5 @@ module.exports = {
   , 'PeceArtifactPage': PeceArtifactPage
   , 'AddTypesPage': AddTypesPage
   , 'ContentPage': ContentPage
-  , 'UserProfilePage': UserProfilePage
+  , 'PeoplePage': PeoplePage
 }
