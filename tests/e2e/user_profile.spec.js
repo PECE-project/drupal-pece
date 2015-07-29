@@ -21,8 +21,8 @@ describe ('User profile' , function () {
   });
 
   it ('should create a new user profile', function () {
-    AllPages.UserProfilePage.getRegister();
-    AllPages.UserProfilePage.register('foob', 'foob@bar.baz', 'Foo Bar Baz', 'foob@bar.baz', 'Institution', 'Trainee', 'Lorem ipsum', 'Brazil', 'tagFoo', true);
+    AllPages.RegistrationPage.get();
+    AllPages.RegistrationPage.registerProfile('foob', 'foob@bar.baz', 'Foo Bar Baz', 'foob@bar.baz', 'Institution', 'Trainee', 'Lorem ipsum', 'Brazil', 'tagFoo', true);
     // Check that the error message is present.
     expect(AllPages.SamplePage.body.getText()).toContain('Your account is currently pending approval by the site administrator.');
   });
