@@ -27,10 +27,4 @@ describe ('Fieldnote' , function () {
 		AllPages.FieldnotePage.add('Fieldnote text');
 		expect(AllPages.SamplePage.body.getText()).toContain('has been created.');
 	});
-
-	it ('remove the just created fieldnote artifact', function () {
-		AllPages.ContentPage.get();
-		AllPages.ContentPage.remove('pece_artifact_fieldnote');
-		expect(AllPages.SamplePage.body.getText()).toContain('has been deleted.');
-	});
 });
