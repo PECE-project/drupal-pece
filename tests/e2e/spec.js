@@ -30,3 +30,4 @@ require('./registration.spec.js');
 require('./fieldnote.spec.js');
 require('./license.spec.js');
 require('./user_profile.spec.js');
+require('./cleanup.spec.js');
