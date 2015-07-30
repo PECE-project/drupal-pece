@@ -18,7 +18,7 @@ var AuthenticationPage = function () {
 
   this.login = function (user, password) {
     this.get();
-    browser.driver.sleep(1000);
+    browser.driver.sleep(3000);
     this.usernameField.sendKeys(user);
     browser.driver.sleep(1000);
     this.passwordField.sendKeys(password);
