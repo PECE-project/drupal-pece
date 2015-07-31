@@ -27,6 +27,11 @@ describe ('Cleanup' , function () {
     expect(AllPages.SamplePage.body.getText()).toContain('has been deleted.');
   });
 
+  it ('should delete the user from another user profile test', function () {
+    AllPages.PeoplePage.deleteUser('boof@bar.baz');
+    expect(AllPages.SamplePage.body.getText()).toContain('has been deleted.');
+  });
+
   it ('should delete the user from the registration test', function () {
     AllPages.PeoplePage.deleteUser('foobar@bar.baz');
     expect(AllPages.SamplePage.body.getText()).toContain('has been deleted.');
