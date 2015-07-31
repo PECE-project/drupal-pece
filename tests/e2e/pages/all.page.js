@@ -8,6 +8,7 @@ var PeceArtifactPage = require('./pece.artifact.page');
 var AddTypesPage = require('./add.types.page');
 var ContentPage = require('./content.page');
 var PeoplePage = require('./people.page');
+var UserProfilePage = require('./user.profile.page');
 
 module.exports = {
   'SamplePage': SamplePage
@@ -19,4 +20,5 @@ module.exports = {
   , 'AddTypesPage': AddTypesPage
   , 'ContentPage': ContentPage
   , 'PeoplePage': PeoplePage
+  , 'UserProfilePage': UserProfilePage
 }
