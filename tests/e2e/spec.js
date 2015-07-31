@@ -19,9 +19,9 @@ describe ('Drupal home page' , function () {
     AllPages.SamplePage.get();
   });
 
-  it ('uses \'radix\' theme', function () {
+  it ('uses \'pece_radix\' theme', function () {
   // Set the expected theme as a string to check that the correct drupal theme is been used.
-    AllPages.SamplePage.checkDrupalTheme('radix');
+    AllPages.SamplePage.checkDrupalTheme('pece_radix');
   });
 });
 

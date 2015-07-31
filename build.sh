@@ -18,7 +18,7 @@ if [ -d "profiles/pece/themes/taller/assets/sass/" ]; then
   )
 fi
 
-if [ -d "profiles/pece/themes/pece/assets/sass/" ]; then
+if [ -d "profiles/pece/themes/pece_radix/assets/sass/" ]; then
   (
     cd profiles/pece/themes/pece/assets/sass/
     bundle install

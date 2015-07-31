@@ -134,3 +134,12 @@ projects[legal][version] = 1.5
 ; Profile 2
 projects[profile2][subdir] = contrib
 projects[profile2][version] = 1.3
+
+; ************************************************
+; ************** PECE Themes **************
+
+projects[radix][type] = theme
+projects[radix][version] = 3.0-rc2
+
+projects[ember][type] = theme
+projects[ember][version] = 2.0-alpha3
