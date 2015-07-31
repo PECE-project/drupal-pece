@@ -9,10 +9,11 @@ var RegistrationPage = function () {
   // User fields.
   this.usernameField = element(by.css('input#edit-name'));
   this.emailField = element(by.css('input#edit-mail'));
+  this.pass1Field = element(by.css('input#edit-pass-pass1'));
+  this.pass2Field = element(by.css('input#edit-pass-pass2'));
 
   // Profile fields.
   this.fullnameFIeld = element(by.css('input#edit-profile-pece-profile-main-field-pece-full-name-und-0-value'));
-  this.email2FIeld = element(by.css('input#edit-profile-pece-profile-main-field-pece-email-und-0-email'));
   this.institutionFIeld = element(by.css('input#edit-profile-pece-profile-main-field-pece-institution-und-0-value'));
   this.positionFIeld = element(by.css('input#edit-profile-pece-profile-main-field-pece-position-und-0-value'));
   this.bioFIeld = element(by.css('textarea#edit-profile-pece-profile-main-field-pece-biography-und-0-value'));
@@ -27,14 +28,15 @@ var RegistrationPage = function () {
     browser.get('user/register');
   };
 
-  this.fillUserFields = function (user, email) {
+  this.fillUserFields = function (user, email, pass) {
     this.usernameField.sendKeys(user);
     this.emailField.sendKeys(email);
+    this.pass1Field.sendKeys(pass);
+    this.pass2Field.sendKeys(pass);
   };
 
-  this.fillProfileFields = function (name, email2, institution, position, bio, tags) {
+  this.fillProfileFields = function (name, institution, position, bio, tags) {
     this.fullnameFIeld.sendKeys(name);
-    this.email2FIeld.sendKeys(email2);
     this.institutionFIeld.sendKeys(institution);
     this.positionFIeld.sendKeys(position);
     this.bioFIeld.sendKeys(bio);
@@ -51,10 +53,10 @@ var RegistrationPage = function () {
     this.submitButton.click();
   };
 
-  this.register = function (user, email, tos) {
+  this.register = function (user, email, pass, tos) {
     this.get();
     browser.driver.sleep(3000);
-    this.fillUserFields(user, email);
+    this.fillUserFields(user, email, pass);
     browser.driver.sleep(1000);
     this.checkTosField(tos);
     browser.driver.sleep(1000);
@@ -62,12 +64,11 @@ var RegistrationPage = function () {
     browser.driver.sleep(3000);
   };
 
-  this.registerProfile = function (user, email, name, email2, institution, position, bio, location, tags, tos) {
+  this.registerProfile = function (user, email, pass, name, institution, position, bio, location, tags, tos) {
     this.get();
     browser.driver.sleep(3000);
-    this.fillUserFields(user, email);
-    browser.driver.sleep(1000);
-    this.fillProfileFields(name, email2, institution, position, bio, tags);
+    this.fillUserFields(user, email, pass);
+    this.fillProfileFields(name, institution, position, bio, tags);
     browser.driver.sleep(1000);
     this.checkTosField(tos);
     browser.driver.sleep(1000);

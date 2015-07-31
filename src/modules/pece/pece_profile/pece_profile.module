@@ -5,3 +5,20 @@
  */
 
 include_once 'pece_profile.features.inc';
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_profile_form_user_register_form_alter(&$form, &$form_state) {
+  // Hide the profile email field in order to autofill it based on the user's
+  // account email.
+  $form['profile_pece_profile_main']['field_pece_email']['#attributes']['class'][] = 'element-invisible';
+  array_unshift($form['#validate'], 'pece_profile_user_register_form_validate');
+}
+
+function pece_profile_user_register_form_validate($form, &$form_state) {
+  $email = $form_state['values']['mail'];
+  // @TODO: Needs to support multilanguage.
+  $element['#parents'] = array('profile_pece_profile_main', 'field_pece_email', LANGUAGE_NONE, 0, 'email');
+  form_set_value($element, $email, $form_state);
+}

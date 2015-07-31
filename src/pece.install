@@ -9,6 +9,8 @@ function pece_install() {
 
   // Allow visitor account creation, but with administrative approval.
   variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
+  // @TODO: Temporary solution to not send email on user registration.
+  variable_set('user_email_verification', 0);
 
   // Enable default permissions for system roles.
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));

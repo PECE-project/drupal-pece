@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the pece_profile module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function pece_profile_install() {
+
+  // Set the module weiight in order to run after profile2 module.
+  db_update('system')
+    ->fields(array('weight' => 10))
+    ->condition('name', 'pece_profile')
+    ->execute();
+}
