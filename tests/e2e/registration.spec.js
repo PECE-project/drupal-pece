@@ -23,18 +23,18 @@ describe ('Registration' , function () {
   });
 
   it ('should be not accomplished', function () {
-    AllPages.RegistrationPage.register('foo', 'foo@bar.baz', 'impossiblepassword', false);
+    AllPages.RegistrationPage.register('foo', 'foo@bar.baz', browser.params.admin.password, false);
     expect(AllPages.SamplePage.body.getText()).toContain('Accept Terms & Conditions of Use field is required.');
   });
 
   it ('invalid email on user registration', function () {
     var invalidEmail = 'bar';
-    AllPages.RegistrationPage.register('bar', invalidEmail, 'impossiblepassword', true);
+    AllPages.RegistrationPage.register('bar', invalidEmail, browser.params.admin.password, true);
     expect(AllPages.SamplePage.body.getText()).toContain('The e-mail address ' + invalidEmail +  ' is not valid.');
   });
 
   it ('should be succesfuly done', function () {
-    AllPages.RegistrationPage.register('foobar', 'foobar@bar.baz', 'impossiblepassword', true);
+    AllPages.RegistrationPage.register('foobar', 'foobar@bar.baz', browser.params.admin.password, true);
     expect(AllPages.SamplePage.body.getText()).toContain('Your account is currently pending approval by the site administrator.');
   });
 });
