@@ -21,7 +21,16 @@ describe ('User profile' , function () {
   });
 
   it ('should create a new user profile', function () {
-    AllPages.RegistrationPage.registerProfile('foob', 'foob@bar.baz', 'Foo Bar Baz', 'foob@bar.baz', 'Institution', 'Trainee', 'Lorem ipsum', 'Brazil', 'tagFoo', true);
+    AllPages.RegistrationPage.registerProfile('foob', 'foob@bar.baz', browser.params.admin.password, 'Foo B.', 'Institution', 'Trainee', 'Lorem ipsum', 'Brazil', 'tagFoo', true);
     expect(AllPages.SamplePage.body.getText()).toContain('Your account is currently pending approval by the site administrator.');
+  });
+
+  it('check profile email after registration', function () {
+    var email = 'boof@bar.baz'
+    AllPages.RegistrationPage.registerProfile('boof', email, browser.params.admin.password, 'Boo F.', 'Institution', 'Trainee', 'Lorem ipsum', 'Brazil', 'tagFoo', true);
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    AllPages.PeoplePage.edit(email);
+    AllPages.UserProfilePage.accessProfileForm();
+    expect(AllPages.UserProfilePage.emailField.getText()).toEqual(email);
   });
 });
