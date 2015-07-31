@@ -33,6 +33,13 @@ var PeoplePage = function () {
     browser.driver.sleep(5000);
   };
 
+  this.edit = function (email) {
+    this.get();
+    this.filter(email);
+    element(by.cssContainingText('a', 'edit')).click();
+    browser.driver.sleep(1000);
+  };
+
 };
 
 module.exports = new PeoplePage();
