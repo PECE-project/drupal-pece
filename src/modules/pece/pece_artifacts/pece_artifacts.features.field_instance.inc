@@ -62,7 +62,7 @@ function pece_artifacts_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -111,7 +111,7 @@ function pece_artifacts_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -160,7 +160,7 @@ function pece_artifacts_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -209,7 +209,7 @@ function pece_artifacts_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -256,7 +256,7 @@ function pece_artifacts_field_default_field_instances() {
       'module' => 'creative_commons',
       'settings' => array(),
       'type' => 'select',
-      'weight' => 9,
+      'weight' => 7,
     ),
   );
 
