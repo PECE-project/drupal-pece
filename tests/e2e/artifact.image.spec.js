@@ -17,13 +17,13 @@ describe ('Image Artifact' , function () {
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
   });
 
-  it ('verify main elements presence', function () {
-    AllPages.ArtifactImagePage.get();
-    AllPages.ArtifactImagePage.checkMainElementsPresence();
-  });
+  //it ('verify main elements presence', function () {
+  //  AllPages.ArtifactImagePage.get();
+  //  AllPages.ArtifactImagePage.checkMainElementsPresence();
+  //});
   it ('add a image artifact', function () {
     AllPages.ArtifactImagePage.get();
-    AllPages.ArtifactImagePage.add('Fieldnote text');
+    AllPages.ArtifactImagePage.add();
     expect(AllPages.SamplePage.body.getText()).toContain('has been created.');
   });
 });

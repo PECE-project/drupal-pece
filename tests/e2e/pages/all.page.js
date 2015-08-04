@@ -9,6 +9,7 @@ var AddTypesPage = require('./add.types.page');
 var ContentPage = require('./content.page');
 var PeoplePage = require('./people.page');
 var UserProfilePage = require('./user.profile.page');
+var ArtifactImagePage = require('./artifact.image.page');
 
 module.exports = {
   'SamplePage': SamplePage
@@ -21,4 +22,5 @@ module.exports = {
   , 'ContentPage': ContentPage
   , 'PeoplePage': PeoplePage
   , 'UserProfilePage': UserProfilePage
+  , 'ArtifactImagePage': ArtifactImagePage
 }
