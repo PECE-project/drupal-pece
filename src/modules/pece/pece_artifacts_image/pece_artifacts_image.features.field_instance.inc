@@ -142,7 +142,7 @@ function pece_artifacts_image_field_default_field_instances() {
     'field_name' => 'field_pece_crit_commentary',
     'label' => 'Critical Commentary',
     'locked' => TRUE,
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'linkit' => array(
         'button_text' => 'Search',

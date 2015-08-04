@@ -5,3 +5,11 @@
  */
 
 include_once 'pece_artifacts_image.features.inc';
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_artifacts_docs_form_pece_artifact_image_node_form_alter(&$form, &$form_state) {
+  // Hide the comment settings fieldset.
+  $form['comment_settings']['#access'] = FALSE;
+}
