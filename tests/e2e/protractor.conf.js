@@ -17,7 +17,8 @@ exports.config = {
     admin: {
       'user': authentication.getInfo('user'),
       'password': authentication.getInfo('password')
-    }
+    },
+    timeoutLimit : 3000
   },
 
   // The test files are stored into the specs array, separated by comma.
@@ -37,6 +38,10 @@ exports.config = {
   // Here you will set things that have to happen before start testing.
   onPrepare: function () {
     var SpecReporter = require('jasmine-spec-reporter');
+
+    // Used for non-angular apps
+    browser.ignoreSynchronization = true;
+
     // add jasmine spec reporter
     jasmine.getEnv().addReporter(new SpecReporter({
       displayFailuresSummary: true,
@@ -44,5 +49,13 @@ exports.config = {
       displaySuiteNumber: true,
       displaySpecDuration: true
     }));
-  }
+
+    browser.driver.manage().window().maximize();
+  },
+
+  jasmineNodeOpts: {
+    showColors: true,
+    includeStackTrace: true,
+    defaultTimeoutInterval: 99999
+  },
 };

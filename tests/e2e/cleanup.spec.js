@@ -36,4 +36,10 @@ describe ('Cleanup' , function () {
     AllPages.PeoplePage.deleteUser('foobar@bar.baz');
     expect(AllPages.SamplePage.body.getText()).toContain('has been deleted.');
   });
+
+  it ('remove the created image artifact', function () {
+    AllPages.ContentPage.get();
+    AllPages.ContentPage.remove('Image Artifact');
+    expect(AllPages.SamplePage.body.getText()).toContain('has been deleted.');
+  });
 });

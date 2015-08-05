@@ -30,4 +30,5 @@ require('./registration.spec.js');
 require('./fieldnote.spec.js');
 require('./license.spec.js');
 require('./user.profile.spec.js');
+require('./artifact.image.spec.js');
 require('./cleanup.spec.js');

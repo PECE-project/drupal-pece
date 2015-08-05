@@ -17,13 +17,20 @@ describe ('Image Artifact' , function () {
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
   });
 
-  //it ('verify main elements presence', function () {
-  //  AllPages.ArtifactImagePage.get();
-  //  AllPages.ArtifactImagePage.checkMainElementsPresence();
-  //});
+  it ('verify main elements presence', function () {
+   AllPages.ArtifactImagePage.get();
+   AllPages.ArtifactImagePage.checkMainElementsPresence();
+  });
+
   it ('add a image artifact', function () {
     AllPages.ArtifactImagePage.get();
-    AllPages.ArtifactImagePage.add();
+    AllPages.ArtifactImagePage.add('Image Artifact', 'imageFile.jpg');
     expect(AllPages.SamplePage.body.getText()).toContain('has been created.');
+  });
+
+  it ('Should not accept other than image files', function () {
+    AllPages.ArtifactImagePage.get();
+    AllPages.ArtifactImagePage.accessMediaBrowser();
+    AllPages.ArtifactImagePage.checkFileFormat();
   });
 });
