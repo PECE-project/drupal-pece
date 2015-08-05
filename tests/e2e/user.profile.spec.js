@@ -20,6 +20,11 @@ describe ('User profile' , function () {
     AllPages.AuthenticationPage.logout();
   });
 
+  afterAll(function () {
+    AllPages.PeoplePage.deleteUser('foob@bar.baz');
+    AllPages.PeoplePage.deleteUser('boof@bar.baz');
+  });
+
   it ('should create a new user profile', function () {
     AllPages.RegistrationPage.registerProfile('foob', 'foob@bar.baz', browser.params.admin.password, 'Foo B.', 'Institution', 'Trainee', 'Lorem ipsum', 'Brazil', 'tagFoo', true);
     expect(AllPages.SamplePage.body.getText()).toContain('Your account is currently pending approval by the site administrator.');
@@ -31,6 +36,6 @@ describe ('User profile' , function () {
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.edit(email);
     AllPages.UserProfilePage.accessProfileForm();
-    expect(AllPages.UserProfilePage.emailField.getText()).toEqual(email);
+    expect(AllPages.UserProfilePage.emailField.getAttribute('value')).toEqual(email);
   });
 });

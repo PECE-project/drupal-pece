@@ -18,13 +18,13 @@ describe ('Fieldnote' , function () {
   });
 
   it ('verify main elements presence', function () {
-		AllPages.FieldnotePage.get();
+    AllPages.FieldnotePage.get();
     AllPages.FieldnotePage.checkMainElementsPresence();
   });
 
-	it ('add a fieldnote artifact', function () {
-		AllPages.FieldnotePage.get();
-		AllPages.FieldnotePage.add('Fieldnote text');
-		expect(AllPages.SamplePage.body.getText()).toContain('has been created.');
-	});
+  it ('add a fieldnote artifact', function () {
+    AllPages.FieldnotePage.get();
+    AllPages.FieldnotePage.add('Fieldnote text');
+    expect(AllPages.SamplePage.body.getText()).toContain('has been created.');
+  });
 });

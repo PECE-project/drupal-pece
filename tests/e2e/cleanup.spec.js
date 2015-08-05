@@ -17,18 +17,8 @@ describe ('Cleanup' , function () {
   });
 
   it ('remove the created fieldnote artifact', function () {
-		AllPages.ContentPage.get();
-		AllPages.ContentPage.remove('pece_artifact_fieldnote');
-		expect(AllPages.SamplePage.body.getText()).toContain('has been deleted.');
-	});
-
-  it ('should delete the user from the user profile test', function () {
-    AllPages.PeoplePage.deleteUser('foob@bar.baz');
-    expect(AllPages.SamplePage.body.getText()).toContain('has been deleted.');
-  });
-
-  it ('should delete the user from another user profile test', function () {
-    AllPages.PeoplePage.deleteUser('boof@bar.baz');
+    AllPages.ContentPage.get();
+    AllPages.ContentPage.remove('pece_artifact_fieldnote');
     expect(AllPages.SamplePage.body.getText()).toContain('has been deleted.');
   });
 

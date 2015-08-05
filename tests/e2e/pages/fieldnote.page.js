@@ -8,9 +8,9 @@ var FieldnotePage = function () {
   this.mainElements = {
 
     // Form main elements.
-	  uriField : element(by.css('#pece-artifact-fieldnote-node-form #edit-field-pece-uri-und-0-value')),
-    textField : element(by.css('#pece-artifact-fieldnote-node-form #edit-body-und-0-value_ifr')),
-    fieldsiteField : element(by.css('#pece-artifact-fieldnote-node-form #edit-field-pece-fieldsite-und-0-target-id')),
+	  uriField           : element(by.css('#pece-artifact-fieldnote-node-form #edit-field-pece-uri-und-0-value')),
+    textField          : element(by.css('#pece-artifact-fieldnote-node-form #edit-body-und-0-value_ifr')),
+    fieldsiteField     : element(by.css('#pece-artifact-fieldnote-node-form #edit-field-pece-fieldsite-und-0-target-id')),
     contributorsFields : element(by.css('#pece-artifact-fieldnote-node-form #edit-field-pece-contributors-und-0-target-id')),
     tagsField : element(by.css('#pece-artifact-fieldnote-node-form #edit-field-pece-tags-und')),
     licenceField : element(by.css('#pece-artifact-fieldnote-node-form #edit-field-pece-license-und-0-licence')),
