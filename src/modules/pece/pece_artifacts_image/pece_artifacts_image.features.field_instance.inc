@@ -298,7 +298,7 @@ function pece_artifacts_image_field_default_field_instances() {
       'alt_field' => 0,
       'default_image' => 0,
       'file_directory' => 'artifacts/media/image',
-      'file_extensions' => 'png gif jpg jpeg cr2 tiff',
+      'file_extensions' => 'png gif jpg jpeg svg',
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',

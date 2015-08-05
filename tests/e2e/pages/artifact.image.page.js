@@ -47,7 +47,7 @@ var ArtifactImagePage = function () {
       , fileFormatsIsVisible = EC.visibilityOf(fileFormats);
 
     browser.wait(fileFormatsIsVisible, browser.params.timeoutLimit);
-    expect(fileFormats.getText()).toContain('png gif jpg jpeg cr2 tiff');
+    expect(fileFormats.getText()).toContain('png gif jpg jpeg svg');
   };
 
   this.accessMediaBrowser = function () {
