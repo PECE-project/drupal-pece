@@ -109,7 +109,7 @@ projects[email][version] = 1.3
 
 ; Location
 projects[location][subdir] = contrib
-projects[location][version] = 3.6
+projects[location][version] = 3.7
 
 ; Bundle Inherit
 projects[bundle_inherit][subdir] = contrib
