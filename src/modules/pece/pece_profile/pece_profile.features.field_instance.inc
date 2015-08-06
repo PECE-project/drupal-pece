@@ -121,7 +121,8 @@ function pece_profile_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'profile2-pece_profile_main-field_pece_institution'
+  // Exported field_instance:
+  // 'profile2-pece_profile_main-field_pece_institution'
   $field_instances['profile2-pece_profile_main-field_pece_institution'] = array(
     'bundle' => 'pece_profile_main',
     'default_value' => NULL,
