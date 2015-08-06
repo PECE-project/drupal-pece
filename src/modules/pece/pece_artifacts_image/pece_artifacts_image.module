@@ -12,4 +12,6 @@ include_once 'pece_artifacts_image.features.inc';
 function pece_artifacts_docs_form_pece_artifact_image_node_form_alter(&$form, &$form_state) {
   // Hide the comment settings fieldset.
   $form['comment_settings']['#access'] = FALSE;
+
+  $form['author']['name']['#required'] = TRUE;
 }
