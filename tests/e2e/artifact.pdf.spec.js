@@ -38,4 +38,10 @@ describe ('PDF Docuemnt Artifact' , function () {
     AllPages.ArtifactPdfPage.add('PDF Document Artifact', 'pdfFile.pdf');
     expect(AllPages.SamplePage.body.getText()).toContain('has been created.');
   });
+
+  it ('Should not accept other than PDF files', function () {
+    AllPages.ArtifactPdfPage.get();
+    AllPages.ArtifactPdfPage.accessMediaBrowser();
+    AllPages.ArtifactPdfPage.checkFileFormat();
+  });
 });

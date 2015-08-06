@@ -35,6 +35,16 @@ var ArtifactImagePage = function () {
     browser.get('node/add/pece-artifact-image');
   };
 
+  this.clearMandatoryFields = function () {
+    this.mainElements.authorField.clear();
+  };
+
+  this.checkMandatoryFields = function () {
+    this.clearMandatoryFields();
+    this.publishButton.click();
+    browser.sleep(500);
+  };
+
   this.checkMainElementsPresence = function () {
     for (var key in this.mainElements) {
       expect(this.mainElements[key].isPresent()).toBe(true);
