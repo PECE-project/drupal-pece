@@ -135,6 +135,10 @@ projects[legal][version] = 1.5
 projects[profile2][subdir] = contrib
 projects[profile2][version] = 1.3
 
+; GMap
+projects[gmap][subdir] = contrib
+projects[gmap][version] = 2.9
+
 ; ************************************************
 ; ************** PECE Themes **************
 
