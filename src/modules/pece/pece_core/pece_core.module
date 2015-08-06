@@ -5,3 +5,14 @@
  */
 
 include_once 'pece_core.features.inc';
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_core_form_pece_fieldsite_node_form_alter(&$form, &$form_state) {
+  // Hide the comment settings fieldset.
+  $form['comment_settings']['#access'] = FALSE;
+
+  $form['author']['name']['#required'] = TRUE;
+}
