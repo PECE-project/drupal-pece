@@ -19,4 +19,6 @@ function pece_artifacts_docs_form_pece_artifact_fieldnote_node_form_alter(&$form
 
   // Hide the comment settings fieldset.
   $form['comment_settings']['#access'] = FALSE;
+
+  $form['author']['name']['#required'] = TRUE;
 }
