@@ -42,6 +42,15 @@ var ArtifactImagePage = function () {
     this.mainElements.authorField.clear();
   };
 
+  this.accessMediaBrowser = function () {
+    var browseButton      = element(by.css('.media-widget a.button.browse'))     , browserBtnIsPresent = EC.visibilityOf(browseButton);
+
+    browser.wait(browserBtnIsPresent, browser.params.timeoutLimit);
+    browseButton.click();
+
+    browser.switchTo().frame('mediaBrowser');
+  }
+
   this.checkMandatoryFields = function () {
     this.clearMandatoryFields();
     browser.wait(EC.visibilityOf(this.publishButton), browser.params.timeoutLimit);
@@ -67,30 +76,26 @@ var ArtifactImagePage = function () {
     expect(fileFormats.getText()).toContain('png gif jpg jpeg svg');
   };
 
-  this.accessMediaBrowser = function () {
-      var browseButton      = element(by.css('.media-widget a.button.browse'))
-      , browserBtnIsPresent = EC.visibilityOf(browseButton);
-
-    browser.wait(browserBtnIsPresent, browser.params.timeoutLimit);
-    browseButton.click();
-
-    browser.switchTo().frame('mediaBrowser');
-  }
-
   this.addImage = function (fileName) {
-    var mediaElement = element.all(by.id('edit-upload-upload')).last()
-      , nextButton   = element(by.css('#edit-next'))
-      , saveButton   = element(by.css('#edit-submit'))
-      , mediaInput   = path.resolve(__dirname, '../assets/' + fileName);
+  // Click on media browse button.
+    element(by.css('.media-widget a.button.browse')).click();
 
-    this.accessMediaBrowser();
-    mediaElement.sendKeys(mediaInput).then(function () {
-      return nextButton.click().then(function () {
-        return saveButton.click().then(function () {
-          browser.sleep(100);
-          return browser.switchTo().defaultContent();
+    return browser.switchTo().frame('mediaBrowser').then(function() {
+      var mediaElement = element.all(by.id('edit-upload-upload')).last()
+        , nextButton = element(by.css('#edit-next'))
+        , saveButton = element(by.css('[value="Save"]'))
+        , mediaInput = path.resolve(__dirname, '../assets/' + fileName);
+
+        // Upload media.
+        return mediaElement.sendKeys(mediaInput).then(function() {
+          return nextButton.click().then(function() {
+            browser.sleep(3000);
+            return saveButton.click().then(function() {
+              browser.sleep(1000);
+              return browser.switchTo().defaultContent();
+            });
+          });
         });
-      });
     });
   };
 
