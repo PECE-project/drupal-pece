@@ -27,10 +27,6 @@ describe ('Image Artifact' , function () {
   it ('verify mandatory fields', function () {
     AllPages.ArtifactImagePage.get();
     AllPages.ArtifactImagePage.checkMandatoryFields();
-    expect(AllPages.SamplePage.body.getText()).toContain('Title field is required.');
-    expect(AllPages.SamplePage.body.getText()).toContain('Author field is required.');
-    expect(AllPages.SamplePage.body.getText()).toContain('Image field is required.');
-    expect(AllPages.SamplePage.body.getText()).toContain('URI field is required.');
   });
 
   it ('add a image artifact', function () {

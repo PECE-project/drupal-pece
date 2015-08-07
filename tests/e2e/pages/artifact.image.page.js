@@ -3,7 +3,9 @@
 */
 
 var helpers = require('../helpers/helpers')
-  , path = require('path');
+  , SamplePage = require('./sample.page')
+  , path = require('path')
+  , EC = protractor.ExpectedConditions;
 
 var ArtifactImagePage = function () {
 
@@ -36,13 +38,19 @@ var ArtifactImagePage = function () {
   };
 
   this.clearMandatoryFields = function () {
+    browser.wait(EC.visibilityOf(this.mainElements.authorField), browser.params.timeoutLimit);
     this.mainElements.authorField.clear();
   };
 
   this.checkMandatoryFields = function () {
     this.clearMandatoryFields();
+    browser.wait(EC.visibilityOf(this.publishButton), browser.params.timeoutLimit);
     this.publishButton.click();
-    browser.sleep(500);
+    browser.wait(EC.visibilityOf(SamplePage.body), browser.params.timeoutLimit);
+    expect(SamplePage.body.getText()).toContain('Title field is required.');
+    expect(SamplePage.body.getText()).toContain('Author field is required.');
+    expect(SamplePage.body.getText()).toContain('Image field is required.');
+    expect(SamplePage.body.getText()).toContain('URI field is required.');
   };
 
   this.checkMainElementsPresence = function () {
@@ -52,8 +60,7 @@ var ArtifactImagePage = function () {
   };
 
   this.checkFileFormat = function () {
-    var EC = protractor.ExpectedConditions
-      , fileFormats = element(by.css('#edit-upload-ajax-wrapper .description'))
+      var fileFormats = element(by.css('#edit-upload-ajax-wrapper .description'))
       , fileFormatsIsVisible = EC.visibilityOf(fileFormats);
 
     browser.wait(fileFormatsIsVisible, browser.params.timeoutLimit);
@@ -61,8 +68,7 @@ var ArtifactImagePage = function () {
   };
 
   this.accessMediaBrowser = function () {
-    var EC                  = protractor.ExpectedConditions
-      , browseButton        = element(by.css('.media-widget a.button.browse'))
+      var browseButton      = element(by.css('.media-widget a.button.browse'))
       , browserBtnIsPresent = EC.visibilityOf(browseButton);
 
     browser.wait(browserBtnIsPresent, browser.params.timeoutLimit);
@@ -89,7 +95,6 @@ var ArtifactImagePage = function () {
   };
 
   this.getFromLibrary = function (fileName) {
-
     var library = element(by.css('a#ui-id-2'))
       , libraryIsPresent = EC.visibilityOf(library)
       , sendFileIsPresent = EC.presenceOf(element(by.cssContainingText('a', fileName)))
@@ -107,12 +112,12 @@ var ArtifactImagePage = function () {
   };
 
   this.add = function (title, fileName) {
-    var EC = protractor.ExpectedConditions;
     browser.wait(EC.visibilityOf(this.mainElements.titleField), browser.params.timeoutLimit);
     this.mainElements.titleField.sendKeys(title);
     this.mainElements.uriField.sendKeys('uri1');
     this.addImage(fileName);
-    this.mainElements.formatField.sendKeys('jpg')
+    this.mainElements.formatField.sendKeys('jpg');
+    browser.wait(EC.visibilityOf(this.publishButton), browser.params.timeoutLimit);
     this.publishButton.click();
   };
 };
