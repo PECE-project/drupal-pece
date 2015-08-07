@@ -3,7 +3,7 @@
 */
 
 // Require all page objects.
-var AllPages= require('./pages/all.page');
+var AllPages = require('./pages/all.page');
 
 // Used for non-angular apps
 browser.ignoreSynchronization = true;
@@ -26,16 +26,56 @@ describe ('User profile' , function () {
   });
 
   it ('should create a new user profile', function () {
-    AllPages.RegistrationPage.registerProfile('foob', 'foob@bar.baz', browser.params.admin.password, 'Foo B.', 'Institution', 'Trainee', 'Lorem ipsum', 'Brazil', 'tagFoo', true);
+    var user = {
+      username: 'foob',
+      email: 'foob@bar.baz',
+      pass: browser.params.admin.password,
+      name: 'Foo B.',
+      institutions: 'Institution',
+      position: 'Trainee',
+      bio: 'Lorem ipsum',
+      location: {
+        label: 'Sweet Home',
+        street: 'street',
+        additional: 'additional',
+        country: 'Brazil'
+      },
+      tags: 'tagFoo',
+      tos: true
+    }
+    AllPages.RegistrationPage.registerProfile(user);
     expect(AllPages.SamplePage.body.getText()).toContain('Your account is currently pending approval by the site administrator.');
   });
 
-  it('check profile email after registration', function () {
+  it('check user profile after registration', function () {
     var email = 'boof@bar.baz'
-    AllPages.RegistrationPage.registerProfile('boof', email, browser.params.admin.password, 'Boo F.', 'Institution', 'Trainee', 'Lorem ipsum', 'Brazil', 'tagFoo', true);
+      , user = {
+      username: 'boof',
+      email: email,
+      pass: browser.params.admin.password,
+      name: 'Boo F.',
+      institution: 'Institution',
+      position: 'Trainee',
+      bio: 'Lorem ipsum',
+      location: {
+        label: 'Taller Web Solutions',
+        street: 'Servidão Recanto das Pedras, 3',
+        additional: 'Rio Tavares - Florianópolis',
+        country: 'Brazil'
+      },
+      tags: 'tagFoo',
+      tos: true
+    }
+    AllPages.RegistrationPage.registerProfile(user);
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.edit(email);
     AllPages.UserProfilePage.accessProfileForm();
+    AllPages.UserProfilePage.checkGeocoding()
+    expect(AllPages.UserProfilePage.nameField.getAttribute('value')).toEqual(user.name);
     expect(AllPages.UserProfilePage.emailField.getAttribute('value')).toEqual(email);
+    expect(AllPages.UserProfilePage.institutionField.getAttribute('value')).toEqual(user.institution);
+    expect(AllPages.UserProfilePage.positionField.getAttribute('value')).toEqual(user.position);
+    expect(AllPages.UserProfilePage.bioField.getText()).toEqual(user.bio);
+    expect(AllPages.UserProfilePage.tagsField.getAttribute('value')).toEqual(user.tags);
   });
 });
