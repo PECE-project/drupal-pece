@@ -3,7 +3,7 @@
 */
 
 // Require all page objects.
-var AllPages = require('./pages/all.page');
+var AllPages = require('../pages/all.page');
 
 // Used for non-angular apps
 browser.ignoreSynchronization = true;

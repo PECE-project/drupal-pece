@@ -3,7 +3,7 @@
 */
 
 // Require all page objects.
-var AllPages = require('./pages/all.page');
+var AllPages = require('../../pages/all.page');
 var EC = protractor.ExpectedConditions;
 
 // For each spec file is recommended to have just one describe.

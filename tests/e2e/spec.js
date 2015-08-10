@@ -25,11 +25,11 @@ describe ('Drupal home page' , function () {
   });
 });
 
-require('./authentication.spec.js');
-require('./registration.spec.js');
-require('./fieldnote.spec.js');
-require('./license.spec.js');
-require('./user.profile.spec.js');
-require('./artifact.image.spec.js');
-require('./artifact.pdf.spec.js');
-require('./cleanup.spec.js');
+require('./specs/authentication.spec.js');
+require('./specs/registration.spec.js');
+require('./specs/artefacts/artifact.fieldnote.spec.js');
+require('./specs/license.spec.js');
+require('./specs/user.profile.spec.js');
+require('./specs/artefacts/artifact.image.spec.js');
+require('./specs/artefacts/artifact.pdf.spec.js');
+require('./specs/cleanup.spec.js');
