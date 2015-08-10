@@ -187,17 +187,23 @@ function pece_artifacts_pdf_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_pece_crit_commentary',
     'label' => 'Critical Commentary',
+    'locked' => TRUE,
     'required' => FALSE,
     'settings' => array(
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
+      'type' => 'text_textarea',
       'weight' => 5,
     ),
   );

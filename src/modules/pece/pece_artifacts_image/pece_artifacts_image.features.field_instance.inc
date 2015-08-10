@@ -204,7 +204,7 @@ function pece_artifacts_image_field_default_field_instances() {
       'settings' => array(
         'size' => 60,
       ),
-      'type' => 'text_textfield',
+      'type' => 'text_textarea',
       'weight' => 6,
     ),
   );
