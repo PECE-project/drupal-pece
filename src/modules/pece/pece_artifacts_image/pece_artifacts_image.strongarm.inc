@@ -74,7 +74,7 @@ function pece_artifacts_image_strongarm() {
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '13',
+          'weight' => '14',
         ),
       ),
       'display' => array(),

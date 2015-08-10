@@ -359,6 +359,49 @@ function pece_artifacts_image_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-pece_artifact_image-field_pece_location'
+  $field_instances['node-pece_artifact_image-field_pece_location'] = array(
+    'bundle' => 'pece_artifact_image',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'location_cck',
+        'settings' => array(),
+        'type' => 'location_default',
+        'weight' => 11,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pece_location',
+    'label' => 'Location',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'location_cck',
+      'settings' => array(),
+      'type' => 'location',
+      'weight' => 13,
+    ),
+  );
+
   // Exported field_instance: 'node-pece_artifact_image-field_pece_media_image'
   $field_instances['node-pece_artifact_image-field_pece_media_image'] = array(
     'bundle' => 'pece_artifact_image',
@@ -621,6 +664,7 @@ function pece_artifacts_image_field_default_field_instances() {
   t('Groups audience');
   t('Image');
   t('License');
+  t('Location');
   t('Tags');
   t('URI');
 
