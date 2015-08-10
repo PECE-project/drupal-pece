@@ -30,7 +30,7 @@ var ArtifactImagePage = function () {
   };
 
   this.browseButtonId = 'edit-field-pece-media-image-und-0-browse-button';
-  this.publishButton  = element(by.css('#edit-submit'));
+  this.publishButton  = element(by.css('#pece-artifact-image-node-form #edit-submit'));
 
   //Define image pageobject methods.
   this.get = function () {
@@ -43,7 +43,8 @@ var ArtifactImagePage = function () {
   };
 
   this.accessMediaBrowser = function () {
-    var browseButton      = element(by.css('.media-widget a.button.browse'))     , browserBtnIsPresent = EC.visibilityOf(browseButton);
+    var browseButton      = element(by.css('.media-widget a.button.browse'))
+       , browserBtnIsPresent = EC.visibilityOf(browseButton);
 
     browser.wait(browserBtnIsPresent, browser.params.timeoutLimit);
     browseButton.click();

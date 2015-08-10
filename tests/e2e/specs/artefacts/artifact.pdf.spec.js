@@ -27,10 +27,6 @@ describe ('PDF Docuemnt Artifact' , function () {
   it ('verify mandatory fields', function () {
     AllPages.ArtifactPdfPage.get();
     AllPages.ArtifactPdfPage.checkMandatoryFields();
-    expect(AllPages.SamplePage.body.getText()).toContain('Title field is required.');
-    expect(AllPages.SamplePage.body.getText()).toContain('Author field is required.');
-    expect(AllPages.SamplePage.body.getText()).toContain('PDF Document field is required.');
-    expect(AllPages.SamplePage.body.getText()).toContain('URI field is required.');
   });
 
   it ('add a PDF Document artifact', function () {

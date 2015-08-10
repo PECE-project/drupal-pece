@@ -3,7 +3,9 @@
 */
 
 var helpers = require('../helpers/helpers')
-  , path = require('path');
+  , SamplePage = require('./sample.page')
+  , path = require('path')
+  , EC = protractor.ExpectedConditions;
 
 var ArtifactPdfPage = function () {
 
@@ -36,11 +38,17 @@ var ArtifactPdfPage = function () {
 
   this.checkMandatoryFields = function () {
     this.clearMandatoryFields();
+    browser.wait(EC.visibilityOf(this.publishButton), browser.params.timeoutLimit);
     this.publishButton.click();
-    browser.sleep(500);
+    browser.wait(EC.visibilityOf(SamplePage.body), browser.params.timeoutLimit);
+    expect(SamplePage.body.getText()).toContain('Title field is required.');
+    expect(SamplePage.body.getText()).toContain('Author field is required.');
+    expect(SamplePage.body.getText()).toContain('PDF Document field is required.');
+    expect(SamplePage.body.getText()).toContain('URI field is required.');
   };
 
   this.clearMandatoryFields = function () {
+    browser.wait(EC.visibilityOf(this.mainElements.authorField), browser.params.timeoutLimit);
     this.mainElements.authorField.clear();
   };
 
@@ -51,8 +59,7 @@ var ArtifactPdfPage = function () {
   };
 
   this.checkFileFormat = function () {
-    var EC = protractor.ExpectedConditions
-      , fileFormats = element(by.css('#edit-upload-ajax-wrapper .description'))
+      var fileFormats = element(by.css('#edit-upload-ajax-wrapper .description'))
       , fileFormatsIsVisible = EC.visibilityOf(fileFormats);
 
     browser.wait(fileFormatsIsVisible, browser.params.timeoutLimit);
@@ -60,8 +67,7 @@ var ArtifactPdfPage = function () {
   };
 
   this.accessMediaBrowser = function () {
-    var EC                  = protractor.ExpectedConditions
-      , browseButton        = element(by.css('.media-widget a.button.browse'))
+      var browseButton      = element(by.css('.media-widget a.button.browse'))
       , browserBtnIsPresent = EC.visibilityOf(browseButton);
 
     browser.wait(browserBtnIsPresent, browser.params.timeoutLimit);
@@ -71,19 +77,25 @@ var ArtifactPdfPage = function () {
   }
 
   this.addPdf = function (fileName) {
-    var mediaElement = element.all(by.id('edit-upload-upload')).last()
-      , nextButton   = element(by.css('#edit-next'))
-      , saveButton   = element(by.css('#edit-submit'))
-      , mediaInput   = path.resolve(__dirname, '../assets/' + fileName);
+    // Click on media browse button.
+    element(by.css('.media-widget a.button.browse')).click();
 
-    this.accessMediaBrowser();
-    mediaElement.sendKeys(mediaInput).then(function () {
-      return nextButton.click().then(function () {
-        return saveButton.click().then(function () {
-          browser.sleep(100);
-          return browser.switchTo().defaultContent();
+    return browser.switchTo().frame('mediaBrowser').then(function() {
+      var mediaElement = element.all(by.id('edit-upload-upload')).last()
+        , nextButton   = element(by.css('#edit-next'))
+        , saveButton   = element(by.css('#edit-submit'))
+        , mediaInput   = path.resolve(__dirname, '../assets/' + fileName);
+
+        // Upload media.
+        return mediaElement.sendKeys(mediaInput).then(function() {
+          return nextButton.click().then(function() {
+            browser.sleep(3000);
+            return saveButton.click().then(function() {
+              browser.sleep(1000);
+              return browser.switchTo().defaultContent();
+            });
+          });
         });
-      });
     });
   };
 
@@ -106,7 +118,6 @@ var ArtifactPdfPage = function () {
   };
 
   this.add = function (title, fileName) {
-    var EC = protractor.ExpectedConditions;
     browser.wait(EC.visibilityOf(this.mainElements.titleField), browser.params.timeoutLimit);
     this.mainElements.titleField.sendKeys(title);
     this.mainElements.uriField.sendKeys('uri1');
