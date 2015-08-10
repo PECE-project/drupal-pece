@@ -40,5 +40,6 @@ function pece_profile_modules_enabled($modules) {
     // Define some permissions for the authentcated user role
     user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('view own pece_profile_main profile'));
     user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('edit own pece_profile_main profile'));
+    user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('view any pece_profile_main profile'));
   }
 }
