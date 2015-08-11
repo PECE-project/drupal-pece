@@ -5,9 +5,6 @@
 // Require sample page object.
 var AllPages = require('./pages/all.page');
 
-// Used for non-angular apps
-browser.ignoreSynchronization = true;
-
 // For each spec file is recommended to have just one describe.
 // A describe may the the description of a functionality/feature or even a web page, like home page, contact page, etc. It depends on the team work agreement
 describe ('Drupal home page' , function () {
@@ -25,11 +22,9 @@ describe ('Drupal home page' , function () {
   });
 });
 
-require('./specs/authentication.spec.js');
 require('./specs/registration.spec.js');
 require('./specs/artefacts/artifact.fieldnote.spec.js');
 require('./specs/license.spec.js');
 require('./specs/user.profile.spec.js');
 require('./specs/artefacts/artifact.image.spec.js');
 require('./specs/artefacts/artifact.pdf.spec.js');
-require('./specs/cleanup.spec.js');
