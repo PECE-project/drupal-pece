@@ -12,8 +12,12 @@ include_once 'pece_artifacts_image.features.inc';
 function pece_artifacts_image_form_pece_artifact_image_node_form_alter(&$form, &$form_state) {
   // Hide the comment settings fieldset.
   $form['comment_settings']['#access'] = FALSE;
-
+  // We cannot allow the content to be authored by anonymous.
   $form['author']['name']['#required'] = TRUE;
+
+  if (module_exists('pece_profile')) {
+    array_unshift($form['#validate'], '_pece_artifact_image_check_author');
+  }
 }
 
 /**
@@ -41,5 +45,23 @@ function pece_artifacts_image_modules_enabled($modules) {
       // Define some permissions for the authentcated user role
       user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array($perm));
     }
+  }
+}
+
+/**
+ * Validate function to check the authors field and fill the contributors
+ * accourding the author name.
+ */
+function _pece_artifact_image_check_author(&$form, &$form_state) {
+  global $user;
+  $values = $form_state['values'];
+  $user_profile = profile2_load_by_user($user);
+  $profile_wrapper = entity_metadata_wrapper('profile2', $user_profile['pece_profile_main']);
+
+  if (isset($values['field_pece_authors']['und'][0]) &&
+      $values['field_pece_authors']['und'][0]['name'] != $profile_wrapper->field_pece_full_name->value()) {
+
+    $value = array(LANGUAGE_NONE => array(array('target_id' => $user->uid)));
+    form_set_value($form['field_pece_contributors'], $value, $form_state);
   }
 }

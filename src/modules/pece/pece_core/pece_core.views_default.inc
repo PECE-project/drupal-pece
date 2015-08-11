@@ -13,7 +13,7 @@ function pece_core_views_default_views() {
   $view = new view();
   $view->name = 'users_field_ref';
   $view->description = '';
-  $view->tag = 'default';
+  $view->tag = 'PECE';
   $view->base_table = 'users';
   $view->human_name = 'Users (Field Reference)';
   $view->core = 7;
