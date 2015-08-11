@@ -70,7 +70,7 @@ describe ('User profile' , function () {
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.edit(email);
     AllPages.UserProfilePage.accessProfileForm();
-    AllPages.UserProfilePage.checkGeocoding()
+    AllPages.UserProfilePage.checkGeocoding();
     expect(AllPages.UserProfilePage.nameField.getAttribute('value')).toEqual(user.name);
     expect(AllPages.UserProfilePage.emailField.getAttribute('value')).toEqual(email);
     expect(AllPages.UserProfilePage.institutionField.getAttribute('value')).toEqual(user.institution);
