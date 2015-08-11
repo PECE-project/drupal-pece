@@ -268,7 +268,7 @@ function pece_core_field_default_field_bases() {
               'weight' => 12,
             ),
             'province' => array(
-              'collect' => 0,
+              'collect' => 1,
               'default' => '',
               'weight' => 10,
               'widget' => 'autocomplete',
