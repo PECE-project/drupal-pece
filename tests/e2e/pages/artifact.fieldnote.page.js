@@ -2,6 +2,8 @@
 * @file fieldnote.page.js
 */
 
+var EC = protractor.ExpectedConditions;
+
 var FieldnotePage = function () {
 
   // Define fieldnote page object attributes.
@@ -34,14 +36,13 @@ var FieldnotePage = function () {
 
   this.checkMainElementsPresence = function () {
     for (var key in this.mainElements) {
-      browser.driver.sleep(2000);
+      browser.driver.sleep(200);
       expect(this.mainElements[key].isPresent()).toBe(true);
     }
   };
 
   this.add = function (fieldNoteText) {
-    var EC = protractor.ExpectedConditions
-      , uriFieldIsPresent = EC.visibilityOf(this.mainElements.uriField);
+    var uriFieldIsPresent = EC.visibilityOf(this.mainElements.uriField);
 
     browser.wait(uriFieldIsPresent, browser.params.timeoutLimit);
     this.mainElements.uriField.sendKeys('uri1');
