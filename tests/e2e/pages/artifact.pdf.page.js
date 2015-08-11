@@ -20,6 +20,7 @@ var ArtifactPdfPage = function () {
     contributorsFields : element(by.css('#pece-artifact-pdf-node-form #edit-field-pece-contributors-und-0-target-id')),
     tagsField          : element(by.css('#pece-artifact-pdf-node-form #edit-field-pece-tags-und')),
     licenceField       : element(by.css('#pece-artifact-pdf-node-form #edit-field-pece-license-und-0-licence')),
+    authorsField       : element(by.css('#pece-artifact-pdf-node-form #edit-field-pece-authors-und')),
 
     // Right side form elements.
     publishedOnDateField   : element(by.css('#pece-artifact-pdf-node-form .radix-layouts-sidebar #edit-pubdate-datepicker-popup-0')),

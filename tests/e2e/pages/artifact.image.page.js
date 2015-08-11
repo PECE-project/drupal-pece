@@ -21,6 +21,7 @@ var ArtifactImagePage = function () {
     contributorsFields : element(by.css('#pece-artifact-image-node-form #edit-field-pece-contributors-und-0-target-id')),
     tagsField          : element(by.css('#pece-artifact-image-node-form #edit-field-pece-tags-und')),
     licenceField       : element(by.css('#pece-artifact-image-node-form #edit-field-pece-license-und-0-licence')),
+    authorsField       : element(by.css('#pece-artifact-image-node-form #edit-field-pece-authors-und')),
 
     // Right side form elements.
     publishedOnDateField   : element(by.css('#pece-artifact-image-node-form .radix-layouts-sidebar #edit-pubdate-datepicker-popup-0')),
@@ -123,6 +124,7 @@ var ArtifactImagePage = function () {
     this.mainElements.uriField.sendKeys('uri1');
     this.addImage(fileName);
     this.mainElements.formatField.sendKeys('jpg');
+    this.mainElements.authorsField.sendKeys('Other author, Another Author');
     browser.wait(EC.visibilityOf(this.publishButton), browser.params.timeoutLimit);
     this.publishButton.click();
   };
