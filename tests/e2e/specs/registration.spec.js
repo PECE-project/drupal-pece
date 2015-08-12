@@ -26,7 +26,7 @@ describe ('Registration' , function () {
     AllPages.SamplePage.checkMessage('has been deleted.');
   });
 
-  it ('should be not accomplished', function () {
+  it ('should be not accomplished because of not accepting the term', function () {
     AllPages.RegistrationPage.register('foo', 'foo@bar.baz', browser.params.admin.password, false);
     AllPages.SamplePage.checkMessage('Accept Terms & Conditions of Use field is required.');
   });
