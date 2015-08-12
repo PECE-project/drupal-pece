@@ -2,12 +2,12 @@
 * @file spec.js
 */
 
-// Require sample page object.
+// Require all page object.
 var AllPages = require('./pages/all.page');
 
 // For each spec file is recommended to have just one describe.
 // A describe may the the description of a functionality/feature or even a web page, like home page, contact page, etc. It depends on the team work agreement
-describe ('Drupal home page' , function () {
+describe ('PECE home page' , function () {
   // This is the pre-condition step of each test.
   beforeEach(function () {
   // In the get method of the sample page you can have two behaviors:
