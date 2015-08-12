@@ -29,14 +29,13 @@ var FieldnotePage = function () {
   this.plaintextOption   = element(by.css('#edit-body-und-0-format--2 option[value="plain_text"]'));
   this.publishButton     = element(by.css('#edit-submit'));
 
-  //Define fieldnote pageobject methods.
+  // Define fieldnote pageobject methods.
   this.get = function () {
     browser.get('node/add/pece-artifact-fieldnote');
   };
 
   this.checkMainElementsPresence = function () {
     for (var key in this.mainElements) {
-      browser.driver.sleep(200);
       expect(this.mainElements[key].isPresent()).toBe(true);
     }
   };
