@@ -62,6 +62,11 @@ function pece_artifacts_pdf_modules_enabled($modules) {
  * accourding the author name.
  */
 function _pece_artifact_pdf_check_author(&$form, &$form_state) {
+
+  if (!isset($user_profile['pece_profile_main'])) {
+    return;
+  }
+
   global $user;
 
   $values = $form_state['values'];

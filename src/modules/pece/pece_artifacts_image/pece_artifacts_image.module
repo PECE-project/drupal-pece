@@ -63,7 +63,6 @@ function _pece_artifact_image_check_author(&$form, &$form_state) {
   $values = $form_state['values'];
   $user_profile = profile2_load_by_user($user);
   $contributor_role = user_role_load_by_name('Contributor');
-
   $profile_wrapper = entity_metadata_wrapper('profile2', $user_profile['pece_profile_main']);
 
   if (in_array($contributor_role->rid, array_keys($user->roles) &&
