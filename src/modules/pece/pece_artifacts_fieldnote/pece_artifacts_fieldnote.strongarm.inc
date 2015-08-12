@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * pece_artifacts_docs.strongarm.inc
+ * pece_artifacts_fieldnote.strongarm.inc
  */
 
 /**
  * Implements hook_strongarm().
  */
-function pece_artifacts_docs_strongarm() {
+function pece_artifacts_fieldnote_strongarm() {
   $export = array();
 
   $strongarm = new stdClass();
@@ -80,7 +80,7 @@ function pece_artifacts_docs_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
-          'weight' => '8',
+          'weight' => '9',
         ),
         'title' => array(
           'weight' => '1',

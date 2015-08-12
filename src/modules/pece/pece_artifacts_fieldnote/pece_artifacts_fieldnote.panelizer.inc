@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * pece_artifacts_docs.panelizer.inc
+ * pece_artifacts_fieldnote.panelizer.inc
  */
 
 /**
  * Implements hook_panelizer_defaults().
  */
-function pece_artifacts_docs_panelizer_defaults() {
+function pece_artifacts_fieldnote_panelizer_defaults() {
   $export = array();
 
   $panelizer = new stdClass();

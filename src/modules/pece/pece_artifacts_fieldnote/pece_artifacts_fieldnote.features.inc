@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * pece_artifacts_docs.features.inc
+ * pece_artifacts_fieldnote.features.inc
  */
 
 /**
  * Implements hook_ctools_plugin_api().
  */
-function pece_artifacts_docs_ctools_plugin_api($module = NULL, $api = NULL) {
+function pece_artifacts_fieldnote_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "panelizer" && $api == "panelizer") {
     return array("version" => "1");
   }
@@ -19,10 +19,10 @@ function pece_artifacts_docs_ctools_plugin_api($module = NULL, $api = NULL) {
 /**
  * Implements hook_node_info().
  */
-function pece_artifacts_docs_node_info() {
+function pece_artifacts_fieldnote_node_info() {
   $items = array(
     'pece_artifact_fieldnote' => array(
-      'name' => t('Fieldnote'),
+      'name' => t('Artifact - Fieldnote'),
       'base' => 'node_content',
       'description' => t('The PECE\'s Artifact Fieldnote content type.'),
       'has_title' => '1',
