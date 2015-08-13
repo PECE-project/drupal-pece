@@ -39,7 +39,7 @@ describe ('User profile' , function () {
       },
       tags: 'tagFoo',
       tos: true
-    }
+    };
     AllPages.RegistrationPage.registerProfile(user);
     expect(AllPages.SamplePage.body.getText()).toContain('Your account is currently pending approval by the site administrator.');
   });
@@ -62,7 +62,7 @@ describe ('User profile' , function () {
       },
       tags: 'tagFoo',
       tos: true
-    }
+    };
     AllPages.RegistrationPage.registerProfile(user);
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.edit(email);
