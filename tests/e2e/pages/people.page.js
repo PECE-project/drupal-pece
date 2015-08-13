@@ -34,7 +34,6 @@ var PeoplePage = function () {
     browser.wait(EC.visibilityOf(cancelOption), browser.params.timeoutLimit);
     cancelOption.click();
     cancelButton.click();
-    // The below line of code is necessary for a later test verification.
     browser.wait(EC.visibilityOf(element(by.css('.messages.status'))), browser.params.timeoutLimit);
   };
 
