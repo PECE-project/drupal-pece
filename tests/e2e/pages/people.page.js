@@ -17,53 +17,48 @@ var PeoplePage = function () {
   };
 
   this.filter = function (email) {
-    var isEmailPresent = EC.visibilityOf(this.emailField);
-
-    browser.wait(isEmailPresent, browser.params.timeoutLimit);
+    browser.wait(EC.visibilityOf(this.emailField), browser.params.timeoutLimit);
     this.emailField.clear();
     this.emailField.sendKeys(email);
     this.applyButton.click();
-    browser.driver.sleep(3000);
   };
 
   this.deleteUser = function (email) {
-    var cancelButton = element(by.css('input[value="user_cancel_delete"]'))
-      , confirmButton = element(by.css('#edit-submit'))
-      , isConfirmPresent = EC.visibilityOf(confirmButton)
-      , isCancelPresent = EC.visibilityOf(cancelButton);
+    var cancelOption = element(by.css('input[value="user_cancel_delete"]'))
+      , cancelButton = element(by.css('#edit-submit'));
 
     this.get();
     this.filter(email);
+    browser.wait(EC.visibilityOf(element(by.cssContainingText('a', 'Cancel account'))), browser.params.timeoutLimit);
     element(by.cssContainingText('a', 'Cancel account')).click();
-    browser.wait(isCancelPresent, browser.params.timeoutLimit);
+    browser.wait(EC.visibilityOf(cancelOption), browser.params.timeoutLimit);
+    cancelOption.click();
     cancelButton.click();
-    browser.wait(isConfirmPresent, browser.params.timeoutLimit);
-    confirmButton.click();
-    browser.driver.sleep(1000);
+    // The below line of code is necessary for a later test verification.
+    browser.wait(EC.visibilityOf(element(by.css('.messages.status'))), browser.params.timeoutLimit);
   };
 
   this.edit = function (email) {
     this.get();
     this.filter(email);
+    browser.wait(EC.visibilityOf(element(by.cssContainingText('a', 'edit'))), browser.params.timeoutLimit);
     element(by.cssContainingText('a', 'edit')).click();
-    browser.driver.sleep(1000);
   };
 
-  this.unblock = function (email) {
-    this.edit(email);
-    this.statusField.click();
-    this.confirmButton.click();
-    browser.driver.sleep(1000);
-  };
+  // this.unblock = function (email) {
+  //   this.edit(email);
+  //   this.statusField.click();
+  //   this.confirmButton.click();
+  // };
 
   this.addRole = function (email, roleName) {
     var roleWrapper = element(by.cssContainingText('#edit-roles .form-type-checkbox', roleName))
       , role = roleWrapper.findElement(by.css('input#edit-roles-6'));
 
     this.edit(email);
-    browser.driver.sleep(1000);
+    browser.wait(EC.visibilityOf(role), browser.params.timeoutLimit);
     role.click();
-    browser.driver.sleep(4000);
+    browser.wait(EC.visibilityOf(this.confirmButton), browser.params.timeoutLimit);
     this.confirmButton.click();
   };
 };
