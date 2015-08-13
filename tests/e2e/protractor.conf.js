@@ -58,7 +58,7 @@ exports.config = {
     browser.driver.controlFlow().execute = function() {
       var args = arguments;
 
-      // queue 100ms wait.
+      // queue 200ms wait.
       origFn.call(browser.driver.controlFlow(), function() {
         return protractor.promise.delayed(200);
       });
