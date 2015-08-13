@@ -4,14 +4,13 @@
  * Code for the PECE Artifacts feature.
  */
 
+include_once 'pece_artifacts.functions.inc';
 include_once 'pece_artifacts.features.inc';
 
 /**
  * Implements hook_form_FORM_ID_alter().
  */
 function pece_artifacts_form_pece_artifact_node_form_alter(&$form, &$form_state) {
-  // Hide the comment settings fieldset.
-  $form['comment_settings']['#access'] = FALSE;
-
-  $form['author']['name']['#required'] = TRUE;
+  // PECE's artifact default form alter.
+  pece_artifacts_alter_artifact_form($form, $form_state);
 }

@@ -256,7 +256,6 @@ function pece_artifacts_pdf_field_default_field_instances() {
     ),
   );
 
-
   // Exported field_instance: 'node-pece_artifact_pdf-field_pece_location'
   $field_instances['node-pece_artifact_pdf-field_pece_location'] = array(
     'bundle' => 'pece_artifact_pdf',
@@ -546,13 +545,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Annotations');
   t('Author(s)');
   t('Contributors');
   t('Critical Commentary');
   t('Fieldsite');
   t('Groups audience');
   t('License');
+  t('Location');
   t('PDF Document');
   t('Tags');
   t('URI');

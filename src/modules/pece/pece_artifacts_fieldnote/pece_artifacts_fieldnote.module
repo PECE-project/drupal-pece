@@ -17,10 +17,8 @@ function pece_artifacts_fieldnote_form_pece_artifact_fieldnote_node_form_alter(&
   $form['title']['#default_value'] = 'pece_artifact_fieldnote_' . $node->created;
   $form['title']['#attributes']['class'][] = 'element-invisible';
 
-  // Hide the comment settings fieldset.
-  $form['comment_settings']['#access'] = FALSE;
-  // We cannot allow the content to be authored by anonymous.
-  $form['author']['name']['#required'] = TRUE;
+  // PECE's artifact default form alter.
+  pece_artifacts_alter_artifact_form($form, $form_state);
 
   if (module_exists('pece_profile')) {
     array_unshift($form['#validate'], 'pece_profile_check_author');
