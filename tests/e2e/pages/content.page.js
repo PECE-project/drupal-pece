@@ -2,6 +2,8 @@
 * @file content.page.js
 */
 
+var EC = protractor.ExpectedConditions;
+
 // This is an object used for mananing drupal contents.
 var ContentPage = function () {
 
@@ -15,27 +17,21 @@ var ContentPage = function () {
   };
 
   this.filter = function (contentTitle) {
+		browser.wait(EC.visibilityOf(this.titleField), browser.params.timeoutLimit);
     this.titleField.sendKeys(contentTitle);
-    browser.driver.sleep(100);
     this.applyButton.click();
-    browser.driver.sleep(1000);
   };
 
   this.remove = function (title) {
-    browser.driver.sleep(3000);
     this.filter(title);
-    browser.driver.sleep(3000);
-    element(by.cssContainingText('a', title)).click().then(function () {
-			browser.driver.sleep(3000);
-      element(by.cssContainingText('.tabs a', 'Edit')).click().then(function () {
-				browser.driver.sleep(3000);
-        element(by.css('#edit-delete')).click().then(function () {
-					browser.driver.sleep(2000);
-          element(by.css('#edit-submit')).click();
-					browser.driver.sleep(3000);
-        });
-      });
-    });
+    browser.wait(EC.visibilityOf(element(by.cssContainingText('a', title))), browser.params.timeoutLimit);
+    element(by.cssContainingText('a', title)).click();
+		browser.wait(EC.visibilityOf(element(by.cssContainingText('.tabs a', 'Edit'))), browser.params.timeoutLimit);
+    element(by.cssContainingText('.tabs a', 'Edit')).click();
+		browser.wait(EC.visibilityOf(element(by.css('#edit-delete'))), browser.params.timeoutLimit);
+    element(by.css('#edit-delete')).click();
+		browser.wait(EC.visibilityOf(element(by.css('#edit-submit'))), browser.params.timeoutLimit);
+    element(by.css('#edit-submit')).click();
   };
 
 };
