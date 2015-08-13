@@ -54,10 +54,10 @@ var ArtifactImagePage = function () {
   this.checkMandatoryFields = function () {
     this.clearMandatoryFields();
     this.publishButton.click();
-    SamplePage.checkErrorMessage('Title field is required.');
-    SamplePage.checkErrorMessage('Author field is required.');
-    SamplePage.checkErrorMessage('Image field is required.');
-    SamplePage.checkErrorMessage('URI field is required.');
+    SamplePage.checkMessage('Title field is required.');
+    SamplePage.checkMessage('Author field is required.');
+    SamplePage.checkMessage('Image field is required.');
+    SamplePage.checkMessage('URI field is required.');
   };
 
   this.checkMainElementsPresence = function () {
@@ -73,14 +73,14 @@ var ArtifactImagePage = function () {
   };
 
   this.addImage = function (fileName) {
-  // Click on media browse button.
+    // Click on media browse button.
     element(by.css('.media-widget a.button.browse')).click();
 
     return browser.switchTo().frame('mediaBrowser').then(function() {
       var mediaElement = element.all(by.id('edit-upload-upload')).last()
-        , nextButton = element(by.css('#edit-next'))
-        , saveButton = element(by.css('[value="Save"]'))
-        , mediaInput = path.resolve(__dirname, '../assets/' + fileName);
+        , nextButton   = element(by.css('#edit-next'))
+        , saveButton   = element(by.css('[value="Save"]'))
+        , mediaInput   = path.resolve(__dirname, '../assets/' + fileName);
 
         // Upload media.
         return mediaElement.sendKeys(mediaInput).then(function() {
