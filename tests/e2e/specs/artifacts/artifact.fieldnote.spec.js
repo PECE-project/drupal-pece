@@ -2,7 +2,6 @@
 * @file fieldnote.spec.js
 */
 
-// Require fieldnote page object.
 var AllPages = require('../../pages/all.page');
 
 // For each spec file is recommended to have just one describe.

@@ -2,7 +2,6 @@
 * @file artifact.image.spec.js
 */
 
-// Require all page objects.
 var AllPages = require('../../pages/all.page');
 var EC = protractor.ExpectedConditions;
 
