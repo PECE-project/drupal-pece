@@ -4,7 +4,6 @@
 
 var EC = protractor.ExpectedConditions;
 
-// This is a sample page file where you will find generic methods to use with drupal.
 var RegistrationPage = function () {
 
   // Define registration attributes.
@@ -15,23 +14,23 @@ var RegistrationPage = function () {
   this.pass2Field = element(by.css('input#edit-pass-pass2'));
 
   // Profile fields.
-  this.fullnameFIeld = element(by.css('input#edit-profile-pece-profile-main-field-pece-full-name-und-0-value'));
-  this.institutionFIeld = element(by.css('input#edit-profile-pece-profile-main-field-pece-institution-und-0-value'));
-  this.positionFIeld = element(by.css('input#edit-profile-pece-profile-main-field-pece-position-und-0-value'));
-  this.bioFIeld = element(by.css('textarea#edit-profile-pece-profile-main-field-pece-biography-und-0-value'));
+  this.fullnameField = element(by.css('input#edit-profile-pece-profile-main-field-pece-full-name-und-0-value'));
+  this.institutionField = element(by.css('input#edit-profile-pece-profile-main-field-pece-institution-und-0-value'));
+  this.positionField = element(by.css('input#edit-profile-pece-profile-main-field-pece-position-und-0-value'));
+  this.bioField = element(by.css('textarea#edit-profile-pece-profile-main-field-pece-biography-und-0-value'));
   this.locStreetField = element(by.css('input#edit-profile-pece-profile-main-field-pece-location-und-0-street'));
   this.locAdditionalField = element(by.css('input#edit-profile-pece-profile-main-field-pece-location-und-0-additional'));
   this.locCountryField = element(by.css('select##edit-profile-pece-profile-main-field-pece-location-und-0-country'));
-  this.tagsFIeld = element(by.css('input#edit-profile-pece-profile-main-field-pece-tags-und'));
+  this.tagsField = element(by.css('input#edit-profile-pece-profile-main-field-pece-tags-und'));
   this.tosField = element(by.css('input#edit-legal-accept'));
   this.submitButton = element(by.css('input#edit-submit'));
 
-  // Define authentication methods.
   this.get = function () {
     browser.get('user/register');
   };
 
   this.fillUserFields = function (user, email, pass) {
+    browser.wait(EC.visibilityOf(this.usernameField), browser.params.timeoutLimit);
     this.usernameField.sendKeys(user);
     this.emailField.sendKeys(email);
     this.pass1Field.sendKeys(pass);
@@ -39,15 +38,15 @@ var RegistrationPage = function () {
   };
 
   this.fillProfileFields = function (name, institution, position, bio, location, tags) {
-    this.fullnameFIeld.sendKeys(name);
-    this.institutionFIeld.sendKeys(institution);
-    this.positionFIeld.sendKeys(position);
-    this.bioFIeld.sendKeys(bio);
+    this.fullnameField.sendKeys(name);
+    this.institutionField.sendKeys(institution);
+    this.positionField.sendKeys(position);
+    this.bioField.sendKeys(bio);
     this.locStreetField.sendKeys(location.street);
     this.locAdditionalField.sendKeys(location.additional);
     // this.locCountryField.findElements(by.css('option[text=' + location.country + ']')).click();
     element(by.cssContainingText('#edit-profile-pece-profile-main-field-pece-location-und-0-country option', location.country)).click();
-    this.tagsFIeld.sendKeys(tags);
+    this.tagsField.sendKeys(tags);
   };
 
   this.checkTosField = function (tos) {
@@ -61,20 +60,14 @@ var RegistrationPage = function () {
   };
 
   this.register = function (user, email, pass, tos) {
-    var formIsPresent = EC.visibilityOf(this.usernameField);
-
     this.get();
-    browser.wait(formIsPresent, browser.params.timeoutLimit);
     this.fillUserFields(user, email, pass);
     this.checkTosField(tos);
     this.submitRegisterForm();
   };
 
   this.registerProfile = function (user) {
-    var formIsPresent = EC.visibilityOf(this.fullnameFIeld);
-
     this.get();
-    browser.wait(formIsPresent, browser.params.timeoutLimit);
     this.fillUserFields(user.username, user.email, user.pass);
     this.fillProfileFields(user.name, user.institution, user.position, user.bio, user.location, user.tags);
     this.checkTosField(user.tos);
