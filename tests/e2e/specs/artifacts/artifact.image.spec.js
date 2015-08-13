@@ -3,7 +3,6 @@
 */
 
 var AllPages = require('../../pages/all.page');
-var EC = protractor.ExpectedConditions;
 
 // For each spec file is recommended to have just one describe.
 // A describe may the the description of a functionality/feature or even a web page, like home page, contact page, etc. It depends on the team work agreement
@@ -32,8 +31,7 @@ describe ('Image Artifact' , function () {
   it ('add a image artifact', function () {
     AllPages.ArtifactImagePage.get();
     AllPages.ArtifactImagePage.add('Image Artifact', 'imageFile.jpg');
-    browser.wait(EC.visibilityOf(AllPages.SamplePage.body), browser.params.timeoutLimit);
-    expect(AllPages.SamplePage.body.getText()).toContain('has been created.');
+    AllPages.SamplePage.checkSuccessMessage('has been created.');
   });
 
   it ('Should not accept other than image files', function () {

@@ -23,22 +23,22 @@ describe ('Registration' , function () {
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.deleteUser('foobar@bar.baz');
-    AllPages.SamplePage.checkMessage('has been deleted.');
+    AllPages.SamplePage.checkSuccessMessage('has been deleted.');
   });
 
   it ('should be not accomplished because of not accepting the term', function () {
     AllPages.RegistrationPage.register('foo', 'foo@bar.baz', browser.params.admin.password, false);
-    AllPages.SamplePage.checkMessage('Accept Terms & Conditions of Use field is required.');
+    AllPages.SamplePage.checkErrorMessage('Accept Terms & Conditions of Use field is required.');
   });
 
   it ('invalid email on user registration', function () {
     var invalidEmail = 'bar';
     AllPages.RegistrationPage.register('bar', invalidEmail, browser.params.admin.password, true);
-    AllPages.SamplePage.checkMessage('The e-mail address ' + invalidEmail +  ' is not valid.');
+    AllPages.SamplePage.checkErrorMessage('The e-mail address ' + invalidEmail +  ' is not valid.');
   });
 
   it ('should be succesfuly done', function () {
     AllPages.RegistrationPage.register('foobar', 'foobar@bar.baz', browser.params.admin.password, true);
-    AllPages.SamplePage.checkMessage('Your account is currently pending approval by the site administrator.');
+    AllPages.SamplePage.checkSuccessMessage('Your account is currently pending approval by the site administrator.');
   });
 });

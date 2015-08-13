@@ -41,7 +41,7 @@ describe ('User profile' , function () {
       tos: true
     };
     AllPages.RegistrationPage.registerProfile(user);
-    expect(AllPages.SamplePage.body.getText()).toContain('Your account is currently pending approval by the site administrator.');
+    AllPages.SamplePage.checkSuccessMessage('Your account is currently pending approval by the site administrator.');
   });
 
   it('check user profile after registration', function () {
