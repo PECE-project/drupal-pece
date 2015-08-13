@@ -18,6 +18,8 @@ describe ('User profile' , function () {
   });
 
   afterAll(function () {
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.deleteUser('foob@bar.baz');
     AllPages.PeoplePage.deleteUser('boof@bar.baz');
   });
