@@ -19,7 +19,7 @@ describe ('Fieldnote' , function () {
   afterAll(function () {
     AllPages.ContentPage.get();
     AllPages.ContentPage.remove('pece_artifact_fieldnote');
-    AllPages.SamplePage.checkSuccessMessage('has been deleted.');
+    AllPages.SamplePage.checkMessage('has been deleted.');
   });
 
   it ('verify main elements presence', function () {
@@ -30,7 +30,7 @@ describe ('Fieldnote' , function () {
   it ('add a fieldnote artifact', function () {
     AllPages.FieldnotePage.get();
     AllPages.FieldnotePage.add('Fieldnote text');
-    AllPages.SamplePage.checkSuccessMessage('has been created.');
+    AllPages.SamplePage.checkMessage('has been created.');
   });
 
   // it ('Add a Fieldnote as a contributor user', function () {

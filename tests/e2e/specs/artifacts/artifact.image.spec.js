@@ -31,7 +31,7 @@ describe ('Image Artifact' , function () {
   it ('add a image artifact', function () {
     AllPages.ArtifactImagePage.get();
     AllPages.ArtifactImagePage.add('Image Artifact', 'imageFile.jpg');
-    AllPages.SamplePage.checkSuccessMessage('has been created.');
+    AllPages.SamplePage.checkMessage('has been created.');
   });
 
   it ('Should not accept other than image files', function () {

@@ -31,7 +31,7 @@ describe ('PDF Docuemnt Artifact' , function () {
   it ('add a PDF Document artifact', function () {
     AllPages.ArtifactPdfPage.get();
     AllPages.ArtifactPdfPage.add('PDF Document Artifact', 'pdfFile.pdf');
-    AllPages.SamplePage.checkSuccessMessage('has been created.');
+    AllPages.SamplePage.checkMessage('has been created.');
   });
 
   it ('Should not accept other than PDF files', function () {
