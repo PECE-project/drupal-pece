@@ -44,10 +44,8 @@ var ArtifactImagePage = function () {
   };
 
   this.accessMediaBrowser = function () {
-    var browseButton      = element(by.css('.media-widget a.button.browse'))
-       , browserBtnIsPresent = EC.visibilityOf(browseButton);
-
-    browser.wait(browserBtnIsPresent, browser.params.timeoutLimit);
+    var browseButton      = element(by.css('.media-widget a.button.browse'));
+    browser.wait(EC.visibilityOf(browseButton), browser.params.timeoutLimit);
     browseButton.click();
 
     browser.switchTo().frame('mediaBrowser');
@@ -55,13 +53,11 @@ var ArtifactImagePage = function () {
 
   this.checkMandatoryFields = function () {
     this.clearMandatoryFields();
-    browser.wait(EC.visibilityOf(this.publishButton), browser.params.timeoutLimit);
     this.publishButton.click();
-    browser.wait(EC.visibilityOf(SamplePage.body), browser.params.timeoutLimit);
-    expect(SamplePage.body.getText()).toContain('Title field is required.');
-    expect(SamplePage.body.getText()).toContain('Author field is required.');
-    expect(SamplePage.body.getText()).toContain('Image field is required.');
-    expect(SamplePage.body.getText()).toContain('URI field is required.');
+    SamplePage.checkErrorMessage('Title field is required.');
+    SamplePage.checkErrorMessage('Author field is required.');
+    SamplePage.checkErrorMessage('Image field is required.');
+    SamplePage.checkErrorMessage('URI field is required.');
   };
 
   this.checkMainElementsPresence = function () {
@@ -71,10 +67,8 @@ var ArtifactImagePage = function () {
   };
 
   this.checkFileFormat = function () {
-      var fileFormats = element(by.css('#edit-upload-ajax-wrapper .description'))
-      , fileFormatsIsVisible = EC.visibilityOf(fileFormats);
-
-    browser.wait(fileFormatsIsVisible, browser.params.timeoutLimit);
+    var fileFormats = element(by.css('#edit-upload-ajax-wrapper .description'));
+    browser.wait(EC.visibilityOf(fileFormats), browser.params.timeoutLimit);
     expect(fileFormats.getText()).toContain('png gif jpg jpeg svg');
   };
 
@@ -101,23 +95,6 @@ var ArtifactImagePage = function () {
     });
   };
 
-  this.getFromLibrary = function (fileName) {
-    var library = element(by.css('a#ui-id-2'))
-      , libraryIsPresent = EC.visibilityOf(library)
-      , sendFileIsPresent = EC.presenceOf(element(by.cssContainingText('a', fileName)))
-      , mediaItem = element(by.cssContainingText('.media-item', fileName))
-      , submitButton = element(by.css('a.fake-submit'));
-
-    this.accessMediaBrowser();
-
-    browser.wait(libraryIsPresent, browser.params.timeoutLimit);
-    library.click();
-    mediaItem.click();
-    return submitButton.click().then(function () {
-      return browser.switchTo().defaultContent();
-    });
-  };
-
   this.add = function (title, fileName) {
     browser.wait(EC.visibilityOf(this.mainElements.titleField), browser.params.timeoutLimit);
     this.mainElements.titleField.sendKeys(title);
@@ -125,7 +102,6 @@ var ArtifactImagePage = function () {
     this.addImage(fileName);
     this.mainElements.formatField.sendKeys('jpg');
     this.mainElements.authorsField.sendKeys('Other author, Another Author');
-    browser.wait(EC.visibilityOf(this.publishButton), browser.params.timeoutLimit);
     this.publishButton.click();
   };
 };
