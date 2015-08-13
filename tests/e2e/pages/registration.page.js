@@ -44,7 +44,6 @@ var RegistrationPage = function () {
     this.bioField.sendKeys(bio);
     this.locStreetField.sendKeys(location.street);
     this.locAdditionalField.sendKeys(location.additional);
-    // this.locCountryField.findElements(by.css('option[text=' + location.country + ']')).click();
     element(by.cssContainingText('#edit-profile-pece-profile-main-field-pece-location-und-0-country option', location.country)).click();
     this.tagsField.sendKeys(tags);
   };
