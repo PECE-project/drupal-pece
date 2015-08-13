@@ -8,7 +8,8 @@ var EC = protractor.ExpectedConditions;
 var SamplePage = function () {
 
   // Define sample attributes.
-  this.body = element(by.css('body'));
+  this.errorMessage = element(by.css('.messages.error'));
+  this.successMessage = element(by.css('#messages .alert-success'));
 
   //Define sample methods.
   // The url argument is optional, if not set it just goes to the baseUrl defined in the conf.js file.
@@ -25,10 +26,15 @@ var SamplePage = function () {
     expect(browser.executeScript('return Drupal.settings.ajaxPageState.theme')).toEqual(theme);
   };
 
-  this.checkMessage = function (message) {
-    browser.wait(EC.visibilityOf(this.body), browser.params.timeoutLimit);
-    expect(this.body.getText()).toContain(message);
-  }
+  this.checkSuccessMessage = function (message) {
+    browser.wait(EC.visibilityOf(this.successMessage ), browser.params.timeoutLimit);
+    expect(this.successMessage.getText()).toContain(message);
+  };
+
+  this.checkErrorMessage = function (message) {
+    browser.wait(EC.visibilityOf(this.errorMessage ), browser.params.timeoutLimit);
+    expect(this.errorMessage.getText()).toContain(message);
+  };
 
 };
 
