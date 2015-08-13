@@ -12,6 +12,7 @@ var UserProfilePage = require('./user.profile.page');
 var ArtifactImagePage = require('./artifact.image.page');
 var ArtifactPdfPage = require('./artifact.pdf.page');
 var ArtifactVideoPage = require('./artifact.video.page');
+var ArtifactAudioPage = require('./artifact.audio.page');
 
 module.exports = {
   'SamplePage': SamplePage
@@ -26,5 +27,6 @@ module.exports = {
   , 'UserProfilePage': UserProfilePage
   , 'ArtifactImagePage': ArtifactImagePage
   , 'ArtifactPdfPage': ArtifactPdfPage
-  , 'ArtifactVideoPage': ArtifactVideoPage
+  , "ArtifactAudioPage": ArtifactVideoPage
+  , 'ArtifactAudioPage': ArtifactAudioPage
 }

@@ -29,7 +29,7 @@ function pece_profile_check_author(&$form, &$form_state) {
       $values['field_pece_contributors']['und'][0]['target_id'] == $user->uid) {
     return;
   }
-
+  // @TODO: Needs to support multilanguage.
   $value = array(LANGUAGE_NONE => array(array('target_id' => $user->uid)));
   form_set_value($form['field_pece_contributors'], $value, $form_state);
 }
