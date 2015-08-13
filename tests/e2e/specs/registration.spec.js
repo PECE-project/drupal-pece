@@ -23,7 +23,6 @@ describe ('Registration' , function () {
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.deleteUser('foobar@bar.baz');
-    AllPages.SamplePage.checkMessage('has been deleted.');
   });
 
   it ('should be not accomplished because of not accepting the term', function () {
