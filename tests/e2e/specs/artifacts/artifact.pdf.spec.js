@@ -18,6 +18,7 @@ describe ('PDF Docuemnt Artifact' , function () {
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.ContentPage.get();
     AllPages.ContentPage.remove('PDF Document Artifact');
+    AllPages.ContentPage.get();
     AllPages.ContentPage.remove('Sample PDF Document');
   });
 
@@ -30,7 +31,7 @@ describe ('PDF Docuemnt Artifact' , function () {
     AllPages.ArtifactPdfPage.get();
     AllPages.ArtifactPdfPage.checkMandatoryFields();
   });
-  
+
   it ('add a PDF Document artifact', function () {
     AllPages.ArtifactPdfPage.get();
     AllPages.ArtifactPdfPage.add('PDF Document Artifact', 'pdfFile.pdf');
