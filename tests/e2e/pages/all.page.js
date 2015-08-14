@@ -27,6 +27,6 @@ module.exports = {
   , 'UserProfilePage': UserProfilePage
   , 'ArtifactImagePage': ArtifactImagePage
   , 'ArtifactPdfPage': ArtifactPdfPage
-  , "ArtifactAudioPage": ArtifactVideoPage
+  , "ArtifactVideoPage": ArtifactVideoPage
   , 'ArtifactAudioPage': ArtifactAudioPage
 }
