@@ -18,6 +18,7 @@ var ContentPage = function () {
 
   this.filter = function (contentTitle) {
 		browser.wait(EC.visibilityOf(this.titleField), browser.params.timeoutLimit);
+		this.titleField.clear();
     this.titleField.sendKeys(contentTitle);
     this.applyButton.click();
   };
