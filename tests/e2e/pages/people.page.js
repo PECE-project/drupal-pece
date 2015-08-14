@@ -44,11 +44,12 @@ var PeoplePage = function () {
     element(by.cssContainingText('a', 'edit')).click();
   };
 
-  // this.unblock = function (email) {
-  //   this.edit(email);
-  //   this.statusField.click();
-  //   this.confirmButton.click();
-  // };
+  this.unblock = function (email) {
+    this.edit(email);
+    browser.wait(EC.visibilityOf(this.statusField), browser.params.timeoutLimit);
+    this.statusField.click();
+    this.confirmButton.click();
+  };
 
   this.addRole = function (email, roleName) {
     var roleWrapper = element(by.cssContainingText('#edit-roles .form-type-checkbox', roleName))
