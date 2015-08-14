@@ -82,7 +82,6 @@ var ArtifactPdfPage = function () {
         // Upload media.
         return mediaElement.sendKeys(mediaInput).then(function() {
           return nextButton.click().then(function() {
-            browser.sleep(3000);
               return browser.switchTo().defaultContent();
           });
         });

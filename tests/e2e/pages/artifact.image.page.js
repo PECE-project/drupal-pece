@@ -85,9 +85,8 @@ var ArtifactImagePage = function () {
         // Upload media.
         return mediaElement.sendKeys(mediaInput).then(function() {
           return nextButton.click().then(function() {
-            browser.sleep(3000);
+            browser.wait(EC.visibilityOf(saveButton), browser.params.timeoutLimit);
             return saveButton.click().then(function() {
-              browser.sleep(1000);
               return browser.switchTo().defaultContent();
             });
           });

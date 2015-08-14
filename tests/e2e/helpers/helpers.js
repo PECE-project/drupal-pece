@@ -2,7 +2,8 @@
 // Helper Funcions
 //
 
-var path = require('path');
+var path = require('path')
+  , EC = protractor.ExpectedConditions;
 
 // Used for non-angular apps
 browser.ignoreSynchronization = true;
@@ -21,7 +22,7 @@ function selectAutocompleteReference(element, text) {
   signatureInput.click()
   signatureInput.clear()
   signatureInput.sendKeys(text);
-  browser.sleep(1000);
+  browser.wait(EC.visibilityOf(element(by.cssContainingText('.reference-autocomplete', text))), browser.params.timeoutLimit);
   element(by.cssContainingText('.reference-autocomplete', text)).click();
 }
 
@@ -43,7 +44,6 @@ function addMedia(mediaButtonId, mediaFile) {
     return mediaElement.sendKeys(mediaInput).then(function() {
       return nextButton.click().then(function() {
         return saveButton.click().then(function() {
-          browser.sleep(1000);
           return browser.switchTo().defaultContent();
         });
       });
