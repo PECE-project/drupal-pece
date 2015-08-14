@@ -14,8 +14,11 @@ describe ('PDF Docuemnt Artifact' , function () {
   });
 
   afterAll(function () {
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.ContentPage.get();
     AllPages.ContentPage.remove('PDF Document Artifact');
+    AllPages.ContentPage.remove('Sample PDF Document');
   });
 
   it ('verify main elements presence', function () {
@@ -27,16 +30,32 @@ describe ('PDF Docuemnt Artifact' , function () {
     AllPages.ArtifactPdfPage.get();
     AllPages.ArtifactPdfPage.checkMandatoryFields();
   });
-
+  
   it ('add a PDF Document artifact', function () {
     AllPages.ArtifactPdfPage.get();
     AllPages.ArtifactPdfPage.add('PDF Document Artifact', 'pdfFile.pdf');
     AllPages.SamplePage.checkMessage('has been created.');
   });
 
-  it ('Should not accept other than PDF files', function () {
+  it ('should not accept other than PDF files', function () {
     AllPages.ArtifactPdfPage.get();
     AllPages.ArtifactPdfPage.accessMediaBrowser();
     AllPages.ArtifactPdfPage.checkFileFormat();
   });
+
+  it ('add PDF Document artifact as researcher user', function () {
+    AllPages.AuthenticationPage.logout();
+    AllPages.RegistrationPage.get();
+    AllPages.RegistrationPage.registerProfile();
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    AllPages.PeoplePage.get();
+    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.defaultUser.email);
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
+    AllPages.ArtifactPdfPage.get();
+    AllPages.ArtifactPdfPage.add('Sample PDF Document', 'pdfFile.pdf');
+    AllPages.SamplePage.checkMessage('has been created.');
+  });
+
+  // it ('add PDF Document artifact with author different from contributor', function () {});
 });
