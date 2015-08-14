@@ -30,3 +30,4 @@ require('./specs/artifacts/artifact.image.spec.js');
 require('./specs/artifacts/artifact.pdf.spec.js');
 require('./specs/artifacts/artifact.video.spec.js');
 require('./specs/artifacts/artifact.audio.spec.js');
+require('./specs/artifacts/artifact.website.spec.js');

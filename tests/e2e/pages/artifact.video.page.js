@@ -15,8 +15,8 @@ var ArtifactVideoPage = function () {
     // Form main elements.
     titleField         : element(by.css('#pece-artifact-video-node-form #edit-title')),
     uriField           : element(by.css('#pece-artifact-video-node-form #edit-field-pece-uri-und-0-value')),
-    fieldsiteField     : element(by.css('#pece-artifact-video-node-form #edit-field-pece-fieldsite-und-0-target-id')),
     videoField         : element(by.css('#pece-artifact-video-node-form #edit-field-pece-media-video-und-0')),
+    fieldsiteField     : element(by.css('#pece-artifact-video-node-form #edit-field-pece-fieldsite-und-0-target-id')),
     contributorsFields : element(by.css('#pece-artifact-video-node-form #edit-field-pece-contributors-und-0-target-id')),
     tagsField          : element(by.css('#pece-artifact-video-node-form #edit-field-pece-tags-und')),
     licenceField       : element(by.css('#pece-artifact-video-node-form #edit-field-pece-license-und-0-licence')),

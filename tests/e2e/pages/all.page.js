@@ -13,6 +13,7 @@ var ArtifactImagePage = require('./artifact.image.page');
 var ArtifactPdfPage = require('./artifact.pdf.page');
 var ArtifactVideoPage = require('./artifact.video.page');
 var ArtifactAudioPage = require('./artifact.audio.page');
+var ArtifactWebsitePage = require('./artifact.website.page');
 
 module.exports = {
   'SamplePage': SamplePage
@@ -29,4 +30,5 @@ module.exports = {
   , 'ArtifactPdfPage': ArtifactPdfPage
   , "ArtifactVideoPage": ArtifactVideoPage
   , 'ArtifactAudioPage': ArtifactAudioPage
+  , 'ArtifactWebsitePage': ArtifactWebsitePage
 }
