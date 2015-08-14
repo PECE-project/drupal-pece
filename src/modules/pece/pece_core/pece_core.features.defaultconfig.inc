@@ -40,5 +40,41 @@ function pece_core_defaultconfig_user_default_permissions() {
     'module' => 'file_entity',
   );
 
+  // Exported permission: 'create pece_fieldsite content'.
+  $permissions['create pece_fieldsite content'] = array(
+    'name' => 'create pece_fieldsite content',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own pece_fieldsite content'.
+  $permissions['delete own pece_fieldsite content'] = array(
+    'name' => 'delete own pece_fieldsite content',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any pece_fieldsite content'.
+  $permissions['edit any pece_fieldsite content'] = array(
+    'name' => 'edit any pece_fieldsite content',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own pece_fieldsite content'.
+  $permissions['edit own pece_fieldsite content'] = array(
+    'name' => 'edit own pece_fieldsite content',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'node',
+  );
+
   return $permissions;
 }
