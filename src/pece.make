@@ -12,39 +12,39 @@ projects[kw_itemnames][download][url] = "git://github.com/kraftwagen/kw-itemname
 projects[kw_itemnames][subdir] = kraftwagen
 
 ; The Panopoly Foundation
-projects[panopoly_core][version] = 1.22
+projects[panopoly_core][version] = 1.25
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.22
+projects[panopoly_images][version] = 1.25
 projects[panopoly_images][subdir] = contrib
 
-projects[panopoly_theme][version] = 1.22
+projects[panopoly_theme][version] = 1.25
 projects[panopoly_theme][subdir] = contrib
 
-projects[panopoly_magic][version] = 1.22
+projects[panopoly_magic][version] = 1.25
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.22
+projects[panopoly_widgets][version] = 1.25
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_admin][version] = 1.22
+projects[panopoly_admin][version] = 1.25
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_users][version] = 1.22
+projects[panopoly_users][version] = 1.25
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.22
+projects[panopoly_pages][version] = 1.25
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_wysiwyg][version] = 1.22
+projects[panopoly_wysiwyg][version] = 1.25
 projects[panopoly_wysiwyg][subdir] = contrib
 
-projects[panopoly_search][version] = 1.22
+projects[panopoly_search][version] = 1.25
 projects[panopoly_search][subdir] = contrib
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.22
+projects[panopoly_test][version] = 1.25
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
@@ -68,7 +68,7 @@ projects[eck][version] = 2.0-rc7
 projects[eck][subdir]  = contrib
 
 ; Inline Entity Form
-projects[inline_entity_form][version] = 1.5
+projects[inline_entity_form][version] = 1.6
 projects[inline_entity_form][subdir]  = contrib
 
 ; Rules
@@ -86,7 +86,7 @@ projects[xautoload][patch][] = "https://www.drupal.org/files/issues/xautoload-7.
 projects[xautoload][patch][] = "https://www.drupal.org/files/issues/base_table_or_view_not-2393205-2.patch"
 
 ; jQuery update recent version
-projects[jquery_update][version] = 2.5
+projects[jquery_update][version] = 2.6
 projects[jquery_update][subdir] = contrib
 
 ; Ember for admin
@@ -139,7 +139,7 @@ projects[profile2][version] = 1.3
 projects[gmap][subdir] = contrib
 projects[gmap][version] = 2.9
 
-; ************************************************
+; *****************************************
 ; ************** PECE Themes **************
 
 projects[radix][type] = theme
