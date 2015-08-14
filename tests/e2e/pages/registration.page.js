@@ -6,6 +6,24 @@ var EC = protractor.ExpectedConditions;
 
 var RegistrationPage = function () {
 
+  this.defaultUser = {
+    username: 'defaultuser',
+    email: 'default@user.com',
+    pass: browser.params.admin.password,
+    name: 'Default User',
+    institution: 'PUCRS',
+    position: 'Developer',
+    bio: 'Lorem ipsum',
+    location: {
+      label: 'Sweet Home',
+      street: 'street',
+      additional: 'additional',
+      country: 'Brazil'
+    },
+    tags: 'tagFoo',
+    tos: true
+  };
+
   // Define registration attributes.
   // User fields.
   this.usernameField = element(by.css('input#edit-name'));
@@ -67,9 +85,15 @@ var RegistrationPage = function () {
 
   this.registerProfile = function (user) {
     this.get();
-    this.fillUserFields(user.username, user.email, user.pass);
-    this.fillProfileFields(user.name, user.institution, user.position, user.bio, user.location, user.tags);
-    this.checkTosField(user.tos);
+    if (typeof(user) == 'undefined') {
+      this.fillUserFields(this.defaultUser.username, this.defaultUser.email, this.defaultUser.pass);
+      this.fillProfileFields(this.defaultUser.name, this.defaultUser.institution, this.defaultUser.position, this.defaultUser.bio, this.defaultUser.location, this.defaultUser.tags);
+      this.checkTosField(this.defaultUser.tos);
+    } else {
+      this.fillUserFields(user.username, user.email, user.pass);
+      this.fillProfileFields(user.name, user.institution, user.position, user.bio, user.location, user.tags);
+      this.checkTosField(user.tos);
+    }
     this.submitRegisterForm();
   };
 }
