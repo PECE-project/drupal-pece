@@ -139,6 +139,11 @@ projects[profile2][version] = 1.3
 projects[gmap][subdir] = contrib
 projects[gmap][version] = 2.9
 
+; External link
+projects[extlink][subdir] = contrib
+projects[extlink][version] = 1.18
+
+
 ; *****************************************
 ; ************** PECE Themes **************
 
