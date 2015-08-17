@@ -14,26 +14,37 @@ describe ('Website Artifact' , function () {
   });
 
   afterAll(function () {
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.ContentPage.get();
     AllPages.ContentPage.remove('Website Artifact');
+    AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
   });
 
-  it ('verify main elements presence', function () {
+  it ('Verify main elements presence', function () {
    AllPages.ArtifactWebsitePage.get();
    AllPages.ArtifactWebsitePage.checkMainElementsPresence();
   });
 
-  it ('verify mandatory fields', function () {
+  it ('Verify mandatory fields', function () {
     AllPages.ArtifactWebsitePage.get();
     AllPages.ArtifactWebsitePage.checkMandatoryFields();
   });
 
-  // it ('Should check if it\'s a valid URL', function () {
-  //   AllPages.ArtifactWebsitePage.get();
-  //   AllPages.ArtifactWebsitePage.checkUrl();
-  // });
+  it ('Should check if it\'s a valid URL', function () {
+    AllPages.ArtifactWebsitePage.get();
+    AllPages.ArtifactWebsitePage.checkUrl();
+  });
 
-  it ('add a Website artifact', function () {
+  it ('Add a Website artifact as an authenticated user', function () {
+    AllPages.AuthenticationPage.logout();
+    AllPages.RegistrationPage.get();
+    AllPages.RegistrationPage.registerProfile();
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    AllPages.PeoplePage.get();
+    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.defaultUser.email);
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
     AllPages.ArtifactWebsitePage.get();
     AllPages.ArtifactWebsitePage.add('Website Artifact', 'http://google.com');
     AllPages.SamplePage.checkMessage('has been created.');

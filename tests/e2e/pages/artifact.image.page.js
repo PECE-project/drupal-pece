@@ -99,8 +99,8 @@ var ArtifactImagePage = function () {
     this.mainElements.titleField.sendKeys(title);
     this.mainElements.uriField.sendKeys('uri1');
     this.addImage(fileName);
-    this.mainElements.formatField.sendKeys('jpg');
-    this.mainElements.authorsField.sendKeys('Other author, Another Author');
+    // this.mainElements.formatField.sendKeys('jpg');
+    // this.mainElements.authorsField.sendKeys('Other author, Another Author');
     this.publishButton.click();
   };
 };

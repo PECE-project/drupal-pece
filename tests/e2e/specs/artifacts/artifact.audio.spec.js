@@ -14,21 +14,32 @@ describe ('Audio Artifact' , function () {
   });
 
   afterAll(function () {
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.ContentPage.get();
     AllPages.ContentPage.remove('Audio Artifact');
+    AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
   });
 
-  it ('verify main elements presence', function () {
+  it ('Verify main elements presence', function () {
    AllPages.ArtifactAudioPage.get();
    AllPages.ArtifactAudioPage.checkMainElementsPresence();
   });
 
-  it ('verify mandatory fields', function () {
+  it ('Verify mandatory fields', function () {
     AllPages.ArtifactAudioPage.get();
     AllPages.ArtifactAudioPage.checkMandatoryFields();
   });
 
-  it ('add a Video artifact', function () {
+  it ('Add a Audio artifact as an authenticated user', function () {
+    AllPages.AuthenticationPage.logout();
+    AllPages.RegistrationPage.get();
+    AllPages.RegistrationPage.registerProfile();
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    AllPages.PeoplePage.get();
+    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.defaultUser.email);
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
     AllPages.ArtifactAudioPage.get();
     AllPages.ArtifactAudioPage.add('Audio Artifact', 'audioFile.mp3');
     AllPages.SamplePage.checkMessage('has been created.');

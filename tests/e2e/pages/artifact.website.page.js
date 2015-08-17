@@ -59,11 +59,11 @@ var ArtifactWebsitePage = function () {
 
   this.checkUrl = function () {
     this.mainElements.urlField.sendKeys('An invalid url');
-    SamplePage.checkMessage('Title field is required.');
+    this.publishButton.click();
+    SamplePage.checkMessage('Not a valid URL.');
   };
 
   this.add = function (title, website) {
-
     browser.wait(EC.visibilityOf(this.mainElements.uriField), browser.params.timeoutLimit);
     this.mainElements.titleField.sendKeys(title);
     this.mainElements.uriField.sendKeys('websiteuri1');

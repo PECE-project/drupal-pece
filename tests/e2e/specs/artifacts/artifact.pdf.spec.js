@@ -21,29 +21,29 @@ describe ('PDF Docuemnt Artifact' , function () {
     AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
   });
 
-  it ('verify main elements presence', function () {
+  it ('Verify main elements presence', function () {
    AllPages.ArtifactPdfPage.get();
    AllPages.ArtifactPdfPage.checkMainElementsPresence();
   });
 
-  it ('verify mandatory fields', function () {
+  it ('Verify mandatory fields', function () {
     AllPages.ArtifactPdfPage.get();
     AllPages.ArtifactPdfPage.checkMandatoryFields();
   });
 
-  it ('add a PDF Document artifact', function () {
+  it ('Add a PDF Document artifact', function () {
     AllPages.ArtifactPdfPage.get();
     AllPages.ArtifactPdfPage.add('PDF Document Artifact', 'pdfFile.pdf');
     AllPages.SamplePage.checkMessage('has been created.');
   });
 
-  it ('should not accept other than PDF files', function () {
+  it ('Should not accept other than PDF files', function () {
     AllPages.ArtifactPdfPage.get();
     AllPages.ArtifactPdfPage.accessMediaBrowser();
     AllPages.ArtifactPdfPage.checkFileFormat();
   });
 
-  it ('add PDF Document artifact as researcher user', function () {
+  it ('Add PDF Document artifact as an authenticated user', function () {
     AllPages.AuthenticationPage.logout();
     AllPages.RegistrationPage.get();
     AllPages.RegistrationPage.registerProfile();

@@ -14,21 +14,32 @@ describe ('Image Artifact' , function () {
   });
 
   afterAll(function () {
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.ContentPage.get();
     AllPages.ContentPage.remove('Image Artifact');
+    AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
   });
 
-  it ('verify main elements presence', function () {
+  it ('Verify main elements presence', function () {
    AllPages.ArtifactImagePage.get();
    AllPages.ArtifactImagePage.checkMainElementsPresence();
   });
 
-  it ('verify mandatory fields', function () {
+  it ('Verify mandatory fields', function () {
     AllPages.ArtifactImagePage.get();
     AllPages.ArtifactImagePage.checkMandatoryFields();
   });
 
-  it ('add a image artifact', function () {
+  it ('Add a image artifact as researcher user', function () {
+    AllPages.AuthenticationPage.logout();
+    AllPages.RegistrationPage.get();
+    AllPages.RegistrationPage.registerProfile();
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    AllPages.PeoplePage.get();
+    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.defaultUser.email);
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
     AllPages.ArtifactImagePage.get();
     AllPages.ArtifactImagePage.add('Image Artifact', 'imageFile.jpg');
     AllPages.SamplePage.checkMessage('has been created.');
