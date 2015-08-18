@@ -41,9 +41,8 @@ var ArtifactWebsitePage = function () {
     this.clearMandatoryFields();
     this.publishButton.click();
     SamplePage.checkMessage('Title field is required.');
-    SamplePage.checkMessage('Author field is required.');
-    SamplePage.checkMessage('URL field is required.');
     SamplePage.checkMessage('URI field is required.');
+    SamplePage.checkMessage('URL field is required.');
   };
 
   this.clearMandatoryFields = function () {

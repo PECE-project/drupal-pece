@@ -20,29 +20,11 @@ describe ('User profile' , function () {
   afterAll(function () {
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-    AllPages.PeoplePage.deleteUser('foob@bar.baz');
     AllPages.PeoplePage.deleteUser('boof@bar.baz');
   });
 
   it ('should create a new user profile', function () {
-    var user = {
-      username: 'foob',
-      email: 'foob@bar.baz',
-      pass: browser.params.admin.password,
-      name: 'Foo B.',
-      institutions: 'Institution',
-      position: 'Trainee',
-      bio: 'Lorem ipsum',
-      location: {
-        label: 'Sweet Home',
-        street: 'street',
-        additional: 'additional',
-        country: 'Brazil'
-      },
-      tags: 'tagFoo',
-      tos: true
-    };
-    AllPages.RegistrationPage.registerProfile(user);
+    AllPages.RegistrationPage.registerProfile();
     AllPages.SamplePage.checkMessage('Your account is currently pending approval by the site administrator.');
   });
 
@@ -60,6 +42,7 @@ describe ('User profile' , function () {
         label: 'Taller Web Solutions',
         street: 'Servidão Recanto das Pedras, 3',
         additional: 'Rio Tavares - Florianópolis',
+        province: 'Santa Catarina',
         country: 'Brazil'
       },
       tags: 'tagFoo',

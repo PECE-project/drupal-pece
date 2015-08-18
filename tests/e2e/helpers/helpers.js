@@ -31,24 +31,20 @@ function clickElement(id) {
 }
 
 function addMedia(mediaButtonId, mediaFile) {
+  var mediaElement = element.all(by.id('edit-upload-upload')).last()
+    , nextButton = element(by.css('#edit-next'))
+    , saveButton = element(by.css('#edit-submit'))
+    , mediaInput = path.resolve(__dirname, '../assets/' + mediaFile);
+
   // Click on media browse button.
-  // clickElement(mediaButtonId);
+  clickElement(mediaButtonId);
+  browser.switchTo().frame('mediaBrowser');
 
-  return browser.switchTo().frame('mediaBrowser').then(function() {
-    var mediaElement = element.all(by.id('edit-upload-upload')).last()
-      , nextButton = element(by.css('#edit-next'))
-      , saveButton = element(by.css('#edit-submit'))
-      , mediaInput = path.resolve(__dirname, '../assets/' + mediaFile);
-
-    // Upload media.
-    return mediaElement.sendKeys(mediaInput).then(function() {
-      return nextButton.click().then(function() {
-        return saveButton.click().then(function() {
-          return browser.switchTo().defaultContent();
-        });
-      });
-    });
-  });
+  // Upload media.
+  mediaElement.sendKeys(mediaInput);
+  nextButton.click();
+  saveButton.click();
+  browser.switchTo().defaultContent();
 }
 
 // Exposed helper methods.

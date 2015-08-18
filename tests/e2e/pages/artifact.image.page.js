@@ -55,7 +55,6 @@ var ArtifactImagePage = function () {
     this.clearMandatoryFields();
     this.publishButton.click();
     SamplePage.checkMessage('Title field is required.');
-    SamplePage.checkMessage('Author field is required.');
     SamplePage.checkMessage('Image field is required.');
     SamplePage.checkMessage('URI field is required.');
   };
@@ -73,25 +72,21 @@ var ArtifactImagePage = function () {
   };
 
   this.addImage = function (fileName) {
+    var mediaElement = element.all(by.id('edit-upload-upload')).last()
+      , nextButton   = element(by.css('#edit-next'))
+      , saveButton   = element(by.css('[value="Save"]'))
+      , mediaInput   = path.resolve(__dirname, '../assets/' + fileName);
+
     // Click on media browse button.
     element(by.css('.media-widget a.button.browse')).click();
+    browser.switchTo().frame('mediaBrowser');
 
-    return browser.switchTo().frame('mediaBrowser').then(function() {
-      var mediaElement = element.all(by.id('edit-upload-upload')).last()
-        , nextButton   = element(by.css('#edit-next'))
-        , saveButton   = element(by.css('[value="Save"]'))
-        , mediaInput   = path.resolve(__dirname, '../assets/' + fileName);
-
-        // Upload media.
-        return mediaElement.sendKeys(mediaInput).then(function() {
-          return nextButton.click().then(function() {
-            browser.wait(EC.visibilityOf(saveButton), browser.params.timeoutLimit);
-            return saveButton.click().then(function() {
-              return browser.switchTo().defaultContent();
-            });
-          });
-        });
-    });
+    // Upload media.
+    mediaElement.sendKeys(mediaInput);
+    nextButton.click();
+    browser.wait(EC.visibilityOf(saveButton), browser.params.timeoutLimit);
+    saveButton.click();
+    browser.switchTo().defaultContent();
   };
 
   this.add = function (title, fileName) {

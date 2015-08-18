@@ -8,8 +8,6 @@ var AllPages = require('../../pages/all.page');
 // A describe may the the description of a functionality/feature or even a web page, like home page, contact page, etc. It depends on the team work agreement
 describe ('Fieldnote' , function () {
 
-  var userEmail = 'foo@bar.baz';
-
   // This is the pre-condition step of each test.
   beforeEach(function () {
     AllPages.AuthenticationPage.logout();
@@ -17,9 +15,11 @@ describe ('Fieldnote' , function () {
   });
 
   afterAll(function () {
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.ContentPage.get();
     AllPages.ContentPage.remove('pece_artifact_fieldnote');
-    AllPages.SamplePage.checkMessage('has been deleted.');
+    AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
   });
 
   it ('verify main elements presence', function () {
@@ -27,26 +27,17 @@ describe ('Fieldnote' , function () {
     AllPages.FieldnotePage.checkMainElementsPresence();
   });
 
-  it ('add a fieldnote artifact', function () {
+  it ('Add a Fieldnote as an authenticated user', function () {
+    AllPages.AuthenticationPage.logout();
+    AllPages.RegistrationPage.get();
+    AllPages.RegistrationPage.registerProfile();
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    AllPages.PeoplePage.get();
+    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.defaultUser.email);
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
     AllPages.FieldnotePage.get();
     AllPages.FieldnotePage.add('Fieldnote text');
     AllPages.SamplePage.checkMessage('has been created.');
   });
-
-  // it ('Add a Fieldnote as a contributor user', function () {
-  //   AllPages.AuthenticationPage.logout();
-  //   AllPages.RegistrationPage.register('foo', userEmail, browser.params.admin.password, true);
-  //   AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-  //   AllPages.PeoplePage.unblock(userEmail);
-  //   AllPages.PeoplePage.addRole(userEmail, 'Contributor');
-  //   AllPages.PeoplePage.addRole(userEmail, 'Researcher');
-  //   AllPages.AuthenticationPage.logout();
-  //   AllPages.AuthenticationPage.login('foo', browser.params.admin.password);
-  //   AllPages.FieldnotePage.get();
-  //   AllPages.FieldnotePage.add('Fieldnote text');
-  //   expect(AllPages.SamplePage.body.getText()).toContain('has been created.');
-  //   AllPages.AuthenticationPage.logout();
-  //   AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-  //   AllPages.PeoplePage.deleteUser(userEmail);
-  // });
 });

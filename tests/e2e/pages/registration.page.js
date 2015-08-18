@@ -18,6 +18,7 @@ var RegistrationPage = function () {
       label: 'Sweet Home',
       street: 'street',
       additional: 'additional',
+      province: 'Santa Catarina',
       country: 'Brazil'
     },
     tags: 'tagFoo',
@@ -38,6 +39,7 @@ var RegistrationPage = function () {
   this.bioField = element(by.css('textarea#edit-profile-pece-profile-main-field-pece-biography-und-0-value'));
   this.locStreetField = element(by.css('input#edit-profile-pece-profile-main-field-pece-location-und-0-street'));
   this.locAdditionalField = element(by.css('input#edit-profile-pece-profile-main-field-pece-location-und-0-additional'));
+  this.locProvinceField = element(by.css('input#edit-profile-pece-profile-main-field-pece-location-und-0-province'));
   this.locCountryField = element(by.css('select##edit-profile-pece-profile-main-field-pece-location-und-0-country'));
   this.tagsField = element(by.css('input#edit-profile-pece-profile-main-field-pece-tags-und'));
   this.tosField = element(by.css('input#edit-legal-accept'));
@@ -63,6 +65,7 @@ var RegistrationPage = function () {
     this.locStreetField.sendKeys(location.street);
     this.locAdditionalField.sendKeys(location.additional);
     element(by.cssContainingText('#edit-profile-pece-profile-main-field-pece-location-und-0-country option', location.country)).click();
+    this.locProvinceField.sendKeys(location.province);
     this.tagsField.sendKeys(tags);
   };
 

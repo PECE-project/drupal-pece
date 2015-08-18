@@ -11,7 +11,7 @@ var FieldnotePage = function () {
 
     // Form main elements.
     uriField           : element(by.css('#pece-artifact-fieldnote-node-form #edit-field-pece-uri-und-0-value')),
-    textField          : element(by.css('#pece-artifact-fieldnote-node-form #edit-body-und-0-value_ifr')),
+    textField          : element(by.css('#pece-artifact-fieldnote-node-form #edit-body-und-0-value')),
     fieldsiteField     : element(by.css('#pece-artifact-fieldnote-node-form #edit-field-pece-fieldsite-und-0-target-id')),
     contributorsFields : element(by.css('#pece-artifact-fieldnote-node-form #edit-field-pece-contributors-und-0-target-id')),
     tagsField          : element(by.css('#pece-artifact-fieldnote-node-form #edit-field-pece-tags-und')),
@@ -45,9 +45,7 @@ var FieldnotePage = function () {
 
     browser.wait(uriFieldIsPresent, browser.params.timeoutLimit);
     this.mainElements.uriField.sendKeys('uri1');
-    this.editorSelectField.click();
-    this.plaintextOption.click();
-    element(by.css('#edit-body-und-0-value')).sendKeys(fieldNoteText);
+    this.mainElements.textField.sendKeys(fieldNoteText);
     this.publishButton.click();
   };
 
