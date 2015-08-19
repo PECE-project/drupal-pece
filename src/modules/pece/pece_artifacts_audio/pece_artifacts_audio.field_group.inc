@@ -13,6 +13,33 @@ function pece_artifacts_audio_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_pece_metadata|node|pece_artifact_audio|default';
+  $field_group->group_name = 'group_pece_metadata';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'pece_artifact_audio';
+  $field_group->mode = 'default';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Metadata',
+    'weight' => '20',
+    'children' => array(
+      0 => 'field_pece_location',
+      1 => 'field_pece_media_duration',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-pece-metadata field-group-fieldset',
+      ),
+    ),
+  );
+  $export['group_pece_metadata|node|pece_artifact_audio|default'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_settings|node|pece_artifact_audio|form';
   $field_group->group_name = 'group_settings';
   $field_group->entity_type = 'node';

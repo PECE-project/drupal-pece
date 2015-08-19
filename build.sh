@@ -4,7 +4,7 @@ cd build
 
 PASSWORD=${PECE_DRUPAL_ADMIN_PASS:-impossiblepassword}
 # drush kw-id
-drush si pece --account-pass=${PASSWORD} -y
+drush si pece --site-name="PECE Drupal Distro" --account-pass=${PASSWORD} -y
 drush kw-m
 drush cc all
 ## Uncomment for CM left sync.

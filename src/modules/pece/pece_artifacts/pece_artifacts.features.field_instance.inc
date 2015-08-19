@@ -123,7 +123,7 @@ function pece_artifacts_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => FALSE,
+          'link' => 1,
         ),
         'type' => 'entityreference_label',
         'weight' => 2,
@@ -466,7 +466,6 @@ function pece_artifacts_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Annotations');
   t('Author(s)');
   t('Contributors');
   t('Fieldsite');

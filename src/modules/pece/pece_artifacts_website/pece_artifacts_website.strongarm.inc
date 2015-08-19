@@ -111,6 +111,7 @@ function pece_artifacts_website_strongarm() {
   $strongarm->name = 'node_options_pece_artifact_website';
   $strongarm->value = array(
     0 => 'status',
+    1 => 'revision',
   );
   $export['node_options_pece_artifact_website'] = $strongarm;
 
