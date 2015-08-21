@@ -143,6 +143,22 @@ projects[gmap][version] = 2.9
 projects[extlink][subdir] = contrib
 projects[extlink][version] = 1.18
 
+; External link
+projects[extlink][subdir] = contrib
+projects[extlink][version] = 1.18
+
+; Fences
+projects[fences][subdir] = contrib
+projects[fences][version] = 1.0
+
+; Entity View Mode
+projects[entity_view_mode][subdir] = contrib
+projects[entity_view_mode][version] = 1.0-rc1
+
+; Real Name
+projects[realname][subdir] = contrib
+projects[realname][version] = 1.2
+
 
 ; *****************************************
 ; ************** PECE Themes **************
