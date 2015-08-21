@@ -52,10 +52,10 @@ projects[radix][version] = 3.0-rc2
 projects[radix][subdir] = contrib
 projects[radix_layouts][version] = 3.3
 projects[radix_layouts][subdir] = contrib
+projects[radix_views][version] = 3.x-dev
+projects[radix_views][subdir] = radix
 ;projects[radix_admin][version] = 3.x-dev
 ;projects[radix_admin][subdir] = radix
-;projects[radix_views][version] = 3.x-dev
-;projects[radix_views][subdir] = radix
 ;projects[radix_colorizer][version] = 1.x-dev
 ;projects[radix_colorizer][subdir] = radix
 
@@ -159,6 +159,18 @@ projects[entity_view_mode][version] = 1.0-rc1
 projects[realname][subdir] = contrib
 projects[realname][version] = 1.2
 
+; Annotation
+;projects[annotation][subdir] = contrib
+;projects[annotation][version] = 1.x-dev
+
+; Annotator
+;projects[annotator][subdir] = contrib
+;projects[annotator][version] = 1.x-dev
+
+; AnnotatorJS library.
+;libraries[annotator][download][type] = file
+;libraries[annotator][download][url] = https://github.com/openannotation/annotator/releases/download/v1.2.10/annotator.1.2.10.zip
+;libraries[annotator][download][subtree] = annotator.1.2.10
 
 ; *****************************************
 ; ************** PECE Themes **************
