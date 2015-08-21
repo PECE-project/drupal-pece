@@ -31,23 +31,27 @@ describe ('Image Artifact' , function () {
     AllPages.ArtifactImagePage.checkMandatoryFields();
   });
 
+  it ('Should not accept other than image files', function () {
+    AllPages.ArtifactImagePage.get();
+    AllPages.ArtifactImagePage.accessMediaBrowser();
+    AllPages.ArtifactImagePage.checkFileFormat();
+  });
+
   it ('Add a image artifact as researcher user', function () {
+    AllPages.SamplePage.get('admin/config/people/legal');
+    AllPages.LegalPage.create();
     AllPages.AuthenticationPage.logout();
     AllPages.RegistrationPage.get();
     AllPages.RegistrationPage.registerProfile();
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.get();
     AllPages.PeoplePage.unblock(AllPages.RegistrationPage.defaultUser.email);
+    AllPages.PeoplePage.addRole(AllPages.RegistrationPage.defaultUser.email, 5);
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
     AllPages.ArtifactImagePage.get();
     AllPages.ArtifactImagePage.add('Image Artifact', 'imageFile.jpg');
-    AllPages.SamplePage.checkMessage('has been created.');
-  });
-
-  it ('Should not accept other than image files', function () {
-    AllPages.ArtifactImagePage.get();
-    AllPages.ArtifactImagePage.accessMediaBrowser();
-    AllPages.ArtifactImagePage.checkFileFormat();
+    AllPages.ArtifactImagePage.checkPageLayout();
+    AllPages.ArtifactImagePage.checkPageElements();
   });
 });

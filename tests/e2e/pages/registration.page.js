@@ -25,6 +25,14 @@ var RegistrationPage = function () {
     tos: true
   };
 
+  this.simpleUser = {
+    username: this.defaultUser.username,
+    email: this.defaultUser.email,
+    pass: browser.params.admin.password,
+    name: this.defaultUser.name,
+    tos: true
+  }
+
   // Define registration attributes.
   // User fields.
   this.usernameField = element(by.css('input#edit-name'));
@@ -57,16 +65,37 @@ var RegistrationPage = function () {
     this.pass2Field.sendKeys(pass);
   };
 
-  this.fillProfileFields = function (name, institution, position, bio, location, tags) {
-    this.fullnameField.sendKeys(name);
-    this.institutionField.sendKeys(institution);
-    this.positionField.sendKeys(position);
-    this.bioField.sendKeys(bio);
-    this.locStreetField.sendKeys(location.street);
-    this.locAdditionalField.sendKeys(location.additional);
-    element(by.cssContainingText('#edit-profile-pece-profile-main-field-pece-location-und-0-country option', location.country)).click();
-    this.locProvinceField.sendKeys(location.province);
-    this.tagsField.sendKeys(tags);
+  this.fillProfileFields = function (user) {
+    browser.wait(EC.visibilityOf(this.fullnameField), browser.params.timeoutLimit);
+    if (typeof user.name != 'undefined') {
+      this.fullnameField.sendKeys(user.name);
+    };
+    if (typeof user.institution != 'undefined') {
+      this.institutionField.sendKeys(user.institution);
+    }
+    if (typeof user.position != 'undefined') {
+      this.positionField.sendKeys(user.position);
+    }
+    if (typeof user.bio != 'undefined') {
+      this.bioField.sendKeys(user.bio);
+    }
+    if (user.location) {
+      if (typeof user.location.street != 'undefined') {
+        this.locStreetField.sendKeys(user.location.street);
+      }
+      if (typeof user.location.additional != 'undefined') {
+        this.locAdditionalField.sendKeys(user.location.additional);
+      }
+      if (typeof user.location.country != 'undefined') {
+        element(by.cssContainingText('#edit-profile-pece-profile-main-field-pece-location-und-0-country option', user.location.country)).click();
+      }
+      if (typeof user.location.province != 'undefined') {
+        this.locProvinceField.sendKeys(user.location.province);
+      }
+    }
+    if (typeof user.tags != 'undefined') {
+      this.tagsField.sendKeys(user.tags);
+    }
   };
 
   this.checkTosField = function (tos) {
@@ -90,11 +119,11 @@ var RegistrationPage = function () {
     this.get();
     if (typeof(user) == 'undefined') {
       this.fillUserFields(this.defaultUser.username, this.defaultUser.email, this.defaultUser.pass);
-      this.fillProfileFields(this.defaultUser.name, this.defaultUser.institution, this.defaultUser.position, this.defaultUser.bio, this.defaultUser.location, this.defaultUser.tags);
+      this.fillProfileFields(this.defaultUser);
       this.checkTosField(this.defaultUser.tos);
     } else {
       this.fillUserFields(user.username, user.email, user.pass);
-      this.fillProfileFields(user.name, user.institution, user.position, user.bio, user.location, user.tags);
+      this.fillProfileFields(user);
       this.checkTosField(user.tos);
     }
     this.submitRegisterForm();

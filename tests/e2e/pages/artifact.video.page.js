@@ -29,6 +29,31 @@ var ArtifactVideoPage = function () {
     dateField              : element(by.css('#pece-artifact-video-node-form .radix-layouts-sidebar #edit-date-datepicker-popup-0'))
   };
 
+  this.pageElements = {
+    // Panels layout
+    layoutWrapper      : element(by.css('.radix-phelan')),
+
+    visible : {
+       // Left side elements.
+      titleField        : element(by.css('h1')),
+      videoField        : element(by.css('.radix-layouts-column1 .field-name-field-pece-media-video')),
+      licenceField      : element(by.css('.radix-layouts-column1 .field-name-field-pece-license')),
+
+      // Right side form elements.
+      createdField       : element(by.css('.radix-layouts-column2 .pane-node-created .pane-title')),
+      contributorsFields : element(by.css('.radix-layouts-column2 .field-name-field-pece-contributors')),
+    },
+
+    hidden : {
+      // Right side form elements.
+      authorsField       : element(by.css('.radix-layouts-column2 .field-name-field-pece-authors')),
+      tagsField          : element(by.css('.radix-layouts-column2 .field-name-field-pece-tags')),
+      fieldsiteField     : element(by.css('.radix-layouts-column2 .field-name-field-pece-authors')),
+      critCommentField   : element(by.css('.radix-layouts-column2 .field-name-field-pece-crit-commentary')),
+      locationField      : element(by.css('.radix-layouts-column2 .field-name-field-pece-location'))
+    }
+  }
+
   this.browseButtonId = 'edit-field-pece-media-video-und-0-browse-button';
   this.publishButton  = element(by.css('#pece-artifact-video-node-form #edit-submit'));
 
@@ -82,6 +107,19 @@ var ArtifactVideoPage = function () {
     mediaElement.sendKeys(mediaInput);
     nextButton.click();
     browser.switchTo().defaultContent();
+  };
+
+  this.checkPageLayout = function () {
+    expect(this.pageElements.layoutWrapper.isPresent()).toBe(true);
+  };
+
+  this.checkPageElements = function () {
+    for (var key in this.pageElements.visible) {
+      expect(this.pageElements.visible[key].isDisplayed()).toBe(true);
+    }
+    for (var key in this.pageElements.hidden) {
+      expect(this.pageElements.hidden[key].isPresent()).toBe(false);
+    }
   };
 
   this.add = function (title, fileName) {

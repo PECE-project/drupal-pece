@@ -29,6 +29,31 @@ var ArtifactTextPage = function () {
     dateField              : element(by.css('#pece-artifact-text-node-form .radix-layouts-sidebar #edit-date-datepicker-popup-0'))
   };
 
+  this.pageElements = {
+    // Panels layout
+    layoutWrapper      : element(by.css('.radix-phelan')),
+
+    visible : {
+       // Left side elements.
+      titleField        : element(by.css('h1')),
+      textField         : element(by.css('.radix-layouts-column1 .field-name-body')),
+      licenceField      : element(by.css('.radix-layouts-column1 .field-name-field-pece-license')),
+
+      // Right side form elements.
+      createdField       : element(by.css('.radix-layouts-column2 .pane-node-created .pane-title')),
+      contributorsFields : element(by.css('.radix-layouts-column2 .field-name-field-pece-contributors')),
+    },
+
+    hidden : {
+      // Right side form elements.
+      authorsField       : element(by.css('.radix-layouts-column2 .field-name-field-pece-authors')),
+      tagsField          : element(by.css('.radix-layouts-column2 .field-name-field-pece-tags')),
+      fieldsiteField     : element(by.css('.radix-layouts-column2 .field-name-field-pece-authors')),
+      critCommentField   : element(by.css('.radix-layouts-column2 .field-name-field-pece-crit-commentary')),
+      locationField      : element(by.css('.radix-layouts-column2 .field-name-field-pece-location'))
+    }
+  }
+
   this.editorSelectField = element(by.css('#edit-body-und-0-format--2'));
   this.plaintextOption   = element(by.css('#edit-body-und-0-format--2 option[value="plain_text"]'));
   this.publishButton     = element(by.css('#edit-submit'));
@@ -36,6 +61,10 @@ var ArtifactTextPage = function () {
   // Define text pageobject methods.
   this.get = function () {
     browser.get('node/add/pece-artifact-text');
+  };
+
+  this.view = function () {
+    browser.get('content/text-artifact');
   };
 
   this.checkMandatoryFields = function () {
@@ -57,11 +86,26 @@ var ArtifactTextPage = function () {
     }
   };
 
+  this.checkPageLayout = function () {
+    expect(this.pageElements.layoutWrapper.isPresent()).toBe(true);
+  };
+
+  this.checkPageElements = function () {
+    for (var key in this.pageElements.visible) {
+      expect(this.pageElements.visible[key].isDisplayed()).toBe(true);
+    }
+    for (var key in this.pageElements.hidden) {
+      expect(this.pageElements.hidden[key].isPresent()).toBe(false);
+    }
+  };
+
   this.add = function (title, text) {
     browser.wait(EC.visibilityOf(this.mainElements.uriField), browser.params.timeoutLimit);
     this.mainElements.titleField.sendKeys(title);
     this.mainElements.uriField.sendKeys('texturi1');
     this.mainElements.textField.sendKeys(text);
+    // this.mainElements.tagsField.sendKeys('foo');
+    // this.mainElements.authorsField.sandKeys('John Do');
     this.publishButton.click();
   };
 };

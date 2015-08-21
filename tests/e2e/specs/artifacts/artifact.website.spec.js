@@ -37,16 +37,20 @@ describe ('Website Artifact' , function () {
   });
 
   it ('Add a Website artifact as an authenticated user', function () {
+    AllPages.SamplePage.get('admin/config/people/legal');
+    AllPages.LegalPage.create();
     AllPages.AuthenticationPage.logout();
     AllPages.RegistrationPage.get();
-    AllPages.RegistrationPage.registerProfile();
+    AllPages.RegistrationPage.registerProfile(AllPages.RegistrationPage.simpleUser);
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.get();
-    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.defaultUser.email);
+    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.simpleUser.email);
+    AllPages.PeoplePage.addRole(AllPages.RegistrationPage.simpleUser.email, 5);
     AllPages.AuthenticationPage.logout();
-    AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
+    AllPages.AuthenticationPage.login(AllPages.RegistrationPage.simpleUser.username, AllPages.RegistrationPage.simpleUser.pass);
     AllPages.ArtifactWebsitePage.get();
     AllPages.ArtifactWebsitePage.add('Website Artifact', 'http://google.com');
-    AllPages.SamplePage.checkMessage('has been created.');
+    AllPages.ArtifactWebsitePage.checkPageLayout();
+    AllPages.ArtifactWebsitePage.checkPageElements();
   });
 });

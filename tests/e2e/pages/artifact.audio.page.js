@@ -29,6 +29,31 @@ var ArtifactAudioPage = function () {
     dateField              : element(by.css('#pece-artifact-audio-node-form .radix-layouts-sidebar #edit-date-datepicker-popup-0'))
   };
 
+  this.pageElements = {
+    // Panels layout
+    layoutWrapper      : element(by.css('.radix-phelan')),
+
+    visible : {
+       // Left side elements.
+      titleField        : element(by.css('h1')),
+      audioField        : element(by.css('.radix-layouts-column1 .field-name-field-pece-media-audio')),
+      licenceField      : element(by.css('.radix-layouts-column1 .field-name-field-pece-license')),
+
+      // Right side form elements.
+      createdField       : element(by.css('.radix-layouts-column2 .pane-node-created .pane-title')),
+      contributorsFields : element(by.css('.radix-layouts-column2 .field-name-field-pece-contributors')),
+    },
+
+    hidden : {
+      // Right side form elements.
+      authorsField       : element(by.css('.radix-layouts-column2 .field-name-field-pece-authors')),
+      tagsField          : element(by.css('.radix-layouts-column2 .field-name-field-pece-tags')),
+      fieldsiteField     : element(by.css('.radix-layouts-column2 .field-name-field-pece-authors')),
+      critCommentField   : element(by.css('.radix-layouts-column2 .field-name-field-pece-crit-commentary')),
+      locationField      : element(by.css('.radix-layouts-column2 .field-name-field-pece-location'))
+    }
+  }
+
   this.browseButtonId = 'edit-field-pece-media-audio-und-0-browse-button';
   this.publishButton  = element(by.css('#pece-artifact-audio-node-form #edit-submit'));
 
@@ -60,6 +85,19 @@ var ArtifactAudioPage = function () {
     var fileFormats = element(by.css('#edit-upload-ajax-wrapper .description'));
     browser.wait(EC.visibilityOf(fileFormats), browser.params.timeoutLimit);
     expect(fileFormats.getText()).toContain('ogg mp3 mka m4a mp4 webm wav');
+  };
+
+  this.checkPageLayout = function () {
+    expect(this.pageElements.layoutWrapper.isPresent()).toBe(true);
+  };
+
+  this.checkPageElements = function () {
+    for (var key in this.pageElements.visible) {
+      expect(this.pageElements.visible[key].isDisplayed()).toBe(true);
+    }
+    for (var key in this.pageElements.hidden) {
+      expect(this.pageElements.hidden[key].isPresent()).toBe(false);
+    }
   };
 
   this.accessMediaBrowser = function () {

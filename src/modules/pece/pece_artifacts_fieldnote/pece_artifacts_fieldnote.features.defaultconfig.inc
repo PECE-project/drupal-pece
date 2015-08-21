@@ -39,6 +39,13 @@ function pece_artifacts_fieldnote_defaultconfig_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any pece_artifact_fieldnote content'.
+  $permissions['edit any pece_artifact_fieldnote content'] = array(
+    'name' => 'edit any pece_artifact_fieldnote content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own pece_artifact_fieldnote content'.
   $permissions['edit own pece_artifact_fieldnote content'] = array(
     'name' => 'edit own pece_artifact_fieldnote content',

@@ -31,23 +31,27 @@ describe ('Audio Artifact' , function () {
     AllPages.ArtifactAudioPage.checkMandatoryFields();
   });
 
-  it ('Add a Audio artifact as an authenticated user', function () {
-    AllPages.AuthenticationPage.logout();
-    AllPages.RegistrationPage.get();
-    AllPages.RegistrationPage.registerProfile();
-    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-    AllPages.PeoplePage.get();
-    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.defaultUser.email);
-    AllPages.AuthenticationPage.logout();
-    AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
-    AllPages.ArtifactAudioPage.get();
-    AllPages.ArtifactAudioPage.add('Audio Artifact', 'audioFile.mp3');
-    AllPages.SamplePage.checkMessage('has been created.');
-  });
-
   it ('Should not accept other than Audio files', function () {
     AllPages.ArtifactAudioPage.get();
     AllPages.ArtifactAudioPage.accessMediaBrowser();
     AllPages.ArtifactAudioPage.checkFileFormat();
+  });
+
+  it ('Add a Audio artifact as an authenticated user', function () {
+    AllPages.SamplePage.get('admin/config/people/legal');
+    AllPages.LegalPage.create();
+    AllPages.AuthenticationPage.logout();
+    AllPages.RegistrationPage.get();
+    AllPages.RegistrationPage.registerProfile(AllPages.RegistrationPage.simpleUser);
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    AllPages.PeoplePage.get();
+    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.simpleUser.email);
+    AllPages.PeoplePage.addRole(AllPages.RegistrationPage.simpleUser.email, 5);
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(AllPages.RegistrationPage.simpleUser.username, AllPages.RegistrationPage.simpleUser.pass);
+    AllPages.ArtifactAudioPage.get();
+    AllPages.ArtifactAudioPage.add('Audio Artifact', 'audioFile.mp3');
+    AllPages.ArtifactAudioPage.checkPageLayout();
+    AllPages.ArtifactAudioPage.checkPageElements();
   });
 });

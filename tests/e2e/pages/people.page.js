@@ -51,14 +51,12 @@ var PeoplePage = function () {
     this.confirmButton.click();
   };
 
-  this.addRole = function (email, roleName) {
-    var roleWrapper = element(by.cssContainingText('#edit-roles .form-type-checkbox', roleName))
-      , role = roleWrapper.findElement(by.css('input#edit-roles-6'));
+  this.addRole = function (email, roleId) {
+    var role = element(by.css('#edit-roles-' + roleId));
 
     this.edit(email);
     browser.wait(EC.visibilityOf(role), browser.params.timeoutLimit);
     role.click();
-    browser.wait(EC.visibilityOf(this.confirmButton), browser.params.timeoutLimit);
     this.confirmButton.click();
   };
 };

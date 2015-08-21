@@ -30,6 +30,32 @@ var ArtifactWebsitePage = function () {
 
   };
 
+
+  this.pageElements = {
+    // Panels layout
+    layoutWrapper      : element(by.css('.radix-phelan')),
+
+    visible : {
+       // Left side elements.
+      titleField        : element(by.css('h1')),
+      websiteField      : element(by.css('.radix-layouts-column1 .field-name-field-pece-website-url')),
+      licenceField      : element(by.css('.radix-layouts-column1 .field-name-field-pece-license')),
+
+      // Right side form elements.
+      createdField       : element(by.css('.radix-layouts-column2 .pane-node-created .pane-title')),
+      contributorsFields : element(by.css('.radix-layouts-column2 .field-name-field-pece-contributors')),
+    },
+
+    hidden : {
+      // Right side form elements.
+      authorsField       : element(by.css('.radix-layouts-column2 .field-name-field-pece-authors')),
+      tagsField          : element(by.css('.radix-layouts-column2 .field-name-field-pece-tags')),
+      fieldsiteField     : element(by.css('.radix-layouts-column2 .field-name-field-pece-authors')),
+      critCommentField   : element(by.css('.radix-layouts-column2 .field-name-field-pece-crit-commentary')),
+      locationField      : element(by.css('.radix-layouts-column2 .field-name-field-pece-location'))
+    }
+  }
+
   this.publishButton     = element(by.css('#edit-submit'));
 
   // Define website pageobject methods.
@@ -60,6 +86,19 @@ var ArtifactWebsitePage = function () {
     this.mainElements.urlField.sendKeys('An invalid url');
     this.publishButton.click();
     SamplePage.checkMessage('Not a valid URL.');
+  };
+
+  this.checkPageLayout = function () {
+    expect(this.pageElements.layoutWrapper.isPresent()).toBe(true);
+  };
+
+  this.checkPageElements = function () {
+    for (var key in this.pageElements.visible) {
+      expect(this.pageElements.visible[key].isDisplayed()).toBe(true);
+    }
+    for (var key in this.pageElements.hidden) {
+      expect(this.pageElements.hidden[key].isPresent()).toBe(false);
+    }
   };
 
   this.add = function (title, website) {

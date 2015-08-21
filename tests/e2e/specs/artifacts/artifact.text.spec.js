@@ -32,16 +32,20 @@ describe ('Text Artifact' , function () {
   });
 
   it ('Add a Text artifact as an authenticated user', function () {
+    AllPages.SamplePage.get('admin/config/people/legal');
+    AllPages.LegalPage.create();
     AllPages.AuthenticationPage.logout();
     AllPages.RegistrationPage.get();
     AllPages.RegistrationPage.registerProfile();
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.get();
     AllPages.PeoplePage.unblock(AllPages.RegistrationPage.defaultUser.email);
+    AllPages.PeoplePage.addRole(AllPages.RegistrationPage.defaultUser.email, 5);
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
     AllPages.ArtifactTextPage.get();
     AllPages.ArtifactTextPage.add('Text Artifact', 'Lorem ipsum dolar sit.');
-    AllPages.SamplePage.checkMessage('has been created.');
+    AllPages.ArtifactTextPage.checkPageLayout();
+    AllPages.ArtifactTextPage.checkPageElements();
   });
 });

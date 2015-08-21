@@ -31,12 +31,6 @@ describe ('PDF Docuemnt Artifact' , function () {
     AllPages.ArtifactPdfPage.checkMandatoryFields();
   });
 
-  it ('Add a PDF Document artifact', function () {
-    AllPages.ArtifactPdfPage.get();
-    AllPages.ArtifactPdfPage.add('PDF Document Artifact', 'pdfFile.pdf');
-    AllPages.SamplePage.checkMessage('has been created.');
-  });
-
   it ('Should not accept other than PDF files', function () {
     AllPages.ArtifactPdfPage.get();
     AllPages.ArtifactPdfPage.accessMediaBrowser();
@@ -44,17 +38,21 @@ describe ('PDF Docuemnt Artifact' , function () {
   });
 
   it ('Add PDF Document artifact as an authenticated user', function () {
+    AllPages.SamplePage.get('admin/config/people/legal');
+    AllPages.LegalPage.create();
     AllPages.AuthenticationPage.logout();
     AllPages.RegistrationPage.get();
-    AllPages.RegistrationPage.registerProfile();
+    AllPages.RegistrationPage.registerProfile(AllPages.RegistrationPage.simpleUser);
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.get();
-    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.defaultUser.email);
+    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.simpleUser.email);
+    AllPages.PeoplePage.addRole(AllPages.RegistrationPage.simpleUser.email, 5);
     AllPages.AuthenticationPage.logout();
-    AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
+    AllPages.AuthenticationPage.login(AllPages.RegistrationPage.simpleUser.username, AllPages.RegistrationPage.simpleUser.pass);
     AllPages.ArtifactPdfPage.get();
-    AllPages.ArtifactPdfPage.add('Sample PDF Document', 'pdfFile.pdf');
-    AllPages.SamplePage.checkMessage('has been created.');
+    AllPages.ArtifactPdfPage.add('PDF Document Artifact', 'pdfFile.pdf');
+    AllPages.ArtifactPdfPage.checkPageLayout();
+    AllPages.ArtifactPdfPage.checkPageElements();
   });
 
   // it ('add PDF Document artifact with author different from contributor', function () {});

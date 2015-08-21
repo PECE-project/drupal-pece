@@ -402,7 +402,7 @@ function pece_artifacts_website_field_default_field_instances() {
     'bundle' => 'pece_artifact_website',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Only external URL are available. e.g: http://example.com',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -543,6 +543,7 @@ function pece_artifacts_website_field_default_field_instances() {
   t('Groups audience');
   t('License');
   t('Location');
+  t('Only external URL are available. e.g: http://example.com');
   t('Tags');
   t('URI');
   t('Website URL');
