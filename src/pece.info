@@ -76,26 +76,29 @@ dependencies[] = pece_profile
 
 ; @TODO Organize the modules base in context
 ; Contrib modules
-dependencies[] = xautoload
-dependencies[] = eck
-dependencies[] = extlink
-dependencies[] = inline_entity_form
-dependencies[] = creative_commons
-dependencies[] = diff
 dependencies[] = block
+dependencies[] = creative_commons
 dependencies[] = coffee
-dependencies[] = search_api
-dependencies[] = syslog
-dependencies[] = profile2
-dependencies[] = translation
+dependencies[] = diff
+dependencies[] = eck
 dependencies[] = email
-dependencies[] = locale
+dependencies[] = entity_view_mode
+dependencies[] = extlink
+dependencies[] = fences
+dependencies[] = gmap
+dependencies[] = inline_entity_form
+dependencies[] = l10n_update
 dependencies[] = legal
+dependencies[] = locale
+dependencies[] = location
+dependencies[] = profile2
+dependencies[] = realname
 dependencies[] = rules
 dependencies[] = rules_admin
-dependencies[] = l10n_update
-dependencies[] = location
-dependencies[] = gmap
+dependencies[] = search_api
+dependencies[] = syslog
+dependencies[] = translation
+dependencies[] = xautoload
 
 ; OG modules
 
@@ -107,3 +110,4 @@ dependencies[] = og_mailinglist
 
 ; Develpment Modules
 env_dependencies[development][] = devel
+env_dependencies[development][] = devel_generate

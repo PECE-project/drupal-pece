@@ -20,6 +20,31 @@ function pece_artifacts_image_ctools_plugin_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function pece_artifacts_image_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: pece_artifact_image_large.
+  $styles['pece_artifact_image_large'] = array(
+    'label' => 'PECE Artifact Image Large',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 550,
+          'height' => '',
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function pece_artifacts_image_node_info() {

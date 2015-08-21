@@ -162,14 +162,17 @@ function pece_artifacts_website_panelizer_defaults() {
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'above',
-    'formatter' => 'entityreference_label',
-    'delta_limit' => 0,
+    'formatter' => 'og_list_default',
+    'delta_limit' => '0',
     'delta_offset' => '0',
-    'delta_reversed' => FALSE,
+    'delta_reversed' => 0,
     'formatter_settings' => array(
       'link' => FALSE,
     ),
     'context' => 'panelizer',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -216,7 +219,7 @@ function pece_artifacts_website_panelizer_defaults() {
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'above',
-    'formatter' => 'entityreference_label',
+    'formatter' => 'og_list_default',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
@@ -224,6 +227,9 @@ function pece_artifacts_website_panelizer_defaults() {
       'link' => FALSE,
     ),
     'context' => 'panelizer',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
   );
   $pane->cache = array();
   $pane->style = array(
