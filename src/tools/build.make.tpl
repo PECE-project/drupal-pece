@@ -1,7 +1,7 @@
 core = 7.x
 api = 2
 
-projects[drupal][version] = "7.38"
+projects[drupal][version] = "7.39"
 
 projects[pece][type] = "profile"
 projects[pece][download][type] = "kraftwagen_directory"
