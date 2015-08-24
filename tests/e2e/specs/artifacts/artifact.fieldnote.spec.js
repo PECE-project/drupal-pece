@@ -17,8 +17,6 @@ describe ('Fieldnote' , function () {
   afterAll(function () {
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-    AllPages.ContentPage.get();
-    AllPages.ContentPage.remove('pece_artifact_fieldnote');
     AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
   });
 

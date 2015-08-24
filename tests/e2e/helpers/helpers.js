@@ -50,5 +50,7 @@ function addMedia(mediaButtonId, mediaFile) {
 // Exposed helper methods.
 module.exports = {
   clickElement: clickElement
+  , selectDropdownbyNum: selectDropdownbyNum
+  , selectAutocompleteReference: selectAutocompleteReference
   , addMedia: addMedia
 }

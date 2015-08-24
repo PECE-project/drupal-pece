@@ -16,8 +16,6 @@ describe ('Website Artifact' , function () {
   afterAll(function () {
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-    AllPages.ContentPage.get();
-    AllPages.ContentPage.remove('Website Artifact');
     AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
   });
 
