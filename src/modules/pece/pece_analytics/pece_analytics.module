@@ -1,0 +1,18 @@
+<?php
+/**
+ * @file
+ * Code for the pece_analytics feature.
+ */
+
+include_once 'pece_analytics.features.inc';
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_analytics_form_pece_analytic_node_form_alter(&$form, &$form_state) {
+  // Hide the comment settings fieldset.
+  $form['comment_settings']['#access'] = FALSE;
+  // We cannot allow the content to be authored by anonymous.
+  $form['author']['name']['#required'] = TRUE;
+}

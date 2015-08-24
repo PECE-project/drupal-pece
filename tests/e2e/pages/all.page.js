@@ -15,6 +15,8 @@ var ArtifactPdfPage = require('./artifact.pdf.page');
 var ArtifactTextPage = require('./artifact.text.page');
 var ArtifactVideoPage = require('./artifact.video.page');
 var ArtifactWebsitePage = require('./artifact.website.page');
+var AnalyticPage = require('./analytic.page');
+var StructuredAnalyticsPage = require('./structured.analytics.page');
 
 module.exports = {
   'SamplePage': SamplePage
@@ -33,4 +35,6 @@ module.exports = {
   , 'ArtifactTextPage': ArtifactTextPage
   , 'ArtifactVideoPage': ArtifactVideoPage
   , 'ArtifactWebsitePage': ArtifactWebsitePage
+  , 'AnalyticPage': AnalyticPage
+  , 'StructuredAnalyticsPage': StructuredAnalyticsPage
 }
