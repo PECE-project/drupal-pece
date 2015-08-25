@@ -10,6 +10,61 @@
 function pece_analytics_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-pece_analytic-field_pece_struct_analytics'
+  $field_instances['node-pece_analytic-field_pece_struct_analytics'] = array(
+    'bundle' => 'pece_analytic',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 3,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'entityconnect_icon_add' => 0,
+    'entityconnect_icon_edit' => 0,
+    'entityconnect_unload_add' => 0,
+    'entityconnect_unload_edit' => 1,
+    'fences_wrapper' => 'div',
+    'field_name' => 'field_pece_struct_analytics',
+    'label' => 'Question Set',
+    'required' => 0,
+    'settings' => array(
+      'behaviors' => array(
+        'taxonomy-index' => array(
+          'status' => TRUE,
+        ),
+      ),
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 6,
+    ),
+  );
+
   // Exported field_instance: 'node-pece_analytic-field_pece_tags'
   $field_instances['node-pece_analytic-field_pece_tags'] = array(
     'bundle' => 'pece_analytic',
@@ -109,60 +164,9 @@ function pece_analytics_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance:
-  // 'node-pece_structured_analytics-field_pece_analytics'
-  $field_instances['node-pece_structured_analytics-field_pece_analytics'] = array(
-    'bundle' => 'pece_structured_analytics',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 1,
-      ),
-      'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'fences_wrapper' => 'div',
-    'field_name' => 'field_pece_analytics',
-    'label' => 'Analytics',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'entityreference',
-      'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
-        'size' => 60,
-      ),
-      'type' => 'entityreference_autocomplete',
-      'weight' => 5,
-    ),
-  );
-
   // Translatables
   // Included for use with string extractors like potx.
-  t('Analytics');
+  t('Question Set');
   t('Tags');
   t('URI');
 

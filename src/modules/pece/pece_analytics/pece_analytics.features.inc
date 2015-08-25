@@ -26,14 +26,6 @@ function pece_analytics_node_info() {
       'title_label' => t('Title'),
       'help' => '',
     ),
-    'pece_structured_analytics' => array(
-      'name' => t('Structured Analytics (Question Set)'),
-      'base' => 'node_content',
-      'description' => t('PECE\'s Collection of Questions'),
-      'has_title' => '1',
-      'title_label' => t('Title'),
-      'help' => '',
-    ),
   );
   drupal_alter('node_info', $items);
   return $items;
