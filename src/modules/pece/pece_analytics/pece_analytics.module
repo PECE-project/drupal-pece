@@ -16,3 +16,14 @@ function pece_analytics_form_pece_analytic_node_form_alter(&$form, &$form_state)
   // We cannot allow the content to be authored by anonymous.
   $form['author']['name']['#required'] = TRUE;
 }
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_analytics_form_pece_structured_analytics_node_form_alter(&$form, &$form_state) {
+  // Hide the comment settings fieldset.
+  $form['comment_settings']['#access'] = FALSE;
+  // We cannot allow the content to be authored by anonymous.
+  $form['author']['name']['#required'] = TRUE;
+}
