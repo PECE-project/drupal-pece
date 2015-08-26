@@ -86,22 +86,18 @@ projects[xautoload][patch][] = "https://www.drupal.org/files/issues/xautoload-7.
 projects[xautoload][patch][] = "https://www.drupal.org/files/issues/base_table_or_view_not-2393205-2.patch"
 
 ; jQuery update recent version
-projects[jquery_update][version] = 2.6
 projects[jquery_update][subdir] = contrib
+projects[jquery_update][version] = 2.6
 
 ; Ember for admin
-projects[ember][version] = 2.0-alpha3
 projects[ember][subdir] = contrib
+projects[ember][version] = 2.0-alpha3
 
 ; Organic groups
 projects[og][subdir] = contrib
 projects[og][version] = 2.7
 projects[og_mailinglist][subdir] = contrib
 projects[og_mailinglist][version] = 1.1-alpha2
-libraries[phpmailer][download][type] = git
-libraries[phpmailer][download][url] = https://github.com/Synchro/PHPMailer.git
-libraries[phpmailer][download][revision] = d3802c597bff8f6c2ccfa3eab2a511aa01b8d68f
-libraries[phpmailer][download][branch] = master
 
 ; Email
 projects[email][subdir] = contrib
@@ -159,6 +155,14 @@ projects[entity_view_mode][version] = 1.0-rc1
 projects[realname][subdir] = contrib
 projects[realname][version] = 1.2
 
+; Entity Reference View Widget
+projects[entityreference_view_widget][subdir] = contrib
+projects[entityreference_view_widget][version] = 2.0-rc6
+
+; Entity Connect
+projects[entityconnect][subdir] = contrib
+projects[entityconnect][version] = 1.0-rc4
+
 ; Annotation
 ;projects[annotation][subdir] = contrib
 ;projects[annotation][version] = 1.x-dev
@@ -166,11 +170,6 @@ projects[realname][version] = 1.2
 ; Annotator
 ;projects[annotator][subdir] = contrib
 ;projects[annotator][version] = 1.x-dev
-
-; AnnotatorJS library.
-;libraries[annotator][download][type] = file
-;libraries[annotator][download][url] = https://github.com/openannotation/annotator/releases/download/v1.2.10/annotator.1.2.10.zip
-;libraries[annotator][download][subtree] = annotator.1.2.10
 
 ; *****************************************
 ; ************** PECE Themes **************
@@ -180,3 +179,16 @@ projects[radix][version] = 3.0-rc2
 
 projects[ember][type] = theme
 projects[ember][version] = 2.0-alpha3
+
+; *****************************************
+; ************** Libraries ****************
+
+libraries[phpmailer][download][type] = git
+libraries[phpmailer][download][url] = https://github.com/Synchro/PHPMailer.git
+libraries[phpmailer][download][revision] = d3802c597bff8f6c2ccfa3eab2a511aa01b8d68f
+libraries[phpmailer][download][branch] = master
+
+; AnnotatorJS library.
+;libraries[annotator][download][type] = file
+;libraries[annotator][download][url] = https://github.com/openannotation/annotator/releases/download/v1.2.10/annotator.1.2.10.zip
+;libraries[annotator][download][subtree] = annotator.1.2.10

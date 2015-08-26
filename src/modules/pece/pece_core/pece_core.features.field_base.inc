@@ -195,6 +195,7 @@ function pece_core_field_default_field_bases() {
         7 => 7,
       ),
       'jurisdiction' => '',
+      'profile2_private' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'creative_commons',
@@ -361,6 +362,7 @@ function pece_core_field_default_field_bases() {
           'parent' => 0,
         ),
       ),
+      'profile2_private' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
@@ -382,6 +384,7 @@ function pece_core_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'text',
