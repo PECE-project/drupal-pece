@@ -54,5 +54,14 @@ function pece_analytics_defaultconfig_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit terms in pece_structured_analytics'.
+  $permissions['edit terms in pece_structured_analytics'] = array(
+    'name' => 'edit terms in pece_structured_analytics',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'taxonomy',
+  );
+
   return $permissions;
 }
