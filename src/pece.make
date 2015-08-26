@@ -54,10 +54,14 @@ projects[radix_layouts][version] = 3.3
 projects[radix_layouts][subdir] = contrib
 projects[radix_views][version] = 1.0
 projects[radix_views][subdir] = contrib
-;projects[radix_admin][version] = 3.x-dev
-;projects[radix_admin][subdir] = radix
 ;projects[radix_colorizer][version] = 1.x-dev
-;projects[radix_colorizer][subdir] = radix
+;projects[radix_colorizer][subdir] = contrib
+;projects[radix_admin][version] = 3.x-dev
+;projects[radix_admin][subdir] = contrib
+
+; Colorizer
+;projects[colorizer][version] = 1.7
+;projects[colorizer][subdir]  = contrib
 
 ; Coffee
 projects[coffee][version] = 2.2
@@ -162,6 +166,10 @@ projects[entityreference_view_widget][version] = 2.0-rc6
 ; Entity Connect
 projects[entityconnect][subdir] = contrib
 projects[entityconnect][version] = 1.0-rc4
+
+; Taxonomy Access Fix
+projects[taxonomy_access_fix][subdir] = contrib
+projects[taxonomy_access_fix][version] = 2.2
 
 ; Annotation
 ;projects[annotation][subdir] = contrib

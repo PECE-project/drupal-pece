@@ -1,5 +1,5 @@
-name = pece
-description = Install site for pece
+name = PECE
+description = Install site for PECE
 distribution_name = pece
 core = 7.x
 exclusive = 1
@@ -50,10 +50,10 @@ dependencies[] = date_popup_authored
 dependencies[] = views_ui
 
 ; Panopoly Radix
-dependencies[] = radix_layouts
 ;dependencies[] = radix_admin
-dependencies[] = radix_views
 ;dependencies[] = radix_colorizer
+dependencies[] = radix_layouts
+dependencies[] = radix_views
 
 ; Panopoly Recommended - Other
 dependencies[] = devel
@@ -99,6 +99,7 @@ dependencies[] = rules_admin
 dependencies[] = search_api
 dependencies[] = syslog
 dependencies[] = translation
+dependencies[] = taxonomy_access_fix
 dependencies[] = xautoload
 
 ; OG modules
