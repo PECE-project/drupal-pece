@@ -5,3 +5,14 @@
  */
 
 include_once 'pece_annotations.features.inc';
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_annotations_form_pece_annotation_node_form_alter(&$form, &$form_state) {
+  // Hide the comment settings fieldset.
+  $form['comment_settings']['#access'] = FALSE;
+  // We cannot allow the content to be authored by anonymous.
+  $form['author']['name']['#required'] = TRUE;
+}
