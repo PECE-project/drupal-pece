@@ -26,10 +26,10 @@ function pece_annotations_menu() {
     'type' => MENU_CALLBACK
   );
 
-  $items['annotation/add'] = array(
-    'title' => 'Annotate',
+  $items['question-set'] = array(
+    'title' => 'Question Set',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('pece_annotations_annotate_form'),
+    'page arguments' => array('pece_annotations_question_set_form'),
     'access callback' => TRUE,
     'type' => MENU_CALLBACK
   );
@@ -88,53 +88,40 @@ function pece_annotations_annotate($js = NULL, $node = NULL) {
 }
 
 /**
- * Form builder.
+ * Annotate Form builder.
  */
 function pece_annotations_annotate_form(&$form, &$form_state) {
 
-  $struc_analytics = pece_annotations_fetch_structured_analytics();
+  $tree = pece_analytics_fetch_structured_analytics();
 
-  if (empty($struc_analytics)) {
+  $options = array('query' => array('destination' => current_path()));
+  $add_link = l(t('Add Analytic'), 'node/add/pece-analytic');
+  $form['content'] = array(
+    '#markup' => t('No Analytic available yet. !add_new', array('!add_new' => $add_link)),
+  );
 
-    $options = array('query' => array('destination' => current_path()));
-    $add_link = l(t('Add Analytic'), 'node/add/pece-analytic');
-    $form['content'] = array(
-      '#markup' => t('No Analytic available yet. !add_new', array('!add_new' => $add_link)),
-    );
+  if (empty($tree)) {
     return $form;
   }
 
-  $form['header'] = array(
-    '#markup' => 'Select a Question Set',
-  );
-
-  $attr = array(
-    'class' => 'question-set-item',
-  );
-
-  $links = array(
-    0 => array(
-      'title' =>  'First link.',
-      'href' =>  '#',
-    ),
-    1 => array(
-      'title' =>  'Second link.',
-      'href' =>  '#',
-    ),
-    1 => array(
-      'title' =>  'Third link.',
-      'href' =>  '#',
-    ),
-  );
-
-  $vars = array(
-    'attributes' => $attr,
-    'links' => $links,
-  );
-
   $form['content'] = array(
-    '#markup' => theme('links', $vars),
+    '#markup' => 'Question Set list',
   );
+
+  return $form;
+}
+
+/**
+ * Question Set list Form builder.
+ */
+function pece_annotations_question_set_form() {
+
+  $form = array();
+
+  // $voc = taxononmy_vacabulary_machine_name_load('pece_structured_analytics');
+  dsm($voc, 'Vocab');
+  // $tree = taxonomy_get_tree($voc->vid);
+  // dsm($tree, 'Tree');
 
   return $form;
 }

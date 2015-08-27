@@ -24,15 +24,15 @@ $plugin = array(
 /**
  * An edit form for the pane's settings.
  */
-function pece_annotations_annotation_pane_edit_form(&$form, &$form_state) {
-    return $form;
+function pece_annotations_annotation_pane_edit_form($form, &$form_state) {
+  return $form;
 }
 
 /**
  * Submit form.
  */
 function pece_annotations_annotation_pane_edit_form_submit(&$form, &$form_state) {
-
+  return $form;
 }
 
 /**
@@ -41,8 +41,15 @@ function pece_annotations_annotation_pane_edit_form_submit(&$form, &$form_state)
  */
 function pece_annotations_annotation_pane_render($subtype, $conf, $args, $contexts) {
 
+  // Prepare response block.
   $block = new stdClass();
-  $node = menu_get_object();
+
+  // Get panelizer context.
+  $context = reset($contexts);
+
+  // Get information about the context being used.
+  $context_type = isset($context->keyword) ? $context->keyword : null;
+  $node_type    = $context_type == 'node' ? $context->data->type : null;
 
   $artifacts = array(
     'pece_artifact_audio',
@@ -54,24 +61,31 @@ function pece_annotations_annotation_pane_render($subtype, $conf, $args, $contex
     'pece_artifact_website',
   );
 
-  if (!in_array($node->type, $artifacts)) {
-    return FALSE;
+  // Check for device node context.
+  if (!in_array($node_type, $artifacts)) {
+
+    // Alert admin of wrong context.
+    $block->content = t('This pane might not be used in this context.');
+
+  } else {
+
+    $node = $context->data;
+
+    $options = array(
+      'attributes' => array(
+        'class' => array('add-link'),
+      ),
+    );
+
+    pece_core_modal_presets('Annotate', '700', '520');
+
+    // Use CTools API to generate the link.
+    $content['annotate_link'] = array(
+      '#markup' => ctools_modal_text_button(t('Annotate'), 'annotation/add/' . $node->nid . '/nojs', t('Annotate'), 'ctools-modal-annotate annotate-link'),
+    );
+
+    $block->content = $content;
   }
-
-  $options = array(
-    'attributes' => array(
-      'class' => array('add-link'),
-    ),
-  );
-
-  pece_core_modal_presets('Annotate', '700', '520');
-
-  // Use CTools API to generate the link.
-  $content['annotate_link'] = array(
-    '#markup' => ctools_modal_text_button(t('Annotate'), 'annotation/add/' . $node->nid . '/nojs', t('Annotate'), 'ctools-modal-annotate annotate-link'),
-  );
-
-  $block->content = $content;
 
   return $block;
 }

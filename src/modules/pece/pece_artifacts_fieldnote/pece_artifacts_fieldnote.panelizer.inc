@@ -132,6 +132,7 @@ function pece_artifacts_fieldnote_panelizer_defaults() {
   $pane->uuid = 'b3cb149c-978a-49f8-8ff2-2ce1d50cbf4f';
   $display->content['new-b3cb149c-978a-49f8-8ff2-2ce1d50cbf4f'] = $pane;
   $display->panels['column1'][2] = 'new-b3cb149c-978a-49f8-8ff2-2ce1d50cbf4f';
+
   $pane = new stdClass();
   $pane->pid = 'new-9e52c08b-9c89-4f49-af6c-0dc1c9be9740';
   $pane->panel = 'column2';
