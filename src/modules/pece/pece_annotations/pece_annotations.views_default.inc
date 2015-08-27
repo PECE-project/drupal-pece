@@ -18,7 +18,7 @@ function pece_annotations_views_default_views() {
   $view->human_name = 'PECE Analytics: Analytics list reference';
   $view->core = 7;
   $view->api_version = '3.0';
-  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+  $view->disabled = TRUE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');

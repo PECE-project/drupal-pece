@@ -6,6 +6,138 @@
 
 include_once 'pece_annotations.features.inc';
 
+/**
+ * Implementation of hook_ctools_plugin_directory()
+ */
+function pece_annotations_ctools_plugin_directory($module, $plugin) {
+  return 'plugins/' . $plugin;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function pece_annotations_menu() {
+
+  $items['annotation/add/%node/%ctools_js'] = array(
+    'title' => 'Annotate',
+    'page callback' => 'pece_annotations_annotate',
+    'page arguments' => array(3, 2),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK
+  );
+
+  $items['annotation/add'] = array(
+    'title' => 'Annotate',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('pece_annotations_annotate_form'),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK
+  );
+
+  return $items;
+}
+
+/**
+ * A modal static page callback.
+ * @param $js
+ *   boolean CTools determination whether the user's browser is javascript enabled.
+ * @param $nid
+ *   string The node ID of passed as an argument from the hook_menu() path
+ * @return
+ *   string The annotation creation wizard form, that will fill the modal window.
+ */
+function pece_annotations_annotate($js = NULL, $node = NULL) {
+
+  $artifacts = array(
+    'pece_artifact_audio',
+    'pece_artifact_fieldnote',
+    'pece_artifact_image',
+    'pece_artifact_pdf',
+    'pece_artifact_text',
+    'pece_artifact_video',
+    'pece_artifact_website',
+  );
+
+  // Make sure that the nid was sent.
+  if ($node == NULL) {
+    watchdog('pece_annotations', 'Unable to load the page. No node id was sent.', array(), WATCHDOG_ERROR);
+    return 'No node id was sent. Error.';
+  }
+
+  // Prevent usind
+  if (!in_array($node->type, $artifacts)) {
+    watchdog('pece_annotations', 'Attempting to load a node type that isn\'t an artifact. Node type: %type', array('%type' => $node->type), WATCHDOG_NOTICE);
+    return 'Only Artifacts can be annotated. Error.';
+  }
+
+  // Displays annotation's page in case of the JS is disbled.
+  if (!$js) {
+    drupal_goto('node/add/pece-annotation', array(), 302);
+    return FALSE;
+  }
+
+  // Required includes for ctools to work:
+  ctools_include('modal');
+  ctools_include('ajax');
+
+  $output = pece_annotations_annotate_form();
+
+  $contents = render($output);
+
+  return ctools_modal_render(t('Annotate %title', array('%title' => $node->title)), $contents) ;
+}
+
+/**
+ * Form builder.
+ */
+function pece_annotations_annotate_form(&$form, &$form_state) {
+
+  $struc_analytics = pece_annotations_fetch_structured_analytics();
+
+  if (empty($struc_analytics)) {
+
+    $options = array('query' => array('destination' => current_path()));
+    $add_link = l(t('Add Analytic'), 'node/add/pece-analytic');
+    $form['content'] = array(
+      '#markup' => t('No Analytic available yet. !add_new', array('!add_new' => $add_link)),
+    );
+    return $form;
+  }
+
+  $form['header'] = array(
+    '#markup' => 'Select a Question Set',
+  );
+
+  $attr = array(
+    'class' => 'question-set-item',
+  );
+
+  $links = array(
+    0 => array(
+      'title' =>  'First link.',
+      'href' =>  '#',
+    ),
+    1 => array(
+      'title' =>  'Second link.',
+      'href' =>  '#',
+    ),
+    1 => array(
+      'title' =>  'Third link.',
+      'href' =>  '#',
+    ),
+  );
+
+  $vars = array(
+    'attributes' => $attr,
+    'links' => $links,
+  );
+
+  $form['content'] = array(
+    '#markup' => theme('links', $vars),
+  );
+
+  return $form;
+}
 
 /**
  * Implements hook_form_FORM_ID_alter().
