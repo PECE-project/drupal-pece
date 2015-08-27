@@ -2,9 +2,11 @@
 * @file legal.page.js
 */
 
+var EC = protractor.ExpectedConditions;
+
 var LegalPage = function () {
 
-  this.tosTextarea = element(by.css('textarea#edit-conditions'));
+  this.tosTextarea = element(by.css('#edit-conditions'));
   this.submitButton = element(by.css('input#edit-save'));
 
   this.get = function () {
@@ -12,6 +14,8 @@ var LegalPage = function () {
   };
 
   this.create = function () {
+    EC.visibilityOf(this.tosTextarea, browser.params.timeOutLimit);
+    this.tosTextarea.click();
     this.tosTextarea.sendKeys('Lorem Ipsum');
     this.submitButton.click();
   };

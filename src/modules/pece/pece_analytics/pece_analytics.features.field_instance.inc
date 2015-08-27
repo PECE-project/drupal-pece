@@ -40,7 +40,7 @@ function pece_analytics_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'entityconnect_icon_add' => 0,
+    'entityconnect_icon_add' => 1,
     'entityconnect_icon_edit' => 0,
     'entityconnect_unload_add' => 0,
     'entityconnect_unload_edit' => 1,

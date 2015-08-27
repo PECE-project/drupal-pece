@@ -13,18 +13,19 @@ var AnalyticPage = function () {
   this.mainElements = {
 
     // Form main elements.
-    titleField         : element(by.css('#pece-analytic-node-form #edit-title')),
-    uriField           : element(by.css('#pece-analytic-node-form #edit-field-pece-uri-und-0-value')),
-    tagsField          : element(by.css('#pece-analytic-node-form #edit-field-pece-tags-und')),
+    titleField       : $('#pece-analytic-node-form #edit-title'),
+    uriField         : $('#pece-analytic-node-form #edit-field-pece-uri-und-0-value'),
+    tagsField        : $('#pece-analytic-node-form #edit-field-pece-tags-und'),
+    questionSetField : $('#pece-analytic-node-form #edit-field-pece-struct-analytics-und'),
 
     // Right side form elements.
-    publishedOnDateField   : element(by.css('#pece-analytic-node-form .radix-layouts-sidebar #edit-pubdate-datepicker-popup-0')),
-    createNewRevisionField : element(by.css('#pece-analytic-node-form .radix-layouts-sidebar #edit-log')),
-    authorField            : element(by.css('#pece-analytic-node-form .radix-layouts-sidebar #edit-name')),
-    dateField              : element(by.css('#pece-analytic-node-form .radix-layouts-sidebar #edit-date-datepicker-popup-0'))
+    publishedOnDateField   : $('#pece-analytic-node-form .radix-layouts-sidebar #edit-pubdate-datepicker-popup-0'),
+    createNewRevisionField : $('#pece-analytic-node-form .radix-layouts-sidebar #edit-log'),
+    authorField            : $('#pece-analytic-node-form .radix-layouts-sidebar #edit-name'),
+    dateField              : $('#pece-analytic-node-form .radix-layouts-sidebar #edit-date-datepicker-popup-0')
   };
 
-  this.publishButton = element(by.css('#edit-submit'));
+  this.publishButton = $('#edit-submit');
 
   // Define text pageobject methods.
   this.get = function () {

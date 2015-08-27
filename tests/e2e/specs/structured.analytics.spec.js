@@ -30,6 +30,8 @@ describe ('Structured Analytics' , function () {
   });
 
   it ('Add a Structred Analytics as an authenticated user', function () {
+    var questionSetTitle = 'Sample Structured Analytics (Question set)';
+
     AllPages.SamplePage.get('admin/config/people/legal');
     AllPages.LegalPage.create();
     AllPages.AuthenticationPage.logout();
@@ -41,10 +43,7 @@ describe ('Structured Analytics' , function () {
     AllPages.PeoplePage.addRole(AllPages.RegistrationPage.simpleUser.email, 5);
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(AllPages.RegistrationPage.simpleUser.username, AllPages.RegistrationPage.simpleUser.pass);
-    AllPages.AnalyticPage.get();
-    AllPages.AnalyticPage.add('Sample Analytic');
-    AllPages.StructuredAnalyticsPage.get();
-    AllPages.StructuredAnalyticsPage.add('Structured Analytics', 'Sample Analytic');
-    AllPages.SamplePage.checkMessage('Structured Analytics (Question Set) Structured Analytics has been created.');
+    AllPages.StructuredAnalyticsPage.add(questionSetTitle);
+    expect(AllPages.AnalyticPage.mainElements.questionSetField.element(by.cssContainingText('label', questionSetTitle)));
   });
 });

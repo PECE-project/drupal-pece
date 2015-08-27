@@ -11,7 +11,7 @@ function pece_annotations_views_default_views() {
   $export = array();
 
   $view = new view();
-  $view->name = 'pece_analytics_ref';
+  $view->name = 'pece_annotations_analytics_ref';
   $view->description = 'PECE\'s Analytics reference list.';
   $view->tag = 'default';
   $view->base_table = 'node';
@@ -134,7 +134,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $translatables['pece_analytics_ref'] = array(
+  $translatables['pece_annotations_analytics_ref'] = array(
     t('Master'),
     t('more'),
     t('Apply'),
@@ -152,7 +152,7 @@ function pece_annotations_views_default_views() {
     t('Question'),
     t('Entity Reference View Widget'),
   );
-  $export['pece_analytics_ref'] = $view;
+  $export['pece_annotations_analytics_ref'] = $view;
 
   return $export;
 }

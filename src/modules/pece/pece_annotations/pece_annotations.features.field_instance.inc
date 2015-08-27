@@ -110,7 +110,7 @@ function pece_annotations_field_default_field_instances() {
         'pass_argument' => 1,
         'pass_arguments' => '',
         'rendered_entity' => 0,
-        'view' => 'pece_analytics_ref|entityreference_view_widget_1',
+        'view' => 'pece_annotations_analytics_ref|entityreference_view_widget_1',
         'view_mode' => 'full',
       ),
       'type' => 'entityreference_view_widget',
