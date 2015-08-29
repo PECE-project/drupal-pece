@@ -77,11 +77,12 @@ function pece_annotations_annotation_pane_render($subtype, $conf, $args, $contex
       ),
     );
 
-    pece_core_modal_presets('Annotate', '700', '520');
+    pece_core_modal_presets('Annotate', '500', '350');
 
     // Use CTools API to generate the link.
+    $alt = t('Annotate %title', array('%title' => $node->title));
     $content['annotate_link'] = array(
-      '#markup' => ctools_modal_text_button(t('Annotate'), 'annotation/add/' . $node->nid . '/nojs', t('Annotate'), 'ctools-modal-annotate annotate-link'),
+      '#markup' => ctools_modal_text_button(t('Annotate'), 'annotation/add/nojs/' . $node->nid . '/form', $alt, 'ctools-modal-annotate annotate-link'),
     );
 
     $block->content = $content;

@@ -18,112 +18,15 @@ function pece_annotations_ctools_plugin_directory($module, $plugin) {
  */
 function pece_annotations_menu() {
 
-  $items['annotation/add/%node/%ctools_js'] = array(
+ $items['annotation/add/%ctools_js/%node/form'] = array(
     'title' => 'Annotate',
-    'page callback' => 'pece_annotations_annotate',
-    'page arguments' => array(3, 2),
+    'page callback' => 'pece_annotations_annotate_form',
+    'page arguments' => array(2, 3),
     'access callback' => TRUE,
-    'type' => MENU_CALLBACK
-  );
-
-  $items['question-set'] = array(
-    'title' => 'Question Set',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('pece_annotations_question_set_form'),
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK
+    'type' => MENU_CALLBACK,
   );
 
   return $items;
-}
-
-/**
- * A modal static page callback.
- * @param $js
- *   boolean CTools determination whether the user's browser is javascript enabled.
- * @param $nid
- *   string The node ID of passed as an argument from the hook_menu() path
- * @return
- *   string The annotation creation wizard form, that will fill the modal window.
- */
-function pece_annotations_annotate($js = NULL, $node = NULL) {
-
-  $artifacts = array(
-    'pece_artifact_audio',
-    'pece_artifact_fieldnote',
-    'pece_artifact_image',
-    'pece_artifact_pdf',
-    'pece_artifact_text',
-    'pece_artifact_video',
-    'pece_artifact_website',
-  );
-
-  // Make sure that the nid was sent.
-  if ($node == NULL) {
-    watchdog('pece_annotations', 'Unable to load the page. No node id was sent.', array(), WATCHDOG_ERROR);
-    return 'No node id was sent. Error.';
-  }
-
-  // Prevent usind
-  if (!in_array($node->type, $artifacts)) {
-    watchdog('pece_annotations', 'Attempting to load a node type that isn\'t an artifact. Node type: %type', array('%type' => $node->type), WATCHDOG_NOTICE);
-    return 'Only Artifacts can be annotated. Error.';
-  }
-
-  // Displays annotation's page in case of the JS is disbled.
-  if (!$js) {
-    drupal_goto('node/add/pece-annotation', array(), 302);
-    return FALSE;
-  }
-
-  // Required includes for ctools to work:
-  ctools_include('modal');
-  ctools_include('ajax');
-
-  $output = pece_annotations_annotate_form();
-
-  $contents = render($output);
-
-  return ctools_modal_render(t('Annotate %title', array('%title' => $node->title)), $contents) ;
-}
-
-/**
- * Annotate Form builder.
- */
-function pece_annotations_annotate_form(&$form, &$form_state) {
-
-  $tree = pece_analytics_fetch_structured_analytics();
-
-  $options = array('query' => array('destination' => current_path()));
-  $add_link = l(t('Add Analytic'), 'node/add/pece-analytic');
-  $form['content'] = array(
-    '#markup' => t('No Analytic available yet. !add_new', array('!add_new' => $add_link)),
-  );
-
-  if (empty($tree)) {
-    return $form;
-  }
-
-  $form['content'] = array(
-    '#markup' => 'Question Set list',
-  );
-
-  return $form;
-}
-
-/**
- * Question Set list Form builder.
- */
-function pece_annotations_question_set_form() {
-
-  $form = array();
-
-  // $voc = taxononmy_vacabulary_machine_name_load('pece_structured_analytics');
-  dsm($voc, 'Vocab');
-  // $tree = taxonomy_get_tree($voc->vid);
-  // dsm($tree, 'Tree');
-
-  return $form;
 }
 
 /**
@@ -134,4 +37,435 @@ function pece_annotations_form_pece_annotation_node_form_alter(&$form, &$form_st
   $form['comment_settings']['#access'] = FALSE;
   // We cannot allow the content to be authored by anonymous.
   $form['author']['name']['#required'] = TRUE;
+}
+
+/**
+ * Page callback: Handles multistep precessing.
+ *
+ * @return string
+ *   Multistep wizard output.
+ *
+ * @see pece_annotations_annotate_menu()
+ */
+function pece_annotations_annotate_form($js = NULL, $node = NULL, $step = NULL) {
+
+  if ($js) {
+    ctools_include('modal');
+    ctools_include('ajax');
+  }
+
+  if (!$node) {
+    $form['empty'] = array(
+      '#markup' => 'Missing artifact data. Please check the link url.'
+    );
+
+    return drupal_render($form);
+  }
+
+  // Define array for ctools multistep wizard.
+  $form_info = array(
+    'id' => 'pece_annotations_annotate',
+    'path' => "annotation/add/" . ($js ? 'ajax' : 'nojs') . "/" . $node->nid . "/form/%step",
+    'show trail' => TRUE,
+    'show back' => TRUE,
+    'show cancel' => TRUE,
+    'show return' => FALSE,
+    'next callback' =>  'pece_annotations_annotate_wizard_next',
+    'finish callback' => 'pece_annotations_annotate_wizard_finish',
+    'cancel callback' => 'pece_annotations_annotate_wizard_cancel',
+
+   // Forms order.
+    'order' => array(
+      'start' => t('Question set selection'),
+      'second' => t('Question selection'),
+      'third' => t('Annotate'),
+    ),
+
+   // Define forms
+    'forms' => array(
+      'start' => array(
+        'form id' => 'pece_annotations_annotate_form_start'
+      ),
+      'second' => array(
+        'form id' => 'pece_annotations_annotate_form_second'
+      ),
+      'third' => array(
+        'form id' => 'pece_annotations_annotate_form_third'
+      ),
+    ),
+  );
+
+  // We're not using any real storage here, so we're going to set our
+  // object_id to 1. When using wizard forms, id management turns
+  // out to be one of the hardest parts. Editing an object with an id
+  // is easy, but new objects don't usually have ids until somewhere
+  // in creation.
+  //
+  // We skip all this here by just using an id of 1.
+  $object_id = 1;
+
+  if (empty($step)) {
+
+    // We reset the form when $step is NULL because that means they have
+    // for whatever reason started over.
+    pece_annotations_annotate_cache_clear($object_id);
+    $step = 'start';
+  }
+
+  // This automatically gets defaults if there wasn't anything saved.
+  $object = pece_annotations_annotate_cache_get($object_id);
+
+  // live $form_state changes.
+  $form_state = array(
+    'ajax' => $js,
+    // Put our object and ID into the form state cache so we can easily find it.
+    'object_id' => $object_id,
+    'object' => &$object,
+  );
+
+  // Stores the node entity to use later.
+  $form_state['object']->artifact = $node;
+
+  // Send this all off to our form. This is like drupal_get_form only wizardy.
+  ctools_include('wizard');
+  $form = ctools_wizard_multistep_form($form_info, $step, $form_state);
+  $output = drupal_render($form);
+  if ($js) {
+
+    // If javascript is active, we have to use a render array.
+    $commands = array();
+    if ($output === FALSE || !empty($form_state['complete'])) {
+      // Dismiss the modal.
+      $commands[] = ajax_command_html('#ctools-sample', render(pece_annotations_annotate_get_result($object)));
+      $commands[] = ctools_modal_command_dismiss();
+    }
+    elseif (!empty($form_state['cancel'])) {
+
+      // If cancelling, return to the activity.
+      $commands[] = ctools_modal_command_dismiss();
+    }
+    else {
+      $commands = ctools_modal_form_render($form_state, $output);
+    }
+    print ajax_render($commands);
+  }
+  else {
+    if ($output === FALSE || !empty($form_state['complete'])) {
+      return drupal_goto('node/' . $object->nid);
+    }
+    elseif (!empty($form_state['cancel'])) {
+      drupal_goto('node/' . $node->nid);
+    }
+    else {
+      return $output;
+    }
+  }
+}
+
+/**
+ * Clears the wizard cache.
+ *
+ * @param integer $id
+ *   cache id.
+ */
+function pece_annotations_annotate_cache_clear($id) {
+  ctools_include('object-cache');
+  ctools_object_cache_clear('pece_annotations_annotate', $id);
+}
+
+/**
+ * Stores our little cache so that we can retain data from form to form.
+ *
+ * @param integer $id
+ *   cache id.
+ * @param object $object
+ *   object with form values.
+ */
+function pece_annotations_annotate_cache_set($id, $object) {
+  ctools_include('object-cache');
+  ctools_object_cache_set('pece_annotations_annotate', $id, $object);
+}
+
+/**
+ * Gets the current object from the cache, or default.
+ *
+ * @param integer $id
+ *   cache id.
+ *
+ * @return object
+ *   cache with stored stuff.
+ */
+function pece_annotations_annotate_cache_get($id) {
+  ctools_include('object-cache');
+  $object = ctools_object_cache_get('pece_annotations_annotate', $id);
+  if (!$object) {
+    // Create a default object.
+    $object = new stdClass;
+  }
+
+  return $object;
+}
+
+/**
+ * Handles the 'next' click on the add/edit pane form wizard.
+ *
+ * All we need to do is store the updated pane in the cache.
+ */
+function pece_annotations_annotate_wizard_next(&$form_state) {
+  pece_annotations_annotate_cache_set($form_state['object_id'], $form_state['object']);
+}
+
+/**
+ * Handles the 'finish' click on teh add/edit pane form wizard.
+ *
+ * All we need to do is set a flag so the return can handle adding
+ * the pane.
+ */
+function pece_annotations_annotate_wizard_finish(&$form_state) {
+  $form_state['complete'] = TRUE;
+}
+
+/**
+ * Handles the 'cancel' click on the add/edit pane form wizard.
+ */
+function pece_annotations_annotate_wizard_cancel(&$form_state) {
+  $form_state['cancel'] = TRUE;
+}
+
+
+function _form_header(&$form, &$form_state) {
+
+  $items = array();
+  if(isset($form_state['object']->header)) {
+    $items = $form_state['object']->header;
+  }
+
+  $form['annotation_info'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Annotation info:'),
+    '#weight' => 0,
+    '#collapsible' => FASLE,
+    '#collapsed' => FALSE,
+  );
+
+  $form['annotation_info']['data'] = array(
+    '#type' => 'item',
+    '#markup' => theme('item_list', array('items' => $items)),
+  );
+
+  return $form;
+}
+
+/**
+ * Generates first form.
+ *
+ * @ingroup forms
+ */
+function pece_annotations_annotate_form_start($form, &$form_state) {
+
+  $voc = taxonomy_vocabulary_machine_name_load('pece_structured_analytics');
+  $tree = taxonomy_get_tree($voc->vid);
+  $items = $header = array();
+  $add_link = l(t('Add Analytic'), 'node/add/pece-analytic');
+
+  $form['struct_analytics'] = array(
+    '#markup' => t('No Analytic available yet. !add_new', array('!add_new' => $add_link)),
+  );
+
+  if (empty($tree)) {
+    return $form;
+  }
+
+  foreach ($tree as $term) {
+    $items[$term->tid] = $term->name ;
+  }
+
+  $form_state['object']->struct_analitycs_tree = $items;
+
+  $header[] = '<b>Artifact</b>: ' . $form_state['object']->artifact->title;
+  $form_state['object']->header = $header;
+
+  _form_header($form, $form_state);
+
+  $form['struct_analytics'] = array(
+    '#type' => 'radios',
+    '#title' => t('Structured analytics'),
+    '#description' => t('Select the Question set you are about to respond.'),
+    '#options' => $items,
+    '#default_value' => isset($form_state['object']->struct_analytics) ? $form_state['object']->struct_analytics : '',
+    '#required' => TRUE,
+  );
+
+  return $form;
+}
+
+/**
+ * Handles submit of first form.
+ */
+function pece_annotations_annotate_form_start_submit($form, &$form_state) {
+  $form_state['object']->struct_analytics = $form_state['values']['struct_analytics'];
+}
+
+/**
+ * Generates second form.
+ *
+ * @ingroup forms
+ */
+function pece_annotations_annotate_form_second($form, &$form_state) {
+  global $user;
+
+  $header = array();
+  $struct_analytic_tid = $form_state['object']->struct_analytics;
+
+  $header[] = '<b>Question set</b>: ' . $form_state['object']->struct_analitycs_tree[$struct_analytic_tid];
+  $form_state['object']->header[] = $header;
+
+  _form_header($form, $form_state);
+
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'pece_analytic')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_pece_struct_analytics', 'target_id', array($struct_analytic_tid))
+    ->addMetaData('account', user_load($user->uid));
+
+  $result = $query->execute();
+
+  if (isset($result['node'])) {
+    $nids = array_keys($result['node']);
+    $analytics_items = entity_load('node', $nids);
+  }
+
+  $items = array();
+
+  foreach ($analytics_items as $analytic) {
+    $items[$analytic->nid] = $analytic->title;
+  }
+  $form_state['object']->analitycs_tree = $items;
+
+  $first = reset($analytics_items);
+  $default = $first->nid;
+
+  $form['analytic'] = array(
+    '#type' => 'radios',
+    '#title' => t('Analytic'),
+    '#description' => t('The Question this annotation responds to.'),
+    '#options' => $items,
+    '#default_value' => isset($form_state['object']->analytic) ? $form_state['object']->analytic : $default,
+    '#required' => TRUE,
+  );
+
+  return $form;
+}
+
+/**
+ * Handles submit for second form.
+ */
+function pece_annotations_annotate_form_second_submit($form, &$form_state) {
+  $form_state['object']->analytic = $form_state['values']['analytic'];
+}
+
+/**
+ * Generates third form.
+ *
+ * @ingroup forms
+ */
+function pece_annotations_annotate_form_third($form, &$form_state) {
+
+  $header = array();
+  $analytic_tid = $form_state['object']->analytic;
+
+  $header[] = '<b>Question:</b> ' . $form_state['object']->analitycs_tree[$analytic_tid];
+  $form_state['object']->header[] = $header;
+
+  _form_header($form, $form_state);
+
+  $form['annotation_title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Title'),
+    '#size' => 60,
+    '#maxlength' => 128,
+    '#required' => TRUE,
+  );
+
+  // Create the entity to attach its fields to the form.
+  $values = array(
+    'type' => 'pece_annotation',
+    'uid' => $user->uid,
+    'status' => 1,
+    'comment' => 0,
+    'promote' => 0,
+  );
+  $entity = $form_state['object']->annotation_entity = entity_create('node', $values);
+
+  $options = array(
+    'field_name' => array(
+      'field_pece_license',
+      'field_pece_tags',
+    ),
+  );
+  field_attach_form('node', $entity, $form, $form_state, NULL, array());
+
+  // unset unnecessary fields.
+  unset($form['body']);
+  unset($form['field_pece_analytic']);
+  unset($form['field_pece_artifact']);
+  unset($form['field_pece_uri']);
+
+  // Simplify the body field.
+  $form['body'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Annotation'),
+    '#cols' => 60,
+    '#rows' => 5,
+    '#required' => TRUE,
+  );
+
+  return $form;
+}
+
+/**
+ * Handles submit for third form.
+ */
+function pece_annotations_annotate_form_third_submit(&$form, &$form_state) {
+  global $user;
+
+  $form_state['object']->title = $form_state['values']['annotation_title'];
+  $form_state['object']->body = $form_state['values']['body'];
+
+  $values = array(
+    'type' => 'pece_annotation',
+    'uid' => $user->uid,
+    'status' => 1,
+    'comment' => 0,
+    'promote' => 0,
+  );
+  $entity = entity_create('node', $values);
+  $form_state['object']->nid = $entity->nid;
+  $annotation_values = $form_state['object'];
+  $annotation_values->artifact = $form['#artifact_node']->nid;
+
+  $node_wrapper = entity_metadata_wrapper('node', $entity);
+
+  // Manualy add the values into the node.
+  $node_wrapper->title->set($annotation_values->title);
+  $node_wrapper->body->set(array('value' => $annotation_values->body));
+  $node_wrapper->field_pece_uri->set('pece_annotation_' . REQUEST_TIME);
+  $node_wrapper->field_pece_artifact->set(intval($annotation_values->artifact));
+  $node_wrapper->field_pece_analytic->set(intval($annotation_values->analytic));
+
+  // An easy way to save the license and tags fields.
+  field_attach_submit('node', $entity, $form, $form_state);
+  $node_wrapper->save();
+
+  drupal_set_message(t('Your %annotation was been created. !link ', array(
+    '%annotation' => $annotation_values->title,
+    '!link' => l('View annotation', 'node/' . $entity->nid),
+  )), 'status');
+
+  ctools_include('ajax');
+  ctools_add_js('ajax-responder');
+  $commands[] = ctools_ajax_command_reload();
+  print ajax_render($commands);
+  exit;
 }
