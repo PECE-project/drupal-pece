@@ -243,7 +243,7 @@ function _form_header(&$form, &$form_state) {
   $form['annotation_info'] = array(
     '#type' => 'fieldset',
     '#title' => t('Annotation info:'),
-    '#weight' => 0,
+    '#weight' => -10,
     '#collapsible' => FASLE,
     '#collapsed' => FALSE,
   );
@@ -353,6 +353,13 @@ function pece_annotations_annotate_form_second($form, &$form_state) {
     '#options' => $items,
     '#default_value' => isset($form_state['object']->analytic) ? $form_state['object']->analytic : $default,
     '#required' => TRUE,
+  );
+
+  $add_link = l(t('Add Analytic'), 'node/add/pece-analytic');
+
+  $form['footer'] = array(
+    '#markup' => t('It\'s a new analytic? !add_new', array('!add_new' => $add_link)),
+    '#weight' => 1000,
   );
 
   return $form;
