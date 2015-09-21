@@ -74,15 +74,17 @@ projects[radix_views][subdir] = contrib
 
 projects[radix][type] = theme
 projects[radix][version] = 3.0-rc2
+projects[radix][subdir] = contrib
 
 ; Ember for admin
 projects[ember][type] = theme
 projects[ember][version] = 2.0-alpha3
+projects[ember][subdir] = contrib
 
 ; PECE Default Theme
 projects[scholarly_lite][type] = theme
 projects[scholarly_lite][version] = 1.0
-
+projects[scholarly_lite][subdir] = contrib
 
 ; =====================
 ; Libraries

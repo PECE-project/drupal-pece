@@ -35,4 +35,4 @@ drush genc 3 0 --types=pece_artifact_text
 drush genc 3 0 --types=pece_artifact_image
 drush genc 3 0 --types=pece_artifact_audio
 drush genc 3 0 --types=pece_artifact_video
-drush genc 3 0 --types=pece_artifact_field_note
+drush genc 3 0 --types=pece_artifact_fieldnote
