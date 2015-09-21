@@ -22,7 +22,7 @@ function pece_install() {
  * Set the default theme.
  */
 function _pece_set_up_theme() {
-  $theme = 'pece_radix';
+  $theme = 'scholarly_lite';
   $admin_theme = 'ember';
   theme_enable(array($theme));
   variable_set('theme_default', $theme);
@@ -41,10 +41,10 @@ function pece_kw_manifests_info() {
     'callback' => 'pece_manifest_define_themes',
   );
 
-//  $manifests['enable_devel_modules'] = array(
-//    'callback' => 'pece_manifest_enable_devel_modules',
-//    'require environment' => array('development', 'local'),
-//  );
+ $manifests['enable_devel_modules'] = array(
+   'callback' => 'pece_manifest_enable_devel_modules',
+   'require environment' => array('development', 'local'),
+ );
 
   return $manifests;
 }
@@ -56,4 +56,11 @@ function pece_kw_manifests_info() {
 function pece_manifest_define_themes() {
   // set the default theme
   _pece_set_up_theme();
+}
+
+function pece_manifest_enable_devel_modules() {
+  module_enable(array(
+    'devel_generate',
+    'search_krumo'
+  ));
 }

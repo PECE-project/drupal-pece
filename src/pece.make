@@ -1,6 +1,11 @@
 core = 7.x
 api = 2
 
+
+; =====================
+; kraftwagen
+; =====================
+
 projects[kw_manifests][type] = module
 projects[kw_manifests][download][type] = git
 projects[kw_manifests][download][url] = "git://github.com/kraftwagen/kw-manifests.git"
@@ -10,6 +15,10 @@ projects[kw_itemnames][type] = module
 projects[kw_itemnames][download][type] = git
 projects[kw_itemnames][download][url] = "git://github.com/kraftwagen/kw-itemnames.git"
 projects[kw_itemnames][subdir] = kraftwagen
+
+; =====================
+; Panopoly
+; =====================
 
 ; The Panopoly Foundation
 projects[panopoly_core][version] = 1.26
@@ -48,16 +57,51 @@ projects[panopoly_test][version] = 1.26
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
-projects[radix][version] = 3.0-rc2
-projects[radix][subdir] = contrib
 projects[radix_layouts][version] = 3.3
 projects[radix_layouts][subdir] = contrib
 projects[radix_views][version] = 1.0
 projects[radix_views][subdir] = contrib
+
 ;projects[radix_colorizer][version] = 1.x-dev
 ;projects[radix_colorizer][subdir] = contrib
 ;projects[radix_admin][version] = 3.x-dev
 ;projects[radix_admin][subdir] = contrib
+
+
+; =====================
+; Themes
+; =====================
+
+projects[radix][type] = theme
+projects[radix][version] = 3.0-rc2
+
+; Ember for admin
+projects[ember][type] = theme
+projects[ember][version] = 2.0-alpha3
+
+; PECE Default Theme
+projects[scholarly_lite][type] = theme
+projects[scholarly_lite][version] = 1.0
+
+
+; =====================
+; Libraries
+; =====================
+
+libraries[phpmailer][download][type] = git
+libraries[phpmailer][download][url] = https://github.com/Synchro/PHPMailer.git
+libraries[phpmailer][download][revision] = d3802c597bff8f6c2ccfa3eab2a511aa01b8d68f
+libraries[phpmailer][download][branch] = master
+
+; AnnotatorJS library.
+;libraries[annotator][download][type] = file
+;libraries[annotator][download][url] = https://github.com/openannotation/annotator/releases/download/v1.2.10/annotator.1.2.10.zip
+;libraries[annotator][download][subtree] = annotator.1.2.10
+
+
+; =====================
+; Other
+; =====================
 
 ; Colorizer
 ;projects[colorizer][version] = 1.7
@@ -93,9 +137,6 @@ projects[xautoload][patch][] = "https://www.drupal.org/files/issues/base_table_o
 projects[jquery_update][subdir] = contrib
 projects[jquery_update][version] = 2.6
 
-; Ember for admin
-projects[ember][subdir] = contrib
-projects[ember][version] = 2.0-alpha3
 
 ; Organic groups
 projects[og][subdir] = contrib
@@ -178,25 +219,3 @@ projects[taxonomy_access_fix][version] = 2.2
 ; Annotator
 ;projects[annotator][subdir] = contrib
 ;projects[annotator][version] = 1.x-dev
-
-; *****************************************
-; ************** PECE Themes **************
-
-projects[radix][type] = theme
-projects[radix][version] = 3.0-rc2
-
-projects[ember][type] = theme
-projects[ember][version] = 2.0-alpha3
-
-; *****************************************
-; ************** Libraries ****************
-
-libraries[phpmailer][download][type] = git
-libraries[phpmailer][download][url] = https://github.com/Synchro/PHPMailer.git
-libraries[phpmailer][download][revision] = d3802c597bff8f6c2ccfa3eab2a511aa01b8d68f
-libraries[phpmailer][download][branch] = master
-
-; AnnotatorJS library.
-;libraries[annotator][download][type] = file
-;libraries[annotator][download][url] = https://github.com/openannotation/annotator/releases/download/v1.2.10/annotator.1.2.10.zip
-;libraries[annotator][download][subtree] = annotator.1.2.10
