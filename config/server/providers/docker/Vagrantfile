@@ -19,6 +19,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     a.vm.synced_folder "../../../../", "/home/vagrant/pece"
 
+    # If hostsupdater plugin is installed, add all servernames as aliases.
+    if Vagrant.has_plugin?("vagrant-hostsupdater")
+      a.hostsupdater.aliases = []
+      a.hostsupdater.aliases.push(a.vm.hostname)
+    end
+
     a.ssh.port = 22
     a.vm.provision "ansible" do |ansible|
       ansible.playbook = "../../playbook.yml"
