@@ -22,7 +22,7 @@ function pece_install() {
  * Set the default theme.
  */
 function _pece_set_up_theme() {
-  $theme = 'scholarly_lite';
+  $theme = 'pece_scholarly_lite';
   $admin_theme = 'ember';
   theme_enable(array($theme));
   variable_set('theme_default', $theme);
