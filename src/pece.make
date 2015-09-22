@@ -21,43 +21,44 @@ projects[kw_itemnames][subdir] = kraftwagen
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_core][version] = 1.26
+projects[panopoly_core][version] = 1.27
 projects[panopoly_core][subdir] = contrib
+projects[panopoly_core][patch][] = https://www.drupal.org/files/issues/media-close-button-broken.patch
 
-projects[panopoly_images][version] = 1.26
+projects[panopoly_images][version] = 1.27
 projects[panopoly_images][subdir] = contrib
 
-projects[panopoly_theme][version] = 1.26
+projects[panopoly_theme][version] = 1.27
 projects[panopoly_theme][subdir] = contrib
 
-projects[panopoly_magic][version] = 1.26
+projects[panopoly_magic][version] = 1.27
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.26
+projects[panopoly_widgets][version] = 1.27
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_admin][version] = 1.26
+projects[panopoly_admin][version] = 1.27
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_users][version] = 1.26
+projects[panopoly_users][version] = 1.27
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.26
+projects[panopoly_pages][version] = 1.27
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_wysiwyg][version] = 1.26
+projects[panopoly_wysiwyg][version] = 1.27
 projects[panopoly_wysiwyg][subdir] = contrib
 
-projects[panopoly_search][version] = 1.26
+projects[panopoly_search][version] = 1.27
 projects[panopoly_search][subdir] = contrib
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.26
+projects[panopoly_test][version] = 1.27
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
-projects[radix_layouts][version] = 3.3
+projects[radix_layouts][version] = 3.4
 projects[radix_layouts][subdir] = contrib
 projects[radix_views][version] = 1.0
 projects[radix_views][subdir] = contrib
