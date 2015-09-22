@@ -68,6 +68,15 @@ projects[radix_views][subdir] = contrib
 ;projects[radix_admin][version] = 3.x-dev
 ;projects[radix_admin][subdir] = contrib
 
+; =====================
+; Administration
+; =====================
+
+projects[admin_menu][version] = 1.6
+projects[admin_menu][subdir]  = contrib
+
+projects[adminimal_admin_menu][version] = 1.6
+projects[adminimal_admin_menu][subdir]  = contrib
 
 ; =====================
 ; Themes
