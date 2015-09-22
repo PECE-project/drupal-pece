@@ -25,6 +25,14 @@ function pece_profile_user_register_form_validate($form, &$form_state) {
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_profile_form_user_profile_form_alter(&$form, &$form_state) {
+  // We're not using Panopoly's user fields.
+  $form['field_user_about']['#access'] = FALSE;
+}
+
+/**
  * Implements hook_modules_enabled().
  *
  * This hook is implemented to assign some default permissions for PECE profile.
