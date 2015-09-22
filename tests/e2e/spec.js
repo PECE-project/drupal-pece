@@ -16,9 +16,9 @@ describe ('PECE home page' , function () {
     AllPages.SamplePage.get();
   });
 
-  it ('uses \'Scholarly Lite\' theme', function () {
+  it ('uses \'PECE Scholarly Lite\' theme', function () {
   // Set the expected theme as a string to check that the correct drupal theme is been used.
-    AllPages.SamplePage.checkDrupalTheme('scholarly_lite');
+    AllPages.SamplePage.checkDrupalTheme('pece_scholarly_lite');
   });
 });
 

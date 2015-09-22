@@ -77,10 +77,10 @@ projects[radix][type] = theme
 projects[radix][version] = 3.0-rc2
 projects[radix][subdir] = contrib
 
-; Ember for admin
-projects[ember][type] = theme
-projects[ember][version] = 2.0-alpha3
-projects[ember][subdir] = contrib
+; Adminimal Theme for admin
+projects[adminimal_theme][type] = theme
+projects[adminimal_theme][version] = 1.22
+projects[adminimal_theme][subdir] = contrib
 
 ; PECE Default Theme
 projects[scholarly_lite][type] = theme
