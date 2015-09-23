@@ -72,7 +72,7 @@ projects[radix_views][subdir] = contrib
 ; Administration
 ; =====================
 
-projects[admin_menu][version] = 1.6
+projects[admin_menu][version] = 3.0-rc5
 projects[admin_menu][subdir]  = contrib
 
 projects[adminimal_admin_menu][version] = 1.6
