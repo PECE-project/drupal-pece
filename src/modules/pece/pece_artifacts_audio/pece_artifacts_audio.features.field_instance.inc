@@ -592,6 +592,50 @@ function pece_artifacts_audio_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-pece_artifact_audio-field_permissions'
+  $field_instances['node-pece_artifact_audio-field_permissions'] = array(
+    'bundle' => 'pece_artifact_audio',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 15,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'fences_wrapper' => 'div',
+    'field_name' => 'field_permissions',
+    'label' => 'Permissions',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 16,
+    ),
+  );
+
   // Exported field_instance: 'node-pece_artifact_audio-og_group_ref'
   $field_instances['node-pece_artifact_audio-og_group_ref'] = array(
     'bundle' => 'pece_artifact_audio',
@@ -673,6 +717,7 @@ function pece_artifacts_audio_field_default_field_instances() {
   t('Groups audience');
   t('License');
   t('Location');
+  t('Permissions');
   t('Tags');
   t('URI');
 
