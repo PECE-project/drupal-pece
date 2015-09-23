@@ -366,12 +366,57 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-pece_artifact_fieldnote-field_permissions'
+  $field_instances['node-pece_artifact_fieldnote-field_permissions'] = array(
+    'bundle' => 'pece_artifact_fieldnote',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 11,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'fences_wrapper' => 'div',
+    'field_name' => 'field_permissions',
+    'label' => 'Permissions',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 11,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Author(s)');
   t('Contributors');
   t('Fieldsite');
   t('License');
+  t('Permissions');
   t('Tags');
   t('Text');
   t('URI');
