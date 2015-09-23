@@ -14,7 +14,14 @@ function pece_access_node_access($node, $op, $account) {
   }
 
   $artifact_node_types = array(
+    'pece_artifact',
+    'pece_artifact_audio',
+    'pece_artifact_fieldnote',
+    'pece_artifact_image',
+    'pece_artifact_pdf',
     'pece_artifact_text',
+    'pece_artifact_video',
+    'pece_artifact_website',
   );
 
   if (in_array($node->type, $artifact_node_types)) {
@@ -32,4 +39,6 @@ function pece_access_node_access($node, $op, $account) {
         return in_array('Researcher', $account->roles) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
     }
   }
+
+  return NODE_ACCESS_IGNORE;
 }
