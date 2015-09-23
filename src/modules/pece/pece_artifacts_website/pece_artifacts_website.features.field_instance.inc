@@ -466,6 +466,50 @@ function pece_artifacts_website_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-pece_artifact_website-field_permissions'
+  $field_instances['node-pece_artifact_website-field_permissions'] = array(
+    'bundle' => 'pece_artifact_website',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 13,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'fences_wrapper' => 'div',
+    'field_name' => 'field_permissions',
+    'label' => 'Permissions',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 15,
+    ),
+  );
+
   // Exported field_instance: 'node-pece_artifact_website-og_group_ref'
   $field_instances['node-pece_artifact_website-og_group_ref'] = array(
     'bundle' => 'pece_artifact_website',
@@ -544,6 +588,7 @@ function pece_artifacts_website_field_default_field_instances() {
   t('License');
   t('Location');
   t('Only external URL are available. e.g: http://example.com');
+  t('Permissions');
   t('Tags');
   t('URI');
   t('Website URL');
