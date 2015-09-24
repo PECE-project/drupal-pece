@@ -2,15 +2,77 @@
  * Media Brwoser fixes
  */
 
+/* =====================*/
+/* Administration */
+/* ===================== */
+
 .admin-menu.onscroll #header {
   top: 30px !important;
 }
+
+body.adminimal-theme * {
+    box-sizing: border-box !important;
+}
+
+#node-edit .form-item-name label {
+  width: auto;
+}
+
+/* =====================*/
+/* Messages */
+/* ===================== */
+
+div.messages.error:before {
+  padding-top: 8px;
+}
+
+/* =====================*/
+/* Autocoplete */
+/* ===================== */
+
+#autocomplete,
+.reference-autocomplete {
+  height: 40px;
+  border: 1px solid #E1E1E1;
+  border-bottom: 2px solid #E1E1E1;
+}
+
+#autocomplete ul,
+.reference-autocomplete ul {
+  border: none;
+}
+
+#autocomplete ul li:hover,
+.reference-autocomplete ul li:hover {
+  background-color: #E1E1E1
+}
+
+#autocomplete ul li a,
+.reference-autocomplete ul li a {
+  line-height: 1.5em
+  font-size: 1.5em
+  text-align: center
+}
+
+#autocomplete ul li a:hover,
+.reference-autocomplete ul li a:hover {
+  color: #FFF
+}
+
+
+/* =====================*/
+/* Media */
+/* ===================== */
 
 #media-browser-tabset ul.tabs.primary li a:link {
   padding: 0 1em !important;
   line-height: 3em !important;
   font-weight: bold !important;
 }
+
+/* =====================*/
+/* Modal */
+/* ===================== */
 
 #modalContent a.close,
 button.ui-dialog-titlebar-close {
@@ -29,6 +91,11 @@ button.ui-dialog-titlebar-close {
   display: none;
 }
 
+#modalContent {
+  background-color: #666;
+  border-radius: 5px 5px 0 0;
+}
+
 #modalContent a.close {
   margin-top: 12px;
 }
@@ -37,10 +104,26 @@ button.ui-dialog-titlebar-close {
   border: none;
 }
 
-body.adminimal-theme * {
-    box-sizing: border-box !important;
+#modalContent fieldset {
+  border:1px solid #dddddd;
+  padding: inherit;
+  margin: 20px 0 35px;
+  height: inherit;
 }
 
-#node-edit .form-item-name label {
-  width: auto;
+#modalContent fieldset.collapsed legend {
+  border-radius: 0;
 }
+
+#modalContent fieldset legend {
+  background: #FFF;
+  border:1px solid #dddddd;
+  border-radius: 0;
+  display: inline-block;
+  width: auto;
+  padding: 5px;
+  font-size: inherit;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+
