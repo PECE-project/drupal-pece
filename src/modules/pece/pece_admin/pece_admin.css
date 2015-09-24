@@ -6,18 +6,41 @@
   top: 30px !important;
 }
 
-button.ui-dialog-titlebar-close {
-  height: 24px !important;
-  width: 24px !important;
-  top: 12px !important;
-  background: url(images/close.png) no-repeat center center !important;
-  padding: 0;
-  right: 12px !important;
-}
-
 #media-browser-tabset ul.tabs.primary li a:link {
   padding: 0 1em !important;
   line-height: 3em !important;
   font-weight: bold !important;
 }
 
+#modalContent a.close,
+button.ui-dialog-titlebar-close {
+  background: url(images/close.png) no-repeat center center !important;
+  height: 24px !important;
+  width: 24px !important;
+}
+
+button.ui-dialog-titlebar-close {
+  padding: 0;
+  right: 12px !important;
+  top: 12px !important;
+}
+
+.ui-dialog button.ui-dialog-titlebar-close span.ui-icon {
+  display: none;
+}
+
+#modalContent a.close {
+  margin-top: 12px;
+}
+
+#modalContent .modal-content {
+  border: none;
+}
+
+body.adminimal-theme * {
+    box-sizing: border-box !important;
+}
+
+#node-edit .form-item-name label {
+  width: auto;
+}
