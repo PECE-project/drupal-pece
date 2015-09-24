@@ -27,16 +27,17 @@ function pece_access_node_access($node, $op, $account) {
   if (in_array($node->type, $artifact_node_types)) {
     $node_wrapper = entity_metadata_wrapper('node', $node);
     $node_permission = $node_wrapper->field_permissions->value();
+    $is_owner = ($account->uid === $node->uid);
 
     switch ($node_permission) {
       case 'open':
         return NODE_ACCESS_ALLOW;
 
       case 'private':
-        return ($account->uid === $node->uid) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
+        return $is_owner ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
 
       case 'restricted':
-        return in_array('Researcher', $account->roles) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
+        return ($is_owner || in_array('Researcher', $account->roles)) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
     }
   }
 
