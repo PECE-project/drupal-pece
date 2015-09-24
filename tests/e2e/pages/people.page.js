@@ -40,8 +40,8 @@ var PeoplePage = function () {
   this.edit = function (email) {
     this.get();
     this.filter(email);
-    browser.wait(EC.visibilityOf(element(by.cssContainingText('a', 'edit'))), browser.params.timeoutLimit);
-    element(by.cssContainingText('a', 'edit')).click();
+    browser.wait(EC.visibilityOf(element(by.cssContainingText('td a', 'edit'))), browser.params.timeoutLimit);
+    element(by.cssContainingText('td a', 'edit')).click();
   };
 
   this.unblock = function (email) {
