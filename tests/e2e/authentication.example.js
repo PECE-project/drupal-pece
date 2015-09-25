@@ -10,7 +10,7 @@ var userInfo = {
     password: 'impossiblepassword'
 };
 
-function getInfo (info) {
+function getInfo(info) {
     return userInfo[info];
 }
 

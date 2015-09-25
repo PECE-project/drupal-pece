@@ -36,7 +36,7 @@ exports.config = {
   baseUrl: 'http://dev-pece.rpi.dropit.in/',
 
   // Here you will set things that have to happen before start testing.
-  onPrepare: function () {
+  onPrepare: function() {
     var SpecReporter = require('jasmine-spec-reporter');
 
     // Used for non-angular apps

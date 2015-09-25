@@ -4,7 +4,7 @@
 
 var EC = protractor.ExpectedConditions;
 
-var RegistrationPage = function () {
+var RegistrationPage = function() {
 
   this.defaultUser = {
     username: 'defaultuser',
@@ -53,11 +53,33 @@ var RegistrationPage = function () {
   this.tosField = element(by.css('input#edit-legal-accept'));
   this.submitButton = element(by.css('input#edit-submit'));
 
-  this.get = function () {
+  // Define registration methods.
+  this.register = function(user, email, pass, tos) {
+    this.get();
+    this.fillUserFields(user, email, pass);
+    this.checkTosField(tos);
+    this.submitRegisterForm();
+  };
+
+  this.registerProfile = function(user) {
+    this.get();
+    if (typeof(user) == 'undefined') {
+      this.fillUserFields(this.defaultUser.username, this.defaultUser.email, this.defaultUser.pass);
+      this.fillProfileFields(this.defaultUser);
+      this.checkTosField(this.defaultUser.tos);
+    } else {
+      this.fillUserFields(user.username, user.email, user.pass);
+      this.fillProfileFields(user);
+      this.checkTosField(user.tos);
+    }
+    this.submitRegisterForm();
+  };
+
+  this.get = function() {
     browser.get('user/register');
   };
 
-  this.fillUserFields = function (user, email, pass) {
+  this.fillUserFields = function(user, email, pass) {
     browser.wait(EC.visibilityOf(this.usernameField), browser.params.timeoutLimit);
     this.usernameField.sendKeys(user);
     this.emailField.sendKeys(email);
@@ -65,7 +87,7 @@ var RegistrationPage = function () {
     this.pass2Field.sendKeys(pass);
   };
 
-  this.fillProfileFields = function (user) {
+  this.fillProfileFields = function(user) {
     browser.wait(EC.visibilityOf(this.fullnameField), browser.params.timeoutLimit);
     if (typeof user.name != 'undefined') {
       this.fullnameField.sendKeys(user.name);
@@ -98,36 +120,16 @@ var RegistrationPage = function () {
     }
   };
 
-  this.checkTosField = function (tos) {
+  this.checkTosField = function(tos) {
     if (tos == true) {
       this.tosField.click();
     }
   };
 
-  this.submitRegisterForm = function () {
+  this.submitRegisterForm = function() {
     this.submitButton.click();
   };
 
-  this.register = function (user, email, pass, tos) {
-    this.get();
-    this.fillUserFields(user, email, pass);
-    this.checkTosField(tos);
-    this.submitRegisterForm();
-  };
-
-  this.registerProfile = function (user) {
-    this.get();
-    if (typeof(user) == 'undefined') {
-      this.fillUserFields(this.defaultUser.username, this.defaultUser.email, this.defaultUser.pass);
-      this.fillProfileFields(this.defaultUser);
-      this.checkTosField(this.defaultUser.tos);
-    } else {
-      this.fillUserFields(user.username, user.email, user.pass);
-      this.fillProfileFields(user);
-      this.checkTosField(user.tos);
-    }
-    this.submitRegisterForm();
-  };
 }
 
 module.exports = new RegistrationPage;

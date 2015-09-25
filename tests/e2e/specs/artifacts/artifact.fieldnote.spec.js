@@ -1,31 +1,32 @@
 /**
-* @file fieldnote.spec.js
+* @file artifact.fieldnote.spec.js
 */
 
 var AllPages = require('../../pages/all.page');
 
 // For each spec file is recommended to have just one describe.
-// A describe may the the description of a functionality/feature or even a web page, like home page, contact page, etc. It depends on the team work agreement
-describe ('Fieldnote' , function () {
+// A describe may the the description of a functionality/feature or even a web page, like home page, contact page, etc.
+// It depends on the team's work agreement.
+describe('Fieldnote', function() {
 
   // This is the pre-condition step of each test.
-  beforeEach(function () {
+  beforeEach(function() {
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
   });
 
-  afterAll(function () {
+  afterAll(function() {
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
   });
 
-  it ('verify main elements presence', function () {
+  it('verify main elements presence', function() {
     AllPages.ArtifactFieldnotePage.get();
     AllPages.ArtifactFieldnotePage.checkMainElementsPresence();
   });
 
-  it ('Add a Fieldnote as an authenticated user', function () {
+  it('Add a Fieldnote as an authenticated user', function() {
     AllPages.SamplePage.get('admin/config/people/legal');
     AllPages.LegalPage.create();
     AllPages.AuthenticationPage.logout();

@@ -1,4 +1,4 @@
-// Require authentication page object.
+// Kind of page's factory.
 var SamplePage = require('./sample.page');
 var RegistrationPage = require('./registration.page');
 var AuthenticationPage = require('./authentication.page');
@@ -19,22 +19,22 @@ var AnalyticPage = require('./analytic.page');
 var StructuredAnalyticsPage = require('./structured.analytics.page');
 
 module.exports = {
-  'SamplePage': SamplePage
-  , 'RegistrationPage': RegistrationPage
-  , 'AuthenticationPage': AuthenticationPage
-  , 'LegalPage': LegalPage
-  , 'PeceArtifactPage': PeceArtifactPage
-  , 'AddTypesPage': AddTypesPage
-  , 'ContentPage': ContentPage
-  , 'PeoplePage': PeoplePage
-  , 'UserProfilePage': UserProfilePage
-  , 'ArtifactAudioPage': ArtifactAudioPage
-  , 'ArtifactFieldnotePage': ArtifactFieldnotePage
-  , 'ArtifactImagePage': ArtifactImagePage
-  , 'ArtifactPdfPage': ArtifactPdfPage
-  , 'ArtifactTextPage': ArtifactTextPage
-  , 'ArtifactVideoPage': ArtifactVideoPage
-  , 'ArtifactWebsitePage': ArtifactWebsitePage
-  , 'AnalyticPage': AnalyticPage
-  , 'StructuredAnalyticsPage': StructuredAnalyticsPage
+  'SamplePage': SamplePage,
+  'RegistrationPage': RegistrationPage,
+  'AuthenticationPage': AuthenticationPage,
+  'LegalPage': LegalPage,
+  'PeceArtifactPage': PeceArtifactPage,
+  'AddTypesPage': AddTypesPage,
+  'ContentPage': ContentPage,
+  'PeoplePage': PeoplePage,
+  'UserProfilePage': UserProfilePage,
+  'ArtifactAudioPage': ArtifactAudioPage,
+  'ArtifactFieldnotePage': ArtifactFieldnotePage,
+  'ArtifactImagePage': ArtifactImagePage,
+  'ArtifactPdfPage': ArtifactPdfPage,
+  'ArtifactTextPage': ArtifactTextPage,
+  'ArtifactVideoPage': ArtifactVideoPage,
+  'ArtifactWebsitePage': ArtifactWebsitePage,
+  'AnalyticPage': AnalyticPage,
+  'StructuredAnalyticsPage': StructuredAnalyticsPage
 }

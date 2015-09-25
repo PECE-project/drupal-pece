@@ -1,34 +1,37 @@
 /**
-* @file user_profile.spec.js
+* @file user.profile.spec.js
 */
 
 // Require all page objects.
 var AllPages = require('../pages/all.page');
 
-describe ('User profile' , function () {
-  beforeAll(function () {
+// For each spec file is recommended to have just one describe.
+// A describe may the the description of a functionality/feature or even a web page, like home page, contact page, etc.
+// It depends on the team's work agreement.
+describe('User profile', function() {
+  beforeAll(function() {
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.SamplePage.get('admin/config/people/legal');
     AllPages.LegalPage.create();
   });
 
-  beforeEach(function () {
+  beforeEach(function() {
     AllPages.AuthenticationPage.logout();
   });
 
-  afterAll(function () {
+  afterAll(function() {
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.deleteUser('boof@bar.baz');
   });
 
-  it ('should create a new user profile', function () {
+  it('should create a new user profile', function() {
     AllPages.RegistrationPage.registerProfile();
     AllPages.SamplePage.checkMessage('Your account is currently pending approval by the site administrator.');
   });
 
-  it('check user profile after registration', function () {
+  it('check user profile after registration', function() {
     var email = 'boof@bar.baz'
       , user = {
       username: 'boof',

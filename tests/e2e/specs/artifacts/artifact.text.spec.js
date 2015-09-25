@@ -5,31 +5,32 @@
 var AllPages = require('../../pages/all.page');
 
 // For each spec file is recommended to have just one describe.
-// A describe may the the description of a functionality/feature or even a web page, like home page, contact page, etc. It depends on the team work agreement
-describe ('Text Artifact' , function () {
+// A describe may the the description of a functionality/feature or even a web page, like home page, contact page, etc.
+// It depends on the team's work agreement.
+describe('Text Artifact', function () {
   // This its the pre-condition step of each test.
-  beforeEach(function () {
+  beforeEach(function() {
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
   });
 
-  afterAll(function () {
+  afterAll(function() {
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
   });
 
-  it ('Verify main elements presence', function () {
+  it('Verify main elements presence', function() {
    AllPages.ArtifactTextPage.get();
    AllPages.ArtifactTextPage.checkMainElementsPresence();
   });
 
-  it ('Verify mandatory fields', function () {
+  it('Verify mandatory fields', function() {
     AllPages.ArtifactTextPage.get();
     AllPages.ArtifactTextPage.checkMandatoryFields();
   });
 
-  it ('Add a Text artifact as an authenticated user', function () {
+  it('Add a Text artifact as an authenticated user', function() {
     AllPages.SamplePage.get('admin/config/people/legal');
     AllPages.LegalPage.create();
     AllPages.AuthenticationPage.logout();

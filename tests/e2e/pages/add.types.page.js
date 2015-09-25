@@ -2,7 +2,7 @@
  * @file add.types.page.js
  */
 
-var AddTypesPage = function () {
+var AddTypesPage = function() {
 
   // Define add types attributes.
   this.inheritanceLink = element(by.cssContainingText('.vertical-tabs-list a', 'Inheritance'));
