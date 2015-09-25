@@ -27,7 +27,7 @@ function pece_artifacts_image_field_default_field_bases() {
     'settings' => array(
       'default_image' => 0,
       'profile2_private' => FALSE,
-      'uri_scheme' => 'public',
+      'uri_scheme' => 'private',
     ),
     'translatable' => 0,
     'type' => 'image',
