@@ -11,7 +11,7 @@
 }
 
 body.adminimal-theme * {
-    box-sizing: border-box !important;
+  box-sizing: border-box !important;
 }
 
 #node-edit .form-item-name label {
@@ -102,6 +102,20 @@ button.ui-dialog-titlebar-close {
 
 #modalContent .modal-content {
   border: none;
+}
+
+#modalContent input.form-text,
+#modalContent select,
+#modalContent textarea {
+  width: 100%;
+}
+
+#modalContent .form-textarea-wrapper {
+  margin: 0 auto;
+}
+
+#modalContent textarea {
+  margin: 0;
 }
 
 #modalContent fieldset {

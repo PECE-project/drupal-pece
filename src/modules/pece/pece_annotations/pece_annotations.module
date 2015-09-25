@@ -61,7 +61,6 @@ function pece_annotations_annotate_form($js = NULL, $node = NULL, $step = NULL) 
 
     return drupal_render($form);
   }
-
   // Define array for ctools multistep wizard.
   $form_info = array(
     'id' => 'pece_annotations_annotate',
@@ -266,10 +265,16 @@ function pece_annotations_annotate_form_start($form, &$form_state) {
   $voc = taxonomy_vocabulary_machine_name_load('pece_structured_analytics');
   $tree = taxonomy_get_tree($voc->vid);
   $items = $header = array();
-  $add_link = l(t('Add Analytic'), 'node/add/pece-analytic');
 
-  $form['struct_analytics'] = array(
-    '#markup' => t('No Analytic available yet. !add_new', array('!add_new' => $add_link)),
+  $form['new_struct_analytics'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Question set title',
+    '#weight' => 100,
+    '#states' => array(
+      'visible' => array(
+        'select[name="struct_analytics"], input[name="struct_analytics"]' => array('value' => 'add_new'),
+      ),
+    ),
   );
 
   if (empty($tree)) {
@@ -280,7 +285,7 @@ function pece_annotations_annotate_form_start($form, &$form_state) {
     $items[$term->tid] = $term->name ;
   }
 
-  $form_state['object']->struct_analitycs_tree = $items;
+  $form_state['object']->struct_analytics_tree = $items;
 
   $header[] = '<b>Artifact</b>: ' . $form_state['object']->artifact->title;
   $form_state['object']->header = $header;
@@ -291,19 +296,50 @@ function pece_annotations_annotate_form_start($form, &$form_state) {
     '#type' => 'radios',
     '#title' => t('Structured analytics'),
     '#description' => t('Select the Question set you are about to respond.'),
-    '#options' => $items,
-    '#default_value' => isset($form_state['object']->struct_analytics) ? $form_state['object']->struct_analytics : '',
-    '#required' => TRUE,
+    '#options' =>  array('add_new' => '< Create new  >') + $items,
   );
 
+  if (count($items) > 10) {
+    $form['struct_analytics']['#type'] = 'select';
+    $form['struct_analytics']['#empty_value'] = '';
+  }
+
   return $form;
+}
+
+
+/**
+ * Handles validate of first form.
+ */
+function pece_annotations_annotate_form_start_validate($form, &$form_state) {
+  if (empty($form_state['values']['struct_analytics']) && empty($form_state['values']['new_struct_analytics'])) {
+    form_set_error('struct_analytics', t('You have to choose at least one of the structured analytics options below or create a new question set by filling the %field field.', array('%field' => $form['new_struct_analytics']['#title'])));
+  }
+
+  if ($form_state['values']['struct_analytics'] == 'add_new' && empty($form_state['values']['new_struct_analytics'])) {
+    form_set_error('new_struct_analytics', t('Field %field is required.', array('%field' => $form['new_struct_analytics']['#title'])));
+  }
 }
 
 /**
  * Handles submit of first form.
  */
 function pece_annotations_annotate_form_start_submit($form, &$form_state) {
-  $form_state['object']->struct_analytics = $form_state['values']['struct_analytics'];
+  if (!empty($form_state['values']['struct_analytics'])) {
+    $form_state['object']->struct_analytics = $form_state['values']['struct_analytics'];
+  }
+  if (!empty($form_state['values']['new_struct_analytics'])) {
+    $vocabulary = taxonomy_vocabulary_machine_name_load('pece_structured_analytics');
+
+    $term = (object) array(
+      'vid' => $vocabulary->vid,
+      'name' => $form_state['values']['new_struct_analytics'],
+    );
+
+    taxonomy_term_save($term);
+    $form_state['object']->struct_analytics = $term->tid;
+    $form_state['object']->struct_analytics_tree[$term->tid] = $term->name;
+  }
 }
 
 /**
@@ -317,10 +353,21 @@ function pece_annotations_annotate_form_second($form, &$form_state) {
   $header = array();
   $struct_analytic_tid = $form_state['object']->struct_analytics;
 
-  $header[] = '<b>Question set</b>: ' . $form_state['object']->struct_analitycs_tree[$struct_analytic_tid];
+  $header[] = '<b>Question set</b>: ' . $form_state['object']->struct_analytics_tree[$struct_analytic_tid];
   $form_state['object']->header[] = $header;
 
   _form_header($form, $form_state);
+
+  $form['new_analytic'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Question title',
+    '#weight' => 100,
+    '#states' => array(
+      'visible' => array(
+        'select[name="analytic"], input[name="analytic"]' => array('value' => 'add_new'),
+      ),
+    ),
+  );
 
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'node')
@@ -344,32 +391,59 @@ function pece_annotations_annotate_form_second($form, &$form_state) {
   $form_state['object']->analitycs_tree = $items;
 
   $first = reset($analytics_items);
-  $default = $first->nid;
 
   $form['analytic'] = array(
     '#type' => 'radios',
     '#title' => t('Analytic'),
     '#description' => t('The Question this annotation responds to.'),
-    '#options' => $items,
-    '#default_value' => isset($form_state['object']->analytic) ? $form_state['object']->analytic : $default,
-    '#required' => TRUE,
+    '#options' =>  array('add_new' => '< Create new  >') + $items,
+    '#default_value' => !empty($items) ? $first->nid : 'add_new',
   );
 
-  $add_link = l(t('Add Analytic'), 'node/add/pece-analytic');
-
-  $form['footer'] = array(
-    '#markup' => t('It\'s a new analytic? !add_new', array('!add_new' => $add_link)),
-    '#weight' => 1000,
-  );
+  if (count($items) > 10) {
+    $form['analytic']['#type'] = 'select';
+    $form['analytic']['#empty_value'] = '';
+  }
 
   return $form;
+}
+
+
+/**
+ * Handles validate of first form.
+ */
+function pece_annotations_annotate_form_second_validate($form, &$form_state) {
+  if (empty($form_state['values']['analytic']) && empty($form_state['values']['new_analytic'])) {
+    form_set_error('analytic', t('You have to choose at least one of the analytics options below or create a new question by filling the %field field.', array('%field' => $form['new_analytic']['#title'])));
+  }
+
+  if ($form_state['values']['analytic'] == 'add_new' && empty($form_state['values']['new_analytic'])) {
+    form_set_error('new_analytic', t('Field %field is required.', array('%field' => $form['new_analytic']['#title'])));
+  }
 }
 
 /**
  * Handles submit for second form.
  */
 function pece_annotations_annotate_form_second_submit($form, &$form_state) {
-  $form_state['object']->analytic = $form_state['values']['analytic'];
+  if (!empty($form_state['values']['analytic'])) {
+    $form_state['object']->analytic = $form_state['values']['analytic'];
+  }
+
+  if (!empty($form_state['values']['new_analytic'])) {
+
+    $analytic_node_values =  array(
+      'type' => 'pece_analytic',
+      'title' => $form_state['values']['new_analytic'],
+    );
+
+    $analytic_node = entity_create('node', $analytic_node_values);
+    $node_wrapper = entity_metadata_wrapper('node', $analytic_node);
+    $node_wrapper->field_pece_struct_analytics->set(array($form_state['object']->struct_analytics));
+    $node_wrapper->save();
+    $form_state['object']->analytics = $node->nid;
+    $form_state['object']->analytics_tree[$node->nid] = $node->nid;
+  }
 }
 
 /**
@@ -386,14 +460,6 @@ function pece_annotations_annotate_form_third($form, &$form_state) {
   $form_state['object']->header[] = $header;
 
   _form_header($form, $form_state);
-
-  $form['annotation_title'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Title'),
-    '#size' => 60,
-    '#maxlength' => 128,
-    '#required' => TRUE,
-  );
 
   // Create the entity to attach its fields to the form.
   $values = array(
@@ -437,7 +503,6 @@ function pece_annotations_annotate_form_third($form, &$form_state) {
 function pece_annotations_annotate_form_third_submit(&$form, &$form_state) {
   global $user;
 
-  $form_state['object']->title = $form_state['values']['annotation_title'];
   $form_state['object']->body = $form_state['values']['body'];
 
   $values = array(
@@ -447,9 +512,13 @@ function pece_annotations_annotate_form_third_submit(&$form, &$form_state) {
     'comment' => 0,
     'promote' => 0,
   );
+
   $entity = entity_create('node', $values);
   $form_state['object']->nid = $entity->nid;
   $annotation_values = $form_state['object'];
+
+  // Autocreate annotation title.
+  $annotation_values->title = 'pece_annotation_' . REQUEST_TIME;
   $annotation_values->artifact = $form['#artifact_node']->nid;
 
   $node_wrapper = entity_metadata_wrapper('node', $entity);
