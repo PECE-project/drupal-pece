@@ -36,7 +36,7 @@ describe('Image Artifact', function() {
     AllPages.ArtifactImagePage.checkFileFormat();
   });
 
-  fit('Add a image artifact as researcher user', function() {
+  it('Add a image artifact as researcher user', function() {
     AllPages.SamplePage.get('admin/config/people/legal');
     AllPages.LegalPage.create();
     AllPages.AuthenticationPage.logout();
