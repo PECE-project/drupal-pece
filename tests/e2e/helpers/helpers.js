@@ -1,12 +1,9 @@
-//
-// Helper Funcions
-//
+/**
+* Helper funcions.
+*/
 
-var path = require('path')
-  , EC = protractor.ExpectedConditions;
-
-// Used for non-angular apps
-browser.ignoreSynchronization = true;
+var path = require('path');
+var EC = protractor.ExpectedConditions;
 
 function selectDropdownbyNum(element, optionNum) {
   if (optionNum) {
@@ -31,10 +28,10 @@ function clickElement(id) {
 }
 
 function addMedia(mediaButtonId, mediaFile) {
-  var mediaElement = element.all(by.id('edit-upload-upload')).last()
-    , nextButton = element(by.css('#edit-next'))
-    , saveButton = element(by.css('#edit-submit'))
-    , mediaInput = path.resolve(__dirname, '../assets/' + mediaFile);
+  var mediaElement = element.all(by.id('edit-upload-upload')).last();
+  var nextButton = element(by.css('#edit-next'));
+  var saveButton = element(by.css('#edit-submit'));
+  var mediaInput = path.resolve(__dirname, '../assets/' + mediaFile);
 
   // Click on media browse button.
   clickElement(mediaButtonId);
@@ -49,8 +46,8 @@ function addMedia(mediaButtonId, mediaFile) {
 
 // Exposed helper methods.
 module.exports = {
-  clickElement: clickElement
-  , selectDropdownbyNum: selectDropdownbyNum
-  , selectAutocompleteReference: selectAutocompleteReference
-  , addMedia: addMedia
+  clickElement: clickElement,
+  selectDropdownbyNum: selectDropdownbyNum,
+  selectAutocompleteReference: selectAutocompleteReference,
+  addMedia: addMedia
 }
