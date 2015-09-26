@@ -13,6 +13,13 @@ function pece_access_node_access($node, $op, $account) {
     return NODE_ACCESS_IGNORE;
   }
 
+  return pece_access_view_access($node, $account) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
+}
+
+/**
+ * Helper function for getting access to a node based on PECE specific rules.
+ */
+function pece_access_view_access($node, $account) {
   $artifact_node_types = array(
     'pece_artifact',
     'pece_artifact_audio',
@@ -31,15 +38,14 @@ function pece_access_node_access($node, $op, $account) {
 
     switch ($node_permission) {
       case 'open':
-        return NODE_ACCESS_ALLOW;
+        return TRUE;
 
       case 'private':
-        return $is_owner ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
+        return $is_owner;
 
       case 'restricted':
-        return ($is_owner || in_array('Researcher', $account->roles)) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
+        return ($is_owner || in_array('Researcher', $account->roles));
     }
   }
 
-  return NODE_ACCESS_IGNORE;
 }
