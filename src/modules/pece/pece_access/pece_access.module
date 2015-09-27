@@ -5,15 +5,65 @@
  * Code for the PECE Access.
  */
 
+define('PECE_ACCESS_RESEARCHER_ROLE', 'Researcher');
+
 /**
  * Implements hook_node_access().
  */
 function pece_access_node_access($node, $op, $account) {
-  if ($op !== 'view') {
+  if ($op != 'view') {
     return NODE_ACCESS_IGNORE;
   }
 
   return pece_access_view_access($node, $account) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function pece_access_entity_presave($entity, $type) {
+  if ($type != 'node') {
+    return;
+  }
+
+  $types_field_map = array(
+    'pece_artifact_audio' => 'field_pece_media_audio',
+    'pece_artifact_image' => 'field_pece_media_image',
+    'pece_artifact_pdf' => 'field_pece_media_pdf',
+    'pece_artifact_video' => 'field_pece_media_video',
+  );
+
+  if (!in_array($entity->type, array_keys($types_field_map))) {
+    return;
+  }
+
+  $node_wrapper = entity_metadata_wrapper('node', $entity);
+  $field_name = $types_field_map[$entity->type];
+  $field_value = $node_wrapper->$field_name->value();
+
+  if (empty($field_value)) {
+    return;
+  }
+
+  $file = file_load($field_value['fid']);
+
+  if (empty($file)) {
+    return;
+  }
+
+  $scheme = file_uri_scheme($file->uri);
+  $node_permission = pece_access_node_permission($entity);
+  $private_permissions = array('restricted', 'private');
+
+  if ($scheme == 'public' && in_array($node_permission, $private_permissions)) {
+    // Move file from public to private.
+    pece_access_move_file($file, 'private');
+  }
+  elseif ($scheme == 'private' && $node_permission == 'open') {
+    // Move file from private to public.
+    pece_access_move_file($file, 'public');
+  }
+
 }
 
 /**
@@ -32,9 +82,8 @@ function pece_access_view_access($node, $account) {
   );
 
   if (in_array($node->type, $artifact_node_types)) {
-    $node_wrapper = entity_metadata_wrapper('node', $node);
-    $node_permission = $node_wrapper->field_permissions->value();
     $is_owner = ($account->uid === $node->uid);
+    $node_permission = pece_access_node_permission($node);
 
     switch ($node_permission) {
       case 'open':
@@ -44,8 +93,31 @@ function pece_access_view_access($node, $account) {
         return $is_owner;
 
       case 'restricted':
-        return ($is_owner || in_array('Researcher', $account->roles));
+        return ($is_owner || in_array(PECE_ACCESS_RESEARCHER_ROLE, $account->roles));
     }
   }
 
+}
+
+/**
+ * Get permissions settings for a node based on PECE specific rules.
+ */
+function pece_access_node_permission($node) {
+  $node_wrapper = entity_metadata_wrapper('node', $node);
+  return $node_wrapper->field_permissions->value();
+}
+
+/**
+ * Move a file form public to private and vice-versa.
+ */
+function pece_access_move_file($file, $scheme) {
+  $original_scheme = ($scheme == 'public') ? 'private' : 'public';
+  $destination = str_replace($original_scheme . '://', $scheme .'://', $file->uri);
+
+  if (file_move($file, $destination)) {
+    drupal_set_message(t('The file was moved from %from to %dest.', array(
+      '%from' => $original_scheme,
+      '%dest' => $scheme,
+    )));
+  }
 }
