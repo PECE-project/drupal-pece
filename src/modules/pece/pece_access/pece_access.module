@@ -26,12 +26,7 @@ function pece_access_entity_presave($entity, $type) {
     return;
   }
 
-  $types_field_map = array(
-    'pece_artifact_audio' => 'field_pece_media_audio',
-    'pece_artifact_image' => 'field_pece_media_image',
-    'pece_artifact_pdf' => 'field_pece_media_pdf',
-    'pece_artifact_video' => 'field_pece_media_video',
-  );
+  $types_field_map = pece_access_artifact_node_types_file_fields();
 
   if (!in_array($entity->type, array_keys($types_field_map))) {
     return;
@@ -67,19 +62,56 @@ function pece_access_entity_presave($entity, $type) {
 }
 
 /**
+ * Implements hook_file_entity_access().
+ */
+function pece_access_file_entity_access($op, $file, $account) {
+  if ($op != 'view') {
+    return FILE_ENTITY_ACCESS_IGNORE;
+  }
+
+  $types_field_map = pece_access_artifact_node_types_file_fields();
+
+  // Build query to get all nodes that reference this file.
+  $query = db_select('node', 'n')
+      ->fields('n', array('nid'))
+      ->condition('n.type', array_keys($types_field_map), 'IN');
+
+  $table_counter = 1;
+  $or = db_or();
+  foreach($types_field_map as $node_type => $file_field) {
+    $table_alias = 'fd_' . $table_counter;
+    $field_name_db = $file_field . '_fid';
+
+    $query->leftJoin('field_data_' . $file_field, $table_alias, '(' . $table_alias . '.entity_id = n.nid )');
+    $or->condition($table_alias . '.' . $field_name_db, $file->fid);
+
+    $table_counter++;
+  }
+
+  $result = $query
+    ->condition($or)
+    ->execute()
+    ->fetchCol();
+
+  if (empty($result)) {
+    return FILE_ENTITY_ACCESS_IGNORE;
+  }
+
+  $nodes = node_load_multiple($result);
+
+  $grants = array();
+  foreach ($nodes as $node) {
+    $grants[] = pece_access_view_access($node, $account);
+  }
+
+  return in_array(FALSE, $grants) ? FILE_ENTITY_ACCESS_DENY : FILE_ENTITY_ACCESS_ALLOW;
+}
+
+/**
  * Helper function for getting access to a node based on PECE specific rules.
  */
 function pece_access_view_access($node, $account) {
-  $artifact_node_types = array(
-    'pece_artifact',
-    'pece_artifact_audio',
-    'pece_artifact_fieldnote',
-    'pece_artifact_image',
-    'pece_artifact_pdf',
-    'pece_artifact_text',
-    'pece_artifact_video',
-    'pece_artifact_website',
-  );
+  $artifact_node_types = pece_access_artifact_node_types();
 
   if (in_array($node->type, $artifact_node_types)) {
     $is_owner = ($account->uid === $node->uid);
@@ -120,4 +152,33 @@ function pece_access_move_file($file, $scheme) {
       '%dest' => $scheme,
     )));
   }
+}
+
+/**
+ * Helper function to provide a list of artifact node types.
+ */
+function pece_access_artifact_node_types() {
+  return array(
+    'pece_artifact',
+    'pece_artifact_audio',
+    'pece_artifact_fieldnote',
+    'pece_artifact_image',
+    'pece_artifact_pdf',
+    'pece_artifact_text',
+    'pece_artifact_video',
+    'pece_artifact_website',
+  );
+}
+
+/**
+ * Helper function to provide a list of artifact node types along with their
+ * file fields.
+ */
+function pece_access_artifact_node_types_file_fields() {
+  return array(
+    'pece_artifact_audio' => 'field_pece_media_audio',
+    'pece_artifact_image' => 'field_pece_media_image',
+    'pece_artifact_pdf' => 'field_pece_media_pdf',
+    'pece_artifact_video' => 'field_pece_media_video',
+  );
 }
