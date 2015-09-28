@@ -41,6 +41,12 @@ function pece_annotations_annotation_pane_edit_form_submit(&$form, &$form_state)
  */
 function pece_annotations_annotation_pane_render($subtype, $conf, $args, $contexts) {
 
+  global $user;
+
+  if (!user_access('create pece_annotation content', $user)) {
+    return FALSE;
+  }
+
   // Prepare response block.
   $block = new stdClass();
 
