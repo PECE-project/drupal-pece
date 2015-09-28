@@ -42,9 +42,15 @@ div.messages.error:before {
   border: none;
 }
 
+#autocomplete ul li,
+.reference-autocomplete ul li {
+  padding: 10px;
+}
+
 #autocomplete ul li:hover,
 .reference-autocomplete ul li:hover {
   background-color: #E1E1E1
+  line-height: 1.5em
 }
 
 #autocomplete ul li a,
@@ -56,7 +62,8 @@ div.messages.error:before {
 
 #autocomplete ul li a:hover,
 .reference-autocomplete ul li a:hover {
-  color: #FFF
+  color: #FFF;
+  font-weight: bold;
 }
 
 
@@ -141,3 +148,6 @@ button.ui-dialog-titlebar-close {
   margin-left: 10px;
 }
 
+#modalContent .field-type-taxonomy-term-reference {
+  overflow: inherit;
+}
