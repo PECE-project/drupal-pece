@@ -28,7 +28,7 @@ function pece_artifacts_audio_field_default_field_bases() {
       'display_default' => 0,
       'display_field' => 0,
       'profile2_private' => FALSE,
-      'uri_scheme' => 'public',
+      'uri_scheme' => 'private',
     ),
     'translatable' => 0,
     'type' => 'file',
