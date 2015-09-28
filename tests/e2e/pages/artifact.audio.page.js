@@ -115,7 +115,12 @@ var ArtifactAudioPage = function() {
     this.mainElements.titleField.sendKeys(title);
     this.mainElements.uriField.sendKeys('uri1');
     this.addAudio(fileName);
-    this.publishButton.click();
+    $('#edit-field-permissions-und-private').click();
+    
+    // Protractor already scrolled down to click in permission bullet,
+    // and can not manage to scroll back up to click in publish
+    // button, that's why the script.
+    browser.executeScript("jQuery('#edit-submit').click()");
   };
 
   this.addAudio = function(fileName) {
@@ -132,7 +137,6 @@ var ArtifactAudioPage = function() {
     nextButton.click();
     browser.switchTo().defaultContent();
   };
-
 };
 
 module.exports = new ArtifactAudioPage();

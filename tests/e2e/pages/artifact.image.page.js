@@ -113,10 +113,15 @@ var ArtifactImagePage = function() {
     this.mainElements.titleField.sendKeys(title);
     this.mainElements.uriField.sendKeys('uri1');
     this.addImage(fileName);
+    $('#edit-field-permissions-und-private').click();
     // @TODO: Discovery why the below two lines are commented.
     // this.mainElements.formatField.sendKeys('jpg');
     // this.mainElements.authorsField.sendKeys('Other author, Another Author');
-    this.publishButton.click();
+    
+    // Protractor already scrolled down to click in permission bullet,
+    // and can not manage to scroll back up to click in publish
+    // button, that's why the script.
+    browser.executeScript("jQuery('#edit-submit').click()");
   };
 
   this.addImage = function(fileName) {
@@ -136,7 +141,6 @@ var ArtifactImagePage = function() {
     saveButton.click();
     browser.switchTo().defaultContent();
   };
-
 };
 
 module.exports = new ArtifactImagePage();

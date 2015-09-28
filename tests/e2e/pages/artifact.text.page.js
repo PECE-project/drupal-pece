@@ -105,10 +105,15 @@ var ArtifactTextPage = function() {
     this.mainElements.titleField.sendKeys(title);
     this.mainElements.uriField.sendKeys('texturi1');
     this.mainElements.textField.sendKeys(text);
+    $('#edit-field-permissions-und-private').click();
     // @TODO: Discovery why the below two lines are comented.
     // this.mainElements.tagsField.sendKeys('foo');
     // this.mainElements.authorsField.sandKeys('John Do');
-    this.publishButton.click();
+    
+    // Protractor already scrolled down to click in permission bullet,
+    // and can not manage to scroll back up to click in publish
+    // button, that's why the script.
+    browser.executeScript("jQuery('#edit-submit').click()");
   };
 };
 

@@ -13,46 +13,44 @@ var ArtifactPdfPage = function() {
   this.mainElements = {
 
     // Form main elements.
-    titleField: element(by.css('#pece-artifact-pdf-node-form #edit-title')),
-    uriField: element(by.css('#pece-artifact-pdf-node-form #edit-field-pece-uri-und-0-value')),
-    fieldsiteField: element(by.css('#pece-artifact-pdf-node-form #edit-field-pece-fieldsite-und-0-target-id')),
-    pdfField: element(by.css('#pece-artifact-pdf-node-form #edit-field-pece-media-pdf-und-0')),
-    contributorsFields: element(by.css('#pece-artifact-pdf-node-form #edit-field-pece-contributors-und-0-target-id')),
-    tagsField: element(by.css('#pece-artifact-pdf-node-form #edit-field-pece-tags-und')),
-    licenceField: element(by.css('#pece-artifact-pdf-node-form #edit-field-pece-license-und-0-licence')),
-    authorsField: element(by.css('#pece-artifact-pdf-node-form #edit-field-pece-authors-und')),
+    titleField         : $('#pece-artifact-pdf-node-form #edit-title'),
+    uriField           : $('#pece-artifact-pdf-node-form #edit-field-pece-uri-und-0-value'),
+    fieldsiteField     : $('#pece-artifact-pdf-node-form #edit-field-pece-fieldsite-und-0-target-id'),
+    pdfField           : $('#pece-artifact-pdf-node-form #edit-field-pece-media-pdf-und-0'),
+    contributorsFields : $('#pece-artifact-pdf-node-form #edit-field-pece-contributors-und-0-target-id'),
+    tagsField          : $('#pece-artifact-pdf-node-form #edit-field-pece-tags-und'),
+    licenceField       : $('#pece-artifact-pdf-node-form #edit-field-pece-license-und-0-licence'),
+    authorsField       : $('#pece-artifact-pdf-node-form #edit-field-pece-authors-und'),
 
     // Right side form elements.
-    publishedOnDateField: element(by.css('#pece-artifact-pdf-node-form .radix-layouts-sidebar #edit-pubdate-datepicker-popup-0')),
-    createNewRevisionField: element(by.css('#pece-artifact-pdf-node-form .radix-layouts-sidebar #edit-log')),
-    authorField: element(by.css('#pece-artifact-pdf-node-form .radix-layouts-sidebar #edit-name')),
-    dateField: element(by.css('#pece-artifact-pdf-node-form .radix-layouts-sidebar #edit-date-datepicker-popup-0'))
-
+    publishedOnDateField   : $('#pece-artifact-pdf-node-form .radix-layouts-sidebar #edit-pubdate-datepicker-popup-0'),
+    createNewRevisionField : $('#pece-artifact-pdf-node-form .radix-layouts-sidebar #edit-log'),
+    authorField            : $('#pece-artifact-pdf-node-form .radix-layouts-sidebar #edit-name'),
+    dateField              : $('#pece-artifact-pdf-node-form .radix-layouts-sidebar #edit-date-datepicker-popup-0')
   };
 
   this.pageElements = {
+    // Panels layout
+    layoutWrapper : $('.radix-phelan'),
 
-    // Panels layout.
-    layoutWrapper: element(by.css('.radix-phelan')),
-
-    visible: {
-      // Left side elements.
-      titleField: element(by.css('h1')),
-      pdfField: element(by.css('.radix-layouts-column1 .field-name-field-pece-media-pdf')),
-      licenceField: element(by.css('.radix-layouts-column1 .field-name-field-pece-license')),
+    visible : {
+       // Left side elements.
+      titleField   : $('h1'),
+      pdfField     : $('.radix-layouts-column1 .field-name-field-pece-media-pdf'),
+      licenceField : $('.radix-layouts-column1 .field-name-field-pece-license'),
 
       // Right side form elements.
-      createdField: element(by.css('.radix-layouts-column2 .pane-node-created .pane-title')),
-      contributorsFields: element(by.css('.radix-layouts-column2 .field-name-field-pece-contributors')),
+      createdField       : $('.radix-layouts-column2 .pane-node-created .pane-title'),
+      contributorsFields : $('.radix-layouts-column2 .field-name-field-pece-contributors'),
     },
 
     hidden: {
       // Right side form elements.
-      authorsField: element(by.css('.radix-layouts-column2 .field-name-field-pece-authors')),
-      tagsField: element(by.css('.radix-layouts-column2 .field-name-field-pece-tags')),
-      fieldsiteField: element(by.css('.radix-layouts-column2 .field-name-field-pece-authors')),
-      critCommentField: element(by.css('.radix-layouts-column2 .field-name-field-pece-crit-commentary')),
-      location: element(by.css('.radix-layouts-column2 .field-name-field-pece-location'))
+      authorsField     : $('.radix-layouts-column2 .field-name-field-pece-authors'),
+      tagsField        : $('.radix-layouts-column2 .field-name-field-pece-tags'),
+      fieldsiteField   : $('.radix-layouts-column2 .field-name-field-pece-authors'),
+      critCommentField : $('.radix-layouts-column2 .field-name-field-pece-crit-commentary'),
+      locationField    : $('.radix-layouts-column2 .field-name-field-pece-location')
     }
 
   };
@@ -115,7 +113,12 @@ var ArtifactPdfPage = function() {
     this.mainElements.titleField.sendKeys(title);
     this.mainElements.uriField.sendKeys('uri1');
     this.addPdf(fileName);
-    this.publishButton.click();
+    $('#edit-field-permissions-und-private').click();
+    
+    // Protractor already scrolled down to click in permission bullet,
+    // and can not manage to scroll back up to click in publish
+    // button, that's why the script.
+    browser.executeScript("jQuery('#edit-submit').click()");
   };
 
   this.addPdf = function(fileName) {
@@ -132,7 +135,6 @@ var ArtifactPdfPage = function() {
     nextButton.click();
     browser.switchTo().defaultContent();
   };
-
 };
 
 module.exports = new ArtifactPdfPage();

@@ -7,9 +7,9 @@ var EC = protractor.ExpectedConditions;
 var PeoplePage = function() {
 
   // Define people attributes.
-  this.emailField = element(by.css('#edit-mail'));
-  this.applyButton = element(by.css('#edit-submit-admin-views-user'));
-  this.statusField = element(by.css('#edit-status-1'));
+  this.emailField =    element(by.css('#edit-mail'));
+  this.applyButton =   element(by.css('#edit-submit-admin-views-user'));
+  this.statusField =   element(by.css('#edit-status-1'));
   this.confirmButton = element(by.css('#edit-submit'));
 
   // Define people methods.
@@ -24,10 +24,11 @@ var PeoplePage = function() {
     browser.wait(EC.visibilityOf(cancelOption), browser.params.timeoutLimit);
     cancelOption.click();
     cancelButton.click();
-    browser.wait(EC.visibilityOf(element(by.css('.messages.status'))), browser.params.timeoutLimit);
+
+    // browser.wait(EC.visibilityOf(element(by.css('.messages.status'))), browser.params.timeoutLimit);
   };
 
-  this.unblock = function(email) {
+  this.unblock = function (email) {
     this.edit(email);
     browser.wait(EC.visibilityOf(this.statusField), browser.params.timeoutLimit);
     this.statusField.click();

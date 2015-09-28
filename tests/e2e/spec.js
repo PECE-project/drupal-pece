@@ -27,6 +27,7 @@ require('./specs/registration.spec.js');
 require('./specs/artifacts/artifact.fieldnote.spec.js');
 require('./specs/license.spec.js');
 require('./specs/user.profile.spec.js');
+require('./specs/user.access.spec.js');
 require('./specs/artifacts/artifact.image.spec.js');
 require('./specs/artifacts/artifact.pdf.spec.js');
 require('./specs/artifacts/artifact.video.spec.js');

@@ -17,6 +17,7 @@ var ArtifactVideoPage = require('./artifact.video.page');
 var ArtifactWebsitePage = require('./artifact.website.page');
 var AnalyticPage = require('./analytic.page');
 var StructuredAnalyticsPage = require('./structured.analytics.page');
+var UserAccessPage = require('./user.access.page');
 
 module.exports = {
   'SamplePage': SamplePage,
@@ -36,5 +37,6 @@ module.exports = {
   'ArtifactVideoPage': ArtifactVideoPage,
   'ArtifactWebsitePage': ArtifactWebsitePage,
   'AnalyticPage': AnalyticPage,
-  'StructuredAnalyticsPage': StructuredAnalyticsPage
+  'StructuredAnalyticsPage': StructuredAnalyticsPage,
+  'UserAccessPage': UserAccessPage
 }
