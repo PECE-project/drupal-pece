@@ -543,8 +543,7 @@ function pece_annotations_annotate_form_third_submit(&$form, &$form_state) {
   field_attach_submit('node', $entity, $form, $form_state);
   $node_wrapper->save();
 
-  drupal_set_message(t('Your %annotation was been created. !link ', array(
-    '%annotation' => $annotation_values->title,
+  drupal_set_message(t('Your annotation was been created. !link ', array(
     '!link' => l('View annotation', 'node/' . $entity->nid),
   )), 'status');
 
