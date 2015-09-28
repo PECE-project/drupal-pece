@@ -308,7 +308,7 @@ function pece_annotations_annotate_form_start($form, &$form_state) {
     '#options' =>  array('add_new' => '< Create new  >') + $items,
   );
 
-  if (count($items) > 10) {
+  if (count($items) > 5) {
     $form['struct_analytics']['#type'] = 'select';
     $form['struct_analytics']['#empty_value'] = '';
   }
@@ -409,7 +409,7 @@ function pece_annotations_annotate_form_second($form, &$form_state) {
     '#default_value' => !empty($items) ? $first->nid : 'add_new',
   );
 
-  if (count($items) > 10) {
+  if (count($items) > 5) {
     $form['analytic']['#type'] = 'select';
     $form['analytic']['#empty_value'] = '';
   }
