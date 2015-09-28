@@ -21,17 +21,6 @@ function pece_analytics_defaultconfig_features() {
 function pece_analytics_defaultconfig_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'add terms in pece_structured_analytics'.
-  $permissions['add terms in pece_structured_analytics'] = array(
-    'name' => 'add terms in pece_structured_analytics',
-    'roles' => array(
-      'Contributor' => 'Contributor',
-      'Researcher' => 'Researcher',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'taxonomy_access_fix',
-  );
-
   // Exported permission: 'create pece_analytic content'.
   $permissions['create pece_analytic content'] = array(
     'name' => 'create pece_analytic content',
