@@ -234,9 +234,17 @@ function pece_annotations_annotate_wizard_cancel(&$form_state) {
 
 function _form_header(&$form, &$form_state) {
 
+  $steps = array();
+  $steps = array_keys($form_state['form_info']['order']);
+
   $items = array();
   if(isset($form_state['object']->header)) {
-    $items = $form_state['object']->header;
+    foreach ($steps as $step) {
+      $items[$step] = $form_state['object']->header[$step];
+      if ($step == $form_state['step']) {
+        break;
+      }
+    }
   }
 
   $form['annotation_info'] = array(
@@ -287,8 +295,8 @@ function pece_annotations_annotate_form_start($form, &$form_state) {
 
   $form_state['object']->struct_analytics_tree = $items;
 
-  $header[] = '<b>Artifact</b>: ' . $form_state['object']->artifact->title;
-  $form_state['object']->header = $header;
+  $header = '<b>Artifact</b>: ' . $form_state['object']->artifact->title;
+  $form_state['object']->header['start'] = $header;
 
   _form_header($form, $form_state);
 
@@ -353,8 +361,8 @@ function pece_annotations_annotate_form_second($form, &$form_state) {
   $header = array();
   $struct_analytic_tid = $form_state['object']->struct_analytics;
 
-  $header[] = '<b>Question set</b>: ' . $form_state['object']->struct_analytics_tree[$struct_analytic_tid];
-  $form_state['object']->header[] = $header;
+  $header = '<b>Question set</b>: ' . $form_state['object']->struct_analytics_tree[$struct_analytic_tid];
+  $form_state['object']->header['second'] = $header;
 
   _form_header($form, $form_state);
 
@@ -456,8 +464,8 @@ function pece_annotations_annotate_form_third($form, &$form_state) {
   $header = array();
   $analytic_tid = $form_state['object']->analytic;
 
-  $header[] = '<b>Question:</b> ' . $form_state['object']->analitycs_tree[$analytic_tid];
-  $form_state['object']->header[] = $header;
+  $header = '<b>Question:</b> ' . $form_state['object']->analitycs_tree[$analytic_tid];
+  $form_state['object']->header['third'] = $header;
 
   _form_header($form, $form_state);
 
