@@ -44,7 +44,7 @@ describe ('User Access' , function () {
     AllPages.UserAccessPage.editArtifactPermission(artifactName, 'restricted');
   });
 
-  fit ('restricted artifact should be allowed to creator and researchers', function() {
+  it ('restricted artifact should be allowed to creator and researchers', function() {
     AllPages.UserAccessPage.expectAllowedContent(artifactName);
     AllPages.AuthenticationPage.logout();
 
@@ -60,7 +60,7 @@ describe ('User Access' , function () {
     AllPages.AuthenticationPage.logout();
   });
 
-  fit ('restricted artifact should be denied to contributor', function() {
+  it ('restricted artifact should be denied to contributor', function() {
     AllPages.RegistrationPage.register(contributorData.name, contributorData.email, browser.params.admin.password, true);
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
     AllPages.PeoplePage.unblock(contributorData.email);
@@ -73,7 +73,7 @@ describe ('User Access' , function () {
     AllPages.AuthenticationPage.logout();
   });
 
-  fit('private artifact should only be allowed to creator', function() {
+  it('private artifact should only be allowed to creator', function() {
     AllPages.AuthenticationPage.login(creatorData.name, browser.params.admin.password);
     AllPages.UserAccessPage.editArtifactPermission(artifactName, 'private');
     AllPages.AuthenticationPage.logout();
@@ -87,7 +87,7 @@ describe ('User Access' , function () {
     AllPages.UserAccessPage.getArtifact(artifactName);
     AllPages.UserAccessPage.expectDenyMessage();
     AllPages.AuthenticationPage.logout();
-    
+
     AllPages.AuthenticationPage.login(researcherData.name, browser.params.admin.password);
     AllPages.UserAccessPage.getArtifact(artifactName);
     AllPages.UserAccessPage.expectDenyMessage();
