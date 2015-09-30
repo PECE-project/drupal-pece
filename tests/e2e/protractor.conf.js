@@ -2,9 +2,11 @@
 * @file conf.js
 */
 
-var authentication = require('./authentication.js');
+var fs = require('fs')
+  , lodash = require('lodash')
+  , authentication = require('./authentication.js');
 
-exports.config = {
+module.exports.config = lodash.assign({
   // The selenium address where the selenium server will be running.
   seleniumAddress: 'http://localhost:4444/wd/hub',
 
@@ -71,5 +73,5 @@ exports.config = {
     showColors: true,
     includeStackTrace: true,
     defaultTimeoutInterval: 99999
-  },
-};
+  }
+}, fs.existsSync(__dirname + '/protractor.conf.local.js') ? require(__dirname + '/protractor.conf.local.js').config : {});

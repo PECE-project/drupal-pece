@@ -55,7 +55,7 @@ describe ('User Access' , function () {
     AllPages.AuthenticationPage.logout();
 
     AllPages.AuthenticationPage.login(researcherData.name, browser.params.admin.password);
-    AllPages.UserAccessPage.getArtifact(artifactName);
+    AllPages.ArtifactPage.getArtifact(artifactName);
     AllPages.UserAccessPage.expectAllowedContent(artifactName);
     AllPages.AuthenticationPage.logout();
   });
@@ -68,7 +68,7 @@ describe ('User Access' , function () {
     AllPages.AuthenticationPage.logout();
 
     AllPages.AuthenticationPage.login(contributorData.name, browser.params.admin.password);
-    AllPages.UserAccessPage.getArtifact(artifactName);
+    AllPages.ArtifactPage.getArtifact(artifactName);
     AllPages.UserAccessPage.expectDenyMessage();
     AllPages.AuthenticationPage.logout();
   });
@@ -79,17 +79,17 @@ describe ('User Access' , function () {
     AllPages.AuthenticationPage.logout();
 
     AllPages.AuthenticationPage.login(creatorData.name, browser.params.admin.password);
-    AllPages.UserAccessPage.getArtifact(artifactName);
+    AllPages.ArtifactPage.getArtifact(artifactName);
     AllPages.UserAccessPage.expectAllowedContent(artifactName);
     AllPages.AuthenticationPage.logout();
 
     AllPages.AuthenticationPage.login(contributorData.name, browser.params.admin.password);
-    AllPages.UserAccessPage.getArtifact(artifactName);
+    AllPages.ArtifactPage.getArtifact(artifactName);
     AllPages.UserAccessPage.expectDenyMessage();
     AllPages.AuthenticationPage.logout();
 
     AllPages.AuthenticationPage.login(researcherData.name, browser.params.admin.password);
-    AllPages.UserAccessPage.getArtifact(artifactName);
+    AllPages.ArtifactPage.getArtifact(artifactName);
     AllPages.UserAccessPage.expectDenyMessage();
     AllPages.AuthenticationPage.logout();
   });

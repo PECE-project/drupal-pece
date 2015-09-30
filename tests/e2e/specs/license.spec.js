@@ -14,9 +14,9 @@ describe('License', function() {
   });
 
   it('check the field_pece_license presence and its default value for Artifact content type', function () {
-    AllPages.PeceArtifactPage.get();
-    expect(AllPages.PeceArtifactPage.licenseField.isPresent()).toBe(true);
-    expect(AllPages.PeceArtifactPage.licenseFieldDefaultValue.getText()).toEqual('Attribution, Share Alike CC BY-SA');
+    AllPages.ArtifactPage.get();
+    expect(AllPages.ArtifactPage.licenseField.isPresent()).toBe(true);
+    expect(AllPages.ArtifactPage.licenseFieldDefaultValue.getText()).toEqual('Attribution, Share Alike CC BY-SA');
   });
 
   // @TODO: I think it could be in another file, since this is not directly related with Licence.

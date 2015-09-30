@@ -117,7 +117,7 @@ var ArtifactImagePage = function() {
     // @TODO: Discovery why the below two lines are commented.
     // this.mainElements.formatField.sendKeys('jpg');
     // this.mainElements.authorsField.sendKeys('Other author, Another Author');
-    
+
     // Protractor already scrolled down to click in permission bullet,
     // and can not manage to scroll back up to click in publish
     // button, that's why the script.

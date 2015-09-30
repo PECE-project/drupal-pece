@@ -3,7 +3,7 @@ var SamplePage = require('./sample.page');
 var RegistrationPage = require('./registration.page');
 var AuthenticationPage = require('./authentication.page');
 var LegalPage = require('./legal.page');
-var PeceArtifactPage = require('./pece.artifact.page');
+var ArtifactPage = require('./pece.artifact.page');
 var AddTypesPage = require('./add.types.page');
 var ContentPage = require('./content.page');
 var PeoplePage = require('./people.page');
@@ -25,7 +25,7 @@ module.exports = {
   'RegistrationPage': RegistrationPage,
   'AuthenticationPage': AuthenticationPage,
   'LegalPage': LegalPage,
-  'PeceArtifactPage': PeceArtifactPage,
+  'ArtifactPage': ArtifactPage,
   'AddTypesPage': AddTypesPage,
   'ContentPage': ContentPage,
   'PeoplePage': PeoplePage,

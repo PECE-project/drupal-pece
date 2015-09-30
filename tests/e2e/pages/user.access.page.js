@@ -4,14 +4,12 @@
 
 var EC = protractor.ExpectedConditions;
 
+var ArtifactPage = require('./pece.artifact.page.js');
+
 var UserAccessPage = function() {
 
-  this.getArtifact = function(node) {
-    browser.get('content/' + node);
-  };
-
   this.getArtifactForm = function(node) {
-    this.getArtifact(node);
+    ArtifactPage.getArtifact(node);
     element(by.cssContainingText('a', 'Edit')).click();
   };
 

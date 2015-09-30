@@ -21,8 +21,8 @@ describe('Image Artifact', function() {
   });
 
   it('Verify main elements presence', function() {
-   AllPages.ArtifactImagePage.get();
-   AllPages.ArtifactImagePage.checkMainElementsPresence();
+    AllPages.ArtifactImagePage.get();
+    AllPages.ArtifactImagePage.checkMainElementsPresence();
   });
 
   it('Verify mandatory fields', function() {
