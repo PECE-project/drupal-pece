@@ -36,6 +36,26 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['relationships']['field_pece_artifact_target_id']['table'] = 'field_data_field_pece_artifact';
   $handler->display->display_options['relationships']['field_pece_artifact_target_id']['field'] = 'field_pece_artifact_target_id';
   $handler->display->display_options['relationships']['field_pece_artifact_target_id']['label'] = 'Artifact';
+  /* Field: Content: Author(s) */
+  $handler->display->display_options['fields']['field_pece_authors']['id'] = 'field_pece_authors';
+  $handler->display->display_options['fields']['field_pece_authors']['table'] = 'field_data_field_pece_authors';
+  $handler->display->display_options['fields']['field_pece_authors']['field'] = 'field_pece_authors';
+  $handler->display->display_options['fields']['field_pece_authors']['label'] = '';
+  $handler->display->display_options['fields']['field_pece_authors']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_pece_authors']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_authors']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_pece_authors']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_authors']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_pece_authors']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_pece_authors']['field_api_classes'] = TRUE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'long';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -50,6 +70,22 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['title_1']['relationship'] = 'field_pece_artifact_target_id';
   $handler->display->display_options['fields']['title_1']['label'] = 'Artifact Title';
   $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
+  /* Field: Content: License */
+  $handler->display->display_options['fields']['field_pece_license']['id'] = 'field_pece_license';
+  $handler->display->display_options['fields']['field_pece_license']['table'] = 'field_data_field_pece_license';
+  $handler->display->display_options['fields']['field_pece_license']['field'] = 'field_pece_license';
+  $handler->display->display_options['fields']['field_pece_license']['label'] = '';
+  $handler->display->display_options['fields']['field_pece_license']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_pece_license']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_license']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_pece_license']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_license']['field_api_classes'] = TRUE;
+  /* Field: Field: Tags */
+  $handler->display->display_options['fields']['field_pece_tags_1']['id'] = 'field_pece_tags_1';
+  $handler->display->display_options['fields']['field_pece_tags_1']['table'] = 'field_data_field_pece_tags';
+  $handler->display->display_options['fields']['field_pece_tags_1']['field'] = 'field_pece_tags';
+  $handler->display->display_options['fields']['field_pece_tags_1']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_pece_tags_1']['delta_offset'] = '0';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -146,6 +182,7 @@ function pece_annotations_views_default_views() {
     t('last »'),
     t('Artifact'),
     t('Artifact Title'),
+    t('Tags'),
     t('All'),
     t('User'),
     t('Question annotations'),
