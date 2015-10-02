@@ -36,18 +36,17 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['relationships']['field_pece_artifact_target_id']['table'] = 'field_data_field_pece_artifact';
   $handler->display->display_options['relationships']['field_pece_artifact_target_id']['field'] = 'field_pece_artifact_target_id';
   $handler->display->display_options['relationships']['field_pece_artifact_target_id']['label'] = 'Artifact';
-  /* Field: Content: Author(s) */
-  $handler->display->display_options['fields']['field_pece_authors']['id'] = 'field_pece_authors';
-  $handler->display->display_options['fields']['field_pece_authors']['table'] = 'field_data_field_pece_authors';
-  $handler->display->display_options['fields']['field_pece_authors']['field'] = 'field_pece_authors';
-  $handler->display->display_options['fields']['field_pece_authors']['label'] = '';
-  $handler->display->display_options['fields']['field_pece_authors']['element_type'] = '0';
-  $handler->display->display_options['fields']['field_pece_authors']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_pece_authors']['element_wrapper_type'] = '0';
-  $handler->display->display_options['fields']['field_pece_authors']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_pece_authors']['type'] = 'taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_pece_authors']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_pece_authors']['field_api_classes'] = TRUE;
+  /* Relationship: Content: Author */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -68,8 +67,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['relationship'] = 'field_pece_artifact_target_id';
-  $handler->display->display_options['fields']['title_1']['label'] = 'Artifact Title';
-  $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title_1']['label'] = 'In response to';
   /* Field: Content: License */
   $handler->display->display_options['fields']['field_pece_license']['id'] = 'field_pece_license';
   $handler->display->display_options['fields']['field_pece_license']['table'] = 'field_data_field_pece_license';
@@ -165,6 +163,114 @@ function pece_annotations_views_default_views() {
   /* Display: Question annotations */
   $handler = $view->new_display('panel_pane', 'Question annotations', 'question_annotations');
   $handler->display->display_options['exposed_block'] = TRUE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'long';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_pece_artifact_target_id';
+  $handler->display->display_options['fields']['title_1']['label'] = 'In response to';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+
+  /* Display: Artifact annotations */
+  $handler = $view->new_display('panel_pane', 'Artifact annotations', 'artifact_annotations');
+  $handler->display->display_options['exposed_block'] = TRUE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'long';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: License */
+  $handler->display->display_options['fields']['field_pece_license']['id'] = 'field_pece_license';
+  $handler->display->display_options['fields']['field_pece_license']['table'] = 'field_data_field_pece_license';
+  $handler->display->display_options['fields']['field_pece_license']['field'] = 'field_pece_license';
+  $handler->display->display_options['fields']['field_pece_license']['label'] = '';
+  $handler->display->display_options['fields']['field_pece_license']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_pece_license']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_license']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_pece_license']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_license']['field_api_classes'] = TRUE;
+  /* Field: Field: Tags */
+  $handler->display->display_options['fields']['field_pece_tags_1']['id'] = 'field_pece_tags_1';
+  $handler->display->display_options['fields']['field_pece_tags_1']['table'] = 'field_data_field_pece_tags';
+  $handler->display->display_options['fields']['field_pece_tags_1']['field'] = 'field_pece_tags';
+  $handler->display->display_options['fields']['field_pece_tags_1']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_pece_tags_1']['delta_offset'] = '0';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'pece_annotation' => 'pece_annotation',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Author uid */
+  $handler->display->display_options['filters']['uid']['id'] = 'uid';
+  $handler->display->display_options['filters']['uid']['table'] = 'node';
+  $handler->display->display_options['filters']['uid']['field'] = 'uid';
+  $handler->display->display_options['filters']['uid']['value'] = '';
+  $handler->display->display_options['filters']['uid']['group'] = 1;
+  $handler->display->display_options['filters']['uid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['uid']['expose']['operator_id'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['label'] = 'User';
+  $handler->display->display_options['filters']['uid']['expose']['operator'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['identifier'] = 'uid';
+  $handler->display->display_options['filters']['uid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    6 => 0,
+    5 => 0,
+  );
   $translatables['pece_annotations'] = array(
     t('Master'),
     t('more'),
@@ -181,12 +287,14 @@ function pece_annotations_views_default_views() {
     t('next ›'),
     t('last »'),
     t('Artifact'),
-    t('Artifact Title'),
+    t('author'),
+    t('In response to'),
     t('Tags'),
     t('All'),
     t('User'),
     t('Question annotations'),
     t('View panes'),
+    t('Artifact annotations'),
   );
   $export['pece_annotations'] = $view;
 
