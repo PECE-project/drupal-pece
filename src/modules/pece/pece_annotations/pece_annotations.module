@@ -62,10 +62,12 @@ function pece_annotations_annotate_form($js = NULL, $node = NULL, $step = NULL) 
     return drupal_render($form);
   }
 
+  $path_pattern = "annotation/add/" . ($js ? 'ajax' : 'nojs') . "/" . $node->nid . "/form";
+
   // Define array for ctools multistep wizard.
   $form_info = array(
     'id' => 'pece_annotations_annotate',
-    'path' => "annotation/add/" . ($js ? 'ajax' : 'nojs') . "/" . $node->nid . "/form/%step",
+    'path' => $path_pattern . '/%step',
     'show trail' => TRUE,
     'show back' => TRUE,
     'show cancel' => TRUE,
@@ -73,6 +75,7 @@ function pece_annotations_annotate_form($js = NULL, $node = NULL, $step = NULL) 
     'next callback' =>  'pece_annotations_annotate_wizard_next',
     'finish callback' => 'pece_annotations_annotate_wizard_finish',
     'cancel callback' => 'pece_annotations_annotate_wizard_cancel',
+    'return path' => $path_pattern,
 
    // Forms order.
     'order' => array(
@@ -90,7 +93,7 @@ function pece_annotations_annotate_form($js = NULL, $node = NULL, $step = NULL) 
         'form id' => 'pece_annotations_annotate_form_second'
       ),
       'third' => array(
-        'form id' => 'pece_annotations_annotate_form_third'
+        'form id' => 'pece_annotations_annotate_form_third',
       ),
     ),
   );
@@ -126,12 +129,39 @@ function pece_annotations_annotate_form($js = NULL, $node = NULL, $step = NULL) 
   // Stores the node entity to use later.
   $form_state['object']->artifact = $node;
 
+
   // Send this all off to our form. This is like drupal_get_form only wizardy.
   ctools_include('wizard');
   $form = ctools_wizard_multistep_form($form_info, $step, $form_state);
-  $output = drupal_render($form);
-  if ($js) {
 
+  // @TODO: Check why ctools wizard doesn't let us to perform our #submit
+  // function.
+  //
+  // Create the Save & Continue buttom.
+  // if ($form_state['step'] == 'third' ) {
+
+  //   $button_attributes = array();
+  //   if (!empty($form_state['ajax']) && empty($form_state['modal'])) {
+  //     $button_attributes =  array('ctools-use-ajax');
+  //   }
+
+  //   $form['save_continue'] = array(
+  //     '#type' =>  'submit',
+  //     '#value' => t('Save & Continue'),
+  //     '#next' => 'start',
+  //     '#wizard type' => 'next',
+  //     '#submit' => array('pece_annotations_annotate_form_save_continue'),
+  //     '#attributes' =>  array(
+  //       'class' => (isset($button_attributes)) ?
+  //         $button_attributes + array('save') : array('save'),
+  //       'id' => 'save-continue',
+  //     ),
+  //   );
+  // }
+
+  $output = drupal_render($form);
+
+  if ($js) {
     // If javascript is active, we have to use a render array.
     $commands = array();
     if ($output === FALSE || !empty($form_state['complete'])) {
@@ -207,16 +237,17 @@ function pece_annotations_annotate_cache_get($id) {
 }
 
 /**
- * Handles the 'next' click on the add/edit pane form wizard.
+ * Handles the 'next' click on the form wizard.
  *
  * All we need to do is store the updated pane in the cache.
  */
 function pece_annotations_annotate_wizard_next(&$form_state) {
+  dd($form_state['step']);
   pece_annotations_annotate_cache_set($form_state['object_id'], $form_state['object']);
 }
 
 /**
- * Handles the 'finish' click on teh add/edit pane form wizard.
+ * Handles the 'finish' click on the form wizard.
  *
  * All we need to do is set a flag so the return can handle adding
  * the pane.
@@ -226,7 +257,7 @@ function pece_annotations_annotate_wizard_finish(&$form_state) {
 }
 
 /**
- * Handles the 'cancel' click on the add/edit pane form wizard.
+ * Handles the 'cancel' click on the form wizard.
  */
 function pece_annotations_annotate_wizard_cancel(&$form_state) {
   $form_state['cancel'] = TRUE;
@@ -252,7 +283,7 @@ function _form_header(&$form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => t('Annotation info:'),
     '#weight' => -10,
-    '#collapsible' => FASLE,
+    '#collapsible' => FALSE,
     '#collapsed' => FALSE,
   );
 
@@ -461,6 +492,7 @@ function pece_annotations_annotate_form_second_submit($form, &$form_state) {
  * @ingroup forms
  */
 function pece_annotations_annotate_form_third($form, &$form_state) {
+  global $user;
 
   $header = array();
   $analytic_id = $form_state['object']->analytic;
@@ -510,9 +542,28 @@ function pece_annotations_annotate_form_third($form, &$form_state) {
  * Handles submit for third form.
  */
 function pece_annotations_annotate_form_third_submit(&$form, &$form_state) {
-  global $user;
 
   $form_state['object']->body = $form_state['values']['body'];
+
+  pece_annotations_annotate_form_save_annotation($form, $form_state);
+
+  if ($form_state['clicked_button']['#wizard type'] == 'next') {
+    pece_annotations_annotate_form_save_continue($form, $form_state);
+  }
+  else if ($form_state['ajax']) {
+    ctools_include('ajax');
+    ctools_add_js('ajax-responder');
+    $commands[] = ctools_ajax_command_reload();
+    print ajax_render($commands);
+    exit;
+  }
+}
+
+/**
+ * Save the annotation created by the wizard form.
+ */
+function pece_annotations_annotate_form_save_annotation(&$form, &$form_state) {
+  global $user;
 
   $values = array(
     'type' => 'pece_annotation',
@@ -525,10 +576,8 @@ function pece_annotations_annotate_form_third_submit(&$form, &$form_state) {
   $entity = entity_create('node', $values);
   $form_state['object']->nid = $entity->nid;
   $annotation_values = $form_state['object'];
-
   // Autocreate annotation title.
   $annotation_values->title = 'pece_annotation_' . REQUEST_TIME;
-  $annotation_values->artifact = $form_state['object']->artifact->nid;
 
   $node_wrapper = entity_metadata_wrapper('node', $entity);
 
@@ -536,7 +585,7 @@ function pece_annotations_annotate_form_third_submit(&$form, &$form_state) {
   $node_wrapper->title->set($annotation_values->title);
   $node_wrapper->body->set(array('value' => $annotation_values->body));
   $node_wrapper->field_pece_uri->set('pece_annotation_' . REQUEST_TIME);
-  $node_wrapper->field_pece_artifact->set(intval($annotation_values->artifact));
+  $node_wrapper->field_pece_artifact->set(intval($annotation_values->artifact->nid));
   $node_wrapper->field_pece_analytic->set(intval($annotation_values->analytic));
 
   // An easy way to save the license and tags fields.
@@ -546,10 +595,12 @@ function pece_annotations_annotate_form_third_submit(&$form, &$form_state) {
   drupal_set_message(t('Your annotation was been created. !link ', array(
     '!link' => l('View annotation', 'node/' . $entity->nid),
   )), 'status');
+}
 
-  ctools_include('ajax');
-  ctools_add_js('ajax-responder');
-  $commands[] = ctools_ajax_command_reload();
-  print ajax_render($commands);
-  exit;
+/**
+ * Save the annotation and return to the beginning of the wizard.
+ */
+function pece_annotations_annotate_form_save_continue(&$form, &$form_state) {
+  $form_state['clicked_button']['#wizard type'] = 'next';
+  $form_state['clicked_button']['#next'] = 'start';
 }

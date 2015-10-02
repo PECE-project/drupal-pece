@@ -16,6 +16,12 @@ projects[kw_itemnames][download][type] = git
 projects[kw_itemnames][download][url] = "git://github.com/kraftwagen/kw-itemnames.git"
 projects[kw_itemnames][subdir] = kraftwagen
 
+; Ctools
+; Overrides panopoly's ctools.
+projects[ctools][version] = 1.9
+projects[ctools][subdir] = contrib
+projects[ctools][patch][] = "./patches/ctools-save_continue_button.patch"
+
 ; =====================
 ; Panopoly
 ; =====================
@@ -23,7 +29,6 @@ projects[kw_itemnames][subdir] = kraftwagen
 ; The Panopoly Foundation
 projects[panopoly_core][version] = 1.27
 projects[panopoly_core][subdir] = contrib
-projects[panopoly_core][patch][] = https://www.drupal.org/files/issues/media-close-button-broken.patch
 
 projects[panopoly_images][version] = 1.27
 projects[panopoly_images][subdir] = contrib
