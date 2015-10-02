@@ -602,5 +602,5 @@ function pece_annotations_annotate_form_save_annotation(&$form, &$form_state) {
  */
 function pece_annotations_annotate_form_save_continue(&$form, &$form_state) {
   $form_state['clicked_button']['#wizard type'] = 'next';
-  $form_state['clicked_button']['#next'] = 'start';
+  $form_state['clicked_button']['#next'] = 'second';
 }
