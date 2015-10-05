@@ -222,6 +222,53 @@ function pece_artifacts_text_panelizer_defaults() {
   $display->content['new-452aff2a-90ee-4862-9f8f-4acdb1489217'] = $pane;
   $display->panels['column1'][3] = 'new-452aff2a-90ee-4862-9f8f-4acdb1489217';
   $pane = new stdClass();
+  $pane->pid = 'new-8402eb09-be5b-4d1b-aef7-6d081c273add';
+  $pane->panel = 'column1';
+  $pane->type = 'block';
+  $pane->subtype = 'views-aec56592c4c370bf6d475d08ee3d819d';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'inherit_path' => 1,
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 4;
+  $pane->locks = array();
+  $pane->uuid = '8402eb09-be5b-4d1b-aef7-6d081c273add';
+  $display->content['new-8402eb09-be5b-4d1b-aef7-6d081c273add'] = $pane;
+  $display->panels['column1'][4] = 'new-8402eb09-be5b-4d1b-aef7-6d081c273add';
+  $pane = new stdClass();
+  $pane->pid = 'new-a423cf9e-d0ac-42b8-a67c-a651cb7fac2e';
+  $pane->panel = 'column1';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_annotations-pece_artifact_user_annotations';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 5;
+  $pane->locks = array();
+  $pane->uuid = 'a423cf9e-d0ac-42b8-a67c-a651cb7fac2e';
+  $display->content['new-a423cf9e-d0ac-42b8-a67c-a651cb7fac2e'] = $pane;
+  $display->panels['column1'][5] = 'new-a423cf9e-d0ac-42b8-a67c-a651cb7fac2e';
+  $pane = new stdClass();
   $pane->pid = 'new-fc6e5b94-6f57-4e35-9466-eb778e9a628f';
   $pane->panel = 'column2';
   $pane->type = 'entity_field';

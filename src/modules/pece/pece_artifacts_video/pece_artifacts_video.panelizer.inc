@@ -278,6 +278,29 @@ function pece_artifacts_video_panelizer_defaults() {
   $display->content['new-02f03cd8-a49a-4ad5-a190-281e36430fcb'] = $pane;
   $display->panels['column1'][5] = 'new-02f03cd8-a49a-4ad5-a190-281e36430fcb';
   $pane = new stdClass();
+  $pane->pid = 'new-07807078-8d41-49b3-b9b6-9a5c9b477ca3';
+  $pane->panel = 'column1';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_annotations-pece_artifact_user_annotations';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 6;
+  $pane->locks = array();
+  $pane->uuid = '07807078-8d41-49b3-b9b6-9a5c9b477ca3';
+  $display->content['new-07807078-8d41-49b3-b9b6-9a5c9b477ca3'] = $pane;
+  $display->panels['column1'][6] = 'new-07807078-8d41-49b3-b9b6-9a5c9b477ca3';
+  $pane = new stdClass();
   $pane->pid = 'new-926a4e2b-195b-4491-a039-cc5a423c45c5';
   $pane->panel = 'column2';
   $pane->type = 'entity_field';

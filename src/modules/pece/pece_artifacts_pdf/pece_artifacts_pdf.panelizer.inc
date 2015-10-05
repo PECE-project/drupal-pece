@@ -225,6 +225,29 @@ function pece_artifacts_pdf_panelizer_defaults() {
   $display->content['new-efab934f-fac6-4d10-a1eb-05d24e0dd9ca'] = $pane;
   $display->panels['column1'][3] = 'new-efab934f-fac6-4d10-a1eb-05d24e0dd9ca';
   $pane = new stdClass();
+  $pane->pid = 'new-2a26e734-dc3e-4358-85d9-037c15c3aae4';
+  $pane->panel = 'column1';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_annotations-pece_artifact_user_annotations';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 4;
+  $pane->locks = array();
+  $pane->uuid = '2a26e734-dc3e-4358-85d9-037c15c3aae4';
+  $display->content['new-2a26e734-dc3e-4358-85d9-037c15c3aae4'] = $pane;
+  $display->panels['column1'][4] = 'new-2a26e734-dc3e-4358-85d9-037c15c3aae4';
+  $pane = new stdClass();
   $pane->pid = 'new-588d01be-8903-4488-8143-73d1dc0c1904';
   $pane->panel = 'column2';
   $pane->type = 'entity_field';

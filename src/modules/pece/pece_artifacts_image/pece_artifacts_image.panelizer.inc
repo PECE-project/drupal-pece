@@ -252,6 +252,29 @@ function pece_artifacts_image_panelizer_defaults() {
   $display->content['new-99a4124e-0110-44d9-b1e0-f5b61605fef6'] = $pane;
   $display->panels['column1'][4] = 'new-99a4124e-0110-44d9-b1e0-f5b61605fef6';
   $pane = new stdClass();
+  $pane->pid = 'new-376597f2-af11-4331-a908-6008a6725e1e';
+  $pane->panel = 'column1';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_annotations-pece_artifact_user_annotations';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 5;
+  $pane->locks = array();
+  $pane->uuid = '376597f2-af11-4331-a908-6008a6725e1e';
+  $display->content['new-376597f2-af11-4331-a908-6008a6725e1e'] = $pane;
+  $display->panels['column1'][5] = 'new-376597f2-af11-4331-a908-6008a6725e1e';
+  $pane = new stdClass();
   $pane->pid = 'new-ba4930d8-5e16-4026-9b1a-21fecaddb26e';
   $pane->panel = 'column2';
   $pane->type = 'entity_field';

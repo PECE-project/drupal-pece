@@ -190,6 +190,29 @@ function pece_artifacts_audio_panelizer_defaults() {
   $display->content['new-7f2e508b-27da-4739-8660-27a3a68616d8'] = $pane;
   $display->panels['column1'][4] = 'new-7f2e508b-27da-4739-8660-27a3a68616d8';
   $pane = new stdClass();
+  $pane->pid = 'new-604715e3-a09b-4b01-a67b-b8d1955d1fe8';
+  $pane->panel = 'column1';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_annotations-pece_artifact_user_annotations';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 5;
+  $pane->locks = array();
+  $pane->uuid = '604715e3-a09b-4b01-a67b-b8d1955d1fe8';
+  $display->content['new-604715e3-a09b-4b01-a67b-b8d1955d1fe8'] = $pane;
+  $display->panels['column1'][5] = 'new-604715e3-a09b-4b01-a67b-b8d1955d1fe8';
+  $pane = new stdClass();
   $pane->pid = 'new-b9f5451d-261b-4d80-af97-d7c28723b9ec';
   $pane->panel = 'column2';
   $pane->type = 'entity_field';

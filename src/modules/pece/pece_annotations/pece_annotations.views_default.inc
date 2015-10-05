@@ -12,10 +12,10 @@ function pece_annotations_views_default_views() {
 
   $view = new view();
   $view->name = 'pece_annotations';
-  $view->description = '';
-  $view->tag = 'default';
+  $view->description = 'Lists annotations';
+  $view->tag = 'pece';
   $view->base_table = 'node';
-  $view->human_name = 'pece_annotations';
+  $view->human_name = 'PECE Annotations';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -235,6 +235,16 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['field_pece_tags_1']['field'] = 'field_pece_tags';
   $handler->display->display_options['fields']['field_pece_tags_1']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_pece_tags_1']['delta_offset'] = '0';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Artifact (field_pece_artifact) */
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['id'] = 'field_pece_artifact_target_id';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['table'] = 'field_data_field_pece_artifact';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['field'] = 'field_pece_artifact_target_id';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -271,6 +281,98 @@ function pece_annotations_views_default_views() {
     6 => 0,
     5 => 0,
   );
+
+  /* Display: Artifact User Annotations */
+  $handler = $view->new_display('panel_pane', 'Artifact User Annotations', 'pece_artifact_user_annotations');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Annotations';
+  $handler->display->display_options['display_description'] = 'List users that have added annotations to a given artifact.';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['exposed_block'] = TRUE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Author */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: User: Uid */
+  $handler->display->display_options['fields']['uid']['id'] = 'uid';
+  $handler->display->display_options['fields']['uid']['table'] = 'users';
+  $handler->display->display_options['fields']['uid']['field'] = 'uid';
+  $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['name']['alter']['path'] = 'annotations/[uid]/[nid]';
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Artifact (field_pece_artifact) */
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['id'] = 'field_pece_artifact_target_id_1';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['table'] = 'field_data_field_pece_artifact';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['field'] = 'field_pece_artifact_target_id';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'pece_annotation' => 'pece_annotation',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+
+  /* Display: User Artifact Annotations */
+  $handler = $view->new_display('page', 'User Artifact Annotations', 'page_1');
+  $handler->display->display_options['display_description'] = 'List annotations for a given user and a given artifact.';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Artifact (field_pece_artifact) */
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['id'] = 'field_pece_artifact_target_id';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['table'] = 'field_data_field_pece_artifact';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['field'] = 'field_pece_artifact_target_id';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['summary_options']['items_per_page'] = '25';
+  /* Contextual filter: User: Uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'users';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['relationship'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['path'] = 'annotations/%/%';
   $translatables['pece_annotations'] = array(
     t('Master'),
     t('more'),
@@ -295,6 +397,13 @@ function pece_annotations_views_default_views() {
     t('Question annotations'),
     t('View panes'),
     t('Artifact annotations'),
+    t('Artifact User Annotations'),
+    t('Annotations'),
+    t('List users that have added annotations to a given artifact.'),
+    t('Uid'),
+    t('Nid'),
+    t('User Artifact Annotations'),
+    t('List annotations for a given user and a given artifact.'),
   );
   $export['pece_annotations'] = $view;
 
