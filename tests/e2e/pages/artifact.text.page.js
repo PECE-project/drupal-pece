@@ -2,62 +2,65 @@
 * @file artifact.text.page.js
 */
 
-var helpers = require('../helpers/helpers');
-var SamplePage = require('./sample.page');
-var path = require('path');
-var EC = protractor.ExpectedConditions;
+var EC         = protractor.ExpectedConditions;
+
+var path       = require('path'),
+    helpers    = require('../helpers/helpers'),
+    SamplePage = require('./sample.page');
 
 var ArtifactTextPage = function() {
 
+  var formId = '#pece-artifact-text-node-form ';
   // Define text artifact page object attributes.
   this.mainElements = {
 
     // Form main elements.
-    titleField: element(by.css('#pece-artifact-text-node-form #edit-title')),
-    uriField: element(by.css('#pece-artifact-text-node-form #edit-field-pece-uri-und-0-value')),
-    textField: element(by.css('#pece-artifact-text-node-form #edit-body-und-0-value')),
-    fieldsiteField: element(by.css('#pece-artifact-text-node-form #edit-field-pece-fieldsite-und-0-target-id')),
-    contributorsFields: element(by.css('#pece-artifact-text-node-form #edit-field-pece-contributors-und-0-target-id')),
-    tagsField: element(by.css('#pece-artifact-text-node-form #edit-field-pece-tags-und')),
-    licenceField: element(by.css('#pece-artifact-text-node-form #edit-field-pece-license-und-0-licence')),
-    authorsField: element(by.css('#pece-artifact-text-node-form #edit-field-pece-authors-und')),
+    titleField        : $(formId + '#edit-title'),
+    uriField          : $(formId + '#edit-field-pece-uri-und-0-value'),
+    textField         : $(formId + '#edit-body-und-0-value'),
+    fieldsiteField    : $(formId + '#edit-field-pece-fieldsite-und-0-target-id'),
+    contributorsFields: $(formId + '#edit-field-pece-contributors-und-0-target-id'),
+    tagsField         : $(formId + '#edit-field-pece-tags-und'),
+    licenceField      : $(formId + '#edit-field-pece-license-und-0-licence'),
+    authorsField      : $(formId + '#edit-field-pece-authors-und'),
+    permissionsField  : $(formId + 'input[name="field_permissions[und]"]'),
 
     // Right side form elements.
-    publishedOnDateField: element(by.css('#pece-artifact-text-node-form .radix-layouts-sidebar #edit-pubdate-datepicker-popup-0')),
-    createNewRevisionField: element(by.css('#pece-artifact-text-node-form .radix-layouts-sidebar #edit-log')),
-    authorField: element(by.css('#pece-artifact-text-node-form .radix-layouts-sidebar #edit-name')),
-    dateField: element(by.css('#pece-artifact-text-node-form .radix-layouts-sidebar #edit-date-datepicker-popup-0'))
+    publishedOnDateField  : $(formId + '.radix-layouts-sidebar #edit-pubdate-datepicker-popup-0'),
+    createNewRevisionField: $(formId + '.radix-layouts-sidebar #edit-log'),
+    authorField           : $(formId + '.radix-layouts-sidebar #edit-name'),
+    dateField             : $(formId + '.radix-layouts-sidebar #edit-date-datepicker-popup-0')
 
   };
 
   this.pageElements = {
     // Panels layout.
-    layoutWrapper: element(by.css('.radix-phelan')),
+    layoutWrapper: $('.radix-phelan'),
 
     visible: {
        // Left side elements.
-      titleField: element(by.css('h1')),
-      textField: element(by.css('.radix-layouts-column1 .field-name-body')),
-      licenceField: element(by.css('.radix-layouts-column1 .field-name-field-pece-license')),
+      titleField  : $('h1'),
+      textField   : $('.radix-layouts-column1 .field-name-body'),
+      licenceField: $('.radix-layouts-column1 .field-name-field-pece-license'),
 
       // Right side form elements.
-      createdField: element(by.css('.radix-layouts-column2 .pane-node-created .pane-title')),
-      contributorsFields: element(by.css('.radix-layouts-column2 .field-name-field-pece-contributors')),
+      createdField      : $('.radix-layouts-column2 .pane-node-created .pane-title'),
+      contributorsFields: $('.radix-layouts-column2 .field-name-field-pece-contributors'),
     },
 
     hidden: {
       // Right side form elements.
-      authorsField: element(by.css('.radix-layouts-column2 .field-name-field-pece-authors')),
-      tagsField: element(by.css('.radix-layouts-column2 .field-name-field-pece-tags')),
-      fieldsiteField: element(by.css('.radix-layouts-column2 .field-name-field-pece-authors')),
-      critCommentField: element(by.css('.radix-layouts-column2 .field-name-field-pece-crit-commentary')),
-      locationField: element(by.css('.radix-layouts-column2 .field-name-field-pece-location'))
+      authorsField    : $('.radix-layouts-column2 .field-name-field-pece-authors'),
+      tagsField       : $('.radix-layouts-column2 .field-name-field-pece-tags'),
+      fieldsiteField  : $('.radix-layouts-column2 .field-name-field-pece-authors'),
+      critCommentField: $('.radix-layouts-column2 .field-name-field-pece-crit-commentary'),
+      locationField   : $('.radix-layouts-column2 .field-name-field-pece-location')
     }
   };
 
-  this.editorSelectField = element(by.css('#edit-body-und-0-format--2'));
-  this.plaintextOption = element(by.css('#edit-body-und-0-format--2 option[value="plain_text"]'));
-  this.publishButton = element(by.css('#edit-submit'));
+  this.editorSelectField = $('#edit-body-und-0-format--2');
+  this.plaintextOption = $('#edit-body-und-0-format--2 option[value="plain_text"]');
+  this.publishButton = $('#edit-submit');
 
   // Define text pageobject methods.
   this.get = function() {
@@ -101,15 +104,21 @@ var ArtifactTextPage = function() {
   };
 
   this.add = function(title, text) {
-    browser.wait(EC.visibilityOf(this.mainElements.uriField), browser.params.timeoutLimit);
+    this.get();
+    // browser.wait(EC.visibilityOf(this.mainElements.titleField), browser.params.timeoutLimit);
+    browser.sleep(1000);
+    browser.sleep(1000);
+    browser.sleep(1000);
+    this.mainElements.titleField.click();
     this.mainElements.titleField.sendKeys(title);
     this.mainElements.uriField.sendKeys('texturi1');
     this.mainElements.textField.sendKeys(text);
-    $('#edit-field-permissions-und-private').click();
+    this.mainElements.permissionsField.element(by.css('input[value="open"]')).click();
+    // $('#edit-field-permissions-und-open').click();
     // @TODO: Discovery why the below two lines are comented.
-    // this.mainElements.tagsField.sendKeys('foo');
-    // this.mainElements.authorsField.sandKeys('John Do');
-    
+    this.mainElements.tagsField.sendKeys('foo');
+    this.mainElements.authorsField.sandKeys('John Do');
+
     // Protractor already scrolled down to click in permission bullet,
     // and can not manage to scroll back up to click in publish
     // button, that's why the script.

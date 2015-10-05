@@ -13,6 +13,11 @@ var PeoplePage = function() {
   this.confirmButton = element(by.css('#edit-submit'));
 
   // Define people methods.
+
+  this.get = function() {
+    browser.get('admin/people');
+  };
+
   this.deleteUser = function(email) {
     var cancelOption = element(by.css('input[value="user_cancel_delete"]'));
     var cancelButton = element(by.css('#edit-submit'));
@@ -29,6 +34,7 @@ var PeoplePage = function() {
   };
 
   this.unblock = function (email) {
+    this.get();
     this.edit(email);
     browser.wait(EC.visibilityOf(this.statusField), browser.params.timeoutLimit);
     this.statusField.click();
@@ -38,6 +44,7 @@ var PeoplePage = function() {
   this.addRole = function(email, roleId) {
     var role = element(by.css('#edit-roles-' + roleId));
 
+    this.get();
     this.edit(email);
     browser.wait(EC.visibilityOf(role), browser.params.timeoutLimit);
     role.click();
@@ -51,11 +58,8 @@ var PeoplePage = function() {
     element(by.cssContainingText('td a', 'edit')).click();
   };
 
-  this.get = function() {
-    browser.get('admin/people');
-  };
-
   this.filter = function(email) {
+    this.get();
     browser.wait(EC.visibilityOf(this.emailField), browser.params.timeoutLimit);
     this.emailField.clear();
     this.emailField.sendKeys(email);

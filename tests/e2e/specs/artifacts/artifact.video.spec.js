@@ -38,17 +38,26 @@ describe('Video Artifact', function() {
 
   it ('Add a Video artifact as an authenticated user', function () {
     AllPages.AuthenticationPage.logout();
-    AllPages.RegistrationPage.get();
     AllPages.RegistrationPage.registerProfile(AllPages.RegistrationPage.simpleUser);
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-    AllPages.PeoplePage.get();
     AllPages.PeoplePage.unblock(AllPages.RegistrationPage.simpleUser.email);
     AllPages.PeoplePage.addRole(AllPages.RegistrationPage.defaultUser.email, 5);
     AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(AllPages.RegistrationPage.simpleUser.username, AllPages.RegistrationPage.simpleUser.pass);
-    AllPages.ArtifactVideoPage.get();
     AllPages.ArtifactVideoPage.add('Video Artifact', 'videoFile.mp4');
     AllPages.ArtifactVideoPage.checkPageLayout();
     AllPages.ArtifactVideoPage.checkPageElements();
+  });
+
+  it('Verify presence of the annotation list in a video artifact.', function () {
+    AllPages.AuthenticationPage.logout();
+    AllPages.RegistrationPage.registerProfile(AllPages.RegistrationPage.simpleUser);
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.simpleUser.email);
+    AllPages.PeoplePage.addRole(AllPages.RegistrationPage.defaultUser.email, 5);
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(AllPages.RegistrationPage.simpleUser.username, AllPages.RegistrationPage.simpleUser.pass);
+    AllPages.ArtifactVideoPage.add('Video Artifact', 'videoFile.mp4');
+    AllPages.ArtifactVideoPage.checkAnnotationList();
   });
 });

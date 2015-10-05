@@ -35,23 +35,23 @@ var RegistrationPage = function() {
 
   // Define registration attributes.
   // User fields.
-  this.usernameField = element(by.css('input#edit-name'));
-  this.emailField = element(by.css('input#edit-mail'));
-  this.pass1Field = element(by.css('input#edit-pass-pass1'));
-  this.pass2Field = element(by.css('input#edit-pass-pass2'));
+  this.usernameField = $('input#edit-name');
+  this.emailField    = $('input#edit-mail');
+  this.pass1Field    = $('input#edit-pass-pass1');
+  this.pass2Field    = $('input#edit-pass-pass2');
 
   // Profile fields.
-  this.fullnameField = element(by.css('input#edit-profile-pece-profile-main-field-pece-full-name-und-0-value'));
-  this.institutionField = element(by.css('input#edit-profile-pece-profile-main-field-pece-institution-und-0-value'));
-  this.positionField = element(by.css('input#edit-profile-pece-profile-main-field-pece-position-und-0-value'));
-  this.bioField = element(by.css('textarea#edit-profile-pece-profile-main-field-pece-biography-und-0-value'));
-  this.locStreetField = element(by.css('input#edit-profile-pece-profile-main-field-pece-location-und-0-street'));
-  this.locAdditionalField = element(by.css('input#edit-profile-pece-profile-main-field-pece-location-und-0-additional'));
-  this.locProvinceField = element(by.css('input#edit-profile-pece-profile-main-field-pece-location-und-0-province'));
-  this.locCountryField = element(by.css('select##edit-profile-pece-profile-main-field-pece-location-und-0-country'));
-  this.tagsField = element(by.css('input#edit-profile-pece-profile-main-field-pece-tags-und'));
-  this.tosField = element(by.css('input#edit-legal-accept'));
-  this.submitButton = element(by.css('input#edit-submit'));
+  this.fullnameField      = $('input#edit-profile-pece-profile-main-field-pece-full-name-und-0-value');
+  this.institutionField   = $('input#edit-profile-pece-profile-main-field-pece-institution-und-0-value');
+  this.positionField      = $('input#edit-profile-pece-profile-main-field-pece-position-und-0-value');
+  this.bioField           = $('textarea#edit-profile-pece-profile-main-field-pece-biography-und-0-value');
+  this.locStreetField     = $('input#edit-profile-pece-profile-main-field-pece-location-und-0-street');
+  this.locAdditionalField = $('input#edit-profile-pece-profile-main-field-pece-location-und-0-additional');
+  this.locProvinceField   = $('input#edit-profile-pece-profile-main-field-pece-location-und-0-province');
+  this.locCountryField    = $('select##edit-profile-pece-profile-main-field-pece-location-und-0-country');
+  this.tagsField          = $('input#edit-profile-pece-profile-main-field-pece-tags-und');
+  this.tosField           = $('input#edit-legal-accept');
+  this.submitButton       = $('input#edit-submit');
 
   // Define registration methods.
   this.register = function(user, email, pass, tos) {
@@ -81,6 +81,13 @@ var RegistrationPage = function() {
 
   this.fillUserFields = function(user, email, pass) {
     browser.wait(EC.visibilityOf(this.usernameField), browser.params.timeoutLimit);
+    // @TODO: Find why protractor needs this time in order to be able to fill
+    // the fields bellow.
+    browser.sleep(1000);
+    browser.sleep(1000);
+    browser.sleep(1000);
+    browser.sleep(1000);
+    this.usernameField.click();
     this.usernameField.sendKeys(user);
     this.emailField.sendKeys(email);
     this.pass1Field.sendKeys(pass);

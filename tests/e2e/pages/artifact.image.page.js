@@ -2,10 +2,11 @@
 * @file artifact.image.page.js
 */
 
-var helpers = require('../helpers/helpers');
-var SamplePage = require('./sample.page');
-var path = require('path');
 var EC = protractor.ExpectedConditions;
+
+var SamplePage = require('./sample.page'),
+    helpers    = require('../helpers/helpers'),
+    path       = require('path');
 
 var ArtifactImagePage = function() {
 
@@ -125,13 +126,13 @@ var ArtifactImagePage = function() {
   };
 
   this.addImage = function(fileName) {
-    var mediaElement = element.all(by.id('edit-upload-upload')).last();
-    var nextButton = element(by.css('#edit-next'));
-    var saveButton = element(by.css('[value="Save"]'));
-    var mediaInput = path.resolve(__dirname, '../assets/' + fileName);
+    var mediaElement = element.all(by.id('edit-upload-upload')).last(),
+        nextButton   = $('#edit-next'),
+        saveButton   = $('[value="Save"]'),
+        mediaInput   = path.resolve(__dirname, '../assets/' + fileName);
 
     // Click on media browse button.
-    element(by.css('.media-widget a.button.browse')).click();
+    $('.media-widget a.button.browse').click();
     browser.switchTo().frame('mediaBrowser');
 
     // Upload media.

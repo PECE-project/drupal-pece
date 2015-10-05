@@ -2,10 +2,11 @@
 * @file artifact.video.page.js
 */
 
-var helpers = require('../helpers/helpers');
-var SamplePage = require('./sample.page');
-var path = require('path');
-var EC = protractor.ExpectedConditions;
+var EC         = protractor.ExpectedConditions;
+
+var path       = require('path'),
+    helpers    = require('../helpers/helpers'),
+    SamplePage = require('./sample.page');
 
 var ArtifactVideoPage = function() {
 
@@ -98,6 +99,7 @@ var ArtifactVideoPage = function() {
   };
 
   this.add = function(title, fileName) {
+    this.get();
     browser.wait(EC.visibilityOf(this.mainElements.titleField), browser.params.timeoutLimit);
     this.mainElements.titleField.sendKeys(title);
     this.mainElements.uriField.sendKeys('uri1');
@@ -137,6 +139,11 @@ var ArtifactVideoPage = function() {
       expect(this.pageElements.hidden[key].isPresent()).toBe(false);
     }
   };
+
+  this.checkAnnotationList = function () {mainElements
+    SamplePage.get('/video-artifact');
+    expect(this.pageElements.visible.annotationList.isPresent()).toBe(true);
+  }
 };
 
 module.exports = new ArtifactVideoPage();
