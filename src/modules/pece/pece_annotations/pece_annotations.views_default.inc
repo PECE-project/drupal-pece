@@ -264,7 +264,7 @@ function pece_annotations_views_default_views() {
   /* Display: User - Artifact Annotations */
   $handler = $view->new_display('page', 'User - Artifact Annotations', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = '%1 -  %2 Annotations';
+  $handler->display->display_options['title'] = '%1 - [field_pece_artifact] Annotations';
   $handler->display->display_options['display_description'] = 'List annotations for a given user and a given artifact.';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Author */
@@ -272,6 +272,17 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Artifact */
+  $handler->display->display_options['fields']['field_pece_artifact']['id'] = 'field_pece_artifact';
+  $handler->display->display_options['fields']['field_pece_artifact']['table'] = 'field_data_field_pece_artifact';
+  $handler->display->display_options['fields']['field_pece_artifact']['field'] = 'field_pece_artifact';
+  $handler->display->display_options['fields']['field_pece_artifact']['label'] = '';
+  $handler->display->display_options['fields']['field_pece_artifact']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_pece_artifact']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_artifact']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_artifact']['settings'] = array(
+    'link' => 0,
+  );
   /* Field: Content: Analytic (Question) */
   $handler->display->display_options['fields']['field_pece_analytic']['id'] = 'field_pece_analytic';
   $handler->display->display_options['fields']['field_pece_analytic']['table'] = 'field_data_field_pece_analytic';
@@ -336,7 +347,9 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['field_pece_tags']['id'] = 'field_pece_tags';
   $handler->display->display_options['fields']['field_pece_tags']['table'] = 'field_data_field_pece_tags';
   $handler->display->display_options['fields']['field_pece_tags']['field'] = 'field_pece_tags';
+  $handler->display->display_options['fields']['field_pece_tags']['label'] = '';
   $handler->display->display_options['fields']['field_pece_tags']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_pece_tags']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_pece_tags']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['field_pece_tags']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_pece_tags']['hide_empty'] = TRUE;
@@ -408,7 +421,7 @@ function pece_annotations_views_default_views() {
     t('List users that have added annotations to a given artifact.'),
     t('Uid'),
     t('User - Artifact Annotations'),
-    t('%1 -  %2 Annotations'),
+    t('%1 - [field_pece_artifact] Annotations'),
     t('List annotations for a given user and a given artifact.'),
   );
   $export['pece_annotations'] = $view;
