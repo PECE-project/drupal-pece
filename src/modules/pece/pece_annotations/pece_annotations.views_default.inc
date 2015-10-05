@@ -277,7 +277,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['field_pece_analytic']['table'] = 'field_data_field_pece_analytic';
   $handler->display->display_options['fields']['field_pece_analytic']['field'] = 'field_pece_analytic';
   $handler->display->display_options['fields']['field_pece_analytic']['label'] = '';
-  $handler->display->display_options['fields']['field_pece_analytic']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_pece_analytic']['element_type'] = 'h2';
   $handler->display->display_options['fields']['field_pece_analytic']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_pece_analytic']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['field_pece_analytic']['element_default_classes'] = FALSE;
@@ -294,6 +294,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['field_pece_struct_analytics']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_pece_struct_analytics']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['field_pece_struct_analytics']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_struct_analytics']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_pece_struct_analytics']['settings'] = array(
     'link' => 0,
   );
@@ -338,6 +339,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['field_pece_tags']['element_type'] = '0';
   $handler->display->display_options['fields']['field_pece_tags']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['field_pece_tags']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_tags']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_pece_tags']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_pece_tags']['field_api_classes'] = TRUE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
