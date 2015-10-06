@@ -99,6 +99,12 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['arguments']['field_pece_analytic_target_id']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_pece_analytic_target_id']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_pece_analytic_target_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_pece_analytic_target_id']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['field_pece_analytic_target_id']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['field_pece_analytic_target_id']['validate_options']['types'] = array(
+    'pece_analytic' => 'pece_analytic',
+  );
+  $handler->display->display_options['arguments']['field_pece_analytic_target_id']['validate_options']['access'] = TRUE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -423,7 +429,7 @@ function pece_annotations_views_default_views() {
   /* Display: Questions - Artifacts Annotetions */
   $handler = $view->new_display('page', 'Questions - Artifacts Annotetions', 'pece_question_artifact_annotions');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = '%1 | [field_pece_struct_analytics] - %2';
+  $handler->display->display_options['title'] = '%1 [field_pece_struct_analytics] - %2';
   $handler->display->display_options['defaults']['footer'] = FALSE;
   /* Footer: Global: Text area */
   $handler->display->display_options['footer']['area']['id'] = 'area';
@@ -437,16 +443,23 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_pece_analytic_target_id']['id'] = 'field_pece_analytic_target_id';
+  $handler->display->display_options['relationships']['field_pece_analytic_target_id']['table'] = 'field_data_field_pece_analytic';
+  $handler->display->display_options['relationships']['field_pece_analytic_target_id']['field'] = 'field_pece_analytic_target_id';
+  $handler->display->display_options['relationships']['field_pece_analytic_target_id']['label'] = 'Analytic';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Question Set */
   $handler->display->display_options['fields']['field_pece_struct_analytics']['id'] = 'field_pece_struct_analytics';
   $handler->display->display_options['fields']['field_pece_struct_analytics']['table'] = 'field_data_field_pece_struct_analytics';
   $handler->display->display_options['fields']['field_pece_struct_analytics']['field'] = 'field_pece_struct_analytics';
+  $handler->display->display_options['fields']['field_pece_struct_analytics']['relationship'] = 'field_pece_analytic_target_id';
   $handler->display->display_options['fields']['field_pece_struct_analytics']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_pece_struct_analytics']['settings'] = array(
     'link' => 0,
   );
   $handler->display->display_options['fields']['field_pece_struct_analytics']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_pece_struct_analytics']['field_api_classes'] = TRUE;
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -597,8 +610,9 @@ function pece_annotations_views_default_views() {
     t('Question'),
     t('Nid'),
     t('Questions - Artifacts Annotetions'),
-    t('%1 | [field_pece_struct_analytics] - %2'),
+    t('%1 [field_pece_struct_analytics] - %2'),
     t('<a href="/node/!1">See all responses to this analytic</a>'),
+    t('Analytic'),
     t('Question Set'),
   );
   $export['pece_annotations'] = $view;
