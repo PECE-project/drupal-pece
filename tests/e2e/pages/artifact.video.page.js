@@ -124,6 +124,10 @@ var ArtifactVideoPage = function() {
     // Upload media.
     mediaElement.sendKeys(mediaInput);
     nextButton.click();
+    /* The below line is needed because when adding a media
+    /* more than one next button is displayed.
+    */
+    nextButton.click();
     browser.switchTo().defaultContent();
   };
 

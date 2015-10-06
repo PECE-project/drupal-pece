@@ -114,7 +114,7 @@ var ArtifactPdfPage = function() {
     this.mainElements.uriField.sendKeys('uri1');
     this.addPdf(fileName);
     $('#edit-field-permissions-und-private').click();
-    
+
     // Protractor already scrolled down to click in permission bullet,
     // and can not manage to scroll back up to click in publish
     // button, that's why the script.
@@ -132,6 +132,10 @@ var ArtifactPdfPage = function() {
 
     // Upload media.
     mediaElement.sendKeys(mediaInput);
+    nextButton.click();
+    /* The below line is needed because when adding a media
+    /* more than one next button is displayed.
+    */
     nextButton.click();
     browser.switchTo().defaultContent();
   };

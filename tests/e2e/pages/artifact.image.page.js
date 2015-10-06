@@ -138,6 +138,10 @@ var ArtifactImagePage = function() {
     // Upload media.
     mediaElement.sendKeys(mediaInput);
     nextButton.click();
+    /* The below line is needed because when adding a media
+    /* more than one next button is displayed.
+    */
+    nextButton.click();
     browser.wait(EC.visibilityOf(saveButton), browser.params.timeoutLimit);
     saveButton.click();
     browser.switchTo().defaultContent();
