@@ -230,7 +230,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['name']['alter']['path'] = 'annotations/[uid]/!1';
+  $handler->display->display_options['fields']['name']['alter']['path'] = 'annotations/user/[uid]/artifact/!1';
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
