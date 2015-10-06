@@ -186,13 +186,16 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['relationship'] = 'field_pece_artifact_target_id';
   $handler->display->display_options['fields']['title_1']['label'] = 'In response to';
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Text */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['element_type'] = '0';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['body']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['body']['field_api_classes'] = TRUE;
 
   /* Display: Artifact Annotations - Users  */
   $handler = $view->new_display('panel_pane', 'Artifact Annotations - Users ', 'pece_artifact_user_annotations');
@@ -484,6 +487,8 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['field_pece_tags_1']['id'] = 'field_pece_tags_1';
   $handler->display->display_options['fields']['field_pece_tags_1']['table'] = 'field_data_field_pece_tags';
   $handler->display->display_options['fields']['field_pece_tags_1']['field'] = 'field_pece_tags';
+  $handler->display->display_options['fields']['field_pece_tags_1']['label'] = '';
+  $handler->display->display_options['fields']['field_pece_tags_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_pece_tags_1']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_pece_tags_1']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
