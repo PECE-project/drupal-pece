@@ -163,7 +163,6 @@ function pece_annotations_views_default_views() {
 
   /* Display: Question annotations */
   $handler = $view->new_display('panel_pane', 'Question annotations', 'pece_question_annotations');
-  $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
