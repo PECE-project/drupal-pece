@@ -155,7 +155,7 @@ function pece_annotations_panelizer_defaults() {
   $display->content['new-d6ccd130-c8e4-4165-9351-2aab864798df'] = $pane;
   $display->panels['center'][3] = 'new-d6ccd130-c8e4-4165-9351-2aab864798df';
   $pane = new stdClass();
-  $pane->pid = 'new-403975b8-5de2-42ac-9d30-ab380a93cb1e';
+  $pane->pid = 'new-73a6eab8-a57f-43fa-80cb-1b7c510e2069';
   $pane->panel = 'center';
   $pane->type = 'views_panes';
   $pane->subtype = 'pece_annotations-pece_question_annotations';
@@ -174,9 +174,9 @@ function pece_annotations_panelizer_defaults() {
   $pane->extras = array();
   $pane->position = 4;
   $pane->locks = array();
-  $pane->uuid = '403975b8-5de2-42ac-9d30-ab380a93cb1e';
-  $display->content['new-403975b8-5de2-42ac-9d30-ab380a93cb1e'] = $pane;
-  $display->panels['center'][4] = 'new-403975b8-5de2-42ac-9d30-ab380a93cb1e';
+  $pane->uuid = '73a6eab8-a57f-43fa-80cb-1b7c510e2069';
+  $display->content['new-73a6eab8-a57f-43fa-80cb-1b7c510e2069'] = $pane;
+  $display->panels['center'][4] = 'new-73a6eab8-a57f-43fa-80cb-1b7c510e2069';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-d6ccd130-c8e4-4165-9351-2aab864798df';
   $panelizer->display = $display;
