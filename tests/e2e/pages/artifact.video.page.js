@@ -45,7 +45,8 @@ var ArtifactVideoPage = function() {
       // Right side form elements.
       createdField      : $('.radix-layouts-column2 .pane-node-created .pane-title'),
       contributorsFields: $('.radix-layouts-column2 .field-name-field-pece-contributors'),
-      annotationList    : $('.views-view-annotations-by-user')
+      // @TODO: Create a separete test for validating the annotation list.
+      // annotationList    : $('.views-view-annotations-by-user')
     },
 
     hidden: {
