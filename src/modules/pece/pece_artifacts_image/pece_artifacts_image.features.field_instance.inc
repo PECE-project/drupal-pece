@@ -356,7 +356,7 @@ function pece_artifacts_image_field_default_field_instances() {
       'module' => 'location_cck',
       'settings' => array(),
       'type' => 'location',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 
@@ -586,7 +586,7 @@ function pece_artifacts_image_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 11,
     ),
   );
 
