@@ -28,7 +28,7 @@ describe('Annotation', function() {
     // AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
   });
 
-  fit('should not be visible for anonymous users.', function() {
+  it('should not be visible for anonymous users.', function() {
     AllPages.SamplePage.get('content/text-artifact-annotation');
     expect(AllPages.AnnotationPage.annotateButton.isPresent()).toBe(false);
   });
