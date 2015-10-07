@@ -30,7 +30,7 @@ var PeoplePage = function() {
     cancelOption.click();
     cancelButton.click();
 
-    // browser.wait(EC.visibilityOf(element(by.css('.messages.status'))), browser.params.timeoutLimit);
+    browser.wait(element(by.css('.messages.status')).isDisplayed);
   };
 
   this.unblock = function (email) {
