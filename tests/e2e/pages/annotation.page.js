@@ -25,11 +25,6 @@ var AnnotationPage = function() {
   this.finishButton  = $('#pece-annotations-annotate-form-third #edit-submit');
   this.continueButton = element(by.id('edit-next'));
 
-  this.clickAnnotate = function() {
-    browser.wait(EC.visibilityOf(this.annotateButton), browser.params.timeoutLimit);
-    this.annotateButton.click();
-  }
-
   this.checkNoQuestionSetEntered = function() {
     this.continueButton.click();
     SamplePage.checkMessage('You have to choose at least one of the structured analytics options below or create a new question set by filling the Question set title field.');
@@ -40,13 +35,18 @@ var AnnotationPage = function() {
     SamplePage.checkMessage('You have to choose at least one of the analytics options below or create a new question by filling the Question title field.');
   };
 
-  this.add = function(title, fileName) {
-    this.clickAnnotate();
-    browser.wait(EC.visibilityOf(this.mainElements.questionSetField), browser.params.timeoutLimit);
-    browser.sleep(3000);
-    // this.continueButton.click();
-    // this.finishButton.click();
-  };
+  // @TODO: Finish this method.
+  // this.add = function(title, fileName) {
+  //   this.clickAnnotate();
+  //   browser.wait(this.mainElements.questionSetField.isDisplayed);
+  //   this.continueButton.click();
+  //   this.finishButton.click();
+  // };
+
+  this.clickAnnotate = function() {
+    browser.wait(this.annotateButton.isDisplayed);
+    this.annotateButton.click();
+  }
 };
 
 module.exports = new AnnotationPage();
