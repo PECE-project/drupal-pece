@@ -105,24 +105,15 @@ var ArtifactTextPage = function() {
 
   this.add = function(title, text) {
     this.get();
-    // browser.wait(EC.visibilityOf(this.mainElements.titleField), browser.params.timeoutLimit);
-    browser.sleep(1000);
-    browser.sleep(1000);
-    browser.sleep(1000);
-    this.mainElements.titleField.click();
+    browser.wait(this.mainElements.titleField.isDisplayed);
     this.mainElements.titleField.sendKeys(title);
     this.mainElements.uriField.sendKeys('texturi1');
     this.mainElements.textField.sendKeys(text);
-    this.mainElements.permissionsField.element(by.css('input[value="open"]')).click();
-    // $('#edit-field-permissions-und-open').click();
-    // @TODO: Discovery why the below two lines are comented.
-    this.mainElements.tagsField.sendKeys('foo');
-    this.mainElements.authorsField.sandKeys('John Do');
-
+    element(by.css('input[value="open"]')).click();
     // Protractor already scrolled down to click in permission bullet,
     // and can not manage to scroll back up to click in publish
     // button, that's why the script.
-    browser.executeScript("jQuery('#edit-submit').click()");
+    browser.executeScript('document.querySelector(\'#edit-submit\').click();');
   };
 };
 
