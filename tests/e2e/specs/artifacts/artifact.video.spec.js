@@ -49,7 +49,8 @@ describe('Video Artifact', function() {
     AllPages.ArtifactVideoPage.checkPageElements();
   });
 
-  it('Verify presence of the annotation list in a video artifact.', function () {
+  // @TODO: This test is still not ready. An annotation needs to be created for the artifact.
+  xit('Verify presence of the annotation list in a video artifact.', function () {
     AllPages.AuthenticationPage.logout();
     AllPages.RegistrationPage.registerProfile(AllPages.RegistrationPage.simpleUser);
     AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
