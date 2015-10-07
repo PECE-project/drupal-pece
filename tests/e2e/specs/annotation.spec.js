@@ -11,22 +11,22 @@ describe('Annotation', function() {
   // This is the pre-condition step all tests.
   beforeAll(function() {
     AllPages.AuthenticationPage.logout();
-    // AllPages.RegistrationPage.registerProfile();
-    // AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-    // AllPages.PeoplePage.get();
-    // AllPages.PeoplePage.unblock(AllPages.RegistrationPage.defaultUser.email);
-    // AllPages.PeoplePage.addRole(AllPages.RegistrationPage.defaultUser.email, 5);
-    // AllPages.AuthenticationPage.logout();
+    AllPages.RegistrationPage.registerProfile();
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    AllPages.PeoplePage.get();
+    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.defaultUser.email);
+    AllPages.PeoplePage.addRole(AllPages.RegistrationPage.defaultUser.email, 5);
+    AllPages.AuthenticationPage.logout();
     AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
     AllPages.ArtifactTextPage.add('Text Artifact Annotation', 'Lorem ipsum dolar sit.');
     AllPages.AuthenticationPage.logout();
   });
 
-  afterAll(function() {
-    // AllPages.AuthenticationPage.logout();
-    // AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-    // AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
-  });
+  // afterAll(function() {
+  //   AllPages.AuthenticationPage.logout();
+  //   AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+  //   AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
+  // });
 
   it('should not be visible for anonymous users.', function() {
     AllPages.SamplePage.get('content/text-artifact-annotation');
@@ -40,7 +40,8 @@ describe('Annotation', function() {
     AllPages.AnnotationPage.checkNoQuestionSetEntered();
   });
 
-  it('should be available for Researcher user to create it.', function() {
+  // @TODO: This test will be skipped because the add method from the annotation page is not ready yet.
+  xit('should be available for Researcher user to create it.', function() {
     AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
     AllPages.SamplePage.get('content/text-artifact-annotation');
     AllPages.AnnotationPage.add();
