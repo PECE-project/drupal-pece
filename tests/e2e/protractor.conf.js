@@ -20,7 +20,7 @@ module.exports.config = lodash.assign({
       'user': authentication.getInfo('user'),
       'password': authentication.getInfo('password')
     },
-    timeoutLimit : 3000
+    timeoutLimit : 5000
   },
 
   // The test files are stored into the specs array, separated by comma.
