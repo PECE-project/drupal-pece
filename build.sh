@@ -36,3 +36,4 @@ drush genc 3 0 --types=pece_artifact_image
 drush genc 3 0 --types=pece_artifact_audio
 drush genc 3 0 --types=pece_artifact_video
 drush genc 3 0 --types=pece_artifact_fieldnote
+drush genc 3 0 --types=pece_memo
