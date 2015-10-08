@@ -9,9 +9,9 @@ drush kw-u
 ## Uncomment for CM left sync.
 # drush clsyn
 
-if [ -d "profiles/pece/themes/pece_radix/" ]; then
+if [ -d "profiles/pece/themes/pece_scholarly_lite/" ]; then
   (
-    cd profiles/pece/themes/pece_radix/
+    cd profiles/pece/themes/pece_scholarly_lite/
     bundle install
     bundle exec "compass clean && compass compile"
   )
