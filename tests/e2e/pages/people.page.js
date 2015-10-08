@@ -39,6 +39,7 @@ var PeoplePage = function() {
     browser.wait(EC.visibilityOf(this.statusField), browser.params.timeoutLimit);
     this.statusField.click();
     this.confirmButton.click();
+    browser.wait(element(by.css('.messages')).isDisplayed);
   };
 
   this.addRole = function(email, roleId) {
@@ -49,6 +50,7 @@ var PeoplePage = function() {
     browser.wait(EC.visibilityOf(role), browser.params.timeoutLimit);
     role.click();
     this.confirmButton.click();
+    browser.wait(element(by.css('.messages')).isDisplayed);
   };
 
   this.edit = function(email) {
