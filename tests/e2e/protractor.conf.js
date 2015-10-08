@@ -72,6 +72,6 @@ module.exports.config = lodash.assign({
   jasmineNodeOpts: {
     showColors: true,
     includeStackTrace: true,
-    defaultTimeoutInterval: 99999
+    defaultTimeoutInterval: 999999
   }
 }, fs.existsSync(__dirname + '/protractor.conf.local.js') ? require(__dirname + '/protractor.conf.local.js').config : {});
