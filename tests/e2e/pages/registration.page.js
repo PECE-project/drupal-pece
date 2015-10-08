@@ -59,6 +59,7 @@ var RegistrationPage = function() {
     this.fillUserFields(user, email, pass);
     this.checkTosField(tos);
     this.submitRegisterForm();
+    browser.wait(element(by.css('.messages')).isDisplayed);
   };
 
   this.registerProfile = function(user) {
@@ -73,6 +74,7 @@ var RegistrationPage = function() {
       this.checkTosField(user.tos);
     }
     this.submitRegisterForm();
+    browser.wait(element(by.css('.messages')).isDisplayed);
   };
 
   this.get = function() {

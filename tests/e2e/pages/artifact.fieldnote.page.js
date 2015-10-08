@@ -89,11 +89,13 @@ var ArtifactFieldnotePage = function() {
     this.mainElements.uriField.sendKeys('uri1');
     this.mainElements.textField.sendKeys(fieldNoteText);
     $('#edit-field-permissions-und-private').click();
-    
+
     // Protractor already scrolled down to click in permission bullet,
     // and can not manage to scroll back up to click in publish
     // button, that's why the script.
     browser.executeScript("jQuery('#edit-submit').click()");
+
+    browser.wait(element(by.css('.messages.status')).isDisplayed);
   };
 
 };
