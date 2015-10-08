@@ -22,11 +22,11 @@ describe('Annotation', function() {
     AllPages.AuthenticationPage.logout();
   });
 
-  // afterAll(function() {
-  //   AllPages.AuthenticationPage.logout();
-  //   AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-  //   AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
-  // });
+  afterAll(function() {
+    AllPages.AuthenticationPage.logout();
+    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
+  });
 
   it('should not be visible for anonymous users.', function() {
     AllPages.SamplePage.get('content/text-artifact-annotation');
