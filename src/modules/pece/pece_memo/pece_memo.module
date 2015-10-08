@@ -1,0 +1,16 @@
+<?php
+/**
+ * @file
+ * Code for the pece_memo feature.
+ */
+
+include_once 'pece_memo.features.inc';
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_memo_form_pece_memo_node_form_alter(&$form, &$form_state) {
+
+  // We cannot allow the content to be authored by anonymous.
+  $form['author']['name']['#required'] = TRUE;
+}
