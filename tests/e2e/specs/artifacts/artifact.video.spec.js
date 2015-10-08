@@ -60,5 +60,5 @@ describe('Video Artifact', function() {
     AllPages.AuthenticationPage.login(AllPages.RegistrationPage.simpleUser.username, AllPages.RegistrationPage.simpleUser.pass);
     AllPages.ArtifactVideoPage.add('Video Artifact', 'videoFile.mp4');
     AllPages.ArtifactVideoPage.checkAnnotationList();
-  }).pend('This test is still not ready. An annotation needs to be created for the artifact');;
+  }).pend('This test is still not ready. An annotation needs to be created for the artifact');
 });
