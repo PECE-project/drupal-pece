@@ -45,5 +45,5 @@ describe('Annotation', function() {
     AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
     AllPages.SamplePage.get('content/text-artifact-annotation');
     AllPages.AnnotationPage.add();
-  });
+  }).pend('This test will be skipped because the add method from the annotation page is not ready yet');
 });
