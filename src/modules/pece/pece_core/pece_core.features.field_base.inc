@@ -164,7 +164,6 @@ function pece_core_field_default_field_bases() {
           'view_name' => 'users_field_ref',
         ),
       ),
-      'profile2_private' => FALSE,
       'target_type' => 'user',
     ),
     'translatable' => 0,
