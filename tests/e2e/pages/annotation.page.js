@@ -26,11 +26,13 @@ var AnnotationPage = function() {
   this.continueButton = element(by.id('edit-next'));
 
   this.checkNoQuestionSetEntered = function() {
+    browser.wait(EC.visibilityOf(this.continueButton), browser.params.timeoutLimit);
     this.continueButton.click();
     SamplePage.checkMessage('You have to choose at least one of the structured analytics options below or create a new question set by filling the Question set title field.');
   };
 
   this.checkNoQuestionEntered = function() {
+    browser.wait(EC.visibilityOf(this.continueButton), browser.params.timeoutLimit);
     this.continueButton.click();
     SamplePage.checkMessage('You have to choose at least one of the analytics options below or create a new question by filling the Question title field.');
   };
