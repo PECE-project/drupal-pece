@@ -33,13 +33,13 @@ var MemoPage = function() {
 
   this.pageElements = {
 
-    layoutWrapper: $('.panel-flexible'),
+    layoutWrapper: $('.node-main-content'),
 
     visible: {
       titleField         : $('h1'),
       textField          : $('.field-name-body'),
       licenceField       : $('.field-name-field-pece-license'),
-      commentBox         : $('.pane-node-comment-wrapper #comments'),
+      commentBox         : $('#comments'),
     },
 
     hidden: {}
@@ -82,6 +82,7 @@ var MemoPage = function() {
   };
 
   this.checkPageElements = function() {
+    browser.wait(this.pageElements.visible.commentBox.isDisplayed);
     for (var key in this.pageElements.visible) {
       expect(this.pageElements.visible[key].isDisplayed()).toBe(true);
     }
