@@ -469,7 +469,11 @@ function pece_artifacts_website_field_default_field_instances() {
   // Exported field_instance: 'node-pece_artifact_website-field_permissions'
   $field_instances['node-pece_artifact_website-field_permissions'] = array(
     'bundle' => 'pece_artifact_website',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'open',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
