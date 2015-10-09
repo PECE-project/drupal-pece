@@ -250,6 +250,7 @@ projects[search_krumo][subdir] = dev
 
 projects[drush_clone][subdir] = dev
 projects[drush_entity][subdir] = dev
+projects[search_krumo][subdir] = dev
 projects[module_builder][subdir] = dev
 projects[drupal_ipsum][subdir] = dev
 projects[environment_indicator][subdir] = dev
