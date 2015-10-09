@@ -74,7 +74,6 @@ var RegistrationPage = function() {
       this.checkTosField(user.tos);
     }
     this.submitRegisterForm();
-    browser.wait(element(by.css('.messages')).isDisplayed);
   };
 
   this.get = function() {
