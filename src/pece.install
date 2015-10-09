@@ -49,12 +49,6 @@ function pece_kw_manifests_info() {
    'callback' => 'pece_manifest_define_analytics_perms',
   );
 
- $manifests['enable_devel_modules'] = array(
-   'callback' => 'pece_manifest_enable_devel_modules',
-   'require environment' => array('development', 'local'),
- );
-
-
   return $manifests;
 }
 
@@ -67,15 +61,6 @@ function pece_manifest_define_themes() {
   _pece_set_up_theme();
 }
 
-/**
- * Enable developemnt related modules.
- */
-function pece_manifest_enable_devel_modules() {
-  module_enable(array(
-    'devel_generate',
-    'search_krumo'
-  ));
-}
 
 /**
  * Add permissions for PECE users to create Question Set taxonomy terms.
