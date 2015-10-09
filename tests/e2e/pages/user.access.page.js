@@ -32,6 +32,7 @@ var UserAccessPage = function() {
   };
 
   this.expectAllowedContent = function(title) {
+    browser.wait(EC.visibilityOf(element(by.css('h1'))), browser.params.timeoutLimit);
     expect(element(by.cssContainingText('h1', title)).isPresent()).toBe(true);
   };
 
