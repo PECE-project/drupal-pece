@@ -2,30 +2,33 @@
 * @file artifact.website.page.js
 */
 
+var path = require('path');
 var helpers = require('../helpers/helpers');
 var SamplePage = require('./sample.page');
-var path = require('path');
+var ArtifactTextPage = require('./artifact.text.page');
 
 var ArtifactBundlePage = function() {
+
+  var formId = '#pece-artifact-bundle-node-form ';
 
   // Define website artifact page object attributes.
   this.mainElements = {
 
     // Form main elements.
-    titleField: element(by.css('#pece-artifact-bundle-node-form #edit-title')),
-    uriField: element(by.css('#pece-artifact-bundle-node-form #edit-field-pece-uri-und-0-value')),
-    artifactsField: element(by.css('#pece-artifact-bundle-node-form #edit-field-pece-website-url-und-0-url')),
-    fieldsiteField: element(by.css('#pece-artifact-bundle-node-form #edit-field-pece-fieldsite-und-0-target-id')),
-    contributorsFields: element(by.css('#pece-artifact-bundle-node-form #edit-field-pece-contributors-und-0-target-id')),
-    tagsField: element(by.css('#pece-artifact-bundle-node-form #edit-field-pece-tags-und')),
-    licenceField: element(by.css('#pece-artifact-bundle-node-form #edit-field-pece-license-und-0-licence')),
-    authorsField: element(by.css('#pece-artifact-bundle-node-form #edit-field-pece-authors-und')),
+    titleField: element(by.css(formId + '#edit-title')),
+    uriField: element(by.css(formId + '#edit-field-pece-uri-und-0-value')),
+    artifactsField: element(by.css(formId + '#edit-field-pece-artifacts-und-0-target-id')),
+    fieldsiteField: element(by.css(formId + '#edit-field-pece-fieldsite-und-0-target-id')),
+    contributorsFields: element(by.css(formId + '#edit-field-pece-contributors-und-0-target-id')),
+    tagsField: element(by.css(formId + '#edit-field-pece-tags-und')),
+    licenceField: element(by.css(formId + '#edit-field-pece-license-und-0-licence')),
+    authorsField: element(by.css(formId + '#edit-field-pece-authors-und')),
 
     // Right side form elements.
-    publishedOnDateField: element(by.css('#pece-artifact-bundle-node-form .radix-layouts-sidebar #edit-pubdate-datepicker-popup-0')),
-    createNewRevisionField: element(by.css('#pece-artifact-bundle-node-form .radix-layouts-sidebar #edit-log')),
-    authorField: element(by.css('#pece-artifact-bundle-node-form .radix-layouts-sidebar #edit-name')),
-    dateField: element(by.css('#pece-artifact-bundle-node-form .radix-layouts-sidebar #edit-date-datepicker-popup-0'))
+    publishedOnDateField: element(by.css(formId + '.radix-layouts-sidebar #edit-pubdate-datepicker-popup-0')),
+    createNewRevisionField: element(by.css(formId + '.radix-layouts-sidebar #edit-log')),
+    authorField: element(by.css(formId + '.radix-layouts-sidebar #edit-name')),
+    dateField: element(by.css(formId + '.radix-layouts-sidebar #edit-date-datepicker-popup-0'))
 
   };
 
@@ -65,7 +68,10 @@ var ArtifactBundlePage = function() {
     this.publishButton.click();
     SamplePage.checkMessage('Title field is required.');
     SamplePage.checkMessage('URI field is required.');
-    SamplePage.checkMessage('Artifacts field is required.');
+    SamplePage.checkMessage('Author field is required.');
+    // Drupal has a label issue with multiple fields.
+    // This validation refers to the Artifacts field.
+    SamplePage.checkMessage('field is required.');
   };
 
   this.clearMandatoryFields = function() {
@@ -93,10 +99,12 @@ var ArtifactBundlePage = function() {
   };
 
   this.add = function(title) {
+    ArtifactTextPage.add('Text Artifact', 'Lorem ipsum dolar sit.');
     this.get();
     browser.wait(this.mainElements.uriField.isDisplayed());
     this.mainElements.titleField.sendKeys(title);
     this.mainElements.uriField.sendKeys('artifactBundleUri');
+    helpers.selectAutocompleteReference(this.mainElements.artifactsField, 'Text Artifact');
     $('#edit-field-permissions-und-open').click();
 
     // Protractor already scrolled down to click in permission bullet,

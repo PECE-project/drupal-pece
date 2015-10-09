@@ -33,5 +33,6 @@ require('./specs/artifacts/artifact.pdf.spec.js');
 require('./specs/artifacts/artifact.video.spec.js');
 require('./specs/artifacts/artifact.audio.spec.js');
 require('./specs/artifacts/artifact.website.spec.js');
+require('./specs/artifacts/artifact.bundle.spec.js');
 require('./specs/annotation.spec.js');
 require('./specs/memo.spec.js');

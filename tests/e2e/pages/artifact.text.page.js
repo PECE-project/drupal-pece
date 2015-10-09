@@ -114,6 +114,8 @@ var ArtifactTextPage = function() {
     // and can not manage to scroll back up to click in publish
     // button, that's why the script.
     browser.executeScript('document.querySelector(\'#edit-submit\').click();');
+
+    browser.wait(this.pageElements.visible.titleField.isDisplayed());
   };
 };
 
