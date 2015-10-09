@@ -236,3 +236,20 @@ projects[taxonomy_access_fix][version] = 2.2
 ; Annotator
 ;projects[annotator][subdir] = contrib
 ;projects[annotator][version] = 1.x-dev
+
+
+; =====================
+; Debuging Modules
+; =====================
+
+projects[search_krumo][subdir] = dev
+
+; =====================
+; Development Modules
+; =====================
+
+projects[drush_clone][subdir] = dev
+projects[drush_entity][subdir] = dev
+projects[module_builder][subdir] = dev
+projects[drupal_ipsum][subdir] = dev
+projects[environment_indicator][subdir] = dev

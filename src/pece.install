@@ -25,6 +25,8 @@ function _pece_set_up_theme() {
   $theme = 'pece_scholarly_lite';
   $admin_theme = 'adminimal';
   theme_enable(array($theme));
+  // Adminimal Theme must be enabled to work properly.
+  theme_enable(array($admin_theme));
   variable_set('theme_default', $theme);
   variable_set('admin_theme', $admin_theme);
   variable_set('node_admin_theme', 1);
