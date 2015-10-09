@@ -40,14 +40,17 @@ gulp.task('webdriver:start', function (done) {
    * Message received from webdriver child process.
    */
   function onMessage(data) {
-    var okMessages = [
-      'Selenium Server is up and running',
-      'Selenium is already running on port 4444'
-    ];
+    var notOk = false;
 
-    okMessages.some(function (message) {
-      if (data.indexOf(message) > 1) {
-        done();
+    var expectedMessages = {
+      'Selenium Standalone is not present'      : 'error',
+      'Selenium Server is up and running'       : 'success',
+      'Selenium is already running on port 4444': 'success'
+    };
+
+    Object.keys(expectedMessages).some(function (message) {
+      if (data.indexOf(message) > -1) {
+        done(expectedMessages[message] == 'error' ? message : null);
         return true;
       }
     });
