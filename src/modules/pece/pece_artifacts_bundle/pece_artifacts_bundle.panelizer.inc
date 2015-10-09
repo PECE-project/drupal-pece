@@ -45,10 +45,10 @@ function pece_artifacts_bundle_panelizer_defaults() {
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
-  $pane->pid = 'new-1bf6a303-eb67-4622-8cd1-ece6c50f8a3c';
+  $pane->pid = 'new-870bca3c-5c92-427f-837d-4e5c819f1bf5';
   $pane->panel = 'column1';
   $pane->type = 'entity_field';
-  $pane->subtype = 'node:field_pece_artifact';
+  $pane->subtype = 'node:field_pece_artifacts';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
@@ -73,9 +73,9 @@ function pece_artifacts_bundle_panelizer_defaults() {
   $pane->extras = array();
   $pane->position = 0;
   $pane->locks = array();
-  $pane->uuid = '1bf6a303-eb67-4622-8cd1-ece6c50f8a3c';
-  $display->content['new-1bf6a303-eb67-4622-8cd1-ece6c50f8a3c'] = $pane;
-  $display->panels['column1'][0] = 'new-1bf6a303-eb67-4622-8cd1-ece6c50f8a3c';
+  $pane->uuid = '870bca3c-5c92-427f-837d-4e5c819f1bf5';
+  $display->content['new-870bca3c-5c92-427f-837d-4e5c819f1bf5'] = $pane;
+  $display->panels['column1'][0] = 'new-870bca3c-5c92-427f-837d-4e5c819f1bf5';
   $pane = new stdClass();
   $pane->pid = 'new-5d5233ac-3dd0-49d7-bd4d-a89dc73604f5';
   $pane->panel = 'column1';

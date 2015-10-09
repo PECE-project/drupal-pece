@@ -15,6 +15,7 @@ var ArtifactPdfPage = require('./artifact.pdf.page');
 var ArtifactTextPage = require('./artifact.text.page');
 var ArtifactVideoPage = require('./artifact.video.page');
 var ArtifactWebsitePage = require('./artifact.website.page');
+var ArtifactBundlePage = require('./artifact.bundle.page');
 var AnalyticPage = require('./analytic.page');
 var StructuredAnalyticsPage = require('./structured.analytics.page');
 var UserAccessPage = require('./user.access.page');
@@ -38,6 +39,7 @@ module.exports = {
   'ArtifactTextPage': ArtifactTextPage,
   'ArtifactVideoPage': ArtifactVideoPage,
   'ArtifactWebsitePage': ArtifactWebsitePage,
+  'ArtifactBundlePage': ArtifactBundlePage,
   'AnalyticPage': AnalyticPage,
   'StructuredAnalyticsPage': StructuredAnalyticsPage,
   'UserAccessPage': UserAccessPage,

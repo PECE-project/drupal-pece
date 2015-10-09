@@ -65,6 +65,7 @@ function pece_annotations_annotation_pane_render($subtype, $conf, $args, $contex
     'pece_artifact_text',
     'pece_artifact_video',
     'pece_artifact_website',
+    'pece_artifact_bundle',
   );
 
   // Check for device node context.

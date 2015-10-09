@@ -10,8 +10,8 @@
 function pece_artifacts_bundle_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-pece_artifact_bundle-field_pece_artifact'
-  $field_instances['node-pece_artifact_bundle-field_pece_artifact'] = array(
+  // Exported field_instance: 'node-pece_artifact_bundle-field_pece_artifacts'
+  $field_instances['node-pece_artifact_bundle-field_pece_artifacts'] = array(
     'bundle' => 'pece_artifact_bundle',
     'default_value' => NULL,
     'deleted' => 0,
@@ -21,7 +21,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => FALSE,
+          'link' => 1,
         ),
         'type' => 'entityreference_label',
         'weight' => 2,
@@ -45,7 +45,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
     'entityconnect_unload_add' => 1,
     'entityconnect_unload_edit' => 1,
     'fences_wrapper' => 'div',
-    'field_name' => 'field_pece_artifact',
+    'field_name' => 'field_pece_artifacts',
     'label' => 'Artifacts',
     'required' => 1,
     'settings' => array(
