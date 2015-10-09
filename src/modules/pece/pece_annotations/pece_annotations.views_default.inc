@@ -191,7 +191,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['relationship'] = 'field_pece_artifact_target_id';
   $handler->display->display_options['fields']['title_1']['label'] = 'In response to';
-  /* Field: Content: Text */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -256,6 +256,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['validate']['type'] = 'node';
   $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['validate_options']['types'] = array(
     'pece_artifact_audio' => 'pece_artifact_audio',
+    'pece_artifact_bundle' => 'pece_artifact_bundle',
     'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
@@ -352,7 +353,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['created']['date_format'] = 'long';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
-  /* Field: Content: Text */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -407,6 +408,19 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['validate_options']['types'] = array(
+    'pece_artifact_audio' => 'pece_artifact_audio',
+    'pece_artifact_bundle' => 'pece_artifact_bundle',
+    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
+    'pece_artifact_image' => 'pece_artifact_image',
+    'pece_artifact_pdf' => 'pece_artifact_pdf',
+    'pece_artifact_text' => 'pece_artifact_text',
+    'pece_artifact_video' => 'pece_artifact_video',
+    'pece_artifact_website' => 'pece_artifact_website',
+  );
+  $handler->display->display_options['arguments']['field_pece_artifact_target_id']['validate_options']['access'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -475,7 +489,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['created']['date_format'] = 'long';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
-  /* Field: Content: Text */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -532,6 +546,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['validate']['type'] = 'node';
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['validate_options']['types'] = array(
     'pece_artifact_audio' => 'pece_artifact_audio',
+    'pece_artifact_bundle' => 'pece_artifact_bundle',
     'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
