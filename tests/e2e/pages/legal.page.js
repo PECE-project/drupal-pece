@@ -16,10 +16,11 @@ var LegalPage = function() {
   this.create = function() {
     EC.visibilityOf(this.tosTextarea, browser.params.timeOutLimit);
     this.tosTextarea.click();
+    this.tosTextarea.clear();
     this.tosTextarea.sendKeys('Lorem Ipsum');
     this.submitButton.click();
   };
-  
+
 };
 
 module.exports = new LegalPage();
