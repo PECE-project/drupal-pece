@@ -1,21 +1,18 @@
 #!/usr/bin/env bash
+
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../ && pwd )"
+
 drush kw-b
-cd build
 
-PASSWORD=${PECE_DRUPAL_ADMIN_PASS:-impossiblepassword}
-# We're not running 'drush kw-id' becaus we musr set up the account-pass param.
-drush si pece --site-name="PECE Drupal Distro" --account-pass=${PASSWORD} -y
-
+cd ./build
 drush kw-u
 ## Uncomment for CM left sync.
 # drush clsyn
 
-if [ -d "profiles/pece/themes/pece_scholarly_lite/" ]; then
-  (
-    cd profiles/pece/themes/pece_scholarly_lite/
-    bundle install
-    bundle exec "compass clean && compass compile"
-  )
-fi
+# Compile theme stylesheets.
+(
+  cd $ROOT_DIR
+)
+node_modules/.bin/gulp styles
 
 sh ../../scripts/sample_content.sh
