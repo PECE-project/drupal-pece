@@ -19,8 +19,8 @@ function selectAutocompleteReference(element, text) {
   signatureInput.click()
   signatureInput.clear()
   signatureInput.sendKeys(text);
-  browser.wait(EC.visibilityOf(element(by.cssContainingText('.reference-autocomplete', text))), browser.params.timeoutLimit);
-  element(by.cssContainingText('.reference-autocomplete', text)).click();
+  browser.wait(element(by.cssContainingText('#autocomplete', text)).isDisplayed());
+  element(by.cssContainingText('#autocomplete', text)).click();
 }
 
 function clickElement(id) {
