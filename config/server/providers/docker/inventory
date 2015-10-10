@@ -7,11 +7,11 @@ pece ansible_ssh_host=localhost ansible_ssh_port=2222
 [drupal]
 pece ansible_ssh_host=localhost ansible_ssh_port=2222
 
-; [nodejs]
-; pece ansible_ssh_host=localhost ansible_ssh_port=2222
+[nodejs]
+pece ansible_ssh_host=localhost ansible_ssh_port=2222
 
 [docker:children]
 ; solr
 database
 drupal
-; nodejs
+nodejs

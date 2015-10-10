@@ -7,11 +7,11 @@ dev-pece.rpi.dropit.in ansible_ssh_user=ubuntu
 [drupal]
 dev-pece.rpi.dropit.in ansible_ssh_user=ubuntu
 
-; [nodejs]
-; dev-pece.rpi.dropit.in ansible_ssh_user=ubuntu
+[nodejs]
+dev-pece.rpi.dropit.in ansible_ssh_user=ubuntu
 
 [dev:children]
 ; solr
 database
 drupal
-; nodejs
+nodejs
