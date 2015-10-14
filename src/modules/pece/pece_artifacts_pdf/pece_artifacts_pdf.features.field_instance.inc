@@ -313,9 +313,16 @@ function pece_artifacts_pdf_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'file',
-        'settings' => array(),
-        'type' => 'file_default',
+        'module' => 'pdf_reader',
+        'settings' => array(
+          'colorbox' => FALSE,
+          'colorbox_link_text' => '',
+          'download' => 1,
+          'pdf_height' => 300,
+          'pdf_width' => 345,
+          'renderer' => 'google',
+        ),
+        'type' => 'pdf_reader_file',
         'weight' => 9,
       ),
       'featured' => array(

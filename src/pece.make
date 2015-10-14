@@ -237,6 +237,10 @@ projects[taxonomy_access_fix][version] = 2.2
 ;projects[annotator][subdir] = contrib
 ;projects[annotator][version] = 1.x-dev
 
+; PDF Reader
+projects[pdf_reader][subdir] = contrib
+projects[pdf_reader][version] = 1.0-rc6
+
 
 ; =====================
 ; Debuging Modules
