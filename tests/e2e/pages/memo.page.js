@@ -50,8 +50,13 @@ var MemoPage = function() {
   this.publishButton     = $('#edit-submit');
 
   // Define text pageobject methods.
-  this.get = function() {
-    browser.get('node/add/pece-memo');
+  this.get = function(url) {
+    if (url) {
+      browser.get(url);
+    }
+    else {
+      browser.get('node/add/pece-memo');
+    }
   };
 
   this.view = function() {
@@ -103,6 +108,18 @@ var MemoPage = function() {
     // button, that's why the script.
     browser.executeScript('document.querySelector(\'#edit-submit\').click();');
   };
+
+  this.comment = function(url, text) {
+    this.get(url);
+    browser.wait(this.pageElements.visible.commentBox.isDisplayed);
+    element(by.css('.form-item-comment-body-und-0-value textarea')).sendKeys(text);
+    element(by.css('#edit-submit')).click();
+    browser.wait(element(by.css('.messages.status')).isDisplayed);
+  };
+
+  this.hasComment = function(text) {
+    return element(by.cssContainingText('.field-name-comment-body', text)).isDisplayed();
+  }
 };
 
 module.exports = new MemoPage();
