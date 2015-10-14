@@ -53,13 +53,17 @@ function pece_artifacts_pdf_panelizer_defaults() {
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'above',
-    'formatter' => 'file_default',
+    'formatter' => 'pdf_reader_file',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
     'formatter_settings' => array(
-      'file_view_mode' => 'default',
-      'text' => 'Download [file:name]',
+      'pdf_width' => '345',
+      'pdf_height' => '400',
+      'renderer' => 'google',
+      'download' => 1,
+      'colorbox' => FALSE,
+      'colorbox_link_text' => '',
     ),
     'context' => 'panelizer',
     'override_title' => 0,
