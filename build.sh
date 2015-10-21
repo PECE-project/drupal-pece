@@ -14,8 +14,8 @@ drush kw-u
 # Compile theme stylesheets.
 (
   cd $ROOT_DIR
+  npm install
+  node_modules/.bin/gulp build
 )
-npm install
-node_modules/.bin/gulp build
 
 sh ../../scripts/sample_content.sh

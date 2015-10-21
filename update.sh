@@ -8,5 +8,5 @@ drush kw-u
 # Compile theme stylesheets.
 (
   cd $ROOT_DIR
+  node_modules/.bin/gulp styles
 )
-node_modules/.bin/gulp styles
