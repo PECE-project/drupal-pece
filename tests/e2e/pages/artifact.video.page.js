@@ -39,7 +39,7 @@ var ArtifactVideoPage = function() {
     visible: {
        // Left side elements.
       titleField  : $('h1'),
-      videoField  : $('.radix-layouts-column1 .field-name-field-pece-media-video'),
+      videoField  : $('.radix-layouts-column1 .field-name-field-pece-media-video video'),
       licenceField: $('.radix-layouts-column1 .field-name-field-pece-license'),
 
       // Right side form elements.

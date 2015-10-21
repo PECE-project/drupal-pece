@@ -38,7 +38,7 @@ var ArtifactAudioPage = function() {
     visible : {
       // Left side elements.
       titleField: element(by.css('h1')),
-      audioField: element(by.css('.radix-layouts-column1 .field-name-field-pece-media-audio')),
+      audioField: element(by.css('.radix-layouts-column1 .field-name-field-pece-media-audio audio')),
       licenceField: element(by.css('.radix-layouts-column1 .field-name-field-pece-license')),
 
       // Right side form elements.
