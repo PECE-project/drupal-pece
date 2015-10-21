@@ -31,9 +31,7 @@
       nvm_version: "v0.24.0"
       nvm_node_version: "{{ node_version }}"
       nvm_profile_file: "/home/{{ app_user }}/.profile"
-      nvm_packages:
-        - protractor
-        - npm
+      nvm_packages: ['protractor']
 
     - role: geerlingguy.java
 
