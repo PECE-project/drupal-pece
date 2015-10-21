@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source $HOME/.nvm/nvm.sh
+
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../ && pwd )"
 
 drush kw-b
