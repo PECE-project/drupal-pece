@@ -2,7 +2,7 @@
 
 source $HOME/.nvm/nvm.sh
 
-ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../ && pwd )"
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 drush kw-b
 
