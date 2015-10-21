@@ -53,12 +53,19 @@ function pece_artifacts_video_panelizer_defaults() {
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'above',
-    'formatter' => 'file_default',
+    'formatter' => 'file_video',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
     'formatter_settings' => array(
       'text' => 'Download [file:name]',
+      'controls' => 1,
+      'autoplay' => 0,
+      'loop' => 0,
+      'multiple_file_behavior' => 'tags',
+      'muted' => 0,
+      'width' => '345',
+      'height' => '',
     ),
     'context' => 'panelizer',
     'override_title' => 0,

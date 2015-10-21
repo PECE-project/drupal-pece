@@ -53,7 +53,7 @@ function pece_artifacts_audio_panelizer_defaults() {
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'above',
-    'formatter' => 'file_default',
+    'formatter' => 'file_audio',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
