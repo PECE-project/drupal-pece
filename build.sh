@@ -13,6 +13,7 @@ drush kw-u
 (
   cd $ROOT_DIR
 )
+npm install
 node_modules/.bin/gulp styles
 
 sh ../../scripts/sample_content.sh
