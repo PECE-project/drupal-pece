@@ -64,7 +64,7 @@ function pece_artifacts_video_panelizer_defaults() {
       'loop' => 0,
       'multiple_file_behavior' => 'tags',
       'muted' => 0,
-      'width' => '345',
+      'width' => '',
       'height' => '',
     ),
     'context' => 'panelizer',
