@@ -251,9 +251,14 @@ projects[search_krumo][subdir] = dev
 ; =====================
 
 projects[devel][subdir] = dev
-projects[drush_clone][subdir] = dev
-projects[drush_entity][subdir] = dev
 projects[search_krumo][subdir] = dev
 projects[module_builder][subdir] = dev
 projects[drupal_ipsum][subdir] = dev
 projects[environment_indicator][subdir] = dev
+
+; =====================
+; Drush Modules - not installable
+; =====================
+
+; projects[drush_clone][subdir]  = .drush ?
+; projects[drush_entity][subdir] = .drush ?
