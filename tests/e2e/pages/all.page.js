@@ -21,6 +21,7 @@ var StructuredAnalyticsPage = require('./structured.analytics.page');
 var UserAccessPage = require('./user.access.page');
 var AnnotationPage = require('./annotation.page');
 var MemoPage = require('./memo.page');
+var GroupPage = require('./group.page');
 
 module.exports = {
   'SamplePage': SamplePage,
@@ -44,5 +45,6 @@ module.exports = {
   'StructuredAnalyticsPage': StructuredAnalyticsPage,
   'UserAccessPage': UserAccessPage,
   'AnnotationPage': AnnotationPage,
-  'MemoPage': MemoPage
+  'MemoPage': MemoPage,
+  'GroupPage': GroupPage
 }
