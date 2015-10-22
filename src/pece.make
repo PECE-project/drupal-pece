@@ -252,6 +252,7 @@ projects[search_krumo][subdir] = dev
 ; Development Modules
 ; =====================
 
+projects[devel][subdir] = dev
 projects[drush_clone][subdir] = dev
 projects[drush_entity][subdir] = dev
 projects[search_krumo][subdir] = dev
