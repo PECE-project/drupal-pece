@@ -73,6 +73,9 @@ function pece_groups_strongarm() {
         'path' => array(
           'weight' => '0',
         ),
+        'locations' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(),
     ),
