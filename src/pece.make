@@ -27,35 +27,35 @@ projects[ctools][patch][] = "./patches/ctools-save_continue_button.patch"
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_core][version] = 1.27
+projects[panopoly_core][version] = 1.28
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.27
+projects[panopoly_images][version] = 1.28
 projects[panopoly_images][subdir] = contrib
 
-projects[panopoly_theme][version] = 1.27
+projects[panopoly_theme][version] = 1.28
 projects[panopoly_theme][subdir] = contrib
 
-projects[panopoly_magic][version] = 1.27
+projects[panopoly_magic][version] = 1.28
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.27
+projects[panopoly_widgets][version] = 1.28
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_admin][version] = 1.27
+projects[panopoly_admin][version] = 1.28
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_users][version] = 1.27
+projects[panopoly_users][version] = 1.28
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.27
+projects[panopoly_pages][version] = 1.28
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_wysiwyg][version] = 1.27
+projects[panopoly_wysiwyg][version] = 1.28
 projects[panopoly_wysiwyg][subdir] = contrib
 
-projects[panopoly_search][version] = 1.27
+projects[panopoly_search][version] = 1.28
 projects[panopoly_search][subdir] = contrib
 
 ; For running the automated tests.
@@ -145,14 +145,12 @@ projects[l10n_update][subdir] = contrib
 projects[l10n_update][version] = 2.0
 
 ; XAutoload
-projects[xautoload][version] = 5.1
+projects[xautoload][version] = 5.5
 projects[xautoload][subdir]  = contrib
-projects[xautoload][patch][] = "https://www.drupal.org/files/issues/xautoload-7.x-5.x-profile-2393205-6.patch"
-projects[xautoload][patch][] = "https://www.drupal.org/files/issues/base_table_or_view_not-2393205-2.patch"
 
 ; jQuery update recent version
 projects[jquery_update][subdir] = contrib
-projects[jquery_update][version] = 2.6
+projects[jquery_update][version] = 2.7
 
 
 ; Organic groups
@@ -195,7 +193,7 @@ projects[profile2][version] = 1.3
 
 ; GMap
 projects[gmap][subdir] = contrib
-projects[gmap][version] = 2.9
+projects[gmap][version] = 2.10
 
 ; External link
 projects[extlink][subdir] = contrib
@@ -207,7 +205,7 @@ projects[extlink][version] = 1.18
 
 ; Fences
 projects[fences][subdir] = contrib
-projects[fences][version] = 1.0
+projects[fences][version] = 1.2
 
 ; Entity View Mode
 projects[entity_view_mode][subdir] = contrib
@@ -223,7 +221,7 @@ projects[entityreference_view_widget][version] = 2.0-rc6
 
 ; Entity Connect
 projects[entityconnect][subdir] = contrib
-projects[entityconnect][version] = 1.0-rc4
+projects[entityconnect][version] = 1.0-rc5
 
 ; Taxonomy Access Fix
 projects[taxonomy_access_fix][subdir] = contrib
@@ -252,6 +250,7 @@ projects[search_krumo][subdir] = dev
 ; Development Modules
 ; =====================
 
+projects[devel][subdir] = dev
 projects[drush_clone][subdir] = dev
 projects[drush_entity][subdir] = dev
 projects[search_krumo][subdir] = dev
