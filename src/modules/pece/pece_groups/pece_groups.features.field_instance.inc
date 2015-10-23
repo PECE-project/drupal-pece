@@ -22,7 +22,7 @@ function pece_groups_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'featured' => array(
         'label' => 'above',
@@ -73,14 +73,14 @@ function pece_groups_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 9,
+        'weight' => 3,
       ),
       'featured' => array(
         'label' => 'above',
@@ -164,10 +164,9 @@ function pece_groups_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 6,
+        'type' => 'hidden',
+        'weight' => 5,
       ),
       'featured' => array(
         'label' => 'above',
@@ -221,10 +220,9 @@ function pece_groups_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 8,
+        'type' => 'hidden',
+        'weight' => 7,
       ),
       'featured' => array(
         'label' => 'above',
@@ -273,11 +271,11 @@ function pece_groups_field_default_field_instances() {
     'description' => 'Choose an email address prefix for your group. It may contain only lowercase letters, numbers, dashes and underscores. e.g. "my-group".',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'og_mailinglist',
         'settings' => array(),
         'type' => 'group_email',
-        'weight' => 4,
+        'weight' => 1,
       ),
       'featured' => array(
         'label' => 'above',
@@ -320,13 +318,13 @@ function pece_groups_field_default_field_instances() {
     'description' => 'Determine if this is an OG group.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'og_ui',
         'settings' => array(
           'field_name' => FALSE,
         ),
         'type' => 'og_group_subscribe',
-        'weight' => 3,
+        'weight' => 0,
       ),
       'featured' => array(
         'label' => 'above',
@@ -381,10 +379,9 @@ function pece_groups_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'og_ui',
         'settings' => array(),
-        'type' => 'og_list_default',
-        'weight' => 7,
+        'type' => 'hidden',
+        'weight' => 6,
       ),
       'featured' => array(
         'label' => 'above',
@@ -450,10 +447,9 @@ function pece_groups_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 5,
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'featured' => array(
         'label' => 'above',
