@@ -58,14 +58,14 @@ function pece_groups_defaultconfig_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'hidden',
+          'label' => 'above',
           'module' => 'image',
           'settings' => array(
             'image_link' => '',
             'image_style' => '',
           ),
           'type' => 'image',
-          'weight' => 3,
+          'weight' => 9,
         ),
         'featured' => array(
           'label' => 'above',

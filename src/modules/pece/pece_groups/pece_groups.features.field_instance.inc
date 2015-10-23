@@ -22,7 +22,7 @@ function pece_groups_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'featured' => array(
         'label' => 'above',
@@ -73,14 +73,14 @@ function pece_groups_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 3,
+        'weight' => 9,
       ),
       'featured' => array(
         'label' => 'above',
@@ -164,9 +164,10 @@ function pece_groups_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 5,
+        'type' => 'list_default',
+        'weight' => 6,
       ),
       'featured' => array(
         'label' => 'above',
@@ -182,9 +183,10 @@ function pece_groups_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'div_div_div',
     'field_name' => 'group_access',
-    'label' => 'Group visibility',
-    'required' => TRUE,
+    'label' => 'Visibility',
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -199,6 +201,7 @@ function pece_groups_field_default_field_instances() {
       ),
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
@@ -220,9 +223,10 @@ function pece_groups_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
+        'type' => 'list_default',
+        'weight' => 8,
       ),
       'featured' => array(
         'label' => 'above',
@@ -238,9 +242,10 @@ function pece_groups_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'div_div_div',
     'field_name' => 'group_content_access',
-    'label' => 'Group content visibility',
-    'required' => TRUE,
+    'label' => 'Content visibility',
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -255,6 +260,7 @@ function pece_groups_field_default_field_instances() {
       ),
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
@@ -271,11 +277,11 @@ function pece_groups_field_default_field_instances() {
     'description' => 'Choose an email address prefix for your group. It may contain only lowercase letters, numbers, dashes and underscores. e.g. "my-group".',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'module' => 'og_mailinglist',
         'settings' => array(),
         'type' => 'group_email',
-        'weight' => 1,
+        'weight' => 4,
       ),
       'featured' => array(
         'label' => 'above',
@@ -291,8 +297,9 @@ function pece_groups_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'div_div_div',
     'field_name' => 'group_email',
-    'label' => 'Group Email',
+    'label' => 'Email',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -318,13 +325,13 @@ function pece_groups_field_default_field_instances() {
     'description' => 'Determine if this is an OG group.',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
         'module' => 'og_ui',
         'settings' => array(
           'field_name' => FALSE,
         ),
         'type' => 'og_group_subscribe',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'featured' => array(
         'label' => 'above',
@@ -379,9 +386,10 @@ function pece_groups_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'module' => 'og_ui',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 6,
+        'type' => 'og_list_default',
+        'weight' => 7,
       ),
       'featured' => array(
         'label' => 'above',
@@ -397,12 +405,18 @@ function pece_groups_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'entityconnect_show_add_icon' => 0,
+    'entityconnect_show_edit_icon' => 0,
+    'entityconnect_unload_add' => 1,
+    'entityconnect_unload_edit' => 1,
+    'fences_wrapper' => 'div_div_div',
     'field_name' => 'og_group_ref',
-    'label' => 'Groups audience',
-    'required' => FALSE,
+    'label' => 'Audience',
+    'required' => 0,
     'settings' => array(
       'behaviors' => array(
         'og_widget' => array(
+          'access_override' => 0,
           'admin' => array(
             'widget_type' => 'entityreference_autocomplete',
           ),
@@ -427,6 +441,7 @@ function pece_groups_field_default_field_instances() {
       ),
     ),
     'widget' => array(
+      'active' => 0,
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
@@ -447,9 +462,10 @@ function pece_groups_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 4,
+        'type' => 'list_default',
+        'weight' => 5,
       ),
       'featured' => array(
         'label' => 'above',
@@ -465,9 +481,10 @@ function pece_groups_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'div_div_div',
     'field_name' => 'og_roles_permissions',
-    'label' => 'Group roles and permissions',
-    'required' => TRUE,
+    'label' => 'Roles and permissions',
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -484,6 +501,7 @@ function pece_groups_field_default_field_instances() {
       ),
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
@@ -493,16 +511,16 @@ function pece_groups_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Audience');
   t('Choose an email address prefix for your group. It may contain only lowercase letters, numbers, dashes and underscores. e.g. "my-group".');
+  t('Content visibility');
   t('Description');
   t('Determine if this is an OG group.');
+  t('Email');
   t('Group');
-  t('Group Email');
-  t('Group content visibility');
-  t('Group roles and permissions');
   t('Group thumbnail image');
-  t('Group visibility');
-  t('Groups audience');
+  t('Roles and permissions');
+  t('Visibility');
 
   return $field_instances;
 }
