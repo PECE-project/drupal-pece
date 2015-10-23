@@ -74,9 +74,12 @@ function pece_groups_defaultconfig_field_default_fields() {
           'weight' => 0,
         ),
         'mini_teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
+          'label' => 'hidden',
+          'module' => 'file_entity',
+          'settings' => array(
+            'file_view_mode' => 'mini_teaser',
+          ),
+          'type' => 'file_rendered',
           'weight' => 0,
         ),
         'teaser' => array(

@@ -40,7 +40,7 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Thumbnail image */
+  /* Field: Content: Image */
   $handler->display->display_options['fields']['field_pece_media_image']['id'] = 'field_pece_media_image';
   $handler->display->display_options['fields']['field_pece_media_image']['table'] = 'field_data_field_pece_media_image';
   $handler->display->display_options['fields']['field_pece_media_image']['field'] = 'field_pece_media_image';
