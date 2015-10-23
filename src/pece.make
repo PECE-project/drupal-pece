@@ -97,9 +97,9 @@ projects[adminimal_theme][version] = 1.23
 projects[adminimal_theme][subdir] = contrib
 
 ; PECE Default Theme
-projects[scholarly_lite][type] = theme
-projects[scholarly_lite][version] = 1.0
-projects[scholarly_lite][subdir] = contrib
+; projects[scholarly_lite][type] = theme
+; projects[scholarly_lite][version] = 1.0
+; projects[scholarly_lite][subdir] = contrib
 
 ; =====================
 ; Libraries
