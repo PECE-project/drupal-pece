@@ -16,11 +16,23 @@ projects[kw_itemnames][download][type] = git
 projects[kw_itemnames][download][url] = "git://github.com/kraftwagen/kw-itemnames.git"
 projects[kw_itemnames][subdir] = kraftwagen
 
-; Ctools
+
+; =====================
+; Overrides
+; =====================
+
 ; Overrides panopoly's ctools.
 projects[ctools][version] = 1.9
 projects[ctools][subdir] = contrib
 projects[ctools][patch][] = "./patches/ctools-save_continue_button.patch"
+
+; Overrides panopoly's panelizer.
+projects[panelizer][version] = 3.1
+projects[panelizer][subdir] = contrib
+projects[panelizer][patch][1623536] = http://drupal.org/files/issues/array-to-object-on-update-1623536-26.patch
+projects[panelizer][patch][2416505] = http://www.drupal.org/files/issues/panelizer-search_api-2416505-3.patch
+projects[panelizer][patch][2328615] = https://www.drupal.org/files/issues/panelizerentitydefault-2328615-1.patch
+
 
 ; =====================
 ; Panopoly
@@ -96,7 +108,7 @@ projects[adminimal_theme][type] = theme
 projects[adminimal_theme][version] = 1.23
 projects[adminimal_theme][subdir] = contrib
 
-; PECE Default Theme
+; PECE Base Theme
 ; projects[scholarly_lite][type] = theme
 ; projects[scholarly_lite][version] = 1.0
 ; projects[scholarly_lite][subdir] = contrib
