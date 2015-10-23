@@ -30,8 +30,12 @@ function pece_groups_panelizer_defaults() {
   $panelizer->link_to_entity = TRUE;
   $panelizer->extra = array();
   $display = new panels_display();
-  $display->layout = 'radix_selby_flipped';
-  $display->layout_settings = array();
+  $display->layout = 'pece_sidebar_right';
+  $display->layout_settings = array(
+    'sidebar' => array(
+      'size' => 'col-md-8',
+    ),
+  );
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
@@ -40,6 +44,7 @@ function pece_groups_panelizer_defaults() {
       'contentcolumn1' => NULL,
       'contentcolumn2' => NULL,
       'contentfooter' => NULL,
+      'content' => NULL,
     ),
   );
   $display->cache = array();
@@ -49,7 +54,7 @@ function pece_groups_panelizer_defaults() {
   $display->panels = array();
   $pane = new stdClass();
   $pane->pid = 'new-147bf60e-4dea-4d25-b657-e75f17702188';
-  $pane->panel = 'contentheader';
+  $pane->panel = 'content';
   $pane->type = 'entity_field';
   $pane->subtype = 'node:group_email';
   $pane->shown = TRUE;
@@ -76,10 +81,10 @@ function pece_groups_panelizer_defaults() {
   $pane->locks = array();
   $pane->uuid = '147bf60e-4dea-4d25-b657-e75f17702188';
   $display->content['new-147bf60e-4dea-4d25-b657-e75f17702188'] = $pane;
-  $display->panels['contentheader'][0] = 'new-147bf60e-4dea-4d25-b657-e75f17702188';
+  $display->panels['content'][0] = 'new-147bf60e-4dea-4d25-b657-e75f17702188';
   $pane = new stdClass();
   $pane->pid = 'new-da3a554d-9286-4257-87ee-60945f7205a6';
-  $pane->panel = 'contentheader';
+  $pane->panel = 'content';
   $pane->type = 'entity_field';
   $pane->subtype = 'node:body';
   $pane->shown = TRUE;
@@ -103,7 +108,67 @@ function pece_groups_panelizer_defaults() {
   $pane->locks = array();
   $pane->uuid = 'da3a554d-9286-4257-87ee-60945f7205a6';
   $display->content['new-da3a554d-9286-4257-87ee-60945f7205a6'] = $pane;
-  $display->panels['contentheader'][1] = 'new-da3a554d-9286-4257-87ee-60945f7205a6';
+  $display->panels['content'][1] = 'new-da3a554d-9286-4257-87ee-60945f7205a6';
+  $pane = new stdClass();
+  $pane->pid = 'new-978f5cdc-34de-4a57-ae97-adc4cdd1d352';
+  $pane->panel = 'content';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'child_groups-main';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'context' => array(
+      0 => 'panelizer',
+    ),
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 2;
+  $pane->locks = array();
+  $pane->uuid = '978f5cdc-34de-4a57-ae97-adc4cdd1d352';
+  $display->content['new-978f5cdc-34de-4a57-ae97-adc4cdd1d352'] = $pane;
+  $display->panels['content'][2] = 'new-978f5cdc-34de-4a57-ae97-adc4cdd1d352';
+  $pane = new stdClass();
+  $pane->pid = 'new-b54d0a10-862b-4dfe-ba1f-c793fe0b5b05';
+  $pane->panel = 'content';
+  $pane->type = 'entity_field';
+  $pane->subtype = 'node:og_group_ref';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'label' => 'title',
+    'formatter' => 'entityreference_entity_view',
+    'delta_limit' => '0',
+    'delta_offset' => '0',
+    'delta_reversed' => 0,
+    'formatter_settings' => array(
+      'link' => 0,
+      'view_mode' => 'mini_teaser',
+      'links' => 0,
+    ),
+    'context' => array(),
+    'override_title' => 1,
+    'override_title_text' => 'Parent groups',
+    'override_title_heading' => 'h3',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 3;
+  $pane->locks = array();
+  $pane->uuid = 'b54d0a10-862b-4dfe-ba1f-c793fe0b5b05';
+  $display->content['new-b54d0a10-862b-4dfe-ba1f-c793fe0b5b05'] = $pane;
+  $display->panels['content'][3] = 'new-b54d0a10-862b-4dfe-ba1f-c793fe0b5b05';
   $pane = new stdClass();
   $pane->pid = 'new-cd10a770-62ad-42d7-a128-12872c386dda';
   $pane->panel = 'sidebar';
@@ -183,9 +248,9 @@ function pece_groups_panelizer_defaults() {
     'override_title' => '',
     'override_title_text' => '',
     'override_title_heading' => 'h2',
-    'view_settings' => 'fields',
+    'view_settings' => 'rendered_entity',
     'header_type' => 'none',
-    'view_mode' => 'full',
+    'view_mode' => 'mini_teaser',
     'widget_title' => 'Members',
   );
   $pane->cache = array();
