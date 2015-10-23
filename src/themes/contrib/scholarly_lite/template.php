@@ -384,17 +384,17 @@ function scholarly_lite_process_html(&$vars) {
 function scholarly_lite_preprocess_page(&$variables) {
 
 	$three_columns_grid_layout = theme_get_setting('three_columns_grid_layout', 'scholarly_lite');
-	$sidebar_first = $variables['page']['sidebar_first'];
-	$sidebar_second = $variables['page']['sidebar_second'];
-	$header_top_left = $variables['page']['header_top_left'];
-	$header_top_right = $variables['page']['header_top_right'];
-	$footer_top_left = $variables['page']['footer_top_left'];
-	$footer_top_right = $variables['page']['footer_top_right'];
-	$footer_first = $variables['page']['footer_first'];
-	$footer_second = $variables['page']['footer_second'];
-	$footer_third = $variables['page']['footer_third'];
-	$footer_fourth = $variables['page']['footer_fourth'];
-	$breadcrumb = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
+	$sidebar_first 		= !empty($variables['page']['sidebar_first']) ? $variables['page']['sidebar_first'] : null;
+	$sidebar_second 	= !empty($variables['page']['sidebar_second']) ? $variables['page']['sidebar_second'] : null;
+	$header_top_left 	= !empty($variables['page']['header_top_left']) ? $variables['page']['header_top_left'] : null;
+	$header_top_right = !empty($variables['page']['header_top_right']) ? $variables['page']['header_top_right'] : null;
+	$footer_top_left 	= !empty($variables['page']['footer_top_left']) ? $variables['page']['footer_top_left'] : null;
+	$footer_top_right = !empty($variables['page']['footer_top_right']) ? $variables['page']['footer_top_right'] : null;
+	$footer_first 		= !empty($variables['page']['footer_first']) ? $variables['page']['footer_first'] : null;
+	$footer_second 		= !empty($variables['page']['footer_second']) ? $variables['page']['footer_second'] : null;
+	$footer_third 		= !empty($variables['page']['footer_third']) ? $variables['page']['footer_third'] : null;
+	$footer_fourth 		= !empty($variables['page']['footer_fourth']) ? $variables['page']['footer_fourth'] : null;
+	$breadcrumb 			= theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
 
 	/**
 	 * Insert variables into the page template.
