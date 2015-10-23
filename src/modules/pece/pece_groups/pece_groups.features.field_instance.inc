@@ -98,7 +98,7 @@ function pece_groups_field_default_field_instances() {
     'entity_type' => 'node',
     'fences_wrapper' => 'div',
     'field_name' => 'field_pece_media_image',
-    'label' => 'Group thumbnail image',
+    'label' => 'Thumbnail image',
     'required' => 1,
     'settings' => array(
       'alt_field' => 0,
@@ -518,8 +518,8 @@ function pece_groups_field_default_field_instances() {
   t('Determine if this is an OG group.');
   t('Email');
   t('Group');
-  t('Group thumbnail image');
   t('Roles and permissions');
+  t('Thumbnail image');
   t('Visibility');
 
   return $field_instances;

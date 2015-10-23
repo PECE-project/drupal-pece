@@ -83,7 +83,7 @@ function pece_groups_defaultconfig_field_default_fields() {
       'entity_type' => 'node',
       'fences_wrapper' => 'div',
       'field_name' => 'field_pece_media_image',
-      'label' => 'Group thumbnail image',
+      'label' => 'Thumbnail image',
       'required' => 1,
       'settings' => array(
         'alt_field' => 0,
@@ -139,7 +139,7 @@ function pece_groups_defaultconfig_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Group thumbnail image');
+  t('Thumbnail image');
 
   return $fields;
 }
