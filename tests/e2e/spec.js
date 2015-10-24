@@ -11,14 +11,14 @@ var AllPages = require('./pages/all.page');
 describe('PECE home page', function() {
   // This is the pre-condition step of each test.
   beforeEach(function() {
-  // In the get method of the sample page you can have two behaviors:
-  // If no url is set you will go to the base url defined in the conf.js file.
-  // Or you can set a relative url as a string, without slash. E.g.: 'user'.
+    // In the get method of the sample page you can have two behaviors:
+    // If no url is set you will go to the base url defined in the conf.js file.
+    // Or you can set a relative url as a string, without slash. E.g.: 'user'.
     AllPages.SamplePage.get();
   });
 
   it('uses \'PECE Scholarly Lite\' theme', function() {
-  // Set the expected theme as a string to check that the correct drupal theme is been used.
+    // Set the expected theme as a string to check that the correct drupal theme is been used.
     AllPages.SamplePage.checkDrupalTheme('pece_scholarly_lite');
   });
 });
