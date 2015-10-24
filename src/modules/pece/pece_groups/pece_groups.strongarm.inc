@@ -89,6 +89,9 @@ function pece_groups_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'mini_teaser' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

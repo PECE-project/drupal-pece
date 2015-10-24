@@ -60,7 +60,7 @@ function pece_groups_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'inline',
+    'label' => 'title',
     'formatter' => 'group_email',
     'delta_limit' => 0,
     'delta_offset' => '0',
@@ -90,13 +90,16 @@ function pece_groups_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'hidden',
+    'label' => 'title',
     'formatter' => 'text_default',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
     'formatter_settings' => array(),
     'context' => 'panelizer',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -210,13 +213,14 @@ function pece_groups_panelizer_defaults() {
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'hidden',
-    'formatter' => 'image',
+    'formatter' => 'file_rendered',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
     'formatter_settings' => array(
       'image_link' => '',
       'image_style' => '',
+      'file_view_mode' => 'default',
     ),
     'context' => 'panelizer',
     'override_title' => 0,
@@ -265,7 +269,7 @@ function pece_groups_panelizer_defaults() {
   $display->content['new-34af642e-2d59-4854-8cb0-4097d7998ef2'] = $pane;
   $display->panels['sidebar'][2] = 'new-34af642e-2d59-4854-8cb0-4097d7998ef2';
   $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = 'new-da3a554d-9286-4257-87ee-60945f7205a6';
+  $display->title_pane = '0';
   $panelizer->display = $display;
   $export['node:pece_group:default'] = $panelizer;
 

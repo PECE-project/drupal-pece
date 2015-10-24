@@ -65,7 +65,7 @@ function pece_groups_defaultconfig_field_default_fields() {
             'image_style' => '',
           ),
           'type' => 'image',
-          'weight' => 9,
+          'weight' => 7,
         ),
         'featured' => array(
           'label' => 'above',

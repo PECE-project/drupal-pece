@@ -18,7 +18,7 @@ function pece_groups_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -86,7 +86,7 @@ function pece_groups_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 9,
+        'weight' => 7,
       ),
       'featured' => array(
         'label' => 'above',
@@ -182,7 +182,7 @@ function pece_groups_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 6,
+        'weight' => 4,
       ),
       'featured' => array(
         'label' => 'above',
@@ -247,7 +247,7 @@ function pece_groups_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 8,
+        'weight' => 6,
       ),
       'featured' => array(
         'label' => 'above',
@@ -307,8 +307,8 @@ function pece_groups_field_default_field_instances() {
         'label' => 'above',
         'module' => 'og_mailinglist',
         'settings' => array(),
-        'type' => 'group_email',
-        'weight' => 4,
+        'type' => 'group_email_link',
+        'weight' => 0,
       ),
       'featured' => array(
         'label' => 'above',
@@ -364,7 +364,7 @@ function pece_groups_field_default_field_instances() {
           'field_name' => FALSE,
         ),
         'type' => 'og_group_subscribe',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'featured' => array(
         'label' => 'above',
@@ -428,7 +428,7 @@ function pece_groups_field_default_field_instances() {
         'module' => 'og_ui',
         'settings' => array(),
         'type' => 'og_list_default',
-        'weight' => 7,
+        'weight' => 5,
       ),
       'featured' => array(
         'label' => 'above',
@@ -510,7 +510,7 @@ function pece_groups_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 5,
+        'weight' => 3,
       ),
       'featured' => array(
         'label' => 'above',
