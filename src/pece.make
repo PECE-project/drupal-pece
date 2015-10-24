@@ -33,6 +33,9 @@ projects[panelizer][patch][1623536] = http://drupal.org/files/issues/array-to-ob
 projects[panelizer][patch][2416505] = http://www.drupal.org/files/issues/panelizer-search_api-2416505-3.patch
 projects[panelizer][patch][2328615] = https://www.drupal.org/files/issues/panelizerentitydefault-2328615-1.patch
 
+; Overrides panopoly_core's features_override
+projects[features_override][version] = 2.0-rc3
+projects[features_override][subdir] = contrib
 
 ; =====================
 ; Panopoly
