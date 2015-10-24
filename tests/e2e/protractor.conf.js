@@ -61,3 +61,8 @@ module.exports.config = {
     defaultTimeoutInterval: 999999
   }
 };
+
+// Allow for local config customization.
+if (fs.existsSync(__dirname + '/config-alter.js')) {
+  require(__dirname + '/config-alter.js')(module.exports.config);
+}
