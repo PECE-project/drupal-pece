@@ -52,7 +52,7 @@ describe ('User Access' , function () {
     AuthenticationPage.logout();
 
     AuthenticationPage.login(researcherData.name, browser.params.admin.password);
-    ArtifactPage.getArtifact(artifactName);
+    PeceArtifactPage.getArtifact(artifactName);
     UserAccessPage.expectAllowedContent(artifactName);
     AuthenticationPage.logout();
   });
@@ -65,7 +65,7 @@ describe ('User Access' , function () {
     AuthenticationPage.logout();
 
     AuthenticationPage.login(contributorData.name, browser.params.admin.password);
-    ArtifactPage.getArtifact(artifactName);
+    PeceArtifactPage.getArtifact(artifactName);
     UserAccessPage.expectDenyMessage();
     AuthenticationPage.logout();
   });
@@ -76,17 +76,17 @@ describe ('User Access' , function () {
     AuthenticationPage.logout();
 
     AuthenticationPage.login(creatorData.name, browser.params.admin.password);
-    ArtifactPage.getArtifact(artifactName);
+    PeceArtifactPage.getArtifact(artifactName);
     UserAccessPage.expectAllowedContent(artifactName);
     AuthenticationPage.logout();
 
     AuthenticationPage.login(contributorData.name, browser.params.admin.password);
-    ArtifactPage.getArtifact(artifactName);
+    PeceArtifactPage.getArtifact(artifactName);
     UserAccessPage.expectDenyMessage();
     AuthenticationPage.logout();
 
     AuthenticationPage.login(researcherData.name, browser.params.admin.password);
-    ArtifactPage.getArtifact(artifactName);
+    PeceArtifactPage.getArtifact(artifactName);
     UserAccessPage.expectDenyMessage();
     AuthenticationPage.logout();
   });
