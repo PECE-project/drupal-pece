@@ -271,6 +271,11 @@ projects[module_builder][subdir] = dev
 projects[drupal_ipsum][subdir] = dev
 projects[environment_indicator][subdir] = dev
 
+projects[seeds][type] = module
+projects[seeds][download][type] = git
+projects[seeds][download][url] = https://github.com/lucasconstantino/drupal-seeds.git
+projects[seeds][subdir] = dev
+
 ; =====================
 ; Drush Modules - not installable
 ; =====================
