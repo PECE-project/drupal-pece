@@ -9,6 +9,6 @@
  *                 protractor.confg.js file.
  */
 module.exports = function (config) {
-  // Local override for admin password.
+  config.baseUrl = 'http://pece.local/';
   config.params.admin.password = 'root';
 };

@@ -16,6 +16,7 @@ module.exports.config = {
 
   specs: ['spec.js'],
   baseUrl: 'http://dev-pece.rpi.dropit.in/',
+
   capabilities: { 'browserName': 'chrome' },
   framework: 'jasmine2',
   seleniumAddress: 'http://localhost:4444/wd/hub',
