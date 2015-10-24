@@ -2,8 +2,6 @@
 * @file artifact.text.spec.js
 */
 
-var AllPages = require('../pages/all.page');
-
 var simpleUser = {
     username: 'simpleUser',
     email: 'simpleUser@example.com',
@@ -18,58 +16,58 @@ var simpleUser = {
 describe('Memo', function () {
   // This its the pre-condition step of each test.
   beforeEach(function() {
-    AllPages.AuthenticationPage.logout();
-    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    AuthenticationPage.logout();
+    AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
   });
 
   afterAll(function() {
-    AllPages.AuthenticationPage.logout();
-    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-    AllPages.PeoplePage.deleteUser(AllPages.RegistrationPage.defaultUser.email);
+    AuthenticationPage.logout();
+    AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    PeoplePage.deleteUser(RegistrationPage.defaultUser.email);
   });
 
   it('Verify main elements presence', function() {
-   AllPages.MemoPage.get();
-   AllPages.MemoPage.checkMainElementsPresence();
+   MemoPage.get();
+   MemoPage.checkMainElementsPresence();
   });
 
   it('Verify mandatory fields', function() {
-    AllPages.MemoPage.get();
-    AllPages.MemoPage.checkMandatoryFields();
+    MemoPage.get();
+    MemoPage.checkMandatoryFields();
   });
 
   it('Add a Memo as an authenticated user', function() {
-    AllPages.SamplePage.get('admin/config/people/legal');
-    AllPages.LegalPage.create();
-    AllPages.AuthenticationPage.logout();
-    AllPages.RegistrationPage.registerProfile();
-    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.defaultUser.email);
-    AllPages.PeoplePage.addRole(AllPages.RegistrationPage.defaultUser.email, 5);
-    AllPages.AuthenticationPage.logout();
-    AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
-    AllPages.MemoPage.add('Memo', 'Lorem ipsum dolar sit.');
-    AllPages.MemoPage.checkPageLayout();
-    AllPages.MemoPage.checkPageElements();
+    SamplePage.get('admin/config/people/legal');
+    LegalPage.create();
+    AuthenticationPage.logout();
+    RegistrationPage.registerProfile();
+    AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    PeoplePage.unblock(RegistrationPage.defaultUser.email);
+    PeoplePage.addRole(RegistrationPage.defaultUser.email, 5);
+    AuthenticationPage.logout();
+    AuthenticationPage.login(RegistrationPage.defaultUser.username, RegistrationPage.defaultUser.pass);
+    MemoPage.add('Memo', 'Lorem ipsum dolar sit.');
+    MemoPage.checkPageLayout();
+    MemoPage.checkPageElements();
   });
 
   it('should have comments opened but moderated for an authenticated users.', function() {
-    AllPages.SamplePage.get('admin/config/people/legal');
-    AllPages.LegalPage.create();
-    AllPages.AuthenticationPage.logout();
-    AllPages.RegistrationPage.registerProfile();
-    AllPages.RegistrationPage.registerProfile(simpleUser);
-    AllPages.AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-    AllPages.PeoplePage.unblock(AllPages.RegistrationPage.defaultUser.email);
-    AllPages.PeoplePage.addRole(AllPages.RegistrationPage.defaultUser.email, 5);
-    AllPages.PeoplePage.unblock(simpleUser.email);
-    AllPages.PeoplePage.addRole(simpleUser.email, 5);
-    AllPages.AuthenticationPage.logout();
-    AllPages.AuthenticationPage.login(AllPages.RegistrationPage.defaultUser.username, AllPages.RegistrationPage.defaultUser.pass);
-    AllPages.MemoPage.add('Memo 2', 'Lorem ipsum dolar sit.');
-    AllPages.AuthenticationPage.logout();
-    AllPages.AuthenticationPage.login(simpleUser.username, simpleUser.pass);
-    AllPages.MemoPage.comment('content/memo-2', 'Comment content');
-    AllPages.SamplePage.checkMessage('Your comment has been queued for review by site administrators and will be published after approval.');
+    SamplePage.get('admin/config/people/legal');
+    LegalPage.create();
+    AuthenticationPage.logout();
+    RegistrationPage.registerProfile();
+    RegistrationPage.registerProfile(simpleUser);
+    AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
+    PeoplePage.unblock(RegistrationPage.defaultUser.email);
+    PeoplePage.addRole(RegistrationPage.defaultUser.email, 5);
+    PeoplePage.unblock(simpleUser.email);
+    PeoplePage.addRole(simpleUser.email, 5);
+    AuthenticationPage.logout();
+    AuthenticationPage.login(RegistrationPage.defaultUser.username, RegistrationPage.defaultUser.pass);
+    MemoPage.add('Memo 2', 'Lorem ipsum dolar sit.');
+    AuthenticationPage.logout();
+    AuthenticationPage.login(simpleUser.username, simpleUser.pass);
+    MemoPage.comment('content/memo-2', 'Comment content');
+    SamplePage.checkMessage('Your comment has been queued for review by site administrators and will be published after approval.');
   });
 });

@@ -2,12 +2,13 @@
 * @file structured.analytics.page.js
 */
 
-var helpers = require('../helpers/helpers');
-var AllPages = require('./all.page');
 var path = require('path');
+var helpers = require('../helpers/helpers');
+var SamplePage = require('./sample.page');
+var AnalyticPage = require('./analytic.page');
 var EC = protractor.ExpectedConditions;
 
-var StructuredAnalyticsPage = function() {
+function StructuredAnalyticsPage() {
 
   // Define text artifact page object attributes.
   this.mainElements = {
@@ -21,7 +22,7 @@ var StructuredAnalyticsPage = function() {
 
   this.checkMandatoryFields = function () {
     this.publishButton.click();
-    AllPages.SamplePage.checkMessage('Title field is required.');
+    SamplePage.checkMessage('Title field is required.');
   };
 
   this.checkMainElementsPresence = function () {
@@ -31,13 +32,13 @@ var StructuredAnalyticsPage = function() {
   };
 
   this.add = function(title) {
-    AllPages.AnalyticPage.get();
+    AnalyticPage.get();
     this.mainElements.addQuestionSet.click();
     browser.wait(EC.visibilityOf(this.mainElements.titleField), browser.params.timeoutLimit);
     this.mainElements.titleField.sendKeys(title);
     this.mainElements.descriptionField.sendKeys('Question set description');
     this.publishButton.click();
-    browser.wait(EC.visibilityOf(AllPages.AnalyticPage.mainElements.questionSetField), browser.params.timeoutLimit);
+    browser.wait(EC.visibilityOf(AnalyticPage.mainElements.questionSetField), browser.params.timeoutLimit);
   };
 
 };

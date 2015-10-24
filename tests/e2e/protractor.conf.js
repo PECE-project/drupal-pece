@@ -4,6 +4,7 @@
 
 var fs = require('fs');
 var SeedsAPI = require('drupal-seeds');
+var SpecReporter = require('jasmine-spec-reporter');
 
 module.exports.config = {
   params: {
@@ -23,7 +24,8 @@ module.exports.config = {
 
   // Here you will set things that have to happen before start testing.
   onPrepare: function() {
-    var SpecReporter = require('jasmine-spec-reporter');
+    // Load all page objects to the global scope.
+    require('./pages/global');
 
     // Used for non-angular apps
     browser.ignoreSynchronization = true;
