@@ -30,9 +30,8 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['row_plugin'] = 'entity';
-  $handler->display->display_options['row_options']['view_mode'] = 'mini_teaser';
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -40,21 +39,6 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Image */
-  $handler->display->display_options['fields']['field_pece_media_image']['id'] = 'field_pece_media_image';
-  $handler->display->display_options['fields']['field_pece_media_image']['table'] = 'field_data_field_pece_media_image';
-  $handler->display->display_options['fields']['field_pece_media_image']['field'] = 'field_pece_media_image';
-  $handler->display->display_options['fields']['field_pece_media_image']['label'] = '';
-  $handler->display->display_options['fields']['field_pece_media_image']['element_type'] = '0';
-  $handler->display->display_options['fields']['field_pece_media_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_pece_media_image']['element_wrapper_type'] = '0';
-  $handler->display->display_options['fields']['field_pece_media_image']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_pece_media_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_pece_media_image']['settings'] = array(
-    'image_style' => '',
-    'image_link' => 'content',
-  );
-  $handler->display->display_options['fields']['field_pece_media_image']['field_api_classes'] = TRUE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -98,7 +82,6 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['allow']['title_override'] = 0;
   $handler->display->display_options['allow']['exposed_form'] = 0;
   $handler->display->display_options['allow']['fields_override'] = 0;
-  $handler->display->display_options['allow']['panopoly_magic_display_type'] = 0;
   $handler->display->display_options['argument_input'] = array(
     'og_group_ref_target_id' => array(
       'type' => 'context',
