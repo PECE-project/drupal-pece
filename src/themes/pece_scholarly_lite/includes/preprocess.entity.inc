@@ -16,12 +16,12 @@ function pece_scholarly_lite_preprocess(&$variables, $hook) {
 /**
  * Implements hook_preprocess_entity().
  */
-function pece_scholarly_lite_preprocess_entity(&$variables, $hook, $entity_type) {
+function pece_scholarly_lite_preprocess_entity(&$variables, $hook) {
   // View-mode based preprocessing.
   if (!empty($variables['elements']['#view_mode'])) {
     // Add view-mode based theme suggestions.
     if (!empty($variables['theme_hook_suggestions'])) {
-      array_unshift($variables['theme_hook_suggestions'], $entity_type . '__' . $variables['elements']['#view_mode']);
+      array_unshift($variables['theme_hook_suggestions'], $hook . '__' . $variables['elements']['#view_mode']);
     }
 
     // Add view-mode based class to all entities.
