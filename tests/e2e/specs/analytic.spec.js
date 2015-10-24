@@ -1,12 +1,5 @@
-/**
-* @file analytics.spec.js
-*/
 
-// For each spec file is recommended to have just one describe.
-// A describe may the the description of a functionality/feature or even a web page, like home page, contact page, etc.
-// It depends on the team's work agreement.
 describe ('Analytic', function () {
-  // This its the pre-condition step of each test.
   beforeEach(function() {
     AuthenticationPage.logout();
     AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);

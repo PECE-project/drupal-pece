@@ -1,6 +1,3 @@
-/**
-* @file group.spec.js
-*/
 
 describe ('Group', function () {
   beforeAll(function() {

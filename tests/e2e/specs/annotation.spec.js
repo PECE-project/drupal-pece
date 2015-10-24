@@ -1,12 +1,5 @@
-/**
-* @file artifact.image.spec.js
-*/
 
-// For each spec file is recommended to have just one describe.
-// A describe may the the description of a functionality/feature or even a web page, like home page, contact page, etc.
-// It depends on the team's work agreement.
 describe('Annotation', function() {
-  // This is the pre-condition step all tests.
   beforeAll(function() {
     AuthenticationPage.logout();
     RegistrationPage.registerProfile();
