@@ -11,7 +11,7 @@ var GroupPage = function() {
   this.checkThumbnailField = function () {
     this.get();
     var message = 'Group thumbnail field is not being displayed in add group form.';
-    expect($('#edit-field-pece-media-image').isPresent()).toBe(false, message);
+    expect($('#edit-field-pece-media-image').isPresent()).toBe(true, message);
   };
 }
 
