@@ -2,49 +2,35 @@
 * @file conf.js
 */
 
-var fs = require('fs')
-  , lodash = require('lodash')
-  , authentication = require('./authentication.js');
+var fs = require('fs');
+var SeedsAPI = require('drupal-seeds');
+var SpecReporter = require('jasmine-spec-reporter');
 
-module.exports.config = lodash.assign({
-  // The selenium address where the selenium server will be running.
-  seleniumAddress: 'http://localhost:4444/wd/hub',
-
-  // In order to user the beforeAll we must set the frameword attribute.
-  framework: 'jasmine2',
-
-  // Parameters that can be used in the tests.
+module.exports.config = {
   params: {
-    // Here is where you set the user credentials for tests usage.
     admin: {
-      'user': authentication.getInfo('user'),
-      'password': authentication.getInfo('password')
+      user: 'admin',
+      password: 'impossiblepassword'
     },
     timeoutLimit : 5000
   },
 
-  // The test files are stored into the specs array, separated by comma.
-  specs: [
-    'spec.js'
-  ],
-
-  // Browser configuration.
-  capabilities: {
-    'browserName': 'chrome'
-  },
-
-  // The url that will be used for the tests. With this you can call just the relative urls into the tests.
-  // This is also good for running tests in different environments. To do this you just have to change the url here.
+  specs: ['spec.js'],
   baseUrl: 'http://dev-pece.rpi.dropit.in/',
+
+  capabilities: { 'browserName': 'chrome' },
+  framework: 'jasmine2',
+  seleniumAddress: 'http://localhost:4444/wd/hub',
 
   // Here you will set things that have to happen before start testing.
   onPrepare: function() {
-    var SpecReporter = require('jasmine-spec-reporter');
+    // Load all page objects to the global scope.
+    require('./pages/global');
 
     // Used for non-angular apps
     browser.ignoreSynchronization = true;
 
-    // add jasmine spec reporter
+    // Add jasmine spec reporter
     jasmine.getEnv().addReporter(new SpecReporter({
       displayFailuresSummary: true,
       displayFailedSpec: true,
@@ -67,6 +53,9 @@ module.exports.config = lodash.assign({
 
       return origFn.apply(browser.driver.controlFlow(), args);
     };
+
+    // Configure Seeds API.
+    return SeedsAPI.initProtractor();
   },
 
   jasmineNodeOpts: {
@@ -74,4 +63,9 @@ module.exports.config = lodash.assign({
     includeStackTrace: true,
     defaultTimeoutInterval: 999999
   }
-}, fs.existsSync(__dirname + '/protractor.conf.local.js') ? require(__dirname + '/protractor.conf.local.js').config : {});
+};
+
+// Allow for local config customization.
+if (fs.existsSync(__dirname + '/config-alter.js')) {
+  require(__dirname + '/config-alter.js')(module.exports.config);
+}

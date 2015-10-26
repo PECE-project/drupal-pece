@@ -39,3 +39,22 @@ function pece_core_modal_presets($modal_name, $width, $height) {
   // Add CTools' javascript to the page.
   ctools_modal_add_js();
 }
+
+/**
+ * Helper method to perform jQuery.extend like default settings.
+ */
+function pece_array_extend() {
+  $arrays = func_get_args();
+  $base = array_shift($arrays);
+  foreach ($arrays as $array) {
+    reset($base);
+    while (list($key, $value) = @each($array)) {
+      if (is_array($value) && @is_array($base[$key])) {
+        $base[$key] = pece_array_extend($base[$key], $value);
+      } else {
+        $base[$key] = $value;
+      }
+    }
+  }
+  return $base;
+}
