@@ -4,7 +4,10 @@ var spawn = require('child_process').spawn;
 var webdriverPath = process.cwd() + '/node_modules/.bin/webdriver-manager';
 var webdriver;
 
-gulp.task('webdriver:start', function (done) {
+gulp.task('webdriver:start', ['context:setup'], function (done) {
+  // This task's content must never run inside a VM environment.
+  if (process.isVM) return done();
+
   var tryAgain = null;
   var fuser;
 

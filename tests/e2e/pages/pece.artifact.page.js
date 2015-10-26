@@ -2,7 +2,7 @@
  * @file pece.artifact.page.js
  */
 
-var ArtifactPage = function() {
+var PeceArtifactPage = function() {
 
   // Define pece artifacts attributes.
   this.licenseField = element(by.css('#edit-field-pece-license-und-0-licence'));
@@ -19,4 +19,4 @@ var ArtifactPage = function() {
 
 }
 
-module.exports = new ArtifactPage;
+module.exports = new PeceArtifactPage;

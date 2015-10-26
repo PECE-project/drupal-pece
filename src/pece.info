@@ -121,12 +121,13 @@ dependencies[] = og_ui
 dependencies[] = og_register
 dependencies[] = og_mailinglist
 
-; Develpment Modules
+; Development Modules
+env_dependencies[development][] = pece_tests
+
 env_dependencies[development][] = devel
 env_dependencies[development][] = devel_generate
 env_dependencies[development][] = search_krumo
-env_dependencies[development][] = drush_clone
-env_dependencies[development][] = drush_entity
 env_dependencies[development][] = module_builder
 env_dependencies[development][] = drupal_ipsum
 env_dependencies[development][] = environment_indicator
+env_dependencies[development][] = seeds

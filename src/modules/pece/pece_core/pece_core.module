@@ -36,3 +36,23 @@ function pece_core_modules_enabled($modules) {
     user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('submit latitude/longitude'));
   }
 }
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function pece_core_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['mini_teaser'] = array(
+    'label' => t('Mini teaser'),
+    'custom settings' => TRUE,
+  );
+
+  $entity_info['user']['view modes']['mini_teaser'] = array(
+    'label' => t('Mini teaser'),
+    'custom settings' => TRUE,
+  );
+
+  $entity_info['file']['view modes']['mini_teaser'] = array(
+    'label' => t('Mini teaser'),
+    'custom settings' => TRUE,
+  );
+}

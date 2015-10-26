@@ -23,12 +23,13 @@ function pece_groups_field_group_info() {
     'label' => 'Group settings',
     'weight' => '5',
     'children' => array(
-      0 => 'group_group',
-      1 => 'group_email',
-      2 => 'og_roles_permissions',
-      3 => 'group_access',
+      0 => 'group_access',
+      1 => 'group_content_access',
+      2 => 'group_email',
+      3 => 'group_group',
       4 => 'og_group_ref',
-      5 => 'group_content_access',
+      5 => 'og_roles_permissions',
+      6 => 'field_pece_media_image',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

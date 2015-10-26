@@ -33,7 +33,7 @@ var MemoPage = function() {
 
   this.pageElements = {
 
-    layoutWrapper: $('.node-main-content'),
+    layoutWrapper: $('.page-node.node-type-pece-memo'),
 
     visible: {
       titleField         : $('h1'),
