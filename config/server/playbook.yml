@@ -278,7 +278,7 @@
       nginx_drupal_mp4_streaming: false
       nginx_drupal_aio: false
       nginx_drupal_http_core:
-        client_max_body_size: "10m"
+        client_max_body_size: "100m"
       nginx_drupal_upstream_servers:
         - "unix:/var/run/php-fpm.sock"
         - "unix:/var/run/php-fpm-zwei.sock"
