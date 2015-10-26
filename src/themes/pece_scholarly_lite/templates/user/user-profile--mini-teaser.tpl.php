@@ -36,7 +36,7 @@
 ?>
 <div class="profile <?php print $classes; ?>" <?php print $attributes; ?>>
   <?php print t('!username', array(
-    '!username' => theme('username', array('account' => $user))
+    '!username' => theme('username', array('account' => $elements['#account']))
   ));?>
   <?php
     // @TODO: solve features override to export user view modes on top of panopoly.
