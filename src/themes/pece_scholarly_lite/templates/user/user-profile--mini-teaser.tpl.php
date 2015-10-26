@@ -38,5 +38,8 @@
   <?php print t('!username', array(
     '!username' => theme('username', array('account' => $user))
   ));?>
-  <?php print render($user_profile); ?>
+  <?php
+    // @TODO: solve features override to export user view modes on top of panopoly.
+    // print render($user_profile);
+  ?>
 </div>
