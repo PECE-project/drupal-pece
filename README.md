@@ -1,1 +1,1 @@
-# PECE - Platform for Experimntal and Colaborative Ethnography
+# PECE - Platform for Experimental and Collaborative Ethnography
