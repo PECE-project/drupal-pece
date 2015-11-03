@@ -14,15 +14,21 @@
     border-radius: 0
     background: transparent
 
-    li
-      border-radius: 0
-      background: transparent
+    +breakpoint($breakpoint-max-sm)
+      border-bottom: none !important
 
+    li
       &.ui-state-default
-        padding-bottom: 1px
-        margin-bottom: -2px
+        padding-bottom: 0
+        margin-bottom: -1px
         border: none
+        border-radius: 0
         background: transparent
+
+        +breakpoint($breakpoint-max-sm)
+          float: none
+          margin-top: -1px
+          margin-bottom: 0
 
       &.ui-state-active
         .ui-tabs-anchor
@@ -32,12 +38,20 @@
           border-bottom-color: white
           background: white
 
-          &:hover
-            color: $color-primary
-            border-bottom-color: white
-            background: white
+          +breakpoint($breakpoint-max-sm)
+            color: white
+            border-bottom-color: $color-primary
+            background: $color-primary
+
+          +breakpoint($breakpoint-min-md)
+            &:hover
+              color: $color-primary
+              border-bottom-color: white
+              background: white
 
       .ui-tabs-anchor
+        display: block
+        float: none
         padding: 15px 23px
         line-height: 1
         font-size: 14px
@@ -45,6 +59,9 @@
         text-decoration: none
         text-align: center
         border: 1px solid transparent
+
+        +breakpoint($breakpoint-max-sm)
+          border-color: $color-primary
 
         &:hover
           color: white
