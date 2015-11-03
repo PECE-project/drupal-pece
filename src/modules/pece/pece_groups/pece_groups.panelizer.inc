@@ -46,6 +46,9 @@ function pece_groups_panelizer_defaults() {
       'contentfooter' => NULL,
       'content' => NULL,
     ),
+    'content' => array(
+      'style' => 'tabs',
+    ),
   );
   $display->cache = array();
   $display->title = '%node:title';
@@ -185,7 +188,9 @@ function pece_groups_panelizer_defaults() {
     'view_mode' => 'teaser',
   );
   $pane->cache = array();
-  $pane->style = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
   $pane->css = array();
   $pane->extras = array();
   $pane->position = 4;
@@ -209,7 +214,9 @@ function pece_groups_panelizer_defaults() {
     'view_mode' => 'teaser',
   );
   $pane->cache = array();
-  $pane->style = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
   $pane->css = array();
   $pane->extras = array();
   $pane->position = 5;
