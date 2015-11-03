@@ -1,0 +1,52 @@
+/*
+ *------------------------------------------------------------------------------
+ * General styles for UI Tabs.
+ *------------------------------------------------------------------------------
+ */
+
+.ui-tabs
+  border-radius: 0
+
+  .ui-tabs-nav
+    padding: 0
+    margin: 7px 0 20px
+    border-bottom: 1px solid $color-primary !important
+    border-radius: 0
+    background: transparent
+
+    li
+      border-radius: 0
+      background: transparent
+
+      &.ui-state-default
+        padding-bottom: 1px
+        margin-bottom: -2px
+        border: none
+        background: transparent
+
+      &.ui-state-active
+        .ui-tabs-anchor
+          color: $color-primary
+          cursor: pointer
+          border: 1px solid $color-primary
+          border-bottom-color: white
+          background: white
+
+          &:hover
+            color: $color-primary
+            border-bottom-color: white
+            background: white
+
+      .ui-tabs-anchor
+        padding: 15px 23px
+        line-height: 1
+        font-size: 14px
+        text-transform: uppercase
+        text-decoration: none
+        text-align: center
+        border: 1px solid transparent
+
+        &:hover
+          color: white
+          border-bottom-color: $color-primary
+          background: $color-primary
