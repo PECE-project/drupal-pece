@@ -98,6 +98,10 @@ projects[admin_menu][subdir]  = contrib
 projects[adminimal_admin_menu][version] = 1.6
 projects[adminimal_admin_menu][subdir]  = contrib
 
+projects[coffee][version] = 2.2
+projects[coffee][subdir]  = contrib
+
+
 ; =====================
 ; Themes
 ; =====================
@@ -132,16 +136,23 @@ libraries[phpmailer][download][branch] = master
 
 
 ; =====================
+; Form & Form Elements
+; =====================
+
+projects[elements][subdir] = contrib
+projects[elements][version] = 1.4
+
+projects[panels_tabs][subdir] = contrib
+projects[panels_tabs][version] = 1.x-dev
+
+
+; =====================
 ; Other
 ; =====================
 
 ; Colorizer
 ;projects[colorizer][version] = 1.7
 ;projects[colorizer][subdir]  = contrib
-
-; Coffee
-projects[coffee][version] = 2.2
-projects[coffee][subdir]  = contrib
 
 ; ECK
 projects[eck][version] = 2.0-rc7
@@ -166,7 +177,6 @@ projects[xautoload][subdir]  = contrib
 ; jQuery update recent version
 projects[jquery_update][subdir] = contrib
 projects[jquery_update][version] = 2.7
-
 
 ; Organic groups
 projects[og][subdir] = contrib
@@ -253,7 +263,6 @@ projects[taxonomy_access_fix][version] = 2.2
 ; PDF Reader
 projects[pdf_reader][subdir] = contrib
 projects[pdf_reader][version] = 1.0-rc6
-
 
 ; =====================
 ; Debuging Modules
