@@ -264,6 +264,10 @@ projects[taxonomy_access_fix][version] = 2.2
 projects[pdf_reader][subdir] = contrib
 projects[pdf_reader][version] = 1.0-rc6
 
+; Views Infinite Scroll
+projects[views_infinite_scroll][subdir] = contrib
+projects[views_infinite_scroll][version] = 1.1
+
 ; =====================
 ; Debuging Modules
 ; =====================
