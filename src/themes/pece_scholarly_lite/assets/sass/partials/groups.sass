@@ -13,3 +13,17 @@
   .field-item > span
     @extend %button-disabled
     display: block
+
+.node-type-pece-group
+
+  // Used to position sidebar block above of content block.
+  .panel-display .container-fluid > .row
+    +breakpoint($breakpoint-max-sm)
+      display: -webkit-box
+      display: -moz-box
+      display: -ms-flexbox
+      display: -webkit-flex
+      display: flex
+
+      -webkit-flex-flow: column-reverse
+      flex-flow: column-reverse
