@@ -120,7 +120,7 @@ function pece_groups_panelizer_defaults() {
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'title',
-    'formatter' => 'entityreference_label',
+    'formatter' => 'entityreference_entity_view',
     'delta_limit' => '0',
     'delta_offset' => '0',
     'delta_reversed' => 0,
