@@ -82,23 +82,28 @@
 ?>
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
+  <?php if (isset($content['field_pece_media_image'])): ?>
+    <div class="icon image" >
+      <?php print render($content['field_pece_media_image']); ?>
+    </div>
+  <?php else: ?>
+    <div class="icon">
+      <i class="fa fa-lg fa-music"></i>
+    </div>
+  <?php endif ?>
+
   <?php print render($title_prefix); ?>
   <?php if (!$page): ?>
     <h5<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h5>
   <?php endif; ?>
   <?php print render($title_suffix); ?>
 
-  <?php if ($display_submitted): ?>
-    <div class="submitted">
-      <?php print $submitted; ?>
-    </div>
-  <?php endif; ?>
-
   <div class="content"<?php print $content_attributes; ?>>
     <?php
       // We hide the comments and links now so that we can render them later.
       hide($content['comments']);
       hide($content['links']);
+      hide($content['field_pece_media_image']);
       print render($content);
     ?>
   </div>
