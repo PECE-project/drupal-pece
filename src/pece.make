@@ -229,8 +229,8 @@ projects[media][subdir] = contrib
 projects[ckeditor][version] = 1.16
 projects[ckeditor][subdir] = contrib
 
-projects[manual_crop][version] = 1.5
-projects[manual_crop][subdir] = contrib
+projects[manualcrop][version] = 1.5
+projects[manualcrop][subdir] = contrib
 
 ; =====================
 ; Fields
