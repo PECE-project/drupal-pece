@@ -425,9 +425,12 @@ function pece_groups_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'og_ui',
-        'settings' => array(),
-        'type' => 'og_list_default',
+        'module' => 'entityreference',
+        'settings' => array(
+          'links' => 1,
+          'view_mode' => 'mini_teaser',
+        ),
+        'type' => 'entityreference_entity_view',
         'weight' => 5,
       ),
       'featured' => array(

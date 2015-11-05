@@ -24,6 +24,7 @@
         border: none
         border-radius: 0
         background: transparent
+        opacity: 0.5
 
         +breakpoint($breakpoint-max-sm)
           float: none
@@ -31,6 +32,8 @@
           margin-bottom: 0
 
       &.ui-state-active
+        opacity: 1
+
         .ui-tabs-anchor
           color: $color-primary
           cursor: pointer
@@ -54,7 +57,7 @@
         float: none
         padding: 15px 23px
         line-height: 1
-        font-size: 14px
+        font-size: $font-size-base
         text-transform: uppercase
         text-decoration: none
         text-align: center
@@ -62,6 +65,10 @@
 
         +breakpoint($breakpoint-max-sm)
           border-color: $color-primary
+
+        +breakpoint($breakpoint-min-lg)
+          font-size: $font-size-small
+          padding: 15px
 
         &:hover
           color: white

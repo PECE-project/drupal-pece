@@ -70,8 +70,8 @@ projects[panopoly_pages][subdir] = contrib
 projects[panopoly_wysiwyg][version] = 1.28
 projects[panopoly_wysiwyg][subdir] = contrib
 
-projects[panopoly_search][version] = 1.28
 projects[panopoly_search][subdir] = contrib
+projects[panopoly_search][version] = 1.28
 
 ; For running the automated tests.
 projects[panopoly_test][version] = 1.27
@@ -87,6 +87,13 @@ projects[radix_views][subdir] = contrib
 ;projects[radix_colorizer][subdir] = contrib
 ;projects[radix_admin][version] = 3.x-dev
 ;projects[radix_admin][subdir] = contrib
+
+; =====================
+; Search
+; =====================
+
+projects[search_api][version] = 1.16
+projects[search_api][subdir]  = contrib
 
 ; =====================
 ; Administration
@@ -129,11 +136,12 @@ libraries[phpmailer][download][url] = https://github.com/Synchro/PHPMailer.git
 libraries[phpmailer][download][revision] = d3802c597bff8f6c2ccfa3eab2a511aa01b8d68f
 libraries[phpmailer][download][branch] = master
 
-; AnnotatorJS library.
+libraries[autopager][download][type] = wget
+libraries[autopager][download][url] = http://jquery-autopager.googlecode.com/files/jquery.autopager-1.0.0.js
+
 ;libraries[annotator][download][type] = file
 ;libraries[annotator][download][url] = https://github.com/openannotation/annotator/releases/download/v1.2.10/annotator.1.2.10.zip
 ;libraries[annotator][download][subtree] = annotator.1.2.10
-
 
 ; =====================
 ; Form & Form Elements
@@ -263,6 +271,10 @@ projects[taxonomy_access_fix][version] = 2.2
 ; PDF Reader
 projects[pdf_reader][subdir] = contrib
 projects[pdf_reader][version] = 1.0-rc6
+
+; Views Infinite Scroll
+projects[views_infinite_scroll][subdir] = contrib
+projects[views_infinite_scroll][version] = 1.1
 
 ; =====================
 ; Debuging Modules

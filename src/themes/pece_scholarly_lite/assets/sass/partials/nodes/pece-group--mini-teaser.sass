@@ -4,22 +4,77 @@
  *------------------------------------------------------------------------------
  */
 
-.node-pece-group.view-mode-mini-teaser
-  position: relative
-  text-transform: center
+// @todo: this placeholder could be more generic and moved to library directory.
+%file-type-icon
+  display: block
+  position: absolute
+  z-index: 20
+  top: auto
+  width: 100%
+  font-family: $font-family-icon
+  font-size: $font-size-large
+  text-align: center
+  color: white
+  opacity: 0.8
+
+
+.view-mode-mini-teaser
+  font-size: 0
 
   h5
-    padding-left: 100px;
-    line-height: 70px;
-    margin: 0px;
+    font-size: $font-size-h5
+    margin: 0px
+    display: inline-block
+    vertical-align: middle
+    padding-left: 20px
+    width: calc(100% - 70px)
+
+  > .content
+    display: inline-block
+    vertical-align: middle
+    width: 70px
 
   .field-name-field-pece-media-image
     .file-image
       img
-        position: absolute
-        top: 0
-        left: 0
-        right: 0
-        bottom: 0
         width: 70px
-        object-fit: cover
+        height: 70px
+
+  .icon
+    position: relative
+    display: inline-block
+    vertical-align: middle
+    width: 70px
+    height: 70px
+    line-height: 70px
+    background-color: #8d36ad
+
+.node-pece-artifact-website .icon::before
+  @extend %file-type-icon
+  content: "\f08e"
+
+.node-pece-artifact-pdf .icon::before
+  @extend %file-type-icon
+  content: "\f1c1"
+
+.node-pece-artifact-video .icon::before
+  @extend %file-type-icon
+  content: "\f144"
+
+.node-pece-artifact-audio .icon::before
+  @extend %file-type-icon
+  content: "\f001"
+
+.node-pece-artifact-text .icon::before
+  @extend %file-type-icon
+  content: "\f031"
+
+.node-pece-artifact-image, .view-mode-mini-teaser
+  .icon.image
+    &::before
+      @extend %file-type-icon
+      content: "\f03e"
+
+  .field
+    position: relative
+    z-index: 20
