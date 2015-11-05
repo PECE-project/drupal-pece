@@ -136,7 +136,7 @@ libraries[phpmailer][download][url] = https://github.com/Synchro/PHPMailer.git
 libraries[phpmailer][download][revision] = d3802c597bff8f6c2ccfa3eab2a511aa01b8d68f
 libraries[phpmailer][download][branch] = master
 
-libraries[autopager][download][type] = wget
+libraries[autopager][download][type] = file
 libraries[autopager][download][url] = http://jquery-autopager.googlecode.com/files/jquery.autopager-1.0.0.js
 
 ;libraries[annotator][download][type] = file
