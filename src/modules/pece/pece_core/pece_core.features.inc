@@ -30,6 +30,30 @@ function pece_core_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function pece_core_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: pece_mini_teaser.
+  $styles['pece_mini_teaser'] = array(
+    'label' => 'PECE Mini Teaser',
+    'effects' => array(
+      3 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 70,
+          'height' => 70,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function pece_core_node_info() {
