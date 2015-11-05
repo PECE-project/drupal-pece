@@ -78,6 +78,27 @@ function pece_core_default_page_manager_pages() {
   $pane->uuid = '50a1accd-2ccd-4319-b127-15b29007da9d';
   $display->content['new-50a1accd-2ccd-4319-b127-15b29007da9d'] = $pane;
   $display->panels['contentmain'][0] = 'new-50a1accd-2ccd-4319-b127-15b29007da9d';
+  $pane = new stdClass();
+  $pane->pid = 'new-0f785044-ced8-410f-bd08-d11f5931809f';
+  $pane->panel = 'contentmain';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_recent_artifacts-panel_pane_1';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array();
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 1;
+  $pane->locks = array();
+  $pane->uuid = '0f785044-ced8-410f-bd08-d11f5931809f';
+  $display->content['new-0f785044-ced8-410f-bd08-d11f5931809f'] = $pane;
+  $display->panels['contentmain'][1] = 'new-0f785044-ced8-410f-bd08-d11f5931809f';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
