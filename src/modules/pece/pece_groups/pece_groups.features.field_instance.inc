@@ -10,7 +10,7 @@
 function pece_groups_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-pece_group-body'
+  // Exported field_instance: 'node-pece_group-body'.
   $field_instances['node-pece_group-body'] = array(
     'bundle' => 'pece_group',
     'default_value' => NULL,
@@ -72,7 +72,7 @@ function pece_groups_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_group-field_pece_media_image'
+  // Exported field_instance: 'node-pece_group-field_pece_media_image'.
   $field_instances['node-pece_group-field_pece_media_image'] = array(
     'bundle' => 'pece_group',
     'deleted' => 0,
@@ -166,7 +166,7 @@ function pece_groups_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_group-group_access'
+  // Exported field_instance: 'node-pece_group-group_access'.
   $field_instances['node-pece_group-group_access'] = array(
     'bundle' => 'pece_group',
     'default_value' => array(
@@ -231,7 +231,7 @@ function pece_groups_field_default_field_instances() {
     'widget_type' => 'options_select',
   );
 
-  // Exported field_instance: 'node-pece_group-group_content_access'
+  // Exported field_instance: 'node-pece_group-group_content_access'.
   $field_instances['node-pece_group-group_content_access'] = array(
     'bundle' => 'pece_group',
     'default_value' => array(
@@ -296,7 +296,7 @@ function pece_groups_field_default_field_instances() {
     'widget_type' => 'options_select',
   );
 
-  // Exported field_instance: 'node-pece_group-group_email'
+  // Exported field_instance: 'node-pece_group-group_email'.
   $field_instances['node-pece_group-group_email'] = array(
     'bundle' => 'pece_group',
     'default_value' => NULL,
@@ -346,7 +346,7 @@ function pece_groups_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_group-group_group'
+  // Exported field_instance: 'node-pece_group-group_group'.
   $field_instances['node-pece_group-group_group'] = array(
     'bundle' => 'pece_group',
     'default_value' => array(
@@ -416,7 +416,7 @@ function pece_groups_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_group-og_group_ref'
+  // Exported field_instance: 'node-pece_group-og_group_ref'.
   $field_instances['node-pece_group-og_group_ref'] = array(
     'bundle' => 'pece_group',
     'default_value' => NULL,
@@ -497,7 +497,7 @@ function pece_groups_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_group-og_roles_permissions'
+  // Exported field_instance: 'node-pece_group-og_roles_permissions'.
   $field_instances['node-pece_group-og_roles_permissions'] = array(
     'bundle' => 'pece_group',
     'default_value' => array(
