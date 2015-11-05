@@ -70,8 +70,8 @@ projects[panopoly_pages][subdir] = contrib
 projects[panopoly_wysiwyg][version] = 1.28
 projects[panopoly_wysiwyg][subdir] = contrib
 
-projects[panopoly_search][version] = 1.28
 projects[panopoly_search][subdir] = contrib
+projects[panopoly_search][version] = 1.28
 
 ; For running the automated tests.
 projects[panopoly_test][version] = 1.27
@@ -87,6 +87,13 @@ projects[radix_views][subdir] = contrib
 ;projects[radix_colorizer][subdir] = contrib
 ;projects[radix_admin][version] = 3.x-dev
 ;projects[radix_admin][subdir] = contrib
+
+; =====================
+; Search
+; =====================
+
+projects[search_api][version] = 1.16
+projects[search_api][subdir]  = contrib
 
 ; =====================
 ; Administration
