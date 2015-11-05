@@ -8,7 +8,7 @@
 %file-type-icon
   display: block
   position: absolute
-  z-index: 20
+  z-index: 10
   top: auto
   width: 100%
   font-family: $font-family-icon
@@ -68,6 +68,14 @@
 .node-pece-artifact-text .icon::before
   @extend %file-type-icon
   content: "\f031"
+
+.node-pece-artifact-bundle .icon::before
+  @extend %file-type-icon
+  content: "\f1b3"
+
+.node-pece-memo .icon::before
+  @extend %file-type-icon
+  content: "\f075"
 
 .node-pece-artifact-image, .view-mode-mini-teaser
   .icon.image
