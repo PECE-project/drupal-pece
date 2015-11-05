@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * pece_core.pages_default.inc
+ * pece_homepage.pages_default.inc
  */
 
 /**
  * Implements hook_default_page_manager_pages().
  */
-function pece_core_default_page_manager_pages() {
+function pece_homepage_default_page_manager_pages() {
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;

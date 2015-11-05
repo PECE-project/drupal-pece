@@ -348,6 +348,10 @@ projects[extlink][version] = 1.18
 projects[realname][subdir] = contrib
 projects[realname][version] = 1.2
 
+; TagCloud
+projects[tagclouds][version] = 1.10
+projects[tagclouds][subdir]  = contrib
+
 ; Taxonomy Access Fix
 projects[taxonomy_access_fix][subdir] = contrib
 projects[taxonomy_access_fix][version] = 2.2
