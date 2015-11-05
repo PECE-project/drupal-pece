@@ -10,7 +10,7 @@
 function pece_core_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'comment_body'
+  // Exported field_base: 'comment_body'.
   $field_bases['comment_body'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -31,7 +31,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_pece_analytic'
+  // Exported field_base: 'field_pece_analytic'.
   $field_bases['field_pece_analytic'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -67,7 +67,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_pece_artifact'
+  // Exported field_base: 'field_pece_artifact'.
   $field_bases['field_pece_artifact'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -110,7 +110,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_pece_artifacts'
+  // Exported field_base: 'field_pece_artifacts'.
   $field_bases['field_pece_artifacts'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -152,7 +152,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_pece_authors'
+  // Exported field_base: 'field_pece_authors'.
   $field_bases['field_pece_authors'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -179,7 +179,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_pece_contributors'
+  // Exported field_base: 'field_pece_contributors'.
   $field_bases['field_pece_contributors'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -213,7 +213,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_pece_crit_commentary'
+  // Exported field_base: 'field_pece_crit_commentary'.
   $field_bases['field_pece_crit_commentary'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -232,7 +232,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_pece_fieldsite'
+  // Exported field_base: 'field_pece_fieldsite'.
   $field_bases['field_pece_fieldsite'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -267,7 +267,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_pece_file_format'
+  // Exported field_base: 'field_pece_file_format'.
   $field_bases['field_pece_file_format'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -289,7 +289,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_pece_license'
+  // Exported field_base: 'field_pece_license'.
   $field_bases['field_pece_license'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -322,7 +322,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'creative_commons',
   );
 
-  // Exported field_base: 'field_pece_location'
+  // Exported field_base: 'field_pece_location'.
   $field_bases['field_pece_location'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -406,7 +406,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'location',
   );
 
-  // Exported field_base: 'field_pece_media_duration'
+  // Exported field_base: 'field_pece_media_duration'.
   $field_bases['field_pece_media_duration'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -428,7 +428,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_pece_researchers'
+  // Exported field_base: 'field_pece_researchers'.
   $field_bases['field_pece_researchers'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -462,7 +462,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_pece_tags'
+  // Exported field_base: 'field_pece_tags'.
   $field_bases['field_pece_tags'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -489,7 +489,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_pece_uri'
+  // Exported field_base: 'field_pece_uri'.
   $field_bases['field_pece_uri'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -511,7 +511,7 @@ function pece_core_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_permissions'
+  // Exported field_base: 'field_permissions'.
   $field_bases['field_permissions'] = array(
     'active' => 1,
     'cardinality' => 1,

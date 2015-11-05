@@ -14,6 +14,9 @@ function pece_core_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "file_entity" && $api == "file_type") {
     return array("version" => "1");
   }
+  if ($module == "page_manager" && $api == "pages_default") {
+    return array("version" => "1");
+  }
   if ($module == "panelizer" && $api == "panelizer") {
     return array("version" => "1");
   }
