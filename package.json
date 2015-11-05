@@ -4,11 +4,11 @@
   "description": "PECE: Platform for Experimental and Colaborative Ethnography",
   "main": "index.js",
   "directories": {
-    "test": "tests",
-    "install": "bower install"
+    "test": "tests"
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "install": "bower install --config.interactive=false"
   },
   "devDependencies": {
     "bless": "^3.0.3",
