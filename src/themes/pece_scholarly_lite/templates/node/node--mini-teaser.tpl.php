@@ -88,7 +88,7 @@
     </div>
   <?php else: ?>
     <div class="icon">
-      <i class="fa fa-music"></i>
+      <?php // @info: icons are defined by sass. ?>
     </div>
   <?php endif ?>
 
