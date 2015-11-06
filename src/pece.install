@@ -43,6 +43,10 @@ function pece_kw_manifests_info() {
     'callback' => 'pece_manifest_define_themes',
   );
 
+  $manifests['set_frontpage'] = array(
+    'callback' => 'pece_manifest_set_frontpage',
+  );
+
   // @TODO: Move this to pece_analytics module after solving the enabled modules
   // order issue.
   $manifests['define_analytics_perms'] = array(
@@ -59,6 +63,14 @@ function pece_kw_manifests_info() {
 function pece_manifest_define_themes() {
   // set the default theme
   _pece_set_up_theme();
+}
+
+
+/**
+ * Set front page variable.
+ */
+function pece_manifest_set_frontpage() {
+  variable_set('site_frontpage', 'home');
 }
 
 
