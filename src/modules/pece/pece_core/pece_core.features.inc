@@ -60,8 +60,8 @@ function pece_core_image_default_styles() {
       3 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 220,
-          'height' => 150,
+          'width' => 120,
+          'height' => 120,
         ),
         'weight' => 1,
       ),

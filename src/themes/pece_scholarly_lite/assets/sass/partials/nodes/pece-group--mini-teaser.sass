@@ -4,20 +4,6 @@
  *------------------------------------------------------------------------------
  */
 
-// @todo: this placeholder could be more generic and moved to library directory.
-%file-type-icon
-  display: block
-  position: absolute
-  z-index: 20
-  top: auto
-  width: 100%
-  font-family: $font-family-icon
-  font-size: $font-size-large
-  text-align: center
-  color: white
-  opacity: 0.8
-
-
 .view-mode-mini-teaser
   font-size: 0
 
@@ -47,29 +33,8 @@
     width: 70px
     height: 70px
     line-height: 70px
-    background-color: #8d36ad
+    background-color: $color-primary
 
-.node-pece-artifact-website .icon::before
-  @extend %file-type-icon
-  content: "\f08e"
-
-.node-pece-artifact-pdf .icon::before
-  @extend %file-type-icon
-  content: "\f1c1"
-
-.node-pece-artifact-video .icon::before
-  @extend %file-type-icon
-  content: "\f144"
-
-.node-pece-artifact-audio .icon::before
-  @extend %file-type-icon
-  content: "\f001"
-
-.node-pece-artifact-text .icon::before
-  @extend %file-type-icon
-  content: "\f031"
-
-.node-pece-artifact-image, .view-mode-mini-teaser
   .icon.image
     &::before
       @extend %file-type-icon

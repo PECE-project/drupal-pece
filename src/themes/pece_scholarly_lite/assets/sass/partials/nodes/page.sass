@@ -7,3 +7,51 @@
 .page-node #content
   h3
     border-bottom: 1px solid #000
+
+.node-pece-artifact-bundle .icon::before
+  @extend %file-type-icon
+  content: "\f1b3"
+
+.node-pece-artifact-website .icon::before
+  @extend %file-type-icon
+  content: "\f08e"
+
+.node-pece-artifact-pdf .icon::before
+  @extend %file-type-icon
+  content: "\f1c1"
+
+.node-pece-artifact-video .icon::before
+  @extend %file-type-icon
+  content: "\f144"
+
+.node-pece-artifact-audio .icon::before
+  @extend %file-type-icon
+  content: "\f001"
+
+.node-pece-artifact-text .icon::before
+  @extend %file-type-icon
+  content: "\f031"
+
+.node-pece-artifact-image
+  .icon.image
+    &::before
+      @extend %file-type-icon
+      content: "\f03e"
+
+  .field
+    position: relative
+    z-index: 20
+    img
+      background-color: white
+
+.node-pece-group
+  .icon::before
+    @extend %file-type-icon
+    content: "\f0c0"
+
+  .field
+    position: absolute
+    top: 0
+    z-index: 20
+    img
+      background-color: white

@@ -230,13 +230,6 @@
 
       <!-- #main -->
       <div id="main" class="clearfix">
-
-        <?php print render($title_prefix); ?>
-        <?php if (!empty($title)): ?>
-          <h1 class="title" id="page-title"><?php print $title; ?></h1>
-        <?php endif; ?>
-        <?php print render($title_suffix); ?>
-
         <!-- #tabs -->
         <?php if (!empty($tabs)):?>
           <div class="tabs">

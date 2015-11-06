@@ -8,12 +8,36 @@
       vertical-align: top
 
   .pane-title
-    margin-bottom: 30px
+    margin: 0 0 80px
+    text-align: center
 
   #main-content
-    .pane-views-panes:nth-child(odd)
+    padding: 0
+
+    .pane-pece-recent-groups-panel-pane-1,
+    .pane-tagclouds-3
       background-color: $color-gray-extra-lighter
 
-    .pane-views-panes:nth-child(even)
+    .pane-pece-recent-artifacts-panel-pane-1
       background-color: $color-gray-lighter
-      border: 1px solid #777
+
+    .pane-pece-recent-groups-panel-pane-1,
+    .pane-pece-recent-artifacts-panel-pane-1,
+    .pane-tagclouds-3
+      padding: 80px 0
+      ul
+        margin: 0
+
+    .pane-tagclouds-3
+      font-size: $font-size-h3
+      text-align: center
+
+      .pane-content
+        width: 80%
+        margin: 0 auto
+
+      span
+        padding: 0 12px
+
+      .more-link
+        display: none

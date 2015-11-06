@@ -226,7 +226,6 @@
   <!-- #main-content -->
   <div id="main-content">
     <div class="container">
-
       <div class="row">
         <section class="col-md-12">
 
