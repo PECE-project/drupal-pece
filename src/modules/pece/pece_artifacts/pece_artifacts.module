@@ -16,6 +16,14 @@ function pece_artifacts_form_pece_artifact_node_form_alter(&$form, &$form_state)
 }
 
 function pece_artifacts_get_types() {
-  $artifatcs = node_type_get_types();
-  dsm($artifatcs);
+  $artifacts = array();
+  $node_types = node_type_get_types();
+
+  foreach ($node_types as $key => $type) {
+    if (strpos($key, 'pece_artifact_') !== FALSE) {
+      $artifacts[$key] = $type;
+    }
+  }
+
+  return $artifacts;
 }

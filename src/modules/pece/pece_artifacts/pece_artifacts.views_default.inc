@@ -1,20 +1,19 @@
 <?php
 /**
  * @file
- * pece_artifacs.views_default.inc
+ * pece_artifacts.views_default.inc
  */
 
 /**
  * Implements hook_views_default_views().
  */
 function pece_artifacts_views_default_views() {
-
   $export = array();
 
   $view = new view();
   $view->name = 'pece_recent_artifacts';
   $view->description = 'List the most recent artifacts.';
-  $view->tag = 'default';
+  $view->tag = 'PECE';
   $view->base_table = 'node';
   $view->human_name = 'PECE Recent Artifacts';
   $view->core = 7;
@@ -33,7 +32,7 @@ function pece_artifacts_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'node';
-  $handler->display->display_options['row_options']['view_mode'] = 'mini_teaser';
+  $handler->display->display_options['row_options']['view_mode'] = 'most_recent';
   $handler->display->display_options['row_options']['links'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -54,14 +53,14 @@ function pece_artifacts_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
+    'pece_artifact_audio' => 'pece_artifact_audio',
+    'pece_artifact_bundle' => 'pece_artifact_bundle',
+    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
+    'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
     'pece_artifact_text' => 'pece_artifact_text',
-    'pece_artifact_audio' => 'pece_artifact_audio',
     'pece_artifact_video' => 'pece_artifact_video',
-    'pece_artifact_image' => 'pece_artifact_image',
-    'pece_artifact_bundle' => 'pece_artifact_bundle',
     'pece_artifact_website' => 'pece_artifact_website',
-    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
   );
 
   /* Display: Content pane */

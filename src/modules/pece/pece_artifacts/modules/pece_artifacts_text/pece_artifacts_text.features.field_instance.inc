@@ -1,18 +1,87 @@
 <?php
 /**
  * @file
- * pece_artifacts_website.features.field_instance.inc
+ * pece_artifacts_text.features.field_instance.inc
  */
 
 /**
  * Implements hook_field_default_field_instances().
  */
-function pece_artifacts_website_field_default_field_instances() {
+function pece_artifacts_text_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-pece_artifact_website-field_pece_authors'
-  $field_instances['node-pece_artifact_website-field_pece_authors'] = array(
-    'bundle' => 'pece_artifact_website',
+  // Exported field_instance: 'node-pece_artifact_text-body'.
+  $field_instances['node-pece_artifact_text-body'] = array(
+    'bundle' => 'pece_artifact_text',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 600,
+        ),
+        'type' => 'text_summary_or_trimmed',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'node',
+    'fences_wrapper' => 'div',
+    'field_name' => 'body',
+    'label' => 'Text',
+    'required' => 1,
+    'settings' => array(
+      'display_summary' => 1,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 20,
+        'summary_rows' => 5,
+      ),
+      'type' => 'text_textarea_with_summary',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-pece_artifact_text-field_pece_authors'.
+  $field_instances['node-pece_artifact_text-field_pece_authors'] = array(
+    'bundle' => 'pece_artifact_text',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -31,6 +100,12 @@ function pece_artifacts_website_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -63,10 +138,9 @@ function pece_artifacts_website_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance:
-  // 'node-pece_artifact_website-field_pece_contributors'
-  $field_instances['node-pece_artifact_website-field_pece_contributors'] = array(
-    'bundle' => 'pece_artifact_website',
+  // Exported field_instance: 'node-pece_artifact_text-field_pece_contributors'.
+  $field_instances['node-pece_artifact_text-field_pece_contributors'] = array(
+    'bundle' => 'pece_artifact_text',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -87,6 +161,12 @@ function pece_artifacts_website_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -121,9 +201,9 @@ function pece_artifacts_website_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'node-pece_artifact_website-field_pece_crit_commentary'
-  $field_instances['node-pece_artifact_website-field_pece_crit_commentary'] = array(
-    'bundle' => 'pece_artifact_website',
+  // 'node-pece_artifact_text-field_pece_crit_commentary'.
+  $field_instances['node-pece_artifact_text-field_pece_crit_commentary'] = array(
+    'bundle' => 'pece_artifact_text',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -133,7 +213,7 @@ function pece_artifacts_website_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 12,
+        'weight' => 11,
       ),
       'featured' => array(
         'label' => 'above',
@@ -142,6 +222,12 @@ function pece_artifacts_website_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -158,12 +244,18 @@ function pece_artifacts_website_field_default_field_instances() {
     'fences_wrapper' => 'div',
     'field_name' => 'field_pece_crit_commentary',
     'label' => 'Critical Commentary',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
@@ -173,9 +265,9 @@ function pece_artifacts_website_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_website-field_pece_fieldsite'
-  $field_instances['node-pece_artifact_website-field_pece_fieldsite'] = array(
-    'bundle' => 'pece_artifact_website',
+  // Exported field_instance: 'node-pece_artifact_text-field_pece_fieldsite'.
+  $field_instances['node-pece_artifact_text-field_pece_fieldsite'] = array(
+    'bundle' => 'pece_artifact_text',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -196,6 +288,12 @@ function pece_artifacts_website_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -229,9 +327,9 @@ function pece_artifacts_website_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_website-field_pece_license'
-  $field_instances['node-pece_artifact_website-field_pece_license'] = array(
-    'bundle' => 'pece_artifact_website',
+  // Exported field_instance: 'node-pece_artifact_text-field_pece_license'.
+  $field_instances['node-pece_artifact_text-field_pece_license'] = array(
+    'bundle' => 'pece_artifact_text',
     'default_value' => array(
       0 => array(
         'licence' => 3,
@@ -254,6 +352,12 @@ function pece_artifacts_website_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -283,9 +387,9 @@ function pece_artifacts_website_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_website-field_pece_location'
-  $field_instances['node-pece_artifact_website-field_pece_location'] = array(
-    'bundle' => 'pece_artifact_website',
+  // Exported field_instance: 'node-pece_artifact_text-field_pece_location'.
+  $field_instances['node-pece_artifact_text-field_pece_location'] = array(
+    'bundle' => 'pece_artifact_text',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -304,6 +408,12 @@ function pece_artifacts_website_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -333,9 +443,9 @@ function pece_artifacts_website_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_website-field_pece_tags'
-  $field_instances['node-pece_artifact_website-field_pece_tags'] = array(
-    'bundle' => 'pece_artifact_website',
+  // Exported field_instance: 'node-pece_artifact_text-field_pece_tags'.
+  $field_instances['node-pece_artifact_text-field_pece_tags'] = array(
+    'bundle' => 'pece_artifact_text',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -354,6 +464,12 @@ function pece_artifacts_website_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -386,9 +502,9 @@ function pece_artifacts_website_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_website-field_pece_uri'
-  $field_instances['node-pece_artifact_website-field_pece_uri'] = array(
-    'bundle' => 'pece_artifact_website',
+  // Exported field_instance: 'node-pece_artifact_text-field_pece_uri'.
+  $field_instances['node-pece_artifact_text-field_pece_uri'] = array(
+    'bundle' => 'pece_artifact_text',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -412,6 +528,12 @@ function pece_artifacts_website_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -420,7 +542,6 @@ function pece_artifacts_website_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'fences_wrapper' => 'div',
     'field_name' => 'field_pece_uri',
     'label' => 'URI',
     'required' => 1,
@@ -444,85 +565,9 @@ function pece_artifacts_website_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance:
-  // 'node-pece_artifact_website-field_pece_website_url'
-  $field_instances['node-pece_artifact_website-field_pece_website_url'] = array(
-    'bundle' => 'pece_artifact_website',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Only external URL are available. e.g: http://example.com',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_default',
-        'weight' => 11,
-      ),
-      'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'mini_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'fences_wrapper' => 'div',
-    'field_name' => 'field_pece_website_url',
-    'label' => 'Website URL',
-    'required' => 1,
-    'settings' => array(
-      'absolute_url' => 1,
-      'attributes' => array(
-        'class' => '',
-        'configurable_class' => 0,
-        'configurable_title' => 0,
-        'rel' => 'nofollow',
-        'target' => 'default',
-        'title' => '',
-      ),
-      'display' => array(
-        'url_cutoff' => 80,
-      ),
-      'enable_tokens' => 1,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'rel_remove' => 'rel_remove_internal',
-      'title' => 'none',
-      'title_label_use_field_label' => 0,
-      'title_maxlength' => 128,
-      'title_value' => '',
-      'url' => 0,
-      'user_register_form' => FALSE,
-      'validate_url' => 1,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'link',
-      'settings' => array(),
-      'type' => 'link_field',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'node-pece_artifact_website-field_permissions'
-  $field_instances['node-pece_artifact_website-field_permissions'] = array(
-    'bundle' => 'pece_artifact_website',
+  // Exported field_instance: 'node-pece_artifact_text-field_permissions'.
+  $field_instances['node-pece_artifact_text-field_permissions'] = array(
+    'bundle' => 'pece_artifact_text',
     'default_value' => array(
       0 => array(
         'value' => 'open',
@@ -536,7 +581,7 @@ function pece_artifacts_website_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 13,
+        'weight' => 12,
       ),
       'featured' => array(
         'label' => 'above',
@@ -545,6 +590,12 @@ function pece_artifacts_website_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -574,9 +625,9 @@ function pece_artifacts_website_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_website-og_group_ref'
-  $field_instances['node-pece_artifact_website-og_group_ref'] = array(
-    'bundle' => 'pece_artifact_website',
+  // Exported field_instance: 'node-pece_artifact_text-og_group_ref'.
+  $field_instances['node-pece_artifact_text-og_group_ref'] = array(
+    'bundle' => 'pece_artifact_text',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -595,6 +646,12 @@ function pece_artifacts_website_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -657,11 +714,10 @@ function pece_artifacts_website_field_default_field_instances() {
   t('Groups audience');
   t('License');
   t('Location');
-  t('Only external URL are available. e.g: http://example.com');
   t('Permissions');
   t('Tags');
+  t('Text');
   t('URI');
-  t('Website URL');
 
   return $field_instances;
 }

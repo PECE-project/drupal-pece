@@ -169,6 +169,7 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'pece_artifact_audio' => 'pece_artifact_audio',
     'pece_artifact_bundle' => 'pece_artifact_bundle',
+    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
     'pece_artifact_text' => 'pece_artifact_text',
@@ -294,7 +295,7 @@ function pece_groups_views_default_views() {
   $view = new view();
   $view->name = 'pece_recent_groups';
   $view->description = 'List the most recent groups.';
-  $view->tag = 'default';
+  $view->tag = 'PECE';
   $view->base_table = 'node';
   $view->human_name = 'PECE Recent Groups';
   $view->core = 7;
@@ -313,7 +314,7 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'node';
-  $handler->display->display_options['row_options']['view_mode'] = 'mini_teaser';
+  $handler->display->display_options['row_options']['view_mode'] = 'most_recent';
   $handler->display->display_options['row_options']['links'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';

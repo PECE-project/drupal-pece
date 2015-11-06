@@ -53,6 +53,21 @@ function pece_core_image_default_styles() {
     ),
   );
 
+  // Exported image style: pece_most_recent.
+  $styles['pece_most_recent'] = array(
+    'label' => 'PECE Most Recent',
+    'effects' => array(
+      3 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 220,
+          'height' => 150,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   return $styles;
 }
 

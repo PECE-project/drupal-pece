@@ -10,7 +10,7 @@
 function pece_annotations_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_pece_annotations'
+  // Exported field_base: 'field_pece_annotations'.
   $field_bases['field_pece_annotations'] = array(
     'active' => 1,
     'cardinality' => -1,

@@ -36,6 +36,12 @@ function pece_groups_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 7,
       ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -99,6 +105,15 @@ function pece_groups_field_default_field_instances() {
         'module' => 'file_entity',
         'settings' => array(
           'file_view_mode' => 'mini_teaser',
+        ),
+        'type' => 'file_rendered',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'hidden',
+        'module' => 'file_entity',
+        'settings' => array(
+          'file_view_mode' => 'most_recent',
         ),
         'type' => 'file_rendered',
         'weight' => 0,
@@ -196,6 +211,12 @@ function pece_groups_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 5,
       ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -256,6 +277,12 @@ function pece_groups_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -322,6 +349,12 @@ function pece_groups_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 4,
       ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -373,6 +406,12 @@ function pece_groups_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -440,6 +479,12 @@ function pece_groups_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -522,6 +567,12 @@ function pece_groups_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
