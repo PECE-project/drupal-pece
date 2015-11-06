@@ -18,13 +18,92 @@ projects[kw_itemnames][subdir] = kraftwagen
 
 
 ; =====================
-; Overrides
+; Utilities and APIs
 ; =====================
 
 ; Overrides panopoly's ctools.
 projects[ctools][version] = 1.9
 projects[ctools][subdir] = contrib
 projects[ctools][patch][] = "./patches/ctools-save_continue_button.patch"
+
+; Overrides panopoly's libraries.
+projects[libraries][version] = 2.2
+projects[libraries][subdir] = contrib
+
+; Overrides panopoly's token.
+projects[token][version] = 1.6
+projects[token][subdir] = contrib
+
+; Overrides panopoly's entity.
+projects[entity][version] = 1.6
+projects[entity][subdir] = contrib
+
+projects[xautoload][version] = 5.5
+projects[xautoload][subdir]  = contrib
+
+projects[jquery_update][version] = 2.7
+projects[jquery_update][subdir] = contrib
+
+projects[prevent_js_alerts][version] = 1.0
+projects[prevent_js_alerts][subdir] = contrib
+
+projects[pathauto][version] = 1.3
+projects[pathauto][subdir] = contrib
+
+; =====================
+; Views
+; =====================
+
+projects[views_infinite_scroll][version] = 1.1
+projects[views_infinite_scroll][subdir] = contrib
+
+projects[views_litepager][version] = 3.0
+projects[views_litepager][subdir] = contrib
+
+; =====================
+; Administration
+; =====================
+
+projects[admin_menu][version] = 3.0-rc5
+projects[admin_menu][subdir]  = contrib
+
+projects[adminimal_admin_menu][version] = 1.6
+projects[adminimal_admin_menu][subdir]  = contrib
+
+projects[coffee][version] = 2.2
+projects[coffee][subdir]  = contrib
+
+; =====================
+; Configuration Management
+; =====================
+
+; Overrides panopoly_core's features_override.
+projects[features_override][version] = 2.0-rc3
+projects[features_override][subdir] = contrib
+
+projects[features][version] = 2.7
+projects[features][subdir] = contrib
+
+projects[diff][version] = 3.2
+projects[diff][subdir] = contrib
+
+projects[strongarm][version] = 2.0
+projects[strongarm][subdir] = contrib
+
+projects[defaultconfig][version] = 1.0-alpha11
+projects[defaultconfig][subdir] = contrib
+
+; =====================
+; Security
+; =====================
+
+; projects[seckit][subdir] = contrib
+; projects[username_enumeration_prevention][subdir] = contrib
+; projects[password_policy][subdir] = contrib
+
+; =====================
+; Panels
+; =====================
 
 ; Overrides panopoly's panelizer.
 projects[panelizer][version] = 3.1
@@ -33,9 +112,13 @@ projects[panelizer][patch][1623536] = http://drupal.org/files/issues/array-to-ob
 projects[panelizer][patch][2416505] = http://www.drupal.org/files/issues/panelizer-search_api-2416505-3.patch
 projects[panelizer][patch][2328615] = https://www.drupal.org/files/issues/panelizerentitydefault-2328615-1.patch
 
-; Overrides panopoly_core's features_override
-projects[features_override][version] = 2.0-rc3
-projects[features_override][subdir] = contrib
+projects[panels][version] = 3.5
+projects[panels][subdir] = contrib
+projects[panels][patch][2448825] = https://www.drupal.org/files/issues/panels-export-indentation-2448825-1.patch
+projects[panels][patch][2390803] = https://www.drupal.org/files/issues/panels-focus-add-content-tab-2390803-13.patch
+
+;projects[panels_breadcrumbs][version] = 2.2
+;projects[panels_breadcrumbs][subdir] = contrib;
 
 ; =====================
 ; Panopoly
@@ -89,25 +172,85 @@ projects[radix_views][subdir] = contrib
 ;projects[radix_admin][subdir] = contrib
 
 ; =====================
+; Interface
+; =====================
+
+projects[breakpoints][version] = 1.3
+projects[breakpoints][subdir] = contrib
+
+;projects[breakpointsjs][version] = 2.x-dev
+;projects[breakpointsjs][subdir] = contrib
+
+; =====================
+; Entities
+; =====================
+
+projects[eck][version] = 2.0-rc7
+projects[eck][subdir]  = contrib
+
+projects[entity_view_mode][subdir] = contrib
+projects[entity_view_mode][version] = 1.0-rc1
+
+projects[entityreference_view_widget][subdir] = contrib
+projects[entityreference_view_widget][version] = 2.0-rc6
+
+projects[entityconnect][subdir] = contrib
+projects[entityconnect][version] = 1.0-rc5
+
+projects[inline_entity_form][version] = 1.6
+projects[inline_entity_form][subdir]  = contrib
+
+; =====================
+; Form & Form Elements
+; =====================
+
+projects[elements][version] = 1.4
+projects[elements][subdir] = contrib
+
+projects[panels_tabs][version] = 1.x-dev
+projects[panels_tabs][subdir] = contrib
+
+projects[fences][version] = 1.2
+projects[fences][subdir] = contrib
+
+projects[better_formats][version] = 1.0-beta1
+projects[better_formats][subdir] = contrib
+
+; =====================
+; Files
+; =====================
+
+projects[file_entity][version] = 2.0-beta2
+projects[file_entity][subdir] = contrib
+
+projects[media][version] = 2.0-beta1
+projects[media][subdir] = contrib
+
+projects[ckeditor][version] = 1.16
+projects[ckeditor][subdir] = contrib
+
+projects[manualcrop][version] = 1.5
+projects[manualcrop][subdir] = contrib
+
+; =====================
+; Fields
+; =====================
+
+projects[image_resize_filter][version] = 1.16
+projects[image_resize_filter][subdir] = contrib
+
+projects[linkit][version] = 3.4
+projects[linkit][subdir] = contrib
+
+projects[field_group][version] = 1.4
+projects[field_group][subdir] = contrib
+
+; =====================
 ; Search
 ; =====================
 
 projects[search_api][version] = 1.16
 projects[search_api][subdir]  = contrib
-
-; =====================
-; Administration
-; =====================
-
-projects[admin_menu][version] = 3.0-rc5
-projects[admin_menu][subdir]  = contrib
-
-projects[adminimal_admin_menu][version] = 1.6
-projects[adminimal_admin_menu][subdir]  = contrib
-
-projects[coffee][version] = 2.2
-projects[coffee][subdir]  = contrib
-
 
 ; =====================
 ; Themes
@@ -144,31 +287,12 @@ libraries[autopager][download][url] = http://jquery-autopager.googlecode.com/fil
 ;libraries[annotator][download][subtree] = annotator.1.2.10
 
 ; =====================
-; Form & Form Elements
-; =====================
-
-projects[elements][subdir] = contrib
-projects[elements][version] = 1.4
-
-projects[panels_tabs][subdir] = contrib
-projects[panels_tabs][version] = 1.x-dev
-
-
-; =====================
 ; Other
 ; =====================
 
 ; Colorizer
 ;projects[colorizer][version] = 1.7
 ;projects[colorizer][subdir]  = contrib
-
-; ECK
-projects[eck][version] = 2.0-rc7
-projects[eck][subdir]  = contrib
-
-; Inline Entity Form
-projects[inline_entity_form][version] = 1.6
-projects[inline_entity_form][subdir]  = contrib
 
 ; Rules
 projects[rules][subdir] = contrib
@@ -177,14 +301,6 @@ projects[rules][version] = 2.9
 ; Translation
 projects[l10n_update][subdir] = contrib
 projects[l10n_update][version] = 2.0
-
-; XAutoload
-projects[xautoload][version] = 5.5
-projects[xautoload][subdir]  = contrib
-
-; jQuery update recent version
-projects[jquery_update][subdir] = contrib
-projects[jquery_update][version] = 2.7
 
 ; Organic groups
 projects[og][subdir] = contrib
@@ -208,10 +324,6 @@ projects[bundle_inherit][version] = 1.0-alpha2
 projects[publication_date][subdir] = contrib
 projects[publication_date][version] = 2.2
 
-; Diff
-projects[diff][subdir] = contrib
-projects[diff][version] = 3.2
-
 ; Creative Commons Field
 projects[creative_commons][subdir] = contrib
 projects[creative_commons][version] = 1.2
@@ -232,29 +344,13 @@ projects[gmap][version] = 2.10
 projects[extlink][subdir] = contrib
 projects[extlink][version] = 1.18
 
-; External link
-projects[extlink][subdir] = contrib
-projects[extlink][version] = 1.18
-
-; Fences
-projects[fences][subdir] = contrib
-projects[fences][version] = 1.2
-
-; Entity View Mode
-projects[entity_view_mode][subdir] = contrib
-projects[entity_view_mode][version] = 1.0-rc1
-
 ; Real Name
 projects[realname][subdir] = contrib
 projects[realname][version] = 1.2
 
-; Entity Reference View Widget
-projects[entityreference_view_widget][subdir] = contrib
-projects[entityreference_view_widget][version] = 2.0-rc6
-
-; Entity Connect
-projects[entityconnect][subdir] = contrib
-projects[entityconnect][version] = 1.0-rc5
+; TagCloud
+projects[tagclouds][version] = 1.10
+projects[tagclouds][subdir]  = contrib
 
 ; Taxonomy Access Fix
 projects[taxonomy_access_fix][subdir] = contrib
@@ -272,16 +368,6 @@ projects[taxonomy_access_fix][version] = 2.2
 projects[pdf_reader][subdir] = contrib
 projects[pdf_reader][version] = 1.0-rc6
 
-; Views Infinite Scroll
-projects[views_infinite_scroll][subdir] = contrib
-projects[views_infinite_scroll][version] = 1.1
-
-; =====================
-; Debuging Modules
-; =====================
-
-projects[search_krumo][subdir] = dev
-
 ; =====================
 ; Development Modules
 ; =====================
@@ -297,9 +383,10 @@ projects[seeds][download][type] = git
 projects[seeds][download][url] = https://github.com/lucasconstantino/drupal-seeds.git
 projects[seeds][subdir] = dev
 
-; =====================
-; Drush Modules - not installable
-; =====================
+projects[search_krumo][subdir] = dev
 
-; projects[drush_clone][subdir]  = .drush ?
-; projects[drush_entity][subdir] = .drush ?
+; =====================
+; Imports
+; =====================
+; At the end, so that overrides are possible.includes[] = modules/sandbox/taller_entity/taller_entity.make
+; includes[] = path/to/file.make

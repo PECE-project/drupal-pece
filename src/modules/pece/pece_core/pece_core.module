@@ -55,4 +55,14 @@ function pece_core_entity_info_alter(&$entity_info) {
     'label' => t('Mini teaser'),
     'custom settings' => TRUE,
   );
+
+  $entity_info['node']['view modes']['most_recent'] = array(
+    'label' => t('Most Recent'),
+    'custom settings' => TRUE,
+  );
+
+  $entity_info['file']['view modes']['most_recent'] = array(
+    'label' => t('Most Recent'),
+    'custom settings' => TRUE,
+  );
 }

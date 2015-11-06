@@ -1,18 +1,18 @@
 <?php
 /**
  * @file
- * pece_artifacts_pdf.features.field_instance.inc
+ * pece_artifacts_image.features.field_instance.inc
  */
 
 /**
  * Implements hook_field_default_field_instances().
  */
-function pece_artifacts_pdf_field_default_field_instances() {
+function pece_artifacts_image_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-pece_artifact_pdf-field_pece_authors'
-  $field_instances['node-pece_artifact_pdf-field_pece_authors'] = array(
-    'bundle' => 'pece_artifact_pdf',
+  // Exported field_instance: 'node-pece_artifact_image-field_pece_authors'.
+  $field_instances['node-pece_artifact_image-field_pece_authors'] = array(
+    'bundle' => 'pece_artifact_image',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -22,7 +22,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 11,
+        'weight' => 10,
       ),
       'featured' => array(
         'label' => 'above',
@@ -34,7 +34,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 11,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -59,13 +65,14 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_pdf-field_pece_contributors'
-  $field_instances['node-pece_artifact_pdf-field_pece_contributors'] = array(
-    'bundle' => 'pece_artifact_pdf',
+  // Exported field_instance:
+  // 'node-pece_artifact_image-field_pece_contributors'.
+  $field_instances['node-pece_artifact_image-field_pece_contributors'] = array(
+    'bundle' => 'pece_artifact_image',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -89,7 +96,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 7,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -116,14 +129,14 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
   // Exported field_instance:
-  // 'node-pece_artifact_pdf-field_pece_crit_commentary'
-  $field_instances['node-pece_artifact_pdf-field_pece_crit_commentary'] = array(
-    'bundle' => 'pece_artifact_pdf',
+  // 'node-pece_artifact_image-field_pece_crit_commentary'.
+  $field_instances['node-pece_artifact_image-field_pece_crit_commentary'] = array(
+    'bundle' => 'pece_artifact_image',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -133,7 +146,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 10,
+        'weight' => 7,
       ),
       'featured' => array(
         'label' => 'above',
@@ -145,7 +158,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 8,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -159,7 +178,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
     'field_name' => 'field_pece_crit_commentary',
     'label' => 'Critical Commentary',
     'locked' => TRUE,
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
       'linkit' => array(
         'button_text' => 'Search',
@@ -170,18 +189,20 @@ function pece_artifacts_pdf_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'size' => 60,
       ),
       'type' => 'text_textarea',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_pdf-field_pece_fieldsite'
-  $field_instances['node-pece_artifact_pdf-field_pece_fieldsite'] = array(
-    'bundle' => 'pece_artifact_pdf',
+  // Exported field_instance: 'node-pece_artifact_image-field_pece_fieldsite'.
+  $field_instances['node-pece_artifact_image-field_pece_fieldsite'] = array(
+    'bundle' => 'pece_artifact_image',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -205,7 +226,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 9,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -232,13 +259,78 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_pdf-field_pece_license'
-  $field_instances['node-pece_artifact_pdf-field_pece_license'] = array(
-    'bundle' => 'pece_artifact_pdf',
+  // Exported field_instance: 'node-pece_artifact_image-field_pece_file_format'.
+  $field_instances['node-pece_artifact_image-field_pece_file_format'] = array(
+    'bundle' => 'pece_artifact_image',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'fences_wrapper' => 'div',
+    'field_name' => 'field_pece_file_format',
+    'label' => 'Format',
+    'locked' => TRUE,
+    'required' => 0,
+    'settings' => array(
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 20,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-pece_artifact_image-field_pece_license'.
+  $field_instances['node-pece_artifact_image-field_pece_license'] = array(
+    'bundle' => 'pece_artifact_image',
     'default_value' => array(
       0 => array(
         'licence' => 3,
@@ -264,7 +356,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 6,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -287,13 +385,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
       'module' => 'creative_commons',
       'settings' => array(),
       'type' => 'select',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_pdf-field_pece_location'
-  $field_instances['node-pece_artifact_pdf-field_pece_location'] = array(
-    'bundle' => 'pece_artifact_pdf',
+  // Exported field_instance: 'node-pece_artifact_image-field_pece_location'.
+  $field_instances['node-pece_artifact_image-field_pece_location'] = array(
+    'bundle' => 'pece_artifact_image',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -315,7 +413,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 5,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -337,28 +441,24 @@ function pece_artifacts_pdf_field_default_field_instances() {
       'module' => 'location_cck',
       'settings' => array(),
       'type' => 'location',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_pdf-field_pece_media_pdf'
-  $field_instances['node-pece_artifact_pdf-field_pece_media_pdf'] = array(
-    'bundle' => 'pece_artifact_pdf',
+  // Exported field_instance: 'node-pece_artifact_image-field_pece_media_image'.
+  $field_instances['node-pece_artifact_image-field_pece_media_image'] = array(
+    'bundle' => 'pece_artifact_image',
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'pdf_reader',
+        'module' => 'image',
         'settings' => array(
-          'colorbox' => FALSE,
-          'colorbox_link_text' => '',
-          'download' => 1,
-          'pdf_height' => 300,
-          'pdf_width' => 345,
-          'renderer' => 'google',
+          'image_link' => '',
+          'image_style' => '',
         ),
-        'type' => 'pdf_reader_file',
+        'type' => 'image',
         'weight' => 9,
       ),
       'featured' => array(
@@ -368,9 +468,21 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'hidden',
+        'module' => 'file_entity',
+        'settings' => array(
+          'file_view_mode' => 'mini_teaser',
+        ),
+        'type' => 'file_rendered',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'hidden',
+        'module' => 'file_entity',
+        'settings' => array(
+          'file_view_mode' => 'most_recent',
+        ),
+        'type' => 'file_rendered',
         'weight' => 0,
       ),
       'teaser' => array(
@@ -382,14 +494,18 @@ function pece_artifacts_pdf_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'fences_wrapper' => 'div',
-    'field_name' => 'field_pece_media_pdf',
-    'label' => 'PDF Document',
+    'field_name' => 'field_pece_media_image',
+    'label' => 'Image',
     'required' => 1,
     'settings' => array(
-      'description_field' => 0,
-      'file_directory' => 'artifacts/media/pdf',
-      'file_extensions' => 'pdf',
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => 'artifacts/media/image',
+      'file_extensions' => 'png gif jpg jpeg svg',
       'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -404,8 +520,8 @@ function pece_artifacts_pdf_field_default_field_instances() {
         ),
         'allowed_types' => array(
           'audio' => 0,
-          'document' => 'document',
-          'image' => 0,
+          'document' => 0,
+          'image' => 'image',
           'video' => 0,
         ),
         'browser_plugins' => array(
@@ -432,9 +548,9 @@ function pece_artifacts_pdf_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_pdf-field_pece_tags'
-  $field_instances['node-pece_artifact_pdf-field_pece_tags'] = array(
-    'bundle' => 'pece_artifact_pdf',
+  // Exported field_instance: 'node-pece_artifact_image-field_pece_tags'.
+  $field_instances['node-pece_artifact_image-field_pece_tags'] = array(
+    'bundle' => 'pece_artifact_image',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -456,7 +572,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 1,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -482,13 +604,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_pdf-field_pece_uri'
-  $field_instances['node-pece_artifact_pdf-field_pece_uri'] = array(
-    'bundle' => 'pece_artifact_pdf',
+  // Exported field_instance: 'node-pece_artifact_image-field_pece_uri'.
+  $field_instances['node-pece_artifact_image-field_pece_uri'] = array(
+    'bundle' => 'pece_artifact_image',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -510,7 +632,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -541,13 +669,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_pdf-field_permissions'
-  $field_instances['node-pece_artifact_pdf-field_permissions'] = array(
-    'bundle' => 'pece_artifact_pdf',
+  // Exported field_instance: 'node-pece_artifact_image-field_permissions'.
+  $field_instances['node-pece_artifact_image-field_permissions'] = array(
+    'bundle' => 'pece_artifact_image',
     'default_value' => array(
       0 => array(
         'value' => 'open',
@@ -573,7 +701,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 3,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -595,13 +729,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_pdf-og_group_ref'
-  $field_instances['node-pece_artifact_pdf-og_group_ref'] = array(
-    'bundle' => 'pece_artifact_pdf',
+  // Exported field_instance: 'node-pece_artifact_image-og_group_ref'.
+  $field_instances['node-pece_artifact_image-og_group_ref'] = array(
+    'bundle' => 'pece_artifact_image',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -623,7 +757,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -670,7 +810,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -680,10 +820,11 @@ function pece_artifacts_pdf_field_default_field_instances() {
   t('Contributors');
   t('Critical Commentary');
   t('Fieldsite');
+  t('Format');
   t('Groups audience');
+  t('Image');
   t('License');
   t('Location');
-  t('PDF Document');
   t('Permissions');
   t('Tags');
   t('URI');

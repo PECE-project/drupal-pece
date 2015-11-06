@@ -1,22 +1,22 @@
 <?php
 /**
  * @file
- * pece_artifacts_video.features.field_base.inc
+ * pece_artifacts_pdf.features.field_base.inc
  */
 
 /**
  * Implements hook_field_default_field_bases().
  */
-function pece_artifacts_video_field_default_field_bases() {
+function pece_artifacts_pdf_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_pece_media_video'
-  $field_bases['field_pece_media_video'] = array(
+  // Exported field_base: 'field_pece_media_pdf'.
+  $field_bases['field_pece_media_pdf'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_pece_media_video',
+    'field_name' => 'field_pece_media_pdf',
     'indexes' => array(
       'fid' => array(
         0 => 'fid',

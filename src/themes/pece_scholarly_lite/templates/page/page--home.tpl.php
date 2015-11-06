@@ -225,50 +225,39 @@
 
   <!-- #main-content -->
   <div id="main-content">
-    <div class="container">
-      <div class="row">
-        <section class="col-md-12">
 
-          <!-- #main -->
-          <div id="main" class="clearfix">
+    <section>
 
-            <?php print render($title_prefix); ?>
-            <?php if (!empty($title)): ?>
-              <h1 class="title" id="page-title"><?php print $title; ?></h1>
-            <?php endif; ?>
-            <?php print render($title_suffix); ?>
-
-            <!-- #tabs -->
-            <?php if (!empty($tabs)):?>
-              <div class="tabs">
-              <?php print render($tabs); ?>
-              </div>
-            <?php endif; ?>
-            <!-- EOF: #tabs -->
-
-            <?php print render($page['help']); ?>
-
-            <!-- #action links -->
-            <?php if (!empty($action_links)):?>
-              <ul class="action-links">
-                <?php print render($action_links); ?>
-              </ul>
-            <?php endif; ?>
-            <!-- EOF: #action links -->
-
-            <?php if (theme_get_setting('frontpage_content_print') || !drupal_is_front_page()):?>
-              <?php print render($page['content']); ?>
-              <?php print $feed_icons; ?>
-            <?php endif; ?>
-
+      <!-- #main -->
+      <div id="main" class="clearfix">
+        <!-- #tabs -->
+        <?php if (!empty($tabs)):?>
+          <div class="tabs">
+          <?php print render($tabs); ?>
           </div>
-          <!-- EOF:#main -->
+        <?php endif; ?>
+        <!-- EOF: #tabs -->
 
-        </section>
+        <?php print render($page['help']); ?>
+
+        <!-- #action links -->
+        <?php if (!empty($action_links)):?>
+          <ul class="action-links">
+            <?php print render($action_links); ?>
+          </ul>
+        <?php endif; ?>
+        <!-- EOF: #action links -->
+
+        <?php if (theme_get_setting('frontpage_content_print') || !drupal_is_front_page()):?>
+          <?php print render($page['content']); ?>
+          <?php print $feed_icons; ?>
+        <?php endif; ?>
 
       </div>
+      <!-- EOF:#main -->
 
-    </div>
+    </section>
+
   </div>
   <!-- EOF:#main-content -->
 

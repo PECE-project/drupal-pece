@@ -82,6 +82,15 @@ function pece_groups_defaultconfig_field_default_fields() {
           'type' => 'file_rendered',
           'weight' => 0,
         ),
+        'most_recent' => array(
+          'label' => 'hidden',
+          'module' => 'file_entity',
+          'settings' => array(
+            'file_view_mode' => 'most_recent',
+          ),
+          'type' => 'file_rendered',
+          'weight' => 0,
+        ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),

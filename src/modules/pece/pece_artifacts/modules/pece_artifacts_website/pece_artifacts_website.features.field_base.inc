@@ -10,7 +10,7 @@
 function pece_artifacts_website_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_pece_website_url'
+  // Exported field_base: 'field_pece_website_url'.
   $field_bases['field_pece_website_url'] = array(
     'active' => 1,
     'cardinality' => 1,

@@ -14,6 +14,9 @@ function pece_core_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "file_entity" && $api == "file_type") {
     return array("version" => "1");
   }
+  if ($module == "page_manager" && $api == "pages_default") {
+    return array("version" => "1");
+  }
   if ($module == "panelizer" && $api == "panelizer") {
     return array("version" => "1");
   }
@@ -44,6 +47,21 @@ function pece_core_image_default_styles() {
         'data' => array(
           'width' => 70,
           'height' => 70,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: pece_most_recent.
+  $styles['pece_most_recent'] = array(
+    'label' => 'PECE Most Recent',
+    'effects' => array(
+      3 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 120,
+          'height' => 120,
         ),
         'weight' => 1,
       ),

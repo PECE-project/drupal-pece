@@ -10,7 +10,8 @@
 function pece_core_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'comment-comment_node_pece_fieldsite-comment_body'
+  // Exported field_instance:
+  // 'comment-comment_node_pece_fieldsite-comment_body'.
   $field_instances['comment-comment_node_pece_fieldsite-comment_body'] = array(
     'bundle' => 'comment_node_pece_fieldsite',
     'default_value' => NULL,
@@ -43,7 +44,7 @@ function pece_core_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_fieldsite-body'
+  // Exported field_instance: 'node-pece_fieldsite-body'.
   $field_instances['node-pece_fieldsite-body'] = array(
     'bundle' => 'pece_fieldsite',
     'default_value' => NULL,
@@ -64,6 +65,12 @@ function pece_core_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -105,7 +112,7 @@ function pece_core_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_fieldsite-field_pece_location'
+  // Exported field_instance: 'node-pece_fieldsite-field_pece_location'.
   $field_instances['node-pece_fieldsite-field_pece_location'] = array(
     'bundle' => 'pece_fieldsite',
     'default_value' => NULL,
@@ -126,6 +133,12 @@ function pece_core_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -154,7 +167,7 @@ function pece_core_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_fieldsite-field_pece_researchers'
+  // Exported field_instance: 'node-pece_fieldsite-field_pece_researchers'.
   $field_instances['node-pece_fieldsite-field_pece_researchers'] = array(
     'bundle' => 'pece_fieldsite',
     'default_value' => NULL,
@@ -177,6 +190,12 @@ function pece_core_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',

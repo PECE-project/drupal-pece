@@ -10,7 +10,7 @@
 function pece_artifacts_fieldnote_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-pece_artifact_fieldnote-body'
+  // Exported field_instance: 'node-pece_artifact_fieldnote-body'.
   $field_instances['node-pece_artifact_fieldnote-body'] = array(
     'bundle' => 'pece_artifact_fieldnote',
     'default_value' => NULL,
@@ -31,6 +31,12 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -74,7 +80,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_fieldnote-field_pece_authors'
+  // Exported field_instance: 'node-pece_artifact_fieldnote-field_pece_authors'.
   $field_instances['node-pece_artifact_fieldnote-field_pece_authors'] = array(
     'bundle' => 'pece_artifact_fieldnote',
     'default_value' => NULL,
@@ -95,6 +101,12 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -128,7 +140,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'node-pece_artifact_fieldnote-field_pece_contributors'
+  // 'node-pece_artifact_fieldnote-field_pece_contributors'.
   $field_instances['node-pece_artifact_fieldnote-field_pece_contributors'] = array(
     'bundle' => 'pece_artifact_fieldnote',
     'default_value' => NULL,
@@ -151,6 +163,12 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -186,7 +204,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'node-pece_artifact_fieldnote-field_pece_fieldsite'
+  // 'node-pece_artifact_fieldnote-field_pece_fieldsite'.
   $field_instances['node-pece_artifact_fieldnote-field_pece_fieldsite'] = array(
     'bundle' => 'pece_artifact_fieldnote',
     'default_value' => NULL,
@@ -209,6 +227,12 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -243,7 +267,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_fieldnote-field_pece_license'
+  // Exported field_instance: 'node-pece_artifact_fieldnote-field_pece_license'.
   $field_instances['node-pece_artifact_fieldnote-field_pece_license'] = array(
     'bundle' => 'pece_artifact_fieldnote',
     'default_value' => array(
@@ -273,6 +297,12 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -297,7 +327,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_fieldnote-field_pece_tags'
+  // Exported field_instance: 'node-pece_artifact_fieldnote-field_pece_tags'.
   $field_instances['node-pece_artifact_fieldnote-field_pece_tags'] = array(
     'bundle' => 'pece_artifact_fieldnote',
     'default_value' => NULL,
@@ -318,6 +348,12 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -350,7 +386,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_fieldnote-field_pece_uri'
+  // Exported field_instance: 'node-pece_artifact_fieldnote-field_pece_uri'.
   $field_instances['node-pece_artifact_fieldnote-field_pece_uri'] = array(
     'bundle' => 'pece_artifact_fieldnote',
     'default_value' => NULL,
@@ -371,6 +407,12 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -408,7 +450,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_fieldnote-field_permissions'
+  // Exported field_instance: 'node-pece_artifact_fieldnote-field_permissions'.
   $field_instances['node-pece_artifact_fieldnote-field_permissions'] = array(
     'bundle' => 'pece_artifact_fieldnote',
     'default_value' => array(
@@ -433,6 +475,12 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',

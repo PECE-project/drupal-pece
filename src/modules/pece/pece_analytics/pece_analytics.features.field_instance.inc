@@ -10,7 +10,7 @@
 function pece_analytics_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-pece_analytic-field_pece_struct_analytics'
+  // Exported field_instance: 'node-pece_analytic-field_pece_struct_analytics'.
   $field_instances['node-pece_analytic-field_pece_struct_analytics'] = array(
     'bundle' => 'pece_analytic',
     'default_value' => NULL,
@@ -33,6 +33,12 @@ function pece_analytics_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -71,7 +77,7 @@ function pece_analytics_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_analytic-field_pece_tags'
+  // Exported field_instance: 'node-pece_analytic-field_pece_tags'.
   $field_instances['node-pece_analytic-field_pece_tags'] = array(
     'bundle' => 'pece_analytic',
     'default_value' => NULL,
@@ -92,6 +98,12 @@ function pece_analytics_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -124,7 +136,7 @@ function pece_analytics_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_analytic-field_pece_uri'
+  // Exported field_instance: 'node-pece_analytic-field_pece_uri'.
   $field_instances['node-pece_analytic-field_pece_uri'] = array(
     'bundle' => 'pece_analytic',
     'default_value' => NULL,
@@ -145,6 +157,12 @@ function pece_analytics_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
