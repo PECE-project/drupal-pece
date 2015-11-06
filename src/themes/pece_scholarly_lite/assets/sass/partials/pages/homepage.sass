@@ -1,4 +1,4 @@
-.front
+.page-home
   .view
     ul li
       list-style-type: none
@@ -9,3 +9,11 @@
 
   .pane-title
     margin-bottom: 30px
+
+  #main-content
+    .pane-views-panes:nth-child(odd)
+      background-color: $color-gray-extra-lighter
+
+    .pane-views-panes:nth-child(even)
+      background-color: $color-gray-lighter
+      border: 1px solid #777
