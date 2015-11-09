@@ -1,15 +1,33 @@
 .page-home
+
+  .item-list ul li
+    margin: 0
+
   .pane-content
     +container-fixed(12px)
     .view
       +make-row(12px)
       text-align: center
       ul li
-        +make-md-column(2)
-        +make-sm-column(6)
-        +make-xs-column(12)
+        &:first-child
+          +make-lg-column-offset(1)
+        +make-lg-column(2)
         list-style-type: none
         text-align: center
+        margin-bottom: 30px
+
+        @media (min-width: $screen-md-min) and (max-width: $screen-md-max)
+          &:first-child
+            +make-md-column-offset(1)
+          +make-md-column(2)
+
+        @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max)
+          &:first-child
+            +make-sm-column-offset(1)
+          +make-sm-column(2)
+
+        @media (min-width: $screen-xs-min) and (max-width: $screen-xs-max)
+          +make-xs-column(12)
 
   .pane-title
     margin: 0 0 80px
@@ -47,5 +65,3 @@
       .more-link
         display: none
 
-.item-list ul li
-  margin: 0
