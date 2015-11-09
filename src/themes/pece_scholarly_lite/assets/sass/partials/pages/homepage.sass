@@ -1,14 +1,15 @@
 .page-home
-  .view
-    +make-row()
-    ul li
-      +make-sm-column(6)
-      +make-md-column(2, 2)
-      +make-xs-column(12)
-      list-style-type: none
-      display: inline-block
+  .pane-content
+    +container-fixed(12px)
+    .view
+      +make-row(12px)
       text-align: center
-      vertical-align: top
+      ul li
+        +make-md-column(2)
+        +make-sm-column(6)
+        +make-xs-column(12)
+        list-style-type: none
+        text-align: center
 
   .pane-title
     margin: 0 0 80px
@@ -45,3 +46,6 @@
 
       .more-link
         display: none
+
+.item-list ul li
+  margin: 0
