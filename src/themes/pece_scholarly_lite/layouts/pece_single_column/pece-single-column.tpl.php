@@ -10,7 +10,7 @@
  */
 ?>
 
-<div class="panel-display sigle-column clearfix <?php if (!empty($classes)) { print $classes; } ?><?php if (!empty($class)) { print $class; } ?>" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
+<div class="panel-display sigle-column <?php if (!empty($classes)) { print $classes; } ?><?php if (!empty($class)) { print $class; } ?>" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
 
   <div class="pece-layouts-content panel-panel">
     <div class="panel-panel-inner">
