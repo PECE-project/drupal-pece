@@ -1,9 +1,12 @@
 .page-home
   .view
+    +make-row()
     ul li
+      +make-sm-column(6)
+      +make-md-column(2, 2)
+      +make-xs-column(12)
       list-style-type: none
       display: inline-block
-      width: 17%
       text-align: center
       vertical-align: top
 
@@ -35,6 +38,7 @@
       .pane-content
         width: 80%
         margin: 0 auto
+        text-align: center
 
       span
         padding: 0 12px
