@@ -10,8 +10,8 @@ var HomePage = function() {
   this.mainElements = {
 
     // Form main elements.
-    groupSection: $('.pane-pece-recent-groups-panel-pane-1 .pane-title'),
-    artifactSection: $('.pane-pece-recent-artifacts-panel-pane-1 .pane-title'),
+    groupsSection: $('.pane-pece-recent-groups-panel-pane-1 .pane-title'),
+    artifactsSection: $('.pane-pece-recent-artifacts-panel-pane-1 .pane-title'),
     tagsSection: $('.pane-tagclouds-3 .pane-title'),
   };
 
