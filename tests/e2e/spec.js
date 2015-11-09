@@ -23,3 +23,4 @@ require('./specs/artifacts/artifact.bundle.spec.js');
 require('./specs/annotation.spec.js');
 require('./specs/memo.spec.js');
 require('./specs/group.spec.js');
+require('./specs/homepage.spec.js');
