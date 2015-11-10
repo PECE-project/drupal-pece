@@ -10,14 +10,13 @@ module.exports.config = {
   params: {
     admin: {
       user: 'admin',
-      password: 'root'
+      password: 'impossiblepassword'
     },
     timeoutLimit : 5000
   },
 
   specs: ['spec.js'],
-  // baseUrl: 'http://dev-pece.rpi.dropit.in/',
-  baseUrl: 'http://pece.local/',
+  baseUrl: 'http://dev-pece.rpi.dropit.in/',
 
   capabilities: { 'browserName': 'chrome' },
   framework: 'jasmine2',
