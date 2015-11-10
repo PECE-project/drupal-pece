@@ -57,13 +57,13 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
-  /* Field: Content: Text */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
   $handler->display->display_options['fields']['body']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['body']['alter']['text'] = '[body] <div class="read-more"><a href="node/[nid]"> Read more...</a></div>';
+  $handler->display->display_options['fields']['body']['alter']['text'] = '<div class="field-diary-body">[body] <div class="read-more"><a href="node/[nid]">(...)</a></div></div>';
   $handler->display->display_options['fields']['body']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['body']['element_type'] = '0';
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
@@ -92,8 +92,9 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = '';
   $handler->display->display_options['fields']['created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'F d, Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -148,7 +149,7 @@ function pece_artifacts_fieldnote_views_default_views() {
     t('author'),
     t('Nid'),
     t('Name'),
-    t('[body] <div class="read-more"><a href="node/[nid]"> Read more...</a></div>'),
+    t('<div class="field-diary-body">[body] <div class="read-more"><a href="node/[nid]">(...)</a></div></div>'),
     t('All'),
     t('[name]\'s Field Diary'),
     t('Page'),
