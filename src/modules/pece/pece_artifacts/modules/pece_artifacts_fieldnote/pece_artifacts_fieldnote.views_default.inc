@@ -24,6 +24,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'PECE - User Field Diary';
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'Read more...';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -38,30 +39,39 @@ function pece_artifacts_fieldnote_views_default_views() {
       'rendered_strip' => 0,
     ),
   );
+  $handler->display->display_options['style_options']['row_class'] = 'fieldnote-diary-row';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['relationships']['uid']['required'] = TRUE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
-  /* Field: Content: Body */
+  /* Field: Content: Text */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['text'] = '[body] <div class="read-more"><a href="node/[nid]"> Read more...</a></div>';
+  $handler->display->display_options['fields']['body']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['body']['element_type'] = '0';
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['body']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['body']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['body']['type'] = 'text_trimmed';
   $handler->display->display_options['fields']['body']['settings'] = array(
-    'trim_length' => '200',
+    'trim_length' => '650',
   );
   $handler->display->display_options['fields']['body']['field_api_classes'] = TRUE;
   /* Field: Field: Tags */
@@ -74,6 +84,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['fields']['field_pece_tags']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['field_pece_tags']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_pece_tags']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_pece_tags']['separator'] = ',';
   $handler->display->display_options['fields']['field_pece_tags']['field_api_classes'] = TRUE;
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
@@ -121,7 +132,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $translatables['pece_user_field_diary'] = array(
     t('Master'),
     t('PECE - User Field Diary'),
-    t('more'),
+    t('Read more...'),
     t('Apply'),
     t('Reset'),
     t('Sort by'),
@@ -135,10 +146,13 @@ function pece_artifacts_fieldnote_views_default_views() {
     t('next ›'),
     t('last »'),
     t('author'),
+    t('Nid'),
     t('Name'),
+    t('[body] <div class="read-more"><a href="node/[nid]"> Read more...</a></div>'),
     t('All'),
     t('[name]\'s Field Diary'),
     t('Page'),
+    t('more'),
   );
   $export['pece_user_field_diary'] = $view;
 
