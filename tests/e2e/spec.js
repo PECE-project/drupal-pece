@@ -24,3 +24,4 @@ require('./specs/annotation.spec.js');
 require('./specs/memo.spec.js');
 require('./specs/group.spec.js');
 require('./specs/homepage.spec.js');
+require('./specs/field.diary.spec.js');
