@@ -8,6 +8,34 @@
 define('PECE_ACCESS_RESEARCHER_ROLE', 'Researcher');
 
 /**
+ * Implements hook_views_query_alter().
+ */
+function pece_access_views_query_alter(&$view, &$query) {
+
+  // If the input for the title filter is a positive integer, filter against
+  // node ID instead of node title.
+  $views = array(
+    'pece_group_field_diary',
+    'pece_user_field_diary',
+  );
+
+  if (in_array($view->name, $views)) {
+    $conditions = $query->where;
+    // Traverse through the 'where' part of the query.
+    foreach ($query->where as &$condition_group) {
+      foreach ($condition_group['conditions'] as &$condition) {
+        // If this is the part of the query filtering on title, change the
+        // condition to filter on node ID.
+        if ($condition['field'] == 'users_node.uid') {
+          global $user;
+          $condition['value'] = $user->uid;
+        }
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_node_access().
  */
 function pece_access_node_access($node, $op, $account) {
