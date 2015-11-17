@@ -76,7 +76,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -135,7 +135,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -199,7 +199,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -263,7 +263,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -323,7 +323,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
       'module' => 'creative_commons',
       'settings' => array(),
       'type' => 'select',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -382,7 +382,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -506,7 +506,81 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 9,
+      'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance: 'node-pece_artifact_fieldnote-og_group_ref'.
+  $field_instances['node-pece_artifact_fieldnote-og_group_ref'] = array(
+    'bundle' => 'pece_artifact_fieldnote',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 12,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'entityconnect_show_add_icon' => 0,
+    'entityconnect_show_edit_icon' => 0,
+    'entityconnect_unload_add' => 1,
+    'entityconnect_unload_edit' => 1,
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'og_group_ref',
+    'label' => 'Group audience',
+    'required' => 0,
+    'settings' => array(
+      'behaviors' => array(
+        'og_widget' => array(
+          'access_override' => 0,
+          'admin' => array(
+            'widget_type' => 'entityreference_autocomplete',
+          ),
+          'default' => array(
+            'widget_type' => 'options_select',
+          ),
+          'status' => TRUE,
+        ),
+      ),
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'og',
+      'settings' => array(),
+      'type' => 'og_complex',
+      'weight' => 13,
     ),
   );
 
@@ -515,6 +589,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
   t('Author(s)');
   t('Contributors');
   t('Fieldsite');
+  t('Group audience');
   t('License');
   t('Permissions');
   t('Tags');
