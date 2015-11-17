@@ -46,6 +46,13 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = 'There are no field notes for the current group.';
   $handler->display->display_options['empty']['area']['format'] = 'panopoly_wysiwyg_text';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   /* Field: Content: Groups audience */
   $handler->display->display_options['fields']['og_group_ref']['id'] = 'og_group_ref';
   $handler->display->display_options['fields']['og_group_ref']['table'] = 'og_membership';
@@ -65,11 +72,14 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'F d, Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
-  /* Field: Content: Text */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['text'] = '<div class="field-diary-body">[body] <div class="read-more"><a href="/node/[nid]">(...)</a></div></div>';
+  $handler->display->display_options['fields']['body']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['body']['element_type'] = '0';
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['body']['element_wrapper_type'] = '0';
@@ -120,9 +130,8 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
   );
-
   /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
+  $handler = $view->new_display('page', 'Page', 'pece_group_field_diary');
   $handler->display->display_options['path'] = 'pece-group-field-diary';
   $translatables['pece_group_field_diary'] = array(
     t('Master'),
@@ -140,7 +149,9 @@ function pece_artifacts_fieldnote_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
+    t('There are no field notes for the current group.'),
     t('Groups audience'),
+    t('<div class="field-diary-body">[body] <div class="read-more"><a href="node/[nid]">(...)</a></div></div>'),
     t('All'),
     t('Page'),
   );
@@ -200,13 +211,13 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
-  /* Field: Content: Text */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
   $handler->display->display_options['fields']['body']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['body']['alter']['text'] = '<div class="field-diary-body">[body] <div class="read-more"><a href="node/[nid]">(...)</a></div></div>';
+  $handler->display->display_options['fields']['body']['alter']['text'] = '<div class="field-diary-body">[body] <div class="read-more"><a href="/node/[nid]">(...)</a></div></div>';
   $handler->display->display_options['fields']['body']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['body']['element_type'] = '0';
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
@@ -293,7 +304,7 @@ function pece_artifacts_fieldnote_views_default_views() {
     t('author'),
     t('Nid'),
     t('Name'),
-    t('<div class="field-diary-body">[body] <div class="read-more"><a href="node/[nid]">(...)</a></div></div>'),
+    t('<div class="field-diary-body">[body] <div class="read-more"><a href="/node/[nid]">(...)</a></div></div>'),
     t('All'),
     t('[name]\'s Field Diary'),
     t('Page'),

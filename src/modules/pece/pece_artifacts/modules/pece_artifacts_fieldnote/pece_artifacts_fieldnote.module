@@ -30,10 +30,31 @@ function pece_artifacts_fieldnote_form_pece_artifact_fieldnote_node_form_alter(&
  */
 function pece_artifacts_fieldnote_preprocess_views_view(&$vars) {
 
-  if ($vars['view']->name == 'pece_user_field_diary' && $vars['view']->current_display == 'pece_user_field_diary') {
+  // Alter view's titles.
+  if ($vars['view']->name == 'pece_user_field_diary' &&
+      $vars['view']->current_display == 'pece_user_field_diary') {
     global $user;
 
-    // Alter the title view.
     $vars['view']->set_title($user->name . "'s FIELD DIARY");
+  }
+
+  if ($vars['view']->name == 'pece_group_field_diary' &&
+      $vars['view']->current_display == 'pece_group_field_diary') {
+
+    $group_id = arg(1);
+
+    if (isset($group_id) && is_numeric($group_id)) {
+      $group = node_load(arg(1));
+
+      if ($group) {
+        if (substr($group->title, -1, 1) == 's') {
+          $suffix = "' GROUP DIARY";
+        }
+        else {
+          $suffix = "'s GROUP DIARY";
+        }
+        $vars['view']->set_title($group->title . $suffix);
+      }
+    }
   }
 }
