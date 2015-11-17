@@ -13,7 +13,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $view = new view();
   $view->name = 'pece_group_field_diary';
   $view->description = '';
-  $view->tag = 'default';
+  $view->tag = 'PECE';
   $view->base_table = 'node';
   $view->human_name = 'PECE - Group Field Diary';
   $view->core = 7;
@@ -39,6 +39,13 @@ function pece_artifacts_fieldnote_views_default_views() {
     ),
   );
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'There are no field notes for the current group.';
+  $handler->display->display_options['empty']['area']['format'] = 'panopoly_wysiwyg_text';
   /* Field: Content: Groups audience */
   $handler->display->display_options['fields']['og_group_ref']['id'] = 'og_group_ref';
   $handler->display->display_options['fields']['og_group_ref']['table'] = 'og_membership';
