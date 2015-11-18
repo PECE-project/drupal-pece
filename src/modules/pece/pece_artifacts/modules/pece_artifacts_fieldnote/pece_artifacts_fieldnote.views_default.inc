@@ -27,6 +27,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
@@ -255,6 +256,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
@@ -346,6 +348,12 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['filter_groups']['operator'] = 'OR';
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'AND',
+    3 => 'AND',
+  );
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -360,6 +368,74 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Permissions (field_permissions) */
+  $handler->display->display_options['filters']['field_permissions_value']['id'] = 'field_permissions_value';
+  $handler->display->display_options['filters']['field_permissions_value']['table'] = 'field_data_field_permissions';
+  $handler->display->display_options['filters']['field_permissions_value']['field'] = 'field_permissions_value';
+  $handler->display->display_options['filters']['field_permissions_value']['value'] = array(
+    'open' => 'open',
+  );
+  $handler->display->display_options['filters']['field_permissions_value']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status_1']['id'] = 'status_1';
+  $handler->display->display_options['filters']['status_1']['table'] = 'node';
+  $handler->display->display_options['filters']['status_1']['field'] = 'status';
+  $handler->display->display_options['filters']['status_1']['value'] = '1';
+  $handler->display->display_options['filters']['status_1']['group'] = 2;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type_2']['id'] = 'type_2';
+  $handler->display->display_options['filters']['type_2']['table'] = 'node';
+  $handler->display->display_options['filters']['type_2']['field'] = 'type';
+  $handler->display->display_options['filters']['type_2']['value'] = array(
+    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
+  );
+  $handler->display->display_options['filters']['type_2']['group'] = 2;
+  /* Filter criterion: Content: Permissions (field_permissions) */
+  $handler->display->display_options['filters']['field_permissions_value_1']['id'] = 'field_permissions_value_1';
+  $handler->display->display_options['filters']['field_permissions_value_1']['table'] = 'field_data_field_permissions';
+  $handler->display->display_options['filters']['field_permissions_value_1']['field'] = 'field_permissions_value';
+  $handler->display->display_options['filters']['field_permissions_value_1']['value'] = array(
+    'restricted' => 'restricted',
+  );
+  $handler->display->display_options['filters']['field_permissions_value_1']['group'] = 2;
+  /* Filter criterion: User: Roles */
+  $handler->display->display_options['filters']['rid']['id'] = 'rid';
+  $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
+  $handler->display->display_options['filters']['rid']['field'] = 'rid';
+  $handler->display->display_options['filters']['rid']['relationship'] = 'uid';
+  $handler->display->display_options['filters']['rid']['value'] = array(
+    6 => '6',
+  );
+  $handler->display->display_options['filters']['rid']['group'] = 2;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status_2']['id'] = 'status_2';
+  $handler->display->display_options['filters']['status_2']['table'] = 'node';
+  $handler->display->display_options['filters']['status_2']['field'] = 'status';
+  $handler->display->display_options['filters']['status_2']['value'] = '1';
+  $handler->display->display_options['filters']['status_2']['group'] = 3;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
+  );
+  $handler->display->display_options['filters']['type_1']['group'] = 3;
+  /* Filter criterion: Content: Permissions (field_permissions) */
+  $handler->display->display_options['filters']['field_permissions_value_2']['id'] = 'field_permissions_value_2';
+  $handler->display->display_options['filters']['field_permissions_value_2']['table'] = 'field_data_field_permissions';
+  $handler->display->display_options['filters']['field_permissions_value_2']['field'] = 'field_permissions_value';
+  $handler->display->display_options['filters']['field_permissions_value_2']['value'] = array(
+    'private' => 'private',
+  );
+  $handler->display->display_options['filters']['field_permissions_value_2']['group'] = 3;
+  /* Filter criterion: User: The user ID */
+  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
+  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
+  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
+  $handler->display->display_options['filters']['uid_raw']['relationship'] = 'uid';
+  $handler->display->display_options['filters']['uid_raw']['group'] = 3;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'pece_user_field_diary');
