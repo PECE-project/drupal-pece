@@ -213,6 +213,9 @@ function pece_artifacts_fieldnote_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'pece_group_field_diary');
   $handler->display->display_options['path'] = 'pece-group-field-diary';
+
+  /* Display: Content pane */
+  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $translatables['pece_group_field_diary'] = array(
     t('Master'),
     t('PECE - Group Field Diary'),
@@ -235,6 +238,8 @@ function pece_artifacts_fieldnote_views_default_views() {
     t('<div class="field-diary-body">[body] <div class="read-more"><a href="/node/[nid]">(...)</a></div></div>'),
     t('All'),
     t('Page'),
+    t('Content pane'),
+    t('View panes'),
   );
   $export['pece_group_field_diary'] = $view;
 
@@ -440,6 +445,9 @@ function pece_artifacts_fieldnote_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'pece_user_field_diary');
   $handler->display->display_options['path'] = 'field-diary';
+
+  /* Display: Content pane */
+  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $translatables['pece_user_field_diary'] = array(
     t('Master'),
     t('PECE - User Field Diary'),
@@ -465,6 +473,8 @@ function pece_artifacts_fieldnote_views_default_views() {
     t('[name]\'s Field Diary'),
     t('Page'),
     t('more'),
+    t('Content pane'),
+    t('View panes'),
   );
   $export['pece_user_field_diary'] = $view;
 
