@@ -11,7 +11,7 @@ define('PECE_ACCESS_RESEARCHER_ROLE', 'Researcher');
  * Implements hook_views_query_alter().
  */
 function pece_access_views_query_alter(&$view, &$query) {
-
+  global $user;
   // If the input for the title filter is a positive integer, filter against
   // node ID instead of node title.
   $views = array(
@@ -20,17 +20,19 @@ function pece_access_views_query_alter(&$view, &$query) {
   );
 
   if (in_array($view->name, $views)) {
-    $conditions = $query->where;
+    $conditions = &$query->where;
     // Traverse through the 'where' part of the query.
-    foreach ($query->where as &$condition_group) {
+    foreach ($conditions as &$condition_group) {
       foreach ($condition_group['conditions'] as &$condition) {
         // If this is the part of the query filtering on title, change the
         // condition to filter on node ID.
         if ($condition['field'] == 'users_node.uid') {
-          global $user;
           $condition['value'] = $user->uid;
         }
       }
+    }
+    if (!in_array('Researcher', $user->roles)) {
+      unset($conditions[2]);
     }
   }
 }
