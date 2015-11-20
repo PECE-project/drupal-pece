@@ -413,14 +413,6 @@ function pece_artifacts_fieldnote_views_default_views() {
     'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
   );
   $handler->display->display_options['filters']['type_1']['group'] = 3;
-  /* Filter criterion: Content: Permissions (field_permissions) */
-  $handler->display->display_options['filters']['field_permissions_value_2']['id'] = 'field_permissions_value_2';
-  $handler->display->display_options['filters']['field_permissions_value_2']['table'] = 'field_data_field_permissions';
-  $handler->display->display_options['filters']['field_permissions_value_2']['field'] = 'field_permissions_value';
-  $handler->display->display_options['filters']['field_permissions_value_2']['value'] = array(
-    'private' => 'private',
-  );
-  $handler->display->display_options['filters']['field_permissions_value_2']['group'] = 3;
   /* Filter criterion: User: The user ID */
   $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
   $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
