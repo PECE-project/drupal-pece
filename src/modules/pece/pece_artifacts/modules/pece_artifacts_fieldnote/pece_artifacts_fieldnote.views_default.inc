@@ -172,15 +172,6 @@ function pece_artifacts_fieldnote_views_default_views() {
     'restricted' => 'restricted',
   );
   $handler->display->display_options['filters']['field_permissions_value_1']['group'] = 2;
-  /* Filter criterion: User: Roles */
-  $handler->display->display_options['filters']['rid']['id'] = 'rid';
-  $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
-  $handler->display->display_options['filters']['rid']['field'] = 'rid';
-  $handler->display->display_options['filters']['rid']['relationship'] = 'uid';
-  $handler->display->display_options['filters']['rid']['value'] = array(
-    6 => '6',
-  );
-  $handler->display->display_options['filters']['rid']['group'] = 2;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status_2']['id'] = 'status_2';
   $handler->display->display_options['filters']['status_2']['table'] = 'node';
@@ -258,7 +249,10 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['title'] = 'PECE - User Field Diary';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'Read more...';
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    2 => '2',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
