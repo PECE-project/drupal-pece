@@ -35,7 +35,13 @@ function pece_artifacts_fieldnote_preprocess_views_view(&$vars) {
       $vars['view']->current_display == 'pece_user_field_diary') {
     global $user;
 
-    $vars['view']->set_title($user->name . "'s FIELD DIARY");
+    if (substr($user->name, -1, 1) == 's') {
+      $sufix = "' FIELD DIARY";
+    }
+    else {
+      $sufix = "'s FIELD DIARY";
+    }
+    $vars['view']->set_title($user->name . $sufix);
   }
 
   if ($vars['view']->name == 'pece_group_field_diary' &&
