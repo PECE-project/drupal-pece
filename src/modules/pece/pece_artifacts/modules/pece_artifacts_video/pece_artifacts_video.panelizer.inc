@@ -458,13 +458,16 @@ function pece_artifacts_video_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'above',
+    'label' => 'title',
     'formatter' => 'og_list_default',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
     'formatter_settings' => array(),
     'context' => 'panelizer',
+    'override_title' => 1,
+    'override_title_text' => 'Group Audience',
+    'override_title_heading' => 'h2',
   );
   $pane->cache = array();
   $pane->style = array(

@@ -378,18 +378,15 @@ function pece_artifacts_fieldnote_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'above',
-    'formatter' => 'entityreference_entity_view',
-    'delta_limit' => '0',
+    'label' => 'title',
+    'formatter' => 'og_list_default',
+    'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => 0,
-    'formatter_settings' => array(
-      'view_mode' => 'default',
-      'links' => 1,
-    ),
+    'formatter_settings' => array(),
     'context' => 'panelizer',
-    'override_title' => 0,
-    'override_title_text' => '',
+    'override_title' => 1,
+    'override_title_text' => 'Group Audience',
     'override_title_heading' => 'h2',
   );
   $pane->cache = array();
