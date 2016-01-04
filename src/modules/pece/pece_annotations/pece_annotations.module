@@ -471,6 +471,7 @@ function pece_annotations_annotate_form_second_submit($form, &$form_state) {
   }
 
   if (!empty($form_state['values']['new_analytic'])) {
+    global $user;
 
     $analytic_node_values =  array(
       'type' => 'pece_analytic',
@@ -478,6 +479,7 @@ function pece_annotations_annotate_form_second_submit($form, &$form_state) {
     );
 
     $analytic_node = entity_create('node', $analytic_node_values);
+    $analytic_node->uid = $user->uid;
     $node_wrapper = entity_metadata_wrapper('node', $analytic_node);
     $node_wrapper->field_pece_struct_analytics->set(array($form_state['object']->struct_analytics));
     $node_wrapper->save();
