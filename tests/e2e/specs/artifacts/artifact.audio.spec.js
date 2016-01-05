@@ -1,5 +1,20 @@
+var Seeds = require('drupal-seeds').Seeds;
 
 describe('Audio Artifact', function() {
+  var seeds = new Seeds([
+    {
+      type: 'user',
+      data: {
+        name: RegistrationPage.simpleUser.username,
+        mail: RegistrationPage.simpleUser.email,
+        pass: RegistrationPage.simpleUser.pass,
+        roles: ['contributor'],
+      }
+    }
+  ]);
+
+  seeds.attach();
+
   beforeEach(function() {
     AuthenticationPage.logout();
     AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
@@ -7,8 +22,6 @@ describe('Audio Artifact', function() {
 
   afterAll(function() {
     AuthenticationPage.logout();
-    AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-    PeoplePage.deleteUser(RegistrationPage.defaultUser.email);
   });
 
   it('Verify main elements presence', function() {
@@ -31,14 +44,8 @@ describe('Audio Artifact', function() {
     SamplePage.get('admin/config/people/legal');
     LegalPage.create();
     AuthenticationPage.logout();
-    RegistrationPage.get();
-    RegistrationPage.registerProfile(RegistrationPage.simpleUser);
-    AuthenticationPage.login(browser.params.admin.user, browser.params.admin.password);
-    PeoplePage.get();
-    PeoplePage.unblock(RegistrationPage.simpleUser.email);
-    PeoplePage.addRole(RegistrationPage.simpleUser.email, 5);
-    AuthenticationPage.logout();
     AuthenticationPage.login(RegistrationPage.simpleUser.username, RegistrationPage.simpleUser.pass);
+    LegalPage.acceptTerm();
     ArtifactAudioPage.get();
     ArtifactAudioPage.add('Audio Artifact', 'audioFile.mp3');
     ArtifactAudioPage.checkPageLayout();
