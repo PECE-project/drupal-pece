@@ -16,7 +16,7 @@ var ArtifactAudioPage = function() {
     titleField: element(by.css('#pece-artifact-audio-node-form #edit-title')),
     uriField: element(by.css('#pece-artifact-audio-node-form #edit-field-pece-uri-und-0-value')),
     fieldsiteField: element(by.css('#pece-artifact-audio-node-form #edit-field-pece-fieldsite-und-0-target-id')),
-    audioField: element(by.css('#pece-artifact-audio-node-form #edit-field-pece-media-audio-und-0')),
+    audioField: element(by.css('#pece-artifact-audio-node-form #edit-field-pece-media-audio-und-0-upload')),
     contributorsFields: element(by.css('#pece-artifact-audio-node-form #edit-field-pece-contributors-und-0-target-id')),
     tagsField: element(by.css('#pece-artifact-audio-node-form #edit-field-pece-tags-und')),
     licenceField: element(by.css('#pece-artifact-audio-node-form #edit-field-pece-license-und-0-licence')),

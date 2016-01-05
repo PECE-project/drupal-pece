@@ -17,7 +17,7 @@ var ArtifactVideoPage = function() {
     // Form main elements.
     titleField        : $(formId + '#edit-title'),
     uriField          : $(formId + '#edit-field-pece-uri-und-0-value'),
-    videoField        : $(formId + '#edit-field-pece-media-video-und-0'),
+    videoField        : $(formId + '#edit-field-pece-media-video-und-0-upload'),
     fieldsiteField    : $(formId + '#edit-field-pece-fieldsite-und-0-target-id'),
     contributorsFields: $(formId + '#edit-field-pece-contributors-und-0-target-id'),
     tagsField         : $(formId + '#edit-field-pece-tags-und'),

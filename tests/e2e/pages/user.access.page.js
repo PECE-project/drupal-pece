@@ -2,8 +2,6 @@
 * @file user.access.page.js
 */
 
-var EC = protractor.ExpectedConditions;
-
 var PeceArtifactPage = require('./pece.artifact.page.js');
 
 var UserAccessPage = function() {
@@ -32,7 +30,7 @@ var UserAccessPage = function() {
   };
 
   this.expectAllowedContent = function(title) {
-    browser.wait(EC.visibilityOf(element(by.css('h1'))), browser.params.timeoutLimit);
+    browser.wait(element(by.css('h1')).isDisplayed);
     expect(element(by.cssContainingText('h1', title)).isPresent()).toBe(true);
   };
 

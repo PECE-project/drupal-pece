@@ -16,7 +16,7 @@ var ArtifactPdfPage = function() {
     titleField         : $('#pece-artifact-pdf-node-form #edit-title'),
     uriField           : $('#pece-artifact-pdf-node-form #edit-field-pece-uri-und-0-value'),
     fieldsiteField     : $('#pece-artifact-pdf-node-form #edit-field-pece-fieldsite-und-0-target-id'),
-    pdfField           : $('#pece-artifact-pdf-node-form #edit-field-pece-media-pdf-und-0'),
+    pdfField           : $('#pece-artifact-pdf-node-form #edit-field-pece-media-pdf-und-0-upload'),
     contributorsFields : $('#pece-artifact-pdf-node-form #edit-field-pece-contributors-und-0-target-id'),
     tagsField          : $('#pece-artifact-pdf-node-form #edit-field-pece-tags-und'),
     licenceField       : $('#pece-artifact-pdf-node-form #edit-field-pece-license-und-0-licence'),

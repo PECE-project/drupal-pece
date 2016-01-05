@@ -21,6 +21,7 @@ module.exports.config = {
   capabilities: { 'browserName': 'chrome' },
   framework: 'jasmine2',
   seleniumAddress: 'http://localhost:4444/wd/hub',
+  directConnect: true,
 
   // Here you will set things that have to happen before start testing.
   onPrepare: function() {
