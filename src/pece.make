@@ -101,6 +101,15 @@ projects[defaultconfig][subdir] = contrib
 ; projects[username_enumeration_prevention][subdir] = contrib
 ; projects[password_policy][subdir] = contrib
 
+; Login Security
+projects[login_security][subdir] = contrib
+projects[login_security][version] = 1.9
+
+; AES (with php5-mcrypt support)
+projects[aes][subdir] = contrib
+projects[aes][version] = 1.10
+
+
 ; =====================
 ; Panels
 ; =====================
