@@ -368,6 +368,10 @@ projects[taxonomy_access_fix][version] = 2.2
 projects[pdf_reader][subdir] = contrib
 projects[pdf_reader][version] = 1.0-rc6
 
+; 403-Redirect
+projects[r4032login][subdir] = contrib
+projects[r4032login][version] = 1.8 
+
 ; =====================
 ; Development Modules
 ; =====================
