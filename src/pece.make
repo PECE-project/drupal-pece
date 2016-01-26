@@ -368,6 +368,14 @@ projects[taxonomy_access_fix][version] = 2.2
 projects[pdf_reader][subdir] = contrib
 projects[pdf_reader][version] = 1.0-rc6
 
+; Node Expiration
+projects[node_expire][subdir] = contrib
+projects[node_expire][version] = 2.1 
+
+; Date (dependency of node_expire)
+projects[date][subdir] = contrib
+projects[date][version] = 2.9
+
 ; =====================
 ; Development Modules
 ; =====================
