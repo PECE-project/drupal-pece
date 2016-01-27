@@ -1,10 +1,21 @@
 .page-taxonomy
   .view-taxonomy-term
 
-    li
+    li.views-row
+      +make-sm-column(6)
       +make-md-column(3)
       list-style: none
       margin: 0
 
+      > div
+        margin-bottom: 4rem
+
+    h5
+      text-overflow: ellipsis
+      white-space: nowrap
+      text-align: center
+      overflow: hidden
+
     img
       width: 100%
+      vertical-align: top
