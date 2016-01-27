@@ -48,7 +48,7 @@ describe('Smoke test', function() {
 
   seeds.attach();
 
-  it('navigate throught the site as a anonymous user', function() {
+  it('navigate through the site as a anonymous user', function() {
     SamplePage.get();
     browser.pause();
   });
