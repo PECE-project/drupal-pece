@@ -1,7 +1,7 @@
 name = PECE Security
 description = PECE security provisions
 core = 7.x
-package = Features
+package = PECE
 version = 7.x-1.0-alpha1
 dependencies[] = aes
 dependencies[] = defaultconfig
@@ -32,6 +32,5 @@ features[defaultconfig][] = strongarm:login_security_user_blocked_email_subject
 features[defaultconfig][] = strongarm:login_security_user_blocked_email_user
 features[defaultconfig][] = strongarm:login_security_user_wrong_count
 features[defaultconfig][] = user_default_permissions:administer aes
+features[defaultconfig][] = user_default_permissions:view passwords
 features[features_api][] = api:2
-features[user_permission][] = administer aes
-features[user_permission][] = view passwords
