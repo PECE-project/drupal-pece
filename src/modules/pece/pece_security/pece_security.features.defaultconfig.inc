@@ -208,5 +208,14 @@ function pece_security_defaultconfig_user_default_permissions() {
     'module' => 'aes',
   );
 
+  // Exported permission: 'view passwords'.
+  $permissions['view passwords'] = array(
+    'name' => 'view passwords',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'aes',
+  );
+
   return $permissions;
 }
