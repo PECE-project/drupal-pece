@@ -101,6 +101,15 @@ projects[defaultconfig][subdir] = contrib
 ; projects[username_enumeration_prevention][subdir] = contrib
 ; projects[password_policy][subdir] = contrib
 
+; Login Security
+projects[login_security][subdir] = contrib
+projects[login_security][version] = 1.9
+
+; AES (with php5-mcrypt support)
+projects[aes][subdir] = contrib
+projects[aes][version] = 1.10
+
+
 ; =====================
 ; Panels
 ; =====================
@@ -367,6 +376,14 @@ projects[taxonomy_access_fix][version] = 2.2
 ; PDF Reader
 projects[pdf_reader][subdir] = contrib
 projects[pdf_reader][version] = 1.0-rc6
+
+; Backup and Migrate
+projects[backup_migrate][subdir] = contrib
+projects[backup_migrate][version] = 3.1
+
+; Backup and Migrate - SFTP support
+projects[backup_migrate_sftp][subdir] = contrib
+projects[backup_migrate_sftp][version] = 1.0
 
 ; =====================
 ; Development Modules
