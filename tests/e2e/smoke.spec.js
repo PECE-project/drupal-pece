@@ -49,6 +49,10 @@ describe('Smoke test', function() {
   var artifact = artifactPane.$('.node-pece-artifact-text');
   var tag = tagsPane.$('.tagclouds');
 
+  var groupLink = group.$('h5 a');
+  var artifactLink = artifact.$('h5 a');
+  var tagLink = tag.$('h5 a');
+
   beforeEach(function() {
     SamplePage.get();
   });
@@ -59,24 +63,50 @@ describe('Smoke test', function() {
     expect(tag.getText()).toEqual('smoke-test-tag');
   });
 
-  it('check that user was directed to the clicked tag page', function() {
-    tag.click();
+  it('check that user is directed to the clicked group page', function() {
+    groupLink.click();
 
     browser.getCurrentUrl().then(function(url) {
-      var currentUrl = /tags\/smoke-test-tag/.test(url)
+      var currentUrl = /content\/smoke-test-group/.test(url);
       expect(currentUrl).toBe(true);
     });
   });
 
-  it('check that user was directed to the clicked artifact page', function() {
+  it('check that user can request being part of a group when in a group page', function() {
+    groupLink.click();
+
+    var requestGroupMembershiptButton = $('.pane-node-group-group');
+
+    expect(requestGroupMembershiptButton.isDisplayed()).toBe(true);
+  });
+
+  it('check that user is directed to the clicked artifact page', function() {
+    artifactLink.click();
+
+    browser.getCurrentUrl().then(function(url) {
+      var artifactUrl = /content\/smoke-test-artifact-text/.test(url);
+      expect(artifactUrl).toBe(true);
+    });
+  });
+
+  it('check that user is directed to the clicked artifact page from tag page', function() {
     var artifactIntoTagsPage = $('h5 a');
 
     tag.click();
     artifactIntoTagsPage.click();
 
     browser.getCurrentUrl().then(function(url) {
-      var artifactUrl = /content\/smoke-test-artifact-text/.test(url)
+      var artifactUrl = /content\/smoke-test-artifact-text/.test(url);
       expect(artifactUrl).toBe(true);
+    });
+  });
+
+  it('check that user is directed to the clicked tag page', function() {
+    tag.click();
+
+    browser.getCurrentUrl().then(function(url) {
+      var currentUrl = /tags\/smoke-test-tag/.test(url);
+      expect(currentUrl).toBe(true);
     });
   });
 
