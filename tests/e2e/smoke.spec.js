@@ -33,13 +33,6 @@ describe('Smoke test', function() {
     {
       type: 'node',
       data: {
-        type: 'pece_memo',
-        title: 'Smoke test memo'
-      }
-    },
-    {
-      type: 'node',
-      data: {
         type: 'pece_group',
         title: 'Smoke test group'
       }
@@ -48,11 +41,40 @@ describe('Smoke test', function() {
 
   seeds.attach();
 
-  it('navigate through the site as a anonymous user', function() {
+  var groupPane = $('.pane-pece-recent-groups-panel-pane-1');
+  var artifactPane = $('.pane-pece-recent-artifacts-panel-pane-1');
+  var tagsPane = $('.pane-tagclouds-3');
+
+  var group = groupPane.$('.node-pece-group');
+  var artifact = artifactPane.$('.node-pece-artifact-text');
+  var tag = tagsPane.$('.tagclouds');
+
+  it('check home page main elements', function() {
     SamplePage.get();
-    browser.pause();
+
+    expect(group.getText()).toEqual('SMOKE TEST GROUP');
+    expect(artifact.getText()).toEqual('SMOKE TEST ARTIFACT TEXT');
+    expect(tag.getText()).toEqual('smoke-test-tag');
+  });
+
+  it('check that user was directed to the clicked tag page', function() {
+    tag.click();
+
+    browser.getCurrentUrl().then(function(url) {
+      var currentUrl = /tags\/smoke-test-tag/.test(url)
+      expect(currentUrl).toBe(true);
+    });
+  });
+
+  it('check that user was directed to the clicked artifact page', function() {
+    var artifactIntoTagsPage = $('h5 a');
+
+    artifactIntoTagsPage.click();
+
+    browser.getCurrentUrl().then(function(url) {
+      var artifactUrl = /content\/smoke-test-artifact-text/.test(url)
+      expect(artifactUrl).toBe(true);
+    });
   });
 
 });
-
-// require('./specs/some-test.spec.js');
