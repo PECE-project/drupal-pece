@@ -49,9 +49,11 @@ describe('Smoke test', function() {
   var artifact = artifactPane.$('.node-pece-artifact-text');
   var tag = tagsPane.$('.tagclouds');
 
-  it('check home page main elements', function() {
+  beforeEach(function() {
     SamplePage.get();
+  });
 
+  it('check home page main elements', function() {
     expect(group.getText()).toEqual('SMOKE TEST GROUP');
     expect(artifact.getText()).toEqual('SMOKE TEST ARTIFACT TEXT');
     expect(tag.getText()).toEqual('smoke-test-tag');
@@ -69,6 +71,7 @@ describe('Smoke test', function() {
   it('check that user was directed to the clicked artifact page', function() {
     var artifactIntoTagsPage = $('h5 a');
 
+    tag.click();
     artifactIntoTagsPage.click();
 
     browser.getCurrentUrl().then(function(url) {
