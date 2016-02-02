@@ -16,6 +16,30 @@ describe('Smoke test', function() {
       }
     },
     {
+      type: 'user',
+      data: {
+        name: 'smoke-test-user-2',
+        mail: 'smoke@test-user-2.com',
+        pass: '123123',
+        roles: [
+          'contributor',
+          'researcher'
+        ]
+      }
+    },
+    {
+      type: 'user',
+      data: {
+        name: 'smoke-test-user-3',
+        mail: 'smoke@test-user-3.com',
+        pass: '123123',
+        roles: [
+          'contributor',
+          'researcher'
+        ]
+      }
+    },
+    {
       type: 'term',
       data: {
         type: 'pece_tags',
@@ -27,7 +51,7 @@ describe('Smoke test', function() {
       data: {
         type: 'pece_artifact_text',
         title: 'Smoke test artifact text',
-        field_pece_tags: [Seeds.parser(1, 'tid')]
+        field_pece_tags: [Seeds.parser(3, 'tid')]
       }
     },
     {
@@ -103,6 +127,47 @@ describe('Smoke test', function() {
 
   it('check that user is directed to the clicked tag page', function() {
     tag.click();
+
+    browser.getCurrentUrl().then(function(url) {
+      var currentUrl = /tags\/smoke-test-tag/.test(url);
+      expect(currentUrl).toBe(true);
+    });
+  });
+
+  it('researcher/contributor user is directed to profile page on login', function() {
+    AuthenticationPage.login('smoke-test-user', '123123');
+    LegalPage.acceptTerm();
+
+    browser.getCurrentUrl().then(function(url) {
+      var currentUrl = /users\/smoke-test-user/.test(url);
+      expect(currentUrl).toBe(true);
+    });
+  });
+
+  it('researcher/contributor user can annotate an artifact', function() {
+    AuthenticationPage.logout();
+    AuthenticationPage.login('smoke-test-user-2', '123123');
+    LegalPage.acceptTerm();
+    SamplePage.get();
+
+    artifactLink.click();
+
+    var annotateButton = $('.pane-annotation div a.annotate-link');
+
+    expect(annotateButton.isDisplayed()).toBe(true);
+  });
+
+  it('researcher/contributor user can navigate to a tag through an artifact', function() {
+    AuthenticationPage.logout();
+    AuthenticationPage.login('smoke-test-user-3', '123123');
+    LegalPage.acceptTerm();
+    SamplePage.get();
+
+    artifactLink.click();
+
+    var tagLink = $('.field-name-field-pece-tags a');
+
+    tagLink.click();
 
     browser.getCurrentUrl().then(function(url) {
       var currentUrl = /tags\/smoke-test-tag/.test(url);

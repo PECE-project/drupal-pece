@@ -23,7 +23,6 @@ var LegalPage = function() {
   };
 
   this.acceptTerm = function() {
-    browser.wait(this.acceptTermCheckbox.isDisplayed);
     this.acceptTermCheckbox.click();
     this.submitButton.click()
   };
