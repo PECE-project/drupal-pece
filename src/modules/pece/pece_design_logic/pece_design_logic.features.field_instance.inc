@@ -11,8 +11,54 @@ function pece_design_logic_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
-  // 'design_logic-design_logic_pages-field_basic_image_image'.
-  $field_instances['design_logic-design_logic_pages-field_basic_image_image'] = array(
+  // 'design_logic-design_logic_pages-field_description'.
+  $field_instances['design_logic-design_logic_pages-field_description'] = array(
+    'bundle' => 'design_logic_pages',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'design_logic',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_description',
+    'label' => 'Description',
+    'required' => 1,
+    'settings' => array(
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance: 'design_logic-design_logic_pages-field_thumbnail'.
+  $field_instances['design_logic-design_logic_pages-field_thumbnail'] = array(
     'bundle' => 'design_logic_pages',
     'deleted' => 0,
     'description' => '',
@@ -36,9 +82,9 @@ function pece_design_logic_field_default_field_instances() {
     ),
     'entity_type' => 'design_logic',
     'fences_wrapper' => 'div_div_div',
-    'field_name' => 'field_basic_image_image',
-    'label' => 'Image',
-    'required' => 0,
+    'field_name' => 'field_thumbnail',
+    'label' => 'Thumbnail',
+    'required' => 1,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
@@ -70,61 +116,14 @@ function pece_design_logic_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'design_logic-design_logic_pages-field_basic_text_text'.
-  $field_instances['design_logic-design_logic_pages-field_basic_text_text'] = array(
-    'bundle' => 'design_logic_pages',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'design_logic',
-    'fences_wrapper' => 'div_div_div',
-    'field_name' => 'field_basic_text_text',
-    'label' => 'Text',
-    'required' => 0,
-    'settings' => array(
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
       'weight' => 2,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Image');
-  t('Text');
+  t('Description');
+  t('Thumbnail');
 
   return $field_instances;
 }
