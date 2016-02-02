@@ -66,7 +66,7 @@ function pece_design_logic_field_default_field_instances() {
     'description' => 'An optional field to provide credits for the uploaded image.',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
