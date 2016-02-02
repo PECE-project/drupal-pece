@@ -31,6 +31,36 @@ function pece_design_logic_field_default_field_bases() {
     'type' => 'text_long',
   );
 
+  // Exported field_base: 'field_image_credits'.
+  $field_bases['field_image_credits'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_image_credits',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'link',
+    'settings' => array(
+      'attributes' => array(
+        'class' => '',
+        'rel' => '',
+        'target' => 'default',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'profile2_private' => FALSE,
+      'title' => 'optional',
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
+    ),
+    'translatable' => 0,
+    'type' => 'link_field',
+  );
+
   // Exported field_base: 'field_thumbnail'.
   $field_bases['field_thumbnail'] = array(
     'active' => 1,
