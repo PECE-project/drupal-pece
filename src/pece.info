@@ -3,29 +3,37 @@ description = Install site for PECE
 distribution_name = pece
 core = 7.x
 exclusive = 1
-version=1.0-alpha1
-
-dependencies[] = kw_manifests
-dependencies[] = kw_itemnames
-dependencies[] = kw_itemnames_entity
-dependencies[] = features
+version = 1.0-alpha1
 
 ; Drupal Core
-dependencies[] = menu
+dependencies[] = block
 dependencies[] = comment
-dependencies[] = image
-dependencies[] = list
-dependencies[] = number
-dependencies[] = options
-dependencies[] = path
-dependencies[] = taxonomy
-dependencies[] = search
-dependencies[] = shortcut
+dependencies[] = dblog
 dependencies[] = field
 dependencies[] = field_ui
 dependencies[] = file
-dependencies[] = dblog
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = search
+dependencies[] = shortcut
+dependencies[] = taxonomy
 dependencies[] = update
+dependencies[] = locale
+dependencies[] = syslog
+
+; Kraftwagen
+dependencies[] = kw_manifests
+dependencies[] = kw_itemnames
+dependencies[] = kw_itemnames_entity
+
+; System
+dependencies[] = aes
+dependencies[] = xautoload
+dependencies[] = backports
 
 ; Panopoly Foundation
 dependencies[] = panopoly_core
@@ -37,109 +45,104 @@ dependencies[] = panopoly_admin
 dependencies[] = panopoly_users
 
 ; Panopoly Toolset
-;dependencies[] = panopoly_pages
 dependencies[] = panopoly_search
 dependencies[] = panopoly_wysiwyg
 
-; Panopoly Recommended - Admin
-dependencies[] = admin_views
-; dependencies[] = navbar
-dependencies[] = breakpoints
-dependencies[] = backports
-dependencies[] = simplified_menu_admin
-dependencies[] = save_draft
-dependencies[] = module_filter
-dependencies[] = date_popup_authored
-dependencies[] = views_ui
-
-; Panopoly Radix
-;dependencies[] = radix_admin
-;dependencies[] = radix_colorizer
-dependencies[] = radix_layouts
-dependencies[] = radix_views
-
-; Panopoly Recommended - Other
-dependencies[] = devel
-dependencies[] = uuid
+; Configuration
 dependencies[] = apps
-
-; PECE Admin
-
-dependencies[] = admin_menu
-dependencies[] = adminimal_admin_menu
+dependencies[] = features
 
 ; PECE Distro modules
-dependencies[] = pece_core
+dependencies[] = pece_access
 dependencies[] = pece_admin
-dependencies[] = pece_homepage
-dependencies[] = pece_groups
 dependencies[] = pece_analytics
 dependencies[] = pece_annotations
 dependencies[] = pece_artifacts
 dependencies[] = pece_artifacts_audio
+dependencies[] = pece_artifacts_bundle
 dependencies[] = pece_artifacts_fieldnote
 dependencies[] = pece_artifacts_image
 dependencies[] = pece_artifacts_pdf
 dependencies[] = pece_artifacts_text
 dependencies[] = pece_artifacts_video
 dependencies[] = pece_artifacts_website
-dependencies[] = pece_artifacts_bundle
-dependencies[] = pece_profile
-dependencies[] = pece_access
+dependencies[] = pece_core
+dependencies[] = pece_design_logic
+dependencies[] = pece_groups
+dependencies[] = pece_homepage
 dependencies[] = pece_memo
+dependencies[] = pece_profile
 dependencies[] = pece_security
 dependencies[] = pece_projects
 dependencies[] = pece_design_logic
 
-; @TODO Organize the modules base in context
-; Contrib modules
-dependencies[] = block
-dependencies[] = creative_commons
-dependencies[] = coffee
-dependencies[] = diff
-dependencies[] = eck
-dependencies[] = email
-dependencies[] = entity_view_mode
-dependencies[] = extlink
+; UI & Front-end
+dependencies[] = breakpoints
 dependencies[] = fences
-dependencies[] = gmap
-dependencies[] = inline_entity_form
-dependencies[] = l10n_update
-dependencies[] = legal
-dependencies[] = locale
-dependencies[] = location
-dependencies[] = profile2
 dependencies[] = panels_tabs
-;dependencies[] = realname
+dependencies[] = radix_layouts
+dependencies[] = radix_views
+
+; Entities
+dependencies[] = date_popup_authored
+dependencies[] = eck
+dependencies[] = entity_view_mode
+dependencies[] = inline_entity_form
+dependencies[] = save_draft
+dependencies[] = uuid
+
+; Language
+dependencies[] = l10n_update
+dependencies[] = translation
+
+; User
+dependencies[] = login_security
+dependencies[] = profile2
+
+; Automatization
 dependencies[] = rules
 dependencies[] = rules_admin
+
+; Search, tagging and metadata
 dependencies[] = search_api
-dependencies[] = syslog
-dependencies[] = translation
 dependencies[] = taxonomy_access_fix
-dependencies[] = xautoload
+
+; Content & data
+dependencies[] = creative_commons
+dependencies[] = diff
+dependencies[] = email
+dependencies[] = extlink
+dependencies[] = gmap
+dependencies[] = legal
+dependencies[] = location
 dependencies[] = pdf_reader
-dependencies[] = views_infinite_scroll
 dependencies[] = tagclouds
-dependencies[] = login_security
-dependencies[] = aes
+dependencies[] = views_infinite_scroll
 
-
-; OG modules
-
+; Organic groups
 dependencies[] = og
 dependencies[] = og_access
-dependencies[] = og_ui
-dependencies[] = og_register
 dependencies[] = og_mailinglist
+dependencies[] = og_register
+dependencies[] = og_ui
 
-; Development Modules
-env_dependencies[development][] = pece_tests
+; Administrative
+dependencies[] = admin_views
+dependencies[] = admin_menu
+dependencies[] = adminimal_admin_menu
+dependencies[] = module_filter
+dependencies[] = simplified_menu_admin
+dependencies[] = views_ui
+dependencies[] = coffee
 
+; Development - contrib
 env_dependencies[development][] = devel
 env_dependencies[development][] = devel_generate
-env_dependencies[development][] = search_krumo
-env_dependencies[development][] = module_builder
 env_dependencies[development][] = drupal_ipsum
 env_dependencies[development][] = environment_indicator
+env_dependencies[development][] = module_builder
+env_dependencies[development][] = search_krumo
 env_dependencies[development][] = seeds
+
+; Development - custom
+env_dependencies[development][] = pece_tests
