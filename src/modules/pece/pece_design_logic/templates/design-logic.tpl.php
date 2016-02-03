@@ -29,20 +29,24 @@
  */
 ?>
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-
-  <?php if (!$page): ?>
-    <h2<?php print $title_attributes; ?>>
-      <?php if ($url): ?>
-        <a href="<?php print $url; ?>"><?php print $title; ?></a>
-      <?php else: ?>
-        <?php print $title; ?>
-      <?php endif; ?>
-    </h2>
-  <?php endif; ?>
-
   <div class="content"<?php print $content_attributes; ?>>
     <?php
-      print render($content);
+      if (!empty($content['field_description'])) {
+        print render($content['field_description']);
+      }
     ?>
+
+    <div class="design-logic-sidebar">
+      <h3>Design Logic</h3>
+      <?php
+        if (!empty($content['field_thumbnail'])) {
+          print render($content['field_thumbnail']);
+        }
+
+        if (!empty($content['field_image_credits'])) {
+          print render($content['field_image_credits']);
+        }
+      ?>
+    </div>
   </div>
 </div>
