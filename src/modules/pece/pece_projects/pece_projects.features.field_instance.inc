@@ -567,10 +567,10 @@ function pece_projects_field_default_field_instances() {
     'fences_wrapper' => 'div',
     'field_name' => 'field_pece_start_end_date',
     'label' => 'Start and End Date',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'default_value' => 'now',
-      'default_value2' => 'same',
+      'default_value2' => 'blank',
       'default_value_code' => '',
       'default_value_code2' => '',
       'user_register_form' => FALSE,
