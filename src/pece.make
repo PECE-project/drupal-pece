@@ -53,6 +53,9 @@ projects[pathauto][subdir] = contrib
 projects[pathauto_entity][version] = 1.0
 projects[pathauto_entity][subdir] = contrib
 
+projects[parse_yaml][version] = 1.x-dev
+projects[parse_yaml][subdir] = contrib
+
 
 ; =====================
 ; Views
