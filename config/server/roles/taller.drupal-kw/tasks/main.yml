@@ -5,22 +5,22 @@
     version={{ drupal_kw_source_branch }}
     accept_hostkey=yes
     dest=/home/{{ drupal_www_owner }}/.drush/kraftwagen
-  sudo: yes
-  sudo_user: "{{ drupal_www_owner }}"
+  become: yes
+  become_user: "{{ drupal_www_owner }}"
 
 - name: Clear the Drush cache.
   command: >
     /usr/local/bin/drush cc drush
-  sudo: yes
-  sudo_user: "{{ drupal_www_owner }}"
+  become: yes
+  become_user: "{{ drupal_www_owner }}"
 
 - name: Check if Drupal is booting.
   shell: >
     /usr/local/bin/drush status | grep -e "Drupal bootstrap.*\:.*Successful"
     chdir={{ drupal_path }}
-  sudo: yes
-  sudo_user: "{{ drupal_www_owner }}"
-  register: drupal_is_booting
+  become: yes
+  become_user: "{{ drupal_www_owner }}"
+  register: "{{ drupal_is_booting }}"
   ignore_errors: True
 
 - name: Check if the src directory is already there.
@@ -31,8 +31,8 @@
 - name: Add project from Git.
   include: git.yml
   when: drupal_source | match("^(git|ssh|(http(s)?)).+\.git$")
-  sudo: yes
-  sudo_user: "{{ drupal_www_owner }}"
+  become: yes
+  become_user: "{{ drupal_www_owner }}"
 
 - name: Ensure Drupal project directory exist.
   file:
@@ -53,8 +53,8 @@
       --human-name="{{ drupal_kw_human_name }}"
     chdir={{ drupal_project_path }}
     creates={{ drupal_project_path }}/src/{{ drupal_kw_name }}.profile
-  sudo: yes
-  sudo_user: "{{ drupal_www_owner }}"
+  become: yes
+  become_user: "{{ drupal_www_owner }}"
   when: drupal_project_destination_status.stat.exists == false
 
 # Setup the project.
@@ -63,16 +63,16 @@
     /usr/local/bin/drush kw-setup --env={{ drupal_env }}
     chdir={{ drupal_project_path }}
     creates={{ drupal_project_path }}/cnf
-  sudo: yes
-  sudo_user: "{{ drupal_www_owner }}"
+  become: yes
+  become_user: "{{ drupal_www_owner }}"
 
 # Build the project.
 - name: Build the Kraftwagen project.
   command: >
     /usr/local/bin/drush kw-b
     chdir={{ drupal_project_path }}
-  sudo: yes
-  sudo_user: "{{ drupal_www_owner }}"
+  become: yes
+  become_user: "{{ drupal_www_owner }}"
 
 - name: Set permissions properly to the files directory.
   file: >
@@ -82,14 +82,14 @@
     group={{ drupal_www_group }}
     state=directory
     recurse=yes
-  sudo: yes
-  sudo_user: "{{ drupal_www_owner }}"
+  become: yes
+  become_user: "{{ drupal_www_owner }}"
   ignore_errors: True
 
 # Drupal Settings files.
 - include: settings.php.yml
-  sudo: yes
-  when: drupal_is_booting.rc != 0
+  become: yes
+  when: drupal_is_booting is not defined
 
 # Install the Drupal via drush.
 - name: Install Drupal.
@@ -101,10 +101,10 @@
     --db-url={{ drupal_db.driver }}://{{ drupal_db.user }}:{{ drupal_db.password }}@{{ drupal_db.host }}/{{ drupal_db.database }}
     chdir={{ drupal_path }}
   register: drupal_new_installation_result
-  sudo: yes
-  sudo_user: "{{ drupal_www_owner }}"
+  become: yes
+  become_user: "{{ drupal_www_owner }}"
   when: >
-    drupal_is_booting.rc != 0
+    drupal_is_booting is not defined
     and drupal_db.database != "" and drupal_db.host != ""
   notify:
     - drupal kraftwagen manifests
@@ -121,5 +121,5 @@
   command: >
     drush kw-m
     chdir={{ drupal_path }}
-  sudo: yes
-  sudo_user: "{{ drupal_www_owner }}"
+  become: yes
+  become_user: "{{ drupal_www_owner }}"

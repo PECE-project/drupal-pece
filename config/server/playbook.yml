@@ -3,8 +3,8 @@
   sudo: yes
 
   pre_tasks:
-    - name: Install apt repositories.
-      command: apt-get install python-apt -y
+    - name: Run common tasks.
+      include: ./tasks/common.yml
 
   roles:
     - role: geerlingguy.mysql
@@ -22,8 +22,8 @@
   sudo: yes
 
   pre_tasks:
-    - name: Install apt repositories.
-      command: apt-get install python-apt -y
+    - name: Run common tasks.
+      include: ./tasks/common.yml
 
   roles:
     - role: g-div.nvm
@@ -39,8 +39,8 @@
   sudo: yes
 
   pre_tasks:
-    - name: Install apt repositories.
-      command: apt-get install python-apt -y
+    - name: Run common tasks.
+      include: ./tasks/common.yml
 
     - name: "Add the deploy key to authorized_keys file."
       authorized_key: >
@@ -342,8 +342,8 @@
   sudo: yes
 
   pre_tasks:
-    - name: Install python-apt.
-      command: apt-get install python-apt -y
+    - name: Run common tasks.
+      include: ./tasks/common.yml
 
   roles:
     - geerlingguy.java
@@ -373,8 +373,8 @@
   sudo: yes
 
   pre_tasks:
-    - name: Install apt repositories.
-      command: apt-get install python-apt -y
+    - name: Run common tasks.
+      include: ./tasks/common.yml
 
   roles:
     - role: g-div.nvm
