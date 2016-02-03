@@ -1,6 +1,19 @@
 <?php
 
 /**
+ * Implements hook_install().
+ */
+function pece_design_logic_install() {
+  // 1. Enable pathauto for the design_logic entity type.
+  $value = variable_get('pathauto_entity_available_entity_types'. array());
+  $value['design_logic'] = 'design_logic';
+  variable_set('pathauto_entity_available_entity_types', $value);
+
+  // 2. Setup pathauto for the design_logic entity type.
+  variable_set('pathauto_design_logic_pattern', 'design-logic/[design_logic:title]');
+}
+
+/**
  * Implements hook_kw_manifests_info().
  */
 function pece_design_logic_kw_manifests_info() {
