@@ -51,14 +51,15 @@ function pece_design_logic_ensure_items() {
     'valuing_noise',
   );
 
+
   foreach ($design_logic_items as $name) {
     $path_to_design_logic_info_file = "{$path_to_defaults}/{$name}.yml";
-    $path_to_design_logic_thumbnail = "{$path_to_defaults}/files/{$name}.png";
 
     if (file_exists($path_to_design_logic_info_file)) {
       $design_logic_info_raw = file_get_contents($path_to_design_logic_info_file);
       $design_logic_info = pece_parse_yaml($design_logic_info_raw);
 
+      $path_to_design_logic_thumbnail = "{$path_to_defaults}/files/{$design_logic_info['thumbnail']}";
       if (file_exists($path_to_design_logic_thumbnail)) {
         $design_logic_info['thumbnail'] = $path_to_design_logic_thumbnail;
       }
