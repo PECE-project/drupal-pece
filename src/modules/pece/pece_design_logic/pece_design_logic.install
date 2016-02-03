@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * Implements hook_kw_manifests_info().
+ */
+function pece_design_logic_kw_manifests_info() {
+  $manifests = array();
+
+  $manifests['ensure_items'] = array(
+    'callback' => 'pece_design_logic_ensure_items',
+  );
+
+  return $manifests;
+}
+
+/**
+ * Create kraftwagen itemnames for each design logic type.
+ */
+function pece_design_logic_ensure_items() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  module_load_include('inc', 'pece_design_logic', 'pece_design_logic.functions');
+
+  $path_to_module = drupal_get_path('module', 'pece_design_logic');
+  $path_to_defaults = drupal_realpath($path_to_module . '/defaults');
+
+  $design_logic_items = array(
+    'valuing_noise',
+  );
+
+  foreach ($design_logic_items as $name) {
+    $path_to_design_logic_info_file = "{$path_to_defaults}/{$name}.yml";
+    $path_to_design_logic_thumbnail = "{$path_to_defaults}/files/{$name}.png";
+
+    if (file_exists($path_to_design_logic_info_file)) {
+      $design_logic_info_raw = file_get_contents($path_to_design_logic_info_file);
+      $design_logic_info = pece_parse_yaml($design_logic_info_raw);
+
+      if (file_exists($path_to_design_logic_thumbnail)) {
+        $design_logic_info['thumbnail'] = $path_to_design_logic_thumbnail;
+      }
+
+      pece_design_logic_ensure_item($name, $design_logic_info);
+    }
+  }
+}
