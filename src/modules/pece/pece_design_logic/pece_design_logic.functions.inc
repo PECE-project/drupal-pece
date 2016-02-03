@@ -25,27 +25,30 @@ function pece_design_logic_ensure_item($name, $info) {
   $item_values = array(
     'title' => $info['title'],
     'type' => 'design_logic',
+  );
 
-    'field_description' => array(
+  if (!empty($info['description'])) {
+    $item_values['field_description'] = array(
       LANGUAGE_NONE => array(
         0 => array(
           'value' => $info['description'],
           'format' => 'panopoly_html_text',
         ),
       ),
-    ),
+    );
+  }
 
-    'field_image_credits' => array(
+  if (!empty($info['credits'])) {
+    $item_values['field_image_credits'] = array(
       LANGUAGE_NONE => array(
         0 => array(
-          'title' => $info['link']['title'],
-          'url' => $info['link']['url'],
+          'title' => $info['credits']['title'],
+          'url' => $info['credits']['url'],
         ),
       ),
-    ),
-  );
+    );
+  }
 
-  // Add thumbnail if available.
   if (!empty($info['thumbnail'])) {
     $file = (object) array(
       'uid' => 1,
