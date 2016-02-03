@@ -152,7 +152,7 @@ function pece_projects_field_default_field_bases() {
       ),
       'profile2_private' => FALSE,
       'timezone_db' => '',
-      'todate' => 'required',
+      'todate' => 'optional',
       'tz_handling' => 'none',
     ),
     'translatable' => 0,
