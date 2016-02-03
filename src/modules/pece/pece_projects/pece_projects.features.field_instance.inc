@@ -405,7 +405,7 @@ function pece_projects_field_default_field_instances() {
       'attributes' => array(
         'class' => '',
         'configurable_class' => 0,
-        'configurable_title' => 1,
+        'configurable_title' => 0,
         'rel' => '',
         'target' => 'default',
         'title' => '',
@@ -528,12 +528,12 @@ function pece_projects_field_default_field_instances() {
         'label' => 'above',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'full_date',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
-          'show_remaining_days' => FALSE,
+          'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
         'weight' => 8,
@@ -580,7 +580,7 @@ function pece_projects_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
-        'input_format' => 'M j Y - g:i:sa',
+        'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,

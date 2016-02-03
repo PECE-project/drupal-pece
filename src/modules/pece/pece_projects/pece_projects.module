@@ -11,6 +11,9 @@ include_once 'pece_projects.features.inc';
  */
 function pece_projects_form_pece_project_node_form_alter(&$form, &$form_state) {
   $form['field_pece_start_end_date'][LANGUAGE_NONE][0]['#element_validate'][] = 'pece_projects_field_pece_start_end_date_validate';
+
+  // Hide the comment settings fieldset.
+  $form['comment_settings']['#access'] = FALSE;
 }
 
 /**
