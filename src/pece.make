@@ -50,9 +50,6 @@ projects[prevent_js_alerts][subdir] = contrib
 projects[pathauto][version] = 1.3
 projects[pathauto][subdir] = contrib
 
-projects[parse_yaml][version] = 1.x-dev
-projects[parse_yaml][subdir] = contrib
-
 
 ; =====================
 ; Views
@@ -298,6 +295,10 @@ libraries[autopager][download][url] = http://jquery-autopager.googlecode.com/fil
 ;libraries[annotator][download][type] = file
 ;libraries[annotator][download][url] = https://github.com/openannotation/annotator/releases/download/v1.2.10/annotator.1.2.10.zip
 ;libraries[annotator][download][subtree] = annotator.1.2.10
+
+libraries[spyc][download][type] = file
+libraries[spyc][download][url] = https://github.com/mustangostang/spyc/archive/0.5.1.zip
+libraries[spyc][directory_name] = spyc-master
 
 ; =====================
 ; Other
