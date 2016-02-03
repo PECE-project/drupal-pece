@@ -10,9 +10,26 @@
 function pece_projects_defaultconfig_features() {
   return array(
     'pece_projects' => array(
+      'strongarm' => 'strongarm',
       'user_default_permissions' => 'user_default_permissions',
     ),
   );
+}
+
+/**
+ * Implements hook_defaultconfig_strongarm().
+ */
+function pece_projects_defaultconfig_strongarm() {
+  $export = array();
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'date_format_full_date';
+  $strongarm->value = 'm/d/Y - H:i';
+  $export['date_format_full_date'] = $strongarm;
+
+  return $export;
 }
 
 /**
