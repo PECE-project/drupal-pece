@@ -50,6 +50,10 @@ projects[prevent_js_alerts][subdir] = contrib
 projects[pathauto][version] = 1.3
 projects[pathauto][subdir] = contrib
 
+projects[parse_yaml][version] = 1.x-dev
+projects[parse_yaml][subdir] = contrib
+
+
 ; =====================
 ; Views
 ; =====================
