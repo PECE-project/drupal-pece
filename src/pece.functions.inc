@@ -32,3 +32,38 @@ function pece_parse_yaml($input = '') {
   }
   return $parsed;
 }
+
+/**
+ * Setup core permissions.
+ *
+ * @param
+ *   A associative array map of permissions to grant/remove.
+ *   Example:
+ *     array(
+ *       'all' => array(
+ *         'use Search Autocomplete' => TRUE, // Sample for granting to all user roles.
+ *       ),
+ *       'role name' => array(
+ *         'granting permission' => TRUE,  // Sample for granting a permission.
+ *         'removing permission' => FALSE, // Sample for removing a permission.
+ *       ),
+ *     );
+ */
+function pece_set_permissions($permission_map = array()) {
+  $all_permissions = user_permission_get_modules();
+  $user_roles = user_roles();
+
+  foreach ($user_roles as $rid => $role_name) {
+    $assigning_permissions = empty($permission_map[$role_name]) ? array() : $permission_map[$role_name];
+    $assigning_permissions += empty($permission_map['all']) ? array() : $permission_map['all'];
+
+    // Clean-up non-existing permissions.
+    foreach ($assigning_permissions as $permission_name => $change) {
+      if (empty($all_permissions[$permission_name])) {
+        unset($assigning_permissions[$permission_name]);
+      }
+    }
+
+    user_role_change_permissions($rid, $assigning_permissions);
+  }
+}

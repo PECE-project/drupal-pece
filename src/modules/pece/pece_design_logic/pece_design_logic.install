@@ -23,6 +23,10 @@ function pece_design_logic_kw_manifests_info() {
     'callback' => 'pece_design_logic_ensure_items',
   );
 
+  $manifests['permissions'] = array(
+    'callback' => 'pece_design_logic_permissions',
+  );
+
   return $manifests;
 }
 
@@ -62,4 +66,18 @@ function pece_design_logic_ensure_items() {
       pece_design_logic_ensure_item($name, $design_logic_info);
     }
   }
+}
+
+/**
+ * Setup Design logic permissions.
+ */
+function pece_design_logic_permissions() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  pece_set_permissions(array(
+    'all' => array(
+      'eck list design_logic design_logic entities' => TRUE,
+      'eck view design_logic design_logic entities' => TRUE,
+    ),
+  ));
 }
