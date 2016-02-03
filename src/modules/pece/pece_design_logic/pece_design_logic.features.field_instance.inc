@@ -11,9 +11,9 @@ function pece_design_logic_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
-  // 'design_logic-design_logic_pages-field_description'.
-  $field_instances['design_logic-design_logic_pages-field_description'] = array(
-    'bundle' => 'design_logic_pages',
+  // 'design_logic-design_logic-field_description'.
+  $field_instances['design_logic-design_logic-field_description'] = array(
+    'bundle' => 'design_logic',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -58,9 +58,9 @@ function pece_design_logic_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'design_logic-design_logic_pages-field_image_credits'.
-  $field_instances['design_logic-design_logic_pages-field_image_credits'] = array(
-    'bundle' => 'design_logic_pages',
+  // 'design_logic-design_logic-field_image_credits'.
+  $field_instances['design_logic-design_logic-field_image_credits'] = array(
+    'bundle' => 'design_logic',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => 'An optional field to provide credits for the uploaded image.',
@@ -121,9 +121,9 @@ function pece_design_logic_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'design_logic-design_logic_pages-field_thumbnail'.
-  $field_instances['design_logic-design_logic_pages-field_thumbnail'] = array(
-    'bundle' => 'design_logic_pages',
+  // Exported field_instance: 'design_logic-design_logic-field_thumbnail'.
+  $field_instances['design_logic-design_logic-field_thumbnail'] = array(
+    'bundle' => 'design_logic',
     'deleted' => 0,
     'description' => '',
     'display' => array(
