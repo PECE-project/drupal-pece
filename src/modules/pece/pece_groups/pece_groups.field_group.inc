@@ -21,7 +21,7 @@ function pece_groups_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Group settings',
-    'weight' => '5',
+    'weight' => '3',
     'children' => array(
       0 => 'group_access',
       1 => 'group_content_access',

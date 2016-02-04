@@ -243,7 +243,73 @@ function pece_groups_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 31,
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-pece_group-field_pece_substantive_logic'.
+  $field_instances['node-pece_group-field_pece_substantive_logic'] = array(
+    'bundle' => 'pece_group',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 2,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'entityconnect_icon_add' => 0,
+    'entityconnect_icon_edit' => 0,
+    'entityconnect_unload_add' => 1,
+    'entityconnect_unload_edit' => 1,
+    'fences_wrapper' => 'div',
+    'field_name' => 'field_pece_substantive_logic',
+    'label' => 'Substantive Logic',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 6,
     ),
   );
 
@@ -691,6 +757,7 @@ function pece_groups_field_default_field_instances() {
   t('Group');
   t('Project');
   t('Roles and permissions');
+  t('Substantive Logic');
   t('Thumbnail image');
   t('Visibility');
 
