@@ -119,11 +119,7 @@ describe('PECE Smoke test', function() {
     });
   });
 
-  xit('check that user is directed to the clicked artifact page from tag page', function() {
-    // The below element is not clickable when running the test against dev environment.
-    // It says that other element would receive the click: <div class="panel-pane pane-block pane-tagclouds-3">...</div>
-    // I think this is happening because of some broken images in this environment,
-    // even the message not saying exactly this. It needs more investigation.
+  it('check that user is directed to the clicked artifact page from tag page', function() {
     firstTag.click();
 
     var firstArtifactIntoTagsPage = element.all(by.css('h5 a')).first();
@@ -145,7 +141,7 @@ describe('PECE Smoke test', function() {
       })
 
     });
-  }).pend('This test if failing when running against dev environment. It needs review.');
+  });
 
   it('check that user is directed to the clicked tag page', function() {
     // The below logic is used to make the test independent of environment,
