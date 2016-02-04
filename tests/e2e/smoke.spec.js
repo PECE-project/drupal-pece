@@ -60,6 +60,18 @@ describe('PECE Smoke test', function() {
         type: 'pece_group',
         title: 'Smoke test group'
       }
+    },
+    {
+      type: 'node',
+      data: {
+        type: 'pece_sub_logic',
+        title: 'Substantive logic test',
+        field_pece_tags: [Seeds.parser(3, 'tid')],
+        field_pece_contributors: [Seeds.parser(0, 'uid')],
+        field_pece_sub_logic_citation_link: '',
+        body: 'Substantive logic body',
+        field_pece_uri: 'logic body uri'
+      }
     }
   ]);
 
@@ -200,6 +212,16 @@ describe('PECE Smoke test', function() {
 
     browser.getCurrentUrl().then(function(url) {
       var currentUrl = /tags\/smoke-test-tag/.test(url);
+      expect(currentUrl).toBe(true);
+    });
+  });
+
+  it('any user can navigate to a substantive logic content', function() {
+    AuthenticationPage.logout();
+    SamplePage.get('substantive-logic-test');
+
+    browser.getCurrentUrl().then(function(url) {
+      var currentUrl = /substantive-logic-test/.test(url);
       expect(currentUrl).toBe(true);
     });
   });
