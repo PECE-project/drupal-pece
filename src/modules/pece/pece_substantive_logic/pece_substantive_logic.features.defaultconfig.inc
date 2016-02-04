@@ -10,7 +10,6 @@
 function pece_substantive_logic_defaultconfig_features() {
   return array(
     'pece_substantive_logic' => array(
-      'strongarm' => 'strongarm',
       'user_default_permissions' => 'user_default_permissions',
     ),
   );

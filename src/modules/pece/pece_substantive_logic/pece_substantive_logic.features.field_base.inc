@@ -10,7 +10,7 @@
 function pece_substantive_logic_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_pece_multiple_link'.
+  // Exported field_base: 'field_pece_sub_logic_cit_link'.
   $field_bases['field_pece_sub_logic_cit_link'] = array(
     'active' => 1,
     'cardinality' => 1,
