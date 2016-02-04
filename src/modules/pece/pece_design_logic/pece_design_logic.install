@@ -5,7 +5,7 @@
  */
 function pece_design_logic_install() {
   // 1. Enable pathauto for the design_logic entity type.
-  $value = variable_get('pathauto_entity_available_entity_types'. array());
+  $value = variable_get('pathauto_entity_available_entity_types', array());
   $value['design_logic'] = 'design_logic';
   variable_set('pathauto_entity_available_entity_types', $value);
 
