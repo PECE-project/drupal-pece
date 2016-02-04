@@ -23,6 +23,7 @@ function pece_install() {
       'region' => 'header_top_right',
       'pages' => '',
       'cache' => -1,
+      'title' => '',
     ),
   );
   $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));

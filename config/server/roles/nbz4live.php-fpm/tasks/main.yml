@@ -104,6 +104,11 @@
   changed_when: "result.rc != 0"
   tags: [configuration,php,fpm]
 
+- name: Enable PHP Mcrypt module
+  command: >
+    php5enmod mcrypt
+  sudo: yes
+
 - name: Start the php5-fpm service
   service: name={{ php_fpm_service_name }} state=started enabled=yes
   tags: [service,php,fpm]

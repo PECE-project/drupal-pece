@@ -176,8 +176,8 @@ function pece_substantive_logic_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_sub_logic-field_pece_sub_logic_citation_link'.
-  $field_instances['node-pece_sub_logic-field_pece_sub_logic_citation_link'] = array(
+  // Exported field_instance: 'node-pece_sub_logic-field_pece_sub_logic_cit_link'.
+  $field_instances['node-pece_sub_logic-field_pece_sub_logic_cit_link'] = array(
     'bundle' => 'pece_sub_logic',
     'default_value' => NULL,
     'deleted' => 0,
@@ -217,7 +217,7 @@ function pece_substantive_logic_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'fences_wrapper' => 'div',
-    'field_name' => 'field_pece_sub_logic_citation_link',
+    'field_name' => 'field_pece_sub_logic_cit_link',
     'label' => 'Image Citation',
     'required' => 1,
     'settings' => array(
