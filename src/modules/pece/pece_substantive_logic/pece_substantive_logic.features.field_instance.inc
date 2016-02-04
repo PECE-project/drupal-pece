@@ -176,7 +176,70 @@ function pece_substantive_logic_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_sub_logic-field_pece_sub_logic_cit_link'.
+  // Exported field_instance: 'node-pece_sub_logic-field_pece_contributors'.
+  $field_instances['node-pece_sub_logic-field_pece_contributors'] = array(
+    'bundle' => 'pece_sub_logic',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 2,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'fences_wrapper' => 'div',
+    'field_name' => 'field_pece_contributors',
+    'label' => 'Contributors',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-pece_sub_logic-field_pece_sub_logic_cit_link'.
   $field_instances['node-pece_sub_logic-field_pece_sub_logic_cit_link'] = array(
     'bundle' => 'pece_sub_logic',
     'default_value' => NULL,
@@ -380,76 +443,11 @@ function pece_substantive_logic_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact-field_pece_contributors'.
-  $field_instances['node-pece_sub_logic-field_pece_contributors'] = array(
-    'bundle' => 'pece_sub_logic',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => 1,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 2,
-      ),
-      'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'mini_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'most_recent' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'fences_wrapper' => 'div',
-    'field_name' => 'field_pece_contributors',
-    'label' => 'Contributors',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'entityreference',
-      'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
-        'size' => 60,
-      ),
-      'type' => 'entityreference_autocomplete',
-      'weight' => 8,
-    ),
-  );
-
   // Translatables
   // Included for use with string extractors like potx.
-  t('Consent Form');
+  t('Contributors');
   t('Description');
-  t('Funding Agency');
-  t('Institution');
-  t('Interview Request');
-  t('Start and End Date');
+  t('Image Citation');
   t('Tags');
   t('Thumbnail');
   t('URI');
