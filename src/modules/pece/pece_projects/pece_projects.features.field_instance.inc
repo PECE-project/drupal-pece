@@ -10,6 +10,73 @@
 function pece_projects_field_default_field_instances() {
   $field_instances = array();
 
+
+    // Exported field_instance: 'node-pece_project-field_pece_substantive_logic'.
+    $field_instances['node-pece_project-field_pece_substantive_logic'] = array(
+        'bundle' => 'pece_project',
+        'default_value' => NULL,
+        'deleted' => 0,
+        'description' => '',
+        'display' => array(
+            'default' => array(
+                'label' => 'above',
+                'module' => 'entityreference',
+                'settings' => array(
+                    'link' => 1,
+                ),
+                'type' => 'entityreference_label',
+                'weight' => 2,
+            ),
+            'featured' => array(
+                'label' => 'above',
+                'settings' => array(),
+                'type' => 'hidden',
+                'weight' => 0,
+            ),
+            'mini_teaser' => array(
+                'label' => 'above',
+                'settings' => array(),
+                'type' => 'hidden',
+                'weight' => 0,
+            ),
+            'most_recent' => array(
+                'label' => 'above',
+                'settings' => array(),
+                'type' => 'hidden',
+                'weight' => 0,
+            ),
+            'teaser' => array(
+                'label' => 'above',
+                'settings' => array(),
+                'type' => 'hidden',
+                'weight' => 0,
+            ),
+        ),
+        'entity_type' => 'node',
+        'entityconnect_icon_add' => 0,
+        'entityconnect_icon_edit' => 0,
+        'entityconnect_unload_add' => 1,
+        'entityconnect_unload_edit' => 1,
+        'fences_wrapper' => 'div',
+        'field_name' => 'field_pece_substantive_logic',
+        'label' => 'Substantive Logic',
+        'required' => 0,
+        'settings' => array(
+            'user_register_form' => FALSE,
+        ),
+        'widget' => array(
+            'active' => 1,
+            'module' => 'entityreference',
+            'settings' => array(
+                'match_operator' => 'CONTAINS',
+                'path' => '',
+                'size' => 60,
+            ),
+            'type' => 'entityreference_autocomplete',
+            'weight' => 31,
+        ),
+    );
+
   // Exported field_instance: 'node-pece_project-body'.
   $field_instances['node-pece_project-body'] = array(
     'bundle' => 'pece_project',
@@ -405,7 +472,7 @@ function pece_projects_field_default_field_instances() {
       'attributes' => array(
         'class' => '',
         'configurable_class' => 0,
-        'configurable_title' => 0,
+        'configurable_title' => 1,
         'rel' => '',
         'target' => 'default',
         'title' => '',
@@ -528,12 +595,12 @@ function pece_projects_field_default_field_instances() {
         'label' => 'above',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'full_date',
+          'format_type' => 'long',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
-          'show_remaining_days' => 0,
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 8,
@@ -580,7 +647,7 @@ function pece_projects_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'input_format' => 'M j Y - g:i:sa',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,

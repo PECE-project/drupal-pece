@@ -102,7 +102,7 @@ function pece_groups_strongarm() {
           'weight' => '0',
         ),
         'locations' => array(
-          'weight' => '30',
+          'weight' => '4',
         ),
       ),
       'display' => array(),
