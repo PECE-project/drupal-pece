@@ -52,7 +52,7 @@ function pece_substantive_logic_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'title',
+    'label' => 'hidden',
     'formatter' => 'text_default',
     'delta_limit' => 0,
     'delta_offset' => '0',
@@ -114,7 +114,7 @@ function pece_substantive_logic_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'hidden',
+    'label' => 'title',
     'formatter' => 'link_default',
     'delta_limit' => 0,
     'delta_offset' => '0',
