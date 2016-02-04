@@ -5,6 +5,7 @@
 var fs = require('fs');
 var SeedsAPI = require('drupal-seeds');
 var SpecReporter = require('jasmine-spec-reporter');
+var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
 
 module.exports.config = {
   params: {
@@ -36,6 +37,13 @@ module.exports.config = {
       displaySuiteNumber: true,
       displaySpecDuration: true
     }));
+
+    jasmine.getEnv().addReporter(
+       new HtmlScreenshotReporter({
+         dest: 'screenshots',
+         filename: 'PECE-smoke-test-report.html'
+       })
+     );
 
     browser.driver.manage().window().maximize();
 
