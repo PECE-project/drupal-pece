@@ -472,7 +472,7 @@ function pece_projects_field_default_field_instances() {
       'attributes' => array(
         'class' => '',
         'configurable_class' => 0,
-        'configurable_title' => 1,
+        'configurable_title' => 0,
         'rel' => '',
         'target' => 'default',
         'title' => '',
