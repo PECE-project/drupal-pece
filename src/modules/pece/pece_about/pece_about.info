@@ -1,0 +1,10 @@
+name = PECE About
+description = Feature that exports the about page properties.
+core = 7.x
+package = Features
+version = 7.x-1.0-alpha1
+dependencies[] = defaultconfig
+features[defaultconfig][] = views_default_views:pece_projects
+features[features_api][] = api:2
+features_exclude[dependencies][defaultconfig] = defaultconfig
+project path = profiles/pece/modules/pece
