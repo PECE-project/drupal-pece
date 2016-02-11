@@ -13,10 +13,10 @@ function pece_about_panelizer_defaults() {
   $panelizer = new stdClass();
   $panelizer->disabled = FALSE; /* Edit this to true to make a default panelizer disabled initially */
   $panelizer->api_version = 1;
-  $panelizer->name = 'node:pece_page:default';
+  $panelizer->name = 'node:pece_about_page:default';
   $panelizer->title = 'Default';
   $panelizer->panelizer_type = 'node';
-  $panelizer->panelizer_key = 'pece_page';
+  $panelizer->panelizer_key = 'pece_about_page';
   $panelizer->no_blocks = FALSE;
   $panelizer->css_id = '';
   $panelizer->css = '';
@@ -194,7 +194,7 @@ function pece_about_panelizer_defaults() {
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $panelizer->display = $display;
-  $export['node:pece_page:default'] = $panelizer;
+  $export['node:pece_about_page:default'] = $panelizer;
 
   return $export;
 }

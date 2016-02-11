@@ -21,10 +21,10 @@ function pece_about_ctools_plugin_api($module = NULL, $api = NULL) {
  */
 function pece_about_node_info() {
   $items = array(
-    'pece_page' => array(
-      'name' => t('Page'),
+    'pece_about_page' => array(
+      'name' => t('About Page'),
       'base' => 'node_content',
-      'description' => t('Basic pages for custom contents.'),
+      'description' => t('Use this content type to add the about page.'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

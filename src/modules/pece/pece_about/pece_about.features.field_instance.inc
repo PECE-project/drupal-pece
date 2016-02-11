@@ -10,9 +10,9 @@
 function pece_about_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-pece_page-body'.
-  $field_instances['node-pece_page-body'] = array(
-    'bundle' => 'pece_page',
+  // Exported field_instance: 'node-pece_about_page-body'.
+  $field_instances['node-pece_about_page-body'] = array(
+    'bundle' => 'pece_about_page',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
