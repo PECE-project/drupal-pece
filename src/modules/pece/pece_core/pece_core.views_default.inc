@@ -200,6 +200,14 @@ function pece_core_views_default_views() {
 
   /* Display: All users */
   $handler = $view->new_display('panel_pane', 'All users', 'panel_pane_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'People';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
@@ -253,6 +261,7 @@ function pece_core_views_default_views() {
     t('Researcher'),
     t('Contributor'),
     t('All users'),
+    t('People'),
     t('View panes'),
   );
   $export['users_field_ref'] = $view;
