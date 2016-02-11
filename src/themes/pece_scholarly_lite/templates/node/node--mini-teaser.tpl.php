@@ -86,6 +86,10 @@
     <div class="icon image" >
       <?php print render($content['field_pece_media_image']); ?>
     </div>
+  <?php elseif (isset($content['field_basic_image_image'])): ?>
+    <div class="icon image" >
+      <?php print render($content['field_basic_image_image']); ?>
+    </div>
   <?php else: ?>
     <div class="icon">
       <?php // @info: icons are defined by sass. ?>
@@ -93,9 +97,9 @@
   <?php endif ?>
 
   <?php print render($title_prefix); ?>
-  <?php if (!$page): ?>
-    <h5<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h5>
-  <?php endif; ?>
+    <?php if (!$page): ?>
+      <h5<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h5>
+    <?php endif; ?>
   <?php print render($title_suffix); ?>
 
   <div class="content"<?php print $content_attributes; ?>>
@@ -104,6 +108,7 @@
       hide($content['comments']);
       hide($content['links']);
       hide($content['field_pece_media_image']);
+      hide($content['field_basic_image_image']);
       print render($content);
     ?>
   </div>
