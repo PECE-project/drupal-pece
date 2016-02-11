@@ -103,7 +103,7 @@ function pece_about_panelizer_defaults() {
   $pane->pid = 'new-aa6b548c-ab3d-4915-bbdc-cb205059df96';
   $pane->panel = 'center';
   $pane->type = 'views_panes';
-  $pane->subtype = 'users_field_ref-panel_pane_1';
+  $pane->subtype = 'users_field_ref-all_users';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
