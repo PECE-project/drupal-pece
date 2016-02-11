@@ -35,9 +35,9 @@
  */
 ?>
 <div class="profile <?php print $classes; ?>" <?php print $attributes; ?>>
-  <?php if (isset($user_profile['user_picture'])): ?>
+  <?php if (isset($user_profile['field_user_picture'])): ?>
     <div class="icon image" >
-      <?php print render($user_profile['user_picture']); ?>
+      <?php print render($user_profile['field_user_picture']); ?>
     </div>
   <?php else: ?>
     <div class="icon">

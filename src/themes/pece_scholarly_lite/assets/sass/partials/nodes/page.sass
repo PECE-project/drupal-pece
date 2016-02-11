@@ -8,7 +8,8 @@
   h3
     border-bottom: 1px solid #000
 
-[class*="node-pece-"]
+[class*="node-pece-"],
+.user-profile
   .icon::before
     @extend %file-type-icon
 
@@ -44,6 +45,9 @@
 
 .node-pece-project .icon::before
   content: "\f0e8"
+
+.user-profile .icon::before
+  content: "\f007"
 
 .node-pece-artifact-image
   .icon.image
