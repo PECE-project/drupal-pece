@@ -199,7 +199,7 @@ function pece_core_views_default_views() {
   );
 
   /* Display: All users */
-  $handler = $view->new_display('panel_pane', 'All users', 'panel_pane_1');
+  $handler = $view->new_display('panel_pane', 'All users', 'all_users');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'People';
   $handler->display->display_options['defaults']['pager'] = FALSE;
@@ -208,6 +208,13 @@ function pece_core_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'user';
+  $handler->display->display_options['row_options']['view_mode'] = 'mini_teaser';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
@@ -216,6 +223,8 @@ function pece_core_views_default_views() {
   $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_type'] = 'h5';
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   /* Field: User: Picture */
   $handler->display->display_options['fields']['field_user_picture']['id'] = 'field_user_picture';
   $handler->display->display_options['fields']['field_user_picture']['table'] = 'field_data_field_user_picture';
@@ -227,7 +236,7 @@ function pece_core_views_default_views() {
   $handler->display->display_options['fields']['field_user_picture']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_user_picture']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_user_picture']['settings'] = array(
-    'image_style' => 'medium',
+    'image_style' => 'panopoly_image_square',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_user_picture']['field_api_classes'] = TRUE;

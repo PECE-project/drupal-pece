@@ -1970,6 +1970,16 @@ function pece_core_strongarm() {
         'default' => 0,
         'choice' => 0,
       ),
+      'mini_teaser' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'most_recent' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
     ),
   );
   $export['panelizer_defaults_node_pece_fieldsite'] = $strongarm;

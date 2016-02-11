@@ -24,6 +24,12 @@ function pece_design_logic_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'mini_teaser' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -68,6 +74,12 @@ function pece_design_logic_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
+        'weight' => 2,
+      ),
+      'mini_teaser' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 2,
       ),
       'teaser' => array(
@@ -134,6 +146,15 @@ function pece_design_logic_field_default_field_instances() {
         'type' => 'file_rendered',
         'weight' => 1,
       ),
+      'mini_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'file_entity',
+        'settings' => array(
+          'file_view_mode' => 'full',
+        ),
+        'type' => 'file_rendered',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -189,6 +210,12 @@ function pece_design_logic_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+      'mini_teaser' => array(
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
