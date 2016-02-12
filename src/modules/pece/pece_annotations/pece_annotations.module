@@ -242,7 +242,6 @@ function pece_annotations_annotate_cache_get($id) {
  * All we need to do is store the updated pane in the cache.
  */
 function pece_annotations_annotate_wizard_next(&$form_state) {
-  dd($form_state['step']);
   pece_annotations_annotate_cache_set($form_state['object_id'], $form_state['object']);
 }
 
