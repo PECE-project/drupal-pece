@@ -79,7 +79,7 @@ function pece_core_node_info() {
     'pece_fieldsite' => array(
       'name' => t('Fieldsite'),
       'base' => 'node_content',
-      'description' => t('PECE\'s Fieldsite content'),
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

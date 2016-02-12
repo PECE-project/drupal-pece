@@ -31,7 +31,7 @@ function pece_substantive_logic_node_info() {
     'pece_sub_logic' => array(
       'name' => t('Substantive Logic'),
       'base' => 'node_content',
-      'description' => t('PECE\'s Substantive Logic content type.'),
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

@@ -24,7 +24,7 @@ function pece_about_node_info() {
     'pece_about_page' => array(
       'name' => t('About Page'),
       'base' => 'node_content',
-      'description' => t('Use this content type to add the about page.'),
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

@@ -31,7 +31,7 @@ function pece_projects_node_info() {
     'pece_project' => array(
       'name' => t('Project'),
       'base' => 'node_content',
-      'description' => t('The main PECE\'s Project content type.'),
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

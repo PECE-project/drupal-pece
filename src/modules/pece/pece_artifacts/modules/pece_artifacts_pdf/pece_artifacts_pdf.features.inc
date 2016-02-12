@@ -27,7 +27,7 @@ function pece_artifacts_pdf_node_info() {
     'pece_artifact_pdf' => array(
       'name' => t('Artifact - PDF Document'),
       'base' => 'node_content',
-      'description' => t('The PECE\'s PDF Document artifact.'),
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

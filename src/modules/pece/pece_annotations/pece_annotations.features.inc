@@ -31,7 +31,7 @@ function pece_annotations_node_info() {
     'pece_annotation' => array(
       'name' => t('Annotation'),
       'base' => 'node_content',
-      'description' => t('The PECE\'s Annotations content type.'),
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

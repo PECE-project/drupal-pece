@@ -27,7 +27,7 @@ function pece_artifacts_bundle_node_info() {
     'pece_artifact_bundle' => array(
       'name' => t('Artifact - Bundle'),
       'base' => 'node_content',
-      'description' => t('The PECE\'s Artifacts bundle.'),
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

@@ -34,7 +34,7 @@ function pece_groups_node_info() {
     'pece_group' => array(
       'name' => t('Group'),
       'base' => 'node_content',
-      'description' => t('The main PECE group.'),
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

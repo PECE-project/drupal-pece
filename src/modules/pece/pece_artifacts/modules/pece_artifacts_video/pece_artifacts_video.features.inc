@@ -27,7 +27,7 @@ function pece_artifacts_video_node_info() {
     'pece_artifact_video' => array(
       'name' => t('Artifact - Video'),
       'base' => 'node_content',
-      'description' => t('The PECE\'s Video artifct.'),
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',
