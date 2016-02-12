@@ -4,10 +4,19 @@
  *------------------------------------------------------------------------------
  */
 
+.node-type-pece-analytic,
+.page-annotations-user,
+.page-annotions-question
+  h1
+    text-transform: lowercase
+
+    &::first-letter
+      text-transform: uppercase
+
 .view-display-id-pece_user_artifact_annotations,
 .view-display-id-pece_question_artifact_annotions,
 .view-display-id-pece_question_annotations
-  .views-row
+  [class*="views-row-"]
     margin-bottom: 2em
     border-bottom: 1px solid #ACACAC
 
