@@ -7,14 +7,16 @@ PECE Documentation
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3 
 
    What is PECE? <intro>
-   Installation <installation>
+   Installing PECE <installation>
    Users' Guide <usersguide>
-   Data Management <datamanagement>
    Contributors' Guide <contributors>
-   Wishlist <wishlist> 
+   Data Management <datamanagement>
+   Legal Documents <legal>
+   Data Model <datamodel>
+   Terminology <terminology> 
 
 Indices and tables
 ==================
