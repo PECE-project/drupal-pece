@@ -10,7 +10,7 @@
 function pece_profile_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_pece_biography'
+  // Exported field_base: 'field_pece_biography'.
   $field_bases['field_pece_biography'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -31,7 +31,7 @@ function pece_profile_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_pece_email'
+  // Exported field_base: 'field_pece_email'.
   $field_bases['field_pece_email'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -48,7 +48,7 @@ function pece_profile_field_default_field_bases() {
     'type' => 'email',
   );
 
-  // Exported field_base: 'field_pece_full_name'
+  // Exported field_base: 'field_pece_full_name'.
   $field_bases['field_pece_full_name'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -70,7 +70,7 @@ function pece_profile_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_pece_institution'
+  // Exported field_base: 'field_pece_institution'.
   $field_bases['field_pece_institution'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -92,7 +92,7 @@ function pece_profile_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_pece_position'
+  // Exported field_base: 'field_pece_position'.
   $field_bases['field_pece_position'] = array(
     'active' => 1,
     'cardinality' => 1,

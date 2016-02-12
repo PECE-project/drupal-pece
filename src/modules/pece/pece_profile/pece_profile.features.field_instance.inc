@@ -10,7 +10,7 @@
 function pece_profile_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'profile2-pece_profile_main-field_pece_biography'
+  // Exported field_instance: 'profile2-pece_profile_main-field_pece_biography'.
   $field_instances['profile2-pece_profile_main-field_pece_biography'] = array(
     'bundle' => 'pece_profile_main',
     'default_value' => NULL,
@@ -49,7 +49,7 @@ function pece_profile_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'profile2-pece_profile_main-field_pece_email'
+  // Exported field_instance: 'profile2-pece_profile_main-field_pece_email'.
   $field_instances['profile2-pece_profile_main-field_pece_email'] = array(
     'bundle' => 'pece_profile_main',
     'default_value' => NULL,
@@ -82,7 +82,7 @@ function pece_profile_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'profile2-pece_profile_main-field_pece_full_name'
+  // Exported field_instance: 'profile2-pece_profile_main-field_pece_full_name'.
   $field_instances['profile2-pece_profile_main-field_pece_full_name'] = array(
     'bundle' => 'pece_profile_main',
     'default_value' => NULL,
@@ -122,7 +122,7 @@ function pece_profile_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'profile2-pece_profile_main-field_pece_institution'
+  // 'profile2-pece_profile_main-field_pece_institution'.
   $field_instances['profile2-pece_profile_main-field_pece_institution'] = array(
     'bundle' => 'pece_profile_main',
     'default_value' => NULL,
@@ -161,7 +161,7 @@ function pece_profile_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'profile2-pece_profile_main-field_pece_location'
+  // Exported field_instance: 'profile2-pece_profile_main-field_pece_location'.
   $field_instances['profile2-pece_profile_main-field_pece_location'] = array(
     'bundle' => 'pece_profile_main',
     'default_value' => NULL,
@@ -192,7 +192,7 @@ function pece_profile_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'profile2-pece_profile_main-field_pece_position'
+  // Exported field_instance: 'profile2-pece_profile_main-field_pece_position'.
   $field_instances['profile2-pece_profile_main-field_pece_position'] = array(
     'bundle' => 'pece_profile_main',
     'default_value' => NULL,
@@ -231,7 +231,7 @@ function pece_profile_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'profile2-pece_profile_main-field_pece_tags'
+  // Exported field_instance: 'profile2-pece_profile_main-field_pece_tags'.
   $field_instances['profile2-pece_profile_main-field_pece_tags'] = array(
     'bundle' => 'pece_profile_main',
     'default_value' => NULL,

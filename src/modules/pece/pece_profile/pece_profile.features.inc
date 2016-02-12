@@ -5,6 +5,24 @@
  */
 
 /**
+ * Implements hook_field_default_field_instances_alter().
+ */
+function pece_profile_field_default_field_instances_alter(&$data) {
+  if (isset($data['user-user-field_user_picture'])) {
+    $data['user-user-field_user_picture']['display']['mini_teaser'] = array(
+      'label' => 'hidden',
+      'module' => 'image',
+      'settings' => array(
+        'image_link' => '',
+        'image_style' => 'panopoly_image_square',
+      ),
+      'type' => 'image',
+      'weight' => 0,
+    ); /* WAS: '' */
+  }
+}
+
+/**
  * Implements hook_default_profile2_type().
  */
 function pece_profile_default_profile2_type() {
