@@ -128,5 +128,35 @@ function pece_analytics_strongarm() {
   $strongarm->value = 1;
   $export['node_submitted_pece_analytic'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'tvi_vocab_pece_structured_analytics';
+  $strongarm->value = array(
+    'is_default' => FALSE,
+    'type' => 'vocab',
+    'xid' => 'pece_structured_analytics',
+    'status' => 1,
+    'view_name' => 'pece_question_term',
+    'display' => 'page',
+    'pass_arguments' => 0,
+  );
+  $export['tvi_vocab_pece_structured_analytics'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'tvi_vocab_pece_tags';
+  $strongarm->value = array(
+    'is_default' => FALSE,
+    'type' => 'vocab',
+    'xid' => 'pece_tags',
+    'status' => 1,
+    'view_name' => 'tag_term',
+    'display' => 'page',
+    'pass_arguments' => 0,
+  );
+  $export['tvi_vocab_pece_tags'] = $strongarm;
+
   return $export;
 }
