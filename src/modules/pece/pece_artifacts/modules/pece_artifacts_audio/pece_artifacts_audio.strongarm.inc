@@ -174,32 +174,7 @@ function pece_artifacts_audio_strongarm() {
         'default' => 0,
         'choice' => 0,
       ),
-      'full' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
       'teaser' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'rss' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'search_index' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'search_result' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'diff_standard' => array(
         'status' => 0,
         'default' => 0,
         'choice' => 0,
@@ -209,7 +184,12 @@ function pece_artifacts_audio_strongarm() {
         'default' => 0,
         'choice' => 0,
       ),
-      'token' => array(
+      'mini_teaser' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'most_recent' => array(
         'status' => 0,
         'default' => 0,
         'choice' => 0,

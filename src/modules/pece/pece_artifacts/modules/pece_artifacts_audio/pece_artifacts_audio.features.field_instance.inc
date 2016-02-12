@@ -491,7 +491,7 @@ function pece_artifacts_audio_field_default_field_instances() {
     'settings' => array(
       'description_field' => 0,
       'file_directory' => 'artifacts/media/audio',
-      'file_extensions' => 'ogg mp3 mka m4a mp4 webm wav',
+      'file_extensions' => 'mp3 mp4 aac wav m4a ogg oga weba webm',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
