@@ -60,7 +60,7 @@ function pece_artifacts_pdf_panelizer_defaults() {
     'formatter_settings' => array(
       'pdf_width' => '525',
       'pdf_height' => '650',
-      'renderer' => 'pdf-js',
+      'renderer' => 'direct',
       'download' => 0,
       'colorbox' => FALSE,
       'colorbox_link_text' => '',
