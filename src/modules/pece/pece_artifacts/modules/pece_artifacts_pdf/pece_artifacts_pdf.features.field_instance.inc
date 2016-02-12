@@ -389,10 +389,10 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'settings' => array(
           'colorbox' => FALSE,
           'colorbox_link_text' => '',
-          'download' => 1,
+          'download' => 0,
           'pdf_height' => 300,
           'pdf_width' => 345,
-          'renderer' => 'google',
+          'renderer' => 'pdf-js',
         ),
         'type' => 'pdf_reader_file',
         'weight' => 9,

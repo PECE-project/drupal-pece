@@ -92,6 +92,12 @@ function pece_artifacts_pdf_strongarm() {
       'pece_fieldsite_reference' => array(
         'custom_settings' => FALSE,
       ),
+      'mini_teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'most_recent' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -174,32 +180,7 @@ function pece_artifacts_pdf_strongarm() {
         'default' => 0,
         'choice' => 0,
       ),
-      'full' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
       'teaser' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'rss' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'search_index' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'search_result' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'diff_standard' => array(
         'status' => 0,
         'default' => 0,
         'choice' => 0,
@@ -209,7 +190,12 @@ function pece_artifacts_pdf_strongarm() {
         'default' => 0,
         'choice' => 0,
       ),
-      'token' => array(
+      'mini_teaser' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'most_recent' => array(
         'status' => 0,
         'default' => 0,
         'choice' => 0,
