@@ -184,7 +184,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = '';
   $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['created']['date_format'] = 'long';
+  $handler->display->display_options['fields']['created']['date_format'] = 'panopoly_day';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
@@ -488,7 +488,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = '';
   $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['created']['date_format'] = 'long';
+  $handler->display->display_options['fields']['created']['date_format'] = 'panopoly_day';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
   /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
