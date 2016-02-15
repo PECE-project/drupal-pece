@@ -222,7 +222,7 @@ function pece_memo_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'format' => 'panopoly_time',
+    'format' => 'panopoly_day',
     'context' => 'panelizer',
     'override_title' => 0,
     'override_title_text' => '',
