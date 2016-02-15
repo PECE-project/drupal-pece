@@ -16,9 +16,16 @@
 .view-display-id-pece_user_artifact_annotations,
 .view-display-id-pece_question_artifact_annotions,
 .view-display-id-pece_question_annotations
-  [class*="views-row-"]
-    margin-bottom: 2em
-    border-bottom: 1px solid #ACACAC
+  > .view-content > .views-row
+    + .views-row > .views-row-inner
+      margin-top: 1em
+      border-top: 2px dotted #ddd
+
+    > .views-row-inner
+      padding-top: 2em
+
+    .field-name-body
+      margin-top: 1em
 
     h2
       display: inline-block
@@ -29,9 +36,6 @@
         margin-left: 1em
         padding: 0 1em
         background-color: #E2E2E2
-
-    div
-      padding-bottom: 1em
 
 .view-display-id-pece_question_artifact_annotions
   .view-footer a

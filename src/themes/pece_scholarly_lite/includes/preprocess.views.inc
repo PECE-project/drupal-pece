@@ -26,7 +26,7 @@ function pece_scholarly_lite_preprocess_views_view(&$variables) {
  */
 function pece_scholarly_lite_preprocess_views_view_unformatted(&$variables) {
   $view = $variables['view'];
-  $additional_row_classes = array('col-xs-12');
+  $additional_row_classes = array('col-xs-12', 'views-row');
 
   // View specific preprocessing.
   switch ($view->name) {
