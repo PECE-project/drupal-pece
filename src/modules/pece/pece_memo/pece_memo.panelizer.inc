@@ -247,15 +247,18 @@ function pece_memo_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'above',
+    'label' => 'hidden',
     'formatter' => 'entityreference_label',
-    'delta_limit' => 0,
+    'delta_limit' => '0',
     'delta_offset' => '0',
-    'delta_reversed' => FALSE,
+    'delta_reversed' => 0,
     'formatter_settings' => array(
-      'link' => FALSE,
+      'link' => 0,
     ),
     'context' => 'panelizer',
+    'override_title' => 1,
+    'override_title_text' => 'Groups audience',
+    'override_title_heading' => 'h3',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -322,7 +325,7 @@ function pece_memo_panelizer_defaults() {
   $display->content['new-e5ca1b4e-b0c0-49f0-8271-56350342f6d3'] = $pane;
   $display->panels['footer'][0] = 'new-e5ca1b4e-b0c0-49f0-8271-56350342f6d3';
   $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = 'new-4e462123-c132-40bb-b135-2c4f7419fdad';
+  $display->title_pane = '0';
   $panelizer->display = $display;
   $export['node:pece_memo:default'] = $panelizer;
 
