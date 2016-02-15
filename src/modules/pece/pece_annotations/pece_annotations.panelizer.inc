@@ -107,13 +107,16 @@ function pece_annotations_panelizer_defaults() {
   $pane->configuration = array(
     'label' => 'above',
     'formatter' => 'entityreference_label',
-    'delta_limit' => 0,
+    'delta_limit' => '0',
     'delta_offset' => '0',
-    'delta_reversed' => FALSE,
+    'delta_reversed' => 0,
     'formatter_settings' => array(
-      'link' => FALSE,
+      'link' => 1,
     ),
     'context' => 'panelizer',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -178,7 +181,7 @@ function pece_annotations_panelizer_defaults() {
   $display->content['new-73a6eab8-a57f-43fa-80cb-1b7c510e2069'] = $pane;
   $display->panels['center'][4] = 'new-73a6eab8-a57f-43fa-80cb-1b7c510e2069';
   $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = 'new-d6ccd130-c8e4-4165-9351-2aab864798df';
+  $display->title_pane = '0';
   $panelizer->display = $display;
   $export['node:pece_analytic:default'] = $panelizer;
 

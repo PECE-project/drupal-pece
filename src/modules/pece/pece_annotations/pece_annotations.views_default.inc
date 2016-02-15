@@ -470,7 +470,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['field_pece_struct_analytics']['relationship'] = 'field_pece_analytic_target_id';
   $handler->display->display_options['fields']['field_pece_struct_analytics']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_pece_struct_analytics']['settings'] = array(
-    'link' => 0,
+    'link' => 1,
   );
   $handler->display->display_options['fields']['field_pece_struct_analytics']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_pece_struct_analytics']['field_api_classes'] = TRUE;
