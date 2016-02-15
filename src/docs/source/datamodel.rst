@@ -6,74 +6,58 @@ PECE Data Model
 
 0. User Roles
 
-Researcher
-Access to restricted data
-Contributor
-Access to group contributed data
-Anonymous
-Public access data
+* Researcher: 
+  Access to restricted data
+
+* Contributor:
+  Access to group contributed data
+
+* Anonymous
+  Public access data
 
 1. Data Types
 
 List of data types, their fields, and their relations.
 References to other data types within a particular type are marked with italics.
 
-Projects
-URI
-Title (required)
-Description
-Institution (Field link com title, multiple, and required)
-Researchers
-Contributors
-Fieldsites
-Design and Substantive Logics
-Funding Agency (Field link w/ title, multiple, and required)
-Interview Request Form
-File Attachment (public)
-Consent Form 
-File Attachment (public)
-Start and End Date field (Only the start date is required)
+**Projects**
+* URI
+* Title (required)
+* Description
+* Institution (Field link com title, multiple, and required)
+* Researchers
+* Contributors
+* Fieldsites
+* Design and Substantive Logics
+* Funding Agency
+* Interview Request Form
+* File Attachment (public)
+* Consent Form 
+* Start and End Date field (Only the start date is required)
 
-Groups
-Contributors and researchers can create groups
-URI
-Title
-Description
-Banner Image
-File Attachment
-Email
-Members
-Researchers
-Contributors
-Citations
-Memos
-Field Diaries
-Artifacts
-Fieldnote
-Text
-PDF document
-Image
-Audio
-Video
-Website
-Forum
-Title
-Topic
-Title
-Author
-Comments
-Permissions
+**Groups**
+* URI
+* Title
+* Description
+* Banner Image
+* File Attachment
+* Email
+* Members
+* Researchers
+* Contributors
+* Citations
+* Memos
+* Field Diaries
 
-Fieldsites
-Contributor and researcher can create fieldsites
-Open to all users
+**Forums** 
+
+**Fieldsites**
 URI
 Title
 Description
 Location
 
-Design and Substantive Logics
-Admin and researchers can create design items
+**Design and Substantive Logics**
 URI
 Title
 Researchers
@@ -86,8 +70,9 @@ Type (Design/Substantive)
 Citation
 Tags
 
-Artifacts
-Fieldnote
+**Artifacts**
+
+**Fieldnote**
 URI
 Title
 Date of creation
@@ -104,7 +89,7 @@ License
 Permissions
 Tags
 
-Text
+**Text**
 URI
 Title
 Date of creation
@@ -125,7 +110,7 @@ Group Audience
 Groups
 Personal workspace
 
-PDF Document
+**PDF Document**
 URI
 Title
 Date of creation
@@ -144,7 +129,7 @@ Group Audience
 Groups
 Personal workspace
 
-Image
+**Image**
 URI
 Title
 Date of creation
@@ -167,7 +152,7 @@ Group Audience
 Groups
 Personal workspace
 
-Audio
+**Audio**
 URI
 Title
 Date of creation
@@ -190,7 +175,7 @@ Group Audience
 Groups
 Personal workspace
 
-Video
+**Video**
 URI
 Title
 Date of creation
@@ -213,7 +198,7 @@ Group Audience
 Groups
 Personal workspace
 
-Website
+**Website**
 URI
 Title
 Date of creation
@@ -232,7 +217,7 @@ Group Audience
 Groups
 Personal workspace
 
-Bundle
+**Bundle**
 URI
 Title
 Date of creation
@@ -257,7 +242,7 @@ Description
 Logo
 File attachment
 
-Memo
+**Memo**
 Title
 Text
 Author
@@ -267,7 +252,7 @@ Group Audience
 Groups
 Personal workspace
 
-Bibliography
+**Bibliography**
 (pulls all the biblio metadata from Zotero API)
 Biblio entry
 All the biblio fields, including keywords
@@ -276,8 +261,9 @@ Group Audience
 Groups
 Personal workspace
 
-
+----------------------
 PECE Annotation Scheme
+----------------------
 
 Structured Analytics (Question set)
 Description: Collection of Questions/Annotations
