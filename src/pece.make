@@ -355,6 +355,7 @@ projects[legal][version] = 1.5
 ; Profile 2
 projects[profile2][subdir] = contrib
 projects[profile2][version] = 1.3
+projects[profile2][patch][] = https://www.drupal.org/files/ctools-profile2_from_user-1273026-10.patch
 
 ; GMap
 projects[gmap][subdir] = contrib
