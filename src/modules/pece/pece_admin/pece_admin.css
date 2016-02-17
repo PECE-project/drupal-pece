@@ -28,6 +28,22 @@ body.adminimal-theme * {
 }
 
 /* =====================*/
+/* Administration Menu  */
+/* ===================== */
+
+#admin-menu .dropdown li ul {
+  display: block !important;
+  left: auto !important;
+
+  visibility: hidden !important;
+  transition: visibility 0s 250ms;
+}
+
+#admin-menu .dropdown li:hover > ul {
+  visibility: visible !important;
+}
+
+/* =====================*/
 /* Tables */
 /* ===================== */
 

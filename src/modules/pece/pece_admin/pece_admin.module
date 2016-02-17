@@ -4,3 +4,19 @@
  * Code for the PECE Admin.
  */
 
+/**
+ * Implements hook_page_build().
+ */
+function pece_admin_page_alter(&$page) {
+  if (!user_access('access administration menu') || admin_menu_suppress(FALSE)) {
+    return;
+  }
+  // Performance: Skip this entirely for AJAX requests.
+  if (strpos($_GET['q'], 'js/') === 0) {
+    return;
+  }
+
+  $path = drupal_get_path('module', 'pece_admin');
+  $attached = &$page['page_bottom']['admin_menu']['#attached'];
+  $attached['js'][$path . '/pece_admin.js'] = array('every_page' => TRUE);
+}
