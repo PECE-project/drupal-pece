@@ -67,3 +67,36 @@ function pece_set_permissions($permission_map = array()) {
     user_role_change_permissions($rid, $assigning_permissions);
   }
 }
+
+/**
+ * Helper method to reset an entity's panelizer state for a given view mode.
+ */
+function pece_reset_panelizer_entity_to_default($entity_type, $entity, $view_mode = NULL) {
+  $handler = panelizer_entity_plugin_get_handler($entity_type);
+  if (isset($entity->panelizer[$view_mode])) {
+    $handler->delete_entity_panelizer($entity, $view_mode);
+  }
+}
+
+/**
+ * Helper method to reset many entity's panelizer state for a given view mode.
+ */
+function pece_reset_panelizer_entities_to_default($entity_type, $entities, $view_mode = NULL) {
+  foreach ($entities as $entity) {
+    pece_reset_panelizer_entity_to_default($entity_type, $entity, $view_mode);
+  }
+}
+
+/**
+ * Rebuild a given component.
+ * @param $component
+ *        The name of the component type.
+ * @param $module
+ *        The module to rebuild the component from. Optional. Default to all.
+ */
+function pece_defaultconfig_component_rebuild_by_name($component, $module = FALSE) {
+  $components = defaultconfig_get_components();
+  if (!empty($components[$component])) {
+    defaultconfig_component_rebuild($components[$component], 'pece_profile');
+  }
+}
