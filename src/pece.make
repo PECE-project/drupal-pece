@@ -68,6 +68,9 @@ projects[views_litepager][subdir] = contrib
 projects[tvi][version] = 1.0-beta5
 projects[tvi][subdir] = contrib
 
+projects[better_exposed_filters][version] = 3.2
+projects[better_exposed_filters][subdir] = contrib
+
 ; =====================
 ; Administration
 ; =====================
