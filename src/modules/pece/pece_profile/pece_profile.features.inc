@@ -5,6 +5,15 @@
  */
 
 /**
+ * Implements hook_ctools_plugin_api().
+ */
+function pece_profile_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "panelizer" && $api == "panelizer") {
+    return array("version" => "1");
+  }
+}
+
+/**
  * Implements hook_default_profile2_type().
  */
 function pece_profile_default_profile2_type() {
