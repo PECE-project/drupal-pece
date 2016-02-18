@@ -5,6 +5,15 @@
  */
 
 /**
+ * Implements hook_ctools_plugin_api().
+ */
+function pece_profile_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "page_manager" && $api == "pages_default") {
+    return array("version" => "1");
+  }
+}
+
+/**
  * Implements hook_field_default_field_instances_alter().
  */
 function pece_profile_field_default_field_instances_alter(&$data) {
@@ -37,6 +46,7 @@ function pece_profile_default_page_manager_handlers_alter(&$data) {
         'id' => 1,
       ),
     ); /* WAS: '' */
+    $data['user_view_panelizer']->weight = -29; /* WAS: -100 */
   }
 }
 
@@ -183,10 +193,10 @@ function pece_profile_panelizer_defaults_override_alter(&$data) {
         ); /* WAS: '' */
     $data['user:user:default']->display->layout = 'pece_sidebar_right'; /* WAS: 'radix_phelan' */
     $data['user:user:default']->display->panels['content'] = array(
-      0 => 'new-fe105be4-3a50-449d-9200-2c518c310e7a',
-      1 => 'new-fb31bbec-c7f7-4076-94b9-ef518518a4a0',
-      2 => 'new-0b86ef08-4f95-4d30-9abb-dcf401f76a0b',
-      3 => 'new-067392e5-fa99-4463-ae00-6d0af59f7aef',
+      0 => 'new-067392e5-fa99-4463-ae00-6d0af59f7aef',
+      1 => 'new-0b86ef08-4f95-4d30-9abb-dcf401f76a0b',
+      2 => 'new-fb31bbec-c7f7-4076-94b9-ef518518a4a0',
+      3 => 'new-fe105be4-3a50-449d-9200-2c518c310e7a',
     ); /* WAS: '' */
     $data['user:user:default']->display->panels['sidebar'] = array(
       0 => 'new-23b1f4f1-cda8-42ca-880a-afc2ae92f3e9',
