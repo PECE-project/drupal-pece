@@ -16,3 +16,17 @@ function pece_profile_install() {
     ->condition('name', 'pece_profile')
     ->execute();
 }
+
+/**
+ * Resets users panelizer defaults.
+ */
+function pece_profile_update_7000() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  // Revert all default config.
+  pece_defaultconfig_component_rebuild_by_name('strongarm', 'pece_profile');
+
+  // Reset all overriden panelizer for users.
+  $users = entity_load('user', FALSE);
+  pece_reset_panelizer_entities_to_default('user', $users, 'page_manager');
+}
