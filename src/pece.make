@@ -160,8 +160,8 @@ projects[panopoly_widgets][subdir] = contrib
 projects[panopoly_admin][version] = 1.28
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_users][version] = 1.28
-projects[panopoly_users][subdir] = contrib
+; projects[panopoly_users][version] = 1.28
+; projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
 projects[panopoly_pages][version] = 1.28
