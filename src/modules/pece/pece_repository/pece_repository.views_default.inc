@@ -148,7 +148,10 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'panopoly_wysiwyg_text';
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '12';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: Content: Type */
@@ -159,13 +162,6 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['fields']['type']['exclude'] = TRUE;
   $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['type']['machine_name'] = TRUE;
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   /* Field: Content: Image */
   $handler->display->display_options['fields']['field_pece_media_image']['id'] = 'field_pece_media_image';
   $handler->display->display_options['fields']['field_pece_media_image']['table'] = 'field_data_field_pece_media_image';
@@ -181,6 +177,13 @@ function pece_repository_views_default_views() {
     'file_view_mode' => 'teaser',
   );
   $handler->display->display_options['fields']['field_pece_media_image']['field_api_classes'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -217,7 +220,6 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -242,7 +244,6 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['filters']['type_1']['value'] = array(
     'pece_artifact_audio' => 'pece_artifact_audio',
     'pece_artifact_bundle' => 'pece_artifact_bundle',
-    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
     'pece_artifact_text' => 'pece_artifact_text',
@@ -254,7 +255,7 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['filters']['type_1']['group'] = 1;
   $handler->display->display_options['filters']['type_1']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type_1']['expose']['operator_id'] = 'type_1_op';
-  $handler->display->display_options['filters']['type_1']['expose']['label'] = 'Content Type';
+  $handler->display->display_options['filters']['type_1']['expose']['label'] = 'Narrow by:';
   $handler->display->display_options['filters']['type_1']['expose']['operator'] = 'type_1_op';
   $handler->display->display_options['filters']['type_1']['expose']['identifier'] = 'type_1';
   $handler->display->display_options['filters']['type_1']['expose']['remember_roles'] = array(
@@ -297,8 +298,7 @@ function pece_repository_views_default_views() {
     t('next ›'),
     t('last »'),
     t('<i class="[type]"></i>'),
-    t('Title'),
-    t('Content Type'),
+    t('Narrow by:'),
     t('Type'),
     t('Page'),
   );
