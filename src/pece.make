@@ -71,6 +71,9 @@ projects[tvi][subdir] = contrib
 projects[better_exposed_filters][version] = 3.2
 projects[better_exposed_filters][subdir] = contrib
 
+projects[views_autocomplete_filters][version] = 1.2
+projects[views_autocomplete_filters][subdir] = contrib
+
 ; =====================
 ; Administration
 ; =====================
