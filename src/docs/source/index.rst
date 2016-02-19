@@ -4,8 +4,6 @@
 PECE Documentation
 ==================
 
-Contents:
-
 .. toctree::
    :maxdepth: 3 
 
