@@ -258,6 +258,7 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['filters']['type_1']['expose']['label'] = 'Narrow by:';
   $handler->display->display_options['filters']['type_1']['expose']['operator'] = 'type_1_op';
   $handler->display->display_options['filters']['type_1']['expose']['identifier'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['type_1']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
