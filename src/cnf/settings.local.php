@@ -15,3 +15,5 @@ $databases = array (
 );
 
 $drupal_hash_salt = 'SOME_REALLY_RANDOM_STRING';
+
+$conf['stage_file_proxy_origin'] = 'http://dev-pece.rpi.dropit.in';
