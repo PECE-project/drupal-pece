@@ -15,14 +15,14 @@ function pece_repository_views_default_views() {
   $view->description = '';
   $view->tag = 'PECE';
   $view->base_table = 'node';
-  $view->human_name = 'PECE - Repository';
+  $view->human_name = 'Repository';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'PECE - Repository';
+  $handler->display->display_options['title'] = 'Repository';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -258,7 +258,7 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['filters']['type_1']['group'] = 1;
   $handler->display->display_options['filters']['type_1']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type_1']['expose']['operator_id'] = 'type_1_op';
-  $handler->display->display_options['filters']['type_1']['expose']['label'] = 'Narrow by:';
+  $handler->display->display_options['filters']['type_1']['expose']['label'] = 'Filter by:';
   $handler->display->display_options['filters']['type_1']['expose']['operator'] = 'type_1_op';
   $handler->display->display_options['filters']['type_1']['expose']['identifier'] = 'type_1';
   $handler->display->display_options['filters']['type_1']['expose']['multiple'] = TRUE;
@@ -282,10 +282,10 @@ function pece_repository_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_1');
-  $handler->display->display_options['path'] = 'pece-repository';
+  $handler->display->display_options['path'] = 'repository';
   $translatables['pece_repository'] = array(
     t('Master'),
-    t('PECE - Repository'),
+    t('Repository'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -302,7 +302,7 @@ function pece_repository_views_default_views() {
     t('next ›'),
     t('last »'),
     t('<i class="[type]"></i>'),
-    t('Narrow by:'),
+    t('Filter by:'),
     t('Type'),
     t('Page'),
   );
