@@ -10,6 +10,43 @@
 function pece_profile_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'profile2-pece_profile_main-field_gpg_key'.
+  $field_instances['profile2-pece_profile_main-field_gpg_key'] = array(
+    'bundle' => 'pece_profile_main',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 7,
+      ),
+    ),
+    'entity_type' => 'profile2',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_gpg_key',
+    'label' => 'OpenPGP key',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'file_directory' => 'gpg',
+      'file_extensions' => 'pub',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'profile2-pece_profile_main-field_pece_biography'.
   $field_instances['profile2-pece_profile_main-field_pece_biography'] = array(
     'bundle' => 'pece_profile_main',
@@ -395,6 +432,7 @@ function pece_profile_field_default_field_instances() {
   t('Full name');
   t('Institution');
   t('Location');
+  t('OpenPGP key');
   t('Picture');
   t('Position');
   t('Tags');

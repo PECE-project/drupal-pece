@@ -175,6 +175,36 @@ function pece_profile_panelizer_defaults() {
   $display->content['new-f1199169-08bf-4ef6-aab7-30decf0fb092'] = $pane;
   $display->panels['content'][3] = 'new-f1199169-08bf-4ef6-aab7-30decf0fb092';
   $pane = new stdClass();
+  $pane->pid = 'new-5ed93436-5e5b-45e8-ae87-d0c72c83d2e5';
+  $pane->panel = 'content';
+  $pane->type = 'entity_field';
+  $pane->subtype = 'profile2:field_gpg_key';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'label' => 'title',
+    'formatter' => 'file_download_link',
+    'delta_limit' => 0,
+    'delta_offset' => '0',
+    'delta_reversed' => FALSE,
+    'formatter_settings' => array(
+      'text' => 'Download [file:name]',
+    ),
+    'context' => array(),
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array();
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 4;
+  $pane->locks = array();
+  $pane->uuid = '5ed93436-5e5b-45e8-ae87-d0c72c83d2e5';
+  $display->content['new-5ed93436-5e5b-45e8-ae87-d0c72c83d2e5'] = $pane;
+  $display->panels['content'][4] = 'new-5ed93436-5e5b-45e8-ae87-d0c72c83d2e5';
+  $pane = new stdClass();
   $pane->pid = 'new-fd495f89-8481-43a1-bde6-4855cf0989d3';
   $pane->panel = 'sidebar';
   $pane->type = 'entity_field';
