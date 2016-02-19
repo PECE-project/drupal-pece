@@ -26,11 +26,20 @@
   div.view-filters
     float: right
 
+  .item-list ul.pager
+    +breakpoint($breakpoint-min-sm)
+      margin-right: percentage(4 / 12)
+
+    +breakpoint($breakpoint-min-md)
+      margin-right: percentage(3 / 12)
+
   .view-content
     +make-xs-column(12)
     +make-sm-column(8)
     +make-md-column(9)
-    +make-row()
+
+    > div
+      +make-row()
 
     .views-row
       +make-xs-column(6)
@@ -38,15 +47,29 @@
       +make-md-column(3)
       text-align: center
       list-style: none
-      margin: 0
-
-    img, i
-      background-color: $color-primary
       display: inline-block
-      vertical-align: middle
-      line-height: 120px
-      width: 120px
-      height: 120px
+      float: none !important
+      margin: 0 0 20px -5px
+      vertical-align: top
+
+    img
+      background-color: white
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      display: block
+      overflow: hidden
+      object-fit: cover
+
+    // img, i
+    //   background-color: $color-primary
+    //   display: inline-block
+    //   vertical-align: middle
+    //   line-height: 120px
+    //   width: 120px
+    //   height: 120px
 
     .views-field-title
       color: $color-primary
