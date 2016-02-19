@@ -30,15 +30,6 @@ function pece_core_defaultconfig_user_default_permissions() {
     'module' => 'comment',
   );
 
-  // Exported permission: 'access user profiles'.
-  $permissions['access user profiles'] = array(
-    'name' => 'access user profiles',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'user',
-  );
-
   // Exported permission: 'administer comments'.
   $permissions['administer comments'] = array(
     'name' => 'administer comments',
