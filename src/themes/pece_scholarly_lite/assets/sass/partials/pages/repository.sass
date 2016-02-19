@@ -1,0 +1,56 @@
+.view-pece-repository
+
+  .reference-autocomplete
+    text-overflow: ellipsis
+    overflow: hidden
+    cursor: pointer
+    color: black
+
+  .view-filters
+    +make-xs-column(12)
+    +make-sm-column(4)
+    +make-md-column(3)
+
+  .views-exposed-form
+    margin-bottom: 2rem
+
+  .views-exposed-widget > label
+    font-size: 2.1rem
+
+  .views-widget-filter-title
+    float: none
+
+  // The float override needs to be in a more specific selector than the
+  // make-*-column() mixin because the mixin styles are written inside a media
+  // query.
+  div.view-filters
+    float: right
+
+  .view-content
+    +make-xs-column(12)
+    +make-sm-column(8)
+    +make-md-column(9)
+    +make-row()
+
+    .views-row
+      +make-xs-column(6)
+      +make-sm-column(4)
+      +make-md-column(3)
+      text-align: center
+      list-style: none
+      margin: 0
+
+    img, i
+      background-color: $color-primary
+      display: inline-block
+      vertical-align: middle
+      line-height: 120px
+      width: 120px
+      height: 120px
+
+    .views-field-title
+      color: $color-primary
+      text-overflow: ellipsis
+      white-space: nowrap
+      overflow: hidden
+      margin: 1rem 0 2rem 0
