@@ -201,7 +201,136 @@ function pece_profile_field_default_field_instances() {
   // Exported field_instance: 'profile2-pece_profile_main-field_pece_location'.
   $field_instances['profile2-pece_profile_main-field_pece_location'] = array(
     'bundle' => 'pece_profile_main',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'location_settings' => array(
+          'display' => array(
+            'hide' => array(
+              'additional' => 0,
+              'city' => 0,
+              'coords' => 0,
+              'country' => 0,
+              'country_name' => 0,
+              'locpick' => 0,
+              'map_link' => 0,
+              'name' => 0,
+              'postal_code' => 0,
+              'province' => 0,
+              'province_name' => 0,
+              'street' => 0,
+            ),
+          ),
+          'form' => array(
+            'fields' => array(
+              'additional' => array(
+                '#parents' => array(
+                  0 => 'field_pece_location',
+                  1 => 'und',
+                  2 => 0,
+                ),
+                'collect' => 1,
+                'default' => '',
+                'weight' => 6,
+              ),
+              'city' => array(
+                'collect' => 0,
+                'default' => '',
+                'weight' => 8,
+              ),
+              'country' => array(
+                '#parents' => array(
+                  0 => 'field_pece_location',
+                  1 => 'und',
+                  2 => 0,
+                ),
+                'collect' => 1,
+                'default' => 'us',
+                'weight' => 14,
+              ),
+              'delete_location' => array(
+                'default' => FALSE,
+                'nodiff' => TRUE,
+              ),
+              'is_primary' => array(
+                'default' => 0,
+              ),
+              'latitude' => array(
+                'default' => 0,
+              ),
+              'lid' => array(
+                'default' => FALSE,
+              ),
+              'locpick' => array(
+                '#parents' => array(
+                  0 => 'field_pece_location',
+                  1 => 'und',
+                  2 => 0,
+                ),
+                'collect' => 1,
+                'default' => FALSE,
+                'nodiff' => TRUE,
+                'weight' => 20,
+              ),
+              'longitude' => array(
+                'default' => 0,
+              ),
+              'name' => array(
+                '#parents' => array(
+                  0 => 'field_pece_location',
+                  1 => 'und',
+                  2 => 0,
+                ),
+                'collect' => 1,
+                'default' => '',
+                'weight' => 2,
+              ),
+              'postal_code' => array(
+                'collect' => 0,
+                'default' => '',
+                'weight' => 12,
+              ),
+              'province' => array(
+                '#parents' => array(
+                  0 => 'field_pece_location',
+                  1 => 'und',
+                  2 => 0,
+                ),
+                'collect' => 1,
+                'default' => '',
+                'weight' => 10,
+                'widget' => 'autocomplete',
+              ),
+              're_geocode_location' => array(
+                'default' => FALSE,
+                'nodiff' => TRUE,
+              ),
+              'source' => array(
+                'default' => 0,
+              ),
+              'street' => array(
+                '#parents' => array(
+                  0 => 'field_pece_location',
+                  1 => 'und',
+                  2 => 0,
+                ),
+                'collect' => 1,
+                'default' => '',
+                'weight' => 4,
+              ),
+            ),
+          ),
+        ),
+        'name' => '',
+        'street' => '',
+        'additional' => '',
+        'province' => '',
+        'country' => '',
+        'locpick' => array(
+          'user_latitude' => '',
+          'user_longitude' => '',
+        ),
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -214,6 +343,7 @@ function pece_profile_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'profile2',
+    'fences_wrapper' => 'div_div_div',
     'field_name' => 'field_pece_location',
     'label' => 'Location',
     'required' => 0,
