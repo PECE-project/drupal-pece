@@ -405,6 +405,7 @@ projects[search_krumo][subdir] = dev
 projects[module_builder][subdir] = dev
 projects[drupal_ipsum][subdir] = dev
 projects[environment_indicator][subdir] = dev
+projects[stage_file_proxy][subdir] = dev
 
 projects[seeds][type] = module
 projects[seeds][download][type] = git
