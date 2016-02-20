@@ -8,11 +8,9 @@ cross-scale ethnographic and historical research. The platform links
 researchers in new ways, enables new kinds of analyses and data visualization,
 and activates researchers’ engagement with public problems and diverse
 audiences. PECE is at the center of a research project that explores how
-digital infrastructure can be designed to support collaborative hermeneutics.
-
+digital infrastructure can be designed to support collaborative hermeneutics. 
 PECE has been built and is governed by an interdisciplinary design group
-centered at Rensselaer Polytechnic Institute (Troy, New York, USA). PECE will
-be available for download and use by other research groups by December 2015.
+centered at Rensselaer Polytechnic Institute (Troy, New York, USA). 
 
 While designed to support the particular needs of experimental ethnography
 projects, PECE provides a general model for the digital humanities, and
@@ -210,8 +208,7 @@ The research questions that orient the PECE project include the following:
 
 * How has experimental ethnography in different historical periods leveraged media technologies (photography, film, etc.), and what new possibilities are created by digital technologies? 
 
-* How do the digital implications of experimental ethnography align with conventional approaches to cyberinfrastructure development for research 
-communities? 
+* How do the digital implications of experimental ethnography align with conventional approaches to cyberinfrastructure development for research communities? 
 
 * How can experimental ethnography be extended (and possibly transformed) through new, digitally enabled modes of collaboration, analysis, and expression?  
 

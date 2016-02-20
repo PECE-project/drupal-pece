@@ -1,10 +1,8 @@
 .. PECE documentation master file, created by Luis Felipe R. Murillo
    sphinx-quickstart on Tue Jan 26 15:51:14 2016.
 
-PECE Documentation
-==================
-
-Contents:
+PECE 1.0 Documentation
+======================
 
 .. toctree::
    :maxdepth: 3 
@@ -16,7 +14,8 @@ Contents:
    Data Management <datamanagement>
    Legal Documents <legal>
    Data Model <datamodel>
-   Terminology <terminology> 
+   Terminology <terminology>
+   Team Members <team>
 
 Indices and tables
 ==================
