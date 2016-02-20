@@ -6,7 +6,7 @@ Roadmap for PECE 2.0
 
 * Multi-author, collaborative real-time writing
 
-* OpenGPG data encryption support
+* OpenPGP data encryption support
 
 * Improved "password strength" estimator
 
@@ -30,8 +30,8 @@ Open Issues
 
 * Improved metadata description based on community feedback
 
-* Integration with large-scale data repository and management solutions, such as iRODS 
+* Integration with large-scale data management solutions, such as iRODS 
 
 * Support for embedded metadata for multimedia files (ID3, EXIM, etc.)
 
-* Ability to store encrypted documents, such as consent forms and other research organization documents with sensitive personal data
+* Ability to store encrypted documents, such as consent forms and other research documents with sensitive data
