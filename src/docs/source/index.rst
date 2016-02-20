@@ -1,8 +1,8 @@
 .. PECE documentation master file, created by Luis Felipe R. Murillo
    sphinx-quickstart on Tue Jan 26 15:51:14 2016.
 
-PECE 1.0 Documentation
-======================
+PECE Documentation
+==================
 
 .. toctree::
    :maxdepth: 3 
