@@ -16,6 +16,7 @@ PECE Documentation
    Data Model <datamodel>
    Terminology <terminology>
    Team Members <team>
+   Roadmap for PECE 2.0 <todo>
 
 Indices and tables
 ==================
