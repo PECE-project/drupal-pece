@@ -20,4 +20,4 @@ PECE Terminology
 
 * **Entity:** instance of a digital object on the Drupal system (which is allowed to have any relationship to any type of content as well as to contain any field and metadata field). 
 
-* **Research Co-Participant:** human subject who collaborate with ethnographic projects. On PECE, he or she have the “collaborator” role assigned to them.
+* **Research Co-Participant:** human subject who collaborate with ethnographic projects. On PECE, he/she has the “collaborator” role.
