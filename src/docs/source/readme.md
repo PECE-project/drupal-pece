@@ -1,3 +1,3 @@
 # PECE Docs
 
-This directory includes the documentation for the platform.
+This directory contains the documentation for the platform.
