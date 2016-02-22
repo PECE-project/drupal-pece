@@ -332,8 +332,6 @@ projects[l10n_update][version] = 2.0
 ; Organic groups
 projects[og][subdir] = contrib
 projects[og][version] = 2.7
-projects[og_mailinglist][subdir] = contrib
-projects[og_mailinglist][version] = 1.1-alpha2
 
 ; Email
 projects[email][subdir] = contrib
@@ -419,3 +417,13 @@ projects[search_krumo][subdir] = dev
 ; =====================
 ; At the end, so that overrides are possible.includes[] = modules/sandbox/taller_entity/taller_entity.make
 ; includes[] = path/to/file.make
+
+; =====================
+; Disabled.
+; Here are the disabled modules to be deleted from make after all environments
+; have disabled them. We can not remove these modules right now because the
+; build runs before the updates, and it will be impossible to disable a module
+; that no longer exists.
+; =====================
+projects[og_mailinglist][subdir] = contrib
+projects[og_mailinglist][version] = 1.1-alpha2
