@@ -455,62 +455,6 @@ function pece_groups_field_default_field_instances() {
     'widget_type' => 'options_select',
   );
 
-  // Exported field_instance: 'node-pece_group-group_email'.
-  $field_instances['node-pece_group-group_email'] = array(
-    'bundle' => 'pece_group',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Choose an email address prefix for your group. It may contain only lowercase letters, numbers, dashes and underscores. e.g. "my-group".',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'og_mailinglist',
-        'settings' => array(),
-        'type' => 'group_email_link',
-        'weight' => 0,
-      ),
-      'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'mini_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 4,
-      ),
-      'most_recent' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'fences_wrapper' => 'div_div_div',
-    'field_name' => 'group_email',
-    'label' => 'Email',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'og_mailinglist',
-      'settings' => array(),
-      'type' => 'group_email',
-      'weight' => 1,
-    ),
-  );
-
   // Exported field_instance: 'node-pece_group-group_group'.
   $field_instances['node-pece_group-group_group'] = array(
     'bundle' => 'pece_group',
@@ -749,11 +693,9 @@ function pece_groups_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Audience');
-  t('Choose an email address prefix for your group. It may contain only lowercase letters, numbers, dashes and underscores. e.g. "my-group".');
   t('Content visibility');
   t('Description');
   t('Determine if this is an OG group.');
-  t('Email');
   t('Group');
   t('Project');
   t('Roles and permissions');
