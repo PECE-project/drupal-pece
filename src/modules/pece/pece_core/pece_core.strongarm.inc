@@ -121,7 +121,7 @@ function pece_core_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'file_entity_default_allowed_extensions';
-  $strongarm->value = 'jpg jpeg gif png pdf odt ods odp mp3 mp4 aac wav m4a ogg oga ogv weba webp webm mkv svg csv json xml txt';
+  $strongarm->value = 'jpg jpeg gif png pdf odt ods odp mp3 mp4 aac wav m4a ogg oga ogv weba webp webm mkv svg csv json xml pub asc txt';
   $export['file_entity_default_allowed_extensions'] = $strongarm;
 
   $strongarm = new stdClass();
