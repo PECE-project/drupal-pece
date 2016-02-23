@@ -69,3 +69,11 @@ Sebastian (sebas5384)
 
 `View the history of contributions <https://github.com/PECE-project/drupal-pece/graphs/contributors>`_
 
+
+Special Thanks
+--------------
+
+Research Data Alliance for support, Practical Policies Data Management working group for guidance, and
+the Cyber Law Clinic at Harvard, Berkman Center for Internet and Society for help us understand the 
+legal issues surrounding the platform.
+
