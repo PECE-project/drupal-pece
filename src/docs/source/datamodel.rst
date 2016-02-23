@@ -4,7 +4,7 @@ PECE Data Model
 
 **User Roles**
 
-* Researcher: 
+* Researcher:
   *Access to restricted data*
 
 * Contributor:
@@ -352,4 +352,3 @@ Reference to content where was created.
 Permissions
 License
 Tags
-
