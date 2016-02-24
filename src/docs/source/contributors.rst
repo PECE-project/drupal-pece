@@ -26,28 +26,28 @@ advance the goals of returning public funded research to the public. In
 practical terms, PECE applies these concepts by:
 
 * Enforcing the usage of open data and open document formats (such as open, web
-safe formats for multimedia files; open formats for documents such as the ODF,
-and established web standards such as JSON, XML, and RDF for data exchange and
-relationality);
+  safe formats for multimedia files; open formats for documents such as the
+  ODF, and established web standards such as JSON, XML, and RDF for data
+  exchange and relationality);
 
 * Providing technical conditions for data sharing by enforcing the usage of
-flexible copyright licenses, such as Creative Commons suite, when applicable
-for ethnographic data;
+  flexible copyright licenses, such as Creative Commons suite, when applicable
+  for ethnographic data;
 
 * Contributing code directly to Drupal projects, instead of forking code and
-working locally and not sharing bug fixes and improvements with the larger user
-and developer community;
+  working locally and not sharing bug fixes and improvements with the larger
+  user and developer community;
 
 * Participating and actively contributing to Free and Open Source projects as
-well as initiatives for Open Access in anthropology and STS, therefore bridging
-the Free and Open Source community efforts with academic disciplines and
-transdisciplinary contexts;
+  well as initiatives for Open Access in anthropology and STS, therefore
+  bridging the Free and Open Source community efforts with academic disciplines
+  and transdisciplinary contexts;
 
 * Drawing from the orientation of the Open Data community regarding
-best-practices for data sharing and open inter-exchange formats;
-Following the community work for debating and creating "codes of conduct"
+  best-practices for data sharing and open inter-exchange formats; Following
+  the community work for debating and creating "codes of conduct"
 
-Guidelines for New Contributors 
+Guidelines for New Contributors
 -------------------------------
 
 At this point, PECE is much more advanced and sophisticated in its theoretical
@@ -72,6 +72,13 @@ that:
 
 * Clearly explain what you trying to accomplish and why you are contributing a change
 
+In terms of attribution, all the contributors are recognized in the AUTHORS file and
+in the section "Team" of this document. For managing the legal aspects of the project,
+we have an non-profit education NGO, described in the legal section, which is listed
+as the copyright holders **for the purposes of its inversion copylefting all
+we do**). Therefore we request developers to sign a Collaborators' License Agreement
+(CLA). This document is described and can be downloaded in the legal section.
+
 
 Submitting your Contribution
 ----------------------------
@@ -87,6 +94,8 @@ changes:
 * Are there remaining tasks? What are they?
 
 * What part of the platform is impacted? API, data model, UI, etc.?
+
+* Describe the "acceptance criteria" in the comments of your pull request
 
 For further information, please `read the official Drupal documentation 
 <https://www.drupal.org/node/1155816>`_ on how to report an issue
