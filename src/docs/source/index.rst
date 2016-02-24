@@ -10,18 +10,11 @@ PECE Documentation
    What is PECE? <intro>
    Installing PECE <installation>
    Users' Guide <usersguide>
-   Contributors' Guide <contributors>
    Data Management <datamanagement>
    Legal Documents <legal>
+   Contributors' Guide <contributors>
+   Team Members <team>
    Data Model <datamodel>
    Terminology <terminology>
-   Team Members <team>
    Roadmap for PECE 2.0 <todo>
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
