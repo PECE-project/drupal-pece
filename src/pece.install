@@ -25,6 +25,17 @@ function pece_install() {
       'cache' => -1,
       'title' => '',
     ),
+    array(
+      'module' => 'system',
+      'delta' => 'main-menu',
+      'theme' => PECE_THEME_DEFAULT,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'header_top_left',
+      'pages' => '',
+      'cache' => -1,
+      'title' => '',
+    ),
   );
   $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
   foreach ($values as $record) {
