@@ -12,36 +12,11 @@ function pece_install() {
   // Allow visitor account creation, but with administrative approval.
   variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
 
+  // Set main menu links.
+  pece_set_primary_menu();
+
   // Set default blocks.
-  $values = array(
-    array(
-      'module' => 'system',
-      'delta' => 'user-menu',
-      'theme' => PECE_THEME_DEFAULT,
-      'status' => 1,
-      'weight' => 0,
-      'region' => 'header_top_right',
-      'pages' => '',
-      'cache' => -1,
-      'title' => '',
-    ),
-    array(
-      'module' => 'system',
-      'delta' => 'main-menu',
-      'theme' => PECE_THEME_DEFAULT,
-      'status' => 1,
-      'weight' => 0,
-      'region' => 'header_top_left',
-      'pages' => '',
-      'cache' => -1,
-      'title' => '',
-    ),
-  );
-  $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
-  foreach ($values as $record) {
-    $query->values($record);
-  }
-  $query->execute();
+  pece_setup_default_blocks();
 
   // @TODO: Temporary solution to not send email on user registration.
   variable_set('user_email_verification', 0);
@@ -117,9 +92,100 @@ function pece_manifest_define_analytics_perms() {
   $researcher = user_role_load_by_name('Researcher');
   $roles = array($contributor, $researcher);
 
+
   if (module_exists('taxonomy_access_fix')) {
     foreach ($roles as $role) {
       user_role_grant_permissions($role->rid, array('add terms in pece_structured_analytics'));
     }
   }
+}
+
+function pece_set_primary_menu() {
+  $base_config = array(
+      'menu_name' => 'main-menu',
+      'mlid' => NULL,
+  );
+
+  $items = array(
+      'home' => array(
+        'link_path' => drupal_get_normal_path('<front>'),
+        'link_title' => 'Home',
+        'weight' => 0,
+      ),
+      'about' => array(
+        'link_path' => drupal_get_normal_path('about'),
+        'link_title' => 'About',
+        'weight' => 1,
+      ),
+      'collaborate' => array(
+        'link_path' => drupal_get_normal_path('collaborate'),
+        'link_title' => 'Collaborate',
+        'weight' => 2,
+      ),
+      'analyze' => array(
+        'link_path' => drupal_get_normal_path('analyze'),
+        'link_title' => 'Analyze',
+        'weight' => 3,
+      ),
+      'discover' => array(
+        'link_path' => drupal_get_normal_path('discover'),
+        'link_title' => 'Discover',
+        'weight' => 4,
+      ),
+      'dashboard' => array(
+        'link_path' => drupal_get_normal_path('dashboard'),
+        'link_title' => 'Dashboard',
+        'weight' => 5,
+      ),
+  );
+
+  foreach ($items as $item) {
+    $item = $item + $base_config;
+    menu_link_save($item);
+  }
+  menu_cache_clear_all();
+}
+
+function pece_setup_default_blocks() {
+  // Set default blocks.
+  $values = array(
+    array(
+      'module' => 'system',
+      'delta' => 'main-menu',
+      'theme' => PECE_THEME_DEFAULT,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'header_top_left',
+      'pages' => '',
+      'cache' => -1,
+      'title' => '<none>',
+    ),
+    array(
+      'module' => 'search',
+      'delta' => 'form',
+      'theme' => PECE_THEME_DEFAULT,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'header_top_right',
+      'pages' => '',
+      'cache' => -1,
+      'title' => '<none>',
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'user-menu',
+      'theme' => PECE_THEME_DEFAULT,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'navigation',
+      'pages' => '',
+      'cache' => -1,
+      'title' => '<none>',
+    ),
+  );
+  $query = db_merge('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
+  foreach ($values as $record) {
+    $query->values($record);
+  }
+  $query->execute();
 }
