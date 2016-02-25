@@ -113,27 +113,27 @@ function pece_set_primary_menu() {
         'weight' => 0,
       ),
       'about' => array(
-        'link_path' => drupal_get_normal_path('about'),
+        'link_path' => 'about',
         'link_title' => 'About',
         'weight' => 1,
       ),
       'collaborate' => array(
-        'link_path' => drupal_get_normal_path('collaborate'),
+        'link_path' => 'collaborate',
         'link_title' => 'Collaborate',
         'weight' => 2,
       ),
       'analyze' => array(
-        'link_path' => drupal_get_normal_path('analyze'),
+        'link_path' => 'analyze',
         'link_title' => 'Analyze',
         'weight' => 3,
       ),
       'discover' => array(
-        'link_path' => drupal_get_normal_path('discover'),
+        'link_path' => 'discover',
         'link_title' => 'Discover',
         'weight' => 4,
       ),
       'dashboard' => array(
-        'link_path' => drupal_get_normal_path('dashboard'),
+        'link_path' => 'dashboard',
         'link_title' => 'Dashboard',
         'weight' => 5,
       ),
@@ -183,7 +183,7 @@ function pece_setup_default_blocks() {
       'title' => '<none>',
     ),
   );
-  $query = db_merge('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
+  $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
   foreach ($values as $record) {
     $query->values($record);
   }
