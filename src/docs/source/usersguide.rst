@@ -2,12 +2,12 @@
 Users' Guide
 ############
 
-This section describes how to use the platform.
+In the current version of PECE, each instance of the platform is run by the research group or university who installs and configures the PECE software to run on their servers. Plans are in the works to create a cluster of search servers to query platforms in later versions, in order to allow for data access across multiple instances of PECE. But for now, the creators of PECE have no control over how any particular instance of PECE is configured or administered. This is the responsibility of the institution, research group or individual installing and managing the platform.
 
 How to request an account
 -------------------------
 
-1. Navigate to the PECE.
+1. Navigate to your research group's instance of PECE.
 
 2. Click ‘Login’ in the top left corner. 
 
@@ -260,8 +260,9 @@ Content Glossary
   that have the Researcher role.  It will not be visible to those with a
   Contributor role.
 
-* Permissions – Private: The content will only be visible to you. * Project
-  reference: Use this field to associate the content with a project that has
+* Permissions – Private: The content will only be visible to you. 
+
+* Project reference: Use this field to associate the content with a project that has
   already been created in the platform. As you begin typing the name, the field
   should autocomplete.
 
