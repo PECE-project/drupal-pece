@@ -100,49 +100,15 @@ function pece_manifest_define_analytics_perms() {
   }
 }
 
-function pece_set_primary_menu() {
-  $base_config = array(
-      'menu_name' => 'main-menu',
-      'mlid' => NULL,
+function pece_set_menu_item() {
+  $item = array(
+    'link_path' => drupal_get_normal_path('<front>'),
+    'link_title' => t('Home'),
+    'weight' => 0,
+    'menu_name' => 'main-menu',
+    'mlid' => NULL,
   );
-
-  $items = array(
-      'home' => array(
-        'link_path' => drupal_get_normal_path('<front>'),
-        'link_title' => 'Home',
-        'weight' => 0,
-      ),
-      'about' => array(
-        'link_path' => 'about',
-        'link_title' => 'About',
-        'weight' => 1,
-      ),
-      'collaborate' => array(
-        'link_path' => 'collaborate',
-        'link_title' => 'Collaborate',
-        'weight' => 2,
-      ),
-      'analyze' => array(
-        'link_path' => 'analyze',
-        'link_title' => 'Analyze',
-        'weight' => 3,
-      ),
-      'discover' => array(
-        'link_path' => 'discover',
-        'link_title' => 'Discover',
-        'weight' => 4,
-      ),
-      'dashboard' => array(
-        'link_path' => 'dashboard',
-        'link_title' => 'Dashboard',
-        'weight' => 5,
-      ),
-  );
-
-  foreach ($items as $item) {
-    $item = $item + $base_config;
-    menu_link_save($item);
-  }
+  menu_link_save($item);
   menu_cache_clear_all();
 }
 
@@ -196,7 +162,7 @@ function pece_set_default_blocks() {
  */
 function pece_update_7001() {
   // Set main menu links.
-  pece_set_primary_menu();
+  pece_set_menu_item();
   // Set default blocks.
   pece_set_default_blocks();
 }

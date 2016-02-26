@@ -1,0 +1,45 @@
+<?php
+/**
+ * @file
+ * Installation code for the PECE About feature.
+ */
+
+ /**
+  * Implements hook_kw_manifests_info().
+  */
+ function pece_about_kw_manifests_info() {
+   $manifests = array();
+
+   $manifests['ensure_items'] = array(
+     'callback' => 'pece_about_ensure_items',
+   );
+
+   return $manifests;
+ }
+
+
+/**
+ * Create kraftwagen itemnames for each design logic type.
+ */
+function pece_about_ensure_items() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  module_load_include('inc', 'pece_about', 'pece_about.functions');
+
+  $path_to_module = drupal_get_path('module', 'pece_about');
+  $path_to_defaults = drupal_realpath($path_to_module . '/defaults');
+
+  $path_to_about_info_file = "{$path_to_defaults}/about.yml";
+
+  if (file_exists($path_to_about_info_file)) {
+    $about_info_raw = file_get_contents($path_to_about_info_file);
+    $about_info = pece_parse_yaml($about_info_raw);
+
+    // Setup pathauto for the design_logic entity type.
+    variable_set('pathauto_node_pece_about_page_pattern', '[node:title]');
+    pece_about_ensure_item('about', $about_info);
+    $node = node_load(kw_itemnames_item_id('node', 'about'));
+    $node->path['pathauto'] = 1;
+    node_save($node);
+    pece_about_set_menu_item();
+  }
+}
