@@ -76,6 +76,8 @@ describe('PECE Smoke test', function() {
 
   seeds.attach();
 
+  var mainMenuLinks = $('#block-system-main-menu a');
+  var aboutMenuLink = mainMenuLinks.all(by.cssContainingText('a', 'About'));
   var groupPane = $('.pane-pece-recent-groups-panel-pane-1');
   var artifactPane = $('.pane-pece-recent-artifacts-panel-pane-1');
   var tagsPane = $('.pane-tagclouds-3');
@@ -102,6 +104,15 @@ describe('PECE Smoke test', function() {
 
     expect(tagsPane.isDisplayed()).toBe(true);
     expect(firstTag.isDisplayed()).toBe(true);
+  });
+
+  it('check that user is directed to the about page', function() {
+    aboutMenuLink.click();
+
+    browser.getCurrentUrl().then(function(url) {
+      var currentUrl = /about/.test(url);
+      expect(currentUrl).toBe(true);
+    });
   });
 
   it('check that user is directed to the clicked group page', function() {
