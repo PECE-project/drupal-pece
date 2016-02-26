@@ -4,352 +4,446 @@ PECE Data Model
 
 **User Roles**
 
-* Researcher: 
-  *Access to restricted data*
+* Researcher:
+  Access to restricted data
 
 * Contributor:
-  *Access to group contributed data*
+  Access to group contributed data
 
-* Anonymous
-  *Public access data*
+* Anonymous:
+  Public access data
 
-----------
+**Observation:** Standard Drupal node fields (date, revision number, node id, etc.) are not described below.
+
 Data Types
 ----------
 
-List of data types, their fields, and their relations.
+List of data types, their fields (with machine names), and their relations.
 References to other data types within a particular type are marked with italics.
 
 **Projects**
 
-* URI
+* URI (field_pece_uri)
 
-* Title (required)
+* Title (title)
 
-* Description
+* Description (body)
 
-* Institution
+* Institution (field_basic_image_image)
 
-* Researchers
+* *Researchers* (field_pece_researchers)
 
-* Contributors
+* *Contributors* (field_pece_contributors)
 
-* Fieldsites
+* *Fieldsites* (pece_fieldsites)
 
-* Design and Substantive Logics
+* *Substantive Logics* (field_pece_substantive_logic)
 
-* Funding Agency
+* Funding Agency (field_pece_funding_agency)
 
-* Interview Request Form
+* Interview Request Form (field_basic_file_file)
 
-* File Attachment
+* Consent Form (field_pece_consent_form)
 
-* Consent Form 
+* Start and End Date (field_pece_start_end_date)
 
-* Start and End Date
+* Tags (field_pece_tags)
 
 
 **Groups**
 
-* URI
+* URI (field_pece_uri)
 
-* Title
+* Title (title)
 
-* Description
+* Description (body)
 
-* Banner Image
+* Group Settings (group_group)
 
-* File Attachment
+    * Group Visibility (group_access)
 
-* Email
+    * Group Audience (og_group_ref)
+
+    * Group Content visibility (group_content_accessList)
+
+    * Roles and Permissions (og_roles_permissions)
+
+    * Thumbnail Image (field_pece_media_image)
+
+* Location (locations)
+
+* Group Email
 
 * Members
 
-* Researchers
+    * *Researchers* (field_pece_researchers)
 
-* Contributors
+    * *Contributors* (field_pece_contributors)
 
-* Citations
+* *Citations*
 
-* Memos
+* *Memos*
 
-* Field Diaries
+* *Field Diaries*
 
-**Forums** 
 
-**Fieldsites**
+**Fieldsite**
 
-* URI
+* URI (field_pece_uri)
 
-* Title
+* Title (title)
 
-* Description
+* Description (body)
 
-* Location
+* *Researchers* (field_pece_researchers)
 
-**Design and Substantive Logics**
+* Location (locations)
 
-* URI
+* *Project* (field_pece_project_ref)
 
-* Title
 
-* Researchers
+**Design and Substantive Logics** (pece_design_logics and pece_substantive_logics)
 
-* Description
+* URI (field_pece_uri)
 
-* Image
+* Title (title)
 
-* Authors
+* *Researchers* (field_pece_researchers)
 
-* Researchers
+* Description (body)
 
-* Contributors
+* Image (field_basic_image_image)
 
-* Type (Design/Substantive)
+* Image Citation (field_pece_sub_logic_cit_link)
 
-* Citation
+* *Authors* (field_pece_authors)
 
-* Tags
+* *Researchers* (field_pece_researchers)
 
----------
+* *Contributors* (field_pece_contributors)
+
+* Type (Design or Substantive)
+
+* Tags (field_pece_tags)
+
+
 Artifacts
 ---------
 
 **Fieldnote**
 
-* URI
+* URI (field_pece_uri)
 
-* Title
+* Authors (field_pece_authors)
 
-* Date of creation
+* Contributor (if different from authors) (field_pece_contributors)
 
-* Date of publication
+* Text (body)
 
-* Date(s) of modification
+* Tags (field_pece_tags)
 
-* Revision number
+* Permissions (field_permissions)
 
-* Author
 
-* Contributor (if different from authors)
+**Annotations**
 
-* Text
+* URI (field_pece_uri)
 
-** Fieldsite**
+* Text (body)
 
-** Annotations**
+* *Artifact* (field_pece_artifact)
 
-* License
+* *Analytic* (field_pece_analytic)
 
-* Permissions
+* License (field_pece_license)
 
-* Tags
+* Tags (field_pece_tags)
+
+* Permissions (field_permissions)
+
 
 **Text**
-URI
-Title
-Date of creation
-Date of publication
-Date(s) of modification
-Revision number
-Authors
-Contributors (if different from authors)
-Fieldsite
-Annotations
-Critical Commentary
-License
-Permissions
-Tags
-Citation
-Group Audience
-Groups
-Personal workspace
+
+* URI (field_pece_uri)
+
+* Title (title)
+
+* Authors (field_pece_authors)
+
+* Contributors (if different from authors) (field_pece_contributors)
+
+* *Fieldsite* (field_pece_fieldsite)
+
+* Critical Commentary (field_pece_crit_commentary)
+
+* License (field_pece_license)
+
+* Permissions (field_permissions)
+
+* Tags (field_pece_tags)
+
+* Citation
+
+* Group Audience (og_group_ref)
+
 
 **PDF Document**
-URI
-Title
-Date of creation
-Date of publication
-Authors
-Collaborators (if different from authors)
-Fieldsite
-Annotations
-Critical Commentary
-License
-Permissions
-Tags
-Citation
-File attachment
-Group Audience
-Groups
-Personal workspace
+
+* URI (field_pece_uri)
+
+* Title (title)
+
+* Authors (field_pece_authors)
+
+* Contributors (if different from authors) (field_pece_contributors)
+
+* *Fieldsite* (field_pece_fieldsite)
+
+* Critical Commentary (field_pece_crit_commentary)
+
+* License (field_pece_license)
+
+* Permissions (field_permissions)
+
+* Tags (field_pece_tags)
+
+* Citation
+
+* PDF Document (field_pece_media_pdf)
+
+* Group Audience (og_group_ref)
+
 
 **Image**
-URI
-Title
-Date of creation
-Date of publication
-Date(s) of modification
-Revision number
-Author
-Author
-Collaborator (if different from author)
-Format
-Fieldsite
-Annotations
-Critical Commentary
-License
-Permissions
-Tags
-File attachment
-Location (if different from fieldsite)
-Group Audience
-Groups
-Personal workspace
+
+* URI (field_pece_uri)
+
+* Title (title)
+
+* Authors (field_pece_authors)
+
+* Contributors (if different from authors) (field_pece_contributors)
+
+* *Fieldsite* (field_pece_fieldsite)
+
+* Critical Commentary (field_pece_crit_commentary)
+
+* License (field_pece_license)
+
+* Permissions (field_permissions)
+
+* Tags (field_pece_tags)
+
+* Citation
+
+* Format (field_pece_file_format)
+
+* Image File (field_pece_media_image)
+
+* Location (if different from fieldsite) (locations)
+
+* Group Audience (og_group_ref)
+
 
 **Audio**
-URI
-Title
-Date of creation
-Date of publication
-Author
-Collaborator (if different from author)
-Format
-Duration
-Transcript
-Fieldsite
-Annotations
-Critical Commentary
-License
-Permissions
-Tags
-Citation
-File attachment
-Location (if different from fieldsite)
-Group Audience
-Groups
-Personal workspace
+
+* URI (field_pece_uri)
+
+* Title (title)
+
+* Authors (field_pece_authors)
+
+* Contributors (if different from authors) (field_pece_contributors)
+
+* *Fieldsite* (field_pece_fieldsite)
+
+* Critical Commentary (field_pece_crit_commentary)
+
+* License (field_pece_license)
+
+* Permissions (field_permissions)
+
+* Tags (field_pece_tags)
+
+* Format (field_pece_file_format)
+
+* Audio File (field_pece_media_audio)
+
+* Location (if different from fieldsite) (locations)
+
+* Group Audience (og_group_ref)
+
+* Format (field_pece_file_format) 
+
+* Duration (field_pece_media_duration)
+
+* Transcript (field_pece_transcript)
+
 
 **Video**
-URI
-Title
-Date of creation
-Date of publication
-Author
-Collaborator (if different from author)
-Format
-Duration
-Transcript
-Fieldsite
-Annotations
-Critical Commentary
-License
-Permissions
-Tags
-Citation
-File attachment
-Location (if different from fieldsite)
-Group Audience
-Groups
-Personal workspace
+
+* URI (field_pece_uri)
+
+* Title (title)
+
+* Authors (field_pece_authors)
+
+* Contributors (if different from authors) (field_pece_contributors)
+
+* *Fieldsite* (field_pece_fieldsite)
+
+* Critical Commentary (field_pece_crit_commentary)
+
+* License (field_pece_license)
+
+* Permissions (field_permissions)
+
+* Tags (field_pece_tags)
+
+* Format (field_pece_file_format)
+
+* Video File (field_pece_media_video)
+
+* Location (if different from fieldsite) (locations)
+
+* Group Audience (og_group_ref)
+
+* Format (field_pece_file_format) 
+
+* Duration (field_pece_media_duration)
+
+* Transcript (field_pece_transcript)
+
 
 **Website**
-URI
-Title
-Date of creation
-Date of publication
-Author
-Collaborator (if different from author)
-Fieldsite
-Annotations
-Critical Commentary
-License
-Permissions
-Tags
-Citation
-File attachment
-Group Audience
-Groups
-Personal workspace
+
+ URI (field_pece_uri)
+
+* Title (title)
+
+* Authors (field_pece_authors)
+
+* Contributors (if different from authors) (field_pece_contributors)
+
+* *Fieldsite* (field_pece_fieldsite)
+
+* Critical Commentary (field_pece_crit_commentary)
+
+* License (field_pece_license)
+
+* Permissions (field_permissions)
+
+* Tags (field_pece_tags)
+
+* Website URL (field_pece_website_url)
+
+* Location (if different from fieldsite) (locations)
+
+* Group Audience (og_group_ref)
+
 
 **Bundle**
-URI
-Title
-Date of creation
-Date of publication
-Author
-Collaborator (if different from author)
-Fieldsite
-Annotations
-License
-Permissions
-Tags
-Citation
-Reference to other artifacts (unlimited)
-Group Audience
-Groups
-Personal workspace
-License
-URI
-Name
-Type
-Description
-Logo
-File attachment
+
+* URI (field_pece_uri)
+
+* Title (title)
+
+* Authors (field_pece_authors)
+
+* Contributors (if different from authors) (field_pece_contributors)
+
+* *Artifacts* (field_pece_artifacts)
+
+* *Fieldsite* (field_pece_fieldsite)
+
+* Critical Commentary (field_pece_crit_commentary)
+
+* License (field_pece_license)
+
+* Permissions (field_permissions)
+
+* Tags (field_pece_tags)
+
+* Format (field_pece_file_format)
+
+* Location (if different from fieldsite) (locations)
+
+* Group Audience (og_group_ref)
+
 
 **Memo**
-Title
-Text
-Author
-Tags
-Comments
-Group Audience
-Groups
-Personal workspace
+
+* URI (field_pece_uri)
+
+* Title (title)
+
+* Text (body)
+
+* Authors (field_pece_authors)
+
+* Tags (field_pece_tags)
+
+* Comments
+
+* Group Audience (og_group_ref)
+
+* License (field_pece_license)
+
 
 **Bibliography**
-(pulls all the biblio metadata from Zotero API)
-Biblio entry
-All the biblio fields, including keywords
-Tags
-Group Audience
-Groups
-Personal workspace
 
-----------------------
+(biblio metadata from Zotero API)
+
+* Biblio entry
+    * All the biblio fields, including keywords
+
+* Tags (field_pece_tags)
+
+* Group Audience (og_group_ref)
+
+
 PECE Annotation Scheme
 ----------------------
 
-**Structured Analytics (Question set)**
+**Structured Analytics (Question Set)**
 
-Description: Collection of Questions/Annotations
+* Description: Collection of Questions / Annotations (type: Entity)
 
-Type: Entity
+* Title (title)
 
-Fields: 
+* Reference to Analytics / Questions
 
-* Title
+**Analytics (Questions)**
 
-* Reference to Questions
+* Description: Individual Questions
 
-**Analytics (questions)**
-Type: entity
-URI
-Title (Question)
-Author
-Date
-Tags
-Reference to Question Set
+* URI (field_pece_uri)
+
+* Title (Question)
+
+* Author
+
+* Tags (field_pece_tags)
+
+* Reference to Question Set
 
 **Annotation (“Response to a question”)**
-Type: entity
-URI
-Text body (long text)
-Author
-Date
-Reference to annotation question
-Reference to content where was created.
-Permissions
-License
-Tags
+
+* Description: Response to a Question
+
+* URI (field_pece_uri)
+
+* Text body (long text)
+
+* Author
+
+* Reference to annotation question
+
+* Reference to content where was created.
+
+* Permissions
+
+* License (field_pece_license)
+
+* Tags (field_pece_tags)
 
