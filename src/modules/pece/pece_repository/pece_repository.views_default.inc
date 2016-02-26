@@ -165,7 +165,7 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['fields']['type']['exclude'] = TRUE;
   $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['type']['machine_name'] = TRUE;
-  /* Field: Content: Thumbnail image */
+  /* Field: Content: Image */
   $handler->display->display_options['fields']['field_pece_media_image']['id'] = 'field_pece_media_image';
   $handler->display->display_options['fields']['field_pece_media_image']['table'] = 'field_data_field_pece_media_image';
   $handler->display->display_options['fields']['field_pece_media_image']['field'] = 'field_pece_media_image';
@@ -282,7 +282,7 @@ function pece_repository_views_default_views() {
 
   /* Display: Repository */
   $handler = $view->new_display('page', 'Repository', 'respository_page');
-  $handler->display->display_options['path'] = 'repository';
+  $handler->display->display_options['path'] = 'repo';
 
   /* Display: Groups */
   $handler = $view->new_display('page', 'Groups', 'repository_group_page');
@@ -330,55 +330,7 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 1;
-  $handler->display->display_options['path'] = 'repository/groups';
-
-  /* Display: Memos */
-  $handler = $view->new_display('page', 'Memos', 'repository_memos_page');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Memos';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'pece_memo' => 'pece_memo',
-  );
-  $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Title */
-  $handler->display->display_options['filters']['title']['id'] = 'title';
-  $handler->display->display_options['filters']['title']['table'] = 'node';
-  $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'contains';
-  $handler->display->display_options['filters']['title']['group'] = 1;
-  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
-  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    6 => 0,
-    5 => 0,
-  );
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_filter'] = 1;
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_items'] = '10';
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_min_chars'] = '0';
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_field'] = 'title';
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_suggestion'] = 1;
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 1;
-  $handler->display->display_options['path'] = 'repository/memos';
+  $handler->display->display_options['path'] = 'repo/groups';
 
   /* Display: Artifacts */
   $handler = $view->new_display('page', 'Artifacts', 'repository_artifacts_page');
@@ -469,7 +421,7 @@ function pece_repository_views_default_views() {
     2 => array(),
     3 => array(),
   );
-  $handler->display->display_options['path'] = 'repository/artifacts';
+  $handler->display->display_options['path'] = 'repo/artifacts';
   $translatables['pece_repository'] = array(
     t('Master'),
     t('Repository'),
@@ -492,7 +444,6 @@ function pece_repository_views_default_views() {
     t('Filter by:'),
     t('Type'),
     t('Groups'),
-    t('Memos'),
     t('Artifacts'),
   );
   $export['pece_repository'] = $view;
