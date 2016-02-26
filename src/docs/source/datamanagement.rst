@@ -2,11 +2,9 @@
 Data Management
 ###############
 
-This section describes the data management policies that were designed
-and implemented for PECE. Since February 2015, the PECE Design Group has been
-working to implement the recommendations of the Research Data Alliance's (RDA)
-"Practical Policies" Working Group (WG-PP) with a focus on the needs of
-empirical humanities researchers.
+This section describes the data management policies that were designed to be used with each instance of PECE. Since February 2015, the PECE Design Group has been working to implement the recommendations of the Research Data Alliance’s (RDA) “Practical Policies” Working Group (WG-PP) with a focus on the needs of empirical humanities researchers.
+
+Please note that the technical details below reflect how the PECE platform was designed. If you are an instance administrator, we hope that the details below can help explain why PECE is presently designed and configured in the way that it is. That said, we leave it to each administrator to determine for themselves whether these settings are appropriate for their research or institution. Given Drupal's flexibility, different research groups can change the pre-configuration of PECE as they see fit on each and every detail of the data management policies we describe.
 
 
 Definition
@@ -333,22 +331,7 @@ allows for automated tasks of contextual metadata extraction via scripts.
 Data Security and Access Control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Data access control policies specify who has access and what type of access is
-granted for any data object of a digital collection. In this regard, PECE was
-designed to support and promote collaborative ethnographic projects which have
-particular needs when it comes to data archiving, security, and sharing: our
-data is produced through interactions with human subjects, and therefore, carry
-potential privacy issues that cannot be solved with automated protocols for
-assessing risks of publication. It is the responsibility of PECE researchers of
-a particular project to discuss with their research co-participants (called
-"subjects" in the language of IRB committees) and make informed decisions
-regarding what can be shared publicly, what can be shared privately with other
-PECE users, and what should not be uploaded to the Internet at all. Broadly
-speaking, all the data we produce as ethnographers must be carefully evaluated
-before it can be shared in the context of a research collaboration or the
-Internet. In our legal documents, terms of service and privacy statement, we
-discuss in detail the responsibility PECE users and administrators have when
-dealing with ethnographic data and setting permissions.
+PECE is designed to allow administrators to set data access control policies, in order to specify who has access and what type of access is granted for any data object of a digital collection. PECE was designed to support and promote collaborative ethnographic projects which have particular needs when it comes to data archiving, security, and sharing: as researchers, our data is produced through interactions with human subjects, and therefore, carry potential privacy issues that cannot be solved with automated protocols for assessing risks of publication. It is the responsibility of PECE instance administrators to set appropriate policies for their projects and institutions, and for researchers of a particular project to discuss with their research co-participants (called “subjects” in the language of IRB committees) and make informed decisions regarding what can be shared publicly, what can be shared privately with other PECE users, and what should not be uploaded to the Internet at all. As set forth in our **Legal Documents** section, the designers of PECE have no control over how these systems are set up in any given instance of PECE, and make no representations or warranties as to the data security of the PECE platform.
 
 Given the special needs of ethnographic data management, we designed four
 levels of access based on four basic user roles:
@@ -427,17 +410,7 @@ questions that are presented to the subject in the consent form. The fluxogram
 below demonstrates how to identify and translate from specific answers to
 privacy and anonymity questions into the permissions system.
 
-For cases of extreme sensitivity involving potential damage to research
-subjects, we advise PECE users to refrain from uploading content to the
-Internet. PECE cannot secure data beyond normal security expectations of
-state-of-the-art web technologies. That is, PECE cannot guarantee nor
-protect privacy when secure storage and data encryption are not used, despite
-the effort our design team has made to enforce the usage of strong passwords
-and data encryption of our backups that are stored in different machines for
-redundancy. Issues of data security will be further discussed under the section
-on "Data Control". For now, it is important to observe the need for using the
-category of "non-uploadable material" when applicable to sensitive data as
-described in the graph below:
+For cases of extreme sensitivity involving potential damage to research subjects, we advise PECE users to refrain from uploading content to the Internet at all. While the PECE platform was designed with security in mind, the PECE Design Team cannot guarantee the security or privacy of any content that is uploaded to the Internet. It is important to observe the need for using the category of “non-uploadable material” when applicable to sensitive data, as described below.
 
 .. figure:: ../img/figure2.png
    :align:  center
