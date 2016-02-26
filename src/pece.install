@@ -16,7 +16,7 @@ function pece_install() {
   pece_set_primary_menu();
 
   // Set default blocks.
-  pece_setup_default_blocks();
+  pece_set_default_blocks();
 
   // @TODO: Temporary solution to not send email on user registration.
   variable_set('user_email_verification', 0);
@@ -146,7 +146,7 @@ function pece_set_primary_menu() {
   menu_cache_clear_all();
 }
 
-function pece_setup_default_blocks() {
+function pece_set_default_blocks() {
   // Set default blocks.
   $values = array(
     array(
@@ -183,9 +183,20 @@ function pece_setup_default_blocks() {
       'title' => '<none>',
     ),
   );
-  $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
   foreach ($values as $record) {
-    $query->values($record);
+    $query = db_update('block')
+      ->fields($record)
+      ->condition('theme', PECE_THEME_DEFAULT)
+      ->condition('delta', $record['delta']);
+    $query->execute();
   }
-  $query->execute();
+}
+/**
+ * Add main menu links and default block.
+ */
+function pece_update_7001() {
+  // Set main menu links.
+  pece_set_primary_menu();
+  // Set default blocks.
+  pece_set_default_blocks();
 }
