@@ -78,6 +78,9 @@ describe('PECE Smoke test', function() {
 
   var mainMenuLinks = $('#block-system-main-menu a');
   var aboutMenuLink = mainMenuLinks.all(by.cssContainingText('a', 'About'));
+  var collaborateMenuLink = mainMenuLinks.all(by.cssContainingText('a', 'Collaborate'));
+  var analyzeMenuLink = mainMenuLinks.all(by.cssContainingText('a', 'Analyze'));
+  var discoverMenuLink = mainMenuLinks.all(by.cssContainingText('a', 'Discover'));
   var groupPane = $('.pane-pece-recent-groups-panel-pane-1');
   var artifactPane = $('.pane-pece-recent-artifacts-panel-pane-1');
   var tagsPane = $('.pane-tagclouds-3');
@@ -106,11 +109,38 @@ describe('PECE Smoke test', function() {
     expect(firstTag.isDisplayed()).toBe(true);
   });
 
-  it('check that user is directed to the about page', function() {
+  it('check that user is directed to the About page', function() {
     aboutMenuLink.click();
 
     browser.getCurrentUrl().then(function(url) {
       var currentUrl = /about/.test(url);
+      expect(currentUrl).toBe(true);
+    });
+  });
+
+  it('check that user is directed to the Collaborate page', function() {
+    collaborateMenuLink.click();
+
+    browser.getCurrentUrl().then(function(url) {
+      var currentUrl = /repo/groups/.test(url);
+      expect(currentUrl).toBe(true);
+    });
+  });
+
+  it('check that user is directed to the Analyze page', function() {
+    analyzeMenuLink.click();
+
+    browser.getCurrentUrl().then(function(url) {
+      var currentUrl = /repo/artifacts/.test(url);
+      expect(currentUrl).toBe(true);
+    });
+  });
+
+  it('check that user is directed to the Discover page', function() {
+    discoverMenuLink.click();
+
+    browser.getCurrentUrl().then(function(url) {
+      var currentUrl = /repo/.test(url);
       expect(currentUrl).toBe(true);
     });
   });
