@@ -394,6 +394,13 @@ projects[taxonomy_access_fix][version] = 2.2
 projects[pdf_reader][subdir] = contrib
 projects[pdf_reader][version] = 1.0-rc6
 
+; Amber
+projects[amber][subdir] = contrib
+projects[amber][type] = file
+projects[amber][download][url] = https://github.com/berkmancenter/amber_drupal/archive/v1.4.zip
+projects[amber][download][subtree] = amber_drupal-1.4
+
+
 ; =====================
 ; Development Modules
 ; =====================
