@@ -76,11 +76,10 @@ describe('PECE Smoke test', function() {
 
   seeds.attach();
 
-  var mainMenuLinks = $('#block-system-main-menu a');
-  var aboutMenuLink = mainMenuLinks.all(by.cssContainingText('a', 'About'));
-  var collaborateMenuLink = mainMenuLinks.all(by.cssContainingText('a', 'Collaborate'));
-  var analyzeMenuLink = mainMenuLinks.all(by.cssContainingText('a', 'Analyze'));
-  var discoverMenuLink = mainMenuLinks.all(by.cssContainingText('a', 'Discover'));
+  var aboutMenuLink = element(by.cssContainingText('#block-system-main-menu a', 'About'));
+  var collaborateMenuLink = element(by.cssContainingText('#block-system-main-menu a', 'Collaborate'));
+  var analyzeMenuLink = element(by.cssContainingText('#block-system-main-menu a', 'Analyze'));
+  var discoverMenuLink = element(by.cssContainingText('#block-system-main-menu a', 'Discover'));
   var groupPane = $('.pane-pece-recent-groups-panel-pane-1');
   var artifactPane = $('.pane-pece-recent-artifacts-panel-pane-1');
   var tagsPane = $('.pane-tagclouds-3');
@@ -122,7 +121,7 @@ describe('PECE Smoke test', function() {
     collaborateMenuLink.click();
 
     browser.getCurrentUrl().then(function(url) {
-      var currentUrl = /repo/groups/.test(url);
+      var currentUrl = /repo\/groups/.test(url);
       expect(currentUrl).toBe(true);
     });
   });
@@ -131,7 +130,7 @@ describe('PECE Smoke test', function() {
     analyzeMenuLink.click();
 
     browser.getCurrentUrl().then(function(url) {
-      var currentUrl = /repo/artifacts/.test(url);
+      var currentUrl = /repo\/artifacts/.test(url);
       expect(currentUrl).toBe(true);
     });
   });
