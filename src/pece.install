@@ -25,6 +25,13 @@ function pece_install() {
   // Enable default permissions for system roles.
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
+
+  $manifests = hook_kw_manifests_info();
+  if (!empty($manifests)) {
+    foreach ($manifests as $manifest) {
+      kw_manifests_run($manifest);
+    }
+  }
 }
 
 
@@ -150,7 +157,7 @@ function pece_set_default_blocks() {
     ),
   );
   foreach ($values as $record) {
-    $query = db_update('block')
+    $query = db_merge('block')
       ->fields($record)
       ->condition('theme', PECE_THEME_DEFAULT)
       ->condition('delta', $record['delta']);
