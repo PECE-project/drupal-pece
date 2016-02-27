@@ -64,7 +64,7 @@ that:
 
 * Are kept small, doing one and only one thing
 
-* Do not change the syntax style, which follows  the Drupal community
+* Do not change the coding style, `which follows the Drupal community <https://www.drupal.org/coding-standards>`_.
 
 * Lines are kept below 80 columns for readability
 
