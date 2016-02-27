@@ -76,8 +76,7 @@ In terms of attribution, all the contributors are recognized in the AUTHORS file
 in the section "Team" of this document. For managing the legal aspects of the project,
 we have an non-profit education NGO, described in the legal section, which is listed
 as the copyright holders **for the purposes of its inversion copylefting all
-we do**). Therefore we request developers to sign a Collaborators' License Agreement
-(CLA). This document is described and can be downloaded in the legal section.
+we do**).
 
 
 Submitting your Contribution
