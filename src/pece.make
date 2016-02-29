@@ -313,6 +313,18 @@ libraries[spyc][download][type] = file
 libraries[spyc][download][url] = https://github.com/mustangostang/spyc/archive/0.5.1.zip
 libraries[spyc][directory_name] = spyc-master
 
+libraries[imgareaselect][download][type] = file
+libraries[imgareaselect][download][url] = http://odyniec.net/projects/imgareaselect/jquery.imgareaselect-0.9.10.zip
+libraries[imgareaselect][directory_name] = jquery.imgareaselect
+
+libraries[aws][download][type] = file
+libraries[aws][download][url] = https://github.com/aws/aws-sdk-php/releases/download/3.15.5/aws.zip
+libraries[aws][directory_name] = aws
+
+libraries[cycle][download][type] = file
+libraries[cycle][download][url] = http://malsup.github.io/min/jquery.cycle.all.min.js
+libraries[cycle][directory_name] = jquery.cycle
+
 ; =====================
 ; Other
 ; =====================
@@ -394,23 +406,35 @@ projects[taxonomy_access_fix][version] = 2.2
 projects[pdf_reader][subdir] = contrib
 projects[pdf_reader][version] = 1.0-rc6
 
-; =====================
-; Development Modules
-; =====================
+; Amber
+projects[amber][type] = module
+projects[amber][download][type] = git
+projects[amber][download][url] = "https://github.com/berkmancenter/amber_drupal.git"
+projects[amber][subdir] = contrib
 
-projects[devel][subdir] = dev
-projects[search_krumo][subdir] = dev
-projects[module_builder][subdir] = dev
-projects[drupal_ipsum][subdir] = dev
-projects[environment_indicator][subdir] = dev
-projects[stage_file_proxy][subdir] = dev
+; Backup and Migrate
+projects[backup_migrate][subdir] = contrib
+projects[backup_migrate][version] = 3.1
 
-projects[seeds][type] = module
-projects[seeds][download][type] = git
-projects[seeds][download][url] = https://github.com/lucasconstantino/drupal-seeds.git
-projects[seeds][subdir] = dev
+; Backup and Migrate - SFTP support
+projects[backup_migrate_sftp][subdir] = contrib
+projects[backup_migrate_sftp][version] = 1.0
 
-projects[search_krumo][subdir] = dev
+; 403-Redirect
+projects[r4032login][subdir] = contrib
+projects[r4032login][version] = 1.8
+
+; Services
+projects[services][subdir] = contrib
+projects[services][version] = 3.12
+
+; Services Views
+projects[services_views][subdir] = contrib
+projects[services_views][version] = 1.1
+
+; Views Slideshow
+projects[views_slideshow][subdir] = contrib
+projects[views_slideshow][version] = 3.1
 
 ; =====================
 ; Imports
