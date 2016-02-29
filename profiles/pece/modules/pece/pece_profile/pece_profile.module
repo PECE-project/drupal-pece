@@ -1,0 +1,54 @@
+<?php
+/**
+ * @file
+ * Code for the pece_profile feature.
+ */
+
+include_once 'pece_profile.functions.inc';
+include_once 'pece_profile.features.inc';
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_profile_form_user_register_form_alter(&$form, &$form_state) {
+  // Hide the profile email field in order to autofill it based on the user's
+  // account email.
+  $form['profile_pece_profile_main']['field_pece_email']['#attributes']['class'][] = 'element-invisible';
+  array_unshift($form['#validate'], 'pece_profile_user_register_form_validate');
+}
+
+function pece_profile_user_register_form_validate($form, &$form_state) {
+  $email = $form_state['values']['mail'];
+  // @TODO: Needs to support multilanguage.
+  $element['#parents'] = array('profile_pece_profile_main', 'field_pece_email', LANGUAGE_NONE, 0, 'email');
+  form_set_value($element, $email, $form_state);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_profile_form_user_profile_form_alter(&$form, &$form_state) {
+  // We're not using Panopoly's user fields.
+  $form['field_user_about']['#access'] = FALSE;
+}
+
+/**
+ * Implements hook_modules_enabled().
+ *
+ * This hook is implemented to assign some default permissions for PECE profile.
+ * This has to be done in this hook to run after both features
+ * and defaultconfig which power the functionality. Hopefully a more general solution
+ * can be found. More information - http://drupal.org/node/1837312.
+ */
+function pece_profile_modules_enabled($modules) {
+
+  // Only run this logic if we are executing as part of an install profile
+  // and only for this particular module.
+  if (drupal_installation_attempted() && in_array('pece_profile', $modules)) {
+
+    // Define some permissions for the authentcated user role
+    user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('view own pece_profile_main profile'));
+    user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('edit own pece_profile_main profile'));
+    user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('view any pece_profile_main profile'));
+  }
+}

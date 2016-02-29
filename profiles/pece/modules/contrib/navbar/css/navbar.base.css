@@ -1,0 +1,219 @@
+/**
+ * @file navbar.base.css
+ *
+ *
+ * Aggressive resets so we can achieve a consistent look in hostile CSS
+ * environments.
+ */
+html.js #navbar-administration,
+html .drupal-navbar * {
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+html.js #navbar-administration {
+  font-size: small;
+  line-height: 1;
+}
+html.js .drupal-navbar {
+  left: 0; /* LTR */
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+/**
+ * Very specific overrides for Drupal system CSS.
+ */
+.drupal-navbar li,
+.drupal-navbar .menu li,
+.drupal-navbar .item-list,
+.drupal-navbar .item-list li,
+.drupal-navbar .menu li.expanded {
+  list-style-type: none;
+  list-style-image: none;
+}
+.drupal-navbar .menu li {
+  margin: 0;
+  padding-top: 0;
+}
+.js .drupal-navbar .navbar-bar .navbar-tab,
+.js .drupal-navbar .menu li {
+  display: block;
+}
+.js .drupal-navbar .navbar-bar .navbar-tab,
+.js .drupal-navbar .navbar-tray-horizontal .navbar-tab  {
+  float: left; /* LTR */
+}
+.js .drupal-navbar a {
+  display: block;
+  line-height: 1;
+}
+/**
+ * Administration menu.
+ */
+.js .drupal-navbar .navbar-bar {
+  left: 0; /* LTR */
+  position: absolute;
+  top: 0;
+  z-index: 1002;
+  width: 100%;
+}
+@media only screen {
+  .js .drupal-navbar .navbar-bar .navbar-tab,
+  .js .drupal-navbar .navbar-tray li {
+    float: none; /* LTR */
+  }
+}
+@media only screen and (min-width: 16.5em) {
+  .js .drupal-navbar .navbar-bar .navbar-tab,
+  .js .drupal-navbar .navbar-tray-horizontal li {
+    float: left; /* LTR */
+  }
+}
+@media only screen and (min-width: 28.125em) {
+  .js .drupal-navbar .navbar-bar {
+    position: fixed;
+  }
+}
+
+/**
+ * navbar tray.
+ */
+.js .drupal-navbar .navbar-tray {
+  display: none;
+}
+.drupal-navbar .navbar-tray {
+  bottom: auto;
+  position: absolute;
+  z-index: 1001;
+}
+.drupal-navbar .navbar-tray-horizontal {
+  width: 100%;
+}
+.drupal-navbar .navbar-tray-vertical,
+.drupal-navbar .navbar-tray-vertical > .navbar-lining:before {
+  bottom: 0;
+  width: 240px;
+  width: 15rem;
+}
+.drupal-navbar .navbar-tray-vertical {
+  left: -100%; /* LTR */
+  position: absolute;
+}
+.drupal-navbar .navbar-tray-horizontal {
+  left: 0; /* LTR */
+  height: 0;
+  /* Set one higher than the contextual links gear. */
+  z-index: 1000;
+}
+.drupal-navbar .navbar-tray .navbar-lining {
+  position: relative;
+}
+.drupal-navbar .navbar-tray-vertical > .navbar-lining,
+.drupal-navbar .navbar-tray-vertical > .navbar-lining:before {
+  left: -100%; /* LTR */
+  min-height: 100%;
+  position: absolute;
+  width: 100%;
+}
+.drupal-navbar .navbar-tray-vertical > .navbar-lining:before {
+  bottom: 0;
+  content: '';
+  display: none;
+  height: 100%;
+  /* Support for devices that do not support position fixed. */
+  position: absolute;
+  position: fixed;
+  top: 0;
+  z-index: -1;
+}
+.drupal-navbar .navbar-tray.active {
+  display: block;
+}
+.drupal-navbar .navbar-tray-horizontal.active {
+  height: auto;
+}
+.drupal-navbar .navbar-tray-vertical.active,
+.drupal-navbar .navbar-tray-vertical.active > .navbar-lining {
+  left: 0; /* LTR */
+  top: 0;
+}
+/* Make vertical navbar tray scroll with page for touch devices. */
+.touch .drupal-navbar .navbar-tray-vertical.active,
+.touch .drupal-navbar .navbar-tray-vertical.active > .navbar-lining {
+  bottom: auto;
+  top: auto;
+}
+.drupal-navbar .navbar-tray-horizontal .menu li ul {
+  display: none;
+}
+@media only screen {
+  .drupal-navbar .navbar-tray-vertical,
+  .drupal-navbar .navbar-tray-vertical > .navbar-lining:before {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 16.5em) {
+  .drupal-navbar .navbar-tray-vertical,
+  .drupal-navbar .navbar-tray-vertical > .navbar-lining:before {
+    width: 240px;
+    width: 15rem;
+  }
+  .drupal-navbar .navbar-tray-vertical.active > .navbar-lining:before {
+    display: block;
+    left: -1px; /* LTR */
+  }
+}
+@media only screen and (min-width: 28.125em) {
+  .drupal-navbar .navbar-tray.navbar-tray-horizontal,
+  .drupal-navbar .navbar-tray.navbar-tray-vertical {
+    position: fixed;
+  }
+  .drupal-navbar .navbar-tray.navbar-tray-vertical {
+    bottom: 0;
+  }
+  .drupal-navbar .navbar-tray-vertical {
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+/**
+ * At larger screen sizes, the tray pushes the page content.
+ */
+@media only screen and (min-width: 38.125em) {
+  body.navbar-tray-open.navbar-vertical {
+    margin-left: 240px; /* LTR */
+    margin-left: 15rem; /* LTR */
+  }
+}
+/**
+ * navbar tray orientation toggle.
+ *
+ * Hide the orientation toggle from browsers that do not interpret
+ * media queries. They get a standard horizontal navbar.
+ */
+.drupal-navbar .navbar-tray-horizontal .navbar-toggle-orientation {
+  display: none;
+}
+@media only screen {
+  .drupal-navbar .navbar-tray .navbar-toggle-orientation {
+    display: none;
+  }
+}
+@media only screen and (min-width: 16.5em)   {
+  .drupal-navbar .navbar-tray .navbar-toggle-orientation {
+    display: block;
+  }
+}
+.drupal-navbar .navbar-tray-horizontal .navbar-toggle-orientation {
+  bottom: 0;
+  position: absolute;
+  right: 0; /* LTR */
+  top: 0;
+}
+.drupal-navbar .navbar-tray-vertical .navbar-toggle-orientation {
+  float: right; /* LTR */
+  width: 100%;
+}

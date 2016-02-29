@@ -1,0 +1,201 @@
+<?php
+
+/**
+ * Provide the code to collect and execute manifests.
+ */
+
+/**
+ * Load the information about all available manifests.
+ *
+ * This function is very resource intensive the first time it is called. It 
+ * loads quite a collection of extra files, runs a depth-first search on a 
+ * directed graph to resolve dependencies and detects missing dependencies. It
+ * statically caches the result of this operation. So, only call this, when you
+ * really need it.
+ *
+ * @return
+ *   Associative array with keys being manifest ids and values an associative
+ *   array with all information about the manifest. Most important keys are
+ *   * `module` and `name` which together uniquely identify the manifest. The
+ *     manifest id is just a simple string derivative from these values, which
+ *     we only need because PHP does not support non-scalar array keys. Consult
+ *     `kw_manifests_manifest_id` for more information about how the 
+ *      manifest id is derived from these properties.
+ *   * `callback` is the function that needs to be called to run the manifest.
+ *   * `file` is optionally the file that should be included before running the
+ *     manifest.
+ *   * `file path` is optionally the path where the file should be loaded from.
+ *      If not given drupal_get_path('module', $module) is assumed.
+ *   * `dependencies` is an optional array of dependencies. Each value is an
+ *     associative array with a `module` and `name` pair.
+ *   * `missing` if given and TRUE means that this manifest does not really 
+ *     exist but is injected to indicate an unresolvable dependency.
+ *   * `applicable` should always be given. If FALSE, this manifest should not
+ *     be run, because it does not exist (`missing` = TRUE) or it has 
+ *     unresolvable dependencies.
+ *   * `missing dependencies` is an array with dependencies that could not be 
+ *     resolved. It follows that same structure as `dependencies`. If there are
+ *     are no unresolved dependencies, the array is empty.
+ *   Some keys are provided by the drupal_depth_first_search function of which
+ *   a few may come in handy
+ *   * `paths` is an associative array of all manifests that depend of this 
+ *     manifest. Key is the manifest id and value is an associative array with a
+ *     `module` and `name` pair.
+ *   * `component` is an identifier that can help to tell completely unrelated
+ *     manifests apart. If two manifests share their value of `component` they
+ *     are somehow dependent of each other. If they don't then they can be run
+ *     completely independent from each other. The value of `component` is 
+ *     manifest id of one of the manifest that have this value. It is hardly 
+ *     predictable which manifest id the algorithm will choose.
+ */
+function kw_manifests_info() {
+  $manifest_info = &drupal_static(__FUNCTION__);
+
+  if (!isset($manifest_info)) {
+    // load all .install files
+    module_load_all_includes('install');
+
+    $manifest_info = array();
+    $dependencies = array();
+
+    // find all manifests
+    $modules = module_implements(__FUNCTION__);
+    foreach ($modules as $module) {
+      if (!($result = module_invoke($module, __FUNCTION__))) {
+        continue;
+      }
+
+      foreach ($result as $name => $info) {
+        $info = $info + array('name' => $name, 'module' => $module);
+        $manifest_info[kw_manifests_manifest_id($info)] = $info;
+        
+        if (!isset($info['dependencies'])) {
+          continue;
+        }
+
+        // register dependencies, so we can easily add it to the info later
+        foreach ($info['dependencies'] as $dependency) {
+          $dependencies[] = array(
+            'from' => array('module' => $module, 'name' => $name),
+            'to' => $dependency
+          );
+        }
+      }
+    }
+
+    // dependency resolving using directed graph (see update.inc and graph.inc). The
+    // dependency edges should originate from the dependency and not from the 
+    // dependent, even though this is a little counter intuitive.
+    foreach ($dependencies as $dep_info) {
+      // if depency is not available, create a stub for it, so we can mark 
+      // manifests as not applicable.
+      if (!isset($manifest_info[kw_manifests_manifest_id($dep_info['to'])])) {
+        $manifest_info[kw_manifests_manifest_id($dep_info['to'])] = $dep_info['to'] + array('missing' => TRUE);
+      }
+
+      // add the dependency edge to the graph
+      $manifest_info[kw_manifests_manifest_id($dep_info['to'])]['edges'][kw_manifests_manifest_id($dep_info['from'])] = $dep_info['from'];
+    }
+
+    // resolve the graph
+    require_once DRUPAL_ROOT . '/includes/graph.inc';
+    drupal_depth_first_search($manifest_info);
+    uasort($manifest_info, 'drupal_sort_weight');
+
+    // mark not applicable manifests so we can create an error message for them
+    // somewhere else
+    foreach ($manifest_info as $key => &$info) {
+      if (!empty($info['missing'])) {
+        $info['applicable'] = FALSE;
+        foreach (array_keys($info['paths']) as $dependent) {
+          $manifest_info[$dependent]['applicable'] = FALSE;
+          $manifest_info[$dependent]['missing dependencies'][] = array('module' => $info['module'], 'name' => $info['name']);
+        }
+      }
+      elseif (!isset($info['applicable'])) {
+        $info['applicable'] = TRUE;
+        $info['missing dependencies'] = array();
+      }
+    }
+
+    drupal_alter(__FUNCTION__, $manifest_info);
+  }
+
+  return $manifest_info;
+}
+
+/**
+ * Run a manifest.
+ *
+ * Check for unresolved dependencies for a manifest, load the required files and
+ * try to execute the callback. 
+ *
+ * @param $info
+ *   The manifest info array, as returned from kw_manifests_info().
+ *
+ * @return
+ *   FALSE or something that casts to FALSE in case of errors. In case of 
+ *   success TRUE or something that casts to TRUE.
+ */
+function kw_manifests_run($info) {
+  if (empty($info['applicable'])) {
+    if (!empty($info['missing'])) {
+      drupal_set_message(t("Manifest %name of %module is not applicable. It was marked as dependency for %dependants, but does not exist.", array('%name' => $info['name'], '%module' => $info['module'], '%dependants' => implode(', ', array_map('kw_manifests_manifest_id', $info['paths'])))), 'error');
+      return FALSE;
+    } elseif (!empty($info['missing dependencies'])) {
+      drupal_set_message(t("Manifest %name of %module is not applicable, because it has unresolved dependencies: %deps", array('%name' => $info['name'], '%module' => $info['module'], '%deps' => implode(', ', array_map('kw_manifests_manifest_id', $info['missing dependencies'])))), 'error');
+      return FALSE;
+    } else {
+      drupal_set_message(t("Manifest %name of %module is not applicable", array('%name' => $info['name'], '%module' => $info['module'])), 'error');
+      return FALSE;
+    }
+    
+    return FALSE;
+  }
+
+  module_load_include('install', $info['module']);
+
+  if (isset($info['file'])) {
+    $path = isset($info['file path']) ? $info['file path'] : drupal_get_path('module', $info['module']);
+    $filepath = $path . DIRECTORY_SEPARATOR . $info['file'];
+    if (is_file($filepath)) {
+      require_once $filepath;
+    } else {
+      drupal_set_message(t("Could not include file %file for manifest %name of %module", array('%file' => $filepath, '%name' => $info['name'], '%module' => $info['module'])), 'error');
+      return FALSE;
+    }
+  }
+
+  if (!isset($info['callback'])) {
+    drupal_set_message(t("No callback given for manifest %name of %module", array('%name' => $info['name'], '%module' => $info['module'])), 'error');
+    return FALSE;
+  } elseif (!function_exists($info['callback'])) {
+    drupal_set_message(t("Given callback %callback for manifest %name of %module", array('%callback', $info['callback'], '%name' => $info['name'], '%module' => $info['module'])), 'error');
+    return FALSE;
+  }
+
+  $args = array();
+  if (isset($info['callback arguments'])) {
+    if (!is_array($info['callback arguments'])) {
+      drupal_set_message(t("Callback arguments for manifest %name of %module is not an array", array('%name' => $info['name'], '%module' => $info['module'])), 'error');
+      return FALSE;
+    }
+    $args = $info['callback arguments'];
+  }
+
+  $result = call_user_func_array($info['callback'], $args);
+  return isset($result) ? $result : TRUE;
+}
+
+/**
+ * Create a manifest id from a manifest info array.
+ *
+ * @param $info
+ *   Associative array with at least `module` and `name`.
+ *
+ * @return
+ *   The manifest id.
+ */
+function kw_manifests_manifest_id($info) {
+  return "{$info['module']}-{$info['name']}";
+}

@@ -1,0 +1,872 @@
+<?php
+
+define("AMBER_ACTION_NONE",0);
+define("AMBER_ACTION_HOVER",1);
+define("AMBER_ACTION_POPUP",2);
+define("AMBER_ACTION_CACHE",3);
+define("AMBER_STATUS_UP","up");
+define("AMBER_STATUS_DOWN","down");
+
+define("AMBER_BACKEND_LOCAL",0);
+define("AMBER_BACKEND_PERMA",1);
+define("AMBER_BACKEND_INTERNET_ARCHIVE",2);
+define("AMBER_BACKEND_AMAZON_S3",3);
+
+define("AMBER_EXTERNAL_AVAILABILITY_NONE",0);
+define("AMBER_EXTERNAL_AVAILABILITY_NETCLERK",1);
+define("AMBER_REPORT_AVAILABILITY_NONE",0);
+define("AMBER_REPORT_AVAILABILITY_NETCLERK",1);
+
+define("AMBER_QUEUE_CACHE", "amber_cache");
+define("AMBER_QUEUE_CHECK_NEW", "amber_check_new");
+define("AMBER_QUEUE_CHECK_EXISTING","amber_check_existing");
+
+define("AMBER_VAR_LAST_CHECK_RUN","amber_last_check_run");
+
+module_load_include('inc', 'amber', 'amber.batch');
+amber_get_alternate_fetchers();
+/**
+ * Get an initialized iAmberStorage implementation, and cache it in a static variable
+ * Used to retrieve the currently selected iAmberStorage implementation that's being
+ * used to save new snapshots
+ * @return iAmberStorage
+ */
+function amber_get_storage() {
+
+  $storage = &drupal_static(__FUNCTION__);
+  if (!isset($storage)) {
+    $storage_id = variable_get('amber_backend', 0);
+    $storage = amber_get_storage_instance($storage_id);
+  }
+  return $storage;
+}
+
+/**
+ * Get an AmberStorage module of the same type that was used to store a particular snapshot
+ * @param  string $id of an item
+ * @param  array $providers list of provider IDs to look in
+ * @return iAmberStorage
+ */
+function amber_get_storage_for_item($id, $providers) {
+  $item = amber_get_status()->get_cache_by_id($id, $providers);
+  return ($item) ? amber_get_storage_instance($item['provider']) : null;
+}
+
+/**
+ * Select and initialize an implementation of iAmberStorage based on the backend ID
+ * @param  int $backend ID of the storage engine to use
+ * @return iAmberStorage
+ */
+function amber_get_storage_instance($backend) {
+  switch ($backend) {
+    case AMBER_BACKEND_LOCAL:
+      $file_path = join(DIRECTORY_SEPARATOR,
+        array(DRUPAL_ROOT, variable_get('amber_storage_location', 'sites/default/files/amber')));
+      $storage = new AmberStorage($file_path);
+      break;
+    case AMBER_BACKEND_PERMA:
+      $storage = new PermaStorage(array());
+      break;
+    case AMBER_BACKEND_INTERNET_ARCHIVE:
+      $storage = new InternetArchiveStorage(array());
+      break;
+    case AMBER_BACKEND_AMAZON_S3:
+      $library = libraries_load('aws');
+      if (!$library || !$library['loaded']) {
+        throw new RuntimeException("AWS Library not available");
+      }
+      $storage = new AmazonS3Storage(array(
+        'access_key' => variable_get('amber_aws_access_key',''),
+        'secret_key' => variable_get('amber_aws_secret_key',''),
+        'bucket' => variable_get('amber_aws_bucket',''),
+        'region' => variable_get('amber_aws_region','us-east-1'),
+      ));
+      break;
+  }
+  return $storage;
+}
+
+/**
+ * Return an initialized AmberFetcher module
+ * @return IAmberFetcher
+ */
+function amber_get_fetcher() {
+  $fetcher = &drupal_static(__FUNCTION__);
+  if (!isset($fetcher)) {
+    $fetcher = _amber_get_fetcher_instance(variable_get('amber_backend', 0));
+  }
+  return $fetcher;
+}
+
+/**
+ * Return a list of alternate fetchers
+ * @return array of IAmberFetcher
+ */
+function amber_get_alternate_fetchers() {
+  $fetchers = &drupal_static(__FUNCTION__);
+  if (!isset($fetchers)) {
+    $fetchers = array();
+    $backends = variable_get('amber_alternate_backends', array());
+    foreach ($backends as $value) {
+      $fetchers[] = _amber_get_fetcher_instance($value);
+    }
+  }
+  return $fetchers;
+}
+
+
+/**
+ * Select and initialize an implementation of iAmberFetcher based on the backend ID
+ * @param  int $backend ID of the storage engine to use
+ * @return iAmberStorage
+ */
+function _amber_get_fetcher_instance($backend) {
+  switch ($backend) {
+    case AMBER_BACKEND_LOCAL:
+      $fetcher = new AmberFetcher(amber_get_storage_instance($backend), array(
+        'amber_max_file' => variable_get('amber_max_file',1000),
+        'header_text' => t("You are viewing a snapshot of <a style='font-weight:bold !important; color:white !important' href='{{url}}'>{{url}}</a> created on {{date}}"),
+        'excluded_content_types' => explode(PHP_EOL,variable_get("amber_excluded_formats","")),
+      ));
+      break;
+    case AMBER_BACKEND_PERMA:
+      $fetcher = new PermaFetcher(amber_get_storage_instance($backend), array(
+        'perma_api_key' => variable_get('amber_perma_apikey',''),
+        'perma_archive_url' => variable_get('amber_perma_server_url', 'https://perma.cc'),
+        'perma_api_url' => variable_get('amber_perma_server_api_url', 'https://api.perma.cc',''),
+      ));
+      break;
+    case AMBER_BACKEND_INTERNET_ARCHIVE:
+      $fetcher = new InternetArchiveFetcher(amber_get_storage_instance($backend), array());
+      break;
+    case AMBER_BACKEND_AMAZON_S3:
+      $fetcher = new AmberFetcher(amber_get_storage_instance($backend), array(
+        'amber_max_file' => 5000000, /* Max size for S3 file */
+        'header_text' => t("You are viewing a snapshot of <a style='font-weight:bold !important; color:white !important' href='{{url}}'>{{url}}</a> created on {{date}}"),
+        'excluded_content_types' => explode(PHP_EOL,variable_get("amber_excluded_formats","")),
+      ));      
+      break;
+    default:
+      $fetcher = null;
+  }
+  return $fetcher;
+}
+
+
+/**
+ * Return an initialized AmberChecker module
+ * @return IAmberChecker
+ */
+function amber_get_checker() {
+  $checker = &drupal_static(__FUNCTION__);
+  if (!isset($checker)) {
+    $checker = new AmberChecker();
+  }
+  return $checker;
+}
+
+/**
+ * Return an initialized AmberStatus module
+ * @return IAmberStatus
+ */
+function amber_get_status() {
+  $status = &drupal_static(__FUNCTION__);
+  if (!isset($status)) {
+    $db = Database::getConnection();
+    $status = new AmberStatus(new AmberPDO($db));
+  }
+  return $status;
+}
+
+/**
+ * Return an initialized AmberAvailability module
+ * @return IAmberAvailability
+ */
+function amber_get_availability() {
+  $lookup = &drupal_static(__FUNCTION__);
+  if (!isset($lookup)) {
+    $lookup = new AmberNetClerkAvailability(array());
+  }
+  return $lookup;
+}
+
+/**
+ * Return an initialized AmberMementoService
+ * @return IAmberMementoService
+ */
+function amber_get_memento_service() {
+  $service = &drupal_static(__FUNCTION__);
+  if (!isset($service)) {
+    $service = new AmberMementoService(array(
+      'server_url' => variable_get('amber_timegate', "http://timetravel.mementoweb.org/timegate/")));
+  }
+  return $service;
+}
+
+/**
+ * Implements hook_init()
+ */
+function amber_init() {
+  if (variable_get('amber_enabled', 1)) {
+    drupal_add_js(array(
+      'amber' => array(
+        'name' => variable_get('site_name',t('This site')),
+        'lookup_availability' => 
+            (variable_get('amber_external_availability', AMBER_EXTERNAL_AVAILABILITY_NETCLERK) == AMBER_EXTERNAL_AVAILABILITY_NETCLERK)
+      )), 'setting');
+  }
+}
+
+/**
+ *  Implements hook_permission()
+**/
+function amber_permission() {
+  return array('administer amber' => array(
+      'title' => t('Administer Amber'),
+      'description' => t('Adminster Amber storage and display of site snapshots'),
+    )
+  );  
+}
+
+/**
+ * Implements hook_library_info()
+ * Defined by the 'libraries' module
+ */
+function amber_libraries_info() {
+  $libraries['aws'] = array(
+    'name' => 'AWS',
+    'vendor url' => 'https://aws.amazon.com/sdk-for-php/',
+    'download url' => 'https://github.com/aws/aws-sdk-php',
+    'version' => 3,
+    'files' => array(
+      'php' => array('aws-autoloader.php')
+      )
+    );
+  return $libraries;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function amber_menu() {
+  $items = array();
+  $items['admin/config/content/amber'] = array(
+    'title' => 'Amber',
+    'description' => 'Configuration for the Amber module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('amber_config_form'),
+    'access arguments' => array('administer amber'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'amber.admin.inc',
+  );
+  $items['admin/reports/amber'] = array(
+    'title' => 'Amber Dashboard',
+    'description' => 'Amber Dashboard',
+    'file' => 'amber.pages.inc',
+    'page callback' => array('drupal_get_form'),
+    'page arguments' => array('amber_dashboard_summary_form'),
+    'access arguments' => array('administer amber'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/reports/amber/summary'] = array(
+    'title' => 'Summary',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 1,
+  );
+  $items['admin/reports/amber/detail'] = array(
+    'title' => 'Detail',
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'amber.pages.inc',
+    'page callback' => array('drupal_get_form'),
+    'page arguments' => array('amber_dashboard_detail_form'),
+    'access arguments' => array('administer amber'),
+    'weight' => 2,
+  );
+  $items['admin/reports/amber/delete'] = array(
+    'title' => 'Delete',
+    'description' => 'Delete a snapshot from storage',
+    'file' => 'amber.pages.inc',
+    'page callback' => array('amber_dashboard_delete_item'),
+    'access arguments' => array('administer amber'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/reports/amber/blacklist'] = array(
+    'title' => 'Exclude',
+    'description' => 'Exclude a site from being cached',
+    'file' => 'amber.pages.inc',
+    'page callback' => array('amber_dashboard_blacklist_site'),
+    'access arguments' => array('administer amber'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['amber/cache'] = array(
+    'title' => 'Amber Cache Frame',
+    'description' => 'Display cached items within an iframe',
+    'page callback' => 'amber_retrieve_cache_item_frame',
+    'access callback' => true,
+    'delivery callback' => 'amber_deliver_cache_item_frame',
+    'type' => MENU_CALLBACK,
+  );
+  $items['amber/cacheframe'] = array(
+    'title' => 'Amber Cache',
+    'description' => 'Retrieve items from the cache',
+    'page callback' => 'amber_retrieve_cache_item',
+    'access callback' => true,
+    'delivery callback' => 'amber_deliver_cache_item',
+    'type' => MENU_CALLBACK,
+  );
+  $items['amber/cacheframe/%/assets'] = array(
+    'title' => 'Amber Cache Assets',
+    'description' => 'Retrieve assets related to an item from the cache',
+    'page callback' => 'amber_retrieve_cache_asset',
+    'page arguments' => array(2),
+    'access callback' => true,
+    'delivery callback' => 'amber_deliver_cache_item',
+    'type' => MENU_CALLBACK,
+  );
+  $items['node/%/cache'] = array(
+    'title' => 'Preserve links now',
+    'page callback' => 'amber_cache_node_now',
+    'page arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'access arguments' => array('administer amber'),
+    'weight' => 20,
+  );
+  $items['amber/logcacheview'] = array(
+    'title' => 'Log cache view',    
+    'description' => 'Log that an externally stored cache has been clicked',
+    'page callback' => 'amber_log_cache_view',
+    'access callback' => true,
+    'delivery callback' => 'amber_deliver_cache_view_result',    
+    'type' => MENU_CALLBACK,
+  );
+  $items['amber/status'] = array(
+    'title' => 'Get status for URLs',    
+    'description' => 'Get availability status for a list of URLs through a POST request',
+    'page callback' => 'amber_get_url_status',
+    'access callback' => true,
+    'delivery callback' => 'amber_deliver_json',    
+    'type' => MENU_CALLBACK,
+  );
+  $items['amber/memento'] = array(
+    'title' => 'Get memento for a URL',    
+    'description' => 'Get a memento for a URLs',
+    'page callback' => 'amber_get_memento',
+    'access callback' => true,
+    'delivery callback' => 'amber_deliver_json',    
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Figure out what behavior to set, based on the status of the page and the configuration settings
+ * @param bool $status true if the site is up, false if the site is down
+ * @param bool $country true if we should be using the country-specific behavior settings
+ * @return null|string
+ */
+function _amber_get_behavior($status, $country = false) {
+  $result = $status ? "up" : "down";
+
+  $c = $country ? "country_" : "";
+  if ($status) {
+    $action = variable_get("amber_${c}available_action", AMBER_ACTION_NONE);
+    switch ($action) {
+      case AMBER_ACTION_NONE:
+        $result = NULL;
+        break;
+      case AMBER_ACTION_HOVER:
+        $result .= " hover:" . variable_get("amber_${c}available_action_hover", 2);
+        break;
+      case AMBER_ACTION_POPUP:
+        $result .= " popup";
+        break;
+      }
+  } else {
+    $action = variable_get("amber_${c}unavailable_action", AMBER_ACTION_NONE);
+    switch ($action) {
+      case AMBER_ACTION_NONE:
+        $result = NULL;
+        break;
+      case AMBER_ACTION_HOVER:
+        $result .= " hover:" . variable_get("amber_${c}unavailable_action_hover", 2);
+        break;
+      case AMBER_ACTION_POPUP:
+        $result .= " popup";
+        break;
+      case AMBER_ACTION_CACHE:
+        $result .= " cache";
+        break;
+      }
+  }
+  return $result;
+}
+
+
+/**
+ * Build the data- attributes to be added to the anchor tag, given saved metadata
+ * @param array $summaries array dictionary from the Amber Status module
+ * @return array attributes to be added to the link
+ */
+function _amber_build_link_attributes($summaries) {
+  $result = array();
+  // Assume that we only have one cache of the data. This would need to change if we start tracking multiple caches
+  if (isset($summaries['default']['location'],$summaries['default']['date'])) {
+    if (strpos($summaries['default']['location'], "http") === 0) {
+      $result['data-versionurl'] = $summaries['default']['location'];
+    } else {
+      $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+      $result['data-versionurl'] = $protocol . $_SERVER['SERVER_NAME'] . base_path() . $summaries['default']['location'];      
+    }
+    $result['data-versiondate'] = date('c',$summaries['default']['date']);
+  } else {
+    return $result;
+  }
+
+  $default_status = isset($summaries['default']['status']) ? $summaries['default']['status'] : null;
+  // Add default behavior
+  if (!is_null($default_status)) {
+    $behavior = _amber_get_behavior($default_status);
+    if ($behavior) {
+      $result['data-amber-behavior'] = $behavior;
+    }
+  }
+
+  // See if we have country-specific behavior
+  if ($country = variable_get('amber_country_id','')) {
+    $country_status = isset($summaries[$country]['status']) ? $summaries[$country]['status'] : $default_status;
+    if (!is_null($country_status)) {
+      $country_behavior = _amber_get_behavior($country_status, true);
+      // Add country-specific behavior only if it is different than the default behavior
+      if ($country_behavior && ($country_behavior != $result['data-amber-behavior'])) {
+        $result['data-amber-behavior'] .= ",${country} ${country_behavior}";
+      }
+    }
+  }
+
+  return $result;
+}
+
+/**
+ * Lookup a URL using the AmberStorage class, while caching for the duration of the page load
+ */
+function _amber_lookup_url($url) {
+  $status = amber_get_status();
+  return _amber_build_link_attributes($status->get_summary($url, array(variable_get('amber_backend', 0))));
+}
+
+/**
+ * Implements hook_preprocess_link()
+ *
+ * Rewrite all cached external links with data-* attributes describing the information in the cache
+ */
+function amber_preprocess_link(&$variables) {
+  /* If it is an external link, check if cache exists, and add data-* attributes as necessary. */
+  if (variable_get('amber_enabled', 1) && url_is_external($variables['path'])) {
+    $attributes = _amber_lookup_url($variables['path']);
+    if (!empty($attributes)) {
+      if (!isset($variables['options'])) {
+        $variables['options'] = array();
+      }
+      if (isset($variables['options']['attributes']))
+        $variables['options']['attributes'] += $attributes;
+      else
+        $variables['options']['attributes'] = $attributes;
+    }
+  }
+}
+
+/**
+ * Implements hook_filter_info().
+ */
+function amber_filter_info() {
+  $filters['filter_amber'] = array(
+    'title' => t('Amber Filter'),
+    'description' => t('Annotate all external links with information about the their local cached copies'),
+    'process callback'  => '_amber_filter_process',
+    'tips callback' => '_amber_filter_tips',
+    'weight' => 50
+  );
+  return $filters;
+}
+
+/**
+ * Callback function for updating href's with data-* attrbutes, after they've been identified with a regular expression
+ * @param $matches
+ * @return string
+ */
+function _amber_filter_callback($matches) {
+  $data = _amber_lookup_url($matches[1]);
+  $result = $matches[0];
+  foreach ($data as $key => $value) {
+    $result .= " $key=\"$value\"" ;
+  }
+  return $result;
+}
+
+/**
+ * Amber filter process callback.
+ *
+ * Find all external links and annotate then with data-* attributes describing the information in the cache.
+ * Note: This treats all absolute URLs as external links.
+ */
+function _amber_filter_process($text, $filter, $format) {
+  if (variable_get('amber_enabled', 1)) {
+    $re = '/href=["\'](http[^\v()<>{}\[\]]+)[\'"]/i';
+    $text = preg_replace_callback($re, '_amber_filter_callback', $text);
+  }
+  return $text;
+}
+
+
+/**
+ * Filter tips callback for Amber filter.
+ */
+function _amber_filter_tips($filter, $format, $long = FALSE) {
+  if (!$long) {
+    // This string will be shown in the content add/edit form
+    return t('Annotate all external links with information about the their local cached copies');
+  }
+  else {
+    //TODO: Get help content to display here
+    return t('Annotate all external links with information about the their local cached copies. Then add some more information about the Amber project and links to other stuff.');
+  }
+}
+
+/**
+ * Menu callback hook for caching a page immediately
+ */
+function amber_cache_node_now($nid) {
+  $node = node_load($nid);
+  amber_cache_node($node,true);
+  drupal_goto('node/' . $nid);
+}
+
+/**
+ * Queue all links in the given node to be checked (which will lead them to be cached eventually if necessary),
+ * or cache them immediately
+ * @param $node object to scan for links to cache
+ */
+function amber_cache_node($node, $immediately = false) {
+  module_load_include('inc', 'amber', 'amber.extract');
+  $links = _amber_extract_node_links($node);
+  if ($immediately) {
+    foreach ($links['cache'] as $url) {
+      if (amber_cache_link($url, $immediately)) {
+        drupal_set_message(t("Sucessfully preserved: @url.", array('@url' => $url)), 'status');
+      } else {
+        drupal_set_message(t("Could not preserve: @url.", array('@url' => $url)), 'warning');
+      }
+    }      
+    foreach ($links['excluded'] as $url) {
+      drupal_set_message(t("Did not preserve excluded site: @url.", array('@url' => $url)), 'warning');
+    }
+  } else {
+    amber_enqueue_check_links($links['cache']);
+  }
+}
+
+/**
+ * Implements hook_entity_update
+ */
+function amber_entity_update($entity, $type) {
+  if ("node" == $type) {
+    if (NODE_PUBLISHED == $entity->status) {
+      amber_cache_node($entity);
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_insert
+ */
+function amber_entity_insert($entity, $type) {
+  if ("node" == $type) {
+    if (NODE_PUBLISHED == $entity->status) {
+      amber_cache_node($entity);
+    }
+  }
+}
+
+/**
+ * Convert a string representation of a date into RFC1123 format
+ */
+function amber_RFC1123_date($date_string) {
+  /* The default ISO8601 date string formatter doesn't include the colons in the time-zone component, which
+     is incompatible with javascript's date.parse() function in at least some implementations (Safari, definitely) */
+  $ISO8601_FORMAT = 'Y-m-d\TH:i:sP';
+
+  $dt = DateTime::createFromFormat($ISO8601_FORMAT, $date_string);
+  $result = $dt->format(DateTime::RFC1123);
+  return $result;
+}
+
+/**
+ * Retrieve an item and its metadata from the cache in preparation for rendering
+ * @param  $id string identifying the item to return
+ * @return array with information about the item, or MENU_NOT_FOUND if item not found
+ */
+function amber_retrieve_cache_item_data($id) {
+  $storage = amber_get_storage_for_item($id, array(AMBER_BACKEND_LOCAL, AMBER_BACKEND_AMAZON_S3));
+  if (is_null($storage)) {
+    return MENU_NOT_FOUND;
+  }
+  $data = $storage->get($id);
+  $metadata = $storage->get_metadata($id);
+  return ($data && $metadata) ? array('id' => $id, 'data' => $data, 'metadata' => $metadata) : MENU_NOT_FOUND;
+}
+
+/**
+ * Retrieve a cache item for display in an iframe. 
+ * @param  $id string identifying the item to return
+ * @return array with information about the item, or MENU_NOT_FOUND if item not found
+ */
+function amber_retrieve_cache_item_frame($id) {
+  return amber_retrieve_cache_item_data($id);
+}
+
+/**
+ * Retrieve an item from the cache for display
+ * @param $id string identifying the item to return
+ * @return array with information about the item, or MENU_NOT_FOUND if item not found
+ */
+function amber_retrieve_cache_item($id) {
+  $status = amber_get_status();
+  $status->save_view($id);
+  return amber_retrieve_cache_item_data($id);
+}
+
+/**
+ * Retrieve an asset from the cache for display
+ * @param $id string identifying the item to return
+ * @return null|string
+ */
+function amber_retrieve_cache_asset() {
+  $args = func_get_args();
+  $id = array_shift($args);
+  $storage = amber_get_storage_for_item($id, array(AMBER_BACKEND_LOCAL, AMBER_BACKEND_AMAZON_S3));
+  if (is_null($storage)) {
+    return MENU_NOT_FOUND;
+  }
+  $d = $storage->get_asset($id, join('/',$args) . ($_SERVER['QUERY_STRING'] ? '?' . $_SERVER['QUERY_STRING'] : ''));
+  if ($d) {
+    $data['data'] = $d;
+    // Set the mime-type for certain files
+    $last_element = $args[count($args) - 1];
+    $extension = substr($last_element, strrpos($last_element, '.') + 1);
+    switch ($extension) {
+      case "css" : $data['metadata']['type'] = 'text/css'; break;
+      case "jpg" : $data['metadata']['type'] = 'image/jpeg'; break;      
+      case "png" : $data['metadata']['type'] = 'image/png'; break;      
+      case "svg" : $data['metadata']['type'] = 'image/svg+xml'; break;      
+      case "js" : $data['metadata']['type'] = 'application/javascript'; break;      
+    }
+  }
+  return (isset($data)) ? $data : MENU_NOT_FOUND;
+}
+
+/**
+ * Display a page with an iframe referencing the cache content
+ * @param $data string
+ */
+function amber_deliver_cache_item_frame($data) {
+  /* If the document is a PDF, serve it directly rather than in an iframe. Browsers
+     will not render PDFs within sandboxed iframes. */
+  if (isset($data['metadata']['type']) && ($data['metadata']['type'] == 'application/pdf')) {
+    return amber_deliver_cache_item($data);
+  }
+  $uri = request_uri();
+  $id = $data['id'];
+  $iframe_url = "";
+  if ($uri && (strrpos($uri,"/") == (strlen($uri) - 1))) {
+    $iframe_url = "../";
+  }
+  $iframe_url .= "../" . "cacheframe/${id}/";  
+  if (isset($data['metadata']['cache']['amber']['date'])) {
+    $memento_date = amber_RFC1123_date($data['metadata']['cache']['amber']['date']);
+    drupal_add_http_header('Memento-Datetime', $memento_date);
+  }
+  print <<<EOF
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<title>Amber</title>
+</head>
+<body style="margin:0; padding: 0; height: 100%">
+<iframe 
+sandbox="allow-scripts allow-forms allow-popups allow-pointer-lock"
+security="restricted"
+style="border:0 none transparent; background-color:transparent; width:100%; height:100%;" 
+src="${iframe_url}"></iframe>
+</body>
+</html>
+EOF;
+}
+
+/**
+ * Display the data returned from the cache without any Drupal doodads
+ * @param $data string or error code returned from amber_retrieve_cache_item to be displayed
+ */
+function amber_deliver_cache_item($data) {
+  if (is_int($data) && $data == MENU_NOT_FOUND) {
+    drupal_deliver_html_page(MENU_NOT_FOUND);
+  } else {
+    if (isset($data['metadata']['type'])) {
+      drupal_add_http_header('Content-Type', $data['metadata']['type']);
+    }
+    if (isset($data['metadata']['cache']['amber']['date'])) {
+      $memento_date = amber_RFC1123_date($data['metadata']['cache']['amber']['date']);
+      drupal_add_http_header('Memento-Datetime', $memento_date);
+    }
+    print($data['data']);
+  }
+}
+
+/**
+ * Delete the contents of the cache
+ */
+function amber_delete_all() {
+  $storage = amber_get_storage();
+  $storage->delete_all();
+  $status = amber_get_status();
+  $status->delete_all();
+  foreach (array(AMBER_QUEUE_CACHE, AMBER_QUEUE_CHECK_EXISTING, AMBER_QUEUE_CHECK_NEW) as $queue_name) {
+    $queue = DrupalQueue::get($queue_name);
+    if ($queue) {
+      $queue->deleteQueue();
+    }
+  }
+  db_delete('queue')->condition('data', '%amber_batch_cache_process%', 'LIKE')->execute();
+}
+
+function amber_delete_item($id, $provider) {
+  $status = amber_get_status();
+  $storage = amber_get_storage_instance($provider);
+  $cache_metadata = $status->get_cache_by_id($id, array($provider));
+  if (is_null($storage) || $storage->delete($cache_metadata)) {
+    $status->delete($id, $provider);
+    return TRUE;
+  } else {
+    return FALSE;
+  }
+  //TODO: Delete the item from the queue (if possible)
+}
+
+/**
+ * Cache all nodes
+ * @return number of nodes queued for caching
+ */
+function amber_cache_all() {
+  $count = 0;
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->propertyCondition('status', 1);
+  $result = $query->execute();
+  if (!empty($result['node'])) {
+    $nids = array_keys($result['node']);
+    foreach ($nids as $nid) {
+      $node = node_load($nid, NULL, TRUE);
+      if ($node) {
+        amber_cache_node($node);
+        $count++;
+      }
+    }
+  }
+  return $count;
+}
+
+/**
+ * Log that the user has clicked a link to view a cache item, but only if it's not being served
+ * from the local cache (since those are logged when the cache is actually viewed)
+ * @param  $url string with the URL of the cache
+ * @return none - this is a fire-and-forget call from the browser
+ */
+function amber_log_cache_view() {
+  if (isset($_GET['cache'])) {
+    $status = amber_get_status();
+    if ($status->save_view_for_external_cache_location($_GET['cache'])) {
+      return array();
+    } else {
+      return MENU_NOT_FOUND;
+    }
+  }
+}
+
+/**
+ * Return an empty result as a response from amber_log_cache_view,
+ * adding a 404 header if necessary
+ */
+function amber_deliver_cache_view_result($data) {
+  drupal_add_http_header('Cache-Control', "no-cache, must-revalidate");
+  drupal_add_http_header('Pragma', "no-cache");
+  drupal_add_http_header('Expires', 0);
+
+  if (is_int($data) && $data == MENU_NOT_FOUND) {
+    drupal_add_http_header('Status', '404 Not Found');
+  }
+}
+
+/**
+ * Perform an availability lookup against NetClerk to get site availability status
+ * Requires some POST or GET parameters:
+ *  url : array of URLs to check
+ *  country : two-character ISO code for the user's country
+ * @return string json response to send to the client with availability status
+ */
+function amber_get_url_status() {
+  if (isset($_REQUEST['url']) && isset($_REQUEST['country'])) {
+    $lookup = amber_get_availability();
+    $lookup_result = $lookup->get_status($_REQUEST['url'], $_REQUEST['country']);
+    foreach ($lookup_result['data'] as $key => $value) {
+      $lookup_result['data'][$key]['behavior'] = _amber_get_behavior($lookup_result['data'][$key]['available']);
+    }
+    $result = json_encode($lookup_result, JSON_UNESCAPED_SLASHES);
+  } else {
+    $result = '{}';
+  }
+  return $result;
+}
+
+/**
+ * Format and deliver HTTP response to availability lookup
+ * @param  string $data JSON to return to the client, or integer return code
+ * @return none
+ */
+function amber_deliver_json($data) {
+  drupal_add_http_header('Content-Type', "application/json");
+  drupal_add_http_header('Cache-Control', "no-cache, must-revalidate");
+  drupal_add_http_header('Pragma', "no-cache");
+  drupal_add_http_header('Expires', 0);
+  if (is_int($data) && $data == MENU_NOT_FOUND) {
+    drupal_add_http_header('Status', '404 Not Found');
+  } else {
+    print $data;
+  }
+}
+
+/**
+ * Search for a Memento from the configured Timegate server for the given
+ * URL and date, and return it to the front-end page
+ * Requires some POST or GET parameters:
+ *  url : url to find a memento for
+ *  date : preferred date for the memento
+ * @return string json response to send to the client with memento location and date
+ */
+function amber_get_memento() {
+  if (isset($_REQUEST['url']) && isset($_REQUEST['date'])) {
+    $lookup = amber_get_memento_service();
+    $lookup_result = $lookup->getMemento($_REQUEST['url'], $_REQUEST['date']);
+    $result = json_encode($lookup_result, JSON_UNESCAPED_SLASHES);
+  } else {
+    $result = '{}';
+  }
+  return $result;
+}
+
+
+
+
+
+
+
+

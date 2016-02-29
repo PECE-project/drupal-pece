@@ -1,0 +1,66 @@
+<?php
+/**
+ * @file
+ * An installation file for Panopoly Pages
+ */
+
+/**
+ * Apply updates (permissions, settings, etc.) for Panopoly Landing Page Nodes.
+ */
+function panopoly_pages_update_7101() {
+
+  // Rebuild the feature to ensure our node type exists, other wise an integrity
+  // constraint is thrown (because Features hasn't built our node type!)
+
+  // Rebuild the features static caches.
+  features_include(TRUE);
+
+  // Create the new landing page content type.
+  $items['panopoly_pages'] = array('node_info');
+  features_revert($items);
+
+  // Rebuild node type info to purge caches (just in case!) for permissions.
+  node_types_rebuild();
+
+  // Set the new permissions.
+  $editor = user_role_load_by_name('editor');
+  $admin = user_role_load_by_name('administrator');
+  $node_landing_page_perms = array(
+    'create panopoly_landing_page content',
+    'delete any panopoly_landing_page content',
+    'delete own panopoly_landing_page content',
+    'edit any panopoly_landing_page content',
+    'edit own panopoly_landing_page content',
+  );
+  foreach (array($editor->rid, $admin->rid) as $rid) {
+    if ($rid) {
+      user_role_grant_permissions($rid, $node_landing_page_perms);
+    }
+  }
+
+  // Apply pathauto setting.
+  variable_set('pathauto_node_panopoly_landing_page_pattern', '[node:menu-link:parents:join-path]/[node:title]');
+}
+
+/**
+ * Fix settings on Menu widgets that were customized.
+ */
+function panopoly_pages_update_7102() {
+  // Go through existing panes and update configuration.
+  $result = db_query("SELECT * FROM {panels_pane} WHERE type = 'menu_tree'");
+  $serialized_fields = array('access', 'configuration', 'cache', 'style', 'css', 'extras', 'locks');
+  foreach ($result as $pane) {
+    // Unserialize all the serialized fields.
+    foreach ($serialized_fields as $field) {
+      $pane->$field = unserialize($pane->$field);
+    }
+
+    if (strpos($pane->configuration['parent_mlid'], ':') !== FALSE) {
+      list ($menu_name, $parent_mlid) = explode(':', $pane->configuration['parent_mlid']);
+      $pane->configuration['parent_mlid'] = $parent_mlid;
+
+      // Write back to the database.
+      drupal_write_record('panels_pane', $pane, array('pid'));
+    }
+  }
+}

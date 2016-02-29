@@ -1,0 +1,66 @@
+<?php
+/**
+ * @file
+ * Bundle Inherit module install file.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function bundle_inherit_schema() {
+  $schema['bundle_hierarchy'] = array(
+    'description' => 'Holds info about hierarchy relations between entity types.',
+    'fields' => array(
+      'entity_type' => array(
+        'description' => 'The entity type of the bundles.',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'bundle' => array(
+        'description' => 'Child bundle name.',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'bundle_parent' => array(
+        'description' => 'Parent bundle name.',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('entity_type', 'bundle'),
+    'indexes' => array(
+      'parent' => array('entity_type', 'bundle_parent'),
+    ),
+  );
+
+
+  return $schema;
+}
+
+
+/**
+ * Implements hook_uninstall().
+ *
+ * We should remove 'locked' state from all inherited fields instances.
+ *
+ * @todo
+ *   Maybe some better way to implement this function exists (talking about
+ *   performance). But anyway we are getting info about instances from cache
+ *   so I think that this implementation is more stable and logicaly loocking.
+ */
+function bundle_inherit_uninstall() {
+  $records = db_select('bundle_hierarchy', 'bh')
+    ->fields('bh')
+    ->execute();
+  foreach ($records as $record) {
+    $instances = field_info_instances($record->entity_type, $record->bundle_parent);
+    foreach ($instances as $instance) {
+      $inherited_instance = field_info_instance($record->entity_type, $instance['field_name'], $record->bundle);
+      $inherited_instance['locked'] = FALSE;
+      field_update_instance($inherited_instance);
+    }
+  }
+}

@@ -1,0 +1,128 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for the tvi module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function tvi_install() {
+  // Ensure weights are ok.
+  $view_info = db_select('system', 's')
+    ->fields('s', array('weight'))
+    ->condition('s.name', 'views')
+    ->range(NULL, 1)
+    ->execute()
+    ->fetchObject();
+
+  db_update('system')
+    ->fields(array('weight' => $view_info->weight + 5))
+    ->condition('name', 'tvi')
+    ->execute();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function tvi_uninstall() {
+  db_delete('variable')
+    ->condition('name', 'tvi_%', 'LIKE')
+    ->execute();
+}
+
+/**
+ * Replace xid int field by a varchar field to allow uuid usage.
+ */
+function tvi_update_7000(&$sandbox) {
+  db_drop_primary_key('tvi_settings');
+  db_change_field('tvi_settings', 'xid', 'xid',
+    array(
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => TRUE,
+      'default' => '',
+      'description' => 'Taxonomy vocabulary or term ID or UUID.',
+    ),
+    array('primary key' => array('type', 'xid'))
+  );
+}
+
+/**
+ * Replace vids by machine_names and tids by uuids if enabled.
+ */
+function tvi_update_7001() {
+  $settings = db_select('tvi_settings', 'tvi')
+                ->fields('tvi')
+                ->condition('tvi.type', TVI_TYPE_VOCAB)
+                ->execute()
+                ->fetchAll();
+  foreach ($settings as $setting) {
+    $voc = taxonomy_vocabulary_load($setting->xid);
+    // Check if the vocabulary still exists.
+    if ($voc !== FALSE && !empty($voc->machine_name)) {
+      db_update('tvi_settings')
+        ->fields(array('xid' => $voc->machine_name))
+        ->condition('type', $setting->type)
+        ->condition('xid', $setting->xid)
+        ->execute();
+    }
+  }
+
+  if (module_exists('uuid')) {
+    $settings = db_select('tvi_settings', 'tvi')
+                  ->fields('tvi')
+                  ->condition('tvi.type', TVI_TYPE_TERM)
+                  ->execute()
+                  ->fetchAll();
+
+    foreach ($settings as $setting) {
+      $term = taxonomy_term_load($setting->xid);
+      // Check if the term still exists and its uuid is defined.
+      if ($term !== FALSE && !empty($term->uuid)) {
+        db_update('tvi_settings')
+          ->fields(array('xid' => $term->uuid))
+          ->condition('type', $setting->type)
+          ->condition('xid', $setting->xid)
+          ->execute();
+      }
+    }
+  }
+}
+
+/**
+ * Drop schema in favor of {variable} table.
+ */
+function tvi_update_7002() {
+  tvi_include('query');
+  $settings = db_select('tvi_settings', 'tvi')
+    ->fields('tvi')
+    ->execute()
+    ->fetchAll();
+  foreach ($settings as $setting) {
+    tvi_update_settings($setting);
+  }
+  db_drop_table('tvi_settings');
+}
+
+/**
+ * Add inherit parameters to settings where it's missing.
+ */
+function tvi_update_7003() {
+  tvi_include('query');
+  $settings = db_select('variable', 'v')
+    ->fields('v', array('name'))
+    ->condition('name', 'tvi_%', 'LIKE')
+    ->execute()
+    ->fetchAll();
+  foreach ($settings as $setting) {
+    list($_, $type, $xid) = explode('_', $setting->name);
+    $setting = tvi_load_settings($xid, $type, FALSE);
+    if ($setting && $setting->type == TVI_TYPE_TERM && empty($setting->inherit)) {
+      $setting->inherit = FALSE;
+    }
+    if ($setting) {
+      tvi_update_settings($setting);
+    }
+  }
+}

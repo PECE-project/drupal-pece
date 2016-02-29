@@ -1,0 +1,15 @@
+<?php
+/**
+ * @file
+ * Code for the PECE Projects feature.
+ */
+
+include_once 'pece_substantive_logic.features.inc';
+
+/**
+ * Implements hook_form_ID_alter().
+ */
+function pece_substantive_logic_form_pece_sub_logic_node_form_alter(&$form, &$form_state) {
+  //@TODO: Need to rename the helper function below to be more generic.
+  pece_artifacts_alter_artifact_form($form, $form_state);
+}

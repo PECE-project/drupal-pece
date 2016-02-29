@@ -1,0 +1,46 @@
+name = Panopoly Admin
+description = Administrative dashboard and related editing interfaces.
+core = 7.x
+package = Panopoly
+project = panopoly_admin
+dependencies[] = admin_views
+dependencies[] = ctools
+dependencies[] = defaultconfig
+dependencies[] = features
+dependencies[] = jquery_update
+dependencies[] = page_manager
+dependencies[] = radix_layouts
+dependencies[] = strongarm
+dependencies[] = views_bulk_operations
+scripts[] = panopoly-admin.js
+stylesheets[all][] = panopoly-admin.css
+stylesheets[all][] = panopoly-admin-navbar.css
+features[ctools][] = page_manager:pages_default:1
+features[ctools][] = strongarm:strongarm:1
+features[ctools][] = views:views_default:3.0
+features[defaultconfig][] = strongarm:admin_toolbar
+features[defaultconfig][] = strongarm:user_register
+features[defaultconfig][] = user_default_permissions:access administration pages
+features[defaultconfig][] = user_default_permissions:access content
+features[defaultconfig][] = user_default_permissions:access content overview
+features[defaultconfig][] = user_default_permissions:access navbar
+features[defaultconfig][] = user_default_permissions:administer menu
+features[defaultconfig][] = user_default_permissions:administer taxonomy
+features[defaultconfig][] = user_default_permissions:delete revisions
+features[defaultconfig][] = user_default_permissions:revert revisions
+features[defaultconfig][] = user_default_permissions:save draft
+features[defaultconfig][] = user_default_permissions:view own unpublished content
+features[defaultconfig][] = user_default_permissions:view revisions
+features[features_api][] = api:2
+features[page_manager_handlers][] = node_edit_panel_context
+features[page_manager_pages][] = panopoly_admin_layout_library
+features[page_manager_pages][] = panopoly_admin_page_library
+features[page_manager_pages][] = panopoly_admin_pane_library
+features[variable][] = user_admin_role
+
+; Information added by Drupal.org packaging script on 2015-10-21
+version = "7.x-1.28"
+core = "7.x"
+project = "panopoly_admin"
+datestamp = "1445465042"
+

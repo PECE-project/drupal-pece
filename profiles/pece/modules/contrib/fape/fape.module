@@ -1,0 +1,528 @@
+<?php
+
+/**
+ * @file
+ * Adds direct field editing via contextual links.
+ */
+
+/**
+ * Implements hook_menu()
+ */
+function fape_menu() {
+  $items = array();
+  $items['admin/field/edit/%/%/%'] = array(
+    // Access is controlled after we have inspected the entity which
+    // can't easily happen until the callback.
+    'access arguments' => array(TRUE),
+    'access callback' => TRUE,
+    'page callback' => 'fape_field_edit_page',
+    'page arguments' => array(3, 4, 5),
+  );
+
+  return $items;
+}
+
+/**
+ * Page callback to edit an entity field.
+ */
+function fape_field_edit_page($entity_type, $entity_id, $field_name, $langcode = NULL) {
+  // Ensure the entity type is valid:
+  if (empty($entity_type)) {
+    return MENU_NOT_FOUND;
+  }
+
+  $entity_info = entity_get_info($entity_type);
+  if (!$entity_info) {
+    return MENU_NOT_FOUND;
+  }
+
+  $entities = entity_load($entity_type, array($entity_id));
+  if (!$entities) {
+    return MENU_NOT_FOUND;
+  }
+
+  $entity = reset($entities);
+  if (!$entity) {
+    return MENU_NOT_FOUND;
+  }
+
+  if (!isset($langcode)) {
+    $langcode = entity_language($entity_type, $entity);
+  }
+
+  // Ensure access to update the entity is granted.
+  if (!entity_access('update', $entity_type, $entity)) {
+    return MENU_ACCESS_DENIED;
+  }
+
+  // Ensure access to actually update this particular field is granted.
+  $field = field_info_field($field_name);
+  if (!field_access('edit', $field, $entity_type, $entity)) {
+    return MENU_ACCESS_DENIED;
+  }
+
+  list( , , $bundle) = entity_extract_ids($entity_type, $entity);
+
+  // This allows us to have limited support for non-field API fields.
+  // Currently, we have support for node:title, node:author, and node:created.
+  if ($entity_type == 'node' && in_array($field_name, array('title', 'author', 'created'))) {
+    $field_instance = TRUE;
+    switch ($field_name) {
+      case 'title':
+        $subform_id = 'fape_field_edit_node_title_form';
+        break;
+      case 'author':
+        $subform_id = 'fape_field_edit_node_author_form';
+        break;
+      case 'created':
+        $subform_id = 'fape_field_edit_node_created_form';
+        break;
+    }
+    if (!node_access('update', $entity)) {
+      return MENU_ACCESS_DENIED;
+    }
+  }
+  else {
+    $field_instance = field_info_instance($entity_type, $field_name, $bundle);
+    $subform_id = 'fape_field_edit_field_form';
+  }
+
+  if (empty($field_instance)) {
+    return MENU_NOT_FOUND;
+  }
+
+  $form_state = array(
+    'entity_type' => $entity_type,
+    'entity' => $entity,
+    'field_name' => $field_name,
+    'langcode' => $langcode,
+    'no_redirect' => TRUE,
+    'redirect' => $_GET['q'],
+    'field_instance' => $field_instance,
+    'bundle' => $bundle,
+    'subform_id' => $subform_id,
+  );
+
+  // Try to figure out bundle's label for nicer field editing title.
+  $entity_bundles = $entity_info['bundles'];
+  $bundle_label = $bundle;
+  foreach ($entity_bundles as $key => $entity_bundle) {
+    if ($key == $bundle) {
+      if (isset($entity_bundle['label'])) {
+        $bundle_label = $entity_bundle['label'];
+      }
+      break;
+    }
+  }
+
+  drupal_set_title(t('<em>Edit @type</em> @title', array('@type' => $bundle_label, '@title' => $field_instance['label'])), PASS_THROUGH);
+
+  $output = drupal_build_form('fape_field_edit_form', $form_state);
+  if (!empty($form_state['executed'])) {
+    entity_save($entity_type, $form_state['entity']);
+    drupal_goto($form_state['redirect']);
+  }
+  return $output;
+}
+
+/**
+ * Field editing form.
+ */
+function fape_field_edit_form($form, &$form_state) {
+  // Since we could edit a number of different things here, immediately
+  // add whatever else is needed.
+  $form_state['subform_id']($form, $form_state);
+  $form['#parents'] = array();
+
+  $entity_type = $form_state['entity_type'];
+  $entity = $form_state['entity'];
+  $bundle = $form_state['bundle'];
+
+  list($use_revisions, $control_revisions) = _fape_entity_allows_revisions($entity_type, $bundle, $entity);
+
+  if ($use_revisions) {
+    $form_state['use revisions'] = TRUE;
+    $form['revision_information'] = array(
+      '#weight' => 11,
+    );
+
+    $form['revision_information']['revision'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Create new revision'),
+      '#default_value' => $entity->revision,
+      '#id' => 'edit-revision',
+      '#access' => $control_revisions,
+    );
+
+    if ($control_revisions || $entity->revision) {
+      $form['revision_information']['log'] = array(
+        '#type' => 'textarea',
+        '#title' => t('Log message'),
+        '#description' => t('Provide an explanation of the changes you are making. This will help other authors understand your motivations.'),
+        '#default_value' => $entity->log,
+      );
+
+      if ($control_revisions) {
+        $form['revision_information']['log']['#dependency'] = array('edit-revision' => array(1));
+      }
+    }
+  }
+
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+  );
+  $form['actions']['cancel'] = array(
+    '#type' => 'submit',
+    '#value' => t('Cancel'),
+    '#validate' => array('fape_field_edit_form_cancel'),
+    '#executes_submit_callback' => FALSE,
+  );
+   
+
+  // Ensure this actually gets on there.
+  $form['#submit'][] = 'fape_field_edit_form_submit';
+  return $form;
+}
+
+/**
+ * Subform to edit a field instance.
+ *
+ * This isn't a true form. As such it modifies the $form by reference.
+ */
+function fape_field_edit_field_form(&$form, &$form_state) {
+  $form['#parents'] = array();
+
+  $entity_type = $form_state['entity_type'];
+  $entity = $form_state['entity'];
+  $field_name = $form_state['field_name'];
+  $field_instance = $form_state['field_instance'];
+  $langcode = $form_state['langcode'];
+  $bundle = $form_state['bundle'];
+
+  ctools_include('fields');
+  // If no language is provided use the default site language.
+  $options = array(
+    'language' => field_valid_language($langcode),
+    'default' => TRUE,
+  );
+
+  $form += (array) ctools_field_invoke_field($field_instance, 'form', $entity_type, $entity, $form, $form_state, $options);
+
+  $form['#pre_render'][] = '_field_extra_fields_pre_render';
+  $form['#entity_type'] = $entity_type;
+  $form['#bundle'] = $bundle;
+
+  // Let other modules make changes to the form.
+  // Exclude some modules.
+  $excluded_modules = array(
+    'field_group',
+    'metatag',
+    'panelizer',
+    'redirect',
+  );
+  // Avoid module_invoke_all() to let parameters be taken by reference.
+  foreach (module_implements('field_attach_form') as $module) {
+    if (in_array($module, $excluded_modules)) {
+      continue;
+    }
+    $function = $module . '_field_attach_form';
+    $function($entity_type, $entity, $form, $form_state, $langcode);
+  }
+
+  $form['#validate'][] = 'fape_field_edit_field_form_validate';
+  $form['#submit'][] = 'fape_field_edit_field_form_submit';
+}
+
+/**
+ * Validate field editing form
+ */
+function fape_field_edit_field_form_validate($form, &$form_state) {
+  ctools_include('fields');
+
+  $entity_type = $form_state['entity_type'];
+  $entity = $form_state['entity'];
+  $field_name = $form_state['field_name'];
+  $field_instance = $form_state['field_instance'];
+  $langcode = $form_state['langcode'];
+
+  // Extract field values from submitted values.
+  ctools_field_invoke_field_default($field_instance, 'extract_form_values', $entity_type, $entity, $form, $form_state);
+
+  $errors = array();
+  // Check generic, field-type-agnostic errors first.
+  ctools_field_invoke_field_default($field_instance, 'validate', $entity_type, $entity, $errors);
+  // Check field-type specific errors.
+  ctools_field_invoke_field($field_instance, 'validate', $entity_type, $entity, $errors);
+
+  // Let other modules validate the entity.
+  // Avoid module_invoke_all() to let $errors be taken by reference.
+  foreach (module_implements('field_attach_validate') as $module) {
+    $function = $module . '_field_attach_validate';
+    $function($entity_type, $entity, $errors);
+  }
+
+  if ($errors) {
+    // Pass field-level validation errors back to widgets for accurate error
+    // flagging.
+    foreach ($errors as $field_errors) {
+      foreach ($field_errors as $langcode => $errors) {
+        $field_state = field_form_get_state($form['#parents'], $field_name, $langcode, $form_state);
+        $field_state['errors'] = $errors;
+        field_form_set_state($form['#parents'], $field_name, $langcode, $form_state, $field_state);
+      }
+    }
+    ctools_field_invoke_field_default($field_instance, 'form_errors', $entity_type, $entity, $form, $form_state);
+  }
+}
+
+/**
+ * Submit field editing form
+ */
+function fape_field_edit_field_form_submit($form, &$form_state) {
+  $entity_type = $form_state['entity_type'];
+  $entity = $form_state['entity'];
+  $field_name = $form_state['field_name'];
+  $field_instance = $form_state['field_instance'];
+  $langcode = $form_state['langcode'];
+
+  // Extract field values from submitted values.
+  ctools_field_invoke_field_default($field_instance, 'extract_form_values', $entity_type, $entity, $form, $form_state);
+
+  ctools_field_invoke_field_default($field_instance, 'submit', $entity_type, $entity, $form, $form_state);
+
+  // Let other modules act on submitting the entity.
+  // Avoid module_invoke_all() to let $form_state be taken by reference.
+  foreach (module_implements('field_attach_submit') as $module) {
+    $function = $module . '_field_attach_submit';
+    $function($entity_type, $entity, $form, $form_state);
+  }
+}
+
+/**
+ * Subform to edit the entity 'title' field.
+ *
+ * This isn't a true form. As such it modifies the $form by reference.
+ */
+function fape_field_edit_node_title_form(&$form, &$form_state) {
+  $node = $form_state['entity'];
+  $type = node_type_get_type($node);
+
+  $form['title'] = array(
+    '#type' => 'textfield',
+    '#title' => check_plain($type->title_label),
+    '#default_value' => !empty($node->title) ? $node->title : '',
+    '#required' => TRUE,
+    '#weight' => -5,
+  );
+
+  $form['#submit'][] = 'fape_field_edit_node_title_form_submit';
+}
+
+function fape_field_edit_node_title_form_submit($form, &$form_state) {
+  $form_state['entity']->title = $form_state['values']['title'];
+}
+
+/**
+ * Subform to edit the entity 'author' field.
+ *
+ * This isn't a true form. As such it modifies the $form by reference.
+ */
+function fape_field_edit_node_author_form(&$form, &$form_state) {
+  $node = $form_state['entity'];
+
+  $form['name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Authored by'),
+    '#maxlength' => 60,
+    '#autocomplete_path' => 'user/autocomplete',
+    '#default_value' => !empty($node->name) ? $node->name : '',
+    '#weight' => -1,
+    '#description' => t('Leave blank for %anonymous.', array('%anonymous' => variable_get('anonymous', t('Anonymous')))),
+  );
+
+  $form['#validate'][] = 'fape_field_edit_node_author_form_validate';
+  $form['#submit'][] = 'fape_field_edit_node_author_form_submit';
+}
+
+/**
+ * Validates that the submitted author user actually exists.
+ *
+ * @see node_validate()
+ */
+function fape_field_edit_node_author_form_validate($form, &$form_state) {
+  $name = $form_state['values']['name'];
+  if (!empty($name) && !($account = user_load_by_name($name))) {
+    // The use of empty() is mandatory in the context of usernames
+    // as the empty string denotes the anonymous user. In case we
+    // are dealing with an anonymous user we set the user ID to 0.
+    form_set_error('name', t('The username %name does not exist.', array('%name' => $name)));
+  }
+}
+
+/**
+ * Sets the node's user ID to the submitted author user.
+ *
+ * @see node_submit()
+ */
+function fape_field_edit_node_author_form_submit($form, &$form_state) {
+  if ($account = user_load_by_name($form_state['values']['name'])) {
+    $form_state['entity']->uid = $account->uid;
+  }
+  else {
+    $form_state['entity']->uid = 0;
+  }
+}
+
+/**
+ * Subform to edit the entity 'created' field.
+ *
+ * This isn't a true form. As such it modifies the $form by reference.
+ */
+function fape_field_edit_node_created_form(&$form, &$form_state) {
+  $node = $form_state['entity'];
+
+  // It is necessary to call node_object_prepare() on the node to calculate
+  // the node's creation date.
+  node_object_prepare($node);
+
+  $time = !empty($node->date) ? date_format(date_create($node->date), 'Y-m-d H:i:s O') : format_date($node->created, 'custom', 'Y-m-d H:i:s O');
+  $timezone = !empty($node->date) ? date_format(date_create($node->date), 'O') : format_date($node->created, 'custom', 'O');
+
+  $form['date'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Authored on'),
+    '#maxlength' => 25,
+    '#description' => t('Format: %time. The date format is YYYY-MM-DD and %timezone is the time zone offset from UTC. Leave blank to use the time of form submission.', array('%time' => $time, '%timezone' => $timezone)),
+    '#default_value' => !empty($node->date) ? $node->date : '',
+  );
+
+  $form['#validate'][] = 'fape_field_edit_node_created_form_validate';
+  $form['#submit'][] = 'fape_field_edit_node_created_form_submit';
+}
+
+/**
+ * Validates that the submitted date exists and is a valid Unix timestamp.
+ *
+ * @see node_validate()
+ */
+function fape_field_edit_node_created_form_validate($form, &$form_state) {
+  $date = $form_state['values']['date'];
+  if (!empty($date) && strtotime($date) === FALSE) {
+    form_set_error('date', t('You have to specify a valid date.'));
+  }
+}
+
+/**
+ * Sets the node's creation date based on the submitted date value.
+ *
+ * @see node_submit()
+ */
+function fape_field_edit_node_created_form_submit($form, &$form_state) {
+  $date = $form_state['values']['date'];
+  $form_state['entity']->created = !empty($date) ? strtotime($date) : REQUEST_TIME;
+}
+
+/**
+ * General submit callback. Simply handles the revision.
+ */
+function fape_field_edit_form_submit($form, &$form_state) {
+  $entity = $form_state['entity'];
+  if (!empty($form_state['use revisions'])) {
+    $entity->revision = $form_state['values']['revision'];
+    $entity->log = $form_state['values']['log'];
+  }
+}
+
+/**
+ * Redirect back to original page when user hits the cancel button.
+ * 
+ * Note:
+ * This is registered as a form validate handler on the cancel submit element
+ * so that we can bypass the submit logic which the ers module ties into.
+ */
+function fape_field_edit_form_cancel($form, &$form_state) {
+  drupal_goto($form_state['redirect']);
+}
+
+/**
+ * Determine if an entity uses revisions.
+ *
+ * @return
+ *   An array where the first item is whether or not revisions are
+ *   supported, and the second item is whether or not the current
+ *   user has a choice.
+ *
+ *   Much of this is specific to entity types, so entities that are not
+ *   nodes that support revisions may not handle this quite correctly
+ *   without help. We'll put in an alter hook so that support can
+ *   be added, but we have no confidence anyone will ever use it.
+ */
+function _fape_entity_allows_revisions($entity_type, $bundle, $entity) {
+  $retval = array(FALSE, FALSE);
+
+  switch ($entity_type) {
+    case 'node':
+      $node_options = variable_get('node_options_' . $bundle, array('status', 'promote'));
+      $retval[0] = in_array('revision', $node_options);
+      $retval[1] = user_access('administer nodes');
+      break;
+
+    default:
+      $entity_info = entity_get_info($entity_type);
+      $retval[0] = !empty($entity_info['revision table']);
+      break;
+  }
+
+  drupal_alter('fape_entity_allow_revisions', $retval);
+  $entity->revision = $retval[0];
+  $entity->log = '';
+  return $retval;
+}
+
+/**
+ * Implement hook_panels_pane_content_alter().
+ *
+ * This adds the contextual link to the entity field pane.
+ */
+function fape_panels_pane_content_alter($content, $pane, $args, $context) {
+  // Don't bother with empty panes.
+  if (empty($content->content)) {
+    return;
+  }
+
+  // Verify access to the field.
+  if ($pane->type == 'entity_field') {
+    list($entity_type, $field_name) = explode(':', $pane->subtype);
+    $plugin = ctools_get_content_type($pane->type);
+    $entity = ctools_content_select_context($plugin, $pane->subtype, $pane->configuration, $context)->data;
+    if (entity_access('update', $entity_type, $entity)) {
+      $field = field_info_field($field_name);
+      if (field_access('edit', $field, $entity_type, $entity)) {
+        list($entity_id, , ) = entity_extract_ids($entity_type, $entity);
+        $content->admin_links[] = array(
+          'title' => t('Edit field'),
+          'alt' => t('Edit the data in this field.'),
+          'href' => "admin/field/edit/$entity_type/$entity_id/$field_name",
+          'query' => drupal_get_destination(),
+        );
+      }
+    }
+  }
+
+  // We also support the node title, author, and created fields specifically.
+  elseif (in_array($pane->type, array('node_title', 'node_author', 'node_created'))) {
+    $plugin = ctools_get_content_type($pane->type);
+    $entity = ctools_content_select_context($plugin, $pane->subtype, $pane->configuration, $context)->data;
+    if (node_access('update', $entity)) {
+      list($ignore, $field_name) = explode('_', $pane->type);
+      $content->admin_links[] = array(
+        'title' => t('Edit field'),
+        'alt' => t('Edit the data in this field.'),
+        'href' => "admin/field/edit/node/{$entity->nid}/$field_name",
+        'query' => drupal_get_destination(),
+      );
+    }
+  }
+}

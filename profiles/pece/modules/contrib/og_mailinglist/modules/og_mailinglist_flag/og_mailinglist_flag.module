@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * Implements hook_og_mailinglist_save_thread_subscription().
+ *
+ * Flag the node for the user when they subscribe to a node.
+ **/
+function og_mailinglist_flag_og_mailinglist_save_thread_subscription($nid, $uid) {
+  $account = user_load($uid);
+  flag('flag', 'follow_node', $nid, $account);
+}
+
+/**
+ * Implements hook_og_mailinglist_delete_thread_subscription().
+ *
+ * When a thread subscription is deleted, unflag the node as well.
+ **/
+function og_mailinglist_flag_og_mailinglist_delete_thread_subscription($nid, $uid) {
+  $account = user_load($uid);
+  flag('unflag', 'follow_node', $nid, $account);
+}
+
+/**
+ * Implements hook_flag().
+ **/
+function og_mailinglist_flag_flag($action, $flag, $content_id, $account) {
+  if ($flag->name == "follow_node") {
+    switch ($action) {
+      case 'flag':
+        og_mailinglist_save_thread_subscriptions($content_id, array($account->uid));
+        break;
+
+      case 'unflag':
+        og_mailinglist_delete_thread_subscription($content_id, $account->uid);
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_flag_default_flags().
+ **/
+function og_mailinglist_flag_flag_default_flags() {
+  $flags = array();
+  // Exported flag: "Follow Node".
+  $flags[] = array(
+    'content_type' => 'node',
+    'name' => 'follow_node',
+    'title' => 'Follow Node',
+    'global' => '0',
+    'types' => array(
+      0 => 'poll',
+      1 => 'note',
+      2 => 'job_form',
+      3 => 'event_cck',
+      4 => 'story',
+    ),
+    'flag_short' => 'Follow',
+    'flag_long' => 'Follow this discussion',
+    'flag_message' => '',
+    'unflag_short' => 'Unfollow',
+    'unflag_long' => 'Stop following this discussion',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'roles' => array(
+      'flag' => array(
+        0 => 2,
+        1 => 3,
+      ),
+      'unflag' => array(
+        0 => 2,
+        1 => 3,
+      ),
+    ),
+    'show_on_page' => 1,
+    'show_on_teaser' => 1,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'i18n' => 0,
+    'api_version' => 2,
+  );
+  return $flags;
+}
+

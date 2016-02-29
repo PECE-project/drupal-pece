@@ -1,0 +1,16 @@
+# This is a custom transport for the Drupal module og_mailinglist.
+
+drupal_og_mailinglist:
+  driver = pipe
+  path = "/bin:/usr/bin:/usr/local/bin"
+  command = /etc/exim4/exim_og_mailinglist/og_mailinglist_exim4_transport.php $domain
+  # command = /etc/exim4/exim_og_mailinglist/og_mailinglist_debug.sh $domain
+  user = mail
+  # Script needs access to sites/default/settings.php, so we run it using web
+  # server group and permissions.
+  group = www-data
+  return_path_add
+  delivery_date_add
+  envelope_to_add
+  log_output
+  return_fail_output

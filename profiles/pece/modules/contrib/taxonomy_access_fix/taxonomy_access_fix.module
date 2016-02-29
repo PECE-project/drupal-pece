@@ -1,0 +1,234 @@
+<?php
+
+/**
+ * @file
+ * This file contains all hooks and callbacks for extra/improved Taxonomy
+ * permissions.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter() for taxonomy_overview_vocabularies().
+ *
+ * Form URI: 'admin/structure/taxonomy'.
+ *
+ * @see taxonomy_overview_vocabularies()
+ * @see theme_taxonomy_overview_vocabularies()
+ */
+function taxonomy_access_fix_form_taxonomy_overview_vocabularies_alter(&$form, &$form_state) {
+  // Admin: don't fix anything.
+  if (user_access('administer taxonomy')) {
+    return TRUE;
+  }
+
+  // Others: remove some vocabularies.
+  foreach (element_children($form) as $vid) {
+    if (is_numeric($vid) && $vocabulary = $form[$vid]['#vocabulary']) {
+      // No access at all?
+      if (!taxonomy_access_fix_access('list terms', $vocabulary)) {
+        // Unfortunately, just setting #access isn't enough.
+        unset($form[$vid]);
+        continue;
+      }
+
+      // Remove weight form element.
+      unset($form[$vid]['weight']);
+
+      // Remove "edit vocabulary" link.
+      $form[$vid]['edit']['#access'] = FALSE;
+
+      // Maybe no "add terms" access.
+      if (!taxonomy_access_fix_access('add terms', $vocabulary)) {
+        $form[$vid]['add']['#access'] = FALSE;
+      }
+    }
+  }
+
+  // Remove "Save" button and prevent draggable table generation.
+  unset($form['actions']);
+}
+
+/**
+ * Implements hook_taxonomy_vocabulary_update().
+ */
+function taxonomy_access_fix_taxonomy_vocabulary_update($vocabulary) {
+  if ($vocabulary->machine_name != $vocabulary->original->machine_name) {
+    taxonomy_access_fix_update_role_permissions($vocabulary->original->machine_name, $vocabulary->machine_name);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for taxonomy_overview_terms().
+ *
+ * @see taxonomy_overview_terms()
+ */
+function taxonomy_access_fix_form_taxonomy_overview_terms_alter(&$form, &$form_state) {
+  // Admin: don't fix anything.
+  if (user_access('administer taxonomy')) {
+    return;
+  }
+
+  // Wrong part of the form (ie. reset): bail out.
+  if (!isset($form['#vocabulary'])) {
+    return;
+  }
+
+  $vocabulary = $form['#vocabulary'];
+  $can_edit = user_access('edit terms in ' . $vocabulary->vid);
+
+  // Remove edit links.
+  if (!$can_edit) {
+    foreach (element_children($form) as $item) {
+      if (isset($item['#term'])) {
+        $form[$item]['edit']['#access'] = FALSE;
+      }
+    }
+  }
+
+  // Hide Save and Reset buttons.
+  if (!taxonomy_access_fix_access('reorder', $vocabulary)) {
+    $form['actions']['submit']['#access'] = $form['actions']['reset_alphabetical']['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_permission().
+ *
+ * Adds one permission per vocabulary: 'add terms in VOCABULARY'.
+ */
+function taxonomy_access_fix_permission() {
+  $permissions = array();
+
+  foreach (taxonomy_get_vocabularies() as $vocabulary) {
+    $permissions['add terms in ' . $vocabulary->machine_name] = array(
+      'title' => t('Add terms in %vocabulary', array('%vocabulary' => $vocabulary->name)),
+    );
+  }
+
+  return $permissions;
+}
+
+/**
+ * Implements hook_menu_alter().
+ *
+ * Changes access callbacks and arguments for **some** (dubious) Taxonomy
+ * admin pages:
+ *
+ * - Vocabulary overview: if you have access to >= 1 vocabulary.
+ * - Vocabulary's terms overview: if you have access to edit or delete
+ *   terms in this vocabulary.
+ * - Add vocabulary term: if you have the new "add terms in X" permission.
+ *
+ * @see taxonomy_access_fix_access()
+ */
+function taxonomy_access_fix_menu_alter(&$items) {
+  // Vocabularies list.
+  $item = &$items['admin/structure/taxonomy'];
+  $item['access callback'] = 'taxonomy_access_fix_access';
+  $item['access arguments'] = array('index');
+
+  // Terms list in vocabulary.
+  $item = &$items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name'];
+  $item['access callback'] = 'taxonomy_access_fix_access';
+  $item['access arguments'] = array('list terms', 3);
+
+  // Add term to vocabulary.
+  $item = &$items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name/add'];
+  $item['access callback'] = 'taxonomy_access_fix_access';
+  $item['access arguments'] = array('add terms', 3);
+}
+
+/**
+ * Creates an access callback for custom vocabulary access.
+ *
+ * @see taxonomy_access_fix_permission()
+ * @see http://api.drupal.org/api/drupal/modules--taxonomy--taxonomy.module/function/taxonomy_permission/7
+ */
+function taxonomy_access_fix_access($op, $vocabulary = NULL) {
+  // Admin: always.
+  if (user_access('administer taxonomy')) {
+    return TRUE;
+  }
+
+  if ($vocabulary && is_string($vocabulary)) {
+    $vocabulary = taxonomy_vocabulary_machine_name_load($vocabulary);
+  }
+
+  // Others: well, that depends.
+  switch ($op) {
+    case 'index':
+      // Allow access when the user has access to at least one vocabulary.
+      foreach (taxonomy_get_vocabularies() as $vid => $vocabulary) {
+        if (user_access('edit terms in ' . $vid) || user_access('delete terms in ' . $vid) || user_access('add terms in ' . $vocabulary->machine_name)) {
+          return TRUE;
+        }
+      }
+      break;
+
+    case 'list terms':
+    case 'reorder':
+      if ($vocabulary) {
+        $vid = $vocabulary->vid;
+        if (user_access('edit terms in ' . $vid) || user_access('delete terms in ' . $vid) || user_access('add terms in ' . $vocabulary->machine_name)) {
+          return TRUE;
+        }
+      }
+      break;
+
+    case 'add terms':
+      if ($vocabulary) {
+        if (user_access('add terms in ' . $vocabulary->machine_name)) {
+          return TRUE;
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Update the role_permission table with the new vocabulary machine name.
+ *
+ * @param string $original
+ *   The $original machine_name
+ * @param string $updated
+ *   The updated machine_name
+ *
+ * @return bool
+ *   The UpdateQuery result if applicable
+ */
+function taxonomy_access_fix_update_role_permissions($original, $updated) {
+  if ($original == $updated) {
+    return FALSE;
+  }
+
+  return db_update('role_permission')
+    ->condition('module', 'taxonomy_access_fix', '=')
+    ->condition('permission', 'add terms in ' . $original, '=')
+    ->fields(array('permission' => 'add terms in ' . $updated))
+    ->execute();
+}
+
+/**
+ * Implements hook_admin_menu_map().
+ */
+function taxonomy_access_fix_admin_menu_map() {
+  if (!user_access('administer taxonomy')) {
+    $vocabularies = array();
+    foreach (taxonomy_get_vocabularies() as $vid => $vocabulary) {
+      if (taxonomy_access_fix_access('index', $vocabulary)) {
+        $vocabularies[] = $vocabulary->machine_name;
+      }
+    }
+
+    if ($vocabularies) {
+      $map = array(
+        'admin/structure/taxonomy/%taxonomy_vocabulary_machine_name' => array(
+          'parent' => 'admin/structure/taxonomy',
+          'arguments' => array(
+            array('%taxonomy_vocabulary_machine_name' => $vocabularies),
+          ),
+        ),
+      );
+      return $map;
+    }
+  }
+}

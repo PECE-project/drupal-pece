@@ -1,0 +1,24 @@
+; $Id: og_mailinglist.info,v 1.0 2009-03-16 $
+name = OG Mailinglist
+description = "Allows email submissions of new posts and comments for organic groups."
+dependencies[] = comment
+dependencies[] = field
+dependencies[] = og (2.x)
+package = "Organic groups"
+core = 7.x
+version = "7.x-1.0-alpha1"
+
+configure = admin/config/group/mailinglist
+
+stylesheets[all][] = og_mailinglist.css
+scripts[] = og_mailinglist.js
+
+files[] = og_mailinglist.admin.inc
+files[] = og_mailinglist.fields.inc
+
+; Information added by Drupal.org packaging script on 2014-04-06
+version = "7.x-1.1-alpha2"
+core = "7.x"
+project = "og_mailinglist"
+datestamp = "1396815552"
+

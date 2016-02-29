@@ -1,0 +1,78 @@
+<?php
+
+include_once('panopoly_pages.features.inc');
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Modify the Panelizer's additions to the IPE buttons to make them make sense
+ * for landing pages.
+ */
+function panopoly_pages_form_panels_ipe_edit_control_form_alter(&$form, &$form_state) {
+  if (empty($form_state['renderer'])) {
+    return;
+  }
+  $renderer = $form_state['renderer'];
+  $cache_key = $renderer->display->cache_key;
+  list($module, $type, $key) = explode(':', $cache_key, 3);
+  if ($module != 'panelizer' || $type != 'node') {
+    return;
+  }
+
+  // Get the actual node so that we can get it's type.
+  list($nid, $view_mode) = explode(':', $key);
+  if (($node = node_load($nid)) && $node->type == 'panopoly_landing_page') {
+    // Change the 'Save as custom' button back to just 'Save'.
+    $form['buttons']['submit']['#value'] = t('Save');
+
+    // Remove the 'Revert' and 'Save as default' buttons.
+    unset($form['buttons']['revert_default']);
+    unset($form['buttons']['save_default']);
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function panopoly_pages_module_implements_alter(&$implementations, $hook) {
+  // Move our hooks to the end so they are executed last.
+  if (($hook == 'form_alter' || $hook == 'modules_enabled') && isset($implementations['panopoly_pages'])) {
+    $group = $implementations['panopoly_pages'];
+    unset($implementations['panopoly_pages']);
+    $implementations['panopoly_pages'] = $group;
+  }
+}
+
+/**
+ * Implements hook_modules_enabled().
+ *
+ * This hook is implemented to assign some default permissions for Panelizer's
+ * handling of taxonomy terms. This has to be done in this hook to run after
+ * both features and defaultconfig which power the functionality. Hopefully a
+ * more general solution can be found.
+ * @see http://drupal.org/node/1837312
+ */
+function panopoly_pages_modules_enabled($modules) {
+  // Only run this logic if we are executing as part of an install profile
+  // And only for this particular module.
+  if (drupal_installation_attempted() && in_array('panopoly_pages', $modules)) {
+
+    // Rebuild some caches so this all works right.
+    features_revert_module('panopoly_pages');
+    drupal_static_reset('panelizer_entity_plugin_get_handler');
+
+    $roles = array('editor', 'administrator');
+    $content_types = array('panopoly_page', 'panopoly_landing_page');
+    $components = array('breadcrumbs', 'content', 'context', 'defaults', 'layout', 'overview', 'settings');
+
+    // Setup some default permissions for Panelizer.
+    foreach ($roles as $role_name) {
+      $role = user_role_load_by_name($role_name);
+      foreach ($content_types as $content_type) {
+        foreach ($components as $component) {
+          user_role_grant_permissions($role->rid, array("administer panelizer node {$content_type} {$component}"));
+        }
+      }
+    }
+  }
+}

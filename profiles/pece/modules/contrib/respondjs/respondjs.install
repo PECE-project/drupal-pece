@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * Implements hook_requirements().
+ */
+function respondjs_requirements($phase) {
+  $requirements = array();
+  if ($phase == "runtime") {
+    $library_path = respondjs_get_library_file();
+    $requirements['respondjs'] = array(
+      'title' => t('Respond.js script'),
+      'value' => t('Enabled'),
+    );
+    // If CSS aggregated is not enabled, inform users it will not work.
+    if (variable_get('preprocess_css') != 1) {
+      $requirements['respondjs']['value'] = t('Respond.js will not work with CSS aggregation disabled.');
+      if (variable_get('respondjs_quiet', RESPONDJS_QUIET_DEFAULT) == 1) {
+        // If user disabled the warning, reduce severity of this requirement.
+        $requirements['respondjs']['severity'] = REQUIREMENT_WARNING;
+        $requirements['respondjs']['description'] = t('The Respond.js module is enabled, but CSS aggregation is disabled. The script cannot function until <a href="@url">CSS agregation is enabled</a>.', array('@url' => url('admin/config/development/performance', array('query' => array('destination' => request_path())))));
+      }
+      else {
+        // By default, failure to enable aggregation results in admin warning.
+        $requirements['respondjs']['severity'] = REQUIREMENT_ERROR;
+        $requirements['respondjs']['description'] = t('The Respond.js module is enabled, but CSS aggregation is disabled. The script cannot function until <a href="@url1">CSS agregation is enabled</a>. You can <a href="@url2">disable this warning</a>.', array('@url1' => url('admin/config/development/performance', array('query' => array('destination' => request_path()))), '@url2' => url('admin/config/media/respondjs', array('query' => array('destination' => request_path())))));
+      }
+    }
+
+    // If any of the next requirements are unsuccessful, they negate the need to
+    // inform the user about CSS aggregation. So we're intentionally overwriting
+    // the $requirements values we just set above.
+
+    // If Libraries API is enabled but respond.js is not found within the
+    // sites/all/libraries folder, then report a warning. The module will fall
+    // back to its included copy so this isn't a showstopper.
+    if (function_exists('libraries_get_path') && strpos($library_path,'libraries/respondjs') === FALSE) {
+      $requirements['respondjs']['value'] = t('Respond.js is not correctly using Libraries API');
+      $requirements['respondjs']['severity'] = REQUIREMENT_WARNING;
+      $requirements['respondjs']['description'] = t('Please install !respondjs in <b>@libraries</b>. The module is using its included copy at <b>@default</b>.', array(
+        '!respondjs' => l('respond.min.js', RESPONDJS_DOWNLOAD_URI),
+        '@libraries' => RESPONDJS_DOWNLOAD_LOCATION,
+        '@default' => drupal_get_path('module','respondjs') . '/lib')
+      );
+    }
+
+    // If the included copy of respond.js has been removed or renamed report an error.
+    // At this point the module cannot function properly.
+    if (!file_exists($library_path)) {
+      $requirements['respondjs']['value'] = t('Respond.js is not correctly installed');
+      $requirements['respondjs']['severity'] = REQUIREMENT_ERROR;
+      $requirements['respondjs']['description'] = t('Please install !respondjs in <strong>@libraries</strong>', array(
+        '!respondjs' => l('Respond.js', RESPONDJS_DOWNLOAD_URI),
+        '@libraries' => RESPONDJS_DOWNLOAD_LOCATION,
+      ));
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function respondjs_uninstall() {
+  variable_del('respondjs_scope');
+  variable_del('respondjs_quiet');
+}

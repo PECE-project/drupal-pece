@@ -1,0 +1,150 @@
+Panopoly Test 7.x-1.27, 2015-09-02
+---------------------------
+- No changes since last release.
+
+Panopoly Test 7.x-1.26, 2015-08-19
+---------------------------
+- Errors on non-interactive install with drush site-install.
+- Error on install of Panopoly-based install profile: "Column 'module' cannot be
+  null" when profile starts with "e".
+- Update tablefield to version 2.4.
+
+Panopoly Test 7.x-1.25, 2015-07-08
+---------------------------
+- Add phing-based build system to make it easier for contributors to build,
+  install and run tests.
+- Allow video_widget.feature to run under Firefox.
+
+Panopoly Test 7.x-1.24, 2015-07-02
+---------------------------
+- No changes since last release.
+
+Panopoly Test 7.x-1.23, 2015-06-17
+---------------------------
+- Commit composer.lock to increase test performance and consistancy.
+- Generate preview markup in a theme function/template.
+
+Panopoly Test 7.x-1.22, 2015-06-04
+---------------------------
+- Only show one widget preview at a time when adding content in panels.
+- Update to latest Fieldable Panels Panes (FPP).
+- Upgrade to Behat 3 / Drupal Extension 3.
+- Write Behat test for autocomplete on "Add content item" widget.
+- Editing body of node in FAPE via the IPE doesn't save changes.
+- Style settings form breaks 'managed_file' elements, puts 'Cancel' button in
+  'General Settings' fieldset, and gives PHP notices on region style settings.
+- Add Behat tests for demo content pulled in via panopoly_demo and Migrate.
+- "@Then /^I should see the "([^"]*)" button$/" notice on $region.
+- Write Behat test for hiding seldom used pane styles via Panopoly Magic.
+- Undefined events don't have definition but afterStep still called, errors out.
+- Provide a way for Views to opt out of allowing the "Display type" to be
+  changed on the pane settings.
+
+Panopoly Test 7.x-1.21, 2015-04-29
+---------------------------
+- Set human-readable names for all of Panopoly's image styles.
+- Clean up instances of deprecated panpoly_theme layouts.
+- Remove 'Radix' from the label of each of the layouts.
+- Page full of variables after changing layout.
+- Menu_rebuild removed, but not variable that tracked if had been done.
+- Update Features module to version 2.5.
+
+Panopoly Test 7.x-1.20, 2015-03-25
+---------------------------
+- CHANGELOG.txt updates for 1.19 went wrong.
+
+Panopoly Test 7.x-1.19, 2015-03-19
+----------------------------
+- Updated CHANGELOG.txt for 7.x-1.19 release.
+- User profile: Unable to chage image field style formatter options because they
+  don't get saved.
+- Authenticated users should have full permission to all test content types.
+- "Top search phrases" report not showing any data.
+- Make "Landing Page" into node + Panelizer (rather than a Page Manager page)?.
+- Panopoly Magic abuses FPP revisions.
+- Audit Behat code for slowness and optimize.
+- YouTube test fails on Chrome 41.
+- Allow live preview to work with WYSIWYG.
+
+Panopoly Test 7.x-1.18, 2015-02-26
+---------------------------
+- Hide 'preview' and 'diff_standard' view modes when adding FPPs.
+- Make view modes removed from pane configuration a setting.
+
+Panopoly Test 7.x-1.17, 2015-02-18
+---------------------------
+- Submenu widget test depends on panopoly_pages.
+
+Panopoly Test 7.x-1.16, 2015-02-12
+---------------------------
+- Overriding title in "Content Item" widget doesn't work for "Featured" view mode of Content Pages.
+- Switch "Content Item" widget to use some kind of entity reference field rather than title with autocomplete filter.
+- Allow users to search for content added to a node via Panelizer.
+- Allow the title of "Content item" widgets to be overridden.
+- Write Behat tests for Panopoly "submenu" widget.
+- Write Behat test for Media Web tab; move to new feature.
+- File upload tests do not clean up after themselves.
+- Revert "Issue #2268647 by cboyden, dsnopek: File upload tests do not clean up after themselves".
+- Allow configuring file types for "File" widget without overriding the Feature.
+
+Panopoly Test 7.x-1.15, 2015-01-12
+---------------------------
+- No changes since last release.
+
+Panopoly Test 7.x-1.14, 2014-11-19
+---------------------------
+- Write Behat tests to ensure search works after install and provides facets.
+- Write Behat tests to verify that submission guidelines appear on node edit form.
+- Panopoly_test shouldn't put "use text format panopoly_(html|wysiwyg)_text" in user_permission.
+- Have Panopoly Theme depend on Radix Layouts (rather than providing it's own).
+- Write Behat tests for pathauto for 'editor' role.
+- Revert "Issue #2334055 by jessehs | dsnopek: Write Behat tests to verify that submission guidelines appear on node edit form.".
+- Write Behat tests to ensure search works after install and provides facets.
+- Write Behat tests to verify that submission guidelines appear on node edit form.
+- Use 'imports' in behat.yml files to share common configuration.
+
+Panopoly Test 7.x-1.13, 2014-10-17
+---------------------------
+- No changes since last release.
+
+Panopoly Test 7.x-1.12, 2014-10-15
+---------------------------
+- Fixed Remove field_featured_categories and field_featured_status from panopoly_test.
+- Added Upgrade linkit module 3.1+.
+- Fixed Disabling "Advanced Panel Plugins" breaks some Panes (ex. Panels Everywhere).
+- Fixed Old content aliases should be preserved by default.
+- Fixed One-time login link test does not delete its user.
+- Fixed panopoly_test should not depend on panopoly_pages.
+- Added Panopoly Magic should respect a view's configured view mode. (take 2).
+- Added Behat feature for Panopoly Magic and view pane configuration.
+- Check that Spotlight 'Slide Duration' field is present and settable in Behat tests.
+- Fixed Path alias isn't preserved if the user doesn't have "create url alias" permission.
+- Investigate why tests now take twice as long to run.
+- Fixed Video widget test looks for "youtube" text both times.
+- Fixed WYSIWYG image insert test fails if private file path not set.
+
+Panopoly Test 7.x-1.11, 2014-08-14
+---------------------------
+- Fixed Tabs region is defined twice in behat.yml which is causing tests to fail in child distributions.
+- Fixed Demo Homepage test fails on child distributions.
+- Fixed Case sensitivity in live preview test.
+
+Panopoly Test 7.x-1.10, 2014-08-06
+---------------------------
+- No changes since last release.
+
+Panopoly Test 7.x-1.9, 2014-07-31
+---------------------------
+- Write Behat test for alt/title text on images in the WYSIWYG. (update for quotes).
+
+Panopoly Test 7.x-1.8, 2014-07-25
+---------------------------
+- Write Behat test for alt/title text on images in the WYSIWYG.
+
+Panopoly Test 7.x-1.7, 2014-07-16
+---------------------------
+- Added an empty CHANGELOG.txt file for the release scripts.
+- Fixed Login test depends on known credentials.
+- Fixed Behat template for local testing needs Chrome profile.
+- Move our FeatureContext and *.features into panopoly_test so that child distributions can reuse them.
+

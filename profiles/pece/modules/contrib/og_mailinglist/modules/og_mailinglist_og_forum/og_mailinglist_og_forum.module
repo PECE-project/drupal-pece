@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * Implements hook_og_mailinglist_save_node_alter().
+ *
+ * If this is a forum post and the og_forum module is enabled, find this
+ * group's default forum container and add that to the node object.
+ */
+function og_mailinglist_og_forum_og_mailinglist_save_node_alter(&$node) {
+  if (_forum_node_check_node_type($node) && module_exists('og_forum')) {
+    $gid = $node->og_group_ref[LANGUAGE_NONE][0]['target_id'];
+    $forum_id = db_query("SELECT m.etid
+                          FROM {og_membership} m
+                          JOIN {taxonomy_term_data} t
+                          ON m.etid = t.tid
+                          WHERE m.gid = :gid
+                          AND m.entity_type = 'taxonomy_term'",
+                          array(':gid' => $gid))->fetchField();
+    $term = taxonomy_term_load($forum_id);
+    $node->taxonomy_forums[LANGUAGE_NONE][0]['tid'] = $term->tid;
+    $node->forum_tid = $term->tid;
+
+    if (empty($node->tid)) {
+      $node->tid = $term->tid;
+    }
+    if (empty($node->taxonomy)) {
+      $node->taxonomy = array($term->vid => $term);
+    }
+  }
+}
+

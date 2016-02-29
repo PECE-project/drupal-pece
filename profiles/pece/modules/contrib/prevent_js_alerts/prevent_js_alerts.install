@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Installation functions for Prevent JS alerts
+ */
+
+/**
+ * Implements hook_install().
+ */
+function prevent_js_alerts_install() {
+  // Set general settings.
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function prevent_js_alerts_uninstall() {
+  // Remove the general settings.
+  $result = db_query(
+    "SELECT name FROM {variable} WHERE name LIKE 'prevent_js_alerts_%'");
+
+  // Exclude variables here!!
+  $exclude = array();
+  while ($var_name = $result->fetchAssoc()) {
+    if (! in_array($var_name['name'], $exclude)) {
+      variable_del($var_name['name']);
+    }
+  }
+}

@@ -1,0 +1,88 @@
+<?php
+/**
+ * @file
+ * Installation code for the PECE Design Logic feature.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function pece_design_logic_install() {
+  // 1. Enable pathauto for the design_logic entity type.
+  $value = variable_get('pathauto_entity_available_entity_types', array());
+  $value['design_logic'] = 'design_logic';
+  variable_set('pathauto_entity_available_entity_types', $value);
+
+  // 2. Setup pathauto for the design_logic entity type.
+  variable_set('pathauto_design_logic_pattern', 'design-logic/[design_logic:title]');
+}
+
+/**
+ * Implements hook_kw_manifests_info().
+ */
+function pece_design_logic_kw_manifests_info() {
+  $manifests = array();
+
+  $manifests['ensure_items'] = array(
+    'callback' => 'pece_design_logic_ensure_items',
+  );
+
+  $manifests['permissions'] = array(
+    'callback' => 'pece_design_logic_permissions',
+  );
+
+  return $manifests;
+}
+
+/**
+ * Create kraftwagen itemnames for each design logic type.
+ */
+function pece_design_logic_ensure_items() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  module_load_include('inc', 'pece_design_logic', 'pece_design_logic.functions');
+
+  $path_to_module = drupal_get_path('module', 'pece_design_logic');
+  $path_to_defaults = drupal_realpath($path_to_module . '/defaults');
+
+  $design_logic_items = array(
+    'alt_ontology',
+    'crossing_scales_working_double_binds',
+    'explanatory_pluralism',
+    'juxtapositional_logics',
+    'pursuing_differential_reproduction',
+    'scruffie_contours_and_blurred_focus',
+    'transmuting_ambivalences_of_meaning',
+    'valuing_noise',
+  );
+
+
+  foreach ($design_logic_items as $name) {
+    $path_to_design_logic_info_file = "{$path_to_defaults}/{$name}.yml";
+
+    if (file_exists($path_to_design_logic_info_file)) {
+      $design_logic_info_raw = file_get_contents($path_to_design_logic_info_file);
+      $design_logic_info = pece_parse_yaml($design_logic_info_raw);
+
+      $path_to_design_logic_thumbnail = "{$path_to_defaults}/files/{$design_logic_info['thumbnail']}";
+      if (file_exists($path_to_design_logic_thumbnail)) {
+        $design_logic_info['thumbnail'] = $path_to_design_logic_thumbnail;
+      }
+
+      pece_design_logic_ensure_item($name, $design_logic_info);
+    }
+  }
+}
+
+/**
+ * Setup Design logic permissions.
+ */
+function pece_design_logic_permissions() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  pece_set_permissions(array(
+    'all' => array(
+      'eck list design_logic design_logic entities' => TRUE,
+      'eck view design_logic design_logic entities' => TRUE,
+    ),
+  ));
+}

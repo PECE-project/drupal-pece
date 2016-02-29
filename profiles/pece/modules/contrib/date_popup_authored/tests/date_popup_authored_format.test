@@ -1,0 +1,111 @@
+<?php
+
+/**
+ * @file
+ * Simpletest case for Date Popup Authored.
+ *
+ * Verify Date Popup Authored functionality.
+ */
+
+/**
+ * Functionality tests for Date Popup Authored.
+ */
+class DatePopupAuthoredTestCase extends PageEditTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Page editing with Date Popup Authored',
+      'description' => 'Verify Date Popup Authored does not interfere with page editing.',
+      'group' => 'Date Popup Authored',
+    );
+  }
+
+  function setUp() {
+    // Enable the module.
+    DrupalWebTestCase::setUp('date_popup_authored');
+
+    // Create users for test cases.
+    $this->web_user = $this->drupalCreateUser(array('edit own page content', 'create page content'));
+    $this->admin_user = $this->drupalCreateUser(array('bypass node access', 'administer nodes'));
+  }
+
+  /**
+   * Check changing node authored on fields.
+   */
+  function testPageAuthoredOnEdit() {
+    $this->drupalLogin($this->admin_user);
+
+    // Create node to edit.
+    $langcode = LANGUAGE_NONE;
+    $body_key = "body[$langcode][0][value]";
+    $edit = array();
+    $edit['title'] = $this->randomName(8);
+    $edit[$body_key] = $this->randomName(16);
+    $this->drupalPost('node/add/page', $edit, t('Save'));
+
+    $node = $this->drupalGetNodeByTitle($edit['title']);
+    $node->date = format_date($node->created, 'custom', 'Y-m-d H:i:s O');
+
+    // Check that the Authored On field's format does not mangle the saved date.
+    $this->checkAuthoredOnWithFormat('M d, Y', $node);
+    $this->checkAuthoredOnWithFormat('M, Y', $node);
+    $this->checkAuthoredOnWithFormat('M d, Y H:i', $node);
+    $this->checkAuthoredOnWithFormat('m/d/Y - H:i:s', $node);
+    $this->checkAuthoredOnWithFormat('d M Y - g:i A', $node);
+  }
+
+  /**
+   * Check to see if Date Popup Authored keeps the Authored On field intact.
+   *
+   * Date Popup cleverly handles how to replace regular text fields: if the date
+   * format has both a date and time component, it creates one textfield for the
+   * date and one for the time.
+   *
+   * Because of this, the node date needs to be split into date and time parts
+   * so it can be compared with the date popup on the node submission form.
+   *
+   * @param $format
+   *  The date format to test.
+   * @param $node
+   *  The node object to test the date format with.
+   * @param $timezone
+   *  Optionally, a timezone to test with.
+   */
+  function checkAuthoredOnWithFormat($format, $node, $timezone = '') {
+    debug('Format: ' . $format);
+
+    $timezone = !empty($timezone) ? $timezone : date_default_timezone_object();
+
+    // Extract the date and time format parts
+    $granularity = date_format_order($format);
+    $date_format = date_limit_format($format, array_intersect($granularity, array('month', 'day', 'year')));
+    $time_format = date_popup_format_to_popup_time(date_limit_format($format, array_intersect($granularity, array('hour', 'minute', 'second'))));
+
+    // Generate a DateObject object for the node date.
+    $node_date = DateObject::createFromFormat('Y-m-d H:i:s O', $node->date, $timezone);
+    debug($node_date->format($date_format), 'Node date');
+    debug($node_date->format($time_format), 'Node time');
+
+    // Extract the date and time parts as seen on the node submission form
+    $default_format = variable_get('date_popup_authored_format_page', 'm/d/Y - H:i');
+    variable_set('date_popup_authored_format_page', $format);
+
+    $this->drupalGet('node/' . $node->nid . '/edit');
+    $elements = $this->xpath("//input[starts-with(@name, 'date[')]");
+
+    $submitted_date_string = '';
+    foreach ($elements as $element) {
+      if ((string) $element['name'] === 'date[date]') {
+        debug((string) $element['value'], 'Submitted date');
+        $this->assertIdentical($node_date->format($date_format), (string) $element['value'], 'The node date and submission form have identical dates.');
+      }
+      elseif ((string) $element['name'] === 'date[time]') {
+        debug((string) $element['value'], 'Submitted time');
+        $this->assertIdentical($node_date->format($time_format), (string) $element['value'], 'The node date and submission form have identical times.');
+      }
+    }
+
+    // Reset format back to default
+    variable_set('date_popup_authored_format_page', $format);
+  }
+}

@@ -1,0 +1,51 @@
+language: php
+sudo: false
+
+addons:
+  apt:
+    packages:
+    - php5-cgi
+    - php5-mysql
+
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+
+mysql:
+  database: amber
+  username: root
+  encoding: utf8
+
+install:
+  # install drush
+  - pear channel-discover pear.drush.org
+  - pear install drush/drush-5.8.0
+  - phpenv rehash
+
+before_script:
+  # Setup /tmp directory for tests
+  - mkdir /tmp/amber
+
+  # navigate out of module directory to prevent blown stack by recursive module lookup
+  - cd ../..
+
+  # create new site, stubbing sendmail path with true to prevent delivery errors and manually resolving drush path
+  - mysql -e 'create database amber'
+  - php -d sendmail_path=`which true` `pear config-get php_dir`/drush/drush.php --yes core-quick-drupal --profile=testing --no-server --db-url=mysql://root:@127.0.0.1/amber --enable=simpletest amber
+
+  # reference and enable travis_ci_drupal_module_example in build site
+  - ln -s $(readlink -e $(cd -)) amber/drupal/sites/all/modules
+  - cd amber/drupal
+  - drush --yes pm-enable amber
+
+  # start a web server on port 8080, run in the background
+  - drush runserver 127.0.0.1:8080 &
+
+script:
+  - drush test-run 'Amber, AmberWeb' --uri=http://127.0.0.1:8080
+  - cd sites/all/modules
+  - phpunit --exclude-group ExternalInterfaces .
+  
+  
+  

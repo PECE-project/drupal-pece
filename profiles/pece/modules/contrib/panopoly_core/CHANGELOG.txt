@@ -1,0 +1,222 @@
+Panopoly Core 7.x-1.28, 2015-10-21
+---------------------------
+- Update to Drupal 7.41 for SA-CORE-2015-004 and jquery_update for SA-
+  CONTRIB-2015-158.
+- Missing file access checks for private files attached to Fieldable Panel
+  Panes.
+- Can't distinguish reusable content without admin title when previews are in
+  single mode.
+- CTools "Undefined index: access callback in
+  ctools_entity_from_field_context()".
+
+Panopoly Core 7.x-1.27, 2015-09-02
+---------------------------
+- Update to fieldable_panels_panes version 1.7 for SA-CONTRIB-2015-145.
+- Move jQuery version from strongarm to defaultconfig so it can be overridden.
+
+Panopoly Core 7.x-1.26, 2015-08-19
+---------------------------
+- Revert "Issue #2474563 by mglaman: Need ctools patch for calling node_view
+  more than once".
+- Update to CTools 1.8 for SA-CONTRIB-2015-141.
+- Update views_autocomplete_filters to version 1.2.
+- Need ctools patch for calling node_view more than once.
+- Update Apps to 1.0.
+- Error on install of Panopoly-based install profile: "Column 'module' cannot be
+  null" when profile starts with "e".
+- The breadcrumb for create text & image shows ampersand as" &amp; ".
+
+Panopoly Core 7.x-1.25, 2015-07-08
+---------------------------
+- Media dialog broken (possible bug).
+
+Panopoly Core 7.x-1.24, 2015-07-02
+---------------------------
+- Media dialog missing styles.
+- Update to views_bulk_operations 3.3 for SA-CONTRIB-2015-131.
+- Update to Migrate 2.8 for SA-CONTRIB-2015-130.
+- Update Features to version 2.6.
+
+Panopoly Core 7.x-1.23, 2015-06-17
+---------------------------
+- Update to jquery_update 2.6 for SA-CONTRIB-2015-123.
+- Update jquery_update to version 2.5.
+- Update Features to version 2.6-rc1.
+
+Panopoly Core 7.x-1.22, 2015-06-04
+---------------------------
+- Include Panels and CTools patches for improved keyboard accessibility.
+- Update to latest Fieldable Panels Panes (FPP).
+- Move jquery_update to panopoly_core.make and .info.
+- Switch from hook_pre_render_styles() to hook_library_alter().
+- Revert "Issue #2456255 by dsnopek: Update views_autocomplete_filters to
+  version 1.2".
+- Update Date to 2.9-rc1.
+- Update apps to rc1.
+- Update views_autocomplete_filters to version 1.2.
+
+Panopoly Core 7.x-1.21, 2015-04-29
+---------------------------
+- Update Views to version 3.11 for SA-CONTRIB-2015-103.
+- Clean up instances of deprecated panpoly_theme layouts.
+- Undefined index: default_filename in defaultconfig_defaultconfig_components()
+  (line 418.
+- Include views patch to fix destination query string on ajax calls from views.
+- Update token module to version 1.6.
+- Make theming FPPs sane.
+- Update to Drupal 7.36.
+- Update Features module to version 2.5.
+- Errors when viewing pages with fieldable panels panes with visibility rules.
+
+Panopoly Core 7.x-1.20, 2015-03-25
+---------------------------
+- CHANGELOG.txt updates for 1.19 went wrong.
+
+Panopoly Core 7.x-1.19, 2015-03-19
+----------------------------
+- Updated CHANGELOG.txt for 7.x-1.19 release.
+- Update to CTools 1.7 for SA-CONTRIB-2015-079.
+- Features exports including Panels stuff (*.pages_default.inc, *.panelizer.inc,
+  etc) use incorrect indentation.
+- Panopoly Magic abuses FPP revisions.
+- Administration menu: errors when enabling it.
+
+Panopoly Core 7.x-1.18, 2015-02-26
+---------------------------
+- Update to Entity API 1.6 for SA-CONTRIB-2015-053.
+- Failing to download 'panopoly_demo' when installing via 'drush si': "Downloading updates failed:Failed to download from ".
+- Update to Migrate 2.7.
+
+Panopoly Core 7.x-1.17, 2015-02-18
+---------------------------
+- No changes since last release.
+
+Panopoly Core 7.x-1.16, 2015-02-12
+---------------------------
+- Update Views to version 3.10 for SA-CONTRIB-2015-039.
+- Allow users to search for content added to a node via Panelizer.
+- Notice: Undefined variable: id in ctools_argument_entity_id_context() (line 73 of /prj/ctools/plugins/arguments/entity_id.inc).
+- Warning: Illegal offset type in views_add_contextual_links() (line 816 of ~/prj/panopoly/panopoly/modules/contrib/views/views.module).
+- Update to Panels 3.5 and Ctools 1.6.
+- Widget 'title' isn't shown admin pages for Fieldable Panel Panes.
+- Revert "Issue #2312827 by dsnopek: Widget 'title' isn't shown admin pages for Fieldable Panel Panes".
+- Widget 'title' isn't shown admin pages for Fieldable Panel Panes.
+- Update to features 2.3.
+
+Panopoly Core 7.x-1.15, 2015-01-12
+---------------------------
+- Update to CTools 1.5
+
+Panopoly Core 7.x-1.14, 2014-11-19
+---------------------------
+- Update to apps beta20.
+- Have Panopoly Theme depend on Radix Layouts (rather than providing it's own).
+- Fixed views_autocomplete_filters 'dependent' feature doesn't work in Pane settings.
+- Fixed Patch needed to Views Bulk Operations (VBO).
+- Update distro_update to version 1.0-beta4.
+- Update 'link' module to version 1.3.
+- Consider CTools modal resize patch (#2055785) for inclusion in Panopoly?.
+- Fixed Strict warning: Only variables should be passed by reference in apps_retrieve_app_image().
+
+Panopoly Core 7.x-1.13, 2014-10-17
+---------------------------
+- No changes since last release.
+
+Panopoly Core 7.x-1.12, 2014-10-15
+---------------------------
+- Fixed Include CTools patch to prevent error in IPE when field doesn't exist.
+- Update 'panels_breadcrumbs' to version 2.2.
+- Update 'uuid' to version 1.0-alpha6.
+- Fixed Old content aliases should be preserved by default.
+- Update Apps to latest beta.
+- Remove Open Sans?.
+- Fixed On Views "Content Panes", exclude hidden fields (on "Field Settings") by default.
+- Patch Panelizer to avoid fatal error in Features.
+- Added features override.
+- Revert "Issue #2208783 by mrfelton | lsolesen: Added features override.".
+- Added features override.
+- Replace default "update" module behavior with something that makes sense for distributions.
+- Fixed Double-encoding of ampersands in page title on node add form.
+- Revert "Issue #2128959 by caschbre | dsnopek: Replace default "update" module behavior with something that makes sense for distributions.".
+- Replace default "update" module behavior with something that makes sense for distributions.
+- Update Features to 2.2.
+
+Panopoly Core 7.x-1.11, 2014-08-14
+---------------------------
+- No changes since last release.
+
+Panopoly Core 7.x-1.10, 2014-08-06
+---------------------------
+- No changes since last release.
+
+Panopoly Core 7.x-1.9, 2014-07-31
+---------------------------
+- Update to Date 2.8 for SA-CONTRIB-2014-073.
+- Fixed Previews for new Views widgets don't show "more link" even when it should be enabled by default.
+
+Panopoly Core 7.x-1.8, 2014-07-25
+---------------------------
+- Added transliteration.
+
+Panopoly Core 7.x-1.7, 2014-07-16
+---------------------------
+- Fixed Autocomplete loses item selected via keyboard in CTools dialog.
+- Fixed views_autocomplete_filter 1.1 is broken on Pantheon.
+- Disable "Nody body" pane in favor of "Field: Body" (which FAPE supports).
+- Add visual indicator of tab focus on to IPE customize page screen.
+- Test if Features are Overridden after install on Travis-CI.
+- Fixed Accessibility issues for link markup on Add Content overlay.
+- Update field_group to version 1.4.
+- Fixed Descriptions of views not accurate.
+
+Panopoly Core 7.x-1.6, 2014-05-22
+---------------------------
+- Update Views to 3.8 for DRUPAL-SA-CONTRIB-2014-054.
+- Update "persist" patch to pathauto.
+- Update 'devel' module to 1.5.
+
+Panopoly Core 7.x-1.5, 2014-04-30
+---------------------------
+- Update FAPE to version 1.2 for SA-CONTRIB-2014-048.
+
+Panopoly Core 7.x-1.4, 2014-04-24
+---------------------------
+- No changes since last release.
+
+Panopoly Core 7.x-1.3, 2014-04-23
+---------------------------
+- Update 'libraries' module to 2.2.
+- Update 'entity' module to version 1.5.
+- Update views_autocomplete_filters to version 1.1.
+
+Panopoly Core 7.x-1.2, 2014-13-08
+---------------------------
+- Add CHANGELOG.txt
+- Use stable Fieldable Panels Panes release.
+- The "Sort by" won't save in the "Content list" widget (switch from ctools patch to views patch).
+- Update to actual CTools 1.4 (security vulnerablity!) and Panels 3.4 releases!.
+- Provide feature module updates for ctools / panels upgrade.
+- Update date module to latest version 2.7.
+- Update 'devel' module to version 1.4.
+- Revert: Installing 'ctools' (1.4) before 'uuid' during Panopoly install causes fatal error.
+- Update views_bulk_operations to version 3.2.
+- Test changes to Ctools (1.4) and Panels (3.4) comming on Feb 5th.
+
+Panopoly Core 7.x-1.1, 2014-01-13
+---------------------------
+- Upgrade from 1.0-rc3 or 1.0-rc2 fails: Table 'pathauto_state' doesn't exist.
+- Update Entity API to 1.3 for security vulnerablity.
+- Add projects[apps][version] = 1.x-dev to makefile.
+- Add helper functions for modules that implement demo content using Migrate.
+- Update all features.
+- FAPE causing "Illegal string offset 'field_name'.
+- Update field_group to version 1.3.
+- The "Sort by" won't save in the "Content list" widget.
+- Update 'link' module to version 1.2.
+- Defaultconfig issues in installation profiles that extend panopoly
+- Add Migrate modules to Panopoly Core to help facilitate better demo content patterns
+- Update Apps module so that Apps can be used in offline mode
+- Troubles Implementing Default Permissions for Panelizer
+- Update features to 2.0.
+- Update 'entity' module to version 1.2 (for security advisory!).
+- Update 'entityreference' module to version 1.1 (for security advisory!).

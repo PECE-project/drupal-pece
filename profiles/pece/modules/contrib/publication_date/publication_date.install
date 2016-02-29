@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * @file
+ * Installation functions for the Publication Date module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function publication_date_schema() {
+  $schema['publication_date'] = array(
+    'description' => 'Keep the publication timestamp for each node.',
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The {node}.nid of the node.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'published_at' => array(
+        'description' => 'The timestamp of the node publication.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+        'published_at' => array('published_at'),
+    ),
+    'primary key' => array('nid'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function publication_date_install() {
+
+  // Set publication dates for existing nodes.
+  _publication_date_update_existing();
+
+  // This module must be called after some other modules (i.e. Scheduler).
+  db_update('system')
+    ->fields(array('weight' => 99))
+    ->condition('name', 'publication_date')
+    ->execute();
+}
+
+/**
+ * Helper function to update the existing nodes on install.
+ *
+ * We can not know the exact date of publication, so $node->published_at will
+ * initially contain the creation date for already publisned nodes.
+ */
+function _publication_date_update_existing() {
+  $query = db_select('node');
+  $query->addField('node', 'nid');
+  $query->addField('node', 'created', 'published_at');
+  $nids = $query->condition('status', 1);
+  db_insert('publication_date')
+    ->from($nids)
+    ->execute();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function publication_date_uninstall() {
+  // Remove Publication Date configuration from the variables table.
+  variable_del('publication_date_popup_enable');
+  variable_del('publication_date_popup_year_start');
+  variable_del('publication_date_popup_year_end');
+}

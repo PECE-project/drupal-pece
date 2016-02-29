@@ -1,0 +1,60 @@
+<?php
+/**
+ * @file
+ * Install operation for apps
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function apps_uninstall() {
+  variable_del('apps_offline_mode');
+  variable_del('apps_enable_dev_console');
+  variable_del('apps_allow_voting');
+  variable_del('apps_install_path');
+}
+
+/**
+ * Fix typo in the dev console variable.
+ */
+function apps_update_7001() {
+  $dev = variable_get('apps_enable_developement_console', FALSE);
+  variable_set('apps_enable_dev_console', $dev);
+  variable_del('apps_enable_developement_console');
+}
+
+
+/**
+ * Reset permissions
+ */
+function apps_update_7102() {
+  if (!module_exists('og') || !module_exists('apps')) {
+    return;
+  }
+  $changed = FALSE;
+  $all_roles = $process_apps = array();
+  apps_include('manifest');
+  foreach (apps_servers() as $app_server) {
+    if ($apps = apps_apps($app_server)) {
+      foreach ($apps as $app_name => $app_info) {
+        if (!empty($app_info['og permissions'])) {
+          foreach ($app_info['og permissions'] as $key => $roles) {
+            list($group_type, $bundle, $perm) = explode(':', $key);
+            $all_roles += og_roles($group_type, $bundle, 0);
+            $process_apps[$app_name] = $app_info;
+          }
+        }
+      }
+    }
+  }
+  if ($process_apps) {
+    $old_roles = og_role_permissions($all_roles);
+    foreach ($process_apps as $app_name => $app_info) {
+      apps_app_configure_og_permissions($app_info);
+    }
+    $new_roles = og_role_permissions($all_roles);
+    if ($old_roles !== $new_roles) {
+      drupal_set_message(t('Per group permissions reset for at least one app. Please <a href="@url">adjust</a> permissions as needed.', array('@url' => url('admin/config/group/permissions'))), 'warning');
+    }
+  }
+}

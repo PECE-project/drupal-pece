@@ -1,0 +1,75 @@
+.page-home
+
+  .item-list ul li
+    margin: 0
+
+    img
+      width: 100%
+      height: auto
+      vertical-align: top
+
+  .pane-content
+    +container-fixed(12px)
+    .view
+      +make-row(12px)
+      text-align: center
+      ul li
+        &:first-child
+          +make-lg-column-offset(1)
+        +make-lg-column(2)
+        list-style-type: none
+        text-align: center
+        margin-bottom: 30px
+
+        @media (min-width: $screen-md-min) and (max-width: $screen-md-max)
+          &:first-child
+            +make-md-column-offset(1)
+          +make-md-column(2)
+
+        @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max)
+          &:first-child
+            +make-sm-column-offset(1)
+          +make-sm-column(2)
+
+        @media (min-width: $screen-xs-min) and (max-width: $screen-xs-max)
+          +make-xs-column(12)
+
+  .pane-title
+    margin: 0 0 80px
+    text-align: center
+
+  #main-content
+    padding: 0
+    font-size: $font-size-large
+    .panel-pane pane-views-panes pane-frontpage-image-slider-panel-pane-1,
+      width: 100%;
+      margin: 0;
+      
+    .pane-pece-recent-groups-panel-pane-1,
+    .pane-tagclouds-3
+      background-color: $color-gray-extra-lighter
+
+    .pane-pece-recent-artifacts-panel-pane-1
+      background-color: $color-gray-lighter
+
+    .pane-pece-recent-groups-panel-pane-1,
+    .pane-pece-recent-artifacts-panel-pane-1,
+    .pane-tagclouds-3
+      padding: 80px 0
+      ul
+        margin: 0
+
+    .pane-tagclouds-3
+      font-size: $font-size-h3
+      text-align: center
+
+      .pane-content
+        width: 80%
+        margin: 0 auto
+        text-align: center
+
+      span
+        padding: 0 12px
+
+      .more-link
+        display: none

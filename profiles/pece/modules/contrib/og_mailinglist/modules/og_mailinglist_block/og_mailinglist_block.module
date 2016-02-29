@@ -1,0 +1,112 @@
+<?php
+/**
+ * @file
+ * OG Mailinglist block.
+ */
+
+module_load_include('inc', 'og_mailinglist', 'og_mailinglist_common');
+
+/**
+ * Implements hook_block_info().
+ */
+function og_mailinglist_block_block_info() {
+  $blocks['group_actions'] = array(
+    'info' => t('OG Mailinglist group settings'),
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function og_mailinglist_block_block_view($delta) {
+  $block = array();
+  $block['subject'] = t('Group settings');
+  $block['content'] = og_mailinglist_block_get_block();
+  return $block;
+}
+
+/**
+ * Generate block html.
+ */
+function og_mailinglist_block_get_block() {
+  global $user;
+  // Only display group details if we have a group context and we are subscribed.
+  $group = og_context();
+  if (!empty($group)) {
+    $group_node = node_load($group['gid']);
+    if (node_access('view', $group_node) && og_is_member($group['group_type'], $group['gid'], 'user', $user->uid)) {
+      $form = drupal_get_form('og_mailinglist_block_subscription_settings_form',
+        $group_node);
+      return render($form);
+    }
+  }
+  return '';
+}
+
+function og_mailinglist_block_subscription_settings_form($form, &$form_state, $group_node) {
+  global $user;
+  $gid = $group_node->nid;
+
+  if (isset($group_node->group_email[LANGUAGE_NONE][0]['value'])) {
+    $group_name = _og_mailinglist_get_group_name($group_node);
+    $server = og_mailinglist_server();
+    $group_email = $group_name . '@' . $server;
+
+    $subscription_type = db_select('og_mailinglist_group_subscription', 's')
+      ->fields('s', array('subscription_type'))
+      ->condition('s.uid', $user->uid)
+      ->condition('s.nid', $gid)
+      ->execute()
+      ->fetchField();
+
+    $subscription_options = array(
+      'email' => t('Email'),
+      'digest email' => t('Digest email'),
+      'no email' => t('No email'),
+    );
+    $form = array();
+
+    $form[$gid] = array(
+      '#type' => 'item',
+      '#tree' => TRUE,
+    );
+
+    $form[$gid]['email'] = array(
+      '#type' => 'item',
+      '#title' => t('E-mail address for this group'),
+      '#markup' => l($group_email, 'mailto:' . $group_email),
+    );
+
+    $form[$gid]['subscription-type'] = array(
+      '#type' => 'select',
+      '#title' => t('Email Settings'),
+      '#default_value' => $subscription_type,
+      '#options' => $subscription_options,
+    );
+  }
+
+  $form[$gid]["leave-group"] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Leave this group'),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save Settings'),
+  );
+
+  $form['submit']['#submit'] = array('og_mailinglist_subscriptions_settings_form_submit');
+
+  return $form;
+}
+
+/**
+ * Implements hook_help().
+ */
+function og_mailinglist_block_help($path, $args) {
+  switch ($path) {
+    case 'admin/help#og_mailinglist_block':
+      return t('This module provides a block to subscribe to / unsubscribe from a group. To enable the block go to admin/structure/block. This block is shown only for the nodes which belong to a group which is handled by OG Mailinglist module.');
+  }
+}

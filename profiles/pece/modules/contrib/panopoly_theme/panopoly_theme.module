@@ -1,0 +1,55 @@
+<?php
+
+include_once('panopoly_theme.features.inc');
+
+/**
+ * Implementation of hook_init()
+ */
+function panopoly_theme_init() {
+  global $theme;
+
+  drupal_add_library('system', 'ui.widget');
+  drupal_add_library('system', 'ui.tabs');
+  drupal_add_library('system', 'ui.accordion');
+}
+
+/**
+ * Implementation of hook_ctools_plugin_directory()
+ */
+function panopoly_theme_ctools_plugin_directory($module, $plugin) {
+  return 'plugins/' . $plugin;
+}
+
+/**
+ * Implementation hook_theme_registry_alter()
+ */
+function panopoly_theme_theme_registry_alter(&$theme_registry) {
+  $mod_path = drupal_get_path('module', 'panopoly_theme') . '/templates';
+  $theme_registry_copy = $theme_registry;
+  _theme_process_registry($theme_registry_copy, 'phptemplate', 'theme_engine', 'pow', $mod_path);
+  $theme_registry += array_diff_key($theme_registry_copy, $theme_registry);
+}
+
+/**
+* Implements hook_entity_info_alter().
+*/
+function panopoly_theme_entity_info_alter(&$entity_info) {
+
+  // Add featured view mode to nodes
+  $entity_info['node']['view modes']['featured'] = array(
+    'label' => t('Featured'),
+    'custom settings' => TRUE,
+  );
+
+  // Add featured view mode to users
+  $entity_info['user']['view modes']['featured'] = array(
+    'label' => t('Featured'),
+    'custom settings' => TRUE,
+  );
+
+  // Add featured view mode to taxonomy
+  $entity_info['taxonomy_term']['view modes']['featured'] = array(
+    'label' => t('Featured'),
+    'custom settings' => TRUE,
+  );
+}

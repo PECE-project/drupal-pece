@@ -1,0 +1,129 @@
+<?php
+/**
+ * @file
+ *
+ * Bundle Inherit Node module.
+ */
+
+/**
+ *
+ * Implements hook_form_alter().
+ */
+function bundle_inherit_node_form_alter(&$form, &$form_state, $form_id) {
+  $entity = entity_get_info('node');
+  if ($form_id == 'node_type_form' && count($entity['bundles']) > 0) {
+    // Attach inheritance form
+    if (empty($form['#node_type']->type)) {
+       bundle_inherit_attach_inherit_form($form, $form_state, 'node');
+    }
+    // If editing existing node type we should provide it
+    else {
+       bundle_inherit_attach_inherit_form($form, $form_state, 'node', $form['#node_type']->type);
+    }
+    if (!empty($form['bundle_inherit'])) {
+      $form['bundle_inherit']['#group'] = 'additional_settings';
+      // We should add submit callback only if we are creating new content type
+      if (empty($form['#node_type']->type)) {
+        $form['#submit'][] = 'bundle_inherit_node_form_submit';
+      }
+    }
+  }
+}
+
+/**
+ *
+ * Additional submit handler to the 'node_type_form' form. Perform inherit
+ * operations.
+ */
+function bundle_inherit_node_form_submit(&$form, &$form_state) {
+  // Check if body field instance already exists.
+  if (isset($form_state['values']['bundle_inherit']['inherit']) && $form_state['values']['bundle_inherit']['inherit']) {
+    if ($instance = field_info_instance('node', 'body', trim($form_state['values']['type']))) {
+      field_delete_instance($instance);
+    }
+    bundle_inherit_attach_inherit_form_submit(trim($form_state['values']['type']), $form, $form_state);
+    drupal_set_message(t('Node type %type was inherited from %parent_type. All fields from %parent_type type was attached to %type type.',
+                        array('%type' => $form_state['values']['name'], '%parent_type' => $form['bundle_inherit']['parent_type']['#options'][$form_state['values']['bundle_inherit']['parent_type']])));
+  }
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function bundle_inherit_menu_alter(&$items) {
+  $items['admin/structure/types']['page callback'] = 'bundle_inherit_node_overview_types';
+}
+
+/**
+ * Redeclare content types admin page. Sort and add indention to the inherited types.
+ */
+function bundle_inherit_node_overview_types() {
+  $types = node_type_get_types();
+  $names = node_type_get_names();
+  $field_ui = module_exists('field_ui');
+  $header = array(t('Name'), array('data' => t('Operations'), 'colspan' => $field_ui ? '4' : '2'));
+  $rows = array();
+
+  // Firstly we need to iterate through node types wich has children types
+  $top_items = $child_items = array();
+  foreach ($names as $key => $name) {
+    $type = $types[$key];
+    if (node_hook($type->type, 'form')) {
+      $type_url_str = str_replace('_', '-', $type->type);
+      $row = array(theme('node_admin_overview', array('name' => $name, 'type' => $type)));
+      // Set the edit column.
+      $row[] = array('data' => l(t('edit'), 'admin/structure/types/manage/' . $type_url_str));
+
+      if ($field_ui) {
+        // Manage fields.
+        $row[] = array('data' => l(t('manage fields'), 'admin/structure/types/manage/' . $type_url_str . '/fields'));
+
+        // Display fields.
+        $row[] = array('data' => l(t('manage display'), 'admin/structure/types/manage/' . $type_url_str . '/display'));
+      }
+
+      // Set the delete column.
+      if ($type->custom) {
+        $row[] = array('data' => l(t('delete'), 'admin/structure/types/manage/' . $type_url_str . '/delete'));
+      }
+      else {
+        $row[] = array('data' => '');
+      }
+
+      $parent_type = bundle_inherit_bundle_get_parent('node', $type->type);
+      if (empty($parent_type)) {
+        $top_items[$type->type] = $row;
+      }
+      else {
+        $child_items[$parent_type][$type->type] = $row;
+      }
+    }
+  }
+
+  foreach ($top_items as $type => $row) {
+    $rows[] = $row;
+    _bundle_inherit_node_overview_types_populate_rows($child_items, $type, $rows);
+  }
+
+  $build['node_table'] = array(
+    '#theme' => 'table',
+    '#header' => $header,
+    '#rows' => $rows,
+    '#empty' => t('No content types available. <a href="@link">Add content type</a>.', array('@link' => url('admin/structure/types/add'))),
+  );
+
+  return $build;
+}
+
+/**
+ * Helper function for bundle_inherit_node_overview_types().
+ */
+function _bundle_inherit_node_overview_types_populate_rows($child_items, $parent, &$rows, $level = 1) {
+  if (array_key_exists($parent, $child_items)) {
+    foreach ($child_items[$parent] as $type => $row) {
+      $row[0] = str_repeat('-&nbsp;&nbsp;-&nbsp;&nbsp;', $level) . $row[0];
+      $rows[] = $row;
+      _bundle_inherit_node_overview_types_populate_rows($child_items, $type, $rows, $level + 1);
+    }
+  }
+}

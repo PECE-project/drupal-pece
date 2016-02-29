@@ -1,0 +1,66 @@
+<?php
+/**
+ * @file
+ * Tests for bundle_inherit_node module.
+ */
+
+class BundleInheritTestCase extends DrupalWebTestCase {
+  protected $privelegedUser;
+  protected $parentType;
+  protected $childTypeName;
+
+  public static function getInfo() {
+    return array(
+        'name' => 'Bundle Inherit Node',
+        'description' => 'Ensure that the Bundle Inherit Node module works properly',
+        'group' => 'Bundle Inherit'
+    );
+  }
+
+  public function setUp() {
+    parent::setUp(array('bundle_inherit_node', 'field_ui', 'text', 'node'));
+
+    $this->privelegedUser = $this->drupalCreateUser(array('administer content types'));
+    $this->childTypeName = drupal_strtolower($this->randomName());
+    $this->drupalLogin($this->privelegedUser);
+
+    // Add new content type.
+    $this->parentType = $this->drupalCreateContentType();
+
+    // Add 5 custom fields.
+    for ($i = 0; $i < 5; $i++) {
+      do{
+        $field_name = drupal_strtolower($this->randomName());
+      } while (field_info_field($field_name));
+      $field = field_create_field(array(
+          'field_name' => $field_name,
+          'type' => 'text'
+      ));
+      field_create_instance(array(
+          'field_name' => $field_name,
+          'entity_type' => 'node',
+          'bundle' => $this->parentType->type
+      ));
+    }
+  }
+
+  /**
+   * Create new content type. Strictly inherit it from content type created in
+   * setUp().
+   */
+  public function testInherit() {
+    $edit = array(
+      'name' => $this->childTypeName,
+      'type' => $this->childTypeName,
+      'bundle_inherit[inherit]' => TRUE,
+      'bundle_inherit[parent_type]' => $this->parentType->type,
+      'bundle_inherit[mode]' => 'strict'
+    );
+
+    $this->drupalPost('admin/structure/types/add', $edit, t('Save content type'));
+    $type_exists = db_query('SELECT 1 FROM {node_type} WHERE type = :type', array(':type' => $this->childTypeName))->fetchField();
+    $this->assertTrue($type_exists, t('Type was created.'));
+    $type_inherited = db_query('SELECT 1 FROM {bundle_hierarchy} WHERE entity_type = :entity_type AND bundle = :bundle AND bundle_parent = :bundle_parent', array(':entity_type' => 'node', ':bundle' => $this->childTypeName, ':bundle_parent' => $this->parentType->type))->fetchField();
+    $this->assertTrue($type_inherited, t('Type was inherited.'));
+  }
+}

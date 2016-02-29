@@ -1,0 +1,54 @@
+<?php
+/**
+ * @file
+ * Install hooks for Panopoly Magic.
+ */
+
+/**
+ * Set correct view mode on panel panes if incorrect - Issue #2426241
+ */
+function panopoly_magic_update_7101() {
+  // Get all view modes for fieldable_panels_pane panel type
+  // @see fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form()
+  $entity_info = entity_get_info('fieldable_panels_pane');
+
+  // $entity_info will be empty if Panopoly Widgets/FPP not enabled.
+  if (!empty($entity_info)) {
+    $view_mode_options = array();
+    foreach ($entity_info['view modes'] as $mode => $option) {
+      $view_mode_options[$mode] = $option['label'];
+    }
+
+    // Go through existing panes and update configuration.
+    $result = db_query("SELECT pid, configuration FROM {panels_pane} WHERE type = 'fieldable_panels_pane'");
+    foreach ($result as $pane) {
+      $pane->configuration = unserialize($pane->configuration);
+      if (($key = array_search($pane->configuration['view_mode'], $view_mode_options, TRUE)) !== FALSE) {
+        $pane->configuration['view_mode'] = $key;
+        // Write back to the database.
+        db_update('panels_pane')
+          ->fields(array(
+            'configuration' => serialize($pane->configuration),
+          ))
+          ->condition('pid', $pane->pid)
+          ->execute();
+      }
+    }
+  }
+}
+
+/**
+ * Clear the Views cache so our new 'Display type override' option appears.
+ */
+function panopoly_magic_update_7102() {
+  views_flush_caches();
+}
+
+/**
+ * Preserve the old 'Add content' preview default.
+ */
+function panopoly_magic_update_7103() {
+  if (variable_get('panopoly_magic_pane_add_preview', 'not set') === 'not set') {
+    variable_set('panopoly_magic_pane_add_preview', PANOPOLY_ADD_PREVIEW_AUTOMATIC);
+  }
+}

@@ -1,0 +1,117 @@
+<?php
+/**
+ * @file backports.module
+ * Hook implementations for Backports.
+ */
+
+/**
+ * Implements hook_menu_alter().
+ *
+ * @see field_ui_menu()
+ */
+function backports_menu_alter(&$items) {
+  foreach (entity_get_info() as $entity_type => $entity_info) {
+    if ($entity_info['fieldable']) {
+      foreach ($entity_info['bundles'] as $bundle_name => $bundle_info) {
+        if (isset($bundle_info['admin'])) {
+          $path = $bundle_info['admin']['path'];
+          // Don't act if the Field UI module's menu items are missing (e.g.,
+          // if the module is disabled).
+          if (isset($items["$path/fields"])) {
+            // Remove "Delete" from the tabs.
+            $items["$path/fields/%field_ui_menu/delete"]['type'] = MENU_VISIBLE_IN_BREADCRUMB;
+
+            // Replace the field settings page with one that will redirect to
+            // the general field editing page.
+            $field_settings_path = "$path/fields/%field_ui_menu/field-settings";
+            // Since different bundles often share the same admin path, we can
+            // wind up here multiple times. Don't run the code more than once,
+            // since it's not idempotent.
+            if ($items[$field_settings_path]['page callback'] != 'backports_redirect_to_field_edit_page') {
+              $items[$field_settings_path]['type'] = MENU_CALLBACK;
+              $items[$field_settings_path]['page callback'] = 'backports_redirect_to_field_edit_page';
+              // Pass along the second page argument from the original menu
+              // item, which contains the position of the %field_ui_menu
+              // placeholder.
+              $items[$field_settings_path]['page arguments'] = array($items[$field_settings_path]['page arguments'][1]);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Menu callback to redirect to the page for editing a field.
+ *
+ * This callback allows us to simplify the field UI by removing the (redundant)
+ * field settings page and replacing with the main field UI edit page (the one
+ * that allows editing the field and instance settings on the same screen).
+ *
+ * @param $instance
+ *   An array representing the field instance to be edited.
+ */
+function backports_redirect_to_field_edit_page($instance) {
+  // By implementing this redirect, we achieve two things. First, we ensure
+  // that if there are any links on the site pointing to the field settings
+  // page, they will gracefully redirect the user to the new page instead.
+  // Second, because the redirect goes to the edit screen directly (without any
+  // query parameters in the URL), this ensures that the field UI will properly
+  // treat it as the "last" (and only) step in the process of adding a new
+  // field and immediately redirect back to the field overview form when
+  // complete; see field_ui_next_destination(). This allows us to automatically
+  // make the workflow for adding fields behave the way we want without having
+  // to mess with submit handlers and $form_state['redirect'].
+  $admin_path = _field_ui_bundle_admin_path($instance['entity_type'], $instance['bundle']);
+  if (isset($admin_path)) {
+    drupal_goto($admin_path . '/fields/' . $instance['field_name']);
+  }
+  else {
+    return MENU_ACCESS_DENIED;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function backports_form_field_ui_field_overview_form_alter(&$form, &$form_state) {
+  // On the field overview screen, instead of linking each field name to the
+  // field settings page, just print the field name directly (since the link
+  // would now go to the same places that the "edit" link does).
+  $fields = &$form['fields'];
+  foreach (element_children($fields) as $field) {
+    if (isset($fields[$field]['type']['#type']) && $fields[$field]['type']['#type'] == 'link') {
+      $fields[$field]['type']['#type'] = 'markup';
+      $fields[$field]['type']['#markup'] = check_plain($fields[$field]['type']['#title']);
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function backports_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
+  $form['instance']['required']['#weight'] = -5;
+  $form['instance']['description']['#weight'] = -10;
+  $form['field']['#title'] = t('Global settings');
+
+  $form['actions']['delete'] = array(
+    '#type' => 'submit',
+    '#value' => t('Delete field'),
+    '#submit' => array('backports_field_ui_field_edit_form_delete_submit'),
+  );
+}
+
+/**
+ * Handle the 'Delete' button on the field instance edit form.
+ */
+function backports_field_ui_field_edit_form_delete_submit($form, &$form_state) {
+  $destination = array();
+  if (isset($_GET['destination'])) {
+    $destination = drupal_get_destination();
+    unset($_GET['destination']);
+  }
+  $instance = $form['#instance'];
+  $form_state['redirect'] = array('admin/structure/types/manage/' . $instance['bundle'] . '/fields/' . $instance['field_name'] . '/delete', array('query' => $destination));
+}

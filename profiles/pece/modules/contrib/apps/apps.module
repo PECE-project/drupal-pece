@@ -1,0 +1,766 @@
+<?php
+/**
+ * @file
+ * Module file for Apps
+ */
+
+define("APPSERVER_BASEPATH", 'admin/apps');
+define("APPSERVER_BASEPATH_DEPTH", 1);
+define("APPS_INSTALL_PATH", 'sites/all/modules');
+
+// File name for app info stored in downloaded projects.
+define('APPS_APP_INFO', 'app.info');
+
+define("APPS_ENABLED", 1);
+define("APPS_DISABLED", 0);
+define("APPS_INCOMPATIBLE", -1);
+define("APPS_INSTALLABLE", 2);
+
+
+require_once drupal_get_path('module', 'apps') . '/theme/apps.theme.inc';
+
+/**
+ * Implements hook_permission().
+ */
+function apps_permission() {
+  return array(
+    'administer apps' => array(
+      'title' => t('Administer the App Store'),
+      'description' => t('Install and Manage Apps'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function apps_menu() {
+  $menu["admin/apps"] = array(
+    'title' => 'Apps',
+    'description' => 'Install and Manage Apps',
+    'page callback' => 'apps_market_page',
+    'access arguments' => array('administer apps'),
+    'weight' => -10,
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'apps.pages.inc',
+  );
+
+  // App Server operations.
+  $menu["admin/apps/%apps_server"] = array(
+    'title callback' => "apps_server_title",
+    'title arguments' => array(2),
+    'page callback' => 'apps_install_page',
+    'page arguments' => array(2),
+    'access arguments' => array('administer apps'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'apps.pages.inc',
+  );
+  $menu["admin/apps/%apps_server/all"] = array(
+    'title' => "All Apps",
+    'weight' => 1,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  $menu["admin/apps/%apps_server/manage"] = array(
+    'title' => "Installed Apps",
+    'page callback' => 'apps_manage_page',
+    'page arguments' => array(2),
+    'access arguments' => array('administer apps'),
+    'weight' => 2,
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'apps.pages.inc',
+  );
+  $menu["admin/apps/%apps_server/update"] = array(
+    'title' => "Available Updates",
+    'page callback' => 'apps_update_page',
+    'page arguments' => array(2),
+    'access arguments' => array('administer apps'),
+    'weight' => 3,
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'apps.pages.inc',
+  );
+  $menu["admin/apps/%apps_server/catalog.md"] = array(
+    'title' => "Catelog",
+    'page callback' => 'apps_catalog_page',
+    'page arguments' => array(2),
+    'access arguments' => array('administer apps'),
+    'file' => 'apps.pages.inc',
+  );
+
+  // App operations.
+  $menu["admin/apps/%apps_app/%"] = array(
+    'load arguments' => array(3),
+    'title callback' => "apps_app_title",
+    'title arguments' => array(2),
+    'page callback' => 'apps_app_details_page',
+    'page arguments' => array(2),
+    'access callback' => 'apps_app_access',
+    'access arguments' => array(2, 'details'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'apps.pages.inc',
+  );
+  $menu["admin/apps/%apps_app/%/details"] = array(
+    'title' => "App Details",
+    'weight' => 1,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  $menu["admin/apps/%apps_app/%/install"] = array(
+    'title' => "Install App",
+    'page callback' => 'apps_app_install',
+    'page arguments' => array(2),
+    'access callback' => 'apps_app_access',
+    'access arguments' => array(2, 'install'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'apps.pages.inc',
+  );
+  $menu["admin/apps/%apps_app/%/enable"] = array(
+    'title' => "Enable App",
+    'page callback' => 'apps_app_enable',
+    'page arguments' => array(2),
+    'access callback' => 'apps_app_access',
+    'access arguments' => array(2, 'enable'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'apps.pages.inc',
+  );
+  $menu["admin/apps/%apps_app/%/disable"] = array(
+    'title' => "Disable App",
+    'page callback' => 'apps_app_disable',
+    'page arguments' => array(2),
+    'access callback' => 'apps_app_access',
+    'access arguments' => array(2, 'disable'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'apps.pages.inc',
+  );
+  $menu["admin/apps/%apps_app/%/uninstall"] = array(
+    'title' => "Uninstall App",
+    'page callback' => 'apps_app_uninstall',
+    'page arguments' => array(2),
+    'access callback' => 'apps_app_access',
+    'access arguments' => array(2, 'uninstall'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'apps.pages.inc',
+  );
+  $menu["admin/apps/%apps_app/%/update"] = array(
+    'title' => "Update",
+    'page callback' => 'apps_app_update',
+    'page arguments' => array(2),
+    'access callback' => 'apps_app_access',
+    'access arguments' => array(2, 'update'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'apps.pages.inc',
+  );
+  $menu["admin/apps/%apps_app/%/configure"] = array(
+    'title' => 'Configure',
+    'page callback' => 'apps_app_config_page',
+    'page arguments' => array(2),
+    'access callback' => 'apps_app_access',
+    'access arguments' => array(2, 'configure'),
+    'weight' => 2,
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'apps.pages.inc',
+  );
+  if (module_exists('devel')) {
+    $menu['admin/apps/%apps_app/%/devel'] = array(
+      'title' => 'Devel',
+      'page callback' => 'apps_devel_load_array',
+      'page arguments' => array('app', 2),
+      'access arguments' => array('access devel information'),
+      'type' => MENU_LOCAL_TASK,
+      'file' => 'apps.pages.inc',
+      'weight' => 300,
+    );
+  }
+  // Config Screens.
+  $menu['admin/config/system/apps'] = array(
+    'title' => 'Apps Configuration',
+    'description' => 'Settings for the App Module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apps_settings_form'),
+    'access arguments' => array('administer apps'),
+    'file' => 'apps.pages.inc',
+  );
+  $menu['admin/config/system/apps/settings'] = array(
+    'title' => 'Apps Configuration',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+  );
+  $menu['admin/config/system/apps/verify'] = array(
+    'title' => 'Verify Apps support',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apps_install_verify'),
+    'description' => 'Apps installation requirements check',
+    'type' => MENU_LOCAL_TASK,
+    'access arguments' => array('administer apps'),
+    'file' => 'apps.profile.inc',
+  );
+
+  // Add a callback for voting
+  // The params are server, app, vote in that order
+  // @TODO: Make Voting a separate module. Not everyone wants it.
+  $menu['apps/vote/%/%/%'] = array(
+    'page callback' => 'apps_vote_for_app',
+    'page arguments' => array(2, 3, 4),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('administer apps'),
+    'file' => 'apps.voting.inc',
+  );
+
+  return $menu;
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function apps_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  // Add CSRF tokens to admin action links.
+  if (strpos($root_path, 'admin/apps') === 0 && !empty($data['actions']['output'])) {
+    $add_token = array(
+      'admin/apps/%/%/disable' => 'disable',
+      'admin/apps/%/%/enable' => 'enable',
+      'admin/apps/%/%/install' => 'install',
+      'admin/apps/%/%/uninstall' => 'uninstall',
+      'admin/apps/%/%/update' => 'update',
+    );
+    foreach ($data['actions']['output'] as $key => $info) {
+      if (!empty($info['#link']['path']) && !empty($add_token[$info['#link']['path']])) {
+        $data['actions']['output'][$key]['#link']['localized_options']['query']['token'] = drupal_get_token($add_token[$info['#link']['path']] . '-' . arg(3, $info['#link']['href']));
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function apps_theme() {
+  $path = drupal_get_path('module', 'apps') . '/theme';
+  $theme = array(
+    'apps_market_page' => array(
+      'render element' => 'servers',
+      'template' => 'apps-market-page',
+      'file' => 'apps.theme.inc',
+      'path' => $path,
+    ),
+    'apps_server_item' => array(
+      'render element' => 'server',
+      'template' => 'apps-server-item',
+      'file' => 'apps.theme.inc',
+      'path' => $path,
+    ),
+    'apps_install_page' => array(
+      'render element' => 'content',
+      'template' => 'apps-install-page',
+      'file' => 'apps.theme.inc',
+      'path' => $path,
+    ),
+    'apps_manage_page' => array(
+      'render element' => 'content',
+      'template' => 'apps-manage-page',
+      'file' => 'apps.theme.inc',
+      'path' => $path,
+    ),
+    'apps_update_page' => array(
+      'render element' => 'content',
+      'template' => 'apps-update-page',
+      'file' => 'apps.theme.inc',
+      'path' => $path,
+    ),
+    'apps_catalog_page' => array(
+      'variables' => array(
+        'server' => NULL,
+        'apps' => array(),
+      ),
+      'template' => 'apps-catalog-page',
+      'file' => 'apps.theme.inc',
+      'path' => $path,
+    ),
+    'apps_list' => array(
+      'render element' => 'apps',
+      'file' => 'apps.theme.inc',
+      'path' => $path,
+    ),
+    'apps_app_teaser' => array(
+      'render element' => 'app',
+      'template' => 'apps-app-teaser',
+      'file' => 'apps.theme.inc',
+      'path' => $path,
+    ),
+    'apps_app_page' => array(
+      'render element' => 'app',
+      'template' => 'apps-app-page',
+      'file' => 'apps.theme.inc',
+      'path' => $path,
+    ),
+    'apps_app_featured' => array(
+      'render element' => 'app',
+      'template' => 'apps-app-featured',
+      'file' => 'apps.theme.inc',
+      'path' => $path,
+    ),
+    'apps_voting_widget' => array(
+      'render element' => 'app',
+      'function' => 'apps_theme_voting_widget',
+      'file' => 'apps.voting.inc',
+    ),
+  );
+  return $theme;
+}
+
+/**
+ * Access callback for the operations that can be performed on an app.
+ */
+function apps_app_access($app, $action = NULL) {
+  apps_include('manifest');
+  if (user_access('administer apps') && isset($app)) {
+    switch ($action) {
+      case 'details':
+        return TRUE;
+
+      case 'enable':
+      case 'install':
+        // Don't allow enabling of conflicted a
+        foreach (apps_app_find_conflicts($app) as $conflict) {
+          if (($conflict_app = apps_app_load($conflict['server'], $conflict['name'])) && $conflict_app['status'] === APPS_ENABLED) {
+            return FALSE;
+          }
+        }
+        if ($action == 'enable') {
+          // We let enable callback most error conditions when it's next step.
+          return (isset($_SESSION['apps_install_next']) && $_SESSION['apps_install_next'] == $_GET['q'])
+            || ($app['status'] === APPS_DISABLED);
+        }
+        elseif ($action == 'install') {
+          return $app['status'] === APPS_INSTALLABLE;
+        }
+
+      case 'update':
+        return !empty($app['upgradeable']) || (!empty($_SESSION['apps_install_next']) && $_SESSION['apps_install_next']  == apps_app_page_path($app, 'update/updatedb'));
+
+      case 'disable':
+        return $app['status'] === APPS_ENABLED;
+
+      case 'configure':
+        return
+          $app['status'] === APPS_ENABLED && (
+            apps_app_callback($app, "configure form") ||
+            apps_app_callback($app, "demo content enabled callback") ||
+            apps_app_callback($app, "status callback") ||
+            !empty($app['permissions']));
+
+      case 'uninstall':
+        return $app['disabled'];
+
+      default:
+        return FALSE;
+    }
+  }
+}
+
+/**
+ * Find the apps that this app is in conflict with.
+ *
+ * Apps can conflict with any app on any server, so calculate the conflict
+ * information as needed.
+ *
+ * @param $app
+ *   The fully loaded app array as from app_app_load().
+ *
+ * @return
+ *  an array of arrays with keys 'server' and 'name'.
+ */
+function apps_app_find_conflicts($app) {
+  if ($conflict_cache = cache_get('apps_app_conflicts_' . $app['machine_name'])) {
+    return $conflict_cache->data;
+  }
+  $conflicts = $app['conflicts'];
+  foreach (array_keys(apps_servers()) as $server_name) {
+    if ($apps = apps_apps($server_name)) {
+      foreach ($apps as $app_name => $app_info) {
+        foreach ($app_info['conflicts'] as $conflict_key => $conflict_info) {
+          if ($conflict_info['server'] == $app['server']['name'] && $conflict_info['name'] == $app['machine_name']) {
+            $conflicts[] = array('name' => $app_name, 'server' => $app_info['server']['name']);
+          }
+        }
+      }
+    }
+  }
+  cache_set('apps_app_conflicts_' . $app['machine_name'], $conflicts);
+  return $conflicts;
+}
+
+/**
+ * Implements hook_admin_paths().
+ *
+ * Trick to make page refresh when app installs.
+ * @TODO clean this up
+ */
+function apps_admin_paths() {
+  $paths = array(
+    'admin/apps/*/*/enable' => FALSE,
+    'admin/apps/*/*/disable' => FALSE,
+  );
+  return $paths;
+}
+
+
+/**
+ * Implements hook_image_default_styles().
+ */
+function apps_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: apps_logo
+  $styles['apps_logo'] = array(
+    'name' => 'apps_logo',
+    'effects' => array(
+      '1' => array(
+        'label' => 'Scale and crop',
+        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
+        'effect callback' => 'image_scale_and_crop_effect',
+        'form callback' => 'image_resize_form',
+        'summary theme' => 'image_resize_summary',
+        'module' => 'image',
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => '100',
+          'height' => '100',
+        ),
+        'weight' => '1',
+      ),
+    ),
+  );
+
+  // Exported image style: apps_logo
+  $styles['apps_logo_small'] = array(
+    'name' => 'apps_logo',
+    'effects' => array(
+      '1' => array(
+        'label' => 'Scale and crop',
+        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
+        'effect callback' => 'image_scale_and_crop_effect',
+        'form callback' => 'image_resize_form',
+        'summary theme' => 'image_resize_summary',
+        'module' => 'image',
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => '60',
+          'height' => '60',
+        ),
+        'weight' => '1',
+      ),
+    ),
+  );
+  // Exported image style: apps_screenshot
+  $styles['apps_screenshot'] = array(
+    'name' => 'apps_screenshot',
+    'effects' => array(
+      '2' => array(
+        'label' => 'Scale and crop',
+        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
+        'effect callback' => 'image_scale_and_crop_effect',
+        'form callback' => 'image_resize_form',
+        'summary theme' => 'image_resize_summary',
+        'module' => 'image',
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => '590',
+          'height' => '370',
+        ),
+        'weight' => '1',
+      ),
+    ),
+  );
+
+  // Exported image style: apps_featured_screenshot
+  $styles['apps_featured_screenshot'] = array(
+    'name' => 'apps_featured_screenshot',
+    'effects' => array(
+      '2' => array(
+        'label' => 'Scale and crop',
+        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
+        'effect callback' => 'image_scale_and_crop_effect',
+        'form callback' => 'image_resize_form',
+        'summary theme' => 'image_resize_summary',
+        'module' => 'image',
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => '548',
+          'height' => '265',
+        ),
+        'weight' => '1',
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * Cache Manifest so we are not pulling
+ * images and manifest when we hit the page
+ */
+function apps_cron() {
+  apps_include('manifest');
+  foreach (apps_servers() as $server) {
+    return apps_request_manifest($server);
+  }
+}
+
+/**
+ * Implements hook_hook_info().
+ */
+function apps_hook_info() {
+  return array(
+    'apps_app_info' => array('group' => 'app'),
+    'apps_server' => '',
+  );
+}
+
+/**
+ * Check whether Apps has write access to libraries and modules directories.
+ *
+ * @return bool
+ *   If the directory is writeable
+ */
+function apps_installer_has_write_access() {
+  $install_location = variable_get('apps_install_path', APPS_INSTALL_PATH);
+  // Create the directory if possible.
+  if (!is_dir($install_location) && !drupal_mkdir($install_location, NULL, TRUE)) {
+    return FALSE;
+  }
+  return is_writable(apps_installer_lib_dir(TRUE)) && is_writable($install_location);
+}
+
+/**
+ * Return the libraries directory to check.
+ */
+function apps_installer_lib_dir($create_directory = FALSE) {
+  return is_dir('sites/all/libraries') || ($create_directory && drupal_mkdir('sites/all/libraries', NULL, TRUE))? 'sites/all/libraries' : 'sites/all';
+}
+
+/**
+ * Path object loader for an App Server.
+ *
+ * @TODO: Remove the apps_servers call in favor of apps_server_load
+ */
+function apps_server_load($name) {
+  apps_include('manifest');
+  return apps_servers($name);
+}
+
+/**
+ * Path object loader for an App.
+ */
+function apps_app_load($server_name, $app_name) {
+  apps_include('manifest');
+  $app = apps_apps($server_name, array('machine_name' => $app_name));
+  return $app[$app_name];
+}
+
+/**
+ * Path object loader for an App via machine name only.
+ *
+ * This assumes there is only one app of that machine name.
+ */
+function apps_app_module_name_load($app_name) {
+  apps_include('manifest');
+  $app = apps_apps_all(array('machine_name' => $app_name));
+  return !empty($app[$app_name]) ? $app[$app_name] : FALSE;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function apps_block_info() {
+  apps_include('manifest');
+  $blocks = array();
+  foreach (apps_servers() as $id => $server) {
+    $blocks["manage_apps__$id"] = array(
+      'info' => t('Manage Apps for %server', array('%server' => $server['title'])),
+    );
+
+  }
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function apps_block_view($delta) {
+  apps_include('manifest');
+  apps_include('pages');
+  list($type, $server_name) = explode("__", $delta);
+  $server = apps_servers($server_name);
+  $element = apps_manage_page($server_name);
+  return array(
+    'subject' => t('Installed Apps for @name', array('@name' => $server['title'])),
+    'content' => $element,
+  );
+}
+
+/**
+ * Easier wrapper around module_load_include.
+ *
+ * @param string $group
+ *   The name of a include file in the from apps.$group.inc
+ */
+function apps_include($group) {
+  module_load_include("inc", "apps", "apps.$group");
+}
+
+/**
+ * Centralize the generation of App paths
+ *
+ * @param $app
+ *    The app array
+ * @param string $op
+ *    The path type
+ * @return string
+ *    A path to the app operation
+ */
+function apps_app_page_path($app, $op = 'details') {
+  if (isset($app['machine_name'])) {
+    return "admin/apps/{$app['server']['name']}/{$app['machine_name']}/$op";
+  }
+}
+
+/**
+ * Handle the submissions of the filetransfer form.
+ *
+ * @TODO: Test the FTP and SSH xfer mechanisms, I dont think this does anything
+ * function apps_authorize_filetransfer_form_submit() {
+ *  require_once DRUPAL_ROOT . '/includes/authorize.inc';
+ *  $form = drupal_get_form('authorize_filetransfer_form');
+ * }
+ */
+
+/**
+ * Implements hook_updater_info().
+ */
+function apps_updater_info() {
+  return array(
+    'library' => array(
+      'class' => 'LibraryUpdater',
+      'name' => t('Update Library'),
+      'weight' => -10,
+    ),
+  );
+}
+
+/**
+ * Implements hook_modules_enabled().
+ */
+function apps_modules_enabled($modules) {
+  foreach ($modules as $module_name) {
+    if ($app = module_invoke($module_name, 'apps_app_info')) {
+      $app['machine_name'] = $module_name;
+      module_invoke_all('apps_app_modules_enabled', $app);
+    }
+  }
+}
+
+/**
+ * Implements hook_apps_app_modules_enabled().
+ */
+function user_apps_app_modules_enabled($app) {
+  apps_app_configure_permissions($app);
+}
+
+/**
+ * Implements hook_apps_app_modules_enabled().
+ */
+function og_apps_app_modules_enabled($app) {
+  apps_app_configure_og_permissions($app);
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function apps_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'modules_enabled') {
+    // Make apps run last for this just be to careful.
+    $group = $implementations['apps'];
+    unset($implementations['apps']);
+    $implementations['apps'] = $group;
+  }
+}
+
+/**
+ * Set the permissions for a role.
+ *
+ * @param $app
+ *   A fully loaded app object.
+ */
+function apps_app_configure_permissions($app) {
+  node_types_rebuild();
+  $modules = user_permission_get_modules();
+  if (!empty($app['permissions'])) {
+    $roles_to_permissions = array();
+    $roles = user_roles();
+    $warned = array();
+    foreach ($roles as $rid => $role_name) {
+      foreach ($app['permissions'] as $perm_name => $default_roles) {
+        if (empty($modules[$perm_name]) && empty($warned[$perm_name])) {
+          $warned[$perm_name] = TRUE;
+          $args = array('!name' => $perm_name, '!module' => $app['machine_name']);
+          $msg = t('Warning in apps configuration of !module. No module defines permission "!name".', $args);
+          drupal_set_message($msg, 'warning');
+        }
+        else {
+          $roles_to_permissions[$rid][$perm_name] = in_array($role_name, $default_roles);
+        }
+      }
+    }
+    foreach ($roles_to_permissions as $rid => $permissions) {
+      user_role_change_permissions($rid, $permissions);
+    }
+  }
+}
+
+/**
+ * Set the permission for a role for og.
+ *
+ * @param $app
+ *   A fully loaded app object.
+ */
+function apps_app_configure_og_permissions($app) {
+  node_types_rebuild();
+  module_load_include('inc', 'og', 'includes/og_features_role.features');
+  if (!empty($app['og permissions'])) {
+    foreach ($app['og permissions'] as $key => $roles) {
+      list($group_type, $bundle, $perm) = explode(':', $key);
+
+      // Make sure the role exists for this entity.
+      foreach ($roles as $role) {
+        $bundle_role = _og_features_role_exists($role, $group_type, $bundle);
+        if (empty($bundle_role)) {
+          og_role_save(og_role_create($role, $group_type, 0, $bundle));
+        }
+      }
+
+      $all_roles = og_roles($group_type, $bundle, 0);
+      foreach ($all_roles as $rid => $rolename) {
+        if (in_array($rolename, $roles)) {
+          $grant[$rid][] = $perm;
+        }
+        else {
+          $revoke[$rid][] = $perm;
+        }
+      }
+    }
+
+    if (!empty($grant)) {
+      foreach ($grant as $rid => $permissions) {
+        og_role_grant_permissions($rid, $permissions);
+      }
+    }
+
+    if (!empty($revoke)) {
+      foreach ($revoke as $rid => $permissions) {
+        og_role_revoke_permissions($rid, $permissions);
+      }
+    }
+  }
+}

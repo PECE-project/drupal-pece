@@ -1,0 +1,34 @@
+Field API Pane Editor 7.x-1.2, 2014-04-30
+-----------------------------------------
+By David_Rothstein: The edit page did not verify access to edit the entity that
+  the field was attached to.
+#2252029 by iMiksu: Use the entity bundle's label in the page title.
+#1743712 by DamienMcKenna: Don't show field groups or the fields from Metatag,
+  Panelizer or Redirect.
+#1650442 by Wim Leers, psynaptic, DamienMcKenna: Support for the node "author"
+  and "created" properties.
+#2249285 by DamienMcKenna: Require CTools 1.4.
+#1817746 by DamienMcKenna: Use entity_language() instead of $entity->language.
+#1846156 by Pancho, ericras: Incorrect usage of field_access().
+#1785056 by beeradb: Removing the contextual dependency.
+#1607652 by dsavinov: Adding a Cancel button to the field edit form.
+
+
+Field API Pane Editor 7.x-1.1, 2012-02-28
+-----------------------------------------
+#1413362 by merlinofchaos: Fix menu permission so more than UID 1 can use it.
+
+
+Field API Pane Editor 7.x-1.0, 2012-01-15
+-----------------------------------------
+#1365352 by merlinofchaos: Make the Panels dependency optional.
+By merlinofchaos: Better access checking on contextual links.
+By merlinofchaos: drupal_set_title() should not be called from within a form.
+By merlinofchaos: Add support for the "node title" field as a special case.
+By merlinofchaos: Add support for revisions.
+
+
+Field API Pane Editor 7.x-1.0-beta1, 2011-10-04
+-----------------------------------------------
+By merlinofchaos: Depends on contextual module too.
+Initial commit.

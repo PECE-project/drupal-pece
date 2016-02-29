@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the pece_profile module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function pece_profile_install() {
+
+  // Set the module weiight in order to run after profile2 module.
+  db_update('system')
+    ->fields(array('weight' => 10))
+    ->condition('name', 'pece_profile')
+    ->execute();
+}
+
+/**
+ * Resets users panelizer defaults.
+ */
+function pece_profile_update_7000() {
+  module_disable(array(
+    'panopoly_users'
+  ));
+
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  // Revert all default config.
+  pece_defaultconfig_component_rebuild_by_name('strongarm', 'pece_profile');
+
+  // Reset all overriden panelizer for users.
+  $users = entity_load('user', FALSE);
+  pece_reset_panelizer_entities_to_default('user', $users, 'page_manager');
+}

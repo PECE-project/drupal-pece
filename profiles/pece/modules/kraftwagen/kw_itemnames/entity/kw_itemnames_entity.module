@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function kw_itemnames_entity_entity_info_alter(&$info) {
+  $disabled_types = kw_itemnames_entity_disabled_entity_types();
+  foreach ($disabled_types as $type) {
+    if (isset($info[$type])) {
+      $info[$type]['kw_itemnames_entity_disabled'] = true;
+    }
+  }
+}
+
+function kw_itemnames_entity_disabled_entity_types() {
+  $types = &drupal_static(__FUNCTION__);
+
+  if (!isset($types)) {
+    $types = module_invoke_all(__FUNCTION__);
+    drupal_alter(__FUNCTION__, $types);
+  }
+
+  return $types;
+}
+
+/**
+ * Implements hook_kw_itemnames_entity_disabled_entity_types() for the system
+ * module.
+ */
+function system_kw_itemnames_entity_disabled_entity_types() {
+  return array('file');
+}

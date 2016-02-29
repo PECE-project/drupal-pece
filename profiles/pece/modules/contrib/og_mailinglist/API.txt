@@ -1,0 +1,203 @@
+Here's a first draft on documenting the APIs that have been added into
+OG Mailinglist to this point. Refinements to the text + additional examples
+are welcome:
+
+Hook signiture, short description of what it can be used for, modules using it,
+example code.
+
+
+hook_og_mailinglist_new_email_comment_alter($email)
+===================================================
+
+Lets other modules alter the new comment or delay posting for a time
+(e.g. a moderation module might want to delay posting until a human moderator
+has had a chance to ok it or until the email can be run through a spam checker
+such as Mollem).
+
+Modules using this hook:
+https://github.com/KyleAMathews/familyletter
+
+Example code:
+
+function example_og_mailinglist_new_email_comment_alter(&$email) {
+  // If you module holds onto an email for a time before processing it,
+  // then you need to mark the email array that it's been processed
+  // to avoid an endless loop.
+  if ($email['example_processed']) {
+    return;
+  }
+
+  // Call another function to check if this email should be moderated.
+  if (example_should_this_email_be_moderated($email)) {
+    // Store the email (probably to the database).
+    $email['example_processed'] = TRUE;
+    example_store_email($email);
+
+    // Set the email array to false so OG Mailinglist will know not to save or
+    // send out again the email.
+    $email = FALSE;
+  }
+}
+
+
+hook_og_mailinglist_new_email_node_alter(&$email)
+=================================================
+Lets other modules alter a new node from email or delay posting for a time.
+This hook can be used in very similar ways to
+hook_og_mailinglist_new_email_comment_alter()
+and any moderation module will almost certainly need to implement both hooks.
+
+Modules using this hook:
+none so far.
+
+Example code:
+
+function example_og_mailinglist_new_email_node_alter(&$email) {
+  // If you module holds onto an email for a time before processing it,
+  // then you need to mark the email array that it's been processed
+  // to avoid an endless loop.
+  if ($email['example_processed']) {
+    return;
+  }
+
+  // Call another function to check if this email should be moderated.
+  if (example_should_this_email_be_moderated($email)) {
+    // Store the email (probably to the database).
+    $email['example_processed'] = TRUE;
+    example_store_email($email);
+
+    // Set the email array to false so OG Mailinglist will know not to save or
+    // send out again the email.
+    $email = FALSE;
+  }
+}
+
+hook_og_mailinglist_save_commment_alter(&$comment)
+==================================================
+
+Lets other modules alter the comment object before saving.
+
+Modules using this hook:
+none so far.
+
+Example code:
+
+function example_og_mailinglist_save_comment_alter(&$comment) {
+  // Add the user's name before the subject.
+  $account = user_load($comment['uid'];
+  $comment['subject'] = $account->name . ": " . $comment['subject'];
+}
+
+
+hook_og_mailinglist_save_node_alter(&$node)
+===========================================
+
+Lets other modules alter the node object before saving.
+
+Modules using this hook
+og_mailinglist_og_forum - included with OG Mailinglist
+
+Example code:
+
+// Code taken from og_mailinglist_og_forum which provides integration between
+// og_forum and og_mailinglist.
+// This code finds the default forum for the group the email is sent to
+// and adds the necessary information to the node object for it to be saved
+// correctly into that forum.
+function og_mailinglist_og_forum_og_mailinglist_save_node_alter(&$node) {
+  // If this is a forum post and the og_forum module is enabled, find this
+  // group's default forum container and add that to the node object.
+  if ($node->type == "forum" && module_exists('og_forum')) {
+    $forum_id = db_result(db_query("SELECT o.tid
+                                    FROM {og_term} o
+                                    JOIN {term_data} t
+                                    ON o.tid = t.tid
+                                    WHERE o.nid = %d
+                                    AND t.weight <> 0",
+                                    current($node->og_groups)));
+    $term = taxonomy_get_term($forum_id);
+    if(empty($node->tid)) {
+      $node->tid = $term->tid;
+    }
+    if(empty($node->vid)) {
+      $node->vid = $term->vid;
+    }
+    if(empty($node->taxonomy)) {
+      $node->taxonomy = array($term->vid => $term);
+    }
+  }
+}
+
+hook_og_mailinglist_new_node_alter(&$data)
+==========================================
+
+Lets other modules alter the subject and body of a node created on the website
+before it's sent.
+
+Modules using this hook
+Etherpad - https://github.com/KyleAMathews/drupal-etherpad
+
+Example code:
+
+function etherpad_og_mailinglist_new_node_alter(&$data) {
+    $data['subject'] = t("A new Notes pad has been added: @title", array('@title' => $data['title']));
+      $data['body'] = t("<p>A Notes pad let's you and others in your group write together in realtime! It's great for taking notes together in class or collaboratively preparing study materials</p> <br /><a style='font-size:150%' href='!link'>Start writing</a>", array('!link' => url('node/' . $data['nid'], array('absolute' => TRUE))));
+}
+
+?>
+
+hook_og_mailinglist_delete_thread_subscription($nid, $uid)
+==========================================================
+
+Fires when a thread subscription is deleted.
+
+Modules using this hook
+OG Mailinglist Flag
+
+Example code:
+
+// When a thread subscription is deleted, unflag the node as well.
+function og_mailinglist_flag_og_mailinglist_delete_thread_subscription($nid, $uid) {
+  $account = user_load($uid);
+  flag('unflag', 'follow_node', $nid, $account);
+}
+?>
+
+hook_og_mailinglist_save_thread_subscription($nid, $uid)
+========================================================
+
+Fires when a thread subscription is saved.
+
+Modules using this hook
+OG Mailinglist Flag
+
+Example code:
+
+// Flag the node for the user when they subscribe to a node.
+function og_mailinglist_flag_og_mailinglist_save_thread_subscription($nid, $uid) {
+  $account = user_load($uid);
+  flag('flag', 'follow_node', $nid, $account);
+}
+
+hook_og_mailinglist_new_phpmailer_alter(&$mailer)
+=================================================
+
+Let other modules add settings to a new phpmailer object.
+
+Modules using this hook
+OG Mailinglist Mailgun
+
+Example code:
+
+// Add SMTP settings to the phpmailer object so email is sent through
+the Mailgun account.
+function og_mailinglist_mailgun_og_mailinglist_new_phpmailer_alter(&$mailer) {
+  $login = variable_get('og_mailinglist_mailgun_login', '');
+  $password = variable_get('og_mailinglist_mailgun_password','');
+  $mailer->IsSMTP();
+  $mailer->Mailer = "smtp";
+  $mailer->Port = 587;
+  $mailer->SMTPAuth = true; // turn on SMTP authentication
+  $mailer->Username = $login; // SMTP username
+  $mailer->Password = $password; // SMTP password
+}

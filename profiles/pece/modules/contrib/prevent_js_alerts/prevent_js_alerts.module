@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * prevent_js_alerts module.
+ */
+
+/**
+ * Initialization of prevent_js_alerts (on each page).
+ */
+function prevent_js_alerts_init() {
+  $js_settings = _prevent_js_alerts_get_settings();
+  $module_path = $js_settings['module_path'];
+  // Add Settings
+  drupal_add_js(array('prevent_js_alerts' => $js_settings), 'setting');
+  // Add module js.
+  drupal_add_js($module_path . '/prevent_js_alerts.js');
+}
+
+/**
+ * Implements hook_help().
+ */
+function prevent_js_alerts_help($path, $arg) {
+  switch ($path) {
+    // Main module help for the block module
+    case 'admin/help#prevent_js_alerts':
+    case 'admin/config/user-interface/prevent_js_alerts':
+      return '<p>' .
+          t(
+              'This module completely suppresses ALL JavaScript alerts and instead prints them to console via console.error! Important: It does NOT ONLY suppress the core alerts, but also custom alerts.') . '</p>';
+  }
+}
+
+/**
+ * Returns the module settings.
+ *
+ * @return array Array of configuration variables to be made available in
+ *         JavaScript.
+ */
+function _prevent_js_alerts_get_settings() {
+  $module_path = drupal_get_path('module', 'prevent_js_alerts');
+  return array(
+    'module_path' => $module_path,
+  );
+}

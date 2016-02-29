@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Add a destination type for SFTP support for Backup and Migrate.
+ */
+
+/**
+ * Implements hook_backup_migrate_destination_types().
+ */
+function backup_migrate_sftp_backup_migrate_destination_types() {
+  $out = array(
+    'sftp' => array(
+      'description' => t('Save the backup files to any a directory on an SFTP server.'),
+      'file' => drupal_get_path('module', 'backup_migrate_sftp') . '/destinations.sftp.inc',
+      'class' => 'BackupMigrateDestinationSFTP',
+      'type_name' => t('SFTP Directory'),
+      'can_create' => TRUE,
+    ),
+  );
+
+  return $out;
+}

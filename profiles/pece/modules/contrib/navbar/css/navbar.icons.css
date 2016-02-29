@@ -1,0 +1,169 @@
+/**
+ * @file navbar.icons.css
+ */
+.drupal-navbar .navbar-icon {
+  background: none;
+  height: auto;
+  padding-left: 2.75em; /* LTR */
+  position: relative;
+  width: auto;
+}
+.drupal-navbar .navbar-icon:before {
+  background-attachment: scroll;
+  background-color: transparent;
+  background-position: center center;
+  background-repeat: no-repeat;
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0.6667em; /* LTR */
+  position: absolute;
+  top: 0;
+  width: 20px;
+}
+.drupal-navbar button.navbar-icon {
+  background-color: transparent;
+  border: 0;
+  font-size: 1em;
+}
+.drupal-navbar .menu ul .navbar-icon {
+  padding-left: 1.3333em; /* LTR */
+}
+.drupal-navbar .menu ul a.navbar-icon:before {
+  display: none;
+}
+.drupal-navbar .navbar-tray-vertical .menu ul {
+  margin-left: 1.5em; /* LTR */
+}
+.drupal-navbar .navbar-tray-vertical .menu ul ul {
+  margin-left: 0.75em; /* LTR */
+}
+
+/**
+ * Top level icons
+ */
+.navbar-icon-home:before {
+  background-image: url("../images/icon-home.png");
+}
+.navbar-icon-home:active:before,
+.navbar-icon-home.active:before {
+  background-image: url("../images/icon-home-active.png");
+}
+.navbar-icon-menu:before {
+  background-image: url("../images/icon-menu.png");
+}
+.navbar-icon-menu:active:before,
+.navbar-icon-menu.active:before {
+  background-image: url("../images/icon-menu-active.png");
+}
+
+/**
+ * Main menu icons.
+ */
+.navbar-icon-content:before {
+  background-image: url("../images/icon-content.png");
+}
+.navbar-icon-content:active:before,
+.navbar-icon-content.active:before {
+  background-image: url("../images/icon-content-active.png");
+}
+.navbar-icon-structure:before {
+  background-image: url("../images/icon-structure.png");
+}
+.navbar-icon-structure:active:before,
+.navbar-icon-structure.active:before {
+  background-image: url("../images/icon-structure-active.png");
+}
+.navbar-icon-appearance:before {
+  background-image: url("../images/icon-appearance.png");
+}
+.navbar-icon-appearance:active:before,
+.navbar-icon-appearance.active:before {
+  background-image: url("../images/icon-appearance-active.png");
+}
+.navbar-icon-people:before {
+  background-image: url("../images/icon-people.png");
+}
+.navbar-icon-people:active:before,
+.navbar-icon-people.active:before {
+  background-image: url("../images/icon-people-active.png");
+}
+.navbar-icon-modules:before {
+  background-image: url("../images/icon-extend.png");
+}
+.navbar-icon-modules:active:before,
+.navbar-icon-modules.active:before {
+  background-image: url("../images/icon-extend-active.png");
+}
+.navbar-icon-configuration:before {
+  background-image: url("../images/icon-configuration.png");
+}
+.navbar-icon-configuration:active:before,
+.navbar-icon-configuration.active:before {
+  background-image: url("../images/icon-configuration-active.png");
+}
+.navbar-icon-reports:before {
+  background-image: url("../images/icon-reports.png");
+}
+.navbar-icon-reports:active:before,
+.navbar-icon-reports.active:before {
+  background-image: url("../images/icon-reports-active.png");
+}
+.navbar-icon-help:before {
+  background-image: url("../images/icon-help.png");
+}
+.navbar-icon-help:active:before,
+.navbar-icon-help.active:before {
+  background-image: url("../images/icon-help-active.png");
+}
+/**
+ * User icon.
+ */
+.navbar-icon-user:before {
+  background-image: url("../images/icon-user.png");
+}
+.navbar-icon-user:active:before,
+.navbar-icon-user.active:before {
+  background-image: url("../images/icon-user-active.png");
+}
+
+/**
+ * Shortcut icon.
+ */
+.navbar-icon-shortcut:before {
+  background-image: url("../images/shortcut.png");
+}
+.navbar-icon-shortcut:active:before,
+.navbar-icon-shortcut.active:before {
+  background-image: url("../images/shortcut-active.png");
+}
+
+@media only screen and (min-width: 16.5em) {
+  .drupal-navbar .navbar-bar .navbar-icon {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    text-indent: -9999px;
+    width: 4em;
+  }
+  .drupal-navbar .navbar-bar .navbar-icon:before {
+    background-size: auto auto;
+    left: 0; /* LTR */
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 36em) {
+  .drupal-navbar .navbar-bar .navbar-icon {
+    background-position: left center; /* LTR */
+    padding-left: 2.75em; /* LTR */
+    padding-right: 1.3333em; /* LTR */
+    text-indent: 0;
+    width: auto;
+  }
+  .drupal-navbar .navbar-bar .navbar-icon:before {
+    left: 0.6667em; /* LTR */
+    width: 20px;
+  }
+}

@@ -1,0 +1,442 @@
+<?php
+/**
+ * @file
+ */
+
+include_once('panopoly_wysiwyg.features.inc');
+include_once('panopoly_wysiwyg.features.wysiwyg.inc');
+
+/**
+ * Implements hook_apps_app_info()
+ */
+function panopoly_wysiwyg_apps_app_info() {
+  return array(
+    'configure form' => 'panopoly_wysiwyg_configure_form',
+  );
+}
+
+/**
+ * Configuration Form for Panopoly WYSIWYG
+ */
+function panopoly_wysiwyg_configure_form($form, &$form_state) {
+  $form = array();
+
+  $form['panopoly_wysiwyg_show_format_details'] = array(
+    '#title' => t('Show Text Formatter Details'),
+    '#type' => 'select',
+    '#required' => TRUE,
+    '#options' => array(
+      '1' => 'Show',
+      '0' => 'Do Not Show',
+    ),
+    '#default_value' => variable_get('panopoly_wysiwyg_show_format_details', 0),
+    '#description' => t('Do you want Panopoly to show the help text and text format guidelines?'),
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implementation of hook_ctools_plugin_directory()
+ */
+function panopoly_wysiwyg_ctools_plugin_directory($module, $plugin) {
+  return 'plugins/' . $plugin;
+}
+
+/**
+  * Implementation of hook_wysiwyg_plugin().
+  */
+function panopoly_wysiwyg_wysiwyg_plugin($editor) {
+  switch ($editor) {
+    case 'tinymce':
+      return array(
+        'pdw' => array(
+          'path' => drupal_get_path('module', 'panopoly_wysiwyg') . '/plugins/wysiwyg/pdw',
+          'filename' => 'editor_plugin.js',
+          'buttons' => array(
+            'pdw_toggle' => t('Kitchen Sink')
+          ),
+          'url' => 'http://www.neele.name/pdw_toggle_toolbars/',
+          'load' => TRUE,
+        ),
+        'spellchecker' => array(
+          'internal' => TRUE,
+          'buttons' => array(
+            'spellchecker' => t('Spell Check')
+          ),
+          'url' => 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/spellchecker',
+          'load' => TRUE,
+        ),
+        'inlinepopups' => array(
+          'internal' => TRUE,
+          'url' => 'http://www.tinymce.com/wiki.php/Plugin:inlinepopups',
+          'load' => TRUE,
+        ),
+      );
+  }
+}
+
+
+/**
+ * Implements of hook_element_info_alter().
+ */
+function panopoly_wysiwyg_element_info_alter(&$type) {
+  // Change text format processing on elements to our version.
+  if (isset($type['text_format'])) {
+    $type['text_format']['#process'][] = 'panopoly_wysiwyg_filter_process_format';
+  }
+}
+
+/**
+ * Callback for processing the text_format element
+ */
+function panopoly_wysiwyg_filter_process_format($element) {
+
+  // Do not auto submit the form due to changes of the filter
+  $element['format']['format']['#attributes']['class'][] = 'ctools-auto-submit-exclude';
+
+  // Do not show the guidelines and help text for text formatters
+  // Also format this all a bit different so that it looks right
+  if (!variable_get('panopoly_wysiwyg_show_format_details', FALSE)) {
+    $element['format']['#weight'] = 1;
+    $element['format']['#prefix'] = '<div class="clearfix"><div class="format-toggle">';
+    $element['format']['#suffix'] = '</div></div>';
+    unset($element['format']['#type']);
+    $element['format']['format']['#title'] = 'Editor: ';
+    $element['format']['help']['#access'] = FALSE;
+    $element['format']['guidelines']['#access'] = FALSE;
+  }
+
+  return $element;
+}
+
+/**
+ * Implementation of hook_module_implements_alter()
+ */
+function panopoly_wysiwyg_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'wysiwyg_editor_settings_alter') {
+    $group = $implementations['panopoly_wysiwyg'];
+    unset($implementations['panopoly_wysiwyg']);
+    $implementations['panopoly_wysiwyg'] = $group;
+  }  
+}
+
+/**
+ * Modify the WYSIWYG editor settings for Panopoly improvements.
+ *
+ * This is meant to be called from hook_wysiwyg_editor_settings_alter().
+ *
+ * Panopoly will call it on all of it's formats (those starting with
+ * 'panopoly_*'), however, you can use it to apply Panopoly's customizations to
+ * your formats as well!
+ *
+ * For TinyMCE: this will change the editor skin, re-arrange the buttons,
+ * configure dialogs, and extend allowed markup for the Media module.
+ *
+ * For Markitup: it'll add additional styles and configure headers and lists.
+ *
+ * @param $settings
+ *   An associative array of JavaScript settings to pass to the editor.
+ * @param $context
+ *   An associative array containing additional context information:
+ *   - editor: The plugin definition array of the editor.
+ *   - profile: The editor profile object, as loaded from the database.
+ *   - theme: The name of the editor theme/skin.
+ *
+ * @see hook_wysiwyg_editor_settings_alter().
+ */
+function panopoly_wysiwyg_alter_wysiwyg_editor_settings(&$settings, $context) {
+  switch ($context['editor']['name']) {
+    case 'tinymce':
+      // Define the skin to use
+      $settings['skin'] = 'cirkuit';
+
+      // Define the spellchecking settings
+      $settings['spellchecker_languages'] = '+English=en';
+
+      // BUTTON ORDER
+      // If the user has set a custom button order with the WYSIWYG Button Order module, we'll use those.
+      // We test for the presence of a button_order array element rather than using module_exists() 
+      // so that the user can also hardcode an order with hook_wysiwyg_editor_settings
+      if (isset($context['profile']->settings['buttonorder'])) {
+        $default_buttons = preg_replace('/separator,separator/', 'PAGEBREAK', $context['profile']->settings['buttonorder']);
+      } 
+      // If there is no custom button_order, fall back on Panopoly defaults
+      else {
+        $enabled_buttons = preg_split('/,/', $settings['theme_advanced_buttons1']);
+        $default_buttons = array('bold', 'italic', 'strikethrough', '|', 'bullist', 'numlist', 'blockquote', '|', 'justifyleft', 'justifycenter', 'justifyright', '|', 'linkit', 'unlink', 'break', '|', 'fullscreen', 'spellchecker', 'media', 'captionfilter', 'pdw_toggle', 'PAGEBREAK', 'formatselect', '|', 'underline', '|', 'justifyfull', '|', 'forecolor', '|', 'pastetext', 'pasteword', 'removeformat', '|', 'charmap', '|', 'outdent', 'indent', '|', 'undo', 'redo'); 
+        foreach ($default_buttons as $button) {
+          if (in_array($button, $enabled_buttons)) {
+            unset($enabled_buttons[array_search($button, $enabled_buttons)]);
+          }
+          elseif ($button != '|' && $button != 'PAGEBREAK') {
+            unset($default_buttons[array_search($button, $default_buttons)]);
+          }
+        }
+        // If there are still any enabled buttons left, let's add them to the third row of buttons
+        if (count($enabled_buttons) > 0) {
+          $default_buttons[] = 'PAGEBREAK';
+          $default_buttons = array_merge($default_buttons, $enabled_buttons);
+        }
+        $default_buttons = implode(',', $default_buttons);
+      }
+
+      // Define the final button row settings.
+      $default_buttons_list = preg_split('/,PAGEBREAK,/', $default_buttons);
+      $rows_count = count($default_buttons_list);
+      for($i=0; $i<$rows_count; $i++) {
+        $settings['theme_advanced_buttons'.($i+1)] = (!empty($default_buttons_list[$i])) ? $default_buttons_list[$i] : NULL;
+      }
+
+      // Define PDW Plugin Settings
+      $settings['pdw_toggle_on'] = '1';
+      $settings['pdw_toggle_toolbars'] = ($rows_count > 1) ? implode(',', range(2, $rows_count)) : '2';
+
+      // Enable the inlinepopups and modal settings
+      $settings['plugins'] .= ',inlinepopups';
+      $settings['dialog_type'] = 'modal';
+
+      // Allow extra elements for Media module
+      // See - http://drupal.org/node/1835826
+      if (empty($settings['extended_valid_elements'])) {
+        $settings['extended_valid_elements'] = 'img[!src|title|alt|style|width|height|class|hspace|vspace|view_mode|format|fid]';
+      }
+      else {
+        $settings['extended_valid_elements'] = array_merge(explode(',', $settings['extended_valid_elements']), array('img[!src|title|alt|style|width|height|class|hspace|vspace|view_mode|format|fid]'));
+
+        // When adding new elements to $settings['extended_valid_elements'], make sure
+        // that we're merging, and not overwriting.
+        $settings_array = array();
+        foreach($settings['extended_valid_elements'] as $tag) {
+          if (strpos("[", $tag) !== FALSE) {
+            list($tag, $allowed_attributes) = explode('[', $tag);
+            $allowed_attributes = explode('|', trim($allowed_attributes, ']'));
+            foreach($allowed_attributes as $key => $attribute) {
+                $settings_array[$tag][$attribute] = $attribute;
+            }
+          }
+        }
+        $valid_elements = array();
+        foreach ($settings_array as $tag => $allowed_attributes) {
+          $attributes = in_array('*', $allowed_attributes) ? '*' : implode('|', $allowed_attributes);
+          $valid_elements[] = $tag . '[' . $attributes . ']';
+        }
+        $settings['extended_valid_elements'] = implode(',', $valid_elements);
+      }
+      break;
+
+    case 'markitup':
+      // Load the appropriate CSS and JS
+      drupal_add_css($context['editor']['library path'] . '/markitup/sets/html/style.css'); 
+      drupal_add_js($context['editor']['library path'] . '/markitup/sets/html/set.js');
+
+      // Define the new header buttons
+      $header_buttons = array(
+        'header-begin' => array(
+          'className' => 'markItUpSeparator',
+        ),
+        'h1' => array(
+          'name' => t('Heading 1'),
+          'className' => 'markitup-h1',
+          'key' => '1',
+          'openWith' => '<h1(!( class="[![Class]!]")!)>',
+          'closeWith' => '</h1>',
+          'placeHolder' => 'Your title here...',
+        ),
+        'h2' => array(
+          'name' => t('Heading 2'),
+          'className' => 'markitup-h2',
+          'key' => '2',
+          'openWith' => '<h2(!( class="[![Class]!]")!)>',
+          'closeWith' => '</h2>',
+          'placeHolder' => 'Your title here...',
+        ),
+        'h3' => array(
+          'name' => t('Heading 3'),
+          'className' => 'markitup-h3',
+          'key' => '3',
+          'openWith' => '<h3(!( class="[![Class]!]")!)>',
+          'closeWith' => '</h3>',
+          'placeHolder' => 'Your title here...',
+        ),
+        'h4' => array(
+          'name' => t('Heading 4'),
+          'className' => 'markitup-h4',
+          'key' => '4',
+          'openWith' => '<h4(!( class="[![Class]!]")!)>',
+          'closeWith' => '</h4>',
+          'placeHolder' => 'Your title here...',
+        ),
+        'paragraph' => array(
+          'name' => t('Paragraph'),
+          'className' => 'markitup-paragraph',
+          'key' => 'p',
+          'openWith' => '<p(!( class="[![Class]!]")!)>',
+          'closeWith' => '</p>',
+        ),
+        'header-end' => array(
+          'className' => 'markItUpSeparator',
+        ),
+      );
+
+      // Define the list styles
+      $list_styles = array(
+        'list-bullet' => array(
+          'name' => t('Unordered List'),
+          'className' => 'markitup-list-bullet',
+          'openWith' => "<ul>\n",
+          'closeWith' => '</ul>',
+        ),
+        'list-numeric' => array(
+          'name' => t('Ordered List'),
+          'className' => 'markitup-list-numeric',
+          'openWith' => "<ol>\n",
+          'closeWith' => '</ol>',
+        ),
+      );
+
+      // Add the header buttons to the end
+      foreach ($header_buttons as $tag => $details) {
+        $settings['markupSet'][$tag] = $details;
+        $context['profile']->settings['buttons']['html'][$tag] = 1;
+      }
+
+      // Add the list styles to the end
+      foreach ($list_styles as $tag => $details) {
+        $settings['markupSet'][$tag] = $details;
+        $context['profile']->settings['buttons']['html'][$tag] = 1;
+      }
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_wysiwyg_editor_settings_alter()
+ *
+ * @see panopoly_wysiwyg_alter_wysiwyg_editor_settings().
+ */
+function panopoly_wysiwyg_wysiwyg_editor_settings_alter(&$settings, $context) {
+  // Only work the magic on the Panopoly profiles
+  if (strpos($context['profile']->format, 'panopoly_') === 0) {
+    panopoly_wysiwyg_alter_wysiwyg_editor_settings($settings, $context);
+  }
+  elseif ($context['profile']->editor == 'tinymce') {
+    // However, the 'pdw' or 'Kitchen Sink' plugin (which we've made available)
+    // requires some extra configuration or it'll break. So, we'll set this up
+    // to prevent user text formats from breaking (see issue #1846322).
+    if (!isset($settings['pdw_toggle_on'])) {
+      $settings['pdw_toggle_on'] = '1'; 
+    }
+    if (!isset($settings['pdw_toggle_toolbars'])) {
+      $toolbars = array();
+      if (!empty($settings['theme_advanced_buttons2'])) {
+        $toolbars[] = '2';
+      }
+      if (!empty($settings['theme_advanced_buttons3'])) {
+        $toolbars[] = '3';
+      }
+      if (empty($toolbars)) {
+        // Issue #2058917: If we have no toolbars then we need to disable 'pdw'
+        // all together, otherwise there'll be Javascript errors.
+        $settings['plugins'] = implode(',', array_diff(explode(',', $settings['plugins']), array('-pdw')));
+      }
+      else {
+        $settings['pdw_toggle_toolbars'] = implode(',', $toolbars);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function panopoly_wysiwyg_form_wysiwyg_profile_form_alter(&$form, &$form_state, $form_id) {
+  if (module_exists('wysiwyg_button_order')) {
+    $form['#after_build'][] = 'panopoly_wysiwyg_button_order_help';
+  }
+}
+
+/**
+ * After build callback that adds help text about using wysiwyg_button_order.
+ */
+function panopoly_wysiwyg_button_order_help($form) {
+  if (isset($form['buttonorder'])) {
+    $form['buttonorder']['#description'] = '<p>Add two separators in a row to force buttons to a new row.</p>';
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_filter_info()
+ */
+function panopoly_wysiwyg_filter_info() {
+  $filters = array();
+  $filters['panopoly_images_fix_captions'] = array(
+    'title' => t('Add Panopoly image classes to caption wrappers'),
+    'description' => t('This filter must come AFTER Caption Filter. Adds the image style class from the img tag to div.caption.'),
+    'process callback' => '_panopoly_wysiwyg_process_caption_filter',
+  );
+  return $filters;
+}
+
+/**
+ * Filter process callback. Add image style class to caption wrapper div.
+ */
+function _panopoly_wysiwyg_process_caption_filter($text, $filter, $format, $langcode, $cache, $cache_id) {
+
+  // We are going to use DOMDocument to parse this which causes $text to default to Latin-1 unless there's
+  // a charset meta tag because of course there is no server header here.
+  $text = '<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><body>' . $text . '</body>';
+
+  // Prevent parse errors from becoming PHP notices.
+  if (function_exists('libxml_use_internal_errors')) {
+    $use_errors = libxml_use_internal_errors(TRUE);
+  }
+
+  $doc = new DOMDocument();
+  $doc->loadHTML($text);
+  $xpath = new DOMXpath($doc);
+
+  // We need this crazy XPath query because a simple [@class=caption] will not
+  // match if we have multiple classes and a "contains" query will match even
+  // for classes like "mycaption". We want to match only if the actual "caption"
+  // class is present, with or without other classes.
+  // See http://pivotallabs.com/xpath-css-class-matching/
+  $captions = $xpath->query("//div[contains(concat(' ',normalize-space(@class),' '),' caption ')]");
+
+  foreach ($captions as $caption) {
+    $imgs = $caption->getElementsByTagName("img");
+    foreach ($imgs as $img) {
+      $img_classes = $img->getAttribute("class");
+      $img_path = $img->getAttribute("src");
+      $server_path = str_replace('http://' . $_SERVER['HTTP_HOST'], $_SERVER['DOCUMENT_ROOT'], $img_path);
+      $doc_path = explode('?', $server_path);
+      $img_info = image_get_info($doc_path[0]);
+
+      // We only do this for panopoly image styles; we don't mess with other
+      // people's stuff.
+      preg_match("/panopoly-image-[a-z]+/", $img_classes, $panopoly_image_class);
+    }
+    if (empty($panopoly_image_class)) {
+      return $text;
+    }
+    $caption_classes = $caption->getAttribute('class');
+    if (!empty($caption_classes)) {
+      $caption_classes = $caption_classes . ' ' . $panopoly_image_class[0];
+    }
+    $caption->setAttribute('class', $caption_classes);
+  }
+
+  // Generate the HTML and remove everything except the body of the document.
+  $text = $doc->saveHTML();
+  $text = preg_replace('/^.*?<body>/s', '', $text);
+  $text = preg_replace('/<\/body>.*$/s', '', $text);
+
+  // Clear the error buffer and restore old error handling mode.
+  if (function_exists('libxml_use_internal_errors')) {
+    libxml_clear_errors();
+    libxml_use_internal_errors($use_errors);
+  }
+
+  return $text;
+}

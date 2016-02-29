@@ -1,0 +1,178 @@
+<?php
+
+/**
+ * @file
+ * Provides a datepicker for the "Authored on" date field found on node forms.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function date_popup_authored_help($section) {
+  switch ($section) {
+    case 'admin/help#date_popup_authored':
+      $readme = '<p>' . t('Date Popup Authored provides a jQuery UI datepicker for the "Authored on" date field found on node forms.') . '</p>';
+      $readme .= '<p>' . t('Please note that the Drupal 7 branch is experimental and relies on non-stable code. A stable version of Date Popup Authored will be released in conjunction with the stable releases of both Drupal 7 and Date for Drupal 7.') . '</p>';
+      $readme .= '<p>' . t('For a full description of the module, visit <a href="@url">the project page</a>.',
+        array(
+          '@url' => url('http://drupal.org/project/date_popup_authored'),
+        )) . '</p>';
+      $readme .= '<p>' . t('To submit bug reports and feature suggestions, or to track changes, visit <a href="@url">the issue queue</a>.',
+        array(
+          '@url' => url('http://drupal.org/project/issues/date_popup_authored'),
+        )) . '</p>';
+
+      $readme .= '<h2>' . t('Requirements') . '</h2>';
+      $readme .= '<ul>';
+      $readme .= '<li>' . t('Drupal 7') . '</li>';
+      $readme .= '<li>' . t('<a href="@url">Date</a> 7.x-1.0-alpha2 or later',
+        array(
+          '@url' => url('http://http://drupal.org/project/date'),
+        )) . '</li>';
+      $readme .= '<li>' . t('<em>Date popup</em>, part of the Date module') . '</li>';
+      $readme .= '</ul>';
+
+      $readme .= '<h2>' . t('Installation and Configuration') . '</h2>';
+      $readme .= '<p>' . t('Install as usual. See the <a href="@url">handbook page on installing contributed modules</a> for further information.',
+        array(
+          '@url' => url('http://drupal.org/node/895232'),
+        )) . '</p>';
+      $readme .= '<p>' . t('You can change the behavior of the datepicker by going to <a href="@url">the settings page for each content type</a>.',
+        array(
+          '@url' => url('admin/structure/types'),
+        )) . '</p>';
+
+      $readme .= '<h2>' . t('Contact') . '</h2>';
+      $readme .= '<p>' . t('The current maintainer is Mark Trapp. You can contact him through his <a href="@url">Drupal user page</a>.',
+        array(
+          '@url' => url('http://drupal.org/user/212019'),
+        )) . '</p>';
+
+      $readme .= '<h2>' . t('Acknowledgements') . '</h2>';
+      $readme .= '<p> ' . t('Date Popup Authored was inspired by the hacks provided by <a href="@url-brice">brice</a> and <a href="@url-robloach">Rob Loach</a> in <a href="@url-issue">issue #471942</a>. It contains additional fixes to account for problems found in their solution as well as new configuration options.',
+        array(
+          '@url-brice' => url('http://drupal.org/user/446296'),
+          '@url-robloach' => url('http://drupal.org/user/61114'),
+          '@url-issue' => url('http://drupal.org/node/471942'),
+        )) . '</p>';
+
+      return $readme;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Adds additional configuration settings to the form for each content type to
+ * control the behavior of the datepicker.
+ */
+function date_popup_authored_form_node_type_form_alter(&$form, &$form_state, $form_id) {
+  $form['additional_settings']['#attached']['js'][] = drupal_get_path('module', 'date_popup_authored') . '/date_popup_authored-node-form.js';
+
+  $form['date_popup_authored'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Date Popup Authored settings'),
+    '#collapsible' => TRUE,
+    '#group' => 'additional_settings',
+  );
+  $form['date_popup_authored']['date_popup_authored_enabled'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable datepicker for authored on date.'),
+    '#description' => t('The default Authored On field will be replaced with a JavaScript datepicker.'),
+    '#default_value' => variable_get('date_popup_authored_enabled_' . $form['#node_type']->type, 1),
+  );
+  $form['date_popup_authored']['date_popup_authored_format'] = array(
+    '#type' => 'select',
+    '#title' => t('Date format'),
+    '#description' => t('Custom date formats can be added on the <a href="@url">date and time formats page</a>.', array('@url' => url('admin/config/regional/date-time'))),
+    '#default_value' => variable_get('date_popup_authored_format_' . $form['#node_type']->type, 'm/d/Y - H:i'),
+    '#options' => _date_popup_authored_format_options(),
+    '#states' => array(
+      'invisible' => array(
+        'input[name="date_popup_authored_enabled"]' => array('checked' => FALSE),
+      ),
+    ),
+  );
+  $form['date_popup_authored']['date_popup_authored_year_range'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Year range'),
+    '#description' => t('The range of years to provide to the user. Default is &#x00B1;3 years, i.e. 2007-2013'),
+    '#default_value' => variable_get('date_popup_authored_year_range_' . $form['#node_type']->type, 3),
+    '#size' => 3,
+    '#field_prefix' => '&#x00B1;',
+    '#field_suffix' => 'years',
+    '#states' => array(
+      'invisible' => array(
+        'input[name="date_popup_authored_enabled"]' => array('checked' => FALSE),
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for node_form.
+ *
+ * Replaces default Authored on field with a datepicker on node submission forms.
+ */
+function date_popup_authored_form_node_form_alter(&$form, $form_state, $form_id) {
+  // Date Popup Authored should modify the node submission form only if the
+  // user is allowed to modify the authoring information and it's enabled.
+  if (!($form['author']['#access'] && variable_get('date_popup_authored_enabled_' . $form['type']['#value'], 1))) {
+    return;
+  }
+
+  $form['author']['date']['#type'] = 'date_popup';
+
+  // If there is a date already available, rewrite it to conform to
+  // Date Popup's expected format.
+  if (!empty($form['author']['date']['#default_value'])) {
+    $date = new DateObject($form['author']['date']['#default_value'], NULL, 'Y-m-d H:i:s O');
+    $form['author']['date']['#default_value'] = $date->format('Y-m-d H:i:s');
+  }
+
+  // Set options specific to date_popup.
+  $year_range = variable_get('date_popup_authored_year_range_' . $form['type']['#value'], 3);
+  $form['author']['date']['#date_year_range'] = '-' . $year_range . ':+' . $year_range;
+  $form['author']['date']['#date_format'] = variable_get('date_popup_authored_format_' . $form['type']['#value'], 'm/d/Y - H:i');
+
+  // Unset options that are not relevant to date_popup
+  unset($form['author']['date']['#maxlength']);
+  unset($form['author']['date']['#description']);
+
+  // We need to modify date popup's data during submit
+  // @see http://drupal.org/node/847854
+  $form['#submit'][] = 'date_popup_authored_node_form_submit';
+}
+
+/**
+ * Submits the node data with the proper post date.
+ *
+ * @see http://drupal.org/node/847854
+ */
+function date_popup_authored_node_form_submit($form, &$form_state) {
+  if (isset($form_state['values']['date']) && $form_state['values']['date'] instanceof DateObject) {
+    $form_state['values']['date'] = $form_state['values']['date']->format('Y-m-d H:i:s O');
+  }
+}
+
+/**
+ * Provides an options list of date formats for the configuration form.
+ */
+function _date_popup_authored_format_options() {
+  $options = array();
+
+  $date = new DateObject('now', date_default_timezone());
+  $date_formats = system_get_date_formats();
+
+  foreach ($date_formats as $type => $format_info) {
+    $format_key = ucwords($type) . ' date format';
+
+    $options[$format_key] = array();
+
+    foreach (array_keys($format_info) as $format) {
+      $options[$format_key][$format] = $date->format($format);
+    }
+  }
+
+  return $options;
+}

@@ -1,0 +1,171 @@
+/**
+ * @file navbar.theme.css
+ */
+.drupal-navbar {
+  font-family: "Source Sans Pro", "Lucida Grande", Verdana, sans-serif;
+  /* Set base font size to 13px based on root ems. */
+  font-size: 0.8125rem;
+  -moz-tap-highlight-color: rgba(0,0,0,0);
+  -o-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  tap-highlight-color: rgba(0,0,0,0);
+  -moz-touch-callout: none;
+  -o-touch-callout: none;
+  -webkit-touch-callout: none;
+  touch-callout: none;
+}
+.drupal-navbar a {
+  cursor: pointer;
+  padding: 1em 1.3333em;
+  text-decoration: none;
+}
+.drupal-navbar .navbar-tray .menu li a {
+  padding-right: 1.3333em;
+}
+.drupal-navbar a:hover {
+  text-decoration: underline;
+}
+
+/**
+ * navbar bar.
+ */
+.drupal-navbar .navbar-bar {
+  background-color: #0f0f0f;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3333);
+  color: #dddddd;
+}
+.drupal-navbar .navbar-bar a {
+  color: #ffffff;
+}
+.drupal-navbar .navbar-bar .navbar-tab > a {
+  font-weight: bold;
+}
+.drupal-navbar .navbar-bar .navbar-tab > a:hover {
+  background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.125) 20%, transparent 200%);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.125) 20%, transparent 200%);
+  text-decoration: none;
+}
+.drupal-navbar .navbar-bar .navbar-tab > a.active {
+  background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.25) 20%, transparent 200%);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.25) 20%, transparent 200%);
+}
+
+/**
+ * navbar tray.
+ */
+.drupal-navbar .navbar-tray > .navbar-lining {
+  background-color: #ffffff;
+}
+.drupal-navbar .navbar-tray-horizontal > .navbar-lining {
+  padding-right: 5em; /* LTR */
+}
+.drupal-navbar .navbar-tray-vertical > .navbar-lining,
+.drupal-navbar .navbar-tray-vertical > .navbar-lining:before {
+  background-color: #ffffff;
+  border-right: 1px solid #aaaaaa; /* LTR */
+}
+.drupal-navbar .navbar-tray-vertical > .navbar-lining:before {
+  box-shadow: -1px 0 5px 2px rgba(0, 0, 0, 0.3333); /* LTR */
+}
+.drupal-navbar .navbar-tray-horizontal {
+  border-bottom: 1px solid #aaaaaa;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3333);
+}
+.drupal-navbar .navbar-tray-horizontal .navbar-tray {
+  background-color: #f5f5f5;
+}
+.drupal-navbar .navbar-tray a {
+  color: #707070;
+}
+.drupal-navbar .navbar-tray a:hover,
+.drupal-navbar .navbar-tray a:active,
+.drupal-navbar .navbar-tray a.active {
+  color: #000;
+}
+.drupal-navbar .navbar-tray-horizontal .menu {
+  background-color: #ffffff;
+}
+.drupal-navbar .navbar-tray-horizontal .menu li + li {
+  border-left: 1px solid #dddddd; /* LTR */
+}
+.drupal-navbar .navbar-tray-horizontal .menu li:last-child {
+  border-right: 1px solid #dddddd; /* LTR */
+}
+.drupal-navbar .navbar-tray-vertical .menu li + li {
+  border-top: 1px solid #dddddd;
+}
+.drupal-navbar .navbar-tray-vertical .menu li:last-child {
+  border-bottom: 1px solid #dddddd;
+}
+.drupal-navbar .navbar-tray-vertical .menu .menu li {
+  border: 0 none;
+}
+.drupal-navbar .navbar-tray-vertical .menu ul ul {
+  border-bottom: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
+}
+.drupal-navbar .navbar-tray-vertical .menu li:last-child > ul {
+  border-bottom: 0;
+}
+.drupal-navbar .navbar-tray-vertical .menu .menu .menu {
+  margin-left: 1.3333em; /* LTR */
+}
+.drupal-navbar .navbar-tray-vertical .menu .menu .menu .menu {
+  margin-left: 0.25em; /* LTR */
+}
+.drupal-navbar .menu .menu a {
+  color: #434343;
+}
+.drupal-navbar .navbar-tray-vertical .menu .menu .menu a {
+  padding-left: 0.6667em; /* LTR */
+}
+
+/**
+ * Orientation toggle.
+ */
+.drupal-navbar .navbar-toggle-orientation {
+  background-color: #f5f5f5;
+  padding: 0.6667em;
+}
+.drupal-navbar .navbar-tray-horizontal .navbar-toggle-orientation {
+  border-left: 1px solid #c9c9c9; /* LTR */
+}
+.drupal-navbar .navbar-toggle-orientation > .navbar-lining {
+  float: right; /* LTR */
+  padding: 0.1667em;
+}
+.drupal-navbar .navbar-toggle-orientation button {
+  cursor: pointer;
+  display: inline-block;
+  height: 16px;
+  padding: 0;
+  text-indent: -999em;
+  width: 20px;
+}
+.drupal-navbar .navbar-toggle-orientation button:before {
+  left: 0; /* LTR */
+}
+.drupal-navbar .navbar-toggle-orientation [value="vertical"]:before {
+  background-image: url('../images/icon-toggle-vertical.png'); /* LTR */
+}
+.drupal-navbar .navbar-toggle-orientation [value="horizontal"]:before {
+  background-image: url('../images/icon-toggle-horizontal.png');
+}
+
+/**
+ * Shortcut.
+ */
+.drupal-navbar .navbar-tray.navbar-tray-horizontal.shortcuts .menu {
+  float: left;
+}
+.edit-shortcuts {
+  display: block;
+}
+.drupal-navbar .navbar-tray-vertical .edit-shortcuts {
+  text-align: right;
+  padding: 1em;
+}
+.drupal-navbar .navbar-tray-horizontal .edit-shortcuts {
+  display: inline-block;
+  float: left; /* LTR */
+}

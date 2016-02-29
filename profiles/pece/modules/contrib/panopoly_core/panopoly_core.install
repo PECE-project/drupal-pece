@@ -1,0 +1,235 @@
+<?php
+
+/**
+ * @file
+ * An installation file for Panopoly Core
+ */
+
+/**
+ * Implementation of hook_requirements()
+ * 
+ * Adapted from system_requirements()
+ */
+function panopoly_core_requirements($phase) {
+
+  // Kick us off
+  $requirements = array();
+
+  // Ensure translations don't break at install time
+  $t = get_t();
+
+  // Let's require more memory and force Drupal core to accept it
+  $memory_limit = ini_get('memory_limit');
+  $panopoly_memory_limit = '196M';
+  $requirements['panopoly_core_memory_limit'] = array(
+    'title' => $t('PHP memory limit'),
+    'value' => $memory_limit == -1 ? t('-1 (Unlimited)') : $memory_limit,
+    'weight' => 0,
+  );
+
+  if ($memory_limit && $memory_limit != -1 && parse_size($memory_limit) < parse_size($panopoly_memory_limit)) {
+    $description = '';
+    if ($phase == 'install') {
+      $description = $t('Consider increasing your PHP memory limit to %memory_minimum_limit to help prevent errors in the installation process.', array('%memory_minimum_limit' => $panopoly_memory_limit));
+    }
+    elseif ($phase == 'update') {
+      $description = $t('Consider increasing your PHP memory limit to %memory_minimum_limit to help prevent errors in the update process.', array('%memory_minimum_limit' => $panopoly_memory_limit));
+    }
+    elseif ($phase == 'runtime') {
+      $description = $t('Depending on your configuration, Drupal can run with a %memory_limit PHP memory limit. However, a %memory_minimum_limit PHP memory limit or above is recommended, especially if your site uses additional custom or contributed modules.', array('%memory_limit' => $memory_limit, '%memory_minimum_limit' => $panopoly_memory_limit));
+    }
+
+    if (!empty($description)) {
+      if ($php_ini_path = get_cfg_var('cfg_file_path')) {
+        $description .= ' ' . $t('Increase the memory limit by editing the memory_limit parameter in the file %configuration-file and then restart your web server (or contact your system administrator or hosting provider for assistance).', array('%configuration-file' => $php_ini_path));
+      }
+      else {
+        $description .= ' ' . $t('Contact your system administrator or hosting provider for assistance with increasing your PHP memory limit.');
+      }
+
+      $requirements['panopoly_core_memory_limit']['description'] = $description . ' ' . $t('See the <a href="@url">Drupal requirements</a> for more information.', array('@url' => 'http://drupal.org/requirements'));
+      $requirements['panopoly_core_memory_limit']['severity'] = REQUIREMENT_WARNING;
+    }
+  }
+  return $requirements;
+}
+
+/**
+ * Implementation of hook_install()
+ */
+function panopoly_core_install() {
+
+  // Add login link for users to log in
+  $item = array(
+    'link_path' => 'user/login',
+    'link_title' => 'Log in',
+    'menu_name' => 'user-menu',
+  );
+  menu_link_save($item);
+}
+
+/**
+ * Implemenetation of hook_uninstall()
+ */
+function panopoly_core_uninstall() {
+
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function panopoly_core_update_dependencies() {
+  $deps = array();
+  $deps['panopoly_core'][7002] = array(
+    'pathauto' => 7006,
+  );
+  $deps['module_filter'][7200] = array(
+    'panopoly_core' => 7105,
+  );
+  return $deps;
+}
+
+/** 
+ * Panopoly Beta 5 Update: Correctly Setting install_task to "done"
+ */
+function panopoly_core_update_7001(&$sandbox) {
+  variable_set('install_task', 'done');
+}
+
+/**
+ * Move pathauto state information from pathauto to pathauto_state.
+ */
+function panopoly_core_update_7002() {
+  module_load_install('pathauto');
+  if (function_exists('pathauto_update_7006')) {
+    // Call it here because it needs to be re-run if it was previously run
+    // with an older version of the patch from #936222.
+    $res = pathauto_update_7006();
+    if (db_table_exists('pathauto')) {
+      db_query("INSERT INTO {pathauto_state} (entity_type, entity_id, pathauto) SELECT entity_type, entity_id, pathauto FROM {pathauto}");
+      db_drop_table('pathauto');
+    }
+    return $res;
+  }
+}
+
+/**
+ * Remove the 'node_body' Pane from the list of allowed panes.
+ */
+function panopoly_core_update_7003() {
+  $allowed = variable_get('panels_page_allowed_types', array());
+  if (!empty($allowed['node_body-node_body'])) {
+    $allowed['node_body-node_body'] = 0;
+    variable_set('panels_page_allowed_types', $allowed);
+  }
+}
+
+/**
+ * Enable the transliteration module.
+ */
+function panopoly_core_update_7100() {
+  if (!module_exists('transliteration')) {
+    module_enable(array('transliteration'));
+  }
+}
+
+/**
+ * Change the Pathauto "Update action" to match the new default.
+ */
+function panopoly_core_update_7101() {
+  // Only change this setting if the 'redirect' module isn't used OR if it's
+  // used in conjunction with the 'globalredirect' module.
+  if (!module_exists('redirect') || module_exists('globalredirect')) {
+    variable_set('pathauto_update_action', '1');
+  }
+}
+
+/**
+ * Disable Panopoly layouts and enable Radix ones.
+ */
+function panopoly_core_update_7102() {
+  $panopoly_layouts = array(
+    'bartlett',
+    'bartlett_flipped',
+    'boxton',
+    'brenham',
+    'brenham_flipped',
+    'brown',
+    'bryant',
+    'bryant_flipped',
+    'burr',
+    'burr_flipped',
+    'geary',
+    'harris',
+    'hewston',
+    'hewston_flipped',
+    'mccoppin',
+    'moscone',
+    'moscone_flipped',
+    'phelan',
+    'pond',
+    'rolph',
+    'sanderson',
+    'sanderson_flipped',
+    'selby',
+    'selby_flipped',
+    'sutro',
+    'sutro_double',
+    'taylor',
+    'taylor_flipped',
+    'webb',
+    'webb_flipped',
+    'whelan',
+  );
+  $allowed_layouts = unserialize(variable_get('panels_page_allowed_layouts', serialize((object)array())));
+  foreach ($panopoly_layouts as $layout_name) {
+    $allowed_layouts->allowed_layout_settings['radix_' . $layout_name] = TRUE;
+    // Work around misnamed layout.
+    if ($layout_name == 'bryant_flipped') {
+      $layout_name = 'bryant_flipped_flipped';
+    }
+    $allowed_layouts->allowed_layout_settings[$layout_name] = FALSE;
+  }
+  variable_set('panels_page_allowed_layouts', serialize($allowed_layouts));
+}
+
+/**
+ * Disown content types that belong to disabled modules.
+ */
+function panopoly_core_update_7103() {
+  $result = db_query("SELECT type, name, module FROM {node_type} WHERE module <> 'node'");
+  foreach ($result as $row) {
+    if (!module_exists($row->module)) {
+      db_update('node_type')
+        ->fields(array(
+            'module' => 'node',
+            'custom' => 1,
+            'modified' => 1,
+            'locked' => 0,
+            'disabled' => 0,
+          ))
+        ->condition('type', $row->type)
+        ->execute();
+    }
+  }
+}
+
+/**
+ * Ensure that jquery_update in enabled and configured.
+ */
+function panopoly_core_update_7104() {
+  module_enable(array('jquery_update'));
+
+  // If the user never configured the jquery version, then we set it to our
+  // default of 1.7.
+  if (variable_get('jquery_update_jquery_version', 'not set') === 'not set') {
+    variable_set('jquery_update_jquery_version', '1.7');
+  }
+}
+
+/**
+ * Rebuild the code registry for views_autocomplete_filters 1.2.
+ */
+function panopoly_core_update_7105() {
+  registry_rebuild();
+}

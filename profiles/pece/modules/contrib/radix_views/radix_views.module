@@ -1,0 +1,39 @@
+<?php
+/**
+ * @file
+ * Radix + Views integration.
+ */
+
+/**
+ * Implements hook_views_api().
+ */
+function radix_views_views_api() {
+  return array("api" => "3.0");
+}
+
+/**
+ * Implements hook_process_views_view().
+ */
+function radix_views_process_views_view(&$variables) {
+  $view = $variables['view'];
+  $options = $view->style_plugin->options;
+
+  // If views has grouping, we add a .row class to the view-content.
+  if ($view->style_plugin->plugin_name == 'radix_views_grid_plugin_style') {
+    if (!empty($options['grouping'])) {
+      // Get the grouping class.
+      if (preg_match("/col\-[xs|sm|md|lg]*\-([0-9]{1,2})/", $options['views_group_col_class'], $matches)) {
+        $variables['views_group_col_class_size'] = $matches[1];
+        $variables['views_group_col_size'] = floor(12 / $matches[1]);
+
+        // We are going to create a row only if there's more than 1 column.
+        if ($variables['views_group_col_size'] != 1) {
+          $variables['view_content_class'] = 'view-content row';
+        }
+      }
+    }
+    else {
+      $variables['view_content_class'] = 'view-content';
+    }
+  }
+}

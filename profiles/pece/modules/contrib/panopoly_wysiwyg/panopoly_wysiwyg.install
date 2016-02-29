@@ -1,0 +1,62 @@
+<?php
+/**
+ * @file
+ * Install hooks for Panopoly WYSIWYG.
+ */
+
+/**
+ * Ensure that filter settings get updated.
+ */
+function panopoly_wysiwyg_update_7101() {
+  features_revert(array('panopoly_wysiwyg' => array('filter')));
+}
+
+/**
+ * Add image classes to captions so responsive images don't break
+ */
+function panopoly_wysiwyg_update_7102() {
+  // Because of the way Drupal handles filter_format_load() we need to use the method
+  // outlined here: https://www.drupal.org/node/1304930
+  $format = filter_format_load('panopoly_wysiwyg_text');
+  if (empty($format->filters)) {
+    $filters = filter_list_format($format->format);
+    $format->filters = array();
+    foreach ($filters as $name => $filter) {
+      foreach ($filter as $k => $v) {
+        $format->filters[$name][$k] = $v;
+      }
+    }
+  }
+
+  // Add the 'panopoly_images_fix_captions' filter
+  $format->filters['panopoly_images_fix_captions'] = array(
+    'weight' => 0,
+    'status' => 1,
+  );
+
+  // Save the updated format.
+  filter_format_save($format);
+}
+
+/**
+ * Remove the 'Convert line breaks into HTML' filter from the WYSIWYG format.
+ */
+function panopoly_wysiwyg_update_7103() {
+  // Because of the way Drupal handles filter_format_load() we need to use the method
+  // outlined here: https://www.drupal.org/node/1304930
+  $format = filter_format_load('panopoly_wysiwyg_text');
+  if (empty($format->filters)) {
+    $filters = filter_list_format($format->format);
+    $format->filters = array();
+    foreach ($filters as $name => $filter) {
+      foreach ($filter as $k => $v) {
+        $format->filters[$name][$k] = $v;
+      }
+    }
+  }
+
+  // Disable the 'filter_autop' filter.
+  $format->filters['filter_autop']['status'] = 0;
+
+  filter_format_save($format);
+}

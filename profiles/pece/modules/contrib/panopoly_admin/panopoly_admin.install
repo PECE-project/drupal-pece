@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * An installation file for Panopoly Admin
+ */
+
+/**
+ * Implements hook_install()
+ */
+function panopoly_admin_install() {
+
+  // Update the administrator role to have all permissions.
+  if ($administrator = user_role_load_by_name('administrator')) {
+    user_role_grant_permissions($administrator->rid, array_keys(module_invoke_all('permission')));
+  }
+}
+
+/**
+ * Implements hook_uninstall()
+ */
+function panopoly_admin_uninstall() {
+
+}
+
+/**
+ * Panopoly RC 5 Update: Enabling Breakpoints Module
+ */
+function panopoly_admin_update_7001(&$sandbox) {
+  module_enable(array('breakpoints'));
+}

@@ -1,0 +1,81 @@
+These files are for integrating OG Mailinglist with the Postfix MTA.
+
+The integration between og_mailinglist and Postfix requires:
+
+1) Postfix access to og_mailinglist_postfix_transport.php
+2) A properly configured site_info.php
+
+Either:
+3.1) An alias address in a virtual domain, using a pipe command
+
+OR
+
+3.2a) Definition of the email addresses
+3.2b) The transport map
+3.2c) The transport command
+
+Each of these elements are described below:
+==========================================================================
+
+1) Postfix access to og_mailinglist_postfix_transport.php
+Copy this entire folder to /etc/postfix/
+
+cp -r ../postfix_og_mailinglist /etc/postfix/
+
+
+2) A properly configured site_info.php.
+Copy example.site_info.php to site_info.php and make it's
+contents match your installation.
+
+cp /etc/postfix/postfix_og_mailinglist/example.site_info.php \
+/etc/postfix/postfix_og_mailinglist/site_info.php
+
+
+3.2) An alias address in a virtual domain, using a pipe command
+
+Add a pipe command to your Postfix alias file (as is often done for Mailman
+addresses):
+
+test:      "| /etc/postfix/postfix_og_mailinglist/og_mailinglist_postfix_transport.php ${DOMAIN}"
+
+When debbugging, you could use this one (writes mails and errors to /tmp):
+
+test:      "| /etc/postfix/postfix_og_mailinglist/og_mailinglist_debug.sh ${DOMAIN}"
+
+
+To test this script you could invoke it from command line as follows (when
+inside the og_mailinglist directory; you also need to adjust domain to
+match your Drupal installation):
+/etc/postfix/postfix_og_mailinglist/og_mailinglist_debug.sh example.com < testing/applemail
+
+
+As mentioned above, if you followed step 3.2, you can stop here.
+The following steps provide an alternative to step 3.2 that may be
+preferable in some circumstances.
+==========================================================================
+
+3.2a) Definition of the email addresses
+
+Instead of using a simple Mailman type pipe to a command, it is also possible to
+define email addresses in the normal way, then use a special transport
+(steps 3.2b and 3.2c) to handle delivery. You might want to do this if,
+like me, you define a good portion of your addresses via MySQL.
+
+A line in your virtual map might thus look like this:
+
+test@example.com @groups.example.com
+
+
+3.2b) The transport map
+The transport map tells Postfix how to deliver email (/etc/postfix/transport):
+
+test@groups.example.com og_mailinglist:
+
+
+3.2c) The transport command
+Finally, in /etc/postfix/master.cf, you want to define
+the 'og_mailinglist' transport...
+If you use "direct_posting" method, set the user=mail:www-data or similar.
+
+  flags=FR user=nobody directory=/etc/postfix/postfix_og_mailinglist \
+    argv=og_mailinglist_postfix_transport.php ${domain}

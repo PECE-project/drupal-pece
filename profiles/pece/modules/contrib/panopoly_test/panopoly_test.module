@@ -1,0 +1,56 @@
+<?php
+/**
+ * @file
+ * Code for the Panopoly Test feature.
+ */
+
+include_once 'panopoly_test.features.inc';
+
+/**
+ * Implementation of hook_ctools_plugin_directory()
+ */
+function panopoly_test_ctools_plugin_directory($module, $plugin) {
+  return 'plugins/' . $plugin;
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function panopoly_test_module_implements_alter(&$implementations, $hook) {
+  // Move our hooks to the end so they are executed last.
+  if ($hook == 'form_alter' && isset($implementations['panopoly_test'])) {
+    $group = $implementations['panopoly_test'];
+    unset($implementations['panopoly_test']);
+    $implementations['panopoly_test'] = $group;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Modify the Panelizer's additions to the IPE buttons to make them make sense
+ * for landing pages.
+ */
+function panopoly_test_form_panels_ipe_edit_control_form_alter(&$form, &$form_state) {
+  if (empty($form_state['renderer'])) {
+    return;
+  }
+  $renderer = $form_state['renderer'];
+
+  $cache_key = $renderer->display->cache_key;
+  list($module, $type, $key) = explode(':', $cache_key, 3);
+  if ($module != 'panelizer' || $type != 'node') {
+    return;
+  }
+
+  // Get the actual node so that we can get it's type.
+  list($nid, $view_mode) = explode(':', $key);
+  if (($node = node_load($nid)) && $node->type == 'panopoly_test_landing_page') {
+    // Change the 'Save as custom' button back to just 'Save'.
+    $form['buttons']['submit']['#value'] = t('Save');
+
+    // Remove the 'Revert' and 'Save as default' buttons.
+    unset($form['buttons']['revert_default']);
+    unset($form['buttons']['save_default']);
+  }
+}

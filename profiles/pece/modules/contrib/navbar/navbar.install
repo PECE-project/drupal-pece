@@ -1,0 +1,84 @@
+<?php
+/**
+ * @file
+ * navbar.install
+ */
+
+/**
+ * Implements hook_install().
+ */
+function navbar_install() {
+  if (module_exists('breakpoints')) {
+    // Add a breakpoint for switching between horizontal and vertical tray
+    // orientation.
+    $breakpoint = new stdClass();
+    $breakpoint->disabled = FALSE;
+    $breakpoint->api_version = 1;
+    $breakpoint->name = 'wide';
+    $breakpoint->breakpoint = 'only screen and (min-width: 50em)';
+    $breakpoint->source = 'navbar';
+    $breakpoint->source_type = 'module';
+    $breakpoint->status = 1;
+    $breakpoint->weight = 0;
+    $breakpoint->multipliers = array();
+    breakpoints_breakpoint_save($breakpoint);
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function navbar_uninstall() {
+  if (module_exists('breakpoints')) {
+    foreach (breakpoints_breakpoint_load_all() as $breakpoint) {
+      if ($breakpoint->machine_name === 'breakpoints.module.navbar.wide') {
+        breakpoints_breakpoint_delete($breakpoint);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function navbar_requirements($phase) {
+  $requirements = array();
+
+  if ($phase == 'runtime') {
+    // Check for the libraries module.
+    if (module_exists('libraries')) {
+      $requirements['navbar_libraries'] = array(
+        'title' => t('Navbar Libraries requirement'),
+        'value' => t('Libraries is enabled. Version 2.x or higher is required. Please check your version if you are experiencing trouble with the Navbar module.'),
+        'severity' => REQUIREMENT_INFO,
+      );
+    }
+    $requirements['navbar_backbone'] = array(
+      'title' => t('Navbar Backbone requirement'),
+      'value' => t('The Backbone library is not present'),
+      'severity' => REQUIREMENT_ERROR,
+    );
+    $requirements['navbar_underscore'] = array(
+      'title' => t('Navbar Underscore requirement'),
+      'value' => t('The Underscore library is not present'),
+      'severity' => REQUIREMENT_ERROR,
+    );
+
+    if (function_exists('libraries_get_path')) {
+      // Check for Underscore.
+      $path = libraries_get_path('underscore');
+      if (!empty($path) && file_exists($path . '/underscore.js')) {
+        $requirements['navbar_underscore']['value'] = t('The Underscore library is present');
+        $requirements['navbar_underscore']['severity'] = REQUIREMENT_OK;
+      }
+    // Check for Backbone.
+      $path = libraries_get_path('backbone');
+      if (!empty($path) && file_exists($path . '/backbone.js')) {
+        $requirements['navbar_backbone']['value'] = t('The Backbone library is present');
+        $requirements['navbar_backbone']['severity'] = REQUIREMENT_OK;
+      }
+    }
+  }
+
+  return $requirements;
+}

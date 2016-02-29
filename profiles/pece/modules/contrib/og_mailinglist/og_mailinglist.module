@@ -1,0 +1,532 @@
+<?php
+/**
+ * @file
+ * OG Mailinglist core and administration.
+ *
+ * This module allows users to email a Drupal installation running the Exim
+ * email server to create discussions and respond to comments. Because it is
+ * tied directly to Exim, Postfix, Qmail or Mailgun, email is processed
+ * immediately upon receipt in the mail server.  Mails should be sent to
+ * group_prefix@example.com rather than to a single email address.
+ *
+ * Original version written by Conan Albrecht, March 2009.
+ * Maintained since by Kyle Mathews.
+ * Upgrade to Drupal 7 started by clee_uftwf, continued by sethfisher, then
+ * by mahfiaz and it's still going on.
+ */
+
+require_once "og_mailinglist_api.inc";
+require_once "og_mailinglist.fields.inc";
+require_once "og_mailinglist.filter.inc";
+require_once "og_mailinglist_phpmailer.inc";
+require_once "og_mailinglist_utilities.inc";
+
+/**
+ * Implements hook_menu().
+ */
+function og_mailinglist_menu() {
+  // The following item is copied from og.module, otherwise it would be
+  // necessary to enable og_ui before og_mailinglist just for config menu.
+  $items['admin/config/group'] = array(
+    'title' => 'Organic groups',
+    'description' => 'Administer the suite of Organic groups modules.',
+    'position' => 'right',
+    'weight' => -5,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('administer group'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+  $items['admin/config/group/mailinglist'] = array(
+    'title' => 'OG mailinglist',
+    'description' => 'Configure posts/comments generated from email',
+    'file' => 'og_mailinglist.admin.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('og_mailinglist_email_settings'),
+    'access arguments' => array('access administration pages'),
+  );
+  $items['admin/config/group/mailinglist/emails'] = array(
+    'title' => 'Emails',
+    'description' => 'Email settings of OG Mailinglist',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -1,
+  );
+  $items['admin/config/group/mailinglist/content_types'] = array(
+    'title' => 'Content types',
+    'description' => 'Configure content types used by OG Mailinglist',
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'og_mailinglist.admin.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('og_mailinglist_content_types_settings'),
+    'access arguments' => array('access administration pages'),
+  );
+  $items['admin/config/group/mailinglist/digest'] = array(
+    'title' => 'Digest',
+    'description' => 'Digest email options',
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'og_mailinglist.admin.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('og_mailinglist_digest_settings'),
+    'access arguments' => array('access administration pages'),
+  );
+  $items['admin/config/group/mailinglist/config'] = array(
+    'title' => 'Configuration',
+    'description' => 'Domain and debugging settings',
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'og_mailinglist.admin.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('og_mailinglist_config_settings'),
+    'access arguments' => array('access administration pages'),
+    'weight' => 1,
+  );
+  $items['mailinglist'] =
+  $items['user/%user/mailinglist'] = array(
+    'title' => 'Group subscriptions',
+    'description' => 'Allows users to manage their group subscriptions',
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'og_mailinglist.admin.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('og_mailinglist_subscriptions_settings_form', 1),
+    'access callback' => 'og_mailinglist_subscriptions_settings_access',
+    'access arguments' => array(1),
+  );
+  $items['mailinglist']['title'] = 'OG Mailinglist subscriptions';
+  $items['mailinglist']['type'] = MENU_CALLBACK;
+
+  $items['mailinglist/subscribe/%node'] = array(
+    'title' => 'Subscribe to post',
+    'description' => 'Users who hit this page will get emails for comments on the node.',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'og_mailinglist_subscribe_thread',
+    'page arguments' => array(2),
+    'access arguments' => array('subscribe to og_mailinglist thread'),
+  );
+  $items['mailinglist/unsubscribe/%node'] = array(
+    'title' => 'Unsubscribe from post',
+    'description' => 'Users who hit this page will not get more emails for comments on the node.',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'og_mailinglist_unsubscribe_thread',
+    'page arguments' => array(2),
+    'access arguments' => array('subscribe to og_mailinglist thread'),
+  );
+
+  // Maintain backward compatibility.
+  $items['og_mailinglist/subscriptions'] = $items['mailinglist'];
+  $items['og_mailinglist/subscribe/%node'] = $items['mailinglist/subscribe/%node'];
+  $items['og_mailinglist/unsubscribe/%node'] = $items['mailinglist/unsubscribe/%node'];
+
+  $items['og_mailinglist'] = array(
+    'page callback' => 'og_mailinglist_post',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'og_mailinglist_transport.inc',
+  );
+
+  return $items;
+}
+
+function og_mailinglist_subscriptions_settings_access($account) {
+  global $user;
+  if (is_object($account) and $account->uid != $user->uid) {
+    // Not own account.
+    return user_access('manage any og_mailinglist subscription');
+  }
+  else {
+    // Own account.
+    return user_access('manage own og_mailinglist subscriptions');
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function og_mailinglist_permission() {
+  return array(
+    'subscribe to og_mailinglist thread' => array(
+      'title' => t('Subscribe to mailinglist threads'),
+      'description' => t('Subscribe or unsubscribe to/from a thread.'),
+    ),
+    'manage own og_mailinglist subscriptions' => array(
+      'title' => t('Manage own mailinglist subscriptions'),
+      'description' => t('Subscribe or unsubscribe yourself to/from a group, change subscription type.'),
+    ),
+    'manage any og_mailinglist subscription' => array(
+      'title' => t('Manage any mailinglist subscription'),
+      'description' => t('Subscribe or unsubscribe other people to/from a group, change subscription type.'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_og_permission().
+ */
+function og_mailinglist_og_permission() {
+  return array(
+    'post comments by mail' => array(
+      'title' => t('Post comments by mail'),
+      'description' => t("Allow a member of a group to post comments by mail."),
+      'roles' => array(OG_AUTHENTICATED_ROLE),
+    ),
+  );
+}
+
+/**
+ * Callback function for subscribing to a thread.
+ */
+function og_mailinglist_subscribe_thread($node) {
+  global $user;
+  og_mailinglist_save_thread_subscriptions($node->nid, array($user->uid));
+
+  drupal_set_message(
+    t('You are successfully subscribed to the post !link.',
+        array('!link' => '<em>' . l($node->title, "node/" . $node->nid) . '</em>'))
+    . '&nbsp;&nbsp;'
+    . l(t('Undo'), 'mailinglist/unsubscribe/' . $node->nid,
+        array('attributes' => array('id' => 'og_mailinglist_undo'))));
+  drupal_goto('node/' . $node->nid);
+}
+
+/**
+ * Callback function for unsubscribing from a thread.
+ */
+function og_mailinglist_unsubscribe_thread($node) {
+  global $user;
+  $success = og_mailinglist_delete_thread_subscription($node->nid, $user->uid);
+
+  if ($success) {
+    drupal_set_message(
+      t('You are successfully unsubscribed from the post !link.',
+      array('!link' => l($node->title, "node/" . $node->nid)))
+      . '&nbsp;&nbsp;'
+      . l(t('Undo'), 'mailinglist/subscribe/' . $node->nid,
+          array('attributes' => array('id' => 'og_mailinglist_undo')))
+      );
+  }
+  else {
+    drupal_set_message(
+      t('You probably already are unsubscribed from the post !link.',
+      array('!link' => l($node->title, "node/" . $node->nid)))
+      . '&nbsp;&nbsp;'
+      . l(t('Subscribe'), 'mailinglist/subscribe/' . $node->nid,
+          array('attributes' => array('id' => 'og_mailinglist_undo')))
+      );
+  }
+  drupal_goto('node/' . $node->nid);
+}
+
+/**
+ * Callback function for OGM Block and user/%/og_mailinglist page form.
+ */
+function og_mailinglist_subscriptions_settings_form_submit($form, &$form_state) {
+  if (isset($form_state['values']['uid'])) {
+    $uid = $form_state['values']['uid'];
+  }
+  else {
+    global $user;
+    $uid = $user->uid;
+  }
+  unset($form_state['values']['uid']);
+
+  foreach ($form_state['values'] as $gid => $settings) {
+    if (is_numeric($gid)) {
+      og_mailinglist_update_group_subcription_type($gid, $uid, $settings['subscription-type']);
+
+      if ($settings['subscription-type'] != "email") {
+        og_mailinglist_delete_group_threads($gid, $uid);
+      }
+
+      // If they choose to leave the group.
+      if ($settings['leave-group']) {
+        if (isset($form[$gid]['#title'])) {
+          $group_link = $form[$gid]['#title'];
+        }
+        else {
+          $group_link = l($form_state['build_info']['args'][0]->title, 'node/' . $gid);
+        }
+        if (og_ungroup($gid, 'user', $uid)) {
+          drupal_set_message(t("You are no longer in the @group_link group.",
+            array('@group_link' => $group_link)));
+        }
+        else {
+          drupal_set_message(t("It is impossible to remove you from the group !group_link since you own that group.",
+            array('!group_link' => $group_link)), 'error');
+        }
+      }
+    }
+  }
+
+  drupal_set_message(t('Your group subscriptions were updated.'));
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function og_mailinglist_node_insert($node) {
+  if ($node->status
+    and !isset($node->og_mailinglist_from_email)
+    and !empty($node->og_group_ref[LANGUAGE_NONE])
+    and og_is_group_content_type('node', $node->type)) {
+
+    // First we prepare gids list.
+    $gids = array();
+    foreach ($node->og_group_ref[LANGUAGE_NONE] as $group) {
+      $gids[] = $group['target_id'];
+    }
+
+    // User might not be automatically subscribed to new threads.
+    // Subscribe now if they aren't signed up to get emails normally.
+    // @TODO: need to ensure if subscribing still works in the new
+    // multiple-groups case. It might be easier to simply register to all threads.
+    if (og_mailinglist_get_group_subscription_type($gids[0], $node->uid) != "email") {
+      og_mailinglist_save_thread_subscriptions($node->nid, array($node->uid));
+    }
+
+    // If the Maillog module has been set to turn off emails, return.
+    if (!variable_get('maillog_send', TRUE)) {
+      return;
+    }
+
+    // Only send email to the list if the node is published.
+    if ($node->status == 1) {
+      // If this content type doesn't use email notifications, then return.
+      $excluded_content_types = variable_get('og_mailinglist_exclude_content_types', array());
+      if (in_array($node->type, $excluded_content_types)) {
+        return;
+      }
+
+      // Send emails.
+      // This email either starts a new thread or starts a new group,
+      // therefore it goes only to the creator.
+      og_mailinglist_send_node_email($node, $gids);
+    }
+  }
+  elseif (og_is_group_type('node', $node->type)) {
+    // Subscribe group owner to the group.
+    og_mailinglist_save_group_subscriptions($node->nid, array($node->uid));
+  }
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function og_mailinglist_node_update($node) {
+  // Only act when content is set to published and is group content.
+  if ($node->original->status == 0 and $node->status == 1
+    and !empty($node->og_group_ref[LANGUAGE_NONE])
+    and og_is_group_content_type('node', $node->type)) {
+
+    // If this content type doesn't use email notifications, then return.
+    $excluded_content_types = variable_get('og_mailinglist_exclude_content_types', array());
+    if (in_array($node->type, $excluded_content_types)) {
+      return;
+    }
+
+    // First we prepare gids list.
+    $gids = array();
+    foreach ($node->og_group_ref[LANGUAGE_NONE] as $group) {
+      $gids[] = $group['target_id'];
+    }
+
+    // Send emails.
+    // This email either starts a new thread or starts a new group,
+    // therefore it goes only to the creator.
+    og_mailinglist_send_node_email($node, $gids);
+  }
+}
+
+/**
+ * Implements hook_node_delete().
+ */
+function og_mailinglist_node_delete($node) {
+  if (og_is_group_content_type('node', $node->type)) {
+    og_mailinglist_delete_group($node->nid);
+  }
+}
+
+
+/**
+ * Implements hook_comment_insert().
+ */
+function og_mailinglist_comment_insert($comment) {
+  // User might not be subscribed to thread. Subscribe them now.
+  // It is better to subscribe them here, since publish might take some time
+  // when approval is needed.
+  og_mailinglist_save_thread_subscriptions($comment->nid, array($comment->uid));
+}
+
+/**
+ * Implements hook_comment_publish().
+ */
+function og_mailinglist_comment_publish($comment) {
+  // If the Maillog module has been set to turn off emails, return.
+  if (!variable_get('maillog_send', TRUE)) {
+    return;
+  }
+
+  $node = node_load($comment->nid);
+  $gids = og_mailinglist_get_groups($node);
+
+  // If this content type doesn't use email notifications, then return.
+  $excluded_content_types = variable_get('og_mailinglist_exclude_content_types', array());
+  if (in_array($node->type, $excluded_content_types)) {
+    return;
+  }
+
+  // Check if the node is published.
+  if ($node->status and !isset($comment->og_mailinglist_from_email) and !empty($gids)) {
+    og_mailinglist_send_comment_email($comment, $node, $gids);
+  }
+}
+
+/**
+ * Implements hook_og_membership_insert().
+ *
+ * Add a og_mailinglist subscription when a user joins a group.
+ */
+function og_mailinglist_og_membership_insert($membership) {
+  if ($membership->entity_type == 'user') {
+    og_mailinglist_save_group_subscriptions($membership->gid,
+      array($membership->etid));
+  }
+}
+
+/**
+ * Implements hook_og_membership_delete().
+ *
+ * Remove a og_mailinglist subscription when a user leaves a group.
+ */
+function og_mailinglist_og_membership_delete($membership) {
+  if ($membership->entity_type == 'user') {
+    og_mailinglist_delete_group_subscriptions($membership->gid,
+      array($membership->etid));
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function og_mailinglist_cron() {
+  // On first run, set digest to run today.
+  $digest_hour = variable_get('og_mailinglist_digest_hour', 17);
+  $next_digest_runtime = variable_get('og_mailinglist_digest_runtime',
+    mktime($digest_hour, 0, 0));
+
+  if (REQUEST_TIME > $next_digest_runtime) {
+    // Set next run time.
+    $digest_days = variable_get('og_mailinglist_digest_interval_days', 1);
+    $next_digest_runtime = mktime($digest_hour, 0, 0) + $digest_days * 86400;
+    variable_set('og_mailinglist_digest_runtime', $next_digest_runtime);
+
+    require_once 'og_mailinglist_digest_email.inc';
+
+    // Send off digest emails.
+    _og_mailinglist_send_digest_emails();
+  }
+}
+
+/**
+ * Implements hook_help().
+ */
+function og_mailinglist_help($path, $args) {
+  switch ($path) {
+    case 'admin/help#og_mailinglist':
+      $text = file_get_contents( dirname(__FILE__) . "/README.txt");
+      return check_markup($text, 'plain_text');
+  }
+}
+
+/**
+ * Implements hook_content_build_modes().
+ **/
+function og_mailinglist_content_build_modes() {
+  return array(
+    'og_mailinglist' => array(
+      'title' => t('OG Mailinglist'),
+      'build modes' => array(
+        'og_mailinglist_full' => array(
+          'title' => t('OG Mailinglist Full'),
+          'views style' => TRUE,
+        ),
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_hook_info().
+ *
+ * This ensures that hooks which are held in .inc files are included as needed.
+ **/
+function og_mailinglist_hook_info() {
+  $hooks['field_info'] = array(
+    'group' => 'fields',
+  );
+  $hooks['field_validate'] = array(
+    'group' => 'fields',
+  );
+  $hooks['field_is_empty'] = array(
+    'group' => 'fields',
+  );
+  $hooks['field_formatter_info'] = array(
+    'group' => 'fields',
+  );
+  $hooks['field_formatter_view'] = array(
+    'group' => 'fields',
+  );
+  $hooks['field_widget_info'] = array(
+    'group' => 'fields',
+  );
+  $hooks['field_widget_form'] = array(
+    'group' => 'fields',
+  );
+  $hooks['field_widget_validate'] = array(
+    'group' => 'fields',
+  );
+  $hooks['field_widget_error'] = array(
+    'group' => 'fields',
+  );
+  $hooks['og_fields_info'] = array(
+    'group' => 'fields',
+  );
+
+  $hooks['filter_info'] = array(
+    'group' => 'filter',
+  );
+
+  return $hooks;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function og_mailinglist_theme() {
+  return array(
+    'og_mailinglist_attached_files' => array(
+      'variables' => array('node' => NULL, 'comment' => NULL),
+    ),
+    'og_mailinglist_user_signature' => array(
+      'variables' => array('user' => NULL),
+    ),
+    'og_mailinglist_mail_footer' => array(
+      'variables' => array('node' => NULL),
+    ),
+    'og_mailinglist_digest' => array(
+      'variables' => array('group_node' => NULL, 'nodes' => NULL, 'message_count' => NULL),
+    ),
+    'og_mailinglist_digest_node' => array(
+      'variables' => array('node' => NULL),
+    ),
+    'og_mailinglist_digest_comment' => array(
+      'variables' => array('node' => NULL, 'comment' => NULL),
+    ),
+  );
+}
+
+/**
+ * Implements hook_user_delete().
+ */
+function og_mailinglist_user_delete($account) {
+  db_delete('og_mailinglist_group_subscription')->condition('uid', $account->uid)->execute();
+  db_delete('og_mailinglist_thread_subscription')->condition('uid', $account->uid)->execute();
+}

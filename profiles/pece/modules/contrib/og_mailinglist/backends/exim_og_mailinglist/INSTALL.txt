@@ -1,0 +1,65 @@
+These files are for integrating OG Mailinglist with the EXIM MTA.
+
+# Installation Instructions
+Only tested on Debian/Ubuntu systems, documentation for others is welcome.
+
+
+1) Copy this entire folder to /etc/exim4/
+
+cp -r ../exim_og_mailinglist /etc/exim4/
+
+
+2) Link 950_exim4-config_drupal_og_mailinglist_router
+to /etc/exim4/conf.d/router/950_exim4-config_drupal_og_mailinglist_router
+
+ln -s \
+/etc/exim4/exim_og_mailinglist/950_exim4-config_drupal_og_mailinglist_router \
+/etc/exim4/conf.d/router/950_exim4-config_drupal_og_mailinglist_router
+
+
+3) Link 95_exim4-config_drupal_og_mailinglist_transport
+to /etc/exim4/conf.d/transport/95_exim4-config_drupal_og_mailinglist_transport
+
+ln -s \
+/etc/exim4/exim_og_mailinglist/95_exim4-config_drupal_og_mailinglist_transport \
+/etc/exim4/conf.d/transport/95_exim4-config_drupal_og_mailinglist_transport
+
+
+4) Copy example.site_info.php to site_info.php
+
+cp /etc/exim4/exim_og_mailinglist/example.site_info.php \
+/etc/exim4/exim_og_mailinglist/site_info.php
+
+
+5) Adjust settings in that file.
+
+nano /etc/exim4/exim_og_mailinglist/site_info.php
+
+
+6) Run dpkg-reconfigure exim4-config on Debain/Ubuntu systems and ensure that
+the "Other destinations for which mail is accepted:" or "local domains" setting
+includes your site's domain name.
+Otherwise, Exim will simply reject emails directed to this domain.
+Also allow exim4 to recieve mail from wilderness, set
+"IP-addresses to listen on for incoming SMTP connections"
+to be blank, otherwise only listed hosts can send you email.
+
+
+7) Restart exim by running
+/etc/init.d/exim4 restart
+
+Note that on some operating systems like Debian, you need to run
+"update-exim4.conf.template" to actually update the configuration before
+restarting. See your installation's Exim documentation for specifics.
+
+
+8) Test setup by sending email to a test group's email on your site,
+e.g. test-group@example.com
+
+
+Debugging help for when things don't work:
+SSH into your server, run "tail -f /var/log/exim/mainlog" to see that
+emails are actually reaching your server and that the og_mailinglist
+router/transports are being called.
+Also, it might help to look at the Drupal logs at admin/reports/dblog
+

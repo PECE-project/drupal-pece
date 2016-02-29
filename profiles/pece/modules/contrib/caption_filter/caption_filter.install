@@ -1,0 +1,21 @@
+<?php
+/**
+ * @file
+ * Update and install functions for FileField Sources.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function caption_filter_install() {
+  // Caption Filter needs to load after Insert module.
+  db_query("UPDATE {system} SET weight = 20 WHERE type = 'module' AND name = 'caption_filter'");
+}
+
+/**
+ * Set the Caption Filter module weight.
+ */
+function caption_filter_update_7100() {
+  // Caption Filter needs to load after Insert module.
+  db_query("UPDATE {system} SET weight = 20 WHERE type = 'module' AND name = 'caption_filter'");
+}

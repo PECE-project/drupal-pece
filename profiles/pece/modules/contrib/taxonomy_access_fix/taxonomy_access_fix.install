@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the Taxonomy Access Fix module.
+ */
+
+/**
+ * Permissions use the vocabulary machine name instead of vocabulary id.
+ */
+function taxonomy_access_fix_update_7201() {
+  $vocabularies = taxonomy_get_vocabularies();
+
+  $updated_permission = FALSE;
+  foreach ($vocabularies as $vocabulary) {
+    $result = taxonomy_access_fix_update_role_permissions($vocabulary->vid, $vocabulary->machine_name);
+    if ($result && $updated_permission == FALSE) {
+      $updated_permission = TRUE;
+    }
+  }
+
+  if (module_exists('features') && $updated_permission) {
+    drupal_set_message("Taxonomy Access Fix permissions have been updated to use the vocabulary machine name instead of the vocabulary id. Update your Features accordingly! For more information visit <a href='https://drupal.org/node/1637446'>https://drupal.org/node/1637446</a>", 'warning');
+  }
+}

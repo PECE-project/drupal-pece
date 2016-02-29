@@ -1,0 +1,452 @@
+<?php
+
+/**
+ * @file
+ * caption_filter.module
+ *
+ * Provides a very basic caption filter for input formats
+ */
+
+/**
+ * Implements hook_page_build().
+ */
+function caption_filter_page_build() {
+  $path = drupal_get_path('module', 'caption_filter');
+  drupal_add_css($path .'/caption-filter.css', array('every_page' => TRUE));
+  drupal_add_js($path .'/js/caption-filter.js', array('every_page' => TRUE));
+}
+
+/**
+ * Implements hook_filter_info().
+ */
+function caption_filter_filter_info() {
+  $filters = array();
+  $filters['caption_filter'] = array(
+    'title' => t('Convert [caption] tags and allow image alignment'),
+    'process callback' => 'caption_filter_process_filter',
+    'tips callback' => 'caption_filter_tips',
+    'weight' => 20,
+  );
+  return $filters;
+}
+
+/**
+ * Filter tips callback. Display the help for using [caption] syntax.
+ */
+function caption_filter_tips($filter, $format, $long = FALSE) {
+  if ($long) {
+    return t('
+      <p><strong>Caption Filter</strong></p>
+      <p>You may wrap images or embeds with a caption using the code <code>[caption caption="This is a caption"]IMAGE[/caption]</code>.</p>
+      <p>Examples:</p>
+      <ul>
+        <li>Single Image:<br /><code>[caption caption="This is a caption"]<img src="" />[/caption]</code></li>
+        <li>Align the video:<br /><code>[caption caption="This is another caption" align="right"]<img src="" />[/caption]</code></li>
+      </ul>');
+  }
+  else {
+    return check_plain(t('Captions may be specified with [caption caption="Image caption"]<img src="example.png" />[/caption]. Items can be aligned with [caption align="left"].'));
+  }
+}
+
+/**
+ * Filter process callback. Replace the [caption] tags with HTML.
+ */
+function caption_filter_process_filter($text, $filter) {
+  // Prevent useless processing if there are no caption tags at all.
+  if (stristr($text, '[caption') !== FALSE) {
+    $pattern = "/(\[caption([^\]]*)\])(.*?)(\[\/caption\])/";
+    $text = preg_replace_callback($pattern, '_caption_filter_replace', $text);
+  }
+  return $text;
+}
+
+/**
+ * Callback for preg_replace_callback() in caption_filter_process_filter().
+ *
+ * This function actually does the work of replacing each [caption] tag with
+ * HTML output.
+ */
+function _caption_filter_replace($matches) {
+  $caption_attributes_filtered = str_replace('\"', '&quot;', $matches[2]);
+  $caption_attributes = _caption_filter_tag_attributes($caption_attributes_filtered);
+  $item = $matches[3];
+
+  $width = _caption_filter_get_width($item);
+  $align = isset($caption_attributes['align']) ? $caption_attributes['align'] : 'center';
+
+  // Determine the caption value from the formal attributes of [caption]
+  $caption = (isset($caption_attributes['caption'])) ? $caption_attributes['caption'] : '';
+
+  // Legacy fallback - If there is no formal attribute, try to infer from the HTML
+  // and then assign the caption to $caption and the $item to the remainder
+  if (empty($caption)) {
+    if (preg_match('/<img.*>(.*)/i', $item, $legacy_img) && !empty($legacy_img[1])) {
+      $caption = $legacy_img[1];
+    } else if (preg_match('/<iframe.*>(.*)/i', $item, $legacy_iframe) && !empty($legacy_iframe[1])) {
+      $caption = $legacy_iframe[1];
+    } else if (preg_match('/<embed.*>(.*)/i', $item, $legacy_embed) && !empty($legacy_embed[1])) {
+      $caption = $legacy_embed[1];
+    } else if (preg_match('/<object.*>(.*)/i', $item, $legacy_obejct) && !empty($legacy_obejct[1])) {
+      $caption = $legacy_obejct[1];
+    }
+  }
+
+  // Determine the content value. This is any HTML content that is inside the [caption] that isn't
+  // part of the actual caption text
+  $content = str_replace($caption, '', $item);
+
+  // Remove "align" from the start of the alignment if needed. WordPress
+  // commonly uses align="alignright" for example.
+  if (strpos($align, 'align') === 0) {
+    $align = substr($align, 5);
+  }
+
+  // If we have a caption, output markup to wrap the caption in a specific tag and class
+  if (!empty($caption)) {
+    return '<div class="caption caption-'. $align .'"><div class="caption-width-container" style="width: '. $width .';"><div class="caption-inner">'. $content . '<p class="caption-text">' . $caption .'</p></div></div></div>';
+  }
+  else {
+    return '<div class="caption caption-'. $align .'"><div class="caption-width-container" style="width: '. $width .';"><div class="caption-inner">'. $content . '</div></div></div>';
+  }
+}
+
+/**
+ * Determine the width of the img/object that is being captioned.
+ */
+function _caption_filter_get_width($item) {
+  // In case we cannot determine the width, just set it to the default css value
+  $width = 'auto';
+
+  // Find an img or object tag within the [caption] to determine the width.
+  if (preg_match_all('/<(img|object)[^>]+>/i', $item, $internal_result)) {
+    foreach($internal_result['0'] as $tag) {
+      // If the width is defined, dump that into the $widths array.
+      if (preg_match_all('/width="([0-9]*)"/i', $tag, $width_result)) {
+        $width = $width_result[1][0];
+      }
+      // We're going to have to find the image src.
+      else {
+        preg_match('/src="([^"]*)"/i', $tag, $src_result);
+        // If there is a src tag:
+        if (!empty($src_result)) {
+          $src =  $src_result['1'];
+          $parts = parse_url($src);
+
+          if (empty($parts['scheme'])) {
+            // Remove any query string attached to the images, as query strings
+            // break getimagesize()
+            if (!empty($parts['query'])) {
+              $local_path = DRUPAL_ROOT . str_replace('?'. $parts['query'], '', $src);
+            }
+            else {
+              $local_path = DRUPAL_ROOT . $src;
+            }
+
+            list($width) = getimagesize($local_path);
+          }
+          else {
+            list($width) = getimagesize($src_result[1]);
+          }
+
+          // Make sure we reduce the width in half if retina_images is enabled.
+          if (is_numeric($width) && module_exists('retina_images')) {
+            // I cannot image this not existing, but just in case...
+            if (!empty($parts['path'])) {
+              $path_parts = explode('/', $parts['path']);
+              if ($style_key = array_search('styles', $path_parts)) {
+                $style = image_style_load($path_parts[$style_key + 1]);
+                // Make sure this is a valid image style.
+                if (!empty($style)) {
+                  foreach ($style['effects'] as $effect) {
+                    if (!empty($effect['data']['retinafy']) && $effect['data']['retinafy'] == 1) {
+                      $width = $width / 2;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  // Free up memory.
+  unset($src_result, $width_result, $internal_result, $parts, $path_parts, $tag, $item);
+
+  // We need to append the 'px' to any numeric widths.
+  if (is_numeric($width)) {
+    $width = $width . 'px';
+  }
+
+  return $width;
+}
+
+/**
+ * Retrieve all attributes from a caption "shortcode" tag.
+ *
+ * This code is based upon the WordPress function shortcode_parse_atts().
+ *
+ * @see http://core.svn.wordpress.org/branches/3.2/wp-includes/shortcodes.php
+ *
+ * @param $text
+ *   The shortcode tag attributes to be parsed. This should not include the
+ *   brackets, the tag itself, or any of the contents within the tag. It should
+ *   be a string of attributes, such as:
+ *
+ *   @code
+ *     attr1="value 1" attr2=value2 value3
+ *   @endcode
+ *
+ *   Note that these tags may or may not use quotes, either single or double.
+ * @return
+ *   An array of attributes and their value.
+ */
+function _caption_filter_tag_attributes($text) {
+  $atts = array();
+  $pattern = '/(\w+)\s*=\s*"([^"]*)"(?:\s|$)|(\w+)\s*=\s*\'([^\']*)\'(?:\s|$)|(\w+)\s*=\s*([^\s\'"]+)(?:\s|$)|"([^"]*)"(?:\s|$)|(\S+)(?:\s|$)/';
+  $text = preg_replace("/[\x{00a0}\x{200b}]+/u", " ", $text);
+  if (preg_match_all($pattern, $text, $match, PREG_SET_ORDER)) {
+    foreach ($match as $m) {
+      if (!empty($m[1]))
+        $atts[strtolower($m[1])] = stripcslashes($m[2]);
+      elseif (!empty($m[3]))
+        $atts[strtolower($m[3])] = stripcslashes($m[4]);
+      elseif (!empty($m[5]))
+        $atts[strtolower($m[5])] = stripcslashes($m[6]);
+      // These two rules vary slightly from the WordPress source. Single word
+      // attributes (e.g "checked") are set to have the value of TRUE.
+      elseif (isset($m[7]) and strlen($m[7]))
+        $atts[strtolower($m[7])] = TRUE;
+      elseif (isset($m[8]))
+        $atts[strtolower($m[8])] = TRUE;
+    }
+  }
+  else {
+    $atts = ltrim($text);
+  }
+  return $atts;
+}
+
+/**
+ * Implements hook_wysiwyg_plugin().
+ *
+ * This hook returns a list of plugins written directly against certain WYSIWYG
+ * editors.
+ */
+function caption_filter_wysiwyg_plugin($editor, $version) {
+  $plugins = array();
+  if ($editor == 'tinymce') {
+    $plugins['captionfilter'] = array(
+      'url' => 'http://drupal.org/project/caption_filter',
+      'path' => drupal_get_path('module', 'caption_filter') . '/js',
+      'filename' => 'caption-filter-tinymce.js',
+      // Caption Filter doesn't actually provide a button, but this code is
+      // needed to make it so that WYSIWYG module will load our plugin.
+      'buttons' => array(
+        'captionfilter' => t('Caption Filter'),
+      ),
+      'options' => array(
+        'captionfilter_css' => base_path() . drupal_get_path('module', 'caption_filter') . '/caption-filter.css',
+      ),
+      'load' => TRUE,
+    );
+  }
+  return $plugins;
+}
+
+/**
+ * Implements hook_element_info().
+ */
+function caption_filter_element_info() {
+  // We only enhance widgets if the Insert module is available.
+  if (!function_exists('insert_widgets')) {
+    return;
+  }
+
+  $extra = array('#after_build' => array('caption_filter_element_process'));
+
+  $elements = array();
+  foreach (insert_widgets() as $widget_type => $widget) {
+    if (isset($widget['fields']['title'])) {
+      $element_type = isset($widget['element_type']) ? $widget['element_type'] : $widget_type;
+      $elements[$element_type] = $extra;
+    }
+  }
+
+  return $elements;
+}
+
+/**
+ * Form API #process function for elements.
+ */
+function caption_filter_element_process($element) {
+  static $js_added;
+
+  // Bail out early if the needed properties aren't available. This happens
+  // most frequently when editing a field configuration.
+  if (!isset($element['#entity_type'])) {
+    return $element;
+  }
+
+  $field = field_info_field($element['#field_name']);
+  $instance = field_info_instance($element['#entity_type'], $element['#field_name'], $element['#bundle']);
+
+  $widget_settings = $instance['widget']['settings'];
+  $widget_type = $instance['widget']['type'];
+
+  if (isset($element['title'])) {
+    $element['title']['#title'] = t('Caption');
+    $element['title']['#description'] = NULL;
+
+    // Add settings for this widget only once.
+    if (!isset($js_added[$widget_type])) {
+      $js_added[$widget_type] = TRUE;
+      $caption_settings = array(
+        'captionFromTitle' => $widget_settings['caption_from_title'],
+      );
+      drupal_add_js(array('captionFilter' => array('widgets' => array($widget_type => $caption_settings))), 'setting');
+    }
+  }
+
+  return $element;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function caption_filter_form_field_ui_field_edit_form_alter(&$form, $form_state) {
+  if (isset($form['instance']['settings']['insert']) && isset($form['instance']['settings']['title_field'])) {
+    $field = $form['#field'];
+    $instance = field_info_instance($form['instance']['entity_type']['#value'], $form['instance']['field_name']['#value'], $form['instance']['bundle']['#value']);
+    $form['instance']['settings']['insert'] += caption_filter_field_widget_settings_form($field, $instance);
+  }
+}
+
+/**
+ * Implements hook_field_widget_info_alter().
+ *
+ * A list of settings needed by Caption Filter module on widgets.
+ */
+function caption_filter_field_widget_info_alter(&$info) {
+  foreach ($info as $widget_type => $widget_info) {
+    // If Insert module has added settings to the widget, add our setting to
+    // use the title field as the caption.
+    if (isset($widget_info['settings']['insert'])) {
+      $info[$widget_type]['settings']['caption_from_title'] = 1;
+    }
+  }
+}
+
+/**
+ * Configuration form for editing insert settings for a field instance.
+ */
+function caption_filter_field_widget_settings_form($field, $instance) {
+  $widget = $instance['widget'];
+  $settings = $widget['settings'];
+
+  $form['caption_from_title'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Use the <em>Title</em> field as a caption'),
+    '#default_value' => $settings['caption_from_title'],
+    '#element_validate' => array('caption_filter_field_widget_caption_validate'),
+    '#description' => t('This feature requires that the <em>Title</em> field be enabled above, and that the "Convert [caption] tags" be enabled in the <a href="!formats">text formats configuration</a>.', array('!formats' => url('admin/config/content/formats'))),
+    '#weight' => -9,
+  );
+
+  return $form;
+}
+
+/**
+ * An #element_validate function for the "caption_from_title" field.
+ */
+function caption_filter_field_widget_caption_validate($element, &$form_state) {
+  if ($element['#value'] && empty($form_state['values']['instance']['settings']['title_field'])) {
+    form_error($element, t('The <em>Title</em> field must be enabled to use it as a caption.'));
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function caption_filter_menu() {
+  // Dialog callback for the TinyMCE button.
+  $items['caption_filter/tinymce'] = array(
+    'title' => 'Image caption',
+    'page callback' => 'caption_filter_tinymce_button',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Menu page callback; the TinyMCE button dialog.
+ */
+function caption_filter_tinymce_button() {
+  // Suppress the admin menu in the popup.
+  module_invoke('admin_menu', 'suppress');
+  if (module_exists('wysiwyg') && $editor = wysiwyg_get_editor('tinymce')) {
+    drupal_add_js($editor['library path'] . '/tiny_mce_popup.js');
+  }
+  drupal_add_js(drupal_get_path('module', 'caption_filter') . '/js/caption-filter-tinymce-button.js');
+  drupal_add_js(drupal_get_path('module', 'caption_filter') . '/js/caption-filter.js');
+
+  $form = drupal_get_form('caption_filter_tinymce_button_form');
+  $output = theme('caption_filter_tinymce_button', array('form' => $form));
+
+  // Write directly to the window and quit rather than returning so the modal
+  // doesn't get themed as a Drupal page.
+  echo $output;
+  exit;
+}
+
+/**
+ * Form builder; the TinyMCE button dialog.
+ */
+function caption_filter_tinymce_button_form() {
+  $form['#action'] = '#';
+  $form['#attributes'] = array('onsubmit' => 'CaptionFilterButton.insert(); return false;');
+  $form['caption'] = array(
+    '#title' => t('Caption'),
+    '#type' => 'textarea',
+    '#rows' => 4,
+    '#default_value' => '',
+    '#attributes' => array('class' => array('field', 'mceFocus')),
+  );
+  $form['align'] = array(
+    '#title' => t('Float'),
+    '#type' => 'select',
+    '#options' => array(
+      0 => t('None'),
+      'left' => t('Left'),
+      'right' => t('Right'),
+    ),
+    '#default_value' => 0,
+    '#attributes' => array('class' => array('field')),
+  );
+  $form['actions'] = array(
+    '#type' => 'container',
+    '#attributes' => array('class' => array('mceActionPanel')),
+  );
+  $form['actions']['insert'] = array(
+    '#markup' => '<input type="button" id="insert" name="insert" value="{#insert}" onclick="CaptionFilterButton.insert();" />',
+  );
+  $form['actions']['cancel'] = array(
+    '#markup' => '<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />',
+  );
+  return $form;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function caption_filter_theme($existing, $type, $theme, $path) {
+  return array(
+    'caption_filter_tinymce_button' => array(
+      'variables' => array('form' => array()),
+      'path' => drupal_get_path('module', 'caption_filter') . '/js',
+      'template' => 'caption-filter-tinymce-button',
+    ),
+  );
+}

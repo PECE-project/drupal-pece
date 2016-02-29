@@ -1,0 +1,533 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the og_mailinglist module.
+ *
+ */
+
+// Load our utilities so the hook_requirements can call those functions.
+require_once 'og_mailinglist_utilities.inc';
+module_load_include('module', 'og', 'og');
+
+/**
+ * Implements hook_install().
+ */
+function og_mailinglist_install() {
+  // Set OGM's system weight to be after Pathauto so our email footers always use the correct path.
+  $weight = db_select('system', 's')
+    ->fields('s', array('weight'))
+    ->condition('type', 'module')
+    ->condition('name', 'pathauto')
+    ->execute()
+    ->fetchField();
+  if (!empty($weight)) {
+    db_update('system')
+      ->fields(array('weight' => $weight + 1))
+      ->condition('type', 'module')
+      ->condition('name', 'og_mailinglist')
+      ->execute();
+  }
+
+  // Add email fields to all group types.
+  add_email_field_to_groups();
+
+  // Add any previously created groups to og_mailinglist.
+  add_groups_to_og_mailinglist();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function og_mailinglist_uninstall() {
+  // http://api.drupal.org/api/drupal/includes!bootstrap.inc/function/variable_del/7
+  db_delete('variable')
+    ->condition('name', 'og_mailinglist_%', 'LIKE')
+    ->execute();
+}
+
+/**
+ * Implementation of hook_requirements().
+ */
+function og_mailinglist_requirements($phase) {
+  $requirements = array();
+  if ($phase == "runtime") {
+    og_mailinglist_phpmailer_load_library();
+    $requirements['og_mailinglist_phpmailer']['title'] = t('PHPMailer');
+    if (class_exists('PHPMailer')) {
+      $requirements['og_mailinglist_phpmailer']['value'] = 'PHPMailer Library is installed correctly';
+      $requirements['og_mailinglist_phpmailer']['severity'] = REQUIREMENT_OK;
+    }
+    else {
+      // Required library wasn't found.
+      $requirements['og_mailinglist_phpmailer']['value'] = t('Not found');
+      // Provide a download link to the PHPMailer library.
+      $requirements['og_mailinglist_phpmailer']['description'] = t('The PHPMailer library is missing or not installed correctly. <a href="@download">Download (see "Download ZIP" button at the right sidebar)</a> and extract it to your <em>og_mailinglist</em> module\'s or libraries directory if you use libraries module. See the INSTALL.txt file at @install for more information.', array('@download' => 'https://code.google.com/a/apache-extras.org/p/phpmailer/downloads/list', '@install' => url(drupal_get_path('module', 'og_mailinglist') . '/INSTALL.txt')));
+      $requirements['og_mailinglist_phpmailer']['severity'] = REQUIREMENT_ERROR;
+    }
+
+    //Check for the Mail_mimeDecode library.
+    og_mailinglist_mimeDecode_load_library();
+    $requirements['og_mailinglist_mimeDecode']['title'] = t('Mail_mimeDecode PEAR extension');
+    if (class_exists('Mail_mimeDecode')) {
+      $requirements['og_mailinglist_mimeDecode']['value'] = 'Mail_mimeDecode PEAR Extension found';
+      $requirements['og_mailinglist_mimeDecode']['severity'] = REQUIREMENT_OK;
+    }
+    else {
+      // Required library wasn't found.
+      $requirements['og_mailinglist_mimeDecode']['value'] = t('Not found');
+      $requirements['og_mailinglist_mimeDecode']['description'] = t('The Mail_mimeDecode PEAR extension is missing or not installed correctly. Check that the extension is installed and that your PHP include_path is correct. See the INSTALL.txt file for more information at path/to/drupal@install.', array('@install' => url(drupal_get_path('module', 'og_mailinglist') . '/INSTALL.txt')));
+      $requirements['og_mailinglist_mimeDecode']['severity'] = REQUIREMENT_ERROR;
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_field_schema().
+ */
+function og_mailinglist_field_schema($field) {
+  if ($field['type'] == 'group_email') {
+    return array(
+      'columns' => array(
+        'value' => array(
+          'type' => 'text',
+          'size' => 'tiny',
+          'not null' => FALSE,
+        ),
+      ),
+  );
+  }
+}
+
+/**
+ * Implements hook_schema().
+ */
+function og_mailinglist_schema() {
+  $schema = array();
+
+  $schema['og_mailinglist_source'] = array(
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The nid for the new posting.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'cid' => array(
+        'description' => 'The cid for the new posting. If 0, means posting was a new node not comment.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'source' => array(
+        'type' => 'varchar',
+        'description' => 'If the new posting was via email or the web. Should be either "email" or "web"',
+        'length' => '64',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'message_id' => array(
+        'type' => 'varchar',
+        'description' => 'The message-id field of this post, either
+        from the email or auto-generated',
+        'non null' => TRUE,
+        'default' => 0,
+        'length' => 255,
+      ),
+      'in_reply_to' => array(
+        'type' => 'varchar',
+        'description' => 'The in-reply-to header of this email, either
+        from the email or implied from the comment.',
+        'non null' => TRUE,
+        'default' => 0,
+        'length' => 255,
+      ),
+      'references_header' => array(
+        'type' => 'varchar',
+        'description' => 'The reference header of this post.
+        If it originated from the web, this stores the references + message-id
+        of its parent. We use the ungainly title of references_header as references appears
+        to be a reserved word for MySQL',
+        'non null' => TRUE,
+        'default' => 0,
+        'length' => 512,
+      ),
+      'parent_message_id' => array(
+        'type' => 'varchar',
+        'description' => 'The message-id of the parent of this post.',
+        'non null' => TRUE,
+        'default' => 0,
+        'length' => 255,
+      ),
+    ),
+    'primary key' => array('nid', 'cid'),
+    'indexes' => array(
+      'source' => array('source'),
+      'message_id' => array('message_id'),
+    ),
+  );
+
+  $schema['og_mailinglist_thread_subscription'] = array(
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The nid of the thread.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'uid' => array(
+        'description' => 'The uid of the user who\'s subscribed to this thead.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('nid', 'uid'),
+    'indexes' => array(
+      'nid' => array('nid'),
+      'uid' => array('uid'),
+    ),
+  );
+
+  $schema['og_mailinglist_group_subscription'] = array(
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The nid of the Group.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'uid' => array(
+        'description' => 'The uid of the User.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'subscription_type' => array(
+        'type' => 'varchar',
+        'description' => 'Subscription type, e.g. "no email", "digest email", or "email"',
+        'length' => '128',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    'primary key' => array('nid', 'uid'),
+    'indexes' => array(
+      'uid' => array('uid'),
+      'subscription_type' => array('subscription_type'),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Create the og_mailinglist table.
+ */
+function og_mailinglist_update_6000() {
+  // Create table.
+  $ret = array();
+  $schema['og_mailinglist'] = array(
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The nid for the new posting.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'group_email' => array(
+        'description' => 'The machine/email readable version of the group. Uses purl shortcode if available.',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    'primary key' => array('nid'),
+  );
+  db_create_table('og_mailinglist', $schema['og_mailinglist']);
+}
+
+/**
+ * Add entries to og_mailinglist for previously created groups.
+ */
+function og_mailinglist_update_6001() {
+  add_groups_to_og_mailinglist();
+}
+
+/**
+ * Modify og_mailinglist_subscriptions to remove space integration
+ */
+function og_mailinglist_update_6002() {
+  $ret = array();
+
+  db_drop_field('og_mailinglist_subscription', 'space_type');
+  db_change_field('og_mailinglist_subscription', 'sid', 'nid', array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+  ));
+}
+
+/**
+ * Add columns to og_mailinglist_source to store
+ * more information about emails to improve threading on site and email clients.
+ */
+function og_mailinglist_update_6003() {
+  $ret = array();
+
+  db_add_field('og_mailinglist_source', 'message_id', array(
+    'type' => 'varchar',
+    'description' => 'The message-id field of this post, either
+                from the email or auto-generated',
+    'non null' => TRUE,
+    'default' => 0,
+    'length' => 255,
+  ));
+
+  db_add_field('og_mailinglist_source', 'in_reply_to', array(
+    'type' => 'varchar',
+    'description' => 'The in-reply-to header of this email, either
+                from the email or implied from the comment.',
+    'non null' => TRUE,
+    'default' => 0,
+    'length' => 255,
+  ));
+
+  db_add_field('og_mailinglist_source', 'references', array(
+    'type' => 'varchar',
+    'description' => 'The reference header of this post.
+                If it originated from the web, this stores the references + message-id
+                of its parent.',
+    'non null' => TRUE,
+    'default' => 0,
+    'length' => 512,
+  ));
+
+  db_add_field('og_mailinglist_source', 'parent_message_id', array(
+    'type' => 'varchar',
+    'description' => 'The message-id of the parent of this post.',
+    'non null' => TRUE,
+    'default' => 0,
+    'length' => 255,
+  ));
+}
+
+/**
+ * Change name of field to references_header from references.
+ */
+function og_mailinglist_update_6004() {
+  $ret = array();
+
+  db_change_field('og_mailinglist_source', 'references', 'references_header', array(
+    'type' => 'varchar',
+    'non null' => TRUE,
+    'default' => 0,
+    'length' => 512,
+  )
+  );
+}
+
+/**
+ * Change module weight to ensure we fire after pathauto if its present.
+ */
+function og_mailinglist_update_6005() {
+  $ret = array();
+
+  $weight = db_query("SELECT weight FROM {system} WHERE type = :type AND name = :name", array(':type' => 'module', ':name' => 'pathauto'))->fetchField();
+  if (!empty($weight)) {
+    db_update('system')
+    ->fields(array(
+        'weight' => $weight + 1,
+      ))
+    ->condition('type', 'module')
+    ->condition('name', 'og_mailinglist')
+    ->execute();
+  }
+}
+
+/**
+ * Rename OGM tables.
+ */
+function og_mailinglist_update_7000(&$sandbox) {
+  // Rename database tables.
+  db_rename_table('og_mailinglist_thread', 'og_mailinglist_thread_subscription');
+  db_rename_table('og_mailinglist_subscription', 'og_mailinglist_group_subscription');
+}
+
+/**
+ * Add email fields to all group types.
+ */
+function og_mailinglist_update_7001(&$sandbox) {
+  require_once 'og_mailinglist.fields.inc';
+
+  // Get all group node types and add group_email field.
+  $types = array();
+  foreach (node_type_get_types('types') as $type => $name) {
+    // Unlike in add_email_field_to_groups() here we check group type as in D6.
+    if (variable_get('og_content_type_usage_' . $type, 'omitted') == 'group') {
+      og_create_field(OG_MAILINGLIST_EMAIL_FIELD, 'node', $type);
+      $types[] = $type;
+    }
+  }
+
+  return t('Added @email field to the following group node types: @types',
+    array(
+      '@email' => OG_MAILINGLIST_EMAIL_FIELD,
+      '@types' => implode(', ', $types),
+  ));
+}
+
+/**
+ * Migrate group_email data to fields.
+ */
+function og_mailinglist_update_7002(&$sandbox) {
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['last_nid'] = 0;
+    $sandbox['limit'] = 4;
+    $sandbox['max'] = db_query('SELECT COUNT(nid) FROM {og_mailinglist}')->fetchField();
+  }
+
+  // Convert data over to fields.
+  $query = db_select('og_mailinglist', 'ogm');
+  $query->fields('ogm');
+  $query->condition('nid', $sandbox['last_nid'], '>');
+  $query->range(0, $sandbox['limit']);
+  $result = $query->execute();
+
+  $gids = array();
+  $emails = array();
+  foreach ($result as $row) {
+    $gids[] = $row->nid;
+    $emails[$row->nid] = $row->group_email;
+  }
+  $group_nodes = node_load_multiple($gids);
+
+  foreach ($group_nodes as $group) {
+      $group->group_email[LANGUAGE_NONE][0]['value'] = $emails[$group->nid];
+      node_save($group);
+      $sandbox['progress']++;
+  }
+
+  $sandbox['#finished'] = empty($sandbox['max']) ? 1 : ($sandbox['progress'] / $sandbox['max']);
+  $sandbox['last_nid'] = $group->nid;
+}
+
+/*
+ * Add the email field to all og groups.
+ */
+function add_email_field_to_groups() {
+  require_once 'og_mailinglist.fields.inc';
+  // Get all group node types and add group_email field.
+  $types = array();
+  _field_info_collate_types(TRUE);
+  foreach (node_type_get_types('types') as $type => $name) {
+    if (og_is_group_type('node', $type)) {
+      og_create_field(OG_MAILINGLIST_EMAIL_FIELD, 'node', $type);
+      $types[] = $type;
+    }
+  }
+  if (!empty($types)) {
+    drupal_set_message(
+      t('Added @email field to the following group node types (if field was not present before): @types',
+        array(
+          '@email' => OG_MAILINGLIST_EMAIL_FIELD,
+          '@types' => implode(', ', $types),
+    )));
+  }
+}
+
+/*
+ * Fill email fields for groups and add groups subscriptions.
+ */
+function add_groups_to_og_mailinglist() {
+  if (!(module_exists('purl') && module_exists('spaces_og'))) {
+    $gids = og_get_all_group();
+    $groups = node_load_multiple($gids);
+
+    foreach ($groups as $group) {
+      if (empty($group->group_email)) {
+        $email = string_to_machine_readable($group->title);
+        $lang = $group->language;
+        $group->group_email[$lang][0]['value'] = $email;
+        node_save($group);
+      }
+
+      // Subscribe group members to active threads.
+      og_mailinglist_create_subscriptions_for_last_month($group->nid);
+    }
+  }
+  // Else, just use the purl entries
+  else {
+    $query = db_select('purl', 'p');
+    $query->condition('p.provider', 'spaces_og');
+    $query->groupBy('p.id');
+    $query->fields('p', array('id', 'value'));
+    $result = $query->execute();
+
+    foreach ($result as $item) {
+      $group = node_load($item->id);
+      if (empty($group->group_email)) {
+        $email = string_to_machine_readable($item->value);
+        $lang = $group->group_email['language'];
+        $group->group_email[$lang][0]['value'] = $email;
+        node_save($group);
+      }
+
+      // Subscribe group members to active threads.
+      og_mailinglist_create_subscriptions_for_last_month($group->nid);
+    }
+  }
+}
+
+/**
+ * Creates group thread subscriptions for past 30 days so og_mailinglist
+ * works out of the box for previously created threads.
+ */
+function og_mailinglist_create_subscriptions_for_last_month($gid) {
+  // Create email subscriptions to group for all group members.
+  $query = db_select('og_membership', 'ogm');
+  $query->condition('ogm.entity_type', 'user');
+  $query->condition('ogm.gid', $gid);
+  $query->condition('ogm.group_type', 'node');
+  $query->fields('ogm', array('etid'));
+  $result = $query->execute();
+
+  $uids = array();
+  foreach ($result as $item) {
+    $uids[] = $item->etid;
+  }
+  if (count($uids) > 0) {
+    og_mailinglist_save_group_subscriptions($gid, $uids);
+  }
+
+  // Create email subscriptions to last month threads to all members.
+  $query = db_select('og_membership', 'ogm');
+  $query->condition('ogm.gid', $gid);
+  $query->condition('ogm.entity_type', 'node');
+  // 2592000 seconds is 30 days
+  $query->condition('ogm.created', time() - 2592000, '>');
+  $query->fields('ogm', array('etid'));
+  $result = $query->execute();
+
+  foreach ($result as $data) {
+    og_mailinglist_save_group_thread_subscriptions($gid, $data->etid);
+  }
+}
+
+function string_to_machine_readable($str) {
+  $str = strtolower($str);
+  $str = str_replace("-", "", $str);
+  $str = preg_replace('/[^a-z0-9]+/', "-", $str);
+  $str = trim($str, " -");
+  return $str;
+}

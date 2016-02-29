@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * Implements hook_uninstall().
+ */
+function pathauto_entity_uninstall() {
+  module_load_include('module', 'pathauto_entity');
+  $entities = pathauto_entity_available_entity_types();
+  if (isset($entities)) {
+    foreach ($entities as $type => $status) {
+      // Remove all variables.
+      $results = db_select('variable', 'v')
+        ->fields('v', array('name'))
+        ->condition('name', 'pathauto_' . $type . '_%', 'LIKE')
+        ->execute();
+      foreach ($results as $result) {
+        variable_del($result->name);
+      }
+    }
+  }
+
+  // Remove all variables.
+  $results = db_select('variable', 'v')
+    ->fields('v', array('name'))
+    ->condition('name', 'pathauto_entity_%', 'LIKE')
+    ->execute();
+  foreach ($results as $result) {
+    variable_del($result->name);
+  }
+}

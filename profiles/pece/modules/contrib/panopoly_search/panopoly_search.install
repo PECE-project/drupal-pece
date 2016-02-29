@@ -1,0 +1,194 @@
+<?php
+
+/**
+ * @file
+ * Installation file for Panopoly Search
+ */
+
+/**
+ * Implementation of hook_install()
+ */
+function panopoly_search_install() {
+
+  // Allow anonymous and authenticated users to search content
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('search content'));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('search content'));
+}
+
+/**
+ * Implemenetation of hook_uninstall()
+ */
+function panopoly_search_uninstall() {
+
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function panopoly_search_update_dependencies() {
+  $deps = array();
+  // We need panopoly_core_update_7002() to run before search_api_solr_update_7102().
+  $deps['search_api_solr'][7102] = array(
+    'panopoly_core' => 7002,
+  );
+  // We need to revert our servers/indexes only after these updates to
+  // search_api_db and search_api_solr.
+  $deps['panopoly_search'][7005] = array(
+    'search_api' => 7116,
+    'search_api_db' => 7104,
+    'search_api_solr' => 7102,
+  );
+  return $deps;
+}
+
+/**
+ * Panopoly Beta 4 Update: Enabling Search API DB Module
+ */
+function panopoly_search_update_7001(&$sandbox) {
+  module_enable(array('search_api_db'));
+}
+
+/**
+ * Panopoly Beta 5 Update: Using Pantheon Solr Search System
+ */
+function panopoly_search_update_7002(&$sandbox) {
+  // This update function used to enable Solr search on Pantheon, but this
+  // was later disabled in panopoly_search_update_7004(), so there is no sense
+  // in enabling it here at all.
+  return t("Panopoly was *not* configured to use Pantheon's Solr Service");
+}
+
+/**
+ * Panopoly Beta 5 Update: Updating Search API DB Search System
+ */
+function panopoly_search_update_7003(&$sandbox) {
+  $database_server = search_api_server_load('database_server');
+  if ($database_index = search_api_index_load('database_node_index')) {
+    $database_server->fieldsUpdated($database_index);
+  }
+  else {
+    features_revert(array('panopoly_search' => array('search_api_index')));
+  }
+  return t('Panopoly\'s Search DB Search API index has been updated');
+}
+
+/**
+ * Panopoly RC4 Update: Disabling the Search API Solr System
+ */
+function panopoly_search_update_7004(&$sandbox) {
+
+  // If we are running on Pantheon...
+  if (variable_get('pantheon_tier')) {
+
+    // Detect if we are using search_api_solr 1.0-rc3 or lower, which used the
+    // SolrPhpClient library to contact the SOLR server.
+    if (function_exists('_search_api_solr_autoload')) {
+      // Load the Solr PHP Client Library
+      _search_api_solr_autoload('Apache_Solr_Service');
+      _search_api_solr_autoload('Apache_Solr_HttpTransport_Abstract');
+    }
+
+    // Disable Panopoly's Solr Server and Solr Index
+    require_once(drupal_get_path('module', 'search_api') . '/search_api.admin.inc');
+    if ($solr_server->enabled) {
+      $solr_server = search_api_server_load('solr_server');
+      $solr_server->update(array('enabled' => 0));
+    }
+    if ($solr_index->enabled) {
+      $solr_index = search_api_index_load('node_index');
+      $solr_index->update(array('enabled' => 0));
+    }
+
+    return t('Panopoly\'s Search API Solr index has been temporarily disabled on Pantheon. Search API DB will now be used for faceted search results.');
+  }
+}
+
+/**
+ * Make sure search is configured to index Panelizer and reindex all nodes.
+ */
+function panopoly_search_update_7005() {
+  if (module_exists('panopoly_search')) {
+    features_revert(array('panopoly_search' => array('search_api_server', 'search_api_index')));
+
+    $types = array();
+    foreach (search_api_index_load_multiple(array('database_node_index', 'node_index')) as $index) {
+      if ($index->enabled) {
+        $types[$index->item_type][] = $index;
+      }
+    }
+    foreach ($types as $type => $indexes) {
+      try {
+        $controller = search_api_get_datasource_controller($type);
+        $controller->startTracking($indexes);
+      }
+      catch (SearchApiException $e) {
+        watchdog_exception('panopoly_search', $e);
+      }
+    }
+  }
+}
+
+/**
+ * Reindex all nodes after applying patch to fix issue 2530866. Also, update the
+ * configuration in the DB so that it matches the Feature.
+ */
+function panopoly_search_update_7006() {
+  $fields = array('body:summary', 'body:value', 'search_api_panelizer_content', 'search_api_panelizer_title', 'search_api_viewed');
+  foreach (search_api_index_load_multiple(array('database_node_index', 'node_index')) as $index) {
+    // If the index configuration is stored in the database, also update it there.
+    if ($index->status & EXPORT_IN_DATABASE) {
+      $options = $index->options;
+      foreach (array('search_api_case_ignore', 'search_api_html_filter', 'search_api_tokenizer') as $processor_name) {
+        foreach ($fields as $field_name) {
+          $options['processors'][$processor_name]['settings']['fields'][$field_name] = TRUE;
+        }
+      }
+      $index->update(array('options' => $options));
+    }
+    // If the index is enabled, queue it for re-indexing.
+    if ($index->enabled) {
+      $index->reindex();
+    }
+  }
+  return t('All items in the search indexes have been queued for reindexing.');
+}
+
+/**
+ * Configure Solr index to use node access by default.
+ */
+function panopoly_search_update_7007() {
+  $index = search_api_index_load('node_index');
+  // If the index configuration is stored in the database, update it there.
+  if ($index->status & EXPORT_IN_DATABASE) {
+    $options = $index->options;
+    // Add the node_access field to be indexed.
+    $options['fields']['search_api_access_node']['type'] = 'list<string>';
+    $index->update(array('options' => $options));
+    // If the index is enabled, queue it for re-indexing.
+    if ($index->enabled) {
+      $index->reindex();
+    }
+    return t('All items in the search indexes have been queued for reindexing.');
+  }
+}
+
+/**
+ * Throttle unneeded indexing by core search. Update index options to
+ * process fewer items per cron run.
+ */
+function panopoly_search_update_7008() {
+  if (module_exists('search_api')) {
+    variable_set('search_cron_limit', '10');
+    foreach (search_api_index_load_multiple(array('database_node_index', 'node_index')) as $index) {
+      // If the index configuration is stored in the database, also update it
+      // there. Only update it if it matches the previous default.
+      if ($index->status & EXPORT_IN_DATABASE) {
+        $options = $index->options;
+        if ($options['cron_limit'] == "50") {
+          $options['cron_limit'] = "20";
+          $index->update(array('options' => $options));
+        }
+      }
+    }
+  }
+}

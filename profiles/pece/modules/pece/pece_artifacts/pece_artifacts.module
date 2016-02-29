@@ -1,0 +1,29 @@
+<?php
+/**
+ * @file
+ * Code for the PECE Artifacts feature.
+ */
+
+include_once 'pece_artifacts.features.inc';
+include_once 'pece_artifacts.functions.inc';
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_artifacts_form_pece_artifact_node_form_alter(&$form, &$form_state) {
+  // PECE's artifact default form alter.
+  pece_artifacts_alter_artifact_form($form, $form_state);
+}
+
+function pece_artifacts_get_types() {
+  $artifacts = array();
+  $node_types = node_type_get_types();
+
+  foreach ($node_types as $key => $type) {
+    if (strpos($key, 'pece_artifact_') !== FALSE) {
+      $artifacts[$key] = $type;
+    }
+  }
+
+  return $artifacts;
+}

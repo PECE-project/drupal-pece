@@ -1,0 +1,108 @@
+<?php
+
+/**
+ * @file
+ * Main file for the Respond.js module
+ */
+
+define('RESPONDJS_DOWNLOAD_URI', 'https://raw.githubusercontent.com/scottjehl/Respond/master/dest/respond.min.js');
+define('RESPONDJS_DOWNLOAD_LOCATION', 'sites/all/libraries/respondjs');
+define('RESPONDJS_SCOPE_DEFAULT','header');
+define('RESPONDJS_QUIET_DEFAULT',NULL);
+
+/**
+ * Implements hook_menu().
+ *
+ * Provides admin config pages.
+ */
+function respondjs_menu() {
+  $items = array();
+  $items['admin/config/media/respondjs'] = array(
+    'title' => 'Respond.js',
+    'description' => 'Configure respond.js settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('respondjs_admin'),
+    'access arguments' => array('administer respondjs'),
+    'file' => 'respondjs.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function respondjs_permission() {
+  return array(
+    'administer respondjs' => array(
+      'title' => t('Administer respond.js'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_page_build().
+ *
+ * This is the function that adds respond.js to the page.
+ */
+function respondjs_page_build() {
+  // We need respond.js to load as soon in the HTML as possible, because it can
+  // affect the presentation of a page. The options below ensure that it happens.
+  drupal_add_js(
+    respondjs_get_library_file(),
+    array(
+      'type' => 'file',
+      'scope' => variable_get('respondjs_scope', RESPONDJS_SCOPE_DEFAULT),
+      'group' => JS_LIBRARY,
+      'every_page' => TRUE,
+      'weight' => -999,
+      'preprocess' => 0,
+    )
+  );
+}
+
+/**
+ * Implements hook_library().
+ */
+function respondjs_library() {
+  $libraries['respondjs'] = array(
+    'title' => 'Respond.js',
+    'website' => 'https://github.com/scottjehl/Respond',
+    'version' => '',
+    'js' => array(
+      respondjs_get_library_file() => array(),
+    ),
+  );
+  return $libraries;
+}
+
+/**
+ * Helper function gets the path to the library directory
+ */
+function respondjs_get_library_path() {
+  $default_path = drupal_get_path('module', 'respondjs') . '/lib';
+
+  // If Libraries API is enabled, make sure the file exists before pointing there
+  if (function_exists('libraries_get_path') && file_exists(libraries_get_path('respondjs'))) {
+    $path = libraries_get_path('respondjs');
+  }
+  // Respond.js is GPLv2 so we can ship it in the module folder as a fallback.
+  // However, we still check to be on the safe side.
+  else if (file_exists($default_path)) {
+    $path = $default_path;
+  }
+  // If the module's files have been altered, we should not report the default path.
+  // repsondjs_requirements() will report this error.
+  else {
+    $path = NULL;
+  }
+
+  return $path;
+}
+
+/**
+ * Helper function gets the path to the library Javascript file
+ */
+function respondjs_get_library_file() {
+  return respondjs_get_library_path() . '/respond.min.js';
+}

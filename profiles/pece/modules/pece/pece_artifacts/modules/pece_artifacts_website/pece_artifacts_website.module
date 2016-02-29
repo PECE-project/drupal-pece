@@ -1,0 +1,36 @@
+<?php
+/**
+ * @file
+ * Code for the Artifact - Website feature.
+ */
+
+include_once 'pece_artifacts_website.features.inc';
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_artifacts_website_form_pece_artifact_website_node_form_alter(&$form, &$form_state) {
+  // PECE's artifact default form alter.
+  pece_artifacts_alter_artifact_form($form, $form_state);
+
+  if (module_exists('pece_profile')) {
+    array_unshift($form['#validate'], 'pece_profile_check_author');
+  }
+
+  array_unshift($form['#validate'], 'pece_artifacts_website_check_link');
+}
+
+function pece_artifacts_website_check_link(&$form, &$form_state) {
+
+  $values = $form_state['values'];
+  $url_field = $values['field_pece_website_url'][LANGUAGE_NONE][0]['url'];
+  if (!empty($url_field)) {
+    if (filter_var($url_field, FILTER_VALIDATE_URL) === false) {
+      form_set_error('field_pece_website_url', t('Not a valid URL. Only external links are allowed in the URL field. e.g http://example.com.'));
+    }
+    if (!preg_match("/(http:\/\/|https:\/\/)/", $url_field)) {
+      form_set_error('field_pece_website_url', t('The URL field must start with http:// or https://.'));
+    }
+  }
+}

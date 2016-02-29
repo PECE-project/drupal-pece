@@ -1,0 +1,113 @@
+<?php
+
+// Set options on a new PHPMailer object so it sends email via Mailgun's servers.
+
+/**
+ * Override PHPMailer settings so email is sent through Mailgun.
+ */
+function og_mailinglist_mailgun_og_mailinglist_new_phpmailer_alter(&$mailer) {
+  // Check if a login/password is set for Mailgun.
+  $login = variable_get('og_mailinglist_mailgun_login', '');
+  $password = variable_get('og_mailinglist_mailgun_password', '');
+  if (empty($login) || empty($password)) {
+    return;
+  }
+  else {
+    $mailer->Mailer = "smtp";
+    $mailer->Host = 'smtp.mailgun.org';
+    // Mailgun recommends using port 587 instead of 25 as
+    // some ISPs block or throttle port 25.
+    $mailer->Port = 587;
+    $mailer->SMTPAuth = TRUE;
+    $mailer->Username = $login;
+    $mailer->Password = $password;
+  }
+}
+
+/**
+ * Implmentation of hook_menu().
+ */
+function og_mailinglist_mailgun_menu() {
+  // Administration
+  $items['admin/config/group/mailinglist/mailgun'] = array(
+    'title' => 'Mailgun',
+    'description' => 'Manage Mailgun/OG Mailinglist integration settings',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('og_mailinglist_mailgun_admin_settings'),
+    'access arguments' => array('access administration pages'),
+  );
+
+  $items['og_mailinglist/mailgun_callback_mime'] = array(
+    'title' => 'URL for Mailgun to call when a new email is received',
+    'access callback' => TRUE,
+    'page callback' => 'og_mailinglist_mailgun_new_email',
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Admin settings form
+ */
+function og_mailinglist_mailgun_admin_settings() {
+  $form['og_mailinglist_mailgun_login'] = array(
+    '#title' => t('Mailgun Login'),
+    '#type' => 'textfield',
+    '#default_value' => variable_get('og_mailinglist_mailgun_login', ''),
+    '#description' => t('Mailgun Login. Find this by logging into Mailgun then clicking on "Domains", then on the domain you\'ll be using for sending OG Mailinglist emails.'),
+    '#prefix' => '<p>' . l('Instructions for setting up the Mailgun/OG Mailinglist integration', 'admin/help/og_mailinglist_mailgun') . '</p>',
+  );
+  $form['og_mailinglist_mailgun_password'] = array(
+    '#title' => t('Mailgun Password'),
+    '#type' => 'textfield',
+    '#default_value' => variable_get('og_mailinglist_mailgun_password', ''),
+    '#description' => t('Mailgun password. This can be found at the same place as the mailgun login.'),
+  );
+  $form['og_mailinglist_mailgun_api_key'] = array(
+    '#title' => t('Mailgun API Key'),
+    '#type' => 'textfield',
+    '#default_value' => variable_get('og_mailinglist_mailgun_api_key', ''),
+    '#description' => t('Mailgun API Key. This can be found under the Mailgun "My Account" tab.'),
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Mailgun callback. New emails from Mailgun are directed here.
+ */
+function og_mailinglist_mailgun_new_email() {
+  $raw_email = $_POST['body-mime'];
+
+  // Verify email is from Mailgun.
+  // See http://documentation.mailgun.net/user_manual.html#securing-webhooks
+  $signature = $_POST['signature'];
+  $token = $_POST['token'];
+  $timestamp = $_POST['timestamp'];
+  $api_key = variable_get('og_mailinglist_mailgun_api_key', '');
+  $my_signature = hash_hmac('sha256', $timestamp . '' . $token, $api_key);
+
+  // If the signature's don't match, set watchdog entry and return.
+  if ($signature != $my_signature) {
+    watchdog('access denied', 'Authentication error for e-mail sent to the OG Mailinglist Mailgun webhook. Check that you\'ve set your API key from Mailgun in /admin/config/group/mailinglist/mailgun', NULL, WATCHDOG_WARNING);
+    return;
+  }
+  // The email is legit, pass it on.
+  else {
+    require_once drupal_get_path('module', 'og_mailinglist') . "/og_mailinglist_transport.inc";
+    _og_mailinglist_process_email($raw_email);
+  }
+}
+
+/**
+ * Implements hook_help().
+ */
+function og_mailinglist_mailgun_help($path, $args) {
+  switch ($path) {
+    case 'admin/help#og_mailinglist_mailgun':
+      $text = file_get_contents( dirname(__FILE__) . "/README.txt");
+      return check_markup($text, 'plain_text');
+  }
+}

@@ -1,0 +1,145 @@
+<?php
+
+include_once 'panopoly_search.features.inc';
+
+/**
+ * Implementation of hook_ctools_plugin_directory()
+ */
+function panopoly_search_ctools_plugin_directory($module, $plugin) {
+  return 'plugins/' . $plugin;
+}
+
+/**
+ * Implementation of hook_form_alter()
+ */
+function panopoly_search_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'search_form' || $form_id == 'search_block_form' || $form_id == 'search_theme_form') {
+    $form['#submit'][] = 'panopoly_search_all_form_submit';
+    if (!empty($form['basic']['keys'])) {
+      $form['basic']['keys']['#size'] = '';
+    }
+  }
+}
+
+/**
+ * Custom form submit handler to change redirect state of the form
+ */
+function panopoly_search_all_form_submit($form, &$form_state) {
+  // The block provided by core's Search module uses the form ID as the value
+  // key, not keys.
+  if (!isset($form_state['values']['keys'])) {
+    $keys = trim($form_state['values'][$form['#form_id']]);
+  }
+  else {
+    $keys = trim($form_state['values']['keys']);
+  }
+
+  $module = !empty($form_state['values']['module']) ? $form_state['values']['module'] : 'site';
+  $module = ($module === 'node') ? 'site' : $module;
+  $form_state['redirect'] = array('search/' . $module . '/' . $keys);
+}
+
+/**
+ * Helper function to enable Solr server and index.
+ */
+function panopoly_search_enable_solr() {
+  // Enable Panopoly's Solr server and index.
+  require_once(drupal_get_path('module', 'search_api') . '/search_api.admin.inc');
+  $solr_server = search_api_server_load('solr_server');
+  $solr_server->update(array('enabled' => 1));
+  $solr_index = search_api_index_load('node_index');
+  $solr_index->update(array('server' => 'solr_server', 'enabled' => 1));
+
+  // Clear index and rebuild.
+  $solr_index->clear();
+  $solr_index->reindex();
+}
+
+/**
+ * Implements hook_default_search_api_server_alter().
+ */
+function panopoly_search_default_search_api_server_alter(&$items) {
+  if (isset($items['solr_server'])) {
+    // Hack to allow 'options' and 'enabled' to be changed without the Feature
+    // becoming overridden (will still be overridden in the Search API admin).
+    if ($solr_server = search_api_server_load('solr_server')) {
+      $items['solr_server']->options = $solr_server->options;
+      $items['solr_server']->enabled = $solr_server->enabled;
+    }
+  }
+}
+
+/**
+ * Implements hook_default_search_api_index_alter().
+ */
+function panopoly_search_default_search_api_index_alter(&$items) {
+  if (isset($items['node_index'])) {
+    // Hack to allow 'enabled' to be changed without the Feature becoming
+    // overridden (will still be overridden in the Search API admin).
+    if ($solr_index = search_api_index_load('node_index')) {
+      $items['node_index']->server = $solr_index->server;
+      $items['node_index']->enabled = $solr_index->enabled;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function panopoly_search_form_pantheon_apachesolr_post_schema_form_alter(&$form, &$form_state) {
+  $form['#submit'][] = 'panopoly_search_pantheon_apachesolr_post_schema_form_submit';
+}
+
+/**
+ * Submit callback for pantheon_apachesolr_post_schema_form_submit().
+ */
+function panopoly_search_pantheon_apachesolr_post_schema_form_submit($form, &$form_state) {
+  // If the schema has been successful posted, then enable Solr.
+  if (variable_get('pantheon_apachesolr_schema', FALSE)) {
+    panopoly_search_enable_solr();
+  }
+}
+
+/**
+ * Implementation of hook_modules_enabled()
+ */
+function panopoly_search_modules_enabled($modules) {
+  // If we are running on Pantheon enable Solr support
+  if (in_array('panopoly_search', $modules) && variable_get('pantheon_tier', FALSE) && module_enable(array('pantheon_apachesolr'))) {
+    // Supress the message from enabling Panopoly Apachesolr since we are configuring it automatically
+    drupal_get_messages('status');
+
+    // Push Pantheon's Solr schema for use with search_api.
+    $schema_uri = drupal_get_path('module', 'search_api_solr') . '/solr-conf/3.x/schema.xml';
+    $response = pantheon_apachesolr_post_schema_exec($schema_uri);
+
+    // If successful, then enable Panopoly's Solr server and index.
+    if ($response != NULL) {
+      panopoly_search_enable_solr();
+    }
+  }
+}
+
+/**
+ * Implements hook_search_api_query_alter().
+ */
+function panopoly_search_search_api_query_alter($query) {
+  // Mimick the logging from Drupal core's search module so that the
+  // 'Top search phrase' report will work.
+  $keys = $query->getOriginalKeys();
+  $type = $query->getIndex()->getEntityType();
+
+  // Try to make the type names match if possible.
+  $search_info = search_get_info();
+  $type_title = $type;
+  if (isset($search_info[$type])) {
+    $type_title = $search_info[$type]['title'];
+  }
+
+  $link = NULL;
+  if ($type == 'node') {
+    $link = l(t('results'), 'search/site/' . $keys);
+  }
+
+  watchdog('search', 'Searched %type for %keys.', array('%keys' => $keys, '%type' => $type_title), WATCHDOG_NOTICE, $link);
+}

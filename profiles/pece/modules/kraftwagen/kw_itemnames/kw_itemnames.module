@@ -1,0 +1,172 @@
+<?php
+
+/**
+ * Implements hook_hook_info().
+ */
+function kw_itemnames_hook_info() {
+  return array(
+    'kw_itemnames_type_info' => array('group' => 'kw_itemnames'),
+  );
+}
+
+/**
+ * Load the information about how to handle nameable types.
+ *
+ * @param $type
+ *   Optional type for which the information should be loaded.
+ * 
+ * @return
+ *   The information about handling nameable types. If $type is not given, this
+ *   will be an associative array, with types as keys and the information per 
+ *   type as values. If $type is given, the value for that type is returned, 
+ *   which is also an associative array.
+ */
+function kw_itemnames_type_info($type = NULL) {
+  $type_info = &drupal_static(__FUNCTION__);
+
+  // if not statically cached yet
+  if (!isset($type_info)) {  
+    // first try to get from the cache
+    if ($cache = cache_get(__FUNCTION__)) {
+      $type_info = $cache->data;
+    } 
+  }
+
+  if (!isset($type_info)) {
+    // construct the list of types from the hook implementations
+    $type_info = array();
+    $modules = module_implements(__FUNCTION__);
+    foreach ($modules as $module) {
+      if ($result = module_invoke($module, __FUNCTION__)) {
+        foreach ($result as $rtype => $rinfo) {
+          $type_info[$rtype] = $rinfo + array('type' => $rtype, 'module' => $module);
+        }
+      }
+    }
+    drupal_alter(__FUNCTION__, $type_info);
+
+    // save the list to the cache
+    cache_set(__FUNCTION__, $type_info);
+  }
+
+  // if type given, return only type specific information
+  if ($type) {
+    return !empty($type_info[$type]) ? $type_info[$type] : FALSE;
+  } 
+
+  return $type_info;
+}
+
+/**
+ * Ensure that an item exists with a certain name. 
+ * 
+ * @param $type
+ *   The type of name that should be ensured.
+ * @param $name
+ *   The name that the item should have. This name has no other use than 
+ *   uniquely identifying the item. Therefore you should make sure that the
+ *   name is used only once per type in your project. A good strategy is to
+ *   prefix all the names you use with your module name.
+ * @param $required
+ *   The properties of the item that are required. If the item already 
+ *   exists, it will be updated to have these properties set correctly. 
+ * @param $defaults
+ *   The properties of the item that should be set on initial creation, but 
+ *   should not be enforced.
+ *
+ * @return 
+ *   The item, after optionally updating it. This function can return FALSE, if
+ *   deletion prevention is switched off!
+ */
+function kw_itemnames_ensure($type, $name, $required = NULL, $defaults = NULL) {
+  // make sure all our helper functions exist
+  module_load_include('inc', 'kw_itemnames');
+
+  // check if we have an item id registered
+  if ($item_id = kw_itemnames_name_get_item_id($type, $name)) {
+    // try to load the item
+    $item = kw_itemnames_item_load($type, $item_id);
+    if ($item) {
+      // update the item we loaded, using the required properties
+      $item = kw_itemnames_item_update($type, $item, $required);
+      // make sure the name points to the new item
+      kw_itemnames_name_update($type, $name, $item);
+
+      return $item;
+    }
+  }
+
+  // create the item, using the required and default properties
+  $item = kw_itemnames_item_create($type, $required, $defaults);
+  // make sure the name points to the new item
+  kw_itemnames_name_update($type, $name, $item);
+
+  return $item;
+}
+
+/**
+ * Ensure that no item exists with a certain name.
+ * 
+ * @param $type
+ *   The type of name that should be removed.
+ * @param $name
+ *   The name that the item has/had.
+ * 
+ * @return
+ *   TRUE on success, FALSE on failure. Also TRUE if the item is already gone.
+ */
+function kw_itemnames_remove($type, $name) {
+  // make sure all our helper functions exist
+  module_load_include('inc', 'kw_itemnames');
+
+  if ($item_id = kw_itemnames_name_get_item_id($type, $name)) {
+    kw_itemnames_name_delete($type, $name);
+
+    $item = kw_itemnames_item_load($type, $item_id);
+    if ($item) {
+      return kw_itemnames_item_delete($type, $item_id);
+    }
+  }
+
+  return TRUE;
+}
+
+/**
+ * Load an named item. 
+ *
+ * Never assume in the code that uses this function that a valid item will be
+ * returned. Not even the item was ensured (using kw_itemnames_ensure) with
+ * deletion prevention. We can't prevent deletion completely, so your code 
+ * should not break miserably when the item can't be found.
+ *
+ * @param $type
+ *   The type of name to load
+ * @param $name
+ *   The name to load
+
+ * @return
+ *   The loaded item, or if not found FALSE.
+ */
+function kw_itemnames_load($type, $name) {
+  // make sure all our helper functions exist
+  module_load_include('inc', 'kw_itemnames');
+
+  if (!($item_id = kw_itemnames_name_get_item_id($type, $name))) {
+    return FALSE;
+  }
+  
+  return kw_itemnames_item_load($type, $item_id);
+}
+
+function kw_itemnames_item_id($type, $name) {
+  // make sure all our helper functions exist
+  module_load_include('inc', 'kw_itemnames');
+
+  return kw_itemnames_name_get_item_id($type, $name);
+}
+function kw_itemnames_name($type, $item) {
+  // make sure all our helper functions exist
+  module_load_include('inc', 'kw_itemnames');
+
+  return is_numeric($item) ? kw_itemnames_item_id_get_name($type, $item) : kw_itemnames_item_get_name($type, $item);
+}

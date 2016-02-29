@@ -1,0 +1,46 @@
+<?php
+/**
+ * @file
+ * Code for the PECE About feature.
+ */
+
+include_once 'pece_about.features.inc';
+
+/**
+ * Implements hook_block_info().
+ */
+function pece_about_block_info() {
+  $blocks['about_pece'] = array(
+    'info' => t('About PECE'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function pece_about_block_view($delta = 'about_pece') {
+  $block['subject'] = t('About PECE');
+
+  return $block = array(
+    'subject' => $block['subject'],
+    'content' => theme(
+      'about_pece'
+    )
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function pece_about_theme() {
+  $path = drupal_get_path('module', 'pece_about') . '/templates';
+
+  return array(
+    'about_pece' => array(
+      'path' => $path,
+      'template' => 'pece-about-block'
+    ),
+  );
+}

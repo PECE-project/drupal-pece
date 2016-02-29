@@ -1,0 +1,15 @@
+To upgrade from 6.x to 7.x just follow these steps:
+
+* Back up your database.
+
+* Update your 6.x site to the very latest versions of all modules.
+
+* Back up your database.
+
+* Update to the suggested modules of 7.x, please bear in mind that
+  og module has to be >= 2.x
+
+* Run update.php
+
+* If everything works, you may delete og_mailinglist table from 
+  database since it is no longer needed, but is not automatically removed.

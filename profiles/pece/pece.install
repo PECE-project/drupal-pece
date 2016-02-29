@@ -1,0 +1,168 @@
+<?php
+
+define('PECE_THEME_DEFAULT' ,'pece_scholarly_lite');
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ */
+function pece_install() {
+
+  // Allow visitor account creation, but with administrative approval.
+  variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
+
+  // Set main menu links.
+  pece_set_menu_item();
+
+  // Set default blocks.
+  pece_set_default_blocks();
+
+  // @TODO: Temporary solution to not send email on user registration.
+  variable_set('user_email_verification', 0);
+
+
+  // Enable default permissions for system roles.
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
+}
+
+
+/**
+ * Set the default theme.
+ */
+function _pece_set_up_theme() {
+  $theme = 'pece_scholarly_lite';
+  $admin_theme = 'adminimal';
+  theme_enable(array($theme));
+  // Adminimal Theme must be enabled to work properly.
+  theme_enable(array($admin_theme));
+  variable_set('theme_default', $theme);
+  variable_set('admin_theme', $admin_theme);
+  variable_set('node_admin_theme', 1);
+  theme_disable(array('responsive_bartik', 'bartik'));
+}
+
+/**
+ * Implements hook_kw_manifests_info().
+ */
+function pece_kw_manifests_info() {
+  $manifests = array();
+
+  $manifests['themes'] = array(
+    'callback' => 'pece_manifest_define_themes',
+  );
+
+  $manifests['set_frontpage'] = array(
+    'callback' => 'pece_manifest_set_frontpage',
+  );
+
+  // @TODO: Move this to pece_analytics module after solving the enabled modules
+  // order issue.
+  $manifests['define_analytics_perms'] = array(
+   'callback' => 'pece_manifest_define_analytics_perms',
+  );
+
+  return $manifests;
+}
+
+
+/**
+ * Set default themes.
+ */
+function pece_manifest_define_themes() {
+  // set the default theme
+  _pece_set_up_theme();
+}
+
+
+/**
+ * Set front page variable.
+ */
+function pece_manifest_set_frontpage() {
+  variable_set('site_frontpage', 'home');
+}
+
+
+/**
+ * Add permissions for PECE users to create Question Set taxonomy terms.
+ */
+function pece_manifest_define_analytics_perms() {
+  $contributor = user_role_load_by_name('Contributor');
+  $researcher = user_role_load_by_name('Researcher');
+  $roles = array($contributor, $researcher);
+
+
+  if (module_exists('taxonomy_access_fix')) {
+    foreach ($roles as $role) {
+      user_role_grant_permissions($role->rid, array('add terms in pece_structured_analytics'));
+    }
+  }
+}
+
+function pece_set_menu_item() {
+  $item = array(
+    'link_path' => drupal_get_normal_path('<front>'),
+    'link_title' => t('Home'),
+    'weight' => 0,
+    'menu_name' => 'main-menu',
+    'mlid' => NULL,
+  );
+  menu_link_save($item);
+  menu_cache_clear_all();
+}
+
+function pece_set_default_blocks() {
+  // Set default blocks.
+  $values = array(
+    array(
+      'module' => 'system',
+      'delta' => 'main-menu',
+      'theme' => PECE_THEME_DEFAULT,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'header_top_left',
+      'pages' => '',
+      'cache' => -1,
+      'title' => '<none>',
+    ),
+    array(
+      'module' => 'search',
+      'delta' => 'form',
+      'theme' => PECE_THEME_DEFAULT,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'header_top_right',
+      'pages' => '',
+      'cache' => -1,
+      'title' => '<none>',
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'user-menu',
+      'theme' => PECE_THEME_DEFAULT,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'navigation',
+      'pages' => '',
+      'cache' => -1,
+      'title' => '<none>',
+    ),
+  );
+  foreach ($values as $record) {
+    $query = db_merge('block')
+      ->fields($record)
+      ->condition('theme', PECE_THEME_DEFAULT)
+      ->condition('delta', $record['delta']);
+    $query->execute();
+  }
+}
+/**
+ * Add main menu links and default block.
+ */
+function pece_update_7001() {
+  // Set main menu links.
+  pece_set_menu_item();
+  // Set default blocks.
+  pece_set_default_blocks();
+}

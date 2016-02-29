@@ -1,0 +1,221 @@
+<?php
+
+/** 
+ * Implements hook_requirements().
+*/
+function amber_requirements($phase) {
+  $t = get_t();
+  switch ($phase) {
+    case 'install':
+      drupal_set_message($t('You should probably go to the Amber dashboard, scan existing content for links to preserve and then preserve them by clicking !here',array('!here' => l($t('here'),'admin/reports/amber'))),'warning');
+      break;
+    
+    case 'runtime':
+
+      $status = amber_get_status();
+      $max_size = variable_get('amber_max_disk', '1000') * 1024 * 1024;
+      $formatted_max = format_size($max_size);
+      $current_size = $status->get_cache_size();
+      $formatted_current_size = $current_size ? format_size($current_size) : "0 MB";
+      $value = t('@current (of @max)', array('@current' => $formatted_current_size, '@max' => $formatted_max));
+      $severity = $current_size < (0.9 * $max_size) ? REQUIREMENT_OK : REQUIREMENT_WARNING;
+      $requirements['amber_storage'] = array('title' => 'Amber disk usage', 'value' => $value, 'severity' => $severity );
+      if (function_exists('libraries_detect')) {
+        $requirements['amber_aws'] = array('title' => 'Amber AWS library');
+        if (($library = libraries_detect('aws')) && $library['installed']) {
+          $requirements['amber_aws']['severity'] = REQUIREMENT_OK;
+          $requirements['amber_aws']['value'] = $t("Installed");
+        } else {
+          $requirements['amber_aws']['severity'] = REQUIREMENT_WARNING;
+          $requirements['amber_aws']['value'] = $t("Not installed");
+          $library_info = libraries_info('aws');
+          $requirements['amber_aws']['description'] = $t("The AWS library is required to store captures on AWS. <a href='${library_info['download url']}'>Download</a> the library and unpack the zip file and 
+          install into sites/all/libraries/aws.");
+        } 
+      }
+      return $requirements;
+      break;
+    
+    default:
+      break;
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function amber_uninstall() {
+  require_once("libraries/AmberStorage.php");
+  require_once("libraries/AmberStatus.php");
+  require_once("amber.module");
+  amber_delete_all();
+  variable_del('amber_enabled');
+  variable_del('amber_max_file');
+  variable_del('amber_max_disk');
+  variable_del('amber_storage_location');
+  variable_del('amber_update_strategy');
+  variable_del('amber_excluded_sites');
+  variable_del('amber_excluded_formats');
+  variable_del('amber_available_action');
+  variable_del('amber_available_action_hover');
+  variable_del('amber_unavailable_action');
+  variable_del('amber_unavailable_action_hover');
+  variable_del('amber_permitted_fields');
+  variable_del('amber_country_id');
+  variable_del('amber_country_proxy');
+  variable_del('amber_country_available_action');
+  variable_del('amber_country_available_action_hover');
+  variable_del('amber_country_unavailable_action');
+  variable_del('amber_country_unavailable_action_hover');
+  variable_del('amber_content_scanned');
+}
+
+function amber_schema() {
+
+  $schema['amber_check'] = array(
+    'description' => 'Stores a list of URLs with their current status',
+    'fields' => array(
+      'id' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ),
+      'url' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 2000,
+        'description' => 'The full URL'
+      ),
+      'status' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'description' => 'Whether the URL is available or not'
+      ),
+      'last_checked' => array(
+        'type' => 'int',
+        'description' => 'The last date the status of the URL was checked',
+      ),
+      'next_check' => array(
+        'type' => 'int',
+        'description' => 'The next date after which the status of the URL can be checked',
+      ),
+      'message' => array(
+        'type' => 'varchar',
+        'length' => 2000,
+        'description' => 'More details about the check or cache results'
+      ),
+
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['amber_cache'] = array(
+    'description' => 'Stores a metadata about cache entries',
+    'fields' => array(
+      'id' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ),
+      'url' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 2000,
+        'description' => 'The full URL'
+      ),
+      'location' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 2000,
+        'description' => 'The location of preserved content'
+      ),
+      'date' => array(
+        'type' => 'int',
+        'description' => 'The date the capture was preserved',
+      ),
+      'type' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 200,
+        'description' => 'The mimetype of the capture'
+      ),
+      'size' => array(
+        'type' => 'int',
+        'description' => 'The size of the capture, in bytes',
+      ),
+      'provider' => array(
+        'type' => 'int',
+        'description' => 'The id of the storage provider being used',
+      ),
+      'provider_id' => array(
+        'type' => 'varchar',
+        'length' => 2000,
+        'description' => 'The unique id for the cached data at the selected provider',
+      ),
+    ),
+    'primary key' => array('id', 'provider'),
+  );
+
+  $schema['amber_activity'] = array(
+    'description' => 'Stores information about cache viewing activity',
+    'fields' => array(
+      'id' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ),
+      'date' => array(
+        'type' => 'int',
+        'description' => 'Date last viewed',
+        'not null' => TRUE,
+      ),
+      'views' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'The number of page views for the capture'
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Add "message" column to amber_check table
+ */
+function amber_update_7100()
+{
+  $spec = array(
+        'type' => 'varchar',
+        'length' => 2000,
+        'description' => 'More details about the check or cache results'
+      );
+  db_add_field('amber_check','message',$spec);
+}
+
+/**
+ * Add columns to support external storage providers
+ */
+function amber_update_7101()
+{
+  db_add_field('amber_cache','provider',array(
+        'type' => 'int',
+        'description' => 'The id of the storage provider being used',
+      ));
+  db_add_field('amber_cache','provider_id',array(
+        'type' => 'varchar',
+        'length' => 2000,
+        'description' => 'The unique id for the cached data at the selected provider',
+      ));
+}
+
+/**
+ * Include provider in the primary key
+ */
+function amber_update_7102()
+{
+  db_drop_primary_key('amber_cache');
+  db_add_primary_key('amber_cache', array('id', 'provider'));
+}
+

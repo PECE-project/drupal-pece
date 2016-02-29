@@ -1,0 +1,66 @@
+<?php
+/**
+ * @file
+ * Code for the PECE Artifacts - fieldnote module.
+ */
+
+include_once 'pece_artifacts_fieldnote.features.inc';
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_artifacts_fieldnote_form_pece_artifact_fieldnote_node_form_alter(&$form, &$form_state) {
+  $node = $form['#node'];
+
+  // Title isn't used in field note contents so it can be omitted from the form.
+  $form['title']['#required'] = FALSE;
+  $form['title']['#default_value'] = 'pece_artifact_fieldnote_' . $node->created;
+  $form['title']['#attributes']['class'][] = 'element-invisible';
+
+  // PECE's artifact default form alter.
+  pece_artifacts_alter_artifact_form($form, $form_state);
+
+  if (module_exists('pece_profile')) {
+    array_unshift($form['#validate'], 'pece_profile_check_author');
+  }
+}
+
+/**
+ * Implements hook_form_preprocess_views_view().
+ */
+function pece_artifacts_fieldnote_preprocess_views_view(&$vars) {
+
+  // Alter view's titles.
+  if ($vars['view']->name == 'pece_user_field_diary' &&
+      $vars['view']->current_display == 'pece_user_field_diary') {
+    global $user;
+
+    if (substr($user->name, -1, 1) == 's') {
+      $sufix = "' FIELD DIARY";
+    }
+    else {
+      $sufix = "'s FIELD DIARY";
+    }
+    $vars['view']->set_title($user->name . $sufix);
+  }
+
+  if ($vars['view']->name == 'pece_group_field_diary' &&
+      $vars['view']->current_display == 'pece_group_field_diary') {
+
+    $group_id = arg(1);
+
+    if (isset($group_id) && is_numeric($group_id)) {
+      $group = node_load(arg(1));
+
+      if ($group) {
+        if (substr($group->title, -1, 1) == 's') {
+          $suffix = "' GROUP DIARY";
+        }
+        else {
+          $suffix = "'s GROUP DIARY";
+        }
+        $vars['view']->set_title($group->title . $suffix);
+      }
+    }
+  }
+}

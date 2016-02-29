@@ -1,0 +1,13 @@
+<?php
+
+function _kw_itemnames_paragraphs_ignore_key_list() {
+  return array('hostEntity', 'hostEntityType', 'field_name');
+}
+
+/**
+ * Implements hook_kw_itemnames_entity_disabled_entity_types() for the system
+ * module.
+ */
+function kw_itemnames_paragraphs_kw_itemnames_entity_disabled_entity_types() {
+  return array('paragraphs_item');
+}

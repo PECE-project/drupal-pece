@@ -1,0 +1,47 @@
+<?php
+/**
+ * @file
+ * Code for the pece_artifacts_image feature.
+ */
+
+include_once 'pece_artifacts_image.features.inc';
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_artifacts_image_form_pece_artifact_image_node_form_alter(&$form, &$form_state) {
+  // PECE's artifact default form alter.
+  pece_artifacts_alter_artifact_form($form, $form_state);
+
+  if (module_exists('pece_profile')) {
+    array_unshift($form['#validate'], 'pece_profile_check_author');
+  }
+}
+
+/**
+ * Implements hook_modules_enabled().
+ *
+ * This hook is implemented to assign some default permissions for PECE's image
+ * artifact.
+ * This has to be done in this hook to run after both features
+ * and defaultconfig which power the functionality. Hopefully a more general
+ * solution can be found. More information - http://drupal.org/node/1837312.
+ */
+function pece_artifacts_image_modules_enabled($modules) {
+
+  // Only run this logic if we are executing as part of an install profile
+  // and only for this particular module.
+  if (drupal_installation_attempted() && in_array('pece_artifacts_image', $modules)) {
+
+    $perms = array(
+      'create pece_artifact_image content',
+      'delete own pece_artifact_image content',
+      'edit own pece_artifact_image content',
+    );
+
+    foreach ($perms as $perm) {
+      // Define some permissions for the authentcated user role
+      user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array($perm));
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function kw_itemnames_schema() {
+  $schema = array();
+  
+  $schema['kw_itemnames'] = array(
+    'description' => 'Stores the names that are assigned to kw_itemnames managed items',
+    'fields' => array(
+      'type' => array(
+        'description' => 'The type of item for which we registered the name',
+        'type' => 'varchar',
+        'length' => 32,
+        'default' => '',
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'The name that is assigned to the item',
+        'type' => 'varchar',
+        'length' => 64, // 64 ought to be enough for everybody
+        'default' => '',
+        'not null' => TRUE
+      ),
+      'item_id' => array(
+        'description' => 'The internal ID of the item this name points to',
+        'type' => 'int', // this is not intended for items that already have a unique string ID
+        'default' => 0,
+        'not null' => TRUE,
+      ),
+    ),
+    'unique keys' => array(
+      'item' => array('type', 'item_id'), // you can't assign two names to one item
+    ),
+    'primary key' => array('type', 'name'), // you can't assign a name to two items of the same type
+  );
+  
+  return $schema;
+}

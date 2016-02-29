@@ -1,0 +1,58 @@
+/*
+ *------------------------------------------------------------------------------
+ * Annotations view styles
+ *------------------------------------------------------------------------------
+ */
+
+.node-type-pece-analytic,
+.page-annotations-user,
+.page-annotions-question
+  h1
+    text-transform: lowercase
+
+    &::first-letter
+      text-transform: uppercase
+
+.view-display-id-pece_user_artifact_annotations,
+.view-display-id-pece_question_artifact_annotions,
+.view-display-id-pece_question_annotations
+  > .view-content > .views-row
+    + .views-row > .views-row-inner
+      margin-top: 1em
+      border-top: 2px dotted #ddd
+
+    > .views-row-inner
+      padding-top: 2em
+
+    .field-name-body
+      margin-top: 1em
+
+    h2
+      display: inline-block
+      margin: 10px
+
+      & + div
+        display: inline-block
+        margin-left: 1em
+        padding: 0 1em
+        background-color: #E2E2E2
+
+  .views-exposed-widgets
+    +make-row()
+
+  #edit-uid-wrapper
+    +make-md-column(3)
+    +make-sm-column(4)
+    +make-xs-column(12)
+
+  #edit-artifact-wrapper
+    +make-md-column(7)
+    +make-sm-column(6)
+    +make-xs-column(12)
+
+  .views-submit-button
+    +make-sm-column(2)
+
+.view-display-id-pece_question_artifact_annotions
+  .view-footer a
+    text-align: right

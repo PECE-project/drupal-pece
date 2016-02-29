@@ -1,0 +1,68 @@
+<?php
+/**
+ * @file
+ * Code for the PECE Core feature.
+ */
+
+include_once 'pece_core.features.inc';
+include_once 'pece_core.functions.inc';
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_core_form_pece_fieldsite_node_form_alter(&$form, &$form_state) {
+  // Hide the comment settings fieldset.
+  $form['comment_settings']['#access'] = FALSE;
+
+  $form['author']['name']['#required'] = TRUE;
+}
+
+/**
+ * Implements hook_modules_enabled().
+ *
+ * This hook is implemented to assign some default permissions for PECE profile.
+ * This has to be done in this hook to run after both features
+ * and defaultconfig which power the functionality. Hopefully a more general solution
+ * can be found. More information - http://drupal.org/node/1837312.
+ */
+function pece_core_modules_enabled($modules) {
+
+  // Only run this logic if we are executing as part of an install profile
+  // and only for this particular module.
+  if (drupal_installation_attempted() && in_array('pece_core', $modules)) {
+
+    // Define some permissions for the authentcated user role
+    user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('submit latitude/longitude'));
+  }
+}
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function pece_core_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['mini_teaser'] = array(
+    'label' => t('Mini teaser'),
+    'custom settings' => TRUE,
+  );
+
+  $entity_info['user']['view modes']['mini_teaser'] = array(
+    'label' => t('Mini teaser'),
+    'custom settings' => TRUE,
+  );
+
+  $entity_info['file']['view modes']['mini_teaser'] = array(
+    'label' => t('Mini teaser'),
+    'custom settings' => TRUE,
+  );
+
+  $entity_info['node']['view modes']['most_recent'] = array(
+    'label' => t('Most Recent'),
+    'custom settings' => TRUE,
+  );
+
+  $entity_info['file']['view modes']['most_recent'] = array(
+    'label' => t('Most Recent'),
+    'custom settings' => TRUE,
+  );
+}
