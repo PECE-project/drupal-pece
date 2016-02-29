@@ -31,7 +31,7 @@ function pece_frontpage_slideshow_image_default_styles() {
     'label' => 'PECE Frontpage Image Style',
     'effects' => array(
       3 => array(
-        'name' => 'image_resize',
+        'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 960,
           'height' => 460,

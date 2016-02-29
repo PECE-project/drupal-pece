@@ -86,14 +86,14 @@ function pece_frontpage_slideshow_defaultconfig_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-frontpage_image_slideshow-field_image'.
-  $fields['node-frontpage_image_slideshow-field_image'] = array(
+  // Exported field: 'node-frontpage_image_slideshow-field_pece_slideshow_image'.
+  $fields['node-frontpage_image_slideshow-field_pece_slideshow_image'] = array(
     'field_config' => array(
       'active' => 1,
       'cardinality' => 1,
       'deleted' => 0,
       'entity_types' => array(),
-      'field_name' => 'field_image',
+      'field_name' => 'field_pece_slideshow_image',
       'foreign keys' => array(
         'fid' => array(
           'columns' => array(
@@ -159,47 +159,29 @@ function pece_frontpage_slideshow_defaultconfig_field_default_fields() {
       ),
       'entity_type' => 'node',
       'fences_wrapper' => 'div_div_div',
-      'field_name' => 'field_image',
+      'field_name' => 'field_pece_slideshow_image',
       'label' => 'Image',
-      'required' => 0,
+      'required' => 1,
       'settings' => array(
-        'alt_field' => 0,
+        'alt_field' => 1,
         'default_image' => 0,
-        'file_directory' => '',
+        'file_directory' => 'slideshow',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
-        'max_resolution' => '',
-        'min_resolution' => '',
-        'title_field' => 0,
+        'max_resolution' => '1920x460',
+        'min_resolution' => '960x460',
+        'title_field' => 1,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
         'active' => 1,
         'module' => 'image',
         'settings' => array(
-          'allowed_schemes' => array(
-            'private' => 0,
-            'public' => 'public',
-            'vimeo' => 0,
-            'youtube' => 0,
-          ),
-          'allowed_types' => array(
-            'audio' => 0,
-            'document' => 0,
-            'image' => 'image',
-            'video' => 0,
-          ),
-          'browser_plugins' => array(
-            'media_default--media_browser_1' => 0,
-            'media_default--media_browser_my_files' => 0,
-            'media_internet' => 0,
-            'upload' => 0,
-          ),
           'manualcrop_crop_info' => 1,
           'manualcrop_default_crop_area' => 1,
           'manualcrop_enable' => 0,
           'manualcrop_inline_crop' => 0,
-          'manualcrop_instant_crop' => FALSE,
+          'manualcrop_instant_crop' => 0,
           'manualcrop_instant_preview' => 1,
           'manualcrop_keyboard' => 1,
           'manualcrop_maximize_default_crop_area' => 0,
@@ -555,35 +537,45 @@ function pece_frontpage_slideshow_defaultconfig_user_default_permissions() {
   // Exported permission: 'create frontpage_image_slideshow content'.
   $permissions['create frontpage_image_slideshow content'] = array(
     'name' => 'create frontpage_image_slideshow content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any frontpage_image_slideshow content'.
   $permissions['delete any frontpage_image_slideshow content'] = array(
     'name' => 'delete any frontpage_image_slideshow content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own frontpage_image_slideshow content'.
   $permissions['delete own frontpage_image_slideshow content'] = array(
     'name' => 'delete own frontpage_image_slideshow content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any frontpage_image_slideshow content'.
   $permissions['edit any frontpage_image_slideshow content'] = array(
     'name' => 'edit any frontpage_image_slideshow content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own frontpage_image_slideshow content'.
   $permissions['edit own frontpage_image_slideshow content'] = array(
     'name' => 'edit own frontpage_image_slideshow content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -636,7 +628,7 @@ function pece_frontpage_slideshow_defaultconfig_views_default_views() {
   $handler->display->display_options['style_options']['widgets']['top']['views_slideshow_pager']['weight'] = '1';
   $handler->display->display_options['style_options']['widgets']['top']['views_slideshow_pager']['type'] = 'views_slideshow_pager_fields';
   $handler->display->display_options['style_options']['widgets']['top']['views_slideshow_pager']['views_slideshow_pager_fields_fields'] = array(
-    'field_image' => 0,
+    'field_pece_slideshow_image' => 0,
   );
   $handler->display->display_options['style_options']['widgets']['top']['views_slideshow_controls']['weight'] = '1';
   $handler->display->display_options['style_options']['widgets']['top']['views_slideshow_controls']['type'] = 'views_slideshow_controls_text';
@@ -644,7 +636,7 @@ function pece_frontpage_slideshow_defaultconfig_views_default_views() {
   $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_pager']['weight'] = '1';
   $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_pager']['type'] = 'views_slideshow_pager_fields';
   $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_pager']['views_slideshow_pager_fields_fields'] = array(
-    'field_image' => 0,
+    'field_pece_slideshow_image' => 0,
   );
   $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_controls']['weight'] = '1';
   $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_controls']['type'] = 'views_slideshow_controls_text';
@@ -663,15 +655,15 @@ function pece_frontpage_slideshow_defaultconfig_views_default_views() {
   $handler->display->display_options['style_options']['views_slideshow_cycle']['cleartypenobg'] = 0;
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: Content: Image */
-  $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
-  $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
-  $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
-  $handler->display->display_options['fields']['field_image']['label'] = '';
-  $handler->display->display_options['fields']['field_image']['element_type'] = 'div';
-  $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_image']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_image']['settings'] = array(
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['id'] = 'field_pece_slideshow_image';
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['table'] = 'field_data_field_pece_slideshow_image';
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['field'] = 'field_pece_slideshow_image';
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['label'] = '';
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['element_type'] = 'div';
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['settings'] = array(
     'image_style' => 'pece_frontpage_image_style',
     'image_link' => '',
   );

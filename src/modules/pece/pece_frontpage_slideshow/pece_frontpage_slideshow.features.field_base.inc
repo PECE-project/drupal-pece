@@ -10,13 +10,13 @@
 function pece_frontpage_slideshow_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_image'.
-  $field_bases['field_image'] = array(
+  // Exported field_base: 'field_pece_slideshow_image'.
+  $field_bases['field_pece_slideshow_image'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_image',
+    'field_name' => 'field_pece_slideshow_image',
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
