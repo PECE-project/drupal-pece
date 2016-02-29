@@ -41,16 +41,25 @@
   #main-content
     padding: 0
     font-size: $font-size-large
-    .panel-pane pane-views-panes pane-frontpage-image-slider-panel-pane-1,
-      width: 100%
-      margin: 0
-
+    .pane-frontpage-image-slider-panel-pane-1
+      margin-left: auto
+      margin-right: auto
+      background-color: $color-gray-extra-lighter
+      .pane-content
+        @media (min-width: $screen-xs-min) and (max-width: $screen-xs-max)
+          width: 100%
+        @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max)
+          width: 100%
+        @media (min-width: $screen-md-min) and (max-width: $screen-md-max)
+          width: 960px
+        @media (min-width: $screen-lg-min)
+          width: 960px
     .pane-pece-recent-groups-panel-pane-1,
     .pane-tagclouds-3
-      background-color: $color-gray-extra-lighter
+      background-color: $color-gray-lighter
 
     .pane-pece-recent-artifacts-panel-pane-1
-      background-color: $color-gray-lighter
+      background-color: $color-gray-extra-lighter
 
     .pane-pece-recent-groups-panel-pane-1,
     .pane-pece-recent-artifacts-panel-pane-1,
