@@ -309,6 +309,16 @@
       tags:
         - drupal-kw
 
+    # Install: NVM and NodeJS packages
+    - role: g-div.nvm
+      nvm_user: "{{ app_user }}"
+      nvm_version: "v0.24.0"
+      nvm_node_version: "{{ node_version }}"
+      nvm_profile_file: "/home/{{ app_user }}/.profile"
+      nvm_packages:
+        - gulp
+        - bower
+
   tasks:
     # - name: Install Kraftwagen Drush module.
     #   git: >
