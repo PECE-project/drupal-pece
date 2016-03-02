@@ -9,6 +9,7 @@ var SamplePage = function() {
 
   // Define sample attributes.
   this.body = element(by.css('body'));
+  this.accessDenied = element(by.id('page-title'));
 
   //Define sample methods.
   // The url argument is optional, if not set it just goes to the baseUrl defined in the conf.js file.

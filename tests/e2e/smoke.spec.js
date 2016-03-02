@@ -40,6 +40,30 @@ describe('PECE Smoke test', function() {
       }
     },
     {
+      type: 'user',
+      data: {
+        name: 'smoke-test-user-4',
+        mail: 'smoke@test-user-4.com',
+        pass: '123123',
+        roles: [
+          'contributor',
+          'researcher'
+        ]
+      }
+    },
+    {
+      type: 'user',
+      data: {
+        name: 'smoke-test-user-5',
+        mail: 'smoke@test-user-5.com',
+        pass: '123123',
+        roles: [
+          'contributor',
+          'researcher'
+        ]
+      }
+    },
+    {
       type: 'term',
       data: {
         type: 'pece_tags',
@@ -51,7 +75,7 @@ describe('PECE Smoke test', function() {
       data: {
         type: 'pece_artifact_text',
         title: 'Smoke test artifact text',
-        field_pece_tags: [Seeds.parser(3, 'tid')]
+        field_pece_tags: [Seeds.parser(5, 'tid')]
       }
     },
     {
@@ -66,7 +90,7 @@ describe('PECE Smoke test', function() {
       data: {
         type: 'pece_sub_logic',
         title: 'Substantive logic test',
-        field_pece_tags: [Seeds.parser(3, 'tid')],
+        field_pece_tags: [Seeds.parser(5, 'tid')],
         field_pece_sub_logic_citation_link: '',
         body: 'Substantive logic body',
         field_pece_uri: 'logic body uri'
@@ -265,4 +289,23 @@ describe('PECE Smoke test', function() {
     });
   });
 
+  it( 'Access denied for panopoly page', function() {
+    AuthenticationPage.login('smoke-test-user-4', '123123');
+    LegalPage.acceptTerm();
+
+    SamplePage.get('node/add/panopoly-page');
+
+    expect(SamplePage.accessDenied.isDisplayed()).toBe(true);
+    AuthenticationPage.logout();
+  });
+
+  it( 'Access denied for panopoly landing page', function() {
+    AuthenticationPage.login('smoke-test-user-5', '123123');
+    LegalPage.acceptTerm();
+
+    SamplePage.get('node/add/panopoly-landing-page');
+
+    expect(SamplePage.accessDenied.isDisplayed()).toBe(true);
+    AuthenticationPage.logout();
+  });
 });
