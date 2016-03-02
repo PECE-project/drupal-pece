@@ -1,13 +1,7 @@
----
-core: 7.x
-api: 2
+core = 7.x
+api = 2
 
-; =====================
-; Debuging
-; =====================
-
-projects:
-   subdir: dev
+;defaults[projects][subdir] = dev
 
 ; =====================
 ; Other
@@ -15,6 +9,7 @@ projects:
 
 projects[devel][subdir] = dev
 projects[drush_clone][subdir] = dev
+projects[drupal_ipsum][subdir] = dev
 projects[drush_entity][subdir] = dev
 projects[module_builder][subdir] = dev
 projects[stage_file_proxy][subdir] = dev

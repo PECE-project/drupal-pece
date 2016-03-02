@@ -161,6 +161,15 @@ projects[panopoly_core][subdir] = contrib
 projects[panopoly_images][version] = 1.28
 projects[panopoly_images][subdir] = contrib
 
+; Panopoly images depending libraries
+libraries[jquery.imagesloaded][download][type] = file
+libraries[jquery.imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz
+libraries[jquery.imagesloaded][download][subtree] = imagesloaded-2.1.2
+
+libraries[jquery.imgareaselect][download][type] = file
+libraries[jquery.imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v0.9.11-rc.1.tar.gz
+libraries[jquery.imgareaselect][download][subtree] = imgareaselect-0.9.11-rc.1
+
 projects[panopoly_theme][version] = 1.28
 projects[panopoly_theme][subdir] = contrib
 
