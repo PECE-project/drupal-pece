@@ -30,12 +30,16 @@
     h2
       display: inline-block
       margin: 10px
+      text-transform: none
 
       & + div
         display: inline-block
         margin-left: 1em
         padding: 0 1em
         background-color: #E2E2E2
+
+        a
+          color: $color-primary
 
   .views-exposed-widgets
     +make-row()
