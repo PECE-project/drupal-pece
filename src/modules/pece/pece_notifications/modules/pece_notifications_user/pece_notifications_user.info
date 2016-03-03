@@ -1,0 +1,10 @@
+name = pece_notifications_user
+core = 7.x
+package = Features
+dependencies[] = ctools
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = user_mail_status_activated_notify
+features[variable][] = user_mail_status_blocked_notify
+features[variable][] = user_mail_status_canceled_notify

@@ -424,6 +424,10 @@ projects[backup_migrate_sftp][version] = 1.0
 projects[r4032login][subdir] = contrib
 projects[r4032login][version] = 1.8
 
+; SMTP Mail
+projects[smtp][subdir] = contrib
+projects[smtp][version] = 1.3
+
 ; Services
 projects[services][subdir] = contrib
 projects[services][version] = 3.12
