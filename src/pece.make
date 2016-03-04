@@ -87,6 +87,13 @@ projects[adminimal_admin_menu][subdir]  = contrib
 projects[coffee][version] = 2.2
 projects[coffee][subdir]  = contrib
 
+projects[fpa][version] = 2.6
+projects[fpa][subdir]  = contrib
+
+projects[filter_perms][version] = 1.0
+projects[filter_perms][subdir]  = contrib
+
+
 ; =====================
 ; Configuration Management
 ; =====================
