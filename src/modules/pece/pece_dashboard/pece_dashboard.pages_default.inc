@@ -117,10 +117,10 @@ function pece_dashboard_default_page_manager_pages() {
   $display->content['new-0fdeb287-7a3c-4ae7-bcbc-3e875e8102f6'] = $pane;
   $display->panels['content'][1] = 'new-0fdeb287-7a3c-4ae7-bcbc-3e875e8102f6';
   $pane = new stdClass();
-  $pane->pid = 'new-177a6356-d733-4073-a894-d7c702bfa6c6';
+  $pane->pid = 'new-caf5f999-9044-4367-b67a-90d64065cf2b';
   $pane->panel = 'content';
   $pane->type = 'views_panes';
-  $pane->subtype = 'pece_recent_artifacts-panel_pane_1';
+  $pane->subtype = 'pece_my_artifacts-panel_pane_1';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
@@ -136,9 +136,9 @@ function pece_dashboard_default_page_manager_pages() {
   $pane->extras = array();
   $pane->position = 2;
   $pane->locks = array();
-  $pane->uuid = '177a6356-d733-4073-a894-d7c702bfa6c6';
-  $display->content['new-177a6356-d733-4073-a894-d7c702bfa6c6'] = $pane;
-  $display->panels['content'][2] = 'new-177a6356-d733-4073-a894-d7c702bfa6c6';
+  $pane->uuid = 'caf5f999-9044-4367-b67a-90d64065cf2b';
+  $display->content['new-caf5f999-9044-4367-b67a-90d64065cf2b'] = $pane;
+  $display->panels['content'][2] = 'new-caf5f999-9044-4367-b67a-90d64065cf2b';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
