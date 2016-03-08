@@ -70,6 +70,44 @@ function pece_artifacts_views_default_views() {
 
   /* Display: Content pane */
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+
+  /* Display: Content pane by user */
+  $handler = $view->new_display('panel_pane', 'Content pane by user', 'panel_pane_2');
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Author uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'node';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'pece_artifact_audio' => 'pece_artifact_audio',
+    'pece_artifact_bundle' => 'pece_artifact_bundle',
+    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
+    'pece_artifact_image' => 'pece_artifact_image',
+    'pece_artifact_pdf' => 'pece_artifact_pdf',
+    'pece_artifact_text' => 'pece_artifact_text',
+    'pece_artifact_video' => 'pece_artifact_video',
+    'pece_artifact_website' => 'pece_artifact_website',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   $translatables['pece_recent_artifacts'] = array(
     t('Master'),
     t('Analyze an artifact'),
@@ -81,6 +119,8 @@ function pece_artifacts_views_default_views() {
     t('Desc'),
     t('Content pane'),
     t('View panes'),
+    t('Content pane by user'),
+    t('All'),
   );
   $export['pece_recent_artifacts'] = $view;
 
