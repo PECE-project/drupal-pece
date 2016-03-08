@@ -11,7 +11,11 @@ include_once 'pece_notifications.features.inc';
  * Implements hook_form_FORM_ID_alter().
  */
 function pece_notifications_form_user_register_form_alter(&$form, &$form_state) {
-  $form['account']['notify']['#default_value'] = 1;
+  global $user;
+
+  if ($user->uid == 1) {
+    $form['account']['notify']['#default_value'] = 1;
+  }
 }
 
 /**
