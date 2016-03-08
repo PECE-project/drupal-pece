@@ -13,7 +13,9 @@ include_once 'pece_notifications.features.inc';
 function pece_notifications_form_user_register_form_alter(&$form, &$form_state) {
   global $user;
 
-  if ($user->uid == 1) {
+  $admin_role = user_role_load(variable_get('user_admin_role', 3));
+
+  if (in_array($admin_role->name, $user->roles) || $user->uid == 1) {
     $form['account']['notify']['#default_value'] = 1;
   }
 }
