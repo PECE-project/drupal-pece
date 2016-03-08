@@ -1,0 +1,30 @@
+.view-id-pece_my_groups,
+.view-id-pece_my_projects
+
+  li.views-row
+    vertical-align: middle
+    border-bottom: 1px dotted $color-primary
+    margin: 0
+    list-style: none
+    display: inline-block
+    padding: 1rem 0
+    width: 100%
+
+    > div
+      display: inline
+
+      &::before
+        @extend %file-type-icon
+        background-color: $color-primary
+        vertical-align: middle
+        margin-right: 1em
+        line-height: 70px
+        display: inline-block
+        opacity: 1
+        width: 70px
+
+.view-id-pece_my_groups li > div::before
+  content: '\f0c0'
+
+.view-id-pece_my_projects li > div::before
+  content: '\f0e8'
