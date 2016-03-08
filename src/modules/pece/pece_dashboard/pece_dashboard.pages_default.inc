@@ -61,6 +61,9 @@ function pece_dashboard_default_page_manager_pages() {
       'content' => NULL,
       'sidebar' => NULL,
     ),
+    'content' => array(
+      'style' => 'tabs',
+    ),
   );
   $display->cache = array();
   $display->title = '';
