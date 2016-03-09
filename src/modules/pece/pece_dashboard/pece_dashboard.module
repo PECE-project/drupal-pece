@@ -38,7 +38,9 @@ function pece_dashboard_block_view($delta = 'dashboard_add_content') {
         '#text' => $node_title,
         '#path' => 'node/add/' . $node_type,
         '#options' => array(
-          'attributes' => array(),
+          'attributes' => array(
+            'class' => 'dashboard-add-content-link'
+          ),
           'html' => TRUE,
         ),
       )
@@ -52,8 +54,6 @@ function pece_dashboard_block_view($delta = 'dashboard_add_content') {
       '#items' => $node_types,
     ),
   );
-
-  // l($links->title, 'node/'. $links->nid)
 
   return $block = array(
     'subject' => $block['subject'],
