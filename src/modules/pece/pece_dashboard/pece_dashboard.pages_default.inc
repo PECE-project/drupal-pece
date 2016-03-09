@@ -142,6 +142,29 @@ function pece_dashboard_default_page_manager_pages() {
   $pane->uuid = 'caf5f999-9044-4367-b67a-90d64065cf2b';
   $display->content['new-caf5f999-9044-4367-b67a-90d64065cf2b'] = $pane;
   $display->panels['content'][2] = 'new-caf5f999-9044-4367-b67a-90d64065cf2b';
+  $pane = new stdClass();
+  $pane->pid = 'new-a6f2d74c-68d6-4670-a3b6-17ecf3d36a20';
+  $pane->panel = 'sidebar';
+  $pane->type = 'block';
+  $pane->subtype = 'pece_dashboard-dashboard_add_content';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 0;
+  $pane->locks = array();
+  $pane->uuid = 'a6f2d74c-68d6-4670-a3b6-17ecf3d36a20';
+  $display->content['new-a6f2d74c-68d6-4670-a3b6-17ecf3d36a20'] = $pane;
+  $display->panels['sidebar'][0] = 'new-a6f2d74c-68d6-4670-a3b6-17ecf3d36a20';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

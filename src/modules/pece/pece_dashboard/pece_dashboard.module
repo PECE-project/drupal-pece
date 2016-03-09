@@ -5,3 +5,58 @@
  */
 
 include_once 'pece_dashboard.features.inc';
+
+/**
+ * Implements hook_block_info().
+ */
+function pece_dashboard_block_info() {
+  $blocks['dashboard_add_content'] = array(
+    'info' => t('Dashboard Add Content'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function pece_dashboard_block_view($delta = 'dashboard_add_content') {
+  $block['subject'] = t('Dashboard Add Content');
+
+  $menu_items = node_type_get_types();
+  $node_types = array();
+
+  foreach ($menu_items as $menu_item) {
+    $node_type = str_replace('_', '-', $menu_item->type);
+
+    $node_title = str_replace('pece-', '', $node_type);
+    $node_title = str_replace('-', ' ', $node_title);
+
+    $node_types[] = array(
+      'data' => array(
+        '#theme' => 'link',
+        '#text' => $node_title,
+        '#path' => 'node/add/' . $node_type,
+        '#options' => array(
+          'attributes' => array(),
+          'html' => TRUE,
+        ),
+      )
+    );
+  }
+
+  $block['content'] = array(
+    'list' => array(
+      '#theme' => 'item_list',
+      '#type' => 'ul',
+      '#items' => $node_types,
+    ),
+  );
+
+  // l($links->title, 'node/'. $links->nid)
+
+  return $block = array(
+    'subject' => $block['subject'],
+    'content' => $block['content'],
+  );
+}
