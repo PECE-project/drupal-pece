@@ -27,10 +27,15 @@ function pece_dashboard_block_view($delta = 'dashboard_add_content') {
   $node_types = array();
 
   foreach ($menu_items as $menu_item) {
-    $node_type = str_replace('_', '-', $menu_item->type);
+    $link_class = '';
 
+    $node_type = str_replace('_', '-', $menu_item->type);
     $node_title = str_replace('pece-', '', $node_type);
     $node_title = str_replace('-', ' ', $node_title);
+
+    if (strpos($node_type, 'pece-artifact') !== false) {
+      $link_class = 'dashboard-artifact-item';
+    }
 
     $node_types[] = array(
       'data' => array(
@@ -39,7 +44,7 @@ function pece_dashboard_block_view($delta = 'dashboard_add_content') {
         '#path' => 'node/add/' . $node_type,
         '#options' => array(
           'attributes' => array(
-            'class' => 'dashboard-add-content-link'
+            'class' => $link_class
           ),
           'html' => TRUE,
         ),
