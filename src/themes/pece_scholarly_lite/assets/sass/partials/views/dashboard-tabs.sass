@@ -33,9 +33,31 @@
   content: '\f0e8'
 
 .pane-pece-dashboard-dashboard-add-content
-  ul li
-    list-style: none
-    margin-left: 0
-    text-transform: capitalize
+  .item-list
+    ul li
+      margin-left: 0
+      list-style: none
+      text-transform: capitalize
+
+.dashboard-artifact-submenu
+  ul
+    display: none
+    padding-left: 0.5em
+
+  .dashboard-artifact-toggle
+    &::before
+      @extend %file-type-icon
+      transition: all 400ms
+      content: "\f0da"
+      display: inline-block
+      width: auto
+      margin-right: 0.25em
+      text-align: left
+      color: $color-primary
+
+    &.opened
+      &::before
+        transform: rotate(90deg)
 
   .dashboard-artifact-item
+    font-size: 0.8em
