@@ -189,6 +189,29 @@ function pece_dashboard_default_page_manager_pages() {
   $display->content['new-c113f8f7-6e9e-4a16-9a84-f4c5b5d7dcfc'] = $pane;
   $display->panels['content'][4] = 'new-c113f8f7-6e9e-4a16-9a84-f4c5b5d7dcfc';
   $pane = new stdClass();
+  $pane->pid = 'new-60cb69ad-36f0-4f50-a301-351064ff312b';
+  $pane->panel = 'content';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_my_analytics-panel_pane_1';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 5;
+  $pane->locks = array();
+  $pane->uuid = '60cb69ad-36f0-4f50-a301-351064ff312b';
+  $display->content['new-60cb69ad-36f0-4f50-a301-351064ff312b'] = $pane;
+  $display->panels['content'][5] = 'new-60cb69ad-36f0-4f50-a301-351064ff312b';
+  $pane = new stdClass();
   $pane->pid = 'new-a6f2d74c-68d6-4670-a3b6-17ecf3d36a20';
   $pane->panel = 'sidebar';
   $pane->type = 'block';
