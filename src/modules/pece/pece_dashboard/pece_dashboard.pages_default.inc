@@ -166,6 +166,29 @@ function pece_dashboard_default_page_manager_pages() {
   $display->content['new-d98f426d-a37e-476c-b537-e12e28c0f32c'] = $pane;
   $display->panels['content'][3] = 'new-d98f426d-a37e-476c-b537-e12e28c0f32c';
   $pane = new stdClass();
+  $pane->pid = 'new-c113f8f7-6e9e-4a16-9a84-f4c5b5d7dcfc';
+  $pane->panel = 'content';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_my_noted_artifacts-panel_pane_1';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 4;
+  $pane->locks = array();
+  $pane->uuid = 'c113f8f7-6e9e-4a16-9a84-f4c5b5d7dcfc';
+  $display->content['new-c113f8f7-6e9e-4a16-9a84-f4c5b5d7dcfc'] = $pane;
+  $display->panels['content'][4] = 'new-c113f8f7-6e9e-4a16-9a84-f4c5b5d7dcfc';
+  $pane = new stdClass();
   $pane->pid = 'new-a6f2d74c-68d6-4670-a3b6-17ecf3d36a20';
   $pane->panel = 'sidebar';
   $pane->type = 'block';
