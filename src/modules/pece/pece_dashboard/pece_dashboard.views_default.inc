@@ -13,7 +13,7 @@ function pece_dashboard_views_default_views() {
   $view = new view();
   $view->name = 'pece_my_analytics';
   $view->description = '';
-  $view->tag = 'default';
+  $view->tag = 'PECE';
   $view->base_table = 'node';
   $view->human_name = 'PECE - My Analytics';
   $view->core = 7;
@@ -22,7 +22,9 @@ function pece_dashboard_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'My Analytics';
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -30,18 +32,34 @@ function pece_dashboard_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Sort criterion: Content: Post date */
+  /* Field: Content: Analytic (Question) */
+  $handler->display->display_options['fields']['field_pece_analytic']['id'] = 'field_pece_analytic';
+  $handler->display->display_options['fields']['field_pece_analytic']['table'] = 'field_data_field_pece_analytic';
+  $handler->display->display_options['fields']['field_pece_analytic']['field'] = 'field_pece_analytic';
+  $handler->display->display_options['fields']['field_pece_analytic']['label'] = '';
+  $handler->display->display_options['fields']['field_pece_analytic']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_pece_analytic']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_analytic']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_pece_analytic']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_analytic']['settings'] = array(
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_pece_analytic']['field_api_classes'] = TRUE;
+  /* Sort criterion: COUNT(Content: Post date) */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['group_type'] = 'count';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: Author uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'node';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -54,13 +72,14 @@ function pece_dashboard_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'pece_analytic' => 'pece_analytic',
+    'pece_annotation' => 'pece_annotation',
   );
 
   /* Display: Content pane */
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $translatables['pece_my_analytics'] = array(
     t('Master'),
+    t('My Analytics'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -74,6 +93,7 @@ function pece_dashboard_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
+    t('All'),
     t('Content pane'),
     t('View panes'),
   );
@@ -91,7 +111,7 @@ function pece_dashboard_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Analyze an artifact';
+  $handler->display->display_options['title'] = 'My Artifacts';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -153,7 +173,7 @@ function pece_dashboard_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $translatables['pece_my_artifacts'] = array(
     t('Master'),
-    t('Analyze an artifact'),
+    t('My Artifacts'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -223,8 +243,6 @@ function pece_dashboard_views_default_views() {
   $handler->display->display_options['arguments']['etid']['field'] = 'etid';
   $handler->display->display_options['arguments']['etid']['ui_name'] = 'We pass the user ID as the Entity ID.';
   $handler->display->display_options['arguments']['etid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['etid']['title_enable'] = TRUE;
-  $handler->display->display_options['arguments']['etid']['title'] = '%1\'s groups';
   $handler->display->display_options['arguments']['etid']['default_argument_type'] = 'current_user';
   $handler->display->display_options['arguments']['etid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['etid']['summary']['format'] = 'default_summary';
@@ -282,7 +300,6 @@ function pece_dashboard_views_default_views() {
     t('User is not a member of any group.'),
     t('Group node from OG membership'),
     t('All'),
-    t('%1\'s groups'),
     t('Content pane'),
     t('View panes'),
   );
@@ -300,6 +317,7 @@ function pece_dashboard_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'My Memos';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -349,6 +367,7 @@ function pece_dashboard_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $translatables['pece_my_memos'] = array(
     t('Master'),
+    t('My Memos'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -380,6 +399,7 @@ function pece_dashboard_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'My Noted Artifacts';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -400,7 +420,7 @@ function pece_dashboard_views_default_views() {
   $handler->display->display_options['fields']['field_pece_artifact']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['field_pece_artifact']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_pece_artifact']['settings'] = array(
-    'link' => 0,
+    'link' => 1,
   );
   $handler->display->display_options['fields']['field_pece_artifact']['field_api_classes'] = TRUE;
   /* Sort criterion: COUNT(DISTINCT Content: Post date) */
@@ -437,6 +457,7 @@ function pece_dashboard_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $translatables['pece_my_noted_artifacts'] = array(
     t('Master'),
+    t('My Noted Artifacts'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -468,6 +489,7 @@ function pece_dashboard_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'My Projects';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -509,8 +531,6 @@ function pece_dashboard_views_default_views() {
   $handler->display->display_options['arguments']['etid']['field'] = 'etid';
   $handler->display->display_options['arguments']['etid']['ui_name'] = 'We pass the user ID as the Entity ID.';
   $handler->display->display_options['arguments']['etid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['etid']['title_enable'] = TRUE;
-  $handler->display->display_options['arguments']['etid']['title'] = '%1\'s groups';
   $handler->display->display_options['arguments']['etid']['default_argument_type'] = 'current_user';
   $handler->display->display_options['arguments']['etid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['etid']['summary']['format'] = 'default_summary';
@@ -560,6 +580,7 @@ function pece_dashboard_views_default_views() {
   );
   $translatables['pece_my_projects'] = array(
     t('Master'),
+    t('My Projects'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -576,7 +597,6 @@ function pece_dashboard_views_default_views() {
     t('User is not a member of any group.'),
     t('Group node from OG membership'),
     t('All'),
-    t('%1\'s groups'),
     t('Content pane'),
     t('PECE - My Projects'),
   );
