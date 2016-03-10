@@ -26,6 +26,10 @@ function pece_dashboard_block_view($delta = 'dashboard_add_content') {
   $menu_items = node_type_get_types();
   $node_types = array();
 
+  unset($menu_items['panopoly_landing_page']);
+  unset($menu_items['panopoly_page']);
+  unset($menu_items['pece_about_page']);
+
   foreach ($menu_items as $menu_item) {
     $link_class = '';
 
