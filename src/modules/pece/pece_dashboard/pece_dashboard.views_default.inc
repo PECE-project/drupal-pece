@@ -222,7 +222,7 @@ function pece_dashboard_views_default_views() {
   $view = new view();
   $view->name = 'pece_my_memos';
   $view->description = '';
-  $view->tag = 'default';
+  $view->tag = 'PECE';
   $view->base_table = 'node';
   $view->human_name = 'PECE - My Memos';
   $view->core = 7;
@@ -237,7 +237,7 @@ function pece_dashboard_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';

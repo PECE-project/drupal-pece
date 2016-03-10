@@ -143,6 +143,29 @@ function pece_dashboard_default_page_manager_pages() {
   $display->content['new-caf5f999-9044-4367-b67a-90d64065cf2b'] = $pane;
   $display->panels['content'][2] = 'new-caf5f999-9044-4367-b67a-90d64065cf2b';
   $pane = new stdClass();
+  $pane->pid = 'new-d98f426d-a37e-476c-b537-e12e28c0f32c';
+  $pane->panel = 'content';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_my_memos-panel_pane_1';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 3;
+  $pane->locks = array();
+  $pane->uuid = 'd98f426d-a37e-476c-b537-e12e28c0f32c';
+  $display->content['new-d98f426d-a37e-476c-b537-e12e28c0f32c'] = $pane;
+  $display->panels['content'][3] = 'new-d98f426d-a37e-476c-b537-e12e28c0f32c';
+  $pane = new stdClass();
   $pane->pid = 'new-a6f2d74c-68d6-4670-a3b6-17ecf3d36a20';
   $pane->panel = 'sidebar';
   $pane->type = 'block';
