@@ -21,7 +21,7 @@ function pece_dashboard_block_info() {
  * Implements hook_block_view().
  */
 function pece_dashboard_block_view($delta = 'dashboard_add_content') {
-  $block['subject'] = t('Dashboard Add Content');
+  $block['subject'] = t('Add Content');
 
   $menu_items = node_type_get_types();
   $node_types = array();
