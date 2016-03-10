@@ -219,7 +219,9 @@ function pece_dashboard_views_default_views() {
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['content'] = 'User is not a member of any group.';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'You are not a member of any group yet.';
+  $handler->display->display_options['empty']['area']['format'] = 'panopoly_wysiwyg_text';
   /* Relationship: OG membership: Group Node from OG membership */
   $handler->display->display_options['relationships']['og_membership_related_node_group']['id'] = 'og_membership_related_node_group';
   $handler->display->display_options['relationships']['og_membership_related_node_group']['table'] = 'og_membership';
@@ -297,7 +299,7 @@ function pece_dashboard_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('User is not a member of any group.'),
+    t('You are not a member of any group yet.'),
     t('Group node from OG membership'),
     t('All'),
     t('Content pane'),
@@ -500,11 +502,6 @@ function pece_dashboard_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* No results behavior: Global: Text area */
-  $handler->display->display_options['empty']['area']['id'] = 'area';
-  $handler->display->display_options['empty']['area']['table'] = 'views';
-  $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['content'] = 'User is not a member of any group.';
   /* Relationship: OG membership: Group Node from OG membership */
   $handler->display->display_options['relationships']['og_membership_related_node_group']['id'] = 'og_membership_related_node_group';
   $handler->display->display_options['relationships']['og_membership_related_node_group']['table'] = 'og_membership';
@@ -594,7 +591,6 @@ function pece_dashboard_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('User is not a member of any group.'),
     t('Group node from OG membership'),
     t('All'),
     t('Content pane'),

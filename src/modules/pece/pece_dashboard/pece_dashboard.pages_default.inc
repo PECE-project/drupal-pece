@@ -16,7 +16,25 @@ function pece_dashboard_default_page_manager_pages() {
   $page->admin_title = 'Dashboard';
   $page->admin_description = '';
   $page->path = 'dashboard';
-  $page->access = array();
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'role',
+        'settings' => array(
+          'rids' => array(
+            0 => 2,
+            1 => 3,
+            2 => 4,
+            3 => 6,
+            4 => 5,
+          ),
+        ),
+        'context' => 'logged-in-user',
+        'not' => FALSE,
+      ),
+    ),
+    'logic' => 'and',
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(
