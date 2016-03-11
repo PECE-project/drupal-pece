@@ -35,7 +35,18 @@ function pece_dashboard_default_page_manager_pages() {
     ),
     'logic' => 'and',
   );
-  $page->menu = array();
+  $page->menu = array(
+    'type' => 'normal',
+    'title' => 'Dashboard',
+    'name' => 'user-menu',
+    'weight' => '0',
+    'parent' => array(
+      'type' => 'none',
+      'title' => '',
+      'name' => 'navigation',
+      'weight' => '0',
+    ),
+  );
   $page->arguments = array();
   $page->conf = array(
     'admin_paths' => FALSE,

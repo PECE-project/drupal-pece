@@ -73,3 +73,18 @@ function pece_dashboard_block_view($delta = 'dashboard_add_content') {
     'content' => $block['content'],
   );
 }
+
+/**
+ * Implements hook_menu().
+ */
+function pece_dashboard_menu() {
+  $items['dashboard'] = array(
+    'title' => 'Dashboard',
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'user_page',
+    'access callback' => 'user_is_logged_in',
+    'menu_name' => 'user-menu',
+  );
+
+  return $items;
+}
