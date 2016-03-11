@@ -33,8 +33,12 @@ function pece_dashboard_block_view($delta = 'dashboard_add_content') {
   foreach ($menu_items as $menu_item) {
     $link_class = '';
 
-    $node_type = str_replace('_', '-', $menu_item->type);
+    // We know that's ugly, but the machine names of the node types are static
+    // and were the only information we had to work here.
+    $node_type  = str_replace('_', '-', $menu_item->type);
     $node_title = str_replace('pece-', '', $node_type);
+    $node_title = str_replace('artifact-', '', $node_title);
+    $node_title = str_replace('sub-', 'substantive-', $node_title);
     $node_title = str_replace('-', ' ', $node_title);
 
     if (strpos($node_type, 'pece-artifact') !== false) {

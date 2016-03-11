@@ -84,7 +84,7 @@ function pece_dashboard_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = 'My Dashboard';
+  $display->title = '';
   $display->uuid = 'eb338d0e-e9ec-44fb-b82f-819311de351b';
   $display->content = array();
   $display->panels = array();

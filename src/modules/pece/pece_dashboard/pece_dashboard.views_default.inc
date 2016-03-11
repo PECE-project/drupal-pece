@@ -22,7 +22,7 @@ function pece_dashboard_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'My Analytics';
+  $handler->display->display_options['title'] = 'Analytics';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -79,7 +79,7 @@ function pece_dashboard_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $translatables['pece_my_analytics'] = array(
     t('Master'),
-    t('My Analytics'),
+    t('Analytics'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -111,7 +111,7 @@ function pece_dashboard_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'My Artifacts';
+  $handler->display->display_options['title'] = 'Artifacts';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -173,7 +173,7 @@ function pece_dashboard_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $translatables['pece_my_artifacts'] = array(
     t('Master'),
-    t('My Artifacts'),
+    t('Artifacts'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -205,7 +205,7 @@ function pece_dashboard_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'My Groups';
+  $handler->display->display_options['title'] = 'Groups';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -285,7 +285,7 @@ function pece_dashboard_views_default_views() {
   );
   $translatables['pece_my_groups'] = array(
     t('Master'),
-    t('My Groups'),
+    t('Groups'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -319,7 +319,7 @@ function pece_dashboard_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'My Memos';
+  $handler->display->display_options['title'] = 'Memos';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -369,7 +369,7 @@ function pece_dashboard_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $translatables['pece_my_memos'] = array(
     t('Master'),
-    t('My Memos'),
+    t('Memos'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -401,7 +401,7 @@ function pece_dashboard_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'My Noted Artifacts';
+  $handler->display->display_options['title'] = 'Annotated Artifacts';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -459,7 +459,7 @@ function pece_dashboard_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $translatables['pece_my_noted_artifacts'] = array(
     t('Master'),
-    t('My Noted Artifacts'),
+    t('Annotated Artifacts'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -491,7 +491,7 @@ function pece_dashboard_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'My Projects';
+  $handler->display->display_options['title'] = 'Projects';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -577,7 +577,7 @@ function pece_dashboard_views_default_views() {
   );
   $translatables['pece_my_projects'] = array(
     t('Master'),
-    t('My Projects'),
+    t('Projects'),
     t('more'),
     t('Apply'),
     t('Reset'),
