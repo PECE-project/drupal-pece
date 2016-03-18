@@ -480,7 +480,7 @@ function pece_artifacts_field_default_field_instances() {
     'fences_wrapper' => 'div',
     'field_name' => 'field_pece_uri',
     'label' => 'URI',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'linkit' => array(
         'button_text' => 'Search',

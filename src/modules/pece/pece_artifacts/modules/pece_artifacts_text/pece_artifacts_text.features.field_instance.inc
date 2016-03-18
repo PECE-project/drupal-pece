@@ -541,7 +541,7 @@ function pece_artifacts_text_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_pece_uri',
     'label' => 'URI',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'linkit' => array(
         'button_text' => 'Search',
