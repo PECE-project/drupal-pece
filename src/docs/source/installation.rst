@@ -28,7 +28,7 @@ research purposes:
     git clone https://github.com/PECE-project/drupal-pece.git
 
 To use the development source files, you will need to follow special instructions
-to install and use `Kraftwagen <https://github.com/kraftwagen/kraftwagen>_` as a build and 
+to install and use `Kraftwagen <https://github.com/kraftwagen/kraftwagen>`_ as a build and 
 deployment tool. See the sub-section on `Development`_ below.
 
 
@@ -46,7 +46,7 @@ so you do not need to worry about them when downloading the tarball or cloning
 the development repo for generating a customized build. All the backend 
 dependencies, however, must be configured. It is out of the scope of this document
 how to configure the backend. Follow the Drupal.org documentation, if you need
-help `getting started <https://www.drupal.org/documentation/install>`_.
+help `getting started <https://www.drupal.org/documentation/install/>`_.
 
 
 Development 
@@ -86,12 +86,12 @@ These dependencies include:
 
 * nginx-extras
 * php5-dev
-* uploadprogress (installed via PHP pear)
+* uploadprogress (installed via PHP ``pear``)
 
 These are necessary for having the upload progress bar working on Nginx, but this
 step is not mandatory. Configuring Nginx is out of the scope of this document. Follow 
-`Perusio's instructions <https://github.com/perusio/drupal-with-nginx>`_for more information 
-on getting Drupal 7 to perform better with Nginx.
+`Perusio\'s instructions <https://github.com/perusio/drupal-with-nginx>`_ for more information 
+on getting Drupal 7 to perform better (than Apache2) with Nginx.
 
 
 Further Information
