@@ -155,10 +155,10 @@ projects[panels][patch][2390803] = https://www.drupal.org/files/issues/panels-fo
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_core][version] = 1.32
+projects[panopoly_core][version] = 1.28
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.32
+projects[panopoly_images][version] = 1.28
 projects[panopoly_images][subdir] = contrib
 
 ; Panopoly images depending libraries
@@ -170,33 +170,33 @@ libraries[jquery.imgareaselect][download][type] = file
 libraries[jquery.imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v0.9.11-rc.1.tar.gz
 libraries[jquery.imgareaselect][download][subtree] = imgareaselect-0.9.11-rc.1
 
-projects[panopoly_theme][version] = 1.32
+projects[panopoly_theme][version] = 1.28
 projects[panopoly_theme][subdir] = contrib
 
-projects[panopoly_magic][version] = 1.32
+projects[panopoly_magic][version] = 1.28
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.32
+projects[panopoly_widgets][version] = 1.28
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_admin][version] = 1.32
+projects[panopoly_admin][version] = 1.28
 projects[panopoly_admin][subdir] = contrib
 
-; projects[panopoly_users][version] = 1.32
+; projects[panopoly_users][version] = 1.28
 ; projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.32
+projects[panopoly_pages][version] = 1.28
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_wysiwyg][version] = 1.32
+projects[panopoly_wysiwyg][version] = 1.28
 projects[panopoly_wysiwyg][subdir] = contrib
 
 projects[panopoly_search][subdir] = contrib
-projects[panopoly_search][version] = 1.32
+projects[panopoly_search][version] = 1.28
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.32
+projects[panopoly_test][version] = 1.27
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
