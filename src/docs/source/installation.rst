@@ -3,17 +3,21 @@ Installing PECE
 ###############
 
 PECE is a Free Software-based Drupal distribution, therefore the standard
-installation procedure for Drupal applies to PECE with a few
-extra dependencies. The distribution is generated through a ``Makefile`` which
-pulls all the dependencies and customizations for PECE.
+installation procedure for Drupal 7 applies to PECE with a few extra dependencies. 
+For development purposes, the procedure is very specific. 
 
+The following instructions have been tested on a Debian 8 (jessie) server. Use this
+version as a guide for the version of the packaged dependencies we mention below.
 
-Obtaining the Distro
---------------------
+Downloading the Distro
+-----------------------
 
-Our distribution is being distributed as a tarball on Github. You can have
-access to the first release, v.1.0, through the link "Releases" on the project's
-Github page.
+Our distribution is currently being developed on Github. You can have to the most 
+updated version following the link "Releases" on the project's git repository:
+
+::
+  
+    https://github.com/PECE-project/pece-distro.git
 
 Alternatively, you can obtain the source code and build the distro yourself if
 you intend to help our team by fixing bugs and extending the platform for your
@@ -23,52 +27,80 @@ research purposes:
 
     git clone https://github.com/PECE-project/drupal-pece.git
 
+To use the development source files, you will need to follow special instructions
+to install and use `Kraftwagen <https://github.com/kraftwagen/kraftwagen>_` as a build and 
+deployment tool. See the sub-section on `Development`_ below.
+
+
 Dependencies
 ------------
 
-PECE has a few extra dependencies in addition to the basic dependencies of
-Drupal, which include:
+PECE has extra dependencies in addition to the ones you will need for Drupal 7 core:
 
-* curl (for the Amber module)
-* php-mcrypt library (for AES encryption support)
+* cURL (for the D7 Amber contributed module)
+* Kraftwagen (for building, updating, and deploying PECE)
+* php-mcrypt (for AES encryption support in backups)
 
-All the platform-specific dependencies are generated in the build process of
-the distro, so you do not need to worry about them when downloading the tarball
-or cloning the repository with the source code. All the extra backend
-dependencies, however, must be configured by the person who is installing the
-platform.
+All the other distro-specific dependencies are generated in the build process, 
+so you do not need to worry about them when downloading the tarball or cloning 
+the development repo for generating a customized build. All the backend 
+dependencies, however, must be configured. It is out of the scope of this document
+how to configure the backend. Follow the Drupal.org documentation, if you need
+help `getting started <https://www.drupal.org/documentation/install>`_.
 
 
-For Developers
---------------
+Development 
+-----------
 
-PECE development is happening on Github, but it will soon be transfered
-to Drupal.org. You can get started by cloning the following repository:
+PECE development is currently happening on Github but we are planning to move to Drupal.org
+soon. To get started, you need to clone the development repository:
 
 ::
 
     https://github.com/PECE-project/drupal-pece.git
 
-In order to build the PECE distro from the devevelopment branch, you need to
+This repository contains the source files in the ``src`` directory, which is basically
+everything you will need from us to build, update, and extend an existent version of
+distro. This  process depends on Kraftwagen and its workflow, so `follow their 
+guide <http://kraftwagen.org/get-started.html>`_ if you need help on how to set it up for an existent Drupal installation.
+
+In order to build the distro from the development repository, you will need to
 install the following dependencies:
 
-* Drush
-* Kraftwagen
-* Node.js
+* Drush (5.x or 6.x)
+* Kraftwagen (1.0rc1)
+* Node.js (0.12.0)
 
-The development branch, ``dev`` contains the following bash scripts which
-execute the ''build' and the 'update' processes.
+Make sure you use the ``master`` branch of the dev repository. Specific instructions
+on how to contribute to the project after you are done setting it up, please follow
+the Contributors guide.
 
-* build.sh
-* update.sh
+The development branch contains the following bash scripts which execute the build 
+and the update processes.
+
+* ``build.sh``
+* ``update.sh``
+
+There are special dependencies if you are planning to use Nginx as the webserver.
+These dependencies include:
+
+* nginx-extras
+* php5-dev
+* uploadprogress (installed via PHP pear)
+
+These are necessary for having the upload progress bar working on Nginx, but this
+step is not mandatory. Configuring Nginx is out of the scope of this document. Follow 
+`Perusio's instructions <https://github.com/perusio/drupal-with-nginx>`_for more information 
+on getting Drupal 7 to perform better with Nginx.
+
 
 Further Information
 -------------------
-For further information on the specifics of the installation process, please
+For further information on the specifics of the Drupal installation process, please
 `read the official Drupal documentation
-<https://www.drupal.org/documentation/install/>`_.
+<https://www.drupal.org/documentation/install>`_.
 
 PECE version 1.0 does not yet have a pre-configured virtual machine image
-distribution. It is in our plans to prepare one. Visit the **Contributors
-Guide** page to learn how you can contribute to the project! 
-
+distribution. It is in our plans to prepare one to make the lives of our
+colleagues in the humanities and social sciences easier. Visit the **Contributors
+Guide** page to learn how you can contribute to the project!
