@@ -1,0 +1,16 @@
+name = PECE Login Redirect
+description = Redirect users to login page upon 403
+core = 7.x
+package = PECE
+version = 7.x-1.0-alpha1
+dependencies[] = defaultconfig
+dependencies[] = r4032login
+features[defaultconfig][] = strongarm:r4032login_access_denied_message
+features[defaultconfig][] = strongarm:r4032login_access_denied_message_type
+features[defaultconfig][] = strongarm:r4032login_default_redirect_code
+features[defaultconfig][] = strongarm:r4032login_display_denied_message
+features[defaultconfig][] = strongarm:r4032login_match_noredirect_pages
+features[defaultconfig][] = strongarm:r4032login_redirect_authenticated_users_to
+features[defaultconfig][] = strongarm:r4032login_user_login_path
+features[defaultconfig][] = strongarm:site_403
+features[features_api][] = api:2
