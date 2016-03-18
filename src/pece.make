@@ -39,7 +39,7 @@ projects[token][subdir] = contrib
 projects[entity][version] = 1.6
 projects[entity][subdir] = contrib
 
-projects[xautoload][version] = 5.5
+projects[xautoload][version] = 5.6
 projects[xautoload][subdir]  = contrib
 
 projects[jquery_update][version] = 2.7
@@ -81,7 +81,7 @@ projects[views_autocomplete_filters][subdir] = contrib
 projects[admin_menu][version] = 3.0-rc5
 projects[admin_menu][subdir]  = contrib
 
-projects[adminimal_admin_menu][version] = 1.6
+projects[adminimal_admin_menu][version] = 1.7
 projects[adminimal_admin_menu][subdir]  = contrib
 
 projects[coffee][version] = 2.2
@@ -214,7 +214,7 @@ projects[radix_views][subdir] = contrib
 ; Interface
 ; =====================
 
-projects[breakpoints][version] = 1.3
+projects[breakpoints][version] = 1.4
 projects[breakpoints][subdir] = contrib
 
 ;projects[breakpointsjs][version] = 2.x-dev
@@ -278,7 +278,7 @@ projects[manualcrop][subdir] = contrib
 projects[image_resize_filter][version] = 1.16
 projects[image_resize_filter][subdir] = contrib
 
-projects[linkit][version] = 3.4
+projects[linkit][version] = 3.5
 projects[linkit][subdir] = contrib
 
 projects[field_group][version] = 1.5
@@ -288,7 +288,7 @@ projects[field_group][subdir] = contrib
 ; Search
 ; =====================
 
-projects[search_api][version] = 1.16
+projects[search_api][version] = 1.17
 projects[search_api][subdir]  = contrib
 
 ; =====================
@@ -301,7 +301,7 @@ projects[radix][subdir] = contrib
 
 ; Adminimal Theme for admin
 projects[adminimal_theme][type] = theme
-projects[adminimal_theme][version] = 1.23
+projects[adminimal_theme][version] = 1.24
 projects[adminimal_theme][subdir] = contrib
 
 ; PECE Base Theme
@@ -359,7 +359,7 @@ projects[l10n_update][version] = 2.0
 
 ; Organic groups
 projects[og][subdir] = contrib
-projects[og][version] = 2.7
+projects[og][version] = 2.8
 
 ; Email
 projects[email][subdir] = contrib
@@ -392,7 +392,7 @@ projects[profile2][patch][] = https://www.drupal.org/files/ctools-profile2_from_
 
 ; GMap
 projects[gmap][subdir] = contrib
-projects[gmap][version] = 2.10
+projects[gmap][version] = 2.11
 
 ; External link
 projects[extlink][subdir] = contrib
@@ -408,7 +408,7 @@ projects[tagclouds][subdir]  = contrib
 
 ; Taxonomy Access Fix
 projects[taxonomy_access_fix][subdir] = contrib
-projects[taxonomy_access_fix][version] = 2.2
+projects[taxonomy_access_fix][version] = 2.3
 
 ; Annotation
 ;projects[annotation][subdir] = contrib
