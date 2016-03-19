@@ -421,6 +421,7 @@ projects[taxonomy_access_fix][version] = 2.2
 ; PDF Reader
 projects[pdf_reader][subdir] = contrib
 projects[pdf_reader][version] = 1.0-rc6
+projects[pdf_reader][patch][] = "./patches/pdf_reader-keydown_event_page_error.patch"
 
 ; Amber
 projects[amber][type] = module
