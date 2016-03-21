@@ -31,7 +31,7 @@ function pece_projects_node_info() {
     'pece_project' => array(
       'name' => t('Project'),
       'base' => 'node_content',
-      'description' => 'Create a project entry.',
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

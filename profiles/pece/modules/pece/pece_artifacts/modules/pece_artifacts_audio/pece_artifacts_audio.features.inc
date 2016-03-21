@@ -27,7 +27,7 @@ function pece_artifacts_audio_node_info() {
     'pece_artifact_audio' => array(
       'name' => t('Artifact - Audio'),
       'base' => 'node_content',
-      'description' => 'Contribute an audio artifact.',
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

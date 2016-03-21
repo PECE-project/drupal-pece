@@ -1,0 +1,185 @@
+
+/**
+ * @file
+ * Defines default templates for hook functions.
+ *
+ * For the tokens that may be used, see
+ * ModuleBuilder\Generator\Module::getReplacements().
+ */
+ 
+== START hook_help ==
+  /* INFO:
+   * The help hook is for displaying helpful messages at the top of pages indicated
+   * by $section to further explain how they work. Adding certain "keywords" to the end of 
+   * a given path (like admin/modules#description) will cause this text to display elsewhere
+   * in the page as well (in this case, in the description section for the given module).
+   */
+  switch ($path) {
+    case 'admin/help#%module':
+      return t("%help");
+    // OPTIONAL: Add additional cases for other paths that should display help text.
+  }
+== END ==
+
+== START hook_menu == 
+  // This is the minimum information you can provide for a menu item.
+  $items['%module'] = array(
+    'title' => 'TODO: Enter menu item title',
+    'page callback' => 'TODO: Enter callback function',
+    'access arguments' => array('TODO: Enter user permissions'),
+  );
+  // This is a menu item for a form.
+  $items['%module/admin'] = array(
+    'title' => 'TODO: Enter menu item title',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('%module_form'),
+    'access arguments' => array('TODO: Enter user permissions'),
+  );
+  // More complex menu item.
+  $items['%module/foo'] = array(
+    'title' => 'TODO: Enter menu item title',
+    'description' => 'TODO: Enter description',
+    'page callback' => 'TODO: Enter callback function',
+    'page arguments' => array(), // An array of arguments to pass to the page callback function. Integer values pass the corresponding URL component.
+    'access callback' => '', // defaults to user_access()
+    'access arguments' => array('TODO: Enter user permissions'),
+    'weight' => 0,
+    'type' => MENU_NORMAL_ITEM, // One of MENU_NORMAL_ITEM / MENU_CALLBACK / MENU_SUGGESTED_ITEM / MENU_LOCAL_TASK / MENU_DEFAULT_LOCAL_TASK
+    'file' => '%module.admin.inc',
+    'menu_name' => '', // Menu to place this item in.
+    'title callback' => '', // Function to generate the title, defaults to t(). 
+    'title arguments' => array(), // Arguments to send to t() or your custom callback. 
+  );
+  // OPTIONAL: Fill in additional menu items
+
+  return $items;
+== END ==
+
+== START hook_permission ==
+  return array(
+    'administer my module' => array(
+      'title' => t('Administer my module'), 
+      'description' => t('Perform administration tasks for my module.'),
+    ),
+  );
+== END ==
+
+
+== START hook_elements ==
+  $type['example'] = array('#property' => t('TODO: Fill in appropriate properties and values for element type.'));
+  // OPTIONAL: Define additional element types.
+  return $type;
+== END ==
+
+== START hook_filter_tips ==
+  // OPTIONAL: If more than one filter was defined in hook_filter, perform switch on $delta
+  switch ($long) {
+    case FALSE:
+      return t("TODO: Enter the filter's short-hand description");
+    case TRUE:
+      return t("TODO: Enter filter's full description");
+  }
+== END ==
+
+== START hook_theme ==
+  return array(
+    'my_simple_theme_function' => array(
+      'variables' => array('arg1' => NULL, 'arg2' => 0, 'arg3' => FALSE),
+    ),
+    'my_form_theme_function' => array(
+      'render element' => 'form',
+    ),
+    'my_theme_template' => array(
+      'variables' => array('arg1' => NULL, 'arg2' => 0, 'arg3' => FALSE),
+      'template' => 'my_theme_template',
+    ),
+  );
+== END ==
+
+== START hook_block_info ==
+  $blocks['my_block'] = array(
+    'info' => t('Block title'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+== END ==
+
+== START hook_block_view ==
+  $block = array();
+
+  switch ($delta) {
+    case 'my_block':
+      $block['subject'] = t('Block title');
+      $block['content'] = array(
+      );
+      break;
+  }
+  return $block;
+== END ==
+
+== START hook_views_api ==
+  return array(
+    'api' => '3.0-alpha1',
+    'path' => drupal_get_path('module', '%module'),
+  );
+== END ==
+
+== START hook_views_data ==
+  // Define the base group of this table. Fields that don't
+  // have a group defined will go into this field by default.
+  $data['%module']['table']['group']  = t('User');
+
+  $data['%module']['table']['join'] = array(
+    'term_data' => array(
+      'left_field' => 'tid',
+      'field' => 'tid',
+    ),
+    'users' => array(
+      'left_field' => 'uid',
+      'field' => 'uid',
+    ),
+  );
+
+  // Simple field
+  $data['%module']['tid'] = array(
+    'title' => t('LABEL'),
+    'help' => t('HELP'),
+    'field' => array(
+      'title' => t('LABEL'),
+      'help' => t('HELP'),
+      'handler' => '%module_handler_field_FIELD_tid',
+      'skip base' => '%module',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument',
+      // todo...
+      'skip base' => '%module',
+    ),
+    'filter' => array(
+      'title' => t('LABEL'),
+      'handler' => 'views_handler_filter',
+    ),
+    'relationship' => array(
+      'title' => t('LABEL'),
+      'label' => t('LABEL'),
+      'help' => t('HELP.'),
+      'base' => 'BASE',
+      'base field' => 'FIELD',
+      'handler' => 'views_handler_relationship',
+      // This allows us to not show this relationship if the base is already
+      // BASE so users won't create circular relationships.
+      'skip base' => array('BASE'),
+    ),
+  );
+
+  return $data;
+== END ==
+
+== START hook_migrate_api ==
+  $api = array(
+    'api' => 2,
+  );
+  return $api;
+}
+== END ==

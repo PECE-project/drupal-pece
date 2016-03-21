@@ -1,0 +1,73 @@
+<?php 
+/**
+ * @file
+ * Helper module to check ability to parse a YAML stream.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function parse_yaml_check_menu() {
+
+  $items = array();
+  $items['admin/config/system/parse_yaml_check'] = array(
+    'title' => 'YAML check',
+    'description' => "Check if a YAML parse is available.",
+    'page callback' => 'parse_yaml_check',
+    'access arguments' => array('access site reports'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+ * Page callback: Check if we have a YAML parser.
+ */
+function parse_yaml_check() {
+  $yaml = <<<EOD
+---
+invoice: 34843
+date: "2001-01-23"
+bill-to: &id001
+  given: Chris
+  family: Dumars
+  address:
+    lines: |-
+      458 Walkman Dr.
+              Suite #292
+    city: Royal Oak
+    state: MI
+    postal: 48046
+ship-to: *id001
+product:
+- sku: BL394D
+  quantity: 4
+  description: Basketball
+  price: 450
+- sku: BL4438H
+  quantity: 1
+  description: Super Hoop
+  price: 2392
+tax: 251.420000
+total: 4443.520000
+comments: Late afternoon is best. Backup contact is Nancy Billsmer @ 338-4338.
+...
+EOD;
+  $parsed = parse_yaml_stream($yaml);
+  if ($parsed) {
+
+    if (function_exists('yaml_parse')){
+      $function = t('<code>yaml_parse</code> (from php-pecl-yaml)');
+    }
+    elseif (function_exists('spyc_load')){
+      $function = t('<code>spyc_load</code> (from Spyc)');
+    }
+    $text = print_r($parsed, TRUE);
+    $build = t('<p>The YAML-parser !function is available. The parsed demo array looks like this:</p>', array('!function' => $function));
+    $build .= '<pre>' . $text . '</pre>';
+  }
+  else {
+    $build = t('<p>Sorry, there is no YAML-parser available.  You need to install one.  Refer to README.md to learn how to.</p>');
+  }
+  return $build;
+}

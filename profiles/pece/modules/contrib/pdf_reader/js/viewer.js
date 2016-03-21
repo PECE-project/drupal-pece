@@ -2009,29 +2009,29 @@ window.addEventListener('keydown', function keydown(evt) {
     curElement = curElement.parentNode;
   }
 
-  if (cmd == 0) { // no control key pressed at all.
-    switch (evt.keyCode) {
-      case 37: // left arrow
-      case 75: // 'k'
-      case 80: // 'p'
-        PDFView.page--;
-        handled = true;
-        break;
-      case 39: // right arrow
-      case 74: // 'j'
-      case 78: // 'n'
-        PDFView.page++;
-        handled = true;
-        break;
-
-      case 32: // spacebar
-        if (PDFView.isFullscreen) {
-          PDFView.page++;
-          handled = true;
-        }
-        break;
-    }
-  }
+//  if (cmd == 0) { // no control key pressed at all.
+//    switch (evt.keyCode) {
+//      case 37: // left arrow
+//      case 75: // 'k'
+//      case 80: // 'p'
+//        PDFView.page--;
+//        handled = true;
+//        break;
+//      case 39: // right arrow
+//      case 74: // 'j'
+//      case 78: // 'n'
+//        PDFView.page++;
+//        handled = true;
+//        break;
+//
+//      case 32: // spacebar
+//        if (PDFView.isFullscreen) {
+//          PDFView.page++;
+//          handled = true;
+//        }
+//        break;
+//    }
+//  }
 
   if (handled) {
     evt.preventDefault();

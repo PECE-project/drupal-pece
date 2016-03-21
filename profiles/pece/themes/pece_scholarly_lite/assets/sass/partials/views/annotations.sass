@@ -8,10 +8,7 @@
 .page-annotations-user,
 .page-annotions-question
   h1
-    text-transform: lowercase
-
-    &::first-letter
-      text-transform: uppercase
+    text-transform: none
 
 .view-display-id-pece_user_artifact_annotations,
 .view-display-id-pece_question_artifact_annotions,
@@ -30,12 +27,16 @@
     h2
       display: inline-block
       margin: 10px
+      text-transform: none
 
       & + div
         display: inline-block
         margin-left: 1em
         padding: 0 1em
         background-color: #E2E2E2
+
+        a
+          color: $color-primary
 
   .views-exposed-widgets
     +make-row()

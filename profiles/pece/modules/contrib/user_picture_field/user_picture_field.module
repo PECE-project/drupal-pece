@@ -1,0 +1,137 @@
+<?php
+
+/**
+ * @file
+ * user picture field
+ */
+ 
+/**
+ * Implements hook_menu().
+ */
+function user_picture_field_menu() { 
+  $items['admin/config/people/user_picture_field'] = array(
+    'title' => 'User picture field',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('user_picture_field_config_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'file' => 'user_picture_field.admin.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_user_insert().
+ */
+function user_picture_field_user_insert(&$edit, $account, $category) {
+  $user_picture_field_source_field = variable_get('user_picture_field_source_field', 'field_user_avatar');
+  $user_picture_field_source_entity = variable_get('user_picture_field_source_entity', 'user');
+  $fid = 0;
+  if ($user_picture_field_source_entity == 'user') {
+    if (isset($account->{$user_picture_field_source_field})) {
+      foreach ($account->{$user_picture_field_source_field} as $langcode => $items) {
+        if (isset($items[0]['fid'])) {
+          $fid = $items[0]['fid'];
+          break;
+        }
+        else {
+          $field_info = field_info_field($user_picture_field_source_field);
+          if (!empty($field_info['settings']['default_image'])) {
+            $fid = $field_info['settings']['default_image'];
+            break;
+          }
+        }
+
+      }
+    }
+  }
+  elseif ($user_picture_field_source_entity == 'profile2') {
+    $user_picture_field_source_bundle = variable_get('user_picture_field_source_bundle', '');
+    $profile = profile2_load_by_user($account, $user_picture_field_source_bundle);
+    if (empty($profile)) {
+      return;
+    }
+    if (isset($profile->{$user_picture_field_source_field})) {
+      foreach ($profile->{$user_picture_field_source_field} as $langcode => $items) {
+        if (isset($items[0]['fid'])) {
+          $fid = $items[0]['fid'];
+          break;
+        }
+        else {
+          $field_info = field_info_field($user_picture_field_source_field);
+          if (!empty($field_info['settings']['default_image'])) {
+            $fid = $field_info['settings']['default_image'];
+            break;
+          }
+        }
+
+      }
+    }
+
+  }
+  if ($fid) {
+    db_update('users')  
+      ->fields(array('picture' => $fid))  
+      ->condition('uid', $account->uid) 
+      ->execute();
+  }
+  //user_save($account);
+}
+
+/**
+ * Implements hook_user_update().
+ */
+function user_picture_field_user_update(&$edit, $account, $category) {
+  user_picture_field_user_insert($edit, $account, $category);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function user_picture_field_form_user_profile_form_alter(&$form, &$form_state) {
+  //remove existing user picture fieldset.
+  if (isset($form['picture'])) {
+    unset($form['picture']);
+  }
+}
+
+/**
+ * Implements hook_profile2_insert().
+ */
+function user_picture_field_profile2_insert($profile) {
+  $user_picture_field_source_entity = variable_get('user_picture_field_source_entity', 'user');
+  $user_picture_field_source_bundle = variable_get('user_picture_field_source_bundle', '');
+  if ($user_picture_field_source_entity == 'profile2' && $user_picture_field_source_bundle == $profile->type) {
+    $fid = 0;
+    $user_picture_field_source_field = variable_get('user_picture_field_source_field', 'field_user_avatar');
+    if (isset($profile->{$user_picture_field_source_field})) {
+      foreach ($profile->{$user_picture_field_source_field} as $langcode => $items) {
+        if (isset($items[0]['fid'])) {
+          $fid = $items[0]['fid'];
+          break;
+        }
+        else {
+          $field_info = field_info_field($user_picture_field_source_field);
+          if (!empty($field_info['settings']['default_image'])) {
+            $fid = $field_info['settings']['default_image'];
+            break;
+          }
+        }
+      }
+    }
+    if ($fid) {
+      db_update('users')  
+        ->fields(array('picture' => $fid))  
+        ->condition('uid', $profile->uid) 
+        ->execute();
+    }
+  }
+
+}
+
+/**
+ * Implements user_picture_field_profile2_update().
+ */
+function user_picture_field_profile2_update($profile) {
+  user_picture_field_profile2_insert($profile);
+}

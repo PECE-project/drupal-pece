@@ -583,10 +583,8 @@ function image_styles() {
           $style['storage'] = IMAGE_STORAGE_DEFAULT;
           foreach ($style['effects'] as $key => $effect) {
             $definition = image_effect_definition_load($effect['name']);
-            if ($definition) {
-              $effect = array_merge($definition, $effect);
-              $style['effects'][$key] = $effect;
-            }
+            $effect = array_merge($definition, $effect);
+            $style['effects'][$key] = $effect;
           }
           $styles[$style_name] = $style;
         }
@@ -837,19 +835,7 @@ function image_style_deliver($style, $scheme) {
       file_download($scheme, file_uri_target($derivative_uri));
     }
     else {
-      $headers = array();
-      foreach (module_implements('file_download') as $module) {
-        $function = $module . '_file_download';
-        $result = $function($image_uri);
-        if ($result == -1) {
-          // Throw away the headers received so far.
-          $headers = array();
-          break;
-        }
-        if (isset($result) && is_array($result)) {
-          $headers = array_merge($headers, $result);
-        }
-      }
+      $headers = file_download_headers($image_uri);
       if (empty($headers)) {
         return MENU_ACCESS_DENIED;
       }

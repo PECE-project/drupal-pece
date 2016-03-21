@@ -1,0 +1,90 @@
+<?php
+/**
+ * @file
+ * Code for the PECE Dashboard feature.
+ */
+
+include_once 'pece_dashboard.features.inc';
+
+/**
+ * Implements hook_block_info().
+ */
+function pece_dashboard_block_info() {
+  $blocks['dashboard_add_content'] = array(
+    'info' => t('Dashboard Add Content'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function pece_dashboard_block_view($delta = 'dashboard_add_content') {
+  $block['subject'] = t('Add Content');
+
+  $menu_items = node_type_get_types();
+  $node_types = array();
+
+  unset($menu_items['panopoly_landing_page']);
+  unset($menu_items['panopoly_page']);
+  unset($menu_items['pece_about_page']);
+
+  foreach ($menu_items as $menu_item) {
+    $link_class = '';
+
+    // We know that's ugly, but the machine names of the node types are static
+    // and were the only information we had to work here.
+    $node_type  = str_replace('_', '-', $menu_item->type);
+    $node_title = str_replace('pece-', '', $node_type);
+    $node_title = str_replace('artifact-', '', $node_title);
+    $node_title = str_replace('sub-', 'substantive-', $node_title);
+    $node_title = str_replace('-', ' ', $node_title);
+
+    if (strpos($node_type, 'pece-artifact') !== false) {
+      $link_class = 'dashboard-artifact-item';
+    }
+
+    $node_types[] = array(
+      'data' => array(
+        '#theme' => 'link',
+        '#text' => $node_title,
+        '#path' => 'node/add/' . $node_type,
+        '#options' => array(
+          'attributes' => array(
+            'class' => $link_class
+          ),
+          'html' => TRUE,
+        ),
+      )
+    );
+  }
+
+  $block['content'] = array(
+    'list' => array(
+      '#theme' => 'item_list',
+      '#type' => 'ul',
+      '#items' => $node_types,
+    ),
+  );
+
+  return $block = array(
+    'subject' => $block['subject'],
+    'content' => $block['content'],
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function pece_dashboard_menu() {
+  $items['dashboard'] = array(
+    'title' => 'Dashboard',
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'user_page',
+    'access callback' => 'user_is_logged_in',
+    'menu_name' => 'user-menu',
+  );
+
+  return $items;
+}

@@ -1,0 +1,565 @@
+<?php
+/**
+ * @file
+ * Drupal Ipsum module.
+ */
+
+/**
+ * Define constants for default vocabularies.
+ */
+define('DRUPAL_IPSUM_VOCAB_DRUPAL', 'drupal');
+define('DRUPAL_IPSUM_VOCAB_CLASSIC', 'classic');
+
+/**
+ * Define constants for text type.
+ */
+define('DRUPAL_IPSUM_TYPE_WORD', 0);
+define('DRUPAL_IPSUM_TYPE_SENTENCE', 1);
+define('DRUPAL_IPSUM_TYPE_PARAGRAPH', 2);
+
+/**
+ * Define contants for starting text.
+ */
+define('DRUPAL_IPSUM_START_ANY', 0);
+define('DRUPAL_IPSUM_START_LOREM', 1);
+define('DRUPAL_IPSUM_START_DRUPAL', 2);
+
+/**
+ * Define content for starting text.
+ */
+define('DRUPAL_IPSUM_TEXT_LOREM', 'Lorem ipsum dolor sit amet');
+define('DRUPAL_IPSUM_TEXT_DRUPAL', 'Drupal ipsum dolor sit modula');
+
+/**
+ * Implements hook_permission().
+ */
+function drupal_ipsum_permission() {
+  return array(
+    'use drupal_ipsum' => array(
+      'title' => t('Use Drupal Ipsum'),
+      'description' => t('Generate Drupal Ipsum filler text'),
+    ),
+    'administer drupal_ipsum' => array(
+      'title' => t('Administer Drupal Ipsum'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function drupal_ipsum_menu() {
+  $items = array();
+
+  // Admin settings form.
+  $items['admin/config/development/drupal_ipsum'] = array(
+    'title' => 'Drupal Ipsum settings',
+    'description' => 'Configure settings for Drupal Ipsum',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('drupal_ipsum_admin_config'),
+    'access arguments' => array('administer drupal_ipsum'),
+    'file' => 'includes/drupal_ipsum.admin.inc',
+  );
+
+  // Drupal Ipsum text generation page.
+  $items['drupal_ipsum'] = array(
+    'title' => 'Generate Drupal Ipsum text',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('drupal_ipsum_generate_form'),
+    'access arguments' => array('use drupal_ipsum'),
+  );
+
+  $items['drupal_ipsum/%'] = array(
+    'title' => 'Generated Drupal Ipsum text',
+    'page callback' => '_drupal_ipsum_show_results',
+    'page arguments' => array(1),
+    'access arguments' => array('use drupal_ipsum'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function drupal_ipsum_theme($existing, $type, $theme, $path) {
+  return array(
+    'drupal_ipsum_results' => array(
+      'template' => 'templates/drupal_ipsum_results',
+      'variables' => array('drupal_ipsum_text' => NULL, 'drupal_ipsum_form' => NULL),
+    ),
+  );
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Adds Drupal Ipsum options to node type forms.
+ */
+function drupal_ipsum_form_node_type_form_alter(&$form, $form_state) {
+  $type = $form['#node_type']->type;
+  $form['#submit'][] = 'drupal_ipsum_node_type_form_submit';
+  $varname = "drupal_ipsum_{$type}_enable";
+  $enabled = variable_get($varname, FALSE);
+
+  $form['drupal_ipsum'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Drupal Ipsum settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#group' => 'additional_settings',
+    '#attached' => array(
+      'js' => array(drupal_get_path('module', 'drupal_ipsum') . '/js/drupal_ipsum_form.js'),
+    ),
+    '#attributes' => array('class' => array('drupal_ipsum-form')),
+    '#tree' => TRUE,
+  );
+
+  $form['drupal_ipsum'][$varname] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Drupal Ipsum'),
+    '#description' => t('Check this option to enable "Fill with Drupal Ipsum text" checkbox on text fields for this content type'),
+    '#default_value' => $enabled,
+  );
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * Alter node forms to add Drupal Ipsum fields.
+ */
+function drupal_ipsum_form_node_form_alter(&$form, &$form_state) {
+  $type = $form_state['node']->type;
+
+  if (variable_get("drupal_ipsum_{$type}_enable", FALSE) && user_access('use drupal_ipsum')) {
+    $allowed_types = array('text', 'text_with_summary', 'text_long', 'textfield');
+    drupal_alter('drupal_ipsum_allowed_inputs', $allowed_types);
+    $added = FALSE;
+
+    if (isset($form_state['field'])) {
+      // Add "Fill field with Drupal Ipsum content" checkbox to all text fields.
+      foreach ($form_state['field'] as $k => $v) {
+        // Each field can have its own language.
+        $lang = $form[$k]['#language'];
+        if (in_array($v[$lang]['field']['type'], $allowed_types)) {
+          _drupal_ipsum_form_add_field($form, $k, $v[$lang]['instance']['label']);
+          $added = TRUE;
+        }
+      }
+    }
+
+    // Add "Fill field with Drupal Ipsum content" checkbox to title field.
+    if (isset($form['title']) && in_array($form['title']['#type'], $allowed_types)) {
+      _drupal_ipsum_form_add_field($form, 'title', 'Title');
+      $added = TRUE;
+    }
+
+    if ($added) {
+      // Add validate callback, make sure its the first one to bypass required
+      // errors on fields filled with Drupal Ipsum text.
+      array_unshift($form['#validate'], 'drupal_ipsum_node_form_validate');
+    }
+  }
+}
+
+/**
+ * Submit callback.
+ *
+ * @see drupal_ipsum_form_node_type_form_alter()
+ */
+function drupal_ipsum_node_type_form_submit(&$form, &$form_state) {
+  $values =& $form_state['values'];
+  $type = $values['type'];
+
+  if (strpos($values['op'], 'Delete') === 0 || $form_state['triggering_element']['#parents'][0] === 'delete') {
+    // Deleting content type, therefore delete all Drupal Ipsum variables related to it.
+    foreach ($values['drupal_ipsum'] as $name => $value) {
+      variable_del($name);
+    }
+  }
+  else {
+    $new = empty($values['old_type']);
+
+    foreach ($values['drupal_ipsum'] as $name => $value) {
+      if ($new) {
+        // Complete drupal_ipsum variable names with Content Type name.
+        if ($name === 'drupal_ipsum__enable') {
+          $varname = "drupal_ipsum_{$type}_enable";
+        }
+      }
+      else {
+        $varname = $name;
+      }
+
+      variable_set($varname, $value);
+    }
+
+    // Delete bogus variable that is automatically created.
+    // Ideally we wouldn't allow it to get created but can't seem to work around this.
+    variable_del("drupal_ipsum_{$type}");
+  }
+}
+
+/**
+ * Add Drupal Ipsum checkbox to text fields in a form and add submit callback and javascript.
+ *
+ * @param array $form
+ * @param string|array $field
+ * @param string $label
+ */
+function _drupal_ipsum_form_add_field(&$form, $field, $label = 'field') {
+  $access = array_key_exists('#access', $form[$field]);
+
+  if (!$access || $form[$field]['#access']) {
+    // Add "Fill field with Drupal Ipsum" checkbox.
+    $item = array(
+      '#type' => 'container',
+      '#attributes' => array(
+        'class' => array('drupal_ipsum_checkbox'),
+      ),
+      'drupal_ipsum' => array(
+        '#type' => 'checkbox',
+        '#title' => t('Fill @field field with Drupal Ipsum text', array('@field' => $label)),
+        '#description' => t('This option will override the contents of this field'),
+        '#name' => "drupal_ipsum_{$field}",
+      )
+    );
+    $item = drupal_render($item);
+
+    if (!array_key_exists('#prefix', $form[$field])) {
+      $form[$field]['#prefix'] = '';
+    }
+
+    $form[$field]['#prefix'] .= $item;
+    $form[$field]['#states'] = array(
+      'invisible' => array(
+        "input[name=\"drupal_ipsum_{$field}\"]" => array('checked' => TRUE),
+      ),
+    );
+  }
+}
+
+/**
+ * Validation callback.
+ * Use form_set_value() to fill fields with Drupal Ipsum text.
+ *
+ * @see drupal_ipsum_form_node_form_alter()
+ */
+function drupal_ipsum_node_form_validate(&$form, &$form_state) {
+  foreach ($form_state['input'] as $k => $v) {
+    if (strpos($k, 'drupal_ipsum_') === 0 && $v == 1) {
+      $temp = explode('drupal_ipsum_', $k);
+      if (count($temp) > 1) {
+        if ($temp[1] === 'title') {
+          // If only title failed validation, clear the error.
+          $errors = form_get_errors();
+          if (count($errors) === 1 && isset($errors['title'])) {
+            form_clear_error();
+            drupal_get_messages('error');
+          }
+          form_set_value($form['title'], drupal_ipsum_generate(NULL, NULL, DRUPAL_IPSUM_TYPE_WORD, DRUPAL_IPSUM_START_ANY, FALSE), $form_state);
+        }
+        else {
+          // Use field's language.
+          $lang = $form[$temp[1]]['#language'];
+          $type = $form[$temp[1]][$lang][0]['value']['#type'];
+
+          // Textfield receives words.
+          if ($type === 'textfield') {
+            form_set_value($form[$temp[1]][$lang][0]['value'], drupal_ipsum_generate(NULL, NULL, DRUPAL_IPSUM_TYPE_WORD, DRUPAL_IPSUM_START_ANY, FALSE), $form_state);
+          }
+          // All others receive paragraphs.
+          else {
+            form_set_value($form[$temp[1]][$lang][0]['value'], drupal_ipsum_generate(NULL, NULL, DRUPAL_IPSUM_TYPE_PARAGRAPH, NULL), $form_state);
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Page callback.
+ * Displays the generated text.
+ *
+ * @see drupal_ipsum_menu()
+ */
+function _drupal_ipsum_show_results($hash) {
+  $hash = unserialize(base64_decode($hash));
+  extract($hash);
+
+  if (!isset($vocabulary) || !isset($type) || !isset($length) || !isset($start) || !isset($html)) {
+    drupal_goto('drupal_ipsum');
+    exit;
+  }
+
+  $text = drupal_ipsum_generate($vocabulary, $length, $type, $start, $html);
+  $form = drupal_get_form('drupal_ipsum_generate_form', $vocabulary, $length, $type, $start);
+  $form = drupal_render($form);
+
+  $vocabulary_key = $vocabulary;
+  $drupal_ipsum = Drupal_Ipsum::getInstance();
+  $vocabularies = $drupal_ipsum->getVocabularies();
+  $vocabulary_name = $vocabularies[$vocabulary_key];
+
+  switch ($type) {
+    case DRUPAL_IPSUM_TYPE_WORD:
+      $type_singular = 'word';
+      $type_plural = 'words';
+      break;
+    case DRUPAL_IPSUM_TYPE_SENTENCE:
+      $type_singular = 'sentence';
+      $type_plural = 'sentences';
+      break;
+    case DRUPAL_IPSUM_TYPE_PARAGRAPH:
+      $type_singular = 'paragraph';
+      $type_plural = 'paragraphs';
+      break;
+  }
+
+  // Display confirmation message.
+  $summary = format_plural($length, 'Generated 1 %type_singular of Drupal Ipsum filler text using the %vocabulary vocabulary!', 'Generated @count %type_plural of Drupal Ipsum filler text using the %vocabulary vocabulary!', array('%type_singular' => $type_singular, '%type_plural' => $type_plural, '%vocabulary' => $vocabulary_name));
+  drupal_set_message($summary, 'status', FALSE);
+
+  return array(
+    '#theme' => 'drupal_ipsum_results',
+    '#drupal_ipsum_text' => $text,
+    '#drupal_ipsum_form' => $form,
+  );
+}
+
+/**
+ * Form callback.
+ * Returns the Drupal Ipsum text generation form.
+ *
+ * @see drupal_ipsum_menu()
+ */
+function drupal_ipsum_generate_form($form, &$form_state, $vocabulary = NULL, $length = NULL, $type = NULL, $start = NULL, $html = NULL) {
+  $form += drupal_ipsum_get_form($vocabulary, $length, $type, $start, $html);
+  $form['#after_build'][] = 'drupal_ipsum_generate_form_after_build';
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Generate!'),
+  );
+
+  return $form;
+}
+
+/**
+ * Helper function.
+ * Returns base form for Drupal Ipsum.
+ *
+ * @param string
+ *   The default $vocabulary.
+ * @param int
+ *   The default $length.
+ * @param int
+ *   The default $type (words, sentences, paragraphs).
+ * @param int
+ *   The default $start (words to start with)
+ * @param boolean
+ *   Whether to wrap paragraphs in <p> tags.
+ *
+ * @return array
+ *   A Form API array representing the form.
+ */
+function drupal_ipsum_get_form($vocabulary = NULL, $length = NULL, $type = NULL, $start = NULL, $html = NULL) {
+  $form = array();
+
+  $drupal_ipsum = Drupal_Ipsum::getInstance();
+  $vocabularies = $drupal_ipsum->getVocabularies();
+
+  $form['drupal_ipsum_vocabulary'] = array(
+    '#type' => 'radios',
+    '#title' => t('Vocabulary'),
+    '#options' => $vocabularies,
+    '#default_value' => isset($vocabulary) ? $vocabulary : variable_get('drupal_ipsum_vocabulary', DRUPAL_IPSUM_VOCAB_DRUPAL),
+    '#weight' => -5,
+  );
+
+  $form['drupal_ipsum_type'] = array(
+    '#type' => 'radios',
+    '#title' => t('Type of text'),
+    '#options' => array(
+      DRUPAL_IPSUM_TYPE_WORD => t('Words'),
+      DRUPAL_IPSUM_TYPE_SENTENCE => t('Sentences'),
+      DRUPAL_IPSUM_TYPE_PARAGRAPH => t('Paragraphs'),
+    ),
+    '#default_value' => isset($type) ? $type : variable_get('drupal_ipsum_type', DRUPAL_IPSUM_TYPE_PARAGRAPH),
+    '#weight' => -4,
+  );
+
+  $form['drupal_ipsum_html'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Wrap paragraphs in @p tags', array('@p' => '<p>')),
+    '#default_value' => isset($html) ? $html : variable_get('drupal_ipsum_html', TRUE),
+    '#states' => array(
+      'visible' => array(
+        'input[name="drupal_ipsum_type"]' => array('value' => DRUPAL_IPSUM_TYPE_PARAGRAPH),
+      ),
+    ),
+    '#weight' => -3,
+  );
+
+  $form['drupal_ipsum_length'] = array(
+    '#type' => 'textfield',
+    '#title' => t('How much text'),
+    '#default_value' => isset($length) ? $length : variable_get('drupal_ipsum_length', 5),
+    '#weight' => -2,
+    '#size' => 2,
+  );
+
+  $form['drupal_ipsum_start'] = array(
+    '#type' => 'radios',
+    '#title' => t('Start with'),
+    '#options' => array(
+      DRUPAL_IPSUM_START_ANY => t('Anything'),
+      DRUPAL_IPSUM_START_LOREM => DRUPAL_IPSUM_TEXT_LOREM . '&hellip;',
+      DRUPAL_IPSUM_START_DRUPAL => DRUPAL_IPSUM_TEXT_DRUPAL . '&hellip;',
+    ),
+    '#default_value' => isset($start) ? $start : variable_get('drupal_ipsum_start', DRUPAL_IPSUM_START_DRUPAL),
+    '#weight' => -1,
+  );
+
+  return $form;
+}
+
+/**
+ * After build callback.
+ *
+ * @see drupal_ipsum_generate_form()
+ */
+function drupal_ipsum_generate_form_after_build($element) {
+  drupal_add_css(drupal_get_path('module', 'drupal_ipsum') . '/css/drupal_ipsum.css');
+  drupal_add_js(drupal_get_path('module', 'drupal_ipsum') . '/js/drupal_ipsum.js');
+  return $element;
+}
+
+/**
+ * Validation callback.
+ *
+ * @see drupal_ipsum_generate_form()
+ */
+function drupal_ipsum_generate_form_validate($form, &$form_state) {
+  // Alias for convenience.
+  $values = & $form_state['values'];
+
+  // Load available vocabularies.
+  $drupal_ipsum = Drupal_Ipsum::getInstance();
+  $vocabularies = $drupal_ipsum->getVocabularies();
+
+  // Validate vocabulary.
+  if (!in_array($values['drupal_ipsum_vocabulary'], array_keys($vocabularies))) {
+    form_set_error('drupal_ipsum_vocabulary', t('Invalid vocabulary!'));
+  }
+
+  // Validate type.
+  if (!is_numeric($values['drupal_ipsum_type']) || !($values['drupal_ipsum_type'] >= 0) || !($values['drupal_ipsum_type'] <= 2)) {
+    form_set_error('drupal_ipsum_type', t('Invalid text generation type!'));
+  }
+
+  // Validate start.
+  if (!is_numeric($values['drupal_ipsum_start']) || !($values['drupal_ipsum_start'] >= 0) || !($values['drupal_ipsum_start'] <= 2)) {
+    form_set_error('drupal_ipsum_start', t('Invalid text generation start!'));
+  }
+
+  // Validate length.
+  if (!is_numeric($values['drupal_ipsum_length'])) {
+    form_set_error('drupal_ipsum_length', t('Quantity must be numeric!'));
+  }
+}
+
+/**
+ * Submit callback.
+ *
+ * @see drupal_ipsum_generate_form()
+ */
+function drupal_ipsum_generate_form_submit(&$form, &$form_state) {
+  // Alias for convenience.
+  $values = & $form_state['values'];
+
+  $data = array(
+    'vocabulary' => $values['drupal_ipsum_vocabulary'],
+    'type' => $values['drupal_ipsum_type'],
+    'length' => $values['drupal_ipsum_length'],
+    'start' => $values['drupal_ipsum_start'],
+    'html' => $values['drupal_ipsum_html'],
+  );
+
+  $hash = base64_encode(serialize($data));
+  drupal_goto("drupal_ipsum/{$hash}");
+}
+
+/**
+ * Generates Drupal-flavoured lorem-ipsum text and returns results.
+ * This is where the magic happens!
+ *
+ * @param string
+ *   The $vocabulary to use.
+ * @param int
+ *   The number of $type to generate.
+ * @param int
+ *   The $type to generate (words, sentences, paragraphs).
+ * @param int
+ *   Whether to $start with a specific word.
+ * @param boolean
+ *   Whether to wrap paragraphs in <p> tags.
+ *
+ * @return string
+ *   The generated text.
+ */
+function drupal_ipsum_generate($vocabulary = NULL, $length = NULL, $type = NULL, $start = NULL, $markup = NULL) {
+  // Fallback to defaults.
+  if (!isset($vocabulary)) {
+    $vocabulary = variable_get('drupal_ipsum_vocabulary', DRUPAL_IPSUM_VOCAB_DRUPAL);
+  }
+
+  if (!isset($length)) {
+    $length = variable_get('drupal_ipsum_length', 5);
+  }
+
+  if (!isset($type)) {
+    $type = variable_get('drupal_ipsum_type', DRUPAL_IPSUM_TYPE_PARAGRAPH);
+  }
+
+  if (!isset($start)) {
+    $start = variable_get('drupal_ipsum_start', DRUPAL_IPSUM_START_DRUPAL);
+  }
+
+  if (!isset($markup)) {
+    $markup = variable_get('drupal_ipsum_html', TRUE);
+  }
+
+  // Should we start with something specific?
+  $starts_with = NULL;
+  if ($start == DRUPAL_IPSUM_START_DRUPAL) {
+    $starts_with = DRUPAL_IPSUM_TEXT_DRUPAL;
+  }
+  elseif ($start == DRUPAL_IPSUM_START_LOREM) {
+    $starts_with = DRUPAL_IPSUM_TEXT_LOREM;
+  }
+
+  // Grab instance.
+  $drupal_ipsum = Drupal_Ipsum::getInstance();
+
+  // Set vocabulary.
+  $drupal_ipsum->setVocabulary($vocabulary);
+
+  // Generate text based on type.
+  switch ($type) {
+    case DRUPAL_IPSUM_TYPE_WORD:
+      $return = $drupal_ipsum->words($length, $starts_with);
+      break;
+    case DRUPAL_IPSUM_TYPE_SENTENCE:
+      $return = $drupal_ipsum->sentences($length, $starts_with);
+      break;
+    case DRUPAL_IPSUM_TYPE_PARAGRAPH:
+    default:
+      $return = $drupal_ipsum->paragraphs($length, $starts_with, $markup);
+      break;
+  }
+
+  return $return;
+}

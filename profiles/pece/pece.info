@@ -1,9 +1,9 @@
 name = PECE
 description = Install site for PECE
-distribution_name = PECE 
+distribution_name = pece
 core = 7.x
 exclusive = 1
-version = 1.0
+version = 1.0-alpha1
 
 ; Drupal Core
 dependencies[] = block
@@ -34,10 +34,8 @@ dependencies[] = kw_itemnames_entity
 dependencies[] = aes
 dependencies[] = xautoload
 dependencies[] = backports
-dependencies[] = services
-dependencies[] = services_views
- 
-;Panopoly Foundation
+
+; Panopoly Foundation
 dependencies[] = panopoly_core
 dependencies[] = panopoly_images
 dependencies[] = panopoly_theme
@@ -78,12 +76,10 @@ dependencies[] = pece_projects
 dependencies[] = pece_design_logic
 dependencies[] = pece_substantive_logic
 dependencies[] = pece_repository
-dependencies[] = pece_tests
-dependencies[] = pece_amber
-dependencies[] = pece_login_redirect
-dependencies[] = pece_backup
-dependencies[] = pece_api
 dependencies[] = pece_frontpage_slideshow
+dependencies[] = pece_notifications
+dependencies[] = pece_notifications_user
+dependencies[] = pece_dashboard
 
 ; UI & Front-end
 dependencies[] = breakpoints
@@ -132,10 +128,7 @@ dependencies[] = tagclouds
 dependencies[] = views_infinite_scroll
 dependencies[] = login_security
 dependencies[] = aes
-;dependencies[] = amber
-dependencies[] = r4032login
-dependencies[] = backup_migrate
-dependencies[] = backup_migrate_sftp	
+
 
 ; OG modules
 
@@ -156,8 +149,19 @@ dependencies[] = tvi
 dependencies[] = coffee
 dependencies[] = better_exposed_filters
 dependencies[] = views_autocomplete_filters
+dependencies[] = smtp
+dependencies[] = fpa
+dependencies[] = filter_perms
 
-; Testing deps
-env_dependencies[development][] = seeds
-env_dependencies[development][] = pece_tests
+; Development - contrib
 env_dependencies[development][] = devel
+env_dependencies[development][] = devel_generate
+env_dependencies[development][] = drupal_ipsum
+env_dependencies[development][] = environment_indicator
+env_dependencies[development][] = module_builder
+env_dependencies[development][] = search_krumo
+env_dependencies[development][] = seeds
+env_dependencies[development][] = stage_file_proxy
+
+; Development - custom
+env_dependencies[development][] = pece_tests

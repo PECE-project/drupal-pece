@@ -1,0 +1,148 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Search Configuration module.
+ */
+
+/**
+ * Implements hook_schema().
+ *
+ * Note that the schema is more generic than the actual implementation at the
+ * moment. This may be extended to other search indexes.
+ */
+function search_config_schema() {
+  $schema['search_config_exclude'] = array(
+    'description' => 'Provides a way to exclude specific entities from the search results. Note that this does not stop the entities from being indexed.',
+    'fields' => array(
+      'entity_id' => array(
+        'description' => 'The {node}.nid to exclude.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'entity_type' => array(
+        'description' => 'The entity type to exclude.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'exclude' => array(
+        'description' => 'Exclusion flag. Default 1: exclude from public searches.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+        'size' => 'tiny',
+      ),
+    ),
+    'primary key' => array('entity_id', 'entity_type'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ *
+ * This provides the two core user roles permissions to search all content.
+ */
+function search_config_install() {
+  // Ensure that this is in scope.
+  module_load_include('module', 'search_config');
+
+  $insert = db_insert('role_permission')->fields(array('rid', 'permission'));
+  foreach (array(DRUPAL_ANONYMOUS_RID, DRUPAL_AUTHENTICATED_RID) as $rid) {
+    if (!search_config_get_roles_by_permission($rid, 'search all content')) {
+      $insert->values(array(
+        'rid' => $rid,
+        'permission' => 'search all content',
+      ));
+    }
+  }
+
+  $insert->execute();
+
+  // And prevent warnings.
+  $settings = search_config_node_settings();
+  variable_set('search_config', $settings);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function search_config_uninstall() {
+  variable_del('search_config');
+}
+
+/**
+ * Provides the upgrade from 6.x to 7.x
+ *
+ * Minimal upgrade step. Requires manual reconfiguration.
+ */
+function search_config_update_7000() {
+  // Ensure that these are always in scope.
+  module_load_include('module', 'search_config');
+
+  // Ensure that we do not block search by default.
+  $insert = db_insert('role_permission')->fields(array('rid', 'permission'));
+  foreach (array(DRUPAL_ANONYMOUS_RID, DRUPAL_AUTHENTICATED_RID) as $rid) {
+    if (!search_config_get_roles_by_permission($rid, 'search all content')) {
+      $insert->values(array(
+        'rid' => $rid,
+        'permission' => 'search all content',
+      ));
+    }
+  }
+  $insert->execute();
+
+  // And prevent warnings.
+  $settings = search_config_node_settings();
+  variable_set('search_config', $settings);
+
+  // Remove the old 6.x variables.
+  variable_del('search_config_disable_or');
+  variable_del('search_config_disable_phrase');
+  variable_del('search_config_disable_negative');
+  variable_del('search_config_disable_category_all');
+  variable_del('search_config_disable_category');
+  variable_del('search_config_disable_type');
+  variable_del('search_config_disable_index_type');
+}
+
+/**
+ * Creates entity search exclusion table.
+ */
+function search_config_update_7001() {
+  $schema = array(
+    'description' => 'Provides a way to exclude specific entities from the search results. Note that this does not stop the entities from being indexed.',
+    'fields' => array(
+      'entity_id' => array(
+        'description' => 'The {node}.nid to exclude.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'entity_type' => array(
+        'description' => 'The entity type to exclude.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'exclude' => array(
+        'description' => 'Exclusion flag. Default 1: exclude from public searches.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+        'size' => 'tiny',
+      ),
+    ),
+    'primary key' => array('entity_id', 'entity_type'),
+  );
+  db_create_table('search_config_exclude', $schema);
+}

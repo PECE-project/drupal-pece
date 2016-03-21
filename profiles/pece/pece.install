@@ -18,9 +18,8 @@ function pece_install() {
   // Set default blocks.
   pece_set_default_blocks();
 
-  // @TODO: Temporary solution to not send email on user registration.
-  variable_set('user_email_verification', 0);
-
+  // Ommit errors for PECE users.
+  variable_set('error_level', 0);
 
   // Enable default permissions for system roles.
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
@@ -165,4 +164,17 @@ function pece_update_7001() {
   pece_set_menu_item();
   // Set default blocks.
   pece_set_default_blocks();
+}
+
+/**
+ * Revert default config permissions.
+ */
+function pece_update_7002() {
+  features_include();
+  $components = defaultconfig_get_components();
+  $component = array();
+  if (isset($components['user_default_permissions'])) {
+    $component = $components['user_default_permissions'];
+    defaultconfig_component_rebuild($component, 'pece_core');
+  }
 }

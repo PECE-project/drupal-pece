@@ -27,7 +27,7 @@ function pece_artifacts_website_node_info() {
     'pece_artifact_website' => array(
       'name' => t('Artifact - Website'),
       'base' => 'node_content',
-      'description' => 'Contribute a web link.',
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

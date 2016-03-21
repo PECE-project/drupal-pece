@@ -1,0 +1,28 @@
+<?php
+
+/**
+* @file
+* Code for PECE - Notifications.
+*/
+
+include_once 'pece_notifications.features.inc';
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_notifications_form_user_register_form_alter(&$form, &$form_state) {
+  global $user;
+
+  $admin_role = user_role_load(variable_get('user_admin_role', 3));
+
+  if (in_array($admin_role->name, $user->roles) || $user->uid == 1) {
+    $form['account']['notify']['#default_value'] = 1;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_notifications_form_user_cancel_confirm_form_alter(&$form, &$form_state) {
+  $form['user_cancel_notify']['#default_value'] = 1;
+}

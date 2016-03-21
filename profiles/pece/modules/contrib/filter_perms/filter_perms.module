@@ -1,0 +1,208 @@
+<?php
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function filter_perms_form_system_modules_alter(&$form, &$form_state, $form_id) {
+  // Confirmation page for enabling dependencies will also fire this hook.
+  if (isset($form['modules'])) {
+    // Replace anchors in links with url paramaters so server side processing can happen.
+    foreach ($form['modules'] as $group_key => $module_group) {
+      if (is_array($module_group)) {
+        $modules = element_children($module_group);
+        foreach ($modules as $key => $module) {
+          if(!empty($form['modules'][$group_key][$module]['links']['permissions']['#options']['fragment'])) {
+            $form['modules'][$group_key][$module]['links']['permissions']['#href'] .= '/'. $form['modules'][$group_key][$module]['links']['permissions']['#options']['fragment'];
+            unset($form['modules'][$group_key][$module]['links']['permissions']['#options']['fragment']);
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function filter_perms_form_user_admin_permissions_alter(&$form, $form_state, $form_id) {
+  drupal_add_css(drupal_get_path('module', 'filter_perms') . '/filter_perms.css');
+
+  if (isset($_SESSION['filter_perm_roles']) && count($_SESSION['filter_perm_roles'])) {
+    $roles = $_SESSION['filter_perm_roles'];
+    // If '--All Roles' is selected, get all roles.
+    if (isset($roles['-1'])) {
+      $user_roles = user_roles();
+      foreach ($user_roles as $user_role_key => $user_role) {
+        $roles[$user_role_key] = $user_role_key;
+      }
+    }
+  }
+  else {
+    // Until the session variable is set, don't display any roles.
+    $roles = array();
+  }
+  $cp_field_perms = array();
+  if (isset($_SESSION['filter_perm_modules']) && count($_SESSION['filter_perm_modules'])) {
+    $modules = $_SESSION['filter_perm_modules'];
+    // if '--All Modules' is selected, get all modules.
+    if (isset($modules['-1'])) {
+      foreach (module_list(FALSE, FALSE, TRUE) as $module) {
+        if (module_invoke($module, 'permission')) {
+          $modules[$module] = $module;
+        }
+      }
+    }
+  }
+  else {
+    // Until the session variable is set, don't display any modules.
+    $modules = array();
+  }
+
+  $perms = array();
+  foreach ($form['permission'] as $perm_key => $perm) {
+    if (is_numeric($perm_key)) {
+      $perm_module = $perm['#id'];
+      $perm_id = $perm_key;
+    }
+    else {
+      if (in_array($perm_module, $modules)) {
+        $perms[$perm_module][$perm_key] = $perm_id;
+      }
+    }
+  }
+  $old_perms = $form['permission'];
+  $old_checkboxes = $form['checkboxes'];
+  $old_roles = $form['role_names'];
+  $form['permission'] = array();
+  $form['checkboxes'] = array();
+  $form['role_names'] = array();
+  // If either a role or module is not selected, don't display checkboxes.
+  if (count($roles) && count($modules)) {
+    $new_roles = array();
+    foreach ($old_roles as $rid => $role) {
+      if (in_array($rid, $roles)) {
+        $new_roles[$rid] = $role;
+      }
+    }
+    $perm_index = 0;
+    foreach ($perms as $perm_key => $perm) {
+
+      foreach ($perms[$perm_key] as $perm_name => $perm_value) {
+        $form['permission'][$perm_index] = $old_perms[$perm_value];
+        $form['permission'][$perm_name] = $old_perms[$perm_name];
+        foreach ($new_roles as $rid => $role) {
+          $form['checkboxes'][$rid]['#type'] = 'checkboxes';
+          $form['checkboxes'][$rid]['#options'][$perm_name] = '';
+          $form['checkboxes'][$rid]['#default_value'] = $old_checkboxes[$rid]['#default_value'];
+        }
+      }
+      $perm_index++;
+    }
+    $form['role_names'] = $new_roles;
+    foreach ($new_roles as $new_rid => $new_role) {
+      $form['role_names']['#value'][$new_rid] = $new_role['#markup'];
+    }
+    $form['role_names']['#type'] = 'value';
+    //No longer need to add a custom submit handler as core appears to handle partial form submits.
+  }
+  else {
+    // Put some basic info in if filters are not selected.
+    $form['permission']['-1'] = array('#markup' => 'Filter Selection', '#id' => 'empty');
+    $form['permission']['empty'] = array('#type' => 'item', '#markup' => 'Please select at least one value from both the Roles and Modules select boxes above and then click the "Filter Permissions" button');
+    // Initialize an empty array to avoid warnings in theme function.
+    $form['role_names']['#value'] = array();
+    // Remove the Save permissions button when no permissions are present.
+    unset($form['actions']['submit']);
+  }
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function filter_perms_menu_alter(&$callbacks) {
+    $callbacks['admin/people/permissions']['page callback'] = 'filter_perms_admin_perm';
+}
+
+/**
+ * Page callback which appends a filter form to the standard user_admin_permissions form.
+ */
+function filter_perms_admin_perm() {
+  $output = array();
+  $output['filter_perms_admin_perm_filter'] = drupal_get_form('filter_perms_admin_perm_filter');
+  $output['user_admin_permissions'] = drupal_get_form('user_admin_permissions');
+  return $output;
+}
+
+/**
+ * Form providing a multiple select for roles and modules for filtering permissions.
+ */
+function filter_perms_admin_perm_filter() {
+  // @todo: Move this handling to a more appropriate place prior to drupal_goto().
+  $url_parts = explode('/', request_uri());
+  $url_last = $url_parts[count($url_parts) - 1];
+  if (is_numeric($url_last)) {
+    // Role Ids will come from role page referral.
+    $_SESSION['filter_perm_roles'] = array($url_last => $url_last);
+    // Show selected role for all modules.
+    foreach (module_list(FALSE, FALSE, TRUE) as $module) {
+      if (module_invoke($module, 'permission')) {
+        $_SESSION['filter_perm_modules'][$module] = $module;
+      }
+    }
+  }
+  elseif (strstr($url_last, 'module-')) {
+    // module- prefix indicates module page referral.
+    $single_module = str_replace('module-', '', $url_last);
+    $_SESSION['filter_perm_modules'] = array($single_module => $single_module);
+    // Show all roles for selected module.
+    $user_roles = user_roles();
+    foreach ($user_roles as $user_role_key => $user_role) {
+      $_SESSION['filter_perm_roles'][$user_role_key] = $user_role_key;
+    }
+  }
+  if ($url_last != 'permissions' && (strpos($url_last, 'permissions?') === FALSE)) {
+    drupal_goto('admin/people/permissions');
+  }
+  $form['filters'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Permission Filters'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $role_options = user_roles();
+  // Displays all user roles.
+  $form['filters']['roles'] = array(
+    '#title' => t('Roles to display'),
+    '#type' => 'select',
+    '#options' => array('-1' => '--All Roles') + $role_options,
+    '#default_value' => isset($_SESSION['filter_perm_roles']) ? $_SESSION['filter_perm_roles'] : '',
+    '#size' => 8,
+    '#multiple' => TRUE,
+  );
+  $module_options = array();
+  // TRUE for the 3rd parameter forces name sorting instead of by module weight.
+  foreach (module_list(FALSE, FALSE, TRUE) as $module) {
+    if (module_invoke($module, 'permission')) {
+      $module_options[$module] = $module;
+    }
+  }
+  // Displays all modules which implement hook_permission().
+  $form['filters']['modules'] = array(
+    '#title' => t('Modules to display'),
+    '#type' => 'select',
+    '#options' => array('-1' => '--All Modules') + $module_options,
+    '#default_value' => isset($_SESSION['filter_perm_modules']) ? $_SESSION['filter_perm_modules'] : '',
+    '#size' => 8,
+    '#multiple' => TRUE,
+  );
+
+  $form['filters']['submit'] = array('#type' => 'submit', '#value' => t('Filter Permissions'));
+  return $form;
+}
+
+/**
+ * Submit handler for filter_perms_admin_perm_filter form.
+ */
+function filter_perms_admin_perm_filter_submit($form, &$form_state) {
+  $_SESSION['filter_perm_roles'] = $form_state['values']['roles'];
+  $_SESSION['filter_perm_modules'] = $form_state['values']['modules'];
+}

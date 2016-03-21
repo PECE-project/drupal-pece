@@ -38,6 +38,15 @@ function pece_core_modules_enabled($modules) {
 }
 
 /**
+ * Implements hook_menu_alter.
+ */
+function pece_core_menu_alter(&$items) {
+  // We don't use panopoly's default content types.
+  $items['node/add/panopoly-page']['access callback'] = FALSE;
+  $items['node/add/panopoly-landing-page']['access callback'] = FALSE;
+}
+
+/**
  * Implements hook_entity_info_alter().
  */
 function pece_core_entity_info_alter(&$entity_info) {

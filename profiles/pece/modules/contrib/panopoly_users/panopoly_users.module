@@ -1,0 +1,111 @@
+<?php
+
+/**
+ * @file
+ * Common features functionality
+ */
+
+include_once 'panopoly_users.features.inc';
+
+/**
+ * Implements hook_apps_app_info().
+ */
+function panopoly_users_apps_app_info() {
+  return array(
+    'configure form' => 'panopoly_users_configure_form',
+  );
+}
+
+/**
+ * Configuration Form for Panopoly Magic.
+ */
+function panopoly_users_configure_form($form, &$form_state) {
+  $form = array();
+
+  $form['panopoly_users_login_destination'] = array(
+    '#title' => t('Login Destination'),
+    '#type' => 'textfield',
+    '#required' => TRUE,
+    '#default_value' => variable_get('panopoly_users_login_destination', '<front>'),
+    '#description' => t('Where do you want to redirect users when the login using the standard login link? Use &lt;front&gt; for the Drupal frontpage.'),
+  );
+
+  $form['panopoly_users_remove_tabs'] = array(
+    '#title' => t('Remove User Tabs'),
+    '#type' => 'select',
+    '#required' => TRUE,
+    '#options' => array(
+      0 => t('Do Not Remove'),
+      1 => t('Remove'),
+    ),
+    '#default_value' => variable_get('panopoly_users_remove_tabs', 1),
+    '#description' => t('Do you want to remove the login, reset password, and register tabs on the user page? These links will be transferred into the relevant field descriptions instead.'),
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function panopoly_users_ctools_plugin_directory($module, $plugin) {
+  return 'plugins/' . $plugin;
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function panopoly_users_menu_alter(&$items) {
+
+  // Remove tabs from user login page.
+  if (variable_get('panopoly_users_remove_tabs', TRUE)) {
+    $items['user/login']['type'] = MENU_CALLBACK;
+    $items['user/register']['type'] = MENU_CALLBACK;
+    $items['user/password']['type'] = MENU_CALLBACK;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function panopoly_users_form_alter(&$form, $form_state, $form_id) {
+
+  if (variable_get('panopoly_users_remove_tabs', TRUE)) {
+
+    // Add a create account link below the username.
+    if ($form_id == 'user_login' && variable_get('user_register')) {
+      $form['name']['#description'] .= '<br />' . t("If you don't have an username, !create.", array('!create' => l(t("create an account"), 'user/register')));
+    }
+
+    // Add the request password link below the password.
+    if ($form_id == 'user_login') {
+      $form['pass']['#description'] .= '<br />' . t('If you forgot your password, !request.', array('!request' => l(t('request a new password'), 'user/password')));
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function panopoly_users_form_user_admin_settings_alter(&$form, &$form_state) {
+  // We disable all the other picture fields which don't make sense, now that
+  // uploading is handled via the field_user_picture field, rather than care.
+  $hidden_fields = array(
+    'user_picture_path',
+    'user_picture_dimensions',
+    'user_picture_file_size',
+    'user_picture_guidelines',
+  );
+  foreach ($hidden_fields as $name) {
+    $form['personalization']['pictures'][$name]['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_user_login().
+ *
+ * This will redirect the user to a specified page when they log in.
+ */
+function panopoly_users_user_login(&$edit, $account) {
+  $edit['redirect'] = variable_get('panopoly_users_login_destination', '<front>');
+}

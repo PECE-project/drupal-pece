@@ -1,1 +1,1 @@
-The development modules should be placed here.
+This directory contains the Development modules for pece.

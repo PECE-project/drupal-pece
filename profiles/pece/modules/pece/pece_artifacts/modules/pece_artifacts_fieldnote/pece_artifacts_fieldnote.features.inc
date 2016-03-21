@@ -34,7 +34,7 @@ function pece_artifacts_fieldnote_node_info() {
     'pece_artifact_fieldnote' => array(
       'name' => t('Artifact - Fieldnote'),
       'base' => 'node_content',
-      'description' => 'Create a field note.',
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

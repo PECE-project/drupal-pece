@@ -27,7 +27,7 @@ function pece_artifacts_text_node_info() {
     'pece_artifact_text' => array(
       'name' => t('Artifact - Text'),
       'base' => 'node_content',
-      'description' => 'Create a textual artifact.',
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

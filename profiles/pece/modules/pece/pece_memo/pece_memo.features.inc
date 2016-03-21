@@ -27,7 +27,7 @@ function pece_memo_node_info() {
     'pece_memo' => array(
       'name' => t('Memo'),
       'base' => 'node_content',
-      'description' => t('Create a memo.'),
+      'description' => t('PECE\'s memo content type.'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

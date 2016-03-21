@@ -1,0 +1,37 @@
+<?php 
+/**
+ * @file
+ * Wrapper for Drupal 7 to parse a YAML stream.
+ */
+
+if (!function_exists('yaml_parse') && file_exists('sites/all/libraries/spyc-master/Spyc.php')) {
+  require_once 'sites/all/libraries/spyc-master/Spyc.php';
+}
+
+/**
+ * Parse a YAML stream.
+ *
+ * @param $input
+ *   The YAML stream.
+ *
+ * @return mixed
+ *   Array of parsed YAML elements (or FALSE on failure).
+ */
+function parse_yaml_stream($input) {
+  if (function_exists('yaml_parse')) {
+    return yaml_parse($input);
+  }
+
+  if (!function_exists('spyc_load')) {
+    drupal_set_message(t('Parse YAML: Unable to find a YAML parser.'), 'error', FALSE);
+    return FALSE;
+  }
+
+  try {
+    $parsed = spyc_load($input);
+  } catch(Exception $exception) {
+    drupal_set_message(t('Failed parsing YAML stream. ') . $exception->getMessage(), 'error');
+    return FALSE;
+  }
+  return $parsed;
+}

@@ -44,8 +44,9 @@ function pece_frontpage_slideshow_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-frontpage_image_slideshow-field_image'.
-  $field_instances['node-frontpage_image_slideshow-field_image'] = array(
+  // Exported field_instance:
+  // 'node-frontpage_image_slideshow-field_pece_slideshow_image'.
+  $field_instances['node-frontpage_image_slideshow-field_pece_slideshow_image'] = array(
     'bundle' => 'frontpage_image_slideshow',
     'deleted' => 0,
     'description' => '',
@@ -87,47 +88,29 @@ function pece_frontpage_slideshow_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'fences_wrapper' => 'div_div_div',
-    'field_name' => 'field_image',
+    'field_name' => 'field_pece_slideshow_image',
     'label' => 'Image',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
-      'file_directory' => '',
+      'file_directory' => 'slideshow',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
-      'max_resolution' => '',
-      'min_resolution' => '',
-      'title_field' => 0,
+      'max_resolution' => '1920x460',
+      'min_resolution' => '960x460',
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'image',
       'settings' => array(
-        'allowed_schemes' => array(
-          'private' => 0,
-          'public' => 'public',
-          'vimeo' => 0,
-          'youtube' => 0,
-        ),
-        'allowed_types' => array(
-          'audio' => 0,
-          'document' => 0,
-          'image' => 'image',
-          'video' => 0,
-        ),
-        'browser_plugins' => array(
-          'media_default--media_browser_1' => 0,
-          'media_default--media_browser_my_files' => 0,
-          'media_internet' => 0,
-          'upload' => 0,
-        ),
         'manualcrop_crop_info' => 1,
         'manualcrop_default_crop_area' => 1,
         'manualcrop_enable' => 0,
         'manualcrop_inline_crop' => 0,
-        'manualcrop_instant_crop' => FALSE,
+        'manualcrop_instant_crop' => 0,
         'manualcrop_instant_preview' => 1,
         'manualcrop_keyboard' => 1,
         'manualcrop_maximize_default_crop_area' => 0,

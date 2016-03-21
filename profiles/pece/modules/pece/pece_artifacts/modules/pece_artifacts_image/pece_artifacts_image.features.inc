@@ -52,7 +52,7 @@ function pece_artifacts_image_node_info() {
     'pece_artifact_image' => array(
       'name' => t('Artifact - Image'),
       'base' => 'node_content',
-      'description' => 'Create an image artifact.',
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

@@ -37,7 +37,9 @@ function pece_scholarly_lite_preprocess_views_view_unformatted(&$variables) {
 
   // Re-create row classes strings.
   foreach ($variables['rows'] as $id => $content) {
-    $variables['classes'][$id] = $additional_row_classes + $variables['classes'][$id];
-    $variables['classes_array'][$id] = implode(' ', $variables['classes'][$id]);
+    if (isset($variables['classes'][$id])) {
+      $variables['classes'][$id] = $additional_row_classes + $variables['classes'][$id];
+      $variables['classes_array'][$id] = implode(' ', $variables['classes'][$id]);
+    }
   }
 }

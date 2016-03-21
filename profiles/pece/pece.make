@@ -87,6 +87,13 @@ projects[adminimal_admin_menu][subdir]  = contrib
 projects[coffee][version] = 2.2
 projects[coffee][subdir]  = contrib
 
+projects[fpa][version] = 2.6
+projects[fpa][subdir]  = contrib
+
+projects[filter_perms][version] = 1.0
+projects[filter_perms][subdir]  = contrib
+
+
 ; =====================
 ; Configuration Management
 ; =====================
@@ -153,6 +160,15 @@ projects[panopoly_core][subdir] = contrib
 
 projects[panopoly_images][version] = 1.28
 projects[panopoly_images][subdir] = contrib
+
+; Panopoly images depending libraries
+libraries[jquery.imagesloaded][download][type] = file
+libraries[jquery.imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz
+libraries[jquery.imagesloaded][download][subtree] = imagesloaded-2.1.2
+
+libraries[jquery.imgareaselect][download][type] = file
+libraries[jquery.imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v0.9.11-rc.1.tar.gz
+libraries[jquery.imgareaselect][download][subtree] = imgareaselect-0.9.11-rc.1
 
 projects[panopoly_theme][version] = 1.28
 projects[panopoly_theme][subdir] = contrib
@@ -305,23 +321,25 @@ libraries[phpmailer][download][branch] = master
 libraries[autopager][download][type] = file
 libraries[autopager][download][url] = http://jquery-autopager.googlecode.com/files/jquery.autopager-1.0.0.js
 
+;libraries[annotator][download][type] = file
+;libraries[annotator][download][url] = https://github.com/openannotation/annotator/releases/download/v1.2.10/annotator.1.2.10.zip
+;libraries[annotator][download][subtree] = annotator.1.2.10
+
 libraries[spyc][download][type] = file
 libraries[spyc][download][url] = https://github.com/mustangostang/spyc/archive/0.5.1.zip
 libraries[spyc][directory_name] = spyc-master
 
 libraries[imgareaselect][download][type] = file
 libraries[imgareaselect][download][url] = http://odyniec.net/projects/imgareaselect/jquery.imgareaselect-0.9.10.zip
-libraries[imgareaselect][directory_name] = jquery.imgareaselect 
-
+libraries[imgareaselect][directory_name] = jquery.imgareaselect
 
 libraries[aws][download][type] = file
 libraries[aws][download][url] = https://github.com/aws/aws-sdk-php/releases/download/3.15.5/aws.zip
-libraries[aws][directory_name] = aws 
+libraries[aws][directory_name] = aws
 
 libraries[cycle][download][type] = file
-libraries[cycle][download][url] = http://malsup.github.io/min/jquery.cycle.all.min.js 
-libraries[cycle][directory_name] = jquery.cycle 
-
+libraries[cycle][download][url] = http://malsup.github.io/min/jquery.cycle.all.min.js
+libraries[cycle][directory_name] = jquery.cycle
 
 ; =====================
 ; Other
@@ -420,7 +438,11 @@ projects[backup_migrate_sftp][version] = 1.0
 
 ; 403-Redirect
 projects[r4032login][subdir] = contrib
-projects[r4032login][version] = 1.8 
+projects[r4032login][version] = 1.8
+
+; SMTP Mail
+projects[smtp][subdir] = contrib
+projects[smtp][version] = 1.3
 
 ; Services
 projects[services][subdir] = contrib
@@ -432,22 +454,20 @@ projects[services_views][version] = 1.1
 
 ; Views Slideshow
 projects[views_slideshow][subdir] = contrib
-projects[views_slideshow][version] = 3.1 
+projects[views_slideshow][version] = 3.1
 
+; =====================
+; Imports
+; =====================
+; At the end, so that overrides are possible.includes[] = modules/sandbox/taller_entity/taller_entity.make
+; includes[] = path/to/file.make
 
-; ===================================
-; Development Modules - to be removed
-; ===================================
-
-projects[seeds][type] = module
-projects[seeds][download][type] = git
-projects[seeds][download][url] = https://github.com/lucasconstantino/drupal-seeds.git
-projects[seeds][subdir] = dev
-
-projects[devel][subdir] = dev
-
-; ===================================
-; Disabled but kept for compatibility
-; ===================================
+; =====================
+; Disabled.
+; Here are the disabled modules to be deleted from make after all environments
+; have disabled them. We can not remove these modules right now because the
+; build runs before the updates, and it will be impossible to disable a module
+; that no longer exists.
+; =====================
 projects[og_mailinglist][subdir] = contrib
 projects[og_mailinglist][version] = 1.1-alpha2

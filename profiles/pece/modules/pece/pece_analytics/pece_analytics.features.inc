@@ -28,7 +28,7 @@ function pece_analytics_node_info() {
     'pece_analytic' => array(
       'name' => t('Analytic (Question)'),
       'base' => 'node_content',
-      'description' => 'Create a question.',
+      'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',
