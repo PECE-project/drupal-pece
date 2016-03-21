@@ -51,9 +51,9 @@ help `getting started <https://www.drupal.org/documentation/install/>`_.
 Quick Install
 -------------
 
-If you have your web and database server already set-up, you can quickly install PECE following these steps:
+If you have the backend already set-up (including ''Drush''), you can quickly install PECE following these steps:
 
-1. Clone the pece-distro repostory:
+1. Clone the ''pece-distro'' repostory:
 
 :: 
 
@@ -64,7 +64,8 @@ If you have your web and database server already set-up, you can quickly install
 
 ::
     
-    mysql -u YOUR_USER -p -e "CREATE DATABASE YOUR_DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci;"
+    mysql -u $YOUR_USER -p -e "CREATE DATABASE $YOUR_DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci;"
+
     
 3. Copy the database schema (.sql) file to your database:
 
@@ -73,11 +74,12 @@ If you have your web and database server already set-up, you can quickly install
     drush sql-cli < pece-drupal/database.sql
     
     
-4. Edit the file ''sites/default/settings.php'' accordingly with your DB credentials
+4. Edit the file ''sites/default/settings.php'' with your DB credentials accordingly
 
-Make sure you have the **permissions properly set**. We cannot emphasize this enough. 
+The default passwd for the admin user is ''peceadmin'', **make sure to change it** after the first log-in.
+Also, make sure to set the **permissions** properly. We cannot emphasize this enough. 
 The `official Drupal documentation explains <https://www.drupal.org/documentation/install>`_ how to do so, 
-if you need help.
+if you have questions on how to proceed.
 
 
 Development 
