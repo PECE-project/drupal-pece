@@ -48,6 +48,37 @@ dependencies, however, must be configured. It is out of the scope of this docume
 how to configure the backend. Follow the Drupal.org documentation, if you need
 help `getting started <https://www.drupal.org/documentation/install/>`_.
 
+Quick Install
+-------------
+
+If you have your web and database server already set-up, you can quickly install PECE following these steps:
+
+1. Clone the pece-distro repostory:
+
+:: 
+
+    git clone https://github.com/PECE-project/pece-distro.git
+    
+    
+2. Create a database:
+
+::
+    
+    mysql -u YOUR_USER -p -e "CREATE DATABASE YOUR_DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci;"
+    
+3. Copy the database schema (.sql) file to your database:
+
+::
+
+    drush sql-cli < pece-drupal/database.sql
+    
+    
+4. Edit the file ''sites/default/settings.php'' accordingly with your DB credentials
+
+Make sure you have the **permissions properly set**. We cannot emphasize this enough. 
+The `official Drupal documentation explains <https://www.drupal.org/documentation/install>`_ how to do so, 
+if you need help.
+
 
 Development 
 -----------
