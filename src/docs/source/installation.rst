@@ -67,15 +67,16 @@ If you have the backend already set-up (including ''Drush''), you can quickly in
     mysql -u $YOUR_USER -p -e "CREATE DATABASE $YOUR_DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci;"
 
     
-3. Copy the database schema (.sql) file to your database:
+3. Edit the file ''sites/default/settings.php'' with your DB credentials ($YOUR_USER, $YOUR_DB_NAME, and $YOUR_DB_PASSWD)
+
+
+4. Copy the database schema (.sql) file to your database:
 
 ::
 
     drush sql-cli < pece-drupal/database.sql
     
     
-4. Edit the file ''sites/default/settings.php'' with your DB credentials accordingly
-
 The default passwd for the admin user is ''peceadmin'', **make sure to change it** after the first log-in.
 Also, make sure to set the **permissions** properly. We cannot emphasize this enough. 
 The `official Drupal documentation explains <https://www.drupal.org/documentation/install>`_ how to do so, 
