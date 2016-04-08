@@ -212,26 +212,15 @@ Troubleshooting
 ---------------
 Common issues post-installation include:
 
-* **Links do not work:** your webserver is not properly configured to support
-what is called "Clean URLs" on Drupal. Make sure you have your httpd "rewrite"
-rules properly set-up. This configuration can be done in the vhost 
+* **Links do not work:** your webserver is not properly configured to support what is called "Clean URLs" on Drupal. Make sure you have your httpd "rewrite" rules properly set-up. This configuration can be done in the vhost 
 file of your nginx configuration, following the `Perusio guide <https://github.com/perusio/drupal-with-nginx>`_ 
 or using the `default .htaccess file that is provided by default by Drupal <https://github.com/PECE-project/drupal/blob/7.x/.htaccess>`_ if you are running Apache.
 
-* **Permission denied when uploading content:** your filesystem permissions must be 
-set accordingly for the ``public`` and ``private`` directories, since PECE uses 
-both extensively. `Follow this official Drupal tutorial <https://www.drupal.org/node/244924>`_ 
-to configure the permissions properly for both directories where you installed PECE.
+* **Permission denied when uploading content:** your filesystem permissions must be  set accordingly for the ``public`` and ``private`` directories, since PECE uses both extensively. `Follow this official Drupal tutorial <https://www.drupal.org/node/244924>`_ to configure the permissions properly for both directories where you installed PECE.
 
-* **Permission denied when uploading content after configuring filesystem permissions:**
-make sure your ``/tmp`` is also writable and, if you are on a shared host and cannot 
-have access to it, configure Drupal to point to a temporary directory in your 
-``system/files`` path. There is a `discussion about this issue on Drupal.org that
-is helpful <https://www.drupal.org/node/2140629>`_.
+* **Permission denied when uploading content after configuring filesystem permissions:** make sure your ``/tmp`` is also writable and, if you are on a shared host and cannot have access to it, configure Drupal to point to a temporary directory in your ``system/files`` path. There is a `discussion about this issue on Drupal.org that is helpful <https://www.drupal.org/node/2140629>`_.
 
-* **Cannot create users, server internal error:** in our experience, ``php5-mcrypt``
-is probably not installed in your system. Make sure it is properly installed and loaded, 
-by running ``php -m`` in a shell and checking if it is listed.
+* **Cannot create users, server internal error:** in our experience, ``php5-mcrypt`` is probably not installed in your system. Make sure it is properly installed and loaded, by running ``php -m`` in a shell and checking if it is listed.
 
 
 Further Information
