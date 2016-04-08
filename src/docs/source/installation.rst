@@ -83,7 +83,7 @@ If you have the backend already set-up (including ''Drush''), you can quickly in
     
 
 
-Please, observe that this step will only work if ``Drush`` and your ``settings.php`` is properly configured.
+Please observe that this step will only work if ``Drush`` and your ``settings.php`` is properly configured.
 The default passwd for the admin user is ''peceadmin''. **Make sure to change it** after the first log-in.
 Also, make sure to set the **permissions** on the filesystem properly. We cannot emphasize this enough. 
 The `official Drupal documentation explains <https://www.drupal.org/node/244924>`_ how to do so, 
@@ -212,9 +212,7 @@ Troubleshooting
 ---------------
 Common issues post-installation include:
 
-* **Links do not work:** your webserver is not properly configured to support what is called "Clean URLs" on Drupal. Make sure you have your httpd "rewrite" rules properly set-up. This configuration can be done in the vhost 
-file of your nginx configuration, following the `Perusio guide <https://github.com/perusio/drupal-with-nginx>`_ 
-or using the `default .htaccess file that is provided by default by Drupal <https://github.com/PECE-project/drupal/blob/7.x/.htaccess>`_ if you are running Apache.
+* **Links do not work:** your webserver is not properly configured to support what is called "Clean URLs" on Drupal. Make sure you have your httpd "rewrite" rules properly set-up. This configuration can be done in the vhost file of your nginx configuration, following the `Perusio guide <https://github.com/perusio/drupal-with-nginx>`_ or using the `default .htaccess file that is provided by default by Drupal <https://github.com/PECE-project/drupal/blob/7.x/.htaccess>`_ if you are running Apache.
 
 * **Permission denied when uploading content:** your filesystem permissions must be  set accordingly for the ``public`` and ``private`` directories, since PECE uses both extensively. `Follow this official Drupal tutorial <https://www.drupal.org/node/244924>`_ to configure the permissions properly for both directories where you installed PECE.
 
