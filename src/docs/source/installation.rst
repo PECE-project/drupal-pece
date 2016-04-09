@@ -220,6 +220,8 @@ Common issues post-installation include:
 
 * **Cannot create users, server internal error:** in our experience, ``php5-mcrypt`` is probably not installed in your system. Make sure it is properly installed and loaded, by running ``php -m`` in a shell and checking if it is listed.
 
+* **Autocomplete fields do not work, displaying a 404 error:** This is **known issue** for both nginx and apache2 after the upgrade to Drupal 7.39 (and has persisted until Drupal 7.42, which is the version we are using for PECE 1.0-rc2). To solve this problem, you have to make sure /non-clean/ URLs also work. This can be done by configuring your webserver to deal with non-clean URLs for the exception of the autocomplete function. This issue is debated and temporarily solved for `nginx <https://github.com/perusio/drupal-with-nginx/issues/241>`_ here and for `apache2 here <https://www.drupal.org/node/2599326>`_.
+
 
 Further Information
 -------------------
