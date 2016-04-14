@@ -5,12 +5,3 @@
  */
 
 include_once 'pece_artifacts_audio.features.inc';
-
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-function pece_artifacts_audio_form_pece_artifact_audio_node_form_alter(&$form, &$form_state) {
-  if (module_exists('pece_profile')) {
-    array_unshift($form['#validate'], 'pece_profile_check_author');
-  }
-}
