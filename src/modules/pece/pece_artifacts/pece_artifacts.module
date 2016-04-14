@@ -46,7 +46,7 @@ function _pece_artifacts_form_pece_artifact_form_alter(&$form, &$form_state) {
   $form['author']['name']['#required'] = TRUE;
 
   // Hide/show location fieldset based on fieldsite location usage flag.
-  if (!empty($form['field_use_fieldsite_location'])) {
+  if (!empty($form['field_pece_use_fieldsite_location'])) {
     $form['field_pece_location']['#states']['visible']['#edit-field-use-fieldsite-location input'] = array(
       'checked' => FALSE,
     );
@@ -62,7 +62,7 @@ function pece_artifacts_node_presave($node) {
   $artifacts = pece_artifacts_fetch_all();
 
   if (in_array($node->type, $artifacts)) {
-    $use_fieldsite_location = field_get_items('node', $node, 'field_use_fieldsite_location');
+    $use_fieldsite_location = field_get_items('node', $node, 'field_pece_use_fieldsite_location');
     if (!empty($use_fieldsite_location[0]['value'])) {
       // Remove any current data from the artifact's location field.
       $node->field_pece_location[LANGUAGE_NONE] = array();
@@ -91,7 +91,7 @@ function pece_artifacts_node_update($node) {
       $result = $query->entityCondition('entity_type', 'node')
         ->entityCondition('bundle', $artifacts)
         ->fieldCondition('field_pece_fieldsite', 'target_id', $node->nid)
-        ->fieldCondition('field_use_fieldsite_location', 'value', TRUE)
+        ->fieldCondition('field_pece_use_fieldsite_location', 'value', TRUE)
         ->execute();
 
       if (isset($result['node'])) {

@@ -785,69 +785,6 @@ function pece_artifacts_audio_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance:
-  // 'node-pece_artifact_audio-field_use_fieldsite_location'.
-  $field_instances['node-pece_artifact_audio-field_use_fieldsite_location'] = array(
-    'bundle' => 'pece_artifact_audio',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => 'Check this to copy the location from the referenced fieldsite, if any.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 16,
-      ),
-      'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'mini_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'most_recent' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'fences_wrapper' => 'div_div_div',
-    'field_name' => 'field_use_fieldsite_location',
-    'label' => 'Use fieldsite\'s location ',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'display_label' => 1,
-      ),
-      'type' => 'options_onoff',
-      'weight' => 7,
-    ),
-  );
-
   // Exported field_instance: 'node-pece_artifact_audio-og_group_ref'.
   $field_instances['node-pece_artifact_audio-og_group_ref'] = array(
     'bundle' => 'pece_artifact_audio',
