@@ -15,6 +15,10 @@ module.exports.config = {
     timeoutLimit : 5000
   },
 
+  suites: {
+    smoke: 'smoke.spec.js'
+  },
+
   specs: ['spec.js'],
   baseUrl: 'http://dev-pece.rpi.dropit.in/',
 
