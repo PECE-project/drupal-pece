@@ -8,6 +8,21 @@ include_once 'pece_artifacts.features.inc';
 include_once 'pece_artifacts.functions.inc';
 
 /**
+ * Implements hook_pece_artifact_info().
+ */
+function pece_artifacts_pece_artifact_info() {
+  return array(
+    'pece_artifact_audio' => 'pece_artifact_audio',
+    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
+    'pece_artifact_image' => 'pece_artifact_image',
+    'pece_artifact_pdf' => 'pece_artifact_pdf',
+    'pece_artifact_text' => 'pece_artifact_text',
+    'pece_artifact_video' => 'pece_artifact_video',
+    'pece_artifact_website' => 'pece_artifact_website',
+  );
+}
+
+/**
  * Implements hook_form_FORM_ID_alter().
  */
 function pece_artifacts_form_pece_artifact_node_form_alter(&$form, &$form_state) {
@@ -26,4 +41,48 @@ function pece_artifacts_get_types() {
   }
 
   return $artifacts;
+}
+
+/**
+ * Implements hook_node_presave().
+ */
+function pece_artifacts_node_presave($node) {
+  if (in_array($node->type, pece_artifacts_fetch_all())) {
+    $location = field_get_items('node', $node, 'field_pece_location');
+
+    if (empty($location)) {
+      $fieldsite_field = field_get_items('node', $node, 'field_pece_fieldsite');
+
+      if (!empty($fieldsite_field[0]['target_id'])) {
+        $fieldsite = node_load($fieldsite_field[0]['target_id']);
+        $node->field_pece_location = $fieldsite->field_pece_location;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function pece_artifacts_node_update($node) {
+  if ($node->type == 'pece_fieldsite') {
+    $location = field_get_items('node', $node, 'field_pece_location');
+    if (!empty($location)) {
+      $query = new EntityFieldQuery();
+      $result = $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', pece_artifacts_fetch_all())
+        ->fieldCondition('field_pece_fieldsite', 'target_id', $node->nid)
+        ->execute();
+
+      if (isset($result['node'])) {
+        entity_get_controller('node')->resetCache(array($node->nid));
+
+        $items_nids = array_keys($result['node']);
+        $items = entity_load('node', $items_nids);
+        foreach ($items as $item) {
+          node_save($item);
+        }
+      }
+    }
+  }
 }

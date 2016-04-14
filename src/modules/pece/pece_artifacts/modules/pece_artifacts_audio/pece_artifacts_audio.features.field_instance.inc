@@ -65,7 +65,7 @@ function pece_artifacts_audio_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 9,
+      'weight' => 11,
     ),
   );
 
@@ -129,7 +129,7 @@ function pece_artifacts_audio_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 11,
+      'weight' => 13,
     ),
   );
 
@@ -196,7 +196,7 @@ function pece_artifacts_audio_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textarea',
-      'weight' => 7,
+      'weight' => 9,
     ),
   );
 
@@ -385,7 +385,7 @@ function pece_artifacts_audio_field_default_field_instances() {
       'module' => 'creative_commons',
       'settings' => array(),
       'type' => 'select',
-      'weight' => 8,
+      'weight' => 10,
     ),
   );
 
@@ -441,7 +441,7 @@ function pece_artifacts_audio_field_default_field_instances() {
       'module' => 'location_cck',
       'settings' => array(),
       'type' => 'location',
-      'weight' => 13,
+      'weight' => 15,
     ),
   );
 
@@ -656,7 +656,7 @@ function pece_artifacts_audio_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 10,
+      'weight' => 12,
     ),
   );
 
@@ -781,7 +781,64 @@ function pece_artifacts_audio_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 12,
+      'weight' => 14,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-pece_artifact_audio-field_use_fieldsite_location'.
+  $field_instances['node-pece_artifact_audio-field_use_fieldsite_location'] = array(
+    'bundle' => 'pece_artifact_audio',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Check this to copy the location from the referenced fieldsite, if any.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 16,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_use_fieldsite_location',
+    'label' => 'Use fieldsite\'s location ',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 7,
     ),
   );
 
@@ -870,6 +927,7 @@ function pece_artifacts_audio_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Audio');
   t('Author(s)');
+  t('Check this to copy the location from the referenced fieldsite, if any.');
   t('Contributors');
   t('Critical Commentary');
   t('Duration');
@@ -881,6 +939,7 @@ function pece_artifacts_audio_field_default_field_instances() {
   t('Permissions');
   t('Tags');
   t('URI');
+  t('Use fieldsite\'s location ');
 
   return $field_instances;
 }

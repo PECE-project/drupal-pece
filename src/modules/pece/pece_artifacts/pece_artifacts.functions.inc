@@ -18,15 +18,7 @@ function pece_artifacts_alter_artifact_form(&$form, &$form_state) {
  * Get the available Artifacts.
  */
 function pece_artifacts_fetch_all() {
-  $artifacts = array(
-    'pece_artifact_audio',
-    'pece_artifact_fieldnote',
-    'pece_artifact_image',
-    'pece_artifact_pdf',
-    'pece_artifact_text',
-    'pece_artifact_video',
-    'pece_artifact_website',
-  );
-
+  $artifacts = module_invoke_all('pece_artifact_info');
+  drupal_alter('pece_artifact_info', $artifacts);
   return $artifacts;
 }
