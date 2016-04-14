@@ -20,6 +20,7 @@ function pece_access_views_query_alter(&$view, &$query) {
     'pece_user_field_diary',
     'pece_repository',
     'pece_recent_artifacts',
+    'tag_term',
   );
 
   if (in_array($view->name, $views)) {
