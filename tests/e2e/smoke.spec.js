@@ -154,7 +154,7 @@ describe('PECE Smoke test', function() {
       expect(currentUrl).toBe(true);
     });
 
-    expect(firstGroupOnCollaborate.isDisplayed()).toBe(true);
+    expect(firstGroupOnCollaborate.getText()).toEqual('SMOKE TEST GROUP');
   });
 
   it('check that user is directed to the Analyze page', function() {
@@ -165,7 +165,7 @@ describe('PECE Smoke test', function() {
       expect(currentUrl).toBe(true);
     });
 
-    expect(firstArtifactOnAnalyze.isDisplayed()).toBe(true);
+    expect(firstArtifactOnAnalyze.getText()).toEqual('SMOKE TEST ARTIFACT TEXT');
   });
 
   it('check that user is directed to the Discover page', function() {
@@ -176,7 +176,7 @@ describe('PECE Smoke test', function() {
       expect(currentUrl).toBe(true);
     });
 
-    expect(firstContentOnDiscovery.isDisplayed()).toBe(true);
+    expect(firstContentOnDiscovery.getText()).toEqual('SMOKE TEST ARTIFACT TEXT');
   });
 
   it('check that user is directed to the clicked group page', function() {
