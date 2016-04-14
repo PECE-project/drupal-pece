@@ -5,7 +5,6 @@
  */
 
 include_once 'pece_artifacts.features.inc';
-include_once 'pece_artifacts.functions.inc';
 
 /**
  * Implements hook_pece_artifact_info().
@@ -26,6 +25,8 @@ function pece_artifacts_pece_artifact_info() {
  * Implements hook_form_alter().
  */
 function pece_artifacts_form_alter(&$form, &$form_state, $form_id) {
+  module_load_include('inc', 'pece_artifacts', 'pece_artifacts.functions');
+
   $artifacts = pece_artifacts_fetch_all();
   $is_node_form = $form['#node_edit_form'] && isset($form['#node']->type);
   $is_artifact_form = $is_node_form && in_array($form['#node']->type, $artifacts);
@@ -56,7 +57,11 @@ function _pece_artifacts_form_pece_artifact_form_alter(&$form, &$form_state) {
  * Implements hook_node_presave().
  */
 function pece_artifacts_node_presave($node) {
-  if (in_array($node->type, pece_artifacts_fetch_all())) {
+  module_load_include('inc', 'pece_artifacts', 'pece_artifacts.functions');
+
+  $artifacts = pece_artifacts_fetch_all();
+
+  if (in_array($node->type, $artifacts)) {
     $use_fieldsite_location = field_get_items('node', $node, 'field_use_fieldsite_location');
     if (!empty($use_fieldsite_location[0]['value'])) {
       // Remove any current data from the artifact's location field.
@@ -78,9 +83,13 @@ function pece_artifacts_node_update($node) {
   if ($node->type == 'pece_fieldsite') {
     $location = field_get_items('node', $node, 'field_pece_location');
     if (!empty($location)) {
+      module_load_include('inc', 'pece_artifacts', 'pece_artifacts.functions');
+
+      $artifacts = pece_artifacts_fetch_all();
+
       $query = new EntityFieldQuery();
       $result = $query->entityCondition('entity_type', 'node')
-        ->entityCondition('bundle', pece_artifacts_fetch_all())
+        ->entityCondition('bundle', $artifacts)
         ->fieldCondition('field_pece_fieldsite', 'target_id', $node->nid)
         ->fieldCondition('field_use_fieldsite_location', 'value', TRUE)
         ->execute();
