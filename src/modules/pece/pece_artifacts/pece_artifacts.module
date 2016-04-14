@@ -43,6 +43,13 @@ function _pece_artifacts_form_pece_artifact_form_alter(&$form, &$form_state) {
   $form['comment_settings']['#access'] = FALSE;
   // We cannot allow the content to be authored by anonymous.
   $form['author']['name']['#required'] = TRUE;
+
+  // Hide/show location fieldset based on fieldsite location usage flag.
+  if (!empty($form['field_use_fieldsite_location'])) {
+    $form['field_pece_location']['#states']['visible']['#edit-field-use-fieldsite-location input'] = array(
+      'checked' => FALSE,
+    );
+  }
 }
 
 /**
@@ -50,8 +57,11 @@ function _pece_artifacts_form_pece_artifact_form_alter(&$form, &$form_state) {
  */
 function pece_artifacts_node_presave($node) {
   if (in_array($node->type, pece_artifacts_fetch_all())) {
-    $use_location = field_get_items('node', $node, 'field_use_fieldsite_location');
-    if (!empty($use_location[0]['value'])) {
+    $use_fieldsite_location = field_get_items('node', $node, 'field_use_fieldsite_location');
+    if (!empty($use_fieldsite_location[0]['value'])) {
+      // Remove any current data from the artifact's location field.
+      $node->field_pece_location[LANGUAGE_NONE] = array();
+
       $fieldsite_field = field_get_items('node', $node, 'field_pece_fieldsite');
       if (!empty($fieldsite_field[0]['target_id'])) {
         $fieldsite = node_load($fieldsite_field[0]['target_id']);
