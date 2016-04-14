@@ -23,11 +23,26 @@ function pece_artifacts_pece_artifact_info() {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
+ * Implements hook_form_alter().
  */
-function pece_artifacts_form_pece_artifact_node_form_alter(&$form, &$form_state) {
-  // PECE's artifact default form alter.
-  pece_artifacts_alter_artifact_form($form, $form_state);
+function pece_artifacts_form_alter(&$form, &$form_state, $form_id) {
+  $artifacts = pece_artifacts_fetch_all();
+  $is_node_form = $form['#node_edit_form'] && isset($form['#node']->type);
+  $is_artifact_form = $is_node_form && in_array($form['#node']->type, $artifacts);
+
+  if ($is_artifact_form) {
+    _pece_artifacts_form_pece_artifact_form_alter($form, $form_state);
+  }
+}
+
+/**
+ * Default form alter for PECE's artifacts.
+ */
+function _pece_artifacts_form_pece_artifact_form_alter(&$form, &$form_state) {
+  // Hide the comment settings fieldset.
+  $form['comment_settings']['#access'] = FALSE;
+  // We cannot allow the content to be authored by anonymous.
+  $form['author']['name']['#required'] = TRUE;
 }
 
 function pece_artifacts_get_types() {
