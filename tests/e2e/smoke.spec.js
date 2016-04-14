@@ -115,6 +115,11 @@ describe('PECE Smoke test', function() {
   var firstGroupLink = firstGroup.all(by.css('h5 a')).first();
   var firstArtifactLink = firstArtifact.all(by.css('h5 a')).first();
 
+  // Elements from group, analyze and discovery pages:
+  var firstGroupOnCollaborate = element.all(by.css('.view-pece-repository .node-pece-group')).first();
+  var firstArtifactOnAnalyze = element.all(by.css('.view-display-id-repository_artifacts_page .view-mode-most-recent')).first();
+  var firstContentOnDiscovery = element.all(by.css('.view-display-id-respository_page .view-mode-most-recent')).first();
+
   beforeEach(function() {
     SamplePage.get();
   });
@@ -148,6 +153,8 @@ describe('PECE Smoke test', function() {
       var currentUrl = /repo\/groups/.test(url);
       expect(currentUrl).toBe(true);
     });
+
+    expect(firstGroupOnCollaborate.isDisplayed()).toBe(true);
   });
 
   it('check that user is directed to the Analyze page', function() {
@@ -157,6 +164,8 @@ describe('PECE Smoke test', function() {
       var currentUrl = /repo\/artifacts/.test(url);
       expect(currentUrl).toBe(true);
     });
+
+    expect(firstArtifactOnAnalyze.isDisplayed()).toBe(true);
   });
 
   it('check that user is directed to the Discover page', function() {
@@ -166,6 +175,8 @@ describe('PECE Smoke test', function() {
       var currentUrl = /repo/.test(url);
       expect(currentUrl).toBe(true);
     });
+
+    expect(firstContentOnDiscovery.isDisplayed()).toBe(true);
   });
 
   it('check that user is directed to the clicked group page', function() {
