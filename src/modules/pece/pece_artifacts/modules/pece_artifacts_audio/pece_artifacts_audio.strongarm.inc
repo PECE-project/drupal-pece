@@ -96,13 +96,13 @@ function pece_artifacts_audio_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
-          'weight' => '8',
+          'weight' => '16',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '16',
+          'weight' => '15',
         ),
       ),
       'display' => array(),

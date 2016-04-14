@@ -441,7 +441,7 @@ function pece_artifacts_audio_field_default_field_instances() {
       'module' => 'location_cck',
       'settings' => array(),
       'type' => 'location',
-      'weight' => 15,
+      'weight' => 8,
     ),
   );
 
@@ -789,7 +789,11 @@ function pece_artifacts_audio_field_default_field_instances() {
   // 'node-pece_artifact_audio-field_use_fieldsite_location'.
   $field_instances['node-pece_artifact_audio-field_use_fieldsite_location'] = array(
     'bundle' => 'pece_artifact_audio',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
     'deleted' => 0,
     'description' => 'Check this to copy the location from the referenced fieldsite, if any.',
     'display' => array(
@@ -836,8 +840,10 @@ function pece_artifacts_audio_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
       'weight' => 7,
     ),
   );
