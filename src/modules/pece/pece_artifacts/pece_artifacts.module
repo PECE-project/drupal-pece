@@ -45,19 +45,6 @@ function _pece_artifacts_form_pece_artifact_form_alter(&$form, &$form_state) {
   $form['author']['name']['#required'] = TRUE;
 }
 
-function pece_artifacts_get_types() {
-  $artifacts = array();
-  $node_types = node_type_get_types();
-
-  foreach ($node_types as $key => $type) {
-    if (strpos($key, 'pece_artifact_') !== FALSE) {
-      $artifacts[$key] = $type;
-    }
-  }
-
-  return $artifacts;
-}
-
 /**
  * Implements hook_node_presave().
  */
