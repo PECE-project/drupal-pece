@@ -9,16 +9,19 @@ include_once 'pece_artifacts.features.inc';
 /**
  * Implements hook_pece_artifact_info().
  */
-function pece_artifacts_pece_artifact_info() {
-  return array(
-    'pece_artifact_audio' => 'pece_artifact_audio',
-    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
-    'pece_artifact_image' => 'pece_artifact_image',
-    'pece_artifact_pdf' => 'pece_artifact_pdf',
-    'pece_artifact_text' => 'pece_artifact_text',
-    'pece_artifact_video' => 'pece_artifact_video',
-    'pece_artifact_website' => 'pece_artifact_website',
-  );
+function pece_artifacts_pece_artifact_info($only_enabled = TRUE) {
+  $node_types = node_type_get_types();
+  $artifacts = array();
+  $prefix = 'pece_artifact_';
+
+  foreach ($node_types as $node_type => $node_type_info) {
+    $is_artifact = substr($node_type, 0, strlen($prefix)) == $prefix;
+    if ($is_artifact && (!$only_enabled || !$node_type_info->disabled)) {
+      $artifacts[$node_type] = $node_type;
+    }
+  }
+
+  return $artifacts;
 }
 
 /**
