@@ -96,13 +96,13 @@ function pece_artifacts_text_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
-          'weight' => '13',
+          'weight' => '14',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '12',
+          'weight' => '13',
         ),
       ),
       'display' => array(),
