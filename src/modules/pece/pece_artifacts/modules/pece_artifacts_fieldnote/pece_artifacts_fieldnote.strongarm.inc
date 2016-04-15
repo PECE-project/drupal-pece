@@ -108,7 +108,7 @@ function pece_artifacts_fieldnote_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
-          'weight' => '11',
+          'weight' => '13',
         ),
         'title' => array(
           'weight' => '1',
