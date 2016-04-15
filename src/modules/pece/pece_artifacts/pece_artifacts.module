@@ -50,7 +50,7 @@ function _pece_artifacts_form_pece_artifact_form_alter(&$form, &$form_state) {
 
   // Hide/show location fieldset based on fieldsite location usage flag.
   if (!empty($form['field_pece_use_fieldsite_local'])) {
-    $form['field_pece_location']['#states']['visible']['#edit-field-use-fieldsite-location input'] = array(
+    $form['field_pece_location']['#states']['visible']['#edit-field-pece-use-fieldsite-local input'] = array(
       'checked' => FALSE,
     );
   }
