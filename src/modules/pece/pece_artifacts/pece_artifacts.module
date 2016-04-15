@@ -63,7 +63,6 @@ function pece_artifacts_node_presave($node) {
   module_load_include('inc', 'pece_artifacts', 'pece_artifacts.functions');
 
   $artifacts = pece_artifacts_fetch_all();
-
   if (in_array($node->type, $artifacts)) {
     $use_fieldsite_location = field_get_items('node', $node, 'field_pece_use_fieldsite_local');
     if (!empty($use_fieldsite_location[0]['value'])) {
@@ -84,29 +83,25 @@ function pece_artifacts_node_presave($node) {
  */
 function pece_artifacts_node_update($node) {
   if ($node->type == 'pece_fieldsite') {
-    $location = field_get_items('node', $node, 'field_pece_location');
-    if (!empty($location)) {
-      module_load_include('inc', 'pece_artifacts', 'pece_artifacts.functions');
+    module_load_include('inc', 'pece_artifacts', 'pece_artifacts.functions');
+    $artifacts = pece_artifacts_fetch_all();
 
-      $artifacts = pece_artifacts_fetch_all();
+    $query = new EntityFieldQuery();
+    $result = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', $artifacts)
+      ->fieldCondition('field_pece_fieldsite', 'target_id', $node->nid)
+      ->fieldCondition('field_pece_use_fieldsite_local', 'value', TRUE)
+      ->execute();
 
-      $query = new EntityFieldQuery();
-      $result = $query->entityCondition('entity_type', 'node')
-        ->entityCondition('bundle', $artifacts)
-        ->fieldCondition('field_pece_fieldsite', 'target_id', $node->nid)
-        ->fieldCondition('field_pece_use_fieldsite_local', 'value', TRUE)
-        ->execute();
+    if (isset($result['node'])) {
+      // Execution time cache is not clean until after this hook is performed; although
+      // the node's data is already saved to the database.
+      entity_get_controller('node')->resetCache(array($node->nid));
 
-      if (isset($result['node'])) {
-        // Execution time cache is not clean until after this hook is performed; although
-        // the node's data is already saved to the database.
-        entity_get_controller('node')->resetCache(array($node->nid));
-
-        $artifacts_ids = array_keys($result['node']);
-        $artifacts = entity_load('node', $artifacts_ids);
-        foreach ($artifacts as $artifact) {
-          node_save($artifact);
-        }
+      $artifacts_ids = array_keys($result['node']);
+      $artifacts = entity_load('node', $artifacts_ids);
+      foreach ($artifacts as $artifact) {
+        node_save($artifact);
       }
     }
   }
