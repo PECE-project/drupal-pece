@@ -726,8 +726,8 @@ function pece_artifacts_audio_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'node-pece_artifact_audio-field_pece_use_fieldsite_locati'.
-  $field_instances['node-pece_artifact_audio-field_pece_use_fieldsite_locati'] = array(
+  // 'node-pece_artifact_audio-field_pece_use_fieldsite_local'.
+  $field_instances['node-pece_artifact_audio-field_pece_use_fieldsite_local'] = array(
     'bundle' => 'pece_artifact_audio',
     'default_value' => NULL,
     'deleted' => 0,
@@ -767,7 +767,7 @@ function pece_artifacts_audio_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'fences_wrapper' => 'div_div_div',
-    'field_name' => 'field_pece_use_fieldsite_locati',
+    'field_name' => 'field_pece_use_fieldsite_local',
     'label' => 'Use fieldsite\'s location',
     'required' => 0,
     'settings' => array(
