@@ -40,6 +40,10 @@ function _pece_set_up_theme() {
   variable_set('admin_theme', $admin_theme);
   variable_set('node_admin_theme', 1);
   theme_disable(array('responsive_bartik', 'bartik'));
+  
+  // Flush theme caches so things are right
+  system_rebuild_theme_data();
+  drupal_theme_rebuild();
 }
 
 /**
