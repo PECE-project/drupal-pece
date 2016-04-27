@@ -6,10 +6,46 @@
 function pece_install_tasks(&$install_state) {
   $tasks = array();
 
-  // Add our custom CSS file for the installation process
-  drupal_add_css(drupal_get_path('profile', 'pece') . '/panopoly.css');
+  // Add our custom CSS file for the installation process.
+  drupal_add_css(drupal_get_path('profile', 'pece') . '/pece.css');
+
+  // Add the PECE settings step to the installation process.
+  $tasks = $tasks + pece_run_kw_manifests_install_task($install_state);
 
   return $tasks;
+}
+
+/**
+ * Add an install task to run Kraftwagen manifests.
+ */
+function pece_run_kw_manifests_install_task(&$install_task) {
+  $tasks['pece_run_kw_manifests'] = array(
+    'display_name' => t('PECE Settings'),
+  );
+  return $tasks;
+}
+
+/**
+ * Helper function to run the Kraftwagen manifests programatically.
+ */
+function pece_run_kw_manifests() {
+
+  // Set the page title
+  drupal_set_title(t('PECE Settings'));
+
+  module_load_include('install', 'pece');
+  pece_manifest_define_themes();
+  pece_manifest_set_frontpage();
+
+  // $manifests = pece_kw_manifests_info();
+  // if (!empty($manifests)) {
+  //   var_dump($manifests);
+  //   kw_manifests_run($manifests['theme']);
+  //   kw_manifests_run($manifests['set_frontpage']);
+  //   // foreach ($manifests as $manifest) {
+  //   //   kw_manifests_run($manifest);
+  //   // }
+  // }
 }
 
 /**
@@ -39,7 +75,7 @@ function pece_form_install_configure_form_alter(&$form, $form_state) {
   $form['site_information']['site_name']['#default_value'] = 'PECE';
   $form['admin_account']['account']['name']['#default_value'] = 'admin';
   $form['server_settings']['site_default_country']['#default_value'] = 'US';
-  $form['server_settings']['date_default_timezone']['#default_value'] = 'America/New_York';
+  $form['server_settings']['date_default_timezone']['#default_value'] = 'America/Los_Angeles'; // West coast, best coast
 
   // Define a default email address if we can guess a valid one
   if (valid_email_address('admin@' . $_SERVER['HTTP_HOST'])) {
