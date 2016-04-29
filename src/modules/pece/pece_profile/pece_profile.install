@@ -21,10 +21,6 @@ function pece_profile_install() {
  * Resets users panelizer defaults.
  */
 function pece_profile_update_7000() {
-  module_disable(array(
-    'panopoly_users'
-  ));
-
   module_load_include('inc', 'pece', 'pece.functions');
 
   // Revert all default config.
