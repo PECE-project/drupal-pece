@@ -70,47 +70,46 @@ function _pece_install_menu() {
  * Setup block configurations.
  */
 function _pece_install_blocks() {
-  // Set default blocks.
-  $values = array(
+  $blocks = array(
     array(
       'module' => 'system',
       'delta' => 'main-menu',
-      'theme' => PECE_DEFAULT_THEME,
-      'status' => 1,
-      'weight' => 0,
-      'region' => 'header_top_left',
       'pages' => '',
       'cache' => -1,
-      'title' => '<none>',
     ),
-    array(
-      'module' => 'search',
-      'delta' => 'form',
-      'theme' => PECE_DEFAULT_THEME,
-      'status' => 1,
-      'weight' => 0,
-      'region' => 'header_top_right',
-      'pages' => '',
-      'cache' => -1,
-      'title' => '<none>',
-    ),
+
     array(
       'module' => 'system',
       'delta' => 'user-menu',
-      'theme' => PECE_DEFAULT_THEME,
-      'status' => 1,
-      'weight' => 0,
-      'region' => 'navigation',
       'pages' => '',
       'cache' => -1,
-      'title' => '<none>',
+    ),
+
+    array(
+      'module' => 'search',
+      'delta' => 'form',
+      'pages' => '',
+      'cache' => -1,
     ),
   );
-  foreach ($values as $record) {
+
+  $block_defaults = array(
+    'theme' => PECE_DEFAULT_THEME,
+    'status' => 1,
+    'weight' => 0,
+    'pages' => '',
+    'cache' => -1,
+    'title' => '<none>',
+  );
+
+  foreach ($blocks as $block) {
+    $block = $block_defaults + $block;
+
     $query = db_merge('block')
-      ->fields($record)
+      ->fields($block)
       ->condition('theme', PECE_DEFAULT_THEME)
-      ->condition('delta', $record['delta']);
+      ->condition('delta', $block['delta']);
+
     $query->execute();
   }
 }
