@@ -4,26 +4,81 @@
  * Installation code for the PECE About feature.
  */
 
- /**
-  * Implements hook_kw_manifests_info().
-  */
- function pece_about_kw_manifests_info() {
-   $manifests = array();
-
-   $manifests['ensure_items'] = array(
-     'callback' => 'pece_about_ensure_items',
-   );
-
-   return $manifests;
- }
-
+/**
+ * Implements hook_install().
+ */
+function pece_about_install() {
+  _pece_about_install_node_config();
+  _pece_about_install_default_page();
+  _pece_about_install_menu();
+}
 
 /**
- * Create kraftwagen itemnames for each design logic type.
+ * Configure node type settings.
  */
-function pece_about_ensure_items() {
+function _pece_about_install_node_config() {
+  variable_set('pathauto_node_pece_about_page_pattern', '[node:title]');
+}
+
+/**
+ * Configures a default about page.
+ */
+function _pece_about_install_default_page() {
+  if (!($default_page_info = _pece_about_default_page_info())) {
+    return FALSE;
+  }
+
+  module_load_include('inc', 'kw_itemnames');
+
+  $item_values = array(
+    'title' => $default_page_info['title'],
+    'type' => 'pece_about_page',
+    'uid' => 1,
+    'language' => LANGUAGE_NONE,
+    'body' => array(LANGUAGE_NONE => array(array(
+      'value' => $default_page_info['body'],
+      'format' => 'panopoly_wysiwyg_text'
+    ))),
+  );
+
+  $about_page = kw_itemnames_ensure('node', 'about', $item_values, array());
+
+  // Add pathauto address to the about page.
+  if (!empty($about_page)) {
+    $about_page->path['pathauto'] = 1;
+    node_save($about_page);
+  }
+}
+
+/**
+ * Creates default menu item for PECE About page.
+ */
+function _pece_about_install_menu() {
+  if (!($default_about_page = kw_itemnames_load('node', 'about'))) {
+    return FALSE;
+  }
+
+  if (!($path = entity_uri('node', $default_about_page))) {
+    return FALSE;
+  }
+
+  $item = array(
+    'link_path' => $path['path'],
+    'link_title' => t('About'),
+    'weight' => 1,
+    'menu_name' => 'main-menu',
+    'mlid' => NULL,
+  );
+
+  menu_link_save($item);
+  menu_cache_clear_all();
+}
+
+/**
+ * Load about page default info.
+ */
+function _pece_about_default_page_info() {
   module_load_include('inc', 'pece', 'pece.functions');
-  module_load_include('inc', 'pece_about', 'pece_about.functions');
 
   $path_to_module = drupal_get_path('module', 'pece_about');
   $path_to_defaults = drupal_realpath($path_to_module . '/defaults');
@@ -33,13 +88,8 @@ function pece_about_ensure_items() {
   if (file_exists($path_to_about_info_file)) {
     $about_info_raw = file_get_contents($path_to_about_info_file);
     $about_info = pece_parse_yaml($about_info_raw);
-
-    // Setup pathauto for the design_logic entity type.
-    variable_set('pathauto_node_pece_about_page_pattern', '[node:title]');
-    pece_about_ensure_item('about', $about_info);
-    $node = node_load(kw_itemnames_item_id('node', 'about'));
-    $node->path['pathauto'] = 1;
-    node_save($node);
-    pece_about_set_menu_item();
+    return $about_info;
   }
+
+  return FALSE;
 }
