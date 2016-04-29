@@ -1,6 +1,7 @@
 <?php
 
-define('PECE_THEME_DEFAULT' ,'pece_scholarly_lite');
+define('PECE_DEFAULT_THEME' ,'pece_scholarly_lite');
+define('PECE_DEFAULT_ADMINISTRATIVE_THEME', 'adminimal');
 
 /**
  * Implements hook_install().
@@ -40,7 +41,7 @@ function _pece_set_up_theme() {
   variable_set('admin_theme', $admin_theme);
   variable_set('node_admin_theme', 1);
   theme_disable(array('responsive_bartik', 'bartik'));
-  
+
   // Flush theme caches so things are right
   system_rebuild_theme_data();
   drupal_theme_rebuild();
@@ -121,7 +122,7 @@ function pece_set_default_blocks() {
     array(
       'module' => 'system',
       'delta' => 'main-menu',
-      'theme' => PECE_THEME_DEFAULT,
+      'theme' => PECE_DEFAULT_THEME,
       'status' => 1,
       'weight' => 0,
       'region' => 'header_top_left',
@@ -132,7 +133,7 @@ function pece_set_default_blocks() {
     array(
       'module' => 'search',
       'delta' => 'form',
-      'theme' => PECE_THEME_DEFAULT,
+      'theme' => PECE_DEFAULT_THEME,
       'status' => 1,
       'weight' => 0,
       'region' => 'header_top_right',
@@ -143,7 +144,7 @@ function pece_set_default_blocks() {
     array(
       'module' => 'system',
       'delta' => 'user-menu',
-      'theme' => PECE_THEME_DEFAULT,
+      'theme' => PECE_DEFAULT_THEME,
       'status' => 1,
       'weight' => 0,
       'region' => 'navigation',
@@ -155,7 +156,7 @@ function pece_set_default_blocks() {
   foreach ($values as $record) {
     $query = db_merge('block')
       ->fields($record)
-      ->condition('theme', PECE_THEME_DEFAULT)
+      ->condition('theme', PECE_DEFAULT_THEME)
       ->condition('delta', $record['delta']);
     $query->execute();
   }
