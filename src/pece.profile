@@ -9,43 +9,7 @@ function pece_install_tasks(&$install_state) {
   // Add our custom CSS file for the installation process.
   drupal_add_css(drupal_get_path('profile', 'pece') . '/pece.css');
 
-  // Add the PECE settings step to the installation process.
-  $tasks = $tasks + pece_run_kw_manifests_install_task($install_state);
-
   return $tasks;
-}
-
-/**
- * Add an install task to run Kraftwagen manifests.
- */
-function pece_run_kw_manifests_install_task(&$install_task) {
-  $tasks['pece_run_kw_manifests'] = array(
-    'display_name' => t('PECE Settings'),
-  );
-  return $tasks;
-}
-
-/**
- * Helper function to run the Kraftwagen manifests programatically.
- */
-function pece_run_kw_manifests() {
-
-  // Set the page title
-  drupal_set_title(t('PECE Settings'));
-
-  module_load_include('install', 'pece');
-  pece_manifest_define_themes();
-  pece_manifest_set_frontpage();
-
-  // $manifests = pece_kw_manifests_info();
-  // if (!empty($manifests)) {
-  //   var_dump($manifests);
-  //   kw_manifests_run($manifests['theme']);
-  //   kw_manifests_run($manifests['set_frontpage']);
-  //   // foreach ($manifests as $manifest) {
-  //   //   kw_manifests_run($manifest);
-  //   // }
-  // }
 }
 
 /**
@@ -54,11 +18,6 @@ function pece_run_kw_manifests() {
 function pece_install_tasks_alter(&$tasks, $install_state) {
   // Magically go one level deeper in solving years of dependency problems
   $tasks['install_load_profile']['function'] = 'pece_install_load_profile';
-
-  // If we only offer one language, define a callback to set this
-  if (!(count(install_find_locales($install_state['parameters']['profile'])) > 1)) {
-    $tasks['install_select_locale']['function'] = 'pece_install_locale_selection';
-  }
 }
 
 /**
@@ -81,15 +40,6 @@ function pece_install_load_profile(&$install_state) {
   }
 
   $install_state['profile_info']['dependencies'] = array_unique($dependencies);
-}
-
-/**
- * Task handler to set the language to the current one or english
- * when only one language is available.
- */
-function pece_install_locale_selection(&$install_state) {
-  global $language;
-  $install_state['parameters']['locale'] = isset($language->language) ? $language->language : 'en';
 }
 
 /**
