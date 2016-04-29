@@ -9,37 +9,41 @@ define('PECE_DEFAULT_ADMINISTRATIVE_THEME', 'adminimal');
  * Perform actions to set up the site for this profile.
  */
 function pece_install() {
+  _pece_install_config();
+  _pece_install_themes();
+  _pece_install_menu();
+  _pece_install_blocks();
+  _pece_install_site();
+}
+
+/**
+ * Setup user configurations.
+ */
+function _pece_install_config() {
+  // Ommit errors for PECE users.
+  variable_set('error_level', 0);
 
   // Allow visitor account creation, but with administrative approval.
   variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
-
-  // Set main menu links.
-  pece_set_menu_item();
-
-  // Set default blocks.
-  pece_set_default_blocks();
-
-  // Ommit errors for PECE users.
-  variable_set('error_level', 0);
 
   // Enable default permissions for system roles.
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
 }
 
-
 /**
- * Set the default theme.
+ * Setup theme configurations.
  */
-function _pece_set_up_theme() {
-  $theme = 'pece_scholarly_lite';
-  $admin_theme = 'adminimal';
-  theme_enable(array($theme));
-  // Adminimal Theme must be enabled to work properly.
-  theme_enable(array($admin_theme));
-  variable_set('theme_default', $theme);
-  variable_set('admin_theme', $admin_theme);
+function _pece_install_themes() {
+  theme_enable(array(
+    PECE_DEFAULT_THEME,
+    PECE_DEFAULT_ADMINISTRATIVE_THEME
+  ));
+
+  variable_set('theme_default', PECE_DEFAULT_THEME);
+  variable_set('admin_theme', PECE_DEFAULT_ADMINISTRATIVE_THEME);
   variable_set('node_admin_theme', 1);
+
   theme_disable(array('responsive_bartik', 'bartik'));
 
   // Flush theme caches so things are right
@@ -48,63 +52,9 @@ function _pece_set_up_theme() {
 }
 
 /**
- * Implements hook_kw_manifests_info().
+ * Setup menu configurations.
  */
-function pece_kw_manifests_info() {
-  $manifests = array();
-
-  $manifests['themes'] = array(
-    'callback' => 'pece_manifest_define_themes',
-  );
-
-  $manifests['set_frontpage'] = array(
-    'callback' => 'pece_manifest_set_frontpage',
-  );
-
-  // @TODO: Move this to pece_analytics module after solving the enabled modules
-  // order issue.
-  $manifests['define_analytics_perms'] = array(
-   'callback' => 'pece_manifest_define_analytics_perms',
-  );
-
-  return $manifests;
-}
-
-
-/**
- * Set default themes.
- */
-function pece_manifest_define_themes() {
-  // set the default theme
-  _pece_set_up_theme();
-}
-
-
-/**
- * Set front page variable.
- */
-function pece_manifest_set_frontpage() {
-  variable_set('site_frontpage', 'home');
-}
-
-
-/**
- * Add permissions for PECE users to create Question Set taxonomy terms.
- */
-function pece_manifest_define_analytics_perms() {
-  $contributor = user_role_load_by_name('Contributor');
-  $researcher = user_role_load_by_name('Researcher');
-  $roles = array($contributor, $researcher);
-
-
-  if (module_exists('taxonomy_access_fix')) {
-    foreach ($roles as $role) {
-      user_role_grant_permissions($role->rid, array('add terms in pece_structured_analytics'));
-    }
-  }
-}
-
-function pece_set_menu_item() {
+function _pece_install_menu() {
   $item = array(
     'link_path' => drupal_get_normal_path('<front>'),
     'link_title' => t('Home'),
@@ -116,7 +66,10 @@ function pece_set_menu_item() {
   menu_cache_clear_all();
 }
 
-function pece_set_default_blocks() {
+/**
+ * Setup block configurations.
+ */
+function _pece_install_blocks() {
   // Set default blocks.
   $values = array(
     array(
@@ -161,14 +114,53 @@ function pece_set_default_blocks() {
     $query->execute();
   }
 }
+
+/**
+ * Setup site information configurations.
+ */
+function _pece_install_site() {
+  variable_set('site_frontpage', 'home');
+}
+
+/**
+ * Implements hook_kw_manifests_info().
+ */
+function pece_kw_manifests_info() {
+  $manifests = array();
+
+  // @TODO: Move this to pece_analytics module after solving the enabled modules
+  // order issue.
+  $manifests['define_analytics_perms'] = array(
+   'callback' => 'pece_manifest_define_analytics_perms',
+  );
+
+  return $manifests;
+}
+
+/**
+ * Add permissions for PECE users to create Question Set taxonomy terms.
+ */
+function pece_manifest_define_analytics_perms() {
+  $contributor = user_role_load_by_name('Contributor');
+  $researcher = user_role_load_by_name('Researcher');
+  $roles = array($contributor, $researcher);
+
+
+  if (module_exists('taxonomy_access_fix')) {
+    foreach ($roles as $role) {
+      user_role_grant_permissions($role->rid, array('add terms in pece_structured_analytics'));
+    }
+  }
+}
+
 /**
  * Add main menu links and default block.
  */
 function pece_update_7001() {
   // Set main menu links.
-  pece_set_menu_item();
+  _pece_install_menu();
   // Set default blocks.
-  pece_set_default_blocks();
+  _pece_install_blocks();
 }
 
 /**
