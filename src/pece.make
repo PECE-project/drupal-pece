@@ -36,10 +36,10 @@ projects[token][version] = 1.6
 projects[token][subdir] = contrib
 
 ; Overrides panopoly's entity.
-projects[entity][version] = 1.6
+projects[entity][version] = 1.7
 projects[entity][subdir] = contrib
 
-projects[xautoload][version] = 5.5
+projects[xautoload][version] = 5.7
 projects[xautoload][subdir]  = contrib
 
 projects[jquery_update][version] = 2.7
@@ -81,7 +81,7 @@ projects[views_autocomplete_filters][subdir] = contrib
 projects[admin_menu][version] = 3.0-rc5
 projects[admin_menu][subdir]  = contrib
 
-projects[adminimal_admin_menu][version] = 1.6
+projects[adminimal_admin_menu][version] = 1.7
 projects[adminimal_admin_menu][subdir]  = contrib
 
 projects[coffee][version] = 2.2
@@ -102,7 +102,7 @@ projects[filter_perms][subdir]  = contrib
 projects[features_override][version] = 2.0-rc3
 projects[features_override][subdir] = contrib
 
-projects[features][version] = 2.7
+projects[features][version] = 2.10
 projects[features][subdir] = contrib
 
 projects[diff][version] = 3.2
@@ -155,10 +155,10 @@ projects[panels][patch][2390803] = https://www.drupal.org/files/issues/panels-fo
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_core][version] = 1.28
+projects[panopoly_core][version] = 1.34
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.28
+projects[panopoly_images][version] = 1.34
 projects[panopoly_images][subdir] = contrib
 
 ; Panopoly images depending libraries
@@ -170,30 +170,30 @@ libraries[jquery.imgareaselect][download][type] = file
 libraries[jquery.imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v0.9.11-rc.1.tar.gz
 libraries[jquery.imgareaselect][download][subtree] = imgareaselect-0.9.11-rc.1
 
-projects[panopoly_theme][version] = 1.28
+projects[panopoly_theme][version] = 1.34
 projects[panopoly_theme][subdir] = contrib
 
-projects[panopoly_magic][version] = 1.28
+projects[panopoly_magic][version] = 1.34
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.28
+projects[panopoly_widgets][version] = 1.34
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_admin][version] = 1.28
+projects[panopoly_admin][version] = 1.34
 projects[panopoly_admin][subdir] = contrib
 
 ; projects[panopoly_users][version] = 1.28
 ; projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.28
+projects[panopoly_pages][version] = 1.34
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_wysiwyg][version] = 1.28
+projects[panopoly_wysiwyg][version] = 1.34
 projects[panopoly_wysiwyg][subdir] = contrib
 
 projects[panopoly_search][subdir] = contrib
-projects[panopoly_search][version] = 1.28
+projects[panopoly_search][version] = 1.34
 
 ; For running the automated tests.
 projects[panopoly_test][version] = 1.27
@@ -214,7 +214,7 @@ projects[radix_views][subdir] = contrib
 ; Interface
 ; =====================
 
-projects[breakpoints][version] = 1.3
+projects[breakpoints][version] = 1.4
 projects[breakpoints][subdir] = contrib
 
 ;projects[breakpointsjs][version] = 2.x-dev
@@ -224,7 +224,7 @@ projects[breakpoints][subdir] = contrib
 ; Entities
 ; =====================
 
-projects[eck][version] = 2.0-rc7
+projects[eck][version] = 2.0-rc8
 projects[eck][subdir]  = contrib
 
 projects[entity_view_mode][subdir] = contrib
@@ -236,7 +236,7 @@ projects[entityreference_view_widget][version] = 2.0-rc6
 projects[entityconnect][subdir] = contrib
 projects[entityconnect][version] = 1.0-rc5
 
-projects[inline_entity_form][version] = 1.6
+projects[inline_entity_form][version] = 1.8
 projects[inline_entity_form][subdir]  = contrib
 
 ; =====================
@@ -278,7 +278,7 @@ projects[manualcrop][subdir] = contrib
 projects[image_resize_filter][version] = 1.16
 projects[image_resize_filter][subdir] = contrib
 
-projects[linkit][version] = 3.4
+projects[linkit][version] = 3.5
 projects[linkit][subdir] = contrib
 
 projects[field_group][version] = 1.5
@@ -288,7 +288,7 @@ projects[field_group][subdir] = contrib
 ; Search
 ; =====================
 
-projects[search_api][version] = 1.16
+projects[search_api][version] = 1.18
 projects[search_api][subdir]  = contrib
 
 ; =====================
@@ -301,7 +301,7 @@ projects[radix][subdir] = contrib
 
 ; Adminimal Theme for admin
 projects[adminimal_theme][type] = theme
-projects[adminimal_theme][version] = 1.23
+projects[adminimal_theme][version] = 1.24
 projects[adminimal_theme][subdir] = contrib
 
 ; PECE Base Theme
@@ -359,7 +359,7 @@ projects[l10n_update][version] = 2.0
 
 ; Organic groups
 projects[og][subdir] = contrib
-projects[og][version] = 2.7
+projects[og][version] = 2.9
 
 ; Email
 projects[email][subdir] = contrib
@@ -392,7 +392,7 @@ projects[profile2][patch][] = https://www.drupal.org/files/ctools-profile2_from_
 
 ; GMap
 projects[gmap][subdir] = contrib
-projects[gmap][version] = 2.10
+projects[gmap][version] = 2.11
 
 ; External link
 projects[extlink][subdir] = contrib
@@ -403,12 +403,12 @@ projects[realname][subdir] = contrib
 projects[realname][version] = 1.2
 
 ; TagCloud
-projects[tagclouds][version] = 1.10
+projects[tagclouds][version] = 1.11
 projects[tagclouds][subdir]  = contrib
 
 ; Taxonomy Access Fix
 projects[taxonomy_access_fix][subdir] = contrib
-projects[taxonomy_access_fix][version] = 2.2
+projects[taxonomy_access_fix][version] = 2.3
 
 ; Annotation
 ;projects[annotation][subdir] = contrib
