@@ -76,6 +76,7 @@ function _pece_install_blocks() {
     array(
       'module' => 'system',
       'delta' => 'main-menu',
+      'region' => 'header_top_left',
       'pages' => '',
       'cache' => -1,
     ),
@@ -83,6 +84,7 @@ function _pece_install_blocks() {
     array(
       'module' => 'system',
       'delta' => 'user-menu',
+      'region' => 'navigation',
       'pages' => '',
       'cache' => -1,
     ),
@@ -90,6 +92,7 @@ function _pece_install_blocks() {
     array(
       'module' => 'search',
       'delta' => 'form',
+      'region' => 'header_top_right',
       'pages' => '',
       'cache' => -1,
     ),
