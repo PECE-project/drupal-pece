@@ -151,26 +151,3 @@ function pece_manifest_define_analytics_perms() {
     }
   }
 }
-
-/**
- * Add main menu links and default block.
- */
-function pece_update_7001() {
-  // Set main menu links.
-  _pece_install_menu();
-  // Set default blocks.
-  _pece_install_blocks();
-}
-
-/**
- * Revert default config permissions.
- */
-function pece_update_7002() {
-  features_include();
-  $components = defaultconfig_get_components();
-  $component = array();
-  if (isset($components['user_default_permissions'])) {
-    $component = $components['user_default_permissions'];
-    defaultconfig_component_rebuild($component, 'pece_core');
-  }
-}
