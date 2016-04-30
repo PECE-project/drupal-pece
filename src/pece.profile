@@ -82,3 +82,16 @@ function pece_form_apps_profile_apps_select_form_alter(&$form, $form_state) {
     }
   }
 }
+
+/**
+ * Implements hook_pece_default_permissions().
+ */
+function pece_pece_default_permissions() {
+  $permissions = array();
+
+  $permissions['all'] = array(
+    'access content' => TRUE,
+  );
+
+  return $permissions;
+}
