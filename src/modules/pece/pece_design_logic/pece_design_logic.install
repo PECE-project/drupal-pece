@@ -61,33 +61,6 @@ function _pece_design_logic_ensure_entities() {
 }
 
 /**
- * Implements hook_kw_manifests_info().
- */
-function pece_design_logic_kw_manifests_info() {
-  $manifests = array();
-
-  $manifests['permissions'] = array(
-    'callback' => 'pece_design_logic_permissions',
-  );
-
-  return $manifests;
-}
-
-/**
- * Setup Design logic permissions.
- */
-function pece_design_logic_permissions() {
-  module_load_include('inc', 'pece', 'pece.functions');
-
-  pece_set_permissions(array(
-    'all' => array(
-      'eck list design_logic design_logic entities' => TRUE,
-      'eck view design_logic design_logic entities' => TRUE,
-    ),
-  ));
-}
-
-/**
  * Ensures the existance of a design logic item.
  *
  * @param $name

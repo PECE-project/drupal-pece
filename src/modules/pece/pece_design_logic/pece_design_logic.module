@@ -7,6 +7,20 @@
 include_once 'pece_design_logic.features.inc';
 
 /**
+ * Implements hook_pece_default_permissions().
+ */
+function pece_default_permissions() {
+  $permissions = array();
+
+  $permissions['all'] = array(
+    'eck list design_logic design_logic entities' => TRUE,
+    'eck view design_logic design_logic entities' => TRUE,
+  );
+
+  return $permissions;
+}
+
+/**
  * Implements hook_theme().
  */
 function pece_design_logic_theme() {
