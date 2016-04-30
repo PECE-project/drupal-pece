@@ -14,6 +14,33 @@ function pece_annotations_ctools_plugin_directory($module, $plugin) {
 }
 
 /**
+ * Implements hook_pece_default_permissions().
+ */
+function pece_annotations_pece_default_permissions() {
+  $permissions = array();
+
+  $permissions['Contributor'] = array(
+    'create pece_annotation content' => TRUE,
+    'delete own pece_annotation content' => TRUE,
+    'edit own pece_annotation content' => TRUE,
+  );
+
+  $permissions['Researcher'] = array(
+    'create pece_annotation content' => TRUE,
+    'delete own pece_annotation content' => TRUE,
+    'edit own pece_annotation content' => TRUE,
+  );
+
+  $permissions['administrator'] = array(
+    'create pece_annotation content' => TRUE,
+    'delete own pece_annotation content' => TRUE,
+    'edit own pece_annotation content' => TRUE,
+  );
+
+  return $permissions;
+}
+
+/**
  * Implements hook_menu().
  */
 function pece_annotations_menu() {
