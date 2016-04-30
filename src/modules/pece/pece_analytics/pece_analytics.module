@@ -5,8 +5,36 @@
  */
 
 include_once 'pece_analytics.features.inc';
-include_once 'pece_analytics.functions.inc';
 
+/**
+ * Implements hook_pece_default_permissions().
+ */
+function pece_analytics_pece_default_permissions() {
+  $permissions = array();
+
+  $permissions['Contributor'] = array(
+    'create pece_analytic content' => TRUE,
+    'delete own pece_analytic content' => TRUE,
+    'edit own pece_analytic content' => TRUE,
+    'entityconnect add button' => TRUE,
+  );
+
+  $permissions['Researcher'] = array(
+    'create pece_analytic content' => TRUE,
+    'delete own pece_analytic content' => TRUE,
+    'edit own pece_analytic content' => TRUE,
+    'entityconnect add button' => TRUE,
+  );
+
+  $permissions['authenticated user'] = array(
+    'create pece_analytic content' => TRUE,
+    'delete own pece_analytic content' => TRUE,
+    'edit own pece_analytic content' => TRUE,
+    'entityconnect add button' => TRUE,
+  );
+
+  return $permissions;
+}
 
 /**
  * Implements hook_form_FORM_ID_alter().
@@ -28,4 +56,3 @@ function pece_analytics_form_taxonomy_form_term_alter(&$form, &$form_state) {
     $form['relations']['#access'] = FALSE;
   }
 }
-
