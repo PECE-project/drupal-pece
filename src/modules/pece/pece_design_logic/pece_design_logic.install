@@ -8,38 +8,26 @@
  * Implements hook_install().
  */
 function pece_design_logic_install() {
+  _pece_design_logic_install_entity_config();
+  _pece_design_logic_ensure_entities();
+}
+
+/**
+ * Setup design logic entity configurations.
+ */
+function _pece_design_logic_install_entity_config() {
   // 1. Enable pathauto for the design_logic entity type.
   $value = variable_get('pathauto_entity_available_entity_types', array());
   $value['design_logic'] = 'design_logic';
   variable_set('pathauto_entity_available_entity_types', $value);
-
-  // 2. Setup pathauto for the design_logic entity type.
   variable_set('pathauto_design_logic_pattern', 'design-logic/[design_logic:title]');
 }
 
 /**
- * Implements hook_kw_manifests_info().
+ * Setup design logic default entities.
  */
-function pece_design_logic_kw_manifests_info() {
-  $manifests = array();
-
-  $manifests['ensure_items'] = array(
-    'callback' => 'pece_design_logic_ensure_items',
-  );
-
-  $manifests['permissions'] = array(
-    'callback' => 'pece_design_logic_permissions',
-  );
-
-  return $manifests;
-}
-
-/**
- * Create kraftwagen itemnames for each design logic type.
- */
-function pece_design_logic_ensure_items() {
+function _pece_design_logic_ensure_entities() {
   module_load_include('inc', 'pece', 'pece.functions');
-  module_load_include('inc', 'pece_design_logic', 'pece_design_logic.functions');
 
   $path_to_module = drupal_get_path('module', 'pece_design_logic');
   $path_to_defaults = drupal_realpath($path_to_module . '/defaults');
@@ -55,7 +43,6 @@ function pece_design_logic_ensure_items() {
     'valuing_noise',
   );
 
-
   foreach ($design_logic_items as $name) {
     $path_to_design_logic_info_file = "{$path_to_defaults}/{$name}.yml";
 
@@ -68,9 +55,22 @@ function pece_design_logic_ensure_items() {
         $design_logic_info['thumbnail'] = $path_to_design_logic_thumbnail;
       }
 
-      pece_design_logic_ensure_item($name, $design_logic_info);
+      _pece_design_logic_ensure_item($name, $design_logic_info);
     }
   }
+}
+
+/**
+ * Implements hook_kw_manifests_info().
+ */
+function pece_design_logic_kw_manifests_info() {
+  $manifests = array();
+
+  $manifests['permissions'] = array(
+    'callback' => 'pece_design_logic_permissions',
+  );
+
+  return $manifests;
 }
 
 /**
@@ -85,4 +85,71 @@ function pece_design_logic_permissions() {
       'eck view design_logic design_logic entities' => TRUE,
     ),
   ));
+}
+
+/**
+ * Ensures the existance of a design logic item.
+ *
+ * @param $name
+ *   The kraftwagen itemname to use as unique id.
+ *
+ * @param $info
+ *   Array with data for the item's fields.
+ *
+ * @return object
+ *   An entity object or NULL if not found/not able to create.
+ */
+function _pece_design_logic_ensure_item($name, $info) {
+  module_load_include('inc', 'kw_itemnames');
+
+  $item_id = kw_itemnames_name_get_item_id('design_logic', $name);
+  $item = empty($item_id) ? null : kw_itemnames_item_load('design_logic', $item_id);
+
+  if (!empty($item)) {
+    return $item;
+  }
+
+  $item_values = array(
+    'title' => $info['title'],
+    'type' => 'design_logic',
+  );
+
+  if (!empty($info['description'])) {
+    $item_values['field_description'] = array(
+      LANGUAGE_NONE => array(
+        0 => array(
+          'value' => $info['description'],
+          'format' => 'panopoly_html_text',
+        ),
+      ),
+    );
+  }
+
+  if (!empty($info['credits'])) {
+    $item_values['field_image_credits'] = array(
+      LANGUAGE_NONE => array(
+        0 => array(
+          'title' => $info['credits']['title'],
+          'url' => $info['credits']['url'],
+        ),
+      ),
+    );
+  }
+
+  if (!empty($info['thumbnail'])) {
+    $file = (object) array(
+      'uid' => 1,
+      'uri' => $info['thumbnail'],
+      'filemime' => file_get_mimetype($info['thumbnail']),
+      'status' => 1,
+    );
+
+    $item_values['field_thumbnail'] = array(
+      LANGUAGE_NONE => array(
+        0 => (array) file_copy($file, 'public://'),
+      ),
+    );
+  }
+
+  return kw_itemnames_ensure('design_logic', $name, array(), $item_values);
 }
