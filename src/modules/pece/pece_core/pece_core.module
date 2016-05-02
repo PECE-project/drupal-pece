@@ -7,6 +7,15 @@
 include_once 'pece_core.features.inc';
 include_once 'pece_core.functions.inc';
 
+/**
+ * Implements hook_url_outbound_alter().
+ */
+function pece_core_url_outbound_alter(&$path, &$options, $original_path) {
+  // @info: Fix AJAX error on views_autocomplete_filters.
+  if (isset($options['script']) && $options['script'] == 'index.php') {
+    $options['script'] = '';
+  }
+}
 
 /**
  * Implements hook_form_FORM_ID_alter().
