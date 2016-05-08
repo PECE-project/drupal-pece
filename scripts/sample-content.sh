@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+PASSWORD="${PASSWORD:-impossiblepassword}"
+
 drush ucrt taller --mail=dev-pece@taller.net.br --password=${PASSWORD}
 drush ucrt reva --mail=renato@taller.net.br --password=${PASSWORD}
 drush ucrt liz --mail=liz@taller.net.br --password=${PASSWORD}
