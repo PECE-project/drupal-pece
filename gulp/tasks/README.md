@@ -32,20 +32,21 @@ $(npm bin)/gulp [TASK-NAME]
 
 ## Tasks
 
-| Name             | Description                                                                                                                    | Dependencies                        |
-|------------------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
-| bower:install    | Installs dependencies registered with bower. Usually, refers to JavaScript libraries installed on the default theme directory. |                                     |
-| build            | Compiles assets (CSS) and downloads Drupal modules (using Kraftwagen's build system).                                          | bower:install, styles, drush:kw-b   |
-| build:dev        | Same as build, but also downloads development only Drupal modules.                                                             | build                               |
-| drush:kw-b       | Helper task to run `drush kw-b`.                                                                                               |                                     |
-| drush:kw-u       | Helper task to run `drush kw-u`.                                                                                               |                                     |
-| drush:si         | Helper task to run `drush si` with PECE's configuration.                                                                       |                                     |
-| init             | One-for-all install method.                                                                                                    | build, drush:kw-i, drush:kw-u       |
-| install          | Install task bound to package. Will run once `npm install` finishes. Installs Bower dependencies                               | bower:install                       |
-| styles           | Compiles Sass stylesheets into CSS.                                                                                            |                                     |
-| test:e2e         | Execute end to end tests using Protractor.                                                                                     | webdriver:start                     |
-| update           | Helper task to update assets and database.                                                                                     | [drush:kw-u, bower:install], styles |
-| watch:styles     | Watch Sass changes and re-compiles into CSS.                                                                                   | styles                              |
-| watch            | Helper task to run watcher tasks.                                                                                              | watch:styles                        |
-| webdriver:start  | Starts a webdriver instance for usage on e2e tests.                                                                            |                                     |
-| webdriver:update | Updates the selenium standalone provided by Protractor.                                                                        |                                     |
+| Name                 | Description                                                                                                                    | Dependencies                        |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
+| bower:install        | Installs dependencies registered with bower. Usually, refers to JavaScript libraries installed on the default theme directory. |                                     |
+| build                | Compiles assets (CSS) and downloads Drupal modules (using Kraftwagen's build system).                                          | bower:install, styles, drush:kw-b   |
+| build:dev            | Same as build, but also downloads development only Drupal modules.                                                             | build                               |
+| drush:kw-b           | Helper task to run `drush kw-b`.                                                                                               |                                     |
+| drush:kw-u           | Helper task to run `drush kw-u`.                                                                                               |                                     |
+| drush:sample-content | Adds sample content to a fresh install.                                                                                        |                                     |
+| drush:si             | Helper task to run `drush si` with PECE's configuration.                                                                       |                                     |
+| init                 | One-for-all install method.                                                                                                    | build, drush:kw-i, drush:kw-u       |
+| install              | Install task bound to package. Will run once `npm install` finishes. Installs Bower dependencies                               | bower:install                       |
+| styles               | Compiles Sass stylesheets into CSS.                                                                                            |                                     |
+| test:e2e             | Execute end to end tests using Protractor.                                                                                     | webdriver:start                     |
+| update               | Helper task to update assets and database.                                                                                     | [drush:kw-u, bower:install], styles |
+| watch:styles         | Watch Sass changes and re-compiles into CSS.                                                                                   | styles                              |
+| watch                | Helper task to run watcher tasks.                                                                                              | watch:styles                        |
+| webdriver:start      | Starts a webdriver instance for usage on e2e tests.                                                                            |                                     |
+| webdriver:update     | Updates the selenium standalone provided by Protractor.                                                                        |                                     |
