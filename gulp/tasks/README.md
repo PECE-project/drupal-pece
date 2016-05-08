@@ -39,6 +39,9 @@ $(npm bin)/gulp [TASK-NAME]
 | build:dev        | Same as build, but also downloads development only Drupal modules.                                                             | build                               |
 | drush:kw-b       | Helper task to run `drush kw-b`.                                                                                               |                                     |
 | drush:kw-u       | Helper task to run `drush kw-u`.                                                                                               |                                     |
+| drush:si         | Helper task to run `drush si` with PECE's configuration.                                                                       |                                     |
+| init             | One-for-all install method.                                                                                                    | build, drush:kw-i, drush:kw-u       |
+| install          | Install task bound to package. Will run once `npm install` finishes. Installs Bower dependencies                               | bower:install                       |
 | styles           | Compiles Sass stylesheets into CSS.                                                                                            |                                     |
 | test:e2e         | Execute end to end tests using Protractor.                                                                                     | webdriver:start                     |
 | update           | Helper task to update assets and database.                                                                                     | [drush:kw-u, bower:install], styles |
