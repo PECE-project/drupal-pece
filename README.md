@@ -46,7 +46,7 @@ Kraftwagen also provides a [official installation guide](http://kraftwagen.org/g
 
 PECE's building process consists of many tasks that automatically install dependencies, compile source assets (such as CSS), and build Drupal dependencies. These tasks as developed using [Gulp](http://gulpjs.com/).
 
-> A full list of the available tasks can be found on the [gulp/TASKS.md](gulp/TASKS.md) file and can be run on their own when desired to perform a single part of the process. To do that, you can install Gulp globally and execute it's tasks directly. The following commands, though, suggest the usage of *npm bin* command to retrieve the locally installed binaries' directory and execute the local Gulp available there after *npm install* was executed.
+> A full list of the available tasks can be found on the [gulp/TASKS.md](gulp/tasks/README.md) file and can be run on their own when desired to perform a single part of the process. To do that, you can install Gulp globally and execute it's tasks directly. The following commands, though, suggest the usage of *npm bin* command to retrieve the locally installed binaries' directory and execute the local Gulp available there after *npm install* was executed.
 
 To build the project, execute the following command on the root directory:
 
