@@ -1,22 +1,18 @@
-
 var gulp = require('gulp');
+var util = require('../../lib/util');
 var spawn = require('child_process').spawn;
 var webdriverPath = process.cwd() + '/node_modules/.bin/webdriver-manager';
 var webdriver;
 
-gulp.task('webdriver:start', ['context:setup'], function (done) {
-  // This task's content must never run inside a VM environment.
-  if (process.isVM) return done();
-
+gulp.task('webdriver:start', function (done) {
   var tryAgain = null;
   var fuser;
 
   // Check if port 4444 is already in use. In this case, probably the
   // developer has already started a webdriver-manager instance.
-  isPortTaken(4444, function (err, used) {
+  util.isPortTaken(4444, function (err, used) {
     err || used ? done(err) : webdriverStart();
   });
-
 
   /**
    * Webdriver starter. Encapsulated so we can try again.
@@ -35,8 +31,10 @@ gulp.task('webdriver:start', ['context:setup'], function (done) {
     if (tryAgain) {
       tryAgain = false;
       fuser = spawn('fuser', ['-k', '4444/tcp']);
-      fuser.on('close', webdriverStart);
+      return fuser.on('close', webdriverStart);
     }
+
+    done('Could not initiate webdriver. Make sure this machine has an available display (either real or xfvb).');
   }
 
   /**
@@ -59,20 +57,3 @@ gulp.task('webdriver:start', ['context:setup'], function (done) {
     });
   }
 });
-
-/**
- * Helper method to find if a given port is in use.
- */
-function isPortTaken(port, fn) {
-  var net = require('net')
-  var tester = net.createServer()
-  .once('error', function (err) {
-    if (err.code != 'EADDRINUSE') return fn(err)
-    fn(null, true)
-  })
-  .once('listening', function() {
-    tester.once('close', function() { fn(null, false) })
-    .close()
-  })
-  .listen(port)
-}

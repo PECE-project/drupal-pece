@@ -9,7 +9,7 @@ gulp.task('build', function (done) {
   sequence('bower:install', 'styles', 'drush:kw-b', done);
 });
 
-gulp.task('build:dev', ['drush:kw-b'], function (done) {
+gulp.task('build:dev', ['build'], function (done) {
   var cwd = pwd();
   cd(cwd + '/build');
   exec('drush make ' + profile + '/pece.dev.make --no-core --contrib-destination ' + profile + ' -y');

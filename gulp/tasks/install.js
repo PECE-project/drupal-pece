@@ -1,2 +1,3 @@
+var gulp = require('gulp');
 
-require('gulp').task('install', ['webdriver:update', 'build']);
+gulp.task('install', ['bower:install']);
