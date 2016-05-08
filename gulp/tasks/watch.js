@@ -1,4 +1,3 @@
-
 var gulp = require('gulp');
 
 gulp.task('watch:styles', ['styles'], function () {

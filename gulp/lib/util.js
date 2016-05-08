@@ -3,12 +3,15 @@
  * Exposes utility methods for the Gulp tasks.
  */
 
+var fs = require('fs');
 var net = require('net');
+
+var cwd = process.cwd();
 
 /**
  * Helper method to find if a given port is in use.
  * @param {Number} port The port to check for availability.
- * @param {Function} callback The callback to call with result.
+ * @param {Function} callback The callback to call with the result.
  */
 module.exports.isPortTaken = function (port, callback) {
   var finish = callback.bind(null, null, false);
@@ -32,4 +35,14 @@ module.exports.isPortTaken = function (port, callback) {
   function onSuccess() {
     tester.once('close', finish).close();
   }
+};
+
+/**
+ * Helper method to get currently setup Kraftwagen environment.
+ * @param {Function} callback The callback to call with the result.
+ */
+module.exports.environment = function (callback) {
+  fs.readFile(cwd + '/cnf/environment', function (err, data) {
+    callback.apply(null, err ? [err, null] : [null, data.toString().trim()]);
+  });
 };
