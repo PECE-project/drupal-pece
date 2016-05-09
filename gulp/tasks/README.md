@@ -36,7 +36,9 @@ $(npm bin)/gulp [TASK-NAME]
 |----------------------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
 | bower:install        | Installs dependencies registered with bower. Usually, refers to JavaScript libraries installed on the default theme directory. |                                     |
 | build                | Downloads Drupal modules (using Kraftwagen's build system) and install front-end dependencies.                                 | bower:install, styles, drush:kw-b   |
-| drush:kw-b           | Executes `drush kw-b` and install environment based dependencies.                                                                                               |                                     |
+| config:environment   | Configure Kraftwagen's environment file.                                                                                       |                                     |
+| config               | Helper task to run all configuration tasks.                                                                                    |                                     |
+| drush:kw-b           | Executes `drush kw-b` and install environment based dependencies.                                                              |                                     |
 | drush:kw-u           | Helper task to run `drush kw-u`.                                                                                               |                                     |
 | drush:sample-content | Adds sample content to a fresh install.                                                                                        |                                     |
 | drush:si             | Helper task to run `drush si` with PECE's configuration.                                                                       |                                     |
