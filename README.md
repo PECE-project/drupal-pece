@@ -17,7 +17,8 @@ PECE development is made easy by using the following softwares:
 - [Node.js](https://nodejs.org/en/) JavaScript runtime;
 - [Gulp](http://gulpjs.com/) task runner;
 - [Drush](http://docs.drush.org/) command line interface;
-- [Kraftwagen](http://kraftwagen.org/) drush extension.
+- [Kraftwagen](http://kraftwagen.org/) drush extension;
+- [Drupal requirements](https://www.drupal.org/requirements).
 
 ### Installing Node.js
 
@@ -55,7 +56,7 @@ npm --version # should echo a number starting with 3
 
 ### Installing Gulp
 
-Even though Gulp is not completely required as to install PECE's development copy, this is currently the main tool for running common tasks which might be hard to accomplish by hand. We strongly suggest you install it to ease development and avoid mistakes. Keep in mind that the following [Getting started](#getting-started) guide will use.
+Even though Gulp is not completely required as to install PECE's development copy, this is currently the main tool for running common tasks which might be hard to accomplish by hand. We strongly suggest you install it to ease development and avoid mistakes. Keep in mind that the following [Getting started](#getting-started) guide will use. Consider having a look at the full [list of the available tasks](gulp/tasks/README.md).
 
 Gulp is a Node.js package that provides an executable, and can be easily installed with the following command:
 
@@ -117,18 +118,20 @@ TODO
 
 ### Build
 
-PECE's building process consists of many tasks that automatically install dependencies, compile source assets (such as CSS), and build Drupal dependencies. These tasks as developed using [Gulp](http://gulpjs.com/).
+Kraftwagen - the tool behind PECE's building system - relies on the concept of different *environments* upon building. The two environments in use are:
 
-> Checkout the full [list of the available tasks](gulp/tasks/README.md) that can be run on their own when desired to perform a single part of the process.
+- **production**
+- **development**
 
-The major building process, however, can be done using *npm* as follows:
+> Onwards in the Drupal installing process, the environment will be responsible for enabling/disabling specific modules. Furthermore, using the *development* environment will also cause for the directory structure to use the *src* directory linked as the *pece* Drupal profile, inside Drupal's root directory - this means you can actively engage development using this directory without having to build every time you change something. This technique was introduced as a [pull-request](https://github.com/kraftwagen/kraftwagen/pull/46) to the Kraftwagen project.
+
+Kraftwagen provides many commands through the drush interface. We encapsulate some of them inside gulp tasks with the intend to ease the building and configuration steps. Therefore, to setup the Kraftwagen workspace you can run the following:
 
 ```sh
-cd [PROJECT PATH]
-npm install
+gulp setup
 ```
 
-`npm install` will automatically install the project's dependencies and perform a first build using Drush and Kraftwagen.
+You'll then be prompt to define the environment (defaults to production) and the posterior database configuration.
 
 ## Running the tests
 
