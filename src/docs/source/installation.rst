@@ -79,7 +79,7 @@ If you have the backend already set-up (including ''Drush''), you can quickly in
 
 ::
 
-    drush sql-cli < pece-drupal/database.sql
+    drush sql-cli < pece-distro/database.sql
     
 
 
