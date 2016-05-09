@@ -55,7 +55,7 @@ npm --version # should echo a number starting with 3
 
 ### Installing Gulp
 
-Even though Gulp is not completely required as to install PECE's development copy, this is currently the main tools for running common tasks which might be hard to accomplish by hand. We strongly suggest you install it to ease development and avoid mistakes. Keep in mind that the following [Getting started](#getting-started) guide will use.
+Even though Gulp is not completely required as to install PECE's development copy, this is currently the main tool for running common tasks which might be hard to accomplish by hand. We strongly suggest you install it to ease development and avoid mistakes. Keep in mind that the following [Getting started](#getting-started) guide will use.
 
 Gulp is a Node.js package that provides an executable, and can be easily installed with the following command:
 
@@ -94,11 +94,22 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Download
 
-To download the project, simple clone it to your directory of choice as follows:
+To download the project, simply clone it to your directory of choice as follows:
 
 ```sh
 git clone git://github.com/PECE-project/drupal-pece.git
+cd drupal-pece
 ```
+
+### Install dependencies
+
+PECE dependends on a bunch of Node.js packages, which will mostly help building PECE, and Bower packages, which are front-end libraries used. To install all these dependencies you can run the following:
+
+```sh
+npm install
+```
+
+After installing Node.js dependencies, *npm* will automatically perform Bower install.
 
 ### Configure
 
