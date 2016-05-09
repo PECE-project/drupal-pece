@@ -7,7 +7,7 @@ var cwd = process.cwd(), command = '', env, environmentMakePath;
 var profilePath = cwd + '/build/profiles/pece';
 
 gulp.task('drush:kw-b', function (done) {
-  // shell.exec('drush kw-b');
+  shell.exec('drush kw-b');
 
   getEnvironmentMakePath(function (err, makeFile) {
     if (!err) {
