@@ -6,53 +6,118 @@ Platform for Experimental and Collaborative Ethnography
 
 PECE is built as a [Drupal distribution](https://www.drupal.org/documentation/build/distributions) and therefore can be extended as any Drupal project can. This repository holds the development code for this project. Also, it is intended to be used by other developers to suggest bug fixes or improvements, as well as the starting point for the customization of the platform.
 
-If you are looking for the installable you should refer to the [PECE project](https://www.drupal.org/project/pece) on Drupal.org.
+If you are looking for the production ready code you should refer to the [PECE project](https://www.drupal.org/project/pece) on Drupal.org.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisities
+## Prerequisites
 
 > Keep in mind that these are prerequisites for the *development environemnt* of the PECE project, not for the production hosted software.
 
 PECE development is made easy by using the following softwares:
 
 - [Node.js](https://nodejs.org/en/) JavaScript runtime;
+- [Gulp](http://gulpjs.com/) task runner;
 - [Drush](http://docs.drush.org/) command line interface;
-- [Kraftwagen](http://kraftwagen.org/) drush extension;
+- [Kraftwagen](http://kraftwagen.org/) drush extension.
 
-#### Installing Node.js
+### Installing Node.js
 
 We strongly suggest you use [nvm](https://github.com/creationix/nvm) to install Node.js on your development machine. We recommend Node.js version 4.x.x and *npm* version 3.x.x.
 
-> After installing node via *nvm* you can update global *npm* package by running `npm install -g npm@3.x.x`.
+**1. To install *nvm*** run the following on you terminal:
 
-##### Installing Node.js dependencies
+```sh
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+```
 
-Run `npm install` inside the project's root directory to download all Node.js dependencies.
+After doing so, you will probably have to open a new terminal instance to have *nvm* available as a command. Visit nvm's [official installation guide](https://github.com/creationix/nvm#install-script) if you have any problem.
 
-#### Installing Drush
+**2. To install Node.js version 4.x.x** run the following on you terminal:
+
+```sh
+nvm install 4.x.x
+nvm use 4.x.x
+```
+
+Alternatively, you might first clone this repository, move into it's directory, and run `nvm install`. The file ``.nvmrc` will inform *nvm* which version of Node.js it should install and automatically set it as currently version to use.
+
+**3. To install the required version of *npm*** you must run the following on your terminal:
+
+```sh
+npm install -g npm@3.x.x
+```
+
+To check if everything went smoothly, run the following on your terminal;
+
+```sh
+node --version # should echo a number starting with 4
+npm --version # should echo a number starting with 3
+```
+
+### Installing Gulp
+
+Even though Gulp is not completely required as to install PECE's development copy, this is currently the main tools for running common tasks which might be hard to accomplish by hand. We strongly suggest you install it to ease development and avoid mistakes. Keep in mind that the following [Getting started](#getting-started) guide will use.
+
+Gulp is a Node.js package that provides an executable, and can be easily installed with the following command:
+
+```sh
+npm install -g gulp
+```
+
+After doing that, `gulp` command should be available in your terminal. If you find any trouble, please refer to Gulp's [official installation guide](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md).
+
+### Installing Drush
 
 To properly install Drush please follow the [official installing guide](http://docs.drush.org/en/master/install/).
 
-#### Installing Kraftwagen
+### Installing Kraftwagen
 
-Kraftwagen also provides a [official installation guide](http://kraftwagen.org/get-started.html#installation). Unfortunutelly, we currently use a forked version of the project. You can still follow the instructions on the official installation, but the git clone should come from [TallerWebSolutions/kraftwagen's local_workflow_improvements branch](https://github.com/TallerWebSolutions/kraftwagen/tree/local_workflow_improvements).
+Kraftwagen also provides an [official installation guide](http://kraftwagen.org/get-started.html#installation). Unfortunutelly, we currently use a forked version of the project. You can still follow the instructions on the official installation guide, but the git clone should come from [Taller's fork](https://github.com/TallerWebSolutions/kraftwagen/tree/local_workflow_improvements), on the *local_workflow_improvements* branch.
 
-> Kraftwagen system is an import part of our building process. Please make sure you understang it's concepts before proceding to the next steps.
+Terminal steps to install:
 
-### Building
+```sh
+# 1. Move to Drush install directory.
+cd ~/.drush
+
+# 2. Clone the Taller fork version of Kraftwagen.
+git clone -b local_workflow_improvements --single-branch git://github.com/TallerWebSolutions/kraftwagen.git
+
+# 3. Make Drush know you've installed a new module.
+drush cc drush
+```
+
+Kraftwagen system is an import part of our building process. Please make sure you understang it's concepts before proceding to the next steps.
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Download
+
+To download the project, simple clone it to your directory of choice as follows:
+
+```sh
+git clone git://github.com/PECE-project/drupal-pece.git
+```
+
+### Configure
+
+TODO
+
+### Build
 
 PECE's building process consists of many tasks that automatically install dependencies, compile source assets (such as CSS), and build Drupal dependencies. These tasks as developed using [Gulp](http://gulpjs.com/).
 
-> A full list of the available tasks can be found on the [gulp/TASKS.md](gulp/tasks/README.md) file and can be run on their own when desired to perform a single part of the process. To do that, you can install Gulp globally and execute it's tasks directly. The following commands, though, suggest the usage of *npm bin* command to retrieve the locally installed binaries' directory and execute the local Gulp available there after *npm install* was executed.
+> Checkout the full [list of the available tasks](gulp/tasks/README.md) that can be run on their own when desired to perform a single part of the process.
 
-To build the project, execute the following command on the root directory:
+The major building process, however, can be done using *npm* as follows:
 
 ```sh
-$(npm bin)/gulp build
+cd [PROJECT PATH]
+npm install
 ```
+
+`npm install` will automatically install the project's dependencies and perform a first build using Drush and Kraftwagen.
 
 ## Running the tests
 
