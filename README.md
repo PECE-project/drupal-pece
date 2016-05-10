@@ -178,6 +178,26 @@ sudo chown -R www-data:www-data cnf/files
 
 After doing that, you can proceed with the install by accessing `/install.php` using the browser.
 
+#### 5. (Optional) Install development modules
+
+When setup to a *development* environment, PECE downloads a bunch modules that aid development - such as [devel](https://www.drupal.org/project/devel). To enable this modules, run the following commands:
+
+```sh
+gulp update
+```
+
+#### 6. (Optional) Adding sample content
+
+PECE comes with a script to add some testing content. To execute it, run:
+
+```sh
+gulp update
+```
+
+> For this command to work, you must execute step 5.
+
+> Keep in mind that the sample content cannot be automatically removed later own. Save a copy of database proceeding to roll it back to the current state.
+
 ## Running the tests
 
 TODO
