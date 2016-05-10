@@ -459,10 +459,6 @@ projects[services][version] = 3.12
 projects[services_views][subdir] = contrib
 projects[services_views][version] = 1.1
 
-; Views Slideshow
-projects[views_slideshow][subdir] = contrib
-projects[views_slideshow][version] = 3.1
-
 ; =====================
 ; Imports
 ; =====================
