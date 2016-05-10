@@ -179,6 +179,15 @@ function pece_access_node_permission($node) {
 function pece_access_move_file($file, $scheme) {
   $original_scheme = ($scheme == 'public') ? 'private' : 'public';
   $destination = str_replace($original_scheme . '://', $scheme .'://', $file->uri);
+  $directory = rtrim(drupal_dirname($destination), '/\\');
+
+  // Check if directory exists.
+  if (!is_dir($directory)) {
+    // Let mkdir() recursively create directories and use the default directory permissions.
+    if (@drupal_mkdir($directory, NULL, TRUE)) {
+      drupal_chmod($directory);
+    }
+  }
 
   if (file_move($file, $destination)) {
     drupal_set_message(t('The file was moved from %from to %dest.', array(
