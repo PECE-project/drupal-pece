@@ -241,6 +241,29 @@ function pece_dashboard_default_page_manager_pages() {
   $display->content['new-60cb69ad-36f0-4f50-a301-351064ff312b'] = $pane;
   $display->panels['content'][5] = 'new-60cb69ad-36f0-4f50-a301-351064ff312b';
   $pane = new stdClass();
+  $pane->pid = 'new-f1d2834d-f05f-479a-9a69-a60937648921';
+  $pane->panel = 'content';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_my_fieldsites-panel_pane_1';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 6;
+  $pane->locks = array();
+  $pane->uuid = 'f1d2834d-f05f-479a-9a69-a60937648921';
+  $display->content['new-f1d2834d-f05f-479a-9a69-a60937648921'] = $pane;
+  $display->panels['content'][6] = 'new-f1d2834d-f05f-479a-9a69-a60937648921';
+  $pane = new stdClass();
   $pane->pid = 'new-a6f2d74c-68d6-4670-a3b6-17ecf3d36a20';
   $pane->panel = 'sidebar';
   $pane->type = 'block';
