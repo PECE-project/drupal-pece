@@ -148,13 +148,43 @@ Kraftwagen - the tool behind PECE's building system - relies on the concept of d
 
 Kraftwagen provides many commands through the drush interface. We encapsulate some of them inside gulp tasks with the intend to ease the building and configuration steps.
 
-To setup the Kraftwagen workspace you can run the following:
+#### 1. Setup the Kraftwagen workspace:
 
 ```sh
 gulp setup
 ```
 
 You'll then be prompt to define the environment (defaults to production) and the posterior database configuration.
+
+> The database configuration provided here is only used to connect to the database, not to create it; prior to proceeding with the install you should make sure to create the database and make it properly available via the settings provided on this step.
+
+#### 2. Download Drupal and contributed modules:
+
+```sh
+gulp build
+```
+
+#### 3. Configure the server
+
+Now you should have the directory *build* already created as Drupal's root. You should go forward and configure Apache, Nginx, or whichever HTTP server you find best. Remember to point the site's root directory to the *build* directory, not to the cloned repository's root.
+
+#### 4. Install Drupal
+
+Drupal requires you give write permission to the files directory. You can do it manually, or use the following helping task:
+
+```sh
+gulp files:allow-write
+```
+
+Proceed with default Drupal installation by accessing `/install.php` in your browser.
+
+After install, make sure to revoke write access on the files directory for security reasons. Again, you can do it manually or via a helping Gulp task:
+
+```sh
+gulp files:disallow-write
+```
+
+> Alternatively, you can install Drupal via Drush using the helper task `gulp site-install`. TODO: this task still throws errors for permission issues.
 
 ## Running the tests
 

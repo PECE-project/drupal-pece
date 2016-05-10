@@ -10,6 +10,7 @@ gulp.task('drush:si', function () {
   command += 'drush si pece';
   command += ' --site-name="' + siteName + '"';
   command += ' --account-pass="' + password + '"';
+  command += ' --notify';
   command += ' -y';
 
   shell.cd(cwd + '/build');
