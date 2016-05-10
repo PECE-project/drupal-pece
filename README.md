@@ -170,21 +170,13 @@ Now you should have the directory *build* already created as Drupal's root. You 
 
 #### 4. Install Drupal
 
-Drupal requires you give write permission to the files directory. You can do it manually, or use the following helping task:
+Drupal requires you give permission for the HTTP server user to write to the files directory. On more traditional installs this means the `www-data` user. To give permission for this user you can run the following:
 
 ```sh
-gulp files:allow-write
+sudo chown -R www-data:www-data cnf/files
 ```
 
-Proceed with default Drupal installation by accessing `/install.php` in your browser.
-
-After install, make sure to revoke write access on the files directory for security reasons. Again, you can do it manually or via a helping Gulp task:
-
-```sh
-gulp files:disallow-write
-```
-
-> Alternatively, you can install Drupal via Drush using the helper task `gulp site-install`. TODO: this task still throws errors for permission issues.
+After doing that, you can proceed with the install by accessing `/install.php` using the browser.
 
 ## Running the tests
 

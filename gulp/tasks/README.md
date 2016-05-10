@@ -44,8 +44,6 @@ $(npm bin)/gulp [TASK-NAME]
 | drush:kw-s           | Setups a Kraftwagen workspace.                                                                                                 |                                     |
 | drush:sample-content | Adds sample content to a fresh install.                                                                                        |                                     |
 | drush:si             | Helper task to run `drush si` with PECE's configuration.                                                                       |                                     |
-| files:allow-write    | Allow files directory writting.                                                                                                |                                     |
-| files:DISallow-write | Disallow files directory writting.                                                                                             |                                     |
 | init                 | One-for-all install method.                                                                                                    | build, drush:kw-i, drush:kw-u       |
 | setup                | Configures workspace and settings.                                                                                             | drush:kw-s, config                  |
 | styles               | Compiles Sass stylesheets into CSS.                                                                                            |                                     |
