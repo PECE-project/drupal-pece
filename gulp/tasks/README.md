@@ -40,10 +40,14 @@ $(npm bin)/gulp [TASK-NAME]
 | config:environment   | Configure Kraftwagen's environment file.                                                                                       |                                     |
 | config               | Helper task to run all configuration tasks.                                                                                    |                                     |
 | drush:kw-b           | Executes `drush kw-b` and install environment based dependencies.                                                              |                                     |
-| drush:kw-u           | Helper task to run `drush kw-u`.                                                                                               |                                     |
+| drush:kw-u           | Performs a Kraftwagen update of a previously installed project.                                                                |                                     |
+| drush:kw-s           | Setups a Kraftwagen workspace.                                                                                                 |                                     |
 | drush:sample-content | Adds sample content to a fresh install.                                                                                        |                                     |
 | drush:si             | Helper task to run `drush si` with PECE's configuration.                                                                       |                                     |
+| files:allow-write    | Allow files directory writting.                                                                                                |                                     |
+| files:DISallow-write | Disallow files directory writting.                                                                                             |                                     |
 | init                 | One-for-all install method.                                                                                                    | build, drush:kw-i, drush:kw-u       |
+| setup                | Configures workspace and settings.                                                                                             | drush:kw-s, config                  |
 | styles               | Compiles Sass stylesheets into CSS.                                                                                            |                                     |
 | test:e2e             | Execute end to end tests using Protractor.                                                                                     | webdriver:start                     |
 | update               | Helper task to update assets and database.                                                                                     | [drush:kw-u, bower:install], styles |
