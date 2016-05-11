@@ -112,7 +112,7 @@ function pece_about_strongarm() {
     'view modes' => array(
       'page_manager' => array(
         'status' => 1,
-        'default' => 1,
+        'default' => 0,
         'choice' => 0,
       ),
       'default' => array(
