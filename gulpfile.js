@@ -11,5 +11,9 @@
 */
 
 var requireDir = require('require-dir');
+var shell = require('shelljs');
+
+shell.config.fatal = true;
+shell.config.verbose = true;
 
 requireDir('./gulp', { recurse: true });
