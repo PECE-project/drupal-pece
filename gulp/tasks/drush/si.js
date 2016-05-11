@@ -11,6 +11,7 @@ gulp.task('drush:si', function () {
   command += ' --site-name="' + siteName + '"';
   command += ' --account-pass="' + password + '"';
   command += ' --notify';
+  command += ' --verbose';
   command += ' -y';
 
   shell.cd(cwd + '/build');
