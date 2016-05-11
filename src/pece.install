@@ -10,6 +10,7 @@ define('PECE_DEFAULT_ADMINISTRATIVE_THEME', 'adminimal');
  */
 function pece_install() {
   _pece_install_user();
+  _pece_install_permissions();
   _pece_install_themes();
   _pece_install_menu();
   _pece_install_blocks();
@@ -31,6 +32,20 @@ function _pece_install_user() {
   // Enable default permissions for system roles.
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
+}
+
+/**
+ * Setup sitewide permissions.
+ */
+function _pece_install_permissions() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  $permissions = array(
+    'add terms in pece_structured_analytics' => TRUE,
+  );
+
+  pece_set_permissions(array('Contributor' => $permissions));
+  pece_set_permissions(array('Researcher' => $permissions));
 }
 
 /**
@@ -124,35 +139,4 @@ function _pece_install_blocks() {
  */
 function _pece_install_site() {
   variable_set('site_frontpage', 'home');
-}
-
-/**
- * Implements hook_kw_manifests_info().
- */
-function pece_kw_manifests_info() {
-  $manifests = array();
-
-  // @TODO: Move this to pece_analytics module after solving the enabled modules
-  // order issue.
-  $manifests['define_analytics_perms'] = array(
-   'callback' => 'pece_manifest_define_analytics_perms',
-  );
-
-  return $manifests;
-}
-
-/**
- * Add permissions for PECE users to create Question Set taxonomy terms.
- */
-function pece_manifest_define_analytics_perms() {
-  $contributor = user_role_load_by_name('Contributor');
-  $researcher = user_role_load_by_name('Researcher');
-  $roles = array($contributor, $researcher);
-
-
-  if (module_exists('taxonomy_access_fix')) {
-    foreach ($roles as $role) {
-      user_role_grant_permissions($role->rid, array('add terms in pece_structured_analytics'));
-    }
-  }
 }
