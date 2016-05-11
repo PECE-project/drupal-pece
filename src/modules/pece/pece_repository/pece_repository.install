@@ -4,23 +4,44 @@
  * Installation code for the PECE Repository feature.
  */
 
- /**
-  * Implements hook_kw_manifests_info().
-  */
- function pece_repository_kw_manifests_info() {
-   $manifests = array();
-
-   $manifests['set_default_menu_items'] = array(
-     'callback' => 'pece_repository_set_default_menu_items',
-   );
-
-   return $manifests;
- }
+/**
+ * Implements hook_install().
+ */
+function pece_repository_install() {
+  _pece_repository_install_menu();
+}
 
 /**
- * Create kraftwagen itemnames for each design logic type.
+ * Creates default menu item for PECE Repository module.
  */
-function pece_repository_set_default_menu_items() {
-  module_load_include('inc', 'pece_repository', 'pece_repository.functions');
-  pece_repository_set_menu_items();
+function _pece_repository_install_menu() {
+  $items = array(
+    'Collaborate' => array(
+      'link_path' => drupal_get_normal_path('repo/groups'),
+      'link_title' => t('Collaborate'),
+      'weight' => 2,
+      'menu_name' => 'main-menu',
+      'mlid' => NULL,
+    ),
+    'Analyze' => array(
+      'link_path' => drupal_get_normal_path('repo/artifacts'),
+      'link_title' => t('Analyze'),
+      'weight' => 3,
+      'menu_name' => 'main-menu',
+      'mlid' => NULL,
+    ),
+    'Discover' => array(
+      'link_path' => drupal_get_normal_path('repo'),
+      'link_title' => t('Discover'),
+      'weight' => 4,
+      'menu_name' => 'main-menu',
+      'mlid' => NULL,
+    )
+  );
+
+  foreach ($items as $item) {
+    menu_link_save($item);
+  }
+
+  menu_cache_clear_all();
 }
