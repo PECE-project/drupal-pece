@@ -1,15 +1,5 @@
 <?php
-
 /**
  * @file
  * Install, update and uninstall functions for the pece_groups module.
  */
-
-/**
- * Implements hook_update_N().
- */
-function pece_groups_update_7000() {
-  module_disable(array(
-    'og_mailinglist'
-  ));
-}
