@@ -195,6 +195,29 @@ function pece_groups_panelizer_defaults() {
   $display->content['new-9ac50c3a-d647-4db6-9917-fded9074b390'] = $pane;
   $display->panels['content'][4] = 'new-9ac50c3a-d647-4db6-9917-fded9074b390';
   $pane = new stdClass();
+  $pane->pid = 'new-a9177a5a-db7c-418e-bfa8-62b18010b5de';
+  $pane->panel = 'content';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_group_field_diary-panel_pane_1';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 5;
+  $pane->locks = array();
+  $pane->uuid = 'a9177a5a-db7c-418e-bfa8-62b18010b5de';
+  $display->content['new-a9177a5a-db7c-418e-bfa8-62b18010b5de'] = $pane;
+  $display->panels['content'][5] = 'new-a9177a5a-db7c-418e-bfa8-62b18010b5de';
+  $pane = new stdClass();
   $pane->pid = 'new-cd10a770-62ad-42d7-a128-12872c386dda';
   $pane->panel = 'sidebar';
   $pane->type = 'entity_field';

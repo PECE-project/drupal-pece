@@ -22,7 +22,7 @@ function pece_artifacts_fieldnote_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'PECE - Group Field Diary';
+  $handler->display->display_options['title'] = 'Group Field Diary';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -77,7 +77,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'F d, Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
-  /* Field: Content: Description */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -201,7 +201,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $translatables['pece_group_field_diary'] = array(
     t('Master'),
-    t('PECE - Group Field Diary'),
+    t('Group Field Diary'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -251,15 +251,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['style_options']['grouping'] = array(
-    0 => array(
-      'field' => 'created',
-      'rendered' => 1,
-      'rendered_strip' => 0,
-    ),
-  );
-  $handler->display->display_options['style_options']['row_class'] = 'fieldnote-diary-row';
+  $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
@@ -284,7 +276,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
-  /* Field: Content: Description */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -426,6 +418,8 @@ function pece_artifacts_fieldnote_views_default_views() {
 
   /* Display: Content pane */
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Field Diary';
   $translatables['pece_user_field_diary'] = array(
     t('Master'),
     t('PECE - User Field Diary'),
@@ -452,6 +446,7 @@ function pece_artifacts_fieldnote_views_default_views() {
     t('Page'),
     t('more'),
     t('Content pane'),
+    t('Field Diary'),
     t('View panes'),
   );
   $export['pece_user_field_diary'] = $view;
