@@ -31,14 +31,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['style_options']['grouping'] = array(
-    0 => array(
-      'field' => 'created',
-      'rendered' => 1,
-      'rendered_strip' => 0,
-    ),
-  );
+  $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
@@ -412,12 +405,8 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['filters']['uid_raw']['relationship'] = 'uid';
   $handler->display->display_options['filters']['uid_raw']['group'] = 3;
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'pece_user_field_diary');
-  $handler->display->display_options['path'] = 'field-diary';
-
   /* Display: Content pane */
-  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  $handler = $view->new_display('panel_pane', 'Content pane', 'pece_user_field_diary');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Field Diary';
   $translatables['pece_user_field_diary'] = array(
@@ -443,10 +432,9 @@ function pece_artifacts_fieldnote_views_default_views() {
     t('<div class="field-diary-body">[body] <div class="read-more"><a href="/node/[nid]">(...)</a></div></div>'),
     t('All'),
     t('[name]\'s Field Diary'),
-    t('Page'),
-    t('more'),
     t('Content pane'),
     t('Field Diary'),
+    t('more'),
     t('View panes'),
   );
   $export['pece_user_field_diary'] = $view;

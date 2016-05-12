@@ -264,10 +264,10 @@ function pece_dashboard_default_page_manager_pages() {
   $display->content['new-f1d2834d-f05f-479a-9a69-a60937648921'] = $pane;
   $display->panels['content'][6] = 'new-f1d2834d-f05f-479a-9a69-a60937648921';
   $pane = new stdClass();
-  $pane->pid = 'new-08d37312-7b80-4c35-b44b-8274a0abbedb';
+  $pane->pid = 'new-d4419201-14ea-4496-b418-6f199399721b';
   $pane->panel = 'content';
   $pane->type = 'views_panes';
-  $pane->subtype = 'pece_user_field_diary-panel_pane_1';
+  $pane->subtype = 'pece_user_field_diary-pece_user_field_diary';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
@@ -283,9 +283,9 @@ function pece_dashboard_default_page_manager_pages() {
   $pane->extras = array();
   $pane->position = 7;
   $pane->locks = array();
-  $pane->uuid = '08d37312-7b80-4c35-b44b-8274a0abbedb';
-  $display->content['new-08d37312-7b80-4c35-b44b-8274a0abbedb'] = $pane;
-  $display->panels['content'][7] = 'new-08d37312-7b80-4c35-b44b-8274a0abbedb';
+  $pane->uuid = 'd4419201-14ea-4496-b418-6f199399721b';
+  $display->content['new-d4419201-14ea-4496-b418-6f199399721b'] = $pane;
+  $display->panels['content'][7] = 'new-d4419201-14ea-4496-b418-6f199399721b';
   $pane = new stdClass();
   $pane->pid = 'new-a6f2d74c-68d6-4670-a3b6-17ecf3d36a20';
   $pane->panel = 'sidebar';

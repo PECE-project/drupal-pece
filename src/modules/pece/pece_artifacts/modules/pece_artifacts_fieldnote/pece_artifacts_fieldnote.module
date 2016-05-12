@@ -28,19 +28,11 @@ function pece_artifacts_fieldnote_form_pece_artifact_fieldnote_node_form_alter(&
  * Implements hook_form_preprocess_views_view().
  */
 function pece_artifacts_fieldnote_preprocess_views_view(&$vars) {
-
   // Alter view's titles.
   if ($vars['view']->name == 'pece_user_field_diary' &&
       $vars['view']->current_display == 'pece_user_field_diary') {
-    global $user;
 
-    if (substr($user->name, -1, 1) == 's') {
-      $sufix = "' FIELD DIARY";
-    }
-    else {
-      $sufix = "'s FIELD DIARY";
-    }
-    $vars['view']->set_title($user->name . $sufix);
+    $vars['view']->set_title(t('Field Diary'));
   }
 
   if ($vars['view']->name == 'pece_group_field_diary' &&
