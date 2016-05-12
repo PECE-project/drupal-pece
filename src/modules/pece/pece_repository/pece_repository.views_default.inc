@@ -459,7 +459,13 @@ function pece_repository_views_default_views() {
 
   /* Display: Repository */
   $handler = $view->new_display('page', 'Repository', 'respository_page');
-  $handler->display->display_options['path'] = 'repo';
+  $handler->display->display_options['path'] = 'repo/discover';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Discover';
+  $handler->display->display_options['menu']['weight'] = '4';
+  $handler->display->display_options['menu']['name'] = 'main-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
 
   /* Display: Groups */
   $handler = $view->new_display('page', 'Groups', 'repository_group_page');
@@ -508,6 +514,12 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 1;
   $handler->display->display_options['path'] = 'repo/groups';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Collaborate';
+  $handler->display->display_options['menu']['weight'] = '2';
+  $handler->display->display_options['menu']['name'] = 'main-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
 
   /* Display: Artifacts */
   $handler = $view->new_display('page', 'Artifacts', 'repository_artifacts_page');
@@ -775,6 +787,12 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['filters']['uid_raw']['relationship'] = 'uid';
   $handler->display->display_options['filters']['uid_raw']['group'] = 3;
   $handler->display->display_options['path'] = 'repo/artifacts';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Analyze';
+  $handler->display->display_options['menu']['weight'] = '3';
+  $handler->display->display_options['menu']['name'] = 'main-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['pece_repository'] = array(
     t('Master'),
     t('Repository'),
