@@ -33,9 +33,7 @@ gulp.task('drush:kw-b', function (done) {
  */
 function getEnvironmentMakePath(callback) {
   util.environment(function (err, env) {
-    if (err) return callback(err, null);
-
-    environmentMakePath = profilePath + '/pece.' + env + '.make';
+    environmentMakePath = profilePath + '/pece.' + (env || 'production') + '.make';
 
     fs.stat(environmentMakePath, function(err, stat) {
       callback.apply(null, err ? [err, null] : [null, environmentMakePath]);
