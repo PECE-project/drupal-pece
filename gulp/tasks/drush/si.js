@@ -16,7 +16,6 @@ gulp.task('drush:si', function (done) {
   command += 'drush si pece';
   command += ' --site-name="' + siteName + '"';
   command += ' --account-pass="' + password + '"';
-  command += ' --notify';
   command += ' --verbose';
   command += ' -y';
 
