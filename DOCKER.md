@@ -27,6 +27,7 @@ $ docker-compose run --rm -p 8080:80 dev_pece
 
   * Access url [http://localhost:8080](http://localhost:8080)
   * Database configurations:
+      - *Host:* pece-db
       - *Database:* pece
       - *User:* pece
       - *Pece Password:* ZwTuVZzQO90qwYzA
