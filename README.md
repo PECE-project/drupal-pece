@@ -168,35 +168,41 @@ gulp build
 
 Now you should have the directory *build* already created as Drupal's root. You should go forward and configure Apache, Nginx, or whichever HTTP server you find best. Remember to point the site's root directory to the *build* directory, not to the cloned repository's root.
 
-#### 4. Install Drupal
+#### 4. Setup permissions
 
 Drupal requires you give permission for the HTTP server user to write to the files directory. On more traditional installs this means the `www-data` user. To give permission for this user you can run the following:
 
 ```sh
-sudo chown -R www-data:www-data cnf/files
+sudo chgrp -R www-data cnf/files
 ```
 
-After doing that, you can proceed with the install by accessing `/install.php` using the browser.
+Keep in mind that this is not necessarily correct; depends on your running environment.
 
-#### 5. (Optional) Install development modules
+#### 5. Install Drupal
 
-When setup to a *development* environment, PECE downloads a bunch modules that aid development - such as [devel](https://www.drupal.org/project/devel). To enable this modules, run the following commands:
+There is currently two methods for installing a fresh PECE project: via command line; or using the browser.
+
+##### 5.1 Using the browser
+
+In your browser, access the url `/install.php`, preceded with the domain serving the site. The install process is self-explanatory. Keep in mind it takes a while to finish; up ot 30 minutes, on lower configuration machines.
+
+##### 5.2 Using the command line
+
+There is a one-command install available through Gulp. Keep in mind that this will erase any currently available data on the database configured in the step 1. To proceed, run the following:
 
 ```sh
-gulp update
+gulp site-install
 ```
 
-#### 6. (Optional) Adding sample content
+#### 6. (Optional) Adding demo content
 
 PECE comes with a script to add some testing content. To execute it, run:
 
 ```sh
-gulp update
+gulp demo
 ```
 
-> For this command to work, you must execute step 5.
-
-> Keep in mind that the sample content cannot be automatically removed later own. Save a copy of database proceeding to roll it back to the current state.
+Alternatively, you can do it in your browser by accessing Configuration > Development > PECE Demo (or `/admin/config/development/pece/demo`). This route will only be available if you configured the environment to *development* or if you enabled `pece_demo` module.
 
 ## Running the tests
 
