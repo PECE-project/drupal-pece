@@ -5,19 +5,13 @@
  */
 
 /**
- * Implements hook_enable().
- */
-function pece_design_logic_enable() {
-  _pece_design_logic_install_paths();
-  _pece_design_logic_install_permissions();
-}
-
-/**
  * Implements hook_modules_enabled().
  */
 function pece_design_logic_modules_enabled($modules) {
   if (in_array('pece', $modules)) {
+    _pece_design_logic_install_paths();
     _pece_design_logic_install_design_logic_items();
+    _pece_design_logic_install_permissions();
   }
 }
 
