@@ -42,6 +42,11 @@ RUN mv drush.phar /usr/local/bin/drush
 RUN npm install -g gulp
 RUN npm install -g npm@3.x.x
 
+### CREATE USER FOR DEVELOPMENT
+RUN echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    useradd -u 1000 -G www-data,sudo -d /pece --shell /bin/bash -m pece && \
+    echo "secret\nsecret" | passwd pece
+
 COPY ./docker/bash.bashrc /etc/bash.bashrc
 RUN chmod +x /etc/bash.bashrc
 ADD ./docker/docker-entrypoint.sh /pece/docker-entrypoint.sh
@@ -60,11 +65,6 @@ RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini && 
     sed -i '/^listen.allowed_clients/c;listen.allowed_clients =' /etc/php5/fpm/pool.d/www.conf && \
     sed -i '/^;catch_workers_output/ccatch_workers_output = yes' /etc/php5/fpm/pool.d/www.conf && \
     sed -i '/^;env\[TEMP\] = .*/aenv[DB_PORT_3306_TCP_ADDR] = $DB_PORT_3306_TCP_ADDR' /etc/php5/fpm/pool.d/www.conf
-
-### CREATE USER FOR DEVELOPMENT
-RUN echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    useradd -u 1000 -G www-data -d /pece --shell /bin/bash -m pece && \
-    echo "secret\nsecret" | passwd pece
 
 USER pece
 WORKDIR /pece

@@ -18,11 +18,20 @@ services:
     hostname: "dev"
     network_mode: bridge
     working_dir: /pece/drupal
+    environment:
+      - DB_PORT=3306
+      - DB_HOST=pece-db
+      - DB_NAME=pece
+      - DB_DRIVER=mysql
+      - DB_USERNAME=pece
+      - DB_PASSWORD=ZwTuVZzQO90qwYzA
     volumes:
       - ./:/pece/drupal
       - ./docker/pece.conf:/etc/nginx/conf.d/default.conf
       - ./docker/nginx.conf:/etc/nginx/nginx.conf
       - ./docker/fastcgi.conf:/etc/nginx/fastcgi.conf
+      - $HOME/.ssh:/pece/.ssh
+      - $HOME/.gitconfig:/pece/.gitconfig
     container_name: pece-dev-apache
     build:
       context: ./

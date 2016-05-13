@@ -8,7 +8,7 @@ sudo nginx -g "daemon on;" > /tmp/access-nginx.log
 if [ ! -d /pece/drupal/node_modules ];
 then
   npm install && gulp setup && gulp build && gulp site-install
-  sudo chgrp -R www-data /pece/drupal/cnf/files
+  sudo chmod 775 -Rf /pece/drupal/cnf
 fi
 
 echo ""

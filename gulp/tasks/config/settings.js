@@ -8,12 +8,12 @@ var replace = require('gulp-replace');
 var cwd = process.cwd();
 
 var info = [
-  { 'name' : 'name',     'placeholder': '%SETTINGS_DATABASE_NAME%',     'default': 'pece' },
-  { 'name' : 'username', 'placeholder': '%SETTINGS_DATABASE_USERNAME%', 'default': 'pece' },
-  { 'name' : 'password', 'placeholder': '%SETTINGS_DATABASE_PASSWORD%', 'default': '' },
-  { 'name' : 'host',     'placeholder': '%SETTINGS_DATABASE_HOST%',     'default': 'localhost' },
-  { 'name' : 'port',     'placeholder': '%SETTINGS_DATABASE_PORT%',     'default': '' },
-  { 'name' : 'driver',   'placeholder': '%SETTINGS_DATABASE_DRIVER%',   'default': 'mysql' },
+  { 'name' : 'name',     'placeholder': '%SETTINGS_DATABASE_NAME%',     'default': process.env.DB_NAME     || 'pece'      },
+  { 'name' : 'username', 'placeholder': '%SETTINGS_DATABASE_USERNAME%', 'default': process.env.DB_USERNAME || 'pece'      },
+  { 'name' : 'password', 'placeholder': '%SETTINGS_DATABASE_PASSWORD%', 'default': process.env.DB_PASSWORD || ''          },
+  { 'name' : 'host',     'placeholder': '%SETTINGS_DATABASE_HOST%',     'default': process.env.DB_HOST     || 'localhost' },
+  { 'name' : 'port',     'placeholder': '%SETTINGS_DATABASE_PORT%',     'default': process.env.DB_PORT     || ''          },
+  { 'name' : 'driver',   'placeholder': '%SETTINGS_DATABASE_DRIVER%',   'default': process.env.DB_DRIVER   || 'mysql'     },
   { 'name' : 'prefix',   'placeholder': '%SETTINGS_DATABASE_PREFIX%',   'default': '' }
 ];
 
