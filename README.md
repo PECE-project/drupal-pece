@@ -194,6 +194,8 @@ There is a one-command install available through Gulp. Keep in mind that this wi
 gulp site-install
 ```
 
+> If the user running the Gulp task differs from the user used by the server, you will need to redo step 4 in orther to make sure the server detains proper permission to manage files.
+
 #### 6. (Optional) Adding demo content
 
 PECE comes with a script to add some testing content. To execute it, run:
