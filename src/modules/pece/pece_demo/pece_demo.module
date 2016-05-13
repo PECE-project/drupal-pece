@@ -75,12 +75,12 @@ function pece_demo_generate_demo_content() {
   $roles = array('Contributor' => 5, 'Researcher' => 5);
 
   foreach ($roles as $role_name => $amount) {
-    // $role = user_role_load_by_name($role_name);
-    // devel_create_users($amount, FALSE, $timeback, array($role->rid), 'demo');
-    // drupal_set_message(t('Generated @amount users of role !role.', array(
-    //   '@amount' => $amount,
-    //   '!role' => $role_name,
-    // )), 'status');
+    $role = user_role_load_by_name($role_name);
+    devel_create_users($amount, FALSE, $timeback, array($role->rid), 'demo');
+    drupal_set_message(t('Generated @amount users of role !role.', array(
+      '@amount' => $amount,
+      '!role' => $role_name,
+    )), 'status');
   }
 
 
@@ -90,15 +90,15 @@ function pece_demo_generate_demo_content() {
   $vocabularies = array('pece_tags' => 40, 'pece_structured_analytics' => 10);
 
   foreach ($vocabularies as $vocabulary_name => $amount) {
-    // if ($vocabulary = taxonomy_vocabulary_machine_name_load($vocabulary_name)) {
-    //   $new_terms = devel_generate_terms($amount, array($vocabulary->vid => $vocabulary), '12');
-    //   if (!empty($new_terms)) {
-    //     drupal_set_message(t('Generated the following new terms on the !vocabulary vocabulary: !terms', array(
-    //       '!terms' => implode(',', $new_terms),
-    //       '!vocabulary' => $vocabulary->name,
-    //     )), 'status');
-    //   }
-    // }
+    if ($vocabulary = taxonomy_vocabulary_machine_name_load($vocabulary_name)) {
+      $new_terms = devel_generate_terms($amount, array($vocabulary->vid => $vocabulary), '12');
+      if (!empty($new_terms)) {
+        drupal_set_message(t('Generated the following new terms on the !vocabulary vocabulary: !terms', array(
+          '!terms' => implode(',', $new_terms),
+          '!vocabulary' => $vocabulary->name,
+        )), 'status');
+      }
+    }
   }
 
 
@@ -115,25 +115,26 @@ function pece_demo_generate_demo_content() {
     'pece_artifact_video' => 3,
     'pece_artifact_fieldnote' => 3,
     'pece_memo' => 3,
+    'frontpage_image_slideshow' => 3,
   );
 
   $content_types_info = node_type_get_types();
 
   foreach ($content_types as $content_type => $amount) {
     if (isset($content_types_info[$content_type])) {
-      // $config = array('values' => array(
-      //   'title_length' => 6,
-      //   'num_nodes' => $amount,
-      //   'max_comments' => 0,
-      //   'node_types' => array($content_type => $content_type),
-      // ));
-      //
-      // devel_generate_content($config);
-      //
-      // drupal_set_message(t('Generated @num_nodes nodes of type !type.', array(
-      //   '@num_nodes' => $amount,
-      //   '!type' => $content_types_info[$content_type]->name,
-      // )), 'status');
+      $config = array('values' => array(
+        'title_length' => 6,
+        'num_nodes' => $amount,
+        'max_comments' => 0,
+        'node_types' => array($content_type => $content_type),
+      ));
+
+      devel_generate_content($config);
+
+      drupal_set_message(t('Generated @num_nodes nodes of type !type.', array(
+        '@num_nodes' => $amount,
+        '!type' => $content_types_info[$content_type]->name,
+      )), 'status');
     }
   }
 
