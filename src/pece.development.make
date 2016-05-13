@@ -8,6 +8,7 @@ api = 2
 ; =====================
 
 projects[devel][subdir] = dev
+projects[devel][version] = 1.x-dev
 projects[drush_clone][subdir] = dev
 projects[drupal_ipsum][subdir] = dev
 projects[drush_entity][subdir] = dev
