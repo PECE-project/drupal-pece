@@ -33,8 +33,5 @@ services:
       - $HOME/.ssh:/pece/.ssh
       - $HOME/.gitconfig:/pece/.gitconfig
     container_name: pece-dev-apache
-    build:
-      context: ./
-      dockerfile: ./docker/DockerfileDevelopment
     links:
       - db_mysql:pece-db
