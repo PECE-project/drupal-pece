@@ -448,6 +448,18 @@ projects[amber][subdir] = contrib
 projects[backup_migrate][subdir] = contrib
 projects[backup_migrate][version] = 3.1
 
+; Node Expiration
+projects[node_expire][subdir] = contrib
+projects[node_expire][version] = 2.1
+
+; Date (dependency of node_expire)
+projects[date][subdir] = contrib
+projects[date][version] = 2.9
+
+; =====================
+; Development Modules
+; =====================
+
 ; Backup and Migrate - SFTP support
 projects[backup_migrate_sftp][subdir] = contrib
 projects[backup_migrate_sftp][version] = 1.0
