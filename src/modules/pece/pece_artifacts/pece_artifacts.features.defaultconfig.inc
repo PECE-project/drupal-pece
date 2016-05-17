@@ -24,58 +24,58 @@ function pece_artifacts_defaultconfig_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_expire_enabled_pece_artifact_audio';
-  $strongarm->value = 1;
-  $export['node_expire_enabled_pece_artifact_audio'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_expire_enabled_pece_artifact_bundle';
-  $strongarm->value = 1;
-  $export['node_expire_enabled_pece_artifact_bundle'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_expire_enabled_pece_artifact_fieldnote';
-  $strongarm->value = 1;
-  $export['node_expire_enabled_pece_artifact_fieldnote'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_expire_enabled_pece_artifact_image';
-  $strongarm->value = 1;
-  $export['node_expire_enabled_pece_artifact_image'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_expire_enabled_pece_artifact_pdf';
-  $strongarm->value = 1;
-  $export['node_expire_enabled_pece_artifact_pdf'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_expire_enabled_pece_artifact_text';
-  $strongarm->value = 1;
-  $export['node_expire_enabled_pece_artifact_text'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_expire_enabled_pece_artifact_video';
-  $strongarm->value = 1;
-  $export['node_expire_enabled_pece_artifact_video'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_expire_enabled_pece_artifact_website';
-  $strongarm->value = 1;
-  $export['node_expire_enabled_pece_artifact_website'] = $strongarm;
+  $strongarm->name = 'node_expire_ntypes';
+  $strongarm->value = array(
+    'pece_artifact_audio' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+    'pece_artifact_bundle' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+    'pece_artifact_fieldnote' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+    'pece_artifact_image' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+    'pece_artifact_pdf' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+    'pece_artifact_text' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+    'pece_artifact_video' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+    'pece_artifact_website' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+  );
+  $export['node_expire_ntypes'] = $strongarm;
 
   return $export;
 }
