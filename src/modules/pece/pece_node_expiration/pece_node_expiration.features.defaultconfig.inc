@@ -73,6 +73,9 @@ function pece_node_expiration_defaultconfig_user_default_permissions() {
     'name' => 'edit node expire',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
     ),
     'module' => 'node_expire',
   );
