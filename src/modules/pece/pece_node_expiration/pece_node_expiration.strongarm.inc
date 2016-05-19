@@ -21,7 +21,7 @@ function pece_node_expiration_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_expire_date_format';
-  $strongarm->value = 'm-d-Y';
+  $strongarm->value = 'm/d/Y';
   $export['node_expire_date_format'] = $strongarm;
 
   $strongarm = new stdClass();

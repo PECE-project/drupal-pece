@@ -33,7 +33,7 @@ function pece_node_expiration_defaultconfig_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_expire_date_format';
-  $strongarm->value = 'm-d-Y';
+  $strongarm->value = 'm/d/Y';
   $export['node_expire_date_format'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -49,6 +49,62 @@ function pece_node_expiration_defaultconfig_strongarm() {
   $strongarm->name = 'node_expire_past_date_allowed';
   $strongarm->value = 0;
   $export['node_expire_past_date_allowed'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_expire_ntypes';
+  $strongarm->value = array(
+    'pece_artifact_audio' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+    'pece_artifact_bundle' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+    'pece_artifact_fieldnote' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+    'pece_artifact_image' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+    'pece_artifact_pdf' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+    'pece_artifact_text' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+    'pece_artifact_video' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+    'pece_artifact_website' => array(
+      'enabled' => 1,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+    ),
+  );
+  $export['node_expire_ntypes'] = $strongarm;
 
   return $export;
 }
@@ -73,7 +129,6 @@ function pece_node_expiration_defaultconfig_user_default_permissions() {
     'name' => 'edit node expire',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
     ),
