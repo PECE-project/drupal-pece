@@ -450,7 +450,7 @@ projects[backup_migrate][version] = 3.1
 
 ; Node Expiration
 projects[node_expire][subdir] = contrib
-projects[node_expire][version] = 2.1
+projects[node_expire][version] = 2.2
 
 ; Date (dependency of node_expire)
 projects[date][subdir] = contrib
