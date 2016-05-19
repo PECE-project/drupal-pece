@@ -72,14 +72,28 @@ function _pece_install_themes() {
  * Setup menu configurations.
  */
 function _pece_install_menu() {
-  $item = array(
-    'link_path' => drupal_get_normal_path('<front>'),
-    'link_title' => t('Home'),
-    'weight' => 0,
-    'menu_name' => 'main-menu',
-    'mlid' => NULL,
+  $items = array(
+    'home' => array(
+      'link_path' => drupal_get_normal_path('<front>'),
+      'link_title' => t('Home'),
+      'weight' => 0,
+      'menu_name' => 'main-menu',
+      'mlid' => NULL,
+    ),
+
+    'register' => array(
+      'link_path' => 'user/register',
+      'link_title' => t('Register'),
+      'weight' => 0,
+      'menu_name' => 'user-menu',
+      'mlid' => NULL,
+    ),
   );
-  menu_link_save($item);
+
+  foreach ($items as $item) {
+    menu_link_save($item);
+  }
+
   menu_cache_clear_all();
 }
 
