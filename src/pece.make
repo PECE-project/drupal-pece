@@ -481,6 +481,26 @@ projects[services_views][subdir] = contrib
 projects[services_views][version] = 1.1
 
 ; =====================
+; Integrations
+; =====================
+
+; Job scheduler
+projects[job_scheduler][subdir] = contrib
+projects[job_scheduler][version] = 2.0-alpha3
+
+; Feeds
+projects[feeds][subdir] = contrib
+projects[feeds][version] = 2.0-beta2
+
+; Bibliography
+projects[biblio][subdir] = contrib
+projects[biblio][version] = 1.0-rc7
+
+; Bibliography Zotero
+projects[biblio_zotero][subdir] = contrib
+projects[biblio_zotero][version] = 1.0-alpha3
+
+; =====================
 ; Imports
 ; =====================
 ; At the end, so that overrides are possible.includes[] = modules/sandbox/taller_entity/taller_entity.make
