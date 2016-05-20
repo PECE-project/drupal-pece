@@ -7,6 +7,31 @@
 include_once 'pece_biblio.features.inc';
 
 /**
- * @file
- * Code for the PECE Bibliography module.
+ * Implements hook_pece_install_tasks().
  */
+function pece_biblio_pece_install_tasks() {
+  $tasks = array();
+
+  // $tasks = array(
+  //   'pece_biblio_zotero' => array(
+  //     'display_name' => st('Configure Zotero'),
+  //     'type' => 'form',
+  //   ),
+  // );
+
+  return $tasks;
+}
+
+/**
+ * Callback form for "Configure Zotero" task.
+ */
+function pece_biblio_zotero($form, &$form_state) {
+  drupal_set_title(st('Configure Zotero integration'));
+
+  $form['intro'] = array(
+    '#markup' => '<p>' . st('You can optionally configure PECE to import bibliography items from Zotero.') .
+      '<br><small>' . st('Safely ignore this step if you don\'t use Zotero or if you don\'t want this integration.') . '</small></p>',
+  );
+
+  return $form;
+}
