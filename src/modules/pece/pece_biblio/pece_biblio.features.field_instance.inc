@@ -125,10 +125,63 @@ function pece_biblio_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_zotero_username'.
+  $field_instances['user-user-field_zotero_username'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'This field will be used to map authorship for the bibliography imported from the Zotero platform.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'user',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_zotero_username',
+    'label' => 'Zotero username',
+    'required' => 0,
+    'settings' => array(
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => 1,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Collection');
   t('Tags');
+  t('This field will be used to map authorship for the bibliography imported from the Zotero platform.');
+  t('Zotero username');
 
   return $field_instances;
 }
