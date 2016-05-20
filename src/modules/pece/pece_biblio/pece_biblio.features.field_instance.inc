@@ -172,7 +172,7 @@ function pece_biblio_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 1.5,
     ),
   );
 

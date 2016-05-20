@@ -6,8 +6,20 @@
 function pece_install_tasks(&$install_state) {
   $tasks = array();
 
+  // ----------------------------------------------------------------
   // Add our custom CSS file for the installation process.
+  // ----------------------------------------------------------------
+
   drupal_add_css(drupal_get_path('profile', 'pece') . '/pece.css');
+
+
+  // ----------------------------------------------------------------
+  // Allow PECE enabling modules to define own install tasks.
+  // ----------------------------------------------------------------
+
+  foreach (pece_modules_implements('pece_install_tasks') as $module => $hook) {
+    $tasks += $hook($install_state);
+  }
 
   return $tasks;
 }
@@ -16,8 +28,66 @@ function pece_install_tasks(&$install_state) {
  * Implements hook_install_tasks_alter()
  */
 function pece_install_tasks_alter(&$tasks, $install_state) {
-  // Magically go one level deeper in solving years of dependency problems
+
+  // ----------------------------------------------------------------
+  // Magically go one level deeper in solving years of dependency problems.
+  // Copied from Panopoly distro.
+  // ----------------------------------------------------------------
+
   $tasks['install_load_profile']['function'] = 'pece_install_load_profile';
+
+
+  // ----------------------------------------------------------------
+  // Allow PECE enabling modules to alter install tasks.
+  // ----------------------------------------------------------------
+
+  foreach (pece_modules_implements('pece_install_tasks_alter') as $module => $implementation) {
+    $implementation($tasks);
+  }
+}
+
+/**
+ * Helper method to retrieve PECE package modules.
+ */
+function pece_modules_info() {
+  $pece_modules = array();
+  $path_to_profile = drupal_get_path('profile', 'pece');
+  $path_to_info = $path_to_profile . '/pece.info';
+  $profile_info = drupal_parse_info_file($path_to_info);
+
+  if (empty($profile_info['dependencies'])) {
+    return $pece_modules;
+  }
+
+  foreach ($profile_info['dependencies'] as $module) {
+    $module_path = drupal_get_path('module', $module);
+    $module_path_to_info = "$module_path/$module.info";
+    $module_info = drupal_parse_info_file($module_path_to_info);
+
+    if (!empty($module_info['package']) && $module_info['package'] == 'PECE') {
+      $pece_modules[$module] = $module_info;
+    }
+  }
+
+  return $pece_modules;
+}
+
+/**
+ * Helper method to get PECE package module implementations.
+ */
+function pece_modules_implements($hook) {
+  $implementations = array();
+
+  foreach (pece_modules_info() as $module => $info) {
+    if (drupal_load('module', $module)) {
+      $function = "{$module}_{$hook}";
+      if (function_exists($function)) {
+        $implementations[$module] = $function;
+      }
+    }
+  }
+
+  return $implementations;
 }
 
 /**

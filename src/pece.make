@@ -498,7 +498,7 @@ projects[biblio][version] = 1.0-rc7
 
 ; Bibliography Zotero
 projects[biblio_zotero][subdir] = contrib
-projects[biblio_zotero][version] = 1.0-alpha3
+projects[biblio_zotero][version] = 1.x-dev
 
 ; =====================
 ; Imports
