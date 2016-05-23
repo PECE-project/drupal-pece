@@ -74,52 +74,59 @@ function pece_biblio_feeds_after_save__zotero_feed__blogPost($source, $entity, $
 /**
  * Creates PDF artifact based on a book's attachment, if existent.
  */
-function pece_biblio_feeds_after_save__zotero_feed__book($source, $entity, $item, $entity_id) {
-  // $config = $source->getConfig();
-  // $has_children = $item['numChildren'] !== '0';
-  //
-  // if (!$has_children || empty($config['FeedsZoteroFetcher'])) {
-  //   return;
-  // }
-  //
-  // $zotero_config = $config['FeedsZoteroFetcher'];
-  // $children_request_url = "https://api.zotero.org";
-  // $children_request_url .= "/{$zotero_config['zotero_type']}s";
-  // $children_request_url .= "/{$zotero_config['zotero_id']}";
-  // $children_request_url .= "/items/{$item['key']}/children";
-  //
-  // if (!empty($zotero_config['api_key'])) {
-  //   $children_request_url .= '?key=' . $zotero_config['api_key'];
-  // }
-  //
-  // $response = file_get_contents($children_request_url);
-  // $children = json_decode($response);
-  //
-  // if (empty($children)) {
-  //   return;
-  // }
-  //
-  // foreach ($children as $child) {
-  //   $data = $child->data;
-  //
-  //   // Consider refactoring this to add image attachment also.
-  //   if ($data->itemType !== 'attachment' || $data->contentType !== 'application/pdf') {
-  //     continue;
-  //   }
-  //
-  //   $file_url = $child->links->alternate->href . '/file';
-  //   $file = system_retrieve_file($file_url, NULL, TRUE);
-  //
-  //   // @TODO: solve how to download from Zotero using user credentials.
-  // }
+function pece_biblio_feeds_after_save__zotero_feed__book($source, $biblio, $item, $entity_id) {
+  $config = $source->getConfig();
+  $has_children = $item['numChildren'] !== '0';
+
+  if (!$has_children || empty($config['FeedsZoteroFetcher'])) {
+    return;
+  }
+
+  $zotero_config = $config['FeedsZoteroFetcher'];
+  $children_request_url = "https://api.zotero.org";
+  $children_request_url .= "/{$zotero_config['zotero_type']}s";
+  $children_request_url .= "/{$zotero_config['zotero_id']}";
+  $children_request_url .= "/items/{$item['key']}/children";
+
+  if (!empty($zotero_config['api_key'])) {
+    $children_request_url .= '?key=' . $zotero_config['api_key'];
+  }
+
+  $response = file_get_contents($children_request_url);
+  $children = json_decode($response);
+
+  if (empty($children)) {
+    return;
+  }
+
+  foreach ($children as $child) {
+    $data = $child->data;
+
+    // Consider refactoring this to add image attachment also.
+    if ($data->itemType !== 'attachment' || $data->contentType !== 'application/pdf') {
+      continue;
+    }
+
+    $biblio->biblio_url = $child->links->alternate->href . '/file';
+    pece_biblio_create_website_artifact_from_biblio($biblio, $biblio->title);
+  }
 }
 
 /**
  * Creates a website artifact based on a website bibliography import from Zotero.
  */
 function pece_biblio_feeds_after_save__zotero_feed__website($source, $biblio, $item, $entity_id) {
+  pece_biblio_create_website_artifact_from_biblio($biblio, $biblio->title);
+}
+
+/**
+ * Create an website artifact based on a biblio item.
+ */
+function pece_biblio_create_website_artifact_from_biblio($biblio, $title = NULl) {
+  $title = empty($title) ? $biblio->title : $title;
+
   $websites = (new EntityFieldQuery())->entityCondition('entity_type', 'node')
-    ->propertyCondition('title', $biblio->title)
+    ->propertyCondition('title', $title)
     ->propertyCondition('type', 'pece_artifact_website')
     ->range(0, 1)
     ->execute();
@@ -127,8 +134,6 @@ function pece_biblio_feeds_after_save__zotero_feed__website($source, $biblio, $i
   if (!empty($websites)) {
     return;
   }
-
-  module_load_include('inc', 'pathauto');
 
   $properties = array(
     'type' => 'pece_artifact_website',
@@ -141,8 +146,7 @@ function pece_biblio_feeds_after_save__zotero_feed__website($source, $biblio, $i
   $website_node = entity_create('node', $properties);
   $website = entity_metadata_wrapper('node', $website_node);
 
-  $website->title->set($biblio->title);
-  $website->field_pece_uri->set('artifact/website/' . pathauto_cleanstring($biblio->title));
+  $website->title->set($title);
   $website->field_pece_bibliography->set(array(intval($biblio->nid)));
   $website->field_pece_website_url->set(array('url' => $biblio->biblio_url, 'title' => '', 'attributes' => array()));
 
