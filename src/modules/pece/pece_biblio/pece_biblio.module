@@ -107,8 +107,15 @@ function pece_biblio_feeds_after_save__zotero_feed__book($source, $biblio, $item
       continue;
     }
 
+    for ($count = 0, $found = TRUE; $found; $count++) {
+      $num = $count + 1;
+      $title = $count ? $biblio->title . " ({$num})" : $biblio->title;
+      $websites = pece_biblio_load_node_by_title('pece_artifact_website', $title);
+      $found = !empty($websites);
+    }
+
     $biblio->biblio_url = $child->links->alternate->href . '/file';
-    pece_biblio_create_website_artifact_from_biblio($biblio, $biblio->title);
+    pece_biblio_create_website_artifact_from_biblio($biblio, $title);
   }
 }
 
@@ -125,13 +132,10 @@ function pece_biblio_feeds_after_save__zotero_feed__website($source, $biblio, $i
 function pece_biblio_create_website_artifact_from_biblio($biblio, $title = NULl) {
   $title = empty($title) ? $biblio->title : $title;
 
-  $websites = (new EntityFieldQuery())->entityCondition('entity_type', 'node')
-    ->propertyCondition('title', $title)
-    ->propertyCondition('type', 'pece_artifact_website')
-    ->range(0, 1)
-    ->execute();
+  $websites = pece_biblio_load_node_by_title('pece_artifact_website', $title);
+  $title_in_use = !empty($websites);
 
-  if (!empty($websites)) {
+  if ($title_in_use) {
     return;
   }
 
@@ -154,4 +158,14 @@ function pece_biblio_create_website_artifact_from_biblio($biblio, $title = NULl)
   $website_node->field_pece_license = array();
 
   node_save($website_node);
+}
+
+/**
+ * Helper method to find node by title.
+ */
+function pece_biblio_load_node_by_title($type, $title) {
+  return (new EntityFieldQuery())->entityCondition('entity_type', 'node')
+    ->propertyCondition('title', $title)
+    ->propertyCondition('type', $type)
+    ->execute();
 }
