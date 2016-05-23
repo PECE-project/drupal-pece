@@ -43,6 +43,8 @@ function pece_artifacts_form_alter(&$form, &$form_state, $form_id) {
  * Default form alter for PECE's artifacts.
  */
 function _pece_artifacts_form_pece_artifact_form_alter(&$form, &$form_state) {
+  // @TODO: show URI field once API is available.
+  $form['field_pece_uri']['#access'] = FALSE;
   // Hide the comment settings fieldset.
   $form['comment_settings']['#access'] = FALSE;
   // We cannot allow the content to be authored by anonymous.
