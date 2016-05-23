@@ -67,11 +67,51 @@ function pece_biblio_feeds_after_save($source, $entity, $item, $entity_id) {
   }
 }
 
-/**
- * Custom feeds_after_save hook for Zotero items.
- */
 function pece_biblio_feeds_after_save__zotero_feed__blogPost($source, $entity, $item, $entity_id) {
   pece_biblio_feeds_after_save__zotero_feed__website($source, $entity, $item, $entity_id);
+}
+
+/**
+ * Creates PDF artifact based on a book's attachment, if existent.
+ */
+function pece_biblio_feeds_after_save__zotero_feed__book($source, $entity, $item, $entity_id) {
+  // $config = $source->getConfig();
+  // $has_children = $item['numChildren'] !== '0';
+  //
+  // if (!$has_children || empty($config['FeedsZoteroFetcher'])) {
+  //   return;
+  // }
+  //
+  // $zotero_config = $config['FeedsZoteroFetcher'];
+  // $children_request_url = "https://api.zotero.org";
+  // $children_request_url .= "/{$zotero_config['zotero_type']}s";
+  // $children_request_url .= "/{$zotero_config['zotero_id']}";
+  // $children_request_url .= "/items/{$item['key']}/children";
+  //
+  // if (!empty($zotero_config['api_key'])) {
+  //   $children_request_url .= '?key=' . $zotero_config['api_key'];
+  // }
+  //
+  // $response = file_get_contents($children_request_url);
+  // $children = json_decode($response);
+  //
+  // if (empty($children)) {
+  //   return;
+  // }
+  //
+  // foreach ($children as $child) {
+  //   $data = $child->data;
+  //
+  //   // Consider refactoring this to add image attachment also.
+  //   if ($data->itemType !== 'attachment' || $data->contentType !== 'application/pdf') {
+  //     continue;
+  //   }
+  //
+  //   $file_url = $child->links->alternate->href . '/file';
+  //   $file = system_retrieve_file($file_url, NULL, TRUE);
+  //
+  //   // @TODO: solve how to download from Zotero using user credentials.
+  // }
 }
 
 /**
