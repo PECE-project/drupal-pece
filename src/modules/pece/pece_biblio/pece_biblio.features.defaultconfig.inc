@@ -12,6 +12,7 @@ function pece_biblio_defaultconfig_features() {
     'pece_biblio' => array(
       'feeds_importer_default' => 'feeds_importer_default',
       'strongarm' => 'strongarm',
+      'user_default_permissions' => 'user_default_permissions',
     ),
   );
 }
@@ -2360,4 +2361,57 @@ function pece_biblio_defaultconfig_strongarm() {
   $export['biblio_show_user_profile_form'] = $strongarm;
 
   return $export;
+}
+
+/**
+ * Implements hook_defaultconfig_user_default_permissions().
+ */
+function pece_biblio_defaultconfig_user_default_permissions() {
+  $permissions = array();
+
+  // Exported permission: 'create zotero_feed content'.
+  $permissions['create zotero_feed content'] = array(
+    'name' => 'create zotero_feed content',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own zotero_feed content'.
+  $permissions['delete own zotero_feed content'] = array(
+    'name' => 'delete own zotero_feed content',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own zotero_feed content'.
+  $permissions['edit own zotero_feed content'] = array(
+    'name' => 'edit own zotero_feed content',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'import zotero_feed feeds'.
+  $permissions['import zotero_feed feeds'] = array(
+    'name' => 'import zotero_feed feeds',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'feeds',
+  );
+
+  return $permissions;
 }
