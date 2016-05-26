@@ -11,6 +11,7 @@ function pece_groups_defaultconfig_features() {
   return array(
     'pece_groups' => array(
       'field_default_fields' => 'field_default_fields',
+      'user_default_permissions' => 'user_default_permissions',
     ),
   );
 }
@@ -160,4 +161,45 @@ function pece_groups_defaultconfig_field_default_fields() {
   t('Thumbnail image');
 
   return $fields;
+}
+
+/**
+ * Implements hook_defaultconfig_user_default_permissions().
+ */
+function pece_groups_defaultconfig_user_default_permissions() {
+  $permissions = array();
+
+  // Exported permission: 'create pece_group content'.
+  $permissions['create pece_group content'] = array(
+    'name' => 'create pece_group content',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own pece_group content'.
+  $permissions['delete own pece_group content'] = array(
+    'name' => 'delete own pece_group content',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own pece_group content'.
+  $permissions['edit own pece_group content'] = array(
+    'name' => 'edit own pece_group content',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  return $permissions;
 }
