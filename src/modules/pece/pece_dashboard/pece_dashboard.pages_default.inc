@@ -289,6 +289,29 @@ function pece_dashboard_default_page_manager_pages() {
   $display->content['new-d4419201-14ea-4496-b418-6f199399721b'] = $pane;
   $display->panels['content'][7] = 'new-d4419201-14ea-4496-b418-6f199399721b';
   $pane = new stdClass();
+  $pane->pid = 'new-0d1aa060-3ae9-4588-9612-58cef304ee92';
+  $pane->panel = 'content';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_my_biblio_items-panel_pane_1';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 8;
+  $pane->locks = array();
+  $pane->uuid = '0d1aa060-3ae9-4588-9612-58cef304ee92';
+  $display->content['new-0d1aa060-3ae9-4588-9612-58cef304ee92'] = $pane;
+  $display->panels['content'][8] = 'new-0d1aa060-3ae9-4588-9612-58cef304ee92';
+  $pane = new stdClass();
   $pane->pid = 'new-a6f2d74c-68d6-4670-a3b6-17ecf3d36a20';
   $pane->panel = 'sidebar';
   $pane->type = 'block';
