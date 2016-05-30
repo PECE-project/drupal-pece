@@ -335,6 +335,94 @@ function pece_groups_views_default_views() {
   $export['pece_group_memos'] = $view;
 
   $view = new view();
+  $view->name = 'pece_group_projects';
+  $view->description = '';
+  $view->tag = 'PECE';
+  $view->base_table = 'node';
+  $view->human_name = 'PECE - Group Projects';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Projects';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Content: Project */
+  $handler->display->display_options['fields']['field_pece_project_ref']['id'] = 'field_pece_project_ref';
+  $handler->display->display_options['fields']['field_pece_project_ref']['table'] = 'field_data_field_pece_project_ref';
+  $handler->display->display_options['fields']['field_pece_project_ref']['field'] = 'field_pece_project_ref';
+  $handler->display->display_options['fields']['field_pece_project_ref']['label'] = '';
+  $handler->display->display_options['fields']['field_pece_project_ref']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_project_ref']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_project_ref']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_project_ref']['settings'] = array(
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_pece_project_ref']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_project_ref']['delta_offset'] = '0';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: OG membership: Entity id */
+  $handler->display->display_options['arguments']['etid']['id'] = 'etid';
+  $handler->display->display_options['arguments']['etid']['table'] = 'og_membership';
+  $handler->display->display_options['arguments']['etid']['field'] = 'etid';
+  $handler->display->display_options['arguments']['etid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['etid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['etid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['etid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['etid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'pece_group' => 'pece_group',
+  );
+
+  /* Display: Content pane */
+  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  $translatables['pece_group_projects'] = array(
+    t('Master'),
+    t('Projects'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('All'),
+    t('Content pane'),
+    t('View panes'),
+  );
+  $export['pece_group_projects'] = $view;
+
+  $view = new view();
   $view->name = 'pece_recent_groups';
   $view->description = 'List the most recent groups.';
   $view->tag = 'PECE';
