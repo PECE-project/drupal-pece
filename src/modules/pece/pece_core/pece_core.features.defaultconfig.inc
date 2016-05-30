@@ -120,6 +120,16 @@ function pece_core_defaultconfig_user_default_permissions() {
     'module' => 'comment',
   );
 
+  // Exported permission: 'use text format panopoly_wysiwyg_text'.
+  $permissions['use text format panopoly_wysiwyg_text'] = array(
+    'name' => 'use text format panopoly_wysiwyg_text',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'filter',
+  );
+
   return $permissions;
 }
 
