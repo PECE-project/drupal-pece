@@ -43,7 +43,7 @@ global $base_path;
   <?php if ($exposed): ?>
     <div class="view-filters">
       <a href="<?php print($base_path . 'biblio'); ?>">
-        <h2 class="biblio-link">PECE Biblio</h2>
+        <h2 class="biblio-link">Bibliography</h2>
       </a>
       <?php print $exposed; ?>
     </div>
