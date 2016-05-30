@@ -37,6 +37,8 @@ function pece_artifacts_pdf_panelizer_defaults() {
       'default' => NULL,
       'column1' => NULL,
       'column2' => NULL,
+      'content' => NULL,
+      'sidebar' => NULL,
     ),
   );
   $display->cache = array();
@@ -109,6 +111,38 @@ function pece_artifacts_pdf_panelizer_defaults() {
   $display->content['new-796e11b7-f8e9-4d0c-83de-897c130c0352'] = $pane;
   $display->panels['content'][1] = 'new-796e11b7-f8e9-4d0c-83de-897c130c0352';
   $pane = new stdClass();
+  $pane->pid = 'new-796c59b5-c169-48c3-b003-ebf63af9f1d8';
+  $pane->panel = 'content';
+  $pane->type = 'entity_field';
+  $pane->subtype = 'node:field_pece_bibliography';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'label' => 'hidden',
+    'formatter' => 'entityreference_label',
+    'delta_limit' => '0',
+    'delta_offset' => '0',
+    'delta_reversed' => 0,
+    'formatter_settings' => array(
+      'link' => 1,
+    ),
+    'context' => array(),
+    'override_title' => 1,
+    'override_title_text' => 'Citation',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 2;
+  $pane->locks = array();
+  $pane->uuid = '796c59b5-c169-48c3-b003-ebf63af9f1d8';
+  $display->content['new-796c59b5-c169-48c3-b003-ebf63af9f1d8'] = $pane;
+  $display->panels['content'][2] = 'new-796c59b5-c169-48c3-b003-ebf63af9f1d8';
+  $pane = new stdClass();
   $pane->pid = 'new-29810e4e-8c07-4693-83a0-beb6fbe25478';
   $pane->panel = 'content';
   $pane->type = 'node_links';
@@ -131,11 +165,11 @@ function pece_artifacts_pdf_panelizer_defaults() {
     'css_class' => 'link-wrapper',
   );
   $pane->extras = array();
-  $pane->position = 2;
+  $pane->position = 3;
   $pane->locks = array();
   $pane->uuid = '29810e4e-8c07-4693-83a0-beb6fbe25478';
   $display->content['new-29810e4e-8c07-4693-83a0-beb6fbe25478'] = $pane;
-  $display->panels['content'][2] = 'new-29810e4e-8c07-4693-83a0-beb6fbe25478';
+  $display->panels['content'][3] = 'new-29810e4e-8c07-4693-83a0-beb6fbe25478';
   $pane = new stdClass();
   $pane->pid = 'new-efab934f-fac6-4d10-a1eb-05d24e0dd9ca';
   $pane->panel = 'content';
@@ -223,11 +257,11 @@ function pece_artifacts_pdf_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 3;
+  $pane->position = 4;
   $pane->locks = array();
   $pane->uuid = 'efab934f-fac6-4d10-a1eb-05d24e0dd9ca';
   $display->content['new-efab934f-fac6-4d10-a1eb-05d24e0dd9ca'] = $pane;
-  $display->panels['content'][3] = 'new-efab934f-fac6-4d10-a1eb-05d24e0dd9ca';
+  $display->panels['content'][4] = 'new-efab934f-fac6-4d10-a1eb-05d24e0dd9ca';
   $pane = new stdClass();
   $pane->pid = 'new-2a26e734-dc3e-4358-85d9-037c15c3aae4';
   $pane->panel = 'content';
@@ -246,11 +280,11 @@ function pece_artifacts_pdf_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 4;
+  $pane->position = 5;
   $pane->locks = array();
   $pane->uuid = '2a26e734-dc3e-4358-85d9-037c15c3aae4';
   $display->content['new-2a26e734-dc3e-4358-85d9-037c15c3aae4'] = $pane;
-  $display->panels['content'][4] = 'new-2a26e734-dc3e-4358-85d9-037c15c3aae4';
+  $display->panels['content'][5] = 'new-2a26e734-dc3e-4358-85d9-037c15c3aae4';
   $pane = new stdClass();
   $pane->pid = 'new-588d01be-8903-4488-8143-73d1dc0c1904';
   $pane->panel = 'sidebar';
