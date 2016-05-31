@@ -284,16 +284,25 @@ function pece_groups_panelizer_defaults() {
   $display->content['new-36b646b6-7ed2-477d-9aac-94cefa8a7ae5'] = $pane;
   $display->panels['sidebar'][1] = 'new-36b646b6-7ed2-477d-9aac-94cefa8a7ae5';
   $pane = new stdClass();
-  $pane->pid = 'new-f822d3f3-9d20-429b-ad7d-7255ccbfd777';
+  $pane->pid = 'new-f8ec13a1-a56d-453b-a928-808fa85c4eb4';
   $pane->panel = 'sidebar';
-  $pane->type = 'views_panes';
-  $pane->subtype = 'pece_group_projects-panel_pane_1';
+  $pane->type = 'entity_field';
+  $pane->subtype = 'node:field_pece_project_ref';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'view_settings' => 'fields',
-    'header_type' => 'none',
-    'view_mode' => 'teaser',
+    'label' => 'hidden',
+    'formatter' => 'entityreference_label',
+    'delta_limit' => '0',
+    'delta_offset' => '0',
+    'delta_reversed' => 0,
+    'formatter_settings' => array(
+      'link' => 1,
+    ),
+    'context' => array(),
+    'override_title' => 1,
+    'override_title_text' => 'Projects',
+    'override_title_heading' => 'h2',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -303,9 +312,9 @@ function pece_groups_panelizer_defaults() {
   $pane->extras = array();
   $pane->position = 2;
   $pane->locks = array();
-  $pane->uuid = 'f822d3f3-9d20-429b-ad7d-7255ccbfd777';
-  $display->content['new-f822d3f3-9d20-429b-ad7d-7255ccbfd777'] = $pane;
-  $display->panels['sidebar'][2] = 'new-f822d3f3-9d20-429b-ad7d-7255ccbfd777';
+  $pane->uuid = 'f8ec13a1-a56d-453b-a928-808fa85c4eb4';
+  $display->content['new-f8ec13a1-a56d-453b-a928-808fa85c4eb4'] = $pane;
+  $display->panels['sidebar'][2] = 'new-f8ec13a1-a56d-453b-a928-808fa85c4eb4';
   $pane = new stdClass();
   $pane->pid = 'new-147bf60e-4dea-4d25-b657-e75f17702188';
   $pane->panel = 'sidebar';
