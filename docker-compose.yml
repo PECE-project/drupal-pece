@@ -15,10 +15,11 @@ services:
 
   dev_pece:
     image: taller/pece
-    # build:
-    #   context: ./
-    #   dockerfile: ./docker/DockerfileDevelopment
+    build:
+      context: ./
+      dockerfile: ./docker/DockerfileDevelopment
     hostname: "dev"
+    mem_limit: 1256m
     network_mode: bridge
     working_dir: /pece/drupal
     environment:
