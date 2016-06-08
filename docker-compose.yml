@@ -15,9 +15,9 @@ services:
 
   dev_pece:
     image: taller/pece
-    build:
-      context: ./
-      dockerfile: ./docker/DockerfileDevelopment
+    # build:
+    #   context: ./
+    #   dockerfile: ./docker/DockerfileDevelopment
     hostname: "dev"
     network_mode: bridge
     working_dir: /pece/drupal

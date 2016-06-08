@@ -100,6 +100,8 @@ RUN wget http://files.drush.org/drush.phar
 RUN chmod +x drush.phar
 RUN mv drush.phar /usr/local/bin/drush
 
+RUN apt-get install unzip --yes
+
 ### CONFIGURE PHP-FPM
 RUN echo "xdebug.max_nesting_level=9999" >> /etc/php5/mods-available/xdebug.ini
 RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini && \
