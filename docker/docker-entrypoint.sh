@@ -5,6 +5,12 @@ while ! nc -q 1 pece-db 3306 </dev/null; do sleep 3; done
 sudo service php5-fpm restart
 sudo nginx -g "daemon on;" > /tmp/access-nginx.log
 
+echo ""
+echo "--------------------------------"
+echo "------ Database connected ------"
+echo "--------------------------------"
+echo ""
+
 if [ ! -d /pece/drupal/node_modules ];
 then
   npm install && gulp setup && gulp build && gulp site-install
@@ -12,8 +18,9 @@ then
 fi
 
 echo ""
-echo "---------------------------------"
+echo "------------------------------"
 echo "Virtual machine ready to work."
-echo "---------------------------------"
+echo "------------------------------"
+echo ""
 
 exec "$@"

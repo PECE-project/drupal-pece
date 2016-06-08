@@ -14,15 +14,9 @@ $ cd drupal-pece/
 ```
 
 ---------------------
-Pull image of drupal-pece
-```sh
-$ docker pull taller/pece
-```
-
----------------------
 Up virtual machine to work
 ```sh
-$ docker-compose run --rm -p 8080:80 dev_pece
+$ make run
 ```
 
   * Access url [http://localhost:8080](http://localhost:8080)

@@ -1,16 +1,72 @@
-FROM nginx:stable
+FROM nginx:latest
 
 ENV DEBIAN_FRONTEND noninteractive
 
+RUN echo "America/Sao_Paulo" > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+
 ### UPDATE DEBIAN
 RUN apt-get update -y && apt-get upgrade -y && apt-get dist-upgrade -y && apt-get autoremove -y
-RUN apt-get update -y && apt-get install -y xz-utils netcat openconnect wget curl bash-completion python zip git vim htop sudo
 
 ### INSTALL PHP-FPM AND EXTENSION
-RUN apt-get update -y && apt-get install -y php5-fpm php5-curl php5-gd php5-imagick php5-json php5-mcrypt php5-mysqlnd libpng12-dev libjpeg-dev libpq-dev imagemagick mysql-client libfontconfig1 php5-xdebug
-RUN apt-get update -y && apt-get install -y php-apc php-pear
+RUN apt-get update -y && apt-get install -y \
+    php5-fpm \
+    php5-curl \
+    php5-gd \
+    php5-geoip \
+    php5-imagick \
+    php5-imap \
+    php5-json \
+    php5-ldap \
+    php5-mcrypt \
+    php5-sqlite \
+    php5-xdebug \
+    php5-xmlrpc \
+    php-apc \
+    php5-mysqlnd \
+    --no-install-recommends
 
-### INSTALL NODEJS
+RUN apt-get update -y && apt-get install -y \
+		sudo \
+		htop \
+		curl \
+		git \
+		libpng12-dev \
+		libjpeg-dev \
+		libpq-dev \
+    vim \
+    imagemagick \
+    mysql-client \
+    bash-completion \
+    libfontconfig1 \
+    bzip2 \
+    build-essential \
+    python-software-properties \
+    locales \
+    wget \
+    openconnect \
+    netcat \
+    tig \
+    ca-certificates \
+    xz-utils \
+    libfontconfig1 \
+    --no-install-recommends
+
+### CONFIGURE LOCALES
+RUN echo "LANGUAGE=pt_BR.UTF-8" >> /etc/environment
+RUN echo "LANG=pt_BR.UTF-8"     >> /etc/environment
+RUN echo "LC_ALL=pt_BR.UTF-8"   >> /etc/environment
+RUN locale-gen pt_BR.UTF-8
+RUN dpkg-reconfigure locales
+
+### INSTALL COMPOSER
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_DISABLE_XDEBUG_WARN 1
+RUN curl -sS https://getcomposer.org/installer | php && \
+    mv composer.phar /usr/local/bin/composer && \
+    composer self-update
+
+# gpg keys listed at https://github.com/nodejs/node
 RUN set -ex \
   && for key in \
     9554F04D7259F04124DE6B476D5A82AC7E37093B \
@@ -26,21 +82,45 @@ RUN set -ex \
   done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 4.4.4
-RUN curl -k -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
-  && curl -k -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
+ENV NODE_VERSION 4.4.5
+
+RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
+  && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
   && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
   && grep " node-v$NODE_VERSION-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt
+
+RUN npm install npm -g
+RUN npm install bower gulp -g
+RUN npm cache clear
 
 ### INSTALL DRUSH
 RUN wget http://files.drush.org/drush.phar
 RUN chmod +x drush.phar
 RUN mv drush.phar /usr/local/bin/drush
 
-RUN npm install -g gulp
-RUN npm install -g npm@3.x.x
+### CONFIGURE PHP-FPM
+RUN echo "xdebug.max_nesting_level=9999" >> /etc/php5/mods-available/xdebug.ini
+RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini && \
+    sed -i "s/memory_limit = 128M/memory_limit = 1256M/" /etc/php5/fpm/php.ini && \
+    sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini && \
+    sed -i "s/display_errors = Off/display_errors = stderr/" /etc/php5/fpm/php.ini && \
+    sed -i "s/post_max_size = 8M/post_max_size = 30M/" /etc/php5/fpm/php.ini && \
+    sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 30M/" /etc/php5/fpm/php.ini && \
+    sed -i "s/;opcache.enable=0/opcache.enable=1/" /etc/php5/fpm/php.ini && \
+    sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf && \
+    sed -i '/^listen = /clisten = 9000' /etc/php5/fpm/pool.d/www.conf && \
+    sed -i '/^listen.allowed_clients/c;listen.allowed_clients =' /etc/php5/fpm/pool.d/www.conf && \
+    sed -i '/^;catch_workers_output/ccatch_workers_output = yes' /etc/php5/fpm/pool.d/www.conf && \
+    sed -i '/^;env\[TEMP\] = .*/aenv[DB_PORT_3306_TCP_ADDR] = $DB_PORT_3306_TCP_ADDR' /etc/php5/fpm/pool.d/www.conf
+
+### APPLY NGINX CONFIGURATION
+RUN mkdir -p /tmp/logs
+RUN chmod 777 /tmp/logs
+COPY ./docker/nginx.conf /etc/nginx/nginx.conf
+COPY ./docker/fastcgi.conf /etc/nginx/fastcgi.conf
+COPY ./docker/bash.bashrc /etc/bash.bashrc
 
 ### CREATE USER FOR DEVELOPMENT
 RUN echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
@@ -51,20 +131,6 @@ COPY ./docker/bash.bashrc /etc/bash.bashrc
 RUN chmod +x /etc/bash.bashrc
 ADD ./docker/docker-entrypoint.sh /pece/docker-entrypoint.sh
 RUN chmod +x /pece/docker-entrypoint.sh
-
-### CONFIGURE PHP-FPM
-RUN echo "xdebug.max_nesting_level=9999" >> /etc/php5/mods-available/xdebug.ini
-RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini && \
-    sed -i "s/memory_limit = 128M/memory_limit = 1256M/" /etc/php5/fpm/php.ini && \
-    sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini && \
-    sed -i "s/display_errors = Off/display_errors = stderr/" /etc/php5/fpm/php.ini && \
-    sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 30M/" /etc/php5/fpm/php.ini && \
-    sed -i "s/;opcache.enable=0/opcache.enable=1/" /etc/php5/fpm/php.ini && \
-    sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf && \
-    sed -i '/^listen = /clisten = 9000' /etc/php5/fpm/pool.d/www.conf && \
-    sed -i '/^listen.allowed_clients/c;listen.allowed_clients =' /etc/php5/fpm/pool.d/www.conf && \
-    sed -i '/^;catch_workers_output/ccatch_workers_output = yes' /etc/php5/fpm/pool.d/www.conf && \
-    sed -i '/^;env\[TEMP\] = .*/aenv[DB_PORT_3306_TCP_ADDR] = $DB_PORT_3306_TCP_ADDR' /etc/php5/fpm/pool.d/www.conf
 
 USER pece
 WORKDIR /pece
