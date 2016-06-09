@@ -11,6 +11,7 @@ function pece_photo_essay_defaultconfig_features() {
   return array(
     'pece_photo_essay' => array(
       'strongarm' => 'strongarm',
+      'user_default_permissions' => 'user_default_permissions',
     ),
   );
 }
@@ -139,4 +140,122 @@ function pece_photo_essay_defaultconfig_strongarm() {
   $export['node_submitted_photo_essay'] = $strongarm;
 
   return $export;
+}
+
+/**
+ * Implements hook_defaultconfig_user_default_permissions().
+ */
+function pece_photo_essay_defaultconfig_user_default_permissions() {
+  $permissions = array();
+
+  // Exported permission: 'create photo_essay content'.
+  $permissions['create photo_essay content'] = array(
+    'name' => 'create photo_essay content',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any photo_essay content'.
+  $permissions['delete any photo_essay content'] = array(
+    'name' => 'delete any photo_essay content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own photo_essay content'.
+  $permissions['delete own photo_essay content'] = array(
+    'name' => 'delete own photo_essay content',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'eck add photo_essay_item photo_essay_item entities'.
+  $permissions['eck add photo_essay_item photo_essay_item entities'] = array(
+    'name' => 'eck add photo_essay_item photo_essay_item entities',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck delete photo_essay_item photo_essay_item entities'.
+  $permissions['eck delete photo_essay_item photo_essay_item entities'] = array(
+    'name' => 'eck delete photo_essay_item photo_essay_item entities',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck edit photo_essay_item photo_essay_item entities'.
+  $permissions['eck edit photo_essay_item photo_essay_item entities'] = array(
+    'name' => 'eck edit photo_essay_item photo_essay_item entities',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck view photo_essay_item photo_essay_item entities'.
+  $permissions['eck view photo_essay_item photo_essay_item entities'] = array(
+    'name' => 'eck view photo_essay_item photo_essay_item entities',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'edit any photo_essay content'.
+  $permissions['edit any photo_essay content'] = array(
+    'name' => 'edit any photo_essay content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own photo_essay content'.
+  $permissions['edit own photo_essay content'] = array(
+    'name' => 'edit own photo_essay content',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'set photo_essay published on date'.
+  $permissions['set photo_essay published on date'] = array(
+    'name' => 'set photo_essay published on date',
+    'roles' => array(),
+    'module' => 'publication_date',
+  );
+
+  return $permissions;
 }
