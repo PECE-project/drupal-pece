@@ -14,7 +14,7 @@ function pece_profile_form_alter(&$form, &$form_state, $form_id) {
   if (module_exists('pece_artifacts')) {
     module_load_include('inc', 'pece_artifacts', 'pece_artifacts.functions');
 
-    $artifacts = pece_artifacts_fetch_all();
+    $artifacts = pece_artifacts_fetch_all_types();
     $is_node_form = !empty($form['#node_edit_form']) && isset($form['#node']->type);
     $is_artifact_form = $is_node_form && in_array($form['#node']->type, $artifacts);
 

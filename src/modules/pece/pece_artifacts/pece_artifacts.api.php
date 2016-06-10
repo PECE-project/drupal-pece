@@ -9,7 +9,7 @@
  *
  * @return $artifacts.
  */
-function hook_pece_artifact_info() {
+function hook_pece_artifact_types_info() {
 }
 
 /**
@@ -17,5 +17,5 @@ function hook_pece_artifact_info() {
  *
  * @param $artifacts.
  */
-function hook_pece_artifact_info_alter(&$artifacts) {
+function hook_pece_artifact_types_info_alter(&$artifacts) {
 }
