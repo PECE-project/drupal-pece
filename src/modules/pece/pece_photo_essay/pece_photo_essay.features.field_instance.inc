@@ -10,7 +10,7 @@
 function pece_photo_essay_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-photo_essay-body'.
+  // Exported field_instance: 'node-pece_photo_essay-body'.
   $field_instances['node-pece_photo_essay-body'] = array(
     'bundle' => 'pece_photo_essay',
     'default_value' => NULL,
@@ -264,6 +264,80 @@ function pece_photo_essay_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-pece_photo_essay-field_pece_photo_essay_items'.
+  $field_instances['node-pece_photo_essay-field_pece_photo_essay_items'] = array(
+    'bundle' => 'pece_photo_essay',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 9,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'entityconnect_show_add_icon' => 0,
+    'entityconnect_show_edit_icon' => 0,
+    'entityconnect_unload_add' => 1,
+    'entityconnect_unload_edit' => 1,
+    'fences_wrapper' => 'div',
+    'field_name' => 'field_pece_photo_essay_items',
+    'label' => 'items',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'inline_entity_form',
+      'settings' => array(
+        'fields' => array(),
+        'type_settings' => array(
+          'allow_clone' => 0,
+          'allow_existing' => 0,
+          'allow_new' => 1,
+          'delete_references' => 1,
+          'label_plural' => 'items',
+          'label_singular' => 'item',
+          'match_operator' => 'CONTAINS',
+          'override_labels' => 1,
+        ),
+      ),
+      'type' => 'inline_entity_form',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'node-pece_photo_essay-field_pece_tags'.
   $field_instances['node-pece_photo_essay-field_pece_tags'] = array(
     'bundle' => 'pece_photo_essay',
@@ -444,79 +518,6 @@ function pece_photo_essay_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 10,
-    ),
-  );
-
-  // Exported field_instance: 'node-pece_photo_essay-field_pece_photo_essay_items'.
-  $field_instances['node-pece_photo_essay-field_pece_photo_essay_items'] = array(
-    'bundle' => 'pece_photo_essay',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 9,
-      ),
-      'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'mini_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'most_recent' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'entityconnect_show_add_icon' => 0,
-    'entityconnect_show_edit_icon' => 0,
-    'entityconnect_unload_add' => 1,
-    'entityconnect_unload_edit' => 1,
-    'fences_wrapper' => 'div',
-    'field_name' => 'field_pece_photo_essay_items',
-    'label' => 'items',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'inline_entity_form',
-      'settings' => array(
-        'fields' => array(),
-        'type_settings' => array(
-          'allow_clone' => 0,
-          'allow_existing' => 0,
-          'allow_new' => 1,
-          'delete_references' => 1,
-          'label_plural' => 'items',
-          'label_singular' => 'item',
-          'match_operator' => 'CONTAINS',
-          'override_labels' => 1,
-        ),
-      ),
-      'type' => 'inline_entity_form',
-      'weight' => 4,
     ),
   );
 
