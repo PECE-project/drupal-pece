@@ -54,7 +54,7 @@ function pece_photo_essay_defaultconfig_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_photo_essay';
-  $strongarm->value = '1';
+  $strongarm->value = '2';
   $export['comment_photo_essay'] = $strongarm;
 
   $strongarm = new stdClass();
