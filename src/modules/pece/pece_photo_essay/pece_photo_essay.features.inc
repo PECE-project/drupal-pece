@@ -21,10 +21,10 @@ function pece_photo_essay_ctools_plugin_api($module = NULL, $api = NULL) {
  */
 function pece_photo_essay_eck_bundle_info() {
   $items = array(
-    'photo_essay_item_photo_essay_item' => array(
-      'machine_name' => 'photo_essay_item_photo_essay_item',
-      'entity_type' => 'photo_essay_item',
-      'name' => 'photo_essay_item',
+    'pece_photo_essay_item_pece_photo_essay_item' => array(
+      'machine_name' => 'pece_photo_essay_item_pece_photo_essay_item',
+      'entity_type' => 'pece_photo_essay_item',
+      'name' => 'pece_photo_essay_item',
       'label' => 'Photo essay item',
       'config' => array(),
     ),
@@ -37,8 +37,8 @@ function pece_photo_essay_eck_bundle_info() {
  */
 function pece_photo_essay_eck_entity_type_info() {
   $items = array(
-    'photo_essay_item' => array(
-      'name' => 'photo_essay_item',
+    'pece_photo_essay_item' => array(
+      'name' => 'pece_photo_essay_item',
       'label' => 'Photo essay item',
       'properties' => array(
         'created' => array(
@@ -62,7 +62,7 @@ function pece_photo_essay_eck_entity_type_info() {
  */
 function pece_photo_essay_node_info() {
   $items = array(
-    'photo_essay' => array(
+    'pece_photo_essay' => array(
       'name' => t('Photo Essay'),
       'base' => 'node_content',
       'description' => '',

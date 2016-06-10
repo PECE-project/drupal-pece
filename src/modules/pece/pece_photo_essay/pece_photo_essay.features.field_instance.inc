@@ -11,8 +11,8 @@ function pece_photo_essay_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance: 'node-photo_essay-body'.
-  $field_instances['node-photo_essay-body'] = array(
-    'bundle' => 'photo_essay',
+  $field_instances['node-pece_photo_essay-body'] = array(
+    'bundle' => 'pece_photo_essay',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -79,9 +79,9 @@ function pece_photo_essay_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-photo_essay-field_pece_authors'.
-  $field_instances['node-photo_essay-field_pece_authors'] = array(
-    'bundle' => 'photo_essay',
+  // Exported field_instance: 'node-pece_photo_essay-field_pece_authors'.
+  $field_instances['node-pece_photo_essay-field_pece_authors'] = array(
+    'bundle' => 'pece_photo_essay',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -138,9 +138,9 @@ function pece_photo_essay_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-photo_essay-field_pece_contributors'.
-  $field_instances['node-photo_essay-field_pece_contributors'] = array(
-    'bundle' => 'photo_essay',
+  // Exported field_instance: 'node-pece_photo_essay-field_pece_contributors'.
+  $field_instances['node-pece_photo_essay-field_pece_contributors'] = array(
+    'bundle' => 'pece_photo_essay',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -204,9 +204,9 @@ function pece_photo_essay_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-photo_essay-field_pece_license'.
-  $field_instances['node-photo_essay-field_pece_license'] = array(
-    'bundle' => 'photo_essay',
+  // Exported field_instance: 'node-pece_photo_essay-field_pece_license'.
+  $field_instances['node-pece_photo_essay-field_pece_license'] = array(
+    'bundle' => 'pece_photo_essay',
     'default_value' => array(
       0 => array(
         'licence' => 1,
@@ -264,9 +264,9 @@ function pece_photo_essay_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-photo_essay-field_pece_tags'.
-  $field_instances['node-photo_essay-field_pece_tags'] = array(
-    'bundle' => 'photo_essay',
+  // Exported field_instance: 'node-pece_photo_essay-field_pece_tags'.
+  $field_instances['node-pece_photo_essay-field_pece_tags'] = array(
+    'bundle' => 'pece_photo_essay',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -323,9 +323,9 @@ function pece_photo_essay_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-photo_essay-field_pece_uri'.
-  $field_instances['node-photo_essay-field_pece_uri'] = array(
-    'bundle' => 'photo_essay',
+  // Exported field_instance: 'node-pece_photo_essay-field_pece_uri'.
+  $field_instances['node-pece_photo_essay-field_pece_uri'] = array(
+    'bundle' => 'pece_photo_essay',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -387,9 +387,9 @@ function pece_photo_essay_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-photo_essay-field_permissions'.
-  $field_instances['node-photo_essay-field_permissions'] = array(
-    'bundle' => 'photo_essay',
+  // Exported field_instance: 'node-pece_photo_essay-field_permissions'.
+  $field_instances['node-pece_photo_essay-field_permissions'] = array(
+    'bundle' => 'pece_photo_essay',
     'default_value' => array(
       0 => array(
         'value' => 'open',
@@ -447,9 +447,9 @@ function pece_photo_essay_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-photo_essay-field_photo_essay_items'.
-  $field_instances['node-photo_essay-field_photo_essay_items'] = array(
-    'bundle' => 'photo_essay',
+  // Exported field_instance: 'node-pece_photo_essay-field_pece_photo_essay_items'.
+  $field_instances['node-pece_photo_essay-field_pece_photo_essay_items'] = array(
+    'bundle' => 'pece_photo_essay',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -493,7 +493,7 @@ function pece_photo_essay_field_default_field_instances() {
     'entityconnect_unload_add' => 1,
     'entityconnect_unload_edit' => 1,
     'fences_wrapper' => 'div',
-    'field_name' => 'field_photo_essay_items',
+    'field_name' => 'field_pece_photo_essay_items',
     'label' => 'items',
     'required' => 1,
     'settings' => array(
@@ -520,9 +520,9 @@ function pece_photo_essay_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-photo_essay-field_thumbnail'.
-  $field_instances['node-photo_essay-field_thumbnail'] = array(
-    'bundle' => 'photo_essay',
+  // Exported field_instance: 'node-pece_photo_essay-field_thumbnail'.
+  $field_instances['node-pece_photo_essay-field_thumbnail'] = array(
+    'bundle' => 'pece_photo_essay',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -601,9 +601,9 @@ function pece_photo_essay_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-photo_essay-og_group_ref'.
-  $field_instances['node-photo_essay-og_group_ref'] = array(
-    'bundle' => 'photo_essay',
+  // Exported field_instance: 'node-pece_photo_essay-og_group_ref'.
+  $field_instances['node-pece_photo_essay-og_group_ref'] = array(
+    'bundle' => 'pece_photo_essay',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -679,9 +679,9 @@ function pece_photo_essay_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'photo_essay_item-photo_essay_item-field_description'.
-  $field_instances['photo_essay_item-photo_essay_item-field_description'] = array(
-    'bundle' => 'photo_essay_item',
+  // 'pece_photo_essay_item-pece_photo_essay_item-field_description'.
+  $field_instances['pece_photo_essay_item-pece_photo_essay_item-field_description'] = array(
+    'bundle' => 'pece_photo_essay_item',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -700,7 +700,7 @@ function pece_photo_essay_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
-    'entity_type' => 'photo_essay_item',
+    'entity_type' => 'pece_photo_essay_item',
     'fences_wrapper' => 'div',
     'field_name' => 'field_description',
     'label' => 'Text',
@@ -726,9 +726,9 @@ function pece_photo_essay_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'photo_essay_item-photo_essay_item-field_image_artifact'.
-  $field_instances['photo_essay_item-photo_essay_item-field_image_artifact'] = array(
-    'bundle' => 'photo_essay_item',
+  // 'pece_photo_essay_item-pece_photo_essay_item-field_image_artifact'.
+  $field_instances['pece_photo_essay_item-pece_photo_essay_item-field_image_artifact'] = array(
+    'bundle' => 'pece_photo_essay_item',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -749,7 +749,7 @@ function pece_photo_essay_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
-    'entity_type' => 'photo_essay_item',
+    'entity_type' => 'pece_photo_essay_item',
     'entityconnect_show_add_icon' => 0,
     'entityconnect_show_edit_icon' => 0,
     'entityconnect_unload_add' => 1,

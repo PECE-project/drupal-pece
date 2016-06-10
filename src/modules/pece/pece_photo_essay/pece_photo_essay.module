@@ -8,10 +8,10 @@ include_once 'pece_photo_essay.features.inc';
 
 /**
  * Implements hook_pece_access_restricted_node_types().
- * Declare photo_essay as a restricted node type.
+ * Declare pece_photo_essay as a restricted node type.
  */
 function pece_photo_essay_pece_access_restricted_node_types() {
   return array(
-    'photo_essay' => 'photo_essay',
+    'pece_photo_essay' => 'pece_photo_essay',
   );
 }
