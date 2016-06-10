@@ -18,3 +18,13 @@ function pece_memo_form_pece_memo_node_form_alter(&$form, &$form_state) {
     array_unshift($form['#validate'], 'pece_profile_check_author');
   }
 }
+
+/**
+ * Implements hook_pece_access_restricted_node_types().
+ * Declare pece_memo as a restricted node types.
+ */
+function pece_memo_pece_access_restricted_node_types() {
+  return array(
+    'pece_memo' => 'pece_memo',
+  );
+}

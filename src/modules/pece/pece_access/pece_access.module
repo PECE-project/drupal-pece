@@ -216,30 +216,11 @@ function pece_access_move_file($file, $scheme) {
 }
 
 /**
- * Helper function to provide a list of artifact node types.
- */
-function pece_access_artifact_node_types() {
-  return array(
-    'pece_artifact',
-    'pece_artifact_audio',
-    'pece_artifact_fieldnote',
-    'pece_artifact_image',
-    'pece_artifact_pdf',
-    'pece_artifact_text',
-    'pece_artifact_video',
-    'pece_artifact_website',
-  );
-}
-
-/**
  * Helper function to provide a list of restricted node types.
  */
 function pece_access_restricted_node_types() {
-  $artifact_node_types = pece_access_artifact_node_types();
-  $other_node_types = array('pece_memo');
-
-  $restricted_node_types = array_merge($artifact_node_types, $other_node_types);
-
+  $restricted_node_types = module_invoke_all('pece_access_restricted_node_types');
+  drupal_alter('pece_access_restricted_node_types', $restricted_node_types);
   return $restricted_node_types;
 }
 
