@@ -34,21 +34,25 @@ function pece_access_views_query_alter(&$view, &$query) {
           $condition['value'] = $user->uid;
         }
 
-        // 2 - Researchers should have access to any restricted content.
-        if (strpos($condition['field'], 'field_permissions_value')
-          && $condition['value'] == 'restricted'
-          && !in_array('Researcher', $user->roles)) {
-            unset($condition_groups[$key]);
-            continue 2;
-        }
+        if (strpos($condition['field'], 'field_permissions_value')) {
+          if (!in_array('Researcher', $user->roles)) {
 
-        // 3 - Specially in the pece repository view we need to use a more
-        // specific rule due to the exposed filters. There is one display of
-        // this view wich does not need any of these, because is handled by OG.
-        if ($view->current_display != 'respository_page' || $view->current_display != 'repository_artifacts_page') {
-          if (strpos($condition['field'], 'field_permissions_value')
-            && !in_array('Researcher', $user->roles)) {
+            // 2 - Only Researchers should have access to any restricted content.
+            if ($condition['value'] == 'restricted') {
+              unset($condition_groups[$key]);
+              continue 2;
+            }
+
+            // 3 - PECE Repository view needs a more specific logic.
+            if ($view->current_display != 'respository_page' || $view->current_display != 'repository_artifacts_page') {
               $condition['value'] = array('open');
+            }
+          }
+
+          // 4 - Admin must view all content.
+          if (in_array('administrator', $user->roles)) {
+            $condition['value'] = array('open', 'restricted', 'private');
+            $condition['operator'] = 'in';
           }
         }
       }
