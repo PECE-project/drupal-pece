@@ -18,25 +18,40 @@ function pece_access_views_query_alter(&$view, &$query) {
   $views = array(
     'pece_group_field_diary',
     'pece_user_field_diary',
-    'pece_repository',
     'pece_recent_artifacts',
+    'pece_repository',
     'tag_term',
   );
 
   if (in_array($view->name, $views)) {
-    $conditions = &$query->where;
+    $condition_groups = &$query->where;
     // Traverse through the 'where' part of the query.
-    foreach ($conditions as &$condition_group) {
+    foreach ($condition_groups as $key => &$condition_group) {
       foreach ($condition_group['conditions'] as &$condition) {
-        // If this is the part of the query filtering on title, change the
-        // condition to filter on node ID.
+
+        // 1 - Users must always have access to it's own content.
         if ($condition['field'] == 'users_node.uid') {
           $condition['value'] = $user->uid;
         }
+
+        // 2 - Researchers should have access to any restricted content.
+        if (strpos($condition['field'], 'field_permissions_value')
+          && $condition['value'] == 'restricted'
+          && !in_array('Researcher', $user->roles)) {
+            unset($condition_groups[$key]);
+            continue 2;
+        }
+
+        // 3 - Specially in the pece repository view we need to use a more
+        // specific rule due to the exposed filters. There is one display of
+        // this view wich does not need any of these, because is handled by OG.
+        if ($view->current_display != 'respository_page' || $view->current_display != 'repository_artifacts_page') {
+          if (strpos($condition['field'], 'field_permissions_value')
+            && !in_array('Researcher', $user->roles)) {
+              $condition['value'] = array('open');
+          }
+        }
       }
-    }
-    if (!in_array('Researcher', $user->roles)) {
-      unset($conditions[2]);
     }
   }
 }
@@ -162,7 +177,6 @@ function pece_access_view_access($node, $account) {
         return ($is_owner || in_array(PECE_ACCESS_RESEARCHER_ROLE, $account->roles));
     }
   }
-
 }
 
 /**
