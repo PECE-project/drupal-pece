@@ -5,7 +5,7 @@
 
 (function (window, document, $, undefined) {
 
-// @ref: http://kenwheeler.github.io/slick/ 
+// @ref: http://kenwheeler.github.io/slick/
 var defaults = {
   adaptiveHeight: true,
   autoplay: true,
@@ -17,11 +17,6 @@ var defaults = {
 Drupal.behaviors.peceSlider = {
   attach: function (context, settings) {
     $.each(settings.peceSlider || {}, function (selector, config) {
-
-      // window.slider = {};
-      // window.slider[selector] = $.extend(true, {}, defaults, config)
-      // console.log($(selector, context))
-      // debugger
       $(selector, context).slick($.extend(true, {}, defaults, config));
     });
   }
