@@ -38,8 +38,13 @@ function pece_scholarly_lite_preprocess_field__field_pece_photo_essay_items(&$va
   drupal_add_js($theme_path . '/assets/lib/slick-carousel/slick/slick.js');
   drupal_add_js($theme_path . '/assets/js/slider.js');
   drupal_add_js(array('peceSlider' => array($slider_selector => array(
+    'sameHeight' => TRUE,
     'arrows' => TRUE,
+    'autoplay' => FALSE,
+    'adaptiveHeight' => FALSE,
     'appendArrows' => '.remodal-wrapper.photo-essay-modal',
+    'draggable' => FALSE,
+    'fade' => TRUE,
     'prevArrow' => '<a href="#" class="slick-prev photo-essay-slider-arrow"><i class="fa fa-chevron-left" aria-hidden="true"></i> ' . t('Previous') . '</a>',
     'nextArrow' => '<a href="#" class="slick-next photo-essay-slider-arrow"><i class="fa fa-chevron-right" aria-hidden="true"></i> ' . t('Next') . '</a>',
   ))), 'setting');
