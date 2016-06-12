@@ -310,7 +310,7 @@ function pece_photo_essay_field_default_field_instances() {
     'entityconnect_show_edit_icon' => 0,
     'entityconnect_unload_add' => 1,
     'entityconnect_unload_edit' => 1,
-    'fences_wrapper' => 'div',
+    'fences_wrapper' => 'div_div_div',
     'field_name' => 'field_pece_photo_essay_items',
     'label' => 'items',
     'required' => 1,
