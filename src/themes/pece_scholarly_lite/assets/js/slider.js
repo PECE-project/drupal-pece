@@ -17,9 +17,18 @@ var defaults = {
 Drupal.behaviors.peceSlider = {
   attach: function (context, settings) {
     $.each(settings.peceSlider || {}, function (selector, config) {
-      $(selector, context).slick($.extend(true, {}, defaults, config));
+      $(selector, context).slick($.extend(true, {}, defaults, config)).each(function () {
+        var $slider = $(this);
+        if (config.sameHeight) $slider.on('setPosition', sameHeight);
+      });
     });
   }
 };
+
+function sameHeight() {
+  $(this).find('.slick-slide')
+    .height('auto')
+    .css('height', $('.slick-track', this).height() + 'px');
+}
 
 })(window, document, jQuery);
