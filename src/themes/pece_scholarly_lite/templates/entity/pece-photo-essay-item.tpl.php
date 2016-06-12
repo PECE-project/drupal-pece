@@ -35,8 +35,7 @@
     </div>
   </div>
   <div class="photo-essay-content content"<?php print $content_attributes; ?>>
-    <?php
-      print render($content);
-    ?>
+    <h3 class="image-artifact-title"><?php print render($content['field_image_artifact']); ?></h3>
+    <?php print render($content);?>
   </div>
 </div>

@@ -52,7 +52,7 @@ HTML comment.
 -->
 
 <div class="<?php print $classes; ?>"<?php print $attributes; ?>>
-  <a href="#" data-remodal-target="<?php print $modal_id; ?>">Abrir</a>
+  <a href="#" data-remodal-target="<?php print $modal_id; ?>"><?php print t('View essay'); ?></a>
   <div class="remodal remodal-big" data-remodal-id="<?php print $modal_id; ?>"
       data-remodal-options="hashTracking: false,modifier: photo-essay-modal,closeOnOutsideClick: false">
     <button data-remodal-action="close" class="remodal-close"><?php print t('Close'); ?></button>
