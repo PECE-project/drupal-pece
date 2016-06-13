@@ -688,11 +688,11 @@ function pece_photo_essay_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -735,13 +735,13 @@ function pece_photo_essay_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => FALSE,
+          'link' => 1,
         ),
         'type' => 'entityreference_label',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -755,7 +755,7 @@ function pece_photo_essay_field_default_field_instances() {
     'entityconnect_show_edit_icon' => 0,
     'entityconnect_unload_add' => 1,
     'entityconnect_unload_edit' => 1,
-    'fences_wrapper' => 'div_div_div',
+    'fences_wrapper' => 'no_wrapper',
     'field_name' => 'field_image_artifact',
     'label' => 'Image artifact',
     'required' => 1,
