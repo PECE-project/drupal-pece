@@ -79,6 +79,18 @@ function pece_photo_essay_user_default_permissions() {
     'module' => 'eck',
   );
 
+  // Exported permission: 'eck list pece_photo_essay_item pece_photo_essay_item entities'.
+  $permissions['eck list pece_photo_essay_item pece_photo_essay_item entities'] = array(
+    'name' => 'eck list pece_photo_essay_item pece_photo_essay_item entities',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'eck',
+  );
+
   // Exported permission: 'eck view pece_photo_essay_item pece_photo_essay_item entities'.
   $permissions['eck view pece_photo_essay_item pece_photo_essay_item entities'] = array(
     'name' => 'eck view pece_photo_essay_item pece_photo_essay_item entities',
