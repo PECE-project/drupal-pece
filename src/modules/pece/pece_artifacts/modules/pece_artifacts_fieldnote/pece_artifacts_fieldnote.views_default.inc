@@ -22,7 +22,7 @@ function pece_artifacts_fieldnote_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Group Field Diary';
+  $handler->display->display_options['title'] = 'Field Diary';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -246,7 +246,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['fields']['field_pece_tags']['field_api_classes'] = TRUE;
   $translatables['pece_group_field_diary'] = array(
     t('Master'),
-    t('Group Field Diary'),
+    t('Field Diary'),
     t('more'),
     t('Apply'),
     t('Reset'),

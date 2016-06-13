@@ -121,7 +121,7 @@ function pece_groups_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Group Artifacts';
+  $handler->display->display_options['title'] = 'Artifacts';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -232,7 +232,7 @@ function pece_groups_views_default_views() {
   );
   $translatables['pece_group_artifacts'] = array(
     t('Master'),
-    t('Group Artifacts'),
+    t('Artifacts'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -258,7 +258,7 @@ function pece_groups_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Group Memos';
+  $handler->display->display_options['title'] = 'Memos';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -321,7 +321,7 @@ function pece_groups_views_default_views() {
   );
   $translatables['pece_group_memos'] = array(
     t('Master'),
-    t('Group Memos'),
+    t('Memos'),
     t('more'),
     t('Apply'),
     t('Reset'),
