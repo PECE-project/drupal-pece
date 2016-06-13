@@ -164,7 +164,7 @@ function pece_demo_ensure_role_named_users() {
     $found = FALSE;
 
     foreach ($users as $user) {
-      if (!in_array($user->uid, $used) && in_array($role, $user->roles)) {
+      if ($user->uid !== 1 && !in_array($user->uid, $used) && in_array($role, $user->roles)) {
         $found = TRUE;
         break;
       }
