@@ -47,6 +47,12 @@ function pece_scholarly_lite_preprocess_field__field_pece_photo_essay_items(&$va
     'fade' => TRUE,
     'prevArrow' => '<a href="#" class="slick-prev photo-essay-slider-arrow"><i class="fa fa-chevron-left" aria-hidden="true"></i> ' . t('Previous') . '</a>',
     'nextArrow' => '<a href="#" class="slick-next photo-essay-slider-arrow"><i class="fa fa-chevron-right" aria-hidden="true"></i> ' . t('Next') . '</a>',
+    'responsive' => array(
+      array(
+        'breakpoint' => 992,
+        'settings' => 'unslick',
+      )
+    ),
   ))), 'setting');
 
   // 3 - Make sure slider works on modal.

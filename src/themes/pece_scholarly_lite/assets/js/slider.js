@@ -17,18 +17,24 @@ var defaults = {
 Drupal.behaviors.peceSlider = {
   attach: function (context, settings) {
     $.each(settings.peceSlider || {}, function (selector, config) {
-      $(selector, context).slick($.extend(true, {}, defaults, config)).each(function () {
-        var $slider = $(this);
-        if (config.sameHeight) $slider.on('setPosition', sameHeight);
-      });
+      $(selector, context)
+        .slick($.extend(true, {}, defaults, config))
+        .on('setPosition', sameHeight);
     });
   }
 };
 
 function sameHeight() {
-  $(this).find('.slick-slide')
-    .height('auto')
-    .css('height', $('.slick-track', this).height() + 'px');
+  var $slick = $(this);
+  var $slides = $slick.find('.slick-slide');
+  var instance = $slick.slick('getSlick');
+  var sameHeight = instance.activeBreakpoint && instance.breakpointSettings[instance.activeBreakpoint].sameHeight || instance.options.sameHeight;
+
+  $slides.height('auto');
+
+  if (sameHeight) {
+    $slides.height('auto').css('height', $slick.find('.slick-track').height() + 'px');
+  }
 }
 
 })(window, document, jQuery);
