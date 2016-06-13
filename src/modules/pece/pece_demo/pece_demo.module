@@ -83,6 +83,8 @@ function pece_demo_generate_demo_content() {
     )), 'status');
   }
 
+  pece_demo_ensure_role_named_users();
+
 
   // Generate vocabulary terms.
   // ------------------------------------------------------
@@ -147,4 +149,31 @@ function pece_demo_generate_demo_content() {
  */
 function pece_demo_delete_demo_content() {
   drupal_set_message(t('Deleting demo content automatically is currently not possible.'), 'warning');
+}
+
+/**
+ * Make sure one user of each role has as username the role name itself. Also,
+ * force a default user password of 'password'.
+ */
+function pece_demo_ensure_role_named_users() {
+  $roles = user_roles(TRUE);
+  $users = entity_load('user');
+  $used = array();
+
+  foreach (user_roles(TRUE) as $rid => $role) {
+    $found = FALSE;
+
+    foreach ($users as $user) {
+      if (!in_array($user->uid, $used) && in_array($role, $user->roles)) {
+        $found = TRUE;
+        break;
+      }
+    }
+
+    if ($found) {
+      $used[] = $user->uid;
+      $user->name = preg_replace('@[^a-z0-9-]+@','_', strtolower($role));
+      user_save($user, array('pass' => 'password'));
+    }
+  }
 }
