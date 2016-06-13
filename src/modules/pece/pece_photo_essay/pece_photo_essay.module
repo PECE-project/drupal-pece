@@ -86,14 +86,13 @@ function pece_photo_essay_item__entity_callback($op, $entity, $account, $entity_
         $photo_essay_item = entity_metadata_wrapper('pece_photo_essay_item', $entity);
         $artifact = $photo_essay_item->field_image_artifact->value();
 
-
-        if ($artifact = $photo_essay_item->field_image_artifact->value()) {
-          return node_access('view', $artifact, $account);
+        if (!empty($artifact) && !node_access('view', $artifact, $account)) {
+          return FALSE;
         }
       }
       break;
   }
 
   $default_access_callback = variable_get('pece_photo_essay_item__access_callback', 'eck__entity_access');
-  return $default_access_callback($op, $entity_or_bundle, $account, $entity_type_name);
+  return $default_access_callback($op, $entity, $account, $entity_type_name);
 }

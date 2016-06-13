@@ -19,6 +19,9 @@
   display: flex
   height: 100%
 
+  h3 a
+    color: $color-vivid-violet
+
   .photo-essay-image
     display: flex
     flex-grow: 1
@@ -30,14 +33,26 @@
     img
       display: inline-block
       max-height: 80vh
+      width: auto
 
   .photo-essay-content
+    display: flex
+    flex-shrink: 0
+    flex-direction: column
     width: 33%
-    padding: 2em
     background: white
     max-height: 80vh
-    flex-shrink: 0
     text-align: left
+
+    > *
+      padding: 2rem
+      margin: 0
+
+    > h3
+      flex-shrink: 0
+
+    .field-name-field-description
+      overflow: auto
 
 .slick-slider
   user-select: text
