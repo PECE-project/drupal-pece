@@ -42,7 +42,7 @@ function pece_scholarly_lite_preprocess_field__field_pece_photo_essay_items(&$va
     'arrows' => TRUE,
     'autoplay' => FALSE,
     'adaptiveHeight' => FALSE,
-    'appendArrows' => '.remodal-wrapper.photo-essay-modal',
+    'appendArrows' => '.remodal-wrapper.' . $modal_id,
     'draggable' => FALSE,
     'fade' => TRUE,
     'prevArrow' => '<a href="#" class="slick-prev photo-essay-slider-arrow"><i class="fa fa-chevron-left" aria-hidden="true"></i> ' . t('Previous') . '</a>',

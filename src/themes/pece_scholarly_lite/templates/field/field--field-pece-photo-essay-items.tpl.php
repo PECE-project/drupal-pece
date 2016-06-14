@@ -54,7 +54,7 @@ HTML comment.
 <div class="<?php print $classes; ?>"<?php print $attributes; ?>>
   <a href="#" data-remodal-target="<?php print $modal_id; ?>"><?php print t('View essay'); ?></a>
   <div class="remodal remodal-big" data-remodal-id="<?php print $modal_id; ?>"
-      data-remodal-options="modifier: photo-essay-modal,closeOnOutsideClick: false">
+      data-remodal-options="modifier: photo-essay-modal <?php print $modal_id; ?>,closeOnOutsideClick: false">
     <button data-remodal-action="close" class="remodal-close"><?php print t('Close'); ?></button>
     <div class="field-items photo-essay-slider" <?php print $content_attributes; ?>>
       <?php foreach ($items as $delta => $item): ?>
