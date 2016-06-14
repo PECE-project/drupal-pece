@@ -219,9 +219,8 @@ function pece_access_move_file($file, $scheme) {
  * Helper function to provide a list of restricted node types.
  */
 function pece_access_restricted_node_types() {
-  $restricted_node_types = module_invoke_all('pece_access_restricted_node_types');
-  drupal_alter('pece_access_restricted_node_types', $restricted_node_types);
-  return $restricted_node_types;
+  $field = field_info_field('field_permissions');
+  return drupal_map_assoc($field['bundles']['node']);
 }
 
 /**

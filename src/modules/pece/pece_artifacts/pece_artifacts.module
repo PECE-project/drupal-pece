@@ -117,11 +117,3 @@ function pece_artifacts_pece_artifact_types_info($only_enabled = TRUE) {
 
   return $artifacts;
 }
-
-/**
- * Implements hook_pece_access_restricted_node_types().
- * Declare all artifacts as restricted node types.
- */
-function pece_artifacts_pece_access_restricted_node_types() {
-  return pece_artifacts_fetch_all_types();
-}
