@@ -77,7 +77,7 @@ function pece_access_views_query_alter(&$view, &$query) {
  * Implements hook_node_access().
  */
 function pece_access_node_access($node, $op, $account) {
-  if ($op != 'view' || !in_array($node->type, pece_access_restricted_node_types())) {
+  if ($op != 'view' || (!empty($node->type) && !in_array($node->type, pece_access_restricted_node_types()))) {
     return NODE_ACCESS_IGNORE;
   }
 
