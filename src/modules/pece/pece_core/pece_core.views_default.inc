@@ -13,9 +13,9 @@ function pece_core_views_default_views() {
   $view = new view();
   $view->name = 'tag_term';
   $view->description = 'A view to emulate Drupal core\'s handling of taxonomy/term.';
-  $view->tag = 'default';
+  $view->tag = 'PECE';
   $view->base_table = 'node';
-  $view->human_name = 'Tag term';
+  $view->human_name = 'PECE - Tag';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -36,10 +36,6 @@ function pece_core_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'node';
   $handler->display->display_options['row_options']['links'] = FALSE;
-  /* Relationship: Content: Author */
-  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
-  $handler->display->display_options['relationships']['uid']['table'] = 'node';
-  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   /* Sort criterion: Global: Random */
   $handler->display->display_options['sorts']['random']['id'] = 'random';
   $handler->display->display_options['sorts']['random']['table'] = 'views';
@@ -69,11 +65,6 @@ function pece_core_views_default_views() {
   $handler->display->display_options['arguments']['term_node_tid_depth_modifier']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['term_node_tid_depth_modifier']['specify_validation'] = TRUE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
-  $handler->display->display_options['filter_groups']['groups'] = array(
-    1 => 'AND',
-    2 => 'AND',
-    3 => 'AND',
-  );
   /* Filter criterion: Content: Published or admin */
   $handler->display->display_options['filters']['status_extra']['id'] = 'status_extra';
   $handler->display->display_options['filters']['status_extra']['table'] = 'node';
@@ -98,74 +89,6 @@ function pece_core_views_default_views() {
     'pece_memo' => 'pece_memo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Permissions (field_permissions) */
-  $handler->display->display_options['filters']['field_permissions_value']['id'] = 'field_permissions_value';
-  $handler->display->display_options['filters']['field_permissions_value']['table'] = 'field_data_field_permissions';
-  $handler->display->display_options['filters']['field_permissions_value']['field'] = 'field_permissions_value';
-  $handler->display->display_options['filters']['field_permissions_value']['value'] = array(
-    'open' => 'open',
-  );
-  $handler->display->display_options['filters']['field_permissions_value']['group'] = 1;
-  /* Filter criterion: Content: Published or admin */
-  $handler->display->display_options['filters']['status_extra_1']['id'] = 'status_extra_1';
-  $handler->display->display_options['filters']['status_extra_1']['table'] = 'node';
-  $handler->display->display_options['filters']['status_extra_1']['field'] = 'status_extra';
-  $handler->display->display_options['filters']['status_extra_1']['group'] = 2;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
-  $handler->display->display_options['filters']['type_1']['table'] = 'node';
-  $handler->display->display_options['filters']['type_1']['field'] = 'type';
-  $handler->display->display_options['filters']['type_1']['value'] = array(
-    'pece_analytic' => 'pece_analytic',
-    'pece_annotation' => 'pece_annotation',
-    'pece_artifact_audio' => 'pece_artifact_audio',
-    'pece_artifact_bundle' => 'pece_artifact_bundle',
-    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
-    'pece_artifact_image' => 'pece_artifact_image',
-    'pece_artifact_pdf' => 'pece_artifact_pdf',
-    'pece_artifact_text' => 'pece_artifact_text',
-    'pece_artifact_video' => 'pece_artifact_video',
-    'pece_artifact_website' => 'pece_artifact_website',
-    'pece_memo' => 'pece_memo',
-  );
-  $handler->display->display_options['filters']['type_1']['group'] = 2;
-  /* Filter criterion: Content: Permissions (field_permissions) */
-  $handler->display->display_options['filters']['field_permissions_value_1']['id'] = 'field_permissions_value_1';
-  $handler->display->display_options['filters']['field_permissions_value_1']['table'] = 'field_data_field_permissions';
-  $handler->display->display_options['filters']['field_permissions_value_1']['field'] = 'field_permissions_value';
-  $handler->display->display_options['filters']['field_permissions_value_1']['value'] = array(
-    'restricted' => 'restricted',
-  );
-  $handler->display->display_options['filters']['field_permissions_value_1']['group'] = 2;
-  /* Filter criterion: Content: Published or admin */
-  $handler->display->display_options['filters']['status_extra_2']['id'] = 'status_extra_2';
-  $handler->display->display_options['filters']['status_extra_2']['table'] = 'node';
-  $handler->display->display_options['filters']['status_extra_2']['field'] = 'status_extra';
-  $handler->display->display_options['filters']['status_extra_2']['group'] = 3;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type_2']['id'] = 'type_2';
-  $handler->display->display_options['filters']['type_2']['table'] = 'node';
-  $handler->display->display_options['filters']['type_2']['field'] = 'type';
-  $handler->display->display_options['filters']['type_2']['value'] = array(
-    'pece_analytic' => 'pece_analytic',
-    'pece_annotation' => 'pece_annotation',
-    'pece_artifact_audio' => 'pece_artifact_audio',
-    'pece_artifact_bundle' => 'pece_artifact_bundle',
-    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
-    'pece_artifact_image' => 'pece_artifact_image',
-    'pece_artifact_pdf' => 'pece_artifact_pdf',
-    'pece_artifact_text' => 'pece_artifact_text',
-    'pece_artifact_video' => 'pece_artifact_video',
-    'pece_artifact_website' => 'pece_artifact_website',
-    'pece_memo' => 'pece_memo',
-  );
-  $handler->display->display_options['filters']['type_2']['group'] = 3;
-  /* Filter criterion: User: The user ID */
-  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
-  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['relationship'] = 'uid';
-  $handler->display->display_options['filters']['uid_raw']['group'] = 3;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -197,7 +120,6 @@ function pece_core_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('author'),
     t('All'),
     t('%1'),
     t('Page'),
