@@ -157,10 +157,6 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['style_options']['uses_fields'] = TRUE;
   $handler->display->display_options['row_plugin'] = 'entity';
   $handler->display->display_options['row_options']['view_mode'] = 'most_recent';
-  /* Relationship: Content: Author */
-  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
-  $handler->display->display_options['relationships']['uid']['table'] = 'node';
-  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   /* Field: Content: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'node';
@@ -169,7 +165,7 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['fields']['type']['exclude'] = TRUE;
   $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['type']['machine_name'] = TRUE;
-  /* Field: Content: Image */
+  /* Field: Content: Thumbnail image */
   $handler->display->display_options['fields']['field_pece_media_image']['id'] = 'field_pece_media_image';
   $handler->display->display_options['fields']['field_pece_media_image']['table'] = 'field_data_field_pece_media_image';
   $handler->display->display_options['fields']['field_pece_media_image']['field'] = 'field_pece_media_image';
@@ -679,21 +675,6 @@ function pece_repository_views_default_views() {
     2 => array(),
     3 => array(),
   );
-  /* Filter criterion: Content: Permissions (field_permissions) */
-  $handler->display->display_options['filters']['field_permissions_value']['id'] = 'field_permissions_value';
-  $handler->display->display_options['filters']['field_permissions_value']['table'] = 'field_data_field_permissions';
-  $handler->display->display_options['filters']['field_permissions_value']['field'] = 'field_permissions_value';
-  $handler->display->display_options['filters']['field_permissions_value']['value'] = array(
-    'restricted' => 'restricted',
-    'open' => 'open',
-  );
-  $handler->display->display_options['filters']['field_permissions_value']['group'] = 1;
-  /* Filter criterion: User: The user ID */
-  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
-  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['relationship'] = 'uid';
-  $handler->display->display_options['filters']['uid_raw']['group'] = 2;
   $handler->display->display_options['path'] = 'repo/discover';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Discover';
@@ -850,21 +831,6 @@ function pece_repository_views_default_views() {
     2 => array(),
     3 => array(),
   );
-  /* Filter criterion: Content: Permissions (field_permissions) */
-  $handler->display->display_options['filters']['field_permissions_value']['id'] = 'field_permissions_value';
-  $handler->display->display_options['filters']['field_permissions_value']['table'] = 'field_data_field_permissions';
-  $handler->display->display_options['filters']['field_permissions_value']['field'] = 'field_permissions_value';
-  $handler->display->display_options['filters']['field_permissions_value']['value'] = array(
-    'restricted' => 'restricted',
-    'open' => 'open',
-  );
-  $handler->display->display_options['filters']['field_permissions_value']['group'] = 1;
-  /* Filter criterion: User: The user ID */
-  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
-  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['relationship'] = 'uid';
-  $handler->display->display_options['filters']['uid_raw']['group'] = 2;
   $handler->display->display_options['path'] = 'repo/artifacts';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Analyze';
@@ -890,11 +856,11 @@ function pece_repository_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('author'),
     t('<i class="[type]"></i>'),
     t('Filter by:'),
     t('Type'),
     t('Title'),
+    t('author'),
     t('Groups'),
     t('Artifacts'),
   );
