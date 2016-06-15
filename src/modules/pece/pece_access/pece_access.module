@@ -103,33 +103,10 @@ function pece_access_file_entity_access($op, $file, $account) {
 
   $grants = array();
   foreach ($nodes as $node) {
-    $grants[] = pece_access_view_access($node, $account);
+    $grants[] = node_access('view', $node, $account);
   }
 
   return in_array(FALSE, $grants) ? FILE_ENTITY_ACCESS_DENY : FILE_ENTITY_ACCESS_ALLOW;
-}
-
-/**
- * Helper function for getting access to a node based on PECE specific rules.
- */
-function pece_access_view_access($node, $account) {
-  $restricted_node_types = pece_access_restricted_node_types();
-
-  if (in_array($node->type, $restricted_node_types)) {
-    $is_owner = ($account->uid === $node->uid);
-    $node_permission = pece_access_node_permission($node);
-
-    switch ($node_permission) {
-      case 'open':
-        return TRUE;
-
-      case 'private':
-        return $is_owner;
-
-      case 'restricted':
-        return ($is_owner || in_array(PECE_RESEARCHER, $account->roles));
-    }
-  }
 }
 
 /**
