@@ -21,46 +21,74 @@ define('PECE_RESEARCHER', 'Researcher');
 define('PECE_ACCESS_REALM', 'pece_access');
 
 /**
- * Implements hook_entity_presave().
+ * Implements hook_node_insert().
  */
-function pece_access_entity_presave($entity, $type) {
-  if ($type != 'node') {
+function pece_access_node_insert($node) {
+  _pece_access_node_save($node);
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function pece_access_node_update($node) {
+  _pece_access_node_save($node);
+}
+
+/**
+ * Executed when nodes are inserted/updated.
+ */
+function _pece_access_node_save($node) {
+  $restricted_types = pece_access_restricted_node_types();
+
+  // Do nothing if saving has no access control.
+  if (!in_array($node->type, $restricted_types)) {
     return;
   }
 
-  $types_field_map = pece_access_artifact_node_types_file_fields();
+  $query = db_select('file_usage', 'fu');
+  $query->fields('fu', array('fid'));
+  $query->condition('fu.type', 'node');
+  $query->condition('fu.id', $node->nid);
+  $query->distinct();
 
-  if (!in_array($entity->type, array_keys($types_field_map))) {
-    return;
+  $node_files = $query->execute()->fetchCol();
+
+  // Trigger file access refresh on any file present on the saving node.
+  foreach ($node_files as $fid) {
+    pece_access_refresh_file_access($fid);
+  }
+}
+
+/**
+ * Recalculate the access controled scheme of a file.
+ */
+function pece_access_refresh_file_access($file) {
+  $file = is_object($file) ? $file : file_load($file);
+
+  $query = db_select('file_usage', 'fu');
+  $query->fields('fu', array('id'));
+  $query->condition('fu.type', 'node');
+  $query->condition('fu.fid', $file->fid);
+  $query->distinct();
+
+  $file_nodes = $query->execute()->fetchCol();
+  $file_is_public = file_uri_scheme($file->uri) == 'public';
+  $file_should_be_public = TRUE;
+
+  // Apply deny first for any node that uses this file.
+  foreach ($file_nodes as $nid) {
+    if (!node_access('view', $nid, $anonymous)) {
+      $file_should_be_public = FALSE;
+      break;
+    }
   }
 
-  $node_wrapper = entity_metadata_wrapper('node', $entity);
-  $field_name = $types_field_map[$entity->type];
-  $field_value = $node_wrapper->$field_name->value();
 
-  if (empty($field_value)) {
-    return;
+  // If current scheme differs from what should be, move the file.
+  if ($file_is_public !== $file_should_be_public) {
+    $scheme = $file_should_be_public ? 'public' : 'private';
+    pece_access_move_file($file, $scheme);
   }
-
-  $file = file_load($field_value['fid']);
-
-  if (empty($file)) {
-    return;
-  }
-
-  $scheme = file_uri_scheme($file->uri);
-  $node_permission = pece_access_node_permission($entity);
-  $private_permissions = array('restricted', 'private');
-
-  if ($scheme == 'public' && in_array($node_permission, $private_permissions)) {
-    // Move file from public to private.
-    pece_access_move_file($file, 'private');
-  }
-  elseif ($scheme == 'private' && $node_permission == 'open') {
-    // Move file from private to public.
-    pece_access_move_file($file, 'public');
-  }
-
 }
 
 /**
@@ -74,9 +102,9 @@ function pece_access_file_entity_access($op, $file, $account) {
   $types_field_map = pece_access_artifact_node_types_file_fields();
 
   // Build query to get all nodes that reference this file.
-  $query = db_select('node', 'n')
-      ->fields('n', array('nid'))
-      ->condition('n.type', array_keys($types_field_map), 'IN');
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid'));
+  $query->condition('n.type', array_keys($types_field_map), 'IN');
 
   $table_counter = 1;
   $or = db_or();
@@ -84,7 +112,7 @@ function pece_access_file_entity_access($op, $file, $account) {
     $table_alias = 'fd_' . $table_counter;
     $field_name_db = $file_field . '_fid';
 
-    $query->leftJoin('field_data_' . $file_field, $table_alias, '(' . $table_alias . '.entity_id = n.nid )');
+    $query->leftJoin("field_data_{$file_field}", $table_alias, "({$table_alias}.entity_id = n.nid)");
     $or->condition($table_alias . '.' . $field_name_db, $file->fid);
 
     $table_counter++;
@@ -235,8 +263,8 @@ function pece_access_node_access_records($node) {
       'realm' => PECE_ACCESS_REALM . ':owner:node',
       'gid' => $node->uid,
       'grant_view' => 1,
-      'grant_update' => 0,
-      'grant_delete' => 0,
+      'grant_update' => 1,
+      'grant_delete' => 1,
       'priority' => !empty($grants) ? end($grants)['priority'] : 0,
     );
   }
