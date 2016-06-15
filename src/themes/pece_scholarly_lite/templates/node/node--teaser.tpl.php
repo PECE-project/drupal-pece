@@ -86,6 +86,10 @@
     <div class="icon image" >
       <?php print render($content['field_pece_media_image']); ?>
     </div>
+  <?php elseif (isset($content['field_thumbnail'])): ?>
+    <div class="icon image" >
+      <?php print render($content['field_thumbnail']); ?>
+    </div>
   <?php else: ?>
     <div class="icon">
       <?php // @info: icons are defined by sass. ?>
@@ -104,6 +108,7 @@
       hide($content['comments']);
       hide($content['links']);
       hide($content['field_pece_media_image']);
+      hide($content['field_thumbnail']);
       print render($content);
     ?>
   </div>
