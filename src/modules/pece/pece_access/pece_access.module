@@ -300,7 +300,7 @@ function pece_access_node_access_records($node) {
 
   // 3. Allow access to a restricted node for 'Researcher' users when the node belongs
   // only to private groups. This is done in a per-group granting system.
-  if ($permission == 'restricted' && !empty($groups) && empty($public_groups)) {
+  if ($permission == 'restricted' && !empty($private_groups) && empty($public_groups)) {
     foreach ($private_groups as $group_id) {
       $grants[] = array(
         'realm' => PECE_ACCESS_REALM . ':restricted:group:node',
@@ -314,15 +314,17 @@ function pece_access_node_access_records($node) {
   }
 
   // 4. Always allow access to a user's own nodes, regardless of the attached grantings.
-  // We use the priority of the last inserted grant, which should be the highest.
-  if (!empty($grants)) {
+  // We use the priority of the last inserted grant, which should be the highest. In case
+  // we defined no previous grants, but the node is part of at least one private group
+  // and no public group at all, we add a grant parallel to the Organic Groups' one.
+  if (!empty($grants) || (empty($public_groups) && !empty($private_groups))) {
     $grants[] = array(
       'realm' => PECE_ACCESS_REALM . ':owner:node',
       'gid' => $node->uid,
       'grant_view' => 1,
       'grant_update' => 0,
       'grant_delete' => 0,
-      'priority' => end($grants)['priority'],
+      'priority' => !empty($grants) ? end($grants)['priority'] : 0,
     );
   }
 
