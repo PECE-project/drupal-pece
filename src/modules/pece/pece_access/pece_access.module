@@ -5,7 +5,20 @@
  * Code for the PECE Access.
  */
 
-define('PECE_ACCESS_RESEARCHER_ROLE', 'Researcher');
+/**
+ * The Contributor role name.
+ */
+define('PECE_CONTRIBUTOR', 'Contributor');
+
+/**
+ * The Researcher role name.
+ */
+define('PECE_RESEARCHER', 'Researcher');
+
+/**
+ * The access realm of group member.
+ */
+define('PECE_ACCESS_REALM', 'pece_access');
 
 /**
  * Implements hook_views_query_alter().
@@ -178,7 +191,7 @@ function pece_access_view_access($node, $account) {
         return $is_owner;
 
       case 'restricted':
-        return ($is_owner || in_array(PECE_ACCESS_RESEARCHER_ROLE, $account->roles));
+        return ($is_owner || in_array(PECE_RESEARCHER, $account->roles));
     }
   }
 }
@@ -234,4 +247,223 @@ function pece_access_artifact_node_types_file_fields() {
     'pece_artifact_pdf' => 'field_pece_media_pdf',
     'pece_artifact_video' => 'field_pece_media_video',
   );
+}
+
+/**
+ * Implements hook_node_access_records().
+ */
+function pece_access_node_access_records($node) {
+  $grants = array();
+
+  // Only control access for specific types.
+  $restricted_types = pece_access_restricted_node_types();
+  if (empty($node->type) || !in_array($node->type, $restricted_types)) {
+    return $grants;
+  }
+
+  $permission = pece_access_get_permission_setting($node);
+  $groups = pece_access_get_node_groups($node);
+
+  foreach ($groups as $gid => $private) {
+    ${$private ? 'private_groups' : 'public_groups'}[] = $gid;
+  }
+
+  // 1. Always allow access to an open node if it belongs to at least one public group.
+  // This is intended to override Organic Groups default behavior regarding nodes on both
+  // private and public groups; by default, the existence of a node on a private group
+  // would deny access to it even though it might be present on a public group.
+  if ($permission == 'open' && !empty($public_groups) && !empty($private_groups)) {
+    $grants[] = array(
+      'realm' => PECE_ACCESS_REALM . ':public-group:node',
+      'gid' => 0,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 0,
+    );
+  }
+
+  // 2. Allow access to a restricted node for 'Researcher' users if the node belongs to
+  // no group at all, or if it belongs to at least one public group. In the case the node
+  // belongs to both a public and a private group, this rule will override Organic Groups
+  // default behavior (which is deny first).
+  if ($permission == 'restricted' && (empty($groups) || !empty($public_groups))) {
+    $grants[] = array(
+      'realm' => PECE_ACCESS_REALM . ':restricted:node',
+      'gid' => 0,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    );
+  }
+
+  // 3. Allow access to a restricted node for 'Researcher' users when the node belongs
+  // only to private groups. This is done in a per-group granting system.
+  if ($permission == 'restricted' && !empty($groups) && empty($public_groups)) {
+    foreach ($private_groups as $group_id) {
+      $grants[] = array(
+        'realm' => PECE_ACCESS_REALM . ':restricted:group:node',
+        'gid' => $group_id,
+        'grant_view' => 1,
+        'grant_update' => 0,
+        'grant_delete' => 0,
+        'priority' => 2,
+      );
+    }
+  }
+
+  // 4. Always allow access to a user's own nodes, regardless of the attached grantings.
+  // We use the priority of the last inserted grant, which should be the highest.
+  if (!empty($grants)) {
+    $grants[] = array(
+      'realm' => PECE_ACCESS_REALM . ':owner:node',
+      'gid' => $node->uid,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => end($grants)['priority'],
+    );
+  }
+
+  // 5. Allow access to private contents always and only to their owners. This is an
+  // ultimate control, and should always override any other when present.
+  if ($permission == 'private') {
+    $grants[] = array(
+      'realm' => PECE_ACCESS_REALM . ':private:owner:node',
+      'gid' => $node->uid,
+      'grant_view' => 1,
+      'grant_update' => 1,
+      'grant_delete' => 1,
+      'priority' => 10,
+    );
+  }
+
+  return $grants;
+}
+
+/**
+ * Implements hook_node_grants().
+ */
+function pece_access_node_grants($account, $op) {
+  if ($op != 'view') {
+    return;
+  }
+
+  $grants = array();
+  $groups = og_get_entity_groups('user', $account);
+
+  // 1. Allow access to all nodes that belong to public groups, regardless of other
+  // groups they might belong to.
+  $grants[PECE_ACCESS_REALM . ':public-group:node'][] = 0;
+
+  // 2. Allow access for 'Researcher' users to any restricted content if it belongs to
+  // no group at all or if it belongs to at least one public group.
+  if (pece_access_user_has_role($account, 'Researcher')) {
+    $grants[PECE_ACCESS_REALM . ':restricted:node'][] = 0;
+  }
+
+  // 3. Allow access for 'Researcher' users to any restricted content in the groups
+  // they belong to.
+  if (pece_access_user_has_role($account, 'Researcher') && !empty($groups['node'])) {
+    foreach ($groups['node'] as $group_id) {
+      $grants[PECE_ACCESS_REALM . ':restricted:group:node'][] = $group_id;
+    }
+  }
+
+  // 4. Allows access to any of the user's own content.
+  $grants[PECE_ACCESS_REALM . ':owner:node'][] = $account->uid;
+
+  // 5. Allow access to any user that owns a private node.
+  $grants[PECE_ACCESS_REALM . ':private:owner:node'][] = $account->uid;
+
+  return $grants;
+}
+
+/**
+ * Helper (performatic) method to get the field permission value for a node.
+ * @TODO: Use db_query for better performance.
+ */
+function pece_access_get_permission_setting($node) {
+  $query = db_select('field_data_field_permissions', 'p');
+  $query->fields('p', array('field_permissions_value'));
+  $query->condition('p.entity_type', 'node');
+  $query->condition('p.entity_id', $node->nid);
+  $query->range(0, 1);
+  $result = $query->execute()->fetch();
+  return !empty($result) ? $result->field_permissions_value : FALSE;
+}
+
+/**
+ * Helper (performatic) method to get a map of private content groups.
+ */
+function pece_access_get_node_groups($node) {
+  $sql = "SELECT ogm.gid AS gid, gca.group_content_access_value AS gcavalue, ga.group_access_value AS gavalue
+    FROM og_membership ogm
+    LEFT OUTER JOIN field_data_group_content_access gca ON gca.entity_id = ogm.gid
+    LEFT OUTER JOIN field_data_group_access ga ON ga.entity_id = ogm.gid
+    WHERE (gca.entity_type = 'node')
+    AND (ga.entity_type = 'node')
+    AND (ogm.entity_type = 'node')
+    AND (ogm.etid = {$node->nid})";
+
+  $results = db_query($sql);
+  $groups = array();
+
+  foreach ($results as $result) {
+    $groups[$result->gid] = $result->gcavalue == 2 || (($result->gcavalue == 0) && ($result->gavalue == 1));
+  }
+
+  return $groups;
+}
+
+/**
+ * Helper (performatic) method to get the private content group id's for a node.
+ */
+function pece_access_get_node_private_groups($node) {
+  $sql = "SELECT ogm.gid AS gid
+    FROM og_membership ogm
+    LEFT OUTER JOIN field_data_group_content_access gca ON gca.entity_id = ogm.gid
+    LEFT OUTER JOIN field_data_group_access ga ON ga.entity_id = ogm.gid
+    WHERE (gca.entity_type = 'node')
+    AND (ga.entity_type = 'node')
+    AND (ogm.entity_type = 'node')
+    AND (ogm.etid = {$node->nid})
+    AND(
+      (gca.group_content_access_value = 2)
+      OR ((gca.group_content_access_value = 0) AND (ga.group_access_value = 1))
+    )";
+
+  $results = db_query($sql);
+  $gids = array();
+
+  foreach ($results as $result) {
+    $gids[] = $result->gid;
+  }
+
+  return $gids;
+}
+
+/**
+ * Helper method to check if user has role.
+ * @TODO: Use db_query for better performance.
+ */
+function pece_access_user_has_role($user, $role) {
+  // 1. Easy way out using the user object.
+  if (isset($user->roles) && in_array($role, $user->roles)) {
+    return TRUE;
+  }
+
+  // 2. Fallback method using databse querying.
+  $query = db_select('users', 'u');
+  $query->fields('u', array('uid'));
+  $query->range(0, 1);
+
+  $query->leftJoin('users_roles', 'ur', 'u.uid = ur.uid');
+  $query->leftJoin('role', 'r', 'ur.rid = r.rid');
+
+  $query->condition('u.uid', $user->uid);
+  $query->condition('r.name', $role);
+
+  return !empty($query->execute()->fetchAll());
 }
