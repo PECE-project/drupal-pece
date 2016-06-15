@@ -65,95 +65,13 @@ function _pece_access_node_save($node) {
 function pece_access_refresh_file_access($file) {
   $file = is_object($file) ? $file : file_load($file);
   $file_is_public = file_uri_scheme($file->uri) == 'public';
-  $file_should_be_public = pece_access_file_should_be_public($file);
+  $file_should_be_public = pece_access_file_is_public($file);
 
   // If current scheme differs from what should be, move the file.
   if ($file_is_public !== $file_should_be_public) {
     $scheme = $file_should_be_public ? 'public' : 'private';
     pece_access_move_file($file, $scheme);
   }
-}
-
-/**
- * Check if a file should be public or private.
- */
-function pece_access_file_should_be_public($file) {
-  $file = is_object($file) ? $file : file_load($file);
-  $anonymous = drupal_anonymous_user();
-
-  $query = db_select('file_usage', 'fu');
-  $query->fields('fu', array('id'));
-  $query->condition('fu.type', 'node');
-  $query->condition('fu.fid', $file->fid);
-  $query->distinct();
-
-  $file_nids = $query->execute()->fetchCol();
-  $file_nodes = node_load_multiple($file_nids);
-  $file_should_be_public = TRUE;
-
-  // Apply deny first for any node that uses this file.
-  foreach ($file_nodes as $node) {
-    if (!node_access('view', $node, $anonymous)) {
-      $file_should_be_public = FALSE;
-      break;
-    }
-  }
-
-  return $file_should_be_public;
-}
-
-/**
- * Implements hook_file_entity_access().
- */
-function pece_access_file_entity_access($op, $file, $account) {
-  if ($op != 'view') {
-    return FILE_ENTITY_ACCESS_IGNORE;
-  }
-
-  $types_field_map = pece_access_artifact_node_types_file_fields();
-
-  // Build query to get all nodes that reference this file.
-  $query = db_select('node', 'n');
-  $query->fields('n', array('nid'));
-  $query->condition('n.type', array_keys($types_field_map), 'IN');
-
-  $table_counter = 1;
-  $or = db_or();
-  foreach($types_field_map as $node_type => $file_field) {
-    $table_alias = 'fd_' . $table_counter;
-    $field_name_db = $file_field . '_fid';
-
-    $query->leftJoin("field_data_{$file_field}", $table_alias, "({$table_alias}.entity_id = n.nid)");
-    $or->condition($table_alias . '.' . $field_name_db, $file->fid);
-
-    $table_counter++;
-  }
-
-  $result = $query
-    ->condition($or)
-    ->execute()
-    ->fetchCol();
-
-  if (empty($result)) {
-    return FILE_ENTITY_ACCESS_IGNORE;
-  }
-
-  $nodes = node_load_multiple($result);
-
-  $grants = array();
-  foreach ($nodes as $node) {
-    $grants[] = node_access('view', $node, $account);
-  }
-
-  return in_array(FALSE, $grants) ? FILE_ENTITY_ACCESS_DENY : FILE_ENTITY_ACCESS_ALLOW;
-}
-
-/**
- * Get permissions settings for a node based on PECE specific rules.
- */
-function pece_access_node_permission($node) {
-  $node_wrapper = entity_metadata_wrapper('node', $node);
-  return $node_wrapper->field_permissions->value();
 }
 
 /**
@@ -178,6 +96,65 @@ function pece_access_move_file($file, $scheme) {
       '%dest' => $scheme,
     )));
   }
+}
+
+/**
+ * Check if a file should be public or private. We do it by checking if an
+ * anonymous user should have access to the file.
+ */
+function pece_access_file_is_public($file) {
+  return _pece_access_file_is_visible($file, drupal_anonymous_user());
+}
+
+/**
+ * Check if a file should be accessbile to the given user.
+ */
+function _pece_access_file_is_visible($file, $account = NULL) {
+  if (!isset($account)) {
+    $account = $GLOBALS['user'];
+  }
+
+  $file = is_object($file) ? $file : file_load($file);
+
+  $query = db_select('file_usage', 'fu');
+  $query->fields('fu', array('id'));
+  $query->condition('fu.type', 'node');
+  $query->condition('fu.fid', $file->fid);
+  $query->distinct();
+
+  $file_nids = $query->execute()->fetchCol();
+  $file_nodes = node_load_multiple($file_nids);
+  $user_can_view_file = TRUE;
+
+  // Apply deny first for any node that uses this file.
+  foreach ($file_nodes as $node) {
+    if (!node_access('view', $node, $account)) {
+      $user_can_view_file = FALSE;
+      break;
+    }
+  }
+
+  return $user_can_view_file;
+}
+
+/**
+ * Implements hook_file_entity_access().
+ */
+function pece_access_file_entity_access($op, $file, $account) {
+  if ($op != 'view') {
+    return FILE_ENTITY_ACCESS_IGNORE;
+  }
+
+  $file_is_visible = _pece_access_file_is_visible($file, $account);
+  return $file_is_visible ? FILE_ENTITY_ACCESS_ALLOW : FILE_ENTITY_ACCESS_DENY;
+}
+
+/**
+ * Get permissions settings for a node based on PECE specific rules.
+ */
+function pece_access_node_permission($node) {
+  $node_wrapper = entity_metadata_wrapper('node', $node);
+  return $node_wrapper->field_permissions->value();
 }
 
 /**
