@@ -218,6 +218,27 @@ function pece_groups_panelizer_defaults() {
   $display->content['new-a9177a5a-db7c-418e-bfa8-62b18010b5de'] = $pane;
   $display->panels['content'][5] = 'new-a9177a5a-db7c-418e-bfa8-62b18010b5de';
   $pane = new stdClass();
+  $pane->pid = 'new-103e63fb-ecaf-4478-a844-d1d192220625';
+  $pane->panel = 'content';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_group_photo_essays-panels_pane';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'rendered_entity',
+    'header_type' => 'none',
+    'view_mode' => 'mini_teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array();
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 6;
+  $pane->locks = array();
+  $pane->uuid = '103e63fb-ecaf-4478-a844-d1d192220625';
+  $display->content['new-103e63fb-ecaf-4478-a844-d1d192220625'] = $pane;
+  $display->panels['content'][6] = 'new-103e63fb-ecaf-4478-a844-d1d192220625';
+  $pane = new stdClass();
   $pane->pid = 'new-cd10a770-62ad-42d7-a128-12872c386dda';
   $pane->panel = 'sidebar';
   $pane->type = 'entity_field';

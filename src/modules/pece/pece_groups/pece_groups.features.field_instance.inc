@@ -631,7 +631,6 @@ function pece_groups_field_default_field_instances() {
   t('Description');
   t('Determine if this is an OG group.');
   t('Group');
-  t('Project');
   t('Roles and permissions');
   t('Substantive Logic');
   t('Thumbnail image');
