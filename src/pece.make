@@ -366,6 +366,7 @@ libraries[cycle][directory_name] = jquery.cycle
 ; Rules
 projects[rules][subdir] = contrib
 projects[rules][version] = 2.9
+projects[rules][patch][2189645] = https://www.drupal.org/files/issues/d7_component_caches.patch
 
 ; Translation
 projects[l10n_update][subdir] = contrib
