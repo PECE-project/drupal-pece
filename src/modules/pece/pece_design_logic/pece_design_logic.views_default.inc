@@ -13,7 +13,7 @@ function pece_design_logic_views_default_views() {
   $view = new view();
   $view->name = 'pece_design_logic';
   $view->description = '';
-  $view->tag = 'default';
+  $view->tag = 'PECE';
   $view->base_table = 'eck_design_logic';
   $view->human_name = 'PECE - Design Logic';
   $view->core = 7;
@@ -23,6 +23,7 @@ function pece_design_logic_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Design Logics';
+  $handler->display->display_options['css_class'] = 'has-mini-teaser';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -32,7 +33,7 @@ function pece_design_logic_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'entity';
   $handler->display->display_options['row_options']['view_mode'] = 'mini_teaser';
-  /* Field: Design logic: Thumbnail */
+  /* Field: Field: Thumbnail */
   $handler->display->display_options['fields']['field_thumbnail']['id'] = 'field_thumbnail';
   $handler->display->display_options['fields']['field_thumbnail']['table'] = 'field_data_field_thumbnail';
   $handler->display->display_options['fields']['field_thumbnail']['field'] = 'field_thumbnail';
@@ -65,7 +66,7 @@ function pece_design_logic_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $translatables['pece_design_logic'] = array(
     t('Master'),
-    t('Design Logic'),
+    t('Design Logics'),
     t('more'),
     t('Apply'),
     t('Reset'),

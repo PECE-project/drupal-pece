@@ -102,7 +102,7 @@ function pece_dashboard_views_default_views() {
 
   $view = new view();
   $view->name = 'pece_my_artifacts';
-  $view->description = 'List the most recent artifacts.';
+  $view->description = 'Lists artifacts created by the current logged user.';
   $view->tag = 'PECE';
   $view->base_table = 'node';
   $view->human_name = 'PECE - My Artifacts';
@@ -113,6 +113,7 @@ function pece_dashboard_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Artifacts';
+  $handler->display->display_options['css_class'] = 'has-mini-teaser';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -411,6 +412,7 @@ function pece_dashboard_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Memos';
+  $handler->display->display_options['css_class'] = 'has-mini-teaser';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -419,7 +421,9 @@ function pece_dashboard_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'list';
-  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'mini_teaser';
+  $handler->display->display_options['row_options']['links'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -585,6 +589,7 @@ function pece_dashboard_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Photo Essays';
+  $handler->display->display_options['css_class'] = 'has-mini-teaser';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';

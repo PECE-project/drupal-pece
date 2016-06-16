@@ -12,7 +12,7 @@ function pece_projects_views_default_views() {
 
   $view = new view();
   $view->name = 'pece_projects';
-  $view->description = 'Lists the artifacts assigned to a given group.';
+  $view->description = 'Lists the site\'s projects.';
   $view->tag = 'PECE';
   $view->base_table = 'node';
   $view->human_name = 'PECE - Projects';
@@ -23,6 +23,7 @@ function pece_projects_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Projects';
+  $handler->display->display_options['css_class'] = 'has-mini-teaser';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
