@@ -113,13 +113,13 @@ function pece_access_move_file($file, $scheme) {
  * anonymous user should have access to the file.
  */
 function pece_access_file_is_public($file) {
-  return _pece_access_file_is_visible($file, drupal_anonymous_user());
+  return pece_access_file_is_visible($file, drupal_anonymous_user());
 }
 
 /**
  * Check if a file should be accessbile to the given user.
  */
-function _pece_access_file_is_visible($file, $account = NULL) {
+function pece_access_file_is_visible($file, $account = NULL) {
   if (!isset($account)) {
     $account = $GLOBALS['user'];
   }
@@ -155,16 +155,8 @@ function pece_access_file_entity_access($op, $file, $account) {
     return FILE_ENTITY_ACCESS_IGNORE;
   }
 
-  $file_is_visible = _pece_access_file_is_visible($file, $account);
+  $file_is_visible = pece_access_file_is_visible($file, $account);
   return $file_is_visible ? FILE_ENTITY_ACCESS_ALLOW : FILE_ENTITY_ACCESS_DENY;
-}
-
-/**
- * Get permissions settings for a node based on PECE specific rules.
- */
-function pece_access_node_permission($node) {
-  $node_wrapper = entity_metadata_wrapper('node', $node);
-  return $node_wrapper->field_permissions->value();
 }
 
 /**
@@ -173,19 +165,6 @@ function pece_access_node_permission($node) {
 function pece_access_restricted_node_types() {
   $field = field_info_field('field_permissions');
   return drupal_map_assoc($field['bundles']['node']);
-}
-
-/**
- * Helper function to provide a list of artifact node types along with their
- * file fields.
- */
-function pece_access_artifact_node_types_file_fields() {
-  return array(
-    'pece_artifact_audio' => 'field_pece_media_audio',
-    'pece_artifact_image' => 'field_pece_media_image',
-    'pece_artifact_pdf' => 'field_pece_media_pdf',
-    'pece_artifact_video' => 'field_pece_media_video',
-  );
 }
 
 /**
@@ -200,7 +179,7 @@ function pece_access_node_access_records($node) {
     return $grants;
   }
 
-  $permission = pece_access_get_permission_setting($node);
+  $permission = pece_access_get_permission($node);
   $groups = pece_access_get_node_groups($node);
 
   foreach ($groups as $gid => $private) {
@@ -325,7 +304,7 @@ function pece_access_node_grants($account, $op) {
  * Helper (performatic) method to get the field permission value for a node.
  * @TODO: Use db_query for better performance.
  */
-function pece_access_get_permission_setting($node) {
+function pece_access_get_permission($node) {
   $query = db_select('field_data_field_permissions', 'p');
   $query->fields('p', array('field_permissions_value'));
   $query->condition('p.entity_type', 'node');
@@ -356,33 +335,6 @@ function pece_access_get_node_groups($node) {
   }
 
   return $groups;
-}
-
-/**
- * Helper (performatic) method to get the private content group id's for a node.
- */
-function pece_access_get_node_private_groups($node) {
-  $sql = "SELECT ogm.gid AS gid
-    FROM og_membership ogm
-    LEFT OUTER JOIN field_data_group_content_access gca ON gca.entity_id = ogm.gid
-    LEFT OUTER JOIN field_data_group_access ga ON ga.entity_id = ogm.gid
-    WHERE (gca.entity_type = 'node')
-    AND (ga.entity_type = 'node')
-    AND (ogm.entity_type = 'node')
-    AND (ogm.etid = {$node->nid})
-    AND(
-      (gca.group_content_access_value = 2)
-      OR ((gca.group_content_access_value = 0) AND (ga.group_access_value = 1))
-    )";
-
-  $results = db_query($sql);
-  $gids = array();
-
-  foreach ($results as $result) {
-    $gids[] = $result->gid;
-  }
-
-  return $gids;
 }
 
 /**
