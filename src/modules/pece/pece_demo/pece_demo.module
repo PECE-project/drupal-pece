@@ -176,7 +176,7 @@ function pece_demo_ensure_role_named_users() {
     if ($found) {
       $used_uids[] = $user->uid;
       $user->name = preg_replace('@[^a-z0-9-]+@','_', strtolower($role));
-      // user_save($user, array('pass' => 'password'));
+      user_save($user, array('pass' => 'password'));
     }
   }
 }
