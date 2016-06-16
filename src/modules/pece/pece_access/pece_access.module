@@ -21,6 +21,11 @@ define('PECE_RESEARCHER', 'Researcher');
 define('PECE_ACCESS_REALM', 'pece_access');
 
 /**
+ * The field that defines access on nodes.
+ */
+define('PECE_ACCESS_FIELD', 'field_permissions');
+
+/**
  * Implements hook_node_insert().
  */
 function pece_access_node_insert($node) {
@@ -109,7 +114,7 @@ function pece_access_move_file($file, $scheme) {
 }
 
 /**
- * Check if a file should be public or private. We do it by checking if an
+ * Check whether a file should be public or private. We do it by checking if an
  * anonymous user should have access to the file.
  */
 function pece_access_file_is_public($file) {
@@ -163,7 +168,7 @@ function pece_access_file_entity_access($op, $file, $account) {
  * Helper function to provide a list of restricted node types.
  */
 function pece_access_restricted_node_types() {
-  $field = field_info_field('field_permissions');
+  $field = field_info_field(PECE_ACCESS_FIELD);
   return drupal_map_assoc($field['bundles']['node']);
 }
 
@@ -305,13 +310,17 @@ function pece_access_node_grants($account, $op) {
  * @TODO: Use db_query for better performance.
  */
 function pece_access_get_permission($node) {
-  $query = db_select('field_data_field_permissions', 'p');
-  $query->fields('p', array('field_permissions_value'));
+  $table = 'field_data_' . PECE_ACCESS_FIELD;
+  $column = PECE_ACCESS_FIELD . '_value';
+
+  $query = db_select($table, 'p');
+  $query->fields('p', array($column));
   $query->condition('p.entity_type', 'node');
   $query->condition('p.entity_id', $node->nid);
   $query->range(0, 1);
   $result = $query->execute()->fetch();
-  return !empty($result) ? $result->field_permissions_value : FALSE;
+
+  return !empty($result) ? $result->$column : FALSE;
 }
 
 /**
@@ -338,7 +347,7 @@ function pece_access_get_node_groups($node) {
 }
 
 /**
- * Helper method to check if user has role.
+ * Helper (performatic) method to check if user has a role.
  * @TODO: Use db_query for better performance.
  */
 function pece_access_user_has_role($user, $role) {
