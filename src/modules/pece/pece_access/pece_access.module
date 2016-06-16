@@ -21,6 +21,31 @@ define('PECE_RESEARCHER', 'Researcher');
 define('PECE_ACCESS_REALM', 'pece_access');
 
 /**
+ * The public-group content access realm.
+ */
+define('PECE_ACCESS_REALM_PUBLIC_GROUP', PECE_ACCESS_REALM . ':public-group:node');
+
+/**
+ * The restricted content access realm.
+ */
+define('PECE_ACCESS_REALM_RESTRICTED', PECE_ACCESS_REALM . ':restricted:node');
+
+/**
+ * The restricted content inside group access realm.
+ */
+define('PECE_ACCESS_REALM_RESTRICTED_GROUP', PECE_ACCESS_REALM . ':restricted:group:node');
+
+/**
+ * The content owner access realm.
+ */
+define('PECE_ACCESS_REALM_OWNER', PECE_ACCESS_REALM . ':owner:node');
+
+/**
+ * The private content owner access realm.
+ */
+define('PECE_ACCESS_REALM_PRIVATE_OWNER', PECE_ACCESS_REALM . ':private:owner:node');
+
+/**
  * The field that defines access on nodes.
  */
 define('PECE_ACCESS_FIELD', 'field_permissions');
@@ -197,7 +222,7 @@ function pece_access_node_access_records($node) {
   // would deny access to it even though it might be present on a public group.
   if ($permission == 'open' && !empty($public_groups) && !empty($private_groups)) {
     $grants[] = array(
-      'realm' => PECE_ACCESS_REALM . ':public-group:node',
+      'realm' => PECE_ACCESS_REALM_PUBLIC_GROUP,
       'gid' => 0,
       'grant_view' => 1,
       'grant_update' => 0,
@@ -212,7 +237,7 @@ function pece_access_node_access_records($node) {
   // default behavior (which is deny first).
   if ($permission == 'restricted' && (empty($groups) || !empty($public_groups))) {
     $grants[] = array(
-      'realm' => PECE_ACCESS_REALM . ':restricted:node',
+      'realm' => PECE_ACCESS_REALM_RESTRICTED,
       'gid' => 0,
       'grant_view' => 1,
       'grant_update' => 0,
@@ -226,7 +251,7 @@ function pece_access_node_access_records($node) {
   if ($permission == 'restricted' && !empty($private_groups) && empty($public_groups)) {
     foreach ($private_groups as $group_id) {
       $grants[] = array(
-        'realm' => PECE_ACCESS_REALM . ':restricted:group:node',
+        'realm' => PECE_ACCESS_REALM_RESTRICTED_GROUP,
         'gid' => $group_id,
         'grant_view' => 1,
         'grant_update' => 0,
@@ -242,7 +267,7 @@ function pece_access_node_access_records($node) {
   // and no public group at all, we add a grant parallel to the Organic Groups' one.
   if (!empty($grants) || (empty($public_groups) && !empty($private_groups))) {
     $grants[] = array(
-      'realm' => PECE_ACCESS_REALM . ':owner:node',
+      'realm' => PECE_ACCESS_REALM_OWNER,
       'gid' => $node->uid,
       'grant_view' => 1,
       'grant_update' => 1,
@@ -255,7 +280,7 @@ function pece_access_node_access_records($node) {
   // ultimate control, and should always override any other when present.
   if ($permission == 'private') {
     $grants[] = array(
-      'realm' => PECE_ACCESS_REALM . ':private:owner:node',
+      'realm' => PECE_ACCESS_REALM_PRIVATE_OWNER,
       'gid' => $node->uid,
       'grant_view' => 1,
       'grant_update' => 1,
@@ -280,27 +305,27 @@ function pece_access_node_grants($account, $op) {
 
   // 1. Allow access to all nodes that belong to public groups, regardless of other
   // groups they might belong to.
-  $grants[PECE_ACCESS_REALM . ':public-group:node'][] = 0;
+  $grants[PECE_ACCESS_REALM_PUBLIC_GROUP][] = 0;
 
   // 2. Allow access for 'Researcher' users to any restricted content if it belongs to
   // no group at all or if it belongs to at least one public group.
   if (pece_access_user_has_role($account, 'Researcher')) {
-    $grants[PECE_ACCESS_REALM . ':restricted:node'][] = 0;
+    $grants[PECE_ACCESS_REALM_RESTRICTED][] = 0;
   }
 
   // 3. Allow access for 'Researcher' users to any restricted content in the groups
   // they belong to.
   if (pece_access_user_has_role($account, 'Researcher') && !empty($groups['node'])) {
     foreach ($groups['node'] as $group_id) {
-      $grants[PECE_ACCESS_REALM . ':restricted:group:node'][] = $group_id;
+      $grants[PECE_ACCESS_REALM_RESTRICTED_GROUP][] = $group_id;
     }
   }
 
   // 4. Allows access to any of the user's own content.
-  $grants[PECE_ACCESS_REALM . ':owner:node'][] = $account->uid;
+  $grants[PECE_ACCESS_REALM_OWNER][] = $account->uid;
 
   // 5. Allow access to any user that owns a private node.
-  $grants[PECE_ACCESS_REALM . ':private:owner:node'][] = $account->uid;
+  $grants[PECE_ACCESS_REALM_PRIVATE_OWNER][] = $account->uid;
 
   return $grants;
 }
