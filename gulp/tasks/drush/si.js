@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var shell = require('shelljs');
 
 var cwd = process.cwd(), command, failed, message;
-var password = process.env.PECE_DRUPAL_ADMIN_PASS || 'impossiblepassword';
+var password = process.env.PECE_DRUPAL_ADMIN_PASS || 'password';
 var siteName = process.env.PECE_DRUPAL_SITE_NAME || 'PECE Drupal Distro';
 var acceptableErrors = [
   'Couldn\'t write .htaccess file',
