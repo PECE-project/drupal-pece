@@ -166,6 +166,7 @@ function pece_core_defaultconfig_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'user';
   $handler->display->display_options['row_options']['view_mode'] = 'mini_teaser';
+  $handler->display->display_options['css_class'] = 'has-mini-teaser';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
