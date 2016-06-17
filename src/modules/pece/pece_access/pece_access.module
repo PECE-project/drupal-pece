@@ -352,12 +352,10 @@ function pece_access_get_permission($node) {
  * Helper (performatic) method to get a map of private content groups.
  */
 function pece_access_get_node_groups($node) {
-  $sql = "SELECT ogm.gid AS gid, gca.group_content_access_value AS gcavalue, ga.group_access_value AS gavalue
+  $sql = "SELECT ogm.gid AS gid, ga.group_access_value AS gavalue
     FROM og_membership ogm
-    LEFT OUTER JOIN field_data_group_content_access gca ON gca.entity_id = ogm.gid
     LEFT OUTER JOIN field_data_group_access ga ON ga.entity_id = ogm.gid
-    WHERE (gca.entity_type = 'node')
-    AND (ga.entity_type = 'node')
+    WHERE (ga.entity_type = 'node')
     AND (ogm.entity_type = 'node')
     AND (ogm.etid = {$node->nid})";
 
@@ -365,7 +363,7 @@ function pece_access_get_node_groups($node) {
   $groups = array();
 
   foreach ($results as $result) {
-    $groups[$result->gid] = $result->gcavalue == 2 || (($result->gcavalue == 0) && ($result->gavalue == 1));
+    $groups[$result->gid] = $result->gavalue == 1;
   }
 
   return $groups;
