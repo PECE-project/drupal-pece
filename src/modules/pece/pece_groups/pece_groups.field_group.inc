@@ -24,7 +24,6 @@ function pece_groups_field_group_info() {
     'weight' => '3',
     'children' => array(
       0 => 'group_access',
-      1 => 'group_content_access',
       2 => 'group_email',
       3 => 'group_group',
       4 => 'og_group_ref',
