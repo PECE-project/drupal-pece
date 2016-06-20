@@ -127,7 +127,7 @@ function pece_photo_essay_views_default_views() {
   );
   $translatables['pece_group_photo_essays'] = array(
     t('Master'),
-    t('Group Essays'),
+    t('Essays'),
     t('more'),
     t('Apply'),
     t('Reset'),
