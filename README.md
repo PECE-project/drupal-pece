@@ -2,18 +2,18 @@
 
 PECE is a Free and Open Source (Drupal-based) digital platform that supports
 multi-sited, cross-scale ethnographic and historical research. PECE is built
-as a [Drupal distribution](https://www.drupal.org/documentation/build/distributions),
-therefore it can be extended like any other Drupal project.
+as a [Drupal distribution](https://www.drupal.org/documentation/build/distributions)
+to be improved and extended like any other Drupal project.
 
-This repository holds the **development code** for PECE. It contains work in progress which
-is intended to be used by developers to suggest bug fixes or improvements,
+This repository contains the **development code** for PECE. It has work in progress which
+is intended to be used by developers to suggest bug fixes and improvements,
 as well as a starting point for customizations of the platform. If you are a
 developer wishing to contribute to the development process, this is the
 repository you must use.
 
 If you are an end-user looking for stable PECE releases, please access the repository
 [PECE-distro](https://github.com/PECE-project/pece-distro), which contains our
-installation packages with the latest stable versions. If you have general questions about
+installation package with the latest stable version. If you have general questions about
 the platform, please refer to our [complete documentation](http://pece.readthedocs.io/en/docs/).
 
 
@@ -25,18 +25,18 @@ PECE development is made easy by using the following software projects:
 - [Gulp](http://gulpjs.com/) task runner;
 - [Drush](http://docs.drush.org/) command line interface;
 - [Kraftwagen](http://kraftwagen.org/) Drush extension;
-- [Drupal requirements](https://www.drupal.org/requirements).
+- [Drupal](https://www.drupal.org/requirements).
 
 Keep in mind that these are prerequisites for the *development environment* of
-the PECE project, not for the production-hosted software. In order words, you
-will not need to follow these instructions if you are interested in installing
+the PECE project, not for the end-user software. In order words, you will
+not need to follow these instructions if you are only interested in installing
 and running PECE. Please, refer to our [official
 documentation](http://pece.readthedocs.io/en/docs/installation.html) if you are
 looking for instructions for regular PECE installation and usage.
 
 ### Installing Node.js
 
-We strongly suggest you use [nvm](https://github.com/creationix/nvm) to install Node.js on your development machine. You must have Node.js version 4.x.x and *npm* version 3.x.x, at least.
+We strongly suggest you to use [nvm](https://github.com/creationix/nvm) to install Node.js on your development machine. You must have Node.js version 4.x.x and *npm* version 3.x.x, at least.
 
 **1. To install *nvm*** run the following on you terminal:
 
@@ -106,7 +106,7 @@ cd ~/.drush
 git clone -b local_workflow_improvements --single-branch git://github.com/TallerWebSolutions/kraftwagen.git
 ```
 
-3. Make Drush know you've installed a new module.
+3. Make Drush knows you've installed a new module.
 
 ```sh
 drush cc drush
@@ -116,7 +116,7 @@ Using Kraftwagen is an important part of the build process. Please make sure you
 
 ## Getting Started
 
-If you follow these instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Proceed to the **Deployment** to learn how to deploy the project on a live system.
+If you follow these instructions you will get a copy of the project up and running on your local machine for development and testing purposes. Proceed to the **Deployment** to learn how to deploy the project on a live system.
 
 ### Download
 
@@ -127,26 +127,26 @@ git clone git://github.com/PECE-project/drupal-pece.git
 cd drupal-pece
 ```
 
-### Install dependencies
+### Installing dependencies
 
-PECE dependends on a bunch of Node.js packages, which will mostly help building PECE, and Bower packages, which are front-end libraries used. To install all these dependencies you can run the following:
+PECE dependends on a bunch of Node.js packages, which will mostly help building PECE, and Bower packages, which refer to the front-end libraries we use. To install all of these dependencies you can run the following command:
 
 ```sh
 npm install
 ```
 
-After installing Node.js dependencies, *npm* will automatically perform Bower install.
+After installing Node.js dependencies, *npm* will automatically perform Bower 'install'.
 
 ### Build
 
-Kraftwagen - the tool behind PECE's building system - relies on the concept of different *environments* upon building. The two environments in use are:
+Kraftwagen - the tool behind PECE building system - relies on the concept of different *environments* upon building. The two environments in use are:
 
 - **production**
 - **development**
 
-> Onwards in the Drupal installing process, the environment will be responsible for enabling/disabling specific modules. Furthermore, using the *development* environment will also cause for the directory structure to use the *src* directory linked as the *pece* Drupal profile, inside Drupal's root directory - this means you can actively engage development using this directory without having to build every time you change something. This technique was introduced as a [pull-request](https://github.com/kraftwagen/kraftwagen/pull/46) to the Kraftwagen project.
+> In the Drupal installation process, the environment config will be responsible for enabling/disabling specific modules. Furthermore, using the *development* environment will also cause for the directory structure to use the *src* directory, using *pece* Drupal profile, inside Drupal's root directory - this means that you can actively engage development using this directory without having to build every time you change something. This technique was introduced as a [pull-request](https://github.com/kraftwagen/kraftwagen/pull/46) to the Kraftwagen project.
 
-Kraftwagen provides many commands through the drush interface. We encapsulate some of them inside gulp tasks with the intend to ease the building and configuration steps.
+Kraftwagen provides many commands through the drush interface. We encapsulate some of them inside 'gulp tasks' with the intend to ease the building and configuration steps.
 
 #### 1. Setup the Kraftwagen workspace:
 
@@ -154,11 +154,11 @@ Kraftwagen provides many commands through the drush interface. We encapsulate so
 gulp setup
 ```
 
-You'll then be prompt to define the environment (defaults to production) and the posterior database configuration.
+You'll then be prompted to define the environment (defaults to production) and the posterior database configuration.
 
 > The database configuration provided here is only used to connect to the database, not to create it; prior to proceeding with the install you should make sure to create the database and make it properly available via the settings provided on this step.
 
-#### 2. Download Drupal and contributed modules:
+#### 2. Download Drupal and contributed modules to build the distro:
 
 ```sh
 gulp build
@@ -170,31 +170,26 @@ Now you should have the directory *build* already created as Drupal's root. You 
 
 #### 4. Setup permissions
 
-Drupal requires you give permission for the HTTP server user to write to the files directory. On more traditional installs this means the `www-data` user. To give permission for this user you can run the following:
+Drupal requires you give permission for the HTTP server user to write to the files directory. This is a crucial step in order to continue the installation process. Pre and post-configuration steps must be taken in order to ensure that proper permissions are set. Please refer to the [official Drupal documention on how to properly setup the permissions](https://www.drupal.org/documentation/install/settings-file) in your server backend. 
 
-```sh
-sudo chgrp -R www-data cnf/files
-```
+#### 5. Installing Drupal
 
-Keep in mind that this is not necessarily correct; depends on your running environment.
-
-#### 5. Install Drupal
-
-There is currently two methods for installing a fresh PECE project: via command line; or using the browser.
+There are currently two methods for installing a new PECE instance: via command-line or using the web browser.
 
 ##### 5.1 Using the browser
 
-In your browser, access the url `/install.php`, preceded with the domain serving the site. The install process is self-explanatory. Keep in mind it takes a while to finish; up ot 30 minutes, on lower configuration machines.
+In your browser, access the url `/install.php`, preceded with the domain serving the site. The install process is self-explanatory. Keep in mind it takes a while to finish (up to 30 minutes on low-end configuration servers).
 
-##### 5.2 Using the command line
+##### 5.2 Using the command-line
 
-There is a one-command install available through Gulp. Keep in mind that this will erase any currently available data on the database configured in the step 1. To proceed, run the following:
+There is a one-command install available through Gulp. Keep in mind that this command will erase any currently available data on the database configured on step 1. To proceed, run the following:
 
 ```sh
 gulp site-install
 ```
 
-> If the user running the Gulp task differs from the user used by the server, you will need to redo step 4 in orther to make sure the server detains proper permission to manage files.
+> If the user running the Gulp task differs from the user which is being used by the web server, you will need to redo step 4 in other to make sure the server has proper permission to manage files.
+
 
 #### 6. (Optional) Adding demo content
 
@@ -212,9 +207,7 @@ TODO
 
 ## Deployment
 
-Deployments are coordinated among the core developers and designers of PECE and distributed through installation packages in the [production repository of PECE](https://github.com/PECE-project/pece-distro.git).
-
-TODO: explain how to deploy a PECE instance?
+TODO
 
 ## Contributing
 
