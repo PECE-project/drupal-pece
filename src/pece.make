@@ -465,10 +465,6 @@ projects[date][version] = 2.9
 projects[backup_migrate_sftp][subdir] = contrib
 projects[backup_migrate_sftp][version] = 1.0
 
-; 403-Redirect
-projects[r4032login][subdir] = contrib
-projects[r4032login][version] = 1.8
-
 ; SMTP Mail
 projects[smtp][subdir] = contrib
 projects[smtp][version] = 1.4
