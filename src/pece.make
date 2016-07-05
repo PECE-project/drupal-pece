@@ -440,10 +440,8 @@ projects[pdf_reader][version] = 1.0-rc6
 projects[pdf_reader][patch][] = "./patches/pdf_reader-keydown_event_page_error.patch"
 
 ; Amber
-projects[amber][type] = module
-projects[amber][download][type] = git
-projects[amber][download][url] = "https://github.com/berkmancenter/amber_drupal.git"
 projects[amber][subdir] = contrib
+projects[amber][version] = 1.0
 
 ; Backup and Migrate
 projects[backup_migrate][subdir] = contrib
