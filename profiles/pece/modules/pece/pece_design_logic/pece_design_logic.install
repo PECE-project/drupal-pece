@@ -5,9 +5,20 @@
  */
 
 /**
- * Implements hook_install().
+ * Implements hook_modules_enabled().
  */
-function pece_design_logic_install() {
+function pece_design_logic_modules_enabled($modules) {
+  if (in_array('pece', $modules)) {
+    _pece_design_logic_install_paths();
+    _pece_design_logic_install_design_logic_items();
+    _pece_design_logic_install_permissions();
+  }
+}
+
+/**
+ * Setup pathauto for design logic items.
+ */
+function _pece_design_logic_install_paths() {
   // 1. Enable pathauto for the design_logic entity type.
   $value = variable_get('pathauto_entity_available_entity_types', array());
   $value['design_logic'] = 'design_logic';
@@ -18,26 +29,9 @@ function pece_design_logic_install() {
 }
 
 /**
- * Implements hook_kw_manifests_info().
+ * Create design logic items using kraftwagen itemnames.
  */
-function pece_design_logic_kw_manifests_info() {
-  $manifests = array();
-
-  $manifests['ensure_items'] = array(
-    'callback' => 'pece_design_logic_ensure_items',
-  );
-
-  $manifests['permissions'] = array(
-    'callback' => 'pece_design_logic_permissions',
-  );
-
-  return $manifests;
-}
-
-/**
- * Create kraftwagen itemnames for each design logic type.
- */
-function pece_design_logic_ensure_items() {
+function _pece_design_logic_install_design_logic_items() {
   module_load_include('inc', 'pece', 'pece.functions');
   module_load_include('inc', 'pece_design_logic', 'pece_design_logic.functions');
 
@@ -76,7 +70,7 @@ function pece_design_logic_ensure_items() {
 /**
  * Setup Design logic permissions.
  */
-function pece_design_logic_permissions() {
+function _pece_design_logic_install_permissions() {
   module_load_include('inc', 'pece', 'pece.functions');
 
   pece_set_permissions(array(

@@ -1,1 +1,30 @@
-amber/amber.info
+name = Amber
+description = Amber keeps links working on blogs and websites.
+package = Amber
+core = 7.x
+
+files[] = libraries/AmberInterfaces.php
+files[] = libraries/AmberNetworkUtils.php
+files[] = libraries/AmberChecker.php
+files[] = libraries/AmberStatus.php
+files[] = libraries/AmberAvailability.php
+files[] = libraries/AmberMementoService.php
+files[] = libraries/backends/amber/AmberStorage.php
+files[] = libraries/backends/amber/AmberFetcher.php
+files[] = libraries/backends/perma/PermaFetcher.php
+files[] = libraries/backends/perma/PermaStorage.php
+files[] = libraries/backends/internetarchive/InternetArchiveFetcher.php
+files[] = libraries/backends/internetarchive/InternetArchiveStorage.php
+files[] = libraries/backends/aws/AmazonS3Storage.php
+files[] = amber.test
+scripts[] = js/amber.js
+stylesheets[all][] = css/amber.css
+configure = admin/config/content/amber
+dependencies[] = libraries
+
+; Information added by Drupal.org packaging script on 2016-05-03
+version = "7.x-1.0"
+core = "7.x"
+project = "amber"
+datestamp = "1462293540"
+

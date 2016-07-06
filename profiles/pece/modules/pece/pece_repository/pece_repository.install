@@ -3,24 +3,3 @@
  * @file
  * Installation code for the PECE Repository feature.
  */
-
- /**
-  * Implements hook_kw_manifests_info().
-  */
- function pece_repository_kw_manifests_info() {
-   $manifests = array();
-
-   $manifests['set_default_menu_items'] = array(
-     'callback' => 'pece_repository_set_default_menu_items',
-   );
-
-   return $manifests;
- }
-
-/**
- * Create kraftwagen itemnames for each design logic type.
- */
-function pece_repository_set_default_menu_items() {
-  module_load_include('inc', 'pece_repository', 'pece_repository.functions');
-  pece_repository_set_menu_items();
-}

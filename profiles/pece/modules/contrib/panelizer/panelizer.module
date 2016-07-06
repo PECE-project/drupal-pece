@@ -1289,18 +1289,6 @@ function panelizer_features_export_alter(&$export, $module_name) {
   return array();
 }
 
-/**
- * Implements hook_search_api_alter_callback_info().
- */
-function panelizer_search_api_alter_callback_info() {
-  $info = array();
-  $info['panelizer'] = array(
-    'name' => t('Panelizer'),
-    'description' => t('Add the content from the Panelizer "Full page override" to the search index.'),
-    'class' => 'PanelizerSearchApiAlterCallback',
-  );
-  return $info;
-}
 // -----------------------------------------------------------------------
 // Theme functions where necessary.
 

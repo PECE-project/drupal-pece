@@ -3,10 +3,3 @@
  * @file
  * Installation code for the PECE Artifacts feature.
  */
-
-/**
- * Implements hook_update_N().
- */
-function pece_artifacts_update_7001() {
-  node_type_delete('pece_artifact');
-}

@@ -105,7 +105,6 @@ class LibrariesFinderPlugin implements FinderPluginInterface {
     // @todo Reset drupal_static('libraries') ?
     $all = array();
     foreach ($this->system->getLibrariesInfo() as $name => $info) {
-      serialize($info);
       if (!isset($info['xautoload'])) {
         continue;
       }

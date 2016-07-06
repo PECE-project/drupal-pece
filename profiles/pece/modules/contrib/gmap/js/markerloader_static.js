@@ -25,7 +25,9 @@ Drupal.gmap.addHandler('gmap', function (elem) {
                 // Pass around the object, bindings can change it if necessary.
                 obj.change('preparemarker', -1, marker);
                 // And add it.
-                obj.change('addmarker', -1, marker);
+                if (marker && marker.marker == undefined) {
+                  obj.change('addmarker', -1, marker);
+                }
             }
             obj.change('markersready', -1);
         });

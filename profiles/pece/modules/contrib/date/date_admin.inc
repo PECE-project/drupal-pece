@@ -313,6 +313,7 @@ function _date_field_widget_settings_form($field, $instance) {
     $formats = drupal_map_assoc($formats);
   }
   $now = date_example_date();
+  $options['site-wide'] = t('Short date format: @date', array('@date' => date_format_date($now, 'short')));
   foreach ($formats as $f) {
     $options[$f] = date_format_date($now, 'custom', $f);
   }

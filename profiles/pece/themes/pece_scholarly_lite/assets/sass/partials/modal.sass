@@ -1,0 +1,65 @@
+/*
+ *------------------------------------------------------------------------------
+ * Modal styles
+ *------------------------------------------------------------------------------
+ */
+
+.remodal
+  .remodal-close
+    font-size: 0
+    z-index: 1
+
+  &.remodal-big
+    @each $breakpoint, $container-width in $container-map
+      +breakpoint(map-get($breakpoint-min-map, $breakpoint))
+        max-width: $container-width
+
+  &.photo-essay-modal
+    padding: 0
+
+.remodal-wrapper.photo-essay-modal
+  padding-right: 6%
+  padding-left: 6%
+
+.photo-essay-slider-arrow
+  position: fixed
+  bottom: 0
+  width: 50%
+  height: 62px
+  font-size: 0
+  z-index: 1
+  opacity: 0.8
+  background-color: rgba(0, 0, 0, 0.9)
+
+  &.slick-prev
+    left: 0
+
+  &.slick-next
+    right: 0
+
+  .remodal-is-closing &
+    opacity: 0
+
+  &:hover, &:focus
+    opacity: 1
+
+  .fa
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate3d(-50%, -50%, 0)
+    font-size: 32px
+
+    &::before
+      opacity: 1
+
++breakpoint($breakpoint-min-md)
+  .photo-essay-slider-arrow
+    top: 0
+    width: 5%
+    height: 100%
+    opacity: 0.5
+    background-color: rgba(0, 0, 0, 0.4)
+
+    &:hover, &:focus
+      opacity: 1

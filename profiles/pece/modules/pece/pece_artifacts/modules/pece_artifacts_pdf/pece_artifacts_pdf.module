@@ -7,18 +7,6 @@
 include_once 'pece_artifacts_pdf.features.inc';
 
 /**
- * Implements hook_form_FORM_ID_alter().
- */
-function pece_artifacts_pdf_form_pece_artifact_pdf_node_form_alter(&$form, &$form_state) {
-  // PECE's artifact default form alter.
-  pece_artifacts_alter_artifact_form($form, $form_state);
-
-  if (module_exists('pece_profile')) {
-    array_unshift($form['#validate'], 'pece_profile_check_author');
-  }
-}
-
-/**
  * Implements hook_modules_enabled().
  *
  * This hook is implemented to assign some default permissions for PECE's PDF

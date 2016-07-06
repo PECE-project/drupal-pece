@@ -13,6 +13,9 @@ function panopoly_admin_install() {
   // Update the administrator role to have all permissions.
   if ($administrator = user_role_load_by_name('administrator')) {
     user_role_grant_permissions($administrator->rid, array_keys(module_invoke_all('permission')));
+
+    // Set the administrator role as the default role.
+    variable_set('user_admin_role', $administrator->rid);
   }
 }
 

@@ -491,10 +491,6 @@ function gmap_menu() {
  * @todo move this to GmapCacheToolbox
  */
 function gmap_regenerate_markers() {
-  // This often fails in cli mode, so bail.
-  if (drupal_is_cli()) {
-    return;
-  }
   $contents = '';
 
   $contents .= "// GMap marker image data.\n";
@@ -1001,7 +997,9 @@ function theme_gmap($variables) {
   // Theming needs to get fixed instead..
   if (isset($map['markers'])) {
     foreach ($map['markers'] as $i => $marker) {
-      unset($map['markers'][$i]['text']);
+      if (isset($marker['text'])) {
+        $map['markers'][$i]['text'] = '<div class="gmap-popup">' . $marker['text'] . '</div>';
+      }
     }
   }
 

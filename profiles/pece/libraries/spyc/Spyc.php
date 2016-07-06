@@ -43,6 +43,8 @@ if (!function_exists('spyc_dump')) {
   }
 }
 
+if (!class_exists('Spyc')) {
+
 /**
    * The Simple PHP YAML Class.
    *
@@ -609,7 +611,9 @@ class Spyc {
 
     if ($is_quoted) {
       $value = str_replace('\n', "\n", $value);
-      return strtr(substr ($value, 1, -1), array ('\\"' => '"', '\'\'' => '\'', '\\\'' => '\''));
+      if ($first_character == "'")
+        return strtr(substr ($value, 1, -1), array ('\'\'' => '\'', '\\\''=> '\''));
+      return strtr(substr ($value, 1, -1), array ('\\"' => '"', '\\\''=> '\''));
     }
 
     if (strpos($value, ' #') !== false && !$is_quoted)
@@ -1141,6 +1145,7 @@ class Spyc {
     $line = trim(str_replace($group, '', $line));
     return $line;
   }
+}
 }
 
 // Enable use of Spyc from command line

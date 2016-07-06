@@ -66,6 +66,9 @@ class date_views_filter_handler extends date_views_filter_handler_simple {
       if ($field['table_name'] != $this->table || !empty($this->relationship)) {
         $this->related_table_alias = $this->query->ensure_table($field['table_name'], $this->relationship);
       }
+      else {
+        $this->related_table_alias = null;
+      }
       $table_alias = !empty($this->related_table_alias) ? $this->related_table_alias : $field['table_name'];
       $field_name = $table_alias . '.' . $field['field_name'];
 

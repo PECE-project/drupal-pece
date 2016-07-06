@@ -22,7 +22,7 @@ function pece_artifacts_fieldnote_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'PECE - Group Field Diary';
+  $handler->display->display_options['title'] = 'Field Diary';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -31,26 +31,8 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['style_options']['grouping'] = array(
-    0 => array(
-      'field' => 'created',
-      'rendered' => 1,
-      'rendered_strip' => 0,
-    ),
-  );
+  $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* No results behavior: Global: Text area */
-  $handler->display->display_options['empty']['area']['id'] = 'area';
-  $handler->display->display_options['empty']['area']['table'] = 'views';
-  $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'There are no field notes for the current group.';
-  $handler->display->display_options['empty']['area']['format'] = 'panopoly_wysiwyg_text';
-  /* Relationship: Content: Author */
-  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
-  $handler->display->display_options['relationships']['uid']['table'] = 'node';
-  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -77,7 +59,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'F d, Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
-  /* Field: Content: Body */
+  /* Field: Content: Description */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -122,11 +104,6 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['arguments']['og_group_ref_target_id']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['og_group_ref_target_id']['validate']['type'] = 'og';
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
-  $handler->display->display_options['filter_groups']['groups'] = array(
-    1 => 'AND',
-    2 => 'AND',
-    3 => 'AND',
-  );
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -142,66 +119,75 @@ function pece_artifacts_fieldnote_views_default_views() {
     'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Permissions (field_permissions) */
-  $handler->display->display_options['filters']['field_permissions_value']['id'] = 'field_permissions_value';
-  $handler->display->display_options['filters']['field_permissions_value']['table'] = 'field_data_field_permissions';
-  $handler->display->display_options['filters']['field_permissions_value']['field'] = 'field_permissions_value';
-  $handler->display->display_options['filters']['field_permissions_value']['value'] = array(
-    'open' => 'open',
-  );
-  $handler->display->display_options['filters']['field_permissions_value']['group'] = 1;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status_1']['id'] = 'status_1';
-  $handler->display->display_options['filters']['status_1']['table'] = 'node';
-  $handler->display->display_options['filters']['status_1']['field'] = 'status';
-  $handler->display->display_options['filters']['status_1']['value'] = '1';
-  $handler->display->display_options['filters']['status_1']['group'] = 2;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type_2']['id'] = 'type_2';
-  $handler->display->display_options['filters']['type_2']['table'] = 'node';
-  $handler->display->display_options['filters']['type_2']['field'] = 'type';
-  $handler->display->display_options['filters']['type_2']['value'] = array(
-    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
-  );
-  $handler->display->display_options['filters']['type_2']['group'] = 2;
-  /* Filter criterion: Content: Permissions (field_permissions) */
-  $handler->display->display_options['filters']['field_permissions_value_1']['id'] = 'field_permissions_value_1';
-  $handler->display->display_options['filters']['field_permissions_value_1']['table'] = 'field_data_field_permissions';
-  $handler->display->display_options['filters']['field_permissions_value_1']['field'] = 'field_permissions_value';
-  $handler->display->display_options['filters']['field_permissions_value_1']['value'] = array(
-    'restricted' => 'restricted',
-  );
-  $handler->display->display_options['filters']['field_permissions_value_1']['group'] = 2;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status_2']['id'] = 'status_2';
-  $handler->display->display_options['filters']['status_2']['table'] = 'node';
-  $handler->display->display_options['filters']['status_2']['field'] = 'status';
-  $handler->display->display_options['filters']['status_2']['value'] = '1';
-  $handler->display->display_options['filters']['status_2']['group'] = 3;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
-  $handler->display->display_options['filters']['type_1']['table'] = 'node';
-  $handler->display->display_options['filters']['type_1']['field'] = 'type';
-  $handler->display->display_options['filters']['type_1']['value'] = array(
-    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
-  );
-  $handler->display->display_options['filters']['type_1']['group'] = 3;
-  /* Filter criterion: User: The user ID */
-  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
-  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['relationship'] = 'uid';
-  $handler->display->display_options['filters']['uid_raw']['group'] = 3;
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'pece_group_field_diary');
-  $handler->display->display_options['path'] = 'pece-group-field-diary';
 
   /* Display: Content pane */
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = '';
+  $handler->display->display_options['fields']['path']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['created']['alter']['path'] = '[path]';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'long';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'F d, Y';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Groups audience */
+  $handler->display->display_options['fields']['og_group_ref']['id'] = 'og_group_ref';
+  $handler->display->display_options['fields']['og_group_ref']['table'] = 'og_membership';
+  $handler->display->display_options['fields']['og_group_ref']['field'] = 'og_group_ref';
+  $handler->display->display_options['fields']['og_group_ref']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['og_group_ref']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['og_group_ref']['delta_offset'] = '0';
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['text'] = '<div class="field-diary-body">[body] <div class="read-more"><a href="/node/[nid]">(...)</a></div></div>';
+  $handler->display->display_options['fields']['body']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_type'] = '0';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['body']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'text_trimmed';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '650',
+  );
+  $handler->display->display_options['fields']['body']['field_api_classes'] = TRUE;
+  /* Field: Field: Tags */
+  $handler->display->display_options['fields']['field_pece_tags']['id'] = 'field_pece_tags';
+  $handler->display->display_options['fields']['field_pece_tags']['table'] = 'field_data_field_pece_tags';
+  $handler->display->display_options['fields']['field_pece_tags']['field'] = 'field_pece_tags';
+  $handler->display->display_options['fields']['field_pece_tags']['label'] = '';
+  $handler->display->display_options['fields']['field_pece_tags']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_pece_tags']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_tags']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_pece_tags']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_tags']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_pece_tags']['field_api_classes'] = TRUE;
   $translatables['pece_group_field_diary'] = array(
     t('Master'),
-    t('PECE - Group Field Diary'),
+    t('Field Diary'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -215,12 +201,9 @@ function pece_artifacts_fieldnote_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('There are no field notes for the current group.'),
-    t('author'),
     t('Groups audience'),
     t('<div class="field-diary-body">[body] <div class="read-more"><a href="/node/[nid]">(...)</a></div></div>'),
     t('All'),
-    t('Page'),
     t('Content pane'),
     t('View panes'),
   );
@@ -251,28 +234,30 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['style_options']['grouping'] = array(
-    0 => array(
-      'field' => 'created',
-      'rendered' => 1,
-      'rendered_strip' => 0,
-    ),
-  );
-  $handler->display->display_options['style_options']['row_class'] = 'fieldnote-diary-row';
+  $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* No results behavior: Global: Text area */
-  $handler->display->display_options['empty']['area']['id'] = 'area';
-  $handler->display->display_options['empty']['area']['table'] = 'views';
-  $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'There are no field notes for the current logged in user.';
-  $handler->display->display_options['empty']['area']['format'] = 'panopoly_wysiwyg_text';
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
-  $handler->display->display_options['relationships']['uid']['required'] = TRUE;
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = '';
+  $handler->display->display_options['fields']['path']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['created']['alter']['path'] = '[path]';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'long';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'F d, Y';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -284,7 +269,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
-  /* Field: Content: Body */
+  /* Field: Content: Description */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -313,16 +298,6 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['fields']['field_pece_tags']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_pece_tags']['separator'] = ',';
   $handler->display->display_options['fields']['field_pece_tags']['field_api_classes'] = TRUE;
-  /* Field: Content: Post date */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'node';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = '';
-  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['created']['custom_date_format'] = 'F d, Y';
-  $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -340,11 +315,6 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
-  $handler->display->display_options['filter_groups']['groups'] = array(
-    1 => 'AND',
-    2 => 'AND',
-    3 => 'AND',
-  );
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -360,72 +330,11 @@ function pece_artifacts_fieldnote_views_default_views() {
     'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Permissions (field_permissions) */
-  $handler->display->display_options['filters']['field_permissions_value']['id'] = 'field_permissions_value';
-  $handler->display->display_options['filters']['field_permissions_value']['table'] = 'field_data_field_permissions';
-  $handler->display->display_options['filters']['field_permissions_value']['field'] = 'field_permissions_value';
-  $handler->display->display_options['filters']['field_permissions_value']['value'] = array(
-    'open' => 'open',
-  );
-  $handler->display->display_options['filters']['field_permissions_value']['group'] = 1;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status_1']['id'] = 'status_1';
-  $handler->display->display_options['filters']['status_1']['table'] = 'node';
-  $handler->display->display_options['filters']['status_1']['field'] = 'status';
-  $handler->display->display_options['filters']['status_1']['value'] = '1';
-  $handler->display->display_options['filters']['status_1']['group'] = 2;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type_2']['id'] = 'type_2';
-  $handler->display->display_options['filters']['type_2']['table'] = 'node';
-  $handler->display->display_options['filters']['type_2']['field'] = 'type';
-  $handler->display->display_options['filters']['type_2']['value'] = array(
-    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
-  );
-  $handler->display->display_options['filters']['type_2']['group'] = 2;
-  /* Filter criterion: Content: Permissions (field_permissions) */
-  $handler->display->display_options['filters']['field_permissions_value_1']['id'] = 'field_permissions_value_1';
-  $handler->display->display_options['filters']['field_permissions_value_1']['table'] = 'field_data_field_permissions';
-  $handler->display->display_options['filters']['field_permissions_value_1']['field'] = 'field_permissions_value';
-  $handler->display->display_options['filters']['field_permissions_value_1']['value'] = array(
-    'restricted' => 'restricted',
-  );
-  $handler->display->display_options['filters']['field_permissions_value_1']['group'] = 2;
-  /* Filter criterion: User: Roles */
-  $handler->display->display_options['filters']['rid']['id'] = 'rid';
-  $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
-  $handler->display->display_options['filters']['rid']['field'] = 'rid';
-  $handler->display->display_options['filters']['rid']['relationship'] = 'uid';
-  $handler->display->display_options['filters']['rid']['value'] = array(
-    6 => '6',
-  );
-  $handler->display->display_options['filters']['rid']['group'] = 2;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status_2']['id'] = 'status_2';
-  $handler->display->display_options['filters']['status_2']['table'] = 'node';
-  $handler->display->display_options['filters']['status_2']['field'] = 'status';
-  $handler->display->display_options['filters']['status_2']['value'] = '1';
-  $handler->display->display_options['filters']['status_2']['group'] = 3;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
-  $handler->display->display_options['filters']['type_1']['table'] = 'node';
-  $handler->display->display_options['filters']['type_1']['field'] = 'type';
-  $handler->display->display_options['filters']['type_1']['value'] = array(
-    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
-  );
-  $handler->display->display_options['filters']['type_1']['group'] = 3;
-  /* Filter criterion: User: The user ID */
-  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
-  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['relationship'] = 'uid';
-  $handler->display->display_options['filters']['uid_raw']['group'] = 3;
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'pece_user_field_diary');
-  $handler->display->display_options['path'] = 'field-diary';
 
   /* Display: Content pane */
-  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  $handler = $view->new_display('panel_pane', 'Content pane', 'pece_user_field_diary');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Field Diary';
   $translatables['pece_user_field_diary'] = array(
     t('Master'),
     t('PECE - User Field Diary'),
@@ -442,16 +351,15 @@ function pece_artifacts_fieldnote_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('There are no field notes for the current logged in user.'),
     t('author'),
     t('Nid'),
     t('Name'),
     t('<div class="field-diary-body">[body] <div class="read-more"><a href="/node/[nid]">(...)</a></div></div>'),
     t('All'),
     t('[name]\'s Field Diary'),
-    t('Page'),
-    t('more'),
     t('Content pane'),
+    t('Field Diary'),
+    t('more'),
     t('View panes'),
   );
   $export['pece_user_field_diary'] = $view;

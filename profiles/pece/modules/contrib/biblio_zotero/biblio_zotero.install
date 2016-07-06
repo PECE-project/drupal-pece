@@ -1,0 +1,221 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function biblio_zotero_install() {
+   _biblio_zotero_set_system_weight();
+   _biblio_zotero_set_common();
+   _biblio_zotero_add_attachment_links_field();
+   _biblio_zotero_add_url_fields();
+}
+
+/**
+ * Set weight of Biblio Zotero higher than Biblio module (weight of 9)
+ *
+ * This is needed so our hook_feeds_processor_targets_alter functions can
+ * override those in Biblio.
+ */
+function _biblio_zotero_set_system_weight() {
+   db_update('system')
+   ->fields(array(
+      'weight' => 10,
+      ))
+   ->condition('name', 'biblio_zotero')
+   ->execute();
+}
+
+/**
+ * Implements hook_schema().
+ *
+ * @return array
+ */
+function biblio_zotero_schema() {
+  $schema['biblio_zotero_collections'] = array(
+    'fields' => array(
+      'tid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'The taxonomy id of the collection',
+      ),
+      'collection_key' => array(
+        'type' => 'varchar',
+        'not null' => FALSE,
+        'length' => '128',
+        'description' => 'The key of the collection in Zotero',
+      ),
+    )
+  );
+  return $schema;
+}
+
+/**
+ * Implements hook_modules_enabled().
+ *
+ * Create our link attachment field if it isn't already and Link module enabled.
+ */
+function biblio_zotero_modules_enabled($modules) {
+  if (in_array('link', $modules)) {
+    if (!field_info_field('field_zotero_attachment_links')) {
+      _biblio_zotero_add_attachment_links_field();
+      _biblio_zotero_add_url_fields();
+    }
+  }
+}
+
+/**
+ * Set common field which Zotero may need for any publication type: note.
+ */
+function _biblio_zotero_set_common() {
+  $fid = db_query("SELECT fid FROM {biblio_fields} WHERE name='biblio_notes'")->fetchField();
+  db_update('biblio_field_type')
+    ->fields(array('common' => 1, 'visible' => 1))
+    ->condition('fid', $fid)
+    ->execute();
+}
+
+/**
+ * Add a link field to store references to attachments as links.
+ */
+function _biblio_zotero_add_attachment_links_field() {
+  if (!module_exists('link')) {
+    // Can't do a link field without link module.
+    return;
+  }
+
+  $field_name = 'field_zotero_attachment_links';
+  $field = array(
+    'field_name' => $field_name,
+    'type' => 'link_field',
+    'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+  );
+  field_create_field($field);
+
+  $instance = array(
+    'field_name' => $field_name,
+    'entity_type' => 'node',
+    'bundle' => 'biblio',
+    'label' => 'Zotero attachments as links',
+    'widget' => array(
+      'weight' => 0,
+      'active' => 0,
+    ),
+    'settings' => array(
+      'attributes' => array(
+        'configurable_class' => 0,
+        'configurable_title' => 0,
+        'title' => '',
+      ),
+      'rel_remove' => 'default',
+    ),
+    'display' => array(
+      'default' => array(
+        'weight' => '10',
+      ),
+      'teaser' => array(
+        'type' => 'hidden',
+        'label' => 'above',
+        'settings' => array(),
+        'weight' => 1,
+      ),
+    ),
+    'default_value' => NULL,
+  );
+  field_create_instance($instance);
+}
+
+/**
+ * Add fields for holding Zotero canonical and fetched-from URLs.
+ */
+function _biblio_zotero_add_url_fields() {
+  if (!module_exists('link')) {
+    // Can't do a link field without link module.
+    return;
+  }
+
+  $fields = array(
+    'field_zotero_canonical_url' => 'Zotero canonical URL',
+    'field_zotero_fetch_url' => 'Zotero fetched-from URL',
+  );
+  
+  foreach ($fields as $field_name => $field_label) {
+    $field = array(
+      'field_name' => $field_name,
+      'type' => 'link_field',
+    );
+    field_create_field($field);
+
+    $instance = array(
+      'field_name' => $field_name,
+      'entity_type' => 'node',
+      'bundle' => 'biblio',
+      'label' => $field_label,
+      'widget' => array(
+        'weight' => '19',
+        'active' => 0,
+      ),
+      'settings' => array(
+        'title' => 'none',
+        'attributes' => array(
+          'configurable_class' => 0,
+          'configurable_title' => 0,
+          'title' => '',
+        ),
+        'rel_remove' => 'default',
+      ),
+      'display' => array(
+        'default' => array(
+          'type' => 'hidden',
+          'weight' => '11',
+        ),
+        'teaser' => array(
+          'type' => 'hidden',
+          'label' => 'above',
+          'settings' => array(),
+          'weight' => 0,
+        ),
+      ),
+      'required' => 1,
+      'default_value' => NULL,
+    );
+    field_create_instance($instance);
+  }
+}
+
+/**
+ * Set system weight to 10 (one higher than biblio).
+ */
+function biblio_zotero_update_7000() {
+   _biblio_zotero_set_system_weight();
+}
+
+/**
+ * Create new database table {biblio_zotero_collections}.
+ */
+function biblio_zotero_update_7001() {
+  $schema = biblio_zotero_schema();
+  db_create_table('biblio_zotero_collections', $schema['biblio_zotero_collections']);
+}
+
+/**
+ * Enable notes Biblio field for all publication types.
+ */
+function biblio_zotero_update_7002() {
+  _biblio_zotero_set_common();
+}
+
+/**
+ * Add an attachment link field.
+ */
+function biblio_zotero_update_7003() {
+  _biblio_zotero_add_attachment_links_field();
+}
+
+/**
+ * Add canonical and fetched URL fields.
+ */
+function biblio_zotero_update_7004() {
+  _biblio_zotero_add_url_fields();
+}

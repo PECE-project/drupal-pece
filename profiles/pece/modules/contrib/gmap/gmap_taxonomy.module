@@ -215,6 +215,10 @@ function gmap_taxonomy_node_update($node) {
           'marker' => $gmap_taxonomy_markers[$term['tid']],
         ))
         ->execute();
+        
+       // because only 1 term marker per node is allowed (db schema constraint) break here
+       // @see https://www.drupal.org/node/2043673
+       break;
     }
   }
 }

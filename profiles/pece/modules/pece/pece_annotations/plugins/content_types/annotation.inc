@@ -57,16 +57,7 @@ function pece_annotations_annotation_pane_render($subtype, $conf, $args, $contex
   $context_type = isset($context->keyword) ? $context->keyword : null;
   $node_type    = $context_type == 'node' ? $context->data->type : null;
 
-  $artifacts = array(
-    'pece_artifact_audio',
-    'pece_artifact_fieldnote',
-    'pece_artifact_image',
-    'pece_artifact_pdf',
-    'pece_artifact_text',
-    'pece_artifact_video',
-    'pece_artifact_website',
-    'pece_artifact_bundle',
-  );
+  $artifacts = pece_artifacts_fetch_all_types();
 
   // Check for device node context.
   if (!in_array($node_type, $artifacts)) {

@@ -2011,15 +2011,15 @@ window.addEventListener('keydown', function keydown(evt) {
 
 //  if (cmd == 0) { // no control key pressed at all.
 //    switch (evt.keyCode) {
-//      case 37: // left arrow
-//      case 75: // 'k'
-//      case 80: // 'p'
+//       case 37: // left arrow
+//       case 75: // 'k'
+//       case 80: // 'p'
 //        PDFView.page--;
 //        handled = true;
 //        break;
 //      case 39: // right arrow
-//      case 74: // 'j'
-//      case 78: // 'n'
+//       case 74: // 'j'
+//       case 78: // 'n'
 //        PDFView.page++;
 //        handled = true;
 //        break;

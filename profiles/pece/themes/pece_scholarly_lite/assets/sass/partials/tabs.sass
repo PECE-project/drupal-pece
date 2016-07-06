@@ -38,22 +38,15 @@
         opacity: 1
 
         .ui-tabs-anchor
-          color: $color-primary
           cursor: pointer
           border: 1px solid $color-primary
-          border-bottom-color: white
           background: white
+          color: white
+          background: $color-primary
 
-          +breakpoint($breakpoint-max-sm)
-            color: white
-            border-bottom-color: $color-primary
-            background: $color-primary
-
-          +breakpoint($breakpoint-min-md)
-            &:hover
-              color: $color-primary
-              border-bottom-color: white
-              background: white
+          &:hover
+            color: $color-primary
+            background: white
 
       .ui-tabs-anchor
         display: block
@@ -70,7 +63,6 @@
           border-color: $color-primary
 
         +breakpoint($breakpoint-min-lg)
-          font-size: $font-size-small
           padding: 15px
 
         &:hover

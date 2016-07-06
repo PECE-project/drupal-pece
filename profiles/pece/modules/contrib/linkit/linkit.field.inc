@@ -170,72 +170,80 @@ function linkit_field_profile_validate($element, &$form_state, $form) {
 }
 
 /**
- * Process callback.
+ * After build callback.
+ *
+ * @param array $element
+ *   Form API element.
+ * @param array $form_state
+ *   State of form the element belongs to.
+ *
+ * @return array
+ *   Form API element with attached Linkit functionality.
  */
-function linkit_process_field_element($element, &$form_state, &$complete_form) {
+function linkit_field_element_after_build(array $element, array &$form_state) {
   // Only proceed if the field is attached to an entity.
   if (!isset($element['#entity_type'])) {
     return $element;
   }
 
-  $field = field_info_field($element['#field_name']);
   $instance = field_info_instance($element['#entity_type'], $element['#field_name'], $element['#bundle']);
 
-  if (isset($instance['settings']['linkit']['enable']) && $instance['settings']['linkit']['enable']) {
-
-    // Load the profile.
-    $profile = linkit_profile_load($instance['settings']['linkit']['profile']);
-    if (!$profile) {
-      return $element;
-    }
-    // Load the insert plugin for the profile.
-    $insert_plugin = linkit_insert_plugin_load($profile->data['insert_plugin']['plugin']);
-    if ($insert_plugin === NULL) {
-      return $element;
-    }
-
-    // Set the field ID.
-    $field_id = $element['#id'];
-
-    // Special treatment for link fields.
-    if ($element['#type'] == 'link_field') {
-      $field_id = $element['#id'] . '-url';
-    }
-
-    $field_js = array(
-      'data' => array(
-        'linkit' => array(
-          'fields' => array(
-            $field_id => array(
-              'profile' => $instance['settings']['linkit']['profile'],
-              'insert_plugin' => $profile->data['insert_plugin']['plugin'],
-              'url_method' => $profile->data['insert_plugin']['url_method'],
-              // @TODO: Add autocomplete settings.
-            ),
-          ),
-        ),
-      ),
-      'type' => 'setting',
-    );
-
-
-    // Link fields can have a title field.
-    if ($element['#type'] == 'link_field') {
-      if (isset($instance['settings']['title']) && in_array($instance['settings']['title'], array('optional', 'required'))) {
-        $field_js['data']['linkit']['fields'][$field_id]['title_field'] = $element['#id'] . '-title';
-      }
-    }
-
-    // Attach js files and settings Linkit needs.
-    $element['#attached']['library'][] = array('linkit', 'base');
-    $element['#attached']['library'][] = array('linkit', 'field');
-    $element['#attached']['js'][] = $insert_plugin['javascript'];
-    $element['#attached']['js'][] = $field_js;
-
-    $button_text = !empty($instance['settings']['linkit']['button_text']) ? $instance['settings']['linkit']['button_text'] : t('Search');
-    // Add Linkit dialog button to the element suffix.
-    $element['#field_suffix'] = '<a class="button linkit-field-button linkit-field-' . $field_id . '" href="#">' . $button_text . '</a>';
+  if (empty($instance['settings']['linkit']['enable'])) {
+    return $element;
   }
+
+  // Load the profile.
+  /* @var \LinkitProfile $profile */
+  $profile = linkit_profile_load($instance['settings']['linkit']['profile']);
+
+  if (!$profile || !isset($profile->data['insert_plugin']['plugin'])) {
+    return $element;
+  }
+
+  // Load the insert plugin for the profile.
+  $insert_plugin = linkit_insert_plugin_load($profile->data['insert_plugin']['plugin']);
+  $js_settings = array(
+    'helper' => 'field',
+    'source' => $element['#id'],
+    'profile' => $instance['settings']['linkit']['profile'],
+    'insertPlugin' => $profile->data['insert_plugin']['plugin'],
+  );
+
+  // Special treatment for link fields.
+  if ('link_field' == $element['#type']) {
+    $js_settings['source'] = $element['url']['#id'];
+
+    // @see link_field_info()
+    // @see link_field_instance_settings_form()
+    //
+    // Link fields have a title field, but value could
+    // be changed only for those options.
+    if (in_array($instance['settings']['title'], array('optional', 'required'))) {
+      $js_settings['titleField'] = $element['title']['#id'];
+    }
+  }
+
+  // Add Linkit dialog button to the element suffix.
+  $element['#field_suffix'] = l(empty($instance['settings']['linkit']['button_text']) ? t('Search') : $instance['settings']['linkit']['button_text'], '', array(
+    'attributes' => array(
+      'class' => array(
+        "button",
+        "linkit-field-button",
+        "linkit-field-{$js_settings['source']}",
+      ),
+    ),
+  ));
+
+  // Attach js files and settings Linkit needs.
+  $element['#attached']['library'][] = array('linkit', 'base');
+  $element['#attached']['library'][] = array('linkit', 'field');
+  $element['#attached']['js'][] = $insert_plugin['javascript'];
+  $element['#attached']['js'][] = array(
+    'type' => 'setting',
+    'data' => array(
+      'linkit' => array('fields' => array($js_settings)),
+    ),
+  );
 
   return $element;
 }

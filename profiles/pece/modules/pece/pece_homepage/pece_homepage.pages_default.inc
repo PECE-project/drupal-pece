@@ -72,6 +72,7 @@ function pece_homepage_default_page_manager_pages() {
   $pane->cache = array();
   $pane->style = array(
     'settings' => NULL,
+    'style' => 'slider',
   );
   $pane->css = array();
   $pane->extras = array();

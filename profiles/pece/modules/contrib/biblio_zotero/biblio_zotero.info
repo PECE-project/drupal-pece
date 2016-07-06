@@ -1,0 +1,19 @@
+; $Id$
+name = Biblio Zotero Feeds Integration
+description = "Adds one-way synchronisation between Zotero and Biblio"
+core = 7.x
+package = Biblio
+dependencies[] = biblio
+dependencies[] = feeds (>=7.x-2.0-alpha8)
+files[] = FeedsZoteroFetcher.inc
+files[] = FeedsZoteroParser.inc
+files[] = FeedsZoteroProcessor.inc
+files[] = biblio_zotero.inc
+
+
+; Information added by Drupal.org packaging script on 2016-05-08
+version = "7.x-1.0-alpha2+8-dev"
+core = "7.x"
+project = "biblio_zotero"
+datestamp = "1462668541"
+

@@ -13,9 +13,9 @@ function pece_core_views_default_views() {
   $view = new view();
   $view->name = 'tag_term';
   $view->description = 'A view to emulate Drupal core\'s handling of taxonomy/term.';
-  $view->tag = 'default';
+  $view->tag = 'PECE';
   $view->base_table = 'node';
-  $view->human_name = 'Tag term';
+  $view->human_name = 'PECE - Tag';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -64,11 +64,12 @@ function pece_core_views_default_views() {
   $handler->display->display_options['arguments']['term_node_tid_depth_modifier']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['term_node_tid_depth_modifier']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['term_node_tid_depth_modifier']['specify_validation'] = TRUE;
+  $handler->display->display_options['filter_groups']['operator'] = 'OR';
   /* Filter criterion: Content: Published or admin */
   $handler->display->display_options['filters']['status_extra']['id'] = 'status_extra';
   $handler->display->display_options['filters']['status_extra']['table'] = 'node';
   $handler->display->display_options['filters']['status_extra']['field'] = 'status_extra';
-  $handler->display->display_options['filters']['status_extra']['group'] = 0;
+  $handler->display->display_options['filters']['status_extra']['group'] = 1;
   $handler->display->display_options['filters']['status_extra']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
@@ -86,7 +87,9 @@ function pece_core_views_default_views() {
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
     'pece_memo' => 'pece_memo',
+    'pece_photo_essay' => 'pece_photo_essay',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -223,7 +226,7 @@ function pece_core_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'People';
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['type'] = 'infinite_scroll';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';

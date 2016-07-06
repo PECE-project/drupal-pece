@@ -46,6 +46,7 @@ function pece_artifacts_views_default_views() {
   $handler->display->display_options['sorts']['published_at']['table'] = 'publication_date';
   $handler->display->display_options['sorts']['published_at']['field'] = 'published_at';
   $handler->display->display_options['sorts']['published_at']['order'] = 'DESC';
+  $handler->display->display_options['filter_groups']['operator'] = 'OR';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -60,13 +61,13 @@ function pece_artifacts_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'pece_artifact_audio' => 'pece_artifact_audio',
     'pece_artifact_bundle' => 'pece_artifact_bundle',
-    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
     'pece_artifact_text' => 'pece_artifact_text',
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
 
   /* Display: Content pane */
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');

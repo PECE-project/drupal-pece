@@ -5,15 +5,3 @@
  */
 
 include_once 'pece_frontpage_slideshow.features.inc';
-
-/**
- * Implements hook_block_view().
- */
-function pece_frontpage_slideshow_preprocess_views_view(&$vars) {
-
-  if ($vars['name'] == 'frontpage_image_slider') {
-    drupal_add_js(libraries_get_path('jquery.cycle') . '/jquery.cycle.all.min.js');
-    drupal_add_js(drupal_get_path('module', 'pece_frontpage_slideshow') . '/js/pece_frontpage_slideshow.js');
-  }
-
-}

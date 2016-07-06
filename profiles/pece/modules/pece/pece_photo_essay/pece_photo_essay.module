@@ -1,0 +1,88 @@
+<?php
+/**
+ * @file
+ * Code for the PECE Photo Essay feature.
+ */
+
+include_once 'pece_photo_essay.features.inc';
+
+/**
+ * Implements hook_inline_entity_form_table_fields_alter().
+ * Add custom fields for the IEF table.
+ */
+function pece_photo_essay_inline_entity_form_table_fields_alter(&$fields, $context) {
+  if ($context['entity_type'] == 'pece_photo_essay_item') {
+    $fields['image_artifact_title'] = array(
+      'type' => 'callback',
+      'label' => t('Artifact'),
+      'sanitized' => TRUE,
+      'render_callback' => 'pece_photo_essay_ief_image_artifact_title',
+      'weight' => 1,
+     );
+
+    $fields['image_artifact_image'] = array(
+      'type' => 'callback',
+      'label' => t('Image'),
+      'sanitized' => TRUE,
+      'render_callback' => 'pece_photo_essay_ief_image_artifact_image',
+      'weight' => 2,
+     );
+  }
+}
+
+/**
+ * Custom IEF column content callback.
+ */
+function pece_photo_essay_ief_image_artifact_title($entity_type, $entity) {
+  $item = entity_metadata_wrapper($entity_type, $entity);
+  $artifact = $item->field_image_artifact->value();
+
+  return empty($artifact) ? t('Unavailable') : l($artifact->title, 'node/' . $artifact->nid, array(
+    'attributes' => array('target' => '_blank'),
+  ));
+}
+
+/**
+ * Custom IEF column content callback.
+ */
+function pece_photo_essay_ief_image_artifact_image($entity_type, $entity) {
+  $item = entity_metadata_wrapper($entity_type, $entity);
+  $artifact = $item->field_image_artifact->value();
+
+  return empty($artifact) ? t('Unavailable') : field_view_field('node', $artifact, 'field_pece_media_image', 'mini_teaser');
+}
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function pece_photo_essay_entity_info_alter(&$entity_info) {
+  if (!empty($entity_info['pece_photo_essay_item'])) {
+    if (empty($callback = variable_get('pece_photo_essay_item__access_callback', NULL))) {
+      $callback = $entity_info['pece_photo_essay_item']['access callback'];
+      variable_set('pece_photo_essay_item__access_callback', $callback);
+    }
+
+    $entity_info['pece_photo_essay_item']['access callback'] = 'pece_photo_essay_item__entity_callback';
+  }
+}
+
+/**
+ * Custom entity access implementation for pece_photo_essay_item.
+ */
+function pece_photo_essay_item__entity_callback($op, $entity, $account, $entity_type_name) {
+  switch ($op) {
+    case 'view':
+      if (is_object($entity) && isset($entity->id)) {
+        $photo_essay_item = entity_metadata_wrapper('pece_photo_essay_item', $entity);
+        $artifact = $photo_essay_item->field_image_artifact->value();
+
+        if (!empty($artifact) && !node_access('view', $artifact, $account)) {
+          return FALSE;
+        }
+      }
+      break;
+  }
+
+  $default_access_callback = variable_get('pece_photo_essay_item__access_callback', 'eck__entity_access');
+  return $default_access_callback($op, $entity, $account, $entity_type_name);
+}

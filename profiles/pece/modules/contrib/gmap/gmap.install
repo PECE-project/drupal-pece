@@ -115,12 +115,19 @@ function gmap_update_7000() {
 */
 
 /**
-+ * Mini-update -- update gmap markerfiles variable to an array if it is not
-+ * already.
-+ */
+ * Mini-update -- update gmap markerfiles variable to an array if it is not
+ * already.
+ */
 function gmap_update_7201() {
  $markerdirs = variable_get('gmap_markerfiles', array(drupal_get_path('module', 'gmap') . '/markers'));
  if (!is_array($markerdirs)) {
    variable_set('gmap_markerfiles', array($markerdirs));
   }
+}
+
+/**
+ * Gmap:deleted gmap_marker_custom_dir since it is not using.
+ */
+function gmap_update_7202() {
+  variable_del('gmap_marker_custom_dir');
 }

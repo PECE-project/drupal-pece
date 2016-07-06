@@ -12,6 +12,7 @@ function pece_backup_defaultconfig_features() {
     'pece_backup' => array(
       'exportables_backup_migrate_profiles' => 'exportables_backup_migrate_profiles',
       'exportables_backup_migrate_schedules' => 'exportables_backup_migrate_schedules',
+      'strongarm' => 'strongarm',
       'user_default_permissions' => 'user_default_permissions',
     ),
   );
@@ -45,66 +46,56 @@ function pece_backup_defaultconfig_exportables_backup_migrate_profiles() {
     'use_cli' => 0,
     'ignore_errors' => 0,
     'sources' => array(
-      'db' => array(
-        'exclude_tables' => array(),
-        'nodata_tables' => array(
-          'cache' => 'cache',
-          'cache_admin_menu' => 'cache_admin_menu',
-          'cache_block' => 'cache_block',
-          'cache_bootstrap' => 'cache_bootstrap',
-          'cache_field' => 'cache_field',
-          'cache_filter' => 'cache_filter',
-          'cache_form' => 'cache_form',
-          'cache_image' => 'cache_image',
-          'cache_location' => 'cache_location',
-          'cache_menu' => 'cache_menu',
-          'cache_page' => 'cache_page',
-          'cache_path' => 'cache_path',
-          'cache_update' => 'cache_update',
-          'cache_views' => 'cache_views',
-          'cache_views_data' => 'cache_views_data',
-          'search_dataset' => 'search_dataset',
-          'search_index' => 'search_index',
-          'search_total' => 'search_total',
-          'sessions' => 'sessions',
-          'watchdog' => 'watchdog',
-        ),
-        'utils_lock_tables' => 0,
-      ),
-      'db:legacy:default' => array(
-        'exclude_tables' => array(),
-        'nodata_tables' => array(
-          'accesslog' => 'accesslog',
-          'cache' => 'cache',
-          'cache_admin_menu' => 'cache_admin_menu',
-          'cache_block' => 'cache_block',
-          'cache_bootstrap' => 'cache_bootstrap',
-          'cache_field' => 'cache_field',
-          'cache_filter' => 'cache_filter',
-          'cache_form' => 'cache_form',
-          'cache_image' => 'cache_image',
-          'cache_location' => 'cache_location',
-          'cache_menu' => 'cache_menu',
-          'cache_page' => 'cache_page',
-          'cache_path' => 'cache_path',
-          'cache_update' => 'cache_update',
-          'cache_views' => 'cache_views',
-          'cache_views_data' => 'cache_views_data',
-          'search_dataset' => 'search_dataset',
-          'search_index' => 'search_index',
-          'search_total' => 'search_total',
-          'sessions' => 'sessions',
-          'watchdog' => 'watchdog',
-        ),
-        'utils_lock_tables' => 0,
-      ),
       'files' => array(
         'exclude_filepaths' => '',
       ),
       'archive' => array(
         'exclude_filepaths' => '/tmp',
       ),
+      'pece_bkp' => array(
+        'exclude_filepaths' => 'backup_migrate
+                                styles
+                                css
+                                js
+                                ctools
+                                less',
+      ),
+      'db' => array(
+        'nodata_tables' => array(
+          0 => 'cache',
+          1 => 'cache_admin_menu',
+          2 => 'cache_browscap',
+          3 => 'cache_content',
+          4 => 'cache_filter',
+          5 => 'cache_calendar_ical',
+          6 => 'cache_location',
+          7 => 'cache_menu',
+          8 => 'cache_page',
+          9 => 'cache_reptag',
+          10 => 'cache_views',
+          11 => 'cache_views_data',
+          12 => 'cache_block',
+          13 => 'cache_update',
+          14 => 'cache_form',
+          15 => 'cache_bootstrap',
+          16 => 'cache_field',
+          17 => 'cache_image',
+          18 => 'cache_path',
+          19 => 'sessions',
+          20 => 'search_dataset',
+          21 => 'search_index',
+          22 => 'search_keywords_log',
+          23 => 'search_total',
+          24 => 'watchdog',
+          25 => 'accesslog',
+          26 => 'devel_queries',
+          27 => 'devel_times',
+        ),
+        'exclude_tables' => array(),
+        'utils_lock_tables' => FALSE,
+      ),
     ),
+    'utils_disable_query_log' => TRUE,
   );
   $export['pece_backup'] = $item;
 
@@ -123,8 +114,8 @@ function pece_backup_defaultconfig_exportables_backup_migrate_schedules() {
   $item->machine_name = 'pece_backup';
   $item->name = 'PECE Backup';
   $item->source_id = 'archive';
-  $item->destination_id = 'pece_bkp';
-  $item->copy_destination_id = 'local_dir';
+  $item->destination_id = 'scheduled';
+  $item->copy_destination_id = '';
   $item->profile_id = 'pece_backup';
   $item->keep = 0;
   $item->period = 604800;
@@ -132,6 +123,22 @@ function pece_backup_defaultconfig_exportables_backup_migrate_schedules() {
   $item->cron = 'builtin';
   $item->cron_schedule = '0 4 * * 6';
   $export['pece_backup'] = $item;
+
+  return $export;
+}
+
+/**
+ * Implements hook_defaultconfig_strongarm().
+ */
+function pece_backup_defaultconfig_strongarm() {
+  $export = array();
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'backup_migrate_profile_id';
+  $strongarm->value = '';
+  $export['backup_migrate_profile_id'] = $strongarm;
 
   return $export;
 }
@@ -145,54 +152,42 @@ function pece_backup_defaultconfig_user_default_permissions() {
   // Exported permission: 'access backup and migrate'.
   $permissions['access backup and migrate'] = array(
     'name' => 'access backup and migrate',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'backup_migrate',
   );
 
   // Exported permission: 'access backup files'.
   $permissions['access backup files'] = array(
     'name' => 'access backup files',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'backup_migrate',
   );
 
   // Exported permission: 'administer backup and migrate'.
   $permissions['administer backup and migrate'] = array(
     'name' => 'administer backup and migrate',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'backup_migrate',
   );
 
   // Exported permission: 'delete backup files'.
   $permissions['delete backup files'] = array(
     'name' => 'delete backup files',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'backup_migrate',
   );
 
   // Exported permission: 'perform backup'.
   $permissions['perform backup'] = array(
     'name' => 'perform backup',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'backup_migrate',
   );
 
   // Exported permission: 'restore from backup'.
   $permissions['restore from backup'] = array(
     'name' => 'restore from backup',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'backup_migrate',
   );
 

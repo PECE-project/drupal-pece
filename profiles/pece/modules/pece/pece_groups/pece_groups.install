@@ -1,15 +1,58 @@
 <?php
-
 /**
  * @file
  * Install, update and uninstall functions for the pece_groups module.
  */
 
 /**
- * Implements hook_update_N().
+ * Implements hook_modules_enabled().
  */
-function pece_groups_update_7000() {
-  module_disable(array(
-    'og_mailinglist'
-  ));
+function pece_groups_modules_enabled($modules) {
+  if (in_array('pece', $modules)) {
+    $roles_members = og_roles('node', 'pece_group');
+
+    $permissions = array(
+      'create pece_artifact_audio content',
+      'delete own pece_artifact_audio content',
+      'update own pece_artifact_audio content',
+      'create pece_artifact_bundle content',
+      'delete own pece_artifact_bundle content',
+      'update own pece_artifact_bundle content',
+      'create pece_artifact_fieldnote content',
+      'delete own pece_artifact_fieldnote content',
+      'update own pece_artifact_fieldnote content',
+      'create pece_artifact_image content',
+      'delete own pece_artifact_image content',
+      'update own pece_artifact_image content',
+      'create pece_artifact_pdf content',
+      'delete own pece_artifact_pdf content',
+      'update own pece_artifact_pdf content',
+      'create pece_artifact_text content',
+      'delete own pece_artifact_text content',
+      'update own pece_artifact_text content',
+      'create pece_artifact_video content',
+      'delete own pece_artifact_video content',
+      'update own pece_artifact_video content',
+      'create pece_artifact_website content',
+      'delete own pece_artifact_website content',
+      'update own pece_artifact_website content',
+      'create pece_group content',
+      'delete own pece_group content',
+      'update own pece_group content',
+      'create pece_memo content',
+      'delete own pece_memo content',
+      'update own pece_memo content',
+    );
+
+    $roles = array(
+      'administrator member',
+      'Researcher',
+      'Contributor'
+    );
+
+    foreach ($roles as $role) {
+      $rid_role = array_search($role, $roles_members);
+      og_role_grant_permissions($rid_role, $permissions);
+    }
+  }
 }

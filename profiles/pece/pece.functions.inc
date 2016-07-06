@@ -100,3 +100,25 @@ function pece_defaultconfig_component_rebuild_by_name($component, $module = FALS
     defaultconfig_component_rebuild($components[$component], 'pece_profile');
   }
 }
+
+/**
+ * Retrieves the default value for a field.
+ * @param $entity_type
+ *        The entity type where the field is used.
+ * @param $bundle
+ *        The bundle where the field is used.
+ * @param $field_name
+ *        The name of the field to grab the default value from.
+ * @param $language
+ *        An optional language to grab the default value from.
+ * @return array
+ *   Field value structure as an array.
+ */
+function pece_get_default_field_value($entity_type, $bundle, $field_name, $language = NULL) {
+  $entity_info = entity_get_info($entity_type);
+  $bundle_key = !empty($entity_info['bundle keys']['bundle']) ? $entity_info['bundle keys']['bundle'] : 'type';
+  $entity = entity_create($entity_type, array($bundle_key => $bundle));
+  $field = field_info_field($field_name);
+  $instance = field_info_instance($entity_type, $field_name, $bundle);
+  return field_get_default_value($entity_type, $entity, $field, $instance, $language);
+}

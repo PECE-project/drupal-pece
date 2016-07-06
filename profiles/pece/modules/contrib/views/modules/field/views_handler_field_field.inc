@@ -124,7 +124,7 @@ class views_handler_field_field extends views_handler_field {
    */
   function access() {
     $base_table = $this->get_base_table();
-    return field_access('view', $this->field_info, $this->definition['entity_tables'][$base_table]);
+    return isset($this->definition['entity_tables'][$base_table]) && field_access('view', $this->field_info, $this->definition['entity_tables'][$base_table]);
   }
 
   /**

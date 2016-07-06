@@ -1,9 +1,9 @@
 name = PECE
 description = Install site for PECE
-distribution_name = pece
+distribution_name = PECE
 core = 7.x
 exclusive = 1
-version = 1.0-alpha1
+version = 1.0
 
 ; Drupal Core
 dependencies[] = block
@@ -29,6 +29,7 @@ dependencies[] = syslog
 dependencies[] = kw_manifests
 dependencies[] = kw_itemnames
 dependencies[] = kw_itemnames_entity
+dependencies[] = kw_itemnames_user_role
 
 ; System
 dependencies[] = aes
@@ -66,20 +67,26 @@ dependencies[] = pece_artifacts_pdf
 dependencies[] = pece_artifacts_text
 dependencies[] = pece_artifacts_video
 dependencies[] = pece_artifacts_website
+dependencies[] = pece_biblio
 dependencies[] = pece_core
+dependencies[] = pece_dashboard
+dependencies[] = pece_design_logic
+dependencies[] = pece_frontpage_slideshow
 dependencies[] = pece_groups
 dependencies[] = pece_homepage
 dependencies[] = pece_memo
-dependencies[] = pece_profile
-dependencies[] = pece_security
-dependencies[] = pece_projects
-dependencies[] = pece_design_logic
-dependencies[] = pece_substantive_logic
-dependencies[] = pece_repository
-dependencies[] = pece_frontpage_slideshow
+dependencies[] = pece_node_expiration
 dependencies[] = pece_notifications
 dependencies[] = pece_notifications_user
-dependencies[] = pece_dashboard
+dependencies[] = pece_photo_essay
+dependencies[] = pece_profile
+dependencies[] = pece_projects
+dependencies[] = pece_repository
+dependencies[] = pece_security
+dependencies[] = pece_substantive_logic
+dependencies[] = pece_amber
+dependencies[] = pece_backup
+dependencies[] = pece_api
 
 ; UI & Front-end
 dependencies[] = breakpoints
@@ -87,7 +94,6 @@ dependencies[] = fences
 dependencies[] = panels_tabs
 dependencies[] = radix_layouts
 dependencies[] = radix_views
-dependencies[] = views_slideshow
 
 ; Entities
 dependencies[] = date_popup_authored
@@ -129,6 +135,10 @@ dependencies[] = views_infinite_scroll
 dependencies[] = login_security
 dependencies[] = aes
 
+; Integrations
+dependencies[] = feeds
+dependencies[] = biblio
+dependencies[] = biblio_zotero
 
 ; OG modules
 
@@ -151,13 +161,14 @@ dependencies[] = better_exposed_filters
 dependencies[] = views_autocomplete_filters
 dependencies[] = smtp
 dependencies[] = fpa
-dependencies[] = filter_perms
 
 ; Development - contrib
 env_dependencies[development][] = devel
 env_dependencies[development][] = devel_generate
+env_dependencies[development][] = devel_debug_log
 env_dependencies[development][] = drupal_ipsum
 env_dependencies[development][] = environment_indicator
+env_dependencies[development][] = feeds_ui
 env_dependencies[development][] = module_builder
 env_dependencies[development][] = search_krumo
 env_dependencies[development][] = seeds
@@ -165,3 +176,4 @@ env_dependencies[development][] = stage_file_proxy
 
 ; Development - custom
 env_dependencies[development][] = pece_tests
+env_dependencies[development][] = pece_demo

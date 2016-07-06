@@ -281,15 +281,6 @@ class LGFATestCase extends DrupalWebTestCase {
     parent::setUp('location', 'gmap', 'location_cck', 'field_ui', 'location_gmap_find_address');
   }
 
-  //@todo remove this after http://drupal.org/node/1252310#comment-7109128 fix
-  protected function error($message = '', $group = 'Other', array $caller = NULL) {
-    if ($message == 'Undefined index: location_settings') {
-      // change error (Notice) to debug message
-      return $this->assert('debug', $message, 'Debug', $caller);
-    }
-    return parent::error($message, $group, $caller);
-  }
-
   public function testGmapSaveConfig() {
 
     // login with user

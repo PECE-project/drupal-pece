@@ -521,20 +521,16 @@ function pece_annotations_annotate_form_third($form, &$form_state) {
   );
   field_attach_form('node', $entity, $form, $form_state, NULL, array());
 
+  $form['body'][LANGUAGE_NONE][0] = array(
+    '#title' => t('Annotation'),
+    '#rows' => 5,
+    '#cols' => 60,
+  ) + $form['body'][LANGUAGE_NONE][0];
+
   // unset unnecessary fields.
-  unset($form['body']);
   unset($form['field_pece_analytic']);
   unset($form['field_pece_artifact']);
   unset($form['field_pece_uri']);
-
-  // Simplify the body field.
-  $form['body'] = array(
-    '#type' => 'textarea',
-    '#title' => t('Annotation'),
-    '#cols' => 60,
-    '#rows' => 5,
-    '#required' => TRUE,
-  );
 
   return $form;
 }

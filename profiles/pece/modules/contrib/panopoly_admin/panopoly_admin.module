@@ -145,6 +145,7 @@ function panopoly_admin_ctools_content_subtype_alter(&$subtype, &$plugin) {
  * Implementation of hook_form_alter()
  */
 function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
+  global $base_url;
 
   // Improve the title field
   if (isset($form['title']['#title'])) {
@@ -159,7 +160,8 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
       unset($form['path']['#type']); // remove the fieldset
       unset($form['path']['alias']['#description']);
       $form['path']['alias']['#title'] = '<strong>' . t('Permalink') . ':</strong> ';
-      $form['path']['alias']['#field_prefix'] = (isset($_SERVER['HTTPS'])) ? 'https://' . $_SERVER['HTTP_HOST'] . '/' : 'http://' . $_SERVER['HTTP_HOST'] . '/';
+
+      $form['path']['alias']['#field_prefix'] = $base_url . '/';
 
       if (isset($form['path']['pathauto'])) {
         $form['path']['pathauto']['#access'] = FALSE;

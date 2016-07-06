@@ -69,13 +69,6 @@ function pece_amber_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'amber_content_scanned';
-  $strongarm->value = 1;
-  $export['amber_content_scanned'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'amber_country_available_action';
   $strongarm->value = '0';
   $export['amber_country_available_action'] = $strongarm;
@@ -126,15 +119,8 @@ function pece_amber_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'amber_excluded_sites';
-  $strongarm->value = 'pece.unixjazz.org';
+  $strongarm->value = '';
   $export['amber_excluded_sites'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'amber_last_check_run';
-  $strongarm->value = 1456493811;
-  $export['amber_last_check_run'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -175,14 +161,14 @@ function pece_amber_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'amber_storage_location';
-  $strongarm->value = 'sites/default/files/amber';
+  $strongarm->value = 'amber';
   $export['amber_storage_location'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'amber_timegate';
-  $strongarm->value = 'http://timetravel.mementoweb.org/timegate';
+  $strongarm->value = '';
   $export['amber_timegate'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -203,7 +189,7 @@ function pece_amber_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'amber_update_strategy';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['amber_update_strategy'] = $strongarm;
 
   return $export;

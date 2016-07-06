@@ -31,7 +31,7 @@ After making sure you have all the dependencies configured in your system, PECE 
 
 First, you need to obtain the installation package:
 
-```$ wget https://github.com/PECE-project/pece-distro/archive/v1.0.tar.gz && tar zxvf v1.0.tar.gz && rm v1.0.tar.gz```
+```$ wget https://github.com/PECE-project/pece-distro/archive/v1.0.tar.gz && tar zxvf v1.0.tar.gz```
 
 Create an empty database and make sure to [configure the directory/file permissions before continuing](https://www.drupal.org/node/244924). Then, proceed with the regular install by accessing /install.php preceded by the URL of your new site (i.e. '''yoursite.org/install.php'''). Alternatively, you can use Drush for your own convenience instead of using the web interface:
 

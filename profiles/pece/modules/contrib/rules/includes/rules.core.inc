@@ -28,6 +28,21 @@ class RulesEntityController extends EntityAPIControllerExportable {
   }
 
   /**
+   * Fetches all events which have configured, active rules attached.
+   *
+   * @return string[]
+   *   A numerically indexed array of event names.
+   */
+  public function fetchAllConfiguredEvents() {
+    $query = db_select('rules_trigger', 'rt')
+      ->distinct(TRUE)
+      ->fields('rt', array('event'));
+    $query->join('rules_config', 'rc', 'rt.id = rc.id');
+    $query->condition('rc.active', 1);
+    return $query->execute()->fetchCol();
+  }
+
+  /**
    * Overridden.
    * @see DrupalDefaultEntityController::attachLoad()
    */
@@ -1113,21 +1128,25 @@ abstract class RulesPlugin extends RulesExtendable {
       else {
         $plugin_info = $this->pluginInfo();
         if (!empty($plugin_info['component'])) {
-          // When component variables changes rebuild the complete cache so the
+          // When component variables changes rebuild the data cache so the
           // changes to the provided action/condition take affect.
           if (empty($this->original) || $this->componentVariables() != $this->original->componentVariables()) {
-            rules_clear_cache();
+            _rules_clear_data_cache();
           }
-          // Clear components cached for evaluation.
-          cache_clear_all('comp_', 'cache_rules', TRUE);
+          _rules_rebuild_component_cache($this->name);
         }
         elseif ($this->plugin == 'reaction rule') {
-          // Clear event sets cached for evaluation.
-          cache_clear_all('event_', 'cache_rules', TRUE);
-          // Clear event whitelist for rebuild.
-          cache_clear_all('rules_event_whitelist', 'cache_rules', TRUE);
+          // Clear caches for all events involved.
+          $events_to_clear = $this->events();
+          // Make sure any remove event is updated too.
+          if (!empty($original)) {
+            $events_to_clear += array_diff($original->events, $events_to_clear);
+          }
+          foreach ($events_to_clear as $event) {
+            rules_clear_cache_entry('event_' . $event);
+          }
+          rules_clear_cache_entry('rules_event_whitelist');
         }
-        drupal_static_reset('rules_get_cache');
         drupal_static_reset('rules_config_update_dirty_flag');
       }
 

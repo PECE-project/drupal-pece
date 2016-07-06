@@ -346,3 +346,32 @@ function panopoly_widgets_update_7013() {
 function panopoly_widgets_update_7014() {
   drupal_theme_rebuild();
 }
+
+/**
+ * Unset the default image for the image widget.
+ */
+function panopoly_widgets_update_7015() {
+  if ($image_field = field_info_field('field_basic_image_image')) {
+    $image_field['settings']['default_image'] = 0;
+    field_update_field($image_field);
+    field_info_cache_clear();
+  }
+}
+
+/**
+ * Make sure that users can insert into the WYSIWYG.
+ */
+function panopoly_widgets_update_7016() {
+  // Panopoly 1.29 was released without granting this permission by default, so
+  // new sites launched on that version won't have it set. To avoid granting it
+  // in situations where it was explicity removed on other sites, we only grant
+  // it to roles that have the 'access media browser' permission (just like in
+  // the media_wysiwyg_update_7201() when the permission was added by Media).
+
+  if (module_exists('media_wysiwyg')) {
+    $roles = user_roles(TRUE, 'access media browser');
+    foreach ($roles as $rid => $role) {
+      user_role_grant_permissions($rid, array('use media wysiwyg'));
+    }
+  }
+}

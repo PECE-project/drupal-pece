@@ -1,0 +1,410 @@
+<?php
+
+/**
+ * Implementation of hook_node_info().
+ */
+function biblio_zotero_node_info() {
+  $items = array(
+    'zotero_feed' => array(
+      'name' => t('Zotero feed'),
+      'module' => 'node',
+      'description' => t('Subscribe to a zotero user or group. Creates nodes of the content type "biblio" from feed content'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'has_body' => '1',
+      'body_label' => t('Body'),
+      'min_word_count' => '0',
+      'help' => '',
+    ),
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_ctools_plugin_api().
+ */
+function biblio_zotero_ctools_plugin_api() {
+  list($module, $api) = func_get_args();
+  if ($module == "feeds" && $api == 'feeds_importer_default') {
+    return array("version" => 1);
+  }
+}
+
+/**
+ * Implementation of hook_views_api().
+ * This is required for your module to have its include files loaded; for example, when implementing hook_views_default_views().
+ */
+function biblio_zotero_views_api() {
+  list($module, $api) = func_get_args();
+  if ($module == "views" && $api == "views_default") {
+    return array("version" => 3.0);
+  }
+}
+
+/**
+ * Implementation of hook_feeds_plugins().
+ */
+function biblio_zotero_feeds_plugins() {
+  $info = array();
+  $info['FeedsZoteroParser'] = array(
+    'name' => 'Zotero Parser',
+    'description' => 'Parses json data from zotero.',
+    'handler' => array(
+      'parent' => 'FeedsSyndicationParser', // A plugin needs to derive either directly or indirectly from FeedsFetcher, FeedsParser or FeedsProcessor.
+      'class' => 'FeedsZoteroParser',
+      'file' => 'FeedsZoteroParser.inc',
+      'path' => drupal_get_path('module', 'biblio_zotero'),
+    ),
+  );
+  $info['FeedsZoteroProcessor'] = array(
+    'name' => 'Zotero Processor',
+    'description' => 'Routes known mapped fields to known Biblio fields and leaves the rest to be configured in the feeds UI.',
+    'handler' => array(
+      'parent' => 'FeedsNodeProcessor', // A plugin needs to derive either directly or indirectly from FeedsFetcher, FeedsParser or FeedsProcessor.
+      'class' => 'FeedsZoteroProcessor',
+      'file' => 'FeedsZoteroProcessor.inc',
+      'path' => drupal_get_path('module', 'biblio_zotero'),
+    ),
+  );
+  $info['FeedsZoteroFetcher'] = array(
+    'name' => 'Zotero Http Fetcher',
+    'description' => 'Fetches user and group libraries from Zotero.org',
+    'handler' => array(
+      'parent' => 'FeedsHTTPFetcher', // A plugin needs to derive either directly or indirectly from FeedsFetcher, FeedsParser or FeedsProcessor.
+      'class' => 'FeedsZoteroFetcher',
+      'file' => 'FeedsZoteroFetcher.inc',
+      'path' => drupal_get_path('module', 'biblio_zotero'),
+    ),
+  );
+  return $info;
+}
+
+/**
+ * Default definition of 'biblio_zotero_importer'
+ */
+function biblio_zotero_feeds_importer_default() {
+  $export = array();
+  $feeds_importer = new stdClass;
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'zotero_feed';
+  $feeds_importer->config = array(
+    'name' => 'Zotero Feed',
+    'description' => 'Import Zotero items.',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsZoteroFetcher',
+      'config' => array(
+        'auto_detect_feeds' => FALSE,
+        'use_pubsubhubbub' => FALSE,
+        'designated_hub' => '',
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsZoteroParser',
+      'config' => array(),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsZoteroProcessor',
+      'config' => array(
+        'bundle' => 'biblio',
+        'update_existing' => 0,
+        'expire' => '-1',
+        'mappings' => biblio_zotero_get_default_mappings(),
+        'input_format' => 0,
+        'author' => 0,
+        'sync_tags' => FALSE,
+        'tags_vocab_id' => NULL,
+      ),
+    ),
+    'content_type' => 'zotero_feed',
+    'update' => 0,
+    'import_period' => '1800',
+    'expire_period' => 3600,
+    'import_on_create' => 1,
+  );
+
+  $export['biblio_zotero_importer'] = $feeds_importer;
+  return $export;
+}
+
+/**
+ * http://drupalcontrib.org/api/drupal/contributions%21feeds%21feeds.api.php/function/hook_feeds_processor_targets_alter/7
+ * */
+function biblio_zotero_feeds_processor_targets_alter(&$targets, $entity_type, $bundle_name) {
+  if ($bundle_name != 'biblio') {
+    return;
+  }
+  foreach ($targets as $key => $target) {
+    if (strpos($key, 'biblio_') !== FALSE && !in_array($key, array('url', 'guid', 'biblio_type', 'biblio_contributor', 'biblio_keyword'))) {
+      $targets[$key]['callback'] = 'biblio_zotero_feeds_set__simple_target';
+    }
+  }
+  $targets['biblio_contributor']['name'] = t('Biblio - Contributor (primary author)'); //remove the singular added by biblio.feeds.inc to avoid confusion
+  $targets['biblio_contributors'] = array(
+    'name' => t('Biblio - Contributors (for zotero creators)'),
+    'description' => t('Map zotero creator types to biblio author types.'),
+    'callback' => 'biblio_zotero_feeds_set__contrib_target',
+  );
+  $targets['field_zotero_attachment_links'] = array(
+    'name' => t('Zotero attachments as links'),
+    'description' => t('Map Zotero attachments to extra fields on Biblio nodes.'),
+    'callback' => 'biblio_zotero_feeds_set__field_link_target',
+  );
+  $targets['field_zotero_canonical_url'] = array(
+    'name' => t('Zotero URL'),
+    'description' => t('Map Zotero canonical URL to field on Biblio nodes.'),
+    'callback' => 'biblio_zotero_feeds_set__field_link_target',
+  );
+  $targets['field_zotero_fetch_url'] = array(
+    'name' => t('Zotero fetched URL'),
+    'description' => t('Map Zotero fetched URL to field on Biblio nodes.'),
+    'callback' => 'biblio_zotero_feeds_set__field_link_target',
+  );
+}
+
+/**
+ * http://drupalcontrib.org/api/drupal/contributions%21feeds%21feeds.api.php/function/hook_feeds_parser_sources_alter/7
+ * */
+function biblio_zotero_feeds_parser_sources_alter(&$sources, $content_type) {
+
+}
+
+function biblio_zotero_get_default_mappings() {
+  module_load_include('inc', 'biblio_zotero', 'biblio_zotero');
+  $all_mappings = array();
+  $itemTypesStructure = array_keys(BiblioZotero::getItemTypeStructure());
+  foreach ($itemTypesStructure as $itemType) {
+    if (in_array($itemType, array('note', 'links', 'files'))) {
+      continue;
+    }
+    $filename = "mappings/" . $itemType . ".mapping";
+    module_load_include('inc', 'biblio_zotero', $filename);
+    $function_name = "biblio_zotero_get_field_mappings__$itemType";
+    $item_type_mappings = call_user_func($function_name);
+    biblio_zotero_remove_empty_targets($item_type_mappings);
+    $all_mappings = array_merge($all_mappings, $item_type_mappings);
+  }
+  $other_mappings = array(
+    array(
+      'source' => 'guid',
+      'target' => 'guid',
+      'unique' => TRUE,
+    ),
+    array(
+      'source' => 'url',
+      'target' => 'url',
+      'unique' => FALSE,
+    ),
+    array(
+      'source' => 'title',
+      'target' => 'title',
+      'unique' => FALSE,
+    ),
+    array(
+      'source' => 'timestamp',
+      'target' => 'created',
+      'unique' => FALSE,
+    ),
+    array(
+      'source' => 'note',
+      'target' => 'biblio_notes',
+      'unique' => FALSE,
+    ),
+    array(
+      'source' => 'creators',
+      'target' => 'biblio_contributors',
+      'unique' => FALSE,
+    ),
+    array(
+      'source' => 'links',
+      'target' => 'field_zotero_attachment_links',
+      'unique' => FALSE,
+    ),
+    array(
+      'source' => 'files',
+      'target' => 'field_zotero_attachment_links',
+      'unique' => FALSE,
+    ),
+    array(
+      'source' => 'url',
+      'target' => 'field_zotero_canonical_url',
+      'unique' => TRUE,
+    ),
+    array(
+      'source' => 'zotero_fetch_url',
+      'target' => 'field_zotero_fetch_url',
+      'unique' => TRUE,
+    ),
+      /** @TODO  UNCOMMENT WHEN notes are properly mapped
+        array(
+        'source' => 'notes',
+        'target' => 'biblio_notes',
+        'unique' => FALSE,
+        ), */
+  );
+  $all_mappings = array_merge($other_mappings, $all_mappings);
+  return $all_mappings;
+}
+
+function biblio_zotero_remove_empty_targets(&$mappings) {
+  foreach ($mappings as $idx => $mapping) {
+    if (empty($mapping['target'])) {
+      unset($mappings[$idx]);
+    }
+  }
+}
+
+function biblio_zotero_feeds_mapping_source_creators($source, FeedsParserResult $result, $key) {
+  $item = $result->currentItem();
+  return my_source_parse_images($item['creators']);
+}
+
+function biblio_zotero_feeds_set__contrib_target($source, $entity, $target, $value) {
+  if (!empty($value)) {
+    foreach ($value as $creator) {
+      $bib_contrib = getBiblioAuthorTypeFromZoteroCreatorType($creator->creatorType);
+      $first_name = isset($creator->firstName) ? $creator->firstName : '';
+      $last_name = isset($creator->lastName) ? $creator->lastName : '';
+      $entity->biblio_contributors[] = array(
+        'name' => $first_name . " " . $last_name,
+        'auth_category' => 1,
+        'auth_type' => $bib_contrib['auth_type'],
+      );
+    }
+  }
+}
+
+function biblio_zotero_feeds_set__simple_target($source, $entity, $target, $value) {
+  if (isset($value) && !empty($value)) {
+    $entity->$target = $value;
+    if (in_array($target, array('biblio_notes', 'biblio_abst_e'))) {
+      $entity->biblio_formats[$target] = 'full_html';
+    }
+  }
+}
+
+/**
+ * Set a value for a regular (non-Biblio) node link field.
+ */
+function biblio_zotero_feeds_set__field_link_target($source, $entity, $target, $value) {
+  if ($value) {
+    $mapping = array('language' => LANGUAGE_NONE);
+    if (is_string($value)) {
+      $value = array(
+        'urls' => array($value),
+        'titles' => array(),
+      );
+    }
+    link_feeds_set_target($source, $entity, $target . ':url', $value['urls'], $mapping);
+    link_feeds_set_target($source, $entity, $target . ':title', $value['titles'], $mapping);
+  }
+}
+
+/**
+ * Map zotero creators to biblio author types and categories
+ * @TODO in a separate module, add custom contributor types to the biblio author types table and configure them here.
+ * Biblio default author categories and types
+ * CATEGORIES
+ *  1	Author
+ *  2	Secondary Author
+ *  3	Tertiary Author
+ *  4	Subsidiary Author
+ *  5	Corporate Author
+ * TYPES
+ *  10	Series Editor
+ *  11	Performers
+ *  12	Sponsor
+ *  13	Translator
+ *  14	Editor
+ *  15	Counsel
+ *  16	Series Director
+ *  17	Producer
+ *  18	Department
+ *  19	Issuing Organization
+ *  20	International Author
+ *  21	Recipient
+ *  22	Advisor
+ */
+function getBiblioAuthorTypeFromZoteroCreatorType($creatorType) {
+  $zotCreator2BibAuthType = array(
+    'editor' => array('desc' => 'Editor', 'auth_category' => 14, 'auth_type' => 14),
+    'seriesEditor' => array('desc' => 'Series Editor', 'auth_category' => 10, 'auth_type' => 10),
+    'translator' => array('desc' => 'Translator', 'auth_category' => 13, 'auth_type' => 13),
+    'counsel' => array('desc' => 'Counsel', 'auth_category' => 15, 'auth_type' => 15),
+    'recipient' => array('desc' => 'Recipient', 'auth_category' => 21, 'auth_type' => 21),
+    'producer' => array('desc' => 'Producer', 'auth_category' => 17, 'auth_type' => 17),
+    'artist' => array('desc' => 'Artist', 'auth_category' => 1, 'auth_type' => 1),
+    'contributor' => array('desc' => 'Contributor', 'auth_category' => 1, 'auth_type' => 1),
+    'performer' => array('desc' => 'Performer', 'auth_category' => 1, 'auth_type' => 1),
+    'composer' => array('desc' => 'Composer', 'auth_category' => 1, 'auth_type' => 1),
+    'wordsBy' => array('desc' => 'Words By', 'auth_category' => 1, 'auth_type' => 1),
+    'sponsor' => array('desc' => 'Sponsor', 'auth_category' => 1, 'auth_type' => 1),
+    'cosponsor' => array('desc' => 'Cosponsor', 'auth_category' => 1, 'auth_type' => 1),
+    'author' => array('desc' => 'Author', 'auth_category' => 1, 'auth_type' => 1),
+    'commenter' => array('desc' => 'Commenter', 'auth_category' => 1, 'auth_type' => 1),
+    'bookAuthor' => array('desc' => 'Book Author', 'auth_category' => 1, 'auth_type' => 1),
+    'programmer' => array('desc' => 'Programmer', 'auth_category' => 1, 'auth_type' => 1),
+    'reviewedAuthor' => array('desc' => 'Reviewed Author', 'auth_category' => 1, 'auth_type' => 1),
+    'director' => array('desc' => 'Director', 'auth_category' => 1, 'auth_type' => 1),
+    'scriptwriter' => array('desc' => 'Scriptwriter', 'auth_category' => 1, 'auth_type' => 1),
+    'interviewee' => array('desc' => 'Interview With', 'auth_category' => 1, 'auth_type' => 1),
+    'interviewer' => array('desc' => 'Interviewer', 'auth_category' => 1, 'auth_type' => 1),
+    'cartographer' => array('desc' => 'Cartographer', 'auth_category' => 1, 'auth_type' => 1),
+    'inventor' => array('desc' => 'Inventor', 'auth_category' => 1, 'auth_type' => 1),
+    'attorneyAgent' => array('desc' => 'Attorney/Agent', 'auth_category' => 1, 'auth_type' => 1),
+    'podcaster' => array('desc' => 'Podcaster', 'auth_category' => 1, 'auth_type' => 1),
+    'guest' => array('desc' => 'Guest', 'auth_category' => 1, 'auth_type' => 1),
+    'presenter' => array('desc' => 'Presenter', 'auth_category' => 1, 'auth_type' => 1),
+    'castMember' => array('desc' => 'Cast Member', 'auth_category' => 1, 'auth_type' => 1),
+  );
+  return $zotCreator2BibAuthType[$creatorType];
+}
+
+function biblio_zotero_get_collection_term($collection_key) {
+  static $terms = array();
+  if (isset($terms[$collection_key]) && $terms[$collection_key]) {
+    return $terms[$collection_key];
+  } else {
+    $result = db_query('SELECT tid FROM {biblio_zotero_collections} WHERE collection_key = :key', array(':key' => $collection_key));
+    $term = taxonomy_term_load($result->fetchField());
+    $terms[$collection_key] = $term;
+    return $term;
+  }
+}
+
+/**
+ * Implements hook_taxonomy_term_delete().
+ */
+function biblio_zotero_taxonomy_term_delete($term) {
+  db_query('DELETE FROM {biblio_zotero_collections} WHERE tid = :tid', array(':tid' => $term->tid));
+}
+
+/**
+ * Implements hook reindex search.
+ */
+function biblio_zotero_reindex_search() {
+  $result = db_query("SELECT nid from {node} where type = 'biblio'");
+  while ($nid = $result->fetchField()) {
+    $node = node_load($nid);
+    _node_index_node($node);
+  }
+  search_update_totals();
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for the user profile form.
+ */
+function biblio_zotero_form_user_profile_form_alter(&$form, $form_state) {
+  if ($form['biblio_fieldset']['biblio_id_change_count']['#default_value'] < 3
+    || (variable_get('biblio_zotero_hide_id_change_count', TRUE) && !user_access('administer users'))) {
+    $form['biblio_fieldset']['biblio_id_change_count']['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() to make Zotero URL fields read-only.
+ */
+function biblio_zotero_form_biblio_node_form_alter(&$form, $form_state) {
+  $form['field_zotero_canonical_url']['#disabled'] = TRUE;
+  $form['field_zotero_fetch_url']['#disabled'] = TRUE;
+}

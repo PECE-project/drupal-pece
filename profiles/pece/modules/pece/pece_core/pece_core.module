@@ -7,6 +7,15 @@
 include_once 'pece_core.features.inc';
 include_once 'pece_core.functions.inc';
 
+/**
+ * Implements hook_url_outbound_alter().
+ */
+function pece_core_url_outbound_alter(&$path, &$options, $original_path) {
+  // @info: Fix AJAX error on views_autocomplete_filters.
+  if (isset($options['script']) && $options['script'] == 'index.php') {
+    $options['script'] = '';
+  }
+}
 
 /**
  * Implements hook_form_FORM_ID_alter().
@@ -74,4 +83,14 @@ function pece_core_entity_info_alter(&$entity_info) {
     'label' => t('Most Recent'),
     'custom settings' => TRUE,
   );
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function pece_core_field_widget_form_alter(&$element, &$form_state, $context) {
+  // @TODO: allow this field to be fulfiled once PECE API is built.
+  if ($context['field']['field_name'] == 'field_pece_uri') {
+    $element['#access'] = FALSE;
+  }
 }

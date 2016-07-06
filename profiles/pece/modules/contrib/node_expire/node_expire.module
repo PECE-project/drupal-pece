@@ -1,0 +1,120 @@
+<?php
+
+/**
+ * @file
+ * Set a timer into your content, allowing you to perform customized actions.
+ */
+
+use Drupal\node_expire\Module\Hook\CommonHookHandler;
+use Drupal\node_expire\Module\Hook\FormHookHandler;
+use Drupal\node_expire\Module\Hook\FormHookHelper;
+use Drupal\node_expire\Module\Hook\NodeHookHandler;
+use Drupal\node_expire\Module\Hook\ViewsHookHandler;
+
+// Will be placed to the "expire" field corresponding empty
+// ("never expire") strings. 2145934800 is 2038-01-01.
+define('NODE_EXPIRE_NO_EXPIRE', 2145934800);
+
+/**
+ * Implements hook_cron().
+ */
+function node_expire_cron() {
+  CommonHookHandler::hookCron();
+}
+
+/**
+ * Implements hook_menu().
+ */
+function node_expire_menu() {
+  return CommonHookHandler::hookMenu();
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Adds expiration options to the node entry forms.
+ */
+function node_expire_form_alter(&$form, &$form_state, $form_id) {
+  FormHookHandler::hookFormAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_node_type_form_alter().
+ *
+ * Enable/Disable expiration feature on node types.
+ */
+function node_expire_form_node_type_form_alter(&$form, &$form_state) {
+  FormHookHandler::hookFormNodeTypeFormAlter($form, $form_state);
+}
+
+/**
+ * Implements hook_node_load().
+ */
+function node_expire_node_load($nodes, $types) {
+  NodeHookHandler::hookNodeLoad($nodes, $types);
+}
+
+/**
+ * Implements hook_node_prepare().
+ */
+function node_expire_node_prepare($node) {
+  NodeHookHandler::hookNodePrepare($node);
+}
+
+/**
+ * Implements hook_node_validate().
+ */
+function node_expire_node_validate($node) {
+  NodeHookHandler::hookNodeValidate($node);
+}
+
+/**
+ * Implements hook_nodeapi_update().
+ */
+function node_expire_node_update($node) {
+  NodeHookHandler::hookNodeUpdate($node);
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function node_expire_node_insert($node) {
+  NodeHookHandler::hookNodeInsert($node);
+}
+
+/**
+ * Implements hook_node_delete().
+ */
+function node_expire_node_delete($node) {
+  NodeHookHandler::hookNodeDelete($node);
+}
+
+/**
+ * Implements hook_permission().
+ */
+function node_expire_permission() {
+  return CommonHookHandler::hookPermission();
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function node_expire_views_api() {
+  return ViewsHookHandler::hookViewsApi();
+}
+
+// Below are referenced functions
+// for hook node_expire_form_node_type_form_alter.
+/**
+ * Implements hook_form_alter().
+ */
+function _node_expire_form_node_type_form_alter_validate(&$form, &$form_state) {
+  FormHookHelper::doFormNodeTypeFormAlterValidate($form, $form_state);
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function _node_expire_form_node_type_form_alter_submit(&$form, &$form_state) {
+  FormHookHelper::doFormNodeTypeFormAlterSubmit($form, $form_state);
+}

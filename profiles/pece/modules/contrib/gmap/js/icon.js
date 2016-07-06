@@ -65,6 +65,10 @@ Drupal.gmap.getIcon = function (setname, sequence) {
                 null,
                 new google.maps.Point(q.anchorX, q.anchorY)
             );
+            // Only set scaledSize if the scale variable makes sense as a divisor
+            if (q.scale > 1) {
+              t.scaledSize = new google.maps.Size(q.sequence[i].w/q.scale, q.sequence[i].h/q.scale);
+            }
             if (q.shadow.f !== '') {
                 this.gshadows[setname][i] = new google.maps.MarkerImage(p + q.shadow.f,
                     new google.maps.Size(q.shadow.w, q.shadow.h),
@@ -147,9 +151,9 @@ Drupal.gmap.expandArray = function (arr, len) {
  */
 Drupal.gmap.expandIconDef = function (c, path, files) {
     var decomp = ['key', 'name', 'sequence', 'anchorX', 'anchorY', 'infoX',
-        'infoY', 'shadow', 'printImage', 'mozPrintImage', 'printShadow',
+        'infoY', 'scale', 'shadow', 'printImage', 'mozPrintImage', 'printShadow',
         'transparent'];
-    var fallback = ['', '', [], 0, 0, 0, 0, {f: '', h: 0, w: 0}, '', '', '', ''];
+    var fallback = ['', '', [], 0, 0, 0, 0, 0, {f: '', h: 0, w: 0}, '', '', '', ''];
     var imagerep = ['shadow', 'printImage', 'mozPrintImage', 'printShadow',
         'transparent'];
     var defaults = {};

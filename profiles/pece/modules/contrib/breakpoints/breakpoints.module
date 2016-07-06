@@ -58,10 +58,12 @@ function breakpoints_enable() {
  * Import breakpoints from all new enabled themes.
  * Do not use breakpoints_breakpoints_group_reload_from_theme as is clears the cache.
  */
-function breakpoints_themes_enabled($theme_list) {
+function breakpoints_themes_enabled($theme_list, $rebuild_menu = TRUE) {
   $themes = list_themes();
+  $updated = FALSE;
   foreach ($theme_list as $theme_key) {
     if (isset($themes[$theme_key]->info['breakpoints'])) {
+      $updated = TRUE;
       $weight = 0;
       $theme_settings = $themes[$theme_key]->info['breakpoints'];
       $multipliers = isset($themes[$theme_key]->info['multipliers']) ? $themes[$theme_key]->info['multipliers'] : array();
@@ -99,7 +101,9 @@ function breakpoints_themes_enabled($theme_list) {
       drupal_set_message($message, 'status');
     }
   }
-  menu_rebuild();
+  if ($rebuild_menu && $updated) {
+    variable_set('menu_rebuild_needed', TRUE);
+  }
 }
 
 /**
@@ -115,7 +119,7 @@ function breakpoints_themes_disabled($theme_list) {
     }
     breakpoints_breakpoint_group_delete_by_name($theme_key);
   }
-  menu_rebuild();
+  variable_set('menu_rebuild_needed', TRUE);
 }
 
 /**
@@ -628,7 +632,7 @@ function breakpoints_breakpoint_group_save(&$breakpoint_group) {
   $result = drupal_write_record('breakpoint_group', $breakpoint_group, $update);
   // rebuild menu if we add a new group
   if (empty ($update)) {
-    menu_rebuild();
+    variable_set('menu_rebuild_needed', TRUE);
   }
   // Reset CTools cache.
   ctools_export_load_object_reset('breakpoint_group');
@@ -662,7 +666,7 @@ function breakpoints_breakpoint_group_delete_by_fullkey($key) {
   // Clear the Ctools export API cache.
   ctools_include('export');
   ctools_export_load_object_reset('breakpoint_group');
-  menu_rebuild();
+  variable_set('menu_rebuild_needed', TRUE);
 }
 
 /**
@@ -893,7 +897,7 @@ function breakpoints_flush_caches() {
         breakpoints_breakpoints_group_reload($group, FALSE);
       }
       else {
-        breakpoints_themes_enabled(array($theme_key));
+        breakpoints_themes_enabled(array($theme_key), FALSE);
       }
     }
   }

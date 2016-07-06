@@ -384,11 +384,17 @@ function &rules_get_cache($cid = 'data') {
       }
       elseif (strpos($cid, 'comp_') === 0) {
         $cache[$cid] = FALSE;
-        _rules_rebuild_component_cache();
+        // Cut of the leading 'comp_' prefix to determine the event name.
+        _rules_rebuild_component_cache(substr($cid, 5));
       }
-      elseif (strpos($cid, 'event_') === 0 || $cid == 'rules_event_whitelist') {
+      elseif ($cid == 'rules_event_whitelist') {
         $cache[$cid] = FALSE;
-        RulesEventSet::rebuildEventCache();
+        _rules_rebuild_event_whitelist_cache();
+      }
+      elseif (strpos($cid, 'event_') === 0) {
+        $cache[$cid] = FALSE;
+        // Cut of the leading 'event_' prefix to determine the event name.
+        RulesEventSet::rebuildEventCache(substr($cid, 6));
       }
       else {
         $cache[$cid] = FALSE;
@@ -428,13 +434,23 @@ function _rules_rebuild_cache(&$cache) {
 }
 
 /**
- * Cache components to allow efficient usage via rules_invoke_component().
+ * Rebuilds the cache for a component.
+ *
+ * Components are cached to allow efficient usage via rules_invoke_component().
+ *
+ * @param string|null $component_name
+ *   (optional) If set, the name of the component for which the cache is to be
+ *   rebuilt. If left empty, the cache for all components is rebuilt.
  *
  * @see rules_invoke_component()
  * @see rules_get_cache()
  */
-function _rules_rebuild_component_cache() {
-  $components = rules_get_components();
+function _rules_rebuild_component_cache($component_name = NULL) {
+  $conditions = array();
+  if (!empty($component_name)) {
+    $conditions['name'] = $component_name;
+  }
+  $components = rules_get_components(FALSE, NULL, $conditions);
 
   foreach ($components as $id => $component) {
     // If a component is marked as dirty, check if this still applies.
@@ -451,6 +467,17 @@ function _rules_rebuild_component_cache() {
       rules_set_cache('comp_' . $component->name, $component);
     }
   }
+}
+
+/**
+ * Rebuilds the rules event whitelist cache.
+ */
+function _rules_rebuild_event_whitelist_cache() {
+  // Cache a whitelist of configured events so we can use it to speed up later
+  // calls. See rules_invoke_event().
+  $events = entity_get_controller('rules_config')->fetchAllConfiguredEvents();
+  $whitelist = array_flip($events);
+  rules_set_cache('rules_event_whitelist', $whitelist);
 }
 
 /**
@@ -485,6 +512,28 @@ function rules_clear_cache() {
   drupal_static_reset('rules_fetch_data');
   drupal_static_reset('rules_config_update_dirty_flag');
   entity_get_controller('rules_config')->resetCache();
+}
+
+/**
+ * Clears a specific cache entry only.
+ *
+ * @param $cid
+ *   The cache id of the cache entry to clear.
+ */
+function rules_clear_cache_entry($cid) {
+  $cache = &drupal_static('rules_get_cache', array());
+  unset($cache[$cid]);
+  cache_clear_all($cid, 'cache_rules');
+}
+
+/**
+ * Clears the rules 'data' cache only.
+ */
+function _rules_clear_data_cache() {
+  drupal_static_reset('rules_get_cache');
+  drupal_static_reset('rules_fetch_data');
+  drupal_static_reset('rules_config_update_dirty_flag');
+  cache_clear_all('data:', 'cache_rules', TRUE);
 }
 
 /**

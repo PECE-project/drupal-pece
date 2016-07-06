@@ -41,11 +41,24 @@ function profile2_entity_info() {
     ),
   );
 
-  // Add bundle info but bypass entity_load() as we cannot use it here.
-  $types = db_select('profile_type', 'p')
-    ->fields('p')
-    ->execute()
-    ->fetchAllAssoc('type');
+  // Use try..catch to workaround #1311820
+  try {
+    // Add bundle info but bypass entity_load() as we cannot use it here.
+    $types = db_select('profile_type', 'p')
+      ->fields('p')
+      ->execute()
+      ->fetchAllAssoc('type');
+  }
+
+  catch (PDOException $ex) {
+    watchdog(
+      'profile2',
+      'Failed to retrieve profile2 types: %exception',
+      array('%exception' => (string)$ex),
+      WATCHDOG_ERROR);
+
+    $types = array();
+  }
 
   foreach ($types as $type => $info) {
     $return['profile2']['bundles'][$type] = array(

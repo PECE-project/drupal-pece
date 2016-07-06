@@ -84,7 +84,9 @@ function template_preprocess_gmap_views_view_gmapextended(&$vars) {
       if (!isset($markers[$i][$purpose])) {
         $markers[$i][$purpose] = '';
       }
-      $markers[$i][$purpose] .= $row[$field];
+      if ($purpose){
+        $markers[$i][$purpose] .= $row[$field];
+      }
     }
   }
   /*

@@ -1,0 +1,18 @@
+name            = Node expire
+description     = Set a timer into your content, allowing you to perform customized actions.
+core = 7.x
+package         = Workflow
+configure = admin/config/workflow/node_expire/settings
+php = 5.3
+; dependencies[]  = rules
+dependencies[] = xautoload (>= 7.x-5.0)
+
+; Tests.
+files[] = tests/node_expire.admin.test
+
+; Information added by Drupal.org packaging script on 2016-02-21
+version = "7.x-2.2"
+core = "7.x"
+project = "node_expire"
+datestamp = "1456025357"
+

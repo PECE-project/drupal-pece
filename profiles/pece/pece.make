@@ -36,10 +36,14 @@ projects[token][version] = 1.6
 projects[token][subdir] = contrib
 
 ; Overrides panopoly's entity.
-projects[entity][version] = 1.6
+projects[entity][version] = 1.7
 projects[entity][subdir] = contrib
 
-projects[xautoload][version] = 5.5
+; Overrides panopoly's uuid.
+projects[uuid][version] = 1.0-beta1
+projects[uuid][subdir] = contrib
+
+projects[xautoload][version] = 5.7
 projects[xautoload][subdir]  = contrib
 
 projects[jquery_update][version] = 2.7
@@ -58,6 +62,13 @@ projects[pathauto_entity][subdir] = contrib
 ; =====================
 ; Views
 ; =====================
+
+; Overrides panopoly's views.
+projects[views][version] = 3.11
+projects[views][subdir] = contrib
+projects[views][patch][2037469] = http://drupal.org/files/views-exposed-sorts-2037469-1.patch
+projects[views][patch][1036962] = http://drupal.org/files/issues/views-ajax-nginx-1036962-71.patch
+projects[views][patch][2331209] = https://www.drupal.org/files/issues/2331209-4-views-7.x-3.x-undefined-index.patch
 
 projects[views_infinite_scroll][version] = 1.1
 projects[views_infinite_scroll][subdir] = contrib
@@ -81,7 +92,7 @@ projects[views_autocomplete_filters][subdir] = contrib
 projects[admin_menu][version] = 3.0-rc5
 projects[admin_menu][subdir]  = contrib
 
-projects[adminimal_admin_menu][version] = 1.6
+projects[adminimal_admin_menu][version] = 1.7
 projects[adminimal_admin_menu][subdir]  = contrib
 
 projects[coffee][version] = 2.2
@@ -102,7 +113,7 @@ projects[filter_perms][subdir]  = contrib
 projects[features_override][version] = 2.0-rc3
 projects[features_override][subdir] = contrib
 
-projects[features][version] = 2.7
+projects[features][version] = 2.10
 projects[features][subdir] = contrib
 
 projects[diff][version] = 3.2
@@ -139,7 +150,8 @@ projects[aes][version] = 1.10
 projects[panelizer][version] = 3.1
 projects[panelizer][subdir] = contrib
 projects[panelizer][patch][1623536] = http://drupal.org/files/issues/array-to-object-on-update-1623536-26.patch
-projects[panelizer][patch][2416505] = http://www.drupal.org/files/issues/panelizer-search_api-2416505-3.patch
+; This patch causes issue on fresh installs.
+; projects[panelizer][patch][2416505] = http://www.drupal.org/files/issues/panelizer-search_api-2416505-3.patch
 projects[panelizer][patch][2328615] = https://www.drupal.org/files/issues/panelizerentitydefault-2328615-1.patch
 
 projects[panels][version] = 3.5
@@ -155,10 +167,10 @@ projects[panels][patch][2390803] = https://www.drupal.org/files/issues/panels-fo
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_core][version] = 1.28
+projects[panopoly_core][version] = 1.35
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.28
+projects[panopoly_images][version] = 1.35
 projects[panopoly_images][subdir] = contrib
 
 ; Panopoly images depending libraries
@@ -170,30 +182,31 @@ libraries[jquery.imgareaselect][download][type] = file
 libraries[jquery.imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v0.9.11-rc.1.tar.gz
 libraries[jquery.imgareaselect][download][subtree] = imgareaselect-0.9.11-rc.1
 
-projects[panopoly_theme][version] = 1.28
+projects[panopoly_theme][version] = 1.35
 projects[panopoly_theme][subdir] = contrib
 
-projects[panopoly_magic][version] = 1.28
+projects[panopoly_magic][version] = 1.35
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.28
+projects[panopoly_widgets][version] = 1.35
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_admin][version] = 1.28
+projects[panopoly_admin][version] = 1.35
 projects[panopoly_admin][subdir] = contrib
 
-; projects[panopoly_users][version] = 1.28
-; projects[panopoly_users][subdir] = contrib
+projects[panopoly_users][version] = 1.28
+projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.28
+projects[panopoly_pages][version] = 1.35
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_wysiwyg][version] = 1.28
+projects[panopoly_wysiwyg][version] = 1.35
 projects[panopoly_wysiwyg][subdir] = contrib
 
 projects[panopoly_search][subdir] = contrib
-projects[panopoly_search][version] = 1.28
+projects[panopoly_search][version] = 1.35
+projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
 
 ; For running the automated tests.
 projects[panopoly_test][version] = 1.27
@@ -214,7 +227,7 @@ projects[radix_views][subdir] = contrib
 ; Interface
 ; =====================
 
-projects[breakpoints][version] = 1.3
+projects[breakpoints][version] = 1.4
 projects[breakpoints][subdir] = contrib
 
 ;projects[breakpointsjs][version] = 2.x-dev
@@ -224,7 +237,7 @@ projects[breakpoints][subdir] = contrib
 ; Entities
 ; =====================
 
-projects[eck][version] = 2.0-rc7
+projects[eck][version] = 2.0-rc8
 projects[eck][subdir]  = contrib
 
 projects[entity_view_mode][subdir] = contrib
@@ -236,7 +249,7 @@ projects[entityreference_view_widget][version] = 2.0-rc6
 projects[entityconnect][subdir] = contrib
 projects[entityconnect][version] = 1.0-rc5
 
-projects[inline_entity_form][version] = 1.6
+projects[inline_entity_form][version] = 1.8
 projects[inline_entity_form][subdir]  = contrib
 
 ; =====================
@@ -264,6 +277,7 @@ projects[file_entity][subdir] = contrib
 
 projects[media][version] = 2.0-beta1
 projects[media][subdir] = contrib
+projects[media][patch][] = https://www.drupal.org/files/issues/unable_to_create-2568123-2.patch
 
 projects[ckeditor][version] = 1.16
 projects[ckeditor][subdir] = contrib
@@ -278,7 +292,7 @@ projects[manualcrop][subdir] = contrib
 projects[image_resize_filter][version] = 1.16
 projects[image_resize_filter][subdir] = contrib
 
-projects[linkit][version] = 3.4
+projects[linkit][version] = 3.5
 projects[linkit][subdir] = contrib
 
 projects[field_group][version] = 1.5
@@ -288,7 +302,7 @@ projects[field_group][subdir] = contrib
 ; Search
 ; =====================
 
-projects[search_api][version] = 1.16
+projects[search_api][version] = 1.18
 projects[search_api][subdir]  = contrib
 
 ; =====================
@@ -301,7 +315,7 @@ projects[radix][subdir] = contrib
 
 ; Adminimal Theme for admin
 projects[adminimal_theme][type] = theme
-projects[adminimal_theme][version] = 1.23
+projects[adminimal_theme][version] = 1.24
 projects[adminimal_theme][subdir] = contrib
 
 ; PECE Base Theme
@@ -352,6 +366,7 @@ libraries[cycle][directory_name] = jquery.cycle
 ; Rules
 projects[rules][subdir] = contrib
 projects[rules][version] = 2.9
+projects[rules][patch][2189645] = https://www.drupal.org/files/issues/d7_component_caches.patch
 
 ; Translation
 projects[l10n_update][subdir] = contrib
@@ -359,7 +374,7 @@ projects[l10n_update][version] = 2.0
 
 ; Organic groups
 projects[og][subdir] = contrib
-projects[og][version] = 2.7
+projects[og][version] = 2.9
 
 ; Email
 projects[email][subdir] = contrib
@@ -388,11 +403,12 @@ projects[legal][version] = 1.5
 ; Profile 2
 projects[profile2][subdir] = contrib
 projects[profile2][version] = 1.3
-projects[profile2][patch][] = https://www.drupal.org/files/ctools-profile2_from_user-1273026-10.patch
+projects[profile2][patch][1273026] = https://www.drupal.org/files/ctools-profile2_from_user-1273026-10.patch
+projects[profile2][patch][1307538] = https://www.drupal.org/files/issues/profile2-fix_entity_info_failure_during_install-1307538-10-7.x-1.x-dev.patch
 
 ; GMap
 projects[gmap][subdir] = contrib
-projects[gmap][version] = 2.10
+projects[gmap][version] = 2.11
 
 ; External link
 projects[extlink][subdir] = contrib
@@ -403,12 +419,12 @@ projects[realname][subdir] = contrib
 projects[realname][version] = 1.2
 
 ; TagCloud
-projects[tagclouds][version] = 1.10
+projects[tagclouds][version] = 1.11
 projects[tagclouds][subdir]  = contrib
 
 ; Taxonomy Access Fix
 projects[taxonomy_access_fix][subdir] = contrib
-projects[taxonomy_access_fix][version] = 2.2
+projects[taxonomy_access_fix][version] = 2.3
 
 ; Annotation
 ;projects[annotation][subdir] = contrib
@@ -421,40 +437,63 @@ projects[taxonomy_access_fix][version] = 2.2
 ; PDF Reader
 projects[pdf_reader][subdir] = contrib
 projects[pdf_reader][version] = 1.0-rc6
+projects[pdf_reader][patch][] = "./patches/pdf_reader-keydown_event_page_error.patch"
 
 ; Amber
-projects[amber][type] = module
-projects[amber][download][type] = git
-projects[amber][download][url] = "https://github.com/berkmancenter/amber_drupal.git"
 projects[amber][subdir] = contrib
+projects[amber][version] = 1.0
 
 ; Backup and Migrate
 projects[backup_migrate][subdir] = contrib
 projects[backup_migrate][version] = 3.1
 
+; Node Expiration
+projects[node_expire][subdir] = contrib
+projects[node_expire][version] = 2.2
+
+; Date (dependency of node_expire)
+projects[date][subdir] = contrib
+projects[date][version] = 2.9
+
+; =====================
+; Development Modules
+; =====================
+
 ; Backup and Migrate - SFTP support
 projects[backup_migrate_sftp][subdir] = contrib
 projects[backup_migrate_sftp][version] = 1.0
 
-; 403-Redirect
-projects[r4032login][subdir] = contrib
-projects[r4032login][version] = 1.8
-
 ; SMTP Mail
 projects[smtp][subdir] = contrib
-projects[smtp][version] = 1.3
+projects[smtp][version] = 1.4
 
 ; Services
 projects[services][subdir] = contrib
-projects[services][version] = 3.12
+projects[services][version] = 3.15
 
 ; Services Views
 projects[services_views][subdir] = contrib
 projects[services_views][version] = 1.1
 
-; Views Slideshow
-projects[views_slideshow][subdir] = contrib
-projects[views_slideshow][version] = 3.1
+; =====================
+; Integrations
+; =====================
+
+; Job scheduler
+projects[job_scheduler][subdir] = contrib
+projects[job_scheduler][version] = 2.0-alpha3
+
+; Feeds
+projects[feeds][subdir] = contrib
+projects[feeds][version] = 2.0-beta2
+
+; Bibliography
+projects[biblio][subdir] = contrib
+projects[biblio][version] = 1.0-rc7
+
+; Bibliography Zotero
+projects[biblio_zotero][subdir] = contrib
+projects[biblio_zotero][version] = 1.x-dev
 
 ; =====================
 ; Imports

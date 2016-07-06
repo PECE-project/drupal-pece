@@ -1037,7 +1037,13 @@ function theme_date_repeat_rrule($vars) {
   $element = $vars['element'];
   $id = drupal_html_id('repeat-settings-fieldset');
   $parents = $element['#parents'];
-  $selector = "{$parents[0]}[{$parents[1]}][{$parents[2]}][show_repeat_settings]";
+
+  $selector = $parents[0];
+  for ($i = 1; $i < count($parents) - 1; $i++) {
+    $selector .= '[' . $parents[$i] . ']';
+  }
+  $selector .= '[show_repeat_settings]';
+
   $fieldset = array(
     '#type' => 'item',
     '#title' => t('Repeat settings'),

@@ -78,7 +78,7 @@ function taxonomy_access_fix_form_taxonomy_overview_terms_alter(&$form, &$form_s
   // Remove edit links.
   if (!$can_edit) {
     foreach (element_children($form) as $item) {
-      if (isset($item['#term'])) {
+      if (isset($form[$item]['#term'])) {
         $form[$item]['edit']['#access'] = FALSE;
       }
     }

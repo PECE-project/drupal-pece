@@ -132,7 +132,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 7,
+      'weight' => 9,
     ),
   );
 
@@ -196,7 +196,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 9,
+      'weight' => 11,
     ),
   );
 
@@ -320,7 +320,64 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
       'module' => 'creative_commons',
       'settings' => array(),
       'type' => 'select',
-      'weight' => 6,
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-pece_artifact_fieldnote-field_pece_location'.
+  $field_instances['node-pece_artifact_fieldnote-field_pece_location'] = array(
+    'bundle' => 'pece_artifact_fieldnote',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'location_cck',
+        'settings' => array(),
+        'type' => 'location_default',
+        'weight' => 13,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_pece_location',
+    'label' => 'Location',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'location_cck',
+      'settings' => array(),
+      'type' => 'location',
+      'weight' => 7,
     ),
   );
 
@@ -379,7 +436,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 8,
+      'weight' => 10,
     ),
   );
 
@@ -426,7 +483,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
     'fences_wrapper' => 'div',
     'field_name' => 'field_pece_uri',
     'label' => 'URI',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'linkit' => array(
         'button_text' => 'Search',
@@ -444,6 +501,69 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-pece_artifact_fieldnote-field_pece_use_fieldsite_local'.
+  $field_instances['node-pece_artifact_fieldnote-field_pece_use_fieldsite_local'] = array(
+    'bundle' => 'pece_artifact_fieldnote',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Check this to copy the location from the referenced fieldsite, if any.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 14,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_pece_use_fieldsite_local',
+    'label' => 'Use fieldsite\'s location',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 6,
     ),
   );
 
@@ -503,7 +623,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 12,
     ),
   );
 
@@ -584,14 +704,17 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Author(s)');
+  t('Check this to copy the location from the referenced fieldsite, if any.');
   t('Contributors');
   t('Fieldsite');
   t('Group audience');
   t('License');
+  t('Location');
   t('Permissions');
   t('Tags');
   t('Text');
   t('URI');
+  t('Use fieldsite\'s location');
 
   return $field_instances;
 }

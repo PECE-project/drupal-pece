@@ -3,9 +3,10 @@
 
 .view-id-pece_my_noted_artifacts,
 .view-id-pece_my_analytics,
+.view-pece-my-biblio-items,
 .view-id-pece_my_projects,
+.view-pece-my-fieldsites,
 .view-id-pece_my_groups,
-.view-id-pece_my_memos
 
   li.views-row
     vertical-align: middle
@@ -29,14 +30,17 @@
         opacity: 1
         width: 70px
 
+.view-pece-my-biblio-items li > div::before
+  content: '\f02d'
+
+.view-pece-my-fieldsites li > div::before
+  content: '\f041'
+
 .view-id-pece_my_groups li > div::before
   content: '\f0c0'
 
 .view-id-pece_my_projects li > div::before
   content: '\f0e8'
-
-.view-id-pece_my_memos li > div::before
-  content: '\f0eb'
 
 .view-id-pece_my_noted_artifacts li > div::before
   content: '\f24a'

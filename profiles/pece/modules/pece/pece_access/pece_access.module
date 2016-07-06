@@ -5,168 +5,113 @@
  * Code for the PECE Access.
  */
 
-define('PECE_ACCESS_RESEARCHER_ROLE', 'Researcher');
+/**
+ * The Contributor role name.
+ */
+define('PECE_CONTRIBUTOR', 'Contributor');
 
 /**
- * Implements hook_views_query_alter().
+ * The Researcher role name.
  */
-function pece_access_views_query_alter(&$view, &$query) {
-  global $user;
-  // If the input for the title filter is a positive integer, filter against
-  // node ID instead of node title.
-  $views = array(
-    'pece_group_field_diary',
-    'pece_user_field_diary',
-  );
+define('PECE_RESEARCHER', 'Researcher');
 
-  if (in_array($view->name, $views)) {
-    $conditions = &$query->where;
-    // Traverse through the 'where' part of the query.
-    foreach ($conditions as &$condition_group) {
-      foreach ($condition_group['conditions'] as &$condition) {
-        // If this is the part of the query filtering on title, change the
-        // condition to filter on node ID.
-        if ($condition['field'] == 'users_node.uid') {
-          $condition['value'] = $user->uid;
-        }
-      }
-    }
-    if (!in_array('Researcher', $user->roles)) {
-      unset($conditions[2]);
-    }
-  }
+/**
+ * The access realm of group member.
+ */
+define('PECE_ACCESS_REALM', 'pece_access');
+
+/**
+ * The public-group content access realm.
+ */
+define('PECE_ACCESS_REALM_PUBLIC_GROUP', PECE_ACCESS_REALM . ':public-group:node');
+
+/**
+ * The restricted content access realm.
+ */
+define('PECE_ACCESS_REALM_RESTRICTED', PECE_ACCESS_REALM . ':restricted:node');
+
+/**
+ * The restricted content inside group access realm.
+ */
+define('PECE_ACCESS_REALM_RESTRICTED_GROUP', PECE_ACCESS_REALM . ':restricted:group:node');
+
+/**
+ * The content owner access realm.
+ */
+define('PECE_ACCESS_REALM_OWNER', PECE_ACCESS_REALM . ':owner:node');
+
+/**
+ * The private content owner access realm.
+ */
+define('PECE_ACCESS_REALM_PRIVATE_OWNER', PECE_ACCESS_REALM . ':private:owner:node');
+
+/**
+ * The field that defines access on nodes.
+ */
+define('PECE_ACCESS_FIELD', 'field_permissions');
+
+/**
+ * Implements hook_node_insert().
+ */
+function pece_access_node_insert($node) {
+  _pece_access_node_save($node);
 }
 
 /**
- * Implements hook_node_access().
+ * Implements hook_node_update().
  */
-function pece_access_node_access($node, $op, $account) {
-  if ($op != 'view' || !in_array($node->type, pece_access_artifact_node_types())) {
-    return NODE_ACCESS_IGNORE;
-  }
-
-  return pece_access_view_access($node, $account) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
+function pece_access_node_update($node) {
+  _pece_access_node_save($node);
 }
 
 /**
- * Implements hook_entity_presave().
+ * Executed when nodes are inserted/updated.
  */
-function pece_access_entity_presave($entity, $type) {
-  if ($type != 'node') {
+function _pece_access_node_save($node) {
+  pece_access_refresh_node_files_access($node);
+}
+
+/**
+ * Recalculate the access controled scheme of a node's files.
+ */
+function pece_access_refresh_node_files_access($node) {
+  // Update the node access table for this node before refreshing access.
+  node_access_acquire_grants($node);
+
+  $restricted_types = pece_access_restricted_node_types();
+
+  // Do nothing if saving has no access control.
+  if (!in_array($node->type, $restricted_types)) {
     return;
   }
 
-  $types_field_map = pece_access_artifact_node_types_file_fields();
+  $query = db_select('file_usage', 'fu');
+  $query->fields('fu', array('fid'));
+  $query->condition('fu.type', 'node');
+  $query->condition('fu.id', $node->nid);
+  $query->distinct();
 
-  if (!in_array($entity->type, array_keys($types_field_map))) {
-    return;
+  $node_files = $query->execute()->fetchCol();
+
+  // Trigger file access refresh on any file present on the saving node.
+  foreach ($node_files as $fid) {
+    pece_access_refresh_file_access($fid);
   }
-
-  $node_wrapper = entity_metadata_wrapper('node', $entity);
-  $field_name = $types_field_map[$entity->type];
-  $field_value = $node_wrapper->$field_name->value();
-
-  if (empty($field_value)) {
-    return;
-  }
-
-  $file = file_load($field_value['fid']);
-
-  if (empty($file)) {
-    return;
-  }
-
-  $scheme = file_uri_scheme($file->uri);
-  $node_permission = pece_access_node_permission($entity);
-  $private_permissions = array('restricted', 'private');
-
-  if ($scheme == 'public' && in_array($node_permission, $private_permissions)) {
-    // Move file from public to private.
-    pece_access_move_file($file, 'private');
-  }
-  elseif ($scheme == 'private' && $node_permission == 'open') {
-    // Move file from private to public.
-    pece_access_move_file($file, 'public');
-  }
-
 }
 
 /**
- * Implements hook_file_entity_access().
+ * Recalculate the access controled scheme of a file.
  */
-function pece_access_file_entity_access($op, $file, $account) {
-  if ($op != 'view') {
-    return FILE_ENTITY_ACCESS_IGNORE;
+function pece_access_refresh_file_access($file) {
+  $file = is_object($file) ? $file : file_load($file);
+  $file_is_public = file_uri_scheme($file->uri) == 'public';
+  $file_should_be_public = pece_access_file_is_public($file);
+
+  // If current scheme differs from what should be, move the file.
+  if ($file_is_public !== $file_should_be_public) {
+    $scheme = $file_should_be_public ? 'public' : 'private';
+    pece_access_move_file($file, $scheme);
   }
-
-  $types_field_map = pece_access_artifact_node_types_file_fields();
-
-  // Build query to get all nodes that reference this file.
-  $query = db_select('node', 'n')
-      ->fields('n', array('nid'))
-      ->condition('n.type', array_keys($types_field_map), 'IN');
-
-  $table_counter = 1;
-  $or = db_or();
-  foreach($types_field_map as $node_type => $file_field) {
-    $table_alias = 'fd_' . $table_counter;
-    $field_name_db = $file_field . '_fid';
-
-    $query->leftJoin('field_data_' . $file_field, $table_alias, '(' . $table_alias . '.entity_id = n.nid )');
-    $or->condition($table_alias . '.' . $field_name_db, $file->fid);
-
-    $table_counter++;
-  }
-
-  $result = $query
-    ->condition($or)
-    ->execute()
-    ->fetchCol();
-
-  if (empty($result)) {
-    return FILE_ENTITY_ACCESS_IGNORE;
-  }
-
-  $nodes = node_load_multiple($result);
-
-  $grants = array();
-  foreach ($nodes as $node) {
-    $grants[] = pece_access_view_access($node, $account);
-  }
-
-  return in_array(FALSE, $grants) ? FILE_ENTITY_ACCESS_DENY : FILE_ENTITY_ACCESS_ALLOW;
-}
-
-/**
- * Helper function for getting access to a node based on PECE specific rules.
- */
-function pece_access_view_access($node, $account) {
-  $artifact_node_types = pece_access_artifact_node_types();
-
-  if (in_array($node->type, $artifact_node_types)) {
-    $is_owner = ($account->uid === $node->uid);
-    $node_permission = pece_access_node_permission($node);
-
-    switch ($node_permission) {
-      case 'open':
-        return TRUE;
-
-      case 'private':
-        return $is_owner;
-
-      case 'restricted':
-        return ($is_owner || in_array(PECE_ACCESS_RESEARCHER_ROLE, $account->roles));
-    }
-  }
-
-}
-
-/**
- * Get permissions settings for a node based on PECE specific rules.
- */
-function pece_access_node_permission($node) {
-  $node_wrapper = entity_metadata_wrapper('node', $node);
-  return $node_wrapper->field_permissions->value();
 }
 
 /**
@@ -175,6 +120,15 @@ function pece_access_node_permission($node) {
 function pece_access_move_file($file, $scheme) {
   $original_scheme = ($scheme == 'public') ? 'private' : 'public';
   $destination = str_replace($original_scheme . '://', $scheme .'://', $file->uri);
+  $directory = rtrim(drupal_dirname($destination), '/\\');
+
+  // Check if directory exists.
+  if (!is_dir($directory)) {
+    // Let mkdir() recursively create directories and use the default directory permissions.
+    if (@drupal_mkdir($directory, NULL, TRUE)) {
+      drupal_chmod($directory);
+    }
+  }
 
   if (file_move($file, $destination)) {
     drupal_set_message(t('The file was moved from %from to %dest.', array(
@@ -185,30 +139,256 @@ function pece_access_move_file($file, $scheme) {
 }
 
 /**
- * Helper function to provide a list of artifact node types.
+ * Check whether a file should be public or private. We do it by checking if an
+ * anonymous user should have access to the file.
  */
-function pece_access_artifact_node_types() {
-  return array(
-    'pece_artifact',
-    'pece_artifact_audio',
-    'pece_artifact_fieldnote',
-    'pece_artifact_image',
-    'pece_artifact_pdf',
-    'pece_artifact_text',
-    'pece_artifact_video',
-    'pece_artifact_website',
-  );
+function pece_access_file_is_public($file) {
+  return pece_access_file_is_visible($file, drupal_anonymous_user());
 }
 
 /**
- * Helper function to provide a list of artifact node types along with their
- * file fields.
+ * Check if a file should be accessbile to the given user.
  */
-function pece_access_artifact_node_types_file_fields() {
-  return array(
-    'pece_artifact_audio' => 'field_pece_media_audio',
-    'pece_artifact_image' => 'field_pece_media_image',
-    'pece_artifact_pdf' => 'field_pece_media_pdf',
-    'pece_artifact_video' => 'field_pece_media_video',
-  );
+function pece_access_file_is_visible($file, $account = NULL) {
+  if (!isset($account)) {
+    $account = $GLOBALS['user'];
+  }
+
+  $file = is_object($file) ? $file : file_load($file);
+
+  $query = db_select('file_usage', 'fu');
+  $query->fields('fu', array('id'));
+  $query->condition('fu.type', 'node');
+  $query->condition('fu.fid', $file->fid);
+  $query->distinct();
+
+  $file_nids = $query->execute()->fetchCol();
+  $file_nodes = node_load_multiple($file_nids);
+  $user_can_view_file = TRUE;
+
+  // Apply deny first for any node that uses this file.
+  foreach ($file_nodes as $node) {
+    if (!node_access('view', $node, $account)) {
+      $user_can_view_file = FALSE;
+      break;
+    }
+  }
+
+  return $user_can_view_file;
+}
+
+/**
+ * Implements hook_file_entity_access().
+ */
+function pece_access_file_entity_access($op, $file, $account) {
+  if ($op != 'view') {
+    return FILE_ENTITY_ACCESS_IGNORE;
+  }
+
+  $file_is_visible = pece_access_file_is_visible($file, $account);
+  return $file_is_visible ? FILE_ENTITY_ACCESS_ALLOW : FILE_ENTITY_ACCESS_DENY;
+}
+
+/**
+ * Helper function to provide a list of restricted node types.
+ */
+function pece_access_restricted_node_types() {
+  $field = field_info_field(PECE_ACCESS_FIELD);
+  return drupal_map_assoc($field['bundles']['node']);
+}
+
+/**
+ * Implements hook_node_access_records().
+ */
+function pece_access_node_access_records($node) {
+  $grants = array();
+
+  // Only control access for specific types.
+  $restricted_types = pece_access_restricted_node_types();
+  if (empty($node->type) || !in_array($node->type, $restricted_types)) {
+    return $grants;
+  }
+
+  $permission = pece_access_get_permission($node);
+  $groups = pece_access_get_node_groups($node);
+
+  foreach ($groups as $gid => $private) {
+    ${$private ? 'private_groups' : 'public_groups'}[] = $gid;
+  }
+
+  // 1. Always allow access to an open node if it belongs to at least one public group.
+  // This is intended to override Organic Groups default behavior regarding nodes on both
+  // private and public groups; by default, the existence of a node on a private group
+  // would deny access to it even though it might be present on a public group.
+  if ($permission == 'open' && !empty($public_groups) && !empty($private_groups)) {
+    $grants[] = array(
+      'realm' => PECE_ACCESS_REALM_PUBLIC_GROUP,
+      'gid' => 0,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 0,
+    );
+  }
+
+  // 2. Allow access to a restricted node for 'Researcher' users if the node belongs to
+  // no group at all, or if it belongs to at least one public group. In the case the node
+  // belongs to both a public and a private group, this rule will override Organic Groups
+  // default behavior (which is deny first).
+  if ($permission == 'restricted' && (empty($groups) || !empty($public_groups))) {
+    $grants[] = array(
+      'realm' => PECE_ACCESS_REALM_RESTRICTED,
+      'gid' => 0,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    );
+  }
+
+  // 3. Allow access to a restricted node for 'Researcher' users when the node belongs
+  // only to private groups. This is done in a per-group granting system.
+  if ($permission == 'restricted' && !empty($private_groups) && empty($public_groups)) {
+    foreach ($private_groups as $group_id) {
+      $grants[] = array(
+        'realm' => PECE_ACCESS_REALM_RESTRICTED_GROUP,
+        'gid' => $group_id,
+        'grant_view' => 1,
+        'grant_update' => 0,
+        'grant_delete' => 0,
+        'priority' => 2,
+      );
+    }
+  }
+
+  // 4. Always allow access to a user's own nodes, regardless of the attached grantings.
+  // We use the priority of the last inserted grant, which should be the highest. In case
+  // we defined no previous grants, but the node is part of at least one private group
+  // and no public group at all, we add a grant parallel to the Organic Groups' one.
+  if (!empty($grants) || (empty($public_groups) && !empty($private_groups))) {
+    $grants[] = array(
+      'realm' => PECE_ACCESS_REALM_OWNER,
+      'gid' => $node->uid,
+      'grant_view' => 1,
+      'grant_update' => 1,
+      'grant_delete' => 1,
+      'priority' => !empty($grants) ? end($grants)['priority'] : 0,
+    );
+  }
+
+  // 5. Allow access to private contents always and only to their owners. This is an
+  // ultimate control, and should always override any other when present.
+  if ($permission == 'private') {
+    $grants[] = array(
+      'realm' => PECE_ACCESS_REALM_PRIVATE_OWNER,
+      'gid' => $node->uid,
+      'grant_view' => 1,
+      'grant_update' => 1,
+      'grant_delete' => 1,
+      'priority' => 10,
+    );
+  }
+
+  return $grants;
+}
+
+/**
+ * Implements hook_node_grants().
+ */
+function pece_access_node_grants($account, $op) {
+  if ($op != 'view') {
+    return;
+  }
+
+  $grants = array();
+  $groups = og_get_entity_groups('user', $account);
+
+  // 1. Allow access to all nodes that belong to public groups, regardless of other
+  // groups they might belong to.
+  $grants[PECE_ACCESS_REALM_PUBLIC_GROUP][] = 0;
+
+  // 2. Allow access for 'Researcher' users to any restricted content if it belongs to
+  // no group at all or if it belongs to at least one public group.
+  if (pece_access_user_has_role($account, 'Researcher')) {
+    $grants[PECE_ACCESS_REALM_RESTRICTED][] = 0;
+  }
+
+  // 3. Allow access for 'Researcher' users to any restricted content in the groups
+  // they belong to.
+  if (pece_access_user_has_role($account, 'Researcher') && !empty($groups['node'])) {
+    foreach ($groups['node'] as $group_id) {
+      $grants[PECE_ACCESS_REALM_RESTRICTED_GROUP][] = $group_id;
+    }
+  }
+
+  // 4. Allows access to any of the user's own content.
+  $grants[PECE_ACCESS_REALM_OWNER][] = $account->uid;
+
+  // 5. Allow access to any user that owns a private node.
+  $grants[PECE_ACCESS_REALM_PRIVATE_OWNER][] = $account->uid;
+
+  return $grants;
+}
+
+/**
+ * Helper (performatic) method to get the field permission value for a node.
+ * @TODO: Use db_query for better performance.
+ */
+function pece_access_get_permission($node) {
+  $table = 'field_data_' . PECE_ACCESS_FIELD;
+  $column = PECE_ACCESS_FIELD . '_value';
+
+  $query = db_select($table, 'p');
+  $query->fields('p', array($column));
+  $query->condition('p.entity_type', 'node');
+  $query->condition('p.entity_id', $node->nid);
+  $query->range(0, 1);
+  $result = $query->execute()->fetch();
+
+  return !empty($result) ? $result->$column : FALSE;
+}
+
+/**
+ * Helper (performatic) method to get a map of private content groups.
+ */
+function pece_access_get_node_groups($node) {
+  $sql = "SELECT ogm.gid AS gid, ga.group_access_value AS gavalue
+    FROM og_membership ogm
+    LEFT OUTER JOIN field_data_group_access ga ON ga.entity_id = ogm.gid
+    WHERE (ga.entity_type = 'node')
+    AND (ogm.entity_type = 'node')
+    AND (ogm.etid = {$node->nid})";
+
+  $results = db_query($sql);
+  $groups = array();
+
+  foreach ($results as $result) {
+    $groups[$result->gid] = $result->gavalue == 1;
+  }
+
+  return $groups;
+}
+
+/**
+ * Helper (performatic) method to check if user has a role.
+ * @TODO: Use db_query for better performance.
+ */
+function pece_access_user_has_role($user, $role) {
+  // 1. Easy way out using the user object.
+  if (isset($user->roles) && in_array($role, $user->roles)) {
+    return TRUE;
+  }
+
+  // 2. Fallback method using databse querying.
+  $query = db_select('users', 'u');
+  $query->fields('u', array('uid'));
+  $query->range(0, 1);
+
+  $query->leftJoin('users_roles', 'ur', 'u.uid = ur.uid');
+  $query->leftJoin('role', 'r', 'ur.rid = r.rid');
+
+  $query->condition('u.uid', $user->uid);
+  $query->condition('r.name', $role);
+
+  return !empty($query->execute()->fetchAll());
 }

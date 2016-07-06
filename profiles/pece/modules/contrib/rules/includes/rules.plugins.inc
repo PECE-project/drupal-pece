@@ -753,63 +753,82 @@ class RulesEventSet extends RulesRuleSet {
   /**
    * Cache event-sets per event to allow efficient usage via rules_invoke_event().
    *
+   * @param string|null $event_name
+   *   (optional) The event for which to rebuild the cache. If left empty, the
+   *   cache for all events is rebuilt. However, doing so is discouraged -
+   *   instead just clear caches and let the event cache build on demand (per
+   *   event).
+   *
    * @see rules_get_cache()
    * @see rules_invoke_event()
    */
-  public static function rebuildEventCache() {
+  public static function rebuildEventCache($event_name = NULL) {
+    // If no event is given, rebuild the cache for all known events.
+    if (!isset($event_name)) {
+      foreach (rules_get_cache('rules_event_whitelist') as $event_name => $value) {
+        self::rebuildEventCache($event_name);
+      }
+      return;
+    }
+
     // Set up the per-event cache.
     $events = rules_fetch_data('event_info');
-    $sets = array();
+    $event_base_name = rules_get_event_base_name($event_name);
+
+    // Skip not defined events.
+    if (empty($events[$event_base_name])) {
+      return;
+    }
+
     // Add all rules associated with this event to an EventSet for caching.
-    $rules = rules_config_load_multiple(FALSE, array('plugin' => 'reaction rule', 'active' => TRUE));
+    $rules = rules_config_load_multiple(FALSE, array(
+      'plugin' => 'reaction rule',
+      'active' => TRUE,
+      'event' => $event_name
+    ));
+
+    // No rules, looks like there is a wrong event whitelist. Clear it so it
+    // gets rebuilt on the next request.
+    if (!$rules) {
+      rules_clear_cache_entry('rules_event_whitelist');
+      return;
+    }
 
     foreach ($rules as $name => $rule) {
-      foreach ($rule->events() as $event_name) {
-        $event_base_name = rules_get_event_base_name($event_name);
-        // Skip not defined events.
-        if (empty($events[$event_base_name])) {
-          continue;
-        }
-        // Create an event set if not yet done.
-        if (!isset($sets[$event_name])) {
-          $handler = rules_get_event_handler($event_name, $rule->getEventSettings($event_name));
+      // Create an event set if not yet done.
+      if (!isset($event_set)) {
+        $handler = rules_get_event_handler($event_name, $rule->getEventSettings($event_name));
 
-          // Start the event dispatcher for this event, if any.
-          if ($handler instanceof RulesEventDispatcherInterface && !$handler->isWatching()) {
-            $handler->startWatching();
-          }
-
-          // Update the event info with the variables available based on the
-          // event settings.
-          $event_info = $events[$event_base_name];
-          $event_info['variables'] = $handler->availableVariables();
-          $sets[$event_name] = new RulesEventSet($event_info);
-          $sets[$event_name]->name = $event_name;
+        // Start the event dispatcher for this event, if any.
+        if ($handler instanceof RulesEventDispatcherInterface && !$handler->isWatching()) {
+          $handler->startWatching();
         }
 
-        // If a rule is marked as dirty, check if this still applies.
-        if ($rule->dirty) {
-          rules_config_update_dirty_flag($rule);
-        }
-        if (!$rule->dirty) {
-          // Clone the rule to avoid modules getting the changed version from
-          // the static cache.
-          $sets[$event_name]->rule(clone $rule);
-        }
+        // Update the event info with the variables available based on the
+        // event settings.
+        $event_info = $events[$event_base_name];
+        $event_info['variables'] = $handler->availableVariables();
+        $event_set = new RulesEventSet($event_info);
+        $event_set->name = $event_name;
+      }
+
+      // If a rule is marked as dirty, check if this still applies.
+      if ($rule->dirty) {
+        rules_config_update_dirty_flag($rule);
+      }
+      if (!$rule->dirty) {
+        // Clone the rule to avoid modules getting the changed version from
+        // the static cache.
+        $event_set->rule(clone $rule);
       }
     }
 
     // Create cache items for all created sets.
-    foreach ($sets as $event_name => $set) {
-      $set->sortChildren();
-      $set->optimize();
-      // Allow modules to alter the cached event set.
-      drupal_alter('rules_event_set', $event_name, $set);
-      rules_set_cache('event_' . $event_name, $set);
-    }
-    // Cache a whitelist of configured events so we can use it to speed up later
-    // calls. See rules_invoke_event().
-    rules_set_cache('rules_event_whitelist', array_flip(array_keys($sets)));
+    $event_set->sortChildren();
+    $event_set->optimize();
+    // Allow modules to alter the cached event set.
+    drupal_alter('rules_event_set', $event_name, $event_set);
+    rules_set_cache('event_' . $event_name, $event_set);
   }
 
   protected function stateVariables($element = NULL) {

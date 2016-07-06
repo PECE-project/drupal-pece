@@ -160,12 +160,13 @@ function _xautoload_register_drupal() {
 
   // Activate a cache, if available and enabled.
   $cache_types = $services->system->variableGet(XAUTOLOAD_VARNAME_CACHE_TYPES, array());
-  if (!empty($cache_types['apcu_q'])) {
+  if (!empty($cache_types['apcu_q']) && extension_loaded('apcu') && function_exists('apcu_store')) {
     $cached_loader = ApcuQueuedCachedClassLoader::create($decorated, $services->cacheManager);
   }
   elseif (!empty($cache_types['apc']) && extension_loaded('apc') && function_exists('apc_store')) {
     $cached_loader = ApcClassLoader::create($decorated, $services->cacheManager);
   }
+  /** @noinspection NotOptimalIfConditionsInspection */
   elseif (!empty($cache_types['apcu']) && extension_loaded('apcu') && function_exists('apcu_store')) {
     $cached_loader = ApcuClassLoader::create($decorated, $services->cacheManager);
   }

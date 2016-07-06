@@ -1,0 +1,175 @@
+<?php
+/**
+ * @file
+ * Code for the PECE Bibliography feature.
+ */
+
+include_once 'pece_biblio.features.inc';
+
+/**
+ * Implements hook_pece_install_tasks().
+ */
+function pece_biblio_pece_install_tasks() {
+  $tasks = array();
+
+  // $tasks = array(
+  //   'pece_biblio_zotero' => array(
+  //     'display_name' => st('Configure Zotero'),
+  //     'type' => 'form',
+  //   ),
+  // );
+
+  return $tasks;
+}
+
+/**
+ * Callback form for "Configure Zotero" task.
+ */
+function pece_biblio_zotero($form, &$form_state) {
+  drupal_set_title(st('Configure Zotero integration'));
+
+  $form['intro'] = array(
+    '#markup' => '<p>' . st('You can optionally configure PECE to import bibliography items from Zotero.') .
+      '<br><small>' . st('Safely ignore this step if you don\'t use Zotero or if you don\'t want this integration.') . '</small></p>',
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_form_node_form_alter().
+ */
+function pece_biblio_form_node_form_alter(&$form, &$form_state) {
+  if ($form['#node']->type == 'zotero_feed') {
+    $type = node_type_get_type($form['#node']);
+
+    $form['title'] = array(
+      '#type' => 'textfield',
+      '#title' => check_plain($type->title_label),
+      '#default_value' => $form['#node']->title,
+      '#maxlength' => 255,
+      '#weight' => -5,
+    );
+  }
+}
+
+/**
+ * Implements hook_feeds_after_save().
+ */
+function pece_biblio_feeds_after_save($source, $entity, $item, $entity_id) {
+  $is_new = empty($entity_id);
+
+  if ($is_new && $entity->feeds_item->id == 'zotero_feed' && !empty($item['itemType'])) {
+    $function = "pece_biblio_feeds_after_save__zotero_feed__{$item['itemType']}";
+    if (function_exists($function)) {
+      $function($source, $entity, $item, $entity_id);
+    }
+  }
+}
+
+/**
+ * Creates PDF artifact based on a book's attachment, if existent.
+ */
+function pece_biblio_feeds_after_save__zotero_feed__book($source, $biblio, $item, $entity_id) {
+  // $config = $source->getConfig();
+  // $has_children = $item['numChildren'] !== '0';
+  //
+  // if (!$has_children || empty($config['FeedsZoteroFetcher'])) {
+  //   return;
+  // }
+  //
+  // $zotero_config = $config['FeedsZoteroFetcher'];
+  // $children_request_url = "https://api.zotero.org";
+  // $children_request_url .= "/{$zotero_config['zotero_type']}s";
+  // $children_request_url .= "/{$zotero_config['zotero_id']}";
+  // $children_request_url .= "/items/{$item['key']}/children";
+  //
+  // if (!empty($zotero_config['api_key'])) {
+  //   $children_request_url .= '?key=' . $zotero_config['api_key'];
+  // }
+  //
+  // $response = file_get_contents($children_request_url);
+  // $children = json_decode($response);
+  //
+  // if (empty($children)) {
+  //   return;
+  // }
+  //
+  // foreach ($children as $child) {
+  //   $data = $child->data;
+  //
+  //   // Consider refactoring this to add image attachment also.
+  //   if ($data->itemType !== 'attachment' || $data->contentType !== 'application/pdf') {
+  //     continue;
+  //   }
+  //
+  //   for ($count = 0, $found = TRUE; $found; $count++) {
+  //     $num = $count + 1;
+  //     $title = $count ? $biblio->title . " ({$num})" : $biblio->title;
+  //     $websites = pece_biblio_load_node_by_title('pece_artifact_website', $title);
+  //     $found = !empty($websites);
+  //   }
+  //
+  //   $biblio->biblio_url = $child->links->alternate->href . '/file';
+  //   pece_biblio_create_website_artifact_from_biblio($biblio, $title);
+  // }
+}
+
+function pece_biblio_feeds_after_save__zotero_feed__blogPost($source, $entity, $item, $entity_id) {
+  pece_biblio_feeds_after_save__zotero_feed__website($source, $entity, $item, $entity_id);
+}
+
+function pece_biblio_feeds_after_save__zotero_feed__webpage($source, $entity, $item, $entity_id) {
+  pece_biblio_feeds_after_save__zotero_feed__website($source, $entity, $item, $entity_id);
+}
+
+/**
+ * Creates a website artifact based on a website bibliography import from Zotero.
+ */
+function pece_biblio_feeds_after_save__zotero_feed__website($source, $biblio, $item, $entity_id) {
+  pece_biblio_create_website_artifact_from_biblio($biblio, $biblio->title);
+}
+
+/**
+ * Create an website artifact based on a biblio item.
+ */
+function pece_biblio_create_website_artifact_from_biblio($biblio, $title = NULl) {
+  $title = empty($title) ? $biblio->title : $title;
+
+  $websites = pece_biblio_load_node_by_title('pece_artifact_website', $title);
+  $title_in_use = !empty($websites);
+
+  if ($title_in_use) {
+    return;
+  }
+
+  $properties = array(
+    'type' => 'pece_artifact_website',
+    'uid' => $biblio->uid,
+    'status' => 1,
+    'comment' => 1,
+    'promote' => 0,
+  );
+
+  $website_node = entity_create('node', $properties);
+  $website = entity_metadata_wrapper('node', $website_node);
+
+  $website->title->set($title);
+  $website->field_pece_bibliography->set(array(intval($biblio->nid)));
+  $website->field_pece_website_url->set(array('url' => $biblio->biblio_url, 'title' => '', 'attributes' => array()));
+
+  // Force empty value for field which has default value.
+  $website_node->field_pece_license = array();
+
+  node_save($website_node);
+}
+
+/**
+ * Helper method to find node by title.
+ */
+function pece_biblio_load_node_by_title($type, $title) {
+  return (new EntityFieldQuery())->entityCondition('entity_type', 'node')
+    ->propertyCondition('title', $title)
+    ->propertyCondition('type', $type)
+    ->execute();
+}

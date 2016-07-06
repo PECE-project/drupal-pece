@@ -19,9 +19,8 @@ projects[wysiwyg_filter][patch][1687794] = https://www.drupal.org/files/wysiwyg_
 
 ; The WYSIWYG Helpers
 
-projects[linkit][version] = 3.3
+projects[linkit][version] = 3.4
 projects[linkit][subdir] = contrib
-projects[linkit][patch][2115763] = http://drupal.org/files/issues/linkit-2115763-18-text-format-switching.patch
 
 projects[image_resize_filter][version] = 1.15
 projects[image_resize_filter][subdir] = contrib

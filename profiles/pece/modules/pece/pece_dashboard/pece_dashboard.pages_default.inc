@@ -34,6 +34,8 @@ function pece_dashboard_default_page_manager_pages() {
       ),
     ),
     'logic' => 'and',
+    'type' => 'none',
+    'settings' => NULL,
   );
   $page->menu = array(
     'type' => 'normal',
@@ -240,6 +242,98 @@ function pece_dashboard_default_page_manager_pages() {
   $pane->uuid = '60cb69ad-36f0-4f50-a301-351064ff312b';
   $display->content['new-60cb69ad-36f0-4f50-a301-351064ff312b'] = $pane;
   $display->panels['content'][5] = 'new-60cb69ad-36f0-4f50-a301-351064ff312b';
+  $pane = new stdClass();
+  $pane->pid = 'new-f1d2834d-f05f-479a-9a69-a60937648921';
+  $pane->panel = 'content';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_my_fieldsites-panel_pane_1';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 6;
+  $pane->locks = array();
+  $pane->uuid = 'f1d2834d-f05f-479a-9a69-a60937648921';
+  $display->content['new-f1d2834d-f05f-479a-9a69-a60937648921'] = $pane;
+  $display->panels['content'][6] = 'new-f1d2834d-f05f-479a-9a69-a60937648921';
+  $pane = new stdClass();
+  $pane->pid = 'new-d4419201-14ea-4496-b418-6f199399721b';
+  $pane->panel = 'content';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_user_field_diary-pece_user_field_diary';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 7;
+  $pane->locks = array();
+  $pane->uuid = 'd4419201-14ea-4496-b418-6f199399721b';
+  $display->content['new-d4419201-14ea-4496-b418-6f199399721b'] = $pane;
+  $display->panels['content'][7] = 'new-d4419201-14ea-4496-b418-6f199399721b';
+  $pane = new stdClass();
+  $pane->pid = 'new-0d1aa060-3ae9-4588-9612-58cef304ee92';
+  $pane->panel = 'content';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_my_biblio_items-panel_pane_1';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 8;
+  $pane->locks = array();
+  $pane->uuid = '0d1aa060-3ae9-4588-9612-58cef304ee92';
+  $display->content['new-0d1aa060-3ae9-4588-9612-58cef304ee92'] = $pane;
+  $display->panels['content'][8] = 'new-0d1aa060-3ae9-4588-9612-58cef304ee92';
+  $pane = new stdClass();
+  $pane->pid = 'new-a7a0a560-f2a8-438c-b956-2751dfa19254';
+  $pane->panel = 'content';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_my_photo_essays-panel_pane_1';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'rendered_entity',
+    'header_type' => 'none',
+    'view_mode' => 'mini_teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 9;
+  $pane->locks = array();
+  $pane->uuid = 'a7a0a560-f2a8-438c-b956-2751dfa19254';
+  $display->content['new-a7a0a560-f2a8-438c-b956-2751dfa19254'] = $pane;
+  $display->panels['content'][9] = 'new-a7a0a560-f2a8-438c-b956-2751dfa19254';
   $pane = new stdClass();
   $pane->pid = 'new-a6f2d74c-68d6-4670-a3b6-17ecf3d36a20';
   $pane->panel = 'sidebar';

@@ -1,0 +1,107 @@
+--- a/panopoly_search.features.inc
++++ b/panopoly_search.features.inc
+@@ -48,8 +48,6 @@ function panopoly_search_default_search_api_index() {
+         "nid" : { "type" : "integer" },
+         "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
+         "search_api_language" : { "type" : "string" },
+-        "search_api_panelizer_content" : { "type" : "text" },
+-        "search_api_panelizer_title" : { "type" : "text", "boost" : "8.0" },
+         "search_api_url" : { "type" : "uri" },
+         "search_api_viewed" : { "type" : "text" },
+         "status" : { "type" : "boolean" },
+@@ -70,7 +68,6 @@ function panopoly_search_default_search_api_index() {
+           "weight" : "-47",
+           "settings" : { "mode" : "search_index" }
+         },
+-        "panelizer" : { "status" : 1, "weight" : "-46", "settings" : [] },
+         "search_api_alter_add_url" : { "status" : 1, "weight" : "-45", "settings" : [] },
+         "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "-44", "settings" : [] },
+         "search_api_alter_add_hierarchy" : { "status" : 0, "weight" : "-43", "settings" : { "fields" : [] } }
+@@ -81,8 +78,6 @@ function panopoly_search_default_search_api_index() {
+           "weight" : "0",
+           "settings" : { "fields" : {
+               "title" : true,
+-              "search_api_panelizer_content" : true,
+-              "search_api_panelizer_title" : true,
+               "search_api_viewed" : true,
+               "body:value" : true,
+               "body:summary" : true
+@@ -95,8 +90,6 @@ function panopoly_search_default_search_api_index() {
+           "settings" : {
+             "fields" : {
+               "title" : true,
+-              "search_api_panelizer_content" : true,
+-              "search_api_panelizer_title" : true,
+               "search_api_viewed" : true,
+               "body:value" : true,
+               "body:summary" : true
+@@ -113,8 +106,6 @@ function panopoly_search_default_search_api_index() {
+           "settings" : {
+             "fields" : {
+               "title" : true,
+-              "search_api_panelizer_content" : true,
+-              "search_api_panelizer_title" : true,
+               "search_api_viewed" : true,
+               "body:value" : true,
+               "body:summary" : true
+@@ -165,8 +156,6 @@ function panopoly_search_default_search_api_index() {
+         "created" : { "type" : "date" },
+         "nid" : { "type" : "integer" },
+         "search_api_language" : { "type" : "string" },
+-        "search_api_panelizer_content" : { "type" : "text" },
+-        "search_api_panelizer_title" : { "type" : "text", "boost" : "8.0" },
+         "search_api_url" : { "type" : "uri" },
+         "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
+         "search_api_viewed" : { "type" : "text" },
+@@ -188,7 +177,6 @@ function panopoly_search_default_search_api_index() {
+           "weight" : "-47",
+           "settings" : { "mode" : "search_index" }
+         },
+-        "panelizer" : { "status" : 1, "weight" : "-46", "settings" : [] },
+         "search_api_alter_add_url" : { "status" : 1, "weight" : "-45", "settings" : [] },
+         "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "-44", "settings" : [] },
+         "search_api_alter_add_hierarchy" : { "status" : 0, "weight" : "-43", "settings" : { "fields" : [] } }
+@@ -199,8 +187,6 @@ function panopoly_search_default_search_api_index() {
+           "weight" : "0",
+           "settings" : { "fields" : {
+               "title" : true,
+-              "search_api_panelizer_content" : true,
+-              "search_api_panelizer_title" : true,
+               "search_api_viewed" : true,
+               "body:value" : true,
+               "body:summary" : true
+@@ -213,8 +199,6 @@ function panopoly_search_default_search_api_index() {
+           "settings" : {
+             "fields" : {
+               "title" : true,
+-              "search_api_panelizer_content" : true,
+-              "search_api_panelizer_title" : true,
+               "search_api_viewed" : true,
+               "body:value" : true,
+               "body:summary" : true
+@@ -241,8 +225,6 @@ function panopoly_search_default_search_api_index() {
+           "settings" : {
+             "fields" : {
+               "title" : true,
+-              "search_api_panelizer_content" : true,
+-              "search_api_panelizer_title" : true,
+               "search_api_viewed" : true,
+               "body:value" : true,
+               "body:summary" : true
+@@ -368,16 +350,6 @@ function panopoly_search_default_search_api_server() {
+             "table" : "search_api_db_database_node_index_text",
+             "type" : "text",
+             "boost" : "1.0"
+-          },
+-          "search_api_panelizer_content" : {
+-            "table" : "search_api_db_database_node_index_text",
+-            "type" : "text",
+-            "boost" : "1.0"
+-          },
+-          "search_api_panelizer_title" : {
+-            "table" : "search_api_db_database_node_index_text",
+-            "type" : "text",
+-            "boost" : "8.0"
+           }
+         }
+       }

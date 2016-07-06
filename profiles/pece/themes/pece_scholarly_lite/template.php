@@ -67,3 +67,14 @@ function pece_scholarly_lite_item_list($variables) {
   $output .= '</div>';
   return $output;
 }
+
+/**
+ * Implements hook_css_alter().
+ */
+function pece_scholarly_lite_css_alter(&$css) {
+  $exclude = array(
+    drupal_get_path('module', 'panopoly_admin') . '/panopoly-admin.css',
+  );
+
+  $css = array_diff_key($css, drupal_map_assoc($exclude));
+}
