@@ -28,7 +28,7 @@ PECE development is made easy by using the following software projects:
 - [Drupal](https://www.drupal.org/requirements).
 
 Keep in mind that these are prerequisites for the *development environment* of
-the PECE project, not for the end-user software. In order words, you will
+the PECE project, not for the end-user software. In other words, you will
 not need to follow these instructions if you are only interested in installing
 and running PECE. Please, refer to our [official
 documentation](http://pece.readthedocs.io/en/docs/installation.html) if you are
