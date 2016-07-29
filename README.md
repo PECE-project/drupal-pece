@@ -14,7 +14,7 @@ repository you must use.
 If you are an end-user looking for stable PECE releases, please access the repository
 [PECE-distro](https://github.com/PECE-project/pece-distro), which contains our
 installation package with the latest stable version. If you have general questions about
-the platform, please refer to our [complete documentation](http://pece.readthedocs.io/en/docs/).
+the platform, please refer to our [complete documentation](http://pece.readthedocs.io/en/latest/).
 
 
 ## Prerequisites
@@ -31,7 +31,7 @@ Keep in mind that these are prerequisites for the *development environment* of
 the PECE project, not for the end-user software. In other words, you will
 not need to follow these instructions if you are only interested in installing
 and running PECE. Please, refer to our [official
-documentation](http://pece.readthedocs.io/en/docs/installation.html) if you are
+documentation](http://pece.readthedocs.io/en/latest/installation.html) if you are
 looking for instructions for regular PECE installation and usage.
 
 ### Installing Node.js
@@ -213,12 +213,12 @@ TODO
 
 Contribution should be done [using pull requests](https://help.github.com/articles/using-pull-requests) to this repository. We keep the `master` branch current with tested, stable code. The branch `dev` is used for the on-going development tasks, new features, and bug fixes.
 
-Our [Contributors' guide](http://pece.readthedocs.io/en/docs/contributors.html) contains all the information you will need to know about the project before submitting your contribution. Please read it before sending us pull requests.
+Our [Contributors' guide](http://pece.readthedocs.io/en/latest/contributors.html) contains all the information you will need to know about the project before submitting your contribution. Please read it before sending us pull requests.
 
 ## Authors
 
-Our official documentation contains the information on authorship for the design and implementation tasks of the platform. Please check the document [PECE Team](http://pece.readthedocs.io/en/docs/team.html) for more information.
+Our official documentation contains the information on authorship for the design and implementation tasks of the platform. Please check the document [PECE Team](http://pece.readthedocs.io/en/latest/team.html) for more information.
 
 ## License
 
-All the code produced for PECE is released under the GNU GPL version 3. Please, read our [legal documents for more information](http://pece.readthedocs.io/en/docs/legal.html).
+All the code produced for PECE is released under the GNU GPL version 3. Please, read our [legal documents for more information](http://pece.readthedocs.io/en/latest/legal.html).
