@@ -4,7 +4,7 @@ PECE is a Free and Open Source (Drupal-based) digital platform that supports mul
 
 This repository holds the packaged distribution for PECE adopters. It contains the most updated version of PECE for public use. If you are an end-user who wants to run PECE for your research, this is the right place to get your copy. If you are a developer wishing to contribute to the development process, you must use the [development repository](https://github.com/PECE-project/drupal-pece) instead.
 
-If you have general questions about the platform, please refer to our [official documentation](http://pece.readthedocs.io/en/docs).
+If you have general questions about the platform, please refer to our [official documentation](http://pece.readthedocs.io/en/latest).
 
 
 ## Dependencies
@@ -14,7 +14,6 @@ In addition to the [basic Drupal system requirements](https://www.drupal.org/req
 - php5-mcrypt
 - php5-curl
 - php-ssh2
-- cURL
 
 Even though these are not hard dependencies, we highly recommend running your PECE site with following set-up for better security and performance: 
 
@@ -23,6 +22,7 @@ Even though these are not hard dependencies, we highly recommend running your PE
 - php5-fpm
 - drush (>= 5.x)
 - any *nix OS of your choice
+- cURL
 
 
 ## Installing PECE
@@ -37,17 +37,17 @@ Create an empty database and make sure to [configure the directory/file permissi
 
 ```$ sudo drush si pece --account-name=admin --account-pass=YOUR_ADMIN_PASS --db-url=mysql://YOUR_DB_USER:YOUR_DB_USER_PASSWD@locahost/YOUR_DB --notify```
 
-Go grab a cup of coffee or tea, since the installation process might take up to 30 minutes to complete dependending on your server backend. For detailed information on the installation process, please check our [official documentation](http://pece.readthedocs.io/en/docs/installation.html).
+Go grab a cup of coffee or tea, since the installation process might take up to 30 minutes to complete dependending on your server backend. For detailed information on the installation process, please check our [official documentation](http://pece.readthedocs.io/en/latest/installation.html).
 
 ## Contributing
 
-There are many ways of contributing to the PECE project. One of them is by reporting bugs or requesting features through Github in our [development repository](https://github.com/PECE-project/drupal-pece). Read our [contributors' guide](http://pece.readthedocs.io/en/docs/contributors.html) for more information about how to contribute code and bug fixes.
+There are many ways of contributing to the PECE project. One of them is by reporting bugs or requesting features through Github in our [development repository](https://github.com/PECE-project/drupal-pece). Read our [contributors' guide](http://pece.readthedocs.io/en/latest/contributors.html) for more information about how to contribute code and bug fixes.
 
 ## PECE Team
 
-Our official documentation contains the information on authorship for the design and implementation of the platform. Please check the document [PECE Team](http://pece.readthedocs.io/en/docs/team.html) for more information.
+Our official documentation contains the information on authorship for the design and implementation of the platform. Please check the document [PECE Team](http://pece.readthedocs.io/en/latest/team.html) for more information.
 
 ## Licensing
 
-All the software code written for PECE is released under the GNU GPL version 3. Access our [legal documents for more information](http://pece.readthedocs.io/en/docs/legal.html). All the documentation for the project is released under CC-BY-SA 4.0 International, unless stated otherwise.
+All the software code written for PECE is released under the GNU GPL version 3. Access our [legal documents for more information](http://pece.readthedocs.io/en/latest/legal.html). All the documentation for the project is released under CC-BY-SA 4.0 International, unless stated otherwise.
 
