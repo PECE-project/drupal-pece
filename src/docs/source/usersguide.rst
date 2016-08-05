@@ -295,6 +295,70 @@ Content Glossary
         Choose an file and hit the ‘Submit’ button. Title: Use this field to enter
         the title of the content.
 
+Using Zotero with PECE
+-------------------------
+
+*User Instructions*
+
+1. Navigate to “My Account.”
+
+2. Under Zotero username, enter the username that you use for Zotero.  You can find this by navigating to Zotero.com and logging in.  Your username will be in the URL.
+
+3. Save.
+
+*To add Zotero feeds to the platform.*
+
+Please note; you should only need to create a Zotero feed once per Zotero library.  Once the feed has been created in PECE, any entries added to the Zotero library afterwards will automatically be imported into PECE within a half hour.
+
+1. Navigate to “Dashboard.”
+
+2. Under “Add Content,” select “Zotero Feed.”
+
+3. Title your feed.
+
+4. If importing a group library, To find your group id, navigate to your groups' settings page and the numeric part of the URL is your group id.  If importing a user library, navigate to settings/keys in Zotero.  Your ID will follow the sentence “Your userID for use in API calls is”
+
+5. If you’d only like to import a single collection, select “Fetch Collections.”  If you enter a collection id, only items from that collection will be fetched from Zotero. Collections are the "folders" in your Zotero library. To find the id of a collection, go to your library, click on a collection to see its content, and look at the page URL. The collection id is the last item in the path, after "collectionKey/".
+
+6. To get an API key, navigate to settings/keys in Zotero.
+
+    - Select “Create new private key.”
+
+    - Enter a key description (e.g. The Asthma Files).
+
+    - Under “Personal Library,” select “Allow library access,” “Allow notes access,” “Allow write access.”
+
+    - If importing a user library, under “Default Group Permissions,” select the level of access PECE should have to group entries (we recommend selecting “None” here).  If importing a group library, select “None” here (you will select the individual group permissions in the next step.)
+
+    - If importing a Group, check “Per Group Permissions” and then select “Read/Write” access for the group that you will be importing.
+
+    - Save Key.
+
+7. Copy and paste the key generated in Zotero into the field “Zotero API key” in PECE.
+
+8. Publish.
+
+9. Large libraries will likely take several minutes to import.  Do not worry if the progress bar doesn’t look like it’s moving.
+
+10. Now any entries added to this Zotero library will automatically be added to the platform within a half hour.
+
+11. All website entries within the Zotero library will automatically be added to PECE as website artifacts with the citation already linked to the artifact.
+
+*To View Zotero Entries*
+
+1. Navigate to “Discover.”  Click “BIBLIOGRAPHY” in the upper right hand corner.
+
+2. Navigate to “Dashboard.”  Under the tab “BIBLIO,” the Zotero entries that you’ve added should be listed.
+
+*To cite a PDF or website artifact*
+
+1. When creating or updating a PDF or website artifact, under the “Bibliography” field, begin typing the title of the Zotero entry.  (Note that the entry must have already been imported into the system.)
+
+2. Select the entry from the autocomplete dropdown.
+
+3. Publish the artifact.
+
+
 Tagging Etiquette 
 -----------------
 
