@@ -426,6 +426,12 @@ configuration: to have a more secure system, you do not want to give admin
 powers to regular users, so that when one regular user account is compromised, 
 the whole system and users' data gets compromised in the process. Not good...
 
+8. **Configuring Zotero:** Navigate to /admin/modules, and turn on modules the Feed Admin UI and Feeds Importer. Flush all caches. Navigate to admin/structure/feeds/zotero_feed.  To the right under, Zotero Process, select Settings to configure the Zotero Importer module.
+    - Most settings here can remain the same.  However, we encourage you to:
+       - Under “Update Existing Nodes,” change “Do Not Update Existing Nodes” to “Update Existing Nodes.”  This way if you update an entry in Zotero, it will also be updated in the platform on the next feed import
+       - Under “Sync zotero tags to a term reference field in the biblio content type?” change “yes” to “no.”  Often Zotero entries are added to the library with chaotic tagging schemes.  Checking “yes” here will add those tagging schemes into PECE.
+       - Save.
+
 
 Troubleshooting
 ---------------
