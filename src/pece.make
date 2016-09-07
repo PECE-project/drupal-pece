@@ -70,7 +70,7 @@ projects[views][patch][2037469] = http://drupal.org/files/views-exposed-sorts-20
 projects[views][patch][1036962] = http://drupal.org/files/issues/views-ajax-nginx-1036962-71.patch
 projects[views][patch][2331209] = https://www.drupal.org/files/issues/2331209-4-views-7.x-3.x-undefined-index.patch
 
-projects[views_infinite_scroll][version] = 1.1
+projects[views_infinite_scroll][version] = 2.0
 projects[views_infinite_scroll][subdir] = contrib
 
 projects[views_litepager][version] = 3.0
@@ -331,9 +331,6 @@ libraries[phpmailer][download][type] = git
 libraries[phpmailer][download][url] = https://github.com/Synchro/PHPMailer.git
 libraries[phpmailer][download][revision] = d3802c597bff8f6c2ccfa3eab2a511aa01b8d68f
 libraries[phpmailer][download][branch] = master
-
-libraries[autopager][download][type] = file
-libraries[autopager][download][url] = http://jquery-autopager.googlecode.com/files/jquery.autopager-1.0.0.js
 
 ;libraries[annotator][download][type] = file
 ;libraries[annotator][download][url] = https://github.com/openannotation/annotator/releases/download/v1.2.10/annotator.1.2.10.zip
