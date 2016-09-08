@@ -207,6 +207,7 @@ projects[panopoly_wysiwyg][subdir] = contrib
 projects[panopoly_search][subdir] = contrib
 projects[panopoly_search][version] = 1.35
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
+projects[panopoly_search][patch][] = "https://www.drupal.org/files/issues/solrphpclient_cannot_be-2790595-10.patch"
 
 ; For running the automated tests.
 projects[panopoly_test][version] = 1.27
