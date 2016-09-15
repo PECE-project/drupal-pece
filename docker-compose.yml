@@ -36,3 +36,25 @@ services:
     container_name: pece-dev-apache
     links:
       - db_mysql:pece-db
+
+  production:
+    image: taller/pece
+    hostname: "prod"
+    mem_limit: 1256m
+    network_mode: bridge
+    working_dir: /pece/drupal
+    environment:
+      - DB_PORT=3306
+      - DB_HOST=pece-db
+      - DB_NAME=pece
+      - DB_DRIVER=mysql
+      - DB_USERNAME=pece
+      - DB_PASSWORD=ZwTuVZzQO90qwYzA
+      - IS_PRODUCTION=true
+    volumes:
+      - $PWD:/pece/drupal
+      - $HOME/.ssh:/pece/.ssh
+      - $HOME/.gitconfig:/pece/.gitconfig
+    container_name: pece-prod-apache
+    links:
+      - db_mysql:pece-db
