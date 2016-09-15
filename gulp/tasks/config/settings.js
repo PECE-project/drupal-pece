@@ -6,6 +6,7 @@ var rename = require('gulp-rename');
 var replace = require('gulp-replace');
 
 var cwd = process.cwd();
+var isProduction = process.env.IS_PRODUCTION;
 
 var info = [
   { 'name' : 'name',     'placeholder': '%SETTINGS_DATABASE_NAME%',     'default': process.env.DB_NAME     || 'pece'      },
@@ -26,6 +27,18 @@ var questions = info.map(function (info) {
 });
 
 gulp.task('config:settings', function () {
+  if (isProduction) {
+    return gulp.src('src/cnf/settings.local.base.php')
+      .pipe(replace('%SETTINGS_DATABASE_NAME%', process.env.DB_NAME))
+      .pipe(replace('%SETTINGS_DATABASE_USERNAME%', process.env.DB_USERNAME))
+      .pipe(replace('%SETTINGS_DATABASE_PASSWORD%', process.env.DB_PASSWORD))
+      .pipe(replace('%SETTINGS_DATABASE_HOST%', process.env.DB_HOST))
+      .pipe(replace('%SETTINGS_DATABASE_PORT%', process.env.DB_PORT))
+      .pipe(replace('%SETTINGS_DATABASE_DRIVER%', process.env.DB_DRIVER))
+      .pipe(replace('%SETTINGS_DATABASE_PREFIX%', ''))
+      .pipe(rename('settings.local.php'))
+      .pipe(gulp.dest('cnf'));
+  }
   return inquirer.prompt(questions).then(function (answers) {
     return gulp.src('src/cnf/settings.local.base.php')
       .pipe(replace('%SETTINGS_DATABASE_NAME%', answers.name))
