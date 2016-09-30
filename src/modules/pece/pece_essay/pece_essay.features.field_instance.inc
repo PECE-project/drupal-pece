@@ -79,8 +79,7 @@ function pece_essay_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance:
-  // 'node-pece_essay-field_pece_contributors'.
+  // Exported field_instance: 'node-pece_essay-field_pece_contributors'.
   $field_instances['node-pece_essay-field_pece_contributors'] = array(
     'bundle' => 'pece_essay',
     'default_value' => NULL,
@@ -142,7 +141,7 @@ function pece_essay_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -202,7 +201,7 @@ function pece_essay_field_default_field_instances() {
       'module' => 'creative_commons',
       'settings' => array(),
       'type' => 'select',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -261,7 +260,7 @@ function pece_essay_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -385,7 +384,7 @@ function pece_essay_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -403,7 +402,7 @@ function pece_essay_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 7,
+        'weight' => 9,
       ),
       'featured' => array(
         'label' => 'above',
@@ -431,30 +430,48 @@ function pece_essay_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'fences_wrapper' => 'div_div_div',
+    'fences_wrapper' => 'div',
     'field_name' => 'field_thumbnail',
     'label' => 'Thumbnail',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 1,
+      'alt_field' => 0,
       'default_image' => 0,
       'file_directory' => 'essay/images',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 1,
+      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'private' => 'private',
+          'public' => 'public',
+          'vimeo' => 0,
+          'youtube' => 0,
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 'media_default--media_browser_1',
+          'media_default--media_browser_my_files' => 0,
+          'media_internet' => 0,
+          'upload' => 'upload',
+        ),
         'manualcrop_crop_info' => 1,
         'manualcrop_default_crop_area' => 1,
         'manualcrop_enable' => 0,
         'manualcrop_inline_crop' => 0,
-        'manualcrop_instant_crop' => 0,
+        'manualcrop_instant_crop' => FALSE,
         'manualcrop_instant_preview' => 1,
         'manualcrop_keyboard' => 1,
         'manualcrop_maximize_default_crop_area' => 0,
@@ -462,11 +479,9 @@ function pece_essay_field_default_field_instances() {
         'manualcrop_styles_list' => array(),
         'manualcrop_styles_mode' => 'include',
         'manualcrop_thumblist' => 0,
-        'preview_image_style' => 'thumbnail',
-        'progress_indicator' => 'throbber',
       ),
-      'type' => 'image_image',
-      'weight' => 3,
+      'type' => 'media_generic',
+      'weight' => 4,
     ),
   );
 
@@ -543,7 +558,7 @@ function pece_essay_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 4,
+      'weight' => 13,
     ),
   );
 

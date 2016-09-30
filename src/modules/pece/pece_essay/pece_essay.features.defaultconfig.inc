@@ -25,7 +25,11 @@ function pece_essay_defaultconfig_user_default_permissions() {
   $permissions['create pece_essay content'] = array(
     'name' => 'create pece_essay content',
     'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
+      'editor' => 'editor',
     ),
     'module' => 'node',
   );
@@ -33,7 +37,9 @@ function pece_essay_defaultconfig_user_default_permissions() {
   // Exported permission: 'delete any pece_essay content'.
   $permissions['delete any pece_essay content'] = array(
     'name' => 'delete any pece_essay content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -41,7 +47,11 @@ function pece_essay_defaultconfig_user_default_permissions() {
   $permissions['delete own pece_essay content'] = array(
     'name' => 'delete own pece_essay content',
     'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
+      'editor' => 'editor',
     ),
     'module' => 'node',
   );
@@ -59,7 +69,11 @@ function pece_essay_defaultconfig_user_default_permissions() {
   $permissions['edit own pece_essay content'] = array(
     'name' => 'edit own pece_essay content',
     'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
+      'editor' => 'editor',
     ),
     'module' => 'node',
   );
