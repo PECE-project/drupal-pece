@@ -28,8 +28,6 @@ function pece_essay_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
-      'editor' => 'editor',
     ),
     'module' => 'node',
   );
@@ -50,8 +48,6 @@ function pece_essay_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
-      'editor' => 'editor',
     ),
     'module' => 'node',
   );
@@ -72,8 +68,6 @@ function pece_essay_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
-      'editor' => 'editor',
     ),
     'module' => 'node',
   );
