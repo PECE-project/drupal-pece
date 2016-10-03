@@ -34,7 +34,7 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 7,
       ),
       'most_recent' => array(
         'label' => 'above',
@@ -105,7 +105,7 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 5,
       ),
       'most_recent' => array(
         'label' => 'above',
@@ -173,7 +173,7 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 6,
       ),
       'most_recent' => array(
         'label' => 'above',
@@ -229,7 +229,7 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
       ),
       'most_recent' => array(
         'label' => 'above',
@@ -288,7 +288,7 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'most_recent' => array(
         'label' => 'above',
@@ -356,7 +356,7 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'most_recent' => array(
         'label' => 'above',
@@ -411,9 +411,12 @@ function pece_essay_field_default_field_instances() {
         'weight' => 0,
       ),
       'mini_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'hidden',
+        'module' => 'file_entity',
+        'settings' => array(
+          'file_view_mode' => 'default',
+        ),
+        'type' => 'file_rendered',
         'weight' => 0,
       ),
       'most_recent' => array(
@@ -509,7 +512,7 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'most_recent' => array(
         'label' => 'above',
