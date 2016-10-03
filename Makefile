@@ -3,6 +3,9 @@
 run:
 	docker-compose run --rm -p 8080:80 dev_pece
 
+in:
+	docker exec -it $(shell docker-compose ps | grep _dev_ | cut -d" " -f 1) /bin/bash
+
 stop:
 	docker-compose stop
 
