@@ -160,7 +160,7 @@ function pece_essay_panelizer_defaults() {
   $display->content['new-beb09bec-1d62-4b84-878b-848a2aa652ac'] = $pane;
   $display->panels['contentmain'][3] = 'new-beb09bec-1d62-4b84-878b-848a2aa652ac';
   $pane = new stdClass();
-  $pane->pid = 'new-b1542e6f-c461-4c89-b1f5-33ae9e683537';
+  $pane->pid = 'new-a39510d0-0fc1-4725-a5fd-66e1a154a26e';
   $pane->panel = 'sidebar';
   $pane->type = 'entity_field';
   $pane->subtype = 'node:field_thumbnail';
@@ -188,9 +188,9 @@ function pece_essay_panelizer_defaults() {
   $pane->extras = array();
   $pane->position = 0;
   $pane->locks = array();
-  $pane->uuid = 'b1542e6f-c461-4c89-b1f5-33ae9e683537';
-  $display->content['new-b1542e6f-c461-4c89-b1f5-33ae9e683537'] = $pane;
-  $display->panels['sidebar'][0] = 'new-b1542e6f-c461-4c89-b1f5-33ae9e683537';
+  $pane->uuid = 'a39510d0-0fc1-4725-a5fd-66e1a154a26e';
+  $display->content['new-a39510d0-0fc1-4725-a5fd-66e1a154a26e'] = $pane;
+  $display->panels['sidebar'][0] = 'new-a39510d0-0fc1-4725-a5fd-66e1a154a26e';
   $pane = new stdClass();
   $pane->pid = 'new-183fc3bf-ff65-4b24-a565-769b4c316a62';
   $pane->panel = 'sidebar';
@@ -312,6 +312,44 @@ function pece_essay_panelizer_defaults() {
   $display->title_pane = '0';
   $panelizer->display = $display;
   $export['node:pece_essay:default'] = $panelizer;
+
+  $panelizer = new stdClass();
+  $panelizer->disabled = FALSE; /* Edit this to true to make a default panelizer disabled initially */
+  $panelizer->api_version = 1;
+  $panelizer->name = 'node:pece_essay:default:free_panel';
+  $panelizer->title = 'Default';
+  $panelizer->panelizer_type = 'node';
+  $panelizer->panelizer_key = 'pece_essay';
+  $panelizer->no_blocks = FALSE;
+  $panelizer->css_id = '';
+  $panelizer->css = '';
+  $panelizer->pipeline = 'ipe';
+  $panelizer->contexts = array();
+  $panelizer->relationships = array();
+  $panelizer->access = array();
+  $panelizer->view_mode = 'free_panel';
+  $panelizer->css_class = '';
+  $panelizer->title_element = 'H2';
+  $panelizer->link_to_entity = TRUE;
+  $panelizer->extra = array();
+  $display = new panels_display();
+  $display->layout = 'flexible';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'center' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '%node:title';
+  $display->uuid = '43a93860-56bc-43a3-9e34-5642b109ac81';
+  $display->content = array();
+  $display->panels = array();
+  $display->hide_title = PANELS_TITLE_NONE;
+  $display->title_pane = '0';
+  $panelizer->display = $display;
+  $export['node:pece_essay:default:free_panel'] = $panelizer;
 
   return $export;
 }

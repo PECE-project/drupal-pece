@@ -68,13 +68,13 @@ function pece_essay_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
-          'weight' => '11',
+          'weight' => '10',
         ),
         'title' => array(
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '10',
+          'weight' => '9',
         ),
       ),
       'display' => array(),
@@ -146,32 +146,7 @@ function pece_essay_strongarm() {
         'default' => 0,
         'choice' => 0,
       ),
-      'full' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
       'teaser' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'rss' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'search_index' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'search_result' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'diff_standard' => array(
         'status' => 0,
         'default' => 0,
         'choice' => 0,
@@ -191,9 +166,9 @@ function pece_essay_strongarm() {
         'default' => 0,
         'choice' => 0,
       ),
-      'token' => array(
-        'status' => 0,
-        'default' => 0,
+      'free_panel' => array(
+        'status' => 1,
+        'default' => 1,
         'choice' => 0,
       ),
     ),
