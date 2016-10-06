@@ -44,14 +44,24 @@ function pece_panels_panelizer_reset_access_callback($node) {
 
 /**
  * Implements hook_panels_ipe_access().
+ *
+ * Control access to IPE when using panelizer.
  */
 function pece_panels_panels_ipe_access($display) {
-  $is_panelizer = !empty($display->context['panelizer']);
-  $is_node = $is_panelizer && in_array('entity:node', $display->context['panelizer']->type);
-  $is_free_panel = $is_node && $display->context['panelizer']->data->panelizer_view_mode === 'free_panel';
+  // Verify if we are working with a panelized display.
+  if (!empty($display->context['panelizer'])) {
+    $panelizer = $display->context['panelizer'];
+    $entity_type = end(array_values($panelizer->type));
+    $entity = $panelizer->data;
 
-  // Common users should only access IPE if in a free panel panelized node page.
-  return $is_free_panel;
+    $access_result = module_invoke_all('panelizer_ipe_access', $display, $entity_type, $entity);
+
+    // Deny first.
+    return in_array(TRUE, $access_result);
+  }
+
+  // Deny first.
+  return FALSE;
 }
 
 /**

@@ -15,3 +15,10 @@ function pece_essay_form_pece_essay_node_form_alter(&$form, &$form_state) {
     // Hide the comment settings fieldset.
     $form['comment_settings']['#access'] = FALSE;
 }
+
+/**
+ * Implements hook_panelizer_ipe_access() by pece_panels.
+ */
+function pece_essay_panelizer_ipe_access($display, $entity_type, $entity) {
+  return $entity->panelizer_view_mode === 'free_panel';
+}
