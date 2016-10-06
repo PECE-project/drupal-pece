@@ -55,6 +55,18 @@ function pece_panels_defaultconfig_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
+  // Exported permission: 'create fieldable node'.
+  $permissions['create fieldable node'] = array(
+    'name' => 'create fieldable node',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'create fieldable text'.
   $permissions['create fieldable text'] = array(
     'name' => 'create fieldable text',
@@ -92,6 +104,18 @@ function pece_panels_defaultconfig_user_default_permissions() {
   // Exported permission: 'delete fieldable map'.
   $permissions['delete fieldable map'] = array(
     'name' => 'delete fieldable map',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'delete fieldable node'.
+  $permissions['delete fieldable node'] = array(
+    'name' => 'delete fieldable node',
     'roles' => array(
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
@@ -140,6 +164,18 @@ function pece_panels_defaultconfig_user_default_permissions() {
   // Exported permission: 'edit fieldable map'.
   $permissions['edit fieldable map'] = array(
     'name' => 'edit fieldable map',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'edit fieldable node'.
+  $permissions['edit fieldable node'] = array(
+    'name' => 'edit fieldable node',
     'roles' => array(
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
