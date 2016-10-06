@@ -36,6 +36,7 @@ function pece_essay_entity_info_alter(&$entity_info) {
   // Fieldable pane for siple node reference rendering.
   $entity_info['fieldable_panels_pane']['bundles']['node'] = array(
     'label' => t('Add content'),
+    'pane top level' => TRUE,
     'admin' => $base_admin_info + array(
       'real path' => 'admin/structure/fieldable-panels-panes/manage/node',
     ),
