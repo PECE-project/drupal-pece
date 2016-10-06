@@ -6,6 +6,17 @@
  */
 
 /**
+ * Implements hook_module_implements_alter().
+ */
+function pece_panels_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'form_alter' && isset($implementations['pece_panels'])) {
+    $group = $implementations['pece_panels'];
+    unset($implementations['pece_panels']);
+    $implementations['pece_panels'] = $group;
+  }
+}
+
+/**
  * Implements hook_panels_ipe_access().
  */
 function pece_panels_panels_ipe_access($display) {
@@ -15,4 +26,15 @@ function pece_panels_panels_ipe_access($display) {
 
   // Common users should only access IPE if in a free panel panelized node page.
   return $is_free_panel;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for panels_ipe_edit_control_form().
+ *
+ * Alter the IPE save control form to hide revisioning info.
+ */
+function pece_panels_form_panels_ipe_edit_control_form_alter(&$form, &$form_state) {
+  if (!empty($form['revision_information'])) {
+    $form['revision_information']['#access'] = FALSE;
+  }
 }
