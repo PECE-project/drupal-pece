@@ -152,6 +152,7 @@ projects[aes][version] = 1.10
 ; Overrides panopoly's panelizer.
 projects[panelizer][version] = 3.4
 projects[panelizer][subdir] = contrib
+projects[panelizer][patch][2812807] = https://www.drupal.org/files/issues/panelizer--2812807--provide-entity-on-access-hooks.patch
 
 projects[panels][version] = 3.7
 projects[panels][subdir] = contrib
