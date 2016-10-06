@@ -1,7 +1,11 @@
 name = PECE Panels
-description = Generic customization on the panels IPE system.
+description = General customization on the panels IPE system.
 core = 7.x
 package = PECE
-project = pece_panels
 version = 7.x-1.0
+project = pece_panels
+dependencies[] = defaultconfig
 dependencies[] = panels
+features[defaultconfig][] = user_default_permissions:bypass access in place editing
+features[defaultconfig][] = user_default_permissions:use panels in place editing
+features[features_api][] = api:2
