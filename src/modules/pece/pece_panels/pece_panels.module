@@ -88,3 +88,23 @@ function pece_panels_form_panels_ipe_edit_control_form_alter(&$form, &$form_stat
     $form['revision_information']['#access'] = FALSE;
   }
 }
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function pece_panels_entity_info_alter(&$entity_info) {
+  $base_admin_info = array(
+    'path' => 'admin/structure/fieldable-panels-panes/manage/%fieldable_panels_pane_type',
+    'bundle argument' => 4,
+    'access arguments' => array('administer fieldable panels panes'),
+  );
+
+  // Fieldable pane for siple node reference rendering.
+  $entity_info['fieldable_panels_pane']['bundles']['node'] = array(
+    'label' => t('Add content'),
+    'pane top level' => TRUE,
+    'admin' => $base_admin_info + array(
+      'real path' => 'admin/structure/fieldable-panels-panes/manage/node',
+    ),
+  );
+}

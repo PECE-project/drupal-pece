@@ -31,6 +31,148 @@ function pece_panels_defaultconfig_user_default_permissions() {
     'module' => 'panels',
   );
 
+  // Exported permission: 'create fieldable image'.
+  $permissions['create fieldable image'] = array(
+    'name' => 'create fieldable image',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'create fieldable map'.
+  $permissions['create fieldable map'] = array(
+    'name' => 'create fieldable map',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'create fieldable text'.
+  $permissions['create fieldable text'] = array(
+    'name' => 'create fieldable text',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'create fieldable video'.
+  $permissions['create fieldable video'] = array(
+    'name' => 'create fieldable video',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'delete fieldable image'.
+  $permissions['delete fieldable image'] = array(
+    'name' => 'delete fieldable image',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'delete fieldable map'.
+  $permissions['delete fieldable map'] = array(
+    'name' => 'delete fieldable map',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'delete fieldable text'.
+  $permissions['delete fieldable text'] = array(
+    'name' => 'delete fieldable text',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'delete fieldable video'.
+  $permissions['delete fieldable video'] = array(
+    'name' => 'delete fieldable video',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'edit fieldable image'.
+  $permissions['edit fieldable image'] = array(
+    'name' => 'edit fieldable image',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'edit fieldable map'.
+  $permissions['edit fieldable map'] = array(
+    'name' => 'edit fieldable map',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'edit fieldable text'.
+  $permissions['edit fieldable text'] = array(
+    'name' => 'edit fieldable text',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'edit fieldable video'.
+  $permissions['edit fieldable video'] = array(
+    'name' => 'edit fieldable video',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'use panels in place editing'.
   $permissions['use panels in place editing'] = array(
     'name' => 'use panels in place editing',
