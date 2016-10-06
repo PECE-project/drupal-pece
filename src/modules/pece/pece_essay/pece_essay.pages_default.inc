@@ -62,6 +62,8 @@ function pece_essay_default_page_manager_pages() {
   $display->cache = array();
   $display->title = '';
   $display->uuid = 'a4f82d2e-9915-4954-a69f-efa53ae63412';
+  $display->storage_type = 'page_manager';
+  $display->storage_id = 'page_pece_essay_items__panel';
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
