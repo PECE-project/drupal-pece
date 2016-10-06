@@ -51,12 +51,12 @@ function pece_panels_panels_ipe_access($display) {
  * Implements hook_panelizer_access().
  */
 function pece_panels_panelizer_access($op, $entity_type, $bundle, $view_mode, $entity) {
-  if ($entity_type !== 'node' || empty($entity)) {
+  if ($entity_type !== 'node') {
     return FALSE;
   }
 
   // Allow resetting to default, but prevent override.
-  if ($op === 'defaults' && !empty($entity->panelizer[$view_mode]->did)) {
+  if ($op === 'defaults' && !empty($entity) && !empty($entity->panelizer[$view_mode]->did)) {
     return TRUE;
   }
 }
