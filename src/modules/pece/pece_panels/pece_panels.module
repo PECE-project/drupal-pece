@@ -20,9 +20,16 @@ function pece_panels_module_implements_alter(&$implementations, $hook) {
  * Implements hook_menu_alter().
  */
 function pece_panels_menu_alter(&$items) {
-  if (!empty($items['node/%node/panelizer/free_panel/reset'])) {
-    $items['node/%node/panelizer/free_panel/reset']['access callback'] = 'pece_panels_panelizer_free_panel_reset_access_callback';
-    $items['node/%node/panelizer/free_panel/reset']['access arguments'] = array(1);
+  $node_info = entity_get_info('node');
+  $node_view_modes = array_keys($node_info['view modes']);
+
+  foreach ($node_view_modes as $view_mode) {
+    $path = 'node/%node/panelizer/' . $view_mode . '/reset';
+
+    if (!empty($items[$path])) {
+      $items[$path]['access callback'] = 'pece_panels_panelizer_reset_access_callback';
+      $items[$path]['access arguments'] = array(1);
+    }
   }
 }
 
@@ -30,7 +37,7 @@ function pece_panels_menu_alter(&$items) {
  * Access callback for resetting a node's panelizer. It should always be TRUE when
  * user has updating access to the node.
  */
-function pece_panels_panelizer_free_panel_reset_access_callback($node) {
+function pece_panels_panelizer_reset_access_callback($node) {
   $handler = panelizer_entity_plugin_get_handler('node');
   return $handler->entity_access('update', $node);
 }
