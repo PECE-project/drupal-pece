@@ -239,14 +239,17 @@ projects[breakpoints][subdir] = contrib
 projects[eck][version] = 2.0-rc8
 projects[eck][subdir]  = contrib
 
-projects[entity_view_mode][subdir] = contrib
 projects[entity_view_mode][version] = 1.0-rc1
+projects[entity_view_mode][subdir] = contrib
 
-projects[entityreference_view_widget][subdir] = contrib
 projects[entityreference_view_widget][version] = 2.0-rc6
+projects[entityreference_view_widget][subdir] = contrib
 
-projects[entityconnect][subdir] = contrib
+projects[er_viewmode][version] = 1.0-alpha1
+projects[er_viewmode][subdir] = contrib
+
 projects[entityconnect][version] = 1.0-rc5
+projects[entityconnect][subdir] = contrib
 
 projects[inline_entity_form][version] = 1.8
 projects[inline_entity_form][subdir]  = contrib

@@ -10,10 +10,10 @@ include_once 'pece_essay.features.inc';
  * Implements hook_form_ID_alter().
  */
 function pece_essay_form_pece_essay_node_form_alter(&$form, &$form_state) {
-    // @TODO: show URI field once API is available.
-    $form['field_pece_uri']['#access'] = FALSE;
-    // Hide the comment settings fieldset.
-    $form['comment_settings']['#access'] = FALSE;
+  // @TODO: show URI field once API is available.
+  $form['field_pece_uri']['#access'] = FALSE;
+  // Hide the comment settings fieldset.
+  $form['comment_settings']['#access'] = FALSE;
 }
 
 /**
@@ -21,4 +21,23 @@ function pece_essay_form_pece_essay_node_form_alter(&$form, &$form_state) {
  */
 function pece_essay_panelizer_ipe_access($display, $entity_type, $entity) {
   return $entity->panelizer_view_mode === 'free_panel';
+}
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function pece_essay_entity_info_alter(&$entity_info) {
+  $base_admin_info = array(
+    'path' => 'admin/structure/fieldable-panels-panes/manage/%fieldable_panels_pane_type',
+    'bundle argument' => 4,
+    'access arguments' => array('administer fieldable panels panes'),
+  );
+
+  // Fieldable pane for siple node reference rendering.
+  $entity_info['fieldable_panels_pane']['bundles']['node'] = array(
+    'label' => t('Add content'),
+    'admin' => $base_admin_info + array(
+      'real path' => 'admin/structure/fieldable-panels-panes/manage/node',
+    ),
+  );
 }
