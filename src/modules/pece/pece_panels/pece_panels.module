@@ -4,3 +4,15 @@
  * @file
  * Code for the PECE Panels.
  */
+
+/**
+ * Implements hook_panels_ipe_access().
+ */
+function pece_panels_panels_ipe_access($display) {
+  $is_panelizer = !empty($display->context['panelizer']);
+  $is_node = $is_panelizer && in_array('entity:node', $display->context['panelizer']->type);
+  $is_free_panel = $is_node && $display->context['panelizer']->data->panelizer_view_mode === 'free_panel';
+
+  // Common users should only access IPE if in a free panel panelized node page.
+  return $is_free_panel;
+}
