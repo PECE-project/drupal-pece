@@ -1,0 +1,12 @@
+<?php
+/**
+ * @file
+ * Installation code for the PECE Access module.
+ */
+
+/**
+ * Remove group manager full permissions.
+ */
+function pece_access_update_7100() {
+  variable_set('og_group_manager_full_access', 0);
+}
