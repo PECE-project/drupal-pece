@@ -108,3 +108,14 @@ function pece_panels_entity_info_alter(&$entity_info) {
     ),
   );
 }
+
+/**
+ * Implements hook_fieldable_panels_panes_access().
+ */
+function pece_panels_fieldable_panels_panes_access($op, $fpp = NULL, $account = NULL) {
+  if ($op === 'view' && !empty($fpp) && $fpp->bundle === 'node') {
+    $node_id = $fpp->field_node[LANGUAGE_NONE][0]['target_id'];
+    $node = node_load($node_id);
+    return node_access('view', $node);
+  }
+}
