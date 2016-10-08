@@ -18,6 +18,7 @@ Drupal.behaviors.peceSlider = {
   attach: function (context, settings) {
     $.each(settings.peceSlider || {}, function (selector, config) {
       $(selector, context)
+        .filter(':not(.slick-initialized)')
         .slick($.extend(true, {}, defaults, config))
         .on('setPosition', sameHeight);
     });
