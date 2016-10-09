@@ -43,6 +43,15 @@ function pece_panels_panelizer_reset_access_callback($node) {
 }
 
 /**
+ * Implements hook_ctools_plugin_pre_alter().
+ */
+function pece_panels_ctools_plugin_pre_alter(&$plugin, &$info) {
+  if ($info['module'] === 'panels' && $info['type'] === 'layouts' && $plugin['name'] === 'packery_layout') {
+    $plugin['category'] = t('PECE');
+  }
+}
+
+/**
  * Implements hook_panels_ipe_access().
  *
  * Control access to IPE when using panelizer.
