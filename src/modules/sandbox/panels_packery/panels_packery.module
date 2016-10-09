@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Code for the Panels Packery.
+ */
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function panels_packery_ctools_plugin_directory($module, $plugin) {
+  if ($module === 'panels' && $plugin === 'layouts') {
+    return 'plugins/' . $module . '/' . $plugin;
+  }
+}
+
+/**
+ * Implements hook_libraries_info().
+ */
+function panels_packery_libraries_info() {
+  $libraries = array();
+
+  $libraries['packery'] = array(
+    'name' => 'Packery',
+    'vendor url' => 'http://packery.metafizzy.co/',
+    'download url' => 'https://github.com/metafizzy/packery/archive/v2.1.1.tar.gz',
+    'version callback' => 'panels_packery_libraries_version_callback',
+    'files' => array('js' => array('dist/packery.pkgd.js')),
+  );
+
+  $libraries['draggabilly'] = array(
+    'name' => 'Draggabilly',
+    'vendor url' => 'http://draggabilly.desandro.com/',
+    'download url' => 'https://github.com/desandro/draggabilly/archive/v2.1.1.tar.gz',
+    'version callback' => 'panels_packery_libraries_version_callback',
+    'files' => array('js' => array('dist/draggabilly.pkgd.js')),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Short-circuit the version argument. It is irrelevant,
+ * as we download our library using make.
+ */
+function panels_packery_libraries_version_callback() {
+  return TRUE;
+}
