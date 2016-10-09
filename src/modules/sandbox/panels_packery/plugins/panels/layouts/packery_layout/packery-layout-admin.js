@@ -5,7 +5,7 @@
 
 (function (window, document, $, undefined) {
 
-Drupal.behaviors.panelsPackery = {
+Drupal.behaviors.panelsPackeryAdmin = {
   attach: function (context, settings) {
     $.each(settings.packery || {}, function (selector, config) {
       // Disable IPE dragging.
@@ -22,7 +22,7 @@ Drupal.behaviors.panelsPackery = {
         })
       }
 
-      // Refresh often to avoid broken layouts..
+      // Refresh often to avoid broken layouts.
       setTimeout(function () {
         $containers.packery();
       }, 100)

@@ -5,7 +5,7 @@
 
 (function (window, document, $, undefined) {
 
-Drupal.behaviors.panelsPackeryAdmin = {
+Drupal.behaviors.panelsPackery = {
   attach: function (context, settings) {
     $.each(settings.packery || {}, function (selector, config) {
       $(selector, context).each(initializePackery(config));
@@ -27,20 +27,6 @@ function initializePackery(config) {
       percentPosition: true
     })
   };
-}
-
-
-/*
- * Helpers
- * -------
- */
-
-function elementWith(element) {
-  return $(element).width()
-}
-
-function min(a, b) {
-  return Math.min(a, b)
 }
 
 })(window, document, jQuery);
