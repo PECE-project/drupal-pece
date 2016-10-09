@@ -1,0 +1,99 @@
+
+.packery-layout .panels-ipe-portlet-wrapper,
+.panels-ipe-editing .packery-layout  div.panels-ipe-portlet-wrapper {
+  width: calc(100% / 3);
+  margin: 0;
+  border: 0;
+}
+
+.panels-ipe-editing .packery-layout div.panels-ipe-handlebar-wrapper {
+  border: 0;
+}
+
+.panels-ipe-editing .packery-layout  div.panels-ipe-portlet-wrapper {
+  cursor: move;
+  cursor: -webkit-grab;
+}
+
+.panels-ipe-editing .packery-layout  div.panels-ipe-portlet-wrapper.is-dragging {
+  cursor: move;
+}
+
+.panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper::after {
+  content: "";
+  display: block;
+  background: rgba(0, 0, 0, 0.5	);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 250ms;
+}
+
+.panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper:hover::after {
+  opacity: 1;
+  z-index: 200;
+}
+
+.panels-ipe-editing .packery-layout .panels-ipe-portlet-content {
+  margin: 0;
+}
+
+.panels-ipe-editing .packery-layout .panels-ipe-placeholder {
+  margin-bottom: 1em;
+}
+
+.panels-ipe-editing .packery-layout div.panels-ipe-draghandle span.panels-ipe-draghandle-icon {
+  display: none;
+}
+
+.panels-ipe-editing .packery-layout div.panels-ipe-draghandle {
+  background: transparent;
+  padding: 0;
+  position: absolute;
+  left: 50%;
+  width: 300px;
+  transform: translateX(-50%);
+  z-index: 300;
+  top: 0;
+  opacity: 0;
+  transition: 250ms;
+  color: white;
+}
+
+.panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper:hover div.panels-ipe-draghandle {
+  opacity: 1;
+  top: 5px;
+}
+
+.panels-ipe-editing .packery-layout div.panels-ipe-draghandle .panels-ipe-linkbar,
+.panels-ipe-editing .packery-layout div.panels-ipe-draghandle .panels-ipe-dragbar-admin-title {
+  float: none;
+  text-align: center;
+  display: block;
+  margin-top: 0.5em;
+}
+
+.panels-ipe-editing .packery-layout div.panels-ipe-draghandle .panels-ipe-linkbar li {
+  display: inline-block;
+  float: none;
+  margin: 0 5px;
+}
+
+.packery-layout .panels-ipe-portlet-wrapper .panel-pane {
+  width: auto;
+}
+
+.packery-layout .panels-ipe-portlet-wrapper.is-dragging,
+.packery-layout .panels-ipe-portlet-wrapper.is-positioning-post-drag {
+  opacity: 0.75;
+  z-index: 1000;
+}
+
+.packery-layout .packery-drop-placeholder {
+  outline: 3px dashed #444;
+  outline-offset: -6px;
+  transition: transform 0.2s;
+}
