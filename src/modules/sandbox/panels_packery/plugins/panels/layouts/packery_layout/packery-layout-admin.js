@@ -27,8 +27,6 @@ Drupal.behaviors.panelsPackeryAdmin = {
   }
 };
 
-$(document).on('ajaxSuccess', handleAjaxSuccess);
-
 /**
  * Packery initializer factory.
  */
@@ -113,6 +111,7 @@ function attachItemBehaviors($container) {
   }
 }
 
+
 // Custom Packery.prototype methods.
 // ---------------------------------
 
@@ -134,6 +133,12 @@ Packery.prototype.getItemsInfo = function () {
   }, {});
 };
 
+
+// AJAX listeners.
+// ---------------
+
+$(document).on('ajaxSuccess', handleAjaxSuccess);
+
 /**
  * Listen to any ajax completition to update layout when needed.
  */
@@ -141,31 +146,75 @@ function handleAjaxSuccess(e, res, req, commands) {
   // Do not handle non-Drupal ajax request.
   if (!res.responseText || res.responseText.indexOf('[{"command"') !== 0) return;
 
-  var isAddingPane = commands.map(commandName).indexOf('insertNewPane') !== -1;
+  var operations = {
+    'edit': req.url.match(/^\/panels\/ajax\/ipe\/edit-pane/),
+    'add': req.url.match(/^\/panels\/ajax\/ipe\/add-pane/)
+  };
 
-  // Do not handle non pane adding ajax requests.
-  if (!isAddingPane) return;
+  var operation = Object.keys(operations).filter(function (type) {
+    return operations[type];
+  })[0];
 
-  commands.forEach(function (command) {
-    if (command.command === 'changed') {
-      // Refresh packery layout.
-      var $container = $(command.selector).find('.panels-ipe-sort-container');
-      var instance = $container.data('packery');
-      var $packeryItems = $($container.packery('getItemElements'));
-      var $allItems = $container.find(instance.options.itemSelector);
+  var ajaxListener = ajaxListeners[operation];
 
-      var $newItems = $allItems.filter(function () {
-        return !$packeryItems.filter(this).length
-      });
+  // Find if any operation was found.
+  if (ajaxListener) {
+    var ipeWrapperSelector = commands.reduce(function (prev, command) {
+      return prev || (command.command === 'changed' ? command.selector : null);
+    }, null);
 
-      $container.packery('prepended', $newItems);
-      $newItems.each(attachItemBehaviors($container));
+    if (ipeWrapperSelector) {
+      var $container = $(ipeWrapperSelector).find('.panels-ipe-sort-container');
+      var configSelector = Object.keys(Drupal.settings.packery || {}).filter(function (selector) {
+        return $container.is(selector)
+      })[0];
+      var config = Drupal.settings.packery && Drupal.settings.packery[configSelector]
+
+      // Safe exit.
+      if ($container.length === 0 || !config) return;
+
+      ajaxListener($container, config, commands);
     }
-  });
+  }
 }
 
-function commandName(command) {
-  return command.command
+var ajaxListeners = {
+  'edit': function ($container, config, commands) {
+    var instance = $container.data('packery');
+    var itemSelector = commands.reduce(function (prev, command) {
+      return prev || (command.command === 'insert' && command.method === 'replaceWith' ? command.selector : null);
+    }, null)
+
+    var item = instance.items.find(function (item) {
+      return jQuery(item.element).is(itemSelector)
+    });
+
+    var replacement = $container.find(itemSelector).get(0)
+
+    // Safe exit.
+    if (!item || !replacement) return false;
+
+    var classes = $(item.element).attr('class');
+
+    item.element = replacement;
+    item.moveTo(item.rect.x, item.rect.y)
+
+    $(item.element)
+      .addClass(classes)
+      .each(attachItemBehaviors($container));
+  },
+  'add': function ($container) {
+    var instance = $container.data('packery');
+
+    var $packeryItems = $($container.packery('getItemElements'));
+    var $allItems = $container.find(instance.options.itemSelector);
+    var $newItems = $allItems.filter(function () {
+      return !$packeryItems.filter(this).length
+    });
+
+    $container.packery('prepended', $newItems);
+    $newItems.each(attachItemBehaviors($container));
+  }
 }
 
 })(window, document, jQuery);
