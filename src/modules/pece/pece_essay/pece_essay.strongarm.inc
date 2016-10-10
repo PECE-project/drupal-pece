@@ -194,7 +194,6 @@ function pece_essay_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'panelizer_node:pece_essay_allowed_types';
   $strongarm->value = array(
-    'entity_field_extra-fieldable_panels_pane:title' => TRUE,
     'entity_view-node' => TRUE,
     'fieldable_panels_pane-quick_links' => TRUE,
     'fieldable_panels_pane-image' => TRUE,
