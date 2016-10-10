@@ -24,7 +24,7 @@ Drupal.behaviors.panelsPackeryAdmin = {
 
       // Refresh often to avoid broken layouts.
       setTimeout(function () {
-        $containers.packery();
+        $containers.packery('shiftLayout');
       }, 100)
     });
   }
