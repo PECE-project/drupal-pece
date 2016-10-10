@@ -1,8 +1,26 @@
 .packery-layout .panels-ipe-portlet-wrapper,
 .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper {
-  width: 380px;
   margin: 0;
+  padding: 0;
   border: 0;
+}
+
+/**
+ * Hack to make Bootstrap columns work here.
+ */
+@media (min-width: 992px) {
+  .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.col-md-12 { width: 100%; }
+  .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.col-md-11 { width: 91.66666667%; }
+  .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.col-md-10 { width: 83.33333333%; }
+  .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.col-md-9 { width: 75%; }
+  .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.col-md-8 { width: 66.66666667%; }
+  .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.col-md-7 { width: 58.33333333%; }
+  .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.col-md-6 { width: 50%; }
+  .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.col-md-5 { width: 41.66666667%; }
+  .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.col-md-4 { width: 33.33333333%; }
+  .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.col-md-3 { width: 25%; }
+  .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.col-md-2 { width: 16.66666667%; }
+  .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.col-md-1 { width: 8.33333333%; }
 }
 
 .panels-ipe-editing .packery-layout div.panels-ipe-handlebar-wrapper {
@@ -12,16 +30,6 @@
 
 .panels-ipe-editing .packery-layout .panels-ipe-region {
   border: none;
-}
-
-.packery-layout .panels-ipe-portlet-wrapper.size-2,
-.panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.size-2 {
-  width: 760px;
-}
-
-.packery-layout .panels-ipe-portlet-wrapper.size-3,
-.panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.size-3 {
-  width: 1140px;
 }
 
 .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper.is-dragging {

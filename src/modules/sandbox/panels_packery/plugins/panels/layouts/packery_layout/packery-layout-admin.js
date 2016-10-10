@@ -13,6 +13,7 @@ Drupal.behaviors.panelsPackeryAdmin = {
 
       var $ipeContainer = $(config.IPEContainer, context);
       var $containers = $(selector, context);
+      var $items = $containers.find(config.itemSelector);
       var isEditing = $ipeContainer.hasClass('panels-ipe-editing');
 
       if (isEditing) {
