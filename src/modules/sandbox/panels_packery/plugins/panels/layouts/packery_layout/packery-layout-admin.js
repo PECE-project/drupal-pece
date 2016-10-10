@@ -34,20 +34,29 @@ Drupal.behaviors.panelsPackeryAdmin = {
  * Packery initializer factory.
  */
 function initializePackeryAdmin(config) {
+  var ipe = Drupal.PanelsIPE.editors[config.IPECacheKeys];
+
   return function () {
     var $container = $(this);
     var $items = $container.find(config.itemSelector);
+    var $form = $('#panels-ipe-edit-control-form');
 
-    $items.each(function(i, item ) {
+    $items.each(function (i, item) {
       $container.packery('bindDraggabillyEvents', new Draggabilly(item));
     });
 
-    $container.on('dragItemPositioned', reorder);
+    if (!$form.find('[name="packery_positions"]').length) {
+      $form.append('<input type="hidden" name="packery_positions" value="{}" />')
+    }
+
+    $container
+      .on('dragItemPositioned', reorder)
+      .on('dragItemPositioned', savePosition(ipe));
   };
 }
 
 /**
- * After reordering, make sure to reflect order in the DOM.
+ * After dragging, make sure to reflect order in the DOM.
  */
 function reorder() {
   var $container = $(this)
@@ -55,5 +64,33 @@ function reorder() {
     $container.append(item)
   });
 }
+
+/**
+ * After dragging, save position of each item.
+ */
+function savePosition(ipe) {
+  return function () {
+    $('[name="packery_positions"]').val(JSON.stringify($(this).packery('getShiftPositions')))
+  };
+}
+
+
+// Custom Packery.prototype methods.
+// ---------------------------------
+
+/**
+ * Get JSON positioning data from items.
+ */
+Packery.prototype.getShiftPositions = function () {
+  var instance = this
+
+  return this.items.reduce(function (result, item) {
+    var uuid = $(item.element).find('[data-pane-uuid]').data('pane-uuid') || null;
+
+    return $.extend(result, uuid ? {
+      [uuid]: item.position.x / instance.columnWidth
+    } : {});
+  }, {});
+};
 
 })(window, document, jQuery);

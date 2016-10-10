@@ -46,3 +46,28 @@ function panels_packery_libraries_info() {
 function panels_packery_libraries_version_callback() {
   return TRUE;
 }
+
+/**
+ * Implements template_preprocess_panels_pane().
+ */
+function panels_packery_preprocess_panels_pane(&$variables) {
+  $pane = $variables['pane'];
+  $display = $variables['display'];
+  $layout = $display->layout;
+
+  if ($layout === 'packery_layout') {
+    $variables['attributes_array']['data-pane-uuid'] = array($pane->uuid);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function panels_packery_form_panels_ipe_edit_control_form_alter(&$form, &$form_state) {
+  $display = $form_state['display'];
+  $input = $form_state['input'];
+
+  if (!empty($input['packery_positions'])) {
+    $display->layout_settings['packery_positions'] = $input['packery_positions'];
+  }
+}

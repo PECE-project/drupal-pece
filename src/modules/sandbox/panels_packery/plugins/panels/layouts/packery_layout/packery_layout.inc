@@ -31,6 +31,13 @@ function template_preprocess_packery_layout(&$variables, $theme) {
   $variables['attributes_array']['class'][] = 'panel-display';
   $variables['attributes_array']['class'] = array_merge($variables['attributes_array']['class'], $variables['classes_array']);
 
+  // Save exit. Usually, in situations such as first entering the layout there is no
+  // benefit on having this functionallity working and errors happen for the display
+  // not having an uuid nor a css_id set.
+  if (empty($css_id)) {
+    return;
+  }
+
 
   // Packery.
   // --------
@@ -66,6 +73,7 @@ function template_preprocess_packery_layout(&$variables, $theme) {
 
   // Initiate settings array.
   $settings['itemSelector'] = $item_selector;
+  $settings['positions'] = !empty($display->layout_settings['packery_positions']) ? json_decode($display->layout_settings['packery_positions']) : NULL;
   $settingsArray['packery'][$container_selector] = $settings;
   drupal_add_js($settingsArray, 'setting');
 }
