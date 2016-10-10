@@ -100,3 +100,12 @@ function pece_core_field_widget_form_alter(&$element, &$form_state, $context) {
     $element['#access'] = FALSE;
   }
 }
+
+/**
+ * Implements hook_er_viewmode_get_view_modes_alter().
+ *
+ * Avoid using full view mode on references entities.
+ */
+function pece_core_er_viewmode_get_view_modes_alter(&$view_modes, $field, $instance) {
+  unset($view_modes['full']);
+}
