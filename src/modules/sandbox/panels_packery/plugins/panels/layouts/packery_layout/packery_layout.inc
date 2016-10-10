@@ -60,6 +60,7 @@ function template_preprocess_packery_layout(&$variables, $theme) {
     $item_selector = '.panels-ipe-portlet-wrapper';
 
     libraries_load('draggabilly');
+    drupal_add_library('system', 'ui.resizable');
     drupal_add_js($path . '/packery-layout-admin.js');
     drupal_add_css($path . '/packery-layout-admin.css');
 
@@ -73,7 +74,7 @@ function template_preprocess_packery_layout(&$variables, $theme) {
 
   // Initiate settings array.
   $settings['itemSelector'] = $item_selector;
-  $settings['positions'] = !empty($display->layout_settings['packery_positions']) ? json_decode($display->layout_settings['packery_positions']) : NULL;
+  $settings['items'] = !empty($display->layout_settings['packery_items']) ? json_decode($display->layout_settings['packery_items']) : NULL;
   $settingsArray['packery'][$container_selector] = $settings;
   drupal_add_js($settingsArray, 'setting');
 }

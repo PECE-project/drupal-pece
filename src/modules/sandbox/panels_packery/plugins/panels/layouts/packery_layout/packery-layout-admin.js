@@ -17,9 +17,6 @@ Drupal.behaviors.panelsPackeryAdmin = {
 
       if (isEditing) {
         $containers.each(initializePackeryAdmin(config));
-        $containers.find('.panels-ipe-handlebar-wrapper .panels-ipe-linkbar a').on('mousedown', function (e) {
-          e.stopPropagation();
-        })
       }
 
       // Refresh often to avoid broken layouts.
@@ -38,20 +35,32 @@ function initializePackeryAdmin(config) {
 
   return function () {
     var $container = $(this);
-    var $items = $container.find(config.itemSelector);
+    var instance = $container.data('packery');
+    var $items = $($container.packery('getItemElements'));
     var $form = $('#panels-ipe-edit-control-form');
 
+    // Attach draggable events.
     $items.each(function (i, item) {
-      $container.packery('bindDraggabillyEvents', new Draggabilly(item));
+      $container.packery('bindDraggabillyEvents', new Draggabilly(item, {
+        handle: '.panel-pane'
+      }));
     });
 
-    if (!$form.find('[name="packery_positions"]').length) {
-      $form.append('<input type="hidden" name="packery_positions" value="{}" />')
-    }
+    $items.resizable({
+      containment: 'parent',
+      grid: instance.columnWidth,
+      handles: 'e,w',
+      resize: function(event, ui) {
+        $container.packery('fit', event.target, ui.position.left, ui.position.top);
+      },
+      stop: function(event, ui) {
+        $container.packery('shiftLayout');
+      }
+    });
 
     $container
-      .on('dragItemPositioned', reorder)
-      .on('dragItemPositioned', savePosition(ipe));
+      .on('dragItemPositioned resizestop', reorder)
+      .on('dragItemPositioned resizestop', save(ipe));
   };
 }
 
@@ -66,11 +75,20 @@ function reorder() {
 }
 
 /**
- * After dragging, save position of each item.
+ * After modiying, save position and size of each item.
+ *
+ * @TODO: find 'name' inside ipe instance form.
  */
-function savePosition(ipe) {
+function save(ipe) {
+  var $form = ipe.container.find('form');
+  var $input = $form.find('[name="packery_items"]');
+
+  if (!$input.length) {
+    var $input = $('<input type="hidden" name="packery_items" value="{}" />').appendTo($form);
+  }
+
   return function () {
-    $('[name="packery_positions"]').val(JSON.stringify($(this).packery('getShiftPositions')))
+    $input.val(JSON.stringify($(this).packery('getItemsInfo')))
   };
 }
 
@@ -81,14 +99,17 @@ function savePosition(ipe) {
 /**
  * Get JSON positioning data from items.
  */
-Packery.prototype.getShiftPositions = function () {
+Packery.prototype.getItemsInfo = function () {
   var instance = this
 
   return this.items.reduce(function (result, item) {
     var uuid = $(item.element).find('[data-pane-uuid]').data('pane-uuid') || null;
 
     return $.extend(result, uuid ? {
-      [uuid]: item.position.x / instance.columnWidth
+      [uuid]: {
+        position: Math.round(item.position.x / instance.columnWidth),
+        size: Math.round(item.rect.width / instance.columnWidth)
+      }
     } : {});
   }, {});
 };

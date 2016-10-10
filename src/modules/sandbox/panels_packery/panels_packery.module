@@ -67,7 +67,7 @@ function panels_packery_form_panels_ipe_edit_control_form_alter(&$form, &$form_s
   $display = $form_state['display'];
   $input = $form_state['input'];
 
-  if (!empty($input['packery_positions'])) {
-    $display->layout_settings['packery_positions'] = $input['packery_positions'];
+  if (!empty($input['packery_items'])) {
+    $display->layout_settings['packery_items'] = $input['packery_items'];
   }
 }

@@ -21,15 +21,19 @@ function initializePackery(config) {
     var $container = $(this);
     var $items = $container.find(config.itemSelector)
 
+    var columnWidth = $items.toArray().reduce(function (prev, item) {
+      return Math.min(prev, $(item).outerWidth());
+    }, Infinity)
+
     if (!$container.data('packery')) {
       $container.packery({
         itemSelector: config.itemSelector,
-        columnWidth: config.itemSelector,
-        initLayout: !config.positions
+        columnWidth: columnWidth,
+        initLayout: !config.items
       });
 
-      if (config.positions) {
-        $container.packery('applySavedLayout', config.positions);
+      if (config.items) {
+        $container.packery('applySavedLayout', config.items);
       }
     }
   };
@@ -39,7 +43,7 @@ function initializePackery(config) {
 // Custom Packery.prototype methods.
 // ---------------------------------
 
-Packery.prototype.applySavedLayout = function (positions, attr) {
+Packery.prototype.applySavedLayout = function (items, attr) {
   var instance = this;
   var $container = $(instance.element)
 
@@ -53,9 +57,12 @@ Packery.prototype.applySavedLayout = function (positions, attr) {
       .attr('data-pane-uuid');
 
     // Safe guard.
-    if (!uuid || !positions[uuid]) return item;
+    if (!uuid || !items[uuid]) return item;
 
-    item.rect.x = positions[uuid] * instance.columnWidth;
+    item.rect.x = items[uuid].position * instance.columnWidth;
+    item.rect.width = items[uuid].size * instance.columnWidth;
+
+    $element.addClass('size-' + items[uuid].size)
 
     return item;
   });

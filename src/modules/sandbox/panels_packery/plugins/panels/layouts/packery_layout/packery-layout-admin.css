@@ -5,8 +5,19 @@
   border: 0;
 }
 
+.packery-layout .panels-ipe-portlet-wrapper.size-2,
+.panels-ipe-editing .packery-layout  div.panels-ipe-portlet-wrapper.size-2 {
+  width: 760px;
+}
+
+.packery-layout .panels-ipe-portlet-wrapper.size-3,
+.panels-ipe-editing .packery-layout  div.panels-ipe-portlet-wrapper.size-3 {
+  width: 1140px;
+}
+
 .panels-ipe-editing .packery-layout div.panels-ipe-handlebar-wrapper {
   border: 0;
+  pointer-events: none;
 }
 
 .panels-ipe-editing .packery-layout  div.panels-ipe-portlet-wrapper {
@@ -18,20 +29,24 @@
   cursor: move;
 }
 
-.panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper::after {
+.panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper .panel-pane {
+  position: relative;
+}
+
+.panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper .panel-pane::after {
   content: "";
   display: block;
-  background: rgba(0, 0, 0, 0.5	);
+  background: rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 10px;
+  right: 10px;
   bottom: 0;
   opacity: 0;
   transition: opacity 250ms;
 }
 
-.panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper:hover::after {
+.panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper:hover .panel-pane::after {
   opacity: 1;
   z-index: 200;
 }
@@ -64,7 +79,7 @@
 
 .panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper:hover div.panels-ipe-draghandle {
   opacity: 1;
-  top: 5px;
+  top: -5px;
 }
 
 .panels-ipe-editing .packery-layout div.panels-ipe-draghandle .panels-ipe-linkbar,
@@ -81,6 +96,10 @@
   margin: 0 5px;
 }
 
+.panels-ipe-editing .packery-layout div.panels-ipe-draghandle .panels-ipe-linkbar li a {
+  pointer-events: all;
+}
+
 .packery-layout .panels-ipe-portlet-wrapper .panel-pane {
   width: auto;
 }
@@ -95,4 +114,30 @@
   outline: 3px dashed #444;
   outline-offset: -6px;
   transition: transform 0.2s;
+}
+
+.panels-ipe-editing .packery-layout .ui-resizable-handle {
+  top: 25%;
+  width: 14px;
+  height: 14px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid #727272;
+  z-index: 1000 !important;
+  opacity: 0;
+}
+
+.panels-ipe-editing .packery-layout .ui-resizable-e {
+  right: 15px;
+}
+
+.panels-ipe-editing .packery-layout .ui-resizable-w {
+  left: 15px;
+}
+
+.panels-ipe-editing .packery-layout div.panels-ipe-portlet-wrapper:hover .ui-resizable-handle {
+  opacity: 1;
+}
+
+.panels-ipe-editing .packery-layout .ui-resizable-handle:hover {
+  background-color: white;
 }
