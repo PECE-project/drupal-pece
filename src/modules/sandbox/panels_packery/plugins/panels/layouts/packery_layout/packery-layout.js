@@ -46,6 +46,9 @@ function initializePackery(config) {
 // Custom Packery.prototype methods.
 // ---------------------------------
 
+/**
+ * Custom Packery method to apply saved layout.
+ */
 Packery.prototype.applySavedLayout = function (items) {
   var instance = this;
   var $container = $(instance.element);
