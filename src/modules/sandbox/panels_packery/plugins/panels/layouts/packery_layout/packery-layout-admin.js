@@ -214,6 +214,7 @@ var ajaxListeners = {
       return !$packeryItems.filter(this).length
     });
 
+    $newItems.addClass('col-md-4');
     $container.packery('prepended', $newItems);
     $newItems.each(attachItemBehaviors($container));
   }

@@ -128,3 +128,26 @@ function pece_panels_fieldable_panels_panes_access($op, $fpp = NULL, $account = 
     return node_access('view', $node);
   }
 }
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Hide "advanced" pane options from related forms.
+ */
+function pece_panels_form_alter(&$form, &$form_state, $form_id) {
+  if (!user_access('administer advanced pane settings')) {
+    switch ($form_id) {
+      case 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form':
+        $form['view_mode']['#access'] = FALSE;
+        $form['language']['#access'] = FALSE;
+        $form['admin']['#access'] = FALSE;
+        $form['reusable']['#access'] = FALSE;
+        $form['revision']['#access'] = FALSE;
+
+        if ($form_state['subtype_name'] === 'node') {
+          $form['widget_settings']['#access'] = FALSE;
+        }
+        break;
+    }
+  }
+}
