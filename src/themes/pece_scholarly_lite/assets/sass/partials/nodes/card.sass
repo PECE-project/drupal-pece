@@ -1,0 +1,29 @@
+/*
+ *------------------------------------------------------------------------------
+ * PECE Card node styles
+ *------------------------------------------------------------------------------
+ */
+
+.view-mode-card
+  .icon.image::before
+    display: none
+
+  .field-name-field-pece-media-image img
+    margin: 0
+    width: 100%
+    max-width: 100%
+
+  .icon
+    display: block
+    height: 120px
+    line-height: 120px
+    position: relative
+    background-color: $color-primary
+    vertical-align: middle
+    text-decoration: none
+
+    &:before
+      font-size: $font-size-h2
+
+  a.icon:hover
+    opacity: 0.8
