@@ -202,6 +202,8 @@ var ajaxListeners = {
     $(item.element)
       .addClass(classes)
       .each(attachItemBehaviors($container));
+
+    $container.packery('shiftLayout');
   },
   'add': function ($container) {
     var instance = $container.data('packery');
