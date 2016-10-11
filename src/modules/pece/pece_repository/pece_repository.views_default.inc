@@ -417,6 +417,7 @@ function pece_repository_views_default_views() {
     'pece_artifact_website' => 'pece_artifact_website',
     'pece_group' => 'pece_group',
     'pece_memo' => 'pece_memo',
+    'pece_essay' => 'pece_essay',
     'pece_photo_essay' => 'pece_photo_essay',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
@@ -459,6 +460,7 @@ function pece_repository_views_default_views() {
     'pece_artifact_website' => 'pece_artifact_website',
     'pece_group' => 'pece_group',
     'pece_memo' => 'pece_memo',
+    'pece_essay' => 'pece_essay',
     'pece_photo_essay' => 'pece_photo_essay',
   );
   $handler->display->display_options['filters']['type_1']['group'] = 1;
