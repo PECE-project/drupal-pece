@@ -79,6 +79,15 @@
  *
  * @ingroup themeable
  */
+
+  hide($content['comments']);
+  hide($content['links']);
+
+  if (isset($content['field_pece_media_image'])) hide($content['field_pece_media_image']);
+  if (isset($content['field_basic_image_image'])) hide($content['field_basic_image_image']);
+  if (isset($content['field_thumbnail'])) hide($content['field_thumbnail']);
+
+  $rendered_content = render($content);
 ?>
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
   <?php print render($title_prefix); ?>
@@ -99,25 +108,15 @@
     <div class="image" >
       <?php print render($content['field_thumbnail']); ?>
     </div>
-  <?php else: ?>
+  <?php elseif (empty($rendered_content)): ?>
     <a href="<?php print $node_url; ?>" class="icon">
       <?php // @info: icons are defined by sass. ?>
     </a>
   <?php endif ?>
 
-  <?php
-    // We hide the comments and links now so that we can render them later.
-    hide($content['comments']);
-    hide($content['links']);
-    hide($content['field_pece_media_image']);
-    hide($content['field_basic_image_image']);
-    hide($content['field_thumbnail']);
-    $rendered = render($content);
-  ?>
-
-  <?php if (!empty($rendered)): ?>
+  <?php if (!empty($rendered_content)): ?>
     <div class="content"<?php print $content_attributes; ?>>
-      <?php print $rendered; ?>
+      <?php print $rendered_content; ?>
     </div>
   <?php endif; ?>
 </div>
