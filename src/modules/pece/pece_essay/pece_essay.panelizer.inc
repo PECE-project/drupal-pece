@@ -79,6 +79,29 @@ function pece_essay_panelizer_defaults() {
   $display->content['new-585b6ced-0f96-4825-b9d6-f5b7191a3ce8'] = $pane;
   $display->panels['contentmain'][0] = 'new-585b6ced-0f96-4825-b9d6-f5b7191a3ce8';
   $pane = new stdClass();
+  $pane->pid = 'new-976d8cc1-771c-4ae2-9718-10c04ca0070b';
+  $pane->panel = 'contentmain';
+  $pane->type = 'view_essay_link';
+  $pane->subtype = 'view_essay_link';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'destination' => 'essay',
+    'context' => 'panelizer',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array();
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 1;
+  $pane->locks = array();
+  $pane->uuid = '976d8cc1-771c-4ae2-9718-10c04ca0070b';
+  $display->content['new-976d8cc1-771c-4ae2-9718-10c04ca0070b'] = $pane;
+  $display->panels['contentmain'][1] = 'new-976d8cc1-771c-4ae2-9718-10c04ca0070b';
+  $pane = new stdClass();
   $pane->pid = 'new-6c085e0a-1161-4d4b-b59c-2660d94154ec';
   $pane->panel = 'contentmain';
   $pane->type = 'entity_field';
@@ -103,11 +126,11 @@ function pece_essay_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 1;
+  $pane->position = 2;
   $pane->locks = array();
   $pane->uuid = '6c085e0a-1161-4d4b-b59c-2660d94154ec';
   $display->content['new-6c085e0a-1161-4d4b-b59c-2660d94154ec'] = $pane;
-  $display->panels['contentmain'][1] = 'new-6c085e0a-1161-4d4b-b59c-2660d94154ec';
+  $display->panels['contentmain'][2] = 'new-6c085e0a-1161-4d4b-b59c-2660d94154ec';
   $pane = new stdClass();
   $pane->pid = 'new-22a8c00a-9a3b-459e-ba15-ea7a1882f925';
   $pane->panel = 'contentmain';
@@ -130,11 +153,11 @@ function pece_essay_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 2;
+  $pane->position = 3;
   $pane->locks = array();
   $pane->uuid = '22a8c00a-9a3b-459e-ba15-ea7a1882f925';
   $display->content['new-22a8c00a-9a3b-459e-ba15-ea7a1882f925'] = $pane;
-  $display->panels['contentmain'][2] = 'new-22a8c00a-9a3b-459e-ba15-ea7a1882f925';
+  $display->panels['contentmain'][3] = 'new-22a8c00a-9a3b-459e-ba15-ea7a1882f925';
   $pane = new stdClass();
   $pane->pid = 'new-beb09bec-1d62-4b84-878b-848a2aa652ac';
   $pane->panel = 'contentmain';
@@ -156,11 +179,11 @@ function pece_essay_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 3;
+  $pane->position = 4;
   $pane->locks = array();
   $pane->uuid = 'beb09bec-1d62-4b84-878b-848a2aa652ac';
   $display->content['new-beb09bec-1d62-4b84-878b-848a2aa652ac'] = $pane;
-  $display->panels['contentmain'][3] = 'new-beb09bec-1d62-4b84-878b-848a2aa652ac';
+  $display->panels['contentmain'][4] = 'new-beb09bec-1d62-4b84-878b-848a2aa652ac';
   $pane = new stdClass();
   $pane->pid = 'new-a39510d0-0fc1-4725-a5fd-66e1a154a26e';
   $pane->panel = 'sidebar';
@@ -335,8 +358,10 @@ function pece_essay_panelizer_defaults() {
   $panelizer->contexts = array();
   $panelizer->relationships = array();
   $display = new panels_display();
-  $display->layout = 'flexible';
-  $display->layout_settings = array();
+  $display->layout = 'packery_layout';
+  $display->layout_settings = array(
+    'packery_items' => '{}',
+  );
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
@@ -346,10 +371,30 @@ function pece_essay_panelizer_defaults() {
   $display->cache = array();
   $display->title = '%node:title';
   $display->uuid = '43a93860-56bc-43a3-9e34-5642b109ac81';
-  $display->storage_type = 'panelizer_default';
+  $display->storage_type = 'panelizer_entity';
   $display->storage_id = 'node:pece_essay:default:free_panel';
   $display->content = array();
   $display->panels = array();
+  $pane = new stdClass();
+  $pane->pid = 'new-49eecf50-cd5c-4c35-9fb5-3bacdc1c1e4b';
+  $pane->panel = 'contentmain';
+  $pane->type = 'view_essay_link';
+  $pane->subtype = 'view_essay_link';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'destination' => 'node',
+    'context' => 'panelizer',
+  );
+  $pane->cache = array();
+  $pane->style = array();
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 0;
+  $pane->locks = array();
+  $pane->uuid = '49eecf50-cd5c-4c35-9fb5-3bacdc1c1e4b';
+  $display->content['new-49eecf50-cd5c-4c35-9fb5-3bacdc1c1e4b'] = $pane;
+  $display->panels['contentmain'][0] = 'new-49eecf50-cd5c-4c35-9fb5-3bacdc1c1e4b';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $panelizer->display = $display;

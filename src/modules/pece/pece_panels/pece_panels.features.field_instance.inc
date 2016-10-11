@@ -34,7 +34,7 @@ function pece_panels_field_default_field_instances() {
     'entityconnect_unload_edit' => 1,
     'fences_wrapper' => 'no_wrapper',
     'field_name' => 'field_node',
-    'label' => 'Conteúdo',
+    'label' => 'Content',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -54,7 +54,7 @@ function pece_panels_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Conteúdo');
+  t('Content');
   t('Select the content to show inside this block.');
 
   return $field_instances;
