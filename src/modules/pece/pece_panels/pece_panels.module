@@ -49,6 +49,26 @@ function pece_panels_ctools_plugin_pre_alter(&$plugin, &$info) {
   if ($info['module'] === 'panels' && $info['type'] === 'layouts' && $plugin['name'] === 'packery_layout') {
     $plugin['category'] = t('PECE');
   }
+
+  if ($info['module'] === 'panels' && $info['type'] === 'panels_storage' && $plugin['name'] === 'panelizer_entity') {
+    $plugin['access callback'] = 'pece_panels_panelizer_entity_panels_storage_access';
+  }
+}
+
+/**
+ * Implements custom access callback to panelizer entity panels_storage.
+ *
+ * Make sure users can override default panelizer for free_panel nodes. They cannot save
+ * an altered default, though.
+ */
+function pece_panels_panelizer_entity_panels_storage_access($storage_type, $storage_id, $op, $account) {
+  list ($entity_type, $entity_id, $panelizer_view_mode, $view_mode) = explode(':', $storage_id);
+
+  if ($op === 'update' && $panelizer_view_mode === 'default' && $view_mode === 'free_panel') {
+    return TRUE;
+  }
+
+  return panelizer_entity_panels_storage_access($storage_type, $storage_id, $op, $account);
 }
 
 /**
