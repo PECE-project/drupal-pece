@@ -1,8 +1,12 @@
 /*
  *------------------------------------------------------------------------------
- * Panels styles
+ * Essay link pane styles
  *------------------------------------------------------------------------------
  */
 
-@import annotate-link
-@import essay-link
+.essay-link
+  @extend %button-primary
+
+  .packery-layout &
+    display: block
+    width: 100%
