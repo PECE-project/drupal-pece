@@ -2,6 +2,7 @@
 
 $plugin = array(
   'single' => TRUE,
+  'top level' => TRUE,
   'title' => t('Essay link'),
   'description' => t('Configurable link to PECE Essay'),
   'render callback' => 'pece_essay_view_essay_link_pane_render',
