@@ -18,12 +18,13 @@ function pece_panels_field_default_field_instances() {
     'description' => 'Select the content to show inside this block.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
+        'label' => 'hidden',
+        'module' => 'er_viewmode',
         'settings' => array(
-          'link' => FALSE,
+          'links' => 0,
+          'view_mode' => 'default',
         ),
-        'type' => 'entityreference_label',
+        'type' => 'entityreference_entity_view',
         'weight' => 0,
       ),
     ),
