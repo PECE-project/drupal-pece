@@ -87,6 +87,7 @@ function pece_core_views_default_views() {
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
     'pece_memo' => 'pece_memo',
+    'pece_essay' => 'pece_essay',
     'pece_photo_essay' => 'pece_photo_essay',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
