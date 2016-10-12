@@ -53,7 +53,7 @@ function template_preprocess_packery_layout(&$variables, $theme) {
   // Packery admin.
   // --------------
 
-  $is_editing = !empty(class_parents($renderer)['panels_renderer_editor']);
+  $is_editing = !empty(class_parents($renderer)['panels_renderer_editor']) && $renderer->access;
 
   if ($is_editing) {
     $container_selector = "#$css_id .panels-ipe-sort-container";

@@ -36,5 +36,5 @@ function pece_essay_panelizer_ipe_access($display, $entity_type, $entity) {
     }
   }
 
-  return $entity->panelizer_view_mode === 'free_panel';
+  return $entity->panelizer_view_mode === 'free_panel' && entity_access('update', $entity_type, $entity);
 }
