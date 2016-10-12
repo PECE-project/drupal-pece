@@ -29,15 +29,14 @@
  */
 ?>
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-  <?php if (isset($content['field_thumbnail'])): ?>
-    <div class="icon image" >
-      <?php print render($content['field_thumbnail']); ?>
-    </div>
-  <?php else: ?>
     <div class="icon">
       <?php // @info: icons are defined by sass. ?>
+      <?php
+        if (isset($content['field_thumbnail'])) {
+          print render($content['field_thumbnail']);
+        }
+      ?>
     </div>
-  <?php endif ?>
 
   <?php print render($title_prefix); ?>
     <?php if (!$page): ?>
