@@ -98,6 +98,13 @@ function pece_essay_views_default_views() {
     'pece_sub_logic' => 'pece_sub_logic',
     'zotero_feed' => 'zotero_feed',
   );
+  /* Filter criterion: Content: Permissions (field_permissions) */
+  $handler->display->display_options['filters']['field_permissions_value']['id'] = 'field_permissions_value';
+  $handler->display->display_options['filters']['field_permissions_value']['table'] = 'field_data_field_permissions';
+  $handler->display->display_options['filters']['field_permissions_value']['field'] = 'field_permissions_value';
+  $handler->display->display_options['filters']['field_permissions_value']['value'] = array(
+    'open' => 'open',
+  );
 
   /* Display: Entity Reference */
   $handler = $view->new_display('entityreference', 'Entity Reference', 'entityreference_1');

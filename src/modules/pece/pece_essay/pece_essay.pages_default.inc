@@ -16,7 +16,10 @@ function pece_essay_default_page_manager_pages() {
   $page->admin_title = 'PECE Essay items';
   $page->admin_description = 'PECE Essay items page.';
   $page->path = 'node/%node/essay';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array(
     'node' => array(

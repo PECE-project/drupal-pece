@@ -216,12 +216,12 @@ function pece_essay_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'panelizer_node:pece_essay_default';
   $strongarm->value = array(
-    'entity_field' => 0,
-    'entity_field_extra' => 0,
-    'entity_form_field' => 0,
     'token' => 0,
-    'block' => 0,
+    'entity_field_extra' => 0,
+    'entity_field' => 0,
     'custom' => 0,
+    'block' => 0,
+    'entity_form_field' => 0,
     'entity_view' => 0,
     'fieldable_panels_pane' => 0,
     'menu_tree' => 0,
