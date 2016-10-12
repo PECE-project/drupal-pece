@@ -42,8 +42,8 @@ function initializePackeryAdmin(config) {
 
     $container
       .on('sortremove', refreshLayout)
-      .on('dragItemPositioned resizestop', reorder)
-      .on('dragItemPositioned resizestop', save(ipe));
+      .on('dragItemPositioned resizestop prepended', reorder)
+      .on('dragItemPositioned resizestop prepended', save(ipe));
   };
 }
 
@@ -215,7 +215,7 @@ var ajaxListeners = {
     });
 
     $newItems.addClass('col-md-4');
-    $container.packery('prepended', $newItems);
+    $container.packery('prepended', $newItems).trigger('prepended');
     $newItems.each(attachItemBehaviors($container));
   }
 }
