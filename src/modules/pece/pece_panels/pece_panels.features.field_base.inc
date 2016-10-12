@@ -25,7 +25,7 @@ function pece_panels_field_default_field_bases() {
     'locked' => 0,
     'module' => 'entityreference',
     'settings' => array(
-      'handler' => 'base',
+      'handler' => 'views',
       'handler_settings' => array(
         'behaviors' => array(
           'er_viewmode_behavior' => array(
@@ -49,12 +49,11 @@ function pece_panels_field_default_field_bases() {
             'status' => 0,
           ),
         ),
-        'sort' => array(
-          'direction' => 'ASC',
-          'property' => 'title',
-          'type' => 'property',
+        'view' => array(
+          'args' => array(),
+          'display_name' => 'entityreference_1',
+          'view_name' => 'pece_essay_nodes',
         ),
-        'target_bundles' => array(),
       ),
       'profile2_private' => FALSE,
       'target_type' => 'node',
