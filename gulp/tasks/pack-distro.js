@@ -3,7 +3,7 @@ var shell = require('shelljs');
 var fs = require('fs');
 
 var cwd = process.cwd();
-var repo = 'https://github.com/revagomes/pece-distro.git';
+var repo = 'https://github.com/PECE-project/pece-distro.git';
 var commitMessage = 'Added new release based on master of development repository.'
 
 gulp.task('pack-distro', function () {
