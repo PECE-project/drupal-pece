@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*------------------------------------------------------------------------------
  * Main Styles
  *------------------------------------------------------------------------------
@@ -39,7 +40,6 @@
   -ms-user-select: none;
   user-select: none; }
   .btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus {
-    outline: thin dotted;
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px; }
   .btn:hover, .btn:focus, .btn.focus {
@@ -369,7 +369,7 @@ input[type="button"].btn-block {
  * Box components
  *------------------------------------------------------------------------------
  */
-.field-name-group-group .field-item > a, .annotate-link, .field-name-group-group .field-item > span, .field-name-field-pece-photo-essay-items [data-remodal-target] {
+.field-name-group-group .field-item > a, .annotate-link, .essay-link, .field-name-group-group .field-item > span, .view-mode-card .button, .field-name-field-pece-photo-essay-items [data-remodal-target] {
   display: inline-block;
   margin: 10px 0;
   padding: 15px 23px;
@@ -380,7 +380,7 @@ input[type="button"].btn-block {
   text-transform: uppercase;
   text-decoration: none;
   text-align: center; }
-  .field-name-group-group .field-item > a:before, .annotate-link:before, .field-name-group-group .field-item > span:before, .field-name-field-pece-photo-essay-items [data-remodal-target]:before {
+  .field-name-group-group .field-item > a:before, .annotate-link:before, .essay-link:before, .field-name-group-group .field-item > span:before, .view-mode-card .button:before, .field-name-field-pece-photo-essay-items [data-remodal-target]:before {
     display: none; }
 
 /*
@@ -388,14 +388,14 @@ input[type="button"].btn-block {
  * Button components
  *------------------------------------------------------------------------------
  */
-.field-name-group-group .field-item > a, .annotate-link, .field-name-group-group .field-item > span, .field-name-field-pece-photo-essay-items [data-remodal-target] {
+.field-name-group-group .field-item > a, .annotate-link, .essay-link, .field-name-group-group .field-item > span, .view-mode-card .button, .field-name-field-pece-photo-essay-items [data-remodal-target] {
   min-width: 130px;
   transition: all 0.2s ease-in-out; }
 
-.field-name-group-group .field-item > a, .annotate-link {
+.field-name-group-group .field-item > a, .annotate-link, .essay-link {
   color: white;
   background-color: #7851A9; }
-  .field-name-group-group .field-item > a:hover, .annotate-link:hover {
+  .field-name-group-group .field-item > a:hover, .annotate-link:hover, .essay-link:hover {
     background-color: #9272bb;
     color: white; }
 
@@ -406,15 +406,17 @@ input[type="button"].btn-block {
     background-color: #eeeeee;
     color: #555555; }
 
-.field-name-field-pece-photo-essay-items [data-remodal-target] {
+.view-mode-card .button, .field-name-field-pece-photo-essay-items [data-remodal-target] {
   color: white;
   background-color: #8D36AD; }
-  .field-name-field-pece-photo-essay-items [data-remodal-target]:hover {
+  .view-mode-card .button:hover, .field-name-field-pece-photo-essay-items [data-remodal-target]:hover {
     background-color: #a74ec8;
     color: white; }
 
+i::before,
 [class*="node-pece-"] .icon::before,
-.user-profile .icon::before, i::before, .node-pece-group .icon::before, .view-mode-mini-teaser .icon.image::before, .view-id-pece_my_noted_artifacts li.views-row > div::before,
+.user-profile .icon::before,
+.node-pece-group .icon::before, .view-mode-mini-teaser .icon.image::before, .view-id-pece_my_noted_artifacts li.views-row > div::before,
 .view-id-pece_my_analytics li.views-row > div::before,
 .view-pece-my-biblio-items li.views-row > div::before,
 .view-id-pece_my_projects li.views-row > div::before,
@@ -426,6 +428,7 @@ input[type="button"].btn-block {
   width: 100%;
   font-family: "FontAwesome";
   font-size: 18px;
+  font-style: normal;
   text-align: center;
   color: white;
   opacity: 0.8; }
@@ -515,7 +518,7 @@ input[type="button"].btn-block {
   display: none; }
 
 /*
- *  Remodal - v1.0.7
+ *  Remodal - v1.1.0
  *  Responsive, lightweight, fast, synchronized with CSS animations, fully customizable modal window plugin with declarative configuration and hash tracking.
  *  http://vodkabears.github.io/remodal/
  *
@@ -568,6 +571,7 @@ html.remodal-is-locked {
 /* Fix iPad, iPhone glitches */
 .remodal-overlay,
 .remodal-wrapper {
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden; }
 
 /* Necessary styles of the modal dialog */
@@ -583,7 +587,7 @@ html.remodal-is-locked {
   display: inline-block; }
 
 /*
- *  Remodal - v1.0.7
+ *  Remodal - v1.1.0
  *  Responsive, lightweight, fast, synchronized with CSS animations, fully customizable modal window plugin with declarative configuration and hash tracking.
  *  http://vodkabears.github.io/remodal/
  *
@@ -596,7 +600,6 @@ html.remodal-is-locked {
 /* Default theme styles for the background */
 .remodal-bg.remodal-is-opening,
 .remodal-bg.remodal-is-opened {
-  -webkit-filter: blur(3px);
   filter: blur(3px); }
 
 /* Default theme styles of the overlay */
@@ -1097,67 +1100,11 @@ html.js input.form-autocomplete {
 .pece-layouts-sidebar .user-profile {
   margin-bottom: 1rem; }
 
-i {
-  font-style: normal; }
-
-.node-pece-artifact-fieldnote .icon::before,
-i.pece_artifact_fieldnote::before {
-  content: "\f249"; }
-
-.node-pece-artifact-bundle .icon::before,
-i.pece_artifact_bundle::before {
-  content: "\f1b3"; }
-
-.node-pece-artifact-website .icon::before,
-i.pece_artifact_website::before {
-  content: "\f0c1"; }
-
-.node-pece-artifact-pdf .icon::before,
-i.pece_artifact_pdf::before {
-  content: "\f1c1"; }
-
-.node-pece-artifact-video .icon::before,
-i.pece_artifact_video::before {
-  content: "\f144"; }
-
-.node-pece-artifact-audio .icon::before,
-i.pece_artifact_audio::before {
-  content: "\f001"; }
-
-.node-pece-artifact-text .icon::before,
-i.pece_artifact_text::before {
-  content: "\f036"; }
-
-.node-pece-memo .icon::before,
-i.pece_memo::before {
-  content: "\f0eb"; }
-
-.node-pece-analytic .icon::before {
-  content: "\f059"; }
-
-.node-pece-annotation .icon::before {
-  content: "\f24a"; }
-
-.node-pece-project .icon::before {
-  content: "\f0e8"; }
-
-.user-profile .icon::before {
-  content: "\f007"; }
-
-.node-pece-photo-essay .icon::before {
-  content: "\f03e"; }
-
-.node-pece-artifact-image .icon.image::before {
-  content: "\f03e"; }
-
 .node-pece-artifact-image .field-name-field-pece-media-image {
   position: relative;
   z-index: 20; }
   .node-pece-artifact-image .field-name-field-pece-media-image img {
     background-color: white; }
-
-.node-pece-group .icon::before {
-  content: "\f0c0"; }
 
 .node-pece-group .field-name-field-pece-media-image img {
   background-color: white; }
@@ -1166,6 +1113,88 @@ i.pece_memo::before {
   position: absolute;
   top: 0;
   z-index: 20; }
+
+/*
+ *------------------------------------------------------------------------------
+ * Node related icons
+ *------------------------------------------------------------------------------
+ */
+/*
+ *------------------------------------------------------------------------------
+ * Node icon map.
+ *------------------------------------------------------------------------------
+ */
+.node-pece-essay .icon::before {
+  content: ""; }
+
+.node-pece-artifact-fieldnote .icon::before {
+  content: ""; }
+
+.node-pece-artifact-bundle .icon::before {
+  content: ""; }
+
+.node-pece-artifact-website .icon::before {
+  content: ""; }
+
+.node-pece-artifact-pdf .icon::before {
+  content: ""; }
+
+.node-pece-artifact-video .icon::before {
+  content: ""; }
+
+.node-pece-artifact-audio .icon::before {
+  content: ""; }
+
+.node-pece-artifact-text .icon::before {
+  content: ""; }
+
+.node-pece-memo .icon::before {
+  content: ""; }
+
+.node-pece-analytic .icon::before {
+  content: ""; }
+
+.node-pece-annotation .icon::before {
+  content: ""; }
+
+.node-pece-project .icon::before {
+  content: ""; }
+
+.user-profile .icon::before {
+  content: ""; }
+
+.node-pece-photo-essay .icon::before {
+  content: ""; }
+
+.node-pece-artifact-image .icon::before {
+  content: ""; }
+
+.node-pece-group .icon::before {
+  content: ""; }
+
+i.pece_artifact_fieldnote::before {
+  content: ""; }
+
+i.pece_artifact_bundle::before {
+  content: ""; }
+
+i.pece_artifact_website::before {
+  content: ""; }
+
+i.pece_artifact_pdf::before {
+  content: ""; }
+
+i.pece_artifact_video::before {
+  content: ""; }
+
+i.pece_artifact_audio::before {
+  content: ""; }
+
+i.pece_artifact_text::before {
+  content: ""; }
+
+i.pece_memo::before {
+  content: ""; }
 
 /*
  *------------------------------------------------------------------------------
@@ -1225,6 +1254,7 @@ i.pece_memo::before {
 .view-mode-most-recent h5 a {
   word-wrap: break-word; }
 
+.view-mode-most-recent .field-name-field-thumbnail,
 .view-mode-most-recent .field-name-field-pece-media-image {
   position: absolute;
   top: 0;
@@ -1232,6 +1262,7 @@ i.pece_memo::before {
   right: 0;
   bottom: 0;
   overflow: hidden; }
+  .view-mode-most-recent .field-name-field-thumbnail .file-image img,
   .view-mode-most-recent .field-name-field-pece-media-image .file-image img {
     width: 120px;
     height: 120px;
@@ -1284,7 +1315,7 @@ i.pece_memo::before {
 
 /*
  *------------------------------------------------------------------------------
- * PECE Group node styles
+ * PECE Teaser Viewmode Styles.
  *------------------------------------------------------------------------------
  */
 .view-mode-teaser h5 a {
@@ -1293,7 +1324,11 @@ i.pece_memo::before {
 .view-mode-teaser .field-name-field-pece-media-image,
 .view-mode-teaser .field-name-field-thumbnail {
   position: absolute;
-  top: 0; }
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden; }
   .view-mode-teaser .field-name-field-pece-media-image img,
   .view-mode-teaser .field-name-field-thumbnail img {
     background-color: white; }
@@ -1325,9 +1360,72 @@ i.pece_memo::before {
 
 /*
  *------------------------------------------------------------------------------
+ * PECE Card node styles
+ *------------------------------------------------------------------------------
+ */
+.view-mode-card .icon.image::before {
+  display: none; }
+
+.view-mode-card .file-image img {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  float: none; }
+
+.view-mode-card .field-name-field-pece-photo-essay-items > a {
+  display: block;
+  width: 100%; }
+
+.view-mode-card .icon {
+  display: block;
+  height: 120px;
+  line-height: 120px;
+  position: relative;
+  background-color: #7851A9;
+  vertical-align: middle;
+  text-decoration: none; }
+  .view-mode-card .icon:before {
+    font-size: 30px; }
+
+.view-mode-card a.icon:hover {
+  opacity: 0.8; }
+
+.view-mode-card .more-link {
+  float: right; }
+
+.view-mode-card .field-name-field-pece-media-video {
+  position: relative; }
+
+.view-mode-card .field-name-field-pece-media-video::after {
+  content: "";
+  display: block;
+  padding-top: 56.25%; }
+
+.view-mode-card video {
+  position: absolute;
+  width: 100%;
+  height: 100%; }
+
+.view-mode-card .button {
+  display: block;
+  width: 100%; }
+
+/*
+ *------------------------------------------------------------------------------
  * Views styles
  *------------------------------------------------------------------------------
  */
+.view-tag-term .view-content img {
+  background-color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  overflow: hidden;
+  object-fit: cover; }
+
 .page-dashboard .pece-layouts-content {
   padding-left: 0; }
 
@@ -1884,6 +1982,15 @@ i.pece_memo::before {
  * Annotate link pane styles
  *------------------------------------------------------------------------------
  */
+/*
+ *------------------------------------------------------------------------------
+ * Essay link pane styles
+ *------------------------------------------------------------------------------
+ */
+.packery-layout .essay-link {
+  display: block;
+  width: 100%; }
+
 /*
  *------------------------------------------------------------------------------
  * Design logic

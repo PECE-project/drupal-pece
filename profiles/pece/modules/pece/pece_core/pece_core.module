@@ -64,6 +64,21 @@ function pece_core_entity_info_alter(&$entity_info) {
     'custom settings' => TRUE,
   );
 
+  $entity_info['node']['view modes']['most_recent'] = array(
+    'label' => t('Most Recent'),
+    'custom settings' => TRUE,
+  );
+
+  $entity_info['node']['view modes']['free_panel'] = array(
+    'label' => t('Free Panel'),
+    'custom settings' => TRUE,
+  );
+
+  $entity_info['node']['view modes']['card'] = array(
+    'label' => t('Card'),
+    'custom settings' => TRUE,
+  );
+
   $entity_info['user']['view modes']['mini_teaser'] = array(
     'label' => t('Mini teaser'),
     'custom settings' => TRUE,
@@ -74,15 +89,11 @@ function pece_core_entity_info_alter(&$entity_info) {
     'custom settings' => TRUE,
   );
 
-  $entity_info['node']['view modes']['most_recent'] = array(
-    'label' => t('Most Recent'),
-    'custom settings' => TRUE,
-  );
-
   $entity_info['file']['view modes']['most_recent'] = array(
     'label' => t('Most Recent'),
     'custom settings' => TRUE,
   );
+
 }
 
 /**
@@ -93,4 +104,17 @@ function pece_core_field_widget_form_alter(&$element, &$form_state, $context) {
   if ($context['field']['field_name'] == 'field_pece_uri') {
     $element['#access'] = FALSE;
   }
+}
+
+/**
+ * Implements hook_er_viewmode_get_view_modes_alter().
+ *
+ * Avoid using full view mode on references entities.
+ */
+function pece_core_er_viewmode_get_view_modes_alter(&$view_modes, $field, $instance) {
+  unset($view_modes['full']);
+  $card_title = $view_modes['card'];
+  $view_modes = array(
+    'card' => $card_title,
+  ) + $view_modes;
 }

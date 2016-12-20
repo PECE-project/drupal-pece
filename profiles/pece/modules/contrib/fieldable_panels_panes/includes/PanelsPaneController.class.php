@@ -71,23 +71,38 @@ class PanelsPaneController extends DrupalDefaultEntityController {
     }
 
     $bundle = is_string($entity) ? $entity : $entity->bundle;
+    $access = array();
 
     if ($op == 'create') {
-      return user_access('create fieldable ' . $bundle);
+      $access[] = user_access('create fieldable ' . $bundle);
     }
     if ($op == 'view') {
       ctools_include('context');
-      return ctools_access($entity->view_access, fieldable_panels_panes_get_base_context($entity));
+      $access[] = ctools_access($entity->view_access, fieldable_panels_panes_get_base_context($entity));
     }
     if ($op == 'update') {
       ctools_include('context');
-      return user_access('edit fieldable ' . $bundle) && ctools_access($entity->edit_access, fieldable_panels_panes_get_base_context($entity));
+      $access[] = user_access('edit fieldable ' . $bundle) && ctools_access($entity->edit_access, fieldable_panels_panes_get_base_context($entity));
     }
     if ($op == 'delete') {
       ctools_include('context');
-      return user_access('delete fieldable ' . $bundle) && ctools_access($entity->edit_access, fieldable_panels_panes_get_base_context($entity));
+      $access[] = user_access('delete fieldable ' . $bundle) && ctools_access($entity->edit_access, fieldable_panels_panes_get_base_context($entity));
     }
 
+    $access = array_merge($access, module_invoke_all('fieldable_panels_panes_access', $op, $entity, $account));
+    drupal_alter('fieldable_panels_panes_access', $access, $op, $entity, $account);
+
+    // Deny if any access implementation did deny.
+    if (in_array(FALSE, $access)) {
+      return FALSE;
+    }
+
+    // Allow if at least one access implementation did allow.
+    if (in_array(TRUE, $access)) {
+      return TRUE;
+    }
+
+    // In case no one explicitaly allowed access, deny.
     return FALSE;
   }
 

@@ -133,32 +133,6 @@ function pece_annotations_annotate_form($js = NULL, $node = NULL, $step = NULL) 
   // Send this all off to our form. This is like drupal_get_form only wizardy.
   ctools_include('wizard');
   $form = ctools_wizard_multistep_form($form_info, $step, $form_state);
-
-  // @TODO: Check why ctools wizard doesn't let us to perform our #submit
-  // function.
-  //
-  // Create the Save & Continue buttom.
-  // if ($form_state['step'] == 'third' ) {
-
-  //   $button_attributes = array();
-  //   if (!empty($form_state['ajax']) && empty($form_state['modal'])) {
-  //     $button_attributes =  array('ctools-use-ajax');
-  //   }
-
-  //   $form['save_continue'] = array(
-  //     '#type' =>  'submit',
-  //     '#value' => t('Save & Continue'),
-  //     '#next' => 'start',
-  //     '#wizard type' => 'next',
-  //     '#submit' => array('pece_annotations_annotate_form_save_continue'),
-  //     '#attributes' =>  array(
-  //       'class' => (isset($button_attributes)) ?
-  //         $button_attributes + array('save') : array('save'),
-  //       'id' => 'save-continue',
-  //     ),
-  //   );
-  // }
-
   $output = drupal_render($form);
 
   if ($js) {
@@ -190,6 +164,23 @@ function pece_annotations_annotate_form($js = NULL, $node = NULL, $step = NULL) 
       return $output;
     }
   }
+}
+
+/**
+ * Implements hook_form_pece_annotations_annotate_form_alter().
+ *
+ * Add a Save & Continue button, to keep adding annotations.
+ * Done in a form alter so that CTools default processors for buttons might step in.
+ * It wouldn't work if done after ctools_wizard_multistep_form call.
+ */
+function pece_annotations_form_pece_annotations_annotate_form_third_alter(&$form, &$form_state, $form_id) {
+  $form['buttons']['save_continue'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save & Continue'),
+    '#wizard type' => 'next',
+    '#next' => 'start',
+    '#attributes' => array('class' => array('ctools-use-ajax')),
+  );
 }
 
 /**

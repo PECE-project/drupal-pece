@@ -82,19 +82,16 @@
 ?>
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
-  <?php if (isset($content['field_pece_media_image'])): ?>
-    <div class="icon image" >
-      <?php print render($content['field_pece_media_image']); ?>
-    </div>
-  <?php elseif (isset($content['field_thumbnail'])): ?>
-    <div class="icon image" >
-      <?php print render($content['field_thumbnail']); ?>
-    </div>
-  <?php else: ?>
     <div class="icon">
       <?php // @info: icons are defined by sass. ?>
+      <?php
+        if (isset($content['field_pece_media_image'])) {
+          print render($content['field_pece_media_image']);
+        } elseif (isset($content['field_thumbnail'])) {
+          print render($content['field_thumbnail']);
+        }
+      ?>
     </div>
-  <?php endif ?>
 
   <?php print render($title_prefix); ?>
   <?php if (!$page): ?>

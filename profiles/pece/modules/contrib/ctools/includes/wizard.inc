@@ -338,15 +338,6 @@ function ctools_wizard_wrapper($form, &$form_state) {
       );
     }
     else if (empty($form_state['next']) || !empty($form_info['free trail'])) {
-
-      $form['buttons']['save_continue'] = array(
-        '#type' => 'submit',
-        '#value' => t('Save & Continue'),
-        '#wizard type' => 'next',
-        '#next' => 'start',
-        '#attributes' => $button_attributes,
-      );
-
       $form['buttons']['return'] = array(
         '#type' => 'submit',
         '#value' => $form_info['finish text'],

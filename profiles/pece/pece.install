@@ -154,3 +154,17 @@ function _pece_install_blocks() {
 function _pece_install_site() {
   variable_set('site_frontpage', 'home');
 }
+
+/**
+ * Enable the pece_essay module.
+ */
+function pece_update_7100() {
+  module_enable(array('pece_essay'));
+}
+
+/**
+ * Enable the subpathauto module.
+ */
+function pece_update_7101() {
+  module_enable(array('subpathauto'));
+}

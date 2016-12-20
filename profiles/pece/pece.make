@@ -24,8 +24,7 @@ projects[kw_itemnames][subdir] = kraftwagen
 ; Overrides panopoly's ctools.
 projects[ctools][version] = 1.9
 projects[ctools][subdir] = contrib
-projects[ctools][patch][] = "./patches/ctools-save_continue_button.patch"
-projects[ctools][patch][] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
+projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
 
 ; Overrides panopoly's libraries.
 projects[libraries][version] = 2.2
@@ -58,6 +57,9 @@ projects[pathauto][subdir] = contrib
 projects[pathauto_entity][version] = 1.0
 projects[pathauto_entity][subdir] = contrib
 
+projects[subpathauto][version] = 1.3
+projects[subpathauto][subdir] = contrib
+
 
 ; =====================
 ; Views
@@ -70,7 +72,7 @@ projects[views][patch][2037469] = http://drupal.org/files/views-exposed-sorts-20
 projects[views][patch][1036962] = http://drupal.org/files/issues/views-ajax-nginx-1036962-71.patch
 projects[views][patch][2331209] = https://www.drupal.org/files/issues/2331209-4-views-7.x-3.x-undefined-index.patch
 
-projects[views_infinite_scroll][version] = 1.1
+projects[views_infinite_scroll][version] = 2.0
 projects[views_infinite_scroll][subdir] = contrib
 
 projects[views_litepager][version] = 3.0
@@ -147,20 +149,20 @@ projects[aes][version] = 1.10
 ; =====================
 
 ; Overrides panopoly's panelizer.
-projects[panelizer][version] = 3.1
+projects[panelizer][version] = 3.4
 projects[panelizer][subdir] = contrib
-projects[panelizer][patch][1623536] = http://drupal.org/files/issues/array-to-object-on-update-1623536-26.patch
-; This patch causes issue on fresh installs.
-; projects[panelizer][patch][2416505] = http://www.drupal.org/files/issues/panelizer-search_api-2416505-3.patch
-projects[panelizer][patch][2328615] = https://www.drupal.org/files/issues/panelizerentitydefault-2328615-1.patch
+projects[panelizer][patch][2812807] = https://www.drupal.org/files/issues/panelizer--2812807--provide-entity-on-access-hooks.patch
 
-projects[panels][version] = 3.5
+projects[panels][version] = 3.7
 projects[panels][subdir] = contrib
-projects[panels][patch][2448825] = https://www.drupal.org/files/issues/panels-export-indentation-2448825-1.patch
-projects[panels][patch][2390803] = https://www.drupal.org/files/issues/panels-focus-add-content-tab-2390803-13.patch
 
 ;projects[panels_breadcrumbs][version] = 2.2
 ;projects[panels_breadcrumbs][subdir] = contrib;
+
+projects[fieldable_panels_panes][version] = 1.10
+projects[fieldable_panels_panes][subdir] = contrib
+projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/issues/fieldable_panels_panes--access_hook--2814117-1.patch
+
 
 ; =====================
 ; Panopoly
@@ -207,6 +209,7 @@ projects[panopoly_wysiwyg][subdir] = contrib
 projects[panopoly_search][subdir] = contrib
 projects[panopoly_search][version] = 1.35
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
+projects[panopoly_search][patch][] = "https://www.drupal.org/files/issues/solrphpclient_cannot_be-2790595-10.patch"
 
 ; For running the automated tests.
 projects[panopoly_test][version] = 1.27
@@ -240,14 +243,17 @@ projects[breakpoints][subdir] = contrib
 projects[eck][version] = 2.0-rc8
 projects[eck][subdir]  = contrib
 
-projects[entity_view_mode][subdir] = contrib
 projects[entity_view_mode][version] = 1.0-rc1
+projects[entity_view_mode][subdir] = contrib
 
-projects[entityreference_view_widget][subdir] = contrib
 projects[entityreference_view_widget][version] = 2.0-rc6
+projects[entityreference_view_widget][subdir] = contrib
 
-projects[entityconnect][subdir] = contrib
+projects[er_viewmode][version] = 1.0-alpha1
+projects[er_viewmode][subdir] = contrib
+
 projects[entityconnect][version] = 1.0-rc5
+projects[entityconnect][subdir] = contrib
 
 projects[inline_entity_form][version] = 1.8
 projects[inline_entity_form][subdir]  = contrib
@@ -267,6 +273,9 @@ projects[fences][subdir] = contrib
 
 projects[better_formats][version] = 1.0-beta1
 projects[better_formats][subdir] = contrib
+
+projects[smart_trim][version] = 1.5
+projects[smart_trim][subdir] = contrib
 
 ; =====================
 ; Files
@@ -331,9 +340,6 @@ libraries[phpmailer][download][type] = git
 libraries[phpmailer][download][url] = https://github.com/Synchro/PHPMailer.git
 libraries[phpmailer][download][revision] = d3802c597bff8f6c2ccfa3eab2a511aa01b8d68f
 libraries[phpmailer][download][branch] = master
-
-libraries[autopager][download][type] = file
-libraries[autopager][download][url] = http://jquery-autopager.googlecode.com/files/jquery.autopager-1.0.0.js
 
 ;libraries[annotator][download][type] = file
 ;libraries[annotator][download][url] = https://github.com/openannotation/annotator/releases/download/v1.2.10/annotator.1.2.10.zip
@@ -499,7 +505,7 @@ projects[biblio_zotero][version] = 1.x-dev
 ; Imports
 ; =====================
 ; At the end, so that overrides are possible.includes[] = modules/sandbox/taller_entity/taller_entity.make
-; includes[] = path/to/file.make
+includes[] = modules/sandbox/panels_packery/panels_packery.make
 
 ; =====================
 ; Disabled.

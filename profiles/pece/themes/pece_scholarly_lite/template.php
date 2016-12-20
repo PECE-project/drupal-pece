@@ -4,8 +4,7 @@
  * Theme functions
  */
 
-include_once('includes/preprocess.inc');
-// include_once('includes/theme.inc');
+include_once(dirname(__FILE__) . '/includes/preprocess.inc');
 
 // @TODO: This overwrite should be in a PECE base theme.
 function pece_scholarly_lite_item_list($variables) {
