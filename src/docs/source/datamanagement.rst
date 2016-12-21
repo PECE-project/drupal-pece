@@ -88,7 +88,7 @@ There are four constitutive dimensions for data management in PECE:
   for multimedia annotation that will be of great value for the academic
   community and the public.
 
-.. figure::  img/figure1.png
+.. image:: img/figure1.png
    :align:   center
    Figure 1. Four inter-related domains for data management.
 
@@ -412,7 +412,7 @@ privacy and anonymity questions into the permissions system.
 
 For cases of extreme sensitivity involving potential damage to research subjects, we advise PECE users to refrain from uploading content to the Internet at all. While the PECE platform was designed with security in mind, the PECE Design Team cannot guarantee the security or privacy of any content that is uploaded to the Internet. It is important to observe the need for using the category of “non-uploadable material” when applicable to sensitive data, as described below.
 
-.. figure:: img/figure2.png
+.. image:: img/figure2.png
    :align:  center
    Figure 2. Consent form transposition into PECE permission system
 
