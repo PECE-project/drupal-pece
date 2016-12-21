@@ -403,3 +403,5 @@ following rules of etiquette when tagging.
         b. Tagging also allows the platform to capture the multiplicity of
         terms used to characterize a piece of content, which is a key design
         logic.
+        
+        :)
