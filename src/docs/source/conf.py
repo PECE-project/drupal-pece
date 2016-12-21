@@ -336,7 +336,7 @@ epub_exclude_files = ['search.html']
 #epub_tocscope = 'default'
 
 # Fix unsupported image types using the Pillow.
-#epub_fix_images = False
+epub_fix_images = True
 
 # Scale large images.
 #epub_max_image_width = 0
