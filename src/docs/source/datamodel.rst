@@ -17,9 +17,6 @@ PECE Data Model
 
 .. image:: img/figure4.png    
 
-
-**Observation:** Standard Drupal node fields (date, revision number, node id, etc.) are not described below.
-
 Data Types
 ----------
 
