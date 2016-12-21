@@ -11,6 +11,8 @@ Kim Fortun (RPI)
 
 Lindsay Poirier (RPI)
 
+Brian Callahan (RPI)
+
 Dominic DiFranzo (RPI)
 
 Brandon Costelloe-Kuehn (RPI)
@@ -28,8 +30,6 @@ Alli Kenner (Drexel University)
 Dan Price (Rice University)
 
 Sharon Traweek (UCLA)
-
-Brian Callahan (RPI)
 
 Rodolfo Hernandez (Tsinghua University)
 
