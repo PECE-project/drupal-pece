@@ -12,11 +12,16 @@ PECE Data Model
 
 * Anonymous:
   Public access data
+  
+  
+
 
 **Observation:** Standard Drupal node fields (date, revision number, node id, etc.) are not described below.
 
 Data Types
 ----------
+
+.. image:: img/figure3.png
 
 List of data types, their fields (with machine names), and their relations.
 References to other data types within a particular type are marked with italics.
