@@ -1,0 +1,40 @@
+<?php
+/**
+ * @file
+ * Code for the pece_essay feature.
+ */
+
+include_once 'pece_essay.features.inc';
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function pece_essay_ctools_plugin_directory($module, $plugin) {
+  if ($module === 'ctools' && $plugin === 'content_types') {
+    return 'plugins/' . $module . '/' . $plugin;
+  }
+}
+
+/**
+ * Implements hook_form_ID_alter().
+ */
+function pece_essay_form_pece_essay_node_form_alter(&$form, &$form_state) {
+  // @TODO: show URI field once API is available.
+  $form['field_pece_uri']['#access'] = FALSE;
+  // Hide the comment settings fieldset.
+  $form['comment_settings']['#access'] = FALSE;
+}
+
+/**
+ * Implements hook_panelizer_ipe_access() by pece_panels.
+ */
+function pece_essay_panelizer_ipe_access($display, $entity_type, $entity) {
+  foreach ($entity->panelizer as $view_mode => $panelizer) {
+    if ($panelizer->display->storage_id === $display->storage_id) {
+      $entity->panelizer_view_mode = $view_mode;
+      break;
+    }
+  }
+
+  return $entity->panelizer_view_mode === 'free_panel' && entity_access('update', $entity_type, $entity);
+}
