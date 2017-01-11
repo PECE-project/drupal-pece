@@ -36,3 +36,11 @@ xmlrpc.php
 /profiles/testing
 /scripts
 /themes
+
+# Ignore dev modules in PECE profile, but keep the README.md
+/profiles/pece/modules/dev/*
+!/profiles/pece/modules/dev/README.md
+
+# OS specific files
+.DS_Store
+Thumbs.db
