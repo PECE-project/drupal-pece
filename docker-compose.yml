@@ -4,7 +4,6 @@ services:
   db_mysql:
     image: mysql:5.6
     container_name: pece-db-mysql
-    network_mode: bridge
     environment:
       - MYSQL_USER=pece
       - MYSQL_DATABASE=pece
@@ -18,12 +17,9 @@ services:
     #build:
     #    context: ./
     #  dockerfile: ./docker/DockerfileDevelopment
-    dns:
-      - 8.8.8.8
-      - 8.8.4.4
+    cap_add:
+      - ALL
     hostname: "dev"
-    mem_limit: 1256m
-    network_mode: bridge
     working_dir: /pece/drupal
     environment:
       - DB_PORT=3306
@@ -42,9 +38,9 @@ services:
 
   production:
     image: taller/pece
+    cap_add:
+      - ALL
     hostname: "prod"
-    mem_limit: 1256m
-    network_mode: bridge
     working_dir: /pece/drupal
     environment:
       - DB_PORT=3306
