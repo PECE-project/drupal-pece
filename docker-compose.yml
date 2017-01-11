@@ -18,6 +18,9 @@ services:
     #build:
     #    context: ./
     #  dockerfile: ./docker/DockerfileDevelopment
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
     hostname: "dev"
     mem_limit: 1256m
     network_mode: bridge
