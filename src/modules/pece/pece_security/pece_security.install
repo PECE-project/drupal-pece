@@ -1,0 +1,15 @@
+<?php
+/**
+ * @file
+ * Installation code for the PECE Security feature.
+ */
+
+ /**
+  * Set SPAM filter configuration defaults.
+  */
+ function pece_security_update_7001() {
+   variable_set('honeypot_element_name', 'url');
+   variable_set('honeypot_log', 1);
+   variable_set('honeypot_protect_all_forms', 1);
+   variable_set('honeypot_time_limit', 3);
+ }
