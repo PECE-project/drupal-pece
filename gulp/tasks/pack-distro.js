@@ -31,7 +31,7 @@ var packDistroCallback = function () {
   shell.exec('git clone ' + repo + ' distro');
 
   // Update distro repository with a new build.
-  shell.exec('rsync -rkptgozhD --delete --progress --exclude=profiles/pece/docs  build/* distro/');
+  shell.exec('rsync -rptgohD --delete --progress --exclude=profiles/pece/docs  build/* distro/');
   shell.cd('distro');
   shell.exec('git add -A');
 
