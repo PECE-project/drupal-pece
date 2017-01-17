@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the pece_essay module.
+ */
+
+/**
+ * Resets users defaults permissions.
+ */
+function pece_essay_update_7001() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  // Revert all default config.
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_essay');
+}
