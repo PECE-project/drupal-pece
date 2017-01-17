@@ -21,6 +21,18 @@ function pece_essay_defaultconfig_features() {
 function pece_essay_defaultconfig_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'administer panelizer node pece_essay content'.
+  $permissions['administer panelizer node pece_essay content'] = array(
+    'name' => 'administer panelizer node pece_essay content',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'panelizer',
+  );
+
   // Exported permission: 'create pece_essay content'.
   $permissions['create pece_essay content'] = array(
     'name' => 'create pece_essay content',
