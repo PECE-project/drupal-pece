@@ -46,6 +46,10 @@ function _pece_install_permissions() {
 
   pece_set_permissions(array('Contributor' => $permissions));
   pece_set_permissions(array('Researcher' => $permissions));
+
+  // Setup pece_essay panelizer permissions.
+  module_load_include('install', 'pece_essay');
+  _pece_essay_install_permissions();
 }
 
 /**
