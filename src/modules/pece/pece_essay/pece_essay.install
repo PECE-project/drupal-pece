@@ -14,3 +14,22 @@ function pece_essay_update_7001() {
   // Revert all default config.
   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_essay');
 }
+
+/**
+* Sets PECE Essay panelizer permissions for users.
+*/
+function pece_essay_update_7002() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  $pece_essay_node_perm = array(
+    'administer panelizer node pece_essay content' => TRUE
+  );
+  $pece_security_permissions = array(
+    'Contributor' => $pece_essay_node_perm,
+    'Researcher' => $pece_essay_node_perm,
+    'administrator' => $pece_essay_node_perm,
+    'editor' => $pece_essay_node_perm,
+  );
+
+  pece_set_permissions($pece_security_permissions);
+}
