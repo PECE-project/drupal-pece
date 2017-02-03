@@ -24,6 +24,7 @@ function pece_essay_field_group_info() {
     'weight' => '5',
     'children' => array(
       0 => 'og_group_ref',
+      1 => 'group_content_access',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
