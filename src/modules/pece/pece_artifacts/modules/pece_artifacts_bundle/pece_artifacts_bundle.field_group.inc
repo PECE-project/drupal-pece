@@ -24,6 +24,7 @@ function pece_artifacts_bundle_field_group_info() {
     'weight' => '2',
     'children' => array(
       0 => 'og_group_ref',
+      1 => 'group_content_access',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
