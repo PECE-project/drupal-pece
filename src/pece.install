@@ -47,6 +47,10 @@ function _pece_install_permissions() {
   pece_set_permissions(array('Contributor' => $permissions));
   pece_set_permissions(array('Researcher' => $permissions));
 
+  // Setup pece_access og default settings.
+  module_load_include('install', 'pece_access');
+  _pece_access_update_og_group_manager_default_rids();
+
   // Setup pece_essay panelizer permissions.
   module_load_include('install', 'pece_essay');
   _pece_essay_install_permissions();

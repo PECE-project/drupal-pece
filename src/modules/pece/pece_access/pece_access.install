@@ -4,9 +4,30 @@
  * Installation code for the PECE Access module.
  */
 
+ /**
+  * Helper function to set OG group default manager roles for Researchers.
+  */
+ function _pece_access_update_og_group_manager_default_rids() {
+   $og_roles = og_roles('node', 'pece_group', 0, FALSE, FALSE);
+   $og_manager_rids = array_search(PECE_RESEARCHER, $og_roles);
+
+   $node_pece_group_default_manager_rids = array(
+     $og_manager_rids => (string) $og_manager_rids,
+   );
+
+   variable_set('og_group_manager_default_rids_node_pece_group', $node_pece_group_default_manager_rids);
+ }
+
 /**
  * Remove group manager full permissions.
  */
 function pece_access_update_7100() {
   variable_set('og_group_manager_full_access', 0);
+}
+
+/**
+ * Set Researchers as default managers of pece_group in OG settings.
+ */
+function pece_access_update_7101() {
+  _pece_access_update_og_group_manager_default_rids();
 }
