@@ -9,7 +9,7 @@
   */
  function _pece_access_update_og_group_manager_default_rids() {
    $og_roles = og_roles('node', 'pece_group', 0, FALSE, FALSE);
-   $og_manager_rids = array_search(PECE_RESEARCHER, $og_roles);
+   $og_manager_rids = array_search('administrator member', $og_roles);
 
    $node_pece_group_default_manager_rids = array(
      $og_manager_rids => (string) $og_manager_rids,
@@ -26,7 +26,8 @@ function pece_access_update_7100() {
 }
 
 /**
- * Set Researchers as default managers of pece_group in OG settings.
+ * Sets 'administrator member' as default manager role for pece_group nodes in
+ * OG settings.
  */
 function pece_access_update_7101() {
   _pece_access_update_og_group_manager_default_rids();
