@@ -1,0 +1,138 @@
+<?php
+/**
+ * @file
+ * Installation code for the PECE Access module.
+ */
+
+ /**
+  * Helper function to set OG group default manager roles for Researchers.
+  */
+ function _pece_access_update_og_group_manager_default_rids() {
+   $og_roles = og_roles('node', 'pece_group', 0, FALSE, FALSE);
+   $og_manager_rids = array_search('administrator member', $og_roles);
+
+   $node_pece_group_default_manager_rids = array(
+     $og_manager_rids => (string) $og_manager_rids,
+   );
+
+   variable_set('og_group_manager_default_rids_node_pece_group', $node_pece_group_default_manager_rids);
+ }
+
+/**
+ * Remove group manager full permissions.
+ */
+function pece_access_update_7100() {
+  variable_set('og_group_manager_full_access', 0);
+}
+
+/**
+ * Sets 'administrator member' as default manager role for pece_group nodes in
+ * OG settings.
+ */
+function pece_access_update_7101() {
+  _pece_access_update_og_group_manager_default_rids();
+}
+
+/**
+ * Performs a batch process to update default value for content access field on
+ * existing contents.
+ */
+function pece_access_update_7102(&$sandbox) {
+
+  // If this is the first pass through this update function then set some vars.
+  if (!isset($sandbox['progress'])) {
+
+    $node_types = array(
+      'pece_artifact_audio',
+      'pece_artifact_bundle',
+      'pece_artifact_fieldnote',
+      'pece_artifact_image',
+      'pece_artifact_pdf',
+      'pece_artifact_text',
+      'pece_artifact_video',
+      'pece_artifact_website',
+      'pece_essay',
+      'pece_memo',
+      'pece_photo_essay',
+    );
+
+    // Get published PECE content.
+    $query = db_select('node', 'n');
+    $query->fields('n', array('nid'))
+          ->condition('n.type', $node_types)
+          ->condition('n.status', 1);
+    $result = $query->execute();
+
+    $sandbox['progress'] = 0;
+    $sandbox['max'] = $result->rowCount();
+  }
+
+  // Prepares the vars for the db_query_range().
+  $sql = variable_get('pece_access_content_update_sql', NULL);
+  $sql_args = variable_get('pece_access_content_update_sql_args', NULL);
+
+  // Stores the query string for the following progresses.
+  if (empty($sql) && !empty($query)) {
+    $sql = $query->__toString();
+    variable_set('pece_access_content_update_sql', $sql);
+  }
+
+  // Stores the query arguments for the following progresses.
+  if (empty($sql_args) && !empty($query)) {
+    $sql_args = $query->arguments();
+    variable_set('pece_access_content_update_sql_args', $sql_args);
+  }
+
+  if (empty($sandbox['max'])) {
+    $sandbox['#finished'] = 1;
+    return t('No contents available for update.');
+  }
+
+  // How many nodes should be processed per pass.
+  $nodes_per_pass = 20;
+
+  // Get the nodes to process during this pass.
+  $result = db_query_range($sql, $sandbox['progress'], $nodes_per_pass, $sql_args);
+
+  while ($row = $result->fetchAssoc()) {
+    // Load the node and updates group visibility fields.
+    $node = node_load($row['nid']);
+    $node_wrapper = entity_metadata_wrapper('node', $node);
+    $node_wrapper->group_content_access->set(0);
+    $node_wrapper->save();
+
+    // Logs the process.
+    watchdog('pece_access', 'Update 7102: Content @title\'s (id: @nid) group visibility field was updated.', array('@nid' => $node->nid, '@title' => $node->title), WATCHDOG_INFO);
+
+    // If running through drush display the status message.
+    if (drupal_is_cli()) {
+      drupal_set_message(t('Content @title\'s (id: @nid) group visibility field was updated.', array('@nid' => $node->nid, '@title' => $node->title)));
+    }
+
+    // Update the progress information.
+    $sandbox['progress']++;
+  }
+
+  // Set the "finished" status, to tell batch engine whether this function
+  // needs to run again. If you set a float, this will indicate the progress of
+  // the batch so the progress bar will update.
+  $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? 1 : ($sandbox['progress'] / $sandbox['max']);
+
+  if ($sandbox['#finished'] === 1) {
+    // A final log of the number of nodes that were updated.
+    watchdog('pece_access', 'Update 7102: !count nodes were updated in total.', array('!count' => $sandbox['progress']), WATCHDOG_INFO);
+
+    // Running through drush.
+    if (drupal_is_cli()) {
+      drupal_set_message(t('!count nodes was updated in total.', array('!count' => $sandbox['progress'])));
+    }
+
+    // Removes the variables that are not needed anymore.
+    variable_del('pece_access_content_update_sql');
+    variable_del('pece_access_content_update_sql_args');
+
+    // hook_update_N() may optionally return a string which will be displayed
+    // to the user.
+    return t('!count nodes were updated in total.', array('!count' => $sandbox['progress']));
+  }
+}

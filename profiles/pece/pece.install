@@ -46,6 +46,14 @@ function _pece_install_permissions() {
 
   pece_set_permissions(array('Contributor' => $permissions));
   pece_set_permissions(array('Researcher' => $permissions));
+
+  // Setup pece_access og default settings.
+  module_load_include('install', 'pece_access');
+  _pece_access_update_og_group_manager_default_rids();
+
+  // Setup pece_essay panelizer permissions.
+  module_load_include('install', 'pece_essay');
+  _pece_essay_install_permissions();
 }
 
 /**
@@ -158,13 +166,13 @@ function _pece_install_site() {
 /**
  * Enable the pece_essay module.
  */
-function pece_update_7100() {
+function pece_update_7101() {
   module_enable(array('pece_essay'));
 }
 
 /**
  * Enable the subpathauto module.
  */
-function pece_update_7101() {
+function pece_update_7102() {
   module_enable(array('subpathauto'));
 }

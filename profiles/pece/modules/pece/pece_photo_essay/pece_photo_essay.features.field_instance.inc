@@ -754,6 +754,87 @@ function pece_photo_essay_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-pece_photo_essay-group_content_access'.
+  $field_instances['node-pece_photo_essay-group_content_access'] = array(
+    'bundle' => 'pece_photo_essay',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 10,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'group_content_access',
+    'label' => 'Group content visibility',
+    'required' => TRUE,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'view modes' => array(
+      'full' => array(
+        'label' => 'above',
+        'type' => 'list_default',
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'type' => 'list_default',
+      ),
+    ),
+    'widget' => array(
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 3,
+    ),
+    'widget_type' => 'options_select',
+  );
+
   // Exported field_instance: 'node-pece_photo_essay-og_group_ref'.
   $field_instances['node-pece_photo_essay-og_group_ref'] = array(
     'bundle' => 'pece_photo_essay',
@@ -944,6 +1025,7 @@ function pece_photo_essay_field_default_field_instances() {
   t('Author(s)');
   t('Contributors');
   t('Description');
+  t('Group content visibility');
   t('Groups audience');
   t('Image artifact');
   t('License');

@@ -220,6 +220,10 @@ function pece_access_node_access_records($node) {
   // This is intended to override Organic Groups default behavior regarding nodes on both
   // private and public groups; by default, the existence of a node on a private group
   // would deny access to it even though it might be present on a public group.
+  //
+  // We intentionally verify if the node alse belongs to at least a private group
+  // beacuse there is no need to set grants to a node that is open and present on
+  // public groups; these nodes are simply accesible to anyone.
   if ($permission == 'open' && !empty($public_groups) && !empty($private_groups)) {
     $grants[] = array(
       'realm' => PECE_ACCESS_REALM_PUBLIC_GROUP,
@@ -350,6 +354,13 @@ function pece_access_get_permission($node) {
 
 /**
  * Helper (performatic) method to get a map of private content groups.
+ *
+ * Keep in mind that any time a node overrides group permissioning (field
+ * Group content visibility) all group information retrieved from this function
+ * will respect that override. This means a private group might be taken for a
+ * public group and vice versa.
+ *
+ * @return {Array} a map of groups to their access: TRUE means private, FALSE means open.
  */
 function pece_access_get_node_groups($node) {
   $sql = "SELECT ogm.gid AS gid, ga.group_access_value AS gavalue
@@ -362,8 +373,16 @@ function pece_access_get_node_groups($node) {
   $results = db_query($sql);
   $groups = array();
 
+  // Override group permissioning based on node group_content_access.
+  if (isset($node->group_content_access)) {
+    $value = field_get_items('node', $node, 'group_content_access');
+    if (!empty($value[0]['value'])) {
+      $override_group_access = $value[0]['value'] == '1' ? FALSE : TRUE;
+    }
+  }
+
   foreach ($results as $result) {
-    $groups[$result->gid] = $result->gavalue == 1;
+    $groups[$result->gid] = isset($override_group_access) ? $override_group_access : $result->gavalue == 1;
   }
 
   return $groups;

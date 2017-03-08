@@ -143,6 +143,9 @@ projects[login_security][version] = 1.9
 projects[aes][subdir] = contrib
 projects[aes][version] = 1.10
 
+; Honeypot
+projects[honeypot][subdir] = contrib
+projects[honeypot][version] = 1.22
 
 ; =====================
 ; Panels

@@ -1,0 +1,55 @@
+/*
+ *------------------------------------------------------------------------------
+ * PECE Card node styles
+ *------------------------------------------------------------------------------
+ */
+
+.view-mode-card
+  .icon.image::before
+    display: none
+
+  .file-image img
+    margin: 0
+    width: 100%
+    max-width: 100%
+    float: none
+
+  .field-name-field-pece-photo-essay-items > a
+    display: block
+    width: 100%
+
+  .icon
+    display: block
+    height: 120px
+    line-height: 120px
+    position: relative
+    background-color: $color-primary
+    vertical-align: middle
+    text-decoration: none
+
+    &:before
+      font-size: $font-size-h2
+
+  a.icon:hover
+    opacity: 0.8
+
+  .more-link
+    float: right
+
+  .field-name-field-pece-media-video
+    position: relative
+
+  .field-name-field-pece-media-video::after
+    content: ""
+    display: block
+    padding-top: 56.25%
+
+  video
+    position: absolute
+    width: 100%
+    height: 100%
+
+  .button
+    @extend %button-vivid
+    display: block
+    width: 100%

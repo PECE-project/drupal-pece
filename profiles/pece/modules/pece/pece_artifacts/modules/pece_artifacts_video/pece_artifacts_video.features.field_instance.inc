@@ -1014,6 +1014,87 @@ function pece_artifacts_video_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-pece_artifact_video-group_content_access'.
+  $field_instances['node-pece_artifact_video-group_content_access'] = array(
+    'bundle' => 'pece_artifact_video',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 16,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'group_content_access',
+    'label' => 'Group content visibility',
+    'required' => TRUE,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'view modes' => array(
+      'full' => array(
+        'label' => 'above',
+        'type' => 'list_default',
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'type' => 'list_default',
+      ),
+    ),
+    'widget' => array(
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 8,
+    ),
+    'widget_type' => 'options_select',
+  );
+
   // Exported field_instance: 'node-pece_artifact_video-og_group_ref'.
   $field_instances['node-pece_artifact_video-og_group_ref'] = array(
     'bundle' => 'pece_artifact_video',
@@ -1116,6 +1197,7 @@ function pece_artifacts_video_field_default_field_instances() {
   t('Duration');
   t('Fieldsite');
   t('Format');
+  t('Group content visibility');
   t('Groups audience');
   t('License');
   t('Location');

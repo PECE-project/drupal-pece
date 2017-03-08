@@ -97,7 +97,7 @@ function pece_reset_panelizer_entities_to_default($entity_type, $entities, $view
 function pece_defaultconfig_component_rebuild_by_name($component, $module = FALSE) {
   $components = defaultconfig_get_components();
   if (!empty($components[$component])) {
-    defaultconfig_component_rebuild($components[$component], 'pece_profile');
+    defaultconfig_component_rebuild($components[$component], $module);
   }
 }
 

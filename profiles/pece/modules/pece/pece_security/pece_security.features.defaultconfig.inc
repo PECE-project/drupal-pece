@@ -60,6 +60,34 @@ function pece_security_defaultconfig_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'honeypot_element_name';
+  $strongarm->value = 'url';
+  $export['honeypot_element_name'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'honeypot_log';
+  $strongarm->value = 1;
+  $export['honeypot_log'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'honeypot_protect_all_forms';
+  $strongarm->value = 1;
+  $export['honeypot_protect_all_forms'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'honeypot_time_limit';
+  $strongarm->value = 3;
+  $export['honeypot_time_limit'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'login_security_activity_threshold';
   $strongarm->value = '20';
   $export['login_security_activity_threshold'] = $strongarm;
@@ -206,6 +234,15 @@ function pece_security_defaultconfig_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'aes',
+  );
+
+  // Exported permission: 'bypass honeypot protection'.
+  $permissions['bypass honeypot protection'] = array(
+    'name' => 'bypass honeypot protection',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'honeypot',
   );
 
   // Exported permission: 'view passwords'.

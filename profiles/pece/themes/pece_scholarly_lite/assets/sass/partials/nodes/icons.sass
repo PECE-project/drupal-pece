@@ -1,0 +1,18 @@
+/*
+ *------------------------------------------------------------------------------
+ * Node related icons
+ *------------------------------------------------------------------------------
+ */
+
+@import icons-map
+
+i,
+[class*="node-pece-"] .icon,
+.user-profile .icon,
+.node-pece-group .icon
+  &::before
+    @extend %file-type-icon
+
+@each $selector, $char in $icon-selectors
+  #{$selector}::before
+    content: $char
