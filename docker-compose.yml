@@ -14,9 +14,9 @@ services:
 
   dev_pece:
     image: taller/pece
-    #build:
-    #    context: ./
-    #  dockerfile: ./docker/DockerfileDevelopment
+    build:
+      context: ./
+      dockerfile: ./docker/DockerfileDevelopment
     cap_add:
       - ALL
     hostname: "dev"
