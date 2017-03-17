@@ -1,0 +1,14 @@
+language: node_js
+
+services:
+  - docker
+
+branches:
+  only:
+  - fs/pece-166-travis-integration
+
+before_install:
+  - docker-compose run production
+
+script:
+  - gulp build
