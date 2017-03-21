@@ -57,3 +57,4 @@ services:
     container_name: pece-prod-apache
     links:
       - db_mysql:pece-db
+    entrypoint: ./docker/docker-entrypoint-prod.sh
