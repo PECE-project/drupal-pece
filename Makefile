@@ -1,4 +1,4 @@
-.PHONY: run stop clean distro
+.PHONY: run stop clean distro prod
 
 run:
 	docker-compose run --rm -p 8080:80 dev_pece
@@ -15,6 +15,9 @@ clean:
 	rm -rf ./cnf
 	rm -rf ./builds
 	rm -rf ./build
+
+prod:
+	docker-compose run --rm -p 8080:80 production
 
 distro: clean
 	docker-compose run --rm production gulp pack-distro
