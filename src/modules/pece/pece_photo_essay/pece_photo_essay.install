@@ -36,3 +36,11 @@ function _pece_photo_essay_install_permissions() {
 
   pece_set_permissions($photo_essay_permissions);
 }
+
+function _pece_photo_essay_update_7001() {
+  if(field_info_field('node-pece_photo_essay-field_pece_authors')) {
+    $message = 'Deleting field = node-pece_photo_essay-field_pece_authors';
+    field_delete_field('node-pece_photo_essay-field_pece_authors');
+    drush_print($message);
+  }
+}
