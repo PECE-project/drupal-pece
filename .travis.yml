@@ -23,8 +23,7 @@ after_success:
   - sh deploy.sh
 
 branches:
-  only:
-    - fs/pece-166-travis-integration
+  - dev
 
 script:
   - docker-compose run production echo "Build ended"
