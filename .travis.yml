@@ -16,14 +16,14 @@ deploy:
   - provider: script
     skip_cleanup: true
     script: sh deploy-update.sh
-    on:
-      branch: fs/dev
+    # on:
+    #   branch: fs/dev
 
 after_success:
   - sh deploy.sh
 
-branches:
-  - dev
+# branches:
+#   - dev
 
 script:
   - docker-compose run production echo "Build ended"
