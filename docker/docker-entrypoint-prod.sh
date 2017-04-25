@@ -19,7 +19,7 @@ echo "-- Started the build process --"
 echo "-------------------------------"
 echo ""
 
-drush kw-b
+/usr/local/bin/drush kw-b
 
 echo "PECE's Build proccess succeeded."
 
