@@ -251,6 +251,7 @@ projects[entity_view_mode][subdir] = contrib
 
 projects[entityreference][version] = 1.2
 projects[entityreference][subdir] = contrib
+projects[entityreference][patch][1836106] = "https://www.drupal.org/files/issues/entityreference_1836106_59.patch"
 
 projects[entityreference_view_widget][version] = 2.0-rc6
 projects[entityreference_view_widget][subdir] = contrib
