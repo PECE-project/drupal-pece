@@ -6,8 +6,10 @@ services:
 addons:
   ssh_known_hosts: dev-pece.dropit.in
 
+# branches:
+#   - dev
+
 before_install:
-  - rm -r ./build
   - docker-compose run production
 
 before_deploy:
@@ -16,8 +18,9 @@ before_deploy:
   - chmod 600 /tmp/deploy_rsa
   - ssh-add /tmp/deploy_rsa
 
-# branches:
-#   - dev
+script:
+  - nvm use default
+  - gulp update
 
 deploy:
   - provider: script
@@ -26,5 +29,5 @@ deploy:
     on:
       branch: dev
 
-# after_success:
-#   - sh deploy.sh
+after_success:
+  - echo "Deployed Successfully! \o/"
