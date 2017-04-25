@@ -9,6 +9,7 @@ addons:
 # branches:
 #   - dev
 
+# Production Env Setup
 before_install:
   - docker-compose run production
 
@@ -18,9 +19,18 @@ before_deploy:
   - chmod 600 /tmp/deploy_rsa
   - ssh-add /tmp/deploy_rsa
 
+# E2E Tests Setup
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
+
 script:
   - nvm use default
+  - gulp build
   - gulp update
+# Run e2e tests
+  - gulp test:e2e
 
 deploy:
   - provider: script
