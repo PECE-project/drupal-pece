@@ -19,6 +19,9 @@ echo "-- Started the build process --"
 echo "-------------------------------"
 echo ""
 
+if [[ -d ./build ]]; then
+  rm -r ./build
+fi
 /usr/local/bin/drush kw-b
 
 echo "PECE's Build proccess succeeded."
