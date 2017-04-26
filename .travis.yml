@@ -25,11 +25,8 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - nohup bash -c "./node_modules/protractor/bin/webdriver-manager start 2>&1 &"
   - sleep 3 # give xvfb some time to start
-
-script:
   - nvm use default
-  - /usr/local/bin/drush kw-u
-  - gulp test:e2e
+  - protractor
 
 deploy:
   - provider: script
