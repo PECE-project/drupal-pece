@@ -171,6 +171,17 @@ function pece_annotations_views_default_views() {
   /* Display: Question annotations */
   $handler = $view->new_display('panel_pane', 'Question annotations', 'pece_question_annotations');
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: User: Rendered User */
+  $handler->display->display_options['fields']['rendered_entity']['id'] = 'rendered_entity';
+  $handler->display->display_options['fields']['rendered_entity']['table'] = 'views_entity_user';
+  $handler->display->display_options['fields']['rendered_entity']['field'] = 'rendered_entity';
+  $handler->display->display_options['fields']['rendered_entity']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['rendered_entity']['label'] = '';
+  $handler->display->display_options['fields']['rendered_entity']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['rendered_entity']['link_to_entity'] = 1;
+  $handler->display->display_options['fields']['rendered_entity']['display'] = 'view';
+  $handler->display->display_options['fields']['rendered_entity']['view_mode'] = 'pece_thumbnail';
+  $handler->display->display_options['fields']['rendered_entity']['bypass_access'] = 0;
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -478,6 +489,17 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['relationships']['field_pece_analytic_target_id']['field'] = 'field_pece_analytic_target_id';
   $handler->display->display_options['relationships']['field_pece_analytic_target_id']['label'] = 'Analytic';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: User: Rendered User */
+  $handler->display->display_options['fields']['rendered_entity']['id'] = 'rendered_entity';
+  $handler->display->display_options['fields']['rendered_entity']['table'] = 'views_entity_user';
+  $handler->display->display_options['fields']['rendered_entity']['field'] = 'rendered_entity';
+  $handler->display->display_options['fields']['rendered_entity']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['rendered_entity']['label'] = '';
+  $handler->display->display_options['fields']['rendered_entity']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['rendered_entity']['link_to_entity'] = 1;
+  $handler->display->display_options['fields']['rendered_entity']['display'] = 'view';
+  $handler->display->display_options['fields']['rendered_entity']['view_mode'] = 'pece_thumbnail';
+  $handler->display->display_options['fields']['rendered_entity']['bypass_access'] = 0;
   /* Field: Content: Question Set */
   $handler->display->display_options['fields']['field_pece_struct_analytics']['id'] = 'field_pece_struct_analytics';
   $handler->display->display_options['fields']['field_pece_struct_analytics']['table'] = 'field_data_field_pece_struct_analytics';
