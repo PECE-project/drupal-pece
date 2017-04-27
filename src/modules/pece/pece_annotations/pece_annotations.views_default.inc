@@ -305,7 +305,7 @@ function pece_annotations_views_default_views() {
   /* Display: User - Artifact Annotations */
   $handler = $view->new_display('page', 'User - Artifact Annotations', 'pece_user_artifact_annotations');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = '-> [picture] <- %1 - [field_pece_artifact] Annotations';
+  $handler->display->display_options['title'] = '[picture] %1 - [field_pece_artifact] Annotations';
   $handler->display->display_options['display_description'] = 'List annotations for a given user and a given artifact.';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Author */
@@ -679,7 +679,7 @@ function pece_annotations_views_default_views() {
     t('List users that have added annotations to a given artifact.'),
     t('Uid'),
     t('User - Artifact Annotations'),
-    t('-> [picture] <- %1 - [field_pece_artifact] Annotations'),
+    t('[picture] %1 - [field_pece_artifact] Annotations'),
     t('List annotations for a given user and a given artifact.'),
     t('Question'),
     t('Nid'),
