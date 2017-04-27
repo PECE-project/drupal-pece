@@ -31,8 +31,6 @@ function pece_core_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'infinite_scroll';
   $handler->display->display_options['pager']['options']['items_per_page'] = '12';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'node';
   $handler->display->display_options['row_options']['links'] = FALSE;
@@ -115,6 +113,11 @@ function pece_core_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
+    t('Show More'),
+    t('All'),
+    t('%1'),
+    t('Page'),
+    t('Feed'),
     t('Items per page'),
     t('- All -'),
     t('Offset'),
@@ -122,10 +125,6 @@ function pece_core_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('All'),
-    t('%1'),
-    t('Page'),
-    t('Feed'),
   );
   $export['tag_term'] = $view;
 
@@ -230,8 +229,6 @@ function pece_core_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'infinite_scroll';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -295,6 +292,7 @@ function pece_core_views_default_views() {
     t('Contributor'),
     t('All users'),
     t('People'),
+    t('Show More'),
     t('View panes'),
   );
   $export['users_field_ref'] = $view;
