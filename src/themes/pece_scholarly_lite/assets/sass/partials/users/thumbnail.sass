@@ -1,0 +1,24 @@
+/*
+ *------------------------------------------------------------------------------
+ * User thumbnail view mode styles
+ *------------------------------------------------------------------------------
+ */
+
+.profile--thumbnail.view-mode-pece-thumbnail
+  position: absolute
+  left: 0
+  width: 70px
+  height: 70px
+  overflow: hidden
+
+  .icon
+    &::before
+      position: absolute
+      content: "\f2be"
+      color: $color-gray-lighter
+      font-size: 7rem
+      margin-top: -1.5rem
+      z-index: -1
+
+    .pece-thumbnail
+      background-color: white
