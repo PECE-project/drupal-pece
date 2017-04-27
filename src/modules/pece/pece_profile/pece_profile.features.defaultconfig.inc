@@ -75,6 +75,12 @@ function pece_profile_defaultconfig_field_default_fields() {
           'type' => 'hidden',
           'weight' => 0,
         ),
+        'pece_thumbnail' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 2,
+        ),
       ),
       'entity_type' => 'user',
       'field_name' => 'field_user_about',
@@ -159,6 +165,16 @@ function pece_profile_defaultconfig_field_default_fields() {
           'type' => 'image',
           'weight' => 0,
         ),
+        'pece_thumbnail' => array(
+          'label' => 'hidden',
+          'module' => 'image',
+          'settings' => array(
+            'image_link' => '',
+            'image_style' => 'pece_thumbnail',
+          ),
+          'type' => 'image',
+          'weight' => 0,
+        ),
       ),
       'entity_type' => 'user',
       'field_name' => 'field_user_picture',
@@ -222,24 +238,35 @@ function pece_profile_defaultconfig_strongarm() {
   $strongarm->name = 'panelizer_defaults_user_user';
   $strongarm->value = array(
     'status' => 1,
+    'help' => '',
     'view modes' => array(
       'page_manager' => array(
         'status' => 1,
+        'substitute' => '',
         'default' => 1,
         'choice' => 0,
       ),
       'default' => array(
         'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'pece_thumbnail' => array(
+        'status' => 0,
+        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'featured' => array(
         'status' => 0,
+        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'mini_teaser' => array(
         'status' => 0,
+        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
