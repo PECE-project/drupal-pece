@@ -93,6 +93,27 @@
   .view-footer a
     text-align: right
 
+.view-display-id-pece_user_artifact_annotations,
+.view-display-id-pece_question_annotations
+  .views-field-artifact-meta-content
+    align-items: center
+    background-color: $color-gray-extra-lighter
+    border: 1px solid $color-gray-lighter
+    display: flex
+    margin: 1.25rem 0
+    padding: 1.25rem 1.5rem
+
+    > span
+      color: $color-gray
+      display: block
+      font-style: italic
+      margin-right: 2rem
+
+      &::before
+        content: '↩'
+        display: inline-block
+        margin-right: 1rem
+
 // !!! WARNING !!!
 // Used for placing page title beside Users' picture.
 .page-annotations-user-artifact
@@ -102,6 +123,8 @@
     line-height: 10px
 
 .view-display-id-pece_user_artifact_annotations
+  .views-field-artifact-meta-content
+    margin: 3rem 0 1.25rem
   > .view-content > .views-row
     h2
       margin: 10px 0
@@ -125,24 +148,3 @@
             margin: 0 .2rem 0 0
             a
               color: $color-royal-purple
-
-.view-display-id-pece_user_artifact_annotations,
-.view-display-id-pece_question_annotations
-  .views-field-artifact-meta-content
-    align-items: center
-    background-color: $color-gray-extra-lighter
-    border: 1px solid $color-gray-lighter
-    display: flex
-    margin: 1.25rem 0
-    padding: 1.25rem 1.5rem
-
-    > span
-      color: $color-gray
-      display: block
-      font-style: italic
-      margin-right: 2rem
-
-      &::before
-        content: '↩'
-        display: inline-block
-        margin-right: 1rem
