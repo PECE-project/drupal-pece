@@ -21,12 +21,15 @@ before_deploy:
 
 # E2E Tests Setup
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
   - nohup bash -c "./node_modules/protractor/bin/webdriver-manager start 2>&1 &"
   - sleep 3 # give xvfb some time to start
   - nvm use default
-  - protractor
+
+script:
+  - echo "Script Running..."
+  - echo "[...]"
 
 deploy:
   - provider: script
