@@ -402,8 +402,8 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['field_pece_struct_analytics']['table'] = 'field_data_field_pece_struct_analytics';
   $handler->display->display_options['fields']['field_pece_struct_analytics']['field'] = 'field_pece_struct_analytics';
   $handler->display->display_options['fields']['field_pece_struct_analytics']['relationship'] = 'field_pece_analytic_target_id';
-  $handler->display->display_options['fields']['field_pece_struct_analytics']['label'] = 'Structured Analytic';
-  $handler->display->display_options['fields']['field_pece_struct_analytics']['element_type'] = 'span';
+  $handler->display->display_options['fields']['field_pece_struct_analytics']['type'] = 'og_list_default';
+  $handler->display->display_options['fields']['field_pece_struct_analytics']['multi_type'] = 'ul';
   $handler->display->display_options['fields']['field_pece_struct_analytics']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_pece_struct_analytics']['settings'] = array(
     'link' => 1,
