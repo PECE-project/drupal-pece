@@ -92,7 +92,11 @@ function pece_core_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__pece_fieldsite';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'pece_meta_content' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(
         'title' => array(
