@@ -90,19 +90,31 @@
     text-align: right
 
 .view-display-id-pece_user_artifact_annotations
+  .view-mode-mini-teaser
+    margin: 0 0 2rem
   > .view-content > .views-row
     h2
       margin: 10px 0
     h2 + div
       display: block
-      margin: 1rem
+      margin: 1rem 0
       padding: 0
       background: none
       h2
         padding: .5em
         background-color: #E2E2E2
-    .view-mode-mini-teaser
-      margin: 0 0 2rem
+
+    .views-field-field-pece-struct-analytics
+      .field-content .item-list
+        @extend %tags
+        margin: 0
+        ul
+          list-style: none
+          li
+            display: inline-block
+            margin: 0 .2rem 0 0
+            a
+              color: $color-royal-purple
 
 .view-display-id-pece_question_annotations
   .views-field-artifact-mini-teaser
