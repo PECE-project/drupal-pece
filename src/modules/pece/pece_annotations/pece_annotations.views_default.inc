@@ -212,11 +212,11 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['field_pece_artifact']['label'] = 'In response to:';
   $handler->display->display_options['fields']['field_pece_artifact']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_pece_artifact']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['field_pece_artifact']['element_wrapper_class'] = 'views-field-artifact-mini-teaser';
+  $handler->display->display_options['fields']['field_pece_artifact']['element_wrapper_class'] = 'views-field-artifact-meta-content';
   $handler->display->display_options['fields']['field_pece_artifact']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_pece_artifact']['type'] = 'entityreference_entity_view';
   $handler->display->display_options['fields']['field_pece_artifact']['settings'] = array(
-    'view_mode' => 'mini_teaser',
+    'view_mode' => 'meta_content',
     'links' => 0,
     'use_content_language' => 1,
   );
@@ -373,7 +373,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['field_pece_artifact']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_pece_artifact']['type'] = 'entityreference_entity_view';
   $handler->display->display_options['fields']['field_pece_artifact']['settings'] = array(
-    'view_mode' => 'mini_teaser',
+    'view_mode' => 'meta_content',
     'links' => 0,
     'use_content_language' => 1,
   );
