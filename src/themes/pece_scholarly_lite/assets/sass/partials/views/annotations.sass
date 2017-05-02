@@ -4,6 +4,21 @@
  *------------------------------------------------------------------------------
  */
 
+%pece-struct-analytics-list
+  @extend %tags
+  margin: 0
+  ul
+    list-style: none
+    li
+      display: inline-block
+      margin: 0 .2rem 0 0
+      a
+        border: 1px solid $color-royal-purple
+        color: $color-royal-purple
+        background: none
+        &:hover
+          background-color: $color-royal-purple
+
 .node-type-pece-analytic,
 .page-annotations-user,
 .page-annotions-question
@@ -93,6 +108,7 @@
   .view-footer a
     text-align: right
 
+.page-annotions-question-artifact,
 .view-display-id-pece_user_artifact_annotations,
 .view-display-id-pece_question_annotations,
 .view-display-id-pece_question_artifact_annotions
@@ -155,16 +171,8 @@
 
     .views-field-field-pece-struct-analytics
       .field-content .item-list
-        @extend %tags
-        margin: 0
-        ul
-          list-style: none
-          li
-            display: inline-block
-            margin: 0 .2rem 0 0
-            a
-              border: 1px solid $color-royal-purple
-              color: $color-royal-purple
-              background: none
-              &:hover
-                background-color: $color-royal-purple
+        @extend %pece-struct-analytics-list
+
+.page-annotions-question-artifact
+  .field-name-field-pece-struct-analytics
+    @extend %pece-struct-analytics-list
