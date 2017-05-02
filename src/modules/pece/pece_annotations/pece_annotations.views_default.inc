@@ -332,7 +332,9 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['header']['area_1']['field'] = 'area';
   $handler->display->display_options['header']['area_1']['label'] = 'Meta Content  Box';
   $handler->display->display_options['header']['area_1']['empty'] = TRUE;
-  $handler->display->display_options['header']['area_1']['content'] = '[picture]
+  $handler->display->display_options['header']['area_1']['content'] = '<div class="views-field-picture">
+[picture]
+</div>
 <div class="views-field-artifact-meta-content">
 <span>In response to:</span>
 [field_pece_artifact] 
@@ -704,7 +706,9 @@ function pece_annotations_views_default_views() {
     t('%1 Annotations'),
     t('List annotations for a given user and a given artifact.'),
     t('Meta Content  Box'),
-    t('[picture]
+    t('<div class="views-field-picture">
+[picture]
+</div>
 <div class="views-field-artifact-meta-content">
 <span>In response to:</span>
 [field_pece_artifact] 

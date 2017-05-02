@@ -121,8 +121,23 @@
     margin-left: 90px
     position: absolute
     line-height: 10px
+    top: 30px
+    text-transform: capitalize
 
 .view-display-id-pece_user_artifact_annotations
+  .views-field-picture
+    height: 70px
+    width: 70px
+
+    &::before
+      content: "\f2be"
+      color: $color-gray-lighter
+      font-family: 'FontAwesome'
+      font-size: 7rem
+      margin-top: -1.5rem
+      position: absolute
+      z-index: -1
+
   .views-field-artifact-meta-content
     margin: 3rem 0 1.25rem
   > .view-content > .views-row
