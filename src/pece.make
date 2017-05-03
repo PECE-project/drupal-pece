@@ -24,6 +24,7 @@ projects[kw_itemnames][subdir] = kraftwagen
 ; Overrides panopoly's ctools.
 projects[ctools][version] = 1.12
 projects[ctools][subdir] = contrib
+; @TODO: Update and reapply the following patch.
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
 
 ; Overrides panopoly's libraries.
