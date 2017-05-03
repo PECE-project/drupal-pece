@@ -116,7 +116,7 @@ function pece_annotations_panelizer_defaults() {
       'link' => 1,
     ),
     'context' => 'panelizer',
-    'override_title' => 1,
+    'override_title' => 0,
     'override_title_text' => 'Structured Analytic',
     'override_title_heading' => 'h2',
   );
