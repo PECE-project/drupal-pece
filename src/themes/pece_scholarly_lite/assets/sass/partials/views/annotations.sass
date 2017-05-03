@@ -147,12 +147,16 @@
     width: 70px
 
     &::before
-      content: "\f2be"
+      height: 70px
+      width: 70px
+      background-color: $color-primary
+      content: ""
       color: $color-gray-lighter
       font-family: 'FontAwesome'
-      font-size: 7rem
-      margin-top: -1.5rem
+      font-size: 2rem
+      line-height: 7rem
       position: absolute
+      text-align: center
       z-index: -1
 
   .views-field-artifact-meta-content
@@ -174,8 +178,28 @@
         @extend %pece-struct-analytics-list
 
 .page-annotions-question-artifact
+.view-display-id-pece_question_annotations,
   .field-name-field-pece-struct-analytics
     @extend %pece-struct-analytics-list
   .views-field-picture
     float: left
     margin-left: -90px
+    height: 70px
+    width: 70px
+
+    &::before
+      height: 70px
+      width: 70px
+      background-color: $color-primary
+      content: ""
+      color: $color-gray-lighter
+      font-family: 'FontAwesome'
+      font-size: 2rem
+      line-height: 7rem
+      position: absolute
+      text-align: center
+      z-index: -1
+
+    .field-content
+      height: 70px
+      width: 70px
