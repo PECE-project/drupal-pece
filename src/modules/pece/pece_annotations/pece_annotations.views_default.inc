@@ -171,17 +171,14 @@ function pece_annotations_views_default_views() {
   /* Display: Question annotations */
   $handler = $view->new_display('panel_pane', 'Question annotations', 'pece_question_annotations');
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: User: Rendered User */
-  $handler->display->display_options['fields']['rendered_entity']['id'] = 'rendered_entity';
-  $handler->display->display_options['fields']['rendered_entity']['table'] = 'views_entity_user';
-  $handler->display->display_options['fields']['rendered_entity']['field'] = 'rendered_entity';
-  $handler->display->display_options['fields']['rendered_entity']['relationship'] = 'uid';
-  $handler->display->display_options['fields']['rendered_entity']['label'] = '';
-  $handler->display->display_options['fields']['rendered_entity']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['rendered_entity']['link_to_entity'] = 1;
-  $handler->display->display_options['fields']['rendered_entity']['display'] = 'view';
-  $handler->display->display_options['fields']['rendered_entity']['view_mode'] = 'pece_thumbnail';
-  $handler->display->display_options['fields']['rendered_entity']['bypass_access'] = 0;
+  /* Field: User: Picture */
+  $handler->display->display_options['fields']['picture']['id'] = 'picture';
+  $handler->display->display_options['fields']['picture']['table'] = 'users';
+  $handler->display->display_options['fields']['picture']['field'] = 'picture';
+  $handler->display->display_options['fields']['picture']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['picture']['label'] = '';
+  $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['picture']['image_style'] = 'pece_thumbnail';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -332,7 +329,9 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['header']['area_1']['field'] = 'area';
   $handler->display->display_options['header']['area_1']['label'] = 'Meta Content  Box';
   $handler->display->display_options['header']['area_1']['empty'] = TRUE;
-  $handler->display->display_options['header']['area_1']['content'] = '[picture]
+  $handler->display->display_options['header']['area_1']['content'] = '<div class="views-field-picture">
+[picture]
+</div>
 <div class="views-field-artifact-meta-content">
 <span>In response to:</span>
 [field_pece_artifact] 
@@ -735,7 +734,9 @@ function pece_annotations_views_default_views() {
     t('%1 Annotations'),
     t('List annotations for a given user and a given artifact.'),
     t('Meta Content  Box'),
-    t('[picture]
+    t('<div class="views-field-picture">
+[picture]
+</div>
 <div class="views-field-artifact-meta-content">
 <span>In response to:</span>
 [field_pece_artifact] 
