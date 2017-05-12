@@ -22,13 +22,18 @@ echo ""
 if [[ -d ./build ]]; then
   rm -r ./build
 fi
-/usr/local/bin/drush kw-b
+
+if [ ! -d /pece/drupal/node_modules ];
+then
+  npm install && gulp setup && gulp build && gulp site-install
+  sudo chmod 775 -Rf /pece/drupal/cnf
+fi
 
 echo "PECE's Build proccess succeeded."
 
 echo ""
 echo "------------------------------"
-echo "Virtual machine ready to work."
+echo "PECE project ready to work."
 echo "------------------------------"
 echo ""
 
