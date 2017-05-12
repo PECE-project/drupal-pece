@@ -16,8 +16,12 @@ clean:
 	rm -rf ./builds
 	rm -rf ./build
 
+distro-clean:
+	docker-compose down
+	rm -rf ./build
+
 prod:
 	docker-compose run --rm -p 8080:80 production
 
-distro: clean
+distro: distro-clean
 	docker-compose run --rm production gulp pack-distro
