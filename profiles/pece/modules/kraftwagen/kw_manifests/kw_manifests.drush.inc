@@ -12,6 +12,11 @@ function kw_manifests_drush_command() {
     'drupal dependencies' => array('kw_manifests'),
   );
 
+  $items['kw-manifest'] = array(
+    'description' => 'Run a single manifest in this installation.',
+    'drupal dependencies' => array('kw_manifests'),
+  );
+
   return $items;
 }
 
@@ -72,4 +77,37 @@ function drush_kw_manifests($environment = null) {
   }
 
   drush_log(dt('Finished running manifests.'), 'ok');
+}
+
+
+/**
+ * Implements drush_COMMAND() for kw-manifest.
+ */
+function drush_kw_manifests_kw_manifest($module, $manifest_name) {
+  // load all defined manifests in executable order
+  $manifests = kw_manifests_info();
+  if (empty($manifests)) {
+    drush_log(dt('No Kraftwagen manifests found.'), 'ok');
+    return;
+  }
+
+  $id = $module . '-' . $manifest_name;
+
+  if (empty($manifests[$id])) {
+    return drush_set_error(dt('Could not find manifest.'));
+  }
+
+  $manifest = $manifests[$id];
+
+  drush_log(dt('Applying manifest !name for !module', array('!name' => $manifest['name'], '!module' => $manifest['module'])));
+
+  // run manifest
+  $result = kw_manifests_run($manifest);
+
+  // fail when a manifest could not be applied
+  if (!$result) {
+    return drush_set_error(dt('Could not apply manifest !name for !module.', array('!name' => $manifest['name'], '!module' => $manifest['module'])));
+  }
+
+  drush_log(dt('Manifest !name for !module ran successfully.', array('!name' => $manifest['name'], '!module' => $manifest['module'])), 'ok');
 }

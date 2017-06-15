@@ -369,7 +369,9 @@ input[type="button"].btn-block {
  * Box components
  *------------------------------------------------------------------------------
  */
-.field-name-group-group .field-item > a, .annotate-link, .essay-link, .field-name-group-group .field-item > span, .view-mode-card .button, .field-name-field-pece-photo-essay-items [data-remodal-target] {
+.field-name-group-group .field-item > a, .annotate-link, .essay-link, .field-name-group-group .field-item > span, .view-mode-card .button, .view-display-id-pece_user_artifact_annotations .view-footer a,
+.view-display-id-pece_question_artifact_annotions .view-footer a,
+.view-display-id-pece_question_annotations .view-footer a, .field-name-field-pece-photo-essay-items [data-remodal-target] {
   display: inline-block;
   margin: 10px 0;
   padding: 15px 23px;
@@ -380,7 +382,9 @@ input[type="button"].btn-block {
   text-transform: uppercase;
   text-decoration: none;
   text-align: center; }
-  .field-name-group-group .field-item > a:before, .annotate-link:before, .essay-link:before, .field-name-group-group .field-item > span:before, .view-mode-card .button:before, .field-name-field-pece-photo-essay-items [data-remodal-target]:before {
+  .field-name-group-group .field-item > a:before, .annotate-link:before, .essay-link:before, .field-name-group-group .field-item > span:before, .view-mode-card .button:before, .view-display-id-pece_user_artifact_annotations .view-footer a:before,
+  .view-display-id-pece_question_artifact_annotions .view-footer a:before,
+  .view-display-id-pece_question_annotations .view-footer a:before, .field-name-field-pece-photo-essay-items [data-remodal-target]:before {
     display: none; }
 
 /*
@@ -388,7 +392,9 @@ input[type="button"].btn-block {
  * Button components
  *------------------------------------------------------------------------------
  */
-.field-name-group-group .field-item > a, .annotate-link, .essay-link, .field-name-group-group .field-item > span, .view-mode-card .button, .field-name-field-pece-photo-essay-items [data-remodal-target] {
+.field-name-group-group .field-item > a, .annotate-link, .essay-link, .field-name-group-group .field-item > span, .view-mode-card .button, .view-display-id-pece_user_artifact_annotations .view-footer a,
+.view-display-id-pece_question_artifact_annotions .view-footer a,
+.view-display-id-pece_question_annotations .view-footer a, .field-name-field-pece-photo-essay-items [data-remodal-target] {
   min-width: 130px;
   transition: all 0.2s ease-in-out; }
 
@@ -406,14 +412,18 @@ input[type="button"].btn-block {
     background-color: #eeeeee;
     color: #555555; }
 
-.view-mode-card .button, .field-name-field-pece-photo-essay-items [data-remodal-target] {
+.view-mode-card .button, .view-display-id-pece_user_artifact_annotations .view-footer a,
+.view-display-id-pece_question_artifact_annotions .view-footer a,
+.view-display-id-pece_question_annotations .view-footer a, .field-name-field-pece-photo-essay-items [data-remodal-target] {
   color: white;
   background-color: #8D36AD; }
-  .view-mode-card .button:hover, .field-name-field-pece-photo-essay-items [data-remodal-target]:hover {
+  .view-mode-card .button:hover, .view-display-id-pece_user_artifact_annotations .view-footer a:hover,
+  .view-display-id-pece_question_artifact_annotions .view-footer a:hover,
+  .view-display-id-pece_question_annotations .view-footer a:hover, .field-name-field-pece-photo-essay-items [data-remodal-target]:hover {
     background-color: #a74ec8;
     color: white; }
 
-i::before,
+.profile--thumbnail.view-mode-pece-thumbnail .icon.image::before, i::before,
 [class*="node-pece-"] .icon::before,
 .user-profile .icon::before,
 .node-pece-group .icon::before, .view-mode-mini-teaser .icon.image::before, .view-id-pece_my_noted_artifacts li.views-row > div::before,
@@ -433,18 +443,29 @@ i::before,
   color: white;
   opacity: 0.8; }
 
-.field-name-field-pece-tags {
+.field-name-field-pece-tags, .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics,
+.view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics, .pane-node-field-pece-struct-analytics, .view-display-id-pece_user_artifact_annotations .views-field-field-pece-tags-1 .field-content,
+.view-display-id-pece_question_artifact_annotions .views-field-field-pece-tags-1 .field-content,
+.view-display-id-pece_question_annotations .views-field-field-pece-tags-1 .field-content {
   display: inline;
   margin-right: 2px; }
-  .field-name-field-pece-tags a {
+  .field-name-field-pece-tags a, .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list a, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics a,
+  .view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics a, .pane-node-field-pece-struct-analytics a, .view-display-id-pece_user_artifact_annotations .views-field-field-pece-tags-1 .field-content a,
+  .view-display-id-pece_question_artifact_annotions .views-field-field-pece-tags-1 .field-content a,
+  .view-display-id-pece_question_annotations .views-field-field-pece-tags-1 .field-content a {
     color: #7d7d7d;
     background-color: #d2d2d2;
     padding: 6px 8px;
     line-height: 1;
+    font-size: 14px;
     border-radius: 2px;
     display: inline-block;
-    margin: 3px 0 2px 0; }
-    .field-name-field-pece-tags a:hover {
+    margin: 3px 0;
+    transition: linear .3s; }
+    .field-name-field-pece-tags a:hover, .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list a:hover, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics a:hover,
+    .view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics a:hover, .pane-node-field-pece-struct-analytics a:hover, .view-display-id-pece_user_artifact_annotations .views-field-field-pece-tags-1 .field-content a:hover,
+    .view-display-id-pece_question_artifact_annotions .views-field-field-pece-tags-1 .field-content a:hover,
+    .view-display-id-pece_question_annotations .views-field-field-pece-tags-1 .field-content a:hover {
       background-color: #000;
       text-decoration: none;
       color: #fff; }
@@ -518,7 +539,7 @@ i::before,
   display: none; }
 
 /*
- *  Remodal - v1.1.0
+ *  Remodal - v1.1.1
  *  Responsive, lightweight, fast, synchronized with CSS animations, fully customizable modal window plugin with declarative configuration and hash tracking.
  *  http://vodkabears.github.io/remodal/
  *
@@ -587,7 +608,7 @@ html.remodal-is-locked {
   display: inline-block; }
 
 /*
- *  Remodal - v1.1.0
+ *  Remodal - v1.1.1
  *  Responsive, lightweight, fast, synchronized with CSS animations, fully customizable modal window plugin with declarative configuration and hash tracking.
  *  http://vodkabears.github.io/remodal/
  *
@@ -731,7 +752,8 @@ html.remodal-is-locked {
     opacity: 0; }
   to {
     transform: none;
-    opacity: 1; } }
+    opacity: 1;
+    filter: blur(0); } }
 
 @keyframes remodal-closing-keyframes {
   from {
@@ -739,7 +761,8 @@ html.remodal-is-locked {
     opacity: 1; }
   to {
     transform: scale(0.95);
-    opacity: 0; } }
+    opacity: 0;
+    filter: blur(0); } }
 
 @keyframes remodal-overlay-opening-keyframes {
   from {
@@ -1082,6 +1105,28 @@ html.js input.form-autocomplete {
 
 /*
  *------------------------------------------------------------------------------
+ * User thumbnail view mode styles
+ *------------------------------------------------------------------------------
+ */
+.profile--thumbnail.view-mode-pece-thumbnail {
+  position: absolute;
+  left: 0;
+  width: 70px;
+  height: 70px;
+  overflow: hidden; }
+  .profile--thumbnail.view-mode-pece-thumbnail .icon {
+    vertical-align: middle;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    background-color: #7851A9; }
+    .profile--thumbnail.view-mode-pece-thumbnail .icon .pece-thumbnail {
+      background-color: #7851A9; }
+    .profile--thumbnail.view-mode-pece-thumbnail .icon.image::before {
+      content: "\f03e"; }
+
+/*
+ *------------------------------------------------------------------------------
  * Node styles
  *------------------------------------------------------------------------------
  */
@@ -1305,6 +1350,29 @@ i.pece_memo::before {
     text-transform: uppercase;
     margin: 0; }
 
+.view-mode-meta-content {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center; }
+  .view-mode-meta-content .icon {
+    border: 2px solid;
+    display: inline-block;
+    color: #8D36AD;
+    border-radius: 4px;
+    width: 45px;
+    height: 45px;
+    margin-right: 1rem; }
+    .view-mode-meta-content .icon::before {
+      color: #8D36AD;
+      line-height: 45px; }
+  .view-mode-meta-content h5 {
+    margin: 0;
+    text-transform: inherit; }
+    .view-mode-meta-content h5 a {
+      color: #8D36AD;
+      font-size: 17px; }
+
 /*
  *------------------------------------------------------------------------------
  * Video Artifact styles
@@ -1510,6 +1578,25 @@ i.pece_memo::before {
  * Annotations view styles
  *------------------------------------------------------------------------------
  */
+.view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics,
+.view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics, .pane-node-field-pece-struct-analytics {
+  margin: 0; }
+  .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list ul, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics ul,
+  .view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics ul, .pane-node-field-pece-struct-analytics ul {
+    list-style: none; }
+    .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list ul li, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics ul li,
+    .view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics ul li, .pane-node-field-pece-struct-analytics ul li {
+      display: inline-block;
+      margin: 0 .2rem 0 0; }
+      .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list ul li a, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics ul li a,
+      .view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics ul li a, .pane-node-field-pece-struct-analytics ul li a {
+        border: 1px solid #7851A9;
+        color: #7851A9;
+        background: none; }
+        .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list ul li a:hover, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics ul li a:hover,
+        .view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics ul li a:hover, .pane-node-field-pece-struct-analytics ul li a:hover {
+          background-color: #7851A9; }
+
 .node-type-pece-analytic h1,
 .page-annotations-user h1,
 .page-annotions-question h1 {
@@ -1640,8 +1727,142 @@ i.pece_memo::before {
       float: left;
       width: 16.66667%; } }
 
-.view-display-id-pece_question_artifact_annotions .view-footer a {
+.view-display-id-pece_user_artifact_annotations .views-field-edit-node,
+.view-display-id-pece_question_artifact_annotions .views-field-edit-node,
+.view-display-id-pece_question_annotations .views-field-edit-node {
+  margin: 1rem 0; }
+
+.view-display-id-pece_user_artifact_annotations .views-field-edit-node a,
+.view-display-id-pece_question_artifact_annotions .views-field-edit-node a,
+.view-display-id-pece_question_annotations .views-field-edit-node a {
+  border: 1px solid #bbb;
+  display: inline-block;
+  padding: 1rem 1.75rem; }
+  .view-display-id-pece_user_artifact_annotations .views-field-edit-node a::before,
+  .view-display-id-pece_question_artifact_annotions .views-field-edit-node a::before,
+  .view-display-id-pece_question_annotations .views-field-edit-node a::before {
+    font-family: "FontAwesome";
+    content: "\f040";
+    padding-right: 10px; }
+
+.view-display-id-pece_user_artifact_annotations .views-field-edit-node a:hover,
+.view-display-id-pece_question_artifact_annotions .views-field-edit-node a:hover,
+.view-display-id-pece_question_annotations .views-field-edit-node a:hover {
+  text-decoration: none;
+  background-color: #eee; }
+
+.view-display-id-pece_user_artifact_annotations .view-footer,
+.view-display-id-pece_question_artifact_annotions .view-footer,
+.view-display-id-pece_question_annotations .view-footer {
+  margin-top: 2rem; }
+
+.view-display-id-pece_user_artifact_annotations .views-field-field-pece-tags-1,
+.view-display-id-pece_question_artifact_annotions .views-field-field-pece-tags-1,
+.view-display-id-pece_question_annotations .views-field-field-pece-tags-1 {
+  margin-top: 1rem; }
+
+.view-display-id-pece_question_artifact_annotions .views-row-inner,
+.view-display-id-pece_question_annotations .views-row-inner {
+  position: relative;
+  padding-left: 10rem; }
+
+.view-display-id-pece_question_artifact_annotions .views-field-name,
+.view-display-id-pece_question_annotations .views-field-name {
+  text-transform: capitalize; }
+
+.view-display-id-pece_question_artifact_annotions .view-footer a,
+.view-display-id-pece_question_annotations .view-footer a {
   text-align: right; }
+
+.page-annotions-question-artifact .views-field-artifact-meta-content,
+.view-display-id-pece_user_artifact_annotations .views-field-artifact-meta-content,
+.view-display-id-pece_question_annotations .views-field-artifact-meta-content,
+.view-display-id-pece_question_artifact_annotions .views-field-artifact-meta-content {
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  border: 1px solid #eeeeee;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 1.25rem 0;
+  padding: 1.25rem 1.5rem; }
+  .page-annotions-question-artifact .views-field-artifact-meta-content > span,
+  .view-display-id-pece_user_artifact_annotations .views-field-artifact-meta-content > span,
+  .view-display-id-pece_question_annotations .views-field-artifact-meta-content > span,
+  .view-display-id-pece_question_artifact_annotions .views-field-artifact-meta-content > span {
+    color: #555555;
+    display: block;
+    font-style: italic;
+    margin-right: 2rem; }
+    .page-annotions-question-artifact .views-field-artifact-meta-content > span::before,
+    .view-display-id-pece_user_artifact_annotations .views-field-artifact-meta-content > span::before,
+    .view-display-id-pece_question_annotations .views-field-artifact-meta-content > span::before,
+    .view-display-id-pece_question_artifact_annotions .views-field-artifact-meta-content > span::before {
+      content: '↩';
+      display: inline-block;
+      margin-right: 1rem; }
+
+.page-annotations-user-artifact h1 {
+  margin-left: 90px;
+  position: absolute;
+  line-height: 10px;
+  top: 30px;
+  text-transform: capitalize; }
+
+.view-display-id-pece_user_artifact_annotations .views-field-picture {
+  height: 70px;
+  width: 70px; }
+  .view-display-id-pece_user_artifact_annotations .views-field-picture::before {
+    height: 70px;
+    width: 70px;
+    background-color: #7851A9;
+    content: "";
+    color: #eeeeee;
+    font-family: 'FontAwesome';
+    font-size: 2rem;
+    line-height: 7rem;
+    position: absolute;
+    text-align: center;
+    z-index: -1; }
+
+.view-display-id-pece_user_artifact_annotations .views-field-artifact-meta-content {
+  margin: 3rem 0 1.25rem; }
+
+.view-display-id-pece_user_artifact_annotations > .view-content > .views-row h2 {
+  margin: 10px 0; }
+
+.view-display-id-pece_user_artifact_annotations > .view-content > .views-row h2 + div {
+  display: block;
+  margin: 1rem 0;
+  padding: 0;
+  background: none; }
+  .view-display-id-pece_user_artifact_annotations > .view-content > .views-row h2 + div h2 {
+    padding: .5em;
+    background-color: #E2E2E2; }
+
+.view-display-id-pece_question_annotations .views-field-picture,
+.view-display-id-pece_question_artifact_annotions .views-field-picture {
+  float: left;
+  margin-left: -90px;
+  height: 70px;
+  width: 70px; }
+  .view-display-id-pece_question_annotations .views-field-picture::before,
+  .view-display-id-pece_question_artifact_annotions .views-field-picture::before {
+    height: 70px;
+    width: 70px;
+    background-color: #7851A9;
+    content: "";
+    color: #eeeeee;
+    font-family: 'FontAwesome';
+    font-size: 2rem;
+    line-height: 7rem;
+    position: absolute;
+    text-align: center;
+    z-index: -1; }
+  .view-display-id-pece_question_annotations .views-field-picture .field-content,
+  .view-display-id-pece_question_artifact_annotions .views-field-picture .field-content {
+    height: 70px;
+    width: 70px; }
 
 /*
  *------------------------------------------------------------------------------
@@ -1678,6 +1899,43 @@ i.pece_memo::before {
 .view-id-pece_group_field_diary .views-field-created {
   font-weight: bold;
   color: #7851A9; }
+
+.view-pece-structured-analytics .views-row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+  align-items: flex-start; }
+
+.view-pece-structured-analytics i {
+  height: 70px;
+  min-width: 70px;
+  background-color: #7851A9;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 20px; }
+  .view-pece-structured-analytics i::before {
+    content: '\f059';
+    font-family: "FontAwesome";
+    font-size: 18px; }
+
+.view-pece-structured-analytics .taxonomy-term h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  text-transform: none; }
+
+.view-pece-structured-analytics .taxonomy-term h2 a {
+  text-transform: initial;
+  display: inline-block; }
+  .view-pece-structured-analytics .taxonomy-term h2 a::first-letter {
+    text-transform: uppercase; }
+
+.view-pece-structured-analytics .taxonomy-term-description {
+  margin-bottom: 0; }
+  .view-pece-structured-analytics .taxonomy-term-description p {
+    margin-bottom: 0;
+    padding: 0; }
 
 /*
  *------------------------------------------------------------------------------
@@ -1967,7 +2225,7 @@ i.pece_memo::before {
   .view-id-pece_question_term ul li {
     margin-bottom: 2rem; }
   .view-id-pece_question_term ul h2 a {
-    text-transform: lowercase;
+    text-transform: initial;
     display: inline-block; }
     .view-id-pece_question_term ul h2 a::first-letter {
       text-transform: uppercase; }
@@ -1990,6 +2248,22 @@ i.pece_memo::before {
 .packery-layout .essay-link {
   display: block;
   width: 100%; }
+
+/*
+ *------------------------------------------------------------------------------
+ * Question Set (Structured Analytic) pane styles
+ *------------------------------------------------------------------------------
+ */
+.pane-node-field-pece-struct-analytics a {
+  border: 1px solid #7851A9;
+  color: #7851A9;
+  background: none; }
+  .pane-node-field-pece-struct-analytics a:hover {
+    background-color: #7851A9; }
+
+.pane-node-field-pece-struct-analytics div.field-name-field-pece-struct-analytics {
+  display: inline-block;
+  margin-right: .2rem; }
 
 /*
  *------------------------------------------------------------------------------

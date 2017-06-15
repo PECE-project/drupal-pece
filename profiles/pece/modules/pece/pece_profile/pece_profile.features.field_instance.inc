@@ -329,6 +329,12 @@ function pece_profile_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'pece_thumbnail' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
     ),
     'entity_type' => 'user',
     'field_name' => 'field_user_about',
@@ -379,6 +385,16 @@ function pece_profile_field_default_field_instances() {
         'settings' => array(
           'image_link' => '',
           'image_style' => 'panopoly_image_square',
+        ),
+        'type' => 'image',
+        'weight' => 0,
+      ),
+      'pece_thumbnail' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => 'pece_thumbnail',
         ),
         'type' => 'image',
         'weight' => 0,

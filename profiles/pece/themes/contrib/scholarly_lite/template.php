@@ -244,7 +244,7 @@ function scholarly_lite_preprocess_html(&$variables) {
 
 	drupal_add_css(path_to_theme() . '/fonts/ptserif-blockquote-font.css', array('group' => CSS_THEME, 'type' => 'file'));
 
-  drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', array('type' => 'external'));
+  drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', array('type' => 'external'));
 
 	drupal_add_css(path_to_theme() . '/ie9.css', array('group' => CSS_THEME, 'browsers' => array('IE' => '(IE 9)&(!IEMobile)', '!IE' => FALSE), 'preprocess' => FALSE));
 

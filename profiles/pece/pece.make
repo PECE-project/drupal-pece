@@ -22,9 +22,10 @@ projects[kw_itemnames][subdir] = kraftwagen
 ; =====================
 
 ; Overrides panopoly's ctools.
-projects[ctools][version] = 1.9
+projects[ctools][version] = 1.12
 projects[ctools][subdir] = contrib
-projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
+; @TODO: Update and reapply the following patch.
+; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
 
 ; Overrides panopoly's libraries.
 projects[libraries][version] = 2.2
@@ -35,8 +36,9 @@ projects[token][version] = 1.6
 projects[token][subdir] = contrib
 
 ; Overrides panopoly's entity.
-projects[entity][version] = 1.7
+projects[entity][version] = 1.8
 projects[entity][subdir] = contrib
+projects[entity][patch][2671150] = "https://www.drupal.org/files/issues/entity_id_token-1957266-36.patch"
 
 ; Overrides panopoly's uuid.
 projects[uuid][version] = 1.0-beta1
@@ -248,6 +250,11 @@ projects[eck][subdir]  = contrib
 
 projects[entity_view_mode][version] = 1.0-rc1
 projects[entity_view_mode][subdir] = contrib
+
+projects[entityreference][version] = 1.2
+projects[entityreference][subdir] = contrib
+projects[entityreference][patch][1836106] = "https://www.drupal.org/files/issues/entityreference_1836106_59.patch"
+projects[entityreference][patch][1423778] = "https://www.drupal.org/files/issues/entityreference-1423778-brokenhandler.diff"
 
 projects[entityreference_view_widget][version] = 2.0-rc6
 projects[entityreference_view_widget][subdir] = contrib

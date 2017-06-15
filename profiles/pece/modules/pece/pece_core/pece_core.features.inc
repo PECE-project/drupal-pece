@@ -68,6 +68,21 @@ function pece_core_image_default_styles() {
     ),
   );
 
+  // Exported image style: pece_thumbnail.
+  $styles['pece_thumbnail'] = array(
+    'label' => 'PECE Thumbnail',
+    'effects' => array(
+      2 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 70,
+          'height' => 70,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   return $styles;
 }
 

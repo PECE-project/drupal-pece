@@ -4,6 +4,21 @@
  *------------------------------------------------------------------------------
  */
 
+%pece-struct-analytics-list
+  @extend %tags
+  margin: 0
+  ul
+    list-style: none
+    li
+      display: inline-block
+      margin: 0 .2rem 0 0
+      a
+        border: 1px solid $color-royal-purple
+        color: $color-royal-purple
+        background: none
+        &:hover
+          background-color: $color-royal-purple
+
 .node-type-pece-analytic,
 .page-annotations-user,
 .page-annotions-question
@@ -54,6 +69,138 @@
   .views-submit-button
     +make-sm-column(2)
 
-.view-display-id-pece_question_artifact_annotions
+  .views-field-edit-node
+    margin: 1rem 0
+
+  .views-field-edit-node a
+    border: 1px solid #bbb
+    display: inline-block
+    padding: 1rem 1.75rem
+    &::before
+      font-family: $font-family-icon
+      content: "\f040"
+      padding-right: 10px
+
+  .views-field-edit-node a:hover
+    text-decoration: none
+    background-color: #eee
+
+  .view-footer
+    margin-top: 2rem
+    a
+      @extend %button-vivid
+
+  .views-field-field-pece-tags-1
+    margin-top: 1rem
+
+    .field-content
+      @extend %tags
+
+.view-display-id-pece_question_artifact_annotions,
+.view-display-id-pece_question_annotations
+  .views-row-inner
+    position: relative
+    padding-left: 10rem
+
+  .views-field-name
+    text-transform: capitalize
+
   .view-footer a
     text-align: right
+
+.page-annotions-question-artifact,
+.view-display-id-pece_user_artifact_annotations,
+.view-display-id-pece_question_annotations,
+.view-display-id-pece_question_artifact_annotions
+  .views-field-artifact-meta-content
+    align-items: center
+    background-color: $color-gray-extra-lighter
+    border: 1px solid $color-gray-lighter
+    display: flex
+    margin: 1.25rem 0
+    padding: 1.25rem 1.5rem
+
+    > span
+      color: $color-gray
+      display: block
+      font-style: italic
+      margin-right: 2rem
+
+      &::before
+        content: '↩'
+        display: inline-block
+        margin-right: 1rem
+
+// !!! WARNING !!!
+// Used for placing page title beside Users' picture.
+.page-annotations-user-artifact
+  h1
+    margin-left: 90px
+    position: absolute
+    line-height: 10px
+    top: 30px
+    text-transform: capitalize
+
+.view-display-id-pece_user_artifact_annotations
+  .views-field-picture
+    height: 70px
+    width: 70px
+
+    &::before
+      height: 70px
+      width: 70px
+      background-color: $color-primary
+      content: ""
+      color: $color-gray-lighter
+      font-family: 'FontAwesome'
+      font-size: 2rem
+      line-height: 7rem
+      position: absolute
+      text-align: center
+      z-index: -1
+
+  .views-field-artifact-meta-content
+    margin: 3rem 0 1.25rem
+  > .view-content > .views-row
+    h2
+      margin: 10px 0
+    h2 + div
+      display: block
+      margin: 1rem 0
+      padding: 0
+      background: none
+      h2
+        padding: .5em
+        background-color: #E2E2E2
+
+    .views-field-field-pece-struct-analytics
+      .field-content .item-list
+        @extend %pece-struct-analytics-list
+
+.page-annotions-question-artifact
+.view-display-id-pece_question_annotations,
+.view-display-id-pece_question_artifact_annotions
+  .field-name-field-pece-struct-analytics
+    @extend %pece-struct-analytics-list
+  .views-field-picture
+    float: left
+    margin-left: -90px
+    height: 70px
+    width: 70px
+
+    &::before
+      height: 70px
+      width: 70px
+      background-color: $color-primary
+      content: ""
+      color: $color-gray-lighter
+      font-family: 'FontAwesome'
+      font-size: 2rem
+      line-height: 7rem
+      position: absolute
+      text-align: center
+      z-index: -1
+
+    .field-content
+      height: 70px
+      width: 70px

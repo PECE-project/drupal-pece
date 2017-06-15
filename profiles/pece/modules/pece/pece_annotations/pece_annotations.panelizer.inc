@@ -13,22 +13,22 @@ function pece_annotations_panelizer_defaults() {
   $panelizer = new stdClass();
   $panelizer->disabled = FALSE; /* Edit this to true to make a default panelizer disabled initially */
   $panelizer->api_version = 1;
-  $panelizer->name = 'node:pece_analytic:default';
   $panelizer->title = 'Default';
   $panelizer->panelizer_type = 'node';
   $panelizer->panelizer_key = 'pece_analytic';
-  $panelizer->no_blocks = FALSE;
-  $panelizer->css_id = '';
-  $panelizer->css = '';
-  $panelizer->pipeline = 'ipe';
-  $panelizer->contexts = array();
-  $panelizer->relationships = array();
   $panelizer->access = array();
   $panelizer->view_mode = 'page_manager';
+  $panelizer->name = 'node:pece_analytic:default';
+  $panelizer->css_id = '';
   $panelizer->css_class = '';
+  $panelizer->css = '';
+  $panelizer->no_blocks = FALSE;
   $panelizer->title_element = 'H2';
   $panelizer->link_to_entity = TRUE;
   $panelizer->extra = array();
+  $panelizer->pipeline = 'ipe';
+  $panelizer->contexts = array();
+  $panelizer->relationships = array();
   $display = new panels_display();
   $display->layout = 'flexible';
   $display->layout_settings = array();
@@ -41,6 +41,8 @@ function pece_annotations_panelizer_defaults() {
   $display->cache = array();
   $display->title = '%node:title';
   $display->uuid = '0a934801-c6b7-4a6c-8234-e885bbfdcc10';
+  $display->storage_type = 'panelizer_default';
+  $display->storage_id = 'node:pece_analytic:default';
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
@@ -114,7 +116,7 @@ function pece_annotations_panelizer_defaults() {
       'link' => 1,
     ),
     'context' => 'panelizer',
-    'override_title' => 1,
+    'override_title' => 0,
     'override_title_text' => 'Structured Analytic',
     'override_title_heading' => 'h2',
   );

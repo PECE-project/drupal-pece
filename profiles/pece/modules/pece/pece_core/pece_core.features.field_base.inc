@@ -254,7 +254,7 @@ function pece_core_field_default_field_bases() {
         ),
         'view' => array(
           'args' => array(),
-          'display_name' => 'entityreference_contributor',
+          'display_name' => 'entityreference_contributor_researcher',
           'view_name' => 'users_field_ref',
         ),
       ),

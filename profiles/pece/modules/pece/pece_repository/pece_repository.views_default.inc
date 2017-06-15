@@ -165,7 +165,7 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['fields']['type']['exclude'] = TRUE;
   $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['type']['machine_name'] = TRUE;
-  /* Field: Content: Thumbnail image */
+  /* Field: Content: Image */
   $handler->display->display_options['fields']['field_pece_media_image']['id'] = 'field_pece_media_image';
   $handler->display->display_options['fields']['field_pece_media_image']['table'] = 'field_data_field_pece_media_image';
   $handler->display->display_options['fields']['field_pece_media_image']['field'] = 'field_pece_media_image';
@@ -200,70 +200,6 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Title */
-  $handler->display->display_options['filters']['title']['id'] = 'title';
-  $handler->display->display_options['filters']['title']['table'] = 'node';
-  $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'contains';
-  $handler->display->display_options['filters']['title']['group'] = 1;
-  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
-  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    6 => 0,
-    5 => 0,
-  );
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_filter'] = 1;
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_items'] = '10';
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_min_chars'] = '0';
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_field'] = 'title';
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_suggestion'] = 1;
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 1;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
-  $handler->display->display_options['filters']['type_1']['table'] = 'node';
-  $handler->display->display_options['filters']['type_1']['field'] = 'type';
-  $handler->display->display_options['filters']['type_1']['value'] = array(
-    'pece_artifact_audio' => 'pece_artifact_audio',
-    'pece_artifact_bundle' => 'pece_artifact_bundle',
-    'pece_artifact_image' => 'pece_artifact_image',
-    'pece_artifact_pdf' => 'pece_artifact_pdf',
-    'pece_artifact_text' => 'pece_artifact_text',
-    'pece_artifact_video' => 'pece_artifact_video',
-    'pece_artifact_website' => 'pece_artifact_website',
-    'pece_group' => 'pece_group',
-    'pece_memo' => 'pece_memo',
-  );
-  $handler->display->display_options['filters']['type_1']['group'] = 1;
-  $handler->display->display_options['filters']['type_1']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['type_1']['expose']['operator_id'] = 'type_1_op';
-  $handler->display->display_options['filters']['type_1']['expose']['label'] = 'Filter by:';
-  $handler->display->display_options['filters']['type_1']['expose']['operator'] = 'type_1_op';
-  $handler->display->display_options['filters']['type_1']['expose']['identifier'] = 'type_1';
-  $handler->display->display_options['filters']['type_1']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['type_1']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    6 => 0,
-    5 => 0,
-  );
-  $handler->display->display_options['filters']['type_1']['expose']['reduce'] = TRUE;
-  $handler->display->display_options['filters']['type_1']['group_info']['label'] = 'Type';
-  $handler->display->display_options['filters']['type_1']['group_info']['identifier'] = 'type_1';
-  $handler->display->display_options['filters']['type_1']['group_info']['remember'] = FALSE;
-  $handler->display->display_options['filters']['type_1']['group_info']['group_items'] = array(
-    1 => array(),
-    2 => array(),
-    3 => array(),
-  );
 
   /* Display: Repository */
   $handler = $view->new_display('page', 'Repository', 'respository_page');
@@ -553,6 +489,7 @@ function pece_repository_views_default_views() {
   $handler = $view->new_display('page', 'Artifacts', 'repository_artifacts_page');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Artifacts';
+  $handler->display->display_options['enabled'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
   $handler->display->display_options['filter_groups']['groups'] = array(
@@ -644,7 +581,6 @@ function pece_repository_views_default_views() {
     3 => array(),
   );
   $handler->display->display_options['path'] = 'repo/artifacts';
-  $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Analyze';
   $handler->display->display_options['menu']['weight'] = '3';
   $handler->display->display_options['menu']['name'] = 'main-menu';
