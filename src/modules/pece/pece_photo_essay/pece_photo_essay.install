@@ -43,6 +43,8 @@ function _pece_photo_essay_install_permissions() {
 function pece_photo_essay_update_7001() {
   if ($instance = field_info_instance('node', 'field_pece_authors', 'pece_photo_essay')) {
     field_delete_instance($instance);
-    drush_print('Deleted field field_pece_authors from pece_photo_essay node types.');
+    if (function_exists('drush_print')) {
+      drush_print('Deleted field field_pece_authors from pece_photo_essay node types.');
+    }
   }
 }
