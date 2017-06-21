@@ -98,6 +98,11 @@ function pece_access_update_7102(&$sandbox) {
     // Load the node and updates group visibility fields.
     $node = node_load($row['nid']);
     $node_wrapper = entity_metadata_wrapper('node', $node);
+    if (!method_exists($node_wrapper->group_content_access)) {
+      // Logs Error.
+      watchdog('pece_access', 'Update 7102: Content @title\'s (id: @nid) group visibility field not available.', array(), WATCHDOG_ERROR);
+      continue;
+    }
     $node_wrapper->group_content_access->set(0);
     $node_wrapper->save();
 
@@ -112,7 +117,6 @@ function pece_access_update_7102(&$sandbox) {
     // Update the progress information.
     $sandbox['progress']++;
   }
-
   // Set the "finished" status, to tell batch engine whether this function
   // needs to run again. If you set a float, this will indicate the progress of
   // the batch so the progress bar will update.
