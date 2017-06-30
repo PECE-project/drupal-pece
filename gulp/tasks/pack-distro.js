@@ -21,7 +21,7 @@ gulp.task('pack-distro', function () {
 var packDistroCallback = function () {
   if (!process.env.IS_PRODUCTION) {
     // Backup kw previous config and set kraftwagen env config to production
-    // in order to prevent symlinks in the profile filder.
+    // in order to prevent symlinks in the profile folder.
     shell.exec('mv ' + kwEnvConfigFile + ' ' + kwEnvConfigFile + '.bkp');
 
     shell.exec('drush kw-setup-env production');
