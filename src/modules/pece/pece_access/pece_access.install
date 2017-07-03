@@ -97,21 +97,22 @@ function pece_access_update_7102(&$sandbox) {
   while ($row = $result->fetchAssoc()) {
     // Load the node and updates group visibility fields.
     $node = node_load($row['nid']);
+    $node_info = array('@nid' => $node->nid, '@title' => $node->title);
     $node_wrapper = entity_metadata_wrapper('node', $node);
-    if (!method_exists($node_wrapper->group_content_access)) {
+    if (!in_array('group_content_access' , $node_wrapper->getPropertyInfo())) {
       // Logs Error.
-      watchdog('pece_access', 'Update 7102: Content @title\'s (id: @nid) group visibility field not available.', array(), WATCHDOG_ERROR);
+      watchdog('pece_access', 'Update 7102: Content @title\'s (id: @nid) group visibility field not available.', $node_info, WATCHDOG_WARNING);
       continue;
     }
     $node_wrapper->group_content_access->set(0);
     $node_wrapper->save();
 
     // Logs the process.
-    watchdog('pece_access', 'Update 7102: Content @title\'s (id: @nid) group visibility field was updated.', array('@nid' => $node->nid, '@title' => $node->title), WATCHDOG_INFO);
+    watchdog('pece_access', 'Update 7102: Content @title\'s (id: @nid) group visibility field was updated.', $node_info, WATCHDOG_INFO);
 
     // If running through drush display the status message.
     if (drupal_is_cli()) {
-      drupal_set_message(t('Content @title\'s (id: @nid) group visibility field was updated.', array('@nid' => $node->nid, '@title' => $node->title)));
+      drupal_set_message(t('Content @title\'s (id: @nid) group visibility field was updated.', $node_info));
     }
 
     // Update the progress information.
