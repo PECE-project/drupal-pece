@@ -98,12 +98,12 @@ function pece_access_update_7102(&$sandbox) {
     // Load the node and updates group visibility fields.
     $node = node_load($row['nid']);
     $node_info = array('@nid' => $node->nid, '@title' => $node->title);
-    $node_wrapper = entity_metadata_wrapper('node', $node);
-    if (!in_array('group_content_access' , $node_wrapper->getPropertyInfo())) {
+    if (!field_get_items('node', $node, 'group_content_access')) {
       // Logs Error.
       watchdog('pece_access', 'Update 7102: Content @title\'s (id: @nid) group visibility field not available.', $node_info, WATCHDOG_WARNING);
       continue;
     }
+    $node_wrapper = entity_metadata_wrapper('node', $node);
     $node_wrapper->group_content_access->set(0);
     $node_wrapper->save();
 
@@ -135,6 +135,9 @@ function pece_access_update_7102(&$sandbox) {
     // Removes the variables that are not needed anymore.
     variable_del('pece_access_content_update_sql');
     variable_del('pece_access_content_update_sql_args');
+
+    // Rebuild node permissions.
+    node_access_rebuild($batch_mode = TRUE);
 
     // hook_update_N() may optionally return a string which will be displayed
     // to the user.
