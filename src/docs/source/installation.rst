@@ -48,6 +48,20 @@ core:
 * cURL 
 * php-mcrypt (for AES encryption support in backups and user passwords) 
 * php-ssh2 (for backup SFTP support, installed via PHP ``pear``)
+* php-mysql
+* php-xml
+* php-mcrypt
+* php-ssh2
+* php-mbstring
+* libapache2-mod-php
+* php-gd
+
+On a fresh install of Ubuntu 16.04.2 LTS, the following single command will install everything needed to run PECE.
+
+
+:: 
+
+    sudo apt-get install apache2 php mysql-server php-mysql php-xml php-mcrypt php-ssh2 php-mbstring libapache2-mod-php php-gd
 
 
 Quick Install 
@@ -70,8 +84,8 @@ these steps:
     mysql -u $YOUR_USER -p -e "CREATE DATABASE $YOUR_DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci;"
 
 
-Proceed to the URL in which your Drupal will reside, i.e.
-``https://worldpece.org``. From there, you can install PECE like any other
+Proceed to the URL in which your Drupal will reside, followed by ``/install.php``, e.g.
+``https://worldpece.org/install.php``. From there, you can install PECE like any other
 Drupal site. Follow the Drupal.org `official documentation if you need
 further help <https://www.drupal.org/documentation/install/>`_. In the section
 `Troubleshooting`_ below we describe common issues users have when trying to
@@ -82,6 +96,45 @@ permissions.
 filesystem properly. We cannot emphasize this enough.  The `official Drupal
 documentation explains <https://www.drupal.org/node/244924>`_ how to do so, if
 you have questions.
+
+If you need to set up the server backend, then roughly, if you are using Apache, the following commands should fully prepare Drupal and PECE. This example is for `worldpece.org`, which lives in `/var/www/html/`.
+
+:: 
+
+    sudo chown -R www-data:www-data pece-distro/
+    sudo mkdir -p pece-distro/sites/default/files
+    sudo chmod -R 777 pece-distro/sites/default/files
+    sudo vi /etc/apache2/apache2.conf
+
+* Edit `AllowOverride None` lines to `AllowOverride All`
+:: 
+
+    cd /etc/apache2/sites-available
+    sudo cp 000-default.conf worldpece.conf
+    sudo vi worldpece.conf
+
+* Add the following:
+:: 
+
+    ServerAdmin admin@example.com
+    DocumentRoot /var/www/html/pece-distro
+    ServerName worldpece.org
+    ServerAlias
+    RewriteEngine On
+    RewriteOptions inherit
+
+* Then teach Apache about the new site.
+:: 
+
+    sudo a2enmod rewrite
+    sudo a2ensite worldpece
+    sudo vi /etc/php/7.0/apache2/php.ini
+
+* Edit 128M to 256M
+:: 
+
+    sudo service apache2 reload
+    sudo service apache2 restart
 
 
 Setting up the Development Environment 
