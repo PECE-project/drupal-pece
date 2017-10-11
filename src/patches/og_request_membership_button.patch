@@ -1,0 +1,23 @@
+diff --git a/og_ui.module b/og_ui.module
+--- a/og_ui.module
++++ b/og_ui.module
+
+@@ -613,9 +613,18 @@ function og_ui_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+      if (og_is_member($entity_type, $id, 'user', $account, array(OG_STATE_ACTIVE, OG_STATE_PENDING))) {	 
++
++		 if (og_is_member($entity_type, $id, 'user', $account, array(OG_STATE_PENDING))) {
++			$links['title'] = t('Pending Group Membership');
++			$links['href'] = "#";
++			$links['class'] = 'group unsubscribe pending-status';
++		} 
++	
++		if (og_is_member($entity_type, $id, 'user', $account, array(OG_STATE_ACTIVE))) {
++			 if (og_user_access($entity_type, $id, 'unsubscribe', $account)) {
++			  $links['title'] = t('Unsubscribe from group');
++			  $links['href'] = "group/$entity_type/$id/unsubscribe";
++			  $links['class'] = 'group unsubscribe';
++			}	 
++	   }
++
+      else {
+        if (og_is_member($entity_type, $id, 'user', $account, array(OG_STATE_BLOCKED))) {
