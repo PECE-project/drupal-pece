@@ -98,7 +98,7 @@ projects[admin_menu][subdir]  = contrib
 projects[adminimal_admin_menu][version] = 1.7
 projects[adminimal_admin_menu][subdir]  = contrib
 
-projects[coffee][version] = 2.2
+projects[coffee][version] = 2.3
 projects[coffee][subdir]  = contrib
 
 projects[fpa][version] = 2.6
