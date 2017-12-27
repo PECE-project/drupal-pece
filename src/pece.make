@@ -83,7 +83,7 @@ projects[views_litepager][subdir] = contrib
 projects[tvi][version] = 1.0-beta5
 projects[tvi][subdir] = contrib
 
-projects[better_exposed_filters][version] = 3.2
+projects[better_exposed_filters][version] = 3.5
 projects[better_exposed_filters][subdir] = contrib
 
 projects[views_autocomplete_filters][version] = 1.2
