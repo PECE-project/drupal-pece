@@ -467,7 +467,7 @@ projects[node_expire][version] = 2.2
 
 ; Date (dependency of node_expire)
 projects[date][subdir] = contrib
-projects[date][version] = 2.9
+projects[date][version] = 2.10
 
 ; =====================
 ; Development Modules
