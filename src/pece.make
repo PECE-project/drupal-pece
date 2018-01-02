@@ -312,7 +312,7 @@ projects[image_resize_filter][subdir] = contrib
 projects[linkit][version] = 3.5
 projects[linkit][subdir] = contrib
 
-projects[field_group][version] = 1.5
+projects[field_group][version] = 1.6
 projects[field_group][subdir] = contrib
 
 ; =====================
