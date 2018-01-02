@@ -195,29 +195,28 @@ projects[panopoly_theme][subdir] = contrib
 projects[panopoly_magic][version] = 1.49
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.35
+projects[panopoly_widgets][version] = 1.49
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_admin][version] = 1.35
+projects[panopoly_admin][version] = 1.49
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_users][version] = 1.28
+projects[panopoly_users][version] = 1.49
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.35
+projects[panopoly_pages][version] = 1.49
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_wysiwyg][version] = 1.35
+projects[panopoly_wysiwyg][version] = 1.49
 projects[panopoly_wysiwyg][subdir] = contrib
 
 projects[panopoly_search][subdir] = contrib
-projects[panopoly_search][version] = 1.35
+projects[panopoly_search][version] = 1.49
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
-projects[panopoly_search][patch][] = "https://www.drupal.org/files/issues/solrphpclient_cannot_be-2790595-10.patch"
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.27
+projects[panopoly_test][version] = 1.49
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
