@@ -189,7 +189,7 @@ libraries[jquery.imgareaselect][download][type] = file
 libraries[jquery.imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v0.9.11-rc.1.tar.gz
 libraries[jquery.imgareaselect][download][subtree] = imgareaselect-0.9.11-rc.1
 
-projects[panopoly_theme][version] = 1.35
+projects[panopoly_theme][version] = 1.49
 projects[panopoly_theme][subdir] = contrib
 
 projects[panopoly_magic][version] = 1.35
