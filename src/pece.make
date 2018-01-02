@@ -261,7 +261,7 @@ projects[entityreference_view_widget][subdir] = contrib
 projects[er_viewmode][version] = 1.0-alpha1
 projects[er_viewmode][subdir] = contrib
 
-projects[entityconnect][version] = 1.0-rc5
+projects[entityconnect][version] = 2.0-rc1
 projects[entityconnect][subdir] = contrib
 
 projects[inline_entity_form][version] = 1.8
