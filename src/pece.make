@@ -174,7 +174,7 @@ projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_core][version] = 1.35
+projects[panopoly_core][version] = 1.49
 projects[panopoly_core][subdir] = contrib
 
 projects[panopoly_images][version] = 1.35
