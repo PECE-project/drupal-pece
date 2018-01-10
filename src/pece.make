@@ -483,7 +483,7 @@ projects[smtp][version] = 1.4
 
 ; Services
 projects[services][subdir] = contrib
-projects[services][version] = 3.15
+projects[services][version] = 3.20
 
 ; Services Views
 projects[services_views][subdir] = contrib
