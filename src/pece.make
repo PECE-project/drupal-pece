@@ -196,6 +196,7 @@ projects[panopoly_magic][subdir] = contrib
 
 projects[panopoly_widgets][version] = 1.49
 projects[panopoly_widgets][subdir] = contrib
+projects[panopoly_widgets][patch][2919401] = https://www.drupal.org/files/issues/panopoly_widgets-update-tablefield-2919401-3.patch
 
 projects[panopoly_admin][version] = 1.49
 projects[panopoly_admin][subdir] = contrib
