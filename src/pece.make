@@ -479,7 +479,7 @@ projects[backup_migrate_sftp][version] = 1.0
 
 ; SMTP Mail
 projects[smtp][subdir] = contrib
-projects[smtp][version] = 1.4
+projects[smtp][version] = 1.7
 
 ; Services
 projects[services][subdir] = contrib
