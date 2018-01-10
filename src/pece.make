@@ -487,7 +487,7 @@ projects[services][version] = 3.20
 
 ; Services Views
 projects[services_views][subdir] = contrib
-projects[services_views][version] = 1.1
+projects[services_views][version] = 1.3
 
 ; =====================
 ; Integrations
