@@ -249,7 +249,7 @@ projects[eck][subdir]  = contrib
 projects[entity_view_mode][version] = 1.0-rc1
 projects[entity_view_mode][subdir] = contrib
 
-projects[entityreference][version] = 1.2
+projects[entityreference][version] = 1.5
 projects[entityreference][subdir] = contrib
 projects[entityreference][patch][1836106] = "https://www.drupal.org/files/issues/entityreference_1836106_59.patch"
 projects[entityreference][patch][1423778] = "https://www.drupal.org/files/issues/entityreference-1423778-brokenhandler.diff"
