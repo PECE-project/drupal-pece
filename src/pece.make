@@ -293,9 +293,8 @@ projects[smart_trim][subdir] = contrib
 projects[file_entity][version] = 2.0-beta2
 projects[file_entity][subdir] = contrib
 
-projects[media][version] = 2.0-beta1
+projects[media][version] = 2.14
 projects[media][subdir] = contrib
-projects[media][patch][] = https://www.drupal.org/files/issues/unable_to_create-2568123-2.patch
 
 projects[ckeditor][version] = 1.16
 projects[ckeditor][subdir] = contrib
