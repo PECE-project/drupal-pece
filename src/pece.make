@@ -459,7 +459,7 @@ projects[amber][version] = 1.0
 
 ; Backup and Migrate
 projects[backup_migrate][subdir] = contrib
-projects[backup_migrate][version] = 3.1
+projects[backup_migrate][version] = 3.3
 
 ; Node Expiration
 projects[node_expire][subdir] = contrib
