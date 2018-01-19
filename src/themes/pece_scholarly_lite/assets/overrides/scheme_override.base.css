@@ -8,6 +8,8 @@
 
 #header-top ul.menu li:last-child>a { border-right: 1px solid _color_primary_; }
 
+div#header-top { background-color: _color_primary_; }
+
 a, blockquote:after, ul.menu li.collapsed > a:before, ul.menu li.expanded > a:before, .footer-area ul.menu li.active-trail > a:before, ul.pager li.pager-current, 
 .item-list ul li.pager-current.last, .node-mt .comment-counter, .comment ul.links li a, .ui-widget-content a, .view-mt-testimonials .views-field-title a,
 .footer-area ul.social-media-info li a, ul.social-media-info li a:hover i, .ui-widget-content ul.links li a, .node-mt .post-submitted-info i, 
@@ -21,8 +23,7 @@ ul.pager li.pager-current, .item-list ul li.pager-current.last { border-bottom: 
 ul.links li a, a.more, input[type="submit"], input[type="reset"], input[type="button"], #main-navigation .sf-menu li.sfHover>a, #header-top, .checkout-buttons .checkout-cancel, 
 .checkout-buttons .checkout-back, .checkout-buttons .checkout-cancel:focus, .checkout-buttons .checkout-back:focus { background-color: _color_secondary_; }
 
-/* @TODO: Add RGBA color for sf-menu ul */
-#main-navigation .sf-menu ul, #header-top .sf-menu ul { background: _color_secondary_ rgba(141, 54, 173, 0.95); }
+#main-navigation .sf-menu ul, #header-top .sf-menu ul { background: _color_alpha_secondary_; }
 
 a:hover, a:focus, h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, .footer-area h1 a:hover, .footer-area h2 a:hover, 
 .footer-area h3 a:hover, .footer-area h4 a:hover, .footer-area h5 a:hover, .footer-area h6 a:hover, .footer-area ul.menu li a:hover, ul.pager li > a:hover, 
@@ -55,3 +56,13 @@ ul.links li a:hover, a.more:hover, input[type="submit"]:hover, input[type="reset
 .header-top-area .block-search .form-actions:after, .footer-area .block-search .form-actions:after, .subfooter-area .block-search .form-actions:after,
 .header-top-area .form-actions input, .footer-area .form-actions input, .subfooter-area .form-actions input {
 background-color: rgba(0,0,0,0.2)!important; }
+
+.header-top-area .form-text { background-color: _color_alpha_primary_ }
+
+.ui-tabs .ui-tabs-nav li.ui-state-active .ui-tabs-anchor { border-color:_color_primary_; background-color: _color_primary_; }
+.ui-tabs .ui-tabs-nav li.ui-state-active .ui-tabs-anchor:hover { color: _color_primary_ }
+
+.ui-tabs .ui-tabs-nav li .ui-tabs-anchor { border-color:_color_primary_; }
+.ui-tabs .ui-tabs-nav li .ui-tabs-anchor:hover { background-color: _color_primary_; }
+
+.view-mode-mini-teaser .icon { _color_primary_; }
