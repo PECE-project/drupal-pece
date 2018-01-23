@@ -8,7 +8,7 @@
 
 #header-top ul.menu li:last-child>a { border-right: 1px solid _color_primary_; }
 
-div#header-top { background-color: _color_primary_; }
+div#header-top { background-color: _color_dark_primary_; }
 
 a, blockquote:after, ul.menu li.collapsed > a:before, ul.menu li.expanded > a:before, .footer-area ul.menu li.active-trail > a:before, ul.pager li.pager-current, 
 .item-list ul li.pager-current.last, .node-mt .comment-counter, .comment ul.links li a, .ui-widget-content a, .view-mt-testimonials .views-field-title a,
@@ -28,7 +28,7 @@ ul.links li a, a.more, input[type="submit"], input[type="reset"], input[type="bu
 a:hover, a:focus, h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, .footer-area h1 a:hover, .footer-area h2 a:hover, 
 .footer-area h3 a:hover, .footer-area h4 a:hover, .footer-area h5 a:hover, .footer-area h6 a:hover, .footer-area ul.menu li a:hover, ul.pager li > a:hover, 
 #breadcrumb a:hover, .comment ul.links li a:hover, .views-field-title a:hover, .ui-widget-content a:hover, ul.members-social-bookmarks li a:hover, 
-.ui-widget-content ul.links li a:hover { color: _color_tertiary_; }
+.ui-widget-content ul.links li a:hover { color: _color_alpha_primary_; }
 
 ul.pager li > a:hover { border-bottom: 2px solid _color_tertiary_; }
 
@@ -39,7 +39,7 @@ ul.pager li > a:hover { border-bottom: 2px solid _color_tertiary_; }
 .header-top-area ul.social-bookmarks li a:hover, .header-top-area ul.brands li a:hover { border-color: _color_tertiary_; }
 
 ul.links li a:hover, a.more:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover,
-.checkout-buttons .checkout-cancel:hover, .checkout-buttons .checkout-back:hover { background-color: _color_tertiary_; }
+.checkout-buttons .checkout-cancel:hover, .checkout-buttons .checkout-back:hover { background-color: _color_alpha_primary_; }
 
 /*resets*/
 .header-top-area a { color: #fff; text-decoration: underline; }
@@ -75,9 +75,16 @@ background-color: rgba(0,0,0,0.2)!important; }
 
 .essay-link,
 .annotate-link,
-.field-name-group-group .field-item > a { background-color: _color_secondary_; }
+.field-name-group-group .field-item > a { background-color: _color_dark_primary_; }
 .essay-link:hover,
 .annotate-link:hover,
 .field-name-group-group .field-item > a:hover { background-color: _color_alpha_primary_; }
 
 .dashboard-artifact-submenu .dashboard-artifact-toggle::before { color: _color_primary_; }
+
+.view-id-pece_my_noted_artifacts li.views-row > div::before,
+.view-id-pece_my_analytics li.views-row > div::before,
+.view-pece-my-biblio-items li.views-row > div::before,
+.view-id-pece_my_projects li.views-row > div::before,
+.view-pece-my-fieldsites li.views-row > div::before,
+.view-id-pece_my_groups li.views-row > div::before { background-color: _color_primary_; }
