@@ -39,3 +39,13 @@
 
    pece_set_permissions($pece_security_permissions);
  }
+
+ /**
+  * Reverts permission defaults.
+  */
+ function pece_security_update_7004() {
+   module_load_include('inc', 'pece', 'pece.functions');
+
+   // Revert default config user_default_permissions.
+   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_security');
+ }
