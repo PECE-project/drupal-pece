@@ -30,5 +30,14 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'module' => 'system',
   );
 
+  // Exported permission: 'access administration menu'.
+  $permissions['access administration menu'] = array(
+    'name' => 'access administration menu',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'admin_menu',
+  );
+
   return $permissions;
 }
