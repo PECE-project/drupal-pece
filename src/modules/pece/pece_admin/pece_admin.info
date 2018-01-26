@@ -5,4 +5,7 @@ package = PECE
 project = pece_admin
 version = 7.x-1.0
 dependencies[] = admin_menu
+dependencies[] = defaultconfig
 stylesheets[all][] = pece_admin.css
+features[defaultconfig][] = user_default_permissions:administer themes
+features[features_api][] = api:2
