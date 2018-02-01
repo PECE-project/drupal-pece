@@ -49,7 +49,7 @@ function pece_scholarly_lite_form_system_theme_settings_alter(&$form, &$form_sta
   $form['mtt_settings']['tabs']['looknfeel']['color_scheme_settings']['color_secondary'] = array(
     '#type' => 'textfield',
     '#title' => t('Secondary Color'),
-    '#description'   => t('Used on links and buttons. e.g. #A1A1A1'),
+    '#description'   => t('Used on links and buttons. e.g. #888888'),
     '#default_value' => theme_get_setting('color_secondary'),
     '#element_validate' => array('pece_scholarly_lite_color_validate'),
     '#states' => array(
@@ -66,7 +66,7 @@ function pece_scholarly_lite_form_system_theme_settings_alter(&$form, &$form_sta
   $form['mtt_settings']['tabs']['looknfeel']['color_scheme_settings']['color_tertiary'] = array(
     '#type' => 'textfield',
     '#title' => t('Tertiary Color'),
-    '#description'   => t('Minor details as active menu items, links and buttons. e.g. #CCCCCC'),
+    '#description'   => t('Used on header menu active page, active links and buttons. e.g. #5F5F5F'),
     '#default_value' => theme_get_setting('color_tertiary'),
     '#element_validate' => array('pece_scholarly_lite_color_validate'),    
     '#states' => array(
