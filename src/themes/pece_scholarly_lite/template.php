@@ -83,8 +83,8 @@ function pece_scholarly_lite_css_alter(&$css) {
  */
 function pece_scholarly_lite_preprocess_html(&$variables) {
   pece_scholarly_lite_add_css_overrides();
+  pece_scholarly_lite_add_extra_styles();
 }
-
 
 /**
 * Implements hook_preprocess_maintenance_page().
@@ -93,6 +93,9 @@ function pece_scholarly_lite_preprocess_maintenance_page(&$variables) {
   pece_scholarly_lite_add_css_overrides();
 }
 
+/**
+ * Adds styles overrides into the html template.
+ */
 function pece_scholarly_lite_add_css_overrides() {
   $custom_color_scheme = theme_get_setting('custom_color_scheme');
   $public_path = variable_get('file_public_path', conf_path() . '/files');
@@ -103,5 +106,22 @@ function pece_scholarly_lite_add_css_overrides() {
       'type' => 'file',
       'weight' => 9999,
     ));
+  }
+}
+
+/**
+ * Adds PECE extra css based on color scheme.
+ */
+function pece_scholarly_lite_add_extra_styles() {
+  $color_scheme = theme_get_setting('color_scheme');
+  if (empty($color_scheme)) {
+    return;
+  }
+  if ($color_scheme == 'gray-purple') {
+    // Apply PECE's default overrides on gray-purple scheme.
+    drupal_add_css(drupal_get_path('theme', 'pece_scholarly_lite') . '/assets/css/pece_header_override.css', array('group' => CSS_THEME, 'type' => 'file'));
+  } else {
+    // Adds PECE extra styles over base theme schemes.
+    drupal_add_css(drupal_get_path('theme', 'pece_scholarly_lite') . '/assets/overrides/scheme_overrides.' . $color_scheme . '.css', array('group' => CSS_THEME, 'type' => 'file'));
   }
 }
