@@ -141,8 +141,21 @@ projects[login_security][subdir] = contrib
 projects[login_security][version] = 1.9
 
 ; AES (with php5-mcrypt support)
+; @TODO: Remove AES module ASAP.
 projects[aes][subdir] = contrib
 projects[aes][version] = 1.10
+
+; Encrypt
+projects[encrypt][subdir] = contrib
+projects[encrypt][version] = 2.3
+
+; Real AES PHP encryption 
+projects[real_aes][subdir] = contrib
+projects[real_aes][version] = 1.2
+
+; PHP encryption libraries
+libraries[php-encryption][download][type] = file
+libraries[php-encryption][download][url] = https://github.com/defuse/php-encryption/archive/522859f0b3f35fe83be5803ede83af3f517bfd5b.zip
 
 ; Honeypot
 projects[honeypot][subdir] = contrib
