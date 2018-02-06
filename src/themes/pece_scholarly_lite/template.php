@@ -82,8 +82,8 @@ function pece_scholarly_lite_css_alter(&$css) {
  * Override or insert variables into the html template.
  */
 function pece_scholarly_lite_preprocess_html(&$variables) {
-  pece_scholarly_lite_add_css_overrides();
   pece_scholarly_lite_add_extra_styles();
+  pece_scholarly_lite_add_css_overrides();
 }
 
 /**
@@ -113,6 +113,9 @@ function pece_scholarly_lite_add_css_overrides() {
  * Adds PECE extra css based on color scheme.
  */
 function pece_scholarly_lite_add_extra_styles() {
+  if (theme_get_setting('custom_color_scheme')) {
+    return;
+  }
   $color_scheme = theme_get_setting('color_scheme');
   if (empty($color_scheme)) {
     return;
