@@ -30,6 +30,7 @@ function pece_dashboard_block_view($delta = 'dashboard_add_content') {
   unset($menu_items['panopoly_page']);
   unset($menu_items['pece_about_page']);
 
+  asort($menu_items);
   foreach ($menu_items as $menu_item) {
     $link_class = '';
 
