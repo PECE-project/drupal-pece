@@ -14,27 +14,112 @@ function pece_photo_essay_modules_enabled($modules) {
 }
 
 /**
- * Setup Design logic permissions.
+ * Setup Photo Essay permissions.
  * @todo: eck permissions are not properly set after install. We basically try and
  * set them after everything has been installed to make sure they have a proper
  * initial state. We should find the bug and report back on eck/features.
  */
 function _pece_photo_essay_install_permissions() {
   module_load_include('inc', 'pece', 'pece.functions');
-  module_load_include('inc', 'pece_photo_essay', 'pece_photo_essay.features.user_permission');
 
-  $default_permissions = pece_photo_essay_user_default_permissions();
-  $photo_essay_permissions = array();
+  $photo_essay_permissions = array(
+    'all' => array(
+      'eck view pece_photo_essay_item pece_photo_essay_item entities' => FALSE
+    )
+  );
 
-  foreach ($default_permissions as $name => $permission) {
-    if (!empty($permission['roles'])) {
-      foreach ($permission['roles'] as $role) {
-        $photo_essay_permissions[$role][$name] = TRUE;
-      }
+  $user_roles = array(
+    'Contributor',
+    'Researcher',
+    'administrator',
+    'editor',
+  );
+
+  $pece_photo_essay_entity_perm = array(
+    'eck add pece_photo_essay_item pece_photo_essay_item entities',
+    'eck delete pece_photo_essay_item pece_photo_essay_item entities',
+    'eck edit pece_photo_essay_item pece_photo_essay_item entities',
+    'eck list pece_photo_essay_item pece_photo_essay_item entities',
+  );
+
+  foreach ($pece_photo_essay_entity_perm as $name) {
+    foreach ($user_roles as $role) {
+      $photo_essay_permissions[$role][$name] = FALSE;
     }
   }
 
   pece_set_permissions($photo_essay_permissions);
+}
+
+/**
+ * Helper function to properly set eck permissions after module install.
+ */
+function pece_photo_essay_eck_user_default_permissions() {
+  $permissions = array();
+
+  // Exported permission: 'eck add pece_photo_essay_item pece_photo_essay_item entities'.
+  $permissions['eck add pece_photo_essay_item pece_photo_essay_item entities'] = array(
+    'name' => 'eck add pece_photo_essay_item pece_photo_essay_item entities',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck delete pece_photo_essay_item pece_photo_essay_item entities'.
+  $permissions['eck delete pece_photo_essay_item pece_photo_essay_item entities'] = array(
+    'name' => 'eck delete pece_photo_essay_item pece_photo_essay_item entities',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck edit pece_photo_essay_item pece_photo_essay_item entities'.
+  $permissions['eck edit pece_photo_essay_item pece_photo_essay_item entities'] = array(
+    'name' => 'eck edit pece_photo_essay_item pece_photo_essay_item entities',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck list pece_photo_essay_item pece_photo_essay_item entities'.
+  $permissions['eck list pece_photo_essay_item pece_photo_essay_item entities'] = array(
+    'name' => 'eck list pece_photo_essay_item pece_photo_essay_item entities',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'eck',
+  );
+
+  // Exported permission: 'eck view pece_photo_essay_item pece_photo_essay_item entities'.
+  $permissions['eck view pece_photo_essay_item pece_photo_essay_item entities'] = array(
+    'name' => 'eck view pece_photo_essay_item pece_photo_essay_item entities',
+    'roles' => array(
+      'Contributor' => 'Contributor',
+      'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+      'editor' => 'editor',
+    ),
+    'module' => 'eck',
+  );
+
+  return $permissions;
 }
 
 /**
