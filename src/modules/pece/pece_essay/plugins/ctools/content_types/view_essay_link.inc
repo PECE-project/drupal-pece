@@ -5,6 +5,7 @@ $plugin = array(
   'top level' => TRUE,
   'title' => t('Essay link'),
   'description' => t('Configurable link to PECE Essay'),
+  'category' => t('PECE'),
   'render callback' => 'pece_essay_view_essay_link_pane_render',
   'required context' => new ctools_context_required(t('Node'), 'node', array(
     'type' => 'pece_essay',
