@@ -54,6 +54,11 @@ function _pece_install_permissions() {
   // Setup pece_essay panelizer permissions.
   module_load_include('install', 'pece_essay');
   _pece_essay_install_permissions();
+
+
+  // Setup pece_photo_essay eck permissions for Photo Essay Item entity type.
+  module_load_include('install', 'pece_photo_essay');
+  _pece_photo_essay_install_permissions();
 }
 
 /**
