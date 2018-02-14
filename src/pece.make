@@ -326,8 +326,11 @@ projects[media][patch][2372907] = https://www.drupal.org/files/issues/media-repl
 projects[ckeditor][version] = 1.16
 projects[ckeditor][subdir] = contrib
 
-projects[manualcrop][version] = 1.5
+projects[manualcrop][version] = 1.x-dev
 projects[manualcrop][subdir] = contrib
+projects[manualcrop][download][type] = git
+projects[manualcrop][download][revision] = d6c449d
+projects[manualcrop][download][branch] = 7.x-1.x
 
 ; =====================
 ; Fields
