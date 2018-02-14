@@ -336,11 +336,13 @@ projects[manualcrop][download][branch] = 7.x-1.x
 ; Fields
 ; =====================
 
+; Overrides panopoly's image_resize_filter.
 projects[image_resize_filter][version] = 1.16
 projects[image_resize_filter][subdir] = contrib
 
 projects[linkit][version] = 3.5
 projects[linkit][subdir] = contrib
+projects[linkit][patch][2651404] = https://www.drupal.org/files/issues/linkit-add-to-any-element-2651404-3.patch
 
 projects[field_group][version] = 1.6
 projects[field_group][subdir] = contrib
