@@ -351,8 +351,8 @@ projects[field_group][subdir] = contrib
 ; Search
 ; =====================
 
-projects[search_api][version] = 1.18
-projects[search_api][subdir]  = contrib
+projects[search_api][version] = 1.21
+projects[search_api][subdir] = contrib
 
 ; =====================
 ; Themes
