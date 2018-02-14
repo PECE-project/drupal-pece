@@ -24,15 +24,18 @@ projects[kw_itemnames][subdir] = kraftwagen
 ; Overrides panopoly's ctools.
 projects[ctools][version] = 1.12
 projects[ctools][subdir] = contrib
-; @TODO: Update and reapply the following patch.
+; @TODO: Update and reapply the following patch if needed.
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
+projects[ctools][patch][2607626] = https://www.drupal.org/files/issues/ctools-close-modal-2607626-5.patch
+projects[ctools][patch][2787045] = https://www.drupal.org/files/issues/ctools-jquery_compatibility-2787045-14.patch
+projects[ctools][patch][2897965] = https://www.drupal.org/files/issues/ctools-wizard-destination-2897965-2.patch
 
 ; Overrides panopoly's libraries.
 projects[libraries][version] = 2.2
 projects[libraries][subdir] = contrib
 
 ; Overrides panopoly's token.
-projects[token][version] = 1.6
+projects[token][version] = 1.7
 projects[token][subdir] = contrib
 
 ; Overrides panopoly's entity.
@@ -87,6 +90,9 @@ projects[better_exposed_filters][subdir] = contrib
 
 projects[views_autocomplete_filters][version] = 1.2
 projects[views_autocomplete_filters][subdir] = contrib
+projects[views_autocomplete_filters][patch][2374709] = http://www.drupal.org/files/issues/views_autocomplete_filters-cache-2374709-2.patch
+projects[views_autocomplete_filters][patch][2317351] = http://www.drupal.org/files/issues/views_autocomplete_filters-content-pane-2317351-4.patch
+projects[views_autocomplete_filters][patch][2404893] = https://www.drupal.org/files/issues/2404893-grammar_correction-11.patch
 
 ; =====================
 ; Administration
@@ -127,6 +133,7 @@ projects[strongarm][subdir] = contrib
 
 projects[defaultconfig][version] = 1.0-alpha11
 projects[defaultconfig][subdir] = contrib
+projects[defaultconfig][patch][1900574] = http://drupal.org/files/1900574.defaultconfig.undefinedindex_11.patch
 
 ; =====================
 ; Security
@@ -168,17 +175,23 @@ projects[honeypot][version] = 1.22
 ; Overrides panopoly's panelizer.
 projects[panelizer][version] = 3.4
 projects[panelizer][subdir] = contrib
+projects[panelizer][patch][1549608] = https://www.drupal.org/files/issues/panelizer-n1549608-26.patch
+projects[panelizer][patch][2788851] = https://www.drupal.org/files/issues/panelizer-administer-panelizer-2788851-2.patch
 projects[panelizer][patch][2812807] = https://www.drupal.org/files/issues/panelizer--2812807--provide-entity-on-access-hooks.patch
 
-projects[panels][version] = 3.7
+projects[panels][version] = 3.9
 projects[panels][subdir] = contrib
+projects[panels][patch][1570120] = https://www.drupal.org/files/issues/move-image-1570120-31.patch
+projects[panels][patch][2897658] = https://www.drupal.org/files/issues/panels-menu-block-ipe-2897658-3.patch
 
 ;projects[panels_breadcrumbs][version] = 2.2
 ;projects[panels_breadcrumbs][subdir] = contrib;
 
-projects[fieldable_panels_panes][version] = 1.10
+projects[fieldable_panels_panes][version] = 1.11
 projects[fieldable_panels_panes][subdir] = contrib
-projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/issues/fieldable_panels_panes--access_hook--2814117-1.patch
+projects[fieldable_panels_panes][patch][2826205] = https://www.drupal.org/files/issues/fieldable_panels_panes-n2826205-39.patch
+;projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/issues/fieldable_panels_panes--access_hook--2814117-1.patch
+projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/issues/fieldable_panels_panes-access-hook-2814117-6.patch
 
 
 ; =====================
@@ -478,7 +491,9 @@ projects[backup_migrate][version] = 3.4
 projects[node_expire][subdir] = contrib
 projects[node_expire][version] = 2.2
 
+
 ; Date (dependency of node_expire)
+; Overrides panopoly's libraries.
 projects[date][subdir] = contrib
 projects[date][version] = 2.10
 
