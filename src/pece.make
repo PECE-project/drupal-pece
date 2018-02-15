@@ -152,6 +152,10 @@ projects[login_security][version] = 1.9
 projects[aes][subdir] = contrib
 projects[aes][version] = 1.10
 
+;Key
+projects[key][subdir] = contrib
+projects[key][version] = 3.4
+
 ; Encrypt
 projects[encrypt][subdir] = contrib
 projects[encrypt][version] = 2.3
