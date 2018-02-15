@@ -39,9 +39,9 @@ projects[token][version] = 1.7
 projects[token][subdir] = contrib
 
 ; Overrides panopoly's entity.
-projects[entity][version] = 1.8
+projects[entity][version] = 1.9
 projects[entity][subdir] = contrib
-projects[entity][patch][2671150] = "https://www.drupal.org/files/issues/entity_id_token-1957266-36.patch"
+;projects[entity][patch][2671150] = "https://www.drupal.org/files/issues/entity_id_token-1957266-36.patch"
 
 ; Overrides panopoly's uuid.
 projects[uuid][version] = 1.0-beta1
