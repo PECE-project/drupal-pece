@@ -24,7 +24,7 @@ function _pece_photo_essay_install_permissions() {
 
   $photo_essay_permissions = array(
     'all' => array(
-      'eck view pece_photo_essay_item pece_photo_essay_item entities' => FALSE
+      'eck view pece_photo_essay_item pece_photo_essay_item entities' => TRUE
     )
   );
 
@@ -44,7 +44,7 @@ function _pece_photo_essay_install_permissions() {
 
   foreach ($pece_photo_essay_entity_perm as $name) {
     foreach ($user_roles as $role) {
-      $photo_essay_permissions[$role][$name] = FALSE;
+      $photo_essay_permissions[$role][$name] = TRUE;
     }
   }
 
