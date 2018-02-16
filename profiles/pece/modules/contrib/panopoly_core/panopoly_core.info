@@ -70,13 +70,21 @@ features[variable][] = ctools_content_all_views
 features[variable][] = page_manager_node_edit_disabled
 features[variable][] = page_manager_node_view_disabled
 features[variable][] = page_manager_term_view_disabled
+features[variable][] = panelizer_taxonomy_term:panopoly_categories:default_selection
+features[variable][] = panelizer_taxonomy_term:panopoly_categories:featured_selection
+features[variable][] = panelizer_taxonomy_term:panopoly_categories:page_manager_selection
 features[variable][] = panelizer_taxonomy_term:panopoly_categories_allowed_layouts_default
 features[variable][] = panelizer_taxonomy_term:panopoly_categories_allowed_types_default
 features[views_view][] = panopoly_taxonomy
+features_exclude[variable][panelizer_taxonomy_term:panopoly_categories_default] = panelizer_taxonomy_term:panopoly_categories_default
+features_exclude[variable][panelizer_taxonomy_term:panopoly_categories_allowed_layouts] = panelizer_taxonomy_term:panopoly_categories_allowed_layouts
+features_exclude[variable][panelizer_taxonomy_term:panopoly_categories_allowed_types] = panelizer_taxonomy_term:panopoly_categories_allowed_types
+features_exclude[variable][panelizer_defaults_taxonomy_term_panopoly_categories] = panelizer_defaults_taxonomy_term_panopoly_categories
+features_exclude[variable][pathauto_taxonomy_term_panopoly_categories_pattern] = pathauto_taxonomy_term_panopoly_categories_pattern
 
-; Information added by Drupal.org packaging script on 2016-05-04
-version = "7.x-1.35"
+; Information added by Drupal.org packaging script on 2017-12-13
+version = "7.x-1.49"
 core = "7.x"
 project = "panopoly_core"
-datestamp = "1462395855"
+datestamp = "1513181917"
 

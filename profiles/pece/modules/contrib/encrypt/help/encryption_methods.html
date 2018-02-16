@@ -1,0 +1,92 @@
+To provide an encryption method to the Encrypt API module, you need to do a couple things:
+
+<ol>
+  
+<li>
+Implement <strong>hook_ctools_plugin_directory</strong> in your module. This simply tells ctools where to look for your module's plugins. Here is an example from Encrypt's own plugins.
+<pre>
+function encrypt_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'encrypt') {
+    return 'plugins/' . $plugin;
+  }
+}
+</pre>
+So, with this implementation, ctools will look for encryption method plugins in <strong>plugins/encryption_methods</strong> and key provider plugins in <strong>plugins/key_providers</strong>. You can load plugins however you'd like, but this is sort of a ctools standard.
+</li>
+
+<li>
+Create your plugin file. It should be a file called <strong>YOUR_PLUGIN.inc</strong> (where <strong>YOUR_PLUGIN</strong> is some machine-readable name for your plugin) inside the folder you declared above.
+</li>
+
+<li>
+In your plugin file, declare your plugin. Here is an example from Encrypt's "Mcrypt AES CBC" encryption method.
+<pre>
+$plugin = encrypt_mcrypt_aes_cbc_encrypt_encryption_methods();
+
+/**
+ * Implements MODULE_FILENAME_encrypt_encryption_methods().
+ */
+function encrypt_mcrypt_aes_cbc_encrypt_encryption_methods() {
+  return array(
+    'title' => t('Mcrypt AES (CBC Mode)'),
+    'description' => t('Uses PHP\'s Mcrypt extension and AES in CBC mode. The key MUST be 16, 24, or 32 bytes.'),
+    'encrypt callback' => '_encrypt_encryption_methods_mcrypt_aes_cbc',
+    'dependency callback' => '_encrypt_mcrypt_extension_is_present',
+  );
+}
+</pre>
+Available options for the $plugin array include:
+<dt>title</dt>
+<dd><strong>Required</strong>. The human-readable name for your encryption method. This will appear on the Encrypt admin page.</dd>
+<dt>description</dt>
+<dd><strong>Required</strong>. A brief description of your encryption method. Also appears in smaller text on the Encrypt admin page.</dd>
+<dt>encrypt callback</dt>
+<dd><strong>Required</strong>. This is the name of a function that you define in your plugin file. Encrypt will use this function to encrypt and decrypt text for your encryption method.</dd>
+<dt>dependency callback</dt>
+<dd>Optional. The name of a function in your plugin file that declares whether or not an encryption method's dependencies have been met. The function should return an array of error messages (if there are any) or an empty array or FALSE if all dependencies are met. For example:</dd>
+<dd><pre>
+/**
+ * Callback to see if the Mcrypt library is present.
+ */
+function _encrypt_mcrypt_extension_is_present() {
+  $errors = array();
+
+  if (!function_exists('mcrypt_encrypt')) {
+    $errors[] = t('Mcrypt library not installed.');
+  }
+
+  return $errors;
+}
+</pre></dd>
+<dt>submit callback</dt>
+<dd>Optional. The name of a function that will be called when the encrypt settings form is saved. This allows plugins to perform additional actions when settings are saved. The function should take the $form and $form_state as arguments, just like most other form submit handlers. See the file key provider plugin for an example.</dd>
+</li>
+
+<li>
+Create your encrypt/decrypt method. This is the function you declared in <strong>encrypt callback</strong> above. The function will have the following signature:
+<pre>
+/**
+ * @param $op
+ *  The operation currently being performed. 'encrypt' for encrypting, 'decrypt' for decrypting
+ *
+ * @param $text
+ *  The string to be encrypted or decrypted.
+ *
+ * @param $key
+ *  The encryption key to use for encrypting. Provided by the active key provider.
+ *
+ * @param $options
+ *  An array of additional parameters.
+ *
+ * @return
+ *  The processed (either encrypted or decrypted, depending on $op) string.
+ */
+function your_encryption_callback($op = 'encrypt', $text = '', $key, $options = array()) {
+  // Do stuff.
+}
+</pre>
+</li>
+
+</ol>
+
+All encryption method plugins are cached by ctools, so you may have to clear Drupal's cache for new plugins or changes to existing plugins to appear.

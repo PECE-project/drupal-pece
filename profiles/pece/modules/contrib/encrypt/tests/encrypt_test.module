@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Declares a bogus encryption method and key provider for testing purposes.
+ */
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function encrypt_test_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'encrypt') {
+    return 'plugins/' . $plugin;
+  }
+}

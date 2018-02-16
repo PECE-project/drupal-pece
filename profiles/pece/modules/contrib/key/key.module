@@ -1,0 +1,939 @@
+<?php
+
+/**
+ * @file
+ * Main Key functionality and hook implementations.
+ */
+
+define('KEY_MENU_PATH', 'admin/config/system/keys');
+
+require_once __DIR__ . '/includes/key.exception.inc';
+
+/**
+ * Implements hook_permission().
+ */
+function key_permission() {
+  return array(
+    'administer keys' => array(
+      'title' => t('Administer keys'),
+      'description' => 'Create, edit, and delete keys.',
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function key_menu() {
+  $items = array();
+
+  $items[KEY_MENU_PATH] = array(
+    'title' => 'Keys',
+    'description' => 'Manage site-wide keys.',
+    'page callback' => 'key_configs_list',
+    'access arguments' => array('administer keys'),
+    'file' => 'includes/key.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items[KEY_MENU_PATH . '/list'] = array(
+    'title' => 'List keys',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+  );
+  $items[KEY_MENU_PATH . '/add'] = array(
+    'title' => 'Add key',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('key_config_form'),
+    'access arguments' => array('administer keys'),
+    'file' => 'includes/key.admin.inc',
+    'type' => MENU_LOCAL_ACTION,
+  );
+  $items[KEY_MENU_PATH . '/manage/%key_config'] = array(
+    'title' => 'Edit key',
+    'title callback' => 'key_config_edit_title',
+    'title arguments' => array(5),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('key_config_form', 5),
+    'access arguments' => array('administer keys'),
+    'file' => 'includes/key.admin.inc',
+  );
+  $items[KEY_MENU_PATH . '/manage/%key_config/delete'] = array(
+    'title' => 'Delete key',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('key_config_delete_confirm', 5),
+    'access arguments' => array('administer keys'),
+    'file' => 'includes/key.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function key_theme() {
+  return array(
+    'key_configs_list_description' => array(
+      'variables' => array(
+        'label' => NULL,
+        'id' => NULL,
+        'description' => NULL,
+      ),
+      'file' => 'includes/key.admin.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ *
+ * Tell CTools where to find plugins for this module.
+ */
+function key_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'key' && !empty($plugin)) {
+    return "plugins/$plugin";
+  }
+}
+
+/**
+ * Implements hook_ctools_plugin_type().
+ *
+ * Tell CTools about plugins the module uses.
+ */
+function key_ctools_plugin_type() {
+  $plugins['key_type'] = array(
+    'cache' => TRUE,
+    'cache table' => 'cache',
+    'process' => '_key_plugin_process',
+    'defaults' => array(
+      'label' => '',
+      'description' => '',
+      'group' => 'none',
+      'key value' => array(
+        'plugin' => 'text_field',
+      ),
+      'default configuration' => NULL,
+      'build configuration form' => NULL,
+      'validate configuration form' => NULL,
+      'submit configuration form' => NULL,
+      'build delete form' => NULL,
+      'validate delete form' => NULL,
+      'submit delete form' => NULL,
+      'generate key value' => NULL,
+      'validate key value' => NULL,
+    ),
+  );
+
+  $plugins['key_provider'] = array(
+    'cache' => TRUE,
+    'cache table' => 'cache',
+    'process' => '_key_plugin_process',
+    'defaults' => array(
+      'label' => '',
+      'description' => '',
+      'storage method' => '',
+      'key value' => array(
+        'accepted' => FALSE,
+        'required' => FALSE,
+        'editable' => FALSE,
+      ),
+      'default configuration' => NULL,
+      'build configuration form' => NULL,
+      'validate configuration form' => NULL,
+      'submit configuration form' => NULL,
+      'build delete form' => NULL,
+      'validate delete form' => NULL,
+      'submit delete form' => NULL,
+      'get key value' => NULL,
+      'set key value' => NULL,
+      'delete key value' => NULL,
+      'obscure key value' => '_key_default_obscure_key_value',
+      'dependency callback' => NULL,
+      'dependency errors' => NULL,
+      'key value form' => NULL,
+      'key value obscure' => NULL,
+      'allow base64 encoding' => TRUE,
+    ),
+  );
+
+  $plugins['key_input'] = array(
+    'cache' => TRUE,
+    'cache table' => 'cache',
+    'process' => '_key_plugin_process',
+    'defaults' => array(
+      'label' => '',
+      'description' => '',
+      'default configuration' => NULL,
+      'build configuration form' => NULL,
+      'validate configuration form' => NULL,
+      'submit configuration form' => NULL,
+      'build delete form' => NULL,
+      'validate delete form' => NULL,
+      'submit delete form' => NULL,
+      'process submitted key value' => NULL,
+      'process existing key value' => NULL,
+    ),
+  );
+
+  return $plugins;
+}
+
+/**
+ * Implements hook_element_info().
+ */
+function key_element_info() {
+  $type['key_select'] = array(
+    '#input' => TRUE,
+    '#size' => 0,
+    '#multiple' => FALSE,
+    '#process' => array(
+      '_key_process_key_select',
+      'form_process_select',
+      'ajax_process_form',
+    ),
+    '#theme' => 'select',
+    '#theme_wrappers' => array('form_element'),
+    '#options' => array(),
+    // Allow filtering of the list of key configurations.
+    '#key_filters' => array(),
+    '#key_description' => TRUE,
+  );
+
+  return $type;
+}
+
+/**
+ * Title callback for the key configuration edit page.
+ *
+ * @param string $config
+ *   The configuration being edited.
+ *
+ * @return string
+ *   The human-friendly label of the requested configuration.
+ */
+function key_config_edit_title($config) {
+  return t('Edit @name key', array('@name' => $config['label']));
+}
+
+/**
+ * Menu argument loader: loads a key configuration by id.
+ *
+ * @param string $id
+ *   The machine-readable name of an configuration to load,
+ *   where '-' is replaced with '_'.
+ *
+ * @return array
+ *   An array representing an key configuration or FALSE if the
+ *   configuration does not exist.
+ */
+function key_config_load($id) {
+  return key_get_key(strtr($id, array('-' => '_')));
+}
+
+/**
+ * Process function to expand the key element.
+ *
+ * @param array $element
+ *   The element to process.
+ *
+ * @return array
+ *   The processed element.
+ */
+function _key_process_key_select($element) {
+  $options = key_get_key_names_as_options($element['#key_filters'], TRUE);
+  $element['#options'] = $options;
+
+  // Prefix the default description with a information about keys.
+  if ($element['#key_description']) {
+    $original_description = (isset($element['#description'])) ? $element['#description'] : '';
+    $key_description = t('Choose an available key. If the desired key is not listed, <a href="@link">create a new key</a>.', array('@link' => '/' . KEY_MENU_PATH . '/add'));
+    $element['#description'] = $key_description . ' ' . $original_description;
+  }
+
+  return $element;
+}
+
+/**
+ * Gets information about all key plugins of the requested type.
+ *
+ * @param string $type
+ *   The type of plugin.
+ * @param bool $all
+ *   A flag indicating whether to include plugins with unmet dependencies.
+ * @param bool $reset
+ *   A flag indicating whether to clear the plugin cache. Otherwise, stale
+ *   data may be returned if plugin properties have changed.
+ *
+ * @return array
+ *   Information about all key plugins of the requested type.
+ */
+function key_get_plugins($type, $all = TRUE, $reset = FALSE) {
+  if (!in_array($type, _key_get_plugin_types())) {
+    return array();
+  }
+
+  if ($reset) {
+    _key_clear_plugin_cache($type);
+  }
+
+  ctools_include('plugins');
+  $plugins = ctools_get_plugins('key', $type);
+
+  return $all ? $plugins : array_filter($plugins, '_key_plugin_is_valid');
+}
+
+/**
+ * Gets all key plugins of the requested type as options, for use in forms.
+ *
+ * @param string $type
+ *   The type of plugin.
+ * @param bool $all
+ *   A flag indicating whether to include plugins with unmet dependencies.
+ * @param bool $reset
+ *   A flag indicating whether to clear the plugin cache. Otherwise, stale
+ *   data may be returned if plugin properties have changed.
+ *
+ * @return array
+ *   An array of key plugins, with ids for keys and labels for values.
+ */
+function key_get_plugins_as_options($type, $all = TRUE, $reset = FALSE) {
+  $plugins = key_get_plugins($type, $all, $reset);
+  $options = array();
+
+  foreach ($plugins as $id => $plugin) {
+    $options[$id] = $plugin['label'];
+  }
+
+  return $options;
+}
+
+/**
+ * Gets information about a specific key plugin of a requested type.
+ *
+ * @param string $type
+ *   The type of plugin.
+ * @param string $plugin_id
+ *   The id of the plugin to get.
+ * @param bool $reset
+ *   A flag indicating whether to clear the plugin cache. Otherwise, stale
+ *   data may be returned if plugin properties have changed.
+ *
+ * @return array
+ *   Information about the key plugin.
+ */
+function key_get_plugin($type, $plugin_id, $reset = FALSE) {
+  if (!in_array($type, _key_get_plugin_types())) {
+    return array();
+  }
+
+  ctools_include('plugins');
+  return ctools_get_plugins('key', $type, $plugin_id);
+}
+
+/**
+ * Gets information about all key configurations.
+ *
+ * @param bool $reset
+ *   A flag to force the configurations to be retrieved from the database.
+ *
+ * @return array
+ *   An array of configurations.
+ */
+function key_get_keys($reset = FALSE) {
+  $configs = &drupal_static(__FUNCTION__);
+
+  if (!isset($configs) || $reset) {
+    $configs = db_query("SELECT * FROM {key_config} ORDER BY label ASC")->fetchAllAssoc('id', PDO::FETCH_ASSOC);
+
+    // Unserialize plugin settings fields.
+    foreach ($configs as $id => $config) {
+      foreach (array('key_type', 'key_provider', 'key_input') as $type) {
+        if (!empty($config[$type . '_settings'])) {
+          $configs[$id][$type . '_settings'] = unserialize($config[$type . '_settings']);
+        }
+      }
+    }
+  }
+
+  return $configs;
+}
+
+/**
+ * Get keys that use the specified key provider.
+ *
+ * @param string $key_provider_id
+ *   The key provider ID to use.
+ * @param bool $reset
+ *   A flag to force the configurations to be retrieved from the database.
+ *
+ * @return array
+ *   An array of keys indexed by their IDs.
+ */
+function key_get_keys_by_provider($key_provider_id, $reset = FALSE) {
+  $filtered_keys = array();
+  $keys = key_get_keys($reset);
+
+  foreach ($keys as $id => $key) {
+    if ($key['key_provider'] == $key_provider_id) {
+      $filtered_keys[$id] = $key;
+    }
+  }
+
+  return $filtered_keys;
+}
+
+/**
+ * Get keys that use the specified key type.
+ *
+ * @param string $key_type_id
+ *   The key type ID to use.
+ * @param bool $reset
+ *   A flag to force the configurations to be retrieved from the database.
+ *
+ * @return array
+ *   An array of keys indexed by their IDs.
+ */
+function key_get_keys_by_type($key_type_id, $reset = FALSE) {
+  $filtered_keys = array();
+  $keys = key_get_keys($reset);
+
+  foreach ($keys as $id => $key) {
+    if ($key['key_type'] == $key_type_id) {
+      $filtered_keys[$id] = $key;
+    }
+  }
+
+  return $filtered_keys;
+}
+
+/**
+ * Get keys that use the specified storage method.
+ *
+ * @param string $storage_method
+ *   The storage method of the key provider.
+ * @param bool $reset
+ *   A flag to force the configurations to be retrieved from the database.
+ *
+ * @return array
+ *   An array of keys indexed by their IDs.
+ */
+function key_get_keys_by_storage_method($storage_method, $reset = FALSE) {
+  $filtered_keys = array();
+  $keys = key_get_keys($reset);
+  $providers = key_get_plugins('key_provider', TRUE, $reset);
+
+  foreach ($keys as $id => $key) {
+    if ($providers[$key['key_provider']]['storage method'] == $storage_method) {
+      $filtered_keys[$id] = $key;
+    }
+  }
+
+  return $filtered_keys;
+}
+
+/**
+ * Get keys that use a key type in the specified group.
+ *
+ * @param string $type_group
+ *   The key type group on which to filter.
+ * @param bool $reset
+ *   A flag to force the configurations to be retrieved from the database.
+ *
+ * @return array
+ *   An array of keys indexed by their IDs.
+ */
+function key_get_keys_by_type_group($type_group, $reset = FALSE) {
+  $filtered_keys = array();
+  $keys = key_get_keys($reset);
+  $types = key_get_plugins('key_type', TRUE, $reset);
+
+  foreach ($keys as $id => $key) {
+    if ($types[$key['key_type']]['group'] == $type_group) {
+      $filtered_keys[$id] = $key;
+    }
+  }
+
+  return $filtered_keys;
+}
+
+/**
+ * Gets all key configurations as options, for use in forms.
+ *
+ * @param array $filters
+ *   An array of filters to apply to the list of options.
+ * @param bool $reset
+ *   A flag to force the configurations to be retrieved from the database.
+ *
+ * @return array
+ *   An array of key names, indexed by id.
+ */
+function key_get_key_names_as_options($filters = array(), $reset = FALSE) {
+  $options = array();
+
+  $keys = key_get_keys($reset);
+
+  foreach ($filters as $index => $filter) {
+    switch ($index) {
+      case 'type':
+        $keys = array_intersect_key(key_get_keys_by_type($filter, $reset), $keys);
+        break;
+      case 'provider':
+        $keys = array_intersect_key(key_get_keys_by_provider($filter, $reset), $keys);
+        break;
+      case 'type_group':
+        $keys = array_intersect_key(key_get_keys_by_type_group($filter, $reset), $keys);
+        break;
+    }
+  }
+
+  foreach ($keys as $key) {
+    $key_id = $key['id'];
+    $key_title = $key['label'];
+    $options[$key_id] = (string) $key_title;
+  }
+
+  return $options;
+}
+
+/**
+ * Gets information about a specific key configuration.
+ *
+ * @param string $id
+ *   The machine name of the configuration to get.
+ * @param bool $reset
+ *   A flag to force the configuration to be retrieved from the database.
+ *
+ * @return array
+ *   A key configuration.
+ */
+function key_get_key($id, $reset = FALSE) {
+  $configs = &drupal_static(__FUNCTION__);
+
+  if (!isset($configs) || $reset) {
+    $configs = key_get_keys($reset);
+  }
+
+  if (array_key_exists($id, $configs)) {
+    $config = $configs[$id];
+  }
+  else {
+    $config = NULL;
+  }
+
+  return $config;
+}
+
+/**
+ * Save a key configuration.
+ *
+ * @param array $fields
+ *   The fields of the configuration to save.
+ * @param array $original_config
+ *   The original configuration, if there was one.
+ * @param bool $messages
+ *   TRUE if messages should be displayed.
+ *
+ * @return array|null
+ *   The saved configuration or NULL if the save was unsuccessful.
+ */
+function key_save_key($fields, $original_config = array(), $messages = TRUE) {
+  // Serialize any field that is an array.
+  foreach ($fields as $index => $field) {
+    if (is_array($field)) {
+      $fields[$index] = serialize($field);
+    }
+  }
+
+  // Save the configuration.
+  $merge_status = db_merge('key_config')
+    ->key(array('id' => $fields['id']))
+    ->fields($fields)
+    ->execute();
+
+  // Load the configuration to make sure it was saved.
+  $key_config = key_get_key($fields['id'], TRUE);
+  if (empty($key_config)) {
+    $key_config = NULL;
+  }
+
+  // If the save was not successful, display an error and bail.
+  if (!$key_config) {
+    if ($messages) {
+      $t_args = array('%label' => $fields['label']);
+      drupal_set_message(t('The key %label could not be saved.', $t_args), 'error');
+    }
+    return FALSE;
+  }
+
+  // Display success message and log to watchdog.
+  if ($messages) {
+    $t_args = array('%label' => $fields['label']);
+
+    switch ($merge_status) {
+      case MergeQuery::STATUS_INSERT:
+        drupal_set_message(t('The key %label has been added.', $t_args));
+        watchdog('key', 'Added key %label.', $t_args, WATCHDOG_NOTICE, l(t('view'), KEY_MENU_PATH . '/list'));
+        break;
+
+      case MergeQuery::STATUS_UPDATE:
+        drupal_set_message(t('The key %label has been updated.', $t_args));
+        watchdog('key', 'Updated key %label.', $t_args, WATCHDOG_NOTICE, l(t('view'), KEY_MENU_PATH . '/list'));
+        break;
+    }
+  }
+
+  // If an original key configuration exists.
+  if (!empty($original_config)) {
+    $original_key_provider = key_get_plugin('key_provider', $original_config['key_provider']);
+
+    // If the original key's provider allows setting a key value and
+    // the plugin ID is different from the one that was just saved.
+    if ($original_key_provider['key value']['accepted'] && $original_config['key_provider'] != $key_config['key_provider']) {
+      // Allow the original key's provider to delete the key value.
+      if ($delete_callback = ctools_plugin_get_function($original_key_provider, 'delete key value')) {
+        call_user_func($delete_callback, $original_config);
+      }
+    }
+  }
+
+  // Return the saved configuration.
+  return $key_config;
+}
+
+/**
+ * Delete a key configuration.
+ *
+ * @param string $id
+ *   The ID of the configuration to delete.
+ * @param bool $messages
+ *   TRUE if messages should be displayed.
+ *
+ * @return bool
+ *   TRUE if successful, FALSE if not.
+ */
+function key_delete_key($id, $messages = TRUE) {
+  // Load the configuration.
+  $config = key_get_key($id);
+
+  // If the configuration could not be loaded.
+  if (!$config) {
+    // Display message and log to watchdog.
+    if ($messages) {
+      drupal_set_message(t('The key was not deleted because it could not be found.'));
+      watchdog('key', 'The key was not deleted because it could not be found.', array(), WATCHDOG_NOTICE, l(t('view'), KEY_MENU_PATH . '/list'));
+    }
+    return FALSE;
+  }
+
+  // Load the key provider plugin.
+  $key_provider = key_get_plugin('key_provider', $config['key_provider']);
+
+  if ($delete_callback = ctools_plugin_get_function($key_provider, 'delete key value')) {
+    call_user_func($delete_callback, $config);
+  }
+
+  db_delete('key_config')
+    ->condition('id', $id)
+    ->execute();
+
+  if ($messages) {
+    $t_args = array('%label' => $config['label']);
+    drupal_set_message(t('The key %label has been deleted.', $t_args));
+    watchdog('key', 'Deleted key %label.', $t_args, WATCHDOG_NOTICE);
+  }
+
+  // Try to load the configuration again.
+  $config = key_get_key($id);
+
+  return ($config) ? FALSE : TRUE;
+}
+
+/**
+ * Get a key value using a key configuration.
+ *
+ * @param array|string $config
+ *   The configuration id or array for the key value to retrieve.
+ *
+ * @return string
+ *   The key value.
+ */
+function key_get_key_value($config) {
+  $keys = &drupal_static(__FUNCTION__);
+
+  // If $config is an array, it must be a configuration ID.
+  if (!is_array($config)) {
+    $config_id = $config;
+  }
+  else {
+    $config_id = isset($config['id']) ? $config['id'] : '';
+  }
+
+  // If the key has already been retrieved during this page load, return it.
+  if (isset($keys[$config_id])) {
+    return $keys[$config_id];
+  }
+
+  if (!is_array($config)) {
+    $config = key_get_key($config_id);
+  }
+
+  // If the configuration doesn't exist, return NULL.
+  if (!isset($config)) {
+    return NULL;
+  }
+
+  $provider = key_get_plugin('key_provider', $config['key_provider']);
+
+  // Get the function to retrieve the key.
+  $key_function = ctools_plugin_get_function($provider, 'get key value');
+
+  // Retrieve the key.
+  $key = call_user_func($key_function, $config);
+
+  // Store the key, in case it's needed again.
+  $keys[$config_id] = $key;
+
+  return $key;
+}
+
+/**
+ * Helper function to clear key plugin caches.
+ *
+ * @param string|null $type
+ *   The plugin type or NULL to clear all caches.
+ */
+function _key_clear_plugin_cache($type = NULL) {
+  if ($type) {
+    cache_clear_all("plugins:key:$type", 'cache');
+  }
+  else {
+    cache_clear_all('plugins:key:', 'cache', TRUE);
+  }
+}
+
+/**
+ * Callback function to process key plugins.
+ *
+ * @param array $plugin
+ *   A key plugin.
+ * @param array $info
+ *   Information about the plugin.
+ */
+function _key_plugin_process(&$plugin, $info) {
+  // Check dependencies and attach any errors to the plugin.
+  if ($dependency_function = ctools_plugin_get_function($plugin, 'dependency callback')) {
+    $plugin['dependency errors'] = call_user_func($dependency_function);
+  }
+}
+
+/**
+ * Determine if a key provider plugin is valid.
+ *
+ * @param array $plugin
+ *   The plugin to check.
+ *
+ * @return bool
+ *   Whether or not the plugin is valid.
+ */
+function _key_plugin_is_valid($plugin) {
+  if (empty($plugin['dependency errors'])) {
+    return TRUE;
+  }
+  else {
+    return FALSE;
+  }
+}
+
+/**
+ * Return a list of plugin types used with keys.
+ *
+ * @return array
+ *   The list of plugin types.
+ */
+function _key_get_plugin_types() {
+  return array('key_type', 'key_provider', 'key_input');
+}
+
+/**
+ * Define the defaults for a key configuration.
+ *
+ * @return array
+ *   The defaults.
+ */
+function _key_config_defaults() {
+  $key_type_id = 'authentication';
+  $key_provider_id = 'config';
+
+  $key_type = key_get_plugin('key_type', $key_type_id);
+  $key_provider = key_get_plugin('key_provider', $key_provider_id);
+
+  $key_type_defaults = ($key_type_defaults_function = ctools_plugin_get_function($key_type, 'default configuration')) ? call_user_func($key_type_defaults_function) : array();
+  $key_provider_defaults = ($key_provider_defaults_function = ctools_plugin_get_function($key_provider, 'default configuration')) ? call_user_func($key_provider_defaults_function) : array();
+
+  $defaults = array(
+    'id' => '',
+    'label' => '',
+    'description' => '',
+    'key_type' => $key_type_id,
+    'key_type_settings' => $key_type_defaults,
+    'key_provider' => $key_provider_id,
+    'key_provider_settings' => $key_provider_defaults,
+  );
+
+  return $defaults;
+}
+
+/**
+ * Default function to process a submitted key value.
+ *
+ * @param array $form_state
+ *   The form state.
+ *
+ * @return string
+ *   The processed key value.
+ */
+function _key_default_process_submitted_key_value(&$form_state) {
+  // This is the default behavior. If a field named 'key_value' exists in
+  // the key input settings, remove it from the settings and return it as
+  // the submitted value. If the key value is Base64-encoded, decode it and
+  // return the result as the processed_submitted value. Input plugins can
+  // override this behavior to perform more complex processing.
+  $processed_values = array(
+    'submitted' => NULL,
+    'processed_submitted' => NULL,
+  );
+  $key_input_settings = $form_state['values'];
+  $key_value_data = $form_state['storage']['key_value'];
+  if (isset($key_input_settings['key_value'])) {
+    // If the submitted key value is equal to the obscured value.
+    if ($key_input_settings['key_value'] == $key_value_data['obscured']) {
+      // Use the processed original value as the submitted value.
+      $processed_values['submitted'] = $key_value_data['processed_original'];
+    }
+    else {
+      $processed_values['submitted'] = $key_input_settings['key_value'];
+    }
+
+    if (isset($key_input_settings['base64_encoded']) && $key_input_settings['base64_encoded'] == TRUE) {
+      $processed_values['processed_submitted'] = base64_decode($processed_values['submitted']);
+    }
+    else {
+      $processed_values['processed_submitted'] = $processed_values['submitted'];
+    }
+
+    unset($key_input_settings['key_value']);
+    $form_state['values'] = $key_input_settings;
+  }
+
+  return $processed_values;
+}
+
+/**
+ * Default function to process an existing key value.
+ *
+ * @param array $plugin_config
+ *   The plugin configuration.
+ * @param string $key_value
+ *   The value to be processed.
+ *
+ * @return string
+ *   The processed key value.
+ */
+function _key_default_process_existing_key_value($plugin_config, $key_value) {
+  // This is the default behavior. The key value is Base64-encoded if
+  // it was originally submitted with Base64 encoding. Otherwise, it is
+  // returned as-is.
+  if (isset($plugin_config['base64_encoded']) && $plugin_config['base64_encoded'] == TRUE) {
+    $processed_value = base64_encode($key_value);
+  }
+  else {
+    $processed_value = $key_value;
+  }
+
+  return $processed_value;
+}
+
+/**
+ * Default function to obscure a key value.
+ *
+ * @param string $key_value
+ *   The key value to obscure.
+ * @param array $options
+ *   Options to use when obscuring the value.
+ *
+ * @return string
+ *   The obscured key value.
+ */
+function _key_default_obscure_key_value($key_value, $options = array()) {
+  switch ($options['key_type_group']) {
+    case 'authentication':
+      $options['visible_right'] = 4;
+      $obscured_value = _key_obscure_value($key_value, $options);
+      break;
+
+    case 'encryption':
+      $options['visible_right'] = 0;
+      $options['fixed_length'] = 30;
+      $obscured_value = _key_obscure_value($key_value, $options);
+      break;
+
+    default:
+      $obscured_value = $key_value;
+  }
+
+  return $obscured_value;
+}
+
+/**
+ * Helper function to obscure a value.
+ *
+ * @param string $value
+ *   The value to obscure.
+ * @param array $options
+ *   Options to use when obscuring the value.
+ *
+ * @return string
+ *   The obscured value.
+ */
+function _key_obscure_value($value, $options = array()) {
+  // Add default options.
+  $options += array(
+    'replacement_character' => '*',
+    'fixed_length' => '',
+    'visible_right' => 4,
+  );
+
+  if ($options['visible_right'] > 0) {
+    $visible_right_chars = drupal_substr($value, $options['visible_right'] * -1);
+  }
+  else {
+    $visible_right_chars = '';
+  }
+
+  $obscured_chars = '';
+  if ($options['fixed_length']) {
+    $obscured_chars = str_repeat($options['replacement_character'], $options['fixed_length'] - $options['visible_right']);
+  }
+  elseif (drupal_strlen($value) - $options['visible_right'] > 0) {
+    $obscured_chars = str_repeat($options['replacement_character'], drupal_strlen($value) - $options['visible_right']);
+  }
+
+  return $obscured_chars . $visible_right_chars;
+}
+
+/**
+ * Implements hook_features_api().
+ *
+ * Define the components that we want to make exportable, in this case
+ * key configurations.
+ */
+function key_features_api() {
+  return array(
+    'key_config' => array(
+      'name' => 'Keys',
+      'file' => drupal_get_path('module', 'key') . '/includes/key_config.features.inc',
+      'default_hook' => 'key_default_configs',
+      'feature_source' => TRUE,
+    ),
+  );
+}

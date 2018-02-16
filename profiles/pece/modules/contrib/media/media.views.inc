@@ -19,7 +19,7 @@ function media_views_plugins() {
   if (module_exists('search_api')) {
     // If the Search API module exists, also allow indices of the file-entity
     // that has the fid field indexed.
-    $indices = search_api_index_load_multiple(NULL);
+    $indices = search_api_index_load_multiple(FALSE);
     foreach ($indices as $machine_name => $index) {
       if ($index->item_type == 'file' && isset($index->options['fields']['fid'])) {
         $base[] = 'search_api_index_' . $machine_name;
@@ -33,6 +33,7 @@ function media_views_plugins() {
     'help' => t('Display as a tab in the media browser.'),
     'handler' => 'media_views_plugin_display_media_browser',
     'theme' => 'views_view',
+    'theme path' => drupal_get_path('module', 'views') . '/theme',
     'base' => $base,
     'use ajax' => TRUE,
     'use pager' => TRUE,
@@ -78,6 +79,14 @@ function template_preprocess_media_views_view_media_browser(&$vars) {
   $view_mode = isset($params['view_mode']) ? $params['view_mode'] : 'preview';
 
   foreach ($vars['rows'] as $index => $row) {
+
+    // If the view result is cached, then the result may include fids that no
+    // longer exist.
+    if (!isset($files[$row->fid])) {
+      unset($vars['rows'][$index]);
+      continue;
+    }
+
     $file = $files[$row->fid];
     // Add url/preview to the file object.
     media_browser_build_media_item($file, $view_mode);
@@ -89,6 +98,7 @@ function template_preprocess_media_views_view_media_browser(&$vars) {
   drupal_add_js(array('media' => array('files' => array_values($files))), 'setting');
 
   // Add the browser parameters to the settings and that this display exists.
+  $params = media_get_browser_params();
   drupal_add_js(array(
     'media' => array(
       'browser' => array(
@@ -117,11 +127,12 @@ function template_preprocess_media_views_view_media_browser(&$vars) {
   $vars['wrapper_suffix'] = '</div>';
   $vars['list_type_prefix'] = '<' . $handler->options['type'] . ' id="media-browser-library-list" class="' . implode(' ', $class) . '">';
   $vars['list_type_suffix'] = '</' . $handler->options['type'] . '>';
+  $vars['aria_role'] = $params['multiselect'] ? 'checkbox' : 'radio';
 
   // Run theming variables through a standard Views preprocess function.
   template_preprocess_views_view_unformatted($vars);
 
-  // Add media browser javascript and CSS.
+  // Add media browser JavaScript and CSS.
   drupal_add_js(drupal_get_path('module', 'media') . '/js/plugins/media.views.js');
 }
 

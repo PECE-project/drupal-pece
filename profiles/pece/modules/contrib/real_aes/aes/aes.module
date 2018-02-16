@@ -1,0 +1,295 @@
+<?php
+/**
+ * @file
+ * Enable to satisfy dependencies on aes.module.
+ */
+
+
+use \Defuse\Crypto\Crypto;
+use \Defuse\Crypto\Exception as Ex;
+
+if (!function_exists('aes_encrypt')) {
+  /**
+   * Encrypt a message using authenticated AES-128 CBC.
+   *
+   * Throws exceptions when errors are encountered.
+   *
+   * @param string $message
+   *   The message to encrypt.
+   * @param bool $base64encode
+   *   If TRUE base64_encodes the ciphertext. Default TRUE.
+   * @param null $custom_key
+   *   A 128-bit key. If not provided, the key from 'aes_key_path' will be used.
+   * @param null $custom_cipher
+   *   Settings this will throw an exception.
+   * @param null $ignored_custom_iv
+   *   This parameter is ignored.
+   * @param null $custom_implementation
+   *   Settings this will throw an exception.
+   *
+   * @return string
+   *   The ciphertext.
+   *
+   * @throws \Defuse\Crypto\Exception\CannotPerformOperation
+   *   Thrown when an essential operation cannot be performed (eg key too small).
+   */
+  function aes_encrypt($message, $base64encode = TRUE, $custom_key = NULL, $custom_cipher = NULL, $ignored_custom_iv = NULL, $custom_implementation = NULL) {
+    // Load the library before throwing exceptions. This ensures defuse's
+    // exception handler can strip the key when Ex\CannotPerformOpertion is
+    // thrown.
+    $library = libraries_load('php-encryption');
+
+    if (empty($library['loaded'])) {
+      // Throw a filtered exception.
+      throw new Ex\CannotPerformOperation('PHP-encryption library is not available.');
+    }
+
+    if ($custom_cipher || $custom_implementation) {
+      // Throw a filtered exception.
+      throw new Ex\CannotPerformOperation('Unsupported options custom_cipher or custom_implementations.');
+    }
+
+    $key = $custom_key ? $custom_key : aes_get_key();
+
+    $ciphertext = Crypto::encrypt($message, $key);
+
+    if ($base64encode) {
+      return base64_encode($ciphertext);
+    }
+    return $ciphertext;
+  }
+}
+
+if (!function_exists('aes_decrypt')) {
+  /**
+   * Decrypts an untampered ciphertext.
+   *
+   * @param string $ciphertext
+   *   Ciphertext to decrypt.
+   * @param bool $base64encoded
+   *   If TRUE, ciphertext is base64_decoded before decryption. Default TRUE.
+   * @param null $custom_key
+   *   The 128-bit key used to encrypt the message. If not provided the key
+   *   from 'aes_key_path' will be used.
+   * @param null $custom_cipher
+   *   Settings this will throw an exception.
+   * @param null $ignored_custom_iv
+   *   Ignored.
+   * @param null $custom_implementation
+   *   Settings this will throw an exception.
+   *
+   * @return string
+   *   The decrypted message.
+   *
+   * @throws \Defuse\Crypto\Exception\CannotPerformOperation
+   *   Thrown when an essential operation cannot be performed.
+   * @throws \Defuse\Crypto\Exception\InvalidCiphertext
+   *   The ciphertext is invalid (MAC doesn't validate or too small).
+   */
+  function aes_decrypt($ciphertext, $base64encoded = TRUE, $custom_key = NULL, $custom_cipher = NULL, $ignored_custom_iv = NULL, $custom_implementation = NULL) {
+    // Load the library before throwing exceptions. This ensures defuse's
+    // exception handler can strip the key when Ex\CannotPerformOpertion is
+    // thrown.
+    $library = libraries_load('php-encryption');
+
+    if (empty($library['loaded'])) {
+      // Throw a filtered exception.
+      throw new Ex\CannotPerformOperation('PHP-encryption library is not available.');
+    }
+
+    if ($custom_cipher || $custom_implementation) {
+      // Throw a filtered exception.
+      throw new Ex\CannotPerformOperation('Unsupported options custom_cipher or custom_implementations.');
+    }
+
+    if ($base64encoded) {
+      $ciphertext = base64_decode($ciphertext);
+    }
+
+    $key = $custom_key ? $custom_key : aes_get_key();
+
+    try{
+      return Crypto::decrypt($ciphertext, $key);
+    }
+    catch (Exception $e){
+      return aes_decrypt_old($ciphertext, FALSE, $custom_key, $custom_cipher, $ignored_custom_iv, $custom_implementation);
+    }
+  }
+}
+
+if (!function_exists('aes_get_key')) {
+  /**
+   * Obtain the key from the keyfile.
+   *
+   * @return string
+   */
+  function aes_get_key() {
+    $key = null;
+
+    if (module_exists('key')){
+      $key = key_get_key_value('real_aes_key');
+    }
+
+    if (!$key && $path = variable_get('real_aes_key_file', '')) {
+      $key = file_get_contents($path);
+    }
+
+    return $key;
+  }
+}
+
+function aes_get_old_key() {
+
+  $storage_method = variable_get("aes_key_storage_method", "Database");
+
+  if ($storage_method == "Database") {
+    $key = variable_get("aes_key", FALSE);
+  }
+  if ($storage_method == "File") {
+    $key = file_get_contents(variable_get("aes_key_path", ""));
+  }
+
+  return $key;
+
+}
+
+function aes_decrypt_old ($ciphertext, $base64encoded = TRUE, $custom_key = NULL, $custom_cipher = NULL, $custom_iv = NULL, $custom_implementation = NULL) {
+  if ($base64encoded) {
+    $string = base64_decode($ciphertext);
+  }
+  else {
+    $string = $ciphertext;
+  }
+
+  // Bail out if the passed string is empty.
+  if (empty($string)) {
+    watchdog("aes", "Tried to decrypt an empty string.", array(), WATCHDOG_WARNING);
+    return FALSE;
+  }
+
+  if ($custom_cipher != NULL) {
+    $cipher = $custom_cipher;
+  }
+  else {
+    $cipher = variable_get("aes_cipher", "rijndael-128");
+  }
+
+  if (!empty($custom_key)) {
+    $key = $custom_key;
+  }
+  else {
+    $key = aes_get_old_key();
+  }
+
+  if ($custom_implementation == "mcrypt" || $custom_implementation == "phpseclib") {
+    $implementation = $custom_implementation;
+  }
+  else {
+    $implementation = variable_get("aes_implementation", "mcrypt");
+  }
+
+  if ($implementation == "phpseclib") {
+    // Using phpseclib implementation.
+
+    // phpseclib doesn't support custom ciphers.
+    if (is_null($custom_cipher) == FALSE) {
+      watchdog("aes", "A custom cipher was defined when decrypting a string in the AES module using the phpseclib implementation. This implementation doesn't support custom ciphers therefore the argument was ignored and the decryption was done with the standard cipher.", array(), WATCHDOG_WARNING);
+    }
+
+    aes_load_phpsec();
+    $phpsec = new Crypt_AES();
+    $phpsec->setKey($key);
+
+    if (!is_null($custom_iv)) {
+      $phpsec->setIV(base64_decode($custom_iv));
+    }
+    $decrypted = $phpsec->decrypt($string);
+  }
+  else {
+    if ($implementation == "mcrypt") {
+      // Using mcrypt implementation.
+
+      $td = mcrypt_module_open_safe($cipher, "", MCRYPT_MODE_CBC, "");
+      $ks = mcrypt_enc_get_key_size($td);
+
+      if ($custom_iv == NULL) {
+        $iv = base64_decode(variable_get("aes_encryption_iv", ""));
+      }
+      else {
+        $iv = base64_decode($custom_iv);
+      }
+
+      if (empty($iv)) {
+        watchdog("aes", "No initialization vector found while trying to decrypt. Aborting!", array(), WATCHDOG_ERROR);
+      }
+
+      $key = substr(sha1($key), 0, $ks);
+
+      mcrypt_generic_init($td, $key, $iv);
+      $decrypted = mdecrypt_generic($td, $string);
+      mcrypt_generic_deinit($td);
+
+      mcrypt_module_close($td);
+    }
+    else {
+
+      $error_msg = t("Request was sent to decrypt a string with the AES module, but the AES module has no active encryption implementation to work with! Did you forget to run update.php after upgrading this module?");
+
+      if (user_access('administer aes')) {
+        drupal_set_message($error_msg, "error");
+      }
+      watchdog("aes", $error_msg, array(), WATCHDOG_ERROR);
+      return FALSE;
+    }
+  }
+
+  return trim($decrypted);
+}
+
+/**
+ * Loads phpseclib.
+ *
+ * @return bool|int
+ *   TRUE on success, negative error code if something went wrong.
+ */
+if (!function_exists('aes_load_phpsec')) {
+  function aes_load_phpsec() {
+
+    // Find out where this module is located and set up an include path for the
+    // phpsec library.
+    if (module_exists('libraries') && libraries_get_path('phpseclib')) {
+      $phpsec_include_path = libraries_get_path('phpseclib');
+    }
+    else {
+      $phpsec_include_path = dirname(__FILE__) . '/phpseclib';
+    }
+
+    // Include phpsec AES lib.
+    if (file_exists($phpsec_include_path . '/Crypt/AES.php') === FALSE) {
+      return -2;
+    }
+    if (is_readable($phpsec_include_path . '/Crypt/AES.php') === FALSE) {
+      drupal_set_message(t("It appears that phpseclib is installed in the right location but can't be read. Check that the permissions on the directory and its files allows for reading by the webserver."));
+      return -3;
+    }
+    if (function_exists("set_include_path") == FALSE) {
+      // If we don't have set_include_path then we're out of luck.
+      return -1;
+    }
+    set_include_path(get_include_path() . PATH_SEPARATOR . $phpsec_include_path);
+    include_once('Crypt/AES.php');
+    return TRUE;
+  }
+}
+
+/**
+ * Safe version of mcrypt_module_open function.
+ */
+if (!function_exists('mcrypt_module_open_safe')) {
+  function mcrypt_module_open_safe($algorithm, $algorithm_directory, $mode, $mode_directory) {
+    if (!function_exists('mcrypt_module_open')) {
+      throw new Exception('AES: Mcrypt is selected as encryption implementation but is unavailable.');
+    }
+    return mcrypt_module_open($algorithm, $algorithm_directory, $mode, $mode_directory);
+  }
+}

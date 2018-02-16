@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * @file
+ * Install, uninstall, schema, and update functions for the Key module.
+ */
+
+/**
+ * Implements hook_schema().
+ *
+ * Create table to store key configurations.
+ */
+function key_schema() {
+  $schema['key_config'] = array(
+    'description' => 'Stores key configurations.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The machine name of the configuration.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ),
+      'label' => array(
+        'description' => 'The human-readable label of the configuration.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'description' => array(
+        'description' => 'A brief description of the configuration.',
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'medium',
+      ),
+      'key_type' => array(
+        'description' => 'The key type.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'key_type_settings' => array(
+        'description' => 'Additional settings for the key type.',
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+      ),
+      'key_provider' => array(
+        'description' => 'The key provider.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'key_provider_settings' => array(
+        'description' => 'Additional settings for the key provider.',
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+      ),
+      'key_input' => array(
+        'description' => 'The key input.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'key_input_settings' => array(
+        'description' => 'Additional settings for the key input.',
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+      ),
+    ),
+    'indexes' => array(
+      'label' => array('label'),
+      'key_type' => array('key_type'),
+      'key_provider' => array('key_provider'),
+      'key_input' => array('key_input'),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}

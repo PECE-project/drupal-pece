@@ -1,0 +1,42 @@
+<?php
+/**
+ * @file
+ * Library loader for the Defuse PHP-encryption library.
+ */
+
+/**
+ * Implements hook_libraries_info().
+ */
+function real_aes_libraries_info() {
+  return array(
+    'php-encryption' => array(
+      'name' => t('Defuse PHP-encryption'),
+      'vendor_url' => 'https://github.com/defuse/php-encryption',
+      'download_url' => 'https://github.com/defuse/php-encryption/archive/master.zip',
+      'files' => array(
+        'php' => array('autoload.php'),
+      ),
+      'version' => 'master',
+    ),
+  );
+}
+
+/**
+ * Load the defuse php encryption library.
+ *
+ * @return bool
+ *   TRUE if the library could be loaded, FALSE otherwise.
+ */
+function real_aes_load_library() {
+  $library = libraries_load('php-encryption');
+  return !empty($library['loaded']);
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function real_aes_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'encrypt') {
+    return 'plugins/' . $plugin;
+  }
+}

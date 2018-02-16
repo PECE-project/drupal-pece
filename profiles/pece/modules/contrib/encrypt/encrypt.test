@@ -1,0 +1,313 @@
+<?php
+
+/**
+ * @file
+ * Tests for encrypt.module
+ */
+
+/**
+ * Test basic encryption and decryption.
+ */
+class EncryptEncryptDecryptTest extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Encrypt and Decrypt a String',
+      'description' => 'Test basic encrypting and decripting of a string.',
+      'group' => 'Encrypt',
+    );
+  }
+
+  /**
+   * Enable encrypt module.
+   */
+  function setUp() {
+    parent::setUp('encrypt');
+  }
+
+  /**
+   * Test encryption and decryption with the "None" method.
+   */
+  function testNoneEncryptDecrypt() {
+    // First, generate a random string to encrypt.
+    $random = $this->randomName(10);
+
+    // Encrypt the string.
+    $encrypted = encrypt($random, array(), 'none');
+    $this->assertNotEqual($random, $encrypted, t('None: A value, encrypted, does not equal itself.'));
+    $this->assertTrue(strpos($encrypted, 'a:') === 0, t('None: The encrypted value is a serialized array.'));
+
+    // Since no actual encryption is being performed, ensure that the "encrypted" text is the same as the original.
+    $encryptedArray = unserialize($encrypted);
+    $this->assertEqual($random, $encryptedArray['text'], t('None: Initial value equals "encrypted" value.'));
+    $this->assertEqual($encryptedArray['method'], 'none', t('None: Encryption method stored correctly.'));
+
+    // Then, decrypt the encrypted string.
+    $decrypted = decrypt($encrypted);
+    $this->assertEqual($random, $decrypted, t('None: A value, decrypted, equals itself.'));
+  }
+
+  /**
+   * Test encryption and decryption with the "Mcrypt AES (CBC Mode)" method.
+   *
+   * Pretty much the same as the "None" tests. See that method for more detailed comments.
+   */
+  function testMcryptEncryptDecrypt() {
+    if (function_exists('mcrypt_encrypt')) {
+      $random = $this->randomName(10);
+      $encrypted = encrypt($random, array(), 'mcrypt_aes_cbc');
+
+      // Test that the original value does not equal the encrypted value (i.e. that the data is actually being encrypted).
+      $this->assertTrue(strpos($encrypted, 'a:') === 0, t('Mcrypt AES (CBC Mode): The encrypted value is a serialized array.'));
+      $encryptedArray = unserialize($encrypted);
+      $this->assertNotEqual($random, $encryptedArray['text'], t('Mcrypt AES (CBC Mode): A value, encrypted, does not equal itself.'));
+      $this->assertEqual($encryptedArray['method'], 'mcrypt_aes_cbc', t('Mcrypt AES (CBC Mode): Encryption method stored correctly.'));
+
+      $decrypted = decrypt($encrypted);
+      $this->assertEqual($random, $decrypted, t('Mcrypt AES (CBC Mode): A value, decrypted, equals itself.'));
+    }
+    else {
+      debug('Mcrypt extension not present. Skipping tests.');
+    }
+  }
+
+}
+
+/**
+ *  Various tests that ensure our encrypted data is portable (i.e. encryptable/decryptable in different environments).
+ */
+class EncryptPortability extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Encryption Portability tests',
+      'description' => 'Test to make sure an encryption array carries its encryption method and key provider with it to ensure portability.',
+      'group' => 'Encrypt',
+    );
+  }
+
+  function setUp() {
+    parent::setUp('encrypt');
+  }
+
+  /**
+   * Ensure that a method and key provider are stored with an encrypted value.
+   */
+  function testMethodAndKeyProviderPortability() {
+    // Generate some text to encrypt and encrypt it.
+    $text = $this->randomName(10);
+    $encrypted = encrypt($text, array(), 'mcrypt_aes_cbc', 'drupal_variable');
+    $encrypted_array = unserialize($encrypted);
+
+    $this->assertEqual($encrypted_array['method'], 'mcrypt_aes_cbc', t('Encryption method is stored with an encrypted value.'));
+    $this->assertEqual($encrypted_array['key_provider'], 'drupal_variable', t('Key provider is stored with an encrypted value.'));
+  }
+
+  /**
+   * Test off-the-cuff decrypting of a value using decrypt() with some text and paramters.
+   */
+  function testDecryptingRandomValue() {
+    // Generate some text and encrypt it.
+    $text = $this->randomName(10);
+    $encrypted = encrypt($text, array(), 'mcrypt_aes_cbc', 'drupal_variable');
+    $encrypted_array = unserialize($encrypted);
+
+    // First, just check to see that the value was actually encrypted.
+    $this->assertNotEqual($text, $encrypted_array['text'], t('The value was actually encrypted.'));
+
+    // Attempt to decrypt it without using the encryption array.
+    $decrypted = decrypt($encrypted_array['text'], array(), NULL, NULL, 'default');
+    $this->assertEqual($text, $decrypted, t('The value was successfully decrypted.'));
+  }
+
+  /**
+   * Test decrypting when only an encryption method is provided (no key provider).
+   *
+   * We are likely to encounter this when sites upgrade from 1.x to 2.x, since key providers
+   * did not exist in 1.x.
+   */
+  function testDecryptWithoutKeyProvider() {
+    // Generate some text and encrypt it.
+    $text = $this->randomName(10);
+    $encrypted = encrypt($text);
+
+    // Now, we'll manually remove the key provider array key and reserialize.
+    $encrypted_array = unserialize($encrypted);
+    $this->assertTrue(isset($encrypted_array['key_provider']), t('The key provider key exists in the encrypted array.'));
+    unset($encrypted_array['key_provider']);
+    $this->assertEqual(count($encrypted_array), 5, t('The key provider was successfully unset.'));
+    $encrypted = serialize($encrypted_array);
+
+    // Now, we'll attempt to decrypt.
+    $decrypted = decrypt($encrypted);
+    $this->assertEqual($decrypted, $text, t('The value was successfully decrypted.'));
+  }
+
+}
+
+/**
+ * Test encryption method hooks.
+ */
+class EncryptEncryptionMethodPluginsTest extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Encryption Method and Key Providers Plugin tests',
+      'description' => 'Test encryption method and key provider implementation.',
+      'group' => 'Encrypt',
+    );
+  }
+
+  /**
+   * Enable encrypt module.
+   */
+  function setUp() {
+    parent::setUp('encrypt', 'encrypt_test');
+    $adminUser = $this->drupalCreateUser(array('administer encrypt'));
+    $this->drupalLogin($adminUser);
+  }
+
+  /**
+   * The declared encryption method appears on the add configuration page.
+   */
+  function testPluginsAppearInList() {
+    $this->drupalGet('admin/config/system/encrypt/add');
+    $this->assertText('Test Method', t('Encryption method name is present.'));
+    $this->assertText('This is just a test encryption method.', t('Encryption method description is present.'));
+    $this->assertText('Test Key Provider', t('Key provider name is present.'));
+    $this->assertText('This is just a test key provider.', t('Key provider description is present.'));
+  }
+
+  /**
+   * Test that plugins cannot be enabled if dependencies are not met.
+   */
+  function testPluginDependencies() {
+    // First, set the variable to trigger our unmet dependency.
+    variable_set('encrypt_test_trigger_unmet_deps', TRUE);
+
+    // Then make sure dependency errors appear on the page, and the method
+    // cannot be enabled.
+    $this->drupalGet('admin/config/system/encrypt/add');
+    $this->assertText('This is an unmet dependency.');
+    $this->assertFieldByXPath('//input[@name="encrypt_encryption_method" and @value="test" and @disabled]');
+
+    // Now disable the unmet dependency and make sure all is OK. Note that this
+    // should also implicitly test the plugin cache-clearing mechanism.
+    variable_set('encrypt_test_trigger_unmet_deps', FALSE);
+    $this->drupalGet('admin/config/system/encrypt');
+    $this->assertNoText('This is an unmet dependency.');
+    $this->assertNoFieldByXPath('//input[@name="encrypt_encryption_method" and @value="test" and @disabled]');
+  }
+
+}
+
+/**
+ * Test configurations.
+ */
+class EncryptConfigTest extends DrupalWebTestCase {
+
+  protected $privilegedUser;
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Configuration Management',
+      'description' => 'Test basic management of configuration, including adding, editing, and deleting.',
+      'group' => 'Encrypt',
+    );
+  }
+
+  /**
+   * Enable encrypt module; create and log in privileged user.
+   */
+  function setUp() {
+    parent::setUp('encrypt');
+
+    $this->privilegedUser = $this->drupalCreateUser(array('administer encrypt'));
+    $this->drupalLogin($this->privilegedUser);
+  }
+
+  /**
+   * Test that the configuration table was created on install.
+   *
+   * The table should exist and a default configuration should have been
+   * added.
+   */
+  function testConfigInstall() {
+    // Test that the encrypt_config table was created.
+    $this->assertTrue(db_table_exists('encrypt_config'), 'The table for storing configurations was created.');
+
+    // Test that the default configuration was added and is enabled.
+    $default_config = encrypt_get_default_config();
+    $this->assertTrue($default_config['name'] == 'default', 'A default configuration was added.');
+    $this->assertTrue($default_config['enabled'], 'The default configuration is enabled.');
+  }
+
+  /**
+   * Test configuration management.
+   *
+   * Ensure that a configuration can be added, loaded, edited, made the
+   * default, and deleted.
+   */
+  function testConfigManage() {
+    // Create the test configuration.
+    $fields = array();
+    $fields['label'] = t('Test');
+    $fields['name'] = strtolower($fields['label']);
+    $fields['description'] = t('This is the original description.');
+    $fields['enabled'] = FALSE;
+    $fields['encrypt_encryption_method'] = 'mcrypt_aes_cbc';
+    $fields['encrypt_key_provider'] = 'drupal_variable';
+    $this->drupalPost('admin/config/system/encrypt/add', $fields, t('Save configuration'));
+    $this->assertText(t('The configuration @label has been added.', array('@label' => $fields['label'])));
+
+    // Load the test configuration.
+    $config = encrypt_get_config($fields['name'], TRUE);
+    $this->assertTrue($config['label'] == $fields['label'], format_string('The configuration @label was loaded.', array('@label' => $fields['label'])));
+
+    // Edit the test configuration.
+    $edit_fields = $fields;
+    unset($edit_fields['name']);
+    $edit_fields['description'] = t('This is the edited description.');
+    $this->drupalPost('admin/config/system/encrypt/edit/' . $fields['name'], $edit_fields, t('Save configuration'));
+    $this->assertText(t('The configuration @label has been updated.', array('@label' => $fields['label'])));
+
+    // Make the test configuration the default.
+    $this->drupalGet('admin/config/system/encrypt/default/' . $fields['name']);
+    $this->assertText(t('The configuration @label has been made the default.', array('@label' => $fields['label'])));
+    $default_config = encrypt_get_default_config(TRUE);
+    $this->assertTrue($default_config['name'] == $fields['name'], 'The test configuration is the default.');
+    $test_config = encrypt_get_config($fields['name'], TRUE);
+    $this->assertTrue($test_config['enabled'], 'The test configuration is enabled.');
+
+    // Ensure that the default configuration cannot be deleted.
+    $this->drupalGet('admin/config/system/encrypt/delete/' . $default_config['name']);
+    $this->assertText(t('The default configuration cannot be deleted.'));
+
+    // Make the test configuration not the default, then delete it.
+    $this->drupalGet('admin/config/system/encrypt/default/default');
+    $this->drupalGet('admin/config/system/encrypt/delete/' . $fields['name']);
+    $this->drupalPost(NULL, array(), t('Delete'));
+    $this->assertText(t('The configuration @label has been deleted.', array('@label' => $fields['label'])));
+  }
+
+  /**
+   * Test an encryption with just a configuration.
+   */
+  function testConfigEncrypt() {
+    $config = encrypt_get_default_config(TRUE);
+
+    $random = $this->randomName(10);
+    $encrypted = encrypt($random, array(), NULL, NULL, $config['name']);
+
+    // Test that the original value does not equal the encrypted value
+    // (i.e. that the data is actually being encrypted).
+    $this->assertTrue(strpos($encrypted, 'a:') === 0, 'Config: The encrypted value is a serialized array.');
+    $encryptedArray = unserialize($encrypted);
+    $this->assertNotEqual($random, $encryptedArray['text'], 'Config: A value, encrypted, does not equal itself.');
+    $this->assertEqual($encryptedArray['method'], 'mcrypt_aes_cbc', 'Config: Encryption method stored correctly.');
+
+    $decrypted = decrypt($encrypted, array(), 'default');
+    $this->assertEqual($random, $decrypted, 'Config: A value, decrypted, equals itself.');
+  }
+
+}

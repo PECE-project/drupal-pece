@@ -34,6 +34,10 @@
   // Used to make sure we don't wrap Drupal.wysiwygAttach() more than once.
   var wrappedWysiwygAttach = false;
 
+  // Used to make sure we don't wrap insertLink() on the Linkit field helper
+  // more than once.
+  var wrappedLinkitField = false;
+
   // Triggers the CTools autosubmit on the given form. If timeout is passed,
   // it'll set a timeout to do the actual submit rather than calling it directly
   // and return the timer handle.
@@ -44,7 +48,9 @@
     if (!preview_widget.hasClass('panopoly-magic-loading')) {
       preview_widget.addClass('panopoly-magic-loading');
       submit = function () {
-        $form.find('.ctools-auto-submit-click').click();
+        if (document.contains(form)) {
+          $form.find('.ctools-auto-submit-click').click();
+        }
       };
       if (typeof timeout === 'number') {
         return setTimeout(submit, timeout);
@@ -77,39 +83,23 @@
     };
   }
 
-  // A function to run before Drupal.wysiwygAttach() with the same arguments.
-  function beforeWysiwygAttach(context, params) {
-    var editorId = params.field,
-        editorType = params.editor,
-        format = params.format;
-
-    if (Drupal.settings.wysiwyg.configs[editorType] && Drupal.settings.wysiwyg.configs[editorType][format]) {
-      wysiwygConfigAlter(params, Drupal.settings.wysiwyg.configs[editorType][format]);
-    }
+  // A function to run before Drupal.wysiwyg.editor.attach.tinymce() with the
+  // same arguments.
+  function wysiwygTinymceBeforeAttach(context, params, settings) {
+    var onWysiwygChange = onWysiwygChangeFactory(params.field);
+    settings['setup'] = function (editor) {
+      editor.onChange.add(onWysiwygChange);
+      editor.onKeyUp.add(onWysiwygChange);
+    };
   }
 
-  // Wouldn't it be great if WYSIWYG gave us an alter hook to change the
-  // settings of the editor before it was attached? Well, we'll just have to
-  // roll our own. :-)
-  function wysiwygConfigAlter(params, config) {
-    var editorId = params.field,
-        editorType = params.editor,
-        onWysiwygChange = onWysiwygChangeFactory(editorId);
-
-    switch (editorType) {
-      case 'markitup':
-        $.each(['afterInsert', 'onEnter'], function (index, funcName) {
-          config[funcName] = onWysiwygChange;
-        });
-        break;
-
-      case 'tinymce':
-        config['setup'] = function (editor) {
-          editor.onChange.add(onWysiwygChange);
-          editor.onKeyUp.add(onWysiwygChange);
-        }
-        break;
-    }
+  // A function to run before Drupal.wysiwyg.editor.attach.markitup() with the
+  // same arguments.
+  function wysiwygMarkitupBeforeAttach(context, params, settings) {
+    var onWysiwygChange = onWysiwygChangeFactory(params.field);
+    $.each(['afterInsert', 'onEnter'], function (index, funcName) {
+      settings[funcName] = onWysiwygChange;
+    });
   }
 
   // Used to wrap a function with a beforeFunc (we use it for wrapping
@@ -121,6 +111,18 @@
       return originalFunc.apply(this, arguments);
     };
   }
+
+  // Used to wrap a function with an afterFunc (we use it for wrapping
+  // insertLink() on the Linkit field helper);
+  function wrapFunctionAfter(parent, name, afterFunc) {
+    var originalFunc = parent[name];
+    parent[name] = function () {
+      var retval = originalFunc.apply(this, arguments);
+      afterFunc.apply(this, arguments);
+      return retval;
+    };
+  }
+
 
   /**
    * Improves the Auto Submit Experience for CTools Modals
@@ -182,8 +184,9 @@
       });
 
       // Handle WYSIWYG fields.
-      if (!wrappedWysiwygAttach && typeof Drupal.wysiwygAttach == 'function') {
-        wrapFunctionBefore(Drupal, 'wysiwygAttach', beforeWysiwygAttach);
+      if (!wrappedWysiwygAttach && typeof Drupal.wysiwyg != 'undefined' && typeof Drupal.wysiwyg.editor.attach.tinymce == 'function' && typeof Drupal.wysiwyg.editor.attach.markitup == 'function') {
+        wrapFunctionBefore(Drupal.wysiwyg.editor.attach, 'tinymce', wysiwygTinymceBeforeAttach);
+        //wrapFunctionBefore(Drupal.wysiwyg.editor.attach, 'markitup', wysiwygMarkitupBeforeAttach);
         wrappedWysiwygAttach = true;
 
         // Since the Drupal.behaviors run in a non-deterministic order, we can
@@ -222,6 +225,18 @@
 
       // Prevent ctools auto-submit from firing when changing text formats.
       $(':input.filter-list').addClass('ctools-auto-submit-exclude');
+
+      // Handle Linkit fields.
+      if (!wrappedLinkitField && typeof Drupal.linkit !== 'undefined') {
+        var linkitFieldHelper = Drupal.linkit.getDialogHelper('field');
+        if (typeof linkitFieldHelper !== 'undefined') {
+          wrapFunctionAfter(linkitFieldHelper, 'insertLink', function (data) {
+            var element = document.getElementById(Drupal.settings.linkit.currentInstance.source);
+            triggerSubmit(element.form);
+          });
+          wrappedLinkitField = true;
+        }
+      }
 
     }
   }

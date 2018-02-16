@@ -994,7 +994,7 @@ function views_ui_edit_form($form, &$form_state, $view, $display_id = NULL) {
   // @todo When more functionality is added to this form, cloning here may be
   //   too soon. But some of what we do with $view later in this function
   //   results in making it unserializable due to PDO limitations.
-  $form_state['view'] = clone($view);
+  $form_state['view'] = clone $view;
 
   $form['#attached']['library'][] = array('system', 'ui.tabs');
   $form['#attached']['library'][] = array('system', 'ui.dialog');
@@ -4959,6 +4959,13 @@ function views_ui_admin_settings_advanced() {
     '#options' => views_fetch_plugin_names('localization', NULL, array()),
     '#default_value' => views_get_localization_plugin(),
     '#description' => t('Select a translation method to use for Views data like header, footer, and empty text.'),
+  );
+
+  $form['locale']['views_localize_all'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Use same translation method for exported views'),
+    '#description' => t('Exported views will use Core translation by default. Enable this to always use the configured translation method.'),
+    '#default_value' => variable_get('views_localize_all', FALSE),
   );
 
   $regions = array();

@@ -4,22 +4,40 @@
  * Implements hook_views_data_alter().
  */
 function entityreference_view_widget_views_data_alter(&$data) {
-  foreach (entity_get_info() as $info) {
-    if (isset($info['base table']) && isset($data[$info['base table']]['table'])) {
-      $data[$info['base table']]['entityreference_view_widget'] = array(
-        'title' => $data[$info['base table']]['table']['group'],
+  $tables = array();
+
+  // Build entity tables.
+  $entity_info = entity_get_info();
+  foreach ($entity_info as $info) {
+    if (isset($info['base table'])) {
+      $tables[$info['base table']] = $info['entity keys']['id'];
+    }
+  }
+
+  // Build search_api index tables.
+  if (module_exists('search_api_views')) {
+    foreach (search_api_index_load_multiple(FALSE) as $index) {
+      $tables['search_api_index_' . $index->machine_name] = 'search_api_id';
+    }
+  }
+
+  foreach ($tables as $table => $name) {
+    if (isset($data[$table]['table'])) {
+      $data[$table]['entityreference_view_widget'] = array(
+        'title' => $data[$table]['table']['group'],
         'group' => t('Entity Reference View Widget Checkbox'),
         'help' => t('Provide a checkbox to select the row for an entity reference.'),
-        'real field' => $info['entity keys']['id'],
+        'real field' => $name,
         'field' => array(
           'handler' => 'entityreference_view_widget_handler_field_checkbox',
           'click sortable' => FALSE,
         ),
       );
+
       // Support for EFQ Views.
-      $efq = 'efq_' . $info['base table'];
+      $efq = 'efq_' . $table;
       if (isset($data[$efq]['table'])) {
-        $data[$efq]['entityreference_view_widget'] = $data[$info['base table']]['entityreference_view_widget'];
+        $data[$efq]['entityreference_view_widget'] = $data[$table]['entityreference_view_widget'];
       }
     }
   }

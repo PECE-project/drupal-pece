@@ -286,6 +286,9 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       $pane = $form_state['pane'];
     }
 
+    // To store arbitrary extra data for generating previews.
+    $extra = array();
+
     // Do some special processing for stylizer settings forms to ensure previews work correctly.
     if ($form_id == 'panels_edit_style_settings_form') {
 
@@ -379,14 +382,22 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
           $entity->fpid = NULL;
         }
 
+        // Process any field collection fields that may be present.
+        $field_collection_fields = _panopoly_magic_process_field_collection_fields('fieldable_panels_pane', $entity->bundle, $entity, $form, $form_state);
+
         field_attach_form_validate('fieldable_panels_pane', $entity, $form, $form_state);
         field_attach_submit('fieldable_panels_pane', $entity, $form, $form_state);
+
+        // Add back any field collection fields.
+        foreach ($field_collection_fields as $field_collection_field => $field_collection_value) {
+          $entity->$field_collection_field = $field_collection_value;
+        }
 
         // Set the callback to use for rendering the preview.
         $preview_callback = 'panopoly_magic_render_fieldable_panels_pane_preview';
 
         // Stash the entity stub for the preview content type.
-        $pane->configuration['fieldable_panels_pane'] = $entity;
+        $extra['fieldable_panels_pane'] = $entity;
       }
     }
 
@@ -468,6 +479,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
         'context' => $context,
         'style' => $style,
         'display' => $display,
+        'extra' => $extra,
       );
 
       // Remove the clearfix for preview floating
@@ -515,7 +527,12 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
   if (strpos($form_id, 'content_type_edit_form') || $form_id == 'ctools_entity_field_content_type_formatter_options') {
     $form['buttons']['cancel']['#access'] = FALSE;
     if (!empty($form['buttons']['return'])) {
-      $form['buttons']['return']['#value'] = t('Save');
+      if ($form_state['op'] == 'add') {
+        $form['buttons']['return']['#value'] = t('Add');
+      }
+      else {
+        $form['buttons']['return']['#value'] = t('Save');
+      }
     }
     $form['buttons']['#weight'] = -99;
   }
@@ -603,6 +620,50 @@ function _panopoly_magic_add_path_to_ajax($element) {
 }
 
 /**
+ * Process any field collection fields, returning psuedo values for them.
+ */
+function _panopoly_magic_process_field_collection_fields($entity_type, $bundle, $entity, $form, &$form_state) {
+  $field_collection_fields = array();
+
+  $instances = field_info_instances($entity_type, $bundle);
+  foreach ($instances as $instance) {
+    $field_name = $instance['field_name'];
+    $field = field_info_field($field_name);
+    if ($field['type'] == 'field_collection') {
+      $langcode = entity_language($entity_type, $entity);
+      if (!$langcode) {
+        $langcode = LANGUAGE_NONE;
+      }
+
+      foreach (element_children($form[$field_name][$langcode]) as $index) {
+        // Only address the numeric children.
+        if (!is_numeric($index)) {
+          continue;
+        }
+        $element = $form[$field_name][$langcode][$index];
+
+        // Create a new field collection entity with the values.
+        $field_collection_item = entity_create('field_collection_item', array('field_name' => $field_name));
+        $field_collection_item->setHostEntity($entity_type, $entity, $langcode, FALSE);
+        field_attach_form_validate('field_collection_item', $field_collection_item, $element, $form_state);
+        field_attach_submit('field_collection_item', $field_collection_item, $element, $form_state);
+        _field_invoke_multiple('load', 'field_collection_item', array($field_collection_item->item_id => $field_collection_item));
+
+        // Stash it for later use.
+        $field_collection_fields[$field_name][$langcode][] = array(
+          'entity' => $field_collection_item,
+        );
+      }
+
+      // Clear out the field so the values don't get submitted.
+      $entity->{$field_name}[$langcode] = array();
+    }
+  }
+
+  return $field_collection_fields;
+}
+
+/**
  * Ajax callback that just returns the rendered preview.
  */
 function panopoly_magic_ajax_update_preview($form, $form_state) {
@@ -624,7 +685,19 @@ function panopoly_magic_form_post_render_preview($output, $form) {
   if (empty($preview_callback)) {
     $preview_callback = 'ctools_content_render';
   }
-  $content = $preview_callback($pane->type, $pane->subtype, $configuration, $keywords, $args, $context);
+
+  // If there is a 'destination', temporarily change the 'q' parameter so the
+  // pane renders as if we are on that path.
+  // @see https://www.drupal.org/node/2177417
+  $original_path = $_GET['q'];
+  if (!empty($_GET['destination'])) {
+    $_GET['q'] = $_GET['destination'];
+  }
+
+  $content = $preview_callback($pane->type, $pane->subtype, $configuration, $keywords, $args, $context, $extra);
+
+  // Restore the 'q' to its original value.
+  $_GET['q'] = $original_path;
 
   if (!empty($content)) {
     // Wrap the widget content in the style plugin.
@@ -650,8 +723,8 @@ function panopoly_magic_form_post_render_preview($output, $form) {
 /**
  * Renders previews for fieldable_panels_pane content types.
  */
-function panopoly_magic_render_fieldable_panels_pane_preview($type, $subtype, $conf, $keywords, $args, $context) {
-  $entity = $conf['fieldable_panels_pane'];
+function panopoly_magic_render_fieldable_panels_pane_preview($type, $subtype, $conf, $keywords, $args, $context, $extra) {
+  $entity = $extra['fieldable_panels_pane'];
   // Prevents PHP notice when not admin user (see issue #2463389).
   if (!isset($entity->view_access)) {
     $entity->view_access = NULL;
@@ -1529,7 +1602,8 @@ function panopoly_magic_preprocess_panels_add_content_modal(&$vars) {
  * Helper function to render the Panels add content link.
  */
 function _panopoly_magic_render_add_content_link($vars, $content_type, $title) {
-  $content_type['title'] = t('Add');
+  $content_type['title'] = t('Add <span class="element-invisible">@widget_name</span>', array('@widget_name' => $title));
+  $content_type['panopoly_magic_add_button'] = TRUE;
   // @todo: Investigate why view_panes are missing description.
   if (empty($content_type['description'])) {
     $content_type['description'] = $title;

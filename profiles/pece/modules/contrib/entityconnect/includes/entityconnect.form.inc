@@ -32,27 +32,27 @@ function _entityconnect_field_attach_form($entity_type, $entity, &$form, &$form_
     $instance = field_info_instance($form['#entity_type'], $field_name, $bundle);
   }
 
-  if (!isset($instance['entityconnect_unload_add'])) {
-    $instance['entityconnect_unload_add'] = variable_get('entityconnect_unload_add_default', 1);
+  if (!isset($instance['entityconnect']['button']['unload_add_button'])) {
+    $instance['entityconnect']['button']['unload_add_button'] = variable_get('entityconnect_unload_add_default', 1);
   }
 
-  if (!isset($instance['entityconnect_unload_edit'])) {
-    $instance['entityconnect_unload_edit'] = variable_get('entityconnect_unload_edit_default', 1);
+  if (!isset($instance['entityconnect']['button']['unload_edit_button'])) {
+    $instance['entityconnect']['button']['unload_edit_button'] = variable_get('entityconnect_unload_edit_default', 1);
   }
 
-  $addbuttonallowed = $instance['entityconnect_unload_add'];
-  $editbuttonallowed = $instance['entityconnect_unload_edit'];
+  $addbuttonallowed = $instance['entityconnect']['button']['unload_add_button'];
+  $editbuttonallowed = $instance['entityconnect']['button']['unload_edit_button'];
 
-  if (!isset($instance['entityconnect_show_add_icon'])) {
-    $instance['entityconnect_show_add_icon'] = variable_get('entityconnect_show_add_icon_default', 0);
+  if (!isset($instance['entityconnect']['icon']['show_add_icon'])) {
+    $instance['entityconnect']['icon']['show_add_icon'] = variable_get('entityconnect_show_add_icon_default', 0);
   }
 
-  if (!isset($instance['entityconnect_show_edit_icon'])) {
-    $instance['entityconnect_show_edit_icon'] = variable_get('entityconnect_show_edit_icon_default', 0);
+  if (!isset($instance['entityconnect']['icon']['show_edit_icon'])) {
+    $instance['entityconnect']['icon']['show_edit_icon'] = variable_get('entityconnect_show_edit_icon_default', 0);
   }
 
-  $add_icon = $instance['entityconnect_show_add_icon'];
-  $edit_icon = $instance['entityconnect_show_edit_icon'];
+  $add_icon = $instance['entityconnect']['icon']['show_add_icon'];
+  $edit_icon = $instance['entityconnect']['icon']['show_edit_icon'];
 
 
   $field = field_info_field($field_name);
@@ -70,19 +70,9 @@ function _entityconnect_field_attach_form($entity_type, $entity, &$form, &$form_
       $name = $entity_reference_info->field['settings']['handler_settings']['view']['view_name'];
       $display = $entity_reference_info->field['settings']['handler_settings']['view']['display_name'];
       $views = views_get_view($name);
-      $views_display = $views->display;
+      $views_display = isset($views->display) ? $views->display : NULL;
 
       switch ($entity_type) {
-        case 'node':
-          if (isset($views_display[$display]->display_options['filters']['type'])) {
-            $acceptable_types = $views_display[$display]->display_options['filters']['type']['value'];
-          }
-          elseif (isset($views_display['default']->display_options['filters']['type']['value'])) {
-            $acceptable_types = $views_display['default']->display_options['filters']['type']['value'];
-          }
-           // $acceptable_types was already set to NULL before
-          break;
-
         case 'taxonomy_term':
           if (isset($views_display[$display]->display_options['filters']['machine_name']['table'])
                 && $views_display[$display]->display_options['filters']['machine_name']['table'] == 'taxonomy_vocabulary' ) {
@@ -94,6 +84,13 @@ function _entityconnect_field_attach_form($entity_type, $entity, &$form, &$form_
           break;
 
         default:
+          if (isset($views_display[$display]->display_options['filters']['type'])) {
+            $acceptable_types = $views_display[$display]->display_options['filters']['type']['value'];
+          }
+          elseif (isset($views_display['default']->display_options['filters']['type']['value'])) {
+            $acceptable_types = $views_display['default']->display_options['filters']['type']['value'];
+          }
+          // $acceptable_types was already set to NULL before
           break;
       }
     }
@@ -107,6 +104,13 @@ function _entityconnect_field_attach_form($entity_type, $entity, &$form, &$form_
     $acceptable_types = $field['settings']['referenceable_roles'];
   }
 
+  $datas = array(
+    'entity_type' => &$entity_type,
+    'acceptable_types' => &$acceptable_types,
+    'field' => $field
+  );
+  drupal_alter('entityconnect_field_attach_form', $datas);
+
   // We currently should separate Autocomplete widget from others default widget
   // because "Edit" button will not react well on multiple selected items.
   // Autocomplete widget has not #type value, so we are testing it
@@ -118,7 +122,10 @@ function _entityconnect_field_attach_form($entity_type, $entity, &$form, &$form_
     $extra_class = isset($widget_container['#type']) ? $widget_container['#type'] : 'autocomplete';
     $extra_class .= (!isset($widget_container['#cardinality']) || $widget_container['#cardinality'] == 1) ? ' single-value' : ' multiple-values';
     $extra_class .= (isset($widget_container['#multiple']) && $widget_container['#multiple'] == TRUE) ? ' multiple-selection' : ' single-selection';
-    if ((isset($widget_container['#multiple']) && $widget_container['#multiple'] == TRUE) || $widget_container['#type'] == 'radios' || $widget_container['#type'] == 'checkboxes'){
+    if (($addbuttonallowed == 0 || $editbuttonallowed == 0)
+        && (isset($widget_container['#multiple']) && $widget_container['#multiple'] == TRUE)
+        || $widget_container['#type'] == 'radios'
+        || $widget_container['#type'] == 'checkboxes') {
       $field_container['#attributes']['class'][] = 'inline-label';
     }
     if (user_access('entityconnect add button') && $addbuttonallowed == 0) {
@@ -157,7 +164,8 @@ function _entityconnect_field_attach_form($entity_type, $entity, &$form, &$form_
     $extra_class = isset($widget_container['#type']) ? $widget_container['#type'] : 'autocomplete';
     $extra_class .= (!isset($widget_container['#cardinality']) || $widget_container['#cardinality'] == 1) ? ' single-value' : ' multiple-values';
     $extra_class .= (isset($widget_container['#multiple']) && $widget_container['#multiple'] == TRUE) ? ' multiple-selection' : ' single-selection';
-    if (isset($widget_container['#type'])) {
+    if (($addbuttonallowed == 0 || $editbuttonallowed == 0)
+        && isset($widget_container['#type'])) {
       if ((isset($widget_container['#multiple']) && $widget_container['#multiple'] == TRUE) || $widget_container['#type'] == 'radios' || $widget_container['#type'] == 'checkboxes'){
         $field_container['#attributes']['class'][] = 'inline-label';
      }
@@ -412,7 +420,11 @@ function entityconnect_add_edit_button_submit(&$form, &$form_state) {
     'target_id'  => $target_id,
     'target_entity_type' => $entity_type,
     'acceptable_types' => $acceptable_types,
+    'field_container' => $field_container,
+    'field_container_key_exists' => $key_exists,
   );
+
+  drupal_alter('entityconnect_add_edit_button_submit', $data);
 
   entityconnect_cache_set($cache_id, $data);
 
@@ -430,9 +442,9 @@ function entityconnect_add_edit_button_submit(&$form, &$form_state) {
 /**
  * Sets submit button on child create form.
  *
- * On submiting of a child form we set:
+ * On submission of a child form we set:
  * the target_id in the cache entry
- * the rediect to our redirect page.
+ * the redirect to our redirect page.
  */
 function entityconnect_child_form_submit(&$form, &$form_state) {
   $cache_id = $form_state['values']['parent_build_cache_id'];
@@ -459,26 +471,33 @@ function entityconnect_child_form_submit(&$form, &$form_state) {
         break;
 
       default:
-        // Entity construction kit support.
-        if (module_exists('eck')) {
-          $entity_info = entity_get_info($entity_type);
-          if ($entity_info['module'] == 'eck') {
-            $data['target_id'] = $form_state['values']['entity']->id;
-          }
-        }
-
-        // Bean support.
-        if (module_exists('bean_admin_ui')) {
-          $entity_info = entity_get_info($entity_type);
-          if ($entity_info['module'] == 'bean') {
-            $data['target_id'] = $form_state['values']['bean']->bid;
-          }
-        }
+        $datas = array(
+          'form' => &$form,
+          'form_state' => &$form_state,
+          'entity_type' => $entity_type,
+          'data' => &$data
+        );
+        drupal_alter('entityconnect_child_form_submit', $datas);
         break;
     }
 
     entityconnect_cache_set($cache_id, $data);
     $form_state['redirect'] = "admin/entityconnect/return/$cache_id";
+  }
+}
+
+/**
+ * Sets delete button on child create form.
+ *
+ * On deletion submission of a child form we set:
+ * the form_state redirect with build cache id.
+ */
+function entityconnect_child_form_delete_submit(&$form, &$form_state) {
+  if (isset($form_state['#entityconnect_child_form'])) {
+    $form_state['redirect'][1]['query'] = array(
+      'build_cache_id' => $form_state['#entityconnect_child_form']->cid,
+      'child' => 1,
+    );
   }
 }
 
@@ -529,7 +548,7 @@ function entityconnect_return_form_alter(&$form, &$form_state, $form_id, $cache_
       $widget_container_type = 'multiple_selects';
     }
 
-    if (isset($data['target_id']) && !is_array($data['target_id']) && $form_state['rebuild'] === TRUE) {
+    if (isset($data['target_id']) && $form_state['rebuild'] === TRUE) {
       switch ($data['target_entity_type']) {
         case 'node':
           if ($data['target_id'] != 0 && $node = node_load($data['target_id'])) {
@@ -740,106 +759,22 @@ function entityconnect_return_form_alter(&$form, &$form_state, $form_id, $cache_
           break;
 
         default:
-          // Entity construction kit support.
-          if (module_exists('eck')) {
-            $entiy_info = entity_get_info($data['target_entity_type']);
-            if ($entiy_info['module'] == 'eck') {
-              if (($data['target_id'] != NULL || $data['target_id'] != 0) && $eck_entity = entity_load_single($data['target_entity_type'], $data['target_id'])) {
-                switch ($widget_container_type) {
-                  // Autocomplete tags style.
-                  case 'textfield':
-                    $element['#default_value'] = !empty($eck_entity->title) ? $eck_entity->title : t('Entity has no title');
-                    $element['#default_value'] .= ' (' . $eck_entity->id . ')';
-                    if (!empty ($widget_container['#value'])) {
-                      $element['#default_value'] .= ', ' . $widget_container['#value'];
-                    }
-                    break;
-
-                  // Select list.
-                  case 'select':
-                    if ($widget_container['#multiple'] == FALSE) {
-                      $element['#default_value'] = $eck_entity->id;
-                    }
-                    else {
-                      $element['#default_value'] = $eck_entity->id;
-                      $element['#default_value'] = $widget_container['#value'] + array($element['#default_value'] => $element['#default_value']);
-                    }
-                    break;
-
-                  // Radios widget.
-                  case 'radios':
-                    $element['#default_value'] = $eck_entity->id;
-                    break;
-
-                  // Checkboxes widget.
-                  case 'checkboxes':
-                    $element['#default_value'] = $eck_entity->id;
-                    $element['#default_value'] = $form[$data['field']][$language]['#value'] + array($element['#default_value'] => $element['#default_value']);
-                    break;
-
-                  default:
-                    if ($field_info['module'] == 'entityreference') {
-                      $element['#default_value'] = !empty($eck_entity->title) ? $eck_entity->title : t('Entity has no title');
-                      $element['#default_value'] .= ' (' . $eck_entity->id . ')';
-                    }
-                    break;
-                }
-              }
-            }
-          }
-
-          // Bean support.
-          if (module_exists('bean')) {
-            $entiy_info = entity_get_info($data['target_entity_type']);
-            if ($entiy_info['module'] == 'bean') {
-              if (($data['target_id'] != NULL || $data['target_id'] != 0) && $bean_entity = entity_load_single($data['target_entity_type'], $data['target_id'])) {
-                switch ($widget_container_type) {
-                  // Autocomplete tags style.
-                  case 'textfield':
-                    $element['#default_value'] = !empty($bean_entity->title) ? $bean_entity->title : t('Entity has no title');
-                    $element['#default_value'] .= ' (' . $bean_entity->bid . ')';
-                    if (!empty ($widget_container['#value'])) {
-                      $element['#default_value'] .= ', ' . $widget_container['#value'];
-                    }
-                    break;
-
-                  // Select list.
-                  case 'select':
-                    if ($widget_container['#multiple'] == FALSE) {
-                      $element['#default_value'] = $bean_entity->bid;
-                    }
-                    else {
-                      $element['#default_value'] = $bean_entity->bid;
-                      $element['#default_value'] = $widget_container['#value'] + array($element['#default_value'] => $element['#default_value']);
-                    }
-                    break;
-
-                  // Radios widget.
-                  case 'radios':
-                    $element['#default_value'] = $bean_entity->bid;
-                    break;
-
-                  // Checkboxes widget.
-                  case 'checkboxes':
-                    $element['#default_value'] = $bean_entity->bid;
-                    $element['#default_value'] = $form[$data['field']][$language]['#value'] + array($element['#default_value'] => $element['#default_value']);
-                    break;
-
-                  default:
-                    if ($field_info['module'] == 'entityreference') {
-                      $element['#default_value'] = !empty($bean_entity->title) ? $bean_entity->title : t('Entity has no title');
-                      $element['#default_value'] .= ' (' . $bean_entity->bid . ')';
-                    }
-                    break;
-                }
-              }
-            }
-          }
-
+          $datas = array(
+            'data' => &$data,
+            'widget_container' => $widget_container,
+            'widget_container_type' => $widget_container_type,
+            'field_info' => $field_info,
+            'language' => $language,
+            'element_value' => NULL
+          );
+          drupal_alter('entityconnect_return_form', $datas);
           break;
       }
       if (isset($element)) {
         _entityconnect_alter_form_state_input($form_state, $field_info['module'], $widget_container_type, $parents, $language, $element['#default_value']);
+      }
+      elseif (!empty($datas['element_value'])) {
+        _entityconnect_alter_form_state_input($form_state, $field_info['module'], $widget_container_type, $parents, $language, $datas['element_value']);
       }
     }
     $form_state['#entityconnect_processed'] = TRUE;
@@ -855,7 +790,6 @@ function entityconnect_return_form_alter(&$form, &$form_state, $form_id, $cache_
  * and a new submit button.
  */
 function entityconnect_child_form_alter(&$form, &$form_state, $form_id, $cache_id, $cache) {
-
   // Exclude some forms to be processed.
   $exclude_forms = array(
     'search_block_form'
@@ -897,18 +831,12 @@ function entityconnect_child_form_alter(&$form, &$form_state, $form_id, $cache_i
       $form['actions']['submit']['#submit'][] = 'taxonomy_form_vocabulary_submit';
       break;
 
-    default:
-      if (isset($form['#entity_type']) && isset($form['#bundle'])) {
-        // Add support for ECK.
-        if ('eck__entity__form_add_' . $form['#entity_type'] . '_' . $form['#bundle'] == $form_id
-            || 'eck__entity__form_edit_' . $form['#entity_type'] . '_' . $form['#bundle'] == $form_id) {
-          $form['actions']['cancel']['#weight'] = 10001;
-          $form['actions']['submit']['#submit'][] = 'eck__entity__form_submit';
+    case 'node_delete_confirm':
+      $form['actions']['submit']['#submit'] = $form['#submit'];
+      $form['#submit'] = array();
+      break;
 
-          // @todo I think we don't need #submit any more..?
-          $form['#submit'] = array();
-        }
-      }
+    default:
       break;
   }
 
@@ -920,6 +848,18 @@ function entityconnect_child_form_alter(&$form, &$form_state, $form_id, $cache_i
     $form['actions']['submit']['#submit'][] = 'entityconnect_include_form';
     $form['actions']['submit']['#submit'][] = 'entityconnect_child_form_submit';
   }
+  if (strpos($form_id, '_delete_confirm') === false) {
+    $form['actions']['delete']['#submit'][] = 'entityconnect_include_form';
+    $form['actions']['delete']['#submit'][] = 'entityconnect_child_form_delete_submit';
+  }
+
+  $datas = array(
+    'form' => &$form,
+    'form_state' => &$form_state,
+    'form_id' => $form_id
+  );
+  drupal_alter('entityconnect_child_form', $datas);
+
 }
 
 /**

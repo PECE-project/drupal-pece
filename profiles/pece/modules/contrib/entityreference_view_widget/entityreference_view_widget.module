@@ -109,7 +109,14 @@ function entityreference_view_widget_field_widget_settings_form($field, $instanc
       '#default_value' => isset($settings['rendered_entity']) ? $settings['rendered_entity'] : FALSE,
     );
 
-    $entity_info = entity_get_info($instance['entity_type']);
+    if (strpos($field['type'], '_reference') !== FALSE) {
+      $target_type = str_replace('_reference', '', $field['type']);
+    }
+    else {
+      $target_type = $field['settings']['target_type'];
+    }
+
+    $entity_info = entity_get_info($target_type);
     $view_modes = array();
     foreach ($entity_info['view modes'] as $mode => $mode_info) {
       $view_modes[$mode] = check_plain($mode_info['label']);
@@ -136,6 +143,7 @@ function entityreference_view_widget_field_widget_settings_form($field, $instanc
  * Implements hook_field_widget_form().
  */
 function entityreference_view_widget_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  $ids = &drupal_static(__FUNCTION__);
   _entityreference_view_widget_add_resources($form);
   $element['#theme'] = 'entityreference_view_widget_widget';
   // Build the path of the element.
@@ -155,14 +163,22 @@ function entityreference_view_widget_field_widget_form(&$form, &$form_state, $fi
 
   $index_parts[] = $field['field_name'];
   $index = implode('-', $index_parts);
-  $index = drupal_html_id($index);
+
+  // Some modules, like entity_translation for example, might render the element
+  // more than once. This can cause ervw to break when drupal_html_id() creates
+  // a unique ID on subsequent passes that does not match the original element.
+  // Cache and use the first index value that is created.
+  if (!isset($ids[$index])) {
+    $ids[$index] = drupal_html_id($index);
+  }
+
   $settings = array(
     'langcode' => $langcode,
-    'table_id' => $index . '-values',
+    'table_id' => $ids[$index] . '-values',
     'element' => $parents_path,
     'instance' => $instance,
     'field' => $field,
-    'index' => $index,
+    'index' => $ids[$index],
     'column' => key($field['columns']),
   );
   // Append the widget settings to the array.
@@ -187,8 +203,13 @@ function entityreference_view_widget_field_widget_form(&$form, &$form_state, $fi
       'class' => array('ervw-add-items'),
     ),
     '#type' => 'button',
-    '#name' => 'add_more_' . $index,
+    '#name' => 'add_more_' . $ids[$index],
   );
+
+  // Load the items for form rebuilds from the field state.
+  if (isset($form_state['input'][$field['field_name']][$langcode])) {
+    $items = $form_state['input'][$field['field_name']][$langcode];
+  }
 
   $entity_ids = array();
   foreach ($items as $item) {
@@ -209,6 +230,7 @@ function entityreference_view_widget_add_more_ajax($form, $form_state) {
     $target_view = explode('|', $settings['view']);
     $view = views_get_view($target_view[0]);
     if (!empty($view)) {
+      _entityreference_view_widget_add_resources($form);
       $arguments = array();
       // If the pass argument setting has been checked, pass a list of entity
       // ids to the view.
@@ -216,7 +238,7 @@ function entityreference_view_widget_add_more_ajax($form, $form_state) {
         $arguments[0] = implode('+', $form_state['ervw_ids'][$settings['index']]);
       }
       // Allow the alteration of Views arguments.
-      drupal_alter('entityreference_view_widget_views_arguments', $arguments, $form_state);
+      drupal_alter('entityreference_view_widget_views_arguments', $arguments, $form_state, $view);
 
       if (!empty($arguments)) {
         $view->set_arguments($arguments);

@@ -181,20 +181,49 @@ function linkit_field_profile_validate($element, &$form_state, $form) {
  *   Form API element with attached Linkit functionality.
  */
 function linkit_field_element_after_build(array $element, array &$form_state) {
-  // Only proceed if the field is attached to an entity.
-  if (!isset($element['#entity_type'])) {
-    return $element;
+  // Default settings.
+  $settings = array(
+    'profile' => NULL,
+    'enable' => TRUE,
+    'button_text' => t('Search'),
+    'js_settings' => array(),
+  );
+
+  // For Field API elements, merge settings from field instance.
+  if (isset($element['#entity_type'])) {
+    $instance = field_info_instance($element['#entity_type'], $element['#field_name'], $element['#bundle']);
+    if (isset($instance['settings']['linkit'])) {
+      $settings = array_merge($settings, $instance['settings']['linkit']);
+    }
+
+    // Special treatment for link fields.
+    if ($element['#type'] == 'link_field') {
+      $settings['js_settings']['source'] = $element['url']['#id'];
+
+      // @see link_field_info()
+      // @see link_field_instance_settings_form()
+      //
+      // Link fields have a title field, but value could
+      // be changed only for those options.
+      if (in_array($instance['settings']['title'], array('optional', 'required'))) {
+        $settings['js_settings']['titleField'] = $element['title']['#id'];
+      }
+    }
   }
 
-  $instance = field_info_instance($element['#entity_type'], $element['#field_name'], $element['#bundle']);
+  // Allow dynamically adding to any eligible element type.
+  if (!empty($element['#linkit'])) {
+    $settings = array_merge($settings, $element['#linkit']);
+  }
 
-  if (empty($instance['settings']['linkit']['enable'])) {
+  // If profile is empty or disabled, skip the rest.
+  if (empty($settings['profile']) || empty($settings['enable'])) {
     return $element;
   }
 
   // Load the profile.
   /* @var \LinkitProfile $profile */
-  $profile = linkit_profile_load($instance['settings']['linkit']['profile']);
+  $profile = linkit_profile_load($settings['profile']);
 
   if (!$profile || !isset($profile->data['insert_plugin']['plugin'])) {
     return $element;
@@ -202,29 +231,15 @@ function linkit_field_element_after_build(array $element, array &$form_state) {
 
   // Load the insert plugin for the profile.
   $insert_plugin = linkit_insert_plugin_load($profile->data['insert_plugin']['plugin']);
-  $js_settings = array(
+  $js_settings = $settings['js_settings'] + array(
     'helper' => 'field',
     'source' => $element['#id'],
-    'profile' => $instance['settings']['linkit']['profile'],
+    'profile' => $profile->name,
     'insertPlugin' => $profile->data['insert_plugin']['plugin'],
   );
 
-  // Special treatment for link fields.
-  if ('link_field' == $element['#type']) {
-    $js_settings['source'] = $element['url']['#id'];
-
-    // @see link_field_info()
-    // @see link_field_instance_settings_form()
-    //
-    // Link fields have a title field, but value could
-    // be changed only for those options.
-    if (in_array($instance['settings']['title'], array('optional', 'required'))) {
-      $js_settings['titleField'] = $element['title']['#id'];
-    }
-  }
-
   // Add Linkit dialog button to the element suffix.
-  $element['#field_suffix'] = l(empty($instance['settings']['linkit']['button_text']) ? t('Search') : $instance['settings']['linkit']['button_text'], '', array(
+  $element['#field_suffix'] = l($settings['button_text'], '', array(
     'attributes' => array(
       'class' => array(
         "button",

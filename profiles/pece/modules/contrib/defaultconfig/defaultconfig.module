@@ -425,14 +425,16 @@ function defaultconfig_defaultconfig_components() {
     features_include(TRUE);
     $features_info = _ctools_features_get_info(NULL, TRUE);
     foreach ($features_info as $name => $info) {
-      $components[$info['default_hook']] = array(
-        'rebuild callback' => 'defaultconfig_component_rebuild_ctools',
-        'label' => $info['name'],
-        'features component' => $name,
-        // We can't register CTools files as groups,
-        // it causes a lot of things to fail.
-        'group' => $info['default_filename'],
-      );
+      if (!empty($info['default_filename'])) {
+        $components[$info['default_hook']] = array(
+          'rebuild callback' => 'defaultconfig_component_rebuild_ctools',
+          'label' => $info['name'],
+          'features component' => $name,
+          // We can't register CTools files as groups,
+          // it causes a lot of things to fail.
+          'group' => $info['default_filename'],
+        );
+      }
     }
   }
   // Override strongarm and use our own version to avoid CTools dependency.

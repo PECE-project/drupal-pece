@@ -1,0 +1,331 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the encrypt module.
+ */
+
+/**
+ * Implements hook_schema().
+ *
+ * Create table to store encryption configurations.
+ */
+function encrypt_schema() {
+  $schema['encrypt_config'] = array(
+    'description' => 'Stores encryption configurations.',
+    'fields' => array(
+      'name' => array(
+        'description' => 'The machine name of the configuration.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ),
+      'label' => array(
+        'description' => 'The human-readable label of the configuration.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'description' => array(
+        'description' => 'A brief description of the configuration.',
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'medium',
+      ),
+      'method' => array(
+        'description' => 'The encryption method to use.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'method_settings' => array(
+        'description' => 'Additional settings for the encryption method.',
+        'type' => 'blob',
+        'not null' => TRUE,
+        'size' => 'big',
+      ),
+      'provider' => array(
+        'description' => 'The key provider to use.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'provider_settings' => array(
+        'description' => 'Additional settings for the key provider.',
+        'type' => 'blob',
+        'not null' => TRUE,
+        'size' => 'big',
+      ),
+      'enabled' => array(
+        'description' => 'A boolean indicating whether this configuration is enabled.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the configuration was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp when the configuration was last saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'enabled' => array('enabled'),
+    ),
+    'primary key' => array('name'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function encrypt_install() {
+  $t = get_t();
+
+  // Check if encrypt_drupal_variable_key already exists. If so, use it.
+  // Otherwise, set it.
+  if (!($key = variable_get('encrypt_drupal_variable_key', 0))) {
+    $key = base64_encode(drupal_random_bytes(16));
+    variable_set('encrypt_drupal_variable_key', $key);
+  }
+
+  // Add a default configuration.
+  db_insert('encrypt_config')
+    ->fields(array(
+      'name' => 'default',
+      'label' => $t('Default'),
+      'description' => $t('The default configuration.'),
+      'method' => 'mcrypt_aes_cbc',
+      'method_settings' => '',
+      'provider' => 'drupal_variable',
+      'provider_settings' => serialize(array('method' => 'base64_decode')),
+      'enabled' => 1,
+      'created' => REQUEST_TIME,
+      'changed' => REQUEST_TIME,
+    ))
+    ->execute();
+
+  variable_set('encrypt_default_config', 'default');
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * Delete all of our variables from the variables table.
+ */
+function encrypt_uninstall() {
+  variable_del('encrypt_default_config');
+
+  // Delete any variables left over from older versions of Encrypt.
+  variable_del('encrypt_encryption_method');
+  $provider = variable_get('encrypt_key_provider', '');
+  if ($provider) {
+    variable_del('encrypt_key_providers_' . $provider . '_settings');
+  }
+  variable_del('encrypt_key_provider');
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function encrypt_requirements($phase) {
+  $t = get_t();
+  $requirements = array();
+
+  switch ($phase) {
+    case 'runtime':
+      $method = encrypt_get_encryption_method();
+      $key_provider = encrypt_get_key_provider();
+
+      // Check the plugins for dependency errors.
+      if (isset($method['dependency errors']) && !empty($method['dependency errors'])) {
+        $dependency_errors .= theme('item_list', array('items' => $method['dependency errors']));
+      }
+      if (isset($key_provider['dependency errors']) && !empty($key_provider['dependency errors'])) {
+        $dependency_errors .= theme('item_list', array('items' => $key_provider['dependency errors']));
+      }
+
+      if (isset($dependency_errors) && !empty($dependency_errors)) {
+        $requirements['encrypt_dependencies'] = array(
+          'title' => $t('Encrypt Dependencies'),
+          'value' => $t('Unmet dependencies'),
+          'description' => $t('There are unmet dependencies in your active encryption plugins. Either !change_link or resolve the following dependencies: !deps', array(
+            '!change_link' => l($t('change your encryption settings'), 'admin/config/system/encrypt'),
+            '!deps' => $dependency_errors,
+          )),
+          'severity' => REQUIREMENT_ERROR,
+        );
+      }
+
+      // Set a warning about the Drupal Private Key method.
+      if ($key_provider['name'] == 'drupal_private_key') {
+        $requirements['encrypt_secure'] = array(
+          'title' => $t('Encryption Security'),
+          'description' => $t(
+            'The site is using the private key stored in the database to encrypt
+            data. While this provides some level of obfuscation, it is highly
+            recommended to store the encryption key outside of the database.
+            See the !link for more information.', array(
+              '!link' => l($t('Encrypt module page'), 'http://drupal.org/project/encrypt'),
+            )
+          ),
+          'severity' => REQUIREMENT_WARNING,
+          'value' => $t('Security concerns'),
+        );
+      }
+      break;
+
+  }
+
+  return $requirements;
+}
+
+/**
+ * Our default encryption method variable has changed.
+ *
+ * So get the old one and save it as the new one.
+ */
+function encrypt_update_7200() {
+  if ($default_method = variable_get('encrypt_default_method', NULL)) {
+    variable_set('encrypt_encryption_method', $default_method);
+    variable_del('encrypt_default_method');
+  }
+}
+
+/**
+ * Provide a nice upgrade for 1.x users by copying their key path.
+ */
+function encrypt_update_7201() {
+  if ($key_path = variable_get('encrypt_secure_key_path', NULL)) {
+    variable_set('encrypt_key_provider', 'file');
+    variable_set('encrypt_key_providers_file_settings', array(
+      'path' => $key_path,
+      'method' => 'file_contents',
+    ));
+    variable_del('encrypt_secure_key_path');
+  }
+}
+
+/**
+ * Create table to store encryption configurations.
+ */
+function encrypt_update_7202() {
+  $table = array(
+    'description' => 'Stores encryption configurations.',
+    'fields' => array(
+      'name' => array(
+        'description' => 'The machine name of the configuration.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ),
+      'label' => array(
+        'description' => 'The human-readable label of the configuration.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'description' => array(
+        'description' => 'A brief description of the configuration.',
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'medium',
+      ),
+      'method' => array(
+        'description' => 'The encryption method to use.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'method_settings' => array(
+        'description' => 'Additional settings for the encryption method.',
+        'type' => 'blob',
+        'not null' => TRUE,
+        'size' => 'big',
+      ),
+      'provider' => array(
+        'description' => 'The key provider to use.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'provider_settings' => array(
+        'description' => 'Additional settings for the key provider.',
+        'type' => 'blob',
+        'not null' => TRUE,
+        'size' => 'big',
+      ),
+      'enabled' => array(
+        'description' => 'A boolean indicating whether this configuration is enabled.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the configuration was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp when the configuration was last saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'enabled' => array('enabled'),
+    ),
+    'primary key' => array('name'),
+  );
+
+  if (!db_table_exists('encrypt_config')) {
+    db_create_table('encrypt_config', $table);
+  }
+}
+
+/**
+ * Migrate any settings in the variable table to a default configuration.
+ */
+function encrypt_update_7203() {
+  $t = get_t();
+
+  $method = variable_get('encrypt_encryption_method', 'default');
+  $provider = variable_get('encrypt_key_provider', 'drupal_private_key');
+  $provider_settings = variable_get('encrypt_key_providers_' . $provider . '_settings', '');
+
+  db_insert('encrypt_config')
+    ->fields(array(
+      'name' => 'default',
+      'label' => $t('Default'),
+      'description' => $t('The default configuration.'),
+      'method' => $method,
+      'method_settings' => '',
+      'provider' => $provider,
+      'provider_settings' => serialize($provider_settings),
+      'enabled' => 1,
+      'created' => REQUEST_TIME,
+      'changed' => REQUEST_TIME,
+    ))->execute();
+
+  variable_set('encrypt_default_config', 'default');
+
+  variable_del('encrypt_encryption_method');
+  variable_del('encrypt_key_provider');
+  variable_del('encrypt_key_providers_' . $provider . '_settings');
+}

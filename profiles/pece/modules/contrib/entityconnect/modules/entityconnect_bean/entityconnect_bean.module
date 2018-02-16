@@ -1,0 +1,172 @@
+<?php
+
+/**
+ * Implements hook_entityconnect_get_ref_fields_alter().
+ */
+function entityconnect_bean_entityconnect_ref_fields_alter(&$ref_fields) {
+  foreach (field_info_fields() as $id => $field) {
+    // Add support for Entity reference module.
+    if ($field['type'] == 'entityreference' && $field['module'] == 'entityreference') {
+      $entity_reference_info = entityreference_get_selection_handler($field);
+      $entity_type = $entity_reference_info->field['settings']['target_type'];
+
+      // Bean support.
+      if (module_exists('bean_admin_ui')) {
+        $entity_info = entity_get_info($entity_type);
+        if (!empty($entity_info['module']) && $entity_info['module'] == 'bean') {
+          if (user_access('entityconnect add button') || user_access('entityconnect edit button')) {
+            $ref_fields[$id] = $field;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_entityconnect_return_form_alter().
+ *
+ * @param $datas
+ */
+function entityconnect_bean_entityconnect_return_form_alter(&$datas) {
+
+  $data = $datas['data'];
+  $widget_container_type = $datas['widget_container_type'];
+  $widget_container = $datas['widget_container'];
+  $field_info = $datas['field_info'];
+  $language = $datas['language'];
+
+  // Bean support.
+  $entiy_info = entity_get_info($data['target_entity_type']);
+  if ($entiy_info['module'] == 'bean') {
+    if (($data['target_id'] != NULL || $data['target_id'] != 0) && $bean_entity = entity_load_single($data['target_entity_type'], $data['target_id'])) {
+      switch ($widget_container_type) {
+        // Autocomplete tags style.
+        case 'textfield':
+          $datas['element_value'] = !empty($bean_entity->title) ? $bean_entity->title : t('Entity has no title');
+          $datas['element_value'] .= ' (' . $bean_entity->bid . ')';
+          if (!empty ($widget_container['#value'])) {
+            $datas['element_value'] .= ', ' . $widget_container['#value'];
+          }
+          break;
+
+        // Select list.
+        case 'select':
+          if ($widget_container['#multiple'] == FALSE) {
+            $datas['element_value'] = $bean_entity->bid;
+          }
+          else {
+            $datas['element_value'] = $bean_entity->bid;
+            $datas['element_value'] = $widget_container['#value'] + array($datas['element_value'] => $datas['element_value']);
+          }
+          break;
+
+        // Radios widget.
+        case 'radios':
+          $datas['element_value'] = $bean_entity->bid;
+          break;
+
+        // Checkboxes widget.
+        case 'checkboxes':
+          $datas['element_value'] = $bean_entity->bid;
+          $datas['element_value'] = $data['form'][$data['field']][$language]['#value'] + array($datas['element_value'] => $datas['element_value']);
+          break;
+
+        default:
+          if ($field_info['module'] == 'entityreference') {
+            $datas['element_value'] = !empty($bean_entity->title) ? $bean_entity->title : t('Entity has no title');
+            $datas['element_value'] .= ' (' . $bean_entity->bid . ')';
+          }
+          break;
+      }
+    }
+  }
+}
+
+function entityconnect_bean_entityconnect_child_form_submit_alter(&$datas) {
+
+  $entity_type = $datas['entity_type'];
+  $form_state = $datas['form_state'];
+  $data = &$datas['data'];
+
+  $entity_info = entity_get_info($entity_type);
+  if ($entity_info['module'] == 'bean') {
+    $data['target_id'] = $form_state['values']['bean']->bid;
+  }
+}
+
+/**
+ * Implements hook_entityconnect_add_info().
+ */
+function entityconnect_bean_entityconnect_add_info($cache_id, $entity_type, $acceptable_types) {
+  if (!isset($entity_type)) {
+    throw new \Exception(t('Entity type can not be empty'));
+  }
+
+  $entity_info = entity_get_info($entity_type);
+  if (isset($entity_info['module']) && $entity_info['module'] == 'bean') {
+    if (count($acceptable_types) > 0) {
+      foreach (bean_admin_ui_get_types() as $key => $item) {
+        if (isset($acceptable_types[$key]) && $acceptable_types[$key]) {
+          $type = str_replace("_", '-', $key);
+          $content[$key] = array(
+            'href' => "block/add/$type/$cache_id",
+            'label' => $item->label,
+            'description' => $item->description
+          );
+        }
+      }
+    }
+    else {
+      foreach (bean_admin_ui_get_types() as $key => $item) {
+        $type = str_replace("_", '-', $key);
+        $content[$key] = array(
+          'href' => "block/add/$type/$cache_id",
+          'label' => $item->label,
+          'description' => $item->description
+        );
+      }
+    }
+
+    return array(
+      'content' => $content,
+    );
+  }
+}
+
+/**
+ * Implements hook_entityconnect_edit_info().
+ */
+function entityconnect_bean_entityconnect_edit_info($cache_id, $entity_type, $target_id) {
+
+  if (!isset($entity_type)) {
+    throw new \Exception(t('Entity type can not be empty'));
+  }
+
+  if (!isset($target_id)) {
+    throw new \Exception(t('Target_id can not be empty'));
+  }
+
+  $entity_info = entity_get_info($entity_type);
+  if (isset($entity_info['module']) && $entity_info['module'] == 'bean') {
+    if (is_array($target_id)) {
+      $info = entity_load($entity_type, $target_id);
+      foreach ($info as $key => $value) {
+        $content[$key] = array(
+          'label' => $value->label,
+          'href' => 'block/' . $value->delta . '/edit',
+          'description' =>  ''
+        );
+      }
+    }
+    else {
+      $bean_entity = entity_load_single($entity_type, $target_id);
+      $content[$entity_type]['href'] = "block/$bean_entity->delta/edit";
+    }
+
+    return array(
+      'content' => $content,
+    );
+
+  }
+}

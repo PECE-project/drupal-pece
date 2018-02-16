@@ -43,7 +43,7 @@
 
 #coffee-form.hide-form {
   position: absolute;
-  left: -100%;
+  top: -100%;
   opacity: 0;
 }
 
@@ -148,4 +148,14 @@
 
 #coffee-results .ui-widget {
   font-family: sans-serif;
+}
+
+.navbar-icon-coffee:before,
+.navbar-icon-coffee.navbar-active:before {
+  background-image: url("../icons/bebebe/coffee.svg");
+}
+
+.no-svg .navbar-icon-coffee:before,
+.no-svg .navbar-icon-coffee.navbar-active:before {
+  background-image: url("../icons/bebebe/coffee.png");
 }

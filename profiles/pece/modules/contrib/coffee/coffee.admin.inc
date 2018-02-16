@@ -14,6 +14,10 @@
 function coffee_admin_settings() {
   $form = array();
 
+  $form['help'] = array(
+    '#markup' => '<label>Toggle Coffee</label><p>Toggle Coffee using the keyboard shortcut alt + D (alt + shift + D in Opera, alt + ctrl + D in Windows Internet Explorer). You can also use use the alternative alt + k.</p>',
+  );
+
   // Output the checkboxes to let admins select which menus are
   // featured in coffee.
   $menus = menu_get_menus();
@@ -29,6 +33,7 @@ function coffee_admin_settings() {
       '#title' => t('Menus to include in Coffee'),
       '#options' => $menu_options,
       '#default_value' => variable_get('coffee_settings_menus', array('management', 'user-menu')),
+      '#description' => 'Select the menus to include in Coffee, changes will be active after a cache clear.',
     );
   }
 

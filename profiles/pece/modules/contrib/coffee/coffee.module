@@ -94,11 +94,15 @@ function coffee_traverse_below($link, &$output, $command = NULL) {
       'value' => $l['link_path'],
       'label' => $label,
       'command' => $command,
+      'parent' => !empty($link['parent']) ? $link['parent'] : NULL,
     );
   }
 
   if (isset($link['below']) && is_array($link['below'])) {
     foreach ($link['below'] as $below_link) {
+      if (isset($label)) {
+        $below_link['parent'] = $label;
+      }
       coffee_traverse_below($below_link, $output);
     }
   }
@@ -163,6 +167,10 @@ function coffee_get_menu_response() {
         continue;
       }
 
+      if (!empty($v['parent'])) {
+        $output[$k]['parent'] = $v['parent'];
+      }
+
       // Prevent any nasty commands from getting through.
       $output[$k]['label'] = filter_xss($output[$k]['label']);
 
@@ -190,6 +198,22 @@ function coffee_get_menu_response() {
  * awesome admin_menu module.
  */
 function coffee_flush_caches($uid = NULL) {
+  // A call to menu_rebuild() will trigger potentially thousands of calls into
+  // menu_link_save(), for which admin_menu has to implement the corresponding
+  // CRUD hooks, in order to take up any menu link changes, since any menu link
+  // change could affect the admin menu (which essentially is an aggregate) and
+  // since there is no other way to get notified about stale caches. The cache
+  // only needs to be flushed once though, so we prevent a ton of needless
+  // subsequent calls with this static.
+  // @see http://drupal.org/node/918538
+  $was_flushed = &drupal_static(__FUNCTION__, array());
+  // $uid can be NULL. PHP automatically converts that into '' (empty string),
+  // which is different to uid 0 (zero).
+  if (isset($was_flushed[$uid])) {
+    return;
+  }
+  $was_flushed[$uid] = TRUE;
+
   $cid = 'coffee_commands:';
   if (isset($uid)) {
     $cid .= $uid . ':';

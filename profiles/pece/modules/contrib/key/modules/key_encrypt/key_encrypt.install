@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * Update keys defined with the "aes_encryption" key type to "encryption".
+ */
+function key_encrypt_update_7001() {
+  $num_updated = db_update('key_config')
+    ->fields(array('key_type' => 'encryption'))
+    ->condition('key_type', 'aes_encryption', '=')
+    ->execute();
+
+  if ($num_updated > 0) {
+    return t('Changed key type from "aes_encryption" to "encryption" for existing keys.');
+  }
+  else {
+    return t('No changes to existing keys were made because there were no keys defined with the "aes_encryption" key type.');
+  }
+}

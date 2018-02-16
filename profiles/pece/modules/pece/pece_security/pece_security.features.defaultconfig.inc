@@ -25,37 +25,16 @@ function pece_security_defaultconfig_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'aes_cipher';
-  $strongarm->value = 'rijndael-256';
-  $export['aes_cipher'] = $strongarm;
+  $strongarm->name = 'encrypt_default_config';
+  $strongarm->value = 'default';
+  $export['encrypt_default_config'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'aes_encryption_iv';
-  $strongarm->value = 'jTXhheTbKzbsWpT9oH10xkM3myPFJicLNHk4R8LpGCM=';
-  $export['aes_encryption_iv'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'aes_implementation';
-  $strongarm->value = 'mcrypt';
-  $export['aes_implementation'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'aes_key';
-  $strongarm->value = 'wt6pxke8i6W1cXhDyHw3Ryb7j2piBLBv';
-  $export['aes_key'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'aes_viewing_method';
-  $strongarm->value = 'page';
-  $export['aes_viewing_method'] = $strongarm;
+  $strongarm->name = 'encrypt_drupal_variable_key';
+  $strongarm->value = 'yJiNNd3XaUAEjNS/pmQ96Q==';
+  $export['encrypt_drupal_variable_key'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -227,13 +206,22 @@ function pece_security_defaultconfig_strongarm() {
 function pece_security_defaultconfig_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'administer aes'.
-  $permissions['administer aes'] = array(
-    'name' => 'administer aes',
+  // Exported permission: 'administer encrypt'.
+  $permissions['administer encrypt'] = array(
+    'name' => 'administer encrypt',
     'roles' => array(
       'administrator' => 'administrator',
     ),
-    'module' => 'aes',
+    'module' => 'encrypt',
+  );
+
+  // Exported permission: 'administer keys'.
+  $permissions['administer keys'] = array(
+    'name' => 'administer keys',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'key',
   );
 
   // Exported permission: 'bypass honeypot protection'.
@@ -243,15 +231,6 @@ function pece_security_defaultconfig_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'honeypot',
-  );
-
-  // Exported permission: 'view passwords'.
-  $permissions['view passwords'] = array(
-    'name' => 'view passwords',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'aes',
   );
 
   return $permissions;

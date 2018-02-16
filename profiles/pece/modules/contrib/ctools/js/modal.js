@@ -265,10 +265,7 @@
           }
           // An empty event means we were triggered via .click() and
           // in jquery 1.4 this won't trigger a submit.
-          // We also have to check jQuery version to prevent
-          // IE8 + jQuery 1.4.4 to break on other events
-          // bound to the submit button.
-          if (jQuery.fn.jquery === '1.4' && typeof event.bubbles === "undefined") {
+          if (typeof event.bubbles === "undefined") {
             $(this.form).trigger('submit');
             return false;
           }
@@ -561,7 +558,7 @@
 
     // Bind a click for closing the modalContent
     modalContentClose = function(){close(); return false;};
-    $('.close').bind('click', modalContentClose);
+    $('#modalContent .modal-header .close').bind('click', modalContentClose);
 
     // Bind a keypress on escape for closing the modalContent
     modalEventEscapeCloseHandler = function(event) {
@@ -577,7 +574,7 @@
     // close button, but we should save the original focus to restore it after
     // the dialog is closed.
     var oldFocus = document.activeElement;
-    $('.close').focus();
+    $('#modalContent .modal-header .close').focus();
 
     // Close the open modal content and backdrop
     function close() {
@@ -586,7 +583,7 @@
       $('body').unbind( 'focus', modalEventHandler);
       $('body').unbind( 'keypress', modalEventHandler );
       $('body').unbind( 'keydown', modalTabTrapHandler );
-      $('.close').unbind('click', modalContentClose);
+      $('#modalContent .modal-header .close').unbind('click', modalContentClose);
       $('body').unbind('keypress', modalEventEscapeCloseHandler);
       $(document).trigger('CToolsDetachBehaviors', $('#modalContent'));
 
@@ -662,7 +659,7 @@
     $('body').unbind('focus', modalEventHandler);
     $('body').unbind('keypress', modalEventHandler);
     $('body').unbind( 'keydown', modalTabTrapHandler );
-    $('.close').unbind('click', modalContentClose);
+    $('#modalContent .modal-header .close').unbind('click', modalContentClose);
     $('body').unbind('keypress', modalEventEscapeCloseHandler);
     $(document).trigger('CToolsDetachBehaviors', $('#modalContent'));
 

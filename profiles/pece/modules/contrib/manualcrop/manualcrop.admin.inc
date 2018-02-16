@@ -327,7 +327,7 @@ function manualcrop_auto_reuse_form($data) {
     $form['style_priority'][$style_name] = &$weight;
     $form['style_priority']['#rows'][] = array(
       'data' => array(
-        array('data' => $label),
+        array('data' => check_plain($label)),
         array('data' => &$weight),
       ),
       'class' => array('draggable'),
@@ -726,6 +726,8 @@ function manualcrop_field_widget_settings_form($widget_type, $settings) {
     ),
     '#default_value' => $settings['manualcrop_styles_mode'],
   );
+
+  $style_options = array_map('check_plain', $style_options);
 
   $form['manualcrop']['manualcrop_styles_list'] = array(
     '#type' => 'checkboxes',

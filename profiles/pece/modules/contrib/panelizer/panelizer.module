@@ -43,6 +43,14 @@ function panelizer_permission() {
     ),
   );
 
+  // In case of features rebuild, the cache sometimes needs to be cleared so
+  // new permissions are recongized.
+  $refresh = &drupal_static('panelizer_refresh_permission_cache');
+  if ($refresh) {
+    drupal_static_reset('ctools_get_plugins_reset');
+    drupal_static_reset('panelizer_entity_plugin_get_handler');
+  }
+
   // Delegate.
   foreach (panelizer_get_plugins_with_hook('permission') as $handler) {
     $handler->hook_permission($items);
@@ -93,6 +101,27 @@ function panelizer_og_permission() {
   }
 
   return $final;
+}
+
+/**
+ * Implements hook_features_pre_restore().
+ */
+function panelizer_features_pre_restore($op, $items) {
+  foreach ($items as $module_name => $comps) {
+    if (in_array('variable', $comps) && in_array('user_permission', $comps)) {
+      $refresh = &drupal_static('panelizer_refresh_permission_cache');
+      $refresh = TRUE;
+      return;
+    }
+  }
+}
+
+/**
+ * Implements hook_features_post_restore().
+ */
+function panelizer_features_post_restore($op, $items) {
+  $refresh = &drupal_static('panelizer_refresh_permission_cache');
+  $refresh = FALSE;
 }
 
 /**

@@ -1,0 +1,194 @@
+<?php
+
+/**
+ * Implements hook_entityconnect_get_ref_fields_alter().
+ */
+function entityconnect_eck_entityconnect_ref_fields_alter(&$ref_fields) {
+  foreach (field_info_fields() as $id => $field) {
+    // Add support for Entity reference module.
+    if ($field['type'] == 'entityreference' && $field['module'] == 'entityreference') {
+      $entity_reference_info = entityreference_get_selection_handler($field);
+      $entity_type = $entity_reference_info->field['settings']['target_type'];
+
+      // Entity construction kit support.
+      if (module_exists('eck')) {
+        $entity_info = entity_get_info($entity_type);
+        if (!empty($entity_info['module']) && $entity_info['module'] == 'eck') {
+          if (user_access('entityconnect add button') || user_access('entityconnect edit button')) {
+            $ref_fields[$id] = $field;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_entityconnect_return_form_alter().
+ *
+ * @param $datas
+ */
+function entityconnect_eck_entityconnect_return_form_alter(&$datas) {
+
+  $data = $datas['data'];
+  $widget_container_type = $datas['widget_container_type'];
+  $widget_container = $datas['widget_container'];
+  $field_info = $datas['field_info'];
+  $language = $datas['language'];
+
+  // Entity construction kit support.
+  $entity_info = entity_get_info($data['target_entity_type']);
+  if ($entity_info['module'] == 'eck') {
+    if (($data['target_id'] != NULL || $data['target_id'] != 0) && $eck_entity = entity_load_single($data['target_entity_type'], $data['target_id'])) {
+      switch ($widget_container_type) {
+        // Autocomplete tags style.
+        case 'textfield':
+          $datas['element_value'] = !empty($eck_entity->title) ? $eck_entity->title : t('Entity has no title');
+          $datas['element_value'] .= ' (' . $eck_entity->id . ')';
+          if (!empty ($widget_container['#value'])) {
+            $datas['element_value'] .= ', ' . $widget_container['#value'];
+          }
+          break;
+
+        // Select list.
+        case 'select':
+          if ($widget_container['#multiple'] == FALSE) {
+            $datas['element_value'] = $eck_entity->id;
+          }
+          else {
+            $datas['element_value'] = $eck_entity->id;
+            $datas['element_value'] = $widget_container['#value'] + array($datas['element_value'] => $datas['element_value']);
+          }
+          break;
+
+        // Radios widget.
+        case 'radios':
+          $datas['element_value'] = $eck_entity->id;
+          break;
+
+        // Checkboxes widget.
+        case 'checkboxes':
+          $datas['element_value'] = $eck_entity->id;
+          $datas['element_value'] = $data['form'][$data['field']][$language]['#value'] + array($datas['element_value'] => $datas['element_value']);
+          break;
+
+        default:
+          if ($field_info['module'] == 'entityreference') {
+            $datas['element_value'] = !empty($eck_entity->title) ? $eck_entity->title : t('Entity has no title');
+            $datas['element_value'] .= ' (' . $eck_entity->id . ')';
+          }
+          break;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_entityconnect_child_form_alter().
+ */
+function entityconnect_eck_entityconnect_child_form_alter(&$datas) {
+  $form = &$datas['form'];
+  $form_id = $datas['form_id'];
+
+  if (isset($form['#entity_type']) && isset($form['#bundle'])) {
+    // Add support for ECK.
+    if ('eck__entity__form_add_' . $form['#entity_type'] . '_' . $form['#bundle'] == $form_id
+      || 'eck__entity__form_edit_' . $form['#entity_type'] . '_' . $form['#bundle'] == $form_id) {
+      $form['actions']['cancel']['#weight'] = 10001;
+      $form['actions']['submit']['#submit'][] = 'eck__entity__form_submit';
+
+      // @todo I think we don't need #submit any more..?
+      $form['#submit'] = array();
+    }
+  }
+}
+
+function entityconnect_eck_entityconnect_child_form_submit_alter(&$datas) {
+
+  $entity_type = $datas['entity_type'];
+  $form_state = $datas['form_state'];
+  $data = &$datas['data'];
+
+  // Entity construction kit support.
+  $entity_info = entity_get_info($entity_type);
+  if ($entity_info['module'] == 'eck') {
+    $data['target_id'] = $form_state['values']['entity']->id;
+  }
+}
+
+/**
+ * Implements hook_entityconnect_add_info().
+ */
+function entityconnect_eck_entityconnect_add_info($cache_id, $entity_type, $acceptable_types) {
+  if (!isset($entity_type)) {
+    throw new \Exception(t('Entity type can not be empty'));
+  }
+
+  $entity_info = entity_get_info($entity_type);
+
+  if (isset($entity_info['module']) && $entity_info['module'] == 'eck') {
+    // Only one allowed, no need for the intermediate step.
+    if (count($acceptable_types) > 0) {
+      foreach ($acceptable_types as $bundle_name) {
+        $bundle = $entity_info['bundles'][$bundle_name];
+        $content[$bundle_name] = array(
+          'href' => $bundle['crud']['add']['path'] . "/$cache_id",
+          'label' => $bundle['label'],
+          'description' => '',
+        );
+      }
+    }
+    else {
+      foreach ($entity_info['bundles'] as $key => $bundle) {
+        $content[$key] = array(
+          'href' => $bundle['crud']['add']['path'] . "/$cache_id",
+          'label' => $bundle['label'],
+          'description' => '',
+        );
+      }
+    }
+
+    return array(
+      'content' => $content,
+    );
+  }
+}
+
+/**
+ * Implements hook_entityconnect_edit_info().
+ */
+function entityconnect_eck_entityconnect_edit_info($cache_id, $entity_type, $target_id) {
+
+  if (!isset($entity_type)) {
+    throw new \Exception(t('Entity type can not be empty'));
+  }
+
+  if (!isset($target_id)) {
+    throw new \Exception(t('Target_id can not be empty'));
+  }
+
+  $entity_info = entity_get_info($entity_type);
+  if (isset($entity_info['module']) && $entity_info['module'] == 'eck') {
+
+    if (is_array($target_id)) {
+      $eck_entities = entity_load($entity_type, $target_id);
+      foreach ($eck_entities as $key => $eck_entity) {
+        $crud_edit_path = preg_replace('/\%/', $key, $entity_info['bundles'][$eck_entity->type]['crud']['edit']['path']);
+        $content[$key] = array(
+          'label' => $eck_entity->title,
+          'href' => $crud_edit_path,
+          'description' => ''
+        );
+      }
+    }
+    else {
+      $eck_entity = entity_load_single($entity_type, $target_id);
+      $crud_edit_path = preg_replace('/\%/', $target_id, $entity_info['bundles'][$eck_entity->type]['crud']['edit']['path']);
+      $content[$entity_type]['href'] = $crud_edit_path;
+    }
+
+    return array(
+      'content' => $content,
+    );
+  }
+}

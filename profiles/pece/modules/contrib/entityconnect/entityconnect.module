@@ -9,6 +9,12 @@
 define('ENTITYCONNECT_CACHE_TABLE', 'cache_entityconnect');
 
 /**
+ * Includes.
+ */
+require_once 'includes/entityconnect.fields.inc';
+require_once 'includes/entityconnect.utils.inc';
+
+/**
  * Implements hook_permission().
  *
  * @return Assoc
@@ -131,7 +137,14 @@ function entityconnect_include_form() {
  * We can set the expire easily if needed.
  */
 function entityconnect_cache_set($cid, $data) {
-  return cache_set($cid, $data, ENTITYCONNECT_CACHE_TABLE, CACHE_PERMANENT);
+  // Get cache_lifetime variable.
+  $cache_lifetime = variable_get('entityconnect_cache_lifetime', CACHE_PERMANENT);
+
+  if ($cache_lifetime !== CACHE_PERMANENT) {
+    $cache_lifetime = REQUEST_TIME + $cache_lifetime;
+  }
+
+  return cache_set($cid, $data, ENTITYCONNECT_CACHE_TABLE, $cache_lifetime);
 }
 
 /**
@@ -139,6 +152,13 @@ function entityconnect_cache_set($cid, $data) {
  */
 function entityconnect_cache_get($cid) {
   return cache_get($cid, ENTITYCONNECT_CACHE_TABLE);
+}
+
+/**
+ * Implements hook_flush_caches().
+ */
+function entityconnect_flush_caches() {
+  return array('cache_entityconnect');
 }
 
 /**
@@ -155,19 +175,20 @@ function entityconnect_form_alter(&$form, &$form_state, $form_id) {
   // first we try the $_REQUEST param.  if we do not getting it from there we
   // try the arg(3) if we are on a add form.  Also if we are on an add form we
   // know that we are a child page.
-  if ((isset($_REQUEST['build_cache_id'])
-          && ($cid = $_REQUEST['build_cache_id']))
-          || ((arg(1) == 'add') && ($cid = arg(3)) && $child = TRUE)
-          || ((arg(1) == 'people') && (arg(2) == 'create') && ($cid = arg(3)) && $child = TRUE)
-          || ((arg(2) == 'taxonomy') && (arg(4) == 'add') && ($cid = arg(5)) && $child = TRUE)
-          || ((arg(2) == 'taxonomy') && (arg(3) == 'add') && ($cid = arg(4)) && $child = TRUE)
-          || ((arg(2) == 'entity-type') && (arg(5) == 'add') && ($cid = arg(6)) && $child = TRUE)) {
+  foreach(arg() as $key => $value) {
+    if (stripos($value, 'entityconnect-form-', 0) == 0) {
+      $cid = $value;
+    }
+  }
+
+  if ((isset($_REQUEST['build_cache_id']) && ($cid = $_REQUEST['build_cache_id']))
+      || ((isset($cid)) && $child = TRUE)) {
     $cache = entityconnect_cache_get($cid);
     entityconnect_include_form();
     if ($child) {
       $form_state['#entityconnect_child_form'] = $cache;
     }
-    if (isset($_REQUEST['return']) && ($cache->data['form']['#form_id'] == $form_id)) {
+    if (isset($_REQUEST['return']) && isset($cache->data) && $cache->data['form']['#form_id'] == $form_id) {
       unset($_REQUEST['build_cache_id']);
       entityconnect_return_form_alter($form, $form_state, $form_id, $cid, $cache);
     }
@@ -181,178 +202,6 @@ function entityconnect_form_alter(&$form, &$form_state, $form_id) {
     module_load_include('inc', 'entityconnect', 'includes/entityconnect.form');
     entityconnect_child_form_alter($form, $form_state, $form_id, $cache->cid, $cache);
   }
-
-  if ($form_id == 'field_ui_field_edit_form') {
-    // Use to add choice field.
-    if ($form['#field']['type'] == 'entityreference'
-          || $form['#field']['type'] == 'node_reference'
-          || $form['#field']['type'] == 'user_reference') {
-      $instance = $form['#instance'];
-      $field = $form['#field'];
-      $additions = module_invoke('entityconnect', 'field_instance_settings_form', $field, $instance);
-      if (is_array($additions) && isset($form['instance'])) {
-        $form['instance'] += $additions;
-      }
-    }
-  }
-}
-
-/**
- * Helper function to retieve all allowed entityreference fields.
- */
-function _entityconnect_get_ref_fields() {
-  $ref_fields = array();
-
-  foreach (field_info_fields() as $id => $field) {
-    // Add support for Entity reference module.
-    if ($field['type'] == 'entityreference' && $field['module'] == 'entityreference') {
-      $entity_reference_info = entityreference_get_selection_handler($field);
-      $entity_type = $entity_reference_info->field['settings']['target_type'];
-      $target_bundle = isset($entity_reference_info->field['settings']['handler_settings']['target_bundles']) ? $entity_reference_info->field['settings']['handler_settings']['target_bundles'] : NULL;
-
-      switch ($entity_type) {
-        case 'user':
-          if (user_access('administer users') && (user_access('entityconnect add button') || user_access('entityconnect edit button'))) {
-            $ref_fields[$id] = $field;
-          }
-          break;
-
-        case 'node':
-          if (isset($target_bundle) && count($target_bundle) == 1) {
-            if ((user_access('create ' . array_pop($target_bundle) . ' content') || user_access('administer nodes'))
-                    && (user_access('entityconnect add button') || user_access('entityconnect edit button'))) {
-              $ref_fields[$id] = $field;
-            }
-          }
-          elseif (user_access('entityconnect add button') || user_access('entityconnect edit button')) {
-            $ref_fields[$id] = $field;
-          }
-          break;
-
-        case 'taxonomy_term':
-          if (user_access('entityconnect add button') || user_access('entityconnect edit button')) {
-            $ref_fields[$id] = $field;
-          }
-          break;
-
-        case 'taxonomy_vocabulary':
-          if (user_access('entityconnect add button') || user_access('entityconnect edit button')) {
-            $ref_fields[$id] = $field;
-          }
-          break;
-
-        default:
-          // Entity construction kit support.
-          if (module_exists('eck')) {
-            $entity_info = entity_get_info($entity_type);
-            if (!empty($entity_info['module']) && $entity_info['module'] == 'eck') {
-              if (user_access('entityconnect add button') || user_access('entityconnect edit button')) {
-                $ref_fields[$id] = $field;
-              }
-            }
-          }
-
-
-          // Bean support.
-          if (module_exists('bean_admin_ui')) {
-            $entity_info = entity_get_info($entity_type);
-            if (!empty($entity_info['module']) && $entity_info['module'] == 'bean') {
-              if (user_access('entityconnect add button') || user_access('entityconnect edit button')) {
-                $ref_fields[$id] = $field;
-              }
-            }
-          }
-          break;
-      }
-    }
-
-    // Add support for Reference module.
-    if (($field['type'] == 'node_reference' && $field['module'] == 'node_reference')
-          || ($field['type'] == 'user_reference' && $field['module'] == 'user_reference')) {
-      $ref_fields[$id] = $field;
-    }
-  }
-  return $ref_fields;
-}
-
-/**
- * Add settings to an instance field settings form.
- *
- * Invoked from field_ui_field_edit_form() to allow the module defining the
- * field to add settings for a field instance.
- *
- * @return array
- *   The form definition for the field instance settings.
- */
-function entityconnect_field_instance_settings_form($field, $instance) {
-  $settings = $instance;
-
-  // Add choice for user to not load entity connect "add" button
-  // on the field.
-  $form['entityconnect_unload_add'] = array(
-    '#type' => 'radios',
-    '#title' => t('Display Entity Connect "add" button.'),
-    '#default_value' => !isset($settings['entityconnect_unload_add']) ? variable_get('entityconnect_unload_add_default', 1) : $settings['entityconnect_unload_add'],
-    '#description' => t('Choose "No" if you want to unload "add" button for the field'),
-    '#options' => array(
-      '0' => t('Yes'),
-      '1' => t('No'),
-    ),
-    '#weight' => 1,
-  );
-
-  // Add choice for user to not load entity connect "edit" button
-  // on the field.
-  $form['entityconnect_unload_edit'] = array(
-    '#type' => 'radios',
-    '#title' => t('Display Entity Connect "edit" button.'),
-    '#default_value' => !isset($settings['entityconnect_unload_edit']) ? variable_get('entityconnect_unload_edit_default', 1) : $settings['entityconnect_unload_edit'],
-    '#description' => t('Choose "No" if you want to unload "edit" button for the field'),
-    '#options' => array(
-      '0' => t('Yes'),
-      '1' => t('No'),
-    ),
-    '#weight' => 1,
-  );
-
-  $form['entityconnect_show_add_icon'] = array(
-    '#required' => '1',
-    '#key_type_toggled' => '1',
-    '#default_value' => !isset($settings['entityconnect_show_add_icon']) ? variable_get('entityconnect_show_add_icon_default', 0) : $settings['entityconnect_show_add_icon'],
-    '#description' => t('Default: "Icon only"<br />
-                         Choose "Icon + Text" if you want to see the edit (pencil) icon + the text displayed by default.<br />
-                         Choose "Text only" if you don\'t want to see the edit (pencil) icon displayed by default.<br />
-                         Each field can override this value.'),
-    '#weight' => '2',
-    '#type' => 'radios',
-    '#options' => array(
-      '0' => t('Icon only'),
-      '1' => t('Icon + Text'),
-      '2' => t('Text only')
-    ),
-    '#title' => t('Default Entity Connect "add (+) icon" display'),
-  );
-
-  $form['entityconnect_show_edit_icon'] = array(
-    '#required' => '1',
-    '#key_type_toggled' => '1',
-    '#default_value' => !isset($settings['entityconnect_show_edit_icon']) ? variable_get('entityconnect_show_edit_icon_default', 0) : $settings['entityconnect_show_edit_icon'],
-    '#description' => t('Default: "Icon only"<br />
-                         Choose "Icon + Text" if you want to see the edit (pencil) icon + the text displayed by default.<br />
-                         Choose "Text only" if you don\'t want to see the edit (pencil) icon displayed by default.<br />
-                         Each field can override this value.'),
-    '#weight' => '3',
-    '#type' => 'radios',
-    '#options' => array(
-      '0' => t('Icon only'),
-      '1' => t('Icon + Text'),
-      '2' => t('Text only')
-    ),
-    '#title' => t('Default Entity Connect "edit (pencil) icon" display'),
-  );
-
-
-  return $form;
 }
 
 /**

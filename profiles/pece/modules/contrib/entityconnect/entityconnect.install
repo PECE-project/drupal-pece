@@ -113,3 +113,27 @@ function entityconnect_update_7101() {
     ->condition('type', 'module')
     ->execute();
 }
+
+/**
+ * Update all settings from 7.x-1.x to 7.x-2.x
+ */
+function entityconnect_update_7200() {
+  $instances = field_info_instances();
+
+  foreach ($instances as $entity_type => $bundles) {
+    foreach ($bundles as $bundle_name => $fields) {
+      if (!empty($fields)) {
+        foreach ($fields as $field_name => $field) {
+          if ($field['widget']['module'] == 'entityreference' || $field['widget']['module'] == 'node_reference' || $field['widget']['module'] == 'user_reference'
+              || $field['display']['default']['module'] == 'entityreference' || $field['display']['default']['module'] == 'node_reference' || $field['display']['default']['module'] == 'user_reference') {
+            $field['entityconnect']['button']['unload_add_button']  = $field['entityconnect_unload_add'];
+            $field['entityconnect']['button']['unload_edit_button'] = $field['entityconnect_unload_edit'];
+            $field['entityconnect']['icon']['show_add_icon']        = $field['entityconnect_show_add_icon'];
+            $field['entityconnect']['icon']['show_edit_icon']       = $field['entityconnect_show_edit_icon'];
+            field_update_instance($field);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,686 @@
+<?php
+
+/**
+ * @file
+ * Main Encrypt Drupal File
+ *
+ * This file holds the main Drupal hook functions,
+ * and API functions.
+ *
+ * @ingroup encrypt
+ */
+
+/**
+ * @defgroup encrypt Encrypt: Provides an API for two-way encryption
+ *
+ * Provides an API for two-way encryption.  Drupal has no native way
+ * to do two-way encryption.  PHP's ability to do two-way encryption
+ * is a little more involved than most people care to get into.  This
+ * module provides an easy way to encrypt() and decrypt().
+ */
+
+define('ENCRYPT_MENU_PATH', 'admin/config/system/encrypt');
+
+/**
+ * Implements hook_help().
+ */
+function encrypt_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#encrypt':
+      $output = '<p>' . t("The encrypt module Provides an API for two-way encryption. Drupal has no native way to do two-way encryption. PHP's ability to do two-way encryption is a little more involved than most people care to get into.  This module provides an easy way to encrypt() and decrypt().") . '</p>';
+
+      if (!function_exists('mcrypt_encrypt')) {
+        $output .= '<p>' . t('Mcrypt is currently not installed or configured properly on your server. If you would like to use the "Mcrypt AES (CBC Mode)" method for encryption, follow the instructions for <a href="http://www.php.net/manual/en/mcrypt.setup.php">installing Mcrypt</a>.') . '</p>';
+      }
+
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function encrypt_menu() {
+  $items = array();
+
+  $items[ENCRYPT_MENU_PATH] = array(
+    'title' => 'Encrypt',
+    'description' => 'Manage encryption configurations.',
+    'page callback' => 'encrypt_configs_list',
+    'access arguments' => array('administer encrypt'),
+    'file' => 'includes/encrypt.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items[ENCRYPT_MENU_PATH . '/list'] = array(
+    'title' => 'List configurations',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+  );
+  $items[ENCRYPT_MENU_PATH . '/add'] = array(
+    'title' => 'Add configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('encrypt_config_form'),
+    'access arguments' => array('administer encrypt'),
+    'file' => 'includes/encrypt.admin.inc',
+    'type' => MENU_LOCAL_ACTION,
+  );
+  $items[ENCRYPT_MENU_PATH . '/edit/%encrypt_config'] = array(
+    'title' => 'Edit encryption configuration',
+    'title callback' => 'encrypt_config_edit_title',
+    'title arguments' => array(5),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('encrypt_config_form', 5),
+    'access arguments' => array('administer encrypt'),
+    'file' => 'includes/encrypt.admin.inc',
+  );
+  $items[ENCRYPT_MENU_PATH . '/default/%encrypt_config'] = array(
+    'page callback' => 'encrypt_config_make_default',
+    'page arguments' => array(5),
+    'access arguments' => array('administer encrypt'),
+    'file' => 'includes/encrypt.admin.inc',
+  );
+  $items[ENCRYPT_MENU_PATH . '/delete/%encrypt_config'] = array(
+    'title' => 'Delete encryption configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('encrypt_config_delete_confirm', 5),
+    'access arguments' => array('administer encrypt'),
+    'file' => 'includes/encrypt.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function encrypt_permission() {
+  return array(
+    'administer encrypt' => array(
+      'title' => t('Administer encryption settings'),
+      'description' => 'Change encryption settings (does not let them view encrypted data).',
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function encrypt_theme() {
+  return array(
+    'encrypt_configs_list_description' => array(
+      'variables' => array(
+        'label' => NULL,
+        'name' => NULL,
+        'description' => NULL,
+      ),
+      'file' => 'includes/encrypt.admin.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_ctools_plugin_type().
+ *
+ * Tell ctools about our plugin types.
+ */
+function encrypt_ctools_plugin_type() {
+  $plugins = array();
+
+  $plugins['encryption_methods'] = array(
+    'cache' => TRUE,
+    'cache table' => 'cache',
+    'process' => '_encrypt_plugin_process',
+    'defaults' => array(
+      'title' => '',
+      'description' => '',
+      'encrypt callback' => NULL,
+      'dependency callback' => NULL,
+      'dependency errors' => NULL,
+      'settings form' => NULL,
+      'submit callback' => NULL,
+      'deprecated' => FALSE,
+    ),
+  );
+  $plugins['key_providers'] = array(
+    'cache' => TRUE,
+    'cache table' => 'cache',
+    'process' => '_encrypt_plugin_process',
+    'defaults' => array(
+      'title' => '',
+      'description' => '',
+      'key callback' => NULL,
+      'dependency callback' => NULL,
+      'dependency errors' => NULL,
+      'settings form' => NULL,
+      'static key' => TRUE,
+      'submit callback' => NULL,
+      'deprecated' => FALSE,
+    ),
+  );
+
+  return $plugins;
+}
+
+/**
+ * Get all configurations.
+ *
+ * @param bool $reset
+ *   A flag to force the configurations to be retrieved from the database.
+ *
+ * @return array
+ *   An array of configurations.
+ */
+function encrypt_get_configs($reset = FALSE) {
+  static $configs = array();
+
+  if (!$configs || $reset) {
+    // For backward compatibility, make sure the table exists.
+    if (db_table_exists('encrypt_config')) {
+      $configs = db_query("SELECT * FROM {encrypt_config} ORDER BY label ASC")->fetchAllAssoc('name', PDO::FETCH_ASSOC);
+    }
+    else {
+      _encrypt_display_update_message();
+      $configs = array();
+    }
+
+    // Unserialize fields with serialized data.
+    foreach ($configs as $key => $config) {
+      if (!empty($config['method_settings'])) {
+        $method_settings = unserialize($config['method_settings']);
+        $configs[$key]['method_settings'] = $method_settings;
+      }
+      if (!empty($config['provider_settings'])) {
+        $provider_settings = unserialize($config['provider_settings']);
+        $configs[$key]['provider_settings'] = $provider_settings;
+      }
+    }
+  }
+
+  return $configs;
+}
+
+/**
+ * Get all configurations as options.
+ *
+ * Useful for retrieving a list of configurations to be used as
+ * #options in form elements such as select, checkboxes, and radios.
+ *
+ * @param bool $reset
+ *   A flag to force the configurations to be retrieved from the database.
+ *
+ * @return array
+ *   An array of key-value pairs. The key is the configuration's machine-
+ *   readable name and the value is its human-friendly label.
+ */
+function encrypt_get_configs_as_options($reset = FALSE) {
+  static $options = array();
+
+  if (!$options || $reset) {
+    $configs = encrypt_get_configs($reset);
+
+    foreach ($configs as $key => $config) {
+      $options[$key] = $config['label'];
+    }
+  }
+
+  return $options;
+}
+
+/**
+ * Get one configuration.
+ *
+ * @param bool $name
+ *   The machine name of the configuration to retrieve.
+ * @param bool $reset
+ *   A flag to force the configuration to be retrieved from the database.
+ *
+ * @return array
+ *   An array with details for the requested configuration.
+ */
+function encrypt_get_config($name = NULL, $reset = FALSE) {
+  $configs = encrypt_get_configs($reset);
+
+  if (array_key_exists($name, $configs)) {
+    $config = $configs[$name];
+  }
+  else {
+    $config = NULL;
+  }
+
+  return $config;
+}
+
+/**
+ * Get enabled configurations.
+ *
+ * @param bool $reset
+ *   A flag to force the configurations to be retrieved from the database.
+ *
+ * @return array
+ *   An array of configurations that are enabled.
+ */
+function encrypt_get_enabled_configs($reset = FALSE) {
+  static $enabled_configs = array();
+
+  if (!$enabled_configs || $reset) {
+    $configs = encrypt_get_configs($reset);
+
+    foreach ($configs as $key => $config) {
+      if ($config['enabled']) {
+        $enabled_configs[$key] = $config;
+      }
+    }
+  }
+
+  return $enabled_configs;
+}
+
+/**
+ * Get enabled configurations as options.
+ *
+ * Useful for retrieving a list of enabled configurations to be used as
+ * #options in form elements such as select, checkboxes, and radios.
+ *
+ * @param bool $reset
+ *   A flag to force the configurations to be retrieved from the database.
+ *
+ * @return array
+ *   An array of key-value pairs. The key is the configuration's machine-
+ *   readable name and the value is its human-friendly label.
+ */
+function encrypt_get_enabled_configs_as_options($reset = FALSE) {
+  static $options = array();
+
+  if (!$options || $reset) {
+    $configs = encrypt_get_enabled_configs($reset);
+
+    foreach ($configs as $key => $config) {
+      $options[$key] = $config['label'];
+    }
+  }
+
+  return $options;
+}
+
+/**
+ * Get the default configuration.
+ *
+ * @param bool $reset
+ *   A flag to force the configuration to be retrieved from the database.
+ *
+ * @return array
+ *   An array with details for the default configuration.
+ */
+function encrypt_get_default_config($reset = FALSE) {
+  static $default_config = array();
+
+  if (!$default_config || $reset) {
+    $default_config = variable_get('encrypt_default_config', NULL);
+    $default_config = encrypt_get_config($default_config);
+
+    // For backward compatibility.
+    if (empty($default_config)) {
+      $method = variable_get('encrypt_encryption_method', 'default');
+      $provider = variable_get('encrypt_key_provider', 'drupal_private_key');
+
+      $settings_variable = 'encrypt_key_providers_' . $provider . '_settings';
+      $provider_settings = variable_get($settings_variable, array());
+
+      $default_config = array(
+        'method' => $method,
+        'method_settings' => NULL,
+        'provider' => $provider,
+        'provider_settings' => $provider_settings,
+      );
+    }
+  }
+
+  return $default_config;
+}
+
+/**
+ * Save a configuration.
+ *
+ * @param array $fields
+ *   The fields of the configuration to save.
+ * @param bool $messages
+ *   TRUE if messages should be displayed.
+ */
+function encrypt_save_config($fields, $messages = TRUE) {
+  // Serialize any field that is an array.
+  foreach ($fields as $key => $field) {
+    if (is_array($field)) {
+      $fields[$key] = serialize($field);
+    }
+  }
+
+  // If the created field is empty, set it to the request time.
+  if (empty($fields['created'])) {
+    $fields['created'] = REQUEST_TIME;
+  }
+
+  // If the changed field is empty, set it to the request time.
+  if (empty($fields['changed'])) {
+    $fields['changed'] = REQUEST_TIME;
+  }
+
+  // Save the configuration.
+  $merge_status = db_merge('encrypt_config')
+    ->key(array('name' => $fields['name']))
+    ->fields($fields)
+    ->execute();
+
+  // Display message and log to watchdog.
+  if ($messages) {
+    $t_args = array('%label' => $fields['label']);
+
+    switch ($merge_status) {
+      case MergeQuery::STATUS_INSERT:
+        drupal_set_message(t('The configuration %label has been added.', $t_args));
+        watchdog('encrypt', 'Added encryption configuration %label.', $t_args, WATCHDOG_NOTICE, l(t('view'), ENCRYPT_MENU_PATH . '/list'));
+        break;
+
+      case MergeQuery::STATUS_UPDATE:
+        drupal_set_message(t('The configuration %label has been updated.', $t_args));
+        watchdog('encrypt', 'Updated encryption configuration %label.', $t_args, WATCHDOG_NOTICE, l(t('view'), ENCRYPT_MENU_PATH . '/list'));
+        break;
+    }
+  }
+}
+
+/**
+ * Fetch metadata on a specific encryption method plugin.
+ *
+ * @param mixed $method
+ *   Name of an encryption method. If no $method is specified, this function
+ *   will return info about the default encryption method.
+ *
+ * @return array
+ *   An array with information about the requested encryption method.
+ */
+function encrypt_get_encryption_method($method = NULL) {
+  // If the method was not specified, use the method
+  // from the default configuration.
+  if (empty($method)) {
+    $config = encrypt_get_default_config();
+    $method = $config['method'];
+  }
+  ctools_include('plugins');
+  return ctools_get_plugins('encrypt', 'encryption_methods', $method);
+}
+
+/**
+ * Returns information for all encryption methods.
+ *
+ * @param bool $all
+ *   A flag indicating whether to include plugins with unmet dependencies.
+ *
+ * @param bool $reset
+ *   A flag indicating whether to clear the plugin cache. Otherwise, this
+ *   function may return stale data if plugin properties have changed.
+ *
+ * @return array
+ *   An array of arrays with information about all available encryption methods.
+ */
+function encrypt_get_encryption_methods($all = TRUE, $reset = FALSE) {
+  // Clear the plugin cache if necessary.
+  if ($reset) {
+    _encrypt_clear_plugin_cache('encryption_methods');
+  }
+
+  ctools_include('plugins');
+  $methods = ctools_get_plugins('encrypt', 'encryption_methods');
+
+  return $all ? $methods : array_filter($methods, '_encrypt_plugin_is_valid');
+}
+
+/**
+ * Fetch metadata on a specific key provider plugin.
+ *
+ * @param mixed $provider
+ *   Name of a key provider method. If no $provider is specified, this function
+ *   will return info about the default key provider.
+ *
+ * @return array
+ *   An array with information about the requested key provider.
+ */
+function encrypt_get_key_provider($provider = NULL) {
+  // If the provider was not specified, use the provider
+  // from the default configuration.
+  if (empty($provider)) {
+    $config = encrypt_get_default_config();
+    $provider = $config['provider'];
+  }
+  ctools_include('plugins');
+  return ctools_get_plugins('encrypt', 'key_providers', $provider);
+}
+
+/**
+ * Returns info for all encryption key providers.
+ *
+ * @param bool $all
+ *   A flag indicating whether to include plugins with unmet dependencies.
+ *
+ * @param bool $reset
+ *   A flag indicating whether to clear the plugin cache. Otherwise, this
+ *   function may return stale data if plugin properties have changed.
+ *
+ * @return array
+ *   An array of arrays with information about all available key providers.
+ */
+function encrypt_get_key_providers($all = TRUE, $reset = FALSE) {
+  if ($reset) {
+    _encrypt_clear_plugin_cache('key_providers');
+  }
+
+  ctools_include('plugins');
+  $providers = ctools_get_plugins('encrypt', 'key_providers');
+
+  return $all ? $providers : array_filter($providers, '_encrypt_plugin_is_valid');
+}
+
+/**
+ * Get the key from a key provider.
+ *
+ * @param mixed $provider
+ *   The key provider to retrieve the key for. Can be either the fully-loaded
+ *   provider (from encrypt_get_key_provider() or the name of the provider. If
+ *   NULL, it assumes the default key provider.
+ *
+ * @param array $config
+ * The selected configuration.
+ *
+ * @return string
+ *   The key.
+ */
+function encrypt_get_key_from_key_provider($provider = NULL, $provider_settings = array(), $config = array()) {
+
+  $keys = &drupal_static(__FUNCTION__);
+
+  if (!is_array($provider)) {
+    $provider = encrypt_get_key_provider($provider);
+  }
+
+  // Get a hash for this combination of provider name and settings.
+  $provider_hash = md5(json_encode(array($provider['name'], $provider_settings)));
+
+  // If the key provider allows static variable storage, try to
+  // retrieve the key from the static variable.
+  if ($provider['static key'] && isset($keys[$provider_hash])) {
+    $key = $keys[$provider_hash];
+  }
+
+  // If the key was not set from static variable storage,
+  // retrieve it from the key provider.
+  if (!isset($key)) {
+    $key_function = ctools_plugin_get_function($provider, 'key callback');
+    $key = call_user_func($key_function, $provider_settings, $config);
+
+    // If the key provider allows static variable storage, set the
+    // static variable.
+    if ($provider['static key']) {
+      $keys[$provider_hash] = $key;
+    }
+  }
+
+  return $key;
+}
+
+/**
+ * Additional processing for plugins.
+ */
+function _encrypt_plugin_process(&$plugin, $info) {
+  // Calculate dependencies and attach any errors.
+  if ($plugin['dependency callback'] && $dep_function = ctools_plugin_get_function($plugin, 'dependency callback')) {
+    $plugin['dependency errors'] = call_user_func($dep_function);
+  }
+}
+
+/**
+ * Helper function to determine if a plugin has unmet dependencies. 
+ * 
+ * Most helpful in conjunction with array_filter().
+ *
+ * @param array $plugin
+ *   The plugin to check.
+ *
+ * @return bool
+ *   Whether or not the plugin is valid (has no unmet dependencies).
+ */
+function _encrypt_plugin_is_valid($plugin) {
+  if (isset($plugin['dependency errors']) && !empty($plugin['dependency errors'])) {
+    return FALSE;
+  }
+  else {
+    return TRUE;
+  }
+}
+
+/**
+ * Helper function to clear encrypt plugin caches.
+ */
+function _encrypt_clear_plugin_cache($type = NULL) {
+  if ($type) {
+    cache_clear_all("plugins:encrypt:$type", 'cache');
+  }
+  else {
+    cache_clear_all('plugins:encrypt:', 'cache', TRUE);
+  }
+}
+
+/**
+ * Encrypt text.
+ *
+ * @param string $text
+ *   Text to encrypt
+ *
+ * @param array $options
+ *   Array of options for encryption
+ *
+ * @param mixed $method
+ *   String name of method to use. Uses setting default if NULL
+ *
+ * @param mixed $key_provider
+ *   String name of provider to use. Uses setting default if NULL
+ *
+ * @param mixed $config
+ *   A configuration to use. Uses the default configuration if NULL.
+ *
+ * @return string
+ *   A serialized array containing the encrypted text and encryption method.
+ */
+function encrypt($text = '', $options = array(), $method = NULL, $key_provider = NULL, $config = NULL) {
+  module_load_include('inc', 'encrypt', 'includes/encrypt.encrypt');
+  return _encrypt_decrypt('encrypt', $text, $options, $method, $key_provider, $config);
+}
+
+/**
+ * Decrypt text.
+ *
+ * @param string $text
+ *   Text to decrypt
+ *
+ * @param array $options
+ *   Array of options for decryption
+ *
+ * @param mixed $method
+ *   String name of method to use. Uses setting default if NULL
+ *
+ * @param mixed $key_provider
+ *   String name of provider to use. Uses setting default if NULL
+ *
+ * @param mixed $config
+ *   A configuration to use. Uses the default configuration if NULL.
+ *
+ * @return string
+ *   Decrypted text
+ */
+function decrypt($text = '', $options = array(), $method = NULL, $key_provider = NULL, $config = NULL) {
+  module_load_include('inc', 'encrypt', 'includes/encrypt.encrypt');
+  return _encrypt_decrypt('decrypt', $text, $options, $method, $key_provider, $config);
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ *
+ * Tell ctools about our plugins.
+ */
+function encrypt_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'encrypt') {
+    return 'plugins/' . $plugin;
+  }
+}
+
+/**
+ * Title callback for the configuration edit page.
+ *
+ * @param string $config
+ *   The machine-readable name of the configuration being edited.
+ *
+ * @return string
+ *   The human-friendly label of the requested configuration.
+ */
+function encrypt_config_edit_title($config) {
+  return $config['label'];
+}
+
+/**
+ * Menu argument loader: loads a configuration by name.
+ *
+ * @param string $name
+ *   The machine-readable name of an encryption configuration to load,
+ *   where '-' is replaced with '_'.
+ *
+ * @return array
+ *   An array representing an encryption configuration or FALSE if $name
+ *   does not exist.
+ */
+function encrypt_config_load($name) {
+  return encrypt_get_config(strtr($name, array('-' => '_')));
+}
+
+/**
+ * Display a message that the update script needs to be run.
+ */
+function _encrypt_display_update_message() {
+  if (user_access('administer content')) {
+    drupal_set_message(t('Encrypt requires a database schema update. You should run the <a href="@update">database update script</a> immediately.', array('@update' => base_path() . 'update.php')), 'error', FALSE);
+  }
+}
+
+/**
+ * Implements hook_features_api().
+ *
+ * Define the components that we want to make exportable, in this case
+ * Encrypt configurations.
+ */
+function encrypt_features_api() {
+  return array(
+    'encrypt_config' => array(
+      'name' => 'Encrypt configurations',
+      'file' => drupal_get_path('module', 'encrypt') . '/includes/encrypt.features.inc',
+      'default_hook' => 'encrypt_default_configs',
+      'feature_source' => TRUE,
+    ),
+  );
+}

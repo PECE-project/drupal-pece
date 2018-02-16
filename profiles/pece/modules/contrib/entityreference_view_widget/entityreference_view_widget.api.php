@@ -17,8 +17,10 @@
  *   The Arguments array to be altered.
  * @param $form_state
  *   A keyed array containing the current state of the form.
+ * @param $view
+ *   The view object that is being used.
  */
-function hook_entityreference_view_widget_views_arguments_alter(&$arguments, $form_state) {
+function hook_entityreference_view_widget_views_arguments_alter(&$arguments, $form_state, $view) {
   if (!empty($form_state['values']['your_field'])) {
     $arguments[] = $form_state['values']['your_field'][LANGUAGE_NONE][0]['value'];
   }

@@ -22,7 +22,12 @@ class entityreference_view_widget_handler_field_checkbox extends views_handler_f
     // in order to get the base key value (for example, nid for nodes).
     foreach ($this->view->result as $row_index => $row) {
       $entity = $this->entities[$row_index];
-      $entity_id = $entity->{$this->view->base_field};
+      if ($this->view->base_field == 'search_api_id' && isset($row->_entity_properties)) {
+        $entity_id = $row->_entity_properties[$this->view->base_field];
+      }
+      else {
+        $entity_id = $entity->{$this->view->base_field};
+      }
 
       if ($this->options['ervw']['force_single']) {
         $form[$this->options['id']][$row_index] = array(
@@ -47,7 +52,12 @@ class entityreference_view_widget_handler_field_checkbox extends views_handler_f
   }
 
   function render($values) {
-    $entity_id = $values->{$this->view->base_field};
+    if ($this->view->base_field == 'search_api_id' && isset($values->_entity_properties)) {
+      $entity_id = $values->_entity_properties[$this->view->base_field];
+    }
+    else {
+      $entity_id = $this->get_value($values, $this->view->base_field);
+    }
     if (empty($entity_id)) {
       return;
     }

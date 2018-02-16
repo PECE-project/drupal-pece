@@ -1,0 +1,72 @@
+default:
+  suites:
+    default:
+      paths: 
+        features: 'features'
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MarkupContext
+        - Drupal\DrupalExtension\Context\DrushContext
+  extensions:
+    Behat\MinkExtension:
+      goutte: ~
+      selenium2:
+        browser: chrome
+        capabilities:
+          browser: chrome
+          browserName: chrome
+          browserVersion: ANY
+          chrome:
+            switches:
+              - "--headless"
+              - "--disable-gpu"
+          version: ANY
+      #base_url: http://mydrupalsite.com
+      #files_path: './profiles/panopoly/modules/panopoly/panopoly_test/tests'
+    Drupal\DrupalExtension:
+      blackbox: ~
+      #drush:
+      #  root: '/path/to/drupal/root'
+      #drupal:
+      #  drupal_root: '/path/to/drupal/root'
+      api_driver: 'drupal'
+      region_map:
+        # The region on panopoly_page where the body appears (frequently
+        # customized on child distributions).
+        Panopoly Page Content: '.bryant-content'
+        # Regions for Radix Layouts
+        Boxton Content: ".boxton .radix-layouts-content"
+        Bryant Content: ".bryant .radix-layouts-content"
+        Bryant Sidebar: ".bryant .radix-layouts-sidebar"
+        Bryant Flipped Content: ".bryant-flipped .radix-layouts-content"
+        Bryant Flipped Sidebar: ".bryant-flipped .radix-layouts-sidebar"
+        # For Panels / Panopoly specific regions.
+        CTools modal: "#modalContent"
+        Live preview: ".panopoly-magic-preview"
+        Linkit modal: "#linkit-modal"
+        # For the Media Browser
+        Media web tab: '#media-tab-media_internet'
+        Media upload tab: '#media-tab-upload'
+        Media library tab: '#media-tab-media_default--media_browser_1'
+        # These are the regions for responsive_bartik.
+        Main menu: "#main-menu"
+        Header: ".region-header"
+        Featured: ".region-featured"
+        Highlighted: ".region-highlighted"
+        Help: ".region-help"
+        Tabs: ".tabs"
+        Content: ".region-content"
+        Sidebar first: ".region-sidebar-first"
+        Sidebar second: ".region-sidebar-second"
+        Triptych first: ".region-triptych-first"
+        Triptych middle: ".region-triptych-middle"
+        Triptych last: ".region-triptych-last"
+        Footer first column: ".region-footer-firstcolumn"
+        Footer second column: ".region-footer-secondcolumn"
+        Footer third column: ".region-footer-thirdcolumn"
+        Footer fourth column: ".region-footer-fourthcolumn"
+        Footer: ".region-footer"
+        Search: "#search-form"
+        Panopoly Magic Style Settings: "#panels-edit-style-settings-form #edit-general-settings"

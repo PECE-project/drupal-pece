@@ -1,0 +1,270 @@
+<?php
+
+/**
+ * @file
+ * Tests for key administration and usage.
+ */
+
+/**
+ * Test basic key administration.
+ */
+class KeyBasicAdminTest extends DrupalWebTestCase {
+
+  /**
+   * An administrative user with the 'administer keys' privilege.
+   *
+   * @var object $adminUser
+   */
+  protected $adminUser;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Basic key administration',
+      'description' => 'Test basic administration of keys.',
+      'group' => 'Key',
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp(array('key'));
+
+    $this->adminUser = $this->drupalCreateUser(array(
+      'access administration pages',
+      'administer keys',
+    ));
+    $this->drupalLogin($this->adminUser);
+  }
+
+  /**
+   * Test the Configuration key provider.
+   */
+  public function testConfigKeyProvider() {
+    // Create a random label.
+    $original_label = DrupalWebTestCase::randomName(8);
+    $original_id = strtolower($original_label);
+
+    // Create a random key value.
+    $original_key_value = DrupalWebTestCase::randomString(32);
+
+    // Define a configuration.
+    $original_config = array(
+      'id' => $original_id,
+      'label' => $original_label,
+      'description' => 'A test key.',
+      'key_type' => 'authentication',
+      'key_type_settings' => array(),
+      'key_provider' => 'config',
+      'key_provider_settings' => array('key_value' => $original_key_value),
+      'key_input' => 'text_field',
+      'key_input_settings' => array(),
+    );
+
+    // Set the data to save.
+    $data = $original_config;
+    unset($data['key_type_settings']);
+    unset($data['key_provider_settings']);
+    unset($data['key_input_settings']);
+    unset($data['key_input']);
+    $data['key_input_settings[key_value]'] = $original_key_value;
+
+    // Add the configuration.
+    $this->drupalGet(KEY_MENU_PATH . '/add');
+    $this->drupalPostAJAX(NULL, array('key_type' => $data['key_type']), 'key_type');
+    $this->drupalPostAJAX(NULL, array('key_provider' => $data['key_provider']), 'key_provider');
+    $this->drupalPost(NULL, $data, t('Save key'));
+
+    // Confirm that the confirmation text appears.
+    $this->assertText(t('The key @label has been added.', array('@label' => $original_label)), 'Confirmation text appears after adding the configuration/authentication key.');
+
+    // Confirm that the key appears on the listing page.
+    $this->drupalGet(KEY_MENU_PATH);
+    $this->assertText($original_label, 'The configuration/authentication key appears on the key listing page.');
+
+    // Confirm that the key was added successfully.
+    $config = key_get_key($original_id);
+    $this->assertEqual($config, $original_config, 'The configuration/authentication key was added successfully.');
+
+    // Confirm that the key value was set successfully.
+    $key_value = key_get_key_value($original_id);
+    $this->assertEqual($key_value, $original_key_value, 'The configuration/authentication key value was set successfully.');
+
+    // Define an altered configuration.
+    $altered_config = $config;
+    $altered_config['description'] = 'A test key that has been altered.';
+
+    // Set the data to save.
+    $data = $altered_config;
+    unset($data['id']);
+    unset($data['key_type_settings']);
+    unset($data['key_provider_settings']);
+    unset($data['key_input_settings']);
+    unset($data['key_input']);
+    $data['key_input_settings[key_value]'] = $original_key_value;
+
+    // Edit the configuration.
+    $this->drupalGet(KEY_MENU_PATH . "/manage/$original_id");
+    $this->drupalPostAJAX(NULL, array('key_type' => $data['key_type']), 'key_type');
+    $this->drupalPostAJAX(NULL, array('key_provider' => $data['key_provider']), 'key_provider');
+    $this->drupalPost(NULL, $data, t('Save key'));
+
+    // Confirm that the confirmation text appears.
+    $this->assertText(t('The key @label has been updated.', array('@label' => $original_label)), 'Confirmation text appears after editing the configuration/authentication key.');
+
+    // Confirm that the key still appears on the listing page.
+    $this->drupalGet(KEY_MENU_PATH);
+    $this->assertText($original_label, 'The configuration/authentication key still appears on the key listing page.');
+
+    // Confirm that the key was edited successfully.
+    $config = key_get_key($original_id, TRUE);
+    $this->assertEqual($config, $altered_config, 'The configuration/authentication key was edited successfully.');
+
+    // Confirm that the key value was set successfully.
+    $key_value = key_get_key_value($original_id);
+    $this->assertEqual($key_value, $original_key_value, 'The configuration/authentication key value was set successfully.');
+
+    // Delete the key.
+    $this->drupalGet(KEY_MENU_PATH . "/manage/$original_id/delete");
+    $this->drupalPost(NULL, NULL, t('Delete'));
+
+    // Confirm that the confirmation text appears.
+    $this->assertText(t('The key @label has been deleted.', array('@label' => $original_label)), 'Confirmation text appears after deleting the configuration/authentication key.');
+
+    // Confirm that the key was deleted.
+    $config = key_get_key($original_id, TRUE);
+    $this->assertFalse($config, 'The configuration/authentication key was deleted successfully.');
+
+    // Confirm that the key no longer appears on the listing page.
+    $this->drupalGet(KEY_MENU_PATH);
+    $this->assertNoText($original_label, 'The configuration/authentication key no longer appears on the key listing page.');
+  }
+
+  /**
+   * Test the File key provider.
+   */
+  public function testFileKeyProvider() {
+    // Create a random label.
+    $original_label = DrupalWebTestCase::randomName(8);
+    $original_id = strtolower($original_label);
+
+    // Define a file location for the test key.
+    $original_file_location = __DIR__ . '/tests/keys/256-bit.key';
+
+    // Define a configuration.
+    $original_config = array(
+      'id' => $original_id,
+      'label' => $original_label,
+      'description' => 'A test key.',
+      'key_type' => 'encryption',
+      'key_type_settings' => array('key_size' => 256),
+      'key_provider' => 'file',
+      'key_provider_settings' => array(
+        'file_location' => $original_file_location,
+        'base64_encoded' => 0,
+      ),
+      'key_input' => 'none',
+      'key_input_settings' => array(),
+    );
+
+    // Set the data to save.
+    $data = $original_config;
+    unset($data['key_type_settings']);
+    unset($data['key_provider_settings']);
+    unset($data['key_input_settings']);
+    unset($data['key_input']);
+    foreach ($original_config['key_type_settings'] as $index => $value) {
+      $data["key_type_settings[$index]"] = $value;
+    }
+    foreach ($original_config['key_provider_settings'] as $index => $value) {
+      $data["key_provider_settings[$index]"] = $value;
+    }
+    unset($data['key_provider_settings[base64_encoded]']);
+
+    // Add the configuration.
+    $this->drupalGet(KEY_MENU_PATH . '/add');
+    $this->drupalPostAJAX(NULL, array('key_type' => $data['key_type']), 'key_type');
+    $this->drupalPostAJAX(NULL, array('key_provider' => $data['key_provider']), 'key_provider');
+    $this->drupalPost(NULL, $data, t('Save key'));
+
+    // Confirm that the confirmation text appears.
+    $this->assertText(t('The key @label has been added.', array('@label' => $original_label)), 'Confirmation text appears after adding the file/encryption key.');
+
+    // Confirm that the key appears on the listing page.
+    $this->drupalGet(KEY_MENU_PATH);
+    $this->assertText($original_label, 'The file/encryption key appears on the key listing page.');
+
+    // Confirm that the key was added successfully.
+    $config = key_get_key($original_id);
+    $this->assertEqual($config, $original_config, 'The file/encryption key was added successfully.');
+
+    // Confirm that the key value can be retrieved successfully.
+    $key_value = key_get_key_value($original_id);
+    $this->assertEqual($key_value, file_get_contents($original_file_location), 'The file/encryption key value was retrieved successfully.');
+
+    // Define a new file location.
+    $new_file_location = __DIR__ . '/tests/keys/256-bit_base64-encoded.key';
+
+    // Define an altered configuration.
+    $altered_config = $config;
+    $altered_config['key_provider_settings'] = array(
+      'file_location' => $new_file_location,
+      'base64_encoded' => 1,
+    );
+
+    // Set the data to save.
+    $data = $altered_config;
+    unset($data['id']);
+    unset($data['key_type_settings']);
+    unset($data['key_provider_settings']);
+    unset($data['key_input_settings']);
+    unset($data['key_input']);
+    foreach ($altered_config['key_type_settings'] as $index => $value) {
+      $data["key_type_settings[$index]"] = $value;
+    }
+    foreach ($altered_config['key_provider_settings'] as $index => $value) {
+      $data["key_provider_settings[$index]"] = $value;
+    }
+
+    // Edit the configuration.
+    $this->drupalGet(KEY_MENU_PATH . "/manage/$original_id");
+    $this->drupalPostAJAX(NULL, array('key_type' => $data['key_type']), 'key_type');
+    $this->drupalPostAJAX(NULL, array('key_provider' => $data['key_provider']), 'key_provider');
+    $this->drupalPost(NULL, $data, t('Save key'));
+
+    // Confirm that the confirmation text appears.
+    $this->assertText(t('The key @label has been updated.', array('@label' => $original_label)), 'Confirmation text appears after editing the file/encryption key.');
+
+    // Confirm that the key still appears on the listing page.
+    $this->drupalGet(KEY_MENU_PATH);
+    $this->assertText($original_label, 'The file/encryption key still appears on the key listing page.');
+
+    // Confirm that the key was edited successfully.
+    $config = key_get_key($original_id, TRUE);
+    $this->assertEqual($config, $altered_config, 'The file/encryption key was edited successfully.');
+
+    // Confirm that the key value can be retrieved successfully.
+    $key_value = key_get_key_value($original_id);
+    $this->assertEqual($key_value, base64_decode(file_get_contents($new_file_location)), 'The file/encryption key value was retrieved successfully.');
+
+    // Delete the key.
+    $this->drupalGet(KEY_MENU_PATH . "/manage/$original_id/delete");
+    $this->drupalPost(NULL, NULL, t('Delete'));
+
+    // Confirm that the confirmation text appears.
+    $this->assertText(t('The key @label has been deleted.', array('@label' => $original_label)), 'Confirmation text appears after deleting the file/encryption key.');
+
+    // Confirm that the key was deleted.
+    $config = key_get_key($original_id, TRUE);
+    $this->assertFalse($config, 'The file/encryption key was deleted successfully.');
+
+    // Confirm that the key no longer appears on the listing page.
+    $this->drupalGet(KEY_MENU_PATH);
+    $this->assertNoText($original_label, 'The file/encryption key no longer appears on the key listing page.');
+  }
+
+}

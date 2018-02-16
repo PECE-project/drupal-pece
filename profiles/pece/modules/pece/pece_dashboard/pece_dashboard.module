@@ -26,9 +26,23 @@ function pece_dashboard_block_view($delta = 'dashboard_add_content') {
   $menu_items = node_type_get_types();
   $node_types = array();
 
+  // Remove restricted content types.
   unset($menu_items['panopoly_landing_page']);
   unset($menu_items['panopoly_page']);
   unset($menu_items['pece_about_page']);
+
+  // Hide the following content types from Reasearcher and Contributor users on
+  // dashboard's Add Content block.
+  $roles = array('researcher', 'contributor');
+  $exclude_types = array(
+    'biblio',
+    'pece_annotation',
+    'frontpage_image_slideshow'
+  );
+  pece_dashboard_hide_content_item_by_role($roles, $exclude_types, $menu_items);
+
+  // Sort items alphabetically.
+  asort($menu_items);
 
   foreach ($menu_items as $menu_item) {
     $link_class = '';
@@ -87,4 +101,24 @@ function pece_dashboard_menu() {
   );
 
   return $items;
+}
+
+function pece_dashboard_hide_content_item_by_role($roles = array(), $exclude = array(), &$node_types = array()) {
+  if (empty($roles)) return;
+  if (empty($exclude)) return;
+
+  global $user;
+
+  $user_roles = array();
+  foreach ($roles as $role_name) {
+    $user_roles[] = user_role_load_by_name($role_name);
+  }
+
+  foreach ($user_roles as $role) {
+    if (in_array($role->rid, array_keys($user->roles))) {
+      foreach ($exclude as $type) {
+        unset($node_types[$type]);
+      }
+    }
+  }
 }

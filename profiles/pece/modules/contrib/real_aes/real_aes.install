@@ -1,0 +1,33 @@
+<?php
+/**
+ * @file
+ * Holds installation hooks for Real AES.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function real_aes_requirements($phase) {
+  $requirements = array();
+  if ($phase == 'runtime') {
+    $t = get_t();
+
+    $requirements['real_aes_library'] = array(
+      'title' => $t('Defuse PHP-Encryption library'),
+    );
+
+    $libraries = libraries_get_libraries();
+
+    if (isset($libraries['php-encryption'])) {
+      $requirements['real_aes_library']['value'] = $t('Installed');
+      $requirements['real_aes_library']['severity'] = REQUIREMENT_OK;
+    }
+    else {
+      $info = libraries_info('php-encryption');
+      $requirements['real_aes_library']['value'] = $t('Not Installed');
+      $requirements['real_aes_library']['severity'] = REQUIREMENT_WARNING;
+      $requirements['real_aes_library']['description'] = $t('Please install the <a href="@url">PHP-encryption library</a>.', array('@url' => $info['vendor_url']));
+    }
+  }
+  return $requirements;
+}

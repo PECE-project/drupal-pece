@@ -15,6 +15,17 @@ function _entityconnect_admin_form($form, &$form_state) {
     '#title' => t('EntityConnect default Parameters'),
   );
 
+  $form['entityconnect']['cache_lifetime'] = array(
+    '#default_value' => variable_get('entityconnect_cache_lifetime', CACHE_PERMANENT),
+    '#description' => t('Set cache lifetime in second.<br />
+                        Set to 0 to CACHE_PERMANENT.'),
+    '#element_validate' => array('element_validate_integer'),
+    '#weight' => '0',
+    '#type' => 'textfield',
+    '#title' => t('Entity Connect cache lifetime'),
+  );
+
+
   $form['entityconnect']['button'] = array(
     '#type' => 'fieldset',
     '#title' => t('Buttons display Parameters'),
@@ -113,6 +124,7 @@ function _entityconnect_admin_form($form, &$form_state) {
  */
 function _entityconnect_admin_form_submit($form, &$form_state) {
   if ($form_state['clicked_button']['#id'] == 'edit-reset') {
+    variable_set('entityconnect_cache_lifetime', CACHE_PERMANENT);
     variable_set('entityconnect_unload_add_default', 1);
     variable_set('entityconnect_unload_edit_default', 1);
     variable_set('entityconnect_show_add_icon_default', 0);
@@ -120,6 +132,7 @@ function _entityconnect_admin_form_submit($form, &$form_state) {
     drupal_set_message(t('The settings were reset to default.'));
   }
   else {
+    variable_set('entityconnect_cache_lifetime', $form_state['values']['cache_lifetime']);
     variable_set('entityconnect_unload_add_default', $form_state['values']['button_add']);
     variable_set('entityconnect_unload_edit_default', $form_state['values']['button_edit']);
     variable_set('entityconnect_show_add_icon_default', $form_state['values']['icon_add']);

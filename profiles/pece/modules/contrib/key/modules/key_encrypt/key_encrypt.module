@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Allows Key to manage keys in Encrypt 7.x-2.x.
+ */
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function key_encrypt_ctools_plugin_directory($module, $plugin) {
+  if (in_array($module, array('encrypt', 'key')) && !empty($plugin)) {
+    return "plugins/$plugin";
+  }
+}

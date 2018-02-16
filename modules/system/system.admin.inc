@@ -706,17 +706,23 @@ function system_theme_settings_submit($form, &$form_state) {
   if (!empty($values['logo_upload'])) {
     $file = $values['logo_upload'];
     unset($values['logo_upload']);
-    $filename = file_unmanaged_copy($file->uri);
+    $path = 'public://' . $file->filename;
+    $file->destination = $path;
+    $file->status = 1;
+    $file = file_copy($file, $file->destination);
     $values['default_logo'] = 0;
-    $values['logo_path'] = $filename;
+    $values['logo_path'] = $file->uri;
     $values['toggle_logo'] = 1;
   }
   if (!empty($values['favicon_upload'])) {
     $file = $values['favicon_upload'];
     unset($values['favicon_upload']);
-    $filename = file_unmanaged_copy($file->uri);
+    $path = 'public://' . $file->filename;
+    $file->destination = $path;
+    $file->status = 1;
+    $file = file_copy($file, $file->destination);
     $values['default_favicon'] = 0;
-    $values['favicon_path'] = $filename;
+    $values['favicon_path'] = $file->uri;
     $values['toggle_favicon'] = 1;
   }
 
@@ -1856,7 +1862,7 @@ function system_image_toolkit_settings() {
   if (count($toolkits_available) == 0) {
     variable_del('image_toolkit');
     $form['image_toolkit_help'] = array(
-      '#markup' => t("No image toolkits were detected. Drupal includes support for <a href='!gd-link'>PHP's built-in image processing functions</a> but they were not detected on this system. You should consult your system administrator to have them enabled, or try using a third party toolkit.", array('gd-link' => url('http://php.net/gd'))),
+      '#markup' => t("No image toolkits were detected. Drupal includes support for <a href='!gd-link'>PHP's built-in image processing functions</a> but they were not detected on this system. You should consult your system administrator to have them enabled, or try using a third party toolkit.", array('!gd-link' => url('http://php.net/gd'))),
     );
     return $form;
   }
@@ -2597,6 +2603,8 @@ function theme_status_report($variables) {
     if (empty($requirement['#type'])) {
       $severity = $severities[isset($requirement['severity']) ? (int) $requirement['severity'] : REQUIREMENT_OK];
       $severity['icon'] = '<div title="' . $severity['title'] . '"><span class="element-invisible">' . $severity['title'] . '</span></div>';
+      // The requirement's 'value' key is optional, provide a default value.
+      $requirement['value'] = isset($requirement['value']) ? $requirement['value'] : '';
 
       // Output table row(s)
       if (!empty($requirement['description'])) {

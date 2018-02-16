@@ -333,7 +333,8 @@ function _manualcrop_attach_dependencies(&$element, $form_state, $js_identifier,
       foreach (manualcrop_styles_with_crop() as $style_name => $data) {
         $styles[$style_name] = array(
           'effect' => $data['effect']['name'],
-          'data' => $data['effect']['data']
+          'data' => $data['effect']['data'],
+          'label' => $data['label'],
         );
       }
     }

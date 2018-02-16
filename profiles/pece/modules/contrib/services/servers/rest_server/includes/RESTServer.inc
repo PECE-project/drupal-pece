@@ -48,6 +48,13 @@ class RESTServer {
     }
     catch (ServicesException $e) {
       $result = $this->handleException($e, $controller, $arguments);
+
+      $no_body = variable_get('services_no_body_responses', array(204, 304));
+      $generate_body = variable_get('services_generate_error_body', TRUE);
+
+      if (in_array($e->getCode(), $no_body) && !$generate_body) {
+        return '';
+      }
     }
 
     return $this->render($formatter, $result);
@@ -334,7 +341,16 @@ class RESTServer {
       // throw a exception if the argument isn't optional.
       if (!isset($arguments[$argument_number])) {
         if (!isset($argument_info['optional']) || !$argument_info['optional']) {
-          return services_error(t('Missing required argument @arg', array('@arg' => $argument_info['name'])), 401);
+          // Send 401 on error for backward compatibility.
+          // To override this behavior with the more appropriate http status
+          // code 400 Bad Request, add this to settings.php:
+          // $conf['services_deprecated_missing_arg_code'] = 400;
+          //
+          // @see See https://www.drupal.org/node/2880909
+          return services_error(
+            t('Missing required argument @arg', array('@arg' => $argument_info['name'])),
+            variable_get('services_deprecated_missing_arg_code', 401)
+          );
         }
         // Set default value or NULL if default value is not set.
         $arguments[$argument_number] = isset($argument_info['default value']) ? $argument_info['default value'] : NULL;

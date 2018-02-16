@@ -1,0 +1,29 @@
+Implementing key providers is, programmatically, very similar to defining <a href="&topic:encrypt/encryption_methods&">encryption methods</a> (or any other <a href="&topic:ctools/plugins-implementing&">ctools plugins</a>, for that matter).
+
+The paramters of a key provider plugin are as follows:
+<dt>title</dt>
+<dd><strong>Required</strong>. The human-readable name for your key provider. This will appear on the Encrypt admin page.</dd>
+<dt>description</dt>
+<dd><strong>Required</strong>. A brief description of your key provider. Also appears in smaller text on the Encrypt admin page.</dd>
+<dt>key callback</dt>
+<dd><strong>Required</strong>. This is the name of a function that you define in your plugin file. This function will be responsible for return an encryption key of some kind.</dd>
+<dt>dependencies</dt>
+<dd>Optional. The name of a function in your plugin file that declares whether or not a key provider's dependencies have been met. The function should return an array of error messages (if there are any) or an empty array or FALSE if all dependencies are met. For example:</dd>
+<dd><pre>
+/**
+ * Callback to see if the Mcrypt library is present.
+ */
+function _encrypt_mcrypt_extension_is_present() {
+  $errors = array();
+
+  if (!function_exists('mcrypt_encrypt')) {
+    $errors[] = t('Mcrypt library not installed.');
+  }
+
+  return $errors;
+}
+</pre></dd>
+<dt>submit callback</dt>
+<dd>Optional. The name of a function that will be called when the encrypt settings form is saved. This allows plugins to perform additional actions when settings are saved. The function should take the $form and $form_state as arguments, just like most other form submit handlers. See the file key provider plugin for an example.</dd>
+<dt>static key</dt>
+<dd>Optional. A boolean value indicating if the key can be stored as a static variable, so that it only needs to be retrieved once per page request. Set this to FALSE if the key provider returns a different key based on a value that is specific to a particular item, such as a node ID or a field's machine name. Defaults to TRUE.</dd>

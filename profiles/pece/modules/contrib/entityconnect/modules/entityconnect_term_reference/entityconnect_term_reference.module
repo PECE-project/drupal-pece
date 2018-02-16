@@ -1,0 +1,109 @@
+<?php
+
+/**
+ * Implements hook_entityconnect_reference_modules_list_alter().
+ */
+function entityconnect_term_reference_entityconnect_field_type_list_alter(&$datas) {
+  $datas[] = 'taxonomy_term_reference';
+}
+
+/**
+ * Implements hook_entityconnect_get_ref_fields_alter().
+ */
+function entityconnect_term_reference_entityconnect_ref_fields_alter(&$ref_fields) {
+  foreach (field_info_fields() as $id => $field) {
+    if ($field['type'] == 'taxonomy_term_reference' && $field['module'] == 'taxonomy') {
+      if (user_access('entityconnect add button') || user_access('entityconnect edit button')) {
+        $ref_fields[$id] = $field;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_entityconnect_field_attach_form_alter().
+ */
+function entityconnect_term_reference_entityconnect_field_attach_form_alter(&$datas) {
+  if ($datas['field']['module'] == 'taxonomy') {
+    $datas['entity_type'] = 'taxonomy_term';
+    // Term reference field allowed only 1 type to be referenced.
+    $datas['acceptable_types'] = $datas['field']['settings']['allowed_values'][0]['vocabulary'];
+  }
+}
+
+function entityconnect_term_reference_entityconnect_child_form_submit_alter(&$datas) {
+
+  $entity_type = $datas['entity_type'];
+  $form_state = $datas['form_state'];
+  $data = &$datas['data'];
+
+  if ($entity_type == 'taxonomy_term') {
+    $data['target_id'] = $form_state['values']['tid'];
+  }
+}
+
+/**
+ * Implements hook_entityconnect_add_info().
+ */
+function entityconnect_term_reference_entityconnect_add_info($cache_id, $entity_type, $acceptable_types) {
+  if (!isset($entity_type)) {
+    throw new \Exception(t('Entity type can not be empty'));
+  }
+
+  $cache = entityconnect_cache_get($cache_id);
+  $field_info = $cache->data['field_info'];
+
+  if (isset($field_info['module']) && $field_info['module'] == 'taxonomy') {
+    if ($entity_type == 'taxonomy_term') {
+      $type = $acceptable_types;
+      $content[$entity_type]['href'] = "admin/structure/taxonomy/$type/add/$cache_id";
+
+      return array(
+        'content' => $content,
+      );
+    }
+  }
+}
+
+/**
+ * Implements hook_entityconnect_add_edit_button_submit_alter().
+ */
+function entityconnect_term_reference_entityconnect_add_edit_button_submit_alter(&$data) {
+
+  $field_info = $data['field_info'];
+  $field_container = $data['field_container'];
+  $key_exists = $data['field_container_key_exists'];
+
+  if ($field_info['module'] == 'taxonomy') {
+    if ($key_exists) {
+      $target_id = NULL;
+      if ($target_id == '' && is_array($field_container)) {
+        foreach ($field_container as $key => $value) {
+          if (is_array($value)) {
+            foreach ($value as $key2 => $value2) {
+              if (!is_null($value2)) {
+                $target_id[$key2] = $value2;
+              }
+            }
+          }
+          else {
+            $target_id = $value;
+          }
+        }
+      }
+    }
+
+    // TODO : Find the original problem of the entity connect use with
+    // Field Collection.
+    if (!empty($target_id) && !is_array($target_id)) {
+      // Take "label (entity id)', match the id from parenthesis.
+      if (preg_match("/.+\((\d+)\)/", $target_id, $matches)) {
+        $target_id = $matches[1];
+      }
+    }
+  }
+
+  if (isset($target_id) && $target_id != '_none') {
+    $data['target_id'] = $target_id;
+  }
+}
