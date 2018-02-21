@@ -41,7 +41,6 @@ projects[token][subdir] = contrib
 ; Overrides panopoly's entity.
 projects[entity][version] = 1.9
 projects[entity][subdir] = contrib
-;projects[entity][patch][2671150] = "https://www.drupal.org/files/issues/entity_id_token-1957266-36.patch"
 
 ; Overrides panopoly's uuid.
 projects[uuid][version] = 1.0-beta1
@@ -199,7 +198,7 @@ projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_core][version] = 1.49
+projects[panopoly_core][version] = 1.50
 projects[panopoly_core][subdir] = contrib
 
 projects[panopoly_images][version] = 1.49
@@ -276,6 +275,7 @@ projects[eck][subdir]  = contrib
 projects[entity_view_mode][version] = 1.0-rc1
 projects[entity_view_mode][subdir] = contrib
 
+; Overrides panopoly's entityreference.
 projects[entityreference][version] = 1.5
 projects[entityreference][subdir] = contrib
 ;projects[entityreference][patch][1836106] = "https://www.drupal.org/files/issues/entityreference_1836106_59.patch"
@@ -344,6 +344,7 @@ projects[linkit][version] = 3.5
 projects[linkit][subdir] = contrib
 projects[linkit][patch][2651404] = https://www.drupal.org/files/issues/linkit-add-to-any-element-2651404-3.patch
 
+; Overrides panopoly's field_group.
 projects[field_group][version] = 1.6
 projects[field_group][subdir] = contrib
 
