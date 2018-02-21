@@ -147,12 +147,7 @@ projects[defaultconfig][patch][1900574] = http://drupal.org/files/1900574.defaul
 projects[login_security][subdir] = contrib
 projects[login_security][version] = 1.9
 
-; AES (with php5-mcrypt support)
-; @TODO: Remove AES module ASAP.
-projects[aes][subdir] = contrib
-projects[aes][version] = 1.10
-
-;Key
+; Key
 projects[key][subdir] = contrib
 projects[key][version] = 3.4
 
