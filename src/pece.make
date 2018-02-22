@@ -238,7 +238,7 @@ projects[panopoly_wysiwyg][version] = 1.49
 projects[panopoly_wysiwyg][subdir] = contrib
 
 projects[panopoly_search][subdir] = contrib
-projects[panopoly_search][version] = 1.49
+projects[panopoly_search][version] = 1.50
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
 
 ; For running the automated tests.
