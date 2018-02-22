@@ -223,7 +223,7 @@ projects[panopoly_widgets][version] = 1.49
 projects[panopoly_widgets][subdir] = contrib
 projects[panopoly_widgets][patch][2919401] = https://www.drupal.org/files/issues/panopoly_widgets-update-tablefield-2919401-3.patch
 
-projects[panopoly_admin][version] = 1.49
+projects[panopoly_admin][version] = 1.50
 projects[panopoly_admin][subdir] = contrib
 
 projects[panopoly_users][version] = 1.49
@@ -259,6 +259,7 @@ projects[radix_views][subdir] = contrib
 ; Interface
 ; =====================
 
+; Overrides panopoly's breakpoints.
 projects[breakpoints][version] = 1.4
 projects[breakpoints][subdir] = contrib
 
