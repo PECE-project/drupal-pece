@@ -201,7 +201,7 @@ projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/
 projects[panopoly_core][version] = 1.50
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.49
+projects[panopoly_images][version] = 1.50
 projects[panopoly_images][subdir] = contrib
 
 ; Panopoly images depending libraries
