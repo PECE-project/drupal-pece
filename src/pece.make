@@ -219,7 +219,8 @@ projects[panopoly_theme][subdir] = contrib
 projects[panopoly_magic][version] = 1.50
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.49
+; Overrides panopoly's panopoly_widgets.
+projects[panopoly_widgets][version] = 1.50
 projects[panopoly_widgets][subdir] = contrib
 projects[panopoly_widgets][patch][2919401] = https://www.drupal.org/files/issues/panopoly_widgets-update-tablefield-2919401-3.patch
 
