@@ -43,7 +43,7 @@ class AmberStatus implements iAmberStatus {
    */
   public function has_cache($url) {
     $prefix = $this->table_prefix;
-    $result = $this->db->selectAll("SELECT * FROM ${prefix}amber_cache WHERE url = %s", array($url));
+    $result = $this->db->selectAll("SELECT * FROM ${prefix}amber_cache WHERE url = %s and message = ''", array($url));
     return count($result) > 0;     
   }
 
@@ -59,7 +59,7 @@ class AmberStatus implements iAmberStatus {
     $prefix = $this->table_prefix;
     $provider_string = implode(', ', array_fill(0, count($provider_types), '%s'));
     $result = $this->db->select(
-      "SELECT * FROM ${prefix}amber_cache WHERE id = %s AND provider in (" . $provider_string . ")", 
+      "SELECT * FROM ${prefix}amber_cache WHERE id = %s AND message = '' AND provider in (" . $provider_string . ")",
       array_merge(array($id), $provider_types));
     return $result;
   }
@@ -144,16 +144,15 @@ class AmberStatus implements iAmberStatus {
   public function save_cache(array $data) {
     $prefix = $this->table_prefix;
 
-    foreach (array('id', 'url', 'location', 'date', 'type', 'size', 'provider', 'provider_id') as $key) {
+    foreach (array('id', 'url', 'location', 'date', 'type', 'size', 'provider', 'provider_id', 'message') as $key) {
       if (!array_key_exists($key,$data)) {
-        error_log(join(":", array(__FILE__, __METHOD__, "Missing required key when updating cache", $key)));
-        return false;
+        $data[$key] = "";
       }
     }
     $result = $this->db->select("SELECT COUNT(id) as count FROM ${prefix}amber_cache WHERE id = %s AND provider = %d", 
                                 array($data['id'], $data['provider']));
     $params = array($data['url'], $data['location'], $data['date'], $data['type'], 
-                    $data['size'], $data['provider'], $data['provider_id'], $data['id']);
+                    $data['size'], $data['provider'], $data['provider_id'], $data['message'],  $data['id']);
     if ($result['count']) {
       $updateQuery = "UPDATE ${prefix}amber_cache " .
                                         'SET ' .
@@ -163,15 +162,16 @@ class AmberStatus implements iAmberStatus {
                                         'type = %s, ' .
                                         'size = %d, ' .
                                         'provider = %d, ' .
-                                        'provider_id = %s ' .
+                                        'provider_id = %s, ' .
+                                        'message = %s ' .
                                         'WHERE id = %s ' .
                                         'AND provider = %d ';
       $params[] = $data['provider'];
       $this->db->update($updateQuery, $params);
     } else {
       $updateQuery = "INSERT into ${prefix}amber_cache " .
-                                        '(url, location, date, type, size,provider, provider_id, id) ' .
-                                        'VALUES(%s, %s, %d, %s, %d, %d, %s, %s)';
+                                        '(url, location, date, type, size, provider, provider_id, message, id) ' .
+                                        'VALUES(%s, %s, %d, %s, %d, %d, %s, %s, %s)';
       $this->db->insert($updateQuery, $params);
     }
     return true;

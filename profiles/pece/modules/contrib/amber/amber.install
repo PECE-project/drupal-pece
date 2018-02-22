@@ -46,6 +46,12 @@ function amber_requirements($phase) {
           $requirements['amber_local']['description'] = $t("The Drupal <a href='@url'>Private file system path</a> must be set to use the local storage method.", array('@url' => url('admin/config/media/file-system')));
         }
       }
+      if (variable_get('amber_backend', AMBER_BACKEND_LOCAL) == AMBER_BACKEND_PERMA) {
+        $requirements['amber_storage'] = array('title' => 'Amber storage');
+        $requirements['amber_storage']['severity'] = REQUIREMENT_ERROR;
+        $requirements['amber_storage']['value'] = $t("Perma cannot be used as a primary storage location");
+        $requirements['amber_storage']['description'] = $t("The use of Perma as a primary storage location has been deprecated. Select a new primary storage location in the <a href='@url'>Amber preferences</a>. Perma may still be used as a secondary storage location", array('@url' => url('admin/config/content/amber')));
+      }
       return $requirements;
       break;
 
@@ -160,12 +166,18 @@ function amber_schema() {
       ),
       'provider' => array(
         'type' => 'int',
+        'not null' => TRUE,
         'description' => 'The id of the storage provider being used',
       ),
       'provider_id' => array(
         'type' => 'varchar',
         'length' => 2000,
         'description' => 'The unique id for the cached data at the selected provider',
+      ),
+      'message' => array(
+        'type' => 'varchar',
+        'length' => 2000,
+        'description' => 'Error message in case the data cannot be cached',
       ),
     ),
     'primary key' => array('id', 'provider'),
@@ -231,3 +243,28 @@ function amber_update_7102() {
   db_add_primary_key('amber_cache', array('id', 'provider'));
 }
 
+/**
+ * Add columns to support status associated with cache attempts
+ */
+function amber_update_7103() {
+  db_add_field('amber_cache', 'message', array(
+    'type' => 'varchar',
+    'length' => 2000,
+    'description' => 'Error message in case the data cannot be cached',
+  ));
+}
+
+/**
+ * Update "provider" column to be not NULL in compliance to MySQL 5.7.
+ */
+function amber_update_7104() {
+  $spec = array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'description' => 'The id of the storage provider being used',
+  );
+  db_drop_primary_key('amber_cache');
+  db_change_field('amber_cache', 'provider', 'provider', $spec, array(
+    'primary key' =>  array('id', 'provider')
+  ));
+}

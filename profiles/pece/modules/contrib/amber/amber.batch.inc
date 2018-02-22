@@ -268,11 +268,12 @@ function _amber_fetch_item($item, $fetcher, $status) {
     $cache_metadata = $fetcher->fetch($item);
   } catch (RuntimeException $re) {
     watchdog('amber', "Did not cache: @url: @message", array('@url' => $item, '@message' => $re->getMessage()), WATCHDOG_NOTICE);
-    $update['message'] = $re->getMessage();
-    $status->save_check($update);
     return FALSE;
   }
   if ($cache_metadata) {
+    if (isset($cache_metadata['message'])) {
+      watchdog('amber', "Did not cache: @url: @message", array('@url' => $item, '@message' => $cache_metadata['message']), WATCHDOG_NOTICE);
+    }
     $status->save_cache($cache_metadata);
     return TRUE;
   }

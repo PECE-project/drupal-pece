@@ -70,26 +70,40 @@ class AmberFetcher implements iAmberFetcher {
     }
 
     if ($this->storage && $root_item) {
-      $result = $this->storage->save($url, $root_item['body'], $root_item['headers'], isset($assets) ? $assets : array());
-      if (!$result) {
-        throw new RuntimeException("Could not save cache");  
+      try {
+        $result = $this->storage->save($url, $root_item['body'], $root_item['headers'], isset($assets) ? $assets : array());
+        if (!$result) {
+          throw new RuntimeException("Could not save cache");
+        }
+        $storage_metadata = $this->storage->get_metadata($url);
+        if (!$storage_metadata || empty($storage_metadata)) {
+          throw new RuntimeException("Could not retrieve metadata");
+        }
+        return array(
+          'id' => $storage_metadata['id'],
+          'url' => $storage_metadata['url'],
+          'type' => isset($storage_metadata['type']) ? $storage_metadata['type'] : 'application/octet-stream',
+          'date' => strtotime($storage_metadata['cache']['amber']['date']),
+          'location' => $storage_metadata['cache']['amber']['location'],
+          'size' => $size,
+          'provider' => $this->storage->provider_id(),
+          'provider_id' => $storage_metadata['id'],
+        );
+      } catch (RuntimeException $e) {
+        /* If there is a problem, return enough information so that the error can be
+           logged appropriately and displayed on the dashboard */
+        return array(
+          'id' => md5($url),
+          'url' => $url,
+          'type' => '',
+          'date' => time(),
+          'location' => '',
+          'size' => 0,
+          'provider' => $this->storage->provider_id(),
+          'provider_id' => '',
+          'message' => $e->getMessage()
+        );
       }
-      $storage_metadata = $this->storage->get_metadata($url);
-      if (!$storage_metadata || empty($storage_metadata)) {
-        throw new RuntimeException("Could not retrieve metadata");   
-      }
-      //TODO: If cannot retrieve storage metadata, or id/url/cache not populated (perhaps due to permissions errors
-      //      in saving the cache), fail more gracefully instead of with errors because the keys are not set
-      return array (
-        'id' => $storage_metadata['id'],
-        'url' => $storage_metadata['url'],
-        'type' => isset($storage_metadata['type']) ? $storage_metadata['type'] : 'application/octet-stream',
-        'date' => strtotime($storage_metadata['cache']['amber']['date']),
-        'location' => $storage_metadata['cache']['amber']['location'],
-        'size' => $size,
-        'provider' => $this->storage->provider_id(),
-        'provider_id' => $storage_metadata['id'],
-      );
     } else {
       throw new RuntimeException("Content empty or could not save to disk");
     }

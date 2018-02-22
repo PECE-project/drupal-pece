@@ -27,20 +27,21 @@ class InternetArchiveFetcher implements iAmberFetcher {
     $ia_result = AmberNetworkUtils::open_single_url($api_endpoint, array(), FALSE);
     /* Make sure that we got a valid response from the Archive */
 
-    if ($ia_result === FALSE) {      
-      throw new RuntimeException(join(":",array("Error submitting to Internet Archive")));
-    }
-    if (isset($ia_result['info']['http_code']) && ($ia_result['info']['http_code'] == 403)) {
-      throw new RuntimeException(join(":",array("Permission denied when submitting to Internet Archive (may be blocked by robots.txt)")));
-    } 
-    if (!isset($ia_result['headers']['Content-Location'])) {
-      throw new RuntimeException("Internet Archive response did not include archive location");  
-    }
+    try {
+      if ($ia_result === FALSE) {
+        throw new RuntimeException(join(":", array("Error submitting to Internet Archive")));
+      }
+      if (isset($ia_result['info']['http_code']) && ($ia_result['info']['http_code'] == 403)) {
+        throw new RuntimeException(join(":", array("Permission denied when submitting to Internet Archive (may be blocked by robots.txt)")));
+      }
+      if (!isset($ia_result['headers']['Content-Location'])) {
+        throw new RuntimeException("Internet Archive response did not include archive location");
+      }
 
-    $location = $ia_result['headers']['Content-Location'];
-    $content_type = isset($ia_result['headers']['X-Archive-Orig-Content-Type']) ? $ia_result['headers']['X-Archive-Orig-Content-Type'] : "";
-    $size = isset($ia_result['headers']['X-Archive-Orig-Content-Length']) ? $ia_result['headers']['X-Archive-Orig-Content-Length'] : 0;
-    $result = array (
+      $location = $ia_result['headers']['Content-Location'];
+      $content_type = isset($ia_result['headers']['X-Archive-Orig-Content-Type']) ? $ia_result['headers']['X-Archive-Orig-Content-Type'] : "";
+      $size = isset($ia_result['headers']['X-Archive-Orig-Content-Length']) ? $ia_result['headers']['X-Archive-Orig-Content-Length'] : 0;
+      $result = array(
         'id' => md5($url),
         'url' => $url,
         'type' => $content_type,
@@ -50,6 +51,22 @@ class InternetArchiveFetcher implements iAmberFetcher {
         'provider' => 2, /* Internet Archive */
         'provider_id' => $location,
       );
+    } catch (RuntimeException $e) {
+      /* If there is a problem, return enough information so that the error can be
+         logged appropriately and displayed on the dashboard */
+      $result = array(
+        'id' => md5($url),
+        'url' => $url,
+        'type' => '',
+        'date' => time(),
+        'location' => '',
+        'size' => 0,
+        'provider' => 2, /* Internet Archive */
+        'provider_id' => '',
+        'message' => $e->getMessage()
+      );
+
+    }
     return $result;
 	}
 

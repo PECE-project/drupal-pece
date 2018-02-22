@@ -49,6 +49,9 @@ function amber_dashboard_summary_form() {
  * Create link to view the capture
  */
 function _amber_get_view_link($row) {
+  if (!isset($row['location']) || !$row['location']) {
+    return "";
+  }
   $p = isset($row['provider']) ? $row['provider'] : AMBER_BACKEND_LOCAL;
   switch ($p) {
     case AMBER_BACKEND_PERMA:
@@ -68,18 +71,15 @@ function _amber_get_view_link($row) {
  * Get the size of the capture
  */
 function _amber_get_size_column($row) {
-  $p = isset($row['provider']) ? $row['provider'] : AMBER_BACKEND_LOCAL;
-  $size = isset($row['size']) ? format_size($row['size']) : (isset($row['message']) ? $row['message'] : "");
-  switch ($p) {
-    case AMBER_BACKEND_PERMA:
-      return "";
-      break;
-    case AMBER_BACKEND_INTERNET_ARCHIVE:
-    case AMBER_BACKEND_AMAZON_S3:
-    case AMBER_BACKEND_LOCAL:
-      return $size;
-      break;
+  $size = "";
+  if (isset($row['message']) && $row['message']) {
+    $size = $row['message'];
+  } else if (isset($row['ca_message']) && $row['ca_message']) {
+    $size = $row['ca_message'];
+  } else if (isset($row['size']) && $row['size']) {
+    $size = format_size($row['size']);
   }
+  return $size;
 }
 
 /**
@@ -138,16 +138,17 @@ function amber_dashboard_detail_form() {
   $rows = array();
   while ($r = $result->fetchAssoc()) {
     $host = parse_url($r['url'], PHP_URL_HOST);
+    $cache_exists = !(isset($r['ca_message']) && $r['ca_message']);
     $rows[] = array(
       'data' => array(
         'site' => "$host (" . l(t('Blacklist'), 'admin/reports/amber/blacklist/' . $host, array('query' => array('destination' => current_path()))) . ")",
         'url' => l($r['url'], $r['url']),
         'status' => $r['status'] ? t('Up') : t('Down'),
         'last_checked' => isset($r['last_checked']) ? format_date($r['last_checked']) : "",
-        'date' => isset($r['date']) ? format_date($r['date']) : "",
+        'date' => isset($r['date']) && $cache_exists ? format_date($r['date']) : "",
         'size' => _amber_get_size_column($r),
-        'a.date' => isset($r['a_date']) ? format_date($r['a_date']) : "",
-        'views' => isset($r['views']) ? $r['views'] : "",
+        'a.date' => isset($r['a_date']) && $cache_exists ? format_date($r['a_date']) : "",
+        'views' => isset($r['views']) && $cache_exists ? $r['views'] : "",
         'method' => _amber_get_method_column($r),
         'view' => _amber_get_view_link($r),
         'delete' => l(t('Delete'), 'admin/reports/amber/delete/' . $r['id'] . "/" . $r['provider'],
@@ -184,7 +185,7 @@ function amber_dashboard_detail_form() {
  */
 function _amber_cache_size() {
   // @ignore sql_count
-  $result = db_query("SELECT COUNT(*) FROM {amber_cache}")->fetchCol();
+  $result = db_query("SELECT COUNT(*) FROM {amber_cache} where message <> ''")->fetchCol();
   return $result[0];
 }
 
@@ -269,22 +270,26 @@ function amber_dashboard_detail_form_export($form, &$form_state) {
     t('Size'),
     t('Last viewed'),
     t('Total views'),
+    t('Method'),
     t('Notes')
   );
 
   $rows = array();
   while ($r = $result->fetchAssoc()) {
     $host = parse_url($r['url'], PHP_URL_HOST);
+    $cache_exists = !(isset($r['ca_message']) && $r['ca_message']);
+
     $rows[] = array(
       'site' => $host,
       'url' => $r['url'],
       'status' => $r['status'] ? t('Up') : t('Down'),
       'last_checked' => isset($r['last_checked']) ? date('c', $r['last_checked']) : "",
-      'date' => isset($r['date']) ? date('c', $r['date']) : "",
-      'size' => $r['size'],
-      'a.date' => isset($r['a_date']) ? date('c', $r['a_date']) : "",
-      'views' => isset($r['views']) ? $r['views'] : 0,
-      'message' => isset($r['message']) ? $r['message'] : ""
+      'date' => isset($r['date']) && $cache_exists ? date('c', $r['date']) : "",
+      'size' => isset($r['size']) && $r['size'] ? $r['size'] : "",
+      'a.date' => isset($r['a_date']) && $cache_exists ? date('c', $r['a_date']) : "",
+      'views' => isset($r['views']) && $cache_exists ? $r['views'] : 0,
+      'method' => _amber_get_method_column($r),
+      'message' => (isset($r['message']) && $r['message']) ? $r['message'] : (isset($r['ca_message']) ? $r['ca_message'] : "")
     );
   }
 
@@ -308,7 +313,7 @@ function _amber_dashboard_detail_query() {
   $query->leftjoin('amber_cache', 'ca', 'ca.id = c.id');
   $query->leftJoin('amber_activity', 'a', 'ca.id = a.id');
   $query = $query->fields('c', array('id', 'url', 'status', 'last_checked', 'message'));
-  $query = $query->fields('ca', array('id', 'date', 'size', 'location', 'provider'));
+  $query = $query->fields('ca', array('id', 'date', 'size', 'location', 'provider', 'message'));
   $query = $query->fields('a', array('id', 'views', 'date'));
   $query->addExpression('substring_index(c.url,\'://\',-1)', 'url_sort');
   return $query;

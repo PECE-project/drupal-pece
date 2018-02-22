@@ -41,7 +41,6 @@ projects[token][subdir] = contrib
 ; Overrides panopoly's entity.
 projects[entity][version] = 1.9
 projects[entity][subdir] = contrib
-;projects[entity][patch][2671150] = "https://www.drupal.org/files/issues/entity_id_token-1957266-36.patch"
 
 ; Overrides panopoly's uuid.
 projects[uuid][version] = 1.0-beta1
@@ -147,12 +146,7 @@ projects[defaultconfig][patch][1900574] = http://drupal.org/files/1900574.defaul
 projects[login_security][subdir] = contrib
 projects[login_security][version] = 1.9
 
-; AES (with php5-mcrypt support)
-; @TODO: Remove AES module ASAP.
-projects[aes][subdir] = contrib
-projects[aes][version] = 1.10
-
-;Key
+; Key
 projects[key][subdir] = contrib
 projects[key][version] = 3.4
 
@@ -204,10 +198,10 @@ projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_core][version] = 1.49
+projects[panopoly_core][version] = 1.50
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.49
+projects[panopoly_images][version] = 1.50
 projects[panopoly_images][subdir] = contrib
 
 ; Panopoly images depending libraries
@@ -219,40 +213,42 @@ libraries[jquery.imgareaselect][download][type] = file
 libraries[jquery.imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v0.9.11-rc.1.tar.gz
 libraries[jquery.imgareaselect][download][subtree] = imgareaselect-0.9.11-rc.1
 
-projects[panopoly_theme][version] = 1.49
+projects[panopoly_theme][version] = 1.50
 projects[panopoly_theme][subdir] = contrib
 
-projects[panopoly_magic][version] = 1.49
+projects[panopoly_magic][version] = 1.50
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.49
+; Overrides panopoly's panopoly_widgets.
+projects[panopoly_widgets][version] = 1.50
 projects[panopoly_widgets][subdir] = contrib
 projects[panopoly_widgets][patch][2919401] = https://www.drupal.org/files/issues/panopoly_widgets-update-tablefield-2919401-3.patch
 
-projects[panopoly_admin][version] = 1.49
+projects[panopoly_admin][version] = 1.50
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_users][version] = 1.49
+projects[panopoly_users][version] = 1.50
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.49
+projects[panopoly_pages][version] = 1.50
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_wysiwyg][version] = 1.49
+projects[panopoly_wysiwyg][version] = 1.50
 projects[panopoly_wysiwyg][subdir] = contrib
 
 projects[panopoly_search][subdir] = contrib
-projects[panopoly_search][version] = 1.49
+projects[panopoly_search][version] = 1.50
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.49
+projects[panopoly_test][version] = 1.50
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
 projects[radix_layouts][version] = 3.4
 projects[radix_layouts][subdir] = contrib
+
 projects[radix_views][version] = 1.0
 projects[radix_views][subdir] = contrib
 
@@ -265,6 +261,7 @@ projects[radix_views][subdir] = contrib
 ; Interface
 ; =====================
 
+; Overrides panopoly's breakpoints.
 projects[breakpoints][version] = 1.4
 projects[breakpoints][subdir] = contrib
 
@@ -281,6 +278,7 @@ projects[eck][subdir]  = contrib
 projects[entity_view_mode][version] = 1.0-rc1
 projects[entity_view_mode][subdir] = contrib
 
+; Overrides panopoly's entityreference.
 projects[entityreference][version] = 1.5
 projects[entityreference][subdir] = contrib
 ;projects[entityreference][patch][1836106] = "https://www.drupal.org/files/issues/entityreference_1836106_59.patch"
@@ -349,6 +347,7 @@ projects[linkit][version] = 3.5
 projects[linkit][subdir] = contrib
 projects[linkit][patch][2651404] = https://www.drupal.org/files/issues/linkit-add-to-any-element-2651404-3.patch
 
+; Overrides panopoly's field_group.
 projects[field_group][version] = 1.6
 projects[field_group][subdir] = contrib
 
@@ -492,7 +491,8 @@ projects[pdf_reader][patch][] = "./patches/pdf_reader-keydown_event_page_error.p
 
 ; Amber
 projects[amber][subdir] = contrib
-projects[amber][version] = 1.0
+projects[amber][version] = 1.x-dev
+projects[amber][patch][] = "https://www.drupal.org/files/issues/amber-mysql5.7_compatibility-2945946-4.patch"
 
 ; Backup and Migrate
 projects[backup_migrate][subdir] = contrib
