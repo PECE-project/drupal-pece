@@ -42,6 +42,12 @@ function pece_photo_essay_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'mini_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -88,6 +94,83 @@ function pece_photo_essay_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-pece_photo_essay-field_pece_authors'.
+  $field_instances['node-pece_photo_essay-field_pece_authors'] = array(
+    'bundle' => 'pece_photo_essay',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 8,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+      'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'node',
+    'fences_wrapper' => 'div',
+    'field_name' => 'field_pece_authors',
+    'label' => 'Author(s)',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-pece_photo_essay-field_pece_contributors'.
   $field_instances['node-pece_photo_essay-field_pece_contributors'] = array(
     'bundle' => 'pece_photo_essay',
@@ -105,6 +188,7 @@ function pece_photo_essay_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
@@ -117,6 +201,12 @@ function pece_photo_essay_field_default_field_instances() {
         'weight' => 7,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -202,6 +292,12 @@ function pece_photo_essay_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'mini_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -250,6 +346,7 @@ function pece_photo_essay_field_default_field_instances() {
         'module' => 'er_viewmode',
         'settings' => array(
           'links' => 0,
+          'use_content_language' => TRUE,
           'view_mode' => 'default',
         ),
         'type' => 'entityreference_entity_view',
@@ -260,6 +357,7 @@ function pece_photo_essay_field_default_field_instances() {
         'module' => 'er_viewmode',
         'settings' => array(
           'links' => 0,
+          'use_content_language' => TRUE,
           'view_mode' => 'default',
         ),
         'type' => 'entityreference_entity_view',
@@ -270,6 +368,7 @@ function pece_photo_essay_field_default_field_instances() {
         'module' => 'er_viewmode',
         'settings' => array(
           'links' => 0,
+          'use_content_language' => TRUE,
           'view_mode' => 'default',
         ),
         'type' => 'entityreference_entity_view',
@@ -281,11 +380,18 @@ function pece_photo_essay_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'mini_teaser' => array(
         'label' => 'hidden',
         'module' => 'er_viewmode',
         'settings' => array(
           'links' => 0,
+          'use_content_language' => TRUE,
           'view_mode' => 'default',
         ),
         'type' => 'entityreference_entity_view',
@@ -369,6 +475,12 @@ function pece_photo_essay_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'mini_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -435,6 +547,12 @@ function pece_photo_essay_field_default_field_instances() {
         'weight' => 4,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -520,6 +638,12 @@ function pece_photo_essay_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'mini_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -592,6 +716,12 @@ function pece_photo_essay_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -719,6 +849,12 @@ function pece_photo_essay_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'mini_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -791,6 +927,12 @@ function pece_photo_essay_field_default_field_instances() {
         'weight' => 3,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -912,6 +1054,7 @@ function pece_photo_essay_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => 1,
         ),
         'type' => 'entityreference_label',
@@ -951,6 +1094,7 @@ function pece_photo_essay_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Author(s)');
   t('Contributors');
   t('Description');
   t('Group content visibility');
