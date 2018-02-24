@@ -9,8 +9,10 @@
 .view-mode-teaser .icon,
 .view-mode-most-recent .icon,
 .view-mode-mini-teaser .icon,
-.view-mode-meta-content .icon,
 .view-pece-structured-analytics i { background-color: #c14300; }
+
+.view-mode-meta-content .icon,
+.view-mode-meta-content .icon::before { color: #c14300; }
 
 .essay-link,
 .annotate-link,
@@ -23,6 +25,8 @@
 
 .dashboard-artifact-submenu .dashboard-artifact-toggle::before { color: #c14300; }
 
+.view-display-id-pece_question_artifact_annotions .views-field-picture::before,
+.view-display-id-pece_user_artifact_annotations .views-field-picture::before,
 .view-id-pece_my_noted_artifacts li.views-row > div::before,
 .view-id-pece_my_analytics li.views-row > div::before,
 .view-pece-my-biblio-items li.views-row > div::before,
@@ -30,4 +34,4 @@
 .view-pece-my-fieldsites li.views-row > div::before,
 .view-id-pece_my_groups li.views-row > div::before { background-color: #c14300; }
 
-.entity-pece-photo-essay-item h3 a  { color: #c14300 }
+.entity-pece-photo-essay-item h3 a, .view-mode-meta-content h5 a  { color: #c14300 }
