@@ -74,6 +74,7 @@ function pece_essay_defaultconfig_user_default_permissions() {
     'name' => 'edit any pece_essay content',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
