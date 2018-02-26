@@ -48,7 +48,6 @@ function pece_photo_essay_user_default_permissions() {
     'name' => 'edit any pece_photo_essay content',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
