@@ -278,7 +278,9 @@ function pece_core_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(),
+    'settings' => array(
+      'profile2_private' => FALSE,
+    ),
     'translatable' => 0,
     'type' => 'text_long',
   );
@@ -338,6 +340,44 @@ function pece_core_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_pece_language'.
+  $field_bases['field_pece_language'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_pece_language',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'languagefield',
+    'settings' => array(
+      'enabled' => array(
+        1 => 1,
+        2 => 0,
+        3 => 0,
+        'authors_default' => 0,
+        'current_interface' => 0,
+        'site_default' => 0,
+        'und' => 0,
+      ),
+      'excluded_languages' => array(),
+      'format' => array(
+        'iso' => 0,
+        'name' => 'name',
+        'name_native' => 0,
+      ),
+      'groups' => '',
+      'languages' => array(),
+      'profile2_private' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'language_field',
   );
 
   // Exported field_base: 'field_pece_license'.
