@@ -21,7 +21,7 @@ function pece_artifacts_audio_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Metadata',
-    'weight' => '20',
+    'weight' => '15',
     'children' => array(
       0 => 'field_pece_location',
       1 => 'field_pece_media_duration',
@@ -50,8 +50,8 @@ function pece_artifacts_audio_field_group_info() {
     'label' => 'Group settings',
     'weight' => '5',
     'children' => array(
-      0 => 'og_group_ref',
-      1 => 'group_content_access',
+      0 => 'group_content_access',
+      1 => 'og_group_ref',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

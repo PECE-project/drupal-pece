@@ -92,17 +92,32 @@ function pece_artifacts_audio_strongarm() {
       'pece_fieldsite_reference' => array(
         'custom_settings' => FALSE,
       ),
+      'mini_teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'most_recent' => array(
+        'custom_settings' => TRUE,
+      ),
+      'free_panel' => array(
+        'custom_settings' => TRUE,
+      ),
+      'card' => array(
+        'custom_settings' => TRUE,
+      ),
+      'meta_content' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
-          'weight' => '16',
+          'weight' => '18',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '15',
+          'weight' => '17',
         ),
       ),
       'display' => array(),
