@@ -42,9 +42,7 @@ function pece_artifacts_text_defaultconfig_user_default_permissions() {
   // Exported permission: 'edit any pece_artifact_text content'.
   $permissions['edit any pece_artifact_text content'] = array(
     'name' => 'edit any pece_artifact_text content',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 

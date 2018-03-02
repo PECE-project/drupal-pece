@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the pece_artifacts_text module.
+ */
+
+/**
+ * Update Text artifact permissions for authenticated users.
+ */
+function pece_artifacts_text_update_7001() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  $text_artifact_permissions = array(
+    'authenticated user' => array(
+      'edit any pece_artifact_text content' => FALSE
+    )
+  );
+
+  pece_set_permissions($text_artifact_permissions);
+}
