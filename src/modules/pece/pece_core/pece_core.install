@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the pece_core module.
+ */
+
+/**
+ * Update Fieldsite content default permissions.
+ */
+function pece_core_update_7001() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  $fieldsite_permissions = array(
+    'authenticated user' => array(
+      'edit any pece_fieldsite content' => FALSE
+    )
+  );
+
+  pece_set_permissions($fieldsite_permissions);
+}
+
