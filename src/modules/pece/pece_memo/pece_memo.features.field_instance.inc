@@ -55,6 +55,12 @@ function pece_memo_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'mini_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -126,6 +132,12 @@ function pece_memo_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'mini_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -148,7 +160,7 @@ function pece_memo_field_default_field_instances() {
     'entity_type' => 'node',
     'fences_wrapper' => 'div',
     'field_name' => 'field_pece_authors',
-    'label' => 'Author(s)',
+    'label' => 'Creator(s)',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -182,6 +194,7 @@ function pece_memo_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
@@ -194,6 +207,12 @@ function pece_memo_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -279,6 +298,12 @@ function pece_memo_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'mini_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -342,6 +367,12 @@ function pece_memo_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -413,6 +444,12 @@ function pece_memo_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -498,6 +535,12 @@ function pece_memo_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'mini_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -570,6 +613,12 @@ function pece_memo_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'mini_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -632,6 +681,7 @@ function pece_memo_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
@@ -644,6 +694,12 @@ function pece_memo_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -703,9 +759,9 @@ function pece_memo_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Author(s)');
   t('Body');
   t('Contributors');
+  t('Creator(s)');
   t('Group content visibility');
   t('Groups audience');
   t('License');
