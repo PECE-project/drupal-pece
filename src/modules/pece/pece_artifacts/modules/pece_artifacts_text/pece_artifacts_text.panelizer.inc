@@ -414,6 +414,72 @@ function pece_artifacts_text_panelizer_defaults() {
   $display->content['new-9d045da6-f11e-4578-8891-fea90aec1786'] = $pane;
   $display->panels['column2'][4] = 'new-9d045da6-f11e-4578-8891-fea90aec1786';
   $pane = new stdClass();
+  $pane->pid = 'new-2b5b13fd-2038-4b74-845a-4b40c001c09f';
+  $pane->panel = 'column2';
+  $pane->type = 'entity_field';
+  $pane->subtype = 'node:field_pece_source';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'label' => 'title',
+    'formatter' => 'text_default',
+    'delta_limit' => 0,
+    'delta_offset' => '0',
+    'delta_reversed' => FALSE,
+    'formatter_settings' => array(),
+    'context' => array(),
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 5;
+  $pane->locks = array();
+  $pane->uuid = '2b5b13fd-2038-4b74-845a-4b40c001c09f';
+  $display->content['new-2b5b13fd-2038-4b74-845a-4b40c001c09f'] = $pane;
+  $display->panels['column2'][5] = 'new-2b5b13fd-2038-4b74-845a-4b40c001c09f';
+  $pane = new stdClass();
+  $pane->pid = 'new-2df4adfe-53e5-4bb5-b794-5e6e072d4de6';
+  $pane->panel = 'column2';
+  $pane->type = 'entity_field';
+  $pane->subtype = 'node:field_pece_language';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'label' => 'title',
+    'formatter' => 'language_default',
+    'delta_limit' => 0,
+    'delta_offset' => '0',
+    'delta_reversed' => FALSE,
+    'formatter_settings' => array(
+      'format' => array(
+        'name' => 'name',
+        'iso' => 0,
+        'name_native' => 0,
+      ),
+    ),
+    'context' => array(),
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 6;
+  $pane->locks = array();
+  $pane->uuid = '2df4adfe-53e5-4bb5-b794-5e6e072d4de6';
+  $display->content['new-2df4adfe-53e5-4bb5-b794-5e6e072d4de6'] = $pane;
+  $display->panels['column2'][6] = 'new-2df4adfe-53e5-4bb5-b794-5e6e072d4de6';
+  $pane = new stdClass();
   $pane->pid = 'new-4bb2d2f2-cdd7-4215-bcce-e5605514d91f';
   $pane->panel = 'column2';
   $pane->type = 'entity_field';
@@ -438,11 +504,11 @@ function pece_artifacts_text_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 5;
+  $pane->position = 7;
   $pane->locks = array();
   $pane->uuid = '4bb2d2f2-cdd7-4215-bcce-e5605514d91f';
   $display->content['new-4bb2d2f2-cdd7-4215-bcce-e5605514d91f'] = $pane;
-  $display->panels['column2'][5] = 'new-4bb2d2f2-cdd7-4215-bcce-e5605514d91f';
+  $display->panels['column2'][7] = 'new-4bb2d2f2-cdd7-4215-bcce-e5605514d91f';
   $pane = new stdClass();
   $pane->pid = 'new-4edb92fb-9e4f-4090-abf3-3fbfcbf361ea';
   $pane->panel = 'column2';
@@ -465,11 +531,11 @@ function pece_artifacts_text_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 6;
+  $pane->position = 8;
   $pane->locks = array();
   $pane->uuid = '4edb92fb-9e4f-4090-abf3-3fbfcbf361ea';
   $display->content['new-4edb92fb-9e4f-4090-abf3-3fbfcbf361ea'] = $pane;
-  $display->panels['column2'][6] = 'new-4edb92fb-9e4f-4090-abf3-3fbfcbf361ea';
+  $display->panels['column2'][8] = 'new-4edb92fb-9e4f-4090-abf3-3fbfcbf361ea';
   $pane = new stdClass();
   $pane->pid = 'new-4f030fd6-7936-4e3e-87d7-987bd0f00e9d';
   $pane->panel = 'column2';
@@ -492,11 +558,11 @@ function pece_artifacts_text_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 7;
+  $pane->position = 9;
   $pane->locks = array();
   $pane->uuid = '4f030fd6-7936-4e3e-87d7-987bd0f00e9d';
   $display->content['new-4f030fd6-7936-4e3e-87d7-987bd0f00e9d'] = $pane;
-  $display->panels['column2'][7] = 'new-4f030fd6-7936-4e3e-87d7-987bd0f00e9d';
+  $display->panels['column2'][9] = 'new-4f030fd6-7936-4e3e-87d7-987bd0f00e9d';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-4bb2d2f2-cdd7-4215-bcce-e5605514d91f';
   $panelizer->display = $display;
