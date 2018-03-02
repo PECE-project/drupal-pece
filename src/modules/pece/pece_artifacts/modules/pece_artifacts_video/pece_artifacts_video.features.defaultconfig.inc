@@ -42,9 +42,7 @@ function pece_artifacts_video_defaultconfig_user_default_permissions() {
   // Exported permission: 'edit any pece_artifact_video content'.
   $permissions['edit any pece_artifact_video content'] = array(
     'name' => 'edit any pece_artifact_video content',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
