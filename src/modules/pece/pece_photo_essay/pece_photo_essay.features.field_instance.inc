@@ -154,7 +154,7 @@ function pece_photo_essay_field_default_field_instances() {
     'entity_type' => 'node',
     'fences_wrapper' => 'div',
     'field_name' => 'field_pece_authors',
-    'label' => 'Author(s)',
+    'label' => 'Creator(s)',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -1094,8 +1094,8 @@ function pece_photo_essay_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Author(s)');
   t('Contributors');
+  t('Creator(s)');
   t('Description');
   t('Group content visibility');
   t('Groups audience');
