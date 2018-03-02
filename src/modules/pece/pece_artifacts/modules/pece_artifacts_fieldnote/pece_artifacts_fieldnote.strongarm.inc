@@ -114,7 +114,7 @@ function pece_artifacts_fieldnote_strongarm() {
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '0',
+          'weight' => '14',
         ),
       ),
       'display' => array(),
