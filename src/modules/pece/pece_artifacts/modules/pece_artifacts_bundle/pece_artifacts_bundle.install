@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the pece_artifacts_bundle module.
+ */
+
+/**
+ * Update Artifact bundle permissions for authenticated users.
+ */
+function pece_artifacts_bundle_update_7001() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  $artifact_bundle_permissions = array(
+    'authenticated user' => array(
+      'edit any pece_artifact_bundle content' => FALSE
+    )
+  );
+
+  pece_set_permissions($artifact_bundle_permissions);
+}
