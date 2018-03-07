@@ -15,7 +15,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
     'bundle' => 'pece_artifact_pdf',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Who created this artifact?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -92,7 +92,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
     'bundle' => 'pece_artifact_pdf',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Who is contributing this artifact to the platform?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -148,6 +148,16 @@ function pece_artifacts_pdf_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'entityconnect' => array(
+      'button' => array(
+        'unload_add_button' => 1,
+        'unload_edit_button' => 1,
+      ),
+      'icon' => array(
+        'show_add_icon' => 0,
+        'show_edit_icon' => 0,
+      ),
+    ),
     'fences_wrapper' => 'div',
     'field_name' => 'field_pece_contributors',
     'label' => 'Contributors',
@@ -175,7 +185,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
     'bundle' => 'pece_artifact_pdf',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Why is this artifact important? How is it relevant to this project?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -340,7 +350,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
     'bundle' => 'pece_artifact_pdf',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'In what language is this artifact?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -686,7 +696,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
     'bundle' => 'pece_artifact_pdf',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Where did you find this artifact?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -1278,6 +1288,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
   t('Fieldsite');
   t('Group content visibility');
   t('Groups audience');
+  t('In what language is this artifact?');
   t('Language');
   t('License');
   t('Location');
@@ -1287,6 +1298,10 @@ function pece_artifacts_pdf_field_default_field_instances() {
   t('Tags');
   t('URI');
   t('Use fieldsite\'s location');
+  t('Where did you find this artifact?');
+  t('Who created this artifact?');
+  t('Who is contributing this artifact to the platform?');
+  t('Why is this artifact important? How is it relevant to this project?');
 
   return $field_instances;
 }
