@@ -100,7 +100,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
     'bundle' => 'pece_artifact_bundle',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Who created this artifact?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -178,7 +178,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
     'bundle' => 'pece_artifact_bundle',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Who is contributing this artifact to the platform?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -270,7 +270,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
     'bundle' => 'pece_artifact_bundle',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Why is this artifact important? How is it relevant to this project?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -1099,6 +1099,9 @@ function pece_artifacts_bundle_field_default_field_instances() {
   t('Tags');
   t('URI');
   t('Use fieldsite\'s location');
+  t('Who created this artifact?');
+  t('Who is contributing this artifact to the platform?');
+  t('Why is this artifact important? How is it relevant to this project?');
 
   return $field_instances;
 }
