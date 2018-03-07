@@ -15,7 +15,7 @@ function pece_artifacts_audio_field_default_field_instances() {
     'bundle' => 'pece_artifact_audio',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Who created this artifact?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -93,7 +93,7 @@ function pece_artifacts_audio_field_default_field_instances() {
     'bundle' => 'pece_artifact_audio',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Who is contributing this artifact to the platform?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -186,7 +186,7 @@ function pece_artifacts_audio_field_default_field_instances() {
     'bundle' => 'pece_artifact_audio',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Why is this artifact important? How is it relevant to this project?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -351,7 +351,7 @@ function pece_artifacts_audio_field_default_field_instances() {
     'bundle' => 'pece_artifact_audio',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'In what file format is this artifact?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -434,7 +434,7 @@ function pece_artifacts_audio_field_default_field_instances() {
     'bundle' => 'pece_artifact_audio',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'In what language is this artifact?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -867,7 +867,7 @@ function pece_artifacts_audio_field_default_field_instances() {
     'bundle' => 'pece_artifact_audio',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Where did you find this artifact?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -926,9 +926,9 @@ function pece_artifacts_audio_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'linkit' => array(
-        'button_text' => 'Add Link',
+        'button_text' => 'Search',
         'enable' => 0,
-        'profile' => 'pece_linkit_base',
+        'profile' => '',
       ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
@@ -1458,6 +1458,8 @@ function pece_artifacts_audio_field_default_field_instances() {
   t('Format');
   t('Group content visibility');
   t('Groups audience');
+  t('In what file format is this artifact?');
+  t('In what language is this artifact?');
   t('Language');
   t('License');
   t('Location');
@@ -1466,6 +1468,10 @@ function pece_artifacts_audio_field_default_field_instances() {
   t('Tags');
   t('URI');
   t('Use fieldsite\'s location');
+  t('Where did you find this artifact?');
+  t('Who created this artifact?');
+  t('Who is contributing this artifact to the platform?');
+  t('Why is this artifact important? How is it relevant to this project?');
 
   return $field_instances;
 }
