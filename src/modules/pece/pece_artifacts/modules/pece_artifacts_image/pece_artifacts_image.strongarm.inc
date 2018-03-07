@@ -99,7 +99,7 @@ function pece_artifacts_image_strongarm() {
           'weight' => '17',
         ),
         'title' => array(
-          'weight' => '1',
+          'weight' => '0',
         ),
         'path' => array(
           'weight' => '16',
