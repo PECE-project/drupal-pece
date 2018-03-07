@@ -112,7 +112,7 @@ function pece_artifacts_text_field_default_field_instances() {
     'bundle' => 'pece_artifact_text',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Who created this artifact?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -189,7 +189,7 @@ function pece_artifacts_text_field_default_field_instances() {
     'bundle' => 'pece_artifact_text',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Who is contributing this artifact to the platform?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -281,7 +281,7 @@ function pece_artifacts_text_field_default_field_instances() {
     'bundle' => 'pece_artifact_text',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Why is this artifact important? How is it relevant to this project?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -444,7 +444,7 @@ function pece_artifacts_text_field_default_field_instances() {
     'bundle' => 'pece_artifact_text',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'In what language is this artifact?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -674,7 +674,7 @@ function pece_artifacts_text_field_default_field_instances() {
     'bundle' => 'pece_artifact_text',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Where did you find this artifact?',
     'display' => array(
       'card' => array(
         'label' => 'above',
@@ -1262,6 +1262,7 @@ function pece_artifacts_text_field_default_field_instances() {
   t('Fieldsite');
   t('Group content visibility');
   t('Groups audience');
+  t('In what language is this artifact?');
   t('Language');
   t('License');
   t('Location');
@@ -1271,6 +1272,10 @@ function pece_artifacts_text_field_default_field_instances() {
   t('Text');
   t('URI');
   t('Use fieldsite\'s location');
+  t('Where did you find this artifact?');
+  t('Who created this artifact?');
+  t('Who is contributing this artifact to the platform?');
+  t('Why is this artifact important? How is it relevant to this project?');
 
   return $field_instances;
 }
