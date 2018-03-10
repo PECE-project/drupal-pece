@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the pece_artifacts_website module.
+ */
+
+/**
+ * Update Website artifact permissions for authenticated users.
+ */
+function pece_artifacts_website_update_7001() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  $website_artifact_permissions = array(
+    'authenticated user' => array(
+      'edit any pece_artifact_website content' => FALSE
+    )
+  );
+
+  pece_set_permissions($website_artifact_permissions);
+}

@@ -122,7 +122,7 @@ function pece_scholarly_lite_add_extra_styles() {
   }
   if ($color_scheme == 'gray-purple') {
     // Apply PECE's default overrides on gray-purple scheme.
-    drupal_add_css(drupal_get_path('theme', 'pece_scholarly_lite') . '/assets/css/pece_header_override.css', array('group' => CSS_THEME, 'type' => 'file'));
+    drupal_add_css(drupal_get_path('theme', 'pece_scholarly_lite') . '/assets/css/header_override.css', array('group' => CSS_THEME, 'type' => 'file'));
   } else {
     // Adds PECE extra styles over base theme schemes.
     drupal_add_css(drupal_get_path('theme', 'pece_scholarly_lite') . '/assets/overrides/scheme_overrides.' . $color_scheme . '.css', array('group' => CSS_THEME, 'type' => 'file'));

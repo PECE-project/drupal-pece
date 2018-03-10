@@ -351,6 +351,9 @@ projects[linkit][patch][2651404] = https://www.drupal.org/files/issues/linkit-ad
 projects[field_group][version] = 1.6
 projects[field_group][subdir] = contrib
 
+projects[languagefield[version] = 1.7
+projects[languagefield][subdir] = contrib
+
 ; =====================
 ; Search
 ; =====================

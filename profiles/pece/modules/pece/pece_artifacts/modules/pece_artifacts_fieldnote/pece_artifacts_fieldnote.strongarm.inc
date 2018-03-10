@@ -108,13 +108,13 @@ function pece_artifacts_fieldnote_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
-          'weight' => '13',
+          'weight' => '15',
         ),
         'title' => array(
-          'weight' => '1',
+          'weight' => '0',
         ),
         'path' => array(
-          'weight' => '0',
+          'weight' => '14',
         ),
       ),
       'display' => array(),

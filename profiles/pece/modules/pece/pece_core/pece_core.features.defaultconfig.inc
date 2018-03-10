@@ -80,9 +80,7 @@ function pece_core_defaultconfig_user_default_permissions() {
   // Exported permission: 'edit any pece_fieldsite content'.
   $permissions['edit any pece_fieldsite content'] = array(
     'name' => 'edit any pece_fieldsite content',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 

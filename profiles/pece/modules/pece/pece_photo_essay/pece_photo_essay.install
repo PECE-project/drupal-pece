@@ -49,6 +49,8 @@ function _pece_photo_essay_install_permissions() {
   }
 
   pece_set_permissions($photo_essay_permissions);
+
+  pece_photo_essay_update_7002();
 }
 
 /**
@@ -132,4 +134,17 @@ function pece_photo_essay_update_7001() {
       drush_print('Deleted field field_pece_authors from pece_photo_essay node types.');
     }
   }
+}
+
+/**
+ * Update Photo Essay permissions for authenticated user.
+ */
+function pece_photo_essay_update_7002() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  $photo_essay_permissions = array(
+    'authenticated user' => array('edit any pece_photo_essay content' => TRUE),
+  );
+
+  pece_set_permissions($photo_essay_permissions);
 }

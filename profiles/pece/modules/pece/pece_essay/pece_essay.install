@@ -41,3 +41,13 @@ function pece_essay_update_7001() {
 function pece_essay_update_7002() {
   _pece_essay_install_permissions();
 }
+
+/**
+ * Resets users defaults permissions.
+ */
+function pece_essay_update_7003() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  // Revert all default config.
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_essay');
+}

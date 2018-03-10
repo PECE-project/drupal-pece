@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the pece_artifacts_video module.
+ */
+
+/**
+ * Update Video artifact permissions for authenticated users.
+ */
+function pece_artifacts_video_update_7001() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  $video_artifact_permissions = array(
+    'authenticated user' => array(
+      'edit any pece_artifact_video content' => FALSE
+    )
+  );
+
+  pece_set_permissions($video_artifact_permissions);
+}

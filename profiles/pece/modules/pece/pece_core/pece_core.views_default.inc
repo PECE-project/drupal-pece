@@ -252,7 +252,7 @@ function pece_core_views_default_views() {
   $handler->display->display_options['filters']['rid']['field'] = 'rid';
   $handler->display->display_options['filters']['rid']['value'] = array(
     5 => '5',
-    6 => '6'
+    6 => '6',
   );
 
   /* Display: All users */
@@ -324,6 +324,7 @@ function pece_core_views_default_views() {
     t('last »'),
     t('Researcher'),
     t('Contributor'),
+    t('Contributor & Researcher'),
     t('All users'),
     t('People'),
     t('Show More'),
