@@ -413,7 +413,7 @@ function pece_essay_panelizer_defaults() {
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'title',
-    'formatter' => 'entityreference_label',
+    'formatter' => 'og_list_default',
     'delta_limit' => '0',
     'delta_offset' => '0',
     'delta_reversed' => 0,
