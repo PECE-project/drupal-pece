@@ -33,7 +33,7 @@ function pece_essay_custom_heading_pane_edit_form($form, &$form_state) {
   $form['custom_heading'] = array(
     '#type' => 'textfield',
     '#title' => t('Heading'),
-    '#default_value' => $form_state['values']['custom_heading'],
+    '#default_value' => $form_state['conf']['custom_heading'],
   );
 
   return $form;
