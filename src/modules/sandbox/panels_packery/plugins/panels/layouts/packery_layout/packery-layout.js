@@ -8,7 +8,9 @@
 Drupal.behaviors.panelsPackery = {
   attach: function (context, settings) {
     $.each(settings.packery || {}, function (selector, config) {
-      $(selector, context).each(initializePackery(config));
+      $(selector, context).imagesLoaded().always(function(){
+        $(selector, context).each(initializePackery(config));
+      });
     });
   }
 };
