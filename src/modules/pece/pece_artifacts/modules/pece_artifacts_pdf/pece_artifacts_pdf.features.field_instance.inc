@@ -21,7 +21,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 11,
       ),
       'default' => array(
         'label' => 'above',
@@ -98,7 +98,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 10,
       ),
       'default' => array(
         'label' => 'above',
@@ -188,9 +188,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
     'description' => 'Why is this artifact important? How is it relevant to this project?',
     'display' => array(
       'card' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 300,
+        ),
+        'type' => 'text_trimmed',
         'weight' => 0,
       ),
       'default' => array(
@@ -274,7 +277,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 12,
       ),
       'default' => array(
         'label' => 'above',
@@ -356,7 +359,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 8,
       ),
       'default' => array(
         'label' => 'above',
@@ -438,7 +441,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 14,
       ),
       'default' => array(
         'label' => 'above',
@@ -513,7 +516,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 13,
       ),
       'default' => array(
         'label' => 'above',
@@ -586,7 +589,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'default' => array(
         'label' => 'above',
@@ -702,7 +705,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 7,
       ),
       'default' => array(
         'label' => 'above',
@@ -784,7 +787,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 9,
       ),
       'default' => array(
         'label' => 'above',
@@ -862,7 +865,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
       ),
       'default' => array(
         'label' => 'above',
@@ -950,7 +953,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'default' => array(
         'label' => 'above',
@@ -1030,7 +1033,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'default' => array(
         'label' => 'above',
@@ -1108,7 +1111,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 5,
       ),
       'default' => array(
         'label' => 'above',
@@ -1191,7 +1194,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 6,
       ),
       'default' => array(
         'label' => 'above',
