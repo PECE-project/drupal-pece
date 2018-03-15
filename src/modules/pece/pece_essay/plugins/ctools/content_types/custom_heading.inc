@@ -59,7 +59,7 @@ function pece_essay_custom_heading_pane_render($subtype, $conf, $args, $context)
       '#theme' => 'html_tag',
       '#tag' => 'h2',
       '#value' => $conf['custom_heading'],
-      'attributes' => array(
+      '#attributes' => array(
         'class' => array('essay-heading'),
       ),
     ),
