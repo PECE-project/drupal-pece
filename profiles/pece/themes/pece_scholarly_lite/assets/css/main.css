@@ -1062,7 +1062,7 @@ th label {
   width: auto; }
 
 .form-item {
-  position: relative; }
+  position: inherit; }
 
 html.js input.form-autocomplete {
   background-position: 98% center; }
@@ -1441,8 +1441,27 @@ i.pece_memo::before {
  * PECE Card node styles
  *------------------------------------------------------------------------------
  */
+.view-mode-card.node-pece-artifact-pdf h5 {
+  display: inline-block;
+  padding-left: 20px;
+  margin: 0;
+  vertical-align: middle; }
+
+.view-mode-card.node-pece-artifact-pdf span {
+  display: inline-block;
+  width: calc(100% - 75px); }
+
+.view-mode-card.node-pece-artifact-pdf .content {
+  padding-top: 15px; }
+
 .view-mode-card .icon.image::before {
   display: none; }
+
+.view-mode-card .icon.pdf {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  line-height: 70px; }
 
 .view-mode-card .file-image img {
   margin: 0;
@@ -1464,6 +1483,8 @@ i.pece_memo::before {
   text-decoration: none; }
   .view-mode-card .icon:before {
     font-size: 30px; }
+  .view-mode-card .icon.pdf:before {
+    font-size: 18px; }
 
 .view-mode-card a.icon:hover {
   opacity: 0.8; }
@@ -2274,6 +2295,33 @@ i.pece_memo::before {
 .pane-node-field-pece-struct-analytics div.field-name-field-pece-struct-analytics {
   display: inline-block;
   margin-right: .2rem; }
+
+/*
+ *------------------------------------------------------------------------------
+ * Essay Content heading pane styles
+ *------------------------------------------------------------------------------
+ */
+/*------------------------------------------------------------------------------
+ * Color Definitions
+ *------------------------------------------------------------------------------
+ * Use this file to set color variables & functions.
+ *
+ * Before starting to define your color variables, I'll advise you: colors
+ * (maybe more then other kind of variables in Sass) can get really trick and
+ * messed up after some time, mostly because they tend to change a lot during
+ * development. To help you make better decisions, I would advise you to read
+ * the followng articles:
+ *
+ * - http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-name-your-sass-variables-modularly/
+ * - http://sachagreif.com/sass-color-variables/
+ */
+/*------------------------------------------------------------------------------
+ * Color Maps
+ *------------------------------------------------------------------------------
+ */
+.essay-heading {
+  border-bottom: 2px solid #999999;
+  padding-bottom: .3em; }
 
 /*
  *------------------------------------------------------------------------------

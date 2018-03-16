@@ -9,7 +9,8 @@ Drupal.behaviors.panelsPackeryAdmin = {
   attach: function (context, settings) {
     $.each(settings.packery || {}, function (selector, config) {
       // Disable IPE dragging.
-      Drupal.PanelsIPE.editors[config.IPECacheKeys].sortableOptions.cancel = '*';
+      if (config.IPECacheKeys)
+        Drupal.PanelsIPE.editors[config.IPECacheKeys].sortableOptions.cancel = '*';
 
       var $ipeContainer = $(config.IPEContainer, context);
       var $containers = $(selector, context);

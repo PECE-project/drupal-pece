@@ -5,8 +5,28 @@
  */
 
 .view-mode-card
+  &.node-pece-artifact-pdf
+    h5
+      display: inline-block
+      padding-left: 20px
+      margin: 0
+      vertical-align: middle
+
+    span
+      display: inline-block
+      width: calc(100% - 75px)
+
+    .content
+      padding-top: 15px
+
   .icon.image::before
     display: none
+
+  .icon.pdf
+    display: inline-block
+    width: 70px
+    height: 70px
+    line-height: 70px
 
   .file-image img
     margin: 0
@@ -29,6 +49,9 @@
 
     &:before
       font-size: $font-size-h2
+
+    &.pdf:before
+      font-size: $font-size-large
 
   a.icon:hover
     opacity: 0.8
