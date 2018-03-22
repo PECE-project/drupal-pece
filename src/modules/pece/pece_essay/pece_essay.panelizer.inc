@@ -358,7 +358,7 @@ function pece_essay_panelizer_defaults() {
   $panelizer->contexts = array();
   $panelizer->relationships = array();
   $display = new panels_display();
-  $display->layout = 'packery_layout';
+  $display->layout = 'pece_three_col';
   $display->layout_settings = array(
     'packery_items' => '{}',
   );
@@ -367,6 +367,9 @@ function pece_essay_panelizer_defaults() {
       'default' => NULL,
       'center' => NULL,
       'contentmain' => NULL,
+      'column1' => NULL,
+      'column2' => NULL,
+      'column3' => NULL,
     ),
   );
   $display->cache = array();
@@ -377,8 +380,8 @@ function pece_essay_panelizer_defaults() {
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
-  $pane->pid = 'new-452edd7e-1b07-4ca3-a0d3-0f2da92ebc5d';
-  $pane->panel = 'contentmain';
+  $pane->pid = 'new-af74425b-4ddd-4cc8-891b-8778e5c6e68a';
+  $pane->panel = 'column1';
   $pane->type = 'node_title';
   $pane->subtype = 'node_title';
   $pane->shown = TRUE;
@@ -401,12 +404,12 @@ function pece_essay_panelizer_defaults() {
   $pane->extras = array();
   $pane->position = 0;
   $pane->locks = array();
-  $pane->uuid = '452edd7e-1b07-4ca3-a0d3-0f2da92ebc5d';
-  $display->content['new-452edd7e-1b07-4ca3-a0d3-0f2da92ebc5d'] = $pane;
-  $display->panels['contentmain'][0] = 'new-452edd7e-1b07-4ca3-a0d3-0f2da92ebc5d';
+  $pane->uuid = 'af74425b-4ddd-4cc8-891b-8778e5c6e68a';
+  $display->content['new-af74425b-4ddd-4cc8-891b-8778e5c6e68a'] = $pane;
+  $display->panels['column1'][0] = 'new-af74425b-4ddd-4cc8-891b-8778e5c6e68a';
   $pane = new stdClass();
-  $pane->pid = 'new-a9879d2c-abf9-4af9-82cc-a75644db3b3a';
-  $pane->panel = 'contentmain';
+  $pane->pid = 'new-c52577ae-1e15-42ab-9bdf-0e9c13cd583c';
+  $pane->panel = 'column1';
   $pane->type = 'entity_field';
   $pane->subtype = 'node:field_pece_contributors';
   $pane->shown = TRUE;
@@ -414,15 +417,12 @@ function pece_essay_panelizer_defaults() {
   $pane->configuration = array(
     'label' => 'title',
     'formatter' => 'og_list_default',
-    'delta_limit' => '0',
+    'delta_limit' => 0,
     'delta_offset' => '0',
-    'delta_reversed' => 0,
-    'formatter_settings' => array(
-      'link' => 0,
-      'bypass_access' => 0,
-    ),
+    'delta_reversed' => FALSE,
+    'formatter_settings' => array(),
     'context' => array(),
-    'override_title' => 0,
+    'override_title' => '',
     'override_title_text' => '',
     'override_title_heading' => 'h2',
   );
@@ -434,12 +434,12 @@ function pece_essay_panelizer_defaults() {
   $pane->extras = array();
   $pane->position = 1;
   $pane->locks = array();
-  $pane->uuid = 'a9879d2c-abf9-4af9-82cc-a75644db3b3a';
-  $display->content['new-a9879d2c-abf9-4af9-82cc-a75644db3b3a'] = $pane;
-  $display->panels['contentmain'][1] = 'new-a9879d2c-abf9-4af9-82cc-a75644db3b3a';
+  $pane->uuid = 'c52577ae-1e15-42ab-9bdf-0e9c13cd583c';
+  $display->content['new-c52577ae-1e15-42ab-9bdf-0e9c13cd583c'] = $pane;
+  $display->panels['column1'][1] = 'new-c52577ae-1e15-42ab-9bdf-0e9c13cd583c';
   $pane = new stdClass();
-  $pane->pid = 'new-49eecf50-cd5c-4c35-9fb5-3bacdc1c1e4b';
-  $pane->panel = 'contentmain';
+  $pane->pid = 'new-3a2183b7-e11e-42f1-b13c-79685a4fcecc';
+  $pane->panel = 'column1';
   $pane->type = 'view_essay_link';
   $pane->subtype = 'view_essay_link';
   $pane->shown = TRUE;
@@ -456,9 +456,9 @@ function pece_essay_panelizer_defaults() {
   $pane->extras = array();
   $pane->position = 2;
   $pane->locks = array();
-  $pane->uuid = '49eecf50-cd5c-4c35-9fb5-3bacdc1c1e4b';
-  $display->content['new-49eecf50-cd5c-4c35-9fb5-3bacdc1c1e4b'] = $pane;
-  $display->panels['contentmain'][2] = 'new-49eecf50-cd5c-4c35-9fb5-3bacdc1c1e4b';
+  $pane->uuid = '3a2183b7-e11e-42f1-b13c-79685a4fcecc';
+  $display->content['new-3a2183b7-e11e-42f1-b13c-79685a4fcecc'] = $pane;
+  $display->panels['column1'][2] = 'new-3a2183b7-e11e-42f1-b13c-79685a4fcecc';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $panelizer->display = $display;
