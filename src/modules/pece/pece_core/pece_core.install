@@ -20,3 +20,13 @@ function pece_core_update_7001() {
   pece_set_permissions($fieldsite_permissions);
 }
 
+
+/**
+ * Update people list settings for About page.
+ */
+function pece_core_update_7002() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  // Revert default config views_default_views.
+  pece_defaultconfig_component_rebuild_by_name('views_default_views', 'pece_core');
+}
