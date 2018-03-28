@@ -2349,6 +2349,13 @@ function pece_biblio_defaultconfig_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'biblio_node_layout';
+  $strongarm->value = 'cite';
+  $export['biblio_node_layout'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'biblio_show_openurl_profile_form';
   $strongarm->value = 0;
   $export['biblio_show_openurl_profile_form'] = $strongarm;
@@ -2359,6 +2366,13 @@ function pece_biblio_defaultconfig_strongarm() {
   $strongarm->name = 'biblio_show_user_profile_form';
   $strongarm->value = 0;
   $export['biblio_show_user_profile_form'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'biblio_style';
+  $strongarm->value = 'chicago';
+  $export['biblio_style'] = $strongarm;
 
   return $export;
 }
