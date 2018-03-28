@@ -1003,6 +1003,30 @@ div.messages.warning:before {
 
 /*
  *------------------------------------------------------------------------------
+ * Diff & Content revision styles
+ *------------------------------------------------------------------------------
+ */
+table.diff td.diff-section-title {
+  padding: 0.5em; }
+
+table.diff td.diff-prevlink, table.diff td.diff-nextlink {
+  line-height: 2em;
+  padding: 0.5em; }
+
+table.diff td.diff-links {
+  display: none; }
+
+table.diff td.diff-deletedline {
+  background-color: #ffffc7; }
+
+table.diff td.diff-addedline {
+  background-color: #d0ffd5; }
+
+div.diff-section-title {
+  padding: 0.5em; }
+
+/*
+ *------------------------------------------------------------------------------
  * Form styles
  *------------------------------------------------------------------------------
  */

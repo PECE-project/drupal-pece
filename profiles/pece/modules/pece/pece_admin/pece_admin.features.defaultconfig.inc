@@ -21,15 +21,6 @@ function pece_admin_defaultconfig_features() {
 function pece_admin_defaultconfig_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'administer themes'.
-  $permissions['administer themes'] = array(
-    'name' => 'administer themes',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'system',
-  );
-
   // Exported permission: 'access administration menu'.
   $permissions['access administration menu'] = array(
     'name' => 'access administration menu',
@@ -47,6 +38,33 @@ function pece_admin_defaultconfig_user_default_permissions() {
       'editor' => 'editor',
     ),
     'module' => 'system',
+  );
+
+  // Exported permission: 'administer themes'.
+  $permissions['administer themes'] = array(
+    'name' => 'administer themes',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'system',
+  );
+
+  // Exported permission: 'revert revisions'.
+  $permissions['revert revisions'] = array(
+    'name' => 'revert revisions',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'view revisions'.
+  $permissions['view revisions'] = array(
+    'name' => 'view revisions',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'node',
   );
 
   return $permissions;

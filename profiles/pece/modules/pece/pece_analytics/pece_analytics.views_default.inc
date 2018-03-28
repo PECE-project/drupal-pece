@@ -28,7 +28,7 @@ function pece_analytics_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['pager']['type'] = 'infinite_scroll';
+  $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '12';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'list';
@@ -79,6 +79,12 @@ function pece_analytics_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '12';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['path'] = 'taxonomy/term/%';
 
   /* Display: Feed */
@@ -100,11 +106,6 @@ function pece_analytics_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Show More'),
-    t('All'),
-    t('%1'),
-    t('Page'),
-    t('Feed'),
     t('Items per page'),
     t('- All -'),
     t('Offset'),
@@ -112,6 +113,10 @@ function pece_analytics_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
+    t('All'),
+    t('%1'),
+    t('Page'),
+    t('Feed'),
   );
   $export['pece_question_term'] = $view;
 
