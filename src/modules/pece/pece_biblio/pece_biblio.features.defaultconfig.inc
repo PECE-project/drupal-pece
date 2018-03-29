@@ -2371,7 +2371,7 @@ function pece_biblio_defaultconfig_strongarm() {
     $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
     $strongarm->api_version = 1;
     $strongarm->name = 'biblio_node_layout';
-    $strongarm->value = 'cite';
+    $strongarm->value = 'tabular';
     $export['biblio_node_layout'] = $strongarm;
 
     $strongarm = new stdClass();
