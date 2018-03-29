@@ -2346,33 +2346,81 @@ function pece_biblio_defaultconfig_feeds_importer_default() {
 function pece_biblio_defaultconfig_strongarm() {
   $export = array();
 
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'biblio_node_layout';
-  $strongarm->value = 'cite';
-  $export['biblio_node_layout'] = $strongarm;
+    $strongarm = new stdClass();
+    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+    $strongarm->api_version = 1;
+    $strongarm->name = 'biblio_index';
+    $strongarm->value = 1;
+    $export['biblio_index'] = $strongarm;
 
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'biblio_show_openurl_profile_form';
-  $strongarm->value = 0;
-  $export['biblio_show_openurl_profile_form'] = $strongarm;
+    $strongarm = new stdClass();
+    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+    $strongarm->api_version = 1;
+    $strongarm->name = 'biblio_search';
+    $strongarm->value = 1;
+    $export['biblio_search'] = $strongarm;
 
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'biblio_show_user_profile_form';
-  $strongarm->value = 0;
-  $export['biblio_show_user_profile_form'] = $strongarm;
+    $strongarm = new stdClass();
+    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+    $strongarm->api_version = 1;
+    $strongarm->name = 'biblio_search_button_text';
+    $strongarm->value = 'Search';
+    $export['biblio_search_button_text'] = $strongarm;
 
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'biblio_style';
-  $strongarm->value = 'chicago';
-  $export['biblio_style'] = $strongarm;
+    $strongarm = new stdClass();
+    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+    $strongarm->api_version = 1;
+    $strongarm->name = 'biblio_node_layout';
+    $strongarm->value = 'cite';
+    $export['biblio_node_layout'] = $strongarm;
+
+    $strongarm = new stdClass();
+    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+    $strongarm->api_version = 1;
+    $strongarm->name = 'biblio_show_openurl_profile_form';
+    $strongarm->value = 0;
+    $export['biblio_show_openurl_profile_form'] = $strongarm;
+
+    $strongarm = new stdClass();
+    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+    $strongarm->api_version = 1;
+    $strongarm->name = 'biblio_show_user_profile_form';
+    $strongarm->value = 0;
+    $export['biblio_show_user_profile_form'] = $strongarm;
+
+    $strongarm = new stdClass();
+    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+    $strongarm->api_version = 1;
+    $strongarm->name = 'biblio_style';
+    $strongarm->value = 'chicago';
+    $export['biblio_style'] = $strongarm;
+
+    $strongarm = new stdClass();
+    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+    $strongarm->api_version = 1;
+    $strongarm->name = 'biblio_sort';
+    $strongarm->value = 'year';
+    $export['biblio_sort'] = $strongarm;
+
+    $strongarm = new stdClass();
+    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+    $strongarm->api_version = 1;
+    $strongarm->name = 'biblio_sort_tabs';
+    $strongarm->value = array(
+      'author' => 'author',
+      'title' => 'title',
+      'type' => 'type',
+      'year' => 'year',
+      'keyword' => 0,
+    );
+    $export['biblio_sort_tabs'] = $strongarm;
+
+    $strongarm = new stdClass();
+    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+    $strongarm->api_version = 1;
+    $strongarm->name = 'biblio_sort_tabs_style';
+    $strongarm->value = 1;
+    $export['biblio_sort_tabs_style'] = $strongarm;
 
   return $export;
 }
