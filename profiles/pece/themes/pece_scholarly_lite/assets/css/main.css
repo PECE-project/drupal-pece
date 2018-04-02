@@ -443,13 +443,13 @@ input[type="button"].btn-block {
   color: white;
   opacity: 0.8; }
 
-.field-name-field-pece-tags, .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics,
+.field-name-field-pece-tags, .biblio-alpha-line, .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics,
 .view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics, .pane-node-field-pece-struct-analytics, .view-display-id-pece_user_artifact_annotations .views-field-field-pece-tags-1 .field-content,
 .view-display-id-pece_question_artifact_annotions .views-field-field-pece-tags-1 .field-content,
 .view-display-id-pece_question_annotations .views-field-field-pece-tags-1 .field-content {
   display: inline;
   margin-right: 2px; }
-  .field-name-field-pece-tags a, .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list a, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics a,
+  .field-name-field-pece-tags a, .biblio-alpha-line a, .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list a, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics a,
   .view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics a, .pane-node-field-pece-struct-analytics a, .view-display-id-pece_user_artifact_annotations .views-field-field-pece-tags-1 .field-content a,
   .view-display-id-pece_question_artifact_annotions .views-field-field-pece-tags-1 .field-content a,
   .view-display-id-pece_question_annotations .views-field-field-pece-tags-1 .field-content a {
@@ -462,7 +462,7 @@ input[type="button"].btn-block {
     display: inline-block;
     margin: 3px 0;
     transition: linear .3s; }
-    .field-name-field-pece-tags a:hover, .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list a:hover, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics a:hover,
+    .field-name-field-pece-tags a:hover, .biblio-alpha-line a:hover, .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list a:hover, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics a:hover,
     .view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics a:hover, .pane-node-field-pece-struct-analytics a:hover, .view-display-id-pece_user_artifact_annotations .views-field-field-pece-tags-1 .field-content a:hover,
     .view-display-id-pece_question_artifact_annotions .views-field-field-pece-tags-1 .field-content a:hover,
     .view-display-id-pece_question_annotations .views-field-field-pece-tags-1 .field-content a:hover {
@@ -1535,6 +1535,26 @@ i.pece_memo::before {
 
 /*
  *------------------------------------------------------------------------------
+ * PECE Biblio node styles
+ *------------------------------------------------------------------------------
+ */
+#biblio-header #edit-filters {
+  margin-bottom: 12px; }
+
+.biblio-current-filters {
+  background-color: #f9f9f9;
+  border: 1px solid #eeeeee;
+  padding: 15px;
+  margin-bottom: 10px; }
+
+.biblio-alpha-line {
+  display: inherit; }
+
+.node-biblio table td, .node-biblio table p {
+  font-size: 14px; }
+
+/*
+ *------------------------------------------------------------------------------
  * Views styles
  *------------------------------------------------------------------------------
  */
@@ -2346,6 +2366,22 @@ i.pece_memo::before {
 .essay-heading {
   border-bottom: 2px solid #999999;
   padding-bottom: .3em; }
+
+.pece-three-col .panel-pane,
+.mccoppin .panel-pane {
+  margin-bottom: 20px;
+  overflow: hidden;
+  word-wrap: break-word; }
+
+.pece-three-col .field-name-field-pece-website-url,
+.mccoppin .field-name-field-pece-website-url {
+  word-wrap: break-word;
+  text-overflow: ellipsis; }
+
+.pece-three-col .essay-link,
+.mccoppin .essay-link {
+  display: block;
+  width: 100%; }
 
 /*
  *------------------------------------------------------------------------------
