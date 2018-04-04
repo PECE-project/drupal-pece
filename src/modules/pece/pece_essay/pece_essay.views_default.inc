@@ -13,7 +13,7 @@ function pece_essay_views_default_views() {
   $view = new view();
   $view->name = 'pece_essay_nodes';
   $view->description = '';
-  $view->tag = 'default';
+  $view->tag = 'PECE';
   $view->base_table = 'node';
   $view->human_name = 'PECE Essay nodes';
   $view->core = 7;
