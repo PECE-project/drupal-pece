@@ -25,6 +25,7 @@
 
 .dashboard-artifact-submenu .dashboard-artifact-toggle::before { color: #c14300; }
 
+.view-display-id-pece_question_annotations .views-field-picture::before,
 .view-display-id-pece_question_artifact_annotions .views-field-picture::before,
 .view-display-id-pece_user_artifact_annotations .views-field-picture::before,
 .view-id-pece_my_noted_artifacts li.views-row > div::before,
@@ -33,5 +34,22 @@
 .view-id-pece_my_projects li.views-row > div::before,
 .view-pece-my-fieldsites li.views-row > div::before,
 .view-id-pece_my_groups li.views-row > div::before { background-color: #c14300; }
+
+.view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list ul li a,
+.view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics ul li a,
+.view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics ul li a,
+.pane-node-field-pece-struct-analytics ul li a,
+.pane-node-field-pece-struct-analytics a {
+  border-color: #ff6a1b;
+  color: #ff6a1b;
+}
+
+.view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list ul li a:hover,
+.view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics ul li a:hover,
+.view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics ul li a:hover,
+.pane-node-field-pece-struct-analytics ul li a:hover,
+.pane-node-field-pece-struct-analytics a:hover {
+  background-color: #ff6a1b;
+}
 
 .entity-pece-photo-essay-item h3 a, .view-mode-meta-content h5 a { color: #c14300 }

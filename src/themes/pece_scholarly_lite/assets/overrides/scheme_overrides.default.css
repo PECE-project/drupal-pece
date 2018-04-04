@@ -19,14 +19,15 @@
 .essay-link,
 .annotate-link,
 .field-name-group-group .field-item > a,
-.field-name-field-pece-photo-essay-items [data-remodal-target] { background-color: #2a68af; }
+.field-name-field-pece-photo-essay-items [data-remodal-target] { background-color: #252525; }
 .essay-link:hover,
 .annotate-link:hover,
 .field-name-group-group .field-item > a:hover,
-.field-name-field-pece-photo-essay-items [data-remodal-target]:hover { background-color: #4187d1; }
+.field-name-field-pece-photo-essay-items [data-remodal-target]:hover { background-color: #252525; }
 
 .dashboard-artifact-submenu .dashboard-artifact-toggle::before { color: #252525; }
 
+.view-display-id-pece_question_annotations .views-field-picture::before,
 .view-display-id-pece_question_artifact_annotions .views-field-picture::before,
 .view-display-id-pece_user_artifact_annotations .views-field-picture::before,
 .view-id-pece_my_noted_artifacts li.views-row > div::before,
@@ -35,5 +36,23 @@
 .view-id-pece_my_projects li.views-row > div::before,
 .view-pece-my-fieldsites li.views-row > div::before,
 .view-id-pece_my_groups li.views-row > div::before { background-color: #252525; }
+
+
+.view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list ul li a,
+.view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics ul li a,
+.view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics ul li a,
+.pane-node-field-pece-struct-analytics ul li a,
+.pane-node-field-pece-struct-analytics a {
+  border-color: #252525;
+  color: #252525;
+}
+
+.view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list ul li a:hover,
+.view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics ul li a:hover,
+.view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics ul li a:hover,
+.pane-node-field-pece-struct-analytics ul li a:hover,
+.pane-node-field-pece-struct-analytics a:hover {
+  background-color: #252525;
+}
 
 .entity-pece-photo-essay-item h3 a, .view-mode-meta-content h5 a { color: #252525 }
