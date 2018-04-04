@@ -45,7 +45,8 @@ ul.pager li > a:hover { border-bottom: 2px solid _color_tertiary_; }
 ul.links li a:hover, a.more:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover,
 .checkout-buttons .checkout-cancel:hover, .checkout-buttons .checkout-back:hover { background-color: _color_alpha_primary_; }
 
-/*resets*/
+/* CSS Resets */
+
 .header-top-area a { color: #fff; text-decoration: underline; }
 
 .header-top-area a:hover { color: #fff; text-decoration: none; }
@@ -62,12 +63,18 @@ ul.links li a:hover, a.more:hover, input[type="submit"]:hover, input[type="reset
 background-color: rgba(0,0,0,0.2)!important; }
 
 /* PECE Distro Overrides */
+
 .header-top-area .form-text { background-color: _color_alpha_primary_ }
+
+/* Tabs */
+
 .ui-tabs .ui-tabs-nav li.ui-state-active .ui-tabs-anchor { border-color:_color_primary_; background-color: _color_primary_; }
 .ui-tabs .ui-tabs-nav li.ui-state-active .ui-tabs-anchor:hover { color: _color_primary_ }
 
 .ui-tabs .ui-tabs-nav li .ui-tabs-anchor { border-color:_color_primary_; }
 .ui-tabs .ui-tabs-nav li .ui-tabs-anchor:hover { background-color: _color_primary_; }
+
+/* View mode */
 
 .view-mode-card .icon,
 .view-mode-teaser .icon,
@@ -77,6 +84,8 @@ background-color: rgba(0,0,0,0.2)!important; }
 
 .view-mode-meta-content .icon,
 .view-mode-meta-content .icon::before { color: _color_primary_; }
+
+/* Buttons */
 
 .essay-link,
 .annotate-link,
@@ -96,7 +105,11 @@ background-color: rgba(0,0,0,0.2)!important; }
 .view-display-id-pece_question_artifact_annotions .view-footer a:hover,
 .field-name-field-pece-photo-essay-items [data-remodal-target]:hover { background-color: _color_alpha_primary_; }
 
+/* Menu */
+
 .dashboard-artifact-submenu .dashboard-artifact-toggle::before { color: _color_primary_; }
+
+/* Views */
 
 .view-display-id-pece_question_annotations .views-field-picture::before,
 .view-display-id-pece_question_artifact_annotions .views-field-picture::before,
@@ -124,5 +137,7 @@ background-color: rgba(0,0,0,0.2)!important; }
 .pane-node-field-pece-struct-analytics a:hover {
   background-color: _color_alpha_primary_;
 }
+
+/* Heading */
 
 .entity-pece-photo-essay-item h3 a, .view-mode-meta-content h5 a { color: _color_primary_; }
