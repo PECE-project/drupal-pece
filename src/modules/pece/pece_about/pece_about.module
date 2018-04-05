@@ -14,21 +14,82 @@ function pece_about_block_info() {
     'info' => t('About PECE'),
   );
 
+  $blocks['about'] = array(
+    'info' => t('About'),
+  );
+
+  $blocks['about_pece_summary'] = array(
+    'info' => t('About PECE Summary'),
+  );
+
   return $blocks;
 }
 
 /**
  * Implements hook_block_view().
  */
-function pece_about_block_view($delta = 'about_pece') {
-  $block['subject'] = t('About PECE');
+function pece_about_block_view($delta) {
 
-  return $block = array(
-    'subject' => $block['subject'],
-    'content' => theme(
-      'about_pece'
-    )
-  );
+  switch ($delta) {
+    case 'about':
+      $block['subject'] = t('About');
+
+      module_load_include('inc', 'kw_itemnames');
+      $about_page = kw_itemnames_load('node', 'about');
+      $node_wrapper = entity_metadata_wrapper('node', $about_page);
+      $body_wrapper = $node_wrapper->body->value();
+      $allowed_tags = '<p> <a> <em> <strong> <cite> <blockquote> <ul> <ol> <li> <dl> <dt> <dd>';
+      $summary = text_summary(strip_tags($body_wrapper['value'], $allowed_tags), $body_wrapper['format'], 300);
+
+      $alter = array(
+        'max_length' => NULL,
+        'word_boundary' => TRUE,
+        'ellipsis' => TRUE,
+        'html' => TRUE,
+      );
+      return $block = array(
+        'subject' => $block['subject'],
+        'content' => (function_exists('views_trim_text')) ? views_trim_text($alter, $summary) : $summary, // Add ellipsis
+      );
+      break;
+
+    case 'about_pece':
+      $block['subject'] = t('About PECE');
+
+      return $block = array(
+        'subject' => $block['subject'],
+        'content' => theme(
+          'about_pece'
+        )
+      );
+      break;
+
+    case 'about_pece_summary':
+      $block['subject'] = t('About PECE');
+      $max_lenght = 800;
+      $summary = text_summary(theme('about_pece'), 'panopoly_wysiwyg_text', $max_lenght);
+      $read_more = l(t('Read more'), 'about', array(
+        'attributes' => array(
+          'class' => 'read-more',
+        )
+      ));
+
+      $alter = array(
+        'max_length' => NULL,
+        'word_boundary' => TRUE,
+        'ellipsis' => TRUE,
+        'html' => TRUE,
+      );
+      // Add ellipsis
+      $content = views_trim_text($alter, $summary);
+      $content .= $read_more;
+
+      return $block = array(
+        'subject' => $block['subject'],
+        'content' => $prefix . $content
+      );
+      break;
+  }
 }
 
 /**
