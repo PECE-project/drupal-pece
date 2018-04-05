@@ -14,7 +14,7 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-9 panel-panel">
+      <div class="col-md-10 pece-layouts-content panel-panel">
         <div class="row">
           <div class="col-md-12 pece-layouts-contentheader panel-panel">
             <?php print $content['contentheader']; ?>
@@ -36,7 +36,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 pece-layouts-sidebar panel-panel">
+      <div class="col-md-2 pece-layouts-sidebar panel-panel">
         <div class="row">
           <div class="col-md-12 pece-layouts-sidebartop panel-panel">
             <div class="panel-panel-inner">
