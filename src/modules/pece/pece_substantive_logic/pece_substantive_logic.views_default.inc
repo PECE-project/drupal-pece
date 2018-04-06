@@ -13,7 +13,7 @@ function pece_substantive_logic_views_default_views() {
   $view = new view();
   $view->name = 'pece_substantive_logic';
   $view->description = '';
-  $view->tag = 'default';
+  $view->tag = 'PECE';
   $view->base_table = 'node';
   $view->human_name = 'PECE - Substantive Logic';
   $view->core = 7;
