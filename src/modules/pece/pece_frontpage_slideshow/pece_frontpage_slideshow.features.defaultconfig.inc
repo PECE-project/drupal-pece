@@ -122,6 +122,12 @@ function pece_frontpage_slideshow_defaultconfig_field_default_fields() {
       'deleted' => 0,
       'description' => '',
       'display' => array(
+        'card' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'above',
           'module' => 'image',
@@ -133,6 +139,18 @@ function pece_frontpage_slideshow_defaultconfig_field_default_fields() {
           'weight' => 0,
         ),
         'featured' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'free_panel' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'meta_content' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
@@ -193,7 +211,7 @@ function pece_frontpage_slideshow_defaultconfig_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => 31,
+        'weight' => 3,
       ),
     ),
   );
@@ -361,13 +379,13 @@ function pece_frontpage_slideshow_defaultconfig_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
-          'weight' => '30',
+          'weight' => '2',
         ),
         'title' => array(
-          'weight' => '-5',
+          'weight' => '0',
         ),
         'path' => array(
-          'weight' => '30',
+          'weight' => '1',
         ),
       ),
       'display' => array(),
@@ -430,31 +448,55 @@ function pece_frontpage_slideshow_defaultconfig_strongarm() {
     'view modes' => array(
       'page_manager' => array(
         'status' => 0,
+        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'default' => array(
         'status' => 0,
+        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'teaser' => array(
         'status' => 0,
+        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'featured' => array(
         'status' => 0,
+        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'mini_teaser' => array(
         'status' => 0,
+        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'most_recent' => array(
         'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'free_panel' => array(
+        'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'card' => array(
+        'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'meta_content' => array(
+        'status' => 0,
+        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
@@ -652,6 +694,23 @@ function pece_frontpage_slideshow_defaultconfig_views_default_views() {
 
   /* Display: Content pane */
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+
+  /* Display: Frontpage slideshow short */
+  $handler = $view->new_display('panel_pane', 'Frontpage slideshow short', 'slideshow_front_short');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Image */
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['id'] = 'field_pece_slideshow_image';
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['table'] = 'field_data_field_pece_slideshow_image';
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['field'] = 'field_pece_slideshow_image';
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['label'] = '';
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['element_type'] = 'div';
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['settings'] = array(
+    'image_style' => 'pece_frontpage_image_short',
+    'image_link' => '',
+  );
   $translatables['frontpage_image_slider'] = array(
     t('Master'),
     t('more'),
@@ -662,8 +721,8 @@ function pece_frontpage_slideshow_defaultconfig_views_default_views() {
     t('Desc'),
     t('Content pane'),
     t('View panes'),
+    t('Frontpage slideshow short'),
   );
-
   $export['frontpage_image_slider'] = $view;
 
   return $export;
