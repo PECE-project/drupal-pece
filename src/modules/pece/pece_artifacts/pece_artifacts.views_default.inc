@@ -75,6 +75,8 @@ function pece_artifacts_views_default_views() {
 
   /* Display: Artifacts front pane */
   $handler = $view->new_display('panel_pane', 'Artifacts front pane', 'artifatcs_front_pane');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Recent Artifacts';
   $handler->display->display_options['defaults']['use_more'] = FALSE;
   $handler->display->display_options['use_more'] = TRUE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
@@ -100,6 +102,7 @@ function pece_artifacts_views_default_views() {
     t('Content pane'),
     t('View panes'),
     t('Artifacts front pane'),
+    t('Recent Artifacts'),
   );
   $export['pece_recent_artifacts'] = $view;
 
