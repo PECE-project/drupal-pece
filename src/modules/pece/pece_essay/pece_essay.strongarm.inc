@@ -156,7 +156,6 @@ function pece_essay_strongarm() {
   $strongarm->name = 'panelizer_defaults_node_pece_essay';
   $strongarm->value = array(
     'status' => 1,
-    'help' => '',
     'view modes' => array(
       'page_manager' => array(
         'status' => 1,

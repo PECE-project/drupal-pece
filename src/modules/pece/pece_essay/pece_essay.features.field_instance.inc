@@ -31,10 +31,23 @@ function pece_essay_field_default_field_instances() {
         'weight' => 1,
       ),
       'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'label' => 'hidden',
+        'module' => 'smart_trim',
+        'settings' => array(
+          'more_link' => 1,
+          'more_text' => 'Read more',
+          'summary_handler' => 'full',
+          'trim_length' => 300,
+          'trim_link' => 0,
+          'trim_options' => array(
+            'text' => 0,
+          ),
+          'trim_preserve_tags' => '',
+          'trim_suffix' => '...',
+          'trim_type' => 'chars',
+        ),
+        'type' => 'smart_trim_format',
+        'weight' => 1,
       ),
       'free_panel' => array(
         'label' => 'above',
@@ -121,7 +134,7 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 6,
       ),
       'free_panel' => array(
         'label' => 'above',
@@ -207,7 +220,7 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 7,
       ),
       'free_panel' => array(
         'label' => 'above',
@@ -281,7 +294,7 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 8,
       ),
       'free_panel' => array(
         'label' => 'above',
@@ -358,7 +371,7 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 5,
       ),
       'free_panel' => array(
         'label' => 'above',
@@ -444,7 +457,7 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
       ),
       'free_panel' => array(
         'label' => 'above',
@@ -521,9 +534,13 @@ function pece_essay_field_default_field_instances() {
         'weight' => 9,
       ),
       'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => 'content',
+          'image_style' => 'pece_mini_teaser',
+        ),
+        'type' => 'image',
         'weight' => 0,
       ),
       'free_panel' => array(
@@ -650,7 +667,7 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'free_panel' => array(
         'label' => 'above',
@@ -733,7 +750,7 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'free_panel' => array(
         'label' => 'above',
