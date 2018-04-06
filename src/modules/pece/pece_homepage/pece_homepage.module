@@ -12,6 +12,6 @@ include_once 'pece_homepage.features.inc';
  */
 function pece_homepage_block_view_alter(&$data, $block) {
   if ($block->module == 'tagclouds' && $data['subject'] == 'Tags in Tags') {
-    $data['subject'] = 'Experiment with terms';
+    $data['subject'] = 'Terms';
   }
 }
