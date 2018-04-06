@@ -141,7 +141,7 @@ function pece_core_defaultconfig_views_default_views() {
   $view = new view();
   $view->name = 'pece_users';
   $view->description = 'PECE\'s user listings';
-  $view->tag = 'default';
+  $view->tag = 'PECE';
   $view->base_table = 'users';
   $view->human_name = 'PECE - Users';
   $view->core = 7;
