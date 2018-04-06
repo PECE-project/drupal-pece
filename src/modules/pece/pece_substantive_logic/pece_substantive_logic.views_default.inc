@@ -92,7 +92,7 @@ function pece_substantive_logic_views_default_views() {
   $handler->display->display_options['fields']['field_basic_image_image']['field_api_classes'] = TRUE;
   $translatables['pece_substantive_logic'] = array(
     t('Master'),
-    t('Substantive Logic'),
+    t('Substantive Logics'),
     t('more'),
     t('Apply'),
     t('Reset'),
