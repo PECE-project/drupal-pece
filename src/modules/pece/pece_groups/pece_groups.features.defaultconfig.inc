@@ -58,6 +58,12 @@ function pece_groups_defaultconfig_field_default_fields() {
       'deleted' => 0,
       'description' => '',
       'display' => array(
+        'card' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'above',
           'module' => 'image',
@@ -69,6 +75,18 @@ function pece_groups_defaultconfig_field_default_fields() {
           'weight' => 7,
         ),
         'featured' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'free_panel' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'meta_content' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
