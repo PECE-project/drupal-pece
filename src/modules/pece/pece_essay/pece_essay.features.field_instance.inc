@@ -538,7 +538,7 @@ function pece_essay_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'pece_mini_teaser',
+          'image_style' => 'pece_most_recent',
         ),
         'type' => 'image',
         'weight' => 0,
