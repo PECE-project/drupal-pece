@@ -30,6 +30,7 @@ function pece_about_block_info() {
  */
 function pece_about_block_view($delta) {
 
+
   switch ($delta) {
     case 'about':
       $block['subject'] = t('About');
@@ -41,15 +42,12 @@ function pece_about_block_view($delta) {
       $allowed_tags = '<p> <a> <em> <strong> <cite> <blockquote> <ul> <ol> <li> <dl> <dt> <dd>';
       $summary = text_summary(strip_tags($body_wrapper['value'], $allowed_tags), $body_wrapper['format'], 400);
 
-      $alter = array(
-        'max_length' => NULL,
-        'word_boundary' => TRUE,
-        'ellipsis' => TRUE,
-        'html' => TRUE,
-      );
+      // Add ellipsis and read more link.
+      $content = pece_about_trim_summary($summary, TRUE);
+
       return $block = array(
         'subject' => $block['subject'],
-        'content' => (function_exists('views_trim_text')) ? views_trim_text($alter, $summary) : $summary, // Add ellipsis
+        'content' => $content,
       );
       break;
 
@@ -66,27 +64,14 @@ function pece_about_block_view($delta) {
 
     case 'about_pece_summary':
       $block['subject'] = t('About PECE');
-      $max_lenght = 800;
-      $summary = text_summary(theme('about_pece'), 'panopoly_wysiwyg_text', $max_lenght);
-      $read_more = l(t('Read more'), 'about', array(
-        'attributes' => array(
-          'class' => 'read-more',
-        )
-      ));
+      $summary = text_summary(theme('about_pece'), 'panopoly_wysiwyg_text', 800);
 
-      $alter = array(
-        'max_length' => NULL,
-        'word_boundary' => TRUE,
-        'ellipsis' => TRUE,
-        'html' => TRUE,
-      );
-      // Add ellipsis
-      $content = views_trim_text($alter, $summary);
-      $content .= $read_more;
+      // Add ellipsis and read more link.
+      $content = pece_about_trim_summary($summary, TRUE);
 
       return $block = array(
         'subject' => $block['subject'],
-        'content' => $prefix . $content
+        'content' => $content,
       );
       break;
   }
@@ -104,4 +89,37 @@ function pece_about_theme() {
       'template' => 'pece-about-block'
     ),
   );
+}
+
+/**
+ * Helper function to prepare About and About PECE block contents by adding
+ * ellipsis and 'read more' link.
+ */
+function pece_about_trim_summary($summary, $more = TRUE, $alter = array()) {
+  $content = $summary;
+
+  if (function_exists('views_trim_text')) {
+    if (empty($alter)) {
+      $alter = array(
+        'max_length' => NULL,
+        'word_boundary' => TRUE,
+        'ellipsis' => TRUE,
+        'html' => TRUE,
+      );
+    }
+
+    $content = views_trim_text($alter, $summary);
+  }
+
+  if ($more !== FALSE) {
+    $read_more = l(t('Read more'), 'about', array(
+      'attributes' => array(
+        'class' => 'read-more',
+      )
+    ));
+
+    $content .= $read_more;
+  }
+
+  return $content;
 }
