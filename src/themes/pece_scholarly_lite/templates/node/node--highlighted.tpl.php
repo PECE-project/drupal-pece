@@ -80,6 +80,11 @@
  * @ingroup themeable
  */
 ?>
+<?php
+if (empty($content['body'])) {
+  $classes .= ' no-desc';
+}
+?>
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <?php print render($title_prefix); ?>
