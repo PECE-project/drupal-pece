@@ -89,16 +89,22 @@
   <?php print render($title_suffix); ?>
 
   <?php if (isset($content['field_pece_media_image'])): ?>
-    <div class="image" >
+    <div class="icon image" >
       <?php print render($content['field_pece_media_image']); ?>
     </div>
   <?php elseif (isset($content['field_basic_image_image'])): ?>
-    <div class="image" >
+    <div class="icon image" >
       <?php print render($content['field_basic_image_image']); ?>
     </div>
   <?php elseif (isset($content['field_thumbnail'])): ?>
-    <div class="image" >
+    <div class="icon image" >
       <?php print render($content['field_thumbnail']); ?>
+    </div>
+  <?php else: ?>
+    <div class="image">
+      <div class="icon">
+        <?php // @info: icons are defined by sass. ?>
+      </div>
     </div>
   <?php endif ?>
 
