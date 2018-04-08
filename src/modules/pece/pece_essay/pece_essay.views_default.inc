@@ -193,6 +193,7 @@ function pece_essay_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'pece_essay' => 'pece_essay',
+    'pece_photo_essay' => 'pece_photo_essay',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
 
@@ -213,6 +214,11 @@ function pece_essay_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Featured', 'panel_pane_featured');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Featured Essay';
+  $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_text'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
