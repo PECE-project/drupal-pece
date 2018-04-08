@@ -88,7 +88,7 @@ function pece_homepage_default_page_manager_pages() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'view_mode' => 'featured',
+    'view_mode' => 'highlighted',
   );
   $pane->cache = array();
   $pane->style = array(
