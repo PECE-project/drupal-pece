@@ -1,0 +1,25 @@
+/*
+ *------------------------------------------------------------------------------
+ * PECE Biblio node styles
+ *------------------------------------------------------------------------------
+ */
+
+#biblio-header
+  #edit-filters
+    margin-bottom: 12px
+
+.biblio-current-filters
+  background-color: $color-gray-extra-lighter
+  border: 1px solid $color-gray-lighter
+  padding: 15px
+  margin-bottom: 10px
+
+.biblio-alpha-line
+  @extend %tags
+  // %tags style overrides
+  display: inherit
+
+.node-biblio
+  table
+    td, p
+      font-size: $font-size-base
