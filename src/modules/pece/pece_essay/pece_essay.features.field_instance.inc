@@ -55,6 +55,25 @@ function pece_essay_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'hidden',
+        'module' => 'smart_trim',
+        'settings' => array(
+          'more_link' => 1,
+          'more_text' => 'Read more',
+          'summary_handler' => 'full',
+          'trim_length' => 300,
+          'trim_link' => 0,
+          'trim_options' => array(
+            'text' => 0,
+          ),
+          'trim_preserve_tags' => '',
+          'trim_suffix' => '...',
+          'trim_type' => 'chars',
+        ),
+        'type' => 'smart_trim_format',
+        'weight' => 1,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -142,6 +161,12 @@ function pece_essay_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -228,6 +253,12 @@ function pece_essay_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -301,6 +332,12 @@ function pece_essay_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
       ),
       'meta_content' => array(
         'label' => 'above',
@@ -378,6 +415,12 @@ function pece_essay_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
       ),
       'meta_content' => array(
         'label' => 'above',
@@ -465,6 +508,12 @@ function pece_essay_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -547,6 +596,16 @@ function pece_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => 'content',
+          'image_style' => 'pece_most_recent',
+        ),
+        'type' => 'image',
         'weight' => 0,
       ),
       'meta_content' => array(
@@ -675,6 +734,12 @@ function pece_essay_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -757,6 +822,12 @@ function pece_essay_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'meta_content' => array(
         'label' => 'above',

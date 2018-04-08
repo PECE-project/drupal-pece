@@ -85,7 +85,11 @@ function pece_essay_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__pece_essay';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'highlighted' => array(
+        'custom_settings' => TRUE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
