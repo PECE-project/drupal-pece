@@ -85,11 +85,7 @@ function pece_essay_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__pece_essay';
   $strongarm->value = array(
-    'view_modes' => array(
-      'highlighted' => array(
-        'custom_settings' => TRUE,
-      ),
-    ),
+    'view_modes' => array(),
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
@@ -160,6 +156,7 @@ function pece_essay_strongarm() {
   $strongarm->name = 'panelizer_defaults_node_pece_essay';
   $strongarm->value = array(
     'status' => 1,
+    'help' => '',
     'view modes' => array(
       'page_manager' => array(
         'status' => 1,
