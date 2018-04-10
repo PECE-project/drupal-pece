@@ -1,30 +1,52 @@
 /* PECE Distro Overrides */
+
+/* Tabs */
+
 .ui-tabs .ui-tabs-nav li.ui-state-active .ui-tabs-anchor { border-color:#a02267; background-color: #a02267; }
 .ui-tabs .ui-tabs-nav li.ui-state-active .ui-tabs-anchor:hover { color: #a02267 }
 
 .ui-tabs .ui-tabs-nav li .ui-tabs-anchor { border-color:#a02267; }
 .ui-tabs .ui-tabs-nav li .ui-tabs-anchor:hover { background-color: #a02267; }
 
+/* View mode */
+
 .view-mode-card .icon,
 .view-mode-teaser .icon,
 .view-mode-most-recent .icon,
 .view-mode-mini-teaser .icon,
+.view-mode-highlighted .icon,
 .view-pece-structured-analytics i { background-color: #a02267; }
 
 .view-mode-meta-content .icon,
 .view-mode-meta-content .icon::before { color: #a02267; }
 
+/* Buttons */
+
 .essay-link,
 .annotate-link,
+.view-mode-card .button,
 .field-name-group-group .field-item > a,
+.view-display-id-pece_question_annotations .view-footer a,
+.view-display-id-pece_user_artifact_annotations .view-footer a,
+.view-display-id-pece_question_artifact_annotions .view-footer a,
 .field-name-field-pece-photo-essay-items [data-remodal-target] { background-color: #c42675; }
+
 .essay-link:hover,
 .annotate-link:hover,
+.view-mode-card .button:hover,
 .field-name-group-group .field-item > a:hover,
+.view-display-id-pece_question_annotations .view-footer a:hover,
+.view-display-id-pece_user_artifact_annotations .view-footer a:hover,
+.view-display-id-pece_question_artifact_annotions .view-footer a:hover,
 .field-name-field-pece-photo-essay-items [data-remodal-target]:hover { background-color: #ec3a93; }
+
+/* Menu */
 
 .dashboard-artifact-submenu .dashboard-artifact-toggle::before { color: #a02267; }
 
+/* Views */
+
+.view-display-id-pece_question_annotations .views-field-picture::before,
 .view-display-id-pece_question_artifact_annotions .views-field-picture::before,
 .view-display-id-pece_user_artifact_annotations .views-field-picture::before,
 .view-id-pece_my_noted_artifacts li.views-row > div::before,
@@ -33,5 +55,24 @@
 .view-id-pece_my_projects li.views-row > div::before,
 .view-pece-my-fieldsites li.views-row > div::before,
 .view-id-pece_my_groups li.views-row > div::before { background-color: #a02267; }
+
+.view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list ul li a,
+.view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics ul li a,
+.view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics ul li a,
+.pane-node-field-pece-struct-analytics ul li a,
+.pane-node-field-pece-struct-analytics a {
+  border-color: #ec3a93;
+  color: #ec3a93;
+}
+
+.view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list ul li a:hover,
+.view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics ul li a:hover,
+.view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics ul li a:hover,
+.pane-node-field-pece-struct-analytics ul li a:hover,
+.pane-node-field-pece-struct-analytics a:hover {
+  background-color: #ec3a93;
+}
+
+/* Heading */
 
 .entity-pece-photo-essay-item h3 a, .view-mode-meta-content h5 a { color: #a02267 }

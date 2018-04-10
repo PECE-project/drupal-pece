@@ -12,7 +12,6 @@ projects[devel][version] = 1.x-dev
 projects[devel_debug_log][subdir] = dev
 projects[devel_debug_log][version] = 1.2
 projects[drush_clone][subdir] = dev
-projects[drupal_ipsum][subdir] = dev
 projects[drush_entity][subdir] = dev
 projects[module_builder][subdir] = dev
 projects[stage_file_proxy][subdir] = dev

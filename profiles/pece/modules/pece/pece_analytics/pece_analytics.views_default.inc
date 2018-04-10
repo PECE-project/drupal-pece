@@ -13,7 +13,7 @@ function pece_analytics_views_default_views() {
   $view = new view();
   $view->name = 'pece_question_term';
   $view->description = 'A view to emulate Drupal core\'s handling of taxonomy/term.';
-  $view->tag = 'default';
+  $view->tag = 'PECE';
   $view->base_table = 'node';
   $view->human_name = 'PECE - Question term';
   $view->core = 7;

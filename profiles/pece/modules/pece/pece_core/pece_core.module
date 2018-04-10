@@ -84,6 +84,11 @@ function pece_core_entity_info_alter(&$entity_info) {
     'custom settings' => TRUE,
   );
 
+  $entity_info['node']['view modes']['highlighted'] = array(
+    'label' => t('Highlighted'),
+    'custom settings' => TRUE,
+  );
+
   $entity_info['user']['view modes']['mini_teaser'] = array(
     'label' => t('Mini teaser'),
     'custom settings' => TRUE,

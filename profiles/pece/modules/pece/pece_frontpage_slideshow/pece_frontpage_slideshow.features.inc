@@ -26,6 +26,21 @@ function pece_frontpage_slideshow_views_api($module = NULL, $api = NULL) {
 function pece_frontpage_slideshow_image_default_styles() {
   $styles = array();
 
+  // Exported image style: pece_frontpage_image_short.
+  $styles['pece_frontpage_image_short'] = array(
+    'label' => 'PECE Frontpage Image short',
+    'effects' => array(
+      3 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 960,
+          'height' => 230,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: pece_frontpage_image_style.
   $styles['pece_frontpage_image_style'] = array(
     'label' => 'PECE Frontpage Image Style',

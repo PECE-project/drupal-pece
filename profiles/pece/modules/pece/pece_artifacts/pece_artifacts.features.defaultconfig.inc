@@ -74,6 +74,13 @@ function pece_artifacts_defaultconfig_strongarm() {
       'max' => '',
       'required' => 0,
     ),
+    'biblio' => array(
+      'enabled' => 0,
+      'default' => '',
+      'max' => '',
+      'required' => 0,
+      'action_type' => '1',
+    ),
   );
   $export['node_expire_ntypes'] = $strongarm;
 
