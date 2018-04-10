@@ -96,6 +96,10 @@ function pece_about_theme() {
  * ellipsis and 'read more' link.
  */
 function pece_about_trim_summary($summary, $more = TRUE, $alter = array()) {
+  if (empty($summary)) {
+    return '';
+  }
+
   $content = $summary;
 
   if (function_exists('views_trim_text')) {
