@@ -107,9 +107,11 @@ if (empty($content['body'])) {
     </div>
   <?php else: ?>
     <div class="image">
-      <div class="icon">
-        <?php // @info: icons are defined by sass. ?>
-      </div>
+      <a href="<?php  print $node_url; ?>">
+        <div class="icon">
+          <?php // @info: icons are defined by sass. ?>
+        </div>
+      </a>
     </div>
   <?php endif ?>
 
