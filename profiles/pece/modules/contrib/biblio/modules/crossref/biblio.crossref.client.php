@@ -18,6 +18,7 @@ class BiblioCrossRefClient
   private $org_count;
   private $field_map;
   private $type_map;
+  private $citation_list;
 
   public function __construct($doi = '', $id = '')
   {
@@ -26,6 +27,7 @@ class BiblioCrossRefClient
     $this->setURL(self::BASE_URL);
     $this->field_map = array();
     $this->type_map = array();
+    $this->citation_list = FALSE;
   }
 
   public function setURL($url) {
@@ -55,7 +57,7 @@ class BiblioCrossRefClient
   public function fetch() {
     $this->query = $this->url . '?pid=' . $this->pid . '&noredirect=true&format=unixref&id=doi%3A' . $this->doi;
 
-    $request_options = array('method' => 'POST');
+    $request_options = array('method' => 'GET');
     $result = drupal_http_request($this->query, $request_options);
 
     if ($result->code != 200) {
@@ -155,6 +157,9 @@ class BiblioCrossRefClient
       case 'doi_data':
         $this->doi_data = TRUE;
         break;
+      case 'citation_list':
+      	$this->citation_list = TRUE;
+      	break;
       default :
         $this->element = $name;
     }
@@ -239,28 +244,31 @@ class BiblioCrossRefClient
       case 'doi_data':
         $this->doi_data = FALSE;
         break;
+      case 'citation_list':
+        $this->citation_list = FALSE;
+        break;
       default :
     }
   }
 
   function unixref_characterData($parser, $data) {
     $data = htmlspecialchars_decode($data);
-    if (trim($data)) {
+    if (trim($data) && !$this->citation_list) {
       switch ($this->element) {
         case 'surname' :
-          $this->contributors[$this->contrib_count]['lastname'] = $data;
+        	$this->_set_contrib_data('lastname', $data);
           break;
         case 'given_name' :
-          $this->contributors[$this->contrib_count]['firstname'] = $data;
+          $this->_set_contrib_data('firstname', $data);
           break;
         case 'suffix':
-          $this->contributors[$this->contrib_count]['suffix'] = $data;
+        	$this->_set_contrib_data('suffix', $data);
           break;
         case 'affiliation' :
-          $this->contributors[$this->contrib_count]['affiliation'] = $data;
+        	$this->_set_contrib_data('affiliation', $data);
           break;
         case 'organization':
-          $this->contributors[$this->contrib_count]['name'] = $data;
+        	$this->_set_contrib_data('name', $data);
           break;
         case 'year':
         case 'month':
@@ -296,8 +304,17 @@ class BiblioCrossRefClient
       }
     }
   }
+
+  function _set_contrib_data($field, $data) {
+    $this->contributors[$this->contrib_count][$field] = (isset($this->contributors[$this->contrib_count][$field]) ?
+                                                        $this->contributors[$this->contrib_count][$field] . $data :
+                                                        $data);
+  }
+
   function _set_data($field, $data) {
-    $this->node[$field] = (isset($this->node[$field]) ? $this->node[$field] . $data : $data);
+    $this->node[$field] = (isset($this->node[$field]) ?
+                          $this->node[$field] . $data :
+                          $data);
   }
   /*
    * map a unixref XML field to a biblio field

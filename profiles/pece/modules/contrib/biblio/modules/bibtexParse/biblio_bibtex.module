@@ -254,7 +254,14 @@ function _biblio_bibtex_import($entries, $terms = array(), $batch = FALSE, $sess
     $node->biblio_year            = (!empty($entry['year'])) ? $entry['year'] : NULL;
     $node->biblio_notes           = (!empty($entry['note'])) ? $entry['note'] : NULL;
     $node->biblio_date            = (!empty($entry['month'])) ? $entry['month'] : NULL;
-    $node->biblio_pages           = (!empty($entry['pages'])) ? $entry['pages'] : NULL;
+
+    if (!empty($entry['article-number'])) {  //from isi web of science
+      $node->biblio_pages         = $entry['article-number'];
+    }
+    else {
+      $node->biblio_pages         = (!empty($entry['pages'])) ? $entry['pages'] : NULL;
+    }
+
     $node->biblio_publisher       = (!empty($entry['publisher'])) ? $entry['publisher'] : NULL;
     if (!empty($entry['organization'])) $node->biblio_publisher = $entry['organization'];
     if (!empty($entry['school']))       $node->biblio_publisher       = $entry['school'];

@@ -877,6 +877,8 @@ class csl_names extends csl_format {
       if (!empty($contributor) && $authors = $this->_get_category($data->{$contributor}, $category)) {
         foreach ($this->elements as $element) {
           if (is_a($element, 'csl_label')) {
+            $element->in_names = TRUE;
+            $element->plural   = (count($authors) > 1) ? 'multiple' : 'single';
             $element->variable = $this->_get_csl_name_variable($category);
             $text .= $element->render($authors, $mode);
           }
@@ -1210,49 +1212,64 @@ class csl_et_al extends csl_text {
 
     }
 }
+
 class csl_label extends csl_format {
-  private $plural;
+  private $pluralization;
 
   function render($data, $mode = NULL) {
     $text = '';
-
-    $variables = explode(' ', $this->variable);
+    $pluralization = NULL;
     $form = (($form = $this->form)) ? $form : 'long';
-    switch ($this->plural) {
-      case 'never':
-        $plural = 'single';
-        break;
-      case 'always':
-        $plural = 'multiple';
-        break;
-      case 'contextual':
-      default:
+
+    // There are two possible locations for a label the first is within a names element which is a bit simpler than the general label case
+    if (isset ( $this->in_names )) {  // within csl_names element case
+      if (($term = $this->citeproc->get_locale ( 'term', $this->variable, $form, $this->plural ))) {
+        $text = $term;
+      }
     }
-    foreach ($variables as $variable) {
-      $field = $this->citeproc->map_field($variable);
-      if (isset($data->{$field})  && !empty($data->{$field})) {
-        if (!isset($this->plural) && empty($plural) && is_array($data->{$field})) {
-          $count = count($data->{$field});
-          if ($count == 1) {
-            $plural = 'single';
-          }
-          elseif ($count > 1) {
-            $plural = 'multiple';
-          }
-        }
-        else {
-          $plural = $this->evaluateStringPluralism($data, $variable);
-        }
-        if (($term = $this->citeproc->get_locale('term', $variable, $form, $plural))) {
-          $text = $term;
+    else { // this is the general label case where we may need to determine if the variable is plural
+      $variables = explode ( ' ', $this->variable );
+      switch ($this->plural) {
+        case 'never' :
+          $pluralization = 'single';
           break;
+        case 'always' :
+          $pluralization = 'multiple';
+          break;
+        case 'contextual' :
+        default :
+      }
+      foreach ( $variables as $variable ) {
+        $field = $this->citeproc->map_field ( $variable );
+        if (isset ( $data->{$field} ) && ! empty ( $data->{$field} )) {
+          if (! isset ( $this->plural ) && empty ( $pluralization ) && is_array ( $data->{$field} )) {
+            $count = count ( $data->{$field} );
+            if ($count == 1) {
+              $pluralization = 'single';
+            }
+            elseif ($count > 1) {
+              $pluralization = 'multiple';
+            }
+          }
+          else {
+            $pluralization = $this->evaluateStringPluralism ( $data, $variable );
+          }
+          if (($term = $this->citeproc->get_locale ( 'term', $variable, $form, $pluralization ))) {
+            $text = $term;
+            break;
+          }
         }
       }
     }
 
-    if (empty($text)) return;
-    if ($this->{'strip-periods'}) $text = str_replace('.', '', $text);
-    return $this->format($text);
+    if (empty ( $text ))
+      return;
+
+    if ($this->{'strip-periods'}) {
+      $text = str_replace ( '.', '', $text );
+    }
+
+    return $this->format ( $text );
   }
 
   function evaluateStringPluralism($data, $variable) {

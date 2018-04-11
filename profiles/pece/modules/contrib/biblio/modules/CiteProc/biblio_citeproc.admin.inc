@@ -245,7 +245,9 @@ function biblio_citeproc_csl_file_import_submit($form, &$form_state) {
 }
 function _get_github_repo_tree($path = '') {
   $options = array();
-    $tree_url = 'https://api.github.com/repos/citation-style-language/styles/contents';
+  $tree = array();
+
+  $tree_url = 'https://api.github.com/repos/citation-style-language/styles-distribution/contents';
     if (!empty($path)) {
       $tree_url .= '/' . $path;
     }
@@ -257,7 +259,7 @@ function _get_github_repo_tree($path = '') {
     else {
       $message = t('Attempt to get list of styles from GitHub resulted in an HTTP error: !code.', array('!code' => $result->code));
 
-      $cache = cache_get('github_csl_repo');
+      $cache = cache_get('biblio_citeproc_styles');
 
       if ($cache) {
         $message .= ' ' . t('I will use cached data instead.');
@@ -344,15 +346,23 @@ function _install_csl($name = NULL, $csl = NULL, $sha = NULL, $all = FALSE, $upd
     }
   }
   else {
-    drupal_set_message(t('I could not parse the CSL provided as valid XML', 'error'));
+    drupal_set_message(t('I could not parse the CSL provided as valid XML'), 'error');
   }
 }
 
 function _get_zip_from_github() {
-  $zip_url = 'https://github.com/citation-style-language/styles/zipball/master';
+  $zip_file = false;
+
+  $zip_url = 'https://github.com/citation-style-language/styles-distribution/archive/master.zip';
   $destination = file_build_uri('Biblio-CiteProc-Styles.zip');
   $zip_file = system_retrieve_file($zip_url, $destination, TRUE, FILE_EXISTS_REPLACE);
-  $usage = file_usage_list($zip_file);
+  if ($zip_file) {
+    $usage = file_usage_list($zip_file);
+  }
+  else {
+    drupal_set_message("Error downloading styles", 'error');
+    return $zip_file;
+  }
   if (empty($usage)) {
     file_usage_add($zip_file, 'biblio_citeproc', 'csl', 0);
   }
@@ -363,7 +373,7 @@ function _get_zip_from_github() {
 
 function _install_csl_from_github($path, $update = FALSE) {
   $csl = '';
-  $github_url = 'https://api.github.com/repos/citation-style-language/styles/contents/';
+  $github_url = 'https://api.github.com/repos/citation-style-language/styles-distribution/contents/';
   $URL = $github_url . $path;
   $result = drupal_http_request($URL);
   if ($result->code == 200) {
@@ -521,20 +531,26 @@ function biblio_citeproc_example_citation() {
       'lastname' => 'Twoauth',
       'firstname' => 'John',
       'initials' => 'B',
-      'auth_category' => 1,
+      'auth_category' => 2,
       'cid' => -2),
   );
   $node = new stdClass();
   $node->nid = -1;
   $node->title                  = 'This is a fantastic title.';
   $node->biblio_contributors    = $contributors;
-  $node->biblio_type            = 102;
+  $node->biblio_type            = 100;
   $node->biblio_year            = 2010;
   $node->biblio_volume          = 1;
   $node->biblio_issue           = 2;
   $node->biblio_secondary_title = 'Journal of Fantastic Articles';
   $node->biblio_pages           = '424-31';
   $node->biblio_coins           = '';
+  $now = time();
+  $node->biblio_access_date = array(
+    format_date($now, 'custom', 'Y'),
+    format_date($now, 'custom', 'n'),
+    format_date($now, 'custom', 'j'),
+  );
   return theme_biblio_citeproc_style(array('node' => $node));
 
 }
@@ -672,7 +688,7 @@ function biblio_citeproc_update_installed_batch(&$context = NULL) {
       $name = $context['sandbox']['installed'][$i]->filename;
       $changed = $context['sandbox']['installed'][$i]->changed;
       if (($index = $za->locateName($name, ZIPARCHIVE::FL_NOCASE|ZIPARCHIVE::FL_NODIR))  !== FALSE) {
-        if ($csl = $za->getFromIndex($index) && !$changed) {
+        if (($csl = $za->getFromIndex($index)) && !$changed) {
           $ret = _install_csl($name, $csl, NULL, NULL, TRUE);
           if ($ret == 2) {
             $context['results']['updated'][] = $name;

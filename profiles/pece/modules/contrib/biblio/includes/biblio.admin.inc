@@ -137,6 +137,13 @@ function biblio_admin_settings() {
     '#default_value' => variable_get('biblio_hide_bibtex_braces', 0),
     '#description' => ''
   );
+  $form['bibtex']['biblio_remove_double_bibtex_braces'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Configure the BibTex import parser to replace all double braces with single braces.'),
+    '#return_value' => 1,
+    '#default_value' => variable_get('biblio_remove_double_bibtex_braces', 0),
+    '#description' => t('<strong>{{</strong> will be replaced with <strong>{</strong> and <strong>}}</strong> will be replaced with <strong>}</strong>. This provides compatibility with importing BibTex from the <a href="http://thomsonreuters.com/web-of-science/">Web of Science</a>. Be aware that this removes support for BibTex "Protected Capitalization".'),
+  );
 
   $result = db_query("SELECT b.name, bftd.title FROM {biblio_fields} b
                       INNER JOIN {biblio_field_type} bt ON bt.fid=b.fid
@@ -515,7 +522,6 @@ function biblio_admin_settings() {
   if (!module_exists('search')) {
     $search_text = '<div class="admin-dependencies">' . t('Depends on') . ': ' . t('Search') . ' (<span class="admin-disabled">' . t('disabled') . '</span>)</div>';
     $search_disabled = TRUE;
-    variable_set('biblio_footnotes_integration', 0);
   }
   else {
     $search_text = '<div class="admin-dependencies">' . t('Depends on') . ': ' . t('Search') . ' (<span class="admin-enabled">' . t('enabled') . '</span>)</div>';
@@ -553,6 +559,14 @@ function biblio_admin_settings() {
     '#return_value' => 1,
     '#default_value' => variable_get('biblio_index', 0),
     '#description' => t('A biblio node must be indexed for the drupal search to know its content. You need to check this option if you want to search for a biblio node that you just created or updated. Otherwise you must wait for the cron job to reindex nodes.')
+  );
+  $form['search']['biblio_search_form_filter'] = array(
+    '#type' => 'checkbox',
+    '#disabled' => $search_disabled,
+    '#title' => t('Allow search filters on search form.'),
+    '#return_value' => 1,
+    '#default_value' => variable_get('biblio_search_form_filter', 1),
+    '#description' => t('Unchecking this box will remove search filters from the search form, but may improve performance on biblio search pages.')
   );
   $form['sort'] = array(
     '#type' => 'fieldset',
@@ -2198,7 +2212,7 @@ function biblio_admin_author_edit_form($form, &$form_state, $author_id) {
         (isset($merged[$other_author->cid]) && $merged[$other_author->cid] == $author->cid) ||
         in_array($other_author->cid, $form_state['biblio_add_merge_author']))  {
       $candidate = TRUE;
-      $merge_def = ($other_author->alt_form && $other_author->aka) ? $author->cid : FALSE;
+      $merge_def = ($other_author->alt_form && $other_author->aka == $author->cid) ? $author->cid : FALSE;
       $retain_def = $other_author->alt_form ? $author->cid : FALSE;
       $retain_disable = $other_author->alt_form ? TRUE : FALSE;
     }

@@ -164,6 +164,18 @@ function biblio_batch_uninstall_finished($success, $results, $operations) {
     foreach ($vars as $var) {
       variable_del($var->name);
     }
+
+      // remove Biblio Node fields.
+    $field_instances = field_info_instances('node', 'biblio');
+    foreach ($field_instances as $instance) {
+      field_delete_instance($instance);
+    }
+
+    // remove Biblio Comment fields.
+    $field_instances = field_info_instances('comment', 'comment_node_biblio');
+    foreach ($field_instances as $instance) {
+      field_delete_instance($instance);
+    }
   }
 }
 

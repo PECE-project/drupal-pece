@@ -280,9 +280,11 @@ function theme_biblio_tabular($variables) {
     );
   }
   if (isset($node->body) && !empty($node->body) && user_access('view full text')) {
+    // Store this in a temp variable to avoid a pass-by-reference error.
+    $full_text = field_view_field('node', $node, 'body', array('label' => 'hidden'));
     $rows[] = array(
         array('data' => t('Full Text'),  'valign' => 'top'),
-        array('data' =>  drupal_render(field_view_field('node', $node, 'body', array('label' => 'hidden')))),
+        array('data' => drupal_render($full_text)),
     );
 
   }
