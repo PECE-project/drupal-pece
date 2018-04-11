@@ -154,7 +154,7 @@ projects[key][version] = 3.4
 projects[encrypt][subdir] = contrib
 projects[encrypt][version] = 2.3
 
-; Real AES PHP encryption 
+; Real AES PHP encryption
 projects[real_aes][subdir] = contrib
 projects[real_aes][version] = 1.2
 
@@ -545,7 +545,7 @@ projects[feeds][version] = 2.0-beta2
 
 ; Bibliography
 projects[biblio][subdir] = contrib
-projects[biblio][version] = 1.0-rc7
+projects[biblio][version] = 1.x-dev
 
 ; Bibliography Zotero
 projects[biblio_zotero][subdir] = contrib
