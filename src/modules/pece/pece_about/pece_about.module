@@ -37,6 +37,13 @@ function pece_about_block_view($delta) {
 
       module_load_include('inc', 'kw_itemnames');
       $about_page = kw_itemnames_load('node', 'about');
+
+      if (empty($about_page)) {
+        module_load_include('install', 'pece_about');
+        _pece_about_install_default_page();
+        $about_page = kw_itemnames_load('node', 'about');
+      }
+
       $node_wrapper = entity_metadata_wrapper('node', $about_page);
       $body_wrapper = $node_wrapper->body->value();
       $allowed_tags = '<p> <a> <em> <strong> <cite> <blockquote> <ul> <ol> <li> <dl> <dt> <dd>';
