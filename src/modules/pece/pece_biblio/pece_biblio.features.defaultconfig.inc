@@ -2431,6 +2431,15 @@ function pece_biblio_defaultconfig_strongarm() {
 function pece_biblio_defaultconfig_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'administer biblio'.
+  $permissions['administer biblio'] = array(
+    'name' => 'administer biblio',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'biblio',
+  );
+
   // Exported permission: 'create zotero_feed content'.
   $permissions['create zotero_feed content'] = array(
     'name' => 'create zotero_feed content',
