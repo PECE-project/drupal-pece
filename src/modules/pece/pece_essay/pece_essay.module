@@ -83,9 +83,12 @@ function pece_essay_form_ctools_entity_field_content_type_formatter_styles_alter
  * free_panel display on PECE Essay board.
  */
 function _pece_essay_override_essay_board_title_config_form(&$form, &$form_state, $form_id) {
-  if ($form_id != 'ctools_node_title_content_type_edit_form' &&
-      strpos(current_path(), 'free_panel') !== FALSE)
+  if ($form_id == 'ctools_node_title_content_type_edit_form' &&
+      $form_state['subtype_name'] == 'node_title' &&
+      strpos($form_state['display']->cache_key, 'free_panel') === FALSE) {
     return;
+  }
+
 
   if (!empty($form['override_title']) && !empty($form['markup'])) {
     $form['override_title']['#default_value'] = 1;
