@@ -14,3 +14,13 @@ function pece_biblio_update_7001() {
   // Revert views_default_views default config.
   pece_defaultconfig_component_rebuild_by_name('strongarm', 'pece_biblio');
 }
+
+/**
+ * Update biblio default permissions.
+ */
+function pece_biblio_update_7002() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  // Revert views_default_views default config.
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_biblio');
+}
