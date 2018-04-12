@@ -2475,5 +2475,34 @@ function pece_biblio_defaultconfig_user_default_permissions() {
     'module' => 'feeds',
   );
 
+  // Exported permission: 'show filter tab'.
+  $permissions['show filter tab'] = array(
+    'name' => 'show filter tab',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'biblio',
+  );
+
+  // Exported permission: 'show sort links'.
+  $permissions['show sort links'] = array(
+    'name' => 'show sort links',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'biblio',
+  );
+
+  // Exported permission: 'show sort links'.
+  $permissions['view full text'] = array(
+    'name' => 'view full text',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'biblio',
+  );
+
   return $permissions;
 }
