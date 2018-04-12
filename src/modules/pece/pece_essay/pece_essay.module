@@ -84,7 +84,7 @@ function pece_essay_form_ctools_entity_field_content_type_formatter_styles_alter
  */
 function _pece_essay_override_essay_board_title_config_form(&$form, &$form_state, $form_id) {
   if ($form_id == 'ctools_node_title_content_type_edit_form' &&
-      $form_state['subtype_name'] == 'node_title' &&
+      $form_state['subtype_name'] != 'node_title' &&
       strpos($form_state['display']->cache_key, 'free_panel') === FALSE) {
     return;
   }
@@ -102,9 +102,11 @@ function _pece_essay_override_essay_board_title_config_form(&$form, &$form_state
  * config form for panelizer's free_panel display on PECE Essay board.
  */
 function _pece_essay_override_essay_board_contributors_config_form(&$form, &$form_state, $form_id) {
-  if ($form_id != 'ctools_entity_field_content_type_formatter_options' &&
-    strpos(current_path(), 'free_panel') !== FALSE)
-    return;
+  if ($form_id == 'ctools_entity_field_content_type_formatter_options' &&
+    $form_state['subtype_name'] != 'node:field_pece_contributors' &&
+    strpos($form_state['display']->cache_key, 'free_panel') === FALSE) {
+      return;
+    }
 
   // Prevent user to change the default values for this pane.
   $form['override_title']['#disabled'] = 'disabled';
@@ -113,6 +115,7 @@ function _pece_essay_override_essay_board_contributors_config_form(&$form, &$for
   $form['label']['#disabled'] = 'disabled';
   $form['formatter']['#disabled'] = 'disabled';
 
+  // @TODO: Hiding the following fields might not be the best solution.
   $form['override_title']['#type'] = 'hidden';
   $form['override_title_text']['#type'] = 'hidden';
   $form['override_title_heading']['#type'] = 'hidden';
@@ -129,15 +132,18 @@ function _pece_essay_override_essay_board_contributors_config_form(&$form, &$for
  * panelizer's free_panel display on PECE Essay board.
  */
 function _pece_essay_override_essay_board_contributors_config_styles_form(&$form, &$form_state, $form_id) {
-  if ($form_id != 'ctools_entity_field_content_type_formatter_styles'  &&
-    strpos(current_path(), 'free_panel') !== FALSE)
+  if ($form_id == 'ctools_entity_field_content_type_formatter_styles'  &&
+      $form_state['subtype_name'] != 'node:field_pece_contributors' &&
+      strpos($form_state['display']->cache_key, 'free_panel') === FALSE) {
     return;
+  }
 
   // Prevent user to change the default values for this pane.
   $form['delta_offset']['#disabled'] = 'disabled';
   $form['delta_limit']['#disabled'] = 'disabled';
   $form['delta_reversed']['#disabled'] = 'disabled';
 
+  // @TODO: Hiding the following fields might not be the best solution.
   $form['delta_offset']['#type'] = 'hidden';
   $form['delta_limit']['#type'] = 'hidden';
   $form['delta_reversed']['#type'] = 'hidden';
