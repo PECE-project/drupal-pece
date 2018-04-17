@@ -40,24 +40,42 @@ function pece_essay_panelizer_ipe_access($display, $entity_type, $entity) {
 }
 
 /**
+ * Helper function to validate adminsitrator role for current logged user.
+ */
+function _pece_essay_is_administrator() {
+  global $user;
+  $admin_role = user_role_load_by_name('administrator');
+  if ($user->uid == 1) return TRUE;
+  if (user_has_role($admin_role->rid, $user)) return TRUE;
+
+  return FALSE;
+}
+
+/**
  * Implements hook_form_FORM_ID_alter().
  */
 function pece_essay_form_ctools_node_title_content_type_edit_form_alter(&$form, &$form_state, $form_id) {
-  _pece_essay_override_essay_board_title_config_form($form, $form_state, $form_id);
+  if (!_pece_essay_is_administrator()) {
+    _pece_essay_override_essay_board_title_config_form($form, $form_state, $form_id);
+  }
 }
 
 /**
  * Implements hook_form_FORM_ID_alter().
  */
 function pece_essay_form_ctools_entity_field_content_type_formatter_options_alter(&$form, &$form_state, $form_id) {
-  _pece_essay_override_essay_board_contributors_config_form($form, $form_state, $form_id);
+  if (!_pece_essay_is_administrator()) {
+    _pece_essay_override_essay_board_contributors_config_form($form, $form_state, $form_id);
+  }
 }
 
 /**
  * Implements hook_form_FORM_ID_alter().
  */
 function pece_essay_form_ctools_entity_field_content_type_formatter_styles_alter(&$form, &$form_state, $form_id) {
-  _pece_essay_override_essay_board_contributors_config_styles_form($form, $form_state, $form_id);
+  if (!_pece_essay_is_administrator()) {
+    _pece_essay_override_essay_board_contributors_config_styles_form($form, $form_state, $form_id);
+  }
 }
 
 /**
