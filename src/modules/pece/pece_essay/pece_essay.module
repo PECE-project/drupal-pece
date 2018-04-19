@@ -139,3 +139,12 @@ function _pece_essay_override_essay_board_contributors_config_styles_form(&$form
   $form['delta_limit']['#type'] = 'hidden';
   $form['delta_reversed']['#type'] = 'hidden';
 }
+
+/**
+ * Implements hook_pece_annotatable_types_info().
+ */
+function pece_essay_pece_annotatable_types_info() {
+  return array(
+    'pece_essay' => 'pece_essay',
+  );
+}
