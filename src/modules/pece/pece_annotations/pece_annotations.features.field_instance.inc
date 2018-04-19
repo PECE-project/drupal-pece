@@ -42,6 +42,12 @@ function pece_annotations_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -111,6 +117,7 @@ function pece_annotations_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => 1,
         ),
         'type' => 'entityreference_label',
@@ -123,6 +130,12 @@ function pece_annotations_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -199,6 +212,7 @@ function pece_annotations_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
@@ -211,6 +225,12 @@ function pece_annotations_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -302,6 +322,12 @@ function pece_annotations_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -371,6 +397,12 @@ function pece_annotations_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -448,6 +480,12 @@ function pece_annotations_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
