@@ -2431,6 +2431,15 @@ function pece_biblio_defaultconfig_strongarm() {
 function pece_biblio_defaultconfig_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'administer biblio'.
+  $permissions['administer biblio'] = array(
+    'name' => 'administer biblio',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'biblio',
+  );
+
   // Exported permission: 'create zotero_feed content'.
   $permissions['create zotero_feed content'] = array(
     'name' => 'create zotero_feed content',
@@ -2473,6 +2482,35 @@ function pece_biblio_defaultconfig_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'feeds',
+  );
+
+  // Exported permission: 'show filter tab'.
+  $permissions['show filter tab'] = array(
+    'name' => 'show filter tab',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'biblio',
+  );
+
+  // Exported permission: 'show sort links'.
+  $permissions['show sort links'] = array(
+    'name' => 'show sort links',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'biblio',
+  );
+
+  // Exported permission: 'show sort links'.
+  $permissions['view full text'] = array(
+    'name' => 'view full text',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'biblio',
   );
 
   return $permissions;
