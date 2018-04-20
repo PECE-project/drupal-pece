@@ -7,6 +7,26 @@
 #biblio-header
   #edit-filters
     margin-bottom: 12px
+  ul.secondary
+    padding: .5em 0
+    @media (min-width: $screen-xs-min)
+      padding: .5em 1em
+    li
+      border: none
+      border-left: 1px solid $color-gray-light
+
+      &:first-child
+        border: none
+
+
+#biblio-search-form
+  margin-bottom: 10px
+
+.biblio-export
+  float: none
+  padding: 10px 0
+  @media (min-width: $screen-xs-min)
+   float: right
 
 .biblio-current-filters
   background-color: $color-gray-extra-lighter
@@ -16,7 +36,7 @@
 
 .biblio-alpha-line
   @extend %tags
-  // %tags style overrides
+  // %tags overrides
   display: inherit
 
 .node-biblio
