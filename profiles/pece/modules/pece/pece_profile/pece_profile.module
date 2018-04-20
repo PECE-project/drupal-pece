@@ -69,3 +69,14 @@ function pece_profile_modules_enabled($modules) {
     user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('view any pece_profile_main profile'));
   }
 }
+
+/**
+ * Implements hook_profile2_update().
+ */
+function pece_profile_profile2_update($profile) {
+  $uid = $profile->uid;
+  $account = user_load($uid);
+  if ($account->uid) {
+    realname_update($account);
+  }
+}

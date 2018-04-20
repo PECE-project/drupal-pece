@@ -18,6 +18,19 @@ function pece_profile_install() {
 }
 
 /**
+ * Implements hook_profile_update_dependencies().
+ */
+function pece_profile_update_dependencies() {
+  // Indicate that pece_profile 7001 update must run after pece 7103 update.
+  // @see: pece.install
+  $dependencies['pece_profile'][7001] = array(
+    'pece' => 7103,
+  );
+
+  return $dependencies;
+}
+
+/**
  * Resets users panelizer defaults.
  */
 function pece_profile_update_7000() {
@@ -29,4 +42,18 @@ function pece_profile_update_7000() {
   // Reset all overriden panelizer for users.
   $users = entity_load('user', FALSE);
   pece_reset_panelizer_entities_to_default('user', $users, 'page_manager');
+}
+
+/**
+ * Enforce default settings for Real Name.
+ */
+function pece_profile_update_7001() {
+  // Revert exported variables.
+  features_revert(array('pece_profile' => array('strongarm')));
+  // Clear realname cache.
+  if (function_exists('realname_delete_all')) {
+    realname_delete_all();
+  }
+
+
 }
