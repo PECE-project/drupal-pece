@@ -19,6 +19,7 @@ function pece_profile_form_alter(&$form, &$form_state, $form_id) {
     $is_artifact_form = $is_node_form && in_array($form['#node']->type, $artifacts);
 
     if ($is_artifact_form) {
+      // Validate author and set contributors field automatically if needed.
       array_unshift($form['#validate'], 'pece_profile_check_author');
     }
   }
