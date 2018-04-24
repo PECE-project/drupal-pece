@@ -18,16 +18,6 @@ function pece_core_url_outbound_alter(&$path, &$options, $original_path) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
- */
-function pece_core_form_pece_fieldsite_node_form_alter(&$form, &$form_state) {
-  // Hide the comment settings fieldset.
-  $form['comment_settings']['#access'] = FALSE;
-
-  $form['author']['name']['#required'] = TRUE;
-}
-
-/**
  * Implements hook_modules_enabled().
  *
  * This hook is implemented to assign some default permissions for PECE profile.
@@ -127,4 +117,14 @@ function pece_core_er_viewmode_get_view_modes_alter(&$view_modes, $field, $insta
   $view_modes = array(
     'card' => $card_title,
   ) + $view_modes;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_core_form_pece_fieldsite_node_form_alter(&$form, &$form_state) {
+  // Hide the comment settings fieldset.
+  $form['comment_settings']['#access'] = FALSE;
+
+  $form['author']['name']['#required'] = TRUE;
 }
