@@ -122,3 +122,18 @@ function pece_get_default_field_value($entity_type, $bundle, $field_name, $langu
   $instance = field_info_instance($entity_type, $field_name, $bundle);
   return field_get_default_value($entity_type, $entity, $field, $instance, $language);
 }
+
+/**
+ * Helper function to validate adminsitrator role for a given/current user.
+ */
+function _pece_is_admin($account) {
+  if (empty($account)) {
+    global $user;
+    $account = $user;
+  }
+  $admin_role = user_role_load_by_name('administrator');
+  if ($account->uid == 1) return TRUE;
+  if (user_has_role($admin_role->rid, $account)) return TRUE;
+
+  return FALSE;
+}
