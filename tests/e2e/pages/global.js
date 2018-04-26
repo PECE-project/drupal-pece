@@ -6,9 +6,9 @@
 var pages = require('./index');
 
 Object.keys(pages).forEach(function (pageName) {
-  if (typeof GLOBAL[pageName] !== 'undefined') {
+  if (typeof global[pageName] !== 'undefined') {
     throw '"' + pageName + '" was already defined in the Global scope.';
   }
 
-  GLOBAL[pageName] = pages[pageName];
+  global[pageName] = pages[pageName];
 });
