@@ -322,9 +322,8 @@ projects[smart_trim][subdir] = contrib
 projects[file_entity][version] = 2.12
 projects[file_entity][subdir] = contrib
 
-projects[media][version] = 2.13
+projects[media][version] = 2.19
 projects[media][subdir] = contrib
-projects[media][patch][2372907] = https://www.drupal.org/files/issues/media-replace-fake-button-2372907-2.patch
 
 projects[ckeditor][version] = 1.16
 projects[ckeditor][subdir] = contrib
