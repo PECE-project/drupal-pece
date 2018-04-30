@@ -27,9 +27,6 @@ projects[kw_itemnames][subdir] = kraftwagen
 ; @TODO: Update and reapply the following patch if needed. @see https://www.drupal.org/project/ctools/issues/2671150
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
 
-; Overrides panopoly's libraries.
-projects[libraries][version] = 2.2
-projects[libraries][subdir] = contrib
 
 ; Overrides panopoly's token.
 projects[token][version] = 1.7
