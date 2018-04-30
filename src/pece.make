@@ -53,6 +53,7 @@ projects[views][version] = 3.18
 projects[views][subdir] = contrib
 projects[views][patch][2037469] = http://drupal.org/files/views-exposed-sorts-2037469-1.patch
 projects[views][patch][2331209] = https://www.drupal.org/files/issues/2331209-4-views-7.x-3.x-undefined-index.patch
+projects[views][patch][2908538] = https://www.drupal.org/files/issues/views-and_missing_parenthesis-2908538-2-D7.patch
 
 projects[views_infinite_scroll][version] = 2.0
 projects[views_infinite_scroll][subdir] = contrib
