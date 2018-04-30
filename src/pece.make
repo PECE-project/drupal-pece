@@ -37,9 +37,6 @@ projects[xautoload][subdir]  = contrib
 projects[prevent_js_alerts][version] = 1.0
 projects[prevent_js_alerts][subdir] = contrib
 
-projects[pathauto][version] = 1.3
-projects[pathauto][subdir] = contrib
-
 projects[pathauto_entity][version] = 1.0
 projects[pathauto_entity][subdir] = contrib
 
