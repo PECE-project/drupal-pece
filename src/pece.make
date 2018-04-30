@@ -67,6 +67,7 @@ projects[tvi][subdir] = contrib
 projects[better_exposed_filters][version] = 3.5
 projects[better_exposed_filters][subdir] = contrib
 
+; Overrides panopoly's views_autocomplete_filters.
 projects[views_autocomplete_filters][version] = 1.2
 projects[views_autocomplete_filters][subdir] = contrib
 projects[views_autocomplete_filters][patch][2374709] = http://www.drupal.org/files/issues/views_autocomplete_filters-cache-2374709-2.patch
@@ -157,6 +158,7 @@ projects[panelizer][patch][1549608] = https://www.drupal.org/files/issues/paneli
 projects[panelizer][patch][2788851] = https://www.drupal.org/files/issues/panelizer-administer-panelizer-2788851-2.patch
 projects[panelizer][patch][2812807] = https://www.drupal.org/files/issues/panelizer--2812807--provide-entity-on-access-hooks.patch
 
+; Overrides panopoly's panels.
 projects[panels][version] = 3.9
 projects[panels][subdir] = contrib
 projects[panels][patch][1570120] = https://www.drupal.org/files/issues/move-image-1570120-31.patch
@@ -485,8 +487,7 @@ projects[node_expire][subdir] = contrib
 projects[node_expire][version] = 2.2
 
 
-; Date (dependency of node_expire)
-; Overrides panopoly's libraries.
+; Overrides panopoly's date (dependency of node_expire).
 projects[date][subdir] = contrib
 projects[date][version] = 2.10
 
