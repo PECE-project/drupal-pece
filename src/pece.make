@@ -98,10 +98,6 @@ projects[filter_perms][subdir]  = contrib
 ; Configuration Management
 ; =====================
 
-
-projects[features][version] = 2.10
-projects[features][subdir] = contrib
-
 projects[diff][version] = 3.3
 projects[diff][subdir] = contrib
 
