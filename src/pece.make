@@ -22,13 +22,10 @@ projects[kw_itemnames][subdir] = kraftwagen
 ; =====================
 
 ; Overrides panopoly's ctools.
-projects[ctools][version] = 1.12
-projects[ctools][subdir] = contrib
-; @TODO: Update and reapply the following patch if needed.
+ projects[ctools][version] = 1.14
+ projects[ctools][subdir] = contrib
+; @TODO: Update and reapply the following patch if needed. @see https://www.drupal.org/project/ctools/issues/2671150
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
-projects[ctools][patch][2607626] = https://www.drupal.org/files/issues/ctools-close-modal-2607626-5.patch
-projects[ctools][patch][2787045] = https://www.drupal.org/files/issues/ctools-jquery_compatibility-2787045-14.patch
-projects[ctools][patch][2897965] = https://www.drupal.org/files/issues/ctools-wizard-destination-2897965-2.patch
 
 ; Overrides panopoly's libraries.
 projects[libraries][version] = 2.2
