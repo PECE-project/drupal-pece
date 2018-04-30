@@ -1,4 +1,12 @@
-language: node_js
+language: php
+
+php:
+  - 5.6
+  - 7.0
+  - hhvm
+
+env:
+  - TRAVIS_NODE_VERSION="4"
 
 services:
   - docker
@@ -12,6 +20,10 @@ addons:
 # Production Env Setup
 before_install:
   - docker-compose run production
+
+install:
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+  - npm install
 
 before_deploy:
   - openssl aes-256-cbc -K $encrypted_33c1172ef7ff_key -iv $encrypted_33c1172ef7ff_iv -in deploy-travisci.enc -out /tmp/deploy_rsa -d
@@ -29,7 +41,7 @@ before_script:
 
 script:
   - echo "Script Running..."
-  - echo "[...]"
+  - npm test
 
 deploy:
   - provider: script
