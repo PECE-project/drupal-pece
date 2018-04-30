@@ -34,9 +34,6 @@ projects[uuid][subdir] = contrib
 projects[xautoload][version] = 5.7
 projects[xautoload][subdir]  = contrib
 
-projects[jquery_update][version] = 2.7
-projects[jquery_update][subdir] = contrib
-
 projects[prevent_js_alerts][version] = 1.0
 projects[prevent_js_alerts][subdir] = contrib
 
