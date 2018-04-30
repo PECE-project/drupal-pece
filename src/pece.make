@@ -101,10 +101,6 @@ projects[filter_perms][subdir]  = contrib
 projects[diff][version] = 3.3
 projects[diff][subdir] = contrib
 
-projects[defaultconfig][version] = 1.0-alpha11
-projects[defaultconfig][subdir] = contrib
-projects[defaultconfig][patch][1900574] = http://drupal.org/files/1900574.defaultconfig.undefinedindex_11.patch
-
 ; =====================
 ; Security
 ; =====================
