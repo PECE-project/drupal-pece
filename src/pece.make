@@ -98,9 +98,6 @@ projects[filter_perms][subdir]  = contrib
 ; Configuration Management
 ; =====================
 
-; Overrides panopoly_core's features_override.
-projects[features_override][version] = 2.0-rc3
-projects[features_override][subdir] = contrib
 
 projects[features][version] = 2.10
 projects[features][subdir] = contrib
