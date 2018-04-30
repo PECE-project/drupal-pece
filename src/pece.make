@@ -28,10 +28,6 @@ projects[kw_itemnames][subdir] = kraftwagen
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
 
 
-; Overrides panopoly's token.
-projects[token][version] = 1.7
-projects[token][subdir] = contrib
-
 ; Overrides panopoly's entity.
 projects[entity][version] = 1.9
 projects[entity][subdir] = contrib
