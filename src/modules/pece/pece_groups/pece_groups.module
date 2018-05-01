@@ -28,13 +28,31 @@ function pece_groups_menu() {
  *  Access Callback.
  */
 function pece_groups_edit_group_access($node) {
-  $skip_content = array(
-    'pece_group',
-    'pece_memo',
-    'pece_essay',
-    'pece_photo_essay',
+  $allowed_content = array(
+    'pece_artifact_bundle',
+    'pece_artifact_audio',
+    'pece_artifact_image',
+    'pece_artifact_pdf',
+    'pece_artifact_text',
+    'pece_artifact_video',
+    'pece_artifact_website',
+    'pece_artifact_future_anterior',
+    // 'frontpage_image_slideshow',
+    // 'panopoly_lading_page',
+    // 'pece_photo_essay',
+    // 'pece_about_page',
+    // 'pece_annotation',
+    // 'pece_fieldsite',
+    // 'pece_sub_logic',
+    // 'pece_analytic',
+    // 'panopoly_page',
+    // 'pece_project',
+    // 'pece_essay',
+    // 'pece_group',
+    // 'pece_memo',
+    // 'biblio',
   );
-  return (in_array($node->type, $skip_content)) ? FALSE : user_is_logged_in();
+  return (!in_array($node->type, $allowed_content)) ? FALSE : user_is_logged_in();
 }
 
 /**
