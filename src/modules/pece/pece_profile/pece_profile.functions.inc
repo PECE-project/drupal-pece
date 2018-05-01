@@ -13,7 +13,7 @@ function pece_profile_check_author(&$form, &$form_state) {
 
   global $user;
 
-  if (!is_contributor($user)) {
+  if (!is_contributor($user) && !is_researcher($user)) {
     return;
   }
 
@@ -42,6 +42,11 @@ function pece_profile_check_author(&$form, &$form_state) {
 
 function is_contributor($user) {
   $contributor_role = user_role_load_by_name('Contributor');
+  return (in_array($contributor_role->rid, array_keys($user->roles)));
+}
+
+function is_researcher($user) {
+  $contributor_role = user_role_load_by_name('Researcher');
   return (in_array($contributor_role->rid, array_keys($user->roles)));
 }
 
