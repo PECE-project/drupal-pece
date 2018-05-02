@@ -26,5 +26,13 @@ function pece_groups_og_features_default_roles() {
     'name' => 'Researcher',
   );
 
+  // Exported OG Role: 'node:pece_group:group administrator'.
+  $roles['node:pece_group:group administrator'] = array(
+    'gid' => 0,
+    'group_type' => 'node',
+    'group_bundle' => 'pece_group',
+    'name' => 'group administrator',
+  );
+
   return $roles;
 }
