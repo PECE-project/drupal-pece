@@ -59,15 +59,18 @@ function pece_groups_edit_group_access($node) {
  * Menu callback; Presents the group audiece field editing form given a node.
  */
 function pece_groups_edit_group_field($node) {
-  drupal_set_title(t('<em>Edit</em> @title', array(
+  drupal_set_title(t('<em>Edit group audience:</em> @title', array(
     '@title' => check_plain($node->title)
   )), PASS_THROUGH);
 
   $form_state['build_info']['args'] = array($node);
+  $form_state['pece_groups_edit_group_field'] = TRUE;
   form_load_include($form_state, 'inc', 'node', 'node.pages');
-
   $form = drupal_build_form($node->type . '_node_form', $form_state);
+  // Set access FALSE on fields that are not used in this form.
   _pece_groups_hide_edit_form_fields($form);
+  // Prevent form errors on media fields by adding element-invisible class
+  // rather than setting access FALSE.
   _pece_groups_edit_form_fields_invisible($form);
 
   return $form;
