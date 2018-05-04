@@ -16,6 +16,12 @@ function pece_profile_check_author(&$form, &$form_state) {
   if (!is_contributor($user) && !is_researcher($user)) {
     return;
   }
+  // @TODO: Move it to pece_groups and ommit this validate from the form.
+  // Skip contributors field autofill when on Edit group audience page.
+  if (isset($form_state['pece_groups_edit_group_field']) &&
+      $form_state['pece_groups_edit_group_field'] === TRUE) {
+    return;
+  }
 
   $field_contributors = field_get_items('node', $form['#entity'], 'field_pece_contributors');
   // Skip contributors field autofill when users is already set as so.
