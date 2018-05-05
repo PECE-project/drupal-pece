@@ -123,7 +123,7 @@ function pece_profile_default_page_manager_handlers() {
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'title',
-    'formatter' => 'text_plain',
+    'formatter' => 'text_default',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
