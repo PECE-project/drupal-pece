@@ -522,6 +522,7 @@ function pece_annotations_annotate_form_third($form, &$form_state) {
   unset($form['field_pece_analytic']);
   unset($form['field_pece_artifact']);
   unset($form['field_pece_uri']);
+  unset($form['field_permissions']);
 
   return $form;
 }
@@ -575,6 +576,7 @@ function pece_annotations_annotate_form_save_annotation(&$form, &$form_state) {
   $node_wrapper->field_pece_uri->set('pece_annotation_' . REQUEST_TIME);
   $node_wrapper->field_pece_artifact->set(intval($annotation_values->artifact->nid));
   $node_wrapper->field_pece_analytic->set(intval($annotation_values->analytic));
+  $node_wrapper->field_permissions->set($annotation_values->artifact->field_permissions[LANGUAGE_NONE][0]['value']);
 
   // An easy way to save the license and tags fields.
   field_attach_submit('node', $entity, $form, $form_state);
