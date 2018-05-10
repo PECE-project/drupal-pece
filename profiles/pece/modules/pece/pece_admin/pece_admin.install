@@ -7,20 +7,20 @@
  /**
   * Adds default permissions for administrator user role.
   */
- function pece_admin_update_7001() {
-   module_load_include('inc', 'pece', 'pece.functions');
+function pece_admin_update_7001() {
+ module_load_include('inc', 'pece', 'pece.functions');
 
-   // Revert default config user_default_permissions.
-   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_admin');
- }
+ // Revert default config user_default_permissions.
+ pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_admin');
+}
 
 
 /**
  * Adds Content Revision default permissions for administrator and authenticated user roles.
  */
- function pece_admin_update_7002() {
-   module_load_include('inc', 'pece', 'pece.functions');
+function pece_admin_update_7002() {
+ module_load_include('inc', 'pece', 'pece.functions');
 
-   // Revert default config user_default_permissions.
-   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_admin');
- }
+ // Revert default config user_default_permissions.
+ pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_admin');
+}
