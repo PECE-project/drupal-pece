@@ -5,3 +5,156 @@
  */
 
 include_once 'pece_groups.features.inc';
+
+
+// Enable PSR-4 Namespaces.
+xautoload()->registerModulePsr4(__FILE__, 'src');
+
+/**
+ * Implements hook_menu().
+ */
+function pece_groups_menu() {
+  $items['node/%node/edit-group'] = array(
+    'title' => 'Edit group audience',
+    'page callback' => 'pece_groups_edit_group_field',
+    'page arguments' => array(1),
+    'access callback' => 'pece_groups_edit_group_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
+  );
+
+  return $items;
+}
+
+/**
+ *  Access Callback.
+ */
+function pece_groups_edit_group_access($node) {
+  $allowed_content = array(
+    'pece_artifact_bundle',
+    'pece_artifact_audio',
+    'pece_artifact_image',
+    'pece_artifact_pdf',
+    'pece_artifact_text',
+    'pece_artifact_video',
+    'pece_artifact_website',
+    'pece_artifact_future_anterior',
+    // 'frontpage_image_slideshow',
+    // 'panopoly_lading_page',
+    // 'pece_photo_essay',
+    // 'pece_about_page',
+    // 'pece_annotation',
+    // 'pece_fieldsite',
+    // 'pece_sub_logic',
+    // 'pece_analytic',
+    // 'panopoly_page',
+    // 'pece_project',
+    // 'pece_essay',
+    // 'pece_group',
+    // 'pece_memo',
+    // 'biblio',
+  );
+  return (!in_array($node->type, $allowed_content)) ? FALSE : user_is_logged_in();
+}
+
+/**
+ * Menu callback; Presents the group audiece field editing form given a node.
+ */
+function pece_groups_edit_group_field($node) {
+  drupal_set_title(t('<em>Edit group audience:</em> @title', array(
+    '@title' => check_plain($node->title)
+  )), PASS_THROUGH);
+
+  $form_state['build_info']['args'] = array($node);
+  $form_state['pece_groups_edit_group_field'] = TRUE;
+  form_load_include($form_state, 'inc', 'node', 'node.pages');
+  $form = drupal_build_form($node->type . '_node_form', $form_state);
+  // Set access FALSE on fields that are not used in this form.
+  _pece_groups_hide_edit_form_fields($form);
+  // Prevent form errors on media fields by adding element-invisible class
+  // rather than setting access FALSE.
+  _pece_groups_edit_form_fields_invisible($form);
+
+  return $form;
+}
+
+/**
+ * Helper for hidding fields (access FALSE) on node edit form.
+ */
+function _pece_groups_hide_edit_form_fields(&$form, $fields = array()) {
+  if (empty($fields)) {
+    $fields = array(
+      'title',
+      'body',
+      'options1', // Publishing Options
+      'group_access',
+      'field_pece_uri',
+      'field_pece_tags',
+      'field_pece_iframe',
+      'field_pece_source',
+      'field_permissions',
+      'field_pece_license',
+      'field_pece_authors',
+      'field_pece_location',
+      'field_pece_language',
+      'field_pece_fieldsite',
+      'field_pece_artifacts',
+      'og_roles_permissions',
+      'group_content_access',
+      'field_pece_project_ref',
+      'field_pece_file_format',
+      'field_pece_website_url',
+      'field_pece_bibliography',
+      'field_pece_contributors',
+      'field_pece_media_duration',
+      'field_pece_crit_commentary',
+      'field_pece_photo_essay_items',
+      'field_pece_substantive_logic',
+    );
+  }
+  foreach ($fields as $field) {
+    $form[$field]['#access'] = FALSE;
+  }
+}
+
+/**
+ * Helper for hidding fields by adding 'element-invisible' class.
+ *
+ * Also useful on use cases that using "['#access']=FALSE" ends up changing
+ * field value.
+ */
+function _pece_groups_edit_form_fields_invisible(&$form, $fields = array()) {
+  if (empty($fields)) {
+    $fields = array(
+      'field_thumbnail',
+      'field_pece_media_pdf',
+      'field_pece_media_image',
+      'field_pece_media_audio',
+      'field_pece_media_video',
+      // Pervents use_fieldsite_local value to change.
+      'field_pece_use_fieldsite_local',
+    );
+  }
+  foreach ($fields as $field) {
+    $form[$field]['#attributes']['class'][] = 'element-invisible';
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function pece_groups_form_alter(&$form, &$form_state, $form_id) {
+  if (strpos($form_id,'_node_form') !== FALSE) {
+    if (isset($form_state['pece_groups_edit_group_field']) &&
+        $form_state['pece_groups_edit_group_field'] === TRUE)
+
+    $req_fields = array(
+      'field_pece_contributors',
+      'field_pece_crit_commentary',
+    );
+    foreach ($req_fields as $field) {
+      Drupal\pece_groups\FormBypasser::RemoveRequiredFields($form[$field], $form_id);
+    }
+  }
+}
