@@ -54,6 +54,18 @@ function pece_profile_update_7001() {
   if (function_exists('realname_delete_all')) {
     realname_delete_all();
   }
-
-
 }
+
+ /**
+  *  Update user profile display settings.
+  */
+ function pece_profile_update_7002() {
+   module_load_include('inc', 'pece', 'pece.functions');
+
+   // Revert default config user_default_permissions.
+   pece_defaultconfig_component_rebuild_by_name('field_default_fields', 'pece_profile');
+
+   // Reset all overriden panelizer for users.{
+   $users = entity_load('user', FALSE);
+   pece_reset_panelizer_entities_to_default('user', $users, 'page_manager');
+ }
