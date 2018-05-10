@@ -22,25 +22,10 @@ projects[kw_itemnames][subdir] = kraftwagen
 ; =====================
 
 ; Overrides panopoly's ctools.
-projects[ctools][version] = 1.12
-projects[ctools][subdir] = contrib
-; @TODO: Update and reapply the following patch if needed.
+ projects[ctools][version] = 1.14
+ projects[ctools][subdir] = contrib
+; @TODO: Update and reapply the following patch if needed. @see https://www.drupal.org/project/ctools/issues/2671150
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
-projects[ctools][patch][2607626] = https://www.drupal.org/files/issues/ctools-close-modal-2607626-5.patch
-projects[ctools][patch][2787045] = https://www.drupal.org/files/issues/ctools-jquery_compatibility-2787045-14.patch
-projects[ctools][patch][2897965] = https://www.drupal.org/files/issues/ctools-wizard-destination-2897965-2.patch
-
-; Overrides panopoly's libraries.
-projects[libraries][version] = 2.2
-projects[libraries][subdir] = contrib
-
-; Overrides panopoly's token.
-projects[token][version] = 1.7
-projects[token][subdir] = contrib
-
-; Overrides panopoly's entity.
-projects[entity][version] = 1.9
-projects[entity][subdir] = contrib
 
 ; Overrides panopoly's uuid.
 projects[uuid][version] = 1.0-beta1
@@ -49,14 +34,8 @@ projects[uuid][subdir] = contrib
 projects[xautoload][version] = 5.7
 projects[xautoload][subdir]  = contrib
 
-projects[jquery_update][version] = 2.7
-projects[jquery_update][subdir] = contrib
-
 projects[prevent_js_alerts][version] = 1.0
 projects[prevent_js_alerts][subdir] = contrib
-
-projects[pathauto][version] = 1.3
-projects[pathauto][subdir] = contrib
 
 projects[pathauto_entity][version] = 1.0
 projects[pathauto_entity][subdir] = contrib
@@ -74,6 +53,7 @@ projects[views][version] = 3.18
 projects[views][subdir] = contrib
 projects[views][patch][2037469] = http://drupal.org/files/views-exposed-sorts-2037469-1.patch
 projects[views][patch][2331209] = https://www.drupal.org/files/issues/2331209-4-views-7.x-3.x-undefined-index.patch
+projects[views][patch][2908538] = https://www.drupal.org/files/issues/views-and_missing_parenthesis-2908538-2-D7.patch
 
 projects[views_infinite_scroll][version] = 2.0
 projects[views_infinite_scroll][subdir] = contrib
@@ -87,6 +67,7 @@ projects[tvi][subdir] = contrib
 projects[better_exposed_filters][version] = 3.5
 projects[better_exposed_filters][subdir] = contrib
 
+; Overrides panopoly's views_autocomplete_filters.
 projects[views_autocomplete_filters][version] = 1.2
 projects[views_autocomplete_filters][subdir] = contrib
 projects[views_autocomplete_filters][patch][2374709] = http://www.drupal.org/files/issues/views_autocomplete_filters-cache-2374709-2.patch
@@ -117,22 +98,8 @@ projects[filter_perms][subdir]  = contrib
 ; Configuration Management
 ; =====================
 
-; Overrides panopoly_core's features_override.
-projects[features_override][version] = 2.0-rc3
-projects[features_override][subdir] = contrib
-
-projects[features][version] = 2.10
-projects[features][subdir] = contrib
-
 projects[diff][version] = 3.3
 projects[diff][subdir] = contrib
-
-projects[strongarm][version] = 2.0
-projects[strongarm][subdir] = contrib
-
-projects[defaultconfig][version] = 1.0-alpha11
-projects[defaultconfig][subdir] = contrib
-projects[defaultconfig][patch][1900574] = http://drupal.org/files/1900574.defaultconfig.undefinedindex_11.patch
 
 ; =====================
 ; Security
@@ -177,6 +144,7 @@ projects[panelizer][patch][1549608] = https://www.drupal.org/files/issues/paneli
 projects[panelizer][patch][2788851] = https://www.drupal.org/files/issues/panelizer-administer-panelizer-2788851-2.patch
 projects[panelizer][patch][2812807] = https://www.drupal.org/files/issues/panelizer--2812807--provide-entity-on-access-hooks.patch
 
+; Overrides panopoly's panels.
 projects[panels][version] = 3.9
 projects[panels][subdir] = contrib
 projects[panels][patch][1570120] = https://www.drupal.org/files/issues/move-image-1570120-31.patch
@@ -198,10 +166,13 @@ projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_core][version] = 1.50
+projects[panopoly_admin][version] = 1.51
+projects[panopoly_admin][subdir] = contrib
+
+projects[panopoly_core][version] = 1.51
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.50
+projects[panopoly_images][version] = 1.51
 projects[panopoly_images][subdir] = contrib
 
 ; Panopoly images depending libraries
@@ -213,36 +184,33 @@ libraries[jquery.imgareaselect][download][type] = file
 libraries[jquery.imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v0.9.11-rc.1.tar.gz
 libraries[jquery.imgareaselect][download][subtree] = imgareaselect-0.9.11-rc.1
 
-projects[panopoly_theme][version] = 1.50
-projects[panopoly_theme][subdir] = contrib
-
-projects[panopoly_magic][version] = 1.50
+projects[panopoly_magic][version] = 1.51
 projects[panopoly_magic][subdir] = contrib
 
+projects[panopoly_theme][version] = 1.51
+projects[panopoly_theme][subdir] = contrib
+
 ; Overrides panopoly's panopoly_widgets.
-projects[panopoly_widgets][version] = 1.50
+projects[panopoly_widgets][version] = 1.53
 projects[panopoly_widgets][subdir] = contrib
 projects[panopoly_widgets][patch][2919401] = https://www.drupal.org/files/issues/panopoly_widgets-update-tablefield-2919401-3.patch
 
-projects[panopoly_admin][version] = 1.50
-projects[panopoly_admin][subdir] = contrib
-
-projects[panopoly_users][version] = 1.50
+projects[panopoly_users][version] = 1.51
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.50
+projects[panopoly_pages][version] = 1.51
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_wysiwyg][version] = 1.50
-projects[panopoly_wysiwyg][subdir] = contrib
-
+projects[panopoly_search][version] = 1.51
 projects[panopoly_search][subdir] = contrib
-projects[panopoly_search][version] = 1.50
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
 
+projects[panopoly_wysiwyg][version] = 1.51
+projects[panopoly_wysiwyg][subdir] = contrib
+
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.50
+projects[panopoly_test][version] = 1.51
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
@@ -505,8 +473,7 @@ projects[node_expire][subdir] = contrib
 projects[node_expire][version] = 2.2
 
 
-; Date (dependency of node_expire)
-; Overrides panopoly's libraries.
+; Overrides panopoly's date (dependency of node_expire).
 projects[date][subdir] = contrib
 projects[date][version] = 2.10
 
