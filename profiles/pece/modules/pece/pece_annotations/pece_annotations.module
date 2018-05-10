@@ -592,3 +592,20 @@ function pece_annotations_annotate_form_save_continue(&$form, &$form_state) {
   $form_state['clicked_button']['#wizard type'] = 'next';
   $form_state['clicked_button']['#next'] = 'second';
 }
+
+/**
+* Get all annotatable entities.
+*/
+function pece_annotations_fetch_annotatable_entities() {
+  $annotatable = module_invoke_all('pece_annotatable_types_info');
+  drupal_alter('pece_annotatable_types_info_alter', $annotatable);
+  return $annotatable;
+}
+
+/**
+ * Implements hook_pece_annotatable_types_info().
+ */
+function pece_annotations_pece_annotatable_types_info() {
+  $annottbl_types = pece_artifacts_fetch_all_types();
+  return $annottbl_types;
+}

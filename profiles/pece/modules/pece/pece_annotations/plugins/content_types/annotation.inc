@@ -57,10 +57,10 @@ function pece_annotations_annotation_pane_render($subtype, $conf, $args, $contex
   $context_type = isset($context->keyword) ? $context->keyword : null;
   $node_type    = $context_type == 'node' ? $context->data->type : null;
 
-  $artifacts = pece_artifacts_fetch_all_types();
+  $can_annotate = pece_annotations_fetch_annotatable_entities();
 
   // Check for device node context.
-  if (!in_array($node_type, $artifacts)) {
+  if (!in_array($node_type, $can_annotate)) {
 
     // Alert admin of wrong context.
     $block->content = t('This pane might not be used in this context.');
