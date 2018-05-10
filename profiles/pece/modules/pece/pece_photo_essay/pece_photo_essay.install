@@ -148,3 +148,15 @@ function pece_photo_essay_update_7002() {
 
   pece_set_permissions($photo_essay_permissions);
 }
+
+/**
+ * Removes field_pece_authors from pece_photo_essay contents.
+ */
+function pece_photo_essay_update_7003() {
+  if ($instance = field_info_instance('node', 'field_pece_authors', 'pece_photo_essay')) {
+    field_delete_instance($instance);
+    if (function_exists('drush_print')) {
+      drush_print('Deleted field field_pece_authors from pece_photo_essay node types.');
+    }
+  }
+}

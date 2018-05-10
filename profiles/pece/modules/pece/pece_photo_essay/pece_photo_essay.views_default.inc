@@ -12,10 +12,10 @@ function pece_photo_essay_views_default_views() {
 
   $view = new view();
   $view->name = 'pece_group_photo_essays';
-  $view->description = 'Lists the artifacts assigned to a given group.';
+  $view->description = 'Lists Photo Essays and PECE Essays assigned to a given group.';
   $view->tag = 'PECE';
   $view->base_table = 'node';
-  $view->human_name = 'PECE - Group Photo Essays';
+  $view->human_name = 'PECE - Group Essays';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -114,6 +114,7 @@ function pece_photo_essay_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'pece_photo_essay' => 'pece_photo_essay',
+    'pece_essay' => 'pece_essay',
   );
   $handler->display->display_options['argument_input'] = array(
     'og_group_ref_target_id' => array(
