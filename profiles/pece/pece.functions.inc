@@ -122,3 +122,42 @@ function pece_get_default_field_value($entity_type, $bundle, $field_name, $langu
   $instance = field_info_instance($entity_type, $field_name, $bundle);
   return field_get_default_value($entity_type, $entity, $field, $instance, $language);
 }
+
+/**
+ * Checks if a given/current user has adminsitrator role.
+ */
+function _pece_is_admin($account) {
+  if (empty($account)) {
+    global $user;
+    $account = $user;
+  }
+  $admin_role = user_role_load_by_name('administrator');
+  if ($account->uid == 1) return TRUE;
+  if (user_has_role($admin_role->rid, $account)) return TRUE;
+
+  return FALSE;
+}
+
+/**
+ * Checks if a given/current user has Contributor role.
+ */
+function _pece_is_contributor($account) {
+  if (empty($account)) {
+    global $user;
+    $account = $user;
+  }
+  $contributor_role = user_role_load_by_name('Contributor');
+  return (in_array($contributor_role->rid, array_keys($account->roles)));
+}
+
+/**
+ * Checks if a given/current user has Researcher role.
+ */
+function _pece_is_researcher($account) {
+  if (empty($account)) {
+    global $user;
+    $account = $user;
+  }
+  $contributor_role = user_role_load_by_name('Researcher');
+  return (in_array($contributor_role->rid, array_keys($account->roles)));
+}
