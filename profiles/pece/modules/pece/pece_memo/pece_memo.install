@@ -1,0 +1,17 @@
+<?php
+/**
+ * @file
+ * Installation code for the PECE Memo feature.
+ */
+
+/**
+* Removes field_pece_authors from pece_memo contents.
+*/
+function pece_memo_update_7001() {
+ if ($instance = field_info_instance('node', 'field_pece_authors', 'pece_memo')) {
+   field_delete_instance($instance);
+   if (function_exists('drush_print')) {
+     drush_print('Deleted field field_pece_authors from pece_memo node types.');
+   }
+ }
+}
