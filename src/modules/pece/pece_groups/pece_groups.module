@@ -111,7 +111,6 @@ function _pece_groups_hide_edit_form_fields(&$form, $fields = array()) {
       'field_pece_crit_commentary',
       'field_pece_photo_essay_items',
       'field_pece_substantive_logic',
-      'field_pece_use_fieldsite_local',
     );
   }
   foreach ($fields as $field) {
@@ -120,7 +119,10 @@ function _pece_groups_hide_edit_form_fields(&$form, $fields = array()) {
 }
 
 /**
- * Helper for hidding by adding 'element-invisible' class on edit form fields.
+ * Helper for hidding fields by adding 'element-invisible' class.
+ *
+ * Also useful on use cases that using "['#access']=FALSE" ends up changing
+ * field value.
  */
 function _pece_groups_edit_form_fields_invisible(&$form, $fields = array()) {
   if (empty($fields)) {
@@ -130,6 +132,8 @@ function _pece_groups_edit_form_fields_invisible(&$form, $fields = array()) {
       'field_pece_media_image',
       'field_pece_media_audio',
       'field_pece_media_video',
+      // Pervents use_fieldsite_local value to change.
+      'field_pece_use_fieldsite_local',
     );
   }
   foreach ($fields as $field) {
