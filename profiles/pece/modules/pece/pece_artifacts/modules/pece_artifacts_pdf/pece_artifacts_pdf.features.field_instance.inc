@@ -42,6 +42,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -117,6 +123,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -225,6 +237,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -262,7 +280,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'enable' => 0,
         'profile' => '',
       ),
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -306,6 +324,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -394,6 +418,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -467,6 +497,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -547,6 +583,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -622,6 +664,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -736,6 +784,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -818,6 +872,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -891,6 +951,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -984,6 +1050,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1059,6 +1131,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -1142,6 +1220,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1220,6 +1304,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
