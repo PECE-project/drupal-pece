@@ -426,7 +426,7 @@ input[type="button"].btn-block {
 .profile--thumbnail.view-mode-pece-thumbnail .icon.image::before, i::before,
 [class*="node-pece-"] .icon::before,
 .user-profile .icon::before,
-.node-pece-group .icon::before, .view-mode-mini-teaser .icon.image::before, .view-id-pece_my_noted_artifacts li.views-row > div::before,
+.node-pece-group .icon::before, .view-id-pece_my_noted_artifacts li.views-row > div::before,
 .view-id-pece_my_analytics li.views-row > div::before,
 .view-pece-my-biblio-items li.views-row > div::before,
 .view-id-pece_my_projects li.views-row > div::before,
@@ -504,7 +504,9 @@ input[type="button"].btn-block {
   position: relative;
   left: 0;
   top: 0;
-  display: block; }
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
   .slick-track:before, .slick-track:after {
     content: "";
     display: table; }
@@ -1321,8 +1323,6 @@ i.pece_memo::before {
     height: 70px;
     line-height: 70px;
     background-color: #7851A9; }
-  .view-mode-mini-teaser .icon.image::before {
-    content: "\f03e"; }
 
 /*
  *------------------------------------------------------------------------------
