@@ -49,6 +49,33 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'module' => 'system',
   );
 
+  // Exported permission: 'create site notices'.
+  $permissions['create site notices'] = array(
+    'name' => 'create site notices',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'site_notice',
+  );
+
+  // Exported permission: 'delete any site notices'.
+  $permissions['delete any site notices'] = array(
+    'name' => 'delete any site notices',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'site_notice',
+  );
+
+  // Exported permission: 'edit any site notices'.
+  $permissions['edit any site notices'] = array(
+    'name' => 'edit any site notices',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'site_notice',
+  );
+
   // Exported permission: 'revert revisions'.
   $permissions['revert revisions'] = array(
     'name' => 'revert revisions',
