@@ -18,7 +18,7 @@ function pece_annotations_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'card' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'smart_trim',
         'settings' => array(
           'more_link' => 1,
@@ -121,14 +121,15 @@ function pece_annotations_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'card' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
+        'label' => 'hidden',
+        'module' => 'er_viewmode',
         'settings' => array(
-          'bypass_access' => 0,
-          'link' => 1,
+          'links' => 1,
+          'use_content_language' => 1,
+          'view_mode' => 'meta_content',
         ),
-        'type' => 'entityreference_label',
-        'weight' => 1,
+        'type' => 'entityreference_entity_view',
+        'weight' => 2,
       ),
       'default' => array(
         'label' => 'above',
@@ -220,14 +221,15 @@ function pece_annotations_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'card' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
+        'label' => 'hidden',
+        'module' => 'er_viewmode',
         'settings' => array(
-          'bypass_access' => 0,
-          'link' => 1,
+          'links' => 1,
+          'use_content_language' => 1,
+          'view_mode' => 'meta_content',
         ),
-        'type' => 'entityreference_label',
-        'weight' => 2,
+        'type' => 'entityreference_entity_view',
+        'weight' => 3,
       ),
       'default' => array(
         'label' => 'above',
@@ -322,7 +324,7 @@ function pece_annotations_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 7,
       ),
       'default' => array(
         'label' => 'above',
@@ -402,7 +404,7 @@ function pece_annotations_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 5,
       ),
       'default' => array(
         'label' => 'above',
@@ -485,7 +487,7 @@ function pece_annotations_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 6,
       ),
       'default' => array(
         'label' => 'above',
@@ -577,7 +579,7 @@ function pece_annotations_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
       ),
       'default' => array(
         'label' => 'above',
