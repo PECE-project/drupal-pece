@@ -45,7 +45,6 @@ function pece_annotations_form_pece_annotation_node_form_alter(&$form, &$form_st
 function pece_annotations_field_extra_fields() {
   $extra['node']['pece_annotation']['display']['card'] = array(
     'label' => t('Structured analytic (Question set)'),
-    'weight' => 1,
   );
   return $extra;
 }
@@ -54,11 +53,10 @@ function pece_annotations_field_extra_fields() {
  * Implements hook_node_view().
  */
 function pece_annotations_node_view($node, $view_mode, $langcode) {
-  if ($node->type !== 'pece_annotation' &&  $view_mode !== 'card') {
-    return;
+  if ($node->type === 'pece_annotation' &&  $view_mode === 'card') {
+    // Add Structured Analytics.
+    pece_annotation_format_card_display($node);
   }
-  // Add Structure Analytics field.
-  pece_annotation_format_card_display($node);
 }
 
 /**
@@ -75,8 +73,9 @@ function pece_annotation_format_card_display(&$node) {
   $node->content['field_pece_struct_analytics']['#prefix'] = '<div class="pece-struct-analytic-wrapper">';
   $node->content['field_pece_struct_analytics']['#suffix'] = '</div>';
   foreach ($question_set as $key => $term) {
-    $term_view = taxonomy_term_view($term, 'meta-content');
-    $node->content['field_pece_struct_analytics'][] = $term_view;
+    $node->content['field_pece_struct_analytics'][] = array(
+      '#markup' => l($term->name, 'taxonomy/term/' . $term->tid),
+    );
   }
 }
 
