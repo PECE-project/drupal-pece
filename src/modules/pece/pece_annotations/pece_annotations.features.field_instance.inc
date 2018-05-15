@@ -139,7 +139,7 @@ function pece_annotations_field_default_field_instances() {
           'link' => 1,
         ),
         'type' => 'entityreference_label',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'featured' => array(
         'label' => 'above',
@@ -235,11 +235,11 @@ function pece_annotations_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
+          'bypass_access' => 0,
+          'link' => 1,
         ),
         'type' => 'entityreference_label',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'featured' => array(
         'label' => 'above',
@@ -490,11 +490,11 @@ function pece_annotations_field_default_field_instances() {
         'weight' => 6,
       ),
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 0,
       ),
       'featured' => array(
         'label' => 'above',
@@ -582,10 +582,9 @@ function pece_annotations_field_default_field_instances() {
         'weight' => 4,
       ),
       'default' => array(
-        'label' => 'above',
-        'module' => 'list',
+        'label' => 'hidden',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 7,
       ),
       'featured' => array(
