@@ -135,6 +135,10 @@ libraries[php-encryption][download][url] = https://github.com/defuse/php-encrypt
 projects[honeypot][subdir] = contrib
 projects[honeypot][version] = 1.22
 
+; Role Delegation
+projects[role_delegation][subdir] = contrib
+projects[role_delegation][version] = 1.1
+
 ; =====================
 ; Panels
 ; =====================
