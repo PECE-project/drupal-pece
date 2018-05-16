@@ -95,6 +95,8 @@ projects[fpa][subdir]  = contrib
 projects[filter_perms][version] = 1.0
 projects[filter_perms][subdir]  = contrib
 
+projects[total_control][version] = 2.4
+projects[total_control][subdir] = contrib
 
 ; =====================
 ; Configuration Management
