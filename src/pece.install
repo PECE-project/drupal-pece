@@ -200,10 +200,20 @@ function pece_update_7104() {
  * Enable Role Delegation, Total Control & User Protect modules.
  */
 function pece_update_7105() {
+  $pece_dashboard = FALSE;
   $modules = array(
     'role_delegation',
     'total_control',
     'userprotect',
   );
+  // Prevent PECE Dashboard page conflict with Total Control Dashboard page.
+  if (module_exists('pece_dashboard')) {
+    $pece_dashboard = TRUE;
+    module_disable(array('pece_dashboard', FALSE));
+    cache_clear_all();
+  }
+  if ($pece_dashboard) {
+    $modules[] = 'pece_dashboard';
+  }
   module_enable($modules);
 }
