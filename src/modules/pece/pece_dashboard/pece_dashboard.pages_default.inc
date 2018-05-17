@@ -13,7 +13,7 @@ function pece_dashboard_default_page_manager_pages() {
   $page->api_version = 1;
   $page->name = 'pece_user_dashboard';
   $page->task = 'page';
-  $page->admin_title = 'User Dashboard';
+  $page->admin_title = 'PECE Dashboard';
   $page->admin_description = '';
   $page->path = 'user/dashboard';
   $page->access = array(
@@ -63,7 +63,7 @@ function pece_dashboard_default_page_manager_pages() {
   $handler->handler = 'panel_context';
   $handler->weight = 2;
   $handler->conf = array(
-    'title' => 'Panel',
+    'title' => 'User Dashboard',
     'no_blocks' => 0,
     'pipeline' => 'ipe',
     'body_classes_to_remove' => '',
