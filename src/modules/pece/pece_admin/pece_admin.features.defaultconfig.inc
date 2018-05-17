@@ -49,6 +49,15 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'module' => 'system',
   );
 
+  // Exported permission: 'assign all roles'.
+  $permissions['assign all roles'] = array(
+    'name' => 'assign all roles',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'role_delegation',
+  );
+
   // Exported permission: 'create site notices'.
   $permissions['create site notices'] = array(
     'name' => 'create site notices',
