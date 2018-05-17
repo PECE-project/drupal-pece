@@ -20,13 +20,16 @@ function pece_dashboard_block_info() {
 /**
  * Implements hook_url_inbound_alter().
  *
- * Total Control module do not handle the override of Drupal core dashboard path.
- * Redirects all dashboard sub-path to user's dashboard page.
+ * Total Control module don't handle well dashboard path for authenticated users
+ * without "have total control" permission.
+ * Redirects all dashboard sub-path to PECE user's dashboard page.
  */
 function pece_dashboard_url_inbound_alter(&$path, $original_path, $path_language) {
-  $argument = explode('/', $path);
-  if (user_is_logged_in() && isset($argument[0]) && $argument[0] == 'dashboard') {
-    $path = 'user/dashboard';
+  if (module_exists('total_control')) {
+    $argument = explode('/', $path);
+    if (user_is_logged_in() && isset($argument[0]) && $argument[0] == 'dashboard') {
+      $path = 'user/dashboard';
+    }
   }
 }
 
