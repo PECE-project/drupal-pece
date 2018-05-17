@@ -192,6 +192,18 @@ function pece_update_7103() {
 /**
  * Enable Site Notice module.
  */
-function pece_update_7105() {
+function pece_update_7104() {
   module_enable(array('site_notice'));
+}
+
+/**
+ * Enable Role Delegation, Total Control & User Protect modules.
+ */
+function pece_update_7105() {
+  $modules = array(
+    'role_delegation',
+    'total_control',
+    'userprotect',
+  );
+  module_enable($modules);
 }
