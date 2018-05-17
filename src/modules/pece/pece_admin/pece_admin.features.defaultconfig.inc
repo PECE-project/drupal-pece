@@ -40,6 +40,15 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'module' => 'system',
   );
 
+   // Exported permission: 'administer feeds'.
+   $permissions['administer feeds'] = array(
+     'name' => 'administer feeds',
+     'roles' => array(
+       'administrator' => 'administrator',
+     ),
+     'module' => 'feeds',
+   );
+
   // Exported permission: 'administer themes'.
   $permissions['administer themes'] = array(
     'name' => 'administer themes',
