@@ -18,6 +18,19 @@ function pece_dashboard_block_info() {
 }
 
 /**
+ * Implements hook_url_inbound_alter().
+ *
+ * Total Control module do not handle the override of Drupal core dashboard path.
+ * Redirects all dashboard sub-path to user's dashboard page.
+ */
+function pece_dashboard_url_inbound_alter(&$path, $original_path, $path_language) {
+  $argument = explode('/', $path);
+  if (user_is_logged_in() && isset($argument[0]) && $argument[0] == 'dashboard') {
+    $path = 'user/dashboard';
+  }
+}
+
+/**
  * Implements hook_block_view().
  */
 function pece_dashboard_block_view($delta = 'dashboard_add_content') {
