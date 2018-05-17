@@ -58,6 +58,15 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'module' => 'role_delegation',
   );
 
+  // Exported permission: 'have total control'.
+  $permissions['have total control'] = array(
+    'name' => 'have total control',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'total_control',
+  );
+
   // Exported permission: 'create site notices'.
   $permissions['create site notices'] = array(
     'name' => 'create site notices',
