@@ -11,11 +11,11 @@ function pece_dashboard_default_page_manager_pages() {
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;
-  $page->name = 'dashboard';
+  $page->name = 'pece_user_dashboard';
   $page->task = 'page';
-  $page->admin_title = 'Dashboard';
+  $page->admin_title = 'User Dashboard';
   $page->admin_description = '';
-  $page->path = 'dashboard';
+  $page->path = 'user/dashboard';
   $page->access = array(
     'plugins' => array(
       0 => array(
@@ -57,11 +57,11 @@ function pece_dashboard_default_page_manager_pages() {
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
   $handler->api_version = 1;
-  $handler->name = 'page_dashboard__panel';
+  $handler->name = 'page_pece_user_dashboard__panel_context_10d6586a-397f-479d-9529-026b19349ecb';
   $handler->task = 'page';
-  $handler->subtask = 'dashboard';
+  $handler->subtask = 'pece_user_dashboard';
   $handler->handler = 'panel_context';
-  $handler->weight = 0;
+  $handler->weight = 2;
   $handler->conf = array(
     'title' => 'Panel',
     'no_blocks' => 0,
@@ -99,6 +99,8 @@ function pece_dashboard_default_page_manager_pages() {
   $display->cache = array();
   $display->title = '';
   $display->uuid = 'eb338d0e-e9ec-44fb-b82f-819311de351b';
+  $display->storage_type = 'page_manager';
+  $display->storage_id = 'page_pece_user_dashboard__panel_context_10d6586a-397f-479d-9529-026b19349ecb';
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
@@ -382,7 +384,7 @@ function pece_dashboard_default_page_manager_pages() {
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
-  $pages['dashboard'] = $page;
+  $pages['pece_user_dashboard'] = $page;
 
   return $pages;
 
