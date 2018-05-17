@@ -49,6 +49,15 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'module' => 'system',
   );
 
+  // Exported permission: 'administer users'.
+  $permissions['administer users'] = array(
+    'name' => 'administer users',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'user',
+  );
+
   // Exported permission: 'assign all roles'.
   $permissions['assign all roles'] = array(
     'name' => 'assign all roles',
