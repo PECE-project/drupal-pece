@@ -95,8 +95,17 @@ function pece_annotations_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'free_panel' => array(
+        'custom_settings' => TRUE,
+      ),
+      'card' => array(
+        'custom_settings' => TRUE,
+      ),
+      'meta_content' => array(
+        'custom_settings' => TRUE,
+      ),
       'highlighted' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
       ),
     ),
     'extra_fields' => array(
@@ -111,7 +120,18 @@ function pece_annotations_strongarm() {
           'weight' => '7',
         ),
       ),
-      'display' => array(),
+      'display' => array(
+        'card' => array(
+          'card' => array(
+            'weight' => '1',
+            'visible' => TRUE,
+          ),
+          'default' => array(
+            'weight' => '2',
+            'visible' => TRUE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_node__pece_annotation'] = $strongarm;
@@ -170,55 +190,31 @@ function pece_annotations_strongarm() {
     'view modes' => array(
       'page_manager' => array(
         'status' => 1,
-        'substitute' => '',
         'default' => 1,
         'choice' => 0,
       ),
       'default' => array(
         'status' => 0,
-        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'teaser' => array(
         'status' => 0,
-        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'featured' => array(
         'status' => 0,
-        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'mini_teaser' => array(
         'status' => 0,
-        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'most_recent' => array(
         'status' => 0,
-        'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'free_panel' => array(
-        'status' => 0,
-        'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'card' => array(
-        'status' => 0,
-        'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'meta_content' => array(
-        'status' => 0,
-        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),

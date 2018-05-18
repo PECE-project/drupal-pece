@@ -40,6 +40,46 @@ function pece_annotations_form_pece_annotation_node_form_alter(&$form, &$form_st
 }
 
 /**
+ * Implements hook_field_extra_fields().
+ */
+function pece_annotations_field_extra_fields() {
+  $extra['node']['pece_annotation']['display']['card'] = array(
+    'label' => t('Structured analytic (Question set)'),
+  );
+  return $extra;
+}
+
+/**
+ * Implements hook_node_view().
+ */
+function pece_annotations_node_view($node, $view_mode, $langcode) {
+  if ($node->type === 'pece_annotation' &&  $view_mode === 'card') {
+    // Add Structured Analytics.
+    pece_annotation_format_card_display($node);
+  }
+}
+
+/**
+ * Format Structure analytic extra_field for Annotation card display.
+ */
+function pece_annotation_format_card_display(&$node) {
+  $node_wrapper = entity_metadata_wrapper('node', $node);
+  if (empty($node_wrapper->field_pece_analytic)) {
+    return;
+  }
+  $question_set = $node_wrapper->field_pece_analytic->field_pece_struct_analytics->value();
+  $node->content['field_pece_struct_analytics'] = array();
+  $node->content['field_pece_struct_analytics']['#weight'] = 100;
+  $node->content['field_pece_struct_analytics']['#prefix'] = '<div class="pece-struct-analytic-wrapper">';
+  $node->content['field_pece_struct_analytics']['#suffix'] = '</div>';
+  foreach ($question_set as $key => $term) {
+    $node->content['field_pece_struct_analytics'][] = array(
+      '#markup' => l($term->name, 'taxonomy/term/' . $term->tid),
+    );
+  }
+}
+
+/**
  * Page callback: Handles multistep precessing.
  *
  * @return string
@@ -512,6 +552,13 @@ function pece_annotations_annotate_form_third($form, &$form_state) {
   );
   field_attach_form('node', $entity, $form, $form_state, NULL, array());
 
+  $form['title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Title'),
+    '#required' => TRUE,
+    '#weight' => 100,
+  );
+
   $form['body'][LANGUAGE_NONE][0] = array(
     '#title' => t('Annotation'),
     '#rows' => 5,
@@ -531,6 +578,7 @@ function pece_annotations_annotate_form_third($form, &$form_state) {
  */
 function pece_annotations_annotate_form_third_submit(&$form, &$form_state) {
 
+  $form_state['object']->title = $form_state['values']['title'];
   $form_state['object']->body = $form_state['values']['body'];
 
   pece_annotations_annotate_form_save_annotation($form, $form_state);
@@ -564,9 +612,6 @@ function pece_annotations_annotate_form_save_annotation(&$form, &$form_state) {
   $entity = entity_create('node', $values);
   $form_state['object']->nid = $entity->nid;
   $annotation_values = $form_state['object'];
-  // Autocreate annotation title.
-  $annotation_values->title = 'pece_annotation_' . REQUEST_TIME;
-
   $node_wrapper = entity_metadata_wrapper('node', $entity);
 
   // Manualy add the values into the node.
