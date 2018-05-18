@@ -65,6 +65,9 @@ function pece_admin_update_7101(&$sandbox) {
       ->condition('up_type', 'admin')
       ->execute();
   }
+  else {
+    watchdog('pece_admin', 'Unable to set default user protection rules to User 1.', array(), WATCHDOG_WARNING);
+  }
   // Revert default config user_default_permissions.
   module_load_include('inc', 'pece', 'pece.functions');
   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_admin');
