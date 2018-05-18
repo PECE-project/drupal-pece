@@ -1,0 +1,196 @@
+<?php
+/**
+ * @file
+ * DB Schema for Site Notices.
+ */
+/**
+ * Implements hook_install().
+ */
+function site_notice_install() {
+  // Create a "body" field for the notices.
+  site_notice_add_message_field();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function site_notice_uninstall() {
+  // Clean up leftover fields that were attached to the entities.
+  field_attach_delete_bundle('site_notice', 'site_notice');
+
+  // Clean up vars.
+  variable_del('site_notice_default_position');
+}
+
+/**
+ * Add Instance and Name fields.
+ */
+function site_notice_update_7101(&$sandbox) {
+  $schema = site_notice_schema();
+
+  db_add_field('site_notice', 'name', $schema['site_notice']['fields']['name']);
+  db_add_field('site_notice', 'instance', $schema['site_notice']['fields']['instance']);
+
+  // Both fields are set to not allow null values and default to empty, so we
+  // need to generate the values for each notice.
+  $notices = site_notice_load_multiple(FALSE);
+  foreach ($notices as $notice) {
+    $notice->name = preg_replace('/[^a-z0-9\-\_]/i', '_', strtolower($notice->title));
+    $notice->instance = md5(REQUEST_TIME . $notice->name);
+    $notice->save();
+  }
+
+  // Provide a success messgage.
+  return t('Update 7101 successful: Add Instance and Name fields.');
+
+  // If the update fails, provide a failure message.
+  throw new DrupalUpdateException('Update 7101 failed: Add Instance and Name fields.');
+}
+
+/**
+ * Add field to determine block status.
+ */
+function site_notice_update_7102(&$sandbox) {
+  $schema = site_notice_schema();
+
+  // Add the field.
+  db_add_field('site_notice', 'block', $schema['site_notice']['fields']['block']);
+
+  // Set default values.
+  db_update('site_notice')->fields(array('block' => 0))->execute();
+
+  // Provide a success messgage.
+  return t('Update 7102 successful: Add field to determine block status.');
+
+  // If the update fails, provide a failure message.
+  throw new DrupalUpdateException('Updated 7102 failed: Add field to determine block status.');
+}
+
+/**
+ * Implements hook_schema().
+ */
+function site_notice_schema() {
+  $schema['site_notice'] = array(
+    'description' => 'The base table for site notices.',
+    'fields' => array(
+      'snid' => array(
+        'description' => 'The primary identifier for a notice.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'The machine name for the notice.',
+        'type' => 'varchar',
+        'length' => '64',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'language' => array(
+        'description' => 'The languages.language of this notice.',
+        'type' => 'varchar',
+        'length' => '12',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'title' => array(
+        'description' => 'The title of this notice, always treated as non-markup plain text.',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'uid' => array(
+        'description' => 'The dev7.users.uid that owns this notice; initially, this is the user that created it.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'status' => array(
+        'description' => 'Boolean indicating whether the notice is active (visible to non-administrators).',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+      'block' => array(
+        'description' => 'Boolean indicating whether the notice should be exposed as a block.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'settings' => array(
+        'description' => 'Various settings to control the behavior.',
+        'type' => 'blob',
+        'not null' => FALSE,
+      ),
+      'instance' => array(
+        'description' => 'An ID generated when the notice is created or enabled.',
+        'type' => 'varchar',
+        'length' => '32',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the notice was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp when the notice was most recently saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('snid'),
+    'indexes' => array(
+      'changed' => array('changed'),
+      'created' => array('created'),
+      'uid' => array('uid'),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Add a message field to the entity to get started.
+ */
+function site_notice_add_message_field() {
+  // Add or remove the body field, as needed.
+  $field = field_info_field('site_notice_message');
+  $instance = field_info_instance('site_notice', 'site_notice_message', 'site_notice');
+  if (empty($field)) {
+    $field = array(
+      'field_name' => 'site_notice_message',
+      'type' => 'text_long',
+      'entity_types' => array('site_notice'),
+    );
+    $field = field_create_field($field);
+  }
+  if (empty($instance)) {
+    $instance = array(
+      'field_name' => 'site_notice_message',
+      'entity_type' => 'site_notice',
+      'bundle' => 'site_notice',
+      'label' => t('Message'),
+      'widget' => array('type' => 'text_textarea'),
+      'settings' => array(
+        'text_processing' => 1,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'type' => 'text_default',
+        ),
+        'teaser' => array(
+          'label' => 'hidden',
+          'type' => 'text_summary_or_trimmed',
+        ),
+      ),
+    );
+    $instance = field_create_instance($instance);
+  }
+  return $instance;
+}

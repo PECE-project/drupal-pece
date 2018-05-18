@@ -1,0 +1,28 @@
+name = Site Notice
+description = Create announcement style notices to appear at the top of your site.
+core = 7.x
+version = VERSION
+configure = admin/config/administration/site-notice
+
+files[] = site_notice.module
+files[] = includes/site_notice.inc
+files[] = includes/site_notice.admin.inc
+files[] = includes/site_notice.entity.inc
+files[] = views/site_notice.views.inc
+files[] = views/site_notice_handler_status_field.inc
+files[] = views/site_notice_handler_status_filter.inc
+files[] = views/site_notice_handler_link_field.inc
+files[] = views/site_notice_handler_delete_link_field.inc
+files[] = views/site_notice_handler_edit_link_field.inc
+files[] = views/site_notice_handler_enable_link_field.inc
+files[] = views/site_notice_handler_site_notice_operations_field.inc
+
+dependencies[] = views
+dependencies[] = entity
+
+; Information added by Drupal.org packaging script on 2014-08-01
+version = "7.x-1.4"
+core = "7.x"
+project = "site_notice"
+datestamp = "1406854132"
+

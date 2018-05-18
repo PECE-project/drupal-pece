@@ -1,0 +1,373 @@
+<?php
+/**
+ * @file
+ * Create notices to appear at the top of the site with optional start and stop
+ * times and recurrences.
+ */
+// One year timeout for permanent dismissals.
+define('SITE_NOTICE_PERMANENT_DISMISSAL_TIMEOUT', 3153600);
+
+// Load module functionality.
+module_load_include('inc', 'site_notice', 'includes/site_notice');
+module_load_include('inc', 'site_notice', 'includes/site_notice.entity');
+
+/**
+ * Implements hook_block_info().
+ */
+function site_notice_block_info() {
+  $blocks = array();
+
+  // Get all notices.
+  foreach (site_notice_load_multiple(FALSE, array('block' => SiteNoticeEntity::BLOCK_EXPOSE)) as $notice) {
+    $blocks[$notice->name] = array(
+      'info' => t('Site Notice: @title', array('@title' => $notice->title)),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+    );
+  }
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function site_notice_block_view($delta = '') {
+  $block = array();
+
+  // Load the notice and make sure it should be displayed.
+  if ($notice = site_notice_load_by_name($delta)) {
+    if (site_notice_passed_filters($notice, TRUE)) {
+      $block['subject'] = $notice->title;
+      $block['content'] = entity_view('site_notice', array($notice));
+    }
+  }
+
+  return $block;
+}
+
+/**
+ * Implements hook_entity_info().
+ */
+function site_notice_entity_info() {
+  $entity['site_notice'] = array(
+    'label' => t('Site Notice'),
+    'entity class' => 'SiteNoticeEntity',
+    'controller class' => 'SiteNoticeController',
+    'base table' => 'site_notice',
+    'fieldable' => TRUE,
+    'entity keys' => array(
+      'id' => 'snid',
+    ),
+    'bundles' => array(
+      'site_notice' => array(
+        'label' => t('Site Notice'),
+        'admin' => array(
+          'path' => 'admin/config/administration/site-notice',
+          'access arguments' => array('administer site notices'),
+        ),
+      ),
+    ),
+    'load hook' => 'site_notice_load',
+    'view modes' => array(
+      'full' => array(
+        'label' => t('Default'),
+        'custom settings' => FALSE,
+      ),
+    ),
+    'label callback' => 'entity_class_label',
+    'uri callback' => 'entity_class_uri',
+    'module' => 'site_notice',
+    'access callback' => 'site_notice_access',
+    'admin ui' => array(
+      'path' => 'admin/content/site-notices',
+      'file' => 'includes/site_notice.admin.inc',
+      'controller class' => 'SiteNoticeUIController',
+      'menu wildcard' => '%site_notice',
+    ),
+  );
+
+  return $entity;
+}
+
+/**
+* Implements hook_entity_property_info_alter().
+*/
+function site_notice_entity_property_info_alter(&$info) {
+  $properties = &$info['site_notice']['properties'];
+  $properties['created'] = array(
+    'label' => t("Date created"),
+    'description' => t("The date the notice was created."),
+    'type' => 'date',
+    'setter callback' => 'entity_property_verbatim_set',
+    'setter permission' => 'administer site notices',
+    'schema field' => 'created',
+  );
+  $properties['changed'] = array(
+    'label' => t("Date changed"),
+    'description' => t("The date the site notice was most recently updated."),
+    'type' => 'date',
+    'schema field' => 'changed',
+  );
+  $properties['uid'] = array(
+    'label' => t("Author"),
+    'description' => t("The author of the notice."),
+    'type' => 'user',
+    'setter callback' => 'entity_property_verbatim_set',
+    'setter permission' => 'administer site notices',
+    'required' => TRUE,
+    'schema field' => 'uid',
+  );
+}
+
+/**
+ * Implements hook_field_extra_fields().
+ */
+function site_notice_field_extra_fields() {
+  $extra = array();
+
+  $extra['site_notice']['site_notice'] = array(
+    'form' => array(
+      'settings' => array(
+        'label' => t('Admin Tabs'),
+        'description' => t('Adminstrative tabs for Site Notices.'),
+        'weight' => 20,
+      ),
+    ),
+  );
+
+  return $extra;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function site_notice_form_site_notice_edit_form_alter(&$form, &$form_state) {
+  // Hide the redirect form element if selected.
+  if (isset($form['redirect']) && variable_get('site_notice_ignore_redirect', 1)) {
+    unset($form['redirect']);
+  }
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function site_notice_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  // Add action link 'admin/content/site-notices/add' on 'admin/structure/site-notices'.
+  if ($root_path == 'admin/content/site-notices') {
+    $item = menu_get_item('admin/content/site-notices/add');
+    if ($item['access']) {
+      $data['actions']['output'][] = array(
+        '#theme' => 'menu_local_action',
+        '#link' => $item,
+      );
+    }
+  }
+}
+
+/**
+ * Implements hook_page_alter().
+ */
+function site_notice_page_alter(&$page) {
+  // Retrieve notices that passed their respective filters.
+  $notices = site_notice_filter_notices(array(SiteNoticeEntity::TOP, SiteNoticeEntity::BOTTOM));
+
+  // Add the top notices.
+  if (!empty($notices[SiteNoticeEntity::TOP])) {
+    $vars = array(
+      'content'  => entity_view('site_notice', $notices[SiteNoticeEntity::TOP]),
+      'position' => 'top',
+      'attributes_array' => array('id' => 'site-notice-top'),
+    );
+    $page['page_top']['site_notices']['#markup'] = theme('site_notices', $vars);
+  }
+
+  // Add the bottom notices.
+  if (!empty($notices[SiteNoticeEntity::BOTTOM])) {
+    $vars = array(
+      'content'  => entity_view('site_notice', $notices[SiteNoticeEntity::BOTTOM]),
+      'position' => 'bottom',
+      'attributes_array' => array('id' => 'site-notice-bottom'),
+    );
+    $page['page_bottom']['site_notices']['#markup'] = theme('site_notices', $vars);
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function site_notice_permission() {
+  return array(
+    'administer site notices' => array(
+      'title' => t('Administer Site Notices'),
+      'description' => t('Create, view, edit and delete site notices.  Overrides other permissions.'),
+    ),
+    'create site notices' => array(
+      'title' => t('Create Site Notices'),
+      'description' => t('Allows users to create site notices.'),
+    ),
+    'view site notices' => array(
+      'title' => t('View Site Notice Previews'),
+      'description' => t('Allows users to view site notices. Ex. "/site-notices/&lt;snid&gt;"'),
+    ),
+    'edit any site notices' => array(
+      'title' => t('Edit any Site Notices'),
+      'description' => t('Allows users to edit any site notices.'),
+    ),
+    'edit own site notices' => array(
+      'title' => t('Edit own Site Notices'),
+      'description' => t('Allows users to edit own site notices.'),
+    ),
+    'delete any site notices' => array(
+      'title' => t('Delete any Site Notices'),
+      'description' => t('Allows users to delete any site notices.'),
+    ),
+    'delete own site notices' => array(
+      'title' => t('Delete own Site Notices'),
+      'description' => t('Allows users to delete own site notices.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function site_notice_preprocess(&$vars, $hook) {
+  switch ($hook) {
+    case 'entity':
+      if ($vars['entity_type'] == 'site_notice') {
+        $vars['attributes_array']['class'] = $vars['classes_array'];
+
+        // Move the contextual links into the content array since there is a
+        // good chance the title will not be rendered.
+        if (isset($vars['title_suffix']['contextual_links'])) {
+          $vars['content']['contextual_links'] = $vars['title_suffix']['contextual_links'];
+          unset($vars['title_suffix']['contextual_links']);
+        }
+
+        // Clean up the theme_hook_suggestions
+        $notice = $vars['site_notice'];
+        $trans = array(
+          SiteNoticeEntity::TOP => 'top',
+          SiteNoticeEntity::BOTTOM => 'bottom',
+        );
+        $vars['theme_hook_suggestions'] = array(
+          'site_notice',
+          "site_notice__{$trans[$vars['site_notice']->status]}",
+          "site_notice__{$vars['view_mode']}",
+          "site_notice__{$trans[$vars['site_notice']->status]}__{$vars['view_mode']}",
+          "site_notice__{$vars['site_notice']->name}",
+          "site_notice__{$vars['site_notice']->name}__{$trans[$vars['site_notice']->status]}",
+          "site_notice__{$vars['site_notice']->name}__{$vars['view_mode']}",
+          "site_notice__{$vars['site_notice']->name}__{$trans[$vars['site_notice']->status]}__{$vars['view_mode']}",
+        );
+
+        // Cleanup RDF
+        unset($vars['attributes_array']['about'], $vars['attributes_array']['typeof']);
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_process().
+ */
+function site_notice_process(&$vars, $hook) {
+  switch ($hook) {
+    case 'site_notices':
+      if (variable_get('site_notice_ajax_dismiss', 1)) {
+        $vars['attributes_array']['ajax'] = 'site-notices';
+      }
+      break;
+
+    case 'entity':
+      if ($vars['entity_type'] == 'site_notice') {
+        if (variable_get('site_notice_ajax_dismiss', 1)) {
+          $vars['attributes_array']['ajax'] = 'site-notice';
+        }
+      }
+      break;
+
+    case 'block':
+      if ($vars['block']->module == 'site_notice') {
+        if (variable_get('site_notice_ajax_dismiss', 1)) {
+          $vars['attributes'] .= ' ajax="site-notices"';
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function site_notice_theme($existing, $type, $theme, $path) {
+  return array(
+    'site_notice' => array(
+      'render element' => 'elements',
+      'template' => 'templates/site-notice',
+    ),
+    'site_notices' => array(
+      'variables' => array('content' => NULL, 'position' => 'top'),
+      'template' => 'templates/site-notices',
+    ),
+  );
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function site_notice_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'site_notice') . '/views',
+  );
+}
+
+/**
+ * Determines whether the given user has access to a site_notice.
+ *
+ * @param $op
+ *   The operation being performed. One of 'view', 'update', 'create', 'delete'
+ *   or just 'edit' (being the same as 'create' or 'update').
+ * @param $site_notice
+ *   Optionally a site_notice or a site_notice type to check access for. If nothing is
+ *   given, access for all site_notices is determined.
+ * @param $account
+ *   The user to check for. Leave it to NULL to check for the global user.
+ * @return boolean
+ *   Whether access is allowed or not.
+ */
+function site_notice_access($op, $site_notice = NULL, $account = NULL) {
+  if (user_access('administer site notices', $account)) {
+    return TRUE;
+  }
+
+  switch ($op) {
+    case 'view':
+      return user_access('view site notices', $account);
+      break;
+
+    case 'create':
+      return user_access('create site notices', $account);
+      break;
+
+    case 'edit':
+      return (user_access('edit any site notice', $account) || (user_access('edit own site notice', $account) && $account->uid == $site_notice->uid));
+      break;
+
+    case 'delete':
+      return (user_access('delete any site notice', $account) || (user_access('delete own site notice', $account) && $account->uid == $site_notice->uid));
+      break;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Implements hook_site_notice_disable().
+ */
+function site_notice_site_notice_disable($notice) {
+  // Clean up any entries left over in the flood table so the notice will
+  // reappear for users who had dismissed it when (if) it is reenabled.
+  db_delete('flood')->condition('event', $notice->dismissalID)->execute();
+}

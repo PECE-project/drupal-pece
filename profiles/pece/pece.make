@@ -43,6 +43,8 @@ projects[pathauto_entity][subdir] = contrib
 projects[subpathauto][version] = 1.3
 projects[subpathauto][subdir] = contrib
 
+projects[site_notice][version] = 1.4
+projects[site_notice][subdir] = contrib
 
 ; =====================
 ; Views
