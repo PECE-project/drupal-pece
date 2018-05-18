@@ -5,6 +5,13 @@
  */
 
 .view-mode-card
+  &.node-pece-annotation
+    .field-type-entityreference
+      margin-bottom: 10px
+    .pece-struct-analytic-wrapper
+      @extend %tags
+      margin: 0
+
   &.node-pece-artifact-pdf
     h5
       display: inline-block
@@ -38,7 +45,7 @@
     display: block
     width: 100%
 
-  .icon
+  > .icon
     display: block
     height: 120px
     line-height: 120px
@@ -53,11 +60,14 @@
     &.pdf:before
       font-size: $font-size-large
 
+  .view-mode-meta-content .icon
+    background: none
+
   a.icon:hover
     opacity: 0.8
 
   .more-link
-    float: right
+    display: block
 
   .field-name-field-pece-media-video
     position: relative
