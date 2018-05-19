@@ -127,7 +127,7 @@ function pece_annotations_strongarm() {
             'visible' => TRUE,
           ),
           'default' => array(
-            'weight' => '2',
+            'weight' => '1',
             'visible' => TRUE,
           ),
         ),
