@@ -57,11 +57,11 @@ function pece_dashboard_default_page_manager_pages() {
   $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
   $handler->api_version = 1;
-  $handler->name = 'page_pece_user_dashboard__panel_context_10d6586a-397f-479d-9529-026b19349ecb';
+  $handler->name = 'page_pece_user_dashboard__panel_context_7278b997-8c41-4b64-910f-f4b37fb53dd0';
   $handler->task = 'page';
   $handler->subtask = 'pece_user_dashboard';
   $handler->handler = 'panel_context';
-  $handler->weight = 2;
+  $handler->weight = 0;
   $handler->conf = array(
     'title' => 'User Dashboard',
     'no_blocks' => 0,
@@ -81,7 +81,7 @@ function pece_dashboard_default_page_manager_pages() {
       ),
     ),
     'relationships' => array(),
-    'name' => 'panel',
+    'name' => '',
   );
   $display = new panels_display();
   $display->layout = 'pece_sidebar_right';
@@ -100,7 +100,7 @@ function pece_dashboard_default_page_manager_pages() {
   $display->title = '';
   $display->uuid = 'eb338d0e-e9ec-44fb-b82f-819311de351b';
   $display->storage_type = 'page_manager';
-  $display->storage_id = 'page_pece_user_dashboard__panel_context_10d6586a-397f-479d-9529-026b19349ecb';
+  $display->storage_id = 'page_pece_user_dashboard__panel_context_7278b997-8c41-4b64-910f-f4b37fb53dd0';
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
