@@ -25,7 +25,17 @@ function pece_artifacts_fieldnote_defaultconfig_user_default_permissions() {
   $permissions['create pece_artifact_fieldnote content'] = array(
     'name' => 'create pece_artifact_fieldnote content',
     'roles' => array(
+      'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any pece_artifact_fieldnote content'.
+  $permissions['delete any pece_artifact_fieldnote content'] = array(
+    'name' => 'delete any pece_artifact_fieldnote content',
+    'roles' => array(
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -34,6 +44,7 @@ function pece_artifacts_fieldnote_defaultconfig_user_default_permissions() {
   $permissions['delete own pece_artifact_fieldnote content'] = array(
     'name' => 'delete own pece_artifact_fieldnote content',
     'roles' => array(
+      'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
@@ -42,7 +53,9 @@ function pece_artifacts_fieldnote_defaultconfig_user_default_permissions() {
   // Exported permission: 'edit any pece_artifact_fieldnote content'.
   $permissions['edit any pece_artifact_fieldnote content'] = array(
     'name' => 'edit any pece_artifact_fieldnote content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -50,6 +63,7 @@ function pece_artifacts_fieldnote_defaultconfig_user_default_permissions() {
   $permissions['edit own pece_artifact_fieldnote content'] = array(
     'name' => 'edit own pece_artifact_fieldnote content',
     'roles' => array(
+      'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
