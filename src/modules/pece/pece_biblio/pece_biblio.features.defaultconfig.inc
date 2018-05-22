@@ -2440,6 +2440,15 @@ function pece_biblio_defaultconfig_user_default_permissions() {
     'module' => 'biblio',
   );
 
+  // Exported permission: 'clear zotero_feed feeds'.
+  $permissions['clear zotero_feed feeds'] = array(
+    'name' => 'clear zotero_feed feeds',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'feeds',
+  );
+
   // Exported permission: 'create zotero_feed content'.
   $permissions['create zotero_feed content'] = array(
     'name' => 'create zotero_feed content',
@@ -2451,12 +2460,30 @@ function pece_biblio_defaultconfig_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any zotero_feed content'.
+  $permissions['delete any zotero_feed content'] = array(
+    'name' => 'delete any zotero_feed content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own zotero_feed content'.
   $permissions['delete own zotero_feed content'] = array(
     'name' => 'delete own zotero_feed content',
     'roles' => array(
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any zotero_feed content'.
+  $permissions['edit any zotero_feed content'] = array(
+    'name' => 'edit any zotero_feed content',
+    'roles' => array(
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -2504,7 +2531,16 @@ function pece_biblio_defaultconfig_user_default_permissions() {
     'module' => 'biblio',
   );
 
-  // Exported permission: 'show sort links'.
+  // Exported permission: 'unlock zotero_feed feeds'.
+  $permissions['unlock zotero_feed feeds'] = array(
+    'name' => 'unlock zotero_feed feeds',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'feeds',
+  );
+
+  // Exported permission: 'view full text'.
   $permissions['view full text'] = array(
     'name' => 'view full text',
     'roles' => array(
