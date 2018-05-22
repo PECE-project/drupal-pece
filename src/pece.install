@@ -35,7 +35,7 @@ function _pece_install_user() {
 }
 
 /**
- * Setup sitewide permissions.
+ * Setup site-wide permissions.
  */
 function _pece_install_permissions() {
   module_load_include('inc', 'pece', 'pece.functions');
@@ -200,7 +200,6 @@ function pece_update_7104() {
  * Enable Role Delegation, Total Control, User Protect, Feeds UI & Feeds Import modules.
  */
 function pece_update_7105() {
-  $pece_dashboard = FALSE;
   $modules = array(
     'role_delegation',
     'total_control',
@@ -208,14 +207,36 @@ function pece_update_7105() {
     'feeds_ui',
     'feeds_import',
   );
-  // Prevent PECE Dashboard page conflict with Total Control Dashboard page.
-  if (module_exists('pece_dashboard')) {
-    $pece_dashboard = TRUE;
-    module_disable(array('pece_dashboard', FALSE));
-    cache_clear_all();
-  }
-  if ($pece_dashboard) {
-    $modules[] = 'pece_dashboard';
-  }
   module_enable($modules);
+
+  module_load_include('inc', 'pece', 'pece.functions');
+  
+  // Revert Panopoly Admin default permissions for adminstrator role.
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'panopoly_admin');
+  
+  // Apply updates on User's Dashboard page.
+  features_revert_module('pece_dashboard');
+  
+  // Set all protections to drupal's admin user (uid:1).
+  if (module_exists('userprotect')) {
+    $fields = array(
+      'up_name' => 1,
+      'up_mail' => 1,
+      'up_pass' => 1,
+      'up_status' => 1,
+      'up_roles' => 1,
+      'up_cancel' => 1,
+      'up_edit' => 1,
+      'up_openid' => 1,
+    );
+    db_update('userprotect')
+      ->fields($fields)
+      ->condition('uid', 1)
+      ->condition('up_type', 'admin')
+      ->execute();
+  }
+  else {
+    watchdog('pece', 'Unable to set default user protection rules to User 1.', array(), WATCHDOG_WARNING);
+  }
+
 }
