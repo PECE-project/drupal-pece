@@ -35,7 +35,9 @@ function pece_annotations_defaultconfig_user_default_permissions() {
   // Exported permission: 'delete any pece_annotation content'.
   $permissions['delete any pece_annotation content'] = array(
     'name' => 'delete any pece_annotation content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -53,7 +55,9 @@ function pece_annotations_defaultconfig_user_default_permissions() {
   // Exported permission: 'edit any pece_annotation content'.
   $permissions['edit any pece_annotation content'] = array(
     'name' => 'edit any pece_annotation content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
