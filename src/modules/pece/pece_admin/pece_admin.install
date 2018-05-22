@@ -5,10 +5,13 @@
  */
 
 
- /**
-  * Implements hook_install().
-  */
+/**
+ * Implements hook_install().
+ */
 function pece_admin_install() {
+  pece_admin_update_7001();
+  pece_admin_update_7002();
+  pece_admin_update_7003();
   pece_admin_update_7101();
 }
 
