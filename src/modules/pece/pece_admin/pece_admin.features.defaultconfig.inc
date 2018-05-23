@@ -40,14 +40,14 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'module' => 'system',
   );
 
-   // Exported permission: 'administer feeds'.
-   $permissions['administer feeds'] = array(
-     'name' => 'administer feeds',
-     'roles' => array(
-       'administrator' => 'administrator',
-     ),
-     'module' => 'feeds',
-   );
+  // Exported permission: 'administer feeds'.
+  $permissions['administer feeds'] = array(
+    'name' => 'administer feeds',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'feeds',
+  );
 
   // Exported permission: 'administer themes'.
   $permissions['administer themes'] = array(
@@ -76,13 +76,13 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'module' => 'role_delegation',
   );
 
-  // Exported permission: 'have total control'.
-  $permissions['have total control'] = array(
-    'name' => 'have total control',
+  // Exported permission: 'bypass node access'.
+  $permissions['bypass node access'] = array(
+    'name' => 'bypass node access',
     'roles' => array(
       'administrator' => 'administrator',
     ),
-    'module' => 'total_control',
+    'module' => 'node',
   );
 
   // Exported permission: 'create site notices'.
@@ -112,11 +112,21 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'module' => 'site_notice',
   );
 
+  // Exported permission: 'have total control'.
+  $permissions['have total control'] = array(
+    'name' => 'have total control',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'total_control',
+  );
+
   // Exported permission: 'revert revisions'.
   $permissions['revert revisions'] = array(
     'name' => 'revert revisions',
     'roles' => array(
       'administrator' => 'administrator',
+      'editor' => 'editor',
     ),
     'module' => 'node',
   );
@@ -125,7 +135,9 @@ function pece_admin_defaultconfig_user_default_permissions() {
   $permissions['view revisions'] = array(
     'name' => 'view revisions',
     'roles' => array(
+      'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
+      'editor' => 'editor',
     ),
     'module' => 'node',
   );
