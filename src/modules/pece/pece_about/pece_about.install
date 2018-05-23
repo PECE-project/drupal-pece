@@ -93,3 +93,11 @@ function _pece_about_default_page_info() {
 
   return FALSE;
 }
+
+/**
+ * Rebuild About page default permissions for administrator user role.
+ */
+function pece_about_update_7001() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_about');
+}
