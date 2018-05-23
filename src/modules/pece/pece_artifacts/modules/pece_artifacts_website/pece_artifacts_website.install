@@ -19,3 +19,11 @@ function pece_artifacts_website_update_7001() {
 
   pece_set_permissions($website_artifact_permissions);
 }
+
+/**
+ * Rebuild Website artifact default permissions for administrator user role.
+ */
+function pece_artifacts_website_update_7002() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_artifacts_website');
+}
