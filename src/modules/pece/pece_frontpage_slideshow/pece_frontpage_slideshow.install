@@ -14,3 +14,11 @@ function pece_frontpage_slideshow_update_7001() {
   // Revert views_default_views default config.
   pece_defaultconfig_component_rebuild_by_name('views_default_views', 'pece_frontpage_slideshow');
 }
+
+/**
+ * Rebuild Slideshow default permissions for administrator user role.
+ */
+function pece_frontpage_slideshow_update_7002() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_frontpage_slideshow');
+}
