@@ -5,6 +5,8 @@
  * Install, update and uninstall functions for the pece_artifacts_audio module.
  */
 
+
+
 /**
  * Update Audio artifact permissions for authenticated users.
  */
@@ -18,4 +20,12 @@ function pece_artifacts_audio_update_7001() {
   );
 
   pece_set_permissions($audio_artifact_permissions);
+}
+
+/**
+ * Rebuild Audio artifact default permissions for administrator user role.
+ */
+function pece_artifacts_audio_update_7002() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_artifacts_audio');
 }
