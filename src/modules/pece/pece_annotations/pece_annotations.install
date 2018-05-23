@@ -100,3 +100,11 @@ function pece_annotations_update_7101(&$sandbox) {
     return t('!count annotations updated in total.', array('!count' => $sandbox['progress']));
   }
 }
+
+/**
+ * Rebuild Annotation default permissions for administrator user role.
+ */
+function pece_annotations_update_7102() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_annotations');
+}
