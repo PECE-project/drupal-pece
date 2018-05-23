@@ -4,12 +4,20 @@
  * Installation code for the PECE Artifact - Image feature.
  */
 
- /**
-  * Reverts image JPEG quality configuration defaults.
-  */
- function pece_artifacts_image_update_7001() {
-   module_load_include('inc', 'pece', 'pece.functions');
+/**
+ * Reverts image JPEG quality configuration defaults.
+ */
+function pece_artifacts_image_update_7001() {
+  module_load_include('inc', 'pece', 'pece.functions');
 
-   // Revert default config.
-   pece_defaultconfig_component_rebuild_by_name('strongarm', 'pece_artifacts_image');
- }
+  // Revert default config.
+  pece_defaultconfig_component_rebuild_by_name('strongarm', 'pece_artifacts_image');
+}
+
+/**
+ * Rebuild Image artifact default permissions for administrator user role.
+ */
+function pece_artifacts_image_update_7002() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_artifacts_image');
+}
