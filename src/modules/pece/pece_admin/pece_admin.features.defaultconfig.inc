@@ -67,15 +67,6 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'module' => 'user',
   );
 
-  // Exported permission: 'assign all roles'.
-  $permissions['assign all roles'] = array(
-    'name' => 'assign all roles',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'role_delegation',
-  );
-
   // Exported permission: 'bypass node access'.
   $permissions['bypass node access'] = array(
     'name' => 'bypass node access',
