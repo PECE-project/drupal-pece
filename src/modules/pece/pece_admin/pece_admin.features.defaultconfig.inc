@@ -50,6 +50,15 @@ function pece_admin_defaultconfig_user_default_permissions() {
   );
 
   // Exported permission: 'administer themes'.
+  $permissions['administer taxonomy'] = array(
+    'name' => 'administer taxonomy',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'system',
+  );
+
+  // Exported permission: 'administer themes'.
   $permissions['administer themes'] = array(
     'name' => 'administer themes',
     'roles' => array(
