@@ -4,6 +4,18 @@
  * Installation code for the PECE Admin module.
  */
 
+/**
+* Implements hook_update_dependencies().
+*/
+function pece_admin_update_dependencies() {
+ // Indicate that pece_admin 7004 update must run after pece 7105 update.
+ // @see: pece.install
+ $dependencies['pece_admin'][7004] = array(
+   'pece' => 7105,
+ );
+
+ return $dependencies;
+}
 
 /**
  * Implements hook_install().
@@ -12,7 +24,7 @@ function pece_admin_install() {
   pece_admin_update_7001();
   pece_admin_update_7002();
   pece_admin_update_7003();
-  pece_admin_update_7101();
+  pece_admin_update_7004();
 }
 
 function pece_admin_apply_admin_protection() {
@@ -72,7 +84,7 @@ function pece_admin_update_7003() {
 /**
  *  Set default user protection settings to Drupal admin user profile.
  */
-function pece_admin_update_7101(&$sandbox) {
+function pece_admin_update_7004(&$sandbox) {
   pece_admin_apply_admin_protection();
   // Revert default config user_default_permissions.
   module_load_include('inc', 'pece', 'pece.functions');
