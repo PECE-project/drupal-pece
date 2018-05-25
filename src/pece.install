@@ -66,6 +66,10 @@ function _pece_install_permissions() {
   // Setup pece_photo_essay eck permissions for Photo Essay Item entity type.
   module_load_include('install', 'pece_photo_essay');
   _pece_photo_essay_install_permissions();
+
+  // Setup user protection rules for user 1.
+  module_load_include('install', 'pece_admin');
+  pece_admin_apply_admin_protection();
 }
 
 /**
