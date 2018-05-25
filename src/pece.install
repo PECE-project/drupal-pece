@@ -43,9 +43,16 @@ function _pece_install_permissions() {
   $permissions = array(
     'add terms in pece_structured_analytics' => TRUE,
   );
+  $admin_permissions = array(
+    'add terms in pece_authors' => TRUE,
+    'add terms in pece_biblio_collections' => TRUE,
+    'add terms in pece_structured_analytics' => TRUE,
+    'add terms in pece_tags' => TRUE,
+  );
 
   pece_set_permissions(array('Contributor' => $permissions));
   pece_set_permissions(array('Researcher' => $permissions));
+  pece_set_permissions(array('administrator' => $admin_permissions));
 
   // Setup pece_access og default settings.
   module_load_include('install', 'pece_access');
