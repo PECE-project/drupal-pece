@@ -204,7 +204,7 @@ function pece_update_7104() {
 }
 
 /**
- * Enable Total Control, User Protect, Feeds UI & Feeds Import modules.
+ * Enable Total Control, User Protect, Feeds UI & Feeds Import modules and rebuild administrator permissions.
  */
 function pece_update_7105() {
   $modules = array(
@@ -216,10 +216,18 @@ function pece_update_7105() {
   module_enable($modules);
 
   module_load_include('inc', 'pece', 'pece.functions');
-  
+
   // Revert Panopoly Admin default permissions for adminstrator role.
   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'panopoly_admin');
-  
+
+  $admin_permissions = array(
+    'add terms in pece_authors' => TRUE,
+    'add terms in pece_biblio_collections' => TRUE,
+    'add terms in pece_structured_analytics' => TRUE,
+    'add terms in pece_tags' => TRUE,
+  );
+  pece_set_permissions(array('administrator' => $admin_permissions));
+
   // Apply updates on User's Dashboard page.
   features_revert_module('pece_dashboard');
   
