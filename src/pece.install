@@ -208,10 +208,11 @@ function pece_update_7104() {
 }
 
 /**
- * Enable Total Control, User Protect, Feeds UI & Feeds Import modules and rebuild administrator permissions.
+ * Enable Role Delegation, Total Control, User Protect, Feeds UI & Feeds Import modules and rebuild administrator permissions.
  */
 function pece_update_7105() {
   $modules = array(
+    'role_delegation',
     'total_control',
     'userprotect',
     'feeds_ui',
