@@ -224,6 +224,9 @@ function pece_update_7105() {
   // Revert Panopoly Admin default permissions for adminstrator role.
   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'panopoly_admin');
 
+  // Revert PECE default permissions for administrator role.
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_admin');
+
   $admin_permissions = array(
     'add terms in pece_authors' => TRUE,
     'add terms in pece_biblio_collections' => TRUE,
