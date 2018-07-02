@@ -2346,81 +2346,81 @@ function pece_biblio_defaultconfig_feeds_importer_default() {
 function pece_biblio_defaultconfig_strongarm() {
   $export = array();
 
-    $strongarm = new stdClass();
-    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-    $strongarm->api_version = 1;
-    $strongarm->name = 'biblio_index';
-    $strongarm->value = 1;
-    $export['biblio_index'] = $strongarm;
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'biblio_index';
+  $strongarm->value = 1;
+  $export['biblio_index'] = $strongarm;
 
-    $strongarm = new stdClass();
-    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-    $strongarm->api_version = 1;
-    $strongarm->name = 'biblio_search';
-    $strongarm->value = 1;
-    $export['biblio_search'] = $strongarm;
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'biblio_node_layout';
+  $strongarm->value = 'tabular';
+  $export['biblio_node_layout'] = $strongarm;
 
-    $strongarm = new stdClass();
-    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-    $strongarm->api_version = 1;
-    $strongarm->name = 'biblio_search_button_text';
-    $strongarm->value = 'Search';
-    $export['biblio_search_button_text'] = $strongarm;
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'biblio_search';
+  $strongarm->value = 1;
+  $export['biblio_search'] = $strongarm;
 
-    $strongarm = new stdClass();
-    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-    $strongarm->api_version = 1;
-    $strongarm->name = 'biblio_node_layout';
-    $strongarm->value = 'tabular';
-    $export['biblio_node_layout'] = $strongarm;
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'biblio_search_button_text';
+  $strongarm->value = 'Search';
+  $export['biblio_search_button_text'] = $strongarm;
 
-    $strongarm = new stdClass();
-    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-    $strongarm->api_version = 1;
-    $strongarm->name = 'biblio_show_openurl_profile_form';
-    $strongarm->value = 0;
-    $export['biblio_show_openurl_profile_form'] = $strongarm;
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'biblio_show_openurl_profile_form';
+  $strongarm->value = 0;
+  $export['biblio_show_openurl_profile_form'] = $strongarm;
 
-    $strongarm = new stdClass();
-    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-    $strongarm->api_version = 1;
-    $strongarm->name = 'biblio_show_user_profile_form';
-    $strongarm->value = 0;
-    $export['biblio_show_user_profile_form'] = $strongarm;
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'biblio_show_user_profile_form';
+  $strongarm->value = 0;
+  $export['biblio_show_user_profile_form'] = $strongarm;
 
-    $strongarm = new stdClass();
-    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-    $strongarm->api_version = 1;
-    $strongarm->name = 'biblio_style';
-    $strongarm->value = 'chicago';
-    $export['biblio_style'] = $strongarm;
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'biblio_sort';
+  $strongarm->value = 'year';
+  $export['biblio_sort'] = $strongarm;
 
-    $strongarm = new stdClass();
-    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-    $strongarm->api_version = 1;
-    $strongarm->name = 'biblio_sort';
-    $strongarm->value = 'year';
-    $export['biblio_sort'] = $strongarm;
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'biblio_sort_tabs';
+  $strongarm->value = array(
+    'author' => 'author',
+    'title' => 'title',
+    'type' => 'type',
+    'year' => 'year',
+    'keyword' => 0,
+  );
+  $export['biblio_sort_tabs'] = $strongarm;
 
-    $strongarm = new stdClass();
-    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-    $strongarm->api_version = 1;
-    $strongarm->name = 'biblio_sort_tabs';
-    $strongarm->value = array(
-      'author' => 'author',
-      'title' => 'title',
-      'type' => 'type',
-      'year' => 'year',
-      'keyword' => 0,
-    );
-    $export['biblio_sort_tabs'] = $strongarm;
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'biblio_sort_tabs_style';
+  $strongarm->value = 1;
+  $export['biblio_sort_tabs_style'] = $strongarm;
 
-    $strongarm = new stdClass();
-    $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-    $strongarm->api_version = 1;
-    $strongarm->name = 'biblio_sort_tabs_style';
-    $strongarm->value = 1;
-    $export['biblio_sort_tabs_style'] = $strongarm;
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'biblio_style';
+  $strongarm->value = 'chicago';
+  $export['biblio_style'] = $strongarm;
 
   return $export;
 }
@@ -2440,6 +2440,24 @@ function pece_biblio_defaultconfig_user_default_permissions() {
     'module' => 'biblio',
   );
 
+  // Exported permission: 'clear zotero_feed feeds'.
+  $permissions['clear zotero_feed feeds'] = array(
+    'name' => 'clear zotero_feed feeds',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'feeds',
+  );
+
+  // Exported permission: 'create biblio content'.
+  $permissions['create biblio content'] = array(
+    'name' => 'create biblio content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create zotero_feed content'.
   $permissions['create zotero_feed content'] = array(
     'name' => 'create zotero_feed content',
@@ -2451,12 +2469,66 @@ function pece_biblio_defaultconfig_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any biblio content'.
+  $permissions['delete any biblio content'] = array(
+    'name' => 'delete any biblio content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any zotero_feed content'.
+  $permissions['delete any zotero_feed content'] = array(
+    'name' => 'delete any zotero_feed content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own biblio content'.
+  $permissions['delete own biblio content'] = array(
+    'name' => 'delete own biblio content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own zotero_feed content'.
   $permissions['delete own zotero_feed content'] = array(
     'name' => 'delete own zotero_feed content',
     'roles' => array(
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any biblio content'.
+  $permissions['edit any biblio content'] = array(
+    'name' => 'edit any biblio content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any zotero_feed content'.
+  $permissions['edit any zotero_feed content'] = array(
+    'name' => 'edit any zotero_feed content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own biblio content'.
+  $permissions['edit own biblio content'] = array(
+    'name' => 'edit own biblio content',
+    'roles' => array(
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -2504,7 +2576,16 @@ function pece_biblio_defaultconfig_user_default_permissions() {
     'module' => 'biblio',
   );
 
-  // Exported permission: 'show sort links'.
+  // Exported permission: 'unlock zotero_feed feeds'.
+  $permissions['unlock zotero_feed feeds'] = array(
+    'name' => 'unlock zotero_feed feeds',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'feeds',
+  );
+
+  // Exported permission: 'view full text'.
   $permissions['view full text'] = array(
     'name' => 'view full text',
     'roles' => array(
