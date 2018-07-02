@@ -1,0 +1,344 @@
+<?php
+
+/**
+ * @file control_activity.view
+ *
+ * Default view for administration of activity.  
+ *
+ */
+
+$view = new view;
+$view->name = 'control_activity';
+$view->description = 'Total Control over activity: Contains a panel pane and a page to control activity.';
+$view->tag = 'total_control';
+$view->view_php = '';
+$view->base_table = 'accesslog';
+$view->is_cacheable = FALSE;
+$view->api_version = 2;
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+$handler = $view->new_display('default', 'Defaults', 'default');
+$handler->override_option('relationships', array(
+  'uid' => array(
+    'label' => 'uid',
+    'required' => 0,
+    'id' => 'uid',
+    'table' => 'accesslog',
+    'field' => 'uid',
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('fields', array(
+  'title' => array(
+    'label' => 'Page title',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+    ),
+    'display_as_link' => 1,
+    'exclude' => 0,
+    'id' => 'title',
+    'table' => 'accesslog',
+    'field' => 'title',
+    'relationship' => 'none',
+  ),
+  'name' => array(
+    'label' => 'by',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+    ),
+    'link_to_user' => 1,
+    'overwrite_anonymous' => 0,
+    'anonymous_text' => '',
+    'exclude' => 0,
+    'id' => 'name',
+    'table' => 'users',
+    'field' => 'name',
+    'relationship' => 'uid',
+    'override' => array(
+      'button' => 'Override',
+    ),
+  ),
+  'timestamp' => array(
+    'label' => 'Timestamp',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+    ),
+    'date_format' => 'custom',
+    'custom_date_format' => 'm/d g:ia',
+    'exclude' => 0,
+    'id' => 'timestamp',
+    'table' => 'accesslog',
+    'field' => 'timestamp',
+    'relationship' => 'none',
+  ),
+  'url' => array(
+    'label' => 'Referrer',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+    ),
+    'display_as_link' => 1,
+    'exclude' => 0,
+    'id' => 'url',
+    'table' => 'accesslog',
+    'field' => 'url',
+    'relationship' => 'none',
+  ),
+  'timer' => array(
+    'label' => 'Timer',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+    ),
+    'set_precision' => FALSE,
+    'precision' => 0,
+    'decimal' => '.',
+    'separator' => ',',
+    'prefix' => '',
+    'suffix' => '',
+    'exclude' => 0,
+    'id' => 'timer',
+    'table' => 'accesslog',
+    'field' => 'timer',
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('sorts', array(
+  'timestamp' => array(
+    'order' => 'DESC',
+    'id' => 'timestamp',
+    'table' => 'accesslog',
+    'field' => 'timestamp',
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('access', array(
+  'type' => 'perm',
+  'perm' => 'have total control',
+));
+$handler->override_option('title', 'View Activity');
+$handler->override_option('items_per_page', 30);
+$handler->override_option('style_plugin', 'table');
+$handler->override_option('style_options', array(
+  'grouping' => '',
+  'override' => 1,
+  'sticky' => 0,
+  'order' => 'asc',
+  'columns' => array(
+    'title' => 'title',
+    'timestamp' => 'timestamp',
+    'url' => 'url',
+    'timer' => 'timer',
+  ),
+  'info' => array(
+    'title' => array(
+      'sortable' => 0,
+      'separator' => '',
+    ),
+    'timestamp' => array(
+      'sortable' => 0,
+      'separator' => '',
+    ),
+    'url' => array(
+      'sortable' => 0,
+      'separator' => '',
+    ),
+    'timer' => array(
+      'sortable' => 0,
+      'separator' => '',
+    ),
+  ),
+  'default' => '-1',
+));
+$handler = $view->new_display('page', 'Page', 'page_1');
+$handler->override_option('path', 'admin/dashboard/activity');
+$handler->override_option('menu', array(
+  'type' => 'tab',
+  'title' => 'Activity',
+  'description' => '',
+  'weight' => '-18',
+  'name' => 'navigation',
+));
+$handler->override_option('tab_options', array(
+  'type' => 'none',
+  'title' => '',
+  'description' => '',
+  'weight' => 0,
+));
+$handler = $view->new_display('panel_pane', 'Panel pane', 'panel_pane_1');
+$handler->override_option('fields', array(
+  'name' => array(
+    'label' => '',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+    ),
+    'link_to_user' => 1,
+    'overwrite_anonymous' => 0,
+    'anonymous_text' => '',
+    'exclude' => 0,
+    'id' => 'name',
+    'table' => 'users',
+    'field' => 'name',
+    'relationship' => 'uid',
+    'override' => array(
+      'button' => 'Use default',
+    ),
+  ),
+  'title' => array(
+    'label' => 'on',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+    ),
+    'display_as_link' => 1,
+    'exclude' => 0,
+    'id' => 'title',
+    'table' => 'accesslog',
+    'field' => 'title',
+    'relationship' => 'none',
+    'override' => array(
+      'button' => 'Use default',
+    ),
+  ),
+  'timestamp' => array(
+    'label' => '',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+    ),
+    'date_format' => 'time ago',
+    'custom_date_format' => 'm/d g:ia',
+    'exclude' => 0,
+    'id' => 'timestamp',
+    'table' => 'accesslog',
+    'field' => 'timestamp',
+    'relationship' => 'none',
+    'override' => array(
+      'button' => 'Use default',
+    ),
+  ),
+));
+$handler->override_option('title', 'Recent Activity');
+$handler->override_option('items_per_page', 10);
+$handler->override_option('use_more', 1);
+$handler->override_option('use_more_text', 'more activity');
+$handler->override_option('style_plugin', 'list');
+$handler->override_option('style_options', array(
+  'grouping' => '',
+  'type' => 'ul',
+));
+$handler->override_option('row_options', array(
+  'inline' => array(
+    'name' => 'name',
+    'title' => 'title',
+  ),
+  'separator' => '',
+));
+$handler->override_option('pane_title', 'Recent Activity');
+$handler->override_option('pane_description', 'Total Control activity summary');
+$handler->override_option('pane_category', array(
+  'name' => 'Dashboard',
+  'weight' => '0',
+));
+$handler->override_option('allow', array(
+  'use_pager' => 0,
+  'items_per_page' => 'items_per_page',
+  'offset' => 0,
+  'link_to_view' => 0,
+  'more_link' => 0,
+  'path_override' => 0,
+));
+$handler->override_option('argument_input', array());
+$handler->override_option('link_to_view', 0);
+$handler->override_option('inherit_panels_path', 0);

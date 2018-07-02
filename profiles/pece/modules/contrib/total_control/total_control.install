@@ -1,0 +1,136 @@
+<?php
+
+/**
+ * @file total_control.install
+ *
+ * Requirements check for views and ctools.
+ */
+
+/**
+ * Implements hook_install
+ *
+ * Disable the core dashboard module.
+ */
+function total_control_install() {
+  // @TODO Disable the core dashboard module or set message explaining it's disappearence.
+}
+
+/**
+ * Test requirements for installation and running.
+ */
+function total_control_requirements($phase) {
+  $requirements = array();
+  // Ensure translations don't break at install time.
+  $t = get_t();
+  // Assume that if the user is running an installation profile that both
+  // Panels and CTools are the same release.
+  if ($phase == 'install' && !(defined('MAINTENANCE_MODE') && MAINTENANCE_MODE == 'install')) {
+
+    // Get panels required version.
+    if (!defined('TOTAL_CONTROL_REQUIRED_PANELS_API')) {
+      include_once drupal_get_path('module', 'total_control') . '/total_control.module';
+    }
+
+    // Check panels current version.
+    if (module_exists('panels')) {
+      include_once drupal_get_path('module', 'panels') . '/panels.module';
+      $panels_version = module_invoke('panels', 'api_version');
+      if ($panels_version[0] < TOTAL_CONTROL_REQUIRED_PANELS_API) {
+        $requirements['total_control_panels'] = array(
+          'title' => $t('Panels API Version'),
+          'value' => $panels_version[0],
+          'severity' => REQUIREMENT_ERROR,
+          'description' => t('The Version of Panels is too old. Total Control needs at least %version.0.', array('%version' => TOTAL_CONTROL_REQUIRED_PANELS_API))
+        );
+      } 
+    }
+
+    // Get views required version.
+    if (!defined('TOTAL_CONTROL_REQUIRED_VIEWS_API')) {
+      include_once drupal_get_path('module', 'total_control') . '/total_control.module';
+    }
+
+    // Check views current version.
+    if (module_exists('views')) {
+      include_once drupal_get_path('module', 'views') . '/views.module';
+      $views_version = module_invoke('views', 'api_version');
+      if ($views_version < TOTAL_CONTROL_REQUIRED_VIEWS_API) {
+        $requirements['total_control_views'] = array(
+          'title' => $t('Views API Version'),
+          'value' => $views_version,
+          'severity' => REQUIREMENT_ERROR,
+          'description' => t('The Version of Views is too old. Total Control needs at least %version.0.', array('%version' => TOTAL_CONTROL_REQUIRED_VIEWS_API))
+        );
+      } 
+    }
+    
+  }
+  if ($phase == 'runtime') {
+    // Add a helpful message if more features exist.
+    $modules = array();
+    $search = $statistics = $taxonomy = TRUE;
+    
+    if (!module_exists('search')) {
+      $search = FALSE;
+      $modules[] = 'search';
+    }
+    if (!module_exists('statistics')) {
+      $statistics = FALSE;
+      $modules[] = 'statistics';
+    }
+    if (!module_exists('taxonomy')) {
+      $taxonomy = FALSE;
+      $modules[] = 'taxonomy';
+    }
+
+    if ($search === FALSE || $statistics === FALSE || $taxonomy === FALSE) {
+      $requirements['total_control_features'] = array(
+        'title' => $t('Total Control administrative dashboard'),
+        'value' => t('Hidden features'),
+        'description' => t('Total Control has even more features if you are using the following modules: !modules', array('!modules' => implode(', ', $modules))),
+        'severity' => REQUIREMENT_WARNING,
+      );
+    }
+  }  
+
+  return $requirements;
+}
+
+
+/**
+ * Implements hook_uninstall
+ */
+function total_control_uninstall() {
+  $views = views_get_all_views();
+
+  // Delete the dashboard views.
+  foreach ($views as $view_name => $view) {
+    // Remove any views that have been overridden
+    $views_types = array('Overridden', 'Normal');
+    $total_control_views = array('control_content', 'control_content_panes', 'control_comments', 
+      'control_files', 'control_revisions', 'control_terms', 'control_users', 'control_users_panes');
+    if (in_array($view->type, $views_types) && in_array($view_name, $total_control_views)) {
+      drupal_set_message(t('Deleting view: @view', array('@view' => $view_name)));
+      $view->delete();
+      module_load_include('inc', 'ctools', 'object-cache');
+      ctools_object_cache_clear('view', $view_name);
+    }
+  }
+
+  // @TODO delete the dashboard panel too?
+
+  variable_del('total_control_type_panels');
+  variable_del('total_control_type_pages');
+  variable_del('total_control_role_panels');
+  variable_del('total_control_role_pages');
+  variable_del('total_control_auto_panels');
+  variable_del('total_control_auto_pages');
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function total_control_update_7000() {
+  // Don't need this setting anymore since these links are in a new pane.
+  variable_del('total_control_configure_links');
+}

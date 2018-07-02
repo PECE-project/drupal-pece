@@ -1,0 +1,211 @@
+<?php
+
+/**
+ * @file
+ *
+ * This module enables an administrative dashboard.
+ */
+
+include_once('includes/total_control.inc'); 
+include_once('includes/total_control.views_default.inc');
+
+define('TOTAL_CONTROL_REQUIRED_PANELS_API', '3');
+define('TOTAL_CONTROL_REQUIRED_VIEWS_API', '2');
+// This is the name of the dashboard as the page manager module sees it via the page task.
+define('TOTAL_CONTROL_DASHBOARD_PANEL_NAME', 'dashboard');
+define('TOTAL_CONTROL_MINIMUM_VERSION', 2);
+define('TOTAL_CONTROL_VERSION', 2);
+
+/** 
+ * Implements hook_perm().
+ *
+ * Adds permissions for access to the total control dashboard
+ */
+function total_control_permission() {
+  return array(
+    'have total control' => array(
+      'title' => t('Have total control'), 
+      'description' => t('See the Total Control administrative dashboard.'),
+    ),
+    'administer total control' => array(
+      'title' => t('Administer total control'), 
+      'description' => t('Adjust the settings for the Total Control administrative dashboard.'),
+    ),
+  );
+}
+
+/** 
+ * Implements hook_menu().
+ *
+ * Adds the total control dashboard
+ */
+function total_control_menu() {
+  $items = array();
+
+  $items['admin/config/administration/control'] = array(
+    'title' => 'Total Control Dashboard',
+    'description' => 'Adjust dashboard settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('total_control_admin_settings'),
+    'access arguments' => array('administer total control'),
+    'file' => 'total_control.admin.inc',
+  );
+  // Add a tab for the dashboard.
+  $items['admin/dashboard/overview'] = array(
+    'title' => 'Dashboard',
+    'description' => 'Total Control admin dashboard',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -100,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Adds views adjustment handling when content types are added or removed
+ */
+function total_control_form_alter(&$form, $form_state, $form_id) {
+  if ('node_type_form' == $form_id) {
+    $form['#submit'][] = 'total_control_add_type_submit';
+  }
+  if ('node_type_delete_confirm' == $form_id) {
+    $form['#submit'][] = 'total_control_remove_type_submit';
+  }
+}
+
+/**
+ * Implements hook_user_login().
+ * Redirects to the dashboard if configured.
+ */
+function total_control_user_login(&$edit, $account) {
+  // Don't redirect for password reset.
+  if (!((arg(0) == 'user') && (arg(1) == 'reset'))) {
+    // Check for permission to use total control.
+    if (user_access('have total control', $account)) {
+      // Check for redirect to dashboard setting.
+      if (variable_get('total_control_login_redirect', 0) == 1) {
+        // TODO Make sure destination is not already set.
+        //if (!isset($_GET['destination'])) {
+          // TODO worry about overlay module.
+          $_GET['destination'] = 'admin/dashboard';
+        //}
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * Adds the create content links to dashboard views.
+ */
+function total_control_views_pre_render(&$view) {
+  // Check that this is the control content view
+  if ($view->name == 'control_content') {
+
+    // Create an array of type-based page displays.
+    $type_displays = $view->display;
+    unset($type_displays['default']);
+    unset($type_displays['page_1']);
+
+    // Get the content type of each display.
+    $machine_names = array();
+    foreach ($type_displays as $key => $value) {
+      if (is_string(substr($key, 8))) {
+        $machine_names[] = substr($key, 8);
+      }
+    }
+
+    foreach ($machine_names as $type) {
+      // Check if the user has access to create content of that type.
+      if (user_access('create ' . $type . ' content')) {
+        // Add the create content link.
+        $add_link = l(t('Create ' . $type . ' content'), 'node/add/' . $type);
+        if (array_key_exists('page_tc_' . $type, $view->display)){
+          if (array_key_exists('header', $view->display['page_tc_' . $type]->handler->options)) {
+            // If there's already a header, append to it.
+            $view->display['page_tc_' . $type]->handler->options['header'] .= $add_link;
+          }
+          else {
+            // Otherwise add our own header.
+            $view->display['page_tc_' . $type]->handler->options['header'] = $add_link;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ctools_plugin_dierctory().
+ */
+function total_control_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools' && !empty($plugin)) {
+    return "plugins/$plugin";
+  }
+}
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function total_control_ctools_plugin_api($module, $api) {
+  if ($module == 'panels_mini' && $api == 'panels_default') {
+    return array('version' => 1);
+  }
+  if ($module == 'page_manager' && $api == 'pages_default') {
+    return array('version' => 1);
+  }
+}
+
+/**
+ * Implements hook_views_api().
+ *
+ * Register View API information. This is required for your module to have
+ * its include files loaded; for example, when implementing
+ * hook_views_default_views().
+ *
+ * @return
+ *   An array with the following possible keys:
+ *   - api:  (required) The version of the Views API the module implements.
+ *   - path: (optional) If includes are stored somewhere other than within
+ *       the root module directory or a subdirectory called includes, specify
+ *       its path here.
+ */
+function total_control_views_api() {
+  return array(
+    'api' => 2,
+  );
+}
+
+/**
+ * Implements hook_theme().
+ *
+ * Adds theme functions for the output of content panes.
+ */
+function total_control_theme() {
+  return array(
+    'total_control_create' => array(
+      'variables' => array('create' => array()), 
+      'file' => 'total_control.theme.inc',
+    ),
+    'total_control_overview' => array(
+      'variables' => array('content' => array(), 'users' => array()), 
+      'file' => 'total_control.theme.inc',
+    ),
+    'total_control_overview_content' => array(
+      'variables' => array('overview' => array()), 
+      'file' => 'total_control.theme.inc',
+    ),
+    'total_control_overview_user' => array(
+      'variables' => array('overview' => array()), 
+      'file' => 'total_control.theme.inc',
+    ),
+    'total_control_admin_table' => array(
+      'variables' => array('header' => array(), 'rows' => array(), 'link' => FALSE), 
+      'file' => 'total_control.theme.inc',
+    ),
+  );
+}
+
