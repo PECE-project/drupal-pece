@@ -35,7 +35,7 @@ function _pece_install_user() {
 }
 
 /**
- * Setup sitewide permissions.
+ * Setup site-wide permissions.
  */
 function _pece_install_permissions() {
   module_load_include('inc', 'pece', 'pece.functions');
@@ -43,9 +43,16 @@ function _pece_install_permissions() {
   $permissions = array(
     'add terms in pece_structured_analytics' => TRUE,
   );
+  $admin_permissions = array(
+    'add terms in pece_authors' => TRUE,
+    'add terms in pece_biblio_collections' => TRUE,
+    'add terms in pece_structured_analytics' => TRUE,
+    'add terms in pece_tags' => TRUE,
+  );
 
   pece_set_permissions(array('Contributor' => $permissions));
   pece_set_permissions(array('Researcher' => $permissions));
+  pece_set_permissions(array('administrator' => $admin_permissions));
 
   // Setup pece_access og default settings.
   module_load_include('install', 'pece_access');
@@ -59,6 +66,10 @@ function _pece_install_permissions() {
   // Setup pece_photo_essay eck permissions for Photo Essay Item entity type.
   module_load_include('install', 'pece_photo_essay');
   _pece_photo_essay_install_permissions();
+
+  // Setup user protection rules for user 1.
+  module_load_include('install', 'pece_admin');
+  pece_admin_apply_admin_protection();
 }
 
 /**
@@ -194,4 +205,41 @@ function pece_update_7103() {
  */
 function pece_update_7104() {
   module_enable(array('site_notice'));
+}
+
+/**
+ * Enable Role Delegation, Total Control, User Protect, Feeds UI & Feeds Import modules and rebuild administrator permissions.
+ */
+function pece_update_7105() {
+  $modules = array(
+    'role_delegation',
+    'total_control',
+    'userprotect',
+    'feeds_ui',
+    'feeds_import',
+  );
+  module_enable($modules);
+
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  // Revert Panopoly Admin default permissions for adminstrator role.
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'panopoly_admin');
+
+  // Revert PECE default permissions for administrator role.
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_admin');
+
+  $admin_permissions = array(
+    'add terms in pece_authors' => TRUE,
+    'add terms in pece_biblio_collections' => TRUE,
+    'add terms in pece_structured_analytics' => TRUE,
+    'add terms in pece_tags' => TRUE,
+  );
+  pece_set_permissions(array('administrator' => $admin_permissions));
+
+  // Apply updates on User's Dashboard page.
+  features_revert_module('pece_dashboard');
+
+  // Set all protections to drupal's admin user (uid:1).
+  module_load_include('install', 'pece_admin');
+  pece_admin_apply_admin_protection();
 }
