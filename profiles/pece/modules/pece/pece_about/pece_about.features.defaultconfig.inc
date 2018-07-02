@@ -10,9 +10,71 @@
 function pece_about_defaultconfig_features() {
   return array(
     'pece_about' => array(
+      'user_default_permissions' => 'user_default_permissions',
       'views_default_views' => 'views_default_views',
     ),
   );
+}
+
+/**
+ * Implements hook_defaultconfig_user_default_permissions().
+ */
+function pece_about_defaultconfig_user_default_permissions() {
+  $permissions = array();
+
+  // Exported permission: 'create pece_about_page content'.
+  $permissions['create pece_about_page content'] = array(
+    'name' => 'create pece_about_page content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any pece_about_page content'.
+  $permissions['delete any pece_about_page content'] = array(
+    'name' => 'delete any pece_about_page content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own pece_about_page content'.
+  $permissions['delete own pece_about_page content'] = array(
+    'name' => 'delete own pece_about_page content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any pece_about_page content'.
+  $permissions['edit any pece_about_page content'] = array(
+    'name' => 'edit any pece_about_page content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own pece_about_page content'.
+  $permissions['edit own pece_about_page content'] = array(
+    'name' => 'edit own pece_about_page content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'set pece_about_page published on date'.
+  $permissions['set pece_about_page published on date'] = array(
+    'name' => 'set pece_about_page published on date',
+    'roles' => array(),
+    'module' => 'publication_date',
+  );
+
+  return $permissions;
 }
 
 /**
