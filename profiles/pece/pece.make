@@ -141,6 +141,10 @@ projects[honeypot][version] = 1.22
 projects[role_delegation][subdir] = contrib
 projects[role_delegation][version] = 1.1
 
+; User Protect
+projects[userprotect][subdir] = contrib
+projects[userprotect][version] = 1.2
+
 ; =====================
 ; Panels
 ; =====================
