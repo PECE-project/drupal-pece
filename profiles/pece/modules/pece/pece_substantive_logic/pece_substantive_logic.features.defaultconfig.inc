@@ -27,6 +27,16 @@ function pece_substantive_logic_defaultconfig_user_default_permissions() {
     'roles' => array(
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any pece_sub_logic content'.
+  $permissions['delete any pece_sub_logic content'] = array(
+    'name' => 'delete any pece_sub_logic content',
+    'roles' => array(
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -37,6 +47,16 @@ function pece_substantive_logic_defaultconfig_user_default_permissions() {
     'roles' => array(
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any pece_sub_logic content'.
+  $permissions['edit any pece_sub_logic content'] = array(
+    'name' => 'edit any pece_sub_logic content',
+    'roles' => array(
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -47,6 +67,7 @@ function pece_substantive_logic_defaultconfig_user_default_permissions() {
     'roles' => array(
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
