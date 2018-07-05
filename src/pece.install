@@ -243,3 +243,25 @@ function pece_update_7105() {
   module_load_include('install', 'pece_admin');
   pece_admin_apply_admin_protection();
 }
+
+/**
+ * Enable Node Access User Reference and update contributors field settings.
+ */
+function pece_update_7106() {
+  module_enable(array('nodeaccess_userreference'));
+  if (module_exists('features')) {
+    $modules = array(
+      'pece_artifatcs_audio',
+      'pece_artifatcs_bundle',
+      'pece_artifatcs_image',
+      'pece_artifatcs_pdf',
+      'pece_artifatcs_text',
+      'pece_artifatcs_video',
+      'pece_artifatcs_website',
+    );
+
+    foreach ($modules as $module) {
+      features_revert(array($module => array('field_instance')));
+    }
+  }
+}
