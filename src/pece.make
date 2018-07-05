@@ -333,6 +333,10 @@ projects[field_group][subdir] = contrib
 projects[languagefield][version] = 1.7
 projects[languagefield][subdir] = contrib
 
+; Node Access User Reference
+projects[nodeaccess_userreference][subdir] = contrib
+projects[nodeaccess_userreference][version] = 3.10
+
 ; =====================
 ; Search
 ; =====================
