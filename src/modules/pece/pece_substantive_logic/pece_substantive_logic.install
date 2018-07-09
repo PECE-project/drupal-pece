@@ -7,3 +7,10 @@ function pece_substantive_logic_update_7001() {
   module_load_include('inc', 'pece', 'pece.functions');
   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_substantive_logic');
 }
+
+/**
+ * Update Substantive logic field instance default settings.
+ */
+function pece_substantive_logic_update_7002() {
+  features_revert(array('pece_substantive_logic' => array('field_instance')));
+}
