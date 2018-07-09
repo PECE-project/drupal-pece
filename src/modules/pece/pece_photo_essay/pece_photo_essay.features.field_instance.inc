@@ -766,8 +766,8 @@ function pece_photo_essay_field_default_field_instances() {
       'module' => 'media',
       'settings' => array(
         'allowed_schemes' => array(
-          'private' => 0,
-          'public' => 'public',
+          'private' => 'private',
+          'public' => 0,
           'vimeo' => 0,
           'youtube' => 0,
         ),
