@@ -27,3 +27,10 @@ function pece_artifacts_video_update_7002() {
   module_load_include('inc', 'pece', 'pece.functions');
   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_artifacts_video');
 }
+
+/**
+ * Update Video artifact field instance default settings.
+ */
+function pece_artifacts_video_update_7003() {
+  features_revert(array('pece_artifacts_video' => array('field_instance')));
+}
