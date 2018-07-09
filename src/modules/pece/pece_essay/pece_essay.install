@@ -51,3 +51,10 @@ function pece_essay_update_7003() {
   // Revert all default config.
   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_essay');
 }
+
+/**
+ * Update Essay thumbnail field instance default settings.
+ */
+function pece_essay_update_7004() {
+  features_revert(array('pece_essay' => array('field_instance')));
+}
