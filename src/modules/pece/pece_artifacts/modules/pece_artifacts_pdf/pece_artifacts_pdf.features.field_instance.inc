@@ -176,7 +176,6 @@ function pece_artifacts_pdf_field_default_field_instances() {
     'locked' => TRUE,
     'required' => 1,
     'settings' => array(
-      'user_register_form' => FALSE,
       'nodeaccess_userreference' => array(
         'all' => array(
           'view' => 'view',
@@ -193,6 +192,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
           'view' => 'view',
         ),
       ),
+      'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
@@ -734,7 +734,7 @@ function pece_artifacts_pdf_field_default_field_instances() {
       'settings' => array(
         'allowed_schemes' => array(
           'private' => 'private',
-          'public' => 'public',
+          'public' => 0,
           'vimeo' => 0,
           'youtube' => 0,
         ),
