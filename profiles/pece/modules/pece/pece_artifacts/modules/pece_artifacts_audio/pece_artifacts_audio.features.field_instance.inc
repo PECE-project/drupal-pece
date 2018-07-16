@@ -177,6 +177,22 @@ function pece_artifacts_audio_field_default_field_instances() {
     'locked' => TRUE,
     'required' => 1,
     'settings' => array(
+      'nodeaccess_userreference' => array(
+        'all' => array(
+          'view' => 'view',
+        ),
+        'author' => array(
+          'delete' => 'delete',
+          'update' => 'update',
+          'view' => 'view',
+        ),
+        'author_published' => 1,
+        'referenced' => array(
+          'delete' => 'delete',
+          'update' => 'update',
+          'view' => 'view',
+        ),
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -799,7 +815,7 @@ function pece_artifacts_audio_field_default_field_instances() {
       'settings' => array(
         'allowed_schemes' => array(
           'private' => 'private',
-          'public' => 'public',
+          'public' => 0,
           'vimeo' => 0,
           'youtube' => 0,
         ),
