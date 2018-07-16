@@ -21,6 +21,7 @@ function pece_design_logic_eck_bundle_info() {
       'entity_type' => 'design_logic',
       'name' => 'design_logic',
       'label' => 'Design logic',
+      'config' => array(),
     ),
   );
   return $items;
