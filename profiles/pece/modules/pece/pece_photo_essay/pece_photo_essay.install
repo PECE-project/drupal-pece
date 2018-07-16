@@ -160,3 +160,10 @@ function pece_photo_essay_update_7003() {
     }
   }
 }
+
+/**
+ * Update Photo Essay field instance default settings.
+ */
+function pece_photo_essay_update_7004() {
+  features_revert(array('pece_photo_essay' => array('field_instance')));
+}
