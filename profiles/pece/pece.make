@@ -28,7 +28,7 @@ projects[kw_itemnames][subdir] = kraftwagen
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
 
 ; Overrides panopoly's uuid.
-projects[uuid][version] = 1.0-beta1
+projects[uuid][version] = 1.1
 projects[uuid][subdir] = contrib
 
 projects[xautoload][version] = 5.7
