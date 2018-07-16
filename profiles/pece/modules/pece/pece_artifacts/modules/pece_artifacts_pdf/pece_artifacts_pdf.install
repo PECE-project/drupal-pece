@@ -13,3 +13,9 @@ function pece_artifacts_pdf_update_7001() {
   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_artifacts_pdf');
 }
 
+/**
+ * Update PDF artifact field instance default settings.
+ */
+function pece_artifacts_pdf_update_7003() {
+  features_revert(array('pece_artifacts_pdf' => array('field_instance')));
+}
