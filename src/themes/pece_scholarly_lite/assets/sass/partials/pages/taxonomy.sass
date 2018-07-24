@@ -1,6 +1,13 @@
 .page-taxonomy
-  .view-tag-term
+  h1#page-title
+    &::before
+      content: "\f02c"
+      color: $color-gray
+      font-family: $font-family-icon
+      font-size: $font-size-h2
+      margin-right: 10px
 
+  .view-tag-term
     li.views-row
       +make-sm-column(6)
       +make-md-column(3)
@@ -14,11 +21,30 @@
         width: 100%
         vertical-align: top
 
+    .views-row
+      > div
+        margin-bottom: 2rem
+      .node
+        &::before
+          %type-icon
+          color: $color-gray-light
+          text-align: right
+          font-family: $font-family-icon
+          width: 100%
+          padding: 2px 4px
+          border-bottom: 1px solid $color-gray-lighter
+        @each $selector, $char in $icon-node-type-selectors
+          &#{$selector}::before
+            content: $char
+        h3
+          margin-top: 5px
+
     h5
       text-overflow: ellipsis
       white-space: nowrap
       text-align: center
       overflow: hidden
+      width: 100%
 
 .view-id-pece_question_term
   ul
