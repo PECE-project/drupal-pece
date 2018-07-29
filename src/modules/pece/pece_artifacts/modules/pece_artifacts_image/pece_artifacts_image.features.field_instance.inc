@@ -750,9 +750,13 @@ function pece_artifacts_image_field_default_field_instances() {
         'weight' => 9,
       ),
       'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => 'content',
+          'image_style' => 'pece_most_recent',
+        ),
+        'type' => 'image',
         'weight' => 0,
       ),
       'free_panel' => array(
@@ -762,9 +766,13 @@ function pece_artifacts_image_field_default_field_instances() {
         'weight' => 0,
       ),
       'highlighted' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => 'content',
+          'image_style' => 'pece_most_recent',
+        ),
+        'type' => 'image',
         'weight' => 0,
       ),
       'meta_content' => array(
@@ -775,11 +783,12 @@ function pece_artifacts_image_field_default_field_instances() {
       ),
       'mini_teaser' => array(
         'label' => 'hidden',
-        'module' => 'file_entity',
+        'module' => 'image',
         'settings' => array(
-          'file_view_mode' => 'mini_teaser',
+          'image_link' => 'content',
+          'image_style' => 'pece_mini_teaser',
         ),
-        'type' => 'file_rendered',
+        'type' => 'image',
         'weight' => 0,
       ),
       'most_recent' => array(
@@ -796,7 +805,7 @@ function pece_artifacts_image_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
+          'image_link' => 'content',
           'image_style' => 'panopoly_image_square',
         ),
         'type' => 'image',
