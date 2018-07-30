@@ -150,20 +150,22 @@ function pece_groups_field_default_field_instances() {
       ),
       'mini_teaser' => array(
         'label' => 'hidden',
-        'module' => 'file_entity',
+        'module' => 'image',
         'settings' => array(
-          'file_view_mode' => 'mini_teaser',
+          'image_link' => 'content',
+          'image_style' => 'pece_mini_teaser',
         ),
-        'type' => 'file_rendered',
+        'type' => 'image',
         'weight' => 0,
       ),
       'most_recent' => array(
         'label' => 'hidden',
-        'module' => 'file_entity',
+        'module' => 'image',
         'settings' => array(
-          'file_view_mode' => 'most_recent',
+          'image_link' => 'content',
+          'image_style' => 'pece_most_recent',
         ),
-        'type' => 'file_rendered',
+        'type' => 'image',
         'weight' => 0,
       ),
       'teaser' => array(
