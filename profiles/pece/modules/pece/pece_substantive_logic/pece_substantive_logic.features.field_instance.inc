@@ -153,8 +153,8 @@ function pece_substantive_logic_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
-          'image_style' => 'panopoly_image_square',
+          'image_link' => 'content',
+          'image_style' => 'pece_mini_teaser',
         ),
         'type' => 'image',
         'weight' => 0,
