@@ -42,13 +42,24 @@ function pece_core_image_default_styles() {
   $styles['pece_mini_teaser'] = array(
     'label' => 'PECE Mini Teaser',
     'effects' => array(
-      3 => array(
+      6 => array(
+        'name' => 'manualcrop_crop',
+        'data' => array(
+          'width' => 70,
+          'height' => 70,
+          'keepproportions' => 1,
+          'reuse_crop_style' => 'panopoly_image_full',
+          'style_name' => 'pece_mini_teaser',
+        ),
+        'weight' => -10,
+      ),
+      5 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 70,
           'height' => 70,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -57,13 +68,24 @@ function pece_core_image_default_styles() {
   $styles['pece_most_recent'] = array(
     'label' => 'PECE Most Recent',
     'effects' => array(
+      4 => array(
+        'name' => 'manualcrop_crop',
+        'data' => array(
+          'width' => 120,
+          'height' => 120,
+          'keepproportions' => 1,
+          'reuse_crop_style' => 'panopoly_image_full',
+          'style_name' => 'pece_most_recent',
+        ),
+        'weight' => -10,
+      ),
       3 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 120,
           'height' => 120,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
