@@ -1312,6 +1312,10 @@ i.pece_artifact_text::before {
 i.pece_memo::before {
   content: ""; }
 
+.field-name-field-pece-website-url {
+  text-overflow: ellipsis;
+  word-wrap: break-word; }
+
 /*
  *------------------------------------------------------------------------------
  * PECE PDF node styles
@@ -2489,7 +2493,8 @@ i.pece_memo::before {
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: center;
-  overflow: hidden; }
+  overflow: hidden;
+  width: 100%; }
 
 .view-id-pece_question_term ul {
   list-style: none; }
