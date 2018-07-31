@@ -13,8 +13,4 @@ function pece_memo_form_pece_memo_node_form_alter(&$form, &$form_state) {
 
   // We cannot allow the content to be authored by anonymous.
   $form['author']['name']['#required'] = TRUE;
-
-  if (module_exists('pece_profile')) {
-    array_unshift($form['#validate'], 'pece_profile_check_author');
-  }
 }
