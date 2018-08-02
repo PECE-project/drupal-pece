@@ -21,11 +21,8 @@
     .view-mode-card
       &.node-pece-artifact-pdf
         h5
-          font-size: $font-size-h3
-          text-align: inherit
-          vertical-align: none
-          display: inherit
-          margin: inherit
+          //font-size: $font-size-h3
+          font-size: 21px
           padding-left: inherit
         span
           display: inherit
@@ -36,10 +33,11 @@
 
         .icon.pdf
           display: none
-          
-  h5
-    text-overflow: ellipsis
-    white-space: nowrap
-    text-align: center
-    overflow: hidden
-    width: 100%
+      &.node-pece-annotation
+        h3
+          text-overflow: ellipsis
+          overflow: hidden
+
+        .node::before
+          border: none
+          content: none
