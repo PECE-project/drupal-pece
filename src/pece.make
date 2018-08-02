@@ -397,6 +397,14 @@ libraries[cycle][download][type] = file
 libraries[cycle][download][url] = http://malsup.github.io/min/jquery.cycle.all.min.js
 libraries[cycle][directory_name] = jquery.cycle
 
+libraries[masonry][download][type] = file
+libraries[masonry][download][url] = https://npmcdn.com/masonry-layout@3.3.2/dist/masonry.pkgd.min.js
+libraries[masonry][directory_name] = masonry
+
+libraries[imagesloaded][download][type] = file
+libraries[imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v4.1.4.tar.gz
+libraries[imagesloaded][download][su5btree] = imagesloaded-4.1.4
+
 ; =====================
 ; Other
 ; =====================
