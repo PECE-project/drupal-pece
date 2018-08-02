@@ -69,6 +69,12 @@ projects[tvi][subdir] = contrib
 projects[better_exposed_filters][version] = 3.5
 projects[better_exposed_filters][subdir] = contrib
 
+projects[masonry][version] = 3.0-beta1
+projects[masonry][subdir] = contrib
+
+projects[masonry_views][version] = 3.0-beta1
+projects[masonry_views][subdir] = contrib
+
 ; Overrides panopoly's views_autocomplete_filters.
 projects[views_autocomplete_filters][version] = 1.2
 projects[views_autocomplete_filters][subdir] = contrib
