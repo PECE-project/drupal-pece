@@ -1,15 +1,4 @@
 .view-tag-term
-  .masonry-item
-    +make-sm-column(6)
-    +make-md-column(3)
-    background-color: #f6f6f2
-    border: 1px solid #DDDDDD
-    margin: 10px
-    padding: 10px
-
-    audio
-      width: 100%
-
   .views-row
     > div
       margin-bottom: 2rem
@@ -26,8 +15,27 @@
         &#{$selector}::before
           content: $char
       h3
-        margin-top: 5px
+        margin-top: 10px
 
+    &.masonry-item
+      +make-lg-column(3.89)
+      background-color: #f6f6f2
+      border: 1px solid #DDD
+      margin-bottom: 10px
+      margin-right: 10px
+      padding: 10px
+
+      @media (min-width: $screen-md-min) and (max-width: $screen-md-max)
+        +make-md-column(5.79)
+      @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max)
+        +make-sm-column(3.83)
+      @media (min-width: $screen-xs-min) and (max-width: $screen-xs-max)
+        +make-xs-column(12)
+        margin: 0 0 10px
+
+
+      audio
+        width: 100%
 
     .view-mode-card
       &.node-pece-artifact-pdf
@@ -52,3 +60,6 @@
         .node::before
           border: none
           content: none
+      &.node-pece-essay
+        .button
+          width: auto
