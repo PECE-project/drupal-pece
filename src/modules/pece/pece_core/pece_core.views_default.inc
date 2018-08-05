@@ -94,11 +94,11 @@ function pece_core_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'masonry_views';
-  $handler->display->display_options['style_options']['masonry_column_width'] = 'col-md-4';
-  $handler->display->display_options['style_options']['masonry_column_width_units'] = '%';
+  $handler->display->display_options['style_options']['masonry_column_width_units'] = 'css';
+  $handler->display->display_options['style_options']['masonry_gutter_width'] = '';
   $handler->display->display_options['style_options']['masonry_resizable'] = TRUE;
   $handler->display->display_options['style_options']['masonry_animated'] = TRUE;
-  $handler->display->display_options['style_options']['masonry_fit_width'] = TRUE;
+  $handler->display->display_options['style_options']['masonry_fit_width'] = FALSE;
   $handler->display->display_options['style_options']['masonry_rtl'] = FALSE;
   $handler->display->display_options['style_options']['masonry_images_first'] = TRUE;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
