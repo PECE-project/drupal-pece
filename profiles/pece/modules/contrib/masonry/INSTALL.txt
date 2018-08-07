@@ -1,0 +1,44 @@
+Requirements
+============
+
+To work with the 3.x version of masonry,
+This project requires two third party libraries to be placed in your
+sites/all/libraries directory.
+Both are provided by David DeSandro desandro.com
+
+The items on the Status report page ( /admin/reports/status )
+will indicate if they are available and installed on your system correctly.
+
+
+Masonry
+-------
+
+Fetch Masonry http://masonry.desandro.com/
+from http://masonry.desandro.com/masonry.pkgd.min.js
+and place it into
+
+    sites/all/libraries/masonry/masonry.pkgd.min.js
+
+2015-06, the version available for download was v3.3.0
+
+imagesLoaded
+------------
+
+Fetch imagesLoaded http://imagesloaded.desandro.com/
+from http://imagesloaded.desandro.com/imagesloaded.pkgd.min.js
+and place it into
+
+    sites/all/libraries/imagesloaded/imagesloaded.pkgd.min.js
+
+2015-06, the version available for download was v3.1.8
+
+JQuery Update
+-------------
+
+Download and install the Drupal JQuery Update module as usual.
+https://www.drupal.org/project/jquery_update
+
+Configs are at /admin/config/development/jquery_update
+
+In testing against the current Masonry 3.x library,
+jQuery Version 1.7 works well, so choose that if you can.

@@ -1,0 +1,282 @@
+<?php
+/**
+ * @file
+ * Provides an API for integrating the jQuery Masonry plugin with Drupal.
+ */
+
+/**
+ * Implements hook_libraries_info().
+ */
+function masonry_libraries_info() {
+  $libraries['masonry'] = array(
+    'name' => 'Masonry',
+    'vendor url' => 'http://masonry.desandro.com/',
+    'download url' => 'http://masonry.desandro.com/',
+    'version arguments' => array(
+      'file' => 'masonry.pkgd.min.js',
+      // Masonry 3.x
+      'pattern' => '/Masonry\s+PACKAGED\s+v?([0-9\.]+)/',
+      'lines' => 2,
+      'cols' => 30,
+    ),
+    'files' => array(
+      'js' => array(
+        'masonry.pkgd.min.js',
+      ),
+    ),
+  );
+  $libraries['imagesloaded'] = array(
+    'name' => 'Images Loaded',
+    'vendor url' => 'http://desandro.github.io/imagesloaded',
+    'download url' => 'http://desandro.github.io/imagesloaded/imagesloaded.pkgd.min.js',
+    'version arguments' => array(
+      'file' => 'imagesloaded.pkgd.min.js',
+      // imagesLoaded 3.x
+      'pattern' => '/imagesLoaded\s+PACKAGED\s+v?([0-9\.]+)/',
+      'lines' => 2,
+      'cols' => 30,
+    ),
+    'files' => array(
+      'js' => array(
+        'imagesloaded.pkgd.min.js',
+      ),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Check if the Masonry and imagesLoaded libraries are installed.
+ *
+ * @return
+ *   A boolean indicating the installed status.
+ */
+function masonry_installed() {
+  $masonry = libraries_detect('masonry');
+  $imagesloaded = libraries_detect('imagesloaded');
+  if ((!empty($masonry['installed'])) && (!empty($imagesloaded['installed']))) {
+    return TRUE;
+  }
+  else {
+    return FALSE;
+  }
+}
+
+/**
+ * Check if the Masonry and imagesLoaded libraries have been loaded.
+ *
+ * @return
+ *   A boolean indicating the loaded status.
+ */
+function masonry_loaded() {
+  $masonry = libraries_load('masonry');
+  $imagesloaded = libraries_load('imagesloaded');
+  if ((!empty($masonry['loaded'])) && (!empty($imagesloaded['loaded']))) {
+    return TRUE;
+  }
+  else {
+    return FALSE;
+  }
+}
+
+/**
+ * Get default Masonry options.
+ *
+ * @return
+ *   An associative array of default options for Masonry.
+ *   Contains:
+ *   - masonry_column_width: The width of each column (in pixels or as a
+ *     percentage).
+ *   - masonry_column_width_units: The units to use for the column width ('px'
+ *     or '%').
+ *   - masonry_gutter_width: The spacing between each column (in pixels).
+ *   - masonry_resizable: Automatically rearrange items when the container is
+ *     resized.
+ *   - masonry_animated: Animate item rearrangements.
+ *   - masonry_animation_duration: The duration of animations (in milliseconds).
+ *   - masonry_fit_width: Sets the width of the container to the nearest column.
+ *     Ideal for centering Masonry layouts.
+ *   - masonry_rtl: Display items from right-to-left.
+ *   - masonry_images_first: Load all images first before triggering Masonry.
+ */
+function masonry_default_options() {
+  $options = array(
+    'masonry_column_width' => '',
+    'masonry_column_width_units' => 'px',
+    'masonry_gutter_width' => '0',
+    'masonry_resizable' => 1,
+    'masonry_animated' => 0,
+    'masonry_animation_duration' => '500',
+    'masonry_fit_width' => 0,
+    'masonry_rtl' => 0,
+    'masonry_images_first' => 1,
+    'masonry_stamp_selector' => ''
+  );
+
+  // Allow other modules to alter the default options
+  drupal_alter('masonry_default_options', $options);
+
+  return $options;
+}
+
+/**
+ * Add Masonry options to an existing form.
+ *
+ * @param $form
+ *   A form array to add Masonry options to.
+ * @param $default_values
+ *   An array of default form values.
+ */
+function masonry_add_options_to_form(&$form, $default_values) {
+  $form['masonry_column_width'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Column width'),
+    '#description' => t("The width of each column, enter pixels, percentage, or string of css selector"),
+    '#default_value' => $default_values['masonry_column_width'],
+  );
+  $form['masonry_column_width_units'] = array(
+    '#type' => 'radios',
+    '#title' => t('Column width units'),
+    '#description' => t("The units to use for the column width."),
+    '#options' => array(
+      'px' => t("Pixels"),
+      '%' => t("Percentage (of container's width)"),
+      'css' => t("CSS selector (you must configure your css to set widths for .masonry-item)"),
+    ),
+    '#default_value' => $default_values['masonry_column_width_units'],
+  );
+  $form['masonry_gutter_width'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Gutter width'),
+    '#description' => t("The spacing between each column."),
+    '#default_value' => $default_values['masonry_gutter_width'],
+    '#size' => 4,
+    '#maxlength' => 3,
+    '#field_suffix' => t('px'),
+  );
+  $form['masonry_stamp_selector'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Stamp Selector'),
+    '#description' => t("Specifies which elements are stamped within the layout using css selector"),
+    '#default_value' => $default_values['masonry_stamp_selector']
+  );
+  $form['masonry_resizable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Resizable'),
+    '#description' => t("Automatically rearrange items when the container is resized."),
+    '#default_value' => $default_values['masonry_resizable'],
+  );
+  $form['masonry_animated'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Animated'),
+    '#description' => t("Animate item rearrangements."),
+    '#default_value' => $default_values['masonry_animated'],
+    '#states' => array(
+      'visible' => array(
+        'input.form-checkbox[name$="[masonry_resizable]"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['masonry_animation_duration'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Animation duration'),
+    '#description' => t("The duration of animations (1000 ms = 1 sec)."),
+    '#default_value' => $default_values['masonry_animation_duration'],
+    '#size' => 5,
+    '#maxlength' => 4,
+    '#field_suffix' => t('ms'),
+    '#states' => array(
+      'visible' => array(
+        'input.form-checkbox[name$="[masonry_resizable]"]' => array('checked' => TRUE),
+        'input.form-checkbox[name$="[masonry_animated]"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['masonry_fit_width'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Fit width'),
+    '#description' => t("Sets the width of the container to the nearest column. Ideal for centering Masonry layouts. See the <a href='http://masonry.desandro.com/demos/centered.html'>'Centered' demo</a> for more information."),
+    '#default_value' => $default_values['masonry_fit_width'],
+  );
+  $form['masonry_rtl'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('RTL layout'),
+    '#description' => t("Display items from right-to-left."),
+    '#default_value' => $default_values['masonry_rtl'],
+  );
+  $form['masonry_images_first'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Load images first'),
+    '#description' => t("Load all images first before triggering Masonry."),
+    '#default_value' => $default_values['masonry_images_first'],
+  );
+
+  // Allow other modules to alter the form
+  drupal_alter('masonry_options_form', $form, $default_values);
+}
+
+/**
+ * Apply Masonry to a container.
+ *
+ * @param $container
+ *   The CSS selector of the container element to apply Masonry to.
+ * @param $options
+ *   An associative array of Masonry options.
+ *   Contains:
+ *   - masonry_item_selector: The CSS selector of the items within the
+ *     container.
+ *   - masonry_column_width: The width of each column (in pixels or as a
+ *     percentage).
+ *   - masonry_column_width_units: The units to use for the column width ('px'
+ *     or '%').
+ *   - masonry_gutter_width: The spacing between each column (in pixels).
+ *   - masonry_resizable: Automatically rearrange items when the container is
+ *     resized.
+ *   - masonry_animated: Animate item rearrangements.
+ *   - masonry_animation_duration: The duration of animations (in milliseconds).
+ *   - masonry_fit_width: Sets the width of the container to the nearest column.
+ *     Ideal for centering Masonry layouts.
+ *   - masonry_rtl: Display items from right-to-left.
+ *   - masonry_images_first: Load all images first before triggering Masonry.
+ */
+function masonry_apply($container, $options = array()) {
+  if (masonry_loaded() && !empty($container)) {
+    // For any options not specified, use default options
+    $options += masonry_default_options();
+    if (!isset($options['masonry_item_selector'])) {
+      $options['masonry_item_selector'] = '';
+    }
+
+    // Setup Masonry script
+    $masonry = array(
+      'masonry' => array(
+        $container => array(
+          'item_selector' => $options['masonry_item_selector'],
+          'column_width' => $options['masonry_column_width'],
+          'column_width_units' => $options['masonry_column_width_units'],
+          'gutter_width' => (int) $options['masonry_gutter_width'],
+          'resizable' => (bool) $options['masonry_resizable'],
+          'animated' => (bool) $options['masonry_animated'],
+          'animation_duration' => (int) $options['masonry_animation_duration'],
+          'fit_width' => (bool) $options['masonry_fit_width'],
+          'rtl' => (bool) $options['masonry_rtl'],
+          'images_first' => (bool) $options['masonry_images_first'],
+          'stamp' => $options['masonry_stamp_selector']
+        ),
+      ),
+    );
+    $script_file = drupal_get_path('module', 'masonry') . '/masonry.js';
+
+    // Allow other modules to alter the Masonry script
+    $context = array(
+      'container' => $container,
+      'options' => $options,
+    );
+    drupal_alter('masonry_script', $masonry, $script_file, $context);
+
+    // Apply the script
+    drupal_add_js($masonry, 'setting');
+    drupal_add_js($script_file);
+  }
+}
