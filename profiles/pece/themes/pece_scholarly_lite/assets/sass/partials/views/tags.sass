@@ -1,12 +1,65 @@
 .view-tag-term
-  .view-content
-    img
-      background-color: white
-      position: absolute
-      top: 0
-      left: 0
-      right: 0
-      bottom: 0
-      display: block
-      overflow: hidden
-      object-fit: cover
+  .views-row
+    > div
+      margin-bottom: 2rem
+    .node
+      &::before
+        %type-icon
+        color: $color-gray-light
+        text-align: right
+        font-family: $font-family-icon
+        width: 100%
+        padding: 2px 4px
+        border-bottom: 1px solid $color-gray-lighter
+      @each $selector, $char in $icon-node-type-selectors
+        &#{$selector}::before
+          content: $char
+      h3
+        margin-top: 10px
+
+    &.masonry-item
+      +make-lg-column(3.89)
+      background-color: #f6f6f2
+      border: 1px solid #DDD
+      margin-bottom: 10px
+      margin-right: 10px
+      padding: 10px
+
+      @media (min-width: $screen-md-min) and (max-width: $screen-md-max)
+        +make-md-column(5.79)
+      @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max)
+        +make-sm-column(3.83)
+      @media (min-width: $screen-xs-min) and (max-width: $screen-xs-max)
+        +make-xs-column(12)
+        margin: 0 0 10px
+
+
+      audio
+        width: 100%
+
+    .view-mode-card
+      &.node-pece-artifact-pdf
+        h5
+          //font-size: $font-size-h3
+          font-size: 21px
+          padding-left: inherit
+        span
+          display: inherit
+          width: auto
+
+        .content
+          padding-top: inherit
+
+        .icon.pdf
+          display: none
+      &.node-pece-annotation
+        h3
+          text-overflow: ellipsis
+          overflow: hidden
+
+        .node::before
+          border: none
+          content: none
+      &.node-pece-essay
+        .button
+          width: auto
