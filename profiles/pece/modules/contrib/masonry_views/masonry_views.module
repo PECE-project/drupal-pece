@@ -1,0 +1,30 @@
+<?php
+/**
+ * @file
+ * Provides a Views plugin for displaying content in a Masonry layout.
+ */
+
+/**
+ * Implements hook_views_api().
+ */
+function masonry_views_views_api() {
+  return array('api' => 3);
+}
+
+/**
+ * Preprocess function for views_view_masonry.tpl.php.
+ */
+function template_preprocess_views_view_masonry(&$vars) {
+  // Run preprocess function for unformatted style
+  template_preprocess_views_view_unformatted($vars);
+
+  // Get view options
+  $view = $vars['view'];
+  $options = $vars['options'];
+
+  // Display content in a Masonry layout
+  $container = '.view-' . drupal_clean_css_identifier($view->name) . '.view-display-id-' . $view->current_display . ' .view-content';
+  $options['masonry_item_selector'] = '.masonry-item';
+  masonry_apply($container, $options);
+}
+
