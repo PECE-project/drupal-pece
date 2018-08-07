@@ -49,12 +49,24 @@ function pece_core_update_7004() {
   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_core');
 }
 
-
 /**
  * Update Mini teaser and Most recent image styles default settings.
  */
 function pece_core_update_7005() {
   if (module_exists('features')) {
     features_revert(array('pece_core' => array('image')));
+  }
+}
+
+/**
+ * Enable Masonry and Masonry Views modules.
+ */
+function pece_core_update_7006() {
+  module_enable(array(
+    'masonry',
+    'masonry_views',
+  ));
+  if (module_exists('features')) {
+    features_revert(array('pece_core' => array('views_view')));
   }
 }
