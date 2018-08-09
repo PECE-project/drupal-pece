@@ -317,6 +317,9 @@ projects[ckeditor][subdir] = contrib
 projects[manualcrop][version] = 1.7
 projects[manualcrop][subdir] = contrib
 
+projects[mimedetect][version] = 1.1
+projects[mimedetect][subdir] = contrib
+
 ; =====================
 ; Fields
 ; =====================
