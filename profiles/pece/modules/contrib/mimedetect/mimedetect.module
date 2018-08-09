@@ -1,0 +1,101 @@
+<?php
+
+/**
+ * @file
+ * Provide server side mime type detection.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function mimedetect_menu() {
+  $items = array();
+
+  // The admin settings form.
+  $items['admin/config/media/mimedetect'] = array(
+    'title' => 'Mime type detection',
+    'description' => 'Control how the mime type of uploaded files will be determined.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mimedetect_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'mimedetect.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Detect File Mime Type.
+ *
+ * @param $file A standard Drupal file object. The uri property is used to
+ *   locate the file and if the mime detection fails, the mimetype property is
+ *   returned.
+ * @return String containing the file's MIME type.
+ */
+function mimedetect_mime($file) {
+  $file = (object)$file;
+
+  // An additional array of mimetypes not included in file_get_mimetype().
+  static $additional_mimes = array(
+    // Audio types
+    'rmi' => 'audio/midi',
+    'aidff' => 'audio/x-aiff',
+    // Image types
+    'cod' => 'image/cis-cod',
+    'jfif' => 'image/pipeg',
+    'cmx' => 'image/x-cmx',
+    // Video types
+    'mpa' => 'video/mpeg',
+    'mpv2' => 'video/mpeg',
+    'asr' => 'video/x-ms-asf',
+  );
+
+  $mime = FALSE;
+  
+  if (variable_get('mimedetect_enable_file_info', FALSE)) {
+    $magic_file = variable_get('mimedetect_magic', '');
+
+    // Try to use the fileinfo extension first.
+    if (extension_loaded('fileinfo')) {
+      static $finfo = FALSE;
+      if ($finfo || $finfo = @finfo_open(FILEINFO_MIME, $magic_file)) {
+        $mime = finfo_file($finfo, drupal_realpath($file->uri));
+      }
+    }
+  }
+
+  // Try the 'file' binary.
+  if ( (!$mime || $mime == 'application/octet-stream')
+    && variable_get('mimedetect_enable_file_binary', FALSE)
+    && ($filebin = variable_get('mimedetect_file_binary', '/usr/bin/file'))
+    && is_executable($filebin))
+  {
+    // On OSX the -i switch is -I, so if we use the long flags everyone is
+    // happy. I checked back to version 3.41 and it still supports the long
+    // names but if you run into problems you can use " -bi ".
+    $command = $filebin . ' --brief --mime' .
+      ( !empty($magic_file)? ' --magic-file=' . escapeshellarg($magic_file) : '' )
+       . ' ' . escapeshellarg(drupal_realpath($file->uri));
+    $mime = trim(exec($command));
+  }
+
+  // with text we often get charset like 'text/plain; charset=us-ascii'
+  $mime = explode(';', $mime);
+  $mime = trim($mime[0]);
+
+  // ASF derived media formats are hard to detect with magic. They're typically
+  // all reported as video/x-ms-asf or application/octet-stream. These aren't
+  // really informative about the media type, so we attempt to figure it out by
+  // extension. I expect OGG to present similar difficulties in determining how
+  // it should be played.
+  if (!$mime || $mime == 'application/octet-stream') {
+    // Try core's mime mapping first...
+    $mime = file_get_mimetype($file->filename);
+    // ...and if that doesn't turn up anything try our additional mappings.
+    if ($mime == 'application/octet-stream') {
+      $mime = file_get_mimetype($file->filename, $additional_mimes);
+    }
+  }
+
+  return $mime;
+}

@@ -1,0 +1,28 @@
+- Added a simple file upload validator (as a submodule) for D6 upgrade and
+  provide a basic functionality.
+- Added a new full settings form.
+- MIME type detection engines can now be enabled or disabled individually.
+- Improved installation and status messages.
+- Removed the bundled 'magic' file. Now default mime information is taken from
+  system or PHP fileinfo.
+
+
+-- MimeDetect 7.x-1.0, 2017-02-26 --
+
+- Better documentation.
+- Issue #2685545 by daria.a: Fixed deprecated function: Function split() is
+  deprecated in mimedetect_mime()
+
+
+-- MimeDetect 7.x-1.0-beta1, 2011-11-21 --
+
+- Issue #1332960 by pillarsdotnet: The mimedetect_mime() function assumes a
+  $file->filepath property, but it does not exist.
+- Issue #660748 by jbrown: Admin page needs to be in different section for D7.
+- Issue #306217 by seaneffel: Improve trouble shooting documentation.
+- Issue #306217 by guix and drewish: Add variable to specify magic file path.
+
+
+-- MimeDetect 7.x-1.0-dev, 2009-04-15 --
+
+- Initial 7.x version

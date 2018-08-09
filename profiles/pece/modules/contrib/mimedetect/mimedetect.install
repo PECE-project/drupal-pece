@@ -1,0 +1,103 @@
+<?php
+
+/**
+ * Implementation of hook_install().
+ */
+function mimedetect_install() {
+  // Enable PHP fileinfo engine by default.
+  variable_set('mimedetect_enable_file_info', TRUE);
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function mimedetect_uninstall() {
+  variable_del('mimedetect_enable_file_info');
+  variable_del('mimedetect_enable_file_binary');
+  variable_del('mimedetect_file_binary');
+  variable_del('mimedetect_enable_file_extension');
+  variable_del('mimedetect_magic');
+}
+
+/**
+ * Implementation of hook_requirements().
+ */
+function mimedetect_requirements($phase) {
+  $t = get_t();
+
+  $requirement = array(
+    'title' => $t('MIME type enabled detection engines'),
+    'description' => '',
+    'severity' => REQUIREMENT_OK,
+  );
+
+  $magic_path = variable_get('mimedetect_magic', '');
+
+  // Test PHP fileinfo engine.
+  if ($fileinfo_enabled = variable_get('mimedetect_enable_file_info', FALSE)) {
+    if ($fileinfo_error = !extension_loaded('fileinfo')) {
+      $requirement['description'] = $t('PHP file information extension not found.');
+    } elseif ($fileinfo_error = !@finfo_open(FILEINFO_MIME, $magic_path)) {
+      if (!empty($magic_path)) {
+        $requirement['description'] = $t('Fileinfo cannot load the configured magic file <em>@file</em>. It could be corrupted. Try another magic file or remove your magic file path settings to use defaults.', array('@file' => $magic_path));
+      } else {
+        $requirement['description'] = $t('Fileinfo could not load magic information. Check the MAGIC environment variable on your system and that fileinfo PHP extension is properly installed.');
+      }
+    }
+
+    if ($fileinfo_error) {
+      $requirement['description'] .= ' ' . $t('Fileinfo detection engine cannot be enabled.') . ' ';
+      $requirement['severity'] = REQUIREMENT_ERROR;
+      $fileinfo_enabled = FALSE;
+    }
+  }
+
+  // Test UNIX 'file' command engine.
+  if ($filebin_enabled = variable_get('mimedetect_enable_file_binary', FALSE)) {
+    $binary = variable_get('mimedetect_file_binary', '/usr/bin/file');
+
+    if (!is_executable($binary)){
+      if (!file_exists($binary)) {
+        $requirement['description'] .= $t("The file %path does not exist or is not readable by your webserver. ", array('%path' => $binary));
+      } else {
+        $requirement['description'] .= $t("The file %path is not executable by your webserver.", array('%path' => $binary));
+      }
+
+      $filebin_enabled = FALSE;
+    } else {
+      // Execution test.
+      $exit_code = 0;
+      $empty = NULL;
+      exec($binary . ( !empty($magic_path)? ' --magic-file=' . escapeshellarg($magic_path) : '' ) . ' --list', $empty, $exit_code);
+      if ($exit_code !== 0) {
+        $filebin_enabled = FALSE;
+        if (!empty($magic_file)) {
+          $requirement['description'] .= t('File command execution failed with exit code <em>@code</em>. Could not load the magic file <em>@file</em>.', array('@code' => $exit_code, '@file' => $path_file));
+        } else {
+          $requirement['description'] .= t('File command execution failed with exit code <em>@code</em>.', array('@code' => $exit_code));
+        }
+      }
+    }
+
+    // Enabled but error on tests.
+    if (!$filebin_enabled) {
+      $requirement['description'] .= ' ' . $t("UNIX 'file' command detection engine disabled.") . ' ';
+      $requirement['severity'] = REQUIREMENT_ERROR;
+    }
+  }
+
+  // Enabled engines + default.
+  $enabled_engines = '';
+  $enabled_engines .= $fileinfo_enabled? 'fileinfo, ' : '';
+  $enabled_engines .= $filebin_enabled? 'UNIX file command, ' : '';
+  $enabled_engines .= 'filename extension';
+  $requirement['value'] = $enabled_engines;
+
+  // No real MIME detection engine enabled.
+  if ($fileinfo_enabled + $filebin_enabled == 0 && $requirement['severity'] == REQUIREMENT_OK) {
+    $requirement['description'] = $t("MimeDetect is using the browser supplied filename for file extension lookups. It is strongly recommended that you install and configure the PHP Fileinfo Extension or the UNIX 'file' command to provide more accurate sever-side mime type detection.");
+    $requirement['severity'] = REQUIREMENT_WARNING;
+  }
+
+  return array('mimetype' => $requirement);
+}

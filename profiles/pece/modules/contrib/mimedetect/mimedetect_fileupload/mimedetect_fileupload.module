@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * MimeDetect file upload validation sub-module.
+ * Validates all file upload for consistency between its real file content and
+ * the filename extension.
+ */
+
+/**
+ * Implements hook_file_validate().
+ */
+function mimedetect_fileupload_file_validate($file) {
+  $errors = array();
+  $detected_mime = mimedetect_mime($file);
+
+  if ($file->filemime != $detected_mime) {
+    $extension = pathinfo($file->filename, PATHINFO_EXTENSION);
+    $errors[] = t('Detected file MIME type (@type) does not match the filename extension (@extension).', array('@type' => $detected_mime, '@extension' => $extension));
+  }
+
+  return $errors;
+}
