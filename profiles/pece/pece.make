@@ -382,8 +382,8 @@ libraries[phpmailer][download][branch] = master
 ;libraries[annotator][download][subtree] = annotator.1.2.10
 
 libraries[spyc][download][type] = file
-libraries[spyc][download][url] = https://github.com/mustangostang/spyc/archive/0.5.1.zip
-libraries[spyc][directory_name] = spyc-master
+libraries[spyc][download][url] = https://github.com/mustangostang/spyc/archive/0.6.2.zip
+libraries[spyc][directory_name] = spyc
 
 libraries[imgareaselect][download][type] = file
 libraries[imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v1.0.0-rc.1.tar.gz
