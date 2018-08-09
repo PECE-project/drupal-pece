@@ -187,7 +187,7 @@ function pece_photo_essay_field_default_field_instances() {
     'fences_wrapper' => 'div_div_div',
     'field_name' => 'field_pece_contributors',
     'label' => 'Contributors',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
