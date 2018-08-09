@@ -400,7 +400,7 @@ libraries[masonry][directory_name] = masonry
 
 libraries[imagesloaded][download][type] = file
 libraries[imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v4.1.4.tar.gz
-libraries[imagesloaded][download][su5btree] = imagesloaded-4.1.4
+libraries[imagesloaded][download][subtree] = imagesloaded-4.1.4
 
 ; =====================
 ; Other
