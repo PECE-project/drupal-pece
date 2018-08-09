@@ -3,8 +3,6 @@
 
   var $window = $(window);
 
-  // The threshold for how far to the bottom you should reach before reloading.
-  var scroll_threshold = 200;
   var vis_index = 0;
 
   /**
@@ -36,7 +34,7 @@
           $pager.append(loadingImg);
         }
         $window.bind('scroll.views_infinite_scroll_' + vis_index, function() {
-          if (window.innerHeight + window.pageYOffset > $pager.offset().top - scroll_threshold) {
+          if (window.innerHeight + window.pageYOffset > $pager.offset().top - settings.scroll_threshold) {
             $pager.find('.pager__item a').click();
             $window.unbind('scroll.views_infinite_scroll_' + vis_index);
           }

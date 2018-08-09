@@ -27,6 +27,7 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
    * {@inheritdoc}
    */
   function options_form(&$form, &$form_state) {
+    $form['warning']['#markup'] = t('Note: The infinite scroll option requires the <em>Use AJAX</em> setting to be enabled for this views display.');
     $form['items_per_page'] = array(
       '#title' => t('Items to display'),
       '#type' => 'textfield',
@@ -75,11 +76,12 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
    * {@inheritdoc}
    */
   function render($input) {
-    $this->view->set_use_ajax(TRUE);
     $pager_theme = views_theme_functions('views_infinite_scroll_pager', $this->view, $this->display);
     $settings = array(
       'views_infinite_scroll' => array(
-        'img_path' => url(drupal_get_path('module', 'views_infinite_scroll') . '/images/ajax-loader.gif'),
+        'img_path' => file_create_url(drupal_get_path('module', 'views_infinite_scroll') . '/images/ajax-loader.gif'),
+        // The threshold for how far to the bottom you should reach before reloading.
+        'scroll_threshold' => variable_get('views_infinite_scroll_scroll_threshold', 200),
       ),
     );
     drupal_add_js($settings, array('type' => 'setting', 'scope' => JS_DEFAULT));
