@@ -314,11 +314,8 @@ projects[media][subdir] = contrib
 projects[ckeditor][version] = 1.16
 projects[ckeditor][subdir] = contrib
 
-projects[manualcrop][version] = 1.x-dev
+projects[manualcrop][version] = 1.7
 projects[manualcrop][subdir] = contrib
-projects[manualcrop][download][type] = git
-projects[manualcrop][download][revision] = d6c449d
-projects[manualcrop][download][branch] = 7.x-1.x
 
 ; =====================
 ; Fields
