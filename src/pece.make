@@ -402,6 +402,10 @@ libraries[imagesloaded][download][type] = file
 libraries[imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v4.1.4.tar.gz
 libraries[imagesloaded][download][subtree] = imagesloaded-4.1.4
 
+libraries[autopager][download][type] = file
+libraries[autopager][download][url] = https://bitbucket.org/luksak/jquery-autopager/raw/2100c39767f97f6da18882aadca7b908c703e450/jquery.autopager-1.0.0.js
+libraries[autopager][download][subtree] = autopager
+
 ; =====================
 ; Other
 ; =====================
