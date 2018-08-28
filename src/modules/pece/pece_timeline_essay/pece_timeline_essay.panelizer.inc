@@ -54,7 +54,7 @@ function pece_timeline_essay_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'above',
+    'label' => 'hidden',
     'formatter' => 'text_default',
     'delta_limit' => 0,
     'delta_offset' => '0',
@@ -77,27 +77,16 @@ function pece_timeline_essay_panelizer_defaults() {
   $display->content['new-7df8b395-78e9-46dd-b417-b5405e45ace0'] = $pane;
   $display->panels['content'][0] = 'new-7df8b395-78e9-46dd-b417-b5405e45ace0';
   $pane = new stdClass();
-  $pane->pid = 'new-5db5a7e4-d897-4210-a3d9-51fd1471ab33';
+  $pane->pid = 'new-bfbdabdb-79e1-4f4c-a87f-1e9ba9c5bdab';
   $pane->panel = 'content';
-  $pane->type = 'entity_field';
-  $pane->subtype = 'node:field_pece_timeline_essay_items';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_timeline_essay_items-panel_pane';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'hidden',
-    'formatter' => 'entityreference_entity_id',
-    'delta_limit' => '0',
-    'delta_offset' => '0',
-    'delta_reversed' => 0,
-    'formatter_settings' => array(
-      'view_mode' => 'default',
-      'links' => 0,
-      'use_content_language' => 1,
-    ),
-    'context' => array(),
-    'override_title' => 0,
-    'override_title_text' => '',
-    'override_title_heading' => 'h2',
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -107,43 +96,9 @@ function pece_timeline_essay_panelizer_defaults() {
   $pane->extras = array();
   $pane->position = 1;
   $pane->locks = array();
-  $pane->uuid = '5db5a7e4-d897-4210-a3d9-51fd1471ab33';
-  $display->content['new-5db5a7e4-d897-4210-a3d9-51fd1471ab33'] = $pane;
-  $display->panels['content'][1] = 'new-5db5a7e4-d897-4210-a3d9-51fd1471ab33';
-  $pane = new stdClass();
-  $pane->pid = 'new-19e4544f-a057-401b-8b9d-dea7ae86a2c9';
-  $pane->panel = 'content';
-  $pane->type = 'entity_field';
-  $pane->subtype = 'node:field_pece_artifacts';
-  $pane->shown = TRUE;
-  $pane->access = array();
-  $pane->configuration = array(
-    'label' => 'title',
-    'formatter' => 'entityreference_entity_view',
-    'delta_limit' => '0',
-    'delta_offset' => '0',
-    'delta_reversed' => 0,
-    'formatter_settings' => array(
-      'view_mode' => 'mini_teaser',
-      'links' => 0,
-      'use_content_language' => 1,
-    ),
-    'context' => array(),
-    'override_title' => 0,
-    'override_title_text' => '',
-    'override_title_heading' => 'h2',
-  );
-  $pane->cache = array();
-  $pane->style = array(
-    'settings' => NULL,
-  );
-  $pane->css = array();
-  $pane->extras = array();
-  $pane->position = 2;
-  $pane->locks = array();
-  $pane->uuid = '19e4544f-a057-401b-8b9d-dea7ae86a2c9';
-  $display->content['new-19e4544f-a057-401b-8b9d-dea7ae86a2c9'] = $pane;
-  $display->panels['content'][2] = 'new-19e4544f-a057-401b-8b9d-dea7ae86a2c9';
+  $pane->uuid = 'bfbdabdb-79e1-4f4c-a87f-1e9ba9c5bdab';
+  $display->content['new-bfbdabdb-79e1-4f4c-a87f-1e9ba9c5bdab'] = $pane;
+  $display->panels['content'][1] = 'new-bfbdabdb-79e1-4f4c-a87f-1e9ba9c5bdab';
   $pane = new stdClass();
   $pane->pid = 'new-32db6b75-f23c-4c92-969d-d36cadd1d74d';
   $pane->panel = 'content';
@@ -161,7 +116,7 @@ function pece_timeline_essay_panelizer_defaults() {
     'context' => array(),
     'override_title' => 0,
     'override_title_text' => '',
-    'override_title_heading' => 'h2',
+    'override_title_heading' => 'h3',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -169,11 +124,11 @@ function pece_timeline_essay_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 3;
+  $pane->position = 2;
   $pane->locks = array();
   $pane->uuid = '32db6b75-f23c-4c92-969d-d36cadd1d74d';
   $display->content['new-32db6b75-f23c-4c92-969d-d36cadd1d74d'] = $pane;
-  $display->panels['content'][3] = 'new-32db6b75-f23c-4c92-969d-d36cadd1d74d';
+  $display->panels['content'][2] = 'new-32db6b75-f23c-4c92-969d-d36cadd1d74d';
   $pane = new stdClass();
   $pane->pid = 'new-ece9b0a7-735b-458f-8821-ba2f9159b7eb';
   $pane->panel = 'content';
@@ -196,11 +151,11 @@ function pece_timeline_essay_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 4;
+  $pane->position = 3;
   $pane->locks = array();
   $pane->uuid = 'ece9b0a7-735b-458f-8821-ba2f9159b7eb';
   $display->content['new-ece9b0a7-735b-458f-8821-ba2f9159b7eb'] = $pane;
-  $display->panels['content'][4] = 'new-ece9b0a7-735b-458f-8821-ba2f9159b7eb';
+  $display->panels['content'][3] = 'new-ece9b0a7-735b-458f-8821-ba2f9159b7eb';
   $pane = new stdClass();
   $pane->pid = 'new-0ef1fc67-4591-4847-afae-c7ef1f118428';
   $pane->panel = 'content';
@@ -222,11 +177,11 @@ function pece_timeline_essay_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 5;
+  $pane->position = 4;
   $pane->locks = array();
   $pane->uuid = '0ef1fc67-4591-4847-afae-c7ef1f118428';
   $display->content['new-0ef1fc67-4591-4847-afae-c7ef1f118428'] = $pane;
-  $display->panels['content'][5] = 'new-0ef1fc67-4591-4847-afae-c7ef1f118428';
+  $display->panels['content'][4] = 'new-0ef1fc67-4591-4847-afae-c7ef1f118428';
   $pane = new stdClass();
   $pane->pid = 'new-53009136-1d9c-4c5f-b1e6-a189bb13bc85';
   $pane->panel = 'sidebar';

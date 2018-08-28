@@ -113,103 +113,6 @@ function pece_timeline_essay_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_timeline_essay-field_pece_artifacts'.
-  $field_instances['node-pece_timeline_essay-field_pece_artifacts'] = array(
-    'bundle' => 'pece_timeline_essay',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'card' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 10,
-      ),
-      'featured' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'free_panel' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'highlighted' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'meta_content' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'mini_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'most_recent' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'entityconnect' => array(
-      'button' => array(
-        'unload_add_button' => 1,
-        'unload_edit_button' => 1,
-      ),
-      'icon' => array(
-        'show_add_icon' => 0,
-        'show_edit_icon' => 0,
-      ),
-    ),
-    'fences_wrapper' => 'div_div_div',
-    'field_name' => 'field_pece_artifacts',
-    'label' => 'Artifacts',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'entityreference',
-      'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
-        'size' => 60,
-      ),
-      'type' => 'entityreference_autocomplete',
-      'weight' => 5,
-    ),
-  );
-
   // Exported field_instance:
   // 'node-pece_timeline_essay-field_pece_contributors'.
   $field_instances['node-pece_timeline_essay-field_pece_contributors'] = array(
@@ -637,7 +540,7 @@ function pece_timeline_essay_field_default_field_instances() {
           'allow_clone' => 0,
           'allow_existing' => 0,
           'allow_new' => 1,
-          'delete_references' => 1,
+          'delete_references' => 0,
           'label_plural' => 'Items',
           'label_singular' => 'Item',
           'match_operator' => 'CONTAINS',
@@ -1310,10 +1213,178 @@ function pece_timeline_essay_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_artifact'.
+  $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_artifact'] = array(
+    'bundle' => 'pece_timeline_essay_item',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'pece_timeline_essay_item',
+    'entityconnect' => array(
+      'button' => array(
+        'unload_add_button' => 1,
+        'unload_edit_button' => 1,
+      ),
+      'icon' => array(
+        'show_add_icon' => 0,
+        'show_edit_icon' => 0,
+      ),
+    ),
+    'fences_wrapper' => 'div',
+    'field_name' => 'field_pece_timeline_artifact',
+    'label' => 'Timeline Artifact',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_color'.
+  $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_color'] = array(
+    'bundle' => 'pece_timeline_essay_item',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'color_field',
+        'settings' => array(),
+        'type' => 'color_field_default_formatter',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'pece_timeline_essay_item',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_pece_timeline_color',
+    'label' => 'Background color',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'color_field',
+      'settings' => array(),
+      'type' => 'color_field_default_widget',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_media'.
+  $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_media'] = array(
+    'bundle' => 'pece_timeline_essay_item',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'pece_timeline_essay_item',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_pece_timeline_media',
+    'label' => 'Media',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 1,
+      'file_directory' => '',
+      'file_extensions' => '',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'private' => 'private',
+          'public' => 0,
+          'vimeo' => 0,
+          'youtube' => 0,
+        ),
+        'allowed_types' => array(
+          'audio' => 'audio',
+          'document' => 'document',
+          'image' => 'image',
+          'video' => 'video',
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 'media_default--media_browser_1',
+          'media_default--media_browser_my_files' => 'media_default--media_browser_my_files',
+          'media_internet' => 0,
+          'upload' => 0,
+        ),
+        'manualcrop_crop_info' => 1,
+        'manualcrop_default_crop_area' => 1,
+        'manualcrop_enable' => 0,
+        'manualcrop_inline_crop' => 0,
+        'manualcrop_instant_crop' => FALSE,
+        'manualcrop_instant_preview' => 1,
+        'manualcrop_keyboard' => 1,
+        'manualcrop_maximize_default_crop_area' => 0,
+        'manualcrop_require_cropping' => array(),
+        'manualcrop_styles_list' => array(),
+        'manualcrop_styles_mode' => 'include',
+        'manualcrop_thumblist' => 0,
+      ),
+      'type' => 'media_generic',
+      'weight' => 4,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Artifact');
-  t('Artifacts');
+  t('Background color');
   t('Contributors');
   t('Description');
   t('Essay Text');
@@ -1321,10 +1392,12 @@ function pece_timeline_essay_field_default_field_instances() {
   t('Groups audience');
   t('Items');
   t('License');
+  t('Media');
   t('Permissions');
   t('Start and End Date');
   t('Tags');
   t('Thumbnail');
+  t('Timeline Artifact');
   t('URI');
 
   return $field_instances;

@@ -20,6 +20,13 @@ function pece_timeline_essay_ctools_plugin_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function pece_timeline_essay_views_api($module = NULL, $api = NULL) {
+  return array("api" => "3.0");
+}
+
+/**
  * Implements hook_eck_bundle_info().
  */
 function pece_timeline_essay_eck_bundle_info() {
