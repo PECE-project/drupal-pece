@@ -58,3 +58,43 @@ function pece_array_extend() {
   }
   return $base;
 }
+
+
+/**
+ * Helper Access callback generator for entity reference fields.
+ *
+ * @param $entity_info array
+ * @param $entity_type_name string
+ *    Entity machine name
+ */
+function pece_entity_access_info_alter_prepare(&$entity_info, $entity_type_name = '') {
+  if (!empty($entity_info[$entity_type_name])) {
+    if (empty($callback = variable_get($entity_type_name . '__access_callback', NULL))) {
+      $callback = $entity_info[$entity_type_name]['access callback'];
+      variable_set($entity_type_name. '__access_callback', $callback);
+    }
+
+    $entity_info[$entity_type_name]['access callback'] = $entity_type_name . '__entity_callback';
+  }
+}
+
+/**
+ * Dynamic entity access for Eck entities.
+ */
+function pece_entity_access_callback_prepare($op, $entity, $account, $entity_type_name, $field_name) {
+  switch ($op) {
+    case 'view':
+      if (is_object($entity) && isset($entity->id)) {
+        $$entity_type_name = entity_metadata_wrapper($entity_type_name, $entity);
+        $referenced_entity = $$entity_type_name->$field_name->value();
+
+        if (!empty($referenced_entity) && !node_access('view', $referenced_entity, $account)) {
+          return FALSE;
+        }
+      }
+      break;
+  }
+
+  $default_access_callback = variable_get($entity_type_name . '__access_callback', 'eck__entity_access');
+  return $default_access_callback($op, $entity, $account, $entity_type_name);
+}
