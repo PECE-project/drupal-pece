@@ -7,6 +7,16 @@
 include_once 'pece_timeline_essay.features.inc';
 
 /**
+ * Implements hook_ctools_plugin_directory().
+ */
+function pece_timeline_essay_ctools_plugin_directory($module, $plugin_type) {
+  if ($module === 'ctools' && $plugin === 'content_types') {
+    return 'plugins/' . $module . '/' . $plugin;
+  }
+}
+
+
+/**
  * Implements hook_form_FORM_ID_alter().
  */
 function pece_timeline_essay_form_pece_timeline_essay_node_form_alter(&$form, &$form_state) {
