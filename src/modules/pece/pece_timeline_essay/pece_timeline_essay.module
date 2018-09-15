@@ -5,3 +5,13 @@
  */
 
 include_once 'pece_timeline_essay.features.inc';
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_timeline_essay_form_pece_timeline_essay_node_form_alter(&$form, &$form_state) {
+  // Hide the comment settings fieldset.
+  $form['comment_settings']['#access'] = FALSE;
+  // We cannot allow the content to be authored by anonymous.
+  $form['author']['name']['#required'] = TRUE;
+}
