@@ -1,0 +1,26 @@
+From 3b9e65766d5e63f60cf10699ee61e8d786fbb892 Mon Sep 17 00:00:00 2001
+From: Renato Vasconcellos <revagomes@gmail.com>
+Date: Mon, 17 Sep 2018 14:03:38 -0300
+Subject: [PATCH] Fix hook_requirements to prevent errors on Drupal install
+ phase.
+
+---
+ nodeaccess_userreference.install | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/nodeaccess_userreference.install b/nodeaccess_userreference.install
+index 3f4dea4..62134eb 100644
+--- a/nodeaccess_userreference.install
++++ b/nodeaccess_userreference.install
+@@ -29,7 +29,7 @@ function nodeaccess_userreference_requirements($phase) {
+     $t = get_t();
+     $requirements['user_reference'] = array(
+       'title' => $t('User reference module'),
+-      'severity' => REQUIREMENT_ERROR,
++      'severity' => REQUIREMENT_INFO,
+       'description' => $t('You need a module to reference users.  Use either <em>Entity reference</em> or <em>References</em>.'),
+     );
+   }
+-- 
+2.7.4
+
