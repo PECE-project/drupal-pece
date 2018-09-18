@@ -8,7 +8,12 @@ include_once 'pece_groups.features.inc';
 
 
 // Enable PSR-4 Namespaces.
-xautoload()->registerModulePsr4(__FILE__, 'src');
+if (!module_exists('xautoload')) {
+  module_load_include('inc', 'xautoload', 'ui');
+  if (function_exists('xautoload')) {
+    xautoload()->registerModulePsr4(__FILE__, 'src');
+  }
+}
 
 /**
  * Implements hook_menu().
