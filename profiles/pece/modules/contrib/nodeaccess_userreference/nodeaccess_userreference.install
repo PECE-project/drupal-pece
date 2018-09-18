@@ -29,7 +29,7 @@ function nodeaccess_userreference_requirements() {
     $t = get_t();
     $requirements['user_reference'] = array(
       'title' => $t('User reference module'),
-      'severity' => REQUIREMENT_ERROR,
+      'severity' => REQUIREMENT_INFO,
       'description' => $t('You need a module to reference users.  Use either <em>Entity reference</em> or <em>References</em>.'),
     );
   }
