@@ -10,20 +10,21 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get dist-upgrade -y && apt-ge
 
 ### INSTALL PHP-FPM AND EXTENSION
 RUN apt-get update -y && apt-get install -y \
-    php5-fpm \
-    php5-curl \
-    php5-gd \
-    php5-geoip \
-    php5-imagick \
-    php5-imap \
-    php5-json \
-    php5-ldap \
-    php5-mcrypt \
-    php5-sqlite \
-    php5-xdebug \
-    php5-xmlrpc \
-    php-apc \
-    php5-mysqlnd \
+
+    php7.0-fpm \
+    php7.0-curl \
+    php7.0-gd \
+    php-geoip \
+    php-imagick \
+    php-imap \
+    php7.0-json \
+    php7.0-ldap \
+    php7.0-mcrypt \
+    php7.0-sqlite3 \
+    php-xdebug \
+    php-xmlrpc2 \
+    php-apcu \
+    php7.0-mysql \
     --no-install-recommends
 
 RUN apt-get update -y && apt-get install -y \
@@ -104,19 +105,19 @@ RUN mv drush.phar /usr/local/bin/drush
 RUN apt-get install unzip --yes
 
 ### CONFIGURE PHP-FPM
-RUN echo "xdebug.max_nesting_level=9999" >> /etc/php5/mods-available/xdebug.ini
-RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini && \
-    sed -i "s/memory_limit = 128M/memory_limit = 1256M/" /etc/php5/fpm/php.ini && \
-    sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini && \
-    sed -i "s/display_errors = Off/display_errors = stderr/" /etc/php5/fpm/php.ini && \
-    sed -i "s/post_max_size = 8M/post_max_size = 30M/" /etc/php5/fpm/php.ini && \
-    sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 30M/" /etc/php5/fpm/php.ini && \
-    sed -i "s/;opcache.enable=0/opcache.enable=1/" /etc/php5/fpm/php.ini && \
-    sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf && \
-    sed -i '/^listen = /clisten = 9000' /etc/php5/fpm/pool.d/www.conf && \
-    sed -i '/^listen.allowed_clients/c;listen.allowed_clients =' /etc/php5/fpm/pool.d/www.conf && \
-    sed -i '/^;catch_workers_output/ccatch_workers_output = yes' /etc/php5/fpm/pool.d/www.conf && \
-    sed -i '/^;env\[TEMP\] = .*/aenv[DB_PORT_3306_TCP_ADDR] = $DB_PORT_3306_TCP_ADDR' /etc/php5/fpm/pool.d/www.conf
+RUN echo "xdebug.max_nesting_level=9999" >> /etc/php7.0/mods-available/xdebug.ini
+RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php7.0/fpm/php.ini && \
+    sed -i "s/memory_limit = 128M/memory_limit = 1256M/" /etc/php7.0/fpm/php.ini && \
+    sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php7.0/fpm/php.ini && \
+    sed -i "s/display_errors = Off/display_errors = stderr/" /etc/php7.0/fpm/php.ini && \
+    sed -i "s/post_max_size = 8M/post_max_size = 30M/" /etc/php7.0/fpm/php.ini && \
+    sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 30M/" /etc/php7.0/fpm/php.ini && \
+    sed -i "s/;opcache.enable=0/opcache.enable=1/" /etc/php7.0/fpm/php.ini && \
+    sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php7.0/fpm/php-fpm.conf && \
+    sed -i '/^listen = /clisten = 9000' /etc/php7.0/fpm/pool.d/www.conf && \
+    sed -i '/^listen.allowed_clients/c;listen.allowed_clients =' /etc/php7.0/fpm/pool.d/www.conf && \
+    sed -i '/^;catch_workers_output/ccatch_workers_output = yes' /etc/php7.0/fpm/pool.d/www.conf && \
+    sed -i '/^;env\[TEMP\] = .*/aenv[DB_PORT_3306_TCP_ADDR] = $DB_PORT_3306_TCP_ADDR' /etc/php7.0/fpm/pool.d/www.conf
 
 ### APPLY NGINX CONFIGURATION
 RUN mkdir -p /tmp/logs
