@@ -84,7 +84,7 @@ function pece_admin_update_7003() {
 /**
  *  Set default user protection settings to Drupal admin user profile.
  */
-function pece_admin_update_7004(&$sandbox) {
+function pece_admin_update_7004() {
   pece_admin_apply_admin_protection();
   // Revert default config user_default_permissions.
   module_load_include('inc', 'pece', 'pece.functions');
