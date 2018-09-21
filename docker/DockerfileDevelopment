@@ -22,7 +22,8 @@ RUN apt-get update -y && apt-get install -y \
     php7.0-mcrypt \
     php7.0-sqlite3 \
     php-xdebug \
-    php-xmlrpc2 \
+    php7.0-xml \
+    php7.0-xmlrpc \
     php-apcu \
     php7.0-mysql \
     --no-install-recommends
@@ -32,7 +33,7 @@ RUN apt-get update -y && apt-get install -y \
 		htop \
 		curl \
 		git \
-		libpng12-dev \
+		libpng-dev \
 		libjpeg-dev \
 		libpq-dev \
     vim \
@@ -42,7 +43,7 @@ RUN apt-get update -y && apt-get install -y \
     libfontconfig1 \
     bzip2 \
     build-essential \
-    python-software-properties \
+    software-properties-common \
     locales \
     wget \
     openconnect \
@@ -55,10 +56,12 @@ RUN apt-get update -y && apt-get install -y \
     --no-install-recommends
 
 ### CONFIGURE LOCALES
-RUN echo "LANGUAGE=pt_BR.UTF-8" >> /etc/environment
-RUN echo "LANG=pt_BR.UTF-8"     >> /etc/environment
-RUN echo "LC_ALL=pt_BR.UTF-8"   >> /etc/environment
-RUN locale-gen pt_BR.UTF-8
+#ENV LOCALE_DEFAULT en_US.UTF8
+ENV LOCALE_DEFAULT pt_BR.UTF8
+RUN echo "LANGUAGE=$LOCALE_DEFAULT" >> /etc/environment
+RUN echo "LANG=$LOCALE_DEFAULT"     >> /etc/environment
+RUN echo "LC_ALL=$LOCALE_DEFAULT"   >> /etc/environment
+RUN locale-gen $LOCALE_DEFAULT
 RUN dpkg-reconfigure locales
 
 ### INSTALL COMPOSER
