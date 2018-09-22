@@ -27,6 +27,7 @@ RUN apt-get update -y && apt-get install -y \
     php7.0-xmlrpc \
     php-apcu \
     php7.0-mysql \
+    php7.0-mbstring \
     --no-install-recommends
 
 RUN apt-get update -y && apt-get install -y \
