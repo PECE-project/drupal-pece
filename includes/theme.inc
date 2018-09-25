@@ -1986,11 +1986,11 @@ function theme_breadcrumb($variables) {
  *     rows.
  */
 function theme_table($variables) {
-  $header = $variables['header'];
-  $rows = $variables['rows'];
+  $header = (array) $variables['header'];
+  $rows = (array) $variables['rows'];
   $attributes = $variables['attributes'];
   $caption = $variables['caption'];
-  $colgroups = $variables['colgroups'];
+  $colgroups = (array) $variables['colgroups'];
   $sticky = $variables['sticky'];
   $empty = $variables['empty'];
 
