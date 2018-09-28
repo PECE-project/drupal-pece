@@ -16,7 +16,7 @@ function pece_essay_ctools_plugin_directory($module, $plugin) {
 }
 
 /**
- * Implements hook_form_ID_alter().
+ * Implements hook_form_FORM_ID_alter().
  */
 function pece_essay_form_pece_essay_node_form_alter(&$form, &$form_state) {
   // @TODO: show URI field once API is available.
