@@ -38,3 +38,13 @@ function pece_timeline_essay_panelizer_ipe_access($display, $entity_type, $entit
 
   return $entity->panelizer_view_mode === 'free_panel' && entity_access('update', $entity_type, $entity);
 }
+
+
+/**
+ * Implements hook_pece_annotatable_types_info().
+ */
+function pece_timeline_essay_pece_annotatable_types_info() {
+  return array(
+    'pece_timeline_essay' => 'pece_timeline_essay',
+  );
+}
