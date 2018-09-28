@@ -1309,6 +1309,62 @@ function pece_timeline_essay_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_essay'.
+  $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_essay'] = array(
+    'bundle' => 'pece_timeline_essay_item',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'pece_timeline_essay_item',
+    'entityconnect' => array(
+      'button' => array(
+        'unload_add_button' => 1,
+        'unload_edit_button' => 1,
+      ),
+      'icon' => array(
+        'show_add_icon' => 0,
+        'show_edit_icon' => 0,
+      ),
+    ),
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_pece_timeline_essay',
+    'label' => 'Timeline Essay',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance:
   // 'pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_media'.
   $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_media'] = array(
     'bundle' => 'pece_timeline_essay_item',
@@ -1398,6 +1454,7 @@ function pece_timeline_essay_field_default_field_instances() {
   t('Tags');
   t('Thumbnail');
   t('Timeline Artifact');
+  t('Timeline Essay');
   t('URI');
 
   return $field_instances;
