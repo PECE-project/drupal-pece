@@ -26,7 +26,7 @@ function pece_timeline_essay_view_essay_link_pane_edit_form($form, &$form_state)
     $form_state['values']
   );
 
-  // Remove common unecessary fields.
+  // Remove common unnecessary fields.
   unset($form['override_title']);
   unset($form['override_title_text']);
   unset($form['override_title_heading']);
@@ -60,8 +60,8 @@ function pece_timeline_essay_view_essay_link_pane_render($subtype, $conf, $args,
   // Prepare response block.
   $block = new stdClass();
   $node = $context->data;
-  $path = "node/{$node->nid}" . ($conf['destination'] === 'timeline' ? '/timeline' : '');
-  $text = $conf['destination'] === 'timeline' ? t('View Timeline Essay') : t('Return to Timeline Essay Metadata');
+  $path = "node/{$node->nid}" . ($conf['destination'] === 'essay' ? '/timeline' : '');
+  $text = $conf['destination'] === 'essay' ? t('View Essay') : t('Return to Essay Metadata');
   $path_alias = drupal_get_path_alias($path);
 
   $block->content = array(
