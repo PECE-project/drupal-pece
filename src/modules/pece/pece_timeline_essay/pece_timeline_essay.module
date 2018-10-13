@@ -39,7 +39,6 @@ function pece_timeline_essay_panelizer_ipe_access($display, $entity_type, $entit
   return $entity->panelizer_view_mode === 'free_panel' && entity_access('update', $entity_type, $entity);
 }
 
-
 /**
  * Implements hook_pece_annotatable_types_info().
  */
@@ -48,3 +47,18 @@ function pece_timeline_essay_pece_annotatable_types_info() {
     'pece_timeline_essay' => 'pece_timeline_essay',
   );
 }
+
+/**
+ * Implements hook_theme().
+ */
+function custom_panes_plugins_theme() {
+  $path = drupal_get_path('module', 'pece_timeline_essay') . '/themes';
+  return array(
+    'timeline_pane' => array(
+      'variables' => array('description' => NULL),
+      'path' => $path,
+      'template' => 'timeline-pane',
+    ),
+  );
+}
+
