@@ -62,3 +62,21 @@ function custom_panes_plugins_theme() {
   );
 }
 
+//function pece_timeline_essay_views_pre_render(&$view) {
+//  die('BBBBBBBBBBB');
+//}
+
+/**
+ * Implements hook_views_post_execute().
+ */
+function pece_timeline_essay_views_post_execute(&$view) {
+  if ($view->name == 'pece_timeline_essay_items') {
+    dsm($view);
+//    foreach ($view->result as $result) {
+//      // Replace all empty fields with the dash '-' character.
+//      if(empty($result->field_field_regular_job_count)) {
+//        $result->field_field_regular_job_count[0]['rendered']['#markup'] = '-';
+//      }
+//    }
+  }
+}
