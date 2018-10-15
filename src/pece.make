@@ -388,6 +388,9 @@ projects[scholarly_lite][type] = theme
 projects[scholarly_lite][version] = 1.1
 projects[scholarly_lite][subdir] = contrib
 
+libraries[timelinejs][download][type] = file
+libraries[timelinejs][download][url] = https://github.com/NUKnightLab/TimelineJS3/archive/3.6.1.tar.gz
+
 ; =====================
 ; Other
 ; =====================
