@@ -51,7 +51,7 @@ function pece_timeline_essay_timeline_pane_render($subtype, $conf, $args, $conte
   // Prepare response block.
   $block = new stdClass();
   $node = $context->data;
-  $timeline_events = tlei_get_timeline_items($node);
+  $timeline_events = pece_timeline_essay_get_tl_items($node);
   $timeline_settings = array(
      'start_at_end' => true,
      'default_bg_color' => '{r:0, g:0, b:0}',
