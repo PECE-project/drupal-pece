@@ -98,20 +98,17 @@ function pece_timeline_essay_theme() {
  * Implements hook_preprocess_theme().
  */
 function pece_timeline_essay_preprocess_timelinejs(&$variables) {
-  libraries_load('timelinejs');
-  if (($library = libraries_detect('timelinejs')) && !empty($library['installed'])) {
-    drupal_add_library('pece_timeline_essay', 'timelinejs');
-  }
-  else {
-    $error = $library['error'];
-    $error_message = $library['error message'];
-    dsm(array($error, $error_message));
-  }
+  return $variables;
+}
 
+/**
+ * Implements hook_preprocess_page().
+ */
+function pece_timeline_essay_preprocess_page(&$variables) {
+  $timelinejs = drupal_get_library('pece_timeline_essay', 'timelinejs');
   $variables['#attached']['timelinejs'][] = array(
-    'pece_timeline_essay',
-    'timelinejs',
-    null
+    'js' => $timelinejs['js'],
+    'css' => $timelinejs['css'],
   );
 
   return $variables;
