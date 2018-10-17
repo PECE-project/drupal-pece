@@ -87,7 +87,7 @@ function pece_timeline_essay_theme() {
   $path = drupal_get_path('module', 'pece_timeline_essay') . '/templates';
   return array(
     'timelinejs' => array(
-      'variables' => array('timeline' => NULL, 'settings' => NULL),
+      'variables' => array('events' => NULL, 'settings' => NULL),
       'path' => $path,
       'template' => 'timeline-pane',
     ),
