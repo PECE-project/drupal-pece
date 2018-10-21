@@ -113,7 +113,7 @@ projects[views_infinite_scroll][subdir] = contrib
 projects[views_litepager][version] = 3.0
 projects[views_litepager][subdir] = contrib
 
-projects[tvi][version] = 1.0-beta5
+projects[tvi][version] = 1.0
 projects[tvi][subdir] = contrib
 
 projects[better_exposed_filters][version] = 3.5
