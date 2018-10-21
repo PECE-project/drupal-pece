@@ -71,9 +71,9 @@ libraries[autopager][download][subtree] = autopager
 ; Utilities and APIs
 ; =====================
 
-; Overrides panopoly's ctools.
- projects[ctools][version] = 1.14
- projects[ctools][subdir] = contrib
+; Overrides panopoly's ctools to apply custom patches.
+; projects[ctools][version] = 1.14
+; projects[ctools][subdir] = contrib
 ; @TODO: Update and reapply the following patch if needed. @see https://www.drupal.org/project/ctools/issues/2671150
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
 
