@@ -129,13 +129,6 @@ projects[masonry][subdir] = contrib
 projects[masonry_views][version] = 3.0-beta1
 projects[masonry_views][subdir] = contrib
 
-; Overrides panopoly's views_autocomplete_filters.
-projects[views_autocomplete_filters][version] = 1.2
-projects[views_autocomplete_filters][subdir] = contrib
-projects[views_autocomplete_filters][patch][2374709] = http://www.drupal.org/files/issues/views_autocomplete_filters-cache-2374709-2.patch
-projects[views_autocomplete_filters][patch][2317351] = http://www.drupal.org/files/issues/views_autocomplete_filters-content-pane-2317351-4.patch
-projects[views_autocomplete_filters][patch][2404893] = https://www.drupal.org/files/issues/2404893-grammar_correction-11.patch
-
 ; =====================
 ; Administration
 ; =====================
