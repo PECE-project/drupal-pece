@@ -67,6 +67,10 @@ libraries[autopager][download][type] = file
 libraries[autopager][download][url] = https://bitbucket.org/luksak/jquery-autopager/raw/2100c39767f97f6da18882aadca7b908c703e450/jquery.autopager-1.0.0.js
 libraries[autopager][download][subtree] = autopager
 
+; PHP encryption libraries (REAL AES module dependency)
+libraries[php-encryption][download][type] = file
+libraries[php-encryption][download][url] = https://github.com/defuse/php-encryption/archive/522859f0b3f35fe83be5803ede83af3f517bfd5b.zip
+
 ; =====================
 ; Utilities and APIs
 ; =====================
@@ -184,10 +188,6 @@ projects[encrypt][version] = 2.3
 ; Real AES PHP encryption
 projects[real_aes][subdir] = contrib
 projects[real_aes][version] = 1.2
-
-; PHP encryption libraries
-libraries[php-encryption][download][type] = file
-libraries[php-encryption][download][url] = https://github.com/defuse/php-encryption/archive/522859f0b3f35fe83be5803ede83af3f517bfd5b.zip
 
 ; Honeypot
 projects[honeypot][subdir] = contrib
