@@ -1,7 +1,6 @@
 core = 7.x
 api = 2
 
-
 ; =====================
 ; kraftwagen
 ; =====================
@@ -16,6 +15,57 @@ projects[kw_itemnames][download][type] = git
 projects[kw_itemnames][download][url] = "git://github.com/kraftwagen/kw-itemnames.git"
 projects[kw_itemnames][subdir] = kraftwagen
 
+; =====================
+; Libraries
+; =====================
+
+; Panopoly images depending libraries
+libraries[jquery.imagesloaded][download][type] = file
+libraries[jquery.imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz
+libraries[jquery.imagesloaded][download][subtree] = imagesloaded-2.1.2
+
+libraries[jquery.imgareaselect][download][type] = file
+libraries[jquery.imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v1.0.0-rc.1.tar.gz
+libraries[jquery.imgareaselect][download][subtree] = imgareaselect-1.0.0-rc.1
+
+; Misc Libraries
+
+libraries[imagesloaded][download][type] = file
+libraries[imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v4.1.4.tar.gz
+libraries[imagesloaded][download][subtree] = imagesloaded-4.1.4
+
+libraries[imgareaselect][download][type] = file
+libraries[imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v1.0.0-rc.1.tar.gz
+libraries[imgareaselect][directory_name] = jquery.imgareaselect
+
+libraries[phpmailer][download][type] = git
+libraries[phpmailer][download][url] = https://github.com/Synchro/PHPMailer.git
+libraries[phpmailer][download][revision] = d3802c597bff8f6c2ccfa3eab2a511aa01b8d68f
+libraries[phpmailer][download][branch] = master
+
+;libraries[annotator][download][type] = file
+;libraries[annotator][download][url] = https://github.com/openannotation/annotator/releases/download/v1.2.10/annotator.1.2.10.zip
+;libraries[annotator][download][subtree] = annotator.1.2.10
+
+libraries[spyc][download][type] = file
+libraries[spyc][download][url] = https://github.com/mustangostang/spyc/archive/0.6.2.zip
+libraries[spyc][directory_name] = spyc
+
+libraries[aws][download][type] = file
+libraries[aws][download][url] = https://github.com/aws/aws-sdk-php/releases/download/3.15.5/aws.zip
+libraries[aws][directory_name] = aws
+
+libraries[cycle][download][type] = file
+libraries[cycle][download][url] = http://malsup.github.io/min/jquery.cycle.all.min.js
+libraries[cycle][directory_name] = jquery.cycle
+
+libraries[masonry][download][type] = file
+libraries[masonry][download][url] = https://npmcdn.com/masonry-layout@3.3.2/dist/masonry.pkgd.min.js
+libraries[masonry][directory_name] = masonry
+
+libraries[autopager][download][type] = file
+libraries[autopager][download][url] = https://bitbucket.org/luksak/jquery-autopager/raw/2100c39767f97f6da18882aadca7b908c703e450/jquery.autopager-1.0.0.js
+libraries[autopager][download][subtree] = autopager
 
 ; =====================
 ; Utilities and APIs
@@ -369,47 +419,6 @@ projects[adminimal_theme][subdir] = contrib
 ; projects[scholarly_lite][type] = theme
 ; projects[scholarly_lite][version] = 1.0
 ; projects[scholarly_lite][subdir] = contrib
-
-; =====================
-; Libraries
-; =====================
-
-libraries[phpmailer][download][type] = git
-libraries[phpmailer][download][url] = https://github.com/Synchro/PHPMailer.git
-libraries[phpmailer][download][revision] = d3802c597bff8f6c2ccfa3eab2a511aa01b8d68f
-libraries[phpmailer][download][branch] = master
-
-;libraries[annotator][download][type] = file
-;libraries[annotator][download][url] = https://github.com/openannotation/annotator/releases/download/v1.2.10/annotator.1.2.10.zip
-;libraries[annotator][download][subtree] = annotator.1.2.10
-
-libraries[spyc][download][type] = file
-libraries[spyc][download][url] = https://github.com/mustangostang/spyc/archive/0.6.2.zip
-libraries[spyc][directory_name] = spyc
-
-libraries[imgareaselect][download][type] = file
-libraries[imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v1.0.0-rc.1.tar.gz
-libraries[imgareaselect][directory_name] = jquery.imgareaselect
-
-libraries[aws][download][type] = file
-libraries[aws][download][url] = https://github.com/aws/aws-sdk-php/releases/download/3.15.5/aws.zip
-libraries[aws][directory_name] = aws
-
-libraries[cycle][download][type] = file
-libraries[cycle][download][url] = http://malsup.github.io/min/jquery.cycle.all.min.js
-libraries[cycle][directory_name] = jquery.cycle
-
-libraries[masonry][download][type] = file
-libraries[masonry][download][url] = https://npmcdn.com/masonry-layout@3.3.2/dist/masonry.pkgd.min.js
-libraries[masonry][directory_name] = masonry
-
-libraries[imagesloaded][download][type] = file
-libraries[imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v4.1.4.tar.gz
-libraries[imagesloaded][download][subtree] = imagesloaded-4.1.4
-
-libraries[autopager][download][type] = file
-libraries[autopager][download][url] = https://bitbucket.org/luksak/jquery-autopager/raw/2100c39767f97f6da18882aadca7b908c703e450/jquery.autopager-1.0.0.js
-libraries[autopager][download][subtree] = autopager
 
 ; =====================
 ; Other
