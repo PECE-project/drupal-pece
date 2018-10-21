@@ -198,16 +198,18 @@ projects[userprotect][version] = 1.2
 ; Panels
 ; =====================
 
-; Overrides panopoly's panelizer.
+; Overrides Panopoly's panelizer.
 projects[panelizer][version] = 3.4
 projects[panelizer][subdir] = contrib
+projects[panelizer][patch][2812807] = https://www.drupal.org/files/issues/panelizer--2812807--provide-entity-on-access-hooks.patch
+; Panopoly's v1.57 patches.
 projects[panelizer][patch][1549608] = https://www.drupal.org/files/issues/panelizer-n1549608-26.patch
 projects[panelizer][patch][2788851] = https://www.drupal.org/files/issues/panelizer-administer-panelizer-2788851-2.patch
-projects[panelizer][patch][2812807] = https://www.drupal.org/files/issues/panelizer--2812807--provide-entity-on-access-hooks.patch
 
 ; Overrides panopoly's panels.
 projects[panels][version] = 3.9
 projects[panels][subdir] = contrib
+; Panopoly's v1.57 patches.
 projects[panels][patch][1570120] = https://www.drupal.org/files/issues/move-image-1570120-31.patch
 projects[panels][patch][2897658] = https://www.drupal.org/files/issues/panels-menu-block-ipe-2897658-3.patch
 
@@ -216,11 +218,9 @@ projects[panels][patch][2897658] = https://www.drupal.org/files/issues/panels-me
 
 projects[fieldable_panels_panes][version] = 1.11
 projects[fieldable_panels_panes][subdir] = contrib
-projects[fieldable_panels_panes][patch][2826205] = https://www.drupal.org/files/issues/fieldable_panels_panes-n2826205-39.patch
 projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/issues/fieldable_panels_panes--access_hook--2814117-1.patch
-; @TODO: Review ASAP the updated/accepted solution for previous patch. At the moment the patch is not applying.
-;projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/issues/fieldable_panels_panes-access-hook-2814117-6.patch
-
+; Panopoly's v1.57 patches.
+projects[fieldable_panels_panes][patch][2826205] = https://www.drupal.org/files/issues/fieldable_panels_panes-n2826205-39.patch
 
 ; =====================
 ; Panopoly
