@@ -248,7 +248,7 @@ libraries[jquery.imgareaselect][download][subtree] = imgareaselect-1.0.0-rc.1
 projects[panopoly_magic][version] = 1.51
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_theme][version] = 1.51
+projects[panopoly_theme][version] = 1.57
 projects[panopoly_theme][subdir] = contrib
 
 ; Overrides panopoly's panopoly_widgets.
