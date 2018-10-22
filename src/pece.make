@@ -363,13 +363,10 @@ projects[nodeaccess_userreference][subdir] = contrib
 projects[nodeaccess_userreference][version] = 3.10
 projects[nodeaccess_userreference][patch][] = ./patches/nodeaccess_userreference-fix_install_phase_requirement_error.patch
 
-
 ; =====================
 ; Search
 ; =====================
 
-projects[search_api][version] = 1.21
-projects[search_api][subdir] = contrib
 
 ; =====================
 ; Themes
