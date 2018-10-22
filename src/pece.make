@@ -483,11 +483,6 @@ projects[backup_migrate][version] = 3.4
 projects[node_expire][subdir] = contrib
 projects[node_expire][version] = 2.2
 
-
-; Overrides panopoly's date (dependency of node_expire).
-projects[date][subdir] = contrib
-projects[date][version] = 2.10
-
 ; =====================
 ; Development Modules
 ; =====================
