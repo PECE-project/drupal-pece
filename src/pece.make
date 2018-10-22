@@ -350,9 +350,6 @@ projects[mimedetect][subdir] = contrib
 ; Fields
 ; =====================
 
-; Overrides panopoly's image_resize_filter.
-projects[image_resize_filter][version] = 1.16
-projects[image_resize_filter][subdir] = contrib
 
 projects[linkit][version] = 3.5
 projects[linkit][subdir] = contrib
