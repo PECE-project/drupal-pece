@@ -97,8 +97,10 @@ function scholarly_lite_form_system_theme_settings_alter(&$form, &$form_state) {
         '#title' => t('BootstrapCDN Complete CSS version'),
         '#options' => drupal_map_assoc(array(
           '3.2.0',
+          '3.3.6',
         )),
         '#default_value' => theme_get_setting('bootstrap_css_cdn'),
+        '#empty_option' => t('Disabled'),
         '#empty_value' => NULL,
     );
 
@@ -107,8 +109,21 @@ function scholarly_lite_form_system_theme_settings_alter(&$form, &$form_state) {
         '#title' => t('BootstrapCDN Complete JavaScript version'),
         '#options' => drupal_map_assoc(array(
           '3.2.0',
+          '3.3.6',
         )),
         '#default_value' => theme_get_setting('bootstrap_js_cdn'),
+        '#empty_option' => t('Disabled'),
+        '#empty_value' => NULL,
+    );
+
+    $form['mtt_settings']['tabs']['bootstrap_cdn']['bootstrap_fa_cdn'] = array(
+        '#type' => 'select',
+        '#title' => t('BootstrapCDN Complete Font Awesome version'),
+        '#options' => drupal_map_assoc(array(
+          '4.2.0',
+          '4.5.0',
+        )),
+        '#default_value' => theme_get_setting('bootstrap_fa_cdn'),
         '#empty_option' => t('Disabled'),
         '#empty_value' => NULL,
     );
@@ -210,6 +225,8 @@ function scholarly_lite_form_system_theme_settings_alter(&$form, &$form_state) {
       'sff-30' => t('Times, Times New Roman, Serif'),
       'sff-31' => t('Alegreya SC, Georgia, Times, Times New Roman, Serif'),
     ),
+    '#empty_option' => t('Disabled'),
+    '#empty_value' => NULL,
   );
   
   $form['mtt_settings']['tabs']['font']['slogan_font_family'] = array(
@@ -247,8 +264,10 @@ function scholarly_lite_form_system_theme_settings_alter(&$form, &$form_state) {
       'slff-28' => t('Gentium Book Basic, Georgia, Times, Times New Roman, Serif'),
       'slff-29' => t('Volkhov, Georgia, Times, Times New Roman, Serif'),
       'slff-30' => t('Times, Times New Roman, Serif'),
-      'slff-31' => t('Alegreya SC, Georgia, Times, Times New Roman, Serif'),      
+      'slff-31' => t('Alegreya SC, Georgia, Times, Times New Roman, Serif'),
     ),
+    '#empty_option' => t('Disabled'),
+    '#empty_value' => NULL,
   );
   
   $form['mtt_settings']['tabs']['font']['headings_font_family'] = array(
@@ -286,8 +305,10 @@ function scholarly_lite_form_system_theme_settings_alter(&$form, &$form_state) {
       'hff-28' => t('Gentium Book Basic, Georgia, Times, Times New Roman, Serif'),
       'hff-29' => t('Volkhov, Georgia, Times, Times New Roman, Serif'),
       'hff-30' => t('Times, Times New Roman, Serif'),
-      'hff-31' => t('Alegreya SC, Georgia, Times, Times New Roman, Serif'),         
+      'hff-31' => t('Alegreya SC, Georgia, Times, Times New Roman, Serif'),
     ),
+    '#empty_option' => t('Disabled'),
+    '#empty_value' => NULL,
   );
   
   $form['mtt_settings']['tabs']['font']['paragraph_font_family'] = array(
@@ -325,8 +346,10 @@ function scholarly_lite_form_system_theme_settings_alter(&$form, &$form_state) {
       'pff-28' => t('Gentium Book Basic, Georgia, Times, Times New Roman, Serif'),
       'pff-29' => t('Volkhov, Georgia, Times, Times New Roman, Serif'),
       'pff-30' => t('Times, Times New Roman, Serif'),
-      'pff-31' => t('Alegreya SC, Georgia, Times, Times New Roman, Serif'),          
+      'pff-31' => t('Alegreya SC, Georgia, Times, Times New Roman, Serif'),
     ),
+    '#empty_option' => t('Disabled'),
+    '#empty_value' => NULL,
   );
   
   $form['mtt_settings']['tabs']['responsive_menu'] = array(
@@ -354,14 +377,14 @@ function scholarly_lite_form_system_theme_settings_alter(&$form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => t('Credits'),
     '#collapsible' => TRUE,
-	'#collapsed' => FALSE,
+	  '#collapsed' => FALSE,
   );
   
   $form['mtt_settings']['tabs']['credits']['credits_display'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show credits'),
   	'#description'   => t('Use the checkbox to enable or disable credits.'),
-	'#default_value' => theme_get_setting('credits_display'),
+	  '#default_value' => theme_get_setting('credits_display'),
   );
   
     
