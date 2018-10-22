@@ -1,7 +1,6 @@
 core = 7.x
 api = 2
 
-
 ; =====================
 ; kraftwagen
 ; =====================
@@ -16,19 +15,74 @@ projects[kw_itemnames][download][type] = git
 projects[kw_itemnames][download][url] = "git://github.com/kraftwagen/kw-itemnames.git"
 projects[kw_itemnames][subdir] = kraftwagen
 
+; =====================
+; Libraries
+; =====================
+
+; Panopoly images depending libraries
+libraries[jquery.imagesloaded][download][type] = file
+libraries[jquery.imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz
+libraries[jquery.imagesloaded][download][subtree] = imagesloaded-2.1.2
+
+libraries[jquery.imgareaselect][download][type] = file
+libraries[jquery.imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v1.0.0-rc.1.tar.gz
+libraries[jquery.imgareaselect][download][subtree] = imgareaselect-1.0.0-rc.1
+
+; Misc Libraries
+
+libraries[imagesloaded][download][type] = file
+libraries[imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v4.1.4.tar.gz
+libraries[imagesloaded][download][subtree] = imagesloaded-4.1.4
+
+libraries[imgareaselect][download][type] = file
+libraries[imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v1.0.0-rc.1.tar.gz
+libraries[imgareaselect][directory_name] = jquery.imgareaselect
+
+libraries[phpmailer][download][type] = git
+libraries[phpmailer][download][url] = https://github.com/Synchro/PHPMailer.git
+libraries[phpmailer][download][revision] = d3802c597bff8f6c2ccfa3eab2a511aa01b8d68f
+libraries[phpmailer][download][branch] = master
+
+;libraries[annotator][download][type] = file
+;libraries[annotator][download][url] = https://github.com/openannotation/annotator/releases/download/v1.2.10/annotator.1.2.10.zip
+;libraries[annotator][download][subtree] = annotator.1.2.10
+
+libraries[spyc][download][type] = file
+libraries[spyc][download][url] = https://github.com/mustangostang/spyc/archive/0.6.2.zip
+libraries[spyc][directory_name] = spyc
+
+libraries[aws][download][type] = file
+libraries[aws][download][url] = https://github.com/aws/aws-sdk-php/releases/download/3.15.5/aws.zip
+libraries[aws][directory_name] = aws
+
+libraries[cycle][download][type] = file
+libraries[cycle][download][url] = http://malsup.github.io/min/jquery.cycle.all.min.js
+libraries[cycle][directory_name] = jquery.cycle
+
+libraries[masonry][download][type] = file
+libraries[masonry][download][url] = https://npmcdn.com/masonry-layout@3.3.2/dist/masonry.pkgd.min.js
+libraries[masonry][directory_name] = masonry
+
+libraries[autopager][download][type] = file
+libraries[autopager][download][url] = https://bitbucket.org/luksak/jquery-autopager/raw/2100c39767f97f6da18882aadca7b908c703e450/jquery.autopager-1.0.0.js
+libraries[autopager][download][subtree] = autopager
+
+; PHP encryption libraries (REAL AES module dependency)
+libraries[php-encryption][download][type] = file
+libraries[php-encryption][download][url] = https://github.com/defuse/php-encryption/archive/522859f0b3f35fe83be5803ede83af3f517bfd5b.zip
 
 ; =====================
 ; Utilities and APIs
 ; =====================
 
-; Overrides panopoly's ctools.
- projects[ctools][version] = 1.14
- projects[ctools][subdir] = contrib
+; Overrides panopoly's ctools to apply custom patches.
+; projects[ctools][version] = 1.14
+; projects[ctools][subdir] = contrib
 ; @TODO: Update and reapply the following patch if needed. @see https://www.drupal.org/project/ctools/issues/2671150
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
 
 ; Overrides panopoly's uuid.
-projects[uuid][version] = 1.1
+projects[uuid][version] = 1.2
 projects[uuid][subdir] = contrib
 
 projects[xautoload][version] = 5.7
@@ -50,12 +104,12 @@ projects[site_notice][subdir] = contrib
 ; Views
 ; =====================
 
-; Overrides panopoly's views.
-projects[views][version] = 3.18
+; Overrides panopoly's views to apply custom patches.
+projects[views][version] = 3.20
 projects[views][subdir] = contrib
-projects[views][patch][2037469] = http://drupal.org/files/views-exposed-sorts-2037469-1.patch
 projects[views][patch][2331209] = https://www.drupal.org/files/issues/2331209-4-views-7.x-3.x-undefined-index.patch
-projects[views][patch][2908538] = https://www.drupal.org/files/issues/views-and_missing_parenthesis-2908538-2-D7.patch
+; Applies Panopoly's specific patches.
+projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
 
 projects[views_infinite_scroll][version] = 2.1
 projects[views_infinite_scroll][subdir] = contrib
@@ -63,7 +117,7 @@ projects[views_infinite_scroll][subdir] = contrib
 projects[views_litepager][version] = 3.0
 projects[views_litepager][subdir] = contrib
 
-projects[tvi][version] = 1.0-beta5
+projects[tvi][version] = 1.0
 projects[tvi][subdir] = contrib
 
 projects[better_exposed_filters][version] = 3.5
@@ -74,13 +128,6 @@ projects[masonry][subdir] = contrib
 
 projects[masonry_views][version] = 3.0-beta1
 projects[masonry_views][subdir] = contrib
-
-; Overrides panopoly's views_autocomplete_filters.
-projects[views_autocomplete_filters][version] = 1.2
-projects[views_autocomplete_filters][subdir] = contrib
-projects[views_autocomplete_filters][patch][2374709] = http://www.drupal.org/files/issues/views_autocomplete_filters-cache-2374709-2.patch
-projects[views_autocomplete_filters][patch][2317351] = http://www.drupal.org/files/issues/views_autocomplete_filters-content-pane-2317351-4.patch
-projects[views_autocomplete_filters][patch][2404893] = https://www.drupal.org/files/issues/2404893-grammar_correction-11.patch
 
 ; =====================
 ; Administration
@@ -135,10 +182,6 @@ projects[encrypt][version] = 2.3
 projects[real_aes][subdir] = contrib
 projects[real_aes][version] = 1.2
 
-; PHP encryption libraries
-libraries[php-encryption][download][type] = file
-libraries[php-encryption][download][url] = https://github.com/defuse/php-encryption/archive/522859f0b3f35fe83be5803ede83af3f517bfd5b.zip
-
 ; Honeypot
 projects[honeypot][subdir] = contrib
 projects[honeypot][version] = 1.22
@@ -155,16 +198,18 @@ projects[userprotect][version] = 1.2
 ; Panels
 ; =====================
 
-; Overrides panopoly's panelizer.
+; Overrides Panopoly's panelizer.
 projects[panelizer][version] = 3.4
 projects[panelizer][subdir] = contrib
+projects[panelizer][patch][2812807] = https://www.drupal.org/files/issues/panelizer--2812807--provide-entity-on-access-hooks.patch
+; Panopoly's v1.57 patches.
 projects[panelizer][patch][1549608] = https://www.drupal.org/files/issues/panelizer-n1549608-26.patch
 projects[panelizer][patch][2788851] = https://www.drupal.org/files/issues/panelizer-administer-panelizer-2788851-2.patch
-projects[panelizer][patch][2812807] = https://www.drupal.org/files/issues/panelizer--2812807--provide-entity-on-access-hooks.patch
 
 ; Overrides panopoly's panels.
 projects[panels][version] = 3.9
 projects[panels][subdir] = contrib
+; Panopoly's v1.57 patches.
 projects[panels][patch][1570120] = https://www.drupal.org/files/issues/move-image-1570120-31.patch
 projects[panels][patch][2897658] = https://www.drupal.org/files/issues/panels-menu-block-ipe-2897658-3.patch
 
@@ -173,67 +218,53 @@ projects[panels][patch][2897658] = https://www.drupal.org/files/issues/panels-me
 
 projects[fieldable_panels_panes][version] = 1.11
 projects[fieldable_panels_panes][subdir] = contrib
-projects[fieldable_panels_panes][patch][2826205] = https://www.drupal.org/files/issues/fieldable_panels_panes-n2826205-39.patch
 projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/issues/fieldable_panels_panes--access_hook--2814117-1.patch
-; @TODO: Review ASAP the updated/accepted solution for previous patch. At the moment the patch is not applying.
-;projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/issues/fieldable_panels_panes-access-hook-2814117-6.patch
-
+; Panopoly's v1.57 patches.
+projects[fieldable_panels_panes][patch][2826205] = https://www.drupal.org/files/issues/fieldable_panels_panes-n2826205-39.patch
 
 ; =====================
 ; Panopoly
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_admin][version] = 1.51
+projects[panopoly_admin][version] = 1.57
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_core][version] = 1.51
+projects[panopoly_core][version] = 1.57
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.51
+projects[panopoly_images][version] = 1.57
 projects[panopoly_images][subdir] = contrib
 
-; Panopoly images depending libraries
-libraries[jquery.imagesloaded][download][type] = file
-libraries[jquery.imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz
-libraries[jquery.imagesloaded][download][subtree] = imagesloaded-2.1.2
-
-libraries[jquery.imgareaselect][download][type] = file
-libraries[jquery.imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v1.0.0-rc.1.tar.gz
-libraries[jquery.imgareaselect][download][subtree] = imgareaselect-1.0.0-rc.1
-
-projects[panopoly_magic][version] = 1.51
+projects[panopoly_magic][version] = 1.57
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_theme][version] = 1.51
+projects[panopoly_theme][version] = 1.57
 projects[panopoly_theme][subdir] = contrib
 
 ; Overrides panopoly's panopoly_widgets.
-projects[panopoly_widgets][version] = 1.53
+projects[panopoly_widgets][version] = 1.57
 projects[panopoly_widgets][subdir] = contrib
-projects[panopoly_widgets][patch][2919401] = https://www.drupal.org/files/issues/panopoly_widgets-update-tablefield-2919401-3.patch
 
-projects[panopoly_users][version] = 1.51
+projects[panopoly_users][version] = 1.57
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.51
+projects[panopoly_pages][version] = 1.57
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_search][version] = 1.51
+projects[panopoly_search][version] = 1.57
 projects[panopoly_search][subdir] = contrib
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
 
-projects[panopoly_wysiwyg][version] = 1.51
+projects[panopoly_wysiwyg][version] = 1.57
 projects[panopoly_wysiwyg][subdir] = contrib
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.51
+projects[panopoly_test][version] = 1.57
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
-projects[radix_layouts][version] = 3.4
-projects[radix_layouts][subdir] = contrib
 
 projects[radix_views][version] = 1.0
 projects[radix_views][subdir] = contrib
@@ -246,10 +277,6 @@ projects[radix_views][subdir] = contrib
 ; =====================
 ; Interface
 ; =====================
-
-; Overrides panopoly's breakpoints.
-projects[breakpoints][version] = 1.4
-projects[breakpoints][subdir] = contrib
 
 ;projects[breakpointsjs][version] = 2.x-dev
 ;projects[breakpointsjs][subdir] = contrib
@@ -267,7 +294,6 @@ projects[entity_view_mode][subdir] = contrib
 ; Overrides panopoly's entityreference.
 projects[entityreference][version] = 1.5
 projects[entityreference][subdir] = contrib
-;projects[entityreference][patch][1836106] = "https://www.drupal.org/files/issues/entityreference_1836106_59.patch"
 projects[entityreference][patch][1423778] = "https://www.drupal.org/files/issues/entityreference-1423778-brokenhandler.diff"
 
 projects[entityreference_view_widget][version] = 2.0-rc7
@@ -324,17 +350,10 @@ projects[mimedetect][subdir] = contrib
 ; Fields
 ; =====================
 
-; Overrides panopoly's image_resize_filter.
-projects[image_resize_filter][version] = 1.16
-projects[image_resize_filter][subdir] = contrib
-
+; Overrides Panopoly's linkit.
 projects[linkit][version] = 3.5
 projects[linkit][subdir] = contrib
 projects[linkit][patch][2651404] = https://www.drupal.org/files/issues/linkit-add-to-any-element-2651404-3.patch
-
-; Overrides panopoly's field_group.
-projects[field_group][version] = 1.6
-projects[field_group][subdir] = contrib
 
 projects[languagefield][version] = 1.7
 projects[languagefield][subdir] = contrib
@@ -344,13 +363,10 @@ projects[nodeaccess_userreference][subdir] = contrib
 projects[nodeaccess_userreference][version] = 3.10
 projects[nodeaccess_userreference][patch][] = ./patches/nodeaccess_userreference-fix_install_phase_requirement_error.patch
 
-
 ; =====================
 ; Search
 ; =====================
 
-projects[search_api][version] = 1.21
-projects[search_api][subdir] = contrib
 
 ; =====================
 ; Themes
@@ -366,50 +382,9 @@ projects[adminimal_theme][version] = 1.24
 projects[adminimal_theme][subdir] = contrib
 
 ; PECE Base Theme
-; projects[scholarly_lite][type] = theme
-; projects[scholarly_lite][version] = 1.0
-; projects[scholarly_lite][subdir] = contrib
-
-; =====================
-; Libraries
-; =====================
-
-libraries[phpmailer][download][type] = git
-libraries[phpmailer][download][url] = https://github.com/Synchro/PHPMailer.git
-libraries[phpmailer][download][revision] = d3802c597bff8f6c2ccfa3eab2a511aa01b8d68f
-libraries[phpmailer][download][branch] = master
-
-;libraries[annotator][download][type] = file
-;libraries[annotator][download][url] = https://github.com/openannotation/annotator/releases/download/v1.2.10/annotator.1.2.10.zip
-;libraries[annotator][download][subtree] = annotator.1.2.10
-
-libraries[spyc][download][type] = file
-libraries[spyc][download][url] = https://github.com/mustangostang/spyc/archive/0.6.2.zip
-libraries[spyc][directory_name] = spyc
-
-libraries[imgareaselect][download][type] = file
-libraries[imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v1.0.0-rc.1.tar.gz
-libraries[imgareaselect][directory_name] = jquery.imgareaselect
-
-libraries[aws][download][type] = file
-libraries[aws][download][url] = https://github.com/aws/aws-sdk-php/releases/download/3.15.5/aws.zip
-libraries[aws][directory_name] = aws
-
-libraries[cycle][download][type] = file
-libraries[cycle][download][url] = http://malsup.github.io/min/jquery.cycle.all.min.js
-libraries[cycle][directory_name] = jquery.cycle
-
-libraries[masonry][download][type] = file
-libraries[masonry][download][url] = https://npmcdn.com/masonry-layout@3.3.2/dist/masonry.pkgd.min.js
-libraries[masonry][directory_name] = masonry
-
-libraries[imagesloaded][download][type] = file
-libraries[imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v4.1.4.tar.gz
-libraries[imagesloaded][download][subtree] = imagesloaded-4.1.4
-
-libraries[autopager][download][type] = file
-libraries[autopager][download][url] = https://bitbucket.org/luksak/jquery-autopager/raw/2100c39767f97f6da18882aadca7b908c703e450/jquery.autopager-1.0.0.js
-libraries[autopager][download][subtree] = autopager
+projects[scholarly_lite][type] = theme
+projects[scholarly_lite][version] = 1.1
+projects[scholarly_lite][subdir] = contrib
 
 ; =====================
 ; Other
@@ -507,11 +482,6 @@ projects[backup_migrate][version] = 3.4
 ; Node Expiration
 projects[node_expire][subdir] = contrib
 projects[node_expire][version] = 2.2
-
-
-; Overrides panopoly's date (dependency of node_expire).
-projects[date][subdir] = contrib
-projects[date][version] = 2.10
 
 ; =====================
 ; Development Modules
