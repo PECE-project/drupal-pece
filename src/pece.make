@@ -274,8 +274,6 @@ projects[panopoly_test][version] = 1.57
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
-projects[radix_layouts][version] = 3.4
-projects[radix_layouts][subdir] = contrib
 
 projects[radix_views][version] = 1.0
 projects[radix_views][subdir] = contrib
