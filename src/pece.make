@@ -278,10 +278,6 @@ projects[radix_views][subdir] = contrib
 ; Interface
 ; =====================
 
-; Overrides panopoly's breakpoints.
-projects[breakpoints][version] = 1.4
-projects[breakpoints][subdir] = contrib
-
 ;projects[breakpointsjs][version] = 2.x-dev
 ;projects[breakpointsjs][subdir] = contrib
 
