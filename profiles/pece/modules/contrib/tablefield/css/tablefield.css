@@ -1,3 +1,7 @@
+/**
+ * @file
+ * Styles for Table fields themselves and the form field as well.
+ */
 
 .field-widget-tablefield .form-tablefield table,
 .form-tablefield table {
@@ -21,11 +25,8 @@
   overflow: hidden;
   width: 98%;
 }
-.form-tablefield input.tablefield-row-0 {
-  font-weight: bold;
-}
 .table-no-headers input.tablefield-row-0 {
-  font-weight: normal!important;
+  font-weight: normal !important;
 }
 .form-tablefield input {
   background-color: transparent;
@@ -34,4 +35,8 @@
 .form-tablefield table,
 .form-tablefield fieldset {
   margin: 0.5em 0;
+}
+/* To have an input value close to its unit for the field 'Maximum cell length'.*/
+.tablefield-form-align {
+  text-align: right; /* LTR */
 }
