@@ -1,20 +1,25 @@
+/**
+ * @file
+ * TVI module behavior.
+ */
+
 (function($) {
   Drupal.behaviors.tvi_initialize = {
     attach: function(context, settings) {
-      //--------------------------------------------------------------------------
+      // -----------------------------------------------------------------------
       // Properties
 
       var current_display = $('#tvi-display-selector', context).val();
       var all_displays = $('#tvi-display-selector', context).children('option');
 
-      //--------------------------------------------------------------------------
+      // ------------------------------------------------------------------------
       // Handlers
 
       var set_active_option = function() {
         $('#tvi-display-selector', context).val(current_display);
-      }
+      };
 
-      //--------------------------------------------------------------------------
+      // -----------------------------------------------------------------------
 
       var view_change_handler = function() {
         var view_name = $('#tvi-view-selector', context).val();
@@ -32,9 +37,9 @@
           }
         });
         ds.val($('[selected]', ds).val());
-      }
+      };
 
-      //--------------------------------------------------------------------------
+      // -----------------------------------------------------------------------
       // Start
 
       // Javascript is enabled.

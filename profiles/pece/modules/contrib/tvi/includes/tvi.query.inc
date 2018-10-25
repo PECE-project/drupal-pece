@@ -6,6 +6,16 @@
 
 /**
  * Return a default setting object.
+ *
+ * @param string $type
+ *   The type of default settings that we are generating. It can be
+ *   TVI_TYPE_TERM or TVI_TYPE_VOCAB.
+ * @param string|int $xid
+ *   The identifier of the object for which we are generating these default
+ *   settings. It can be an integer or and UUID.
+ *
+ * @return object
+ *   The TVI default settings.
  */
 function tvi_default_settings($type = TVI_TYPE_TERM, $xid = 0) {
   $settings = new stdClass();
@@ -25,8 +35,21 @@ function tvi_default_settings($type = TVI_TYPE_TERM, $xid = 0) {
 }
 
 /**
- * Load a setting from the database or return a default, if the $return_default
- * flag is set.
+ * Load a setting from the database or return a default.
+ *
+ * @param string|int $xid
+ *   The identifier of the object for which we are loading these settings. It
+ *   can be an integer or and UUID.
+ * @param string $type
+ *   The type of the object for which we are loading these settings. It can be
+ *   TVI_TYPE_TERM or TVI_TYPE_VOCAB.
+ * @param bool $return_default
+ *   A boolean to decide if we want to return default settings if no settings
+ *   are set for this object.
+ *
+ * @return bool|object
+ *   FALSE if no settings are set for this object and $return_default is TRUE.
+ *   Otherwise, the settings object corresponding to the given term/vocabulary.
  */
 function tvi_load_settings($xid, $type = TVI_TYPE_TERM, $return_default = TRUE) {
   $xid = _tvi_get_xid($xid, $type);
@@ -49,8 +72,15 @@ function tvi_load_settings($xid, $type = TVI_TYPE_TERM, $return_default = TRUE) 
 }
 
 /**
- * Check if the views and views' displays referenced by the settings still
- * exists and is still enabled.
+ * Check if the views and views' displays referenced by the settings are valid.
+ *
+ * They are valid if they stillexists and are still enabled.
+ *
+ * @param object $settings
+ *   A TVI settings object.
+ *
+ * @return bool
+ *   TRUE if the settings are still valid, else FALSE.
  */
 function tvi_validate_settings($settings) {
   if (empty($settings) || empty($settings->view_name)) {
@@ -80,6 +110,9 @@ function tvi_validate_settings($settings) {
 
 /**
  * Save settings information for a taxonomy vocabulary or term to the database.
+ *
+ * @param object $settings
+ *   A TVI settings object.
  */
 function tvi_update_settings($settings) {
   if (is_object($settings)) {
@@ -93,8 +126,14 @@ function tvi_update_settings($settings) {
 }
 
 /**
- * Delete settings information for a taxonomy vocabulary or term in
- * the database.
+ * Delete settings information for a taxonomy term/vocabulary in the database.
+ *
+ * @param string|int $xid
+ *   The identifier of the object for which we are loading these settings. It
+ *   can be an integer or and UUID.
+ * @param string $type
+ *   The type of the object for which we are loading these settings. It can be
+ *   TVI_TYPE_TERM or TVI_TYPE_VOCAB.
  */
 function tvi_remove_settings($xid, $type = TVI_TYPE_TERM) {
   $xid = _tvi_get_xid($xid, $type);
@@ -107,6 +146,16 @@ function tvi_remove_settings($xid, $type = TVI_TYPE_TERM) {
  *
  * Vocabulary's vid converts to machine_name.
  * Term's tid converts to uuid if set.
+ *
+ * @param string|int $xid
+ *   The identifier of the object for which we are loading these settings. It
+ *   can be an integer and/or a UUID.
+ * @param string $type
+ *   The type of the object for which we are loading these settings. It can be
+ *   TVI_TYPE_TERM or TVI_TYPE_VOCAB.
+ *
+ * @return string
+ *   Vocabulary machine_name or term uuid.
  */
 function _tvi_get_xid($xid, $type = TVI_TYPE_TERM) {
   if ($type == TVI_TYPE_VOCAB) {
@@ -115,7 +164,7 @@ function _tvi_get_xid($xid, $type = TVI_TYPE_TERM) {
       $xid = $vocabulary->machine_name;
     }
   }
-  elseif ($type == TVI_TYPE_TERM && module_exists('uuid')) {
+  elseif ($type == TVI_TYPE_TERM && module_exists('uuid') && $xid != '_autocreate') {
     $uuids = entity_get_uuid_by_id('taxonomy_term', array($xid));
     $uuid = reset($uuids);
     if (!empty($uuid)) {

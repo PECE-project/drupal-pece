@@ -5,9 +5,12 @@
  */
 
 /**
- * Adds TVI administration form to the vocabulary edit page
+ * Adds TVI administration form to the vocabulary edit page.
  *
  * admin/content/taxonomy/edit/vocabulary/$vid
+ *
+ * @param array $form
+ *   The vocabulary edit form.
  */
 function tvi_vocab_form(&$form) {
   if (array_key_exists('#vocabulary', $form)) {
@@ -22,9 +25,12 @@ function tvi_vocab_form(&$form) {
 }
 
 /**
- * Adds TVI administration form to the term edit page
+ * Adds TVI administration form to the term edit page.
  *
  * admin/content/taxonomy/edit/term/$tid
+ *
+ * @param array $form
+ *   The term edit form.
  */
 function tvi_term_form(&$form) {
   if (array_key_exists('#term', $form)) {
@@ -42,8 +48,13 @@ function tvi_term_form(&$form) {
  * Create the main settings form.
  *
  * admin/config/user-interface/tvi
+ *
+ * @return array
+ *   The settings form array.
  */
-function tvi_settings_form($form, &$form_state) {
+function tvi_settings_form() {
+  $form = array();
+
   tvi_include('query');
   tvi_taxonomy_admin_form($form, tvi_load_settings('default', TVI_TYPE_ALL));
 
@@ -59,26 +70,30 @@ function tvi_settings_form($form, &$form_state) {
  * The main TVI administration form.
  *
  * This is added to both vocabulary and term edit forms.
+ *
+ * @param array $form
+ *   The form array being built.
+ * @param object $settings
+ *   The TVI settings to build the form.
  */
 function tvi_taxonomy_admin_form(&$form, $settings) {
-  // Add validate and submit handlers
+  // Add validate and submit handlers.
   $form['#validate'][] = 'tvi_validate_handler';
   $form['#submit'][]   = 'tvi_submit_handler';
-  // Add JS & CSS
+  // Add JS & CSS.
   $form['#attached']['js'][] = drupal_get_path('module', 'tvi') . '/tvi.js';
   $form['#attached']['css'][] = drupal_get_path('module', 'tvi') . '/tvi.css';
 
-  // Form container
+  // Form container.
   $form['tvi'] = array(
     '#type' => 'fieldset',
     '#title' => t('View usage'),
-    '#weight' => -10,
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
     '#tree' => TRUE,
   );
 
-  // Javascript warning message
+  // Javascript warning message.
   $js_msg = t('This form is best used with Javascript enabled. Please enable your Javascript, then refresh this page.');
   $js_msg = '<p class="javascript-warning">' . $js_msg . '</p>';
   $form['tvi']['javascript_message'] = array(
@@ -101,7 +116,7 @@ function tvi_taxonomy_admin_form(&$form, $settings) {
     '#value' => $settings->xid,
   );
 
-  // Status toggle switch
+  // Status toggle switch.
   $form['tvi']['status'] = array(
     '#id' => 'tvi-status-check',
     '#type' => 'checkbox',
@@ -111,7 +126,7 @@ function tvi_taxonomy_admin_form(&$form, $settings) {
   );
 
   if ($settings->type == TVI_TYPE_TERM) {
-    // Inheritance switch
+    // Inheritance switch.
     $form['tvi']['inherit'] = array(
       '#id' => 'tvi-inherit-check',
       '#type' => 'checkbox',
@@ -129,7 +144,7 @@ function tvi_taxonomy_admin_form(&$form, $settings) {
     );
   }
 
-  //  View selector
+  // View selector.
   $form['tvi']['view_name'] = array(
     '#id' => 'tvi-view-selector',
     '#type' => 'select',
@@ -146,17 +161,14 @@ function tvi_taxonomy_admin_form(&$form, $settings) {
       ),
     ),
   );
-  // Display selector
+  // Display selector.
   $form['tvi']['display'] = array(
     '#id' => 'tvi-display-selector',
     '#type' => 'select',
     '#title' => t('View display'),
-    '#default_value' => (
-      $settings->view_name
-      ? $settings->view_name . ':' . $settings->display
-      : NULL
-    ),
-    '#options' => tvi_get_view_displays(), // Assume no Javascript
+    '#default_value' => $settings->view_name ? $settings->view_name . ':' . $settings->display : NULL,
+    // Assume no Javascript.
+    '#options' => tvi_get_view_displays(),
     '#states' => array(
       'disabled' => array(
         '#tvi-status-check' => array('checked' => FALSE),
@@ -166,7 +178,7 @@ function tvi_taxonomy_admin_form(&$form, $settings) {
       ),
     ),
   );
-  // Pass arguments
+  // Pass arguments.
   $form['tvi']['pass_arguments'] = array(
     '#id' => 'tvi-pass-arguments',
     '#type' => 'checkbox',
@@ -183,16 +195,16 @@ function tvi_taxonomy_admin_form(&$form, $settings) {
     ),
   );
   if ($settings->type == TVI_TYPE_TERM) {
-    $form['tvi']['display']['#description'] =
-      t('The view display you select from the option above will be used to render this taxonomy term.');
+    $form['tvi']['display']['#description']
+      = t('The view display you select from the option above will be used to render this taxonomy term.');
   }
   elseif ($settings->type == TVI_TYPE_VOCAB) {
-    $form['tvi']['display']['#description'] =
-      t('The view display you select from the option above will be used to render all the taxonomy terms of this vocabulary except if their settings are overriden.');
+    $form['tvi']['display']['#description']
+      = t('The view display you select from the option above will be used to render all the taxonomy terms of this vocabulary except if their settings are overriden.');
   }
   else {
-    $form['tvi']['display']['#description'] =
-      t('The view display you select from the option above will be used to render all the taxonomy terms in all the defined vocabularies except if their vocabularies settings or their terms settings are overriden.');
+    $form['tvi']['display']['#description']
+      = t('The view display you select from the option above will be used to render all the taxonomy terms in all the defined vocabularies except if their vocabularies settings or their terms settings are overriden.');
   }
 }
 
@@ -200,24 +212,34 @@ function tvi_taxonomy_admin_form(&$form, $settings) {
  * Validate the TVI administration form submission.
  *
  * If the view and the display do not line up, throw an error.
+ *
+ * @param array $form
+ *   The form array.
+ * @param array $form_state
+ *   The form state array.
  */
 function tvi_validate_handler($form, &$form_state) {
   $values = $form_state['values']['tvi'];
 
-  if(!empty($values['display'])) {
-    list($view_name, $display_name) = explode(':', $values['display']);
+  if (!empty($values['display'])) {
+    list(, $display_name) = explode(':', $values['display']);
     $form_state['values']['tvi']['display'] = $display_name;
   }
 }
 
 /**
  * Save the view taxonomy data to the database.
+ *
+ * @param array $form
+ *   The form array.
+ * @param array $form_state
+ *   The form state array.
  */
 function tvi_submit_handler($form, &$form_state) {
   $settings = (object) $form_state['values']['tvi'];
 
-  // Handle the case of the creation form
-  if (empty($settings->xid) ||$settings->xid == '_autocreate') {
+  // Handle the case of the creation form.
+  if (empty($settings->xid) || $settings->xid == '_autocreate') {
     if ($settings->type == TVI_TYPE_VOCAB) {
       $settings->xid = $form_state['vocabulary']->vid;
     }
@@ -236,13 +258,19 @@ function tvi_submit_handler($form, &$form_state) {
 }
 
 /**
- * Gather a listing of all views so that the admin may choose ANY view
+ * Gather a listing of all views so that the admin may choose ANY view.
+ *
+ * @param bool $return_object
+ *   Define if we want the entire object or just the name of the view.
+ *
+ * @return object|string
+ *   The entire view object or just its name.
  */
 function tvi_get_views($return_object = FALSE) {
   $views = array();
 
   foreach (views_get_enabled_views() as $view) {
-    // Filter views having no display
+    // Filter views having no display.
     if (count($view->display) > 1) {
       if ($return_object) {
         $views[$view->name] = $view;
@@ -257,19 +285,21 @@ function tvi_get_views($return_object = FALSE) {
 }
 
 /**
- * Gathers the available display options for the view operating on this term
- * or vocabulary.
+ * Gathers the available views display options.
+ *
+ * @return array
+ *   All available views displays.
  */
 function tvi_get_view_displays() {
   $displays = array();
 
   foreach (tvi_get_views(TRUE) as $view_name => $view) {
     foreach ($view->display as $display_name => $display) {
-      // Ignore the "default" displays
+      // Ignore the "default" displays.
       if ($display_name == 'default' || $display->display_plugin == 'default') {
         continue;
       }
-      // Ignore disabled displays
+      // Ignore disabled displays.
       if (array_key_exists('enabled', $display->display_options) && $display->display_options['enabled'] === FALSE) {
         continue;
       }

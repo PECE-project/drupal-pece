@@ -51,12 +51,12 @@ function tvi_update_7000(&$sandbox) {
 /**
  * Replace vids by machine_names and tids by uuids if enabled.
  */
-function tvi_update_7001() {
+function tvi_update_7001(&$sandbox) {
   $settings = db_select('tvi_settings', 'tvi')
-                ->fields('tvi')
-                ->condition('tvi.type', TVI_TYPE_VOCAB)
-                ->execute()
-                ->fetchAll();
+    ->fields('tvi')
+    ->condition('tvi.type', TVI_TYPE_VOCAB)
+    ->execute()
+    ->fetchAll();
   foreach ($settings as $setting) {
     $voc = taxonomy_vocabulary_load($setting->xid);
     // Check if the vocabulary still exists.
@@ -71,10 +71,10 @@ function tvi_update_7001() {
 
   if (module_exists('uuid')) {
     $settings = db_select('tvi_settings', 'tvi')
-                  ->fields('tvi')
-                  ->condition('tvi.type', TVI_TYPE_TERM)
-                  ->execute()
-                  ->fetchAll();
+      ->fields('tvi')
+      ->condition('tvi.type', TVI_TYPE_TERM)
+      ->execute()
+      ->fetchAll();
 
     foreach ($settings as $setting) {
       $term = taxonomy_term_load($setting->xid);
@@ -93,7 +93,7 @@ function tvi_update_7001() {
 /**
  * Drop schema in favor of {variable} table.
  */
-function tvi_update_7002() {
+function tvi_update_7002(&$sandbox) {
   tvi_include('query');
   $settings = db_select('tvi_settings', 'tvi')
     ->fields('tvi')
@@ -108,7 +108,7 @@ function tvi_update_7002() {
 /**
  * Add inherit parameters to settings where it's missing.
  */
-function tvi_update_7003() {
+function tvi_update_7003(&$sandbox) {
   tvi_include('query');
   $settings = db_select('variable', 'v')
     ->fields('v', array('name'))
