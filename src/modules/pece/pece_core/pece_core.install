@@ -70,16 +70,3 @@ function pece_core_update_7006() {
     features_revert(array('pece_core' => array('views_view')));
   }
 }
-
-/**
- * Enable PECE Timeline Essay and Views_timelinejs modules.
- */
-function pece_core_update_7007() {
-  module_enable(array(
-    'views_timelinejs',
-    'pece_timeline_essay',
-  ));
-  if (module_exists('features')) {
-    features_revert(array('pece_annotations' => array('views_view')));
-  }
-}
