@@ -84,7 +84,7 @@ function _tlei_format_media($media_array) {
   $default = array(
     'url'=> $file_path,
     'caption' => $media_array['title'],
-    'credit' => '~~CREDIT PLACEHOLDER~~',
+    'credit' => '',
   );
   return $default;
 }
