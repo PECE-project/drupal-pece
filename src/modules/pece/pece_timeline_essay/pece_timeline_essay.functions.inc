@@ -42,6 +42,8 @@ function tlei_get_artifact_value($artifactWpr) {
       return $artifactWpr->field_pece_website_url->value();
     case 'pece_artifact_pdf':
       return $artifactWpr->field_pece_media_pdf->value();
+    case 'pece_artifact_text':
+      return $artifactWpr->body->value();
     default:
       dsm($artifactWpr->value());
       return Null;

@@ -120,5 +120,33 @@ function pece_timeline_essay_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
+  // Exported field_base: 'field_pece_timeline_type'.
+  $field_bases['field_pece_timeline_type'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_pece_timeline_type',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'title ' => ' Title',
+        'event ' => ' Event',
+        'era ' => ' Era',
+        'scale ' => ' Scale',
+      ),
+      'allowed_values_function' => '',
+      'profile2_private' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   return $field_bases;
 }
