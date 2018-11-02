@@ -52,14 +52,8 @@ function pece_timeline_essay_timeline_pane_render($subtype, $conf, $args, $conte
   $block = new stdClass();
   $node = $context->data;
   $timeline_events = pece_timeline_essay_get_tl_items($node);
-  $timeline_settings = array(
-     'start_at_end' => true,
-     'default_bg_color' => '{r:0, g:0, b:0}',
-     'timenav_height' => '250',
-  );
   $TLEvents = json_encode($timeline_events);
-  $TLSettings = json_encode($timeline_settings);
 
-  $block->content = theme('timelinejs', array('events' => $TLEvents, 'settings' => $TLSettings));
+  $block->content = theme('timelinejs', array('events' => $TLEvents));
   return $block;
 }
