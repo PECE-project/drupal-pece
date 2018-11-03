@@ -47,7 +47,7 @@ function pece_timeline_essay_timeline_pane_edit_form_submit(&$form, &$form_state
  * See ctools_plugin_examples for more advanced info
  */
 function pece_timeline_essay_timeline_pane_render($subtype, $conf, $args, $context) {
-
+  drupal_add_library('pece_timeline_essay', 'timelinejs');
   // Prepare response block.
   $block = new stdClass();
   $node = $context->data;
