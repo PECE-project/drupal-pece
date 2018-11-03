@@ -1239,7 +1239,7 @@ function pece_timeline_essay_field_default_field_instances() {
     'fences_wrapper' => 'div_div_div',
     'field_name' => 'field_pece_timeline_color',
     'label' => 'Background color',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
