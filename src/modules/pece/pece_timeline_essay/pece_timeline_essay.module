@@ -98,18 +98,13 @@ function pece_timeline_essay_theme() {
  * Implements hook_preprocess_theme().
  */
 function pece_timeline_essay_preprocess_timelinejs(&$variables) {
-  return $variables;
-}
-
-/**
- * Implements hook_preprocess_page().
- */
-function pece_timeline_essay_preprocess_page(&$variables) {
-  $timelinejs = drupal_get_library('pece_timeline_essay', 'timelinejs');
-  $variables['#attached']['timelinejs'][] = array(
-    'js' => $timelinejs['js'],
-    'css' => $timelinejs['css'],
-  );
-
+  /*
+  // Set custom TimelineJS settings.
+  $variables['settings'] = json_encode(array(
+     'start_at_end' => true,
+     'default_bg_color' => '{r:0, g:0, b:0}',
+     'timenav_height' => '250',
+  ));
+  */
   return $variables;
 }
