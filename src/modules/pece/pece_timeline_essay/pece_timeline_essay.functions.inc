@@ -25,7 +25,9 @@ function pece_timeline_essay_get_tl_items($node) {
     $tlei_slides[$index]['media'] = _tlei_format_media(tlei_get_artifact_value($item->field_pece_timeline_artifact));
     $tlei_slides[$index]['start_date'] = _tlei_format_date($item->field_pece_start_end_date->value->value());
     $tlei_slides[$index]['end_date'] = _tlei_format_date($item->field_pece_start_end_date->value2->value());
-    $tlei_slides[$index]['background'] = _tlei_format_bg_color($item->field_pece_timeline_color->rgb->value());
+    $tlei_slides[$index]['background'] = (!empty($item->field_pece_timeline_color->value()))
+      ? _tlei_format_bg_color($item->field_pece_timeline_color->rgb->value())
+      : '';
   }
   return $tlei_slides;
 }
@@ -45,7 +47,6 @@ function tlei_get_artifact_value($artifactWpr) {
     case 'pece_artifact_text':
       return $artifactWpr->body->value();
     default:
-      dsm($artifactWpr->value());
       return Null;
   }
 }
@@ -97,5 +98,5 @@ function _tlei_format_bg_color($bg_array) {
   $default = array(
     'color'=> $bg_array,
   );
-  return (empty($bg_array)) ? $default['color'] = 'transparent' : $default;
+  return $default;
 }
