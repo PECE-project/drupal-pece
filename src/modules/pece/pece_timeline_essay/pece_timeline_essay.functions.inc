@@ -21,7 +21,7 @@ function pece_timeline_essay_get_tl_items($node) {
   $tlei_slides = array();
   foreach (pece_timeline_essay_pane_get_items($node) as $index => $item) {
     $tlei_slides[$index]['unique_id'] = $item->uuid->value();
-    $tlei_slides[$index]['text'] = _tlei_format_text($item->field_description->value());
+    $tlei_slides[$index]['text'] = _tlei_format_text(_tlei_append_artifact_link($item, $item->field_description->value()));
     $tlei_slides[$index]['media'] = _tlei_format_media(tlei_get_artifact_value($item->field_pece_timeline_artifact));
     $tlei_slides[$index]['start_date'] = _tlei_format_date($item->field_pece_start_end_date->value->value());
     $tlei_slides[$index]['end_date'] = _tlei_format_date($item->field_pece_start_end_date->value2->value());
@@ -49,6 +49,29 @@ function tlei_get_artifact_value($artifactWpr) {
     default:
       return Null;
   }
+}
+
+
+/**
+ * Append node link to a given content.
+ *
+ * @param $entity Drupal entity
+ * @param $content Entity field value
+ * @return string
+ * @throws \Exception
+ */
+function _tlei_append_artifact_link($entity, $content) {
+  $artifact_path = drupal_get_path_alias('node/' . $entity->field_pece_timeline_artifact->nid->value());
+  $node_link = array(
+    'text' => 'Read more',
+    'path' => url($artifact_path, array('absolute' => TRUE)),
+    'options' => array(
+      'attributes' => array(),
+      'html' => FALSE,
+    ),
+  );
+  $link = $content . '<p>'  . theme('link', $node_link) . '</p>';
+  return $link;
 }
 
 
@@ -94,9 +117,9 @@ function _tlei_format_media($media_array) {
  * Format a given background color to TimelineJS date object structure.
  * @see: http://timeline.knightlab.com/docs/json-format.html
  */
-function _tlei_format_bg_color($bg_array) {
+function _tlei_format_bg_color($color) {
   $default = array(
-    'color'=> $bg_array,
+    'color'=> $color,
   );
   return $default;
 }
