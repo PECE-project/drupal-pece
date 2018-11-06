@@ -70,8 +70,15 @@ function _tlei_append_artifact_link($entity, $content) {
       'html' => FALSE,
     ),
   );
-  $link = $content . '<p>'  . theme('link', $node_link) . '</p>';
-  return $link;
+  $link_wrapper = array(
+    '#theme' => 'html_tag',
+    '#tag' => 'p',
+    '#value' => theme('link', $node_link),
+    '#attributes' => array(
+      'class' => 'pece-tle-item-link',
+    ),
+  );
+  return $content . drupal_render($link_wrapper);
 }
 
 
