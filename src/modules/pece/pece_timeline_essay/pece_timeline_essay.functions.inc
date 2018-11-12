@@ -41,33 +41,11 @@ function pece_timeline_tl_slide_prepare($item, TimelineEssayItemFormatter $forma
   return array (
     'unique_id' => $item->uuid->value(),
     'text' => $formatter->formatText($formatter->appendArtifactLink($item, $item->field_description->value())),
-    'media' => $formatter->formatMedia(tlei_get_artifact_value($item->field_pece_timeline_artifact)),
+    'media' => $formatter->formatMedia($formatter->prepareTimelineItemMedia($item)),
     'start_date' => $formatter->formatDate($item->field_pece_start_end_date->value->value()),
     'end_date' => $formatter->formatDate($item->field_pece_start_end_date->value2->value()),
     'background' => (!empty($item->field_pece_timeline_color->value()))
       ? $formatter->formatBgColor($item->field_pece_timeline_color->rgb->value())
       : '',
   );
-}
-
-/**
- * Artifacts media field map.
- *
- * @param $artifactWpr
- * @return mixed
- */
-function tlei_get_artifact_value($artifactWpr) {
-  $artifact_field = array(
-    'pece_artifact_audio' => 'field_pece_media_audio',
-    'pece_artifact_image' => 'field_pece_media_image',
-    'pece_artifact_video' => 'field_pece_media_video',
-    'pece_artifact_website' => 'field_pece_website_url',
-    'pece_artifact_pdf' => 'field_pece_media_pdf',
-    'pece_artifact_text' => 'body',
-  );
-  if (!in_array($artifactWpr->type->value(), array_keys($artifact_field))) {
-    return '';
-  }
-  $field = $artifact_field[$artifactWpr->type->value()];
-  return $artifactWpr->$field->value();
 }
