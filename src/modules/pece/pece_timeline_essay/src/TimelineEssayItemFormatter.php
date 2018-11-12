@@ -27,11 +27,30 @@ class TimelineEssayItemFormatter {
   }
 
   public function prepareTimelineItemMedia(\EntityDrupalWrapper $entityWpr) {
-    return array(
-      'file' => $this->getArtifactMediaFile($entityWpr->field_pece_timeline_artifact),
+    $file = ($this->hasfield($entityWpr, 'field_pece_media_image'))
+      ? $this->getRenderedField($entityWpr, 'field_pece_media_image')
+      : $this->getArtifactMediaFile($entityWpr->field_pece_timeline_artifact);
+    $thumbnail = ($this->hasField($entityWpr, 'field_thumbnail'))
+      ? $this->getRenderedField($entityWpr, 'field_thumbnail')
+      : FALSE;
+    $media = array(
+      'file' => $file,
       'caption' => $this->prepareTimelineItemCaption($entityWpr),
       'credit' => $this->prepareTimelineItemCredits($entityWpr),
     );
+    if ($thumbnail) {
+      $media['thumbnail'] = $thumbnail;
+    }
+    return $media;
+  }
+
+  protected function hasfield(\EntityDrupalWrapper $timelineItem, $field_name) {
+    return null !== $timelineItem->$field_name->value();
+  }
+
+  protected function getRenderedField(\EntityDrupalWrapper $timelineItem, $field_name) {
+    $field = field_view_field('pece_timeline_essay_item', $timelineItem->value(), $field_name);
+    return drupal_render($field);
   }
 
   public function prepareTimelineItemCaption(\EntityDrupalWrapper $entityWpr){
