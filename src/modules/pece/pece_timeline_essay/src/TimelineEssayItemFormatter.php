@@ -10,6 +10,38 @@ class TimelineEssayItemFormatter {
     $this->timelineEssay = $TimelineNode;
   }
 
+  public function getArtifactMediaFile(\EntityDrupalWrapper $entityWpr) {
+    $artifact_field = array(
+      'pece_artifact_audio' => 'field_pece_media_audio',
+      'pece_artifact_image' => 'field_pece_media_image',
+      'pece_artifact_video' => 'field_pece_media_video',
+      'pece_artifact_website' => 'field_pece_website_url',
+      'pece_artifact_pdf' => 'field_pece_media_pdf',
+      'pece_artifact_text' => 'body',
+    );
+    if (!in_array($entityWpr->getBundle(), array_keys($artifact_field))) {
+      return '';
+    }
+    $field = $artifact_field[$entityWpr->getBundle()];
+    return $entityWpr->$field->value();
+  }
+
+  public function prepareTimelineItemMedia(\EntityDrupalWrapper $entityWpr) {
+    return array(
+      'file' => $this->getArtifactMediaFile($entityWpr->field_pece_timeline_artifact),
+      'caption' => $this->prepareTimelineItemCaption($entityWpr),
+      'credit' => $this->prepareTimelineItemCredits($entityWpr),
+    );
+  }
+
+  public function prepareTimelineItemCaption(\EntityDrupalWrapper $entityWpr){
+    return $entityWpr->field_pece_timeline_caption->value();
+  }
+
+  public function prepareTimelineItemCredits(\EntityDrupalWrapper $entityWpr) {
+    return drupal_render(field_view_field('pece_timeline_essay_item', $entityWpr->value(), 'field_image_credits'));
+  }
+
   /**
    * Append node link to a given content.
    *
@@ -84,12 +116,15 @@ class TimelineEssayItemFormatter {
   /**
    * Format media to TimelineJS media object structure.
    */
-  public function formatMedia($media_array) {
-    $file_path = (!empty($media_array['uri'])) ? file_create_url($media_array['uri']) : '';
+  public function formatMedia($media_settings) {
+    $file_path = '';
+    if (isset($media_settings['file']) && isset($media_settings['file']['uri'])) {
+      $file_path = file_create_url($media_settings['file']['uri']);
+    }
     $default = array(
       'url'=> $file_path,
-      'caption' => $media_array['title'],
-      'credit' => '',
+      'caption' => $media_settings['caption'],
+      'credit' => $media_settings['credit'],
     );
     return $default;
   }
