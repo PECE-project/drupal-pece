@@ -16,7 +16,10 @@ function pece_timeline_essay_default_page_manager_pages() {
   $page->admin_title = 'PECE Timeline Essay Items';
   $page->admin_description = 'PECE Timeline Essay Items Page';
   $page->path = 'node/%node/timeline';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array(
     'node' => array(
