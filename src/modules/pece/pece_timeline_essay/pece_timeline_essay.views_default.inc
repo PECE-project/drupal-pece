@@ -98,7 +98,7 @@ function pece_timeline_essay_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'field_pece_timeline_artifact_target_id';
-  /* Field: Field: Text */
+  /* Field: Field: Description */
   $handler->display->display_options['fields']['field_description']['id'] = 'field_description';
   $handler->display->display_options['fields']['field_description']['table'] = 'field_data_field_description';
   $handler->display->display_options['fields']['field_description']['field'] = 'field_description';
@@ -210,7 +210,7 @@ function pece_timeline_essay_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Artifact Title';
-  /* Field: Field: Text */
+  /* Field: Field: Description */
   $handler->display->display_options['fields']['field_description']['id'] = 'field_description';
   $handler->display->display_options['fields']['field_description']['table'] = 'field_data_field_description';
   $handler->display->display_options['fields']['field_description']['field'] = 'field_description';
@@ -601,9 +601,8 @@ function pece_timeline_essay_views_default_views() {
     t('Timeline Essay Item referencing Content from field_pece_artifact'),
     t('Content referencing Timeline Essay Item from field_pece_timeline_essay_items'),
     t('Title'),
-    t('Text'),
-    t('Timeline Item title'),
     t('Description'),
+    t('Timeline Item title'),
     t('Type'),
     t('Content pane'),
     t('Timeline Essay Item From Timeline Essay Node'),
