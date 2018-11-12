@@ -1078,7 +1078,7 @@ function pece_timeline_essay_field_default_field_instances() {
     'entity_type' => 'pece_timeline_essay_item',
     'fences_wrapper' => 'div_div_div',
     'field_name' => 'field_description',
-    'label' => 'Essay Text',
+    'label' => 'Description',
     'required' => 1,
     'settings' => array(
       'linkit' => array(
@@ -1096,7 +1096,151 @@ function pece_timeline_essay_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 1,
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'pece_timeline_essay_item-pece_timeline_essay_item-field_image_credits'.
+  $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_image_credits'] = array(
+    'bundle' => 'pece_timeline_essay_item',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Provide full URL path. e.g.: http://example.com',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_default',
+        'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'pece_timeline_essay_item',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_image_credits',
+    'label' => 'Credits',
+    'required' => 0,
+    'settings' => array(
+      'absolute_url' => 1,
+      'attributes' => array(
+        'class' => '',
+        'configurable_class' => 0,
+        'configurable_title' => 0,
+        'rel' => '',
+        'target' => 'default',
+        'title' => '',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 0,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'rel_remove' => 'default',
+      'title' => 'optional',
+      'title_label_use_field_label' => 0,
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 'optional',
+      'user_register_form' => FALSE,
+      'validate_url' => 1,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'link',
+      'settings' => array(),
+      'type' => 'link_field',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'pece_timeline_essay_item-pece_timeline_essay_item-field_pece_media_image'.
+  $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_pece_media_image'] = array(
+    'bundle' => 'pece_timeline_essay_item',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'pece_timeline_essay_item',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_pece_media_image',
+    'label' => 'Image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => 'timeline-essay',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '500x500',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'private' => 'private',
+          'public' => 'public',
+          'vimeo' => 0,
+          'youtube' => 0,
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 'media_default--media_browser_1',
+          'media_default--media_browser_my_files' => 0,
+          'media_internet' => 0,
+          'upload' => 'upload',
+        ),
+        'manualcrop_crop_info' => 1,
+        'manualcrop_default_crop_area' => 1,
+        'manualcrop_enable' => 0,
+        'manualcrop_inline_crop' => 0,
+        'manualcrop_instant_crop' => FALSE,
+        'manualcrop_instant_preview' => 1,
+        'manualcrop_keyboard' => 1,
+        'manualcrop_maximize_default_crop_area' => 0,
+        'manualcrop_require_cropping' => array(),
+        'manualcrop_styles_list' => array(),
+        'manualcrop_styles_mode' => 'include',
+        'manualcrop_thumblist' => 0,
+      ),
+      'type' => 'media_generic',
+      'weight' => 2,
     ),
   );
 
@@ -1153,7 +1297,7 @@ function pece_timeline_essay_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 2,
+      'weight' => 6,
     ),
   );
 
@@ -1209,6 +1353,53 @@ function pece_timeline_essay_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_caption'.
+  $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_caption'] = array(
+    'bundle' => 'pece_timeline_essay_item',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'pece_timeline_essay_item',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_pece_timeline_caption',
+    'label' => 'Caption',
+    'required' => 0,
+    'settings' => array(
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
       'weight' => 3,
     ),
   );
@@ -1248,7 +1439,7 @@ function pece_timeline_essay_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_default_widget',
-      'weight' => 4,
+      'weight' => 8,
     ),
   );
 
@@ -1295,17 +1486,103 @@ function pece_timeline_essay_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'pece_timeline_essay_item-pece_timeline_essay_item-field_thumbnail'.
+  $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_thumbnail'] = array(
+    'bundle' => 'pece_timeline_essay_item',
+    'deleted' => 0,
+    'description' => 'An image to use in the timeline navigation marker for this event.
+If omitted, Timeline will use an icon based on the type of media. ',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'pece_timeline_essay_item',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_thumbnail',
+    'label' => 'Thumbnail',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => 'timeline-essay',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'private' => 'private',
+          'public' => 'public',
+          'vimeo' => 0,
+          'youtube' => 0,
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 'media_default--media_browser_1',
+          'media_default--media_browser_my_files' => 0,
+          'media_internet' => 0,
+          'upload' => 'upload',
+        ),
+        'manualcrop_crop_info' => 1,
+        'manualcrop_default_crop_area' => 1,
+        'manualcrop_enable' => 0,
+        'manualcrop_inline_crop' => 0,
+        'manualcrop_instant_crop' => FALSE,
+        'manualcrop_instant_preview' => 1,
+        'manualcrop_keyboard' => 1,
+        'manualcrop_maximize_default_crop_area' => 0,
+        'manualcrop_require_cropping' => array(),
+        'manualcrop_styles_list' => array(),
+        'manualcrop_styles_mode' => 'include',
+        'manualcrop_thumblist' => 0,
+      ),
+      'type' => 'media_generic',
+      'weight' => 1,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
+  t('An image to use in the timeline navigation marker for this event.
+If omitted, Timeline will use an icon based on the type of media. ');
   t('Background color');
+  t('Caption');
   t('Contributors');
+  t('Credits');
   t('Description');
-  t('Essay Text');
   t('Group content visibility');
   t('Groups audience');
+  t('Image');
   t('Items');
   t('License');
   t('Permissions');
+  t('Provide full URL path. e.g.: http://example.com');
   t('Start and End Date');
   t('Tags');
   t('Thumbnail');

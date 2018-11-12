@@ -3,15 +3,13 @@ description = Provides Timeline Essay feature for presenting PECE Artifacts.
 core = 7.x
 package = PECE
 version = 7.x-1.0
-
-stylesheets[all][] = src/css/tlessay.css
-
 dependencies[] = color_field
 dependencies[] = ctools
 dependencies[] = eck
 dependencies[] = field_group
 dependencies[] = inline_entity_form
 dependencies[] = panelizer
+dependencies[] = pece_artifacts_image
 dependencies[] = pece_essay
 dependencies[] = pece_projects
 dependencies[] = smart_trim
@@ -20,9 +18,7 @@ dependencies[] = views
 dependencies[] = views_content
 dependencies[] = views_timelinejs
 dependencies[] = xautoload (>= 7.x-5.0)
-
-;files[] = src/*.php
-
+stylesheets[all][] = src/css/tlessay.css
 features[ctools][] = field_group:field_group:1
 features[ctools][] = page_manager:pages_default:1
 features[ctools][] = panelizer:panelizer:1
@@ -48,10 +44,14 @@ features[field_instance][] = node-pece_timeline_essay-field_thumbnail
 features[field_instance][] = node-pece_timeline_essay-group_content_access
 features[field_instance][] = node-pece_timeline_essay-og_group_ref
 features[field_instance][] = pece_timeline_essay_item-pece_timeline_essay_item-field_description
+features[field_instance][] = pece_timeline_essay_item-pece_timeline_essay_item-field_image_credits
+features[field_instance][] = pece_timeline_essay_item-pece_timeline_essay_item-field_pece_media_image
 features[field_instance][] = pece_timeline_essay_item-pece_timeline_essay_item-field_pece_start_end_date
 features[field_instance][] = pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_artifact
+features[field_instance][] = pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_caption
 features[field_instance][] = pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_color
 features[field_instance][] = pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_type
+features[field_instance][] = pece_timeline_essay_item-pece_timeline_essay_item-field_thumbnail
 features[node][] = pece_timeline_essay
 features[page_manager_pages][] = pece_timeline_essay_items
 features[panelizer_defaults][] = node:pece_timeline_essay:default
