@@ -5,6 +5,16 @@ namespace Drupal\pece_timeline_essay;
 class TimelineEssayItemFormatter {
 
   protected $timelineEssay;
+  protected $tlMediaObjAttr = array(
+    'url',
+    'caption',
+    'credit',
+    'thumbnail',
+    'alt',
+    'title',
+    'link',
+    'link_target',
+  );
 
   function __construct(\EntityDrupalWrapper $TimelineNode) {
     $this->timelineEssay = $TimelineNode;
@@ -26,12 +36,12 @@ class TimelineEssayItemFormatter {
     return $entityWpr->$field->value();
   }
 
-  public function prepareTimelineItemMedia(\EntityDrupalWrapper $entityWpr) {
-    $file = ($this->hasfield($entityWpr, 'field_pece_media_image'))
-      ? $this->getRenderedField($entityWpr, 'field_pece_media_image')
+  public function prepareMediaFile(\EntityDrupalWrapper $entityWpr) {
+    $file = ($this->hasfield($entityWpr, 'field_pece_timeline_media'))
+      ? $entityWpr->field_pece_timeline_media->value()
       : $this->getArtifactMediaFile($entityWpr->field_pece_timeline_artifact);
     $thumbnail = ($this->hasField($entityWpr, 'field_thumbnail'))
-      ? $this->getRenderedField($entityWpr, 'field_thumbnail')
+      ? $entityWpr->field_thumbnail->value()
       : FALSE;
     $media = array(
       'file' => $file,
@@ -45,7 +55,7 @@ class TimelineEssayItemFormatter {
   }
 
   protected function hasfield(\EntityDrupalWrapper $timelineItem, $field_name) {
-    return null !== $timelineItem->$field_name->value();
+    return (null !== $timelineItem->$field_name);
   }
 
   protected function getRenderedField(\EntityDrupalWrapper $timelineItem, $field_name) {
@@ -121,8 +131,18 @@ class TimelineEssayItemFormatter {
   /**
    * Format color to TimelineJS background object structure.
    */
-  public function formatBgColor($color) {
-    return $this->formatTlField('color', $color);
+  public function formatBgColor(\EntityDrupalWrapper $timelineItem) {
+    $bgColor = array();
+    if (!empty($timelineItem->field_pece_timeline_color->value())) {
+      $bgColor = $this->formatTlField('color', $timelineItem->field_pece_timeline_color->rgb->value());
+    }
+    if (!empty($timelineItem->field_pece_timeline_background->value())) {
+      $field_data = $timelineItem->field_pece_timeline_background->value();
+      $bgImg = $this->formatTlField('url', file_create_url($field_data['uri']));
+      $bgColor = array_merge($bgColor, $bgImg);
+    }
+
+    return $bgColor;
   }
 
   /**
@@ -135,16 +155,40 @@ class TimelineEssayItemFormatter {
   /**
    * Format media to TimelineJS media object structure.
    */
-  public function formatMedia($media_settings) {
-    $file_path = '';
+  public function formatMedia($media_settings = array()) {
+    $media = $this->mapMediaFields($media_settings);
+
     if (isset($media_settings['file']) && isset($media_settings['file']['uri'])) {
-      $file_path = file_create_url($media_settings['file']['uri']);
+      $media['url'] = file_create_url($media_settings['file']['uri']);
+      $media['alt'] = $media_settings['file']['alt'];
+      $media['title'] = $media_settings['file']['title'];
     }
-    $default = array(
-      'url'=> $file_path,
-      'caption' => $media_settings['caption'],
-      'credit' => $media_settings['credit'],
-    );
-    return $default;
+
+    if (isset($media_settings['thumbnail']) && isset($media_settings['thumbnail']['uri'])) {
+      $media['thumbnail'] = file_create_url($media_settings['thumbnail']['uri']);
+      $media['alt'] = $media_settings['thumbnail']['alt'];
+      $media['title'] = $media_settings['thumbnail']['title'];
+    }
+
+    // Add mandatory url attr. on Timeline media object if still not present.
+    $media = (isset($media['url'])) ? $media : array_merge(array('url' => ''), $media);
+    return (isset($media)) ? $media : FALSE;
+  }
+
+  /**
+   * Map TimelineJS media object structure to Timeline Essay Item media fields.
+   * @param $media_fields
+   * @return array|bool
+   */
+  private function mapMediaFields($media_fields) {
+    $fields = array();
+    foreach ($this->tlMediaObjAttr as $field) {
+      if (!isset($media_fields[$field])
+      || (isset($media_fields[$field]) && empty($media_fields[$field]))) {
+        continue;
+      }
+      $fields[$field] = $media_fields[$field];
+    }
+    return (isset($fields)) ? $fields : FALSE;
   }
 }
