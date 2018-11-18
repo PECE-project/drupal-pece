@@ -41,7 +41,7 @@ function pece_timeline_tl_slide_prepare($item, TimelineEssayItemFormatter $forma
   return array (
     'unique_id' => $item->uuid->value(),
     'text' => $formatter->formatText($formatter->appendArtifactLink($item, $item->field_description->value())),
-    'media' => $formatter->formatMedia($formatter->prepareMediaFile($item)),
+    'media' => $formatter->formatMedia($formatter->prepareMediaFileObj($item)),
     'start_date' => $formatter->formatDate($item->field_pece_start_end_date->value->value()),
     'end_date' => $formatter->formatDate($item->field_pece_start_end_date->value2->value()),
     'background' => $formatter->formatBgColor($item),

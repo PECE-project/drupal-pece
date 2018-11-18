@@ -20,7 +20,7 @@ class TimelineEssayItemFormatter {
     $this->timelineEssay = $TimelineNode;
   }
 
-  public function getArtifactMediaFile(\EntityDrupalWrapper $entityWpr) {
+  public function getArtifactMediaFile(\EntityDrupalWrapper $artifactWpr) {
     $artifact_field = array(
       'pece_artifact_audio' => 'field_pece_media_audio',
       'pece_artifact_image' => 'field_pece_media_image',
@@ -29,24 +29,30 @@ class TimelineEssayItemFormatter {
       'pece_artifact_pdf' => 'field_pece_media_pdf',
       'pece_artifact_text' => 'body',
     );
-    if (!in_array($entityWpr->getBundle(), array_keys($artifact_field))) {
+    if (!in_array($artifactWpr->getBundle(), array_keys($artifact_field))) {
       return '';
     }
-    $field = $artifact_field[$entityWpr->getBundle()];
-    return $entityWpr->$field->value();
+    $field = $artifact_field[$artifactWpr->getBundle()];
+    return $artifactWpr->$field->value();
   }
 
-  public function prepareMediaFile(\EntityDrupalWrapper $entityWpr) {
-    $file = ($this->hasfield($entityWpr, 'field_pece_timeline_media'))
-      ? $entityWpr->field_pece_timeline_media->value()
-      : $this->getArtifactMediaFile($entityWpr->field_pece_timeline_artifact);
-    $thumbnail = ($this->hasField($entityWpr, 'field_thumbnail'))
-      ? $entityWpr->field_thumbnail->value()
+  /**
+   * Extracts TL Essay Item fields to build TimelineJS Media field JSON object.
+   *
+   * @param \EntityDrupalWrapper Timeline Essay Item entity wrapper
+   * @return array
+   */
+  public function prepareMediaFileObj(\EntityDrupalWrapper $tleiWpr) {
+    $file = ($this->hasfield($tleiWpr, 'field_pece_timeline_media'))
+      ? $tleiWpr->field_pece_timeline_media->value()
+      : $this->getArtifactMediaFile($tleiWpr->field_pece_timeline_artifact);
+    $thumbnail = ($this->hasField($tleiWpr, 'field_thumbnail'))
+      ? $tleiWpr->field_thumbnail->value()
       : FALSE;
     $media = array(
       'file' => $file,
-      'caption' => $this->prepareTimelineItemCaption($entityWpr),
-      'credit' => $this->prepareTimelineItemCredits($entityWpr),
+      'caption' => $this->prepareTimelineItemCaption($tleiWpr),
+      'credit' => $this->prepareTimelineItemCredits($tleiWpr),
     );
     if ($thumbnail) {
       $media['thumbnail'] = $thumbnail;
@@ -55,7 +61,7 @@ class TimelineEssayItemFormatter {
   }
 
   protected function hasfield(\EntityDrupalWrapper $timelineItem, $field_name) {
-    return (null !== $timelineItem->$field_name);
+    return (null !== $timelineItem->$field_name && $timelineItem->$field_name->value());
   }
 
   protected function getRenderedField(\EntityDrupalWrapper $timelineItem, $field_name) {
