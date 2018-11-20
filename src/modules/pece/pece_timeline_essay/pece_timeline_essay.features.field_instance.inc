@@ -32,9 +32,22 @@ function pece_timeline_essay_field_default_field_instances() {
       ),
       'featured' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
+        'module' => 'smart_trim',
+        'settings' => array(
+          'more_link' => 1,
+          'more_text' => 'Read more',
+          'summary_handler' => 'full',
+          'trim_length' => 300,
+          'trim_link' => 0,
+          'trim_options' => array(
+            'text' => 0,
+          ),
+          'trim_preserve_tags' => '',
+          'trim_suffix' => '...',
+          'trim_type' => 'chars',
+        ),
+        'type' => 'smart_trim_format',
+        'weight' => 1,
       ),
       'free_panel' => array(
         'label' => 'above',
@@ -141,7 +154,7 @@ function pece_timeline_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'free_panel' => array(
         'label' => 'above',
@@ -293,7 +306,7 @@ function pece_timeline_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'free_panel' => array(
         'label' => 'above',
@@ -373,7 +386,7 @@ function pece_timeline_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'free_panel' => array(
         'label' => 'above',
@@ -441,13 +454,8 @@ function pece_timeline_essay_field_default_field_instances() {
     'display' => array(
       'card' => array(
         'label' => 'hidden',
-        'module' => 'er_viewmode',
-        'settings' => array(
-          'links' => 0,
-          'use_content_language' => 1,
-          'view_mode' => 'default',
-        ),
-        'type' => 'entityreference_entity_view',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 1,
       ),
       'default' => array(
@@ -462,14 +470,9 @@ function pece_timeline_essay_field_default_field_instances() {
       ),
       'featured' => array(
         'label' => 'hidden',
-        'module' => 'er_viewmode',
-        'settings' => array(
-          'links' => 0,
-          'use_content_language' => 1,
-          'view_mode' => 'default',
-        ),
-        'type' => 'entityreference_entity_view',
-        'weight' => 1,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
       ),
       'free_panel' => array(
         'label' => 'above',
@@ -491,13 +494,8 @@ function pece_timeline_essay_field_default_field_instances() {
       ),
       'mini_teaser' => array(
         'label' => 'hidden',
-        'module' => 'er_viewmode',
-        'settings' => array(
-          'links' => 0,
-          'use_content_language' => 1,
-          'view_mode' => 'default',
-        ),
-        'type' => 'entityreference_entity_view',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 1,
       ),
       'most_recent' => array(
@@ -668,7 +666,7 @@ function pece_timeline_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'free_panel' => array(
         'label' => 'above',
@@ -752,11 +750,12 @@ function pece_timeline_essay_field_default_field_instances() {
       ),
       'featured' => array(
         'label' => 'hidden',
-        'module' => 'file_entity',
+        'module' => 'image',
         'settings' => array(
-          'file_view_mode' => 'default',
+          'image_link' => 'content',
+          'image_style' => 'pece_most_recent',
         ),
-        'type' => 'file_rendered',
+        'type' => 'image',
         'weight' => 0,
       ),
       'free_panel' => array(
@@ -783,12 +782,8 @@ function pece_timeline_essay_field_default_field_instances() {
       ),
       'mini_teaser' => array(
         'label' => 'hidden',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => 'content',
-          'image_style' => 'pece_mini_teaser',
-        ),
-        'type' => 'image',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'most_recent' => array(
@@ -896,7 +891,7 @@ function pece_timeline_essay_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'free_panel' => array(
         'label' => 'above',
@@ -1442,8 +1437,8 @@ e.g.: http://example.com</p>',
   $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_media'] = array(
     'bundle' => 'pece_timeline_essay_item',
     'deleted' => 0,
-    'description' => 'A file or a video url (Youtube/Vimeo) to be used as an illustration for this timeline event.
-The media provided by previously referenced artifact will be possibly used if no custom media is set.',
+    'description' => '<p>A file or a video url (Youtube/Vimeo) to be used as an illustration for this timeline event.<br />
+The media provided by previously referenced artifact might be used if no custom media is set.</p>',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1468,7 +1463,7 @@ The media provided by previously referenced artifact will be possibly used if no
       'description_field' => 0,
       'file_directory' => 'timeline-essay',
       'file_extensions' => 'jpg gif png jpeg mp4 mp3 m4a wav',
-      'max_filesize' => '5MB',
+      'max_filesize' => '2MB',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1637,12 +1632,12 @@ If omitted, Timeline will use an icon based on media type. </p>',
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('<p>An image used on timeline navigation marker for this event.
-If omitted, Timeline will use an icon based on media type. ');
+  t('<p>A file or a video url (Youtube/Vimeo) to be used as an illustration for this timeline event.<br />
+The media provided by previously referenced artifact might be used if no custom media is set.</p>');
+  t('<p>An image used on timeline navigation marker for this event.<br />
+If omitted, Timeline will use an icon based on media type. </p>');
   t('<p>Provide full URL address. <br />
 e.g.: http://example.com</p>');
-  t('A file or a video url (Youtube/Vimeo) to be used as an illustration for this timeline event.
-The media provided by previously referenced artifact will be possibly used if no custom media is set.');
   t('Background Image');
   t('Background color');
   t('Caption');
