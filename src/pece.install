@@ -267,11 +267,10 @@ function pece_update_7106() {
 }
 
 /**
- * Enable PECE Timeline Essay and Views_timelinejs modules.
+ * Enable PECE Timeline Essay module.
  */
 function pece_update_7107() {
   module_enable(array(
-    'views_timelinejs',
     'pece_timeline_essay',
   ));
   if (module_exists('features')) {

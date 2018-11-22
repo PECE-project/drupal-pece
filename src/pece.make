@@ -123,9 +123,6 @@ projects[views_infinite_scroll][subdir] = contrib
 projects[views_litepager][version] = 3.0
 projects[views_litepager][subdir] = contrib
 
-projects[views_timelinejs][version] = 3.1
-projects[views_timelinejs][subdir] = contrib
-
 projects[tvi][version] = 1.0
 projects[tvi][subdir] = contrib
 
