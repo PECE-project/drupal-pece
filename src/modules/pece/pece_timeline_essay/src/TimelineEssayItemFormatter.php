@@ -88,7 +88,7 @@ class TimelineEssayItemFormatter {
   public function appendArtifactLink(\EntityDrupalWrapper $TimelineItem, $content) {
     $artifact_path = drupal_get_path_alias('node/' . $TimelineItem->field_pece_timeline_artifact->nid->value());
     $node_link = array(
-      'text' => 'Read more',
+      'text' => 'See artifact details',
       'path' => url($artifact_path, array('absolute' => TRUE)),
       'options' => array(
         'attributes' => array(),
