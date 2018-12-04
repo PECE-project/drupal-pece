@@ -74,6 +74,10 @@ libraries[timelinejs][download][url] = https://github.com/NUKnightLab/TimelineJS
 libraries[php-encryption][download][type] = file
 libraries[php-encryption][download][url] = https://github.com/defuse/php-encryption/archive/522859f0b3f35fe83be5803ede83af3f517bfd5b.zip
 
+; Spectrum Colorpicker
+libraries[bgrins-spectrum][download][type] = file
+libraries[bgrins-spectrum][download][url] =  https://github.com/bgrins/spectrum/archive/master.zip
+
 ; =====================
 ; Utilities and APIs
 ; =====================
