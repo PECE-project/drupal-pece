@@ -276,7 +276,7 @@ function pece_dashboard_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $translatables['pece_my_essays'] = array(
     t('Master'),
-    t('Essays'),
+    t('PECE Essays'),
     t('more'),
     t('Apply'),
     t('Reset'),
