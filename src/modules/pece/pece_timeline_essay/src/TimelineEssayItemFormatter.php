@@ -175,8 +175,10 @@ class TimelineEssayItemFormatter {
   /**
    * Format text to TimelineJS text object structure.
    */
-  public function formatText($raw_data) {
-    return $this->formatTlField('text', $raw_data) ;
+  public function formatText(\EntityDrupalWrapper $timelineItem, $content) {
+    $text_obj = $this->formatTlField('text', $content);
+    $text_obj['headline'] = $timelineItem->get('title')->value();
+    return $text_obj;
   }
 
   /**

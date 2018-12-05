@@ -40,7 +40,7 @@ function pece_timeline_essay_get_tl_items($node) {
 function pece_timeline_tl_slide_prepare($item, TimelineEssayItemFormatter $formatter) {
   return array (
     'unique_id' => $item->uuid->value(),
-    'text' => $formatter->formatText($formatter->appendArtifactLink($item, $item->field_description->value())),
+    'text' => $formatter->formatText($item, $formatter->appendArtifactLink($item, $item->field_description->value())),
     'media' => $formatter->formatMedia($formatter->prepareMediaFileObj($item)),
     'start_date' => $formatter->formatDate($item->field_pece_start_end_date->value->value()),
     'end_date' => $formatter->formatDate($item->field_pece_start_end_date->value2->value()),
