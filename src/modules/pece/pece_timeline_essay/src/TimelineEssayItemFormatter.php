@@ -43,6 +43,19 @@ class TimelineEssayItemFormatter {
    * @return array
    */
   public function prepareMediaFileObj(\EntityDrupalWrapper $tleiWpr) {
+    $media = array(
+      'file' => $this->getArtifactMediaFile($tleiWpr->field_pece_timeline_artifact),
+    );
+    // $media = $this->addCustomMediaFieldsNThumb($tleiWpr);
+
+    return $media;
+  }
+
+  /**
+   * @param \EntityDrupalWrapper $tleiWpr
+   * @return array
+   */
+  protected function addCustomMediaFieldsNThumb(\EntityDrupalWrapper $tleiWpr) {
     $file = ($this->hasfield($tleiWpr, 'field_pece_timeline_media'))
       ? $tleiWpr->field_pece_timeline_media->value()
       : $this->getArtifactMediaFile($tleiWpr->field_pece_timeline_artifact);
@@ -51,8 +64,12 @@ class TimelineEssayItemFormatter {
       : FALSE;
     $media = array(
       'file' => $file,
-      'caption' => $this->prepareTimelineItemCaption($tleiWpr),
-      'credit' => $this->prepareTimelineItemCredits($tleiWpr),
+      'caption' => ($this->hasfield($tleiWpr, 'field_pece_timeline_caption'))
+        ? $this->prepareTimelineItemCaption($tleiWpr)
+        : '',
+      'credit' => ($this->hasfield($tleiWpr, 'field_image_credits'))
+        ? $this->prepareTimelineItemCredits($tleiWpr)
+        : '',
     );
     if ($thumbnail) {
       $media['thumbnail'] = $thumbnail;
@@ -61,7 +78,11 @@ class TimelineEssayItemFormatter {
   }
 
   protected function hasfield(\EntityDrupalWrapper $timelineItem, $field_name) {
-    return (null !== $timelineItem->$field_name && $timelineItem->$field_name->value());
+    try {
+      return (null !== $timelineItem->$field_name && $timelineItem->$field_name->value());
+    } catch (\Exception $e) {
+      return FALSE;
+    }
   }
 
   protected function getRenderedField(\EntityDrupalWrapper $timelineItem, $field_name) {

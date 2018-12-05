@@ -1096,71 +1096,6 @@ function pece_timeline_essay_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'pece_timeline_essay_item-pece_timeline_essay_item-field_image_credits'.
-  $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_image_credits'] = array(
-    'bundle' => 'pece_timeline_essay_item',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '<p>Provide full URL address. <br />
-e.g.: http://example.com</p>',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_default',
-        'weight' => 8,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'pece_timeline_essay_item',
-    'fences_wrapper' => 'div_div_div',
-    'field_name' => 'field_image_credits',
-    'label' => 'Credits',
-    'required' => 0,
-    'settings' => array(
-      'absolute_url' => 1,
-      'attributes' => array(
-        'class' => '',
-        'configurable_class' => 0,
-        'configurable_title' => 0,
-        'rel' => '',
-        'target' => 'default',
-        'title' => '',
-      ),
-      'display' => array(
-        'url_cutoff' => 80,
-      ),
-      'enable_tokens' => 0,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'rel_remove' => 'default',
-      'title' => 'optional',
-      'title_label_use_field_label' => 0,
-      'title_maxlength' => 128,
-      'title_value' => '',
-      'url' => 'optional',
-      'user_register_form' => FALSE,
-      'validate_url' => 1,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'link',
-      'settings' => array(),
-      'type' => 'link_field',
-      'weight' => 7,
-    ),
-  );
-
-  // Exported field_instance:
   // 'pece_timeline_essay_item-pece_timeline_essay_item-field_pece_start_end_date'.
   $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_pece_start_end_date'] = array(
     'bundle' => 'pece_timeline_essay_item',
@@ -1347,53 +1282,6 @@ e.g.: http://example.com</p>',
   );
 
   // Exported field_instance:
-  // 'pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_caption'.
-  $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_caption'] = array(
-    'bundle' => 'pece_timeline_essay_item',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 9,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'pece_timeline_essay_item',
-    'fences_wrapper' => 'div_div_div',
-    'field_name' => 'field_pece_timeline_caption',
-    'label' => 'Caption',
-    'required' => 0,
-    'settings' => array(
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance:
   // 'pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_color'.
   $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_color'] = array(
     'bundle' => 'pece_timeline_essay_item',
@@ -1429,80 +1317,6 @@ e.g.: http://example.com</p>',
       'settings' => array(),
       'type' => 'color_field_default_widget',
       'weight' => 7,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_media'.
-  $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_pece_timeline_media'] = array(
-    'bundle' => 'pece_timeline_essay_item',
-    'deleted' => 0,
-    'description' => '<p>A file or a video url (Youtube/Vimeo) to be used as an illustration for this timeline event.<br />
-The media provided by previously referenced artifact might be used if no custom media is set.</p>',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'file',
-        'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 10,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'pece_timeline_essay_item',
-    'fences_wrapper' => 'div_div_div',
-    'field_name' => 'field_pece_timeline_media',
-    'label' => 'Media',
-    'required' => 0,
-    'settings' => array(
-      'description_field' => 0,
-      'file_directory' => 'timeline-essay',
-      'file_extensions' => 'jpg gif png jpeg mp4 mp3 m4a wav',
-      'max_filesize' => '2MB',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'media',
-      'settings' => array(
-        'allowed_schemes' => array(
-          'private' => 0,
-          'public' => 'public',
-          'vimeo' => 'vimeo',
-          'youtube' => 'youtube',
-        ),
-        'allowed_types' => array(
-          'audio' => 'audio',
-          'document' => 'document',
-          'image' => 'image',
-          'video' => 'video',
-        ),
-        'browser_plugins' => array(
-          'media_default--media_browser_1' => 'media_default--media_browser_1',
-          'media_default--media_browser_my_files' => 0,
-          'media_internet' => 'media_internet',
-          'upload' => 'upload',
-        ),
-        'manualcrop_crop_info' => 1,
-        'manualcrop_default_crop_area' => 1,
-        'manualcrop_enable' => 0,
-        'manualcrop_inline_crop' => 0,
-        'manualcrop_instant_crop' => FALSE,
-        'manualcrop_instant_preview' => 1,
-        'manualcrop_keyboard' => 1,
-        'manualcrop_maximize_default_crop_area' => 0,
-        'manualcrop_require_cropping' => array(),
-        'manualcrop_styles_list' => array(),
-        'manualcrop_styles_mode' => 'include',
-        'manualcrop_thumblist' => 0,
-      ),
-      'type' => 'media_generic',
-      'weight' => 5,
     ),
   );
 
@@ -1549,105 +1363,15 @@ The media provided by previously referenced artifact might be used if no custom 
     ),
   );
 
-  // Exported field_instance:
-  // 'pece_timeline_essay_item-pece_timeline_essay_item-field_thumbnail'.
-  $field_instances['pece_timeline_essay_item-pece_timeline_essay_item-field_thumbnail'] = array(
-    'bundle' => 'pece_timeline_essay_item',
-    'deleted' => 0,
-    'description' => '<p>An image used on timeline navigation marker for this event.<br />
-If omitted, Timeline will use an icon based on media type. </p>',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 12,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'pece_timeline_essay_item',
-    'fences_wrapper' => 'div_div_div',
-    'field_name' => 'field_thumbnail',
-    'label' => 'Thumbnail',
-    'required' => 0,
-    'settings' => array(
-      'alt_field' => 0,
-      'default_image' => 0,
-      'file_directory' => 'timeline-essay',
-      'file_extensions' => 'png gif jpg jpeg',
-      'max_filesize' => '',
-      'max_resolution' => '500x500',
-      'min_resolution' => '',
-      'title_field' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'media',
-      'settings' => array(
-        'allowed_schemes' => array(
-          'private' => 0,
-          'public' => 'public',
-          'vimeo' => 0,
-          'youtube' => 0,
-        ),
-        'allowed_types' => array(
-          'audio' => 0,
-          'document' => 0,
-          'image' => 'image',
-          'video' => 0,
-        ),
-        'browser_plugins' => array(
-          'media_default--media_browser_1' => 'media_default--media_browser_1',
-          'media_default--media_browser_my_files' => 0,
-          'media_internet' => 0,
-          'upload' => 'upload',
-        ),
-        'manualcrop_crop_info' => 1,
-        'manualcrop_default_crop_area' => 1,
-        'manualcrop_enable' => 0,
-        'manualcrop_inline_crop' => 0,
-        'manualcrop_instant_crop' => FALSE,
-        'manualcrop_instant_preview' => 1,
-        'manualcrop_keyboard' => 1,
-        'manualcrop_maximize_default_crop_area' => 0,
-        'manualcrop_require_cropping' => array(),
-        'manualcrop_styles_list' => array(),
-        'manualcrop_styles_mode' => 'include',
-        'manualcrop_thumblist' => 0,
-      ),
-      'type' => 'media_generic',
-      'weight' => 1,
-    ),
-  );
-
   // Translatables
   // Included for use with string extractors like potx.
-  t('<p>A file or a video url (Youtube/Vimeo) to be used as an illustration for this timeline event.<br />
-The media provided by previously referenced artifact might be used if no custom media is set.</p>');
-  t('<p>An image used on timeline navigation marker for this event.<br />
-If omitted, Timeline will use an icon based on media type. </p>');
-  t('<p>Provide full URL address. <br />
-e.g.: http://example.com</p>');
   t('Background Image');
   t('Background color');
-  t('Caption');
   t('Contributors');
-  t('Credits');
   t('Description');
   t('Group content visibility');
   t('Groups audience');
   t('License');
-  t('Media');
   t('Permissions');
   t('Start and End Date');
   t('Tags');
