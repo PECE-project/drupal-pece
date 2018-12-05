@@ -108,6 +108,15 @@ class TimelineEssayItemFormatter {
    */
   public function appendArtifactLink(\EntityDrupalWrapper $TimelineItem, $content) {
     $artifact_path = drupal_get_path_alias('node/' . $TimelineItem->field_pece_timeline_artifact->nid->value());
+    $node_title = $TimelineItem->field_pece_timeline_artifact->title->value();
+    $title_wrapper = array(
+      '#theme' => 'html_tag',
+      '#tag' => 'h6',
+      '#value' => $node_title,
+      '#attributes' => array(
+        'class' => 'pece-tle-item-title',
+      ),
+    );
     $node_link = array(
       'text' => 'See artifact details',
       'path' => url($artifact_path, array('absolute' => TRUE)),
@@ -124,7 +133,7 @@ class TimelineEssayItemFormatter {
         'class' => 'pece-tle-item-link',
       ),
     );
-    return $content . drupal_render($link_wrapper);
+    return $content . drupal_render($title_wrapper) . drupal_render($link_wrapper);
   }
 
   /**
