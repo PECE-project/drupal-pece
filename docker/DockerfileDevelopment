@@ -93,7 +93,7 @@ RUN npm install bower gulp -g
 RUN npm cache verify
 
 ### INSTALL DRUSH
-RUN wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.5.1/drush.phar
+RUN wget -O drush.phar https://github.com/drush-ops/drush/releases/download/8.1.18/drush.phar
 RUN chmod +x drush.phar
 RUN mv drush.phar /usr/local/bin/drush
 
