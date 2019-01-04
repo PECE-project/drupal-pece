@@ -13,7 +13,7 @@ services:
     #   - ../databases/pece:/var/lib/mysql
 
   dev_pece:
-    image: revagomes/pece:php7.0-alpha
+    image: revagomes/pece:php7-alpha1
     build:
       context: ./
       dockerfile: ./docker/DockerfileDevelopment
