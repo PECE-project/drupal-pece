@@ -239,7 +239,7 @@ projects[panopoly_images][subdir] = contrib
 projects[panopoly_magic][version] = 1.58
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_theme][version] = 1.57
+projects[panopoly_theme][version] = 1.58
 projects[panopoly_theme][subdir] = contrib
 
 ; Overrides panopoly's panopoly_widgets.
