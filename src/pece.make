@@ -230,7 +230,7 @@ projects[fieldable_panels_panes][patch][2826205] = https://www.drupal.org/files/
 projects[panopoly_admin][version] = 1.58
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_core][version] = 1.57
+projects[panopoly_core][version] = 1.58
 projects[panopoly_core][subdir] = contrib
 
 projects[panopoly_images][version] = 1.57
