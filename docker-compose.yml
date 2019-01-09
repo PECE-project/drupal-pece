@@ -20,6 +20,7 @@ services:
     cap_add:
       - ALL
     hostname: "dev"
+    restart: always
     working_dir: /pece/drupal
     environment:
       - DB_PORT=3306
