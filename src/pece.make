@@ -328,9 +328,6 @@ projects[smart_trim][subdir] = contrib
 ; Files
 ; =====================
 
-projects[file_entity][version] = 2.12
-projects[file_entity][subdir] = contrib
-
 projects[media][version] = 2.19
 projects[media][subdir] = contrib
 
