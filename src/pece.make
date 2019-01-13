@@ -206,15 +206,13 @@ projects[panelizer][patch][2812807] = https://www.drupal.org/files/issues/paneli
 projects[panelizer][patch][1549608] = https://www.drupal.org/files/issues/panelizer-n1549608-26.patch
 projects[panelizer][patch][2788851] = https://www.drupal.org/files/issues/panelizer-administer-panelizer-2788851-2.patch
 
-; Overrides panopoly's panels.
-projects[panels][version] = 3.9
-projects[panels][subdir] = contrib
-; Panopoly's v1.57 patches.
-projects[panels][patch][1570120] = https://www.drupal.org/files/issues/move-image-1570120-31.patch
-projects[panels][patch][2897658] = https://www.drupal.org/files/issues/panels-menu-block-ipe-2897658-3.patch
-
-;projects[panels_breadcrumbs][version] = 2.2
-;projects[panels_breadcrumbs][subdir] = contrib;
+;;; PATCHES ADDED ON panopoly_core v7.58 ;;;
+;; Overrides panopoly's panels.
+;projects[panels][version] = 3.9
+;projects[panels][subdir] = contrib
+;; Panopoly's v1.57 patches.
+;projects[panels][patch][1570120] = https://www.drupal.org/files/issues/move-image-1570120-31.patch
+;projects[panels][patch][2897658] = https://www.drupal.org/files/issues/panels-menu-block-ipe-2897658-3.patch
 
 projects[fieldable_panels_panes][version] = 1.11
 projects[fieldable_panels_panes][subdir] = contrib
