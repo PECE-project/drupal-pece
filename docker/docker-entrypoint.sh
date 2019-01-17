@@ -4,7 +4,9 @@ sudo chown $UID:$UID -R .
 sudo chmod +w -R .
 while ! nc -q 1 pece-db 3306 </dev/null; do sleep 3; done
 
+sudo service php7.2-fpm stop
 sudo service php7.2-fpm start
+
 sudo nginx -g "daemon on;" > /tmp/access-nginx.log
 
 echo ""
