@@ -89,6 +89,10 @@ libraries[bgrins-spectrum][download][url] =  https://github.com/bgrins/spectrum/
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
 
 ; Overrides panopoly's uuid.
+projects[features][version] = 2.11
+projects[features][subdir] = contrib
+
+; Overrides panopoly's uuid.
 projects[uuid][version] = 1.2
 projects[uuid][subdir] = contrib
 
