@@ -88,9 +88,10 @@ libraries[bgrins-spectrum][download][url] =  https://github.com/bgrins/spectrum/
 ; @TODO: Update and reapply the following patch if needed. @see https://www.drupal.org/project/ctools/issues/2671150
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
 
-; Overrides panopoly's uuid.
+; Overrides panopoly's features.
 projects[features][version] = 2.11
 projects[features][subdir] = contrib
+projects[features][patch][2931464] = https://www.drupal.org/files/issues/features-create_function-is-deprecated-2931464-5.patch
 
 ; Overrides panopoly's uuid.
 projects[uuid][version] = 1.2
