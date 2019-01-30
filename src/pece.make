@@ -343,9 +343,6 @@ projects[smart_trim][subdir] = contrib
 ; Files
 ; =====================
 
-projects[media][version] = 2.19
-projects[media][subdir] = contrib
-
 projects[ckeditor][version] = 1.16
 projects[ckeditor][subdir] = contrib
 
