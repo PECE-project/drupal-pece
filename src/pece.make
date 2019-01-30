@@ -24,9 +24,6 @@ libraries[jquery.imagesloaded][download][type] = file
 libraries[jquery.imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz
 libraries[jquery.imagesloaded][download][subtree] = imagesloaded-2.1.2
 
-libraries[jquery.imgareaselect][download][type] = file
-libraries[jquery.imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v1.0.0-rc.1.tar.gz
-libraries[jquery.imgareaselect][download][subtree] = imgareaselect-1.0.0-rc.1
 
 ; Misc Libraries
 
@@ -91,7 +88,6 @@ libraries[bgrins-spectrum][download][url] =  https://github.com/bgrins/spectrum/
 ; Overrides panopoly's features.
 projects[features][version] = 2.11
 projects[features][subdir] = contrib
-projects[features][patch][2931464] = https://www.drupal.org/files/issues/features-create_function-is-deprecated-2931464-5.patch
 
 ; Overrides panopoly's uuid.
 projects[uuid][version] = 1.2
