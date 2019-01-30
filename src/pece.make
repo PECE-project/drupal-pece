@@ -252,7 +252,7 @@ projects[panopoly_images][subdir] = contrib
 projects[panopoly_magic][version] = 1.60
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_theme][version] = 1.58
+projects[panopoly_theme][version] = 1.60
 projects[panopoly_theme][subdir] = contrib
 
 projects[panopoly_widgets][version] = 1.58
