@@ -240,7 +240,7 @@ projects[fieldable_panels_panes][patch][2826205] = https://www.drupal.org/files/
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_admin][version] = 1.58
+projects[panopoly_admin][version] = 1.60
 projects[panopoly_admin][subdir] = contrib
 
 projects[panopoly_core][version] = 1.58
