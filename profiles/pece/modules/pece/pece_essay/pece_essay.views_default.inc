@@ -195,6 +195,7 @@ function pece_essay_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'pece_essay' => 'pece_essay',
     'pece_photo_essay' => 'pece_photo_essay',
+    'pece_timeline_essay' => 'pece_timeline_essay',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
 

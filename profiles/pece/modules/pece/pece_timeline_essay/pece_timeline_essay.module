@@ -1,0 +1,110 @@
+<?php
+/**
+ * @file
+ * Code for the PECE Timeline Essay feature.
+ */
+
+include_once 'pece_timeline_essay.functions.inc';
+
+include_once 'pece_timeline_essay.features.inc';
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function pece_timeline_essay_ctools_plugin_directory($module, $plugin) {
+  if ($module === 'ctools' && $plugin === 'content_types') {
+    return 'plugins/' . $module . '/' . $plugin;
+  }
+}
+
+/**
+ * Implements hook_library().
+ */
+function pece_timeline_essay_library() {
+  global $base_url;
+  $libraries = array();
+
+  $libraries['timelinejs'] = array(
+    'title' => 'TimelineJS',
+    'website' => 'https://timeline.knightlab.com',
+    'version' => '3.6.1',
+    'js' => array(
+      'timeline.js' => array(
+        'data' => $base_url . '/profiles/pece/libraries/timelinejs/compiled/js/timeline-min.js',
+        'type' => 'external',
+        'group' => JS_LIBRARY,
+      ),
+    ),
+    'css' => array(
+      'timeline.css' => array(
+        'data' => $base_url . '/profiles/pece/libraries/timelinejs/compiled/css/timeline.css',
+        'type' => 'external',
+        'group' => CSS_DEFAULT,
+      ),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pece_timeline_essay_form_pece_timeline_essay_node_form_alter(&$form, &$form_state) {
+  // Hide the comment settings fieldset.
+  $form['comment_settings']['#access'] = FALSE;
+  // We cannot allow the content to be authored by anonymous.
+  $form['author']['name']['#required'] = TRUE;
+}
+
+/**
+ * Implements hook_panelizer_ipe_access() by pece_panels.
+ */
+function pece_timeline_essay_panelizer_ipe_access($display, $entity_type, $entity) {
+  foreach ($entity->panelizer as $view_mode => $panelizer) {
+    if ($panelizer->display->storage_id === $display->storage_id) {
+      $entity->panelizer_view_mode = $view_mode;
+      break;
+    }
+  }
+
+  return $entity->panelizer_view_mode === 'free_panel' && entity_access('update', $entity_type, $entity);
+}
+
+/**
+ * Implements hook_pece_annotatable_types_info().
+ */
+function pece_timeline_essay_pece_annotatable_types_info() {
+  return array(
+    'pece_timeline_essay' => 'pece_timeline_essay',
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function pece_timeline_essay_theme() {
+  $path = drupal_get_path('module', 'pece_timeline_essay') . '/templates';
+  return array(
+    'timelinejs' => array(
+      'variables' => array('events' => NULL, 'settings' => NULL),
+      'path' => $path,
+      'template' => 'timeline-pane',
+    ),
+  );
+}
+
+/**
+ * Implements hook_preprocess_theme().
+ */
+function pece_timeline_essay_preprocess_timelinejs(&$variables) {
+  /*
+  // Set custom TimelineJS settings.
+  $variables['settings'] = json_encode(array(
+     'start_at_end' => true,
+     'default_bg_color' => '{r:0, g:0, b:0}',
+     'timenav_height' => '250',
+  ));
+  */
+  return $variables;
+}

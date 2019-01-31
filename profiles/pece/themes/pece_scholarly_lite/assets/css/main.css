@@ -1240,6 +1240,9 @@ html.js input.form-autocomplete {
  * Node icon map.
  *------------------------------------------------------------------------------
  */
+.node-pece-timeline-essay > .icon::before {
+  content: ""; }
+
 .node-pece-essay > .icon::before {
   content: ""; }
 
@@ -1311,6 +1314,9 @@ i.pece_artifact_text::before {
 
 i.pece_memo::before {
   content: ""; }
+
+i.pece_timeline_essay::before {
+  content: ""; }
 
 .field-name-field-pece-website-url {
   text-overflow: ellipsis;
@@ -1404,6 +1410,7 @@ i.pece_memo::before {
   .view-mode-most-recent .icon:before {
     font-size: 30px; }
 
+.view-id-pece_group_essays .view-content .item-list ul li,
 .view-id-pece_group_photo_essays .view-content .item-list ul li,
 .view-pece-substantive-logic .view-content .item-list ul li,
 .view-id-users_field_ref .view-content .item-list ul li,
@@ -1693,6 +1700,9 @@ i.pece_memo::before {
 
 .view-tag-term .views-row .node.node-pece-group::before {
   content: ""; }
+
+.view-tag-term .views-row .node.node-pece-timeline-essay::before {
+  content: ""; }
 
 .view-tag-term .views-row .node h3 {
   margin-top: 10px; }

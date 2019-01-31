@@ -165,7 +165,7 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['fields']['type']['exclude'] = TRUE;
   $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['type']['machine_name'] = TRUE;
-  /* Field: Content: Image */
+  /* Field: Content: Thumbnail image */
   $handler->display->display_options['fields']['field_pece_media_image']['id'] = 'field_pece_media_image';
   $handler->display->display_options['fields']['field_pece_media_image']['table'] = 'field_data_field_pece_media_image';
   $handler->display->display_options['fields']['field_pece_media_image']['field'] = 'field_pece_media_image';
@@ -355,6 +355,7 @@ function pece_repository_views_default_views() {
     'pece_memo' => 'pece_memo',
     'pece_essay' => 'pece_essay',
     'pece_photo_essay' => 'pece_photo_essay',
+    'pece_timeline_essay' => 'pece_timeline_essay',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Title */
@@ -398,6 +399,7 @@ function pece_repository_views_default_views() {
     'pece_memo' => 'pece_memo',
     'pece_essay' => 'pece_essay',
     'pece_photo_essay' => 'pece_photo_essay',
+    'pece_timeline_essay' => 'pece_timeline_essay',
   );
   $handler->display->display_options['filters']['type_1']['group'] = 1;
   $handler->display->display_options['filters']['type_1']['exposed'] = TRUE;

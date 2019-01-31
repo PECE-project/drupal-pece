@@ -265,3 +265,15 @@ function pece_update_7106() {
     }
   }
 }
+
+/**
+ * Enable PECE Timeline Essay module.
+ */
+function pece_update_7107() {
+  module_enable(array(
+    'pece_timeline_essay',
+  ));
+  if (module_exists('features')) {
+    features_revert(array('pece_annotations' => array('views_view')));
+  }
+}
