@@ -24,9 +24,6 @@ libraries[jquery.imagesloaded][download][type] = file
 libraries[jquery.imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz
 libraries[jquery.imagesloaded][download][subtree] = imagesloaded-2.1.2
 
-libraries[jquery.imgareaselect][download][type] = file
-libraries[jquery.imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v1.0.0-rc.1.tar.gz
-libraries[jquery.imgareaselect][download][subtree] = imgareaselect-1.0.0-rc.1
 
 ; Misc Libraries
 
@@ -71,6 +68,10 @@ libraries[autopager][download][subtree] = autopager
 libraries[php-encryption][download][type] = file
 libraries[php-encryption][download][url] = https://github.com/defuse/php-encryption/archive/522859f0b3f35fe83be5803ede83af3f517bfd5b.zip
 
+; Spectrum Colorpicker
+libraries[bgrins-spectrum][download][type] = file
+libraries[bgrins-spectrum][download][url] =  https://github.com/bgrins/spectrum/archive/master.zip
+
 ; =====================
 ; Utilities and APIs
 ; =====================
@@ -80,6 +81,10 @@ libraries[php-encryption][download][url] = https://github.com/defuse/php-encrypt
 ; projects[ctools][subdir] = contrib
 ; @TODO: Update and reapply the following patch if needed. @see https://www.drupal.org/project/ctools/issues/2671150
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
+
+; Overrides panopoly's features.
+projects[features][version] = 2.11
+projects[features][subdir] = contrib
 
 ; Overrides panopoly's uuid.
 projects[uuid][version] = 1.2
@@ -213,9 +218,6 @@ projects[panels][subdir] = contrib
 projects[panels][patch][1570120] = https://www.drupal.org/files/issues/move-image-1570120-31.patch
 projects[panels][patch][2897658] = https://www.drupal.org/files/issues/panels-menu-block-ipe-2897658-3.patch
 
-;projects[panels_breadcrumbs][version] = 2.2
-;projects[panels_breadcrumbs][subdir] = contrib;
-
 projects[fieldable_panels_panes][version] = 1.11
 projects[fieldable_panels_panes][subdir] = contrib
 projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/issues/fieldable_panels_panes--access_hook--2814117-1.patch
@@ -227,41 +229,40 @@ projects[fieldable_panels_panes][patch][2826205] = https://www.drupal.org/files/
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_admin][version] = 1.57
+projects[panopoly_admin][version] = 1.60
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_core][version] = 1.57
+projects[panopoly_core][version] = 1.60
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.57
+projects[panopoly_images][version] = 1.60
 projects[panopoly_images][subdir] = contrib
 
-projects[panopoly_magic][version] = 1.57
+projects[panopoly_magic][version] = 1.60
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_theme][version] = 1.57
+projects[panopoly_theme][version] = 1.60
 projects[panopoly_theme][subdir] = contrib
 
-; Overrides panopoly's panopoly_widgets.
-projects[panopoly_widgets][version] = 1.57
+projects[panopoly_widgets][version] = 1.60
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_users][version] = 1.57
+projects[panopoly_users][version] = 1.60
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.57
+projects[panopoly_pages][version] = 1.60
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_search][version] = 1.57
+projects[panopoly_search][version] = 1.60
 projects[panopoly_search][subdir] = contrib
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
 
-projects[panopoly_wysiwyg][version] = 1.57
+projects[panopoly_wysiwyg][version] = 1.60
 projects[panopoly_wysiwyg][subdir] = contrib
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.57
+projects[panopoly_test][version] = 1.60
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
@@ -331,12 +332,6 @@ projects[smart_trim][subdir] = contrib
 ; Files
 ; =====================
 
-projects[file_entity][version] = 2.12
-projects[file_entity][subdir] = contrib
-
-projects[media][version] = 2.19
-projects[media][subdir] = contrib
-
 projects[ckeditor][version] = 1.16
 projects[ckeditor][subdir] = contrib
 
@@ -362,6 +357,11 @@ projects[languagefield][subdir] = contrib
 projects[nodeaccess_userreference][subdir] = contrib
 projects[nodeaccess_userreference][version] = 3.10
 projects[nodeaccess_userreference][patch][] = ./patches/nodeaccess_userreference-fix_install_phase_requirement_error.patch
+
+
+; Color field
+projects[color_field][subdir] = contrib
+projects[color_field][version] = 1.8
 
 ; =====================
 ; Search
