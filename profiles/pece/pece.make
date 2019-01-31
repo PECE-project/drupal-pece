@@ -115,6 +115,9 @@ projects[views][subdir] = contrib
 projects[views][patch][2331209] = https://www.drupal.org/files/issues/2331209-4-views-7.x-3.x-undefined-index.patch
 ; Applies Panopoly's specific patches.
 projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
+projects[views][patch][2885660] = https://www.drupal.org/files/issues/2018-06-28/2885660-13.patch
+projects[views][patch][2977851] = https://www.drupal.org/files/issues/2018-06-06/2977851-views-php72-count-2.patch
+
 
 projects[views_infinite_scroll][version] = 2.1
 projects[views_infinite_scroll][subdir] = contrib
@@ -140,6 +143,7 @@ projects[masonry_views][subdir] = contrib
 
 projects[admin_menu][version] = 3.0-rc5
 projects[admin_menu][subdir]  = contrib
+projects[admin_menu][patch][2929025] = https://www.drupal.org/files/issues/admin-menu-2929025-each-function-deprecated-php-7.2.patch
 
 projects[adminimal_admin_menu][version] = 1.7
 projects[adminimal_admin_menu][subdir]  = contrib
