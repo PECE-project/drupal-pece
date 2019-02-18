@@ -7,14 +7,13 @@ PECE Documentation
 .. toctree::
    :maxdepth: 3 
 
-   What is PECE? <intro>
+   About PECE <intro>
+   Getting Started <gettingstarted>
    Installing PECE <installation>
    Users' Guide <usersguide>
+   Site Admins' Guide <usersguide>
    Data Management <datamanagement>
    Legal Documents <legal>
-   Contributors' Guide <contributors>
-   Team Members <team>
    Data Model <datamodel>
-   Terminology <terminology>
-   Roadmap for PECE 2.0 <todo>
+   Contributors' Guide <contributors>
 
