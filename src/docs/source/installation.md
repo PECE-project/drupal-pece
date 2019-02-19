@@ -4,8 +4,10 @@ Administering PECE
 How do I install PECE?
 ----------------------
 
-PECE is a Free Software-based Drupal distribution, therefore the [standard installation procedure for Drupal
-7](https://www.drupal.org/requirements) applies to PECE with a few extra dependencies.
+PECE is a Free Software-based Drupal distribution, therefore the
+[*standard installation procedure for Drupal
+7*](https://www.drupal.org/requirements) applies to PECE with a few
+extra dependencies.
 
 The following instructions have been tested on a Debian 8 (jessie)
 server, but they are not OS-dependent. PECE should run on any system
@@ -22,14 +24,14 @@ Our distribution is currently being developed on Github. You can obtain
 the most updated version following the link “Releases” on the project’s
 git repository:
 
-> https://github.com/PECE-project/pece-distro
+> https:**//**github**.**com**/**PECE**-**project**/**pece**-**distro
 
 Alternatively, you can obtain the source code and build the distro
 yourself if you intend to help our team by fixing bugs and extending the
 platform for your research purposes:
 
 > git clone
-> https://github.com/PECE-project/drupal-pece.git
+> https:**//**github**.**com**/**PECE**-**project**/**drupal**-**pece**.**git
 
 If you are a developer who wants to contribute to PECE, you will need to
 follow special instructions to install and configure the tools for
@@ -58,7 +60,7 @@ PECE following these steps:
 Clone the ‘’pece-distro’’ repository:
 
 > git clone
-> [https://github.com/PECE-project/pece-distro.git](https://github.com/PECE-project/pece-distro.git)
+> [*https:**//**github**.**com**/**PECE**-**project**/**pece**-**distro**.**git*](https://github.com/PECE-project/pece-distro.git)
 
 Create an empty database:
 
@@ -247,12 +249,42 @@ Be sure to turn off maintenance mode when you are done.
 Other Post-Installation Troubleshooting
 ---------------------------------------
 
--   “Time Out” during installation: this issue is related to the usage of Drupal distributions in “shared hosting” environments which are very limited in terms of the resources allocated per client / user account. If the installation process is interrupted before it is finished, you will have to check your PHP configuration and increase the memory allocation and timeout configuration for the php scripts with the following directives: memory\_limit and max\_execution\_time which can be found in your php.ini file. After doing so, you should not experience more “timeouts” during installation.
+-   “Time Out” during installation: this issue is related to the usage
+    > of Drupal distributions in “shared hosting” environments which are
+    > very limited in terms of the resources allocated per client / user
+    > account. If the installation process is interrupted before it is
+    > finished, you will have to check your PHP configuration and
+    > increase the memory allocation and timeout configuration for the
+    > php scripts with the following directives: memory\_limit and
+    > max\_execution\_time which can be found in your php.ini file.
+    > After doing so, you should not experience more “timeouts” during
+    > installation.
 
--   Links do not work: your webserver is not properly configured to support what is called “Clean URLs” on Drupal. Make sure you have your httpd “rewrite” rules properly set-up. This configuration can be done in the vhost file of your nginx configuration, following the [*Perusio guide*](https://github.com/perusio/drupal-with-nginx) or using the [*default.htaccess file that is provided by default by Drupal*](https://github.com/PECE-project/drupal/blob/7.x/.htaccess) if you are running Apache.
+-   Links do not work: your webserver is not properly configured to
+    > support what is called “Clean URLs” on Drupal. Make sure you have
+    > your httpd “rewrite” rules properly set-up. This configuration can
+    > be done in the vhost file of your nginx configuration, following
+    > the [*Perusio
+    > guide*](https://github.com/perusio/drupal-with-nginx) or using the
+    > [*default.htaccess file that is provided by default by
+    > Drupal*](https://github.com/PECE-project/drupal/blob/7.x/.htaccess)
+    > if you are running Apache.
 
--   Permission denied when uploading content: your filesystem permissions must be set accordingly for the public and private directories, since PECE uses both extensively. [*Follow this official Drupal tutorial*](https://www.drupal.org/node/244924) to configure the permissions properly for both directories where you installed PECE.
+-   Permission denied when uploading content: your filesystem
+    > permissions must be set accordingly for the public and private
+    > directories, since PECE uses both extensively. [*Follow this
+    > official Drupal tutorial*](https://www.drupal.org/node/244924) to
+    > configure the permissions properly for both directories where you
+    > installed PECE.
 
--   Permission denied when uploading content after configuring filesystem permissions: make sure your /tmp is also writable and, if you are on a shared host and cannot have access to it, configure Drupal to point to a temporary directory in your system/files path. There is a [*discussion about this issue on Drupal.org that is helpful*](https://www.drupal.org/node/2140629).
+-   Permission denied when uploading content after configuring
+    > filesystem permissions: make sure your /tmp is also writable and,
+    > if you are on a shared host and cannot have access to it,
+    > configure Drupal to point to a temporary directory in your
+    > system/files path. There is a [*discussion about this issue on
+    > Drupal.org that is helpful*](https://www.drupal.org/node/2140629).
 
--   Cannot create users, server internal error: in our experience, php5-mcrypt is probably not installed in your system. Make sure it is properly installed and loaded, by running php -m in a shell and checking if it is listed.
+-   Cannot create users, server internal error: in our experience,
+    > php5-mcrypt is probably not installed in your system. Make sure it
+    > is properly installed and loaded, by running php -m in a shell and
+    > checking if it is listed.
