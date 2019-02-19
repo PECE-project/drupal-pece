@@ -24,14 +24,14 @@ Our distribution is currently being developed on Github. You can obtain
 the most updated version following the link “Releases” on the project’s
 git repository:
 
-> https:**//**github**.**com**/**PECE**-**project**/**pece**-**distro
+> https://github.com/PECE-project/pece-distro
 
 Alternatively, you can obtain the source code and build the distro
 yourself if you intend to help our team by fixing bugs and extending the
 platform for your research purposes:
 
 > git clone
-> https:**//**github**.**com**/**PECE**-**project**/**drupal**-**pece**.**git
+> https://github.com/PECE-project/drupal-pece.git
 
 If you are a developer who wants to contribute to PECE, you will need to
 follow special instructions to install and configure the tools for
@@ -47,8 +47,7 @@ Drupal 7 core:
 
 -   cURL
 
--   php-mcrypt (for AES encryption support in backups and user
-    > passwords)
+-   php-mcrypt (for AES encryption support in backups and user passwords)
 
 -   php-ssh2 (for backup SFTP support, installed via PHP pear)
 
@@ -59,23 +58,13 @@ PECE following these steps:
 
 Clone the ‘’pece-distro’’ repository:
 
-> git clone
-> [*https:**//**github**.**com**/**PECE**-**project**/**pece**-**distro**.**git*](https://github.com/PECE-project/pece-distro.git)
+> git clone [https://github.com/PECE-project/pece-distro.git](https://github.com/PECE-project/pece-distro.git)
 
 Create an empty database:
 
-> mysql -u \$YOUR\_USER -p -e "CREATE DATABASE \$YOUR\_DB\_NAME
-> CHARACTER SET utf8 COLLATE utf8\_general\_ci;"
+> mysql -u \$YOUR\_USER -p -e "CREATE DATABASE \$YOUR\_DB\_NAME CHARACTER SET utf8 COLLATE utf8\_general\_ci;"
 
-Proceed to the URL in which your Drupal will reside, i.e.
-https://worldpece.org. From there, you can install PECE like any other
-Drupal site. Follow the Drupal.org [*official documentation if you need
-further help*](https://www.drupal.org/documentation/install/). In the
-section
-[*Troubleshooting*](http://pece.readthedocs.io/en/latest/installation.html#troubleshooting)
-below we describe common issues users have when trying to install PECE
-without the proper backend dependencies, configurations, and
-permissions.
+Proceed to the URL in which your Drupal will reside, i.e. https://worldpece.org. From there, you can install PECE like any other Drupal site. Follow the Drupal.org [*official documentation if you need further help*](https://www.drupal.org/documentation/install/). In the section [*Troubleshooting*](http://pece.readthedocs.io/en/latest/installation.html#troubleshooting) below we describe common issues users have when trying to install PECE without the proper backend dependencies, configurations, and permissions.
 
 One important note: please, make sure to set the permissions on the
 filesystem properly. We cannot emphasize this enough. The [*official
@@ -194,16 +183,9 @@ admin/structure/feeds/zotero\_feed. To the right under, Zotero Process,
 select Settings to configure the Zotero Importer module. Most settings
 here can remain the same. However, we encourage you to:
 
--   Under “Update Existing Nodes,” change “Do Not Update Existing Nodes”
-    > to “Update Existing Nodes.” This way if you update an entry in
-    > Zotero, it will also be updated in the platform on the next feed
-    > import
+-   Under “Update Existing Nodes,” change “Do Not Update Existing Nodes” to “Update Existing Nodes.” This way if you update an entry in Zotero, it will also be updated in the platform on the next feed import
 
--   Under “Sync zotero tags to a term reference field in the biblio
-    > content type?” change “yes” to “no.” Often Zotero entries are
-    > added to the library with chaotic tagging schemes. Checking “no”
-    > here will ensure those schemas don’t get added to the PECE tag
-    > library.
+-   Under “Sync zotero tags to a term reference field in the biblio content type?” change “yes” to “no.” Often Zotero entries are added to the library with chaotic tagging schemes. Checking “no” here will ensure those schemas don’t get added to the PECE tag library.
 
 -   Save.
 
@@ -249,42 +231,12 @@ Be sure to turn off maintenance mode when you are done.
 Other Post-Installation Troubleshooting
 ---------------------------------------
 
--   “Time Out” during installation: this issue is related to the usage
-    > of Drupal distributions in “shared hosting” environments which are
-    > very limited in terms of the resources allocated per client / user
-    > account. If the installation process is interrupted before it is
-    > finished, you will have to check your PHP configuration and
-    > increase the memory allocation and timeout configuration for the
-    > php scripts with the following directives: memory\_limit and
-    > max\_execution\_time which can be found in your php.ini file.
-    > After doing so, you should not experience more “timeouts” during
-    > installation.
+-   “Time Out” during installation: this issue is related to the usage of Drupal distributions in “shared hosting” environments which are very limited in terms of the resources allocated per client / user account. If the installation process is interrupted before it is finished, you will have to check your PHP configuration and increase the memory allocation and timeout configuration for the php scripts with the following directives: memory\_limit and max\_execution\_time which can be found in your php.ini file. After doing so, you should not experience more “timeouts” during installation.
 
--   Links do not work: your webserver is not properly configured to
-    > support what is called “Clean URLs” on Drupal. Make sure you have
-    > your httpd “rewrite” rules properly set-up. This configuration can
-    > be done in the vhost file of your nginx configuration, following
-    > the [*Perusio
-    > guide*](https://github.com/perusio/drupal-with-nginx) or using the
-    > [*default.htaccess file that is provided by default by
-    > Drupal*](https://github.com/PECE-project/drupal/blob/7.x/.htaccess)
-    > if you are running Apache.
+-   Links do not work: your webserver is not properly configured to support what is called “Clean URLs” on Drupal. Make sure you have your httpd “rewrite” rules properly set-up. This configuration can be done in the vhost file of your nginx configuration, following the [*Perusio guide*](https://github.com/perusio/drupal-with-nginx) or using the [*default.htaccess file that is provided by default by Drupal*](https://github.com/PECE-project/drupal/blob/7.x/.htaccess) if you are running Apache.
 
--   Permission denied when uploading content: your filesystem
-    > permissions must be set accordingly for the public and private
-    > directories, since PECE uses both extensively. [*Follow this
-    > official Drupal tutorial*](https://www.drupal.org/node/244924) to
-    > configure the permissions properly for both directories where you
-    > installed PECE.
+-   Permission denied when uploading content: your filesystem permissions must be set accordingly for the public and private directories, since PECE uses both extensively. [*Follow this official Drupal tutorial*](https://www.drupal.org/node/244924) to configure the permissions properly for both directories where you installed PECE.
 
--   Permission denied when uploading content after configuring
-    > filesystem permissions: make sure your /tmp is also writable and,
-    > if you are on a shared host and cannot have access to it,
-    > configure Drupal to point to a temporary directory in your
-    > system/files path. There is a [*discussion about this issue on
-    > Drupal.org that is helpful*](https://www.drupal.org/node/2140629).
+-   Permission denied when uploading content after configuring filesystem permissions: make sure your /tmp is also writable and, if you are on a shared host and cannot have access to it, configure Drupal to point to a temporary directory in your system/files path. There is a [*discussion about this issue on Drupal.org that is helpful*](https://www.drupal.org/node/2140629).
 
--   Cannot create users, server internal error: in our experience,
-    > php5-mcrypt is probably not installed in your system. Make sure it
-    > is properly installed and loaded, by running php -m in a shell and
-    > checking if it is listed.
+-   Cannot create users, server internal error: in our experience, php5-mcrypt is probably not installed in your system. Make sure it is properly installed and loaded, by running php -m in a shell and checking if it is listed.
