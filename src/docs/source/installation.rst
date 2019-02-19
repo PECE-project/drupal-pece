@@ -4,10 +4,8 @@ Administering PECE
 How do I install PECE?
 ----------------------
 
-PECE is a Free Software-based Drupal distribution, therefore the
-[*standard installation procedure for Drupal
-7*](https://www.drupal.org/requirements) applies to PECE with a few
-extra dependencies.
+PECE is a Free Software-based Drupal distribution, therefore the [standard installation procedure for Drupal
+7](https://www.drupal.org/requirements) applies to PECE with a few extra dependencies.
 
 The following instructions have been tested on a Debian 8 (jessie)
 server, but they are not OS-dependent. PECE should run on any system
