@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Installing and Administering PECE - PECE Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Installing and Administering PECE";
+    var mkdocs_page_input_path = "installation.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> PECE Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../about/">About PECE</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../gettingstarted/">Getting Started</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Installing and Administering PECE</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#administering-pece">Administering PECE</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#how-do-i-install-pece">How do I install PECE?</a></li>
+        
+            <li><a class="toctree-l3" href="#ive-installed-pece-but-none-of-my-links-are-working-what-is-going-on">I’ve installed PECE, but none of my links are working. What is going on?</a></li>
+        
+            <li><a class="toctree-l3" href="#when-should-the-admin-log-in-credentials-be-used">When should the admin log-in credentials be used?</a></li>
+        
+            <li><a class="toctree-l3" href="#how-do-i-update-the-site-information">How do I update the site information?</a></li>
+        
+            <li><a class="toctree-l3" href="#how-do-i-add-a-logo-and-change-site-colors">How do I add a logo and change site colors?</a></li>
+        
+            <li><a class="toctree-l3" href="#how-do-i-upload-the-terms-of-service">How do I upload the terms of service?</a></li>
+        
+            <li><a class="toctree-l3" href="#how-do-i-configure-aes">How do I configure AES?</a></li>
+        
+            <li><a class="toctree-l3" href="#how-do-i-configure-amber-to-archive-links-on-the-platform">How do I configure Amber to archive links on the platform?</a></li>
+        
+            <li><a class="toctree-l3" href="#how-do-i-set-up-back-ups">How do I set up back-ups?</a></li>
+        
+            <li><a class="toctree-l3" href="#how-do-i-configure-smtp-so-that-emails-can-be-sent-from-the-platform">How do I configure SMTP so that emails can be sent from the platform?</a></li>
+        
+            <li><a class="toctree-l3" href="#how-do-i-configure-zotero">How do I configure Zotero?</a></li>
+        
+            <li><a class="toctree-l3" href="#how-do-i-approve-user-memberships">How do I approve user memberships?</a></li>
+        
+            <li><a class="toctree-l3" href="#how-do-i-add-front-page-image-sliders">How do I add front page image sliders?</a></li>
+        
+            <li><a class="toctree-l3" href="#how-do-i-increase-the-file-upload-limit">How do I increase the file upload limit?</a></li>
+        
+            <li><a class="toctree-l3" href="#how-do-i-update-the-platform-when-a-new-instance-of-distro-is-released">How do I update the platform when a new instance of distro is released?</a></li>
+        
+            <li><a class="toctree-l3" href="#other-post-installation-troubleshooting">Other Post-Installation Troubleshooting</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../usersguide/">Users' Guide</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../datamanagement/">Data Management</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../legal/">Legal Documents</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../contributors/">Contributors' Guide</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">PECE Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Installing and Administering PECE</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="administering-pece">Administering PECE</h1>
+<h2 id="how-do-i-install-pece">How do I install PECE?</h2>
+<p>PECE is a Free Software-based Drupal distribution, therefore the
+<a href="https://www.drupal.org/requirements"><em>standard installation procedure for Drupal 7</em></a> applies to PECE with a few
+extra dependencies.</p>
+<p>The following instructions have been tested on a Debian 8 (jessie)
+server, but they are not OS-dependent. PECE should run on any system
+supported by Drupal 7. PECE has been tested in virtual machines with
+256M allocated for PHP, being 128M the recommended minimum for Drupal 7
+distributions. Your configuration, of course, may vary considerably
+depending on the usage you are making of the platform. Refer to our data
+management guidelines under the “sustainability” section to learn about
+the recommended minimum specs for your servers.</p>
+<h3 id="downloading-the-distro">Downloading the Distro</h3>
+<p>Our distribution is currently being developed on Github. You can obtain
+the most updated version following the link “Releases” on the project’s
+git repository:</p>
+<blockquote>
+<p>https://github.com/PECE-project/pece-distro</p>
+</blockquote>
+<p>Alternatively, you can obtain the source code and build the distro
+yourself if you intend to help our team by fixing bugs and extending the
+platform for your research purposes:</p>
+<blockquote>
+<p>git clone
+https://github.com/PECE-project/drupal-pece.git</p>
+</blockquote>
+<p>If you are a developer who wants to contribute to PECE, you will need to
+follow special instructions to install and configure the tools for
+building the distro. Consult the sub-section <a href="http://pece.readthedocs.io/en/latest/installation.html#setting-up-the-development-environment"><em>Setting up the Development Environment</em></a>
+below for more information.</p>
+<h3 id="dependencies">Dependencies</h3>
+<p>PECE has extra dependencies in addition to the ones you will need for
+Drupal 7 core:</p>
+<ul>
+<li>
+<p>cURL</p>
+</li>
+<li>
+<p>php-mcrypt (for AES encryption support in backups and user passwords)</p>
+</li>
+<li>
+<p>php-ssh2 (for backup SFTP support, installed via PHP pear)</p>
+</li>
+</ul>
+<h3 id="quick-install">Quick Install</h3>
+<p>If you have the server backend already set-up, you can quickly install
+PECE following these steps:</p>
+<p>Clone the ‘’pece-distro’’ repository:</p>
+<blockquote>
+<p>git clone
+<a href="https://github.com/PECE-project/pece-distro.git"><em>https://github.com/PECE-project/pece-distro.git</em></a></p>
+</blockquote>
+<p>Create an empty database:</p>
+<blockquote>
+<p>mysql -u \$YOUR_USER -p -e "CREATE DATABASE \$YOUR_DB_NAME
+CHARACTER SET utf8 COLLATE utf8_general_ci;"</p>
+</blockquote>
+<p>Proceed to the URL in which your Drupal will reside, i.e.
+https://worldpece.org. From there, you can install PECE like any other
+Drupal site. Follow the Drupal.org <a href="https://www.drupal.org/documentation/install/"><em>official documentation if you need further help</em></a>. In the
+section <a href="http://pece.readthedocs.io/en/latest/installation.html#troubleshooting"><em>Troubleshooting</em></a> below we describe common issues users have when trying to install PECE without the proper backend dependencies, configurations, and permissions.</p>
+<p>One important note: please, make sure to set the permissions on the
+filesystem properly. We cannot emphasize this enough. The <a href="https://www.drupal.org/node/244924"><em>official Drupal documentation explains</em></a> how
+to do so, if you have questions. (In our experience, we have needed to
+set the file permissions at sites/default/files/artifacts to 770 and
+sites/default/files/private to 770.)</p>
+<h2 id="ive-installed-pece-but-none-of-my-links-are-working-what-is-going-on">I’ve installed PECE, but none of my links are working. What is going on?</h2>
+<p>Your webserver is not properly configured to support what is called
+“Clean URLs” on Drupal. Make sure you have your httpd “rewrite” rules
+properly set-up. This configuration can be done in the vhost file of
+your nginx configuration, following the <a href="https://github.com/perusio/drupal-with-nginx"><em>Perusio guide</em></a> or using the <a href="https://github.com/PECE-project/drupal/blob/7.x/.htaccess"><em>default.htaccess file that is provided by default by Drupal</em></a> if you are running Apache.</p>
+<h2 id="when-should-the-admin-log-in-credentials-be-used">When should the admin log-in credentials be used?</h2>
+<p>Distribute admin log-in credentials to as few users as possible. Admin
+log-in credentials should only be used to configure settings and to
+approve new users. The admin credentials should not be used to add
+content or comment on content.</p>
+<h2 id="how-do-i-update-the-site-information">How do I update the site information?</h2>
+<p>Go to “Administration » Configuration » System » Site information” and
+fill out the information about your site name, the basic admin password,
+contact, timezone and other relevant info.</p>
+<h2 id="how-do-i-add-a-logo-and-change-site-colors">How do I add a logo and change site colors?</h2>
+<p>Go to “Administration » Appearance » Settings » PECE Scholarly Lite.
+Under the heading, Logo image settings, uncheck the box to use the
+default logo. Choose a file to upload as the logo. To change site
+colors, scroll down on this page to the heading “MtT Settings.” Click
+the “Look’n’Feel” link. Check the box to use a Custom Color Scheme.
+Select a Primary color (header and icons), Secondary color (links), and
+Tertiary color (color to appear on hover in main navigation). Click
+“Save Configuration.”</p>
+<h2 id="how-do-i-upload-the-terms-of-service">How do I upload the terms of service?</h2>
+<p>Go to “Administration » Configuration » People » Legal” and click “Add
+T&amp;C”, then fill-out the boxes with your custom text to be displayed to
+every user who requests an account on the system. You may ask: why is
+there not a default “Terms of Service”? Because... the text really
+depends on the way you are using PECE, so our legal documents won’t not
+suit your case, you need to craft your own text according to the usage
+you are making of PECE. We are not (cannot and should not be)
+responsible for any use authorized researchers or any other person make
+of the platform. Please, refer to our section on “Legal Documents” for
+more information about the software licenses we use for the PECE project
+(and for the Free Software technology we use from the Drupal project).</p>
+<h2 id="how-do-i-configure-aes">How do I configure AES?</h2>
+<p>To config AES, go to: “Administration » Configuration » System » AES
+settings”. Make sure to point to a secure directory outside the webroot
+where PECE is installed to store your key and make it read-only (to the
+owner of the httpd service), instead of having it stored in the database
+(which tends to be a much less secure option).</p>
+<h2 id="how-do-i-configure-amber-to-archive-links-on-the-platform">How do I configure Amber to archive links on the platform?</h2>
+<p>PECE comes pre-shipped with Amber, so if you have an account on Perma.cc
+you can set PECE up to use it an store your snapshots there. This is the
+way to go when it comes to long-term preservation of content for
+scholarly purposes. Go to “Administration » Configuration » Content
+authoring » Amber” and select “perma.cc” as alternate backend and
+provide your API key in the text field below. Done! You are storing
+“PECE Website” link artifacts, hopefully, for many future
+anthropological lives and times now.</p>
+<h2 id="how-do-i-set-up-back-ups">How do I set up back-ups?</h2>
+<p>As explained in our data management guidelines, PECE is configured to
+automatically generate backups. You should, however, revise the settings
+and set-up a SFTP connection to transfer your backup to another server
+and ensure that you have extra security when storing your encrypted
+backups. First, revise the settings we provided, changing whatever you
+think is needed (say, the most convenient time, when the site is not
+being used, to generate the backup). Go to “Configuration » System »
+Backup and Migrate” to perform this first step. Then, click on
+“Destinations” and “Add Destination” to set-up the SFTP connection with
+the credentials of your backup server. Please note that you have to use
+the port 22 (not 21) and password authentication, since ssh-key
+authentication is unfortunately not supported yet.</p>
+<h2 id="how-do-i-configure-smtp-so-that-emails-can-be-sent-from-the-platform">How do I configure SMTP so that emails can be sent from the platform?</h2>
+<p>PECE uses Drupal notification for key events on the system. It has to be
+configured using a regular email address, provided you have all the mail
+server information. You just need your SMTP server info and credentials
+to get this done. Go to “Administration » Configuration » System » SMTP
+Authentication Support” and provide your SMTP server information,
+including username and password.</p>
+<h2 id="how-do-i-configure-zotero">How do I configure Zotero?</h2>
+<p>Navigate to /admin/modules, and turn on modules the Feed Admin UI and
+Feeds Importer. Flush all caches. Navigate to
+admin/structure/feeds/zotero_feed. To the right under, Zotero Process,
+select Settings to configure the Zotero Importer module. Most settings
+here can remain the same. However, we encourage you to:</p>
+<ul>
+<li>
+<p>Under “Update Existing Nodes,” change “Do Not Update Existing Nodes” to “Update Existing Nodes.” This way if you update an entry in Zotero, it will also be updated in the platform on the next feed import</p>
+</li>
+<li>
+<p>Under “Sync zotero tags to a term reference field in the biblio content type?” change “yes” to “no.” Often Zotero entries are added to the library with chaotic tagging schemes. Checking “no” here will ensure those schemas don’t get added to the PECE tag library.</p>
+</li>
+<li>
+<p>Save.</p>
+</li>
+</ul>
+<h2 id="how-do-i-approve-user-memberships">How do I approve user memberships?</h2>
+<p>While logged-in as an administrator, navigate to /admin/people. Select
+‘edit’ next to the user you wish to approve. Change the user status to
+‘Active’ and select the appropriate <a href="#user-roles"><em>User Roles</em></a>. Click
+the ‘Save’ button at the bottom of the page.</p>
+<h2 id="how-do-i-add-front-page-image-sliders">How do I add front page image sliders?</h2>
+<p>While logged-in as an administrator, navigate to ‘Dashboard’. Under the
+‘Add Content’ heading, select front page slider. Fill in the relevant
+fields and Save. Note that all images will be scaled and cropped to
+960x460 pixels.</p>
+<h2 id="how-do-i-increase-the-file-upload-limit">How do I increase the file upload limit?</h2>
+<p>While logged-in as an administrator, navigate to Administration &gt;&gt;
+Configuration &gt;&gt; Media &gt;&gt; File Settings. Under the Maximum
+Upload Size field, enter a new value (we use 2GB). Click Save
+Configuration. You may also need to increase the upload limit on the
+server.</p>
+<h2 id="how-do-i-update-the-platform-when-a-new-instance-of-distro-is-released">How do I update the platform when a new instance of distro is released?</h2>
+<p>Always back-up your files and database before updating the platform.</p>
+<p>Put the site in maintenance mode. Under sites/default/, there is a file
+called settings.php. Search for \$update_free_access = FALSE; and
+change FALSE to TRUE.</p>
+<p>Then, go to YourSite/update.php and follow the steps. In theory major
+updates are not handled differently, but sometimes issues have occurred.</p>
+<p>Be sure to turn off maintenance mode when you are done.</p>
+<h2 id="other-post-installation-troubleshooting">Other Post-Installation Troubleshooting</h2>
+<ul>
+<li>
+<p>“Time Out” during installation: this issue is related to the usage of Drupal distributions in “shared hosting” environments which are very limited in terms of the resources allocated per client / user account. If the installation process is interrupted before it is finished, you will have to check your PHP configuration and increase the memory allocation and timeout configuration for the php scripts with the following directives: memory_limit and max_execution_time which can be found in your php.ini file. After doing so, you should not experience more “timeouts” during installation.</p>
+</li>
+<li>
+<p>Links do not work: your webserver is not properly configured to support what is called “Clean URLs” on Drupal. Make sure you have your httpd “rewrite” rules properly set-up. This configuration can be done in the vhost file of your nginx configuration, following the <a href="https://github.com/perusio/drupal-with-nginx"><em>Perusio guide</em></a> or using the <a href="https://github.com/PECE-project/drupal/blob/7.x/.htaccess"><em>default.htaccess file that is provided by default by Drupal</em></a> if you are running Apache.</p>
+</li>
+<li>
+<p>Permission denied when uploading content: your filesystem permissions must be set accordingly for the public and private directories, since PECE uses both extensively. <a href="https://www.drupal.org/node/244924"><em>Follow this official Drupal tutorial</em></a> to configure the permissions properly for both directories where you installed PECE.</p>
+</li>
+<li>
+<p>Permission denied when uploading content after configuring filesystem permissions: make sure your /tmp is also writable and, if you are on a shared host and cannot have access to it, configure Drupal to point to a temporary directory in your system/files path. There is a <a href="https://www.drupal.org/node/2140629"><em>discussion about this issue on Drupal.org that is helpful</em></a>.</p>
+</li>
+<li>
+<p>Cannot create users, server internal error: in our experience, php5-mcrypt is probably not installed in your system. Make sure it is properly installed and loaded, by running php -m in a shell and checking if it is listed.</p>
+</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../usersguide/" class="btn btn-neutral float-right" title="Users' Guide">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../gettingstarted/" class="btn btn-neutral" title="Getting Started"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../gettingstarted/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../usersguide/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
