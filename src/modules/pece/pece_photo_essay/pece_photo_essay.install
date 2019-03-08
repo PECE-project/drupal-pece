@@ -1,54 +1,28 @@
 <?php
 /**
  * @file
- * Installation code for the PECE Design Logic feature.
+ * Installation code for the PECE Photo Essay feature.
  */
 
 /**
  * Implements hook_modules_enabled().
  */
 function pece_photo_essay_modules_enabled($modules) {
-  if (in_array('pece', $modules)) {
-    _pece_photo_essay_install_permissions();
+  if (in_array('pece', $modules) || in_array('pece_photo_essay', $modules)) {
+    _pece_photo_essay_eck_entity_install_permissions('pece_photo_essay_item');
   }
 }
 
 /**
  * Setup Photo Essay permissions.
- * @todo: eck permissions are not properly set after install. We basically try and
- * set them after everything has been installed to make sure they have a proper
- * initial state. We should find the bug and report back on eck/features.
+ *
+ * ECK permissions are not properly set by defaultconfig after install.
+ * Setting permissions after module installation to make sure it has permission
+ * proper initial state.
  */
-function _pece_photo_essay_install_permissions() {
+function _pece_photo_essay_eck_entity_install_permissions($eck_entiy_name) {
   module_load_include('inc', 'pece', 'pece.functions');
-
-  $photo_essay_permissions = array(
-    'all' => array(
-      'eck view pece_photo_essay_item pece_photo_essay_item entities' => TRUE
-    )
-  );
-
-  $user_roles = array(
-    'Contributor',
-    'Researcher',
-    'administrator',
-    'editor',
-  );
-
-  $pece_photo_essay_entity_perm = array(
-    'eck add pece_photo_essay_item pece_photo_essay_item entities',
-    'eck delete pece_photo_essay_item pece_photo_essay_item entities',
-    'eck edit pece_photo_essay_item pece_photo_essay_item entities',
-    'eck list pece_photo_essay_item pece_photo_essay_item entities',
-  );
-
-  foreach ($pece_photo_essay_entity_perm as $name) {
-    foreach ($user_roles as $role) {
-      $photo_essay_permissions[$role][$name] = TRUE;
-    }
-  }
-
-  pece_set_permissions($photo_essay_permissions);
+  _pece_eck_set_permissions($eck_entity_name);
 
   pece_photo_essay_update_7002();
 }
