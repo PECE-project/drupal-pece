@@ -27,8 +27,7 @@ function _pece_install_user() {
   // Allow visitor account creation, but with administrative approval.
   variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
 
-  // @TODO: we should created user roles using kw_itemnames here.
-
+  // @TODO: Create user roles using kw_itemnames.
   // Enable default permissions for system roles.
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
@@ -62,7 +61,6 @@ function _pece_install_permissions() {
   module_load_include('install', 'pece_essay');
   _pece_essay_install_permissions();
 
-
   // Setup pece_photo_essay eck permissions for Photo Essay Item entity type.
   module_load_include('install', 'pece_photo_essay');
   _pece_photo_essay_install_permissions();
@@ -70,6 +68,10 @@ function _pece_install_permissions() {
   // Setup user protection rules for user 1.
   module_load_include('install', 'pece_admin');
   pece_admin_apply_admin_protection();
+
+  // Setup eck permissions for Timeline Essay Item entity type.
+  module_load_include('inc', 'pece', 'pece.functions');
+  _pece_eck_set_permissions('pece_timeline_essay_item');
 }
 
 /**
@@ -273,7 +275,9 @@ function pece_update_7107() {
   module_enable(array(
     'pece_timeline_essay',
   ));
-  if (module_exists('features')) {
+  if (module_exists('pece_timeline_essay') && module_exists('features')) {
     features_revert(array('pece_annotations' => array('views_view')));
   }
+  module_load_include('inc', 'pece', 'pece.functions');
+  _pece_eck_set_permissions('pece_timeline_essay_item');
 }
