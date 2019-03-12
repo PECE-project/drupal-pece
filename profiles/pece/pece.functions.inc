@@ -69,6 +69,59 @@ function pece_set_permissions($permission_map = array()) {
 }
 
 /**
+ * Helper to setup ECK entities default permissions.
+ *
+ * @param $eck_entity_name
+ *  ECK Entity machine name
+ *  Example:
+ *     array(
+ *       'all' => array(
+ *         "eck view <eck_entity_name> <eck_entity_name> entities" => TRUE,
+ *       ),
+ *       'role name' => array(
+ *          "eck add <eck_entity_name> <eck_entity_name> entities",
+ *          "eck delete <eck_entity_name> <eck_entity_name> entities",
+ *          "eck edit <eck_entity_name> <eck_entity_name> entities",
+ *          "eck list <eck_entity_name> <eck_entity_name> entities",
+ *       ),
+ *     );
+ *
+ * @see pece_set_permissions().
+ */
+function _pece_eck_set_permissions($eck_entity_name) {
+
+  $entity_permissions = array(
+    'all' => array(
+      "eck view $eck_entity_name $eck_entity_name entities" => TRUE
+    )
+  );
+
+  $user_roles = array(
+    'Contributor',
+    'Researcher',
+    'administrator',
+    'editor',
+  );
+
+  $pece_entities_entity_perm = array(
+    "eck add $eck_entity_name $eck_entity_name entities",
+    "eck delete $eck_entity_name $eck_entity_name entities",
+    "eck edit $eck_entity_name $eck_entity_name entities",
+    "eck list $eck_entity_name $eck_entity_name entities",
+  );
+
+  foreach ($pece_entities_entity_perm as $name) {
+    foreach ($user_roles as $role) {
+      $entity_permissions[$role][$name] = TRUE;
+    }
+  }
+
+  pece_set_permissions($entity_permissions);
+  watchdog('info', 'ECK Entity (' . $eck_entity_name . ') permissions has been updated.');
+}
+
+
+/**
  * Helper method to reset an entity's panelizer state for a given view mode.
  */
 function pece_reset_panelizer_entity_to_default($entity_type, $entity, $view_mode = NULL) {
