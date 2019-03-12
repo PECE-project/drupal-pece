@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Class with common helper methods.
+ */
+class BiblioKeywordWebTestCase extends BiblioWebTestCase {
+
+  /**
+   *
+   */
+  public function setUp() {
+    parent::setUp('biblio');
+    require_once drupal_get_path('module', 'biblio') . '/includes/biblio.keywords.inc';
+  }
+
+  /**
+   * Returns a new keyword with random properties.
+   */
+  public function createKeyword() {
+    $keyword = array();
+    $keyword['word'] = $this->randomName();
+    biblio_save_keyword($keyword);
+    $this->kids[] = $keyword['kid'];
+    return $keyword;
+  }
+
+}

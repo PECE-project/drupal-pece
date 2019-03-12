@@ -81,7 +81,7 @@
 
 <b>Bugs Fixed...</b>
 <ul>
-  <li># row titles in theme_biblio_tabular() not translated</li> 
+  <li># row titles in theme_biblio_tabular() not translated</li>
   <li><a href="http://drupal.org/node/146758#comment-2184004">#146758</a> fixed missing initialization of the keyword separator string</li>
   <li># fixed spans being filtered out of biblio listings</li>
   <li><a href="http://drupal.org/node/611712">#611712</a> fixed Empty href attributes in OpenURL links </li>
@@ -115,7 +115,7 @@
   <li><a href="http://drupal.org/node/561722">#561722</a> fixed Order Vocabularies by Weight on Import Screen(s)</li>
   <li><a href="http://drupal.org/node/561800">#561800</a> fixed Incorrectly placed curly bracket } around table name in db_query</li>
   <li><a href="http://drupal.org/node/551362">#551362</a> fixed problem with author and keyword edit links when base url has more than one level</li>
-  <li><a href="http://drupal.org/node/502140">#502140</a> fixed typo which prevented removal of BibTex braces in the title with Views display</li>
+  <li><a href="http://drupal.org/node/502140">#502140</a> fixed typo which prevented removal of BibTeX braces in the title with Views display</li>
   <li><a href="http://drupal.org/node/536062">#536062</a> fixed bug which would overwrite page title if the page had a "View" containing a biblio node</li>
   <li>fixed bug which prevented the "Alpha" line from being displayed on the "Authors" page when there were no authors to display</li>
 </ul>
@@ -161,7 +161,7 @@
   <li>Added new settings in the links section on the admin/settings/biblio page.  You choose to carry "inline" mode through to all subsequent links.  Inline mode is used primarily by people accessing biblio data from custom code, so the average user will not need this.</li>
   <li>Added new settings in the links section on the admin/settings/biblio page.  You can now toggle the export links on/off individually as well as the Google Scholar link</li>
   <li>Added links from each entry to Google Scholar.  Following the link does a Google Scholar search using the title and first authors name.</li>
-  <li>Added a new feature (and setting to turn it on/off) which will allow you to retain BibTex protected capitalization braces in title strings, they will be stripped out on display, but will still be in place when exported in BibTex format. </li>
+  <li>Added a new feature (and setting to turn it on/off) which will allow you to retain BibTeX protected capitalization braces in title strings, they will be stripped out on display, but will still be in place when exported in BibTeX format. </li>
   <li>Added a <b><em>new permission</em></b> called "access biblio content" which will allow you to restrict access to any of the biblio pages (biblio, biblio/authors, biblio/keywords etc.) <b>A user <u>MUST</u> have this permission to see anything from the biblio module!</b></li>
   <li>Added a section to the user profile page to allow entry of CrossRef login information used for DOI lookup</li>
   <li>Added a new option when selecting taxonomy terms from a vocabulary, you can now choose to copy them to the biblio keyword database or not.  There is a check box on the input and import forms and there is also a new check box in the "Keywords" section of the admin/settings page which sets the default for this option.</li>
@@ -180,11 +180,11 @@
   <li><a href="http://drupal.org/node/471436">#471436</a> Problem with Taxonomy and Biblio Keywords </li>
   <li><a href="http://drupal.org/node/469328">#469328</a> What to do if Author is an Organization (CSE and APA styles only) </li>
   <li><a href="http://drupal.org/node/464572">#464572</a> Undefined function taxonomy_vocabulary_load()-installation error </li>
-  <li><a href="http://drupal.org/node/461474">#461474</a> BibTex - ISSN field </li>
-  <li><a href="http://drupal.org/node/461464">#461464</a> BibTex - Inproceedings and inbook - booktitle replaced by series</li>  
-  <li><a href="http://drupal.org/node/461426">#461426</a> BibTex - @incollection interpreted as @book</li>  
-  <li><a href="http://drupal.org/node/461422">#461422</a> BibTex - export - no doi</li>
-  <li><a href="http://drupal.org/node/456750">#456750</a> Content Access Permissions are ignored</li>  
+  <li><a href="http://drupal.org/node/461474">#461474</a> BibTeX - ISSN field </li>
+  <li><a href="http://drupal.org/node/461464">#461464</a> BibTeX - Inproceedings and inbook - booktitle replaced by series</li>
+  <li><a href="http://drupal.org/node/461426">#461426</a> BibTeX - @incollection interpreted as @book</li>
+  <li><a href="http://drupal.org/node/461422">#461422</a> BibTeX - export - no doi</li>
+  <li><a href="http://drupal.org/node/456750">#456750</a> Content Access Permissions are ignored</li>
   <li><a href="http://drupal.org/node/459374">#459374</a> Use of $form_state['storage'] to hold a string/integer (as opposed to an array)</li>
   <li><a href="http://drupal.org/node/459684">#459684</a> DOI import fails, CrossRef registration required now</li>
   <li><a href="http://drupal.org/node/455216">#455216</a> Compilation failed: POSIX named classes.. in biblio_theme.inc</li>
@@ -192,7 +192,7 @@
   <li><a href="http://drupal.org/node/455402">#455402</a> Changes to Biblio Filter</li>
   <li><a href="http://drupal.org/node/455022">#455022</a> Extend admin pages to set the 'biblio_author_links' variable</li>
   <li>fixed problem with missing sort arrow images when filtering</li>
-  <li><a href="http://drupal.org/node/460240">#460240</a>fixed keyword export in BibTex and EndNote Tagged formats</li>
+  <li><a href="http://drupal.org/node/460240">#460240</a>fixed keyword export in BibTeX and EndNote Tagged formats</li>
   <li><a href="http://drupal.org/node/453708">#453708</a> Duplicate bibtex export</li>
   <li><a href="http://drupal.org/node/453298">#453298</a> "Number of items in the RSS feed" not working...</li>
   <li><a href="http://drupal.org/node/450522">#450522</a> Limit on author initials is not respected in Vancouver style</li>
@@ -210,11 +210,11 @@
 <b>New features...</b>
 <ul>
   <li>Added "DOI Lookup" option on the input form. Entering a valid DOI name (number) here will query crossref.org and poplulate the input form with all the data it gets.  You are then presented with the populated form to make further additions/changes prior to saving it to the database.</li>
-  <li>Added "BibTex cut and paste" option to the input form.  Pasting a valid bibTex string into the box will populate the input form with the data and similar to the DOI lookup above, allows you to preview and make changes prior to saving it in the database.</li>
+  <li>Added "BibTeX cut and paste" option to the input form.  Pasting a valid BibTeX string into the box will populate the input form with the data and similar to the DOI lookup above, allows you to preview and make changes prior to saving it in the database.</li>
   <li>Added a new user permission called "edit biblio authors" which allows the user to edit biblio author information but not other biblio settings, unlike "administer biblio" which gives them the right to edit all biblio settings.</li>
   <li>Changed "Views" integration such that Blblio is no longer a "Base" type of view.  You should now use the "Node" view type to create a view containing biblio information.</li>
   <li>Added an option to toggle sort links between text and tab type display.</li>
-  <li>Changed Keyword/Taxonomy freetag handling...  The Taxonomy freetag input box is no longer displayed on the input form. All keywords/taxonomy freetags should be entered into the biblio Keywords input box and (if required) the taxonomy freetags will be updated when the keywords are saved.  This keeps the keywords and freetags in sync and avoids the confustion of having two input boxes (one for keywords and one for freetags).</li>   
+  <li>Changed Keyword/Taxonomy freetag handling...  The Taxonomy freetag input box is no longer displayed on the input form. All keywords/taxonomy freetags should be entered into the biblio Keywords input box and (if required) the taxonomy freetags will be updated when the keywords are saved.  This keeps the keywords and freetags in sync and avoids the confustion of having two input boxes (one for keywords and one for freetags).</li>
 </ul>
 <b>Bugs Fixed...</b>
 <ul>

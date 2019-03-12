@@ -1,21 +1,13 @@
 <?php
-/*
- * @file
- * Tests for contributor handling in the Biblio module
+
+/**
  *
  */
-
-class BiblioContributorWebTestCase extends BiblioWebTestCase {
-  function setUp() {
-    parent::setUp('biblio');
-    require_once(drupal_get_path('module', 'biblio') . '/includes/biblio.contributors.inc');
-  }
-
-
-}
-
 class BiblioContributorUnitTest extends BiblioContributorWebTestCase {
 
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Biblio contributor unit tests',
@@ -24,66 +16,79 @@ class BiblioContributorUnitTest extends BiblioContributorWebTestCase {
     );
   }
 
-  function testGrabSurname() {
+  /**
+   *
+   */
+  public function testGrabSurname() {
 
     $surname = 'van der Plus';
     list ($surname, $prefix) = _grabSurname($surname);
-    $this->assertIdentical($surname, 'Plus' );
-    $this->assertIdentical($prefix, 'van der' );
+    $this->assertIdentical($surname, 'Plus');
+    $this->assertIdentical($prefix, 'van der');
     $surname = 'Van den Bussche';
     list ($surname, $prefix) = _grabSurname($surname);
-    $this->assertIdentical($surname, 'Van den Bussche' );
-    $this->assertIdentical($prefix, FALSE );
+    $this->assertIdentical($surname, 'Van den Bussche');
+    $this->assertIdentical($prefix, FALSE);
   }
-  function testGrabFirstnameInitials() {
+
+  /**
+   *
+   */
+  public function testGrabFirstnameInitials() {
 
     $string = "Ron";
     list($firstname, $initials, $prefix) = _grabFirstnameInitials($string);
-    $this->assertIdentical($firstname, 'Ron' );
-    $this->assertIdentical($initials, '' );
+    $this->assertIdentical($firstname, 'Ron');
+    $this->assertIdentical($initials, '');
     $string = "Ron J.";
     list($firstname, $initials, $prefix) = _grabFirstnameInitials($string);
-    $this->assertIdentical($firstname, 'Ron' );
-    $this->assertIdentical($initials, 'J' );
+    $this->assertIdentical($firstname, 'Ron');
+    $this->assertIdentical($initials, 'J');
     $string = "sir Ron J.";
     list($firstname, $initials, $prefix) = _grabFirstnameInitials($string);
-    $this->assertIdentical($firstname, 'Ron' );
-    $this->assertIdentical($initials, 'J' );
-    $this->assertIdentical($prefix, 'sir' );
+    $this->assertIdentical($firstname, 'Ron');
+    $this->assertIdentical($initials, 'J');
+    $this->assertIdentical($prefix, 'sir');
     $string = "R J";
     list($firstname, $initials, $prefix) = _grabFirstnameInitials($string);
-    $this->assertIdentical($firstname, '' );
-    $this->assertIdentical($initials, 'R J' );
+    $this->assertIdentical($firstname, '');
+    $this->assertIdentical($initials, 'R J');
     $string = "R. J.";
     list($firstname, $initials, $prefix) = _grabFirstnameInitials($string);
-    $this->assertIdentical($firstname, '' );
-    $this->assertIdentical($initials, 'R J' );
+    $this->assertIdentical($firstname, '');
+    $this->assertIdentical($initials, 'R J');
     $string = "R.J.";
     list($firstname, $initials, $prefix) = _grabFirstnameInitials($string);
-    $this->assertIdentical($firstname, '' );
-    $this->assertIdentical($initials, 'R J' );
+    $this->assertIdentical($firstname, '');
+    $this->assertIdentical($initials, 'R J');
 
   }
 
-  function testBiblioParseAuthor() {
+  /**
+   *
+   */
+  public function testBiblioParseAuthor() {
 
     $author['name'] = 'Bush, Jr. III, George W';
     $author['auth_category'] = 1;
     $author = biblio_parse_author($author);
-    $this->assertIdentical($author['firstname'], 'George', 'Test biblio_parse_author($author), firstname' );
+    $this->assertIdentical($author['firstname'], 'George', 'Test biblio_parse_author($author), firstname');
     $this->assertIdentical($author['lastname'], 'Bush', 'Test biblio_parse_author($author), lastname');
-    $this->assertIdentical($author['initials'], 'W', 'Test biblio_parse_author($author), initials' );
-    $this->assertIdentical($author['suffix'], 'Jr. III', 'Test biblio_parse_author($author), suffix' );
+    $this->assertIdentical($author['initials'], 'W', 'Test biblio_parse_author($author), initials');
+    $this->assertIdentical($author['suffix'], 'Jr. III', 'Test biblio_parse_author($author), suffix');
 
   }
 
-  function testBiblioUpdateContributors() {
+  /**
+   *
+   */
+  public function testBiblioUpdateContributors() {
 
     $node = $this->createNode();
     $nid = $node->nid;
     $vid1 = $node->vid;
     $this->assertIdentical($node->biblio_contributors[2]['firstname'], 'George', 'Test biblio_insert_contributors($node), firstname');
-    $this->assertIdentical($node->biblio_contributors[2]['lastname'], 'Bushzzzzzz', 'Test biblio_insert_contributors($node), lastname' );
+    $this->assertIdentical($node->biblio_contributors[2]['lastname'], 'Bushzzzzzz', 'Test biblio_insert_contributors($node), lastname');
     unset($node->biblio_contributors[2]);
     $node->revision = TRUE;
     node_save($node);
@@ -105,18 +110,22 @@ class BiblioContributorUnitTest extends BiblioContributorWebTestCase {
 
   }
 
-  function testBiblioDeleteOrphanAuthors() {
+  /**
+   *
+   */
+  public function testBiblioDeleteOrphanAuthors() {
     $orphan_authors = array();
-    $orphan_authors = biblio_get_orphan_authors(); // first save any existing orphans so we can put them back
+    // First save any existing orphans so we can put them back.
+    $orphan_authors = biblio_get_orphan_authors();
     $orphan_count = biblio_count_orphan_authors();
-    $author = array('name' => 'Ron J. Jeromezzzzzz',  'auth_type' => 1);
-    biblio_save_contributor($author);  // create a new orphan so we will have at least one
+    $author = array('name' => 'Ron J. Jeromezzzzzz', 'auth_type' => 1);
+    // Create a new orphan so we will have at least one.
+    biblio_save_contributor($author);
     $before_count = biblio_count_orphan_authors();
     $this->assertTrue($before_count != 0, "There are $before_count orphans to delete");
     biblio_delete_orphan_authors(TRUE);
     $after_count = biblio_count_orphan_authors();
     $this->assertEqual($after_count, 0, "There are now $after_count orphans");
-
 
     foreach ($orphan_authors as $author) {
       biblio_save_contributor($author);
