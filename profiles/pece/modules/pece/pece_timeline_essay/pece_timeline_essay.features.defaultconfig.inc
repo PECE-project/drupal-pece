@@ -41,56 +41,6 @@ function pece_timeline_essay_defaultconfig_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'eck add pece_timeline_essay_item pece_timeline_essay_item entities'.
-  $permissions['eck add pece_timeline_essay_item pece_timeline_essay_item entities'] = array(
-    'name' => 'eck add pece_timeline_essay_item pece_timeline_essay_item entities',
-    'roles' => array(
-      'Contributor' => 'Contributor',
-      'Researcher' => 'Researcher',
-    ),
-    'module' => 'eck',
-  );
-
-  // Exported permission: 'eck delete pece_timeline_essay_item pece_timeline_essay_item entities'.
-  $permissions['eck delete pece_timeline_essay_item pece_timeline_essay_item entities'] = array(
-    'name' => 'eck delete pece_timeline_essay_item pece_timeline_essay_item entities',
-    'roles' => array(
-      'Contributor' => 'Contributor',
-      'Researcher' => 'Researcher',
-    ),
-    'module' => 'eck',
-  );
-
-  // Exported permission: 'eck edit pece_timeline_essay_item pece_timeline_essay_item entities'.
-  $permissions['eck edit pece_timeline_essay_item pece_timeline_essay_item entities'] = array(
-    'name' => 'eck edit pece_timeline_essay_item pece_timeline_essay_item entities',
-    'roles' => array(
-      'Contributor' => 'Contributor',
-      'Researcher' => 'Researcher',
-    ),
-    'module' => 'eck',
-  );
-
-  // Exported permission: 'eck list pece_timeline_essay_item pece_timeline_essay_item entities'.
-  $permissions['eck list pece_timeline_essay_item pece_timeline_essay_item entities'] = array(
-    'name' => 'eck list pece_timeline_essay_item pece_timeline_essay_item entities',
-    'roles' => array(
-      'Contributor' => 'Contributor',
-      'Researcher' => 'Researcher',
-    ),
-    'module' => 'eck',
-  );
-
-  // Exported permission: 'eck view pece_timeline_essay_item pece_timeline_essay_item entities'.
-  $permissions['eck view pece_timeline_essay_item pece_timeline_essay_item entities'] = array(
-    'name' => 'eck view pece_timeline_essay_item pece_timeline_essay_item entities',
-    'roles' => array(
-      'Contributor' => 'Contributor',
-      'Researcher' => 'Researcher',
-    ),
-    'module' => 'eck',
-  );
-
   // Exported permission: 'edit own pece_timeline_essay content'.
   $permissions['edit own pece_timeline_essay content'] = array(
     'name' => 'edit own pece_timeline_essay content',
