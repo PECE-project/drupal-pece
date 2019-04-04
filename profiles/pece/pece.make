@@ -351,6 +351,9 @@ projects[mimedetect][subdir] = contrib
 ; =====================
 ; Fields
 ; =====================
+; Overrides Panopoly's link.
+projects[link][version] = 1.6
+projects[link][subdir] = contrib
 
 ; Overrides Panopoly's linkit.
 projects[linkit][version] = 3.5
