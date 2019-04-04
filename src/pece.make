@@ -148,6 +148,10 @@ projects[admin_menu][patch][2929025] = https://www.drupal.org/files/issues/admin
 projects[adminimal_admin_menu][version] = 1.7
 projects[adminimal_admin_menu][subdir]  = contrib
 
+; Overrides panopoly's module_filter.
+projects[module_filter][version] = 2.2
+projects[module_filter][subdir]  = contrib
+
 projects[coffee][version] = 2.3
 projects[coffee][subdir]  = contrib
 
