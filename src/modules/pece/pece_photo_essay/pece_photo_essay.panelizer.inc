@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_photo_essay.panelizer.inc
@@ -171,7 +172,7 @@ function pece_photo_essay_panelizer_defaults() {
   $pane->panel = 'contentmain';
   $pane->type = 'node_comment_wrapper';
   $pane->subtype = 'node_comment_wrapper';
-  $pane->shown = TRUE;
+  $pane->shown = FALSE;
   $pane->access = array();
   $pane->configuration = array(
     'mode' => '1',
@@ -192,6 +193,145 @@ function pece_photo_essay_panelizer_defaults() {
   $pane->uuid = 'b26e3694-148a-4067-b99b-f8227a7d3e1e';
   $display->content['new-b26e3694-148a-4067-b99b-f8227a7d3e1e'] = $pane;
   $display->panels['contentmain'][4] = 'new-b26e3694-148a-4067-b99b-f8227a7d3e1e';
+  $pane = new stdClass();
+  $pane->pid = 'new-f0467b40-b946-4baf-a68a-4ac8705eaa1a';
+  $pane->panel = 'contentmain';
+  $pane->type = 'annotation';
+  $pane->subtype = 'annotation';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'map' => array(
+      'path' => 'panels/ajax',
+      'load_functions' => '',
+      'to_arg_functions' => '',
+      'access_callback' => 'user_access',
+      'access_arguments' => 'a:1:{i:0;s:14:"access content";}',
+      'page_callback' => 'panels_ajax_router',
+      'page_arguments' => array(
+        0 => 'editor',
+        1 => 'add-pane',
+        2 => 'panelizer:default:node:pece_photo_essay.page_manager:default',
+        3 => 'contentmain',
+        4 => 'annotation',
+        5 => 'annotation',
+        6 => 'form',
+      ),
+      'delivery_callback' => 'ajax_deliver',
+      'fit' => '3',
+      'number_parts' => '2',
+      'context' => '0',
+      'tab_parent' => '',
+      'tab_root' => 'panels/ajax',
+      'title' => '',
+      'title_callback' => 't',
+      'title_arguments' => '',
+      'theme_callback' => 'ajax_base_page_theme',
+      'theme_arguments' => array(
+        0 => 'editor',
+        1 => 'add-pane',
+        2 => 'panelizer:default:node:pece_photo_essay.page_manager:default',
+        3 => 'contentmain',
+        4 => 'annotation',
+        5 => 'annotation',
+        6 => 'form',
+      ),
+      'type' => '0',
+      'description' => '',
+      'position' => '',
+      'weight' => '0',
+      'include_file' => '',
+      'href' => 'panels/ajax',
+      'tab_root_href' => 'panels/ajax',
+      'tab_parent_href' => '',
+      'options' => array(),
+      'access' => TRUE,
+      'localized_options' => array(),
+      'original_map' => array(
+        0 => 'panels',
+        1 => 'ajax',
+        2 => 'editor',
+        3 => 'add-pane',
+        4 => 'panelizer:default:node:pece_photo_essay.page_manager:default',
+        5 => 'contentmain',
+        6 => 'annotation',
+        7 => 'annotation',
+        8 => 'form',
+      ),
+      'map' => array(
+        0 => 'panels',
+        1 => 'ajax',
+        2 => 'editor',
+        3 => 'add-pane',
+        4 => 'panelizer:default:node:pece_photo_essay.page_manager:default',
+        5 => 'contentmain',
+        6 => 'annotation',
+        7 => 'annotation',
+        8 => 'form',
+      ),
+    ),
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 5;
+  $pane->locks = array();
+  $pane->uuid = 'f0467b40-b946-4baf-a68a-4ac8705eaa1a';
+  $display->content['new-f0467b40-b946-4baf-a68a-4ac8705eaa1a'] = $pane;
+  $display->panels['contentmain'][5] = 'new-f0467b40-b946-4baf-a68a-4ac8705eaa1a';
+  $pane = new stdClass();
+  $pane->pid = 'new-47933042-098a-4709-922d-8efa4b4dbf1a';
+  $pane->panel = 'contentmain';
+  $pane->type = 'block';
+  $pane->subtype = 'views-aec56592c4c370bf6d475d08ee3d819d';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'inherit_path' => 1,
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 6;
+  $pane->locks = array();
+  $pane->uuid = '47933042-098a-4709-922d-8efa4b4dbf1a';
+  $display->content['new-47933042-098a-4709-922d-8efa4b4dbf1a'] = $pane;
+  $display->panels['contentmain'][6] = 'new-47933042-098a-4709-922d-8efa4b4dbf1a';
+  $pane = new stdClass();
+  $pane->pid = 'new-5420ae40-7ef2-4739-af25-5502609f6dac';
+  $pane->panel = 'contentmain';
+  $pane->type = 'views_panes';
+  $pane->subtype = 'pece_annotations-pece_artifact_user_annotations';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'view_settings' => 'fields',
+    'header_type' => 'none',
+    'view_mode' => 'teaser',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 7;
+  $pane->locks = array();
+  $pane->uuid = '5420ae40-7ef2-4739-af25-5502609f6dac';
+  $display->content['new-5420ae40-7ef2-4739-af25-5502609f6dac'] = $pane;
+  $display->panels['contentmain'][7] = 'new-5420ae40-7ef2-4739-af25-5502609f6dac';
   $pane = new stdClass();
   $pane->pid = 'new-d037d200-1f9e-45a9-8191-ddbc80d172f3';
   $pane->panel = 'sidebar';

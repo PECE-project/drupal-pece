@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_photo_essay.features.defaultconfig.inc
