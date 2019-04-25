@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_artifacts_bundle.features.field_instance.inc
@@ -18,9 +19,14 @@ function pece_artifacts_bundle_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'card' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'hidden',
+        'module' => 'er_viewmode',
+        'settings' => array(
+          'links' => 0,
+          'use_content_language' => 1,
+          'view_mode' => 'meta_content',
+        ),
+        'type' => 'entityreference_entity_view',
         'weight' => 0,
       ),
       'default' => array(
@@ -112,7 +118,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'default' => array(
         'label' => 'above',
@@ -196,7 +202,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'default' => array(
         'label' => 'above',
@@ -267,7 +273,6 @@ function pece_artifacts_bundle_field_default_field_instances() {
     'label' => 'Contributors',
     'required' => 1,
     'settings' => array(
-      'user_register_form' => FALSE,
       'nodeaccess_userreference' => array(
         'all' => array(
           'view' => 'view',
@@ -284,6 +289,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
           'view' => 'view',
         ),
       ),
+      'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
@@ -310,7 +316,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'default' => array(
         'label' => 'above',
@@ -398,7 +404,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
       ),
       'default' => array(
         'label' => 'above',
@@ -489,7 +495,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 5,
       ),
       'default' => array(
         'label' => 'above',
@@ -569,7 +575,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 6,
       ),
       'default' => array(
         'label' => 'above',
@@ -649,7 +655,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 7,
       ),
       'default' => array(
         'label' => 'above',
@@ -732,7 +738,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 8,
       ),
       'default' => array(
         'label' => 'above',
@@ -825,7 +831,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 9,
       ),
       'default' => array(
         'label' => 'above',
@@ -911,7 +917,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 10,
       ),
       'default' => array(
         'label' => 'above',
@@ -995,7 +1001,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 11,
       ),
       'default' => array(
         'label' => 'above',
@@ -1084,7 +1090,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 12,
       ),
       'default' => array(
         'label' => 'above',
