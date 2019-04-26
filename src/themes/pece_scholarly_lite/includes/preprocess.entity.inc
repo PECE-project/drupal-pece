@@ -42,13 +42,28 @@ function pece_scholarly_lite_preprocess_entity(&$variables, $hook) {
  */
 function pece_scholarly_lite_preprocess_entity__pece_photo_essay_item(&$variables) {
   $item = entity_metadata_wrapper('pece_photo_essay_item', $variables['pece_photo_essay_item']);
-  $artifact = entity_metadata_wrapper('node', $item->field_image_artifact->value());
-  $artifact_image = $artifact->field_pece_media_image->value();
-
-  $variables['artifact_url'] = url('node/' . $artifact->getIdentifier());
-  $variables['artifact_title'] = $artifact->label();
-  $variables['artifact_image'] = array(
-    '#theme' => 'image_formatter',
-    '#item' => $artifact_image,
-  );
+  try {
+    $artifact = entity_metadata_wrapper('node', $item->field_image_artifact->value());
+    if(!isset($artifact->field_pece_media_image)) {
+      $variables['artifact_image'] = array(
+        '#markup' => '<p class="error">Image Unavailable</p>'
+      );
+      return;
+    }
+    $artifact_image = $artifact->field_pece_media_image->value();
+    $variables['artifact_url'] = url('node/' . $artifact->getIdentifier());
+    $variables['artifact_title'] = $artifact->label();
+    $variables['artifact_image'] = array(
+      '#theme' => 'image_formatter',
+      '#item' => $artifact_image,
+    );
+  }
+  catch (EntityMetadataWrapperException $exc) {
+    watchdog(
+      'pece_scholarly_lite',
+      'EntityMetadataWrapper exception in %function() <pre>@trace</pre>',
+      array('%function' => __FUNCTION__, '@trace' => $exc->getTraceAsString()),
+      WATCHDOG_ERROR
+    );
+  }
 }
