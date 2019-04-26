@@ -111,13 +111,13 @@ function pece_photo_essay_defaultconfig_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
-          'weight' => '12',
+          'weight' => '11',
         ),
         'title' => array(
-          'weight' => '1',
+          'weight' => '0',
         ),
         'path' => array(
-          'weight' => '11',
+          'weight' => '10',
         ),
       ),
       'display' => array(),

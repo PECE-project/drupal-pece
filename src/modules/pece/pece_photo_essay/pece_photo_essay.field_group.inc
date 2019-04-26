@@ -22,10 +22,10 @@ function pece_photo_essay_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Group settings',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
-      0 => 'og_group_ref',
-      1 => 'group_content_access',
+      0 => 'group_content_access',
+      1 => 'og_group_ref',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
