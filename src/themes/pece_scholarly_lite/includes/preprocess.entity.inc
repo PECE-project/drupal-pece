@@ -46,7 +46,7 @@ function pece_scholarly_lite_preprocess_entity__pece_photo_essay_item(&$variable
     $artifact = entity_metadata_wrapper('node', $item->field_image_artifact->value());
     if(!isset($artifact->field_pece_media_image)) {
       $variables['artifact_image'] = array(
-        '#markup' => '<p class="error">Image Unavailable</p>'
+        '#markup' => '<p class="error">Unavailable Image artifact</p>'
       );
       return;
     }
