@@ -178,8 +178,12 @@ function pece_get_default_field_value($entity_type, $bundle, $field_name, $langu
 
 /**
  * Checks if a given/current user has adminsitrator role.
+ *
+ * @param $account
+ *        User object
+ * @return bool
  */
-function _pece_is_admin($account) {
+function _pece_is_admin($account = FALSE) {
   if (empty($account)) {
     global $user;
     $account = $user;
