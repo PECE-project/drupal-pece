@@ -86,3 +86,12 @@ function pece_photo_essay_item__entity_callback($op, $entity, $account, $entity_
   $default_access_callback = variable_get('pece_photo_essay_item__access_callback', 'eck__entity_access');
   return $default_access_callback($op, $entity, $account, $entity_type_name);
 }
+
+/**
+ * Implements hook_pece_annotatable_types_info().
+ */
+function pece_photo_essay_pece_annotatable_types_info() {
+  return array(
+    'pece_photo_essay' => 'pece_photo_essay',
+  );
+}

@@ -298,6 +298,7 @@ function pece_annotations_views_default_views() {
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
     'pece_essay' => 'pece_essay',
+    'pece_photo_essay' => 'pece_photo_essay',
     'pece_timeline_essay' => 'pece_timeline_essay',
   );
   $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['validate_options']['access'] = TRUE;
@@ -489,6 +490,7 @@ function pece_annotations_views_default_views() {
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
     'pece_essay' => 'pece_essay',
+    'pece_photo_essay' => 'pece_photo_essay',
     'pece_timeline_essay' => 'pece_timeline_essay',
   );
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['validate_options']['access'] = TRUE;
@@ -667,6 +669,7 @@ function pece_annotations_views_default_views() {
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
     'pece_essay' => 'pece_essay',
+    'pece_photo_essay' => 'pece_photo_essay',
     'pece_timeline_essay' => 'pece_timeline_essay',
   );
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['validate_options']['access'] = TRUE;
