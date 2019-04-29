@@ -6,6 +6,54 @@
 
 include_once 'pece_artifacts.features.inc';
 
+// ---
+// HELPERS
+// ---
+
+/**
+ * Extract artifatc's media file type.
+ *
+ * @param $node         Node object
+ * @return mixed|string Media type (audio, image, video)
+ */
+function _pece_artifacts_node_presave_get_media_type($node) {
+  if (strpos($node->type, 'pece_artifact_') === FALSE) return '';
+  return str_replace('pece_artifact_', '', $node->type);
+}
+
+/**
+ * Extract file extension from artifact's media file.
+ *
+ * @param $node       Node object
+ * @return mixed|void File extension
+ */
+function _pece_artifacts_node_presave_get_file_ext($node) {
+  $media_type = _pece_artifacts_node_presave_get_media_type($node);
+  $field_media = 'field_pece_media_' . $media_type;
+  if (!isset($node->{$field_media})) return;
+  // @TODO: Wrap node in a EntityMetadataWrapper.
+  $fid = $node->{$field_media}[LANGUAGE_NONE][0]['fid'];
+  if (!$fid) return;
+  $media_file = file_load_multiple(array($fid));
+  return pathinfo($media_file[$fid]->filename, PATHINFO_EXTENSION);
+}
+
+/**
+ * Autofill artifact's file format field based on its media field.
+ *
+ * @param $node Node object
+ */
+function pece_artifacts_autofill_file_format($node) {
+  if (!isset($node->field_pece_file_format)) return;
+  $media_ext = _pece_artifacts_node_presave_get_file_ext($node);
+  // @TODO: Wrap node in a EntityMetadataWrapper.
+  $node->field_pece_file_format[LANGUAGE_NONE][0]['value'] = $media_ext;
+}
+
+// ---
+// HOOKS
+// ---
+
 /**
  * Implements hook_form_alter().
  */
@@ -31,6 +79,9 @@ function _pece_artifacts_form_pece_artifact_form_alter(&$form, &$form_state) {
   $form['comment_settings']['#access'] = FALSE;
   // We cannot allow the content to be authored by anonymous.
   $form['author']['name']['#required'] = TRUE;
+  // Hide file_format due to autofill during presave hook.
+  // @see pece_artifacts_node_presave().
+  $form['field_pece_file_format']['#access'] = FALSE;
 
   // Hide/show location fieldset based on fieldsite location usage flag.
   if (!empty($form['field_pece_use_fieldsite_local'])) {
@@ -44,20 +95,19 @@ function _pece_artifacts_form_pece_artifact_form_alter(&$form, &$form_state) {
  * Implements hook_node_presave().
  */
 function pece_artifacts_node_presave($node) {
+  if (!in_array($node->type, pece_artifacts_fetch_all_types())) return;
+
   module_load_include('inc', 'pece_artifacts', 'pece_artifacts.functions');
+  pece_artifacts_autofill_file_format($node);
+  $use_fieldsite_location = field_get_items('node', $node, 'field_pece_use_fieldsite_local');
+  if (!empty($use_fieldsite_location[0]['value'])) {
+    // Remove any current data from the artifact's location field.
+    $node->field_pece_location[LANGUAGE_NONE] = array();
 
-  $artifacts = pece_artifacts_fetch_all_types();
-  if (in_array($node->type, $artifacts)) {
-    $use_fieldsite_location = field_get_items('node', $node, 'field_pece_use_fieldsite_local');
-    if (!empty($use_fieldsite_location[0]['value'])) {
-      // Remove any current data from the artifact's location field.
-      $node->field_pece_location[LANGUAGE_NONE] = array();
-
-      $fieldsite_field = field_get_items('node', $node, 'field_pece_fieldsite');
-      if (!empty($fieldsite_field[0]['target_id'])) {
-        $fieldsite = node_load($fieldsite_field[0]['target_id']);
-        $node->field_pece_location = $fieldsite->field_pece_location;
-      }
+    $fieldsite_field = field_get_items('node', $node, 'field_pece_fieldsite');
+    if (!empty($fieldsite_field[0]['target_id'])) {
+      $fieldsite = node_load($fieldsite_field[0]['target_id']);
+      $node->field_pece_location = $fieldsite->field_pece_location;
     }
   }
 }
