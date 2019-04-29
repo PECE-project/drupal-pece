@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_artifacts_bundle.panelizer.inc
@@ -55,12 +56,15 @@ function pece_artifacts_bundle_panelizer_defaults() {
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'title',
-    'formatter' => 'entityreference_label',
+    'formatter' => 'entityreference_entity_view',
     'delta_limit' => '0',
     'delta_offset' => '0',
     'delta_reversed' => 0,
     'formatter_settings' => array(
       'link' => 1,
+      'view_mode' => 'meta_content',
+      'links' => 1,
+      'use_content_language' => 1,
     ),
     'context' => array(),
     'override_title' => 0,
