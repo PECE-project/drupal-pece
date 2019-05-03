@@ -1,5 +1,0 @@
-- name: restart {{ nodejs_app.service }}
-  sudo: true
-  action: service name={{ nodejs_app.service }}-{{ item }} state=restarted
-  with_sequence: start=1 end={{ nodejs_app.workers }}
-  when: nodejs_app.autostart
