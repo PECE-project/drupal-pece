@@ -1,31 +1,9 @@
-.PHONY: run stop clean distro prod
+include docker.mk
 
+.PHONY: test
 
-run:
-	docker-compose run --rm -p 8080:80 dev_pece
+DRUPAL_VER ?= 8
+PHP_VER ?= 7.2
 
-in:
-	docker exec -it $(shell docker-compose ps | grep _dev_ | cut -d" " -f 1) /bin/bash
-
-stop:
-	docker-compose stop
-
-clean:
-	docker-compose down
-	rm -rf ./node_modules
-	rm -rf ./cnf
-	rm -rf ./builds
-	rm -rf ./build
-
-distro-clean:
-	docker-compose down
-	rm -rf ./build
-
-prod:
-	docker-compose run --rm -p 8080:80 production
-
-distro: distro-clean
-	docker-compose run --rm production gulp pack-distro
-
-run-php7:
-	docker-compose -f docker-compose-php7.2.yml run --rm -p 8080:80 dev_pece
+test:
+	cd ./tests/$(DRUPAL_VER) && PHP_VER=$(PHP_VER) ./run.sh

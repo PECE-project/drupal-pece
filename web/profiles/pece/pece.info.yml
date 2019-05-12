@@ -1,0 +1,46 @@
+name: PECE
+type: profile
+description: 'PECE profile.'
+core: 8.x
+
+distribution:
+  name: PECE
+  langcode: en
+
+# Modules to install to support the profile.
+install:
+  - history
+  - block_content
+  - breakpoint
+  - color
+  - config
+  - comment
+  - contextual
+  - contact
+  - quickedit
+  - help
+  - image
+  - options
+  - path
+  - taxonomy
+  - dblog
+  - search
+  - shortcut
+  - toolbar
+  - field_ui
+  - file
+  - rdf
+  - views
+  - views_ui
+  - editor
+  - ckeditor
+  - config_split
+
+dependencies:
+  - node
+  - block
+  - views
+
+themes:
+  - bartik
+  - seven

@@ -1,6 +1,0 @@
----
-- name: restart php-fpm
-  service: name={{php_fpm_binary_name}} state=restarted
-
-- name: reload php-fpm
-  service: name={{php_fpm_binary_name}} state=reloaded

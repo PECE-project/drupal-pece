@@ -1,224 +1,164 @@
-# Platform for Experimental and Collaborative Ethnography (PECE)
+# Composer template for Drupal projects with docker
 
-PECE is a Free and Open Source (Drupal-based) digital platform that supports
-multi-sited, cross-scale ethnographic and historical research. PECE is built
-as a [Drupal distribution](https://www.drupal.org/documentation/build/distributions)
-to be improved and extended like any other Drupal project.
+This project is based from https://github.com/drupal-composer/drupal-project and https://github.com/wodby/docker4drupal
 
-This repository contains the **development code** for PECE. It has work in progress which
-is intended to be used by developers to suggest bug fixes and improvements,
-as well as a starting point for customizations of the platform. If you are a
-developer wishing to contribute to the development process, this is the
-repository you must use.
+## Depedencies
+- Docker
+- Docker Compose
+- Make
+- Composer
 
-If you are an end-user looking for stable PECE releases, please access the repository
-[PECE-distro](https://github.com/PECE-project/pece-distro), which contains our
-installation package with the latest stable version. If you have general questions about
-the platform, please refer to our [complete documentation](http://pece.readthedocs.io/en/latest/).
+## Usage
 
+1- Install Docker
 
-## Prerequisites
+2- Install docker-compose
 
-PECE development is made easy by using the following software projects:
+After that you can create the project:
 
-- [Node.js](https://nodejs.org/en/) JavaScript runtime;
-- [Gulp](http://gulpjs.com/) task runner;
-- [Drush](http://docs.drush.org/) command line interface;
-- [Kraftwagen](http://kraftwagen.org/) Drush extension;
-- [Drupal](https://www.drupal.org/requirements).
+```
+composer composer create-project nyxtechnology/drupal-project:dev-master some-dir --no-interaction
+```
+---
+3- Rename .env.example to .env and if necessary, change the variables.
 
-Keep in mind that these are prerequisites for the *development environment* of
-the PECE project, not for the end-user software. In other words, you will
-not need to follow these instructions if you are only interested in installing
-and running PECE. Please, refer to our [official
-documentation](http://pece.readthedocs.io/en/latest/installation.html) if you are
-looking for instructions for regular PECE installation and usage.
+#### 3.1 - Only Mac users
 
-### Installing Node.js
+Update this lines
 
-We strongly suggest you to use [nvm](https://github.com/creationix/nvm) to install Node.js on your development machine. You must have Node.js version 4.x.x and *npm* version 3.x.x, at least.
+.env file
 
-**1. To install *nvm*** run the following on you terminal:
+`Change PHP_TAG to use macos images.`
 
-```sh
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+In docker-compose.override.yml, search for `For macOS users` comment.
+
+More information: https://wodby.com/docs/stacks/drupal/local/#docker-for-mac for you choice between cache or docker-sync
+
+---
+
+4- Run command `make up`
+
+5- Try access http://drupal.docker.local
+
+6- If you need GraphQl, after drupal installation, enable the graphql module in http://drupal.docker.local/admin/modules
+
+Look docker.mk to see others make commands and read .env about database settings
+
+```
+cd some-dir
+composer require drupal/devel:~1.0
 ```
 
-After doing so, you will probably have to open a new terminal to have *nvm* available as a command. Visit nvm's [official installation guide](https://github.com/creationix/nvm#install-script) if you have any questions.
+The `composer create-project` command passes ownership of all files to the 
+project that is created. You should create a new git repository, and commit 
+all files not excluded by the .gitignore file.
 
-**2. To install Node.js version 4.x.x** run the following on you terminal:
+## What does the template do?
 
-```sh
-nvm install 4.x.x
-nvm use 4.x.x
+When installing the given `composer.json` some tasks are taken care of:
+
+* Drupal will be installed in the `web`-directory.
+* Autoloader is implemented to use the generated composer autoloader in `vendor/autoload.php`,
+  instead of the one provided by Drupal (`web/vendor/autoload.php`).
+* Modules (packages of type `drupal-module`) will be placed in `web/modules/contrib/`
+* Theme (packages of type `drupal-theme`) will be placed in `web/themes/contrib/`
+* Profiles (packages of type `drupal-profile`) will be placed in `web/profiles/contrib/`
+* Creates default writable versions of `settings.php` and `services.yml`.
+* Creates `web/sites/default/files`-directory.
+* Latest version of drush is installed locally for use at `vendor/bin/drush`.
+* Latest version of DrupalConsole is installed locally for use at `vendor/bin/drupal`.
+* Creates environment variables based on your .env file. See [.env.example](.env.example).
+* Graphql module
+
+## Updating Drupal Core
+
+This project will attempt to keep all of your Drupal Core files up-to-date; the 
+project [drupal-composer/drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold) 
+is used to ensure that your scaffold files are updated every time drupal/core is 
+updated. If you customize any of the "scaffolding" files (commonly .htaccess), 
+you may need to merge conflicts if any of your modified files are updated in a 
+new release of Drupal core.
+
+Follow the steps below to update your core files.
+
+1. Run `composer update drupal/core webflo/drupal-core-require-dev "symfony/*" --with-dependencies` to update Drupal Core and its dependencies.
+1. Run `git diff` to determine if any of the scaffolding files have changed. 
+   Review the files for any changes and restore any customizations to 
+  `.htaccess` or `robots.txt`.
+1. Commit everything all together in a single commit, so `web` will remain in
+   sync with the `core` when checking out branches or running `git bisect`.
+1. In the event that there are non-trivial conflicts in step 2, you may wish 
+   to perform these steps on a branch, and use `git merge` to combine the 
+   updated core files with your customized files. This facilitates the use 
+   of a [three-way merge tool such as kdiff3](http://www.gitshah.com/2010/12/how-to-setup-kdiff-as-diff-tool-for-git.html). This setup is not necessary if your changes are simple; 
+   keeping all of your modifications at the beginning or end of the file is a 
+   good strategy to keep merges easy.
+
+## Generate composer.json from existing project
+
+With using [the "Composer Generate" drush extension](https://www.drupal.org/project/composer_generate)
+you can now generate a basic `composer.json` file from an existing project. Note
+that the generated `composer.json` might differ from this project's file.
+
+
+## FAQ
+
+### Should I commit the contrib modules I download?
+
+Composer recommends **no**. They provide [argumentation against but also 
+workrounds if a project decides to do it anyway](https://getcomposer.org/doc/faqs/should-i-commit-the-dependencies-in-my-vendor-directory.md).
+
+### Should I commit the scaffolding files?
+
+The [drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold) plugin can download the scaffold files (like
+index.php, update.php, …) to the web/ directory of your project. If you have not customized those files you could choose
+to not check them into your version control system (e.g. git). If that is the case for your project it might be
+convenient to automatically run the drupal-scaffold plugin after every install or update of your project. You can
+achieve that by registering `@composer drupal:scaffold` as post-install and post-update command in your composer.json:
+
+```json
+"scripts": {
+    "post-install-cmd": [
+        "@composer drupal:scaffold",
+        "..."
+    ],
+    "post-update-cmd": [
+        "@composer drupal:scaffold",
+        "..."
+    ]
+},
 ```
+### How can I apply patches to downloaded modules?
 
-Alternatively, you can first clone this repository, change to it's directory, and run `nvm install`. The file ``.nvmrc` will inform *nvm* which version of Node.js it should install and automatically set it as currently version to use.
+If you need to apply patches (depending on the project being modified, a pull 
+request is often a better solution), you can do so with the 
+[composer-patches](https://github.com/cweagans/composer-patches) plugin.
 
-**3. To install the required version of *npm*** you must run the following on your terminal:
-
-```sh
-npm install -g npm@3.x.x
+To add a patch to drupal module foobar insert the patches section in the extra 
+section of composer.json:
+```json
+"extra": {
+    "patches": {
+        "drupal/foobar": {
+            "Patch description": "URL or local path to patch"
+        }
+    }
+}
 ```
+### How do I switch from packagist.drupal-composer.org to packages.drupal.org?
 
-To check if everything went smoothly, run the following on your terminal:
+Follow the instructions in the [documentation on drupal.org](https://www.drupal.org/docs/develop/using-composer/using-packagesdrupalorg).
 
-```sh
-node --version # should echo a number starting with 4
-npm --version # should echo a number starting with 3
+### How do I specify a PHP version ?
+
+This project supports PHP 5.6 as minimum version (see [Drupal 8 PHP requirements](https://www.drupal.org/docs/8/system-requirements/drupal-8-php-requirements)), however it's possible that a `composer update` will upgrade some package that will then require PHP 7+.
+
+To prevent this you can add this code to specify the PHP version you want to use in the `config` section of `composer.json`:
+```json
+"config": {
+    "sort-packages": true,
+    "platform": {
+        "php": "5.6.40"
+    }
+},
 ```
-
-### Installing Gulp
-
-Even though Gulp is not a hard requirement for installing PECE's development
-version, it is currently the main tool for running common tasks which are
-inconvenient if not automated. We strongly suggest you install it to ease
-installation process and avoid mistakes. Keep in mind that the following
-[Getting started](#getting-started) guide will use Gulp. Consider having a look at the full [list of the available tasks](gulp/tasks/README.md).
-
-Gulp is a Node.js package that provides an executable, and can be easily installed with the following command:
-
-```sh
-npm install -g gulp
-```
-
-After doing that, `gulp` command should be available in your terminal. If you find any trouble, please refer to Gulp's [official installation guide](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md).
-
-### Installing Drush
-
-To properly install Drush please follow the [official installing guide](http://docs.drush.org/en/master/install/).
-
-### Installing Kraftwagen
-
-Kraftwagen also provides an [official installation guide](http://kraftwagen.org/get-started.html#installation). Unfortunutelly, we currently use a forked version of the project. You can still follow the instructions on the official installation guide, but the `git clone` should come from [Taller's fork](https://github.com/TallerWebSolutions/kraftwagen/tree/local_workflow_improvements), on the *local_workflow_improvements* branch.
-
-Terminal steps to install:
-
-1. Move to Drush install directory.
-
-```sh
-cd ~/.drush
-```
-
-2. Clone the Taller fork version of Kraftwagen.
-
-```sh
-git clone -b local_workflow_improvements --single-branch git://github.com/TallerWebSolutions/kraftwagen.git
-```
-
-3. Make Drush knows you've installed a new module.
-
-```sh
-drush cc drush
-```
-
-Using Kraftwagen is an important part of the build process. Please make sure you understand its concepts before proceding to the next steps.
-
-## Getting Started
-
-If you follow these instructions you will get a copy of the project up and running on your local machine for development and testing purposes. Proceed to the **Deployment** to learn how to deploy the project on a live system.
-
-### Download
-
-To download the project, simply clone it to your directory of choice as follows:
-
-```sh
-git clone git://github.com/PECE-project/drupal-pece.git
-cd drupal-pece
-```
-
-### Installing dependencies
-
-PECE dependends on a bunch of Node.js packages, which will mostly help building PECE, and Bower packages, which refer to the front-end libraries we use. To install all of these dependencies you can run the following command:
-
-```sh
-npm install
-```
-
-After installing Node.js dependencies, *npm* will automatically perform Bower 'install'.
-
-### Build
-
-Kraftwagen - the tool behind PECE building system - relies on the concept of different *environments* upon building. The two environments in use are:
-
-- **production**
-- **development**
-
-> In the Drupal installation process, the environment config will be responsible for enabling/disabling specific modules. Furthermore, using the *development* environment will also cause for the directory structure to use the *src* directory, using *pece* Drupal profile, inside Drupal's root directory - this means that you can actively engage development using this directory without having to build every time you change something. This technique was introduced as a [pull-request](https://github.com/kraftwagen/kraftwagen/pull/46) to the Kraftwagen project.
-
-Kraftwagen provides many commands through the drush interface. We encapsulate some of them inside 'gulp tasks' with the intend to ease the building and configuration steps.
-
-#### 1. Setup the Kraftwagen workspace:
-
-```sh
-gulp setup
-```
-
-You'll then be prompted to define the environment (defaults to production) and the posterior database configuration.
-
-> The database configuration provided here is only used to connect to the database, not to create it; prior to proceeding with the install you should make sure to create the database and make it properly available via the settings provided on this step.
-
-#### 2. Download Drupal and contributed modules to build the distro:
-
-```sh
-gulp build
-```
-
-#### 3. Configure the server
-
-Now you should have the directory *build* already created as Drupal's root. You should go forward and configure Apache, Nginx, or whichever HTTP server you find best. Remember to point the site's root directory to the *build* directory, not to the cloned repository's root.
-
-#### 4. Setup permissions
-
-Drupal requires you give permission for the HTTP server user to write to the files directory. This is a crucial step in order to continue the installation process. Pre and post-configuration steps must be taken in order to ensure that proper permissions are set. Please refer to the [official Drupal documention on how to properly setup the permissions](https://www.drupal.org/documentation/install/settings-file) in your server backend. 
-
-#### 5. Installing Drupal
-
-There are currently two methods for installing a new PECE instance: via command-line or using the web browser.
-
-##### 5.1 Using the browser
-
-In your browser, access the url `/install.php`, preceded with the domain serving the site. The install process is self-explanatory. Keep in mind it takes a while to finish (up to 30 minutes on low-end configuration servers).
-
-##### 5.2 Using the command-line
-
-There is a one-command install available through Gulp. Keep in mind that this command will erase any currently available data on the database configured on step 1. To proceed, run the following:
-
-```sh
-gulp site-install
-```
-
-> If the user running the Gulp task differs from the user which is being used by the web server, you will need to redo step 4 in other to make sure the server has proper permission to manage files.
-
-
-#### 6. (Optional) Adding demo content
-
-PECE comes with a script to add some testing content. To execute it, run:
-
-```sh
-gulp demo
-```
-
-Alternatively, you can do it in your browser by accessing Configuration > Development > PECE Demo (or `/admin/config/development/pece/demo`). This route will only be available if you configured the environment to *development* or if you enabled `pece_demo` module.
-
-## Running the tests
-
-TODO
-
-## Deployment
-
-TODO
-
-## Contributing
-
-Contribution should be done [using pull requests](https://help.github.com/articles/using-pull-requests) to this repository. We keep the `master` branch current with tested, stable code. The branch `dev` is used for the on-going development tasks, new features, and bug fixes.
-
-Our [Contributors' guide](http://pece.readthedocs.io/en/latest/contributors.html) contains all the information you will need to know about the project before submitting your contribution. Please read it before sending us pull requests.
-
-## Authors
-
-Our official documentation contains the information on authorship for the design and implementation tasks of the platform. Please check the document [PECE Team](http://pece.readthedocs.io/en/latest/team.html) for more information.
-
-## License
-
-All the code produced for PECE is released under the GNU GPL version 3. Please, read our [legal documents for more information](http://pece.readthedocs.io/en/latest/legal.html).
