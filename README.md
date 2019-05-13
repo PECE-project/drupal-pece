@@ -14,12 +14,6 @@ This project is based from https://github.com/drupal-composer/drupal-project and
 
 2- Install docker-compose
 
-After that you can create the project:
-
-```
-composer composer create-project nyxtechnology/drupal-project:dev-master some-dir --no-interaction
-```
----
 3- Rename .env.example to .env and if necessary, change the variables.
 
 #### 3.1 - Only Mac users
