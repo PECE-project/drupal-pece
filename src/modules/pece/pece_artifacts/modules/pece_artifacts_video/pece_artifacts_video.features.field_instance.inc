@@ -908,7 +908,7 @@ function pece_artifacts_video_field_default_field_instances() {
       'settings' => array(
         'allowed_schemes' => array(
           'private' => 'private',
-          'public' => 0,
+          'public' => 'public',
           'vimeo' => 0,
           'youtube' => 0,
         ),
