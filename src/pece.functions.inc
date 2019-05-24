@@ -218,3 +218,34 @@ function _pece_is_researcher($account) {
   $contributor_role = user_role_load_by_name('Researcher');
   return (in_array($contributor_role->rid, array_keys($account->roles)));
 }
+
+/**
+ * Update Artifact's media fields settings (audio, image, pdf, video).
+ */
+function _pece_artifacts_media_field_settings_update() {
+  $artifatct_fields = array(
+    'pece_artifact_audio' => 'field_pece_media_audio',
+    'pece_artifact_image' => 'field_pece_media_image',
+    'pece_artifact_pdf' => 'field_pece_media_pdf',
+    'pece_artifact_video' => 'field_pece_media_video',
+  );
+  foreach ($artifatct_fields as $node_type => $field_name) {
+    _pece_artifacts_set_public_allowed_schema($node_type, $field_name);
+  }
+}
+
+/**
+ * Add Public to allowed_scheme on a given field of a node.
+ *
+ * @param $node_type
+ * @param $field_name
+ * @throws \FieldException
+ */
+function _pece_artifacts_set_public_allowed_schema($node_type, $field_name) {
+  // Fetch an instance info array.
+  $field_instance_info = field_info_instance('node', $field_name, $node_type);
+  // Change a single property in the instance definition.
+  $field_instance_info ['widget']['settings']['allowed_schemes']['public'] = 'public';
+  // Write the changed definition back.
+  field_update_instance($field_instance_info);
+}
