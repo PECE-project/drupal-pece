@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_artifacts_image.panelizer.inc
