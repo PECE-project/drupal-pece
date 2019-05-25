@@ -242,10 +242,7 @@ function _pece_artifacts_media_field_settings_update() {
  * @throws \FieldException
  */
 function _pece_artifacts_set_public_allowed_schema($node_type, $field_name) {
-  // Fetch an instance info array.
   $field_instance_info = field_info_instance('node', $field_name, $node_type);
-  // Change a single property in the instance definition.
   $field_instance_info ['widget']['settings']['allowed_schemes']['public'] = 'public';
-  // Write the changed definition back.
   field_update_instance($field_instance_info);
 }
