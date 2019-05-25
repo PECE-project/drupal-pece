@@ -28,11 +28,11 @@ libraries[jquery.imagesloaded][download][subtree] = imagesloaded-2.1.2
 ; Misc Libraries
 
 libraries[imagesloaded][download][type] = file
-libraries[imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v4.1.4.tar.gz
-libraries[imagesloaded][download][subtree] = imagesloaded-4.1.4
+libraries[imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz
+libraries[imagesloaded][download][subtree] = imagesloaded-2.1.2
 
 libraries[imgareaselect][download][type] = file
-libraries[imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v1.0.0-rc.1.tar.gz
+libraries[imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v0.9.11-rc.1.tar.gz
 libraries[imgareaselect][directory_name] = jquery.imgareaselect
 
 libraries[phpmailer][download][type] = git
