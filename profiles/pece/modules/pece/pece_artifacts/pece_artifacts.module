@@ -58,6 +58,10 @@ function pece_artifacts_autofill_file_format($node) {
  * Implements hook_form_alter().
  */
 function pece_artifacts_form_alter(&$form, &$form_state, $form_id) {
+  if($form_id == 'file_entity_add_upload') {
+    _pece_artifacts_file_entity_deny_schema_update_form_alter($form, $form_state);
+  }
+
   module_load_include('inc', 'pece_artifacts', 'pece_artifacts.functions');
 
   $artifacts = pece_artifacts_fetch_all_types();
@@ -88,6 +92,17 @@ function _pece_artifacts_form_pece_artifact_form_alter(&$form, &$form_state) {
     $form['field_pece_location']['#states']['visible']['#edit-field-pece-use-fieldsite-local input'] = array(
       'checked' => FALSE,
     );
+  }
+}
+
+/**
+ * Deny users changing schema destination on media browser file upload.
+ */
+function _pece_artifacts_file_entity_deny_schema_update_form_alter(&$form, &$form_state) {
+  global $user;
+  module_load_include('inc', 'pece', 'pece.functions');
+  if (!_pece_is_admin($user)) {
+    $form['scheme']['#access'] = FALSE;
   }
 }
 
