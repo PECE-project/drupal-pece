@@ -138,7 +138,7 @@ projects[masonry_views][subdir] = contrib
 ; Administration
 ; =====================
 
-projects[admin_menu][version] = 3.0-rc5
+projects[admin_menu][version] = 3.0-rc6
 projects[admin_menu][subdir]  = contrib
 projects[admin_menu][patch][2929025] = https://www.drupal.org/files/issues/admin-menu-2929025-each-function-deprecated-php-7.2.patch
 
