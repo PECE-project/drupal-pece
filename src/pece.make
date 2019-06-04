@@ -89,10 +89,6 @@ libraries[bgrins-spectrum][download][url] =  https://github.com/bgrins/spectrum/
 projects[features][version] = 2.11
 projects[features][subdir] = contrib
 
-; Overrides panopoly's uuid.
-projects[uuid][version] = 1.2
-projects[uuid][subdir] = contrib
-
 projects[xautoload][version] = 5.7
 projects[xautoload][subdir]  = contrib
 
