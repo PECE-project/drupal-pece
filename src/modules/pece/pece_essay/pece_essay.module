@@ -7,6 +7,71 @@
 include_once 'pece_essay.features.inc';
 
 /**
+ * Configures a default Featured Essay pane.
+ */
+function _pece_essay_ensure_featured_essay_pane() {
+  module_load_include('inc', 'kw_itemnames');
+
+  $item_values = array(
+    'title' => t('Featured Essay'),
+    'bundle' => 'pece_fpp_featured_essay_pane',
+    'uid' => 1,
+    'language' => LANGUAGE_NONE,
+  );
+
+  kw_itemnames_ensure('fieldable_panels_pane', 'featuredEssay', $item_values, array());
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function pece_essay_block_info() {
+  $blocks['featured_essay'] = array(
+    'info' => t('Featured Essay'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function pece_essay_block_view($delta) {
+
+  switch ($delta) {
+    case 'featured_essay':
+      global $user;
+      module_load_include('inc', 'pece', 'pece.functions');
+      module_load_include('install', 'pece_essay');
+
+      $block['subject'] = '';
+      $title = t('Featured Essay');
+      $content_prefix = '<div class="pane-pece-recent-essays-panel-pane-featured">';
+      $content_suffix = '</div>';
+      $content = '';
+
+      _pece_essay_ensure_featured_essay_pane();
+      $fpp_featured_essay = kw_itemnames_load('fieldable_panels_pane', 'featuredEssay');
+      if (_pece_is_admin($user) && !empty($fpp_featured_essay->fpid)) {
+        $path = 'admin/structure/fieldable-panels-panes/view/' . $fpp_featured_essay->fpid . '/edit';
+        $content .= l('Edit Featured Essay', $path);
+      }
+      $content .= '<h3 class="pece-featured-essay pane-title">' . $title . '</h3>';
+      if (empty($fpp_featured_essay->field_pece_featured_essay)) {
+        $content .= views_embed_view('pece_recent_essays', 'random_featured');
+      } else {
+        $content .= drupal_render(entity_view('fieldable_panels_pane', array($fpp_featured_essay), 'highlighted'));
+      }
+
+      return $block = array(
+        'subject' => $block['subject'],
+        'content' => $content_prefix . $content . $content_suffix,
+      );
+      break;
+  }
+}
+
+/**
  * Implements hook_ctools_plugin_directory().
  */
 function pece_essay_ctools_plugin_directory($module, $plugin) {
