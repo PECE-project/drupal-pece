@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_homepage.pages_default.inc
@@ -81,26 +82,26 @@ function pece_homepage_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
-  $pane->pid = 'new-f3bca11c-1639-4dd7-9e3a-325f80fee7ed';
+  $pane->pid = 'new-66fb2d1e-9df0-465c-8b81-b4b30b8c3863';
   $pane->panel = 'contentbottom';
-  $pane->type = 'views_panes';
-  $pane->subtype = 'pece_recent_essays-panel_pane_featured';
+  $pane->type = 'block';
+  $pane->subtype = 'pece_essay-featured_essay';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'view_mode' => 'highlighted',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
   );
   $pane->cache = array();
-  $pane->style = array(
-    'settings' => NULL,
-  );
+  $pane->style = array();
   $pane->css = array();
   $pane->extras = array();
   $pane->position = 0;
   $pane->locks = array();
-  $pane->uuid = 'f3bca11c-1639-4dd7-9e3a-325f80fee7ed';
-  $display->content['new-f3bca11c-1639-4dd7-9e3a-325f80fee7ed'] = $pane;
-  $display->panels['contentbottom'][0] = 'new-f3bca11c-1639-4dd7-9e3a-325f80fee7ed';
+  $pane->uuid = '66fb2d1e-9df0-465c-8b81-b4b30b8c3863';
+  $display->content['new-66fb2d1e-9df0-465c-8b81-b4b30b8c3863'] = $pane;
+  $display->panels['contentbottom'][0] = 'new-66fb2d1e-9df0-465c-8b81-b4b30b8c3863';
   $pane = new stdClass();
   $pane->pid = 'new-ca214dea-68ff-4597-b5e6-e444ce6a481c';
   $pane->panel = 'contentfooter';
