@@ -11,6 +11,57 @@
 function pece_essay_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance:
+  // 'fieldable_panels_pane-pece_fpp_featured_essay_pane-field_pece_featured_essay'.
+  $field_instances['fieldable_panels_pane-pece_fpp_featured_essay_pane-field_pece_featured_essay'] = array(
+    'bundle' => 'pece_fpp_featured_essay_pane',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Set a Essay to be featured at home page. If no value is provided a random Essay will be show each time the home page is loaded.',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'er_viewmode',
+        'settings' => array(
+          'links' => 0,
+          'use_content_language' => 1,
+          'view_mode' => 'highlighted',
+        ),
+        'type' => 'entityreference_entity_view',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'entityconnect' => array(
+      'button' => array(
+        'unload_add_button' => 1,
+        'unload_edit_button' => 1,
+      ),
+      'icon' => array(
+        'show_add_icon' => 0,
+        'show_edit_icon' => 0,
+      ),
+    ),
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_pece_featured_essay',
+    'label' => 'Featured Essay',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'node-pece_essay-body'.
   $field_instances['node-pece_essay-body'] = array(
     'bundle' => 'pece_essay',
@@ -899,10 +950,12 @@ function pece_essay_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Contributors');
   t('Description');
+  t('Featured Essay');
   t('Group content visibility');
   t('Groups audience');
   t('License');
   t('Permissions');
+  t('Set a Essay to be featured at home page. If no value is provided a random Essay will be show each time the home page is loaded.');
   t('Tags');
   t('Thumbnail');
   t('URI');
