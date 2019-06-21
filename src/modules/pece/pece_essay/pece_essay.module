@@ -62,6 +62,9 @@ function pece_essay_block_view($delta) {
       } else {
         $content .= drupal_render(entity_view('fieldable_panels_pane', array($fpp_featured_essay), 'highlighted'));
       }
+      if (strpos($content, 'node-pece-essay') === FALSE) {
+        return;
+      }
 
       return $block = array(
         'subject' => $block['subject'],
