@@ -452,7 +452,7 @@ projects[gmap][version] = 2.11
 
 ; External link
 projects[extlink][subdir] = contrib
-projects[extlink][version] = 1.18
+projects[extlink][version] = 1.20
 
 ; Real Name
 projects[realname][subdir] = contrib
