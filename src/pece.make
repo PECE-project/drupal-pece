@@ -257,7 +257,7 @@ projects[panopoly_users][version] = 1.69
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.68
+projects[panopoly_pages][version] = 1.69
 projects[panopoly_pages][subdir] = contrib
 
 projects[panopoly_search][version] = 1.68
