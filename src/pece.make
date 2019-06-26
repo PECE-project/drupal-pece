@@ -526,8 +526,7 @@ projects[feeds][version] = 2.0-beta4
 
 ; Bibliography
 projects[biblio][subdir] = contrib
-projects[biblio][version] = 1.0-rc9
-;projects[biblio][patch][2806971] = https://www.drupal.org/files/issues/biblio-fix_php7_issues-2806971-19.patch
+projects[biblio][version] = 1.0
 
 ; Bibliography Zotero
 projects[biblio_zotero][subdir] = contrib
