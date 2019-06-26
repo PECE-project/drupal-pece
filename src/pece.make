@@ -414,7 +414,7 @@ projects[l10n_update][version] = 2.2
 
 ; Organic groups
 projects[og][subdir] = contrib
-projects[og][version] = 2.9
+projects[og][version] = 2.10
 
 ; Email
 projects[email][subdir] = contrib
