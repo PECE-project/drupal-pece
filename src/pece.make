@@ -128,7 +128,7 @@ projects[views_litepager][subdir] = contrib
 projects[tvi][version] = 1.0
 projects[tvi][subdir] = contrib
 
-projects[better_exposed_filters][version] = 3.5
+projects[better_exposed_filters][version] = 3.6
 projects[better_exposed_filters][subdir] = contrib
 
 projects[masonry][version] = 3.0-beta1
