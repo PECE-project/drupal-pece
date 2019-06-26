@@ -226,12 +226,9 @@ projects[panels][subdir] = contrib
 projects[panels][patch][1570120] = https://www.drupal.org/files/issues/move-image-1570120-31.patch
 projects[panels][patch][2897658] = https://www.drupal.org/files/issues/panels-menu-block-ipe-2897658-3.patch
 
-projects[fieldable_panels_panes][version] = 1.11
+projects[fieldable_panels_panes][version] = 1.13
 projects[fieldable_panels_panes][subdir] = contrib
 projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/issues/fieldable_panels_panes--access_hook--2814117-1.patch
-; Panopoly's v1.57 patches.
-projects[fieldable_panels_panes][patch][2826205] = https://www.drupal.org/files/issues/fieldable_panels_panes-n2826205-39.patch
-projects[fieldable_panels_panes][patch][3019270] = https://www.drupal.org/files/issues/2018-12-10/2848997-cant-access-admin-too-many-redirects.patch
 
 ; =====================
 ; Panopoly
