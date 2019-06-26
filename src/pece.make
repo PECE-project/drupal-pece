@@ -134,7 +134,7 @@ projects[better_exposed_filters][subdir] = contrib
 projects[masonry][version] = 3.0-beta1
 projects[masonry][subdir] = contrib
 
-projects[masonry_views][version] = 3.0-beta1
+projects[masonry_views][version] = 3.0
 projects[masonry_views][subdir] = contrib
 
 ; =====================
