@@ -85,6 +85,10 @@ libraries[bgrins-spectrum][download][url] =  https://github.com/bgrins/spectrum/
 ; @TODO: Update and reapply the following patch if needed. @see https://www.drupal.org/project/ctools/issues/2671150
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
 
+; Overrides panopoly's Libraries.
+projects[libraries][version] = 2.5
+projects[libraries][subdir] = contrib
+
 ; Overrides panopoly's features.
 projects[features][version] = 2.11
 projects[features][subdir] = contrib
