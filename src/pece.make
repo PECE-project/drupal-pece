@@ -292,7 +292,7 @@ projects[radix_views][subdir] = contrib
 ; Entities
 ; =====================
 
-projects[eck][version] = 2.0-rc9
+projects[eck][version] = 2.0-rc10
 projects[eck][subdir]  = contrib
 
 projects[entity_view_mode][version] = 1.0-rc1
