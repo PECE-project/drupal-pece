@@ -113,12 +113,11 @@ projects[site_notice][subdir] = contrib
 ; =====================
 
 ; Overrides panopoly's views to apply custom patches.
-projects[views][version] = 3.22
+projects[views][version] = 3.23
 projects[views][subdir] = contrib
 ; Applies Panopoly's specific patches.
 projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
 projects[views][patch][2977851] = https://www.drupal.org/files/issues/2019-03-13/2977851-views-php72-count-8.patch
-projects[views][patch][2885660] = https://www.drupal.org/files/issues/2018-06-28/2885660-13.patch
 
 projects[views_infinite_scroll][version] = 2.1
 projects[views_infinite_scroll][subdir] = contrib
