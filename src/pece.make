@@ -410,7 +410,7 @@ projects[rules][patch][2189645] = https://www.drupal.org/files/issues/d7_compone
 
 ; Translation
 projects[l10n_update][subdir] = contrib
-projects[l10n_update][version] = 2.0
+projects[l10n_update][version] = 2.2
 
 ; Organic groups
 projects[og][subdir] = contrib
