@@ -54,7 +54,11 @@ function pece_essay_block_view($delta) {
       $fpp_featured_essay = kw_itemnames_load('fieldable_panels_pane', 'featuredEssay');
       if (_pece_is_admin($user) && !empty($fpp_featured_essay->fpid)) {
         $path = 'admin/structure/fieldable-panels-panes/view/' . $fpp_featured_essay->fpid . '/edit';
-        $content .= l('Edit Featured Essay', $path);
+        $content .= l('Edit Featured Essay', $path, array(
+          'attributes' => array(
+            'class' => 'edit-featured-essay',
+          ),
+        ));
       }
       $content .= '<h3 class="pece-featured-essay pane-title">' . $title . '</h3>';
       if (empty($fpp_featured_essay->field_pece_featured_essay)) {
