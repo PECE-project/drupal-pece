@@ -64,7 +64,10 @@ function pece_essay_block_view($delta) {
       if (empty($fpp_featured_essay->field_pece_featured_essay)) {
         $content .= views_embed_view('pece_recent_essays', 'random_featured');
       } else {
-        $content .= drupal_render(entity_view('fieldable_panels_pane', array($fpp_featured_essay), 'highlighted'));
+        $entity = entity_view('fieldable_panels_pane', array($fpp_featured_essay), 'highlighted');
+        // Hide FPP title field.
+        $entity['fieldable_panels_pane'][$fpp_featured_essay->fpid]['title']['#access'] = FALSE;
+        $content .= drupal_render($entity);
       }
       if (strpos($content, 'view-mode-highlighted') === FALSE) {
         return;
