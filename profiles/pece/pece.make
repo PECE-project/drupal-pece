@@ -171,7 +171,7 @@ projects[total_control][subdir] = contrib
 ; Configuration Management
 ; =====================
 
-projects[diff][version] = 3.3
+projects[diff][version] = 3.4
 projects[diff][subdir] = contrib
 
 ; =====================
