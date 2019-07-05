@@ -521,7 +521,7 @@ projects[services_views][version] = 1.3
 
 ; Job scheduler
 projects[job_scheduler][subdir] = contrib
-projects[job_scheduler][version] = 2.0-alpha3
+projects[job_scheduler][version] = 2.0
 
 ; Feeds
 projects[feeds][subdir] = contrib
