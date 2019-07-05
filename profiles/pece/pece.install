@@ -300,3 +300,20 @@ function pece_update_7108() {
   module_load_include('inc', 'pece', 'pece.functions');
   _pece_artifacts_media_field_settings_update();
 }
+
+/**
+ * Allow Featured Essay customization and update Home page settings.
+ */
+function pece_update_7109() {
+  if (module_exists('features')) {
+    $modules = array(
+      'pece_core',
+      'pece_essay',
+      'pece_homepage'
+    );
+
+    foreach ($modules as $module) {
+      features_revert_module($module);
+    }
+  }
+}
