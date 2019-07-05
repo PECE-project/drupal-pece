@@ -390,7 +390,7 @@ projects[radix][subdir] = contrib
 
 ; Adminimal Theme for admin
 projects[adminimal_theme][type] = theme
-projects[adminimal_theme][version] = 1.24
+projects[adminimal_theme][version] = 1.26
 projects[adminimal_theme][subdir] = contrib
 
 ; PECE Base Theme
