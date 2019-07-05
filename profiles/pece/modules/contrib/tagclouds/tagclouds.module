@@ -62,9 +62,10 @@ function tagclouds_menu() {
  */
 function tagclouds_settings() {
   $options = array(
-        'title,asc' => t('by title, ascending'), 'title,desc' => t('by title, descending'),
-        'count,asc' => t('by count, ascending'), 'count,desc' => t('by count, descending'),
-        'random,none' => t('random'));
+    'title,asc' => t('by title, ascending'), 'title,desc' => t('by title, descending'),
+    'count,asc' => t('by count, ascending'), 'count,desc' => t('by count, descending'),
+    'random,none' => t('random')
+  );
 
   $form['tagclouds_sort_order'] = array(
     '#type' => 'radios',
@@ -113,27 +114,29 @@ function tagclouds_settings() {
   );
 
   $lang = language_list('enabled');
-  if(!empty($lang) && count($lang[1]) > 1){
-    /* select this option if you want language separation and the site 
+  if (!empty($lang) && count($lang[1]) > 1) {
+    /* select this option if you want language separation and the site
            is using node translation rather than entity_translation */
     if (!module_exists('entity_translation')) {
       $form['tagclouds_language_separation'] = array(
-          '#type' => 'checkbox',
-          '#title' => t('Separation of Tags per language for bundles/content types using node translation'),
-          '#default_value' => variable_get('tagclouds_language_separation', 0),
-          '#description' => t('If you have more than one language installed and your content type/bundle is configured to use node translation (one language per node) then this setting would allow you to separate the tags for each language. '),
+        '#type' => 'checkbox',
+        '#title' => t('Separation of Tags per language for bundles/content types using node translation'),
+        '#default_value' => variable_get('tagclouds_language_separation', 0),
+        '#description' => t('If you have more than one language installed and your content type/bundle is configured to use node translation (one language per node) then this setting would allow you to separate the tags for each language. '),
       );
-    } else { //entity translation is enabled
+    }
+    else { //entity translation is enabled
       $form['tagclouds_language_separation_radios'] = array(
-          '#type' => 'radios',
-          '#title' => t('Separation of Tags per language'),
-          '#options' => array('0'=>t('Disable separation by language'),
-                              '1'=>t('Separation of Tags per language for site configured to use node translation (Choose this if you have one language per node , but no entity/field translations for the node fields and your taxonomy/vocabulary is not entity translation enabled)'),
-                              'entity'=>t('Separation of Tags per language per entity. (Choose this if your content type/bundle is configured to use field translation aka entity translation and your tagcloudable taxonomy/vocabulary is translation enabled each term has a translation)')
-                              ),
-          '#default_value' => variable_get('tagclouds_language_separation_radios', '0'),
-          '#description' => t('*Choose tagclouds language separation method.'),
-          '#required'=>TRUE
+        '#type' => 'radios',
+        '#title' => t('Separation of Tags per language'),
+        '#options' => array(
+          '0' => t('Disable separation by language'),
+          '1' => t('Separation of Tags per language for site configured to use node translation (Choose this if you have one language per node , but no entity/field translations for the node fields and your taxonomy/vocabulary is not entity translation enabled)'),
+          'entity' => t('Separation of Tags per language per entity. (Choose this if your content type/bundle is configured to use field translation aka entity translation and your tagcloudable taxonomy/vocabulary is translation enabled each term has a translation)'),
+        ),
+        '#default_value' => variable_get('tagclouds_language_separation_radios', '0'),
+        '#description' => t('*Choose tagclouds language separation method.'),
+        '#required'=>TRUE
       );
     }
   }
@@ -246,16 +249,19 @@ function tagclouds_get_tags($vids, $steps = 6, $size = 60, $display = NULL) {
     $query->fields('td',array('tid', 'vid', 'name', 'description'));
     $query->addExpression('max(n.nid)', 'nid');
     $query->join('taxonomy_index', 'tn', 'td.tid = tn.tid');
-    $query->join('node', 'n', 'tn.nid = n.nid');
+    // $query->join('node', 'n', 'tn.nid = n.nid');
+    $query->innerJoin('node', 'n', 'tn.nid = n.nid');
+    $query->addTag('node_access');
     if (!module_exists('entity_translation')) {
       if (variable_get('tagclouds_language_separation', 0)) {
         $query->condition('n.language', $language->language);
         /* site is using node translation rather than entity_translation
            this will return taxonomy terms for that node translation
-           unfortunately this will not work well for bundles/content types that are 
+           unfortunately this will not work well for bundles/content types that are
            (entity translation enabled /field translated) */
       }
-    } else { // entity translation module is enabled
+    }
+    else { // entity translation module is enabled
       if (variable_get('tagclouds_language_separation_radios', 0)=='entity') {
           /* TODO: would be nice to enhance tagclouds so that a translation enabled field_data_field_example-term-reference (example)
             can be used as a language condition for tid rather than taxonomy_index.  This would work
@@ -268,7 +274,8 @@ function tagclouds_get_tags($vids, $steps = 6, $size = 60, $display = NULL) {
             'source' language = $language.  Using term language is more appropriate
             for entity_translation scenarios*/
           $query->condition('td.language', $language->language);
-      } elseif (variable_get('tagclouds_language_separation_radios', 0) == 1 ) {
+      }
+      elseif (variable_get('tagclouds_language_separation_radios', 0) == 1 ) {
         $query->condition('n.language', $language->language);
       }
     }
@@ -277,16 +284,20 @@ function tagclouds_get_tags($vids, $steps = 6, $size = 60, $display = NULL) {
     $query->groupBy('td.tid')->groupBy('td.vid')->groupBy('td.name');//->groupBy('tn.nid');
     $query->groupBy('td.description HAVING COUNT(*) > 0');
     $query->orderBy('COUNT(*)', 'DESC');
-    if ($size > 0) $query->range(0, $size);
+    if ($size > 0) {
+      $query->range(0, $size);
+    }
 
-    drupal_alter('tagclouds_get_tags_query', $query);
+    drupal_alter('tagclouds_get_tags_query', $query, $size);
 
     $result = $query->execute();
 
     foreach ($result as $tag) {
       $tags[$tag->tid] = $tag;
     }
-    if ($display == NULL) $display = variable_get('tagclouds_display_type', 'style');
+    if ($display == NULL) {
+      $display = variable_get('tagclouds_display_type', 'style');
+    }
     $tags = tagclouds_build_weighted_tags($tags, $steps);
 
     cache_set($cache_name, $tags, 'cache_page', CACHE_TEMPORARY);
@@ -328,7 +339,7 @@ function tagclouds_build_weighted_tags($tags, $steps = 6) {
   // Note: we need to ensure the range is slightly too large to make sure even
   // the largest element is rounded down.
   $range = max(.01, $max - $min) * 1.0001;
-  foreach ($tags_tmp as $key => $value) {
+  foreach($tags_tmp as $key => $value) {
     $tags[$key]->weight = 1 + floor($steps * ($value->weightcount - $min) / $range);
   }
   return $tags;
@@ -345,9 +356,9 @@ function tagclouds_sort_tags($tags, $sort = NULL) {
     $sort = 'title,asc';
     list($sort, $order) = explode(',', variable_get('tagclouds_sort_order', $sort));
   }
- else {
-   list($sort, $order) = explode(',', $sort);
- }
+  else {
+    list($sort, $order) = explode(',', $sort);
+  }
 
   switch ($sort) {
     case 'title':
@@ -396,17 +407,18 @@ function theme_tagclouds_weighted(array $vars) {
     foreach ($terms as $term) {
       if (module_exists('i18n_taxonomy')) {
         $term_name = i18n_taxonomy_term_name($term, $language->language);
-        $term_desc = tagclouds_i18n_taxonomy_term_description($term, $language->language);
-      } else {
+        $term_desc = i18n_taxonomy_term_description($term, $language->language);
+      }
+      else {
         $term_name = $term->name;
         $term_desc = $term->description;
       }
-      
-	  if ($term->count==1 && variable_get("tagclouds_display_node_link", false)) {
+
+    if ($term->count==1 && variable_get("tagclouds_display_node_link", false)) {
         $output .= tagclouds_display_node_link_weight($term_name, $term->tid, $term->nid, $term->weight, $term_desc);
       }
-      else {
-	    $output .= tagclouds_display_term_link_weight($term_name, $term->tid, $term->weight, $term_desc);
+      else{
+        $output .= tagclouds_display_term_link_weight($term_name, $term->tid, $term->weight, $term_desc);
       }
     }
   }
@@ -414,8 +426,9 @@ function theme_tagclouds_weighted(array $vars) {
     foreach ($terms as $term) {
       if (module_exists('i18n_taxonomy')) {
         $term_name = i18n_taxonomy_term_name($term, $language->language);
-        $term_desc = tagclouds_i18n_taxonomy_term_description($term, $language->language);
-      } else {
+        $term_desc = i18n_taxonomy_term_description($term, $language->language);
+      }
+      else {
         $term_name = $term->name;
         $term_desc = $term->description;
       }
@@ -439,7 +452,7 @@ function tagclouds_display_term_link_weight($name, $tid, $weight, $description) 
     $uri = entity_uri('taxonomy_term', $term);
     $uri['options']['attributes']['class'][] = 'tagclouds';
     $uri['options']['attributes']['class'][] = 'level' . $weight;
-    $uri['options']['attributes']['title'] = $description;
+    $uri['options']['attributes']['title'] = decode_entities($description);
     return "<span class='tagclouds-term'>" . l($name, $uri['path'], $uri['options']) . "</span>\n";
   }
 }
@@ -448,9 +461,9 @@ function tagclouds_display_node_link_weight($name, $tid, $nid, $weight, $descrip
   if ($term = taxonomy_term_load($tid) && $node = node_load($nid)) {
     $uri = entity_uri('node', $node);
     $uri['options']['attributes']['class'][] = 'tagclouds';
-	$uri['options']['attributes']['class'][] = 'level' . $weight;
-    $uri['options']['attributes']['title'] = $description;
-	return "<span class='tagclouds-term'>" . l($name, $uri['path'], $uri['options']) . "</span>\n";
+    $uri['options']['attributes']['class'][] = 'level' . $weight;
+    $uri['options']['attributes']['title'] = decode_entities($description);
+    return "<span class='tagclouds-term'>" . l($name, $uri['path'], $uri['options']) . "</span>\n";
   }
 }
 
@@ -462,7 +475,7 @@ function tagclouds_display_node_link_count($name, $tid, $nid, $count, $descripti
   if ($term = taxonomy_term_load($tid) && $node = node_load($nid)) {
     $uri = entity_uri('node', $node);
     $uri['options']['attributes']['class'][] = 'tagclouds';
-    $uri['options']['attributes']['title'] = $description;
+    $uri['options']['attributes']['title'] = decode_entities($description);
     return "<span class='tagclouds-term'>" . l($name, $uri['path'], $uri['options']) . " (" . $count . ")" . "</span>\n";
   }
 }
@@ -471,7 +484,7 @@ function tagclouds_display_term_link_count($name, $tid, $count, $description) {
   if ($term = taxonomy_term_load($tid)) {
     $uri = entity_uri('taxonomy_term', $term);
     $uri['options']['attributes']['class'][] = 'tagclouds';
-    $uri['options']['attributes']['title'] = $description;
+    $uri['options']['attributes']['title'] = decode_entities($description);
     return "<span class='tagclouds-term'>" . l($name, $uri['path'], $uri['options']) . " (" . $count . ")" . "</span>\n";
   }
 }
@@ -495,8 +508,9 @@ function theme_tagclouds_list_box(array $vars) {
 
   if (module_exists('i18n_taxonomy')) {
     $voc_name = i18n_taxonomy_vocabulary_name($vocabulary, $language->language);
-    $voc_desc = tagclouds_i18n_taxonomy_vocabulary_description($vocabulary, $language->language);
-  } else {
+    $voc_desc = i18n_taxonomy_vocabulary_description($vocabulary, $language->language);
+  }
+  else {
     $voc_name = $vocabulary->name;
     $voc_desc = $vocabulary->description;
   }
@@ -590,20 +604,4 @@ function tagclouds_theme() {
  */
 function tagclouds_vocs_load($ids){
   return explode(',',$ids);
-}
-
-/**
- * Get localized term description unfiltered.
- * Adapted from i18n_taxonomy_term_name(). Should moved to i18n, issue http://drupal.org/node/1704658.
- */
-function tagclouds_i18n_taxonomy_term_description($term, $langcode = NULL) {
-  return i18n_taxonomy_vocabulary_mode($term->vid, I18N_MODE_LOCALIZE) ? i18n_string(array('taxonomy', 'term', $term->tid, 'description'), $term->description, array('langcode' => $langcode, 'sanitize' => FALSE)) : $term->description;
-}
-
-/**
- * Get localized vocabulary description.
- * Adapted from i18n_taxonomy_vocabulary_name(). Should moved to i18n, issue http://drupal.org/node/1704658.
- */
-function tagclouds_i18n_taxonomy_vocabulary_description($vocabulary, $langcode = NULL) {
-  return i18n_object_langcode($vocabulary) ? $vocabulary->description : i18n_string(array('taxonomy', 'vocabulary', $vocabulary->vid, 'description'), $vocabulary->description, array('langcode' => $langcode));
 }
