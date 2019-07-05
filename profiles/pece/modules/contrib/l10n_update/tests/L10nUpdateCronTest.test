@@ -12,6 +12,9 @@ class L10nUpdateCronTest extends L10nUpdateTestBase {
 
   protected $batch_output = array();
 
+  /**
+   * {@inheritdoc}
+   */
   public static function getInfo() {
     return array(
       'name' => 'Update translations using cron',
@@ -20,7 +23,10 @@ class L10nUpdateCronTest extends L10nUpdateTestBase {
     );
   }
 
-  function setUp() {
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
     parent::setUp();
     $admin_user = $this->drupalCreateUser(array('administer modules', 'administer site configuration', 'administer languages', 'access administration pages', 'translate interface'));
     $this->drupalLogin($admin_user);
@@ -30,7 +36,7 @@ class L10nUpdateCronTest extends L10nUpdateTestBase {
   /**
    * Tests interface translation update using cron.
    */
-  function testUpdateCron() {
+  public function testUpdateCron() {
     // Set a flag to let the l10n_update_test module replace the project data
     // with a set of test projects.
     variable_set('l10n_update_test_projects_alter', TRUE);
@@ -112,4 +118,5 @@ class L10nUpdateCronTest extends L10nUpdateTestBase {
     $this->assertTrue($current->timestamp > $initial->timestamp, 'Timestamp is updated');
     $this->assertTrue($current->last_checked > $initial->last_checked, 'Last checked is updated');
   }
+
 }

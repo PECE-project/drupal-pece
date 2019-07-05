@@ -12,7 +12,7 @@
  */
 class TranslationsStreamWrapper extends DrupalLocalStreamWrapper {
   /**
-   * Implements abstract public function getDirectoryPath()
+   * Implements abstract public function getDirectoryPath().
    */
   public function getDirectoryPath() {
     return variable_get('l10n_update_download_store', L10N_UPDATE_DEFAULT_TRANSLATION_PATH);
@@ -21,7 +21,8 @@ class TranslationsStreamWrapper extends DrupalLocalStreamWrapper {
   /**
    * Overrides getExternalUrl().
    */
-  function getExternalUrl() {
+  public function getExternalUrl() {
     throw new Exception('PO files URL should not be public.');
   }
+
 }

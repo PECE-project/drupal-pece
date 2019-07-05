@@ -9,7 +9,7 @@
  * Implements Gettext PO stream reader.
  *
  * The PO file format parsing is implemented according to the documentation at
- * http://www.gnu.org/software/gettext/manual/gettext.html#PO-Files
+ * http://www.gnu.org/software/gettext/manual/gettext.html#PO-Files.
  */
 class PoStreamReader implements PoStreamInterface, PoReaderInterface {
 
@@ -228,7 +228,7 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
     if (!$item) {
       return;
     }
-    $header = new PoHeader;
+    $header = new PoHeader();
     $header->setFromString(trim($item->getTranslation()));
     $this->_header = $header;
   }
@@ -240,13 +240,13 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
    * this line ends the current item, it is saved with setItemFromArray() with
    * data from $this->_current_item.
    *
-   * An internal state machine is maintained in this reader using $this->_context
-   * as the reading state. PO items are inbetween COMMENT states (when items have
-   * at least one line or comment inbetween them or indicated by MSGSTR or
-   * MSGSTR_ARR followed immediately by an MSGID or MSGCTXT (when items closely
-   * follow each other).
+   * An internal state machine is maintained in this reader using
+   * $this->_context as the reading state. PO items are in between COMMENT
+   * states (when items have at least one line or comment in between them or
+   * indicated by MSGSTR or MSGSTR_ARR followed immediately by an MSGID or
+   * MSGCTXT (when items closely follow each other).
    *
-   * @return
+   * @return FALSE|NULL
    *   FALSE if an error was logged, NULL otherwise. The errors are considered
    *   non-blocking, so reading can continue, while the errors are collected
    *   for later presentation.
@@ -281,7 +281,6 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
 
       if (!strncmp('#', $line, 1)) {
         // Lines starting with '#' are comments.
-
         if ($this->_context == 'COMMENT') {
           // Already in comment context, add to current comment.
           $this->_current_item['#'][] = substr($line, 1);
@@ -295,18 +294,17 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
           $this->_current_item['#'][] = substr($line, 1);
 
           $this->_context = 'COMMENT';
-          return;
+          return NULL;
         }
         else {
           // A comment following any other context is a syntax error.
           $this->_errors[] = format_string('The translation stream %uri contains an error: "msgstr" was expected but not found on line %line.', $log_vars);
           return FALSE;
         }
-        return;
+        return NULL;
       }
       elseif (!strncmp('msgid_plural', $line, 12)) {
         // A plural form for the current source string.
-
         if ($this->_context != 'MSGID') {
           // A plural form can only be added to an msgid directly.
           $this->_errors[] = format_string('The translation stream %uri contains an error: "msgid_plural" was expected but not found on line %line.', $log_vars);
@@ -333,11 +331,10 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
         $this->_current_item['msgid'][] = $quoted;
 
         $this->_context = 'MSGID_PLURAL';
-        return;
+        return NULL;
       }
       elseif (!strncmp('msgid', $line, 5)) {
         // Starting a new message.
-
         if (($this->_context == 'MSGSTR') || ($this->_context == 'MSGSTR_ARR')) {
           // We are currently in string context, save current item.
           $this->setItemFromArray($this->_current_item);
@@ -346,7 +343,8 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
           $this->_current_item = array();
         }
         elseif ($this->_context == 'MSGID') {
-          // We are currently already in the context, meaning we passed an id with no data.
+          // We are currently already in the context, meaning we passed an id
+          // with no data.
           $this->_errors[] = format_string('The translation stream %uri contains an error: "msgid" is unexpected on line %line.', $log_vars);
           return FALSE;
         }
@@ -358,17 +356,16 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
         $quoted = $this->parseQuoted($line);
         if ($quoted === FALSE) {
           // The message id must be wrapped in quotes.
-          $this->_errors[] = format_string('The translation stream %uri contains an error: invalid format for "msgid" on line %line.', $log_vars, $log_vars);
+          $this->_errors[] = format_string('The translation stream %uri contains an error: invalid format for "msgid" on line %line.', $log_vars);
           return FALSE;
         }
 
         $this->_current_item['msgid'] = $quoted;
         $this->_context = 'MSGID';
-        return;
+        return NULL;
       }
       elseif (!strncmp('msgctxt', $line, 7)) {
         // Starting a new context.
-
         if (($this->_context == 'MSGSTR') || ($this->_context == 'MSGSTR_ARR')) {
           // We are currently in string context, save current item.
           $this->setItemFromArray($this->_current_item);
@@ -394,11 +391,10 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
         $this->_current_item['msgctxt'] = $quoted;
 
         $this->_context = 'MSGCTXT';
-        return;
+        return NULL;
       }
       elseif (!strncmp('msgstr[', $line, 7)) {
         // A message string for a specific plurality.
-
         if (($this->_context != 'MSGID') &&
             ($this->_context != 'MSGCTXT') &&
             ($this->_context != 'MSGID_PLURAL') &&
@@ -436,11 +432,10 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
         $this->_current_item['msgstr'][$this->_current_plural_index] = $quoted;
 
         $this->_context = 'MSGSTR_ARR';
-        return;
+        return NULL;
       }
       elseif (!strncmp("msgstr", $line, 6)) {
         // A string pair for an msgidid (with optional context).
-
         if (($this->_context != 'MSGID') && ($this->_context != 'MSGCTXT')) {
           // Strings are only valid within an id or context scope.
           $this->_errors[] = format_string('The translation stream %uri contains an error: "msgstr" is unexpected on line %line.', $log_vars);
@@ -461,11 +456,11 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
         $this->_current_item['msgstr'] = $quoted;
 
         $this->_context = 'MSGSTR';
-        return;
+        return NULL;
       }
       elseif ($line != '') {
-        // Anything that is not a token may be a continuation of a previous token.
-
+        // Anything that is not a token may be a continuation of a previous
+        // token.
         $quoted = $this->parseQuoted($line);
         if ($quoted === FALSE) {
           // This string must be quoted.
@@ -502,7 +497,7 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
           $this->_errors[] = format_string('The translation stream %uri contains an error: unexpected string on line %line.', $log_vars);
           return FALSE;
         }
-        return;
+        return NULL;
       }
     }
 
@@ -515,6 +510,8 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
       $this->_errors[] = format_string('The translation stream %uri ended unexpectedly at line %line.', $log_vars);
       return FALSE;
     }
+
+    return NULL;
   }
 
   /**
@@ -524,8 +521,10 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
     $plural = FALSE;
 
     $comments = '';
+    $textgroup = 'default';
     if (isset($value['#'])) {
       $comments = $this->shortenComments($value['#']);
+      $textgroup = $this->fetchGroupFromComment($comments);
     }
 
     if (is_array($value['msgstr'])) {
@@ -541,6 +540,7 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
     $item->setPlural($plural);
     $item->setComment($comments);
     $item->setLangcode($this->_langcode);
+    $item->setTextgroup($textgroup);
 
     $this->_last_item = $item;
 
@@ -550,13 +550,13 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
   /**
    * Parses a string in quotes.
    *
-   * @param $string
+   * @param string $string
    *   A string specified with enclosing quotes.
    *
-   * @return
+   * @return string|FALSE
    *   The string parsed from inside the quotes.
    */
-  function parseQuoted($string) {
+  public function parseQuoted($string) {
     if (substr($string, 0, 1) != substr($string, -1, 1)) {
       // Start and end quotes must be the same.
       return FALSE;
@@ -580,10 +580,10 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
   /**
    * Generates a short, one-string version of the passed comment array.
    *
-   * @param $comment
+   * @param string|array $comment
    *   An array of strings containing a comment.
    *
-   * @return
+   * @return string
    *   Short one-string version of the comment.
    */
   private function shortenComments($comment) {
@@ -598,6 +598,29 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
       }
     }
     return trim(substr($comm, 0, -2));
+  }
+
+  /**
+   * Determine a translation text group using a source's comment-string.
+   *
+   * @param string $comment
+   *   Comment string.
+   *
+   * @return string
+   *   The comment's text group.
+   */
+  private function fetchGroupFromComment($comment) {
+    // Only if i18n_string is installed, check for and set textgroups.
+    if (module_exists('i18n_string') && strpos($comment, ':') !== FALSE) {
+      // Fetch available textgroups.
+      $groups = array_keys(i18n_string_group_info());
+      // Parse textgroup from comment (assume default drupal exports).
+      $comment_array = explode(':', $comment);
+      if (!empty($comment_array) && in_array($comment_array[0], $groups)) {
+        return $comment_array[0];
+      }
+    }
+    return 'default';
   }
 
 }

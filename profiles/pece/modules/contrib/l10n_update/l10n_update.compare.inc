@@ -9,7 +9,7 @@
  * Load common APIs.
  */
 // @todo Combine functions differently in files to avoid unnecessary includes.
-// Follow-up issue http://drupal.org/node/1834298
+// Follow-up issue https://www.drupal.org/node/1834298
 require_once __DIR__ . '/l10n_update.translation.inc';
 
 /**
@@ -21,9 +21,9 @@ function l10n_update_flush_projects() {
 }
 
 /**
- * Rebuild project list
+ * Rebuild project list.
  *
- * @param $refresh
+ * @param bool $refresh
  *   TRUE: Refresh project list.
  *
  * @return array
@@ -46,48 +46,17 @@ function l10n_update_build_projects($refresh = FALSE) {
 
     $default_server = l10n_update_default_translation_server();
 
-    if (module_exists('update')) {
-      $projects_info = update_get_available(TRUE);
-    }
     foreach ($projects as $name => $data) {
-
-      // Force update fetch of project data in cases where Drupal's performance
-      // optimized approach is missing out on some projects.
-      // @see http://drupal.org/node/1671570#comment-6216090
-      if (module_exists('update') && !isset($projects_info[$name])) {
-        module_load_include('fetch.inc', 'update');
-        _update_process_fetch_task($data);
-        $available = _update_get_cached_available_releases();
-        if (!empty($available[$name])) {
-          $projects_info[$name] = $available[$name];
+      // For dev releases, remove the '-dev' part and trust the translation
+      // server to fall back to the latest stable release for that branch.
+      if (isset($data['info']['version']) && strpos($data['info']['version'], '-dev')) {
+        if (preg_match("/^(\d+\.x-\d+\.).*$/", $data['info']['version'], $matches)) {
+          // Example matches: 7.x-1.x-dev, 7.x-1.0-alpha1+5-dev => 7.x-1.x.
+          $data['info']['version'] = $matches[1] . 'x';
         }
-      }
-
-      if (isset($projects_info[$name]['releases']) && $projects_info[$name]['project_status'] != 'not-fetched') {
-        // Find out if a dev version is installed.
-        if (preg_match("/^[0-9]+\.x-([0-9]+)\..*-dev$/", $data['info']['version'], $matches)) {
-          // Find a suitable release to use as alternative translation.
-          foreach ($projects_info[$name]['releases'] as $project_release) {
-            // The first release with the same major release number which is not
-            // a dev release is the one. Releases are sorted the most recent first.
-            if ($project_release['version_major'] == $matches[1] &&
-              (!isset($project_release['version_extra']) || $project_release['version_extra'] != 'dev')) {
-              $release = $project_release;
-              break;
-            }
-          }
-        }
-        if (!empty($release['version'])) {
-          $data['info']['version'] = $release['version'];
-        }
-
-        unset($release);
-      }
-      // Without Update module we do a best effort fallback. A development
-      // release will fall back to the corresponding release version.
-      elseif (!isset($projects_info) && isset($data['info']['version'])) {
-        if (preg_match('/[^x](\+\d+)?-dev$/', $data['info']['version'])) {
-          $data['info']['version'] = preg_replace('/(\+\d+)?-dev$/', '', $data['info']['version']);
+        elseif (preg_match("/^(\d+\.).*$/", $data['info']['version'], $matches)) {
+          // Example match: 7.33-dev => 7.x (Drupal core).
+          $data['info']['version'] = $matches[1] . 'x';
         }
       }
 
@@ -121,19 +90,46 @@ function l10n_update_build_projects($refresh = FALSE) {
 }
 
 /**
- * Get update module's project list
+ * Get update module's project list.
  *
  * @return array
+ *   List of projects to be updated.
  */
 function l10n_update_project_list() {
   $projects = array();
   $disabled = variable_get('l10n_update_check_disabled', 0);
-  // Unlike update module, this one has no cache
+  // Unlike update module, this one has no cache.
   _l10n_update_project_info_list($projects, system_rebuild_module_data(), 'module', $disabled);
   _l10n_update_project_info_list($projects, system_rebuild_theme_data(), 'theme', $disabled);
   // Allow other modules to alter projects before fetching and comparing.
   drupal_alter('l10n_update_projects', $projects);
+  l10n_update_remove_disabled_projects($projects);
   return $projects;
+}
+
+/**
+ * Removes disabled projects from the project list.
+ *
+ * @param array $projects
+ *   Array of projects keyed by the project machine name.
+ */
+function l10n_update_remove_disabled_projects(&$projects) {
+  $disabled_projects = variable_get('l10n_update_disabled_projects', array());
+
+  foreach ($disabled_projects as $disabled_name) {
+
+    // Remove projects with matching name either by full string of by wild card.
+    if (strpos($disabled_name, '*') !== FALSE) {
+      $pattern = str_replace('*', '.*?', $disabled_name);
+      $matches = preg_grep('/^' . $pattern . '$/i', array_keys($projects));
+      foreach ($matches as $match) {
+        unset($projects[$match]);
+      }
+    }
+    elseif (isset($projects[$disabled_name])) {
+      unset($projects[$disabled_name]);
+    }
+  }
 }
 
 /**
@@ -141,13 +137,17 @@ function l10n_update_project_list() {
  *
  * Based on _update_process_info_list()
  *
- * @param $projects
- * @param $list
- * @param $project_type
- * @param $disabled
- *   TRUE to include disabled projects too
+ * @param array $projects
+ *   The list of projects to populate.
+ * @param array $list
+ *   System module list as returned by system_rebuild_module_data() or
+ *   system_rebuild_theme_data().
+ * @param string $project_type
+ *   The project type to process: 'theme' or 'module'.
+ * @param bool $disabled
+ *   TRUE to include disabled projects too.
  */
-function _l10n_update_project_info_list(&$projects, $list, $project_type, $disabled = FALSE) {
+function _l10n_update_project_info_list(array &$projects, array $list, $project_type, $disabled = FALSE) {
   foreach ($list as $file) {
     if (!$disabled && empty($file->status)) {
       // Skip disabled modules or themes.
@@ -207,14 +207,19 @@ function _l10n_update_project_info_list(&$projects, $list, $project_type, $disab
 }
 
 /**
- * Given a $file object (as returned by system_rebuild_module_data()), figure
- * out what project it belongs to.
+ * Given a file object figure out what project it belongs to.
  *
- * Based on update_get_project_name().
+ * Uses a file object as returned by system_rebuild_module_data(). Based on
+ * update_get_project_name().
  *
- * @param $file
+ * @param object $file
+ *   Project info file object.
+ *
  * @return string
+ *   The project's machine name this file belongs to.
+ *
  * @see system_get_files_database()
+ * @see update_get_project_name()
  */
 function l10n_update_get_project_name($file) {
   $project_name = '';
@@ -250,10 +255,8 @@ function l10n_update_default_translation_server() {
  * @param string $langcodes
  *   Array of language codes. Defaults to all translatable languages.
  *
- * @return array
- *   Available sources indexed by project and language.
+ * @todo Return batch array or NULL
  */
-// @todo Return batch or NULL
 function l10n_update_check_projects($projects = array(), $langcodes = array()) {
   if (l10n_update_use_remote_source()) {
     // Retrieve the status of both remote and local translation sources by
@@ -277,7 +280,7 @@ function l10n_update_check_projects($projects = array(), $langcodes = array()) {
  *
  * @param array $projects
  *   Array of project names to check. Defaults to all translatable projects.
- * @param string $langcodes
+ * @param array $langcodes
  *   Array of language codes. Defaults to all translatable languages.
  */
 function l10n_update_check_projects_batch($projects = array(), $langcodes = array()) {
@@ -323,8 +326,7 @@ function l10n_update_batch_status_build($projects = array(), $langcodes = array(
 }
 
 /**
- * Helper function to construct batch operations checking remote translation
- * status.
+ * Constructs batch operations checking remote translation status.
  *
  * @param array $projects
  *   Array of project names to be processed.
@@ -336,13 +338,20 @@ function l10n_update_batch_status_build($projects = array(), $langcodes = array(
  * @return array
  *   Array of batch operations.
  */
-function _l10n_update_batch_status_operations($projects, $langcodes, $options = array()) {
+function _l10n_update_batch_status_operations(array $projects, array $langcodes, array $options = array()) {
   $operations = array();
 
   foreach ($projects as $project) {
     foreach ($langcodes as $langcode) {
       // Check status of local and remote translation sources.
-      $operations[] = array('l10n_update_batch_status_check', array($project, $langcode, $options));
+      $operations[] = array(
+        'l10n_update_batch_status_check',
+        array(
+          $project,
+          $langcode,
+          $options,
+        ),
+      );
     }
   }
 

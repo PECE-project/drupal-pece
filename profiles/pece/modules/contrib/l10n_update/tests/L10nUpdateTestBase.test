@@ -31,7 +31,10 @@ class L10nUpdateTestBase extends DrupalWebTestCase {
    */
   protected $timestamp_new;
 
-  function setUp() {
+  /**
+   *
+   */
+  public function setUp() {
     parent::setUp('update', 'locale', 'l10n_update', 'l10n_update_test');
 
     // Setup timestamps to identify old and new translation sources.
@@ -56,7 +59,7 @@ class L10nUpdateTestBase extends DrupalWebTestCase {
   /**
    * Adds a language.
    *
-   * @param $langcode
+   * @param string $langcode
    *   The language code of the language to add.
    */
   protected function addLanguage($langcode) {
@@ -74,7 +77,7 @@ class L10nUpdateTestBase extends DrupalWebTestCase {
    *   Path of the file relative to the public file path.
    * @param string $filename
    *   Name of the file to create.
-   * @param integer $timestamp
+   * @param int $timestamp
    *   Timestamp to set the file to. Defaults to current time.
    * @param array $translations
    *   Array of source/target value translation strings. Only singular strings
@@ -99,8 +102,8 @@ EOF;
     // Convert array of translations to Gettext source and translation strings.
     if ($translations) {
       foreach ($translations as $source => $target) {
-        $text .= 'msgid "'. $source . '"' . "\n";
-        $text .= 'msgstr "'. $target . '"' . "\n";
+        $text .= 'msgid "' . $source . '"' . "\n";
+        $text .= 'msgstr "' . $target . '"' . "\n";
       }
     }
 
@@ -151,8 +154,8 @@ EOF;
    * imported.
    */
   protected function setTranslationFiles() {
-    // A flag is set to let the l10n_update_test module replace the project data with
-    // a set of test projects which match the below project files.
+    // A flag is set to let the l10n_update_test module replace the project data
+    // with a set of test projects which match the below project files.
     variable_set('l10n_update_test_projects_alter', TRUE);
 
     // Setup the environment.
@@ -162,7 +165,7 @@ EOF;
 
     // Setting up sets of translations for the translation files.
     $translations_one = array('January' => 'Januar_1', 'February' => 'Februar_1', 'March' => 'Marz_1');
-    $translations_two = array( 'February' => 'Februar_2', 'March' => 'Marz_2', 'April' => 'April_2');
+    $translations_two = array('February' => 'Februar_2', 'March' => 'Marz_2', 'April' => 'April_2');
     $translations_three = array('April' => 'April_3', 'May' => 'Mai_3', 'June' => 'Juni_3');
 
     // Add a number of files to the local file system to serve as remote
@@ -182,8 +185,7 @@ EOF;
   }
 
   /**
-   * Setup existing translations in the database and set up the status of
-   * existing translations.
+   * Setup existing translations in the database and their status.
    */
   protected function setCurrentTranslations() {
     // Setup to add German translations to the database.
@@ -281,4 +283,5 @@ EOF;
     $db_translation = $db_translation == FALSE ? '' : $db_translation;
     $this->assertEqual($translation, $db_translation, $message ? $message : format_string('Correct translation of %source (%language)', array('%source' => $source, '%language' => $langcode)));
   }
+
 }

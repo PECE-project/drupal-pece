@@ -2,14 +2,14 @@
 
 /**
  * @file
- * The API for download and import of translations from remote and local sources.
+ * The API for download and import of translations.
  */
 
 /**
  * Load the common translation API.
  */
 // @todo Combine functions differently in files to avoid unnecessary includes.
-// Follow-up issue http://drupal.org/node/1834298
+// Follow-up issue https://www.drupal.org/node/1834298
 require_once __DIR__ . '/l10n_update.translation.inc';
 
 /**
@@ -92,15 +92,39 @@ function l10n_update_batch_fetch_build($projects = array(), $langcodes = array()
  * @return array
  *   Array of batch operations.
  */
-function _l10n_update_fetch_operations($projects, $langcodes, $options) {
+function _l10n_update_fetch_operations(array $projects, array $langcodes, array $options) {
   $operations = array();
+
+  // If the process is going to download files from a remote, make sure the
+  // files can be saved in the download directory.
+  if (!empty($projects) && l10n_update_use_remote_source()) {
+    $directory = variable_get('l10n_update_download_store', L10N_UPDATE_DEFAULT_TRANSLATION_PATH);
+
+    // Do not download files if the directory is missing or can not be created.
+    if (!file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
+      drupal_set_message(t('The directory %directory does not exist or is not writable.', array('%directory' => $directory)), 'error');
+      watchdog('file system', 'The directory %directory does not exist or is not writable.', array('%directory' => $directory), WATCHDOG_ERROR);
+      return $operations;
+    }
+  }
 
   foreach ($projects as $project) {
     foreach ($langcodes as $langcode) {
       if (l10n_update_use_remote_source()) {
-        $operations[] = array('l10n_update_batch_fetch_download', array($project, $langcode));
+        $operations[] = array(
+          'l10n_update_batch_fetch_download',
+          array(
+            $project,
+            $langcode,
+          ),
+        );
       }
-      $operations[] = array('l10n_update_batch_fetch_import', array($project, $langcode, $options));
+      $operations[] = array('l10n_update_batch_fetch_import', array(
+        $project,
+        $langcode,
+        $options,
+      ),
+      );
     }
   }
 

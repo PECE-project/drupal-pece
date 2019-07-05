@@ -2,7 +2,7 @@
 
 /**
  * @file
- *   Install file for l10n remote updates.
+ * Install file for l10n remote updates.
  */
 
 /**
@@ -15,7 +15,7 @@ function l10n_update_schema() {
       'name' => array(
         'description' => 'A unique short name to identify the project.',
         'type' => 'varchar',
-        'length' => '50',
+        'length' => '255',
         'not null' => TRUE,
       ),
       'project_type' => array(
@@ -35,13 +35,6 @@ function l10n_update_schema() {
         'description' => 'Human readable name for project used on the interface.',
         'type' => 'varchar',
         'length' => '128',
-        'not null' => TRUE,
-        'default' => '',
-      ),
-      'l10n_server' => array(
-        'description' => 'Localization server for this project.',
-        'type' => 'varchar',
-        'length' => '255',
         'not null' => TRUE,
         'default' => '',
       ),
@@ -68,7 +61,7 @@ function l10n_update_schema() {
       'project' => array(
         'description' => 'A unique short name to identify the project.',
         'type' => 'varchar',
-        'length' => '50',
+        'length' => '255',
         'not null' => TRUE,
       ),
       'language' => array(
@@ -136,9 +129,6 @@ function l10n_update_schema() {
     'primary key' => array('project', 'language'),
   );
 
-  $schema['cache_l10n_update'] = drupal_get_schema_unprocessed('system', 'cache');
-  $schema['cache_l10n_update']['description'] = 'Cache table for the Localization Update module to store information about available releases, fetched from central server.';
-
   return $schema;
 }
 
@@ -158,7 +148,11 @@ function l10n_update_schema_alter(&$schema) {
  * Implements hook_install().
  */
 function l10n_update_install() {
-  db_add_field('locales_target', 'l10n_status', array('type' => 'int', 'not null' => TRUE, 'default' => 0));
+  db_add_field('locales_target', 'l10n_status', array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+  ));
   variable_set('l10n_update_rebuild_projects', 1);
 
   // Create the translation directory. We try different alternative paths as the
@@ -192,8 +186,8 @@ function l10n_update_uninstall() {
   variable_del('l10n_update_check_frequency');
   variable_del('l10n_update_last_check');
   variable_del('l10n_update_download_store');
-  variable_del('l10n_update_translation_status');
-  variable_del('l10n_update_check_mode');}
+  variable_del('l10n_update_check_mode');
+}
 
 /**
  * Implements hook_requirements().
@@ -226,7 +220,10 @@ function l10n_update_requirements($phase) {
               'title' => 'Translation update status',
               'value' => l(t('Updates available'), 'admin/config/regional/translate/update'),
               'severity' => REQUIREMENT_WARNING,
-              'description' => t('Updates available for: @languages. See the <a href="!updates">Available translation updates</a> page for more information.', array('@languages' => implode(', ', $available_updates), '!updates' => url('admin/config/regional/translate/update'))),
+              'description' => t('Updates available for: @languages. See the <a href="!updates">Translate interface update</a> page for more information.', array(
+                '@languages' => implode(', ', $available_updates),
+                '!updates' => url('admin/config/regional/translate/update'),
+              )),
             );
           }
           else {
@@ -234,7 +231,10 @@ function l10n_update_requirements($phase) {
               'title' => 'Translation update status',
               'value' => t('Missing translations'),
               'severity' => REQUIREMENT_INFO,
-              'description' => t('Missing translations for: @languages. See the <a href="!updates">Available translation updates</a> page for more information.', array('@languages' => implode(', ', $untranslated), '!updates' => url('admin/config/regional/translate/update'))),
+              'description' => t('Missing translations for: @languages. See the <a href="!updates">Translate interface update</a> page for more information.', array(
+                '@languages' => implode(', ', $untranslated),
+                '!updates' => url('admin/config/regional/translate/update'),
+              )),
             );
           }
         }
@@ -251,7 +251,7 @@ function l10n_update_requirements($phase) {
           'title' => 'Translation update status',
           'value' => l(t('Can not determine status'), 'admin/config/regional/translate/update'),
           'severity' => REQUIREMENT_WARNING,
-          'description' => t('No translation status is available. See the <a href="!updates">Available translation updates</a> page for more information.', array('!updates' => url('admin/config/regional/translate/update'))),
+          'description' => t('No translation status is available. See the <a href="!updates">Translate interface update</a> page for more information.', array('!updates' => url('admin/config/regional/translate/update'))),
         );
       }
     }
@@ -264,6 +264,162 @@ function l10n_update_requirements($phase) {
     }
   }
   return $requirements;
+}
+
+/**
+ * Converts D8 style translations strings into D7 format.
+ *
+ * Drupal 8 stores plurals (both for source and translation strings) as one
+ * string, where the plural forms are separated by a special character. By
+ * mistake this plural handling was also back ported. This function converts any
+ * D8 style plural into a D7 style plural. It used the following strategy.
+ * - Any locales_source record that contains the separator character is
+ *   converted.
+ * - All these records are deleted, except those of which the translation was
+ *   edited.
+ * - Existing translations will only be overwritten by converted translations
+ *   if the import behaviour setting (admin/config/regional/language/update)
+ *   allows that.
+ *
+ * @param int $start
+ *   The number of start.
+ * @param int $length
+ *   The length number.
+ * @param array $report
+ *   Array containing import results.
+ *
+ * @return bool
+ *   Returns true conversion
+ *   a keyed array of log messages. Available keys:
+ *   - message: Translated message
+ *   - status: Message status. See drush_log() for supported values.
+ */
+function l10n_update_d8_plural_conversion($start = 0, $length = 0, array &$report) {
+  module_load_include('inc', 'l10n_update', 'l10n_update.translation');
+  require_once DRUPAL_ROOT . '/includes/locale.inc';
+  $processed = array();
+
+  $plurals = l10n_update_get_d8_plural_strings($start, $length);
+  $finished = count($plurals) < $length;
+  if (empty($plurals)) {
+    return $finished;
+  }
+
+  $mode = variable_get('l10n_update_import_mode', LOCALE_IMPORT_OVERWRITE);
+  $writer = new PoDatabaseWriter();
+  $writer->setOptions(array(
+    'overwrite_options' => array(
+      'not_customized' => $mode != LOCALE_IMPORT_KEEP,
+      'customized' => $mode == LOCALE_IMPORT_OVERWRITE,
+    ),
+    'customized' => L10N_UPDATE_NOT_CUSTOMIZED,
+  ));
+  $writer_report = isset($report['writer']) ? $report['writer'] : array();
+  $writer->setReport($writer_report);
+
+  foreach ($plurals as $plural) {
+
+    // Extract data from source and target strings.
+    $sources = explode(L10N_UPDATE_PLURAL_DELIMITER, $plural->source);
+    $translations = explode(L10N_UPDATE_PLURAL_DELIMITER, $plural->translation);
+
+    $writer->setLangcode($plural->language);
+    $item = new PoItem();
+    $item->setContext($plural->context);
+    $item->setSource($sources);
+    $item->setTranslation($translations);
+    $item->setPlural(TRUE);
+    $item->setLangcode($plural->language);
+    $item->setTextgroup($plural->textgroup);
+    $writer->writeItem($item);
+
+    // Collect plurals to be deleted. In the rare case that a translation was
+    // modified, we will convert it but not delete the custom translation.
+    if (!$plural->l10n_status) {
+      $report['results']['lids'][] = $plural->lid;
+    }
+    $report['results']['languages'][$plural->language] = $plural->language;
+  }
+
+  $report['writer'] = $writer->getReport();
+  unset($report['writer']['strings']);
+
+  return $finished;
+}
+
+/**
+ * Gets D8 plural style strings.
+ *
+ * @param int $start
+ *   Offset of records to load.
+ * @param int $length
+ *   Maximum number of records to load.
+ *
+ * @return array|bool
+ *   An array of data from source and translation strings of which the source
+ *   string contains a Drupal 8 style plural delimiter. Returns false if not
+ *   found.
+ */
+function l10n_update_get_d8_plural_strings($start = 0, $length = 0) {
+  $translation_strings = FALSE;
+
+  $query = db_select('locales_source', 'ls');
+  $query->fields('ls', array(
+    'lid', 'location',
+    'textgroup',
+    'source',
+    'context',
+    'version',
+  ));
+  $query->fields('lt', array(
+    'translation',
+    'language',
+    'plid',
+    'plural',
+    'l10n_status',
+  ));
+  $query->innerJoin('locales_target', 'lt', 'ls.lid = lt.lid');
+  $query->condition('source', '%' . db_like(L10N_UPDATE_PLURAL_DELIMITER) . '%', 'LIKE');
+  if ($length) {
+    $query->range($start, $length);
+  }
+  $results = $query->execute();
+
+  if ($results->rowCount()) {
+    foreach ($results as $result) {
+      $translation_strings[] = $result;
+    }
+  }
+
+  return $translation_strings;
+}
+
+/**
+ * Clean-up after plural string conversion.
+ *
+ * @param array $results
+ *   Batch results array.
+ */
+function l10n_update_finish_d8_plural_strings($results) {
+  require_once DRUPAL_ROOT . '/includes/locale.inc';
+
+  if ($results) {
+    // Delete converted D8 style translations.
+    if (isset($results['lids'])) {
+      foreach ($results['lids'] as $lids) {
+        db_delete('locales_source')->condition('lid', $lids)->execute();
+        db_delete('locales_target')->condition('lid', $lids)->execute();
+      }
+    }
+
+    // Clear caches if translations are modified.
+    if (isset($results['languages'])) {
+      cache_clear_all('locale:', 'cache', TRUE);
+      foreach ($results['languages'] as $langcode) {
+        _locale_invalidate_js($langcode);
+      }
+    }
+  }
 }
 
 /**
@@ -301,11 +457,7 @@ function l10n_update_update_7003() {
  * Create {cache_l10n_update} table.
  */
 function l10n_update_update_7004() {
-  if (!db_table_exists('cache_l10n_update')) {
-    $schema = drupal_get_schema_unprocessed('system', 'cache');
-    $schema['description'] = 'Cache table for the Localization Update module to store information about available releases, fetched from central server.';
-    db_create_table('cache_l10n_update', $schema);
-  }
+  // Code removed. Table {cache_l10n_update} is no longer used.
 }
 
 /**
@@ -317,30 +469,33 @@ function l10n_update_update_7200() {
     registry_rebuild();
   }
 
+  // If no translation directory was set, set one here. We try different
+  // alternative paths as the default may not always be writable.
   if (!variable_get('l10n_update_download_store', '')) {
-    variable_set('l10n_update_download_store', 'sites/all/translations');
-  }
-  // Create the translation directory. We try different alternative paths as the
-  // default may not always be writable.
-  $directories = array(
-    variable_get('l10n_update_download_store', L10N_UPDATE_DEFAULT_TRANSLATION_PATH),
-    variable_get('file_public_path', conf_path() . '/files') . '/translations',
-    'sites/default/files/translations',
-  );
-  foreach ($directories as $directory) {
-    if (file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
-      variable_set('l10n_update_download_store', $directory);
-      return;
+    $directories = array(
+      variable_get('l10n_update_download_store', L10N_UPDATE_DEFAULT_TRANSLATION_PATH),
+      variable_get('file_public_path', conf_path() . '/files') . '/translations',
+      'sites/default/files/translations',
+    );
+    $directory_created = FALSE;
+    foreach ($directories as $directory) {
+      if (file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
+        variable_set('l10n_update_download_store', $directory);
+        $directory_created = TRUE;
+        break;
+      }
+    }
+    if (!$directory_created) {
+      watchdog('l10n_update', 'The directory %directory does not exist or is not writable.', array('%directory' => $directories[0]), WATCHDOG_ERROR);
+      drupal_set_message(t('The directory %directory does not exist or is not writable.', array('%directory' => $directories[0])), 'error');
     }
   }
-  watchdog('l10n_update', 'The directory %directory does not exist or is not writable.', array('%directory' => $directories[0]), WATCHDOG_ERROR);
-  drupal_set_message(t('The directory %directory does not exist or is not writable.', array('%directory' => $directories[0])), 'error');
 
   // Translation source 'Remote server only' is no longer supported. Use 'Remote
   // and local' instead.
-  $mode = variable_get('l10n_update_check_mode', 3); // L10N_UPDATE_USE_SOURCE_REMOTE_AND_LOCAL
+  $mode = variable_get('l10n_update_check_mode', 3);
   if ($mode == 1) {
-    variable_set('l10n_update_check_mode', 3); // L10N_UPDATE_USE_SOURCE_REMOTE_AND_LOCAL
+    variable_set('l10n_update_check_mode', 3);
   }
 
   // Daily cron updates are no longer supported. Use weekly instead.
@@ -360,6 +515,114 @@ function l10n_update_update_7200() {
  */
 function l10n_update_update_7201() {
   if (!variable_get('l10n_update_download_store', '')) {
-   variable_set('l10n_update_download_store', 'sites/all/translations');
+    variable_set('l10n_update_download_store', 'sites/all/translations');
+  }
+}
+
+/**
+ * Removes table {cache_l10n_update}.
+ */
+function l10n_update_update_7202() {
+  if (db_table_exists('cache_l10n_update')) {
+    db_drop_table('cache_l10n_update');
+  }
+}
+
+/**
+ * Removes the field 'l10n_server' from table {cache_l10n_update}.
+ */
+function l10n_update_update_7203() {
+  if (db_field_exists('l10n_update_project', 'l10n_server')) {
+    db_drop_field('l10n_update_project', 'l10n_server');
+  }
+}
+
+/**
+ * Increase the length of the name column.
+ */
+function l10n_update_update_7204() {
+  $schema = l10n_update_schema();
+  db_change_field('l10n_update_project', 'name', 'name', $schema['l10n_update_project']['fields']['name']);
+}
+
+/**
+ * Increase the length of the name column.
+ */
+function l10n_update_update_7205() {
+  $schema = l10n_update_schema();
+  db_change_field('l10n_update_file', 'project', 'project', $schema['l10n_update_file']['fields']['project']);
+}
+
+/**
+ * Remove 'headers' field from cache table.
+ */
+function l10n_update_update_7206() {
+  if (db_field_exists('cache_l10n_update', 'headers')) {
+    db_drop_field('cache_l10n_update', 'headers');
+  }
+}
+
+/**
+ * Migrate D8 style plurals to D7 style.
+ */
+function l10n_update_update_7207(&$sandbox) {
+  $message = NULL;
+  $batch_size = 50;
+
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['max'] = count(l10n_update_get_d8_plural_strings());
+    $sandbox['report'] = array();
+  }
+
+  if ($sandbox['max'] == 0) {
+    $sandbox['#finished'] = 1;
+    return NULL;
+  }
+
+  $finished = l10n_update_d8_plural_conversion($sandbox['progress'], $batch_size, $sandbox['report']);
+  $sandbox['progress'] += $batch_size;
+
+  // Whether the batch is finished is determined by the result of
+  // l10n_update_d8_plural_conversion().The progress (percentage) is
+  // calculated.
+  if (empty($sandbox['max']) || $finished) {
+    $sandbox['#finished'] = 1;
+  }
+  else {
+    $sandbox['#finished'] = $sandbox['progress'] / $sandbox['max'];
+  }
+
+  if ($sandbox['#finished'] == 1) {
+    l10n_update_finish_d8_plural_strings($sandbox['report']['results']);
+
+    if ($sandbox['report']['writer']['skips']) {
+      $message = t('Some problems were reported during plural string migration. See <a href="/admin/reports/dblog">Recent log messages</a> for details.');
+    }
+  }
+
+  return $message;
+}
+
+/**
+ * Remove the status variable.
+ */
+function l10n_update_update_7208() {
+  $status = variable_get('l10n_update_translation_status');
+  cache_set('l10n_update_status', $status);
+  variable_del('l10n_update_translation_status');
+}
+
+/**
+ * Update default variable values to use https.
+ */
+function l10n_update_update_7209() {
+  $server_url = variable_get('l10n_client_server', '');
+  if ($server_url == 'http://localize.drupal.org') {
+    variable_set('l10n_client_server', 'https://localize.drupal.org');
+  }
+  $update_url = variable_get('l10n_update_default_update_url', '');
+  if ($update_url == 'http://ftp.drupal.org/files/translations/%core/%project/%project-%release.%language.po') {
+    variable_set('l10n_update_default_update_url', L10N_UPDATE_DEFAULT_SERVER_PATTERN);
   }
 }

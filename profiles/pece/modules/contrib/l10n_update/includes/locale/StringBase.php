@@ -12,12 +12,27 @@
  * the common properties and methods for source and translation strings.
  */
 abstract class StringBase implements StringInterface {
+
   /**
    * The string identifier.
    *
    * @var integer
    */
   public $lid;
+
+  /**
+   * The parent string identifier for plural translations.
+   *
+   * @var integer
+   */
+  public $plid;
+
+  /**
+   * Plural index in case of plural string.
+   *
+   * @var integer
+   */
+  public $plural;
 
   /**
    * The string locations indexed by type.
@@ -41,6 +56,13 @@ abstract class StringBase implements StringInterface {
   public $context;
 
   /**
+   * The string group.
+   *
+   * @var string
+   */
+  public $textgroup;
+
+  /**
    * The string version.
    *
    * @var string
@@ -61,7 +83,7 @@ abstract class StringBase implements StringInterface {
    *   Object or array with initial values.
    */
   public function __construct($values = array()) {
-    $this->setValues((array)$values);
+    $this->setValues((array) $values);
   }
 
   /**
@@ -76,6 +98,21 @@ abstract class StringBase implements StringInterface {
    */
   public function setId($lid) {
     $this->lid = $lid;
+    return $this;
+  }
+
+  /**
+   * Implements StringInterface::getParentId().
+   */
+  public function getParentId() {
+    return isset($this->plid) ? $this->plid : 0;
+  }
+
+  /**
+   * Implements StringInterface::setParentId().
+   */
+  public function setParentId($plid) {
+    $this->plid = $plid;
     return $this;
   }
 
@@ -95,21 +132,6 @@ abstract class StringBase implements StringInterface {
   }
 
   /**
-   * Implements StringInterface::getPlurals().
-   */
-  public function getPlurals() {
-    return explode(L10N_UPDATE_PLURAL_DELIMITER, $this->getString());
-  }
-
-  /**
-   * Implements StringInterface::setPlurals().
-   */
-  public function setPlurals($plurals) {
-    $this->setString(implode(L10N_UPDATE_PLURAL_DELIMITER, $plurals));
-    return $this;
-  }
-
-  /**
    * Implements StringInterface::getStorage().
    */
   public function getStorage() {
@@ -119,7 +141,7 @@ abstract class StringBase implements StringInterface {
   /**
    * Implements StringInterface::setStorage().
    */
-  public function setStorage($storage) {
+  public function setStorage(StringStorageInterface $storage) {
     $this->storage = $storage;
     return $this;
   }
@@ -150,6 +172,20 @@ abstract class StringBase implements StringInterface {
   }
 
   /**
+   * Implements StringInterface::getTextgroup().
+   */
+  public function getTextgroup() {
+    return empty($this->textgroup) ? 'default' : $this->textgroup;
+  }
+
+  /**
+   * Implements StringInterface::setTextgroup().
+   */
+  public function setTextgroup($textgroup) {
+    $this->textgroup = $textgroup;
+  }
+
+  /**
    * Implements LocaleString::save().
    */
   public function save() {
@@ -158,7 +194,7 @@ abstract class StringBase implements StringInterface {
     }
     else {
       throw new StringStorageException(format_string('The string cannot be saved because its not bound to a storage: @string', array(
-        '@string' => $this->getString()
+        '@string' => $this->getString(),
       )));
     }
     return $this;
@@ -174,7 +210,7 @@ abstract class StringBase implements StringInterface {
       }
       else {
         throw new StringStorageException(format_string('The string cannot be deleted because its not bound to a storage: @string', array(
-          '@string' => $this->getString()
+          '@string' => $this->getString(),
         )));
       }
     }

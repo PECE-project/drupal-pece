@@ -47,7 +47,7 @@ class PoDatabaseWriter implements PoWriterInterface {
    *  - additions: number of source strings newly added
    *  - updates: number of translations updated
    *  - deletes: number of translations deleted
-   *  - skips: number of strings skipped due to disallowed HTML
+   *  - skips: number of strings skipped due to disallowed HTML.
    *
    * @var array
    */
@@ -63,7 +63,7 @@ class PoDatabaseWriter implements PoWriterInterface {
   /**
    * Constructor, initialize reporting array.
    */
-  function __construct() {
+  public function __construct() {
     $this->setReport();
     $this->storage = new StringDatabaseStorage();
   }
@@ -95,7 +95,7 @@ class PoDatabaseWriter implements PoWriterInterface {
    * @param array $report
    *   Associative array with result information.
    */
-  function setReport($report = array()) {
+  public function setReport($report = array()) {
     $report += array(
       'additions' => 0,
       'updates' => 0,
@@ -109,14 +109,14 @@ class PoDatabaseWriter implements PoWriterInterface {
   /**
    * Get the options used by the writer.
    */
-  function getOptions() {
+  public function getOptions() {
     return $this->_options;
   }
 
   /**
    * Set the options for the current writer.
    */
-  function setOptions(array $options) {
+  public function setOptions(array $options) {
     if (!isset($options['overwrite_options'])) {
       $options['overwrite_options'] = array();
     }
@@ -133,7 +133,7 @@ class PoDatabaseWriter implements PoWriterInterface {
   /**
    * Implements PoMetadataInterface::getHeader().
    */
-  function getHeader() {
+  public function getHeader() {
     return $this->_header;
   }
 
@@ -151,8 +151,9 @@ class PoDatabaseWriter implements PoWriterInterface {
    *   Header metadata.
    *
    * @throws Exception
+   *   Exception is thrown when required properties are not set.
    */
-  function setHeader(PoHeader $header) {
+  public function setHeader(PoHeader $header) {
     $this->_header = $header;
     $languages = language_list();
 
@@ -193,12 +194,29 @@ class PoDatabaseWriter implements PoWriterInterface {
   /**
    * Implements PoWriterInterface::writeItem().
    */
-  function writeItem(PoItem $item) {
+  public function writeItem(PoItem $item) {
     if ($item->isPlural()) {
-      $item->setSource(join(L10N_UPDATE_PLURAL_DELIMITER, $item->getSource()));
-      $item->setTranslation(join(L10N_UPDATE_PLURAL_DELIMITER, $item->getTranslation()));
+      $sources = $item->getSource();
+      $translations = $item->getTranslation();
+
+      // Build additional source strings for plurals.
+      $entries = array_keys($translations);
+      for ($i = 3; $i <= count($entries); $i++) {
+        $sources[] = $sources[1];
+      }
+      $translations = array_map('_locale_import_append_plural', $translations, $entries);
+      $sources = array_map('_locale_import_append_plural', $sources, $entries);
+
+      $plid = 0;
+      foreach ($entries as $index) {
+        $item->setSource($sources[$index]);
+        $item->setTranslation($translations[$index]);
+        $plid = $this->importString($item, $plid, $index);
+      }
     }
-    $this->importString($item);
+    else {
+      $this->importString($item);
+    }
   }
 
   /**
@@ -216,11 +234,15 @@ class PoDatabaseWriter implements PoWriterInterface {
    *
    * @param PoItem $item
    *   The item being imported.
+   * @param integer $plid
+   *   The parent string identifier for plural strings.
+   * @param integer $plural
+   *   The plural index number.
    *
    * @return int
    *   The string ID of the existing string modified or the new string added.
    */
-  private function importString(PoItem $item) {
+  private function importString(PoItem $item, $plid = 0, $plural = 0) {
     // Initialize overwrite options if not set.
     $this->_options['overwrite_options'] += array(
       'not_customized' => FALSE,
@@ -232,12 +254,14 @@ class PoDatabaseWriter implements PoWriterInterface {
     $context = $item->getContext();
     $source = $item->getSource();
     $translation = $item->getTranslation();
+    $textgroup = $item->getTextgroup();
 
     // Look up the source string and any existing translation.
     $strings = $this->storage->getTranslations(array(
       'language' => $this->_langcode,
       'source' => $source,
-      'context' => $context
+      'context' => $context,
+      'textgroup' => $textgroup,
     ));
     $string = reset($strings);
 
@@ -253,8 +277,10 @@ class PoDatabaseWriter implements PoWriterInterface {
         if ($string->isNew()) {
           // No translation in this language.
           $string->setValues(array(
+            'plid' => $plid,
+            'plural' => $plural,
             'language' => $this->_langcode,
-            'customized' => $customized
+            'customized' => $customized,
           ));
           $string->save();
           $this->_report['additions']++;
@@ -270,10 +296,12 @@ class PoDatabaseWriter implements PoWriterInterface {
       }
       else {
         // No such source string in the database yet.
-        $string = $this->storage->createString(array('source' => $source, 'context' => $context))
+        $string = $this->storage->createString(array('source' => $source, 'context' => $context, 'textgroup' => $textgroup))
           ->save();
-        $target = $this->storage->createTranslation(array(
+        $this->storage->createTranslation(array(
           'lid' => $string->getId(),
+          'plid' => $plid,
+          'plural' => $plural,
           'language' => $this->_langcode,
           'translation' => $translation,
           'customized' => $customized,
@@ -292,5 +320,4 @@ class PoDatabaseWriter implements PoWriterInterface {
       return $string->lid;
     }
   }
-
 }

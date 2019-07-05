@@ -2,22 +2,24 @@
 
 /**
  * @file
- *   Http API for l10n updates.
+ * Http API for l10n updates.
  */
 
 /**
  * Check if remote file exists and when it was last updated.
  *
- * @param $url
+ * @param string $url
  *   URL of remote file.
- * @param $headers
+ * @param array $headers
  *   HTTP request headers.
- * @return object
+ *
+ * @return object|bool
  *   Result object containing the HTTP request headers, response code, headers,
  *   data, redirect status and updated timestamp.
- *   @see l10n_update_http_request()
+ *
+ * @see l10n_update_http_request()
  */
-function l10n_update_http_check($url, $headers = array()) {
+function l10n_update_http_check($url, array $headers = array()) {
   $result = l10n_update_http_request($url, array('headers' => $headers, 'method' => 'HEAD'));
   if (!isset($result->error)) {
     if ($result && $result->code == 200) {
@@ -35,9 +37,11 @@ function l10n_update_http_check($url, $headers = array()) {
         // found there.
         watchdog('l10n_update', 'File not found: @uri.', array('@uri' => $url));
         return TRUE;
+
       case 0:
         watchdog('l10n_update', 'Error occurred when trying to check @remote: @errormessage.', array('@errormessage' => $result->error, '@remote' => $url), WATCHDOG_ERROR);
         break;
+
       default:
         watchdog('l10n_update', 'HTTP error @errorcode occurred when trying to check @remote.', array('@errorcode' => $result->code, '@remote' => $url), WATCHDOG_ERROR);
         break;
@@ -49,12 +53,13 @@ function l10n_update_http_check($url, $headers = array()) {
 /**
  * Perform an HTTP request.
  *
- * We cannot use drupal_http_request() at install, see http://drupal.org/node/527484
+ * We cannot use drupal_http_request() at install,
+ * see https://www.drupal.org/node/527484
  *
  * This is a flexible and powerful HTTP client implementation. Correctly
  * handles GET, POST, PUT or any other HTTP requests. Handles redirects.
  *
- * @param $url
+ * @param string $url
  *   A string containing a fully qualified URI.
  * @param array $options
  *   (optional) An array that can have one or more of the following elements:
@@ -88,6 +93,14 @@ function l10n_update_http_check($url, $headers = array()) {
  *   - data: A string containing the response body that was received.
  */
 function l10n_update_http_request($url, array $options = array()) {
+  // Allow an alternate HTTP client library to replace l10n_update's default
+  // implementation.
+  /** @var string $override_function */
+  $override_function = variable_get('drupal_http_request_function', FALSE);
+  if (!empty($override_function) && function_exists($override_function)) {
+    return $override_function($url, $options);
+  }
+
   $result = new stdClass();
 
   // Parse the URL and make sure we can handle the schema.
@@ -119,7 +132,7 @@ function l10n_update_http_request($url, array $options = array()) {
 
   // Merge the default headers.
   $options['headers'] += array(
-    'User-Agent' => 'Drupal (+http://drupal.org/)',
+    'User-Agent' => 'Drupal (+https://www.drupal.org/)',
   );
 
   // stream_socket_client() requires timeout to be a float.
@@ -203,8 +216,7 @@ function l10n_update_http_request($url, array $options = array()) {
     // server's ability to make outgoing HTTP requests the next time that
     // requirements checking is performed.
     // See system_requirements().
-    // variable_set('drupal_http_request_fails', TRUE);
-
+    // variable_set('drupal_http_request_fails', TRUE);.
     return $result;
   }
 
@@ -228,12 +240,12 @@ function l10n_update_http_request($url, array $options = array()) {
     $options['headers']['Authorization'] = 'Basic ' . base64_encode($uri['user'] . (isset($uri['pass']) ? ':' . $uri['pass'] : ''));
   }
 
-  // If the database prefix is being used by SimpleTest to run the tests in a copied
-  // database then set the user-agent header to the database prefix so that any
-  // calls to other Drupal pages will run the SimpleTest prefixed database. The
-  // user-agent is used to ensure that multiple testing sessions running at the
-  // same time won't interfere with each other as they would if the database
-  // prefix were stored statically in a file or database variable.
+  // If the database prefix is being used by SimpleTest to run the tests in a
+  // copied database then set the user-agent header to the database prefix so
+  // that any calls to other Drupal pages will run the SimpleTest prefixed
+  // database. The user-agent is used to ensure that multiple testing sessions
+  // running at the same time won't interfere with each other as they would if
+  // the database prefix were stored statically in a file or database variable.
   $test_info = &$GLOBALS['drupal_test_info'];
   if (!empty($test_info['test_run_id'])) {
     $options['headers']['User-Agent'] = drupal_generate_test_ua($test_info['test_run_id']);
@@ -356,12 +368,18 @@ function l10n_update_http_request($url, array $options = array()) {
   $result->code = $code;
 
   switch ($code) {
-    case 200: // OK
-    case 304: // Not modified
+    case 200:
+      // OK.
+    case 304:
+      // Not modified.
       break;
-    case 301: // Moved permanently
-    case 302: // Moved temporarily
-    case 307: // Moved temporarily
+
+    case 301:
+      // Moved permanently.
+    case 302:
+      // Moved temporarily.
+    case 307:
+      // Moved temporarily.
       $location = $result->headers['location'];
       $options['timeout'] -= timer_read(__FUNCTION__) / 1000;
       if ($options['timeout'] <= 0) {
@@ -378,6 +396,7 @@ function l10n_update_http_request($url, array $options = array()) {
         $result->redirect_url = $location;
       }
       break;
+
     default:
       $result->error = $status_message;
   }

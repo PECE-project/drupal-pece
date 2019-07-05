@@ -11,14 +11,14 @@
  * The operations are related to pumping data from a source to a destination,
  * for example:
  * - Remote files http://*.po to memory
- * - File public://*.po to database
+ * - File public://*.po to database.
  */
 class Gettext {
 
   /**
    * Reads the given PO files into the database.
    *
-   * @param stdClass $file
+   * @param object $file
    *   File object with an URI property pointing at the file's path.
    *   - "langcode": The language the strings will be added to.
    *   - "uri": File URI.
@@ -28,8 +28,8 @@ class Gettext {
    *     PoDatabaseWriter. Optional, defaults to an empty array.
    *   - 'customized': Flag indicating whether the strings imported from $file
    *     are customized translations or come from a community source. Use
-   *     L10N_UPDATE_CUSTOMIZED or L10N_UPDATE_NOT_CUSTOMIZED. Optional, defaults to
-   *     L10N_UPDATE_NOT_CUSTOMIZED.
+   *     L10N_UPDATE_CUSTOMIZED or L10N_UPDATE_NOT_CUSTOMIZED. Optional,
+   *     defaults to L10N_UPDATE_NOT_CUSTOMIZED.
    *   - 'seek': Specifies from which position in the file should the reader
    *     start reading the next items. Optional, defaults to 0.
    *   - 'items': Specifies the number of items to read. Optional, defaults to
@@ -38,9 +38,12 @@ class Gettext {
    * @return array
    *   Report array as defined in PoDatabaseWriter.
    *
+   * @throws \Exception
+   *   Throws exception in case of missing header.
+   *
    * @see PoDatabaseWriter
    */
-  static function fileToDatabase($file, $options) {
+  public static function fileToDatabase($file, array $options) {
     // Add the default values to the options array.
     $options += array(
       'overwrite_options' => array(),
@@ -94,4 +97,5 @@ class Gettext {
     $report['seek'] = $reader->getSeek();
     return $report;
   }
+
 }

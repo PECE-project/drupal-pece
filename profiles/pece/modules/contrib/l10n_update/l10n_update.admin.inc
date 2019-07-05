@@ -2,7 +2,7 @@
 
 /**
  * @file
- *   Admin settings and update page.
+ * Admin settings and update page.
  */
 
 /**
@@ -37,7 +37,7 @@ function l10n_update_status_form() {
   $projects_update = array();
 
   // @todo Calling l10n_update_build_projects() is an expensive way to
-  //   get a module name. In follow-up issue http://drupal.org/node/1842362
+  //   get a module name. In follow-up issue https://www.drupal.org/node/1842362
   //   the project name will be stored to display use, like here.
   $project_data = l10n_update_build_projects();
   $languages = l10n_update_translatable_language_list();
@@ -59,12 +59,13 @@ function l10n_update_status_form() {
             $languages_not_found[$langcode] = $langcode;
           }
           // Translation update found for this project-language combination.
-          elseif ($project_info->type == L10N_UPDATE_LOCAL || $project_info->type == L10N_UPDATE_REMOTE ) {
+          elseif ($project_info->type == L10N_UPDATE_LOCAL || $project_info->type == L10N_UPDATE_REMOTE) {
             $local = isset($project_info->files[L10N_UPDATE_LOCAL]) ? $project_info->files[L10N_UPDATE_LOCAL] : NULL;
             $remote = isset($project_info->files[L10N_UPDATE_REMOTE]) ? $project_info->files[L10N_UPDATE_REMOTE] : NULL;
             $recent = _l10n_update_source_compare($local, $remote) == L10N_UPDATE_SOURCE_COMPARE_LT ? $remote : $local;
+            $name = isset($project_data[$project_info->name]->info['name']) ? $project_data[$project_info->name]->info['name'] : '';
             $updates[$langcode]['updates'][] = array(
-              'name' => $project_info->name == 'drupal' ? t('Drupal core') : $project_data[$project_info->name]->info['name'],
+              'name' => $project_info->name == 'drupal' ? t('Drupal core') : $name,
               'version' => $project_info->version,
               'timestamp' => $recent->timestamp,
             );
@@ -77,7 +78,7 @@ function l10n_update_status_form() {
     $languages_not_found = array_diff($languages_not_found, $languages_update);
 
     // Build data options for the select table.
-    foreach($updates as $langcode => $update) {
+    foreach ($updates as $langcode => $update) {
       $title = check_plain($languages[$langcode]);
       $l10n_update_update_info = array('#theme' => 'l10n_update_update_info');
       foreach (array('updates', 'not_found') as $update_status) {
@@ -90,10 +91,17 @@ function l10n_update_status_form() {
           'class' => array('label'),
           'data' => array(
             '#title' => $title,
-            '#markup' => $title
+            '#markup' => $title,
           ),
         ),
-        'status' => array('class' => array('description', 'expand', 'priority-low'), 'data' => drupal_render($l10n_update_update_info)),
+        'status' => array(
+          'class' => array(
+            'description',
+            'expand',
+            'priority-low',
+          ),
+          'data' => drupal_render($l10n_update_update_info),
+        ),
       );
     }
     // Sort the table data on language name.
@@ -125,7 +133,7 @@ function l10n_update_status_form() {
   elseif (empty($options)) {
     $empty = t('All translations up to date.');
   }
-  else  {
+  else {
     $empty = t('No translation status available. <a href="@check">Check manually</a>.', array('@check' => url('admin/config/regional/translate/check')));
   }
 
@@ -261,6 +269,31 @@ function l10n_update_admin_settings_form($form, &$form_state) {
     '#description' => t('How to treat existing translations when automatically updating the interface translations.'),
   );
 
+  $form['disable_update'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Disable update'),
+    '#collapible' => FALSE,
+    '#collapsed' => FALSE,
+  );
+
+  $form['disable_update']['disabled_projects'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Projects'),
+    '#default_value' => implode(PHP_EOL, variable_get('l10n_update_disabled_projects', array())),
+    '#description' => t("These modules, themes or profiles will not receive interface translation updates. Specify them by there machine name, enter one name per line. The '*' character is a wildcard. Use for example feature_* for every feature."),
+  );
+
+  $languages = locale_language_list('name');
+  unset($languages['en']);
+
+  $form['disable_update']['l10n_update_disabled_languages'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Languages'),
+    '#options' => $languages,
+    '#default_value' => variable_get('l10n_update_disabled_languages', array()),
+    '#description' => t('The selected languages will not receive interface translation updates.'),
+  );
+
   $form['#submit'][] = 'l10n_update_admin_settings_form_submit';
   return system_settings_form($form);
 }
@@ -270,7 +303,14 @@ function l10n_update_admin_settings_form($form, &$form_state) {
  */
 function l10n_update_admin_settings_form_validate($form, &$form_state) {
   // Check for existing translations directory and create one if required.
+  // When using local sources, only check if the directory exists.
   $directory = $form_state['values']['l10n_update_download_store'];
+  $directory = rtrim($directory, '/\\');
+
+  if ($form_state['values']['l10n_update_check_mode'] == L10N_UPDATE_USE_SOURCE_LOCAL
+    && is_dir($directory)) {
+    return;
+  }
   if (!file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
     form_set_error('l10n_update_download_store', t('The directory %directory does not exist or is not writable.', array('%directory' => $directory)));
     watchdog('file system', 'The directory %directory does not exist or is not writable.', array('%directory' => $directory), WATCHDOG_ERROR);
@@ -280,13 +320,22 @@ function l10n_update_admin_settings_form_validate($form, &$form_state) {
 /**
  * Submit handler for translation update settings.
  */
-function l10n_update_admin_settings_form_submit($form, $form_state) {
+function l10n_update_admin_settings_form_submit($form, &$form_state) {
   // Invalidate the cached translation status when the configuration setting of
   // 'l10n_update_check_mode' or 'check_disabled' change.
   if ($form['l10n_update_check_mode']['#default_value'] != $form_state['values']['l10n_update_check_mode'] ||
     $form['l10n_update_check_disabled']['#default_value'] != $form_state['values']['l10n_update_check_disabled']) {
     l10n_update_clear_status();
   }
+
+  // Convert the disabled projects input into an array value. The input value is
+  // removed from the form_state values to prevent it being turned into a
+  // variable.
+  $input = $form_state['values']['disabled_projects'];
+  unset($form_state['values']['disabled_projects']);
+  $input = strtr($input, array("\r" => '', ' ' => ''));
+  $values = array_filter(explode("\n", $input));
+  variable_set('l10n_update_disabled_projects', $values);
 }
 
 /**
@@ -295,7 +344,7 @@ function l10n_update_admin_settings_form_submit($form, $form_state) {
  * The import options of the Locale module are used but the UI text is altered
  * to suit the Localization update cases.
  *
- * @return
+ * @return array
  *   Keyed array of import options.
  */
 function _l10n_update_admin_import_options() {
@@ -318,8 +367,8 @@ function _l10n_update_admin_import_options() {
  * Translations for development versions are never fetched, so the debug info
  * for that is a fixed message.
  *
- * @param array $source
- *   An array which is the project information of the source.
+ * @param object $source
+ *   An object which is the project information of the source.
  *
  * @return string
  *   The string which contains debug information.
@@ -366,10 +415,14 @@ function l10n_update_language_table($form_element) {
  *   An associative array containing:
  *   - form: The form that contains the language information.
  *
+ * @return string
+ *   HTML output.
+ *
  * @see l10n_update_edit_form()
+ *
  * @ingroup themeable
  */
-function theme_l10n_update_edit_form_strings($variables) {
+function theme_l10n_update_edit_form_strings(array $variables) {
   $output = '';
   $form = $variables['form'];
   $header = array(
@@ -418,11 +471,11 @@ function theme_l10n_update_edit_form_strings($variables) {
  *
  * @see l10n_update_status_form()
  */
-function template_preprocess_l10n_update_update_info(&$variables) {
+function template_preprocess_l10n_update_update_info(array &$variables) {
   $details = array();
   $modules = array();
 
-  // Default values
+  // Default values.
   $variables['modules'] = array();
   $variables['module_list'] = '';
   $details['available_updates_list'] = array();
@@ -433,7 +486,10 @@ function template_preprocess_l10n_update_update_info(&$variables) {
     if ($variables['updates']) {
       foreach ($variables['updates'] as $update) {
         $modules[] = $update['name'];
-        $releases[] = t('@module (@date)', array('@module' => $update['name'], '@date' => format_date($update['timestamp'], 'html_date')));
+        $releases[] = t('@module (@date)', array(
+          '@module' => $update['name'],
+          '@date' => format_date($update['timestamp'], 'html_date'),
+        ));
       }
       $variables['modules'] = $modules;
       $variables['module_list'] = t('Updates for: @modules', array('@modules' => implode(', ', $modules)));
@@ -477,13 +533,13 @@ function template_preprocess_l10n_update_update_info(&$variables) {
  *
  * Default template: l10n_update-translation-last-check.tpl.php.
  *
- * @param $variables
+ * @param array $variables
  *   An associative array containing:
  *   - last: The timestamp when the site last checked for available updates.
  *
  * @see l10n_update_status_form()
  */
-function template_preprocess_l10n_update_last_check(&$variables) {
+function template_preprocess_l10n_update_last_check(array &$variables) {
   $last = $variables['last'];
   $variables['last_checked'] = $last ? t('Last checked: !time ago', array('!time' => format_interval(REQUEST_TIME - $last))) : t('Last checked: never');
   $variables['link'] = l(t('Check manually'), 'admin/config/regional/translate/check');

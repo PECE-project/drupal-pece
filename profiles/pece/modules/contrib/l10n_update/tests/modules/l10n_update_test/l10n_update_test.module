@@ -13,7 +13,8 @@
  */
 function l10n_update_test_system_info_alter(&$info, $file, $type) {
   // Only modify the system info if required.
-  // By default the l10n_update_test modules are hidden and have a project specified.
+  // By default the l10n_update_test modules are hidden and have a project
+  // specified.
   // To test the module detection process by l10n_update_project_list() the
   // test modules should mimic a custom module. I.e. be non-hidden.
   if (variable_get('l10n_update_test_system_info_alter', FALSE)) {
@@ -45,10 +46,10 @@ function l10n_update_test_l10n_update_projects_alter(&$projects) {
     $remote_url = $wrapper->getExternalUrl() . '/remote/';
 
     // Completely replace the project data with a set of test projects.
-    $projects = array (
-      'contrib_module_one' => array (
+    $projects = array(
+      'contrib_module_one' => array(
         'name' => 'contrib_module_one',
-        'info' => array (
+        'info' => array(
           'name' => 'Contributed module one',
           'l10n path' => $remote_url . '%core/%project/%project-%release.%language._po',
           'package' => 'Other',
@@ -58,15 +59,15 @@ function l10n_update_test_l10n_update_projects_alter(&$projects) {
           '_info_file_ctime' => 1348767306,
         ),
         'datestamp' => '1344471537',
-        'includes' => array (
+        'includes' => array(
           'contrib_module_one' => 'Contributed module one',
         ),
         'project_type' => 'module',
         'project_status' => TRUE,
       ),
-      'contrib_module_two' => array (
+      'contrib_module_two' => array(
         'name' => 'contrib_module_two',
-        'info' => array (
+        'info' => array(
           'name' => 'Contributed module two',
           'l10n path' => $remote_url . '%core/%project/%project-%release.%language._po',
           'package' => 'Other',
@@ -76,15 +77,15 @@ function l10n_update_test_l10n_update_projects_alter(&$projects) {
           '_info_file_ctime' => 1348767306,
         ),
         'datestamp' => '1344471537',
-        'includes' => array (
+        'includes' => array(
           'contrib_module_two' => 'Contributed module two',
         ),
         'project_type' => 'module',
         'project_status' => TRUE,
       ),
-      'contrib_module_three' => array (
+      'contrib_module_three' => array(
         'name' => 'contrib_module_three',
-        'info' => array (
+        'info' => array(
           'name' => 'Contributed module three',
           'l10n path' => $remote_url . '%core/%project/%project-%release.%language._po',
           'package' => 'Other',
@@ -94,18 +95,18 @@ function l10n_update_test_l10n_update_projects_alter(&$projects) {
           '_info_file_ctime' => 1348767306,
         ),
         'datestamp' => '1344471537',
-        'includes' => array (
+        'includes' => array(
           'contrib_module_three' => 'Contributed module three',
         ),
         'project_type' => 'module',
         'project_status' => TRUE,
       ),
-      'l10n_update_test' => array (
+      'l10n_update_test' => array(
         'name' => 'l10n_update_test',
-        'info' => array (
+        'info' => array(
           'name' => 'Locale test',
           'interface translation project' => 'l10n_update_test',
-          'l10n path' => 'sites/all/modules/l10n_update/tests/test.%language.po',
+          'l10n path' => drupal_get_path('module', 'l10n_update') . '/tests/test.%language.po',
           'package' => 'Other',
           'version' => NULL,
           'project' => 'l10n_update_test',
@@ -113,15 +114,15 @@ function l10n_update_test_l10n_update_projects_alter(&$projects) {
           'datestamp' => 0,
         ),
         'datestamp' => 0,
-        'includes' => array (
+        'includes' => array(
           'l10n_update_test' => 'Locale test',
         ),
         'project_type' => 'module',
         'project_status' => TRUE,
       ),
-      'custom_module_one' => array (
+      'custom_module_one' => array(
         'name' => 'custom_module_one',
-        'info' => array (
+        'info' => array(
           'name' => 'Custom module one',
           'interface translation project' => 'custom_module_one',
           'l10n path' => 'translations://custom_module_one.%language.po',
@@ -132,7 +133,7 @@ function l10n_update_test_l10n_update_projects_alter(&$projects) {
           'datestamp' => 0,
         ),
         'datestamp' => 0,
-        'includes' => array (
+        'includes' => array(
           'custom_module_one' => 'Custom module one',
         ),
         'project_type' => 'module',

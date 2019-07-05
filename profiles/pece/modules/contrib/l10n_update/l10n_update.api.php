@@ -2,36 +2,46 @@
 
 /**
  * @file
- *   API documentation for Localize updater module.
+ * API documentation for Localize updater module.
  */
 
 /**
- * Alter the list of project to be updated by l10n update.
+ * Alter the list of project to be updated by Localization Update.
  *
- * l10n_update uses the same list of projects as update module. Using this hook
- * the list can be altered.
+ * L10n_update uses the same list of projects as update module. Using this hook
+ * the list can be altered. This hook is typically used to alter the following
+ * values from the .info file:
+ *  - interface translation project
+ *  - l10n path.
  *
  * @param array $projects
  *   Array of projects.
  */
-function hook_l10n_update_projects_alter(&$projects) {
-  // The $projects array contains the project data produced by
-  // update_get_projects(). A number of the array elements are described in
-  // the documentation of hook_update_projects_alter().
+function hook_l10n_update_projects_alter(array &$projects) {
 
-  // In the .info file of a project a localization server can be specified.
-  // Using this hook the localization server specification can be altered or
-  // added. The 'l10n path' element is optional but can be specified to override
-  // the translation download path specified in the 10n_server.xml file.
-  $projects['existing_example_project'] = array(
-    'info' => array(
-      'l10n path' => 'http://example.com/files/translations/%core/%project/%project-%release.%language.po',
-    ),
-  );
+  foreach (array_keys($projects) as $name) {
+    // @todo These 'interface translation project' examples are good for system_projects_alter.
+    // Make all custom_* modules use the 'custom_module' module translation
+    // file.
+    if (strpos($name, 'custom_') === 0) {
+      $projects[$name]['info']['interface translation project'] = 'custom_module';
+    }
 
-  // With this hook it is also possible to add a new project wich does not
+    // Disable interface translation updates for all features.
+    if (strpos($name, 'feature_') === 0) {
+      $projects[$name]['info']['interface translation project'] = FALSE;
+    }
+  }
+
+  // Set the path to the custom module translation files if not already set.
+  if (isset($projects['custom_module']) && empty($projects['custom_module']['info']['l10n path'])) {
+    $path = drupal_get_path('module', 'custom_module');
+    $projects['custom_module']['info']['l10n path'] = $path . '/translations/%language.po';
+  }
+
+  // With this hook it is also possible to add a new project which does not
   // exist as a real module or theme project but is treated by the localization
-  // update module as one. The below data is the minumum to be specified.
+  // update module as one. The below data is the minimum to be specified.
   // As in the previous example the 'l10n path' element is optional.
   $projects['new_example_project'] = array(
     'project_type'  => 'module',
@@ -43,4 +53,18 @@ function hook_l10n_update_projects_alter(&$projects) {
       'l10n path' => 'http://example.com/files/translations/%core/%project/%project-%release.%language.po',
     ),
   );
+}
+
+/**
+ * Alter the list of languages to be updated by Localization Update.
+ *
+ * @param array $langcodes
+ *   Language codes of languages to be updated by Localization Update module.
+ */
+function hook_l10n_update_languages_alter(array &$langcodes) {
+  // Use a different language code for Dutch translations.
+  if (isset($langcodes['nl'])) {
+    $langcodes['nl-NL'] = $langcodes['nl'];
+    unset($langcodes['nl']);
+  }
 }

@@ -17,15 +17,16 @@ function l10n_update_drush_command() {
     'description' => 'Show translation status of available projects.',
     'options' => array(
       'languages' => 'Comma separated list of languages. Defaults to all available languages. Example: --languages="nl, fr, de"',
-    )
+    ),
   );
   $commands['l10n-update'] = array(
     'description' => 'Update translations.',
     'options' => array(
       'languages' => 'Comma separated list of languages. Defaults to all available languages. Example: --languages="nl, fr, de"',
-      'mode' => 'Determine if existing translations are overwitten during import. Use "overwrite" to overwrite any existing translation, "replace" to replace previously imported translations but not overwrite edited strings, "keep" to keep any existing translation and only add new translations. Default value: "keep"'
+      'mode' => 'Determine if existing translations are overwitten during import. Use "overwrite" to overwrite any existing translation, "replace" to replace previously imported translations but not overwrite edited strings, "keep" to keep any existing translation and only add new translations. Default value: "keep"',
     ),
   );
+
   return $commands;
 }
 
@@ -67,13 +68,13 @@ function drush_l10n_update_status() {
     // Build table header.
     $table = array();
     $header = array(dt('Project'));
-    foreach ($languages as $langcode => $language) {
+    foreach ($languages as $language) {
       $header[] = $language->name;
     }
     $table[] = $header;
 
     // Iterate projects to obtain per language status.
-    foreach ($status as $name => $project) {
+    foreach ($status as $project) {
       $row = array();
       // First column: Project name & version number.
       $project_details = reset($project);
@@ -140,12 +141,14 @@ function drush_l10n_update() {
           'customized' => FALSE,
         );
         break;
+
       case 'replace':
         $options['overwrite_options'] = array(
           'not_customized' => TRUE,
           'customized' => FALSE,
         );
         break;
+
       case 'overwrite':
         $options['overwrite_options'] = array(
           'not_customized' => TRUE,
@@ -155,13 +158,12 @@ function drush_l10n_update() {
 
       default:
         return drush_set_error('L10N_UPDATE_INVALID_MODE', dt('Invalid update mode. Valid options are keep, overwrite.'));
-        break;
     }
 
     $languages = array_keys(drush_get_option('languages'));
 
     // Get translation status of the projects, download and update translations.
-    $batch = l10n_update_batch_update_build(array(), $languages, $options);
+    $batch = l10n_update_batch_update_build(array_keys($updates['projects']), $languages, $options);
     drush_log($batch['title'], 'status');
     drush_log($batch['init_message'], 'status');
     batch_set($batch);
@@ -222,14 +224,19 @@ function _drush_l10n_update_validate_languages() {
 /**
  * Helper function to obtain $updates.
  *
- * @return $updates array or NULL.
+ * @return array|null
+ *   Array of projects and languages to be updated. Array keys:
+ *   - projects: Associative array of projects to be updated. Key: Project name.
+ *     Value: Project info array.
+ *   - languages: Associative array of languages to be updated. Key: Language
+ *     code. Value: Project info array.
  */
 function _drush_l10n_update_get_updates() {
   $updates = array();
   $languages = l10n_update_translatable_language_list();
   $status = l10n_update_get_status();
 
-    drush_log(dt('Fetching update information for all projects / all languages.'), 'status');
+  drush_log(dt('Fetching update information for all projects / all languages.'), 'status');
 
   // Prepare information about projects which have available translation
   // updates.
@@ -243,11 +250,19 @@ function _drush_l10n_update_get_updates() {
         }
       }
     }
-  }
-  if ($updates) {
-    return $updates;
+    if ($updates) {
+      return $updates;
+    }
+    else {
+      drush_log(dt('All project translations up to date.'), 'status');
+    }
   }
   else {
-    drush_log(dt('No languages to update.'), 'warning');
+    if (empty($languages)) {
+      drush_log(dt('No languages to update.'), 'warning');
+    }
+    else {
+      drush_log(dt('No translation status available. Run drush l10n-update-status first.'), 'warning');
+    }
   }
 }

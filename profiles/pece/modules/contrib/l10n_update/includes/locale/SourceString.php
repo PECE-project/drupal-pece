@@ -13,6 +13,15 @@
  * value, and is assumed to be in English language.
  */
 class SourceString extends StringBase {
+
+  /**
+   * Implements StringInterface::getParentId().
+   */
+  public function getParentId() {
+    // Source strings don't have a parent; Translations do.
+    return 0;
+  }
+
   /**
    * Implements StringInterface::isSource().
    */

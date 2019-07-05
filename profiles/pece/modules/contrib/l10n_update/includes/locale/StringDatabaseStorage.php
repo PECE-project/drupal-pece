@@ -91,7 +91,7 @@ class StringDatabaseStorage implements StringStorageInterface {
   /**
    * Implements StringStorageInterface::save().
    */
-  public function save($string) {
+  public function save(\StringInterface $string) {
     if ($string->isNew()) {
       $result = $this->dbStringInsert($string);
       if ($string->isSource() && $result) {
@@ -114,20 +114,20 @@ class StringDatabaseStorage implements StringStorageInterface {
    * @param string $version
    *   Drupal version to check against.
    */
-  protected function checkVersion($string, $version) {
+  protected function checkVersion(StringInterface $string, $version) {
     if ($string->getId() && $string->getVersion() != $version) {
       $string->setVersion($version);
       db_update('locales_source', $this->options)
-      ->condition('lid', $string->getId())
-      ->fields(array('version' => $version))
-      ->execute();
+        ->condition('lid', $string->getId())
+        ->fields(array('version' => $version))
+        ->execute();
     }
   }
 
   /**
    * Implements StringStorageInterface::delete().
    */
-  public function delete($string) {
+  public function delete(\StringInterface $string) {
     if ($keys = $this->dbStringKeys($string)) {
       $this->dbDelete('locales_target', $keys)->execute();
       if ($string->isSource()) {
@@ -138,7 +138,7 @@ class StringDatabaseStorage implements StringStorageInterface {
     }
     else {
       throw new StringStorageException(format_string('The string cannot be deleted because it lacks some key fields: @string', array(
-        '@string' => $string->getString()
+        '@string' => $string->getString(),
       )));
     }
     return $this;
@@ -147,19 +147,19 @@ class StringDatabaseStorage implements StringStorageInterface {
   /**
    * Implements StringStorageInterface::deleteLanguage().
    */
-  public function deleteStrings($conditions) {
+  public function deleteStrings(array $conditions) {
     $lids = $this->dbStringSelect($conditions, array('fields' => array('lid')))->execute()->fetchCol();
     if ($lids) {
       $this->dbDelete('locales_target', array('lid' => $lids))->execute();
-      $this->dbDelete('locales_source',  array('lid' => $lids))->execute();
-      $this->dbDelete('locales_location',  array('sid' => $lids))->execute();
+      $this->dbDelete('locales_source', array('lid' => $lids))->execute();
+      $this->dbDelete('locales_location', array('sid' => $lids))->execute();
     }
   }
 
   /**
    * Implements StringStorageInterface::deleteLanguage().
    */
-  public function deleteTranslations($conditions) {
+  public function deleteTranslations(array $conditions) {
     $this->dbDelete('locales_target', $conditions)->execute();
   }
 
@@ -176,7 +176,7 @@ class StringDatabaseStorage implements StringStorageInterface {
   public function createTranslation($values = array()) {
     return new TranslationString($values + array(
       'storage' => $this,
-      'is_new' => TRUE
+      'is_new' => TRUE,
     ));
   }
 
@@ -191,7 +191,7 @@ class StringDatabaseStorage implements StringStorageInterface {
    *   target or location table table.
    */
   protected function dbFieldTable($field) {
-    if (in_array($field, array('language', 'translation', 'customized'))) {
+    if (in_array($field, array('language', 'translation', 'l10n_status'))) {
       return 't';
     }
     elseif (in_array($field, array('type', 'name'))) {
@@ -211,7 +211,7 @@ class StringDatabaseStorage implements StringStorageInterface {
    * @return string
    *   The table name.
    */
-  protected function dbStringTable($string) {
+  protected function dbStringTable(StringInterface $string) {
     if ($string->isSource()) {
       return 'locales_source';
     }
@@ -229,7 +229,7 @@ class StringDatabaseStorage implements StringStorageInterface {
    * @return array
    *   Array with key fields if the string has all keys, or empty array if not.
    */
-  protected function dbStringKeys($string) {
+  protected function dbStringKeys(StringInterface $string) {
     if ($string->isSource()) {
       $keys = array('lid');
     }
@@ -285,6 +285,7 @@ class StringDatabaseStorage implements StringStorageInterface {
    *   ones:
    *   - 'translation', Whether to include translation fields too. Defaults to
    *     FALSE.
+   *
    * @return SelectQuery
    *   Query object with all the tables, fields and conditions.
    */
@@ -294,10 +295,6 @@ class StringDatabaseStorage implements StringStorageInterface {
     if (isset($conditions['customized'])) {
       $conditions['l10n_status'] = $conditions['customized'];
       unset($conditions['customized']);
-    }
-    if (isset($options['customized'])) {
-      $options['l10n_status'] = $options['customized'];
-      unset($options['customized']);
     }
     // Start building the query with source table and check whether we need to
     // join the target table too.
@@ -326,7 +323,7 @@ class StringDatabaseStorage implements StringStorageInterface {
       if (isset($conditions['language'])) {
         // If we've got a language condition, we use it for the join.
         $query->$join('locales_target', 't', "t.lid = s.lid AND t.language = :langcode", array(
-          ':langcode' => $conditions['language']
+          ':langcode' => $conditions['language'],
         ));
         unset($conditions['language']);
       }
@@ -336,6 +333,8 @@ class StringDatabaseStorage implements StringStorageInterface {
       }
       if (!empty($options['translation'])) {
         // We cannot just add all fields because 'lid' may get null values.
+        $query->addField('t', 'plid');
+        $query->addField('t', 'plural');
         $query->addField('t', 'language');
         $query->addField('t', 'translation');
         $query->addField('t', 'l10n_status', 'customized');
@@ -399,7 +398,7 @@ class StringDatabaseStorage implements StringStorageInterface {
   }
 
   /**
-   * Createds a database record for a string object.
+   * Creates a database record for a string object.
    *
    * @param StringInterface $string
    *   The string object.
@@ -411,14 +410,15 @@ class StringDatabaseStorage implements StringStorageInterface {
    * @throws StringStorageException
    *   If the string is not suitable for this storage, an exception ithrown.
    */
-  protected function dbStringInsert($string) {
+  protected function dbStringInsert(StringInterface $string) {
     if ($string->isSource()) {
       $string->setValues(array('context' => '', 'version' => 'none'), FALSE);
-      $fields = $string->getValues(array('source', 'context', 'version'));
+      $fields = $string->getValues(array('source', 'context', 'version', 'textgroup'));
+      // @todo Add support for D7 fields 'location' and 'textgroup'.
     }
     elseif ($string->isTranslation()) {
       $string->setValues(array('customized' => 0), FALSE);
-      $fields = $string->getValues(array('lid', 'language', 'translation', 'customized'));
+      $fields = $string->getValues(array('lid', 'language', 'translation', 'plid', 'plural', 'customized'));
     }
     if (!empty($fields)) {
       // Change field 'customized' into 'l10n_status'. This enables the Drupal 8
@@ -434,7 +434,7 @@ class StringDatabaseStorage implements StringStorageInterface {
     }
     else {
       throw new StringStorageException(format_string('The string cannot be saved: @string', array(
-          '@string' => $string->getString()
+          '@string' => $string->getString(),
       )));
     }
   }
@@ -452,7 +452,7 @@ class StringDatabaseStorage implements StringStorageInterface {
    * @throws StringStorageException
    *   If the string is not suitable for this storage, an exception is thrown.
    */
-  protected function dbStringUpdate($string) {
+  protected function dbStringUpdate(StringInterface $string) {
     if ($string->isSource()) {
       $values = $string->getValues(array('source', 'context', 'version'));
     }
@@ -478,7 +478,7 @@ class StringDatabaseStorage implements StringStorageInterface {
     }
     else {
       throw new StringStorageException(format_string('The string cannot be updated: @string', array(
-          '@string' => $string->getString()
+          '@string' => $string->getString(),
       )));
     }
   }
@@ -494,7 +494,7 @@ class StringDatabaseStorage implements StringStorageInterface {
    * @return DeleteQuery
    *   Returns a new DeleteQuery object for the active database.
    */
-  protected function dbDelete($table, $keys) {
+  protected function dbDelete($table, array $keys) {
     $query = db_delete($table, $this->options);
     // Change field 'customized' into 'l10n_status'. This enables the Drupal 8
     // backported code to work with the Drupal 7 style database tables.
@@ -515,4 +515,5 @@ class StringDatabaseStorage implements StringStorageInterface {
   protected function dbExecute($query, array $args = array()) {
     return db_query($query, $args, $this->options);
   }
+
 }

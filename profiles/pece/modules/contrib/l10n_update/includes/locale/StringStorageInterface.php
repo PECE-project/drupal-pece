@@ -93,7 +93,7 @@ interface StringStorageInterface {
    * @throws \StringStorageException
    *   In case of failures, an exception is thrown.
    */
-  public function save($string);
+  public function save(\StringInterface $string);
 
   /**
    * Delete string from storage.
@@ -107,7 +107,7 @@ interface StringStorageInterface {
    * @throws \StringStorageException
    *   In case of failures, an exception is thrown.
    */
-  public function delete($string);
+  public function delete(\StringInterface $string);
 
   /**
    * Deletes source strings and translations using conditions.
@@ -115,7 +115,7 @@ interface StringStorageInterface {
    * @param array $conditions
    *   Array with simple field conditions for source strings.
    */
-  public function deleteStrings($conditions);
+  public function deleteStrings(array $conditions);
 
   /**
    * Deletes translations using conditions.
@@ -123,7 +123,7 @@ interface StringStorageInterface {
    * @param array $conditions
    *   Array with simple field conditions for string translations.
    */
-  public function deleteTranslations($conditions);
+  public function deleteTranslations(array $conditions);
 
   /**
    * Counts source strings.
@@ -162,4 +162,5 @@ interface StringStorageInterface {
    *   New string translation object.
    */
   public function createTranslation($values = array());
+
 }
