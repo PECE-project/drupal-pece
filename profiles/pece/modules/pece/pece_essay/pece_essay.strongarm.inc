@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_essay.strongarm.inc
@@ -207,6 +208,12 @@ function pece_essay_strongarm() {
         'choice' => 0,
       ),
       'meta_content' => array(
+        'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'highlighted' => array(
         'status' => 0,
         'substitute' => 0,
         'default' => 0,
