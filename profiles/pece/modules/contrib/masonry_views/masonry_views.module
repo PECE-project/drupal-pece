@@ -18,13 +18,22 @@ function template_preprocess_views_view_masonry(&$vars) {
   // Run preprocess function for unformatted style
   template_preprocess_views_view_unformatted($vars);
 
+  // Add some default CSS.
+  drupal_add_css(drupal_get_path('module', 'masonry_views') . '/css/masonry_views.css');
+
   // Get view options
   $view = $vars['view'];
   $options = $vars['options'];
 
   // Display content in a Masonry layout
-  $container = '.view-' . drupal_clean_css_identifier($view->name) . '.view-display-id-' . $view->current_display . ' .view-content';
+  $container = '.view-' . drupal_clean_css_identifier($view->name) . '.view-display-id-' . $view->current_display . ' > .view-content';
+  if (!empty($options['grouping'])) {
+    $vars['grouping'] = true;
+    static $groupid;
+    $container .= ' .masonry-group-' . ++$groupid;
+    $vars['prefix'] = "<div class=\"masonry-group masonry-group-$groupid\">";
+    $vars['suffix'] = "</div>";
+  }
   $options['masonry_item_selector'] = '.masonry-item';
   masonry_apply($container, $options);
 }
-

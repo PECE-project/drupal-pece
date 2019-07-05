@@ -19,7 +19,7 @@ function masonry_views_views_plugins() {
         'type' => 'normal',
         'uses row plugin' => TRUE,
         'uses row class' => TRUE,
-        'uses grouping' => FALSE,
+        'uses grouping' => TRUE,
       ),
     ),
   );
