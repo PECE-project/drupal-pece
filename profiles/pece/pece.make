@@ -459,7 +459,7 @@ projects[extlink][version] = 1.20
 
 ; Real Name
 projects[realname][subdir] = contrib
-projects[realname][version] = 1.2
+projects[realname][version] = 1.4
 
 ; TagCloud
 projects[tagclouds][version] = 1.11
