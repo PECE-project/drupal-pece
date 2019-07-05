@@ -176,7 +176,7 @@ function entityconnect_form_alter(&$form, &$form_state, $form_id) {
   // try the arg(3) if we are on a add form.  Also if we are on an add form we
   // know that we are a child page.
   foreach(arg() as $key => $value) {
-    if (stripos($value, 'entityconnect-form-', 0) == 0) {
+    if (stripos($value, 'entityconnect-form-', 0) === 0) {
       $cid = $value;
     }
   }
