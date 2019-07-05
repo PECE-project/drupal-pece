@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * File: entityreference_view_widget.views.inc.
+ */
+
+/**
  * Implements hook_views_data_alter().
  */
 function entityreference_view_widget_views_data_alter(&$data) {

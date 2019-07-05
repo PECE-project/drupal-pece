@@ -1,4 +1,5 @@
-This module provides an advanced Entity Reference widget that uses a view for selecting items.
+This module provides an advanced Entity Reference
+widget that uses a view for selecting items.
 The view can be paginated and have exposed filters.
 It requires javascript to be enabled.
 

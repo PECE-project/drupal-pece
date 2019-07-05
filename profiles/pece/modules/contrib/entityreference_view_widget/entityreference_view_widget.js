@@ -1,6 +1,22 @@
+/**
+ * @file
+ * File: entityreference_view_widget.js.
+ */
+
 (function($) {
   Drupal.behaviors.entityreferenceViewWidget = {
     attach: function(context, settings) {
+      var widgetCheckboxSelector = '.entityreference-view-widget-checkbox';
+
+      // Remove the reference when a checkbox is unchecked.
+      if ($(widgetCheckboxSelector).length > 0) {
+        $(widgetCheckboxSelector).click(function () {
+          if (!$(this).is(':checked')) {
+            $(this).parents('.entityreference-view-widget-table-row').get(0).remove();
+          }
+        });
+      }
+
       var checkboxes = '#modal-content input.entity-reference-view-widget-select';
       var selectAllSelector = '#entityreference-view-widget-select-all';
       $(selectAllSelector).unbind('click').data('unselect', 0).click(function() {
@@ -12,7 +28,7 @@
           $(this).data('unselect', 0).text(Drupal.t('Select all'));
         }
         else {
-          use_prop ? $(checkboxes).prop('checked',true) : $(checkboxes).$(checkboxes).attr('checked', 'checked');
+          use_prop ? $(checkboxes).prop('checked',true) : $(checkboxes).attr('checked', 'checked');
           $(this).data('unselect', 1).text(Drupal.t('Unselect all'));
         }
         return false;

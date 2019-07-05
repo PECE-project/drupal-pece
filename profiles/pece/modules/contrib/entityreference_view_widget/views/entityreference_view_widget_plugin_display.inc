@@ -1,11 +1,24 @@
 <?php
 
 /**
+ * @file
+ * File: entityreference_view_widget_plugin_display.inc.
+ */
+
+/**
+ * Plugin display.
+ *
  * Provides the "Entityreference View Widget" display which configures
  * the view for inclusion in the widget.
+ *
+ * @codingStandardsIgnoreStart
  */
 class entityreference_view_widget_plugin_display extends views_plugin_display {
-  function option_definition() {
+  /**
+   * Option definition.
+   */
+  public function option_definition() {
+    // @codingStandardsIgnoreEnd
     $options = parent::option_definition();
 
     $options['style_plugin']['default'] = 'table';
@@ -24,4 +37,5 @@ class entityreference_view_widget_plugin_display extends views_plugin_display {
     $options['hide_left'] = array('default' => FALSE);
     return $options;
   }
+
 }

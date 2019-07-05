@@ -1,7 +1,17 @@
 <?php
 
 /**
- * Provides the checkbox field to tick the view rows and set them as field values.
+ * @file
+ * File: entityreference_view_widget_handler_field_checkbox.inc.
+ */
+
+/**
+ * Handler field checkbox.
+ *
+ * Provides the checkbox field to tick the view rows
+ * and set them as field values.
+ *
+ * @codingStandardsIgnoreStart
  */
 class entityreference_view_widget_handler_field_checkbox extends views_handler_field_entity {
   var $revision = FALSE;
@@ -9,7 +19,8 @@ class entityreference_view_widget_handler_field_checkbox extends views_handler_f
   /**
    * The form which replaces the placeholder from render().
    */
-  function views_form(&$form, &$form_state) {
+  public function views_form(&$form, &$form_state) {
+    // @codingStandardsIgnoreEnd
     // The view is empty, abort.
     if (empty($this->view->result)) {
       return;
@@ -18,8 +29,8 @@ class entityreference_view_widget_handler_field_checkbox extends views_handler_f
     $form[$this->options['id']] = array(
       '#tree' => TRUE,
     );
-    // At this point, the query has already been run, so we can access the results
-    // in order to get the base key value (for example, nid for nodes).
+    // At this point, the query has already been run, so we can access the
+    // results in order to get the base key value (for example, nid for nodes).
     foreach ($this->view->result as $row_index => $row) {
       $entity = $this->entities[$row_index];
       if ($this->view->base_field == 'search_api_id' && isset($row->_entity_properties)) {
@@ -51,7 +62,13 @@ class entityreference_view_widget_handler_field_checkbox extends views_handler_f
     }
   }
 
-  function render($values) {
+  /**
+   * Render.
+   *
+   * @codingStandardsIgnoreStart
+   */
+  public function render($values) {
+    // @codingStandardsIgnoreEnd
     if ($this->view->base_field == 'search_api_id' && isset($values->_entity_properties)) {
       $entity_id = $values->_entity_properties[$this->view->base_field];
     }
@@ -64,7 +81,13 @@ class entityreference_view_widget_handler_field_checkbox extends views_handler_f
     return '<!--form-item-' . $this->options['id'] . '--' . $this->view->row_index . '-->';
   }
 
-  function option_definition() {
+  /**
+   * Option definition.
+   *
+   * @codingStandardsIgnoreStart
+   */
+  public function option_definition() {
+    // @codingStandardsIgnoreEnd
     $options = parent::option_definition();
     $options['ervw'] = array(
       'contains' => array(
@@ -75,7 +98,13 @@ class entityreference_view_widget_handler_field_checkbox extends views_handler_f
     return $options;
   }
 
-  function options_form(&$form, &$form_state) {
+  /**
+   * Options form.
+   *
+   * @codingStandardsIgnoreStart
+   */
+  public function options_form(&$form, &$form_state) {
+    // @codingStandardsIgnoreEnd
     parent::options_form($form, $form_state);
 
     $form['ervw'] = array(
@@ -105,4 +134,5 @@ class entityreference_view_widget_handler_field_checkbox extends views_handler_f
       '#default_value' => $this->options['ervw']['label_display'],
     );
   }
+
 }
