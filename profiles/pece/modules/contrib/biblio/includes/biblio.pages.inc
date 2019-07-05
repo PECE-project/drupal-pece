@@ -1252,9 +1252,8 @@ function _biblio_get_authors($filter = NULL) {
     $where_clause = 'WHERE (' . implode(') AND (', $where) . ')';
   }
 
-  $suspects = array();
   $query = db_select('biblio_contributor_data', 'bcd')
-    ->fields('bcd', array('lastname', 'firstname', 'initials', 'alt_form'))
+    ->fields('bcd', array('lastname', 'firstname', 'alt_form'))
     ->groupBy('lastname')
     ->groupBy('firstname')
     ->groupBy('alt_form')
@@ -1266,6 +1265,7 @@ function _biblio_get_authors($filter = NULL) {
   }
   $result = $query->execute();
 
+  $suspects = array();
   foreach ($result as $author) {
     $suspects[] = $author->lastname;
   }

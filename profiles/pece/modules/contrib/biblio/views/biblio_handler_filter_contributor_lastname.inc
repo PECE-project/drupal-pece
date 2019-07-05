@@ -14,7 +14,7 @@ class biblio_handler_filter_contributor_lastname extends views_handler_filter_ma
                   ORDER by lastname, firstname");
     $this->value_options = array();
     foreach ($result as $row) {
-      $this->value_options[$row->lastname] = "$row->lastname, $row->firstname $row->initials";
+      $this->value_options[$row->cid] = "$row->lastname, $row->firstname $row->initials";
     }
   }
 

@@ -290,8 +290,8 @@ class BiblioEntrezClient {
    * at $retstart.
    *
    * If this is the first search for a given term a web environment and a query
-   * key is retrieved from the NCBI server in addition to the result set.
-   * See http://eutils.ncbi.nlm.nih.gov/corehtml/query/static/esearch_help.html.
+   * key is retrieved from the NCBI server in addition to the result set. See
+   * https://eutils.ncbi.nlm.nih.gov/corehtml/query/static/esearch_help.html.
    *
    * @param int $retStart
    *   the sequential number of the first record retrieved - default=0

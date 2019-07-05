@@ -9,8 +9,8 @@
  * This Vancouver style was modeled after these resources:
  * <http://www.library.uq.edu.au/training/citation/vancouv.pdf>
  * <http://library.curtin.edu.au/research_and_information_skills/referencing/vancouver.pdf>
- * <http://www.icmje.org/index.html> citing: <http://www.nlm.nih.gov/citingmedicine/>
- * <http://www.nlm.nih.gov/bsd/uniform_requirements.html>
+ * <http://www.icmje.org/index.html> citing: <https://www.nlm.nih.gov/citingmedicine/>
+ * <https://www.nlm.nih.gov/bsd/uniform_requirements.html>
  * <http://library.sun.ac.za//eng/help/infolit2002/bibvancouver.htm>
  * Based on 'cite_AMA.php'
  * NOTES: - In the Vancouver style, the reference list is arranged numerically in the order in which references are cited in the text.
@@ -19,7 +19,7 @@
  *          (e.g. "Proceedings of the 5th Germ Cell Tumour Conference; 2001 Sep 13-15; Leeds, UK").
  * TODO: - abstracts, newspaper/magazine articles, patents & reports?
  *       - arrange references numerically
- *       - for newspaper articles, only the beginning page number of an article should be included (see: <http://www.ncbi.nlm.nih.gov/books/bv.fcgi?rid=citmed.section.41496#41607>)
+ *       - for newspaper articles, only the beginning page number of an article should be included (see: <https://www.ncbi.nlm.nih.gov/books/bv.fcgi?rid=citmed.section.41496#41607>)
  *       - where to put (and how to format) editors of whole books that also have an author?
  *       - see also inline comments labeled with TODO (and NOTE)
  * Modified for use in biblio by Ron Jerome.

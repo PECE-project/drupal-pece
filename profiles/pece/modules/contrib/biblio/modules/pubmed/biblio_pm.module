@@ -38,7 +38,7 @@ function biblio_pm_cron() {
             $message = '';
             $message = t('!nid was updated due to changes originating at !url', array(
               '!nid' => l($nid, 'node/' . $nid),
-              '!url' => l(t('PubMed'), 'http://www.ncbi.nlm.nih.gov/pubmed/' . $ids[$nid]),
+              '!url' => l(t('PubMed'), 'https://www.ncbi.nlm.nih.gov/pubmed/' . $ids[$nid]),
             )
             );
             watchdog('biblio_pm', $message, array(), WATCHDOG_WARNING);
@@ -342,7 +342,7 @@ function _biblio_pm_create_node_from_xml($xml, $terms, $batch, $session_id) {
         $curr_date = format_date(time());
         $node->log = t('Automatically updated by the Biblio PubMed module on !date due to changes at !url', array(
           '!date' => $curr_date,
-          '!url' => l('PubMed', 'http://www.ncbi.nlm.nih.gov/pubmed/' . $node->biblio_pubmed_id),
+          '!url' => l('PubMed', 'https://www.ncbi.nlm.nih.gov/pubmed/' . $node->biblio_pubmed_id),
         ));
         $dup = NULL;
       }
@@ -397,7 +397,7 @@ function biblio_pm_biblio_lookup_link($node) {
     return array();
   }
 
-  $link = 'http://www.ncbi.nlm.nih.gov/pubmed/' . $node->biblio_pubmed_id . '?dopt=Abstract';
+  $link = 'https://www.ncbi.nlm.nih.gov/pubmed/' . $node->biblio_pubmed_id . '?dopt=Abstract';
   $attrs = array('title' => t("Click to view the PubMed listing for this node"));
   if (variable_get('biblio_links_target_new_window', NULL)) {
     $attrs = array_merge($attrs, array('target' => '_blank'));
@@ -568,7 +568,7 @@ function biblio_pm_biblio_node_table_rows_alter(&$rows, $node) {
           'class' => array('biblio-row-title'),
         ),
         array(
-          'data' => l($node->biblio_pubmed_id, 'http://www.ncbi.nlm.nih.gov/pubmed/' . $node->biblio_pubmed_id . '?dopt=Abstract'),
+          'data' => l($node->biblio_pubmed_id, 'https://www.ncbi.nlm.nih.gov/pubmed/' . $node->biblio_pubmed_id . '?dopt=Abstract'),
         ),
     );
   }

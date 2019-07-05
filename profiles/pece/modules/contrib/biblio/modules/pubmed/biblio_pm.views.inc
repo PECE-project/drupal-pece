@@ -44,7 +44,7 @@ function biblio_pm_views_data() {
   );
   $data['biblio_pubmed']['biblio_pmcid'] = array(
     'title' => t('PMCID'),
-    'help' => t('The PubMed Central ID (http://www.ncbi.nlm.nih.gov/pmc/)'),
+    'help' => t('The PubMed Central ID (https://www.ncbi.nlm.nih.gov/pmc/)'),
     'field' => array(
       'handler' => 'views_handler_field',
       'click sortable' => TRUE,

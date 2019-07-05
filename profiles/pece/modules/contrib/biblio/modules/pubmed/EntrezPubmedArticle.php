@@ -113,7 +113,7 @@ class BiblioEntrezPubmedArticle {
         'biblio_issn'     => (string) $this->article->Article->Journal->ISSN,
         'biblio_pages'    => (string) $this->article->Article->Pagination->MedlinePgn,
         'biblio_abst_e'   => $this->abst(),
-        'biblio_custom1'  => "http://www.ncbi.nlm.nih.gov/pubmed/{$this->id}?dopt=Abstract",
+        'biblio_custom1'  => "https://www.ncbi.nlm.nih.gov/pubmed/{$this->id}?dopt=Abstract",
         'biblio_keywords' => $this->keywords(),
         'biblio_lang'     => $this->lang(),
       );
@@ -202,7 +202,7 @@ class BiblioEntrezPubmedArticle {
   /**
    * Returns the publication date obtained from the given MedlineCitation's
    * PubDate element. See the reference documentation for possible values:
-   * http://www.nlm.nih.gov/bsd/licensee/elements_descriptions.html#pubdate
+   * https://www.nlm.nih.gov/bsd/licensee/elements_descriptions.html#pubdate
    * According to the above source it always begins with a four digit year.
    *
    * @return string
