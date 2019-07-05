@@ -152,14 +152,15 @@ function _pece_groups_edit_form_fields_invisible(&$form, $fields = array()) {
 function pece_groups_form_alter(&$form, &$form_state, $form_id) {
   if (strpos($form_id,'_node_form') !== FALSE) {
     if (isset($form_state['pece_groups_edit_group_field']) &&
-        $form_state['pece_groups_edit_group_field'] === TRUE)
+        $form_state['pece_groups_edit_group_field'] === TRUE) {
 
-    $req_fields = array(
-      'field_pece_contributors',
-      'field_pece_crit_commentary',
-    );
-    foreach ($req_fields as $field) {
-      Drupal\pece_groups\FormBypasser::RemoveRequiredFields($form[$field], $form_id);
+      $req_fields = array(
+        'field_pece_contributors',
+        'field_pece_crit_commentary',
+      );
+      foreach ($req_fields as $field) {
+        Drupal\pece_groups\FormBypasser::RemoveRequiredFields($form[$field], $form_id);
+      }
     }
   }
 }
