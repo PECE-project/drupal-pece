@@ -1,18 +1,40 @@
 <?php
 
 /**
+ * @file
+ * Install file for External Links module.
+ */
+
+/**
  * Implements hook_install().
  */
 function extlink_install() {
   // Weight needs to be 1 for compatibility with SpamSpan.
-  db_query("UPDATE {system} SET weight = 1 WHERE name = 'extlink'");
+  db_update('system')
+    ->fields(array('weight' => 1))
+    ->condition('name', 'extlink', '=')
+    ->execute();
 }
 
 /**
  * Implements hook_uninstall().
  */
 function extlink_uninstall() {
-  db_query("DELETE FROM {variable} WHERE name LIKE 'extlink_%'");
+  variable_del('extlink_alert');
+  variable_del('extlink_alert_text');
+  variable_del('extlink_class');
+  variable_del('extlink_css_exclude');
+  variable_del('extlink_css_explicit');
+  variable_del('extlink_exclude');
+  variable_del('extlink_icon_placement');
+  variable_del('extlink_img_class');
+  variable_del('extlink_include');
+  variable_del('extlink_label');
+  variable_del('extlink_mailto_class');
+  variable_del('extlink_mailto_label');
+  variable_del('extlink_subdomains');
+  variable_del('extlink_target');
+
   cache_clear_all('variables', 'cache');
 }
 

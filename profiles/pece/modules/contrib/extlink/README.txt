@@ -1,4 +1,5 @@
-
+INTRODUCTION
+------------
 The External Links module is a very simple approach to adding icons to links
 to external websites or e-mail addresses. It is a purely JavaScript
 implementation, so the icons are only shown to users that have JavaScript
@@ -7,8 +8,12 @@ enabled.
 External Links was written by Nathan Haug.
 Built by Robots: http://www.lullabot.com
 
-Install
--------
+REQUIREMENTS
+------------
+No special requirements.
+
+INSTALLATION
+------------
 Simply install External Links like you would any other module.
 
 1) Copy the extlink folder to the modules folder in your installation.
@@ -18,7 +23,13 @@ Simply install External Links like you would any other module.
 3) No additional configuration is necessary though you may fine-tune settings at
    Administer -> Site configuration -> External Links (/admin/settings/extlink).
 
-A note about the CSS
+CONFIGURATION
+-------------
+No additional configuration is necessary though you may fine-tune settings at
+Manage -> Configuration -> External Links
+(/admin/config/user-interface/extlink).
+
+A NOTE ABOUT THE CSS
 --------------------
 This module adds a CSS file that is only a few lines in length. You may choose
 to move this CSS to your theme to prevent the file from needing to be loaded
@@ -33,3 +44,10 @@ separately. To do this:
 
 Note that you DO NOT need to make a extlink.css file. Specifying the file in the
 info file is enough to tell Drupal not to load the original file.
+
+MAINTAINERS
+-----------
+Current maintainers:
+
+- Lachlan Ennis (elachlan) - https://www.drupal.org/u/elachlan
+- Nate Haug (quicksketch) - https://www.drupal.org/u/quicksketch

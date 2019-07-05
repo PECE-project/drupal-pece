@@ -1,28 +1,39 @@
 <?php
+
+/**
+ * @file
+ * External Link tests.
+ */
+
 /**
  * Base class for External Link tests.
  *
- * Provides common setup stuff and various helper functions
+ * Provides common setup stuff and various helper functions.
  */
 class ExtlinkBaseWebTestCase extends DrupalWebTestCase {
   /**
    * User with various administrative permissions.
-   * @var Drupal user
+   *
+   * @var Drupaluser
    */
-  protected $admin_user;
+  protected $adminUser;
 
   /**
-   * Normal visitor with limited permissions
-   * @var Drupal user;
+   * Normal visitor with limited permissions.
+   *
+   * @var Drupaluser
    */
-  protected $normal_user;
-  
-    /**
-   * Drupal path of the (general) External Links admin page
+  protected $normalUser;
+
+  /**
+   * Drupal path of the (general) External Links admin page.
    */
   const EXTLINK_ADMIN_PATH = 'admin/config/user-interface/extlink';
-  
-  function setUp() {
+
+  /**
+   * Set up tests.
+   */
+  public function setUp() {
     // Enable any module that you will need in your tests.
     parent::setUp('extlink');
 
@@ -31,46 +42,25 @@ class ExtlinkBaseWebTestCase extends DrupalWebTestCase {
       'access comments', 'post comments', 'skip comment approval',
       'access content', 'create page content', 'edit own page content',
     );
-    $this->normal_user = $this->drupalCreateUser($permissions);
+    $this->normalUser = $this->drupalCreateUser($permissions);
 
     // Create an admin user.
     $permissions[] = 'administer site configuration';
     $permissions[] = 'administer permissions';
     $permissions[] = 'administer content types';
-    $this->admin_user = $this->drupalCreateUser($permissions);
+    $this->adminUser = $this->drupalCreateUser($permissions);
   }
-  
-  protected function getNodeFormValues() {
-    $edit = array(
-      'title' => 'node_title ' . $this->randomName(32),
-      'body[' . LANGUAGE_NONE . '][0][value]' => 'node_body ' . $this->randomName(256) . ' <a href="http://google.com">Google!</a>',
-    );
-    return $edit;
-  }
-  
-  /**
-   * Test if External Link is present
-   */
-  protected function assertExternalLinkPresence() {
-    $elements = $this->xpath('//span[@class="ext"]');
-    if (count($elements) > 0)
-       $this->pass('There should be an External Link on the form.', 'External Links');
-    else
-       $this->fail('There should be an External Link on the form.', 'External Links');
-  }
+
 }
 
-class ExtlinkTestCase extends ExtlinkBaseWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => t('General External Links functionality'),
-      'description' => t('Testing the basic functionality of External Links'),
-      'group' => t('External Links'),
-    );
-  }
-}
-
+/**
+ * Test Case for External Links administration functionality.
+ */
 class ExtlinkAdminTestCase extends ExtlinkBaseWebTestCase {
+
+  /**
+   * Get test info.
+   */
   public static function getInfo() {
     return array(
       'name' => t('External Links administration functionality'),
@@ -82,16 +72,14 @@ class ExtlinkAdminTestCase extends ExtlinkBaseWebTestCase {
   /**
    * Test access to the admin pages.
    */
-  function testAdminAccess() {
-    $this->drupalLogin($this->normal_user);
+  public function testAdminAccess() {
+    $this->drupalLogin($this->normalUser);
     $this->drupalGet(self::EXTLINK_ADMIN_PATH);
-    file_put_contents('tmp.simpletest.html', $this->drupalGetContent());
     $this->assertText(t('Access denied'), 'Normal users should not be able to access the External Links admin pages', 'External Links');
 
-    $this->drupalLogin($this->admin_user);
+    $this->drupalLogin($this->adminUser);
     $this->drupalGet(self::EXTLINK_ADMIN_PATH);
-    file_put_contents('tmp.simpletest.html', $this->drupalGetContent());
     $this->assertNoText(t('Access denied'), 'Admin users should be able to access the External Links admin pages', 'External Links');
   }
+
 }
-?>
