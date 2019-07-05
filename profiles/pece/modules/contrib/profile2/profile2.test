@@ -62,8 +62,10 @@ class Profile2CRUDTestCase extends DrupalWebTestCase {
     profile2_save($profile);
 
     $profiles = profile2_load_by_user($user1);
-    $this->assertEqual($profiles['test']->label(), 'label', 'Created and loaded profile 1.');
-    $this->assertEqual($profiles['test2']->label(), 'label2', 'Created and loaded profile 2.');
+    $label = t('@type profile for @user', array('@type' => 'label', '@user' => format_username($user1)));
+    $label2 = t('@type profile for @user', array('@type' => 'label2', '@user' => format_username($user1)));
+    $this->assertEqual($profiles['test']->label(), $label, 'Created and loaded profile 1.');
+    $this->assertEqual($profiles['test2']->label(), $label2, 'Created and loaded profile 2.');
 
     // Test looking up from static cache works also.
     $profiles = profile2_load_by_user($user1);
@@ -132,6 +134,32 @@ class Profile2CRUDTestCase extends DrupalWebTestCase {
 
     $this->drupalGet('user/' . $user2->uid);
     $this->assertText(check_plain($edit['profile_main[profile_fullname][und][0][value]']), 'Profile displayed.');
+  }
+
+  /**
+   * Tests optional access parameters.
+   */
+  function testAccess() {
+    global $user;
+    $admin_user = $this->drupalCreateUser(array('administer profiles'));
+    $user2 = $this->drupalCreateUser();
+    // Create profiles for the admin user.
+    $profile = profile2_create(array('type' => 'test', 'uid' => $admin_user->uid));
+    profile2_save($profile);
+
+    // Make sure access is denied to the profile.
+    $this->drupalLogin($user2);
+    $this->drupalGet('user/' . $admin_user->uid . '/edit/main');
+    $this->assertText(t('Access denied'), 'Access has been denied.');
+
+    // Set the global user to ensure the defaults are respected.
+    $user = $user2;
+
+    // Ensure optional parameters check access for the current logged in user.
+    $this->assertFalse(profile2_access('edit'), 'No edit access for user 2');
+
+    // Ensure optional parameters check access for the admin user.
+    $this->assertTrue(profile2_access('edit', NULL, $admin_user), 'No edit access for user 1');
   }
 
 }

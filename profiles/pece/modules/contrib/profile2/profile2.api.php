@@ -138,7 +138,7 @@ function hook_profile2_view($profile, $view_mode, $langcode) {
 *
 * @see hook_entity_view_alter()
 */
-function hook_profile2_view_alter($build) {
+function hook_profile2_view_alter(&$build) {
   if ($build['#view_mode'] == 'full' && isset($build['an_additional_field'])) {
     // Change its weight.
     $build['an_additional_field']['#weight'] = -10;

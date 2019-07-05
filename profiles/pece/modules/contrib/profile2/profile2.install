@@ -16,7 +16,7 @@ function profile2_install() {
       'type' => 'main',
       'label' => t('Main profile'),
       'weight' => 0,
-      'data' => array('registration' => TRUE, 'use_page' => TRUE),
+      'data' => array('registration' => TRUE),
     ));
     $type->save();
     user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('edit own main profile', 'view own main profile'));
@@ -81,6 +81,9 @@ function profile2_schema() {
         'columns' => array('type' => 'type'),
       ),
     ),
+    'unique keys' => array(
+      'user_profile_type' => array('type', 'uid'),
+    ),
     'primary key' => array('pid'),
   );
 
@@ -144,6 +147,22 @@ function profile2_schema() {
 }
 
 /**
+ * Implements hook_uninstall()
+ */
+function profile2_uninstall() {
+  // Select all available profile2 bundles from the database directly, instead
+  // of entity_load() call. See https://drupal.org/node/1330598 for details.
+ $types = db_select('profile_type', 'p')
+    ->fields('p')
+    ->execute()
+    ->fetchAllAssoc('type');
+
+  foreach ($types as $name => $type) {
+    field_attach_delete_bundle('profile2', $name);
+  }
+}
+
+/**
  * Add in the exportable entity db columns as required by the entity API.
  */
 function profile2_update_7100() {
@@ -203,4 +222,47 @@ function profile2_update_7102() {
     'type' => 'int',
     'not null' => FALSE,
   ));
+}
+
+/**
+ * Remove duplicate profile records in batches of 50.
+ */
+function profile2_update_7103(&$sandbox) {
+  // Query to get duplicate profiles.
+  $query = db_select('profile', 'p1');
+  $query->distinct();
+  $query->fields('p1', array('pid'));
+  $query->join('profile', 'p2', 'p1.type = p2.type AND p1.uid = p2.uid AND p1.label = p2.label AND p1.pid < p2.pid');
+
+  // Setup initial batch variables.
+  if (!isset($sandbox['progress'])) {
+    // The number of duplicate profiles deleted so far.
+    $sandbox['progress'] = 0;
+    // Total number of duplicate profiles that will be deleted.
+    $sandbox['total'] = $query->execute()->rowCount();
+  }
+
+  // Query the next 50 profiles to be deleted.
+  $query->range(0, 50);
+  $result = $query->execute();
+
+  // Update progress of removing duplicate profiles.
+  $sandbox['progress'] = $sandbox['progress'] + $result->rowCount();
+
+  // Delete duplicate profiles.
+  profile2_delete_multiple($result->fetchCol());
+
+  // Update batch status.
+  $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['total']) ? TRUE : ($sandbox['progress'] / $sandbox['total']);
+
+  if ($sandbox['#finished']) {
+    return t('@total duplicate profiles were removed from the system.', array('@total' => $sandbox['progress']));
+  }
+}
+
+/**
+ * The combination of profile type and uid should be unique.
+ */
+function profile2_update_7104() {
+  db_add_unique_key('profile', 'user_profile_type', array('type', 'uid'));
 }

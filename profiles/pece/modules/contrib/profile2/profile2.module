@@ -119,6 +119,39 @@ function profile2_type_load($type) {
 }
 
 /**
+ * Implements hook_menu().
+ */
+function profile2_menu() {
+  $items = array();
+
+  // Define page which provides form to generate profiles using
+  // Devel generate module.
+  if (module_exists('devel_generate')) {
+    $items['admin/config/development/generate/profile2'] = array(
+      'title' => 'Generate profiles',
+      'description' => 'Generate a given number of profiles for users. Optionally override current user profiles.',
+      'access arguments' => array('administer profiles'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('profile2_generate_form'),
+      'file' => 'profile2.devel.inc',
+    );
+  }
+
+  $items['user/%profile2_by_uid/%/delete'] = array(
+    'title' => 'Delete',
+    'description' => 'Delete Profile of User.',
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('profile2_delete_confirm_form', 1),
+    'load arguments' => array(2),
+    'access callback' => 'profile2_access',
+    'access arguments' => array('delete', 1),
+    'file' => 'profile2.delete.inc',
+  );
+  return $items;
+}
+
+/**
  * Implements hook_permission().
  */
 function profile2_permission() {
@@ -147,6 +180,9 @@ function profile2_permission() {
       ),
       "view any $type_name profile" => array(
         'title' => t('%type_name: View any profile', array('%type_name' => $type->getTranslation('label'))),
+      ),
+      "delete own $type_name profile" => array(
+        'title' => t('%type_name: Delete own profile', array('%type_name' => $type->getTranslation('label'))),
       ),
     );
   }
@@ -225,24 +261,17 @@ function profile2_load_by_user($account, $type_name = NULL) {
   $uid = is_object($account) ? $account->uid : $account;
 
   if (!isset($cache[$uid])) {
-    if (empty($type_name)) {
-      $profiles = profile2_load_multiple(FALSE, array('uid' => $uid));
-      // Cache ids for further lookups.
-      $cache[$uid] = array();
-      foreach ($profiles as $pid => $profile) {
-        $cache[$uid][$profile->type] = $pid;
-      }
-      return $profiles ? array_combine(array_keys($cache[$uid]), $profiles) : array();
-    }
     $cache[$uid] = db_select('profile', 'p')
       ->fields('p', array('type', 'pid'))
       ->condition('uid', $uid)
       ->execute()
       ->fetchAllKeyed();
   }
+
   if (isset($type_name)) {
     return isset($cache[$uid][$type_name]) ? profile2_load($cache[$uid][$type_name]) : FALSE;
   }
+
   // Return an array containing profiles keyed by profile type.
   return $cache[$uid] ? array_combine(array_keys($cache[$uid]), profile2_load_multiple($cache[$uid])) : $cache[$uid];
 }
@@ -321,8 +350,25 @@ function profile2_type_delete(ProfileType $type) {
 }
 
 /**
-* Implements hook_profile2_type_delete()
-*/
+ * Implements hook_profile2_type_insert().
+ */
+function profile2_profile2_type_insert(ProfileType $type) {
+  // Do not directly issue menu rebuilds here to avoid potentially multiple
+  // rebuilds. Instead, let menu_get_item() issue the rebuild on the next page.
+  variable_set('menu_rebuild_needed', TRUE);
+}
+
+/**
+ * Implements hook_profile2_type_update().
+ */
+function profile2_profile2_type_update(ProfileType $type) {
+  // @see profile2_profile2_type_insert()
+  variable_set('menu_rebuild_needed', TRUE);
+}
+
+/**
+ * Implements hook_profile2_type_delete()
+ */
 function profile2_profile2_type_delete(ProfileType $type) {
   // Delete all profiles of this type but only if this is not a revert.
   if (!$type->hasStatus(ENTITY_IN_CODE)) {
@@ -330,6 +376,8 @@ function profile2_profile2_type_delete(ProfileType $type) {
     if ($pids) {
       profile2_delete_multiple($pids);
     }
+    // @see profile2_profile2_type_insert()
+    variable_set('menu_rebuild_needed', TRUE);
   }
 }
 
@@ -342,10 +390,10 @@ function profile2_user_view($account, $view_mode, $langcode) {
       if (profile2_access('view', $profile)) {
         $account->content['profile_' . $type] = array(
           '#type' => 'user_profile_category',
-          '#title' => $profile->label,
+          '#title' => $profile_type->getTranslation('label'),
           '#prefix' => '<a id="profile-' . $profile->type . '"></a>',
         );
-        $account->content['profile_' . $type]['view'] = $profile->view('account');
+        $account->content['profile_' . $type]['view'] = $profile->view($view_mode);
       }
     }
   }
@@ -358,15 +406,43 @@ function profile2_user_view($account, $view_mode, $langcode) {
  * @see profile2_form_submit_handler
  */
 function profile2_form_user_profile_form_alter(&$form, &$form_state) {
+  global $user;
   if (($type = profile2_get_types($form['#user_category'])) && $type->userCategory) {
     if (empty($form_state['profiles'])) {
       $profile = profile2_load_by_user($form['#user'], $form['#user_category']);
       if (empty($profile)) {
         $profile = profile2_create(array('type' => $form['#user_category'], 'uid' => $form['#user']->uid));
+        $profile->is_new = TRUE;
       }
       $form_state['profiles'][$profile->type] = $profile;
+
+      if (user_access('administer profiles') && $user->uid != $profile->uid) {
+        $str_button_value = t('Delete profile');
+      }
+      elseif (user_access("delete own $profile->type profile") && $user->uid === $profile->uid) {
+        $str_button_value = t('Delete this profile');
+      }
+    }
+    if (empty($profile->is_new) && !empty($str_button_value)) {
+      $form['actions']['delete'] = array(
+        '#type' => 'submit',
+        '#value' => $str_button_value,
+        '#weight' => 45,
+        '#limit_validation_errors' => array(),
+        '#submit' => array('profile2_form_submit_own_delete')
+      );
     }
     profile2_attach_form($form, $form_state);
+  }
+}
+
+/**
+ * Profile form submit handler for the delete button.
+ */
+function profile2_form_submit_own_delete($form, &$form_state) {
+  $profile = $form_state['profiles'][$form['#user_category']];
+  if (isset($profile) && is_object($profile)) {
+    $form_state['redirect'] = 'user/' . $profile->uid . '/' . $form['#user_category'] . '/delete';
   }
 }
 
@@ -379,8 +455,15 @@ function profile2_form_user_register_form_alter(&$form, &$form_state) {
       if (empty($form_state['profiles'][$type_name])) {
         $form_state['profiles'][$type_name] = profile2_create(array('type' => $type_name));
       }
-      profile2_attach_form($form, $form_state);
-      // Wrap each profile form in a fieldset.
+    }
+  }
+
+  // If we have profiles to attach to the registration form - then do it.
+  if (!empty($form_state['profiles'])) {
+    profile2_attach_form($form, $form_state);
+
+    // Wrap each profile form in a fieldset.
+    foreach ($form_state['profiles'] as $type_name => $profile_type) {
       $form['profile_' . $type_name] += array(
         '#type' => 'fieldset',
         '#title' => check_plain($profile_type->getTranslation('label')),
@@ -412,12 +495,16 @@ function profile2_attach_form(&$form, &$form_state) {
     $form['profile_' . $profile->type]['#parents'] = array('profile_' . $profile->type);
     field_attach_form('profile2', $profile, $form['profile_' . $profile->type], $form_state);
 
-    if (count(field_info_instances('profile2', $profile->type)) == 0) {
-      $form['profile_' . $profile->type]['message'] = array(
-        '#access' => user_access('administer profile types'),
-        '#markup' => t('No fields have been associated with this profile type. Go to the <a href="!url">Profile types</a> page to add some fields.', array('!url' => url('admin/structure/profiles'))),
-      );
+    if (user_access('administer profile types')) {
+      if (count(field_info_instances('profile2', $profile->type)) == 0) {
+        $form['profile_' . $profile->type]['message'] = array(
+          '#markup' => t('No fields have been associated with this profile type. Go to the <a href="!url">Profile types</a> page to add some fields.', array('!url' => url('admin/structure/profiles'))),
+        );
+      }
     }
+
+    // Make sure we don't have duplicate pre render callbacks.
+    $form['profile_' . $profile->type]['#pre_render'] = array_unique($form['profile_' . $profile->type]['#pre_render']);
 
     // Provide a central place for modules to alter the profile forms, but
     // skip that in case the caller cares about invoking the hooks.
@@ -429,7 +516,42 @@ function profile2_attach_form(&$form, &$form_state) {
     }
   }
   $form['#validate'][] = 'profile2_form_validate_handler';
-  $form['#submit'][] = 'profile2_form_submit_handler';
+
+  // Default name of user registry form callback.
+  $register_submit_callback = 'user_register_submit';
+
+  // LoginToBoggan module replaces default user_register_submit() callback
+  // with his own. So if this module enabled we need to track his callback
+  // instead one that comes from the User module.
+  if (module_exists('logintoboggan')) {
+    $register_submit_callback = 'logintoboggan_user_register_submit';
+  }
+
+  // Search for key of user register submit callback.
+  if (!empty($form['#submit']) && is_array($form['#submit'])) {
+    $submit_key = array_search($register_submit_callback, $form['#submit']);
+  }
+
+  // Add these hooks only when needed, and ensure they are not added twice.
+  if (isset($submit_key) && $submit_key !== FALSE && !in_array('profile2_form_before_user_register_submit_handler', $form['#submit'])) {
+
+    // Insert submit callback right before the user register submit callback.
+    // Needs for disabling email notification during user registration.
+    array_splice($form['#submit'], $submit_key, 0, array('profile2_form_before_user_register_submit_handler'));
+
+    // Add a submit callback right after the user register submit callback.
+    // This is needed for creation of a new user profile.
+    array_splice($form['#submit'], $submit_key + 2, 0, array('profile2_form_submit_handler'));
+
+    // Insert submit handler right after the creation of new user profile.
+    // This is needed for sending email which was blocked during registration.
+    array_splice($form['#submit'], $submit_key + 3, 0, array('profile2_form_after_user_register_submit_handler'));
+  }
+  else {
+    // Fallback if some contrib module removes user register submit callback
+    // from form submit functions.
+    $form['#submit'][] = 'profile2_form_submit_handler';
+  }
 }
 
 /**
@@ -445,6 +567,99 @@ function profile2_form_validate_handler(&$form, &$form_state) {
       $pseudo_entity->type = $type;
       field_attach_form_validate('profile2', $pseudo_entity, $form['profile_' . $profile->type], $form_state);
     }
+  }
+}
+
+/**
+ * User registration form submit handler
+ * that executes right before user_register_submit().
+ *
+ * In generally, this callback disables the notification emails
+ * during the execution of user_register_submit() callback.
+ * The reason for this - we want to support profile2 tokens
+ * in emails during registration, and there is no another
+ * proper way to do this. See https://drupal.org/node/1097684.
+ *
+ * @see profile2_form_after_user_register_submit_handler()
+ * @see user_register_submit()
+ * @see profile2_attach_form()
+ */
+function profile2_form_before_user_register_submit_handler(&$form, &$form_state) {
+  global $conf;
+
+  // List of available operations during the registration.
+  $register_ops = array('register_admin_created', 'register_no_approval_required', 'register_pending_approval');
+
+  // We also have to track if we change a variables, because
+  // later we have to restore them.
+  $changed_ops = &drupal_static('profile2_register_changed_operations', array());
+  foreach ($register_ops as $op) {
+
+    // Save variable value.
+    if (isset($conf['user_mail_' . $op . '_notify'])) {
+      $changed_ops['user_mail_' . $op . '_notify'] = $conf['user_mail_' . $op . '_notify'];
+    }
+
+    // Temporary disable the notification about registration.
+    $conf['user_mail_' . $op . '_notify'] = FALSE;
+  }
+}
+
+/**
+ * User registration form submit handler
+ * that executes right after user_register_submit().
+ *
+ * This callback sends delayed email notification to a user
+ * about his registration. See https://drupal.org/node/1097684.
+ *
+ * @see profile2_form_prepare_user_register_submit_handler()
+ * @see user_register_submit()
+ * @see profile2_attach_form()
+ */
+function profile2_form_after_user_register_submit_handler(&$form, &$form_state) {
+  global $conf;
+
+  // List of registration operations that where
+  // notification values were changed.
+  $changed_ops = &drupal_static('profile2_register_changed_operations', array());
+
+  // List of available operations during the registration.
+  $register_ops = array('register_admin_created', 'register_no_approval_required', 'register_pending_approval');
+  foreach ($register_ops as $op) {
+
+    // If we changed the notification value in
+    // profile2_form_before_user_register_submit_handler() then change it back.
+    if (isset($changed_ops['user_mail_' . $op . '_notify'])) {
+      $conf['user_mail_' . $op . '_notify'] = $changed_ops['user_mail_' . $op . '_notify'];
+    }
+    // Otherwise just remove this value from a global variables array.
+    else {
+      unset($conf['user_mail_' . $op . '_notify']);
+    }
+  }
+
+  // Get the values that we need to define which notification
+  // should be sent to the user. Generally this is a trimmed version
+  // of user_register_submit() callback.
+  $admin = !empty($form_state['values']['administer_users']);
+  $account = $form_state['user'];
+  $notify = !empty($form_state['values']['notify']);
+
+  if ($admin && !$notify) {
+    // If admin has created a new account and decided to don't notify a user -
+    // then just do nothing.
+  }
+  elseif (!$admin && !variable_get('user_email_verification', TRUE) && $account->status) {
+    _user_mail_notify('register_no_approval_required', $account);
+  }
+  // No administrator approval required.
+  elseif ($account->status || $notify) {
+    $op = $notify ? 'register_admin_created' : 'register_no_approval_required';
+    _user_mail_notify($op, $account);
+  }
+  // Administrator approval required.
+  elseif (!$admin) {
+    _user_mail_notify('register_pending_approval', $account);
   }
 }
 
@@ -544,9 +759,26 @@ function profile2_category_access($account, $type_name) {
  * @see profile2_profile2_access()
  */
 function profile2_access($op, $profile = NULL, $account = NULL) {
+
+  // Check if profile user has current profile available by role.
+  if (isset($profile->type)) {
+    $profile_type = profile2_type_load($profile->type);
+    if (!empty($profile_type) && !empty($profile_type->data['roles']) && isset($profile->uid)) {
+      $profile_user = user_load($profile->uid);
+      $profile_roles = array_keys($profile_type->data['roles']);
+      $user_roles = array_keys($profile_user->roles);
+      $matches = array_intersect($profile_roles, $user_roles);
+      if (empty($matches)) {
+        return FALSE;
+      }
+    }
+  }
+
+  // With access to all profiles there is no need to check further.
   if (user_access('administer profiles', $account)) {
     return TRUE;
   }
+
   if ($op == 'create' || $op == 'update') {
     $op = 'edit';
   }
@@ -568,8 +800,7 @@ function profile2_access($op, $profile = NULL, $account = NULL) {
  * Implements hook_profile2_access().
  */
 function profile2_profile2_access($op, $profile = NULL, $account = NULL) {
-  // Don't grant access for users to delete their profile.
-  if (isset($profile) && ($type_name = $profile->type) && $op != 'delete') {
+  if (isset($profile) && ($type_name = $profile->type)) {
     if (user_access("$op any $type_name profile", $account)) {
       return TRUE;
     }
@@ -714,12 +945,11 @@ class Profile extends Entity {
   }
 
   public function defaultLabel() {
-    if (module_exists('profile2_i18n')) {
-      // Run the label through i18n_string() using the profile2_type label
-      // context, so the default label (= the type's label) gets translated.
-      return entity_i18n_string('profile2:profile2_type:' . $this->type . ':label', $this->label);
-    }
-    return $this->label;
+    // Return a label that combines the type name and user name, translatable.
+    return t('@type profile for @user', array(
+      '@type' => profile2_get_types($this->type)->getTranslation('label'),
+      '@user' => format_username($this->user()),
+    ));
   }
 
   public function buildContent($view_mode = 'full', $langcode = NULL) {
@@ -732,6 +962,19 @@ class Profile extends Entity {
   }
 
   public function save() {
+    // Don't create a new profile if the user already have one of the same type.
+    $existing_profile = profile2_load_by_user($this->uid, $this->type);
+    if (empty($this->pid) && !empty($existing_profile)) {
+      watchdog('profile2_create', serialize(array(
+        'message' => 'Profile already exists',
+        'uid' => $this->uid,
+        'type' => $this->type,
+        'path' => current_path(),
+        'logged_in_user' => $GLOBALS['user']->uid,
+      )), array(), WATCHDOG_WARNING);
+      return;
+    }
+
     // Care about setting created and changed values. But do not automatically
     // set a created values for already existing profiles.
     if (empty($this->created) && (!empty($this->is_new) || !$this->pid)) {
@@ -739,12 +982,12 @@ class Profile extends Entity {
     }
     $this->changed = REQUEST_TIME;
 
-    parent::save();
-    // Update the static cache from profile2_load_by_user().
+    // Clear the static cache from profile2_load_by_user() before saving, so
+    // that profiles are correctly loaded in insert/update hooks.
     $cache = &drupal_static('profile2_load_by_user', array());
-    if (isset($cache[$this->uid])) {
-      $cache[$this->uid][$this->type] = $this->pid;
-    }
+    unset($cache[$this->uid]);
+
+    return parent::save();
   }
 }
 
@@ -821,7 +1064,7 @@ function profile2_view($profile, $view_mode = 'full', $langcode = NULL, $page = 
  * profiles.
  */
 function profile2_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
-  if ($form['instance']['entity_type']['#value'] == 'profile2') {
+  if (!empty($form['instance']['entity_type']['#value']) && $form['instance']['entity_type']['#value'] == 'profile2') {
     $form['field']['settings']['profile2_private'] = array(
       '#type' => 'checkbox',
       '#title' => t('Make the content of this field private.'),
@@ -842,15 +1085,17 @@ function profile2_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
  * Implements hook_field_access().
  */
 function profile2_field_access($op, $field, $entity_type, $profile = NULL, $account = NULL) {
-  if ($entity_type == 'profile2' && $op == 'view' && !empty($field['settings']['profile2_private']) && !user_access('administer profiles', $account)) {
-    // For profiles, deny general view access for private fields.
-    if (!isset($profile)) {
+  if ($entity_type == 'profile2' && $op == 'view' && isset($profile)) {
+    // Check if the profile type is accessible (e.g. applicable to the role).
+    if (!profile2_access($op, $profile, $account)) {
       return FALSE;
     }
-    // Also deny view access, if someone else views a private field.
-    $account = isset($account) ? $account : $GLOBALS['user'];
-    if ($account->uid != $profile->uid) {
-      return FALSE;
+    // Deny view access, if someone else views a private field.
+    if (!empty($field['settings']['profile2_private']) && !user_access('administer profiles', $account)) {
+      $account = isset($account) ? $account : $GLOBALS['user'];
+      if ($account->uid != $profile->uid) {
+        return FALSE;
+      }
     }
   }
 }
@@ -893,9 +1138,71 @@ function profile2_user_get_properties($account, array $options, $name) {
 }
 
 /**
-* Implementation of hook_ctools_plugin_dierctory() to let the system know
-* we implement plugins.
+ * Implements hook_ctools_plugin_directory().
+ */
+function profile2_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools' && !empty($plugin_type)) {
+    return 'plugins/' . $plugin_type;
+  }
+}
+
+/**
+ * Implements hook_preprocess_ctools_context_item_form().
+ *
+ * When the User context is added, CTools will update the relationship dropdown
+ * with ajax. The dropdown is passed through theme_ctools_context_item_form
+ * before being passed to ajax_render, so that is our best opportunity to
+ * alter it.
+ *
+ * @see ctools_context_ajax_item_add
+ */
+function profile2_preprocess_ctools_context_item_form(&$vars) {
+  unset($vars['form']['buttons']['relationship']['item']['#options']['entity_from_schema:uid-user-profile2']);
+}
+
+/**
+ * Determines whether the given user has access to delete a profile.
 */
-function profile2_ctools_plugin_directory($module, $plugin) {
-  return 'plugins/' . $plugin;
+function profile2_delete_access($uid, $type_name) {
+  $profile = profile2_by_uid_load($uid, $type_name);
+  return is_object($profile) ? profile2_access('edit', $profile) : FALSE;
+}
+
+/**
+ * Menu load callback.
+ *
+ * Returns the profile object for the given user. If there is none yet, a new
+ * object is created.
+ */
+function profile2_by_uid_load($uid, $type_name) {
+  if ($uid && is_numeric($uid) && ($account = user_load($uid))) {
+    $profile = profile2_load_by_user($account, $type_name);
+    if (!$profile) {
+      $profile = profile2_create(array('type' => $type_name));
+      $profile->setUser($account);
+      $profile->is_new = TRUE;
+    }
+    return $profile;
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ * Fix the page titles on the profile2 edit tabs.
+ * We want the titles to be the full profile label, giving the user name & profile name.
+ */
+function profile2_preprocess_page(&$vars) {
+  // This is true when editing a profile in a tab.
+  if (!empty($vars['page']['content']['system_main']['#user_category'])) {
+    $ptype = $vars['page']['content']['system_main']['#user_category'];
+    if (!empty($vars['page']['content']['system_main']["profile_$ptype"])) {
+      $item = $vars['page']['content']['system_main']["profile_$ptype"];
+      // If we've found an item, and it has a profile2 entity, display the title.
+      if (!empty($item['#entity'])) {
+        $vars['title'] = $item['#entity']->label();
+      }
+    }
+  }
 }
