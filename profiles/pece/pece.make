@@ -467,7 +467,7 @@ projects[tagclouds][subdir]  = contrib
 
 ; Taxonomy Access Fix
 projects[taxonomy_access_fix][subdir] = contrib
-projects[taxonomy_access_fix][version] = 2.3
+projects[taxonomy_access_fix][version] = 2.4
 
 ; Annotation
 ;projects[annotation][subdir] = contrib
