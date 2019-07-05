@@ -462,7 +462,7 @@ projects[realname][subdir] = contrib
 projects[realname][version] = 1.4
 
 ; TagCloud
-projects[tagclouds][version] = 1.11
+projects[tagclouds][version] = 1.12
 projects[tagclouds][subdir]  = contrib
 
 ; Taxonomy Access Fix
