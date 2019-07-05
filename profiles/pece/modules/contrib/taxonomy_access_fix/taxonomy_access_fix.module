@@ -149,6 +149,8 @@ function taxonomy_access_fix_access($op, $vocabulary = NULL) {
     return TRUE;
   }
 
+  $access = FALSE;
+
   if ($vocabulary && is_string($vocabulary)) {
     $vocabulary = taxonomy_vocabulary_machine_name_load($vocabulary);
   }
@@ -159,7 +161,8 @@ function taxonomy_access_fix_access($op, $vocabulary = NULL) {
       // Allow access when the user has access to at least one vocabulary.
       foreach (taxonomy_get_vocabularies() as $vid => $vocabulary) {
         if (user_access('edit terms in ' . $vid) || user_access('delete terms in ' . $vid) || user_access('add terms in ' . $vocabulary->machine_name)) {
-          return TRUE;
+          $access = TRUE;
+          break;
         }
       }
       break;
@@ -169,7 +172,7 @@ function taxonomy_access_fix_access($op, $vocabulary = NULL) {
       if ($vocabulary) {
         $vid = $vocabulary->vid;
         if (user_access('edit terms in ' . $vid) || user_access('delete terms in ' . $vid) || user_access('add terms in ' . $vocabulary->machine_name)) {
-          return TRUE;
+          $access = TRUE;
         }
       }
       break;
@@ -177,11 +180,15 @@ function taxonomy_access_fix_access($op, $vocabulary = NULL) {
     case 'add terms':
       if ($vocabulary) {
         if (user_access('add terms in ' . $vocabulary->machine_name)) {
-          return TRUE;
+          $access = TRUE;
         }
       }
       break;
   }
+
+  drupal_alter('taxonomy_access_fix', $op, $vocabulary, $access);
+
+  return $access;
 }
 
 /**
