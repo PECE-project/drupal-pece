@@ -1,0 +1,47 @@
+version: "3"
+
+services:
+
+  php:
+    image: wodby/drupal:$DRUPAL_TAG
+    environment:
+      PHP_FPM_CLEAR_ENV: "no"
+      PHP_XDEBUG: 1
+      PHP_XDEBUG_DEFAULT_ENABLE: 1
+      PHP_XDEBUG_REMOTE_CONNECT_BACK: 1
+## Read instructions at https://wodby.com/stacks/drupal/docs/local/xdebug/
+#      PHP_XDEBUG: 1
+#      PHP_XDEBUG_DEFAULT_ENABLE: 1
+#      PHP_XDEBUG_REMOTE_CONNECT_BACK: 0
+#      PHP_IDE_CONFIG: serverName=my-ide
+#      PHP_XDEBUG_REMOTE_HOST: host.docker.internal # Docker 18.03+ Mac/Win
+#      PHP_XDEBUG_REMOTE_HOST: 172.17.0.1 # Linux
+#      PHP_XDEBUG_REMOTE_HOST: 10.254.254.254 # macOS, Docker < 18.03
+#      PHP_XDEBUG_REMOTE_HOST: 10.0.75.1 # Windows, Docker < 18.03
+#      PHP_XDEBUG_REMOTE_LOG: /tmp/php-xdebug.log
+#    volumes:
+#      - codebase:/var/www/html
+## For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
+#      - ./:/var/www/html:cached # User-guided caching
+#      - docker-sync:/var/www/html # Docker-sync
+## For XHProf and Xdebug profiler traces
+#      - files:/mnt/files
+
+## For windows users
+#  mariadb:
+#    environment:
+#      MYSQL_INNODB_FLUSH_METHOD: fsync
+
+#  nginx:
+#    volumes:
+#      - codebase:/var/www/html
+
+#volumes:
+#  codebase:
+
+#volumes:
+## Docker-sync for macOS users
+#  docker-sync:
+#    external: true
+## For Xdebug profiler
+#  files:
