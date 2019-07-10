@@ -39,7 +39,7 @@ To request information about the history of PECE or PECE as a research
 project, please contact [Kim Fortun](mailto:kfortun@uci.edu) and [Mike Fortun](mailto:mike.fortun@uci.edu).
 
 To request information about downloading an instance of PECE for your
-own project, please contact [Brian Callahan](mailto:callab3@rpi.edu).
+own project, please contact [Brian Callahan](mailto:callab5@rpi.edu).
 
 To request information about the PECE architecture (data model,
 permissions system, user interfaces, modules, or workflows), please
