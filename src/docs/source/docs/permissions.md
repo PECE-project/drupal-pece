@@ -20,6 +20,8 @@ been IRB-approved to view collaborative research materials. Researchers
 have all of the same capabilities as a contributor, except that they can
 also view content that has been designated as Restricted.
 
+**Administrators** can approve user registrations and configure the site theme. Administrators have access to edit any artifact on the platform. 
+
 Content Permissions
 -----------
 
