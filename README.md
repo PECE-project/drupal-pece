@@ -221,4 +221,4 @@ Our official documentation contains the information on authorship for the design
 
 ## License
 
-All the code produced for PECE is released under the GNU GPL version 3. Please, read our [legal documents for more information](http://pece.readthedocs.io/en/latest/legal.html).
+All the code produced for PECE is released under the GNU GPL version 3 only. Please, read our [legal documents for more information](http://pece.readthedocs.io/en/latest/legal.html).
