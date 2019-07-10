@@ -324,16 +324,7 @@ contributed the content.
 
 ### What is “critical commentary”?
 
-Artifacts that you upload that may be protected by copyright law can
-only be posted on the site if they fall under the “Fair Use” provisions
-of copyright law. Within “Fair Use” provisions, exceptions to laws that
-prohibit the replication of copyrighted material are made for materials
-that are the subject of scholarly “critical commentary” or to materials
-that are being copied for educational purposes. In this field, you
-should provide commentary on the artifact that documents why it is
-important and why it is relevant to the platform, along with an analysis
-of the artifact. Keep in mind most analysis will take place in the
-annotations. See sections on the [*Bibliography*](#zotero) field,
+In this field, you should provide commentary on the artifact that documents its significance as an ethnographic objects and why it is relevant to the platform. See sections on thes
 Source field, and [*Licensing*](#licensing) for more information about
 attribution of artifacts.
 
