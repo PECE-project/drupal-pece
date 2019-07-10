@@ -41,9 +41,7 @@ In [*Resources*](../legal), you will find links to many useful documents such as
 
 !!! note "PECE Governance and Contacts"
 
-    For PECE as a research project, please contact [Kim Fortun](mailto:kfortun@uci.edu) and [Mike Fortun](mailto:mike.fortun@uci.edu).
-
-    For PECE installation, please contact [Brian Callahan](mailto:callab3@rpi.edu).
+    For PECE installation, please contact [Brian Callahan](mailto:callab5@rpi.edu).
 
     For PECE architecture and usability, please contact [Lindsay Poirier](mailto:lnpoirier@ucdavis.edu).
 

@@ -48,6 +48,8 @@ Drupal 7 core:
 
 -   php-ssh2 (for backup SFTP support, installed via PHP pear)
 
+-   pecl-yaml (for YAML parsing)
+
 ### Quick Install
 
 If you have the server backend already set-up, you can quickly install
@@ -60,7 +62,7 @@ Clone the ‘’pece-distro’’ repository:
 
 Create an empty database:
 
-> mysql -u \$YOUR\_USER -p -e "CREATE DATABASE \$YOUR\_DB\_NAME
+> mysql -u $YOUR\_USER -p -e "CREATE DATABASE $YOUR\_DB\_NAME
 > CHARACTER SET utf8 COLLATE utf8\_general\_ci;"
 
 Proceed to the URL in which your Drupal will reside, i.e.
@@ -74,6 +76,10 @@ to do so, if you have questions. (In our experience, we have needed to
 set the file permissions at sites/default/files/artifacts to 770 and
 sites/default/files/private to 770.)
 
+I want to use HTTPS with PECE. How can I do that?
+------------------------------------------------------------------------
+A very simple tutorial for setting up HTTPS with Certbot on Ubuntu can be found [here](https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04).
+
 I’ve installed PECE, but none of my links are working. What is going on?
 ------------------------------------------------------------------------
 
@@ -82,11 +88,22 @@ Your webserver is not properly configured to support what is called
 properly set-up. This configuration can be done in the vhost file of
 your nginx configuration, following the [*Perusio guide*](https://github.com/perusio/drupal-with-nginx) or using the [*default.htaccess file that is provided by default by Drupal*](https://github.com/PECE-project/drupal/blob/7.x/.htaccess) if you are running Apache.
 
-When should the admin log-in credentials be used?
--------------------------------------------------
+I get an error about a YAML parser being missing. How can I fix that?
+------------------------------------------------------------------------
 
-Distribute admin log-in credentials to as few users as possible. Admin
-log-in credentials should only be used to configure settings and to
+Newer versions of PHP require you to install pecl-yaml for YAML parsing. You can find it [here](https://pecl.php.net/package/yaml).
+We recommend using the latest version, which is 2.0.4 at the time of writing. Follow the pecl-yaml instructions to build and install it.
+Then edit your php.ini file. For example, if you are using PHP 7.2, the file will be found at:
+/etc/php/7.2/apache2/php.ini
+
+Add the following line to php.ini:
+extension=yaml.so
+
+When should the admin login credentials be used?
+------------------------------------------------
+
+Distribute admin login credentials to as few users as possible. Admin
+login credentials should only be used to configure settings and to
 approve new users. The admin credentials should not be used to add
 content or comment on content.
 
@@ -191,13 +208,13 @@ Upload Size field, enter a new value (we use 2GB). Click Save
 Configuration. You may also need to increase the upload limit on the
 server.
 
-How do I update the platform when a new instance of distro is released?
------------------------------------------------------------------------
+How do I update my instance when a new version of the PECE distro is released?
+------------------------------------------------------------------------------
 
 Always back-up your files and database before updating the platform.
 
 Put the site in maintenance mode. Under sites/default/, there is a file
-called settings.php. Search for \$update\_free\_access = FALSE; and
+called settings.php. Search for $update\_free\_access = FALSE; and
 change FALSE to TRUE.
 
 Then, go to YourSite/update.php and follow the steps. In theory major
