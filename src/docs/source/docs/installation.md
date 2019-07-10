@@ -124,27 +124,6 @@ of the platform. Please, refer to our section on “Legal Documents” for
 more information about the software licenses we use for the PECE project
 (and for the Free Software technology we use from the Drupal project).
 
-How do I configure AES?
------------------------
-
-To config AES, go to: “Administration » Configuration » System » AES
-settings”. Make sure to point to a secure directory outside the webroot
-where PECE is installed to store your key and make it read-only (to the
-owner of the httpd service), instead of having it stored in the database
-(which tends to be a much less secure option).
-
-How do I configure Amber to archive links on the platform?
-----------------------------------------------------------
-
-PECE comes pre-shipped with Amber, so if you have an account on Perma.cc
-you can set PECE up to use it an store your snapshots there. This is the
-way to go when it comes to long-term preservation of content for
-scholarly purposes. Go to “Administration » Configuration » Content
-authoring » Amber” and select “perma.cc” as alternate backend and
-provide your API key in the text field below. Done! You are storing
-“PECE Website” link artifacts, hopefully, for many future
-anthropological lives and times now.
-
 How do I set up back-ups?
 -------------------------
 
@@ -201,6 +180,7 @@ While logged-in as an administrator, navigate to ‘Dashboard’. Under the
 ‘Add Content’ heading, select front page slider. Fill in the relevant
 fields and Save. Note that all images will be scaled and cropped to
 960x460 pixels.
+
 
 How do I increase the file upload limit?
 ----------------------------------------

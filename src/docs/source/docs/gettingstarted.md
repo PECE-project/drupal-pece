@@ -64,26 +64,6 @@ other projects and most of whom are volunteering time to work on PECE)
 and overcoming bureaucratic barriers. This means that requests for
 changes could take several weeks or even months. **We would really like for PECE to be a resource that researchers find useful; however, we ask that you be patient with us when requesting fixes and new features.**
 
-### How to report a bug or request a feature
-
-If you do notice a bug in the platform, or if there is a feature that
-you really believe would support your work, we ask that you follow the
-following steps:
-
-1.  Check our [*GitHub issue*](https://github.com/PECE-project/pece-distro/issues) page to see if someone else has reported the bug or requested the feature.
-
-2.  Search this document to see if your question has been answered within it.
-
-3.  If you’ve gone through steps 1 and 2 and still don’t see your issue listed, please navigate to [*the following form*](https://platform-for-experimental-collaborative-ethnography.forms.fm/issues/forms/5287) for reporting your concern. Once you submit the form, an issue will be created on our [*GitHub issue*](https://github.com/PECE-project/pece-distro/issues) page. You can monitor this page to see who has been assigned to your issue and to track progress on addressing it.
-
-We sometimes get several emails a day pointing out bugs or requesting
-fixes in the platform. Following these steps will ensure that we don’t
-lose your request and that we can prioritize them appropriately. It will
-also dramatically speed up the time that we can get up to speed on the
-issue, as many of our follow-up questions will be answered through the
-form.
-
-
 Introduction to PECE
 =====================
 
@@ -219,67 +199,3 @@ content that has been associated with a private group as “public” or
 content that has been associated with a public group as “private.”
 
 ### Overview - Who will see my content?![](media/permissions.png)
-
-PECE Wishlist
--------------
-
-### Groups
-
--   Groups will be able to maintain a group bibliography.
-
--   Groups will have a forum space where they can facilitate group discussions.
-
-### Artifacts
-
--   Users can create an artifact that embeds content or widgets stored elsewhere through an iFrame. This will allow embedding YouTube videos, Google Calendars, and other cool things.
-
--   All fieldnotes on the site will have a title based on the user that created it and the date it was created.
-
-### Annotations and Analytics
-
--   On annotation pages, users will be able to filter the annotations according to how they’ve been tagged.
-
-### Memos, Essays, and Other Visualizations
-
--   The memo page will be redesigned so that groups can be linked from them.
-
--   Users will be able to create timelines.
-
--   On the PECE Essay the card view will allow users to display PDFs rather than just icons linking to PDFs.
-
-### User experience/interface
-
--   All of the icons on the site will be clickable, along with the links that they are attached to.
-
--   Similar tags or misspelled tags on the site will be merged automatically.
-
-### Data Management
-
--   All content on the site can be assigned a unique Archival Resource Key.
-
--   The site will require that all artifacts be uniquely named.
-
--   There will be options to add metadata about a collaborative project’s agreed upon techniques and equipment.
-
-### Discovery
-
--   We are working to enhance capacity to search across multiple instances of PECE.
-
-### Site Administration
-
--   We hope to eventually create options where user data that has been licensed with a Creative Commons license can be maintained, while All Rights Reserved data can be deleted with the user.
-
--   The admin role will be configured with additional options.
-
-Known Bugs
-----------
-
-### Groups
-
--   When you click the “Request Group Membership” button in a certain group, the box changes to “Unsubscribe from Group” even before the group’s administrator approves your membership. You will not be able to add to the group, and it will not display on your Dashboard until the administrator approves your membership. Soon this button will display “Group Membership Pending” in the interim.
-
--   Only 5 group members display under the “Members” heading of the group page. Soon all group members will display with the Owner of the group listed at the top.
-
-### Annotations and Analytics
-
--   On the Annotated Artifacts tab of user’s dashboard, links to annotations display rather than links to artifacts that the user has annotated.

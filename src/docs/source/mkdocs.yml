@@ -1,11 +1,15 @@
 site_name: PECE Documentation
+repo_url: https://github.com/PECE-project/pece-distro
 nav:
    - Home: index.md
-   - About PECE: about.md
    - Getting Started: gettingstarted.md
-   - Installing and Administering PECE: installation.md
-   - Users' Guide: usersguide.md
-   - Data Management: datamanagement.md
-   - Legal Documents: legal.md
-   - Contributors' Guide: contributors.md
-theme: readthedocs
+   - User's Guide: usersguide.md
+   - Administrator's Guide: installation.md
+   - Resources: legal.md
+theme:
+  name: cinder
+extra_css:
+  - "css/extra.css"
+markdown_extensions:
+  - admonition
+  - markdown.extensions.extra

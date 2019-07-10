@@ -1,54 +1,52 @@
 
-![](media/pece-logo-5.png)
+![](media/pece-logo-5.png#logo)
 
-Stay Connected
---------------
+<div markdown="1" class="row">
 
-Find a downloadable distribution of the PECE software at our [Github repo](https://github.com/PECE-project/pece-distro).
+<div markdown="1" class="column1">
 
-Stay connected with other PECE users by joining our [Slack Channel](https://peceniks.slack.com/).
+The Platform for Experimental, Collaborative Ethnography (PECE) is a Free and Open Source (Drupal-based) digital platform that supports multi-sited, cross-scale ethnographic and historical research. PECE provides a place to archive and share primary data, facilitates analytic collaboration, and encourages experimentation with diverse modes of publication. The platform encourages humanities scholars to experiment with digitally-mediated, interdisciplinary collaboration, provides opportunities to involve students and practitioners in humanities research as it progresses, and quickens the public availability of humanities research in an open access form. PECE also enables experimentation with new forms of peer review for humanities research, and functions as a portal to a suite of open source tools useful for humanities research, including tools developed in data science for other scientific communities.
 
-Sign-up for our [monthly newsletter](http://eepurl.com/ghNzof) to receive development updates, tips, and to learn how others are using PECE.
+At its core, PECE is an experimental system. PECE’s design is both theoretically inflected and ethnographically grounded: platform design has been oriented by “design logics” drawn
+from cultural, social, and language theories. We intend for the system to be as user-friendly as possible, but also acknowledge that conventional modes of knowledge organization tend to overdetermine the structure and meaning of knowledge, history, and culture. The way we have deliberately chosen to organize content in PECE may feel unfamiliar and disorienting to some, but we hope that in choosing to use PECE, you are as excited as we are to engage in this experiment.
 
-Sections all new users should read (at a minimum)
--------------------------------------------------
+Overview of this Documentation
+=====================
 
--   [*PECE Development*](gettingstarted#pece-development)
+In [*Getting Started*](../gettingstarted)
 
--   [*PECE Governance and Contacts*](gettingstarted#pece-governance-and-contacts)
+</div>
 
--   [*Introduction to PECE*](gettingstarted#introduction-to-pece)
+<div markdown="1" class="column2">
 
--   [*What is “critical commentary”?*](usersguide#what-is-critical-commentary)
+!!! note "Stay Connected"
 
--   [*Annotation Etiquette*](usersguide#annotation-ettiquette)
+    Find a downloadable distribution of the PECE software at our [Github repo](https://github.com/PECE-project/pece-distro).
 
--   [*Tagging Etiquette*](usersguide#tagging-etiquette)
+    Stay connected with other PECE users by joining our [Slack Channel](https://peceniks.slack.com/).
 
--   [*Licensing*](usersguide#licensing)
+    Sign-up for our [monthly newsletter](http://eepurl.com/ghNzof) to receive development updates, tips, and to learn how others are using PECE.
 
-Reporting Bugs and Requesting Features
------------------------------------------------------------------
+!!! note "Reporting Bugs and Requesting Features"
 
-[*How to report a bug or request a feature*](gettingstarted#how-to-report-a-bug-or-request-a-feature)
+    Please check our our [*GitHub issue*](https://github.com/PECE-project/pece-distro/issues) page to see if the request has already been made.
 
-PECE Governance and Contacts
------------------------------
+    Bugs and requests can be reported to [*here*](https://platform-for-experimental-collaborative-ethnography.forms.fm/issues/forms/5287). The progress of your request can be tracked on our [*GitHub issue*](https://github.com/PECE-project/pece-distro/issues) page.
 
-To request information about the history of PECE or PECE as a research
-project, please contact [Kim Fortun](mailto:kfortun@uci.edu) and [Mike Fortun](mailto:mike.fortun@uci.edu).
+!!! note "PECE Governance and Contacts"
 
-To request information about downloading an instance of PECE for your
-own project, please contact [Brian Callahan](mailto:callab3@rpi.edu).
+    For PECE as a research project, please contact [Kim Fortun](mailto:kfortun@uci.edu) and [Mike Fortun](mailto:mike.fortun@uci.edu).
 
-To request information about the PECE architecture (data model,
-permissions system, user interfaces, modules, or workflows), please
-contact [Lindsay Poirier](mailto:lnpoirier@ucdavis.edu).
+    For PECE installation, please contact [Brian Callahan](mailto:callab3@rpi.edu).
 
-To request that your account registration request be approved, please
-contact the administrator of your PECE instance. Below is a list of
-administrators for current PECE instances:
+    For PECE architecture and usability, please contact [Lindsay Poirier](mailto:lnpoirier@ucdavis.edu).
 
-*World PECE, The Asthma Files, Disaster STS Network*
+    For account registration, , please contact site administrator:
 
-Contact: [PECE Tech Team](mailto:pece.tech.team@gmail.com)
+    *World PECE, The Asthma Files, Disaster STS Network*
+
+    Contact: [PECE Tech Team](mailto:pece.tech.team@gmail.com)
+
+</div>
+
+</div>
