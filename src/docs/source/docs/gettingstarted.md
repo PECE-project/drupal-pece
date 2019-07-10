@@ -47,6 +47,12 @@ Introduction to PECE
 
 <div markdown="1" class="column2">
 
+!!! note "Why PECE?"
+
+    - [Background](../about)
+    - [Aims and Questions](../aims)
+    - [Rationale](../rationale)
+
 !!! note "Helpful Resources"
 
     - [Glossary of PECE Terms](../glossary)
