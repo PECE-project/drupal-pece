@@ -60,7 +60,7 @@ Clone the ‘’pece-distro’’ repository:
 
 Create an empty database:
 
-> mysql -u \$YOUR\_USER -p -e "CREATE DATABASE \$YOUR\_DB\_NAME
+> mysql -u $YOUR\_USER -p -e "CREATE DATABASE $YOUR\_DB\_NAME
 > CHARACTER SET utf8 COLLATE utf8\_general\_ci;"
 
 Proceed to the URL in which your Drupal will reside, i.e.
@@ -211,13 +211,13 @@ Upload Size field, enter a new value (we use 2GB). Click Save
 Configuration. You may also need to increase the upload limit on the
 server.
 
-How do I update the platform when a new instance of distro is released?
------------------------------------------------------------------------
+How do I update my instance when a new version of the PECE distro is released?
+------------------------------------------------------------------------------
 
 Always back-up your files and database before updating the platform.
 
 Put the site in maintenance mode. Under sites/default/, there is a file
-called settings.php. Search for \$update\_free\_access = FALSE; and
+called settings.php. Search for $update\_free\_access = FALSE; and
 change FALSE to TRUE.
 
 Then, go to YourSite/update.php and follow the steps. In theory major
