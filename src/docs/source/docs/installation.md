@@ -48,6 +48,8 @@ Drupal 7 core:
 
 -   php-ssh2 (for backup SFTP support, installed via PHP pear)
 
+-   pecl-yaml (for YAML parsing)
+
 ### Quick Install
 
 If you have the server backend already set-up, you can quickly install
@@ -81,6 +83,17 @@ Your webserver is not properly configured to support what is called
 “Clean URLs” on Drupal. Make sure you have your httpd “rewrite” rules
 properly set-up. This configuration can be done in the vhost file of
 your nginx configuration, following the [*Perusio guide*](https://github.com/perusio/drupal-with-nginx) or using the [*default.htaccess file that is provided by default by Drupal*](https://github.com/PECE-project/drupal/blob/7.x/.htaccess) if you are running Apache.
+
+I get an error about a YAML parser being missing. How can I fix that?
+------------------------------------------------------------------------
+
+Newer versions of PHP require you to install pecl-yaml for YAML parsing. You can find it [here](https://pecl.php.net/package/yaml).
+We recommend using the latest version, which is 2.0.4 at the time of writing. Follow the pecl-yaml instructions to build and install it.
+Then edit your php.ini file. For example, if you are using PHP 7.2, the file will be found at:
+/etc/php/7.2/apache2/php.ini
+
+Add the following line to php.ini:
+extension=yaml.so
 
 When should the admin log-in credentials be used?
 -------------------------------------------------
