@@ -82,11 +82,11 @@ Your webserver is not properly configured to support what is called
 properly set-up. This configuration can be done in the vhost file of
 your nginx configuration, following the [*Perusio guide*](https://github.com/perusio/drupal-with-nginx) or using the [*default.htaccess file that is provided by default by Drupal*](https://github.com/PECE-project/drupal/blob/7.x/.htaccess) if you are running Apache.
 
-When should the admin log-in credentials be used?
--------------------------------------------------
+When should the admin login credentials be used?
+------------------------------------------------
 
-Distribute admin log-in credentials to as few users as possible. Admin
-log-in credentials should only be used to configure settings and to
+Distribute admin login credentials to as few users as possible. Admin
+login credentials should only be used to configure settings and to
 approve new users. The admin credentials should not be used to add
 content or comment on content.
 
