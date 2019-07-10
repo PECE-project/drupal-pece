@@ -38,6 +38,10 @@ Introduction to PECE
 
 15. [*Create a PECE essay*](../usersguide#how-do-i-create-a-pece-essay), collaging artifacts with analysis and free text.
 
+!!! note "User Accounts and Profiles"
+
+    [Read more](../account) about how to create an account and update a user profile in PECE.
+
 !!! note "Permissions"
 
     ![](media/permissions.png)
