@@ -13,7 +13,13 @@ from cultural, social, and language theories. We intend for the system to be as 
 Overview of this Documentation
 =====================
 
-In [*Getting Started*](../gettingstarted)
+In [*Getting Started*](../gettingstarted), you will find information relevant for new users, such as a glossary of PECE terms, typical PECE workflows, and how the PECE permission system works.
+
+In [*Users's Guide*](../usersguide), you will find full documentation for PECE users, including many frequently asked questions we get about the use of PECE.
+
+In [*Administrator's Guide*](../installation), you will find full documentation for PECE users, including many frequently asked questions we get about the functionality of PECE.
+
+In [*Resources*](../legal), you will find links to many useful documents such as PECE licensing, terms of service templates, governance guides, and contributed style guides.
 
 </div>
 

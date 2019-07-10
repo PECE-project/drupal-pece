@@ -1,157 +1,162 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  
-  <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Getting Started - PECE Documentation</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+<html lang="en">
 
-  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "Getting Started";
-    var mkdocs_page_input_path = "gettingstarted.md";
-    var mkdocs_page_url = null;
-  </script>
-  
-  <script src="../js/jquery-2.1.1.min.js" defer></script>
-  <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script> 
-  
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="../img/favicon.ico">
+
+    
+    <title>Getting Started - PECE Documentation</title>
+    
+
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+    <link href="../css/highlight.min.css" rel="stylesheet">
+    <link href="../css/extra.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+
+     
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body>
 
-  <div class="wy-grid-for-nav">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
 
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-      <div class="wy-side-nav-search">
-        <a href=".." class="icon icon-home"> PECE Documentation</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
-
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="..">Home</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../about/">About PECE</a>
-	    </li>
-          
-            <li class="toctree-l1 current">
-		
-    <a class="current" href="./">Getting Started</a>
-    <ul class="subnav">
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             
-    <li class="toctree-l2"><a href="#pece-development">PECE Development</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#background">Background</a></li>
-        
-            <li><a class="toctree-l3" href="#whats-the-difference-between-the-development-repository-the-distribution-and-an-instance-of-pece">What’s the difference between the development repository, the distribution, and an instance of PECE?</a></li>
-        
-            <li><a class="toctree-l3" href="#current-development-process">Current Development Process</a></li>
-        
-        </ul>
-    
 
-    <li class="toctree-l2"><a href="#introduction-to-pece">Introduction to PECE</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#data-model">Data Model</a></li>
-        
-            <li><a class="toctree-l3" href="#permissions">Permissions</a></li>
-        
-            <li><a class="toctree-l3" href="#pece-wishlist">PECE Wishlist</a></li>
-        
-            <li><a class="toctree-l3" href="#known-bugs">Known Bugs</a></li>
-        
-        </ul>
-    
+            <!-- Main title -->
 
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../installation/">Installing and Administering PECE</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../usersguide/">Users' Guide</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../datamanagement/">Data Management</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../legal/">Legal Documents</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../contributors/">Contributors' Guide</a>
-	    </li>
-          
-        </ul>
-      </div>
-      &nbsp;
-    </nav>
+            <a class="navbar-brand" href="..">PECE Documentation</a>
+        </div>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="active">
+                        <a href="./">Getting Started</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../usersguide/">User's Guide</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../installation/">Administrator's Guide</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../legal/">Resources</a>
+                    </li>
+                
+                
+                </ul>
 
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="..">PECE Documentation</a>
-      </nav>
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="..">Docs</a> &raquo;</li>
-    
-      
-    
-    <li>Getting Started</li>
-    <li class="wy-breadcrumbs-aside">
-      
-    </li>
-  </ul>
-  <hr/>
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="..">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../usersguide/">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/PECE-project/pece-distro/edit/master/docs/gettingstarted.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
 </div>
-          <div role="main">
-            <div class="section">
-              
-                <h1 id="pece-development">PECE Development</h1>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#pece-development">PECE Development</a></li>
+            <li class="second-level"><a href="#background">Background</a></li>
+                
+            <li class="second-level"><a href="#whats-the-difference-between-the-development-repository-the-distribution-and-an-instance-of-pece">What’s the difference between the development repository, the distribution, and an instance of PECE?</a></li>
+                
+            <li class="second-level"><a href="#current-development-process">Current Development Process</a></li>
+                
+        <li class="first-level "><a href="#introduction-to-pece">Introduction to PECE</a></li>
+            <li class="second-level"><a href="#data-model">Data Model</a></li>
+                
+                <li class="third-level"><a href="#data-type-glossary">Data Type Glossary</a></li>
+                <li class="third-level"><a href="#pece-in-15-steps-a-typical-workflow">PECE in 15 Steps: A Typical Workflow</a></li>
+                <li class="third-level"><a href="#data-model-overview">Data Model Overview</a></li>
+                <li class="third-level"><a href="#detailed-data-model">Detailed Data Model</a></li>
+            <li class="second-level"><a href="#permissions">Permissions</a></li>
+                
+                <li class="third-level"><a href="#user-roles">User roles</a></li>
+                <li class="third-level"><a href="#content-permissions">Content Permissions</a></li>
+                <li class="third-level"><a href="#group-permissions">Group permissions</a></li>
+                <li class="third-level"><a href="#group-content-permissions">Group content permissions</a></li>
+                <li class="third-level"><a href="#overview-who-will-see-my-content">Overview - Who will see my content?</a></li>
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="pece-development">PECE Development</h1>
 <h2 id="background">Background</h2>
 <p>The development of PECE as a stand-alone platform began in 2011. Since
 then, the PECE design team has gone through several iterations of the
@@ -205,27 +210,6 @@ coordinating different stakeholders (many of whom are involved in many
 other projects and most of whom are volunteering time to work on PECE)
 and overcoming bureaucratic barriers. This means that requests for
 changes could take several weeks or even months. <strong>We would really like for PECE to be a resource that researchers find useful; however, we ask that you be patient with us when requesting fixes and new features.</strong></p>
-<h3 id="how-to-report-a-bug-or-request-a-feature">How to report a bug or request a feature</h3>
-<p>If you do notice a bug in the platform, or if there is a feature that
-you really believe would support your work, we ask that you follow the
-following steps:</p>
-<ol>
-<li>
-<p>Check our <a href="https://github.com/PECE-project/pece-distro/issues"><em>GitHub issue</em></a> page to see if someone else has reported the bug or requested the feature.</p>
-</li>
-<li>
-<p>Search this document to see if your question has been answered within it.</p>
-</li>
-<li>
-<p>If you’ve gone through steps 1 and 2 and still don’t see your issue listed, please navigate to <a href="https://platform-for-experimental-collaborative-ethnography.forms.fm/issues/forms/5287"><em>the following form</em></a> for reporting your concern. Once you submit the form, an issue will be created on our <a href="https://github.com/PECE-project/pece-distro/issues"><em>GitHub issue</em></a> page. You can monitor this page to see who has been assigned to your issue and to track progress on addressing it.</p>
-</li>
-</ol>
-<p>We sometimes get several emails a day pointing out bugs or requesting
-fixes in the platform. Following these steps will ensure that we don’t
-lose your request and that we can prioritize them appropriately. It will
-also dramatically speed up the time that we can get up to speed on the
-issue, as many of our follow-up questions will be answered through the
-form.</p>
 <h1 id="introduction-to-pece">Introduction to PECE</h1>
 <h2 id="data-model">Data Model</h2>
 <h3 id="data-type-glossary">Data Type Glossary</h3>
@@ -360,136 +344,92 @@ the platform.</p>
 permissions field to override the <a href="#group-permissions"><em>group’s default content permissions</em></a>. This means that you can designate
 content that has been associated with a private group as “public” or
 content that has been associated with a public group as “private.”</p>
-<h3 id="overview-who-will-see-my-content">Overview - Who will see my content?<img alt="" src="../media/permissions.png" /></h3>
-<h2 id="pece-wishlist">PECE Wishlist</h2>
-<h3 id="groups">Groups</h3>
-<ul>
-<li>
-<p>Groups will be able to maintain a group bibliography.</p>
-</li>
-<li>
-<p>Groups will have a forum space where they can facilitate group discussions.</p>
-</li>
-</ul>
-<h3 id="artifacts">Artifacts</h3>
-<ul>
-<li>
-<p>Users can create an artifact that embeds content or widgets stored elsewhere through an iFrame. This will allow embedding YouTube videos, Google Calendars, and other cool things.</p>
-</li>
-<li>
-<p>All fieldnotes on the site will have a title based on the user that created it and the date it was created.</p>
-</li>
-</ul>
-<h3 id="annotations-and-analytics">Annotations and Analytics</h3>
-<ul>
-<li>On annotation pages, users will be able to filter the annotations according to how they’ve been tagged.</li>
-</ul>
-<h3 id="memos-essays-and-other-visualizations">Memos, Essays, and Other Visualizations</h3>
-<ul>
-<li>
-<p>The memo page will be redesigned so that groups can be linked from them.</p>
-</li>
-<li>
-<p>Users will be able to create timelines.</p>
-</li>
-<li>
-<p>On the PECE Essay the card view will allow users to display PDFs rather than just icons linking to PDFs.</p>
-</li>
-</ul>
-<h3 id="user-experienceinterface">User experience/interface</h3>
-<ul>
-<li>
-<p>All of the icons on the site will be clickable, along with the links that they are attached to.</p>
-</li>
-<li>
-<p>Similar tags or misspelled tags on the site will be merged automatically.</p>
-</li>
-</ul>
-<h3 id="data-management">Data Management</h3>
-<ul>
-<li>
-<p>All content on the site can be assigned a unique Archival Resource Key.</p>
-</li>
-<li>
-<p>The site will require that all artifacts be uniquely named.</p>
-</li>
-<li>
-<p>There will be options to add metadata about a collaborative project’s agreed upon techniques and equipment.</p>
-</li>
-</ul>
-<h3 id="discovery">Discovery</h3>
-<ul>
-<li>We are working to enhance capacity to search across multiple instances of PECE.</li>
-</ul>
-<h3 id="site-administration">Site Administration</h3>
-<ul>
-<li>
-<p>We hope to eventually create options where user data that has been licensed with a Creative Commons license can be maintained, while All Rights Reserved data can be deleted with the user.</p>
-</li>
-<li>
-<p>The admin role will be configured with additional options.</p>
-</li>
-</ul>
-<h2 id="known-bugs">Known Bugs</h2>
-<h3 id="groups_1">Groups</h3>
-<ul>
-<li>
-<p>When you click the “Request Group Membership” button in a certain group, the box changes to “Unsubscribe from Group” even before the group’s administrator approves your membership. You will not be able to add to the group, and it will not display on your Dashboard until the administrator approves your membership. Soon this button will display “Group Membership Pending” in the interim.</p>
-</li>
-<li>
-<p>Only 5 group members display under the “Members” heading of the group page. Soon all group members will display with the Owner of the group listed at the top.</p>
-</li>
-</ul>
-<h3 id="annotations-and-analytics_1">Annotations and Analytics</h3>
-<ul>
-<li>On the Annotated Artifacts tab of user’s dashboard, links to annotations display rather than links to artifacts that the user has annotated.</li>
-</ul>
-              
-            </div>
-          </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../installation/" class="btn btn-neutral float-right" title="Installing and Administering PECE">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../about/" class="btn btn-neutral" title="About PECE"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
+<h3 id="overview-who-will-see-my-content">Overview - Who will see my content?<img alt="" src="../media/permissions.png" /></h3></div>
+        
+        
     </div>
-  
 
-  <hr/>
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p></small>
 
-  <div role="contentinfo">
-    <!-- Copyright etc -->
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>var base_url = ".."</script>
     
-  </div>
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
-      
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
         </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../about/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../installation/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
 </div>
-    <script>var base_url = '..';</script>
-    <script src="../js/theme.js" defer></script>
-      <script src="../search/main.js" defer></script>
+    </body>
 
-</body>
 </html>
