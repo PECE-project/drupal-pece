@@ -6,9 +6,9 @@ The following section sets for the terms by which PECE is distributed. Please no
 Software License
 ----------------
 
-PECE is licensed to the public under the [General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.txt) ("GPLv3"). Your use of the software constitutes acceptance of those terms.
+PECE is licensed to the public under the [General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.txt) ("GPLv3") only. Your use of the software constitutes acceptance of those terms.
 
-PECE is based on the Drupal framework. Drupal and all drupal.org files are licensed under the [General Public License, version 2](https://www.drupal.org/about/licensing). Please see our [source code repository](https://github.com/PECE-project/) for other information about our developers and contributors.
+PECE is based on the Drupal framework. Drupal and all drupal.org files are licensed under the [General Public License, version 2](https://www.drupal.org/about/licensing), or any later version. Please see our [source code repository](https://github.com/PECE-project/) for other information about our developers and contributors.
 
 Please note that pursuant to the GPLv3 license and to the extent permitted by law, the creators of PECE make no warranties of any kind, and you assume any and all risk in use of the PECE software. We suggest that PECE administrators and platform users consult with their relevant institutions or IRB committee when setting up, configuring, or using the PECE platform.
 
