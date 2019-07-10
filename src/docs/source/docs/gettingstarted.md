@@ -169,7 +169,7 @@ distributes when users request an account on the platform.
 **Anonymous users** can visit the site and can see any content that has
 been designated as public.
 
-**Contributors** can log-in to the site, manage a profile, join groups,
+**Contributors** can login to the site, manage a profile, join groups,
 and contribute content to the site. They have access to content that has
 been designated as public or their own content that they’ve designated
 as private.
