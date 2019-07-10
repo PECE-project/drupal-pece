@@ -76,6 +76,10 @@ to do so, if you have questions. (In our experience, we have needed to
 set the file permissions at sites/default/files/artifacts to 770 and
 sites/default/files/private to 770.)
 
+I want to use HTTPS with PECE. How can I do that?
+------------------------------------------------------------------------
+A very simple tutorial for setting up HTTPS with Certbot on Ubuntu can be found [here](https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04).
+
 I’ve installed PECE, but none of my links are working. What is going on?
 ------------------------------------------------------------------------
 
