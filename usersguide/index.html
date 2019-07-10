@@ -1,160 +1,259 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  
-  <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Users' Guide - PECE Documentation</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+<html lang="en">
 
-  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "Users' Guide";
-    var mkdocs_page_input_path = "usersguide.md";
-    var mkdocs_page_url = null;
-  </script>
-  
-  <script src="../js/jquery-2.1.1.min.js" defer></script>
-  <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script> 
-  
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="../img/favicon.ico">
+
+    
+    <title>User's Guide - PECE Documentation</title>
+    
+
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+    <link href="../css/highlight.min.css" rel="stylesheet">
+    <link href="../css/extra.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+
+     
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body>
 
-  <div class="wy-grid-for-nav">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
 
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-      <div class="wy-side-nav-search">
-        <a href=".." class="icon icon-home"> PECE Documentation</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
-
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="..">Home</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../about/">About PECE</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../gettingstarted/">Getting Started</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../installation/">Installing and Administering PECE</a>
-	    </li>
-          
-            <li class="toctree-l1 current">
-		
-    <a class="current" href="./">Users' Guide</a>
-    <ul class="subnav">
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             
-    <li class="toctree-l2"><a href="#using-pece">Using PECE</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#creating-accounts-and-managing-profiles">Creating accounts and managing profiles</a></li>
-        
-            <li><a class="toctree-l3" href="#logics">Logics</a></li>
-        
-            <li><a class="toctree-l3" href="#projects-and-fieldsites">Projects and Fieldsites</a></li>
-        
-            <li><a class="toctree-l3" href="#groups">Groups</a></li>
-        
-            <li><a class="toctree-l3" href="#archival-space">Archival space</a></li>
-        
-            <li><a class="toctree-l3" href="#analysis-space">Analysis space</a></li>
-        
-            <li><a class="toctree-l3" href="#publication-space">Publication space</a></li>
-        
-            <li><a class="toctree-l3" href="#licensing">Licensing</a></li>
-        
-            <li><a class="toctree-l3" href="#zotero">Zotero</a></li>
-        
-            <li><a class="toctree-l3" href="#tagging-etiquette">Tagging Etiquette</a></li>
-        
-            <li><a class="toctree-l3" href="#search">Search</a></li>
-        
-            <li><a class="toctree-l3" href="#discover">Discover</a></li>
-        
-        </ul>
-    
 
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../datamanagement/">Data Management</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../legal/">Legal Documents</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../contributors/">Contributors' Guide</a>
-	    </li>
-          
-        </ul>
-      </div>
-      &nbsp;
-    </nav>
+            <!-- Main title -->
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+            <a class="navbar-brand" href="..">PECE Documentation</a>
+        </div>
 
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="..">PECE Documentation</a>
-      </nav>
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../gettingstarted/">Getting Started</a>
+                    </li>
+                
+                
+                
+                    <li class="active">
+                        <a href="./">User's Guide</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../installation/">Administrator's Guide</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../legal/">Resources</a>
+                    </li>
+                
+                
+                </ul>
 
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="..">Docs</a> &raquo;</li>
-    
-      
-    
-    <li>Users' Guide</li>
-    <li class="wy-breadcrumbs-aside">
-      
-    </li>
-  </ul>
-  <hr/>
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../gettingstarted/">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../installation/">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/PECE-project/pece-distro/edit/master/docs/usersguide.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
 </div>
-          <div role="main">
-            <div class="section">
-              
-                <h1 id="using-pece">Using PECE</h1>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#using-pece">Using PECE</a></li>
+            <li class="second-level"><a href="#creating-accounts-and-managing-profiles">Creating accounts and managing profiles</a></li>
+                
+                <li class="third-level"><a href="#how-do-i-create-an-account">How do I create an account?</a></li>
+                <li class="third-level"><a href="#why-does-the-system-ask-for-my-zotero-username">Why does the system ask for my Zotero username?</a></li>
+                <li class="third-level"><a href="#i-created-an-account-and-have-not-yet-been-approved-who-do-i-contact">I created an account and have not yet been approved. Who do I contact?</a></li>
+                <li class="third-level"><a href="#how-do-i-change-my-password">How do I change my password?</a></li>
+                <li class="third-level"><a href="#how-do-i-edit-my-profile">How do I edit my profile?</a></li>
+                <li class="third-level"><a href="#where-can-i-find-a-list-of-all-users-on-the-site">Where can I find a list of all users on the site?</a></li>
+                <li class="third-level"><a href="#how-can-i-see-everything-that-a-certain-user-has-contributed-to-the-site">How can I see everything that a certain user has contributed to the site?</a></li>
+                <li class="third-level"><a href="#what-can-i-find-on-my-dashboard">What can I find on my dashboard?</a></li>
+            <li class="second-level"><a href="#logics">Logics</a></li>
+                
+                <li class="third-level"><a href="#what-is-a-substantive-logic">What is a substantive logic?</a></li>
+                <li class="third-level"><a href="#how-is-it-different-than-a-design-logic">How is it different than a design logic?</a></li>
+                <li class="third-level"><a href="#where-can-i-find-a-list-of-design-logics-on-the-site">Where can I find a list of design logics on the site?</a></li>
+                <li class="third-level"><a href="#where-can-i-find-a-list-of-substantive-logics-on-the-site">Where can I find a list of substantive logics on the site?</a></li>
+                <li class="third-level"><a href="#how-do-i-add-substantive-logics-to-projects">How do I add substantive logics to projects?</a></li>
+                <li class="third-level"><a href="#how-do-i-add-substantive-logics-to-groups">How do I add substantive logics to groups?</a></li>
+            <li class="second-level"><a href="#projects-and-fieldsites">Projects and Fieldsites</a></li>
+                
+                <li class="third-level"><a href="#what-is-a-project">What is a project?</a></li>
+                <li class="third-level"><a href="#how-do-i-add-a-project">How do I add a project?</a></li>
+                <li class="third-level"><a href="#where-can-i-upload-a-projects-consent-form-and-interview-request-form">Where can I upload a project’s consent form and interview request form?</a></li>
+                <li class="third-level"><a href="#how-can-i-see-a-list-of-projects-on-the-site">How can I see a list of projects on the site?</a></li>
+                <li class="third-level"><a href="#how-do-i-designate-a-group-as-part-of-a-project">How do I designate a group as part of a project?</a></li>
+                <li class="third-level"><a href="#what-is-a-fieldsite">What is a fieldsite?</a></li>
+                <li class="third-level"><a href="#how-do-i-add-a-fieldsite">How do I add a fieldsite?</a></li>
+            <li class="second-level"><a href="#groups">Groups</a></li>
+                
+                <li class="third-level"><a href="#what-is-a-group">What is a group?</a></li>
+                <li class="third-level"><a href="#how-do-i-create-a-group">How do I create a group?</a></li>
+                <li class="third-level"><a href="#how-do-i-join-a-group">How do I join a group?</a></li>
+                <li class="third-level"><a href="#ive-requested-membership-to-a-group-but-i-cannot-add-to-it-and-it-is-not-listed-in-my-dashboard-what-is-going-on">I’ve requested membership to a group, but I cannot add to it, and it is not listed in my Dashboard. What is going on?</a></li>
+                <li class="third-level"><a href="#how-do-i-add-a-person-to-a-group-or-manage-group-memberships">How do I add a person to a group or manage group memberships?</a></li>
+                <li class="third-level"><a href="#what-do-the-different-group-membership-roles-mean">What do the different group membership roles mean?</a></li>
+                <li class="third-level"><a href="#im-trying-to-approve-a-users-request-to-join-a-group-and-i-keep-getting-an-error-whats-going-on">I’m trying to approve a user’s request to join a group, and I keep getting an error. What’s going on?</a></li>
+                <li class="third-level"><a href="#how-do-i-add-content-ive-created-to-a-group">How do I add content I’ve created to a group?</a></li>
+                <li class="third-level"><a href="#how-do-i-add-content-others-have-created-to-a-group">How do I add content others have created to a group?</a></li>
+                <li class="third-level"><a href="#how-do-i-add-content-to-multiple-groups">How do I add content to multiple groups?</a></li>
+                <li class="third-level"><a href="#how-do-i-make-a-group-a-sub-group-of-another-group">How do I make a group a sub-group of another group?</a></li>
+                <li class="third-level"><a href="#ive-made-a-new-group-a-sub-group-of-an-existing-group-why-is-the-content-in-the-sub-group-not-appearing-in-the-parent-group">I’ve made a new group a sub-group of an existing group? Why is the content in the sub-group not appearing in the parent group?</a></li>
+                <li class="third-level"><a href="#overview">Overview</a></li>
+            <li class="second-level"><a href="#archival-space">Archival space</a></li>
+                
+                <li class="third-level"><a href="#what-type-of-content-can-i-add">What type of content can I add?</a></li>
+                <li class="third-level"><a href="#what-is-the-difference-between-a-text-artifact-and-a-field-note">What is the difference between a text artifact and a field note?</a></li>
+                <li class="third-level"><a href="#what-is-an-artifact-bundle-and-why-would-i-use-it">What is an artifact bundle, and why would I use it?</a></li>
+                <li class="third-level"><a href="#how-do-i-add-content">How do I add content?</a></li>
+                <li class="third-level"><a href="#what-do-i-enter-into-the-contributor-field-do-i-enter-myself-as-a-contributor">What do I enter into the Contributor field? Do I enter myself as a Contributor?</a></li>
+                <li class="third-level"><a href="#how-do-i-designate-that-multiple-contributors-added-a-piece-of-content-to-the-platform">How do I designate that multiple contributors added a piece of content to the platform?</a></li>
+                <li class="third-level"><a href="#what-is-critical-commentary">What is “critical commentary”?</a></li>
+                <li class="third-level"><a href="#when-i-upload-a-file-the-system-asks-me-which-folder-i-should-save-the-file-to-in-the-server-should-i-save-the-content-to-the-private-or-public-folder">When I upload a file the system asks me which folder I should save the file to in the server. Should I save the content to the private or public folder?</a></li>
+                <li class="third-level"><a href="#how-do-i-select-a-file-that-has-already-been-added-to-the-system">How do I select a file that has already been added to the system?</a></li>
+                <li class="third-level"><a href="#what-does-source-mean">What does “Source” mean?</a></li>
+                <li class="third-level"><a href="#what-does-language-mean">What does “Language” mean?</a></li>
+                <li class="third-level"><a href="#what-does-format-mean">What does “Format” mean?</a></li>
+                <li class="third-level"><a href="#how-do-i-add-content-to-a-group">How do I add content to a group?</a></li>
+                <li class="third-level"><a href="#how-do-i-set-the-group-content-visibility-for-an-artifact">How do I set the group content visibility for an artifact?</a></li>
+                <li class="third-level"><a href="#how-do-i-list-the-creator-author-photographer-composer-of-a-piece-of-content-when-they-are-not-part-of-the-system">How do I list the creator (author, photographer, composer) of a piece of content when they are not part of the system?</a></li>
+                <li class="third-level"><a href="#how-do-i-add-a-fieldsite-to-an-artifact">How do I add a fieldsite to an artifact?</a></li>
+                <li class="third-level"><a href="#what-does-bibliography-mean">What does “bibliography” mean?</a></li>
+                <li class="third-level"><a href="#how-do-i-select-a-license">How do I select a license?</a></li>
+                <li class="third-level"><a href="#how-do-i-select-a-permission">How do I select a permission?</a></li>
+                <li class="third-level"><a href="#how-should-i-tag-content">How should I tag content?</a></li>
+                <li class="third-level"><a href="#when-i-edit-content-what-should-i-include-in-the-revision-log-message">When I edit content, what should I include in the revision log message?</a></li>
+                <li class="third-level"><a href="#where-can-i-access-older-versions-of-content">Where can I access older versions of content?</a></li>
+                <li class="third-level"><a href="#ive-identified-my-content-as-having-multiple-contributors-but-those-contributors-dont-have-access-to-edit-the-content-whats-going-on">I’ve identified my content as having multiple contributors, but those contributors don’t have access to edit the content. What’s going on?</a></li>
+                <li class="third-level"><a href="#where-can-i-find-my-fieldnotes">Where can I find my fieldnotes?</a></li>
+                <li class="third-level"><a href="#why-do-my-published-images-appear-blurry">Why do my published images appear blurry?</a></li>
+                <li class="third-level"><a href="#can-i-download-files-from-the-platform">Can I download files from the platform?</a></li>
+                <li class="third-level"><a href="#can-i-add-a-youtube-or-vimeo-video-to-the-platform">Can I add a Youtube or Vimeo video to the platform?</a></li>
+                <li class="third-level"><a href="#can-i-add-a-map-to-the-platform">Can I add a map to the platform?</a></li>
+            <li class="second-level"><a href="#analysis-space">Analysis space</a></li>
+                
+                <li class="third-level"><a href="#what-is-the-difference-between-a-structured-analytic-an-analytic-and-an-annotation">What is the difference between a structured analytic, an analytic, and an annotation?</a></li>
+                <li class="third-level"><a href="#how-do-i-create-a-structured-analytic">How do I create a structured analytic?</a></li>
+                <li class="third-level"><a href="#how-do-i-create-an-analytic">How do I create an analytic?</a></li>
+                <li class="third-level"><a href="#how-do-i-annotate-an-artifact">How do I annotate an artifact?</a></li>
+                <li class="third-level"><a href="#do-i-have-to-answer-all-of-the-questions-for-a-certain-structured-analytic-when-annotating-an-artifact">Do I have to answer all of the questions for a certain structured analytic when annotating an artifact?</a></li>
+                <li class="third-level"><a href="#how-do-i-select-a-permission_1">How do I select a permission?</a></li>
+                <li class="third-level"><a href="#when-creating-an-annotation-if-i-hit-save-and-continue-and-then-decide-i-do-not-want-to-answer-another-question-there-is-no-button-for-finish-from-the-window-that-lists-structured-analytics-or-the-window-that-lists-analytics-will-i-lose-all-of-my-work-if-i-close-out-of-the-window">When creating an annotation, if I hit Save and Continue, and then decide I do not want to answer another question, there is no button for ‘Finish’ from the window that lists structured analytics or the window that lists analytics. Will I lose all of my work if I close out of the window?</a></li>
+                <li class="third-level"><a href="#how-do-i-edit-an-annotation">How do I edit an annotation?</a></li>
+                <li class="third-level"><a href="#how-do-i-edit-an-analytic">How do I edit an analytic?</a></li>
+                <li class="third-level"><a href="#how-do-i-see-a-list-of-all-existing-structured-analytics">How do I see a list of all existing structured analytics?</a></li>
+                <li class="third-level"><a href="#how-do-i-see-a-list-of-all-analytics-in-a-given-structured-analytic">How do I see a list of all analytics in a given structured analytic?</a></li>
+                <li class="third-level"><a href="#how-do-i-access-my-annotations">How do I access my annotations?</a></li>
+                <li class="third-level"><a href="#how-do-i-see-how-others-annotated-an-artifact">How do I see how others annotated an artifact?</a></li>
+                <li class="third-level"><a href="#how-do-i-see-all-of-the-responses-to-a-particular-analytic">How do I see all of the responses to a particular analytic?</a></li>
+                <li class="third-level"><a href="#how-do-i-see-all-of-the-responses-to-a-particular-analytic-for-a-given-artifact">How do I see all of the responses to a particular analytic for a given artifact?</a></li>
+                <li class="third-level"><a href="#how-do-i-see-all-of-the-responses-to-a-particular-analytic-created-by-a-given-user">How do I see all of the responses to a particular analytic created by a given user?</a></li>
+                <li class="third-level"><a href="#i-annotated-a-private-or-restricted-artifact-and-my-annotation-is-appearing-in-both-search-and-on-tag-pages-shouldnt-my-annotation-be-private-or-restricted-if-it-is-responding-to-a-private-or-restricted-artifact">I annotated a Private or Restricted artifact, and my annotation is appearing in both Search and on Tag pages. Shouldn’t my annotation be Private or Restricted if it is responding to a Private or Restricted artifact?</a></li>
+                <li class="third-level"><a href="#annotation-etiquette">Annotation Etiquette</a></li>
+                <li class="third-level"><a href="#overview_1">Overview</a></li>
+            <li class="second-level"><a href="#publication-space">Publication space</a></li>
+                
+                <li class="third-level"><a href="#what-is-the-difference-between-a-memo-a-photo-essay-and-a-pece-essay">What is the difference between a memo, a photo essay, and a PECE essay?</a></li>
+                <li class="third-level"><a href="#how-do-i-create-a-memo">How do I create a memo?</a></li>
+                <li class="third-level"><a href="#how-do-i-create-a-photo-essay">How do I create a photo essay?</a></li>
+                <li class="third-level"><a href="#how-do-i-reorder-photos-in-a-photo-essay">How do I reorder photos in a photo essay?</a></li>
+                <li class="third-level"><a href="#how-do-i-create-a-pece-essay">How do I create a PECE essay?</a></li>
+                <li class="third-level"><a href="#how-do-i-comment-on-publications">How do I comment on publications?</a></li>
+            <li class="second-level"><a href="#licensing">Licensing</a></li>
+                
+            <li class="second-level"><a href="#zotero">Zotero</a></li>
+                
+                <li class="third-level"><a href="#how-do-i-add-a-zotero-feed-to-the-platform">How do I add a zotero feed to the platform?</a></li>
+                <li class="third-level"><a href="#what-happens-to-my-zotero-collections-when-i-import-a-feed-into-pece">What happens to my Zotero collections when I import a feed into PECE?</a></li>
+                <li class="third-level"><a href="#how-do-i-access-a-platform-bibliography">How do I access a platform bibliography?</a></li>
+                <li class="third-level"><a href="#how-do-i-cite-pdf-and-website-artifacts-using-zotero-entries">How do I cite pdf and website artifacts using zotero entries?</a></li>
+            <li class="second-level"><a href="#tagging-etiquette">Tagging Etiquette</a></li>
+                
+            <li class="second-level"><a href="#search">Search</a></li>
+                
+                <li class="third-level"><a href="#is-there-a-way-to-search-across-instances-of-the-platform">Is there a way to search across instances of the platform?</a></li>
+            <li class="second-level"><a href="#discover">Discover</a></li>
+                
+                <li class="third-level"><a href="#a-bunch-of-website-and-pdf-artifacts-just-appeared-in-the-platform-and-dont-have-a-contributor-listed-where-did-these-artifacts-come-from">A bunch of website and PDF artifacts just appeared in the platform and don’t have a contributor listed. Where did these artifacts come from?</a></li>
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="using-pece">Using PECE</h1>
 <h2 id="creating-accounts-and-managing-profiles">Creating accounts and managing profiles</h2>
 <h3 id="how-do-i-create-an-account">How do I create an account?</h3>
 <p>Navigate to your research group’s instance of PECE. Click ‘Login’ in the
@@ -383,16 +482,7 @@ contributor.</p>
 the Contributor field to reference other users in the platform that
 contributed the content.</p>
 <h3 id="what-is-critical-commentary">What is “critical commentary”?</h3>
-<p>Artifacts that you upload that may be protected by copyright law can
-only be posted on the site if they fall under the “Fair Use” provisions
-of copyright law. Within “Fair Use” provisions, exceptions to laws that
-prohibit the replication of copyrighted material are made for materials
-that are the subject of scholarly “critical commentary” or to materials
-that are being copied for educational purposes. In this field, you
-should provide commentary on the artifact that documents why it is
-important and why it is relevant to the platform, along with an analysis
-of the artifact. Keep in mind most analysis will take place in the
-annotations. See sections on the <a href="#zotero"><em>Bibliography</em></a> field,
+<p>In this field, you should provide commentary on the artifact that documents its significance as an ethnographic objects and why it is relevant to the platform. See sections on thes
 Source field, and <a href="#licensing"><em>Licensing</em></a> for more information about
 attribution of artifacts.</p>
 <p><strong>Filling in this field is mandatory.</strong></p>
@@ -842,53 +932,92 @@ minutes. Whenever new journal article or website Zotero entries are
 imported to the platform, a PDF or website artifact is automatically
 created with the Zotero entry listed in the <a href="#what-does-bibliography-mean"><em>‘bibliography’ field</em></a>. Since the artifact is created
 automatically by the platform, there will be no contributor listed for
-these artifacts.</p>
-              
-            </div>
-          </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../datamanagement/" class="btn btn-neutral float-right" title="Data Management">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../installation/" class="btn btn-neutral" title="Installing and Administering PECE"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
+these artifacts.</p></div>
+        
+        
     </div>
-  
 
-  <hr/>
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p></small>
 
-  <div role="contentinfo">
-    <!-- Copyright etc -->
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>var base_url = ".."</script>
     
-  </div>
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
-      
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
         </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../installation/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../datamanagement/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
 </div>
-    <script>var base_url = '..';</script>
-    <script src="../js/theme.js" defer></script>
-      <script src="../search/main.js" defer></script>
+    </body>
 
-</body>
 </html>
