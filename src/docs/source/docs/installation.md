@@ -62,7 +62,7 @@ Clone the ‘’pece-distro’’ repository:
 
 Create an empty database:
 
-> mysql -u \$YOUR\_USER -p -e "CREATE DATABASE \$YOUR\_DB\_NAME
+> mysql -u $YOUR\_USER -p -e "CREATE DATABASE $YOUR\_DB\_NAME
 > CHARACTER SET utf8 COLLATE utf8\_general\_ci;"
 
 Proceed to the URL in which your Drupal will reside, i.e.
@@ -95,11 +95,11 @@ Then edit your php.ini file. For example, if you are using PHP 7.2, the file wil
 Add the following line to php.ini:
 extension=yaml.so
 
-When should the admin log-in credentials be used?
--------------------------------------------------
+When should the admin login credentials be used?
+------------------------------------------------
 
-Distribute admin log-in credentials to as few users as possible. Admin
-log-in credentials should only be used to configure settings and to
+Distribute admin login credentials to as few users as possible. Admin
+login credentials should only be used to configure settings and to
 approve new users. The admin credentials should not be used to add
 content or comment on content.
 
@@ -136,27 +136,6 @@ responsible for any use authorized researchers or any other person make
 of the platform. Please, refer to our section on “Legal Documents” for
 more information about the software licenses we use for the PECE project
 (and for the Free Software technology we use from the Drupal project).
-
-How do I configure AES?
------------------------
-
-To config AES, go to: “Administration » Configuration » System » AES
-settings”. Make sure to point to a secure directory outside the webroot
-where PECE is installed to store your key and make it read-only (to the
-owner of the httpd service), instead of having it stored in the database
-(which tends to be a much less secure option).
-
-How do I configure Amber to archive links on the platform?
-----------------------------------------------------------
-
-PECE comes pre-shipped with Amber, so if you have an account on Perma.cc
-you can set PECE up to use it an store your snapshots there. This is the
-way to go when it comes to long-term preservation of content for
-scholarly purposes. Go to “Administration » Configuration » Content
-authoring » Amber” and select “perma.cc” as alternate backend and
-provide your API key in the text field below. Done! You are storing
-“PECE Website” link artifacts, hopefully, for many future
-anthropological lives and times now.
 
 How do I set up back-ups?
 -------------------------
@@ -215,6 +194,7 @@ While logged-in as an administrator, navigate to ‘Dashboard’. Under the
 fields and Save. Note that all images will be scaled and cropped to
 960x460 pixels.
 
+
 How do I increase the file upload limit?
 ----------------------------------------
 
@@ -224,13 +204,13 @@ Upload Size field, enter a new value (we use 2GB). Click Save
 Configuration. You may also need to increase the upload limit on the
 server.
 
-How do I update the platform when a new instance of distro is released?
------------------------------------------------------------------------
+How do I update my instance when a new version of the PECE distro is released?
+------------------------------------------------------------------------------
 
 Always back-up your files and database before updating the platform.
 
 Put the site in maintenance mode. Under sites/default/, there is a file
-called settings.php. Search for \$update\_free\_access = FALSE; and
+called settings.php. Search for $update\_free\_access = FALSE; and
 change FALSE to TRUE.
 
 Then, go to YourSite/update.php and follow the steps. In theory major
