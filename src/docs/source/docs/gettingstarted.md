@@ -42,6 +42,12 @@ Introduction to PECE
 
     [Read more](../account) about how to create an account and update a user profile in PECE.
 
+!!! note "Artifacts"
+
+    The primary way to contribute data to the PECE archive is by creating an *artifact*. Artifacts contributed to the site can include documents, images, audio, videos, text, and web sites. Each artifact is embellished with metadata. For instructions on how to add artifacts to PECE, [read here](../artifacts). 
+
+    [Read more](../account) about how to create an account and update a user profile in PECE.
+
 !!! note "Permissions"
 
     ![](media/permissions.png)
