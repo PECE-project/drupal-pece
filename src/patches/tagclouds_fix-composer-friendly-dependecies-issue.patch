@@ -1,0 +1,26 @@
+From ad5f1b4c1486f9446923f71f4212a46e3af4fa1f Mon Sep 17 00:00:00 2001
+From: Renato Vasconcellos <revagomes@gmail.com>
+Date: Wed, 10 Jul 2019 17:17:56 -0500
+Subject: [PATCH] Fix install issues on non composer Drupal instalations.
+
+---
+ tagclouds.info | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tagclouds.info b/tagclouds.info
+index fcfa22d..a4aca13 100644
+--- a/tagclouds.info
++++ b/tagclouds.info
+@@ -1,7 +1,7 @@
+ name = TagClouds
+ description = TagClouds makes weighted tag clouds from your taxonomy terms.
+ core = 7.x
+-dependencies[] = drupal:taxonomy
+-dependencies[] = drupal:system (>=7.40)
++dependencies[] = taxonomy
++dependencies[] = system (>=7.40)
+ package = "Taxonomy"
+ configure = admin/config/content/tagclouds
+-- 
+2.7.4
+

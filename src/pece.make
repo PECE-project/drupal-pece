@@ -469,6 +469,7 @@ projects[realname][version] = 1.4
 ; TagCloud
 projects[tagclouds][version] = 1.12
 projects[tagclouds][subdir]  = contrib
+projects[tagclouds][patches]  = ./patches/tagclouds_fix-composer-friendly-dependecies-issue.patch
 
 ; Taxonomy Access Fix
 projects[taxonomy_access_fix][subdir] = contrib
