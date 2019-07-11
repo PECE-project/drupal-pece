@@ -1,0 +1,24 @@
+From f40c40332d2daa5ab357e3d3fb218392f0f0c39b Mon Sep 17 00:00:00 2001
+From: Renato Vasconcellos <revagomes@gmail.com>
+Date: Wed, 10 Jul 2019 17:23:16 -0500
+Subject: [PATCH] Fix install issues on non composer Drupal instalations.
+
+---
+ search_api.info | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/search_api.info b/search_api.info
+index 8b11f2c..0e14ed8 100644
+--- a/search_api.info
++++ b/search_api.info
+@@ -1,6 +1,6 @@
+ name = Search API
+ description = "Provides a generic API for modules offering search capabilities."
+-dependencies[] = entity:entity
++dependencies[] = entity
+ core = 7.x
+ package = Search
+ 
+-- 
+2.7.4
+
