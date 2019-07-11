@@ -46,9 +46,18 @@ Introduction to PECE
 
     The primary way to contribute data to the PECE archive is by creating an *artifact*. Artifacts contributed to the site can include documents, images, audio, videos, text, and web sites. Each artifact is embellished with metadata. For instructions on how to add artifacts to PECE, [read here](../artifacts).
 
+!!! note "Groups"
+
+    Groups are workspaces where designated site users can contribute content,
+    share a field diary, write collaboratively, and publish essays. By creating groups in PECE, you can control which users on the platform have access to view and edit content. For instructions on how to create and administer groups, [read here](../groups).
+
 !!! note "Permissions"
 
     PECE has a several layers of permissions that can be applied to content archived in the platform. When a user selects a permission for content on the platform, it limits who can view, edit, and delete that content, depending on user roles assigned. Permissions can be set at a content level (which sets the content visibility site-wide) and at a group level (which sets the content visibility amongst group members). [Read more](../permissions) about user roles and permissions in PECE.
+
+!!! note "Projects"
+
+    A *project* designates a research project that the platform is being used to scaffold. You can use this content type to describe when a project starts and ends, its institutional affiliation, and its funding source. By creating a *fieldsite* in PECE, users can designate certain content as deriving from a particular geographic location. For instructions on how to add projects and fieldsites to PECE, [read here](../projects).
 
 !!! note "Logics"
 
