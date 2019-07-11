@@ -44,14 +44,15 @@ Introduction to PECE
 
 !!! note "Artifacts"
 
-    The primary way to contribute data to the PECE archive is by creating an *artifact*. Artifacts contributed to the site can include documents, images, audio, videos, text, and web sites. Each artifact is embellished with metadata. For instructions on how to add artifacts to PECE, [read here](../artifacts). 
-
-    [Read more](../account) about how to create an account and update a user profile in PECE.
+    The primary way to contribute data to the PECE archive is by creating an *artifact*. Artifacts contributed to the site can include documents, images, audio, videos, text, and web sites. Each artifact is embellished with metadata. For instructions on how to add artifacts to PECE, [read here](../artifacts).
 
 !!! note "Permissions"
 
-    ![](media/permissions.png)
-    [Read more](../permissions) about user roles and permissions in PECE.
+    PECE has a several layers of permissions that can be applied to content archived in the platform. When a user selects a permission for content on the platform, it limits who can view, edit, and delete that content, depending on user roles assigned. Permissions can be set at a content level (which sets the content visibility site-wide) and at a group level (which sets the content visibility amongst group members). [Read more](../permissions) about user roles and permissions in PECE.
+
+!!! note "Logics"
+
+    *Substantive logics* document the rationale for running a particular instance of PECE or for conducting a particular research project. *Design logics* document critical directives that have guided the architecture and design of PECE itself. Read more about Design Logics and Substantive Logics [here](../logics).
 
 </div>
 
