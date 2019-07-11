@@ -128,3 +128,10 @@ function pece_core_form_pece_fieldsite_node_form_alter(&$form, &$form_state) {
 
   $form['author']['name']['#required'] = TRUE;
 }
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function pece_core_preprocess_page(&$variables) {
+  $variables['pece_docs'] = l('Need help with PECE?', 'https://pece-project.github.io/drupal-pece/');
+}
