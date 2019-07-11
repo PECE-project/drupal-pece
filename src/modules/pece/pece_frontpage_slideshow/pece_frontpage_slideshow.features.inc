@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_frontpage_slideshow.features.inc
