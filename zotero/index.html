@@ -11,7 +11,7 @@
     <link rel="../img/favicon.ico">
 
     
-    <title>Discovery - PECE Documentation</title>
+    <title>Zotero - PECE Documentation</title>
     
 
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -109,7 +109,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/PECE-project/pece-distro/edit/master/docs/discovery.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/PECE-project/pece-distro/edit/master/docs/zotero.md"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -121,34 +121,31 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#discovery">Discovery</a></li>
-            <li class="second-level"><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+        <li class="first-level active"><a href="#zotero">Zotero</a></li>
+            <li class="second-level"><a href="#how-do-i-configure-zotero">How do I configure Zotero?</a></li>
                 
-                <li class="third-level"><a href="#is-there-a-way-to-search-across-instances-of-the-platform">Is there a way to search across instances of the platform?</a></li>
-                <li class="third-level"><a href="#a-bunch-of-website-and-pdf-artifacts-just-appeared-in-the-platform-and-dont-have-a-contributor-listed-where-did-these-artifacts-come-from">A bunch of website and PDF artifacts just appeared in the platform and don’t have a contributor listed. Where did these artifacts come from?</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-<h1 id="discovery">Discovery</h1>
-<p>How to find my Content</p>
-<p>How to find another user's Content</p>
-<p>How to find artifacts, memos, and Essays</p>
-<p>How to find Annotations and analytics</p>
-<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
-<h3 id="is-there-a-way-to-search-across-instances-of-the-platform">Is there a way to search across instances of the platform?</h3>
-<p>We are hoping that this will be possible very soon. We are looking at
-one module
-<a href="https://www.drupal.org/project/apachesolr_multisitesearch"><em>https://www.drupal.org/project/apachesolr_multisitesearch</em></a>
-to enable this.</p>
-<h3 id="a-bunch-of-website-and-pdf-artifacts-just-appeared-in-the-platform-and-dont-have-a-contributor-listed-where-did-these-artifacts-come-from">A bunch of website and PDF artifacts just appeared in the platform and don’t have a contributor listed. Where did these artifacts come from?</h3>
-<p>When a <a href="#how-do-i-add-a-zotero-feed-to-the-platform"><em>Zotero feed is added to the platform</em></a>, the platform
-automatically imports new entries from the Zotero library every 30
-minutes. Whenever new journal article or website Zotero entries are
-imported to the platform, a PDF or website artifact is automatically
-created with the Zotero entry listed in the <a href="#what-does-bibliography-mean"><em>‘bibliography’ field</em></a>. Since the artifact is created
-automatically by the platform, there will be no contributor listed for
-these artifacts.</p></div>
+<h1 id="zotero">Zotero</h1>
+<h2 id="how-do-i-configure-zotero">How do I configure Zotero?</h2>
+<p>Navigate to /admin/modules, and turn on modules the Feed Admin UI and
+Feeds Importer. Flush all caches. Navigate to
+admin/structure/feeds/zotero_feed. To the right under, Zotero Process,
+select Settings to configure the Zotero Importer module. Most settings
+here can remain the same. However, we encourage you to:</p>
+<ul>
+<li>
+<p>Under “Update Existing Nodes,” change “Do Not Update Existing Nodes” to “Update Existing Nodes.” This way if you update an entry in Zotero, it will also be updated in the platform on the next feed import</p>
+</li>
+<li>
+<p>Under “Sync zotero tags to a term reference field in the biblio content type?” change “yes” to “no.” Often Zotero entries are added to the library with chaotic tagging schemes. Checking “no” here will ensure those schemas don’t get added to the PECE tag library.</p>
+</li>
+<li>
+<p>Save.</p>
+</li>
+</ul></div>
         
         
     </div>

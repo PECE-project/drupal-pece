@@ -11,7 +11,7 @@
     <link rel="../img/favicon.ico">
 
     
-    <title>Administrator's Guide - PECE Documentation</title>
+    <title>System Admin's Guide - PECE Documentation</title>
     
 
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -83,8 +83,14 @@
                 
                 
                 
+                    <li >
+                        <a href="./">Site Admin's Guide</a>
+                    </li>
+                
+                
+                
                     <li class="active">
-                        <a href="./">Administrator's Guide</a>
+                        <a href="./">System Admin's Guide</a>
                     </li>
                 
                 
@@ -103,7 +109,7 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../usersguide/">
+                        <a rel="prev" href="./">
                             <i class="fas fa-arrow-left"></i> Previous
                         </a>
                     </li>
@@ -125,7 +131,7 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#administering-pece">Administering PECE</a></li>
+        <li class="first-level active"><a href="#pece-system-administration">PECE System Administration</a></li>
             <li class="second-level"><a href="#how-do-i-install-pece">How do I install PECE?</a></li>
                 
                 <li class="third-level"><a href="#downloading-the-distro">Downloading the Distro</a></li>
@@ -141,19 +147,11 @@
                 
             <li class="second-level"><a href="#how-do-i-update-the-site-information">How do I update the site information?</a></li>
                 
-            <li class="second-level"><a href="#how-do-i-add-a-logo-and-change-site-colors">How do I add a logo and change site colors?</a></li>
-                
             <li class="second-level"><a href="#how-do-i-upload-the-terms-of-service">How do I upload the terms of service?</a></li>
                 
             <li class="second-level"><a href="#how-do-i-set-up-back-ups">How do I set up back-ups?</a></li>
                 
             <li class="second-level"><a href="#how-do-i-configure-smtp-so-that-emails-can-be-sent-from-the-platform">How do I configure SMTP so that emails can be sent from the platform?</a></li>
-                
-            <li class="second-level"><a href="#how-do-i-configure-zotero">How do I configure Zotero?</a></li>
-                
-            <li class="second-level"><a href="#how-do-i-approve-user-memberships">How do I approve user memberships?</a></li>
-                
-            <li class="second-level"><a href="#how-do-i-add-front-page-image-sliders">How do I add front page image sliders?</a></li>
                 
             <li class="second-level"><a href="#how-do-i-increase-the-file-upload-limit">How do I increase the file upload limit?</a></li>
                 
@@ -165,7 +163,7 @@
 </div></div>
         <div class="col-md-9" role="main">
 
-<h1 id="administering-pece">Administering PECE</h1>
+<h1 id="pece-system-administration">PECE System Administration</h1>
 <h2 id="how-do-i-install-pece">How do I install PECE?</h2>
 <p>PECE is a Free Software-based Drupal distribution, therefore the
 <a href="https://www.drupal.org/requirements"><em>standard installation procedure for Drupal 7</em></a> applies to PECE with a few
@@ -258,27 +256,10 @@ content or comment on content.</p>
 <p>Go to “Administration » Configuration » System » Site information” and
 fill out the information about your site name, the basic admin password,
 contact, timezone and other relevant info.</p>
-<h2 id="how-do-i-add-a-logo-and-change-site-colors">How do I add a logo and change site colors?</h2>
-<p>Go to “Administration » Appearance » Settings » PECE Scholarly Lite.
-Under the heading, Logo image settings, uncheck the box to use the
-default logo. Choose a file to upload as the logo. To change site
-colors, scroll down on this page to the heading “MtT Settings.” Click
-the “Look’n’Feel” link. Check the box to use a Custom Color Scheme.
-Select a Primary color (header and icons), Secondary color (links), and
-Tertiary color (color to appear on hover in main navigation). Click
-“Save Configuration.”</p>
 <h2 id="how-do-i-upload-the-terms-of-service">How do I upload the terms of service?</h2>
 <p>Go to “Administration » Configuration » People » Legal” and click “Add
 T&amp;C”, then fill-out the boxes with your custom text to be displayed to
-every user who requests an account on the system. You may ask: why is
-there not a default “Terms of Service”? Because... the text really
-depends on the way you are using PECE, so our legal documents won’t not
-suit your case, you need to craft your own text according to the usage
-you are making of PECE. We are not (cannot and should not be)
-responsible for any use authorized researchers or any other person make
-of the platform. Please, refer to our section on “Legal Documents” for
-more information about the software licenses we use for the PECE project
-(and for the Free Software technology we use from the Drupal project).</p>
+every user who requests an account on the system.</p>
 <h2 id="how-do-i-set-up-back-ups">How do I set up back-ups?</h2>
 <p>As explained in our data management guidelines, PECE is configured to
 automatically generate backups. You should, however, revise the settings
@@ -299,33 +280,6 @@ server information. You just need your SMTP server info and credentials
 to get this done. Go to “Administration » Configuration » System » SMTP
 Authentication Support” and provide your SMTP server information,
 including username and password.</p>
-<h2 id="how-do-i-configure-zotero">How do I configure Zotero?</h2>
-<p>Navigate to /admin/modules, and turn on modules the Feed Admin UI and
-Feeds Importer. Flush all caches. Navigate to
-admin/structure/feeds/zotero_feed. To the right under, Zotero Process,
-select Settings to configure the Zotero Importer module. Most settings
-here can remain the same. However, we encourage you to:</p>
-<ul>
-<li>
-<p>Under “Update Existing Nodes,” change “Do Not Update Existing Nodes” to “Update Existing Nodes.” This way if you update an entry in Zotero, it will also be updated in the platform on the next feed import</p>
-</li>
-<li>
-<p>Under “Sync zotero tags to a term reference field in the biblio content type?” change “yes” to “no.” Often Zotero entries are added to the library with chaotic tagging schemes. Checking “no” here will ensure those schemas don’t get added to the PECE tag library.</p>
-</li>
-<li>
-<p>Save.</p>
-</li>
-</ul>
-<h2 id="how-do-i-approve-user-memberships">How do I approve user memberships?</h2>
-<p>While logged-in as an administrator, navigate to /admin/people. Select
-‘edit’ next to the user you wish to approve. Change the user status to
-‘Active’ and select the appropriate <a href="#user-roles"><em>User Roles</em></a>. Click
-the ‘Save’ button at the bottom of the page.</p>
-<h2 id="how-do-i-add-front-page-image-sliders">How do I add front page image sliders?</h2>
-<p>While logged-in as an administrator, navigate to ‘Dashboard’. Under the
-‘Add Content’ heading, select front page slider. Fill in the relevant
-fields and Save. Note that all images will be scaled and cropped to
-960x460 pixels.</p>
 <h2 id="how-do-i-increase-the-file-upload-limit">How do I increase the file upload limit?</h2>
 <p>While logged-in as an administrator, navigate to Administration &gt;&gt;
 Configuration &gt;&gt; Media &gt;&gt; File Settings. Under the Maximum
