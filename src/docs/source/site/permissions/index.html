@@ -11,7 +11,7 @@
     <link rel="../img/favicon.ico">
 
     
-    <title>Resources - PECE Documentation</title>
+    <title>Permissions - PECE Documentation</title>
     
 
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -89,8 +89,8 @@
                 
                 
                 
-                    <li class="active">
-                        <a href="./">Resources</a>
+                    <li >
+                        <a href="../legal/">Resources</a>
                     </li>
                 
                 
@@ -102,18 +102,8 @@
                             <i class="fas fa-search"></i> Search
                         </a>
                     </li>
-                    <li >
-                        <a rel="prev" href="../installation/">
-                            <i class="fas fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li class="disabled">
-                        <a rel="next" >
-                            Next <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </li>
                     <li>
-                        <a href="https://github.com/PECE-project/pece-distro/edit/master/docs/legal.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/PECE-project/pece-distro/edit/master/docs/permissions.md"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -125,25 +115,65 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#legal-documents">Legal Documents</a></li>
-            <li class="second-level"><a href="#software-license">Software License</a></li>
+        <li class="first-level active"><a href="#permissions">Permissions</a></li>
+            <li class="second-level"><a href="#user-roles">User roles</a></li>
                 
-            <li class="second-level"><a href="#usage-of-pece">Usage of PECE</a></li>
+            <li class="second-level"><a href="#content-permissions">Content Permissions</a></li>
+                
+            <li class="second-level"><a href="#group-permissions">Group permissions</a></li>
+                
+            <li class="second-level"><a href="#group-content-permissions">Group content permissions</a></li>
+                
+            <li class="second-level"><a href="#overview-who-will-see-my-content">Overview - Who will see my content?</a></li>
                 
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-<h1 id="legal-documents">Legal Documents</h1>
-<p>The following section sets for the terms by which PECE is distributed. Please note that these terms may change in future instances of PECE, including any future extensions, modification, or plug-ins. Please revisit this section periodically.</p>
-<h2 id="software-license">Software License</h2>
-<p>PECE is licensed to the public under the <a href="https://www.gnu.org/licenses/gpl-3.0.txt">General Public License, version 3</a> ("GPLv3") only. Your use of the software constitutes acceptance of those terms.</p>
-<p>PECE is based on the Drupal framework. Drupal and all drupal.org files are licensed under the <a href="https://www.drupal.org/about/licensing">General Public License, version 2</a>, or any later version. Please see our <a href="https://github.com/PECE-project/">source code repository</a> for other information about our developers and contributors.</p>
-<p>Please note that pursuant to the GPLv3 license and to the extent permitted by law, the creators of PECE make no warranties of any kind, and you assume any and all risk in use of the PECE software. We suggest that PECE administrators and platform users consult with their relevant institutions or IRB committee when setting up, configuring, or using the PECE platform.</p>
-<p>Unless otherwise noted, all supporting documentation and related content for PECE, other than the software itself, is licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0">Creative Commons Attribution-ShareAlike 4.0 International</a> license.</p>
-<h2 id="usage-of-pece">Usage of PECE</h2>
-<p>Please note that each distribution of PECE is run by the research group or university who installs and configures the software to run on their servers.  Plans are in the works to build a search cluster in order to query multiple instances of PECE. But for now, the PECE Design Team have no control over how any particular instance of PECE is configured or administered. Accordingly, the PECE Design Team is not responsible for any content that may be hosted on any instance of the PECE platform whatsoever.</p>
-<p>Members of the PECE Design Team are anthropologists and STS researchers by training, and have developed the platform with the ethical guidelines of professional anthropological associations in mind, such as the American Anthropological Association (AAA), Associação Brasileira de Antropologia (ABA) and the World Council of Anthropological Associations (WCAA). We aim to cause no harm to research participants or to any social group directly or indirectly as a consequence of research work on instances of our platform,  and ask for the help of instance administrators and users to help achieve that objective.</p></div>
+<h1 id="permissions">Permissions</h1>
+<h2 id="user-roles">User roles</h2>
+<p>There are three user roles in the system, which the site administrator
+distributes when users request an account on the platform.</p>
+<p><strong>Anonymous users</strong> can visit the site and can see any content that has
+been designated as public.</p>
+<p><strong>Contributors</strong> can login to the site, manage a profile, join groups,
+and contribute content to the site. They have access to content that has
+been designated as public or their own content that they’ve designated
+as private.</p>
+<p><strong>Researchers</strong> are typically those individuals on a project that have
+been IRB-approved to view collaborative research materials. Researchers
+have all of the same capabilities as a contributor, except that they can
+also view content that has been designated as Restricted.</p>
+<p><strong>Administrators</strong> can approve user registrations and configure the site theme. Administrators have access to edit any artifact on the platform. </p>
+<h2 id="content-permissions">Content Permissions</h2>
+<p>There are three permissions which can be applied to content that is
+created on the platform. Designating content permissions determines
+which site visitors and users will be able to view content.</p>
+<p>Content designated as <strong>Open</strong> can be seen by any of the platform’s site
+visitors unless the content has been given special <a href="#group-content-permissions"><em>group content restrictions</em></a>.</p>
+<p>Content designated as <strong>Restricted</strong> can be seen only by the platform
+users that have been designated as Researchers (See <a href="#user-roles"><em>User Roles</em></a>).</p>
+<p>Content designated as <strong>Private</strong> can only be seen by the content’s
+creator.</p>
+<h2 id="group-permissions">Group permissions</h2>
+<p>Any group that is created on the platform can either be public or
+private. These permissions are selected when <a href="../usersguide#how-do-i-create-a-group"><em>creating a group</em></a>.</p>
+<p><strong>Public</strong> groups will be accessible by any platform visitor.
+Additionally, all content associated with a public group will be public
+to the platform by default.</p>
+<p><strong>Private</strong> groups will be accessible only to group members. When not
+logged-in, private groups will not be listed anywhere on the platform
+and cannot be searched for. All content associated with a private group
+will be private to the group members by default.</p>
+<p>Group content permission settings can be overridden using the <a href="#group-content-permissions"><em>group content visibility</em></a> setting when creating content on
+the platform.</p>
+<h2 id="group-content-permissions">Group content permissions</h2>
+<p>When creating a piece of content, you can use the group content
+permissions field to override the <a href="#group-permissions"><em>group’s default content permissions</em></a>. This means that you can designate
+content that has been associated with a private group as “public” or
+content that has been associated with a public group as “private.”</p>
+<h2 id="overview-who-will-see-my-content">Overview - Who will see my content?</h2>
+<p><img alt="" src="../media/permissions.png" /></p></div>
         
         
     </div>

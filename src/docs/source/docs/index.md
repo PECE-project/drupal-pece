@@ -5,6 +5,9 @@
 
 <div markdown="1" class="column1">
 
+About
+=====================
+
 The Platform for Experimental, Collaborative Ethnography (PECE) is a Free and Open Source (Drupal-based) digital platform that supports multi-sited, cross-scale ethnographic and historical research. PECE provides a place to archive and share primary data, facilitates analytic collaboration, and encourages experimentation with diverse modes of publication. The platform encourages humanities scholars to experiment with digitally-mediated, interdisciplinary collaboration, provides opportunities to involve students and practitioners in humanities research as it progresses, and quickens the public availability of humanities research in an open access form. PECE also enables experimentation with new forms of peer review for humanities research, and functions as a portal to a suite of open source tools useful for humanities research, including tools developed in data science for other scientific communities.
 
 At its core, PECE is an experimental system. PECE’s design is both theoretically inflected and ethnographically grounded: platform design has been oriented by “design logics” drawn
@@ -13,13 +16,11 @@ from cultural, social, and language theories. We intend for the system to be as 
 Overview of this Documentation
 =====================
 
-In [*Getting Started*](../gettingstarted), you will find information relevant for new users, such as a glossary of PECE terms, typical PECE workflows, and how the PECE permission system works.
+In [*Users's Guide*](/usersguide), you will find documentation on how to use PECE, including many frequently asked questions and helpful resources.
 
-In [*Users's Guide*](../usersguide), you will find full documentation for PECE users, including many frequently asked questions we get about the use of PECE.
+In [*Administrator's Guide*](/installation), you will find full documentation for PECE users, including many frequently asked questions we get about the functionality of PECE.
 
-In [*Administrator's Guide*](../installation), you will find full documentation for PECE users, including many frequently asked questions we get about the functionality of PECE.
-
-In [*Resources*](../legal), you will find links to many useful documents such as PECE licensing, terms of service templates, governance guides, and contributed style guides.
+In [*Resources*](/legal), you will find links to many useful documents such as PECE licensing, terms of service templates, governance guides, and contributed style guides.
 
 </div>
 
@@ -45,7 +46,7 @@ In [*Resources*](../legal), you will find links to many useful documents such as
 
     For PECE architecture and usability, please contact [Lindsay Poirier](mailto:lnpoirier@ucdavis.edu).
 
-    For account registration, , please contact site administrator:
+    For account registration, please contact site administrator:
 
     *World PECE, The Asthma Files, Disaster STS Network*
 
