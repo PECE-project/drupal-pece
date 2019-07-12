@@ -16,11 +16,11 @@ from cultural, social, and language theories. We intend for the system to be as 
 Overview of this Documentation
 =====================
 
-In [*Users's Guide*](/usersguide), you will find documentation on how to use PECE, including many frequently asked questions and helpful resources.
+In [*User's Guide*](usersguide), you will find documentation on how to use PECE, including many frequently asked questions and helpful resources.
 
-In [*Administrator's Guide*](/installation), you will find full documentation for PECE users, including many frequently asked questions we get about the functionality of PECE.
+In [*Administrator's Guide*](installation), you will find full documentation for PECE users, including many frequently asked questions we get about the functionality of PECE.
 
-In [*Resources*](/legal), you will find links to many useful documents such as PECE licensing, terms of service templates, governance guides, and contributed style guides.
+In [*Resources*](legal), you will find links to many useful documents such as PECE licensing, terms of service templates, governance guides, and contributed style guides.
 
 </div>
 
@@ -41,6 +41,8 @@ In [*Resources*](/legal), you will find links to many useful documents such as P
     Bugs and requests can be reported to [*here*](https://platform-for-experimental-collaborative-ethnography.forms.fm/issues/forms/5287). The progress of your request can be tracked on our [*GitHub issue*](https://github.com/PECE-project/pece-distro/issues) page.
 
 !!! note "PECE Governance and Contacts"
+
+    For PECE as a research project, please contact [Kim Fortun](mailto:kfortun@uci.edu) and [Mike Fortun](mailto:mfortun@uci.edu).
 
     For PECE installation, please contact [Brian Callahan](mailto:callab5@rpi.edu).
 

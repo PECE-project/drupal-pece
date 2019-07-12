@@ -1,7 +1,7 @@
 Tagging
 =======
 
-In accordance with our [Design Logics](../logics.md), there are no folders in PECE. Instead content gets characterized and organized via tags. When you navigate to a tag page in PECE, you will see, in random order, a list of all content that has been tagged with that term. To make the most of this form of knowledge organization, we encourage you to consider the following:
+In accordance with our [Design Logics](../logics), there are no folders in PECE. Instead content gets characterized and organized via tags. When you navigate to a tag page in PECE, you will see, in random order, a list of all content that has been tagged with that term. To make the most of this form of knowledge organization, we encourage you to consider the following:
 
 -   When possible and appropriate, try to use existing tags rather than creating your own. As you begin typing a tag, PECE will offer suggestions of existing tags.
 
