@@ -379,6 +379,11 @@ projects[color_field][version] = 1.8
 ; Search
 ; =====================
 
+; Search API
+; Overrides panopoly's search_api settings.
+projects[search_api][subdir] = contrib
+projects[search_api][version] = 1.26
+projects[search_api][patch][] = ./patches/search_api_fix-composer-friendly-dependecies-issue.patch
 
 ; =====================
 ; Themes
