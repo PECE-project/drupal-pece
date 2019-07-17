@@ -390,7 +390,7 @@ projects[search_api][patch][] = ./patches/search_api_fix-composer-friendly-depen
 ; =====================
 
 projects[radix][type] = theme
-projects[radix][version] = 3.0-rc2
+projects[radix][version] = 3.7
 projects[radix][subdir] = contrib
 
 ; Adminimal Theme for admin
