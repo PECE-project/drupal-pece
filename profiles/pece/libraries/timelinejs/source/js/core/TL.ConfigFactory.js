@@ -147,6 +147,8 @@
         return d;
     }
 
+    
+
     var getGoogleItemExtractor = function(data) {
         if (typeof data.feed.entry === 'undefined'
                 || data.feed.entry.length == 0) {
@@ -176,54 +178,203 @@
         throw new TL.Error("invalid_data_format_err");
     }
 
-    var buildGoogleFeedURL = function(parts) {
-        return "https://spreadsheets.google.com/feeds/list/" + parts.key + "/1/public/values?alt=json";
-
+    var buildGoogleFeedURL = function(key, api_version) {
+        if (api_version == 'v4') {
+            return "https://sheets.googleapis.com/v4/spreadsheets/" + key + "/values/A1:R1000?key=AIzaSyCInR0kjJJ2Co6aQAXjLBQ14CEHam3K0xg";
+        } else {
+            return "https://spreadsheets.google.com/feeds/list/" + key + "/1/public/values?alt=json";
+        }
     }
 
-    var jsonFromGoogleURL = function(url) {
-        var url = buildGoogleFeedURL(parseGoogleSpreadsheetURL(url));
-            var timeline_config = { 'events': [] };
-            var data = TL.ajax({
+    var jsonFromGoogleURL = function(google_url) {
+        var api_version = 'v3';
+        var parts = parseGoogleSpreadsheetURL(google_url);
+        if (parts && parts.key) {
+            var spreadsheet_key = parts.key;
+        } else {
+            throw new TL.Error('invalid_url_err', google_url);
+        }
+
+        var url = buildGoogleFeedURL(spreadsheet_key, api_version);
+
+        var response = TL.ajax({
+            url: url,
+            async: false
+        });
+        
+        // tricky because errors can be in the response object or in the parsed data...
+
+        if (response.status != 200) {
+            console.log("Error fetching data " + api_version + ": " + response.status + " - " + response.statusText);
+            api_version = 'v4';
+            var url = buildGoogleFeedURL(spreadsheet_key, api_version);
+            console.log("trying v4 - " + google_url);
+            var response = TL.ajax({
                 url: url,
                 async: false
             });
-            data = JSON.parse(data.responseText);
-            return googleFeedJSONtoTimelineJSON(data);
+
+            if (response.status == 403) {
+                throw new TL.Error('invalid_url_share_required');
+            } else if (response.status != 200) {
+                var msg = "Error fetching data " + api_version + ": " + response.status + " - " + response.statusText;
+                console.log(msg);
+                throw new TL.Error("google_error", msg);
+            }
+        } 
+
+
+        var data = JSON.parse(response.responseText);
+
+        if (data.error) {
+            var msg = "Error fetching data " + api_version + ": " + response.status + " - " + response.statusText;
+            console.log(msg);
+            console.log(data.error);
+            throw new TL.Error("google_error", msg);
         }
+
+        return googleFeedJSONtoTimelineJSON(data);
+    }
+
+    function extractGoogleEntryData_V4(column, item) {
+        function clean_integer(s) {
+            if (s) {
+                return s.replace(/[\s,]+/g,''); // doesn't handle '.' as comma separator, but how to distinguish that from decimal separator?
+            }
+        }
+        // console.log(item);
+        var item_data = {};
+        for (var i = 1; i < item.length; i++) {
+            if (column.length >= i) {
+                var column_name = column[i].toLowerCase().replace(" ", "");
+                item_data[column_name] = item[i];
+            }
+           
+        }
+
+        var event = {
+            media: {
+                caption: item_data.mediacaption || '',
+                credit: item_data.mediacredit || '',
+                url: item_data.media || '',
+                thumbnail: item_data.mediathumbnail || ''
+            },
+            text: {
+                headline: item_data.headline || '',
+                text: item_data.text || ''
+            },
+            start_date: {
+                year: clean_integer(item[0]),
+                month: clean_integer(item[1]) || '',
+                day: clean_integer(item[2]) || ''
+            },
+            end_date: {
+                year: clean_integer(item_data.endyear) || '',
+                month: clean_integer(item_data.endmonth) || '',
+                day: clean_integer(item_data.endday) || ''
+            },
+            display_date: item_data.displaydate || '',
+
+            type: item_data.type || ''
+        }
+
+
+        if (item_data.time) {
+            TL.Util.mergeData(event.start_date,TL.DateUtil.parseTime(item[3]));
+        }
+
+        if (item_data.endtime) {
+            TL.Util.mergeData(event.end_date,TL.DateUtil.parseTime(item_data.endtime));
+        }
+
+        if (item_data.group) {
+            event.group = item_data.group;
+        }
+
+        if (event.end_date.year == '') {
+            var bad_date = event.end_date;
+            delete event.end_date;
+            if (bad_date.month != '' || bad_date.day != '' || bad_date.time != '') {
+                var label = event.text.headline ||
+                trace("Invalid end date for spreadsheet row. Must have a year if any other date fields are specified.");
+                trace(item);
+            }
+        }
+
+        if (item_data.background) {
+            if (item_data.background.match(/^(https?:)?\/\/?/)) { // support http, https, protocol relative, site relative
+                event['background'] = { 'url': item_data.background }
+            } else { // for now we'll trust it's a color
+                event['background'] = { 'color': item_data.background }
+            }
+        }
+
+        return event;
+    }
 
     var googleFeedJSONtoTimelineJSON = function(data) {
         var timeline_config = { 'events': [], 'errors': [], 'warnings': [], 'eras': [] }
-        var extract = getGoogleItemExtractor(data);
-        for (var i = 0; i < data.feed.entry.length; i++) {
-            try {
-                var event = extract(data.feed.entry[i]);
+        
+        if (data.values) {
+            // Google Sheets API v4
+            for (var i = 1; i < data.values.length; i++) {
+                var event = extractGoogleEntryData_V4(data.values[0], data.values[i]);
                 if (event) { // blank rows return null
-                  var row_type = 'event';
-                  if (typeof(event.type) != 'undefined') {
-                      row_type = event.type;
-                      delete event.type;
-                  }
-                  if (row_type == 'title') {
-                    if (!timeline_config.title) {
-                      timeline_config.title = event;
-                    } else {
-                      timeline_config.warnings.push("Multiple title slides detected.");
-                      timeline_config.events.push(event);
+                    var row_type = 'event';
+                    if (typeof (event.type) != 'undefined') {
+                        row_type = event.type;
+                        delete event.type;
                     }
-                  } else if (row_type == 'era') {
-                    timeline_config.eras.push(event);
-                  } else {
-                      timeline_config.events.push(event);
-                  }
+                    if (row_type == 'title') {
+                        if (!timeline_config.title) {
+                            timeline_config.title = event;
+                        } else {
+                            timeline_config.warnings.push("Multiple title slides detected.");
+                            timeline_config.events.push(event);
+                        }
+                    } else if (row_type == 'era') {
+                        timeline_config.eras.push(event);
+                    } else {
+                        timeline_config.events.push(event);
+                    }
                 }
-            } catch(e) {
-                if (e.message) {
-                    e = e.message;
-                }
-                timeline_config.errors.push(e + " ["+ i +"]");
             }
-        };
+        } else {
+
+            // Google Sheets API v3 
+            var extract = getGoogleItemExtractor(data);
+            for (var i = 0; i < data.feed.entry.length; i++) {
+                try {
+                    var event = extract(data.feed.entry[i]);
+                    if (event) { // blank rows return null
+                    var row_type = 'event';
+                    if (typeof(event.type) != 'undefined') {
+                        row_type = event.type;
+                        delete event.type;
+                    }
+                    if (row_type == 'title') {
+                        if (!timeline_config.title) {
+                        timeline_config.title = event;
+                        } else {
+                        timeline_config.warnings.push("Multiple title slides detected.");
+                        timeline_config.events.push(event);
+                        }
+                    } else if (row_type == 'era') {
+                        timeline_config.eras.push(event);
+                    } else {
+                        timeline_config.events.push(event);
+                    }
+                    }
+                } catch(e) {
+                    if (e.message) {
+                        e = e.message;
+                    }
+                    timeline_config.errors.push(e + " ["+ i +"]");
+                }
+            };
+
+        }
+
         return timeline_config;
 
     }
