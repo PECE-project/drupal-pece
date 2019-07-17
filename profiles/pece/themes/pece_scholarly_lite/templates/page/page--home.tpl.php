@@ -261,6 +261,24 @@
   </div>
   <!-- EOF:#main-content -->
 
+  <!-- #pece docs -->
+  <?php if (!empty($pece_docs)): ?>
+    <div class="pece-docs-wrapper">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="pece-docs">
+              <?php print render($pece_docs); ?>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <?php endif;?>
+  <!-- EOF: #pece docs -->
+
 </div>
 <!-- EOF: #page -->
 
