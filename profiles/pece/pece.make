@@ -129,6 +129,9 @@ projects[views_infinite_scroll][subdir] = contrib
 projects[views_litepager][version] = 3.0
 projects[views_litepager][subdir] = contrib
 
+projects[draggableviews][version] = 2.1
+projects[draggableviews][subdir] = contrib
+
 projects[tvi][version] = 1.0
 projects[tvi][subdir] = contrib
 
