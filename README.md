@@ -1,10 +1,10 @@
-#Platform for Experimental and Collaborative Ethnography (PECE)  
+# Platform for Experimental and Collaborative Ethnography (PECE)  
 
 PECE is a Free and Open Source (Drupal-based) digital platform that supports multi-sited, cross-scale ethnographic and historical research. PECE is built as a Drupal distribution, therefore it can be extended like any other Drupal project.
 
 This repository holds the packaged distribution for PECE adopters. It contains the most updated version of PECE for public use. If you are an end-user who wants to run PECE for your research, this is the right place to get your copy. If you are a developer wishing to contribute to the development process, you must use the [development repository](https://github.com/PECE-project/drupal-pece) instead.
 
-If you have general questions about the platform, please refer to our [official documentation](http://pece.readthedocs.io/en/latest).
+If you have general questions about the platform, please refer to our [official documentation](https://pece-project.github.io/drupal-pece/).
 
 
 ## Dependencies
@@ -37,7 +37,7 @@ Create an empty database and make sure to [configure the directory/file permissi
 
 ```$ sudo drush si pece --account-name=admin --account-pass=YOUR_ADMIN_PASS --db-url=mysql://YOUR_DB_USER:YOUR_DB_USER_PASSWD@locahost/YOUR_DB --notify```
 
-Go grab a cup of coffee or tea, since the installation process might take up to 30 minutes to complete dependending on your server backend. For detailed information on the installation process, please check our [official documentation](http://pece.readthedocs.io/en/latest/installation.html).
+Go grab a cup of coffee or tea, since the installation process might take up to 30 minutes to complete dependending on your server backend. For detailed information on the installation process, please check our [official documentation](https://pece-project.github.io/drupal-pece/installation/).
 
 ## Contributing
 
@@ -45,9 +45,9 @@ There are many ways of contributing to the PECE project. One of them is by repor
 
 ## PECE Team
 
-Our official documentation contains the information on authorship for the design and implementation of the platform. Please check the document [PECE Team](http://pece.readthedocs.io/en/latest/team.html) for more information.
+Our official documentation contains the information on authorship for the design and implementation of the platform. Please check the document [PECE Team](https://pece-project.github.io/drupal-pece/) for more information.
 
 ## Licensing
 
-All the software code written for PECE is released under the GNU GPL version 3. Access our [legal documents for more information](http://pece.readthedocs.io/en/latest/legal.html). All the documentation for the project is released under CC-BY-SA 4.0 International, unless stated otherwise.
+All the software code written for PECE is released under the GNU GPL version 3. Access our [legal documents for more information](https://pece-project.github.io/drupal-pece/legal/). All the documentation for the project is released under CC-BY-SA 4.0 International, unless stated otherwise.
 
