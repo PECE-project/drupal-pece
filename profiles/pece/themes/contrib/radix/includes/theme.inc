@@ -60,6 +60,20 @@ function radix_theme(&$existing, $type, $theme, $path) {
         'type' => 'status',
       ),
     ),
+    'radix_icon' => array(
+      'variables' => array(
+        'icon' => NULL,
+        'text' => NULL,
+        'link' => NULL,
+      ),
+      'function' => 'theme_radix_icon',
+    ),
+    'radix_input_group_addon' => array(
+      'variables' => array(
+        'content' => NULL,
+      ),
+      'function' => 'theme_radix_input_group_addon',
+    )
   );
 }
 
@@ -67,7 +81,7 @@ function radix_theme(&$existing, $type, $theme, $path) {
  * Implements theme_radix_dropdown().
  */
 function theme_radix_dropdown($variables) {
-  $links = $variables['links'];
+  $links = is_array($variables['links']) ? $variables['links'] : array();
   $attributes = (isset($variables['attributes'])) ? $variables['attributes'] : array();
   $wrapper = (isset($variables['wrapper'])) ? $variables['wrapper'] : FALSE;
   $output = '';
@@ -147,7 +161,7 @@ function theme_radix_dropdown($variables) {
  * Implements theme_radix_button_group().
  */
 function theme_radix_button_group($variables) {
-  $buttons = $variables['buttons'];
+  $buttons = is_array($variables['buttons']) ? $variables['buttons'] : array();
   $attributes = $variables['attributes'];
   $output = '';
 
@@ -278,7 +292,7 @@ function radix_preprocess_radix_modal(&$variables) {
   }
 
   // Format modal butttons.
-  if (isset($variables['buttons'])) {
+  if (is_array($variables['buttons'])) {
     if (count($variables['buttons'])) {
       foreach ($variables['buttons'] as $key => $button) {
         $text = isset($button['text']) ? $button['text'] : '';
@@ -351,3 +365,34 @@ function template_preprocess_radix_alert(&$variables) {
   $variables['classes_array'][] = 'alert-' . $type;
 }
 
+/**
+ * Implements theme_radix_icon().
+ */
+function theme_radix_icon($variables) {
+  $icon = $variables['icon'];
+  $text = $variables['text'];
+  $link = $variables['link'];
+
+  $html  = '<i class="fa fa-' . check_plain($icon) . '">';
+  if ($text) {
+    $html .= '<span class="element-invisible">' . check_plain($text) . '</span>';
+  }
+  $html .= '</i>';
+
+  if ($link) {
+    $link_options = array('html' => TRUE);
+    if ($text) {
+      $link_options['attributes']['title'] = $text;
+    }
+    return l($html, $link, $link_options);
+  }
+
+  return $html;
+}
+
+/**
+ * Implements theme_input_group_addon().
+ */
+function theme_radix_input_group_addon($variables) {
+  return '<span class="input-group-addon">' . $variables['content'] . '</span>';
+}

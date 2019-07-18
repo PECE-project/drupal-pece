@@ -17,9 +17,6 @@ function radix_form($variables) {
     $element['#attributes']['accept-charset'] = "UTF-8";
   }
 
-  // Add the role attribute.
-  $element['#attributes']['role'] = "form";
-
   // Anonymous DIV to satisfy XHTML compliance.
   return '<form' . drupal_attributes($element['#attributes']) . '><div>' . $element['#children'] . '</div></form>';
 }
@@ -29,6 +26,8 @@ function radix_form($variables) {
  */
 function radix_container($variables) {
   $element = $variables['element'];
+  // Ensure an array is always passed to drupal_attributes().
+  $element['#attributes'] = is_array($element['#attributes']) ? $element['#attributes'] : array();
 
   // Special handling for form elements.
   if (isset($element['#array_parents'])) {
@@ -58,18 +57,22 @@ function radix_container($variables) {
 function radix_element_info_alter(&$elements) {
   foreach ($elements as &$element) {
     // Process all elements.
-    $element['#process'][] = '_radix_process_element';
+    $element['#pre_render'][] = '_radix_pre_render_element';
     // Process input elements.
     if (!empty($element['#input'])) {
-      $element['#process'][] = '_radix_process_input';
+      $element['#pre_render'][] = '_radix_pre_render_input';
+    }
+    // Process text format elements.
+    if (!empty($element['#type']) && $element['#type'] == 'text_format') {
+      $element['#after_build'][] = '_radix_text_format_after_build';
     }
   }
 }
 
 /**
- * Process all elements.
+ * Pre render callback for all elements.
  */
-function _radix_process_element(&$element, &$form_state) {
+function _radix_pre_render_element(&$element) {
   // Add form-inline or form-group classes.
   if (!empty($element['#attributes']['class']) && is_array($element['#attributes']['class'])) {
     if (in_array('container-inline', $element['#attributes']['class'])) {
@@ -83,9 +86,9 @@ function _radix_process_element(&$element, &$form_state) {
 }
 
 /**
- * Process input elements.
+ * Pre render callback for input elements.
  */
-function _radix_process_input(&$element, &$form_state) {
+function _radix_pre_render_input(&$element) {
   // Add form-control class.
   $types = array(
     'textfield',
@@ -105,9 +108,31 @@ function _radix_process_input(&$element, &$form_state) {
     'webform_number',
     'number',
   );
-  if (!empty($element['#type']) && (in_array($element['#type'], $types))) {
+
+  // Skip elements with these #theme key.
+  $skip_themes = array(
+    'select_as_checkboxes',
+  );
+
+  if (!empty($element['#type']) && in_array($element['#type'], $types) && (empty($element['#theme']) || (!empty($element['#theme']) && !in_array($element['#theme'], $skip_themes)))) {
     $element['#attributes']['class'][] = 'form-control';
   }
+
+  return $element;
+}
+
+/**
+ * Last minute theming for format selectors.
+ */
+function _radix_text_format_after_build($element, &$form_state) {
+  // This thing runs twice, but the first time around format is not set yet.
+  if (empty($element['format'])) { return $element; }
+
+  $format = &$element['format']['format'];
+  // Set title to show in a field group before the input.
+  $format['#input_group'] = TRUE;
+  $format['#title_display'] = 'prefix';
+
   return $element;
 }
 
@@ -118,6 +143,7 @@ function radix_form_element($variables) {
   $element = &$variables['element'];
   $is_checkbox = FALSE;
   $is_radio = FALSE;
+  $is_input_group = FALSE;
 
   // This is also used in the installer, pre-database setup.
   $t = get_t();
@@ -168,6 +194,12 @@ function radix_form_element($variables) {
     }
   }
 
+  // Recognize non-standard #input_group key to use a Bootstrap input group.
+  if (!empty($element['#input_group'])) {
+    $attributes['class'][] = 'input-group';
+    $is_input_group = TRUE;
+  }
+
   // Add a class for disabled elements to facilitate cross-browser styling.
   if (!empty($element['#attributes']['disabled'])) {
     $attributes['class'][] = 'form-disabled';
@@ -178,8 +210,32 @@ function radix_form_element($variables) {
   if (!isset($element['#title'])) {
     $element['#title_display'] = 'none';
   }
-  $prefix = isset($element['#field_prefix']) ? '<span class="field-prefix">' . $element['#field_prefix'] . '</span> ' : '';
-  $suffix = isset($element['#field_suffix']) ? ' <span class="field-suffix">' . $element['#field_suffix'] . '</span>' : '';
+
+  // Support for non-standard #title_display options.
+  if ($element['#title_display'] == 'prefix') {
+    if (empty($element['#field_prefix'])) {
+      $element['#field_prefix'] = '';
+    }
+    $element['#field_prefix'] = theme('form_element_label', $variables) . $element['#field_prefix'];
+    $element['#title_display'] = 'none';
+  }
+  elseif ($element['#title_display'] == 'suffix') {
+    if (empty($element['#field_suffix'])) {
+      $element['#field_suffix'] = '';
+    }
+    $element['#field_suffix'] .= theme('form_element_label', $variables);
+    $element['#title_display'] = 'none';
+  }
+
+  // Generate the prefix and suffix.
+  if ($is_input_group) {
+    $prefix = isset($element['#field_prefix']) ? theme('radix_input_group_addon', array('content' => $element['#field_prefix'])) . ' ' : '';
+    $suffix = isset($element['#field_suffix']) ? ' ' . theme('radix_input_group_addon', array('content' => $element['#field_suffix'])) : '';
+  }
+  else {
+    $prefix = isset($element['#field_prefix']) ? '<span class="field-prefix">' . $element['#field_prefix'] . '</span> ' : '';
+    $suffix = isset($element['#field_suffix']) ? ' <span class="field-suffix">' . $element['#field_suffix'] . '</span>' : '';
+  }
 
   switch ($element['#title_display']) {
     case 'invisible':
@@ -207,7 +263,7 @@ function radix_form_element($variables) {
         $output .= ' ' . $prefix . theme('form_element_label', $variables) . $suffix . "\n";
       }
       else {
-        $variables['#children'] = ' ' . $prefix . $element['#children'] . $suffix;
+        $output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
         $output .= ' ' . theme('form_element_label', $variables) . "\n";
       }
       break;
@@ -303,6 +359,14 @@ function radix_button($variables) {
     $element['#attributes']['class'][] = 'btn-primary';
   }
 
+  if (!empty($element['#button_icon'])) {
+    $value  = theme('radix_icon', array('icon' => $element['#button_icon']));
+    $value .= ' ';
+    $value .= '<span class="button-text">' . check_plain($element['#value']) . '</span>';
+
+    return '<button' . drupal_attributes($element['#attributes']) . '>' . $value . '</button>';
+  }
+
   return '<input' . drupal_attributes($element['#attributes']) . ' />';
 }
 
@@ -342,7 +406,7 @@ function radix_fieldset($variables) {
   if (!empty($element['#description'])) {
     $output .= '<p class="help-block">' . $element['#description'] . '</p>';
   }
-  $output .= $element['#children'];
+  $output .= render($element['#children']);
   if (isset($element['#value'])) {
     $output .= $element['#value'];
   }
