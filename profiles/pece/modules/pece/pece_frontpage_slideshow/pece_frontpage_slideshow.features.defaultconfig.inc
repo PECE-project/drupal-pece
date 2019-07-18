@@ -382,29 +382,17 @@ function pece_frontpage_slideshow_defaultconfig_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
-      'free_panel' => array(
-        'custom_settings' => TRUE,
-      ),
-      'card' => array(
-        'custom_settings' => TRUE,
-      ),
-      'meta_content' => array(
-        'custom_settings' => TRUE,
-      ),
-      'highlighted' => array(
-        'custom_settings' => TRUE,
-      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
-          'weight' => '1',
+          'weight' => '30',
         ),
         'title' => array(
-          'weight' => '0',
+          'weight' => '-5',
         ),
         'path' => array(
-          'weight' => '2',
+          'weight' => '30',
         ),
       ),
       'display' => array(),
@@ -694,28 +682,21 @@ function pece_frontpage_slideshow_defaultconfig_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Frontpage slideshow short', 'slideshow_front_short');
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Image link */
-  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['id'] = 'field_pece_slideshow_img_link';
-  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['table'] = 'field_data_field_pece_slideshow_img_link';
-  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['field'] = 'field_pece_slideshow_img_link';
-  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['label'] = '';
-  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['element_type'] = '0';
-  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['element_wrapper_type'] = '0';
-  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['click_sort_column'] = 'url';
-  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['type'] = 'link_absolute';
-  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['field_api_classes'] = TRUE;
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link_1']['id'] = 'field_pece_slideshow_img_link_1';
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link_1']['table'] = 'field_data_field_pece_slideshow_img_link';
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link_1']['field'] = 'field_pece_slideshow_img_link';
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link_1']['label'] = '';
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link_1']['click_sort_column'] = 'url';
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link_1']['type'] = 'link_absolute';
   /* Field: Content: Image */
   $handler->display->display_options['fields']['field_pece_slideshow_image']['id'] = 'field_pece_slideshow_image';
   $handler->display->display_options['fields']['field_pece_slideshow_image']['table'] = 'field_data_field_pece_slideshow_image';
   $handler->display->display_options['fields']['field_pece_slideshow_image']['field'] = 'field_pece_slideshow_image';
   $handler->display->display_options['fields']['field_pece_slideshow_image']['label'] = '';
   $handler->display->display_options['fields']['field_pece_slideshow_image']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_pece_slideshow_image']['alter']['path'] = '[field_pece_slideshow_img_link]';
-  $handler->display->display_options['fields']['field_pece_slideshow_image']['alter']['absolute'] = TRUE;
-  $handler->display->display_options['fields']['field_pece_slideshow_image']['alter']['replace_spaces'] = TRUE;
-  $handler->display->display_options['fields']['field_pece_slideshow_image']['element_type'] = 'div';
+  $handler->display->display_options['fields']['field_pece_slideshow_image']['alter']['path'] = '[field_pece_slideshow_img_link_1]';
   $handler->display->display_options['fields']['field_pece_slideshow_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_pece_slideshow_image']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_pece_slideshow_image']['click_sort_column'] = 'fid';
@@ -723,6 +704,16 @@ function pece_frontpage_slideshow_defaultconfig_views_default_views() {
     'image_style' => 'pece_frontpage_image_short',
     'image_link' => '',
   );
+  /* Field: Content: Image link */
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['id'] = 'field_pece_slideshow_img_link';
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['table'] = 'field_data_field_pece_slideshow_img_link';
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['field'] = 'field_pece_slideshow_img_link';
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['label'] = '';
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['element_wrapper_class'] = 'slideshow-image-link';
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['click_sort_column'] = 'url';
+  $handler->display->display_options['fields']['field_pece_slideshow_img_link']['field_api_classes'] = TRUE;
   $translatables['frontpage_image_slider'] = array(
     t('Master'),
     t('more'),
