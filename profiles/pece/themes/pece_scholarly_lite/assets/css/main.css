@@ -2393,14 +2393,25 @@ i.pece_timeline_essay::before {
   .page-home .pane-content .pane-pece-recent-essays-panel-pane-featured {
     margin: 0; }
 
-.page-home .view-frontpage-image-slider .view-content {
+.page-home .view-id-frontpage_image_slider .view-content {
   margin: 0; }
 
-.page-home .view-frontpage-image-slider .views-row {
+.page-home .view-id-frontpage_image_slider .views-row {
   padding: 0 !important; }
 
-.page-home .view-frontpage-image-slider img {
+.page-home .view-id-frontpage_image_slider img {
   width: 100%; }
+
+.page-home .view-id-frontpage_image_slider.view-display-id-slideshow_front_short .views-row-inner {
+  position: relative; }
+
+.page-home .view-id-frontpage_image_slider.view-display-id-slideshow_front_short .views-field-field-pece-slideshow-img-link {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
+  bottom: 0;
+  border-bottom: inset 2px #999999;
+  width: 100%;
+  padding: 5px 0; }
 
 .page-home #main-content {
   padding: 0;
@@ -2653,7 +2664,8 @@ body {
     margin: 0; }
   body #page .pece-docs-wrapper {
     position: fixed;
-    bottom: 0; }
+    bottom: 0;
+    z-index: 999999; }
     body #page .pece-docs-wrapper .pece-docs {
       padding: 0 15px; }
       body #page .pece-docs-wrapper .pece-docs a {
