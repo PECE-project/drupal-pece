@@ -317,3 +317,22 @@ function pece_update_7109() {
     }
   }
 }
+
+/**
+ * Update front page slideshow to add links on slide images.
+ */
+function pece_update_7110() {
+  if (module_exists('features')) {
+    $modules = array(
+      'pece_frontpage_slideshow'
+    );
+
+    foreach ($modules as $module) {
+      features_revert_module($module);
+    }
+
+    module_load_include('inc', 'pece', 'pece.functions');
+    // Revert default config views_default_views component for PECE Frontpage Image Slider view.
+    pece_defaultconfig_component_rebuild_by_name('views_default_views', 'pece_frontpage_slideshow');
+  }
+}
