@@ -32,9 +32,13 @@ More information: https://wodby.com/docs/stacks/drupal/local/#docker-for-mac for
 
 4- Run command `make up`
 
-5- Try access http://drupal.docker.local
+5- Run command `make shell`
 
-6- If you need GraphQl, after drupal installation, enable the graphql module in http://drupal.docker.local/admin/modules
+6- Run command `composer install`
+
+7- Try access http://drupal.docker.local
+
+8- If you need GraphQl, after drupal installation, enable the graphql module in http://drupal.docker.local/admin/modules
 
 Look docker.mk to see others make commands and read .env about database settings
 
