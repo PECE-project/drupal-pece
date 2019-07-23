@@ -5,13 +5,13 @@ How do I install PECE?
 ----------------------
 
 PECE is a Free Software-based Drupal distribution, therefore the
-[*standard installation procedure for Drupal 7*](https://www.drupal.org/requirements) applies to PECE with a few
+[*standard installation procedure for Drupal 8*](https://www.drupal.org/requirements) applies to PECE with a few
 extra dependencies.
 
 The following instructions have been tested on a Debian 8 (jessie)
 server, but they are not OS-dependent. PECE should run on any system
-supported by Drupal 7. PECE has been tested in virtual machines with
-256M allocated for PHP, being 128M the recommended minimum for Drupal 7
+supported by Drupal 8. PECE has been tested in virtual machines with
+256M allocated for PHP, being 128M the recommended minimum for Drupal 8
 distributions. Your configuration, of course, may vary considerably
 depending on the usage you are making of the platform. Refer to our data
 management guidelines under the “sustainability” section to learn about
@@ -39,40 +39,51 @@ below for more information.
 
 ### Dependencies
 
-PECE has extra dependencies in addition to the ones you will need for
-Drupal 7 core:
+PECE has extra dependencies in addition to the ones you will need:
 
--   cURL
-
--   php-mcrypt (for AES encryption support in backups and user passwords)
-
--   php-ssh2 (for backup SFTP support, installed via PHP pear)
+- Docker
+- Docker Compose
+- Make
+- Composer
 
 ### Quick Install
 
-If you have the server backend already set-up, you can quickly install
-PECE following these steps:
+## Usage
 
-Clone the ‘’pece-distro’’ repository:
+1- Install Docker
 
-> git clone
-> [*https://github.com/PECE-project/pece-distro.git*](https://github.com/PECE-project/pece-distro.git)
+2- Install docker-compose
 
-Create an empty database:
+3- Rename .env.example to .env and if necessary, change the variables.
+Ex.: ```PROJECT_BASE_URL=yoururl.com```
 
-> mysql -u \$YOUR\_USER -p -e "CREATE DATABASE \$YOUR\_DB\_NAME
-> CHARACTER SET utf8 COLLATE utf8\_general\_ci;"
+4- Run command `make up`
 
-Proceed to the URL in which your Drupal will reside, i.e.
-https://worldpece.org. From there, you can install PECE like any other
-Drupal site. Follow the Drupal.org [*official documentation if you need further help*](https://www.drupal.org/documentation/install/). In the
-section [*Troubleshooting*](http://pece.readthedocs.io/en/latest/installation.html#troubleshooting) below we describe common issues users have when trying to install PECE without the proper backend dependencies, configurations, and permissions.
+5- Try access http://yoururl.com to finish installation or use ```make si pece``` in the command line
 
-One important note: please, make sure to set the permissions on the
-filesystem properly. We cannot emphasize this enough. The [*official Drupal documentation explains*](https://www.drupal.org/node/244924) how
-to do so, if you have questions. (In our experience, we have needed to
-set the file permissions at sites/default/files/artifacts to 770 and
-sites/default/files/private to 770.)
+Look docker.mk to see others make commands and read .env about database settings
+
+How to use the docker compose override
+---------------------------------------------------------
+Docker compose override allows you to change and add new settings and services in your container.
+
+Copy docker-compose.override.yml.example to docker-compose.override.yml and change the values as desired, for example, 
+add user and password to nginx for a stage environment.
+
+- User: test
+- Pass: test
+
+Created using http://www.htaccesstools.com/htpasswd-generator/
+```yaml
+  nginx:
+    labels:
+      - 'traefik.logs.frontend.auth.basic.users=test:$$apr1$$n4tqay70$$Y6K.H9JYEhofKykkT'
+```
+
+About docker override: https://docs.docker.com/compose/extends/
+
+About docker 4 Drupal: https://wodby.com/docs/stacks/drupal/local/#usage
+
 
 I’ve installed PECE, but none of my links are working. What is going on?
 ------------------------------------------------------------------------
