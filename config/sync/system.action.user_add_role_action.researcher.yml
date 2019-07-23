@@ -1,0 +1,14 @@
+uuid: aa099ac8-068f-4c8c-8265-fcacae7f743c
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.researcher
+  module:
+    - user
+id: user_add_role_action.researcher
+label: 'Add the Researcher role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: researcher
