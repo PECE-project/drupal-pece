@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_groups.features.defaultconfig.inc
@@ -177,7 +178,7 @@ function pece_groups_defaultconfig_field_default_fields() {
           'manualcrop_thumblist' => 0,
         ),
         'type' => 'media_generic',
-        'weight' => 6,
+        'weight' => 5,
       ),
     ),
   );
