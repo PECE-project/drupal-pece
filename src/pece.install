@@ -336,3 +336,12 @@ function pece_update_7110() {
     pece_defaultconfig_component_rebuild_by_name('views_default_views', 'pece_frontpage_slideshow');
   }
 }
+
+/**
+ * Add Group content visibility field on Group content type
+ */
+function pece_update_7111() {
+  if (module_exists('features')) {
+    features_revert_module(array('pece_groups'));
+  }
+}
