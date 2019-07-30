@@ -542,7 +542,7 @@ projects[feeds][version] = 2.0-beta4
 
 ; Bibliography
 projects[biblio][subdir] = contrib
-projects[biblio][version] = 1.0
+projects[biblio][version] = 1.x-dev
 
 ; Bibliography Zotero
 projects[biblio_zotero][subdir] = contrib
