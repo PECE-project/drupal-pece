@@ -125,13 +125,3 @@ function biblio_style_apa($node) {
    */
   return filter_xss($output, biblio_get_allowed_tags());
 }
-
-/**
- *
- */
-function _apa_format_author($author) {
-  $format = $author['prefix'] . ' ' . $author['lastname'];
-  $format .= !empty($author['firstname']) ? ' ' . drupal_substr($author['firstname'], 0, 1) . '.' : '';
-  $format .= !empty($author['initials']) ? $author['initials'] . '.' : '';
-  return $format;
-}

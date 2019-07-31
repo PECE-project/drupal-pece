@@ -43,7 +43,7 @@
 // -----------------------------------------------------------------------------.
 require_once "../php-marc/php-marc.php";
 
-// Other way to access file
+// Other way to access file.
 /*$string = file("example.mrc");
 $file = new USMARC($string[0]);*/
 

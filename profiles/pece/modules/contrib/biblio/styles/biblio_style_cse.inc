@@ -2,13 +2,14 @@
 
 /**
  * @file
+ * Council of Science Editors (CSE) style.
  */
 
 /**
  * Get the style information.
  *
- * @return
- *   The name of the style
+ * @return string[]
+ *   The name of the style keyed with the abbreviation.
  */
 function biblio_style_cse_info() {
   return array(
@@ -17,13 +18,10 @@ function biblio_style_cse_info() {
 }
 
 /**
- * Apply a bibliographic style to the node.
+ * Return an array of author options.
  *
- * @param $node
- *   An object containing the node data to render
- *
- * @return
- *   The styled biblio entry
+ * @return array
+ *   The author options array.
  */
 function biblio_style_cse_author_options() {
   $author_options = array(
@@ -55,7 +53,13 @@ function biblio_style_cse_author_options() {
 }
 
 /**
+ * Apply a bibliographic style to the node.
  *
+ * @param object $node
+ *   An object containing the node data to render.
+ *
+ * @return string
+ *   The styled biblio entry.
  */
 function biblio_style_cse($node) {
   module_load_include('inc', 'biblio', '/includes/biblio.contributors');
@@ -81,13 +85,12 @@ function biblio_style_cse($node) {
     // Use anonymous if we still have nothing.
     $authors = '[' . t('Anonymous') . ']';
   }
-  if (!empty($node->biblio_citekey)&&(variable_get('biblio_display_citation_key', 0))) {
+  if (!empty($node->biblio_citekey) && (variable_get('biblio_display_citation_key', 0))) {
     $output .= '[' . check_plain($node->biblio_citekey) . '] ';
   }
   $output .= '<span class="biblio-authors">' . $authors . "</span>.&nbsp; \n";
 
   switch ($node->biblio_type) {
-
     default:
       if (isset($node->biblio_year)) {
         $output .= check_plain($node->biblio_year) . ".&nbsp;&nbsp;";
@@ -101,15 +104,7 @@ function biblio_style_cse($node) {
       $output .= (!empty($node->biblio_volume)) ? check_plain($node->biblio_volume) : '';
       $output .= (!empty($node->biblio_issue)) ? '(' . check_plain($node->biblio_issue) . ')' : '';
       $output .= (!empty($node->biblio_pages)) ? ':' . str_replace(" ", "", check_plain($node->biblio_pages)) . '.' : '';
-      // Generic.
-      break;
   }
-  /*  if ($node->biblio_date) $output .= ', '. check_plain($node->biblio_date);
-  if ($node->biblio_number) $output .= ', Number '. check_plain($node->biblio_number);
-
-  if ($node->biblio_place_published) $output .= ', '. check_plain($node->biblio_place_published);
-   */
 
   return filter_xss($output, biblio_get_allowed_tags());
-
 }

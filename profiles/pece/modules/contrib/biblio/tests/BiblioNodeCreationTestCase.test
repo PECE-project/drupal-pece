@@ -1,12 +1,12 @@
 <?php
 
 /**
- *
+ * Test biblio node creation.
  */
 class BiblioNodeCreationTestCase extends DrupalWebTestCase {
 
   /**
-   *
+   * {@inheritdoc}
    */
   public static function getInfo() {
     return array(
@@ -17,7 +17,7 @@ class BiblioNodeCreationTestCase extends DrupalWebTestCase {
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function setUp() {
     parent::setUp('biblio');
@@ -38,6 +38,14 @@ class BiblioNodeCreationTestCase extends DrupalWebTestCase {
     $this->assertOptionSelected('edit-biblio-type', '101');
     $this->assertFieldById('edit-title');
     $this->assertFieldById('edit-biblio-year');
+    $this->assertRaw('Year of Publication ' . theme('form_required_marker'), t('Form required marker appears for "Year of Publication".'));
+
+    $edit = array(
+      'title' => $this->randomString(32),
+    );
+    $this->drupalPost(NULL, $edit, t('Save'));
+    $this->assertRaw('
+Year of Publication field is required (on the <em class="placeholder">Publication</em> tab).', t('Custom "field is required" validation message appears.'));
 
     $edit = array(
       'title' => $this->randomString(32),

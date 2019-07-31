@@ -1057,7 +1057,7 @@ class csl_names extends csl_format {
     $variables = explode(' ', $this->variable);
 
     foreach ($variables as $var) {
-      if (in_array($var, $this->citeproc->quash)) {
+      if (!$var || in_array($var, $this->citeproc->quash)) {
         continue;
       }
       list($contributor, $category) = explode(':', $var);

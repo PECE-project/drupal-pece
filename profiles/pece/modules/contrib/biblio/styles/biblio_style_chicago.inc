@@ -391,11 +391,13 @@ function biblio_style_chicago($node) {
 
     // All other types.
     default:
-      // TODO
+      // @todo
+      // @code
       //        if (preg_match("[ \r\n]*\(ed\)", $node->author)) // single editor
       //          $author = $author . ", ed";
       //        elseif (preg_match("[ \r\n]*\(eds\)", $node->author)) // multiple editors
       //          $author = $author . ", eds";.
+      // @endcode
       // Author.
       if (!empty($authors)) {
         $output .= '<span class="biblio-authors">';

@@ -142,8 +142,8 @@ function biblio_style_mla($node) {
       if (!empty($node->biblio_year)) {
         $output .= " (" . $node->biblio_year . ")";
       }
-      // FIXME do something with the online pubs section
-      // This record refers to an online article
+      // @todo Do something with the online pubs section.
+      // This record refers to an online article.
       if (FALSE /*$node->online_publication == "yes"*/) {
         // Instead of any pages info (which normally doesn't exist for online publications) we append
         // an optional string (given in 'online_citation') plus the current date and the DOI (or URL):
@@ -201,7 +201,7 @@ function biblio_style_mla($node) {
           !empty($node->biblio_secondary_title)) {
             $output .= ": ";
           }
-          // TODO: FIXME $output .= formatPageInfo($node->biblio_pages, $markupPatternsArray["endash"]); // function 'formatPageInfo()' is defined in 'cite.inc.php'.
+          // @todo: $output .= formatPageInfo($node->biblio_pages, $markupPatternsArray["endash"]); // function 'formatPageInfo()' is defined in 'cite.inc.php'.
           $output .= theme('biblio_page_number', array('orig_page_info' => $node->biblio_pages));
         }
       }
@@ -530,11 +530,11 @@ function biblio_style_mla($node) {
 
       // Thesis (unpublished dissertation)
       if (!empty($node->thesis)) {
-        // TODO: a published dissertation needs to be formatted differently!
+        // @todo: a published dissertation needs to be formatted differently!
         //       see e.g. example at: <http://web.csustan.edu/english/reuben/pal/append/AXI.HTML>
         _period_if_needed($output);
 
-        // TODO: I've also seen MLA examples that separate thesis name, name of institution and year by dots. ?:-|
+        // @todo: I've also seen MLA examples that separate thesis name, name of institution and year by dots. ?:-|
         //       Also, do we need to use the abbreviation "Diss." instead of "Ph.D. thesis"? What about other thesis types then?
         //       see e.g. <http://www.english.uiuc.edu/cws/wworkshop/writer_resources/citation_styles/mla/unpublished_diss.htm>
         $output .= " " . $node->thesis;

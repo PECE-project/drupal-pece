@@ -209,8 +209,6 @@ function biblio_pm_form_biblio_node_form_submit($form, &$form_state) {
     $form_state['input']['biblio_pubmed_grants'] = $form_state['biblio_pubmed_grants'] = isset($node_data['biblio_pmcid']) ? $node_data['biblio_pmcid'] : array();
     $form_state['rebuild'] = TRUE;
   }
-
-  return;
 }
 
 /**

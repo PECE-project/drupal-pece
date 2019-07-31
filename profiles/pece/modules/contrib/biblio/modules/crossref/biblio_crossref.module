@@ -96,7 +96,6 @@ function biblio_crossref_form_biblio_node_form_submit($form, &$form_state) {
     }
   }
   $form_state['rebuild'] = TRUE;
-  return;
 }
 
 /**
@@ -147,7 +146,6 @@ function biblio_crossref_biblio_lookup_link($node) {
       ),
     );
   }
-  return;
 }
 
 /**

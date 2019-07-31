@@ -101,13 +101,3 @@ function biblio_style_classic($node) {
   return filter_xss($output, biblio_get_allowed_tags());
 
 }
-
-/**
- *
- */
-function _classic_format_author($author) {
-  $format = $author['prefix'] . ' ' . $author['lastname'] . ' ';
-  $format .= !empty($author['firstname']) ? ' ' . drupal_substr($author['firstname'], 0, 1) : '';
-  $format .= !empty($author['initials']) ? str_replace(' ', '', $author['initials']) : '';
-  return $format;
-}

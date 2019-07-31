@@ -6,7 +6,7 @@
 class BiblioKeywordUnitTest extends BiblioKeywordWebTestCase {
 
   /**
-   *
+   * {@inheritdoc}
    */
   public static function getInfo() {
     return array(
@@ -91,13 +91,13 @@ class BiblioKeywordUnitTest extends BiblioKeywordWebTestCase {
 
     foreach ($node->biblio_keywords as $kid => $value) {
       $this->assertEqual($value, $term1['word'] . 'xxx', 'Loaded updated keyword');
-      // Add the new kids to the global array so we can delete them on tear down.
+      // Add the new kids to the global array so we can delete them on teardown.
       $this->kids[] = $kid;
     }
     $node = node_load($node->nid, $old_vid, TRUE);
     foreach ($node->biblio_keywords as $kid => $value) {
       $this->assertEqual($value, 'biblio_keywords', 'Loaded previous revision prior to update');
-      // Add the new kids to the global array so we can delete them on tear down.
+      // Add the new kids to the global array so we can delete them on teardown.
       $this->kids[] = $kid;
     }
     biblio_delete_keywords($node);
@@ -137,7 +137,7 @@ class BiblioKeywordUnitTest extends BiblioKeywordWebTestCase {
     $string = implode($wrong_sep, $words);
     $exploded = biblio_explode_keywords($string);
     $this->assertNotIdentical($words, $exploded, 'Tried to explode keyword string with incorrect separator');
-    $words[] = '"' . 'word1' . $sep . ' word2' . '"';
+    $words[] = '"word1' . $sep . ' word2"';
     $string = implode($sep, $words);
     $exploded = biblio_explode_keywords($string);
     // Strip the quotes becuase that's the way it comes back.

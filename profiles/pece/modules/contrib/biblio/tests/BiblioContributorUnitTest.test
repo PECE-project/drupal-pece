@@ -1,12 +1,12 @@
 <?php
 
 /**
- *
+ * System tests for contributor functions.
  */
 class BiblioContributorUnitTest extends BiblioContributorWebTestCase {
 
   /**
-   *
+   * {@inheritdoc}
    */
   public static function getInfo() {
     return array(
@@ -20,7 +20,6 @@ class BiblioContributorUnitTest extends BiblioContributorWebTestCase {
    *
    */
   public function testGrabSurname() {
-
     $surname = 'van der Plus';
     list ($surname, $prefix) = _grabSurname($surname);
     $this->assertIdentical($surname, 'Plus');
@@ -35,7 +34,6 @@ class BiblioContributorUnitTest extends BiblioContributorWebTestCase {
    *
    */
   public function testGrabFirstnameInitials() {
-
     $string = "Ron";
     list($firstname, $initials, $prefix) = _grabFirstnameInitials($string);
     $this->assertIdentical($firstname, 'Ron');
@@ -68,7 +66,6 @@ class BiblioContributorUnitTest extends BiblioContributorWebTestCase {
    *
    */
   public function testBiblioParseAuthor() {
-
     $author['name'] = 'Bush, Jr. III, George W';
     $author['auth_category'] = 1;
     $author = biblio_parse_author($author);
@@ -83,7 +80,6 @@ class BiblioContributorUnitTest extends BiblioContributorWebTestCase {
    *
    */
   public function testBiblioUpdateContributors() {
-
     $node = $this->createNode();
     $nid = $node->nid;
     $vid1 = $node->vid;

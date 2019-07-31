@@ -464,11 +464,13 @@ function _save_contributors(&$contributors, $nid, $vid, $update = FALSE) {
       }
     }
   }
-  // TODO  check if it is necessary to reset aka here...
+  // @todo check if it is necessary to reset aka here...
+  // @code
   //  db_query("UPDATE {biblio_contributor_data} SET aka = cid WHERE aka = 0 OR aka IS NULL");
   //  db_update('biblio_contributor_data')
   //    ->fields(array('aka', )
-  // successfully saved all contributors.
+  // @endcode
+  // Successfully saved all contributors.
   return TRUE;
 }
 

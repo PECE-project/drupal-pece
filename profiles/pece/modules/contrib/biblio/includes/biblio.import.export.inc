@@ -256,8 +256,6 @@ function biblio_import_form_submit($form, & $form_state) {
               $terms[$key] = $form_state['values'][$key];
             }
           }
-          // }
-          // FIXME     if (count($terms) && $key == 'copy_to_biblio') $terms['copy_to_biblio'] = $form_state['values'][$key];.
         }
       }
 
@@ -764,7 +762,7 @@ function biblio_csv_export_2($result, $bfields) {
       }
     }
   } //End while
-  // head line containing column names.
+  // Head line containing column names.
   if ($label) {
     $csv = $textsep . join("$textsep$filedsep$textsep", array_values($col_array)) . "$textsep\n";
   }

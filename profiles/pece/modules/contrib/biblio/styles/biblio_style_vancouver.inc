@@ -17,11 +17,11 @@
  *          This isn't currently handled by this style
  *        - For conference proceedings, you'll currently need to add the place & date of the conference in the proceedings title field
  *          (e.g. "Proceedings of the 5th Germ Cell Tumour Conference; 2001 Sep 13-15; Leeds, UK").
- * TODO: - abstracts, newspaper/magazine articles, patents & reports?
+ * @todo: - abstracts, newspaper/magazine articles, patents & reports?
  *       - arrange references numerically
  *       - for newspaper articles, only the beginning page number of an article should be included (see: <https://www.ncbi.nlm.nih.gov/books/bv.fcgi?rid=citmed.section.41496#41607>)
  *       - where to put (and how to format) editors of whole books that also have an author?
- *       - see also inline comments labeled with TODO (and NOTE)
+ *       - see also inline comments labeled with @todo (and NOTE)
  * Modified for use in biblio by Ron Jerome.
  */
 
@@ -120,7 +120,7 @@ function biblio_style_vancouver($node) {
       // if this is not the case, the output string will begin with a space. However, any preceding/trailing whitespace will be removed at the cleanup stage (see below)
       // Abbreviated journal name.
       if (!empty($node->biblio_alternate_title)) {
-        // No punctuation marks are used in the abbreviated journal name, just spaces (TODO: smarten regex pattern)
+        // No punctuation marks are used in the abbreviated journal name, just spaces (@todo: smarten regex pattern)
         $output .= " " . preg_replace("/\./", "", $node->biblio_alternate_title);
       }
 
@@ -136,7 +136,7 @@ function biblio_style_vancouver($node) {
         $output .= " [Internet]";
       }
 
-      // NOTE: the formatting of year/volume/issue is meant for journal articles (TODO: newspaper/magazine articles)
+      // NOTE: the formatting of year/volume/issue is meant for journal articles (@todo: newspaper/magazine articles)
       // year.
       if (!empty($node->biblio_year)) {
         $output .= ". " . $node->biblio_year;
@@ -187,7 +187,7 @@ function biblio_style_vancouver($node) {
               // Print instead of pages.
               $output .= ":";
             }
-            // Append to pages (TODO: not sure whether this is correct)
+            // Append to pages (@todo: not sure whether this is correct)
             else {
               $output .= ";";
             }
@@ -308,7 +308,7 @@ function biblio_style_vancouver($node) {
           $output .= ".";
         }
 
-        // TODO: not sure whether this is correct.
+        // @todo: not sure whether this is correct.
         $output .= " Vol " . $node->biblio_volume;
       }
 
@@ -392,7 +392,7 @@ function biblio_style_vancouver($node) {
 
         // Abbreviated series title.
         if (!empty($node->biblio_alternate_title)) {
-          // No punctuation marks are used in the abbreviated series title, just spaces (TODO: smarten regex pattern)
+          // No punctuation marks are used in the abbreviated series title, just spaces (@todo: smarten regex pattern)
           $output .= preg_replace("/\./", "", $node->biblio_alternate_title);
         }
 
@@ -412,7 +412,7 @@ function biblio_style_vancouver($node) {
         }
 
         if (!empty($node->biblio_volume) && !empty($node->biblio_issue)) {
-          // TODO: not sure whether this is correct.
+          // @todo: not sure whether this is correct.
           $output .= "; ";
         }
 
@@ -433,7 +433,7 @@ function biblio_style_vancouver($node) {
 
     // All other types.
     default:
-      // TODO.
+      // @todo.
       // @code
       //        if (preg_match("[ \r\n]*\(ed\)", $node->author)) // single editor
       //          $author = $author . ", ed";
@@ -456,7 +456,7 @@ function biblio_style_vancouver($node) {
           $output .= " ";
         }
 
-        // TODO: book/volume/report/etc titles should be formatted in heading caps, however, this doesn't yet work correctly if the publication title contains HTML entities.
+        // @todo: book/volume/report/etc titles should be formatted in heading caps, however, this doesn't yet work correctly if the publication title contains HTML entities.
         $output .= '<span class="biblio-title-vancouver">';
         $url = biblio_get_title_url_info($node);
         $output .= l($node->title, $url['link'], $url['options']);
@@ -479,7 +479,7 @@ function biblio_style_vancouver($node) {
           $output .= ".";
         }
 
-        // TODO: not sure whether this is correct.
+        // @todo: not sure whether this is correct.
         $output .= " Vol " . $node->biblio_volume;
       }
 
@@ -554,7 +554,7 @@ function biblio_style_vancouver($node) {
 
       // Thesis.
       if (!empty($node->thesis)) {
-        // TODO: do we need to use the term "[dissertation]" instead of "[Ph.D. thesis]", etc? What about other thesis types then?
+        // @todo: do we need to use the term "[dissertation]" instead of "[Ph.D. thesis]", etc? What about other thesis types then?
         $output .= " [" . $node->thesis;
 
         // This record refers to an online thesis.
@@ -595,7 +595,7 @@ function biblio_style_vancouver($node) {
         $output .= " " . $node->biblio_year;
       }
 
-      // For software, volume (=month) and issue (=day) information is printed after the year (TODO: not sure whether this is correct)
+      // For software, volume (=month) and issue (=day) information is printed after the year (@todo: not sure whether this is correct)
       if ($node->type == "Software") {
         // Volume (=month)
         if (!empty($node->biblio_volume)) {
@@ -623,7 +623,7 @@ function biblio_style_vancouver($node) {
 
         // Abbreviated series title.
         if (!empty($node->biblio_alternate_title)) {
-          // No punctuation marks are used in the abbreviated series title, just spaces (TODO: smarten regex pattern)
+          // No punctuation marks are used in the abbreviated series title, just spaces (@todo: smarten regex pattern)
           $output .= preg_replace("/\./", "", $node->biblio_alternate_title);
         }
 
@@ -643,7 +643,7 @@ function biblio_style_vancouver($node) {
         }
 
         if (!empty($node->biblio_volume) && !empty($node->biblio_issue)) {
-          // TODO: not sure whether this is correct.
+          // @todo: not sure whether this is correct.
           $output .= "; ";
         }
 

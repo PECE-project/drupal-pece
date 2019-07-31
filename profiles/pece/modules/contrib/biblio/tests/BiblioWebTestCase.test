@@ -1,23 +1,36 @@
 <?php
 
 /**
- *
+ * Base class used by other tests.
  */
 class BiblioWebTestCase extends DrupalWebTestCase {
+
   /**
    * Keep a list of all keyword id's created.
+   *
+   * @var array
    */
   protected $kids = array();
 
   /**
    * Keep a list of all contributor id's created.
+   *
+   * @var array
    */
   protected $cids = array();
 
   /**
    * Keep a list of all node id's created.
+   *
+   * @var array
    */
   protected $nids = array();
+
+  /**
+   * This variable is probably unused.
+   *
+   * @var null
+   */
   protected $admin_user;
 
   // @code
@@ -52,7 +65,7 @@ class BiblioWebTestCase extends DrupalWebTestCase {
   // @endcode
 
   /**
-   *
+   * Create a test node.
    */
   public function createNode($type = 100) {
     $schema = drupal_get_schema('biblio');
@@ -79,9 +92,21 @@ class BiblioWebTestCase extends DrupalWebTestCase {
       'biblio_type' => $type,
       'biblio_year' => 2009,
       'biblio_contributors' => array(
-        0 => array('name' => 'Ron J. Jeromezzzzzz', 'auth_type' => 1, 'auth_category' => 1),
-        1 => array('name' => 'John Smithzzzzzz', 'auth_type' => 1, 'auth_category' => 1),
-        2 => array('name' => 'George W. Bushzzzzzz', 'auth_type' => 1, 'auth_category' => 1),
+        0 => array(
+          'name' => 'Ron J. Jeromezzzzzz',
+          'auth_type' => 1,
+          'auth_category' => 1,
+        ),
+        1 => array(
+          'name' => 'John Smithzzzzzz',
+          'auth_type' => 1,
+          'auth_category' => 1,
+        ),
+        2 => array(
+          'name' => 'George W. Bushzzzzzz',
+          'auth_type' => 1,
+          'auth_category' => 1,
+        ),
       ),
       'biblio_keywords' => array('biblio_keywords'),
     );

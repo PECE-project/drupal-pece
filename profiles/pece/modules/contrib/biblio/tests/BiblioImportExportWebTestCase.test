@@ -1,12 +1,12 @@
 <?php
 
 /**
- *
+ * System tests for import/export.
  */
 class BiblioImportExportWebTestCase extends BiblioWebTestCase {
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function setUp() {
     parent::setUp('biblio', 'biblio_ris', 'biblio_bibtex', 'biblio_tagged', 'biblio_xml', 'biblio_crossref');

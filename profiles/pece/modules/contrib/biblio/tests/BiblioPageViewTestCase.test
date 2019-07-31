@@ -1,12 +1,12 @@
 <?php
 
 /**
- *
+ * Test page view permissions.
  */
 class BiblioPageViewTestCase extends BiblioWebTestCase {
 
   /**
-   *
+   * {@inheritdoc}
    */
   public static function getInfo() {
     return array(
@@ -17,14 +17,14 @@ class BiblioPageViewTestCase extends BiblioWebTestCase {
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function setUp() {
     parent::setUp('biblio');
   }
 
   /**
-   * Creates a node and then an anonymous and unpermissioned user attempt to edit the node.
+   * Creates a node and an anonymous and unpermissioned user attempt to edit it.
    */
   public function testBiblioPageView() {
     // Create a node to view.

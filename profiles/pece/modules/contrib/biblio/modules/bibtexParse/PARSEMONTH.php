@@ -13,7 +13,7 @@ Mark Grimshaw 2005
 http://bibliophile.sourceforge.net
  */
 /*****
- *  PARSEMONTH: BibTeX MONTH import class
+ * PARSEMONTH: BibTeX MONTH import class.
  *
  * BibTeX month field can come in as:
  * jan

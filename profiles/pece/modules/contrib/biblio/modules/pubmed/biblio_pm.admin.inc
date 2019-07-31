@@ -5,7 +5,8 @@
  */
 
 /**
- * @return multitype:string NULL multitype:NULL  multitype:multitype:multitype:boolean
+ * @return
+ *   multitype:string NULL multitype:NULL multitype:multitype:multitype:boolean.
  */
 function biblio_pm_settings_form() {
   $form = array();

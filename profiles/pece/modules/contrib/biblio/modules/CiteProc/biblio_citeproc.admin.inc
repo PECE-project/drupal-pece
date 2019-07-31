@@ -437,7 +437,6 @@ function _install_csl_from_github($path, $update = FALSE) {
     $mess_type = 'error';
     drupal_set_message(check_plain($message), $mess_type);
   }
-  return;
 }
 
 /**
