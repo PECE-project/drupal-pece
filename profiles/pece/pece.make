@@ -457,8 +457,9 @@ projects[legal][version] = 1.10
 
 ; Profile 2
 projects[profile2][subdir] = contrib
-projects[profile2][version] = 1.6
-;projects[profile2][patch][1273026] = https://www.drupal.org/files/ctools-profile2_from_user-1273026-10.patch
+projects[profile2][version] = 1.x-dev
+projects[profile2][patch][1273026] = https://www.drupal.org/files/ctools-profile2_from_user-1273026-10_0.patch
+projects[profile2][patch][1273026] = https://www.drupal.org/files/ctools-new-file-1273026-10.patch
 projects[profile2][patch][1307538] = https://www.drupal.org/files/issues/profile2-fix_entity_info_failure_during_install-1307538-10-7.x-1.x-dev.patch
 
 ; GMap
