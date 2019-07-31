@@ -15,7 +15,16 @@ function pece_install() {
   _pece_install_menu();
   _pece_install_blocks();
   _pece_install_site();
+  _pece_install_finished();
 }
+
+/**
+ * Final routines on PECE installation process.
+ */
+function _pece_install_finished() {
+  node_access_rebuild(TRUE);
+}
+
 
 /**
  * Setup user configurations.
