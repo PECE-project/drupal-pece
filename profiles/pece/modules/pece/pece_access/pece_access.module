@@ -221,9 +221,9 @@ function pece_access_node_access_records($node) {
   // private and public groups; by default, the existence of a node on a private group
   // would deny access to it even though it might be present on a public group.
   //
-  // We intentionally verify if the node alse belongs to at least a private group
-  // beacuse there is no need to set grants to a node that is open and present on
-  // public groups; these nodes are simply accesible to anyone.
+  // We intentionally verify if the node also belongs to at least a private group
+  // because there is no need to set grants to a node that is open and present on
+  // public groups; these nodes are simply accessible to anyone.
   if ($permission == 'open' && !empty($public_groups) && !empty($private_groups)) {
     $grants[] = array(
       'realm' => PECE_ACCESS_REALM_PUBLIC_GROUP,
