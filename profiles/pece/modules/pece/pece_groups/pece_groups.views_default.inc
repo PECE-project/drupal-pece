@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_groups.views_default.inc
@@ -57,7 +58,7 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['arguments']['og_group_ref_target_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['og_group_ref_target_id']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['og_group_ref_target_id']['validate']['type'] = 'og';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -157,7 +158,7 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['arguments']['og_group_ref_target_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['og_group_ref_target_id']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['og_group_ref_target_id']['validate']['type'] = 'og';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -202,7 +203,7 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['arguments']['gid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -294,7 +295,7 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['arguments']['og_group_ref_target_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['og_group_ref_target_id']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['og_group_ref_target_id']['validate']['type'] = 'og';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -339,7 +340,7 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['arguments']['gid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -428,7 +429,7 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['arguments']['og_group_ref_target_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['og_group_ref_target_id']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['og_group_ref_target_id']['validate']['type'] = 'og';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -512,7 +513,7 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['arguments']['field_pece_project_ref_target_id']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_pece_project_ref_target_id']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_pece_project_ref_target_id']['summary_options']['items_per_page'] = '25';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -587,7 +588,7 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['sorts']['published_at']['table'] = 'publication_date';
   $handler->display->display_options['sorts']['published_at']['field'] = 'published_at';
   $handler->display->display_options['sorts']['published_at']['order'] = 'DESC';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';

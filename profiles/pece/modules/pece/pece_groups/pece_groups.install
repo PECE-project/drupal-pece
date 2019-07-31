@@ -104,3 +104,11 @@ function pece_groups_update_7002() {
 function pece_groups_update_7003() {
   features_revert(array('pece_groups' => array('field_instance')));
 }
+
+/**
+ * Add Group content visibility field on Group contents and rebuild node ccess.
+ */
+function pece_groups_update_7004() {
+  features_revert_module('pece_groups');
+  node_access_rebuild(TRUE);
+}
