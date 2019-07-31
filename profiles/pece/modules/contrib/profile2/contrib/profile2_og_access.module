@@ -32,6 +32,20 @@ function profile2_og_access_og_permission() {
  */
 function profile2_og_access_profile2_access($op, $profile = NULL, $account = NULL) {
   if (isset($profile) && ($type_name = $profile->type) && $profile->identifier() && $op != 'delete') {
+
+    // Check by common user og roles.
+    $current_user_groups = og_get_entity_groups('user', $account);
+    $profile_user_groups = og_get_entity_groups('user', $profile->uid);
+
+    if (!empty($current_user_groups['node']) && !empty($profile_user_groups['node'])) {
+      foreach($profile_user_groups['node'] as $grp_id) {
+        if (in_array($grp_id,$profile_user_groups['node']) &&
+          og_user_access_entity("$op any $type_name profile", 'node', $grp_id, $account)) {
+          //common group found
+          return TRUE;
+        }
+      }
+    }
     // Only return TRUE if og grants access. So other modules may still grant
     // access in case og does not.
     if (og_user_access_entity("$op any $type_name profile", 'profile2', $profile, $account)) {

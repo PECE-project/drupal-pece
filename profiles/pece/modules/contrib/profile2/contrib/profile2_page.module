@@ -133,24 +133,44 @@ function profile2_page_menu() {
 /**
  * Implements hook_menu_local_tasks_alter().
  *
- * If viewing a profile sub-tab, change the URL of the edit tab (if present)
- * so it edits the profile, not the main account page.
- * Subject to edit permissions.
+ * If viewing or editing a profile sub-tab, change the URL of the
+ * edit or view tab (if present) so it edits or views the profile,
+ * not the main account page. Subject to permissions.
  */
 function profile2_page_menu_local_tasks_alter(&$data, $router_item, $root_path) {
-  if (strpos($root_path, 'user/%/view/') === 0) {
-    // Get the part of the URL containing "user/<uid>".
-    $href = $router_item['tab_root_href'] . '/edit';
-    // Get the uid & profile type name.
-    $uid = $router_item['original_map'][1];
+  if (strpos($root_path, 'user/%/') === 0 && isset($router_item['original_map'][3])) {
     $ptype = $router_item['original_map'][3];
-    if (profile2_access('edit', profile2_by_uid_load($uid, $ptype))) {
-      //Walk the menu tree to find the account-edit link, and append the profile type.
-      array_walk_recursive($data, function (&$item) use ($href, $ptype) {
-        if ($item == $href) {
-          $item .= "/$ptype";
-        }
-      });
+    $profile = profile2_type_load($ptype);
+    // Only do this if the current profile is in use-tab mode.
+    if (!empty($profile->data['use_tab'])) {
+      switch ($router_item['original_map'][2]) {
+        case 'view':
+          $href_suff = '/edit';
+          $ptype_pref = '';
+          $access = 'edit';
+          break;
+        case 'edit':
+          $href_suff = '';
+          $ptype_pref = '/view';
+          $access = 'view';
+          break;
+        default:
+          return;
+      }
+      // Get the uid & profile type name.
+      $uid = $router_item['original_map'][1];
+
+      if (profile2_access($access, profile2_by_uid_load($uid, $ptype))) {
+        // Get the part of the link URL containing "user/<uid>".
+        $href = "{$router_item['tab_root_href']}$href_suff";
+
+        //Walk the menu tree to find the account link, and append the profile type.
+        array_walk_recursive($data, function (&$item) use ($href, $ptype_pref, $ptype) {
+          if ($item == $href) {
+            $item .= "$ptype_pref/$ptype";
+          }
+        });
+      }
     }
   }
 }
@@ -236,6 +256,9 @@ function profile2_page_uri_callback($profile) {
   if (!empty($type->data['use_page'])) {
     return array('path' => profile2_page_get_base_path($type) . '/' . $profile->uid);
   }
+  else if (!empty($type->data['use_tab'])) {
+    return array('path' => "user/{$profile->uid}/view/{$profile->type}");
+  }
   // Fall back to the default callback.
   return $profile->defaultUri();
 }
@@ -277,6 +300,17 @@ function profile2_page_form_profile2_type_form_alter(&$form, &$form_state) {
       ),
     ),
   );
+  $form['data']['edit_label'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Allow the profile title to be edited.'),
+    '#description' => t('If enabled, the title of the profile is editable, and is used as-is when displaying the profile.'),
+    '#default_value' => empty($type->is_new) && !empty($type->data['edit_label']),
+    '#states' => array(
+      'invisible' => array(
+       ':input[name="data[use_page]"]' => array('checked' => FALSE),
+      ),
+    ),
+  );
   $form['data']['use_tab'] = array(
     '#type' => 'checkbox',
     '#title' => t('Provide a separate tab for viewing profiles.'),
@@ -289,6 +323,16 @@ function profile2_page_form_profile2_type_form_alter(&$form, &$form_state) {
     ),
   );
   $form['data']['#tree'] = TRUE;
+  $form['#validate'][] = 'profile2_page_form_profile2_type_form_validate';
+}
+
+/**
+ * Ensure edit_label flag is never set if use_page is not set.
+ */
+function profile2_page_form_profile2_type_form_validate($form, &$form_state) {
+  if (empty($form_state['values']['data']['use_page'])) {
+    $form_state['values']['data']['edit_label'] = 0;
+  }
 }
 
 /**

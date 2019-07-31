@@ -416,11 +416,9 @@ function profile2_form_user_profile_form_alter(&$form, &$form_state) {
       }
       $form_state['profiles'][$profile->type] = $profile;
 
-      if (user_access('administer profiles') && $user->uid != $profile->uid) {
+      if (user_access('administer profiles') || $user->uid === $profile->uid &&
+          user_access("delete own {$profile->type} profile")) {
         $str_button_value = t('Delete profile');
-      }
-      elseif (user_access("delete own $profile->type profile") && $user->uid === $profile->uid) {
-        $str_button_value = t('Delete this profile');
       }
     }
     if (empty($profile->is_new) && !empty($str_button_value)) {
@@ -450,10 +448,13 @@ function profile2_form_submit_own_delete($form, &$form_state) {
  * Implements hook_form_FORM_ID_alter() for the registration form.
  */
 function profile2_form_user_register_form_alter(&$form, &$form_state) {
-  foreach (profile2_get_types() as $type_name => $profile_type) {
-    if (!empty($profile_type->data['registration'])) {
-      if (empty($form_state['profiles'][$type_name])) {
-        $form_state['profiles'][$type_name] = profile2_create(array('type' => $type_name));
+  $profile_types = profile2_get_types();
+  if (!empty($profile_types)) {
+    foreach ($profile_types as $type_name => $profile_type) {
+      if (!empty($profile_type->data['registration'])) {
+        if (empty($form_state['profiles'][$type_name])) {
+          $form_state['profiles'][$type_name] = profile2_create(array('type' => $type_name));
+        }
       }
     }
   }
@@ -461,12 +462,11 @@ function profile2_form_user_register_form_alter(&$form, &$form_state) {
   // If we have profiles to attach to the registration form - then do it.
   if (!empty($form_state['profiles'])) {
     profile2_attach_form($form, $form_state);
-
     // Wrap each profile form in a fieldset.
-    foreach ($form_state['profiles'] as $type_name => $profile_type) {
+    foreach ($form_state['profiles'] as $type_name => $profile) {
       $form['profile_' . $type_name] += array(
         '#type' => 'fieldset',
-        '#title' => check_plain($profile_type->getTranslation('label')),
+        '#title' => check_plain($profile_types[$type_name]->getTranslation('label')),
       );
     }
   }
@@ -735,10 +735,37 @@ function profile2_user_categories() {
  * Menu item access callback - check if a user has access to a profile category.
  */
 function profile2_category_access($account, $type_name) {
+  $profile = profile2_load_by_user($account, $type_name);
   // As there might be no profile yet, create a new object for being able to run
   // a proper access check.
-  $profile = profile2_create(array('type' => $type_name, 'uid' => $account->uid));
+  if(empty($profile)) {
+    $profile = profile2_create(array('type' => $type_name, 'uid' => $account->uid));
+  }
   return ($account->uid > 0 && $profile->type()->userCategory && profile2_access('edit', $profile));
+}
+
+/**
+ * Determines if profile user has current profile available by role.
+ *
+ * @param $profile
+ *   Profile to check.
+ * @return boolean
+ *   TRUE if profile is available to the profile user.
+ */
+function profile2_role_access($profile) {
+  if (isset($profile->type)) {
+    $profile_type = profile2_type_load($profile->type);
+    if (!empty($profile_type) && !empty($profile_type->data['roles']) && isset($profile->uid)) {
+      $profile_user = user_load($profile->uid);
+      $profile_roles = array_keys($profile_type->data['roles']);
+      $user_roles = array_keys($profile_user->roles);
+      $matches = array_intersect($profile_roles, $user_roles);
+      if (empty($matches)) {
+        return FALSE;
+      }
+    }
+  }
+  return TRUE;
 }
 
 /**
@@ -761,17 +788,8 @@ function profile2_category_access($account, $type_name) {
 function profile2_access($op, $profile = NULL, $account = NULL) {
 
   // Check if profile user has current profile available by role.
-  if (isset($profile->type)) {
-    $profile_type = profile2_type_load($profile->type);
-    if (!empty($profile_type) && !empty($profile_type->data['roles']) && isset($profile->uid)) {
-      $profile_user = user_load($profile->uid);
-      $profile_roles = array_keys($profile_type->data['roles']);
-      $user_roles = array_keys($profile_user->roles);
-      $matches = array_intersect($profile_roles, $user_roles);
-      if (empty($matches)) {
-        return FALSE;
-      }
-    }
+  if (isset ($profile) && !profile2_role_access($profile)) {
+    return FALSE;
   }
 
   // With access to all profiles there is no need to check further.
@@ -945,11 +963,17 @@ class Profile extends Entity {
   }
 
   public function defaultLabel() {
-    // Return a label that combines the type name and user name, translatable.
-    return t('@type profile for @user', array(
-      '@type' => profile2_get_types($this->type)->getTranslation('label'),
-      '@user' => format_username($this->user()),
-    ));
+    $type = profile2_get_types($this->type);
+    if (!empty($type->data['edit_label'])) {
+      return $this->label;
+    }
+    else {
+      // Return a label that combines the type name and user name, translatable.
+      return t('@type profile for @user', array(
+        '@type' => $type->getTranslation('label'),
+        '@user' => format_username($this->user()),
+      ));
+    }
   }
 
   public function buildContent($view_mode = 'full', $langcode = NULL) {
@@ -962,16 +986,13 @@ class Profile extends Entity {
   }
 
   public function save() {
-    // Don't create a new profile if the user already have one of the same type.
+    // Don't create a new profile if the user already has one of the same type.
     $existing_profile = profile2_load_by_user($this->uid, $this->type);
     if (empty($this->pid) && !empty($existing_profile)) {
-      watchdog('profile2_create', serialize(array(
-        'message' => 'Profile already exists',
-        'uid' => $this->uid,
-        'type' => $this->type,
-        'path' => current_path(),
-        'logged_in_user' => $GLOBALS['user']->uid,
-      )), array(), WATCHDOG_WARNING);
+      watchdog('profile2_create', '@type profile already exists for user @uid', array(
+        '@uid' => $this->uid,
+        '@type' => $this->type,
+      ), WATCHDOG_WARNING);
       return;
     }
 
@@ -1087,7 +1108,7 @@ function profile2_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
 function profile2_field_access($op, $field, $entity_type, $profile = NULL, $account = NULL) {
   if ($entity_type == 'profile2' && $op == 'view' && isset($profile)) {
     // Check if the profile type is accessible (e.g. applicable to the role).
-    if (!profile2_access($op, $profile, $account)) {
+    if (!profile2_role_access($profile)) {
       return FALSE;
     }
     // Deny view access, if someone else views a private field.

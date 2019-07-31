@@ -225,14 +225,20 @@ function profile2_update_7102() {
 }
 
 /**
- * Remove duplicate profile records in batches of 50.
+ * No changes for this schema update.
  */
-function profile2_update_7103(&$sandbox) {
+function profile2_update_7103() {
+}
+
+/**
+ * Remove duplicate profile records in batches of 50, and add unique key on type + uid.
+ */
+function profile2_update_7104(&$sandbox) {
   // Query to get duplicate profiles.
   $query = db_select('profile', 'p1');
   $query->distinct();
   $query->fields('p1', array('pid'));
-  $query->join('profile', 'p2', 'p1.type = p2.type AND p1.uid = p2.uid AND p1.label = p2.label AND p1.pid < p2.pid');
+  $query->join('profile', 'p2', 'p1.type = p2.type AND p1.uid = p2.uid AND p1.pid < p2.pid');
 
   // Setup initial batch variables.
   if (!isset($sandbox['progress'])) {
@@ -242,27 +248,28 @@ function profile2_update_7103(&$sandbox) {
     $sandbox['total'] = $query->execute()->rowCount();
   }
 
-  // Query the next 50 profiles to be deleted.
-  $query->range(0, 50);
-  $result = $query->execute();
+  if ($sandbox['total']) {
+    // Query the next 50 profiles to be deleted.
+    $query->range(0, 50);
+    $result = $query->execute();
 
-  // Update progress of removing duplicate profiles.
-  $sandbox['progress'] = $sandbox['progress'] + $result->rowCount();
+    // Update progress of removing duplicate profiles.
+    $sandbox['progress'] = $sandbox['progress'] + $result->rowCount();
 
-  // Delete duplicate profiles.
-  profile2_delete_multiple($result->fetchCol());
+    // Delete duplicate profiles.
+    profile2_delete_multiple($result->fetchCol());
 
-  // Update batch status.
-  $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['total']) ? TRUE : ($sandbox['progress'] / $sandbox['total']);
+    // Update batch status.
+    $sandbox['#finished'] = $sandbox['progress'] / $sandbox['total'];
+  }
+  else {
+    $sandbox['#finished'] = 1;
+  }
 
-  if ($sandbox['#finished']) {
+  if ($sandbox['#finished'] >= 1) {
+    // Add a unique key on type + uid.
+    db_add_unique_key('profile', 'user_profile_type', array('type', 'uid'));
+
     return t('@total duplicate profiles were removed from the system.', array('@total' => $sandbox['progress']));
   }
-}
-
-/**
- * The combination of profile type and uid should be unique.
- */
-function profile2_update_7104() {
-  db_add_unique_key('profile', 'user_profile_type', array('type', 'uid'));
 }

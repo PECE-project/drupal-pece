@@ -41,17 +41,30 @@ function profile2_form($form, &$form_state, $profile) {
   $form_state['profile2_skip_hook'] = TRUE;
   profile2_attach_form($form, $form_state);
 
+  // If using edit title mode, add a field for the title and validate function.
+  $type = profile2_get_types($profile->type);
+  if (!empty($type->data['edit_label'])) {
+    $form['title'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Title'),
+      '#description' => t('Enter a title for this profile'),
+      '#required' => TRUE,
+      '#default_value' => $profile->label,
+      '#maxlength' => 255,
+      '#weight' => -5,
+    );
+    $form['#validate'][] = 'profile2_form_validate';
+  }
+
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save'),
     '#weight' => 40,
   );
-  if (user_access('administer profiles') && $user->uid != $profile->uid) {
+  if (user_access('administer profiles') || $user->uid === $profile->uid &&
+      user_access("delete own {$profile->type} profile")) {
     $delete_button_label = t('Delete profile');
-  }
-  elseif (user_access("delete own $profile->type profile") && $user->uid === $profile->uid) {
-    $delete_button_label = t('Delete this profile');
   }
   if (empty($profile->is_new) && !empty($delete_button_label)) {
     $form['actions']['delete'] = array(
@@ -64,6 +77,16 @@ function profile2_form($form, &$form_state, $profile) {
   }
   $form['#submit'][] = 'profile2_form_submit';
   return $form;
+}
+
+/**
+ * Profile form validate handler.
+ *
+ * Set the profile label from the entered title.
+ */
+function profile2_form_validate($form, &$form_state) {
+  $profile = reset($form_state['profiles']);
+  $profile->label = $form_state['values']['title'];
 }
 
 /**
