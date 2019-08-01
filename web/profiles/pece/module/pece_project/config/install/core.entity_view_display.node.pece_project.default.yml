@@ -1,0 +1,106 @@
+uuid: c8ec1e42-520b-48f3-a08d-a78d086bc0c3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_project.body
+    - field.field.node.pece_project.field_project_consent_form_file
+    - field.field.node.pece_project.field_project_fund_agency_link
+    - field.field.node.pece_project.field_project_image
+    - field.field.node.pece_project.field_project_institution_link
+    - field.field.node.pece_project.field_project_intv_request_file
+    - field.field.node.pece_project.field_project_start_end_date
+    - field.field.node.pece_project.field_project_uri
+    - node.type.pece_project
+  module:
+    - datetime_range
+    - file
+    - image
+    - link
+    - text
+    - user
+id: node.pece_project.default
+targetEntityType: node
+bundle: pece_project
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_project_consent_form_file:
+    weight: 113
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_project_fund_agency_link:
+    weight: 114
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_project_image:
+    weight: 115
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_project_institution_link:
+    weight: 108
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_project_intv_request_file:
+    weight: 112
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_project_start_end_date:
+    weight: 107
+    label: above
+    settings:
+      separator: '-'
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_project_uri:
+    weight: 110
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

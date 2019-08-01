@@ -1,0 +1,20 @@
+uuid: 18a3ea19-ac0e-4335-84bd-011746fbbf70
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime_range
+    - node
+id: node.field_project_start_end_date
+field_name: field_project_start_end_date
+entity_type: node
+type: daterange
+settings:
+  datetime_type: date
+module: datetime_range
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,27 @@
+uuid: 7af2cf06-9037-4c9b-a786-0ff0e5749e36
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_intv_request_file
+    - node.type.pece_project
+  module:
+    - file
+id: node.pece_project.field_project_intv_request_file
+field_name: field_project_intv_request_file
+entity_type: node
+bundle: pece_project
+label: 'Interview Request'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt doc docx pdf xls xlsx odt'
+  max_filesize: '30 MB'
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file
