@@ -1,0 +1,23 @@
+uuid: e273a5bb-d953-48d0-bbb8-22a44c4c54ad
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_institution_link
+    - node.type.pece_project
+  module:
+    - link
+id: node.pece_project.field_project_institution_link
+field_name: field_project_institution_link
+entity_type: node
+bundle: pece_project
+label: Institution
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

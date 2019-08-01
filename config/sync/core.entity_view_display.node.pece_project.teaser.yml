@@ -1,0 +1,30 @@
+uuid: 4555c113-a22d-43a3-bf2b-04ce3cb640ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_project.body
+    - node.type.pece_project
+  module:
+    - text
+    - user
+id: node.pece_project.teaser
+targetEntityType: node
+bundle: pece_project
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }
