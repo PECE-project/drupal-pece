@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_artifacts_text.field_group.inc
@@ -23,17 +24,20 @@ function pece_artifacts_text_field_group_info() {
     'label' => 'Group settings',
     'weight' => '13',
     'children' => array(
-      0 => 'group_content_access',
-      1 => 'og_group_ref',
+      0 => 'og_group_ref',
+      1 => 'group_content_access',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Group settings',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-settings field-group-fieldset',
         'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-settings field-group-fieldset',
+        'description' => 'Be aware that this content might become <strong>Visible</strong> to anyone if you assign it to an <strong>Open Group</strong>.
+',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_settings|node|pece_artifact_text|form'] = $field_group;
