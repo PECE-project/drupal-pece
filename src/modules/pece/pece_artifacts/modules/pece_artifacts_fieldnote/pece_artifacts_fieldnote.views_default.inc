@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_artifacts_fieldnote.views_default.inc
@@ -104,7 +105,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['arguments']['og_group_ref_target_id']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['og_group_ref_target_id']['validate']['type'] = 'og';
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -236,7 +237,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Relationship: Content: Author */
+  /* Relationship: Content: Content author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
@@ -315,7 +316,7 @@ function pece_artifacts_fieldnote_views_default_views() {
   $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
