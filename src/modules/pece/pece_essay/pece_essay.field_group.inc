@@ -29,13 +29,15 @@ function pece_essay_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Group settings',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-settings field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'group-settings field-group-fieldset',
+        'description' => 'Be aware that this content might become <strong>Visible</strong> to anyone if you assign it to an <strong>Open Group</strong>.
+',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_settings|node|pece_essay|form'] = $field_group;
