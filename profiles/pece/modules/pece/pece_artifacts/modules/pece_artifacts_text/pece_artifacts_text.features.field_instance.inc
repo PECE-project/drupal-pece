@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_artifacts_text.features.field_instance.inc
@@ -278,7 +279,6 @@ function pece_artifacts_text_field_default_field_instances() {
     'label' => 'Contributors',
     'required' => 1,
     'settings' => array(
-      'user_register_form' => FALSE,
       'nodeaccess_userreference' => array(
         'all' => array(
           'view' => 'view',
@@ -295,6 +295,7 @@ function pece_artifacts_text_field_default_field_instances() {
           'view' => 'view',
         ),
       ),
+      'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
