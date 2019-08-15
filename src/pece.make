@@ -170,6 +170,9 @@ projects[filter_perms][subdir]  = contrib
 projects[total_control][version] = 2.4
 projects[total_control][subdir] = contrib
 
+projects[node_access_rebuild_bonus][version] = 1.1
+projects[node_access_rebuild_bonus][subdir] = contrib
+
 ; =====================
 ; Configuration Management
 ; =====================
