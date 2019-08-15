@@ -16,7 +16,6 @@ If you are an end-user looking for stable PECE releases, please access the repos
 installation package with the latest stable version. If you have general questions about
 the platform, please refer to our [complete documentation](http://pece.readthedocs.io/en/latest/).
 
-
 ## Prerequisites
 
 PECE development is made easy by using the following software projects:
@@ -33,6 +32,9 @@ not need to follow these instructions if you are only interested in installing
 and running PECE. Please, refer to our [official
 documentation](http://pece.readthedocs.io/en/latest/installation.html) if you are
 looking for instructions for regular PECE installation and usage.
+
+Find more information on how to run **PECE development environment with Docker** at the end of this file.
+
 
 ### Installing Node.js
 
@@ -222,3 +224,32 @@ Our official documentation contains the information on authorship for the design
 ## License
 
 All the code produced for PECE is released under the GNU GPL version 3 only. Please, read our [legal documents for more information](http://pece-project.github.io/drupal-pece/legal/).
+
+
+## PECE Development environment with Docker
+
+---------------------
+## Requirements
+  * [GIT](https://git-scm.com/)
+  * [Docker Compose](https://docs.docker.com/compose/)
+
+---------------------
+Clone project
+```sh
+$ git clone https://github.com/PECE-project/drupal-pece.git
+$ cd drupal-pece/
+```
+
+---------------------
+Up virtual machine to work
+```sh
+$ make run
+```
+
+  * Access url [http://localhost:8080](http://localhost:8080)
+  * For Database configuration:
+      - *Host:* pece-db
+      - *Database:* pece
+      - *User:* pece
+  * For more Database configuration info, see DOCKER.md file
+
