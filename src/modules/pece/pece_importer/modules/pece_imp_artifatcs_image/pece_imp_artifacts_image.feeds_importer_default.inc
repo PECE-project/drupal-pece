@@ -14,10 +14,10 @@ function pece_imp_artifacts_image_feeds_importer_default() {
   $feeds_importer = new stdClass();
   $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
-  $feeds_importer->id = 'pece_imp_artifacts_images';
+  $feeds_importer->id = 'pece_imp_artifacts_image';
   $feeds_importer->config = array(
     'name' => 'PECE - Image Artifacts Importer',
-    'description' => 'Batch import Image Artifacts for PECE Instances',
+    'description' => 'Batch import Image Artifacts',
     'fetcher' => array(
       'plugin_key' => 'FeedsFileFetcher',
       'config' => array(
@@ -130,7 +130,7 @@ function pece_imp_artifacts_image_feeds_importer_default() {
     'import_on_create' => 1,
     'process_in_background' => 0,
   );
-  $export['pece_imp_artifacts_images'] = $feeds_importer;
+  $export['pece_imp_artifacts_image'] = $feeds_importer;
 
   return $export;
 }
