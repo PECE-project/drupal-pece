@@ -349,7 +349,7 @@ function pece_update_7110() {
 /**
  * Update contributors field permission settings for Artifacts, Memo and Essays (PECE Essay, Photo Essay, Timeline Essay).
  */
-function pece_update_7211() {
+function pece_update_7111() {
   if (module_exists('features')) {
     $modules = array(
       'pece_artifatcs_audio',
@@ -369,5 +369,7 @@ function pece_update_7211() {
     foreach ($modules as $module) {
       features_revert_module($module);
     }
+
+    node_access_rebuild(TRUE);
   }
 }
