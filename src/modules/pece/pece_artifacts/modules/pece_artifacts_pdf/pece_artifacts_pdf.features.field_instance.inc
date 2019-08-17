@@ -178,9 +178,6 @@ function pece_artifacts_pdf_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'nodeaccess_userreference' => array(
-        'all' => array(
-          'view' => 'view',
-        ),
         'author' => array(
           'delete' => 'delete',
           'update' => 'update',
@@ -188,7 +185,6 @@ function pece_artifacts_pdf_field_default_field_instances() {
         ),
         'author_published' => 1,
         'referenced' => array(
-          'delete' => 'delete',
           'update' => 'update',
           'view' => 'view',
         ),
