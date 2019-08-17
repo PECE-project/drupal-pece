@@ -112,3 +112,10 @@ function pece_groups_update_7004() {
   features_revert_module('pece_groups');
   node_access_rebuild(TRUE);
 }
+
+/**
+ * Update Group thumbnail image destination path default settings.
+ */
+function pece_groups_update_7005() {
+  features_revert(array('pece_groups' => array('field_instance')));
+}
