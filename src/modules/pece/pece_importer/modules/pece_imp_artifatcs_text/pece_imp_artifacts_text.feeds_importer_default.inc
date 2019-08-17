@@ -117,7 +117,7 @@ function pece_imp_artifacts_text_feeds_importer_default() {
         'language' => 'und',
       ),
     ),
-    'content_type' => 'pece_artifact_text',
+    'content_type' => '',
     'update' => 0,
     'import_period' => '-1',
     'expire_period' => 3600,
