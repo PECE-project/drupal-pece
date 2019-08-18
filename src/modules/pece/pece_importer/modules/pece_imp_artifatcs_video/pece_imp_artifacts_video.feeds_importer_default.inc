@@ -83,36 +83,44 @@ function pece_imp_artifacts_video_feeds_importer_default() {
             'language' => 'und',
           ),
           6 => array(
+            'source' => 'media_duration',
+            'target' => 'field_pece_media_duration',
+            'unique' => FALSE,
+            'language' => 'und',
+          ),
+          7 => array(
             'source' => 'tags',
             'target' => 'field_pece_tags',
             'term_search' => '0',
             'autocreate' => 1,
+            'language' => 'und',
           ),
-          7 => array(
+          8 => array(
             'source' => 'group_content_access',
             'target' => 'group_content_access',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          8 => array(
+          9 => array(
             'source' => 'content_creators',
             'target' => 'field_pece_authors',
             'term_search' => '0',
             'autocreate' => 1,
+            'language' => 'und',
           ),
-          9 => array(
+          10 => array(
             'source' => 'critical_commentary',
             'target' => 'field_pece_crit_commentary',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          10 => array(
+          11 => array(
             'source' => 'contributors',
             'target' => 'field_pece_contributors:etid',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          11 => array(
+          12 => array(
             'source' => 'author',
             'target' => 'uid',
             'unique' => FALSE,
