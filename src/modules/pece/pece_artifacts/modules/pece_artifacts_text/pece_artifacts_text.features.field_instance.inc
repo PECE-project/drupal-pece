@@ -281,7 +281,7 @@ function pece_artifacts_text_field_default_field_instances() {
     'settings' => array(
       'nodeaccess_userreference' => array(
         'all' => array(
-          'view' => 0,
+          'view' => 'view',
         ),
         'all_published' => 0,
         'author' => array(
