@@ -86,8 +86,7 @@ function pece_imp_artifacts_video_feeds_importer_default() {
             'source' => 'tags',
             'target' => 'field_pece_tags',
             'term_search' => '0',
-            'autocreate' => 0,
-            'language' => 'und',
+            'autocreate' => 1,
           ),
           7 => array(
             'source' => 'group_content_access',
@@ -99,8 +98,7 @@ function pece_imp_artifacts_video_feeds_importer_default() {
             'source' => 'content_creators',
             'target' => 'field_pece_authors',
             'term_search' => '0',
-            'autocreate' => 0,
-            'language' => 'und',
+            'autocreate' => 1,
           ),
           9 => array(
             'source' => 'critical_commentary',
@@ -112,6 +110,13 @@ function pece_imp_artifacts_video_feeds_importer_default() {
             'source' => 'contributors',
             'target' => 'field_pece_contributors:etid',
             'unique' => FALSE,
+            'language' => 'und',
+          ),
+          11 => array(
+            'source' => 'author',
+            'target' => 'uid',
+            'unique' => FALSE,
+            'language' => 'und',
           ),
         ),
         'insert_new' => '1',
