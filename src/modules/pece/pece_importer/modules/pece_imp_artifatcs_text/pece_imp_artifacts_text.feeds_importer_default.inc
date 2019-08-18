@@ -43,7 +43,7 @@ function pece_imp_artifacts_text_feeds_importer_default() {
       'plugin_key' => 'FeedsNodeProcessor',
       'config' => array(
         'expire' => '-1',
-        'author' => '0',
+        'author' => 0,
         'authorize' => 1,
         'mappings' => array(
           0 => array(
@@ -80,8 +80,7 @@ function pece_imp_artifacts_text_feeds_importer_default() {
             'source' => 'tags',
             'target' => 'field_pece_tags',
             'term_search' => '0',
-            'autocreate' => 0,
-            'language' => 'und',
+            'autocreate' => 1,
           ),
           6 => array(
             'source' => 'group_content_access',
@@ -93,8 +92,7 @@ function pece_imp_artifacts_text_feeds_importer_default() {
             'source' => 'content_creators',
             'target' => 'field_pece_authors',
             'term_search' => '0',
-            'autocreate' => 0,
-            'language' => 'und',
+            'autocreate' => 1,
           ),
           8 => array(
             'source' => 'critical_commentary',
@@ -106,6 +104,19 @@ function pece_imp_artifacts_text_feeds_importer_default() {
             'source' => 'contributors',
             'target' => 'field_pece_contributors:etid',
             'unique' => FALSE,
+            'language' => 'und',
+          ),
+          10 => array(
+            'source' => 'author',
+            'target' => 'uid',
+            'unique' => FALSE,
+            'language' => 'und',
+          ),
+          11 => array(
+            'source' => 'body',
+            'target' => 'body',
+            'unique' => FALSE,
+            'language' => 'und',
           ),
         ),
         'insert_new' => '1',
