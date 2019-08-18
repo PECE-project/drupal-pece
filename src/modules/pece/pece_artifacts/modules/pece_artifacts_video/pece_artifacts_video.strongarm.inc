@@ -93,6 +93,24 @@ function pece_artifacts_video_strongarm() {
       'pece_fieldsite_reference' => array(
         'custom_settings' => FALSE,
       ),
+      'mini_teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'most_recent' => array(
+        'custom_settings' => TRUE,
+      ),
+      'free_panel' => array(
+        'custom_settings' => TRUE,
+      ),
+      'card' => array(
+        'custom_settings' => TRUE,
+      ),
+      'meta_content' => array(
+        'custom_settings' => TRUE,
+      ),
+      'highlighted' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
