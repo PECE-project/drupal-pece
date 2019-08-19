@@ -16,7 +16,7 @@ function pece_imp_artifacts_pdf_feeds_importer_default() {
   $feeds_importer->api_version = 1;
   $feeds_importer->id = 'pece_imp_artifacts_pdf';
   $feeds_importer->config = array(
-    'name' => 'PECE - pdf Artifacts Importer',
+    'name' => 'PECE - PDF Artifacts Importer',
     'description' => 'Batch import PDF Artifacts',
     'fetcher' => array(
       'plugin_key' => 'FeedsFileFetcher',
