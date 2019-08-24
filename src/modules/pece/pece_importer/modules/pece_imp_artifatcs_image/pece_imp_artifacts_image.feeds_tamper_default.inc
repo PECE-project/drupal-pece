@@ -24,7 +24,7 @@ function pece_imp_artifacts_image_feeds_tamper_default() {
     'real_separator' => ';',
   );
   $feeds_tamper->weight = 0;
-  $feeds_tamper->description = 'Explode';
+  $feeds_tamper->description = 'Explode on semicolon';
   $export['pece_imp_artifacts_image-content_creators-explode'] = $feeds_tamper;
 
   $feeds_tamper = new stdClass();
@@ -39,7 +39,7 @@ function pece_imp_artifacts_image_feeds_tamper_default() {
     'side' => 'trim',
   );
   $feeds_tamper->weight = 1;
-  $feeds_tamper->description = 'Trim';
+  $feeds_tamper->description = 'Trim - Whitespace will be removed from both sides.';
   $export['pece_imp_artifacts_image-content_creators-trim'] = $feeds_tamper;
 
   $feeds_tamper = new stdClass();
@@ -55,7 +55,7 @@ function pece_imp_artifacts_image_feeds_tamper_default() {
     'real_separator' => ';',
   );
   $feeds_tamper->weight = 2;
-  $feeds_tamper->description = 'Explode';
+  $feeds_tamper->description = 'Explode on semicolon';
   $export['pece_imp_artifacts_image-contributors-explode'] = $feeds_tamper;
 
   $feeds_tamper = new stdClass();
@@ -70,7 +70,7 @@ function pece_imp_artifacts_image_feeds_tamper_default() {
     'side' => 'trim',
   );
   $feeds_tamper->weight = 3;
-  $feeds_tamper->description = 'Trim';
+  $feeds_tamper->description = 'Trim - Whitespace will be removed from both sides.';
   $export['pece_imp_artifacts_image-contributors-trim'] = $feeds_tamper;
 
   $feeds_tamper = new stdClass();
@@ -86,7 +86,7 @@ function pece_imp_artifacts_image_feeds_tamper_default() {
     'real_separator' => ';',
   );
   $feeds_tamper->weight = 0;
-  $feeds_tamper->description = 'Explode';
+  $feeds_tamper->description = 'Explode on semicolon';
   $export['pece_imp_artifacts_image-tags-explode'] = $feeds_tamper;
 
   $feeds_tamper = new stdClass();
@@ -101,7 +101,7 @@ function pece_imp_artifacts_image_feeds_tamper_default() {
     'side' => 'trim',
   );
   $feeds_tamper->weight = 1;
-  $feeds_tamper->description = 'Trim';
+  $feeds_tamper->description = 'Trim - Whitespace will be removed from both sides.';
   $export['pece_imp_artifacts_image-tags-trim'] = $feeds_tamper;
 
   return $export;
