@@ -123,7 +123,7 @@ function pece_timeline_essay_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -212,13 +212,13 @@ function pece_timeline_essay_field_default_field_instances() {
     'settings' => array(
       'nodeaccess_userreference' => array(
         'all' => array(
-          'view' => 0,
+          'view' => 'view',
         ),
         'all_published' => 0,
         'author' => array(
-          'delete' => 0,
-          'update' => 0,
-          'view' => 0,
+          'delete' => 'delete',
+          'update' => 'update',
+          'view' => 'view',
         ),
         'author_published' => 0,
         'create' => array(
@@ -244,7 +244,6 @@ function pece_timeline_essay_field_default_field_instances() {
           'pece_photo_essay' => 0,
           'pece_project' => 0,
           'pece_sub_logic' => 0,
-          'pece_timeline' => 0,
           'pece_timeline_essay' => 0,
           'zotero_feed' => 0,
         ),
@@ -254,8 +253,8 @@ function pece_timeline_essay_field_default_field_instances() {
           'deny_delete' => 0,
           'deny_update' => 0,
           'deny_view' => 0,
-          'update' => 0,
-          'view' => 0,
+          'update' => 'update',
+          'view' => 'view',
         ),
         'referenced_published' => 0,
         'unused' => 0,
@@ -275,7 +274,7 @@ function pece_timeline_essay_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 8,
+      'weight' => 2,
     ),
   );
 
@@ -442,7 +441,7 @@ function pece_timeline_essay_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -547,7 +546,7 @@ function pece_timeline_essay_field_default_field_instances() {
         ),
       ),
       'type' => 'inline_entity_form',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -719,7 +718,7 @@ function pece_timeline_essay_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -860,7 +859,7 @@ function pece_timeline_essay_field_default_field_instances() {
         'manualcrop_thumblist' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
