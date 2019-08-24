@@ -174,7 +174,7 @@ function pece_essay_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -245,6 +245,16 @@ function pece_essay_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'entityconnect' => array(
+      'button' => array(
+        'unload_add_button' => 1,
+        'unload_edit_button' => 1,
+      ),
+      'icon' => array(
+        'show_add_icon' => 0,
+        'show_edit_icon' => 0,
+      ),
+    ),
     'entityconnect_show_add_icon' => 0,
     'entityconnect_show_edit_icon' => 0,
     'entityconnect_unload_add' => 1,
@@ -254,6 +264,59 @@ function pece_essay_field_default_field_instances() {
     'label' => 'Contributors',
     'required' => 1,
     'settings' => array(
+      'nodeaccess_userreference' => array(
+        'all' => array(
+          'view' => 'view',
+        ),
+        'all_published' => 0,
+        'author' => array(
+          'delete' => 'delete',
+          'update' => 'update',
+          'view' => 'view',
+        ),
+        'author_published' => 0,
+        'create' => array(
+          'biblio' => 0,
+          'frontpage_image_slideshow' => 0,
+          'panopoly_landing_page' => 0,
+          'panopoly_page' => 0,
+          'pece_about_page' => 0,
+          'pece_analytic' => 0,
+          'pece_annotation' => 0,
+          'pece_artifact_audio' => 0,
+          'pece_artifact_bundle' => 0,
+          'pece_artifact_fieldnote' => 0,
+          'pece_artifact_image' => 0,
+          'pece_artifact_pdf' => 0,
+          'pece_artifact_text' => 0,
+          'pece_artifact_video' => 0,
+          'pece_artifact_website' => 0,
+          'pece_essay' => 0,
+          'pece_fieldsite' => 0,
+          'pece_group' => 0,
+          'pece_memo' => 0,
+          'pece_photo_essay' => 0,
+          'pece_project' => 0,
+          'pece_sub_logic' => 0,
+          'pece_timeline_essay' => 0,
+          'zotero_feed' => 0,
+        ),
+        'priority' => 0,
+        'referenced' => array(
+          'delete' => 0,
+          'deny_delete' => 0,
+          'deny_update' => 0,
+          'deny_view' => 0,
+          'update' => 'update',
+          'view' => 'view',
+        ),
+        'referenced_published' => 0,
+        'unused' => 0,
+        'views' => array(
+          'view' => '',
+          'view_args' => '',
+        ),
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -265,7 +328,7 @@ function pece_essay_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 7,
+      'weight' => 2,
     ),
   );
 
@@ -432,7 +495,7 @@ function pece_essay_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -604,7 +667,7 @@ function pece_essay_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
