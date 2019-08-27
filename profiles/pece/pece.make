@@ -544,6 +544,10 @@ projects[job_scheduler][version] = 2.0
 projects[feeds][subdir] = contrib
 projects[feeds][version] = 2.0-beta4
 
+; Feeds Tamper
+projects[feeds_tamper][subdir] = contrib
+projects[feeds_tamper][version] = 1.2
+
 ; Bibliography
 projects[biblio][subdir] = contrib
 projects[biblio][version] = 1.x-dev
