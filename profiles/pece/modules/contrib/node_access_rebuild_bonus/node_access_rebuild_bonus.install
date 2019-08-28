@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * Node access rebuild bonus install file.
+ */
+
+
+/**
+ * Implements hook_schema().
+ */
+function node_access_rebuild_bonus_schema() {
+
+  // Create a table to store the rebuild history.
+  $schema['node_access_rebuild_bonus_history'] = array(
+    'description' => 'The history of node access rebuild operations.',
+    'fields' => array(
+      'history_id' => array(
+        'description' => 'The primary identifier for a history entry.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'The user id of the user that performed the rebuild.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'date' => array(
+        'description' => 'The Unix timestamp of the record.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('history_id'),
+  );
+
+  // Create a table to store the rebuild history.
+  $schema['node_access_rebuild_bonus_queue'] = array(
+    'description' => 'The queue of nodes to rebuild.',
+    'fields' => array(
+      'queue_id' => array(
+        'description' => 'A serial field to prevent unique key constraint.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'The node id of the node that needs rebuilding.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('queue_id'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_schema().
+ */
+function node_access_rebuild_bonus_uninstall() {
+  variable_del('node_access_rebuild_bonus_cron');
+  variable_del('node_access_rebuild_bonus_ajax');
+  variable_del('node_access_rebuild_bonus_rebuild_limit');
+  variable_del('node_access_rebuild_bonus_history');
+  variable_del('node_access_rebuild_bonus_history_limit');
+  variable_del('node_access_rebuild_bonus_rebuilder');
+  variable_del('node_access_rebuild_bonus_queue_exists');
+  variable_del('node_access_rebuild_bonus_needs_rebuild');
+}

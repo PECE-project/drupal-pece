@@ -1,0 +1,425 @@
+<?php
+
+/**
+ * @file
+ * Node access rebuild bonus.
+ */
+
+/**
+* Implements hook_permission().
+*/
+function node_access_rebuild_bonus_permission(){
+  return array(
+    'administer node access rebuild bonus' => array(
+      'title' => t('Administer node access rebuild bonus'),
+      'description' => t('Perform administrative tasks on node access rebuild bonus\' functionality.')
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function node_access_rebuild_bonus_theme() {
+  return array(
+    'node_access_rebuild_bonus_history' => array(
+      'variables' => array('history' => NULL),
+    ),
+  );
+}
+
+/**
+ * Implements hook_cron().
+ */
+function node_access_rebuild_bonus_cron() {
+  // Some housekeeping regarding history records.
+  $ids = node_access_rebuild_bonus_get_history(array('ids' => TRUE));
+  if (!empty($ids)) {
+    if (variable_get('node_access_rebuild_bonus_history', 1)) {
+      // Purge old history entries from the database.
+      db_delete('node_access_rebuild_bonus_history')
+        ->condition('history_id', $ids, 'NOT IN')
+        ->execute();
+    }
+    else {
+      // We're not keeping a history, but there are records, so purge everything.     
+      db_delete('node_access_rebuild_bonus_history')->execute();
+    }
+  }
+  // Process a bit of the queue.
+  // @todo: some way to repeatedly call this function until we've used a fair chunk of cron resources?
+  if (variable_get('node_access_rebuild_bonus_cron', 1) && node_access_rebuild_bonus_queue_exists()) {
+    node_access_rebuild_bonus_process_queue();
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function node_access_rebuild_bonus_menu() {
+  $items = array();
+  $items['admin/config/system/node_access_rebuild_bonus'] = array(
+    'title' => 'Node access rebuild bonus',
+    'description' => 'Configure the settings for Node access rebuild bonus.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('node_access_rebuild_bonus_configuration'),
+    'access arguments' => array('administer node access rebuild bonus'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['node_access_rebuild_bonus/ajax'] = array(
+    'title' => 'Node access rebuild bonus',
+    'page callback' => 'node_access_rebuild_bonus_ajax',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_init().
+ */
+function node_access_rebuild_bonus_init() {
+  // Silently handle 'needs rebuild' functionality.
+  node_access_rebuild_bonus_silent_needs_rebuild();
+  // Add ajax if needed.
+  node_access_rebuild_bonus_add_ajax();
+}
+
+/**
+ * Adds ajax processing to the page.
+ */
+function node_access_rebuild_bonus_add_ajax() {
+  // Add the js if there is a queue to process.
+  if (variable_get('node_access_rebuild_bonus_ajax', 1) && node_access_rebuild_bonus_queue_exists()) {
+    drupal_add_js(drupal_get_path('module', 'node_access_rebuild_bonus') . '/node_access_rebuild_bonus.js');
+  }
+}
+
+/**
+ * Callback function for ajax.
+ */
+function node_access_rebuild_bonus_ajax() {
+  $call_again = node_access_rebuild_bonus_process_queue();
+  drupal_json_output($call_again);
+  exit;
+}
+
+/**
+ * Implements hook_form_FORM-ID_alter().
+ */
+function node_access_rebuild_bonus_form_node_configure_rebuild_confirm_alter(&$form, &$form_state) {
+  // Check that we are keeping a history.
+  if (variable_get('node_access_rebuild_bonus_history', 1)) {
+    $history = node_access_rebuild_bonus_get_history();
+    if (!empty($history)) {
+      $form['node_access_rebuild_bonus'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Node access rebuild history'),
+      );
+      $form['node_access_rebuild_bonus']['node_access_rebuild_bonus'] = array(
+        '#theme' => 'node_access_rebuild_bonus_history',
+        '#history' => $history,
+      );
+    }
+    $form['#submit'][] = 'node_access_rebuild_bonus_form_node_configure_rebuild_confirm_submit';
+  }
+}
+
+/**
+ * Submit function for node access rebuild confirmation form.
+ */
+function node_access_rebuild_bonus_form_node_configure_rebuild_confirm_submit($form, &$form_state) {
+  // Add to the history function.
+  node_access_rebuild_bonus_add_history();
+  // Clear queue and remove the rebuild flags.
+  node_access_rebuild_bonus_clear_queue();
+}
+
+/**
+ * Get the history entries.
+ *
+ * @param $options
+ *  An array of options:
+ *    'ids' => TRUE : returns array of history entry IDs.
+ *    'data' => TRUE : returns array of history data
+ * @return
+ *  The HTML output or array if options specified.
+ */
+function node_access_rebuild_bonus_get_history($options = NULL) {
+  $history_data = array();
+  $limit = variable_get('node_access_rebuild_bonus_history_limit', 20);
+  $select = $options['ids'] ? 'history_id' : '*';
+  $result = db_query_range("SELECT " . $select . " FROM {node_access_rebuild_bonus_history} ORDER BY date DESC", 0, $limit);
+  foreach ($result as $row) {
+    $history_data[] = $options['ids'] ? $row->history_id : $row;
+  }
+  return $history_data;
+}
+
+/**
+ * Add a history entry.
+ */
+function node_access_rebuild_bonus_add_history() {
+  global $user;
+  // Check that we are keeping a history.
+  if (variable_get('node_access_rebuild_bonus_history', 1)) {
+    // Write a history entry.
+    $record = (object) array(
+      'uid' => $user->uid,
+      'date' => REQUEST_TIME,
+    );
+    drupal_write_record('node_access_rebuild_bonus_history', $record);
+  }
+}
+
+/**
+ * Theme the history entries.
+ *
+ * @param $variables
+ *  An associative array with keys:
+ *  'history' - An array of history entries, each entry being an associative array of data.
+ *
+ * @return
+ *  The HTML output.
+ */
+function theme_node_access_rebuild_bonus_history($variables) {
+  $output = '';
+  $entries = array();
+  $history = $variables['history'];
+  foreach ($history as $entry) {
+    $entries[] = t(
+      "!date by !user",
+      array(
+        '!date' => format_date($entry->date),
+        '!user' => l(check_plain(format_username(user_load($entry->uid))), 'user/' . $entry->uid),
+      )
+    );
+  }
+  if (!empty($entries)) {
+    $output = theme('item_list', array('items' => $entries));
+  }
+
+  return $output;
+}
+
+/**
+ * Configuration page.
+ */
+function node_access_rebuild_bonus_configuration() {
+  $form = array();
+
+  $form['automatic'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Automatic rebuild'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $form['automatic']['node_access_rebuild_bonus_cron'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Process node access rebuild queue during cron runs.'),
+    '#default_value' => variable_get('node_access_rebuild_bonus_cron', 1),
+  );
+  $form['automatic']['node_access_rebuild_bonus_ajax'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Process node access rebuild queue during page views with ajax.'),
+    '#default_value' => variable_get('node_access_rebuild_bonus_ajax', 1),
+  );
+  $form['automatic']['node_access_rebuild_bonus_rebuild_limit'] = array(
+    '#type' => 'textfield',
+    '#maxlength' => 10,
+    '#size' => 3,
+    '#title' => t('Maximum nodes to process at a time'),
+    '#default_value' => variable_get('node_access_rebuild_bonus_rebuild_limit', 20),
+    '#description' => t('In typical cases 20 should be the maximum. Sites with a lot of users may need to set this lower.'),
+    '#required' => TRUE,
+  );
+
+  $form['history'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('History'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $form['history']['node_access_rebuild_bonus_history'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Keep a history of <em>Rebuild content access permissions</em>.'),
+    '#default_value' => variable_get('node_access_rebuild_bonus_history', 1),
+  );
+  $form['history']['node_access_rebuild_bonus_history_limit'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Maximum history entries'),
+    '#default_value' => variable_get('node_access_rebuild_bonus_history_limit', 20),
+    '#size' => 3,
+    '#maxlength' => 10,
+    '#description' => t("The maximum number of history entries to store for Node access rebuilds."),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Configuration page validation.
+ */
+function node_access_rebuild_bonus_configuration_validate($form, &$form_state) {
+  $history_limit = $form_state['values']['node_access_rebuild_bonus_history_limit'];
+  if (!is_numeric($history_limit)) {
+    form_set_error('node_access_rebuild_bonus_history_limit', t('You must enter a number for the maximum history entries.'));
+  }
+  elseif ($history_limit < 1) {
+    form_set_error('node_access_rebuild_bonus_history_limit', t('Maximum history entries must be at least 1.'));
+  }
+
+  $rebuild_limit = $form_state['values']['node_access_rebuild_bonus_rebuild_limit'];
+  if (!is_numeric($rebuild_limit)) {
+    form_set_error('node_access_rebuild_bonus_rebuild_limit', t('You must enter a number for the maximum nodes to process at a time.'));
+  }
+  elseif ($rebuild_limit < 1) {
+    form_set_error('node_access_rebuild_bonus_rebuild_limit', t('Maximum nodes to process at a time must be at least 1.'));
+  }
+
+}
+
+/**
+ * Return boolean indicating whether this module will automatically process rebuilds.
+ */
+function node_access_rebuild_bonus_will_process() {
+  return (variable_get('node_access_rebuild_bonus_ajax', 1) || variable_get('node_access_rebuild_bonus_cron', 1));
+}
+
+/**
+ * Add nodes to a queue to be rebuilt.
+ *
+ * @param $nids
+ *   Array of Node Ids, if supplied will only queue these nodes, otherwise all
+ *   nodes.
+ */
+function node_access_rebuild_bonus_queue($nids = NULL) {
+  variable_set('node_access_rebuild_bonus_queue_exists', TRUE);
+  if (empty($nids)) {
+    db_query("INSERT INTO {node_access_rebuild_bonus_queue} (nid) SELECT nid FROM {node} ");
+  }
+  else {
+    foreach ($nids as $nid) {
+      $record = array('nid' => $nid);
+      drupal_write_record('node_access_rebuild_bonus_queue', $record);
+    }
+  }
+
+}
+
+/**
+ * Process nodes from the rebuild queue.
+ *
+ * @return
+ *   TRUE if processing done and more queue exists, FALSE otherwise.
+ */
+function node_access_rebuild_bonus_process_queue() {
+  // Minimise the chance of two rebuilders acting at the same time, for performance and redunancy reasons.
+  if (REQUEST_TIME - variable_get('node_access_rebuild_bonus_rebuilder', 0) > ini_get('max_execution_time')) {
+
+    // Set that there is a rebuilder, to prevent overloading the server.
+    variable_set('node_access_rebuild_bonus_rebuilder', REQUEST_TIME);
+
+    // Try to allocate more time to rebuild node grants.
+    if (function_exists('set_time_limit')) {
+      @set_time_limit(240);
+    }
+
+    $rebuild_limit = variable_get('node_access_rebuild_bonus_rebuild_limit', 20);
+    $result = db_query_range("SELECT DISTINCT nid FROM {node_access_rebuild_bonus_queue}", 0, $rebuild_limit);
+    foreach ($result as $row) {
+      // Rebuild this node.
+      $loaded_node = node_load($row->nid, NULL, TRUE);
+      // To preserve database integrity, only acquire grants if the node
+      // loads successfully.
+      if (!empty($loaded_node)) {
+        db_query("DELETE FROM {node_access} WHERE nid = :nid", array(':nid' => $loaded_node->nid));
+        node_access_acquire_grants($loaded_node);
+      }
+      // Remove this nid from the queue.
+      db_query("DELETE FROM {node_access_rebuild_bonus_queue} WHERE nid = :nid", array(':nid' => $row->nid));
+    }
+
+    $queue_exists = node_access_rebuild_bonus_queue_exists(TRUE);
+    if (!$queue_exists) {
+      // There is no queue left.
+      variable_del('node_access_rebuild_bonus_queue_exists');
+      // We can also remove needs rebuild flags.
+      node_access_rebuild_bonus_needs_rebuild(FALSE);
+    }
+
+    // Upon completion reset the rebuilder variable.
+    variable_del('node_access_rebuild_bonus_rebuilder');
+    return $queue_exists;
+
+  }
+  return FALSE;
+}
+
+/**
+ * Clear all nodes from the rebuild queue.
+ */
+function node_access_rebuild_bonus_clear_queue() {
+  db_query("DELETE FROM {node_access_rebuild_bonus_queue}");
+  variable_del('node_access_rebuild_bonus_queue_exists');
+  // We can also remove needs rebuild flags.
+  node_access_rebuild_bonus_needs_rebuild(FALSE);
+}
+
+/**
+ * Determine if queue processing needs to be done.
+ *
+ * @param $reset
+ *   If reset to TRUE will force checking the database.
+ * @return
+ *   Boolean indicating whether queue exists.
+ */
+function node_access_rebuild_bonus_queue_exists($reset = TRUE) {
+  if ($reset) {
+    $queue_exists = FALSE;
+  }
+  else {
+    $queue_exists = variable_get('node_access_rebuild_bonus_queue_exists', FALSE);
+  }
+  if (!$queue_exists) {
+    $query = db_select('node_access_rebuild_bonus_queue', 'narbq')
+      ->fields('narbq', array('nid'));
+    $queue_exists = $query->countQuery()->execute()->fetchField();
+    if ($queue_exists) {
+      variable_set('node_access_rebuild_bonus_queue_exists', TRUE);
+    }
+  }
+  return $queue_exists ? TRUE : FALSE;
+}
+
+/**
+ * Silently handle node modules 'needs rebuild' functionality.
+ */
+function node_access_rebuild_bonus_silent_needs_rebuild() {
+  // If the node module says we need rebuild, but this module doesn't know about it.
+  if (node_access_needs_rebuild() && !node_access_rebuild_bonus_needs_rebuild()) {
+    // Add all nodes to our queue.
+    node_access_rebuild_bonus_queue();
+    // Set our own flag to indicate that we did this.
+    node_access_rebuild_bonus_needs_rebuild(TRUE);
+  }
+}
+
+/**
+ * Our own version of node_access_needs_rebuild().
+ */
+function node_access_rebuild_bonus_needs_rebuild($rebuild = NULL) {
+  if (!isset($rebuild)) {
+    return variable_get('node_access_rebuild_bonus_needs_rebuild', FALSE);
+  }
+  elseif ($rebuild) {
+    variable_set('node_access_rebuild_bonus_needs_rebuild', TRUE);
+  }
+  else {
+    variable_del('node_access_rebuild_bonus_needs_rebuild');
+    // Also remove node module's flag.
+    node_access_needs_rebuild(FALSE);
+  }
+}
+
