@@ -114,7 +114,7 @@ function pece_photo_essay_defaultconfig_strongarm() {
           'weight' => '11',
         ),
         'title' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'path' => array(
           'weight' => '10',
