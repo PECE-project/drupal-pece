@@ -94,6 +94,15 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create url aliases'.
+  $permissions['create url aliases'] = array(
+    'name' => 'create url aliases',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'path',
+  );
+
   // Exported permission: 'create site notices'.
   $permissions['create site notices'] = array(
     'name' => 'create site notices',
