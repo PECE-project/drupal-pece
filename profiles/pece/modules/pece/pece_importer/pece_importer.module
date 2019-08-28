@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * Implements hook_feeds_processor_targets_alter().
+ */
+function pece_importer_feeds_processor_targets_alter(&$targets, $entity_type, $bundle_name){
+  foreach(field_info_instances($entity_type, $bundle_name) as $name => $instance){
+    $info = field_info_field($name);
+    if($info['type'] == 'creative_commons'){
+      $targets[$name] = array(
+        'name' => check_plain($instance['label']),
+        'callback' => '_pece_imp_video_cc_feeds_set_target_value',
+        'description' => t('The @label field of the node.', array(
+          '@label' => $instance['label']
+        ))
+      );
+    }
+  }
+}
+
+/**
+ * Fix creative_commons' Callback to set the value for a CC field.
+ */
+function _pece_imp_video_cc_feeds_set_target_value($source, $entity, $target, $value){
+  $entity_type = strtolower(get_class($source->importer->processor));
+  if(($processor_location = strpos($entity_type, 'processor')) > 0){
+    $entity_type = substr($entity_type, 0, $processor_location);
+  }
+  if(substr($entity_type, 0, 5) == 'feeds'){
+    $entity_type = substr($entity_type, 5);
+  }
+  if(!entity_get_info($entity_type)){
+    $entity_type = 'node';
+  }
+  $field = isset($entity->$target) ? $entity->$target : array();
+  $value = array_search(current($value), creative_commons_get_licence_types());
+  $lang = field_language($entity_type, $entity, $target);
+  $lang = $lang ? $lang : LANGUAGE_NONE;
+  $field[$lang][] = array(
+    'licence' => $value
+  );
+  $entity->{$target} = $field;
+}
