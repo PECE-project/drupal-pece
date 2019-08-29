@@ -1,0 +1,48 @@
+# Migration configuration for projects.
+id: projects_json
+label: JSON feed of projects from PECE
+migration_group: projects
+
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  # The URL of your JSON datasource
+  urls:
+    - http://172.27.0.2/migrate
+  item_selector: nodes
+  fields:
+    -
+      name: id
+      label: 'Identificador unico da publicação'
+      selector: id
+    -
+      name: title
+      label: 'Título da publicação'
+      selector: title
+  ids:
+    id:
+      type: string
+
+destination:
+  plugin: entity:node
+
+process:
+  type:
+    plugin: default_value
+    default_value: project
+
+  title: title
+
+  sticky:
+    plugin: default_value
+    default_value: 0
+  uid:
+    plugin: default_value
+    default_value: 0
+
+migration_dependencies: {}
+dependencies:
+  enforced:
+    module:
+      - pece_project
