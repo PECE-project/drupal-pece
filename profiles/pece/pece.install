@@ -345,3 +345,35 @@ function pece_update_7110() {
     pece_defaultconfig_component_rebuild_by_name('views_default_views', 'pece_frontpage_slideshow');
   }
 }
+
+/**
+ * Update contributors field permission settings for Artifacts, Memo and Essays (PECE Essay, Photo Essay, Timeline Essay).
+ */
+function pece_update_7111() {
+  module_enable(array(
+    'node_access_rebuild_bonus',
+  ));
+
+  if (module_exists('features')) {
+    $modules = array(
+      'pece_artifatcs_audio',
+      'pece_artifatcs_bundle',
+      'pece_artifatcs_fieldnote',
+      'pece_artifatcs_image',
+      'pece_artifatcs_pdf',
+      'pece_artifatcs_text',
+      'pece_artifatcs_video',
+      'pece_artifatcs_website',
+      'pece_memo',
+      'pece_essay',
+      'pece_photo_essay',
+      'pece_timeline_essay',
+    );
+
+    foreach ($modules as $module) {
+      features_revert_module($module);
+    }
+
+    node_access_rebuild(TRUE);
+  }
+}
