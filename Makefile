@@ -4,6 +4,7 @@ include docker.mk
 
 DRUPAL_VER ?= 8
 PHP_VER ?= 7.2
+FILE_MATCH ?= 
 
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 
@@ -24,3 +25,26 @@ endif
 distro-install:
 	docker-compose -f services-drupal.yml run --rm install
 
+nuxt-install:
+	docker-compose -f services-nuxt.yml run --rm install
+
+nuxt-build:
+	docker-compose -f services-nuxt.yml run --rm build
+
+nuxt-lint:
+	docker-compose -f services-nuxt.yml run --rm lint
+
+nuxt-e2e-test:
+	docker-compose -f services-nuxt.yml run --rm e2e
+
+nuxt-e2e-open-test:
+	docker-compose -f services-nuxt.yml run --rm e2e_open
+
+nuxt-unit-test:
+	docker-compose -f services-nuxt.yml run --rm unit
+
+nuxt-unit-snap:
+	docker-compose -f services-nuxt.yml run --rm unit_snap
+
+nuxt-unit-single:
+	docker-compose -f services-nuxt.yml run --rm unit_single
