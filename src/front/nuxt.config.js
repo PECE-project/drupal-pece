@@ -151,6 +151,7 @@ module.exports = {
   /*
    ** Build configuration
    */
+  buildDir: path.resolve(__dirname, '../../dist/front'),
   build: {
     /*
      ** You can extend webpack config here
