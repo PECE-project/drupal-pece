@@ -804,4 +804,7 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',
 );
 $settings['hash_salt'] = '8XV2RAQaNGvbErBoQurOnw-NUKyIV7tCxxkxfg1pG-BYUtoRvHgLVUcuGyNlNp_RcQk34syo9g';
-include dirname(__FILE__) . '/settings.local.php';
+
+if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+  include dirname(__FILE__) . '/settings.local.php';
+}
