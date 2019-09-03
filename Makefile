@@ -33,18 +33,3 @@ nuxt-build:
 
 nuxt-lint:
 	docker-compose -f services-nuxt.yml run --rm lint
-
-nuxt-e2e-test:
-	docker-compose -f services-nuxt.yml run --rm e2e
-
-nuxt-e2e-open-test:
-	docker-compose -f services-nuxt.yml run --rm e2e_open
-
-nuxt-unit-test:
-	docker-compose -f services-nuxt.yml run --rm unit
-
-nuxt-unit-snap:
-	docker-compose -f services-nuxt.yml run --rm unit_snap
-
-nuxt-unit-single:
-	docker-compose -f services-nuxt.yml run --rm unit_single

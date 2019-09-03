@@ -4,13 +4,19 @@ services:
   install:
     image: wodby/node:$NODE_TAG
     working_dir: /home/node/app
+    user: root
+    environment:
+      - NPM_CONFIG_PREFIX=/home/node/app/.npm-global
     volumes:
       - $FRONT_DIR:/home/node/app
-    command: npm i
+    command: npm i --force --no-optional
 
   build:
     image: wodby/node:$NODE_TAG
     working_dir: /home/node/app
+    user: root
+    environment:
+      - NPM_CONFIG_PREFIX=/home/node/app/.npm-global
     volumes:
       - $FRONT_DIR:/home/node/app
     command: npm run build
@@ -18,41 +24,9 @@ services:
   lint:
     image: wodby/node:$NODE_TAG
     working_dir: /home/node/app
+    user: root
+    environment:
+      - NPM_CONFIG_PREFIX=/home/node/app/.npm-global
     volumes:
       - $FRONT_DIR:/home/node/app
     command: npm run lint
-
-  e2e:
-    image: wodby/node:$NODE_TAG
-    working_dir: /home/node/app
-    volumes:
-      - $FRONT_DIR:/home/node/app
-    command: npm run test:e2e
-
-  e2e_open:
-    image: wodby/node:$NODE_TAG
-    working_dir: /home/node/app
-    volumes:
-      - $FRONT_DIR:/home/node/app
-    command: npm run test:e2e:open
-
-  unit:
-    image: wodby/node:$NODE_TAG
-    working_dir: /home/node/app
-    volumes:
-      - $FRONT_DIR:/home/node/app
-    command: npm run test:unit
-
-  unit_snap:
-    image: wodby/node:$NODE_TAG
-    working_dir: /home/node/app
-    volumes:
-      - $FRONT_DIR:/home/node/app
-    command: npm run test:unit:updt:snap
-
-  unit_single:
-    image: wodby/node:$NODE_TAG
-    working_dir: /home/node/app
-    volumes:
-      - $FRONT_DIR:/home/node/app
-    command: npm run test:unit:single $FILE_MATCH
