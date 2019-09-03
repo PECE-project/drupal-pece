@@ -55,7 +55,7 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/pwa-module
-    '@nuxtjs/pwa',
+    ['@nuxtjs/pwa', { icon: false }],
     // Doc: https://github.com/nuxt-community/apollo-module
     '@nuxtjs/apollo',
     // Doc: https://github.com/nuxt-community/dotenv-module
@@ -151,7 +151,11 @@ module.exports = {
   /*
    ** Build configuration
    */
-  buildDir: path.resolve(__dirname, '../../dist/front'),
+  buildDir: path.resolve(__dirname, 'dist'),
+  server: {
+    host: process.env.NUXT_HOST || '0.0.0.0',
+    port: process.env.NUXT_PORT || 5000
+  },
   build: {
     /*
      ** You can extend webpack config here
