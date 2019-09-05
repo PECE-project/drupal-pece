@@ -1,0 +1,75 @@
+uuid: 1d3e6e9a-8586-431e-bc13-5385947d32ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_fieldsite.body
+    - field.field.node.pece_fieldsite.field_fieldsite_description
+    - field.field.node.pece_fieldsite.field_fieldsite_location
+    - field.field.node.pece_fieldsite.field_fieldsite_project
+    - field.field.node.pece_fieldsite.field_fieldsite_researcher
+    - field.field.node.pece_fieldsite.field_fieldsite_uri
+    - node.type.pece_fieldsite
+  module:
+    - address
+    - text
+    - user
+_core:
+  default_config_hash: WknCYsZMtKhW6KFPHu1f_uJfDoyBODndcuV97NFTuyk
+id: node.pece_fieldsite.default
+targetEntityType: node
+bundle: pece_fieldsite
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_fieldsite_description:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_fieldsite_location:
+    weight: 106
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_fieldsite_project:
+    weight: 105
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_fieldsite_researcher:
+    weight: 104
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_fieldsite_uri:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }
