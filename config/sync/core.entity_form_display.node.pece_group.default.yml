@@ -1,9 +1,11 @@
+uuid: d0915a66-b478-46eb-9706-3a9bf53a4cd5
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.node.pece_group.body
     - field.field.node.pece_group.field_pece_media_image
+    - field.field.node.pece_group.field_projects
     - field.field.node.pece_group.og_audience
     - image.style.thumbnail
     - node.type.pece_group
@@ -46,13 +48,20 @@ content:
     third_party_settings: {  }
     type: image_image
     region: content
+  field_projects:
+    weight: 123
   langcode:
     type: language_select
     weight: 2
     region: content
     settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
       include_locked: true
     third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   og_audience:
     type: og_complex
     weight: 122
