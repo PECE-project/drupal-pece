@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_group.body
     - field.field.node.pece_group.field_pece_media_image
+    - field.field.node.pece_group.field_projects
     - field.field.node.pece_group.og_audience
     - image.style.thumbnail
     - node.type.pece_group
@@ -46,6 +47,15 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
+    region: content
+  field_projects:
+    weight: 123
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   og_audience:
     type: og_complex
