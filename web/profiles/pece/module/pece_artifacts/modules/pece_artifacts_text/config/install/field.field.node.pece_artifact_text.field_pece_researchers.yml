@@ -1,0 +1,32 @@
+uuid: 550cda37-765b-4583-a39a-9c4b0c95d726
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_researchers
+    - node.type.pece_artifact_text
+id: node.pece_artifact_text.field_pece_researchers
+field_name: field_pece_researchers
+entity_type: node
+bundle: pece_artifact_text
+label: Researchers
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: false
+    filter:
+      type: role
+      role:
+        contributor: contributor
+        researcher: researcher
+        administrator: '0'
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

@@ -1,28 +1,26 @@
-uuid: 35fd061c-ec8a-4bef-a610-44eb048d49d4
+uuid: 024a6ac2-8c94-40a9-95f3-7f945d9f69d9
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.pece_project.body
-    - field.field.node.pece_project.field_project_consent_form_file
-    - field.field.node.pece_project.field_project_fund_agency_link
-    - field.field.node.pece_project.field_project_image
-    - field.field.node.pece_project.field_project_institution_link
-    - field.field.node.pece_project.field_project_intv_request_file
-    - field.field.node.pece_project.field_project_start_end_date
-    - field.field.node.pece_project.field_project_uri
+    - field.field.node.pece_artifact_text.body
+    - field.field.node.pece_artifact_text.field_pece_crit_commentary
+    - field.field.node.pece_artifact_text.field_pece_language
+    - field.field.node.pece_artifact_text.field_pece_source
+    - field.field.node.pece_artifact_text.field_pece_thumbnail
+    - field.field.node.pece_artifact_text.field_pece_uri
+    - field.field.node.pece_artifact_text.field_pece_use_fieldsite_local
+    - field.field.node.pece_artifact_text.field_permissions
     - image.style.thumbnail
-    - node.type.pece_project
+    - node.type.pece_artifact_text
   module:
-    - datetime_range
-    - file
     - image
-    - link
+    - languagefield
     - path
     - text
-id: node.pece_project.default
+id: node.pece_artifact_text.default
 targetEntityType: node
-bundle: pece_project
+bundle: pece_artifact_text
 mode: default
 content:
   body:
@@ -40,57 +38,58 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_project_consent_form_file:
-    weight: 133
+  field_pece_crit_commentary:
+    weight: 123
     settings:
-      progress_indicator: throbber
+      rows: 5
+      placeholder: ''
     third_party_settings: {  }
-    type: file_generic
+    type: string_textarea
     region: content
-  field_project_fund_agency_link:
-    weight: 134
+  field_pece_language:
+    weight: 125
     settings:
-      placeholder_url: ''
-      placeholder_title: ''
+      format:
+        name: name
     third_party_settings: {  }
-    type: link_default
+    type: languagefield_select
     region: content
-  field_project_image:
-    weight: 135
+  field_pece_source:
+    weight: 124
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_pece_thumbnail:
+    weight: 128
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
     region: content
-  field_project_institution_link:
-    weight: 128
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-    type: link_default
-    region: content
-  field_project_intv_request_file:
-    weight: 132
-    settings:
-      progress_indicator: throbber
-    third_party_settings: {  }
-    type: file_generic
-    region: content
-  field_project_start_end_date:
-    weight: 127
-    settings: {  }
-    third_party_settings: {  }
-    type: daterange_default
-    region: content
-  field_project_uri:
-    weight: 130
+  field_pece_uri:
+    weight: 122
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_pece_use_fieldsite_local:
+    weight: 126
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_permissions:
+    weight: 127
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   langcode:
     type: language_select

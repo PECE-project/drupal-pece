@@ -5,6 +5,13 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_project.body
+    - field.field.node.pece_project.field_project_consent_form_file
+    - field.field.node.pece_project.field_project_fund_agency_link
+    - field.field.node.pece_project.field_project_image
+    - field.field.node.pece_project.field_project_institution_link
+    - field.field.node.pece_project.field_project_intv_request_file
+    - field.field.node.pece_project.field_project_start_end_date
+    - field.field.node.pece_project.field_project_uri
     - node.type.pece_project
   module:
     - text
@@ -27,4 +34,12 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-hidden: {  }
+hidden:
+  field_project_consent_form_file: true
+  field_project_fund_agency_link: true
+  field_project_image: true
+  field_project_institution_link: true
+  field_project_intv_request_file: true
+  field_project_start_end_date: true
+  field_project_uri: true
+  langcode: true
