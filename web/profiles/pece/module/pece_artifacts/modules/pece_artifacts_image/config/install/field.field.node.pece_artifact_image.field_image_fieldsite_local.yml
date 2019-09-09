@@ -1,0 +1,23 @@
+uuid: eae735c9-5e79-4bc8-982c-bec4f3efd838
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image_fieldsite_local
+    - node.type.pece_artifact_image
+id: node.pece_artifact_image.field_image_fieldsite_local
+field_name: field_image_fieldsite_local
+entity_type: node
+bundle: pece_artifact_image
+label: 'Use fieldsite''s location'
+description: 'Check this to copy the location from the referenced fieldsite, if any.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
