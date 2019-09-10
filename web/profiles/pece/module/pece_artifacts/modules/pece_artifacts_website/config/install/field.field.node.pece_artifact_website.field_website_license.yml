@@ -1,0 +1,29 @@
+uuid: 763779ee-47ee-444d-ac01-1438e1da7777
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_website_license
+    - node.type.pece_artifact_website
+    - taxonomy.vocabulary.media_attribution_licenses
+id: node.pece_artifact_website.field_website_license
+field_name: field_website_license
+entity_type: node
+bundle: pece_artifact_website
+label: License
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      media_attribution_licenses: media_attribution_licenses
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
