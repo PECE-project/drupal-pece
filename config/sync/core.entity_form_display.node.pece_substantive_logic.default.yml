@@ -1,24 +1,24 @@
-uuid: 1ba4164b-b3af-47f5-b767-d4029e0c97e3
+uuid: ad360723-0a71-4844-8619-5c87b820b935
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.pece_fieldsite.body
-    - field.field.node.pece_fieldsite.field_fieldsite_description
-    - field.field.node.pece_fieldsite.field_fieldsite_location
-    - field.field.node.pece_fieldsite.field_fieldsite_project
-    - field.field.node.pece_fieldsite.field_fieldsite_researcher
-    - field.field.node.pece_fieldsite.field_fieldsite_uri
-    - node.type.pece_fieldsite
+    - field.field.node.pece_substantive_logic.body
+    - field.field.node.pece_substantive_logic.field_subst_logic_contributors
+    - field.field.node.pece_substantive_logic.field_subst_logic_image_citation
+    - field.field.node.pece_substantive_logic.field_subst_logic_tags
+    - field.field.node.pece_substantive_logic.field_subst_logic_thumbnail
+    - field.field.node.pece_substantive_logic.field_subst_logic_uri
+    - node.type.pece_substantive_logic
   module:
-    - address
+    - link
     - path
     - text
 _core:
-  default_config_hash: SstYoWtZA0zldEIXwLn0QbwfnHjJvVriTyjsCK8EjB0
-id: node.pece_fieldsite.default
+  default_config_hash: 2LatptSgzCnESPpP4w6KOQOjLmvpYtGNJcFeW4cmmlQ
+id: node.pece_substantive_logic.default
 targetEntityType: node
-bundle: pece_fieldsite
+bundle: pece_substantive_logic
 mode: default
 content:
   body:
@@ -36,21 +36,7 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_fieldsite_description:
-    weight: 123
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_fieldsite_location:
-    weight: 126
-    settings: {  }
-    third_party_settings: {  }
-    type: address_default
-    region: content
-  field_fieldsite_project:
+  field_subst_logic_contributors:
     weight: 125
     settings:
       match_operator: CONTAINS
@@ -59,8 +45,16 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_fieldsite_researcher:
-    weight: 124
+  field_subst_logic_image_citation:
+    weight: 123
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_subst_logic_tags:
+    weight: 127
     settings:
       match_operator: CONTAINS
       size: 60
@@ -68,7 +62,16 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_fieldsite_uri:
+  field_subst_logic_thumbnail:
+    weight: 126
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_subst_logic_uri:
     weight: 122
     settings:
       size: 60

@@ -1,18 +1,18 @@
-uuid: 76e2b7b6-233a-44ee-9d56-ef00b65e976b
+uuid: 6b9f4bff-faeb-49c2-a0bc-d8903ebb6285
 langcode: en
 status: true
 dependencies:
   module:
     - node
-    - user
+    - taxonomy
 _core:
-  default_config_hash: aqZMnL3FKH2WYngynZT0C8dUtdc7yJQA5GmFjAOUCvo
-id: node.field_fieldsite_researcher
-field_name: field_fieldsite_researcher
+  default_config_hash: zCIawZGvbvsy0xwWFj1feZXluvZG_13MHqQpWJTK8G0
+id: node.field_subst_logic_tags
+field_name: field_subst_logic_tags
 entity_type: node
 type: entity_reference
 settings:
-  target_type: user
+  target_type: taxonomy_term
 module: core
 locked: false
 cardinality: -1
