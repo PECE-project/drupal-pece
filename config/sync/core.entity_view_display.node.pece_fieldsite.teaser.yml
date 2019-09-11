@@ -1,3 +1,4 @@
+uuid: 8ec18426-1152-4448-9edc-f450b1f00ab3
 langcode: en
 status: true
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_fieldsite.body
     - field.field.node.pece_fieldsite.field_fieldsite_description
+    - field.field.node.pece_fieldsite.field_fieldsite_location
+    - field.field.node.pece_fieldsite.field_fieldsite_project
     - field.field.node.pece_fieldsite.field_fieldsite_researcher
     - field.field.node.pece_fieldsite.field_fieldsite_uri
     - node.type.pece_fieldsite
@@ -12,7 +15,7 @@ dependencies:
     - text
     - user
 _core:
-  default_config_hash: grWmV6SrilVaQZlGIS1dYhO95wJJ3opBMibQP3mF2QI
+  default_config_hash: GlSmcTQ9R58MBdaKlywgBIaGer7BKDmvKUkzkRR0zZI
 id: node.pece_fieldsite.teaser
 targetEntityType: node
 bundle: pece_fieldsite
@@ -33,5 +36,8 @@ content:
     region: content
 hidden:
   field_fieldsite_description: true
+  field_fieldsite_location: true
+  field_fieldsite_project: true
   field_fieldsite_researcher: true
   field_fieldsite_uri: true
+  langcode: true
