@@ -1,0 +1,43 @@
+uuid: 0630720e-e7fa-438c-ba97-2d76f10cd63e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_substantive_logic.body
+    - field.field.node.pece_substantive_logic.field_subst_logic_contributors
+    - field.field.node.pece_substantive_logic.field_subst_logic_image_citation
+    - field.field.node.pece_substantive_logic.field_subst_logic_tags
+    - field.field.node.pece_substantive_logic.field_subst_logic_thumbnail
+    - field.field.node.pece_substantive_logic.field_subst_logic_uri
+    - node.type.pece_substantive_logic
+  module:
+    - text
+    - user
+_core:
+  default_config_hash: vizMbYwpdWcl9CltYRhSeJtP-oqQgD2jvQdNbVBtGh0
+id: node.pece_substantive_logic.teaser
+targetEntityType: node
+bundle: pece_substantive_logic
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_subst_logic_contributors: true
+  field_subst_logic_image_citation: true
+  field_subst_logic_tags: true
+  field_subst_logic_thumbnail: true
+  field_subst_logic_uri: true
+  langcode: true
