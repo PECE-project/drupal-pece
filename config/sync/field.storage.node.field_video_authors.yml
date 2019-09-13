@@ -1,0 +1,20 @@
+uuid: 03bc50c7-55ef-471d-813e-9b471b05424a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_video_authors
+field_name: field_video_authors
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

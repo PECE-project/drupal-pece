@@ -1,16 +1,16 @@
-uuid: 20f7588a-78de-40d8-8ba9-ab85754c844a
+uuid: d70cb3b9-e8bb-4bc3-8fa6-9f846f527508
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_pece_license
-    - node.type.pece_artifact_text
-    - taxonomy.vocabulary.media_attribution_licenses
-id: node.pece_artifact_text.field_pece_license
-field_name: field_pece_license
+    - field.storage.node.field_website_authors
+    - node.type.pece_artifact_website
+    - taxonomy.vocabulary.pece_authors
+id: node.pece_artifact_website.field_website_authors
+field_name: field_website_authors
 entity_type: node
-bundle: pece_artifact_text
-label: License
+bundle: pece_artifact_website
+label: Creator(s)
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      media_attribution_licenses: media_attribution_licenses
+      pece_authors: pece_authors
     sort:
       field: name
       direction: asc
