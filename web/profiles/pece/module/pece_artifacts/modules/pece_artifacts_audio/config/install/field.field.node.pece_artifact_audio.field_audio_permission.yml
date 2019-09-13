@@ -1,0 +1,21 @@
+uuid: 6a612f4a-ad87-4efa-9fb9-db3832cdcce4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_audio_permission
+    - node.type.pece_artifact_audio
+  module:
+    - options
+id: node.pece_artifact_audio.field_audio_permission
+field_name: field_audio_permission
+entity_type: node
+bundle: pece_artifact_audio
+label: Permission
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
