@@ -1,0 +1,22 @@
+uuid: 34c37a50-2695-40cf-a46e-e06106bcc774
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.pece_artifact_image
+  module:
+    - text
+id: node.pece_artifact_image.body
+field_name: body
+entity_type: node
+bundle: pece_artifact_image
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary
