@@ -1,0 +1,32 @@
+uuid: 28d5cf54-6094-4e39-826e-9316d8ba4dda
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pdf_contributors
+    - node.type.pece_artifact_pdf
+id: node.pece_artifact_pdf.field_pdf_contributors
+field_name: field_pdf_contributors
+entity_type: node
+bundle: pece_artifact_pdf
+label: Contributors
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: role
+      role:
+        contributor: contributor
+        researcher: researcher
+        administrator: '0'
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

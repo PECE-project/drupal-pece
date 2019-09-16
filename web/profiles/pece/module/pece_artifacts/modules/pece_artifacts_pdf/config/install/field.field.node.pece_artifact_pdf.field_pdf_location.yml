@@ -1,0 +1,41 @@
+uuid: 6e02dce9-daa1-4bf6-b621-929930d261c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pdf_location
+    - node.type.pece_artifact_pdf
+  module:
+    - address
+id: node.pece_artifact_pdf.field_pdf_location
+field_name: field_pdf_location
+entity_type: node
+bundle: pece_artifact_pdf
+label: Location
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  available_countries: {  }
+  langcode_override: ''
+  field_overrides:
+    givenName:
+      override: optional
+    additionalName:
+      override: hidden
+    familyName:
+      override: hidden
+    organization:
+      override: hidden
+    addressLine2:
+      override: hidden
+    sortingCode:
+      override: hidden
+    dependentLocality:
+      override: hidden
+    administrativeArea:
+      override: hidden
+  fields: {  }
+field_type: address
