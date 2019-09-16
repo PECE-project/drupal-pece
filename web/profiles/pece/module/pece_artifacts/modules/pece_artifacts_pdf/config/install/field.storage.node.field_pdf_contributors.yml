@@ -1,0 +1,20 @@
+uuid: ec9e628c-375c-4e23-8d72-ad3b9feadc9f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - user
+id: node.field_pdf_contributors
+field_name: field_pdf_contributors
+entity_type: node
+type: entity_reference
+settings:
+  target_type: user
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
