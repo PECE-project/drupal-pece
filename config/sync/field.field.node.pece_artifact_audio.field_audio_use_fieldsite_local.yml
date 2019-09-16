@@ -1,0 +1,23 @@
+uuid: e0e9ec67-7ffb-49af-81c6-fd5ac60e4053
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_audio_use_fieldsite_local
+    - node.type.pece_artifact_audio
+id: node.pece_artifact_audio.field_audio_use_fieldsite_local
+field_name: field_audio_use_fieldsite_local
+entity_type: node
+bundle: pece_artifact_audio
+label: 'Use fieldsite''s location'
+description: 'Check this to copy the location from the referenced fieldsite, if any.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

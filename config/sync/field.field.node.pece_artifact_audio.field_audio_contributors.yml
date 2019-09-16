@@ -1,0 +1,32 @@
+uuid: 91d0e4b6-2902-4a4f-b20b-50b99da93171
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_audio_contributors
+    - node.type.pece_artifact_audio
+id: node.pece_artifact_audio.field_audio_contributors
+field_name: field_audio_contributors
+entity_type: node
+bundle: pece_artifact_audio
+label: Contributors
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: role
+      role:
+        contributor: contributor
+        researcher: researcher
+        administrator: '0'
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference
