@@ -1,4 +1,3 @@
-uuid: ad360723-0a71-4844-8619-5c87b820b935
 langcode: en
 status: true
 dependencies:
@@ -14,6 +13,8 @@ dependencies:
     - link
     - path
     - text
+_core:
+  default_config_hash: 2LatptSgzCnESPpP4w6KOQOjLmvpYtGNJcFeW4cmmlQ
 id: node.pece_substantive_logic.default
 targetEntityType: node
 bundle: pece_substantive_logic
@@ -77,6 +78,13 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
   path:
     type: path
     weight: 30
