@@ -1,0 +1,22 @@
+uuid: dac91498-00e2-4ec7-b94f-62856b7bba8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.pece_artifact_pdf
+  module:
+    - text
+id: node.pece_artifact_pdf.body
+field_name: body
+entity_type: node
+bundle: pece_artifact_pdf
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

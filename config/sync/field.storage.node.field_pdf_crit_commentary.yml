@@ -1,16 +1,15 @@
-uuid: d3cdc77d-99ca-4429-a98e-23cacd0a7323
+uuid: e8f8cc3a-2816-4129-88fc-365864280a30
 langcode: en
 status: true
 dependencies:
   module:
     - node
-    - taxonomy
-id: node.field_website_license
-field_name: field_website_license
+id: node.field_pdf_crit_commentary
+field_name: field_pdf_crit_commentary
 entity_type: node
-type: entity_reference
+type: string_long
 settings:
-  target_type: taxonomy_term
+  case_sensitive: false
 module: core
 locked: false
 cardinality: 1
