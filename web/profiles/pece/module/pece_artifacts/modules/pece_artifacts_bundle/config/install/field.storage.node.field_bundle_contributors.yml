@@ -1,0 +1,20 @@
+uuid: ef4ea9dc-8574-4785-b2aa-7c8de722a058
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - user
+id: node.field_bundle_contributors
+field_name: field_bundle_contributors
+entity_type: node
+type: entity_reference
+settings:
+  target_type: user
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
