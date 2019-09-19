@@ -1,3 +1,4 @@
+uuid: c8ec1e42-520b-48f3-a08d-a78d086bc0c3
 langcode: en
 status: true
 dependencies:
@@ -10,6 +11,7 @@ dependencies:
     - field.field.node.pece_project.field_project_intv_request_file
     - field.field.node.pece_project.field_project_start_end_date
     - field.field.node.pece_project.field_project_uri
+    - field.field.node.pece_project.field_substantive_logic
     - node.type.pece_project
   module:
     - datetime_range
@@ -96,6 +98,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_substantive_logic:
+    weight: 116
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   links:
     weight: 100

@@ -1,0 +1,28 @@
+uuid: a277fd09-7b8f-4776-a04e-e89670fc7004
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_substantive_logic
+    - node.type.pece_project
+id: node.pece_project.field_substantive_logic
+field_name: field_substantive_logic
+entity_type: node
+bundle: pece_project
+label: 'Substantive Logic'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_project: pece_project
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

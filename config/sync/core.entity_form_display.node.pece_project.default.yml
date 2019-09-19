@@ -1,3 +1,4 @@
+uuid: 35fd061c-ec8a-4bef-a610-44eb048d49d4
 langcode: en
 status: true
 dependencies:
@@ -10,6 +11,7 @@ dependencies:
     - field.field.node.pece_project.field_project_intv_request_file
     - field.field.node.pece_project.field_project_start_end_date
     - field.field.node.pece_project.field_project_uri
+    - field.field.node.pece_project.field_substantive_logic
     - image.style.thumbnail
     - node.type.pece_project
   module:
@@ -90,6 +92,15 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_substantive_logic:
+    weight: 136
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   langcode:
     type: language_select
