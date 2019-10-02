@@ -428,7 +428,9 @@ function pece_access_allow_contibutors_edit_content(&$perms, $context) {
   // Filter OG Permissions for essay contents.
   if (strstr($context['string'], 'update') && strstr($context['string'], '_essay')) {
     $contributors = array();
-    $node = menu_get_object('node');
+    if (arg(0) === 'node' && is_numeric(arg(1))) {
+      $node = node_load(arg(1));
+    }
     if (!is_object($node)) {
       return;
     }
