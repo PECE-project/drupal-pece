@@ -72,7 +72,7 @@ function _pece_access_node_save($node) {
 }
 
 /**
- * Recalculate the access controled scheme of a node's files.
+ * Recalculate the access control scheme of a node's files.
  */
 function pece_access_refresh_node_files_access($node) {
   // Update the node access table for this node before refreshing access.
@@ -100,7 +100,8 @@ function pece_access_refresh_node_files_access($node) {
 }
 
 /**
- * Recalculate the access controled scheme of a file.
+ * Recalculate the access control scheme of a file.
+ *
  */
 function pece_access_refresh_file_access($file) {
   $file = is_object($file) ? $file : file_load($file);
@@ -410,4 +411,33 @@ function pece_access_user_has_role($user, $role) {
   $query->condition('r.name', $role);
 
   return !empty($query->execute()->fetchAll());
+}
+
+/**
+ * Implement hook_og_user_access_alter().
+ */
+function pece_access_og_user_access_alter(&$perms, $context) {
+  pece_access_allow_contibutors_edit_content($perms, $context);
+}
+
+/**
+ * Override OG Group Content permissions to allow editing content for its
+ * contributors.
+ */
+function pece_access_allow_contibutors_edit_content(&$perms, $context) {
+  // Filter OG Permissions for essay contents.
+  if (strstr($context['string'], 'update') && strstr($context['string'], '_essay')) {
+    $contributors = array();
+    $node = menu_get_object('node');
+    if (!is_object($node)) {
+      return;
+    }
+    $contributors = field_get_items('node', $node, 'field_pece_contributors');
+    foreach ($contributors as $contributor) {
+      if ($contributor['target_id'] == $context['account']->uid) {
+        // Override OG Content default permissions.
+        $perms[$context['string']] = TRUE;
+      }
+    }
+  }
 }
