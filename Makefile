@@ -20,3 +20,7 @@ endif
 # TODO: Need drush cim -y when have settings files
 	docker exec $(shell docker ps --filter name='^/$(PROJECT_NAME)_php' --format "{{ .ID }}") bash -c 'cd $(DRUPAL_ROOT) && drush updb -y'
 	@echo "Finish build $(PROJECT_NAME)"
+
+distro-install:
+	docker-compose -f services-drupal.yml run --rm install
+
