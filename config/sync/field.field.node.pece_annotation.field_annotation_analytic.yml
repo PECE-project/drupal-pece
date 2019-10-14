@@ -1,0 +1,28 @@
+uuid: 16a7cadd-be9e-413a-af3d-9fdecc7c6ef8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_annotation_analytic
+    - node.type.pece_analytic
+    - node.type.pece_annotation
+id: node.pece_annotation.field_annotation_analytic
+field_name: field_annotation_analytic
+entity_type: node
+bundle: pece_annotation
+label: 'Analytic (Question)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_analytic: pece_analytic
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
