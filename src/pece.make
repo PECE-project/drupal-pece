@@ -112,6 +112,10 @@ projects[subpathauto][subdir] = contrib
 projects[site_notice][version] = 1.4
 projects[site_notice][subdir] = contrib
 
+projects[yaml_parser][version] = 1.0
+projects[yaml_parser][subdir] = contrib
+
+
 ; =====================
 ; Views
 ; =====================
