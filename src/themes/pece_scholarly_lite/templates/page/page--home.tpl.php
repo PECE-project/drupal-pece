@@ -261,23 +261,25 @@
   </div>
   <!-- EOF:#main-content -->
 
-  <!-- #pece docs -->
+  <!-- #pece links (docs, slack) -->
   <?php if (!empty($pece_docs)): ?>
-    <div class="pece-docs-wrapper">
+    <div class="pece-footer-links-wrapper">
       <div class="container">
 
+        <!-- <div class="row justify-content-between"> -->
         <div class="row">
-          <div class="col-md-12">
-            <div class="pece-docs">
+          <div class="col-md-6">
+            <div class="pece-link-tab docs">
               <?php print render($pece_docs); ?>
             </div>
+            <div class="pece-link-tab slack">
+              <?php print render($pece_slack); ?>
+            </div>
           </div>
-        </div>
-
       </div>
     </div>
   <?php endif;?>
-  <!-- EOF: #pece docs -->
+  <!-- EOF: #pece links -->
 
 </div>
 <!-- EOF: #page -->
