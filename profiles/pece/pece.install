@@ -377,3 +377,12 @@ function pece_update_7111() {
     node_access_rebuild(TRUE);
   }
 }
+
+/**
+ * Enable YAML parser module.
+ */
+function pece_update_7112() {
+  module_enable(array(
+    'yaml_parser',
+  ));
+}
