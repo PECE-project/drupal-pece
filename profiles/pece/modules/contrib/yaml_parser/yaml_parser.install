@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Install file for yaml_parser module.
+ */
+
+/**
+ * Implements hook_requirements().
+ *
+ * Check if a yaml-parser is installed.
+ */
+function yaml_parser_requirements($phase) {
+  $requirements = array();
+
+  if ($phase != 'runtime') {
+    return $requirements;
+  }
+
+  $lib = libraries_detect('spyc');
+  $found = TRUE;
+  if (!isset($lib['installed']) || ($lib['installed'] == FALSE)) {
+    $found = FALSE;
+  }
+
+  $requirements['spyc'] = array(
+    'title' => t('Spyc'),
+    'value' => t('enabled, Spyc version !version', array('!version' => $lib['version'])),
+    'severity' => REQUIREMENT_OK,
+  );
+  if (!$found) {
+    $requirements['spyc']['value'] = t('Spyc YAML-parser is missing, please install it from !url (!direct_url) into !folder', array(
+      '!url' => l(t('here'), $lib['vendor url']),
+      '!direct_url' => l(t('direct download'), $lib['download url']),
+      '!folder' => 'sites/all/libraries/' . $lib['path'],
+    )
+    );
+    $requirements['spyc']['severity'] = REQUIREMENT_ERROR;
+  }
+
+  return $requirements;
+}

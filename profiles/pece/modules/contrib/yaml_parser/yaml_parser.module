@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * @file
+ * Provides a YAML-PArser using Spyc library.
+ *
+ * Developer module to parse YAML strings and files into php-arrays. Uses the
+ * spyc-library.
+ */
+
+/**
+ * Implements hook_libraries_info().
+ */
+function yaml_parser_libraries_info() {
+  $libraries['spyc'] = array(
+    'name' => 'Spyc',
+    'version' => '0.5.1',
+    'vendor url' => 'https://github.com/mustangostang/spyc',
+    'download url' => 'https://raw2.github.com/mustangostang/spyc/master/Spyc.php',
+    'version arguments' => array(
+      'file' => 'Spyc.php',
+      'pattern' => '@version\s+([0-9a-zA-Z\.-]+)@',
+    ),
+    'files' => array(
+      'php' => array('Spyc.php'),
+    ),
+  );
+  return $libraries;
+}
+
+/**
+ * Include yaml-parser php-files.
+ */
+function yaml_parser_include() {
+  static $lib = NULL;
+  if (!isset($lib)) {
+    $lib = libraries_detect('spyc');
+  }
+  if (!$lib['installed']) {
+    return FALSE;
+  }
+
+  libraries_load_files($lib);
+  return TRUE;
+}
+
+/**
+ * Parse a yaml-string.
+ *
+ * @param string $string
+ *   Yaml-string to parse.
+ *
+ * @return array
+ *   The data as php-array, on error an empty array
+ */
+function yaml_parser_parse_string($string) {
+  if (!yaml_parser_include()) {
+    return array();
+  }
+
+  try {
+    $data = spyc_load($string);
+  }
+  catch (Exception $e) {
+    watchdog_exception('yaml_parser', $e, "could not parse YAML from string @string<br />%type: !message in %function (line %line of %file).", array('@string' => $string), WATCHDOG_ERROR);
+    return array();
+  }
+  return $data;
+}
+
+/**
+ * Parse a yaml-file.
+ *
+ * @param string $filename
+ *   Yaml-file to parse.
+ *
+ * @return array
+ *   The data as php-array, on error an empty array
+ */
+function yaml_parser_parse_file($filename) {
+  if (!yaml_parser_include()) {
+    return array();
+  }
+
+  try {
+    $data = spyc_load_file($filename);
+  }
+  catch (Exception $e) {
+    watchdog_exception('yaml_parser', $e, "could not parse YAML from @filename<br />%type: !message in %function (line %line of %file).", array('@filename' => $filename), WATCHDOG_ERROR);
+    return array();
+  }
+  return $data;
+}
