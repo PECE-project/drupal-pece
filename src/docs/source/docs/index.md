@@ -30,7 +30,7 @@ In [*Resources*](legal), you will find links to many useful documents such as PE
 
     Find a downloadable distribution of the PECE software at our [Github repo](https://github.com/PECE-project/pece-distro).
 
-    Stay connected with other PECE users by joining our [Slack Channel](https://peceniks.slack.com/).
+    Stay connected with other PECE users by joining our [Slack Channel](https://join.slack.com/t/peceniks/shared_invite/enQtNzUzMjc4MjgxNjE5LTM5ZWI0NWVlMzhkNmFkNDYwNTBhZDA4MDFjY2ViNTU5ZjYyNzRhY2EwNDk0ODk1YzIxNDc2MGU4ODE1ZTU3ZjU).
 
     Sign-up for our [monthly newsletter](http://eepurl.com/ghNzof) to receive development updates, tips, and to learn how others are using PECE.
 
