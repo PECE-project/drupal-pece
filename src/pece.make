@@ -325,7 +325,7 @@ projects[er_viewmode][subdir] = contrib
 projects[entityconnect][version] = 2.0-rc2
 projects[entityconnect][subdir] = contrib
 
-projects[inline_entity_form][version] = 1.8
+projects[inline_entity_form][version] = 1.9
 projects[inline_entity_form][subdir]  = contrib
 
 ; =====================
