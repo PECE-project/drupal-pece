@@ -93,9 +93,19 @@ function pece_admin_update_7004() {
 }
 
 /**
- * Adds "Create and Edit URL aliases" default permission for administrator user role.
+ * Add "Create and Edit URL aliases" default permission for administrator user role.
  */
 function pece_admin_update_7005() {
+ module_load_include('inc', 'pece', 'pece.functions');
+
+ // Revert default config user_default_permissions.
+ pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_admin');
+}
+
+/**
+ * Add "Create mini panels" and "Administer mini panels" default permission for administrator user role.
+ */
+function pece_admin_update_7006() {
  module_load_include('inc', 'pece', 'pece.functions');
 
  // Revert default config user_default_permissions.
