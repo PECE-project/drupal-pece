@@ -49,6 +49,15 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'module' => 'feeds',
   );
 
+  // Exported permission: 'administer mini panels'.
+  $permissions['administer mini panels'] = array(
+    'name' => 'administer mini panels',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'panels_mini',
+  );
+
   // Exported permission: 'administer themes'.
   $permissions['administer taxonomy'] = array(
     'name' => 'administer taxonomy',
@@ -92,6 +101,15 @@ function pece_admin_defaultconfig_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'create mini panels'.
+  $permissions['create mini panels'] = array(
+    'name' => 'create mini panels',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'panels_mini',
   );
 
   // Exported permission: 'create url aliases'.
