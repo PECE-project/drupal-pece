@@ -872,7 +872,7 @@ function pece_dashboard_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Photo Essays';
+  $handler->display->display_options['title'] = 'My Photo Essays';
   $handler->display->display_options['css_class'] = 'has-mini-teaser';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
@@ -935,7 +935,7 @@ function pece_dashboard_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $translatables['pece_my_photo_essays'] = array(
     t('Master'),
-    t('Photo Essays'),
+    t('My Photo Essays'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -1238,7 +1238,7 @@ function pece_dashboard_views_default_views() {
   /* Display: Content pane */
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Timeline Essays';
+  $handler->display->display_options['title'] = 'My Timeline Essays';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
@@ -1263,7 +1263,7 @@ function pece_dashboard_views_default_views() {
     t('last »'),
     t('All'),
     t('Content pane'),
-    t('Timeline Essays'),
+    t('My Timeline Essays'),
     t('View panes'),
   );
   $export['pece_my_timeline_essays'] = $view;
