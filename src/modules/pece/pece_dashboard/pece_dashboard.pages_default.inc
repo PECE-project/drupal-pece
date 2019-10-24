@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_dashboard.pages_default.inc
@@ -89,8 +90,8 @@ function pece_dashboard_default_page_manager_pages() {
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
-      'content' => NULL,
       'sidebar' => NULL,
+      'content' => NULL,
     ),
     'content' => array(
       'style' => 'tabs',
@@ -314,16 +315,16 @@ function pece_dashboard_default_page_manager_pages() {
   $display->content['new-0d1aa060-3ae9-4588-9612-58cef304ee92'] = $pane;
   $display->panels['content'][8] = 'new-0d1aa060-3ae9-4588-9612-58cef304ee92';
   $pane = new stdClass();
-  $pane->pid = 'new-a7a0a560-f2a8-438c-b956-2751dfa19254';
+  $pane->pid = 'new-20c5ca8a-7d70-4f1d-ab74-bd8dad400e52';
   $pane->panel = 'content';
-  $pane->type = 'views_panes';
-  $pane->subtype = 'pece_my_photo_essays-panel_pane_1';
+  $pane->type = 'panels_mini';
+  $pane->subtype = 'pece_dashb_tab_pece_essay';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'view_settings' => 'rendered_entity',
-    'header_type' => 'none',
-    'view_mode' => 'mini_teaser',
+    'override_title' => 1,
+    'override_title_text' => 'PECE Essays',
+    'override_title_heading' => 'h2',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -333,20 +334,20 @@ function pece_dashboard_default_page_manager_pages() {
   $pane->extras = array();
   $pane->position = 9;
   $pane->locks = array();
-  $pane->uuid = 'a7a0a560-f2a8-438c-b956-2751dfa19254';
-  $display->content['new-a7a0a560-f2a8-438c-b956-2751dfa19254'] = $pane;
-  $display->panels['content'][9] = 'new-a7a0a560-f2a8-438c-b956-2751dfa19254';
+  $pane->uuid = '20c5ca8a-7d70-4f1d-ab74-bd8dad400e52';
+  $display->content['new-20c5ca8a-7d70-4f1d-ab74-bd8dad400e52'] = $pane;
+  $display->panels['content'][9] = 'new-20c5ca8a-7d70-4f1d-ab74-bd8dad400e52';
   $pane = new stdClass();
-  $pane->pid = 'new-b1f0a9fb-37d6-45e2-a92d-25934ace0457';
+  $pane->pid = 'new-298d9f18-8675-409e-a6c3-b5551e51a9e2';
   $pane->panel = 'content';
-  $pane->type = 'views_panes';
-  $pane->subtype = 'pece_my_essays-panel_pane_1';
+  $pane->type = 'panels_mini';
+  $pane->subtype = 'pece_dashb_tab_photo_essay';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'view_settings' => 'rendered_entity',
-    'header_type' => 'none',
-    'view_mode' => 'mini_teaser',
+    'override_title' => 1,
+    'override_title_text' => 'Photo Essays',
+    'override_title_heading' => 'h2',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -356,20 +357,20 @@ function pece_dashboard_default_page_manager_pages() {
   $pane->extras = array();
   $pane->position = 10;
   $pane->locks = array();
-  $pane->uuid = 'b1f0a9fb-37d6-45e2-a92d-25934ace0457';
-  $display->content['new-b1f0a9fb-37d6-45e2-a92d-25934ace0457'] = $pane;
-  $display->panels['content'][10] = 'new-b1f0a9fb-37d6-45e2-a92d-25934ace0457';
+  $pane->uuid = '298d9f18-8675-409e-a6c3-b5551e51a9e2';
+  $display->content['new-298d9f18-8675-409e-a6c3-b5551e51a9e2'] = $pane;
+  $display->panels['content'][10] = 'new-298d9f18-8675-409e-a6c3-b5551e51a9e2';
   $pane = new stdClass();
-  $pane->pid = 'new-e00aa766-abf8-443a-a74e-5d0ed38052b3';
+  $pane->pid = 'new-f3019bf2-4139-4732-86d9-e5e199997f2f';
   $pane->panel = 'content';
-  $pane->type = 'views_panes';
-  $pane->subtype = 'pece_my_timeline_essays-panel_pane_1';
+  $pane->type = 'panels_mini';
+  $pane->subtype = 'pece_dashb_tab_timeline_essay';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'view_settings' => 'rendered_entity',
-    'header_type' => 'none',
-    'view_mode' => 'mini_teaser',
+    'override_title' => 1,
+    'override_title_text' => 'Timeline Essays',
+    'override_title_heading' => 'h2',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -379,9 +380,9 @@ function pece_dashboard_default_page_manager_pages() {
   $pane->extras = array();
   $pane->position = 11;
   $pane->locks = array();
-  $pane->uuid = 'e00aa766-abf8-443a-a74e-5d0ed38052b3';
-  $display->content['new-e00aa766-abf8-443a-a74e-5d0ed38052b3'] = $pane;
-  $display->panels['content'][11] = 'new-e00aa766-abf8-443a-a74e-5d0ed38052b3';
+  $pane->uuid = 'f3019bf2-4139-4732-86d9-e5e199997f2f';
+  $display->content['new-f3019bf2-4139-4732-86d9-e5e199997f2f'] = $pane;
+  $display->panels['content'][11] = 'new-f3019bf2-4139-4732-86d9-e5e199997f2f';
   $pane = new stdClass();
   $pane->pid = 'new-a6f2d74c-68d6-4670-a3b6-17ecf3d36a20';
   $pane->panel = 'sidebar';
