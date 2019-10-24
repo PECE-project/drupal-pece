@@ -77,3 +77,37 @@
 
   .dashboard-artifact-item
     font-size: 0.8em
+
+body
+  &.uco,
+  &.ure
+    a.edit-mini-panel-link
+      display: none
+
+  &.uad
+    a.edit-mini-panel-link
+      display: block
+
+.page-user-dashboard
+  .ui-tabs-panel.ui-widget-content
+      padding-left: 0
+      padding-right: 0
+
+  .pane-panels-mini
+    .ui-accordion .accordion-content,
+      padding-left: 0
+      padding-right: 0
+
+    .ui-state-default,
+    .ui-widget-content .ui-state-default,
+    .ui-widget-header .ui-state-default
+      background-color: $color-gray-lighter
+
+    .ui-state-active,
+    .ui-widget-content .ui-state-active,
+    .ui-widget-header .ui-state-active
+      border-color: $color-gray
+      background-color: transparent
+
+  .ui-accordion .ui-accordion-header .ui-accordion-header-icon
+      background-color: transparent
