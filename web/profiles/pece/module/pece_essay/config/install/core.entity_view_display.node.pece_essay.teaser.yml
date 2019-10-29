@@ -1,0 +1,31 @@
+uuid: f77c8855-40d1-4fd4-9c94-e50b9587deab
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_essay.body
+    - node.type.pece_essay
+  module:
+    - text
+    - user
+id: node.pece_essay.teaser
+targetEntityType: node
+bundle: pece_essay
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true
