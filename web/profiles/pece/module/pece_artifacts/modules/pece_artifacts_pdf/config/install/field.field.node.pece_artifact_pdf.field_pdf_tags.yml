@@ -1,0 +1,29 @@
+uuid: 0e7835eb-1236-4faf-acbf-23f810fa8b20
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pdf_tags
+    - node.type.pece_artifact_pdf
+    - taxonomy.vocabulary.tags
+id: node.pece_artifact_pdf.field_pdf_tags
+field_name: field_pdf_tags
+entity_type: node
+bundle: pece_artifact_pdf
+label: Tags
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference
