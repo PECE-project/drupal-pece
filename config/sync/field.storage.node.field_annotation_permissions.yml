@@ -1,0 +1,30 @@
+uuid: 4081daf3-2318-4dfc-99d5-6ded6c0ab3de
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_annotation_permissions
+field_name: field_annotation_permissions
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: private
+      label: Private
+    -
+      value: restricted
+      label: Restricted
+    -
+      value: open
+      label: Open
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

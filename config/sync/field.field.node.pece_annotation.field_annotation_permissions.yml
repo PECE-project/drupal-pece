@@ -1,0 +1,21 @@
+uuid: be7e49b4-ccb7-4119-a087-d704f29fe9d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_annotation_permissions
+    - node.type.pece_annotation
+  module:
+    - options
+id: node.pece_annotation.field_annotation_permissions
+field_name: field_annotation_permissions
+entity_type: node
+bundle: pece_annotation
+label: Permissions
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
