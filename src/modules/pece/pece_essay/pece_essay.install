@@ -83,3 +83,12 @@ function pece_essay_update_7005() {
   pece_set_permissions($pece_administrator_permissions);
 }
 
+/**
+ * Remove "Edit any PECE Essay content" default permission for authenticated users.
+ */
+function pece_essay_update_7006() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  // Revert all default config.
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_essay');
+}
