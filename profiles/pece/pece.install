@@ -379,10 +379,12 @@ function pece_update_7111() {
 }
 
 /**
- * Enable YAML parser module.
+ * Enable YAML parser, Panels Mini and Panels Mini IPE modules.
  */
 function pece_update_7112() {
   module_enable(array(
     'yaml_parser',
+    'panels_mini',
+    'panels_mini_ipe',
   ));
 }
