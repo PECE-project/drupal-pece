@@ -84,6 +84,19 @@ function pece_scholarly_lite_css_alter(&$css) {
 function pece_scholarly_lite_preprocess_html(&$variables) {
   pece_scholarly_lite_add_extra_styles();
   pece_scholarly_lite_add_css_overrides();
+  pece_scholarly_lite_add_role_name_class($variables);
+}
+
+/**
+ * Add current user role tag into page body classes array.
+ */
+function pece_scholarly_lite_add_role_name_class(&$variables) {
+  $classes = $variables['classes_array'];
+  $user_roles = $variables['user']->roles;
+  $classes = array();
+  foreach ($user_roles as $rid => $role) {
+    $variables['classes_array'][] = 'u' . strtolower(substr($role, 0, 2));
+  }
 }
 
 /**
