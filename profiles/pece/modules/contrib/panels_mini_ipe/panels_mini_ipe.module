@@ -1,0 +1,140 @@
+<?php
+/**
+ * @file
+ * Extends Panels IPE functionality to Mini Panels
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function panels_mini_ipe_menu() {
+  $items = array();
+
+  $items['admin/config/mini-panels-ipe/%'] = array(
+    'title' => 'Mini Panels IPE',
+    'description' => 'Allows for editing Mini Panel content in Panels IPE',
+    'page callback' => '_panels_mini_ipe_editor',
+    'page arguments' => array(3),
+    'access arguments' => array('use panels in place editing'),
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_panels_pane_content_alter().
+ */
+function panels_mini_ipe_panels_pane_content_alter($content, $pane, $args, $context) {
+  // Only display the link to people with adequate permissions, obviously.
+  if (user_access('use panels in place editing') && isset($content->module) && $content->module == 'panels_mini') {
+    $delta = $content->delta;
+    $mini_panel = panels_mini_load($delta);
+    $url = 'admin/config/mini-panels-ipe/' . $delta;
+    $title = $mini_panel->admin_title;
+
+    // Create edit link.
+    $edit_link = l(t('Edit @title', array('@title' => $title)), $url, array(
+      'attributes' => array(
+        'class' => array(
+          'edit-mini-panel-link',
+        ),
+      ),
+      // Provide a way to get back to the original page.
+      'query' => array(
+        'destination' => $_GET['q'],
+      ),
+    ));
+
+    // Prepend edit link to content.
+    $content->content = $edit_link . $content->content;
+  }
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function panels_mini_ipe_preprocess_block(&$vars) {
+  // Only display the link to people with adequate permissions, obviously.
+  if (user_access('use panels in place editing') && $vars['block']->module == 'panels_mini') {
+    $mini_delta = $vars['block']->delta;
+    $mini_panel = panels_mini_load($mini_delta);
+    $url = 'admin/config/mini-panels-ipe/' . $mini_delta;
+    $title = $mini_panel->admin_title;
+
+    // Create edit link.
+    $edit_link = l(t('Edit @title', array('@title' => $title)), $url, array(
+      'attributes' => array(
+        'class' => array(
+          'edit-mini-panel-link',
+        ),
+      ),
+      // Provide a way to get back to the original page.
+      'query' => array(
+        'destination' => $_GET['q'],
+      ),
+    ));
+
+    // Prepend edit link to content
+    $vars['content'] = $edit_link . $vars['content'];
+  }
+}
+
+/**
+ * Admin page to render the sidebar mini panel as an IPE-editable page.
+ *
+ * Functionality almost completely lifted from panels_mini_block_view() in
+ * panels_mini.module
+ */
+function _panels_mini_ipe_editor($delta) {
+  // Prevent the message from being set repeatedly while using IPE
+  if (isset($_POST)) {
+    // Using set_message because the help module is trash
+    drupal_set_message(t('Click "Customize this page" in the bottom black toolbar to edit the content of this region.'));
+  }
+
+  if (isset($_GET['destination'])) {
+    drupal_set_message(l(t('Return to the previous page'), $_GET['destination']) . '.');
+  }
+
+  $panel_mini = panels_mini_load($delta);
+
+  // We set the renderer here, Panels will load the object for us.
+  $panel_mini->display->renderer = 'ipe';
+  if (empty($panel_mini)) {
+    // Bail out early if the specified mini panel doesn't exist.
+    return;
+  }
+  $panel_mini->display->cache_key = 'panels_mini:' . $panel_mini->name;
+
+  ctools_include('context');
+
+  $contexts = array();
+  if (module_exists('page_manager') && $current_page = page_manager_get_current_page()) {
+    if (!empty($current_page['contexts'])) {
+      $contexts = ctools_context_match_required_contexts($panel_mini->requiredcontexts, $current_page['contexts']);
+    }
+  }
+
+  $panel_mini->context = $panel_mini->display->context = ctools_context_load_contexts($panel_mini, FALSE, $contexts);
+  $panel_mini->display->css_id = panels_mini_get_id($panel_mini->name);
+
+  return panels_render_display($panel_mini->display);
+}
+
+/**
+ * Implements hook_panels_display_save().
+ *
+ * Saves the actual display cache after display save.
+ */
+function panels_mini_ipe_panels_display_save($display) {
+  if (empty($display->cache_key)) {
+    panels_edit_cache_get_default($display);
+  }
+  else {
+    $cache = new stdClass();
+    $cache->display = $display;
+    $cache->content_types = ctools_content_get_available_types();
+    $cache->display_title = FALSE;
+    panels_edit_cache_set($cache);
+  }
+}
