@@ -88,7 +88,10 @@ function pece_essay_update_7005() {
  */
 function pece_essay_update_7006() {
   module_load_include('inc', 'pece', 'pece.functions');
-
-  // Revert all default config.
-  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_essay');
+  $pece_auth_user_perms = array(
+    'authenticated user' => array(
+      'edit any pece_essay content' => FALSE,
+    ),
+  );
+  pece_set_permissions($pece_auth_user_perms);
 }
