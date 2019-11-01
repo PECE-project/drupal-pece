@@ -243,6 +243,9 @@ projects[fieldable_panels_panes][version] = 1.13
 projects[fieldable_panels_panes][subdir] = contrib
 projects[fieldable_panels_panes][patch][2814117] = https://www.drupal.org/files/issues/fieldable_panels_panes--access_hook--2814117-1.patch
 
+projects[panels_mini_ipe][version] = 1.0
+projects[panels_mini_ipe][subdir] = contrib
+
 ; =====================
 ; Panopoly
 ; =====================
