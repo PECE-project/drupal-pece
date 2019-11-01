@@ -21,6 +21,7 @@ function biblio_get_kid_by_name($name) {
 
 /**
  * @param $name
+ *
  * @return array of keywords
  */
 function biblio_get_keyword_by_name($name) {
@@ -44,7 +45,8 @@ function biblio_get_keyword_by_name($name) {
 
 /**
  * @param $kid
- * @return unknown_type
+ *
+ * @return
  */
 function biblio_get_keyword_by_id($kid) {
   static $keywords = array();
@@ -278,6 +280,7 @@ function biblio_insert_keywords($node, $update = FALSE) {
 
 /**
  * @param $word
+ *
  * @return
  */
 function biblio_save_keyword(&$keyword) {

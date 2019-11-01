@@ -628,6 +628,8 @@ function _biblio_filter_info_line($args = array()) {
   if (count($filters)) {
     $i = 0;
     foreach ($filters as $type => $value) {
+      // Will $value be run through check_plain()?
+      $check_plain = TRUE;
       if ($type == 'search') {
         $search_content = $value;
         continue;
@@ -662,7 +664,14 @@ function _biblio_filter_info_line($args = array()) {
       if ($type == 'aid' || ($type == 'author' && is_numeric($value))) {
         module_load_include('inc', 'biblio', 'includes/biblio.contributors');
         $author = biblio_get_contributor($value);
-        $value = isset($author->name) ? $author->name : t('Unknown Author');
+        $check_plain = FALSE;
+        $value = isset($author->name) ? check_plain($author->name) : t('Unknown Author');
+
+        // Link to edit page for author.
+        if (drupal_valid_path(variable_get('biblio_base', 'biblio') . '/authors/%/edit')) {
+          $value .= _biblio_author_edit_links($author);
+        }
+
         $type = t("Author");
       }
       if ($type == 'ag') {
@@ -679,8 +688,8 @@ function _biblio_filter_info_line($args = array()) {
           $type = t("Type");
         }
       }
-      $params = array('%a' => check_plain(ucwords($type)) , '%b' => check_plain($value));
-      $filtercontent .= ($i++ ? t('<em> and</em> <strong>%a</strong> is <strong>%b</strong>', $params) : t('<strong>%a</strong> is <strong>%b</strong>', $params));
+      $params = array('%a' => check_plain(ucwords($type)) , '!b' => $check_plain ? check_plain($value) : $value);
+      $filtercontent .= ($i++ ? t(' <strong>and</strong> %a is <em class="placeholder">!b</em>', $params) : t('%a is <em class="placeholder">!b</em>', $params));
     }
     if ($search_content) {
       $content .= '<div class="biblio-current-filters"><b>' . t('Search results for') . '</b>';
@@ -891,7 +900,8 @@ function biblio_section_bar($text) {
 
 /**
  * @param $form_state
- * @return unknown_type
+ *
+ * @return
  */
 function biblio_search_form($form, &$form_state) {
   $base = variable_get('biblio_base', 'biblio');
@@ -982,7 +992,8 @@ function biblio_search_query($keys) {
 
 /**
  * @param $arg
- * @return unknown_type
+ *
+ * @return
  */
 function _get_biblio_search_filter($arg = 'keys') {
   if (variable_get('biblio_search', 0) &&
@@ -1066,7 +1077,7 @@ function _get_biblio_filters() {
 }
 
 /**
- * @return unknown_type
+ * @return
  */
 function biblio_form_filter() {
   $session = isset($_SESSION['biblio_filter']) ? $_SESSION['biblio_filter'] : array();
@@ -1156,7 +1167,8 @@ function biblio_form_filter() {
 /**
  * @param $form
  * @param $form_state
- * @return unknown_type
+ *
+ * @return
  */
 function biblio_form_filter_submit($form, &$form_state) {
   // If the search filter was set, remove it now.
@@ -1195,7 +1207,7 @@ function biblio_form_filter_submit($form, &$form_state) {
 }
 
 /**
- * @return unknown_type
+ * @return
  */
 function biblio_citekey_view() {
   $citekey = arg(2);
@@ -1373,14 +1385,32 @@ function _biblio_format_author($author) {
 }
 
 /**
+ * Return an HTML link to an author edit page.
  *
+ * If current_path() is within the admin section of biblio, the link will be to
+ * the admin version of the edit page.
+ *
+ * @param object $author
+ *   The author object.
+ *
+ * @return string
+ *   The HTML link.
  */
 function _biblio_author_edit_links($author) {
-  static $path = '';
-  $destination = drupal_get_destination();
+  // Cache $path.
+  static $path = NULL;
   if (empty($path)) {
-    $path = (ord(substr($_GET['q'], -1)) > 97) ? $_GET['q'] . "/" : substr($_GET['q'], 0, -1);
-    $path = (strpos($path, 'list/')) ? str_replace('list/', '', $path) : $path;
+    // When the page is an admin page, use the admin author edit page. Usually:
+    // admin/config/content/biblio/author
+    // admin/config/content/biblio/author/list.
+    $search_path = 'admin/config/content/biblio/';
+    if (substr(current_path(), 0, 28) === $search_path) {
+      $path = 'admin/config/content/biblio/author/';
+    }
+    // Otherwise, use the public author edit path. Usually: $base/authors:
+    else {
+      $path = variable_get('biblio_base', 'biblio') . '/authors/';
+    }
   }
   return l(' [' . t('edit') . ']', $path . $author->cid . "/edit");
 }

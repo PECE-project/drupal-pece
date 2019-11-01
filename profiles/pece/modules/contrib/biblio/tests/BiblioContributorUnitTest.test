@@ -1,9 +1,9 @@
 <?php
 
 /**
- * System tests for contributor functions.
+ * Unit tests for contributor functions.
  */
-class BiblioContributorUnitTest extends BiblioContributorWebTestCase {
+class BiblioContributorUnitTest extends DrupalUnitTestCase {
 
   /**
    * {@inheritdoc}
@@ -14,6 +14,14 @@ class BiblioContributorUnitTest extends BiblioContributorWebTestCase {
       'description' => 'Unit tests for contributor functions.',
       'group' => 'Biblio',
     );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp();
+    require_once __DIR__ . '/../includes/biblio.contributors.inc';
   }
 
   /**
@@ -73,61 +81,6 @@ class BiblioContributorUnitTest extends BiblioContributorWebTestCase {
     $this->assertIdentical($author['lastname'], 'Bush', 'Test biblio_parse_author($author), lastname');
     $this->assertIdentical($author['initials'], 'W', 'Test biblio_parse_author($author), initials');
     $this->assertIdentical($author['suffix'], 'Jr. III', 'Test biblio_parse_author($author), suffix');
-
-  }
-
-  /**
-   *
-   */
-  public function testBiblioUpdateContributors() {
-    $node = $this->createNode();
-    $nid = $node->nid;
-    $vid1 = $node->vid;
-    $this->assertIdentical($node->biblio_contributors[2]['firstname'], 'George', 'Test biblio_insert_contributors($node), firstname');
-    $this->assertIdentical($node->biblio_contributors[2]['lastname'], 'Bushzzzzzz', 'Test biblio_insert_contributors($node), lastname');
-    unset($node->biblio_contributors[2]);
-    $node->revision = TRUE;
-    node_save($node);
-
-    $node = node_load($nid, NULL, TRUE);
-    $this->assertFalse(isset($node->biblio_contributors[2]), 'Test removing an author and updating the node');
-
-    biblio_delete_contributor_revision($node->biblio_contributors[1]['cid'], $node->vid);
-    $node = node_load($nid, NULL, TRUE);
-    $this->assertEqual(count($node->biblio_contributors), 1, 'Test biblio_delete_contributor_revision($cid, $vid)');
-
-    $node = node_load($nid, $vid1, TRUE);
-
-    $this->assertEqual(count($node->biblio_contributors), 3, 'Test load original vid, still three authors');
-
-    biblio_delete_contributors($node);
-    $node = node_load($nid, NULL, TRUE);
-    $this->assertFalse(count($node->biblio_contributors), 'Test biblio_delete_contributors($node), should be zero authors on reload');
-
-  }
-
-  /**
-   *
-   */
-  public function testBiblioDeleteOrphanAuthors() {
-    $orphan_authors = array();
-    // First save any existing orphans so we can put them back.
-    $orphan_authors = biblio_get_orphan_authors();
-    $orphan_count = biblio_count_orphan_authors();
-    $author = array('name' => 'Ron J. Jeromezzzzzz', 'auth_type' => 1);
-    // Create a new orphan so we will have at least one.
-    biblio_save_contributor($author);
-    $before_count = biblio_count_orphan_authors();
-    $this->assertTrue($before_count != 0, "There are $before_count orphans to delete");
-    biblio_delete_orphan_authors(TRUE);
-    $after_count = biblio_count_orphan_authors();
-    $this->assertEqual($after_count, 0, "There are now $after_count orphans");
-
-    foreach ($orphan_authors as $author) {
-      biblio_save_contributor($author);
-    }
-    $restored_count = biblio_count_orphan_authors();
-    $this->assertEqual($orphan_count, $restored_count, "Restored $restored_count of $orphan_count original orphans");
 
   }
 

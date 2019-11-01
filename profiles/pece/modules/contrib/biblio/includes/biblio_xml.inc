@@ -21,7 +21,8 @@
 
 /**
  * @param $result
- * @return unknown_type
+ *
+ * @return
  */
 function biblio_xml_export($result) {
   set_time_limit(300);

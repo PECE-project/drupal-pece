@@ -258,6 +258,7 @@ function _biblio_bibtex_import($entries, $terms = array(), $batch = FALSE, $sess
     $node = new stdClass();
     $node->biblio_contributors = array();
     $node->biblio_type = _biblio_bibtex_type_map($entry['bibtexEntryType'], 'import');
+
     switch ($entry['bibtexEntryType']) {
       case 'mastersthesis':
         $node->biblio_type_of_work = 'masters';
@@ -270,6 +271,8 @@ function _biblio_bibtex_import($entries, $terms = array(), $batch = FALSE, $sess
       default:
         $node->biblio_type_of_work = NULL;
     }
+    $node->biblio_type_of_work .= (!empty($entry['type'])) ? $entry['type'] : NULL;
+
     if (!empty($entry['author'])) {
       // Split on ' and '.
       $author_array = preg_split("/\s(and|&)\s/i", trim($entry['author']));
@@ -329,7 +332,6 @@ function _biblio_bibtex_import($entries, $terms = array(), $batch = FALSE, $sess
       $node->biblio_publisher = $entry['institution'];
     }
     $node->title                  = (!empty($entry['title'])) ? $entry['title'] : NULL;
-    $node->biblio_type_of_work   .= (!empty($entry['type'])) ? $entry['type'] : NULL;
     $node->biblio_edition         = (!empty($entry['edition'])) ? $entry['edition'] : NULL;
     $node->biblio_section         = (!empty($entry['chapter'])) ? $entry['chapter'] : NULL;
     $node->biblio_place_published = (!empty($entry['address'])) ? $entry['address'] : NULL;

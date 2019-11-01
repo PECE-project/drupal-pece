@@ -57,7 +57,7 @@ function biblio_style_ieee($node) {
   module_load_include('inc', 'biblio', '/includes/biblio.contributors');
   $output = '';
   $author_options = biblio_style_ieee_author_options();
-  $primary_authors = biblio_get_contributor_category($node->biblio_contributors, 1);
+  $primary_authors = isset($node->biblio_contributors) ? biblio_get_contributor_category($node->biblio_contributors, 1) : NULL;
   if (!empty($primary_authors)) {
     $authors = theme('biblio_format_authors', array('contributors' => $primary_authors, 'options' => $author_options));
   }

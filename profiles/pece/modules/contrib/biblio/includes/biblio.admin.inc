@@ -1127,8 +1127,9 @@ function biblio_admin_io_mapper_page() {
 }
 
 /**
- * @param unknown_type $format
- * @param unknown_type $exportable
+ * @param $format
+ * @param $exportable
+ *
  * @return Ambigous <multitype:string multitype:string  NULL , multitype:number multitype:string  multitype:string Ambigous <> Ambigous <string, unknown>  , multitype:string >
  */
 function biblio_admin_io_mapper_form($form, $form_state, $format, $exportable = TRUE) {
@@ -1179,7 +1180,8 @@ function biblio_admin_io_mapper_form($form, $form_state, $format, $exportable = 
 }
 
 /**
- * @param unknown_type $variables
+ * @param $variables
+ *
  * @return unknown
  */
 function theme_biblio_admin_io_mapper_form($variables) {
@@ -1199,8 +1201,9 @@ function theme_biblio_admin_io_mapper_form($variables) {
 }
 
 /**
- * @param unknown_type $format
- * @param unknown_type $type
+ * @param $format
+ * @param $type
+ *
  * @return multitype:string NULL multitype:string
  */
 function biblio_admin_io_mapper_add_form($form, &$form_state, $format, $type) {
@@ -1244,7 +1247,8 @@ function biblio_admin_io_mapper_add_form($form, &$form_state, $format, $type) {
 }
 
 /**
- * @param unknown_type $variables
+ * @param $variables
+ *
  * @return unknown
  */
 function theme_biblio_admin_io_mapper_add_form($variables) {
@@ -1260,8 +1264,8 @@ function theme_biblio_admin_io_mapper_add_form($variables) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_io_mapper_add_form_pubtype_submit($form, &$form_state) {
   $names = biblio_get_map('type_names', $form_state['values']['fileformat']);
@@ -1271,8 +1275,8 @@ function biblio_admin_io_mapper_add_form_pubtype_submit($form, &$form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_io_mapper_add_form_field_submit($form, &$form_state) {
   $names = biblio_get_map('field_map', $form_state['values']['fileformat']);
@@ -1281,7 +1285,8 @@ function biblio_admin_io_mapper_add_form_field_submit($form, &$form_state) {
 }
 
 /**
- * @param unknown_type $format
+ * @param $format
+ *
  * @return Ambigous <multitype:string multitype:string  NULL , multitype:multitype:string  multitype:string unknown number  >
  */
 function biblio_admin_type_mapper_form($format) {
@@ -1327,7 +1332,8 @@ function biblio_admin_type_mapper_form($format) {
 }
 
 /**
- * @param unknown_type $variables
+ * @param $variables
+ *
  * @return unknown
  */
 function theme_biblio_admin_type_mapper_form($variables) {
@@ -1358,8 +1364,8 @@ function theme_biblio_admin_type_mapper_form($variables) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_type_mapper_form_submit($form, $form_state) {
   foreach ($form_state['values']['typemap']['type'] as $key => $value) {
@@ -1371,8 +1377,8 @@ function biblio_admin_type_mapper_form_submit($form, $form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_type_mapper_form_reset_submit($form, $form_state) {
   biblio_reset_map('type_map', $form_state['values']['fileformat']);
@@ -1380,8 +1386,9 @@ function biblio_admin_type_mapper_form_reset_submit($form, $form_state) {
 }
 
 /**
- * @param unknown_type $format
- * @param unknown_type $exportable
+ * @param $format
+ * @param $exportable
+ *
  * @return Ambigous <multitype:string multitype:string  NULL , multitype:number multitype:string  multitype:string Ambigous <> Ambigous <string, unknown>  , multitype:string >
  */
 function biblio_admin_field_mapper_form($format, $exportable = TRUE) {
@@ -1438,7 +1445,8 @@ function biblio_admin_field_mapper_form($format, $exportable = TRUE) {
 }
 
 /**
- * @param unknown_type $variables
+ * @param $variables
+ *
  * @return unknown
  */
 function theme_biblio_admin_field_mapper_form($variables) {
@@ -1470,8 +1478,8 @@ function theme_biblio_admin_field_mapper_form($variables) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_field_mapper_form_submit($form, $form_state) {
   foreach ($form_state['values']['fieldmap']['type'] as $key => $value) {
@@ -1497,8 +1505,8 @@ function biblio_admin_field_mapper_form_submit($form, $form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_field_mapper_form_reset_submit($form, $form_state) {
   biblio_reset_map('field_map', $form_state['values']['fileformat']);
@@ -1547,8 +1555,9 @@ function biblio_admin_types_form() {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
+ *
  * @return multitype:string number NULL
  */
 function biblio_admin_types_add_form($form, &$form_state) {
@@ -1577,8 +1586,8 @@ function biblio_admin_types_add_form($form, &$form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_types_add_form_submit($form, &$form_state) {
   $values['name'] = $form_state['values']['name'];
@@ -1672,9 +1681,10 @@ function biblio_admin_types_show() {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
- * @param unknown_type $tid
+ * @param $form
+ * @param $form_state
+ * @param $tid
+ *
  * @return unknown
  */
 function biblio_admin_types_delete_form($form, &$form_state, $tid) {
@@ -1702,8 +1712,8 @@ function biblio_admin_types_delete_form($form, &$form_state, $tid) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_types_delete_form_submit($form, &$form_state) {
   if (!empty($form_state['values']['tid'])) {
@@ -1750,8 +1760,8 @@ function biblio_admin_types_reset_form() {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_types_reset_form_submit($form, & $form_state) {
   module_load_include('install', 'biblio');
@@ -1866,7 +1876,8 @@ function _biblio_drupal_author_user_map($profile_user, $allow_edit = TRUE) {
 }
 
 /**
- * @param unknown_type $user
+ * @param $user
+ *
  * @return multitype:string number NULL
  */
 function _biblio_get_user_doi_form($user) {
@@ -1891,7 +1902,8 @@ function _biblio_get_user_doi_form($user) {
 }
 
 /**
- * @param unknown_type $user
+ * @param $user
+ *
  * @return multitype:string number NULL
  */
 function _biblio_get_user_openurl_form($user) {
@@ -1935,7 +1947,8 @@ function biblio_form_sort($a, $b) {
 }
 
 /**
- * @param unknown_type $name
+ * @param $name
+ *
  * @return string
  */
 function biblio_admin_get_query($name) {
@@ -1957,10 +1970,11 @@ function biblio_admin_get_query($name) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
- * @param unknown_type $op
- * @param unknown_type $id
+ * @param $form
+ * @param $form_state
+ * @param $op
+ * @param $id
+ *
  * @return void|multitype:string multitype:string number NULL  multitype:string number multitype:string  NULL  multitype:string number boolean NULL  NULL
  */
 function biblio_admin_author_types_form($form, &$form_state, $op = NULL, $id = NULL) {
@@ -2015,7 +2029,8 @@ function biblio_admin_author_types_form($form, &$form_state, $op = NULL, $id = N
 }
 
 /**
- * @param unknown_type $variables
+ * @param $variables
+ *
  * @return string
  */
 function theme_biblio_admin_author_types_form($variables) {
@@ -2058,8 +2073,8 @@ function theme_biblio_admin_author_types_form($variables) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_author_types_form_submit($form, &$form_state) {
 
@@ -2084,9 +2099,9 @@ function biblio_admin_author_types_form_submit($form, &$form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
- * @param unknown_type $type_id
+ * @param $form
+ * @param $form_state
+ * @param $type_id
  */
 function biblio_admin_author_type_delete_confirm($form, &$form_state, $type_id) {
   $base = variable_get('biblio_base', 'biblio');
@@ -2107,8 +2122,8 @@ function biblio_admin_author_type_delete_confirm($form, &$form_state, $type_id) 
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_author_type_delete_confirm_submit($form, &$form_state) {
 
@@ -2124,9 +2139,10 @@ function biblio_admin_author_type_delete_confirm_submit($form, &$form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
- * @param unknown_type $author_id
+ * @param $form
+ * @param $form_state
+ * @param $author_id
+ *
  * @return void|multitype:string NULL
  */
 function biblio_admin_author_edit_form($form, &$form_state, $author_id) {
@@ -2489,16 +2505,16 @@ function biblio_admin_author_edit_form_merge_link($form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_author_edit_form_link_validate($form, &$form_state) {
 
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_author_edit_form_link_submit($form, &$form_state) {
   module_load_include('inc', 'biblio', 'includes/biblio.contributors');
@@ -2534,8 +2550,8 @@ function biblio_admin_author_edit_form_link_submit($form, &$form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_author_edit_form_validate($form, &$form_state) {
   foreach ($form_state['values'] as $key => $value) {
@@ -2546,8 +2562,8 @@ function biblio_admin_author_edit_form_validate($form, &$form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_author_edit_form_submit($form, &$form_state) {
   $op = $form_state['values']['op'];
@@ -2601,6 +2617,7 @@ function biblio_admin_author_edit_form_submit($form, &$form_state) {
  *
  * @param  $form
  * @param  $form_state
+ *
  * @return array
  */
 function biblio_admin_orphans_form($form, &$form_state) {
@@ -2654,8 +2671,8 @@ function biblio_admin_orphans_form($form, &$form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_orphans_form_validate($form, &$form_state) {
   $check_count = array_filter($form_state['values']['authors']);
@@ -2665,8 +2682,8 @@ function biblio_admin_orphans_form_validate($form, &$form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_orphans_form_submit($form, &$form_state) {
   $authors = $names = array();
@@ -2690,8 +2707,9 @@ function biblio_admin_orphans_form_submit($form, &$form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
+ *
  * @return multitypeNULL
  */
 function biblio_admin_keyword_orphans_form($form, $form_state) {
@@ -2757,8 +2775,8 @@ function biblio_admin_keyword_orphans_form($form, $form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_keyword_orphans_form_validate($form, &$form_state) {
   $check_count = array_filter($form_state['values']['words']);
@@ -2768,8 +2786,8 @@ function biblio_admin_keyword_orphans_form_validate($form, &$form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_keyword_orphans_form_submit($form, &$form_state) {
 
@@ -2783,9 +2801,10 @@ function biblio_admin_keyword_orphans_form_submit($form, &$form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
- * @param unknown_type $keyword_id
+ * @param $form
+ * @param $form_state
+ * @param $keyword_id
+ *
  * @return multitype:string number NULL
  */
 function biblio_admin_keyword_edit_form($form, &$form_state, $keyword_id) {
@@ -2908,16 +2927,16 @@ function biblio_admin_keyword_edit_form($form, &$form_state, $keyword_id) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_add_merge_keyword_callback($form, &$form_state) {
   return $form['merge']['merge_words'];
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_add_merge_keyword($form, &$form_state) {
 
@@ -2947,9 +2966,9 @@ function biblio_add_merge_keyword($form, &$form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
- * @param unknown_type $keyword_id
+ * @param $form
+ * @param $form_state
+ * @param $keyword_id
  */
 function biblio_admin_keyword_delete_confirm($form, &$form_state, $keyword_id) {
   $base = variable_get('biblio_base', 'biblio');
@@ -2970,8 +2989,8 @@ function biblio_admin_keyword_delete_confirm($form, &$form_state, $keyword_id) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_keyword_delete_confirm_submit($form, &$form_state) {
   $base = variable_get('biblio_base', 'biblio');
@@ -2981,8 +3000,8 @@ function biblio_admin_keyword_delete_confirm_submit($form, &$form_state) {
 }
 
 /**
- * @param unknown_type $form
- * @param unknown_type $form_state
+ * @param $form
+ * @param $form_state
  */
 function biblio_admin_keyword_edit_form_submit($form, &$form_state) {
   switch ($form_state['values']['op']) {

@@ -8,9 +8,7 @@ configure = admin/config/content/biblio
 
 files[] = tests/BiblioContributorUnitTest.test
 files[] = tests/BiblioContributorWebTestCase.test
-files[] = tests/BiblioImportExportUnitTest.test
 files[] = tests/BiblioImportExportWebTestCase.test
-files[] = tests/BiblioKeywordUnitTest.test
 files[] = tests/BiblioKeywordWebTestCase.test
 files[] = tests/BiblioNodeCreationTestCase.test
 files[] = tests/BiblioPageViewTestCase.test
@@ -37,9 +35,10 @@ files[] = views/biblio_handler_filter_contributor.inc
 files[] = views/biblio_handler_sort_contributor_lastname.inc
 files[] = views/biblio_handler_argument_many_to_one.inc
 files[] = views/biblio_handler_field_export_link.inc
+php = 5.3
 
-; Information added by Drupal.org packaging script on 2019-08-26
-version = "7.x-1.1"
+; Information added by Drupal.org packaging script on 2019-10-11
+version = "7.x-1.2"
 core = "7.x"
 project = "biblio"
-datestamp = "1566849791"
+datestamp = "1570806196"

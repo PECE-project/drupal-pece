@@ -27,11 +27,11 @@ class BiblioWebTestCase extends DrupalWebTestCase {
   protected $nids = array();
 
   /**
-   * This variable is probably unused.
+   * Array of test users.
    *
-   * @var null
+   * @var array
    */
-  protected $admin_user;
+  protected $users;
 
   // @code
   // function tearDown() {
@@ -63,6 +63,25 @@ class BiblioWebTestCase extends DrupalWebTestCase {
   //    $this->cids = array();
   // }
   // @endcode
+
+  /**
+   * Return a test user.
+   */
+  public function getUser($type) {
+    if (isset($users[$type])) {
+      return $users[$type];
+    }
+    switch ($type) {
+      case 'access biblio content':
+        $users[$type] = $this->drupalCreateUser(array('access biblio content'));
+        break;
+
+      case 'administer biblio':
+        $users[$type] = $this->drupalCreateUser(array('administer biblio', 'access biblio content'));
+        break;
+    }
+    return isset($users[$type]) ? $users[$type] : NULL;
+  }
 
   /**
    * Create a test node.

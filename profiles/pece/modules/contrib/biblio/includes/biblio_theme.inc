@@ -9,7 +9,8 @@ module_load_include('inc', 'biblio', 'biblio.pages');
 
 /**
  * @param $openURL
- * @return unknown_type
+ *
+ * @return
  */
 function theme_biblio_openurl($variables) {
   $open_url = $variables['openURL'];
@@ -24,7 +25,8 @@ function theme_biblio_openurl($variables) {
 
 /**
  * @param $node
- * @return unknown_type
+ *
+ * @return
  */
 function biblio_openurl($node) {
   global $user;
@@ -74,7 +76,7 @@ function biblio_openurl($node) {
  * @param $base
  * @param $style
  *
- * @return unknown_type
+ * @return
  */
 function theme_biblio_long($variables) {
   $output = '';
@@ -212,7 +214,8 @@ function _biblio_get_field_information($biblio_type, $only_visible = FALSE) {
  * @param $node
  * @param $base
  * @param $teaser
- * @return unknown_type
+ *
+ * @return
  */
 function theme_biblio_tabular($variables) {
   module_load_include('inc', 'biblio', '/includes/biblio.contributors');
@@ -812,14 +815,15 @@ function theme_biblio_style($variables) {
   else {
     drupal_set_message(t('The style function: @funct does not exist', array('@funct' => $style_function)), 'error');
   }
-  return ($styled_node . filter_xss($node->biblio_coins, array('span')));
+  return $styled_node . (isset($node->biblio_coins) ? filter_xss($node->biblio_coins, array('span')) : NULL);
 }
 
 /**
  * @param $node
  * @param $base
  * @param $style
- * @return unknown_type
+ *
+ * @return
  */
 function theme_biblio_entry($variables) {
   $node       = $variables['node'];
@@ -875,7 +879,8 @@ function theme_biblio_entry($variables) {
 
 /**
  * @param $form
- * @return unknown_type
+ *
+ * @return
  */
 function theme_biblio_filters($variables) {
   $form = $variables['form'];
@@ -905,7 +910,8 @@ function theme_biblio_filters($variables) {
 
 /**
  * @param $form
- * @return unknown_type
+ *
+ * @return
  */
 function theme_biblio_form_filter($variables) {
   $form = $variables['form'];
@@ -957,7 +963,8 @@ function theme_biblio_field_tab($variables) {
 
 /**
  * @param $form
- * @return unknown_type
+ *
+ * @return
  */
 function theme_biblio_admin_types_edit_form($variables) {
   $form = $variables['form'];
@@ -1107,7 +1114,8 @@ function theme_google_scholar_link($variables) {
 
 /**
  * @param $form
- * @return unknown_type
+ *
+ * @return
  */
 function theme_biblio_contributors($variables) {
   $form = $variables['form'];

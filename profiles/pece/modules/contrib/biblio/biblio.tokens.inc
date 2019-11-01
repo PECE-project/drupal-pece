@@ -63,10 +63,10 @@ function biblio_token_info() {
 }
 
 /**
- * @param unknown_type $type
- * @param unknown_type $tokens
- * @param unknown_type $data
- * @param unknown_type $options
+ * @param $type
+ * @param $tokens
+ * @param $data
+ * @param $options
  *
  * @return array
  */

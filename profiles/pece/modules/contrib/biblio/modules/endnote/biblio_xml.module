@@ -88,7 +88,7 @@ function biblio_xml_biblio_export_link($nid = NULL, $filter = array()) {
   if (!empty($nid)) {
     $link['href'] .= '/' . $nid;
   }
-  $link['title'] = t('XML');
+  $link['title'] = t('EndNote XML');
 
   // Add any filters which may be on the current page.
   if (empty($nid) && !empty($filter)) {

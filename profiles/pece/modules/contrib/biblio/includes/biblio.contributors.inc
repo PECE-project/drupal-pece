@@ -7,7 +7,7 @@
 /**
  * @param $aid
  *
- * @return unknown_type
+ * @return
  */
 function biblio_get_linked_contributors($aid) {
   $related = &drupal_static(__FUNCTION__);
@@ -50,6 +50,7 @@ function biblio_get_contributor($aid) {
 /**
  * @param array $contributors
  * @param int $category
+ *
  * @return array $authors
  */
 function biblio_get_contributor_category($contributors, $category) {
@@ -86,7 +87,8 @@ function biblio_get_cid_by_name($name) {
 }
 
 /**
- * @param unknown_type $name
+ * @param $name
+ *
  * @return unknown
  */
 function biblio_get_contributor_by_name($name) {
@@ -101,7 +103,8 @@ function biblio_get_contributor_by_name($name) {
 }
 
 /**
- * @param unknown_type $vid
+ * @param $vid
+ *
  * @return Ambigous <NULL>
  */
 function biblio_get_first_contributor($vid) {
@@ -120,7 +123,8 @@ function biblio_get_first_contributor($vid) {
 
 /**
  * @param $vid
- * @return unknown_type
+ *
+ * @return
  */
 function biblio_load_contributors($vid) {
   $vids = (isset($vid) ? array($vid) : array());
@@ -128,8 +132,9 @@ function biblio_load_contributors($vid) {
 }
 
 /**
- * @param unknown_type $vids
- * @param unknown_type $auth_category
+ * @param $vids
+ * @param $auth_category
+ *
  * @return multitype:|Ambigous <multitype:, array>
  */
 function biblio_load_contributors_multiple($vids = array(), $auth_category = 0) {
@@ -191,7 +196,8 @@ function biblio_authors_add_etal(&$authors, $type) {
 }
 
 /**
- * @param unknown_type $node
+ * @param $node
+ *
  * @return unknown
  */
 function biblio_delete_contributors($node) {
@@ -202,7 +208,8 @@ function biblio_delete_contributors($node) {
 }
 
 /**
- * @param unknown_type $node
+ * @param $node
+ *
  * @return unknown
  */
 function biblio_delete_contributors_revision($node) {
@@ -213,7 +220,7 @@ function biblio_delete_contributors_revision($node) {
 }
 
 /**
- * @param unknown_type $cid
+ * @param $cid
  */
 function biblio_delete_contributor($cid) {
   db_delete('biblio_contributor')
@@ -227,8 +234,8 @@ function biblio_delete_contributor($cid) {
 }
 
 /**
- * @param unknown_type $cid
- * @param unknown_type $vid
+ * @param $cid
+ * @param $vid
  */
 function biblio_delete_contributor_revision($cid, $vid) {
   return db_delete('biblio_contributor')
@@ -301,7 +308,7 @@ function biblio_get_orphan_author_ids() {
 }
 
 /**
- * @param unknown_type $force
+ * @param $force
  */
 function biblio_delete_orphan_authors($force = FALSE) {
   if (variable_get('biblio_auto_orphaned_author_delete', 0) || $force) {
@@ -315,7 +322,8 @@ function biblio_delete_orphan_authors($force = FALSE) {
 }
 
 /**
- * @param unknown_type $node
+ * @param $node
+ *
  * @return Ambigous <success, boolean>
  */
 function biblio_insert_contributors($node) {
@@ -325,7 +333,7 @@ function biblio_insert_contributors($node) {
 }
 
 /**
- * @param unknown_type $node
+ * @param $node
  */
 function biblio_update_contributors($node) {
   if (!empty($node->biblio_contributors)) {
@@ -336,7 +344,7 @@ function biblio_update_contributors($node) {
 }
 
 /**
- * @param unknown_type $author
+ * @param $author
  */
 function biblio_save_contributor(&$author) {
   foreach ($author as $key => $value) {
@@ -346,7 +354,8 @@ function biblio_save_contributor(&$author) {
 }
 
 /**
- * @param unknown_type $author
+ * @param $author
+ *
  * @return bool
  */
 function biblio_update_contributor(&$author) {
@@ -357,7 +366,7 @@ function biblio_update_contributor(&$author) {
 }
 
 /**
- * @param unknown_type $authors
+ * @param $authors
  */
 function _biblio_contributor_sort(&$authors) {
   foreach ($authors as $key => $author) {
@@ -369,8 +378,9 @@ function _biblio_contributor_sort(&$authors) {
 }
 
 /**
- * @param unknown_type $a
- * @param unknown_type $b
+ * @param $a
+ * @param $b
+ *
  * @return int
  */
 function _biblio_contributor_usort($a, $b) {
@@ -508,7 +518,8 @@ function _save_contributors(&$contributors, $nid, $vid, $update = FALSE) {
 
 /**
  * @param $author_array
- * @return unknown_type
+ *
+ * @return
  */
 function biblio_parse_author($author_array, $cat = 0) {
 
@@ -575,7 +586,8 @@ function biblio_parse_author($author_array, $cat = 0) {
 
 /**
  * @param $creator
- * @return unknown_type
+ *
+ * @return
  */
 function _md5sum($creator) {
   $string = $creator['firstname'] . $creator['initials'] . $creator['prefix'] . $creator['lastname'];
@@ -588,7 +600,7 @@ function _md5sum($creator) {
  *
  * @param $remainder
  *
- * @return unknown_type
+ * @return
  */
 function _grabFirstnameInitials($remainder) {
   $prefix = array();
@@ -624,7 +636,7 @@ function _grabFirstnameInitials($remainder) {
  *
  * @param $input
  *
- * @return unknown_type
+ * @return
  */
 function _grabSurname($input) {
   $no_prefix = FALSE;
@@ -653,7 +665,7 @@ function _grabSurname($input) {
 }
 
 /**
- * @return unknown_type
+ * @return
  */
 function _loadMD5() {
   static $md5   = array();

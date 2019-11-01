@@ -317,9 +317,14 @@ function biblio_theme($existing, $type, $theme, $path) {
 }
 
 /**
+ * Page callback for autocompletion. Outputs JSON of autocomplete options.
  *
+ * @param string $field
+ *   The field to search.
+ * @param string $string
+ *   The string to search for.
  */
-function biblio_autocomplete($field, $string = '') {
+function biblio_autocomplete($field = NULL, $string = '') {
   $matches = array();
   switch ($field) {
     case 'contributor':
@@ -349,6 +354,9 @@ function biblio_autocomplete($field, $string = '') {
       break;
 
     default:
+      if (!$field) {
+        break;
+      }
       $field = drupal_strtolower($field);
       $string = '%' . drupal_strtolower($string) . '%';
       $query = db_select('biblio', 'b')
@@ -362,8 +370,8 @@ function biblio_autocomplete($field, $string = '') {
         $matches[$data->$field] = check_plain($data->$field);
       }
   }
-  print drupal_json_encode($matches);
-  exit();
+  print drupal_json_output($matches);
+  drupal_exit();
 }
 
 /**
@@ -692,6 +700,13 @@ function biblio_menu() {
 
   $wildcard = 2 + (count(explode("/", $base)) - 1);
 
+  $items[$base . '/authors/%'] = array(
+    'title'             => 'Show author information',
+    'page callback'     => 'biblio_goto',
+    'page arguments'    => array($base, 'f[author]', 2),
+    'access arguments'  => array('access biblio content'),
+    'type'              => MENU_CALLBACK,
+  );
   $items["$base/authors/%/edit"] = array(
     'title'             => 'Edit author information',
     'page callback'     => 'drupal_get_form',
@@ -738,7 +753,7 @@ function biblio_menu() {
     'file'              => 'includes/biblio.pages.inc',
     'type'              => MENU_LOCAL_TASK,
   );
-  // The next two "LOCAL TASKS" are for the admin/config/content/biblio page.
+
   $items['admin/config/content/biblio'] = array(
     'title'             => 'Biblio settings',
     'description'       => 'Configure default behavior of the Biblio module.',
@@ -747,15 +762,9 @@ function biblio_menu() {
     'access arguments'  => array('administer biblio'),
     'file'              => 'includes/biblio.admin.inc',
   );
-
   $items['admin/config/content/biblio/basic'] = array(
     'title'             => 'Preferences',
-    'description'       => 'Configure default behavior of the Biblio module.',
-    'page callback'     => 'drupal_get_form',
-    'page arguments'    => array('biblio_admin_settings'),
-    'access arguments'  => array('administer biblio'),
-    'file'              => 'includes/biblio.admin.inc',
-    'type'              => MENU_LOCAL_TASK,
+    'type'              => MENU_DEFAULT_LOCAL_TASK,
     'weight'            => -10,
   );
   $items['admin/config/content/biblio/import'] = array(
@@ -911,6 +920,13 @@ function biblio_menu() {
     'file'              => 'includes/biblio.pages.inc',
     'type'              => MENU_DEFAULT_LOCAL_TASK,
     'weight'            => -7,
+  );
+  $items['admin/config/content/biblio/author/%'] = array(
+    'title'             => 'Show author information',
+    'page callback'     => 'biblio_goto',
+    'page arguments'    => array($base, 'f[author]', 5),
+    'access arguments'  => array('access biblio content'),
+    'type'              => MENU_CALLBACK,
   );
   $items['admin/config/content/biblio/author/%/edit'] = array(
     'title'             => 'Edit author information',
@@ -1077,6 +1093,20 @@ function biblio_menu() {
     'type'              => MENU_CALLBACK,
   );
   return $items;
+}
+
+/**
+ * Sends the user to the page with URL "$path?$param=$value".
+ *
+ * @param string $path
+ *   The path to send the user to.
+ * @param string $param
+ *   The query parameter name.
+ * @param string $value
+ *   The query parameter value.
+ */
+function biblio_goto($path, $param, $value) {
+  drupal_goto($path, array('query' => array($param => $value)));
 }
 
 /**

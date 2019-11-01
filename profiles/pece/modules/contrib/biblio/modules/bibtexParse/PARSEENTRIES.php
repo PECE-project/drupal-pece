@@ -132,7 +132,7 @@ require_once drupal_get_path('module', 'biblio') . '/includes/biblio.contributor
 class PARSEENTRIES {
 
   /**
-   * @return unknown_type
+   * @return
    */
   public function __construct() {
     require_once drupal_get_path('module', 'biblio_bibtex') . '/transtab_latex_unicode.inc.php';
