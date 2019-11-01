@@ -33,7 +33,7 @@ class L10nUpdateTest extends L10nUpdateTestBase {
     // Exclude drupal core and nl10n_update so no remote translations are
     // fetched.
     $edit = array(
-      'disabled_projects' => 'drupal\nl10n_update',
+      'disabled_projects' => "drupal\nl10n_update",
     );
     $this->drupalPost('admin/config/regional/language/update', $edit, t('Save configuration'));
 

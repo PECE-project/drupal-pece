@@ -802,3 +802,15 @@ function l10n_update_clear_status() {
 function l10n_update_use_remote_source() {
   return variable_get('l10n_update_check_mode', L10N_UPDATE_USE_SOURCE_REMOTE_AND_LOCAL) == L10N_UPDATE_USE_SOURCE_REMOTE_AND_LOCAL;
 }
+
+/**
+ * Creates a .htaccess file in the translations directory if it is missing.
+ *
+ * @param string $directory
+ *   The translations directory to create the file in. Defaults to the directory
+ *   of the 'translations://' wrapper.
+ */
+function l10n_update_ensure_htaccess($directory = '') {
+  $directory = empty($directory) ? 'translations://' : $directory;
+  file_create_htaccess($directory, FALSE);
+}

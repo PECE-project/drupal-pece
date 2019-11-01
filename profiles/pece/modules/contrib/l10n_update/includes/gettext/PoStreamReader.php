@@ -257,6 +257,12 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
     $line = fgets($this->_fd);
     $this->_finished = ($line === FALSE);
 
+    // Initialize common values for error logging.
+    $log_vars = array(
+      '%uri' => $this->getURI(),
+      '%line' => &$this->_line_number,
+    );
+
     if (!$this->_finished) {
 
       if ($this->_line_number == 0) {
@@ -268,12 +274,6 @@ class PoStreamReader implements PoStreamInterface, PoReaderInterface {
 
       // Track the line number for error reporting.
       $this->_line_number++;
-
-      // Initialize common values for error logging.
-      $log_vars = array(
-        '%uri' => $this->getURI(),
-        '%line' => $this->_line_number,
-      );
 
       // Trim away the linefeed. \\n might appear at the end of the string if
       // another line continuing the same string follows. We can remove that.

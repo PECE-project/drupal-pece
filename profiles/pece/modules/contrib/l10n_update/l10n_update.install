@@ -165,6 +165,7 @@ function l10n_update_install() {
   foreach ($directories as $directory) {
     if (file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
       variable_set('l10n_update_download_store', $directory);
+      l10n_update_ensure_htaccess($directory);
       return;
     }
   }
@@ -254,6 +255,21 @@ function l10n_update_requirements($phase) {
           'description' => t('No translation status is available. See the <a href="!updates">Translate interface update</a> page for more information.', array('!updates' => url('admin/config/regional/translate/update'))),
         );
       }
+    }
+
+    // Test the contents of the .htaccess file in the translations directory.
+    l10n_update_ensure_htaccess();
+    $htaccess_file = 'translations://.htaccess';
+    $directory = variable_get('l10n_update_download_store', L10N_UPDATE_DEFAULT_TRANSLATION_PATH);
+    // Check for the string which was added to the recommended .htaccess file
+    // in the latest security update.
+    if (!file_exists($htaccess_file) || !($contents = @file_get_contents($htaccess_file)) || strpos($contents, 'Drupal_Security_Do_Not_Remove_See_SA_2013_003') === FALSE) {
+      $requirements['l10n_update_htaccess'] = array(
+        'title' => t('Translations directory'),
+        'value' => t('Not fully protected'),
+        'severity' => REQUIREMENT_ERROR,
+        'description' => t('See <a href="@url">@url</a> for information about the recommended .htaccess file which should be added to the %directory directory to help protect against arbitrary code execution.', array('@url' => 'http://drupal.org/SA-CORE-2013-003', '%directory' => $directory)),
+      );
     }
   }
   if ($phase == 'update') {
@@ -625,4 +641,11 @@ function l10n_update_update_7209() {
   if ($update_url == 'http://ftp.drupal.org/files/translations/%core/%project/%project-%release.%language.po') {
     variable_set('l10n_update_default_update_url', L10N_UPDATE_DEFAULT_SERVER_PATTERN);
   }
+}
+
+/**
+ * Add a .htaccess file to the translations directory.
+ */
+function l10n_update_update_7210() {
+  l10n_update_ensure_htaccess();
 }

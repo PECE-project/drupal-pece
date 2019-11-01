@@ -106,6 +106,7 @@ function _l10n_update_fetch_operations(array $projects, array $langcodes, array 
       watchdog('file system', 'The directory %directory does not exist or is not writable.', array('%directory' => $directory), WATCHDOG_ERROR);
       return $operations;
     }
+    l10n_update_ensure_htaccess();
   }
 
   foreach ($projects as $project) {

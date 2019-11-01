@@ -294,8 +294,10 @@ function l10n_update_admin_settings_form($form, &$form_state) {
     '#description' => t('The selected languages will not receive interface translation updates.'),
   );
 
+  $form = system_settings_form($form);
   $form['#submit'][] = 'l10n_update_admin_settings_form_submit';
-  return system_settings_form($form);
+
+  return $form;
 }
 
 /**
@@ -336,6 +338,9 @@ function l10n_update_admin_settings_form_submit($form, &$form_state) {
   $input = strtr($input, array("\r" => '', ' ' => ''));
   $values = array_filter(explode("\n", $input));
   variable_set('l10n_update_disabled_projects', $values);
+
+  // Add .htaccess file to the translations directory.
+  l10n_update_ensure_htaccess();
 }
 
 /**
