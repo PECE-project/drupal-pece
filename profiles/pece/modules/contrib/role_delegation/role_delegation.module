@@ -149,10 +149,6 @@ function role_delegation_access() {
   if (!user_access('access user profiles')) {
     return FALSE;
   }
-  // Check if they can edit users. In that case, the Roles tab is not needed.
-  if (user_access('administer users')) {
-    return FALSE;
-  }
   // Check access to role assignment page.
   if (user_access('administer permissions')) {
     return TRUE;
@@ -236,7 +232,7 @@ function role_delegation_form_user_admin_role_submit($form, $form_state) {
 function role_delegation_user_role_delete($role) {
   db_delete('role_permission')
   ->condition('permission', "assign {$role->name} role")
-  ->execute();  
+  ->execute();
 }
 
 /**
@@ -295,11 +291,14 @@ function role_delegation_user_operations($form = array(), $form_state = array())
 
 /**
  * Implements hook_form_FORM_ID_alter() for user_admin_account().
- * 
+ *
  * In the user bulk update form, separates out the role delegation operations
  * and groups and relabels them under 'Add a role' and 'Remove a role' optgroups.
  */
 function role_delegation_form_user_admin_account_alter(&$form, $form_state, $form_id) {
+  if (!isset($form['options']['operation']['#options'])) {
+    return;
+  }
   $options = $form['options']['operation']['#options'];
   $roles = _role_delegation_roles();
   $add_roles = array();

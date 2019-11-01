@@ -11,7 +11,7 @@
 class RoleDelegationTestCase extends DrupalWebTestCase {
 
   protected $rid_high, $rid_low, $user_high, $user_low;
-  
+
   /**
    * Assign or remove one role to/from one user.
    *
@@ -25,9 +25,9 @@ class RoleDelegationTestCase extends DrupalWebTestCase {
    * @param $assign
    *   TRUE (the default) to assign the role, or
    *   FALSE to remove it.
-   *   
+   *
    * @return
-   *   TRUE or FALSE depending on whether the role was 
+   *   TRUE or FALSE depending on whether the role was
    *   successfully assigned or removed.
    */
   protected function assignRoleToUser($rid, $user, $assign = TRUE) {
@@ -42,11 +42,11 @@ class RoleDelegationTestCase extends DrupalWebTestCase {
       return FALSE;
     }
     $this->drupalPost(NULL, array($name => $assign), t('Save'));
-    
+
     $elements = $this->xpath("//input[@name='$name']");
     return isset($elements[0]) && ($assign XOR empty($elements[0]['checked']));
   }
-  
+
   /**
    * Assign or remove one permission to/from one role, and assert
    * that the result succeeded.
@@ -72,26 +72,26 @@ class RoleDelegationTestCase extends DrupalWebTestCase {
       ($assign ? 'Assign' : 'Remove') . ' permission "' . $permission . '" ' . ($assign ? 'to' : 'from') . " role $rid."
     );
   }
-  
-  public function setUp() {
+
+  public function setUp(array $modules = array('role_delegation')) {
 
     // Enable modules
-    parent::setUp('role_delegation');
+    parent::setUp($modules);
 
     // Create roles
     $this->rid_high = $this->drupalCreateRole(array(), 'high');
     $this->rid_low  = $this->drupalCreateRole(array(), 'low' );
-    
+
     // Create users
-    $this->user_high = $this->drupalCreateUser(array('administer users'));
+    $this->user_high = $this->drupalCreateUser(array('administer users', 'access user profiles'));
     $this->user_low  = $this->drupalCreateUser(array('administer users'));
 
     // Create privileged user and log in
-    $this->drupalLogin($this->drupalCreateUser(array('administer users', 'administer permissions')));
-    
+    $this->drupalLogin($this->drupalCreateUser(array('administer users', 'administer permissions', 'access user profiles')));
+
     // Assign permissions to roles
     $this->assignPermissionToRole('assign low role', $this->rid_high);  // 'high' can assign 'low'
-    
+
     // Assign roles to users
     $this->assertTrue(
       $this->assignRoleToUser($this->rid_high, $this->user_high),
@@ -136,7 +136,7 @@ class RoleDelegationPermissionsTestCase extends RoleDelegationTestCase {
       t('Role Delegation')
     );
   }
-  
+
   /**
    * Check that roles can't be assigned by forgery.
    */
@@ -164,6 +164,36 @@ class RoleDelegationPermissionsTestCase extends RoleDelegationTestCase {
       t('Role Delegation')
     );
   }
+
+  /**
+   * Check access to the role delegation page.
+   */
+  public function testRoleDelegationPageAccess() {
+    // Users with 'administer permissions' can view the page.
+    $this->drupalGet("user/{$this->user_low->uid}/roles");
+    $this->assertResponse(200, t('Users with \'administer permissions\' can view the page.'));
+
+    // Anonymous users can never access the roles page.
+    $this->drupalLogout();
+    $this->drupalGet("user/{$this->user_low->uid}/roles");
+    $this->assertResponse(403, t('Anonymous users can never access the roles page.'));
+
+    // Users with only 'administer users' cannot view the page.
+    $this->drupalLogin($this->drupalCreateUser(array('administer users')));
+    $this->drupalGet("user/{$this->user_low->uid}/roles");
+    $this->assertResponse(403, t('Users with only \'administer users\' cannot view the page.'));
+
+    $this->drupalLogout();
+    $this->drupalLogin($this->user_high);
+    $this->drupalGet("user/{$this->user_low->uid}/roles");
+    $this->assertResponse(200, t('Users with assign role permissions should be able to access the page.'));
+
+    $this->drupalLogout();
+    $this->drupalLogin($this->user_low);
+    $this->drupalGet("user/{$this->user_low->uid}/roles");
+    $this->assertResponse(403, t('Users without assign role permissions should not be able to access the page.'));
+  }
+
 }
 
 /**
@@ -258,7 +288,7 @@ class RoleDelegationOperationsTestCase extends RoleDelegationTestCase {
   public function testOperationsForgery() {
     $this->drupalLogin($this->user_high);
     $this->drupalGet('admin/people');
-    
+
     // Forge an operation to add the high role...
     $option = $this->xpath("//select[@name='operation']//option[@value='role_delegation_add_role-{$this->rid_low}']");
     if (count($option)==0) {
@@ -266,7 +296,7 @@ class RoleDelegationOperationsTestCase extends RoleDelegationTestCase {
     }
     $dome = dom_import_simplexml($option[0]);
     $dome->setAttribute('value', "role_delegation_add_role-{$this->rid_high}");
-    
+
     // ... then submit the form, and check that it wasn't granted.
     $edit = array(
       "accounts[{$this->user_low->uid}]" => TRUE,
@@ -285,7 +315,7 @@ class RoleDelegationOperationsTestCase extends RoleDelegationTestCase {
       t('Role Delegation')
     );
   }
-  
+
 }
 
 
