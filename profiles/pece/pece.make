@@ -214,7 +214,7 @@ projects[honeypot][version] = 1.25
 
 ; Role Delegation
 projects[role_delegation][subdir] = contrib
-projects[role_delegation][version] = 1.1
+projects[role_delegation][version] = 1.2
 
 ; User Protect
 projects[userprotect][subdir] = contrib
