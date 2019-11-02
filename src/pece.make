@@ -214,11 +214,15 @@ projects[honeypot][version] = 1.25
 
 ; Role Delegation
 projects[role_delegation][subdir] = contrib
-projects[role_delegation][version] = 1.2
+projects[role_delegation][version] = 1.1
 
 ; User Protect
 projects[userprotect][subdir] = contrib
 projects[userprotect][version] = 1.2
+
+; Username Enumeration Prevention
+projects[username_enumeration_prevention][subdir] = contrib
+projects[username_enumeration_prevention][version] = 1.2
 
 ; =====================
 ; Panels
