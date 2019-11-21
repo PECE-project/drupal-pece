@@ -1,0 +1,27 @@
+uuid: 021e9859-7605-4575-a581-b4f1729f8f68
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_external_audio
+    - paragraphs.paragraphs_type.paragraph_external
+  module:
+    - file
+id: paragraph.paragraph_external.field_external_audio
+field_name: field_external_audio
+entity_type: paragraph
+bundle: paragraph_external
+label: Audio
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: 'external-audio/[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'mp3 wma aac ogg ace'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

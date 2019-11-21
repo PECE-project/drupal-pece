@@ -1,0 +1,54 @@
+uuid: a2e98ff8-d50e-4ec9-b814-0ff00f16a273
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_internal_content
+    - node.type.artifact_video
+    - node.type.pece_analytic
+    - node.type.pece_annotation
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
+    - node.type.pece_essay
+    - node.type.pece_fieldsite
+    - node.type.pece_group
+    - node.type.pece_project
+    - node.type.pece_substantive_logic
+    - paragraphs.paragraphs_type.paragraph_internal
+id: paragraph.paragraph_internal.field_internal_content
+field_name: field_internal_content
+entity_type: paragraph
+bundle: paragraph_internal
+label: Content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_analytic: pece_analytic
+      pece_annotation: pece_annotation
+      pece_artifact_audio: pece_artifact_audio
+      pece_artifact_bundle: pece_artifact_bundle
+      pece_artifact_image: pece_artifact_image
+      pece_artifact_pdf: pece_artifact_pdf
+      pece_artifact_text: pece_artifact_text
+      artifact_video: artifact_video
+      pece_artifact_website: pece_artifact_website
+      pece_fieldsite: pece_fieldsite
+      pece_essay: pece_essay
+      pece_group: pece_group
+      pece_project: pece_project
+      pece_substantive_logic: pece_substantive_logic
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: pece_analytic
+field_type: entity_reference

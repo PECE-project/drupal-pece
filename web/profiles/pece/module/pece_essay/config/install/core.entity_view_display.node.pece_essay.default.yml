@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_essay.body
+    - field.field.node.pece_essay.field_essay_contents
     - field.field.node.pece_essay.field_essay_contributors
     - field.field.node.pece_essay.field_essay_permission
     - field.field.node.pece_essay.field_essay_tags
@@ -12,6 +13,7 @@ dependencies:
     - field.field.node.pece_essay.og_audience
     - node.type.pece_essay
   module:
+    - entity_reference_revisions
     - image
     - options
     - text
@@ -26,6 +28,15 @@ content:
     type: text_default
     weight: 101
     settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_essay_contents:
+    type: entity_reference_revisions_entity_view
+    weight: 109
+    label: above
+    settings:
+      view_mode: default
+      link: ''
     third_party_settings: {  }
     region: content
   field_essay_contributors:
@@ -83,3 +94,4 @@ content:
     region: content
 hidden:
   langcode: true
+  search_api_excerpt: true
