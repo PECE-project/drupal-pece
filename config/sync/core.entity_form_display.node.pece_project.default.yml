@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.pece_project.field_project_start_end_date
     - field.field.node.pece_project.field_project_subst_logic
     - field.field.node.pece_project.field_project_uri
+    - field.field.node.pece_project.og_audience
     - image.style.thumbnail
     - node.type.pece_project
   module:
@@ -19,6 +20,7 @@ dependencies:
     - file
     - image
     - link
+    - og
     - path
     - text
 id: node.pece_project.default
@@ -109,6 +111,15 @@ content:
     settings:
       include_locked: true
     third_party_settings: {  }
+  og_audience:
+    type: og_complex
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    weight: 137
+    third_party_settings: {  }
+    region: content
   path:
     type: path
     weight: 30

@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.pece_project.field_project_start_end_date
     - field.field.node.pece_project.field_project_subst_logic
     - field.field.node.pece_project.field_project_uri
+    - field.field.node.pece_project.og_audience
     - node.type.pece_project
   module:
     - datetime_range
@@ -112,5 +113,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  og_audience:
+    label: above
+    type: entity_reference_label
+    settings:
+      link: true
+    weight: 117
+    third_party_settings: {  }
+    region: content
 hidden:
   langcode: true
+  search_api_excerpt: true
