@@ -1,0 +1,36 @@
+uuid: 7dc47fad-a108-441b-846d-0e324df3db8f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_access_permission.field_acc_perm_accesses
+    - field.field.paragraph.paragraph_access_permission.field_acc_perm_permissions
+    - paragraphs.paragraphs_type.paragraph_access_permission
+  module:
+    - paragraphs
+id: paragraph.paragraph_access_permission.default
+targetEntityType: paragraph
+bundle: paragraph_access_permission
+mode: default
+content:
+  field_acc_perm_accesses:
+    type: entity_reference_paragraphs
+    weight: 6
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_acc_perm_permissions:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,28 @@
+uuid: f71d3439-d32b-415a-84bb-c65bda6eb532
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.groups.pece_group
+    - field.storage.groups.field_pece_group_owners
+id: groups.pece_group.field_pece_group_owners
+field_name: field_pece_group_owners
+entity_type: groups
+bundle: pece_group
+label: Owners
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

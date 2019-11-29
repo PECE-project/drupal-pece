@@ -1,0 +1,43 @@
+uuid: 54f18d2d-81a4-4900-b3af-4119576f80ae
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.groups.pece_group
+    - field.field.groups.pece_group.field_pece_group_members
+    - field.field.groups.pece_group.field_pece_group_owners
+  module:
+    - entity_reference_revisions
+id: groups.pece_group.default
+targetEntityType: groups
+bundle: pece_group
+mode: default
+content:
+  field_pece_group_members:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_pece_group_owners:
+    weight: 0
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  title:
+    label: hidden
+    type: string
+    weight: -5
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  search_api_excerpt: true
