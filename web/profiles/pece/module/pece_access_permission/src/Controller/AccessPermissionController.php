@@ -16,7 +16,7 @@ class AccessPermissionController extends ControllerBase {
    *
    * @return bool
    */
-  public function handleCanViewEdit($user, $entity, $permission){
+  public function ifCanViewEdit($user, $entity, $permission){
     if ($entity->getOwner() == $user)
       return TRUE;
     $permissionIds = $this->getPermission($entity, $permission);
@@ -26,7 +26,8 @@ class AccessPermissionController extends ControllerBase {
         return TRUE;
       else{
         $groupsId = $this->getGroupsByUser($user);
-        if (count($groupsId) > 0 && count($this->getGroupsPermissionByUser($groupsId, $permissionIds)) > 0)
+        if (count($groupsId) > 0 &&
+            count($this->getGroupsPermissionByUser($groupsId, $permissionIds)) > 0)
           return TRUE;
       }
     }
@@ -49,16 +50,16 @@ class AccessPermissionController extends ControllerBase {
       ->condition('parent_id', $entity->id());
     switch ($type){
       case 'view':
-        $or = $query->orConditionGroup();
-        $or->condition('field_acc_perm_permissions', 'administer')
-           ->condition('field_acc_perm_permissions', 'edit')
-           ->condition('field_acc_perm_permissions', 'view');
+        $or = $query->orConditionGroup()
+            ->condition('field_acc_perm_permissions', 'administer')
+            ->condition('field_acc_perm_permissions', 'edit')
+            ->condition('field_acc_perm_permissions', 'view');
         $query->condition($or);
         break;
       case 'edit':
-        $or = $query->orConditionGroup();
-        $query->condition('field_acc_perm_permissions', 'administer')
-              ->condition('field_acc_perm_permissions', 'edit');
+        $or = $query->orConditionGroup()
+            ->condition('field_acc_perm_permissions', 'administer')
+            ->condition('field_acc_perm_permissions', 'edit');
         $query->condition($or);
         break;
       case 'administer':

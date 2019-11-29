@@ -8,30 +8,21 @@ use \Drupal\pece_access_permission\Controller\AccessPermissionController;
 use \Drupal\user\Entity\User;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\field\Entity\FieldConfig;
-
-/**
- * Implements hook_entity_view().
- */
-function pece_access_permission_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
-  if($entity->bundle() === 'pece_artifact_text') {
-    $accessPermission = new AccessPermissionController();
-    if(!$accessPermission->handleCanViewEdit(User::load(\Drupal::currentUser()
-      ->id()), $entity, 'view'))
-      throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
-  }
-}
+use \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use \Drupal\Core\Entity\EntityInterface;
+use \Drupal\Core\Session\AccountInterface;
 
 /**
  * Implements hook_entity_access().
  */
-/**
- * Implements hook_entity_view_alter().
- */
-/**
- * Implements hook_entity_form_display_alter().
- */
-function pece_access_permission_entity_form_display_alter(\Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display, array $context) {
-  $form_display = $form_display;
+function pece_access_permission_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  if($entity->bundle() === 'pece_artifact_text') {
+    $accessPermission = new AccessPermissionController();
+    $permission = $operation == 'view' ? $operation : $operation == 'update' ? 'edit' : null;
+    if(!$accessPermission->ifCanViewEdit(User::load(\Drupal::currentUser()
+      ->id()), $entity, $permission))
+      throw new AccessDeniedHttpException();
+  }
 }
 
 /**
@@ -44,7 +35,7 @@ function pece_access_permission_entity_form_display_alter(\Drupal\Core\Entity\Di
 /**
  * Implements hook_entity_update().
  */
-function pece_access_permission_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
+function pece_access_permission_entity_update(EntityInterface $entity) {
 
   // Only act on content entities.
   if (!($entity instanceof FieldableEntityInterface)) {
