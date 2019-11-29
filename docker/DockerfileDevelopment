@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx:1.14
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -18,7 +18,7 @@ RUN apt-get update -y && apt-get install -y \
     libpq-dev \
     vim \
     imagemagick \
-    mysql-client \
+    default-mysql-client \
     bash-completion \
     libfontconfig1 \
     bzip2 \
@@ -42,6 +42,9 @@ RUN apt-get update -y && apt-get install -y \
 RUN wget https://packages.sury.org/php/apt.gpg -O- | sudo apt-key add -
 RUN echo "deb https://packages.sury.org/php/ stretch main" | sudo tee /etc/apt/sources.list.d/php.list
 
+RUN apt-get install -y \
+    libmagickwand-dev
+
 RUN apt-get update -y && apt-get install -y \
     php7.2-fpm \
     php7.2-cli \
@@ -56,7 +59,7 @@ RUN apt-get update -y && apt-get install -y \
     php7.2-sqlite3 \
     php7.2-xmlrpc \
     php-geoip \
-    php-imagick \
+    php7.2-imagick \
     php-imap \
     php-xdebug \
     php-xml \
@@ -101,6 +104,9 @@ RUN apt-get install unzip --yes
 
 ### CONFIGURE PHP-FPM
 RUN echo "xdebug.max_nesting_level=9999" >> /etc/php/7.2/mods-available/xdebug.ini
+RUN echo "xdebug.default_enable=1" >> /etc/php/7.2/mods-available/xdebug.ini
+RUN echo "xdebug.remote_connect_back=1" >> /etc/php/7.2/mods-available/xdebug.ini
+RUN echo "xdebug.remote_enable=1" >> /etc/php/7.2/mods-available/xdebug.ini
 RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php/7.2/fpm/php.ini && \
     sed -i "s/memory_limit = 128M/memory_limit = 1256M/" /etc/php/7.2/fpm/php.ini && \
     sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/7.2/fpm/php.ini && \
