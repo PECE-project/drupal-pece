@@ -1,0 +1,52 @@
+uuid: 2e75d977-a4da-4678-8fdf-6300be60d630
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.groups.pece_group
+    - field.field.groups.pece_group.field_pece_group_members
+    - field.field.groups.pece_group.field_pece_group_owners
+  module:
+    - paragraphs
+id: groups.pece_group.default
+targetEntityType: groups
+bundle: pece_group
+mode: default
+content:
+  field_pece_group_members:
+    type: entity_reference_paragraphs
+    weight: 4
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_pece_group_owners:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

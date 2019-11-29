@@ -1,0 +1,40 @@
+uuid: 4c3c92df-b922-41e7-8f31-bfa07c705178
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_access_permissions
+    - node.type.pece_artifact_text
+    - paragraphs.paragraphs_type.paragraph_access_permission
+  module:
+    - entity_reference_revisions
+id: node.pece_artifact_text.field_pece_access_permissions
+field_name: field_pece_access_permissions
+entity_type: node
+bundle: pece_artifact_text
+label: 'Access Permissions'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      paragraph_access_permission: paragraph_access_permission
+    target_bundles_drag_drop:
+      paragraph_access_permission:
+        enabled: true
+        weight: 5
+      paragraph_content_reference:
+        weight: 6
+        enabled: false
+      paragraph_custom_reference:
+        weight: 7
+        enabled: false
+      paragraph_members:
+        weight: 8
+        enabled: false
+field_type: entity_reference_revisions

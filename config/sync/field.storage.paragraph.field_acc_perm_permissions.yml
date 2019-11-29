@@ -1,0 +1,30 @@
+uuid: eb856907-dd1e-4930-86b6-2771a48885c2
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_acc_perm_permissions
+field_name: field_acc_perm_permissions
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: administer
+      label: Administer
+    -
+      value: edit
+      label: Edit
+    -
+      value: view
+      label: View
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

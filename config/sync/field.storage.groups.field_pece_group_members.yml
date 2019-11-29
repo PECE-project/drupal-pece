@@ -1,0 +1,21 @@
+uuid: f167a0e6-f949-4b3e-8c3b-8516d7c8ca36
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - entity_reference_revisions
+    - paragraphs
+id: groups.field_pece_group_members
+field_name: field_pece_group_members
+entity_type: groups
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

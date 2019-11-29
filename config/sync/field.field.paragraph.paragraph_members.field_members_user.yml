@@ -1,0 +1,28 @@
+uuid: f4f17694-f746-44a7-ae67-b69abe4b3085
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_members_user
+    - paragraphs.paragraphs_type.paragraph_members
+id: paragraph.paragraph_members.field_members_user
+field_name: field_members_user
+entity_type: paragraph
+bundle: paragraph_members
+label: Member
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

@@ -1,0 +1,27 @@
+uuid: 22c4b5d5-7862-4d2d-b4b0-6bc4fb5f4a92
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_members_function
+field_name: field_members_function
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: researcher
+      label: Researcher
+    -
+      value: contributor
+      label: Contributor
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
