@@ -15,7 +15,7 @@ function pece_parse_yaml($input = '') {
   }
 
   // Load fallback library.
-  if ($path_to_spyc_library = libraries_get_path('spyc-master')) {
+  if ($path_to_spyc_library = libraries_get_path('spyc')) {
     include_once $path_to_spyc_library . '/Spyc.php';
   }
 
