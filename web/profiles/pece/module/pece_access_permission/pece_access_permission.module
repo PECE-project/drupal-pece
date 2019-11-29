@@ -1,0 +1,107 @@
+<?php
+/**
+ * @file
+ * Code for the PECE Access Permission.
+ */
+
+use \Drupal\pece_access_permission\Controller\AccessPermissionController;
+use \Drupal\user\Entity\User;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\field\Entity\FieldConfig;
+
+/**
+ * Implements hook_entity_view().
+ */
+function pece_access_permission_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+  if($entity->bundle() === 'pece_artifact_text') {
+    $accessPermission = new AccessPermissionController();
+    if(!$accessPermission->handleCanViewEdit(User::load(\Drupal::currentUser()
+      ->id()), $entity, 'view'))
+      throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
+  }
+}
+
+/**
+ * Implements hook_entity_access().
+ */
+/**
+ * Implements hook_entity_view_alter().
+ */
+/**
+ * Implements hook_entity_form_display_alter().
+ */
+function pece_access_permission_entity_form_display_alter(\Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display, array $context) {
+  $form_display = $form_display;
+}
+
+/**
+ * Implements hook_entity_update().
+ *
+ * When form updates, delete any paragraph entities that were removed.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+/**
+ * Implements hook_entity_update().
+ */
+function pece_access_permission_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
+
+  // Only act on content entities.
+  if (!($entity instanceof FieldableEntityInterface)) {
+    return;
+  }
+
+  $fieldManager = \Drupal::service('entity_field.manager');
+  $parentEntities = $fieldManager->getFieldMapByFieldType('entity_reference_revisions');
+
+  if (!array_key_exists($entity->getEntityTypeId(), $parentEntities)) {
+    return;
+  }
+
+  $paragraph_definitions = [];
+
+  // loop through all paragraph types
+  foreach ($parentEntities[$entity->getEntityTypeId()] as $field_id => $settings) {
+    if ($configField = FieldConfig::loadByName($entity->getEntityTypeId(), $entity->bundle(), $field_id)) {
+      $paragraph_definitions[] = $configField;
+    }
+  }
+
+  if (empty($paragraph_definitions)) {
+    return;
+  }
+
+  foreach ($paragraph_definitions as $paragraph_definition) {
+
+    //get entity type name to make it work with any kind of parent entity (node, paragraph, etc.)
+    $entityTypeName = $entity->getEntityTypeId();
+
+    // Remove orphaned paragraphs.
+    $query = \Drupal::database()->select('paragraphs_item_field_data', 'pfd')
+      ->fields('pfd', ['id'])
+      ->condition('pfd.parent_type', $entityTypeName)
+      ->condition('pfd.parent_id', $entity->id())
+      ->condition('pfd.parent_field_name', $paragraph_definition->getName());
+
+    $query->addJoin('left', $entityTypeName.'__'.$paragraph_definition->getName(),'nt','pfd.id=nt.'.$paragraph_definition->getName().'_target_id');
+    $query->isNull('nt.'.$paragraph_definition->getName().'_target_id');
+    $query->distinct();
+
+    $paragraph_ids = $query->execute()->fetchCol();
+
+    if ($paragraph_ids) {
+      $para_storage = \Drupal::entityTypeManager()->getStorage('paragraph');
+      foreach ($paragraph_ids as $paragraph_id) {
+        $paragraph = $para_storage->load($paragraph_id);
+        if ($paragraph->bundle() == 'paragraph_groups' ||
+            $paragraph->bundle() == 'paragraph_members' ||
+            $paragraph->bundle() == 'paragraph_access_permission') {
+          $paragraph->delete();
+        }
+
+      }
+    }
+
+  }
+
+}
