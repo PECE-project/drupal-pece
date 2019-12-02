@@ -18,11 +18,20 @@ use \Drupal\Core\Session\AccountInterface;
 function pece_access_permission_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
   if($entity->bundle() === 'pece_artifact_text') {
     $accessPermission = new AccessPermissionController();
-    $permission = $operation == 'view' ? $operation : $operation == 'update' ? 'edit' : null;
+    $permission = '';
+    switch ($operation) {
+      case 'update':
+      case 'view':
+      $permission = $operation;
+        break;
+      default:
+        $permission = null;
+    }
     if(!$accessPermission->ifCanViewEdit(User::load(\Drupal::currentUser()
       ->id()), $entity, $permission))
       throw new AccessDeniedHttpException();
-  }
+
+    }
 }
 
 /**
@@ -69,8 +78,8 @@ function pece_access_permission_entity_update(EntityInterface $entity) {
       foreach ($paragraph_ids as $paragraph_id) {
         $paragraph = $para_storage->load($paragraph_id);
         if ($paragraph->bundle() == 'paragraph_groups' ||
-            $paragraph->bundle() == 'paragraph_members' ||
-            $paragraph->bundle() == 'paragraph_access_permission') {
+            $paragraph->bundle() == 'paragraph_member' ||
+            $paragraph->bundle() == 'paragraph_permission') {
           $paragraph->delete();
         }
       }

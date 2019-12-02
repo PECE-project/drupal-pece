@@ -46,24 +46,24 @@ class AccessPermissionController extends ControllerBase {
    */
   public function getPermission($entity, $type){
     $query = \Drupal::entityQuery('paragraph')
-      ->condition('type', 'paragraph_access_permission')
+      ->condition('type', 'paragraph_permission')
       ->condition('parent_id', $entity->id());
     switch ($type){
       case 'view':
         $or = $query->orConditionGroup()
-            ->condition('field_acc_perm_permissions', 'administer')
-            ->condition('field_acc_perm_permissions', 'edit')
-            ->condition('field_acc_perm_permissions', 'view');
+            ->condition('field_permission_permissions', 'administer')
+            ->condition('field_permission_permissions', 'edit')
+            ->condition('field_permission_permissions', 'view');
         $query->condition($or);
         break;
       case 'edit':
         $or = $query->orConditionGroup()
-            ->condition('field_acc_perm_permissions', 'administer')
-            ->condition('field_acc_perm_permissions', 'edit');
+            ->condition('field_permission_permissions', 'administer')
+            ->condition('field_permission_permissions', 'edit');
         $query->condition($or);
         break;
       case 'administer':
-        $query->condition('field_acc_perm_permissions', 'administer');
+        $query->condition('field_permission_permissions', 'administer');
         break;
     }
     return $query->execute();
@@ -80,8 +80,8 @@ class AccessPermissionController extends ControllerBase {
    */
   public function getMembersByUser($user, $permissionIds = NULL){
     $query = \Drupal::entityQuery('paragraph')
-      ->condition('type', 'paragraph_members')
-      ->condition('field_members_user', $user->id());
+      ->condition('type', 'paragraph_member')
+      ->condition('field_member_user', $user->id());
     if (!is_null($permissionIds)) {
       $or = $query->orConditionGroup();
       foreach ($permissionIds as $parentId)
