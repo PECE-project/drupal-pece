@@ -1,26 +1,29 @@
-uuid: 22c4b5d5-7862-4d2d-b4b0-6bc4fb5f4a92
+uuid: 5c220118-6cb9-4e0e-941f-cf10096396ee
 langcode: en
 status: true
 dependencies:
   module:
     - options
     - paragraphs
-id: paragraph.field_members_function
-field_name: field_members_function
+id: paragraph.field_permission_permissions
+field_name: field_permission_permissions
 entity_type: paragraph
 type: list_string
 settings:
   allowed_values:
     -
-      value: researcher
-      label: Researcher
+      value: administer
+      label: Administer
     -
-      value: contributor
-      label: Contributor
+      value: edit
+      label: Edit
+    -
+      value: view
+      label: View
   allowed_values_function: ''
 module: options
 locked: false
-cardinality: 1
+cardinality: -1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

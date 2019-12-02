@@ -1,18 +1,18 @@
-uuid: ed039268-d73a-42b5-a3e3-054898bd47fb
+uuid: 09fd7c78-205c-459a-be9d-7d827422d33c
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_acc_perm_accesses
-    - paragraphs.paragraphs_type.paragraph_access_permission
+    - field.storage.paragraph.field_permission_accesses
     - paragraphs.paragraphs_type.paragraph_groups
-    - paragraphs.paragraphs_type.paragraph_members
+    - paragraphs.paragraphs_type.paragraph_member
+    - paragraphs.paragraphs_type.paragraph_permission
   module:
     - entity_reference_revisions
-id: paragraph.paragraph_access_permission.field_acc_perm_accesses
-field_name: field_acc_perm_accesses
+id: paragraph.paragraph_permission.field_permission_accesses
+field_name: field_permission_accesses
 entity_type: paragraph
-bundle: paragraph_access_permission
+bundle: paragraph_permission
 label: Accesses
 description: ''
 required: false
@@ -24,22 +24,22 @@ settings:
   handler_settings:
     negate: 0
     target_bundles:
+      paragraph_member: paragraph_member
       paragraph_groups: paragraph_groups
-      paragraph_members: paragraph_members
     target_bundles_drag_drop:
-      paragraph_groups:
-        enabled: true
-        weight: 6
-      paragraph_access_permission:
+      paragraph_permission:
         weight: 7
         enabled: false
       paragraph_content_reference:
-        weight: 8
-        enabled: false
-      paragraph_custom_reference:
         weight: 9
         enabled: false
-      paragraph_members:
+      paragraph_member:
         enabled: true
+        weight: 9
+      paragraph_custom_reference:
         weight: 10
+        enabled: false
+      paragraph_groups:
+        enabled: true
+        weight: 11
 field_type: entity_reference_revisions

@@ -1,30 +1,30 @@
-uuid: 11a9e297-7725-481b-bcd1-6ecb2b74dcd4
+uuid: a58c4b32-7cfe-4d96-8f3c-3a8fb5dcd276
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.paragraph_access_permission.field_acc_perm_accesses
-    - field.field.paragraph.paragraph_access_permission.field_acc_perm_permissions
-    - paragraphs.paragraphs_type.paragraph_access_permission
+    - field.field.paragraph.paragraph_permission.field_permission_accesses
+    - field.field.paragraph.paragraph_permission.field_permission_permissions
+    - paragraphs.paragraphs_type.paragraph_permission
   module:
     - entity_reference_revisions
     - options
-id: paragraph.paragraph_access_permission.default
+id: paragraph.paragraph_permission.default
 targetEntityType: paragraph
-bundle: paragraph_access_permission
+bundle: paragraph_permission
 mode: default
 content:
-  field_acc_perm_accesses:
+  field_permission_accesses:
     type: entity_reference_revisions_entity_view
-    weight: 6
+    weight: 0
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
     region: content
-  field_acc_perm_permissions:
-    weight: 0
+  field_permission_permissions:
+    weight: 1
     label: above
     settings: {  }
     third_party_settings: {  }

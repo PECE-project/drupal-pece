@@ -1,15 +1,15 @@
-uuid: f71d3439-d32b-415a-84bb-c65bda6eb532
+uuid: 8138b2c8-cf11-4504-aa97-af34bea28f5b
 langcode: en
 status: true
 dependencies:
   config:
-    - eck.eck_type.groups.pece_group
-    - field.storage.groups.field_pece_group_owners
-id: groups.pece_group.field_pece_group_owners
-field_name: field_pece_group_owners
-entity_type: groups
-bundle: pece_group
-label: Owners
+    - field.storage.paragraph.field_member_user
+    - paragraphs.paragraphs_type.paragraph_member
+id: paragraph.paragraph_member.field_member_user
+field_name: field_member_user
+entity_type: paragraph
+bundle: paragraph_member
+label: Member
 description: ''
 required: false
 translatable: false

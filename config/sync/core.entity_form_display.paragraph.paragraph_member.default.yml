@@ -1,24 +1,24 @@
-uuid: b0b05102-576a-4634-bd76-2bbd553ed893
+uuid: 2150cc84-ae81-4c06-b91c-1d57952ba638
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.paragraph_members.field_members_function
-    - field.field.paragraph.paragraph_members.field_members_user
-    - paragraphs.paragraphs_type.paragraph_members
-id: paragraph.paragraph_members.default
+    - field.field.paragraph.paragraph_member.field_member_function
+    - field.field.paragraph.paragraph_member.field_member_user
+    - paragraphs.paragraphs_type.paragraph_member
+id: paragraph.paragraph_member.default
 targetEntityType: paragraph
-bundle: paragraph_members
+bundle: paragraph_member
 mode: default
 content:
-  field_members_function:
-    weight: 1
+  field_member_function:
+    weight: 0
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
-  field_members_user:
-    weight: 0
+  field_member_user:
+    weight: 1
     settings:
       match_operator: CONTAINS
       size: 60

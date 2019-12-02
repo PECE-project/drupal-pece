@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_pece_access_permissions
     - node.type.pece_artifact_text
-    - paragraphs.paragraphs_type.paragraph_access_permission
+    - paragraphs.paragraphs_type.paragraph_permission
   module:
     - entity_reference_revisions
 id: node.pece_artifact_text.field_pece_access_permissions
@@ -23,18 +23,21 @@ settings:
   handler_settings:
     negate: 0
     target_bundles:
-      paragraph_access_permission: paragraph_access_permission
+      paragraph_permission: paragraph_permission
     target_bundles_drag_drop:
-      paragraph_access_permission:
-        enabled: true
-        weight: 5
       paragraph_content_reference:
         weight: 6
         enabled: false
       paragraph_custom_reference:
         weight: 7
         enabled: false
+      paragraph_groups:
+        weight: 8
+        enabled: false
       paragraph_members:
         weight: 8
         enabled: false
+      paragraph_permission:
+        enabled: true
+        weight: 10
 field_type: entity_reference_revisions
