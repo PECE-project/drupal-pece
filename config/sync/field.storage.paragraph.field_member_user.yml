@@ -1,0 +1,20 @@
+uuid: 4f56bee4-98ce-4d0b-a707-cefa8830321f
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - user
+id: paragraph.field_member_user
+field_name: field_member_user
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: user
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

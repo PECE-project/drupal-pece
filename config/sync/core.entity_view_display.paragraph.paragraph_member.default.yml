@@ -1,0 +1,32 @@
+uuid: 9baa8e3c-8260-402a-81c6-07092aecbcdb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_member.field_member_function
+    - field.field.paragraph.paragraph_member.field_member_user
+    - paragraphs.paragraphs_type.paragraph_member
+  module:
+    - options
+id: paragraph.paragraph_member.default
+targetEntityType: paragraph
+bundle: paragraph_member
+mode: default
+content:
+  field_member_function:
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_member_user:
+    weight: 1
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,45 @@
+uuid: 09fd7c78-205c-459a-be9d-7d827422d33c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_permission_accesses
+    - paragraphs.paragraphs_type.paragraph_groups
+    - paragraphs.paragraphs_type.paragraph_member
+    - paragraphs.paragraphs_type.paragraph_permission
+  module:
+    - entity_reference_revisions
+id: paragraph.paragraph_permission.field_permission_accesses
+field_name: field_permission_accesses
+entity_type: paragraph
+bundle: paragraph_permission
+label: Accesses
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      paragraph_member: paragraph_member
+      paragraph_groups: paragraph_groups
+    target_bundles_drag_drop:
+      paragraph_permission:
+        weight: 7
+        enabled: false
+      paragraph_content_reference:
+        weight: 9
+        enabled: false
+      paragraph_member:
+        enabled: true
+        weight: 9
+      paragraph_custom_reference:
+        weight: 10
+        enabled: false
+      paragraph_groups:
+        enabled: true
+        weight: 11
+field_type: entity_reference_revisions
