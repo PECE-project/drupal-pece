@@ -5,20 +5,13 @@ dependencies:
   config:
     - field.field.node.pece_artifact_text.body
     - field.field.node.pece_artifact_text.field_pece_access_permissions
-    - field.field.node.pece_artifact_text.field_pece_authors
-    - field.field.node.pece_artifact_text.field_pece_contributors
     - field.field.node.pece_artifact_text.field_pece_crit_commentary
-    - field.field.node.pece_artifact_text.field_pece_fieldsite
     - field.field.node.pece_artifact_text.field_pece_language
-    - field.field.node.pece_artifact_text.field_pece_location
-    - field.field.node.pece_artifact_text.field_pece_researchers
     - field.field.node.pece_artifact_text.field_pece_source
-    - field.field.node.pece_artifact_text.field_pece_tags
     - field.field.node.pece_artifact_text.field_pece_thumbnail
     - field.field.node.pece_artifact_text.field_pece_uri
     - field.field.node.pece_artifact_text.field_pece_use_fieldsite_local
     - field.field.node.pece_artifact_text.field_permissions
-    - field.field.node.pece_artifact_text.og_audience
     - node.type.pece_artifact_text
   module:
     - entity_reference_revisions
@@ -112,12 +105,4 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
-  field_pece_authors: true
-  field_pece_contributors: true
-  field_pece_fieldsite: true
-  field_pece_location: true
-  field_pece_researchers: true
-  field_pece_tags: true
   langcode: true
-  og_audience: true
-  search_api_excerpt: true
