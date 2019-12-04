@@ -152,6 +152,31 @@ function profile2_menu() {
 }
 
 /**
+ * Implements hook_menu_local_tasks_alter().
+ *
+ * Adds a local task to the profiles admin page to jump to permissions for profiles.
+ */
+function profile2_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  if ($root_path == 'admin/structure/profiles') {
+    $item = menu_get_item('admin/people/permissions');
+    if ($item['access']) {
+      $item['title'] = t('Manage permissions');
+      if (module_exists('filter_perms')) {
+        $item['href'] .= '/module-profile2';
+      }
+      else {
+        $item['localized_options']['fragment'] = 'module-profile2';
+      }
+      $item['weight'] = 3;
+      $data['actions']['output'][] = array(
+        '#theme' => 'menu_local_action',
+        '#link' => $item,
+      );
+    }
+  }
+}
+
+/**
  * Implements hook_permission().
  */
 function profile2_permission() {
