@@ -80,3 +80,10 @@ function _pece_design_logic_install_permissions() {
     ),
   ));
 }
+
+/**
+ * Create design logic items using kraftwagen itemnames.
+ */
+function pece_design_logic_update_7601(){
+  _pece_design_logic_install_design_logic_items();
+}
