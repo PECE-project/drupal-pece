@@ -26,10 +26,13 @@ distro-install:
 	docker-compose -f services-drupal.yml run --rm install
 
 nuxt-install:
-	docker-compose -f services-nuxt.yml run --rm install
+	cd $(FRONT_DIR) && make install
 
 nuxt-build:
-	docker-compose -f services-nuxt.yml run --rm build
+	cd $(FRONT_DIR) && make build
 
 nuxt-lint:
-	docker-compose -f services-nuxt.yml run --rm lint
+	cd $(FRONT_DIR) && make lint
+
+nuxt-run:
+	cd $(FRONT_DIR) && make run
