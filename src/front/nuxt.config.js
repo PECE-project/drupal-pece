@@ -1,24 +1,19 @@
-const path = require('path')
 require('dotenv').config()
+const path = require('path')
+const devServer = require(path.resolve(__dirname, 'config/devServer'))
+const modules = require(path.resolve(__dirname, 'config/modules'))
+const i18n = require(path.resolve(__dirname, 'config/i18n'))
+const head = require(path.resolve(__dirname, 'config/head'))
 
 module.exports = {
+  /*
+   ** Universal: Client-side and Server-side rendering
+   */
   mode: 'universal',
   /*
    ** Headers of the page
    */
-  head: {
-    title: process.env.npm_package_name || '',
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      {
-        hid: 'description',
-        name: 'description',
-        content: process.env.npm_package_description || ''
-      }
-    ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
-  },
+  head,
   /*
    ** Customize the progress-bar color
    */
@@ -51,35 +46,7 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    // Doc: https://github.com/nuxt-community/pwa-module
-    ['@nuxtjs/pwa', { icon: false }],
-    // Doc: https://github.com/nuxt-community/apollo-module
-    '@nuxtjs/apollo',
-    // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv',
-    // Doc: https://github.com/nuxt-community/svg-sprite-module
-    '@nuxtjs/svg-sprite',
-    // Doc: https://github.com/nuxt-community/sitemap-module
-    '@nuxtjs/sitemap',
-    // Doc: https://github.com/nuxt-community/modules/tree/master/packages/browserconfig
-    '@nuxtjs/browserconfig',
-    // Doc: https://github.com/nuxt-community/webpackmonitor-module
-    '@nuxtjs/webpackmonitor',
-    // Doc: https://github.com/nuxt-community/style-resources-module#setup
-    '@nuxtjs/style-resources',
-    // Doc: https://nuxt-community.github.io/nuxt-i18n/
-    'nuxt-i18n',
-    // Doc: https://github.com/nuxt-community/modules/tree/master/packages/component-cache
-    [
-      '@nuxtjs/component-cache',
-      {
-        maxAge: 1000 * 60 * 60
-      }
-    ]
-  ],
+  modules,
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -126,40 +93,16 @@ module.exports = {
     TileColor: '#6c6fd4'
   },
   /*
-   ** i18n
-   ** See https://github.com/nuxt-community/nuxt-i18n
-   ** See https://github.com/nuxt-community/nuxt-i18n
+   ** Internacionalization
    */
-  i18n: {
-    seo: false,
-    defaultLocale: process.env.NUXT_MODULE_i18N_DEFAULT_LOCALE,
-    lazy: true,
-    langDir: 'lang/',
-    locales: [
-      {
-        code: 'en',
-        iso: 'en-US',
-        file: 'en-US.js'
-      },
-      {
-        code: 'pt',
-        iso: 'pt-BR',
-        file: 'pt-BR.js'
-      }
-    ]
-  },
+  i18n,
   /*
    ** Build configuration
    */
+  server: devServer.server,
+  watchers: devServer.watchers,
   buildDir: path.resolve(__dirname, 'dist'),
-  server: {
-    host: process.env.NUXT_HOST || '0.0.0.0',
-    port: process.env.NUXT_PORT || 5000
-  },
   build: {
-    /*
-     ** You can extend webpack config here
-     */
     extend (config, ctx) {}
   }
 }

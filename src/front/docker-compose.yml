@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  front:
+    image: wodby/node:$NODE_TAG
+    container_name: front
+    working_dir: /home/node/app
+    environment:
+      - NUXT_PORT:$NUXT_PORT
+    volumes:
+      - ./:/home/node/app
+    restart: unless-stopped
+    command: npm run start
+    labels:
+      - 'traefik.port=5000'
+      - 'traefik.enable=true'
+      - 'traefik.backend=node'
+      - 'traefik.frontend.priority = 10'
+      - 'traefik.frontend.rule=Host:front.${PROJECT_BASE_URL}'
+
+  traefik:
+    image: traefik:v1.7.16-alpine
+    container_name: traefik
+    command: --web --docker --logLevel=INFO
+    ports:
+      - '80:80'
+      - '5000:5000'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
