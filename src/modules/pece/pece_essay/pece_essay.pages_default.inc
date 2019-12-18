@@ -32,17 +32,6 @@ function pece_essay_default_page_manager_pages() {
         ),
         'not' => FALSE,
       ),
-      1 => array(
-        'name' => 'node_access',
-        'settings' => array(
-          'type' => 'update',
-        ),
-        'context' => array(
-          0 => 'logged-in-user',
-          1 => 'argument_entity_id:node_1',
-        ),
-        'not' => FALSE,
-      ),
     ),
   );
 
