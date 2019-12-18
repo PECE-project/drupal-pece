@@ -1,5 +1,5 @@
 <template>
-  <div class="VueToNuxtLogo">
+  <div class="VueToNuxtLogo" data-pece="logo">
     <div class="Triangle Triangle--two" />
     <div class="Triangle Triangle--one" />
     <div class="Triangle Triangle--three" />

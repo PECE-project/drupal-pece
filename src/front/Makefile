@@ -1,5 +1,7 @@
 include .env
 
+.PHONY: test lint install build e2e e2e-open
+
 stop:
 	docker-compose stop
 
@@ -17,6 +19,15 @@ build:
 
 lint:
 	docker-compose -f services-nuxt.yml run --rm lint
+
+test:
+	docker-compose -f services-nuxt.yml run --rm test
+
+e2e:
+	docker-compose -f services-nuxt.yml run --rm e2e
+
+e2e-open:
+	docker-compose -f services-nuxt.yml run --rm e2e_open
 
 logs:
 	docker-compose logs -f front

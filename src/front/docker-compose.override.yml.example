@@ -6,7 +6,7 @@ services:
     container_name: front
     working_dir: /home/node/app
     environment:
-      - NUXT_PORT:$NUXT_PORT
+      NUXT_PORT: $NUXT_PORT
     volumes:
       - ./:/home/node/app
     restart: unless-stopped
