@@ -472,6 +472,9 @@ function pece_access_node_access($node, $op, $account) {
 
     $permission = field_get_items('node', $node, 'field_permissions');
 
+    if (!is_null($permission) && $permission[0]['value'] == 'open' && $op == 'view')
+      return NODE_ACCESS_ALLOW;
+
     if (!is_null($permission) && $permission[0]['value'] == 'private')
       return NODE_ACCESS_DENY;
 
