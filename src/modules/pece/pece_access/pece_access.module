@@ -446,11 +446,11 @@ function pece_access_allow_contibutors_edit_content(&$perms, $context) {
 
 /**
  *  Implements node access to PECE Essay control access with this rules
- *    - All private content can only accessed by the owner (need works)
+ *    - All private content can only accessed by the owner
  *    - Restrict content
  *        Owner: view, update and delete
  *        Contributor: view, update
- *        Anonymous: nothing (need works)
+ *        Anonymous: nothing
  *    - Open content
  *        Owner: view, update and delete
  *        Contributor: view, update
@@ -485,7 +485,6 @@ function pece_access_node_access($node, $op, $account) {
           return NODE_ACCESS_ALLOW;
         }
       }
-
     }
   }
 
