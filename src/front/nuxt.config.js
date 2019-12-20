@@ -75,7 +75,7 @@ module.exports = {
    */
   styleResources: {
     scss: [
-      './assets/styles/library/settings/*.scss'
+      './assets/styles/settings/*.scss'
     ]
   },
   /*
