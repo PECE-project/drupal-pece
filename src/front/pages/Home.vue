@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <div>
+    <div class="bg-black p-10 rounded-lg">
       <logo />
-      <h1 class="title">
+      <h1 class="title text-white">
         V2 PECE
       </h1>
-      <h2 class="subtitle">
+      <h2 class="subtitle text-white">
         {{ $t('description') }}
       </h2>
       <div class="links">

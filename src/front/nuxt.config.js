@@ -2,6 +2,7 @@ require('dotenv').config()
 const path = require('path')
 const devServer = require(path.resolve(__dirname, 'config/devServer'))
 const modules = require(path.resolve(__dirname, 'config/modules'))
+const plugins = require(path.resolve(__dirname, 'config/plugins'))
 const i18n = require(path.resolve(__dirname, 'config/i18n'))
 const head = require(path.resolve(__dirname, 'config/head'))
 
@@ -25,22 +26,19 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    // Doc: https://github.com/vuejs/composition-api
-    './plugins/composition-api',
-    // Doc: https://github.com/vue-a11y/vue-announcer
-    { src: './plugins/a11y/vue-announcer', mode: 'client' },
-    // Doc: https://github.com/vue-a11y/vue-skip-to
-    { src: './plugins/a11y/vue-skip-to', mode: 'client' },
-    // Doc: https://github.com/vue-a11y/vue-axe
-    { src: './plugins/a11y/vue-axe', mode: 'client' },
-  ],
+  plugins,
+  /*
+   ** Nuxt.js modules
+   */
+  modules,
   /*
    ** Nuxt.js dev-modules
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
+    // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
+    '@nuxtjs/tailwindcss',
     // Doc: https://github.com/nuxt-community/router-module
     [
       '@nuxtjs/router',
@@ -51,9 +49,11 @@ module.exports = {
     ]
   ],
   /*
-   ** Nuxt.js modules
+   ** Tailwind CSS config
    */
-  modules,
+  tailwindcss: {
+    cssPath: '~/assets/styles/tailwind.css'
+  },  
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
