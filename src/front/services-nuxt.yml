@@ -40,6 +40,15 @@ services:
     networks:
       - pece
 
+  unit_single:
+    image: wodby/node:$NODE_TAG
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: npm run test:single $FILE_MATCH
+    networks:
+      - pece
+
   e2e:
     image: cypress/included:3.8.0
     working_dir: /home/node/app

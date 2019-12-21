@@ -2,6 +2,8 @@ include .env
 
 .PHONY: test lint install build e2e e2e-open
 
+FILE_MATCH?=
+
 stop:
 	docker-compose stop
 
@@ -22,6 +24,9 @@ lint:
 
 test:
 	docker-compose -f services-nuxt.yml run --rm test
+
+test-single:
+	docker-compose -f services-nuxt.yml run --rm unit_single
 
 e2e:
 	docker-compose -f services-nuxt.yml run --rm e2e
