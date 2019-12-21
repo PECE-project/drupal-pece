@@ -11,6 +11,7 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "test": "jest",
+    "test:single": "jest -t",
     "e2e": "./node_modules/.bin/cypress run --headless",
     "e2e:open": "./node_modules/.bin/cypress open"
   },
@@ -47,12 +48,12 @@
     "babel-jest": "^24.1.0",
     "cypress": "^3.8.0",
     "eslint": "^6.1.0",
+    "eslint-plugin-import-helpers": "^1.0.2",
     "eslint-plugin-nuxt": ">=0.4.2",
     "eslint-plugin-vue-a11y": "0.0.31",
     "jest": "^24.1.0",
     "node-sass": "^4.12.0",
     "nodemon": "^1.18.9",
-    "prettier": "^1.16.4",
     "sass-loader": "^8.0.0",
     "vue-jest": "^4.0.0-0"
   }
