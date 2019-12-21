@@ -34,7 +34,6 @@ function pece_essay_default_page_manager_pages() {
       ),
     ),
   );
-
   $page->menu = array();
   $page->arguments = array(
     'node' => array(
