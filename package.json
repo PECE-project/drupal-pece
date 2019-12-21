@@ -8,10 +8,12 @@
   },
   "scripts": {
     "test": "gulp test:e2e",
+    "cypress:open": "cypress open",
     "install": "gulp install",
     "pack-distro": "gulp pack-distro"
   },
   "devDependencies": {
+    "cypress": "^3.8.0",
     "drupal-seeds": "git+https://github.com/lucasconstantino/drupal-seeds-client.git",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^3.0.2",
