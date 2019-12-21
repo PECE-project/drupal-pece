@@ -266,7 +266,7 @@ function pece_essay_field_default_field_instances() {
     'settings' => array(
       'nodeaccess_userreference' => array(
         'all' => array(
-          'view' => 'view',
+          'view' => 0,
         ),
         'all_published' => 0,
         'author' => array(
