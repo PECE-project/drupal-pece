@@ -53,7 +53,7 @@ module.exports = {
    */
   tailwindcss: {
     cssPath: '~/assets/styles/tailwind.css'
-  },  
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
