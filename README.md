@@ -205,6 +205,15 @@ Alternatively, you can do it in your browser by accessing Configuration > Develo
 
 ## Running the tests
 
+### Requirements
+- User: admin
+- Passwords: `123456789`
+
+```sh 
+npm run cypress:open
+```
+Click on the test you want to run.
+
 TODO
 
 ## Deployment
