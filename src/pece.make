@@ -381,6 +381,8 @@ projects[media][subdir] = contrib
 ; Overrides Panopoly's link.
 projects[link][version] = 1.6
 projects[link][subdir] = contrib
+; Fix URL validation rejects existing valid content after upgrade to 7.x-1.4.
+projects[link][patch][2666912] = https://www.drupal.org/files/issues/2019-01-24/link-revert_url_validation-2666912-7.x-1.5.patch
 
 ; Overrides Panopoly's linkit.
 projects[linkit][version] = 3.5
