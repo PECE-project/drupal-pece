@@ -100,7 +100,7 @@ context('Permissions', () => {
       cy.createContent('/node/add/pece-essay', [
         'input[name=title]:type:' + title,
         '#edit-field-pece-contributors-und-0-target-id:type:cy_contributor',
-        '#edit-field-permissions-und-private:check:open'
+        '#edit-field-permissions-und-open:check:open'
       ], () => {
         cy.type_tinyMCE('edit-body-und-0-value', "<p>Test open content with no group</p>")
       })
