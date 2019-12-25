@@ -6,6 +6,9 @@ Cypress.Commands.add("type_tinyMCE", (element, content) => {
 });
 
 Cypress.Commands.add('createUser', (name, role = null,password = '123456789') => {
+  if(name == 'anonymous')
+    return
+
   cy.login('admin')
   cy.visit('/admin/people/create')
   cy.get('#edit-name').type('cy_' + name)
@@ -19,6 +22,8 @@ Cypress.Commands.add('createUser', (name, role = null,password = '123456789') =>
 })
 
 Cypress.Commands.add('deleteUser', (name) => {
+  if(name == 'anonymous')
+    return
   cy.login('admin')
   cy.visit('/admin/people')
   cy.get('.views-table a').contains('cy_' + name).parent().parent().contains('Cancel account').click()
@@ -27,6 +32,8 @@ Cypress.Commands.add('deleteUser', (name) => {
 })
 
 Cypress.Commands.add('login', (user, password = '123456789') => {
+  if(name == 'anonymous')
+    return
   user = user == 'admin' ? user : 'cy_' + user
   cy.visit('/user/login')
   cy.get('input[name=name]').type(user)
