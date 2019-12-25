@@ -82,8 +82,8 @@ libraries[bgrins-spectrum][download][url] =  https://github.com/bgrins/spectrum/
 ; Overrides Panopoly's Ctools to apply custom patches.
 projects[ctools][version] = 1.15
 projects[ctools][subdir] = contrib
-; Panopoly's patch.
-projects[ctools][patch][1907256] = "https://www.drupal.org/files/issues/2018-03-26/views_panes-more_link_text-1000146-28.patch"
+; Edit text of "More Link" from Panel config.
+projects[ctools][patch][1000146] = "https://www.drupal.org/files/issues/2018-03-26/views_panes-more_link_text-1000146-28.patch"
 ; Fix PECE Annotation Save&Continue issue.
 projects[ctools][patch][1907256] = "https://www.drupal.org/files/issues/2018-05-23/ctools-modal-1907256-9.patch"
 ; @TODO: Update and reapply the following patch if needed. @see https://www.drupal.org/project/ctools/issues/2671150
@@ -123,8 +123,9 @@ projects[yaml_parser][subdir] = contrib
 ; Overrides panopoly's views to apply custom patches.
 projects[views][version] = 3.23
 projects[views][subdir] = contrib
-; Applies Panopoly's specific patches.
+; Exposed Sort By and Sort Order view pane settings not retained.
 projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
+; PHP 7.2: count() on non-Countable in views_many_to_one_helper.
 projects[views][patch][2977851] = https://www.drupal.org/files/issues/2019-03-13/2977851-views-php72-count-8.patch
 
 projects[views_infinite_scroll][version] = 2.1
@@ -231,16 +232,19 @@ projects[username_enumeration_prevention][version] = 1.2
 ; Overrides Panopoly's panelizer.
 projects[panelizer][version] = 3.4
 projects[panelizer][subdir] = contrib
+; Add entity object to hook_panelizer_access.
 projects[panelizer][patch][2812807] = https://www.drupal.org/files/issues/panelizer--2812807--provide-entity-on-access-hooks.patch
-; Panopoly's v1.57 patches.
+; Cannot import exported Panelizer permissions using Features/defaultconfig if handler cache is stale.
 projects[panelizer][patch][1549608] = https://www.drupal.org/files/issues/panelizer-n1549608-26.patch
+; Allow anyone with 'administer panelizer' to edit Panelizer defaults.
 projects[panelizer][patch][2788851] = https://www.drupal.org/files/issues/panelizer-administer-panelizer-2788851-2.patch
 
 ; Overrides panopoly's panels.
 projects[panels][version] = 3.9
 projects[panels][subdir] = contrib
-; Panopoly's v1.57 patches.
+; Add a button for adding CSS id or CSS class for a region in IPE.
 projects[panels][patch][1570120] = https://www.drupal.org/files/issues/move-image-1570120-31.patch
+; Menu blocks disappear when editing/saving in the Panels IPE.
 projects[panels][patch][2897658] = https://www.drupal.org/files/issues/panels-menu-block-ipe-2897658-3.patch
 
 projects[fieldable_panels_panes][version] = 1.13
@@ -255,40 +259,40 @@ projects[panels_mini_ipe][subdir] = contrib
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_admin][version] = 1.70
+projects[panopoly_admin][version] = 1.71
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_core][version] = 1.70
+projects[panopoly_core][version] = 1.71
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.70
+projects[panopoly_images][version] = 1.71
 projects[panopoly_images][subdir] = contrib
 
-projects[panopoly_magic][version] = 1.70
+projects[panopoly_magic][version] = 1.71
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_theme][version] = 1.70
+projects[panopoly_theme][version] = 1.71
 projects[panopoly_theme][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.70
+projects[panopoly_widgets][version] = 1.71
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_users][version] = 1.70
+projects[panopoly_users][version] = 1.71
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.70
+projects[panopoly_pages][version] = 1.71
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_search][version] = 1.70
+projects[panopoly_search][version] = 1.71
 projects[panopoly_search][subdir] = contrib
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
 
-projects[panopoly_wysiwyg][version] = 1.70
+projects[panopoly_wysiwyg][version] = 1.71
 projects[panopoly_wysiwyg][subdir] = contrib
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.70
+projects[panopoly_test][version] = 1.71
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
@@ -377,10 +381,13 @@ projects[media][subdir] = contrib
 ; Overrides Panopoly's link.
 projects[link][version] = 1.6
 projects[link][subdir] = contrib
+; Fix URL validation rejects existing valid content after upgrade to 7.x-1.4.
+projects[link][patch][2666912] = https://www.drupal.org/files/issues/2019-01-24/link-revert_url_validation-2666912-7.x-1.5.patch
 
 ; Overrides Panopoly's linkit.
 projects[linkit][version] = 3.5
 projects[linkit][subdir] = contrib
+; Allow Linkit support for any eligible element type.
 projects[linkit][patch][2651404] = https://www.drupal.org/files/issues/linkit-add-to-any-element-2651404-3.patch
 
 projects[languagefield][version] = 1.7
