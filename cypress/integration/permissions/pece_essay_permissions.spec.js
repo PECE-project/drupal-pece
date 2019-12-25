@@ -1,3 +1,6 @@
+/// <reference types="Cypress" />
+/// <reference types="../support" />
+
 function testNoAccess(url) {
   cy.request({
     url: url,
