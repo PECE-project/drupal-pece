@@ -125,6 +125,65 @@ context('Permissions', () => {
     })
   })
 
+  describe('Test restricted PECE Essay', () => {
+
+    let title = "Restricted Contributor No Group cy"
+    let path = "/content/restricted-contributor-no-group-cy"
+
+    it('create a restricted PECE Essay content ', () => {
+      cy.login('editor')
+      cy.createContent('/node/add/pece-essay', [
+        'input[name=title]:type:' + title,
+        '#edit-field-pece-contributors-und-0-target-id:type:cy_contributor',
+        '#edit-field-permissions-und-restricted:check:restricted'
+      ], () => {
+        cy.type_tinyMCE('edit-body-und-0-value', "<p>Test restricted content with no group</p>")
+      })
+    })
+
+    it("anonymous user can't access this content", () => {
+      testNoAccess(path)
+      testNoAccess(path + '/essay')
+    })
+
+    it('authenticated user can\'t access this content', () => {
+      cy.login('user')
+      testNoAccess(path)
+      testNoAccess(path + '/essay')
+    })
+
+    it('research user can access this content', () => {
+      cy.login('researcher')
+      testAccess(path)
+      testAccess(path + '/essay')
+    })
+
+    it('contributor user can access this content', () => {
+      cy.login('contributor')
+      testAccess(path)
+      testAccess(path + '/essay')
+    })
+
+    it('contributor user can access in panels editor', () => {
+      cy.login('contributor')
+      cy.visit(path + "/essay")
+      cy.contains('Customize this page').click()
+      cy.contains('Save as custom')
+      cy.contains('Cancel')
+    })
+
+    it('owner can view and edit this content', () => {
+      cy.login('editor')
+      testAccess(path)
+      testAccess(path + '/essay')
+    })
+
+    it('delete an open PECE Essay content', () => {
+      cy.login('admin')
+      cy.deleteContent(title)
+    })
+  })
+
   describe ('Delete users after tests', () => {
     users.forEach((user) => {
       it('delete user: ' + user.username,  () => {
