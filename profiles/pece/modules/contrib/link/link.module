@@ -339,7 +339,7 @@ function link_field_validate($entity_type, $entity, $field, $instance, $langcode
  */
 function link_field_insert($entity_type, $entity, $field, $instance, $langcode, &$items) {
   foreach ($items as $delta => $value) {
-    _link_process($items[$delta], $delta, $field, $entity, $instance);
+    _link_process($items[$delta], $delta, $field, $entity);
   }
 }
 
@@ -348,7 +348,7 @@ function link_field_insert($entity_type, $entity, $field, $instance, $langcode, 
  */
 function link_field_update($entity_type, $entity, $field, $instance, $langcode, &$items) {
   foreach ($items as $delta => $value) {
-    _link_process($items[$delta], $delta, $field, $entity, $instance);
+    _link_process($items[$delta], $delta, $field, $entity);
   }
 }
 
@@ -428,12 +428,10 @@ function _link_load($field, $item, $instance) {
  *   The field structure array.
  * @param object $entity
  *   Entity object.
- * @param array $instance
- *   The instance structure for $field on $entity's bundle.
  *
  * @codingStandardsIgnoreStart
  */
-function _link_process(&$item, $delta, $field, $entity, $instance) {
+function _link_process(&$item, $delta, $field, $entity) {
   // @codingStandardsIgnoreEnd
   // Trim whitespace from URL.
   if (!empty($item['url'])) {
@@ -453,8 +451,7 @@ function _link_process(&$item, $delta, $field, $entity, $instance) {
 
   // Don't save an invalid default value (e.g. 'http://').
   if ((isset($field['widget']['default_value'][$delta]['url']) && $item['url'] == $field['widget']['default_value'][$delta]['url']) && is_object($entity)) {
-    $langcode = !empty($entity) ? field_language($instance['entity_type'], $entity, $instance['field_name']) : LANGUAGE_NONE;
-    if (!link_validate_url($item['url'], $langcode)) {
+    if (!link_validate_url($item['url'])) {
       unset($item['url']);
     }
   }
@@ -466,7 +463,7 @@ function _link_process(&$item, $delta, $field, $entity, $instance) {
 function _link_validate(&$item, $delta, $field, $entity, $instance, $langcode, &$optional_field_found, &$errors) {
   if ($item['url'] && !(isset($instance['default_value'][$delta]['url']) && $item['url'] === $instance['default_value'][$delta]['url'] && !$instance['required'])) {
     // Validate the link.
-    if (!link_validate_url(trim($item['url']), $langcode)) {
+    if (!link_validate_url(trim($item['url']))) {
       $errors[$field['field_name']][$langcode][$delta][] = array(
         'error' => 'link_required',
         'message' => t('The value %value provided for %field is not a valid URL.', array(
@@ -555,7 +552,7 @@ function _link_sanitize(&$item, $delta, &$field, $instance, &$entity) {
     }
   }
 
-  $type = link_url_type($item['url']);
+  $type = link_validate_url($item['url']);
   // If the type of the URL cannot be determined and URL validation is disabled,
   // then assume LINK_EXTERNAL for later processing.
   if ($type == FALSE && $instance['settings']['validate_url'] === 0) {
@@ -1328,7 +1325,7 @@ function link_views_api() {
  */
 function link_cleanup_url($url, $protocol = 'http') {
   $url = trim($url);
-  $type = link_url_type($url);
+  $type = link_validate_url($url);
 
   if ($type === LINK_EXTERNAL) {
     // Check if there is no protocol specified.
@@ -1345,48 +1342,6 @@ function link_cleanup_url($url, $protocol = 'http') {
   }
 
   return $url;
-}
-
-/**
- * Validates a URL.
- *
- * @param string $text
- *   Url to be validated.
- * @param string $langcode
- *   An optional language code to look up the path in.
- *
- * @return bool
- *   True if a valid link, FALSE otherwise.
- */
-function link_validate_url($text, $langcode = NULL) {
-
-  $text = _link_clean_relative($text);
-  $text = link_cleanup_url($text);
-  $type = link_url_type($text);
-
-  if ($type && ($type == LINK_INTERNAL || $type == LINK_EXTERNAL)) {
-    $flag = valid_url($text, TRUE);
-    if (!$flag) {
-      $normal_path = drupal_get_normal_path($text, $langcode);
-      $parsed_link = parse_url($normal_path, PHP_URL_PATH);
-      if ($normal_path != $parsed_link) {
-        $normal_path = $parsed_link;
-      }
-      $flag = drupal_valid_path($normal_path);
-    }
-    if (!$flag) {
-      $flag = file_exists($normal_path);
-    }
-    if (!$flag) {
-      $uri = file_build_uri($normal_path);
-      $flag = file_exists($uri);
-    }
-  }
-  else {
-    $flag = (bool) $type;
-  }
-
-  return $flag;
 }
 
 /**
@@ -1415,19 +1370,19 @@ function _link_clean_relative($url) {
 }
 
 /**
- * Type check a URL.
+ * Validates a URL.
  *
  * Accepts all URLs following RFC 1738 standard for URL formation and all e-mail
  * addresses following the RFC 2368 standard for mailto address formation.
  *
  * @param string $text
- *   Url to be checked.
+ *   Url to be validated.
  *
  * @return mixed
  *   Returns boolean FALSE if the URL is not valid. On success, returns one of
  *   the LINK_(linktype) constants.
  */
-function link_url_type($text) {
+function link_validate_url($text) {
   // @TODO Complete letters.
   // @codingStandardsIgnoreStart
   $link_ichars_domain = (string) html_entity_decode(implode("", array(
