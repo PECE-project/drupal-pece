@@ -115,9 +115,8 @@ context('Permissions', () => {
       cy.login('contributor')
       cy.visit(path + "/essay")
       cy.contains('Customize this page').click()
-      cy.contains('Save')
+      cy.contains('Save as custom')
       cy.contains('Cancel')
-      cy.contains('Revert to PECE Essay default')
     })
 
     it('delete an open PECE Essay content', () => {
