@@ -20,6 +20,19 @@ function pece_essay_default_page_manager_pages() {
   $page->access = array(
     'type' => 'none',
     'settings' => NULL,
+    'plugins' => array(
+      0 => array(
+        'name' => 'node_access',
+        'settings' => array(
+          'type' => 'view',
+        ),
+        'context' => array(
+          0 => 'logged-in-user',
+          1 => 'argument_entity_id:node_1',
+        ),
+        'not' => FALSE,
+      ),
+    ),
   );
   $page->menu = array();
   $page->arguments = array(
