@@ -66,6 +66,7 @@ There are two options, instead of integrating with the user account page.
 These options are mutually exclusive, but are set per profile type, so different
 profiles can display in different ways.
 
+New in version 7.x-1.7:
 If mode 1 is chosen, there is an addtional option to allow the profile title
 to be edited directly in the profile edit form. In this case, the profile
 title is displayed directly, and overrides the generated title described above.
@@ -74,7 +75,7 @@ title is displayed directly, and overrides the generated title described above.
 Installation
 -------------
 
- * Once profile2 is installed, just active the Profile2-pages module.
+ * Once profile2 is installed, just enable the "Profile2 pages" sub-module.
 
 
 Usage
