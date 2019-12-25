@@ -48,7 +48,7 @@ context('Permissions', () => {
       cy.login('editor')
       cy.createContent('/node/add/pece-essay', [
         'input[name=title]:type:' + title,
-        '#edit-field-pece-contributors-und-0-target-id:type:contributor',
+        '#edit-field-pece-contributors-und-0-target-id:type:cy_contributor',
         '#edit-field-permissions-und-private:check:private'
       ], () => {
         cy.type_tinyMCE('edit-body-und-0-value', "<p>Test private content with no group</p>")
@@ -85,6 +85,42 @@ context('Permissions', () => {
     })
 
     it('delete a private PECE Essay content', () => {
+      cy.login('admin')
+      cy.deleteContent(title)
+    })
+  })
+
+  describe('Test open PECE Essay', () => {
+
+    let title = "Open Contributor No Group cy"
+    let path = "/content/open-contributor-no-group-cy"
+
+    it('create an open PECE Essay content ', () => {
+      cy.login('editor')
+      cy.createContent('/node/add/pece-essay', [
+        'input[name=title]:type:' + title,
+        '#edit-field-pece-contributors-und-0-target-id:type:cy_contributor',
+        '#edit-field-permissions-und-private:check:open'
+      ], () => {
+        cy.type_tinyMCE('edit-body-und-0-value', "<p>Test open content with no group</p>")
+      })
+    })
+
+    it("anonymous user can access this content", () => {
+      testAccess(path)
+      testAccess(path + '/essay')
+    })
+
+    it('contributor user can access in panels editor', () => {
+      cy.login('contributor')
+      cy.visit(path + "/essay")
+      cy.contains('Customize this page').click()
+      cy.contains('Save')
+      cy.contains('Cancel')
+      cy.contains('Revert to PECE Essay default')
+    })
+
+    it('delete an open PECE Essay content', () => {
       cy.login('admin')
       cy.deleteContent(title)
     })
