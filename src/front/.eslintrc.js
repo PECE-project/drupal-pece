@@ -24,7 +24,8 @@ module.exports = {
       {
         newlinesBetween: 'always',
         groups: [
-          '/^(vue|@vue)/',
+          '/^vue/',
+          '/^@vue/',
           'module',
           '/^@\//',
           ['parent', 'sibling', 'index']
