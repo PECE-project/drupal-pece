@@ -158,7 +158,7 @@ function pece_core_form_alter(&$form, &$form_state, $form_id) {
 function pece_core_validate_contributors($element, &$form_state) {
   foreach ($form_state['input']['field_pece_contributors']['und'] as $key => $contributor) {
 
-    if (isset($contributor['target_id']) && (strpos($contributor['target_id'], ' (') == false)) {
+    if (isset($contributor['target_id']) && $contributor['target_id'] != '' && (strpos($contributor['target_id'], ' (') == false)) {
       $uid = db_query('SELECT uid from {users} WHERE name = :name', array(':name' => $contributor['target_id']))->fetchField();
 
       if (!$uid)
@@ -175,7 +175,7 @@ function pece_core_validate_contributors($element, &$form_state) {
 function pece_core_contributors_submit($form, &$form_state) {
   foreach ($form_state['input']['field_pece_contributors']['und'] as $key => $contributor) {
 
-    if (isset($contributor['target_id']) && (strpos($contributor['target_id'], ' (') == false)) {
+    if (isset($contributor['target_id']) && $contributor['target_id'] != '' && (strpos($contributor['target_id'], ' (') == false)) {
       $uid = db_query('SELECT uid from {users} WHERE name = :name', array(':name' => $contributor['target_id']))->fetchField();
 
       if ($uid)
