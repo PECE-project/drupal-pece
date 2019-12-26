@@ -50,7 +50,7 @@ context('Permissions', () => {
       cy.testNoAccess(path + '/essay')
     })
 
-    it('research user can access this content', () => {
+    it('researcher user can access this content', () => {
       cy.login('researcher')
       cy.testAccess(path)
       cy.testAccess(path + '/essay')
