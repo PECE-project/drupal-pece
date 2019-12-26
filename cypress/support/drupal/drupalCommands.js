@@ -46,10 +46,17 @@ Cypress.Commands.add('login', (user, password = '123456789') => {
   if(name == 'anonymous')
     return
   user = user == 'admin' ? user : 'cy_' + user
-  cy.visit('/user/login')
-  cy.get('input[name=name]').type(user)
-  cy.get('input[name=pass]').type(password + `{enter}`)
-  cy.contains("Log out")
+
+  cy.request({
+    method: 'POST',
+    url: '/user/login', // baseUrl is prepended to url
+    form: true, // indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
+    body: {
+      name: user,
+      pass: password,
+      form_id: 'user_login'
+    }
+  })
 })
 
 /**
