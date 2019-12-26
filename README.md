@@ -209,6 +209,8 @@ Alternatively, you can do it in your browser by accessing Configuration > Develo
 - User: admin
 - Passwords: `123456789`
 
+It's necessary has an image with the name sf.jpg in the library to use in uploads fields.
+
 ```sh 
 npm run cypress:open
 ```
