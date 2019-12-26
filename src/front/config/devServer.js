@@ -1,6 +1,6 @@
 const path = require('path')
 
-let server = {
+const server = {
   host: process.env.NUXT_HOST || '0.0.0.0',
   port: process.env.NUXT_PORT || 5000,
   disableHostCheck: true,
