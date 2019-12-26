@@ -104,12 +104,21 @@ module.exports = {
    */
   i18n,
   /*
+   ** Web font configuration
+   */
+  webfontloader: {
+    google: {
+      families: ['Open+Sans:400,700&display=swap']
+    }
+  },
+  /*
    ** Build configuration
    */
   server: devServer.server,
   watchers: devServer.watchers,
   buildDir: path.resolve(__dirname, 'dist'),
   build: {
+    analyze: true,
     extend (config, ctx) {}
   }
 }
