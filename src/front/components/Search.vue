@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <form name="search" role="search">
     <label
       class="relative block h-12"
       for="search"
-      aria-label="Search content in PECE project site"
     >
+      <span class="sr-only">Search content in PECE project site</span>
       <input
         id="search"
         class="shadow-search p-3 pr-12 bg-gray"
@@ -13,6 +13,7 @@
         name="search"
       >
       <button class="absolute p-2 px-4 right-0 inset-y-0 flex items-center justify-center">
+        <span class="sr-only">Submit search</span>
         <svg
           class="fill-current text-gray-600"
           xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +25,7 @@
         </svg>
       </button>
     </label>
-  </div>
+  </form>
 </template>
 
 <script>

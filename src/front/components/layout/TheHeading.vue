@@ -1,5 +1,5 @@
 <template>
-  <header class="header text-sm">
+  <header class="header">
     <div class="header-bg" />
     <div class="container mx-auto relative z-20">
       <div class="flex py-2">
