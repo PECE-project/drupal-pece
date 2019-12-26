@@ -3,6 +3,8 @@
 declare namespace Cypress {
   interface Chainable {
     type_tinyMCE(element: string, content: string):Cypress.Chainable<JQuery>;
+    testNoAccess(url: string):Cypress.Chainable<JQuery>;
+    testAccess(url: string):Cypress.Chainable<JQuery>;
 
     /**
      * Add image in field upload using library tab.
