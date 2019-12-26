@@ -1,3 +1,4 @@
 export default {
-  description: 'Front-end para distribuição V2 do PECE'
+  description: 'Front-end para distribuição V2 do PECE',
+  search: 'Buscar'
 }
