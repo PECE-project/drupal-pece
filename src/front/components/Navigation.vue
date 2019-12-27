@@ -1,10 +1,13 @@
 <template>
-  <nav>
+  <nav aria-labelledby="mainmenu">
+    <h2 id="mainmenu" class="sr-only">
+      Main menu
+    </h2>
     <ul class="flex">
       <li
         v-for="menu in menuHeader"
         :key="menu.label"
-        class="p-6 py-5 cursor-pointer hover:text-accent"
+        class="p-6 py-5 md:px-4 lg:px-6 cursor-pointer hover:text-accent"
       >
         <a :href="menu.link">
           {{ menu.label }}
