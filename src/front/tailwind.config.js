@@ -18,10 +18,8 @@ module.exports = {
     }
   },
   variants: {
-    extends: {
-      borderWidth: ['responsive', 'hover', 'focus'],
-      width: ['responsive', 'hover', 'focus']
-    }
+    borderWidth: ['responsive', 'hover', 'focus'],
+    width: ['responsive', 'hover', 'focus']
   },
   plugins: []
 }
