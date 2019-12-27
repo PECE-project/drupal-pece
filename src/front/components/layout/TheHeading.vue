@@ -1,9 +1,9 @@
 <template>
   <header class="header">
     <div class="header-bg" />
-    <div class="container mx-auto relative z-20">
+    <div class="container pece-container z-20">
       <div class="flex py-2">
-        <navigation class="w-8/12" />
+        <navigation class="w-8/12 hidden md:block" />
         <div class="w-4/12 ">
           <search class="my-2" />
         </div>

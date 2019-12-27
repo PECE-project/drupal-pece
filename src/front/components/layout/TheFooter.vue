@@ -1,5 +1,5 @@
 <template>
-  <div class="footer container m-auto">
+  <div class="footer container pece-container">
     <ul>
       <li>
         <a href="https://pece-project.github.io/drupal-pece/">

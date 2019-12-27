@@ -4,7 +4,7 @@
       <span class="sr-only">Search content in PECE project site</span>
       <input
         id="search"
-        class="shadow-search p-3 pr-12 w-full"
+        class="shadow-pece p-3 pr-12 w-full"
         placeholder="Search"
         type="text"
         name="search"
