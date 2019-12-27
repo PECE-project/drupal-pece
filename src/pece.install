@@ -257,7 +257,6 @@ function pece_update_7105() {
  * Enable Node Access User Reference and update contributors field settings.
  */
 function pece_update_7106() {
-  module_enable(array('nodeaccess_userreference'));
   if (module_exists('features')) {
     $modules = array(
       'pece_artifatcs_audio',
@@ -389,3 +388,24 @@ function pece_update_7112() {
     'username_enumeration_prevention',
   ));
 }
+
+/**
+ *  Disable nodeaccess_userreference module.
+ */
+/*
+function pece_update_7113() {
+  module_disable(array('nodeaccess_userreference'));
+  drupal_uninstall_modules(array('nodeaccess_userreference'));
+  //@TODO: only keep modules with contributor field.
+  if (module_exists('features')) {
+    $modules = array(
+      'pece_essay',
+    );
+
+    foreach ($modules as $module) {
+      features_revert_module($module);
+    }
+
+    node_access_rebuild(TRUE);
+  }
+}*/
