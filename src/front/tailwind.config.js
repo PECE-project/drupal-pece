@@ -13,7 +13,7 @@ module.exports = {
         accentHover: '#595BB5'
       },
       boxShadow: {
-        search: '0 6px 4px #F7FAFC'
+        pece: '0 6px 4px #F7FAFC'
       }
     }
   },
