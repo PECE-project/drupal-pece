@@ -18,6 +18,7 @@ context('Permissions', () => {
   const title = "Open PECE Essay cy"
   const path = "/content/open-pece-essay-cy"
 
+  //@todo: Need add seeds to start the tests
   describe ('Create users to tests', () => {
     users.forEach((user) => {
       it('create user: ' + user.username,  () => {
@@ -134,12 +135,14 @@ context('Permissions', () => {
       })
 
       it("user in group content can access this content", () => {
+        //@todo: Need add user in the group
         cy.login('user')
         cy.testAccess(path)
         cy.testAccess(path + '/essay')
       })
 
       it("researcher user in group user can access this content", () => {
+        //@todo: Need add user in the group
         cy.login('researcher')
         cy.testAccess(path)
         cy.testAccess(path + '/essay')
