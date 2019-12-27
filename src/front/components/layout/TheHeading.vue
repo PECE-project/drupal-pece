@@ -5,7 +5,7 @@
       <div class="flex py-2">
         <navigation class="w-8/12" />
         <div class="w-4/12 ">
-          <search class="py-2 float-right" />
+          <search class="my-2" />
         </div>
       </div>
       <div class="flex py-8 pl-4">
