@@ -1,21 +1,27 @@
 <template>
   <div>
     <the-heading />
-    <nuxt />
+    <the-main>
+      <nuxt />
+    </the-main>
+    <LazyHydrate ssr-only>
+      <the-footer />
+    </LazyHydrate>
   </div>
 </template>
 
 <script>
 import TheHeading from '@/components/layout/TheHeading'
+import TheMain from '@/components/layout/TheMain'
 
 export default {
   components: {
-    TheHeading
+    TheHeading,
+    TheMain,
+    TheFooter: () => import('@/components/layout/TheFooter')
   },
   head () {
-    return {
-      ...this.$nuxtI18nSeo()
-    }
+    return { ...this.$nuxtI18nSeo() }
   }
 }
 </script>
