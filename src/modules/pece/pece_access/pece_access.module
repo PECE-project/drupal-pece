@@ -41,6 +41,11 @@ define('PECE_ACCESS_REALM_ALL_MEMBER', PECE_ACCESS_REALM . ':all:node');
 define('PECE_ACCESS_REALM_RESEARCHER_MEMBER', PECE_ACCESS_REALM . ':researcher:node');
 
 /**
+ * The all contributors users access.
+ */
+define('PECE_ACCESS_REALM_CONTRIBUTOR_MEMBER', PECE_ACCESS_REALM . ':contributor:node');
+
+/**
  * The all researcher in the content's group can access.
  */
 define('PECE_ACCESS_REALM_RESEARCHER_IN_GROUP_MEMBER', PECE_ACCESS_REALM . ':researcher-in-group:node');
@@ -82,6 +87,16 @@ function pece_access_node_insert($node) {
  */
 function pece_access_node_update($node) {
   _pece_access_node_save($node);
+
+  //rebuild permissions to PECE Essay
+  if ($node->type == "pece_essay") {
+    node_access_rebuild_bonus_queue([$node->nid]);
+  }
+
+  if ($node->type == 'pece_group') {
+    $nodes = pece_access_get_nodes_by_group($node->nid);
+    node_access_rebuild_bonus_queue($nodes);
+  }
 }
 
 /**
@@ -245,7 +260,7 @@ function pece_access_node_access_records($node) {
   // We intentionally verify if the node also belongs to at least a private group
   // because there is no need to set grants to a node that is open and present on
   // public groups; these nodes are simply accessible to anyone.
-  if ($permission == 'open' && !empty($public_groups)) {
+  if ($permission == 'open' && !empty($public_groups) && !empty($private_groups)) {
     $grants[] = array(
       'realm' => PECE_ACCESS_REALM_PUBLIC_GROUP,
       'gid' => 0,
@@ -257,14 +272,16 @@ function pece_access_node_access_records($node) {
   }
 
   if ($permission == 'open' && !empty($private_groups)) {
-    $grants[] = array(
-      'realm' => PECE_ACCESS_REALM_ONLY_GROUP_MEMBERS,
-      'gid' => 0,
-      'grant_view' => 1,
-      'grant_update' => 0,
-      'grant_delete' => 0,
-      'priority' => 0,
-    );
+    foreach ($private_groups as $private_group) {
+      $grants[] = array(
+        'realm' => PECE_ACCESS_REALM_ONLY_GROUP_MEMBERS,
+        'gid' => $private_group,
+        'grant_view' => 1,
+        'grant_update' => 0,
+        'grant_delete' => 0,
+        'priority' => 0,
+      );
+    }
   }
 
   // 2. Allow access to a restricted node for 'Researcher' users if the node belongs to
@@ -285,6 +302,7 @@ function pece_access_node_access_records($node) {
   // 3. Allow access to a restricted node for 'Researcher' users when the node belongs
   // only to private groups. This is done in a per-group granting system.
   if ($permission == 'restricted' && !empty($private_groups) && empty($public_groups)) {
+    $cont = 2;
     foreach ($private_groups as $group_id) {
       $grants[] = array(
         'realm' => PECE_ACCESS_REALM_RESTRICTED_GROUP,
@@ -292,7 +310,7 @@ function pece_access_node_access_records($node) {
         'grant_view' => 1,
         'grant_update' => 0,
         'grant_delete' => 0,
-        'priority' => 2,
+        'priority' => $cont++,
       );
     }
   }
@@ -321,8 +339,21 @@ function pece_access_node_access_records($node) {
       'grant_view' => 1,
       'grant_update' => 1,
       'grant_delete' => 1,
-      'priority' => 10,
+      'priority' => !empty($grants) ? end($grants)['priority'] : 10,
     );
+  }
+  else {
+    $contributors = field_get_items('node', $node, 'field_pece_contributors');
+    foreach ($contributors as $contributor) {
+      $grants[] = array(
+        'realm' => PECE_ACCESS_REALM_CONTRIBUTOR_MEMBER,
+        'gid' => $contributor['target_id'],
+        'grant_view' => 1,
+        'grant_update' => 0,
+        'grant_delete' => 0,
+        'priority' => !empty($grants) ? end($grants)['priority'] : 10,
+      );
+    }
   }
 
   return $grants;
@@ -349,7 +380,12 @@ function pece_access_node_grants($account, $op) {
     $grants[PECE_ACCESS_REALM_RESTRICTED][] = 0;
   }
 
-  // 3. Allow access for 'Researcher' users to any restricted content in the groups
+  // 3. Allow access for all authenticated user in your group content
+  foreach ($groups['node'] as $group_id) {
+    $grants[PECE_ACCESS_REALM_ONLY_GROUP_MEMBERS][] = $group_id;
+  }
+
+  // 4. Allow access for 'Researcher' users to any restricted content in the groups
   // they belong to.
   if (pece_access_user_has_role($account, 'Researcher') && !empty($groups['node'])) {
     foreach ($groups['node'] as $group_id) {
@@ -357,10 +393,10 @@ function pece_access_node_grants($account, $op) {
     }
   }
 
-  // 4. Allows access to any of the user's own content.
+  // 5. Allows access to any of the user's own content.
   $grants[PECE_ACCESS_REALM_OWNER][] = $account->uid;
 
-  // 5. Allow access to any user that owns a private node.
+  // 6. Allow access to any user that owns a private node.
   $grants[PECE_ACCESS_REALM_PRIVATE_OWNER][] = $account->uid;
 
   return $grants;
@@ -421,6 +457,29 @@ function pece_access_get_node_groups($node) {
 }
 
 /**
+ * Helper (performatic) method to get nodes with this group.
+ *
+ * @return {Array} a map of nodes with this group
+ */
+function pece_access_get_nodes_by_group($gid) {
+  $sql = "SELECT ogm.etid AS etid, ga.group_access_value AS gavalue
+    FROM og_membership ogm
+    LEFT OUTER JOIN field_data_group_access ga ON ga.entity_id = ogm.gid
+    WHERE (ga.entity_type = 'node')
+    AND (ogm.entity_type = 'node')
+    AND (ogm.gid = {$gid})";
+
+  $results = db_query($sql);
+  $nodes = array();
+
+  foreach ($results as $result) {
+    $nodes[] = $result->etid;
+  }
+
+  return $nodes;
+}
+
+/**
  * Helper (performatic) method to check if user has a role.
  * @TODO: Use db_query for better performance.
  */
@@ -473,55 +532,4 @@ function pece_access_allow_contibutors_edit_content(&$perms, $context) {
       }
     }
   }
-}
-
-/**
- *  Implements node access to PECE Essay control access with this rules
- *    - All private content can only accessed by the owner
- *    - Restrict content
- *        Owner: view, update and delete
- *        Contributor: view, update
- *        Anonymous: nothing
- *    - Open content
- *        Owner: view, update and delete
- *        Contributor: view, update
- *        Anonymous: view
- * @param $node
- * @param $op
- * @param $account
- *
- * @return string|null
- */
-function pece_access_node_access($node, $op, $account) {
-  // $node can be string or object, in this case we need object
-  $type = is_object($node) ? $node->type : NULL;
-
-  if ($type == "pece_essay" && in_array($type, node_permissions_get_configured_types())) {
-    if (user_access('edit any ' . $type . ' content', $account) || (user_access('edit own ' . $type . ' content', $account) && ($account->uid == $node->uid))) {
-      return NODE_ACCESS_ALLOW;
-    }
-
-    $permission = field_get_items('node', $node, 'field_permissions');
-
-    if (!is_null($permission) && $permission[0]['value'] == 'open' && $op == 'view')
-      return NODE_ACCESS_ALLOW;
-
-    if (!is_null($permission) && $permission[0]['value'] == 'private')
-      return NODE_ACCESS_DENY;
-
-    if (!is_null($permission) && $permission[0]['value'] == 'restricted' && $account->uid == 0)
-      return NODE_ACCESS_DENY;
-
-    if ($op != 'delete') {
-      $contributors = field_get_items('node', $node, 'field_pece_contributors');
-      foreach ($contributors as $contributor) {
-        if ($contributor['target_id'] == $account->uid) {
-          return NODE_ACCESS_ALLOW;
-        }
-      }
-    }
-  }
-
-  // Returning nothing from this function would have the same effect.
-  return NODE_ACCESS_IGNORE;
 }
