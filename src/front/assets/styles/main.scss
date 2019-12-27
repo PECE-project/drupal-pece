@@ -11,3 +11,11 @@ body {
 	@apply text-gray-900 tracking-wide;
 	font-family: $font-stack;
 }
+
+.pece-container {
+	@apply relative mx-auto px-6;
+
+	@media (min-width: theme('screens.lg')) {
+		@apply px-0;
+	}
+}
