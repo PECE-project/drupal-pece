@@ -1,4 +1,4 @@
 import Vue from 'vue'
-import LazyHydration from 'vue-lazy-hydration'
+import LazyHydrate from 'vue-lazy-hydration'
 
-Vue.use(LazyHydration)
+Vue.component('LazyHydrate', LazyHydrate)
