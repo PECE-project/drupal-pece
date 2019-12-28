@@ -4,9 +4,9 @@
     <the-main>
       <nuxt />
     </the-main>
-    <LazyHydrate ssr-only>
+    <lazy-hydrate ssr-only>
       <the-footer />
-    </LazyHydrate>
+    </lazy-hydrate>
   </div>
 </template>
 
