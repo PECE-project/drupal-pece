@@ -1,7 +1,7 @@
 <template>
   <form role="search" class="relative flex justify-end">
     <label for="search" class="md:w-3/5 lg:w-2/5">
-      <span class="sr-only">Search content in PECE project site</span>
+      <span class="sr-only">{{ $t('a11y.text_search') }}</span>
       <input
         id="search"
         class="shadow-pece p-3 pr-12 w-full"
@@ -11,7 +11,7 @@
       >
     </label>
     <button class="absolute p-2 px-4 right-0 inset-y-0 flex items-center justify-center">
-      <span class="sr-only">Submit search</span>
+      <span class="sr-only">{{ $t('a11y.submit_search') }}</span>
       <svg
         class="fill-current text-gray-600"
         xmlns="http://www.w3.org/2000/svg"
