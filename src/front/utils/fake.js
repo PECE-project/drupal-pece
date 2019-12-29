@@ -1,24 +1,69 @@
-module.exports = {
-  menuHeader: [
-    {
-      label: 'Home',
-      link: '/'
+export const menuHeader = [
+  {
+    label: 'Home',
+    link: '/'
+  },
+  {
+    label: 'About',
+    link: '/'
+  },
+  {
+    label: 'Collaborate',
+    link: '/'
+  },
+  {
+    label: 'Analtze',
+    link: '/'
+  },
+  {
+    label: 'Discover',
+    link: '/'
+  }
+]
+
+export const highlights = [
+  {
+    title: 'Platform for Experimental, Collaborative Ethnograph',
+    images: {
+      alt: 'teste',
+      thumbnail: 'https://i.picsum.photos/id/421/480/320.jpg',
+      medium: 'https://i.picsum.photos/id/421/640/480.jpg',
+      large: 'https://i.picsum.photos/id/421/1280/400.jpg'
     },
-    {
-      label: 'About',
-      link: '/'
+    link: 'https://google.com',
+    created_at: 'Dezember 31, 2019'
+  },
+  {
+    title: 'Green Mountain National Forest',
+    images: {
+      alt: 'teste',
+      thumbnail: 'https://i.picsum.photos/id/787/480/320.jpg',
+      medium: 'https://i.picsum.photos/id/787/640/480.jpg',
+      large: 'https://i.picsum.photos/id/787/1280/400.jpg'
     },
-    {
-      label: 'Collaborate',
-      link: '/'
+    link: 'https://facebook.com',
+    created_at: 'April 26, 2019'
+  },
+  {
+    title: 'The Amazon Rainforest',
+    images: {
+      alt: 'teste',
+      thumbnail: 'https://i.picsum.photos/id/442/480/320.jpg',
+      medium: 'https://i.picsum.photos/id/442/640/480.jpg',
+      large: 'https://i.picsum.photos/id/442/1280/400.jpg'
     },
-    {
-      label: 'Analyze',
-      link: '/'
+    link: 'https://trello.com',
+    created_at: 'November 05, 2019'
+  },
+  {
+    title: 'Arashiyama Bamboo Grove',
+    images: {
+      alt: 'teste',
+      thumbnail: 'https://i.picsum.photos/id/454/480/320.jpg',
+      medium: 'https://i.picsum.photos/id/454/640/480.jpg',
+      large: 'https://i.picsum.photos/id/454/1280/400.jpg'
     },
-    {
-      label: 'Discover',
-      link: '/'
-    }
-  ]
-}
+    link: 'https://twitter.com',
+    created_at: 'January 10, 2019'
+  }
+]
