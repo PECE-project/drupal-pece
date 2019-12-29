@@ -40,6 +40,15 @@ services:
     networks:
       - pece
 
+  test_watch:
+    image: wodby/node:$NODE_TAG
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: npm run test:watch
+    networks:
+      - pece
+
   unit_single:
     image: wodby/node:$NODE_TAG
     working_dir: /home/node/app

@@ -25,6 +25,9 @@ lint:
 test:
 	docker-compose -f services-nuxt.yml run --rm test
 
+test-watch:
+	docker-compose -f services-nuxt.yml run --rm test_watch
+
 test-single:
 	docker-compose -f services-nuxt.yml run --rm unit_single
 
