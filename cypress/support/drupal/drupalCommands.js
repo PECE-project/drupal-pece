@@ -20,7 +20,6 @@ Cypress.Commands.add('createUser', (name, role = null,password = '123456789') =>
   if(name == 'anonymous')
     return
 
-  cy.login('admin')
   cy.visit('/admin/people/create')
   cy.get('#edit-name').type('cy_' + name)
   cy.get('#edit-mail').type(name + '@' + 'test.com')
