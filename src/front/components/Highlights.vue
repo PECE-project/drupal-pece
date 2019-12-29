@@ -26,18 +26,22 @@
         <li
           v-for="(hl, index) in highlights"
           :key="`highlight-${index}`"
-          :class="{ 'highlights__list__item--active': hl.title === highlight.title }"
-          @click="setChosenHighlight(hl)"
-          @keypress.enter="setChosenHighlight(hl)"
-          :data-test="index"
-          class="highlights__list__item p-4 w-full cursor-pointer"
-          data-pece="highlights-items"
-          tabindex="0"
+          class="highlights__list__item w-full cursor-pointer"
         >
-          <h2 class="text-gray-800 text-sm mb-1 leading-tight">
-            {{ hl.title }}
-          </h2>
-          <span class="text-gray-600 text-xs">{{ hl.created_at }}</span>
+          <button
+            ref="highlightItem"
+            :class="{ 'highlights__list__item__button--active': hl.title === highlight.title }"
+            @click="setChosenHighlight(hl)"
+            @keydown.enter="setChosenHighlight(hl)"
+            @keydown="navBetweenTabsByArrows($event, index)"
+            class="highlights__list__item__button h-full w-full block p-5 text-left"
+            data-pece="highlights-items"
+          >
+            <h2 class="text-gray-800 text-sm mb-1 leading-tight">
+              {{ hl.title }}
+            </h2>
+            <span class="text-gray-600 text-xs">{{ hl.created_at }}</span>
+          </button>
         </li>
       </ul>
     </nav>
@@ -51,18 +55,34 @@ import { highlights } from '@/utils/fake'
 
 export default {
   name: 'Highlights',
-  setup (_, { refs }) {
-    const state = reactive({ highlight: highlights[0] })
+  setup (_, { root, refs }) {
+    const state = reactive({
+      highlight: highlights[0],
+      highlights
+    })
 
     function setChosenHighlight (hl) {
       state.highlight = { ...hl }
       refs.highlightCover.focus()
     }
 
+    function navBetweenTabsByArrows ($e, index) {
+      const i = {
+        ArrowRight: index + 1,
+        ArrowLeft: index - 1,
+        Home: 0,
+        End: state.highlights.length - 1
+      }
+      if (state.highlights[i[$e.key]]) {
+        state.highlight = { ...state.highlights[i[$e.key]] }
+        refs.highlightItem[i[$e.key]].focus()
+      }
+    }
+
     return {
       ...toRefs(state),
-      highlights,
-      setChosenHighlight
+      setChosenHighlight,
+      navBetweenTabsByArrows
     }
   }
 }
@@ -86,7 +106,7 @@ export default {
     }
   }
   &__list {
-    &__item {
+    &__item__button {
       @apply relative border-b border-solid border-gray-100;
       &--active, &:hover {
         @apply bg-gray-100;
