@@ -110,6 +110,14 @@ Mais detalhes sobre: https://vue-test-utils.vuejs.org/
 make test
 ```
 
+#### Observando testes (watch)
+Executa todos os testes quando um arquivo for alterado
+```shell
+make test-watch
+```
+
+**OBS: É possível também configurar seu editor para executar os testes utilizando o jest**
+
 #### Rodar um arquivo específico
 ```shell
 make test-single FILE_MATCH=AppFooter
