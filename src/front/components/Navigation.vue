@@ -1,7 +1,7 @@
 <template>
   <nav aria-labelledby="mainmenu">
     <h2 id="mainmenu" class="sr-only">
-      Main menu
+      {{ $t('a11y.main_navigation') }}
     </h2>
     <ul class="flex">
       <li

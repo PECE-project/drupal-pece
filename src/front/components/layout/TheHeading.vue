@@ -23,15 +23,15 @@
           <ul class="flex justify-center sm:justify-end py-8">
             <li class="mr-5">
               <a href="/">
-                Log in
+                {{ $t('login') }}
               </a>
             </li>
             <li>
               <a
                 href="/"
-                class="bg-accent rounded-full py-3 px-6 text-white hover:bg-accentHover"
+                class="link-accent"
               >
-                Register
+                {{ $t('register') }}
               </a>
             </li>
           </ul>
