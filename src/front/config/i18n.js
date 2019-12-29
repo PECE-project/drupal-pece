@@ -12,7 +12,7 @@ module.exports = {
     useCookie: true,
     cookieKey: 'i18n_pece',
     alwaysRedirect: true,
-    fallbackLocale: 'en'
+    fallbackLocale: process.env.NUXT_MODULE_i18N_DEFAULT_LOCALE || 'en'
   },
   locales: [
     {
