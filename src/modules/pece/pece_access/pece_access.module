@@ -28,12 +28,12 @@ define('PECE_ACCESS_REALM_PUBLIC_GROUP', PECE_ACCESS_REALM . ':public-group:node
 /**
  * The only members access.
  */
-define('PECE_ACCESS_REALM_ONLY_GROUP_MEMBER', PECE_ACCESS_REALM . ':only-group-member:node');
+define('PECE_ACCESS_REALM_ONLY_GROUP_MEMBERS', PECE_ACCESS_REALM . ':only-group-members:node');
 
 /**
  * The all users access.
  */
-define('PECE_ACCESS_REALM_ALL_MEMBER', PECE_ACCESS_REALM . ':all:node');
+define('PECE_ACCESS_REALM_ALL', PECE_ACCESS_REALM . ':all:node');
 
 /**
  * The all researcher users access.
@@ -64,11 +64,6 @@ define('PECE_ACCESS_REALM_RESTRICTED_GROUP', PECE_ACCESS_REALM . ':restricted:gr
  * The content owner access realm.
  */
 define('PECE_ACCESS_REALM_OWNER', PECE_ACCESS_REALM . ':owner:node');
-
-/**
- * The private content owner access realm.
- */
-define('PECE_ACCESS_REALM_PRIVATE_OWNER', PECE_ACCESS_REALM . ':private:owner:node');
 
 /**
  * The field that defines access on nodes.
@@ -245,11 +240,66 @@ function pece_access_node_access_records($node) {
     return $grants;
   }
 
-  $permission = pece_access_get_permission($node);
-  $groups = pece_access_get_node_groups($node);
+  $visibility = pece_access_get_node_visibility($node);
 
-  foreach ($groups as $gid => $private) {
-    ${$private ? 'private_groups' : 'public_groups'}[] = $gid;
+  $grants[] = array(
+    'realm' => PECE_ACCESS_REALM_OWNER,
+    'gid' => $node->uid,
+    'grant_view' => 1,
+    'grant_update' => 1,
+    'grant_delete' => 1,
+    'priority' => 0,
+  );
+
+  switch ($visibility['realm']) {
+    case PECE_ACCESS_REALM_ALL:
+      $grants[] = array(
+        'realm' => PECE_ACCESS_REALM_ALL,
+        'gid' => 0,
+        'grant_view' => 1,
+        'grant_update' => 0,
+        'grant_delete' => 0,
+        'priority' => 0,
+      );
+      break;
+    case PECE_ACCESS_REALM_ONLY_GROUP_MEMBERS:
+      $groups = $visibility[0] + $visibility[1];
+      foreach ($groups as $gid => $group) {
+        $grants[] = array(
+          'realm' => PECE_ACCESS_REALM_ONLY_GROUP_MEMBERS,
+          'gid' => $gid,
+          'grant_view' => 1,
+          'grant_update' => 0,
+          'grant_delete' => 0,
+          'priority' => 0,
+        );
+      }
+      break;
+    case PECE_ACCESS_REALM_RESEARCHER_MEMBER:
+      break;
+//    case PECE_ACCESS_REALM_RESEARCHER_IN_GROUP_MEMBER:
+//      break;
+  }
+
+  // If content visibility is not private then add access to contributors
+  if ($visibility['realm'] != PECE_ACCESS_REALM_OWNER) {
+    $contributors = field_get_items('node', $node, 'field_pece_contributors');
+    foreach ($contributors as $contributor) {
+      $grants[] = [
+        'realm' => PECE_ACCESS_REALM_CONTRIBUTOR_MEMBER,
+        'gid' => $contributor['target_id'],
+        'grant_view' => 1,
+        'grant_update' => 0,
+        'grant_delete' => 0,
+        'priority' => 0,
+      ];
+    }
+  }
+
+  return $grants;
+/*
+  foreach ($groups as $gid => $property) {
+    ${$property['override_group_access'] ? 'private_groups' : 'public_groups'}[$gid] = $property;
   }
 
   // 1. Always allow access to an open node if it belongs to at least one public group.
@@ -260,7 +310,7 @@ function pece_access_node_access_records($node) {
   // We intentionally verify if the node also belongs to at least a private group
   // because there is no need to set grants to a node that is open and present on
   // public groups; these nodes are simply accessible to anyone.
-  if ($permission == 'open' && (count($groups) == 0)) {// || !empty($public_groups) && !empty($private_groups)) {
+  if ($permission == 'open' && (count($groups) == 0 || (!empty($public_groups) ))) {// || !empty($public_groups) && !empty($private_groups)) {
     $grants[] = array(
       'realm' => PECE_ACCESS_REALM_PUBLIC_GROUP,
       'gid' => 0,
@@ -272,10 +322,10 @@ function pece_access_node_access_records($node) {
   }
 
   if ($permission == 'open' && !empty($private_groups)) {
-    foreach ($private_groups as $private_group) {
+    foreach ($private_groups as $gid => $private_group) {
       $grants[] = array(
         'realm' => PECE_ACCESS_REALM_ONLY_GROUP_MEMBERS,
-        'gid' => $private_group,
+        'gid' => $gid,
         'grant_view' => 1,
         'grant_update' => 0,
         'grant_delete' => 0,
@@ -303,10 +353,10 @@ function pece_access_node_access_records($node) {
   // only to private groups. This is done in a per-group granting system.
   if ($permission == 'restricted' && !empty($private_groups) && empty($public_groups)) {
     $cont = 2;
-    foreach ($private_groups as $group_id) {
+    foreach ($private_groups as $gid => $group_id) {
       $grants[] = array(
         'realm' => PECE_ACCESS_REALM_RESTRICTED_GROUP,
-        'gid' => $group_id,
+        'gid' => $gid,
         'grant_view' => 1,
         'grant_update' => 0,
         'grant_delete' => 0,
@@ -356,7 +406,7 @@ function pece_access_node_access_records($node) {
     }
   }
 
-  return $grants;
+  return $grants;*/
 }
 
 /**
@@ -372,19 +422,19 @@ function pece_access_node_grants($account, $op) {
 
   // 1. Allow access to all nodes that belong to public groups, regardless of other
   // groups they might belong to.
-  $grants[PECE_ACCESS_REALM_PUBLIC_GROUP][] = 0;
-
+  $grants[PECE_ACCESS_REALM_ALL][] = 0;
+/*
   // 2. Allow access for 'Researcher' users to any restricted content if it belongs to
   // no group at all or if it belongs to at least one public group.
   if (pece_access_user_has_role($account, 'Researcher')) {
     $grants[PECE_ACCESS_REALM_RESTRICTED][] = 0;
   }
-
+*/
   // 3. Allow access for all authenticated user in your group content
   foreach ($groups['node'] as $group_id) {
     $grants[PECE_ACCESS_REALM_ONLY_GROUP_MEMBERS][] = $group_id;
   }
-
+/*
   // 4. Allow access for 'Researcher' users to any restricted content in the groups
   // they belong to.
   if (pece_access_user_has_role($account, 'Researcher') && !empty($groups['node'])) {
@@ -392,12 +442,12 @@ function pece_access_node_grants($account, $op) {
       $grants[PECE_ACCESS_REALM_RESTRICTED_GROUP][] = $group_id;
     }
   }
-
+*/
   // 5. Allows access to any of the user's own content.
   $grants[PECE_ACCESS_REALM_OWNER][] = $account->uid;
 
   // 6. Allow access to any user that owns a private node.
-  $grants[PECE_ACCESS_REALM_PRIVATE_OWNER][] = $account->uid;
+  //$grants[PECE_ACCESS_REALM_PRIVATE_OWNER][] = $account->uid;
 
   return $grants;
 }
@@ -421,16 +471,36 @@ function pece_access_get_permission($node) {
 }
 
 /**
- * Helper (performatic) method to get a map of private content groups.
+ * Helper (performatic) method to get content visibility.
  *
- * Keep in mind that any time a node overrides group permissioning (field
- * Group content visibility) all group information retrieved from this function
- * will respect that override. This means a private group might be taken for a
- * public group and vice versa.
- *
- * @return {Array} a map of groups to their access: TRUE means private, FALSE means open.
+ * @param $node
+ * @return array with value to node visibility and groups.
+ *  [
+ *    realm => realm permission for this node
+ *    0 => array with all the public groups with their visibility content value
+ *    1 => array with all the private groups with their visibility content value
+ * ]
  */
-function pece_access_get_node_groups($node) {
+function pece_access_get_node_visibility($node) {
+  // Start structure to return
+  $contentVisibility = array(
+    'realm' => PECE_ACCESS_REALM_OWNER,
+    0 => array(),
+    1 => array()
+  );
+  // Get node permission: open, private or restricted.
+  $permission = pece_access_get_permission($node);
+  $node_override_group = NULL;
+  // Get node's groups
+  /* @var int gavalue Group visibility
+   * 0 -> group public
+   * 1 -> group private
+   */
+  /* @var int gcavalue Group content visibility
+   * 0 -> use group default
+   * 1 -> public content
+   * 2 -> private content
+   */
   $sql = "SELECT ogm.gid AS gid, ga.group_access_value AS gavalue, gca.group_content_access_value AS gcavalue
     FROM og_membership ogm
     LEFT OUTER JOIN field_data_group_access ga ON ga.entity_id = ogm.gid
@@ -440,21 +510,110 @@ function pece_access_get_node_groups($node) {
     AND (ogm.etid = {$node->nid})";
 
   $results = db_query($sql);
-  $groups = array();
+
+  switch ($permission) {
+    case 'open':
+      $contentVisibility['realm'] = PECE_ACCESS_REALM_ALL;
+      break;
+    case 'private':
+      $contentVisibility['realm'] = PECE_ACCESS_REALM_OWNER;
+      break;
+    case 'restricted':
+      $contentVisibility['realm'] = PECE_ACCESS_REALM_RESEARCHER_MEMBER;
+      break;
+  }
 
   // Override group permissioning based on node group_content_access.
   if (isset($node->group_content_access)) {
-    $value = field_get_items('node', $node, 'group_content_access');
+    /* @var int $node_override_group
+     * 0 -> Default group permissions
+     * 1 -> Public to all users
+     * 2 -> Only groups members and private group restrictions
+     * */
+    $node_override_group = field_get_items('node', $node, 'group_content_access');
     if (!empty($value[0]['value'])) {
-      $override_group_access = $value[0]['value'] == '1' ? FALSE : TRUE;
+      $node_override_group = $value[0]['value'];
+      $contentVisibility['realm'] == ($node_override_group == 1) ? PECE_ACCESS_REALM_ALL : PECE_ACCESS_REALM_ONLY_GROUP_MEMBERS;
     }
+    else
+      $node_override_group = 0;
   }
 
-  foreach ($results as $result) {
-    $groups[$result->gid] = isset($override_group_access) ? $override_group_access : $result->gavalue == 1;
+  // If content hasn't groups then finish the visibility process
+  if (count($results->fetchAll()) == 0)
+    return $contentVisibility;
+
+  // Values to gcavalue
+  $groupContentAccess = array('default', 'public', 'private');
+
+  switch ($permission) {
+    case 'private':
+      // If content is private then finish the visibility process
+      return $contentVisibility;
+      break;
+    case 'restricted':
+      foreach ($results as $result) {
+        // Add group in the private groups variables
+        $contentVisibility[$result->gavalue][$result->gid] = array(
+          'visibility' => $groupContentAccess[$result->gcavalue]
+        );
+
+        // If node override group permissions with all user can access then go to next group in foreach
+        if ($node_override_group == 1)
+          continue;
+
+        // if group is private
+        if ($result->gavalue) {
+          // If group is private and the group content is public
+          if ($groupContentAccess[$result->gcavalue] == 'public')
+            //only the researcher can access this content, researcher DOESN'T need is in the group
+            $contentVisibility['realm'] = PECE_ACCESS_REALM_RESEARCHER_MEMBER;
+          else
+            //else the content is default or private then only researcher IN GROUP can has access
+            $contentVisibility['realm'] = PECE_ACCESS_REALM_RESEARCHER_IN_GROUP_MEMBER;
+        }
+        // else group is public
+        else {
+          // If group is public and the group content is private
+          if ($groupContentAccess[$result->gcavalue] == 'private')
+            //only researcher IN GROUP can has access
+            $contentVisibility['realm'] = PECE_ACCESS_REALM_RESEARCHER_IN_GROUP_MEMBER;
+          else
+            //else the content is default or public then only the researcher can access this content, researcher DOESN'T need is in the group
+            $contentVisibility['realm'] = PECE_ACCESS_REALM_RESEARCHER_MEMBER;
+        }
+      }
+      break;
+    case 'open':
+      // Start with this visibility because if has public permission is need change
+      $contentVisibility['realm'] = PECE_ACCESS_REALM_ONLY_GROUP_MEMBERS;
+      foreach ($results as $result) {
+        // Add group in the private groups variables
+        $contentVisibility[$result->gavalue][$result->gid] = array(
+          'visibility' => $groupContentAccess[$result->gcavalue]
+        );
+
+        // If node override group permissions then go to next group in foreach
+        if ($node_override_group)
+          continue;
+
+        // if group is private
+        if ($result->gavalue) {
+          //and group is private and the group content is public then change to all user can access
+          if ($groupContentAccess[$result->gcavalue] == 'public')
+            $contentVisibility['realm'] = PECE_ACCESS_REALM_ALL;
+        }
+        // else group is public
+        else {
+          // If the content is default or public then all users can access
+          if ($groupContentAccess[$result->gcavalue] == 'default'  || $groupContentAccess[$result->gcavalue] == 'public')
+            $contentVisibility['realm'] = PECE_ACCESS_REALM_ALL;
+        }
+      }
+      break;
   }
 
-  return $groups;
+  return $contentVisibility;
 }
 
 /**
@@ -548,6 +707,10 @@ function pece_access_node_access($node, $op, $account) {
   $type = is_object($node) ? $node->type : NULL;
 
   if ($type == "pece_essay" && in_array($type, node_permissions_get_configured_types())) {
+
+    $permission = pece_access_get_permission($node);
+    if ($permission == 'private' && $account->uid != $node->uid)
+      return NODE_ACCESS_DENY;
 
     if ($op != 'delete') {
       $contributors = field_get_items('node', $node, 'field_pece_contributors');
