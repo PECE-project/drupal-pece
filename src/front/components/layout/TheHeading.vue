@@ -3,21 +3,24 @@
     <div class="header-bg" />
     <div class="container pece-container z-20">
       <div class="flex py-2">
-        <navigation class="w-8/12 hidden md:block" />
-        <div class="w-4/12 ">
+        <navigation class="w-1/2 sm:w-8/12 hidden md:block" />
+        <div class="w-8/12 p-4 md:hidden">
+          MENU
+        </div>
+        <div class="w-1/2 sm:w-4/12 ">
           <search class="my-2" />
         </div>
       </div>
-      <div class="flex py-8 pl-4">
-        <div class="w-1/2">
+      <div class="flex flex-wrap pt-4 sm:py-8 sm:pl-4">
+        <div class="w-full sm:w-1/2 text-center">
           <img
-            class="w-56"
+            class="w-56 inline sm:block"
             src="~/assets/images/logo-pece.png"
             alt="Logo PECE project"
           >
         </div>
-        <div class="w-1/2">
-          <ul class="flex justify-end py-8">
+        <div class="w-full sm:w-1/2">
+          <ul class="flex justify-center sm:justify-end py-8">
             <li class="mr-5">
               <a href="/">
                 Log in
@@ -57,7 +60,7 @@ export default {
   background-image: url('~@/assets/images/bg-header.svg');
   display: none;
 
-  @media (min-width: 768px) {
+  @screen lg {
     display: block;
   }
 }
