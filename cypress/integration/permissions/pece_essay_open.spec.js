@@ -17,18 +17,19 @@ context('Permissions', () => {
 
   const title = "Open PECE Essay cy"
   const path = "/content/open-pece-essay-cy"
+  const groupName = 'Group Test cy'
+  const groupPath = '/content/group-test-cy'
 
-  //@todo: Need add seeds to start the tests
-  describe ('Create users to tests', () => {
-    users.forEach((user) => {
-      it('create user: ' + user.username,  () => {
+  describe ('Create contents to tests', () => {
+
+    it('create users: researcher, owner, contributor and user',  () => {
+      cy.login('admin')
+      users.forEach((user) => {
         cy.createUser(user.username, user.role)
       })
     })
-  })
 
-  describe('Test open PECE Essay', () => {
-    it('create an open PECE Essay content ', () => {
+    it('create an open PECE Essay content', () => {
       cy.login('owner')
       cy.createContent('/node/add/pece-essay', [
         'input[name=title]:type:' + title,
@@ -38,6 +39,19 @@ context('Permissions', () => {
         cy.type_tinyMCE('edit-body-und-0-value', "<p>Test open PECE Essay content</p>")
       })
     })
+
+    it('create group', () => {
+      cy.login('admin')
+      cy.createContent('/node/add/pece-group', [
+        'input[name=title]:type:' + groupName
+      ], () => {
+        cy.addImage('#edit-field-pece-media-image-und-0-upload--widget')
+        cy.type_tinyMCE('edit-body-und-0-value', "<p>Test group</p>")
+      })
+    })
+  })
+
+  describe('Test open PECE Essay', () => {
 
     it("anonymous user can access this content", () => {
       cy.testAccess(path)
@@ -55,42 +69,35 @@ context('Permissions', () => {
   })
 
   describe('Group permissions', () => {
-    let groupName = 'Group Test cy'
-    let groupPath = '/content/group-test-cy'
-    it('create group', () => {
-      cy.login('admin')
-      cy.createContent('/node/add/pece-group', [
-        'input[name=title]:type:' + groupName
-      ], () => {
-        cy.addImage('#edit-field-pece-media-image-und-0-upload--widget')
-        cy.type_tinyMCE('edit-body-und-0-value', "<p>Test group</p>")
-      })
-      cy.updateContent(title, [
-        '#edit-og-group-ref-und-0-default:select:' + groupName
-      ])
-    })
 
-    describe('Default Visibility', () => {
-      it("anonymous user can access this content", () => {
-        cy.testAccess(path)
-        cy.testAccess(path + '/essay')
+    describe('Public group', () => {
+      describe('Default Visibility', () => {
+        it ('group with default visibility', () => {
+          cy.login('admin')
+          cy.updateContent(title, [
+            '#edit-og-group-ref-und-0-default:select:' + groupName
+          ])
+        })
+        it("anonymous user can access this content", () => {
+          cy.testAccess(path)
+          cy.testAccess(path + '/essay')
+        })
       })
-    })
 
-    describe('Public Visibility', () => {
-      it("change group visibility TO PUBLIC", () => {
-        cy.login('admin')
-        cy.updateContent(groupName, [
-          '#edit-group-content-access-und:select:Public - accessible to all site users'
-        ])
+      describe('Public Visibility', () => {
+        it("change group visibility TO PUBLIC", () => {
+          cy.login('admin')
+          cy.updateContent(groupName, [
+            '#edit-group-content-access-und:select:Public - accessible to all site users'
+          ])
+        })
+        it("anonymous user can access this content", () => {
+          cy.testAccess(path)
+          cy.testAccess(path + '/essay')
+        })
       })
-      it("anonymous user can access this content", () => {
-        cy.testAccess(path)
-        cy.testAccess(path + '/essay')
-      })
-    })
 
-    describe('Private Visibility', () => {
+      describe('Private Visibility', () => {
       it ("change group visibility TO PRIVATE", () => {
         cy.login('admin')
         cy.updateContent(groupName, [
@@ -108,7 +115,7 @@ context('Permissions', () => {
         cy.testNoAccess(path + '/essay')
       })
 
-      it('researcher user can access this content', () => {
+      it('researcher user can\'t access this content', () => {
         cy.login('researcher')
         cy.testNoAccess(path)
         cy.testNoAccess(path + '/essay')
@@ -134,28 +141,37 @@ context('Permissions', () => {
         cy.testNoAccess(path + '/essay')
       })
 
+      it ('add user and researcher in the content group', () => {
+        cy.login('admin')
+        cy.updateUser('user', [
+          '#edit-og-user-node-und-0-default:select:' + groupName
+        ])
+        cy.updateUser('researcher', [
+          '#edit-og-user-node-und-0-default:select:' + groupName
+        ])
+      })
+
       it("user in group content can access this content", () => {
-        //@todo: Need add user in the group
         cy.login('user')
         cy.testAccess(path)
         cy.testAccess(path + '/essay')
       })
 
       it("researcher user in group user can access this content", () => {
-        //@todo: Need add user in the group
         cy.login('researcher')
         cy.testAccess(path)
         cy.testAccess(path + '/essay')
       })
+
+      //@TODO: Need test to add two groups, one public and visibility public other private and permission need keep public
+    })
     })
   })
 
   describe ('Delete contents', () => {
-    it('delete an open PECE Essay content', () => {
+    it('delete content and group', () => {
       cy.login('admin')
       cy.deleteContent(title)
-    })
-    it('Delete group', () => {
       cy.deleteContent(groupName)
     })
     users.forEach((user) => {
@@ -165,3 +181,4 @@ context('Permissions', () => {
     })
   })
 })
+
