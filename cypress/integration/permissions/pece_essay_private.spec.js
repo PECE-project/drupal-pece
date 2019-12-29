@@ -10,18 +10,17 @@ context('Permissions', () => {
     { username:'anonymous', role: null}
   ]
 
-  describe ('Create users to tests', () => {
-    users.forEach((user) => {
-      it('create user: ' + user.username,  () => {
+  let title = "Private PECE Essay cy"
+  let path = "/content/private-pece-essay-cy"
+
+  describe ('Create contents to tests', () => {
+
+    it('create users: researcher, owner, contributor and user',  () => {
+      cy.login('admin')
+      users.forEach((user) => {
         cy.createUser(user.username, user.role)
       })
     })
-  })
-
-  describe('Test private PECE Essay', () => {
-
-    let title = "Private PECE Essay cy"
-    let path = "/content/private-pece-essay-cy"
 
     it('create a private PECE Essay content ', () => {
       cy.login('owner')
@@ -33,6 +32,9 @@ context('Permissions', () => {
         cy.type_tinyMCE('edit-body-und-0-value', "<p>Test private PECE Essay content</p>")
       })
     })
+  })
+
+  describe('Test private PECE Essay', () => {
 
     it("anonymous user can't access this content", () => {
       cy.testNoAccess(path)
@@ -62,14 +64,13 @@ context('Permissions', () => {
       cy.testAccess(path)
       cy.testAccess(path + '/essay')
     })
+  })
 
+  describe ('Delete contents after tests', () => {
     it('delete a private PECE Essay content', () => {
       cy.login('admin')
       cy.deleteContent(title)
     })
-  })
-
-  describe ('Delete users after tests', () => {
     users.forEach((user) => {
       it('delete user: ' + user.username,  () => {
         cy.deleteUser(user.username)
