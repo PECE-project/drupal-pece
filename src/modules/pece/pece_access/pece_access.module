@@ -540,7 +540,8 @@ function pece_access_get_node_visibility($node) {
   }
 
   // If content hasn't groups then finish the visibility process
-  if (count($results->fetchAll()) == 0)
+  $results = $results->fetchAll();
+  if (count($results) == 0)
     return $contentVisibility;
 
   // Values to gcavalue
