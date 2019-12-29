@@ -31,6 +31,22 @@ Cypress.Commands.add('createUser', (name, role = null,password = '123456789') =>
   cy.get("#edit-submit").click()
 })
 
+Cypress.Commands.add('updateUser', (username, fields, beforeSave  = null) => {
+  cy.visit('/admin/people')
+  cy.contains('cy_' + username).parent().parent().contains('.views-field-edit-node','edit').contains('edit').click()
+
+  /** @var String data **/
+  fields.forEach((data) => {
+    let [selectorField, func, dataValue] = data.split(':')
+    cy.get(selectorField)[func](dataValue)
+  })
+  if (beforeSave) {
+    beforeSave()
+  }
+  cy.get("#edit-submit").click()
+  cy.contains('The changes have been saved.')
+})
+
 Cypress.Commands.add('deleteUser', (name) => {
   if(name == 'anonymous')
     return
