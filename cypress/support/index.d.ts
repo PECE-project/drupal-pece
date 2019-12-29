@@ -14,6 +14,7 @@ declare namespace Cypress {
     addImage(element: string, image = 'sf.jpg'): Cypress.Chainable<JQuery>;
     createUser(name:string, role?:string, password = '123456789'): Cypress.Chainable<JQuery>;
     deleteUser(name: string): Cypress.Chainable<JQuery>;
+    updateUser(username: string): Cypress.Chainable<JQuery>;
     login(user:string, password = '123456789'): Cypress.Chainable<JQuery>;
     createContent(path:string, fields:[], beforeSave = () => {}): Cypress.Chainable<JQuery>;
     updateContent(title:string, fields:[], beforeSave = () => {}): Cypress.Chainable<JQuery>;
