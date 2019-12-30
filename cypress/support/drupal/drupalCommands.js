@@ -36,8 +36,7 @@ Cypress.Commands.add('createUser', (name, role = null,password = '123456789') =>
 })
 
 Cypress.Commands.add('updateUser', (username, fields, beforeSave  = null) => {
-  cy.visit('/admin/people')
-  cy.contains('cy_' + username).parent().parent().contains('.views-field-edit-node','edit').contains('edit').click()
+  cy.visit('/users/cy' + username.replace('_','') + '/edit')
 
   /** @var String data **/
   fields.forEach((data) => {
