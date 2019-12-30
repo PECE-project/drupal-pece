@@ -1,6 +1,5 @@
-//@TODO update this commands to use drush:
-// Ref: https://sevaa.com/blog/2018/10/end-to-end-testing-with-drupal-and-cypress/
-// Ref: https://www.npmjs.com/package/cypress-drupal
+//@TODO update this commands to use drush
+//@TODO Integrate this commands with content_devel module to generate data
 
 Cypress.Commands.add("type_tinyMCE", (element, content) => {
   cy.window()
@@ -24,15 +23,15 @@ Cypress.Commands.add('createUser', (name, role = null,password = '123456789') =>
   if(name == 'anonymous')
     return
 
-  cy.visit('/admin/people/create')
-  cy.get('#edit-name').type('cy_' + name)
-  cy.get('#edit-mail').type(name + '@' + 'test.com')
-  cy.get('#edit-pass-pass1').type(password)
-  cy.get('#edit-pass-pass2').type(password)
+  cy.drupalDrushCommand([
+    'user-create',
+    'cy_' + name,
+    '--mail="' + name + '@example.com"',
+    '--password="'+ password+'"',
+  ])
 
   if(role)
-    cy.get('.form-item-roles').contains(role).prev('input').click()
-  cy.get("#edit-submit").click()
+    cy.drupalDrushCommand(['urol', role, 'cy_' + name])
 })
 
 Cypress.Commands.add('updateUser', (username, fields, beforeSave  = null) => {
@@ -53,11 +52,8 @@ Cypress.Commands.add('updateUser', (username, fields, beforeSave  = null) => {
 Cypress.Commands.add('deleteUser', (name) => {
   if(name == 'anonymous')
     return
-  cy.login('admin')
-  cy.visit('/admin/people')
-  cy.get('.views-table a').contains('cy_' + name).parent().parent().contains('Cancel account').click()
-  cy.contains('Delete the account and its content.').prev('input').click()
-  cy.get('#edit-submit').click()
+
+  cy.drupalDrushCommand(['ucan', '--delete-content', 'cy_'+ name, '-y'])
 })
 
 Cypress.Commands.add('login', (user, password = '123456789') => {
@@ -119,3 +115,18 @@ Cypress.Commands.add('updateContent', (title, fields, beforeSave  = null) => {
   cy.contains(title + ' has been updated.')
 })
 
+Cypress.Commands.add("drupalDrushCommand", (command) => {
+  var cmd = Cypress.env('drupalDrushCmdLine');
+
+  if (cmd == null) {
+    cmd = 'drush %command'
+  }
+
+  if( typeof command === 'string' ) {
+    command = [ command ];
+  }
+
+  const execCmd = cmd.replace('%command', command.join(' '));
+
+  return cy.exec(execCmd);
+});
