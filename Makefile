@@ -5,7 +5,11 @@ run:
 	docker-compose run --rm -p 8080:80 dev_pece
 
 in:
+	docker ps
 	docker exec -it $(shell docker-compose ps | grep _dev_ | cut -d" " -f 1) /bin/bash
+
+drush:
+	docker exec $(shell docker-compose ps | grep _dev_ | cut -d" " -f 1) bash -c 'cd build && drush $(argument)'
 
 stop:
 	docker-compose stop
