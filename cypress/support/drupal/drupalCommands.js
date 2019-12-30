@@ -1,3 +1,7 @@
+//@TODO update this commands to use drush:
+// Ref: https://sevaa.com/blog/2018/10/end-to-end-testing-with-drupal-and-cypress/
+// Ref: https://www.npmjs.com/package/cypress-drupal
+
 Cypress.Commands.add("type_tinyMCE", (element, content) => {
   cy.window()
     .then(win => {
