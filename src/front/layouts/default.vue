@@ -5,7 +5,7 @@
       <nuxt />
     </the-main>
     <lazy-hydrate ssr-only>
-      <the-footer />
+      <the-footer class="my-8 sm:my-16" />
     </lazy-hydrate>
   </div>
 </template>
