@@ -16,7 +16,6 @@ context('Permissions', () => {
   describe ('Create contents to tests', () => {
 
     it('create users: researcher, owner, contributor and user',  () => {
-      cy.login('admin')
       users.forEach((user) => {
         cy.createUser(user.username, user.role)
       })
