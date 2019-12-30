@@ -13,7 +13,7 @@
 export default {
   name: 'Tab',
   props: {
-    title: {
+    label: {
       type: String,
       required: true
     },
