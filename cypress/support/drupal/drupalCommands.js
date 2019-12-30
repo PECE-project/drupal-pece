@@ -97,7 +97,7 @@ Cypress.Commands.add('deleteContent', (title) => {
   cy.visit('/admin/content')
   cy.contains(title).parent().parent().contains('delete').click()
   cy.get('[value="Delete"]').click()
-  cy.contains('PECE Essay ' + title + ' has been deleted.')
+  cy.contains( title + ' has been deleted.')
 })
 
 Cypress.Commands.add('updateContent', (title, fields, beforeSave  = null) => {
