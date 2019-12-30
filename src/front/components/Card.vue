@@ -5,11 +5,11 @@
     </div>
     <div class="card__content p-3">
       <header class="card__header">
-        <h2 class="card__title font-bold text-gray-900">
+        <h2 class="card__title text-sm font-bold text-gray-900">
           Traces of future
         </h2>
       </header>
-      <footer class="card__meta" role="contentinfo">
+      <footer class="card__meta mt-1" role="contentinfo">
         <div class="card__info text-gray-600">
           <a href="#" class="card__user-link">
             <span class="underline">Mike Fortun</span>
@@ -35,7 +35,7 @@ export default {
 <style lang="scss">
 .card {
   &__info {
-    font-size: 13px;
+    font-size: 12px;
   }
   &__tags {
     span {

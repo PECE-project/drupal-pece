@@ -6,10 +6,10 @@
       </section>
       <section class="tabs mt-6 md:mt-16">
         <tabs :uppercase="true">
-          <tab :title="$t('recent_essays')">
+          <tab :label="$t('recent_essays')">
             <list-cards />
           </tab>
-          <tab :title="$t('recent_artifacts')">
+          <tab :label="$t('recent_artifacts')">
             <list-cards />
           </tab>
         </tabs>

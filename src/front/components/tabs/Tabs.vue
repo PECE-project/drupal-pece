@@ -25,7 +25,7 @@
           role="tab"
           class="tabs__link flex p-4 px-3 sm:px-6 block"
         >
-          {{ tab.title }}
+          {{ tab.label }}
         </a>
       </li>
     </ul>
@@ -98,13 +98,13 @@ export default {
     onMounted(() => {
       const slotsTabs = slots.default() || []
       slotsTabs.forEach((child, index) => {
-        if (child.tag) {
-          const { title, disabled } = child.componentOptions.propsData
+        if (child.tag && child.componentOptions.propsData) {
+          const { label, disabled } = child.componentOptions.propsData
           const { _uid: uid, $el: el } = child.componentInstance
           state.tabList = [ ...state.tabList, {
             el,
             uid,
-            title,
+            label,
             disabled: disabled || false
           }]
           setAttrs()

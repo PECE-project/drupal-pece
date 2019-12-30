@@ -37,7 +37,7 @@
             class="highlights__list__item__button h-full w-full block p-5 text-left"
             data-pece="highlights-items"
           >
-            <h2 class="text-gray-800 text-sm mb-1 leading-tight">
+            <h2 class="text-gray-800 text-sm mb-1 font-bold leading-tight">
               {{ hl.title }}
             </h2>
             <span class="text-gray-600 text-xs">{{ hl.created_at }}</span>
