@@ -33,7 +33,7 @@
             :class="{ 'highlights__list__item__button--active': hl.title === highlight.title }"
             @click="setChosenHighlight(hl)"
             @keydown.enter="setChosenHighlight(hl)"
-            @keydown="navBetweenTabsByArrows($event, index)"
+            @keydown="navBetweenTabsByKeyBoard($event, index)"
             class="highlights__list__item__button h-full w-full block p-5 text-left"
             data-pece="highlights-items"
           >
@@ -66,23 +66,23 @@ export default {
       refs.highlightCover.focus()
     }
 
-    function navBetweenTabsByArrows ($e, index) {
+    function navBetweenTabsByKeyBoard (e, index) {
       const i = {
         ArrowRight: index + 1,
         ArrowLeft: index - 1,
         Home: 0,
         End: state.highlights.length - 1
       }
-      if (state.highlights[i[$e.key]]) {
-        state.highlight = { ...state.highlights[i[$e.key]] }
-        refs.highlightItem[i[$e.key]].focus()
+      if (state.highlights[i[e.key]]) {
+        state.highlight = { ...state.highlights[i[e.key]] }
+        refs.highlightItem[i[e.key]].focus()
       }
     }
 
     return {
       ...toRefs(state),
       setChosenHighlight,
-      navBetweenTabsByArrows
+      navBetweenTabsByKeyBoard
     }
   }
 }
