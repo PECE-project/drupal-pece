@@ -79,7 +79,6 @@ context('Permissions', () => {
   })
 
   describe ('Delete contents after tests', () => {
-
     users.forEach((user) => {
       it('delete user: ' + user.username,  () => {
         cy.deleteUser(user.username)
