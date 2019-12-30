@@ -21,11 +21,6 @@ define('PECE_RESEARCHER', 'Researcher');
 define('PECE_ACCESS_REALM', 'pece_access');
 
 /**
- * The public-group content access realm.
- */
-define('PECE_ACCESS_REALM_PUBLIC_GROUP', PECE_ACCESS_REALM . ':public-group:node');
-
-/**
  * The only members access.
  */
 define('PECE_ACCESS_REALM_ONLY_GROUP_MEMBERS', PECE_ACCESS_REALM . ':only-group-members:node');
@@ -51,18 +46,9 @@ define('PECE_ACCESS_REALM_CONTRIBUTOR_MEMBER', PECE_ACCESS_REALM . ':contributor
 define('PECE_ACCESS_REALM_RESEARCHER_IN_GROUP_MEMBER', PECE_ACCESS_REALM . ':researcher-in-group:node');
 
 /**
- * The restricted content access realm.
- */
-define('PECE_ACCESS_REALM_RESTRICTED', PECE_ACCESS_REALM . ':restricted:node');
-
-/**
- * The restricted content inside group access realm.
- */
-define('PECE_ACCESS_REALM_RESTRICTED_GROUP', PECE_ACCESS_REALM . ':restricted:group:node');
-
-/**
  * The content owner access realm.
  */
+
 define('PECE_ACCESS_REALM_OWNER', PECE_ACCESS_REALM . ':owner:node');
 
 /**
@@ -316,116 +302,6 @@ function pece_access_node_access_records($node) {
   }
 
   return $grants;
-/*
-  foreach ($groups as $gid => $property) {
-    ${$property['override_group_access'] ? 'private_groups' : 'public_groups'}[$gid] = $property;
-  }
-
-  // 1. Always allow access to an open node if it belongs to at least one public group.
-  // This is intended to override Organic Groups default behavior regarding nodes on both
-  // private and public groups; by default, the existence of a node on a private group
-  // would deny access to it even though it might be present on a public group.
-  //
-  // We intentionally verify if the node also belongs to at least a private group
-  // because there is no need to set grants to a node that is open and present on
-  // public groups; these nodes are simply accessible to anyone.
-  if ($permission == 'open' && (count($groups) == 0 || (!empty($public_groups) ))) {// || !empty($public_groups) && !empty($private_groups)) {
-    $grants[] = array(
-      'realm' => PECE_ACCESS_REALM_PUBLIC_GROUP,
-      'gid' => 0,
-      'grant_view' => 1,
-      'grant_update' => 0,
-      'grant_delete' => 0,
-      'priority' => 0,
-    );
-  }
-
-  if ($permission == 'open' && !empty($private_groups)) {
-    foreach ($private_groups as $gid => $private_group) {
-      $grants[] = array(
-        'realm' => PECE_ACCESS_REALM_ONLY_GROUP_MEMBERS,
-        'gid' => $gid,
-        'grant_view' => 1,
-        'grant_update' => 0,
-        'grant_delete' => 0,
-        'priority' => 0,
-      );
-    }
-  }
-
-  // 2. Allow access to a restricted node for 'Researcher' users if the node belongs to
-  // no group at all, or if it belongs to at least one public group. In the case the node
-  // belongs to both a public and a private group, this rule will override Organic Groups
-  // default behavior (which is deny first).
-  if ($permission == 'restricted' && (empty($groups) || !empty($public_groups))) {
-    $grants[] = array(
-      'realm' => PECE_ACCESS_REALM_RESTRICTED,
-      'gid' => 0,
-      'grant_view' => 1,
-      'grant_update' => 0,
-      'grant_delete' => 0,
-      'priority' => 1,
-    );
-  }
-
-  // 3. Allow access to a restricted node for 'Researcher' users when the node belongs
-  // only to private groups. This is done in a per-group granting system.
-  if ($permission == 'restricted' && !empty($private_groups) && empty($public_groups)) {
-    $cont = 2;
-    foreach ($private_groups as $gid => $group_id) {
-      $grants[] = array(
-        'realm' => PECE_ACCESS_REALM_RESTRICTED_GROUP,
-        'gid' => $gid,
-        'grant_view' => 1,
-        'grant_update' => 0,
-        'grant_delete' => 0,
-        'priority' => $cont++,
-      );
-    }
-  }
-
-  // 4. Always allow access to a user's own nodes, regardless of the attached grantings.
-  // We use the priority of the last inserted grant, which should be the highest. In case
-  // we defined no previous grants, but the node is part of at least one private group
-  // and no public group at all, we add a grant parallel to the Organic Groups' one.
-  if (!empty($grants) || (empty($public_groups) && !empty($private_groups))) {
-    $grants[] = array(
-      'realm' => PECE_ACCESS_REALM_OWNER,
-      'gid' => $node->uid,
-      'grant_view' => 1,
-      'grant_update' => 1,
-      'grant_delete' => 1,
-      'priority' => !empty($grants) ? end($grants)['priority'] : 0,
-    );
-  }
-
-  // 5. Allow access to private contents always and only to their owners. This is an
-  // ultimate control, and should always override any other when present.
-  if ($permission == 'private') {
-    $grants[] = array(
-      'realm' => PECE_ACCESS_REALM_PRIVATE_OWNER,
-      'gid' => $node->uid,
-      'grant_view' => 1,
-      'grant_update' => 1,
-      'grant_delete' => 1,
-      'priority' => !empty($grants) ? end($grants)['priority'] : 10,
-    );
-  }
-  else {
-    $contributors = field_get_items('node', $node, 'field_pece_contributors');
-    foreach ($contributors as $contributor) {
-      $grants[] = array(
-        'realm' => PECE_ACCESS_REALM_CONTRIBUTOR_MEMBER,
-        'gid' => $contributor['target_id'],
-        'grant_view' => 1,
-        'grant_update' => 0,
-        'grant_delete' => 0,
-        'priority' => !empty($grants) ? end($grants)['priority'] : 10,
-      );
-    }
-  }
-
-  return $grants;*/
 }
 
 /**
