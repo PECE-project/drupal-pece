@@ -3,7 +3,7 @@
     <label
       :class="{ 'search__label--active': term || searchFocused }"
       for="search"
-      class="search__label md:w-3/5 lg:w-2/5"
+      class="search__label w-2/3 lg:w-2/5"
     >
       <span class="sr-only">{{ $t('a11y.text_search') }}</span>
       <input
