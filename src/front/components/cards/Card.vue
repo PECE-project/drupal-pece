@@ -31,8 +31,6 @@
         </div>
       </footer>
     </div>
-    </a>
-    </div>
   </article>
 </template>
 
