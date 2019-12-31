@@ -56,12 +56,11 @@ export default {
 
 <style lang="scss">
 .header-bg {
-  @apply w-full h-56 z-10 absolute left-0 top-0 bg-top bg-no-repeat;
+  @apply w-full h-56 z-10 absolute left-0 top-0 bg-right bg-no-repeat;
   background-image: url('~@/assets/images/bg-header.svg');
-  display: none;
 
   @screen lg {
-    display: block;
+    @apply bg-top;
   }
 }
 </style>

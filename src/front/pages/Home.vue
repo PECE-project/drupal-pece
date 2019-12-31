@@ -1,20 +1,24 @@
 <template>
   <div class="home flex mt-6 sm:mt-12 flex-wrap lg:flex-no-wrap">
-    <div class="content sm:pr-0 lg:pr-6 w-full lg:w-3/4">
+    <div class="content w-full lg:w-4/6">
       <section class="highlights">
         <highlights />
       </section>
-      <section class="tabs mt-6 md:mt-16">
+      <section class="tabs mt-12 md:mt-16">
         <tabs :uppercase="true">
           <tab :label="$t('recent_essays')">
-            <list-cards />
+            <list-cards :data="new Array(4)">
+              <template v-slot="{ item }">
+                <card :data="{ item }" />
+              </template>
+            </list-cards>
           </tab>
           <tab :label="$t('recent_artifacts')">
-            <list-cards />
+            <h3>CONTENT TAB</h3>
           </tab>
         </tabs>
       </section>
-      <section class="about bg-gray-100 mt-6 md:mt-16 p-8 sm:p-12 flex flex-wrap lg:flex-no-wrap">
+      <section class="about bg-gray-100 mt-12 md:mt-16 p-8 sm:p-12 flex flex-wrap lg:flex-no-wrap">
         <div class="w-full lg:w-2/5">
           <img src="~/assets/images/logo-pece-ico.png" alt="Logo PECE project" class="w-12">
           <h1 class="mt-4 text-2xl lg:text-3xl font-bold sm:pr-2 leading-tight">
@@ -29,8 +33,19 @@
         </div>
       </section>
     </div>
-    <div class="sidebar w-full lg:w-1/4">
-      SIDEBAR
+    <div class="sidebar w-full mt-12 pr-0 lg:mt-0 lg:w-2/6 lg:pl-8 xl:pl-12">
+      <tabs :uppercase="true">
+        <tab :label="$t('groups')">
+          <list-cards :data="new Array(4)" :vertical="true">
+            <template v-slot="{ item }">
+              <horizontal-card :data="{ item }" />
+            </template>
+          </list-cards>
+        </tab>
+        <tab :label="$t('people')">
+          <h3>CONTENT TAB</h3>
+        </tab>
+      </tabs>
     </div>
   </div>
 </template>
@@ -42,7 +57,9 @@ export default {
     Highlights: () => import(/* webpackChunkName: "Highlights" */ '@/components/Highlights'),
     Tabs: () => import(/* webpackChunkName: "tabs" */ '@/components/tabs/Tabs'),
     Tab: () => import(/* webpackChunkName: "tab" */ '@/components/tabs/Tab'),
-    ListCards: () => import(/* webpackChunkName: "ListCards" */ '@/components/ListCards')
+    ListCards: () => import(/* webpackChunkName: "ListCards" */ '@/components/ListCards'),
+    Card: () => import(/* webpackChunkName: "Card" */ '@/components/cards/Card'),
+    HorizontalCard: () => import(/* webpackChunkName: "HorizontalCard" */ '@/components/cards/HorizontalCard')
   }
 }
 </script>
