@@ -3,11 +3,11 @@
     <div class="header-bg" />
     <div class="container pece-container z-20">
       <div class="flex py-2">
-        <navigation class="w-1/2 sm:w-8/12 hidden md:block" />
-        <div class="w-8/12 p-4 md:hidden">
+        <navigation class="w-1/2 md:w-8/12 hidden md:block" />
+        <div class="w-1/3 p-4 md:hidden">
           MENU
         </div>
-        <div class="w-1/2 sm:w-4/12 ">
+        <div class="w-2/3 md:w-4/12 ">
           <search class="my-2" />
         </div>
       </div>
