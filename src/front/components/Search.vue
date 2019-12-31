@@ -1,9 +1,16 @@
 <template>
-  <form role="search" class="relative flex justify-end">
-    <label for="search" class="md:w-3/5 lg:w-2/5">
+  <form role="search" class="search relative flex justify-end">
+    <label
+      :class="{ 'search__label--active': term || searchFocused }"
+      for="search"
+      class="search__label md:w-3/5 lg:w-2/5"
+    >
       <span class="sr-only">{{ $t('a11y.text_search') }}</span>
       <input
         id="search"
+        v-model="term"
+        @focus="searchFocused = true"
+        @blur="searchFocused = false"
         class="shadow-pece p-3 pr-12 w-full"
         placeholder="Search"
         type="text"
@@ -26,9 +33,29 @@
 </template>
 
 <script>
+import { reactive, toRefs } from '@vue/composition-api'
+
 export default {
-  name: 'Search'
+  name: 'Search',
+  setup () {
+    const state = reactive({
+      term: '',
+      searchFocused: false
+    })
+    return {
+      ...toRefs(state)
+    }
+  }
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.search {
+  &__label {
+    transition: width .5s;
+    &--active {
+      @apply w-full;
+    }
+  }
+}
+</style>
