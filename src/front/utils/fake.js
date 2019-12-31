@@ -12,7 +12,7 @@ export const menuHeader = [
     link: '/'
   },
   {
-    label: 'Analtze',
+    label: 'Analyze',
     link: '/'
   },
   {
