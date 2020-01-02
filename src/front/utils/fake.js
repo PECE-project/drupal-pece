@@ -1,23 +1,23 @@
 export const menuHeader = [
   {
-    label: 'Home',
-    link: '/'
+    label: 'nav.home',
+    routeName: 'home'
   },
   {
-    label: 'About',
-    link: '/'
+    label: 'nav.about',
+    routeName: 'about'
   },
   {
-    label: 'Collaborate',
-    link: '/'
+    label: 'nav.collaborate',
+    routeName: 'collaborate'
   },
   {
-    label: 'Analyze',
-    link: '/'
+    label: 'nav.analyze',
+    routeName: 'analyze'
   },
   {
-    label: 'Discover',
-    link: '/'
+    label: 'nav.discover',
+    routeName: 'discover'
   }
 ]
 
