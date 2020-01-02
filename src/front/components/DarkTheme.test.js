@@ -2,7 +2,11 @@ import { shallowMount } from '@vue/test-utils'
 
 import DarkTheme from '@/components/DarkTheme.vue'
 
-const wrapper = shallowMount(DarkTheme)
+const wrapper = shallowMount(DarkTheme, {
+  stubs: {
+    svgIcon: '<span></span>'
+  }
+})
 
 describe('DarkTheme', () => {
   test('is a Vue instance', () => {
