@@ -21,7 +21,8 @@
       height="20px"
       name="night"
     />
-    <style :media="darkTheme ? 'screen' : 'none'">
+    <!-- eslint-disable-next-line vue/require-component-is -->
+    <component :is="'style'" :media="darkTheme ? 'screen' : 'none'">
       html {
       background-color: #222 !important;
       }
@@ -45,7 +46,7 @@
       -ms-filter: invert(100%) !important;
       -webkit-filter: invert(100%) hue-rotate(-180deg) !important;
       }
-    </style>
+    </component>
   </button>
 </template>
 
