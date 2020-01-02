@@ -1,14 +1,7 @@
-import Home from '~/pages/Home'
+import enUS from './en-US'
+import ptBR from './pt-BR'
 
 export default [
-  {
-    path: '/',
-    name: 'home___en',
-    component: Home
-  },
-  {
-    path: '/',
-    name: 'home___pt',
-    component: Home
-  }
+  ...ptBR,
+  ...enUS
 ]
