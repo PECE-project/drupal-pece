@@ -1,5 +1,5 @@
 <template>
-  <div class="footer container pece-container">
+  <footer class="footer container pece-container">
     <ul class="flex">
       <li>
         <a href="https://pece-project.github.io/drupal-pece/">
@@ -14,7 +14,7 @@
         </a>
       </li>
     </ul>
-  </div>
+  </footer>
 </template>
 
 <script>

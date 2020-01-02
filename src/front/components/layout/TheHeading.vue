@@ -9,8 +9,8 @@
         <menu-mobile v-slot="{ id, show }" class="w-1/3 p-2 pl-0 -ml-1 md:hidden">
           <navigation :id="id" :showMenuMobile="show" :mobile="true" />
         </menu-mobile>
-        <div class="w-2/3 md:w-4/12">
-          <search class="my-2" />
+        <div class="w-2/3 md:w-4/12 pt-2 flex justify-end">
+          <search class="w-full" />
         </div>
       </div>
       <div class="flex flex-wrap pt-4 sm:py-8 sm:pl-4">
@@ -22,7 +22,10 @@
           >
         </div>
         <div class="w-full sm:w-1/2">
-          <ul class="flex justify-center sm:justify-end py-8">
+          <ul class="flex items-center justify-center sm:justify-end py-8">
+            <li class="mr-8">
+              <dark-theme />
+            </li>
             <li class="mr-5">
               <a href="/">
                 {{ $t('login') }}
@@ -52,7 +55,8 @@ export default {
   components: {
     Search,
     Navigation,
-    MenuMobile: () => import(/* webpackChunkName: "MenuMobile" */ '@/components/MenuMobile')
+    MenuMobile: () => import(/* webpackChunkName: "MenuMobile" */ '@/components/MenuMobile'),
+    DarkTheme: () => import(/* webpackChunkName: "DarkTheme" */ '@/components/DarkTheme')
   }
 }
 </script>
