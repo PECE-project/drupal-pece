@@ -15,7 +15,7 @@
       </div>
       <div class="flex flex-wrap pt-4 sm:py-8 sm:pl-4">
         <div class="w-full sm:w-1/2 text-center">
-          <nuxt-link :to="{ name: 'home___pt' }">
+          <nuxt-link :to="{ name: `home___${$i18n.locale}` }">
             <img
               class="w-56 inline sm:block"
               src="~/assets/images/logo-pece.png"
