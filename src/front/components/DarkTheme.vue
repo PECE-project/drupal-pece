@@ -50,13 +50,10 @@
 </template>
 
 <script>
-import { createComponent, reactive, toRefs, onMounted } from '@vue/composition-api'
+import { reactive, toRefs, onMounted } from '@vue/composition-api'
 
-export default createComponent({
+export default {
   name: 'DarkTheme',
-  asyncData ({ req }) {
-    console.log(req)
-  },
   setup () {
     const state = reactive({ darkTheme: false })
 
@@ -79,7 +76,7 @@ export default createComponent({
       toggleDarkTheme
     }
   }
-})
+}
 </script>
 
 <style lang="scss"></style>
