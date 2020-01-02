@@ -19,6 +19,8 @@ export default {
   a11y: {
     main_navigation: 'Menu de navegação principal',
     text_search: 'Campo para pesquisar conteúdo no site',
-    submit_search: 'Submeter pesquisa'
+    submit_search: 'Submeter pesquisa',
+    dark_theme_title_off: 'Tema noturno ativado',
+    dark_theme_title_on: 'Tema noturno desativado'
   }
 }

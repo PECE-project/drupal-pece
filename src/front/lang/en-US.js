@@ -20,6 +20,8 @@ export default {
   a11y: {
     main_navigation: 'Main navigation',
     text_search: 'Search field to find content in site',
-    submit_search: 'Submit search'
+    submit_search: 'Submit search',
+    dark_theme_title_off: 'Dark theme activated',
+    dark_theme_title_on: 'Dark theme deactivated'
   }
 }
