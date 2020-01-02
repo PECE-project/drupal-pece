@@ -13,7 +13,7 @@
           </a>
         </h2>
       </header>
-      <footer class="card__meta mt-1" role="contentinfo">
+      <footer class="card__meta mt-1">
         <div class="card__info text-gray-600">
           <a href="#" class="card__user-link">
             <span class="underline">Mike Fortun</span>
