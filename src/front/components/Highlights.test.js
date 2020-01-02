@@ -16,7 +16,7 @@ describe('Highlights', () => {
 
   test('First item must be enabled', () => {
     const first = wrapper.findAll('[data-pece="highlights-items"]').at(0)
-    expect(first.classes()).toContain('highlights__list__item__button--active')
+    expect(first.classes()).toContain('highlights__item__button--active')
   })
 
   test('the first item should be highlighted', () => {
