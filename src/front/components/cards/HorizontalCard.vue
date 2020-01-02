@@ -1,6 +1,6 @@
 <template>
   <div class="horizontal-card flex rounded overflow-hidden shadow-pece">
-    <div class="horizontal-card__media w-1/4">
+    <div class="horizontal-card__media">
       <a href="#">
         <img src="https://picsum.photos/320" alt="Description image" class="object-contain">
       </a>
@@ -27,4 +27,10 @@ export default {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.horizontal-card {
+  &__media {
+    width: 100px;
+  }
+}
+</style>
