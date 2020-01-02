@@ -5,3 +5,34 @@
 
 
 @import "transitions";
+@import "a11y";
+
+.container {
+	transition: max-width .5s;
+}
+
+.pece-container {
+	@apply relative mx-auto px-6;
+
+	@media (min-width: theme('screens.lg')) {
+		@apply px-0;
+	}
+}
+
+.link-accent-transparent, .btn-accent-transparent, .link-accent, .btn-accent {
+	@apply py-3 px-5 rounded-full;
+}
+
+.link-accent, .btn-accent {
+	@apply bg-accent text-white;
+	&:hover {
+		@apply bg-accentHover;
+	}
+}
+
+.link-accent-transparent, .btn-accent-transparent {
+	@apply border border-accent bg-transparent text-accent;
+	&:hover {
+		@apply text-white bg-accent;
+	}
+}
