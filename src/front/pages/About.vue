@@ -1,6 +1,9 @@
 <template>
   <div class="about mt-6">
-    <section class="highlights">
+    <h1 class="font-bold text-4xl uppercase mb-6">
+      {{ $t('about') }}
+    </h1>
+    <section>
       <tabs :uppercase="true">
         <tab label="Projects">
           <list-cards :data="new Array(4)" :vertical="true">
