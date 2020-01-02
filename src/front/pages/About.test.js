@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils'
 
-import Home from '@/pages/Home.vue'
+import About from '@/pages/About.vue'
 
-const wrapper = shallowMount(Home)
+const wrapper = shallowMount(About)
 
-describe('Home page', () => {
+describe('About page', () => {
   test('is a Vue instance', () => {
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
