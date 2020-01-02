@@ -26,15 +26,15 @@
         <li
           v-for="(hl, index) in highlights"
           :key="`highlight-${index}`"
-          class="highlights__list__item w-full cursor-pointer"
+          class="highlights__item w-full cursor-pointer"
         >
           <button
             ref="highlightItem"
-            :class="{ 'highlights__list__item__button--active': hl.title === highlight.title }"
+            :class="{ 'highlights__item__button--active': hl.title === highlight.title }"
             @click="setChosenHighlight(hl)"
             @keydown.enter="setChosenHighlight(hl)"
             @keydown="navBetweenTabsByKeyBoard($event, index)"
-            class="highlights__list__item__button h-full w-full block p-5 text-left"
+            class="highlights__item__button h-full w-full block p-4 text-left"
             data-pece="highlights-items"
           >
             <h2 class="text-gray-800 text-sm mb-1 font-bold leading-tight">
@@ -105,8 +105,8 @@ export default {
       transition: transform.5s;
     }
   }
-  &__list {
-    &__item__button {
+  &__item {
+    &__button {
       @apply relative border-b border-solid border-gray-100;
       &--active, &:hover {
         @apply bg-gray-100;
@@ -125,10 +125,12 @@ export default {
           }
         }
       }
-      &:not(:last-child) {
-        @screen md {
-          @apply border-r;
-        }
+    }
+  }
+  &:not(:last-child) {
+    .highlights__item__button {
+      @screen md {
+        @apply border-b-0 border-r;
       }
     }
   }
