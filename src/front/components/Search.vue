@@ -11,8 +11,8 @@
         v-model="term"
         @focus="searchFocused = true"
         @blur="searchFocused = false"
+        :placeholder="$t('search')"
         class="shadow-pece p-4 pr-12 w-full"
-        placeholder="Search"
         type="text"
         name="search"
       >

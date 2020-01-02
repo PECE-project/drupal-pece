@@ -26,7 +26,7 @@ export default {
   props: {
     linkSeeMore: {
       type: String,
-      default: '#'
+      default: ''
     },
     direction: {
       type: String,
@@ -53,15 +53,15 @@ export default {
     @apply ml-0;
   }
   &__item {
-    @apply w-1/2 mb-4 pl-4;
+    @apply w-full mb-4 pl-4;
+    @screen sm {
+      @apply w-1/2;
+    }
     @screen md {
-      @apply w-1/4 mb-0;
+      @apply w-1/4;
     }
     &--vertical {
       @apply pl-0 w-full;
-      &:not(:first-child) {
-        @apply mt-4;
-      }
     }
   }
 }
