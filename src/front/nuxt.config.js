@@ -90,9 +90,7 @@ module.exports = {
   /*
    ** svg Sprite configuration
    */
-  svgSprite: {
-    input: '~/assets/svg/'
-  },
+  svgSprite: {},
   /*
    ** Browser config
    */
