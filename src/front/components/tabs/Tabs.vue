@@ -3,14 +3,14 @@
     <ul
       ref="tabsList"
       v-show="tabList.length"
-      class="tabs__list flex flex-wrap sm:flex-no-wrap border-b border-gray-300"
+      class="tabs__list flex flex-wrap lg:flex-no-wrap border-b border-gray-300"
       role="tablist"
     >
       <li
         v-for="(tab, index) in tabList"
         :key="`tab${tab.uid}`"
         role="presentation"
-        class="tabs__item w-1/2 sm:w-auto"
+        class="tabs__item w-full lg:w-auto"
       >
         <a
           ref="tabsLinks"
@@ -23,7 +23,7 @@
           :aria-selected="index === selectedIndex"
           :tabindex="index !== selectedIndex ? -1 : null"
           role="tab"
-          class="tabs__link flex p-4 px-3 sm:px-6 block"
+          class="tabs__link flex h-full items-start leading-none py-4 px-3 md:px-6 block"
         >
           {{ tab.label }}
         </a>
@@ -126,7 +126,9 @@ export default {
   &__item {
     &:first-child {
       .tabs__link {
-        @apply pl-0;
+        @screen lg {
+          @apply pl-0;
+        }
 
         &[aria-selected="true"] {
           @apply border-l-0;
@@ -141,10 +143,10 @@ export default {
       content: '';
       width: 4px;
       height: 15px;
-      top: 4px;
+      top: 0;
     }
     &[aria-selected="true"] {
-      @apply relative border-l border-r border-gray-300;
+      @apply relative bg-gray-100;
       &:before {
         @apply bg-accent;
       }
@@ -153,6 +155,9 @@ export default {
         content: '';
         height: 1px;
         bottom: -1px;
+      }
+      @screen lg {
+        @apply bg-transparent border-l border-r border-gray-300;
       }
     }
     &--disabled {
