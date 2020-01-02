@@ -15,11 +15,13 @@
       </div>
       <div class="flex flex-wrap pt-4 sm:py-8 sm:pl-4">
         <div class="w-full sm:w-1/2 text-center">
-          <img
-            class="w-56 inline sm:block"
-            src="~/assets/images/logo-pece.png"
-            alt="Logo PECE project"
-          >
+          <nuxt-link :to="{ name: 'home___pt' }">
+            <img
+              class="w-56 inline sm:block"
+              src="~/assets/images/logo-pece.png"
+              alt="Logo PECE project"
+            >
+          </nuxt-link>
         </div>
         <div class="w-full sm:w-1/2">
           <ul class="flex items-center justify-center sm:justify-end py-8">

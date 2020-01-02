@@ -19,9 +19,9 @@
         class="p-6 py-5 md:px-4 lg:px-6 cursor-pointer hover:text-accent"
         data-pece="menuHeader-items"
       >
-        <a :href="menu.link">
-          {{ menu.label }}
-        </a>
+        <nuxt-link :to="{ name: `${menu.routeName}___${$i18n.locale}` }">
+          {{ $t(menu.label) }}
+        </nuxt-link>
       </li>
     </ul>
   </nav>
