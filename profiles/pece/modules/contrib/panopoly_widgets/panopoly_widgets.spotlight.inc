@@ -287,6 +287,44 @@ function panopoly_widgets_field_widget_form(&$form, &$form_state, $field, $insta
       '#default_value' => isset($items[$delta]['fid']) ? $items[$delta]['fid'] : NULL,
     );
 
+    // Allow cropping via the manualcrop module.
+    if (module_exists('manualcrop') && user_access("use manualcrop")) {
+      $fid = isset($form_state['values'][$field['field_name']][$langcode][$delta]['fid']) ?
+        $form_state['values'][$field['field_name']][$langcode][$delta]['fid'] : $element['fid']['#default_value'];
+      $file = !empty($fid) ? file_load($fid) : NULL;
+
+      // If the remove button was clicked, then unset the file.
+      $triggering_parents = !empty($form_state['triggering_element']) ? $form_state['triggering_element']['#parents'] : array();
+      if (count($triggering_parents) >= 5 && $triggering_parents[4] == 'remove_button' && $triggering_parents[2] == $delta) {
+        $file = NULL;
+      }
+
+      if (!empty($file)) {
+        $manualcrop = array(
+          'manualcrop_enable' => TRUE,
+          'manualcrop_keyboard' => TRUE,
+          'manualcrop_thumblist' => FALSE,
+          'manualcrop_inline_crop' => FALSE,
+          'manualcrop_crop_info' => TRUE,
+          'manualcrop_instant_preview' => TRUE,
+          'manualcrop_instant_crop' => FALSE,
+          'manualcrop_default_crop_area' => TRUE,
+          'manualcrop_maximize_default_crop_area' => TRUE,
+          'manualcrop_styles_mode' => 'include',
+          'manualcrop_styles_list' => array(
+            'panopoly_image_spotlight' => 'panopoly_image_spotlight',
+          ),
+          'manualcrop_require_cropping' => array(),
+        );
+        manualcrop_croptool_process($form, $form_state, $element['fid'], $file, $manualcrop);
+      }
+      else {
+        // Mark this element as supporting manualcrop, even if the crop tool
+        // isn't currently available.
+        $element['fid']['manualcrop'] = array();
+      }
+    }
+
     $element['alt'] = array(
       '#title' => t('Alt text'),
       '#type' => 'textfield',
@@ -435,9 +473,9 @@ function theme_panopoly_spotlight_wrapper($variables){
       $output .= '<ul>';
     }
     else {
-      // We're not displaying a full pager but we still want to render the full pager, and just hide it
-      // in an accessible way, instead of not rendering it at all.
-      $output .= '<ul class="element-invisible">';
+      // We're not displaying a full pager but we still want to put the links
+      // in the DOM, because the Javascript depends on them.
+      $output .= '<ul style="display: none;">';
     }
     foreach ($items as $delta => $item_data) {
       $output .= '<li>' . '<a href="#panopoly-spotlight-' . $delta . '">' . ($delta+1) . '</a></li>';
@@ -449,13 +487,13 @@ function theme_panopoly_spotlight_wrapper($variables){
 
       // Have to split up previous and next so that we can squeeze pause between them if needed.
       if ($pager_style == 'mini') {
-        $output .= '<a href="#panopoly-spotlight" class="panopoly-spotlight-previous">' . t('Prev') . '</a>';
+        $output .= '<a href="#" class="panopoly-spotlight-previous">' . t('Prev') . '</a>';
       }
       if (variable_get('panopoly_widgets_spotlight_pause_play_buttons', 1)) {
         $output .= '<a href="#" class="panopoly-spotlight-pause-play">' . t('Pause') . '</a>';
       }
       if ($pager_style == 'mini') {
-        $output .= '<a href="#panopoly-spotlight" class="panopoly-spotlight-next">' . t('Next') . '</a>';
+        $output .= '<a href="#" class="panopoly-spotlight-next">' . t('Next') . '</a>';
       }
 
       $output .= '</div>';
