@@ -267,7 +267,7 @@ projects[panels_mini_ipe][subdir] = contrib
 projects[panopoly_admin][version] = 1.72
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_core][version] = 1.71
+projects[panopoly_core][version] = 1.72
 projects[panopoly_core][subdir] = contrib
 
 projects[panopoly_images][version] = 1.71
