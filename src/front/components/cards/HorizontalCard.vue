@@ -2,7 +2,7 @@
   <div class="horizontal-card flex rounded overflow-hidden shadow-pece">
     <div class="horizontal-card__media">
       <a href="#">
-        <img src="https://picsum.photos/320" alt="Description image" class="object-contain">
+        <img src="~/assets/images/media/1067-320x200.jpg" alt="Description image" class="object-contain">
       </a>
     </div>
     <div class="horizontal-card__content w-3/3 px-3 self-center">
