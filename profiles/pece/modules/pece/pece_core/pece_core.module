@@ -115,8 +115,8 @@ function pece_core_er_viewmode_get_view_modes_alter(&$view_modes, $field, $insta
   unset($view_modes['full']);
   $card_title = $view_modes['card'];
   $view_modes = array(
-    'card' => $card_title,
-  ) + $view_modes;
+      'card' => $card_title,
+    ) + $view_modes;
 }
 
 /**
@@ -135,4 +135,53 @@ function pece_core_form_pece_fieldsite_node_form_alter(&$form, &$form_state) {
 function pece_core_preprocess_page(&$variables) {
   $variables['pece_docs'] = l('Need help with PECE?', 'https://pece-project.github.io/drupal-pece/');
   $variables['pece_slack'] = l('Join the PECE Slack channel', 'https://join.slack.com/t/peceniks/shared_invite/enQtNzUzMjc4MjgxNjE5LTM5ZWI0NWVlMzhkNmFkNDYwNTBhZDA4MDFjY2ViNTU5ZjYyNzRhY2EwNDk0ODk1YzIxNDc2MGU4ODE1ZTU3ZjU');
+}
+
+/**
+ * Implements Hook form alter
+ * @param $form
+ * @param $form_state
+ * @param $form_id
+ */
+function pece_core_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['field_pece_contributors'])) {
+    $form['#submit'][] = 'pece_core_contributors_submit';
+    $form['field_pece_contributors']['#element_validate'][] = 'pece_core_validate_contributors';
+  }
+}
+
+/**
+ * Validate contributors
+ * @param $element
+ * @param $form_state
+ */
+function pece_core_validate_contributors($element, &$form_state) {
+  foreach ($form_state['input']['field_pece_contributors']['und'] as $key => $contributor) {
+
+    if (isset($contributor['target_id']) && $contributor['target_id'] != '' && (strpos($contributor['target_id'], ' (') == false)) {
+      $uid = db_query('SELECT uid from {users} WHERE name = :name', array(':name' => $contributor['target_id']))->fetchField();
+
+      if (!$uid)
+        form_set_error('edit-field-pece-contributors-und-' . $key . '-target-id', t('@username isn\'t valid username.',['@username' => $contributor['target_id']]));
+    }
+  }
+}
+
+/**
+ * Change username contributor to id
+ * @param $element
+ * @param $form_state
+ */
+function pece_core_contributors_submit($form, &$form_state) {
+  foreach ($form_state['input']['field_pece_contributors']['und'] as $key => $contributor) {
+
+    if (isset($contributor['target_id']) && $contributor['target_id'] != '' && (strpos($contributor['target_id'], ' (') == false)) {
+      $uid = db_query('SELECT uid from {users} WHERE name = :name', array(':name' => $contributor['target_id']))->fetchField();
+
+      if ($uid)
+        $form_state['values']['field_pece_contributors']['und'][$key]['target_id'] = $uid;
+      else
+        form_set_error('edit-field-pece-contributors-und-' . $key . '-target-id', t('@username isn\'t valid username.',['@username' => $contributor['target_id']]));
+    }
+  }
 }
