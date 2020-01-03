@@ -1,4 +1,6 @@
 import About from '~/pages/About'
+import Analyze from '~/pages/Analyze'
+import AnalyzeQuestions from '~/pages/AnalyzeQuestions'
 import Collaborate from '~/pages/Collaborate'
 import Home from '~/pages/Home'
 
@@ -14,18 +16,23 @@ export default [
     component: About
   },
   {
-    path: '/collaborate',
+    path: '/repo/collaborate',
     name: 'collaborate___en',
     component: Collaborate
   },
   {
-    path: '/analyze',
+    path: '/repo/analyze',
     name: 'analyze___en',
+    component: Analyze
+  },
+  {
+    path: '/repo/discover',
+    name: 'discover___en',
     component: About // Using Page About avoid warning console
   },
   {
-    path: '/discover',
-    name: 'discover___en',
-    component: About // Using Page About avoid warning console
+    path: '/structured-analytics-questions-set/:slug',
+    name: 'questions_structured_analyze___en',
+    component: AnalyzeQuestions
   }
 ]

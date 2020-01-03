@@ -36,7 +36,7 @@
 import { reactive, toRefs } from '@vue/composition-api'
 
 export default {
-  name: 'About',
+  name: 'Collaborate',
   components: {
     ListCards: () => import(/* webpackChunkName: "ListCards" */ '@/components/ListCards'),
     SimpleCard: () => import(/* webpackChunkName: "SimpleCard" */ '@/components/cards/SimpleCard')
