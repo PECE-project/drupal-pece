@@ -27,6 +27,7 @@ libraries[jquery.imagesloaded][download][subtree] = imagesloaded-2.1.2
 
 ; Misc Libraries
 
+; Drupal's Masonry module requirement.
 libraries[imagesloaded][download][type] = file
 libraries[imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz
 libraries[imagesloaded][download][subtree] = imagesloaded-2.1.2
@@ -127,6 +128,10 @@ projects[views][subdir] = contrib
 projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
 ; PHP 7.2: count() on non-Countable in views_many_to_one_helper.
 projects[views][patch][2977851] = https://www.drupal.org/files/issues/2019-03-13/2977851-views-php72-count-8.patch
+; Warning: A non-numeric value encountered in views_plugin_pager_full->query()
+projects[views[patch][2885660] = https://www.drupal.org/files/issues/2018-06-28/2885660-13.patch
+; Exposed Sort By and Sort Order view pane settings not retained
+projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
 
 projects[views_infinite_scroll][version] = 2.1
 projects[views_infinite_scroll][subdir] = contrib
