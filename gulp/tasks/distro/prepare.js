@@ -17,6 +17,22 @@ gulp.task('distro:prepare', function (done) {
 
 });
 
+gulp.task('distro:clone', function (done) {
+  // Clone distro repository.
+  fs.stat('distro', function (err) {
+    if (err == null) {
+      shell.exec('rm -rf distro');
+    }
+    cloneDistroRepo(done);
+  });
+
+});
+
+gulp.task('distro:sync', function (done) {
+  // Sync latest local build with PECE Distro repo.
+  syncLocalFiles(done);
+});
+
 var rebuildToProd = function () {
   // Backup kw previous config and set kraftwagen env config to production
   // in order to prevent symlinks in the profile folder.
@@ -32,11 +48,19 @@ var rebuildToProd = function () {
 
 var prepareDistro = function (done) {
   rebuildToProd();
+  cloneDistroRepo();
+  syncLocalFiles();
+  done();
+}
 
+var cloneDistroRepo = function (done) {
+  // Clone PECE Distro repository.
   shell.exec('git clone ' + repo + ' distro');
+  done();
+}
 
-  // Update distro repository with a new build.
+var syncLocalFiles = function (done) {
+  // Update distro repository with a new production build.
   shell.exec('rsync -rptgohD --delete --progress --exclude=profiles/pece/docs  build/* distro/');
-
   done();
 }
