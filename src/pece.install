@@ -390,13 +390,11 @@ function pece_update_7112() {
 }
 
 /**
- *  Disable nodeaccess_userreference module.
+ *  Disable nodeaccess_userreference module and rebuild permissions.
  */
-/*
 function pece_update_7113() {
   module_disable(array('nodeaccess_userreference'));
   drupal_uninstall_modules(array('nodeaccess_userreference'));
-  //@TODO: only keep modules with contributor field.
   if (module_exists('features')) {
     $modules = array(
       'pece_essay',
@@ -408,4 +406,4 @@ function pece_update_7113() {
 
     node_access_rebuild(TRUE);
   }
-}*/
+}
