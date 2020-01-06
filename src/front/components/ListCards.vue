@@ -4,16 +4,16 @@
     class="list-card flex flex-wrap justify-between"
   >
     <li
-      v-for="index in data"
+      v-for="(item, index) in data"
       :key="index"
       :class="{ 'list-card__item--vertical': vertical }"
       class="list-card__item"
     >
-      <slot :item="index" />
+      <slot :item="item" />
     </li>
     <li v-show="linkSeeMore" class="flex w-full justify-end">
       <a href="#" class="flex mt-6 hover:text-accent">
-        <span class="text-xs mt-1 font-bold">SEE MORE</span>
+        <span class="text-xs mt-1 font-bold capitalize">{{ $t('see') }} {{ $t('more') }}</span>
         <svg-icon name="rightArrowThinLine" width="38px" height="26px" class="fill-current" />
       </a>
     </li>

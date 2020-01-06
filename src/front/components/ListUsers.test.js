@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils'
 
-import ListFilter from '@/components/ListFilter.vue'
+import ListUsers from '@/components/ListUsers.vue'
 
-describe('ListFilter', () => {
+describe('ListUsers', () => {
   test('is a Vue instance', () => {
-    const wrapper = shallowMount(ListFilter)
+    const wrapper = shallowMount(ListUsers)
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
 })
