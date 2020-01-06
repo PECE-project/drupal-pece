@@ -17,8 +17,15 @@
 	}
 }
 
+.link-accent-inline {
+	@apply text-accent;
+	&:hover {
+		@apply text-accentHover;
+	}
+}
+
 .link-accent-transparent, .btn-accent-transparent, .link-accent, .btn-accent {
-	@apply py-3 px-5 rounded-full;
+	@apply py-2 px-5 rounded;
 }
 
 .link-accent, .btn-accent {
