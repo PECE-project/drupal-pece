@@ -11,7 +11,7 @@ export default {
   repository: 'repositório',
   bibliography: 'bibliografia',
   search: 'Buscar',
-  see: 'ver',
+  see_more: 'ver mais',
   people: 'Usuários',
   groups: 'Grupos',
   apply: 'aplicar',
