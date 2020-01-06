@@ -1,5 +1,5 @@
 <template>
-  <div class="collaborate mt-6">
+  <div class="discover mt-6">
     <h1 class="font-bold text-4xl uppercase mb-6">
       {{ $t('repository') }}
     </h1>
