@@ -1,10 +1,11 @@
 import { shallowMount } from '@vue/test-utils'
 
-import ListFilter from '@/components/ListFilter.vue'
+import Group from '@/pages/Group.vue'
 
-describe('ListFilter', () => {
+const wrapper = shallowMount(Group)
+
+describe('Group page', () => {
   test('is a Vue instance', () => {
-    const wrapper = shallowMount(ListFilter)
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
 })

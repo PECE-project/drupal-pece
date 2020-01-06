@@ -5,9 +5,9 @@
     </h1>
     <div class="flex flex-wrap lg:flex-no-wrap">
       <section class="w-full order-2 lg:order-1 lg:w-4/6">
-        <list-cards :data="new Array(8)">
+        <list-cards :data="simpleCardData">
           <template v-slot="{ item }">
-            <simple-card :data="{ item }" />
+            <simple-card :data="item" />
           </template>
         </list-cards>
       </section>
@@ -15,7 +15,7 @@
         <form name="search-groups">
           <label for="search">
             <input
-              id="search"
+              id="search_group"
               v-model="term"
               :placeholder="`${$t('search')} ${$t('groups').toLowerCase()}`"
               class="shadow-pece p-4 pr-12 w-full border border-gray-100"
@@ -23,8 +23,8 @@
               name="search"
             >
           </label>
-          <button type="button" class="link-accent mt-4 rounded-sm">
-            Apply
+          <button type="button" class="link-accent capitalize mt-4 rounded-sm">
+            {{ $t('apply') }}
           </button>
         </form>
       </section>
@@ -34,6 +34,8 @@
 
 <script>
 import { reactive, toRefs } from '@vue/composition-api'
+
+import { simpleCardData } from '@/utils/fake'
 
 export default {
   name: 'Collaborate',
@@ -47,7 +49,8 @@ export default {
     })
 
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      simpleCardData
     }
   }
 }

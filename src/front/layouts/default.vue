@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="xl:px-6">
     <the-heading />
     <the-main>
       <nuxt />

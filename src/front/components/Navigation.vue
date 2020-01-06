@@ -11,15 +11,14 @@
       {{ $t('a11y.main_navigation') }}
     </h2>
     <ul
-      class="main-menu__list flex"
+      class="main-menu__list flex mt-4"
     >
       <li
         v-for="menu in menuHeader"
         :key="menu.label"
-        class="p-6 py-5 md:px-4 lg:px-6 cursor-pointer hover:text-accent"
         data-pece="menuHeader-items"
       >
-        <nuxt-link :to="{ name: `${menu.routeName}___${$i18n.locale}` }">
+        <nuxt-link :to="{ name: `${menu.routeName}___${$i18n.locale}` }" class="p-6 py-5 md:px-4 lg:px-6 cursor-pointer hover:text-accent">
           {{ $t(menu.label) }}
         </nuxt-link>
       </li>

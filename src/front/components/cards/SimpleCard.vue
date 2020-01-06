@@ -1,16 +1,17 @@
 <template>
-  <div class="simple-card rounded overflow-hidden shadow-pece">
-    <div class="card__media">
-      <a href="#">
-        <img src="~/assets/images/media/880-320x200.jpg" alt="Description image" class="w-full block">
-      </a>
+  <div class="simple-card rounded overflow-hidden shadow-pece flex flex-wrap flex-col h-full">
+    <div :class="{ 'flex-auto': !data.image }" class="card__media">
+      <nuxt-link :to="{ name: `group___${$i18n.locale}`, params: { slug: data.slug } }">
+        <img v-if="data.image" :src="data.image.url" :alt="data.image.alt" class="w-full block">
+        <div v-else class="bg-accent w-full h-full" />
+      </nuxt-link>
     </div>
-    <div class="card__content p-3 pb-4">
+    <div class="card__content p-3 pb-4 min-h-12">
       <!-- eslint-disable-next-line vue/require-component-is -->
       <component :is="heading" class="card__title text-sm font-bold text-gray-900 leading-tight">
-        <a href="#">
-          Open group
-        </a>
+        <nuxt-link :to="{ name: `group___${$i18n.locale}`, params: { slug: data.slug } }">
+          {{ data.title }}
+        </nuxt-link>
       </component>
     </div>
   </div>
@@ -18,7 +19,7 @@
 
 <script>
 export default {
-  name: 'Card',
+  name: 'SimpleCard',
   props: {
     data: {
       type: Object,
