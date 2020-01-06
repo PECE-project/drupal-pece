@@ -6,11 +6,12 @@
       </a>
     </div>
     <div class="card__content p-3 pb-4">
-      <h2 class="card__title text-sm font-bold text-gray-900 leading-tight">
+      <!-- eslint-disable-next-line vue/require-component-is -->
+      <component :is="heading" class="card__title text-sm font-bold text-gray-900 leading-tight">
         <a href="#">
           Open group
         </a>
-      </h2>
+      </component>
     </div>
   </div>
 </template>
@@ -22,6 +23,10 @@ export default {
     data: {
       type: Object,
       required: true
+    },
+    heading: {
+      type: String,
+      default: 'h2'
     }
   }
 }
