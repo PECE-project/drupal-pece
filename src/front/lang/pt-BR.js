@@ -8,6 +8,8 @@ export default {
   analyze: 'Analisar',
   discover: 'Descobrir',
   structured: 'estruturada',
+  repository: 'repositório',
+  bibliography: 'bibliografia',
   search: 'Buscar',
   see: 'ver',
   people: 'Usuários',

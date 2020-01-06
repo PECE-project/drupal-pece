@@ -2,6 +2,7 @@ import About from '~/pages/About'
 import Analyze from '~/pages/Analyze'
 import AnalyzeQuestions from '~/pages/AnalyzeQuestions'
 import Collaborate from '~/pages/Collaborate'
+import Discover from '~/pages/Discover'
 import Home from '~/pages/Home'
 
 export default [
@@ -28,7 +29,7 @@ export default [
   {
     path: '/pt/repo/explorar',
     name: 'discover___pt',
-    component: About // Using component About avoid warning console
+    component: Discover
   },
   {
     path: '/pt/perguntas-de-analise-estruturada/:slug',

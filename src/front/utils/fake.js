@@ -21,6 +21,19 @@ export const menuHeader = [
   }
 ]
 
+export const filter = [
+  { label: 'Artifact - Audio' },
+  { label: 'Artifact - Bundle' },
+  { label: 'Artifact - Image' },
+  { label: 'Artifact - PDF Document' },
+  { label: 'Artifact - Text' },
+  { label: 'Artifact - Website' },
+  { label: 'Group' },
+  { label: 'Memo' },
+  { label: 'PECE Essay' },
+  { label: 'Photo Essay' }
+]
+
 export const highlights = [
   {
     title: 'Platform for Experimental, Collaborative Ethnograph',
