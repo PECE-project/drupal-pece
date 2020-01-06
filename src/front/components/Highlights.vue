@@ -7,7 +7,7 @@
       ref="highlightCover"
       v-if="highlight.title"
       :href="highlight.link"
-      :title="`${$t('see')} ${highlight.title}`"
+      :title="`${$t('see_more')} ${highlight.title}`"
       class="highlights__cover w-full block"
       data-pece="highlights-cover"
     >

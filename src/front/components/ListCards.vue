@@ -13,7 +13,7 @@
     </li>
     <li v-show="linkSeeMore" class="flex w-full justify-end">
       <a href="#" class="flex mt-6 hover:text-accent">
-        <span class="text-xs mt-1 font-bold capitalize">{{ $t('see') }} {{ $t('more') }}</span>
+        <span class="text-xs mt-1 font-bold capitalize">{{ $t('see_more') }}</span>
         <svg-icon name="rightArrowThinLine" width="38px" height="26px" class="fill-current" />
       </a>
     </li>
