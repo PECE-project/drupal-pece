@@ -38,7 +38,7 @@ export default [
     component: AnalyzeQuestions
   },
   {
-    path: '/pt/group/:slug',
+    path: '/pt/grupo/:slug',
     name: 'group___pt',
     component: Group
   }
