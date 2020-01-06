@@ -9,7 +9,6 @@
           :id="`checkbox_filter_${index}`"
           :label="item.label"
           v-model="filter"
-          val="dddddd"
         />
       </li>
     </ul>
