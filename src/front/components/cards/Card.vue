@@ -22,12 +22,11 @@
           <span class="card__post-date">2 day ago</span>
         </div>
         <div class="card__tags mt-4">
-          <a href="#">
-            #science
-          </a>
-          <a href="#">
-            #climatology
-          </a>
+          <ul class="flex">
+            <li v-for="tag in fakeTags" :key="tag.label">
+              <tag :data="tag" />
+            </li>
+          </ul>
         </div>
       </footer>
     </div>
@@ -37,10 +36,33 @@
 <script>
 export default {
   name: 'Card',
+  components: {
+    Tag: () => import(/** webpackChunkName: "Tag" */ '@/components/Tag')
+  },
   props: {
     data: {
       type: Object,
       required: true
+    }
+  },
+  setup () {
+    const fakeTags = [
+      {
+        label: '#science',
+        to: {
+          path: '/'
+        }
+      },
+      {
+        label: '#climatology',
+        to: {
+          path: '/'
+        }
+      }
+    ]
+
+    return {
+      fakeTags
     }
   }
 }
@@ -53,11 +75,7 @@ export default {
   }
   &__tags {
     a {
-      @apply rounded-full bg-gray-100 text-gray-600 p-1 px-2 mr-1;
       font-size: 10px;
-      &:hover {
-        @apply bg-gray-300;
-      }
     }
   }
 }
