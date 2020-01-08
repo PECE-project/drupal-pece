@@ -1,15 +1,16 @@
 <template>
   <div class="horizontal-card flex rounded overflow-hidden shadow-pece">
     <div class="horizontal-card__media">
-      <a href="#">
-        <img src="~/assets/images/media/1067-320x200.jpg" alt="Description image" class="object-contain">
-      </a>
+      <nuxt-link :to="data.to" class="h-full">
+        <img v-if="data.image" :src="data.image.url" :alt="data.image.alt" class="w-full h-full object-cover">
+        <div v-else :aria-label="data.title" class="bg-accent w-full h-full" />
+      </nuxt-link>
     </div>
     <div class="horizontal-card__content w-3/3 px-3 self-center">
       <h2 class="card__title text-sm font-bold text-gray-900 leading-tight">
-        <a href="#" class="hover:text-accent">
-          Empirical humanities metadata wg
-        </a>
+        <nuxt-link :to="data.to" class="hover:text-accent">
+          {{ data.title }}
+        </nuxt-link>
       </h2>
     </div>
   </div>
@@ -31,6 +32,7 @@ export default {
 .horizontal-card {
   &__media {
     width: 100px;
+    height: 100px;
   }
 }
 </style>

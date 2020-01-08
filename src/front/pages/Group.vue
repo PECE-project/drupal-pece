@@ -69,21 +69,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.about {
-  &__content {
-    p {
-      @apply mb-3;
-    }
-    h2 {
-      @apply font-bold text-lg mb-3 mt-8;
-    }
-    ul {
-      @apply list-disc ml-5;
-      li {
-        @apply mb-2;
-      }
-    }
-  }
-}
-</style>
+<style lang="scss"></style>
