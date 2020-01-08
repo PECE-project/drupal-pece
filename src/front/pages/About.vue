@@ -6,30 +6,30 @@
     <section>
       <tabs :uppercase="true">
         <tab label="Projects">
-          <list-cards :data="new Array(4)" :vertical="true">
+          <list-cards :data="simpleCardData" :vertical="true">
             <template v-slot="{ item }">
-              <horizontal-card :data="{ item }" />
+              <horizontal-card :data="item" />
             </template>
           </list-cards>
         </tab>
         <tab :label="$t('people')">
-          <list-cards :data="new Array(4)" :vertical="true">
+          <list-cards :data="simpleCardData" :vertical="true">
             <template v-slot="{ item }">
-              <horizontal-card :data="{ item }" />
+              <horizontal-card :data="item" />
             </template>
           </list-cards>
         </tab>
         <tab label="substantive logics">
-          <list-cards :data="new Array(4)" :vertical="true">
+          <list-cards :data="simpleCardData" :vertical="true">
             <template v-slot="{ item }">
-              <horizontal-card :data="{ item }" />
+              <horizontal-card :data="item" />
             </template>
           </list-cards>
         </tab>
         <tab label="design logics">
-          <list-cards :data="new Array(4)" :vertical="true">
+          <list-cards :data="simpleCardData" :vertical="true">
             <template v-slot="{ item }">
-              <horizontal-card :data="{ item }" />
+              <horizontal-card :data="item" />
             </template>
           </list-cards>
         </tab>
@@ -111,6 +111,8 @@
 </template>
 
 <script>
+import { simpleCardData } from '@/utils/fake'
+
 export default {
   name: 'About',
   components: {
@@ -118,6 +120,11 @@ export default {
     Tab: () => import(/* webpackChunkName: "tab" */ '@/components/tabs/Tab'),
     ListCards: () => import(/* webpackChunkName: "ListCards" */ '@/components/ListCards'),
     HorizontalCard: () => import(/* webpackChunkName: "HorizontalCard" */ '@/components/cards/HorizontalCard')
+  },
+  setup () {
+    return {
+      simpleCardData
+    }
   }
 }
 </script>

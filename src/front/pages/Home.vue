@@ -36,14 +36,14 @@
     <div class="sidebar w-full mt-12 pr-0 lg:mt-0 lg:w-2/6 lg:pl-8 xl:pl-12">
       <tabs :uppercase="true">
         <tab :label="$t('groups')">
-          <list-cards :data="new Array(4)" :vertical="true">
+          <list-cards :data="simpleCardData" :vertical="true">
             <template v-slot="{ item }">
-              <horizontal-card :data="{ item }" />
+              <horizontal-card :data="item" />
             </template>
           </list-cards>
         </tab>
         <tab :label="$t('people')">
-          <h3>CONTENT TAB</h3>
+          <list-users :users="users" :horizontal="true" />
         </tab>
       </tabs>
     </div>
@@ -51,15 +51,24 @@
 </template>
 
 <script>
+import { simpleCardData, users } from '@/utils/fake'
+
 export default {
   name: 'Home',
   components: {
-    Highlights: () => import(/* webpackChunkName: "Highlights" */ '@/components/Highlights'),
     Tabs: () => import(/* webpackChunkName: "tabs" */ '@/components/tabs/Tabs'),
     Tab: () => import(/* webpackChunkName: "tab" */ '@/components/tabs/Tab'),
-    ListCards: () => import(/* webpackChunkName: "ListCards" */ '@/components/ListCards'),
     Card: () => import(/* webpackChunkName: "Card" */ '@/components/cards/Card'),
+    ListCards: () => import(/* webpackChunkName: "ListCards" */ '@/components/ListCards'),
+    ListUsers: () => import(/* webpackChunkName: "ListUsers" */ '@/components/ListUsers'),
+    Highlights: () => import(/* webpackChunkName: "Highlights" */ '@/components/Highlights'),
     HorizontalCard: () => import(/* webpackChunkName: "HorizontalCard" */ '@/components/cards/HorizontalCard')
+  },
+  setup () {
+    return {
+      simpleCardData,
+      users
+    }
   }
 }
 </script>

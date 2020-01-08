@@ -78,6 +78,12 @@ export const simpleCardData = [
     id: 1,
     title: 'Data Science',
     slug: 'data-science',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'data-science'
+      }
+    },
     image: {
       alt: 'Image open group',
       url: 'https://i.picsum.photos/id/200/480/320.jpg'
@@ -87,6 +93,12 @@ export const simpleCardData = [
     id: 2,
     title: 'History PECE',
     slug: 'history-pece',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'history-pece'
+      }
+    },
     image: {
       alt: 'Image open group',
       url: 'https://i.picsum.photos/id/96/480/320.jpg'
@@ -96,12 +108,24 @@ export const simpleCardData = [
     id: 3,
     title: 'Empirical Group',
     slug: 'empirical',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'empirical'
+      }
+    },
     image: null
   },
   {
     id: 4,
     title: 'Pece Users',
     slug: 'pece-users',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'pece-users'
+      }
+    },
     image: {
       alt: 'Image open group',
       url: 'https://i.picsum.photos/id/222/480/320.jpg'
@@ -111,6 +135,12 @@ export const simpleCardData = [
     id: 5,
     title: 'Analyz Group',
     slug: 'analyze',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'analyze'
+      }
+    },
     image: {
       alt: 'Image open group',
       url: 'https://i.picsum.photos/id/180/480/320.jpg'
@@ -120,6 +150,12 @@ export const simpleCardData = [
     id: 6,
     title: 'Open Group',
     slug: 'open-group',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'open-group'
+      }
+    },
     image: {
       alt: 'Image open group',
       url: 'https://i.picsum.photos/id/80/480/320.jpg'
@@ -129,6 +165,12 @@ export const simpleCardData = [
     id: 7,
     title: 'EUA group',
     slug: 'eua-group',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'eua-group'
+      }
+    },
     image: {
       alt: 'Image open group',
       url: 'https://i.picsum.photos/id/20/480/320.jpg'
@@ -138,6 +180,12 @@ export const simpleCardData = [
     id: 8,
     title: 'Data education',
     slug: 'data-education',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'data-education'
+      }
+    },
     image: {
       alt: 'Image open group',
       url: 'https://i.picsum.photos/id/269/480/320.jpg'
