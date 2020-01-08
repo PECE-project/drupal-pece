@@ -5,7 +5,7 @@
     </h1>
     <div class="flex flex-wrap lg:flex-no-wrap">
       <section class="w-full order-2 lg:order-1 lg:w-4/6">
-        <list-cards :data="simpleCardData">
+        <list-cards :data="discoverData">
           <template v-slot="{ item }">
             <simple-card :data="item" />
           </template>
@@ -39,7 +39,7 @@
 <script>
 import { reactive, toRefs } from '@vue/composition-api'
 
-import { filter as filterItems, simpleCardData } from '@/utils/fake'
+import { filter as filterItems, discoverData } from '@/utils/fake'
 
 export default {
   name: 'DiscoverPage',
@@ -62,7 +62,7 @@ export default {
       ...toRefs(state),
       filterItems,
       setFilter,
-      simpleCardData
+      discoverData
     }
   }
 }

@@ -193,6 +193,168 @@ export const simpleCardData = [
   }
 ]
 
+export const discoverData = [
+  {
+    id: 2,
+    title: 'Researcher audio artifact',
+    slug: 'researcher-audio-artifact',
+    __typename: 'ArtifactAudioConnection',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'researcher-audio-artifact'
+      }
+    },
+    image: null
+  },
+  {
+    id: 3,
+    title: 'Researcher sample artifact bundle',
+    slug: 'researcher-sample-artifact-bundle',
+    __typename: 'ArtifactBundleConnection',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'researcher-sample-artifact-bundle'
+      }
+    },
+    image: null
+  },
+  {
+    id: 4,
+    title: 'Normal user public image artifact',
+    slug: 'normal-user-public-image-artifact',
+    __typename: 'ArtifactImageConnection',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'normal-user-public-image-artifact'
+      }
+    },
+    image: null
+  },
+  {
+    id: 5,
+    title: `contributor's pdf artifact`,
+    slug: 'contributors-pdf artifact',
+    __typename: 'ArtifactPDFDocumentConnection',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'contributors-pdf-artifact'
+      }
+    },
+    image: null
+  },
+  {
+    id: 6,
+    title: 'Open text artifact but private to group',
+    slug: 'open-text-artifact-but-private-to-group',
+    __typename: 'ArtifactTextConnection',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'open-text-artifact-but-private-to-group'
+      }
+    },
+    image: null
+  },
+  {
+    id: 7,
+    title: 'Researcher sample video artifact',
+    slug: 'researcher-sample-video-artifact',
+    __typename: 'ArtifactVideoConnection',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'researcher-sample-video-artifact'
+      }
+    },
+    image: null
+  },
+  {
+    id: 8,
+    title: 'Researcher website artifact - open',
+    slug: 'researcher-website-artifact---open',
+    __typename: 'ArtifactWebsiteConnection',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'researcher-website-artifact---open'
+      }
+    },
+    image: null
+  },
+  {
+    id: 9,
+    title: 'Test group by researcher',
+    slug: 'test-group-by-researcher',
+    __typename: 'GroupConnection',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'test-group-by-researcher'
+      }
+    },
+    image: {
+      alt: 'Test group by researcher',
+      url: 'https://i.picsum.photos/id/200/480/320.jpg'
+    }
+  },
+  {
+    id: 10,
+    title: 'Open memo in private group but made public',
+    slug: 'open-memo-in-private-group-but-made-public',
+    __typename: 'MemoConnection',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'open-memo-in-private-group-but-made-public'
+      }
+    },
+    image: null
+  },
+  {
+    id: 11,
+    title: `lindsay's new researcher pece essay`,
+    slug: 'lindsays-new-researcher-pece-essay',
+    __typename: 'PeceEssayConnection',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'lindsays-new-researcher-pece-essay'
+      }
+    },
+    image: null
+  },
+  {
+    id: 12,
+    title: 'Researcher photo essay [open no group]',
+    slug: 'researcher-photo-essay-open-no-group',
+    __typename: 'PhotoEssayConnection',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'researcher-photo-essay-open-no-group'
+      }
+    },
+    image: null
+  },
+  {
+    id: 13,
+    title: 'Researcher timeline essay',
+    slug: 'researcher-timeline-essay',
+    __typename: 'TimelineEssayConnection',
+    to: {
+      name: 'home___en',
+      params: {
+        slug: 'researcher-timeline-essay'
+      }
+    },
+    image: null
+  }
+]
+
 export const highlights = [
   {
     title: 'Platform for Experimental, Collaborative Ethnograph',
