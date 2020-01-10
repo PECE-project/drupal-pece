@@ -13,7 +13,8 @@ module.exports = {
         accentHover: '#595BB5'
       },
       boxShadow: {
-        pece: '0 6px 4px #F7FAFC'
+        pece: '0 6px 4px #F7FAFC',
+        gray100: '0 6px 4px #EDF2F7'
       },
       margin: {
         '-px': '-1px',

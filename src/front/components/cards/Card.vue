@@ -37,7 +37,7 @@
 export default {
   name: 'Card',
   components: {
-    Tag: () => import(/** webpackChunkName: "Tag" */ '@/components/Tag')
+    Tag: () => import(/* webpackChunkName: "Tag" */ '@/components/Tag')
   },
   props: {
     data: {

@@ -79,7 +79,7 @@ export const simpleCardData = [
     title: 'Data Science',
     slug: 'data-science',
     to: {
-      name: 'home___en',
+      name: 'group___en',
       params: {
         slug: 'data-science'
       }
@@ -94,7 +94,7 @@ export const simpleCardData = [
     title: 'History PECE',
     slug: 'history-pece',
     to: {
-      name: 'home___en',
+      name: 'group___en',
       params: {
         slug: 'history-pece'
       }
@@ -109,7 +109,7 @@ export const simpleCardData = [
     title: 'Empirical Group',
     slug: 'empirical',
     to: {
-      name: 'home___en',
+      name: 'group___en',
       params: {
         slug: 'empirical'
       }
@@ -121,7 +121,7 @@ export const simpleCardData = [
     title: 'Pece Users',
     slug: 'pece-users',
     to: {
-      name: 'home___en',
+      name: 'group___en',
       params: {
         slug: 'pece-users'
       }
@@ -136,7 +136,7 @@ export const simpleCardData = [
     title: 'Analyz Group',
     slug: 'analyze',
     to: {
-      name: 'home___en',
+      name: 'group___en',
       params: {
         slug: 'analyze'
       }
@@ -151,7 +151,7 @@ export const simpleCardData = [
     title: 'Open Group',
     slug: 'open-group',
     to: {
-      name: 'home___en',
+      name: 'group___en',
       params: {
         slug: 'open-group'
       }
@@ -166,7 +166,7 @@ export const simpleCardData = [
     title: 'EUA group',
     slug: 'eua-group',
     to: {
-      name: 'home___en',
+      name: 'group___en',
       params: {
         slug: 'eua-group'
       }
@@ -181,7 +181,7 @@ export const simpleCardData = [
     title: 'Data education',
     slug: 'data-education',
     to: {
-      name: 'home___en',
+      name: 'group___en',
       params: {
         slug: 'data-education'
       }
@@ -401,3 +401,102 @@ export const highlights = [
     created_at: 'January 10, 2019'
   }
 ]
+
+export const tagCard = [
+  {
+    id: 1,
+    __typename: 'ArtifactAudioConnection',
+    title: 'Artifact - audio',
+    body: 'Doloremque diamlorem incidunt, repellendus expedita? Sollicitudin aptent pharetra provident? Praesentium, animi egestas netus. Justo ullam diam diam mattis aliquip nascetur aspernatur auctor pariatur repudiandae auctor, fusce? Occaecat, etiam, dolor dolore? Natus nostra, porro autem praesent',
+    to: {
+      name: 'home___en'
+    }
+  },
+  {
+    id: 2,
+    __typename: 'ArtifactBundleConnection',
+    title: 'Bundle test',
+    body: 'Doloremque diamlorem incidunt, repellendus expedita? etiam, dolor dolore? Natus nostra, porro autem praesent',
+    to: {
+      name: 'home___en'
+    }
+  },
+  {
+    id: 3,
+    __typename: 'ArtifactVideoConnection',
+    title: 'Video test artifact lorem ipsum specially body',
+    body: 'Doloremque diamlorem',
+    to: {
+      name: 'home___en'
+    }
+  },
+  {
+    id: 4,
+    __typename: 'ArtifactImageConnection',
+    title: 'Album research PECE Ireland',
+    body: 'Praesentium, animi egestas netus. Justo ullam diam diam mattis aliquip nascetur aspernatur auctor pariatur repudiandae auctor, fusce? Occaecat, etiam, dolor dolore? Natus nostra, porro autem praesent',
+    to: {
+      name: 'home___en'
+    }
+  },
+  {
+    id: 5,
+    __typename: 'ArtifactPDFDocumentConnection',
+    title: 'PDF file document with essay default documentation',
+    body: 'Doloremque diamlorem incidunt, repellendus expedita? etiam, dolor dolore? Natus nostra, porro autem praesent',
+    to: {
+      name: 'home___en'
+    }
+  },
+  {
+    id: 6,
+    __typename: 'ArtifactTextConnection',
+    title: 'Text and more',
+    body: 'Doloremque diamlorem',
+    to: {
+      name: 'home___en'
+    }
+  },
+  {
+    id: 7,
+    __typename: 'ArtifactWebsiteConnection',
+    title: 'Website composition essay',
+    body: 'Praesentium, nascetur aspernatur auctor pariatur repudiandae auctor, fusce? Occaecat, etiam, dolor dolore? Natus nostra, porro autem praesent',
+    to: {
+      name: 'home___en'
+    }
+  },
+  {
+    id: 8,
+    __typename: 'GroupConnection',
+    title: 'New group for new PECE website',
+    body: 'Doloremque diamlorem incidunt, Doloremque diamlorem incidunt, Doloremque diamlorem incidunt, repellendus expedita? etiam, dolor dolore? Natus nostra, porro autem praesent',
+    to: {
+      name: 'home___en'
+    }
+  },
+  {
+    id: 9,
+    __typename: 'PeceEssayConnection',
+    title: 'Pece essay',
+    body: 'Doloremque diamlorem, nascetur aspernatur auctor pariatur',
+    to: {
+      name: 'home___en'
+    }
+  }
+]
+
+export const icons = {
+  ArtifactAudioConnection: 'audio',
+  ArtifactBundleConnection: 'bundle',
+  ArtifactImageConnection: 'photo',
+  ArtifactPDFDocumentConnection: 'pdf-file',
+  ArtifactTextConnection: 'text',
+  ArtifactVideoConnection: 'video',
+  ArtifactWebsiteConnection: 'web',
+  GroupConnection: 'group',
+  MemoConnection: 'memo',
+  PeceEssayConnection: 'essay',
+  PhotoEssayConnection: 'photo',
+  TimelineEssayConnection: 'timeline'
+}

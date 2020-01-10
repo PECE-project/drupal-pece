@@ -49,13 +49,16 @@ import { users } from '@/utils/fake'
 export default {
   name: 'User',
   components: {
-    Tag: () => import(/** webpackChunkName: "Tag" */ '@/components/Tag')
+    Tag: () => import(/* webpackChunkName: "Tag" */ '@/components/Tag')
   },
   setup (_, { root }) {
     const fakeTag = {
       label: 'Foo',
       to: {
-        path: '/'
+        name: 'tag___en',
+        params: {
+          slug: 'foo'
+        }
       }
     }
 
