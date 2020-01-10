@@ -5,6 +5,7 @@ import Collaborate from '@/pages/Collaborate'
 import Discover from '@/pages/Discover'
 import Group from '@/pages/Group'
 import Home from '@/pages/Home'
+import Tag from '@/pages/Tag'
 import User from '@/pages/User'
 
 export default [
@@ -47,5 +48,10 @@ export default [
     path: '/user/:slug',
     name: 'user___en',
     component: User
+  },
+  {
+    path: '/tag/:slug',
+    name: 'tag___en',
+    component: Tag
   }
 ]
