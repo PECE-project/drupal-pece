@@ -38,31 +38,26 @@ context('Permissions', () => {
 
     it("anonymous user can't access this content", () => {
       cy.testNoAccess(path)
-      cy.testNoAccess(path + '/essay')
     })
 
     it('authenticated user can\'t access this content', () => {
       cy.login('user')
       cy.testNoAccess(path)
-      cy.testNoAccess(path + '/essay')
     })
 
     it('researcher user can\'t access this content', () => {
       cy.login('researcher')
       cy.testNoAccess(path)
-      cy.testNoAccess(path + '/essay')
     })
 
     it('contributor user can\'t access this content', () => {
       cy.login('contributor')
       cy.testNoAccess(path)
-      cy.testNoAccess(path + '/essay')
     })
 
     it('owner can view and edit this content', () => {
       cy.login('owner')
       cy.testAccess(path)
-      cy.testAccess(path + '/essay')
     })
   })
 

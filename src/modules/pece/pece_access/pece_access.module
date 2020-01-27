@@ -70,7 +70,7 @@ function pece_access_node_update($node) {
   _pece_access_node_save($node);
 
   //rebuild permissions to PECE Essay
-  if ($node->type == "pece_essay") {
+  if ($node->type == "pece_essay" || $node->type == "pece_artifact_text") {
     node_access_rebuild_bonus_queue([$node->nid]);
   }
 
@@ -593,7 +593,7 @@ function pece_access_allow_contibutors_edit_content(&$perms, $context) {
 }
 
 /**
- *  Implements node access to PECE Essay to use the panels from contributors
+ *  Implements node access to PECE Essay and Artifacts to use the panels from contributors
  * @param $node
  * @param $op
  * @param $account
@@ -604,7 +604,7 @@ function pece_access_node_access($node, $op, $account) {
   // $node can be string or object, in this case we need object
   $type = is_object($node) ? $node->type : NULL;
 
-  if ($type == "pece_essay" && in_array($type, node_permissions_get_configured_types())) {
+  if (($type == "pece_essay" || $type == "pece_artifact_text") && in_array($type, node_permissions_get_configured_types())) {
 
     $permission = pece_access_get_permission($node);
     if ($permission == 'private' && $account->uid != $node->uid)
