@@ -277,7 +277,7 @@ function pece_artifacts_text_field_default_field_instances() {
     'fences_wrapper' => 'div',
     'field_name' => 'field_pece_contributors',
     'label' => 'Contributors',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'nodeaccess_userreference' => array(
         'all' => array(

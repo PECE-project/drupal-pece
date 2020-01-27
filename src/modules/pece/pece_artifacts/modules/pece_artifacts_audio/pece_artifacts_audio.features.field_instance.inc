@@ -176,7 +176,7 @@ function pece_artifacts_audio_field_default_field_instances() {
     'field_name' => 'field_pece_contributors',
     'label' => 'Contributors',
     'locked' => TRUE,
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'nodeaccess_userreference' => array(
         'all' => array(

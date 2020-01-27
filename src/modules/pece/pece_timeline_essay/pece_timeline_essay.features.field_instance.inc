@@ -208,7 +208,7 @@ function pece_timeline_essay_field_default_field_instances() {
     'fences_wrapper' => 'div_div_div',
     'field_name' => 'field_pece_contributors',
     'label' => 'Contributors',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'nodeaccess_userreference' => array(
         'all' => array(
