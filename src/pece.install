@@ -433,3 +433,10 @@ function pece_update_7114() {
     }
   }
 }
+
+/**
+ *  Update contributors field to optional field.
+ */
+function pece_update_7115() {
+  node_access_rebuild(TRUE);
+}
