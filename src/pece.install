@@ -407,3 +407,29 @@ function pece_update_7113() {
     node_access_rebuild(TRUE);
   }
 }
+
+/**
+ *  Update contributors field to optional field.
+ */
+function pece_update_7114() {
+
+  if (module_exists('features')) {
+    $modules = array(
+      'pece_artifacts_audio',
+      'pece_artifacts_bundle',
+      'pece_artifacts_fieldnote',
+      'pece_artifacts_image',
+      'pece_artifacts_pdf',
+      'pece_artifacts_text',
+      'pece_artifacts_video',
+      'pece_artifacts_website',
+      'pece_memo',
+      'pece_photo_essay',
+      'pece_timeline_essay',
+    );
+
+    foreach ($modules as $module) {
+      features_revert_module($module);
+    }
+  }
+}
