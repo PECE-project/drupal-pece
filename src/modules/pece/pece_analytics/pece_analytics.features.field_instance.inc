@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_analytics.features.field_instance.inc
@@ -40,6 +41,12 @@ function pece_analytics_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -138,6 +145,12 @@ function pece_analytics_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'meta_content' => array(
         'label' => 'above',
         'settings' => array(),
@@ -210,6 +223,12 @@ function pece_analytics_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
