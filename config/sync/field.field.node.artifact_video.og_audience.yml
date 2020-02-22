@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.storage.node.og_audience
     - node.type.artifact_video
-    - node.type.pece_group
   module:
     - og
 id: node.artifact_video.og_audience
@@ -21,7 +20,6 @@ default_value_callback: ''
 settings:
   handler: 'og:default'
   handler_settings:
-    target_bundles:
-      pece_group: pece_group
+    target_bundles: {  }
   access_override: false
 field_type: og_standard_reference
