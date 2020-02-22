@@ -10,7 +10,6 @@ dependencies:
     - field.field.node.pece_essay.field_essay_tags
     - field.field.node.pece_essay.field_essay_thumbnail
     - field.field.node.pece_essay.field_essay_uri
-    - field.field.node.pece_essay.og_audience
     - node.type.pece_essay
   module:
     - entity_reference_revisions
@@ -82,14 +81,6 @@ content:
   links:
     weight: 100
     settings: {  }
-    third_party_settings: {  }
-    region: content
-  og_audience:
-    label: above
-    type: entity_reference_label
-    settings:
-      link: true
-    weight: 108
     third_party_settings: {  }
     region: content
 hidden:

@@ -10,12 +10,10 @@ dependencies:
     - field.field.node.pece_essay.field_essay_tags
     - field.field.node.pece_essay.field_essay_thumbnail
     - field.field.node.pece_essay.field_essay_uri
-    - field.field.node.pece_essay.og_audience
     - image.style.thumbnail
     - node.type.pece_essay
   module:
     - image
-    - og
     - paragraphs
     - path
     - text
@@ -100,16 +98,6 @@ content:
     settings:
       include_locked: true
     third_party_settings: {  }
-  og_audience:
-    type: og_complex
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-      match_limit: 10
-    weight: 128
-    third_party_settings: {  }
-    region: content
   path:
     type: path
     weight: 30
