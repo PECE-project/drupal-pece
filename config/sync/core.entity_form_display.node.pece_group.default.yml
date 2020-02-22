@@ -6,29 +6,14 @@ dependencies:
     - field.field.node.pece_group.body
     - field.field.node.pece_group.field_pece_media_image
     - field.field.node.pece_group.field_projects
+    - field.field.node.pece_group.field_substantive_logic
     - field.field.node.pece_group.og_audience
     - image.style.thumbnail
     - node.type.pece_group
   module:
-    - field_group
     - image
     - og
     - path
-third_party_settings:
-  field_group:
-    group_fields:
-      children:
-        - field_pece_media_image
-        - og_audience
-      parent_name: ''
-      weight: 20
-      format_type: fieldset
-      format_settings:
-        id: ''
-        classes: ''
-        description: ''
-        required_fields: true
-      label: 'Group Settings'
 id: node.pece_group.default
 targetEntityType: node
 bundle: pece_group
