@@ -10,16 +10,6 @@ enum ImageStyleEnum {
 
 schema {
   query: Query
-  mutation: Mutation
-}
-
-type Mutation {
-  createProduct(data: ProductInput): Product
-  createAutomaker(data: AutomakerInput): Automaker
-  createModel(data: ModelInput): Model
-  createEngine(data: EngineInput): Engine
-  createVehicle(data: VehicleInput): Vehicle
-  createVersion(data: VersionInput): Version
 }
 
 type Query {
