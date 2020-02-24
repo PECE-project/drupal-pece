@@ -56,24 +56,29 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
         ->map('entity', $builder->fromParent())
     );
 
-    $registry->addFieldResolver($type, 'title',
-      $builder->compose(
-        $builder->produce('entity_label')
-          ->map('entity', $builder->fromParent()),
-        $builder->produce('uppercase')
-          ->map('string', $builder->fromParent())
-      )
-    );
+    if (is_null($registry->getFieldResolver($type, 'title'))) {
+      $registry->addFieldResolver($type, 'title',
+        $builder->compose(
+          $builder->produce('entity_label')
+            ->map('entity', $builder->fromParent()),
+          $builder->produce('uppercase')
+            ->map('string', $builder->fromParent())
+        )
+      );
+    }
 
-    $registry->addFieldResolver($type, 'type',
-      $builder->compose(
-        $builder->produce('entity_bundle')
-          ->map('entity', $builder->fromParent()),
-        $builder->callback(function ($parent) {
-          return self::formatFieldName($parent);
-        })
-      )
-    );
+
+    if (is_null($registry->getFieldResolver($type, 'type'))) {
+      $registry->addFieldResolver($type, 'type',
+        $builder->compose(
+          $builder->produce('entity_bundle')
+            ->map('entity', $builder->fromParent()),
+          $builder->callback(function ($parent) {
+            return self::formatFieldName($parent);
+          })
+        )
+      );
+    }
 
     $removePrefixField = explode('_', $bundle);
     $removePrefixField[] = 'field';
@@ -86,63 +91,70 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
     foreach ($fields as $field) {
       if ($field instanceof FieldConfig) {
         $fieldName = self::formatFieldName($field->getName(), $removePrefix);
-        switch ($field->getType()) {
-          case 'image':
-            $registry->addFieldResolver($type, $fieldName,
-              $builder->compose(
-                $builder->produce('property_path')
-                  ->map('type', $builder->fromValue('entity:' . $field->get('entity_type') . ':' . $field->get('bundle')))
-                  ->map('value', $builder->fromParent())
-                  ->map('path', $builder->fromValue($field->getName())),
-                $builder->callback(function ($parent) {
-                  return reset($parent);
-                })
-              )
-            );
-
-            self::addMediaImageFields($registry, $builder, ucfirst($fieldName));
-            break;
-          case 'entity_reference_revisions':
-          case 'entity_reference':
-            $registry->addFieldResolver($type, $fieldName,
-              $builder->produce('entity_reference')
-                ->map('entity', $builder->fromParent())
-                ->map('field', $builder->fromValue($field->getName()))
-            );
-
-            self::addConfigField($registry, $builder, $field);
-            break;
-          default:
-            if ($fieldConfig->getTargetEntityTypeId() != 'user')
-              $typeDefinition = 'entity:' . $field->getTargetEntityTypeId() . ':' . $field->getTargetBundle();
-            else
-              $typeDefinition = 'entity:' . $field->getTargetEntityTypeId();
-
-            if (key_exists('max', $field->getSettings()) &&
-              ($field->getSetting('max') == null || $field->getSetting('max') > 1))
+        if (is_null($registry->getFieldResolver($type, $fieldName))) {
+          switch ($field->getType()) {
+            case 'image':
               $registry->addFieldResolver($type, $fieldName,
                 $builder->compose(
                   $builder->produce('property_path')
-                    ->map('type', $builder->fromValue($typeDefinition))
+                    ->map('type', $builder->fromValue('entity:' . $field->get('entity_type') . ':' . $field->get('bundle')))
                     ->map('value', $builder->fromParent())
                     ->map('path', $builder->fromValue($field->getName())),
                   $builder->callback(function ($parent) {
-                    if ($parent)
-                      foreach ($parent as $key => $item) {
-                        $parent[$key] = $item['value'];
-                      }
-                    return $parent;
+                    return reset($parent);
                   })
                 )
               );
-            else
-              $registry->addFieldResolver($type, $fieldName,
 
-                $builder->produce('property_path')
-                  ->map('type', $builder->fromValue($typeDefinition))
-                  ->map('value', $builder->fromParent())
-                  ->map('path', $builder->fromValue($field->getName() . '.value'))
+              self::addMediaImageFields($registry, $builder, ucfirst($fieldName));
+              break;
+            case 'entity_reference_revisions':
+            case 'entity_reference':
+              $registry->addFieldResolver($type, $fieldName,
+                $builder->produce('entity_reference')
+                  ->map('entity', $builder->fromParent())
+                  ->map('field', $builder->fromValue($field->getName()))
               );
+
+              self::addConfigField($registry, $builder, $field);
+              break;
+            default:
+              if ($fieldConfig->getTargetEntityTypeId() != 'user') {
+                $typeDefinition = 'entity:' . $field->getTargetEntityTypeId() . ':' . $field->getTargetBundle();
+              }
+              else {
+                $typeDefinition = 'entity:' . $field->getTargetEntityTypeId();
+              }
+
+              if (key_exists('max', $field->getSettings()) &&
+                ($field->getSetting('max') == NULL || $field->getSetting('max') > 1)) {
+                $registry->addFieldResolver($type, $fieldName,
+                  $builder->compose(
+                    $builder->produce('property_path')
+                      ->map('type', $builder->fromValue($typeDefinition))
+                      ->map('value', $builder->fromParent())
+                      ->map('path', $builder->fromValue($field->getName())),
+                    $builder->callback(function ($parent) {
+                      if ($parent) {
+                        foreach ($parent as $key => $item) {
+                          $parent[$key] = $item['value'];
+                        }
+                      }
+                      return $parent;
+                    })
+                  )
+                );
+              }
+              else {
+                $registry->addFieldResolver($type, $fieldName,
+
+                  $builder->produce('property_path')
+                    ->map('type', $builder->fromValue($typeDefinition))
+                    ->map('value', $builder->fromParent())
+                    ->map('path', $builder->fromValue($field->getName() . '.value'))
+                );
+              }
+          }
         }
       }
     }

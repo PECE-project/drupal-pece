@@ -31,7 +31,8 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
 
     $this->addQueryFields($registry, $builder);
     $this->addFields($registry, $builder);
-    $this->addConnectionFields(ucfirst($this->entity['bundle']).'Connection', $registry, $builder);
+    $baseEntityNameSingular = BaseSchema::formatFieldName($this->entity['bundle'], []);
+    $this->addConnectionFields(ucfirst($baseEntityNameSingular).'Connection', $registry, $builder);
   }
 
   /**
