@@ -1,0 +1,15 @@
+nyx_graphql.fieldsmap:
+  path: '/admin/config/graphql/servers/manage/{graphql_server}/fields-map'
+  defaults:
+    _controller: '\Drupal\nyx_graphql\Controller\FieldMapController::viewFieldsMap'
+    _title: 'Fields Map'
+  requirements:
+    _permission: 'administer graphql configuration'
+  options:
+    _admin_route: TRUE
+    parameters:
+      graphql_server:
+        type: entity:graphql_server
+
+route_callbacks:
+  - graphql.route_provider::routes

@@ -1,0 +1,34 @@
+diff --git a/src/GraphQL/ResolverRegistry.php b/src/GraphQL/ResolverRegistry.php
+index abeb6d0..3031db3 100644
+--- a/src/GraphQL/ResolverRegistry.php
++++ b/src/GraphQL/ResolverRegistry.php
+@@ -107,6 +107,13 @@ class ResolverRegistry implements ResolverRegistryInterface {
+     return $this->fieldResolvers[$type][$field] ?? NULL;
+   }
+ 
++  /**
++   * {@inheritdoc}
++   */
++  public function getAllFieldResolvers() {
++    return $this->fieldResolvers;
++  }
++
+   /**
+    * {@inheritdoc}
+    */
+diff --git a/src/GraphQL/ResolverRegistryInterface.php b/src/GraphQL/ResolverRegistryInterface.php
+index 57f5e55..f8eb46b 100644
+--- a/src/GraphQL/ResolverRegistryInterface.php
++++ b/src/GraphQL/ResolverRegistryInterface.php
+@@ -46,6 +46,11 @@ interface ResolverRegistryInterface {
+    */
+   public function getFieldResolver($type, $field);
+ 
++  /**
++   * @return callable
++   */
++  public function getAllFieldResolvers();
++
+   /**
+    * TODO: Type resolvers should also get their own interface.
+    *
