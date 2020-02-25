@@ -40,13 +40,14 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
    * @param \Drupal\graphql\GraphQL\ResolverBuilder $builder
    * @param array $entity
    */
-  protected function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder) {
+  protected function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder, array $prefix = []) {
     $fields = \Drupal::service('entity_field.manager')->getFieldDefinitions($this->entity['type'], $this->entity['bundle']);
     $baseEntityNameSingular = BaseSchema::formatFieldName($this->entity['bundle'], []);
 
+    $prefix = array_merge($prefix, ['field_' . $this->entity['bundle'] . '_', 'field_']);
     foreach ($fields as $field) {
       if ($field instanceof FieldConfig) {
-        $fieldName = BaseSchema::formatFieldName($field->getName(),['field_' . $this->entity['bundle'] . '_', 'field_']);
+        $fieldName = BaseSchema::formatFieldName($field->getName(),$prefix);
         if ($field->getType() == 'entity_reference_revisions' || $field->getType() == 'entity_reference') {
           $registry->addFieldResolver(ucfirst($baseEntityNameSingular), $fieldName,
             $builder->produce('entity_reference')

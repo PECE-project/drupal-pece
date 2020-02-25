@@ -1,0 +1,23 @@
+type User {
+  id: Int!
+  uuid: String!
+  mail: String
+  username: String
+  status: Boolean
+}
+
+type UserConnection {
+  total: Int!
+  items: [User!]
+}
+
+type Address {
+  id: Int!
+  street: String
+  number: String
+  state: String
+  city: String
+  zipCode: String
+  district: String
+}
+

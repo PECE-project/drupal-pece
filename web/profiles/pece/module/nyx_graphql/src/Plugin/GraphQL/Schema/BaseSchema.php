@@ -210,13 +210,10 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
 
   public static function mapImageStyleEnum($_, $args) {
     $map = [
-      'LARGE' => 'large',
-      'MEDIUM' => 'medium',
-      'THUMBNAIL' => 'thumbnail',
-      'S150x150' => '150x150',
-      'S340x200' => '340x200',
-      'S400x400' => '400x400',
-      'S500x350' => '500x350',
+      'LARGE_480x480' => 'large',
+      'MEDIUM_220x220' => 'medium',
+      'THUMBNAIL_100x100' => 'thumbnail',
+      'S350x200' => 'media_entity_browser_thumbnail',
     ];
 
     return $map[$args['style']];

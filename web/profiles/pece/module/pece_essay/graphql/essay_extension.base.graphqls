@@ -2,7 +2,14 @@ type PeceEssay implements NodeInterface {
   id: Int!
   title: String!
   uuid: String
-  essayContents: [EssayContents]
+  body: String
+  contents: [EssayContents]
+  contributors: [User]
+  permission: String
+  tags: [EssayTags]
+  thumbnail: Thumbnail
+  uri: String
+  author: String
 }
 
 type PeceEssayConnection {
@@ -18,4 +25,27 @@ type EssayContents {
   id: Int!
   title: String
   type: String
+  audio: String
+  image: Image
+  link: String
+  video: String
+  content: String
 }
+
+type EssayTags {
+  id: Int!
+  title: String
+  type: String
+}
+
+type Thumbnail {
+  alt: String
+  url(style: ImageStyleEnum!): String
+}
+
+type Image {
+  alt: String
+  url(style: ImageStyleEnum!): String
+}
+
+
