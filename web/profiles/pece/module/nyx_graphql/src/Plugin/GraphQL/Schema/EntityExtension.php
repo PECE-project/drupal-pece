@@ -69,7 +69,11 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
             )
           );
 
-          BaseSchema::addMediaImageFields($registry, $builder, ucfirst($fieldName));
+          if ($field->getType() == 'image')
+            BaseSchema::addMediaImageFields($registry, $builder, ucfirst($fieldName));
+          else
+            BaseSchema::addFileFields($registry, $builder, ucfirst($fieldName));
+
         }
         else {
           $compose = [];
