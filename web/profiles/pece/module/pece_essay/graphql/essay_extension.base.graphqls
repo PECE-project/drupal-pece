@@ -25,10 +25,10 @@ type EssayContents {
   id: Int!
   title: String
   type: String
-  audio: String
+  audio: Audio
   image: Image
   link: String
-  video: String
+  video: Video
   content: String
 }
 
@@ -41,11 +41,21 @@ type EssayTags {
 type Thumbnail {
   alt: String
   url(style: ImageStyleEnum!): String
+  mimetype: String
 }
 
 type Image {
   alt: String
   url(style: ImageStyleEnum!): String
+  mimetype: String
 }
 
+type Video {
+  url: String
+  mimetype: String
+}
 
+type Audio {
+  url: String
+  mimetype: String
+}

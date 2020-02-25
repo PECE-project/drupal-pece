@@ -94,6 +94,7 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
         if (is_null($registry->getFieldResolver($type, $fieldName))) {
           switch ($field->getType()) {
             case 'image':
+            case 'file':
               $registry->addFieldResolver($type, $fieldName,
                 $builder->compose(
                   $builder->produce('property_path')
@@ -106,7 +107,10 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
                 )
               );
 
-              self::addMediaImageFields($registry, $builder, ucfirst($fieldName));
+              if ($field->getType() == 'image')
+                self::addMediaImageFields($registry, $builder, ucfirst($fieldName));
+              else
+                self::addFileFields($registry, $builder, ucfirst($fieldName));
               break;
             case 'entity_reference_revisions':
             case 'entity_reference':
@@ -146,13 +150,23 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
                 );
               }
               else {
-                $registry->addFieldResolver($type, $fieldName,
+                $compose = [];
 
-                  $builder->produce('property_path')
+                if ($field->getFieldStorageDefinition()->getCardinality() != 1) {
+                  $compose[] = $builder->produce('property_path')
                     ->map('type', $builder->fromValue($typeDefinition))
                     ->map('value', $builder->fromParent())
-                    ->map('path', $builder->fromValue($field->getName() . '.value'))
-                );
+                    ->map('path', $builder->fromValue($field->getName()));
+                  $compose[] = $builder->produce('multi_value')
+                    ->map('values', $builder->fromParent());
+                }
+                else {
+                  $compose[] = $builder->produce('property_path')
+                    ->map('type', $builder->fromValue($typeDefinition))
+                    ->map('value', $builder->fromParent())
+                    ->map('path', $builder->fromValue($field->getName() . '.value'));
+                }
+                $registry->addFieldResolver($type, $fieldName, $builder->compose(...$compose));
               }
           }
         }
@@ -189,7 +203,7 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
 
     $registry->addFieldResolver($type, 'url',
       $builder->compose(
-        $builder->produce('image_load')
+        $builder->produce('file_load')
           ->map('value', $builder->fromParent())
           ->map('path', $builder->fromValue('target_id')),
         $builder->produce('image_derivative')
@@ -206,6 +220,39 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
           ->map('value', $builder->fromParent())
           ->map('path', $builder->fromValue('alt'))
       ));
+
+    $registry->addFieldResolver($type, 'mimetype',
+      $builder->compose(
+        $builder->produce('file_load')
+          ->map('value', $builder->fromParent())
+          ->map('path', $builder->fromValue('target_id')),
+        $builder->produce('file_mimetype')
+          ->map('entity', $builder->fromParent())
+      )
+    );
+  }
+
+  public static function addFileFields(ResolverRegistry $registry, ResolverBuilder $builder, $type) {
+
+    $registry->addFieldResolver($type, 'url',
+      $builder->compose(
+        $builder->produce('file_load')
+          ->map('value', $builder->fromParent())
+          ->map('path', $builder->fromValue('target_id')),
+        $builder->produce('file_url')
+          ->map('entity', $builder->fromParent())
+      )
+    );
+
+    $registry->addFieldResolver($type, 'mimetype',
+      $builder->compose(
+        $builder->produce('file_load')
+          ->map('value', $builder->fromParent())
+          ->map('path', $builder->fromValue('target_id')),
+        $builder->produce('file_mimetype')
+          ->map('entity', $builder->fromParent())
+      )
+    );
   }
 
   public static function mapImageStyleEnum($_, $args) {

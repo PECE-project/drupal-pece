@@ -13,7 +13,7 @@ use GraphQL\Type\Definition\ResolveInfo;
 
 /**
  * @DataProducer(
- *   id = "image_load",
+ *   id = "file_load",
  *   name = @Translation("Image load"),
  *   description = @Translation("Returns file Entity."),
  *   produces = @ContextDefinition("entity",
@@ -30,11 +30,9 @@ use GraphQL\Type\Definition\ResolveInfo;
  *   }
  * )
  */
-class ImageLoad extends ArrayValue implements DataProducerPluginCachingInterface {
+class FileLoad extends ArrayValue implements DataProducerPluginCachingInterface {
 
   /**
-   * @param \Drupal\user\UserInterface $user
-   *
    * @return string|null
    */
   public function resolve($value, $path) {
