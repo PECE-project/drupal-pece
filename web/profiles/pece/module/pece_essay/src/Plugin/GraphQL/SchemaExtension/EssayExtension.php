@@ -32,7 +32,7 @@ class EssayExtension extends EntityExtension {
   }
 
   public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder) {
-    parent::addFields($registry, $builder);
+    parent::addFields($registry, $builder, ['essay_']);
     $registry->addFieldResolver('Mutation', 'createEssay',
       $builder->produce('create_essay')
         ->map('data', $builder->fromArgument('data'))

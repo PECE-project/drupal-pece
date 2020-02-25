@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\nyx_graphql\Plugin\GraphQL\DataProducer\Entity;
+namespace Drupal\graphql_people\Plugin\GraphQL\DataProducer\Entity;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;

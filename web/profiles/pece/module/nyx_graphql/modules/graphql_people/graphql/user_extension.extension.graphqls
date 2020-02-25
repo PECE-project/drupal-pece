@@ -1,0 +1,9 @@
+extend type Query {
+  users (
+    offset: Int = 0
+    limit: Int = 10
+    filters: [Filter] = []
+  ): UserConnection!
+
+  user (id: Int):User
+}

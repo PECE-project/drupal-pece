@@ -62,7 +62,6 @@ class FieldMapController implements ContainerInjectionInterface {
       $plugin->setConfiguration($config[$schema] ?? []);
     }
 
-
     // Create the server config.
     $registry = $plugin->getResolverRegistry();
     $plugin->getSchema($registry);
