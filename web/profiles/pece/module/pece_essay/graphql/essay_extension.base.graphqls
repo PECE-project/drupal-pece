@@ -2,6 +2,7 @@ type PeceEssay implements NodeInterface {
   id: Int!
   title: String!
   uuid: String
+  essayContents: [EssayContents]
 }
 
 type PeceEssayConnection {
@@ -11,4 +12,10 @@ type PeceEssayConnection {
 
 input EssayInput {
   title: String!
+}
+
+type EssayContents {
+  id: Int!
+  title: String
+  type: String
 }
