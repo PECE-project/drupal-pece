@@ -1,0 +1,9 @@
+extend type Query {
+  peceProjects (
+    offset: Int = 0
+    limit: Int = 10
+    filters: [Filter] = []
+  ): PeceEssayConnection!
+
+  peceProject (id: Int!) : PeceProject
+}
