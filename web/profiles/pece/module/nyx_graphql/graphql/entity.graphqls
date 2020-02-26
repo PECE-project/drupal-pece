@@ -59,11 +59,14 @@ input Filter {
 
 interface NodeInterface {
   id: Int!
+  title: String!
+  uuid: String!
 }
 
 type Page implements NodeInterface {
   id: Int!
   title: String!
+  uuid: String!
 }
 
 type LabelImage {

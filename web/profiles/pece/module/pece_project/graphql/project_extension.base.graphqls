@@ -1,0 +1,18 @@
+type PeceProject implements NodeInterface {
+  id: Int!
+  title: String!
+  uuid: String!
+  body: String
+  audio: Audio
+  authors: [AudioAuthors]
+  contributors: [User]
+  criticalCommentary: String
+  fieldsite: [Audio]
+  language: String
+  author: String
+}
+
+type PeceProjectConnection {
+  total: Int!
+  items: [PeceProject!]
+}

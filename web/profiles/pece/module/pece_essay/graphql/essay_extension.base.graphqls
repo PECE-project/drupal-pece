@@ -1,7 +1,7 @@
 type PeceEssay implements NodeInterface {
   id: Int!
   title: String!
-  uuid: String
+  uuid: String!
   body: String
   contents: [EssayContents]
   contributors: [User]
@@ -29,7 +29,7 @@ type EssayContents {
   image: Image
   link: String
   video: Video
-  content: String
+  content: [EssayContents]
 }
 
 type EssayTags {

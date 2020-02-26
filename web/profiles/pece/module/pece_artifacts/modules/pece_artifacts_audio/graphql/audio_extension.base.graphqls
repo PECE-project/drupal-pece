@@ -1,0 +1,62 @@
+type PeceArtifactAudio implements NodeInterface {
+  id: Int!
+  title: String!
+  uuid: String!
+  body: String
+  audio: Audio
+  authors: [AudioAuthors]
+  contributors: [User]
+  criticalCommentary: String
+  fieldsite: [Audio]
+  language: String
+#  location
+#  permission: String
+#  source
+#  tags
+#  uri: String
+#  useFieldsiteLocal
+#  author: String
+}
+
+type PeceArtifactAudioConnection {
+  total: Int!
+  items: [PeceArtifactAudio!]
+}
+
+type AudioAuthors {
+  id: Int!
+  title: String
+  type: String
+}
+
+type AudioFieldsite {
+  id: Int!
+  title: String
+  type: String
+  body: String
+  description: String
+#  location: []
+  project: [FieldsiteProject]
+  researcher: [User]
+  uri: String
+}
+
+type FieldsiteProject {
+  id: Int!
+  title: String
+  type: String
+  body: String
+#  consentFormFile
+#  fundAgencyLink
+#  image
+#  institutionLink
+#  intvRequestFile
+#  startEndDate
+#  substLogic
+#  uri
+}
+
+input PeceArtifactAudioInput {
+  title: String!
+}
+

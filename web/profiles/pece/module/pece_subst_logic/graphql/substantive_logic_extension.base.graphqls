@@ -1,0 +1,23 @@
+type PeceSubstantiveLogic implements NodeInterface {
+  id: Int!
+  uuid: String!
+  title: String!
+  body: String
+  contributors: [User]
+  imageCitation: String
+  tags: [SubstLogicTags]
+  thumbnail: [Thumbnail]
+  uri: String
+  author: [User]
+}
+
+type PeceSubstantiveLogicConnection {
+  total: Int!
+  items: [PeceSubstantiveLogic!]
+}
+
+type SubstLogicTags {
+  id: Int!
+  title: String!
+  type: String
+}
