@@ -1,0 +1,21 @@
+uuid: 16a12161-4ed2-42d4-9850-76e91007e455
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_essay_contributors
+    - node.type.pece_essay
+id: node.pece_essay.field_essay_contributors
+field_name: field_essay_contributors
+entity_type: node
+bundle: pece_essay
+label: Contributors
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings: {  }
+field_type: entity_reference

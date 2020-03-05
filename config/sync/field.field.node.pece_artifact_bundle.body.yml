@@ -1,0 +1,23 @@
+uuid: 46347390-b8f6-4cb4-a892-b6db4798b521
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.pece_artifact_bundle
+  module:
+    - text
+id: node.pece_artifact_bundle.body
+field_name: body
+entity_type: node
+bundle: pece_artifact_bundle
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

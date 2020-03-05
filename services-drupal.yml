@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  install:
+    image: wodby/drupal-php:$PHP_TAG
+    container_name: "${PROJECT_NAME}_php"
+    working_dir: /var/www/html/web
+    environment:
+      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
+      DB_HOST: $DB_HOST
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+      DB_DRIVER: $DB_DRIVER
+      PHP_FPM_USER: wodby
+      PHP_FPM_GROUP: wodby
+      COLUMNS: 80 # Set 80 columns for docker exec -it.
+    volumes:
+      - ./:/var/www/html
+    command: |
+      drupal -vvv site:install --langcode ${SITE_LANGUAGE} --site-name ${PROJECT_NAME} --force --account-name ${SITE_ADMIN_USERNAME} --account-mail ${PROJECT_MAIL} --account-pass ${SITE_ADMIN_PASSWORD} --site-mail ${PROJECT_MAIL} --db-type ${DB_DRIVER} --db-host ${DB_HOST} --db-name ${DB_NAME} --db-user ${DB_USER} --db-pass ${DB_PASSWORD} --db-port ${DB_PORT} pece
+
+

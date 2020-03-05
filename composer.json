@@ -1,5 +1,5 @@
 {
-    "name": "PECE-project/pece-content-api",
+    "name": "pece-project/pece-content-api",
     "description": "PECE content API",
     "type": "project",
     "license": "GNU GENERAL PUBLIC LICENSE",
@@ -20,15 +20,31 @@
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.5",
         "drupal-composer/drupal-scaffold": "^2.5",
+        "drupal/address": "^1.7",
+        "drupal/admin_toolbar": "^2.0",
         "drupal/adminimal_admin_toolbar": "^1.9",
         "drupal/adminimal_theme": "^1.5",
+        "drupal/better_exposed_filters": "^3.0@alpha",
         "drupal/config_partial_export": "^1.4",
         "drupal/config_split": "^1.4",
         "drupal/console": "^1.0.2",
-        "drupal/core": "^8.7.1",
-        "drupal/field_group": "^1.0",
-        "drupal/graphql": "^3.0",
-        "drupal/og": "^1.0@alpha",
+        "drupal/core": "^8.8.2",
+        "drupal/eck": "^1.0@alpha",
+        "drupal/field_group": "^3.0",
+        "drupal/geocoder": "^2.2",
+        "drupal/geofield": "^1.3",
+        "drupal/geolocation": "^1.11",
+        "drupal/graphql": "4.x-dev",
+        "drupal/languagefield": "^1.5",
+        "drupal/media_attribution": "^1.0@beta",
+        "drupal/media_entity": "^2.0",
+        "drupal/media_entity_browser": "^1.0@beta",
+        "drupal/metatag": "^1.10",
+        "drupal/migrate_tools": "^4.3",
+        "drupal/paragraphs": "^1.9",
+        "drupal/pathauto": "^1.4",
+        "drupal/search_api": "^1.14",
+        "drupal/workflow": "^1.1",
         "drush/drush": "^9.0.0",
         "vlucas/phpdotenv": "^2.4",
         "webflo/drupal-finder": "^1.0.0",
@@ -85,6 +101,14 @@
             "initial": {
                 ".editorconfig": "../.editorconfig",
                 ".gitattributes": "../.gitattributes"
+            }
+        },
+        "patches": {
+            "drupal/core": {
+                "Error empty system.site UUID": "https://www.drupal.org/files/issues/2019-04-11/system-config_with_empty_site_uuid-3047392-01.patch"
+            },
+            "drupal/media_entity": {
+                "Call to undefined function media_entity_copy_icons": "https://www.drupal.org/files/issues/2934599-11.patch"
             }
         }
     }

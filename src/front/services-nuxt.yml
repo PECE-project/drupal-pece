@@ -1,0 +1,84 @@
+version: "3"
+
+services:
+  install:
+    image: wodby/node:$NODE_TAG
+    working_dir: /home/node/app
+    user: root
+    environment:
+      - NPM_CONFIG_PREFIX=/home/node/app/.npm-global
+    volumes:
+      - ./:/home/node/app
+    command: npm i --force --no-optional
+    networks:
+      - pece
+
+  build:
+    image: wodby/node:$NODE_TAG
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: npm run build
+    networks:
+      - pece
+
+  lint:
+    image: wodby/node:$NODE_TAG
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: npm run lint
+    networks:
+      - pece
+
+  test:
+    image: wodby/node:$NODE_TAG
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: npm run test
+    networks:
+      - pece
+
+  test_watch:
+    image: wodby/node:$NODE_TAG
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: npm run test:watch
+    networks:
+      - pece
+
+  unit_single:
+    image: wodby/node:$NODE_TAG
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: npm run test:single $FILE_MATCH
+    networks:
+      - pece
+
+  e2e:
+    image: cypress/included:3.8.0
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: npm run e2e
+    networks:
+      - pece
+
+  e2e_open:
+    image: cypress/included:3.8.0
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: npm run e2e:open
+    networks:
+      - pece
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=pece'
+
+networks:
+  pece:
+    external: true

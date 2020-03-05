@@ -4,6 +4,7 @@ include docker.mk
 
 DRUPAL_VER ?= 8
 PHP_VER ?= 7.2
+FILE_MATCH ?= 
 
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 
@@ -20,3 +21,18 @@ endif
 # TODO: Need drush cim -y when have settings files
 	docker exec $(shell docker ps --filter name='^/$(PROJECT_NAME)_php' --format "{{ .ID }}") bash -c 'cd $(DRUPAL_ROOT) && drush updb -y'
 	@echo "Finish build $(PROJECT_NAME)"
+
+distro-install:
+	docker-compose -f services-drupal.yml run --rm install
+
+nuxt-install:
+	cd $(FRONT_DIR) && make install
+
+nuxt-build:
+	cd $(FRONT_DIR) && make build
+
+nuxt-lint:
+	cd $(FRONT_DIR) && make lint
+
+nuxt-run:
+	cd $(FRONT_DIR) && make run

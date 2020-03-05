@@ -1,0 +1,36 @@
+uuid: 573c603d-61da-49ee-9a6d-909a499190bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_permission.field_permission_accesses
+    - field.field.paragraph.paragraph_permission.field_permission_permissions
+    - paragraphs.paragraphs_type.paragraph_permission
+  module:
+    - paragraphs
+id: paragraph.paragraph_permission.default
+targetEntityType: paragraph
+bundle: paragraph_permission
+mode: default
+content:
+  field_permission_accesses:
+    type: entity_reference_paragraphs
+    weight: 0
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_permission_permissions:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  status: true

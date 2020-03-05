@@ -1,0 +1,40 @@
+uuid: 9a799311-d6d5-40b9-b9cc-9e900b5e73c3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_analytic.body
+    - field.field.node.pece_analytic.field_analytic_question_set
+    - field.field.node.pece_analytic.field_analytic_tags
+    - field.field.node.pece_analytic.field_analytic_uri
+    - node.type.pece_analytic
+  module:
+    - text
+    - user
+_core:
+  default_config_hash: 3cuY5_tBysbj_RLOCanENCWBrY2yCa4bdhcTUh-f_jo
+id: node.pece_analytic.teaser
+targetEntityType: node
+bundle: pece_analytic
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_analytic_question_set: true
+  field_analytic_tags: true
+  field_analytic_uri: true
+  langcode: true
+  search_api_excerpt: true

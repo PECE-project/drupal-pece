@@ -793,15 +793,8 @@ $databases['default']['default'] = array (
   'prefix' => '',
   'username' => getenv('DB_USER'),
 );
-$databases['default']['default'] = array (
-  'database' => 'drupal',
-  'username' => 'drupal',
-  'password' => 'drupal',
-  'prefix' => '',
-  'host' => 'mariadb',
-  'port' => '3306',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
-);
 $settings['hash_salt'] = '8XV2RAQaNGvbErBoQurOnw-NUKyIV7tCxxkxfg1pG-BYUtoRvHgLVUcuGyNlNp_RcQk34syo9g';
-include dirname(__FILE__) . '/settings.local.php';
+
+if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+  include dirname(__FILE__) . '/settings.local.php';
+}

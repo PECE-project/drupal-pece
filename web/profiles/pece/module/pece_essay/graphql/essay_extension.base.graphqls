@@ -1,0 +1,14 @@
+type PeceEssay implements NodeInterface {
+  id: Int!
+  title: String!
+  uuid: String
+}
+
+type PeceEssayConnection {
+  total: Int!
+  items: [PeceEssay!]
+}
+
+input EssayInput {
+  title: String!
+}

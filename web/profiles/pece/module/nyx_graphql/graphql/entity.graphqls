@@ -1,0 +1,57 @@
+enum ImageStyleEnum {
+  S150x150
+  S340x200
+  S400x400
+  S500x350
+  LARGE
+  MEDIUM
+  THUMBNAIL
+}
+
+schema {
+  query: Query
+}
+
+type Query {
+  page(id: Int!): Page
+  pageByUUID(uuid: String!): Page
+  """
+  List projects.
+  offset is the start load item
+  limit is the limit item result
+  filters is the filter property array, example: [{key: status, value: published},{key:owner, value: 1}]
+  On Filters, operators are SQL operators.
+  """
+  pages(
+      offset: Int = 0
+      limit: Int = 10
+      filters: [Filter] = []
+    ): PageConnection!
+
+  route(path: String!): NodeInterface
+}
+
+input Filter {
+  key:String!
+  value:String!
+  operator: String = "="
+}
+
+interface NodeInterface {
+  id: Int!
+}
+
+type Page implements NodeInterface {
+  id: Int!
+  title: String!
+}
+
+type LabelImage {
+  alt: String
+  url(style: ImageStyleEnum!): String
+}
+
+type PageConnection {
+  total: Int!
+  items: [Page!]
+}

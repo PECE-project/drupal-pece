@@ -1,0 +1,30 @@
+uuid: 5c220118-6cb9-4e0e-941f-cf10096396ee
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_permission_permissions
+field_name: field_permission_permissions
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: administer
+      label: Administer
+    -
+      value: edit
+      label: Edit
+    -
+      value: view
+      label: View
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

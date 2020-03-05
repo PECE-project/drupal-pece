@@ -1,0 +1,88 @@
+uuid: 29e82442-9e68-4024-82c9-10b8b702534a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_essay.body
+    - field.field.node.pece_essay.field_essay_contents
+    - field.field.node.pece_essay.field_essay_contributors
+    - field.field.node.pece_essay.field_essay_permission
+    - field.field.node.pece_essay.field_essay_tags
+    - field.field.node.pece_essay.field_essay_thumbnail
+    - field.field.node.pece_essay.field_essay_uri
+    - node.type.pece_essay
+  module:
+    - entity_reference_revisions
+    - image
+    - options
+    - text
+    - user
+id: node.pece_essay.default
+targetEntityType: node
+bundle: pece_essay
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_essay_contents:
+    type: entity_reference_revisions_entity_view
+    weight: 109
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_essay_contributors:
+    weight: 103
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_essay_permission:
+    weight: 106
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_essay_tags:
+    weight: 105
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_essay_thumbnail:
+    weight: 104
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_essay_uri:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

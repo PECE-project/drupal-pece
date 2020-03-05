@@ -1,0 +1,45 @@
+uuid: 85fd267b-b91f-46cc-bba3-86f5cc12a1b9
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_artifact_pdf.body
+    - node.type.pece_artifact_pdf
+  module:
+    - text
+    - user
+id: node.pece_artifact_pdf.teaser
+targetEntityType: node
+bundle: pece_artifact_pdf
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_pdf_authors: true
+  field_pdf_contributors: true
+  field_pdf_crit_commentary: true
+  field_pdf_document: true
+  field_pdf_fieldsite: true
+  field_pdf_language: true
+  field_pdf_location: true
+  field_pdf_permission: true
+  field_pdf_source: true
+  field_pdf_tags: true
+  field_pdf_uri: true
+  field_pdf_use_fieldsite_local: true
+  langcode: true
+  og_audience: true
+  search_api_excerpt: true

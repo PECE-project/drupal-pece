@@ -1,0 +1,45 @@
+uuid: 47ddcee0-91c0-4d79-8964-27133bea343a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_artifact_image.body
+    - node.type.pece_artifact_image
+  module:
+    - text
+    - user
+id: node.pece_artifact_image.teaser
+targetEntityType: node
+bundle: pece_artifact_image
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_image_authors: true
+  field_image_contributors: true
+  field_image_crit_commentary: true
+  field_image_fieldsite: true
+  field_image_fieldsite_local: true
+  field_image_images: true
+  field_image_language: true
+  field_image_location: true
+  field_image_permission: true
+  field_image_source: true
+  field_image_tags: true
+  field_image_uri: true
+  langcode: true
+  og_audience: true
+  search_api_excerpt: true

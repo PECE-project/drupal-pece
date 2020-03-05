@@ -16,15 +16,18 @@ install:
   - config
   - comment
   - contextual
+  - content_moderation
   - contact
+  - ctools
   - quickedit
   - help
   - image
   - options
   - path
+  - paragraphs
+  - paragraphs_type_permissions
   - taxonomy
   - dblog
-  - search
   - shortcut
   - toolbar
   - field_ui
@@ -35,14 +38,48 @@ install:
   - editor
   - ckeditor
   - config_split
+  - workflow
+  - workflow_ui
+  - better_exposed_filters
+  - languagefield
+  - pathauto
+  - pece_subst_logic
+  - pece_project
+  - pece_analytics
+  - pece_essay
+  - pece_annotations
+  - pece_artifacts
+  - pece_artifacts_fieldsite
+  - pece_core
+  - pece_artifacts_audio
+  - pece_artifacts_image
+  - pece_artifacts_text
+  - pece_artifacts_video
+  - pece_artifacts_website
+  - pece_artifacts_pdf
+  - pece_artifacts_bundle
+  - admin_toolbar
+  - adminimal_admin_toolbar
+  - metatag
+  - metatag_dc
+  - metatag_dc_advanced
+  - metatag_open_graph
+  - metatag_verification
+  - metatag_views
 
 dependencies:
   - node
   - block
   - views
-  - pece_core
-  - og
+  - ctools
+  - workflow
+  - pece_essay
+  - pece_subst_logic
+  - pece_artifacts
+  - pece_artifacts_fieldsite
+  - pece_analytics
 
 themes:
   - bartik
   - seven
+  - adminimal_theme

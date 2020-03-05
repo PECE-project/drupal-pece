@@ -1,0 +1,24 @@
+// Fade
+// ...
+
+// Slide
+
+.slide-enter-active {
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in;
+}
+
+.slide-leave-active {
+  transition-duration: 0.5s;
+  transition-timing-function: ease-out;
+}
+
+.slide-enter-to, .slide-leave {
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.slide-enter, .slide-leave-to {
+  overflow: hidden;
+  max-height: 0;
+}

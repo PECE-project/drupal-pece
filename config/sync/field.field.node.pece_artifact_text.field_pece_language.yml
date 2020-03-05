@@ -1,0 +1,21 @@
+uuid: 13c55318-c928-466f-b7f5-91a24d06074c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_language
+    - node.type.pece_artifact_text
+  module:
+    - languagefield
+id: node.pece_artifact_text.field_pece_language
+field_name: field_pece_language
+entity_type: node
+bundle: pece_artifact_text
+label: Language
+description: 'In what language is this artifact?'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: language_field

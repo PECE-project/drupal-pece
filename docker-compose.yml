@@ -50,7 +50,7 @@ services:
     labels:
       - 'traefik.backend=${PROJECT_NAME}_nginx'
       - 'traefik.port=80'
-      - 'traefik.frontend.rule=Host:${PROJECT_BASE_URL}'
+      - 'traefik.frontend.rule=Host:admin.${PROJECT_BASE_URL}'
 
   mailhog:
     image: mailhog/mailhog
@@ -182,19 +182,19 @@ services:
 #      WEAVER_WORKER_TIMEOUT: 90
 #      WEAVER_CONVERSION_FALLBACK: "false"
 
-#  node:
-#    image: wodby/node:$NODE_TAG
-#    container_name: "${PROJECT_NAME}_node"
-#    working_dir: /var/www/html/path/to/theme/to/build
-#    labels:
-#      - 'traefik.backend=${PROJECT_NAME}_node'
-#      - 'traefik.port=3000'
-#      - 'traefik.frontend.rule=Host:front.${PROJECT_BASE_URL}'
-#    expose:
-#      - "3000"
-#    volumes:
-#      - ./:/var/www/html
-#    command: sh -c 'yarn install && yarn run start'
+  node:
+    image: wodby/node:$NODE_TAG
+    container_name: "${PROJECT_NAME}_front_node"
+    working_dir: /home/node/app
+    labels:
+      - 'traefik.backend=${PROJECT_NAME}_front_node'
+      - 'traefik.port=5000'
+      - 'traefik.frontend.rule=Host:front.${PROJECT_BASE_URL}'
+    ports:
+      - 4000:5000
+    volumes:
+      - $FRONT_DIR:/home/node/app
+    command: bash -c "npm run start"
 
 #  blackfire:
 #    image: blackfire/blackfire
@@ -264,7 +264,7 @@ services:
     command: -c /dev/null --web --docker --logLevel=INFO
     ports:
       - '80:80'
-      - '8080:8080'
+      - '8080:8080' # Dashboard
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 

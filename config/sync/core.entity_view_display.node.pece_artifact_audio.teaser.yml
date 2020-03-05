@@ -1,0 +1,45 @@
+uuid: 41cc6f7f-c714-4f6d-9ddb-4c7c09641572
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_artifact_audio.body
+    - node.type.pece_artifact_audio
+  module:
+    - text
+    - user
+id: node.pece_artifact_audio.teaser
+targetEntityType: node
+bundle: pece_artifact_audio
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_audio_audios: true
+  field_audio_authors: true
+  field_audio_contributors: true
+  field_audio_crit_commentary: true
+  field_audio_fieldsite: true
+  field_audio_language: true
+  field_audio_location: true
+  field_audio_permission: true
+  field_audio_source: true
+  field_audio_tags: true
+  field_audio_uri: true
+  field_audio_use_fieldsite_local: true
+  langcode: true
+  og_audience: true
+  search_api_excerpt: true
