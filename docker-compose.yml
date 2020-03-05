@@ -259,12 +259,12 @@ services:
       - 'traefik.frontend.rule=Host:portainer.${PROJECT_BASE_URL}'
 
   traefik:
-    image: traefik
+    image: traefik:v1.7.21-alpine
     container_name: "${PROJECT_NAME}_traefik"
     command: -c /dev/null --web --docker --logLevel=INFO
     ports:
       - '80:80'
-#      - '8080:8080' # Dashboard
+      - '8080:8080'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
