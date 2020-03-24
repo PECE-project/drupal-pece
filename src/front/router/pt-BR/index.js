@@ -45,7 +45,7 @@ export default [
     component: Group
   },
   {
-    path: '/pt/user/:slug',
+    path: '/pt/usuario/:slug',
     name: 'user___pt',
     component: User
   },
