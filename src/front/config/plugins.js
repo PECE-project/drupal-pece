@@ -3,6 +3,8 @@ module.exports = [
   '@/components/base/_globals',
   // Doc: https://github.com/vuejs/composition-api
   '@/plugins/composition-api',
+  // Doc: https://github.com/logaretm/vee-validate
+  '@/plugins/vee-validate',
   // Doc: https://github.com/maoberlehner/vue-lazy-hydration
   '@/plugins/lazy-hydration',
   // Doc: https://github.com/vue-a11y/vue-announcer

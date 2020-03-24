@@ -119,6 +119,10 @@ module.exports = {
   buildDir: path.resolve(__dirname, 'dist'),
   build: {
     analyze: true,
+    transpile: [
+      // Doc: https://logaretm.github.io/vee-validate/guide/rules.html#importing-rules-in-nuxt-js
+      'vee-validate/dist/rules'
+    ],
     extend (config, ctx) {}
   }
 }
