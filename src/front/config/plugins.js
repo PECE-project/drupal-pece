@@ -1,6 +1,8 @@
 module.exports = [
   // Register base componentes
   '@/components/base/_globals',
+  // Register UI componentes
+  '@/components/ui/_globals',
   // Doc: https://github.com/vuejs/composition-api
   '@/plugins/composition-api',
   // Doc: https://github.com/logaretm/vee-validate
