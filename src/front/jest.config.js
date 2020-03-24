@@ -11,7 +11,6 @@ module.exports = {
   ],
   transform: {
     '^.+\\.js$': 'babel-jest',
-    'vee-validate/dist/rules': 'babel-jest',
     '.*\\.(vue)$': 'vue-jest'
   },
   setupFiles: [
