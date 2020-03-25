@@ -1,18 +1,19 @@
 <template>
-  <div class="flex justify-center fixed w-full h-full z-40">
+  <div class="modal fixed w-full h-full z-40">
     <div
       v-show="overlay"
-      @click="$emit('onClose')"
-      @keyup.enter="$emit('onClose')"
+      @click="!persistent && $emit('onClose')"
+      @keyup.enter="!persistent && $emit('onClose')"
       class="z-20 w-full h-full top-0 left-0 fixed bg-overlay"
     />
     <section
       :aria-describedby="`modal-${_uid}-body`"
       :aria-labelledby="`modal-${_uid}-header`"
+      :style="{ 'max-width': '28rem' }"
       role="dialog"
       aria-modal="true"
       tabindex="-1"
-      class="z-30 bg-white w-11/12 md:w-2/5 fixed p-6 rounded"
+      class="modal modal__content z-30 bg-white w-full fixed p-6 rounded"
     >
       <FocusLock>
         <slot />
@@ -41,10 +42,18 @@ export default {
     overlay: {
       type: Boolean,
       default: true
+    },
+    scrollable: {
+      type: Boolean,
+      default: false
+    },
+    persistent: {
+      type: Boolean,
+      default: false
     }
   },
 
-  setup (_, { emit }) {
+  setup ({ scrollable }, { emit }) {
     provide('onClose', onClose)
 
     function onClose () {
@@ -57,15 +66,30 @@ export default {
       }
     }
 
+    function toggleOverflow (overflow) {
+      if (scrollable) { return }
+      document.body.style.overflow = overflow
+    }
+
     onMounted(() => {
       window.addEventListener('keydown', escFullScreen, true)
+      toggleOverflow('hidden')
     })
 
     onUnmounted(() => {
       window.removeEventListener('keydown', escFullScreen, true)
+      toggleOverflow('auto')
     })
   }
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.modal {
+  &__content {
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+</style>
