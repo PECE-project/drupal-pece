@@ -1,5 +1,5 @@
 <template>
-  <ValidationObserver v-slot="{ invalid, passed, validate }">
+  <ValidationObserver v-slot="{ invalid, passed, validate }" slim>
     <form @submit.prevent="validate().then($emit('submitted', passed))">
       <slot :invalid="invalid" />
     </form>

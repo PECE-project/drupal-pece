@@ -1,5 +1,7 @@
 <template>
-  <div />
+  <p class="text-xs text-gray-600">
+    <slot />
+  </p>
 </template>
 
 <script>

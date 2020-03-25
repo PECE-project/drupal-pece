@@ -2,6 +2,7 @@
   <ValidationProvider
     v-slot="{ errors }"
     :rules="rules"
+    :name="name"
     tag="div"
   >
     <slot :errors="errors" />
@@ -9,6 +10,8 @@
 </template>
 
 <script>
+import { provide } from '@vue/composition-api'
+
 import { ValidationProvider } from 'vee-validate'
 
 export default {
@@ -19,9 +22,19 @@ export default {
   },
 
   props: {
+    name: {
+      type: String,
+      required: true
+    },
     rules: {
       type: String,
       required: true
+    }
+  },
+
+  setup ({ rules }) {
+    if (rules.includes('required')) {
+      provide('required', true)
     }
   }
 }
