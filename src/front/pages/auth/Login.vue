@@ -12,7 +12,7 @@ export default {
   name: 'Login',
 
   components: {
-    LoginForm: () => import('@/components/auth/Login')
+    LoginForm: () => import(/* webpackChunkName: "AuthLogin" */ '@/components/auth/Login')
   }
 }
 </script>

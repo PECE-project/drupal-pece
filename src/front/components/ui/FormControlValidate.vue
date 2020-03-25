@@ -4,6 +4,7 @@
     :rules="rules"
     :name="name"
     tag="div"
+    role="group"
   >
     <slot :errors="errors" />
   </ValidationProvider>
