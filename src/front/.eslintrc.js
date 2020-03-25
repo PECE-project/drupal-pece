@@ -19,6 +19,7 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'nuxt/no-cjs-in-config': 'off',
+    'vue/max-attributes-per-line': 1,
     'import-helpers/order-imports': [
       'warn',
       {
