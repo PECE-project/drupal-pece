@@ -22,11 +22,13 @@
         >
           Enter your PECE Drupal Distro username.
         </FormHelperText>
+        <!-- eslint-disable vue-a11y/no-autofocus -->
         <FormInput
           id="username"
           v-model="auth.username"
           type="text"
           name="username"
+          autofocus
           aria-describedby="username-help-text"
         />
         <FormErrorMessage :errors="errors" />

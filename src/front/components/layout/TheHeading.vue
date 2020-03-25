@@ -29,9 +29,9 @@
               <dark-theme />
             </li>
             <li class="mr-5">
-              <a href="/">
+              <button @click="onOpen" type="button">
                 {{ $t('login') }}
-              </a>
+              </button>
             </li>
             <li>
               <a
@@ -45,20 +45,46 @@
         </div>
       </div>
     </div>
+    <transition name="fade">
+      <Modal
+        v-if="isOpen"
+        @onClose="onClose"
+      >
+        <ModalHeader>
+          Log In
+        </ModalHeader>
+        <ModalBody>
+          <LoginForm />
+        </ModalBody>
+      </Modal>
+    </transition>
   </header>
 </template>
 
 <script>
 import Navigation from '@/components/Navigation'
 import Search from '@/components/Search'
+import useDisclosure from '@/composable/useDisclosure'
 
 export default {
   name: 'TheHeading',
+
   components: {
     Search,
     Navigation,
+    LoginForm: () => import(/* webpackChunkName: "AuthLogin" */ '@/components/auth/Login'),
     MenuMobile: () => import(/* webpackChunkName: "MenuMobile" */ '@/components/MenuMobile'),
     DarkTheme: () => import(/* webpackChunkName: "DarkTheme" */ '@/components/DarkTheme')
+  },
+
+  setup () {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+    return {
+      isOpen,
+      onOpen,
+      onClose
+    }
   }
 }
 </script>
