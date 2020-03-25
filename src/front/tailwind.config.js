@@ -10,7 +10,8 @@ module.exports = {
       colors: {
         primary: '',
         accent: '#6C6FD4',
-        accentHover: '#595BB5'
+        accentHover: '#595BB5',
+        overlay: 'rgba(0, 0, 0, 0.4)'
       },
       boxShadow: {
         pece: '0 6px 4px #F7FAFC',
