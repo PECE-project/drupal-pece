@@ -66,6 +66,7 @@ module.exports = {
    ** See https://github.com/nuxt-community/apollo-module#setup
    */
   apollo: {
+    errorHandler: '~/graphql/customErrorHandler.js',
     clientConfigs: {
       default: {
         httpEndpoint: process.env.NUXT_MODULE_APOLLO_HTTP
