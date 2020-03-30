@@ -24,7 +24,7 @@ export default {
       formData.append('grant_type', 'password')
 
       try {
-        resolve(makeAuth(commit, formData))
+        resolve(makeAuth.call(this.app, commit, formData))
       } catch (e) {
         reject(e)
       }

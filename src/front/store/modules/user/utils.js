@@ -1,10 +1,9 @@
-
-import * as MUTATIONS_TYPES from './mutation-types'
-import { apolloClient } from '@/graphql/apolloProvider'
+import * as MUTATIONS_TYPES from './mutation-types' // eslint-disable-line
 import { GET_USER } from '@/graphql/queries/user'
 import api from '@/services/api'
 
 export const makeAuth = (commit, formData) => {
+  const apolloClient = this.apolloProvider.defaultClient
   return api('/oauth/token', {
     method: 'POST',
     body: formData
