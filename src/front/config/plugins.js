@@ -14,5 +14,6 @@ module.exports = [
   // Doc: https://github.com/vue-a11y/vue-skip-to
   { src: '@/plugins/a11y/vue-skip-to', mode: 'client' },
   // Doc: https://github.com/vue-a11y/vue-axe
-  { src: '@/plugins/a11y/vue-axe', mode: 'client' }
+  { src: '@/plugins/a11y/vue-axe', mode: 'client' },
+  { src: '@/plugins/persistedstate', mode: 'client' }
 ]
