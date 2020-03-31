@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import { watch } from '@vue/composition-api'
 import Navigation from '@/components/Navigation'
 import Search from '@/components/Search'
 import useDisclosure from '@/composable/useDisclosure'
@@ -77,8 +78,14 @@ export default {
     DarkTheme: () => import(/* webpackChunkName: "DarkTheme" */ '@/components/DarkTheme')
   },
 
-  setup () {
+  setup (_, { isServer }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+    watch('$route', () => {
+      if (isOpen.value) {
+        onClose()
+      }
+    })
 
     return {
       isOpen,
