@@ -1,10 +1,10 @@
-<template>
+<template functional>
   <span
-    v-show="errors.length"
+    v-show="props.errors.length"
     class="text-red-700 text-xs"
   >
     <slot>
-      {{ errors[0] }}
+      {{ props.errors[0] }}
     </slot>
   </span>
 </template>
@@ -16,12 +16,10 @@ export default {
   props: {
     errors: {
       type: Array,
-      required: true
+      default () {
+        return []
+      }
     }
   }
-
-  // TODO: Usar watch na errors para a próxima versão do vue-announcer (usar com o politeness "assertive")
 }
 </script>
-
-<style lang="scss"></style>
