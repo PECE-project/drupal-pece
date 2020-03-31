@@ -4,6 +4,21 @@
     name="form-login"
   >
     <template v-slot="{ invalid }">
+      <div
+        v-if="serverErrors.length"
+        class="mt-6"
+      >
+        <Alert>
+          <span slot="title">
+            There were some login errors
+          </span>
+          <ul slot="description" class="list-disc ml-4">
+            <li v-for="(error, index) in serverErrors" :key="`server-error${index}`">
+              {{ error.message }}
+            </li>
+          </ul>
+        </Alert>
+      </div>
       <FormControlValidate
         v-slot="{ errors }"
         rules="required"
@@ -97,6 +112,7 @@ export default {
   name: 'LoginForm',
 
   setup () {
+    const serverErrors = ref([])
     const auth = ref({
       username: null,
       password: null
@@ -108,7 +124,8 @@ export default {
 
     return {
       auth,
-      login
+      login,
+      serverErrors
     }
   }
 }

@@ -4,7 +4,22 @@
     name="form-register"
   >
     <template v-slot="{ invalid }">
-      <section class="mt-16">
+      <div
+        v-if="serverErrors.length"
+        class="mt-6"
+      >
+        <Alert>
+          <span slot="title">
+            Some errors occurred while registering
+          </span>
+          <ul slot="description" class="list-disc ml-4">
+            <li v-for="(error, index) in serverErrors" :key="`server-error${index}`">
+              {{ error.message }}
+            </li>
+          </ul>
+        </Alert>
+      </div>
+      <section class="mt-8">
         <h3 class="text-2xl rounded py-2 px-3 bg-accent text-white">
           User information
         </h3>
@@ -296,12 +311,13 @@
 </template>
 
 <script>
-import { reactive, toRefs } from '@vue/composition-api'
+import { ref, reactive, toRefs } from '@vue/composition-api'
 
 export default {
   name: 'RegisterForm',
 
   setup () {
+    const serverErrors = ref([])
     const countries = [
       {
         id: 1,
@@ -341,6 +357,7 @@ export default {
 
     return {
       ...toRefs(state),
+      serverErrors,
       countries,
       register
     }

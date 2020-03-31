@@ -1,6 +1,6 @@
 <template>
-  <div class="mt-20 mb-40 w-3/5 mx-auto">
-    <h1 class="font-bold text-4xl">
+  <div class="mt-20 mb-40 w-full lg:w-3/5 mx-auto">
+    <h1 class="font-bold text-4xl leading-none">
       Create an account
     </h1>
     <RegisterForm />

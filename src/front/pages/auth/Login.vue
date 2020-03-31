@@ -1,6 +1,6 @@
 <template>
-  <div class="mt-20 mb-40 w-1/3 mx-auto">
-    <h1 class="font-bold text-3xl">
+  <div class="mt-20 mb-40 w-full lg:w-1/3 mx-auto">
+    <h1 class="font-bold text-4xl">
       PECE Log In
     </h1>
     <LoginForm />
