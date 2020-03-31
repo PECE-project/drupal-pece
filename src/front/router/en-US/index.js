@@ -7,8 +7,10 @@ import Group from '@/pages/Group'
 import Home from '@/pages/Home'
 import Tag from '@/pages/Tag'
 import User from '@/pages/User'
+import auth from './auth'
 
 export default [
+  ...auth,
   {
     path: '/',
     name: 'home___en',

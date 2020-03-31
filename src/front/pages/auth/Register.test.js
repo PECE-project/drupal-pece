@@ -1,9 +1,10 @@
-import Login from '@/components/auth/Login.vue'
+import Register from '@/pages/auth/Register'
 import { shallowMount } from '@vue/test-utils'
 
-const wrapper = shallowMount(Login)
 
-describe('Login', () => {
+const wrapper = shallowMount(Register)
+
+describe('Register page', () => {
   test('is a Vue instance', () => {
     expect(wrapper.isVueInstance()).toBeTruthy()
   })

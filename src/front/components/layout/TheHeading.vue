@@ -34,12 +34,12 @@
               </button>
             </li>
             <li>
-              <a
-                href="/"
+              <nuxt-link
+                :to="{ name: `register___${$i18n.locale}` }"
                 class="link-accent"
               >
                 {{ $t('register') }}
-              </a>
+              </nuxt-link>
             </li>
           </ul>
         </div>

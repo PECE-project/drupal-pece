@@ -6,7 +6,7 @@
     <template v-slot="{ invalid }">
       <FormControlValidate
         v-slot="{ errors }"
-        rules="required|email"
+        rules="required"
         name="username"
         class="mt-8"
       >
