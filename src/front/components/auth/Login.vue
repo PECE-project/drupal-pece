@@ -50,7 +50,7 @@
         <p class="text-xs mt-2">
           If you don't have an username,
           <nuxt-link
-            to="register"
+            :to="{ name: `register___${$i18n.locale}` }"
             class="link-accent-inline"
           >
             create an account.
@@ -86,7 +86,7 @@
         <p class="text-xs mt-2">
           If you forgot your password,
           <nuxt-link
-            to="reset-password"
+            :to="{ name: `forget-password___${$i18n.locale}`}"
             class="link-accent-inline"
           >
             request a new password.
