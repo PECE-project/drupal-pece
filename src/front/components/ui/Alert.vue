@@ -21,6 +21,8 @@
             'text-red-500': props.type === 'error',
             'text-accent': props.type === 'notify',
           }"
+          focusable="false"
+          role="presentation"
           aria-hidden="true"
           class="fill-current h-6 w-6 mr-4"
           xmlns="http://www.w3.org/2000/svg"
