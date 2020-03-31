@@ -12,7 +12,7 @@ export default {
   name: 'Register',
 
   components: {
-    RegisterForm: () => import(/* webpackChunkName: "AuthLogin" */ '@/components/auth/Register')
+    RegisterForm: () => import(/* webpackChunkName: "RegisterForm" */ '@/components/auth/Register')
   }
 }
 </script>
