@@ -5,8 +5,13 @@
 </template>
 
 <script>
+import { provide } from '@vue/composition-api'
+
 export default {
-  name: 'FormControl'
+  name: 'FormControl',
+  setup () {
+    provide('required', false)
+  }
 }
 </script>
 
