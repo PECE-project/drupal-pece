@@ -19,8 +19,8 @@ export default {
       const formData = new FormData()
       formData.append('username', user.username)
       formData.append('password', user.password)
-      formData.append('client_id', process.env.VUE_APP_AUTH_CLIENT_ID)
-      formData.append('client_secret', process.env.VUE_APP_AUTH_CLIENT_SECRET)
+      formData.append('client_id', process.env.NUXT_AUTH_CLIENT_ID)
+      formData.append('client_secret', process.env.NUXT_AUTH_CLIENT_SECRET)
       formData.append('grant_type', 'password')
 
       try {
@@ -36,13 +36,13 @@ export default {
       commit(MUTATIONS_TYPES.AUTH_STATUS_REQUEST, 'loading')
 
       const formData = new FormData()
-      formData.append('client_id', process.env.VUE_APP_AUTH_CLIENT_ID)
-      formData.append('client_secret', process.env.VUE_APP_AUTH_CLIENT_SECRET)
+      formData.append('client_id', process.env.NUXT_AUTH_CLIENT_ID)
+      formData.append('client_secret', process.env.NUXT_AUTH_CLIENT_SECRET)
       formData.append('refresh_token', state.refreshToken)
       formData.append('grant_type', 'refresh_token')
 
       try {
-        resolve(makeAuth(commit, formData))
+        resolve(makeAuth.call(this.app, commit, formData))
       } catch (e) {
         reject(e)
       }

@@ -1,14 +1,14 @@
-import * as MUTATIONS_TYPES from './mutation-types' // eslint-disable-line
-import { GET_USER } from '@/graphql/queries/user'
+// import { GET_USER } from '@/graphql/queries/user'
 import api from '@/services/api'
+import * as MUTATIONS_TYPES from './mutation-types' // eslint-disable-line
 
-export const makeAuth = (commit, formData) => {
-  const apolloClient = this.apolloProvider.defaultClient
+export function makeAuth (commit, formData) {
+  // const apolloClient = this.apolloProvider.defaultClient
   return api('/oauth/token', {
     method: 'POST',
     body: formData
   })
-    .then(async (res) => {
+    .then((res) => {
       if (res.error) { throw (res) }
 
       commit(MUTATIONS_TYPES.AUTH_SUCCESS, {
@@ -16,16 +16,18 @@ export const makeAuth = (commit, formData) => {
         refreshToken: res.refresh_token
       })
 
-      const { data } = await apolloClient.query({
-        query: GET_USER,
-        variables: { id: res.user_id },
-        context: {
-          headers: {
-            authorization: `Bearer ${res.access_token}`
-          }
-        }
-      })
-      commit(MUTATIONS_TYPES.SET_USER, data.user)
+      // TODO: Enable when get user in graphql ok
+      // const { data } = await apolloClient.query({
+      //   query: GET_USER,
+      //   variables: { id: res.user_id },
+      //   context: {
+      //     headers: {
+      //       authorization: `Bearer ${res.access_token}`
+      //     }
+      //   }
+      // })
+
+      // commit(MUTATIONS_TYPES.SET_USER, data.user)
       commit(MUTATIONS_TYPES.AUTH_STATUS_REQUEST, 'success')
       return res
     })

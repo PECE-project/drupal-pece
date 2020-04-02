@@ -111,15 +111,23 @@ import { ref } from '@vue/composition-api'
 export default {
   name: 'LoginForm',
 
-  setup () {
+  setup (_, { root }) {
     const serverErrors = ref([])
     const auth = ref({
       username: null,
       password: null
     })
 
-    function login (isValid) {
-      console.log('submetido', isValid)
+    async function login (isValid) {
+      if (!isValid) { return serverErrors.value.push({ message: 'Invalid form' }) }
+      serverErrors.value = []
+      try {
+        await root.$store.dispatch('user/login', auth.value)
+        window.location.href = root.$route.query.redirect || '/'
+      } catch (e) {
+        console.log(e)
+        serverErrors.value = e
+      }
     }
 
     return {
