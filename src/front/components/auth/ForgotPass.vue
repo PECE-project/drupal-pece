@@ -38,24 +38,24 @@
       </div>
       <FormControlValidate
         v-slot="{ errors }"
-        rules="required"
-        name="username"
+        rules="required|email"
+        name="mail"
         class="mt-8"
       >
         <FormLabel
           for="username"
           class="pb-0"
         >
-          Username or email
+          Email
         </FormLabel>
         <!-- eslint-disable vue-a11y/no-autofocus -->
         <FormInput
-          id="username"
-          v-model="username"
-          type="text"
-          name="username"
+          id="mail"
+          v-model="mail"
+          type="email"
+          name="mail"
           autofocus
-          aria-describedby="username-help-text"
+          aria-describedby="mail-help-text"
         />
         <FormErrorMessage :errors="errors" />
       </FormControlValidate>
@@ -73,6 +73,7 @@
 
 <script>
 import { ref } from '@vue/composition-api'
+import api from '@/services/api'
 
 export default {
   name: 'ForgotPassForm',
@@ -83,18 +84,37 @@ export default {
       show: false,
       message: 'If the email you specified exists in our system, we’ve sent you a password reset link'
     })
-    const username = ref(null)
+    const mail = ref(null)
+
+    function setEmailStorage () {
+      if (mail.value) { localStorage.setItem('mailRecoveryPass', mail.value) }
+    }
 
     function submit (isValid) {
-      console.log('submetido', isValid)
-      setTimeout(() => {
-        alertRecover.value.show = true
-      }, 1000)
+      setEmailStorage()
+      serverErrors.value = []
+      return api('/user/lost-password?_format=json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          mail: mail.value
+        })
+      })
+        .then((res) => {
+          alertRecover.value.show = true
+        })
+        .catch((e) => {
+          serverErrors.value.push({
+            message: e.message
+          })
+        })
     }
 
     return {
       submit,
-      username,
+      mail,
       alertRecover,
       serverErrors
     }

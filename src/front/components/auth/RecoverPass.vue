@@ -19,6 +19,23 @@
           </ul>
         </Alert>
       </div>
+      <div
+        v-if="alertRecover.show"
+        class="mt-6"
+      >
+        <Alert type="info">
+          <span slot="title">
+            New password created
+          </span>
+          <span slot="description">
+            {{ alertRecover.message }}
+            <br><br>
+            <nuxt-link :to="{ name: 'login' }">
+              <strong>Go to login page</strong>
+            </nuxt-link>
+          </span>
+        </Alert>
+      </div>
       <FormControlValidate
         v-slot="{ errors }"
         rules="required|min:8"
@@ -74,26 +91,65 @@
 </template>
 
 <script>
-import { ref } from '@vue/composition-api'
+import { ref, onMounted } from '@vue/composition-api'
+import api from '@/services/api'
 
 export default {
   name: 'RecoverPassForm',
 
-  setup () {
+  setup (_, { root }) {
     const serverErrors = ref([])
+
+    const alertRecover = ref({
+      show: false,
+      type: 'info',
+      message: 'Password changed successfully.'
+    })
+
     const reset = ref({
+      mail: null,
       password: null,
       password_confirm: null
     })
 
+    onMounted(() => {
+      setEmailRecover()
+    })
+
+    function setEmailRecover () {
+      reset.value.mail = localStorage.getItem('mailRecoveryPass')
+    }
+
     function submit (isValid) {
-      console.log('submetido', isValid)
+      serverErrors.value = []
+      return api('/user/lost-password-reset?_format=json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: reset.value.mail,
+          temp_pass: root.$route.params.token,
+          new_pass: reset.value.pass
+        })
+      })
+        .then((res) => {
+          alertRecover.value.show = true
+          alertRecover.value.message = res.message
+          localStorage.removeItem('mailRecoveryPass')
+        })
+        .catch((e) => {
+          serverErrors.value.push({
+            message: e.message
+          })
+        })
     }
 
     return {
       submit,
       reset,
-      serverErrors
+      serverErrors,
+      alertRecover
     }
   }
 }
