@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3bdffd7fb8fb3e73e3d985a9a1f791aa",
+    "content-hash": "944a51ac251c58e25682e27e81aea1a4",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -4653,6 +4653,53 @@
             "homepage": "https://www.drupal.org/project/pathauto",
             "support": {
                 "source": "https://git.drupalcode.org/project/pathauto"
+            }
+        },
+        {
+            "name": "drupal/rest_password",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/rest_password.git",
+                "reference": "8.x-1.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/rest_password-8.x-1.6.zip",
+                "reference": "8.x-1.6",
+                "shasum": "b3e41e455a3bcf86843e06ab0d2bd25b3e26455e"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.6",
+                    "datestamp": "1578012189",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "taggartj",
+                    "homepage": "https://www.drupal.org/user/786470"
+                }
+            ],
+            "description": "Rest Service to Request Frogotten password",
+            "homepage": "https://www.drupal.org/project/rest_password",
+            "support": {
+                "source": "https://git.drupalcode.org/project/rest_password"
             }
         },
         {
