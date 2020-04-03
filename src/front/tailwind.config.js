@@ -11,6 +11,7 @@ module.exports = {
         primary: '',
         accent: '#6C6FD4',
         accentHover: '#595BB5',
+        headerAdmin: '#2d2d2d',
         overlay: 'rgba(0, 0, 0, 0.4)'
       },
       boxShadow: {

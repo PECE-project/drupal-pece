@@ -1,12 +1,15 @@
 <template>
-  <div class="xl:px-6">
-    <the-heading />
-    <the-main>
-      <nuxt />
-    </the-main>
-    <lazy-hydrate ssr-only>
-      <the-footer class="my-8 sm:my-16" />
-    </lazy-hydrate>
+  <div>
+    <TheHeaderAdmin />
+    <div class="xl:px-6">
+      <the-heading />
+      <the-main>
+        <nuxt />
+      </the-main>
+      <lazy-hydrate ssr-only>
+        <the-footer class="my-8 sm:my-16" />
+      </lazy-hydrate>
+    </div>
   </div>
 </template>
 
@@ -18,7 +21,8 @@ export default {
   components: {
     TheHeading,
     TheMain,
-    TheFooter: () => import('@/components/layout/TheFooter')
+    TheFooter: () => import('@/components/layout/TheFooter'),
+    TheHeaderAdmin: () => import(/* webpackChunkName: "TheHeaderAdmin" */ '@/components/layout/TheHeaderAdmin')
   },
   head () {
     return { ...this.$nuxtI18nSeo() }
