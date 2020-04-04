@@ -10,6 +10,29 @@ enum ImageStyleEnum {
 
 schema {
   query: Query
+  mutation: Mutation
+}
+
+type Mutation {
+  """ page """
+  createPage(data: PageInput): Page
+  updatePage(data: PageUpdateInput): Page
+  deletePage(data: PageDeleteInput): Page
+}
+
+input PageInput {
+  title: String
+  body: String!
+}
+
+input PageUpdateInput {
+  id: Int!
+  title: String
+  body: String
+}
+
+input PageDeleteInput {
+  id: Int!
 }
 
 type Query {

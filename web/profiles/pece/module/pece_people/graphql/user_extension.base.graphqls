@@ -1,0 +1,35 @@
+type User {
+  id: Int!
+  uuid: String!
+  mail: String
+  username: String
+  status: Boolean
+}
+
+type UserConnection {
+  total: Int!
+  items: [User!]
+}
+
+input UserInput {
+  username: String
+  mail: String!
+  pass: String
+  name: String!
+  status: Boolean
+}
+
+input UserUpdateInput {
+  id: Int!
+  username: String
+  mail: String
+  pass: String
+  name: String
+  status: Boolean
+  cpf: String
+}
+
+input UserDeleteInput {
+  id: Int!
+}
+
