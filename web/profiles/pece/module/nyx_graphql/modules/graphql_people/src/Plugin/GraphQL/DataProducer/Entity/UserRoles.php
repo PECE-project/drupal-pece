@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\pece_people\Plugin\GraphQL\DataProducer\Entity;
+namespace Drupal\graphql_people\Plugin\GraphQL\DataProducer\Entity;
 
 use Drupal\graphql\Plugin\DataProducerPluginCachingInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
@@ -8,11 +8,11 @@ use Drupal\user\UserInterface;
 
 /**
  * @DataProducer(
- *   id = "user_status",
- *   name = @Translation("User account status"),
- *   description = @Translation("Returns the account status."),
+ *   id = "user_roles",
+ *   name = @Translation("User roles"),
+ *   description = @Translation("Returns the user roles."),
  *   produces = @ContextDefinition("string",
- *     label = @Translation("Account Status")
+ *     label = @Translation("User roles")
  *   ),
  *   consumes = {
  *     "entity" = @ContextDefinition("entity",
@@ -21,7 +21,7 @@ use Drupal\user\UserInterface;
  *   }
  * )
  */
-class UserStatus extends DataProducerPluginBase implements DataProducerPluginCachingInterface {
+class UserRoles extends DataProducerPluginBase implements DataProducerPluginCachingInterface {
 
   /**
    * @param \Drupal\user\UserInterface $user
@@ -29,7 +29,7 @@ class UserStatus extends DataProducerPluginBase implements DataProducerPluginCac
    * @return string|null
    */
   public function resolve(UserInterface $user) {
-    return $user->isActive();
+    return $user->getRoles();
   }
 
 }

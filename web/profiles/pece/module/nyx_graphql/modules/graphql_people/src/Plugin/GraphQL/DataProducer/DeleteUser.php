@@ -1,22 +1,20 @@
 <?php
 
-namespace Drupal\pece_people\Plugin\GraphQL\DataProducer;
+namespace Drupal\graphql_people\Plugin\GraphQL\DataProducer;
 
 use Drupal\user\Entity\User;
-use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\pece_people\Plugin\GraphQL\DataProducer\TraitUser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 
 /**
- * Update a new user.
+ * Delete a new user.
  *
  * @DataProducer(
- *   id = "update_user",
- *   name = @Translation("Update User"),
- *   description = @Translation("Update a new user."),
+ *   id = "delete_user",
+ *   name = @Translation("Delete User"),
+ *   description = @Translation("Delete a new user."),
  *   produces = @ContextDefinition("any",
  *     label = @Translation("User")
  *   ),
@@ -27,9 +25,7 @@ use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
  *   }
  * )
  */
-class UpdateUser extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
-
-  use TraitUser;
+class DeleteUser extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
   /**
    * The current user.
@@ -68,7 +64,7 @@ class UpdateUser extends DataProducerPluginBase implements ContainerFactoryPlugi
   }
 
   /**
-   * Update a user.
+   * Delete a user.
    *
    * @param array $data
    *   The fields of the user.
@@ -81,13 +77,7 @@ class UpdateUser extends DataProducerPluginBase implements ContainerFactoryPlugi
   public function resolve(array $data) {
     if (isset($data['id']) && $this->currentUser->hasPermission("administer users")) {
       $account = User::load($data['id']);
-      unset($data['id']);
-      foreach ($data as $key => $value) {
-        if (isset($this->map_fields[$key])) {
-          $account->set($this->map_fields[$key], $value);
-        }
-      }
-      $account->save();
+      $account->delete();
       return $account;
     }
     return NULL;

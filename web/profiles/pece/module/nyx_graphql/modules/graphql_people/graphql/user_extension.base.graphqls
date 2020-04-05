@@ -11,13 +11,23 @@ type UserConnection {
   items: [User!]
 }
 
-type Address {
-  id: Int!
-  street: String
-  number: String
-  state: String
-  city: String
-  zipCode: String
-  district: String
+input UserInput {
+  username: String
+  mail: String!
+  pass: String
+  name: String!
+  status: Boolean
 }
 
+input UserUpdateInput {
+  id: Int!
+  username: String
+  mail: String
+  pass: String
+  name: String
+  status: Boolean
+}
+
+input UserDeleteInput {
+  id: Int!
+}
