@@ -1,5 +1,5 @@
 <?php
-namespace Drupal\pece_people\Plugin\GraphQL\DataProducer;
+namespace Drupal\graphql_people\Plugin\GraphQL\DataProducer;
 
 use Drupal\paragraphs\Entity\Paragraph;
 

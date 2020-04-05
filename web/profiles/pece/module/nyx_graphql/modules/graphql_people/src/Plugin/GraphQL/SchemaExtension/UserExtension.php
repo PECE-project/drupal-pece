@@ -8,7 +8,6 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\graphql\GraphQL\ResolverBuilder;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\nyx_graphql\Plugin\GraphQL\Schema\EntityExtension;
-use Drupal\user\Entity\User;
 
 /**
  * @SchemaExtension(
@@ -50,6 +49,26 @@ class UserExtension extends EntityExtension {
       $builder->produce('user_status')
         ->map('entity', $builder->fromParent())
     );
+
+    $registry->addFieldResolver('User', 'roles',
+      $builder->produce('user_roles')
+        ->map('entity', $builder->fromParent())
+    );
+
+    $registry->addFieldResolver('Mutation', 'createPeople',
+      $builder->produce('create_user')
+        ->map('data', $builder->fromArgument('data'))
+    );
+
+    $registry->addFieldResolver('Mutation', 'updatePeople',
+      $builder->produce('update_user')
+        ->map('data', $builder->fromArgument('data'))
+    );
+
+    $registry->addFieldResolver('Mutation', 'deletePeople',
+      $builder->produce('delete_user')
+        ->map('data', $builder->fromArgument('data'))
+    );
   }
 
   function addQueryFields(ResolverRegistryInterface $registry, ResolverBuilder $builder) {
@@ -68,11 +87,6 @@ class UserExtension extends EntityExtension {
         ->map('offset', $builder->fromArgument('offset'))
         ->map('limit', $builder->fromArgument('limit'))
         ->map('filters', $builder->fromArgument('filters'))
-    );
-
-    $registry->addFieldResolver('Mutation', 'createUser',
-      $builder->produce('create_user')
-        ->map('data', $builder->fromArgument('data'))
     );
   }
 
