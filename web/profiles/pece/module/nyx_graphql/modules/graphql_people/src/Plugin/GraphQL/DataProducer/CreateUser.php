@@ -5,7 +5,7 @@ namespace Drupal\graphql_people\Plugin\GraphQL\DataProducer;
 use Drupal\user\Entity\User;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\pece_people\Plugin\GraphQL\DataProducer\TraitUser;
+use Drupal\graphql_people\Plugin\GraphQL\DataProducer\TraitUser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 
@@ -101,8 +101,8 @@ class CreateUser extends DataProducerPluginBase implements ContainerFactoryPlugi
       $values = [];
       $values['vid'] = 'user';
       foreach ($data as $key => $value) {
-        if (isset($this->map_fields[$key])) {
-          $values[$this->map_fields[$key]] = $value;
+        if (isset($this->mapFields[$key])) {
+          $values[$this->mapFields[$key]] = $value;
         }
       }
       $account = User::create($values);
