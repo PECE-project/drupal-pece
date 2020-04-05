@@ -8,7 +8,7 @@ trait TraitUser {
      * Mapping fields
      *
      */
-    protected $map_fields = [
+    protected $mapFields = [
         'mail' => 'mail',
         'pass' => 'pass',
         'username' => 'name',
