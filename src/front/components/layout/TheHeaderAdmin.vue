@@ -21,7 +21,7 @@
             to="/"
             class="p-4 h-full block"
           >
-            My profile
+            {{ user.username }}
           </nuxt-link>
         </li>
         <li class="h-full">
@@ -46,8 +46,10 @@ export default {
 
   setup (_, { root }) {
     const isLogged = ref(false)
+    const user = ref({})
 
     onMounted(() => {
+      user.value = root.$store.getters['user/user']
       isLogged.value = root.$store.getters['user/getToken']
     })
 
@@ -56,6 +58,7 @@ export default {
     }
 
     return {
+      user,
       logout,
       isLogged
     }
