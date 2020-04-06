@@ -1,0 +1,50 @@
+uuid: 702ca65a-cf0e-4c9c-b27f-cf6026eb3649
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_profile.field_profile_biography
+    - field.field.paragraph.paragraph_profile.field_profile_full_name
+    - field.field.paragraph.paragraph_profile.field_profile_institution
+    - field.field.paragraph.paragraph_profile.field_profile_position
+    - paragraphs.paragraphs_type.paragraph_profile
+id: paragraph.paragraph_profile.default
+targetEntityType: paragraph
+bundle: paragraph_profile
+mode: default
+content:
+  field_profile_biography:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_profile_full_name:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_profile_institution:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_profile_position:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,76 @@
+uuid: be982316-decc-4b7b-8c64-d638815186f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_location.field_location_additional
+    - field.field.paragraph.paragraph_location.field_location_city
+    - field.field.paragraph.paragraph_location.field_location_country
+    - field.field.paragraph.paragraph_location.field_location_name
+    - field.field.paragraph.paragraph_location.field_location_postal_code
+    - field.field.paragraph.paragraph_location.field_location_state_province
+    - field.field.paragraph.paragraph_location.field_location_street
+    - paragraphs.paragraphs_type.paragraph_location
+id: paragraph.paragraph_location.default
+targetEntityType: paragraph
+bundle: paragraph_location
+mode: default
+content:
+  field_location_additional:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_location_city:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_location_country:
+    weight: 6
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_location_name:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_location_postal_code:
+    weight: 5
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_location_state_province:
+    weight: 4
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_location_street:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  search_api_excerpt: true
