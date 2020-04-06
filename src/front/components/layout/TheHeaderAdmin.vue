@@ -1,5 +1,9 @@
 <template>
-  <div v-if="isLogged" class="sticky left-0 top-0 z-50 w-full px-4 bg-headerAdmin">
+  <div
+    v-if="isLogged"
+    class="sticky left-0 top-0 z-50 w-full px-4 bg-headerAdmin"
+    data-nw="header-admin"
+  >
     <nav class="flex h-full">
       <ul class="flex justify-start text-gray-400 text-sm">
         <li class="h-full">
@@ -29,6 +33,7 @@
             @click="logout"
             type="button"
             class="p-4 h-full block"
+            data-nw="logout"
           >
             Logout
           </button>

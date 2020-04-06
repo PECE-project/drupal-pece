@@ -43,6 +43,7 @@
           v-model="auth.username"
           type="text"
           name="username"
+          data-nw="username"
           autofocus
           aria-describedby="username-help-text"
         />
@@ -80,6 +81,7 @@
           v-model="auth.password"
           type="password"
           name="password"
+          data-nw="password"
           aria-describedby="password-help-text"
         />
         <FormErrorMessage :errors="errors" />
@@ -88,6 +90,7 @@
           <nuxt-link
             :to="{ name: `forget-password___${$i18n.locale}`}"
             class="link-accent-inline"
+            data-nw="link-forgot-pass"
           >
             request a new password.
           </nuxt-link>
@@ -97,6 +100,7 @@
         :disabled="invalid"
         :class="{ 'opacity-50': invalid }"
         type="submit"
+        data-nw="btn-submit"
         class="mt-8 btn-accent"
       >
         Log In

@@ -7,6 +7,7 @@
     }"
     class=" border-t-4 rounded-b text-teal-900 px-4 py-3"
     role="alert"
+    data-nw="alert"
     aria-atomic="true"
   >
     <div class="flex">

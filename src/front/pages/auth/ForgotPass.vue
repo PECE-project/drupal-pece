@@ -3,7 +3,7 @@
     <h1 class="font-bold text-4xl leading-none">
       Forgot Password?
     </h1>
-    <p id="email-help-text" class="text-md mt-2 text-gray-600">
+    <p id="email-help-text" class="text-md mt-2 text-gray-700">
       Enter your account email address and we will send you a link to reset your password.
     </p>
     <ForgotPassForm />
@@ -16,6 +16,12 @@ export default {
 
   components: {
     ForgotPassForm: () => import(/* webpackChunkName: "ForgotPassForm" */ '@/components/auth/ForgotPass')
+  },
+
+  head () {
+    return {
+      title: 'Forgot password | PECE Project'
+    }
   }
 }
 </script>

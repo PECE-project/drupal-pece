@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="pece-app">
     <TheHeaderAdmin />
     <div class="xl:px-6">
       <the-heading />

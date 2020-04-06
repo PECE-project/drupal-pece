@@ -2,6 +2,7 @@
   <FormObserveValidate
     @submitted="submit"
     name="form-forgot-pass"
+    data-nw="form-forgot-pass"
   >
     <template v-slot="{ invalid }">
       <div
@@ -43,7 +44,7 @@
         class="mt-8"
       >
         <FormLabel
-          for="username"
+          for="mail"
           class="pb-0"
         >
           Email
@@ -54,6 +55,7 @@
           v-model="mail"
           type="email"
           name="mail"
+          data-nw="email"
           autofocus
           aria-describedby="mail-help-text"
         />
@@ -64,6 +66,7 @@
         :class="{ 'opacity-50': invalid }"
         type="submit"
         class="mt-8 btn-accent"
+        data-nw="btn-submit"
       >
         Request password reset
       </button>

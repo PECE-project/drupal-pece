@@ -13,6 +13,12 @@ export default {
 
   components: {
     LoginForm: () => import(/* webpackChunkName: "AuthLogin" */ '@/components/auth/Login')
+  },
+
+  head () {
+    return {
+      title: 'Login | PECE Project'
+    }
   }
 }
 </script>
