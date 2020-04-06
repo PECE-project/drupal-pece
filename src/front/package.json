@@ -13,8 +13,8 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:single": "jest -t",
-    "e2e": "./node_modules/.bin/cypress run --headless",
-    "e2e:open": "./node_modules/.bin/cypress open"
+    "e2e": "nightwatch --headless",
+    "e2e:open": "nightwatch"
   },
   "dependencies": {
     "@nuxtjs/apollo": "^4.0.0-rc12",
@@ -51,12 +51,15 @@
     "@vue/test-utils": "^1.0.0-beta.27",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.1.0",
-    "cypress": "^3.8.0",
+    "chromedriver": "^80.0.0",
     "eslint": "^6.1.0",
     "eslint-plugin-import-helpers": "^1.0.2",
     "eslint-plugin-nuxt": ">=0.4.2",
     "eslint-plugin-vue-a11y": "0.0.31",
+    "geckodriver": "^1.19.1",
     "jest": "^24.1.0",
+    "nightwatch": "^1.3.4",
+    "nightwatch-axe-verbose": "^1.0.1",
     "node-sass": "^4.12.0",
     "nodemon": "^1.18.9",
     "nuxt-webfontloader": "^1.1.0",

@@ -45,6 +45,9 @@ ps:
 shell:
 	docker exec -ti -e COLUMNS=$(shell tput cols) -e LINES=$(shell tput lines) $(shell docker ps --filter name='$(PROJECT_NAME)_php' --format "{{ .ID }}") sh
 
+shell-node:
+	docker exec -ti --user root -e COLUMNS=$(shell tput cols) -e LINES=$(shell tput lines) $(shell docker ps --filter name='$(PROJECT_NAME)_front_node' --format "{{ .ID }}") sh
+
 ## drush	:	Executes `drush` command in a specified `DRUPAL_ROOT` directory (default is `/var/www/html/web`).
 ## 		Doesn't support --flag arguments.
 drush:
