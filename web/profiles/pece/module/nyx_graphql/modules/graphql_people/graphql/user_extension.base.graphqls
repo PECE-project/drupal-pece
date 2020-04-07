@@ -3,7 +3,6 @@ type User {
   uuid: String!
   mail: String
   username: String
-  zotero: String
   status: Boolean
 }
 
@@ -16,7 +15,7 @@ input UserInput {
   username: String!
   mail: String!
   pass: String!
-  zotero: string
+  zotero: String
   status: Boolean
 }
 
@@ -25,7 +24,7 @@ input UserUpdateInput {
   username: String
   mail: String
   pass: String
-  zotero: string
+  zotero: String
   status: Boolean
 }
 
