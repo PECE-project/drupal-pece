@@ -1,29 +1,41 @@
 <template>
   <article class="card rounded overflow-hidden shadow-pece">
     <div class="card__media">
-      <a href="#">
-        <img src="~/assets/images/media/786-320x200.jpg" alt="Description image" class="w-full block">
-      </a>
+      <nuxt-link :to="data.to">
+        <img
+          :src="data.image.url"
+          :alt="data.image.alt"
+          class="w-full block contains"
+          style="height: 140px;"
+        >
+      </nuxt-link>
     </div>
     <div class="card__content p-3">
       <header class="card__header">
         <h2 class="card__title text-sm font-bold text-gray-900 leading-tight">
-          <a href="#">
-            Traces of future
-          </a>
+          <nuxt-link :to="data.to">
+            {{ data.title }}
+          </nuxt-link>
         </h2>
       </header>
       <footer class="card__meta mt-1">
         <div class="card__info text-gray-600">
-          <a href="#" class="card__user-link">
-            <span class="underline">Mike Fortun</span>
-          </a>
+          <nuxt-link
+            :to="data.author.to"
+            class="card__user-link"
+          >
+            <span class="underline">
+              {{ data.author.name }}
+            </span>
+          </nuxt-link>
           <span>•</span>
-          <span class="card__post-date">2 day ago</span>
+          <span class="card__post-date">
+            {{ data.createdAt }}
+          </span>
         </div>
         <div class="card__tags mt-4">
-          <ul class="flex">
-            <li v-for="tag in fakeTags" :key="tag.label">
+          <ul v-if="data.tags.length" class="flex">
+            <li v-for="tag in data.tags" :key="tag.id">
               <tag :data="tag" />
             </li>
           </ul>
@@ -45,25 +57,9 @@ export default {
       required: true
     }
   },
-  setup () {
-    const fakeTags = [
-      {
-        label: '#science',
-        to: {
-          path: '/'
-        }
-      },
-      {
-        label: '#climatology',
-        to: {
-          path: '/'
-        }
-      }
-    ]
 
-    return {
-      fakeTags
-    }
+  created () {
+    console.log(this.data)
   }
 }
 </script>

@@ -7,3 +7,25 @@ export const GET_USER = gql`
     }
   }
 `
+
+export const CREATE_USER = gql`
+  mutation (
+    $mail: String!,
+    $username: String!,
+    $pass: String!,
+    $zotero: String,
+    $status: Boolean
+  ) {
+    createPeople (
+      data: {
+        mail: $mail,
+        username: $username,
+        pass: $pass,
+        zotero: $zotero,
+        status: $status,
+      }
+    ) {
+      id
+    }
+  }
+`

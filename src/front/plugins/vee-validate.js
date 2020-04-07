@@ -7,3 +7,8 @@ extend('min', min)
 extend('numeric', numeric)
 extend('required', required)
 extend('confirmed', confirmed)
+
+extend('username', {
+  message: field => 'The ' + field + ' value is not valid.',
+  validate: value => /^[\w\d\-_']+$/g.test(value)
+})
