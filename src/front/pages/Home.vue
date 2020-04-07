@@ -6,12 +6,12 @@
       </section>
       <section class="tabs mt-12 md:mt-16">
         <tabs :uppercase="true">
-          <tab :label="$t('recent_essays')">
-            <list-cards :data="new Array(4)">
+          <tab :label="$t('recent_essays')" v-if="getEssays.length">
+            <ListCards :data="getEssays">
               <template v-slot="{ item }">
-                <card :data="{ item }" />
+                <card :data="item" />
               </template>
-            </list-cards>
+            </ListCards>
           </tab>
           <tab :label="$t('recent_artifacts')">
             <h3>CONTENT TAB</h3>
@@ -36,14 +36,14 @@
     <div class="sidebar w-full mt-12 pr-0 lg:mt-0 lg:w-2/6 lg:pl-8 xl:pl-12">
       <tabs :uppercase="true">
         <tab :label="$t('groups')">
-          <list-cards :data="simpleCardData" :vertical="true">
+          <ListCards :data="simpleCardData" :vertical="true">
             <template v-slot="{ item }">
-              <horizontal-card :data="item" />
+              <HorizontalCard :data="item" />
             </template>
-          </list-cards>
+          </ListCards>
         </tab>
         <tab :label="$t('people')">
-          <list-users :users="users" :horizontal="true" />
+          <ListUsers :users="users" :horizontal="true" />
         </tab>
       </tabs>
     </div>
@@ -51,10 +51,12 @@
 </template>
 
 <script>
+import * as QUERY from '@/graphql/queries/essay'
 import { simpleCardData, users } from '@/utils/fake'
 
 export default {
   name: 'Home',
+
   components: {
     Tabs: () => import(/* webpackChunkName: "tabs" */ '@/components/tabs/Tabs'),
     Tab: () => import(/* webpackChunkName: "tab" */ '@/components/tabs/Tab'),
@@ -64,6 +66,70 @@ export default {
     Highlights: () => import(/* webpackChunkName: "Highlights" */ '@/components/Highlights'),
     HorizontalCard: () => import(/* webpackChunkName: "HorizontalCard" */ '@/components/cards/HorizontalCard')
   },
+
+  apollo: {
+    peceEssays () {
+      return {
+        query: QUERY.GET_ESSAYS_HOME,
+        variables: {
+          offset: 0,
+          limit: 4
+        }
+      }
+    }
+  },
+
+  computed: {
+    getEssays () {
+      if (this.peceEssays && this.peceEssays.items.length) {
+        return this.peceEssays.items.map((essay) => {
+          const tags = essay.tags && essay.tags.length
+            ? essay.tags
+              .filter(item => item.title)
+              .map((item) => {
+                return {
+                  title: item.title,
+                  to: {
+                    name: `tag___${this.$i18n.locale}`,
+                    params: {
+                      slug: item.title
+                    }
+                  }
+                }
+              })
+              .slice(0, 2)
+            : []
+          return {
+            id: essay.id,
+            title: essay.title,
+            to: {
+              name: `essay___${this.$i18n.locale}`,
+              params: {
+                id: essay.id
+              }
+            },
+            author: {
+              name: essay.author.username,
+              to: {
+                name: `user___${this.$i18n.locale}`,
+                params: {
+                  slug: essay.author.username
+                }
+              }
+            },
+            image: {
+              alt: essay.thumbnail.alt,
+              url: essay.thumbnail.url
+            },
+            tags,
+            createdAt: ''
+          }
+        })
+      }
+      return []
+    }
+  },
+
   setup () {
     return {
       simpleCardData,
