@@ -2,6 +2,7 @@
 
 namespace Drupal\graphql_people\Plugin\GraphQL\DataProducer;
 
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\user\Entity\User;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -97,7 +98,7 @@ class CreateUser extends DataProducerPluginBase implements ContainerFactoryPlugi
    * @throws \Exception
    */
   public function resolve(array $data) {
-    if ($this->currentUser->hasPermission("administer users")) {
+    if ($this->currentUser->hasPermission("administer users") || $this->currentUser->isAnonymous()) {
       $values = [];
       $values['vid'] = 'user';
       foreach ($data as $key => $value) {
@@ -105,11 +106,21 @@ class CreateUser extends DataProducerPluginBase implements ContainerFactoryPlugi
           $values[$this->mapFields[$key]] = $value;
         }
       }
-      $account = User::create($values);
-      $account->save();
-      return $account;
+      try {
+        $account = User::create($values);
+        $account->save();
+        return $account;
+      } catch (EntityStorageException $e) {
+        switch ($e->getCode()) {
+          case 23000:
+            throw new \Exception($this->t("User already registered."), $e->getCode());
+            break;
+          default:
+            throw new \Exception($e->getMessage(), $e->getCode());
+        }
+
+      }
     }
     return NULL;
   }
-
 }
