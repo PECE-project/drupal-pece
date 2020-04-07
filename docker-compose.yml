@@ -196,6 +196,18 @@ services:
       - $FRONT_DIR:/home/node/app
     command: bash -c "npm run start"
 
+  n8n:
+    image: n8nio/n8n
+    container_name: "${PROJECT_NAME}_n8n"
+    labels:
+      - 'traefik.backend=${PROJECT_NAME}_n8n'
+      - 'traefik.port=5678'
+      - 'traefik.frontend.rule=Host:n8n.${PROJECT_BASE_URL}'
+    ports:
+      - 5678:5678
+    volumes:
+      - ~/.n8n:/root/.n8n
+
 #  blackfire:
 #    image: blackfire/blackfire
 #    container_name: "${PROJECT_NAME}_blackfire"
