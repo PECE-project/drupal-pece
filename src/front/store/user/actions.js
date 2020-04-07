@@ -23,11 +23,9 @@ export default {
       formData.append('client_secret', process.env.NUXT_AUTH_CLIENT_SECRET)
       formData.append('grant_type', 'password')
 
-      try {
-        resolve(makeAuth.call(this.app, commit, formData))
-      } catch (e) {
-        reject(e)
-      }
+      return makeAuth.call(this.app, commit, formData)
+        .then(res => resolve(res))
+        .catch(e => reject(e))
     })
   },
 
