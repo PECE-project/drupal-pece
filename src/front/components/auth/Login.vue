@@ -129,8 +129,9 @@ export default {
         await root.$store.dispatch('user/login', auth.value)
         window.location.href = root.$route.query.redirect || '/'
       } catch (e) {
-        console.log(e)
-        serverErrors.value = e
+        serverErrors.value.push({
+          message: e.message
+        })
       }
     }
 
