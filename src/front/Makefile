@@ -4,6 +4,9 @@ include .env
 
 FILE_MATCH?=
 
+run:
+	docker-compose up -d
+
 stop:
 	docker-compose stop
 
@@ -39,9 +42,6 @@ e2e-open:
 
 logs:
 	docker-compose logs -f front
-
-run:
-	docker-compose up -d
 
 in:
 	docker-compose exec front /bin/bash

@@ -28,3 +28,6 @@ status_canceled:
 langcode: en
 _core:
   default_config_hash: IWzNdUVX2YSiflxrGSTLIiqTrhgIzbV2C-hRL5DniJM
+password_reset_rest:
+  body: "[user:display-name],\n        A request to reset the password for your account has been made at [site:name].\n        Here is your temporary password [user:rest-temp-password] this will expire in 7 Days.\n        [user:name-url-encode]\n        [user:name-url-encode-spaces]"
+  subject: 'Replacement login information for [user:display-name]'

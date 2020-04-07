@@ -6,7 +6,6 @@ module.exports = {
   },
   plugins: [
     'vue-a11y',
-    'eslint-plugin-import-helpers'
   ],
   parserOptions: {
     parser: 'babel-eslint'
@@ -19,19 +18,8 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'nuxt/no-cjs-in-config': 'off',
-    'import-helpers/order-imports': [
-      'warn',
-      {
-        newlinesBetween: 'always',
-        groups: [
-          '/^vue/',
-          '/^@vue/',
-          'module',
-          '/^@\//',
-          ['parent', 'sibling', 'index']
-        ],
-        alphabetize: { order: 'asc', ignoreCase: true }
-      }
-    ]
+    'vue-a11y/click-events-have-key-events': 'off',
+    'vue/max-attributes-per-line': 1,
+    'import/order': 'off'
   }
 }

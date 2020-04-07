@@ -1,0 +1,49 @@
+uuid: ead8052c-963a-41e3-9260-7a868a975140
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_location
+    - paragraphs.paragraphs_type.paragraph_location
+  module:
+    - entity_reference_revisions
+    - user
+id: user.user.field_location
+field_name: field_location
+entity_type: user
+bundle: user
+label: Location
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      paragraph_location: paragraph_location
+    target_bundles_drag_drop:
+      paragraph_content_reference:
+        weight: 8
+        enabled: false
+      paragraph_custom_reference:
+        weight: 9
+        enabled: false
+      paragraph_groups:
+        weight: 10
+        enabled: false
+      paragraph_location:
+        enabled: true
+        weight: 11
+      paragraph_member:
+        weight: 12
+        enabled: false
+      paragraph_permission:
+        weight: 13
+        enabled: false
+      paragraph_profile:
+        weight: 14
+        enabled: false
+field_type: entity_reference_revisions

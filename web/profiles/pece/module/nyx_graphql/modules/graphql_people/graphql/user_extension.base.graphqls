@@ -4,6 +4,8 @@ type User {
   mail: String
   username: String
   status: Boolean
+  profile: [Profile]
+  location: [Location]
 }
 
 type UserConnection {
@@ -30,4 +32,23 @@ input UserUpdateInput {
 
 input UserDeleteInput {
   id: Int!
+}
+
+type Profile {
+  id: Int
+  fullName: String
+  institution: String
+  biography: String
+  position: String
+}
+
+type Location {
+  id: Int
+  name: String
+  street: String
+  additional: String
+  stateProvince: String
+  city: String
+  postalCode: String
+  country: String
 }

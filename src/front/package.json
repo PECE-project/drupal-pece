@@ -13,8 +13,8 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:single": "jest -t",
-    "e2e": "./node_modules/.bin/cypress run --headless",
-    "e2e:open": "./node_modules/.bin/cypress open"
+    "e2e": "nightwatch --headless",
+    "e2e:open": "nightwatch"
   },
   "dependencies": {
     "@nuxtjs/apollo": "^4.0.0-rc12",
@@ -30,10 +30,14 @@
     "graphql-tag": "^2.10.1",
     "nuxt": "^2.9.2",
     "nuxt-i18n": "^6.1.1",
+    "vee-validate": "^3.2.5",
     "vue-a11y-utils": "^0.6.2",
     "vue-announcer": "^1.0.5",
+    "vue-focus-lock": "^1.4.0",
     "vue-lazy-hydration": "^1.0.0-beta.9",
-    "vue-skip-to": "^1.0.6"
+    "vue-skip-to": "^1.0.6",
+    "vuex-persistedstate": "^3.0.0",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "@nuxtjs/dotenv": "^1.4.0",
@@ -47,12 +51,15 @@
     "@vue/test-utils": "^1.0.0-beta.27",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.1.0",
-    "cypress": "^3.8.0",
+    "chromedriver": "^80.0.0",
     "eslint": "^6.1.0",
     "eslint-plugin-import-helpers": "^1.0.2",
     "eslint-plugin-nuxt": ">=0.4.2",
     "eslint-plugin-vue-a11y": "0.0.31",
+    "geckodriver": "^1.19.1",
     "jest": "^24.1.0",
+    "nightwatch": "^1.3.4",
+    "nightwatch-axe-verbose": "^1.0.1",
     "node-sass": "^4.12.0",
     "nodemon": "^1.18.9",
     "nuxt-webfontloader": "^1.1.0",

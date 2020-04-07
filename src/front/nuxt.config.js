@@ -66,6 +66,7 @@ module.exports = {
    ** See https://github.com/nuxt-community/apollo-module#setup
    */
   apollo: {
+    errorHandler: '~/graphql/customErrorHandler.js',
     clientConfigs: {
       default: {
         httpEndpoint: process.env.NUXT_MODULE_APOLLO_HTTP
@@ -119,6 +120,10 @@ module.exports = {
   buildDir: path.resolve(__dirname, 'dist'),
   build: {
     analyze: true,
+    transpile: [
+      // Doc: https://logaretm.github.io/vee-validate/guide/rules.html#importing-rules-in-nuxt-js
+      'vee-validate/dist/rules'
+    ],
     extend (config, ctx) {}
   }
 }
