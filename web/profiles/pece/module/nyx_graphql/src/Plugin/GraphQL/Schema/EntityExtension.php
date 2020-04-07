@@ -116,6 +116,11 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
         ->map('entity', $builder->fromParent())
     );
 
+    $registry->addFieldResolver(ucfirst($baseEntityNameSingular), 'created',
+      $builder->produce('entity_created')
+        ->map('entity', $builder->fromParent())
+    );
+
     $registry->addFieldResolver(ucfirst($baseEntityNameSingular), 'uuid',
       $builder->produce('entity_uuid')
         ->map('entity', $builder->fromParent())
