@@ -14,7 +14,7 @@ export default {
     },
     locale: {
       type: String,
-      default: 'en_US'
+      default: 'en'
     }
   },
   data () {
