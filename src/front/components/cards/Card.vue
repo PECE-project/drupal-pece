@@ -30,7 +30,18 @@
           </nuxt-link>
           <span>•</span>
           <span class="card__post-date">
-            {{ data.createdAt }}
+            <TimeAgo
+              :date="data.created"
+              :locale="$i18n.locale"
+            >
+              <time
+                :datetime="data.created"
+                slot-scope="{ time }"
+                class="card-timeago"
+              >
+                {{ time }}
+              </time>
+            </TimeAgo>
           </span>
         </div>
         <div class="card__tags mt-4">
@@ -46,9 +57,11 @@
 </template>
 
 <script>
+
 export default {
   name: 'Card',
   components: {
+    TimeAgo: () => import(/* webpackChunkName: "TimeAgo" */ '@/components/time/Provider'),
     Tag: () => import(/* webpackChunkName: "Tag" */ '@/components/Tag')
   },
   props: {
