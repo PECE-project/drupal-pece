@@ -8,6 +8,7 @@ export const GET_ESSAYS_HOME = gql`
       items {
         id
         title
+        created
         thumbnail {
           alt
           url(style: THUMBNAIL_100x100)
