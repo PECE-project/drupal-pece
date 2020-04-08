@@ -2,11 +2,13 @@
   <FormObserveValidate
     @submitted="register"
     name="form-register"
+    data-nw="form-register"
   >
     <template v-slot="{ invalid }">
       <div
         ref="alert"
         v-if="serverErrors.length"
+        data-nw="error-alert"
         tabindex="-1"
         class="mt-6"
       >
@@ -14,7 +16,11 @@
           <span slot="title">
             Some errors occurred while registering
           </span>
-          <ul slot="description" class="list-disc ml-4">
+          <ul
+            slot="description"
+            data-nw="error-alert-list"
+            class="list-disc ml-4"
+          >
             <li v-for="(error, index) in serverErrors" :key="`server-error${index}`">
               {{ error.message }}
             </li>
@@ -39,6 +45,7 @@
             v-model="username"
             type="text"
             name="username"
+            data-nw="username"
             aria-describedby="username-help-text"
           />
           <FormErrorMessage :errors="errors" />
@@ -63,6 +70,7 @@
             v-model="mail"
             type="email"
             name="email"
+            data-nw="email"
             aria-describedby="email-help-text"
           />
           <FormErrorMessage :errors="errors" />
@@ -87,6 +95,7 @@
             v-model="password"
             type="password"
             name="password"
+            data-nw="password"
             aria-describedby="password-help-text"
           />
           <FormErrorMessage :errors="errors" />
@@ -111,6 +120,7 @@
             v-model="password_confirm"
             type="password"
             name="password_confirm"
+            data-nw="password_confirm"
             aria-describedby="password-confirm-help-text"
           />
           <FormErrorMessage :errors="errors" />
@@ -130,6 +140,7 @@
             v-model="zotero"
             type="text"
             name="zotero"
+            data-nw="zotero"
             aria-describedby="zotero-help-text"
           />
         </FormControl>
@@ -145,6 +156,7 @@
         :class="{ 'opacity-50': invalid }"
         type="submit"
         class="btn-accent"
+        data-nw="btn-submit"
       >
         Create new account
       </button>
@@ -196,10 +208,9 @@ export default {
             username: state.username,
             password: state.password
           })
-          root.$swal({
-            title: 'Registration successfully Complete!',
-            icon: 'success'
-          })
+          const successMessage = 'Registration successfully Complete!'
+          root.$swal(successMessage, '', 'success')
+          root.$announcer.set(successMessage)
           setTimeout(() => {
             window.location.href = root.$route.query.redirect || '/'
           }, 2000)

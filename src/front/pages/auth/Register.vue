@@ -13,6 +13,12 @@ export default {
 
   components: {
     RegisterForm: () => import(/* webpackChunkName: "RegisterForm" */ '@/components/auth/Register')
+  },
+
+  head () {
+    return {
+      title: 'Create an account | PECE Project'
+    }
   }
 }
 </script>
