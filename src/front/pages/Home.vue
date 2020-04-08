@@ -122,7 +122,7 @@ export default {
               url: essay.thumbnail.url
             },
             tags,
-            createdAt: ''
+            created: essay.created
           }
         })
       }
