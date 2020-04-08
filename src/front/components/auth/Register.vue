@@ -5,7 +5,9 @@
   >
     <template v-slot="{ invalid }">
       <div
+        ref="alert"
         v-if="serverErrors.length"
+        tabindex="-1"
         class="mt-6"
       >
         <Alert>
@@ -157,7 +159,7 @@ import { CREATE_USER } from '@/graphql/queries/user'
 export default {
   name: 'RegisterForm',
 
-  setup (_, { root }) {
+  setup (_, { root, refs }) {
     const serverErrors = ref([])
     const saveLoading = ref(false)
 
@@ -175,7 +177,7 @@ export default {
           saveLoading.value = true
           serverErrors.value = []
 
-          const { data } = await root.$apollo.mutate({
+          const res = await root.$apollo.mutate({
             mutation: CREATE_USER,
             variables: {
               mail: state.mail,
@@ -186,21 +188,25 @@ export default {
             }
           })
 
-          console.log(data)
-
-          if (!data.createPeople) {
-            throw new Error(`Error saving the user ${state.username}`)
+          if (res.extensions && res.extensions.length) {
+            throw new Error(res.extensions[0].message || `Error saving the user ${state.username}`)
           }
 
           await root.$store.dispatch('user/login', {
             username: state.username,
             password: state.password
           })
+          root.$swal({
+            title: 'Registration successfully Complete!',
+            icon: 'success'
+          })
+          setTimeout(() => {
+            window.location.href = root.$route.query.redirect || '/'
+          }, 2000)
         } catch (e) {
           saveLoading.value = false
-          serverErrors.value.push({
-            message: e.message
-          })
+          serverErrors.value.push({ message: e.message })
+          root.$nextTick(() => refs.alert.focus())
         }
       }
     }
