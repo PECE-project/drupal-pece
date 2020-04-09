@@ -53,7 +53,7 @@
 <script>
 import { simpleCardData, users } from '@/utils/fake'
 import { computed } from '@vue/composition-api'
-import useEssays from '@/composable/useEssays'
+import useEssays from '@/graphql/composables/useEssays'
 import { GET_ESSAYS_HOME } from '@/graphql/queries/essay'
 
 export default {
