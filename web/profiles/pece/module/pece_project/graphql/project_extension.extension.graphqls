@@ -3,7 +3,7 @@ extend type Query {
     offset: Int = 0
     limit: Int = 10
     filters: [Filter] = []
-  ): PeceEssayConnection!
+  ): PeceProjectConnection!
 
   peceProject (id: Int!) : PeceProject
 }
