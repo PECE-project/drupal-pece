@@ -1,12 +1,12 @@
-uuid: 7d780e59-5e1c-496d-b28c-05a9b253d119
+uuid: df4921cb-8225-4e58-be4d-ed7392e08992
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_subst_logic_thumbnail
     - node.type.pece_substantive_logic
-_core:
-  default_config_hash: YlTyJnWjYarK9JGzOJTYCRawWXSCgAm1ql309syJYCs
+  module:
+    - image
 id: node.pece_substantive_logic.field_subst_logic_thumbnail
 field_name: field_subst_logic_thumbnail
 entity_type: node
@@ -18,10 +18,21 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
+  file_extensions: 'png gif jpg jpeg'
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  max_resolution: ''
+  min_resolution: ''
+  default_image:
+    uuid: null
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  max_filesize: ''
   handler: 'default:file'
-  handler_settings:
-    target_bundles: null
-    sort:
-      field: _none
-    auto_create: false
-field_type: entity_reference
+  handler_settings: {  }
+field_type: image
