@@ -53,7 +53,7 @@
 <script>
 import { simpleCardData, users } from '@/utils/fake'
 import { computed } from '@vue/composition-api'
-import useEssays from '@/graphql/composables/useEssays'
+import useGqlContents from '@/graphql/composables/useGqlContents'
 import { GET_ESSAYS_HOME } from '@/graphql/queries/essay'
 
 export default {
@@ -70,17 +70,18 @@ export default {
   },
 
   setup (_, { root }) {
-    const { essays } = useEssays({
+    const { data } = useGqlContents({
       query: GET_ESSAYS_HOME,
       variables: {
         offset: 0,
         limit: 4
-      }
+      },
+      type: 'peceEssays'
     })
 
     const getEssays = computed(() => {
-      if (essays.value) {
-        return essays.value.map((essay) => {
+      if (data.value) {
+        return data.value.map((essay) => {
           const tags = essay.tags && essay.tags.length
             ? essay.tags
               .filter(item => item.title)

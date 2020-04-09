@@ -43,7 +43,7 @@
 
 <script>
 import { simpleCardData } from '@/utils/fake'
-import useRoute from '@/graphql/composables/useRoute'
+import useGqlRoute from '@/graphql/composables/useGqlRoute'
 import { GET_ROUTE } from '@/graphql/queries/route'
 
 export default {
@@ -55,7 +55,7 @@ export default {
     HorizontalCard: () => import(/* webpackChunkName: "HorizontalCard" */ '@/components/cards/HorizontalCard')
   },
   setup () {
-    const { data: about } = useRoute({
+    const { data: about } = useGqlRoute({
       query: GET_ROUTE,
       variables: { path: '/about' }
     })
