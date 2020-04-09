@@ -51,8 +51,10 @@
 </template>
 
 <script>
-import * as QUERY from '@/graphql/queries/essay'
 import { simpleCardData, users } from '@/utils/fake'
+import { computed } from '@vue/composition-api'
+import useEssays from '@/composable/useEssays'
+import { GET_ESSAYS_HOME } from '@/graphql/queries/essay'
 
 export default {
   name: 'Home',
@@ -67,22 +69,18 @@ export default {
     HorizontalCard: () => import(/* webpackChunkName: "HorizontalCard" */ '@/components/cards/HorizontalCard')
   },
 
-  apollo: {
-    peceEssays () {
-      return {
-        query: QUERY.GET_ESSAYS_HOME,
-        variables: {
-          offset: 0,
-          limit: 4
-        }
+  setup (_, { root }) {
+    const { essays } = useEssays({
+      query: GET_ESSAYS_HOME,
+      variables: {
+        offset: 0,
+        limit: 4
       }
-    }
-  },
+    })
 
-  computed: {
-    getEssays () {
-      if (this.peceEssays && this.peceEssays.items.length) {
-        return this.peceEssays.items.map((essay) => {
+    const getEssays = computed(() => {
+      if (essays.value) {
+        return essays.value.map((essay) => {
           const tags = essay.tags && essay.tags.length
             ? essay.tags
               .filter(item => item.title)
@@ -90,7 +88,7 @@ export default {
                 return {
                   title: item.title,
                   to: {
-                    name: `tag___${this.$i18n.locale}`,
+                    name: `tag___${root.$i18n.locale}`,
                     params: {
                       slug: item.title
                     }
@@ -103,7 +101,7 @@ export default {
             id: essay.id,
             title: essay.title,
             to: {
-              name: `essay___${this.$i18n.locale}`,
+              name: `essay___${root.$i18n.locale}`,
               params: {
                 id: essay.id
               }
@@ -111,7 +109,7 @@ export default {
             author: {
               name: essay.author.username,
               to: {
-                name: `user___${this.$i18n.locale}`,
+                name: `user___${root.$i18n.locale}`,
                 params: {
                   slug: essay.author.username
                 }
@@ -127,13 +125,12 @@ export default {
         })
       }
       return []
-    }
-  },
+    })
 
-  setup () {
     return {
-      simpleCardData,
-      users
+      users,
+      getEssays,
+      simpleCardData
     }
   }
 }
