@@ -5,6 +5,7 @@ export const GET_ESSAYS_HOME = gql`
     peceEssays (offset: $offset, limit: $limit, filters: [
       { key: "status", value: "1" },
     ]) {
+      total
       items {
         id
         title
