@@ -1,6 +1,13 @@
 Groups
 ==========
 
+### Overview
+
+For an overview of how to add and manage groups on PECE, please see the
+following YouTube video.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aZusE6G1aFY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Steps to Create Group
 --------------------------
 
@@ -132,9 +139,3 @@ like to be the parent of this sub-group. Save the group.
 Sub-groups are simply pointers to parent groups. Parent groups do not
 adopt the content of their sub-groups. This feature simply lets users
 know that there is a hierarchical relationship between the groups.
-
-### Overview
-
-For an overview of how to add and manage groups on PECE, please see the
-following YouTube video:
-[*https://www.youtube.com/edit?o=U&video\_id=aZusE6G1aFY*](https://www.youtube.com/edit?o=U&video_id=aZusE6G1aFY)

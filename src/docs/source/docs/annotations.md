@@ -1,5 +1,10 @@
 Annotations
 ============
+### Overview
+
+For an overview of how to annotate artifacts, please see the following
+YouTube video.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bB2X8lZWyVY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### How do I create a structured analytic?
 
@@ -160,9 +165,3 @@ It can be valuable to use the structured analytic headings to cordon off more sp
 3.  **Be sure to navigate the existing structured analytics by clicking on ‘Analyze’ in the main menu before creating a new analytic or structured analytic.** If you see questions or sets of questions similar to the ones you were planning to create, gauge whether there is analytic value to create a separate analytic. If you do create a separate analytic, it will not be possible to juxtapose the responses to this question to the responses the similar questions you identified. This is a tradeoff that you will need to consider.
 
 4.  **If a question is relevant to more than one structured analytic, categorize it under both structured analytics following [*these*](#how-do-i-edit-an-analytic) instructions. Do not duplicate the analytic to categorize it under a separate structured analytic.**
-
-### Overview
-
-For an overview of how to annotate artifacts, please see the following
-YouTube video:
-[*https://www.youtube.com/edit?o=U&video\_id=bB2X8lZWyVY*](https://www.youtube.com/edit?o=U&video_id=bB2X8lZWyVY)

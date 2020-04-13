@@ -18,7 +18,9 @@ Overview of this Documentation
 
 In [*User's Guide*](usersguide), you will find documentation on how to use PECE, including many frequently asked questions and helpful resources.
 
-In [*Administrator's Guide*](installation), you will find full documentation for PECE users, including many frequently asked questions we get about the functionality of PECE.
+In [*Site Admin's Guide*](siteadmin), you will find documentation for site administrator's regarding the configuration of the site theme, user registrations approvals, and the customization of front page material.
+
+In [*System Admin's Guide*](installation), you will find documentation for system administrator's regarding the installation of PECE and the configuration of PECE's backend.
 
 In [*Resources*](legal), you will find links to many useful documents such as PECE licensing, terms of service templates, governance guides, and contributed style guides.
 

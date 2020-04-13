@@ -12,7 +12,7 @@ see [here](http://theasthmafiles.org/content/6-united-states-environmental-healt
 
 A PECE essay is a collection of artifacts, memos, and essays, organized
 into a collage, with text added for context. For an example of a PECE
-essay, see [here](http://worldpece.org/content/lindsays-second-attempt)
+essay, see [here](https://disaster-sts-network.org/content/lead-poisoning-and-information-distribution-southern-california/essay)
 
 ### How do I create a memo?
 
@@ -22,6 +22,8 @@ a web form to create the content. Enter the relevant fields (explained
 in other parts of this document). Save the content.
 
 ### How do I create a photo essay?
+For an overview of how to create photo essays, see this YouTube video.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Z2K9nrp4j74" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Navigate to your ‘Dashboard’. This link will be listed in the main menu.
 Under the ‘Add Content’ heading, select ‘Photo Essay’. You will be
