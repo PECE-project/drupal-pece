@@ -1,4 +1,4 @@
-Administering PECE
+PECE System Administration
 ==================
 
 How do I install PECE?
@@ -114,32 +114,12 @@ Go to “Administration » Configuration » System » Site information” and
 fill out the information about your site name, the basic admin password,
 contact, timezone and other relevant info.
 
-How do I add a logo and change site colors?
--------------------------------------------
-
-Go to “Administration » Appearance » Settings » PECE Scholarly Lite.
-Under the heading, Logo image settings, uncheck the box to use the
-default logo. Choose a file to upload as the logo. To change site
-colors, scroll down on this page to the heading “MtT Settings.” Click
-the “Look’n’Feel” link. Check the box to use a Custom Color Scheme.
-Select a Primary color (header and icons), Secondary color (links), and
-Tertiary color (color to appear on hover in main navigation). Click
-“Save Configuration.”
-
 How do I upload the terms of service?
 -------------------------------------
 
 Go to “Administration » Configuration » People » Legal” and click “Add
 T&C”, then fill-out the boxes with your custom text to be displayed to
-every user who requests an account on the system. You may ask: why is
-there not a default “Terms of Service”? Because... the text really
-depends on the way you are using PECE, so our legal documents won’t not
-suit your case, you need to craft your own text according to the usage
-you are making of PECE. We are not (cannot and should not be)
-responsible for any use authorized researchers or any other person make
-of the platform. Please, refer to our section on “Legal Documents” for
-more information about the software licenses we use for the PECE project
-(and for the Free Software technology we use from the Drupal project).
+every user who requests an account on the system. 
 
 How do I set up back-ups?
 -------------------------
@@ -166,38 +146,6 @@ server information. You just need your SMTP server info and credentials
 to get this done. Go to “Administration » Configuration » System » SMTP
 Authentication Support” and provide your SMTP server information,
 including username and password.
-
-How do I configure Zotero?
---------------------------
-
-Navigate to /admin/modules, and turn on modules the Feed Admin UI and
-Feeds Importer. Flush all caches. Navigate to
-admin/structure/feeds/zotero\_feed. To the right under, Zotero Process,
-select Settings to configure the Zotero Importer module. Most settings
-here can remain the same. However, we encourage you to:
-
--   Under “Update Existing Nodes,” change “Do Not Update Existing Nodes” to “Update Existing Nodes.” This way if you update an entry in Zotero, it will also be updated in the platform on the next feed import
-
--   Under “Sync zotero tags to a term reference field in the biblio content type?” change “yes” to “no.” Often Zotero entries are added to the library with chaotic tagging schemes. Checking “no” here will ensure those schemas don’t get added to the PECE tag library.
-
--   Save.
-
-How do I approve user memberships?
-----------------------------------
-
-While logged-in as an administrator, navigate to /admin/people. Select
-‘edit’ next to the user you wish to approve. Change the user status to
-‘Active’ and select the appropriate [*User Roles*](#user-roles). Click
-the ‘Save’ button at the bottom of the page.
-
-How do I add front page image sliders?
---------------------------------------
-
-While logged-in as an administrator, navigate to ‘Dashboard’. Under the
-‘Add Content’ heading, select front page slider. Fill in the relevant
-fields and Save. Note that all images will be scaled and cropped to
-960x460 pixels.
-
 
 How do I increase the file upload limit?
 ----------------------------------------
