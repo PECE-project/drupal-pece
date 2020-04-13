@@ -38,7 +38,7 @@ In [*Resources*](legal), you will find links to many useful documents such as PE
 
     Please check our our [*GitHub issue*](https://github.com/PECE-project/pece-distro/issues) page to see if the request has already been made.
 
-    Bugs and requests can be reported to [*here*](https://platform-for-experimental-collaborative-ethnography.forms.fm/issues/forms/5287). The progress of your request can be tracked on our [*GitHub issue*](https://github.com/PECE-project/pece-distro/issues) page.
+    Bugs and requests can be reported to [*here*](https://github.com/PECE-project/pece-distro/issues). The progress of your request can be tracked on our [*GitHub issue*](https://github.com/PECE-project/pece-distro/issues) page.
 
 !!! note "PECE Governance and Contacts"
 
