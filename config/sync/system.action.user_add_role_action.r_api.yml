@@ -1,0 +1,14 @@
+uuid: eb958b87-5702-4d3a-99ce-fe552607c445
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.r_api
+  module:
+    - user
+id: user_add_role_action.r_api
+label: 'Add the Reading API role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: r_api

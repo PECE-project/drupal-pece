@@ -1,0 +1,14 @@
+uuid: f5d2a475-9324-4bf0-b339-7660f108fe31
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.r_api
+  module:
+    - user
+id: user_remove_role_action.r_api
+label: 'Remove the Reading API role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: r_api
