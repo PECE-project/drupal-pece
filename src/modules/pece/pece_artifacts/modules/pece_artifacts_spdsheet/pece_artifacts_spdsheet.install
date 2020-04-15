@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the pece_artifacts_spdsheet module.
+ */
+
+/**
+ * Rebuild Spreadsheet artifact default permissions for administrator user role.
+ */
+function pece_artifacts_spdsheet_update_7001() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_artifacts_spdsheet');
+}
+
+/**
+ * Update Spreadsheet artifact field instance default settings.
+ */
+function pece_artifacts_spdsheet_update_7003() {
+  features_revert(array('pece_artifacts_spdsheet' => array('field_instance')));
+}
