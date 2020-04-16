@@ -3,13 +3,8 @@ type PeceProject implements NodeInterface {
   title: String!
   uuid: String!
   body: String
-  audio: Audio
-  authors: [AudioAuthors]
-  contributors: [User]
-  criticalCommentary: String
-  fieldsite: [Audio]
-  language: String
-  author: String
+  image: Thumbnail
+  uri: String
 }
 
 type PeceProjectConnection {

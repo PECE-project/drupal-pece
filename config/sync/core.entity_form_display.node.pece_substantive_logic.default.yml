@@ -9,8 +9,10 @@ dependencies:
     - field.field.node.pece_substantive_logic.field_subst_logic_tags
     - field.field.node.pece_substantive_logic.field_subst_logic_thumbnail
     - field.field.node.pece_substantive_logic.field_subst_logic_uri
+    - image.style.thumbnail
     - node.type.pece_substantive_logic
   module:
+    - image
     - link
     - path
     - text
@@ -65,14 +67,12 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_subst_logic_thumbnail:
-    weight: 126
+    weight: 128
     settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-      match_limit: 10
+      progress_indicator: throbber
+      preview_image_style: thumbnail
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: image_image
     region: content
   field_subst_logic_uri:
     weight: 122

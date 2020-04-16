@@ -5,6 +5,7 @@ module.exports = [
   '@/components/ui/_globals',
   // Doc: https://github.com/vuejs/composition-api
   '@/plugins/composition-api',
+  '@/plugins/provide-apollo-client',
   // Doc: https://github.com/logaretm/vee-validate
   '@/plugins/vee-validate',
   // Doc: https://github.com/maoberlehner/vue-lazy-hydration

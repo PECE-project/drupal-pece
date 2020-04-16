@@ -61,12 +61,14 @@ interface NodeInterface {
   id: Int!
   title: String!
   uuid: String!
+  body: String
 }
 
 type Page implements NodeInterface {
   id: Int!
   title: String!
   uuid: String!
+  body: String
 }
 
 type LabelImage {
@@ -77,4 +79,26 @@ type LabelImage {
 type PageConnection {
   total: Int!
   items: [Page!]
+}
+
+type Thumbnail {
+  alt: String
+  url(style: ImageStyleEnum!): String
+  mimetype: String
+}
+
+type Image {
+  alt: String
+  url(style: ImageStyleEnum!): String
+  mimetype: String
+}
+
+type Video {
+  url: String
+  mimetype: String
+}
+
+type Audio {
+  url: String
+  mimetype: String
 }

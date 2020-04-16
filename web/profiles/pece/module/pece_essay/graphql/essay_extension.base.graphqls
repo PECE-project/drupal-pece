@@ -38,25 +38,3 @@ type EssayTags {
   title: String
   type: String
 }
-
-type Thumbnail {
-  alt: String
-  url(style: ImageStyleEnum!): String
-  mimetype: String
-}
-
-type Image {
-  alt: String
-  url(style: ImageStyleEnum!): String
-  mimetype: String
-}
-
-type Video {
-  url: String
-  mimetype: String
-}
-
-type Audio {
-  url: String
-  mimetype: String
-}

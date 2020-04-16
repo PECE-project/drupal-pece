@@ -8,6 +8,22 @@ export const GET_USER = gql`
   }
 `
 
+export const GET_USERS = gql`
+  query ($offset: Int!, $limit: Int!) {
+    users (offset: $offset, limit: $limit, filters: [
+      { key: "status", value: "1" },
+    ]) {
+      total
+      items {
+        id
+        mail
+        username
+        status
+      }
+    }
+  }
+`
+
 export const CREATE_USER = gql`
   mutation (
     $mail: String!,
