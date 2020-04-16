@@ -197,7 +197,9 @@ services:
     command: bash -c "npm run start"
 
   n8n:
-    image: n8nio/n8n
+    build:
+      context: docker/n8n
+#    image: n8nio/n8n:0.62.1-ubuntu
     container_name: "${PROJECT_NAME}_n8n"
     labels:
       - 'traefik.backend=${PROJECT_NAME}_n8n'
@@ -206,7 +208,7 @@ services:
     ports:
       - 5678:5678
     volumes:
-      - ~/.n8n:/root/.n8n
+      - ./n8n:/root/.n8n
 
 #  blackfire:
 #    image: blackfire/blackfire
