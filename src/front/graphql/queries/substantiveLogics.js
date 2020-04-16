@@ -9,7 +9,8 @@ export const GET_SUBSTANTIVE_LOGICS_ABOUT = gql`
       items {
         id
         title
-        image {
+        thumbnail {
+          alt
           url (style: THUMBNAIL_100x100)
         }
       }
