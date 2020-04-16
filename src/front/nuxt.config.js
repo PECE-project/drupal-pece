@@ -91,6 +91,15 @@ module.exports = {
     gzip: true
   },
   /*
+   ** recaptcha configuration
+   ** See https://github.com/nuxt-community/recaptcha-module
+   */
+  recaptcha: {
+    hideBadge: true,
+    version: 2,
+    siteKey: process.env.NUXT_RECAPTCHA_SITE_KEY
+  },
+  /*
    ** svg Sprite configuration
    */
   svgSprite: {},
