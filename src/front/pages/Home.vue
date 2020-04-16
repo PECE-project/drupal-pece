@@ -18,18 +18,24 @@
           </tab>
         </tabs>
       </section>
-      <section class="about bg-gray-100 mt-12 md:mt-16 p-8 sm:p-12 flex flex-wrap lg:flex-no-wrap">
+      <section
+        v-if="home"
+        class="about bg-gray-100 mt-12 md:mt-16 p-8 sm:p-12 flex flex-wrap lg:flex-no-wrap"
+      >
         <div class="w-full lg:w-2/5">
           <img src="~/assets/images/logo-pece-ico.png" alt="Logo PECE project" class="w-12">
           <h1 class="mt-4 text-2xl lg:text-3xl font-bold sm:pr-2 leading-tight">
-            {{ $t('project_title') }}
+            {{ home.title }}
           </h1>
         </div>
         <div class="w-full lg:w-3/5 text-sm">
-          <p v-html="$t('project_description')" class="my-6 lg:mt-16" />
-          <a href="#" class="link-accent-transparent uppercase text-xs font-bold">
+          <p v-html="home.body" class="my-6 lg:mt-16" />
+          <nuxt-link
+            :to="{ name: `about___${$i18n.locale}` }"
+            class="link-accent-transparent uppercase text-xs font-bold"
+          >
             {{ $t('read_more') }}
-          </a>
+          </nuxt-link>
         </div>
       </section>
     </div>
@@ -43,7 +49,7 @@
           </ListCards>
         </tab>
         <tab :label="$t('people')">
-          <ListUsers :users="users" :horizontal="true" />
+          <ListUsers :users="getUsers" :horizontal="true" />
         </tab>
       </tabs>
     </div>
@@ -51,10 +57,13 @@
 </template>
 
 <script>
-import { simpleCardData, users } from '@/utils/fake'
+import { simpleCardData } from '@/utils/fake'
 import { computed } from '@vue/composition-api'
 import useGqlContents from '@/graphql/composables/useGqlContents'
+import useGqlRoute from '@/graphql/composables/useGqlRoute'
 import { GET_ESSAYS_HOME } from '@/graphql/queries/essay'
+import { GET_USERS } from '@/graphql/queries/user'
+import { GET_ROUTE } from '@/graphql/queries/route'
 
 export default {
   name: 'Home',
@@ -70,6 +79,20 @@ export default {
   },
 
   setup (_, { root }) {
+    const { data: home } = useGqlRoute({
+      query: GET_ROUTE,
+      variables: { path: `/${root.$i18n.locale}/home` }
+    })
+
+    const { data: users } = useGqlContents({
+      query: GET_USERS,
+      variables: {
+        offset: 0,
+        limit: 10
+      },
+      type: 'users'
+    })
+
     const { data } = useGqlContents({
       query: GET_ESSAYS_HOME,
       variables: {
@@ -128,8 +151,22 @@ export default {
       return []
     })
 
+    const getUsers = computed(() => {
+      if (users.value) {
+        return users.value.map((user) => {
+          return {
+            id: user.id,
+            fullname: user.mail,
+            slug: user.username
+          }
+        })
+      }
+      return []
+    })
+
     return {
-      users,
+      home,
+      getUsers,
       getEssays,
       simpleCardData
     }
