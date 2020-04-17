@@ -86,8 +86,17 @@ class RulesWebhookPost extends RulesActionBase implements ContainerFactoryPlugin
     $this->logger->info("Start webhook post");
     // Logs a notice
 
-    if (is_object($data))
-      $dataValue = json_encode($data->toArray());
+    if (is_object($data)) {
+      if (method_exists($data, 'toArray')) {
+        $dataValue = json_encode($data->toArray());
+      }
+      if (method_exists($data, 'getValue')) {
+        $dataValue = json_encode($data->getValue());
+      }
+      else {
+        $dataValue = json_encode($data);
+      }
+    }
     else
       $dataValue = $data;
 

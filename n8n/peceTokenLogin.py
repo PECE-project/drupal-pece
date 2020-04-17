@@ -4,8 +4,8 @@ import json
 url = "http://nginx/oauth/token"
 
 payload = {'grant_type': 'password',
-'client_id': '34726a6c-98ff-4666-b24c-96b9bcbc881e',
-'client_secret': '#fljien392nf9',
+'client_id': 'a8e4babf-869c-4304-81a2-bdfd204805c1',
+'client_secret': '',
 'username': 'n8n',
 'password': '123456789'}
 files = [
