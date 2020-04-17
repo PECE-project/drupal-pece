@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_core.features.defaultconfig.inc
@@ -196,7 +197,7 @@ function pece_core_defaultconfig_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'users';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: User: Active */
+  /* Filter criterion: User: Active status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'users';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -212,13 +213,13 @@ function pece_core_defaultconfig_views_default_views() {
     6 => '6',
     5 => '5',
   );
+  $handler->display->display_options['filters']['rid']['reduce_duplicates'] = TRUE;
   /* Filter criterion: User: The user ID */
   $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
   $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
   $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
   $handler->display->display_options['filters']['uid_raw']['operator'] = '!=';
   $handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
-  $handler->display->display_options['filters']['rid']['reduce_duplicates'] = TRUE;
 
   /* Display: All users */
   $handler = $view->new_display('panel_pane', 'All users', 'all_users');
