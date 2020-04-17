@@ -21,8 +21,6 @@ module.exports = [
   'nuxt-i18n',
   // Doc: https://github.com/Developmint/nuxt-webfontloader
   'nuxt-webfontloader',
-  // Doc: https://github.com/nuxt-community/recaptcha-module
-  '@nuxtjs/recaptcha',
   // Doc: https://github.com/nuxt-community/modules/tree/master/packages/component-cache
   [
     '@nuxtjs/component-cache',
