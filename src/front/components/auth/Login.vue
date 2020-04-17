@@ -100,12 +100,12 @@
       <p class="mt-8">
         <recaptcha
           ref="recaptcha"
-          :key="recaptcha.size"
-          :size="recaptcha.size"
+          :key="recaptchaData.size"
+          :size="recaptchaData.size"
           :loadRecaptchaScript="true"
           @verify="recaptchaSuccess"
           @error="recaptchaError"
-          :sitekey="recaptcha.challenged ? recaptcha.siteKeyV2 : recaptcha.siteKeyV3"
+          :sitekey="recaptchaData.challenged ? recaptchaData.siteKeyV2 : recaptchaData.siteKeyV3"
         />
       </p>
 
@@ -136,7 +136,7 @@ export default {
   setup (_, { root, refs }) {
     const serverErrors = ref([])
 
-    const recaptcha = ref({
+    const recaptchaData = ref({
       size: 'invisible',
       challenged: false,
       success: false,
@@ -152,10 +152,10 @@ export default {
     async function submit (isValid) {
       resetErrors()
       if (!isValid) { return serverErrors.value.push({ message: 'Invalid form' }) }
-      if (!recaptcha.value.success && recaptcha.value.size === 'normal') {
+      if (!recaptchaData.value.success && recaptchaData.value.size === 'normal') {
         return handlerError({ message: 'Resolve reCAPTCHA' })
       }
-      if (recaptcha.value.success) { return login() }
+      if (recaptchaData.value.success) { return login() }
       await refs.recaptcha.execute()
     }
 
@@ -181,23 +181,23 @@ export default {
     }
 
     function recaptchaSuccess (response) {
-      if (!recaptcha.value.challenged) {
+      if (!recaptchaData.value.challenged) {
         return checkRecaptcha(response)
           .then((res) => {
-            recaptcha.value.success = true
+            recaptchaData.value.success = true
             login()
           })
           .catch((e) => {
-            recaptcha.value.challenged = true
-            recaptcha.value.size = 'normal'
+            recaptchaData.value.challenged = true
+            recaptchaData.value.size = 'normal'
           })
       }
-      recaptcha.value.success = true
+      recaptchaData.value.success = true
     }
 
     function recaptchaError (e) {
       handlerError(e)
-      recaptcha.value.size = 'normal'
+      recaptchaData.value.size = 'normal'
     }
 
     function resetErrors () {
@@ -213,9 +213,9 @@ export default {
     return {
       auth,
       login,
-      recaptcha,
       submit,
       serverErrors,
+      recaptchaData,
       recaptchaError,
       recaptchaSuccess
     }
