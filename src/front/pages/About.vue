@@ -29,11 +29,10 @@
           </list-cards>
         </tab>
         <tab
-          v-if="about"
           :label="$t('about')"
           class="about__content"
         >
-          <div v-html="about.body" />
+          <div v-if="about" v-html="about.body" />
         </tab>
       </tabs>
     </section>

@@ -1,6 +1,6 @@
 <template>
   <FormObserveValidate
-    @submitted="login"
+    @submitted="submit"
     name="form-login"
   >
     <template v-slot="{ invalid }">
@@ -96,6 +96,19 @@
           </nuxt-link>
         </p>
       </FormControlValidate>
+
+      <p class="mt-8">
+        <recaptcha
+          ref="recaptcha"
+          :key="recaptcha.size"
+          :size="recaptcha.size"
+          :loadRecaptchaScript="true"
+          @verify="recaptchaSuccess"
+          @error="recaptchaError"
+          :sitekey="recaptcha.challenged ? recaptcha.siteKeyV2 : recaptcha.siteKeyV3"
+        />
+      </p>
+
       <button
         :disabled="invalid"
         :class="{ 'opacity-50': invalid }"
@@ -111,34 +124,100 @@
 
 <script>
 import { ref } from '@vue/composition-api'
+import api from '@/services/api'
 
 export default {
   name: 'LoginForm',
 
-  setup (_, { root }) {
+  components: {
+    recaptcha: () => import('vue-recaptcha')
+  },
+
+  setup (_, { root, refs }) {
     const serverErrors = ref([])
+
+    const recaptcha = ref({
+      size: 'invisible',
+      challenged: false,
+      success: false,
+      siteKeyV3: process.env.NUXT_RECAPTCHA_SITE_KEY_V3,
+      siteKeyV2: process.env.NUXT_RECAPTCHA_SITE_KEY_V2
+    })
+
     const auth = ref({
       username: null,
       password: null
     })
 
-    async function login (isValid) {
+    async function submit (isValid) {
+      resetErrors()
       if (!isValid) { return serverErrors.value.push({ message: 'Invalid form' }) }
-      serverErrors.value = []
+      if (!recaptcha.value.success && recaptcha.value.size === 'normal') {
+        return handlerError({ message: 'Resolve reCAPTCHA' })
+      }
+      if (recaptcha.value.success) { return login() }
+      await refs.recaptcha.execute()
+    }
+
+    async function login () {
       try {
         await root.$store.dispatch('user/login', auth.value)
         window.location.href = root.$route.query.redirect || '/'
       } catch (e) {
-        serverErrors.value.push({
-          message: e.message
-        })
+        handlerError(e)
       }
+    }
+
+    function checkRecaptcha (response) {
+      return new Promise((resolve, reject) => {
+        return api(`/recaptcha/verify/${response}`)
+          .then((res) => {
+            resolve(res)
+          })
+          .catch((e) => {
+            reject(e)
+          })
+      })
+    }
+
+    function recaptchaSuccess (response) {
+      if (!recaptcha.value.challenged) {
+        return checkRecaptcha(response)
+          .then((res) => {
+            recaptcha.value.success = true
+            login()
+          })
+          .catch((e) => {
+            recaptcha.value.challenged = true
+            recaptcha.value.size = 'normal'
+          })
+      }
+      recaptcha.value.success = true
+    }
+
+    function recaptchaError (e) {
+      handlerError(e)
+      recaptcha.value.size = 'normal'
+    }
+
+    function resetErrors () {
+      serverErrors.value = []
+    }
+
+    function handlerError (e) {
+      serverErrors.value.push({
+        message: e.message
+      })
     }
 
     return {
       auth,
       login,
-      serverErrors
+      recaptcha,
+      submit,
+      serverErrors,
+      recaptchaError,
+      recaptchaSuccess
     }
   }
 }
