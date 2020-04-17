@@ -6,8 +6,8 @@
       </section>
       <section class="tabs mt-12 md:mt-16">
         <tabs :uppercase="true">
-          <tab :label="$t('recent_essays')" v-if="getEssays.length">
-            <ListCards :data="getEssays">
+          <tab :label="$t('recent_essays')">
+            <ListCards :data="getEssays" v-if="getEssays.length">
               <template v-slot="{ item }">
                 <card :data="item" />
               </template>
