@@ -1,0 +1,9 @@
+nyx_recaptcha.settings:
+    path: '/recaptcha/verify/{token}'
+    methods:  [GET]
+    defaults:
+      _controller: '\Drupal\nyx_recaptcha\Controller\RecaptchaController::verify'
+      _title: 'NYX Recaptcha'
+    requirements:
+      _permission: 'access content'
+  
