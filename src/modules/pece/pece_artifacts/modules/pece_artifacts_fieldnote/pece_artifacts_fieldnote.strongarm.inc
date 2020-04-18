@@ -75,6 +75,27 @@ function pece_artifacts_fieldnote_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_pece_artifact_fieldnote';
+  $strongarm->value = 1;
+  $export['diff_enable_revisions_page_node_pece_artifact_fieldnote'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_pece_artifact_fieldnote';
+  $strongarm->value = 1;
+  $export['diff_show_preview_changes_node_pece_artifact_fieldnote'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_pece_artifact_fieldnote';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_pece_artifact_fieldnote'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__pece_artifact_fieldnote';
   $strongarm->value = array(
     'view_modes' => array(
@@ -109,13 +130,13 @@ function pece_artifacts_fieldnote_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
-          'weight' => '15',
+          'weight' => '16',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '14',
+          'weight' => '15',
         ),
       ),
       'display' => array(),
@@ -174,30 +195,78 @@ function pece_artifacts_fieldnote_strongarm() {
   $strongarm->name = 'panelizer_defaults_node_pece_artifact_fieldnote';
   $strongarm->value = array(
     'status' => 1,
+    'help' => '',
     'view modes' => array(
       'page_manager' => array(
         'status' => 1,
+        'substitute' => '',
         'default' => 1,
         'choice' => 0,
       ),
       'default' => array(
         'status' => 0,
+        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'teaser' => array(
         'status' => 0,
+        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'featured' => array(
         'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'mini_teaser' => array(
+        'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'most_recent' => array(
+        'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'free_panel' => array(
+        'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'card' => array(
+        'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'meta_content' => array(
+        'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'highlighted' => array(
+        'status' => 0,
+        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
     ),
   );
   $export['panelizer_defaults_node_pece_artifact_fieldnote'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'panelizer_node:pece_artifact_fieldnote:page_manager_selection';
+  $strongarm->value = 'node:pece_artifact_fieldnote:default';
+  $export['panelizer_node:pece_artifact_fieldnote:page_manager_selection'] = $strongarm;
 
   return $export;
 }
