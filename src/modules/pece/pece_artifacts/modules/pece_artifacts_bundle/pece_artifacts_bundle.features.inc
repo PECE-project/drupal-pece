@@ -28,7 +28,7 @@ function pece_artifacts_bundle_node_info() {
     'pece_artifact_bundle' => array(
       'name' => t('Artifact - Bundle'),
       'base' => 'node_content',
-      'description' => '',
+      'description' => t('An artifact bundle is an artifact of artifacts. You can create an artifact bundle to annotate a group of artifacts together.'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',
