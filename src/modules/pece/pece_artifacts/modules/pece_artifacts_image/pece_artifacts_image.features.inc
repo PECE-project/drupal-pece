@@ -53,7 +53,7 @@ function pece_artifacts_image_node_info() {
     'pece_artifact_image' => array(
       'name' => t('Artifact - Image'),
       'base' => 'node_content',
-      'description' => '',
+      'description' => t('An artifact is the basic unit of data on PECE. Artifacts represent materials that an ethnographer determines to be data relevant to the site; this can include documents, images, audio, videos, and web sites, which could include field notes, interviews, news articles, journal articles, films, etc.'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',
