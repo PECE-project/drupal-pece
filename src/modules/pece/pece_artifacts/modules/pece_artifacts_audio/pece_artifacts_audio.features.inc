@@ -28,7 +28,7 @@ function pece_artifacts_audio_node_info() {
     'pece_artifact_audio' => array(
       'name' => t('Artifact - Audio'),
       'base' => 'node_content',
-      'description' => '',
+      'description' => t('An artifact is the basic unit of data on PECE. Artifacts represent materials that an ethnographer determines to be data relevant to the site; e.g. audio records, interviews, etc.'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',
