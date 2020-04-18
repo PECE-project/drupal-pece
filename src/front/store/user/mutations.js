@@ -24,8 +24,8 @@ export default {
    */
   [MUTATIONS_TYPES.AUTH_SUCCESS] (state, payload) {
     state.status = 'success'
-    state.token = payload.token
-    state.refreshToken = payload.refreshToken
+    state.auth.token = payload.token
+    state.auth.refreshToken = payload.refreshToken
   },
   /**
    * Logout user
@@ -34,8 +34,8 @@ export default {
    */
   [MUTATIONS_TYPES.LOGOUT] (state) {
     state.status = ''
-    state.token = ''
-    state.refreshToken = ''
+    state.auth.token = ''
+    state.auth.refreshToken = ''
     state.user = {}
     location.reload()
   }

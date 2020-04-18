@@ -1,4 +1,5 @@
 require('dotenv').config()
+const { v4: uuidv4 } = require('uuid')
 const path = require('path')
 const devServer = require(path.resolve(__dirname, 'config/devServer'))
 const modules = require(path.resolve(__dirname, 'config/modules'))
@@ -111,6 +112,9 @@ module.exports = {
     google: {
       families: ['Open+Sans:400,700&display=swap']
     }
+  },
+  env: {
+    NUXT_AUTH_LS_ENCRYPTION_SECRET: uuidv4()
   },
   /*
    ** Build configuration
