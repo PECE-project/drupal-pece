@@ -1,6 +1,6 @@
 export default {
   user: state => state.user,
-  getToken: state => state.token,
+  getToken: state => state.auth.token,
   authStatus: state => state.status,
-  refreshToken: state => state.refreshToken
+  refreshToken: state => state.auth.refreshToken
 }

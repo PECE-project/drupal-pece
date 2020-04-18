@@ -36,7 +36,7 @@ export default {
       const formData = new FormData()
       formData.append('client_id', process.env.NUXT_AUTH_CLIENT_ID)
       formData.append('client_secret', process.env.NUXT_AUTH_CLIENT_SECRET)
-      formData.append('refresh_token', state.refreshToken)
+      formData.append('refresh_token', state.auth.refreshToken)
       formData.append('grant_type', 'refresh_token')
 
       try {

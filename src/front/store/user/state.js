@@ -1,8 +1,10 @@
 export default function state () {
   return {
     user: {},
-    token: '',
-    refreshToken: '',
+    auth: {
+      token: '',
+      refreshToken: ''
+    },
     status: 'success'
   }
 }
