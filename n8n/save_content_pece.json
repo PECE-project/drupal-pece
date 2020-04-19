@@ -1,0 +1,127 @@
+{
+  "name": "save-content-pece",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        30,
+        650
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "requestMethod": "GET",
+        "endpoint": "http://nginx/v1",
+        "query": "=query essay {\n  peceEssay (id: {{$node[\"PECE Essay Created\"].json[\"body\"][0][\"value\"]}}) {\n   id\n   title \n  }\n}",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$node[\"Get Authentication Token\"].json[\"stdout\"]}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "name": "GraphQL",
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1,
+      "position": [
+        880,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "basicAuth",
+        "httpMethod": "POST",
+        "path": "savepeceessay",
+        "options": {}
+      },
+      "name": "PECE Essay Created",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        460,
+        460
+      ],
+      "credentials": {
+        "httpBasicAuth": "n8n"
+      }
+    },
+    {
+      "parameters": {
+        "command": "python /root/.n8n/peceTokenLogin.py"
+      },
+      "name": "Get Authentication Token",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        680,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "-448394209",
+        "text": "=New PECE Essay is created: {{$node[\"GraphQL\"].json[\"data\"][\"peceEssay\"][\"title\"]}}",
+        "additionalFields": {}
+      },
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1070,
+        460
+      ],
+      "credentials": {
+        "telegramApi": "PECE Bot Telegram"
+      }
+    }
+  ],
+  "connections": {
+    "PECE Essay Created": {
+      "main": [
+        [
+          {
+            "node": "Get Authentication Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Authentication Token": {
+      "main": [
+        [
+          {
+            "node": "GraphQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "id": "1"
+}

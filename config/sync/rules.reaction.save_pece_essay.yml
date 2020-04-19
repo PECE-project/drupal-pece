@@ -1,0 +1,63 @@
+uuid: c704824f-5d24-4897-b568-34b3c96a4886
+langcode: en
+status: true
+dependencies: {  }
+id: save_pece_essay
+label: 'Save PECE Essay'
+events:
+  -
+    event_name: 'rules_entity_insert:node'
+description: 'When saving a new PECE Essay send information to n8n.'
+tags:
+  - publishing
+  - notification
+  - essay
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: 9f5651a5-0740-4347-8488-e616907c9745
+  conditions:
+    id: rules_and
+    uuid: c442b847-1ab1-49fd-a30f-882251d7ed38
+    conditions:
+      -
+        id: rules_condition
+        uuid: 13a74d2c-e393-46f9-852e-99eb62a7eef9
+        context_values:
+          type: node
+          bundle: pece_essay
+        context_mapping:
+          entity: node
+        context_processors:
+          type:
+            rules_tokens: {  }
+          bundle:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_entity_is_of_bundle
+        negate: false
+  actions:
+    id: rules_action_set
+    uuid: 46ce1200-5baf-4d28-b61b-3dccc67bdeef
+    actions:
+      -
+        id: rules_action
+        uuid: 55c7828c-7023-41f0-a8f4-6c29607429df
+        context_values:
+          url: 'http://n8n:5678/webhook-test/1/pece%20essay%20created/savepeceessay'
+          apiuser: pece
+          apipass: pece
+          apitoken: ''
+        context_mapping:
+          data: node.nid
+        context_processors:
+          url:
+            rules_tokens: {  }
+          apiuser:
+            rules_tokens: {  }
+          apipass:
+            rules_tokens: {  }
+          apitoken:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        action_id: RulesWebhookPost
