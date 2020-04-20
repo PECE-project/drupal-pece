@@ -1,5 +1,5 @@
 {
-  "name": "save-content-pece",
+  "name": "base-pece-automation",
   "nodes": [
     {
       "parameters": {},
@@ -7,10 +7,9 @@
       "type": "n8n-nodes-base.start",
       "typeVersion": 1,
       "position": [
-        30,
-        650
-      ],
-      "disabled": true
+        250,
+        300
+      ]
     },
     {
       "parameters": {
@@ -34,8 +33,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1,
       "position": [
-        880,
-        460
+        1358,
+        313
       ]
     },
     {
@@ -49,8 +48,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        460,
-        460
+        938,
+        313
       ],
       "credentials": {
         "httpBasicAuth": "n8n"
@@ -58,32 +57,15 @@
     },
     {
       "parameters": {
-        "command": "python /root/.n8n/peceTokenLogin.py"
+        "command": "python /root/.pece/peceTokenLogin.py"
       },
       "name": "Get Authentication Token",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        680,
-        460
+        1158,
+        313
       ]
-    },
-    {
-      "parameters": {
-        "chatId": "-448394209",
-        "text": "=New PECE Essay is created: {{$node[\"GraphQL\"].json[\"data\"][\"peceEssay\"][\"title\"]}}",
-        "additionalFields": {}
-      },
-      "name": "Telegram",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1,
-      "position": [
-        1070,
-        460
-      ],
-      "credentials": {
-        "telegramApi": "PECE Bot Telegram"
-      }
     }
   ],
   "connections": {
@@ -111,17 +93,11 @@
     },
     "GraphQL": {
       "main": [
-        [
-          {
-            "node": "Telegram",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     }
   },
-  "active": true,
+  "active": false,
   "settings": {},
   "id": "1"
 }
