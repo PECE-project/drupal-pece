@@ -13,7 +13,6 @@ use Drupal\user\Entity\User as UserPECE;
  * Implements hook_install().
  */
 function pece_n8n_install() {
-  // @TODO: Create consumer
   $consumers = \Drupal::entityTypeManager()->getStorage('consumer')
     ->loadByProperties(['label' => 'n8n']);
   $consumers ? reset($consumers) : FALSE;
@@ -22,6 +21,9 @@ function pece_n8n_install() {
       'label' => 'n8n',
       'description' => 'This is the n8n consumer. This was created programmatically when the n8n module was first installed. Feel free to edit, or delete this.',
       'is_default' => FALSE,
+      'confidential' => TRUE,
+      'third_party' => TRUE,
+      'secret' => getenv('N8N_CLIENT_SECRET') ?? Random::string(10),
     ])->save();
 
   if (!user_load_by_name('n8n'))
@@ -29,6 +31,7 @@ function pece_n8n_install() {
       'name' => getenv('SITE_N8N_USERNAME') ?? 'n8n',
       'mail' => 'n8n@pece.automation',
       'roles' => ['authenticated', 'r_api'],
+      'status' => TRUE,
       'pass' => getenv('SITE_N8N_PASSWORD') ?? Random::string(10),
     ])->save();
 }
