@@ -294,6 +294,7 @@ function pece_annotations_views_default_views() {
     'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
+    'pece_artifact_spdsheet' => 'pece_artifact_spdsheet',
     'pece_artifact_text' => 'pece_artifact_text',
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
@@ -337,7 +338,7 @@ function pece_annotations_views_default_views() {
 </div>
 <div class="views-field-artifact-meta-content">
 <span>In response to:</span>
-[field_pece_artifact] 
+[field_pece_artifact]
 </div>';
   $handler->display->display_options['header']['area_1']['format'] = 'panopoly_wysiwyg_text';
   $handler->display->display_options['header']['area_1']['tokenize'] = TRUE;
@@ -486,6 +487,7 @@ function pece_annotations_views_default_views() {
     'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
+    'pece_artifact_spdsheet' => 'pece_artifact_spdsheet',
     'pece_artifact_text' => 'pece_artifact_text',
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
@@ -525,7 +527,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['header']['area']['label'] = 'Structured Analytic';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
   $handler->display->display_options['header']['area']['content'] = '<div class="field-name-field-pece-struct-analytics">
-[field_pece_struct_analytics] 
+[field_pece_struct_analytics]
 </div>';
   $handler->display->display_options['header']['area']['format'] = 'panopoly_wysiwyg_text';
   $handler->display->display_options['header']['area']['tokenize'] = TRUE;
@@ -593,7 +595,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['field_pece_artifact']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_pece_artifact']['alter']['text'] = '<div class="views-field-artifact-meta-content">
 <span>In response to:</span>
-[field_pece_artifact] 
+[field_pece_artifact]
 </div>';
   $handler->display->display_options['fields']['field_pece_artifact']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_pece_artifact']['type'] = 'entityreference_entity_view';
@@ -665,6 +667,7 @@ function pece_annotations_views_default_views() {
     'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
+    'pece_artifact_spdsheet' => 'pece_artifact_spdsheet',
     'pece_artifact_text' => 'pece_artifact_text',
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
@@ -748,7 +751,7 @@ function pece_annotations_views_default_views() {
 </div>
 <div class="views-field-artifact-meta-content">
 <span>In response to:</span>
-[field_pece_artifact] 
+[field_pece_artifact]
 </div>'),
     t('Question'),
     t('Nid'),
@@ -756,13 +759,13 @@ function pece_annotations_views_default_views() {
     t('%1'),
     t('Structured Analytic'),
     t('<div class="field-name-field-pece-struct-analytics">
-[field_pece_struct_analytics] 
+[field_pece_struct_analytics]
 </div>'),
     t('<a href="/node/!1">See all responses to this analytic</a>'),
     t('Analytic'),
     t('<div class="views-field-artifact-meta-content">
 <span>In response to:</span>
-[field_pece_artifact] 
+[field_pece_artifact]
 </div>'),
   );
   $export['pece_annotations'] = $view;
