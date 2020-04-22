@@ -76,6 +76,9 @@ libraries[php-encryption][download][url] = https://github.com/defuse/php-encrypt
 libraries[bgrins-spectrum][download][type] = file
 libraries[bgrins-spectrum][download][url] =  https://github.com/bgrins/spectrum/archive/master.zip
 
+libraries[gifresizer][download][type] = git
+libraries[gifresizer][download][url] = https://github.com/revagomes/gifresizer.git
+
 ; =====================
 ; Utilities and APIs
 ; =====================
@@ -379,6 +382,9 @@ projects[mimedetect][subdir] = contrib
 ; Overrides panopoly's media.
 projects[media][version] = 2.23
 projects[media][subdir] = contrib
+
+projects[animgif_support][version] = 1.6
+projects[animgif_support][subdir] = contrib
 
 ; =====================
 ; Fields
