@@ -442,10 +442,11 @@ function pece_update_7115() {
 }
 
 /**
- *  Add Spreadsheet artifact & Add Created Date field on artifacts.
+ *  Add Animated gif support for image styles & Enable Spreadsheet artifact & Add Created Date field on all artifacts.
  */
 function pece_update_7116() {
    module_enable(array(
+     'animgif_support',
      'pece_artifacts_spdsheet',
    ));
   // Prepare spreadsheets directory on private fs.
