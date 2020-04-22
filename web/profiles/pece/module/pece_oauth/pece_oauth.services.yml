@@ -1,5 +1,5 @@
 services:
-  remove_x_frame_options_subscriber:
+  add_x_login_attempt_subscriber:
     class: Drupal\pece_oauth\EventSubscriber\AddXLoginAttemptEvent
     tags:
       - { name: event_subscriber }
