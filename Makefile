@@ -4,7 +4,7 @@ include docker.mk
 
 DRUPAL_VER ?= 8
 PHP_VER ?= 7.2
-FILE_MATCH ?= 
+FILE_MATCH ?=
 
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 
@@ -36,3 +36,6 @@ nuxt-lint:
 
 nuxt-run:
 	cd $(FRONT_DIR) && make run
+
+start-automations:
+	docker exec $(shell docker ps --filter name='^/$(PROJECT_NAME)_n8n' --format "{{ .ID }}") python /root/.pece/startWorkflows.py

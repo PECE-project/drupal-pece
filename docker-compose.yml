@@ -214,6 +214,7 @@ services:
       - 5678:5678
     volumes:
       - ~/.n8n:/root/.n8n
+      - ./n8n-automations:/root/.pece/automations
 
 #  blackfire:
 #    image: blackfire/blackfire
