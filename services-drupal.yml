@@ -2,7 +2,7 @@ version: "3"
 
 services:
   install:
-    image: wodby/drupal-php:$PHP_TAG
+    image: wodby/drupal-php:$DRUPAL_TAG
     container_name: "${PROJECT_NAME}_php"
     working_dir: /var/www/html
     environment:
