@@ -856,7 +856,7 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
     'settings' => array(
       'description_field' => 0,
       'file_directory' => 'artifacts/media/spreadsheet',
-      'file_extensions' => 'txt csv xls xml json rdf zip',
+      'file_extensions' => 'txt csv xls xlsx ods xml json rdf zip',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
