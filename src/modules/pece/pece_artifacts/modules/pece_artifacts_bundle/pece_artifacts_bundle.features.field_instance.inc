@@ -83,6 +83,16 @@ function pece_artifacts_bundle_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'entityconnect' => array(
+      'button' => array(
+        'unload_add_button' => 1,
+        'unload_edit_button' => 1,
+      ),
+      'icon' => array(
+        'show_add_icon' => NULL,
+        'show_edit_icon' => NULL,
+      ),
+    ),
     'entityconnect_icon_add' => 0,
     'entityconnect_icon_edit' => 0,
     'entityconnect_unload_add' => 1,
@@ -416,7 +426,7 @@ function pece_artifacts_bundle_field_default_field_instances() {
     'label' => 'Created Date',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
