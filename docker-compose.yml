@@ -4,6 +4,8 @@ services:
   mariadb:
     image: wodby/mariadb:$MARIADB_TAG
     container_name: "${PROJECT_NAME}_mariadb"
+    networks:
+      pece:
     stop_grace_period: 30s
     environment:
       MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
@@ -17,6 +19,8 @@ services:
   php:
     image: wodby/drupal-php:$DRUPAL_TAG
     container_name: "${PROJECT_NAME}_php"
+    networks:
+      pece:
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       DB_HOST: $DB_HOST
@@ -32,6 +36,8 @@ services:
 
   nginx:
     image: wodby/nginx:$NGINX_TAG
+    networks:
+      pece:
     container_name: "${PROJECT_NAME}_nginx"
     depends_on:
       - php
@@ -52,6 +58,8 @@ services:
 
   mailhog:
     image: mailhog/mailhog
+    networks:
+      pece:
     container_name: "${PROJECT_NAME}_mailhog"
     labels:
       - "traefik.http.services.${PROJECT_NAME}_mailhog.loadbalancer.server.port=8025"
@@ -242,6 +250,8 @@ services:
   node:
     image: wodby/node:$NODE_TAG
     container_name: "${PROJECT_NAME}_front_node"
+    networks:
+      pece:
     working_dir: /home/node/app
     labels:
       - "traefik.http.services.${PROJECT_NAME}_front_node.loadbalancer.server.port=5000"
@@ -257,6 +267,8 @@ services:
       context: docker/n8n
 #    image: n8nio/n8n:0.62.1-ubuntu
     container_name: "${PROJECT_NAME}_n8n"
+    networks:
+      pece:
     environment:
       N8N_CLIENT_ID: $N8N_CLIENT_ID
       N8N_CLIENT_SECRET: $N8N_CLIENT_SECRET
@@ -327,6 +339,8 @@ services:
     image: portainer/portainer
     container_name: "${PROJECT_NAME}_portainer"
     command: --no-auth -H unix:///var/run/docker.sock
+    networks:
+      pece:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
@@ -336,12 +350,22 @@ services:
     image: traefik:v2.2
     container_name: "${PROJECT_NAME}_traefik"
     command: --api.insecure=true --providers.docker
+    networks:
+      pece:
+        ipv4_address: 172.28.1.1
     ports:
       - '80:80'
       - '8080:8080' # Dashboard
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
+networks:
+  pece:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.1.0/16
 #volumes:
 ## Docker-sync for macOS users
 #  docker-sync:
