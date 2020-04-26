@@ -794,6 +794,8 @@ $databases['default']['default'] = array (
   'username' => getenv('DB_USER'),
 );
 $settings['hash_salt'] = '8XV2RAQaNGvbErBoQurOnw-NUKyIV7tCxxkxfg1pG-BYUtoRvHgLVUcuGyNlNp_RcQk34syo9g';
+$settings['reverse_proxy'] = TRUE;
+$settings['reverse_proxy_addresses'] = ['172.28.1.1'];
 
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include dirname(__FILE__) . '/settings.local.php';
