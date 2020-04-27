@@ -122,16 +122,19 @@ export default {
 
     function submit (isValid) {
       serverErrors.value = []
-      return api('/user/lost-password-reset?_format=json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: reset.value.mail,
-          temp_pass: root.$route.params.token,
-          new_pass: reset.value.pass
-        })
+      return api({
+        path: '/user/lost-password-reset?_format=json',
+        options: {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: reset.value.mail,
+            temp_pass: root.$route.params.token,
+            new_pass: reset.value.pass
+          })
+        }
       })
         .then((res) => {
           alertRecover.value.show = true
