@@ -1,4 +1,5 @@
 
+import api from '@/services/api'
 import * as MUTATIONS_TYPES from './mutation-types'
 import { makeAuth } from './utils'
 
@@ -45,5 +46,27 @@ export default {
         reject(e)
       }
     })
+  },
+
+  checkScoreReCaptcha ({ commit }, response) {
+    return new Promise((resolve, reject) => {
+      return api({ path: `/recaptcha/verify/${response}` })
+        .then((res) => {
+          commit(MUTATIONS_TYPES.RECAPTCHA_SUCCESS)
+          resolve(res)
+        })
+        .catch((e) => {
+          commit(MUTATIONS_TYPES.RECAPTCHA_ERROR)
+          reject(e)
+        })
+    })
+  },
+
+  reCaptchaSuccess ({ commit }) {
+    commit(MUTATIONS_TYPES.RECAPTCHA_SUCCESS)
+  },
+
+  reCaptchaError ({ commit }) {
+    commit(MUTATIONS_TYPES.RECAPTCHA_ERROR)
   }
 }

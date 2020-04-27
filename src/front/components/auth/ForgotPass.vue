@@ -96,14 +96,17 @@ export default {
     function submit (isValid) {
       setEmailStorage()
       serverErrors.value = []
-      return api('/user/lost-password?_format=json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          mail: mail.value
-        })
+      return api({
+        path: '/user/lost-password?_format=json',
+        options: {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            mail: mail.value
+          })
+        }
       })
         .then((res) => {
           alertRecover.value.show = true

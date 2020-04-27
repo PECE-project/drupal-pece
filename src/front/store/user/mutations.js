@@ -38,5 +38,22 @@ export default {
     state.auth.refreshToken = ''
     state.user = {}
     location.reload()
+  },
+  /**
+   * reCaptcha Success score
+   *
+   * @param {Object} state
+   */
+  [MUTATIONS_TYPES.RECAPTCHA_SUCCESS] (state) {
+    state.recaptcha.success = true
+  },
+  /**
+   * reCaptcha Error score
+   *
+   * @param {Object} state
+   */
+  [MUTATIONS_TYPES.RECAPTCHA_ERROR] (state) {
+    state.recaptcha.challenged = true
+    state.recaptcha.size = 'normal'
   }
 }
