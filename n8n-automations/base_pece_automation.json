@@ -9,7 +9,8 @@
       "position": [
         250,
         300
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -33,13 +34,12 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1,
       "position": [
-        1358,
-        313
+        610,
+        490
       ]
     },
     {
       "parameters": {
-        "authentication": "basicAuth",
         "httpMethod": "POST",
         "path": "savepeceessay",
         "options": {}
@@ -48,12 +48,9 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        938,
-        313
-      ],
-      "credentials": {
-        "httpBasicAuth": "n8n"
-      }
+        190,
+        490
+      ]
     },
     {
       "parameters": {
@@ -63,8 +60,8 @@
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        1158,
-        313
+        410,
+        490
       ]
     }
   ],
@@ -90,14 +87,9 @@
           }
         ]
       ]
-    },
-    "GraphQL": {
-      "main": [
-        []
-      ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {},
-  "id": "1"
+  "id": "4"
 }
