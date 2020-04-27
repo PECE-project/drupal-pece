@@ -123,8 +123,7 @@
 </template>
 
 <script>
-import { ref } from '@vue/composition-api'
-import api from '@/services/api'
+import { ref, computed } from '@vue/composition-api'
 
 export default {
   name: 'LoginForm',
@@ -136,13 +135,7 @@ export default {
   setup (_, { root, refs }) {
     const serverErrors = ref([])
 
-    const recaptcha = ref({
-      size: 'invisible',
-      challenged: false,
-      success: false,
-      siteKeyV3: process.env.NUXT_RECAPTCHA_SITE_KEY_V3,
-      siteKeyV2: process.env.NUXT_RECAPTCHA_SITE_KEY_V2
-    })
+    const recaptcha = computed(() => root.$store.getters['user/recaptcha'])
 
     const auth = ref({
       username: null,
@@ -165,39 +158,23 @@ export default {
         window.location.href = root.$route.query.redirect || '/'
       } catch (e) {
         handlerError(e)
+        if (e.message.includes('attempts')) {
+          root.$store.dispatch('user/reCaptchaError')
+        }
       }
     }
 
-    function checkRecaptcha (response) {
-      return new Promise((resolve, reject) => {
-        return api(`/recaptcha/verify/${response}`)
-          .then((res) => {
-            resolve(res)
-          })
-          .catch((e) => {
-            reject(e)
-          })
-      })
-    }
-
-    function recaptchaSuccess (response) {
+    async function recaptchaSuccess (response) {
       if (!recaptcha.value.challenged) {
-        return checkRecaptcha(response)
-          .then((res) => {
-            recaptcha.value.success = true
-            login()
-          })
-          .catch((e) => {
-            recaptcha.value.challenged = true
-            recaptcha.value.size = 'normal'
-          })
+        await root.$store.dispatch('user/checkScoreReCaptcha', response)
+        return login()
       }
-      recaptcha.value.success = true
+      root.$store.dispatch('user/reCaptchaSuccess')
     }
 
     function recaptchaError (e) {
       handlerError(e)
-      recaptcha.value.size = 'normal'
+      root.$store.dispatch('user/reCaptchaError')
     }
 
     function resetErrors () {

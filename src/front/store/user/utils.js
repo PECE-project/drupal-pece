@@ -5,9 +5,19 @@ import * as MUTATIONS_TYPES from './mutation-types' // eslint-disable-line
 export function makeAuth (commit, formData) {
   const apolloClient = this.apolloProvider.defaultClient
   return new Promise((resolve, reject) => {
-    return api('/oauth/token', {
-      method: 'POST',
-      body: formData
+    return api({
+      path: '/oauth/token',
+      options: {
+        method: 'POST',
+        body: formData
+      },
+      handlerError (response) {
+        commit(MUTATIONS_TYPES.AUTH_STATUS_REQUEST, 'error')
+        const loginAttept = response.headers.get('x-login-attempt')
+        if (loginAttept && Number(loginAttept) > process.env.NUXT_AUTH_LIMIT_LOGIN_ATTEMPT) {
+          throw new Error('Login attempts limit reached, try again later.')
+        }
+      }
     })
       .then(async (res) => {
         if (res.error) { throw (res) }
