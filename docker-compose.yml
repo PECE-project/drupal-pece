@@ -272,8 +272,8 @@ services:
     environment:
       N8N_CLIENT_ID: $N8N_CLIENT_ID
       N8N_CLIENT_SECRET: $N8N_CLIENT_SECRET
-      WEBHOOK_N8N_USERNAME: $WEBHOOK_N8N_USERNAME
-      WEBHOOK_N8N_PASSWORD: $WEBHOOK_N8N_PASSWORD
+      SITE_N8N_USERNAME: $SITE_N8N_USERNAME
+      SITE_N8N_PASSWORD: $SITE_N8N_PASSWORD
     labels:
       - "traefik.http.routers.${PROJECT_NAME}_n8n.rule=Host(`n8n.${PROJECT_BASE_URL}`)"
       - "traefik.http.middlewares.auth.basicauth.users=${N8N_HTTP_ACCESS}"
