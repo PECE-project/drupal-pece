@@ -37,5 +37,5 @@ nuxt-lint:
 nuxt-run:
 	cd $(FRONT_DIR) && make run
 
-start-automations:
+start-automation:
 	docker exec $(shell docker ps --filter name='^/$(PROJECT_NAME)_n8n' --format "{{ .ID }}") python /root/.pece/startWorkflows.py
