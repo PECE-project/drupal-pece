@@ -2,6 +2,7 @@
   <FormObserveValidate
     @submitted="submit"
     name="form-login"
+    data-nw="form-login"
   >
     <template v-slot="{ invalid }">
       <div
@@ -106,6 +107,7 @@
           @verify="recaptchaSuccess"
           @error="recaptchaError"
           :sitekey="recaptcha.challenged ? recaptcha.siteKeyV2 : recaptcha.siteKeyV3"
+          data-nw="recaptcha"
         />
       </p>
 
@@ -146,6 +148,7 @@ export default {
       resetErrors()
       if (!isValid) { return serverErrors.value.push({ message: 'Invalid form' }) }
       if (!recaptcha.value.success && recaptcha.value.size === 'normal') {
+        console.log('disparou o submit')
         return handlerError({ message: 'Resolve reCAPTCHA' })
       }
       if (recaptcha.value.success) { return login() }
@@ -157,6 +160,7 @@ export default {
         await root.$store.dispatch('user/login', auth.value)
         window.location.href = root.$route.query.redirect || '/'
       } catch (e) {
+        console.log('disparou o login')
         handlerError(e)
         if (e.message.includes('attempts')) {
           root.$store.dispatch('user/reCaptchaError')
@@ -165,6 +169,7 @@ export default {
     }
 
     async function recaptchaSuccess (response) {
+      console.log('disparou o recaptcha')
       if (!recaptcha.value.challenged) {
         await root.$store.dispatch('user/checkScoreReCaptcha', response)
         return login()
@@ -173,6 +178,7 @@ export default {
     }
 
     function recaptchaError (e) {
+      console.log('disparou o recaptchaError')
       handlerError(e)
       root.$store.dispatch('user/reCaptchaError')
     }
@@ -182,6 +188,7 @@ export default {
     }
 
     function handlerError (e) {
+      console.log(e)
       serverErrors.value.push({
         message: e.message
       })
