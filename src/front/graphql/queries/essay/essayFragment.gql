@@ -1,0 +1,20 @@
+fragment essay on Essay {
+  total
+  items {
+    id
+    title
+    created
+    thumbnail {
+      alt
+      url(style: THUMBNAIL_100x100)
+    }
+    tags {
+      id
+      title
+    }
+    author {
+      id
+      username
+    }
+  }
+}

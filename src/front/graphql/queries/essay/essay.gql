@@ -1,0 +1,9 @@
+#import "./essayFragment.gql"
+
+query peceEssays ($offset: Int!, $limit: Int!) {
+  peceEssays (offset: $offset, limit: $limit, filters: [
+    { key: "status", value: "1" },
+  ]) {
+    ...essay
+  }
+}
