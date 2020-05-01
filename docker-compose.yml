@@ -254,10 +254,8 @@ services:
       pece:
     working_dir: /home/node/app
     labels:
-      - "traefik.http.services.${PROJECT_NAME}_front_node.loadbalancer.server.port=5000"
-      - "traefik.http.routers.${PROJECT_NAME}_front_node.rule=Host(`front.${PROJECT_BASE_URL}`)"
-    ports:
-      - 4000:5000
+      - "traefik.http.services.${PROJECT_NAME}_front_node-service.loadbalancer.server.port=5000"
+      - "traefik.http.routers.${PROJECT_NAME}_front_node.rule=Host(`${PROJECT_BASE_URL}`)"
     volumes:
       - $FRONT_DIR:/home/node/app
     command: bash -c "npm run start"
