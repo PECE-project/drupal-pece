@@ -490,3 +490,15 @@ function pece_update_7117() {
      features_revert_module('pece_analytics');
    }
 }
+
+/**
+ *  Add ARK support for PECE content.
+ */
+function pece_update_7118() {
+
+  // Activate ARK and PECE ARK modules.
+  module_enable(array(
+  'ark',
+  'pece_ark',
+  ));
+}
