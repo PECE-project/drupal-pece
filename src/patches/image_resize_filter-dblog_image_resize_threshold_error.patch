@@ -1,0 +1,35 @@
+From ae64e9646f6996116602b939aa1f9faa98ae1e04 Mon Sep 17 00:00:00 2001
+From: Renato Vasconcellos <revagomes@gmail.com>
+Date: Fri, 1 May 2020 19:56:07 -0300
+Subject: [PATCH] Convert Image resize threshold limit error message to
+ database log entries.
+
+---
+ image_resize_filter.module | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/image_resize_filter.module b/image_resize_filter.module
+index 7efd6f3..c6387b1 100644
+--- a/image_resize_filter.module
++++ b/image_resize_filter.module
+@@ -359,7 +359,7 @@ function image_resize_filter_get_images($settings, $text) {
+       // Basic flood prevention on remote images.
+       $resize_threshold = variable_get('image_resize_filter_threshold', 10);
+       if (!flood_is_allowed('image_resize_filter_remote', $resize_threshold, 120)) {
+-        drupal_set_message(t('Image resize threshold of @count remote images has been reached. Please use fewer remote images.', array('@count' => $resize_threshold)), 'error', FALSE);
++        watchdog('image_resize_filter', 'Image resize threshold of @count remote images has been reached. Please use fewer remote images.', array('@count' => $resize_threshold), WATCHDOG_ERROR);
+         continue;
+       }
+       flood_register_event('image_resize_filter_remote', 120);
+@@ -500,7 +500,7 @@ function image_resize_filter_process_images($images, $text, $settings) {
+       // Basic flood prevention of resizing.
+       $resize_threshold = variable_get('image_resize_filter_threshold', 10);
+       if (!flood_is_allowed('image_resize_filter_resize', $resize_threshold, 120)) {
+-        drupal_set_message(t('Image resize threshold of @count per minute reached. Some images have not been resized. Resave the content to resize remaining images.', array('@count' => floor($resize_threshold / 2))), 'error', FALSE);
++        watchdog('image_resize_filter', 'Image resize threshold of @count per minute reached. Some images have not been resized. Resave the content to resize remaining images.', array('@count' => floor($resize_threshold / 2)), WATCHDOG_ERROR);
+         continue;
+       }
+       flood_register_event('image_resize_filter_resize', 120);
+-- 
+2.17.1
+

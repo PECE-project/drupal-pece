@@ -386,6 +386,10 @@ projects[media][subdir] = contrib
 projects[animgif_support][version] = 1.6
 projects[animgif_support][subdir] = contrib
 
+projects[image_resize_filter][version] = 1.16
+projects[image_resize_filter][subdir] = contrib
+projects[image_resize_filter][patch][] = ./patches/image_resize_filter-dblog_image_resize_threshold_error.patch
+
 ; =====================
 ; Fields
 ; =====================
