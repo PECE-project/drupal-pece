@@ -2,18 +2,18 @@
 
 /**
  * @file
- * pece_artifacts_spdsheet.features.field_instance.inc
+ * pece_artifacts_tabular.features.field_instance.inc
  */
 
 /**
  * Implements hook_field_default_field_instances().
  */
-function pece_artifacts_spdsheet_field_default_field_instances() {
+function pece_artifacts_tabular_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-pece_artifact_spdsheet-field_pece_authors'.
-  $field_instances['node-pece_artifact_spdsheet-field_pece_authors'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // Exported field_instance: 'node-pece_artifact_tabular-field_pece_authors'.
+  $field_instances['node-pece_artifact_tabular-field_pece_authors'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => 'Who created this artifact?',
@@ -95,9 +95,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'node-pece_artifact_spdsheet-field_pece_contributors'.
-  $field_instances['node-pece_artifact_spdsheet-field_pece_contributors'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // 'node-pece_artifact_tabular-field_pece_contributors'.
+  $field_instances['node-pece_artifact_tabular-field_pece_contributors'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => 'Who is contributing this artifact to the platform?',
@@ -201,7 +201,7 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
           'pece_artifact_bundle' => 0,
           'pece_artifact_fieldnote' => 0,
           'pece_artifact_image' => 0,
-          'pece_artifact_spdsheet' => 0,
+          'pece_artifact_tabular' => 0,
           'pece_artifact_text' => 0,
           'pece_artifact_video' => 0,
           'pece_artifact_website' => 0,
@@ -246,9 +246,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_spdsheet-field_pece_created'.
-  $field_instances['node-pece_artifact_spdsheet-field_pece_created'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // Exported field_instance: 'node-pece_artifact_tabular-field_pece_created'.
+  $field_instances['node-pece_artifact_tabular-field_pece_created'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -345,9 +345,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'node-pece_artifact_spdsheet-field_pece_crit_commentary'.
-  $field_instances['node-pece_artifact_spdsheet-field_pece_crit_commentary'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // 'node-pece_artifact_tabular-field_pece_crit_commentary'.
+  $field_instances['node-pece_artifact_tabular-field_pece_crit_commentary'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => 'Why is this artifact important? How is it relevant to this project?',
@@ -448,9 +448,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'node-pece_artifact_spdsheet-field_pece_fieldsite'.
-  $field_instances['node-pece_artifact_spdsheet-field_pece_fieldsite'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // 'node-pece_artifact_tabular-field_pece_fieldsite'.
+  $field_instances['node-pece_artifact_tabular-field_pece_fieldsite'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -536,9 +536,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_spdsheet-field_pece_language'.
-  $field_instances['node-pece_artifact_spdsheet-field_pece_language'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // Exported field_instance: 'node-pece_artifact_tabular-field_pece_language'.
+  $field_instances['node-pece_artifact_tabular-field_pece_language'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => 'In what language is this artifact?',
@@ -620,9 +620,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_spdsheet-field_pece_license'.
-  $field_instances['node-pece_artifact_spdsheet-field_pece_license'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // Exported field_instance: 'node-pece_artifact_tabular-field_pece_license'.
+  $field_instances['node-pece_artifact_tabular-field_pece_license'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'default_value' => array(
       0 => array(
         'licence' => 3,
@@ -705,9 +705,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_spdsheet-field_pece_location'.
-  $field_instances['node-pece_artifact_spdsheet-field_pece_location'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // Exported field_instance: 'node-pece_artifact_tabular-field_pece_location'.
+  $field_instances['node-pece_artifact_tabular-field_pece_location'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -786,9 +786,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'node-pece_artifact_spdsheet-field_pece_media_spdsheet'.
-  $field_instances['node-pece_artifact_spdsheet-field_pece_media_spdsheet'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // 'node-pece_artifact_tabular-field_pece_media_tabular'.
+  $field_instances['node-pece_artifact_tabular-field_pece_media_tabular'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -850,7 +850,7 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'fences_wrapper' => 'div',
-    'field_name' => 'field_pece_media_spdsheet',
+    'field_name' => 'field_pece_media_tabular',
     'label' => 'Spreadsheet Document',
     'required' => 1,
     'settings' => array(
@@ -901,9 +901,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'node-pece_artifact_spdsheet-field_pece_media_spdst_attach'.
-  $field_instances['node-pece_artifact_spdsheet-field_pece_media_spdst_attach'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // 'node-pece_artifact_tabular-field_pece_media_tablr_attach'.
+  $field_instances['node-pece_artifact_tabular-field_pece_media_tablr_attach'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -965,7 +965,7 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'fences_wrapper' => 'div_div_div',
-    'field_name' => 'field_pece_media_spdst_attach',
+    'field_name' => 'field_pece_media_tablr_attach',
     'label' => 'Attachments',
     'required' => 0,
     'settings' => array(
@@ -1015,9 +1015,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_spdsheet-field_pece_source'.
-  $field_instances['node-pece_artifact_spdsheet-field_pece_source'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // Exported field_instance: 'node-pece_artifact_tabular-field_pece_source'.
+  $field_instances['node-pece_artifact_tabular-field_pece_source'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => 'Where did you find this artifact?',
@@ -1103,9 +1103,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_spdsheet-field_pece_tags'.
-  $field_instances['node-pece_artifact_spdsheet-field_pece_tags'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // Exported field_instance: 'node-pece_artifact_tabular-field_pece_tags'.
+  $field_instances['node-pece_artifact_tabular-field_pece_tags'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -1187,9 +1187,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_spdsheet-field_pece_uri'.
-  $field_instances['node-pece_artifact_spdsheet-field_pece_uri'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // Exported field_instance: 'node-pece_artifact_tabular-field_pece_uri'.
+  $field_instances['node-pece_artifact_tabular-field_pece_uri'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -1277,9 +1277,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'node-pece_artifact_spdsheet-field_pece_use_fieldsite_local'.
-  $field_instances['node-pece_artifact_spdsheet-field_pece_use_fieldsite_local'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // 'node-pece_artifact_tabular-field_pece_use_fieldsite_local'.
+  $field_instances['node-pece_artifact_tabular-field_pece_use_fieldsite_local'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'default_value' => array(
       0 => array(
         'value' => 0,
@@ -1363,9 +1363,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-pece_artifact_spdsheet-field_permissions'.
-  $field_instances['node-pece_artifact_spdsheet-field_permissions'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // Exported field_instance: 'node-pece_artifact_tabular-field_permissions'.
+  $field_instances['node-pece_artifact_tabular-field_permissions'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'default_value' => array(
       0 => array(
         'value' => 'open',
@@ -1448,9 +1448,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'node-pece_artifact_spdsheet-group_content_access'.
-  $field_instances['node-pece_artifact_spdsheet-group_content_access'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // 'node-pece_artifact_tabular-group_content_access'.
+  $field_instances['node-pece_artifact_tabular-group_content_access'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'default_value' => array(
       0 => array(
         'value' => 0,
@@ -1541,9 +1541,9 @@ function pece_artifacts_spdsheet_field_default_field_instances() {
     'widget_type' => 'options_select',
   );
 
-  // Exported field_instance: 'node-pece_artifact_spdsheet-og_group_ref'.
-  $field_instances['node-pece_artifact_spdsheet-og_group_ref'] = array(
-    'bundle' => 'pece_artifact_spdsheet',
+  // Exported field_instance: 'node-pece_artifact_tabular-og_group_ref'.
+  $field_instances['node-pece_artifact_tabular-og_group_ref'] = array(
+    'bundle' => 'pece_artifact_tabular',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',

@@ -2,13 +2,13 @@
 
 /**
  * @file
- * pece_artifacts_spdsheet.panelizer.inc
+ * pece_artifacts_tabular.panelizer.inc
  */
 
 /**
  * Implements hook_panelizer_defaults().
  */
-function pece_artifacts_spdsheet_panelizer_defaults() {
+function pece_artifacts_tabular_panelizer_defaults() {
   $export = array();
 
   $panelizer = new stdClass();
@@ -16,10 +16,10 @@ function pece_artifacts_spdsheet_panelizer_defaults() {
   $panelizer->api_version = 1;
   $panelizer->title = 'Default';
   $panelizer->panelizer_type = 'node';
-  $panelizer->panelizer_key = 'pece_artifact_spdsheet';
+  $panelizer->panelizer_key = 'pece_artifact_tabular';
   $panelizer->access = array();
   $panelizer->view_mode = 'page_manager';
-  $panelizer->name = 'node:pece_artifact_spdsheet:default';
+  $panelizer->name = 'node:pece_artifact_tabular:default';
   $panelizer->css_id = '';
   $panelizer->css_class = '';
   $panelizer->css = '';
@@ -46,14 +46,14 @@ function pece_artifacts_spdsheet_panelizer_defaults() {
   $display->title = '%node:title';
   $display->uuid = '6ae2f024-3fb5-4bec-896a-32c3ba9cf39c';
   $display->storage_type = 'panelizer_default';
-  $display->storage_id = 'node:pece_artifact_spdsheet:default';
+  $display->storage_id = 'node:pece_artifact_tabular:default';
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
   $pane->pid = 'new-80e68ddc-59aa-4666-90de-47f1259a7c16';
   $pane->panel = 'content';
   $pane->type = 'entity_field';
-  $pane->subtype = 'node:field_pece_media_spdsheet';
+  $pane->subtype = 'node:field_pece_media_tabular';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
@@ -91,7 +91,7 @@ function pece_artifacts_spdsheet_panelizer_defaults() {
   $pane->pid = 'new-b3e2d7f5-2fd7-4d4e-8716-cc6f8f049822';
   $pane->panel = 'content';
   $pane->type = 'entity_field';
-  $pane->subtype = 'node:field_pece_media_spdst_attach';
+  $pane->subtype = 'node:field_pece_media_tablr_attach';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
@@ -224,7 +224,7 @@ function pece_artifacts_spdsheet_panelizer_defaults() {
       'page_arguments' => array(
         0 => 'editor',
         1 => 'add-pane',
-        2 => 'panelizer:default:node:pece_artifact_spdsheet.page_manager:default',
+        2 => 'panelizer:default:node:pece_artifact_tabular.page_manager:default',
         3 => 'column1',
         4 => 'annotation',
         5 => 'annotation',
@@ -243,7 +243,7 @@ function pece_artifacts_spdsheet_panelizer_defaults() {
       'theme_arguments' => array(
         0 => 'editor',
         1 => 'add-pane',
-        2 => 'panelizer:default:node:pece_artifact_spdsheet.page_manager:default',
+        2 => 'panelizer:default:node:pece_artifact_tabular.page_manager:default',
         3 => 'column1',
         4 => 'annotation',
         5 => 'annotation',
@@ -265,7 +265,7 @@ function pece_artifacts_spdsheet_panelizer_defaults() {
         1 => 'ajax',
         2 => 'editor',
         3 => 'add-pane',
-        4 => 'panelizer:default:node:pece_artifact_spdsheet.page_manager:default',
+        4 => 'panelizer:default:node:pece_artifact_tabular.page_manager:default',
         5 => 'column1',
         6 => 'annotation',
         7 => 'annotation',
@@ -276,7 +276,7 @@ function pece_artifacts_spdsheet_panelizer_defaults() {
         1 => 'ajax',
         2 => 'editor',
         3 => 'add-pane',
-        4 => 'panelizer:default:node:pece_artifact_spdsheet.page_manager:default',
+        4 => 'panelizer:default:node:pece_artifact_tabular.page_manager:default',
         5 => 'column1',
         6 => 'annotation',
         7 => 'annotation',
@@ -654,7 +654,7 @@ function pece_artifacts_spdsheet_panelizer_defaults() {
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $panelizer->display = $display;
-  $export['node:pece_artifact_spdsheet:default'] = $panelizer;
+  $export['node:pece_artifact_tabular:default'] = $panelizer;
 
   return $export;
 }

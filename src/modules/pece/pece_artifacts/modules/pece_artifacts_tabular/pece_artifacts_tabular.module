@@ -1,10 +1,10 @@
 <?php
 /**
  * @file
- * Code for the pece_artifacts_spdsheet feature.
+ * Code for the pece_artifacts_tabular feature.
  */
 
-include_once 'pece_artifacts_spdsheet.features.inc';
+include_once 'pece_artifacts_tabular.features.inc';
 
 /**
  * Implements hook_modules_enabled().
@@ -15,16 +15,16 @@ include_once 'pece_artifacts_spdsheet.features.inc';
  * and defaultconfig which power the functionality. Hopefully a more general
  * solution can be found. More information - http://drupal.org/node/1837312.
  */
-function pece_artifacts_spdsheet_modules_enabled($modules) {
+function pece_artifacts_tabular_modules_enabled($modules) {
 
   // Only run this logic if we are executing as part of an install profile
   // and only for this particular module.
-  if (drupal_installation_attempted() && in_array('pece_artifacts_spdsheet', $modules)) {
+  if (drupal_installation_attempted() && in_array('pece_artifacts_tabular', $modules)) {
 
     $perms = array(
-      'create pece_artifact_spdsheet content',
-      'delete own pece_artifact_spdsheet content',
-      'edit own pece_artifact_spdsheet content',
+      'create pece_artifact_tabular content',
+      'delete own pece_artifact_tabular content',
+      'edit own pece_artifact_tabular content',
     );
 
     foreach ($perms as $perm) {

@@ -2,13 +2,13 @@
 
 /**
  * @file
- * pece_artifacts_spdsheet.features.inc
+ * pece_artifacts_tabular.features.inc
  */
 
 /**
  * Implements hook_ctools_plugin_api().
  */
-function pece_artifacts_spdsheet_ctools_plugin_api($module = NULL, $api = NULL) {
+function pece_artifacts_tabular_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "field_group" && $api == "field_group") {
     return array("version" => "1");
   }
@@ -23,9 +23,9 @@ function pece_artifacts_spdsheet_ctools_plugin_api($module = NULL, $api = NULL) 
 /**
  * Implements hook_node_info().
  */
-function pece_artifacts_spdsheet_node_info() {
+function pece_artifacts_tabular_node_info() {
   $items = array(
-    'pece_artifact_spdsheet' => array(
+    'pece_artifact_tabular' => array(
       'name' => t('Artifact - Spreadsheet'),
       'base' => 'node_content',
       'description' => t('An artifact is the basic unit of data on PECE. Artifacts represent materials that an ethnographer determines to be data relevant to the site.'),

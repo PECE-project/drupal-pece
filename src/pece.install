@@ -442,15 +442,15 @@ function pece_update_7115() {
 }
 
 /**
- *  Add Animated gif support for image styles & Enable Spreadsheet artifact & Add Created Date field on all artifacts.
+ *  Add Animated gif support for image styles, Enable Tabular data artifact & Add Created Date field on all artifacts.
  */
 function pece_update_7116() {
    module_enable(array(
      'animgif_support',
-     'pece_artifacts_spdsheet',
+     'pece_artifacts_tabular',
    ));
   // Prepare spreadsheets directory on private fs.
-  $new_folder = 'private://artifacts/media/spreadsheet/';
+  $new_folder = 'private://artifacts/media/tabular-data/';
   file_prepare_directory($new_folder, FILE_CREATE_DIRECTORY);
 
   if (module_exists('features')) {
