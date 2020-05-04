@@ -64,7 +64,7 @@ function pece_artifacts_views_default_views() {
     'pece_artifact_bundle' => 'pece_artifact_bundle',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
-    'pece_artifact_spdsheet' => 'pece_artifact_spdsheet',
+    'pece_artifact_tabular' => 'pece_artifact_tabular',
     'pece_artifact_text' => 'pece_artifact_text',
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
