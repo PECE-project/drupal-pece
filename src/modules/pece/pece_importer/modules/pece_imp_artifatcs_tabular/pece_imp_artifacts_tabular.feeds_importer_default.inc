@@ -2,22 +2,22 @@
 
 /**
  * @file
- * pece_imp_artifacts_spdsheet.feeds_importer_default.inc
+ * pece_imp_artifacts_tabular.feeds_importer_default.inc
  */
 
 /**
  * Implements hook_feeds_importer_default().
  */
-function pece_imp_artifacts_spdsheet_feeds_importer_default() {
+function pece_imp_artifacts_tabular_feeds_importer_default() {
   $export = array();
 
   $feeds_importer = new stdClass();
   $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
-  $feeds_importer->id = 'pece_imp_artifacts_spreadsheet';
+  $feeds_importer->id = 'pece_imp_artifacts_tabular';
   $feeds_importer->config = array(
-    'name' => 'PECE - PDF Artifacts Importer',
-    'description' => 'Batch import Spreadsheet Artifacts',
+    'name' => 'PECE - Tabular data Artifacts Importer',
+    'description' => 'Batch import Tabular data Artifacts',
     'fetcher' => array(
       'plugin_key' => 'FeedsFileFetcher',
       'config' => array(
@@ -78,7 +78,7 @@ function pece_imp_artifacts_spdsheet_feeds_importer_default() {
           ),
           5 => array(
             'source' => 'file',
-            'target' => 'field_pece_media_spdsheet:uri',
+            'target' => 'field_pece_media_tabular:uri',
             'file_exists' => '3',
             'language' => 'und',
           ),
@@ -124,7 +124,7 @@ function pece_imp_artifacts_spdsheet_feeds_importer_default() {
         'update_non_existent' => 'skip',
         'input_format' => 'plain_text',
         'skip_hash_check' => 0,
-        'bundle' => 'pece_artifact_spdsheet',
+        'bundle' => 'pece_artifact_tabular',
         'language' => 'und',
       ),
     ),
@@ -135,7 +135,7 @@ function pece_imp_artifacts_spdsheet_feeds_importer_default() {
     'import_on_create' => 1,
     'process_in_background' => 0,
   );
-  $export['pece_imp_artifacts_spdsheet'] = $feeds_importer;
+  $export['pece_imp_artifacts_tabular'] = $feeds_importer;
 
   return $export;
 }

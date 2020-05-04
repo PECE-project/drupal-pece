@@ -2,13 +2,13 @@
 
 /**
  * @file
- * pece_imp_artifacts_spdsheet.features.inc
+ * pece_imp_artifacts_tabular.features.inc
  */
 
 /**
  * Implements hook_ctools_plugin_api().
  */
-function pece_imp_artifacts_spdsheet_ctools_plugin_api($module = NULL, $api = NULL) {
+function pece_imp_artifacts_tabular_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "feeds" && $api == "feeds_importer_default") {
     return array("version" => "1");
   }
