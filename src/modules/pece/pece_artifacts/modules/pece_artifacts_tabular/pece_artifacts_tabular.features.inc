@@ -26,7 +26,7 @@ function pece_artifacts_tabular_ctools_plugin_api($module = NULL, $api = NULL) {
 function pece_artifacts_tabular_node_info() {
   $items = array(
     'pece_artifact_tabular' => array(
-      'name' => t('Artifact - Spreadsheet'),
+      'name' => t('Artifact - Tabular data'),
       'base' => 'node_content',
       'description' => t('An artifact is the basic unit of data on PECE. Artifacts represent materials that an ethnographer determines to be data relevant to the site.'),
       'has_title' => '1',
