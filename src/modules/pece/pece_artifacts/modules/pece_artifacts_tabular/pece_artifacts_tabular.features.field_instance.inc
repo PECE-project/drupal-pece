@@ -851,11 +851,11 @@ function pece_artifacts_tabular_field_default_field_instances() {
     'entity_type' => 'node',
     'fences_wrapper' => 'div',
     'field_name' => 'field_pece_media_tabular',
-    'label' => 'Spreadsheet Document',
+    'label' => 'Tabular data Document',
     'required' => 1,
     'settings' => array(
       'description_field' => 0,
-      'file_directory' => 'artifacts/media/spreadsheet',
+      'file_directory' => 'artifacts/media/tabular-data',
       'file_extensions' => 'txt csv xls xlsx ods xml json rdf zip',
       'max_filesize' => '',
       'user_register_form' => FALSE,
@@ -970,7 +970,7 @@ function pece_artifacts_tabular_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
-      'file_directory' => 'artifacts/media/spreadsheet',
+      'file_directory' => 'artifacts/media/tabular-data',
       'file_extensions' => 'txt csv xls xml json rdf zip',
       'max_filesize' => '',
       'user_register_form' => FALSE,
@@ -1663,7 +1663,7 @@ function pece_artifacts_tabular_field_default_field_instances() {
   t('Location');
   t('Permissions');
   t('Source');
-  t('Spreadsheet Document');
+  t('Tabular data Document');
   t('Tags');
   t('URI');
   t('Use fieldsite\'s location');
