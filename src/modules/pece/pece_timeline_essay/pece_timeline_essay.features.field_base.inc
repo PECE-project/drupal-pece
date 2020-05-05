@@ -43,7 +43,7 @@ function pece_timeline_essay_field_default_field_bases() {
           'pece_artifact_audio' => 'pece_artifact_audio',
           'pece_artifact_image' => 'pece_artifact_image',
           'pece_artifact_pdf' => 'pece_artifact_pdf',
-          'pece_artifact_spdsheet' => 'pece_artifact_spdsheet',
+          'pece_artifact_tabular' => 'pece_artifact_tabular',
           'pece_artifact_text' => 'pece_artifact_text',
           'pece_artifact_video' => 'pece_artifact_video',
           'pece_artifact_website' => 'pece_artifact_website',
