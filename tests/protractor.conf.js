@@ -9,7 +9,7 @@ exports.config = {
     'spec.js'
   ],
 
-  baseUrl: 'http://dev-pece.rpi.dropit.in',
+  baseUrl: 'http://pece.revax.com.br',
 
   // Chrome is not allowed to create a SUID sandbox when running inside Docker
   capabilities: {
