@@ -32,4 +32,9 @@ function pece_artifacts_tabular_modules_enabled($modules) {
       user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array($perm));
     }
   }
+
+  $anon_perms = array(
+    'download any document files',
+  );
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, $anon_perms);
 }

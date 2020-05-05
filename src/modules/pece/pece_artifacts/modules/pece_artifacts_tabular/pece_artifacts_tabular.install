@@ -5,17 +5,9 @@
  * Install, update and uninstall functions for the pece_artifacts_tabular module.
  */
 
-/**
- * Rebuild Tabular data artifact default permissions for administrator user role.
- */
-function pece_artifacts_tabular_update_7001() {
-  module_load_include('inc', 'pece', 'pece.functions');
-  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_artifacts_tabular');
-}
-
-/**
- * Update Tabular data artifact field instance default settings.
- */
-function pece_artifacts_tabular_update_7003() {
-  features_revert(array('pece_artifacts_tabular' => array('field_instance')));
-}
+function pece_artifacts_tabular_install () {
+  $anon_perms = array(
+    'download any document files',
+  );
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, $anon_perms);
+ }
