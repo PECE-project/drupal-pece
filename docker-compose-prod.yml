@@ -1,9 +1,14 @@
+# @TODO: Need to do install kraftwagen service
+# @TODO: Need to do install gulp service
+
 version: "3"
 
 services:
   mariadb:
     image: wodby/mariadb:$MARIADB_TAG
     container_name: "${PROJECT_NAME}_mariadb"
+    networks:
+      pecev1:
     stop_grace_period: 30s
     environment:
       MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
@@ -12,11 +17,13 @@ services:
       MYSQL_PASSWORD: $DB_PASSWORD
       MYSQL_PORT: $DB_PORT
     volumes:
-      - ./docker/database/data:/var/lib/mysql # Use bind mount
+      - ./docker/database/datav1:/var/lib/mysql # Use bind mount
 
   php:
     image: wodby/drupal-php:$PHP_TAG
     container_name: "${PROJECT_NAME}_php"
+    networks:
+      pecev1:
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       DB_HOST: $DB_HOST
@@ -33,13 +40,15 @@ services:
   nginx:
     image: wodby/nginx:$NGINX_TAG
     container_name: "${PROJECT_NAME}_nginx"
+    networks:
+      pecev1:
     depends_on:
       - php
     environment:
       NGINX_STATIC_OPEN_FILE_CACHE: "off"
       NGINX_ERROR_LOG_LEVEL: debug
       NGINX_BACKEND_HOST: php
-      NGINX_SERVER_ROOT: /var/www/html/web
+      NGINX_SERVER_ROOT: /var/www/html/build
       NGINX_VHOST_PRESET: $NGINX_VHOST_PRESET
 #      NGINX_DRUPAL_FILE_PROXY_URL: http://example.com
     volumes:
@@ -48,13 +57,13 @@ services:
 #      - ./:/var/www/html:cached # User-guided caching
 #      - docker-sync:/var/www/html # Docker-sync
     labels:
-      - 'traefik.backend=${PROJECT_NAME}_nginx'
-      - 'traefik.port=80'
-      - 'traefik.frontend.rule=Host:${PROJECT_BASE_URL}'
+      - "traefik.http.routers.${PROJECT_NAME}_nginx.rule=Host(`${PROJECT_BASE_URL}`)"
 
   mailhog:
     image: mailhog/mailhog
     container_name: "${PROJECT_NAME}_mailhog"
+    networks:
+      pecev1:
     labels:
       - 'traefik.backend=${PROJECT_NAME}_mailhog'
       - 'traefik.port=8025'
@@ -247,26 +256,31 @@ services:
 #      - 'traefik.port=8080'
 #      - 'traefik.frontend.rule=Host:xhprof.${PROJECT_BASE_URL}'
 
-  portainer:
-    image: portainer/portainer
-    container_name: "${PROJECT_NAME}_portainer"
-    command: --no-auth -H unix:///var/run/docker.sock
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    labels:
-      - 'traefik.backend=${PROJECT_NAME}_portainer'
-      - 'traefik.port=9000'
-      - 'traefik.frontend.rule=Host:portainer.${PROJECT_BASE_URL}'
+#  portainer:
+#    image: portainer/portainer
+#    container_name: "${PROJECT_NAME}_portainer"
+#    command: --no-auth -H unix:///var/run/docker.sock
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    labels:
+#      - 'traefik.backend=${PROJECT_NAME}_portainer'
+#      - 'traefik.port=9000'
+#      - 'traefik.frontend.rule=Host:portainer.${PROJECT_BASE_URL}'
 
-  traefik:
-    image: traefik
-    container_name: "${PROJECT_NAME}_traefik"
-    command: -c /dev/null --web --docker --logLevel=INFO
-    ports:
-      - '80:80'
-#      - '8080:8080' # Dashboard
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+#  traefik:
+#    image: traefik
+#    container_name: "${PROJECT_NAME}_traefik"
+#    command: -c /dev/null --web --docker --logLevel=INFO
+#    ports:
+#      - '80:80'
+##      - '8080:8080' # Dashboard
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  pecev1:
+    external:
+      name: pecev1
 
 #volumes:
 ## Docker-sync for macOS users
