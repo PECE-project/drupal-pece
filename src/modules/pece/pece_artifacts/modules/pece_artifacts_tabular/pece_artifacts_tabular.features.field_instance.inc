@@ -792,10 +792,13 @@ function pece_artifacts_tabular_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'card' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'label' => 'inline',
+        'module' => 'file_entity',
+        'settings' => array(
+         'text' => 'Download [file:name]',
+        ),
+        'type' => 'file_download_link',
+        'weight' => 1,
       ),
       'default' => array(
         'label' => 'above',
@@ -811,10 +814,13 @@ function pece_artifacts_tabular_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'label' => 'inline',
+        'module' => 'file_entity',
+        'settings' => array(
+          'text' => 'Download [file:name]',
+        ),
+        'type' => 'file_download_link',
+        'weight' => 1,
       ),
       'highlighted' => array(
         'label' => 'above',
@@ -907,10 +913,13 @@ function pece_artifacts_tabular_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'card' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 1,
+        'label' => 'hidden',
+        'module' => 'file_entity',
+        'settings' => array(
+          'text' => 'Download [file:name]',
+        ),
+        'type' => 'file_download_link',
+        'weight' => 0,
       ),
       'default' => array(
         'label' => 'above',
@@ -926,9 +935,12 @@ function pece_artifacts_tabular_field_default_field_instances() {
         'weight' => 0,
       ),
       'free_panel' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'hidden',
+        'module' => 'file_entity',
+        'settings' => array(
+          'text' => 'Download [file:name]',
+        ),
+        'type' => 'file_download_link',
         'weight' => 0,
       ),
       'highlighted' => array(
