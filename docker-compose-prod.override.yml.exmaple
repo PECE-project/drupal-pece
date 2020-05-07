@@ -27,6 +27,17 @@ services:
 ## For XHProf and Xdebug profiler traces
 #      - files:/mnt/files
 
+  traefik:
+    image: traefik:v1.7
+    container_name: "${PROJECT_NAME}_traefik"
+    command: -c /dev/null --web --docker --logLevel=INFO
+    ports:
+      - '80:80'
+#      - '8080:8080' # Dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+
 ## For windows users
 #  mariadb:
 #    environment:
