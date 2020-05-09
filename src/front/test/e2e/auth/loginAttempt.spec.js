@@ -9,13 +9,15 @@ module.exports = {
       .assert.visible('[data-nw="btn-submit"]')
       .expect.element('[data-nw="btn-submit"]').to.have.attribute('disabled')
 
-    client.expect.element('.grecaptcha-badge').to.not.be.visible
-    client.expect.element('[data-nw="recaptcha"]').to.not.be.visible
+    if (process.env.NUXT_RECAPTCHA_SITE_KEY_V2) {
+      client.expect.element('.grecaptcha-badge').to.not.be.visible
+      client.expect.element('[data-nw="recaptcha"]').to.not.be.visible
+    }
 
     client
-      .assert.visible('[data-nw="username"]')
-      .setValue('[data-nw="username"]', client.globals.auth.username)
-      .assert.valueContains('[data-nw="username"]', client.globals.auth.username)
+      .assert.visible('[data-nw="email"]')
+      .setValue('[data-nw="email"]', client.globals.auth.email)
+      .assert.valueContains('[data-nw="email"]', client.globals.auth.email)
 
     client
       .assert.visible('[data-nw="password"]')
@@ -39,12 +41,14 @@ module.exports = {
     for (let i = 0; i < 6; i++) {
       client
         .click('[data-nw="btn-submit"]')
-        .wait(1000)
+        .pause(1000)
     }
 
-    client
-      .waitForElementVisible('[data-nw="recaptcha"]')
-      .assert.visible('[data-nw="recaptcha"]')
+    if (process.env.NUXT_RECAPTCHA_SITE_KEY_V2) {
+      client
+        .waitForElementVisible('[data-nw="recaptcha"]')
+        .assert.visible('[data-nw="recaptcha"]')
+    }
 
     client
       .expect.element('[data-nw="alert"]').text.to.contain('Login attempts limit reached, try again later.')
