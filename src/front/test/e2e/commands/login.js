@@ -13,9 +13,9 @@ module.exports.command = function () {
     .expect.element('[data-nw="btn-submit"]').to.have.attribute('disabled')
 
   client
-    .assert.visible('[data-nw="username"]')
-    .setValue('[data-nw="username"]', client.globals.auth.username)
-    .assert.valueContains('[data-nw="username"]', client.globals.auth.username)
+    .assert.visible('[data-nw="email"]')
+    .setValue('[data-nw="email"]', client.globals.auth.email)
+    .assert.valueContains('[data-nw="email"]', client.globals.auth.email)
 
   client
     .assert.visible('[data-nw="password"]')
