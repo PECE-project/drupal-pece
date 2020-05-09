@@ -101,6 +101,7 @@
       <p class="mt-8">
         <recaptcha
           ref="recaptcha"
+          v-if="hasCaptcha"
           :key="recaptcha.size"
           :size="recaptcha.size"
           :loadRecaptchaScript="true"
@@ -135,6 +136,7 @@ export default {
   },
 
   setup (_, { root, refs }) {
+    const hasCaptcha = process.env.NUXT_RECAPTCHA_SITE_KEY_V2
     const serverErrors = ref([])
 
     const recaptcha = computed(() => root.$store.getters['user/recaptcha'])
@@ -148,10 +150,9 @@ export default {
       resetErrors()
       if (!isValid) { return serverErrors.value.push({ message: 'Invalid form' }) }
       if (!recaptcha.value.success && recaptcha.value.size === 'normal') {
-        console.log('disparou o submit')
         return handlerError({ message: 'Resolve reCAPTCHA' })
       }
-      if (recaptcha.value.success) { return login() }
+      if (recaptcha.value.success || !hasCaptcha) { return login() }
       await refs.recaptcha.execute()
     }
 
@@ -160,7 +161,6 @@ export default {
         await root.$store.dispatch('user/login', auth.value)
         window.location.href = root.$route.query.redirect || '/'
       } catch (e) {
-        console.log('disparou o login')
         handlerError(e)
         if (e.message.includes('attempts')) {
           root.$store.dispatch('user/reCaptchaError')
@@ -169,7 +169,6 @@ export default {
     }
 
     async function recaptchaSuccess (response) {
-      console.log('disparou o recaptcha')
       if (!recaptcha.value.challenged) {
         await root.$store.dispatch('user/checkScoreReCaptcha', response)
         return login()
@@ -178,7 +177,6 @@ export default {
     }
 
     function recaptchaError (e) {
-      console.log('disparou o recaptchaError')
       handlerError(e)
       root.$store.dispatch('user/reCaptchaError')
     }
@@ -196,12 +194,13 @@ export default {
 
     return {
       auth,
+      hasCaptcha,
       login,
       recaptcha,
-      submit,
-      serverErrors,
       recaptchaError,
-      recaptchaSuccess
+      recaptchaSuccess,
+      serverErrors,
+      submit
     }
   }
 }
