@@ -22,35 +22,35 @@
       </div>
       <FormControlValidate
         v-slot="{ errors }"
-        rules="required"
-        name="username"
+        rules="required|email"
+        name="email"
         class="mt-8"
       >
         <FormLabel
-          for="username"
+          for="email"
           class="pb-0"
         >
-          Username
+          Email
         </FormLabel>
         <FormHelperText
-          id="username-help-text"
+          id="email-help-text"
           class="mb-1"
         >
-          Enter your PECE Drupal Distro username.
+          Enter your PECE Drupal Distro Email.
         </FormHelperText>
         <!-- eslint-disable vue-a11y/no-autofocus -->
         <FormInput
-          id="username"
+          id="email"
           v-model="auth.username"
           type="text"
-          name="username"
-          data-nw="username"
+          name="email"
+          data-nw="email"
           autofocus
-          aria-describedby="username-help-text"
+          aria-describedby="email-help-text"
         />
         <FormErrorMessage :errors="errors" />
         <p class="text-xs mt-2">
-          If you don't have an username,
+          If you don't have an user,
           <nuxt-link
             :to="{ name: `register___${$i18n.locale}` }"
             class="link-accent-inline"
@@ -75,7 +75,7 @@
           id="password-help-text"
           class="m-0 text-xs mb-1"
         >
-          Enter the password that accompanies your username.
+          Enter the password that accompanies your email.
         </FormHelperText>
         <FormInput
           id="password"

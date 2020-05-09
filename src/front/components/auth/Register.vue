@@ -30,31 +30,6 @@
       <section class="mt-8">
         <FormControlValidate
           v-slot="{ errors }"
-          rules="required|username"
-          name="username"
-          class="mt-8"
-        >
-          <FormLabel
-            for="username"
-            class="pb-0"
-          >
-            Username
-          </FormLabel>
-          <FormInput
-            id="username"
-            v-model="username"
-            type="text"
-            name="username"
-            data-nw="username"
-            aria-describedby="username-help-text"
-          />
-          <FormErrorMessage :errors="errors" />
-          <p id="username-help-text" class="text-xs mt-2">
-            Spaces are allowed; punctuation is not allowed except for periods, hyphens, apostrophes, and underscores.
-          </p>
-        </FormControlValidate>
-        <FormControlValidate
-          v-slot="{ errors }"
           rules="required|email"
           name="email"
           class="mt-8"
@@ -176,7 +151,6 @@ export default {
     const saveLoading = ref(false)
 
     const state = reactive({
-      username: null,
       mail: null,
       zotero: null,
       password: null,
@@ -193,7 +167,7 @@ export default {
             mutation: CREATE_USER,
             variables: {
               mail: state.mail,
-              username: state.username,
+              username: state.mail,
               pass: state.password,
               zotero: state.zotero,
               status: true
@@ -205,7 +179,7 @@ export default {
           }
 
           await root.$store.dispatch('user/login', {
-            username: state.username,
+            username: state.mail,
             password: state.password
           })
           const successMessage = 'Registration successfully Complete!'

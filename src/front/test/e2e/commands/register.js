@@ -11,11 +11,6 @@ module.exports.command = function (dataRegister) {
     .expect.element('[data-nw="btn-submit"]').to.have.attribute('disabled')
 
   client
-    .assert.visible('[data-nw="username"]')
-    .setValue('[data-nw="username"]', dataRegister.username)
-    .assert.valueContains('[data-nw="username"]', dataRegister.username)
-
-  client
     .assert.visible('[data-nw="email"]')
     .setValue('[data-nw="email"]', dataRegister.email)
     .assert.valueContains('[data-nw="email"]', dataRegister.email)
