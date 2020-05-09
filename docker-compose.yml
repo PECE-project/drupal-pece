@@ -258,7 +258,7 @@ services:
       - "traefik.http.routers.${PROJECT_NAME}_front_node.rule=Host(`${PROJECT_BASE_URL}`)"
     volumes:
       - $FRONT_DIR:/home/node/app
-    command: bash -c "npm run start"
+    command: bash -c "npm install && npm run build && npm run start"
 
   n8n:
     build:
