@@ -41,3 +41,22 @@ How do I set the Featured Essay?
 While logged-in as an administrator, navigate to the home page.
 Scroll down to the "Featured Essay" block, and click "Edit Featured Essay."
 Select a Featured Essay, in the Featured Essay field, and then click "Save."
+
+How do I translate PECE admin interface and specific sentences or words into a different language?
+--------------------------------------
+##### How do I download a language pack and setup website default language? 
+While logged-in as an administrator, navigate to [SITE URL]/admin/config/regional/language/add.
+Select the preferred language on ´Language Name´ select box.
+Click ´Add language´ and wait the new Language to be downloaded (it might take a while).
+On Languages page [SITE URL]/admin/config/regional/language/, update website default language by selecting the corresponding radio button on ´Default´ column.
+Click Save Configuration.
+
+##### How do I translate a missing sentence or word of a language pack?
+While logged-in as an administrator, navigate to [SITE URL]/admin/config/regional/translate/translate.
+Enter the word to be translated on ´String contains´ text input and click ´filter´.
+Find the correct sentence to be translated on the result list and click ´edit´.
+Enter the translated word/sentence on the text box under the language name and click ´Save translations´.  
+     
+[Demo video](https://www.loom.com/share/78f37a4b01674e199130be89728a74ec)
+
+ 
