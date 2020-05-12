@@ -1,0 +1,40 @@
+<?php
+/**
+ * @file
+ * Code for the pece_artifacts_tabular feature.
+ */
+
+include_once 'pece_artifacts_tabular.features.inc';
+
+/**
+ * Implements hook_modules_enabled().
+ *
+ * This hook is implemented to assign some default permissions for PECE's Tabular data
+ * artifacts.
+ * This has to be done in this hook to run after both features
+ * and defaultconfig which power the functionality. Hopefully a more general
+ * solution can be found. More information - http://drupal.org/node/1837312.
+ */
+function pece_artifacts_tabular_modules_enabled($modules) {
+
+  // Only run this logic if we are executing as part of an install profile
+  // and only for this particular module.
+  if (drupal_installation_attempted() && in_array('pece_artifacts_tabular', $modules)) {
+
+    $perms = array(
+      'create pece_artifact_tabular content',
+      'delete own pece_artifact_tabular content',
+      'edit own pece_artifact_tabular content',
+    );
+
+    foreach ($perms as $perm) {
+      // Define some permissions for the authentcated user role
+      user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array($perm));
+    }
+  }
+
+  $anon_perms = array(
+    'download any document files',
+  );
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, $anon_perms);
+}
