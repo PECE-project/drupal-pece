@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * Implementation of hook_install().
+ */
+function download_file_install() {
+  // Add variable for the accessible format.
+  variable_set('download_file_accessible_format', '(format !extension / !file_size)');
+  
+  // Display the link to configure the format of the link accessible.
+  drupal_set_message(st('Configure the format of the link accessible on the <a href="@setting">setting page</a>.', array('@setting' => url('admin/config/media/download-file'))));
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function download_file_uninstall() {
+  // Delete variable for the accessible format.
+  variable_del('download_file_accessible_format');
+}
+
+/**
+ * First update for the 7.1 branch.
+ */
+function download_file_update_7100() {
+  // Add variable for the accessible format.
+  variable_set('download_file_accessible_format', '(format !extension / !file_size)');
+  
+  // Clear all cache.
+  cache_clear_all();
+  
+  // Display the link to configure the format of the link accessible.
+  drupal_set_message(t('Configure the format of the link accessible on the <a href="@setting">setting page</a>.', array('@setting' => url('admin/config/media/download-file'))));
+}
