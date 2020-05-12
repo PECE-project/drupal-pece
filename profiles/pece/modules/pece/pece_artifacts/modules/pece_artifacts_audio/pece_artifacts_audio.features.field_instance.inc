@@ -246,6 +246,104 @@ function pece_artifacts_audio_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-pece_artifact_audio-field_pece_created'.
+  $field_instances['node-pece_artifact_audio-field_pece_created'] = array(
+    'bundle' => 'pece_artifact_audio',
+    'deleted' => 0,
+    'description' => 'When was this artifact created?',
+    'display' => array(
+      'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 15,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_pece_created',
+    'label' => 'Created Date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'M j Y - g:i:sa',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-pece_artifact_audio-field_pece_crit_commentary'.
   $field_instances['node-pece_artifact_audio-field_pece_crit_commentary'] = array(
@@ -420,7 +518,7 @@ function pece_artifacts_audio_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -509,7 +607,7 @@ function pece_artifacts_audio_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -593,7 +691,7 @@ function pece_artifacts_audio_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -678,7 +776,7 @@ function pece_artifacts_audio_field_default_field_instances() {
       'module' => 'creative_commons',
       'settings' => array(),
       'type' => 'select',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -758,7 +856,7 @@ function pece_artifacts_audio_field_default_field_instances() {
       'module' => 'location_cck',
       'settings' => array(),
       'type' => 'location',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -972,7 +1070,7 @@ function pece_artifacts_audio_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -1144,7 +1242,7 @@ function pece_artifacts_audio_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -1316,7 +1414,7 @@ function pece_artifacts_audio_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -1400,7 +1498,7 @@ function pece_artifacts_audio_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -1607,6 +1705,7 @@ function pece_artifacts_audio_field_default_field_instances() {
   t('Audio');
   t('Check this to copy the location from the referenced fieldsite, if any.');
   t('Contributors');
+  t('Created Date');
   t('Creator(s)');
   t('Critical Commentary');
   t('Duration');
@@ -1624,6 +1723,7 @@ function pece_artifacts_audio_field_default_field_instances() {
   t('Tags');
   t('URI');
   t('Use fieldsite\'s location');
+  t('When was this artifact created?');
   t('Where did you find this artifact?');
   t('Who created this artifact?');
   t('Who is contributing this artifact to the platform?');
