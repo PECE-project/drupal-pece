@@ -359,7 +359,7 @@ function image_resize_filter_get_images($settings, $text) {
       // Basic flood prevention on remote images.
       $resize_threshold = variable_get('image_resize_filter_threshold', 10);
       if (!flood_is_allowed('image_resize_filter_remote', $resize_threshold, 120)) {
-        drupal_set_message(t('Image resize threshold of @count remote images has been reached. Please use fewer remote images.', array('@count' => $resize_threshold)), 'error', FALSE);
+        watchdog('image_resize_filter', 'Image resize threshold of @count remote images has been reached. Please use fewer remote images.', array('@count' => $resize_threshold), WATCHDOG_ERROR);
         continue;
       }
       flood_register_event('image_resize_filter_remote', 120);
@@ -500,7 +500,7 @@ function image_resize_filter_process_images($images, $text, $settings) {
       // Basic flood prevention of resizing.
       $resize_threshold = variable_get('image_resize_filter_threshold', 10);
       if (!flood_is_allowed('image_resize_filter_resize', $resize_threshold, 120)) {
-        drupal_set_message(t('Image resize threshold of @count per minute reached. Some images have not been resized. Resave the content to resize remaining images.', array('@count' => floor($resize_threshold / 2))), 'error', FALSE);
+        watchdog('image_resize_filter', 'Image resize threshold of @count per minute reached. Some images have not been resized. Resave the content to resize remaining images.', array('@count' => floor($resize_threshold / 2)), WATCHDOG_ERROR);
         continue;
       }
       flood_register_event('image_resize_filter_resize', 120);
