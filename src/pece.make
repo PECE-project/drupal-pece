@@ -370,7 +370,7 @@ projects[smart_trim][subdir] = contrib
 ; Files
 ; =====================
 
-projects[ckeditor][version] = 1.16
+projects[ckeditor][version] = 1.19
 projects[ckeditor][subdir] = contrib
 
 projects[manualcrop][version] = 1.7
