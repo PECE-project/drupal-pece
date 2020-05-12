@@ -793,11 +793,9 @@ function pece_artifacts_tabular_field_default_field_instances() {
     'display' => array(
       'card' => array(
         'label' => 'inline',
-        'module' => 'file_entity',
-        'settings' => array(
-          'text' => 'Download [file:name]',
-        ),
-        'type' => 'file_download_link',
+        'module' => 'download_file',
+        'settings' => array(),
+        'type' => 'direct_download_accessible_icon',
         'weight' => 1,
       ),
       'default' => array(
@@ -815,11 +813,9 @@ function pece_artifacts_tabular_field_default_field_instances() {
       ),
       'free_panel' => array(
         'label' => 'inline',
-        'module' => 'file_entity',
-        'settings' => array(
-          'text' => 'Download [file:name]',
-        ),
-        'type' => 'file_download_link',
+        'module' => 'download_file',
+        'settings' => array(),
+        'type' => 'direct_download_accessible_icon',
         'weight' => 1,
       ),
       'highlighted' => array(
@@ -914,11 +910,9 @@ function pece_artifacts_tabular_field_default_field_instances() {
     'display' => array(
       'card' => array(
         'label' => 'hidden',
-        'module' => 'file_entity',
-        'settings' => array(
-          'text' => 'Download [file:name]',
-        ),
-        'type' => 'file_download_link',
+        'module' => 'download_file',
+        'settings' => array(),
+        'type' => 'direct_download_accessible_icon',
         'weight' => 0,
       ),
       'default' => array(
@@ -936,11 +930,9 @@ function pece_artifacts_tabular_field_default_field_instances() {
       ),
       'free_panel' => array(
         'label' => 'hidden',
-        'module' => 'file_entity',
-        'settings' => array(
-          'text' => 'Download [file:name]',
-        ),
-        'type' => 'file_download_link',
+        'module' => 'download_file',
+        'settings' => array(),
+        'type' => 'direct_download_accessible_icon',
         'weight' => 0,
       ),
       'highlighted' => array(
