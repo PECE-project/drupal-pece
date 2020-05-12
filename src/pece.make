@@ -125,7 +125,7 @@ projects[yaml_parser][subdir] = contrib
 ; =====================
 
 ; Overrides panopoly's views to apply custom patches.
-projects[views][version] = 3.23
+projects[views][version] = 3.24
 projects[views][subdir] = contrib
 ; Exposed Sort By and Sort Order view pane settings not retained.
 projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
