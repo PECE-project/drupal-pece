@@ -383,6 +383,16 @@ projects[mimedetect][subdir] = contrib
 projects[media][version] = 2.23
 projects[media][subdir] = contrib
 
+projects[animgif_support][version] = 1.6
+projects[animgif_support][subdir] = contrib
+
+projects[image_resize_filter][version] = 1.16
+projects[image_resize_filter][subdir] = contrib
+projects[image_resize_filter][patch][] = ./patches/image_resize_filter-dblog_image_resize_threshold_error.patch
+
+projects[download_file][version] = 2.1
+projects[download_file][subdir] = contrib
+
 ; =====================
 ; Fields
 ; =====================
