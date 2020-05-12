@@ -134,7 +134,7 @@ function pece_groups_defaultconfig_field_default_fields() {
       'settings' => array(
         'alt_field' => 0,
         'default_image' => 0,
-        'file_directory' => '',
+        'file_directory' => 'group/thumbnail',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
         'max_resolution' => '',

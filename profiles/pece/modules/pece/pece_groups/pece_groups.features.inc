@@ -35,7 +35,7 @@ function pece_groups_node_info() {
     'pece_group' => array(
       'name' => t('Group'),
       'base' => 'node_content',
-      'description' => '',
+      'description' => t('Groups are workspaces where several individuals can contribute content, share a field diary, write collaboratively, and publish essays.'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',
