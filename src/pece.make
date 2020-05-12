@@ -219,7 +219,7 @@ projects[real_aes][version] = 1.2
 
 ; Honeypot
 projects[honeypot][subdir] = contrib
-projects[honeypot][version] = 1.25
+projects[honeypot][version] = 1.26
 
 ; Role Delegation
 projects[role_delegation][subdir] = contrib
