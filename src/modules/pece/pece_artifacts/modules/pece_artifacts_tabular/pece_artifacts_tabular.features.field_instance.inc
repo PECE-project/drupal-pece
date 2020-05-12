@@ -795,7 +795,7 @@ function pece_artifacts_tabular_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'file_entity',
         'settings' => array(
-         'text' => 'Download [file:name]',
+          'text' => 'Download [file:name]',
         ),
         'type' => 'file_download_link',
         'weight' => 1,
