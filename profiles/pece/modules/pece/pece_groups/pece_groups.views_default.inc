@@ -175,9 +175,11 @@ function pece_groups_views_default_views() {
     'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
+    'pece_artifact_tabular' => 'pece_artifact_tabular',
     'pece_artifact_text' => 'pece_artifact_text',
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
+
   );
 
   /* Display: Content pane */
@@ -219,6 +221,7 @@ function pece_groups_views_default_views() {
     'pece_artifact_bundle' => 'pece_artifact_bundle',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
+    'pece_artifact_tabular' => 'pece_artifact_tabular',
     'pece_artifact_text' => 'pece_artifact_text',
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
@@ -312,6 +315,7 @@ function pece_groups_views_default_views() {
     'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
+    'pece_artifact_tabular' => 'pece_artifact_tabular',
     'pece_artifact_text' => 'pece_artifact_text',
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
