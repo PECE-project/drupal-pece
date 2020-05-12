@@ -58,7 +58,7 @@ function pece_artifacts_tabular_panelizer_defaults() {
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'above',
-    'formatter' => 'file_download_link',
+    'formatter' => 'direct_download_accessible_icon',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
@@ -96,7 +96,7 @@ function pece_artifacts_tabular_panelizer_defaults() {
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'title',
-    'formatter' => 'file_download_link',
+    'formatter' => 'direct_download_accessible_icon',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
