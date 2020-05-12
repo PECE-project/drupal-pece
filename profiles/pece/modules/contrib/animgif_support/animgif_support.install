@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Install file for animgif_support.
+ *
+ * Developed by Dénes Szabó.
+ * denes.szabo@internode.hu
+ * http://internode.hu
+ * .
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function animgif_support_uninstall() {
+  variable_del('animgif_support_gif_handler');
+}

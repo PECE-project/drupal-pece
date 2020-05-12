@@ -1,0 +1,393 @@
+<?php
+
+/**
+ * @file
+ * Provides animated gif resizing support for the image styles.
+ *
+ * Image crop will not work for animated GIFs. So se use image_resize for
+ * image_crop and image_scale instead of image_scale_and_crop if the processed
+ * image is GIF. Because of this effect replacement, the image dimensions
+ * sometimes generated wrong in HTML. This module's theme_image implementation
+ * solves this problem by leaving out width, height attributes for GIFs.
+ *
+ *  Developed by Dénes Szabó.
+ *  denes.szabo@internode.hu
+ *  http://internode.hu
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function animgif_support_menu() {
+  $items = array();
+
+  $items['admin/config/media/animgif_support'] = [
+    'title' => 'Animated GIF support settings',
+    'description' => 'Settings page for animateg GIF support',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['animgif_support_settings_form'],
+    'access callback' => 'user_access',
+    'access arguments' => ['administer site configuration'],
+    'weight' => 20,
+    'file' => 'animgif_support.admin.inc',
+  ];
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ *
+ * If you have own theme for image, then set the animgif_support_use_image_theme
+ * variable to false. But check our image theme for image dimensions handling of
+ * GIF images.
+ */
+function animgif_support_theme_registry_alter(&$theme_registry) {
+  if (!empty($theme_registry['image']['function']) && variable_get('animgif_support_use_image_theme', TRUE)) {
+    $theme_registry['image']['function'] = 'animgif_support_image';
+  }
+}
+
+/**
+ * Returns HTML for an image.
+ *
+ * @group themeable
+ */
+function animgif_support_image($variables) {
+  $attributes = $variables['attributes'];
+  $attributes['src'] = file_create_url($variables['path']);
+  $parts = explode('?', $variables['path']);
+  $mime = file_get_mimetype($parts[0]);
+
+  if ('image/gif' == $mime) {
+    // Remove dimensions if the image is gif - the effect's dimensions callback
+    // gives back false data for animated GIFs (GIFs either).
+    unset($variables['width']);
+    unset($variables['height']);
+  }
+
+  foreach (array('width', 'height', 'alt', 'title') as $key) {
+    if (isset($variables[$key])) {
+      $attributes[$key] = $variables[$key];
+    }
+  }
+
+  return '<img' . drupal_attributes($attributes) . ' />';
+}
+
+/**
+ * Provides original effect - replace effect array.
+ */
+function animgif_support_effect_replaces() {
+  $replace = array(
+    'image_crop' => 'image_resize',
+    'image_resize' => 'image_resize',
+    'image_scale' => 'image_scale',
+    'image_scale_and_crop' => 'image_scale',
+  );
+
+  // Allow other modules to change the style associations.
+  drupal_alter('animgif_support_effect_replaces', $replace);
+
+  return $replace;
+}
+
+/**
+ * Implements hook_image_effect_info_alter().
+ */
+function animgif_support_image_effect_info_alter(&$effects) {
+  $replaces = animgif_support_effect_replaces();
+  foreach ($effects as $key => $data) {
+    if (!empty($replaces[$key])) {
+      $effects[$key]['original effect callback'] = $effects[$key]['effect callback'];
+      $effects[$key]['gif effect'] = $replaces[$key];
+      $effects[$key]['effect callback'] = 'animgif_support_' . $key . '_effect';
+    }
+  }
+  return TRUE;
+}
+
+/**
+ * Effect callback common function for overridden effects.
+ */
+function animgif_support_do_effect(&$image, $data, $original_effect) {
+  $definitions = image_effect_definitions();
+  if (!empty($definitions[$original_effect]['original effect callback'])) {
+    if (animgif_support_is_gif($image->info)) {
+      // Run gif effect instead of the original.
+      // todo: check if it is not an animgif. Dunno how...
+      $gif_effect = $definitions[$original_effect]['gif effect'];
+      $func = 'animgif_support_' . $gif_effect . '_func';
+      $func($image, $data);
+    }
+    else {
+      // Call the original effect callback.
+      $func = $definitions[$original_effect]['original effect callback'];
+      $func($image, $data);
+    }
+  }
+}
+
+/**
+ * Provides image_crop effect callback for animated GIFs.
+ */
+function animgif_support_image_crop_effect(&$image, $data) {
+  animgif_support_do_effect($image, $data, 'image_crop');
+}
+
+/**
+ * Provides image_resize effect callback for animated GIFs.
+ */
+function animgif_support_image_resize_effect(&$image, $data) {
+  animgif_support_do_effect($image, $data, 'image_resize');
+}
+
+/**
+ * Provides image_scale effect callback for animated GIFs.
+ */
+function animgif_support_image_scale_effect(&$image, $data) {
+  animgif_support_do_effect($image, $data, 'image_scale');
+}
+
+/**
+ * Provides image_scale_and_crop effect callback for animated GIFs.
+ */
+function animgif_support_image_scale_and_crop_effect(&$image, $data) {
+  animgif_support_do_effect($image, $data, 'image_scale_and_crop');
+}
+
+/**
+ * Image re-sizer function for animated GIFs.
+ */
+function animgif_support_image_resize_func(&$image, $data) {
+  if (!animgif_support_image_resizer($image, $data['width'], $data['height'])) {
+    watchdog('image', 'Gif Image resize failed using the gifresizer lib on %path (%mimetype, %dimensions)',
+      array(
+        '%path' => $image->source,
+        '%mimetype' => $image->info['mime_type'],
+        '%dimensions' => $image->info['width'] . 'x' . $image->info['height'],
+      ), WATCHDOG_ERROR);
+    return FALSE;
+  }
+  return TRUE;
+}
+
+/**
+ * Image size scale function for animated GIFs.
+ */
+function animgif_support_image_scale_func(&$image, $data) {
+  // Set sane default values.
+  $data += array(
+    'width' => NULL,
+    'height' => NULL,
+    'upscale' => FALSE,
+  );
+  $dimensions = $image->info;
+
+  // If both dimensions are null we set the original width.
+  if (empty($data['width']) && empty($data['height'])) {
+    $data['width'] = $dimensions['width'];
+  }
+
+  // Scale the dimensions - if they don't change then we use our re-sizer, we
+  // want to GD do not touch this image.
+  image_dimensions_scale($dimensions, $data['width'], $data['height'], $data['upscale']);
+
+  if (!animgif_support_image_resizer($image, $dimensions['width'], $dimensions['height'])) {
+    watchdog('image', 'Gif Image resize failed using the gifresizer lib on %path (%mimetype, %dimensions)',
+      array(
+        '%path' => $image->source,
+        '%mimetype' => $image->info['mime_type'],
+        '%dimensions' => $image->info['width'] . 'x' . $image->info['height'],
+      ), WATCHDOG_ERROR);
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+/**
+ * Resize the GIF using available libraries.
+ *
+ * @param string $source
+ *   Original GIF image path.
+ * @param string $destination
+ *   Resized GIF image path.
+ * @param int $width
+ *   Width dimension to resize to.
+ * @param int $height
+ *   Height dimension to resize to.
+ *
+ * @return bool
+ *   The success flag.
+ */
+function _animgif_support_resize_image($source, $destination, $width, $height) {
+  $ret = TRUE;
+  $active = variable_get('animgif_support_gif_handler', 'gifresizer');
+
+  // Use ImageMagick class, if available.
+  if ('imagick' == $active && extension_loaded('imagick')) {
+    $imagick = new Imagick($source);
+    $image = $imagick->coalesceImages();
+
+    foreach ($image as $frame) {
+      $frame->scaleimage($width, $height);
+    }
+
+    $image = $image->deconstructImages();
+    $ret = $image->writeImages($destination, TRUE);
+  }
+  elseif ('gifresizer' == $active && libraries_load('gifresizer')) {
+    // Use GIFResizer class, if available.
+    $gr = new gifresizer();
+
+    // Used for extracting GIF Animation Frames.
+    $gr->temp_dir = file_directory_temp();
+
+    // Resizing the animation into a new file.
+    $gr->resize($source, $destination, $width, $height);
+    $ret = TRUE;
+  }
+
+  return $ret;
+}
+
+/**
+ * Provides re-sizer for animated GIFs.
+ */
+function animgif_support_image_resizer(stdClass $image, $width, $height) {
+  $file_path = NULL;
+  $is_remote = FALSE;
+
+  $width = (int) round($width);
+  $height = (int) round($height);
+
+  $tmp = file_directory_temp();
+  $img_name = 'resized--' . time() . '--' . rand() . '.gif';
+  $resized_image = $tmp . '/' . $img_name;
+
+  $scheme = file_uri_scheme($image->source);
+  $local_stream_wrappers = file_get_stream_wrappers(STREAM_WRAPPERS_LOCAL);
+
+  // If we can determine the uri scheme and it's not local.
+  if (!empty($scheme) && !isset($local_stream_wrappers[$scheme])) {
+    // Get an external URL for it.
+    $file_path = file_create_url($image->source);
+    $is_remote = TRUE;
+  }
+
+  // If the file is local or we couldn't generate an external URL,
+  // (try to) get a local real path.
+  if (empty($file_path)) {
+    $file_path = drupal_realpath($image->source);
+    if (empty($file_path)) {
+      watchdog('Animated GIF support', 'Could not get local file path or external URL for file URI %uri.', array('%uri' => $image->source), WATCHDOG_ERROR);
+      return FALSE;
+    }
+
+    $is_remote = FALSE;
+  }
+
+  // If the file is remote and we're saving it locally and
+  // using the contents of the file we've already downloaded.
+  if ($is_remote) {
+    $file_contents = file_get_contents($file_path);
+    $local_path = drupal_tempnam('temporary://', 'animgif_support') . '.gif';
+    if (($temp_file = file_save_data($file_contents, $local_path, FILE_EXISTS_REPLACE)) === FALSE) {
+      watchdog('Animated GIF support', 'Could not write data for resource %uri to local temporary file %temp. Aborting indexing of resource.',
+        array('%uri' => $file_path, '%temp' => $local_path), WATCHDOG_WARNING);
+      return FALSE;
+    }
+    // As file_save_data() is hardcoded to save with FILE_STATUS_PERMANENT,
+    // we need to Re-save with temporary status so file is garbage collected.
+    $temp_file->status = 0;
+    file_save($temp_file);
+
+    $file_path = drupal_realpath($local_path);
+  }
+
+  if (_animgif_support_resize_image($file_path, $resized_image, $width, $height)) {
+    // Get new file as resource.
+    $image->resource = imagecreatefromgif($resized_image);
+    $image->info['width'] = $width;
+    $image->info['height'] = $height;
+    $image->info['resized_animgif_uri'] = 'temporary://' . $img_name;
+    $image->info['resized_animgif'] = $tmp . '/' . $resized_image;
+
+    // Hack into the save method - we need to use our method because GD ruins
+    // the gif animation.
+    $image->toolkit = 'animgif';
+
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Helper to write an image resource to a destination file.
+ *
+ * Actually it just moves the generated animgif to the proper place, beacuse the
+ * GD uses imagegd() which is not proper there, it losts the animation.
+ */
+function image_animgif_save(stdClass $image, $destination) {
+  $scheme = file_uri_scheme($destination);
+  $return = FALSE;
+
+  // Work around lack of stream wrapper support in imagejpeg() and imagepng().
+  $local_wrappers = file_get_stream_wrappers(STREAM_WRAPPERS_LOCAL);
+  if ($scheme && file_stream_wrapper_valid_scheme($scheme)) {
+    if (isset($local_wrappers[$scheme])) {
+      // Convert stream wrapper URI to normal path.
+      $destination = drupal_realpath($destination);
+    }
+  }
+
+  if (!empty($image->info['resized_animgif_uri'])) {
+    $image->uri = $image->info['resized_animgif_uri'];
+    $return = file_unmanaged_move($image->info['resized_animgif_uri'], $destination, FILE_EXISTS_REPLACE);
+  }
+
+  return $return;
+}
+
+/**
+ * Implements hook_libraries_info().
+ */
+function animgif_support_libraries_info() {
+  // A very simple library. No changing APIs (hence, no versions), no variants.
+  // Expected to be extracted into 'sites/all/libraries/simple'.
+  $libraries['gifresizer'] = array(
+    'name' => 'Gifresizer library',
+    'vendor url' => 'http://www.phpclasses.org/package/7353-PHP-Resize-animations-in-files-of-the-GIF-format.html',
+    'download url' => 'http://www.phpclasses.org/package/7353-PHP-Resize-animations-in-files-of-the-GIF-format.html#download',
+    'version callback' => 'animgif_support_gifresizer_version_callback',
+    'files' => array(
+      'php' => array('gifresizer.php'),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Provides version callback for gifresizer lib.
+ */
+function animgif_support_gifresizer_version_callback() {
+  return TRUE;
+}
+
+/**
+ * Helper function to check the image type is gif or not.
+ */
+function animgif_support_is_gif($info) {
+  if ($info['mime_type'] == 'image/gif') {
+    return TRUE;
+  }
+
+  if ($info['extension'] == 'gif') {
+    return TRUE;
+  }
+
+  return FALSE;
+}
