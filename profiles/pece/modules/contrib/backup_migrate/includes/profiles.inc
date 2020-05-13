@@ -31,7 +31,12 @@ function backup_migrate_backup_migrate_profile_subtypes() {
  */
 function backup_migrate_get_profiles() {
   backup_migrate_include('filters');
-  $profiles = backup_migrate_crud_get_items('profile');
+  $profiles = &drupal_static('backup_migrate_get_profiles', NULL);
+
+  // Get the list of profiles and cache them locally.
+  if ($profiles === NULL) {
+    $profiles = backup_migrate_crud_get_items('profile');
+  }
   return $profiles;
 }
 

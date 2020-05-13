@@ -255,7 +255,7 @@ class backup_migrate_files_destination_archivesource extends backup_migrate_dest
    * Restores to this source.
    */
   public function _restore_from_file_cli($file, &$settings) {
-    // @TODO: implement the cli version of the restore.
+    // @todo implement the cli version of the restore.
     return FALSE;
   }
 

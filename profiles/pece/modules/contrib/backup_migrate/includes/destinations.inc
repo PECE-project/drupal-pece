@@ -52,14 +52,6 @@ function backup_migrate_backup_migrate_destination_subtypes() {
       'file' => drupal_get_path('module', 'backup_migrate') . '/includes/destinations.browser.inc',
       'class' => 'backup_migrate_destination_browser_upload',
     ),
-    'nodesquirrel' => array(
-      'description' => t('Save the backup files to the <a href="@link" target="_blank">NodeSquirrel</a> backup service.', array('@link' => url('http://nodesquirrel.com'))),
-      'file' => drupal_get_path('module', 'backup_migrate') . '/includes/destinations.nodesquirrel.inc',
-      'class' => 'backup_migrate_destination_nodesquirrel',
-      'type_name' => t('NodeSquirrel.com'),
-      'can_create' => TRUE,
-      'remote' => TRUE,
-    ),
     'ftp' => array(
       'description' => t('Save the backup files to any a directory on an FTP server.'),
       'file' => drupal_get_path('module', 'backup_migrate') . '/includes/destinations.ftp.inc',
@@ -733,11 +725,14 @@ function _backup_migrate_destination_pulldown_set_value(&$values, $parents, $val
 function _backup_migrate_get_destination_form_item_options($op) {
   $remote = $local = array();
   foreach (backup_migrate_get_destinations($op) as $key => $destination) {
-    if ($destination->op('remote backup')) {
-      $remote[$key] = $destination->get_name();
-    }
-    else {
-      $local[$key] = $destination->get_name();
+    // Only work with destinations that are currently configured and will work.
+    if ($destination->confirm_destination()) {
+      if ($destination->op('remote backup')) {
+        $remote[$key] = $destination->get_name();
+      }
+      else {
+        $local[$key] = $destination->get_name();
+      }
     }
   }
   $out = array();
@@ -843,6 +838,8 @@ class backup_migrate_destination extends backup_migrate_location {
       if ($this->cache_files) {
         $this->file_cache_set($files);
       }
+      // Clean up any previous abandoned tmp files before going further.
+      backup_migrate_include('files');
       _backup_migrate_temp_files_delete();
     }
 

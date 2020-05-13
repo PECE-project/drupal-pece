@@ -250,11 +250,12 @@ class backup_migrate_destination_files extends backup_migrate_destination {
         }
       }
 
-      // Attempt to read the test file via http. This may fail for other reasons,
-      // so it's not a bullet-proof check.
+      // Attempt to read the test file via http. This may fail for other
+      // reasons, so it's not a bullet-proof check.
       if ($this->test_file_readable_remotely($directory . '/test.txt', $test_contents)) {
         $message = t("Security notice: Backup and Migrate will not save backup files to the server because the destination directory is publicly accessible. If you want to save files to the server, please secure the '%directory' directory", array('%directory' => $directory));
         drupal_set_message($message, "error");
+        unlink($directory . '/test.txt');
         return FALSE;
       }
       // Directory tested OK, so we mark it as tested.
