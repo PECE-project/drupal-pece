@@ -17,8 +17,9 @@
         v-for="menu in menuHeader"
         :key="menu.label"
         data-pece="menuHeader-items"
+        class="py-2"
       >
-        <nuxt-link :to="{ name: `${menu.routeName}___${$i18n.locale}` }" class="p-6 py-5 md:px-4 lg:px-6 cursor-pointer hover:text-accent">
+        <nuxt-link :to="{ name: `${menu.routeName}___${$i18n.locale}` }" class="px-6 md:px-4 lg:px-6 cursor-pointer hover:text-accent">
           {{ $t(menu.label) }}
         </nuxt-link>
       </li>
