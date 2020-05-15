@@ -18,7 +18,7 @@
         <tab :label="$t('people')">
           <ListUsers :users="getUsers" :horizontal="true" />
         </tab>
-        <tab label="design logics">
+        <tab label="substantive logics">
           <list-cards
             :data="getSubstantiveLogics"
             :vertical="true"
