@@ -169,25 +169,18 @@ export default {
               mail: state.mail,
               username: state.mail,
               pass: state.password,
-              zotero: state.zotero,
-              status: true
+              zotero: state.zotero
             }
           })
 
           if (res.extensions && res.extensions.length) {
             throw new Error(res.extensions[0].message || `Error saving the user ${state.username}`)
           }
-
-          await root.$store.dispatch('user/login', {
-            username: state.mail,
-            password: state.password
-          })
           const successMessage = 'Registration successfully Complete!'
-          root.$swal(successMessage, '', 'success')
-          root.$announcer.set(successMessage)
-          setTimeout(() => {
+          root.$swal(successMessage, 'You need to wait for admin approval.', 'success').then(() => {
             window.location.href = root.$route.query.redirect || '/'
-          }, 2000)
+          })
+          root.$announcer.set(successMessage)
         } catch (e) {
           saveLoading.value = false
           serverErrors.value.push({ message: e.message })

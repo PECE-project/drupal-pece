@@ -12,11 +12,12 @@ module.exports = {
       .waitForElementVisible('.swal-modal')
       .assert.visible('.swal-modal')
       .assert.containsText('.swal-title', 'Registration successfully Complete!')
+      .assert.containsText('.swal-text', 'You need to wait for admin approval.')
 
     client
-      .pause(2000)
-      .waitForElementVisible('[data-nw="header-admin"]')
-      .assert.visible('[data-nw="header-admin"]')
+      .click('.swal-button--confirm')
+      .waitForElementVisible('.shadow-pece')
+      .assert.urlEquals(`${process.env.NUXT_APP_URL}/`)
 
     client
       .end()

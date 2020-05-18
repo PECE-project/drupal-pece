@@ -29,8 +29,7 @@ export const CREATE_USER = gql`
     $mail: String!,
     $username: String!,
     $pass: String!,
-    $zotero: String,
-    $status: Boolean
+    $zotero: String
   ) {
     createPeople (
       data: {
@@ -38,7 +37,6 @@ export const CREATE_USER = gql`
         username: $username,
         pass: $pass,
         zotero: $zotero,
-        status: $status,
       }
     ) {
       id
