@@ -1,3 +1,9 @@
+<template>
+  <span>
+    <slot :time="result" />
+  </span>
+</template>
+
 <script>
 import * as timeago from 'timeago.js'
 import { pt_BR as ptBR } from 'timeago.js/lib/lang'
@@ -28,11 +34,6 @@ export default {
   },
   created () {
     this.result = timeago.format(this.date, this.langs[this.locale])
-  },
-  render () {
-    return this.$scopedSlots.default({
-      time: this.result
-    })
   }
 }
 </script>
