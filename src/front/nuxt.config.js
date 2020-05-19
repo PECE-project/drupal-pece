@@ -57,6 +57,19 @@ module.exports = {
   tailwindcss: {
     cssPath: '~/assets/styles/tailwind.css'
   },
+  purgeCSS: {
+    whitelist: [
+      'body',
+      'html',
+      'grecaptcha-badge'
+    ],
+    whitelistPatterns: [
+      /grecaptcha-/
+    ],
+    whitelistPatternsChildren: [
+      /grecaptcha$/
+    ]
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
