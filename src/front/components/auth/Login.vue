@@ -186,10 +186,11 @@ export default {
     }
 
     function handlerError (e) {
-      console.log(e)
-      serverErrors.value.push({
-        message: e.message
-      })
+      if (e) {
+        serverErrors.value.push({
+          message: e.message
+        })
+      }
     }
 
     return {
