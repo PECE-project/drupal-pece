@@ -167,8 +167,14 @@ export default {
     p {
       @apply mb-3;
     }
+    h2, h3 {
+      @apply font-bold mb-3 mt-8;
+    }
     h2 {
-      @apply font-bold text-lg mb-3 mt-8;
+      @apply text-lg;
+    }
+    h3 {
+      @apply text-base;
     }
     ul {
       @apply list-disc ml-5;

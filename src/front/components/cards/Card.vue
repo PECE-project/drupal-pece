@@ -28,7 +28,7 @@
               {{ data.author.name }}
             </span>
           </nuxt-link>
-          <span>•</span>
+          <br />
           <span class="card__post-date">
             <TimeAgo
               :date="data.created"
@@ -69,10 +69,6 @@ export default {
       type: Object,
       required: true
     }
-  },
-
-  created () {
-    console.log(this.data)
   }
 }
 </script>
