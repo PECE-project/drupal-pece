@@ -1,4 +1,4 @@
-.PHONY: run stop clean distro prod
+.PHONY: up run stop clean distro prod run-prod stop-prod
 
 
 run:
@@ -10,6 +10,9 @@ in:
 
 drush:
 	docker exec $(shell docker-compose ps | grep _dev_ | cut -d" " -f 1) bash -c 'cd build && drush $(argument)'
+
+up:
+	docker-compose -f docker-compose.yml up -d
 
 stop:
 	docker-compose stop
