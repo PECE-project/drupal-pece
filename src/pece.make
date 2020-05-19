@@ -591,6 +591,7 @@ projects[biblio][version] = 1.3
 ; Bibliography Zotero
 projects[biblio_zotero][subdir] = contrib
 projects[biblio_zotero][version] = 1.0-alpha3
+projects[biblio_zotero][patch][2930668] = https://www.drupal.org/files/issues/biblio_zotero-php7_mapping_sources-2930668-2.patch
 
 ; =====================
 ; Imports
