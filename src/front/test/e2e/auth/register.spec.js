@@ -11,8 +11,8 @@ module.exports = {
     client
       .waitForElementVisible('.swal-modal')
       .assert.visible('.swal-modal')
-      .assert.containsText('.swal-title', 'Registration successfully Complete!')
-      .assert.containsText('.swal-text', 'You need to wait for admin approval.')
+      .assert.containsText('.swal-title', 'Register completed!')
+      .assert.containsText('.swal-text', 'You have to wait for account approval.')
 
     client
       .click('.swal-button--confirm')

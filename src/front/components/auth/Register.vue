@@ -176,8 +176,8 @@ export default {
           if (res.extensions && res.extensions.length) {
             throw new Error(res.extensions[0].message || `Error saving the user ${state.username}`)
           }
-          const successMessage = 'Registration successfully Complete!'
-          root.$swal(successMessage, 'You need to wait for admin approval.', 'success').then(() => {
+          const successMessage = 'Registration complete!'
+          root.$swal(successMessage, 'You have to wait for account approval.', 'success').then(() => {
             window.location.href = root.$route.query.redirect || '/'
           })
           root.$announcer.set(successMessage)
