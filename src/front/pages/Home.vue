@@ -29,7 +29,7 @@
           </h1>
         </div>
         <div class="w-full lg:w-3/5 text-sm">
-          <p v-if="home.body" v-html="home.body" class="my-6 lg:mt-16" />
+          <div v-html="home.body" class="my-6 lg:mt-16" />
           <nuxt-link
             :to="{ name: `about___${$i18n.locale}` }"
             class="link-accent-transparent uppercase text-xs font-bold"
