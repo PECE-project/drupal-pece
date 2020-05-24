@@ -404,7 +404,9 @@ projects[download_file][subdir] = contrib
 projects[link][version] = 1.7
 projects[link][subdir] = contrib
 ; Fix URL validation rejects existing valid content after upgrade to 7.x-1.4.
-projects[link][patch][2666912] = https://www.drupal.org/files/issues/2019-11-18/link-fix-internal-validation-2666912-55.patch
+projects[link][patch][2666912] = https://www.drupal.org/files/issues/2019-11-18/link-fix-internal-validation-2666912-54.patch
+; Menu blocks disappear when editing/saving in the Panels IPE
+projects[link][patch][3120382] = https://www.drupal.org/files/issues/2020-03-17/link-panopoly-magic-notice-3120382-2.patch
 
 ; Overrides Panopoly's linkit.
 projects[linkit][version] = 3.5
