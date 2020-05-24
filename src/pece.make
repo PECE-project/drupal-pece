@@ -130,11 +130,15 @@ projects[views][subdir] = contrib
 ; Exposed Sort By and Sort Order view pane settings not retained.
 projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
 ; PHP 7.2: count() on non-Countable in views_many_to_one_helper.
-projects[views][patch][2977851] = https://www.drupal.org/files/issues/2019-03-13/2977851-views-php72-count-8.patch
-; Warning: A non-numeric value encountered in views_plugin_pager_full->query()
+projects[views][patch][2977851] = https://www.drupal.org/files/issues/2019-09-23/2977851-views-php72-count-14_0.patch
+; Warning: A non-numeric value encountered in views_plugin_pager_full->query().
 projects[views[patch][2885660] = https://www.drupal.org/files/issues/2018-06-28/2885660-13.patch
-; Exposed Sort By and Sort Order view pane settings not retained
+; Exposed Sort By and Sort Order view pane settings not retained.
 projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
+; Having the same sort twice doesn't work correctly.
+projects[views][patch][2284423] = https://www.drupal.org/files/issues/2019-04-29/views-same_sort_twice-2284423-3.patch
+; Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter.
+projects[views][patch][3076826] = https://www.drupal.org/files/issues/2019-08-23/views-php7-3076826-2.patch
 
 projects[views_infinite_scroll][version] = 2.1
 projects[views_infinite_scroll][subdir] = contrib
