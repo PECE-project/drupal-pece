@@ -367,7 +367,7 @@ projects[fences][subdir] = contrib
 projects[better_formats][version] = 1.0-beta1
 projects[better_formats][subdir] = contrib
 
-projects[smart_trim][version] = 1.5
+projects[smart_trim][version] = 1.6
 projects[smart_trim][subdir] = contrib
 
 ; =====================
