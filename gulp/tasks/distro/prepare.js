@@ -33,6 +33,20 @@ gulp.task('distro:sync', function (done) {
   syncLocalFiles(done);
 });
 
+gulp.task('distro:build', function (done) {
+  // Build distro to production environment.
+  rebuildToProd();
+  done();
+});
+
+
+gulp.task('distro:build:sync', function (done) {
+  // Build to production and Sync the result with PECE Distro repo.
+  rebuildToProd();
+  syncLocalFiles();
+  done();
+});
+
 var rebuildToProd = function () {
   // Backup kw previous config and set kraftwagen env config to production
   // in order to prevent symlinks in the profile folder.
