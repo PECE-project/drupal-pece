@@ -24,13 +24,13 @@ libraries[jquery.imagesloaded][download][type] = file
 libraries[jquery.imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz
 libraries[jquery.imagesloaded][download][subtree] = imagesloaded-2.1.2
 
-
 ; Misc Libraries
 
 ; Drupal's Masonry module requirement.
 libraries[imagesloaded][download][type] = file
 libraries[imagesloaded][download][url] = https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz
 libraries[imagesloaded][download][subtree] = imagesloaded-2.1.2
+libraries[imagesloaded][directory_name] = imagesloaded
 
 libraries[imgareaselect][download][type] = file
 libraries[imgareaselect][download][url] = https://github.com/odyniec/imgareaselect/archive/v0.9.11-rc.1.tar.gz
