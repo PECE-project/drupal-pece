@@ -113,10 +113,11 @@ function views_ui_check_advanced_help() {
  * Returns the results of the live preview.
  */
 function views_ui_preview($view, $display_id, $args = array()) {
+  $tmp_args = array_slice(func_get_args(), 2);
   // When this function is invoked as a page callback, each Views argument is
   // passed separately.
   if (!is_array($args)) {
-    $args = array_slice(func_get_args(), 2);
+    $args = $tmp_args;
   }
 
   // Save $_GET['q'] so it can be restored before returning from this function.

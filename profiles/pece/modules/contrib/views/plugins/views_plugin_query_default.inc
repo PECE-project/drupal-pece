@@ -1375,7 +1375,13 @@ class views_plugin_query_default extends views_plugin_query {
     if (!$this->get_count_optimized) {
       // We only add the orderby if we're not counting.
       if ($this->orderby) {
+        $fields_ordered = array();
         foreach ($this->orderby as $order) {
+          if (!empty($fields_ordered[$order['field']])) {
+            // Do not order by the same field twice.
+            continue;
+          }
+          $fields_ordered[$order['field']] = $order['field'];
           if ($order['field'] == 'rand_') {
             $query->orderRandom();
           }
