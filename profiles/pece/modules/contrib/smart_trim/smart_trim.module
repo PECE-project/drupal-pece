@@ -4,6 +4,10 @@
  * Module functionality.
  */
 
+define('SMART_TRIM_NEVER', 0);
+define('SMART_TRIM_ALWAYS', 1);
+define('SMART_TRIM_IFNEEDED', 2);
+
 /**
  * Implements hook_field_formatter_info().
  */
@@ -17,7 +21,7 @@ function smart_trim_field_formatter_info() {
         'trim_type' => 'chars',
         'trim_suffix' => '...',
         'trim_link' => FALSE,
-        'more_link' => FALSE,
+        'more_link' => SMART_TRIM_NEVER,
         'more_text' => 'Read more',
         'summary_handler' => 'full',
         'trim_options' => array(),
@@ -29,7 +33,9 @@ function smart_trim_field_formatter_info() {
 
 /**
  * Implements hook_field_formatter_view().
- * Need a better way to handle doing count by words instead of characeters (see views_trim_text() ?
+ *
+ * Need a better way to handle doing count by words instead of characters (see
+ * views_trim_text().
  */
 function smart_trim_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $element = array();
@@ -38,51 +44,55 @@ function smart_trim_field_formatter_view($entity_type, $entity, $field, $instanc
   switch ($display['type']) {
     case 'smart_trim_format':
       foreach ($items as $delta => $item) {
-        // Check if the formatter involves a link.
-        if ($display['settings']['trim_link'] == 1) {
-          $uri = entity_uri($entity_type, $entity);
-        }
         // The default behaviour is to use the main body field, but the summary
         // option allows users to use the summary field IFF it is not empty.
-        $output = '';
-        if (!empty($settings['summary_handler']) && $settings['summary_handler'] != 'ignore' && !empty($item['summary'])) {
-          $output = _text_sanitize($instance, $langcode, $item, 'summary');
+        $break_pos = strpos($item['value'], '<!--break-->');
+        $has_summary_or_break = !empty($item['summary']) || $break_pos !== FALSE;
+        $honor_trim = empty($settings['summary_handler']) || $settings['summary_handler'] != 'full' ? TRUE : FALSE;
+        if (!empty($settings['summary_handler']) && $settings['summary_handler'] != 'ignore' && $has_summary_or_break) {
+          if (empty($item['summary'])) {
+            $output = check_markup(substr($item['value'], 0, $break_pos), $item['format'], $langcode, FALSE);
+          }
+          else {
+            $output = _text_sanitize($instance, $langcode, $item, 'summary');
+          }
         }
         else {
           $output = _text_sanitize($instance, $langcode, $item, 'value');
         }
 
-        // Process additional options (currently only HTML on/off)
+        // Process additional options (currently only HTML on/off).
         if (!empty($settings['trim_options'])) {
           if (!empty($settings['trim_options']['text'])) {
-            // Strip tags
+            // Strip tags.
             $preserve_tags = !empty($settings['trim_preserve_tags']) ? $settings['trim_preserve_tags'] : '';
             $output = strip_tags(str_replace('<', ' <', $output), $preserve_tags);
 
-            // Strip out line breaks
+            // Strip out line breaks.
             $output = preg_replace('/\n|\r|\t/m', ' ', $output);
 
-            // Strip out non-breaking spaces
+            // Strip out non-breaking spaces.
             $output = str_replace('&nbsp;', ' ', $output);
             $output = str_replace("\xc2\xa0", ' ', $output);
 
-            // Strip out extra spaces
+            // Strip out extra spaces.
             $output = trim(preg_replace('/\s\s+/', ' ', $output));
           }
         }
 
-        // Make the trim, provided we're not showing a full summary
+        // Make the trim, provided we're honoring trim settings
+        // or there's no summary or break available.
         $shortened = FALSE;
-        if ($settings['summary_handler'] != 'full' || empty($item['summary'])) {
+        if ($honor_trim || $has_summary_or_break === FALSE) {
           if ($settings['trim_type'] == 'words') {
-            //only bother with this is we have to
+            // Only bother with this is we have to.
             if ($settings['trim_length'] < str_word_count($output)) {
-              //use \s or use PREG_CLASS_UNICODE_WORD_BOUNDARY?
+              // Use \s or use PREG_CLASS_UNICODE_WORD_BOUNDARY?
               $words = preg_split('/\s/', $output, NULL, PREG_SPLIT_NO_EMPTY);
-              $output2 = implode(" ", array_slice($words, 0,  $settings['trim_length']));
+              $output2 = implode(" ", array_slice($words, 0, $settings['trim_length']));
               $output2 = _filter_htmlcorrector($output2);
             }
-            //field contained fewer words than we're trimming at, so do nothing
+            // Field contained fewer words, so do nothing.
             else {
               $output2 = $output;
             }
@@ -98,46 +108,73 @@ function smart_trim_field_formatter_view($entity_type, $entity, $field, $instanc
               ), $output);
             }
             else {
-              //See http://api.drupal.org/api/drupal/modules%21field%21modules%21text%21text.module/function/text_summary/7
-              //text_summary is smart about looking for paragraphs, sentences,
-              //etc, not strictly just length. Uses truncate_utf8 as well
+              // @see http://api.drupal.org/api/drupal/modules%21field%21modules%21text%21text.module/function/text_summary/7
+              // text_summary is smart about looking for paragraphs, sentences,
+              // etc, not strictly just length. Uses truncate_utf8 as well.
               $output2 = text_summary($output, $instance['settings']['text_processing'] ? $item['format'] : NULL, $settings['trim_length']);
             }
           }
 
-          //verify if we actually performed any shortening
-          if (drupal_strlen($output) != drupal_strlen($output2)) {
+          // Verify if we actually performed any shortening.
+          if (drupal_strlen(drupal_html_to_text($output)) != drupal_strlen(drupal_html_to_text($output2))) {
             $shortened = TRUE;
           }
           $output = $output2;
         }
 
-        // Only include the extension if the text was truncated
+        // Only include the extension if the text was truncated.
         $extension = '';
         if ($shortened) {
           $extension = filter_xss($settings['trim_suffix']);
         }
-        // Don't duplicate period at end of text and beginning of extension
+        // Don't duplicate period at end of text and beginning of extension.
         if (substr($output, -1, 1) == '.' && substr($extension, 0, 1) == '.') {
           $extension = substr($extension, 1);
         }
 
-        // Add the link, if there is one!
+        // Final checks if we need to display a more link.
+        $needs_more = FALSE;
+        switch ($settings['more_link']) {
+          // If the user always wants the link, include it.
+          case SMART_TRIM_ALWAYS:
+            $needs_more = TRUE;
+            break;
+
+          case SMART_TRIM_IFNEEDED:
+            if ($shortened) {
+              $needs_more = TRUE;
+            }
+            else {
+              // If a summary is used (whether truncated or not), and it's
+              // different from the main body, we need to show the more link.
+              if (!empty($item['summary'])
+                  && $settings['summary_handler'] != 'ignore') {
+                $summary_output = _text_sanitize($instance, $langcode, $item, 'summary');
+                $full_output = _text_sanitize($instance, $langcode, $item, 'value');
+                if (strcmp($summary_output, $full_output) != 0) {
+                  $needs_more = TRUE;
+                }
+              }
+            }
+            break;
+        }
         $uri = entity_uri($entity_type, $entity);
-        // But wait! Don't add a more link if the field ends in <!--break-->
-        if ($uri && $settings['more_link'] && strpos(strrev($output), strrev('<!--break-->')) !== 0) {
+
+        if ($uri && $needs_more) {
           $extension .= l(t('@more_text', array('@more_text' => $settings['more_text'])), $uri['path'], array('html' => TRUE, 'attributes' => array('class' => array('more-link'))));
         }
 
         $output_appended = preg_replace('#^(.*)(\s?)(</[^>]+>)$#Us', '$1' . $extension . '$3', $output);
 
-        //check if the regex did anything. if not, append manually
-        if ($output_appended == $output) $output_appended = $output . $extension;
+        // Check if the regex did anything. if not, append manually.
+        if ($output_appended == $output) {
+          $output_appended = $output . $extension;
+        }
 
         // If linking to content is selected the trimmed text will have tags
         // removed from the trimmed text. Need to find a more elegant way of
         // doing this without conflicting the other settings.
-        if ($settings['trim_link'] != 0 && !empty($uri['path'])) {
+        if (!empty($settings['trim_link']) && !empty($uri['path'])) {
           $output_appended = strip_tags($output_appended);
           $output = l($output_appended, $uri['path']);
           $element[$delta] = array(
@@ -205,8 +242,9 @@ function smart_trim_field_formatter_settings_form($field, $instance, $view_mode,
     '#title' => t('Display more link?'),
     '#type' => 'select',
     '#options' => array(
-      0 => t("No"),
-      1 => t("Yes"),
+      SMART_TRIM_NEVER => t('Never'),
+      SMART_TRIM_ALWAYS => t('Always'),
+      SMART_TRIM_IFNEEDED => t('If needed (when using a summary or trimmed text)'),
     ),
     '#default_value' => $settings['more_link'],
     '#description' => t('Displays a link to the entity (if one exists)'),
@@ -218,6 +256,13 @@ function smart_trim_field_formatter_settings_form($field, $instance, $view_mode,
     '#size' => 20,
     '#default_value' => $settings['more_text'],
     '#description' => t('If displaying more link, enter the text for the link.'),
+    '#states' => array(
+      // Hide this field when $element['more_link'] is set to "Never".
+      // @see States Api : drupal_process_states()
+      'invisible' => array(
+        ':input[name="fields[body][settings_edit_form][settings][more_link]"]' => array('value' => SMART_TRIM_NEVER),
+      ),
+    ),
   );
 
   if ($field['type'] == 'text_with_summary') {
@@ -262,10 +307,15 @@ function smart_trim_field_formatter_settings_summary($field, $instance, $view_mo
   if (drupal_strlen(trim($settings['trim_suffix']))) {
     $summary .= " " . t("with suffix");
   }
-  if ($settings['more_link']) {
-    $summary .= ", " . t("with more link");
-  }
+  switch ($settings['more_link']) {
+    case SMART_TRIM_ALWAYS:
+      $summary .= ', ' . t('with more link (always)');
+      break;
 
+    case SMART_TRIM_IFNEEDED:
+      $summary .= ', ' . t('with more link (if needed)');
+      break;
+  }
   // Trim options summary.
   if (isset($settings['trim_link'])) {
     $summary .= ($settings['trim_link'] == 1) ? ' ' . t('linked to content') : '';

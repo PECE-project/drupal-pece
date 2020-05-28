@@ -19,7 +19,3 @@ Initial release is strictly for Drupal 7. No backport to Drupal 6 is planned.
 
 Note that HTML markup not seen by end-users will still be counted when
   calculating trim length. This may be addressed in future releases.
-
-Smart Trim was initially developed by Ben Byrne while at New Signature
-  (bbyrne@newsignature.com) but Ben is now at Cornershop Creative
-  (ben@cornershopcreative.com)
