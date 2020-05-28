@@ -18,6 +18,18 @@ function extlink_help($path, $arg) {
 }
 
 /**
+ * Implements hook_permission().
+ */
+function extlink_permission() {
+  return array(
+    'administer external link' => array(
+      'title' => t('Administer External Links'),
+      'description' => t('Configure external links.'),
+    ),
+  );
+}
+
+/**
  * Implements hook_menu().
  */
 function extlink_menu() {
@@ -28,7 +40,7 @@ function extlink_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('extlink_admin_settings'),
     'access callback' => 'user_access',
-    'access arguments' => array('administer site configuration'),
+    'access arguments' => array('administer external link'),
   );
   return $items;
 }
@@ -36,27 +48,40 @@ function extlink_menu() {
 /**
  * Implements hook_page_build().
  */
-function extlink_page_build() {
+function extlink_page_build(&$page) {
   $path = drupal_get_path('module', 'extlink');
-  drupal_add_js($path . '/extlink.js', array('every_page' => TRUE));
-  drupal_add_js(array(
-    'extlink' => array(
-      'extTarget'     => variable_get('extlink_target', 0),
-      'extClass'      => variable_get('extlink_class', 'ext'),
-      'extLabel'      => check_plain(variable_get('extlink_label', t('(link is external)'))),
-      'extImgClass'   => variable_get('extlink_img_class', 0),
-      'extIconPlacement' => variable_get('extlink_icon_placement', 'append'),
-      'extSubdomains' => variable_get('extlink_subdomains', 1),
-      'extExclude'    => variable_get('extlink_exclude', ''),
-      'extInclude'    => variable_get('extlink_include', ''),
-      'extCssExclude' => variable_get('extlink_css_exclude', ''),
-      'extCssExplicit' => variable_get('extlink_css_explicit', ''),
-      'extAlert'      => variable_get('extlink_alert', 0),
-      'extAlertText'  => variable_get('extlink_alert_text', 'This link will take you to an external web site. We are not responsible for their content.'),
-      'mailtoClass'   => variable_get('extlink_mailto_class', 'mailto'),
-      'mailtoLabel'   => check_plain(variable_get('extlink_mailto_label', t('(link sends e-mail)'))),
-    ),
-  ), 'setting');
+  $page['content']['#attached']['js'][] = [
+    'type' => 'file',
+    'data' => $path . '/js/extlink.js',
+  ];
+  $page['content']['#attached']['js'][] = [
+    'type' => 'setting',
+    'data' => [
+      'extlink' => [
+        'extTarget'     => variable_get('extlink_target', 0),
+        'extClass'      => variable_get('extlink_class', 'ext'),
+        'extLabel'      => check_plain(variable_get('extlink_label', t('(link is external)'))),
+        'extImgClass'   => variable_get('extlink_img_class', 0),
+        'extIconPlacement' => variable_get('extlink_icon_placement', 'append'),
+        'extSubdomains' => variable_get('extlink_subdomains', 1),
+        'extExclude' => implode('|', array_filter(array(
+          variable_get('extlink_exclude', ''),
+          variable_get('extlink_exclude_internal_pattern', ''),
+        ))),
+        'extInclude' => implode('|', array_filter(array(
+          variable_get('extlink_include', ''),
+          variable_get('extlink_include_internal_pattern', ''),
+        ))),
+        'extCssExclude' => variable_get('extlink_css_exclude', ''),
+        'extCssExplicit' => variable_get('extlink_css_explicit', ''),
+        'extAlert'      => variable_get('extlink_alert', 0),
+        'extAlertText'  => variable_get('extlink_alert_text', 'This link will take you to an external web site. We are not responsible for their content.'),
+        'mailtoClass'   => variable_get('extlink_mailto_class', 'mailto'),
+        'mailtoLabel'   => check_plain(variable_get('extlink_mailto_label', t('(link sends e-mail)'))),
+        'extUseFontAwesome' => variable_get('extlink_use_font_awesome', FALSE),
+      ],
+    ],
+  ];
 }
 
 /**
@@ -74,7 +99,7 @@ function extlink_admin_settings() {
       array(
         '!icon' => theme('image',
           array(
-            'path' => drupal_get_path('module', 'extlink') . '/extlink.png',
+            'path' => drupal_get_path('module', 'extlink') . '/images/extlink.png',
             'alt' => t('External Links icon'),
           )
         ),
@@ -90,7 +115,7 @@ function extlink_admin_settings() {
       array(
         '!icon' => theme('image',
           array(
-            'path' => drupal_get_path('module', 'extlink') . '/mailto.png',
+            'path' => drupal_get_path('module', 'extlink') . '/images/mailto.png',
             'alt' => t('Email links icon'),
           )
         ),
@@ -103,6 +128,14 @@ function extlink_admin_settings() {
     '#return_value' => TRUE,
     '#default_value' => variable_get('extlink_img_class', FALSE),
     '#description' => t('If checked, images wrapped in an anchor tag will be treated as external links.'),
+  );
+
+  $form['extlink_use_font_awesome'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Use Font Awesome icons instead of images.'),
+    '#return_value' => TRUE,
+    '#default_value' => variable_get('extlink_use_font_awesome', FALSE),
+    '#description' => t('Add Font Awesome classes to the link as well as an i tag rather than images.'),
   );
 
   $form['extlink_icon_placement'] = array(
@@ -181,6 +214,13 @@ function extlink_admin_settings() {
     '#description' => t('Enter a regular expression for links that you wish to exclude from being considered external.'),
   );
 
+  $form['patterns']['extlink_exclude_internal'] = [
+    '#type' => 'textarea',
+    '#title' => t('Exclude internal paths'),
+    '#default_value' => variable_get('extlink_exclude_internal', ''),
+    '#description' => t('Enter internal paths, one per line, that should be excluded, eg. node/1.'),
+  ];
+
   $form['patterns']['extlink_include'] = array(
     '#type' => 'textfield',
     '#title' => t('Include links matching the pattern'),
@@ -188,6 +228,13 @@ function extlink_admin_settings() {
     '#default_value' => variable_get('extlink_include', ''),
     '#description' => t('Enter a regular expression for internal links that you wish to be considered external.'),
   );
+
+  $form['patterns']['extlink_include_internal'] = [
+    '#type' => 'textarea',
+    '#title' => t('Include internal paths'),
+    '#default_value' => variable_get('extlink_include_internal', ''),
+    '#description' => t('Enter internal paths, one per line, that should be included, eg. node/1.'),
+  ];
 
   $form['css_matching'] = array(
     '#tree' => FALSE,
@@ -215,6 +262,8 @@ function extlink_admin_settings() {
     '#description' => t('Enter a comma-separated list of CSS selectors (ie "#block-block-2 .content, ul.menu")'),
   );
 
+  $form['#submit'][] = 'extlink_admin_settings_submit';
+
   return system_settings_form($form);
 }
 
@@ -240,6 +289,38 @@ function extlink_admin_settings_validate($form, &$form_state) {
     if ($regexeval === NULL) {
       form_set_error('extlink_include', t('Invalid regular expression.'));
       variable_set('extlink_include', '');
+    }
+  }
+}
+
+/**
+ * Submit handler for admin settings form.
+ */
+function extlink_admin_settings_submit($form, &$form_state) {
+  // Append internal paths & aliases to exclude/include patterns.
+  foreach (['exclude', 'include'] as $type) {
+    $internal = $form_state['values']['extlink_' . $type . '_internal'];
+    if ($internal && $internal != variable_get('extlink_' . $type . '_internal')) {
+      // Get lines.
+      $internal = array_filter(preg_split("/\r\n|\n|\r/", $internal));
+      // Add aliases.
+      $internal = array_map(function ($v) {
+        $v = trim($v, '/ ');
+        $ret = [
+          $v,
+          drupal_lookup_path('alias', $v),
+        ];
+        return implode('|', array_filter($ret));
+      }, $internal);
+      if (!empty($internal)) {
+        // Implode, add base url & escape slashes.
+        global $base_url;
+        $internal = $base_url . '/(' . implode('|', array_filter($internal)) . ')';
+      }
+      else {
+        $internal = NULL;
+      }
+      variable_set('extlink_' . $type . '_internal_pattern', $internal);
     }
   }
 }

@@ -34,6 +34,7 @@ function extlink_uninstall() {
   variable_del('extlink_mailto_label');
   variable_del('extlink_subdomains');
   variable_del('extlink_target');
+  variable_del('extlink_use_font_awesome');
 
   cache_clear_all('variables', 'cache');
 }

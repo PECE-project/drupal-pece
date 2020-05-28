@@ -37,17 +37,19 @@ class ExtlinkBaseWebTestCase extends DrupalWebTestCase {
     // Enable any module that you will need in your tests.
     parent::setUp('extlink');
 
-    // Create a normal user.
+    // Create a normal user without permission.
     $permissions = array(
-      'access comments', 'post comments', 'skip comment approval',
-      'access content', 'create page content', 'edit own page content',
+      'access comments',
+      'post comments',
+      'skip comment approval',
+      'access content',
+      'create page content',
+      'edit own page content',
     );
     $this->normalUser = $this->drupalCreateUser($permissions);
 
     // Create an admin user.
-    $permissions[] = 'administer site configuration';
-    $permissions[] = 'administer permissions';
-    $permissions[] = 'administer content types';
+    $permissions[] = 'administer external link';
     $this->adminUser = $this->drupalCreateUser($permissions);
   }
 

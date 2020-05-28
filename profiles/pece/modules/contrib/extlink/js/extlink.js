@@ -15,7 +15,7 @@
 
     // Strip the host name down, removing ports, subdomains, or www.
     var pattern = /^(([^\/:]+?\.)*)([^\.:]{1,})((\.[a-z0-9]{1,253})*)(:[0-9]{1,5})?$/;
-    var host = window.location.host.replace(pattern, '$2$3');
+    var host = window.location.host.replace(pattern, '$2$3$6');
     var subdomain = window.location.host.replace(host, '');
 
     // Determine what subdomains are considered internal.
@@ -68,7 +68,7 @@
     // available in jQuery 1.0 (Drupal 5 default).
     var external_links = [];
     var mailto_links = [];
-    $('a:not(.' + settings.extlink.extClass + ', .' + settings.extlink.mailtoClass + '), area:not(.' + settings.extlink.extClass + ', .' + settings.extlink.mailtoClass + ')', context).each(function (el) {
+    $('a:not([data-extlink]), area:not([data-extlink])', context).each(function (el) {
       try {
         var url = '';
         if (typeof this.href == 'string') {
@@ -173,17 +173,28 @@
       var links_with_images = $(links).find('img').parents('a');
       $links_to_process = $(links).not(links_with_images);
     }
-    $links_to_process.addClass(class_name);
+    // Add data-extlink attribute.
+    $links_to_process.attr('data-extlink', '');
     var i;
     var length = $links_to_process.length;
     for (i = 0; i < length; i++) {
       var $link = $($links_to_process[i]);
       if ($link.css('display') === 'inline' || $link.css('display') === 'inline-block') {
-        if (class_name === Drupal.settings.extlink.mailtoClass) {
-          $link[icon_placement]('<span class="' + class_name + '" aria-label="' + Drupal.settings.extlink.mailtoLabel + '"></span>');
+        if (Drupal.settings.extlink.extUseFontAwesome) {
+          if (class_name === Drupal.settings.extlink.mailtoClass) {
+            $link[icon_placement]('<span class="fa-' + class_name + ' extlink"><span class="fa fa-envelope-o" title="' + Drupal.settings.extlink.mailtoLabel + '"></span><span class="element-invisible">' + Drupal.settings.extlink.mailtoLabel + '</span></span>');
+          }
+          else {
+            $link[icon_placement]('<span class="fa-' + class_name + ' extlink"><span class="fa fa-external-link" title="' + Drupal.settings.extlink.extLabel + '"></span><span class="element-invisible">' + Drupal.settings.extlink.extLabel + '</span></span>');
+          }
         }
         else {
-          $link[icon_placement]('<span class="' + class_name + '" aria-label="' + Drupal.settings.extlink.extLabel + '"></span>');
+          if (class_name === Drupal.settings.extlink.mailtoClass) {
+            $link[icon_placement]('<span class="' + class_name + '"><span class="element-invisible">' + Drupal.settings.extlink.mailtoLabel + '</span></span>');
+          }
+          else {
+            $link[icon_placement]('<span class="' + class_name + '"><span class="element-invisible">' + Drupal.settings.extlink.extLabel + '</span></span>');
+          }
         }
       }
     }
