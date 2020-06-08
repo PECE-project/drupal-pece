@@ -857,7 +857,7 @@ function pece_artifacts_tabular_field_default_field_instances() {
     'settings' => array(
       'description_field' => 0,
       'file_directory' => 'artifacts/media/tabular-data',
-      'file_extensions' => 'txt csv xls xml json rdf zip',
+      'file_extensions' => 'txt csv xls xlsx ods xml json rdf doc docx pdf rmd ipynb html nb.html',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
