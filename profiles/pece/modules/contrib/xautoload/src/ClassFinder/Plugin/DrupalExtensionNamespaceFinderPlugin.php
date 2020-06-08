@@ -182,7 +182,7 @@ class DrupalExtensionNamespaceFinderPlugin implements FinderPluginInterface {
       // namespace separator, from right to left. On average there is no or very
       // few of them, so this loop rarely iterates even once.
       while ($nspos < $uspos = strrpos($relative_path, '_')) {
-        $relative_path{$uspos} = '/';
+        $relative_path[$uspos] = '/';
       }
     }
 

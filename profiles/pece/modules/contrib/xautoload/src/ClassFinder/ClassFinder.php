@@ -414,7 +414,7 @@ class ClassFinder extends AbstractClassLoader implements ExtendedClassFinderInte
     // Clean up surplus '/' resulting from duplicate underscores, or an
     // underscore at the beginning of the class.
     while (FALSE !== $pos = strrpos('/' . $pear_logical_path, '//')) {
-      $pear_logical_path{$pos} = '_';
+      $pear_logical_path[$pos] = '_';
     }
 
     // Check if the class has any underscore.
@@ -457,7 +457,7 @@ class ClassFinder extends AbstractClassLoader implements ExtendedClassFinderInte
     // Clean up surplus '/' resulting from duplicate underscores, or an
     // underscore at the beginning of the class.
     while (FALSE !== $pos = strrpos('/' . $pear_logical_path, '//')) {
-      $pear_logical_path{$pos} = '_';
+      $pear_logical_path[$pos] = '_';
     }
 
     // Check if the class has any underscore.

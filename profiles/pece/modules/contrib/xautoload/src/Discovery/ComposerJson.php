@@ -99,7 +99,7 @@ class ComposerJson {
     foreach ($multiple as &$paths) {
       $paths = (array)$paths;
       foreach ($paths as &$path) {
-        if ('' === $path || '/' !== $path{0}) {
+        if ('' === $path || '/' !== $path[0]) {
           $path = $this->pathPrefix . $path;
         }
       }
