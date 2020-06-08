@@ -22,6 +22,15 @@ function pece_analytics_defaultconfig_features() {
 function pece_analytics_defaultconfig_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'administer nodeorder'.
+  $permissions['administer nodeorder'] = array(
+    'name' => 'administer nodeorder',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'nodeorder',
+  );
+
   // Exported permission: 'create pece_analytic content'.
   $permissions['create pece_analytic content'] = array(
     'name' => 'create pece_analytic content',
@@ -86,6 +95,15 @@ function pece_analytics_defaultconfig_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'entityconnect',
+  );
+
+  // Exported permission: 'order nodes within categories'.
+  $permissions['order nodes within categories'] = array(
+    'name' => 'order nodes within categories',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'nodeorder',
   );
 
   return $permissions;
