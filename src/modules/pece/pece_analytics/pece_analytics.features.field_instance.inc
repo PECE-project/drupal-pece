@@ -70,6 +70,12 @@ function pece_analytics_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'nodeorder' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -84,8 +90,8 @@ function pece_analytics_field_default_field_instances() {
         'unload_edit_button' => 1,
       ),
       'icon' => array(
-        'show_add_icon' => 0,
-        'show_edit_icon' => 0,
+        'show_add_icon' => NULL,
+        'show_edit_icon' => NULL,
       ),
     ),
     'entityconnect_icon_add' => 1,
@@ -169,6 +175,12 @@ function pece_analytics_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'nodeorder' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -247,6 +259,12 @@ function pece_analytics_field_default_field_instances() {
         'weight' => 0,
       ),
       'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'nodeorder' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',

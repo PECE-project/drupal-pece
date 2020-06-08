@@ -15,7 +15,7 @@ function pece_analytics_taxonomy_default_vocabularies() {
       'machine_name' => 'pece_structured_analytics',
       'description' => 'PECE\'s collection of questions',
       'hierarchy' => 0,
-      'module' => 'taxonomy',
+      'module' => 'nodeorder',
       'weight' => 0,
     ),
   );
