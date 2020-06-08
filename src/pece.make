@@ -161,6 +161,9 @@ projects[masonry][subdir] = contrib
 projects[masonry_views][version] = 3.0
 projects[masonry_views][subdir] = contrib
 
+projects[nodeorder][version] = 1.5
+projects[nodeorder][subdir] = contrib
+
 ; =====================
 ; Administration
 ; =====================
