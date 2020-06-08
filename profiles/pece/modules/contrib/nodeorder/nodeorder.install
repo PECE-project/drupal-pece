@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * Nodeorder install file.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Adds field 'weight' to core table 'taxonomy_index'.
+ * @todo: Handle exceptions that could be thrown by DatabaseSchema::addField.
+ */
+function nodeorder_install() {
+  // Define field properties.
+  $schema = drupal_get_schema('taxonomy_index');
+  $spec = $schema['fields']['weight'];
+
+  // Create an index for 'weight'
+  $keys['indexes'] = array('weight' => array('weight'));
+
+  // Add the column to the table.
+  db_add_field('taxonomy_index', 'weight', $spec, $keys);
+
+  // Set the weight of the nodeorder module in the system table to ensure that
+  // nodeorder can alter forms after the taxonomy module.
+  db_update('system')
+    ->fields(array('weight' => 5))
+    ->condition('name', 'nodeorder')
+    ->condition('type', 'module')
+    ->execute();
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * Drops field 'weight' from core table 'taxonomy_index'.
+ */
+function nodeorder_uninstall() {
+  db_drop_index('taxonomy_index', 'weight');
+  db_drop_field('taxonomy_index', 'weight');
+  // Remove variables.
+  variable_del('nodeorder_show_links_on_node');
+  variable_del('nodeorder_link_to_ordering_page');
+  variable_del('nodeorder_link_to_ordering_page_taxonomy_admin');
+  variable_del('nodeorder_override_taxonomy_page');
+}
+
+/**
+ * Implements hook_schema_alter().
+ *
+ * Informs drupal_get_schema() of the field addition to 'taxonomy_index'.
+ */
+function nodeorder_schema_alter(&$schema) {
+  $schema['taxonomy_index']['fields']['weight'] = array(
+    'type' => 'int',
+    'signed' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+    'initial' => 0,
+    'description' => t('A user-defined weight for each node in its respective category.'),
+  );
+}
+
+/**
+ * Remove an obsolete variable.
+ */
+function nodeorder_update_7100() {
+  variable_del('nodeorder_replace_taxonomy_link');
+}
