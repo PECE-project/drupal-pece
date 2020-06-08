@@ -479,3 +479,14 @@ function pece_update_7116() {
       }
     }
 }
+
+/**
+ *  Allow users to reorder analytics items on Analytics page.
+ */
+function pece_update_7117() {
+   module_enable(array('nodeorder'));
+
+   if (module_exists('features')) {
+     features_revert_module('pece_analytics');
+   }
+}
