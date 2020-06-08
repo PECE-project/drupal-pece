@@ -14,7 +14,6 @@ gulp.task('distro:prepare', function (done) {
     }
     prepareDistro(done);
   });
-
 });
 
 gulp.task('distro:clone', function (done) {
@@ -25,7 +24,6 @@ gulp.task('distro:clone', function (done) {
     }
     cloneDistroRepo(done);
   });
-
 });
 
 gulp.task('distro:sync', function (done) {
@@ -36,7 +34,6 @@ gulp.task('distro:sync', function (done) {
 gulp.task('distro:build', function (done) {
   // Build distro to production environment.
   rebuildToProd();
-  done();
 });
 
 
@@ -44,7 +41,6 @@ gulp.task('distro:build:sync', function (done) {
   // Build to production and Sync the result with PECE Distro repo.
   rebuildToProd();
   syncLocalFiles();
-  done();
 });
 
 var rebuildToProd = function () {
@@ -64,17 +60,14 @@ var prepareDistro = function (done) {
   rebuildToProd();
   cloneDistroRepo();
   syncLocalFiles();
-  done();
 }
 
 var cloneDistroRepo = function (done) {
   // Clone PECE Distro repository.
   shell.exec('git clone ' + repo + ' distro');
-  done();
 }
 
 var syncLocalFiles = function (done) {
   // Update distro repository with a new production build.
   shell.exec('rsync -rptgohD --delete --progress --exclude=profiles/pece/docs  build/* distro/');
-  done();
 }
