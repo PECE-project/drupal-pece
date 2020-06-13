@@ -1,0 +1,71 @@
+type PeceAnnotation implements NodeInterface {
+  id: Int!
+  title: String!
+  uuid: String!
+  body: String
+  tags: [AnnotationTags]
+  uri: String
+  author: User
+  created: String
+  analytic: [AnnotationAnalytic]
+  artifact: [AnnotationArtifact]
+}
+
+type AnnotationAnalytic {
+  id: Int!
+  title: String
+  type: String
+  body: String
+  questionSet: [AnalyticQuestionSet]
+  tags: [EssayTags]
+  uri: String
+}
+
+type AnalyticQuestionSet {
+  id: Int!
+  title: String
+  type: String
+}
+
+type AnnotationArtifact {
+  id: Int!
+  title: String
+  type: String
+  body: String
+  audios: [Audios]
+  authors: [User]
+  contributors: [User]
+  critCommentary: String
+  fieldsite: String
+  language: String
+  location: String
+  source: String
+  tags: [EssayTags]
+  uri: String
+  useFieldsiteLocal: String
+  fieldsiteLocal: String
+  images: [Image]
+  document:String
+  researchers: [User]
+  thumbnail: [Image]
+  url:String
+}
+
+type Audios {
+  url: String
+}
+
+type PeceAnnotationConnection {
+  total: Int!
+  items: [PeceAnnotation!]
+}
+
+input AnnotationInput {
+  title: String!
+}
+
+type AnnotationTags {
+  id: Int!
+  title: String
+  type: String
+}
