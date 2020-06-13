@@ -6,12 +6,10 @@ dependencies:
     - field.field.node.pece_annotation.body
     - field.field.node.pece_annotation.field_annotation_analytic
     - field.field.node.pece_annotation.field_annotation_artifact
-    - field.field.node.pece_annotation.field_annotation_permissions
     - field.field.node.pece_annotation.field_annotation_tags
     - field.field.node.pece_annotation.field_annotation_uri
     - node.type.pece_annotation
   module:
-    - options
     - text
     - user
 id: node.pece_annotation.default
@@ -41,13 +39,6 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
-    region: content
-  field_annotation_permissions:
-    weight: 106
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
     region: content
   field_annotation_tags:
     weight: 105

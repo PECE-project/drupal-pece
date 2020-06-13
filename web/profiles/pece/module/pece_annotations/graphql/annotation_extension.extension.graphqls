@@ -1,0 +1,9 @@
+extend type Query {
+  peceAnnotations (
+    offset: Int = 0
+    limit: Int = 10
+    filters: [Filter] = []
+  ): PeceAnnotationConnection!
+
+  peceAnnotation (id: Int!) : PeceAnnotation
+}
