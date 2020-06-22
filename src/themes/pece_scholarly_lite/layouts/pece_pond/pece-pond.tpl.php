@@ -10,7 +10,7 @@
  */
 ?>
 
-<div class="panel-display pond pece-pond-doble clearfix <?php if (!empty($classes)) { print $classes; } ?><?php if (!empty($class)) { print $class; } ?>" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
+<div class="panel-display pond pece-pond-double clearfix <?php if (!empty($classes)) { print $classes; } ?><?php if (!empty($class)) { print $class; } ?>" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
 
   <div class="container-fluid">
     <div class="row">
