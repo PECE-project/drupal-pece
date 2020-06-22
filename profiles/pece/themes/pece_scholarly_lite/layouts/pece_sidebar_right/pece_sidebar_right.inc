@@ -7,7 +7,7 @@
 module_load_include('inc', 'pece_core', 'pece_core.functions');
 
 $plugin = array(
-  'title' => t('PECE Sidebar Right'),
+  'title' => t('git sSidebar Right'),
   'icon' => 'pece-sidebar-right.png',
   'category' => t('PECE'),
   'theme' => 'pece_sidebar_right',
