@@ -19,6 +19,18 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
       'plural' => 'entities'
   ];
 
+
+  protected $mapFields = [];
+
+  /**
+   * Map fields to this entity.
+   * @return array
+   */
+  public function &getMapFields () {
+    return $this->mapFields;
+  }
+
+
   public function __construct($configuration, $pluginId, $pluginDefinition, ModuleHandlerInterface $moduleHandler) {
     parent::__construct($configuration, $pluginId, $pluginDefinition, $moduleHandler);
   }
@@ -36,18 +48,23 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
   }
 
   /**
+   * Add field resolvers dynamically from the field definitions in the Drupal.
+   *
    * @param \Drupal\graphql\GraphQL\ResolverRegistryInterface $registry
    * @param \Drupal\graphql\GraphQL\ResolverBuilder $builder
    * @param array $entity
    */
   protected function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder, array $prefix = []) {
+    // Get all field informations about this entity
     $fields = \Drupal::service('entity_field.manager')->getFieldDefinitions($this->entity['type'], $this->entity['bundle']);
-    $baseEntityNameSingular = BaseSchema::formatFieldName($this->entity['bundle'], []);
+    $baseEntityNameSingular = ucfirst(BaseSchema::formatFieldName($this->entity['bundle'], []));
 
+    // This array is used to clean graphql properties. Got to BaseSchema::formatFieldName to more details.
     $prefix = array_merge($prefix, ['field_' . $this->entity['bundle'] . '_', 'field_']);
     foreach ($fields as $field) {
       if ($field instanceof FieldConfig) {
         $fieldName = BaseSchema::formatFieldName($field->getName(),$prefix);
+        $this->mapFields[$fieldName] = $field->getName();
         if ($field->getType() == 'entity_reference_revisions' || $field->getType() == 'entity_reference') {
           $registry->addFieldResolver(ucfirst($baseEntityNameSingular), $fieldName,
             $builder->produce('entity_reference')
@@ -97,12 +114,16 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
         }
       }
     }
-    $registry->addFieldResolver(ucfirst($baseEntityNameSingular), 'id',
+
+    $this->mapFields['id'] = 'id';
+    $registry->addFieldResolver($baseEntityNameSingular, 'id',
       $builder->produce('entity_id')
         ->map('entity', $builder->fromParent())
+        ->map('field', $builder->fromValue('id'))
     );
 
-    $registry->addFieldResolver(ucfirst($baseEntityNameSingular), 'title',
+    $this->mapFields['title'] = 'title';
+    $registry->addFieldResolver($baseEntityNameSingular, 'title',
       $builder->compose(
         $builder->produce('entity_label')
           ->map('entity', $builder->fromParent()),
@@ -111,20 +132,32 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
       )
     );
 
-    $registry->addFieldResolver(ucfirst($baseEntityNameSingular), 'author',
+    $this->mapFields['author'] = 'author';
+    $registry->addFieldResolver($baseEntityNameSingular, 'author',
       $builder->produce('entity_owner')
         ->map('entity', $builder->fromParent())
     );
 
-    $registry->addFieldResolver(ucfirst($baseEntityNameSingular), 'created',
+    $this->mapFields['created'] = 'created';
+    $registry->addFieldResolver($baseEntityNameSingular, 'created',
       $builder->produce('entity_created')
         ->map('entity', $builder->fromParent())
     );
 
-    $registry->addFieldResolver(ucfirst($baseEntityNameSingular), 'uuid',
+    $this->mapFields['uuid'] = 'uuid';
+    $registry->addFieldResolver($baseEntityNameSingular, 'uuid',
       $builder->produce('entity_uuid')
         ->map('entity', $builder->fromParent())
     );
+
+    if (isset($this->entity['bundle'])) {
+      $registry->addFieldResolver('Mutation', 'create' . $baseEntityNameSingular,
+        $builder->produce('create_entity')
+          ->map('data', $builder->fromArgument('data'))
+          ->map('entity', $builder->fromValue($this->entity['bundle']))
+          ->map('fieldsMap', $builder->fromValue($this->getMapFields()))
+      );
+    }
   }
 
   /**

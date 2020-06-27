@@ -8,6 +8,7 @@ use Drupal\graphql\GraphQL\ResolverRegistry;
 use Drupal\node\NodeInterface;
 use Drupal\nyx_graphql\Wrappers\QueryConnection;
 
+//@TODO: Refactoring this class using BaseSchema
 /**
  * @Schema(
  *   id = "entity",
