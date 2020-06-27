@@ -60,12 +60,13 @@ type PeceAnnotationConnection {
   items: [PeceAnnotation!]
 }
 
-input AnnotationInput {
-  title: String!
-}
-
 type AnnotationTags {
   id: Int!
   title: String
   type: String
+}
+
+input AnnotationInput {
+  title: String!
+  body: String
 }

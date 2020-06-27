@@ -30,9 +30,4 @@ class AnnotationExtension extends EntityExtension {
       'plural' => 'peceAnnotations'
     ];
   }
-
-  public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder) {
-    parent::addFields($registry, $builder, ['annotation_']);
-  }
-
 }
