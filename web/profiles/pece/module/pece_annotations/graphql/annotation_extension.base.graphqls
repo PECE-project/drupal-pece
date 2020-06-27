@@ -69,4 +69,8 @@ type AnnotationTags {
 input AnnotationInput {
   title: String!
   body: String
+  uri: String
+  tags: [Int]
+  analytic: [Int]
+  artifact: [Int]
 }
