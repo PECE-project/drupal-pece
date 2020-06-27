@@ -10,4 +10,5 @@ extend type Query {
 
 extend type Mutation {
   createPeceAnnotation(data: AnnotationInput):PeceAnnotation
+  deletePeceAnnotation(id: Int): PeceAnnotation
 }
