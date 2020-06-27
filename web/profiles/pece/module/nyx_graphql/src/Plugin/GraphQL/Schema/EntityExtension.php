@@ -63,7 +63,7 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
     $prefix = array_merge($prefix, ['field_' . $this->entity['bundle'] . '_', 'field_']);
     foreach ($fields as $field) {
       if ($field instanceof FieldConfig) {
-        $fieldName = BaseSchema::formatFieldName($field->getName(),$prefix);
+        $fieldName = BaseSchema::formatFieldName($field->getName(), $prefix);
         $this->mapFields[$fieldName] = $field->getName();
         if ($field->getType() == 'entity_reference_revisions' || $field->getType() == 'entity_reference') {
           $registry->addFieldResolver(ucfirst($baseEntityNameSingular), $fieldName,
@@ -109,7 +109,7 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
               ->map('value', $builder->fromParent())
               ->map('path', $builder->fromValue($field->getName() . '.value'));
           }
-          $registry->addFieldResolver(ucfirst($baseEntityNameSingular), $fieldName, $builder->compose(...$compose));
+          $registry->addFieldResolver($baseEntityNameSingular, $fieldName, $builder->compose(...$compose));
 
         }
       }
