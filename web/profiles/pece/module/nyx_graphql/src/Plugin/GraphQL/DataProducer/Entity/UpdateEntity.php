@@ -2,28 +2,31 @@
 
 namespace Drupal\nyx_graphql\Plugin\GraphQL\DataProducer\Entity;
 
-use Drupal\Core\Entity\EntityStorageException;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\graphql_people\Plugin\GraphQL\DataProducer\TraitUser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 
 /**
- * Creates a new Annotation.
+ * Update a new user.
  *
  * @DataProducer(
- *   id = "create_entity",
- *   name = @Translation("Create Entity"),
- *   description = @Translation("Creates a new Entity."),
+ *   id = "update_entity",
+ *   name = @Translation("Update entity"),
+ *   description = @Translation("Update an entity."),
  *   produces = @ContextDefinition("any",
  *     label = @Translation("Entity")
  *   ),
  *   consumes = {
+ *     "id" = @ContextDefinition("string",
+ *       label = @Translation("Entity Identifier")
+ *     ),
  *     "data" = @ContextDefinition("any",
  *       label = @Translation("Entity data")
  *     ),
- *     "entity" = @ContextDefinition("string",
+ *    "entity" = @ContextDefinition("string",
  *       label = @Translation("Entity type")
  *     ),
  *     "fieldsMap" = @ContextDefinition("any",
@@ -32,17 +35,7 @@ use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
  *   }
  * )
  */
-class CreateEntity extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
-
-  //@TODO: get this map dynamically
-  /**
-   * Map fields to Drupal
-   * graphqlfield => drupalfield
-   * @var string[]
-   */
-  protected $mapFields = [
-    'title' => 'title',
-  ];
+class UpdateEntity extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
   /**
    * The current user.
@@ -64,7 +57,7 @@ class CreateEntity extends DataProducerPluginBase implements ContainerFactoryPlu
   }
 
   /**
-   * Create Entity constructor.
+   * Update Entity constructor.
    *
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
@@ -81,8 +74,10 @@ class CreateEntity extends DataProducerPluginBase implements ContainerFactoryPlu
   }
 
   /**
-   * Create an Entity.
-   *
+   * Update a user.
+
+   * @param int $id
+   *   The id to update entity.
    * @param array $data
    *   The fields of the Entity.
    * @param string $entity
@@ -91,28 +86,23 @@ class CreateEntity extends DataProducerPluginBase implements ContainerFactoryPlu
    *   Field map to entity.
    *
    * @return \Drupal\Core\Entity\EntityBase|\Drupal\Core\Entity\EntityInterface
-   *   The newly created entity.
+   *   The updated entity.
    *
    * @throws \Exception
    */
-  public function resolve(intarray $data, $entity, array $fieldsMap) {
-    //@todo: set permission
-    //if ($this->currentUser->hasPermission("administer users") || $this->currentUser->isAnonymous()) {
-      $values = ['type' => $entity];
+  public function resolve(int $id, array $data, string $entity, array $fieldsMap) {
+    //if (isset($data['id']) && $this->currentUser->hasPermission("administer users")) {
+      $content = Node::load($id);
       foreach ($data as $key => $value) {
         if (isset($fieldsMap[$key])) {
           $field = $fieldsMap[$key];
-          $values[$field] = $value;
+          $content->set($field, $value);
         }
       }
-      try {
-        $content = Node::create($values);
-        $content->save();
-        return $content;
-      } catch (EntityStorageException $e) {
-        throw new \Exception($e->getMessage(), $e->getCode());
-      }
+      $content->save();
+      return $content;
     //}
     //return NULL;
   }
+
 }
