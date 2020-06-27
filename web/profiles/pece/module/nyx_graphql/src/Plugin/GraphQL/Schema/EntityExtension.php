@@ -163,6 +163,14 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
           ->map('id', $builder->fromArgument('id'))
           ->map('bundle', $builder->fromValue($this->entity['bundle']))
       );
+
+      $registry->addFieldResolver('Mutation', 'update' . $baseEntityNameSingular,
+        $builder->produce('update_entity')
+          ->map('id', $builder->fromArgument('id'))
+          ->map('data', $builder->fromArgument('data'))
+          ->map('entity', $builder->fromValue($this->entity['bundle']))
+          ->map('fieldsMap', $builder->fromValue($this->getMapFields()))
+      );
     }
   }
 

@@ -50,7 +50,7 @@ class DeleteEntity extends DataProducerPluginBase implements ContainerFactoryPlu
   }
 
   /**
-   * UpdateUser constructor.
+   * Delete entity constructor.
    *
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
