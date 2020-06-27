@@ -2,7 +2,6 @@
 
 namespace Drupal\nyx_graphql\Plugin\GraphQL\DataProducer\Entity;
 
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Session\AccountInterface;
