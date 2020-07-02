@@ -1,0 +1,175 @@
+<?php
+
+/**
+ * @file
+ * Schema definitions and install/update/uninstall hooks for ARK module.
+ */
+
+/**
+  * Implements hook_uninstall().
+  */
+function ark_uninstall() {
+  variable_del('ark_naan');
+  variable_del('ark_node_types');
+  // Still need to delete ark_*_who, ark_*_what variables.
+}
+
+/**
+ * Implements hook_schema().
+ */
+function ark_schema() {
+  $schema = array();
+
+  $schema['ark_map'] = array(
+    'description' => 'ARK PURL to Drupal entity mapping.',
+    'fields' => array(
+      'ark_name' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Name of ARK object.',
+      ),
+      'entity_type' => array(
+        'type' => 'varchar',
+        'length' => '128',
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Entity type of resource.',
+      ),
+      'entity_id' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'unsigned' => TRUE,
+        'description' => 'Entity id of resource.',
+      ),
+    ),
+    'primary key' => array('ark_name'),
+    'unique keys' => array(
+      'entity' => array('entity_type', 'entity_id'),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Add extra fields.
+ */
+function ark_update_7001() {
+  $array_specs = array(
+    'remote_ark_name' => array(
+      'type' => 'varchar',
+      'length' => 128,
+      'not null' => TRUE,
+      'default' => '',
+      'description' => 'The remote name of ARK object.',
+    ),
+    'ark_who' => array(
+      'type' => 'text',
+      'size' => 'normal',
+      'not null' => TRUE,
+      'default' => '',
+      'description' => 'The WHO field from ARK definition.',
+    ),
+    'ark_when' => array(
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
+      'description' => 'The WHEN (Unix timestamp) field from ARK definition.',
+    ),
+    'created' => array(
+      'description' => 'The Unix timestamp when name of ARK object was created.',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'remote_created' => array(
+      'description' => 'The Unix timestamp when name of remote ARK object was created.',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'changed' => array(
+      'description' => 'The Unix timestamp when name of ARK object was most recently saved.',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'remote_changed' => array(
+      'description' => 'The Unix timestamp when name of remote ARK object was most recently saved.',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'data' => array(
+      'type' => 'blob',
+      'not null' => FALSE,
+      'size' => 'big',
+      'serialize' => TRUE,
+      'description' => 'A serialized array of additional data.',
+    ),
+    'remote_data' => array(
+      'type' => 'blob',
+      'not null' => FALSE,
+      'size' => 'big',
+      'serialize' => TRUE,
+      'description' => 'A serialized array of remote additional data.',
+    ),
+    'need_send_remote_update' => array(
+      'type' => 'int',
+      'not null' => TRUE,
+      'size' => 'tiny',
+      'default' => 1,
+      'description' => 'Should send updated data to the remote Ark NAAN.',
+    ),
+  );
+
+  foreach ($array_specs as $new_field => $spec) {
+    db_add_field('ark_map', $new_field, $spec);
+  }
+  return t('ARK 7001 - Adding extra fields updadated with success.');
+}
+
+/**
+ * Add flag for remote update.
+ */
+function ark_update_7002() {
+  $array_specs = array(
+    'need_send_remote_update' => array(
+      'type' => 'int',
+      'not null' => TRUE,
+      'size' => 'tiny',
+      'default' => 1,
+      'description' => 'Should send updated data to the remote Ark NAAN.',
+    ),
+  );
+
+  foreach ($array_specs as $new_field => $spec) {
+    db_add_field('ark_map', $new_field, $spec);
+  }
+  return t('ARK 7002 - Adding extra fields updadated with success.');
+}
+
+
+function ark_update_7003() {
+
+  db_change_field('ark_map', 'who', 'ark_who', array(
+    'type' => 'text',
+    'size' => 'normal',
+    'not null' => TRUE,
+    // 'default' => '',
+    'description' => 'The WHO field from ARK definition.',
+  ));
+
+  db_change_field('ark_map', 'when', 'ark_when', array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+    'description' => 'The WHEN (Unix timestamp) field from ARK definition.',
+  ));  
+
+  return t('ARK 7003 - Renaming fields.');
+}
+
