@@ -11,6 +11,18 @@
 function ark_uninstall() {
   variable_del('ark_naan');
   variable_del('ark_node_types');
+  variable_del('ark_naan');
+  variable_del('ark_ezid_user');
+  variable_del('ark_ezid_password');
+  variable_del('ark_ezid_remote_export');
+  variable_del('ark_ezid_remote_status');
+  variable_del('ark_ezid_update_if_exists');
+  variable_del('ark_composite_who_field');
+  variable_del('ark_indexing_limit');
+  variable_del('ark_authors_name_separator');
+  variable_del('ark_remote_server_address');
+  variable_del('ark_remote_identifier_site_address');
+  variable_del('ark_name_prefix');
   // Still need to delete ark_*_who, ark_*_what variables.
 }
 
@@ -169,6 +181,13 @@ function ark_update_7003() {
     'default' => 0,
     'description' => 'The WHEN (Unix timestamp) field from ARK definition.',
   ));  
+
+  return t('ARK 7003 - Renaming fields.');
+}
+
+function ark_update_7004() {
+
+  variable_set('ark_naan', '99999');
 
   return t('ARK 7003 - Renaming fields.');
 }

@@ -11,6 +11,51 @@
  */
 function ark_batches_form() {
 
+  $form['description'] = array(
+    '#type' => 'markup',
+    '#markup' => t('Select the batch operation'),
+  );
+  $form['batch'] = array(
+    '#type' => 'select',
+    '#title' => 'Choose batch',
+    '#options' => array(
+      'ark_batch_for_local_ark_data_creation' => t('Generate Ark data for all ARK content types selected'),
+      'ark_batch_for_remote_data_update' => t('Update Ark remote data for all ARK content types selected'),
+    ),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Go',
+  );
+
+  // If no nodes, prevent submission.
+  // Find out if we have a node to work with. Otherwise it won't work.
+  $nids = _get_all_node_ids_for_selected_ark_node_types();
+  $remote_status = variable_get('ark_ezid_remote_status', ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE);
+  $username = variable_get('ark_ezid_user');
+  $password = variable_get('ark_ezid_password');
+  if (empty($nids)) {
+    drupal_set_message(t("You don't currently have any nodes for the selected ARK content types, and this batch requires at least one node to process. As a result, this form is disabled."));
+    $form['submit']['#disabled'] = TRUE;
+  }
+  if (empty($username)) {
+    drupal_set_message(t("You don't set the username to connect to the remote sever under the ") . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark') . ". As a result, this form is disabled.");
+    $form['submit']['#disabled'] = TRUE;
+  }
+  if (empty($password)) {
+    drupal_set_message(t("You don't set the password to connect to the remote sever under the ") . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark') . ". As a result, this form is disabled.");
+    $form['submit']['#disabled'] = TRUE;
+  }
+  if (empty($remote_status)) {
+    drupal_set_message(t("You don't set the default status to the new entries for the remote sever under the ") . l(t('Ark Module Settings page'), 'admin/config/services/ark/remote_update_settings') . ". As a result, this form is disabled.");
+    $form['submit']['#disabled'] = TRUE;
+  }
+  return $form;
+}
+
+function ark_remote_update_settings_form() {
+
   $form['ark_ezid_remote_status_explanation'] = array(
     '#type' => 'fieldset',
     '#title' => t('EZID Remote Status field'),
@@ -48,6 +93,7 @@ function ark_batches_form() {
     '#description' => '<strong>' . t('PLEASE DO NOT CHANGE THIS VALUE IF YOU DON\'T KNOW WHAT IT MEANS!!!') . '</strong>',
     '#default_value' => variable_get( 'ark_ezid_remote_status', ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE),
     '#size' => 30,
+    '#required' => TRUE,
   );
 
   $form['ark_ezid_remote_status_explanation']['ark_ezid_remote_export'] = array(
@@ -60,7 +106,6 @@ function ark_batches_form() {
     '#default_value' => variable_get( 'ark_ezid_remote_export', ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE ),
   );
   
-
   $form['ark_ezid_remote_status_explanation']['ark_ezid_update_if_exists'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Update remote ARK entry if already exist. If not, create a new one.'),
@@ -70,37 +115,7 @@ function ark_batches_form() {
     '#default_value' => variable_get( 'ark_ezid_update_if_exists', ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS ),
   );
 
-  $form['ark_ezid_remote_status_explanation']['submit'] = array(
-    '#type' => 'submit',
-    '#value' => 'Save',
-  );
-
-  $form['description'] = array(
-    '#type' => 'markup',
-    '#markup' => t('Select the batch operation'),
-  );
-  $form['batch'] = array(
-    '#type' => 'select',
-    '#title' => 'Choose batch',
-    '#options' => array(
-      'ark_batch_for_local_ark_data_creation' => t('Generate Ark data for all ARK content types selected'),
-      'ark_batch_for_remote_data_update' => t('Update Ark remote data for all ARK content types selected'),
-    ),
-  );
-
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => 'Go',
-  );
-
-  // If no nodes, prevent submission.
-  // Find out if we have a node to work with. Otherwise it won't work.
-  $nids = _get_all_node_ids_for_selected_ark_node_types();
-  if (empty($nids)) {
-    drupal_set_message(t("You don't currently have any nodes for the selected ARK content types, and this batch requires at least one node to process. As a result, this form is disabled."));
-    $form['submit']['#disabled'] = TRUE;
-  }
-  return $form;
+  return system_settings_form($form);
 }
 
 /**
@@ -113,18 +128,18 @@ function ark_batches_form() {
  */
 function ark_batches_form_submit($form, &$form_state) {
   $function = $form_state['values']['batch'];
-
+  
   if ( $form_state['values']['batch'] == 'ark_batch_for_remote_data_update') {
     if(empty(variable_get('ark_ezid_user')) || empty(variable_get('ark_ezid_password'))) {
-      form_set_error('batch', t('Values for ark_ezid_user and ark_ezid_password are ampty. Please set it in the ARK module settings page.')) ;
+      form_set_error('batch', t('Values for ark_ezid_user or ark_ezid_password may be empty. Please set it in the ') . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark')) ;
     }
-  } else {
-    // Reset counter for debug information.
-    $_SESSION['http_request_count'] = 0;
-
-    $batch = $function();
-    batch_set($batch);
-  }
+  } 
+    
+  // Reset counter for debug information.
+  $_SESSION['http_request_count'] = 0;
+  $batch = $function();
+  
+  batch_set($batch);  
 }
 
 /**
@@ -172,7 +187,7 @@ function ark_batch_for_remote_data_update() {
   // Give helpful information about how many nodes are being operated on.
   $node_count = count(_get_all_node_data_for_remote_update());
   drupal_set_message(
-    t('There are @node_count nodes to be processed, so it will require @count requests.',
+    t('There are @node_count nodes configured to update remote ARK data to be processed, so it will require @count requests.',
       array(
         '@node_count' => $node_count,
         '@count' => ceil($node_count / variable_get('ark_indexing_limit', ARK_INDEXING_LIMIT)),
@@ -379,10 +394,12 @@ function ark_operation_for_local_ark_data_creation_finished($success, $results, 
  */
 function ark_operation_for_remote_ark_data_update_finished($success, $results, $operations) {
   if ($success) {
+    dd('$results: ');
+    dd(print_r($results));
     // Here we could do something meaningful with the results.
     // We just display the number of nodes we processed...
     drupal_set_message(t('@count results processed in @requests HTTP requests.', array('@count' => count($results), '@requests' => _batch_ark_get_http_requests())));
-    drupal_set_message(t('The final result was "%final"', array('%final' => end($results))));
+    drupal_set_message(t('The final result was "%final"', array('%final' => end($results['successfully_processed']))));
     
     if ( !empty($results['fail_processed']) ) {
       drupal_set_message(t('Folowing data failed to be processed'), 'error');

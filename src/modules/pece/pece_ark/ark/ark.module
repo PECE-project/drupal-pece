@@ -13,10 +13,7 @@ define('ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE'              , 'public');
 define('ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE'              , array('yes'));
 define('ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS'                , array('1'));
 define('ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS'         , 'https://n2t.net/');
-
-
-
-
+define('ARK_DEFAULT_PRE_PREFIX'                             , 'f4k');
 
 /**
  * @file
@@ -98,6 +95,36 @@ function ark_menu() {
     'file' => 'ark.admin.inc',
   );
 
+  $items['admin/config/services/ark/ark'] = array(
+    'title' => 'Local Content ARK Module Settings',
+    'description' => 'Configure the Name Assigning Authority Number and content type and field settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ark_settings'),
+    'access arguments' => array('administer ark'),
+    'file' => 'ark.admin.inc',
+    'weight' => '1',
+  );
+
+  $items['admin/config/services/ark/ark_module_settigns'] = array(
+    'title' => 'ARK Fields Settings',
+    'description' => 'Configure parameters Ark Module.',
+    'access arguments' => array('administer ark'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ark_settings_form'),
+    'file' => 'ark.settings.inc',
+    'weight' => '2',
+  ); 
+
+  $items['admin/config/services/ark/remote_update_settings'] = array(
+    'title' => 'ARK Remote Update Settings',
+    'description' => 'Execute ARK batch actions',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ark_remote_update_settings_form'),
+    'access arguments' => array('administer ark'),
+    'file' => 'ark.batches.inc',
+    'weight' => '3',
+  );
+
   $items['admin/config/services/ark/batch_operations'] = array(
     'title' => 'ARK Batch operations',
     'description' => 'Execute ARK batch actions',
@@ -105,52 +132,47 @@ function ark_menu() {
     'page arguments' => array('ark_batches_form'),
     'access arguments' => array('administer ark'),
     'file' => 'ark.batches.inc',
+    'weight' => '5',
   );
-
-  $items['admin/config/services/ark/ark_module_settigns'] = array(
-    'title' => 'Ark Module Settings',
-    'description' => 'Configure parameters Ark Module.',
-    'access arguments' => array('administer ark'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('ark_settings_form'),
-    'file' => 'ark.settings.inc',
-  ); 
 
   return $items;
 }
-/*
-  [15] => 
-    Array (
-      [ark_name] => 1rsk5ee9887787a82
-      [ark_who] => Master Admin
-      [ark_when] => 1591858800
-      [nid] => 305
-      [title] => ABLA Ark test
-    ) 
-*/
+
+
+/**
+ * Function ark_remote_data_update
+ * Update ark information in the remote server
+ *
+ * @param array $data
+ * @return bool TRUE if ok | False if not saved
+ */
 function ark_remote_data_update(array $data = null) {
   $return = FALSE;
   if ( !is_null($data) && is_array($data) && (isset($data['ark_name']) && isset($data['ark_who']) && isset($data['ark_when']) && isset($data['title']) && isset($data['nid'])) ) {
-    $username = variable_get('ark_ezid_user');
-    $password = variable_get('ark_ezid_password');
-    $ark_who = $data['ark_who'];
-    $ark_what = $data['title'];;
-    $ark_when = _arc_convert_data_to_human_readable($data['ark_when']);
-    $ark_update_if_exists = (array_shift(variable_get('ark_ezid_update_if_exists', ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS)) == '1') ? '?update_if_exists=yes' : '';
-    $ark_remote_export_param = array_shift(variable_get( 'ark_ezid_remote_export', ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE ));
-    $ark_remote_status_param = variable_get( 'ark_ezid_remote_status', ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE );
+    $username   = variable_get('ark_ezid_user');
+    $password   = variable_get('ark_ezid_password');
+    $ark_who    = $data['ark_who'];
+    $ark_what   = $data['title'];
+    $ark_when   = _arc_convert_data_to_human_readable($data['ark_when']);
+
+    $ark_update_if_exists     = variable_get('ark_ezid_update_if_exists', ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS);
+    $ark_update_if_exists     = (array_shift($ark_update_if_exists) == '1') ? '?update_if_exists=yes' : '';
+    $ark_remote_export_param  = variable_get('ark_ezid_remote_export', ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE);
+    $ark_remote_export_param  = (array_shift($ark_remote_export_param) == 0) ? 'no': array_shift($ark_remote_export_param);
+    $ark_remote_status_param  = variable_get( 'ark_ezid_remote_status', ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE);
+    
     $ark_remote_url = _ark_build_purl($data['ark_name']);
     $ark_identifier = _ark_build_identifier($data['ark_name']);
-    $create_url = variable_get('ark_remote_server_address', ARK_DEFAULT_REMOTE_SERVER_ADDRESS) . '/id/' . $ark_identifier .  $ark_update_if_exists;
-  
-    if (!empty($username) && empty($password) && empty($ark_who) && empty($ark_when) && empty($ark_remote_export_param) && empty($ark_remote_status_param) && empty($ark_remote_url) && empty($create_url)) {
-      $input = 
-      "_target: $ark_remote_url
-      erc.who: $ark_who
-      erc.what: $ark_what
-      erc.when: $ark_when
-      _export: $ark_remote_export_param
-      _status: $ark_remote_status_param";  
+    $create_url     = variable_get('ark_remote_server_address', ARK_DEFAULT_REMOTE_SERVER_ADDRESS) . '/id/' . $ark_identifier .  $ark_update_if_exists;
+
+    if (!empty($username) && !empty($password) && !empty($ark_who) && !empty($ark_when) && !empty($ark_what) && !empty($ark_remote_export_param) && !empty($ark_remote_status_param) && !empty($ark_remote_url) && !empty($create_url)) {
+      $input = "_target: $ark_remote_url
+erc.who: $ark_who
+erc.what: $ark_what
+erc.when: $ark_when
+_export: $ark_remote_export_param
+_status: $ark_remote_status_param";  
+
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL, $create_url);
       curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
@@ -166,8 +188,10 @@ function ark_remote_data_update(array $data = null) {
 
       if ( (in_array($return_header, array(200, 201, 204))) && ($output == "success: $ark_identifier") ) {
         $node = node_load($data['nid']);
+        $remote_ark_name = variable_get('ark_remote_identifier_site_address', ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS) . '/' . $ark_identifier;
+        $remote_ark_name = preg_replace('/([^:])(\/{2,})/', '$1/', $remote_ark_name);
         $from_remote_data = array (
-          'remote_ark_name' => $ark_identifier,
+          'remote_ark_name' => $remote_ark_name,
           'request_time'    => REQUEST_TIME,
         );
         ark_node_update($node, $from_remote_data);
@@ -181,6 +205,10 @@ function ark_remote_data_update(array $data = null) {
 
 /**
  * Insert/Update ark data in database.
+ *
+ * @param object $node
+ * @param array $from_remote_data Not mandatory. When some value is present in this variable, the update data comes from some remote ARK data update. 
+ * @return void
  */
 function ark_data_save($node, array $from_remote_data = null) {
   // Do not insert ARK name mappings for content that isn't resources.
@@ -211,12 +239,11 @@ function ark_data_save($node, array $from_remote_data = null) {
       $fields_for_update['ark_when']    = (isset($ark_data['ark_when']) && $ark_data['ark_when']  !== $ark_when) ? $ark_when  : $ark_data['ark_when'];  
     } elseif (!is_null($from_remote_data) && is_array($from_remote_data) && ( isset($from_remote_data['remote_ark_name']) && isset($from_remote_data['request_time']) )) {
       $fields_for_update['remote_ark_name']             = $from_remote_data['remote_ark_name']; 
-      $fields_for_update['remote_created']              = (isset($ark_data['remote_created']))        ? $ark_data['remote_created']         : $from_remote_data['request_time']; 
-      $fields_for_update['remote_changed']              = (isset($from_remote_data['request_time']))  ? $from_remote_data['request_time']   : REQUEST_TIME; 
+      $fields_for_update['remote_created']              = (!empty($ark_data['remote_created']))        ? $ark_data['remote_created']         : $from_remote_data['request_time']; 
+      $fields_for_update['remote_changed']              = (isset($from_remote_data['request_time']))   ? $from_remote_data['request_time']   : REQUEST_TIME; 
       $fields_for_update['need_send_remote_update']     = 0;
     }
     
-
     $ark_update_query = db_update('ark_map')
     ->fields($fields_for_update)
     ->condition('ark_name', $ark_data['ark_name']);
@@ -250,6 +277,14 @@ function ark_node_insert($node) {
   ark_data_save($node);
 }
 
+/**
+ *
+ * Return a formated string with the ark_who field. 
+ * ark_get_who_values_from_node
+ *
+ * @param  object $node
+ * @return string 
+ */
 function ark_get_who_values_from_node($node = null) {
   $result = null;
   if (!is_null($node) && isset($node->nid)) {
@@ -279,6 +314,12 @@ function ark_get_who_values_from_node($node = null) {
   return $result;
 }
 
+/**
+ * Return a timestamp with the ark_when value. 
+ * @param object $node A node object
+ * @return string timestamp
+ * 
+ */
 function ark_get_when_values_from_node($node = null) {
   $result = null;
   $date_when = null;
@@ -302,7 +343,17 @@ function ark_get_when_values_from_node($node = null) {
   return $result;
 }
 
-
+/**
+ * 
+ * @param $node - A node object
+ * 
+ */
+/**
+ * _ark_get_default_who - Helper function to return the node author name. 
+ *
+ * @param  object $node
+ * @return null|string
+ */
 function _ark_get_default_who($node = null) {
   $result = null;
   if (!is_null($node) && isset($node->uid)) {
@@ -313,10 +364,13 @@ function _ark_get_default_who($node = null) {
   return $result;
 }  
 
+
 /**
+ * _ark_get_default_when - Helper function to return the node created date timestamp. 
+ * @param $node - A node object
  * @todo: discuss about not published nodes
  * 
-*/
+ */
 function _ark_get_default_when($node = null) {
   $result = null;
   if (!is_null($node) && isset($node->created)) {
@@ -325,6 +379,13 @@ function _ark_get_default_when($node = null) {
   return $result;
 }  
 
+/**
+ * _ark_get_composite_who - Helper function to return the node created date timestamp. 
+ *
+ * @param  object $node
+ * @param  array $composite_who_fields_selected
+ * @return null|string
+ */
 function _ark_get_composite_who($node = null, array $composite_who_fields_selected = null) {
   $result = null;
   $authors = array();
@@ -354,6 +415,12 @@ function _ark_get_composite_who($node = null, array $composite_who_fields_select
   return $result;
 }  
 
+/**
+ * ark_get_data - Return an object with all information from an ARK entry
+ *
+ * @param mixed $node
+ * @return null|object
+ */
 function ark_get_data($node = null) {
   $result = null; 
 
@@ -670,6 +737,12 @@ function ark_naan_format_valid($naan) {
   return FALSE;
 }
 
+/**
+ * _arc_convert_data_to_human_readable - Helper function to convert a timestamp value in a human readeable value
+ *
+ * @param  mixed $timestamp
+ * @return void
+ */
 function _arc_convert_data_to_human_readable($timestamp = null){
   $result = null;
   if (!is_null($timestamp)) {
