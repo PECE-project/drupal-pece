@@ -29,7 +29,7 @@ function ark_settings($form, &$form_state) {
 
   $form['ark_ezid_user'] = array(
     '#type' => 'textfield',
-    '#title' => t('Username for the University of California EZID library'),
+    '#title' => t('Username for the University of California Digital Library'),
     '#description' => t('Username provided by University of California EZID to use the API system'),
     '#default_value' => variable_get('ark_ezid_user'),
     '#size' => 30,
@@ -37,7 +37,7 @@ function ark_settings($form, &$form_state) {
 
   $form['ark_ezid_password'] = array(
     '#type' => 'textfield',
-    '#title' => t('Password for the University of California EZID library'),
+    '#title' => t('Password for the University of California Digital Library'),
     '#description' => t('Password provided by University of California EZID to use the API system'),
     '#default_value' => variable_get('ark_ezid_password'),
     '#size' => 30,
@@ -45,7 +45,7 @@ function ark_settings($form, &$form_state) {
 
   $form['ark_remote_server_address'] = array(
     '#type' => 'textfield',
-    '#title' => t('Remote ARK server address. Normally the server address for the University of California EZID library'),
+    '#title' => t('Remote ARK server address. Normally the server address for the University of California Digital Library'),
     '#description' => t('Server address for the University of California EZID to use the API system'),
     '#default_value' => variable_get('ark_remote_server_address', ARK_DEFAULT_REMOTE_SERVER_ADDRESS),
     '#size' => 90,
@@ -207,6 +207,6 @@ function ark_fields_by_type_by_bundle($entity_type, $bundle, $field_type) {
  * Provide a default ARK prefix (random, as recommended by ARK).
  */
 function ark_default_prefix() {
-  return substr(str_shuffle('bcdfghjklmnpqrstvwxyz123456789'), 0, 4);
+  return ARK_DEFAULT_PRE_PREFIX . substr(str_shuffle('bcdfghjklmnpqrstvwxyz123456789'), 0, 4);
 }
 

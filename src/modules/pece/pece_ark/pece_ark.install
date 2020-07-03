@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * @file
+ * Schema definitions and install/update/uninstall hooks for PECE ARK module.
+ */
+
+define('PECE_ARK_COMPOSITE_WHO_FIELD'                            , array('field_pece_authors', 'field_pece_contributors'));
+define('PECE_ARK_INDEXING_LIMIT'                                 , 50);
+define('PECE_ARK_DEFAULT_AUTHORS_NAME_SEPARATOR'                 , ';');
+define('PECE_ARK_DEFAULT_REMOTE_SERVER_ADDRESS'                  , 'https://ezid.cdlib.org');
+define('PECE_ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE'              , 'public');
+define('PECE_ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE'              , array('yes'));
+define('PECE_ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS'                , array('1'));
+define('PECE_ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS'         , 'https://n2t.net/');
+define('PECE_ARK_DEFAULT_PRE_PREFIX'                             , 'f4k');
+
+/**
+  * Implements hook_uninstall().
+  */
+function pece_ark_uninstall() {
+  variable_del('ark_naan');
+  variable_del('ark_node_types');
+  variable_del('ark_naan');
+  variable_del('ark_ezid_user');
+  variable_del('ark_ezid_password');
+  variable_del('ark_ezid_remote_export');
+  variable_del('ark_ezid_remote_status');
+  variable_del('ark_ezid_update_if_exists');
+  variable_del('ark_composite_who_field');
+  variable_del('ark_indexing_limit');
+  variable_del('ark_authors_name_separator');
+  variable_del('ark_remote_server_address');
+  variable_del('ark_remote_identifier_site_address');
+  variable_del('ark_name_prefix');
+}
+
+
+
+function pece_ark_update_7001() {
+
+  variable_set('ark_naan'                                 , '99999');
+  variable_set('ark_ezid_user'                            , getenv('ARK_USER'));
+  variable_set('ark_ezid_password'                        , getenv('ARK_PASS'));
+  variable_set('ark_ezid_remote_export'                   , PECE_ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE );
+  variable_set('ark_ezid_remote_status'                   , PECE_ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE);
+  variable_set('ark_ezid_update_if_exists'                , PECE_ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS);
+  variable_set('ark_composite_who_field'                  , implode(',', PECE_ARK_COMPOSITE_WHO_FIELD));
+  variable_set('ark_indexing_limit'                       , PECE_ARK_INDEXING_LIMIT);
+  variable_set('ark_authors_name_separator'               , PECE_ARK_DEFAULT_AUTHORS_NAME_SEPARATOR);
+  variable_set('ark_remote_server_address'                , PECE_ARK_DEFAULT_REMOTE_SERVER_ADDRESS);
+  variable_set('ark_remote_identifier_site_address'       , PECE_ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS);
+  variable_set('ark_name_prefix'                          , PECE_ARK_DEFAULT_PRE_PREFIX . substr(str_shuffle('bcdfghjklmnpqrstvwxyz123456789'), 0, 4));
+
+  return t('PECE ARK 7001 - Setup default values for PECE.');
+}
+
