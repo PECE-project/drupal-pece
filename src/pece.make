@@ -119,8 +119,9 @@ projects[site_notice][subdir] = contrib
 projects[yaml_parser][version] = 1.0
 projects[yaml_parser][subdir] = contrib
 
-projects[ark][version] = 1.0-alpha1
-projects[ark][subdir] = contrib
+; Incorporated in pece_ark module.
+;projects[ark][version] = 1.0-alpha1
+;projects[ark][subdir] = contrib
 
 ; =====================
 ; Views
