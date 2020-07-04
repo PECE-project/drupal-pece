@@ -113,7 +113,7 @@ function ark_menu() {
     'page arguments' => array('ark_settings_form'),
     'file' => 'ark.settings.inc',
     'weight' => '2',
-  ); 
+  );
 
   $items['admin/config/services/ark/remote_update_settings'] = array(
     'title' => 'ARK Remote Update Settings',
@@ -160,7 +160,7 @@ function ark_remote_data_update(array $data = null) {
     $ark_remote_export_param  = variable_get('ark_ezid_remote_export', ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE);
     $ark_remote_export_param  = (array_shift($ark_remote_export_param) == 0) ? 'no': array_shift($ark_remote_export_param);
     $ark_remote_status_param  = variable_get( 'ark_ezid_remote_status', ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE);
-    
+
     $ark_remote_url = _ark_build_purl($data['ark_name']);
     $ark_identifier = _ark_build_identifier($data['ark_name']);
     $create_url     = variable_get('ark_remote_server_address', ARK_DEFAULT_REMOTE_SERVER_ADDRESS) . '/id/' . $ark_identifier .  $ark_update_if_exists;
@@ -171,7 +171,7 @@ erc.who: $ark_who
 erc.what: $ark_what
 erc.when: $ark_when
 _export: $ark_remote_export_param
-_status: $ark_remote_status_param";  
+_status: $ark_remote_status_param";
 
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL, $create_url);
@@ -195,9 +195,9 @@ _status: $ark_remote_status_param";
           'request_time'    => REQUEST_TIME,
         );
         ark_node_update($node, $from_remote_data);
-        $return = TRUE; 
+        $return = TRUE;
       }
-    } 
+    }
   }
   return $return;
 }
@@ -207,7 +207,7 @@ _status: $ark_remote_status_param";
  * Insert/Update ark data in database.
  *
  * @param object $node
- * @param array $from_remote_data Not mandatory. When some value is present in this variable, the update data comes from some remote ARK data update. 
+ * @param array $from_remote_data Not mandatory. When some value is present in this variable, the update data comes from some remote ARK data update.
  * @return void
  */
 function ark_data_save($node, array $from_remote_data = null) {
@@ -230,20 +230,20 @@ function ark_data_save($node, array $from_remote_data = null) {
       'created'                 => REQUEST_TIME,
       'changed'                 => REQUEST_TIME,
     ))->execute();
-  
+
   } else {
     $fields_for_update = array();
     if (is_null($from_remote_data)) {
       $fields_for_update['changed']     = REQUEST_TIME;
-      $fields_for_update['ark_who']     = (isset($ark_data['ark_who'])  && $ark_data['ark_who']   !== $ark_who)  ? $ark_who   : $ark_data['ark_who']; 
-      $fields_for_update['ark_when']    = (isset($ark_data['ark_when']) && $ark_data['ark_when']  !== $ark_when) ? $ark_when  : $ark_data['ark_when'];  
+      $fields_for_update['ark_who']     = (isset($ark_data['ark_who'])  && $ark_data['ark_who']   !== $ark_who)  ? $ark_who   : $ark_data['ark_who'];
+      $fields_for_update['ark_when']    = (isset($ark_data['ark_when']) && $ark_data['ark_when']  !== $ark_when) ? $ark_when  : $ark_data['ark_when'];
     } elseif (!is_null($from_remote_data) && is_array($from_remote_data) && ( isset($from_remote_data['remote_ark_name']) && isset($from_remote_data['request_time']) )) {
-      $fields_for_update['remote_ark_name']             = $from_remote_data['remote_ark_name']; 
-      $fields_for_update['remote_created']              = (!empty($ark_data['remote_created']))        ? $ark_data['remote_created']         : $from_remote_data['request_time']; 
-      $fields_for_update['remote_changed']              = (isset($from_remote_data['request_time']))   ? $from_remote_data['request_time']   : REQUEST_TIME; 
+      $fields_for_update['remote_ark_name']             = $from_remote_data['remote_ark_name'];
+      $fields_for_update['remote_created']              = (!empty($ark_data['remote_created']))        ? $ark_data['remote_created']         : $from_remote_data['request_time'];
+      $fields_for_update['remote_changed']              = (isset($from_remote_data['request_time']))   ? $from_remote_data['request_time']   : REQUEST_TIME;
       $fields_for_update['need_send_remote_update']     = 0;
     }
-    
+
     $ark_update_query = db_update('ark_map')
     ->fields($fields_for_update)
     ->condition('ark_name', $ark_data['ark_name']);
@@ -279,11 +279,11 @@ function ark_node_insert($node) {
 
 /**
  *
- * Return a formated string with the ark_who field. 
+ * Return a formated string with the ark_who field.
  * ark_get_who_values_from_node
  *
  * @param  object $node
- * @return string 
+ * @return string
  */
 function ark_get_who_values_from_node($node = null) {
   $result = null;
@@ -294,7 +294,7 @@ function ark_get_who_values_from_node($node = null) {
 
     $who_field_name = 'ark_' . $node->type . '_who';
     $who_field_value = variable_get($who_field_name);
-    
+
     switch ($who_field_value) {
       case ARK_SELECT_DEFAULT_WHO_OPTION_VALUE:
         $result = _ark_get_default_who($node);
@@ -305,7 +305,7 @@ function ark_get_who_values_from_node($node = null) {
         $composite_who_fields_selected = !is_null(variable_get($composite_who, null)) ? array_values(variable_get($composite_who)) : null;
         $result = _ark_get_composite_who($node, $composite_who_fields_selected);
         break;
-        
+
       default:
         $result = _ark_get_default_who($node);
         break;
@@ -315,10 +315,10 @@ function ark_get_who_values_from_node($node = null) {
 }
 
 /**
- * Return a timestamp with the ark_when value. 
+ * Return a timestamp with the ark_when value.
  * @param object $node A node object
  * @return string timestamp
- * 
+ *
  */
 function ark_get_when_values_from_node($node = null) {
   $result = null;
@@ -344,12 +344,12 @@ function ark_get_when_values_from_node($node = null) {
 }
 
 /**
- * 
+ *
  * @param $node - A node object
- * 
+ *
  */
 /**
- * _ark_get_default_who - Helper function to return the node author name. 
+ * _ark_get_default_who - Helper function to return the node author name.
  *
  * @param  object $node
  * @return null|string
@@ -360,27 +360,27 @@ function _ark_get_default_who($node = null) {
     if ($user = user_load($node->uid)) {
       $result = $user->realname;
     }
-  }  
+  }
   return $result;
-}  
+}
 
 
 /**
- * _ark_get_default_when - Helper function to return the node created date timestamp. 
+ * _ark_get_default_when - Helper function to return the node created date timestamp.
  * @param $node - A node object
  * @todo: discuss about not published nodes
- * 
+ *
  */
 function _ark_get_default_when($node = null) {
   $result = null;
   if (!is_null($node) && isset($node->created)) {
     $result = $node->created;
-  }  
+  }
   return $result;
-}  
+}
 
 /**
- * _ark_get_composite_who - Helper function to return the node created date timestamp. 
+ * _ark_get_composite_who - Helper function to return the node created date timestamp.
  *
  * @param  object $node
  * @param  array $composite_who_fields_selected
@@ -392,7 +392,7 @@ function _ark_get_composite_who($node = null, array $composite_who_fields_select
   $result = null;
   if (!is_null($node) && (!is_null($composite_who_fields_selected) && is_array($composite_who_fields_selected) && count($composite_who_fields_selected)) ) {
     $fields = array_filter($composite_who_fields_selected, 'is_string');
-    $wrapper = entity_metadata_wrapper('node', $node);  
+    $wrapper = entity_metadata_wrapper('node', $node);
     foreach ($fields as $field) {
       $array_authors_object = null;
       $array_authors_object = $wrapper->{$field}->value();
@@ -411,9 +411,9 @@ function _ark_get_composite_who($node = null, array $composite_who_fields_select
       }
     }
     $result = (count($authors)) ? implode(variable_get('ark_authors_name_separator', ARK_DEFAULT_AUTHORS_NAME_SEPARATOR) . ' ', $authors) : _ark_get_default_who($node);
-  }  
+  }
   return $result;
-}  
+}
 
 /**
  * ark_get_data - Return an object with all information from an ARK entry
@@ -422,7 +422,7 @@ function _ark_get_composite_who($node = null, array $composite_who_fields_select
  * @return null|object
  */
 function ark_get_data($node = null) {
-  $result = null; 
+  $result = null;
 
   if (!is_null($node) && isset($node->nid)) {
     if (!in_array($node->type, variable_get('ark_node_types'))) {
@@ -546,8 +546,8 @@ function ark_extra_field_render_array($field_name, $node) {
         ),
       );
       return $render;
-      break;  
-    
+      break;
+
     case 'ark_when':
       $date_formated = _arc_convert_data_to_human_readable($ark_data['ark_when']);
       $render = array(
@@ -567,9 +567,9 @@ function ark_extra_field_render_array($field_name, $node) {
         ),
       );
       return $render;
-      break;  
+      break;
   }
-  
+
 }
 
 /**
@@ -738,7 +738,7 @@ function ark_naan_format_valid($naan) {
 }
 
 /**
- * _arc_convert_data_to_human_readable - Helper function to convert a timestamp value in a human readeable value
+ * _arc_convert_data_to_human_readable - Helper function to convert a timestamp value in a human readable value
  *
  * @param  mixed $timestamp
  * @return void
@@ -750,7 +750,7 @@ function _arc_convert_data_to_human_readable($timestamp = null){
     $dt = new DateTime();
     $dt->setTimestamp($item_date);
     $dt->setTimezone(new DateTimeZone("UTC"));
-    $result = $dt->format('Y-m-d H:i:sP');  
+    $result = $dt->format('Y-m-d H:i:sP');
   }
   return $result;
 }
