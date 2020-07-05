@@ -95,7 +95,7 @@ class CreateEntity extends DataProducerPluginBase implements ContainerFactoryPlu
    *
    * @throws \Exception
    */
-  public function resolve(intarray $data, $entity, array $fieldsMap) {
+  public function resolve(array $data, $entity, array $fieldsMap) {
     //@todo: set permission
     //if ($this->currentUser->hasPermission("administer users") || $this->currentUser->isAnonymous()) {
       $values = ['type' => $entity];
