@@ -1,0 +1,35 @@
+uuid: b244d361-2650-4498-89f2-0335764a6633
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pbc_ref_user
+    - node.type.pece_essay
+  module:
+    - pbf
+id: node.pece_essay.field_pbc_ref_user
+field_name: field_pbc_ref_user
+entity_type: node
+bundle: pece_essay
+label: 'Permission User'
+description: 'Add specific permission by user'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+  synchronized_by: ''
+  synchronized_with: ''
+  synchronized_from_target: 0
+  priority: 0
+  user_method: user
+field_type: pbf

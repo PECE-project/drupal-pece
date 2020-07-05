@@ -6,16 +6,17 @@ dependencies:
     - field.field.node.pece_essay.body
     - field.field.node.pece_essay.field_essay_contents
     - field.field.node.pece_essay.field_essay_contributors
-    - field.field.node.pece_essay.field_essay_permission
     - field.field.node.pece_essay.field_essay_tags
     - field.field.node.pece_essay.field_essay_thumbnail
     - field.field.node.pece_essay.field_essay_uri
+    - field.field.node.pece_essay.field_pbc_ref_user
     - image.style.thumbnail
     - node.type.pece_essay
   module:
     - image
     - paragraphs
     - path
+    - pbf
     - text
 id: node.pece_essay.default
 targetEntityType: node
@@ -59,12 +60,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_essay_permission:
-    weight: 126
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
   field_essay_tags:
     weight: 125
     settings:
@@ -90,6 +85,21 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_pbc_ref_user:
+    weight: 130
+    settings:
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: pbf_widget
     region: content
   langcode:
     type: language_select
