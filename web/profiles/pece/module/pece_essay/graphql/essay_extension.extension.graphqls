@@ -7,3 +7,9 @@ extend type Query {
 
   peceEssay (id: Int!) : PeceEssay
 }
+
+extend type Mutation {
+  createPeceEssay(data: EssayInput):PeceEssay
+  deletePeceEssay(id: Int): PeceEssay
+  updatePeceEssay(id:Int, data: EssayInput): PeceEssay
+}
