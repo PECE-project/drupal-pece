@@ -91,7 +91,6 @@ class UpdateEntity extends DataProducerPluginBase implements ContainerFactoryPlu
    * @throws \Exception
    */
   public function resolve(int $id, array $data, string $entity, array $fieldsMap) {
-    //if (isset($data['id']) && $this->currentUser->hasPermission("administer users")) {
       $content = Node::load($id);
       foreach ($data as $key => $value) {
         if (isset($fieldsMap[$key])) {
@@ -101,8 +100,6 @@ class UpdateEntity extends DataProducerPluginBase implements ContainerFactoryPlu
       }
       $content->save();
       return $content;
-    //}
-    //return NULL;
   }
 
 }
