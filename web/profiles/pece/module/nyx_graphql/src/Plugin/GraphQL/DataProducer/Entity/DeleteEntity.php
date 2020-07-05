@@ -80,12 +80,9 @@ class DeleteEntity extends DataProducerPluginBase implements ContainerFactoryPlu
    */
   public function resolve(int $id, string $bundle) {
     // @TODO: Create permission
-    //if (isset($data['id']) && $this->currentUser->hasPermission("delete any pece_annotation content")) {
-      $content = Node::load($id);
-      $content->delete();
-      return $content;
-    //}
-    //return NULL;
+    $content = Node::load($id);
+    $content->delete();
+    return $content;
   }
 
 }

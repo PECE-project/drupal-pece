@@ -97,22 +97,19 @@ class CreateEntity extends DataProducerPluginBase implements ContainerFactoryPlu
    */
   public function resolve(array $data, $entity, array $fieldsMap) {
     //@todo: set permission
-    //if ($this->currentUser->hasPermission("administer users") || $this->currentUser->isAnonymous()) {
-      $values = ['type' => $entity];
-      foreach ($data as $key => $value) {
-        if (isset($fieldsMap[$key])) {
-          $field = $fieldsMap[$key];
-          $values[$field] = $value;
-        }
+    $values = ['type' => $entity];
+    foreach ($data as $key => $value) {
+      if (isset($fieldsMap[$key])) {
+        $field = $fieldsMap[$key];
+        $values[$field] = $value;
       }
-      try {
-        $content = Node::create($values);
-        $content->save();
-        return $content;
-      } catch (EntityStorageException $e) {
-        throw new \Exception($e->getMessage(), $e->getCode());
-      }
-    //}
-    //return NULL;
+    }
+    try {
+      $content = Node::create($values);
+      $content->save();
+      return $content;
+    } catch (EntityStorageException $e) {
+      throw new \Exception($e->getMessage(), $e->getCode());
+    }
   }
 }
