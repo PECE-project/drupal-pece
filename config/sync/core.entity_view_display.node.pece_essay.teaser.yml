@@ -5,6 +5,12 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_essay.body
+    - field.field.node.pece_essay.field_essay_contents
+    - field.field.node.pece_essay.field_essay_contributors
+    - field.field.node.pece_essay.field_essay_tags
+    - field.field.node.pece_essay.field_essay_thumbnail
+    - field.field.node.pece_essay.field_essay_uri
+    - field.field.node.pece_essay.field_pbc_ref_user
     - node.type.pece_essay
   module:
     - text
@@ -30,10 +36,10 @@ content:
 hidden:
   field_essay_contents: true
   field_essay_contributors: true
-  field_essay_permission: true
   field_essay_tags: true
   field_essay_thumbnail: true
   field_essay_uri: true
+  field_pbc_ref_user: true
   langcode: true
   og_audience: true
   search_api_excerpt: true

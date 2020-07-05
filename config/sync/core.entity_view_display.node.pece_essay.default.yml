@@ -6,15 +6,15 @@ dependencies:
     - field.field.node.pece_essay.body
     - field.field.node.pece_essay.field_essay_contents
     - field.field.node.pece_essay.field_essay_contributors
-    - field.field.node.pece_essay.field_essay_permission
     - field.field.node.pece_essay.field_essay_tags
     - field.field.node.pece_essay.field_essay_thumbnail
     - field.field.node.pece_essay.field_essay_uri
+    - field.field.node.pece_essay.field_pbc_ref_user
     - node.type.pece_essay
   module:
     - entity_reference_revisions
     - image
-    - options
+    - pbf
     - text
     - user
 id: node.pece_essay.default
@@ -46,13 +46,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_essay_permission:
-    weight: 106
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
   field_essay_tags:
     weight: 105
     label: above
@@ -77,6 +70,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_pbc_ref_user:
+    weight: 110
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
     region: content
   links:
     weight: 100
