@@ -1,0 +1,1427 @@
+From 6a4fc94d5afd18562b2c58a080a70bcbd7b5e23f Mon Sep 17 00:00:00 2001
+From: Leandro Carvalho <lrcarvalho@gmail.com>
+Date: Sun, 5 Jul 2020 20:05:34 -0300
+Subject: [PATCH] Add PECE requirements for ARK module.
+
+---
+ ark.admin.inc    |  96 +++++++++-
+ ark.batches.inc  | 487 +++++++++++++++++++++++++++++++++++++++++++++++
+ ark.info         |   7 +
+ ark.install      | 136 +++++++++++++
+ ark.module       | 450 ++++++++++++++++++++++++++++++++++++++++++-
+ ark.settings.inc |  50 +++++
+ 6 files changed, 1213 insertions(+), 13 deletions(-)
+ create mode 100644 ark.batches.inc
+ create mode 100644 ark.settings.inc
+
+diff --git a/ark.admin.inc b/ark.admin.inc
+index 747b180..6fdcf09 100644
+--- a/ark.admin.inc
++++ b/ark.admin.inc
+@@ -27,6 +27,38 @@ function ark_settings($form, &$form_state) {
+     '#size' => 10,
+   );
+ 
++  $form['ark_ezid_user'] = array(
++    '#type' => 'textfield',
++    '#title' => t('Username for the University of California Digital Library'),
++    '#description' => t('Username provided by University of California EZID to use the API system'),
++    '#default_value' => variable_get('ark_ezid_user'),
++    '#size' => 30,
++  );
++
++  $form['ark_ezid_password'] = array(
++    '#type' => 'textfield',
++    '#title' => t('Password for the University of California Digital Library'),
++    '#description' => t('Password provided by University of California EZID to use the API system'),
++    '#default_value' => variable_get('ark_ezid_password'),
++    '#size' => 30,
++  );
++
++  $form['ark_remote_server_address'] = array(
++    '#type' => 'textfield',
++    '#title' => t('Remote ARK server address. Normally the server address for the University of California Digital Library'),
++    '#description' => t('Server address for the University of California EZID to use the API system'),
++    '#default_value' => variable_get('ark_remote_server_address', ARK_DEFAULT_REMOTE_SERVER_ADDRESS),
++    '#size' => 90,
++  );
++
++  $form['ark_remote_identifier_site_address'] = array(
++    '#type' => 'textfield',
++    '#title' => t('Remote Identifier Site Address. By default "https://n2t.net/"'),
++    '#description' => t('Remote Identifier Site Address. The remote Identifiear as URL will composed by this server url + the Remote Ark Name value. Ex: https://n2t.net/ark:/99999/fk4pecetest15'),
++    '#default_value' => variable_get('ark_remote_identifier_site_address', ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS),
++    '#size' => 90,
++  );
++
+   $node_types = ark_all_available_node_types();
+   $form['ark_node_types'] = array(
+     '#type' => 'select',
+@@ -43,19 +75,41 @@ function ark_settings($form, &$form_state) {
+ 
+   foreach ($node_types as $type_machine_name => $type_human) {
+     $who = 'ark_' . $type_machine_name . '_who';
++    
+     $form[$who] = array(
+       '#type' => 'select',
+       '#title' => $type_human . ' ' . t('Who'),
+       '#options' => ark_fields_by_type_by_bundle('node', $type_machine_name, 'text'),
+-      '#default_value' => variable_get($who),
++      '#default_value' => variable_get($who, ARK_SELECT_DEFAULT_WHO_OPTION_VALUE),
+     );
+ 
++    if (ark_check_if_composite_who_fields_exists_in_content_type($type_machine_name)) {
++      $composite_who_options = array(
++        'field_pece_authors' => 'field_pece_authors',
++        'field_pece_contributors' => 'field_pece_contributors'
++      );
++      
++      $composite_who = 'ark_' . $type_machine_name . '_composite_who';
++      $default_value = variable_get($composite_who);
++      $checked_all = (count(array_unique(array_values($default_value))) == 1) ? array('checked' => 'checked') : array();
++
++      $form[$composite_who] = array(
++        '#title' => t('Use fields bellow as a composite field for WHO'),
++        '#type' => 'checkboxes',
++        '#description' => t('Choose composite WHO fields.'),
++        '#options' => $composite_who_options,
++        '#default_value' => $default_value,
++        '#attributes' => $checked_all,
++        '#tree' => TRUE,
++      );
++    }
++
+     $when = 'ark_' . $type_machine_name . '_when';
+     $form[$when] = array(
+       '#type' => 'select',
+       '#title' => $type_human . ' ' . t('When'),
+       '#options' => ark_fields_by_type_by_bundle('node', $type_machine_name, 'date'),
+-      '#default_value' => variable_get($when),
++      '#default_value' => variable_get($when, ARK_SELECT_DEFAULT_WHEN_OPTION_VALUE),
+     );
+ 
+   }
+@@ -94,6 +148,25 @@ function ark_all_available_node_types() {
+   return _node_types_build()->names;
+ }
+ 
++function ark_check_if_composite_who_fields_exists_in_content_type($bundle_name = NULL, array $fields = null) {
++  $entity_type = 'node';
++  $result = NULL; 
++  
++  $composite_who_fields = variable_get('ark_composite_who_field') ? array_map('trim', explode(',', variable_get('ark_composite_who_field'))) : ARK_COMPOSITE_WHO_FIELD;
++  // exit(var_dump($composite_who_fields));
++
++  $fields = (!is_null($fields) && is_array($fields) && count($fields)) ? $fields : $composite_who_fields;
++  if (isset($bundle_name)) {
++    $fields_list = field_info_instances($entity_type, $bundle_name);
++    if ($fields_list) {
++      $fields_name = array_keys($fields_list);
++      $array_comparison = array_intersect($fields_name, $fields);
++      $result = (array_values($array_comparison) == array_values($fields)) ? true : false;
++    }
++    return $result;
++  }
++}
++
+ /**
+  * Helper function to return all fields of one type on one bundle.
+  */
+@@ -107,10 +180,26 @@ function ark_fields_by_type_by_bundle($entity_type, $bundle, $field_type) {
+       $result_fields[$field] = $field;
+     }
+   }
++  
++  if($field_type == 'date') {
++    $result_fields[ARK_SELECT_DEFAULT_WHEN_OPTION_VALUE] = t('The @entity_type @bundle needs a @field_type field to be used. If no other option being choose, the @bundle creation date will be used.',
++      array('@entity_type' => $entity_type, '@bundle' => $bundle, '@field_type' => $field_type));
++  }
++
++  if($field_type == 'text') {
++    $result_fields[ARK_SELECT_DEFAULT_WHO_OPTION_VALUE] = t('The @entity_type @bundle needs a @field_type field to be used. If no other option being choose, the @bundle Author will be used.',
++      array('@entity_type' => $entity_type, '@bundle' => $bundle, '@field_type' => $field_type));
++
++    if (ark_check_if_composite_who_fields_exists_in_content_type($bundle)) {
++      $result_fields['use_composite_who'] = t('Use a composite WHO field with the fields bellow.');
++    }
++  }
++
+   if (!$result_fields) {
+     $result_fields[''] = t('The @entity_type @bundle needs a @field_type field to be used.',
+         array('@entity_type' => $entity_type, '@bundle' => $bundle, '@field_type' => $field_type));
+   }
++
+   return $result_fields;
+ }
+ 
+@@ -118,5 +207,6 @@ function ark_fields_by_type_by_bundle($entity_type, $bundle, $field_type) {
+  * Provide a default ARK prefix (random, as recommended by ARK).
+  */
+ function ark_default_prefix() {
+-  return substr(str_shuffle('bcdfghjklmnpqrstvwxyz123456789'), 0, 4);
++  return ARK_DEFAULT_PRE_PREFIX . substr(str_shuffle('bcdfghjklmnpqrstvwxyz123456789'), 0, 4);
+ }
++
+diff --git a/ark.batches.inc b/ark.batches.inc
+new file mode 100644
+index 0000000..e79bda9
+--- /dev/null
++++ b/ark.batches.inc
+@@ -0,0 +1,487 @@
++<?php
++
++/**
++ * @file
++ * Functions related to Ark indexing operations.
++ */
++
++
++/**
++ * Form builder function to allow choice of which batch to run.
++ */
++function ark_batches_form() {
++
++  $form['description'] = array(
++    '#type' => 'markup',
++    '#markup' => t('Select the batch operation'),
++  );
++  $form['batch'] = array(
++    '#type' => 'select',
++    '#title' => 'Choose batch',
++    '#options' => array(
++      'ark_batch_for_local_ark_data_creation' => t('Generate Ark data for all ARK content types selected'),
++      'ark_batch_for_remote_data_update' => t('Update Ark remote data for all ARK content types selected'),
++    ),
++  );
++
++  $form['submit'] = array(
++    '#type' => 'submit',
++    '#value' => 'Go',
++  );
++
++  // If no nodes, prevent submission.
++  // Find out if we have a node to work with. Otherwise it won't work.
++  $nids = _get_all_node_ids_for_selected_ark_node_types();
++  $remote_status = variable_get('ark_ezid_remote_status', ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE);
++  $username = variable_get('ark_ezid_user');
++  $password = variable_get('ark_ezid_password');
++  if (empty($nids)) {
++    drupal_set_message(t("You don't currently have any nodes for the selected ARK content types, and this batch requires at least one node to process. As a result, this form is disabled."));
++    $form['submit']['#disabled'] = TRUE;
++  }
++  if (empty($username)) {
++    drupal_set_message(t("You don't set the username to connect to the remote sever under the ") . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark') . ". As a result, this form is disabled.");
++    $form['submit']['#disabled'] = TRUE;
++  }
++  if (empty($password)) {
++    drupal_set_message(t("You don't set the password to connect to the remote sever under the ") . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark') . ". As a result, this form is disabled.");
++    $form['submit']['#disabled'] = TRUE;
++  }
++  if (empty($remote_status)) {
++    drupal_set_message(t("You don't set the default status to the new entries for the remote sever under the ") . l(t('Ark Module Settings page'), 'admin/config/services/ark/remote_update_settings') . ". As a result, this form is disabled.");
++    $form['submit']['#disabled'] = TRUE;
++  }
++  return $form;
++}
++
++function ark_remote_update_settings_form() {
++
++  $form['ark_ezid_remote_status_explanation'] = array(
++    '#type' => 'fieldset',
++    '#title' => t('EZID Remote Status field'),
++    '#weight' => 0,
++    '#collapsible' => FALSE,
++    '#collapsed' => FALSE,
++    '#description' => 
++      '<div>
++        <h2>' . t('Identifier status') . '</h2>
++        <p>' . t('Each identifier in EZID has a status.  The status is recorded as the value of the "_status" reserved metadata element (see <a class="reference internal" href="https://ezid.cdlib.org/doc/apidoc.html#internal-metadata">Internal metadata</a> on EZid site) and may be one of:') . '</p>
++        <dl>
++          <dt><strong>' . t('public') . '</strong></dt>
++          <dd>' . t('The default value.') . '</dd>
++          <dt><strong>' . t('reserved') . '</strong></dt>
++          <dd>' . t('The identifier is known only to EZID.  This status may be used to reserve an identifier name within EZID without advertising the identifier\'s existence to resolvers and other external services. A reserved identifier may be deleted.') . '</dd>
++          <dt><strong>' . t('unavailable') . '</strong></dt>
++          <dd>'
++          . t('The identifier is public, but the object referenced by the identifier is not available.  A reason for the object\'s unavailability may optionally follow the status separated by a pipe character ("|", U+007C), e.g., "unavailable | withdrawn by author".')   
++          . t('The identifier redirects to an EZID-provided "tombstone" page (an HTML page that displays the identifier\'s citation metadata and the reason for the object\'s unavailability) regardless of its target URL.') . 
++          '</dd>
++        </dl>
++        <p>' . t('An identifier\'s status may be changed by setting a new value for the aforementioned "_status" metadata element.  EZID permits only certain status transitions:') . '</p>
++        <ul>
++          <li>' . t('A status of "reserved" may be specified only at identifier creation time.') . '</li>
++          <li>' . t('A reserved identifier may be made public.  At this time the identifier will be registered with resolvers and other external services.') . '</li>
++          <li>' . t('A public identifier may be marked as unavailable.  At this time the identifier will be removed from resolvers and external services to the extent possible.') . '</li>
++          <li>' . t('An unavailable identifier may be returned to public status.  At this time the identifier will be re-registered with resolvers and other external services.') . '</li>
++        </ul>
++      </div>'
++  );
++
++  $form['ark_ezid_remote_status_explanation']['ark_ezid_remote_status'] = array(
++    '#type' => 'textfield',
++    '#title' => t('The default value for status field when creating a new remote entry.'),
++    '#description' => '<strong>' . t('PLEASE DO NOT CHANGE THIS VALUE IF YOU DON\'T KNOW WHAT IT MEANS!!!') . '</strong>',
++    '#default_value' => variable_get( 'ark_ezid_remote_status', ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE),
++    '#size' => 30,
++    '#required' => TRUE,
++  );
++
++  $form['ark_ezid_remote_status_explanation']['ark_ezid_remote_export'] = array(
++    '#type' => 'checkboxes',
++    '#title' => t('Determines if the identifier is publicized by exporting it to external indexing and harvesting services. Default is checked.'),
++    '#description' => '<strong>' . t('PLEASE DO NOT CHANGE THIS VALUE IF YOU DON\'T KNOW WHAT IT MEANS!!!') . '</strong>',
++    '#options' => array(
++      'yes' => t('Allow harvesting/indexing.'),
++    ),
++    '#default_value' => variable_get( 'ark_ezid_remote_export', ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE ),
++  );
++  
++  $form['ark_ezid_remote_status_explanation']['ark_ezid_update_if_exists'] = array(
++    '#type' => 'checkboxes',
++    '#title' => t('Update remote ARK entry if already exist. If not, create a new one.'),
++    '#options' => array(
++      '1' => t('Update remote ARK entry if already exist. If not, create a new one.'),
++    ),
++    '#default_value' => variable_get( 'ark_ezid_update_if_exists', ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS ),
++  );
++
++  return system_settings_form($form);
++}
++
++/**
++ * Submit handler.
++ *
++ * @param array $form
++ *   Form API form.
++ * @param array $form_state
++ *   Form API form.
++ */
++function ark_batches_form_submit($form, &$form_state) {
++  $function = $form_state['values']['batch'];
++  
++  if ( $form_state['values']['batch'] == 'ark_batch_for_remote_data_update') {
++    if(empty(variable_get('ark_ezid_user')) || empty(variable_get('ark_ezid_password'))) {
++      form_set_error('batch', t('Values for ark_ezid_user or ark_ezid_password may be empty. Please set it in the ') . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark')) ;
++    }
++  } 
++    
++  // Reset counter for debug information.
++  $_SESSION['http_request_count'] = 0;
++  $batch = $function();
++  
++  batch_set($batch);  
++}
++
++/**
++ * Batch definition that will generate local ARK data.
++ */
++function ark_batch_for_local_ark_data_creation() {
++
++  // Give helpful information about how many nodes are being operated on.
++  $node_count = count(_get_all_node_ids_for_selected_ark_node_types());
++  drupal_set_message(
++    t('There are @node_count nodes to be processed, so it will require @count requests.',
++      array(
++        '@node_count' => $node_count,
++        '@count' => ceil($node_count / variable_get('ark_indexing_limit', ARK_INDEXING_LIMIT)),
++      )
++    )
++  );
++
++  $operations[] = array(
++    'ark_operation_for_local_ark_data_creation',
++    array(),
++  );
++  $batch = array(
++    'operations' => $operations,
++    'finished' => 'ark_operation_for_local_ark_data_creation_finished',
++    // Message displayed while processing the batch. Available placeholders are:
++    // @current, @remaining, @total, @percentage, @estimate and @elapsed.
++    // These placeholders are replaced with actual values in _batch_process(),
++    // using strtr() instead of t(). 
++    // Defaults to t('Completed @current of @total.').
++    'title' => t('Creating local ARK URL for the selected content types'),
++    'init_message' => t('Preparing to submit content to ARK URL creation...'),
++    'progress_message' => t('Creating ARK URLs ...'),
++    'error_message' => t('ARK URL creation  has encountered an error.'),
++    'file' => drupal_get_path('module', 'ark') . '/ark.batches.inc',
++  );
++  return $batch;
++}
++
++/**
++ * Batch definition to update remote ARK data.
++ */
++function ark_batch_for_remote_data_update() {
++
++  // Give helpful information about how many nodes are being operated on.
++  $node_count = count(_get_all_node_data_for_remote_update());
++  drupal_set_message(
++    t('There are @node_count nodes configured to update remote ARK data to be processed, so it will require @count requests.',
++      array(
++        '@node_count' => $node_count,
++        '@count' => ceil($node_count / variable_get('ark_indexing_limit', ARK_INDEXING_LIMIT)),
++      )
++    )
++  );
++
++  $operations[] = array(
++    'ark_operation_for_remote_ark_data_update',
++    array(),
++  );
++  $batch = array(
++    'operations' => $operations,
++    'finished' => 'ark_operation_for_remote_ark_data_update_finished',
++    // Message displayed while processing the batch. Available placeholders are:
++    // @current, @remaining, @total, @percentage, @estimate and @elapsed.
++    // These placeholders are replaced with actual values in _batch_process(),
++    // using strtr() instead of t(). 
++    // Defaults to t('Completed @current of @total.').
++    'title' => t('Updating remote ARK data for the existent local ark data'),
++    'init_message' => t('Preparing to submit ARK data to remote server...'),
++    'progress_message' => t('Updating remote data...'),
++    'error_message' => t('Remote data update has encountered an error.'),
++    'file' => drupal_get_path('module', 'ark') . '/ark.batches.inc',
++  );
++  return $batch;
++}
++
++/**
++ * Batch operation for ark_batch_for_local_ark_data_creation
++ *
++ * After each group of ARK_INDEXING_LIMIT (default by module 50) control is returned to the batch API for later
++ * continuation.
++ * 
++ * 
++ */
++function ark_operation_for_local_ark_data_creation(&$context) {
++  module_load_include('module', 'ark');
++  module_load_include('inc', 'ark', 'ark.batches');
++  // Use the $context['sandbox'] at your convenience to store the
++  // information needed to track progression between successive calls.
++  $were_ark_nodes = _get_were_clause_for_selected_ark_node_types();
++
++  if (empty($context['sandbox'])) {
++    $context['sandbox'] = array();
++    $context['sandbox']['progress'] = 0;
++    $context['sandbox']['current_node'] = 0;
++
++    // Save node count for the termination message.
++    if ($were_ark_nodes) {
++      $node_ids = _get_all_node_ids_for_selected_ark_node_types();
++      if ($node_ids) {
++        $context['sandbox']['max'] = count($node_ids);
++      }
++    }
++  }
++
++  // Process nodes by groups of ARK_INDEXING_LIMIT (default by module 50).
++  // When a group of five is processed, the batch update engine determines
++  // whether it should continue processing in the same request or provide
++  // progress feedback to the user and wait for the next request.
++  // That way even though we're already processing at the operation level
++  // the operation itself is interruptible.
++  $limit = variable_get('ark_indexing_limit', ARK_INDEXING_LIMIT);
++
++  // Retrieve the next group of nids.
++  $result = db_select('node', 'n')
++            ->fields('n', array('nid'))
++            ->orderBy('n.nid', 'ASC')
++            ->where("$were_ark_nodes AND (n.nid > :nid)", array(':nid' => $context['sandbox']['current_node']))
++            ->extend('PagerDefault')
++            ->limit($limit)
++            ->execute();
++            
++  foreach ($result as $row) {
++    // Here we actually perform our dummy 'processing' on the current node.
++    $node = node_load($row->nid, NULL, TRUE);
++    ark_data_save($node);
++    // Store some results for post-processing in the 'finished' callback.
++    // The contents of 'results' will be available as $results in the
++    // 'finished' function (in this example, batch_example_finished()).
++    $context['results'][] = 'ARK data for nid:' . $node->nid . ', Title' . check_plain($node->title) . ' processed';
++
++    // Update our progress information.
++    $context['sandbox']['progress']++;
++    $context['sandbox']['current_node'] = $node->nid;
++    $context['message'] = check_plain($node->title);
++    $context['message'] = t('Generating ARK data for node "@title" (nid:@nid)', array('@title' => $node->title, '@nid' => $node->nid));
++  }
++
++  // Inform the batch engine that we are not finished,
++  // and provide an estimation of the completion level we reached.
++  if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
++    $context['finished'] = ($context['sandbox']['progress'] >= $context['sandbox']['max']);
++  }
++  _batch_ark_update_http_requests();
++}
++
++/**
++ * Batch operation for ark_operation_for_remote_ark_data_update
++ *
++ * After each group of ARK_INDEXING_LIMIT (default by module 50) control is returned to the batch API for later
++ * continuation.
++ * 
++ * 
++ */
++function ark_operation_for_remote_ark_data_update(&$context) {
++  module_load_include('module', 'ark');
++  module_load_include('inc', 'ark', 'ark.batches');
++  // Use the $context['sandbox'] at your convenience to store the
++  // information needed to track progression between successive calls.
++
++  if (empty($context['sandbox'])) {
++    $context['sandbox'] = array();
++    $context['sandbox']['progress'] = 0;
++    $context['sandbox']['current_node'] = 0;
++
++    $nodes_data = _get_all_node_data_for_remote_update();
++    if ($nodes_data) {
++      $context['sandbox']['max'] = count($nodes_data);
++    }
++  }
++
++  // Process nodes by groups of ARK_INDEXING_LIMIT (default by module 50).
++  // When a group of five is processed, the batch update engine determines
++  // whether it should continue processing in the same request or provide
++  // progress feedback to the user and wait for the next request.
++  // That way even though we're already processing at the operation level
++  // the operation itself is interruptible.
++  $limit = variable_get('ark_indexing_limit', ARK_INDEXING_LIMIT);
++
++  // Retrieve the next group of nids.
++  $result = array();
++  $query = db_select('ark_map', 'am');
++  $query->join('node' , 'n', 'am.entity_id = n.nid');
++  $query->fields('am' , array('ark_name', 'ark_who', 'ark_when'));
++  $query->fields('n'  , array('nid', 'title'));
++  $query->orderBy('n.nid', 'ASC');
++  $query->where('(am.need_send_remote_update = :cond) AND (n.nid > :nid)', array(':cond' => 1, ':nid' => $context['sandbox']['current_node']));
++  $query->extend('PagerDefault');
++  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
++
++  if (count($result)) {
++    foreach ($result as $key => $data) {
++      $current_status = false;
++      // Here we actually perform our dummy 'processing' on the current node.
++      $current_status = ark_remote_data_update($data);
++      // Store some results for post-processing in the 'finished' callback.
++      // The contents of 'results' will be available as $results in the
++      // 'finished' function (in this example, batch_example_finished()).
++      if ($current_status) {
++        $context['results']['successfully_processed'][] = 'Remote ARK data for nid:' . $data['nid'] . ', Title: ' . check_plain($data['title']) . ' successfully processed';
++      } else {
++        $context['results']['fail_processed'][] = 'Remote ARK data for nid:' . $data['nid'] . ', Title: ' . check_plain($data['title']) . ' failed during the process';
++      }
++      
++  
++      // Update our progress information.
++      $context['sandbox']['progress']++;
++      $context['sandbox']['current_node'] = $data['nid'];
++      $context['message'] = check_plain($data['title']);
++      $context['message'] = t('Updating Remote ARK data for node "@title" (nid:@nid)', array('@title' => $data['title'] , '@nid' => $data['nid']));
++    }
++  }
++            
++  
++
++  // Inform the batch engine that we are not finished,
++  // and provide an estimation of the completion level we reached.
++  if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
++    $context['finished'] = ($context['sandbox']['progress'] >= $context['sandbox']['max']);
++  }
++  _batch_ark_update_http_requests();
++}
++
++/**
++ * Batch 'finished' callback .
++ */
++function ark_operation_for_local_ark_data_creation_finished($success, $results, $operations) {
++  if ($success) {
++    // Here we could do something meaningful with the results.
++    // We just display the number of nodes we processed...
++    drupal_set_message(t('@count results processed in @requests HTTP requests.', array('@count' => count($results), '@requests' => _batch_ark_get_http_requests())));
++    drupal_set_message(t('The final result was "%final"', array('%final' => end($results))));
++  }
++  else {
++    // An error occurred.
++    // $operations contains the operations that remained unprocessed.
++    $error_operation = reset($operations);
++    drupal_set_message(
++      t('An error occurred while processing @operation with arguments : @args',
++        array(
++          '@operation' => $error_operation[0],
++          '@args' => print_r($error_operation[0], TRUE),
++        )
++      ),
++      'error'
++    );
++  }
++}
++
++/**
++ * Batch 'finished' callback .
++ */
++function ark_operation_for_remote_ark_data_update_finished($success, $results, $operations) {
++  if ($success) {
++    dd('$results: ');
++    dd(print_r($results));
++    // Here we could do something meaningful with the results.
++    // We just display the number of nodes we processed...
++    drupal_set_message(t('@count results processed in @requests HTTP requests.', array('@count' => count($results), '@requests' => _batch_ark_get_http_requests())));
++    drupal_set_message(t('The final result was "%final"', array('%final' => end($results['successfully_processed']))));
++    
++    if ( !empty($results['fail_processed']) ) {
++      drupal_set_message(t('Folowing data failed to be processed'), 'error');
++      foreach( $results['fail_processed'] as $failed_row) {
++        drupal_set_message($failed_row, 'error');
++      }  
++    }
++  }
++  else {
++    // An error occurred.
++    // $operations contains the operations that remained unprocessed.
++    $error_operation = reset($operations);
++    drupal_set_message(
++      t('An error occurred while processing @operation with arguments : @args',
++        array(
++          '@operation' => $error_operation[0],
++          '@args' => print_r($error_operation[0], TRUE),
++        )
++      ),
++      'error'
++    );
++  }
++}
++
++/**
++ * Utility function to increment HTTP requests in a session variable.
++ */
++function _batch_ark_update_http_requests() {
++  $_SESSION['http_request_count']++;
++}
++
++/**
++ * Utility function to count the HTTP requests in a session variable.
++ *
++ * @return int
++ *   Number of requests.
++ */
++function _batch_ark_get_http_requests() {
++  return !empty($_SESSION['http_request_count']) ? $_SESSION['http_request_count'] : 0;
++}
++
++function _get_were_clause_for_selected_ark_node_types(){
++  $ark_node_types = variable_get('ark_node_types');
++  $were_ark_nodes = NULL;
++  if ($ark_node_types) {
++    $array_were_ark_node_types = array();
++    
++    foreach ($ark_node_types as $key => $node_type) {
++      array_push($array_were_ark_node_types, "(type = '$node_type')"); 
++    }
++    $were_ark_nodes  = (count($array_were_ark_node_types) > 1) ? implode(' OR ', $array_were_ark_node_types) : implode('', $array_were_ark_node_types);
++    $were_ark_nodes .= ' AND (status = 1)';
++  }
++  return $were_ark_nodes;
++}
++
++function _get_all_node_ids_for_selected_ark_node_types() {
++  $result = array();
++  $were_ark_nodes = _get_were_clause_for_selected_ark_node_types();
++  if ($were_ark_nodes) {
++    $node_ids = db_select('node', 'n')
++                ->fields('n', array('nid'))
++                ->orderBy('n.nid', 'ASC')
++                ->where("$were_ark_nodes")
++                ->extend('PagerDefault')
++                ->execute()->fetchCol('nid');
++    if ($node_ids) {
++      $result = $node_ids;
++    }
++  }
++  return $result;
++}
++
++function _get_all_node_data_for_remote_update() {
++  $result = array();
++  $query = db_select('ark_map', 'am');
++  $query->join('node' , 'n', 'am.entity_id = n.nid');
++  $query->fields('am' , array('ark_name', 'ark_who', 'ark_when'));
++  $query->fields('n'  , array('nid', 'title'));
++  $query->orderBy('n.nid', 'ASC');
++  $query->where('am.need_send_remote_update = :cond', array(':cond' => 1));
++  $query->extend('PagerDefault');
++  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
++  return $result;
++}
+\ No newline at end of file
+diff --git a/ark.info b/ark.info
+index 1fd3210..a95deec 100644
+--- a/ark.info
++++ b/ark.info
+@@ -5,3 +5,10 @@ core = 7.x
+ files[] = ark.test
+ dependencies[] = date
+ 
++
++; Information added by Drupal.org packaging script on 2016-07-27
++version = "7.x-1.0-alpha1"
++core = "7.x"
++project = "ark"
++datestamp = "1469617700"
++
+diff --git a/ark.install b/ark.install
+index dd22733..559b14d 100644
+--- a/ark.install
++++ b/ark.install
+@@ -11,6 +11,18 @@
+ function ark_uninstall() {
+   variable_del('ark_naan');
+   variable_del('ark_node_types');
++  variable_del('ark_naan');
++  variable_del('ark_ezid_user');
++  variable_del('ark_ezid_password');
++  variable_del('ark_ezid_remote_export');
++  variable_del('ark_ezid_remote_status');
++  variable_del('ark_ezid_update_if_exists');
++  variable_del('ark_composite_who_field');
++  variable_del('ark_indexing_limit');
++  variable_del('ark_authors_name_separator');
++  variable_del('ark_remote_server_address');
++  variable_del('ark_remote_identifier_site_address');
++  variable_del('ark_name_prefix');
+   // Still need to delete ark_*_who, ark_*_what variables.
+ }
+ 
+@@ -53,3 +65,127 @@ function ark_schema() {
+ 
+   return $schema;
+ }
++
++/**
++ * Add extra fields.
++ */
++function ark_update_7001() {
++  $array_specs = array(
++    'remote_ark_name' => array(
++      'type' => 'varchar',
++      'length' => 128,
++      'not null' => TRUE,
++      'default' => '',
++      'description' => 'The remote name of ARK object.',
++    ),
++    'ark_who' => array(
++      'type' => 'text',
++      'size' => 'normal',
++      'not null' => TRUE,
++      'default' => '',
++      'description' => 'The WHO field from ARK definition.',
++    ),
++    'ark_when' => array(
++      'type' => 'int',
++      'not null' => TRUE,
++      'default' => 0,
++      'description' => 'The WHEN (Unix timestamp) field from ARK definition.',
++    ),
++    'created' => array(
++      'description' => 'The Unix timestamp when name of ARK object was created.',
++      'type' => 'int',
++      'not null' => TRUE,
++      'default' => 0,
++    ),
++    'remote_created' => array(
++      'description' => 'The Unix timestamp when name of remote ARK object was created.',
++      'type' => 'int',
++      'not null' => TRUE,
++      'default' => 0,
++    ),
++    'changed' => array(
++      'description' => 'The Unix timestamp when name of ARK object was most recently saved.',
++      'type' => 'int',
++      'not null' => TRUE,
++      'default' => 0,
++    ),
++    'remote_changed' => array(
++      'description' => 'The Unix timestamp when name of remote ARK object was most recently saved.',
++      'type' => 'int',
++      'not null' => TRUE,
++      'default' => 0,
++    ),
++    'data' => array(
++      'type' => 'blob',
++      'not null' => FALSE,
++      'size' => 'big',
++      'serialize' => TRUE,
++      'description' => 'A serialized array of additional data.',
++    ),
++    'remote_data' => array(
++      'type' => 'blob',
++      'not null' => FALSE,
++      'size' => 'big',
++      'serialize' => TRUE,
++      'description' => 'A serialized array of remote additional data.',
++    ),
++    'need_send_remote_update' => array(
++      'type' => 'int',
++      'not null' => TRUE,
++      'size' => 'tiny',
++      'default' => 1,
++      'description' => 'Should send updated data to the remote Ark NAAN.',
++    ),
++  );
++
++  foreach ($array_specs as $new_field => $spec) {
++    db_add_field('ark_map', $new_field, $spec);
++  }
++}
++
++/**
++ * Add flag for remote update.
++ */
++function ark_update_7002() {
++  $array_specs = array(
++    'need_send_remote_update' => array(
++      'type' => 'int',
++      'not null' => TRUE,
++      'size' => 'tiny',
++      'default' => 1,
++      'description' => 'Should send updated data to the remote Ark NAAN.',
++    ),
++  );
++
++  foreach ($array_specs as $new_field => $spec) {
++    db_add_field('ark_map', $new_field, $spec);
++  }
++}
++
++/**
++ * Renaming fields.
++ */
++function ark_update_7003() {
++
++  db_change_field('ark_map', 'who', 'ark_who', array(
++    'type' => 'text',
++    'size' => 'normal',
++    'not null' => TRUE,
++    // 'default' => '',
++    'description' => 'The WHO field from ARK definition.',
++  ));
++
++  db_change_field('ark_map', 'when', 'ark_when', array(
++    'type' => 'int',
++    'not null' => TRUE,
++    'default' => 0,
++    'description' => 'The WHEN (Unix timestamp) field from ARK definition.',
++  ));
++}
++
++/**
++ * Set default value for ark_naan variable.
++ */
++function ark_update_7004() {
++  variable_set('ark_naan', '99999');
++}
+diff --git a/ark.module b/ark.module
+index d122041..30a45f5 100755
+--- a/ark.module
++++ b/ark.module
+@@ -1,5 +1,20 @@
+ <?php
+ 
++define('ARK_COMPOSITE_WHO_FIELD'                            , array('field_pece_authors', 'field_pece_contributors'));
++define('ARK_PERSISTENT_UNIFORM_RESOURCE_LOCATOR_FIELD_NAME' , 'ark_plur');
++define('ARK_COMPOSITE_WHO_FIELD_NAME'                       , 'ark_composite_who');
++define('ARK_INDEXING_LIMIT'                                 , 50);
++define('ARK_SELECT_DEFAULT_WHO_OPTION_VALUE'                , 'use_default_who');
++define('ARK_SELECT_COMPOSITE_WHO_OPTION_VALUE'              , 'use_composite_who');
++define('ARK_SELECT_DEFAULT_WHEN_OPTION_VALUE'               , 'use_default_when');
++define('ARK_DEFAULT_AUTHORS_NAME_SEPARATOR'                 , ';');
++define('ARK_DEFAULT_REMOTE_SERVER_ADDRESS'                  , 'https://ezid.cdlib.org');
++define('ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE'              , 'public');
++define('ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE'              , array('yes'));
++define('ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS'                , array('1'));
++define('ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS'         , 'https://n2t.net/');
++define('ARK_DEFAULT_PRE_PREFIX'                             , 'f4k');
++
+ /**
+  * @file
+  * Contains hook implementations and main functions for ARK module.
+@@ -48,6 +63,7 @@ function ark_menu() {
+     'page callback' => 'ark_info_page',
+     'access callback' => TRUE,
+   );
++
+   $items['ark/%'] = array(
+     'title' => 'Archival Resource Key Identifiers',
+     'page callback' => 'ark_info_page',
+@@ -79,9 +95,175 @@ function ark_menu() {
+     'file' => 'ark.admin.inc',
+   );
+ 
++  $items['admin/config/services/ark/ark'] = array(
++    'title' => 'Local Content ARK Module Settings',
++    'description' => 'Configure the Name Assigning Authority Number and content type and field settings.',
++    'page callback' => 'drupal_get_form',
++    'page arguments' => array('ark_settings'),
++    'access arguments' => array('administer ark'),
++    'file' => 'ark.admin.inc',
++    'weight' => '1',
++  );
++
++  $items['admin/config/services/ark/ark_module_settigns'] = array(
++    'title' => 'ARK Fields Settings',
++    'description' => 'Configure parameters Ark Module.',
++    'access arguments' => array('administer ark'),
++    'page callback' => 'drupal_get_form',
++    'page arguments' => array('ark_settings_form'),
++    'file' => 'ark.settings.inc',
++    'weight' => '2',
++  );
++
++  $items['admin/config/services/ark/remote_update_settings'] = array(
++    'title' => 'ARK Remote Update Settings',
++    'description' => 'Execute ARK batch actions',
++    'page callback' => 'drupal_get_form',
++    'page arguments' => array('ark_remote_update_settings_form'),
++    'access arguments' => array('administer ark'),
++    'file' => 'ark.batches.inc',
++    'weight' => '3',
++  );
++
++  $items['admin/config/services/ark/batch_operations'] = array(
++    'title' => 'ARK Batch operations',
++    'description' => 'Execute ARK batch actions',
++    'page callback' => 'drupal_get_form',
++    'page arguments' => array('ark_batches_form'),
++    'access arguments' => array('administer ark'),
++    'file' => 'ark.batches.inc',
++    'weight' => '5',
++  );
++
+   return $items;
+ }
+ 
++
++/**
++ * Function ark_remote_data_update
++ * Update ark information in the remote server
++ *
++ * @param array $data
++ * @return bool TRUE if ok | False if not saved
++ */
++function ark_remote_data_update(array $data = null) {
++  $return = FALSE;
++  if ( !is_null($data) && is_array($data) && (isset($data['ark_name']) && isset($data['ark_who']) && isset($data['ark_when']) && isset($data['title']) && isset($data['nid'])) ) {
++    $username   = variable_get('ark_ezid_user');
++    $password   = variable_get('ark_ezid_password');
++    $ark_who    = $data['ark_who'];
++    $ark_what   = $data['title'];
++    $ark_when   = _arc_convert_data_to_human_readable($data['ark_when']);
++
++    $ark_update_if_exists     = variable_get('ark_ezid_update_if_exists', ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS);
++    $ark_update_if_exists     = (array_shift($ark_update_if_exists) == '1') ? '?update_if_exists=yes' : '';
++    $ark_remote_export_param  = variable_get('ark_ezid_remote_export', ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE);
++    $ark_remote_export_param  = (array_shift($ark_remote_export_param) == 0) ? 'no': array_shift($ark_remote_export_param);
++    $ark_remote_status_param  = variable_get( 'ark_ezid_remote_status', ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE);
++
++    $ark_remote_url = _ark_build_purl($data['ark_name']);
++    $ark_identifier = _ark_build_identifier($data['ark_name']);
++    $create_url     = variable_get('ark_remote_server_address', ARK_DEFAULT_REMOTE_SERVER_ADDRESS) . '/id/' . $ark_identifier .  $ark_update_if_exists;
++
++    if (!empty($username) && !empty($password) && !empty($ark_who) && !empty($ark_when) && !empty($ark_what) && !empty($ark_remote_export_param) && !empty($ark_remote_status_param) && !empty($ark_remote_url) && !empty($create_url)) {
++      $input = "_target: $ark_remote_url
++erc.who: $ark_who
++erc.what: $ark_what
++erc.when: $ark_when
++_export: $ark_remote_export_param
++_status: $ark_remote_status_param";
++
++      $ch = curl_init();
++      curl_setopt($ch, CURLOPT_URL, $create_url);
++      curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
++      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
++      curl_setopt($ch, CURLOPT_HTTPHEADER,
++        array('Content-Type: text/plain; charset=UTF-8',
++              'Content-Length: ' . strlen($input)));
++      curl_setopt($ch, CURLOPT_POSTFIELDS, $input);
++      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
++      $output = curl_exec($ch);
++      $return_header = curl_getinfo($ch, CURLINFO_HTTP_CODE);
++      curl_close($ch);
++
++      if ( (in_array($return_header, array(200, 201, 204))) && ($output == "success: $ark_identifier") ) {
++        $node = node_load($data['nid']);
++        $remote_ark_name = variable_get('ark_remote_identifier_site_address', ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS) . '/' . $ark_identifier;
++        $remote_ark_name = preg_replace('/([^:])(\/{2,})/', '$1/', $remote_ark_name);
++        $from_remote_data = array (
++          'remote_ark_name' => $remote_ark_name,
++          'request_time'    => REQUEST_TIME,
++        );
++        ark_node_update($node, $from_remote_data);
++        $return = TRUE;
++      }
++    }
++  }
++  return $return;
++}
++
++
++/**
++ * Insert/Update ark data in database.
++ *
++ * @param object $node
++ * @param array $from_remote_data Not mandatory. When some value is present in this variable, the update data comes from some remote ARK data update.
++ * @return void
++ */
++function ark_data_save($node, array $from_remote_data = null) {
++  // Do not insert ARK name mappings for content that isn't resources.
++  if (!in_array($node->type, variable_get('ark_node_types'))) {
++    return;
++  }
++
++  $ark_data = ark_get_data($node);
++  $ark_who = ark_get_who_values_from_node($node);
++  $ark_when = ark_get_when_values_from_node($node);
++  if (!$ark_data) {
++    db_insert('ark_map')
++    ->fields(array(
++      'ark_name'                => ark_name_create(),
++      'entity_type'             => 'node',
++      'entity_id'               => $node->nid,
++      'ark_who'                 => $ark_who,
++      'ark_when'                => $ark_when,
++      'created'                 => REQUEST_TIME,
++      'changed'                 => REQUEST_TIME,
++    ))->execute();
++
++  } else {
++    $fields_for_update = array();
++    if (is_null($from_remote_data)) {
++      $fields_for_update['changed']     = REQUEST_TIME;
++      $fields_for_update['ark_who']     = (isset($ark_data['ark_who'])  && $ark_data['ark_who']   !== $ark_who)  ? $ark_who   : $ark_data['ark_who'];
++      $fields_for_update['ark_when']    = (isset($ark_data['ark_when']) && $ark_data['ark_when']  !== $ark_when) ? $ark_when  : $ark_data['ark_when'];
++    } elseif (!is_null($from_remote_data) && is_array($from_remote_data) && ( isset($from_remote_data['remote_ark_name']) && isset($from_remote_data['request_time']) )) {
++      $fields_for_update['remote_ark_name']             = $from_remote_data['remote_ark_name'];
++      $fields_for_update['remote_created']              = (!empty($ark_data['remote_created']))        ? $ark_data['remote_created']         : $from_remote_data['request_time'];
++      $fields_for_update['remote_changed']              = (isset($from_remote_data['request_time']))   ? $from_remote_data['request_time']   : REQUEST_TIME;
++      $fields_for_update['need_send_remote_update']     = 0;
++    }
++
++    $ark_update_query = db_update('ark_map')
++    ->fields($fields_for_update)
++    ->condition('ark_name', $ark_data['ark_name']);
++    $ark_update_query->execute();
++  }
++}
++
++/**
++ * Implements hook_node_update().
++ *
++ * Updated ARK data when updating any node.
++ */
++function ark_node_update($node, array $from_remote_data = null) {
++  // Do not insert ARK name mappings for content that isn't resources.
++  if (!in_array($node->type, variable_get('ark_node_types'))) {
++    return;
++  }
++  ark_data_save($node, $from_remote_data);
++}
++
+ /**
+  * Implements hook_node_insert().
+  *
+@@ -92,13 +274,164 @@ function ark_node_insert($node) {
+   if (!in_array($node->type, variable_get('ark_node_types'))) {
+     return;
+   }
+-  // Insert a newly-created non-semantic ARK name.
+-  db_insert('ark_map')
+-    ->fields(array(
+-      'ark_name' => ark_name_create(),
+-      'entity_type' => 'node',
+-      'entity_id' => $node->nid,
+-    ))->execute();
++  ark_data_save($node);
++}
++
++/**
++ *
++ * Return a formated string with the ark_who field.
++ * ark_get_who_values_from_node
++ *
++ * @param  object $node
++ * @return string
++ */
++function ark_get_who_values_from_node($node = null) {
++  $result = null;
++  if (!is_null($node) && isset($node->nid)) {
++    if (!in_array($node->type, variable_get('ark_node_types'))) {
++      return;
++    }
++
++    $who_field_name = 'ark_' . $node->type . '_who';
++    $who_field_value = variable_get($who_field_name);
++
++    switch ($who_field_value) {
++      case ARK_SELECT_DEFAULT_WHO_OPTION_VALUE:
++        $result = _ark_get_default_who($node);
++        break;
++
++      case ARK_SELECT_COMPOSITE_WHO_OPTION_VALUE:
++        $composite_who = 'ark_' . $node->type . '_composite_who';
++        $composite_who_fields_selected = !is_null(variable_get($composite_who, null)) ? array_values(variable_get($composite_who)) : null;
++        $result = _ark_get_composite_who($node, $composite_who_fields_selected);
++        break;
++
++      default:
++        $result = _ark_get_default_who($node);
++        break;
++    }
++  }
++  return $result;
++}
++
++/**
++ * Return a timestamp with the ark_when value.
++ * @param object $node A node object
++ * @return string timestamp
++ *
++ */
++function ark_get_when_values_from_node($node = null) {
++  $result = null;
++  $date_when = null;
++  if (!is_null($node) && isset($node->nid)) {
++    if (!in_array($node->type, variable_get('ark_node_types'))) {
++      return;
++    }
++    $when_field_name = 'ark_' . $node->type . '_when';
++    $when_field_value = variable_get($when_field_name);
++    if ($when_field_value == ARK_SELECT_DEFAULT_WHEN_OPTION_VALUE) {
++      $result = _ark_get_default_when($node);
++    } else {
++      $date = $node->{$when_field_value};
++      $date = (isset($date[$node->language])) ? $date[$node->language][0] : $date[LANGUAGE_NONE][0];
++      if ($date) {
++        $date_when = strtotime($date['value']);
++      }
++      $result = (!is_null($date_when)) ? $date_when : _ark_get_default_when($node);
++    }
++  }
++  return $result;
++}
++
++/**
++ *
++ * @param $node - A node object
++ *
++ */
++/**
++ * _ark_get_default_who - Helper function to return the node author name.
++ *
++ * @param  object $node
++ * @return null|string
++ */
++function _ark_get_default_who($node = null) {
++  $result = null;
++  if (!is_null($node) && isset($node->uid)) {
++    if ($user = user_load($node->uid)) {
++      $result = $user->realname;
++    }
++  }
++  return $result;
++}
++
++
++/**
++ * _ark_get_default_when - Helper function to return the node created date timestamp.
++ * @param $node - A node object
++ * @todo: discuss about not published nodes
++ *
++ */
++function _ark_get_default_when($node = null) {
++  $result = null;
++  if (!is_null($node) && isset($node->created)) {
++    $result = $node->created;
++  }
++  return $result;
++}
++
++/**
++ * _ark_get_composite_who - Helper function to return the node created date timestamp.
++ *
++ * @param  object $node
++ * @param  array $composite_who_fields_selected
++ * @return null|string
++ */
++function _ark_get_composite_who($node = null, array $composite_who_fields_selected = null) {
++  $result = null;
++  $authors = array();
++  $result = null;
++  if (!is_null($node) && (!is_null($composite_who_fields_selected) && is_array($composite_who_fields_selected) && count($composite_who_fields_selected)) ) {
++    $fields = array_filter($composite_who_fields_selected, 'is_string');
++    $wrapper = entity_metadata_wrapper('node', $node);
++    foreach ($fields as $field) {
++      $array_authors_object = null;
++      $array_authors_object = $wrapper->{$field}->value();
++      foreach ($array_authors_object as $key => $user_object) {
++        $name_value = null;
++        if (!empty($user_object->realname)) {
++          $name_value = $user_object->realname;
++        } elseif (!empty($user_object->name)) {
++          $name_value = $user_object->name;
++        } else {
++          $name_value = null;
++        }
++        if (!empty($name_value)) {
++          array_push($authors, $name_value);
++        }
++      }
++    }
++    $result = (count($authors)) ? implode(variable_get('ark_authors_name_separator', ARK_DEFAULT_AUTHORS_NAME_SEPARATOR) . ' ', $authors) : _ark_get_default_who($node);
++  }
++  return $result;
++}
++
++/**
++ * ark_get_data - Return an object with all information from an ARK entry
++ *
++ * @param mixed $node
++ * @return null|object
++ */
++function ark_get_data($node = null) {
++  $result = null;
++
++  if (!is_null($node) && isset($node->nid)) {
++    if (!in_array($node->type, variable_get('ark_node_types'))) {
++      return;
++    }
++    $result =  db_query("SELECT * FROM {ark_map} WHERE entity_type = :entity_type AND entity_id = :entity_id",
++      array(':entity_type' => 'node', ':entity_id' => $node->nid))->fetchAssoc();
++  }
++  return $result;
+ }
+ 
+ /**
+@@ -108,11 +441,22 @@ function ark_field_extra_fields() {
+   $node_types = variable_get('ark_node_types', '');
+   $extra = array();
+   foreach ($node_types as $type) {
++
+     $extra['node'][$type] = array(
+       'display' => array(
+         'ark_purl' => array(
+           'label' => t('ARK persistent URL'),
+           'description' => t('Display the Archival Resource Key (ARK) Persistent Uniform Resource Locator (PURL) for this content.'),
++          'weight' => 97,
++        ),
++        'ark_who' => array(
++          'label' => t('ARK authors (who)'),
++          'description' => t('Display the Archival Resource Key (ARK Who) authors for this content.'),
++          'weight' => 98,
++        ),
++        'ark_when' => array(
++          'label' => t('ARK date created (when)'),
++          'description' => t('Display the Archival Resource Key (ARK When ) creation date for this content.'),
+           'weight' => 99,
+         ),
+       ),
+@@ -151,12 +495,11 @@ function ark_node_view($node, $view_mode, $langcode) {
+  * Currently the only extra field we provide is the ARK PURL.
+  */
+ function ark_extra_field_render_array($field_name, $node) {
++  $ark_data = ark_get_data($node);
+   $render = array();
+   switch($field_name) {
+     case 'ark_purl':
+-
+       $ark_purl = ark_get_purl($node->nid, 'node');
+-
+       $render = array(
+         'container' => array(
+           '#prefix' => '<div class="field field-label-above">',
+@@ -165,7 +508,7 @@ function ark_extra_field_render_array($field_name, $node) {
+             '#type' => 'html_tag',
+             '#tag' => 'h4',
+             '#attributes' => array('class' => 'field-label'),
+-            '#value' => t('Archival Resource Key persistent URL:'),
++            '#value' => t('Archival Resource Key URL:'),
+           ),
+           'p' => array(
+             '#prefix' => '<p class="field-item">',
+@@ -182,10 +525,51 @@ function ark_extra_field_render_array($field_name, $node) {
+           ),
+         ),
+       );
++      return $render;
++      break;
+ 
++    case 'ark_who':
++      $render = array(
++        'container' => array(
++          '#prefix' => '<div class="field field-label-above">',
++          '#suffix' => '</div>',
++          'label' => array(
++            '#type' => 'html_tag',
++            '#tag' => 'h4',
++            '#attributes' => array('class' => 'field-label'),
++            '#value' => t('Archival Resource Key Author(s):'),
++          ),
++          'p' => array(
++            '#prefix' => '<p class="field-item">' . $ark_data['ark_who'],
++            '#suffix' => '</p>',
++          ),
++        ),
++      );
+       return $render;
++      break;
+ 
++    case 'ark_when':
++      $date_formated = _arc_convert_data_to_human_readable($ark_data['ark_when']);
++      $render = array(
++        'container' => array(
++          '#prefix' => '<div class="field field-label-above">',
++          '#suffix' => '</div>',
++          'label' => array(
++            '#type' => 'html_tag',
++            '#tag' => 'h4',
++            '#attributes' => array('class' => 'field-label'),
++            '#value' => t('Archival Resource Key Creation Date (when):'),
++          ),
++          'p' => array(
++            '#prefix' => '<p class="field-item">' . $date_formated,
++            '#suffix' => '</p>',
++          ),
++        ),
++      );
++      return $render;
++      break;
+   }
++
+ }
+ 
+ /**
+@@ -271,6 +655,32 @@ function ark_get_purl($entity_id, $entity_type = 'node') {
+   return $ark_hostname . 'ark:/' . $ark_naan . '/' . $ark_name;
+ }
+ 
++/**
++ * Build a complete ARK URL for a resource Drupal entity.
++ */
++function _ark_build_purl($ark_name = null) {
++  $result = null;
++  if (!is_null($ark_name)) {
++    $ark_hostname = variable_get('ark_hostname', $GLOBALS['base_url'] . base_path());
++    $ark_identifier = _ark_build_identifier($ark_name);
++    $result =  $ark_hostname . $ark_identifier;
++  }
++  return $result;
++}
++
++/**
++ * Build a complete ARK URL for a resource Drupal entity.
++ */
++function _ark_build_identifier($ark_name = null) {
++  $result = null;
++  if (!is_null($ark_name)) {
++    $ark_naan = variable_get('ark_naan', 'pending');
++    $result =  'ark:/' . $ark_naan . '/' . $ark_name;
++  }
++  return $result;
++}
++
++
+ /**
+  * Load an ARK name.
+  */
+@@ -279,6 +689,8 @@ function ark_name_load($entity_id, $entity_type = 'node') {
+       array(':entity_type' => $entity_type, ':entity_id' => $entity_id))->fetchField();
+ }
+ 
++
++
+ /**
+  * Strip invalid characters from a potential ARK name to increase odds of match.
+  */
+@@ -324,3 +736,21 @@ function ark_naan_format_valid($naan) {
+   }
+   return FALSE;
+ }
++
++/**
++ * _arc_convert_data_to_human_readable - Helper function to convert a timestamp value in a human readable value
++ *
++ * @param  mixed $timestamp
++ * @return void
++ */
++function _arc_convert_data_to_human_readable($timestamp = null){
++  $result = null;
++  if (!is_null($timestamp)) {
++    $item_date = $timestamp;
++    $dt = new DateTime();
++    $dt->setTimestamp($item_date);
++    $dt->setTimezone(new DateTimeZone("UTC"));
++    $result = $dt->format('Y-m-d H:i:sP');
++  }
++  return $result;
++}
+diff --git a/ark.settings.inc b/ark.settings.inc
+new file mode 100644
+index 0000000..7c5334f
+--- /dev/null
++++ b/ark.settings.inc
+@@ -0,0 +1,50 @@
++<?php
++
++/**
++ * Build a form to save values.
++ */
++function ark_settings_form() {
++  
++  $form = array();
++  
++  $form['ark-form-settings'] = array(
++    '#type' => 'fieldset',
++    '#title' => t('Setup Ark Module settings'),
++    '#weight' => 0,
++    '#description' => t('Set the parameters for the Ark Module settings'),
++    '#collapsible' => TRUE,
++    '#collapsed' => FALSE
++  );
++
++  $form['ark-form-settings']['ark_composite_who_field'] = array(
++      '#type' => 'textfield',
++      '#size'=> 65,
++      '#title' => t('Set the machine name of the fields that will compose the "who" field. Pelase add the fields separated by comma.'),
++      '#default_value' => variable_get('ark_composite_who_field', implode(',', ARK_COMPOSITE_WHO_FIELD)),
++      '#maxlength' => 1024,
++      '#required' => TRUE,
++      '#description' => implode(',', ARK_COMPOSITE_WHO_FIELD),
++  );
++
++  $form['ark-form-settings']['ark_indexing_limit'] = array(
++    '#type' => 'textfield',
++    '#size'=> 65,
++    '#title' => t('Set the limit of nodes to be processed at the same time during the bach process for crating local and remote ARK ID\'s.'),
++    '#default_value' => variable_get('ark_indexing_limit', ARK_INDEXING_LIMIT),
++    '#maxlength' => 1024,
++    '#required' => TRUE,
++    '#description' => 'Ex.: ' . ARK_INDEXING_LIMIT,
++  );
++
++  $form['ark-form-settings']['ark_authors_name_separator'] = array(
++    '#type' => 'textfield',
++    '#size'=> 65,
++    '#title' => t('Set the separator simbol to delimit the authors names.'),
++    '#default_value' => variable_get('ark_authors_name_separator', ARK_DEFAULT_AUTHORS_NAME_SEPARATOR),
++    '#maxlength' => 1024,
++    '#required' => TRUE,
++    '#description' => 'Ex.: ' . ARK_DEFAULT_AUTHORS_NAME_SEPARATOR,
++  );
++  
++  return system_settings_form($form);
++}
+\ No newline at end of file
+-- 
+2.17.1
+
