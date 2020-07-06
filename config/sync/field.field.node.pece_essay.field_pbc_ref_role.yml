@@ -1,35 +1,30 @@
-uuid: b244d361-2650-4498-89f2-0335764a6633
+uuid: 362f2a59-08a3-4365-9904-39eb82b42863
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_pbc_ref_user
+    - field.storage.node.field_pbc_ref_role
     - node.type.pece_essay
   module:
     - pbf
-id: node.pece_essay.field_pbc_ref_user
-field_name: field_pbc_ref_user
+id: node.pece_essay.field_pbc_ref_role
+field_name: field_pbc_ref_role
 entity_type: node
 bundle: pece_essay
-label: 'Permission by User'
-description: 'Add specific permission by user'
+label: 'Permission by Rule'
+description: 'Add permission to this content by roles.'
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:user'
+  handler: 'default:user_role'
   handler_settings:
-    include_anonymous: true
-    filter:
-      type: _none
     target_bundles: null
-    sort:
-      field: _none
     auto_create: false
   synchronized_by: ''
+  priority: 0
+  user_method: user
   synchronized_with: ''
   synchronized_from_target: 0
-  priority: -1
-  user_method: user
 field_type: pbf
