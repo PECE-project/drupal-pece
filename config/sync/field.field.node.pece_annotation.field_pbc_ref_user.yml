@@ -1,0 +1,35 @@
+uuid: 4e81e752-3eae-4987-8a17-cc8a26c93bbd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pbc_ref_user
+    - node.type.pece_annotation
+  module:
+    - pbf
+id: node.pece_annotation.field_pbc_ref_user
+field_name: field_pbc_ref_user
+entity_type: node
+bundle: pece_annotation
+label: 'Permission User'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+  synchronized_by: ''
+  synchronized_with: ''
+  synchronized_from_target: 0
+  priority: 0
+  user_method: user
+field_type: pbf
