@@ -8,8 +8,10 @@ dependencies:
     - field.field.node.pece_annotation.field_annotation_artifact
     - field.field.node.pece_annotation.field_annotation_tags
     - field.field.node.pece_annotation.field_annotation_uri
+    - field.field.node.pece_annotation.field_pbc_ref_user
     - node.type.pece_annotation
   module:
+    - pbf
     - text
     - user
 id: node.pece_annotation.default
@@ -55,6 +57,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_pbc_ref_user:
+    weight: 106
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
     region: content
   links:
     weight: 100
