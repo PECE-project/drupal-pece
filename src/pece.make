@@ -121,6 +121,7 @@ projects[yaml_parser][subdir] = contrib
 
 projects[ark][version] = 1.0-alpha1
 projects[ark][subdir] = contrib
+projects[ark][patch][] = ./patches/ark_add-ark-ids-on-pece-content-and-batch-remote-update.patch
 
 
 ; =====================
