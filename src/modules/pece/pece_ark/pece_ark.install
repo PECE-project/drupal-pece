@@ -16,6 +16,19 @@ define('PECE_ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS'         , 'https://n2t.
 define('PECE_ARK_DEFAULT_PRE_PREFIX'                             , 'f4k');
 
 /**
+ * Grants PECE custom ARK permission.
+ */
+function _pece_ark_install_perms() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  $pece_ark_perms = array(
+    'administrator' => array(
+      'administer ark' => TRUE,
+    );
+  );
+  pece_set_permissions($pece_ark_perms);
+}
+
+/**
   * Implements hook_uninstall().
   */
 function pece_ark_uninstall() {
@@ -35,8 +48,17 @@ function pece_ark_uninstall() {
   variable_del('ark_name_prefix');
 }
 
+/**
+ * Implements hook_install().
+ */
+function pece_ark_install() {
+  _pece_ark_install_perms();
+  pece_ark_update_7001();
+}
 
-
+/**
+ * Setup default values for PECE.
+ */
 function pece_ark_update_7001() {
 
   variable_set('ark_naan'                                 , '99999');
@@ -51,7 +73,5 @@ function pece_ark_update_7001() {
   variable_set('ark_remote_server_address'                , PECE_ARK_DEFAULT_REMOTE_SERVER_ADDRESS);
   variable_set('ark_remote_identifier_site_address'       , PECE_ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS);
   variable_set('ark_name_prefix'                          , PECE_ARK_DEFAULT_PRE_PREFIX . substr(str_shuffle('bcdfghjklmnpqrstvwxyz123456789'), 0, 4));
-
-  return t('PECE ARK 7001 - Setup default values for PECE.');
 }
 
