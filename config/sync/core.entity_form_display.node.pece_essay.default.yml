@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.pece_essay.field_essay_tags
     - field.field.node.pece_essay.field_essay_thumbnail
     - field.field.node.pece_essay.field_essay_uri
+    - field.field.node.pece_essay.field_pbc_ref_role
     - field.field.node.pece_essay.field_pbc_ref_user
     - image.style.thumbnail
     - node.type.pece_essay
@@ -25,22 +26,23 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 121
+    weight: 8
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
+      show_summary: false
     third_party_settings: {  }
     region: content
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   field_essay_contents:
     type: entity_reference_paragraphs
-    weight: 129
+    weight: 13
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -51,7 +53,7 @@ content:
     third_party_settings: {  }
     region: content
   field_essay_contributors:
-    weight: 123
+    weight: 10
     settings:
       match_operator: CONTAINS
       size: 60
@@ -61,7 +63,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_essay_tags:
-    weight: 125
+    weight: 12
     settings:
       match_operator: CONTAINS
       size: 60
@@ -71,7 +73,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_essay_thumbnail:
-    weight: 124
+    weight: 11
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -79,15 +81,30 @@ content:
     type: image_image
     region: content
   field_essay_uri:
-    weight: 122
+    weight: 9
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_pbc_ref_role:
+    weight: 14
+    settings:
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: pbf_widget
+    region: content
   field_pbc_ref_user:
-    weight: 130
+    weight: 15
     settings:
       grant_global: 0
       grant_public: 1
@@ -103,14 +120,14 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 2
+    weight: 1
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -118,26 +135,26 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 4
     region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 120
+    weight: 7
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 16
+    weight: 5
     region: content
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
@@ -145,7 +162,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 2
     settings:
       match_operator: CONTAINS
       size: 60
