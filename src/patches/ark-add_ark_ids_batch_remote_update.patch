@@ -1,27 +1,11 @@
-From 6a4fc94d5afd18562b2c58a080a70bcbd7b5e23f Mon Sep 17 00:00:00 2001
-From: Leandro Carvalho <lrcarvalho@gmail.com>
-Date: Sun, 5 Jul 2020 20:05:34 -0300
-Subject: [PATCH] Add PECE requirements for ARK module.
-
----
- ark.admin.inc    |  96 +++++++++-
- ark.batches.inc  | 487 +++++++++++++++++++++++++++++++++++++++++++++++
- ark.info         |   7 +
- ark.install      | 136 +++++++++++++
- ark.module       | 450 ++++++++++++++++++++++++++++++++++++++++++-
- ark.settings.inc |  50 +++++
- 6 files changed, 1213 insertions(+), 13 deletions(-)
- create mode 100644 ark.batches.inc
- create mode 100644 ark.settings.inc
-
-diff --git a/ark.admin.inc b/ark.admin.inc
+diff --git ark.admin.inc ark.admin.inc
 index 747b180..6fdcf09 100644
---- a/ark.admin.inc
-+++ b/ark.admin.inc
+--- ark.admin.inc
++++ ark.admin.inc
 @@ -27,6 +27,38 @@ function ark_settings($form, &$form_state) {
      '#size' => 10,
    );
- 
+
 +  $form['ark_ezid_user'] = array(
 +    '#type' => 'textfield',
 +    '#title' => t('Username for the University of California Digital Library'),
@@ -58,10 +42,10 @@ index 747b180..6fdcf09 100644
    $form['ark_node_types'] = array(
      '#type' => 'select',
 @@ -43,19 +75,41 @@ function ark_settings($form, &$form_state) {
- 
+
    foreach ($node_types as $type_machine_name => $type_human) {
      $who = 'ark_' . $type_machine_name . '_who';
-+    
++
      $form[$who] = array(
        '#type' => 'select',
        '#title' => $type_human . ' ' . t('Who'),
@@ -69,13 +53,13 @@ index 747b180..6fdcf09 100644
 -      '#default_value' => variable_get($who),
 +      '#default_value' => variable_get($who, ARK_SELECT_DEFAULT_WHO_OPTION_VALUE),
      );
- 
+
 +    if (ark_check_if_composite_who_fields_exists_in_content_type($type_machine_name)) {
 +      $composite_who_options = array(
 +        'field_pece_authors' => 'field_pece_authors',
 +        'field_pece_contributors' => 'field_pece_contributors'
 +      );
-+      
++
 +      $composite_who = 'ark_' . $type_machine_name . '_composite_who';
 +      $default_value = variable_get($composite_who);
 +      $checked_all = (count(array_unique(array_values($default_value))) == 1) ? array('checked' => 'checked') : array();
@@ -99,16 +83,16 @@ index 747b180..6fdcf09 100644
 -      '#default_value' => variable_get($when),
 +      '#default_value' => variable_get($when, ARK_SELECT_DEFAULT_WHEN_OPTION_VALUE),
      );
- 
+
    }
 @@ -94,6 +148,25 @@ function ark_all_available_node_types() {
    return _node_types_build()->names;
  }
- 
+
 +function ark_check_if_composite_who_fields_exists_in_content_type($bundle_name = NULL, array $fields = null) {
 +  $entity_type = 'node';
-+  $result = NULL; 
-+  
++  $result = NULL;
++
 +  $composite_who_fields = variable_get('ark_composite_who_field') ? array_map('trim', explode(',', variable_get('ark_composite_who_field'))) : ARK_COMPOSITE_WHO_FIELD;
 +  // exit(var_dump($composite_who_fields));
 +
@@ -131,7 +115,7 @@ index 747b180..6fdcf09 100644
        $result_fields[$field] = $field;
      }
    }
-+  
++
 +  if($field_type == 'date') {
 +    $result_fields[ARK_SELECT_DEFAULT_WHEN_OPTION_VALUE] = t('The @entity_type @bundle needs a @field_type field to be used. If no other option being choose, the @bundle creation date will be used.',
 +      array('@entity_type' => $entity_type, '@bundle' => $bundle, '@field_type' => $field_type));
@@ -153,7 +137,7 @@ index 747b180..6fdcf09 100644
 +
    return $result_fields;
  }
- 
+
 @@ -118,5 +207,6 @@ function ark_fields_by_type_by_bundle($entity_type, $bundle, $field_type) {
   * Provide a default ARK prefix (random, as recommended by ARK).
   */
@@ -162,11 +146,11 @@ index 747b180..6fdcf09 100644
 +  return ARK_DEFAULT_PRE_PREFIX . substr(str_shuffle('bcdfghjklmnpqrstvwxyz123456789'), 0, 4);
  }
 +
-diff --git a/ark.batches.inc b/ark.batches.inc
+diff --git ark.batches.inc ark.batches.inc
 new file mode 100644
 index 0000000..e79bda9
 --- /dev/null
-+++ b/ark.batches.inc
++++ ark.batches.inc
 @@ -0,0 +1,487 @@
 +<?php
 +
@@ -232,7 +216,7 @@ index 0000000..e79bda9
 +    '#weight' => 0,
 +    '#collapsible' => FALSE,
 +    '#collapsed' => FALSE,
-+    '#description' => 
++    '#description' =>
 +      '<div>
 +        <h2>' . t('Identifier status') . '</h2>
 +        <p>' . t('Each identifier in EZID has a status.  The status is recorded as the value of the "_status" reserved metadata element (see <a class="reference internal" href="https://ezid.cdlib.org/doc/apidoc.html#internal-metadata">Internal metadata</a> on EZid site) and may be one of:') . '</p>
@@ -243,8 +227,8 @@ index 0000000..e79bda9
 +          <dd>' . t('The identifier is known only to EZID.  This status may be used to reserve an identifier name within EZID without advertising the identifier\'s existence to resolvers and other external services. A reserved identifier may be deleted.') . '</dd>
 +          <dt><strong>' . t('unavailable') . '</strong></dt>
 +          <dd>'
-+          . t('The identifier is public, but the object referenced by the identifier is not available.  A reason for the object\'s unavailability may optionally follow the status separated by a pipe character ("|", U+007C), e.g., "unavailable | withdrawn by author".')   
-+          . t('The identifier redirects to an EZID-provided "tombstone" page (an HTML page that displays the identifier\'s citation metadata and the reason for the object\'s unavailability) regardless of its target URL.') . 
++          . t('The identifier is public, but the object referenced by the identifier is not available.  A reason for the object\'s unavailability may optionally follow the status separated by a pipe character ("|", U+007C), e.g., "unavailable | withdrawn by author".')
++          . t('The identifier redirects to an EZID-provided "tombstone" page (an HTML page that displays the identifier\'s citation metadata and the reason for the object\'s unavailability) regardless of its target URL.') .
 +          '</dd>
 +        </dl>
 +        <p>' . t('An identifier\'s status may be changed by setting a new value for the aforementioned "_status" metadata element.  EZID permits only certain status transitions:') . '</p>
@@ -275,7 +259,7 @@ index 0000000..e79bda9
 +    ),
 +    '#default_value' => variable_get( 'ark_ezid_remote_export', ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE ),
 +  );
-+  
++
 +  $form['ark_ezid_remote_status_explanation']['ark_ezid_update_if_exists'] = array(
 +    '#type' => 'checkboxes',
 +    '#title' => t('Update remote ARK entry if already exist. If not, create a new one.'),
@@ -298,18 +282,18 @@ index 0000000..e79bda9
 + */
 +function ark_batches_form_submit($form, &$form_state) {
 +  $function = $form_state['values']['batch'];
-+  
++
 +  if ( $form_state['values']['batch'] == 'ark_batch_for_remote_data_update') {
 +    if(empty(variable_get('ark_ezid_user')) || empty(variable_get('ark_ezid_password'))) {
 +      form_set_error('batch', t('Values for ark_ezid_user or ark_ezid_password may be empty. Please set it in the ') . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark')) ;
 +    }
-+  } 
-+    
++  }
++
 +  // Reset counter for debug information.
 +  $_SESSION['http_request_count'] = 0;
 +  $batch = $function();
-+  
-+  batch_set($batch);  
++
++  batch_set($batch);
 +}
 +
 +/**
@@ -338,7 +322,7 @@ index 0000000..e79bda9
 +    // Message displayed while processing the batch. Available placeholders are:
 +    // @current, @remaining, @total, @percentage, @estimate and @elapsed.
 +    // These placeholders are replaced with actual values in _batch_process(),
-+    // using strtr() instead of t(). 
++    // using strtr() instead of t().
 +    // Defaults to t('Completed @current of @total.').
 +    'title' => t('Creating local ARK URL for the selected content types'),
 +    'init_message' => t('Preparing to submit content to ARK URL creation...'),
@@ -375,7 +359,7 @@ index 0000000..e79bda9
 +    // Message displayed while processing the batch. Available placeholders are:
 +    // @current, @remaining, @total, @percentage, @estimate and @elapsed.
 +    // These placeholders are replaced with actual values in _batch_process(),
-+    // using strtr() instead of t(). 
++    // using strtr() instead of t().
 +    // Defaults to t('Completed @current of @total.').
 +    'title' => t('Updating remote ARK data for the existent local ark data'),
 +    'init_message' => t('Preparing to submit ARK data to remote server...'),
@@ -391,8 +375,8 @@ index 0000000..e79bda9
 + *
 + * After each group of ARK_INDEXING_LIMIT (default by module 50) control is returned to the batch API for later
 + * continuation.
-+ * 
-+ * 
++ *
++ *
 + */
 +function ark_operation_for_local_ark_data_creation(&$context) {
 +  module_load_include('module', 'ark');
@@ -431,7 +415,7 @@ index 0000000..e79bda9
 +            ->extend('PagerDefault')
 +            ->limit($limit)
 +            ->execute();
-+            
++
 +  foreach ($result as $row) {
 +    // Here we actually perform our dummy 'processing' on the current node.
 +    $node = node_load($row->nid, NULL, TRUE);
@@ -461,8 +445,8 @@ index 0000000..e79bda9
 + *
 + * After each group of ARK_INDEXING_LIMIT (default by module 50) control is returned to the batch API for later
 + * continuation.
-+ * 
-+ * 
++ *
++ *
 + */
 +function ark_operation_for_remote_ark_data_update(&$context) {
 +  module_load_include('module', 'ark');
@@ -513,8 +497,8 @@ index 0000000..e79bda9
 +      } else {
 +        $context['results']['fail_processed'][] = 'Remote ARK data for nid:' . $data['nid'] . ', Title: ' . check_plain($data['title']) . ' failed during the process';
 +      }
-+      
-+  
++
++
 +      // Update our progress information.
 +      $context['sandbox']['progress']++;
 +      $context['sandbox']['current_node'] = $data['nid'];
@@ -522,8 +506,8 @@ index 0000000..e79bda9
 +      $context['message'] = t('Updating Remote ARK data for node "@title" (nid:@nid)', array('@title' => $data['title'] , '@nid' => $data['nid']));
 +    }
 +  }
-+            
-+  
++
++
 +
 +  // Inform the batch engine that we are not finished,
 +  // and provide an estimation of the completion level we reached.
@@ -570,12 +554,12 @@ index 0000000..e79bda9
 +    // We just display the number of nodes we processed...
 +    drupal_set_message(t('@count results processed in @requests HTTP requests.', array('@count' => count($results), '@requests' => _batch_ark_get_http_requests())));
 +    drupal_set_message(t('The final result was "%final"', array('%final' => end($results['successfully_processed']))));
-+    
++
 +    if ( !empty($results['fail_processed']) ) {
 +      drupal_set_message(t('Folowing data failed to be processed'), 'error');
 +      foreach( $results['fail_processed'] as $failed_row) {
 +        drupal_set_message($failed_row, 'error');
-+      }  
++      }
 +    }
 +  }
 +  else {
@@ -616,9 +600,9 @@ index 0000000..e79bda9
 +  $were_ark_nodes = NULL;
 +  if ($ark_node_types) {
 +    $array_were_ark_node_types = array();
-+    
++
 +    foreach ($ark_node_types as $key => $node_type) {
-+      array_push($array_were_ark_node_types, "(type = '$node_type')"); 
++      array_push($array_were_ark_node_types, "(type = '$node_type')");
 +    }
 +    $were_ark_nodes  = (count($array_were_ark_node_types) > 1) ? implode(' OR ', $array_were_ark_node_types) : implode('', $array_were_ark_node_types);
 +    $were_ark_nodes .= ' AND (status = 1)';
@@ -656,25 +640,10 @@ index 0000000..e79bda9
 +  return $result;
 +}
 \ No newline at end of file
-diff --git a/ark.info b/ark.info
-index 1fd3210..a95deec 100644
---- a/ark.info
-+++ b/ark.info
-@@ -5,3 +5,10 @@ core = 7.x
- files[] = ark.test
- dependencies[] = date
- 
-+
-+; Information added by Drupal.org packaging script on 2016-07-27
-+version = "7.x-1.0-alpha1"
-+core = "7.x"
-+project = "ark"
-+datestamp = "1469617700"
-+
-diff --git a/ark.install b/ark.install
+diff --git ark.install ark.install
 index dd22733..559b14d 100644
---- a/ark.install
-+++ b/ark.install
+--- ark.install
++++ ark.install
 @@ -11,6 +11,18 @@
  function ark_uninstall() {
    variable_del('ark_naan');
@@ -693,9 +662,9 @@ index dd22733..559b14d 100644
 +  variable_del('ark_name_prefix');
    // Still need to delete ark_*_who, ark_*_what variables.
  }
- 
+
 @@ -53,3 +65,127 @@ function ark_schema() {
- 
+
    return $schema;
  }
 +
@@ -822,13 +791,13 @@ index dd22733..559b14d 100644
 +function ark_update_7004() {
 +  variable_set('ark_naan', '99999');
 +}
-diff --git a/ark.module b/ark.module
+diff --git ark.module ark.module
 index d122041..30a45f5 100755
---- a/ark.module
-+++ b/ark.module
+--- ark.module
++++ ark.module
 @@ -1,5 +1,20 @@
  <?php
- 
+
 +define('ARK_COMPOSITE_WHO_FIELD'                            , array('field_pece_authors', 'field_pece_contributors'));
 +define('ARK_PERSISTENT_UNIFORM_RESOURCE_LOCATOR_FIELD_NAME' , 'ark_plur');
 +define('ARK_COMPOSITE_WHO_FIELD_NAME'                       , 'ark_composite_who');
@@ -858,7 +827,7 @@ index d122041..30a45f5 100755
 @@ -79,9 +95,175 @@ function ark_menu() {
      'file' => 'ark.admin.inc',
    );
- 
+
 +  $items['admin/config/services/ark/ark'] = array(
 +    'title' => 'Local Content ARK Module Settings',
 +    'description' => 'Configure the Name Assigning Authority Number and content type and field settings.',
@@ -901,7 +870,7 @@ index d122041..30a45f5 100755
 +
    return $items;
  }
- 
+
 +
 +/**
 + * Function ark_remote_data_update
@@ -1201,7 +1170,7 @@ index d122041..30a45f5 100755
 +  }
 +  return $result;
  }
- 
+
  /**
 @@ -108,11 +441,22 @@ function ark_field_extra_fields() {
    $node_types = variable_get('ark_node_types', '');
@@ -1255,7 +1224,7 @@ index d122041..30a45f5 100755
        );
 +      return $render;
 +      break;
- 
+
 +    case 'ark_who':
 +      $render = array(
 +        'container' => array(
@@ -1275,7 +1244,7 @@ index d122041..30a45f5 100755
 +      );
        return $render;
 +      break;
- 
+
 +    case 'ark_when':
 +      $date_formated = _arc_convert_data_to_human_readable($ark_data['ark_when']);
 +      $render = array(
@@ -1299,12 +1268,12 @@ index d122041..30a45f5 100755
    }
 +
  }
- 
+
  /**
 @@ -271,6 +655,32 @@ function ark_get_purl($entity_id, $entity_type = 'node') {
    return $ark_hostname . 'ark:/' . $ark_naan . '/' . $ark_name;
  }
- 
+
 +/**
 + * Build a complete ARK URL for a resource Drupal entity.
 + */
@@ -1337,7 +1306,7 @@ index d122041..30a45f5 100755
 @@ -279,6 +689,8 @@ function ark_name_load($entity_id, $entity_type = 'node') {
        array(':entity_type' => $entity_type, ':entity_id' => $entity_id))->fetchField();
  }
- 
+
 +
 +
  /**
@@ -1365,11 +1334,11 @@ index d122041..30a45f5 100755
 +  }
 +  return $result;
 +}
-diff --git a/ark.settings.inc b/ark.settings.inc
+diff --git ark.settings.inc ark.settings.inc
 new file mode 100644
 index 0000000..7c5334f
 --- /dev/null
-+++ b/ark.settings.inc
++++ ark.settings.inc
 @@ -0,0 +1,50 @@
 +<?php
 +
@@ -1377,9 +1346,9 @@ index 0000000..7c5334f
 + * Build a form to save values.
 + */
 +function ark_settings_form() {
-+  
++
 +  $form = array();
-+  
++
 +  $form['ark-form-settings'] = array(
 +    '#type' => 'fieldset',
 +    '#title' => t('Setup Ark Module settings'),
@@ -1418,10 +1387,7 @@ index 0000000..7c5334f
 +    '#required' => TRUE,
 +    '#description' => 'Ex.: ' . ARK_DEFAULT_AUTHORS_NAME_SEPARATOR,
 +  );
-+  
++
 +  return system_settings_form($form);
 +}
 \ No newline at end of file
--- 
-2.17.1
-
