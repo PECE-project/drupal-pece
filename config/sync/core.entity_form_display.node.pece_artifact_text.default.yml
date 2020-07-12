@@ -4,10 +4,15 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_text.body
-    - field.field.node.pece_artifact_text.field_pece_access_permissions
+    - field.field.node.pece_artifact_text.field_pece_authors
+    - field.field.node.pece_artifact_text.field_pece_contributors
     - field.field.node.pece_artifact_text.field_pece_crit_commentary
+    - field.field.node.pece_artifact_text.field_pece_fieldsite
     - field.field.node.pece_artifact_text.field_pece_language
+    - field.field.node.pece_artifact_text.field_pece_location
+    - field.field.node.pece_artifact_text.field_pece_researchers
     - field.field.node.pece_artifact_text.field_pece_source
+    - field.field.node.pece_artifact_text.field_pece_tags
     - field.field.node.pece_artifact_text.field_pece_thumbnail
     - field.field.node.pece_artifact_text.field_pece_uri
     - field.field.node.pece_artifact_text.field_pece_use_fieldsite_local
@@ -17,7 +22,6 @@ dependencies:
   module:
     - image
     - languagefield
-    - paragraphs
     - path
     - text
 id: node.pece_artifact_text.default
@@ -40,18 +44,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_pece_access_permissions:
-    type: entity_reference_paragraphs
-    weight: 129
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
-    region: content
   field_pece_crit_commentary:
     weight: 123
     settings:

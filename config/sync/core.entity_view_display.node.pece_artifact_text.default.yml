@@ -4,17 +4,21 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_text.body
-    - field.field.node.pece_artifact_text.field_pece_access_permissions
+    - field.field.node.pece_artifact_text.field_pece_authors
+    - field.field.node.pece_artifact_text.field_pece_contributors
     - field.field.node.pece_artifact_text.field_pece_crit_commentary
+    - field.field.node.pece_artifact_text.field_pece_fieldsite
     - field.field.node.pece_artifact_text.field_pece_language
+    - field.field.node.pece_artifact_text.field_pece_location
+    - field.field.node.pece_artifact_text.field_pece_researchers
     - field.field.node.pece_artifact_text.field_pece_source
+    - field.field.node.pece_artifact_text.field_pece_tags
     - field.field.node.pece_artifact_text.field_pece_thumbnail
     - field.field.node.pece_artifact_text.field_pece_uri
     - field.field.node.pece_artifact_text.field_pece_use_fieldsite_local
     - field.field.node.pece_artifact_text.field_permissions
     - node.type.pece_artifact_text
   module:
-    - entity_reference_revisions
     - image
     - languagefield
     - options
@@ -30,15 +34,6 @@ content:
     type: text_default
     weight: 101
     settings: {  }
-    third_party_settings: {  }
-    region: content
-  field_pece_access_permissions:
-    type: entity_reference_revisions_entity_view
-    weight: 109
-    label: above
-    settings:
-      view_mode: default
-      link: ''
     third_party_settings: {  }
     region: content
   field_pece_crit_commentary:
