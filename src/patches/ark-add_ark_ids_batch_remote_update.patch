@@ -31,7 +31,7 @@ index dd22733..b4834be 100644
 +  variable_del('ark_name_prefix');
    // Still need to delete ark_*_who, ark_*_what variables.
  }
- 
+
 @@ -30,6 +41,13 @@ function ark_schema() {
          'default' => '',
          'description' => 'Name of ARK object.',
@@ -124,12 +124,12 @@ index dd22733..b4834be 100644
      'unique keys' => array(
 @@ -52,4 +139,4 @@ function ark_schema() {
    );
- 
+
    return $schema;
 -}
 +}
 \ No newline at end of file
--- 
+--
 2.21.0
 
 
@@ -154,7 +154,7 @@ index 747b180..4aa01d9 100644
 @@ -27,6 +27,38 @@ function ark_settings($form, &$form_state) {
      '#size' => 10,
    );
- 
+
 +  $form['ark_ezid_user'] = array(
 +    '#type' => 'textfield',
 +    '#title' => t('Username for the University of California Digital Library'),
@@ -164,7 +164,7 @@ index 747b180..4aa01d9 100644
 +  );
 +
 +  $form['ark_ezid_password'] = array(
-+    '#type' => 'textfield',
++    '#type' => 'password',
 +    '#title' => t('Password for the University of California Digital Library'),
 +    '#description' => t('Password provided by University of California EZID to use the API system'),
 +    '#default_value' => variable_get('ark_ezid_password'),
@@ -191,7 +191,7 @@ index 747b180..4aa01d9 100644
    $form['ark_node_types'] = array(
      '#type' => 'select',
 @@ -43,19 +75,41 @@ function ark_settings($form, &$form_state) {
- 
+
    foreach ($node_types as $type_machine_name => $type_human) {
      $who = 'ark_' . $type_machine_name . '_who';
 +
@@ -202,7 +202,7 @@ index 747b180..4aa01d9 100644
 -      '#default_value' => variable_get($who),
 +      '#default_value' => variable_get($who, ARK_SELECT_DEFAULT_WHO_OPTION_VALUE),
      );
- 
+
 +    if (ark_check_if_composite_who_fields_exists_in_content_type($type_machine_name)) {
 +      $composite_who_options = array(
 +        'field_pece_authors' => 'field_pece_authors',
@@ -232,12 +232,12 @@ index 747b180..4aa01d9 100644
 -      '#default_value' => variable_get($when),
 +      '#default_value' => variable_get($when, ARK_SELECT_DEFAULT_WHEN_OPTION_VALUE),
      );
- 
+
    }
 @@ -94,6 +148,25 @@ function ark_all_available_node_types() {
    return _node_types_build()->names;
  }
- 
+
 +function ark_check_if_composite_who_fields_exists_in_content_type($bundle_name = NULL, array $fields = null) {
 +  $entity_type = 'node';
 +  $result = NULL;
@@ -286,7 +286,7 @@ index 747b180..4aa01d9 100644
 +
    return $result_fields;
  }
- 
+
 @@ -118,5 +207,6 @@ function ark_fields_by_type_by_bundle($entity_type, $bundle, $field_type) {
   * Provide a default ARK prefix (random, as recommended by ARK).
   */
@@ -795,7 +795,7 @@ index d122041..30a45f5 100755
 +++ b/ark.module
 @@ -1,5 +1,20 @@
  <?php
- 
+
 +define('ARK_COMPOSITE_WHO_FIELD'                            , array('field_pece_authors', 'field_pece_contributors'));
 +define('ARK_PERSISTENT_UNIFORM_RESOURCE_LOCATOR_FIELD_NAME' , 'ark_plur');
 +define('ARK_COMPOSITE_WHO_FIELD_NAME'                       , 'ark_composite_who');
@@ -825,7 +825,7 @@ index d122041..30a45f5 100755
 @@ -79,9 +95,175 @@ function ark_menu() {
      'file' => 'ark.admin.inc',
    );
- 
+
 +  $items['admin/config/services/ark/ark'] = array(
 +    'title' => 'Local Content ARK Module Settings',
 +    'description' => 'Configure the Name Assigning Authority Number and content type and field settings.',
@@ -868,7 +868,7 @@ index d122041..30a45f5 100755
 +
    return $items;
  }
- 
+
 +
 +/**
 + * Function ark_remote_data_update
@@ -1168,7 +1168,7 @@ index d122041..30a45f5 100755
 +  }
 +  return $result;
  }
- 
+
  /**
 @@ -108,11 +441,22 @@ function ark_field_extra_fields() {
    $node_types = variable_get('ark_node_types', '');
@@ -1222,7 +1222,7 @@ index d122041..30a45f5 100755
        );
 +      return $render;
 +      break;
- 
+
 +    case 'ark_who':
 +      $render = array(
 +        'container' => array(
@@ -1242,7 +1242,7 @@ index d122041..30a45f5 100755
 +      );
        return $render;
 +      break;
- 
+
 +    case 'ark_when':
 +      $date_formated = _arc_convert_data_to_human_readable($ark_data['ark_when']);
 +      $render = array(
@@ -1266,12 +1266,12 @@ index d122041..30a45f5 100755
    }
 +
  }
- 
+
  /**
 @@ -271,6 +655,32 @@ function ark_get_purl($entity_id, $entity_type = 'node') {
    return $ark_hostname . 'ark:/' . $ark_naan . '/' . $ark_name;
  }
- 
+
 +/**
 + * Build a complete ARK URL for a resource Drupal entity.
 + */
@@ -1304,7 +1304,7 @@ index d122041..30a45f5 100755
 @@ -279,6 +689,8 @@ function ark_name_load($entity_id, $entity_type = 'node') {
        array(':entity_type' => $entity_type, ':entity_id' => $entity_id))->fetchField();
  }
- 
+
 +
 +
  /**
@@ -1389,6 +1389,6 @@ index 0000000..78af490
 +  return system_settings_form($form);
 +}
 \ No newline at end of file
--- 
+--
 2.21.0
 
