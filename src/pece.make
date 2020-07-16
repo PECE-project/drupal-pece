@@ -480,6 +480,7 @@ projects[l10n_update][version] = 2.4
 ; Organic groups
 projects[og][subdir] = contrib
 projects[og][version] = 2.10
+projects[og][patch][3159453] = https://www.drupal.org/files/issues/2020-07-15/og-ignore-grants-permissions-3159453-2.patch
 
 ; Email
 projects[email][subdir] = contrib
