@@ -1,0 +1,40 @@
+From c612699560440fda3bc7ea1043266ac84aa1a99e Mon Sep 17 00:00:00 2001
+From: Renato Vasconcellos <revagomes@gmail.com>
+Date: Thu, 16 Jul 2020 01:54:43 -0300
+Subject: [PATCH] Add pending message on Group page after subscription action.
+
+---
+ og_ui/og_ui.module | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+diff --git a/og_ui/og_ui.module b/og_ui/og_ui.module
+index 879480c7..3e3d8b86 100644
+--- a/og_ui/og_ui.module
++++ b/og_ui/og_ui.module
+@@ -611,6 +611,23 @@ function og_ui_field_formatter_view($entity_type, $entity, $field, $instance, $l
+           $links['href'] = "group/$entity_type/$id/unsubscribe";
+           $links['class'] = 'group unsubscribe';
+         }
++        if (og_is_member($entity_type, $id, 'user', $account, array(OG_STATE_PENDING))) {
++          $element[] = array(
++            '#type' => 'html_tag',
++            '#tag' => 'span',
++            '#attributes' => array('title' => t('Membership Pending'), 'class' => 'group pending-status'),
++            '#value' => t('Membership Pending'),
++          );
++
++          return $element;
++        }
++        if (og_is_member($entity_type, $id, 'user', $account, array(OG_STATE_ACTIVE))) {
++           if (og_user_access($entity_type, $id, 'unsubscribe', $account)) {
++            $links['title'] = t('Unsubscribe from group');
++            $links['href'] = "group/$entity_type/$id/unsubscribe";
++            $links['class'] = 'group unsubscribe';
++          }
++        }
+       }
+       else {
+         if (og_is_member($entity_type, $id, 'user', $account, array(OG_STATE_BLOCKED))) {
+--
+2.17.1
+
