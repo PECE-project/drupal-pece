@@ -480,7 +480,10 @@ projects[l10n_update][version] = 2.4
 ; Organic groups
 projects[og][subdir] = contrib
 projects[og][version] = 2.10
+; Fix OG ignore the grants permission API
 projects[og][patch][3159453] = https://www.drupal.org/files/issues/2020-07-15/og-ignore-grants-permissions-3159453-2.patch
+; Membership pending message
+projects[og][patch][] = ./patches/og_ui-membership-pending-request-msg.patch
 
 ; Email
 projects[email][subdir] = contrib
