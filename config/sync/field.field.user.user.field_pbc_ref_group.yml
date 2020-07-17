@@ -1,0 +1,36 @@
+uuid: 319b4ee3-881d-4796-bdd4-3fce441c4ddc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_pbc_ref_group
+    - node.type.group
+  module:
+    - pbf
+    - user
+id: user.user.field_pbc_ref_group
+field_name: field_pbc_ref_group
+entity_type: user
+bundle: user
+label: Group
+description: 'Add this user in the group'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      group: group
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: page
+  synchronized_by: ''
+  priority: 0
+  user_method: user
+  synchronized_with: ''
+  synchronized_from_target: 0
+field_type: pbf
