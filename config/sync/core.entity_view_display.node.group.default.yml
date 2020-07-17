@@ -1,0 +1,39 @@
+uuid: 935679cb-672a-4a7c-9643-91731a0066c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.group.body
+    - field.field.node.group.field_group_visibility
+    - node.type.group
+  module:
+    - options
+    - text
+    - user
+id: node.group.default
+targetEntityType: node
+bundle: group
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_group_visibility:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

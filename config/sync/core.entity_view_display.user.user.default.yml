@@ -3,15 +3,24 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_pbc_ref_group
     - field.field.user.user.field_zotero
   module:
-    - entity_reference_revisions
+    - pbf
     - user
 id: user.user.default
 targetEntityType: user
 bundle: user
 mode: default
 content:
+  field_pbc_ref_group:
+    weight: 7
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
+    region: content
   field_zotero:
     weight: 6
     label: above
