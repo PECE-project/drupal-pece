@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.pece_essay.field_essay_tags
     - field.field.node.pece_essay.field_essay_thumbnail
     - field.field.node.pece_essay.field_essay_uri
+    - field.field.node.pece_essay.field_pbc_ref_group
     - field.field.node.pece_essay.field_pbc_ref_role
     - field.field.node.pece_essay.field_pbc_ref_user
     - node.type.pece_essay
@@ -71,6 +72,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_pbc_ref_group:
+    weight: 112
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
     region: content
   field_pbc_ref_role:
     weight: 111

@@ -1,0 +1,36 @@
+uuid: b8e21d35-008b-4c93-9f42-407ef244a7cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pbc_ref_group
+    - node.type.group
+    - node.type.pece_essay
+  module:
+    - pbf
+id: node.pece_essay.field_pbc_ref_group
+field_name: field_pbc_ref_group
+entity_type: node
+bundle: pece_essay
+label: 'Permission by Group'
+description: 'Add permission by group to this content'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      group: group
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+  synchronized_by: ''
+  priority: 0
+  user_method: user
+  synchronized_with: ''
+  synchronized_from_target: 0
+field_type: pbf
