@@ -13,9 +13,68 @@ dependencies:
     - field.field.node.pece_annotation.field_pbc_ref_user
     - node.type.pece_annotation
   module:
+    - field_group
     - path
     - pbf
     - text
+third_party_settings:
+  field_group:
+    group_permissions:
+      children:
+        - group_conditions_permission
+      parent_name: ''
+      weight: 13
+      format_type: details
+      region: content
+      format_settings:
+        description: 'Set permissions to view, update and delete this content.'
+        id: permissions
+        classes: ''
+        open: false
+        required_fields: false
+      label: Permissions
+    group_or_permission:
+      children:
+        - field_pbc_ref_user
+      parent_name: group_conditions_permission
+      weight: 21
+      format_type: accordion_item
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        required_fields: false
+        description: ''
+      label: OR
+    group_and_permission:
+      children:
+        - field_pbc_ref_group
+        - field_pbc_ref_role
+      parent_name: group_conditions_permission
+      weight: 22
+      format_type: accordion_item
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        required_fields: true
+        description: ''
+      label: AND
+    group_conditions_permission:
+      children:
+        - group_or_permission
+        - group_and_permission
+      parent_name: group_permissions
+      weight: 20
+      format_type: accordion
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        effect: bounceslide
+      label: Conditions
 id: node.pece_annotation.default
 targetEntityType: node
 bundle: pece_annotation
@@ -76,22 +135,22 @@ content:
     type: string_textfield
     region: content
   field_pbc_ref_group:
-    weight: 28
+    weight: 22
     settings:
+      match_operator: CONTAINS
+      match_limit: '10'
+      size: '60'
+      placeholder: ''
       grant_global: 0
       grant_public: 1
       grant_view: 0
       grant_update: 0
       grant_delete: 0
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
     third_party_settings: {  }
     type: pbf_widget
     region: content
   field_pbc_ref_role:
-    weight: 27
+    weight: 23
     settings:
       grant_global: 0
       grant_public: 1
@@ -106,7 +165,7 @@ content:
     type: pbf_widget
     region: content
   field_pbc_ref_user:
-    weight: 26
+    weight: 21
     settings:
       grant_global: 0
       grant_public: 1
