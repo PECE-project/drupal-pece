@@ -1,0 +1,59 @@
+<?php
+/**
+ * @file
+ * Code for the PECE Access.
+ */
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_node_grants_alter().
+ */
+function pece_access_node_grants_alter(&$grants, AccountInterface $account, $op) {
+  // this code merge role permission with group permission. Exemple, if you add
+  // a group and role permission in a content, only group's members with this role
+  // can access
+  if (key_exists('pbf_role_id', $grants)  && key_exists('pbf_field_pbc_ref_group', $grants)) {
+    // for each user's group and user's role need create a new grant to PECE. //21 0 4 -> 2102
+    foreach ($grants['pbf_field_pbc_ref_group'] as $userGroup) {
+      foreach ($grants['pbf_role_id'] as $roleUser) {
+        //add new grants permission for this user
+        $grants['pece_role_group'][] = $userGroup . '0' .  $roleUser;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_node_access_records_alter().
+ */
+function pece_access_node_access_records_alter(&$grants, NodeInterface $node) {
+  $grantsGroupRole = [];
+  foreach ($grants as $key => $grant) {
+    switch ($grant['realm']) {
+      case 'pbf_field_pbc_ref_group':
+      case 'pbf_role_id':
+        $grantsGroupRole[$grant['realm']][] = $grant;
+        $grantsGroupRole[$grant['realm']][count($grantsGroupRole[$grant['realm']]) - 1]['key'] = $key;
+        break;
+    }
+  }
+
+  //if content has group permission and role permission only
+  if (key_exists('pbf_field_pbc_ref_group', $grantsGroupRole) && key_exists('pbf_role_id', $grantsGroupRole)) {
+    foreach ($grantsGroupRole['pbf_field_pbc_ref_group'] as $group) {
+      foreach ($grantsGroupRole['pbf_role_id'] as $role) {
+        $grants[] = [
+          'realm' => 'pece_role_group',
+          'gid' => $group['gid'] . '0' . $role['gid'], //103 - 10303
+          'grant_view' => $role['grant_view'],
+          'grant_update' => $role['grant_update'],
+          'grant_delete' => $role['grant_delete'],
+          'priority' => $role['priority']
+        ];
+        unset($grants[$role['key']]);
+      }
+      unset($grants[$group['key']]);
+    }
+  }
+}
