@@ -757,9 +757,9 @@ function og_form_group_reference_validate($form, &$form_state) {
 
   if ($entity_type == 'node') {
     $node = empty($id) ? $bundle : $entity;
-    // We call node_node_access() directly as we just want to check the
+    // We call node_access() directly as we just want to check the
     // permissions using user_acces().
-    if (node_node_access($node, $op, $account)) {
+    if (node_access($op, $node, $account)) {
       // User has site-wide permissions to create or edit the node.
       return;
     }
