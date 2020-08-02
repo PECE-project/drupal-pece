@@ -1,0 +1,61 @@
+version: "3.7"
+
+services:
+  db-test:
+    image: wodby/mariadb:$MARIADB_TAG
+    container_name: "${PROJECT_NAME}_db_test"
+    stop_grace_period: 30s
+    environment:
+      MYSQL_ROOT_PASSWORD: fjieijifijf
+      MYSQL_DATABASE: pecev2-test
+      MYSQL_USER: pece
+      MYSQL_PASSWORD: kenfkjo
+      MYSQL_PORT: 3306
+    volumes:
+      - ./docker/database/start-test:/docker-entrypoint-initdb.d
+
+  pece-test:
+    image: wodby/drupal-php:$DRUPAL_TAG
+    container_name: "${PROJECT_NAME}_php_test"
+    environment:
+      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
+      DB_HOST: db-test
+      DB_USER: pece
+      DB_PASSWORD: kenfkjo
+      DB_NAME: pecev2-test
+      DB_DRIVER: $DB_DRIVER
+      PHP_FPM_USER: wodby
+      PHP_FPM_GROUP: wodby
+      COLUMNS: 80 # Set 80 columns for docker exec -it.
+    volumes:
+      - ./:/var/www/html
+
+  nginx-test:
+    image: wodby/nginx:$NGINX_TAG
+    container_name: "${PROJECT_NAME}_nginx_test"
+    ports:
+    - 5375:80
+    depends_on:
+      - pece-test
+    environment:
+      NGINX_STATIC_OPEN_FILE_CACHE: "off"
+      NGINX_ERROR_LOG_LEVEL: debug
+      NGINX_BACKEND_HOST: pece-test
+      NGINX_SERVER_ROOT: /var/www/html/web
+      NGINX_VHOST_PRESET: $NGINX_VHOST_PRESET
+#      NGINX_DRUPAL_FILE_PROXY_URL: http://example.com
+    volumes:
+      - ./:/var/www/html
+# For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
+#      - ./:/var/www/html:cached # User-guided caching
+#      - docker-sync:/var/www/html # Docker-sync
+
+  mailhog:
+    image: mailhog/mailhog
+
+#volumes:
+## Docker-sync for macOS users
+#  docker-sync:
+#    external: true
+## For Xdebug profiler
+#  files:

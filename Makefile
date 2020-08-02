@@ -9,7 +9,14 @@ FILE_MATCH ?=
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 
 test:
-	cd ./tests/$(DRUPAL_VER) && PHP_VER=$(PHP_VER) ./run.sh
+	@echo "Starting test containers for $(PROJECT_NAME)..."
+	docker-compose -f docker-compose-tests.yml pull
+	docker-compose -f docker-compose-tests.yml up -d
+	@echo "Starting tests for $(PROJECT_NAME)..."
+	docker-compose -f docker-compose-tests.yml exec pece-test bash -c "cd web && ../vendor/bin/phpunit --configuration core core/modules/datetime/tests/src/Unit/Plugin/migrate/field/DateFieldTest.php"
+	@echo "Stopping test containers for $(PROJECT_NAME)..."
+	docker-compose -f docker-compose-tests.yml stop
+
 
 build:
 	@echo "Build $(PROJECT_NAME)..."
