@@ -364,7 +364,7 @@ function pece_artifacts_tabular_field_default_field_instances() {
           'trim_options' => array(
             'text' => 0,
           ),
-          'trim_preserve_tags' => '',
+          'trim_preserve_tags' => '<h1><h2><h3><h4><h5><h6><p><a><i><b><u><strong><em><ul><ol><li><span>',
           'trim_suffix' => '...',
           'trim_type' => 'chars',
         ),

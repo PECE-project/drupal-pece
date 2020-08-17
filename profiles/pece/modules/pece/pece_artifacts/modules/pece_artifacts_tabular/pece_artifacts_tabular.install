@@ -5,3 +5,10 @@
  * Install, update and uninstall functions for the pece_artifacts_tabular module.
  */
 
+
+/**
+ * Update Critical Commentary field settings on Tabular artifact.
+ */
+function pece_artifacts_tabular_update_7001() {
+  features_revert(array('pece_artifacts_tabular' => array('field_instance')));
+}
