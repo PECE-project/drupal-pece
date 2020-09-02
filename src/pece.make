@@ -237,6 +237,10 @@ projects[userprotect][version] = 1.2
 projects[username_enumeration_prevention][subdir] = contrib
 projects[username_enumeration_prevention][version] = 1.2
 
+; Two-Factor Authentication
+projects[tfa][subdir] = contrib
+projects[tfa][version] = 2.0
+
 ; Password Policy
 projects[password_policy][subdir] = contrib
 projects[password_policy][version] = 1.16
