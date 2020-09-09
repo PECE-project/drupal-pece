@@ -5,15 +5,13 @@
  * Schema definitions and install/update/uninstall hooks for PECE ARK module.
  */
 
-define('PECE_ARK_COMPOSITE_WHO_FIELD'                            , array('field_pece_authors', 'field_pece_contributors'));
-define('PECE_ARK_INDEXING_LIMIT'                                 , 50);
-define('PECE_ARK_DEFAULT_AUTHORS_NAME_SEPARATOR'                 , ';');
-define('PECE_ARK_DEFAULT_REMOTE_SERVER_ADDRESS'                  , 'https://ezid.cdlib.org');
-define('PECE_ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE'              , 'public');
-define('PECE_ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE'              , array('yes'));
-define('PECE_ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS'                , array('1'));
-define('PECE_ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS'         , 'https://n2t.net/');
-define('PECE_ARK_DEFAULT_PRE_PREFIX'                             , 'f4k');
+/**
+ * Implements hook_install().
+ */
+function pece_ark_install() {
+  _pece_ark_install_perms();
+  pece_ark_update_7001();
+}
 
 /**
  * Grants PECE custom ARK permission.
@@ -27,12 +25,16 @@ function _pece_ark_install_perms() {
   );
   pece_set_permissions($pece_ark_perms);
 }
-
 /**
-  * Implements hook_uninstall().
-  */
+ * Implements hook_uninstall().
+ */
 function pece_ark_uninstall() {
-  variable_del('ark_naan');
+  $node_types = pece_ark_all_available_node_types();
+  foreach ($node_types as $node_type) {
+    variable_del('ark_' . $node_type . '_who');
+    variable_del('ark_' . $node_type . '_composite_who');
+    variable_del('ark_' . $node_type . '_when');
+  }
   variable_del('ark_node_types');
   variable_del('ark_naan');
   variable_del('ark_ezid_user');
@@ -49,29 +51,112 @@ function pece_ark_uninstall() {
 }
 
 /**
- * Implements hook_install().
+ * Implements hook_schema().
  */
-function pece_ark_install() {
-  _pece_ark_install_perms();
-  pece_ark_update_7001();
+function pece_ark_schema() {
+  $schema = array();
+
+  $schema['ark_map'] = array(
+    'description' => 'ARK PURL to Drupal entity mapping.',
+    'fields' => array(
+      'ark_name' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Name of ARK object.',
+      ),
+      'remote_ark_name' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The remote name of ARK object.',
+      ),
+      'entity_type' => array(
+        'type' => 'varchar',
+        'length' => '128',
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Entity type of resource.',
+      ),
+      'entity_id' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'unsigned' => TRUE,
+        'description' => 'Entity id of resource.',
+      ),
+      'ark_who' => array(
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'description' => 'The WHO field from ARK definition.',
+      ),
+      'ark_when' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The WHEN (Unix timestamp) field from ARK definition.',
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when name of ARK object was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'remote_created' => array(
+        'description' => 'The Unix timestamp when name of remote ARK object was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp when name of ARK object was most recently saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'remote_changed' => array(
+        'description' => 'The Unix timestamp when name of remote ARK object was most recently saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'data' => array(
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+        'serialize' => TRUE,
+        'description' => 'A serialized array of additional data.',
+      ),
+      'remote_data' => array(
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+        'serialize' => TRUE,
+        'description' => 'A serialized array of remote additional data.',
+      ),
+      'pending_remote_update' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'tiny',
+        'default' => 1,
+        'description' => 'Should send updated data to the remote Ark NAAN.',
+      ),
+    ),
+    'primary key' => array('ark_name'),
+    'unique keys' => array(
+      'entity' => array('entity_type', 'entity_id'),
+    ),
+  );
+
+  return $schema;
 }
 
 /**
  * Setup default values for PECE.
  */
 function pece_ark_update_7001() {
-
-  variable_set('ark_naan'                                 , '99999');
-  variable_set('ark_ezid_user'                            , getenv('ARK_USER'));
-  variable_set('ark_ezid_password'                        , getenv('ARK_PASS'));
-  variable_set('ark_ezid_remote_export'                   , PECE_ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE );
-  variable_set('ark_ezid_remote_status'                   , PECE_ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE);
-  variable_set('ark_ezid_update_if_exists'                , PECE_ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS);
-  variable_set('ark_composite_who_field'                  , implode(',', PECE_ARK_COMPOSITE_WHO_FIELD));
-  variable_set('ark_indexing_limit'                       , PECE_ARK_INDEXING_LIMIT);
-  variable_set('ark_authors_name_separator'               , PECE_ARK_DEFAULT_AUTHORS_NAME_SEPARATOR);
-  variable_set('ark_remote_server_address'                , PECE_ARK_DEFAULT_REMOTE_SERVER_ADDRESS);
-  variable_set('ark_remote_identifier_site_address'       , PECE_ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS);
-  variable_set('ark_name_prefix'                          , PECE_ARK_DEFAULT_PRE_PREFIX . substr(str_shuffle('bcdfghjklmnpqrstvwxyz123456789'), 0, 4));
+  start_variables();
 }
-

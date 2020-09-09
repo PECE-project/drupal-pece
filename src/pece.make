@@ -119,11 +119,6 @@ projects[site_notice][subdir] = contrib
 projects[yaml_parser][version] = 1.0
 projects[yaml_parser][subdir] = contrib
 
-projects[ark][version] = 1.0-alpha1
-projects[ark][subdir] = contrib
-projects[ark][patch][] = "./patches/ark-add_ark_ids_batch_remote_update.patch"
-
-
 ; =====================
 ; Views
 ; =====================
