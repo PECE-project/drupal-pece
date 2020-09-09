@@ -124,7 +124,7 @@ function pece_ark_settings($form, &$form_state) {
  * Form validation logic for the contact form.
  */
 function pece_ark_settings_validate($form, &$form_state) {
-  if (!ark_naan_format_valid($form_state['values']['ark_naan'])) {
+  if (!pece_ark_naan_format_valid($form_state['values']['ark_naan'])) {
     form_set_error('ark_naan', t('NAAN must be a number, or, if you do not yet have one, test the site using "pending".'));
   }
   if (!$form_state['values']['ark_node_types']) {
