@@ -496,8 +496,6 @@ function pece_ark_node_view($node, $view_mode, $langcode) {
  * Implements hook_node_type_delete().
  */
 function pece_ark_node_type_delete($info) {
-  var_dump($info);
-  die();
   // Delete variables when node type is removed.
   variable_del('ark_' . $info->type . '_who');
   variable_del('ark_' . $info->type . '_composite_who');
