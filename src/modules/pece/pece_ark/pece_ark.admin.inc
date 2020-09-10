@@ -80,6 +80,8 @@ function pece_ark_settings($form, &$form_state) {
       '#type' => 'select',
       '#title' => $type_human . ' ' . t('Who'),
       '#options' => pece_ark_fields_by_type_by_bundle('node', $type_machine_name, 'text'),
+      '#description' => t('The @entity_type @bundle needs a @field_type field to be used. If no other option being choose, the @bundle Author will be used.',
+        array('@entity_type' => 'node', '@bundle' => $type_machine_name, '@field_type' => 'text')),
       '#default_value' => variable_get($who, ARK_SELECT_DEFAULT_WHO_OPTION_VALUE),
     );
 
@@ -110,6 +112,8 @@ function pece_ark_settings($form, &$form_state) {
       '#type' => 'select',
       '#title' => $type_human . ' ' . t('When'),
       '#options' => pece_ark_fields_by_type_by_bundle('node', $type_machine_name, 'date'),
+      '#description' => t('The @entity_type @bundle needs a @field_type field to be used. If no other option being choose, the @bundle creation date will be used.',
+        array('@entity_type' => 'node', '@bundle' => $type_machine_name, '@field_type' => 'date')),
       '#default_value' => variable_get($when, ARK_SELECT_DEFAULT_WHEN_OPTION_VALUE),
     );
 
@@ -183,13 +187,11 @@ function pece_ark_fields_by_type_by_bundle($entity_type, $bundle, $field_type) {
   }
 
   if($field_type == 'date') {
-    $result_fields[ARK_SELECT_DEFAULT_WHEN_OPTION_VALUE] = t('The @entity_type @bundle needs a @field_type field to be used. If no other option being choose, the @bundle creation date will be used.',
-      array('@entity_type' => $entity_type, '@bundle' => $bundle, '@field_type' => $field_type));
+    $result_fields[ARK_SELECT_DEFAULT_WHEN_OPTION_VALUE] = t('Default value');
   }
 
   if($field_type == 'text') {
-    $result_fields[ARK_SELECT_DEFAULT_WHO_OPTION_VALUE] = t('The @entity_type @bundle needs a @field_type field to be used. If no other option being choose, the @bundle Author will be used.',
-      array('@entity_type' => $entity_type, '@bundle' => $bundle, '@field_type' => $field_type));
+    $result_fields[ARK_SELECT_DEFAULT_WHO_OPTION_VALUE] = t('Default value');
 
     if (pece_ark_check_if_composite_who_fields_exists_in_content_type($bundle)) {
       $result_fields['use_composite_who'] = t('Use a composite WHO field with the fields bellow.');
