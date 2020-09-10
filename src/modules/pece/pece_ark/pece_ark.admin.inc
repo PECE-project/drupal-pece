@@ -76,9 +76,13 @@ function pece_ark_settings($form, &$form_state) {
   foreach ($node_types as $type_machine_name => $type_human) {
     $who = 'ark_' . $type_machine_name . '_who';
 
-    $form[$who] = array(
+    $form['fs-' . $type_machine_name] = array(
+      '#type' => 'fieldset',
+      '#title' => $type_human,
+    );
+    $form['fs-' . $type_machine_name][$who] = array(
       '#type' => 'select',
-      '#title' => $type_human . ' ' . t('Who'),
+      '#title' => t('Who'),
       '#options' => pece_ark_fields_by_type_by_bundle('node', $type_machine_name, 'text'),
       '#description' => t('The @entity_type @bundle needs a @field_type field to be used. If no other option being choose, the @bundle Author will be used.',
         array('@entity_type' => 'node', '@bundle' => $type_machine_name, '@field_type' => 'text')),
@@ -96,7 +100,7 @@ function pece_ark_settings($form, &$form_state) {
       $default_value = variable_get($composite_who);
       $checked_all = (count(array_unique(array_values($default_value))) == 1) ? array('checked' => 'checked') : array();
 
-      $form[$composite_who] = array(
+      $form['fs-' . $type_machine_name][$composite_who] = array(
         '#title' => t('Use fields bellow as a composite field for WHO'),
         '#type' => 'checkboxes',
         '#description' => t('Choose composite WHO fields.'),
@@ -104,13 +108,18 @@ function pece_ark_settings($form, &$form_state) {
         '#default_value' => $default_value,
         '#attributes' => $checked_all,
         '#tree' => TRUE,
+        '#states' => array(
+          'visible' => array(
+            'select[name="' .$who. '"]' => array('value' => 'use_composite_who'),
+          ),
+        ),
       );
     }
 
     $when = 'ark_' . $type_machine_name . '_when';
-    $form[$when] = array(
+    $form['fs-' . $type_machine_name][$when] = array(
       '#type' => 'select',
-      '#title' => $type_human . ' ' . t('When'),
+      '#title' => t('When'),
       '#options' => pece_ark_fields_by_type_by_bundle('node', $type_machine_name, 'date'),
       '#description' => t('The @entity_type @bundle needs a @field_type field to be used. If no other option being choose, the @bundle creation date will be used.',
         array('@entity_type' => 'node', '@bundle' => $type_machine_name, '@field_type' => 'date')),
@@ -212,4 +221,3 @@ function pece_ark_fields_by_type_by_bundle($entity_type, $bundle, $field_type) {
 function pece_ark_default_prefix() {
   return ARK_DEFAULT_PRE_PREFIX . substr(str_shuffle('bcdfghjklmnpqrstvwxyz123456789'), 0, 4);
 }
-
