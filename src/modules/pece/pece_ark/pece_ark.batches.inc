@@ -19,8 +19,8 @@ function pece_ark_batches_form() {
     '#type' => 'select',
     '#title' => 'Choose batch',
     '#options' => array(
-      'ark_batch_for_local_ark_data_creation' => t('Generate Ark data for all ARK content types selected'),
-      'ark_batch_for_remote_data_update' => t('Update Ark remote data for all ARK content types selected'),
+      'pece_ark_batch_for_local_ark_data_creation' => t('Generate Ark data for all ARK content types selected'),
+      'pece_ark_batch_for_remote_data_update' => t('Update Ark remote data for all ARK content types selected'),
     ),
   );
 
@@ -129,7 +129,7 @@ function pece_ark_remote_update_settings_form() {
 function pece_ark_batches_form_submit($form, &$form_state) {
   $function = $form_state['values']['batch'];
 
-  if ( $form_state['values']['batch'] == 'ark_batch_for_remote_data_update') {
+  if ( $form_state['values']['batch'] == 'pece_ark_batch_for_remote_data_update') {
     if(empty(variable_get('ark_ezid_user')) || empty(variable_get('ark_ezid_password'))) {
       form_set_error('batch', t('Values for ark_ezid_user or ark_ezid_password may be empty. Please set it in the ') . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark')) ;
     }
@@ -174,7 +174,7 @@ function pece_ark_batch_for_local_ark_data_creation() {
     'init_message' => t('Preparing to submit content to ARK URL creation...'),
     'progress_message' => t('Creating ARK URLs ...'),
     'error_message' => t('ARK URL creation  has encountered an error.'),
-    'file' => drupal_get_path('module', 'ark') . '/pece_ark.batches.inc',
+    'file' => drupal_get_path('module', 'pece_ark') . '/pece_ark.batches.inc',
   );
   return $batch;
 }
@@ -196,12 +196,12 @@ function pece_ark_batch_for_remote_data_update() {
   );
 
   $operations[] = array(
-    'ark_operation_for_remote_ark_data_update',
+    'pece_ark_operation_for_remote_ark_data_update',
     array(),
   );
   $batch = array(
     'operations' => $operations,
-    'finished' => 'ark_operation_for_remote_ark_data_update_finished',
+    'finished' => 'pece_ark_operation_for_remote_ark_data_update_finished',
     // Message displayed while processing the batch. Available placeholders are:
     // @current, @remaining, @total, @percentage, @estimate and @elapsed.
     // These placeholders are replaced with actual values in _batch_process(),
@@ -211,7 +211,7 @@ function pece_ark_batch_for_remote_data_update() {
     'init_message' => t('Preparing to submit ARK data to remote server...'),
     'progress_message' => t('Updating remote data...'),
     'error_message' => t('Remote data update has encountered an error.'),
-    'file' => drupal_get_path('module', 'ark') . '/pece_ark.batches.inc',
+    'file' => drupal_get_path('module', 'pece_ark') . '/pece_ark.batches.inc',
   );
   return $batch;
 }
@@ -225,8 +225,8 @@ function pece_ark_batch_for_remote_data_update() {
  *
  */
 function pece_ark_operation_for_local_ark_data_creation(&$context) {
-  module_load_include('module', 'ark');
-  module_load_include('inc', 'ark', 'ark.batches');
+  module_load_include('module', 'pece_ark');
+  module_load_include('inc', 'pece_ark', 'pece_ark.batches');
   // Use the $context['sandbox'] at your convenience to store the
   // information needed to track progression between successive calls.
   $were_ark_nodes = _get_were_clause_for_selected_ark_node_types();
@@ -295,8 +295,8 @@ function pece_ark_operation_for_local_ark_data_creation(&$context) {
  *
  */
 function pece_ark_operation_for_remote_ark_data_update(&$context) {
-  module_load_include('module', 'ark');
-  module_load_include('inc', 'ark', 'ark.batches');
+  module_load_include('module', 'pece_ark');
+  module_load_include('inc', 'pece_ark', 'pece_ark.batches');
   // Use the $context['sandbox'] at your convenience to store the
   // information needed to track progression between successive calls.
 
@@ -326,7 +326,7 @@ function pece_ark_operation_for_remote_ark_data_update(&$context) {
   $query->fields('am' , array('ark_name', 'ark_who', 'ark_when'));
   $query->fields('n'  , array('nid', 'title'));
   $query->orderBy('n.nid', 'ASC');
-  $query->where('(am.need_send_remote_update = :cond) AND (n.nid > :nid)', array(':cond' => 1, ':nid' => $context['sandbox']['current_node']));
+  $query->where('(am.pending_remote_update = :cond) AND (n.nid > :nid)', array(':cond' => 1, ':nid' => $context['sandbox']['current_node']));
   $query->extend('PagerDefault');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
@@ -480,7 +480,7 @@ function _get_all_node_data_for_remote_update() {
   $query->fields('am' , array('ark_name', 'ark_who', 'ark_when'));
   $query->fields('n'  , array('nid', 'title'));
   $query->orderBy('n.nid', 'ASC');
-  $query->where('am.need_send_remote_update = :cond', array(':cond' => 1));
+  $query->where('am.pending_remote_update = :cond', array(':cond' => 1));
   $query->extend('PagerDefault');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result;

@@ -129,7 +129,7 @@ function pece_ark_menu() {
     'title' => 'ARK Batch operations',
     'description' => 'Execute ARK batch actions',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('ark_batches_form'),
+    'page arguments' => array('pece_ark_batches_form'),
     'access arguments' => array('administer ark'),
     'file' => 'pece_ark.batches.inc',
     'weight' => '5',
@@ -184,6 +184,12 @@ _status: $ark_remote_status_param";
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
       $output = curl_exec($ch);
       $return_header = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+      if ($output === false)
+      {
+        watchdog('error', 'Curl error: ' . curl_error($ch));
+      }
+
       curl_close($ch);
 
       if ( (in_array($return_header, array(200, 201, 204))) && ($output == "success: $ark_identifier") ) {
