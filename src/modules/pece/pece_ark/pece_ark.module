@@ -358,9 +358,7 @@ function _ark_get_default_who($node = null) {
   $result = null;
   if (!is_null($node) && isset($node->uid)) {
     if ($user = user_load($node->uid)) {
-      $profile = profile2_load_by_user($node->uid, 'pece_profile_main');
-      $fullName = $profile->field_pece_full_name[LANGUAGE_NONE][0]['value'];
-      $result = $fullName ? $fullName : $user->name;
+      $result = pece_get_fullname_or_name($user);
     }
   }
   return $result;
@@ -399,16 +397,7 @@ function _ark_get_composite_who($node = null, array $composite_who_fields_select
       $array_authors_object = null;
       $array_authors_object = $wrapper->{$field}->value();
       foreach ($array_authors_object as $key => $user_object) {
-        $name_value = null;
-        $profile = profile2_load_by_user($user_object->uid, 'pece_profile_main');
-        $fullName = $profile->field_pece_full_name[LANGUAGE_NONE][0]['value'];
-        if (!empty($fullName)) {
-          $name_value = $fullName;
-        } elseif (!empty($user_object->name)) {
-          $name_value = $user_object->name;
-        } else {
-          $name_value = null;
-        }
+        $name_value = pece_get_fullname_or_name($user_object);
         if (!empty($name_value)) {
           array_push($authors, $name_value);
         }
