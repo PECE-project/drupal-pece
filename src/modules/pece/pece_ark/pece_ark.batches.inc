@@ -159,12 +159,12 @@ function pece_ark_batch_for_local_ark_data_creation() {
   );
 
   $operations[] = array(
-    'ark_operation_for_local_ark_data_creation',
+    'pece_ark_operation_for_local_ark_data_creation',
     array(),
   );
   $batch = array(
     'operations' => $operations,
-    'finished' => 'ark_operation_for_local_ark_data_creation_finished',
+    'finished' => 'pece_ark_operation_for_local_ark_data_creation_finished',
     // Message displayed while processing the batch. Available placeholders are:
     // @current, @remaining, @total, @percentage, @estimate and @elapsed.
     // These placeholders are replaced with actual values in _batch_process(),
