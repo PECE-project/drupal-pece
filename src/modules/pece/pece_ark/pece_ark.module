@@ -13,7 +13,7 @@ define('ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE'              , 'public');
 define('ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE'              , array('yes'));
 define('ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS'                , array('1'));
 define('ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS'         , 'https://n2t.net/');
-define('ARK_DEFAULT_PRE_PREFIX'                             , 'f4k');
+define('ARK_DEFAULT_PRE_PREFIX'                             , 'p4');
 
 /**
  * @file
@@ -202,6 +202,9 @@ _status: $ark_remote_status_param";
         );
         pece_ark_node_update($node, $from_remote_data);
         $return = TRUE;
+      }
+      else {
+        watchdog('error', 'ARK error: ' . $output);
       }
     }
   }
