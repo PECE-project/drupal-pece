@@ -368,6 +368,7 @@ function _ark_get_default_who($node = null) {
   if (!is_null($node) && isset($node->uid)) {
     if ($user = user_load($node->uid)) {
       $result = pece_get_fullname_or_name($user);
+      _pece_ark_fullname_missing_warning_msg($result, $user);
     }
   }
   return $result;
@@ -407,6 +408,7 @@ function _ark_get_composite_who($node = null, array $composite_who_fields_select
       $array_authors_object = $wrapper->{$field}->value();
       foreach ($array_authors_object as $key => $user_object) {
         $name_value = pece_get_fullname_or_name($user_object);
+        _pece_ark_fullname_missing_warning_msg($name_value, $user_object);
         if (!empty($name_value)) {
           array_push($authors, $name_value);
         }
@@ -782,4 +784,18 @@ function start_variables() {
   variable_set('ark_remote_server_address'                , ARK_DEFAULT_REMOTE_SERVER_ADDRESS);
   variable_set('ark_remote_identifier_site_address'       , ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS);
   variable_set('ark_name_prefix'                          , ARK_DEFAULT_PRE_PREFIX . substr(str_shuffle('bcdfghjklmnpqrstvwxyz123456789'), 0, 4));
+}
+
+/**
+ * Rise a warning message when the user hasn't full name.
+ * @param string $name
+ * @param Object $user
+ */
+function _pece_ark_fullname_missing_warning_msg($name, $user) {
+  if ($name == $user->name) {
+    drupal_set_message(
+      t("User @username hasn't full name. Please contact @username to insert valid full name.", ['@username' => $user->name]),
+      'warning'
+    );
+  }
 }
