@@ -227,6 +227,9 @@ function pece_ark_batch_for_remote_data_update() {
 function pece_ark_operation_for_local_ark_data_creation(&$context) {
   module_load_include('module', 'pece_ark');
   module_load_include('inc', 'pece_ark', 'pece_ark.batches');
+
+  module_load_include('module', 'pece_profile');
+  module_load_include('inc', 'pece_profile', 'pece_profile.functions');
   // Use the $context['sandbox'] at your convenience to store the
   // information needed to track progression between successive calls.
   $were_ark_nodes = _get_were_clause_for_selected_ark_node_types();
@@ -297,6 +300,9 @@ function pece_ark_operation_for_local_ark_data_creation(&$context) {
 function pece_ark_operation_for_remote_ark_data_update(&$context) {
   module_load_include('module', 'pece_ark');
   module_load_include('inc', 'pece_ark', 'pece_ark.batches');
+
+  module_load_include('module', 'pece_profile');
+  module_load_include('inc', 'pece_profile', 'pece_profile.functions');
   // Use the $context['sandbox'] at your convenience to store the
   // information needed to track progression between successive calls.
 
