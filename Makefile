@@ -10,10 +10,9 @@ BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 
 test:
 	@echo "Starting test containers for $(PROJECT_NAME)..."
-	docker-compose -f docker-compose-tests.yml pull
 	docker-compose -f docker-compose-tests.yml up -d
 	@echo "Starting tests for $(PROJECT_NAME)..."
-	docker-compose -f docker-compose-tests.yml exec pece-test bash -c "cd web && ../vendor/bin/phpunit --configuration core core/modules/datetime/tests/src/Unit/Plugin/migrate/field/DateFieldTest.php"
+	docker-compose -f docker-compose-tests.yml exec pece-test bash -c "cd web/core && ../../vendor/bin/phpunit ../profiles/pece/modules/pece_access/tests/src/Kernel/RoleGroupPermissionsTest.php"
 	@echo "Stopping test containers for $(PROJECT_NAME)..."
 	docker-compose -f docker-compose-tests.yml stop
 

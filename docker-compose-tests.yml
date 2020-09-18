@@ -15,7 +15,7 @@ services:
       - ./docker/database/start-test:/docker-entrypoint-initdb.d
 
   pece-test:
-    image: wodby/drupal-php:$DRUPAL_TAG
+    image: wodby/php:$PHP_TAG
     container_name: "${PROJECT_NAME}_php_test"
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
@@ -27,6 +27,13 @@ services:
       PHP_FPM_USER: wodby
       PHP_FPM_GROUP: wodby
       COLUMNS: 80 # Set 80 columns for docker exec -it.
+      PHP_XDEBUG: 1
+      PHP_XDEBUG_DEFAULT_ENABLE: 1
+      PHP_XDEBUG_REMOTE_CONNECT_BACK: 1
+      PHP_XDEBUG_REMOTE_ENABLE: 1
+      PHP_XDEBUG_REMOTE_HOST: localhost
+      PHP_XDEBUG_REMOTE_PORT: 9000
+      PHP_XDEBUG_REMOTE_MODE: jit
     volumes:
       - ./:/var/www/html
 
