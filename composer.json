@@ -13,52 +13,89 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "nyxtechnology/pbf",
+                "version": "1.0",
+                "type": "drupal-module",
+                "source": {
+                    "url": "https://github.com/nyxtechnology/pbf-d9.git",
+                    "type": "git",
+                    "reference": "8.x-1.x"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "nyxtechnology/rest_password",
+                "version": "1.0",
+                "type": "drupal-module",
+                "source": {
+                    "url": "https://github.com/nyxtechnology/rest_password.git",
+                    "type": "git",
+                    "reference": "8.x"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "nyxtechnology/media_attribution",
+                "version": "1.0",
+                "type": "drupal-module",
+                "source": {
+                    "url": "https://github.com/nyxtechnology/media_attribution.git",
+                    "type": "git",
+                    "reference": "8.x-1.x"
+                }
+            }
         }
     ],
     "require": {
-        "php": ">=7.0",
-        "composer/installers": "^1.2",
+        "php": ">=7.3",
+        "composer/installers": "^v1.9",
         "cweagans/composer-patches": "^1.6.5",
-        "drupal-composer/drupal-scaffold": "^2.5",
+        "drupal/core-composer-scaffold": "^9.0.6",
         "drupal/address": "^1.7",
         "drupal/admin_toolbar": "^2.0",
-        "drupal/better_exposed_filters": "^3.0@alpha",
+        "drupal/better_exposed_filters": "^5.0@beta",
         "drupal/config_partial_export": "^1.4",
         "drupal/config_split": "^1.4",
         "drupal/console": "^1.0.2",
-        "drupal/core": "^8.9.1",
+        "drupal/core": "^9.0.6",
         "drupal/eck": "^1.0@alpha",
         "drupal/field_group": "^3.0",
         "drupal/geocoder": "^2.2",
         "drupal/geofield": "^1.3",
-        "drupal/geolocation": "^1.11",
+        "drupal/geolocation": "^3.2",
         "drupal/graphql": "4.x-dev",
-        "drupal/languagefield": "^1.5",
-        "drupal/media_attribution": "^1.0@beta",
-        "drupal/media_entity": "^2.0",
-        "drupal/media_entity_browser": "^1.0@beta",
+        "drupal/languagefield": "1.x-dev",
+        "nyxtechnology/media_attribution": "1.0",
+        "drupal/media_entity_browser": "^2.0@alpha",
         "drupal/metatag": "^1.10",
         "drupal/migrate_tools": "^4.3",
         "drupal/paragraphs": "^1.9",
         "drupal/pathauto": "^1.4",
-        "drupal/pbf": "^1.2",
+        "nyxtechnology/pbf": "^1.0",
         "drupal/redirect": "^1.6",
-        "drupal/rest_password": "^1.6",
+        "nyxtechnology/rest_password": "1.0",
         "drupal/restui": "^1.17",
-        "drupal/rules": "^3.0@alpha",
+        "drupal/rules": "3.x-dev",
         "drupal/search_api": "^1.14",
         "drupal/simple_oauth": "^4.4",
         "drupal/workflow": "^1.4",
-        "drush/drush": "^9.0.0",
-        "vlucas/phpdotenv": "^2.4",
-        "webflo/drupal-finder": "^1.0.0",
+        "drush/drush": "^10.3",
+        "vlucas/phpdotenv": "^5.1",
+        "webflo/drupal-finder": "^1.2",
         "webmozart/path-util": "^2.3",
         "zaporylie/composer-drupal-optimizations": "^1.0"
     },
     "require-dev": {
-        "drupal/config_devel": "^1.2",
-        "drupal/devel": "^2.1",
-        "webflo/drupal-core-require-dev": "^8.9.1"
+        "drupal/devel": "^4.0",
+        "drupal/core-dev": "^9.0.6"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -114,8 +151,11 @@
             "drupal/graphql": {
                 "978-Add get all field resolvers": "patches/graphql-978-add-getall-field-resolvers.patch"
             },
-            "drupal/pbf": {
-                "3092564-The 'Add a new field' list includes incorrect options": "https://www.drupal.org/files/issues/2019-11-05/3092564-2.patch"
+            "nyxtechnology/pbf": {
+                "3148398 - Automated Drupal 9 compatibility fixes": "https://www.drupal.org/files/issues/2020-06-06/pbf.1.x-dev.rector.patch"
+            },
+            "drupal/workflow" : {
+                "3157199 - D9 deprecated entity.manager, few WorkflowStorage arguments": "https://www.drupal.org/files/issues/2020-07-07/deprecated_entity_manager_workflowstorage_error-3157199-7.patch"
             }
         }
     }
