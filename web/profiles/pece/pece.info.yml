@@ -2,6 +2,7 @@ name: PECE
 type: profile
 description: 'PECE profile.'
 core: 8.x
+core_version_requirement: ^8 || ^9
 
 distribution:
   name: PECE
@@ -39,8 +40,6 @@ install:
   - editor
   - ckeditor
   - config_split
-  - workflow
-  - workflow_ui
   - better_exposed_filters
   - languagefield
   - nyx_graphql
@@ -79,7 +78,6 @@ dependencies:
   - block
   - views
   - ctools
-  - workflow
   - pece_essay
   - pece_subst_logic
   - pece_artifacts
