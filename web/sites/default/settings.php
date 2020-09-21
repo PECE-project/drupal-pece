@@ -252,6 +252,11 @@ $databases = [];
  * @endcode
  */
 $config_directories = [];
+// Use development config in dev environments.
+$config['config_split.config_split.dev']['status'] = getenv('ENVIRONMENT') == 'dev' ? TRUE : FALSE;
+// Use production config in prod environments.
+$config['config_split.config_split.prod']['status'] = getenv('ENVIRONMENT') == 'prod' ? TRUE : FALSE;
+$settings['config_sync_directory'] = '../config/sync';
 
 /**
  * Settings:
@@ -777,11 +782,6 @@ $settings['entity_update_backup'] = TRUE;
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
-// Use development config in dev environments.
-$config['config_split.config_split.dev']['status'] = getenv('ENVIRONMENT') == 'dev' ? TRUE : FALSE;
-// Use production config in prod environments.
-$config['config_split.config_split.prod']['status'] = getenv('ENVIRONMENT') == 'prod' ? TRUE : FALSE;
-$config_directories['sync'] = '../config/sync';
 
 $databases['default']['default'] = array (
 'database' => getenv('DB_NAME'),
