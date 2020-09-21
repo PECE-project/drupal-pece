@@ -26,12 +26,13 @@ function pece_n8n_install() {
       'secret' => getenv('N8N_CLIENT_SECRET') ?? Random::string(10),
     ])->save();
 
+  //@TODO: Get values from .env, but getenv doesn't work here
   if (!user_load_by_name('n8n'))
     UserPECE::create([
-      'name' => getenv('SITE_N8N_USERNAME') ?? 'n8n',
+      'name' => 'n8n',
       'mail' => 'n8n@pece.automation',
       'roles' => ['authenticated', 'r_api'],
       'status' => TRUE,
-      'pass' => getenv('SITE_N8N_PASSWORD') ?? Random::string(10),
+      'pass' => Random::string(10),
     ])->save();
 }
