@@ -246,6 +246,7 @@ function pece_ark_data_save($node, array $from_remote_data = null) {
       $fields_for_update['changed']     = REQUEST_TIME;
       $fields_for_update['ark_who']     = (isset($ark_data['ark_who'])  && $ark_data['ark_who']   !== $ark_who)  ? $ark_who   : $ark_data['ark_who'];
       $fields_for_update['ark_when']    = (isset($ark_data['ark_when']) && $ark_data['ark_when']  !== $ark_when) ? $ark_when  : $ark_data['ark_when'];
+      $fields_for_update['pending_remote_update']     = 1;
     } elseif (!is_null($from_remote_data) && is_array($from_remote_data) && ( isset($from_remote_data['remote_ark_name']) && isset($from_remote_data['request_time']) )) {
       $fields_for_update['remote_ark_name']             = $from_remote_data['remote_ark_name'];
       $fields_for_update['remote_created']              = (!empty($ark_data['remote_created']))        ? $ark_data['remote_created']         : $from_remote_data['request_time'];
