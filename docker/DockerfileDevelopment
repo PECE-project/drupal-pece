@@ -35,11 +35,6 @@ RUN apt-get update -y && apt-get install -y \
     libfontconfig1 \
     rsync \
     gnupg \
-    gcc \
-    make \
-    autoconf \
-    libc-dev \
-    pkg-config \
     --no-install-recommends
 
 ### INSTALL PHP-FPM AND EXTENSION
@@ -48,8 +43,7 @@ RUN wget https://packages.sury.org/php/apt.gpg -O- | sudo apt-key add -
 RUN echo "deb https://packages.sury.org/php/ stretch main" | sudo tee /etc/apt/sources.list.d/php.list
 
 RUN apt-get install -y \
-    libmagickwand-dev \
-    --no-install-recommends
+    libmagickwand-dev
 
 RUN apt-get update -y && apt-get install -y \
     php7.2-fpm \
@@ -72,19 +66,6 @@ RUN apt-get update -y && apt-get install -y \
     php-apcu \
     libfcgi0ldbl \
     --no-install-recommends
-
-### Install Mcrypt to meet 2FA Drupal module dependency
-RUN apt-get install -y \
-    php7.2-dev \
-    libmcrypt-dev \
-    php-pear \
-    libcurl3-openssl-dev \
-    --no-install-recommends
-
-RUN pecl install mcrypt-1.0.1
-
-RUN bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/cli/conf.d/mcrypt.ini"
-RUN bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/fpm/conf.d/mcrypt.ini"
 
 ### CONFIGURE LOCALES
 #ENV LOCALE_DEFAULT en_US.UTF8
