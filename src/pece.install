@@ -452,32 +452,6 @@ function pece_update_7116() {
   // Prepare Tabular Data directory on private fs.
   $new_folder = 'private://artifacts/media/tabular-data/';
   file_prepare_directory($new_folder, FILE_CREATE_DIRECTORY);
-
-  if (module_exists('features')) {
-      $modules = array(
-        'pece_annotations',
-        'pece_artifacts',
-        'pece_artifacts_audio',
-        'pece_artifacts_bundle',
-        'pece_artifacts_fieldnote',
-        'pece_artifacts_image',
-        'pece_artifacts_pdf',
-        'pece_artifacts_text',
-        'pece_artifacts_video',
-        'pece_artifacts_website',
-        'pece_core',
-        'pece_dashboard',
-        'pece_groups',
-        'pece_projects',
-        'pece_repository',
-        'pece_photo_essay',
-        'pece_timeline_essay',
-      );
-
-      foreach ($modules as $module) {
-        features_revert_module($module);
-      }
-    }
 }
 
 /**
@@ -500,4 +474,31 @@ function pece_update_7118() {
   module_enable(array(
   'pece_ark',
   ));
+}
+
+/**
+ *  Allow users to reorder analytics items on Analytics page.
+ */
+function pece_update_7119() {
+
+  if (module_exists('features')) {
+    $modules = array(
+      'pece_artifacts',
+      'pece_artifacts_audio',
+      'pece_artifacts_bundle',
+      'pece_artifacts_fieldnote',
+      'pece_artifacts_image',
+      'pece_artifacts_pdf',
+      'pece_artifacts_text',
+      'pece_artifacts_video',
+      'pece_artifacts_website',
+      'pece_essay',
+      'pece_photo_essay',
+      'pece_timeline_essay',
+    );
+
+    foreach ($modules as $module) {
+      features_revert_module($module);
+    }
+  }
 }
