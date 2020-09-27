@@ -75,6 +75,12 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'nodeorder' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -173,6 +179,12 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'nodeorder' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -255,6 +267,12 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'weight' => 0,
       ),
       'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'nodeorder' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -413,6 +431,12 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'nodeorder' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -501,6 +525,12 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'weight' => 0,
       ),
       'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'nodeorder' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -597,6 +627,12 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'nodeorder' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -685,6 +721,12 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'nodeorder' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -760,6 +802,12 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'weight' => 0,
       ),
       'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'nodeorder' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -845,6 +893,12 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'nodeorder' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -923,6 +977,12 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'weight' => 0,
       ),
       'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'nodeorder' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -1021,6 +1081,12 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'nodeorder' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1102,6 +1168,12 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'weight' => 0,
       ),
       'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'nodeorder' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -1191,6 +1263,12 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'nodeorder' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1275,6 +1353,12 @@ function pece_artifacts_bundle_field_default_field_instances() {
         'weight' => 0,
       ),
       'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'nodeorder' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
