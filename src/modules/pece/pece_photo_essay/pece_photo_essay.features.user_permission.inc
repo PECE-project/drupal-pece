@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_photo_essay.features.user_permission.inc
@@ -39,15 +40,6 @@ function pece_photo_essay_user_default_permissions() {
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
       'editor' => 'editor',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit any pece_photo_essay content'.
-  $permissions['edit any pece_photo_essay content'] = array(
-    'name' => 'edit any pece_photo_essay content',
-    'roles' => array(
-      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
