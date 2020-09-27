@@ -800,3 +800,12 @@ function _pece_ark_fullname_missing_warning_msg($name, $user) {
     );
   }
 }
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function pece_ark_ctools_plugin_directory($module, $plugin) {
+  if ($module === 'ctools' && $plugin === 'content_types') {
+    return 'plugins/' . $plugin;
+  }
+}
