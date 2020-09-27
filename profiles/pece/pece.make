@@ -119,7 +119,6 @@ projects[site_notice][subdir] = contrib
 projects[yaml_parser][version] = 1.0
 projects[yaml_parser][subdir] = contrib
 
-
 ; =====================
 ; Views
 ; =====================
@@ -205,8 +204,6 @@ projects[diff][subdir] = contrib
 ; =====================
 
 ; projects[seckit][subdir] = contrib
-; projects[username_enumeration_prevention][subdir] = contrib
-; projects[password_policy][subdir] = contrib
 
 ; Login Security
 projects[login_security][subdir] = contrib
