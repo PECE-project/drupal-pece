@@ -237,6 +237,10 @@ projects[userprotect][version] = 1.3
 projects[username_enumeration_prevention][subdir] = contrib
 projects[username_enumeration_prevention][version] = 1.3
 
+; Password Policy
+projects[password_policy][subdir] = contrib
+projects[password_policy][version] = 1.16
+
 ; =====================
 ; Panels
 ; =====================
