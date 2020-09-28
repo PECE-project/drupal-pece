@@ -204,8 +204,6 @@ projects[diff][subdir] = contrib
 ; =====================
 
 ; projects[seckit][subdir] = contrib
-; projects[username_enumeration_prevention][subdir] = contrib
-; projects[password_policy][subdir] = contrib
 
 ; Login Security
 projects[login_security][subdir] = contrib
@@ -233,11 +231,23 @@ projects[role_delegation][version] = 1.2
 
 ; User Protect
 projects[userprotect][subdir] = contrib
-projects[userprotect][version] = 1.2
+projects[userprotect][version] = 1.3
 
 ; Username Enumeration Prevention
 projects[username_enumeration_prevention][subdir] = contrib
-projects[username_enumeration_prevention][version] = 1.2
+projects[username_enumeration_prevention][version] = 1.3
+
+; Two-Factor Authentication
+projects[tfa][subdir] = contrib
+projects[tfa][version] = 2.1-rc1
+
+# 2FA Plugins
+projects[tfa_basic][subdir] = contrib
+projects[tfa_basic][version] = 1.1
+
+; Password Policy
+projects[password_policy][subdir] = contrib
+projects[password_policy][version] = 1.16
 
 ; =====================
 ; Panels
@@ -402,6 +412,12 @@ projects[download_file][subdir] = contrib
 ; =====================
 ; Fields
 ; =====================
+
+; Overrides Panopoly's date.
+projects[date][version] =  2.10
+projects[date][subdir] = contrib
+projects[date][patch][1143680] = https://www.drupal.org/files/issues/2020-08-04/date-beforeShowDay-eval-1143680-28.patch
+
 ; Overrides Panopoly's link.
 projects[link][version] = 1.7
 projects[link][subdir] = contrib

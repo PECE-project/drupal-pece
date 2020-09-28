@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_security.features.defaultconfig.inc
@@ -206,6 +207,15 @@ function pece_security_defaultconfig_strongarm() {
 function pece_security_defaultconfig_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'admin tfa settings'.
+  $permissions['admin tfa settings'] = array(
+    'name' => 'admin tfa settings',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'tfa',
+  );
+
   // Exported permission: 'administer encrypt'.
   $permissions['administer encrypt'] = array(
     'name' => 'administer encrypt',
@@ -224,6 +234,15 @@ function pece_security_defaultconfig_user_default_permissions() {
     'module' => 'key',
   );
 
+  // Exported permission: 'administer password policies'.
+  $permissions['administer password policies'] = array(
+    'name' => 'administer password policies',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'password_policy',
+  );
+
   // Exported permission: 'bypass honeypot protection'.
   $permissions['bypass honeypot protection'] = array(
     'name' => 'bypass honeypot protection',
@@ -231,6 +250,24 @@ function pece_security_defaultconfig_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'honeypot',
+  );
+
+  // Exported permission: 'force password change'.
+  $permissions['force password change'] = array(
+    'name' => 'force password change',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'password_policy',
+  );
+
+  // Exported permission: 'unblock expired accounts'.
+  $permissions['unblock expired accounts'] = array(
+    'name' => 'unblock expired accounts',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'password_policy',
   );
 
   return $permissions;
