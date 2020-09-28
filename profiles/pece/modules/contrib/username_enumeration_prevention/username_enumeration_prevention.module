@@ -11,35 +11,37 @@
 
 /**
  * Implements hook_menu_alter().
- *
- * Disable the callback for the views module when users don't have access user
- * profiles permission.
  */
 function username_enumeration_prevention_menu_alter(&$items) {
-  if (module_exists('views')) {
-    $items['admin/views/ajax/autocomplete/user']['access arguments'] = array('access user profiles');
-  }
+  $items['user/%user']['delivery callback'] = 'username_enumeration_prevention_delivery_wrapper';
 }
 
 /**
- * Implements hook_form_alter().
+ * Converts 403 Access Denied responses to 404 Not Found on user profiles.
+ */
+function username_enumeration_prevention_delivery_wrapper($page_callback_result) {
+  if ($page_callback_result == MENU_ACCESS_DENIED) {
+    $page_callback_result = MENU_NOT_FOUND;
+  }
+  drupal_deliver_html_page($page_callback_result);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
  *
  * Checks for the user password reset form and changes the validate and submit
  * functions. Uses the overrided functions defined in this module instead of
  * Drupal cores.
  */
-function username_enumeration_prevention_form_alter(&$form, &$form_state, $form_id) {
-  // Check to see if form is the reset password form.
-  if (strlen(strstr($form_id, 'user_pass')) > 0) {
-    // Override core validate and submit actions.
-    $key_validate = array_search('user_pass_validate', $form['#validate']);
-    if ($key_validate !== FALSE) {
-      $form['#validate'][$key_validate] = 'username_enumeration_prevention_pass_validate';
-    }
-    $key_submit = array_search('user_pass_submit', $form['#submit']);
-    if ($key_submit !== FALSE) {
-      $form['#submit'][$key_submit] = 'username_enumeration_prevention_pass_submit';
-    }
+function username_enumeration_prevention_form_user_pass_alter(&$form, &$form_state, $form_id) {
+  // Override core validate and submit actions.
+  $key_validate = array_search('user_pass_validate', $form['#validate']);
+  if ($key_validate !== FALSE) {
+    $form['#validate'][$key_validate] = 'username_enumeration_prevention_pass_validate';
+  }
+  $key_submit = array_search('user_pass_submit', $form['#submit']);
+  if ($key_submit !== FALSE) {
+    $form['#submit'][$key_submit] = 'username_enumeration_prevention_pass_submit';
   }
 }
 
@@ -60,12 +62,6 @@ function username_enumeration_prevention_pass_validate($form, &$form_state) {
   if (isset($account->uid)) {
     form_set_value(array('#parents' => array('account')), $account, $form_state);
   }
-  else {
-    // Reuse the 'send email' message if a value was entered in form.
-    if ($name != '') {
-      drupal_set_message(t('Further instructions have been sent to your e-mail address.'));
-    }
-  }
 }
 
 /**
@@ -79,7 +75,11 @@ function username_enumeration_prevention_pass_submit($form, &$form_state) {
     // Mail one time login URL and instructions using current language.
     _user_mail_notify('password_reset', $account, $language);
     watchdog('user', 'Password reset instructions mailed to %name at %email.', array('%name' => $account->name, '%email' => $account->mail));
-    drupal_set_message(t('Further instructions have been sent to your e-mail address.'));
   }
+  // Set the same message as when an email has been sent whenever the form is
+  // submitted. Moved from validation callback to prevent message to be
+  // displayed in case there is another form error for other modules like
+  // captcha.
+  drupal_set_message(t('Further instructions have been sent to your e-mail address.'));
   $form_state['redirect'] = 'user';
 }

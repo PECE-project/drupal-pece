@@ -26,6 +26,7 @@ function username_enumeration_prevention_requirements($phase) {
     else {
       $value = $t('Anonymous users do not have permission to access user
         profiles.');
+      $severity = REQUIREMENT_OK;
     }
 
     $requirements['username_enumeration_prevention_via_permissions'] = array(
@@ -34,9 +35,11 @@ function username_enumeration_prevention_requirements($phase) {
       'description' => $t('Granting anonymous users permission to access user
       profiles poses a security risk because it allows users who are not logged
       into the site to obtain usernames via callbacks. More information is
-      available in the module README or on the !url.', array('!url' =>
-      l($t('project page'),
-        'http://drupal.org/project/username_enumeration_prevention'))),
+      available in the module README or on the !url.', array(
+        '!url' =>
+        l($t('project page'),
+        'http://drupal.org/project/username_enumeration_prevention'),
+      )),
       'severity' => isset($severity) ? $severity : REQUIREMENT_OK,
     );
 
@@ -57,8 +60,10 @@ function username_enumeration_prevention_requirements($phase) {
         'description' => $t("Pathauto's default user paths, along with Global
         Redirect's default Menu Access Checking disabled combine to create
         redirects with no access checking. More information is available in the
-        !url.", array('!url' => l($t('Global Redirect issue queue'),
-          'http://drupal.org/node/782476'))),
+        !url.", array(
+          '!url' => l($t('Global Redirect issue queue'),
+          'http://drupal.org/node/782476'),
+        )),
         'severity' => isset($severity) ? $severity : REQUIREMENT_OK,
       );
     }
