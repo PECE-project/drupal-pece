@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function tfa_uninstall() {
+  variable_del('tfa_login_plugins');
+  variable_del('tfa_validate_plugin');
+  variable_del('tfa_fallback_plugins');
+
+  variable_del('tfa_validate_threshold');
+  variable_del('tfa_begin_threshold');
+  variable_del('tfa_flood_window');
+  // This variable used to exist.
+  variable_del('tfa_required');
+  variable_del('tfa_enabled');
+  variable_del('tfa_test_mode');
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function tfa_requirements($phase) {
+  $t = get_t();
+  if ($phase == 'runtime') {
+    if (!extension_loaded('openssl')) {
+      if (extension_loaded('mcrypt')) {
+        $requirement_severity = REQUIREMENT_WARNING;
+        $description = $t('The TFA module recommends the PHP OpenSSL extension to be installed on the web server.');
+      }
+      else {
+        $requirement_severity = REQUIREMENT_ERROR;
+        $description = $t('The TFA module requires either the PHP OpenSSL or Mcrypt extensions to be installed on the web server.');
+      }
+    }
+    else {
+      $requirement_severity = REQUIREMENT_OK;
+      $description = '';
+    }
+
+    $enabled = variable_get('tfa_enabled', 0);
+    $msg = $enabled ? 'Enabled' : 'Not enabled';
+
+    $requirements = array(
+      array(
+        'title' => $t('Two-factor authentication'),
+        'value' => $t($msg),
+        'description' => $description,
+        'severity' => $requirement_severity,
+      ),
+    );
+
+    return $requirements;
+  }
+  return array();
+}

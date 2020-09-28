@@ -1,0 +1,407 @@
+<?php
+
+/**
+ * @file
+ * Drupal test cases for TFA.
+ */
+
+/**
+ * Tests the functionality of the TFA module.
+ */
+class TfaTestCase extends DrupalWebTestCase {
+
+  /**
+   * Implement getInfo().
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Two-factor Authentication',
+      'description' => 'Test the Two-factor authentication process.',
+      'group' => 'TFA',
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    // Enable TFA module and the test module.
+    parent::setUp('tfa', 'tfa_test');
+    variable_set('tfa_enabled', TRUE);
+    $this->web_user = $this->drupalCreateUser(array('access content'));
+  }
+
+  /**
+   * Test authentication.
+   */
+  public function testAuthentication() {
+    // Enable test plugin.
+    variable_set('tfa_validate_plugin', 'tfa_test_send');
+    $code = $this->randomName();
+    variable_set('tfa_test_code', $code);
+
+    $account = $this->web_user;
+
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    // Not using drupalLogin() since it tests for actual login.
+    $this->drupalPost('user/login', $edit, 'Log in');
+    // Get login hash. Could user tfa_login_hash() but would require reloading
+    // account.
+    $url_parts = explode('/', $this->url);
+    $login_hash = array_pop($url_parts);
+
+    // Check that TFA process has begun.
+    $this->assertNoLink('Log out', 'Logout link does not appear');
+    $this->assertFieldById('edit-code', '', 'The send code input appears');
+    // Confirm no fallback button.
+    $this->assertNoFieldById('edit-fallback', '', 'Fallback button does not appear');
+
+    // Confirm validation error.
+    $edit = array(
+      'code' => $this->randomName(),
+    );
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $edit, 'Submit');
+    $this->assertText('Invalid sent code', 'Error message appears for random code');
+    // Check resend text.
+    $this->drupalPost(NULL, array(), 'Resend');
+    $this->assertText('Code resent', 'Resent message appears');
+    // Confirm login.
+    $edit = array(
+      'code' => $code,
+    );
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $edit, 'Submit');
+    $this->assertLink('Log out', 0, 'Logout link appears');
+
+    $this->drupalGet('user/logout');
+
+    // Enable TOTP and two fallback.
+    variable_set('tfa_validate_plugin', 'tfa_test_totp');
+    variable_set('tfa_fallback_plugins', array('tfa_test_send', 'tfa_test_fallback'));
+
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    $this->drupalPost('user/login', $edit, 'Log in');
+    $url_parts = explode('/', $this->url);
+    $login_hash = array_pop($url_parts);
+
+    // Check that TOTP has begun.
+    $this->assertText('TOTP code', 'TOTP code appears');
+    $this->assertFieldById('edit-fallback', '', 'Fallback button appears');
+    // Begin fallback.
+    $this->drupalPost(NULL, array(), $this->uiStrings('fallback-button'));
+    $this->assertText('Enter sent code', 'The send code input appears');
+    // Second fallback.
+    $this->drupalPost(NULL, array(), $this->uiStrings('fallback-button'));
+    $this->assertText('Enter recovery code', 'The recovery code input appears');
+    // Confirm validation error.
+    $edit = array(
+      'recover' => $this->randomName(),
+    );
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $edit, 'Submit');
+    $this->assertText('Invalid recovery code', 'Error message appears for random code');
+    // Confirm login.
+    $edit = array(
+      'recover' => 'FAILSAFE',
+    );
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $edit, 'Submit');
+    $this->assertLink('Log out', 0, 'Logout link appears');
+  }
+
+  /**
+   * Test flood control.
+   */
+  public function testFloodControl() {
+    // Enable test plugin.
+    variable_set('tfa_validate_plugin', 'tfa_test_send');
+    // Set the TFA hourly flood threshold.
+    $hourly_threshold = 3;
+    variable_set('tfa_user_threshold', $hourly_threshold);
+    $account = $this->web_user;
+
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    $this->drupalPost('user/login', $edit, 'Log in');
+
+    // Check TFA validation flood.
+    $url_parts = explode('/', $this->url);
+    $login_hash = array_pop($url_parts);
+    $edit = array(
+      'code' => $this->randomName(),
+    );
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $edit, 'Submit');
+    $this->assertText('Invalid sent code', 'Error message appears for random code');
+    $this->assertIdentical(variable_get('tfa_test_flood_hit', ''), '', 'TFA flood hit hooks not yet invoked');
+    // Hit flood limit.
+    for ($i = 1; $i < $hourly_threshold; $i++) {
+      $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $edit, 'Submit');
+    }
+    // Not sure why this is necessary.
+    $this->drupalGet('system/tfa/' . $account->uid . '/' . $login_hash);
+    $this->assertText($this->uiStrings('flood-validate'), 'The validation flood text appears');
+
+    variable_set('tfa_begin_threshold', 2);
+    // Check process begin flood.
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    $this->drupalPost('user/login', $edit, 'Log in');
+    $this->assertText($this->uiStrings('flood-begin'), 'The begin flood text appears');
+
+    // Assert that hook_tfa_flood_hit() was invoked.
+    $this->assertIdentical(variable_get('tfa_test_flood_hit', ''), $account->uid, 'TFA flood hit hooks invoked');
+  }
+
+  /**
+   * Test plugin flood control.
+   */
+  public function testPluginFloodControl() {
+    variable_set('tfa_validate_plugin', 'tfa_test_send');
+    $account = $this->web_user;
+    variable_set('tfa_test_resend_threshold', 1);
+
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    $this->drupalPost('user/login', $edit, 'Log in');
+    $url_parts = explode('/', $this->url);
+    $login_hash = array_pop($url_parts);
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, array(), 'Resend');
+    $this->assertText('Resend flood hit', 'The resend flood text appears');
+  }
+
+  /**
+   * Test that TFA correctly sets error messages.
+   *
+   * Messages originate from plugins that error during the begin() process.
+   */
+  public function testSendError() {
+    // Enable test plugin.
+    variable_set('tfa_validate_plugin', 'tfa_test_send');
+    // Cause the send plugin to have a begin process error.
+    variable_set('tfa_test_send_begin', FALSE);
+
+    $account = $this->web_user;
+
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    $this->drupalPost('user/login', $edit, 'Log in');
+    $this->assertText('Error during send', 'Error message appears for begin error');
+    // Test resend.
+    $this->drupalPost(NULL, array(), 'Resend');
+    $this->assertText('Error during resend', 'Error message appears for resend');
+  }
+
+  /**
+   * Test redirection.
+   */
+  public function testRedirection() {
+    // Enable test plugin.
+    variable_set('tfa_validate_plugin', 'tfa_test_send');
+    $code = $this->randomName();
+    variable_set('tfa_test_code', $code);
+
+    $account = $this->web_user;
+
+    $login = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    // Set destination to filter tips page.
+    $options = array('query' => array('destination' => 'filter/tips'));
+    $this->drupalPost('user/login', $login, 'Log in', $options);
+    // Reload account since login timestamp is updated.
+    $account = user_load($account->uid);
+    $login_hash = tfa_login_hash($account);
+
+    // Authenticate with code.
+    $edit = array(
+      'code' => $code,
+    );
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $edit, 'Submit', $options);
+    $this->assertLink('Log out', 0, 'Logout link appears');
+    // Confirm user is on filter tips page.
+    $this->assertText('Compose tips', 'Redirected page text appears');
+    $this->drupalLogout();
+
+    // Test form_state redirect. tfa_test module sets filter/tips redirect.
+    variable_set('tfa_test_login_form_redirect', TRUE);
+
+    $this->drupalPost('user/login', $login, 'Log in');
+    $edit = array(
+      'code' => $code,
+    );
+    $this->drupalPost(NULL, $edit, 'Submit');
+    $this->assertLink('Log out', 0, 'Logout link appears');
+    // Confirm user is on filter tips page.
+    $this->assertText('Compose tips', 'Redirected page text appears');
+
+    // @todo test one-time login redirection.
+  }
+
+  /**
+   * Test login plugins.
+   */
+  public function testLoginPlugins() {
+    variable_set('tfa_validate_plugin', 'tfa_test_send');
+    // Enable login plugin.
+    variable_set('tfa_login_plugins', array('tfa_test_login'));
+
+    $account = $this->web_user;
+
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    $this->drupalPost('user/login', $edit, 'Log in');
+    $this->assertNoLink('Log out', 'Not authenticated');
+
+    // Set TfaTestLogin to allow login.
+    variable_set('tfa_test_login_uid', (string) $account->uid);
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    $this->drupalPost('user/login', $edit, 'Log in');
+    $this->assertLink('Log out', 0, 'Authenticated');
+    $this->assertNoFieldById('edit-code', '', 'The send code input does not appear');
+  }
+
+  /**
+   * Test tfa_test_is_ready.
+   */
+  public function testReady() {
+    variable_set('tfa_validate_plugin', 'tfa_test_send');
+    $account = $this->web_user;
+
+    // Disable ready.
+    variable_set('tfa_test_is_ready', FALSE);
+
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    $this->drupalPost('user/login', $edit, 'Log in');
+    $this->assertLink('Log out', 0, 'Authenticated');
+
+    $this->drupalLogout();
+  }
+
+  /**
+   * Test tfa_context_alter.
+   */
+  public function testAlter() {
+    // Set TOTP as primary.
+    variable_set('tfa_validate_plugin', 'tfa_test_totp');
+    variable_set('tfa_fallback_plugins', array('tfa_test_send', 'tfa_test_fallback'));
+    // Allow context alter that will set send as validate plugin.
+    variable_set('tfa_test_context_alter', 'tfa_test_send');
+    $account = $this->web_user;
+
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    $this->drupalPost('user/login', $edit, 'Log in');
+    $this->assertNoText('TOTP code', 'TOTP code does not appear');
+  }
+
+  /**
+   * Test the TfaSetup forms and process in tfa_test.module.
+   *
+   * This test illustrates how a user would setup a TFA send plugin. See
+   * tfa_test.module tfa_test_setup_form() for how to use.
+   */
+  public function testSetup() {
+    variable_set('tfa_enabled', FALSE);
+
+    $account = $this->web_user;
+    $this->drupalLogin($account);
+
+    // Enable TFA and begin configuration.
+    variable_set('tfa_enabled', TRUE);
+    variable_set('tfa_validate_plugin', 'tfa_test_send');
+    variable_set('tfa_test_setup_class', 'TfaTestSendSetup');
+
+    $this->drupalGet('user/' . $account->uid . '/tfa');
+
+    $edit = array();
+    $this->drupalPost(NULL, $edit, 'Setup send');
+
+    // Set plugin location to account name.
+    $edit = array(
+      'location' => $account->name,
+    );
+    $this->drupalPost(NULL, $edit, 'Submit');
+    // Enter default test code.
+    $edit = array(
+      'code' => variable_get('tfa_test_code', 'TEST'),
+    );
+    $this->drupalPost(NULL, $edit, 'Submit');
+
+    // Logout to now test TFA process.
+    $this->drupalGet('user/logout');
+
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    // Not using drupalLogin() since it tests for actual login.
+    $this->drupalPost('user/login', $edit, 'Log in');
+    // Get login hash. Could user tfa_login_hash() but would require reloading
+    // account.
+    $url_parts = explode('/', $this->url);
+    $login_hash = array_pop($url_parts);
+
+    // Confirm login with code as account name.
+    // TfaTestSendSetup::submitSetupForm() would have set the test code to it.
+    $edit = array(
+      'code' => $account->name,
+    );
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $edit, 'Submit');
+    $this->assertLink('Log out', 0, 'Logout link appears');
+  }
+
+  /**
+   * Test TfaBasePlugin encryption methods.
+   */
+  protected function testEncryption() {
+    $tfa_totp = new TfaTestTotp(array('uid' => 1));
+    $plain_text = $this->randomName(rand(6, 20));
+    $tfa_totp->setInStore($plain_text);
+    $this->assertIdentical($plain_text, $tfa_totp->readFromStore());
+  }
+
+  /**
+   * TFA module user interface strings.
+   *
+   * @param string $id
+   *   ID string.
+   *
+   * @return string
+   *   Appropriate string.
+   */
+  protected function uiStrings($id) {
+    switch ($id) {
+      case 'fallback-button':
+        return "Can't access your account?";
+
+      case 'flood-validate':
+        return 'You have reached the threshold for incorrect code entry attempts.';
+
+      case 'flood-begin':
+        return 'You have reached the threshold for TFA attempts.';
+    }
+  }
+
+}
