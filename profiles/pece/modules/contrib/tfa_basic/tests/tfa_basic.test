@@ -1,0 +1,375 @@
+<?php
+
+/**
+ * @file tfa_basic.test.
+ * Drupal test cases for TFA basic plugins.
+ */
+
+/**
+ * Tests the functionality of the TFA basic plugins.
+ */
+class TfaBasicTestCase extends DrupalWebTestCase {
+
+  /**
+   * @var PHPGangsta_GoogleAuthenticator
+   */
+  protected $ga;
+
+  /**
+   * @var array
+   */
+  protected $recoveryCodes;
+
+  /**
+   * @var string
+   */
+  protected $seed;
+
+  /**
+   * @var stdClass
+   */
+  protected $web_user;
+
+  /**
+   * @var stdClass
+   */
+  protected $admin_user;
+
+  public static function getInfo() {
+    return array(
+      'name' => 'TFA Basic tests',
+      'description' => 'Test the TFA basic plugins.',
+      'group' => 'TFA',
+    );
+  }
+
+  public function setUp() {
+    // Enable TFA module and the test module.
+    parent::setUp('tfa', 'tfa_basic');
+    // Use PHPGangsta_GoogleAuthenticator to create codes for TOTP seed.
+    require_once drupal_get_path('module', 'tfa_basic') . '/includes/googleauthenticator/GoogleAuthenticator.php';
+    $this->ga = new PHPGangsta_GoogleAuthenticator();
+    $this->web_user = $this->drupalCreateUser(array('access content', 'setup own tfa'));
+    $this->admin_user = $this->drupalCreateUser(array('access content', 'administer users'));
+  }
+
+  public function testTfaBasic() {
+    // Use one test function to allow accounts to carry through testing.
+    $this->_testAppAndRecoverySetup();
+    $this->_testAdminDisable();
+  }
+
+  public function _testAppAndRecoverySetup() {
+    variable_set('tfa_enabled', FALSE);
+
+    $account = $this->web_user;
+    $this->drupalLogin($account);
+
+    // Enable TFA and begin configuration.
+    variable_set('tfa_enabled', TRUE);
+    variable_set('tfa_validate_plugin', 'tfa_basic_totp');
+    variable_set('tfa_fallback_plugins', array('tfa_basic_recovery_code'));
+
+    $this->drupalGet('user/' . $account->uid . '/security/tfa');
+
+    $this->assertLink($this->uiStrings('setup-app'));
+
+    // Set up application.
+    $this->drupalGet('user/' . $account->uid . '/security/tfa/app-setup');
+
+    $this->assertText($this->uiStrings('password-request'));
+    // Test incorrect password.
+    $edit = array(
+      'current_pass' => $this->randomName(),
+    );
+    $this->drupalPost(NULL, $edit, 'Confirm');
+    $this->assertText($this->uiStrings('pass-error'));
+
+    $edit = array(
+      'current_pass' => $account->pass_raw,
+    );
+    $this->drupalPost(NULL, $edit, 'Confirm');
+
+    $this->assertText($this->uiStrings('app-step1'));
+    $this->assertFieldById('edit-seed', '', 'Seed input appears');
+    $this->assertFieldById('edit-code', '', 'Code input appears');
+
+    // Extract and store seed to generate codes with.
+    $result = $this->xpath('//input[@name="seed"]');
+    if (empty($result)) {
+      $this->fail('Unable to extract seed from page. Aborting test.');
+      return;
+    }
+    $element = $result[0];
+    $this->seed = (string) $element['value'];
+
+    // Try invalid code.
+    $edit = array(
+      'code' => $this->randomName(),
+    );
+    $this->drupalPost(NULL, $edit, 'Verify and save');
+    $this->assertText($this->uiStrings('invalid-code-retry'));
+
+    // Submit valid code.
+    $edit = array(
+      'code' => $this->ga->getCode($this->seed),
+    );
+    $this->drupalPost(NULL, $edit, 'Verify and save');
+
+    // Setup recovery codes.
+    $this->assertText($this->uiStrings('set-recovery-codes'));
+
+    // Store codes.
+    $result = $this->xpath('//li');
+    while (list(, $node) = each($result)) {
+      $this->recoveryCodes[] = (string) $node;
+    }
+    $this->drupalPost(NULL, array(), 'Save');
+    $this->assertText($this->uiStrings('setup-complete'));
+
+    // Logout to test TFA app process.
+    $this->drupalGet('user/logout');
+
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    // Do not use drupalLogin() since it tests for actual login.
+    $this->drupalPost('user/login', $edit, 'Log in');
+    // Get login hash. Could user tfa_login_hash() but would require reloading
+    // account.
+    $url_parts = explode('/', $this->url);
+    $login_hash = array_pop($url_parts);
+
+    // Try invalid code.
+    $edit = array(
+      'code' => $this->randomName(),
+    );
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $edit, 'Verify');
+    $this->assertText($this->uiStrings('invalid-code-retry'));
+
+    // Submit valid code.
+    $edit = array(
+      'code' => $this->ga->getCode($this->seed),
+    );
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $edit, 'Verify');
+    $this->assertText('My account');
+
+    // Logout to test recovery code process.
+    $this->drupalGet('user/logout');
+
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    $this->drupalPost('user/login', $edit, 'Log in');
+    $url_parts = explode('/', $this->url);
+    $login_hash = array_pop($url_parts);
+
+    // Begin fallback.
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, array(), $this->uiStrings('fallback-button'));
+    $this->assertText($this->uiStrings('recovery-prompt'));
+
+    // Try invalid code.
+    $edit = array(
+      'recover' => $this->randomName(),
+    );
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $edit, 'Verify');
+    $this->assertText($this->uiStrings('invalid-recovery-code'));
+
+    // Submit valid code.
+    $edit = array(
+      'recover' => array_pop($this->recoveryCodes),
+    );
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $edit, 'Verify');
+    $this->assertText('My account');
+  }
+
+  public function _testAdminDisable() {
+    $this->drupalLogin($this->admin_user);
+
+    $this->drupalGet('user/' . $this->web_user->uid . '/security/tfa');
+    $this->assertText($this->web_user->name, 'Account name appears');
+    $this->assertText($this->uiStrings('tfa-status-enabled'));
+    $this->assertLink($this->uiStrings('tfa-disable'));
+
+    $this->drupalGet('user/' . $this->web_user->uid . '/security/tfa/disable');
+    $this->assertText($this->uiStrings('tfa-disable-confirm'));
+    $edit = array(
+      'current_pass' => $this->admin_user->pass_raw,
+    );
+    $this->drupalPost('user/' . $this->web_user->uid . '/security/tfa/disable', $edit, 'Disable');
+    $this->assertText($this->uiStrings('tfa-disabled'));
+  }
+
+  public function testTotpReplay() {
+    variable_set('tfa_enabled', TRUE);
+    variable_set('tfa_validate_plugin', 'tfa_basic_totp');
+    $account = $this->drupalCreateUser(array('access content', 'setup own tfa'));
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    $this->drupalPost('user/login', $edit, 'Log in');
+    // Set up application.
+    $this->drupalGet('user/' . $account->uid . '/security/tfa/app-setup');
+    $pass_form = array(
+      'current_pass' => $account->pass_raw,
+    );
+    $this->drupalPost(NULL, $pass_form, 'Confirm');
+    $result = $this->xpath('//input[@name="seed"]');
+    if (empty($result)) {
+      $this->fail('Unable to extract seed from page. Aborting test.');
+      return;
+    }
+    $element = $result[0];
+    $this->seed = (string) $element['value'];
+
+    // Submit valid code.
+    $code_form = array(
+      'code' => $this->ga->getCode($this->seed),
+    );
+    $this->drupalPost(NULL, $code_form, 'Verify and save');
+
+    $this->drupalLogout();
+
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    $this->drupalPost('user/login', $edit, 'Log in');
+    $url_parts = explode('/', $this->url);
+    $login_hash = array_pop($url_parts);
+
+    // Submit valid code.
+    $code = $this->ga->getCode($this->seed);
+    $code_form = array(
+      'code' => $code,
+    );
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $code_form, 'Verify');
+    $this->assertText('My account');
+
+    // Logout and retry same code.
+    $this->drupalLogout();
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    $this->drupalPost('user/login', $edit, 'Log in');
+    $url_parts = explode('/', $this->url);
+    $login_hash = array_pop($url_parts);
+    $code_form = array(
+      'code' => $code,
+    );
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $code_form, 'Verify');
+    $this->assertNoText('My account');
+    $this->assertText($this->uiStrings('tfa-replay'));
+
+    // Set expire time and run cron to delete saved code to log in.
+    variable_set('tfa_basic_accepted_code_expiration', '0');
+    $this->cronRun();
+    $code_form = array(
+      'code' => $code,
+    );
+    $this->drupalPost('system/tfa/' . $account->uid . '/' . $login_hash, $code_form, 'Verify');
+    $this->assertText('My account');
+  }
+
+  public function testRequired() {
+    variable_set('tfa_enabled', TRUE);
+    variable_set('tfa_validate_plugin', 'tfa_basic_totp');
+    $account = $this->drupalCreateUser(array('access content', 'setup own tfa'));
+    $edit = array(
+      'name' => $account->name,
+      'pass' => $account->pass_raw,
+    );
+    $this->drupalPost('user/login', $edit, 'Log in');
+    // Set up application.
+    $this->drupalGet('user/' . $account->uid . '/security/tfa/app-setup');
+    $pass_form = array(
+      'current_pass' => $account->pass_raw,
+    );
+    $this->drupalPost(NULL, $pass_form, 'Confirm');
+    $result = $this->xpath('//input[@name="seed"]');
+    if (empty($result)) {
+      $this->fail('Unable to extract seed from page. Aborting test.');
+      return;
+    }
+    $element = $result[0];
+    $this->seed = (string) $element['value'];
+
+    // Submit valid code.
+    $code_form = array(
+      'code' => $this->ga->getCode($this->seed),
+    );
+    $this->drupalPost(NULL, $code_form, 'Verify and save');
+
+    // Set required for authenticated and confirm messages.
+    variable_set('tfa_basic_roles_require', array(DRUPAL_AUTHENTICATED_RID => DRUPAL_AUTHENTICATED_RID));
+    $this->drupalGet('user/' . $account->uid . '/security/tfa/disable');
+    $this->assertText($this->uiStrings('disable-required'));
+    // Disable TFA.
+    $this->drupalPost(NULL, $pass_form, 'Disable');
+    $this->drupalGet('user/logout');
+
+    // Confirm cannot log in.
+    $this->drupalPost('user/login', $edit, 'Log in');
+    $this->assertNoLink('Log out', 'Not authenticated');
+    $this->assertText($this->uiStrings('required'), 'Required text shows');
+  }
+
+  /**
+   * TFA module user interface strings.
+   *
+   * @param string $id
+   * @return string
+   */
+  protected function uiStrings($id) {
+    switch ($id) {
+      case 'setup-app':
+        return 'Set up application';
+      case 'password-request':
+        return 'Enter your current password to continue.';
+      case 'pass-error':
+        return 'Incorrect password';
+      case 'app-step1':
+        return 'Install authentication code application on your mobile or desktop device';
+      case 'invalid-code-retry':
+        return 'Invalid application code. Please try again.';
+      case 'invalid-recovery-code':
+        return 'Invalid recovery code.';
+      case 'set-trust-skip':
+        return 'Mark this browser as trusted or skip to continue and finish TFA setup';
+      case 'set-recovery-codes':
+        return 'Your recovery codes';
+      case 'setup-complete':
+        return 'TFA setup complete';
+      case 'setup-trust':
+        return 'Set trusted browsers';
+      case 'setup-recovery':
+        return 'Get recovery codes';
+      case 'code-list':
+        return 'View unused recovery codes';
+      case 'app-desc':
+        return 'Verification code is application generated and 6 digits long.';
+      case 'fallback-button':
+        return 'Can\'t access your account?';
+      case 'recovery-prompt':
+        return 'Enter one of your recovery codes';
+      case 'tfa-status-enabled':
+        return 'TFA enabled';
+      case 'tfa-disable':
+        return 'Disable TFA';
+      case 'tfa-disable-confirm':
+        return 'Are you sure you want to disable TFA on account';
+      case 'tfa-disabled':
+        return 'TFA has been disabled';
+      case 'required':
+        return 'Login disallowed. You are required to set up two-factor authentication.';
+      case 'disable-required':
+        return 'Your account must have at least one two-factor authentication method enabled. Continuing will disable your ability to log back into this site.';
+      case 'tfa-replay':
+        return 'Invalid code, it was recently used for a login. Please wait for the application to generate a new code.';
+    }
+  }
+}

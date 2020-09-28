@@ -1,0 +1,803 @@
+<?php
+
+/**
+ * Implements hook_permission().
+ */
+function tfa_basic_permission() {
+  return array(
+    'setup own tfa' => array(
+      'title' => t('Set up TFA for account'),
+      'description' => t('Allow users to set up TFA for their account. Users with "administer users" permission can edit other account\'s TFA.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_library().
+ */
+function tfa_basic_library() {
+  $items = array();
+  $items['qrcodejs'] = array(
+    'title' => 'QRCode.js',
+    'website' => 'https://github.com/davidshimjs/qrcodejs',
+    'version' => '1.0',
+    'js' => array(
+      drupal_get_path('module', 'tfa_basic') . '/includes/qrcodejs/qrcode.min.js' => array(),
+    ),
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_libraries_info().
+ */
+function tfa_basic_libraries_info() {
+  $libraries['twilio'] = array(
+    'name' => 'Twilio library',
+    'vendor url' => 'http://www.twilio.com',
+    'download url' => 'https://github.com/twilio/twilio-php/tarball/latest',
+    'path' => 'Services',
+    'version' => '2010-04-01',
+    'files' => array(
+      'php' => array(
+        'Twilio.php',
+      ),
+    ),
+  );
+  return $libraries;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function tfa_basic_menu() {
+  $items = array();
+
+  $items['user/%user/security/tfa'] = array(
+    'title' => 'Security',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tfa_basic_overview', 1),
+    'access callback' => 'tfa_basic_setup_access',
+    'access arguments' => array(1, 'setup own tfa'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'tfa_basic.pages.inc',
+  );
+  $items['user/%user/security/tfa/disable'] = array(
+    'title' => 'TFA disable',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tfa_basic_disable_form', 1),
+    'access callback' => 'tfa_basic_setup_access',
+    'access arguments' => array(1, 'setup own tfa'),
+    'type' => MENU_CALLBACK,
+    'file' => 'tfa_basic.pages.inc',
+  );
+  $items['user/%user/security/tfa/app-setup'] = array(
+    'title' => 'TFA setup',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tfa_basic_setup_form', 1, 'tfa_basic_totp'),
+    'access callback' => 'tfa_basic_setup_access',
+    'access arguments' => array(1, 'setup own tfa'),
+    'type' => MENU_CALLBACK,
+    'file' => 'tfa_basic.pages.inc',
+  );
+  $items['user/%user/security/tfa/trusted-browsers'] = array(
+    'title' => 'TFA setup',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tfa_basic_setup_form', 1, 'tfa_basic_trusted_browser'),
+    'access callback' => 'tfa_basic_setup_access',
+    'access arguments' => array(1, 'setup own tfa'),
+    'type' => MENU_CALLBACK,
+    'file' => 'tfa_basic.pages.inc',
+  );
+  $items['user/%user/security/tfa/recovery-codes'] = array(
+    'title' => 'TFA setup',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tfa_basic_setup_form', 1, 'tfa_basic_recovery_code'),
+    'access callback' => 'tfa_basic_setup_access',
+    'access arguments' => array(1, 'setup own tfa'),
+    'type' => MENU_CALLBACK,
+    'file' => 'tfa_basic.pages.inc',
+  );
+  $items['user/%user/security/tfa/recovery-codes-list'] = array(
+    'title' => 'TFA - Unused recovery codes',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tfa_basic_setup_form', 1, 'recovery_codes_list'),
+    'access callback' => 'tfa_basic_setup_access',
+    'access arguments' => array(1, 'setup own tfa'),
+    'type' => MENU_CALLBACK,
+    'file' => 'tfa_basic.pages.inc',
+  );
+  $items['user/%user/security/tfa/sms-setup'] = array(
+    'title' => 'TFA setup',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tfa_basic_setup_form', 1, 'tfa_basic_sms'),
+    'access callback' => 'tfa_basic_setup_access',
+    'access arguments' => array(1, 'setup own tfa'),
+    'type' => MENU_CALLBACK,
+    'file' => 'tfa_basic.pages.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Access control.
+ *
+ * @param object $account
+ * @param string $permission
+ * @return bool
+ */
+function tfa_basic_setup_access($account, $permission = '') {
+  $administer_users = user_access('administer users') && $account->uid > 0;
+  $is_account = ($GLOBALS['user']->uid == $account->uid);
+
+  return ($is_account && user_access($permission, $account)) || $administer_users;
+}
+
+/**
+ * Implements hook_cron().
+ */
+function tfa_basic_cron() {
+  // Delete trusted browser entries older than expiration.
+  $expiration = variable_get('tfa_basic_trust_cookie_expiration', 3600 * 24 * 30);
+
+  $num_deleted = db_delete('tfa_trusted_browser')
+    ->condition('created', REQUEST_TIME - $expiration, '<')
+    ->execute();
+  if ($num_deleted) {
+    watchdog('tfa_basic', 'Removed !num TFA trusted browsers older than !time', array('!num' => $num_deleted, '!time' => REQUEST_TIME - $expiration), WATCHDOG_INFO);
+  }
+
+  // Delete accepted codes older than expiration.
+  $accepted_expiration = variable_get('tfa_basic_accepted_code_expiration', 3600 * 24);
+  db_delete('tfa_accepted_code')
+    ->condition('time_accepted', REQUEST_TIME - $accepted_expiration, '<')
+    ->execute();
+}
+
+/**
+ * Implements hook_tfa_api().
+ */
+function tfa_basic_tfa_api() {
+  return array(
+    'tfa_basic_totp' => array(
+      'class' => 'TfaTotp',
+      'name' => 'TOTP',
+    ),
+    'tfa_basic_trusted_browser' => array(
+      'class' => 'TfaTrustedBrowser',
+      'name' => 'Trusted Browsers',
+    ),
+    'tfa_basic_recovery_code' => array(
+      'class' => 'TfaBasicRecoveryCode',
+      'name' => 'Recovery Codes',
+    ),
+    'tfa_basic_sms' => array(
+      'class' => 'TfaBasicSms',
+      'name' => 'Twilio SMS',
+    ),
+    'tfa_basic_help' => array(
+      'class' => 'TfaBasicHelp',
+      'name' => 'Help page',
+    ),
+  );
+}
+
+/**
+ * Create TfaTotp plugin.
+ *
+ * @param array $context
+ * @return TfaTotp
+ */
+function tfa_basic_totp_create($context) {
+  return new TfaTotp($context);
+}
+
+/**
+ * Create TfaTrustedBrowser plugin.
+ *
+ * @param array $context
+ * @return TfaTrustedBrowser
+ */
+function tfa_basic_trusted_browser_create($context) {
+  return new TfaTrustedBrowser($context);
+}
+
+/**
+ * Create TfaBasicRecoveryCode plugin.
+ *
+ * @param array $context
+ * @return TfaBasicRecoveryCode
+ */
+function tfa_basic_recovery_code_create($context) {
+  return new TfaBasicRecoveryCode($context);
+}
+
+/**
+ * Create TfaBasicSms plugin.
+ *
+ * @param array $context
+ * @return TfaBasicSms
+ */
+function tfa_basic_sms_create($context) {
+  $account = user_load($context['uid']);
+  $number = tfa_basic_get_mobile_number($account);
+  $client = tfa_basic_get_twilio_client();
+  return new TfaBasicSms($context, $number, $client);
+}
+
+/**
+ * Get a Twilio services client.
+ *
+ * @return Services_Twilio|FALSE
+ */
+function tfa_basic_get_twilio_client() {
+  if (module_exists('libraries') && $library = libraries_load('twilio') && !empty($library['loaded'])) {
+    // Library should be loaded.
+  }
+  if (!class_exists('Services_Twilio')) {
+    return FALSE;
+  }
+  $sid = variable_get('tfa_basic_twilio_account_sid', '');
+  $token = variable_get('tfa_basic_twilio_account_token', '');
+  return new Services_Twilio($sid, $token);
+}
+
+/**
+ * Alters tfa_context array to set plugins from user settings.
+ */
+function tfa_basic_tfa_context_alter(&$context) {
+  // $context can be empty during beginning of TFA process.
+  if (empty($context)) {
+    return;
+  }
+
+  $account = user_load($context['uid']);
+  $tfa_data = tfa_basic_get_tfa_data($account);
+  // Remove SMS plugin if enabled and mobile number is not available.
+  $number = tfa_basic_get_mobile_number($account);
+  if ((empty($tfa_data['data']['sms']) || !$number)) {
+    $fallback_plugins = array();
+    if (isset($context['plugins']['fallback'])) {
+      foreach ($context['plugins']['fallback'] as $plugin) {
+        if ($plugin !== 'tfa_basic_sms') {
+          $fallback_plugins[] = $plugin;
+        }
+      }
+    }
+    // Remove SMS from validation if set.
+    if ('tfa_basic_sms' == $context['plugins']['validate']) {
+      $context['plugins']['validate'] = array_shift($fallback_plugins);
+    }
+    $context['plugins']['fallback'] = $fallback_plugins;
+  }
+}
+
+/**
+ * Implements hook_tfa_ready_require().
+ */
+function tfa_basic_tfa_ready_require($account) {
+  if (tfa_basic_tfa_required($account)) {
+    drupal_set_message(t('Login disallowed. You are required to set up two-factor authentication. Please contact a site administrator.'), 'error');
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Whether TFA is required for the account.
+ *
+ * @param object $account
+ *
+ * @return bool
+ */
+function tfa_basic_tfa_required($account) {
+  $required = FALSE;
+  $required_roles = variable_get('tfa_basic_roles_require', array());
+  if (!empty($required_roles)) {
+    foreach ($required_roles as $rid => $enabled) {
+      if ($enabled && array_key_exists($rid, $account->roles)) {
+        $required = TRUE;
+        break;
+      }
+    }
+  }
+  return $required;
+}
+
+/**
+ * Get mobile number for an account.
+ *
+ * @param object $account
+ *   User account object.
+ *
+ * @return string|FALSE
+ *   Mobile phone number or FALSE if not set.
+ */
+function tfa_basic_get_mobile_number($account) {
+  $phone_field = variable_get('tfa_basic_phone_field', '');
+  $number = FALSE;
+  // Note, set tfa_basic_phone_field to FALSE to avoid using account field as
+  // storage.
+  if (!empty($phone_field)) {
+    if (!empty($account->{$phone_field}[LANGUAGE_NONE][0]['value'])) {
+      $number = $account->{$phone_field}[LANGUAGE_NONE][0]['value'];
+    }
+  }
+  $alterable = array(
+    'account' => $account,
+    'number' => $number,
+  );
+  // Allow other modules to supply the mobile number for this account.
+  drupal_alter('tfa_basic_get_mobile_number', $alterable);
+  return $alterable['number'];
+}
+
+/**
+ * Update mobile number on account.
+ *
+ * @param object $account
+ * @param string $number
+ */
+function tfa_basic_set_mobile_number($account, $number) {
+  $phone_field = variable_get('tfa_basic_phone_field', '');
+  if ($phone_field !== FALSE) {
+    if (isset($account->{$phone_field})) {
+      $edit = array(
+        $phone_field => array(LANGUAGE_NONE => array(0 => array('value' => $number))),
+      );
+      user_save($account, $edit);
+    }
+  }
+  $alterable = array(
+    'account' => $account,
+    'number' => $number,
+  );
+  // Allow other modules to set the mobile number for this account.
+  drupal_alter('tfa_basic_set_mobile_number', $alterable);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function tfa_basic_form_tfa_form_alter(&$form, &$form_state, $form_id) {
+  // Add validation handler for fallback awareness.
+  $form['#validate'][] = '_tfa_basic_form_validate';
+}
+
+/**
+ * Validation handler to encourage use of fallback if there are form errors.
+ */
+function _tfa_basic_form_validate($form, &$form_state) {
+  $errors = form_get_errors();
+  if (!empty($errors) && !empty($form_state['values']['code']) && isset($form['actions']['fallback'])) {
+    drupal_set_message(t("If you are having trouble click \"Can't access your account?\" for further authentication options."), 'warning');
+  }
+}
+
+/**
+ * Get TFA data for an account.
+ *
+ * @param object $account
+ *   User account.
+ *
+ * @return array
+ *   TFA data.
+ *
+ * @code
+ *   array(
+ *     'status' => TRUE,
+ *     'data' => array(
+ *       'primary' => 'app',
+ *       'sms' => FALSE,
+ *     ),
+ *   )
+ * @endcode
+ */
+function tfa_basic_get_tfa_data($account) {
+  $result = db_query("SELECT status, saved, data FROM {tfa_user_settings} WHERE uid = :uid", array(':uid' => $account->uid))->fetchAssoc();
+  if (!empty($result)) {
+    $data = array();
+    if (!empty($result['data'])) {
+      $data = json_decode($result['data'], TRUE);
+    }
+    $tfa = array(
+      'status' => $result['status'] == '1' ? TRUE : FALSE,
+      'saved' => $result['saved'],
+      'data' => $data,
+    );
+    return $tfa;
+  }
+  return array();
+}
+
+/**
+ * Save TFA settings for an account.
+ *
+ * @param object $account
+ * @param array $data TFA data
+ * @code
+ *   array(
+ *     'plugins' => ['tfa_basic_totp'],
+ *     'sms' => FALSE,
+ *     'status' => TRUE,
+ *   )
+ * @endcode
+ */
+function tfa_basic_setup_save_data($account, $data = array()) {
+  // Check if existing data and update.
+  $existing = tfa_basic_get_tfa_data($account);
+  if (!empty($existing['data'])) {
+    $tfa_data = $existing['data'];
+  }
+  else {
+    $tfa_data = array(
+      'plugins' => '',
+      'sms' => FALSE,
+    );
+  }
+  if (isset($data['plugins'])) {
+    $tfa_data['plugins'] = $data['plugins'];
+  }
+  if (isset($data['sms'])) {
+    $tfa_data['sms'] = $data['sms'];
+  }
+  $status = 1;
+  if (isset($data['status']) && $data['status'] === FALSE) {
+    $tfa_data = array();
+    $status = 0;
+  }
+
+  $record = array(
+    'uid' => $account->uid,
+    'saved' => REQUEST_TIME,
+    'status' => $status,
+    'data' => json_encode($tfa_data),
+  );
+  if (!empty($existing)) {
+    drupal_write_record('tfa_user_settings', $record, 'uid');
+  }
+  else {
+    drupal_write_record('tfa_user_settings', $record);
+  }
+}
+
+/**
+ * Validate phone number for use in TFA SMS plugin.
+ *
+ * @param string $number
+ *   Number.
+ *
+ * @return array()
+ *   Array of error messages if the number is not valid, empty array otherwise.
+ */
+function tfa_basic_valid_number($number) {
+  $errors = array();
+  if (variable_get('tfa_basic_sms_nanp_validate', 1)) {
+    // Strip leading '1' if set.
+    if (strpos($number, '1') === 0) {
+      $number = ltrim($number, '1');
+    }
+    // Validate against North American Numbering Plan (NANP) regex.
+    // http://en.wikipedia.org/wiki/North_American_Numbering_Plan#Numbering_system
+    $pattern = '~^\(?([2-9][0-9]{2})\)?[-. ]?([2-9](?!11)[0-9]{2})[-. ]?([0-9]{4})$~';
+    if (!preg_match($pattern, $number)) {
+      $errors = array(t('Number does not match expected patterns.'));
+    }
+  }
+  else {
+    // For international numbers we only validate that the number contains only
+    // space, hyphen, plus and digits.
+    if (!preg_match('/[0-9\-\+ ]/', $number)) {
+      $errors = array(t('The phone number must only contain digits, space, hyphen or plus.'));
+    }
+  }
+  $alterable = array(
+    'number' => $number,
+    'errors' => $errors,
+  );
+  drupal_alter('tfa_basic_valid_number', $alterable);
+  return $alterable['errors'];
+}
+
+/**
+ * Format a mobile number.
+ *
+ * @param string $number
+ *   Phone number.
+ *
+ * @return string
+ *   Formatted number.
+ */
+function tfa_basic_format_number($number) {
+  $number = str_replace(array('-', ' ', '(', ')'), '', $number);
+  $formatted = $number;
+  if (ctype_digit($number) && strlen($number) == 11) {
+    $formatted = 'x-xxx-xxx-' . substr($number, 7);
+  }
+  elseif (ctype_digit($number) && strlen($number) == 10) {
+    $formatted = 'xxx-xxx-' . substr($number, 6);
+  }
+  elseif (ctype_digit($number) && strlen($number) == 7) {
+    $formatted = 'xxx-' . substr($number, 3, 4);
+  }
+  $alterable = array(
+    'number' => $number,
+    'formatted' => $formatted,
+  );
+  drupal_alter('tfa_basic_format_number', $alterable);
+  return $alterable['formatted'];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function tfa_basic_form_tfa_admin_settings_alter(&$form, &$form_state, $form_id) {
+  global $cookie_domain;
+  $twilio_available = FALSE;
+
+  $form['required_tfa_roles'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Roles required to have set up TFA'),
+    '#description' => t("Login will be denied to an account without TFA setup and any matching role."),
+    '#options' => user_roles(TRUE),
+    '#default_value' => variable_get('tfa_basic_roles_require', array()),
+  );
+
+  // Add cookie domain field to TFA admin settings.
+  $form['tfa_basic_cookie_domain'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Cookie domain'),
+    '#default_value' => variable_get('tfa_basic_cookie_domain', $cookie_domain),
+    '#description' => t('Domain to set for the trusted browser TFA cookie.'),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="tfa_login[tfa_basic_trusted_browser]"]' => array('checked' => TRUE)
+      )
+    ),
+  );
+  // Add Twilio configuration if Twilio PHP library is available.
+  if (module_exists('libraries') && $library = libraries_load('twilio') && !empty($library['loaded'])) {
+    $twilio_available = TRUE;
+  }
+  elseif (class_exists('Services_Twilio')) {
+    $twilio_available = TRUE;
+  }
+  if ($twilio_available) {
+    $sms_states = array(
+      'visible' => array(
+        array(
+          array(':input[name="tfa_fallback[tfa_basic_sms][enable]"]' => array('checked' => TRUE)),
+          'or',
+          array(':input[name="tfa_validate"]' => array('value' => 'tfa_basic_sms'))
+        )
+      )
+    );
+    $form['tfa_basic_twilio_account_sid'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Twilio account SID'),
+      '#default_value' => variable_get('tfa_basic_twilio_account_sid', ''),
+      '#description' => t('Twilio account SID from twilio.com.'),
+      '#states' => $sms_states
+    );
+    $form['tfa_basic_twilio_account_token'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Twilio account token'),
+      '#default_value' => variable_get('tfa_basic_twilio_account_token', ''),
+      '#description' => t('Private Twilio account token from twilio.com.'),
+      '#states' => $sms_states
+    );
+    $form['tfa_basic_twilio_account_number'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Twilio account number'),
+      '#default_value' => variable_get('tfa_basic_twilio_account_number', ''),
+      '#description' => t('Private Twilio account number from twilio.com.'),
+      '#states' => $sms_states
+    );
+    $form['tfa_basic_twilio_message_text'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Twilio message text'),
+      '#default_value' => variable_get('tfa_basic_twilio_message_text',
+        'Verification code: !code'),
+      '#description' => t('Text to be sent to the user. Use !code for the verification code.'),
+      '#states' => $sms_states
+    );
+    $form['tfa_basic_sms_nanp_validate'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Validate phone numbers against NANP'),
+      '#default_value' => variable_get('tfa_basic_sms_nanp_validate', 1),
+      '#description' => t('If enabled phone numbers will be checked against the North American Numbering Plan.'),
+      '#states' => $sms_states
+    );
+
+    // Mobile phone storage field. Set variable to FALSE to ignore.
+    $phone_field = variable_get('tfa_basic_phone_field', '');
+    if ($phone_field !== FALSE) {
+      $form['tfa_basic_phone_field'] = array(
+        '#title' => t('SMS mobile number'),
+        '#type' => 'container',
+        '#children'  => t('<div class="error messages">An account field for mobile number storage is required to use the Twilio SMS plugin. Consult TFA Basic README.txt for more info.</div>'),
+        '#states' => $sms_states
+      );
+
+      $instances = field_info_instances('user');
+      $options = array();
+      foreach ($instances['user'] as $name => $field) {
+        $options[$name] = $field['label'];
+      }
+      // Change to select field.
+      if (!empty($options)) {
+        unset($form['tfa_basic_phone_field']['#children'], $form['tfa_basic_phone_field']['#prefix'], $form['tfa_basic_phone_field']['#suffix']);
+        $form['tfa_basic_phone_field']['#type'] = 'select';
+        $form['tfa_basic_phone_field']['#default_value'] = $phone_field;
+        $form['tfa_basic_phone_field']['#options'] = $options;
+        $form['tfa_basic_phone_field']['#description'] = t('Account field that stores mobile numbers.');
+      }
+    }
+  }
+  // SMS is disabled if the Twilio class is not available.
+  else {
+    $form['tfa_fallback']['tfa_basic_sms']['enable']['#disabled'] = TRUE;
+    $form['tfa_fallback']['tfa_basic_sms']['enable']['#description'] = t('Not available for use because Twilio PHP library is not installed. See TFA Basic README.txt.');
+  }
+
+  $form['tfa_fallback']['tfa_basic_help']['weight']['#default_value'] = 10;
+  $form['tfa_fallback']['tfa_basic_help']['weight']['#disabled'] = TRUE;
+  $default_help = t('Contact support to reset your access');
+  $form['tfa_basic_help_text'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Help page text'),
+    '#default_value' => variable_get('tfa_basic_help_text', $default_help),
+    '#description' => t('Text to display on help page. Plain text only.'),
+    '#states' => array(
+      'visible' => array(
+        array(
+          array(':input[name="tfa_fallback[tfa_basic_help][enable]"]' => array('checked' => TRUE)),
+          'or',
+          array(':input[name="tfa_validate"]' => array('value' => 'tfa_basic_help'))
+        )
+      )
+    ),
+  );
+
+  $form['#validate'][] = 'tfa_basic_form_validate';
+  $form['#submit'][] = 'tfa_basic_form_submit';
+}
+
+/**
+ * Validation for TFA admin settings alter.
+ */
+function tfa_basic_form_validate($form, &$form_state) {
+  $login = array();
+  $values = $form_state['values'];
+  if (!empty($values['tfa_login'])) {
+    foreach ($values['tfa_login'] as $key => $enabled) {
+      if ($enabled) {
+        $login[] = $key;
+      }
+    }
+
+    if (!empty($login) && in_array('tfa_basic_trusted_browser', $login) && empty($values['tfa_basic_cookie_domain'])) {
+      form_set_error('tfa_basic_cookie_domain', t('Cookie domain is required if Trusted Browser plugin is enabled.'));
+    }
+  }
+  if (!empty($values['tfa_fallback']) && (!empty($values['tfa_fallback']['tfa_basic_sms']['enable']) || $values['tfa_validate'] === 'tfa_basic_sms')) {
+    if (empty($values['tfa_basic_twilio_account_sid'])) {
+      form_set_error('tfa_basic_twilio_account_sid', t('Account SID is required if Twilio SMS plugin is enabled.'));
+    }
+    if (empty($values['tfa_basic_twilio_account_token'])) {
+      form_set_error('tfa_basic_twilio_account_token', t('Account token is required if Twilio SMS plugin is enabled.'));
+    }
+    if (empty($values['tfa_basic_twilio_account_number'])) {
+      form_set_error('tfa_basic_twilio_account_number', t('Account number is required if Twilio SMS plugin is enabled.'));
+    }
+    if (empty($values['tfa_basic_twilio_message_text'])) {
+      form_set_error('tfa_basic_twilio_message_text', t('Message text is required if Twilio SMS plugin is enabled.'));
+    }
+    elseif (strpos($values['tfa_basic_twilio_message_text'], '!code') === FALSE) {
+      form_set_error('tfa_basic_twilio_message_text', t('Message text must include token !code.'));
+    }
+    $phone_field = variable_get('tfa_basic_phone_field', '');
+    if ($phone_field !== FALSE && empty($values['tfa_basic_phone_field'])) {
+      form_set_error('', t('An account field for mobile number storage is required to use the Twilio SMS plugin. Consult TFA Basic README.txt for more info.'));
+    }
+  }
+}
+
+/**
+ * Submit for TFA admin settings alter.
+ */
+function tfa_basic_form_submit($form, &$form_state) {
+  if (!empty($form_state['values']['tfa_basic_cookie_domain'])) {
+    variable_set('tfa_basic_cookie_domain', $form_state['values']['tfa_basic_cookie_domain']);
+  }
+  if (!empty($form_state['values']['tfa_basic_twilio_account_sid'])) {
+    variable_set('tfa_basic_twilio_account_sid', $form_state['values']['tfa_basic_twilio_account_sid']);
+  }
+  if (!empty($form_state['values']['tfa_basic_twilio_account_token'])) {
+    variable_set('tfa_basic_twilio_account_token', $form_state['values']['tfa_basic_twilio_account_token']);
+  }
+  if (!empty($form_state['values']['tfa_basic_twilio_account_number'])) {
+    variable_set('tfa_basic_twilio_account_number', $form_state['values']['tfa_basic_twilio_account_number']);
+  }
+  if (!empty($form_state['values']['tfa_basic_twilio_message_text'])) {
+    variable_set('tfa_basic_twilio_message_text', $form_state['values']['tfa_basic_twilio_message_text']);
+  }
+  if (isset($form_state['values']['tfa_basic_sms_nanp_validate'])) {
+    variable_set('tfa_basic_sms_nanp_validate', $form_state['values']['tfa_basic_sms_nanp_validate']);
+  }
+  if (!empty($form_state['values']['tfa_basic_help_text'])) {
+    variable_set('tfa_basic_help_text', $form_state['values']['tfa_basic_help_text']);
+  }
+  $phone_field = variable_get('tfa_basic_phone_field', '');
+  if ($phone_field !== FALSE && !empty($form_state['values']['tfa_fallback']) && !empty($form_state['values']['tfa_fallback']['tfa_basic_sms']['enable']) && !empty($form_state['values']['tfa_basic_phone_field'])) {
+    variable_set('tfa_basic_phone_field', $form_state['values']['tfa_basic_phone_field']);
+  }
+  variable_set('tfa_basic_roles_require', $form_state['values']['required_tfa_roles']);
+}
+
+/**
+ * Implements hook_mail().
+ */
+function tfa_basic_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'tfa_basic_tfa_enabled':
+      $message['subject'] = t('Your @site_name account now has two-factor authentication', array('@site_name' => variable_get('site_name', 'Drupal')));
+      $message['body']['body'] = tfa_basic_tfa_enabled_body($message, $params);
+      break;
+
+    case 'tfa_basic_disabled_configuration':
+      $message['subject'] = t('Your @site_name account no longer has two-factor authentication', array('@site_name' => variable_get('site_name', 'Drupal')));
+      $message['body']['body'] = tfa_basic_tfa_disabled_body($message, $params);
+      break;
+
+  }
+}
+
+/**
+ * Returns text appropriate for an email when someone has enabled tfa.
+ *
+ * @param array $message
+ *   The message, must include the language.
+ * @param array $params
+ *   Parameters from drupal_mail. Must include the account.
+ *
+ * @return string
+ *   Message body.
+ */
+function tfa_basic_tfa_enabled_body($message, $params) {
+  $text = t("[user:name],
+
+Thanks for configuring two-factor authentication on your @site_name account!
+
+This additional level of security will help to ensure that only you are able to log in to your account.
+
+If you ever lose the device you configured, you should act quickly to delete its association with this account.
+
+-- @site_name team", array('@site_name' => variable_get('site_name', 'Drupal')));
+
+  return token_replace($text, array('user' => $params['account']), array('language' => $message['language'], 'sanitize' => FALSE, 'clear' => TRUE));
+}
+
+/**
+ * Returns text appropriate for an email when someone has disabled tfa.
+ *
+ * @param array $message
+ *   The message, must include the language.
+ * @param array $params
+ *   Parameters from drupal_mail. Must include the account.
+ *
+ * @return string
+ *   Message body.
+ */
+function tfa_basic_tfa_disabled_body($message, $params) {
+  $text = t("[user:name],
+
+Two-factor authentication has been disabled on your account.
+
+If you did not take this action, please contact a site administrator immediately.
+
+-- @site_name team", array('@site_name' => variable_get('site_name', 'Drupal')));
+
+  return token_replace($text, array('user' => $params['account']), array('language' => $message['language'], 'sanitize' => FALSE, 'clear' => TRUE));
+}
