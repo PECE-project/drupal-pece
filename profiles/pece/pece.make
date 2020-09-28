@@ -235,7 +235,7 @@ projects[userprotect][version] = 1.3
 
 ; Username Enumeration Prevention
 projects[username_enumeration_prevention][subdir] = contrib
-projects[username_enumeration_prevention][version] = 1.2
+projects[username_enumeration_prevention][version] = 1.3
 
 ; =====================
 ; Panels
