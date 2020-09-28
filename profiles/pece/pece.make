@@ -231,7 +231,7 @@ projects[role_delegation][version] = 1.2
 
 ; User Protect
 projects[userprotect][subdir] = contrib
-projects[userprotect][version] = 1.2
+projects[userprotect][version] = 1.3
 
 ; Username Enumeration Prevention
 projects[username_enumeration_prevention][subdir] = contrib
