@@ -241,6 +241,10 @@ projects[username_enumeration_prevention][version] = 1.3
 projects[tfa][subdir] = contrib
 projects[tfa][version] = 2.1-rc1
 
+# 2FA Plugins
+projects[tfa_basic][subdir] = contrib
+projects[tfa_basic][version] = 1.1
+
 ; Password Policy
 projects[password_policy][subdir] = contrib
 projects[password_policy][version] = 1.16
