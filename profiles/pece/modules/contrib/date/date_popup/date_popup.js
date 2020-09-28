@@ -5,6 +5,12 @@
   function makeFocusHandler(e) {
     if (!$(this).hasClass('date-popup-init')) {
       var datePopup = e.data;
+
+      // Allow a function name to be passed for beforeShowDay.
+      if (typeof datePopup.settings.beforeShowDay == 'string') {
+        datePopup.settings.beforeShowDay = eval(datePopup.settings.beforeShowDay);
+      }
+
       // Explicitely filter the methods we accept.
       switch (datePopup.func) {
         case 'datepicker':

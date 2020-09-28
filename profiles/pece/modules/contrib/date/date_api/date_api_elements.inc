@@ -464,12 +464,7 @@ function date_select_element_value_callback($element, $input = FALSE, &$form_sta
   );
   foreach ($granularity as $field) {
     if ($field != 'timezone') {
-      if (date_is_date($date)) {
-        $return[$field] = $date->format($formats[$field]);
-      }
-      else {
-        $return = array();
-      }
+      $return[$field] = date_is_date($date) ? $date->format($formats[$field]) : '';
     }
   }
   return $return;
