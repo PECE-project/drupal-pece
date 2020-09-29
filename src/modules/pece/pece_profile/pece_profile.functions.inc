@@ -21,7 +21,8 @@ function _pece_profile_field_contributors_has_user($field_values = array(), $use
  * @return mixed
  */
 function pece_get_fullname_or_name($user = NULL) {
-  $user = $user ? $user :get_current_user();
+  $user = $user ? $user : get_current_user();
+  $user = is_object($user) ? $user : user_load($user);
   $profile = profile2_load_by_user($user, 'pece_profile_main');
   $fullName = $profile->field_pece_full_name[LANGUAGE_NONE][0]['value'];
   $result = $fullName ? $fullName : $user->name;
