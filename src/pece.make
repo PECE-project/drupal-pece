@@ -266,10 +266,6 @@ projects[panelizer][patch][2788851] = https://www.drupal.org/files/issues/paneli
 ; Overrides panopoly's panels.
 projects[panels][version] = 3.10
 projects[panels][subdir] = contrib
-; Add a button for adding CSS id or CSS class for a region in IPE.
-projects[panels][patch][1570120] = https://www.drupal.org/files/issues/move-image-1570120-31.patch
-; Menu blocks disappear when editing/saving in the Panels IPE.
-projects[panels][patch][2897658] = https://www.drupal.org/files/issues/panels-menu-block-ipe-2897658-3.patch
 
 projects[fieldable_panels_panes][version] = 1.13
 projects[fieldable_panels_panes][subdir] = contrib
