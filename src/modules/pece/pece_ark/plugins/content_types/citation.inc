@@ -37,17 +37,23 @@ function pece_ark_citation_pane_render($subtype, $conf, $args, $context) {
   $block = new stdClass();
 
   $node = $context['panelizer']->data;
-  $ark = ', [ARK].';
+  $ark = pece_ark_get_data($node);
+  if ($ark && $ark['remote_ark_name'] != '')
+    $ark_link = ', ' .$ark['remote_ark_name']. '.';
+  else
+    $ark_link = '.';
+  // Define creators
   $creator = pece_get_fullname_or_name($node->uid);
+
   $block->content = array(
     'citation' => array(
       '#theme' => 'html_tag',
-      '#tag' => 'div',
+      '#tag' => 'p',
       '#value' => t('@creator. "@title", @siteName, Platform for Experimental Collaborative Ethnography, last modified @changed, accessed @accessed@ark', array(
         '@creator' => $creator,
         '@title' => $node->title,
         '@siteName' => variable_get('site_name'),
-        '@ark' => $ark,
+        '@ark' => $ark_link,
         '@changed' => format_date($node->changed, 'custom', 'j F Y'),
         '@accessed' => date('j F Y')
       )),
