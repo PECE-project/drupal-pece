@@ -205,7 +205,7 @@ function pece_projects_field_default_field_bases() {
   // Exported field_base: 'field_pece_proj_struct_analytics'.
   $field_bases['field_pece_proj_struct_analytics'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_pece_proj_struct_analytics',
@@ -219,10 +219,11 @@ function pece_projects_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         0 => array(
-          'vocabulary' => '',
+          'vocabulary' => 'pece_structured_analytics',
           'parent' => 0,
         ),
       ),
+      'profile2_private' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',

@@ -203,7 +203,7 @@ function pece_projects_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -323,7 +323,7 @@ function pece_projects_field_default_field_instances() {
         'manualcrop_thumblist' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -454,7 +454,7 @@ function pece_projects_field_default_field_instances() {
         'manualcrop_thumblist' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -574,7 +574,7 @@ function pece_projects_field_default_field_instances() {
         'manualcrop_thumblist' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -665,7 +665,7 @@ function pece_projects_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 12,
+      'weight' => 1,
     ),
   );
 
@@ -881,7 +881,7 @@ function pece_projects_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -1105,7 +1105,7 @@ function pece_projects_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -1238,7 +1238,7 @@ function pece_projects_field_default_field_instances() {
         'manualcrop_thumblist' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -1246,6 +1246,7 @@ function pece_projects_field_default_field_instances() {
   // 'node-pece_project-field_pece_proj_struct_analytics'.
   $field_instances['node-pece_project-field_pece_proj_struct_analytics'] = array(
     'bundle' => 'pece_project',
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -1312,23 +1313,26 @@ function pece_projects_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'div_div_div',
     'field_name' => 'field_pece_proj_struct_analytics',
     'label' => 'Structured Analytics',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'module' => 'entityreference_view_widget',
+      'active' => 1,
+      'module' => 'options',
       'settings' => array(
-        'allow_duplicates' => FALSE,
-        'close_modal' => '',
+        'allow_duplicates' => 0,
+        'close_modal' => 0,
+        'pass_argument' => 0,
         'pass_arguments' => '',
-        'rendered_entity' => FALSE,
-        'view' => '',
-        'view_mode' => FALSE,
+        'rendered_entity' => 0,
+        'view' => 'entityreference_view_widget_sample|entityreference_view_widget_1',
+        'view_mode' => 'full',
       ),
-      'type' => 'entityreference_view_widget',
+      'type' => 'options_buttons',
       'weight' => 15,
     ),
   );
@@ -1433,7 +1437,7 @@ function pece_projects_field_default_field_instances() {
         'year_range' => '-100:+10',
       ),
       'type' => 'date_popup',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -1713,7 +1717,7 @@ function pece_projects_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 

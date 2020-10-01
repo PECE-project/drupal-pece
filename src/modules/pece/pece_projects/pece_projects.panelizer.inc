@@ -70,8 +70,8 @@ function pece_projects_panelizer_defaults() {
     'delta_reversed' => FALSE,
     'formatter_settings' => array(),
     'context' => array(),
-    'override_title' => 0,
-    'override_title_text' => '',
+    'override_title' => 1,
+    'override_title_text' => 'About Project',
     'override_title_heading' => 'h2',
   );
   $pane->cache = array();
@@ -104,8 +104,8 @@ function pece_projects_panelizer_defaults() {
       'use_content_language' => 1,
     ),
     'context' => array(),
-    'override_title' => 0,
-    'override_title_text' => '',
+    'override_title' => 1,
+    'override_title_text' => 'Researchers',
     'override_title_heading' => 'h2',
   );
   $pane->cache = array();
@@ -134,12 +134,12 @@ function pece_projects_panelizer_defaults() {
     'delta_reversed' => 0,
     'formatter_settings' => array(
       'view_mode' => 'mini_teaser',
-      'links' => 1,
+      'links' => 0,
       'use_content_language' => 1,
     ),
     'context' => array(),
-    'override_title' => 0,
-    'override_title_text' => '',
+    'override_title' => 1,
+    'override_title_text' => 'Essays',
     'override_title_heading' => 'h2',
   );
   $pane->cache = array();
@@ -177,20 +177,21 @@ function pece_projects_panelizer_defaults() {
   $display->content['new-7b7dc01f-8ec6-471f-a89d-de6f1c182c37'] = $pane;
   $display->panels['column3'][0] = 'new-7b7dc01f-8ec6-471f-a89d-de6f1c182c37';
   $pane = new stdClass();
-  $pane->pid = 'new-9d8ab1d1-5b78-4921-90d5-28a48ebe9bd1';
+  $pane->pid = 'new-ace70d71-8c8c-477c-b5da-95c2552c33b6';
   $pane->panel = 'header';
   $pane->type = 'entity_field';
-  $pane->subtype = 'node:field_basic_image_image';
+  $pane->subtype = 'node:field_pece_proj_img';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'hidden',
-    'formatter' => 'file_rendered',
+    'formatter' => 'image',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
     'formatter_settings' => array(
-      'file_view_mode' => 'default',
+      'image_style' => 'panopoly_image_full',
+      'image_link' => '',
     ),
     'context' => array(),
     'override_title' => 0,
@@ -205,9 +206,9 @@ function pece_projects_panelizer_defaults() {
   $pane->extras = array();
   $pane->position = 0;
   $pane->locks = array();
-  $pane->uuid = '9d8ab1d1-5b78-4921-90d5-28a48ebe9bd1';
-  $display->content['new-9d8ab1d1-5b78-4921-90d5-28a48ebe9bd1'] = $pane;
-  $display->panels['header'][0] = 'new-9d8ab1d1-5b78-4921-90d5-28a48ebe9bd1';
+  $pane->uuid = 'ace70d71-8c8c-477c-b5da-95c2552c33b6';
+  $display->content['new-ace70d71-8c8c-477c-b5da-95c2552c33b6'] = $pane;
+  $display->panels['header'][0] = 'new-ace70d71-8c8c-477c-b5da-95c2552c33b6';
   $pane = new stdClass();
   $pane->pid = 'new-2b52b029-b5ba-4da5-acbb-731453e8df52';
   $pane->panel = 'secondarycolumn1';
