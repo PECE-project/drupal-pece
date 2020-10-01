@@ -38,7 +38,7 @@ function pece_projects_field_default_field_bases() {
   // Exported field_base: 'field_pece_featured_essays'.
   $field_bases['field_pece_featured_essays'] = array(
     'active' => 1,
-    'cardinality' => 10,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_pece_featured_essays',
@@ -109,7 +109,7 @@ function pece_projects_field_default_field_bases() {
   // Exported field_base: 'field_pece_groups'.
   $field_bases['field_pece_groups'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_pece_groups',
@@ -121,8 +121,28 @@ function pece_projects_field_default_field_bases() {
     'locked' => 0,
     'module' => 'entityreference',
     'settings' => array(
-      'handler' => 'base',
-      'handler_settings' => array(),
+      'handler' => 'og',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'er_viewmode_behavior' => array(
+            'status' => 0,
+          ),
+          'og_behavior' => array(
+            'status' => TRUE,
+          ),
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'membership_type' => 'og_membership_type_default',
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'pece_group' => 'pece_group',
+        ),
+      ),
+      'profile2_private' => FALSE,
       'target_type' => 'node',
     ),
     'translatable' => 0,
@@ -180,6 +200,32 @@ function pece_projects_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'image',
+  );
+
+  // Exported field_base: 'field_pece_proj_struct_analytics'.
+  $field_bases['field_pece_proj_struct_analytics'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_pece_proj_struct_analytics',
+    'indexes' => array(
+      'tid' => array(
+        0 => 'tid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'taxonomy',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => '',
+          'parent' => 0,
+        ),
+      ),
+    ),
+    'translatable' => 0,
+    'type' => 'taxonomy_term_reference',
   );
 
   // Exported field_base: 'field_pece_project'.

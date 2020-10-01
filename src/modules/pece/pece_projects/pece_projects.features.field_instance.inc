@@ -578,6 +578,97 @@ function pece_projects_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-pece_project-field_pece_contributors'.
+  $field_instances['node-pece_project-field_pece_contributors'] = array(
+    'bundle' => 'pece_project',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 13,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'nodeorder' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pece_contributors',
+    'label' => 'Contributors',
+    'required' => FALSE,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 12,
+    ),
+  );
+
   // Exported field_instance: 'node-pece_project-field_pece_featured_essays'.
   $field_instances['node-pece_project-field_pece_featured_essays'] = array(
     'bundle' => 'pece_project',
@@ -677,7 +768,7 @@ function pece_projects_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -867,17 +958,41 @@ function pece_projects_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'entityconnect' => array(
+      'button' => array(
+        'unload_add_button' => 1,
+        'unload_edit_button' => 1,
+      ),
+      'icon' => array(
+        'show_add_icon' => 0,
+        'show_edit_icon' => 0,
+      ),
+    ),
+    'fences_wrapper' => 'div_div_div',
     'field_name' => 'field_pece_groups',
     'label' => 'Groups',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
+      'behaviors' => array(
+        'og_widget' => array(
+          'access_override' => 0,
+          'admin' => array(
+            'widget_type' => 'entityreference_autocomplete',
+          ),
+          'default' => array(
+            'widget_type' => 'options_buttons',
+          ),
+          'status' => TRUE,
+        ),
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 0,
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -1127,6 +1242,97 @@ function pece_projects_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-pece_project-field_pece_proj_struct_analytics'.
+  $field_instances['node-pece_project-field_pece_proj_struct_analytics'] = array(
+    'bundle' => 'pece_project',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 14,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'nodeorder' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pece_proj_struct_analytics',
+    'label' => 'Structured Analytics',
+    'required' => FALSE,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'entityreference_view_widget',
+      'settings' => array(
+        'allow_duplicates' => FALSE,
+        'close_modal' => '',
+        'pass_arguments' => '',
+        'rendered_entity' => FALSE,
+        'view' => '',
+        'view_mode' => FALSE,
+      ),
+      'type' => 'entityreference_view_widget',
+      'weight' => 15,
+    ),
+  );
+
   // Exported field_instance: 'node-pece_project-field_pece_start_end_date'.
   $field_instances['node-pece_project-field_pece_start_end_date'] = array(
     'bundle' => 'pece_project',
@@ -1324,7 +1530,7 @@ function pece_projects_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -1413,7 +1619,7 @@ function pece_projects_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 14,
+      'weight' => 17,
     ),
   );
 
@@ -1514,6 +1720,7 @@ function pece_projects_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Consent Form');
+  t('Contributors');
   t('Description');
   t('Featured Essays');
   t('Funding Agency');
@@ -1523,6 +1730,7 @@ function pece_projects_field_default_field_instances() {
   t('Interview Request');
   t('Project');
   t('Start and End Date');
+  t('Structured Analytics');
   t('Substantive Logic');
   t('Tags');
   t('Thumbnail');
