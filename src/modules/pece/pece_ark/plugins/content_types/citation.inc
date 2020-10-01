@@ -44,6 +44,16 @@ function pece_ark_citation_pane_render($subtype, $conf, $args, $context) {
     $ark_link = '.';
   // Define creators
   $creator = pece_get_fullname_or_name($node->uid);
+  $contributors = isset($node->field_pece_contributors[LANGUAGE_NONE]) ? $node->field_pece_contributors[LANGUAGE_NONE] : array();
+  for ($cont = 0; $cont < count($contributors); $cont++) {
+    // Test if use 'and' or ',' to separate creators.
+    if ($cont + 1 == count($contributors))
+      $creator .= ' and ';
+    else
+      $creator .= ', ';
+
+    $creator .= pece_get_fullname_or_name($contributors[$cont]['target_id']);
+  }
 
   $block->content = array(
     'citation' => array(
