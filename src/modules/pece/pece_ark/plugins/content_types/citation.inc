@@ -31,29 +31,22 @@ function pece_ark_citation_pane_edit_form_submit(&$form, &$form_state) {
  * See ctools_plugin_examples for more advanced info
  */
 function pece_ark_citation_pane_render($subtype, $conf, $args, $context) {
+  $node = $context['panelizer']->data;
+  if (strpos($node->type, 'artifact') === false)
+    return _citation_render($node);
+  else
+    return _artifact_citation_render($node);
+}
 
+function _citation_render($node) {
   module_load_include('inc', 'pece_profile', 'pece_profile.functions');
   // Prepare response block.
   $block = new stdClass();
-
-  $node = $context['panelizer']->data;
-  $ark = pece_ark_get_data($node);
-  if ($ark && $ark['remote_ark_name'] != '')
-    $ark_link = ', ' .$ark['remote_ark_name']. '.';
-  else
-    $ark_link = '.';
+  $ark_link = _citation_get_ark_link($node);
   // Define creators
   $creator = pece_get_fullname_or_name($node->uid);
   $contributors = isset($node->field_pece_contributors[LANGUAGE_NONE]) ? $node->field_pece_contributors[LANGUAGE_NONE] : array();
-  for ($cont = 0; $cont < count($contributors); $cont++) {
-    // Test if use 'and' or ',' to separate creators.
-    if ($cont + 1 == count($contributors))
-      $creator .= ' and ';
-    else
-      $creator .= ', ';
-
-    $creator .= pece_get_fullname_or_name($contributors[$cont]['target_id']);
-  }
+  $creator = _citation_create_many_names($contributors, $creator);
 
   $block->content = array(
     'citation' => array(
@@ -74,4 +67,97 @@ function pece_ark_citation_pane_render($subtype, $conf, $args, $context) {
   );
 
   return $block;
+}
+
+function _artifact_citation_render($node) {
+  module_load_include('inc', 'pece_profile', 'pece_profile.functions');
+  // Prepare response block.
+  $block = new stdClass();
+  $ark_link = _citation_get_ark_link($node);
+  // Define contributor
+  $contributor = pece_get_fullname_or_name($node->uid);
+  $contributors = isset($node->field_pece_contributors[LANGUAGE_NONE]) ? $node->field_pece_contributors[LANGUAGE_NONE] : array();
+  $contributors = _citation_create_many_names($contributors, $contributor);
+
+  // Define creators
+  $creators = isset($node->field_pece_authors[LANGUAGE_NONE]) ? $node->field_pece_authors[LANGUAGE_NONE] : array();
+  $creators = _citation_create_many_names_authors($creators);
+
+  $block->content = array(
+    'citation' => array(
+      '#theme' => 'html_tag',
+      '#tag' => 'p',
+      '#value' => t('@creator, "@title", @dateCreate, contributed by @contributors, last modified @changed, accessed @accessed, @siteName, Platform for Experimental Collaborative Ethnography@ark', array(
+        '@creator' => $creators,
+        '@title' => $node->title,
+       // '@dateCreate' => format_date($node->field_pece_created[LANGUAGE_NONE][0], 'custom', 'j F Y'),
+        '@dateCreate' => format_date($node->changed, 'custom', 'j F Y'),
+        '@contributors' => $contributors,
+        '@siteName' => variable_get('site_name'),
+        '@ark' => $ark_link,
+        '@changed' => format_date($node->changed, 'custom', 'j F Y'),
+        '@accessed' => date('j F Y')
+      )),
+      '#attributes' => array(
+        'class' => array('citation'),
+      ),
+    ),
+  );
+
+  return $block;
+}
+
+/**
+ * Helper to return link to ark.
+ * @param $node
+ *
+ * @return string
+ */
+function _citation_get_ark_link($node) {
+  $ark_link = '.';
+  $ark = pece_ark_get_data($node);
+  if ($ark && $ark['remote_ark_name'] != '')
+    $ark_link = ', ' .$ark['remote_ark_name']. '.';
+
+  return $ark_link;
+}
+
+/**
+ * Helper to transform list name uid in string citations
+ * @param $user_list
+ * @param string $names
+ */
+function _citation_create_many_names($user_list, $names = '') {
+  for ($cont = 0; $cont < count($user_list); $cont++) {
+    // Test if use 'and' or ',' to separate creators.
+    if ($cont + 1 == count($user_list))
+      $names .= ' and ';
+    elseif ($names != '')
+      $names .= ', ';
+
+    $names .= pece_get_fullname_or_name($user_list[$cont]['target_id']);
+  }
+  return $names;
+}
+
+function _citation_create_many_names_authors($authors_list) {
+  foreach ($authors_list as $key => $author) {
+    $authors_list[$key] =  $author['tid'];
+  }
+
+  $authors = taxonomy_term_load_multiple($authors_list);
+  $cont = 1;
+  $names = '';
+  foreach ($authors as $auth) {
+    $names .= $auth->name;
+
+    if ($cont + 1 == count($authors))
+      $names .= ' and ';
+    elseif ($cont + 1 < count($authors))
+      $names .= ', ';
+
+    $cont++;
+  }
+
+  return $names;
 }
