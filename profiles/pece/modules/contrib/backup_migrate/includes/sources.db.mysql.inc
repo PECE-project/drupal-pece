@@ -4,7 +4,7 @@
  * @file
  */
 
-backup_migrate_include('sources.db');
+require_once dirname(__FILE__) . '/sources.db.inc';
 
 /**
  * @file
@@ -39,6 +39,9 @@ class backup_migrate_source_db_mysql extends backup_migrate_source_db {
    */
   protected static $viewNames = array();
 
+  /**
+   *
+   */
   public function type_name() {
     return t("MySQL Database");
   }
@@ -388,8 +391,6 @@ class backup_migrate_source_db_mysql extends backup_migrate_source_db {
     return $out;
   }
 
-
-
   /**
    * Get the sql for the structure of the given table.
    */
@@ -558,7 +559,7 @@ class backup_migrate_source_db_mysql extends backup_migrate_source_db {
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE=NO_AUTO_VALUE_ON_ZERO */;
 
 SET SQL_MODE=\"NO_AUTO_VALUE_ON_ZERO\";
-SET NAMES utf8;
+SET NAMES utf8mb4;
 
 ";
   }

@@ -125,17 +125,22 @@ class BmTestBasics extends BmTestBase {
     $element['#title'] = 'Mock Field (Memory Limit)';
     $test_values = array(
       // Value to be tested => validity.
-      '-1' => TRUE, // Special meaning: no limit.
+      // Special meaning: no limit.
+      '-1' => TRUE,
       '50' => TRUE,
-      '5M' => TRUE, // 5 megabytes.
-      '.5M' => TRUE, // 500 kilobytes.
-      '5G' => TRUE, // 5 gigabytes.
+      // 5 megabytes.
+      '5M' => TRUE,
+      // 500 kilobytes.
+      '.5M' => TRUE,
+      // 5 gigabytes.
+      '5G' => TRUE,
       '.5G' => TRUE,
       '1.5G' => TRUE,
       '0' => TRUE,
       'a' => FALSE,
       '-2' => FALSE,
-      '1.5' => FALSE, // You cannot have half a byte.
+      // You cannot have half a byte.
+      '1.5' => FALSE,
       '5T' => FALSE,
       '5 G' => FALSE,
       '.5.5G' => FALSE,
@@ -150,11 +155,20 @@ class BmTestBasics extends BmTestBase {
       '0' => TRUE,
       '1' => TRUE,
       '10000' => TRUE,
-      'a' => FALSE, // NaN.
-      '.5' => FALSE, // Not an integer.
-      '-1' => FALSE, // Not positive.
-      // PHP_INT_MAX => TRUE, // Largest integer.
-      // (PHP_INT_MAX + 1) => FALSE, // Resolves to a decimal.
+      // NaN.
+      'a' => FALSE,
+      // Not an integer.
+      '.5' => FALSE,
+      // Not positive.
+      '-1' => FALSE,
+      // Largest integer.
+      // @code
+      // PHP_INT_MAX => TRUE,
+      // @endcode
+      // Resolves to a decimal.
+      // @code
+      // (PHP_INT_MAX + 1) => FALSE,
+      // @endcode
     );
     foreach ($test_values as $value => $valid) {
       $this->assertValidFieldValue('backup_migrate_unsigned_integer_validate', $element, $value, $valid, 'zero or a positive integer');
@@ -192,7 +206,7 @@ class BmTestBasics extends BmTestBase {
    * @param string $type
    *   Description of value sub-type.
    */
-  protected function assertValidFieldValue($validator, $element, $value, $value_is_valid, $type) {
+  protected function assertValidFieldValue($validator, array $element, $value, $value_is_valid, $type) {
     $form = array();
     $form_state = array();
     $field = 'mock_field';
@@ -203,11 +217,20 @@ class BmTestBasics extends BmTestBase {
     $errors = form_get_errors();
 
     if ($value_is_valid) {
-      $msg = t('%value is a valid %type.', array('%value' => $value, '%type' => $type));
+      $args = array(
+        '%value' => $value,
+        '%type' => $type,
+      );
+      $msg = t('%value is a valid %type.', $args);
       $result = $this->assertTrue(empty($errors[$field]), $msg);
     }
     else {
-      $msg = t('%value is not a valid %type. Error message: "%msg".', array('%value' => $value, '%type' => $type, '%msg' => strip_tags($errors[$field])));
+      $args = array(
+        '%value' => $value,
+        '%type' => $type,
+        '%msg' => strip_tags($errors[$field]),
+      );
+      $msg = t('%value is not a valid %type. Error message: "%msg".', $args);
       $result = $this->assertFalse(empty($errors[$field]), $msg);
     }
 
@@ -220,7 +243,6 @@ class BmTestBasics extends BmTestBase {
   public function testBackupMigrateToBytes() {
     // PHP manual:
     // http://php.net/manual/en/ini.core.php#ini.memory-limit
-
     // '-1' is a reserved value meaning 'no limit'.
     $input = '-1';
     $expected = -1;

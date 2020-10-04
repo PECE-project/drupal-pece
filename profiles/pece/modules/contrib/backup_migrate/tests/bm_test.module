@@ -10,9 +10,18 @@
  */
 class BmTestItem {
 
-  // Edit this to true to make a default item disabled initially.
+  /**
+   * Edit this to true to make a default item disabled initially.
+   *
+   * @var bool
+   */
   public $disabled = FALSE;
 
+  /**
+   * Indicates the API version to use.
+   *
+   * @var int
+   */
   public $api_version = 1;
 
 }
@@ -45,17 +54,17 @@ function bm_test_exportables_backup_migrate_schedules() {
  */
 function _bm_test_get_mock_schedule() {
   return array(
-    'machine_name'        => 'mock_db_weekly',
-    'name'                => 'Mock weekly database schedule',
-    'source_id'           => 'db',
-    'destination_id'      => 'scheduled',
+    'machine_name' => 'mock_db_weekly',
+    'name' => 'Mock weekly database schedule',
+    'source_id' => 'db',
+    'destination_id' => 'scheduled',
     'copy_destination_id' => '',
-    'profile_id'          => 'default',
-    'keep'                => 4,
-    'period'              => 604800,
-    'enabled'             => TRUE,
-    'cron'                => 'builtin',
-    'cron_schedule'       => '0 4 * * *',
+    'profile_id' => 'default',
+    'keep' => 4,
+    'period' => 604800,
+    'enabled' => TRUE,
+    'cron' => 'builtin',
+    'cron_schedule' => '0 4 * * *',
   );
 }
 

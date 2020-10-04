@@ -13,6 +13,9 @@
 class backup_migrate_destination_files extends backup_migrate_destination {
   public $supported_ops = array('scheduled backup', 'manual backup', 'local backup', 'restore', 'list files', 'configure', 'delete');
 
+  /**
+   *
+   */
   public function type_name() {
     return t("Server Directory");
   }
@@ -74,7 +77,8 @@ class backup_migrate_destination_files extends backup_migrate_destination {
   public function load_file($file_id) {
     $filepath = $this->get_filepath($file_id);
     if (file_exists($filepath)) {
-      backup_migrate_include('files');
+      require_once dirname(__FILE__) . '/files.inc';
+
       return new backup_file(array('filepath' => $filepath));
     }
   }
@@ -97,7 +101,8 @@ class backup_migrate_destination_files extends backup_migrate_destination {
     $files = array();
     if ($dir = $this->get_realpath()) {
       if ($handle = @opendir($dir)) {
-        backup_migrate_include('files');
+        require_once dirname(__FILE__) . '/files.inc';
+
         while (FALSE !== ($file = readdir($handle))) {
           if (substr($file, 0, 1) !== '.') {
             $filepath = $dir . "/" . $file;
@@ -306,6 +311,10 @@ class backup_migrate_destination_files extends backup_migrate_destination {
  */
 class backup_migrate_destination_files_manual extends backup_migrate_destination_files {
   public $supported_ops = array('manual backup', 'restore', 'list files', 'configure', 'delete');
+
+  /**
+   *
+   */
   public function __construct($params = array()) {
     $dir = 'private://backup_migrate/manual';
     parent::__construct($params + array('location' => $dir, 'name' => t('Manual Backups Directory')));
@@ -318,6 +327,10 @@ class backup_migrate_destination_files_manual extends backup_migrate_destination
  */
 class backup_migrate_destination_files_scheduled extends backup_migrate_destination_files {
   public $supported_ops = array('scheduled backup', 'restore', 'list files', 'configure', 'delete');
+
+  /**
+   *
+   */
   public function __construct($params = array()) {
     $dir = 'private://backup_migrate/scheduled';
     parent::__construct($params + array('location' => $dir, 'name' => t('Scheduled Backups Directory')));

@@ -34,13 +34,13 @@ class BmTestUpdate7310 extends BmTestBase {
   /**
    * Test update 7310.
    */
-  public function testUpdate_7310() {
-    backup_migrate_include('schedules', 'destinations');
+  public function testUpdate7310() {
+    require_once dirname(__FILE__) . '/../includes/destinations.inc';
+    require_once dirname(__FILE__) . '/../includes/schedules.inc';
 
     $this->assertEqual(function_exists('backup_migrate_update_7310'), TRUE, 'Update 7310 exists.');
 
     // First test what happens when there are no e-mail destinations.
-
     // Execute the update function.
     $result = backup_migrate_update_7310();
 
@@ -50,7 +50,6 @@ class BmTestUpdate7310 extends BmTestBase {
     $this->assertEqual($expected, $result, $message);
 
     // Next, add e-mail destinations and see what happens then.
-
     // Create two mock e-mail destinations.
     $address = strtolower($this->randomName(10)) . '@example.com';
     $email_destination_id = strtolower($this->randomName(16));
@@ -101,7 +100,7 @@ class BmTestUpdate7310 extends BmTestBase {
    * @param string $mail
    *   The e-mail address of the destination.
    */
-  function submitDestinationEmail($name, $machine_name, $mail) {
+  public function submitDestinationEmail($name, $machine_name, $mail) {
     $this->drupalGet('admin/config/system/backup_migrate/settings/destination/add/email');
     $this->assertResponse(200);
     $edit = array();
@@ -119,19 +118,21 @@ class BmTestUpdate7310 extends BmTestBase {
    *   The name of the destination.
    * @param string $machine_name
    *   The machine name of the destination.
-   * @param string $mail
-   *   The e-mail address of the destination.
+   * @param string $destination_id
+   *   The destination ID to use.
+   * @param string $copy_destination_id
+   *   The destination ID to use for an optional copy.
    */
-  function submitSchedule($name, $machine_name, $destination, $copy_destination) {
+  public function submitSchedule($name, $machine_name, $destination_id, $copy_destination_id = NULL) {
     $this->drupalGet('admin/config/system/backup_migrate/schedule/add');
     $this->assertResponse(200);
     $edit = array();
     $edit['name'] = $name;
     $edit['machine_name'] = $machine_name;
-    $edit['destination_id'] = $destination;
-    if (!empty($copy_destination)) {
+    $edit['destination_id'] = $destination_id;
+    if (!empty($copy_destination_id)) {
       $edit['copy'] = TRUE;
-      $edit['copy_destination_id'] = $copy_destination;
+      $edit['copy_destination_id'] = $copy_destination_id;
     }
     $this->drupalPost(NULL, $edit, t('Save schedule'));
     $this->assertResponse(200);

@@ -18,7 +18,8 @@ function backup_migrate_requirements($phase) {
     // Get a list of all destinations, make sure none of them are publicly
     // accessible.
     // @todo Expand the API to add methods to specifically check this.
-    backup_migrate_include('destinations');
+    require_once dirname(__FILE__) . '/includes/destinations.inc';
+
     foreach (backup_migrate_get_destinations() as $dest_name => $destination) {
       if (method_exists($destination, 'get_display_location')) {
         $dest_path = $destination->get_display_location();
@@ -680,7 +681,7 @@ function backup_migrate_update_7203() {
  * Upgrade from Backup & Migrate 7.x-2.x.
  *
  * - Uninstall the Backup Migrate Files module if it's installed.
- * - Uninstall the Nodesquirrel module if it's installed.
+ * - Uninstall the NodeSquirrel module if it's installed.
  * - Upgrade the configurations.
  */
 function backup_migrate_update_7300() {
@@ -869,7 +870,7 @@ function backup_migrate_update_7305() {
     'backup_migrate_sources',
     'backup_migrate_schedules',
   ) as $table) {
-    if (!db_field_exists($table, $machine_name)) {
+    if (!db_field_exists($table, 'machine_name')) {
       try {
         db_add_field($table, 'machine_name', $field_spec);
       }
@@ -935,11 +936,12 @@ function backup_migrate_update_7308() {
 }
 
 /**
- * NodeSquirel support has been removed.
+ * NodeSquirrel support has been removed.
  */
 function backup_migrate_update_7309() {
-  backup_migrate_include('destinations');
-  backup_migrate_include('schedules');
+  require_once dirname(__FILE__) . '/includes/destinations.inc';
+  require_once dirname(__FILE__) . '/includes/schedules.inc';
+
   foreach (backup_migrate_get_schedules() as $schedule) {
     // Look for backups which use NodeSquirrel as its destination.
     if ($schedule->destination_id == 'nodesquirrel') {
@@ -978,7 +980,7 @@ function backup_migrate_update_7309() {
   variable_set('menu_rebuild_needed', TRUE);
 
   // @todo Remove the configuration later.
-  drupal_set_message(t('<a href="!url">NodeSquirel stopped being usable as a backup destination</a> on October 1st, 2019 and ceased operations entirely on November 1st, 2019. Because of this, the Nodesquirrel functonality as been disabled. Please switch to an alternate destination if necessary. Please note that the NodeSquirrel configuration itself has not been removed.', array('!url' => 'https://pantheon.io/nodesquirrel-service-end-life')));
+  drupal_set_message(t('<a href="!url">NodeSquirrel stopped being usable as a backup destination</a> on October 1st, 2019 and ceased operations entirely on November 1st, 2019. Because of this, the NodeSquirrel functionality has been disabled. Please switch to an alternate destination if necessary. Please note that the NodeSquirrel configuration itself has not been removed.', array('!url' => 'https://pantheon.io/nodesquirrel-service-end-life')));
 }
 
 /**
@@ -993,9 +995,9 @@ function backup_migrate_update_7310() {
   // Which e-mail destinations exist?
   $destinations = db_select('backup_migrate_destinations', 'bmd')
     ->fields('bmd', array('machine_name'))
-      ->condition('subtype', 'email', '=')
-      ->execute()
-      ->fetchAllAssoc('machine_name', PDO::FETCH_ASSOC);
+    ->condition('subtype', 'email', '=')
+    ->execute()
+    ->fetchAllAssoc('machine_name', PDO::FETCH_ASSOC);
   $destinations = array_keys($destinations);
 
   if (!empty($destinations)) {
@@ -1027,5 +1029,40 @@ function backup_migrate_update_7310() {
   }
   else {
     return t('No destinations were affected by this change.');
+  }
+}
+
+/**
+ * Adjust the default performance settings.
+ */
+function backup_migrate_update_7311() {
+  $settings = array(
+    'backup_migrate_data_rows_per_query' => array(
+      'old' => 1000,
+      'new' => 50000,
+    ),
+    'backup_migrate_data_rows_per_line' => array(
+      'old' => 30,
+      'new' => 10,
+    ),
+    'backup_migrate_data_bytes_per_line' => array(
+      'old' => 2000,
+      'new' => 2 * 1024,
+    ),
+  );
+  foreach ($settings as $var_name => $data) {
+    $stored = variable_get($var_name);
+
+    // Nothing was stored in the database.
+    if (empty($stored)) {
+      // Don't do anything, the new default will be picked up automatically.
+    }
+    // The old value was smaller than or equal to the new value, or was the
+    // same as the old default, delete it so that the new default can be picked
+    // up.
+    elseif (intval($stored) <= $data['new'] || $stored == $data['old']) {
+      variable_del($var_name);
+      drupal_set_message(t('!var setting reset to the new default of !val.', array('!var' => $var_name, '!val' => $data['new'])));
+    }
   }
 }

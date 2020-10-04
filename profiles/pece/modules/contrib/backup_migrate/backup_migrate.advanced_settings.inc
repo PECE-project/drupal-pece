@@ -104,7 +104,7 @@ function backup_migrate_ui_advanced_settings_form($form, &$form_state) {
   $keys = array_keys($form);
   $query = db_query('SELECT name, value FROM {variable} WHERE name IN (:keys)', array(':keys' => $keys));
   $result = $query->fetchAllKeyed();
-  foreach($form as $key => $field) {
+  foreach ($form as $key => $field) {
     if (isset($result[$key])) {
       // Compare the value with what we have in the database.
       $db_value = unserialize($result[$key]);
@@ -114,7 +114,44 @@ function backup_migrate_ui_advanced_settings_form($form, &$form_state) {
     }
   }
 
-  return system_settings_form($form);
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save configuration'),
+  );
+
+  return $form;
+}
+
+/**
+ * The advanced settings form.
+ */
+function backup_migrate_ui_advanced_settings_form_submit($form, &$form_state) {
+  $variables = array(
+    'backup_migrate_backup_max_time' => BACKUP_MIGRATE_BACKUP_MAX_TIME,
+    'backup_migrate_cleanup_temp_files' => BACKUP_MIGRATE_CLEANUP_TEMP_FILES,
+    'backup_migrate_cleanup_time' => BACKUP_MIGRATE_CLEANUP_TIME,
+    'backup_migrate_data_bytes_per_line' => BACKUP_MIGRATE_DATA_BYTES_PER_LINE,
+    'backup_migrate_data_rows_per_line' => BACKUP_MIGRATE_DATA_ROWS_PER_LINE,
+    'backup_migrate_data_rows_per_query' => BACKUP_MIGRATE_DATA_ROWS_PER_QUERY,
+    'backup_migrate_disable_cron' => BACKUP_MIGRATE_DISABLE_CRON,
+    'backup_migrate_max_email_size' => BACKUP_MIGRATE_MAX_EMAIL_SIZE,
+    'backup_migrate_memory_limit' => BACKUP_MIGRATE_MEMORY_LIMIT,
+    'backup_migrate_schedule_buffer' => BACKUP_MIGRATE_SCHEDULE_BUFFER,
+    'backup_migrate_verbose' => BACKUP_MIGRATE_VERBOSE,
+  );
+  foreach ($variables as $var_name => $var_default) {
+    if (isset($form_state['values'][$var_name])) {
+      // There's no need to save the variable if it's just the default.
+      if ($form_state['values'][$var_name] == $var_default) {
+        variable_del($var_name);
+      }
+      // The variable is not the default, so save it.
+      else {
+        variable_set($var_name, $form_state['values'][$var_name]);
+      }
+    }
+  }
 }
 
 /**
@@ -139,6 +176,7 @@ function backup_migrate_unsigned_integer_validate($element, &$form_state, $form)
 
 /**
  * Validate fields that require a decimal between 0 and 1.
+ *
  * @todo Better name.
  */
 function backup_migrate_fraction_validate($element, &$form_state, $form) {

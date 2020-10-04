@@ -36,7 +36,6 @@ class BmTestEmail extends BmTestBase {
    */
   public function testAddEmailDestination() {
     // See if we can add a destination.
-
     // Load the email destination Add page.
     $this->drupalGet(BACKUP_MIGRATE_MENU_PATH . '/settings/destination/add/email');
     $this->assertResponse(200);
@@ -63,7 +62,6 @@ class BmTestEmail extends BmTestBase {
     $this->assertText(t('Email Address field is required.'), 'E-mail required.');
 
     // Step 1, set-up.
-
     // Create a test destination.
     $this->submitDestinationEmail($this->randomString(16), $test_destination, $address);
     $this->assertText(t('Your destination was saved'));
@@ -72,7 +70,7 @@ class BmTestEmail extends BmTestBase {
     // @todo Test the source add form.
     // @todo Maybe add a note somewhere about how we are using a small
     // source on purpose, so as to not break the testing system.
-    $this->submitSourceFiles($this->randomString(16), $test_source,  drupal_get_path('module', 'backup_migrate') . '/tests/files/');
+    $this->submitSourceFiles($this->randomString(16), $test_source, drupal_get_path('module', 'backup_migrate') . '/tests/files/');
     $this->assertText(t('Your source was saved'));
 
     // Run a manual back-up so we have a file to compare against.
@@ -92,7 +90,6 @@ class BmTestEmail extends BmTestBase {
     $attachment->path = $file->path;
 
     // Step 2, e-mail generated through the Quick Backup form.
-
     // Run a backup per e-mail.
     $this->runBackup($test_destination, $test_source);
 
@@ -102,15 +99,15 @@ class BmTestEmail extends BmTestBase {
     $this->assertEqual(count($captured_emails), 1, 'A back-up was mailed.');
 
     // Does the attachment occur in the captured e-mail?
-    // Note that the e-mail from Step 2 is tested against the back-up file from Step 1.
+    // Note that the e-mail from Step 2 is tested against the back-up file from
+    // Step 1.
     $file_data = fread(fopen($attachment->path, "r"), filesize($attachment->path));
-    $encoded_file_data  = chunk_split(base64_encode($file_data), 70, "\r\n");
+    $encoded_file_data = chunk_split(base64_encode($file_data), 70, "\r\n");
     $this->assertMailString('body', $encoded_file_data, 1);
 
     // Step 3, e-mail generated through the main helper function.
-
     // Make sure the new $address is never the same as the old one.
-    $address = strtolower($this->randomName(1+strlen($address))) . '@example.com';
+    $address = strtolower($this->randomName(1 + strlen($address))) . '@example.com';
 
     _backup_migrate_destination_email_mail_backup($attachment, $address);
 
@@ -126,13 +123,12 @@ class BmTestEmail extends BmTestBase {
     $this->assertMailString('body', $attachment->filename, 1);
 
     // Step 4, (partial) e-mail generated through a mime_mail() object.
-
     // Build an e-mail.
     $test_mail = new mime_mail();
     $boundary = "b" . md5(uniqid(time()));
 
     // Make sure the new $address is never the same as the old one.
-    $address = strtolower($this->randomName(1+strlen($address))) . '@example.com';
+    $address = strtolower($this->randomName(1 + strlen($address))) . '@example.com';
 
     $attach = fread(fopen($attachment->path, "r"), filesize($attachment->path));
     $test_mail->add_attachment($attach, $attachment->filename, "application/octet-stream");
@@ -144,7 +140,7 @@ class BmTestEmail extends BmTestBase {
       'subject' => 'test',
       'headers' => array(
         'MIME-Version' => "1.0",
-        'Content-Type' =>  "multipart/mixed; boundary=\"$boundary\"",
+        'Content-Type' => "multipart/mixed; boundary=\"$boundary\"",
       ),
     );
 
@@ -176,7 +172,7 @@ class BmTestEmail extends BmTestBase {
    * @param string $mail
    *   The e-mail address of the destination.
    */
-  function submitDestinationEmail($name, $machine_name, $mail) {
+  public function submitDestinationEmail($name, $machine_name, $mail) {
     $this->drupalGet('admin/config/system/backup_migrate/settings/destination/add/email');
     $this->assertResponse(200);
     $edit = array();
@@ -197,7 +193,7 @@ class BmTestEmail extends BmTestBase {
    * @param string $path
    *   The path of the source.
    */
-  function submitSourceFiles($name, $machine_name, $path) {
+  public function submitSourceFiles($name, $machine_name, $path) {
     $this->drupalGet('admin/config/system/backup_migrate/settings/source/add/filesource');
     $this->assertResponse(200);
     $edit = array();

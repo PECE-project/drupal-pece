@@ -6,7 +6,7 @@
  */
 
 /**
- * Class for testing Ctools' extended functionality.
+ * Class for testing CTools' extended functionality.
  */
 class BmTestCtools extends BmTestBase {
 
@@ -15,8 +15,8 @@ class BmTestCtools extends BmTestBase {
    */
   public static function getInfo() {
     return array(
-      'name' => 'Ctools tests',
-      'description' => 'Test integration with the Ctools module.',
+      'name' => 'CTools tests',
+      'description' => 'Test integration with the CTools module.',
       'group' => 'backup_migrate',
       'dependencies' => array('ctools'),
     );
@@ -39,7 +39,6 @@ class BmTestCtools extends BmTestBase {
    * Confirm automated settings exist.
    */
   public function testSettingsPage() {
-
     // Load the B&M Settings page.
     $this->drupalGet(BACKUP_MIGRATE_MENU_PATH . '/settings');
     $this->assertResponse(200);
@@ -100,7 +99,6 @@ class BmTestCtools extends BmTestBase {
       $id = 'edit-' . str_replace('_', '-', $key);
       $this->assertFieldById($id, $field, 'Found field by id "' . $id . '" and value "' . $field . '".');
     }
-
   }
 
 }
