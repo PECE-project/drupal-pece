@@ -157,6 +157,7 @@ function pece_timeline_essay_strongarm() {
   $strongarm->name = 'panelizer_defaults_node_pece_timeline_essay';
   $strongarm->value = array(
     'status' => 1,
+    'help' => '',
     'view modes' => array(
       'page_manager' => array(
         'status' => 1,
@@ -213,6 +214,12 @@ function pece_timeline_essay_strongarm() {
         'choice' => 0,
       ),
       'highlighted' => array(
+        'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'nodeorder' => array(
         'status' => 0,
         'substitute' => 0,
         'default' => 0,
