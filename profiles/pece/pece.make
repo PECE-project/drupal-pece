@@ -568,7 +568,7 @@ projects[amber][patch][2945946] = "https://www.drupal.org/files/issues/amber-mys
 
 ; Backup and Migrate
 projects[backup_migrate][subdir] = contrib
-projects[backup_migrate][version] = 3.7
+projects[backup_migrate][version] = 3.9
 
 ; Node Expiration
 projects[node_expire][subdir] = contrib
