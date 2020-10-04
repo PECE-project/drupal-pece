@@ -1205,7 +1205,7 @@ function pece_timeline_essay_field_default_field_instances() {
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '-100:+10',
       ),
       'type' => 'date_popup',
       'weight' => 3,

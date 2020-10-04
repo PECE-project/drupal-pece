@@ -264,12 +264,8 @@ projects[panelizer][patch][1549608] = https://www.drupal.org/files/issues/paneli
 projects[panelizer][patch][2788851] = https://www.drupal.org/files/issues/panelizer-administer-panelizer-2788851-2.patch
 
 ; Overrides panopoly's panels.
-projects[panels][version] = 3.9
+projects[panels][version] = 3.10
 projects[panels][subdir] = contrib
-; Add a button for adding CSS id or CSS class for a region in IPE.
-projects[panels][patch][1570120] = https://www.drupal.org/files/issues/move-image-1570120-31.patch
-; Menu blocks disappear when editing/saving in the Panels IPE.
-projects[panels][patch][2897658] = https://www.drupal.org/files/issues/panels-menu-block-ipe-2897658-3.patch
 
 projects[fieldable_panels_panes][version] = 1.13
 projects[fieldable_panels_panes][subdir] = contrib
@@ -283,40 +279,40 @@ projects[panels_mini_ipe][subdir] = contrib
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_admin][version] = 1.75
+projects[panopoly_admin][version] = 1.76
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_core][version] = 1.75
+projects[panopoly_core][version] = 1.76
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.75
+projects[panopoly_images][version] = 1.76
 projects[panopoly_images][subdir] = contrib
 
-projects[panopoly_magic][version] = 1.75
+projects[panopoly_magic][version] = 1.76
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_theme][version] = 1.75
+projects[panopoly_theme][version] = 1.76
 projects[panopoly_theme][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.75
+projects[panopoly_widgets][version] = 1.76
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_users][version] = 1.75
+projects[panopoly_users][version] = 1.76
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.75
+projects[panopoly_pages][version] = 1.76
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_search][version] = 1.75
+projects[panopoly_search][version] = 1.76
 projects[panopoly_search][subdir] = contrib
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
 
-projects[panopoly_wysiwyg][version] = 1.75
+projects[panopoly_wysiwyg][version] = 1.76
 projects[panopoly_wysiwyg][subdir] = contrib
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.75
+projects[panopoly_test][version] = 1.76
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
@@ -572,7 +568,7 @@ projects[amber][patch][2945946] = "https://www.drupal.org/files/issues/amber-mys
 
 ; Backup and Migrate
 projects[backup_migrate][subdir] = contrib
-projects[backup_migrate][version] = 3.7
+projects[backup_migrate][version] = 3.9
 
 ; Node Expiration
 projects[node_expire][subdir] = contrib
@@ -608,7 +604,7 @@ projects[job_scheduler][version] = 2.0
 
 ; Feeds
 projects[feeds][subdir] = contrib
-projects[feeds][version] = 2.0-beta4
+projects[feeds][version] = 2.0-beta5
 
 ; Feeds Tamper
 projects[feeds_tamper][subdir] = contrib
@@ -616,7 +612,7 @@ projects[feeds_tamper][version] = 1.2
 
 ; Bibliography
 projects[biblio][subdir] = contrib
-projects[biblio][version] = 1.3
+projects[biblio][version] = 1.4
 
 ; Bibliography Zotero
 projects[biblio_zotero][subdir] = contrib
