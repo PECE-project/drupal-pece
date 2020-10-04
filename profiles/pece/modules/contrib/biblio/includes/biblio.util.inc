@@ -214,7 +214,7 @@ function biblio_contextObject($node) {
 /**
  *
  */
-function biblio_coins_generate(& $node) {
+function biblio_coins_generate(&$node) {
   if (!isset($node->vid)) {
     $node->biblio_coins = biblio_coins($node);
     return;

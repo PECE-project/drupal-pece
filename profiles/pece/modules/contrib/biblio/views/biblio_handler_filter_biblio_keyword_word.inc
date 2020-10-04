@@ -57,7 +57,7 @@ class biblio_handler_filter_biblio_keyword_word extends views_handler_filter_str
    *
    */
   public function value_form(&$form, &$form_state) {
-    parent::value_form(&$form, &$form_state);
+    parent::value_form($form, $form_state);
     if ($this->options['type'] == 'textfield') {
       /*      $default = '';
       if ($this->value) {

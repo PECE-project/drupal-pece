@@ -191,7 +191,7 @@ function biblio_import_form($form, &$form_state) {
 /**
  * Implementation of hook_validate() for the biblio_import_form.
  */
-function biblio_import_form_validate($form, & $form_state) {
+function biblio_import_form_validate($form, &$form_state) {
   $op = $form_state['values']['op'];
   $filetype = isset($form_state['values']['filetype']) ? $form_state['values']['filetype'] : 0;
   if ($error = isset($_FILES['files']) ? $_FILES['files']['error']['biblio_import_file'] : '') {
@@ -226,7 +226,7 @@ function biblio_import_form_validate($form, & $form_state) {
 /**
  * Implementation of hook_submit() for the biblio_import_form.
  */
-function biblio_import_form_submit($form, & $form_state) {
+function biblio_import_form_submit($form, &$form_state) {
   global $user;
   $batch_proc = FALSE;
   $extensions = 'xml bib enw mrc ris txt';
@@ -471,7 +471,7 @@ function biblio_export_form() {
 /**
  *
  */
-function biblio_export_form_submit($form, & $form_state) {
+function biblio_export_form_submit($form, &$form_state) {
   if ($form_state['values']['op'] == t('Export translation data')) {
     biblio_dump_db_data_for_pot();
   }
@@ -577,7 +577,7 @@ function biblio_export($format = "tagged", $nid = NULL, $popup = FALSE) {
  * @return
  *   The node ids of the saved nodes
  */
-function biblio_save_imported_nodes(& $node_array) {
+function biblio_save_imported_nodes(&$node_array) {
   $dup_count = 0;
   if (function_exists('node_save')) {
     foreach ($node_array as $imp_node) {
@@ -790,7 +790,7 @@ function biblio_csv_export_2($result, $bfields) {
 /**
  * Function _biblio_cck_join($biblio_fields = array()) {    // works not with php4.
  */
-function _biblio_cck_join(& $biblio_fields) {
+function _biblio_cck_join(&$biblio_fields) {
   $cck_join = '';
   // Identify records for update operations.
   $biblio_fields['nid'] = 'Node-ID';
@@ -865,7 +865,7 @@ function biblio_backup() {
 /**
  *
  */
-function biblio_restore(& $csv_content, $mode = 'create') {
+function biblio_restore(&$csv_content, $mode = 'create') {
 
 }
 

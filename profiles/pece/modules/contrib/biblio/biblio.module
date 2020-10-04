@@ -1196,8 +1196,11 @@ function _biblio_index_node($node, $update) {
       // here. Don't assign node_load to $node because node_load resets e.g. the
       // menus mlid etc.
       $mynode = node_load($node->nid, NULL, TRUE);
+      _node_index_node($mynode);
     }
-    _node_index_node($mynode);
+    else {
+      _node_index_node($node);
+    }
     search_update_totals();
   }
 }

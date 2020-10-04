@@ -1763,7 +1763,7 @@ function biblio_admin_types_reset_form() {
  * @param $form
  * @param $form_state
  */
-function biblio_admin_types_reset_form_submit($form, & $form_state) {
+function biblio_admin_types_reset_form_submit($form, &$form_state) {
   module_load_include('install', 'biblio');
   biblio_reset_types();
   $form_state['redirect'] = 'admin/config/content/biblio/fields';

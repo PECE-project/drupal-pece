@@ -268,7 +268,7 @@ class BiblioCrossRefClient {
         if (isset($this->node['biblio_first_page'])) {
           $this->node['biblio_pages'] = $this->node['biblio_first_page'];
         }
-        if (isset($this->node{'biblio_last_page'})) {
+        if (isset($this->node['biblio_last_page'])) {
           $this->node['biblio_pages'] .= ' - ' . $this->node['biblio_last_page'];
         }
         break;

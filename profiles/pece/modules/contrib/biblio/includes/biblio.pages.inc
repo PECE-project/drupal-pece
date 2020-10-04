@@ -1329,7 +1329,8 @@ function _biblio_format_author_page($path, $filter, $authors) {
   $rows[] = array(
     array(
       'data' =>
-      theme('biblio_alpha_line', array('type' => 'authors', 'current' => $filter, 'path' => $path)) . $checkbox, 'colspan' => 3,
+      theme('biblio_alpha_line', array('type' => 'authors', 'current' => $filter, 'path' => $path)) . $checkbox,
+      'colspan' => 3,
     ),
   );
   if (count($authors)) {
