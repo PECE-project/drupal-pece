@@ -637,6 +637,29 @@ function pece_artifacts_audio_panelizer_defaults() {
   $pane->uuid = '8c00c587-26fa-4b5a-aade-f640e42cdcec';
   $display->content['new-8c00c587-26fa-4b5a-aade-f640e42cdcec'] = $pane;
   $display->panels['column2'][10] = 'new-8c00c587-26fa-4b5a-aade-f640e42cdcec';
+  $pane = new stdClass();
+  $pane->pid = 'new-9558acde-048c-433b-b1f0-50b95bdf3a89';
+  $pane->panel = 'column2';
+  $pane->type = 'citation';
+  $pane->subtype = 'citation';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'override_title' => 1,
+    'override_title_text' => 'Cite as',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 11;
+  $pane->locks = array();
+  $pane->uuid = '9558acde-048c-433b-b1f0-50b95bdf3a89';
+  $display->content['new-9558acde-048c-433b-b1f0-50b95bdf3a89'] = $pane;
+  $display->panels['column2'][11] = 'new-9558acde-048c-433b-b1f0-50b95bdf3a89';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-7f2e508b-27da-4739-8660-27a3a68616d8';
   $panelizer->display = $display;
