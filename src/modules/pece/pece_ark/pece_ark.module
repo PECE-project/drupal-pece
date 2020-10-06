@@ -445,6 +445,9 @@ function pece_ark_get_data($node = null) {
 function pece_ark_field_extra_fields() {
   $node_types = variable_get('ark_node_types', '');
   $extra = array();
+  if (empty($node_types)) {
+    return $extra;
+  }
   foreach ($node_types as $type) {
 
     $extra['node'][$type] = array(
