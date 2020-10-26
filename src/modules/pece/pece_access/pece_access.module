@@ -600,6 +600,7 @@ function pece_access_allow_contibutors_edit_content(&$perms, $context) {
   // Filter OG Permissions for essay contents.
   if (strstr($context['string'], 'update') && strstr($context['string'], '_essay')) {
     $contributors = array();
+    $node = null;
     if (arg(0) === 'node' && is_numeric(arg(1))) {
       $node = node_load(arg(1));
     }
@@ -607,6 +608,9 @@ function pece_access_allow_contibutors_edit_content(&$perms, $context) {
       return;
     }
     $contributors = field_get_items('node', $node, 'field_pece_contributors');
+    if (empty($contributors)) {
+      return;
+    }
     foreach ($contributors as $contributor) {
       if ($contributor['target_id'] == $context['account']->uid) {
         // Override OG Content default permissions.
