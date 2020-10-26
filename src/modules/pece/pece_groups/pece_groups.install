@@ -125,5 +125,11 @@ function pece_groups_update_7005() {
  */
 function pece_groups_update_7006() {
   features_revert_module('pece_groups');
-#   features_revert(array('pece_groups' => array('panelizer_defaults', 'views_view')));
+}
+
+/**
+ * Remove Project field from Group pages.
+ */
+function pece_groups_update_7007() {
+  features_revert_module('pece_groups');
 }
