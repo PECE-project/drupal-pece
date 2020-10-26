@@ -38,7 +38,7 @@ function pece_projects_field_default_field_bases() {
   // Exported field_base: 'field_pece_design_group'.
   $field_bases['field_pece_design_group'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_pece_design_group',
@@ -255,8 +255,22 @@ function pece_projects_field_default_field_bases() {
     'module' => 'entityreference',
     'settings' => array(
       'handler' => 'base',
-      'handler_settings' => array(),
-      'target_type' => 'node',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'er_viewmode_behavior' => array(
+            'status' => 0,
+          ),
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(),
+      ),
+      'profile2_private' => FALSE,
+      'target_type' => 'user',
     ),
     'translatable' => 0,
     'type' => 'entityreference',
