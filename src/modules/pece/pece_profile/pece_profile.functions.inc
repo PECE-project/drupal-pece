@@ -25,6 +25,7 @@ function pece_get_fullname_or_name($user = FALSE) {
   if (!$user) {
     global $user;
   }
+  $user = is_object($user) ? $user : user_load($user);
   $userWpr = entity_metadata_wrapper('user', $user);
   $fullName = $userWpr->profile_pece_profile_main->field_pece_full_name->value();
   return $fullName ? $fullName : $user->name;
