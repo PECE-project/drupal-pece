@@ -14,7 +14,9 @@ function pece_notifications_form_user_register_form_alter(&$form, &$form_state) 
   global $user;
 
   $admin_role = user_role_load(variable_get('user_admin_role', 3));
-
+  if (!is_object($admin_role)) {
+    return;
+  }
   if (in_array($admin_role->name, $user->roles) || $user->uid == 1) {
     $form['account']['notify']['#default_value'] = 1;
   }

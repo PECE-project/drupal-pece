@@ -20,11 +20,13 @@ function _pece_profile_field_contributors_has_user($field_values = array(), $use
  *
  * @return mixed
  */
-function pece_get_fullname_or_name($user = NULL) {
-  $user = $user ? $user : get_current_user();
+function pece_get_fullname_or_name($user = FALSE) {
+  $fullName = FALSE;
+  if (!$user) {
+    global $user;
+  }
   $user = is_object($user) ? $user : user_load($user);
-  $profile = profile2_load_by_user($user, 'pece_profile_main');
-  $fullName = isset($profile->field_pece_full_name[LANGUAGE_NONE]) ? $profile->field_pece_full_name[LANGUAGE_NONE][0]['value'] : NULL;
-  $result = $fullName ? $fullName : $user->name;
-  return $result;
+  $userWpr = entity_metadata_wrapper('user', $user);
+  $fullName = $userWpr->profile_pece_profile_main->field_pece_full_name->value();
+  return $fullName ? $fullName : $user->name;
 }
