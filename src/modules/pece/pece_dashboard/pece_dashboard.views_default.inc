@@ -174,6 +174,8 @@ function pece_dashboard_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pane_title'] = 'PECE - My Annotations';
+  $handler->display->display_options['pane_category']['weight'] = '0';
   $translatables['pece_my_annotations'] = array(
     t('Master'),
     t('Annotations'),
@@ -192,6 +194,7 @@ function pece_dashboard_views_default_views() {
     t('last »'),
     t('All'),
     t('Content pane'),
+    t('PECE - My Annotations'),
     t('View panes'),
   );
   $export['pece_my_annotations'] = $view;
