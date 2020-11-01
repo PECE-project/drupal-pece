@@ -16,3 +16,15 @@ function pece_dashboard_update_7001() {
   // Revert page_manager_pages default config.
   features_revert(array('pece_dashboard' => array('page_manager_pages')));
 }
+
+/**
+ * Add My Annotations tab onto user dashboard.
+ */
+function pece_dashboard_update_7002() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  // Revert views_default_views default config.
+  features_revert(array('pece_dashboard' => array('views_default_views')));
+  // Revert page_manager_pages default config.
+  features_revert(array('pece_dashboard' => array('page_manager_pages')));
+}
