@@ -119,6 +119,12 @@ function pece_groups_defaultconfig_field_default_fields() {
           'type' => 'image',
           'weight' => 0,
         ),
+        'nodeorder' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
