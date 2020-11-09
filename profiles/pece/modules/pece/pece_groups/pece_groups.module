@@ -154,7 +154,9 @@ function _pece_groups_edit_form_fields_invisible(&$form, $fields = array()) {
  * @param array $fields
  */
 function _pece_groups_hide_project_ref_field(&$form, $fields = array()) {
-  $form['field_pece_project_ref']['#access'] = FALSE;
+  if (isset($form['field_pece_project_ref'])) {
+    $form['field_pece_project_ref']['#access'] = FALSE;
+  }
 }
 
 /**
