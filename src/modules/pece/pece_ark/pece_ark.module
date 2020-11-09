@@ -790,13 +790,30 @@ function start_variables() {
   variable_set('ark_name_prefix'                          , ARK_DEFAULT_PRE_PREFIX . substr(str_shuffle('bcdfghjklmnpqrstvwxyz123456789'), 0, 4));
 }
 
+
+/**
+ * Check user full name.
+ *
+ * @user obj User
+ */ 
+function _user_has_fullname($user = FALSE) {
+  $result = FALSE;
+  if (!$user) {
+    global $user;
+  }
+  $user = is_object($user) ? $user : user_load($user);
+  $userWpr = entity_metadata_wrapper('user', $user);
+  $fullName = $userWpr->profile_pece_profile_main->field_pece_full_name->value();
+  return empty($fullName);
+}
+
 /**
  * Rise a warning message when the user hasn't full name.
  * @param string $name
  * @param Object $user
  */
 function _pece_ark_fullname_missing_warning_msg($name, $user) {
-  if ($name == $user->name) {
+  if (_user_has_fullname($user)) {
     drupal_set_message(
       t("User @username hasn't full name. Please contact @username to insert valid full name.", ['@username' => $user->name]),
       'warning'

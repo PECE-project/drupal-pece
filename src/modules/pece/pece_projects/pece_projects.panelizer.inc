@@ -523,16 +523,11 @@ function pece_projects_panelizer_defaults() {
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'title',
-    'formatter' => 'services',
+    'formatter' => 'text_default',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
-    'formatter_settings' => array(
-      'data_element_key' => '',
-      'skip_safe' => 0,
-      'skip_empty_values' => 0,
-      'skip_text_format' => 1,
-    ),
+    'formatter_settings' => array(),
     'context' => array(),
     'override_title' => 0,
     'override_title_text' => '',
