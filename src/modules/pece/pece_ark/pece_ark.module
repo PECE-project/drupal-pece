@@ -795,14 +795,16 @@ function start_variables() {
  * Check user full name.
  *
  * @user obj User
- */ 
+ */
 function _user_has_fullname($user = FALSE) {
-  $result = FALSE;
   if (!$user) {
     global $user;
   }
-  $user = is_object($user) ? $user : user_load($user);
+  $user = is_object($user) ? $user : (is_numeric($user) ? user_load($user) : $user);
   $userWpr = entity_metadata_wrapper('user', $user);
+  if (get_class($userWpr) !== 'EntityDrupalWrapper') {
+    return FALSE;
+  }
   $fullName = $userWpr->profile_pece_profile_main->field_pece_full_name->value();
   return empty($fullName);
 }
