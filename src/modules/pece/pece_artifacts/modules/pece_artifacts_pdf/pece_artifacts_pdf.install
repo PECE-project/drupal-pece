@@ -19,3 +19,10 @@ function pece_artifacts_pdf_update_7001() {
 function pece_artifacts_pdf_update_7003() {
   features_revert(array('pece_artifacts_pdf' => array('field_instance')));
 }
+
+/**
+ * Update Critical Commentary field settings on PDF artifact.
+ */
+function pece_artifacts_pdf_update_7004() {
+  features_revert(array('pece_artifacts_pdf' => array('field_instance')));
+}

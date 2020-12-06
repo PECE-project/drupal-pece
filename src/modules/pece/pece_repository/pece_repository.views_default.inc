@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_repository.views_default.inc
@@ -146,8 +147,6 @@ function pece_repository_views_default_views() {
     'any_label' => NULL,
     'filter_rewrite_values' => NULL,
   );
-  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
-  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'panopoly_wysiwyg_text';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '12';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -193,7 +192,7 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -322,8 +321,6 @@ function pece_repository_views_default_views() {
     'any_label' => NULL,
     'filter_rewrite_values' => NULL,
   );
-  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
-  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'panopoly_wysiwyg_text';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
@@ -332,7 +329,7 @@ function pece_repository_views_default_views() {
     2 => 'OR',
   );
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -348,6 +345,7 @@ function pece_repository_views_default_views() {
     'pece_artifact_bundle' => 'pece_artifact_bundle',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
+    'pece_artifact_tabular' => 'pece_artifact_tabular',
     'pece_artifact_text' => 'pece_artifact_text',
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
@@ -355,6 +353,7 @@ function pece_repository_views_default_views() {
     'pece_memo' => 'pece_memo',
     'pece_essay' => 'pece_essay',
     'pece_photo_essay' => 'pece_photo_essay',
+    'pece_project' => 'pece_project',
     'pece_timeline_essay' => 'pece_timeline_essay',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
@@ -392,6 +391,7 @@ function pece_repository_views_default_views() {
     'pece_artifact_bundle' => 'pece_artifact_bundle',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
+    'pece_artifact_tabular' => 'pece_artifact_tabular',
     'pece_artifact_text' => 'pece_artifact_text',
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
@@ -399,6 +399,7 @@ function pece_repository_views_default_views() {
     'pece_memo' => 'pece_memo',
     'pece_essay' => 'pece_essay',
     'pece_photo_essay' => 'pece_photo_essay',
+    'pece_project' => 'pece_project',
     'pece_timeline_essay' => 'pece_timeline_essay',
   );
   $handler->display->display_options['filters']['type_1']['group'] = 1;
@@ -410,11 +411,6 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['filters']['type_1']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['type_1']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    6 => 0,
-    5 => 0,
   );
   $handler->display->display_options['filters']['type_1']['expose']['reduce'] = TRUE;
   $handler->display->display_options['filters']['type_1']['group_info']['label'] = 'Type';
@@ -439,7 +435,7 @@ function pece_repository_views_default_views() {
   $handler->display->display_options['title'] = 'Groups';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -499,7 +495,7 @@ function pece_repository_views_default_views() {
     2 => 'AND',
   );
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -515,6 +511,7 @@ function pece_repository_views_default_views() {
     'pece_artifact_bundle' => 'pece_artifact_bundle',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
+    'pece_artifact_tabular' => 'pece_artifact_tabular',
     'pece_artifact_text' => 'pece_artifact_text',
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
@@ -554,6 +551,7 @@ function pece_repository_views_default_views() {
     'pece_artifact_bundle' => 'pece_artifact_bundle',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
+    'pece_artifact_tabular' => 'pece_artifact_tabular',
     'pece_artifact_text' => 'pece_artifact_text',
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',
@@ -598,7 +596,6 @@ function pece_repository_views_default_views() {
     t('Asc'),
     t('Desc'),
     t('Advanced options'),
-    t('Select any filter and click on Apply to see results'),
     t('Items per page'),
     t('- All -'),
     t('Offset'),

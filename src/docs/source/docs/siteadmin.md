@@ -51,6 +51,7 @@ Click ´Add language´ and wait the new Language to be downloaded (it might take
 On Languages page [SITE URL]/admin/config/regional/language/, update website default language by selecting the corresponding radio button on ´Default´ column.
 Click Save Configuration.
 
+
 ##### How do I translate a missing sentence or word of a language pack?
 While logged-in as an administrator, navigate to [SITE URL]/admin/config/regional/translate/translate.
 Enter the word to be translated on ´String contains´ text input and click ´filter´.

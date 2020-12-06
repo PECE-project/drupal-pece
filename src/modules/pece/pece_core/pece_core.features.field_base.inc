@@ -150,6 +150,7 @@ function pece_core_field_default_field_bases() {
           'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
           'pece_artifact_image' => 'pece_artifact_image',
           'pece_artifact_pdf' => 'pece_artifact_pdf',
+          'pece_artifact_tabular' => 'pece_artifact_tabular',
           'pece_artifact_text' => 'pece_artifact_text',
           'pece_artifact_video' => 'pece_artifact_video',
           'pece_artifact_website' => 'pece_artifact_website',
@@ -192,6 +193,7 @@ function pece_core_field_default_field_bases() {
           'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
           'pece_artifact_image' => 'pece_artifact_image',
           'pece_artifact_pdf' => 'pece_artifact_pdf',
+          'pece_artifact_tabular' => 'pece_artifact_tabular',
           'pece_artifact_text' => 'pece_artifact_text',
           'pece_artifact_video' => 'pece_artifact_video',
           'pece_artifact_website' => 'pece_artifact_website',
@@ -263,6 +265,36 @@ function pece_core_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_pece_created'.
+  $field_bases['field_pece_created'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_pece_created',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 'hour',
+        'minute' => 'minute',
+        'month' => 'month',
+        'second' => 'second',
+        'year' => 'year',
+      ),
+      'profile2_private' => FALSE,
+      'timezone_db' => 'UTC',
+      'todate' => '',
+      'tz_handling' => 'site',
+    ),
+    'translatable' => 0,
+    'type' => 'date',
   );
 
   // Exported field_base: 'field_pece_crit_commentary'.

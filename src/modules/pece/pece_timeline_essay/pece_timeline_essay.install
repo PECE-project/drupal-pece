@@ -24,3 +24,10 @@ function _pece_timeline_essay_eck_entity_set_permissions($eck_entity_name) {
   module_load_include('inc', 'pece', 'pece.functions');
   _pece_eck_set_permissions($eck_entity_name);
 }
+
+/**
+ * Update Timeline Essay Item field instance default settings.
+ */
+function pece_timeline_essay_update_7001() {
+  features_revert_module('pece_timeline_essay');
+}

@@ -15,10 +15,17 @@ function pece_analytics_update_7001() {
 /**
  * Rebuild Analyze menu item.
  */
-
 function pece_analytics_update_7002() {
   if (!module_exists('features')) {
     return;
   }
   features_revert(array('pece_analytics' => 'views_view'));
+}
+
+/**
+ * Rebuild Analytics default permissions.
+ */
+function pece_analytics_update_7003() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_analytics');
 }

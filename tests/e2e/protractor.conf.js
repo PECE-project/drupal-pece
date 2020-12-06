@@ -20,7 +20,7 @@ module.exports.config = {
   },
 
   specs: ['spec.js'],
-  baseUrl: 'http://dev-pece.rpi.dropit.in/',
+  baseUrl: 'http://pece.revax.com.br/',
 
   capabilities: { 'browserName': 'chrome' },
   framework: 'jasmine2',

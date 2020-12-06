@@ -1,0 +1,824 @@
+<?php
+
+define('ARK_COMPOSITE_WHO_FIELD'                            , array('field_pece_authors', 'field_pece_contributors'));
+define('ARK_PERSISTENT_UNIFORM_RESOURCE_LOCATOR_FIELD_NAME' , 'ark_plur');
+define('ARK_COMPOSITE_WHO_FIELD_NAME'                       , 'ark_composite_who');
+define('ARK_INDEXING_LIMIT'                                 , 50);
+define('ARK_SELECT_DEFAULT_WHO_OPTION_VALUE'                , 'use_default_who');
+define('ARK_SELECT_COMPOSITE_WHO_OPTION_VALUE'              , 'use_composite_who');
+define('ARK_SELECT_DEFAULT_WHEN_OPTION_VALUE'               , 'use_default_when');
+define('ARK_DEFAULT_AUTHORS_NAME_SEPARATOR'                 , ';');
+define('ARK_DEFAULT_REMOTE_SERVER_ADDRESS'                  , 'https://ezid.cdlib.org');
+define('ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE'              , 'reserved');
+define('ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE'              , array('yes'));
+define('ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS'                , array('1'));
+define('ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS'         , 'https://n2t.net/');
+define('ARK_DEFAULT_PRE_PREFIX'                             , 'fk4');
+
+/**
+ * @file
+ * Contains hook implementations and main functions for ARK module.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function pece_ark_help($path, $arg) {
+  switch ($path) {
+    case 'admin/config/services/ark':
+      return t('Configure ARK here.');
+
+    case 'admin/help#ark':
+      $help = '<p>' . t("Provides Archival Resource Key (ARK) persistent unifor resource locator (PURL) implementation for Drupal.") . '</p>';
+      $help .= '<p>' .t("In the form: :purl", array(':purl' => '[Protocol]/[NMAH/]ark:/[NAAN]/[Name]/[Qualifier]'));
+      return $help;
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function pece_ark_permission() {
+  return array(
+    'access ark' => array(
+      'title' => t('Access ARK '),
+      'description' => t('Allow access to Archival Resource Key persistent uniform resource locators resolution.'),
+    ),
+    'administer ark' => array(
+      'title' => t('Administer ARK '),
+      'description' => t('Allow configuration of the Archival Resource Key persistent uniform resource locators service.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function pece_ark_menu() {
+
+  // This is the minimum information you can provide for a menu item. This menu
+  // item will be created in the default menu, usually Navigation.
+  $items['ark'] = array(
+    'title' => 'Archival Resource Key Identifiers',
+    'page callback' => 'ark_info_page',
+    'access callback' => TRUE,
+  );
+
+  $items['ark/%'] = array(
+    'title' => 'Archival Resource Key Identifiers',
+    'page callback' => 'ark_info_page',
+    'access callback' => TRUE,
+  );
+
+  $items['ark:/%/%'] = array(
+    'page callback' => 'pece_ark_redirect',
+    'page arguments' => array(1, 2),
+    'access callback' => TRUE,
+    // 'access arguments' => array('access ark'),
+    'type' => MENU_CALLBACK,
+  );
+  // Give better error message than page not found.
+  $items['ark:/%'] = array(
+    'page callback' => 'ark_malformed',
+    'page arguments' => array(1, 2),
+    'access callback' => TRUE,
+    // 'access arguments' => array('access ark'),
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['admin/config/services/ark'] = array(
+    'title' => 'Archival Resource Key',
+    'description' => 'Configure the Name Assigning Authority Number and content type and field settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('pece_ark_settings'),
+    'access arguments' => array('administer ark'),
+    'file' => 'pece_ark.admin.inc',
+  );
+
+  $items['admin/config/services/ark/ark'] = array(
+    'title' => 'Local Content ARK Module Settings',
+    'description' => 'Configure the Name Assigning Authority Number and content type and field settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('pece_ark_settings'),
+    'access arguments' => array('administer ark'),
+    'file' => 'pece_ark.admin.inc',
+    'weight' => '1',
+  );
+
+  $items['admin/config/services/ark/ark_module_settigns'] = array(
+    'title' => 'ARK Fields Settings',
+    'description' => 'Configure parameters Ark Module.',
+    'access arguments' => array('administer ark'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('pece_ark_settings_form'),
+    'file' => 'pece_ark.settings.inc',
+    'weight' => '2',
+  );
+
+  $items['admin/config/services/ark/remote_update_settings'] = array(
+    'title' => 'ARK Remote Update Settings',
+    'description' => 'Execute ARK batch actions',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ark_remote_update_settings_form'),
+    'access arguments' => array('administer ark'),
+    'file' => 'pece_ark.batches.inc',
+    'weight' => '3',
+  );
+
+  $items['admin/config/services/ark/batch_operations'] = array(
+    'title' => 'ARK Batch operations',
+    'description' => 'Execute ARK batch actions',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('pece_ark_batches_form'),
+    'access arguments' => array('administer ark'),
+    'file' => 'pece_ark.batches.inc',
+    'weight' => '5',
+  );
+
+  return $items;
+}
+
+
+/**
+ * Function pece_ark_remote_data_update
+ * Update ark information in the remote server
+ *
+ * @param array $data
+ * @return bool TRUE if ok | False if not saved
+ */
+function pece_ark_remote_data_update(array $data = null) {
+  $return = FALSE;
+  if ( !is_null($data) && is_array($data) && (isset($data['ark_name']) && isset($data['ark_who']) && isset($data['ark_when']) && isset($data['title']) && isset($data['nid'])) ) {
+    $username   = variable_get('ark_ezid_user');
+    $password   = variable_get('ark_ezid_password');
+    $ark_who    = $data['ark_who'];
+    $ark_what   = $data['title'];
+    $ark_when   = _arc_convert_data_to_human_readable($data['ark_when']);
+
+    $ark_update_if_exists     = variable_get('ark_ezid_update_if_exists', ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS);
+    $ark_update_if_exists     = (array_shift($ark_update_if_exists) == '1') ? '?update_if_exists=yes' : '';
+    $ark_remote_export_param  = variable_get('ark_ezid_remote_export', ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE);
+    $ark_remote_export_param  = (array_shift($ark_remote_export_param) == 0) ? 'no': array_shift($ark_remote_export_param);
+    $ark_remote_status_param  = variable_get( 'ark_ezid_remote_status', ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE);
+
+    $ark_remote_url = _ark_build_purl($data['ark_name']);
+    $ark_identifier = _ark_build_identifier($data['ark_name']);
+    $create_url     = variable_get('ark_remote_server_address', ARK_DEFAULT_REMOTE_SERVER_ADDRESS) . '/id/' . $ark_identifier .  $ark_update_if_exists;
+
+    if (!empty($username) && !empty($password) && !empty($ark_who) && !empty($ark_when) && !empty($ark_what) && !empty($ark_remote_export_param) && !empty($ark_remote_status_param) && !empty($ark_remote_url) && !empty($create_url)) {
+      $input = "_target: $ark_remote_url
+erc.who: $ark_who
+erc.what: $ark_what
+erc.when: $ark_when
+_export: $ark_remote_export_param
+_status: $ark_remote_status_param";
+
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $create_url);
+      curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+      curl_setopt($ch, CURLOPT_HTTPHEADER,
+        array('Content-Type: text/plain; charset=UTF-8',
+          'Content-Length: ' . strlen($input)));
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $input);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      $output = curl_exec($ch);
+      $return_header = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+      if ($output === false)
+      {
+        watchdog('error', 'Curl error: ' . curl_error($ch));
+      }
+
+      curl_close($ch);
+
+      if ( (in_array($return_header, array(200, 201, 204))) && ($output == "success: $ark_identifier") ) {
+        $node = node_load($data['nid']);
+        $remote_ark_name = variable_get('ark_remote_identifier_site_address', ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS) . '/' . $ark_identifier;
+        $remote_ark_name = preg_replace('/([^:])(\/{2,})/', '$1/', $remote_ark_name);
+        $from_remote_data = array (
+          'remote_ark_name' => $remote_ark_name,
+          'request_time'    => REQUEST_TIME,
+        );
+        pece_ark_node_update($node, $from_remote_data);
+        $return = TRUE;
+      }
+      else {
+        watchdog('error', 'ARK error: ' . $output);
+      }
+    }
+  }
+  return $return;
+}
+
+
+/**
+ * Insert/Update ark data in database.
+ *
+ * @param object $node
+ * @param array $from_remote_data Not mandatory. When some value is present in this variable, the update data comes from some remote ARK data update.
+ * @return void
+ */
+function pece_ark_data_save($node, array $from_remote_data = null) {
+  // Do not insert ARK name mappings for content that isn't resources.
+  if (!in_array($node->type, variable_get('ark_node_types'))) {
+    return;
+  }
+
+  $ark_data = pece_ark_get_data($node);
+  $ark_who = pece_ark_get_who_values_from_node($node);
+  $ark_when = pece_ark_get_when_values_from_node($node);
+  if (!$ark_data) {
+    db_insert('ark_map')
+      ->fields(array(
+        'ark_name'                => pece_ark_name_create(),
+        'entity_type'             => 'node',
+        'entity_id'               => $node->nid,
+        'ark_who'                 => $ark_who,
+        'ark_when'                => $ark_when,
+        'created'                 => REQUEST_TIME,
+        'changed'                 => REQUEST_TIME,
+      ))->execute();
+
+  } else {
+    $fields_for_update = array();
+    if (is_null($from_remote_data)) {
+      $fields_for_update['changed']     = REQUEST_TIME;
+      $fields_for_update['ark_who']     = (isset($ark_data['ark_who'])  && $ark_data['ark_who']   !== $ark_who)  ? $ark_who   : $ark_data['ark_who'];
+      $fields_for_update['ark_when']    = (isset($ark_data['ark_when']) && $ark_data['ark_when']  !== $ark_when) ? $ark_when  : $ark_data['ark_when'];
+      $fields_for_update['pending_remote_update']     = 1;
+    } elseif (!is_null($from_remote_data) && is_array($from_remote_data) && ( isset($from_remote_data['remote_ark_name']) && isset($from_remote_data['request_time']) )) {
+      $fields_for_update['remote_ark_name']             = $from_remote_data['remote_ark_name'];
+      $fields_for_update['remote_created']              = (!empty($ark_data['remote_created']))        ? $ark_data['remote_created']         : $from_remote_data['request_time'];
+      $fields_for_update['remote_changed']              = (isset($from_remote_data['request_time']))   ? $from_remote_data['request_time']   : REQUEST_TIME;
+      $fields_for_update['pending_remote_update']     = 0;
+    }
+
+    $ark_update_query = db_update('ark_map')
+      ->fields($fields_for_update)
+      ->condition('ark_name', $ark_data['ark_name']);
+    $ark_update_query->execute();
+  }
+}
+
+/**
+ * Implements hook_node_update().
+ *
+ * Updated ARK data when updating any node.
+ */
+function pece_ark_node_update($node, array $from_remote_data = null) {
+  // Do not insert ARK name mappings for content that isn't resources.
+  if (!in_array($node->type, variable_get('ark_node_types'))) {
+    return;
+  }
+  pece_ark_data_save($node, $from_remote_data);
+}
+
+/**
+ * Implements hook_node_insert().
+ *
+ * Saves a new non-semantic ARK name for resources configured to have ARK IDs.
+ */
+function pece_ark_node_insert($node) {
+  // Do not insert ARK name mappings for content that isn't resources.
+  if (!in_array($node->type, variable_get('ark_node_types'))) {
+    return;
+  }
+  pece_ark_data_save($node);
+}
+
+/**
+ *
+ * Return a formated string with the ark_who field.
+ * pece_ark_get_who_values_from_node
+ *
+ * @param  object $node
+ * @return string
+ */
+function pece_ark_get_who_values_from_node($node = null) {
+  $result = null;
+  if (!is_null($node) && isset($node->nid)) {
+    if (!in_array($node->type, variable_get('ark_node_types'))) {
+      return;
+    }
+
+    $who_field_name = 'ark_' . $node->type . '_who';
+    $who_field_value = variable_get($who_field_name);
+
+    switch ($who_field_value) {
+      case ARK_SELECT_DEFAULT_WHO_OPTION_VALUE:
+        $result = _ark_get_default_who($node);
+        break;
+
+      case ARK_SELECT_COMPOSITE_WHO_OPTION_VALUE:
+        $composite_who = 'ark_' . $node->type . '_composite_who';
+        $composite_who_fields_selected = !is_null(variable_get($composite_who, null)) ? array_values(variable_get($composite_who)) : null;
+        $result = _ark_get_composite_who($node, $composite_who_fields_selected);
+        break;
+
+      default:
+        $result = _ark_get_default_who($node);
+        break;
+    }
+  }
+  return $result;
+}
+
+/**
+ * Return a timestamp with the ark_when value.
+ * @param object $node A node object
+ * @return string timestamp
+ *
+ */
+function pece_ark_get_when_values_from_node($node = null) {
+  $result = null;
+  $date_when = null;
+  if (!is_null($node) && isset($node->nid)) {
+    if (!in_array($node->type, variable_get('ark_node_types'))) {
+      return;
+    }
+    $when_field_name = 'ark_' . $node->type . '_when';
+    $when_field_value = variable_get($when_field_name);
+    if ($when_field_value == ARK_SELECT_DEFAULT_WHEN_OPTION_VALUE) {
+      $result = _ark_get_default_when($node);
+    } else {
+      $date = $node->{$when_field_value};
+      $date = (isset($date[$node->language])) ? $date[$node->language][0] : $date[LANGUAGE_NONE][0];
+      if ($date) {
+        $date_when = strtotime($date['value']);
+      }
+      $result = (!is_null($date_when)) ? $date_when : _ark_get_default_when($node);
+    }
+  }
+  return $result;
+}
+
+/**
+ *
+ * @param $node - A node object
+ *
+ */
+/**
+ * _ark_get_default_who - Helper function to return the node author name.
+ *
+ * @param  object $node
+ * @return null|string
+ */
+function _ark_get_default_who($node = null) {
+  $result = null;
+  if (!is_null($node) && isset($node->uid)) {
+    if ($user = user_load($node->uid)) {
+      $result = pece_get_fullname_or_name($user);
+      _pece_ark_fullname_missing_warning_msg($result, $user);
+    }
+  }
+  return $result;
+}
+
+
+/**
+ * _ark_get_default_when - Helper function to return the node created date timestamp.
+ * @param $node - A node object
+ * @todo: discuss about not published nodes
+ *
+ */
+function _ark_get_default_when($node = null) {
+  $result = null;
+  if (!is_null($node) && isset($node->created)) {
+    $result = $node->created;
+  }
+  return $result;
+}
+
+/**
+ * _ark_get_composite_who - Helper function to return the node created date timestamp.
+ *
+ * @param  object $node
+ * @param  array $composite_who_fields_selected
+ * @return null|string
+ */
+function _ark_get_composite_who($node = null, array $composite_who_fields_selected = null) {
+  $result = null;
+  $authors = array();
+  $result = null;
+  if (!is_null($node) && (!is_null($composite_who_fields_selected) && is_array($composite_who_fields_selected) && count($composite_who_fields_selected)) ) {
+    $fields = array_filter($composite_who_fields_selected, 'is_string');
+    $wrapper = entity_metadata_wrapper('node', $node);
+    foreach ($fields as $field) {
+      $array_authors_object = null;
+      $array_authors_object = $wrapper->{$field}->value();
+      foreach ($array_authors_object as $key => $user_object) {
+        $name_value = pece_get_fullname_or_name($user_object);
+        _pece_ark_fullname_missing_warning_msg($name_value, $user_object);
+        if (!empty($name_value)) {
+          array_push($authors, $name_value);
+        }
+      }
+    }
+    $result = (count($authors)) ? implode(variable_get('ark_authors_name_separator', ARK_DEFAULT_AUTHORS_NAME_SEPARATOR) . ' ', $authors) : _ark_get_default_who($node);
+  }
+  return $result;
+}
+
+/**
+ * pece_ark_get_data - Return an object with all information from an ARK entry
+ *
+ * @param mixed $node
+ * @return null|object
+ */
+function pece_ark_get_data($node = null) {
+  $result = null;
+
+  if (!is_null($node) && isset($node->nid)) {
+    if (!in_array($node->type, variable_get('ark_node_types'))) {
+      return;
+    }
+    $result =  db_query("SELECT * FROM {ark_map} WHERE entity_type = :entity_type AND entity_id = :entity_id",
+      array(':entity_type' => 'node', ':entity_id' => $node->nid))->fetchAssoc();
+  }
+  return $result;
+}
+
+/**
+ * Implements hook_field_extra_fields().
+ */
+function pece_ark_field_extra_fields() {
+  $node_types = variable_get('ark_node_types', '');
+  $extra = array();
+  if (empty($node_types)) {
+    return $extra;
+  }
+  foreach ($node_types as $type) {
+
+    $extra['node'][$type] = array(
+      'display' => array(
+        'ark_purl' => array(
+          'label' => t('ARK persistent URL'),
+          'description' => t('Display the Archival Resource Key (ARK) Persistent Uniform Resource Locator (PURL) for this content.'),
+          'weight' => 97,
+        ),
+        'ark_who' => array(
+          'label' => t('ARK authors (who)'),
+          'description' => t('Display the Archival Resource Key (ARK Who) authors for this content.'),
+          'weight' => 98,
+        ),
+        'ark_when' => array(
+          'label' => t('ARK date created (when)'),
+          'description' => t('Display the Archival Resource Key (ARK When ) creation date for this content.'),
+          'weight' => 99,
+        ),
+      ),
+    );
+  }
+  return $extra;
+}
+
+/**
+ * Implements hook_node_view().
+ */
+function pece_ark_node_view($node, $view_mode, $langcode) {
+  $extra = pece_ark_field_extra_fields();
+  // Check that we're supporting the node type being viewed.
+  if (empty($extra['node'][$node->type]['display'])) {
+    return;
+  }
+
+  $config = field_bundle_settings('node', $node->type);
+  foreach ($extra['node'][$node->type]['display'] as $field_name => $field_info) {
+    // Check to make sure this field is visible in this view mode.
+    // If the current view mode doesn't have custom settings, default applies.
+    $check_view_mode = $config['view_modes'][$view_mode]['custom_settings'] ? $view_mode : 'default';
+    if (empty($config['extra_fields']['display'][$field_name][$check_view_mode]['visible'])) {
+      continue;
+    }
+
+    $node->content[$field_name] = pece_ark_extra_field_render_array($field_name, $node);
+  }
+}
+
+/**
+ * Implements hook_node_type_delete().
+ */
+function pece_ark_node_type_delete($info) {
+  // Delete variables when node type is removed.
+  variable_del('ark_' . $info->type . '_who');
+  variable_del('ark_' . $info->type . '_composite_who');
+  variable_del('ark_' . $info->type. '_when');
+}
+
+/**
+ * Return a render array displaying the results of an ARK field.
+ *
+ * Currently the only extra field we provide is the ARK PURL.
+ */
+function pece_ark_extra_field_render_array($field_name, $node) {
+  $ark_data = pece_ark_get_data($node);
+  $render = array();
+  switch($field_name) {
+    case 'ark_purl':
+      $ark_purl = pece_ark_get_purl($node->nid, 'node');
+      $render = array(
+        'container' => array(
+          '#prefix' => '<div class="field field-label-above">',
+          '#suffix' => '</div>',
+          'label' => array(
+            '#type' => 'html_tag',
+            '#tag' => 'h4',
+            '#attributes' => array('class' => 'field-label'),
+            '#value' => t('Archival Resource Key URL:'),
+          ),
+          'p' => array(
+            '#prefix' => '<p class="field-item">',
+            '#suffix' => '</p>',
+            'link' => array(
+              '#type' => 'link',
+              '#title' => $ark_purl,
+              '#href' => $ark_purl,
+              '#attributes' => array(
+                'class' => $field_name,
+                'ark-purl' => $ark_purl,
+              ),
+            ),
+          ),
+        ),
+      );
+      return $render;
+      break;
+
+    case 'ark_who':
+      $render = array(
+        'container' => array(
+          '#prefix' => '<div class="field field-label-above">',
+          '#suffix' => '</div>',
+          'label' => array(
+            '#type' => 'html_tag',
+            '#tag' => 'h4',
+            '#attributes' => array('class' => 'field-label'),
+            '#value' => t('Archival Resource Key Author(s):'),
+          ),
+          'p' => array(
+            '#prefix' => '<p class="field-item">' . $ark_data['ark_who'],
+            '#suffix' => '</p>',
+          ),
+        ),
+      );
+      return $render;
+      break;
+
+    case 'ark_when':
+      $date_formated = _arc_convert_data_to_human_readable($ark_data['ark_when']);
+      $render = array(
+        'container' => array(
+          '#prefix' => '<div class="field field-label-above">',
+          '#suffix' => '</div>',
+          'label' => array(
+            '#type' => 'html_tag',
+            '#tag' => 'h4',
+            '#attributes' => array('class' => 'field-label'),
+            '#value' => t('Archival Resource Key Creation Date (when):'),
+          ),
+          'p' => array(
+            '#prefix' => '<p class="field-item">' . $date_formated,
+            '#suffix' => '</p>',
+          ),
+        ),
+      );
+      return $render;
+      break;
+  }
+
+}
+
+/**
+ * Constructs a descriptive page.
+ *
+ * Our menu maps this function to the path 'examples/page_example'.
+ */
+function pece_ark_info_page() {
+  return array(
+    '#markup' =>
+      t('<p>This site, %site_name, implements Archival Resource Key URLs designed to support long-term access to information. It is a Name Mapping Authority Hostport for the Naming Assigning Authority Number %naan.</p><p>Read more about <a href="@ark_url">ARK</a>.</p><p>If you reached this page instead of an expected resource, be sure you have "ark:/", with the colon, in the URL.',
+        array(
+          '%site_name' => variable_get('site_name', 'Drupal'),
+          '%naan' => variable_get('ark_naan', ''),
+          '@ark_url' => 'https://wiki.ucop.edu/display/Curation/ARK',
+          '@arguments_link' => url('examples/page_example/arguments/23/56', array('absolute' => TRUE)),
+        )
+      ),
+  );
+}
+
+/**
+ * Redirect visitors to the content matching their ARK identifier.
+ *
+ * ARK requires the Name Assigning Authority Number, so this must be the one
+ * the site is managing, and the resource name, so that must match one the site
+ * has provided.
+ *
+ * This callback is mapped to the path 'ark:/%/%'.
+ */
+function pece_ark_redirect($naan, $name) {
+  if (!pece_ark_naan_format_valid($naan)) {
+    drupal_add_http_header('Status', '404 Not Found');
+    drupal_set_message(t('The Name Assigning Authority Number (NAAN) must be a number'), 'error');
+    return '';
+  }
+  if ($naan != variable_get('ark_naan', 'pending')) {
+    drupal_add_http_header('Status', '404 Not Found');
+    drupal_set_message(t('This site only services requests for Archival Resource Keys under the Name Assigning Authority Number <strong>@naan</strong>.', array('@naan' => variable_get('ark_naan', 'pending'))), 'error');
+    return '';
+  }
+  $ark_name = pece_ark_name_strip_invalid_characters($name);
+  $entity = pece_ark_resource_load($ark_name);
+  if (!$entity) {
+    drupal_add_http_header('Status', '404 Not Found');
+    drupal_set_title('No resource found');
+    drupal_set_message(t('No resource found for Archival Resource Key name %ark_name under the Name Assigning Authority Number <strong>@naan</strong>.', array('%ark_name' => $ark_name, '@naan' => variable_get('ark_naan', 'pending'))), 'error');
+    return '';
+  }
+  $uri = entity_uri($entity->entity_type, $entity);
+  drupal_goto(url($uri['path'], $uri['options']));
+
+}
+
+/**
+ * Let visitors know if they've almost got an ARK identifier, but not quite.
+ *
+ * This callback is mapped to the path 'ark:/%'.
+ */
+function pece_ark_malformed($naan) {
+  if (!pece_ark_naan_format_valid($naan)) {
+    drupal_set_message(t('The Name Assigning Authority Number (NAAN) must be a number'), 'error');
+  }
+  drupal_add_http_header('Status', '404 Not Found');
+  drupal_set_message(t('The ARK request is malformed.  It must have a name component.'), 'error');
+  return '';
+}
+
+/**
+ * Creates a random ARK name for a resource (meant to be non-semantic).
+ */
+function pece_ark_name_create() {
+  return uniqid(variable_get('ark_name_prefix'));
+}
+
+/**
+ * Retrieve a complete ARK URL for a resource Drupal entity.
+ */
+function pece_ark_get_purl($entity_id, $entity_type = 'node') {
+  $ark_hostname = variable_get('ark_hostname', $GLOBALS['base_url'] . base_path());
+  $ark_naan = variable_get('ark_naan', 'pending');
+  $ark_name = pece_ark_name_load($entity_id, $entity_type);
+  return $ark_hostname . 'ark:/' . $ark_naan . '/' . $ark_name;
+}
+
+/**
+ * Build a complete ARK URL for a resource Drupal entity.
+ */
+function _ark_build_purl($ark_name = null) {
+  $result = null;
+  if (!is_null($ark_name)) {
+    $ark_hostname = variable_get('ark_hostname', $GLOBALS['base_url'] . base_path());
+    $ark_identifier = _ark_build_identifier($ark_name);
+    $result =  $ark_hostname . $ark_identifier;
+  }
+  return $result;
+}
+
+/**
+ * Build a complete ARK URL for a resource Drupal entity.
+ */
+function _ark_build_identifier($ark_name = null) {
+  $result = null;
+  if (!is_null($ark_name)) {
+    $ark_naan = variable_get('ark_naan', 'pending');
+    $result =  'ark:/' . $ark_naan . '/' . $ark_name;
+  }
+  return $result;
+}
+
+
+/**
+ * Load an ARK name.
+ */
+function pece_ark_name_load($entity_id, $entity_type = 'node') {
+  return db_query("SELECT ark_name FROM {ark_map} WHERE entity_type = :entity_type AND entity_id = :entity_id",
+    array(':entity_type' => $entity_type, ':entity_id' => $entity_id))->fetchField();
+}
+
+
+
+/**
+ * Strip invalid characters from a potential ARK name to increase odds of match.
+ */
+function pece_ark_name_strip_invalid_characters($name) {
+  return str_replace(array(' ', '-', '.', ','), '', $name);
+}
+
+/**
+ * Load a local (Drupal entity) ARK resource given an ARK name.
+ *
+ * Adds the 'entity_type' as a property on the entity object because DUH.
+ */
+function pece_ark_resource_load($ark_name) {
+  $row = db_query("SELECT entity_type, entity_id FROM {ark_map} WHERE ark_name = :ark_name",
+    array(':ark_name' => $ark_name))->fetchAssoc();
+  if ($row) {
+    extract($row, EXTR_SKIP);
+    $entity_array = entity_load($entity_type, array($entity_id));
+    if (empty($entity_array)) {
+      drupal_set_message(t('The resource (@entity_type @entity_id) represented by ARK name %ark_name has been deleted.',
+        array('@entity_type' => $entity_type, '@entity_id' => $entity_id, '%ark_name' => $ark_name)), 'warning');
+      return FALSE;
+    }
+    else {
+      $entity = array_shift($entity_array);
+      $entity->entity_type = $entity_type;
+      return $entity;
+    }
+  }
+}
+
+/**
+ * Checks that a Name Assigning Authority Number is potentially valid.
+ *
+ * Does not check against the officially issued NAANs.
+ */
+function pece_ark_naan_format_valid($naan) {
+  if (is_numeric($naan)) {
+    return TRUE;
+  }
+  if ($naan === 'pending') {
+    return 'pending';
+  }
+  return FALSE;
+}
+
+/**
+ * _arc_convert_data_to_human_readable - Helper function to convert a timestamp value in a human readable value
+ *
+ * @param  mixed $timestamp
+ * @return void
+ */
+function _arc_convert_data_to_human_readable($timestamp = null){
+  $result = null;
+  if (!is_null($timestamp)) {
+    $item_date = $timestamp;
+    $dt = new DateTime();
+    $dt->setTimestamp($item_date);
+    $dt->setTimezone(new DateTimeZone("UTC"));
+    $result = $dt->format('Y-m-d H:i:sP');
+  }
+  return $result;
+}
+
+/**
+ * Start default values for PECE.
+ */
+function start_variables() {
+  variable_set('ark_naan'                                 , '99999');
+  variable_set('ark_ezid_user'                            , getenv('ARK_USER'));
+  variable_set('ark_ezid_password'                        , getenv('ARK_PASS'));
+  variable_set('ark_ezid_remote_export'                   , ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE );
+  variable_set('ark_ezid_remote_status'                   , ARK_DEFAULT_REMOTE_STATUS_ENTRY_VALUE);
+  variable_set('ark_ezid_update_if_exists'                , ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS);
+  variable_set('ark_composite_who_field'                  , implode(',', ARK_COMPOSITE_WHO_FIELD));
+  variable_set('ark_indexing_limit'                       , ARK_INDEXING_LIMIT);
+  variable_set('ark_authors_name_separator'               , ARK_DEFAULT_AUTHORS_NAME_SEPARATOR);
+  variable_set('ark_remote_server_address'                , ARK_DEFAULT_REMOTE_SERVER_ADDRESS);
+  variable_set('ark_remote_identifier_site_address'       , ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS);
+  variable_set('ark_name_prefix'                          , ARK_DEFAULT_PRE_PREFIX . substr(str_shuffle('bcdfghjklmnpqrstvwxyz123456789'), 0, 4));
+}
+
+
+/**
+ * Check user full name.
+ *
+ * @user obj User
+ */
+function _user_has_fullname($user = FALSE) {
+  if (!$user) {
+    global $user;
+  }
+  $user = is_object($user) ? $user : (is_numeric($user) ? user_load($user) : $user);
+  $userWpr = entity_metadata_wrapper('user', $user);
+  if (get_class($userWpr) !== 'EntityDrupalWrapper') {
+    return FALSE;
+  }
+  $fullName = $userWpr->profile_pece_profile_main->field_pece_full_name->value();
+  return empty($fullName);
+}
+
+/**
+ * Rise a warning message when the user hasn't full name.
+ * @param string $name
+ * @param Object $user
+ */
+function _pece_ark_fullname_missing_warning_msg($name, $user) {
+  if (_user_has_fullname($user)) {
+    drupal_set_message(
+      t("User @username hasn't full name. Please contact @username to insert valid full name.", ['@username' => $user->name]),
+      'warning'
+    );
+  }
+}

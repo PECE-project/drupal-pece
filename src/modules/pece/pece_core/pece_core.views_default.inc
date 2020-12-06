@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_core.views_default.inc
@@ -63,7 +64,7 @@ function pece_core_views_default_views() {
   $handler->display->display_options['arguments']['term_node_tid_depth_modifier']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['term_node_tid_depth_modifier']['specify_validation'] = TRUE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
-  /* Filter criterion: Content: Published or admin */
+  /* Filter criterion: Content: Published status or admin user */
   $handler->display->display_options['filters']['status_extra']['id'] = 'status_extra';
   $handler->display->display_options['filters']['status_extra']['table'] = 'node';
   $handler->display->display_options['filters']['status_extra']['field'] = 'status_extra';
@@ -81,6 +82,7 @@ function pece_core_views_default_views() {
     'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
     'pece_artifact_image' => 'pece_artifact_image',
     'pece_artifact_pdf' => 'pece_artifact_pdf',
+    'pece_artifact_tabular' => 'pece_artifact_tabular',
     'pece_artifact_text' => 'pece_artifact_text',
     'pece_artifact_video' => 'pece_artifact_video',
     'pece_artifact_website' => 'pece_artifact_website',

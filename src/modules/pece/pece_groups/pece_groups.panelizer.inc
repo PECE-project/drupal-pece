@@ -314,7 +314,7 @@ function pece_groups_panelizer_defaults() {
   $pane->panel = 'sidebar';
   $pane->type = 'entity_field';
   $pane->subtype = 'node:field_pece_project_ref';
-  $pane->shown = TRUE;
+  $pane->shown = FALSE;
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'hidden',
@@ -405,7 +405,7 @@ function pece_groups_panelizer_defaults() {
   $pane->pid = 'new-34af642e-2d59-4854-8cb0-4097d7998ef2';
   $pane->panel = 'sidebar';
   $pane->type = 'views_panes';
-  $pane->subtype = 'og_members-panel_pane_1';
+  $pane->subtype = 'pece_group_members-panel_pane_1';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(

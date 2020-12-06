@@ -27,3 +27,11 @@ function pece_artifacts_text_update_7002() {
   module_load_include('inc', 'pece', 'pece.functions');
   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_artifacts_text');
 }
+
+
+/**
+ * Update Body field settings on Text artifact.
+ */
+function pece_artifacts_text_update_7003() {
+  features_revert(array('pece_artifacts_text' => array('field_instance')));
+}

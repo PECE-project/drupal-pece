@@ -338,6 +338,43 @@ function pece_artifacts_video_panelizer_defaults() {
   $display->content['new-926a4e2b-195b-4491-a039-cc5a423c45c5'] = $pane;
   $display->panels['column2'][0] = 'new-926a4e2b-195b-4491-a039-cc5a423c45c5';
   $pane = new stdClass();
+  $pane->pid = 'new-c2ccfdde-7119-4440-a494-d683232d235f';
+  $pane->panel = 'column2';
+  $pane->type = 'entity_field';
+  $pane->subtype = 'node:field_pece_created';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'label' => 'title',
+    'formatter' => 'date_default',
+    'delta_limit' => 0,
+    'delta_offset' => '0',
+    'delta_reversed' => FALSE,
+    'formatter_settings' => array(
+      'format_type' => 'medium',
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_to' => '',
+      'fromto' => 'both',
+      'show_remaining_days' => 0,
+    ),
+    'context' => array(),
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 1;
+  $pane->locks = array();
+  $pane->uuid = 'c2ccfdde-7119-4440-a494-d683232d235f';
+  $display->content['new-c2ccfdde-7119-4440-a494-d683232d235f'] = $pane;
+  $display->panels['column2'][1] = 'new-c2ccfdde-7119-4440-a494-d683232d235f';
+  $pane = new stdClass();
   $pane->pid = 'new-59ec5faa-9f5e-4da3-ac97-5c7d29397eb3';
   $pane->panel = 'column2';
   $pane->type = 'entity_field';
@@ -364,11 +401,11 @@ function pece_artifacts_video_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 1;
+  $pane->position = 2;
   $pane->locks = array();
   $pane->uuid = '59ec5faa-9f5e-4da3-ac97-5c7d29397eb3';
   $display->content['new-59ec5faa-9f5e-4da3-ac97-5c7d29397eb3'] = $pane;
-  $display->panels['column2'][1] = 'new-59ec5faa-9f5e-4da3-ac97-5c7d29397eb3';
+  $display->panels['column2'][2] = 'new-59ec5faa-9f5e-4da3-ac97-5c7d29397eb3';
   $pane = new stdClass();
   $pane->pid = 'new-b674469e-8a07-4d4b-9d31-5b615a00395d';
   $pane->panel = 'column2';
@@ -377,11 +414,11 @@ function pece_artifacts_video_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'format' => 'panopoly_day',
+    'format' => 'medium',
     'context' => 'panelizer',
     'override_title' => 1,
-    'override_title_text' => 'Created date',
-    'override_title_heading' => 'h3',
+    'override_title_text' => 'Contributed date',
+    'override_title_heading' => 'h2',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -389,11 +426,11 @@ function pece_artifacts_video_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 2;
+  $pane->position = 3;
   $pane->locks = array();
   $pane->uuid = 'b674469e-8a07-4d4b-9d31-5b615a00395d';
   $display->content['new-b674469e-8a07-4d4b-9d31-5b615a00395d'] = $pane;
-  $display->panels['column2'][2] = 'new-b674469e-8a07-4d4b-9d31-5b615a00395d';
+  $display->panels['column2'][3] = 'new-b674469e-8a07-4d4b-9d31-5b615a00395d';
   $pane = new stdClass();
   $pane->pid = 'new-2c5e0ee6-702e-40a9-a6ba-bb3643514998';
   $pane->panel = 'column2';
@@ -421,11 +458,11 @@ function pece_artifacts_video_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 3;
+  $pane->position = 4;
   $pane->locks = array();
   $pane->uuid = '2c5e0ee6-702e-40a9-a6ba-bb3643514998';
   $display->content['new-2c5e0ee6-702e-40a9-a6ba-bb3643514998'] = $pane;
-  $display->panels['column2'][3] = 'new-2c5e0ee6-702e-40a9-a6ba-bb3643514998';
+  $display->panels['column2'][4] = 'new-2c5e0ee6-702e-40a9-a6ba-bb3643514998';
   $pane = new stdClass();
   $pane->pid = 'new-35489b3a-a08e-432c-b24b-ec02c1865df5';
   $pane->panel = 'column2';
@@ -448,11 +485,11 @@ function pece_artifacts_video_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 4;
+  $pane->position = 5;
   $pane->locks = array();
   $pane->uuid = '35489b3a-a08e-432c-b24b-ec02c1865df5';
   $display->content['new-35489b3a-a08e-432c-b24b-ec02c1865df5'] = $pane;
-  $display->panels['column2'][4] = 'new-35489b3a-a08e-432c-b24b-ec02c1865df5';
+  $display->panels['column2'][5] = 'new-35489b3a-a08e-432c-b24b-ec02c1865df5';
   $pane = new stdClass();
   $pane->pid = 'new-8b3a45d6-bd13-47ff-b543-93b31a8ee97c';
   $pane->panel = 'column2';
@@ -478,11 +515,11 @@ function pece_artifacts_video_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 5;
+  $pane->position = 6;
   $pane->locks = array();
   $pane->uuid = '8b3a45d6-bd13-47ff-b543-93b31a8ee97c';
   $display->content['new-8b3a45d6-bd13-47ff-b543-93b31a8ee97c'] = $pane;
-  $display->panels['column2'][5] = 'new-8b3a45d6-bd13-47ff-b543-93b31a8ee97c';
+  $display->panels['column2'][6] = 'new-8b3a45d6-bd13-47ff-b543-93b31a8ee97c';
   $pane = new stdClass();
   $pane->pid = 'new-5c4c8936-9d58-40ff-ba17-02c869427059';
   $pane->panel = 'column2';
@@ -514,11 +551,11 @@ function pece_artifacts_video_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 6;
+  $pane->position = 7;
   $pane->locks = array();
   $pane->uuid = '5c4c8936-9d58-40ff-ba17-02c869427059';
   $display->content['new-5c4c8936-9d58-40ff-ba17-02c869427059'] = $pane;
-  $display->panels['column2'][6] = 'new-5c4c8936-9d58-40ff-ba17-02c869427059';
+  $display->panels['column2'][7] = 'new-5c4c8936-9d58-40ff-ba17-02c869427059';
   $pane = new stdClass();
   $pane->pid = 'new-f893c998-f365-4a33-9d57-a87fe8072c4c';
   $pane->panel = 'column2';
@@ -544,11 +581,11 @@ function pece_artifacts_video_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 7;
+  $pane->position = 8;
   $pane->locks = array();
   $pane->uuid = 'f893c998-f365-4a33-9d57-a87fe8072c4c';
   $display->content['new-f893c998-f365-4a33-9d57-a87fe8072c4c'] = $pane;
-  $display->panels['column2'][7] = 'new-f893c998-f365-4a33-9d57-a87fe8072c4c';
+  $display->panels['column2'][8] = 'new-f893c998-f365-4a33-9d57-a87fe8072c4c';
   $pane = new stdClass();
   $pane->pid = 'new-f2aae210-6a0b-4af8-900c-ff3de5cacd1b';
   $pane->panel = 'column2';
@@ -571,11 +608,11 @@ function pece_artifacts_video_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 8;
+  $pane->position = 9;
   $pane->locks = array();
   $pane->uuid = 'f2aae210-6a0b-4af8-900c-ff3de5cacd1b';
   $display->content['new-f2aae210-6a0b-4af8-900c-ff3de5cacd1b'] = $pane;
-  $display->panels['column2'][8] = 'new-f2aae210-6a0b-4af8-900c-ff3de5cacd1b';
+  $display->panels['column2'][9] = 'new-f2aae210-6a0b-4af8-900c-ff3de5cacd1b';
   $pane = new stdClass();
   $pane->pid = 'new-8f68f814-6ada-4b4d-9ff3-47beb8f343da';
   $pane->panel = 'column2';
@@ -598,11 +635,11 @@ function pece_artifacts_video_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 9;
+  $pane->position = 10;
   $pane->locks = array();
   $pane->uuid = '8f68f814-6ada-4b4d-9ff3-47beb8f343da';
   $display->content['new-8f68f814-6ada-4b4d-9ff3-47beb8f343da'] = $pane;
-  $display->panels['column2'][9] = 'new-8f68f814-6ada-4b4d-9ff3-47beb8f343da';
+  $display->panels['column2'][10] = 'new-8f68f814-6ada-4b4d-9ff3-47beb8f343da';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-f893c998-f365-4a33-9d57-a87fe8072c4c';
   $panelizer->display = $display;

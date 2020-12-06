@@ -25,7 +25,7 @@
    pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_security');
  }
 
- /**
+/**
  * Sets honeypot permission for authenticated users.
  */
  function pece_security_update_7003() {
@@ -39,3 +39,13 @@
 
    pece_set_permissions($pece_security_permissions);
  }
+
+ /**
+  * Enable Password Policy and Two-factor Authentication modules.
+  */
+function pece_security_update_7004() {
+  module_enable(array(
+    'tfa',
+    'password_policy',
+  ));
+}

@@ -9,6 +9,7 @@
 /builds/
 /build
 /database
+/distro
 /temp
 
 # Node specific #
@@ -33,6 +34,7 @@
 # Logs and databases #
 ######################
 database/local/*
+docker/database/*
 
 # Compiled css files #
 ######################
@@ -85,6 +87,10 @@ nbproject
 tests/e2e/config-alter.js
 tests/e2e/screenshots/
 tmp
+.env
+
+# Docker compose
+docker-compose.override.yml
 
 
 # PECE Profile files #
@@ -106,6 +112,5 @@ src/themes/responsive_bartik
 src/themes/contrib/*
 src/libraries/*
 
-disaster-sts-net.release-1.3.1/
 build.*
 databases

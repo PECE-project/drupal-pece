@@ -435,8 +435,69 @@ function pece_update_7114() {
 }
 
 /**
- *  Update contributors field to optional field.
+ *  Rebuild node access permissions.
  */
 function pece_update_7115() {
   node_access_rebuild(TRUE);
+}
+
+/**
+ *  Add Animated gif support for image styles, Enable Tabular data artifact & Add Created Date field on all artifacts.
+ */
+function pece_update_7116() {
+   module_enable(array(
+     'animgif_support',
+     'pece_artifacts_tabular',
+   ));
+  // Prepare Tabular Data directory on private fs.
+  $new_folder = 'private://artifacts/media/tabular-data/';
+  file_prepare_directory($new_folder, FILE_CREATE_DIRECTORY);
+
+  if (module_exists('features')) {
+      $modules = array(
+        'pece_annotations',
+        'pece_artifacts',
+        'pece_artifacts_audio',
+        'pece_artifacts_bundle',
+        'pece_artifacts_fieldnote',
+        'pece_artifacts_image',
+        'pece_artifacts_pdf',
+        'pece_artifacts_text',
+        'pece_artifacts_video',
+        'pece_artifacts_website',
+        'pece_core',
+        'pece_dashboard',
+        'pece_groups',
+        'pece_projects',
+        'pece_repository',
+        'pece_photo_essay',
+        'pece_timeline_essay',
+      );
+
+      foreach ($modules as $module) {
+        features_revert_module($module);
+      }
+    }
+}
+
+/**
+ *  Allow users to reorder analytics items on Analytics page.
+ */
+function pece_update_7117() {
+   module_enable(array('nodeorder'));
+
+   if (module_exists('features')) {
+     features_revert_module('pece_analytics');
+   }
+}
+
+/**
+ *  Add ARK support for PECE content.
+ */
+function pece_update_7118() {
+
+  // Activate ARK and PECE ARK modules.
+  module_enable(array(
+  'pece_ark',
+  ));
 }

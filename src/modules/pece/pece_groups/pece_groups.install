@@ -119,3 +119,17 @@ function pece_groups_update_7004() {
 function pece_groups_update_7005() {
   features_revert(array('pece_groups' => array('field_instance')));
 }
+
+/**
+ * Update Page layout settings for Group pages.
+ */
+function pece_groups_update_7006() {
+  features_revert_module('pece_groups');
+}
+
+/**
+ * Remove Project field from Group pages.
+ */
+function pece_groups_update_7007() {
+  features_revert_module('pece_groups');
+}

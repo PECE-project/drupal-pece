@@ -3,3 +3,11 @@
  * @file
  * Installation code for the PECE Repository feature.
  */
+
+
+/**
+ * Add Projects to Discovery page.
+ */
+function pece_repository_update_7001() {
+  features_revert_module('pece_repository');
+}
