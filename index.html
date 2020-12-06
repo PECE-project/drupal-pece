@@ -14,14 +14,20 @@
     <title>Home - PECE Documentation</title>
     
 
-    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
-    <link href='//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
     <link href="css/bootstrap-custom.min.css" rel="stylesheet">
     <link href="css/base.min.css" rel="stylesheet">
     <link href="css/cinder.min.css" rel="stylesheet">
-    <link href="css/highlight.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
     <link href="css/extra.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -29,15 +35,6 @@
             <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
         <![endif]-->
-
-    <script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
-    <script>
-    WebFont.load({
-        google: {
-            families: ['Open Sans', 'PT Sans']
-        }
-    });
-    </script>
 
     
 
@@ -141,9 +138,8 @@
 <div class="row">
 <div class="column1">
 <h1 id="about">About</h1>
-<p>The Platform for Experimental, Collaborative Ethnography (PECE) is a Free and Open Source (Drupal-based) digital platform that supports multi-sited, cross-scale ethnographic and historical research. PECE provides a place to archive and share primary data, facilitates analytic collaboration, and encourages experimentation with diverse modes of publication. The platform encourages humanities scholars to experiment with digitally-mediated, interdisciplinary collaboration, provides opportunities to involve students and practitioners in humanities research as it progresses, and quickens the public availability of humanities research in an open access form. PECE also enables experimentation with new forms of peer review for humanities research, and functions as a portal to a suite of open source tools useful for humanities research, including tools developed in data science for other scientific communities.</p>
-<p>At its core, PECE is an experimental system. PECE’s design is both theoretically inflected and ethnographically grounded: platform design has been oriented by “design logics” drawn
-from cultural, social, and language theories. We intend for the system to be as user-friendly as possible, but also acknowledge that conventional modes of knowledge organization tend to overdetermine the structure and meaning of knowledge, history, and culture. The way we have deliberately chosen to organize content in PECE may feel unfamiliar and disorienting to some, but we hope that in choosing to use PECE, you are as excited as we are to engage in this experiment.</p>
+<p>The Platform for Experimental, Collaborative Ethnography (PECE) is open source (Drupal-based) software supporting virtual research environments for cultural anthropologists, historians, cultural heritage scholars, and other researchers working with diverse data, including extensive unstructured data, largely through interpretive methods.  Designed to support the workflows, data types and interpretive modalities particular to  these scholars in what we call the “empirical humanities,” it also provides a platform for deeply interdisciplinary collaboration with transnational scope. PECE provides space to archive and curate data, facilitates collaborative analysis of data, and enables diverse modes of visualization, scholarly communication, and peer review.</p>
+<p>There are now many instances of PECE, supporting diverse research communities and projects.  Work on the following instances of PECE informs our on-going software development: <a href="https://theasthmafiles.org/">The Asthma Files</a> | <a href="http://housingenergy.info/">The Energy Vulnerability Project</a> | <a href="https://disaster-sts-network.org/">The Disaster STS Network</a> | <a href="http://centerforethnography.org/">Center for Ethnography</a> | <a href="https://stsinfrastructures.org/">STS Infrastructures</a> | <a href="https://www.researchdatashare.org/">Research Data Share</a> |  <a href="https://worldpece.org/">World PECE</a> |</p>
 <h1 id="overview-of-this-documentation">Overview of this Documentation</h1>
 <p>In <a href="usersguide"><em>User's Guide</em></a>, you will find documentation on how to use PECE, including many frequently asked questions and helpful resources.</p>
 <p>In <a href="siteadmin"><em>Site Admin's Guide</em></a>, you will find documentation for site administrator's regarding the configuration of the site theme, user registrations approvals, and the customization of front page material.</p>
@@ -189,8 +185,13 @@ from cultural, social, and language theories. We intend for the system to be as 
     </footer>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap-3.0.3.min.js"></script>
-    <script src="js/highlight.pack.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
     <script>hljs.initHighlightingOnLoad();</script>
+    
+
     <script>var base_url = "."</script>
     
     <script src="js/base.js"></script>
@@ -200,8 +201,11 @@ from cultural, social, and language theories. We intend for the system to be as 
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
                 <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
             <div class="modal-body">
                 <p>
@@ -264,6 +268,6 @@ from cultural, social, and language theories. We intend for the system to be as 
 </html>
 
 <!--
-MkDocs version : 1.0.4
-Build Date UTC : 2020-06-04 15:48:04
+MkDocs version : 1.1.2
+Build Date UTC : 2020-12-06 01:53:15.622337+00:00
 -->
