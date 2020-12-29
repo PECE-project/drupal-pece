@@ -1,5 +1,7 @@
 <?php
 
+include_once 'pece_ark.functions.inc';
+
 define('ARK_COMPOSITE_WHO_FIELD'                            , array('field_pece_authors', 'field_pece_contributors'));
 define('ARK_PERSISTENT_UNIFORM_RESOURCE_LOCATOR_FIELD_NAME' , 'ark_plur');
 define('ARK_COMPOSITE_WHO_FIELD_NAME'                       , 'ark_composite_who');
@@ -153,7 +155,9 @@ function pece_ark_remote_data_update(array $data = null) {
     $password   = variable_get('ark_ezid_password');
     $ark_who    = $data['ark_who'];
     $ark_what   = $data['title'];
-    $ark_when   = _arc_convert_data_to_human_readable($data['ark_when']);
+
+
+    $ark_when   = _ark_convert_data_to_human_readable($data['ark_when']);
 
     $ark_update_if_exists     = variable_get('ark_ezid_update_if_exists', ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS);
     $ark_update_if_exists     = (array_shift($ark_update_if_exists) == '1') ? '?update_if_exists=yes' : '';
@@ -369,7 +373,7 @@ function _ark_get_default_who($node = null) {
   if (!is_null($node) && isset($node->uid)) {
     if ($user = user_load($node->uid)) {
       $result = pece_get_fullname_or_name($user);
-      _pece_ark_fullname_missing_warning_msg($result, $user);
+      _pece_ark_missing_fullname_warning_msg($result, $user);
     }
   }
   return $result;
@@ -377,7 +381,7 @@ function _ark_get_default_who($node = null) {
 
 
 /**
- * _ark_get_default_when - Helper function to return the node created date timestamp.
+ * _ark_get_default_when - Helper function to return node's created date timestamp.
  * @param $node - A node object
  * @todo: discuss about not published nodes
  *
@@ -391,7 +395,7 @@ function _ark_get_default_when($node = null) {
 }
 
 /**
- * _ark_get_composite_who - Helper function to return the node created date timestamp.
+ * _ark_get_composite_who - Helper function to return node authors/contributors/creators.
  *
  * @param  object $node
  * @param  array $composite_who_fields_selected
@@ -409,7 +413,7 @@ function _ark_get_composite_who($node = null, array $composite_who_fields_select
       $array_authors_object = $wrapper->{$field}->value();
       foreach ($array_authors_object as $key => $user_object) {
         $name_value = pece_get_fullname_or_name($user_object);
-        _pece_ark_fullname_missing_warning_msg($name_value, $user_object);
+        _pece_ark_missing_fullname_warning_msg($name_value, $user_object);
         if (!empty($name_value)) {
           array_push($authors, $name_value);
         }
@@ -566,7 +570,7 @@ function pece_ark_extra_field_render_array($field_name, $node) {
       break;
 
     case 'ark_when':
-      $date_formated = _arc_convert_data_to_human_readable($ark_data['ark_when']);
+      $date_formated = _ark_convert_data_to_human_readable($ark_data['ark_when']);
       $render = array(
         'container' => array(
           '#prefix' => '<div class="field field-label-above">',
@@ -755,12 +759,12 @@ function pece_ark_naan_format_valid($naan) {
 }
 
 /**
- * _arc_convert_data_to_human_readable - Helper function to convert a timestamp value in a human readable value
+ * _ark_convert_data_to_human_readable - Helper function to convert a timestamp value in a human readable value
  *
  * @param  mixed $timestamp
  * @return void
  */
-function _arc_convert_data_to_human_readable($timestamp = null){
+function _ark_convert_data_to_human_readable($timestamp = null){
   $result = null;
   if (!is_null($timestamp)) {
     $item_date = $timestamp;
