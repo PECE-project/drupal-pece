@@ -272,7 +272,7 @@ function pece_ark_operation_for_local_ark_data_creation(&$context) {
     // Store some results for post-processing in the 'finished' callback.
     // The contents of 'results' will be available as $results in the
     // 'finished' function (in this example, batch_example_finished()).
-    $context['results'][] = 'ARK data for nid:' . $node->nid . ', Title' . check_plain($node->title) . ' processed';
+    $context['results'][] = 'ARK data for nid: ' . $node->nid . ', Title "' . check_plain($node->title) . '" processed';
 
     // Update our progress information.
     $context['sandbox']['progress']++;
