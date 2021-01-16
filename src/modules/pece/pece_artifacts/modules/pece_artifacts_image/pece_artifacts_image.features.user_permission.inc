@@ -16,7 +16,6 @@ function pece_artifacts_image_user_default_permissions() {
     'name' => 'delete any image files',
     'roles' => array(
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'file_entity',
   );
@@ -28,7 +27,6 @@ function pece_artifacts_image_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'file_entity',
   );
@@ -38,7 +36,6 @@ function pece_artifacts_image_user_default_permissions() {
     'name' => 'download any image files',
     'roles' => array(
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'file_entity',
   );
@@ -50,7 +47,6 @@ function pece_artifacts_image_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'file_entity',
   );
@@ -60,7 +56,6 @@ function pece_artifacts_image_user_default_permissions() {
     'name' => 'edit any image files',
     'roles' => array(
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'file_entity',
   );
@@ -72,7 +67,6 @@ function pece_artifacts_image_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'file_entity',
   );
