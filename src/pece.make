@@ -395,6 +395,11 @@ projects[mimedetect][subdir] = contrib
 projects[media][version] = 2.26
 projects[media][subdir] = contrib
 
+; Overrides panopoly's media_youtube.
+projects[media_youtube][version] = 3.10
+projects[media_youtube][subdir] = contrib
+// projects[media_youtube][patch][1572550] = https://www.drupal.org/files/issues/2020-12-15/the_youtube_video_id_is_invalid_or_the_video_was_deleted-1572550-076.patch
+
 projects[animgif_support][version] = 1.6
 projects[animgif_support][subdir] = contrib
 
