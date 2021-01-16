@@ -26,7 +26,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
     'name' => 'bypass access in place editing',
     'roles' => array(
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'panels',
   );
@@ -38,7 +37,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -50,7 +48,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -62,7 +59,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -74,7 +70,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -84,7 +79,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
     'name' => 'create fieldable video',
     'roles' => array(
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -96,7 +90,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -108,7 +101,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -120,7 +112,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -132,7 +123,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -144,7 +134,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -156,7 +145,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -168,7 +156,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -180,7 +167,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -192,7 +178,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -204,7 +189,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -216,7 +200,6 @@ function pece_panels_defaultconfig_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'panels',
   );
