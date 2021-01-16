@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the pece_panels module.
+ */
+
+/**
+ * Reset permission for Editor user role.
+ */
+function pece_panels_update_7001() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  $editor_perms = array(
+    'bypass access in place editing' => FALSE,
+    'create fieldable image' => FALSE,
+    'create fieldable map' => FALSE,
+    'create fieldable node' => FALSE,
+    'create fieldable text' => FALSE,
+    'create fieldable video' => FALSE,
+    'delete fieldable image' => FALSE,
+    'delete fieldable map' => FALSE,
+    'delete fieldable node' => FALSE,
+    'delete fieldable text' => FALSE,
+    'delete fieldable video' => FALSE,
+    'edit fieldable image' => FALSE,
+    'edit fieldable map' => FALSE,
+    'edit fieldable node' => FALSE,
+    'edit fieldable text' => FALSE,
+    'edit fieldable video' => FALSE,
+    'use panels in place editing' => FALSE,
+  );
+  pece_set_permissions(array('editor' => $editor_perms));
+}
