@@ -35,7 +35,6 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'access administration pages',
     'roles' => array(
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'system',
   );
@@ -162,7 +161,6 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'revert revisions',
     'roles' => array(
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'node',
   );
@@ -173,7 +171,6 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-      'editor' => 'editor',
     ),
     'module' => 'node',
   );
