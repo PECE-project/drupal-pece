@@ -141,3 +141,16 @@ function pece_photo_essay_update_7003() {
 function pece_photo_essay_update_7004() {
   features_revert(array('pece_photo_essay' => array('field_instance')));
 }
+
+/**
+ * Reset permission for Editor user role.
+ */
+function pece_photo_essay_update_7005() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  $editor_perms = array(
+    'create pece_photo_essay content' => FALSE,
+    'delete own pece_photo_essay content' => FALSE,
+    'edit own pece_photo_essay content' => FALSE,
+  );
+  pece_set_permissions(array('editor' => $editor_perms));
+}

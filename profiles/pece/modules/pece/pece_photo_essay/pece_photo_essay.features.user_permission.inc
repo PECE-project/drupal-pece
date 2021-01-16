@@ -17,7 +17,6 @@ function pece_photo_essay_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'node',
   );
@@ -38,7 +37,6 @@ function pece_photo_essay_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'node',
   );
@@ -59,7 +57,6 @@ function pece_photo_essay_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'node',
   );
