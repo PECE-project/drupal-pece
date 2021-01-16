@@ -70,3 +70,14 @@ function pece_core_update_7006() {
     features_revert(array('pece_core' => array('views_view')));
   }
 }
+
+/**
+ * Reset permissions for Editor user role.
+ */
+function pece_core_update_7007() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  $editor_permissions = array(
+    'use text format panopoly_wysiwyg_text' => FALSE,
+  );
+  pece_set_permissions(array('editor' => $editor_permissions));
+}
