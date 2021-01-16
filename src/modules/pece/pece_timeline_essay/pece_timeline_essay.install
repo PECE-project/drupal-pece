@@ -31,3 +31,18 @@ function _pece_timeline_essay_eck_entity_set_permissions($eck_entity_name) {
 function pece_timeline_essay_update_7001() {
   features_revert_module('pece_timeline_essay');
 }
+
+/**
+ * Reset permission for Editor user role.
+ */
+function pece_timeline_essay_update_7002() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  $editor_perms = array(
+    'eck add pece_timeline_essay_item pece_timeline_essay_item entities' => FALSE,
+    'eck delete pece_timeline_essay_item pece_timeline_essay_item entities' => FALSE,
+    'eck edit pece_timeline_essay_item pece_timeline_essay_item entities' => FALSE,
+    'eck list pece_timeline_essay_item pece_timeline_essay_item entities' => FALSE,
+    'eck view pece_timeline_essay_item pece_timeline_essay_item entities' => FALSE,
+  );
+  pece_set_permissions(array('editor' => $editor_perms));
+}

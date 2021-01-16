@@ -18,7 +18,6 @@ function pece_timeline_essay_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'eck',
   );
@@ -30,7 +29,6 @@ function pece_timeline_essay_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'eck',
   );
@@ -42,7 +40,6 @@ function pece_timeline_essay_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'eck',
   );
@@ -54,7 +51,6 @@ function pece_timeline_essay_user_default_permissions() {
       'Contributor' => 'Contributor',
       'Researcher' => 'Researcher',
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'eck',
   );
@@ -68,7 +64,6 @@ function pece_timeline_essay_user_default_permissions() {
       'administrator' => 'administrator',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
-      'editor' => 'editor',
     ),
     'module' => 'eck',
   );
