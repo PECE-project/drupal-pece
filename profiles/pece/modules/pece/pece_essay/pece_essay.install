@@ -95,3 +95,17 @@ function pece_essay_update_7006() {
   );
   pece_set_permissions($pece_auth_user_perms);
 }
+
+/**
+ * Reset permission for Editor user role.
+ */
+function pece_essay_update_7007() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  $editor_perms = array(
+    'administer panelizer node pece_essay content' => FALSE,
+    'create pece_essay content' => FALSE,
+    'delete own pece_essay content' => FALSE,
+    'edit own pece_essay content' => FALSE,
+  );
+  pece_set_permissions(array('editor' => $editor_perms));
+}
