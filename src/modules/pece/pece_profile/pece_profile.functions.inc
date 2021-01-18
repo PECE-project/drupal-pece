@@ -29,10 +29,9 @@ function _user_has_fullname($user = FALSE) {
     return FALSE;
   }
   $user = (is_numeric($user) ? user_load($user) : $user);
-  $userWpr = entity_metadata_wrapper('user', $user);
-  if (isset($userWpr->profile_pece_profile_main) &&
-    in_array('field_pece_full_name', array_keys($userWpr->profile_pece_profile_main->getPropertyInfo()))) {
-    return !empty($userWpr->profile_pece_profile_main->field_pece_full_name->value());
+  $profile =  profile2_load_by_user($user, 'pece_profile_main');
+  if (isset($profile->field_pece_full_name)) {
+    return !empty($profile->field_pece_full_name[LANGUAGE_NONE][0]['value']);
   }
   return FALSE;
 }
@@ -55,8 +54,8 @@ function pece_get_fullname_or_name($entity) {
     return $entity->name;
   }
   if (_user_has_fullname($entity)) {
-    $userWpr = entity_metadata_wrapper('user', $entity);
-    $full_name = $userWpr->profile_pece_profile_main->field_pece_full_name->value();
+    $profile = profile2_load_by_user($entity, 'pece_profile_main');
+    $full_name = $profile->field_pece_full_name[LANGUAGE_NONE][0]['value'];
     if (!empty($full_name)){
       return $full_name;
     }
