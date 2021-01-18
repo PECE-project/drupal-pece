@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains hook implementations and main functions for ARK module.
+ */
+
 include_once 'pece_ark.functions.inc';
 
 define('ARK_COMPOSITE_WHO_FIELD'                            , array('field_pece_authors', 'field_pece_contributors'));
@@ -16,11 +21,6 @@ define('ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE'              , array('yes'));
 define('ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS'                , array('1'));
 define('ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS'         , 'https://n2t.net/');
 define('ARK_DEFAULT_PRE_PREFIX'                             , 'fk4');
-
-/**
- * @file
- * Contains hook implementations and main functions for ARK module.
- */
 
 /**
  * Implements hook_help().
