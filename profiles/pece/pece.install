@@ -501,3 +501,11 @@ function pece_update_7118() {
   'pece_ark',
   ));
 }
+
+/**
+ * Un-assign Editor role from all users.
+ */
+function pece_update_7119() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  pece_batch_unassign_role('editor');
+}
