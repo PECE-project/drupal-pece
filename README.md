@@ -224,7 +224,7 @@ TODO
 
 ## Contributing
 
-Contribution should be done [using pull requests](https://help.github.com/articles/using-pull-requests) to this repository. We keep the `master` branch current with tested, stable code. The branch `dev` is used for the on-going development tasks, new features, and bug fixes.
+Contributions should be done [using pull requests](https://help.github.com/articles/using-pull-requests) to this repository. We keep the `master` branch current with tested, stable code. The branch `dev` is used for the on-going development tasks, new features, and bug fixes.
 
 Our [Contributors' guide](http://pece.readthedocs.io/en/latest/contributors.html) contains all the information you will need to know about the project before submitting your contribution. Please read it before sending us pull requests.
 
