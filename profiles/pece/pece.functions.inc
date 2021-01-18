@@ -246,3 +246,38 @@ function _pece_artifacts_set_public_allowed_schema($node_type, $field_name) {
   $field_instance_info ['widget']['settings']['allowed_schemes']['public'] = 'public';
   field_update_instance($field_instance_info);
 }
+
+/**
+ *
+ */
+function pece_batch_unassign_role($rolename) {
+  $role = user_role_load_by_name($rolename);
+  $users = pece_get_users_by_rolename($rolename);
+  if (empty($users)) {
+    return;
+  }
+  user_multiple_role_edit(array_keys($users['user']), 'remove_role', $role->rid);
+}
+
+function pece_get_users_by_rolename($rolename){
+  $query = new EntityFieldQuery;
+  $query->entityCondition('entity_type', 'user');
+  $query->addTag('rolequery');
+  $query->addMetaData('rolename', $rolename);
+  return $query->execute();
+}
+
+/**
+ * Implement hook_query_TAG_alter
+ *
+ * @param QueryAlterableInterface $query
+ */
+function pece_query_rolequery_alter(QueryAlterableInterface $query) {
+  $rolename = $query->getMetaData('rolename');
+  $role_subquery = db_select("role", "role");
+  $role_subquery->condition('role.name', $rolename, '=');
+  $role_subquery->join('users_roles', "users_to_include", "role.rid = users_to_include.rid");
+  $role_subquery->fields('users_to_include', array('uid' => 'uid'));
+  $role_subquery->where('users_to_include.uid = users.uid');
+  $query->exists($role_subquery);
+}
