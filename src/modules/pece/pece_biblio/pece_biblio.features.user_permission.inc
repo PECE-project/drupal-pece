@@ -19,7 +19,6 @@ function pece_biblio_user_default_permissions() {
       'administrator' => 'administrator',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
-      'editor' => 'editor',
     ),
     'module' => 'biblio',
   );
