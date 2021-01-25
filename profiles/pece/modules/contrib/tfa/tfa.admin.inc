@@ -62,7 +62,10 @@ function tfa_admin_settings($form, $form_state) {
       $message .= ' - unused';
     }
     // phpcs:disable Drupal.Semantics.FunctionT.NotLiteralString
-    $items[] = t($message, array('%type' => _tfa_class_types($plugin['class']), '@name' => $plugin['name']));
+    $items[] = t($message, array(
+      '%type' => _tfa_class_types($plugin['class']),
+      '@name' => $plugin['name'],
+    ));
   }
   $form['plugins']['list'] = array(
     '#value' => 'markup',

@@ -79,7 +79,9 @@ class TfaTestCase extends DrupalWebTestCase {
 
     // Enable TOTP and two fallback.
     variable_set('tfa_validate_plugin', 'tfa_test_totp');
-    variable_set('tfa_fallback_plugins', array('tfa_test_send', 'tfa_test_fallback'));
+    variable_set('tfa_fallback_plugins', array(
+      'tfa_test_send', 'tfa_test_fallback',
+    ));
 
     $edit = array(
       'name' => $account->name,
@@ -303,7 +305,9 @@ class TfaTestCase extends DrupalWebTestCase {
   public function testAlter() {
     // Set TOTP as primary.
     variable_set('tfa_validate_plugin', 'tfa_test_totp');
-    variable_set('tfa_fallback_plugins', array('tfa_test_send', 'tfa_test_fallback'));
+    variable_set('tfa_fallback_plugins', array(
+      'tfa_test_send', 'tfa_test_fallback',
+    ));
     // Allow context alter that will set send as validate plugin.
     variable_set('tfa_test_context_alter', 'tfa_test_send');
     $account = $this->web_user;

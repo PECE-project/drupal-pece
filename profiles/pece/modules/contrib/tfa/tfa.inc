@@ -539,13 +539,46 @@ abstract class TfaBasePlugin {
    *   Whether code is valid.
    */
   protected function validate($code) {
-    if ((string) $code === (string) $this->code) {
+    if ($this->timingSafeEquals((string) $code, (string) $this->code)) {
       $this->isValid = TRUE;
       return TRUE;
     }
     else {
       return FALSE;
     }
+  }
+
+  /**
+   * A timing safe equals comparison.
+   *
+   * More info here: http://blog.ircmaxell.com/2014/11/its-all-about-time.html.
+   *
+   * @param string $safeString
+   *   The internal (safe) value to be checked.
+   * @param string $userString
+   *   The user submitted (unsafe) value.
+   *
+   * @return bool
+   *   True if the two strings are identical.
+   */
+  private function timingSafeEquals($safeString, $userString) {
+    if (function_exists('hash_equals')) {
+      return hash_equals($safeString, $userString);
+    }
+    $safeLen = strlen($safeString);
+    $userLen = strlen($userString);
+
+    if ($userLen != $safeLen) {
+      return FALSE;
+    }
+
+    $result = 0;
+    for ($i = 0; $i < $userLen; ++$i) {
+      $result |= (ord($safeString[$i]) ^ ord($userString[$i]));
+    }
+
+    // They are only identical strings if $result is exactly 0.
+    return $result === 0;
   }
 
   /**
