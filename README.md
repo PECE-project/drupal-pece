@@ -121,7 +121,7 @@ For any inquiries, send an email to pece.tech.team@gmail.com
 
 
 
-<div id='contribute1'/>
+<div id='contribute'/>
 
 ## How to Contribute
 
