@@ -27,7 +27,7 @@ This repository holds the packaged distribution for PECE adopters. It contains t
 
 ## Cite As
 
-Indicate how others can cite the project. If you’d like to include a DOI for the project, you can create a release of the GitHub repo and then archive the release on [Zenodo](https://zenodo.org/badge/latestdoi/52763688&sa=D&source=editors&ust=1613404827497000&usg=AOvVaw1-q5pcSIj_QObbr9FIMm-r). Zenodo will assign a DOI to the release, which you can include in the citation.
+If you’d like to include a DOI for the project, you can create a release of the GitHub repo and then archive the release on [Zenodo](https://zenodo.org/badge/latestdoi/52763688&sa=D&source=editors&ust=1613404827497000&usg=AOvVaw1-q5pcSIj_QObbr9FIMm-r). Zenodo will assign a DOI to the release, which you can include in the citation.
 
 <div id='contributors'/>
 
@@ -125,9 +125,7 @@ For any inquiries, send an email to pece.tech.team@gmail.com
 
 ## How to Contribute
 
-There are many ways of contributing to the PECE project. One of them is by reporting bugs or requesting features through Github in our [development repository](https://github.com/PECE-project/drupal-pece). Read our [contributors' guide](http://pece.readthedocs.io/en/latest/contributors.html) for more information about how to contribute code and bug fixes.
-
-Bug and feature requests for this project are documented in this repo’s [issues queue](https://github.com/PECE-project/pece-distro/issues). You can contribute to the project by writing code to fix issues or to create new features. When contributing code, please be sure to:
+Bug and feature requests for this project are documented in this repo’s [issues queue](https://github.com/PECE-project/drupal-pece). You can contribute to the project by writing code to fix issues or to create new features. When contributing code, please be sure to:
 - Fork this repository.
 - Modify the code (changing only one thing at a time), and then issue a pull request for each change.
 - Follow the project's coding style (using K&R-style indentation and bracketing, commenting above each feature, and using snake case for variables). [Feel free to swap out with specific conventions]
