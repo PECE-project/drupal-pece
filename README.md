@@ -3,15 +3,16 @@
 ## Table of Contents
 1. [About](#about)
 2. [Cite As](#cite)
-3. [How to Access/Download/Install](#install)
-4. [How to Provide Feedback](#feedback)
-5. [Copyrights](#copyrights)
-6. [Questions](#questions)
-7. [How to Contribute](#contribute)
-8. [Dependencies](#dependencies)
+3. [Contributors](#contributors)
+4. [How to Access/Download/Install](#install)
+5. [How to Provide Feedback](#feedback)
+6. [Copyrights](#copyrights)
+7. [Questions](#questions)
+8. [How to Contribute](#contribute)
+9. [Dependencies](#dependencies)
 
 
-***
+
 <div id='about'/>
 
 ## About
@@ -20,13 +21,36 @@ PECE is a Free and Open Source (Drupal-based) digital platform that supports mul
 
 This repository holds the packaged distribution for PECE adopters. It contains the most updated version of PECE for public use. If you are an end-user who wants to run PECE for your research, this is the right place to get your copy. If you are a developer wishing to contribute to the development process, you must use the [development repository](https://github.com/PECE-project/drupal-pece) instead.
 
-***
+
 
 <div id='cite'/>
 
 ## Cite As
 
-***
+Indicate how others can cite the project. If you’d like to include a DOI for the project, you can create a release of the GitHub repo and then archive the release on [Zenodo](https://zenodo.org/badge/latestdoi/52763688&sa=D&source=editors&ust=1613404827497000&usg=AOvVaw1-q5pcSIj_QObbr9FIMm-r). Zenodo will assign a DOI to the release, which you can include in the citation.
+
+<div id='contributors'/>
+
+## Contributors
+
+<table>
+  <tr>
+    <td align="center"><a href="https://en.wikipedia.org/wiki/Michael_Scott_(The_Office)">
+    <img src="https://img4.looper.com/img/gallery/the-untold-truth-of-michael-scott/l-intro-1600107071.jpg" width="100px;" alt=""/> <br />
+    <b>Michael Scott</b>
+    </a> <br />
+    <a href="#question-kentcdodds" title="Being Annoying">💻</a>💼 </td>
+      <td align="center"><a href="https://en.wikipedia.org/wiki/Jim_Halpert">
+      <img src="https://img1.looper.com/img/gallery/was-jim-halpert-from-the-office-secretly-a-sociopath/intro-1565015060.jpg" width="100px;" alt=""/> <br />
+      <b>Jim Halpert</b>
+      </a> <br />
+      <a href="#question-kentcdodds" title="Being Annoying">📋</a> </td>   
+
+  </tr>
+  <tr>
+
+</table>
+
 
 <div id='install'/>
 
@@ -73,7 +97,7 @@ Proceed to the URL in which your Drupal will reside, i.e. https://worldpece.org.
 
 One important note: please, make sure to set the permissions on the filesystem properly. We cannot emphasize this enough. The official Drupal documentation explains how to do so, if you have questions. (In our experience, we have needed to set the file permissions at sites/default/files/artifacts to 770 and sites/default/files/private to 770.)
 
-***
+
 
 <div id='feedback'/>
 
@@ -81,13 +105,13 @@ One important note: please, make sure to set the permissions on the filesystem p
 
 To report an issue, head on over to https://github.com/PECE-project/pece-distro/issues and create an issue there.
 
-***
+
 
 <div id='copyrights'/>
 
 ## Copyrights
 
-***
+
 
 <div id='questions'/>
 
@@ -95,7 +119,7 @@ To report an issue, head on over to https://github.com/PECE-project/pece-distro/
 
 For any inquiries, send an email to pece.tech.team@gmail.com
 
-***
+
 
 <div id='contribute1'/>
 
@@ -103,7 +127,15 @@ For any inquiries, send an email to pece.tech.team@gmail.com
 
 There are many ways of contributing to the PECE project. One of them is by reporting bugs or requesting features through Github in our [development repository](https://github.com/PECE-project/drupal-pece). Read our [contributors' guide](http://pece.readthedocs.io/en/latest/contributors.html) for more information about how to contribute code and bug fixes.
 
-***
+Bug and feature requests for this project are documented in this repo’s [issues queue](https://github.com/PECE-project/pece-distro/issues). You can contribute to the project by writing code to fix issues or to create new features. When contributing code, please be sure to:
+- Fork this repository.
+- Modify the code (changing only one thing at a time), and then issue a pull request for each change.
+- Follow the project's coding style (using K&R-style indentation and bracketing, commenting above each feature, and using snake case for variables). [Feel free to swap out with specific conventions]
+- Test your code locally before issuing a pull request.
+- Clearly state the purpose of your change in the description field for each commit.
+
+
+
 
 <div id='dependencies'/>
 
