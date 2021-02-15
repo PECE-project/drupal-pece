@@ -79,7 +79,7 @@ One important note: please, make sure to set the permissions on the filesystem p
 
 ## How to Provide Feedback
 
-To provide feedback, please direct questions to: https://github.com/PECE-project/pece-distro/issues
+To report an issue, head on over to https://github.com/PECE-project/pece-distro/issues and create an issue there.
 
 ***
 
