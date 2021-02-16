@@ -35,16 +35,30 @@ If you’d like to include a DOI for the project, you can create a release of th
 
 <table>
   <tr>
-    <td align="center"><a href="https://en.wikipedia.org/wiki/Michael_Scott_(The_Office)">
-    <img src="https://img4.looper.com/img/gallery/the-untold-truth-of-michael-scott/l-intro-1600107071.jpg" width="100px;" alt=""/> <br />
-    <b>Michael Scott</b>
+    <td align="center"><a href="https://stsinfrastructures.org/users/aalok-khandekar">
+    <img src="https://drive.google.com/thumbnail?id=14CWmF_Dl1e91IBtLe8i7ZIeOtdX5vb6x" width="100px;" alt=""/> <br />
+    <b>Aalok Khandekar</b>
     </a> <br />
-    <a href="#question-kentcdodds" title="Being Annoying">💻</a>💼 </td>
-      <td align="center"><a href="https://en.wikipedia.org/wiki/Jim_Halpert">
-      <img src="https://img1.looper.com/img/gallery/was-jim-halpert-from-the-office-secretly-a-sociopath/intro-1565015060.jpg" width="100px;" alt=""/> <br />
-      <b>Jim Halpert</b>
-      </a> <br />
-      <a href="#question-kentcdodds" title="Being Annoying">📋</a> </td>   
+    <a title="Content"> 🖋</a>  <a title="Data">🔣</a>  <a title="Design"> 🎨</a>  <br />
+    <a title="Ideas">🤔</a>  <a title="Project Management">📆</a>  <a title="Research">🔬</a> <br /> <a title="Tutorials">✅</a>  <a title="Talks">📢</a>   </td>
+    <td align="center"><a href="https://worldpece.org/users/renato-vasconcellos-gomes">
+    <img src="https://drive.google.com/thumbnail?id=1pSo8S6b7w-Tm2FJH8rPLVD4SJfI_Dtty" width="100px;" alt=""/> <br />
+    <b>Renato Vasconcellos <br /> Gomes</b>
+    </a> <br />
+    <a title="Bug Reports"> 🐛</a> <a title="Code"> 💻</a>  <a title="Content"> 🖋</a>  <a title="Documentation">📖</a>  <a title="Design"> 🎨</a>  <br />
+    <a title="Ideas and Planning">🤔</a>  <a title="Infrastructure">🚇</a>  <a title="Maintenance">🚧</a>  <a title="Mentoring">🧑‍🏫</a> <br /> <a title="Reviewed Pull Requests">👀</a>  <a title="Tests">⚠️</a> <a title="User Testing">📓</a> <a title="Videos">📹</a>  </td>
+    <td align="center"><a href="https://worldpece.org/content/alison-kenner">
+    <img src="https://drive.google.com/thumbnail?id=1oFt3LUVCaYp3fl7jjQj_NyOZoeD5f6Le" width="100px;" alt=""/> <br />
+    <b>Alison Kenner</b>
+    </a> <br />
+    <a title="Bug Reports"> 🔊</a>  <a title="Bug Reports"> 🐛</a>  </a>  <a title="Content"> 🖋</a> <a title="Data">🔣</a> <br />
+    <a title="Examples">💡</a>  <a title="Financial Support">💵</a>  <a title="Funding/Grant Finders">🔍</a> <br />  <a title="Mentoring">🧑‍🏫</a> <a title="Research">🔬</a>  <a title="Talks">📢</a>  </td>
+    <td align="center"><a href="https://worldpece.org/users/mikefortun">
+    <img src="https://drive.google.com/thumbnail?id=1nEY1rtFxMVxa3ryF0JYmti-WPR78AXcE" width="100px;" alt=""/> <br />
+    <b>Mike Fortun</b>
+    </a> <br />
+    <a title="Audio"> 🔊</a>  <a title="Bug Reports">🐛</a> <a title="Blogposts"> 📝</a>  <a title="Business Development"> 💼</a>  <a title="Content"> 🖋</a> <a title="Data">🔣</a> <br /> <a title="Documentation">📖</a>  <a title="Design"> 🎨</a>
+    <a title="Examples">💡</a> <a title="Event Organizers">📋</a> <a title="Financial Support">💵</a>  <a title="Funding/Grant Finders">🔍</a> <br /> <a title="Ideas and Planning">🤔</a> <a title="Infrastructure">🚇</a> <a title="Maintenance">🚧</a>  <a title="Mentoring">🧑‍🏫</a> <a title="Packaging">📦</a> <br /> <a title="Answering Questions">💬</a>  </a> <a title="Security">🛡️</a></a> <a title="Tools">🔧</a></a> <a title="Translation">🌍</a> <a title="Research">🔬</a> <a title="Project Management">📆</a> <br /> </a> <a title="Tests">⚠️<a title="Tutorials">✅</a></a>  <a title="Talks"> 📢</a> <a title="User Testing">📓</a> <a title="Videos">📹</a>   </td>
 
   </tr>
   <tr>
