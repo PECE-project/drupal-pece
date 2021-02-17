@@ -90,9 +90,7 @@ group of artifacts together.
 
 ### What is “critical commentary”?
 
-In this field, you should provide commentary on the artifact that documents its significance as an ethnographic objects and why it is relevant to the platform. See sections on the
-[*Source field*](#what-does-source-mean), and [*Licensing*](#licensing) for more information about
-attribution of artifacts.
+In this field, you should provide commentary on the artifact that documents its significance as an ethnographic objects and why it is relevant to the platform.
 
 ### How do I select a file that has already been added to the system?
 
@@ -109,12 +107,6 @@ the system has already been tagged with the creator, you should be given
 the option to select this creator’s name when you begin typing in this
 field. Otherwise, upon saving the artifact, the creator’s name will
 become a new “Creator tag” in the system.
-
-### How do I add a fieldsite to an artifact?
-
-First the fieldsite needs to have already been added to the platform.
-See [*How do I add a fieldsite*](#what-is-a-fieldsite)? for instructions on
-how to do this.
 
 ### When I edit content, what should I include in the revision log message?
 

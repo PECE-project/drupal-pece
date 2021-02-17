@@ -239,7 +239,7 @@ projects[username_enumeration_prevention][version] = 1.3
 
 ; Two-Factor Authentication
 projects[tfa][subdir] = contrib
-projects[tfa][version] = 2.1-rc1
+projects[tfa][version] = 2.1
 
 # 2FA Plugins
 projects[tfa_basic][subdir] = contrib
@@ -279,40 +279,40 @@ projects[panels_mini_ipe][subdir] = contrib
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_admin][version] = 1.76
+projects[panopoly_admin][version] = 1.79
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_core][version] = 1.76
+projects[panopoly_core][version] = 1.79
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.76
+projects[panopoly_images][version] = 1.79
 projects[panopoly_images][subdir] = contrib
 
-projects[panopoly_magic][version] = 1.76
+projects[panopoly_magic][version] = 1.79
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_theme][version] = 1.76
+projects[panopoly_theme][version] = 1.79
 projects[panopoly_theme][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.76
+projects[panopoly_widgets][version] = 1.79
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_users][version] = 1.76
+projects[panopoly_users][version] = 1.79
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.76
+projects[panopoly_pages][version] = 1.79
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_search][version] = 1.76
+projects[panopoly_search][version] = 1.79
 projects[panopoly_search][subdir] = contrib
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
 
-projects[panopoly_wysiwyg][version] = 1.76
+projects[panopoly_wysiwyg][version] = 1.79
 projects[panopoly_wysiwyg][subdir] = contrib
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.76
+projects[panopoly_test][version] = 1.79
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
@@ -395,6 +395,11 @@ projects[mimedetect][subdir] = contrib
 projects[media][version] = 2.26
 projects[media][subdir] = contrib
 
+; Overrides panopoly's media_youtube.
+projects[media_youtube][version] = 3.10
+projects[media_youtube][subdir] = contrib
+// projects[media_youtube][patch][1572550] = https://www.drupal.org/files/issues/2020-12-15/the_youtube_video_id_is_invalid_or_the_video_was_deleted-1572550-076.patch
+
 projects[animgif_support][version] = 1.6
 projects[animgif_support][subdir] = contrib
 
@@ -452,6 +457,11 @@ projects[color_field][version] = 1.8
 projects[search_api][subdir] = contrib
 projects[search_api][version] = 1.26
 projects[search_api][patch][] = ./patches/search_api_fix-composer-friendly-dependecies-issue.patch
+
+; Search API DB
+; Overrides panopoly's search_api_db version.
+projects[search_api_db][subdir] = contrib
+projects[search_api_db][version] = 1.8
 
 ; =====================
 ; Themes

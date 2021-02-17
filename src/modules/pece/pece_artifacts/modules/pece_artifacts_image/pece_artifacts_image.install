@@ -28,3 +28,19 @@ function pece_artifacts_image_update_7002() {
 function pece_artifacts_image_update_7003() {
   features_revert(array('pece_artifacts_image' => array('field_instance')));
 }
+
+/**
+ * Reset permissions for Editor user role.
+ */
+function pece_artifacts_image_update_7004() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  $editor_permissions = array(
+    'delete any image files' => FALSE,
+    'delete own image files' => FALSE,
+    'download any image files' => FALSE,
+    'download own image files' => FALSE,
+    'edit any image files' => FALSE,
+    'edit own image files' => FALSE,
+  );
+  pece_set_permissions(array('editor' => $editor_permissions));
+}

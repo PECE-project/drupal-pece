@@ -272,7 +272,7 @@ function pece_ark_operation_for_local_ark_data_creation(&$context) {
     // Store some results for post-processing in the 'finished' callback.
     // The contents of 'results' will be available as $results in the
     // 'finished' function (in this example, batch_example_finished()).
-    $context['results'][] = 'ARK data for nid:' . $node->nid . ', Title' . check_plain($node->title) . ' processed';
+    $context['results'][] = 'ARK data for nid: ' . $node->nid . ', Title "' . check_plain($node->title) . '" processed';
 
     // Update our progress information.
     $context['sandbox']['progress']++;
@@ -476,6 +476,19 @@ function _get_all_node_ids_for_selected_ark_node_types() {
       $result = $node_ids;
     }
   }
+  return $result;
+}
+
+function _get_all_ark_enabled_content_nids() {
+  $result = array();
+  $were_ark_nodes = _get_were_clause_for_selected_ark_node_types();
+  $query = db_select('node', 'n');
+  $query->innerJoin('field_data_field_ark_enabled', 'fdata', 'fdata.entity_id = n.nid');
+  $query->fields('n'  , array('nid'));
+  $query->where("$were_ark_nodes");
+  $query->orderBy('n.nid', 'ASC');
+  $query->extend('PagerDefault');
+  $result = $query->execute()->fetchAllAssoc('nid',PDO::FETCH_ASSOC);
   return $result;
 }
 
