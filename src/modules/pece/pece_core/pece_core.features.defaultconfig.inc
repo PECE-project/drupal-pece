@@ -213,12 +213,6 @@ function pece_core_defaultconfig_views_default_views() {
     5 => '5',
   );
   $handler->display->display_options['filters']['rid']['reduce_duplicates'] = TRUE;
-  /* Filter criterion: User: The user ID */
-  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
-  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['operator'] = '!=';
-  $handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
 
   /* Display: All users */
   $handler = $view->new_display('panel_pane', 'All users', 'all_users');
