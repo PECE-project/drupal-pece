@@ -32,6 +32,32 @@ function pece_core_field_default_field_bases() {
     'type' => 'text_long',
   );
 
+  // Exported field_base: 'field_ark_enabled'.
+  $field_bases['field_ark_enabled'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_ark_enabled',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'No',
+        1 => 'Yes',
+      ),
+      'allowed_values_function' => '',
+      'profile2_private' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
   // Exported field_base: 'field_description'.
   $field_bases['field_description'] = array(
     'active' => 1,
