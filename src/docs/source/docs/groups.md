@@ -20,7 +20,7 @@ Steps to Create Group
 4. Note that in order to create a group as a child of another group, you should
 select the Parent Group in the Group Audience field.
 
-5. Save the group. You are now the group administrator. See [*How do I add a person to a group or manage group memberships?*](#how-do-i-add-a-person-to-a-group-or-manage-group-memberships)
+5. Save the group. You are now the group administrator.
 
 
 Steps to Join a Group
