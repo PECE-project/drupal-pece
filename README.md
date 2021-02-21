@@ -52,7 +52,8 @@ If you’d like to include a DOI for the project, you can create a release of th
     <b>Renato Vasconcellos <br /> Gomes</b>
     </a> <br />
     <a href="#contributors" title="Bug Reports"> 🐛</a>
-    <a href="#contributors" title="Code"> 💻</a>  <a href="#contributors" title="Content"> 🖋</a>  
+    <a href="#contributors" title="Code"> 💻</a>
+    <a href="#contributors" title="Content"> 🖋</a>  
     <a href="#contributors" title="Documentation">📖</a>  
     <a href="#contributors" title="Design"> 🎨</a>  <br />
     <a href="#contributors" title="Ideas and Planning">🤔</a>  
@@ -106,6 +107,29 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Tutorials">✅</a>  
     <a href="#contributors" title="Talks"> 📢</a>
     <a href="#contributors" title="User Testing">📓</a>
+    <a href="#contributors" title="Videos">📹</a>   </td>
+    <td align="center"><a href="https://worldpece.org/content/brian-callahan">
+    <img src="https://drive.google.com/thumbnail?id=1FQvLlelTR2I1FGO2PJPhrkaGF2riFuja" width="100px;" alt=""/> <br />
+    <b>Brian Callahan</b>
+    </a> <br />
+    <a href="#contributors" title="Audio"> 🔊</a>  
+    <a href="#contributors" title="Bug Reports">🐛</a>
+    <a href="#contributors" title="Code"> 💻</a>
+    <a href="#contributors" title="Content"> 🖋</a>
+    <a href="#contributors" title="Data">🔣</a> <br />
+    <a href="#contributors" title="Documentation">📖</a>  
+    <a href="#contributors" title="Design"> 🎨</a>
+    <a href="#contributors" title="Examples">💡</a>
+    <a href="#contributors" title="Ideas and Planning">🤔</a>
+    <a href="#contributors" title="Infrastructure">🚇</a> <br />
+    <a href="#contributors" title="Maintenance">🚧</a>  
+    <a href="#contributors" title="Mentoring">🧑‍🏫</a>
+    <a href="#contributors" title="Packaging">📦</a>
+    <a href="#contributors" title="Security">🛡️</a>
+    <a href="#contributors" title="Answering Questions">💬</a> <br />
+    <a href="#contributors" title="Research">🔬</a>
+    <a href="#contributors" title="Reviewed Pull Requests">👀</a>
+    <a href="#contributors" title="Project Management">📆</a>
     <a href="#contributors" title="Videos">📹</a>   </td>
 
   </tr>
