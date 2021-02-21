@@ -97,15 +97,15 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Maintenance">🚧</a>  <br />
     <a href="#contributors" title="Mentoring">🧑‍🏫</a>
     <a href="#contributors" title="Packaging">📦</a>
-    <a href="#contributors" title="Answering Questions">💬</a>
-    <a href="#contributors" title="Security">🛡️</a>
-    <a href="#contributors" title="Tools">🔧</a> <br />
-    <a href="#contributors" title="Translation">🌍</a>
-    <a href="#contributors" title="Research">🔬</a>
     <a href="#contributors" title="Project Management">📆</a>
-    <a href="#contributors" title="Tests">⚠️</a>
-    <a href="#contributors" title="Tutorials">✅</a>  <br />
+    <a href="#contributors" title="Answering Questions">💬</a>
+    <a href="#contributors" title="Research">🔬</a> <br />
+    <a href="#contributors" title="Security">🛡️</a>
     <a href="#contributors" title="Talks"> 📢</a>
+    <a href="#contributors" title="Tests">⚠️</a>
+    <a href="#contributors" title="Tools">🔧</a>
+    <a href="#contributors" title="Translation">🌍</a> <br />
+    <a href="#contributors" title="Tutorials">✅</a>
     <a href="#contributors" title="User Testing">📓</a>
     <a href="#contributors" title="Videos">📹</a>   </td>
     <td align="center" valign= "top"><a href="https://worldpece.org/content/brian-callahan">
@@ -214,6 +214,28 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Talks"> 📢</a>  </td>
   </tr>
   <tr>
+  <td align="center" valign= "top"><a href="https://worldpece.org/content/brandon-costelloe-kuehn">
+  <img src="https://drive.google.com/thumbnail?id=1rPE6_3DCYkdC_ykMwdswH5JmIbbQUjIc" width="100px;" alt=""/> <br />
+  <b>Brandon Costelloe-Kuehn</b>
+  </a> <br />
+  <a href="#contributors" title="Content"> 🖋</a>
+  <a href="#contributors" title="Data">🔣</a>
+  <a href="#contributors" title="Documentation">📖</a>  
+  <a href="#contributors" title="Design"> 🎨</a>
+  <a href="#contributors" title="Examples">💡</a> <br />
+  <a href="#contributors" title="Event Organizers">📋</a>
+  <a href="#contributors" title="Funding/Grant Finders">🔍</a>
+  <a href="#contributors" title="Ideas and Planning">🤔</a>
+  <a href="#contributors" title="Infrastructure">🚇</a>
+  <a href="#contributors" title="Maintenance">🚧</a>  <br />
+  <a href="#contributors" title="Mentoring">🧑‍🏫</a>
+  <a href="#contributors" title="Project Management">📆</a>
+  <a href="#contributors" title="Answering Questions">💬</a>
+  <a href="#contributors" title="Research">🔬</a>
+  <a href="#contributors" title="Security">🛡️</a> <br/>
+  <a href="#contributors" title="Talks"> 📢</a>
+  <a href="#contributors" title="Tutorials">✅</a>
+  <a href="#contributors" title="Developing Instances for Teaching">🎓</a> </td>
 
 </table>
 
