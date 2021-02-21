@@ -216,7 +216,7 @@ If you’d like to include a DOI for the project, you can create a release of th
   <tr>
   <td align="center" valign= "top"><a href="https://worldpece.org/content/brandon-costelloe-kuehn">
   <img src="https://drive.google.com/thumbnail?id=1rPE6_3DCYkdC_ykMwdswH5JmIbbQUjIc" width="100px;" alt=""/> <br />
-  <b>Brandon Costelloe-Kuehn</b>
+  <b>Brandon <br /> Costelloe-Kuehn</b>
   </a> <br />
   <a href="#contributors" title="Content"> 🖋</a>
   <a href="#contributors" title="Data">🔣</a>
