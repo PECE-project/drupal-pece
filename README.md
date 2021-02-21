@@ -163,6 +163,24 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Talks"> 📢</a> <br />
     <a href="#contributors" title="Videos">📹</a>
     <a href="#contributors" title="Community Outreach">🗣</>   </td>
+    <td align="center" valign= "top"><a href="https://worldpece.org/content/james-adams>
+    <img src="https://drive.google.com/thumbnail?id=1G42OFg8S1I4P9UoJx0J2Ye0xGMDfTJ2z/" width="100px;" alt=""/> <br />
+    <b>James Adams</b>
+    </a> <br />
+    <a href="#contributors" title="Audio"> 🔊</a>  
+    <a href="#contributors" title="Bug Reports">🐛</a>
+    <a href="#contributors" title="Content"> 🖋</a> <br />
+    <a href="#contributors" title="Data">🔣</a>
+    <a href="#contributors" title="Event Organizers">📋</a> <br />
+    <a href="#contributors" title="Ideas and Planning">🤔</a>
+    <a href="#contributors" title="Mentoring">🧑‍🏫</a>
+    <a href="#contributors" title="Answering Questions">💬</a>
+    <a href="#contributors" title="Research">🔬</a>
+    <a href="#contributors" title="Project Management">📆</a>
+    <a href="#contributors" title="Tutorials">✅</a>  <br />
+    <a href="#contributors" title="Talks"> 📢</a>
+    <a href="#contributors" title="User Testing">📓</a>
+    <a href="#contributors" title="Videos">📹</a>   </td>
   </tr>
   <tr>
 
