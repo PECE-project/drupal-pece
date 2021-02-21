@@ -39,8 +39,8 @@ If you’d like to include a DOI for the project, you can create a release of th
     <img src="https://drive.google.com/thumbnail?id=14CWmF_Dl1e91IBtLe8i7ZIeOtdX5vb6x" width="100px;" alt=""/> <br />
     <b>Aalok Khandekar</b>
     </a> <br />
-    <a title="Content"> 🖋</a>  <a title="Data">🔣</a>  <a title="Design"> 🎨</a>  <br />
-    <a title="Ideas">🤔</a>  <a title="Project Management">📆</a>  <a title="Research">🔬</a> <br /> <a title="Tutorials">✅</a>  <a title="Talks">📢</a>   </td>
+    <a href="" title="Content"> 🖋</a>  <a href="" title="Data">🔣</a>  <a title="Design"> 🎨</a>  <br />
+    <a href="" title="Ideas">🤔</a>  <a title="Project Management">📆</a>  <a href="" title="Research">🔬</a> <br /> <a href="" title="Tutorials">✅</a>  <a href="" title="Talks">📢</a>   </td>
     <td align="center"><a href="https://worldpece.org/users/renato-vasconcellos-gomes">
     <img src="https://drive.google.com/thumbnail?id=1pSo8S6b7w-Tm2FJH8rPLVD4SJfI_Dtty" width="100px;" alt=""/> <br />
     <b>Renato Vasconcellos <br /> Gomes</b>
