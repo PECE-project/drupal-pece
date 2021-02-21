@@ -181,6 +181,19 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Talks"> 📢</a>
     <a href="#contributors" title="User Testing">📓</a>
     <a href="#contributors" title="Videos">📹</a>   </td>
+    <td align="center" valign= "top"><a href="https://worldpece.org/users/angela-okune">
+    <img src="https://drive.google.com/thumbnail?id=1Brvr_051o6WbdCOyaD-5-_d5SrXyZ91t" width="100px;" alt=""/> <br />
+    <b>Angela Okune</b>
+    </a> <br />
+    <a href="#contributors" title="Bug Reports">🐛</a>
+    <a href="#contributors" title="Examples">💡</a>
+    <a href="#contributors" title="Event Organizers">📋</a>
+    <a href="#contributors" title="Ideas and Planning">🤔</a>
+    <a href="#contributors" title="Mentoring">🧑‍🏫</a> <br />
+    <a href="#contributors" title="Answering Questions">💬</a>
+    <a href="#contributors" title="Tutorials">✅</a>  
+    <a href="#contributors" title="Talks"> 📢</a>
+    <a href="#contributors" title="Videos">📹</a>   </td>
   </tr>
   <tr>
 
