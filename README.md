@@ -51,23 +51,62 @@ If you’d like to include a DOI for the project, you can create a release of th
     <img src="https://drive.google.com/thumbnail?id=1pSo8S6b7w-Tm2FJH8rPLVD4SJfI_Dtty" width="100px;" alt=""/> <br />
     <b>Renato Vasconcellos <br /> Gomes</b>
     </a> <br />
-    <a title="Bug Reports"> 🐛</a>
-    <a title="Code"> 💻</a>  <a title="Content"> 🖋</a>  
-    <a title="Documentation">📖</a>  
-    <a title="Design"> 🎨</a>  <br />
-    <a title="Ideas and Planning">🤔</a>  <a title="Infrastructure">🚇</a>  <a title="Maintenance">🚧</a>  <a title="Mentoring">🧑‍🏫</a> <br /> <a title="Reviewed Pull Requests">👀</a>  <a title="Tests">⚠️</a> <a title="User Testing">📓</a> <a title="Videos">📹</a>  </td>
+    <a href="#contributors" title="Bug Reports"> 🐛</a>
+    <a href="#contributors" title="Code"> 💻</a>  <a href="#contributors" title="Content"> 🖋</a>  
+    <a href="#contributors" title="Documentation">📖</a>  
+    <a href="#contributors" title="Design"> 🎨</a>  <br />
+    <a href="#contributors" title="Ideas and Planning">🤔</a>  
+    <a href="#contributors" title="Infrastructure">🚇</a>  
+    <a href="#contributors" title="Maintenance">🚧</a>  
+    <a href="#contributors" title="Mentoring">🧑‍🏫</a> <br />
+    <a href="#contributors" title="Reviewed Pull Requests">👀</a>  
+    <a href="#contributors" title="Tests">⚠️</a> <a href="#contributors" title="User Testing">📓</a> <a href="#contributors" title="Videos">📹</a>  </td>
     <td align="center"><a href="https://worldpece.org/content/alison-kenner">
     <img src="https://drive.google.com/thumbnail?id=1oFt3LUVCaYp3fl7jjQj_NyOZoeD5f6Le" width="100px;" alt=""/> <br />
     <b>Alison Kenner</b>
     </a> <br />
-    <a title="Bug Reports"> 🔊</a>  <a title="Bug Reports"> 🐛</a>  </a>  <a title="Content"> 🖋</a> <a title="Data">🔣</a> <br />
-    <a title="Examples">💡</a>  <a title="Financial Support">💵</a>  <a title="Funding/Grant Finders">🔍</a> <br />  <a title="Mentoring">🧑‍🏫</a> <a title="Research">🔬</a>  <a title="Talks">📢</a>  </td>
+    <a href="#contributors" title="Bug Reports"> 🔊</a>  
+    <a href="#contributors" title="Bug Reports"> 🐛</a>  </a>  
+    <a href="#contributors" title="Content"> 🖋</a>
+    <a href="#contributors" title="Data">🔣</a> <br />
+    <a href="#contributors" title="Examples">💡</a>  
+    <a href="#contributors" title="Financial Support">💵</a>  
+    <a href="#contributors" title="Funding/Grant Finders">🔍</a> <br />  
+    <a href="#contributors" title="Mentoring">🧑‍🏫</a>
+    <a href="#contributors" title="Research">🔬</a>  
+    <a href="#contributors" title="Talks">📢</a>  </td>
     <td align="center"><a href="https://worldpece.org/users/mikefortun">
     <img src="https://drive.google.com/thumbnail?id=1nEY1rtFxMVxa3ryF0JYmti-WPR78AXcE" width="100px;" alt=""/> <br />
     <b>Mike Fortun</b>
     </a> <br />
-    <a title="Audio"> 🔊</a>  <a title="Bug Reports">🐛</a> <a title="Blogposts"> 📝</a>  <a title="Business Development"> 💼</a>  <a title="Content"> 🖋</a> <a title="Data">🔣</a> <br /> <a title="Documentation">📖</a>  <a title="Design"> 🎨</a>
-    <a title="Examples">💡</a> <a title="Event Organizers">📋</a> <a title="Financial Support">💵</a>  <a title="Funding/Grant Finders">🔍</a> <br /> <a title="Ideas and Planning">🤔</a> <a title="Infrastructure">🚇</a> <a title="Maintenance">🚧</a>  <a title="Mentoring">🧑‍🏫</a> <a title="Packaging">📦</a> <br /> <a title="Answering Questions">💬</a>  </a> <a title="Security">🛡️</a></a> <a title="Tools">🔧</a></a> <a title="Translation">🌍</a> <a title="Research">🔬</a> <a title="Project Management">📆</a> <br /> </a> <a title="Tests">⚠️<a title="Tutorials">✅</a></a>  <a title="Talks"> 📢</a> <a title="User Testing">📓</a> <a title="Videos">📹</a>   </td>
+    <a href="#contributors" title="Audio"> 🔊</a>  
+    <a href="#contributors" title="Bug Reports">🐛</a>
+    <a href="#contributors" title="Blogposts"> 📝</a>  
+    <a href="#contributors" title="Business Development"> 💼</a>  
+    <a href="#contributors" title="Content"> 🖋</a>
+    <a href="#contributors" title="Data">🔣</a> <br />
+    <a href="#contributors" title="Documentation">📖</a>  
+    <a href="#contributors" title="Design"> 🎨</a>
+    <a href="#contributors" title="Examples">💡</a>
+    <a href="#contributors" title="Event Organizers">📋</a>
+    <a href="#contributors" title="Financial Support">💵</a>  
+    <a href="#contributors" title="Funding/Grant Finders">🔍</a> <br />
+    <a href="#contributors" title="Ideas and Planning">🤔</a>
+    <a href="#contributors" title="Infrastructure">🚇</a>
+    <a href="#contributors" title="Maintenance">🚧</a>  
+    <a href="#contributors" title="Mentoring">🧑‍🏫</a>
+    <a href="#contributors" title="Packaging">📦</a> <br />
+    <a href="#contributors" title="Answering Questions">💬</a>
+    <a href="#contributors" title="Security">🛡️</a>
+    <a href="#contributors" title="Tools">🔧</a>
+    <a href="#contributors" title="Translation">🌍</a>
+    <a href="#contributors" title="Research">🔬</a>
+    <a href="#contributors" title="Project Management">📆</a> <br />
+    <a href="#contributors" title="Tests">⚠️</a>
+    <a href="#contributors" title="Tutorials">✅</a>  
+    <a href="#contributors" title="Talks"> 📢</a>
+    <a href="#contributors" title="User Testing">📓</a>
+    <a href="#contributors" title="Videos">📹</a>   </td>
 
   </tr>
   <tr>
