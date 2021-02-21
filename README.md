@@ -236,7 +236,25 @@ If you’d like to include a DOI for the project, you can create a release of th
   <a href="#contributors" title="Talks"> 📢</a>
   <a href="#contributors" title="Tutorials">✅</a>
   <a href="#contributors" title="Developing Instances for Teaching">🎓</a> </td>
-
+  <td align="center" valign= "top"><a href="https://worldpece.org/content/kim-fortun">
+  <img src="https://drive.google.com/thumbnail?id=1eU5TX4IGe7KN6QQGtFbWMIYsgFZulE0u" width="100px;" alt=""/> <br />
+  <b>Kim Fortun</b>
+  </a> <br />
+  <a href="#contributors" title="Business Development"> 💼</a>
+  <a href="#contributors" title="Content"> 🖋</a>
+  <a href="#contributors" title="Data">🔣</a>
+  <a href="#contributors" title="Design"> 🎨</a>
+  <a href="#contributors" title="Event Organizers">📋</a> <br/>
+  <a href="#contributors" title="Financial Support">💵</a>
+  <a href="#contributors" title="Funding/Grant Finders">🔍</a>
+  <a href="#contributors" title="Ideas and Planning">🤔</a>
+  <a href="#contributors" title="Mentoring">🧑‍🏫</a>
+  <a href="#contributors" title="Project Management">📆</a> <br />
+  <a href="#contributors" title="Answering Questions">💬</a>
+  <a href="#contributors" title="Research">🔬</a>
+  <a href="#contributors" title="Talks"> 📢</a>
+  <a href="#contributors" title="Tutorials">✅</a> </td>
+  </tr>
 </table>
 
 
