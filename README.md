@@ -39,13 +39,22 @@ If you’d like to include a DOI for the project, you can create a release of th
     <img src="https://drive.google.com/thumbnail?id=14CWmF_Dl1e91IBtLe8i7ZIeOtdX5vb6x" width="100px;" alt=""/> <br />
     <b>Aalok Khandekar</b>
     </a> <br />
-    <a href="#contributors" title="Content"> 🖋</a>  <a href="#contributors" title="Data">🔣</a>  <a href="#contributors" title="Design"> 🎨</a>  <br />
-    <a href="#contributors" title="Ideas">🤔</a>  <a href="#contributors" title="Project Management">📆</a>  <a href="#contributors" title="Research">🔬</a> <br /> <a href="#contributors" title="Tutorials">✅</a>  <a href="#contributors" title="Talks">📢</a>   </td>
+    <a href="#contributors" title="Content"> 🖋</a>  
+    <a href="#contributors" title="Data">🔣</a>  
+    <a href="#contributors" title="Design"> 🎨</a>  <br />
+    <a href="#contributors" title="Ideas">🤔</a>  
+    <a href="#contributors" title="Project Management">📆</a>  
+    <a href="#contributors" title="Research">🔬</a> <br />
+    <a href="#contributors" title="Tutorials">✅</a>  
+    <a href="#contributors" title="Talks">📢</a>   </td>
     <td align="center"><a href="https://worldpece.org/users/renato-vasconcellos-gomes">
     <img src="https://drive.google.com/thumbnail?id=1pSo8S6b7w-Tm2FJH8rPLVD4SJfI_Dtty" width="100px;" alt=""/> <br />
     <b>Renato Vasconcellos <br /> Gomes</b>
     </a> <br />
-    <a title="Bug Reports"> 🐛</a> <a title="Code"> 💻</a>  <a title="Content"> 🖋</a>  <a title="Documentation">📖</a>  <a title="Design"> 🎨</a>  <br />
+    <a title="Bug Reports"> 🐛</a>
+    <a title="Code"> 💻</a>  <a title="Content"> 🖋</a>  
+    <a title="Documentation">📖</a>  
+    <a title="Design"> 🎨</a>  <br />
     <a title="Ideas and Planning">🤔</a>  <a title="Infrastructure">🚇</a>  <a title="Maintenance">🚧</a>  <a title="Mentoring">🧑‍🏫</a> <br /> <a title="Reviewed Pull Requests">👀</a>  <a title="Tests">⚠️</a> <a title="User Testing">📓</a> <a title="Videos">📹</a>  </td>
     <td align="center"><a href="https://worldpece.org/content/alison-kenner">
     <img src="https://drive.google.com/thumbnail?id=1oFt3LUVCaYp3fl7jjQj_NyOZoeD5f6Le" width="100px;" alt=""/> <br />
