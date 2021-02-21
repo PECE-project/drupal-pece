@@ -131,6 +131,8 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Reviewed Pull Requests">👀</a>
     <a href="#contributors" title="Project Management">📆</a>
     <a href="#contributors" title="Videos">📹</a>   </td>
+    </tr>
+    <tr>
     <td align="center" valign= "top"><a href="https://worldpece.org/users/lina-franken">
     <img src="https://drive.google.com/thumbnail?id=1VPS4-GlQKr_nMh7-2v_SSxHX9cXslpYe" width="100px;" alt=""/> <br />
     <b>Lina Franken</b>
@@ -140,8 +142,6 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Documentation">📖</a>  
     <a href="#contributors" title="Ideas and Planning">🤔</a>
     <a href="#contributors" title="Research">🔬</a> </td>
-    </tr>
-    <tr>
     <td align="center" valign= "top"><a href="https://worldpece.org/users/mikefortun">
     <img src="https://drive.google.com/thumbnail?id=1mnGhj1mC7UuUaOf3iP85SGECcJIPteTS" width="100px;" alt=""/> <br />
     <b>Mike Fortun</b>
