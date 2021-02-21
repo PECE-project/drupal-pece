@@ -149,18 +149,18 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Audio"> 🔊</a>  
     <a href="#contributors" title="Bug Reports">🐛</a>
     <a href="#contributors" title="Blogposts"> 📝</a>  
-    <a href="#contributors" title="Content"> 🖋</a> <br />
-    <a href="#contributors" title="Data">🔣</a>
+    <a href="#contributors" title="Content"> 🖋</a>
+    <a href="#contributors" title="Data">🔣</a> <br />
     <a href="#contributors" title="Documentation">📖</a>  
     <a href="#contributors" title="Design"> 🎨</a>
-    <a href="#contributors" title="Event Organizers">📋</a> <br />
+    <a href="#contributors" title="Event Organizers">📋</a>
     <a href="#contributors" title="Ideas and Planning">🤔</a>
-    <a href="#contributors" title="Project Management">📆</a>
+    <a href="#contributors" title="Project Management">📆</a> <br />
     <a href="#contributors" title="Answering Questions">💬</a>
     <a href="#contributors" title="Research">🔬</a>
     <a href="#contributors" title="Translation">🌍</a>
-    <a href="#contributors" title="Tutorials">✅</a>  <br />
-    <a href="#contributors" title="Talks"> 📢</a>
+    <a href="#contributors" title="Tutorials">✅</a>  
+    <a href="#contributors" title="Talks"> 📢</a> <br />
     <a href="#contributors" title="Videos">📹</a>
     <a href="#contributors" title="Community Outreach">🗣</>   </td>
   </tr>
