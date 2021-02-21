@@ -194,6 +194,24 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Tutorials">✅</a>  
     <a href="#contributors" title="Talks"> 📢</a>
     <a href="#contributors" title="Videos">📹</a>   </td>
+    <td align="center" valign= "top"><a href="https://worldpece.org/users/lindsay-poirier">
+    <img src="https://drive.google.com/thumbnail?id=11HDGZPSOkm8eeYY1fJm3PxzuN_9W5dSZ" width="100px;" alt=""/> <br />
+    <b>Lindsay Poirier</b>
+    </a> <br />
+    <a href="#contributors" title="Content"> 🖋</a>
+    <a href="#contributors" title="Documentation">📖</a>  
+    <a href="#contributors" title="Design"> 🎨</a>
+    <a href="#contributors" title="Event Organizers">📋</a>
+    <a href="#contributors" title="Funding/Grant Finders">🔍</a> <br />
+    <a href="#contributors" title="Ideas and Planning">🤔</a>
+    <a href="#contributors" title="Security">🛡️</a>
+    <a href="#contributors" title="Tools">🔧</a>
+    <a href="#contributors" title="Translation">🌍</a>
+    <a href="#contributors" title="Project Management">📆</a> <br />
+    <a href="#contributors" title="Answering Questions">💬</a>
+    <a href="#contributors" title="Research">🔬</a>
+    <a href="#contributors" title="Tutorials">✅</a>
+    <a href="#contributors" title="Talks"> 📢</a>  </td>
   </tr>
   <tr>
 
