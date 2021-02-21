@@ -35,7 +35,7 @@ If you’d like to include a DOI for the project, you can create a release of th
 
 <table>
   <tr>
-    <td align="center" style = "vertical-align:top; width = 100px;"><a href="https://stsinfrastructures.org/users/aalok-khandekar">
+    <td style = "text-align:center; vertical-align:top; width = 100px;"><a href="https://stsinfrastructures.org/users/aalok-khandekar">
     <img src="https://drive.google.com/thumbnail?id=1OmCM70i628ZfveCxuRAy5R1R_g_t7brq" width="100px;" alt=""/> <br />
     <b>Aalok Khandekar</b>
     </a> <br />
