@@ -36,7 +36,7 @@ If you’d like to include a DOI for the project, you can create a release of th
 <table>
   <tr>
     <td align="center"><a href="https://stsinfrastructures.org/users/aalok-khandekar">
-    <img src="https://drive.google.com/thumbnail?id=14CWmF_Dl1e91IBtLe8i7ZIeOtdX5vb6x" width="100px;" alt=""/> <br />
+    <img src="https://drive.google.com/thumbnail?id=1OmCM70i628ZfveCxuRAy5R1R_g_t7brq" width="100px;" alt=""/> <br />
     <b>Aalok Khandekar</b>
     </a> <br />
     <a href="#contributors" title="Content"> 🖋</a>  
@@ -77,7 +77,7 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Research">🔬</a>  
     <a href="#contributors" title="Talks">📢</a>  </td>
     <td align="center"><a href="https://worldpece.org/users/mikefortun">
-    <img src="https://drive.google.com/thumbnail?id=1nEY1rtFxMVxa3ryF0JYmti-WPR78AXcE" width="100px;" alt=""/> <br />
+    <img src="https://drive.google.com/thumbnail?id=1mnGhj1mC7UuUaOf3iP85SGECcJIPteTS" width="100px;" alt=""/> <br />
     <b>Mike Fortun</b>
     </a> <br />
     <a href="#contributors" title="Audio"> 🔊</a>  
