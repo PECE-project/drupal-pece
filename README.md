@@ -241,7 +241,7 @@ If you’d like to include a DOI for the project, you can create a release of th
   <td align="center" valign= "top"> <b> PECE Research Director <b/> <br /><a href="https://worldpece.org/content/kim-fortun">
   <img src="https://drive.google.com/thumbnail?id=1eU5TX4IGe7KN6QQGtFbWMIYsgFZulE0u" width="100px;" alt=""/> <br />
   <b>Kim Fortun</b>
-  </a> <br />
+  </a> <br /> <br />
   <a href="#contributors" title="Business Development"> 💼</a>
   <a href="#contributors" title="Content"> 🖋</a>
   <a href="#contributors" title="Data">🔣</a>
