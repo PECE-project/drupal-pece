@@ -78,7 +78,7 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Mentoring">🧑‍🏫</a>
     <a href="#contributors" title="Research">🔬</a>  
     <a href="#contributors" title="Talks">📢</a>  </td>
-    <td align="center" valign= "top"> <b> PECE Design Director <b/> <br />&nbsp;<br /> <a href="https://worldpece.org/users/mikefortun">
+    <td align="center" valign= "top"> <b> PECE Design Director <b/> <br /> <a> <a/> <br /> <a href="https://worldpece.org/users/mikefortun">
     <img src="https://drive.google.com/thumbnail?id=1mnGhj1mC7UuUaOf3iP85SGECcJIPteTS" width="100px;" alt=""/> <br />
     <b>Mike Fortun</b>
     </a> <br />
