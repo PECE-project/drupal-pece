@@ -64,7 +64,7 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Mentoring">🧑‍🏫</a>
     <a href="#contributors" title="Reviewed Pull Requests">👀</a>  <br />
     <a href="#contributors" title="Tests">⚠️</a> <a href="#contributors" title="User Testing">📓</a> <a href="#contributors" title="Videos">📹</a>  </td>
-    <td align="center" valign= "top"><a href="https://worldpece.org/content/alison-kenner">
+    <td align="center" valign= "top"> <b> Platform Director, <br /> Energy Rights project <b/> <br /> <a href="https://worldpece.org/content/alison-kenner">
     <img src="https://drive.google.com/thumbnail?id=1oFt3LUVCaYp3fl7jjQj_NyOZoeD5f6Le" width="100px;" alt=""/> <br />
     <b>Alison Kenner</b>
     </a> <br />
@@ -78,7 +78,7 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Mentoring">🧑‍🏫</a>
     <a href="#contributors" title="Research">🔬</a>  
     <a href="#contributors" title="Talks">📢</a>  </td>
-    <td align="center" valign= "top"> <b> Research Director <b/> <br /> <br /> <a href="https://worldpece.org/users/mikefortun">
+    <td align="center" valign= "top"> <b> PECE Design Director <b/> <br /> <br /> <a href="https://worldpece.org/users/mikefortun">
     <img src="https://drive.google.com/thumbnail?id=1mnGhj1mC7UuUaOf3iP85SGECcJIPteTS" width="100px;" alt=""/> <br />
     <b>Mike Fortun</b>
     </a> <br />
@@ -238,7 +238,7 @@ If you’d like to include a DOI for the project, you can create a release of th
   <a href="#contributors" title="Talks"> 📢</a>
   <a href="#contributors" title="Tutorials">✅</a>
   <a href="#contributors" title="Developing Instances for Teaching">🎓</a> </td>
-  <td align="center" valign= "top"><a href="https://worldpece.org/content/kim-fortun">
+  <td align="center" valign= "top"> <b> PECE Research Director <b/> <br /><a href="https://worldpece.org/content/kim-fortun">
   <img src="https://drive.google.com/thumbnail?id=1eU5TX4IGe7KN6QQGtFbWMIYsgFZulE0u" width="100px;" alt=""/> <br />
   <b>Kim Fortun</b>
   </a> <br />
