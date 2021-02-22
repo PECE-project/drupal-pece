@@ -6,7 +6,7 @@
 3. [Contributors](#contributors)
 4. [How to Access/Download/Install](#install)
 5. [How to Provide Feedback](#feedback)
-6. [Copyrights](#copyrights)
+6. [Licensing](#licensing)
 7. [Questions](#questions)
 8. [How to Contribute](#contribute)
 9. [Dependencies](#dependencies)
@@ -27,11 +27,15 @@ This repository holds the packaged distribution for PECE adopters. It contains t
 
 ## Cite As
 
-If you’d like to include a DOI for the project, you can create a release of the GitHub repo and then archive the release on [Zenodo](https://zenodo.org/badge/latestdoi/52763688&sa=D&source=editors&ust=1613404827497000&usg=AOvVaw1-q5pcSIj_QObbr9FIMm-r). Zenodo will assign a DOI to the release, which you can include in the citation.
+[![DOI](https://zenodo.org/badge/52763688.svg)](https://zenodo.org/badge/latestdoi/52763688)
+
+If you’d like to include a DOI for the project, you can create a release of the GitHub repo and then archive the release on Zenodo. Zenodo will assign a DOI to the release, which you can include in the citation.
 
 <div id='contributors'/>
 
 ## Contributors
+
+Special thanks to our contributors \([emoji key](https://allcontributors.org/docs/en/emoji-key)\):
 
 <table>
   <tr>
@@ -314,10 +318,11 @@ To report an issue, head on over to https://github.com/PECE-project/pece-distro/
 
 
 
-<div id='copyrights'/>
+<div id='licensing'/>
 
-## Copyrights
+## Licensing
 
+All the software code written for PECE is released under the GNU GPL version 3. Access our [legal documents for more information](https://pece-project.github.io/drupal-pece/legal/). All the documentation for the project is released under CC-BY-SA 4.0 International, unless stated otherwise.
 
 
 <div id='questions'/>
