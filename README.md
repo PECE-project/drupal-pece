@@ -48,7 +48,7 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Research">🔬</a>
     <a href="#contributors" title="Tutorials">✅</a>  
     <a href="#contributors" title="Talks">📢</a>   </td>
-    <td align="center" valign= "top"> <b> Lead Developer <b/> <br /> <br />
+    <td align="center" valign= "top"> <b> PECE Lead Developer <b/> <br /> <br />
     <a href="https://worldpece.org/users/renato-vasconcellos-gomes">
     <img src="https://drive.google.com/thumbnail?id=1pSo8S6b7w-Tm2FJH8rPLVD4SJfI_Dtty" width="100px;" alt=""/> <br />
     <b>Renato Gomes</b>
@@ -64,7 +64,7 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Mentoring">🧑‍🏫</a>
     <a href="#contributors" title="Reviewed Pull Requests">👀</a>  <br />
     <a href="#contributors" title="Tests">⚠️</a> <a href="#contributors" title="User Testing">📓</a> <a href="#contributors" title="Videos">📹</a>  </td>
-    <td align="center" valign= "top"> <b> Platform Director, <br /> Energy Rights project <b/> <br /> <a href="https://worldpece.org/content/alison-kenner">
+    <td align="center" valign= "top"> <b> Platform Director, <br /> Energy Rights Project <b/> <br /> <br /> <a href="https://worldpece.org/content/alison-kenner">
     <img src="https://drive.google.com/thumbnail?id=1oFt3LUVCaYp3fl7jjQj_NyOZoeD5f6Le" width="100px;" alt=""/> <br />
     <b>Alison Kenner</b>
     </a> <br />
