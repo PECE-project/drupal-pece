@@ -35,7 +35,8 @@ If you’d like to include a DOI for the project, you can create a release of th
 
 <table>
   <tr>
-    <td align="center" valign= "top"> <a href="https://stsinfrastructures.org/users/aalok-khandekar">
+    <td align="center" valign= "top"> <b> Platform Director, <br /> STS Infrastructures <b/> <br />
+    <a href="https://stsinfrastructures.org/users/aalok-khandekar">
     <img src="https://drive.google.com/thumbnail?id=1OmCM70i628ZfveCxuRAy5R1R_g_t7brq" width="100px;" alt=""/> <br />
     <b>Aalok Khandekar</b>
     </a> <br />
@@ -47,12 +48,8 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Research">🔬</a>
     <a href="#contributors" title="Tutorials">✅</a>  
     <a href="#contributors" title="Talks">📢</a>   </td>
-<<<<<<< HEAD
     <td align="center" valign= "top"> <b> Lead Developer <b/> <br /> <br /> <br />
     <a href="https://worldpece.org/users/renato-vasconcellos-gomes">
-=======
-    <td align="center" valign= "top"><a href="https://worldpece.org/users/renato-vasconcellos-gomes">
->>>>>>> parent of a0753f23 (Update README.md)
     <img src="https://drive.google.com/thumbnail?id=1pSo8S6b7w-Tm2FJH8rPLVD4SJfI_Dtty" width="100px;" alt=""/> <br />
     <b>Renato Gomes</b>
     </a> <br />
@@ -81,11 +78,7 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Mentoring">🧑‍🏫</a>
     <a href="#contributors" title="Research">🔬</a>  
     <a href="#contributors" title="Talks">📢</a>  </td>
-<<<<<<< HEAD
     <td align="center" valign= "top"> <b> Research Director <b/> <br /> <br /> <br /> <a href="https://worldpece.org/users/mikefortun">
-=======
-    <td align="center" valign= "top"><a href="https://worldpece.org/users/mikefortun">
->>>>>>> parent of a0753f23 (Update README.md)
     <img src="https://drive.google.com/thumbnail?id=1mnGhj1mC7UuUaOf3iP85SGECcJIPteTS" width="100px;" alt=""/> <br />
     <b>Mike Fortun</b>
     </a> <br />
@@ -117,7 +110,7 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Tutorials">✅</a>
     <a href="#contributors" title="User Testing">📓</a>
     <a href="#contributors" title="Videos">📹</a>   </td>
-    <td align="center" valign= "top"><a href="https://worldpece.org/content/brian-callahan">
+    <td align="center" valign= "top"> <b> Lead Open Knowledge <br /> Developer & System Admin <b/> <br /> <a href="https://worldpece.org/content/brian-callahan">
     <img src="https://drive.google.com/thumbnail?id=1FQvLlelTR2I1FGO2PJPhrkaGF2riFuja" width="100px;" alt=""/> <br />
     <b>Brian Callahan</b>
     </a> <br />
@@ -142,7 +135,7 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Videos">📹</a>   </td>
     </tr>
     <tr>
-    <td align="center" valign= "top"><a href="https://worldpece.org/users/lina-franken">
+    <td align="center" valign= "top"> <b> Design Team Member <b> <br /> <br /> <a href="https://worldpece.org/users/lina-franken">
     <img src="https://drive.google.com/thumbnail?id=1VPS4-GlQKr_nMh7-2v_SSxHX9cXslpYe" width="100px;" alt=""/> <br />
     <b>Lina Franken</b>
     </a> <br />
@@ -151,11 +144,11 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Documentation">📖</a>  
     <a href="#contributors" title="Ideas and Planning">🤔</a>
     <a href="#contributors" title="Research">🔬</a> </td>
-    <td align="center" valign= "top"><a href="https://worldpece.org/users/tim-schütz">
+    <td align="center" valign= "top"> <b> Outreach Coordinator <b> <br /> <br />  <a href="https://worldpece.org/users/tim-schütz">
     <img src="https://drive.google.com/thumbnail?id=1t4pwwl0f9DCzBmn5MofT8srM6ZPeuFMf" width="100px;" alt=""/> <br />
     <b>Tim Schütz</b>
     </a> <br />
-    <a href="#contributors" title="Audio"> 🔊</a>  
+    <a href="#contributors" title="Audio"> 🔊</a>  x`
     <a href="#contributors" title="Bug Reports">🐛</a>
     <a href="#contributors" title="Blogposts"> 📝</a>  
     <a href="#contributors" title="Content"> 🖋</a>
@@ -172,7 +165,7 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Talks"> 📢</a> <br />
     <a href="#contributors" title="Videos">📹</a>
     <a href="#contributors" title="Community Outreach">🗣</>   </td>
-    <td align="center" valign= "top"><a href="https://worldpece.org/content/james-adams">
+    <td align="center" valign= "top"> <b> Platform Director, <br /> UCI Center for Ethnography <b/> <br /> <a href="https://worldpece.org/content/james-adams">
     <img src="https://drive.google.com/thumbnail?id=1G42OFg8S1I4P9UoJx0J2Ye0xGMDfTJ2z" width="100px;" alt=""/> <br />
     <b>James Adams</b>
     </a> <br />
@@ -190,7 +183,7 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Talks"> 📢</a>
     <a href="#contributors" title="User Testing">📓</a>
     <a href="#contributors" title="Videos">📹</a>   </td>
-    <td align="center" valign= "top"><a href="https://worldpece.org/users/angela-okune">
+    <td align="center" valign= "top"> <b> Community Manager <b/> <br /> <br /> <a href="https://worldpece.org/users/angela-okune">
     <img src="https://drive.google.com/thumbnail?id=1Brvr_051o6WbdCOyaD-5-_d5SrXyZ91t" width="100px;" alt=""/> <br />
     <b>Angela Okune</b>
     </a> <br />
@@ -203,7 +196,7 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Tutorials">✅</a>  
     <a href="#contributors" title="Talks"> 📢</a>
     <a href="#contributors" title="Videos">📹</a>   </td>
-    <td align="center" valign= "top"><a href="https://worldpece.org/users/lindsay-poirier">
+    <td align="center" valign= "top"> <b> Lead Platform Architect <b/> <br /> <br /> <a href="https://worldpece.org/users/lindsay-poirier">
     <img src="https://drive.google.com/thumbnail?id=11HDGZPSOkm8eeYY1fJm3PxzuN_9W5dSZ" width="100px;" alt=""/> <br />
     <b>Lindsay Poirier</b>
     </a> <br />
@@ -223,7 +216,7 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Talks"> 📢</a>  </td>
   </tr>
   <tr>
-  <td align="center" valign= "top"><a href="https://worldpece.org/content/brandon-costelloe-kuehn">
+  <td align="center" valign= "top"> <b> Design and Outreach <br /> Team Member <b/> <br /> <a href="https://worldpece.org/content/brandon-costelloe-kuehn">
   <img src="https://drive.google.com/thumbnail?id=1rPE6_3DCYkdC_ykMwdswH5JmIbbQUjIc" width="100px;" alt=""/> <br />
   <b>Brandon <br /> Costelloe-Kuehn</b>
   </a> <br />
