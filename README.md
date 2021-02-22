@@ -110,7 +110,7 @@ If you’d like to include a DOI for the project, you can create a release of th
     <a href="#contributors" title="Tutorials">✅</a>
     <a href="#contributors" title="User Testing">📓</a>
     <a href="#contributors" title="Videos">📹</a>   </td>
-    <td align="center" valign= "top"> <b> Lead Open Knowledge Developer & System Admin <b/> <br /> <a href="https://worldpece.org/content/brian-callahan">
+    <td align="center" valign= "top"> <b> Lead Open Knowledge <br/> Developer & System Admin <b/> <br /> <a href="https://worldpece.org/content/brian-callahan">
     <img src="https://drive.google.com/thumbnail?id=1FQvLlelTR2I1FGO2PJPhrkaGF2riFuja" width="100px;" alt=""/> <br />
     <b>Brian Callahan</b>
     </a> <br />
