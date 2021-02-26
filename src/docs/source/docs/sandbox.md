@@ -26,4 +26,4 @@ This file is for practicing updates to the PECE Docs.
 - I like the [installation page](../installation) on PECE docs.
 - [I](#farhat-bin-aznan) was referred to this page to update the README.
 
-![](media/farhat-bin-aznan.png#farhat)
+![](media/farhat-bin-aznan.png#farhat-headshot)
