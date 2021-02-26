@@ -5,11 +5,11 @@
 2. [Cite As](#cite)
 3. [Contributors](#contributors)
 4. [How to Access/Download/Install](#install)
-5. [How to Provide Feedback](#feedback)
-6. [Licensing](#licensing)
-7. [Questions](#questions)
-8. [How to Contribute](#contribute)
-9. [Dependencies](#dependencies)
+5. [Dependencies](#dependencies)
+6. [How to Provide Feedback](#feedback)
+7. [Licensing](#licensing)
+8. [Questions](#questions)
+
 
 
 
@@ -29,7 +29,6 @@ This repository holds the packaged distribution for PECE adopters. It contains t
 
 [![DOI](https://zenodo.org/badge/52763688.svg)](https://zenodo.org/badge/latestdoi/52763688)
 
-If you’d like to include a DOI for the project, you can create a release of the GitHub repo and then archive the release on Zenodo. Zenodo will assign a DOI to the release, which you can include in the citation.
 Zenodo will assign a DOI to the release, which you can include in the citation.
 
 <div id='contributors'/>
@@ -287,8 +286,6 @@ Alternatively, you can obtain the source code and build the distro yourself if y
 ```
 git clone https://github.com/PECE-project/drupal-pece.git
 ```
-If you are a developer who wants to contribute to PECE, you will need to follow special instructions to install and configure the tools for building the distro. Consult the sub-section Setting up the Development Environment below for more information.
-
 
 ### Quick Install
 If you have the server backend already set-up, you can quickly install PECE following these steps:
@@ -309,7 +306,25 @@ Proceed to the URL in which your Drupal will reside, i.e. https://worldpece.org.
 
 One important note: please, make sure to set the permissions on the filesystem properly. We cannot emphasize this enough. The official Drupal documentation explains how to do so, if you have questions. (In our experience, we have needed to set the file permissions at sites/default/files/artifacts to 770 and sites/default/files/private to 770.)
 
+<div id='dependencies'/>
 
+## Dependencies
+
+In addition to the [basic Drupal system requirements](https://www.drupal.org/requirements), you will need these extra libraries:
+
+- php5-mcrypt
+- php5-curl
+- php-ssh2
+- pecl-yaml (for YAML parsing)
+
+Even though these are not hard dependencies, we highly recommend running your PECE site with following set-up for better security and performance:
+
+- nginx
+- php (>= 5.5)
+- php5-fpm
+- drush (>= 5.x)
+- any *nix OS of your choice
+- cURL
 
 <div id='feedback'/>
 
@@ -331,39 +346,3 @@ All the software code written for PECE is released under the GNU GPL version 3. 
 ## Questions
 
 For any inquiries, send an email to pece.tech.team@gmail.com
-
-
-
-<div id='contribute'/>
-
-## How to Contribute
-
-Bug and feature requests for this project are documented in this repo’s [issues queue](https://github.com/PECE-project/drupal-pece). You can contribute to the project by writing code to fix issues or to create new features. When contributing code, please be sure to:
-- Fork this repository.
-- Modify the code (changing only one thing at a time), and then issue a pull request for each change.
-- Follow the project's coding style (using K&R-style indentation and bracketing, commenting above each feature, and using snake case for variables). [Feel free to swap out with specific conventions]
-- Test your code locally before issuing a pull request.
-- Clearly state the purpose of your change in the description field for each commit.
-
-
-
-
-<div id='dependencies'/>
-
-## Dependencies
-
-In addition to the [basic Drupal system requirements](https://www.drupal.org/requirements), you will need these extra libraries:
-
-- php5-mcrypt
-- php5-curl
-- php-ssh2
-- pecl-yaml (for YAML parsing)
-
-Even though these are not hard dependencies, we highly recommend running your PECE site with following set-up for better security and performance:
-
-- nginx
-- php (>= 5.5)
-- php5-fpm
-- drush (>= 5.x)
-- any *nix OS of your choice
-- cURL
