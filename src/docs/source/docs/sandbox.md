@@ -8,7 +8,7 @@ This file is for practicing updates to the PECE Docs.
 3. Write a sentence that tells us something about someone else on this page and provides a relative link to the header with their name.
 4. Make each of these sentences bullets.
 5. Add a headshot below the two bullets, by adding a .png image with a descriptive file name to the media folder and then linking to it below the bullets.
-6. Save this file. 
+6. Save this file.
 
 ### Lindsay Poirier
 
@@ -21,3 +21,8 @@ This file is for practicing updates to the PECE Docs.
 
 - My favorite page on pece-docs is [this one](../artifacts).
 - [Lindsay Poirier](#lindsay-poirier) wrote this assignment.
+
+### Hipolito Angel Cerros
+
+- My favorite page on pece-docs is [this one] (../)
+-
