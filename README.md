@@ -30,6 +30,7 @@ This repository holds the packaged distribution for PECE adopters. It contains t
 [![DOI](https://zenodo.org/badge/52763688.svg)](https://zenodo.org/badge/latestdoi/52763688)
 
 If you’d like to include a DOI for the project, you can create a release of the GitHub repo and then archive the release on Zenodo. Zenodo will assign a DOI to the release, which you can include in the citation.
+Zenodo will assign a DOI to the release, which you can include in the citation.
 
 <div id='contributors'/>
 
