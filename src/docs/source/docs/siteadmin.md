@@ -60,6 +60,7 @@ Enter the translated word/sentence on the text box under the language name and c
      
 [Demo video](https://www.loom.com/share/78f37a4b01674e199130be89728a74ec)
 
-#### How do I add images to fron page Slideshow? 
+How do I add images to front page Slideshow?
+---------------------------------------------
 
  
