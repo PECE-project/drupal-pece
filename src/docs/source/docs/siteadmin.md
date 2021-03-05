@@ -64,20 +64,20 @@ Enter the translated word/sentence on the text box under the language name and c
 
 How do I add images to front page Slideshow?
 ---------------------------------------------
-[video tutorial can be found here](https://www.loom.com/share/5b003ad3d2a248b0965ab3f842aac7e1)
+[Demo video](https://www.loom.com/share/5b003ad3d2a248b0965ab3f842aac7e1)
 
 How to update site name
 ------------------------
-[Video tutorial can be found here](https://www.loom.com/share/97f17fc9b4f7452989f9216b8f893dd8)
+[Demo Video](https://www.loom.com/share/97f17fc9b4f7452989f9216b8f893dd8)
 
 How to restore PECE default About page and its link if missing from main menu?
 ------------------------------------------------------------------------------
-[video tutorial can be found here](https://www.loom.com/share/94ff754320694aeead385cf811771d32)
+[Demo Video](https://www.loom.com/share/94ff754320694aeead385cf811771d32)
 
 How to download language pack and translate missing words/sentences? 
 --------------------------------------------------------------------
 - Shows steps to add other languages to system interface and how to translate missing sentences from a given language pack. Step by step to add Brazilian Portugese and German languages to a demo PECE instalation.
-[video tutorial can be found here](https://www.loom.com/share/78f37a4b01674e199130be89728a74ec)
+[Demo Video](https://www.loom.com/share/78f37a4b01674e199130be89728a74ec)
 
 
 
