@@ -62,5 +62,6 @@ Enter the translated word/sentence on the text box under the language name and c
 
 How do I add images to front page Slideshow?
 ---------------------------------------------
+[video tutorial can be found here](https://www.loom.com/share/5b003ad3d2a248b0965ab3f842aac7e1)
 
  
