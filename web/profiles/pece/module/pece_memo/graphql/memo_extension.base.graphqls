@@ -1,0 +1,27 @@
+type PeceMemo implements NodeInterface {
+  id: Int!
+  title: String!
+  uuid: String!
+  body: String
+  tags: [MemoTags]
+  contributors: [User]
+  author: User
+  created: String
+}
+
+type PeceMemoConnection {
+  total: Int!
+  items: [PeceMemo!]
+}
+
+input MemoInput {
+  title: String!
+  body: String
+  tags: [Int]
+}
+
+type MemoTags {
+  id: Int!
+  title: String
+  type: String
+}

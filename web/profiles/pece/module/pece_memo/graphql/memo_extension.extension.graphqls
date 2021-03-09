@@ -1,0 +1,15 @@
+extend type Query {
+  peceMemos (
+    offset: Int = 0
+    limit: Int = 10
+    filters: [Filter] = []
+  ): PeceMemoConnection!
+
+  peceMemo (id: Int!) : PeceMemo
+}
+
+extend type Mutation {
+  createPeceMemo(data: MemoInput):PeceMemo
+  deletePeceMemo(id: Int): PeceMemo
+  updatePeceMemo(id:Int, data: MemoInput): PeceMemo
+}
