@@ -1,0 +1,40 @@
+uuid: 892542f3-95d4-41ee-be70-cc77449162c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_memo.body
+    - field.field.node.pece_memo.field_pece_contributors
+    - field.field.node.pece_memo.field_pece_tags
+    - field.field.node.pece_memo.field_pece_uri
+    - field.field.node.pece_memo.field_permissions
+    - node.type.pece_memo
+  module:
+    - text
+    - user
+id: node.pece_memo.teaser
+targetEntityType: node
+bundle: pece_memo
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_pece_contributors: true
+  field_pece_tags: true
+  field_pece_uri: true
+  field_permissions: true
+  langcode: true
+  search_api_excerpt: true

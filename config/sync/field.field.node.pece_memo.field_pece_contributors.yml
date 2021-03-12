@@ -1,0 +1,23 @@
+uuid: 0cfda591-1d78-440b-8b0a-9a0e07fbe441
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_contributors
+    - node.type.pece_memo
+id: node.pece_memo.field_pece_contributors
+field_name: field_pece_contributors
+entity_type: node
+bundle: pece_memo
+label: Contributors
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:entity_view_display'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference
