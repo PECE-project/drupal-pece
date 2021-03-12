@@ -1,0 +1,62 @@
+uuid: f6a90abb-acee-4c6f-8cf5-1c70b6f3f2cf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_memo.body
+    - field.field.node.pece_memo.field_pece_contributors
+    - field.field.node.pece_memo.field_pece_tags
+    - field.field.node.pece_memo.field_pece_uri
+    - field.field.node.pece_memo.field_permissions
+    - node.type.pece_memo
+  module:
+    - options
+    - text
+    - user
+id: node.pece_memo.default
+targetEntityType: node
+bundle: pece_memo
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_pece_contributors:
+    weight: 2
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_pece_tags:
+    weight: 4
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_pece_uri:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_permissions:
+    weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+hidden:
+  langcode: true
+  links: true
+  search_api_excerpt: true

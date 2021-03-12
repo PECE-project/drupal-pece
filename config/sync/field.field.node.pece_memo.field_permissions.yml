@@ -1,0 +1,23 @@
+uuid: 5fe59dd5-f30e-4dbb-8fe7-f717f35455c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_permissions
+    - node.type.pece_memo
+  module:
+    - options
+id: node.pece_memo.field_permissions
+field_name: field_permissions
+entity_type: node
+bundle: pece_memo
+label: Permissions
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: open
+default_value_callback: ''
+settings: {  }
+field_type: list_string
