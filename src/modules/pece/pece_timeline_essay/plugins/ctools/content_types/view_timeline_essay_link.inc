@@ -61,7 +61,7 @@ function pece_timeline_essay_view_essay_link_pane_render($subtype, $conf, $args,
   $block = new stdClass();
   $node = $context->data;
   $path = "node/{$node->nid}" . ($conf['destination'] === 'essay' ? '/timeline' : '');
-  $text = $conf['destination'] === 'essay' ? t('View Essay') : t('Return to Essay Metadata');
+  $text = $conf['destination'] === 'essay' ? t('View Essay') : t('Return to Timeline Essay Landing Page');
   $path_alias = drupal_get_path_alias($path);
 
   $block->content = array(
