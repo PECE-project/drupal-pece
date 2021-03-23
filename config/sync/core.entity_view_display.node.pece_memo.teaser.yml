@@ -5,6 +5,9 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_memo.body
+    - field.field.node.pece_memo.field_pbc_ref_group
+    - field.field.node.pece_memo.field_pbc_ref_role
+    - field.field.node.pece_memo.field_pbc_ref_user
     - field.field.node.pece_memo.field_pece_contributors
     - field.field.node.pece_memo.field_pece_tags
     - field.field.node.pece_memo.field_pece_uri
@@ -32,6 +35,9 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
   field_pece_contributors: true
   field_pece_tags: true
   field_pece_uri: true
