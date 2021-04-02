@@ -594,6 +594,15 @@ function pece_ark_extra_field_render_array($field_name, $node) {
 }
 
 /**
+ * Implements hook_ctools_plugin_directory().
+ */
+function pece_ark_ctools_plugin_directory($module, $plugin) {
+  if ($module === 'ctools' && $plugin === 'content_types') {
+    return 'plugins/' . $plugin;
+  }
+}
+
+/**
  * Constructs a descriptive page.
  *
  * Our menu maps this function to the path 'examples/page_example'.

@@ -44,7 +44,7 @@ function _citation_render($node) {
   $block = new stdClass();
   $ark_link = _citation_get_ark_link($node);
   // Define creators
-  $creator = pece_get_fullname_or_name($node->uid);
+  $creator = pece_get_fullname_or_name(user_load($node->uid));
   $contributors = isset($node->field_pece_contributors[LANGUAGE_NONE]) ? $node->field_pece_contributors[LANGUAGE_NONE] : array();
   $creator = _citation_create_many_names($contributors, $creator);
 
@@ -75,13 +75,21 @@ function _artifact_citation_render($node) {
   $block = new stdClass();
   $ark_link = _citation_get_ark_link($node);
   // Define contributor
-  $contributor = pece_get_fullname_or_name($node->uid);
+  $contributor = '';
+  // Define creators
+  $creators = isset($node->field_pece_authors[LANGUAGE_NONE]) ? $node->field_pece_authors[LANGUAGE_NONE] : array();
+
+  if (count($creators)) {
+    $creators = _citation_create_many_names_authors($creators);
+    $contributor = pece_get_fullname_or_name(user_load($node->uid));
+  }
+  else {
+    $creators = pece_get_fullname_or_name(user_load($node->uid));
+  }
+
   $contributors = isset($node->field_pece_contributors[LANGUAGE_NONE]) ? $node->field_pece_contributors[LANGUAGE_NONE] : array();
   $contributors = _citation_create_many_names($contributors, $contributor);
 
-  // Define creators
-  $creators = isset($node->field_pece_authors[LANGUAGE_NONE]) ? $node->field_pece_authors[LANGUAGE_NONE] : array();
-  $creators = _citation_create_many_names_authors($creators);
 
   $block->content = array(
     'citation' => array(
@@ -90,7 +98,6 @@ function _artifact_citation_render($node) {
       '#value' => t('@creator, "@title", @dateCreate, contributed by @contributors, last modified @changed, accessed @accessed, @siteName, Platform for Experimental Collaborative Ethnography@ark', array(
         '@creator' => $creators,
         '@title' => $node->title,
-       // '@dateCreate' => format_date($node->field_pece_created[LANGUAGE_NONE][0], 'custom', 'j F Y'),
         '@dateCreate' => format_date($node->changed, 'custom', 'j F Y'),
         '@contributors' => $contributors,
         '@siteName' => variable_get('site_name'),
@@ -130,12 +137,14 @@ function _citation_get_ark_link($node) {
 function _citation_create_many_names($user_list, $names = '') {
   for ($cont = 0; $cont < count($user_list); $cont++) {
     // Test if use 'and' or ',' to separate creators.
-    if ($cont + 1 == count($user_list))
-      $names .= ' and ';
-    elseif ($names != '')
-      $names .= ', ';
+    if ($names != '') {
+      if ($cont + 1 == count($user_list))
+        $names .= ' and ';
+      elseif ($names != '')
+        $names .= ', ';
+    }
 
-    $names .= pece_get_fullname_or_name($user_list[$cont]['target_id']);
+    $names .= pece_get_fullname_or_name(user_load($user_list[$cont]['target_id']));
   }
   return $names;
 }
