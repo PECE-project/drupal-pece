@@ -30,11 +30,11 @@ Step-by-step
 <ol> <!-- Step 1 -->
 <li> Begin by logging into the PECE platform and navigating to your Dashboard. </li>
 
-![](media/photo_essay_1.png)
+<img src= media/photo_essay_1.png>
 
 <li> Click “Photo Essay” </li> <!-- Step 2 -->
 
-![](media/photo_essay_2.png)
+<img src= media/photo_essay_2.png>
 
 <li> You should now have access to all of the fields you need to fill out in order to create a new Photo Essay.
 <ul>
@@ -42,7 +42,8 @@ Step-by-step
   <li> Next, write out your project description in the “Description” section. </li>
 </ul> </li>
 
-![](media/photo_essay_3.png)
+<img src= media/photo_essay_3.png>
+
 
 <li> Next Choose a “thumbnail” image to represent your essay.
 <ul>
@@ -63,12 +64,12 @@ Step-by-step
 </ul> </li>
 
 
-![](media/photo_essay_4.png)
+<img src= media/photo_essay_4.png>
 
 
 <li> Once this artifact is added, click “Add New Item.” Repeat Step 5 for your remaining Image Artifacts. </li>
 
-![](media/photo_essay_5.png)
+<img src= media/photo_essay_5.png>
 
 <li> If you would like this essay to appear in a group, be sure to select the Group Audience.
 <ul>
@@ -79,14 +80,14 @@ Step-by-step
 
 <li> Select a license for the content. (See [licensing](../licensing) for more information) </li>
 
-![](media/photo_essay_6.png)
+<img src= media/photo_essay_6.png>
 
 <li> Next, add yourself as a contributor by typing the first few letters of your name into the “contributor” field. Your screen name should pop up. Select your name.
 <ul>
   <li> Repeat this process with the names of any other group members who you would like to grant access to editing the image or caption. </li>
 </ul> </li>
 
-![](media/photo_essay_7.png)
+<img src= media/photo_essay_7.png>
 
 <li> Tag the Essay with any tags that you find appropriate.
  <br> If the essay is not ready to be made public, you can alter the permissions of the image. </br>
@@ -98,7 +99,7 @@ Step-by-step
 
 <li> Finally, scroll back up to the top of the page and click “Save” to save your work. </li>
 
-![](media/photo_essay_8.png)
+<img src= media/photo_essay_8.png>
 
 </ol>
 
