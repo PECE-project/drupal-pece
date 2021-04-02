@@ -12,7 +12,7 @@ drush:
 	docker exec $(shell docker-compose ps | grep _dev_ | cut -d" " -f 1) bash -c 'cd build && drush $(argument)'
 
 up:
-	docker-compose -f docker-compose.yml up -d
+	docker-compose up -d
 
 stop:
 	docker-compose stop
