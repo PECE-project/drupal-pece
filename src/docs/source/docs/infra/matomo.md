@@ -34,7 +34,8 @@
 2) Go to /admin/config/system/matomo in your PECE instance
 
 3) Enable the modules: Matomo Analytics and Matomo Noscript
-   ![](../media/matomo-modules.png)
+   
+  ![](../media/matomo-modules.png)
 
 4) Go to /admin/config/system/matomo to start settings
 
@@ -42,4 +43,3 @@
    
    ![](../media/matomo-site-id.gif)
 
-6) 
