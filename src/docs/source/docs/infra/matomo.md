@@ -12,7 +12,7 @@
 
 ## Install Matomo
 
-1) Update variables in `./docker/matomo/matomo.env`. It's very important you change the passwords.
+1) Copy `./docker/matomo/matomo.example.env` to `./docker/matomo/matomo.env` and update variables. It's very important you change the passwords.
    
    ![](../media/matomo-variables.png)
    
