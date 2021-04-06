@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+  matomodb:
+    image: mariadb
+    command: --max-allowed-packet=64MB
+    restart: always
+    networks:
+      pecev1:
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+    env_file:
+      - ./matomo.env
+    volumes:
+      - ./database/motomo:/var/lib/mysql
+
+  matomo:
+    image: matomo
+    restart: always
+    networks:
+      pecev1:
+        aliases:
+          - ${MATOMO_BASE_URL}
+    volumes:
+      #      - ./config:/var/www/html/config:rw
+      #      - ./logs:/var/www/html/logs
+      - matomo:/var/www/html
+    environment:
+      - MATOMO_DATABASE_HOST=matomodb
+    env_file:
+      - ./matomo.env
+    labels:
+      - "traefik.http.routers.matomo.rule=Host(`${MATOMO_BASE_URL}`)"
+
+networks:
+  pecev1:
+    external:
+      name: pecev1
+
+volumes:
+  matomo:
