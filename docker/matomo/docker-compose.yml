@@ -12,7 +12,7 @@ services:
     env_file:
       - ./matomo.env
     volumes:
-      - ./database/motomo:/var/lib/mysql
+      - ./database/matomo:/var/lib/mysql
 
   matomo:
     image: matomo
