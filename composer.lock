@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "262d2041add0d2ae2f4661bbf0e81dd8",
+    "content-hash": "bbfe6ec7ce0a9a06b83a519306b46856",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -172,12 +172,12 @@
             "version": "v1.4.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/clue/php-stream-filter.git",
+                "url": "https://github.com/clue/stream-filter.git",
                 "reference": "5a58cc30a8bd6a4eb8f856adf61dd3e013f53f71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clue/php-stream-filter/zipball/5a58cc30a8bd6a4eb8f856adf61dd3e013f53f71",
+                "url": "https://api.github.com/repos/clue/stream-filter/zipball/5a58cc30a8bd6a4eb8f856adf61dd3e013f53f71",
                 "reference": "5a58cc30a8bd6a4eb8f856adf61dd3e013f53f71",
                 "shasum": ""
             },
@@ -1749,6 +1749,7 @@
                 "reflection",
                 "static"
             ],
+            "abandoned": "roave/better-reflection",
             "time": "2020-03-27T11:06:43+00:00"
         },
         {
@@ -3917,6 +3918,63 @@
             "time": "2020-04-28T07:13:29+00:00"
         },
         {
+            "name": "drupal/matomo",
+            "version": "1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/matomo.git",
+                "reference": "8.x-1.11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/matomo-8.x-1.11.zip",
+                "reference": "8.x-1.11",
+                "shasum": "82be96c20ab15df03d199ab98d047cef6e67d40b"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "require-dev": {
+                "drupal/php": "*",
+                "drupal/token": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.11",
+                    "datestamp": "1601651459",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Carsten Logemann",
+                    "homepage": "https://www.drupal.org/u/C_Logemann"
+                },
+                {
+                    "name": "Shelane French",
+                    "homepage": "https://www.drupal.org/u/shelane"
+                },
+                {
+                    "name": "See other contributors",
+                    "homepage": "https://www.drupal.org/node/247808/committers"
+                }
+            ],
+            "description": "Adds Matomo javascript tracking code to all your site's pages",
+            "homepage": "https://www.drupal.org/project/matomo",
+            "support": {
+                "source": "https://git.drupal.org/project/matomo.git",
+                "issues": "https://www.drupal.org/project/issues/matomo"
+            }
+        },
+        {
             "name": "drupal/media_entity_browser",
             "version": "2.0.0-alpha3",
             "source": {
@@ -4318,6 +4376,50 @@
                 "source": "https://cgit.drupalcode.org/pathauto",
                 "issues": "https://www.drupal.org/project/issues/pathauto",
                 "documentation": "https://www.drupal.org/docs/8/modules/pathauto"
+            }
+        },
+        {
+            "name": "drupal/piwik_noscript",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/piwik_noscript.git",
+                "reference": "8.x-1.5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/piwik_noscript-8.x-1.5.zip",
+                "reference": "8.x-1.5",
+                "shasum": "8c7c87ceba9f67d0fba61f8a1cd8f6d2d0c47eca"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.5",
+                    "datestamp": "1615098538",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "mfb",
+                    "homepage": "https://www.drupal.org/user/12302"
+                }
+            ],
+            "description": "Adds Matomo noscript tracking code to all your site's pages.",
+            "homepage": "https://www.drupal.org/project/piwik_noscript",
+            "support": {
+                "source": "https://git.drupalcode.org/project/piwik_noscript"
             }
         },
         {
@@ -6188,12 +6290,7 @@
                 "url": "https://github.com/nyxtechnology/rest_password.git",
                 "reference": "8.x"
             },
-            "type": "drupal-module",
-            "extra": {
-                "patches_applied": {
-                    "3148632 - Automated Drupal 9 compatibility fixes": "https://www.drupal.org/files/issues/2020-06-06/rest_password.1.6.rector.patch"
-                }
-            }
+            "type": "drupal-module"
         },
         {
             "name": "paragonie/random_compat",
@@ -10280,12 +10377,12 @@
             "version": "1.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "shasum": ""
             },
