@@ -14,7 +14,7 @@
 
 1) Update variables in `./docker/matomo/matomo.env`. It's very important you change the passwords.
    
-   ![](/home/edmar/projetos/pece/d7-drupal-pece/src/docs/assets/matomo-variables.png)
+   ![](../media/matomo-variables.png)
    
    `MATOMO_BASE_URL` is the domain to access the Matomo, for example: analytics.yourdomain.com
 
@@ -34,12 +34,12 @@
 2) Go to /admin/config/system/matomo in your PECE instance
 
 3) Enable the modules: Matomo Analytics and Matomo Noscript
-   ![](/home/edmar/projetos/pece/d7-drupal-pece/src/docs/assets/matomo-modules.png)
+   ![](../media/matomo-modules.png)
 
 4) Go to /admin/config/system/matomo to start settings
 
 5) Matomo Site ID is your id website in the Matomo
    
-   ![](/home/edmar/projetos/pece/d7-drupal-pece/src/docs/assets/matomo-site-id.gif)
+   ![](../media/matomo-site-id.gif)
 
 6) 
