@@ -46,13 +46,20 @@ function _citation_render($node) {
   $creator = pece_get_fullname_or_name(user_load($node->uid));
   $contributors = isset($node->field_pece_contributors[LANGUAGE_NONE]) ? $node->field_pece_contributors[LANGUAGE_NONE] : array();
   $creator = _citation_create_many_names($contributors, $creator);
+  $projectId = isset($node->field_pece_project_ref[LANGUAGE_NONE]) ? $node->field_pece_project_ref[LANGUAGE_NONE][0]['target_id'] : null;
+  $projectName = '';
+  if ($projectId) {
+    $projectName = node_load($projectId);
+    $projectName = $projectName->title . ',';
+  }
 
   $block->content = array(
     'citation' => array(
       '#theme' => 'html_tag',
       '#tag' => 'p',
-      '#value' => t('@creator. @dateCreated, "@title", <i>@siteName, Platform for Experimental Collaborative Ethnography<i>, last modified @changed, accessed @accessed@ark', array(
+      '#value' => t('@creator. @dateCreated, "@title", <i>@projectName @siteName, Platform for Experimental Collaborative Ethnography<i>, last modified @changed, accessed @accessed@ark', array(
         '@creator' => $creator,
+        '@projectName' => $projectName,
         '@dateCreated' => format_date($node->created, 'custom', 'j F Y'),
         '@title' => $node->title,
         '@siteName' => variable_get('site_name'),
@@ -91,13 +98,20 @@ function _artifact_citation_render($node) {
   $contributors = _citation_create_many_names($contributors, $contributor);
 
   $dateCreated =  isset($node->field_pece_created[LANGUAGE_NONE]) ? date('j F Y', strtotime($node->field_pece_created[LANGUAGE_NONE][0]['value'])) . ',' : '';
+  $projectId = isset($node->field_pece_project_ref[LANGUAGE_NONE]) ? $node->field_pece_project_ref[LANGUAGE_NONE][0]['target_id'] : null;
+  $projectName = '';
+  if ($projectId) {
+    $projectName = node_load($projectId);
+    $projectName = $projectName->title . ',';
+  }
 
   $block->content = array(
     'citation' => array(
       '#theme' => 'html_tag',
       '#tag' => 'p',
-      '#value' => t('@creator, @dateCreated "@title", contributed by @contributors, <i>@siteName, Platform for Experimental Collaborative Ethnography</i>, last modified @changed, accessed @accessed@ark', array(
+      '#value' => t('@creator, @dateCreated "@title", contributed by @contributors, <i>@projectName @siteName, Platform for Experimental Collaborative Ethnography</i>, last modified @changed, accessed @accessed@ark', array(
         '@creator' => $creators,
+        '@projectName' => $projectName,
         '@title' => $node->title,
         '@dateCreated' => $dateCreated,
         '@contributors' => $contributors,
