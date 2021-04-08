@@ -136,13 +136,13 @@ function pece_artifacts_video_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'locations' => array(
-          'weight' => '19',
+          'weight' => '20',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '18',
+          'weight' => '19',
         ),
       ),
       'display' => array(),
