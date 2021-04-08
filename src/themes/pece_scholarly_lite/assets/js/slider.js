@@ -10,8 +10,9 @@ var defaults = {
   adaptiveHeight: true,
   autoplay: true,
   autoplaySpeed: 5000,
-  arrows: false,
-  speed: 700
+  arrows: true,
+  speed: 700,
+  dots: true
 };
 
 Drupal.behaviors.peceSlider = {
