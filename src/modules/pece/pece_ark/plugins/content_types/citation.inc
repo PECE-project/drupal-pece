@@ -25,7 +25,6 @@ function pece_ark_citation_pane_edit_form_submit(&$form, &$form_state) {
   return $form;
 }
 
-
 /**
  * Run-time rendering of the body of the block (content type)
  * See ctools_plugin_examples for more advanced info
@@ -52,8 +51,9 @@ function _citation_render($node) {
     'citation' => array(
       '#theme' => 'html_tag',
       '#tag' => 'p',
-      '#value' => t('@creator. "@title", @siteName, Platform for Experimental Collaborative Ethnography, last modified @changed, accessed @accessed@ark', array(
+      '#value' => t('@creator. @dateCreated, "@title", <i>@siteName, Platform for Experimental Collaborative Ethnography<i>, last modified @changed, accessed @accessed@ark', array(
         '@creator' => $creator,
+        '@dateCreated' => format_date($node->created, 'custom', 'j F Y'),
         '@title' => $node->title,
         '@siteName' => variable_get('site_name'),
         '@ark' => $ark_link,
@@ -90,15 +90,16 @@ function _artifact_citation_render($node) {
   $contributors = isset($node->field_pece_contributors[LANGUAGE_NONE]) ? $node->field_pece_contributors[LANGUAGE_NONE] : array();
   $contributors = _citation_create_many_names($contributors, $contributor);
 
+  $dateCreated =  isset($node->field_pece_created[LANGUAGE_NONE]) ? date('j F Y', strtotime($node->field_pece_created[LANGUAGE_NONE][0]['value'])) . ',' : '';
 
   $block->content = array(
     'citation' => array(
       '#theme' => 'html_tag',
       '#tag' => 'p',
-      '#value' => t('@creator, "@title", @dateCreate, contributed by @contributors, last modified @changed, accessed @accessed, @siteName, Platform for Experimental Collaborative Ethnography@ark', array(
+      '#value' => t('@creator, @dateCreated "@title", contributed by @contributors, <i>@siteName, Platform for Experimental Collaborative Ethnography</i>, last modified @changed, accessed @accessed@ark', array(
         '@creator' => $creators,
         '@title' => $node->title,
-        '@dateCreate' => format_date($node->changed, 'custom', 'j F Y'),
+        '@dateCreated' => $dateCreated,
         '@contributors' => $contributors,
         '@siteName' => variable_get('site_name'),
         '@ark' => $ark_link,
