@@ -360,7 +360,7 @@ function pece_projects_field_default_field_bases() {
   // Exported field_base: 'field_pece_project_ref'.
   $field_bases['field_pece_project_ref'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_pece_project_ref',
@@ -375,12 +375,17 @@ function pece_projects_field_default_field_bases() {
       'handler' => 'base',
       'handler_settings' => array(
         'behaviors' => array(
+          'er_viewmode_behavior' => array(
+            'status' => 0,
+          ),
           'views-select-list' => array(
             'status' => 0,
           ),
         ),
         'sort' => array(
-          'type' => 'none',
+          'direction' => 'ASC',
+          'property' => 'title',
+          'type' => 'property',
         ),
         'target_bundles' => array(
           'pece_project' => 'pece_project',
