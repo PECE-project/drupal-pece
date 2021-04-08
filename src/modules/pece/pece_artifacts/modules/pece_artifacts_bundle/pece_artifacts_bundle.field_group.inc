@@ -22,7 +22,7 @@ function pece_artifacts_bundle_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Group settings',
-    'weight' => '12',
+    'weight' => '13',
     'children' => array(
       0 => 'group_content_access',
       1 => 'og_group_ref',
