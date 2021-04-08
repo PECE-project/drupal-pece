@@ -49,7 +49,7 @@ function pece_artifacts_video_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Group settings',
-    'weight' => '16',
+    'weight' => '17',
     'children' => array(
       0 => 'group_content_access',
       1 => 'og_group_ref',
