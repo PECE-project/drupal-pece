@@ -28,76 +28,61 @@ For an overview of how to create photo essays, see [*this YouTube video*](https:
 Step-by-step
 
 1. Begin by logging into the PECE platform and navigating to your Dashboard.
-
-![](media/photo_essay_1.png)
+    ![](media/photo_essay_1.png)
 
 2. Click “Photo Essay”
 
-![](media/photo_essay_2.png)
+    ![](media/photo_essay_2.png)
 
 3. You should now have access to all of the fields you need to fill out in order to create a new Photo Essay.
-
-  * First, type the title in the “Title” pane.</li>
-  * Next, write out your project description in the “Description” section. </li>
-
-
-![](media/photo_essay_3.png)
+    * First, type the title in the “Title” pane.</li>
+    * Next, write out your project description in the “Description” section. </li>
+    ![](media/photo_essay_3.png)
 
 4. Next Choose a “thumbnail” image to represent your essay.
-
-  * You can edit this image later </li>
-  * Click “Next” to upload the image. Type in Alt Text and/or Title Text as desired (you can simply leave these blank), and click save. </li>
-
-
-  <br/>You are now ready to upload your image artifacts into your Photo Essay.
+    * You can edit this image later </li>
+    * Click “Next” to upload the image. Type in Alt Text and/or Title Text as desired (you can simply leave these blank), and click save. <br/> You are now ready to upload your image artifacts into your Photo Essay. </li>
 
 5. Begin by typing the title of the image artifact into the “Image Artifact” pane. Your Image Artifact should pop up as an option to select.
+    * Click on the title of your Image Artifact to select it. </li>
+    * Next, type in the “Substantive Caption” into the “Text” pane. </li>
+    * Click “Create Item”. </li>
 
-  *Click on the title of your Image Artifact to select it. </li>
-
-
-  <br/>Next, type in the “Substantive Caption” into the “Text” pane.
-
-  * Click “Create Item”. </li>
-
-
-
-![](media/photo_essay_4.png)
+    ![](media/photo_essay_4.png)
 
 
 6. Once this artifact is added, click “Add New Item.” Repeat Step 5 for your remaining Image Artifacts.
 
-![](media/photo_essay_5.png)
+    ![](media/photo_essay_5.png)
 
 7. If you would like this essay to appear in a group, be sure to select the Group Audience.
-
-  *Select “Public” to make it accessible to all viewers</li>
-  *Select “Private” to limit visibility to Group Members</li>
+    * Select “Public” to make it accessible to all viewers</li>
+    * Select “Private” to limit visibility to Group Members</li>
 
 
 
 8. Select a license for the content. (See [licensing](./licensing.md) for more information)
 
-![](media/photo_essay_6.png)
+    ![](media/photo_essay_6.png)
 
 9. Next, add yourself as a contributor by typing the first few letters of your name into the “contributor” field. Your screen name should pop up. Select your name.
 
-  * Repeat this process with the names of any other group members who you would like to grant access to editing the image or caption. </li>
+    * Repeat this process with the names of any other group members who you would like to grant access to editing the image or caption. </li>
 
 
-![](media/photo_essay_7.png)
+    ![](media/photo_essay_7.png)
 
 10. Tag the Essay with any tags that you find appropriate.
- <br> If the essay is not ready to be made public, you can alter the permissions of the image. </br>
+    <br> If the essay is not ready to be made public, you can alter the permissions of the image. </br>
 
-  * Select “Private” to limit visibility to yourself and other contributors.</li>
-  * Select “Restricted” to limit visibility to PECE users.</li>
-  * Select “Open” to make the essay visible to all internet users.</li>
+    * Select “Private” to limit visibility to yourself and other contributors.</li>
+    * Select “Restricted” to limit visibility to PECE users.</li>
+    * Select “Open” to make the essay visible to all internet users.</li>
 
 
 11. Finally, scroll back up to the top of the page and click “Save” to save your work.
 
-![](media/photo_essay_8.png)
+    ![](media/photo_essay_8.png)
 
 Congratulations! You’ve created your Photo Essay!
 
