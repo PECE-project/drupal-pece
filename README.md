@@ -194,7 +194,7 @@ Special thanks to our contributors \([emoji key](https://allcontributors.org/doc
     <a href="#contributors" title="Mentoring">🧑‍🏫</a>
     <a href="#contributors" title="Research">🔬</a>  
     <a href="#contributors" title="Talks">📢</a>  </td>
-    <td align="center" valign= "top"> <b> Platform Director, <br /> STS Infrastructures <b/> <br /> <br/ > <br />
+    <td align="center" valign= "top"> <b> Platform Director, <br /> STS Infrastructures <b/> <br /> <br/ >
     <a href="https://stsinfrastructures.org/users/aalok-khandekar">
     <img src="https://drive.google.com/thumbnail?id=1OmCM70i628ZfveCxuRAy5R1R_g_t7brq" width="100px;" alt=""/> <br />
     <b>Aalok Khandekar</b>
