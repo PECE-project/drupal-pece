@@ -789,8 +789,13 @@ function _ark_convert_data_to_human_readable($timestamp = null){
  * Implements hook_form_BASE_FORM_ID_alter().
  */
 function pece_ark_form_node_form_alter(&$form, &$form_state) {
+
+  if (!isset($form['field_ark_enabled']))
+    return;
+
   global $user;
-  if (isset($form['field_ark_enabled']) && !in_array('administrator', $user->roles)) {
+
+  if ($user->uid != 1 && (!in_array('administrator', $user->roles) || !in_array($form['#bundle'], variable_get('ark_node_types')))) {
     unset($form['field_ark_enabled']);
   }
 }

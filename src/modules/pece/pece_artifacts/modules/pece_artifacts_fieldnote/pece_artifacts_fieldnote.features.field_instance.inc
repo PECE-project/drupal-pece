@@ -108,6 +108,92 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-pece_artifact_fieldnote-field_ark_enabled'.
+  $field_instances['node-pece_artifact_fieldnote-field_ark_enabled'] = array(
+    'bundle' => 'pece_artifact_fieldnote',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 20,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'free_panel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'highlighted' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'meta_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'most_recent' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'nodeorder' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_ark_enabled',
+    'label' => 'ARK Enabled',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 19,
+    ),
+  );
+
   // Exported field_instance: 'node-pece_artifact_fieldnote-field_pece_authors'.
   $field_instances['node-pece_artifact_fieldnote-field_pece_authors'] = array(
     'bundle' => 'pece_artifact_fieldnote',
@@ -1603,6 +1689,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('ARK Enabled');
   t('Check this to copy the location from the referenced fieldsite, if any.');
   t('Cite as part of...');
   t('Contributors');
