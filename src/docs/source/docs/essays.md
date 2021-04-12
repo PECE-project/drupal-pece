@@ -77,6 +77,10 @@ Step-by-step
   <li>Select “Private” to limit visibility to Group Members</li>
 </ul> </li>
 
+<<<<<<< HEAD
+=======
+8. Select a license for the content. (See [licensing](./licensing.md) for more information)
+>>>>>>> parent of cc08f93d (Update essays.md)
 
 <li> Select a license for the content. (See [licensing](../licensing) for more information) </li>
 
