@@ -78,6 +78,10 @@ Step-by-step
 </ul> </li>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+8. Select a license for the content. (See [licensing](./licensing.md) for more information)
+>>>>>>> parent of cc08f93d (Update essays.md)
 =======
 8. Select a license for the content. (See [licensing](./licensing.md) for more information)
 >>>>>>> parent of cc08f93d (Update essays.md)
