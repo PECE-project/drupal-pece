@@ -154,7 +154,7 @@ Special thanks to our contributors \([emoji key](https://allcontributors.org/doc
     <a href="#contributors" title="Videos">📹</a>   </td>
     </tr>
     <tr>
-    <td align="center" valign= "top"> <b> Design Team Member <b> <br /> <br /> <a href="https://worldpece.org/users/lina-franken">
+    <td align="center" valign= "top"> <b> Design Team Member <b> <br /> <br /> <br /> <a href="https://worldpece.org/users/lina-franken">
     <img src="https://drive.google.com/thumbnail?id=1VPS4-GlQKr_nMh7-2v_SSxHX9cXslpYe" width="100px;" alt=""/> <br />
     <b>Lina Franken</b>
     </a> <br />
@@ -163,7 +163,7 @@ Special thanks to our contributors \([emoji key](https://allcontributors.org/doc
     <a href="#contributors" title="Documentation">📖</a>  
     <a href="#contributors" title="Ideas and Planning">🤔</a>
     <a href="#contributors" title="Research">🔬</a> </td>
-    <td align="center" valign= "top"> <b> PECE Lead Software <br/>Developer <b/> <br /> <br /><a href="https://worldpece.org/users/renato-vasconcellos-gomes">
+    <td align="center" valign= "top"> <b> PECE Lead Software <br/>Developer <b/> <br /> <br /> <br /> <a href="https://worldpece.org/users/renato-vasconcellos-gomes">
     <img src="https://drive.google.com/thumbnail?id=1pSo8S6b7w-Tm2FJH8rPLVD4SJfI_Dtty" width="100px;" alt=""/> <br />
     <b>Renato Gomes</b>
     </a> <br />
@@ -194,7 +194,7 @@ Special thanks to our contributors \([emoji key](https://allcontributors.org/doc
     <a href="#contributors" title="Mentoring">🧑‍🏫</a>
     <a href="#contributors" title="Research">🔬</a>  
     <a href="#contributors" title="Talks">📢</a>  </td>
-    <td align="center" valign= "top"> <b> Platform Director, <br /> STS Infrastructures <b/> <br /> <br/ >
+    <td align="center" valign= "top"> <b> Platform Director, <br /> STS Infrastructures <b/> <br /> <br/ > <br />
     <a href="https://stsinfrastructures.org/users/aalok-khandekar">
     <img src="https://drive.google.com/thumbnail?id=1OmCM70i628ZfveCxuRAy5R1R_g_t7brq" width="100px;" alt=""/> <br />
     <b>Aalok Khandekar</b>
@@ -207,7 +207,7 @@ Special thanks to our contributors \([emoji key](https://allcontributors.org/doc
     <a href="#contributors" title="Research">🔬</a>
     <a href="#contributors" title="Tutorials">✅</a>  
     <a href="#contributors" title="Talks">📢</a>   </td>
-    <td align="center" valign= "top"> <b> Community Manager <b/> <br /> <br /> <a href="https://worldpece.org/users/angela-okune">
+    <td align="center" valign= "top"> <b> Community Manager <b/> <br /> <br /> <br /><a href="https://worldpece.org/users/angela-okune">
     <img src="https://drive.google.com/thumbnail?id=1Brvr_051o6WbdCOyaD-5-_d5SrXyZ91t" width="100px;" alt=""/> <br />
     <b>Angela Okune</b>
     </a> <br />
