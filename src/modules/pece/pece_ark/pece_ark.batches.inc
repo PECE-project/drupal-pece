@@ -486,6 +486,7 @@ function _get_all_ark_enabled_content_nids() {
   $query->innerJoin('field_data_field_ark_enabled', 'fdata', 'fdata.entity_id = n.nid');
   $query->fields('n'  , array('nid'));
   $query->where("$were_ark_nodes");
+  $query->where("field_ark_enabled_value = 1");
   $query->orderBy('n.nid', 'ASC');
   $query->extend('PagerDefault');
   $result = $query->execute()->fetchAllAssoc('nid',PDO::FETCH_ASSOC);
@@ -502,5 +503,11 @@ function _get_all_node_data_for_remote_update() {
   $query->where('am.pending_remote_update = :cond', array(':cond' => 1));
   $query->extend('PagerDefault');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $enabledToArk = _get_all_ark_enabled_content_nids();
+  foreach ($result as $key => $data) {
+    // test if this content is with enable ark set with true.
+    if (!isset($enabledToArk[$data['nid']]))
+      unset($result[$key]);
+  }
   return $result;
 }
