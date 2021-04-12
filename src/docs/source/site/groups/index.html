@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    
+    <title>Groups - PECE Documentation</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+    <link href="../css/extra.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            <a class="navbar-brand" href="..">PECE Documentation</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../usersguide/">User's Guide</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../siteadmin/">Site Admin's Guide</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../installation/">System Admin's Guide</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../legal/">Resources</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/PECE-project/pece-distro/edit/master/docs/groups.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#groups">Groups</a></li>
+            <li class="second-level"><a href="#overview">Overview</a></li>
+                
+            <li class="second-level"><a href="#steps-to-create-group">Steps to Create Group</a></li>
+                
+            <li class="second-level"><a href="#steps-to-join-a-group">Steps to Join a Group</a></li>
+                
+            <li class="second-level"><a href="#steps-to-manage-group-memberships">Steps to Manage Group Memberships</a></li>
+                
+                <li class="third-level"><a href="#approving-a-group-member">Approving a Group Member</a></li>
+                <li class="third-level"><a href="#changing-a-group-members-roles">Changing a Group Member's roles</a></li>
+                <li class="third-level"><a href="#deleting-a-group-member">Deleting a Group Member</a></li>
+            <li class="second-level"><a href="#adding-artifacts-to-groups">Adding Artifacts to Groups</a></li>
+                
+            <li class="second-level"><a href="#adding-artifacts-other-users-created-to-groups">Adding Artifacts Other Users Created to Groups</a></li>
+                
+            <li class="second-level"><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+                
+                <li class="third-level"><a href="#ive-requested-membership-to-a-group-but-i-cannot-add-to-it-and-it-is-not-listed-in-my-dashboard-what-is-going-on">I’ve requested membership to a group, but I cannot add to it, and it is not listed in my Dashboard. What is going on?</a></li>
+                <li class="third-level"><a href="#what-do-the-different-group-membership-roles-mean">What do the different group membership roles mean?</a></li>
+                <li class="third-level"><a href="#im-trying-to-approve-a-users-request-to-join-a-group-and-i-keep-getting-an-error-whats-going-on">I’m trying to approve a user’s request to join a group, and I keep getting an error. What’s going on?</a></li>
+                <li class="third-level"><a href="#how-do-i-add-content-to-multiple-groups">How do I add content to multiple groups?</a></li>
+                <li class="third-level"><a href="#how-do-i-make-a-group-a-sub-group-of-another-group">How do I make a group a sub-group of another group?</a></li>
+                <li class="third-level"><a href="#ive-made-a-new-group-a-sub-group-of-an-existing-group-why-is-the-content-in-the-sub-group-not-appearing-in-the-parent-group">I’ve made a new group a sub-group of an existing group? Why is the content in the sub-group not appearing in the parent group?</a></li>
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="groups">Groups</h1>
+<h3 id="overview">Overview</h3>
+<p>For an overview of how to add and manage groups on PECE, please see the
+following YouTube video.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aZusE6G1aFY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="steps-to-create-group">Steps to Create Group</h2>
+<ol>
+<li>
+<p>Navigate to ‘Dashboard’. This link is listed in the main menu.</p>
+</li>
+<li>
+<p>Select to add a group. You will be directed to a web form to create your group.</p>
+</li>
+<li>
+<p>Enter the relevant fields (see Field glossary for explanation).</p>
+</li>
+<li>
+<p>Note that in order to create a group as a child of another group, you should
+select the Parent Group in the Group Audience field.</p>
+</li>
+<li>
+<p>Save the group. You are now the group administrator.</p>
+</li>
+</ol>
+<h2 id="steps-to-join-a-group">Steps to Join a Group</h2>
+<ol>
+<li>
+<p>Navigate to ‘Collaborate’. This tab is listed on the main menu bar.
+Here, you will find all of the open groups.</p>
+</li>
+<li>
+<p>Navigate by clicking through the arrows on the bottom of the pages, or by searching if you know the
+name of the group.</p>
+</li>
+<li>
+<p>Once you locate the group, click on the link to navigate to the group page.</p>
+</li>
+<li>
+<p>Click ‘Subscribe to group’ on the right hand of the screen. The group administrator will
+have to approve your request before you are considered a member of a
+group, and this may take some time. Once you are listed as a member, you
+should be able to begin associating content with a group.</p>
+</li>
+</ol>
+<h2 id="steps-to-manage-group-memberships">Steps to Manage Group Memberships</h2>
+<ol>
+<li>
+<p>If you created a group or have been appointed as an administrator of a
+group, navigate to the group’s page from your dashboard or from the “Collaborate” link.</p>
+</li>
+<li>
+<p>Click on the Group tab in the edit menu. (You will not see this tab if you are not a group owner.)</p>
+</li>
+<li>
+<p>Select the link ‘People.’ Here you can see a list of site users that have requested to join the group or that have already been approved. If a user has been approved, their State will be listed as "Active"; otherwise, their State will be listed as "Pending".</p>
+</li>
+</ol>
+<h3 id="approving-a-group-member">Approving a Group Member</h3>
+<ol>
+<li>
+<p>To approve a group membership for a Pending user, click edit at the end of the row with their username.</p>
+</li>
+<li>
+<p>Change their membership Status to "Active".</p>
+</li>
+<li>
+<p>Select group user roles for the user.</p>
+</li>
+<li>
+<p>Click "Update Membership".</p>
+</li>
+</ol>
+<h3 id="changing-a-group-members-roles">Changing a Group Member's roles</h3>
+<ol>
+<li>
+<p>To change a group member's role, click edit at the end of the row with their username.</p>
+</li>
+<li>
+<p>Select a new group user role for the user.</p>
+</li>
+<li>
+<p>Click "Update Membership".</p>
+</li>
+</ol>
+<h3 id="deleting-a-group-member">Deleting a Group Member</h3>
+<ol>
+<li>
+<p>To delete a group member, click remove at the end of the row with the user's username.</p>
+</li>
+<li>
+<p>Click "Remove".</p>
+</li>
+</ol>
+<h2 id="adding-artifacts-to-groups">Adding Artifacts to Groups</h2>
+<ol>
+<li>Follow instructions to <a href="../artifacts">add an artifact</a>, and designate the Group Audience to which you would like the group added.</li>
+</ol>
+<h2 id="adding-artifacts-other-users-created-to-groups">Adding Artifacts Other Users Created to Groups</h2>
+<ol>
+<li>
+<p>Navigate to the content you’d like to add to a group.</p>
+</li>
+<li>
+<p>Click on the “Edit Group Audience” tab.</p>
+</li>
+<li>
+<p>Select the group to which you would like to add the content.</p>
+</li>
+<li>
+<p>Save the content.</p>
+</li>
+</ol>
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<h3 id="ive-requested-membership-to-a-group-but-i-cannot-add-to-it-and-it-is-not-listed-in-my-dashboard-what-is-going-on">I’ve requested membership to a group, but I cannot add to it, and it is not listed in my Dashboard. What is going on?</h3>
+<p>Currently when you request membership to a group, the button on the
+group page changes to read “Unsubscribe from Group” even though you have
+not yet been approved by the group admin as a group member. If you
+requested membership to a group and cannot add to it, you likely have
+not yet been approved. You should contact to the group administrator,
+which will soon be listed on the group page.</p>
+<h3 id="what-do-the-different-group-membership-roles-mean">What do the different group membership roles mean?</h3>
+<p>Administrators can manage groups as described above. <strong>There is no
+difference between a researcher and a contributor in a group.</strong></p>
+<h3 id="im-trying-to-approve-a-users-request-to-join-a-group-and-i-keep-getting-an-error-whats-going-on">I’m trying to approve a user’s request to join a group, and I keep getting an error. What’s going on?</h3>
+<p>This is a bug that has happened to a few group managers over the past
+couple of months. We don’t quite know what is going on. However, if this
+keeps happening, delete the user’s request to join the group and then
+add the user manually by navigating to the group page, clicking on the
+group tab, and then clicking the “Add People” link.</p>
+<h3 id="how-do-i-add-content-to-multiple-groups">How do I add content to multiple groups?</h3>
+<p>Follow the same protocol for adding content, but when selecting “group
+audience” select multiple groups by holding the “ctrl” key and clicking
+as many groups as you would like to associate the content to. Users may
+associate (or unassociate) content with groups at any time. <strong>Note that
+when adding content to multiple groups, the <a href="../permissions#group-content-permissions"><em>group content visibility</em></a> field will be applied to all of
+the groups that the content is associated with.</strong> There is no way to
+override this.</p>
+<h3 id="how-do-i-make-a-group-a-sub-group-of-another-group">How do I make a group a sub-group of another group?</h3>
+<p>Navigate to ‘Dashboard’. This link is listed in the main menu. Select
+the ‘group” link under “Add Content.” Follow the steps to create a
+group. Under the “Group Audience” field, select the group that you would
+like to be the parent of this sub-group. Save the group.</p>
+<h3 id="ive-made-a-new-group-a-sub-group-of-an-existing-group-why-is-the-content-in-the-sub-group-not-appearing-in-the-parent-group">I’ve made a new group a sub-group of an existing group? Why is the content in the sub-group not appearing in the parent group?</h3>
+<p>Sub-groups are simply pointers to parent groups. Parent groups do not
+adopt the content of their sub-groups. This feature simply lets users
+know that there is a hierarchical relationship between the groups.</p></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+        </p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = ".."</script>
+    
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>
