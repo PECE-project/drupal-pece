@@ -76,7 +76,7 @@ Step-by-step
 </ul>
 
 
-8. Select a license for the content. (See [licensing](../licensing) for more information)
+8. Select a license for the content. (See [licensing](./licensing.md) for more information)
 
 ![](media/photo_essay_6.png)
 
