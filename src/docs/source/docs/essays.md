@@ -36,7 +36,6 @@ Step-by-step
 
 <img src= media/photo_essay_2.png>
 
-<<<<<<< HEAD
 <li> You should now have access to all of the fields you need to fill out in order to create a new Photo Essay.
 <ul>
   <li> First, type the title in the “Title” pane.</li>
@@ -44,29 +43,16 @@ Step-by-step
 </ul> </li>
 
 <img src= media/photo_essay_3.png>
-=======
-3. You should now have access to all of the fields you need to fill out in order to create a new Photo Essay.
-
-  - First, type the title in the “Title” pane.
-  - Next, write out your project description in the “Description” section.
->>>>>>> parent of f3c3a36f (PHP formatting)
 
 
-<<<<<<< HEAD
 <li> Next Choose a “thumbnail” image to represent your essay.
 <ul>
   <li> You can edit this image later </li>
   <li> Click “Next” to upload the image. Type in Alt Text and/or Title Text as desired (you can simply leave these blank), and click save. </li>
 </ul>
-=======
-4. Next Choose a “thumbnail” image to represent your essay.
-  - You can edit this image later
-  - Click “Next” to upload the image. Type in Alt Text and/or Title Text as desired (you can simply leave these blank), and click save.
->>>>>>> parent of f3c3a36f (PHP formatting)
 
   <br/>You are now ready to upload your image artifacts into your Photo Essay. </li>
 
-<<<<<<< HEAD
 <li> Begin by typing the title of the image artifact into the “Image Artifact” pane. Your Image Artifact should pop up as an option to select.
 <ul>
   <li>Click on the title of your Image Artifact to select it. </li>
@@ -77,13 +63,6 @@ Step-by-step
   <li> Click “Create Item”. </li>
 </ul> </li>
 
-=======
-5. Begin by typing the title of the image artifact into the “Image Artifact” pane. Your Image Artifact should pop up as an option to select.
-  - Click on the title of your Image Artifact to select it.
-
-  <br/>Next, type in the “Substantive Caption” into the “Text” pane.
-  - Click “Create Item”.
->>>>>>> parent of f3c3a36f (PHP formatting)
 
 <img src= media/photo_essay_4.png>
 
@@ -92,17 +71,11 @@ Step-by-step
 
 <img src= media/photo_essay_5.png>
 
-<<<<<<< HEAD
 <li> If you would like this essay to appear in a group, be sure to select the Group Audience.
 <ul>
   <li>Select “Public” to make it accessible to all viewers</li>
   <li>Select “Private” to limit visibility to Group Members</li>
 </ul> </li>
-=======
-7. If you would like this essay to appear in a group, be sure to select the Group Audience.
-  - Select “Public” to make it accessible to all viewers
-  - Select “Private” to limit visibility to Group Members
->>>>>>> parent of f3c3a36f (PHP formatting)
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -117,19 +90,13 @@ Step-by-step
 
 <img src= media/photo_essay_6.png>
 
-<<<<<<< HEAD
 <li> Next, add yourself as a contributor by typing the first few letters of your name into the “contributor” field. Your screen name should pop up. Select your name.
 <ul>
   <li> Repeat this process with the names of any other group members who you would like to grant access to editing the image or caption. </li>
 </ul> </li>
-=======
-9. Next, add yourself as a contributor by typing the first few letters of your name into the “contributor” field. Your screen name should pop up. Select your name.
-  - Repeat this process with the names of any other group members who you would like to grant access to editing the image or caption.
->>>>>>> parent of f3c3a36f (PHP formatting)
 
 <img src= media/photo_essay_7.png>
 
-<<<<<<< HEAD
 <li> Tag the Essay with any tags that you find appropriate.
  <br> If the essay is not ready to be made public, you can alter the permissions of the image. </br>
   <ul>
@@ -139,13 +106,6 @@ Step-by-step
   </ul> </li>
 
 <li> Finally, scroll back up to the top of the page and click “Save” to save your work. </li>
-=======
-10. Tag the Essay with any tags that you find appropriate.
-- If the essay is not ready to be made public, you can alter the permissions of the image.
-  - Select “Private” to limit visibility to yourself and other contributors.
-  - Select “Restricted” to limit visibility to PECE users.
-  - Select “Open” to make the essay visible to all internet users.
->>>>>>> parent of f3c3a36f (PHP formatting)
 
 <img src= media/photo_essay_8.png>
 
