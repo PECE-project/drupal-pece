@@ -225,7 +225,7 @@ _status: $ark_remote_status_param";
  */
 function pece_ark_data_save($node, array $from_remote_data = null) {
   // Do not insert ARK name mappings for content that isn't resources.
-  if (!in_array($node->type, variable_get('ark_node_types'))) {
+  if (!in_array($node->type, variable_get('ark_node_types')) || isset($node->field_ark_enabled[LANGUAGE_NONE][0]) && $node->field_ark_enabled[LANGUAGE_NONE][0]['value'] == "0") {
     return;
   }
 
