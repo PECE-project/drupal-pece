@@ -100,8 +100,6 @@ Step-by-step
 
 ![](media/photo_essay_8.png)
 
-</ol>
-
 Congratulations! You’ve created your Photo Essay!
 
 
