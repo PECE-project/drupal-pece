@@ -535,3 +535,30 @@ function pece_update_7120() {
     }
   }
 }
+
+/**
+ *  Delete pece_ark_enabled field in the database.
+ */
+function pece_update_7121() {
+  if (module_exists('features')) {
+    $modules = array(
+      'pece_artifacts_audio',
+      'pece_artifacts_bundle',
+      'pece_artifacts_fieldnote',
+      'pece_artifacts_image',
+      'pece_artifacts_pdf',
+      'pece_artifacts_text',
+      'pece_artifacts_video',
+      'pece_artifacts_website',
+      'pece_projects',
+      'pece_essay',
+      'pece_photo_essay',
+      'pece_timeline_essay',
+    );
+
+    foreach ($modules as $module) {
+      features_revert_module($module);
+    }
+  }
+}
+
