@@ -39,48 +39,87 @@ Special thanks to our contributors \([emoji key](https://allcontributors.org/doc
 
 <table>
   <tr>
-    <td align="center" valign= "top"> <b> Platform Director, <br /> STS Infrastructures <b/> <br />
-    <a href="https://stsinfrastructures.org/users/aalok-khandekar">
-    <img src="https://drive.google.com/thumbnail?id=1OmCM70i628ZfveCxuRAy5R1R_g_t7brq" width="100px;" alt=""/> <br />
-    <b>Aalok Khandekar</b>
+    <td align="center" valign= "top"> <b> Platform Director, <br /> UCI Center for Ethnography <b/> <br /> <a href="https://worldpece.org/content/james-adams"> <br />
+    <img src="https://drive.google.com/thumbnail?id=1G42OFg8S1I4P9UoJx0J2Ye0xGMDfTJ2z" width="100px;" alt=""/> <br />
+    <b>James Adams</b>
     </a> <br />
-    <a href="#contributors" title="Content"> 🖋</a>  
-    <a href="#contributors" title="Data">🔣</a>  
-    <a href="#contributors" title="Design"> 🎨</a>  
-    <a href="#contributors" title="Ideas">🤔</a>  
-    <a href="#contributors" title="Project Management">📆</a> <br />
-    <a href="#contributors" title="Research">🔬</a>
-    <a href="#contributors" title="Tutorials">✅</a>  
-    <a href="#contributors" title="Talks">📢</a>   </td>
-    <td align="center" valign= "top"> <b> PECE Lead Developer <b/> <br /> <br /> <br /> <a href="https://worldpece.org/users/renato-vasconcellos-gomes">
-    <img src="https://drive.google.com/thumbnail?id=1pSo8S6b7w-Tm2FJH8rPLVD4SJfI_Dtty" width="100px;" alt=""/> <br />
-    <b>Renato Gomes</b>
-    </a> <br />
-    <a href="#contributors" title="Bug Reports"> 🐛</a>
-    <a href="#contributors" title="Code"> 💻</a>
-    <a href="#contributors" title="Content"> 🖋</a>  
-    <a href="#contributors" title="Documentation">📖</a>  
-    <a href="#contributors" title="Design"> 🎨</a>  <br />
-    <a href="#contributors" title="Ideas and Planning">🤔</a>  
-    <a href="#contributors" title="Infrastructure">🚇</a>  
-    <a href="#contributors" title="Maintenance">🚧</a>  
-    <a href="#contributors" title="Mentoring">🧑‍🏫</a>
-    <a href="#contributors" title="Reviewed Pull Requests">👀</a>  <br />
-    <a href="#contributors" title="Tests">⚠️</a> <a href="#contributors" title="User Testing">📓</a> <a href="#contributors" title="Videos">📹</a>  </td>
-    <td align="center" valign= "top"> <b> Platform Director, <br /> Energy Rights Project <b/> <br /> <br /> <a href="https://worldpece.org/content/alison-kenner">
-    <img src="https://drive.google.com/thumbnail?id=1oFt3LUVCaYp3fl7jjQj_NyOZoeD5f6Le" width="100px;" alt=""/> <br />
-    <b>Alison Kenner</b>
-    </a> <br />
-    <a href="#contributors" title="Bug Reports"> 🔊</a>  
-    <a href="#contributors" title="Bug Reports"> 🐛</a>  </a>  
+    <a href="#contributors" title="Audio"> 🔊</a>  
+    <a href="#contributors" title="Bug Reports">🐛</a>
     <a href="#contributors" title="Content"> 🖋</a>
     <a href="#contributors" title="Data">🔣</a>
-    <a href="#contributors" title="Examples">💡</a>  <br />
-    <a href="#contributors" title="Financial Support">💵</a>  
-    <a href="#contributors" title="Funding/Grant Finders">🔍</a>  
+    <a href="#contributors" title="Event Organizers">📋</a> <br />
+    <a href="#contributors" title="Ideas and Planning">🤔</a>
     <a href="#contributors" title="Mentoring">🧑‍🏫</a>
-    <a href="#contributors" title="Research">🔬</a>  
-    <a href="#contributors" title="Talks">📢</a>  </td>
+    <a href="#contributors" title="Answering Questions">💬</a>
+    <a href="#contributors" title="Research">🔬</a>
+    <a href="#contributors" title="Project Management">📆</a> <br />
+    <a href="#contributors" title="Tutorials">✅</a>  
+    <a href="#contributors" title="Talks"> 📢</a>
+    <a href="#contributors" title="User Testing">📓</a>
+    <a href="#contributors" title="Videos">📹</a>   </td>
+    <td align="center" valign= "top"> <b> Lead Open Knowledge <br /> Developer & System Admin <b/> <br /> <a href="https://worldpece.org/content/brian-callahan">
+    <img src="https://drive.google.com/thumbnail?id=1FQvLlelTR2I1FGO2PJPhrkaGF2riFuja" width="100px;" alt=""/> <br />
+    <b>Brian Callahan</b>
+    </a> <br />
+    <a href="#contributors" title="Audio"> 🔊</a>  
+    <a href="#contributors" title="Bug Reports">🐛</a>
+    <a href="#contributors" title="Code"> 💻</a>
+    <a href="#contributors" title="Content"> 🖋</a>
+    <a href="#contributors" title="Data">🔣</a> <br />
+    <a href="#contributors" title="Documentation">📖</a>  
+    <a href="#contributors" title="Design"> 🎨</a>
+    <a href="#contributors" title="Examples">💡</a>
+    <a href="#contributors" title="Ideas and Planning">🤔</a>
+    <a href="#contributors" title="Infrastructure">🚇</a> <br />
+    <a href="#contributors" title="Maintenance">🚧</a>  
+    <a href="#contributors" title="Mentoring">🧑‍🏫</a>
+    <a href="#contributors" title="Packaging">📦</a>
+    <a href="#contributors" title="Security">🛡️</a>
+    <a href="#contributors" title="Answering Questions">💬</a> <br />
+    <a href="#contributors" title="Research">🔬</a>
+    <a href="#contributors" title="Reviewed Pull Requests">👀</a>
+    <a href="#contributors" title="Project Management">📆</a>
+    <a href="#contributors" title="Videos">📹</a>   </td>
+    <td align="center" valign= "top"> <b> Design and Outreach <br /> Team Member <b/> <br /> <br/> <a href="https://worldpece.org/content/brandon-costelloe-kuehn">
+    <img src="https://drive.google.com/thumbnail?id=1rPE6_3DCYkdC_ykMwdswH5JmIbbQUjIc" width="100px;" alt=""/> <br />
+    <b>Brandon <br /> Costelloe-Kuehn</b>
+    </a> <br />
+    <a href="#contributors" title="Content"> 🖋</a>
+    <a href="#contributors" title="Data">🔣</a>
+    <a href="#contributors" title="Documentation">📖</a>  
+    <a href="#contributors" title="Design"> 🎨</a>
+    <a href="#contributors" title="Examples">💡</a> <br />
+    <a href="#contributors" title="Event Organizers">📋</a>
+    <a href="#contributors" title="Funding/Grant Finders">🔍</a>
+    <a href="#contributors" title="Ideas and Planning">🤔</a>
+    <a href="#contributors" title="Infrastructure">🚇</a>
+    <a href="#contributors" title="Maintenance">🚧</a>  <br />
+    <a href="#contributors" title="Mentoring">🧑‍🏫</a>
+    <a href="#contributors" title="Project Management">📆</a>
+    <a href="#contributors" title="Answering Questions">💬</a>
+    <a href="#contributors" title="Research">🔬</a>
+    <a href="#contributors" title="Security">🛡️</a> <br/>
+    <a href="#contributors" title="Talks"> 📢</a>
+    <a href="#contributors" title="Tutorials">✅</a>
+    <a href="#contributors" title="Developing Instances for Teaching">🎓</a> </td>
+    <td align="center" valign= "top"> <b> PECE Research Director <b/> <br /> <br /> <br /><a href="https://worldpece.org/content/kim-fortun">
+    <img src="https://drive.google.com/thumbnail?id=1eU5TX4IGe7KN6QQGtFbWMIYsgFZulE0u" width="100px;" alt=""/> <br />
+    <b>Kim Fortun</b>
+    </a> <br />
+    <a href="#contributors" title="Business Development"> 💼</a>
+    <a href="#contributors" title="Content"> 🖋</a>
+    <a href="#contributors" title="Data">🔣</a>
+    <a href="#contributors" title="Design"> 🎨</a>
+    <a href="#contributors" title="Event Organizers">📋</a> <br/>
+    <a href="#contributors" title="Financial Support">💵</a>
+    <a href="#contributors" title="Funding/Grant Finders">🔍</a>
+    <a href="#contributors" title="Ideas and Planning">🤔</a>
+    <a href="#contributors" title="Mentoring">🧑‍🏫</a>
+    <a href="#contributors" title="Project Management">📆</a> <br />
+    <a href="#contributors" title="Answering Questions">💬</a>
+    <a href="#contributors" title="Research">🔬</a>
+    <a href="#contributors" title="Talks"> 📢</a>
+    <a href="#contributors" title="Tutorials">✅</a> </td>
     <td align="center" valign= "top"> <b> PECE Design Director <b/> <br /> <br /> <br /> <a href="https://worldpece.org/users/mikefortun">
     <img src="https://drive.google.com/thumbnail?id=1mnGhj1mC7UuUaOf3iP85SGECcJIPteTS" width="100px;" alt=""/> <br />
     <b>Mike Fortun</b>
@@ -113,29 +152,6 @@ Special thanks to our contributors \([emoji key](https://allcontributors.org/doc
     <a href="#contributors" title="Tutorials">✅</a>
     <a href="#contributors" title="User Testing">📓</a>
     <a href="#contributors" title="Videos">📹</a>   </td>
-    <td align="center" valign= "top"> <b> Lead Open Knowledge <br /> Developer & System Admin <b/> <br /> <a href="https://worldpece.org/content/brian-callahan">
-    <img src="https://drive.google.com/thumbnail?id=1FQvLlelTR2I1FGO2PJPhrkaGF2riFuja" width="100px;" alt=""/> <br />
-    <b>Brian Callahan</b>
-    </a> <br />
-    <a href="#contributors" title="Audio"> 🔊</a>  
-    <a href="#contributors" title="Bug Reports">🐛</a>
-    <a href="#contributors" title="Code"> 💻</a>
-    <a href="#contributors" title="Content"> 🖋</a>
-    <a href="#contributors" title="Data">🔣</a> <br />
-    <a href="#contributors" title="Documentation">📖</a>  
-    <a href="#contributors" title="Design"> 🎨</a>
-    <a href="#contributors" title="Examples">💡</a>
-    <a href="#contributors" title="Ideas and Planning">🤔</a>
-    <a href="#contributors" title="Infrastructure">🚇</a> <br />
-    <a href="#contributors" title="Maintenance">🚧</a>  
-    <a href="#contributors" title="Mentoring">🧑‍🏫</a>
-    <a href="#contributors" title="Packaging">📦</a>
-    <a href="#contributors" title="Security">🛡️</a>
-    <a href="#contributors" title="Answering Questions">💬</a> <br />
-    <a href="#contributors" title="Research">🔬</a>
-    <a href="#contributors" title="Reviewed Pull Requests">👀</a>
-    <a href="#contributors" title="Project Management">📆</a>
-    <a href="#contributors" title="Videos">📹</a>   </td>
     </tr>
     <tr>
     <td align="center" valign= "top"> <b> Design Team Member <b> <br /> <br /> <a href="https://worldpece.org/users/lina-franken">
@@ -147,45 +163,50 @@ Special thanks to our contributors \([emoji key](https://allcontributors.org/doc
     <a href="#contributors" title="Documentation">📖</a>  
     <a href="#contributors" title="Ideas and Planning">🤔</a>
     <a href="#contributors" title="Research">🔬</a> </td>
-    <td align="center" valign= "top"> <b> Outreach Coordinator <b> <br /> <br />  <a href="https://worldpece.org/users/tim-schütz">
-    <img src="https://drive.google.com/thumbnail?id=1t4pwwl0f9DCzBmn5MofT8srM6ZPeuFMf" width="100px;" alt=""/> <br />
-    <b>Tim Schütz</b>
+    <td align="center" valign= "top"> <b> PECE Lead Software <br/>Developer <b/> <br /> <a href="https://worldpece.org/users/renato-vasconcellos-gomes">
+    <img src="https://drive.google.com/thumbnail?id=1pSo8S6b7w-Tm2FJH8rPLVD4SJfI_Dtty" width="100px;" alt=""/> <br />
+    <b>Renato Gomes</b>
     </a> <br />
-    <a href="#contributors" title="Audio"> 🔊</a>  x`
-    <a href="#contributors" title="Bug Reports">🐛</a>
-    <a href="#contributors" title="Blogposts"> 📝</a>  
-    <a href="#contributors" title="Content"> 🖋</a>
-    <a href="#contributors" title="Data">🔣</a> <br />
+    <a href="#contributors" title="Bug Reports"> 🐛</a>
+    <a href="#contributors" title="Code"> 💻</a>
+    <a href="#contributors" title="Content"> 🖋</a>  
     <a href="#contributors" title="Documentation">📖</a>  
-    <a href="#contributors" title="Design"> 🎨</a>
-    <a href="#contributors" title="Event Organizers">📋</a>
-    <a href="#contributors" title="Ideas and Planning">🤔</a>
-    <a href="#contributors" title="Project Management">📆</a> <br />
-    <a href="#contributors" title="Answering Questions">💬</a>
-    <a href="#contributors" title="Research">🔬</a>
-    <a href="#contributors" title="Translation">🌍</a>
-    <a href="#contributors" title="Tutorials">✅</a>  
-    <a href="#contributors" title="Talks"> 📢</a> <br />
-    <a href="#contributors" title="Videos">📹</a>
-    <a href="#contributors" title="Community Outreach">🗣</>   </td>
-    <td align="center" valign= "top"> <b> Platform Director, <br /> UCI Center for Ethnography <b/> <br /> <a href="https://worldpece.org/content/james-adams">
-    <img src="https://drive.google.com/thumbnail?id=1G42OFg8S1I4P9UoJx0J2Ye0xGMDfTJ2z" width="100px;" alt=""/> <br />
-    <b>James Adams</b>
+    <a href="#contributors" title="Design"> 🎨</a>  <br />
+    <a href="#contributors" title="Ideas and Planning">🤔</a>  
+    <a href="#contributors" title="Infrastructure">🚇</a>  
+    <a href="#contributors" title="Maintenance">🚧</a>  
+    <a href="#contributors" title="Mentoring">🧑‍🏫</a>
+    <a href="#contributors" title="Reviewed Pull Requests">👀</a>  <br />
+    <a href="#contributors" title="Tests">⚠️</a>
+    <a href="#contributors" title="User Testing">📓</a>
+    <a href="#contributors" title="Videos">📹</a>  </td>
+    <td align="center" valign= "top"> <b> Platform Director, <br /> Energy Rights Project <b/> <br /> <br /> <a href="https://worldpece.org/content/alison-kenner">
+    <img src="https://drive.google.com/thumbnail?id=1oFt3LUVCaYp3fl7jjQj_NyOZoeD5f6Le" width="100px;" alt=""/> <br />
+    <b>Alison Kenner</b>
     </a> <br />
-    <a href="#contributors" title="Audio"> 🔊</a>  
-    <a href="#contributors" title="Bug Reports">🐛</a>
+    <a href="#contributors" title="Bug Reports"> 🔊</a>  
+    <a href="#contributors" title="Bug Reports"> 🐛</a>  </a>  
     <a href="#contributors" title="Content"> 🖋</a>
     <a href="#contributors" title="Data">🔣</a>
-    <a href="#contributors" title="Event Organizers">📋</a> <br />
-    <a href="#contributors" title="Ideas and Planning">🤔</a>
+    <a href="#contributors" title="Examples">💡</a>  <br />
+    <a href="#contributors" title="Financial Support">💵</a>  
+    <a href="#contributors" title="Funding/Grant Finders">🔍</a>  
     <a href="#contributors" title="Mentoring">🧑‍🏫</a>
-    <a href="#contributors" title="Answering Questions">💬</a>
-    <a href="#contributors" title="Research">🔬</a>
+    <a href="#contributors" title="Research">🔬</a>  
+    <a href="#contributors" title="Talks">📢</a>  </td>
+    <td align="center" valign= "top"> <b> Platform Director, <br /> STS Infrastructures <b/> <br />
+    <a href="https://stsinfrastructures.org/users/aalok-khandekar">
+    <img src="https://drive.google.com/thumbnail?id=1OmCM70i628ZfveCxuRAy5R1R_g_t7brq" width="100px;" alt=""/> <br />
+    <b>Aalok Khandekar</b>
+    </a> <br />
+    <a href="#contributors" title="Content"> 🖋</a>  
+    <a href="#contributors" title="Data">🔣</a>  
+    <a href="#contributors" title="Design"> 🎨</a>  
+    <a href="#contributors" title="Ideas">🤔</a>  
     <a href="#contributors" title="Project Management">📆</a> <br />
+    <a href="#contributors" title="Research">🔬</a>
     <a href="#contributors" title="Tutorials">✅</a>  
-    <a href="#contributors" title="Talks"> 📢</a>
-    <a href="#contributors" title="User Testing">📓</a>
-    <a href="#contributors" title="Videos">📹</a>   </td>
+    <a href="#contributors" title="Talks">📢</a>   </td>
     <td align="center" valign= "top"> <b> Community Manager <b/> <br /> <br /> <a href="https://worldpece.org/users/angela-okune">
     <img src="https://drive.google.com/thumbnail?id=1Brvr_051o6WbdCOyaD-5-_d5SrXyZ91t" width="100px;" alt=""/> <br />
     <b>Angela Okune</b>
@@ -199,66 +220,47 @@ Special thanks to our contributors \([emoji key](https://allcontributors.org/doc
     <a href="#contributors" title="Tutorials">✅</a>  
     <a href="#contributors" title="Talks"> 📢</a>
     <a href="#contributors" title="Videos">📹</a>   </td>
-    <td align="center" valign= "top"> <b> Lead Platform Architect <b/> <br /> <br /> <a href="https://worldpece.org/users/lindsay-poirier">
-    <img src="https://drive.google.com/thumbnail?id=11HDGZPSOkm8eeYY1fJm3PxzuN_9W5dSZ" width="100px;" alt=""/> <br />
-    <b>Lindsay Poirier</b>
-    </a> <br />
-    <a href="#contributors" title="Content"> 🖋</a>
-    <a href="#contributors" title="Documentation">📖</a>  
-    <a href="#contributors" title="Design"> 🎨</a>
-    <a href="#contributors" title="Event Organizers">📋</a>
-    <a href="#contributors" title="Funding/Grant Finders">🔍</a> <br />
-    <a href="#contributors" title="Ideas and Planning">🤔</a>
-    <a href="#contributors" title="Security">🛡️</a>
-    <a href="#contributors" title="Tools">🔧</a>
-    <a href="#contributors" title="Translation">🌍</a>
-    <a href="#contributors" title="Project Management">📆</a> <br />
-    <a href="#contributors" title="Answering Questions">💬</a>
-    <a href="#contributors" title="Research">🔬</a>
-    <a href="#contributors" title="Tutorials">✅</a>
-    <a href="#contributors" title="Talks"> 📢</a>  </td>
   </tr>
   <tr>
-  <td align="center" valign= "top"> <b> Design and Outreach <br /> Team Member <b/> <br /> <a href="https://worldpece.org/content/brandon-costelloe-kuehn">
-  <img src="https://drive.google.com/thumbnail?id=1rPE6_3DCYkdC_ykMwdswH5JmIbbQUjIc" width="100px;" alt=""/> <br />
-  <b>Brandon <br /> Costelloe-Kuehn</b>
+  <td align="center" valign= "top"> <b> Lead Platform Architect <b/> <br /> <br /> <a href="https://worldpece.org/users/lindsay-poirier">
+  <img src="https://drive.google.com/thumbnail?id=11HDGZPSOkm8eeYY1fJm3PxzuN_9W5dSZ" width="100px;" alt=""/> <br />
+  <b>Lindsay Poirier</b>
   </a> <br />
   <a href="#contributors" title="Content"> 🖋</a>
-  <a href="#contributors" title="Data">🔣</a>
   <a href="#contributors" title="Documentation">📖</a>  
   <a href="#contributors" title="Design"> 🎨</a>
-  <a href="#contributors" title="Examples">💡</a> <br />
   <a href="#contributors" title="Event Organizers">📋</a>
-  <a href="#contributors" title="Funding/Grant Finders">🔍</a>
+  <a href="#contributors" title="Funding/Grant Finders">🔍</a> <br />
   <a href="#contributors" title="Ideas and Planning">🤔</a>
-  <a href="#contributors" title="Infrastructure">🚇</a>
-  <a href="#contributors" title="Maintenance">🚧</a>  <br />
-  <a href="#contributors" title="Mentoring">🧑‍🏫</a>
-  <a href="#contributors" title="Project Management">📆</a>
-  <a href="#contributors" title="Answering Questions">💬</a>
-  <a href="#contributors" title="Research">🔬</a>
-  <a href="#contributors" title="Security">🛡️</a> <br/>
-  <a href="#contributors" title="Talks"> 📢</a>
-  <a href="#contributors" title="Tutorials">✅</a>
-  <a href="#contributors" title="Developing Instances for Teaching">🎓</a> </td>
-  <td align="center" valign= "top"> <b> PECE Research Director <b/> <br /> <br /><a href="https://worldpece.org/content/kim-fortun">
-  <img src="https://drive.google.com/thumbnail?id=1eU5TX4IGe7KN6QQGtFbWMIYsgFZulE0u" width="100px;" alt=""/> <br />
-  <b>Kim Fortun</b>
-  </a> <br />
-  <a href="#contributors" title="Business Development"> 💼</a>
-  <a href="#contributors" title="Content"> 🖋</a>
-  <a href="#contributors" title="Data">🔣</a>
-  <a href="#contributors" title="Design"> 🎨</a>
-  <a href="#contributors" title="Event Organizers">📋</a> <br/>
-  <a href="#contributors" title="Financial Support">💵</a>
-  <a href="#contributors" title="Funding/Grant Finders">🔍</a>
-  <a href="#contributors" title="Ideas and Planning">🤔</a>
-  <a href="#contributors" title="Mentoring">🧑‍🏫</a>
+  <a href="#contributors" title="Security">🛡️</a>
+  <a href="#contributors" title="Tools">🔧</a>
+  <a href="#contributors" title="Translation">🌍</a>
   <a href="#contributors" title="Project Management">📆</a> <br />
   <a href="#contributors" title="Answering Questions">💬</a>
   <a href="#contributors" title="Research">🔬</a>
-  <a href="#contributors" title="Talks"> 📢</a>
-  <a href="#contributors" title="Tutorials">✅</a> </td>
+  <a href="#contributors" title="Tutorials">✅</a>
+  <a href="#contributors" title="Talks"> 📢</a>  </td>
+  <td align="center" valign= "top"> <b> Outreach Coordinator <b> <br /> <br />  <a href="https://worldpece.org/users/tim-schütz">
+  <img src="https://drive.google.com/thumbnail?id=1t4pwwl0f9DCzBmn5MofT8srM6ZPeuFMf" width="100px;" alt=""/> <br />
+  <b>Tim Schütz</b>
+  </a> <br />
+  <a href="#contributors" title="Audio"> 🔊</a>  x`
+  <a href="#contributors" title="Bug Reports">🐛</a>
+  <a href="#contributors" title="Blogposts"> 📝</a>  
+  <a href="#contributors" title="Content"> 🖋</a>
+  <a href="#contributors" title="Data">🔣</a> <br />
+  <a href="#contributors" title="Documentation">📖</a>  
+  <a href="#contributors" title="Design"> 🎨</a>
+  <a href="#contributors" title="Event Organizers">📋</a>
+  <a href="#contributors" title="Ideas and Planning">🤔</a>
+  <a href="#contributors" title="Project Management">📆</a> <br />
+  <a href="#contributors" title="Answering Questions">💬</a>
+  <a href="#contributors" title="Research">🔬</a>
+  <a href="#contributors" title="Translation">🌍</a>
+  <a href="#contributors" title="Tutorials">✅</a>  
+  <a href="#contributors" title="Talks"> 📢</a> <br />
+  <a href="#contributors" title="Videos">📹</a>
+  <a href="#contributors" title="Community Outreach">🗣</>   </td>
   </tr>
 </table>
 
