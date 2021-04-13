@@ -11,8 +11,8 @@ var defaults = {
   autoplay: true,
   autoplaySpeed: 5000,
   arrows: true,
-  speed: 700,
-  dots: true
+  dots: true,
+  speed: 700
 };
 
 Drupal.behaviors.peceSlider = {
