@@ -4,6 +4,7 @@ services:
   db_mysql:
     image: mysql:5.7
     container_name: pece-db-mysql
+    restart: always
     environment:
       - MYSQL_USER=pece
       - MYSQL_DATABASE=pece
