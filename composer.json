@@ -17,24 +17,11 @@
         {
             "type": "package",
             "package": {
-                "name": "nyxtechnology/pbf",
-                "version": "1.0",
+                "name": "drupal/rest_password",
+                "version": "1.7",
                 "type": "drupal-module",
                 "source": {
-                    "url": "https://github.com/nyxtechnology/pbf-d9.git",
-                    "type": "git",
-                    "reference": "8.x-1.x"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "nyxtechnology/rest_password",
-                "version": "1.0",
-                "type": "drupal-module",
-                "source": {
-                    "url": "https://github.com/nyxtechnology/rest_password.git",
+                    "url": "https://git.drupalcode.org/project/rest_password.git",
                     "type": "git",
                     "reference": "8.x"
                 }
@@ -88,8 +75,8 @@
         "drupal/workflow": "^1.4",
         "drush/drush": "^10.3",
         "nyxtechnology/media_attribution": "1.0",
-        "nyxtechnology/pbf": "^1.0",
-        "nyxtechnology/rest_password": "1.0",
+        "drupal/pbf": "^1.0",
+        "drupal/rest_password": "1.7",
         "vlucas/phpdotenv": "^5.1",
         "webflo/drupal-finder": "^1.2",
         "webmozart/path-util": "^2.3",
@@ -153,8 +140,8 @@
             "drupal/graphql": {
                 "978-Add get all field resolvers": "patches/graphql-978-add-getall-field-resolvers.patch"
             },
-            "nyxtechnology/pbf": {
-                "3148398 - Automated Drupal 9 compatibility fixes": "https://www.drupal.org/files/issues/2020-06-06/pbf.1.x-dev.rector.patch"
+            "drupal/rest_password": {
+                "3148632-Drupal 9 compatibility fixes": "https://www.drupal.org/files/issues/2020-09-21/drupal-9-compatibility-fix-3148632-3.patch"
             },
             "drupal/workflow" : {
                 "3157199 - D9 deprecated entity.manager, few WorkflowStorage arguments": "https://www.drupal.org/files/issues/2020-07-07/deprecated_entity_manager_workflowstorage_error-3157199-7.patch"
