@@ -536,6 +536,29 @@ function pece_artifacts_fieldnote_panelizer_defaults() {
   $pane->uuid = '5b5b273c-1d84-4442-b40d-ef6a29a81c97';
   $display->content['new-5b5b273c-1d84-4442-b40d-ef6a29a81c97'] = $pane;
   $display->panels['column2'][8] = 'new-5b5b273c-1d84-4442-b40d-ef6a29a81c97';
+  $pane = new stdClass();
+  $pane->pid = 'new-a84573cd-098c-4994-9502-75571e64896d';
+  $pane->panel = 'column2';
+  $pane->type = 'citation';
+  $pane->subtype = 'citation';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'override_title' => 1,
+    'override_title_text' => 'Cite as',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 9;
+  $pane->locks = array();
+  $pane->uuid = 'a84573cd-098c-4994-9502-75571e64896d';
+  $display->content['new-a84573cd-098c-4994-9502-75571e64896d'] = $pane;
+  $display->panels['column2'][9] = 'new-a84573cd-098c-4994-9502-75571e64896d';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-b3cb149c-978a-49f8-8ff2-2ce1d50cbf4f';
   $panelizer->display = $display;
