@@ -1,0 +1,102 @@
+<?php
+
+/**
+ * @file
+ * Installation file for Matomo Analytics module.
+ */
+
+function matomo_install() {
+  // Remove tracking from all administrative pages, see https://drupal.org/node/34970.
+  variable_set('matomo_visibility_roles', 0);
+  variable_set('matomo_visibility_pages', 0);
+  $pages = array(
+    'admin',
+    'admin/*',
+    'batch',
+    'node/add*',
+    'node/*/*',
+    'user/*/*',
+  );
+  variable_set('matomo_pages', implode("\n", $pages));
+
+  // Make the default install more user and GDPR friendly.
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('opt-in or out of matomo tracking'));
+  drupal_set_message(t('Module %module granted %permission permission to authenticated users.', array('%module' => 'Matomo Analytics', '%permission' => t('Opt-in or out of tracking'))), 'status');
+}
+
+function matomo_uninstall() {
+  variable_del('matomo_cache');
+  variable_del('matomo_codesnippet_before');
+  variable_del('matomo_codesnippet_after');
+  variable_del('matomo_custom');
+  variable_del('matomo_custom_var');
+  variable_del('matomo_domain_mode');
+  variable_del('matomo_js_scope');
+  variable_del('matomo_last_cache');
+  variable_del('matomo_page_title_hierarchy');
+  variable_del('matomo_page_title_hierarchy_exclude_home');
+  variable_del('matomo_pages');
+  variable_del('matomo_privacy_donottrack');
+  variable_del('matomo_roles');
+  variable_del('matomo_site_id');
+  variable_del('matomo_site_search');
+  variable_del('matomo_trackcolorbox');
+  variable_del('matomo_trackmailto');
+  variable_del('matomo_track'); // interrims solution
+  variable_del('matomo_trackfiles_extensions');
+  variable_del('matomo_trackmessages');
+  variable_del('matomo_trackuserid');
+  variable_del('matomo_translation_set');
+  variable_del('matomo_url_http');
+  variable_del('matomo_url_https');
+  variable_del('matomo_visibility_pages');
+  variable_del('matomo_visibility_roles');
+
+  // Remove backup variables if exits. Remove this code in D8.
+  variable_del('matomo_codesnippet_before_backup_7202');
+  variable_del('matomo_codesnippet_after_backup_7202');
+}
+
+/**
+ * Remove cache directory if module is disabled (or uninstalled).
+ */
+function matomo_disable() {
+  matomo_clear_js_cache();
+}
+
+/**
+ * Implementation of hook_requirements().
+ */
+function matomo_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+
+  switch ($phase) {
+    case 'runtime':
+      // Module cannot validate matomo URL without external HTTP requests.
+      if (variable_get('drupal_http_request_fails', TRUE) && !system_check_http_request()) {
+        $requirements['matomo_http_requests'] = array(
+          'title' => $t('HTTP request status'),
+          'value' => $t('Fails'),
+          'severity' => REQUIREMENT_ERROR,
+          'description' => $t('Your system or network configuration does not allow Drupal to access web pages, resulting in reduced functionality. This could be due to your webserver configuration or PHP settings, and should be resolved in order to download information about available updates, fetch aggregator feeds, sign in via OpenID, or use other network-dependent services.'),
+        );
+      }
+
+      // Raise warning if Matomo user account has not been set yet.
+      if (!preg_match('/^\d{1,}$/', variable_get('matomo_site_id', ''))) {
+        $requirements['matomo'] = array(
+          'title' => $t('Matomo module'),
+          'description' => $t('Matomo module has not been configured yet. Please configure its settings from the <a href="@url">Matomo settings page</a>.', array('@url' => url('admin/config/system/matomo'))),
+          'severity' => REQUIREMENT_WARNING,
+          'value' => $t('Not configured'),
+        );
+      }
+      break;
+  }
+  return $requirements;
+}
+
+/**
+ * NOTE: Next update need to be 7206 or updates for 'dev' users may break.
+ */
