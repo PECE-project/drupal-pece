@@ -1,0 +1,95 @@
+<?php
+
+/**
+ * @file
+ * Adds Matomo noscript tracking code to all your site's pages.
+ */
+
+/**
+ * Adds Matomo noscript tag to bottom of the page.
+ */
+function piwik_noscript_preprocess_html(&$variables) {
+  // Return early if not configured.
+  if (!piwik_noscript_configured()) {
+    return;
+  }
+  $options = piwik_noscript_options();
+  // The head title needs to be un-HTML-encoded.
+  $options['query']['action_name'] = decode_entities($variables['head_title']);
+  drupal_alter('piwik_noscript_options', $options);
+  $variables['page']['page_bottom']['piwik_noscript'][] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'noscript',
+    '#value' => piwik_noscript_image($options),
+  );
+}
+
+/**
+ * Adds Matomo image tag with capability to track referrer URL using javascript.
+ */
+function piwik_noscript_page_build(&$page) {
+  // Only add this image tag if Matomo and Piwik modules are not enabled.
+  if (module_exists('matomo') || module_exists('piwik') || !piwik_noscript_configured()) {
+    return;
+  }
+  $page['page_bottom']['piwik_noscript'][] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'id' => 'piwik-noscript',
+    ),
+  );
+  $options = piwik_noscript_options();
+  $options['query']['action_name'] = '';
+  $options['query']['urlref'] = '';
+  drupal_alter('piwik_noscript_options', $options);
+  $page['page_bottom']['piwik_noscript']['#attached']['js'][] = array(
+    'data' => array(
+      'piwikNoscript' => array(
+        'image' => piwik_noscript_image($options),
+      ),
+    ),
+    'type' => 'setting',
+  );
+  $page['page_bottom']['piwik_noscript']['#attached']['js'][] = array(
+    'data' => drupal_get_path('module', 'piwik_noscript') . '/piwik_noscript.js',
+    'defer' => TRUE,
+    'every_page' => TRUE,
+    'scope' => 'footer',
+    'type' => 'file',
+  );
+}
+
+/**
+ * Builds Matomo query parameters.
+ */
+function piwik_noscript_options() {
+  global $base_root;
+  return array(
+    'query' => array(
+      'idsite' => variable_get('matomo_site_id', variable_get('piwik_site_id', 0)),
+      'rec' => 1,
+      'url' => $base_root . request_uri(),
+    ),
+  );
+}
+
+/**
+ * Builds Matomo image element.
+ */
+function piwik_noscript_image(array $options) {
+  return theme('image', array(
+    'path' => url(variable_get('matomo_url_https', variable_get('piwik_url_https', '')) . 'js/', $options),
+    'width' => 0,
+    'height' => 0,
+    'attributes' => array(
+      'style' => 'position: absolute',
+    ),
+  ));
+}
+
+/**
+ * Returns true if module is configured or false otherwise.
+ */
+function piwik_noscript_configured() {
+  return variable_get('matomo_url_https', variable_get('piwik_url_https', '')) && variable_get('matomo_site_id', variable_get('piwik_site_id', 0));
+}

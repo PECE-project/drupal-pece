@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Tests for Matomo Noscript module.
+ */
+
+/**
+ * Tests for Matomo Noscript module.
+ */
+class PiwikNoscriptTestCase extends DrupalWebTestCase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Matomo Noscript',
+      'description' => 'Tests Matomo Noscript module.',
+      'group' => 'Matomo',
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp('piwik_noscript');
+  }
+
+  /**
+   * Tests that Matomo noscript tags appear in the page.
+   */
+  protected function testPiwikNoscript() {
+    variable_set('piwik_site_id', 1);
+    variable_set('piwik_url_https', 'https://example.org/');
+    $this->piwikNoscriptTest();
+  }
+
+  /**
+   * Tests that Matomo noscript tags appear in the page with Matomo module.
+   */
+  protected function testMatomoNoscript() {
+    variable_set('matomo_site_id', 1);
+    variable_set('matomo_url_https', 'https://example.org/');
+    $this->piwikNoscriptTest();
+  }
+
+  /**
+   * Tests that Matomo noscript tags appear in the page with Matomo module.
+   */
+  protected function piwikNoscriptTest() {
+    $this->drupalGet(NULL);
+    $elements = $this->xpath('//div[@id="piwik-noscript"]');
+    $this->assert(isset($elements[0]), 'Div tag found.');
+    $elements = $this->xpath('//noscript[child::img[starts-with(@src, "https://example.org/js/?")]]');
+    $this->assert(isset($elements[0]), 'Noscript img tag found.');
+  }
+
+}
