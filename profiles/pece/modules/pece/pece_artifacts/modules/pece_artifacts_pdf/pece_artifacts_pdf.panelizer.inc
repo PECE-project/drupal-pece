@@ -618,6 +618,29 @@ function pece_artifacts_pdf_panelizer_defaults() {
   $pane->uuid = 'f3154cf9-17e8-48a8-94f9-b25946040a24';
   $display->content['new-f3154cf9-17e8-48a8-94f9-b25946040a24'] = $pane;
   $display->panels['sidebar'][10] = 'new-f3154cf9-17e8-48a8-94f9-b25946040a24';
+  $pane = new stdClass();
+  $pane->pid = 'new-85676c85-96e2-4c90-a8aa-55e7457c3097';
+  $pane->panel = 'sidebar';
+  $pane->type = 'citation';
+  $pane->subtype = 'citation';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'override_title' => 1,
+    'override_title_text' => 'Cite as',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 11;
+  $pane->locks = array();
+  $pane->uuid = '85676c85-96e2-4c90-a8aa-55e7457c3097';
+  $display->content['new-85676c85-96e2-4c90-a8aa-55e7457c3097'] = $pane;
+  $display->panels['sidebar'][11] = 'new-85676c85-96e2-4c90-a8aa-55e7457c3097';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $panelizer->display = $display;
