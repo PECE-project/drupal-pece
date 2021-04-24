@@ -1,0 +1,29 @@
+uuid: fb11473d-06f8-4d8e-bce5-c4d4fea34a44
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_pece_tags
+    - profile.type.pece_profile_main
+    - taxonomy.vocabulary.tags
+id: profile.pece_profile_main.field_pece_tags
+field_name: field_pece_tags
+entity_type: profile
+bundle: pece_profile_main
+label: Tags
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

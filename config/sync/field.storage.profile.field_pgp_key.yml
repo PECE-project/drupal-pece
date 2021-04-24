@@ -1,0 +1,23 @@
+uuid: ba271a1f-0564-4efd-b5d3-85e7b26b62e9
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - profile
+id: profile.field_pgp_key
+field_name: field_pgp_key
+entity_type: profile
+type: file
+settings:
+  display_field: false
+  display_default: false
+  uri_scheme: public
+  target_type: file
+module: file
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
