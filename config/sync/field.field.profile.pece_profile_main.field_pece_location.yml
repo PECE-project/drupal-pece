@@ -1,0 +1,57 @@
+uuid: 9b8159ae-d235-4a36-9f31-8518b5390483
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_pece_location
+    - profile.type.pece_profile_main
+  module:
+    - address
+id: profile.pece_profile_main.field_pece_location
+field_name: field_pece_location
+entity_type: profile
+bundle: pece_profile_main
+label: Location
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    country_code: BR
+    langcode: en
+    organization: ''
+    given_name: ''
+    family_name: ''
+    address_line1: ''
+    address_line2: ''
+    dependent_locality: ''
+    locality: ''
+    administrative_area: ''
+    postal_code: ''
+    additional_name: null
+    sorting_code: null
+default_value_callback: ''
+settings:
+  available_countries: {  }
+  langcode_override: ''
+  field_overrides:
+    givenName:
+      override: hidden
+    additionalName:
+      override: hidden
+    familyName:
+      override: hidden
+    organization:
+      override: hidden
+    addressLine1:
+      override: optional
+    postalCode:
+      override: optional
+    dependentLocality:
+      override: optional
+    locality:
+      override: optional
+    administrativeArea:
+      override: optional
+  fields: {  }
+field_type: address

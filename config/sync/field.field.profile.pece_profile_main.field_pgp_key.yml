@@ -1,0 +1,27 @@
+uuid: 1044c4ce-9024-4313-a836-2e35c21620d0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_pgp_key
+    - profile.type.pece_profile_main
+  module:
+    - file
+id: profile.pece_profile_main.field_pgp_key
+field_name: field_pgp_key
+entity_type: profile
+bundle: pece_profile_main
+label: 'OpenPGP key'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: gpg
+  file_extensions: pub
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file
