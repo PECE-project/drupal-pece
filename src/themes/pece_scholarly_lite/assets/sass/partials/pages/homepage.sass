@@ -163,9 +163,12 @@
         z-index: 99999
         border: none
         &::before
-          color: white
+          color: black
+          background: white
           font-size: 3rem
-          text-shadow: 1px 1px black
+          border: 3px solid white
+          border-radius: 100%
+
       .slick-prev
         left: 0 !important
         background: linear-gradient(to right, transparentize($gray, 0.2), transparent 40%)
