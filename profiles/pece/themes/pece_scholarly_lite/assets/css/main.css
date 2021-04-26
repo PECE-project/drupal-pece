@@ -2654,6 +2654,40 @@ body.uad a.edit-mini-panel-link {
     font-size: 18px; }
     .page-home #main-content .pece-douby-double .pane-tagclouds-3 .pane-content {
       width: 90%; }
+  .page-home #main-content .pece-douby-double .slick-prev,
+  .page-home #main-content .pece-douby-double .slick-next {
+    height: 100%;
+    width: 40px;
+    z-index: 99999;
+    border: none; }
+    .page-home #main-content .pece-douby-double .slick-prev::before,
+    .page-home #main-content .pece-douby-double .slick-next::before {
+      color: black;
+      background: white;
+      font-size: 3rem;
+      border: 3px solid white;
+      border-radius: 100%; }
+  .page-home #main-content .pece-douby-double .slick-prev {
+    left: 0 !important;
+    background: linear-gradient(to right, rgba(85, 85, 85, 0.8), transparent 40%);
+    border-radius: 0 100% 100% 0; }
+  .page-home #main-content .pece-douby-double .slick-next {
+    right: 0 !important;
+    background: linear-gradient(to left, rgba(85, 85, 85, 0.8), transparent 40%);
+    border-radius: 100% 0 0 100%; }
+  .page-home #main-content .pece-douby-double .slick-dots {
+    color: transparent; }
+    .page-home #main-content .pece-douby-double .slick-dots li {
+      height: 15px;
+      width: 15px;
+      border-radius: 100%;
+      background-color: #eeeeee;
+      border: 1px inset whitesmoke; }
+    .page-home #main-content .pece-douby-double .slick-dots .slick-active {
+      border: 1px inset #777777;
+      background-color: white; }
+    .page-home #main-content .pece-douby-double .slick-dots button {
+      visibility: hidden; }
   .page-home #main-content .pece-single-column .pane-title {
     margin: 0 0 80px;
     text-align: center; }
