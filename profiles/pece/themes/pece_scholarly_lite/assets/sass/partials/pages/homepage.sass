@@ -69,7 +69,6 @@
         margin: 0 0 30px
         text-align: center
 
-
       .pane-pece-about-about
         padding: 20px 0 0
         a.read-more
@@ -156,6 +155,42 @@
 
         .pane-content
           width: 90%
+
+      .slick-prev,
+      .slick-next
+        height: 100%
+        width: 40px
+        z-index: 99999
+        border: none
+        &::before
+          color: black
+          background: white
+          font-size: 3rem
+          border: 3px solid white
+          border-radius: 100%
+
+      .slick-prev
+        left: 0 !important
+        background: linear-gradient(to right, transparentize($gray, 0.2), transparent 40%)
+        border-radius: 0 100% 100% 0
+      .slick-next
+        right: 0 !important
+        background: linear-gradient(to left, transparentize($gray, 0.2), transparent 40%)
+        border-radius: 100% 0 0 100%
+      .slick-dots
+        color: transparent
+        li
+          height: 15px
+          width: 15px
+          border-radius: 100%
+          background-color: $gray-lighter
+          border: 1px inset whitesmoke
+        .slick-active
+          border: 1px inset $gray-light
+          background-color: white
+        button
+          visibility: hidden
+
 
     // ===========================
     // Panels Layout Single Column
