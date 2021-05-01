@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 
 services:
   db_mysql:
@@ -20,7 +20,6 @@ services:
       dockerfile: ./docker/DockerfileDevelopment
     cap_add:
       - ALL
-    hostname: "dev"
     restart: always
     working_dir: /pece/drupal
     environment:
