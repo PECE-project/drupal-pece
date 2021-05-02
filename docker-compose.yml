@@ -6,6 +6,7 @@ services:
     container_name: "${PROJECT_NAME}_mariadb"
     networks:
       pece:
+      peceV1:
     stop_grace_period: 30s
     environment:
       MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
@@ -21,6 +22,7 @@ services:
     container_name: "${PROJECT_NAME}_php"
     networks:
       pece:
+      peceV1:
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       DB_HOST: $DB_HOST
@@ -38,6 +40,9 @@ services:
     image: wodby/nginx:$NGINX_TAG
     networks:
       pece:
+        aliases:
+          - admin.${PROJECT_BASE_URL}
+      peceV1:
     container_name: "${PROJECT_NAME}_nginx"
     depends_on:
       - php
