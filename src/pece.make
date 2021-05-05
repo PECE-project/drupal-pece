@@ -580,6 +580,7 @@ projects[pdf_reader][patch][] = "./patches/pdf_reader-keydown_event_page_error.p
 projects[amber][subdir] = contrib
 projects[amber][version] = 1.x-dev
 projects[amber][patch][2945946] = "https://www.drupal.org/files/issues/amber-mysql5.7_compatibility-2945946-4.patch"
+projects[amber][patch][] = "./patches/amber_fix-AmberPDO-class-issue.patch"
 
 ; Backup and Migrate
 projects[backup_migrate][subdir] = contrib
