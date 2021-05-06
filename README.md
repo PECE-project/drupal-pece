@@ -244,7 +244,7 @@ Special thanks to our contributors \([emoji key](https://allcontributors.org/doc
   <img src="https://drive.google.com/thumbnail?id=1t4pwwl0f9DCzBmn5MofT8srM6ZPeuFMf" width="100px;" alt=""/> <br />
   <b>Tim Schütz</b>
   </a> <br />
-  <a href="#contributors" title="Audio"> 🔊</a>  x`
+  <a href="#contributors" title="Audio"> 🔊</a>
   <a href="#contributors" title="Bug Reports">🐛</a>
   <a href="#contributors" title="Blogposts"> 📝</a>  
   <a href="#contributors" title="Content"> 🖋</a>
