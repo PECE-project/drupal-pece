@@ -103,7 +103,7 @@ analytics will appear here. Click on the structured analytic to be
 directed to a list of analytics that have been designated a part of that
 structured analytic.
 
-### How do I reorder the Structured Analytics list?
+### How do I reorder the structured analytics list?
 
 1. First, refer to the "Analyze" page to see the current order of your list.
 
@@ -117,7 +117,9 @@ structured analytic.
 
 5. If you want other terms to appear at the top of the list, repeat steps 2-4 but use different weights. The list is ordered from smallest weight to highest weight. So, if you wanted another term to appear second on the list, you would use a weight of -49. Likewise, if you wanted another term to appear at the top of the list, you would use a weight of -51 and so forth.
 
-[Video demonstration](https://www.loom.com/share/2aafce9525e049b2bb2e1dd17152b067)
+
+<iframe width="560" height="315" src="https://www.loom.com/share/2aafce9525e049b2bb2e1dd17152b067" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 
 
 ### How do I access my annotations?
