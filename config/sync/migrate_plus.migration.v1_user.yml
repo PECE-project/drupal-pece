@@ -1,17 +1,19 @@
+langcode: en
+status: true
+dependencies: {  }
 id: v1_user
-label: User accounts
-audit: true
-group: PECE
-migration_tags:
-  - PECE v1
-  - Drupal 7
-  - Content
 class: Drupal\user\Plugin\migrate\User
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'PECE v1-test'
+  - 'Drupal 7'
+  - Content
+migration_group: pece
+label: 'User accounts'
 source:
   plugin: d7_user
 process:
-  # If you are using this file to build a custom migration consider removing
-  # the uid field to allow incremental migrations.
   uid: uid
   name: name
   pass: pass
@@ -47,7 +49,7 @@ process:
       plugin: migration_lookup
       migration: d7_file
 destination:
-  plugin: entity:user
+  plugin: 'entity:user'
 migration_dependencies:
   required:
     - d7_user_role
