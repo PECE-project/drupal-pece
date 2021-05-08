@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a9bce6f919ecb55dd4a44941b32f4c54",
+    "content-hash": "8d93943665f3777255284aac616a28d0",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3487,9 +3487,6 @@
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
                     }
-                },
-                "patches_applied": {
-                    "978-Add get all field resolvers": "patches/graphql-978-add-getall-field-resolvers.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -11951,6 +11948,67 @@
                 "source": "https://gitlab.com/drupalspoons/devel",
                 "issues": "https://gitlab.com/drupalspoons/devel/-/issues",
                 "slack": "https://drupal.slack.com/archives/C012WAW1MH6"
+            }
+        },
+        {
+            "name": "drupal/migrate_devel",
+            "version": "2.0.0-alpha2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/migrate_devel.git",
+                "reference": "8.x-2.0-alpha2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/migrate_devel-8.x-2.0-alpha2.zip",
+                "reference": "8.x-2.0-alpha2",
+                "shasum": "8ea8a10d8238c0a52abc7b12d688414e024999c8"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "conflict": {
+                "drush/drush": "<9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.0-alpha2",
+                    "datestamp": "1593367363",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                },
+                "drush": {
+                    "services": {
+                        "drush.services.yml": "^9"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Derimagia",
+                    "homepage": "https://www.drupal.org/user/819640"
+                },
+                {
+                    "name": "aczietlow",
+                    "homepage": "https://www.drupal.org/user/1616656"
+                },
+                {
+                    "name": "andrewmacpherson",
+                    "homepage": "https://www.drupal.org/user/265648"
+                }
+            ],
+            "description": "Migrate Development Tools",
+            "homepage": "https://www.drupal.org/project/migrate_devel",
+            "support": {
+                "source": "https://git.drupalcode.org/project/migrate_devel",
+                "issues": "https://www.drupal.org/project/issues/migrate_devel"
             }
         },
         {
