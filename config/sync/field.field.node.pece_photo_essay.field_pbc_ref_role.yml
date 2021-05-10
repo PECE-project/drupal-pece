@@ -1,0 +1,30 @@
+uuid: 1bdab64b-6773-49c4-b091-2431de31a064
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pbc_ref_role
+    - node.type.pece_photo_essay
+  module:
+    - pbf
+id: node.pece_photo_essay.field_pbc_ref_role
+field_name: field_pbc_ref_role
+entity_type: node
+bundle: pece_photo_essay
+label: 'Permission by Roles'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user_role'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+  synchronized_by: ''
+  priority: 0
+  user_method: user
+  synchronized_with: ''
+  synchronized_from_target: 0
+field_type: pbf

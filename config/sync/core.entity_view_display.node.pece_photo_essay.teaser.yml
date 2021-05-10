@@ -1,0 +1,46 @@
+uuid: 2aca7d63-c453-4b59-b64e-e80e927ec4ad
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_photo_essay.body
+    - field.field.node.pece_photo_essay.field_pbc_ref_group
+    - field.field.node.pece_photo_essay.field_pbc_ref_role
+    - field.field.node.pece_photo_essay.field_pbc_ref_user
+    - field.field.node.pece_photo_essay.field_pece_contributors
+    - field.field.node.pece_photo_essay.field_pece_photo_essay_thumbnail
+    - field.field.node.pece_photo_essay.field_pece_tags
+    - field.field.node.pece_photo_essay.field_pece_uri
+    - node.type.pece_photo_essay
+  module:
+    - text
+    - user
+id: node.pece_photo_essay.teaser
+targetEntityType: node
+bundle: pece_photo_essay
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
+  field_pece_contributors: true
+  field_pece_photo_essay_thumbnail: true
+  field_pece_tags: true
+  field_pece_uri: true
+  langcode: true
+  search_api_excerpt: true
