@@ -1,0 +1,32 @@
+uuid: cba2182b-0f77-401e-b044-70076b4fbc70
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_photo_essay_item.field_pece_description
+    - field.field.paragraph.paragraph_photo_essay_item.field_pece_image_artifact
+    - paragraphs.paragraphs_type.paragraph_photo_essay_item
+  module:
+    - text
+id: paragraph.paragraph_photo_essay_item.default
+targetEntityType: paragraph
+bundle: paragraph_photo_essay_item
+mode: default
+content:
+  field_pece_description:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_pece_image_artifact:
+    weight: 0
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  search_api_excerpt: true
