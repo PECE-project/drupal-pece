@@ -4,7 +4,7 @@
    by the platform on which they are running (e.g. Wordpress, Drupal)
  */
 interface iAmberDB {
- 
+
   public function db_type();
   public function select($sql, $options = array());
   public function selectAll($sql, $options = array());
@@ -16,7 +16,7 @@ interface iAmberDB {
 
 Class AmberPDO implements iAmberDB {
 
-	public function __construct(PDO $db) {
+	public function __construct(DatabaseConnection $db) {
   		$this->db = $db;
 	}
 
@@ -24,7 +24,7 @@ Class AmberPDO implements iAmberDB {
 		$sql = str_replace('%s', '?', $sql);
 		$sql = str_replace('%d', '?', $sql);
 		$sql = str_replace('%f', '?', $sql);
-		return $sql;  		
+		return $sql;
 	}
 
 	private function execute($sql, $options) {
@@ -69,7 +69,7 @@ Class AmberPDO implements iAmberDB {
 			error_log("Could not create query: $sql");
 			return false;
 		}
-	    $query->closeCursor();      
+	    $query->closeCursor();
 	}
 
 	public function update($sql, $options = array()) {
@@ -78,7 +78,7 @@ Class AmberPDO implements iAmberDB {
 			error_log("Could not create query: $sql");
 			return false;
 		}
-    	$query->closeCursor();      
+    	$query->closeCursor();
 	}
 
 	public function delete($sql, $options = array()) {
@@ -87,8 +87,8 @@ Class AmberPDO implements iAmberDB {
 			error_log("Could not create query: $sql");
 			return false;
 		}
-	    $query->closeCursor();      
-	}	
+	    $query->closeCursor();
+	}
 }
 
 Class AmberWPDB implements iAmberDB {
@@ -118,7 +118,7 @@ Class AmberWPDB implements iAmberDB {
 	public function selectAll($sql, $options = array())
 	{
 	    $query = $this->prepare($sql, $options);
-	    return $this->db->get_results($query, ARRAY_A); 
+	    return $this->db->get_results($query, ARRAY_A);
 	}
 
 	public function insert($sql, $options = array())

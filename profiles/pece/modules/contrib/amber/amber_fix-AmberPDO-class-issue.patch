@@ -1,0 +1,82 @@
+From e47aa834c47d1d1858557dd080feb4df0b79f317 Mon Sep 17 00:00:00 2001
+From: Renato Vasconcellos <revagomes@gmail.com>
+Date: Wed, 5 May 2021 06:42:30 +0000
+Subject: [PATCH] Fix AmberPDO class construct method to be compatible with
+ Drupal's DatabaseConnection class.
+
+---
+ libraries/AmberDB.php | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/libraries/AmberDB.php b/libraries/AmberDB.php
+index 096d8f7..2aaff63 100644
+--- a/libraries/AmberDB.php
++++ b/libraries/AmberDB.php
+@@ -4,7 +4,7 @@
+    by the platform on which they are running (e.g. Wordpress, Drupal)
+  */
+ interface iAmberDB {
+- 
++
+   public function db_type();
+   public function select($sql, $options = array());
+   public function selectAll($sql, $options = array());
+@@ -16,7 +16,7 @@ interface iAmberDB {
+ 
+ Class AmberPDO implements iAmberDB {
+ 
+-	public function __construct(PDO $db) {
++	public function __construct(DatabaseConnection $db) {
+   		$this->db = $db;
+ 	}
+ 
+@@ -24,7 +24,7 @@ Class AmberPDO implements iAmberDB {
+ 		$sql = str_replace('%s', '?', $sql);
+ 		$sql = str_replace('%d', '?', $sql);
+ 		$sql = str_replace('%f', '?', $sql);
+-		return $sql;  		
++		return $sql;
+ 	}
+ 
+ 	private function execute($sql, $options) {
+@@ -69,7 +69,7 @@ Class AmberPDO implements iAmberDB {
+ 			error_log("Could not create query: $sql");
+ 			return false;
+ 		}
+-	    $query->closeCursor();      
++	    $query->closeCursor();
+ 	}
+ 
+ 	public function update($sql, $options = array()) {
+@@ -78,7 +78,7 @@ Class AmberPDO implements iAmberDB {
+ 			error_log("Could not create query: $sql");
+ 			return false;
+ 		}
+-    	$query->closeCursor();      
++    	$query->closeCursor();
+ 	}
+ 
+ 	public function delete($sql, $options = array()) {
+@@ -87,8 +87,8 @@ Class AmberPDO implements iAmberDB {
+ 			error_log("Could not create query: $sql");
+ 			return false;
+ 		}
+-	    $query->closeCursor();      
+-	}	
++	    $query->closeCursor();
++	}
+ }
+ 
+ Class AmberWPDB implements iAmberDB {
+@@ -118,7 +118,7 @@ Class AmberWPDB implements iAmberDB {
+ 	public function selectAll($sql, $options = array())
+ 	{
+ 	    $query = $this->prepare($sql, $options);
+-	    return $this->db->get_results($query, ARRAY_A); 
++	    return $this->db->get_results($query, ARRAY_A);
+ 	}
+ 
+ 	public function insert($sql, $options = array())
+-- 
+2.11.0
+
