@@ -4,8 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.user.user.field_pbc_ref_group
+    - field.field.user.user.field_user_picture
     - field.field.user.user.field_zotero
+    - image.style.thumbnail
   module:
+    - image
     - path
     - pbf
     - user
@@ -39,6 +42,14 @@ content:
     third_party_settings: {  }
     type: pbf_widget
     region: content
+  field_user_picture:
+    weight: 33
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
   field_zotero:
     weight: 31
     settings:
@@ -65,3 +76,4 @@ content:
     region: content
 hidden:
   langcode: true
+  pece_profile_main_profiles: true

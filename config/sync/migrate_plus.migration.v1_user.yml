@@ -6,7 +6,7 @@ class: Drupal\user\Plugin\migrate\User
 field_plugin_method: null
 cck_plugin_method: null
 migration_tags:
-  - 'PECE v1-test'
+  - 'PECE v1'
   - 'Drupal 7'
   - Content
 migration_group: pece
@@ -40,22 +40,17 @@ process:
     plugin: migration_lookup
     migration: d7_user_role
     source: roles
-  user_picture:
-    -
-      plugin: default_value
-      source: picture
-      default_value: null
-    -
-      plugin: migration_lookup
-      migration: d7_file
+  field_user_picture: field_user_picture
+  field_zotero: field_zotero_username
 destination:
   plugin: 'entity:user'
 migration_dependencies:
   required:
     - d7_user_role
+    - v1_file
   optional:
-    - d7_field_instance
     - d7_file
+    - d7_field_instance
     - language
     - default_language
     - user_picture_field_instance
