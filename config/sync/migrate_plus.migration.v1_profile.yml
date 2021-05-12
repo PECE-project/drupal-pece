@@ -3,7 +3,7 @@ label: User accounts profile
 audit: true
 migration_group: pece
 migration_tags:
-  - "PECE v1-test"
+  - "PECE v1"
   - "Drupal 7"
   - Content
 deriver: Drupal\profile\Plugin\migrate\D7Profile2Deriver
@@ -30,10 +30,18 @@ process:
       - email
   field_pece_institution: field_pece_institution
   field_pece_position: field_pece_position
+  field_pece_tags: field_pece_tags
+  field_pgp_key/target_id:
+    plugin: extract
+    source: field_gpg_key
+    index:
+      - 0
+      - fid
 destination:
   plugin: entity:profile
 migration_dependencies:
   required:
     - v1_user
+    - v1_file
   optional:
     - d7_field_instance

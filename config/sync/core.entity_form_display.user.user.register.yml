@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_form_mode.user.register
     - field.field.user.user.field_pbc_ref_group
+    - field.field.user.user.field_user_picture
     - field.field.user.user.field_zotero
   module:
     - path
@@ -73,4 +74,5 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_user_picture: true
   langcode: true

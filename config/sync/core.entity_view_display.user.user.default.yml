@@ -4,8 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.user.user.field_pbc_ref_group
+    - field.field.user.user.field_user_picture
     - field.field.user.user.field_zotero
   module:
+    - image
     - pbf
     - user
 id: user.user.default
@@ -20,6 +22,15 @@ content:
       link: true
     third_party_settings: {  }
     type: pbf_formatter_default
+    region: content
+  field_user_picture:
+    weight: 8
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
     region: content
   field_zotero:
     weight: 6
@@ -36,4 +47,5 @@ content:
     region: content
 hidden:
   langcode: true
+  pece_profile_main_profiles: true
   search_api_excerpt: true
