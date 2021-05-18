@@ -27,6 +27,7 @@ services:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       DB_HOST: $DB_HOST
       DB_USER: $DB_USER
+      MIGRATE_V1_URL: $MIGRATE_V1_URL
       DB_PASSWORD: $DB_PASSWORD
       DB_NAME: $DB_NAME
       DB_DRIVER: $DB_DRIVER

@@ -16,7 +16,7 @@ source:
     # represents the fully qualified path relative to which URIs in the files
     # table are specified, and must end with a /. See source_full_path
     # configuration in this migration's process pipeline as an example.
-    source_base_path: 'http://v1.pece.local'
+    source_base_path: ''
 process:
   # If you are using this file to build a custom migration consider removing
   # the fid field to allow incremental migrations.
@@ -24,9 +24,10 @@ process:
   filename: filename
   source_full_path:
     -
-      plugin: concat
+      plugin: concat_env
       delimiter: /
       source:
+        - env/MIGRATE_V1_URL
         - constants/source_base_path
         - filepath
     -
