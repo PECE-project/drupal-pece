@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d93943665f3777255284aac616a28d0",
+    "content-hash": "4db620b33ccf5e454571172f0aea5518",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3910,6 +3910,55 @@
                 "irc": "irc://irc.freenode.org/drupal-contribute"
             },
             "time": "2021-04-20T14:38:41+00:00"
+        },
+        {
+            "name": "drupal/location_migration",
+            "version": "1.0.0-beta3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/location_migration.git",
+                "reference": "1.0.0-beta3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/location_migration-1.0.0-beta3.zip",
+                "reference": "1.0.0-beta3",
+                "shasum": "49200384e23a8fc78aad685a3b797641faad3cd3"
+            },
+            "require": {
+                "drupal/address": "^1.8",
+                "drupal/core": "^8.8 || ^9",
+                "drupal/geolocation": "^3.2",
+                "php": ">=7.1"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.0-beta3",
+                    "datestamp": "1603710055",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Zoltán Horváth",
+                    "homepage": "https://www.drupal.org/u/huzooka",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Migration plugins for migrating Drupal 7 location data from Drupal 7 to Drupal 9",
+            "homepage": "https://www.drupal.org/project/location_migration",
+            "support": {
+                "source": "https://git.drupalcode.org/project/location_migration",
+                "issues": "https://www.drupal.org/project/issues/location_migration"
+            }
         },
         {
             "name": "drupal/matomo",
@@ -14494,6 +14543,7 @@
         "drupal/eck": 15,
         "drupal/graphql": 20,
         "drupal/languagefield": 20,
+        "drupal/location_migration": 10,
         "drupal/media_entity_browser": 15,
         "drupal/rules": 20
     },
