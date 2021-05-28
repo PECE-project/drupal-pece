@@ -22,6 +22,11 @@ This file is for practicing updates to the PECE Docs.
 - My favorite page on pece-docs is [this one](../artifacts).
 - [Lindsay Poirier](#lindsay-poirier) wrote this assignment.
 
+### Hipolito Angel Cerros
+
+- My favorite page on pece-docs is [this one] (../)
+-
+
 ### Farhat Bin Aznan
 - I like the [installation page](../installation) on PECE docs.
 - [I](#farhat-bin-aznan) was referred to this page to update the README.

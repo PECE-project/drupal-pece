@@ -225,7 +225,7 @@ _status: $ark_remote_status_param";
  */
 function pece_ark_data_save($node, array $from_remote_data = null) {
   // Do not insert ARK name mappings for content that isn't resources.
-  if (!in_array($node->type, variable_get('ark_node_types'))) {
+  if (!in_array($node->type, variable_get('ark_node_types')) || isset($node->field_ark_enabled) && isset($node->field_ark_enabled[LANGUAGE_NONE][0]) && $node->field_ark_enabled[LANGUAGE_NONE][0]['value'] == "0") {
     return;
   }
 
@@ -594,6 +594,15 @@ function pece_ark_extra_field_render_array($field_name, $node) {
 }
 
 /**
+ * Implements hook_ctools_plugin_directory().
+ */
+function pece_ark_ctools_plugin_directory($module, $plugin) {
+  if ($module === 'ctools' && $plugin === 'content_types') {
+    return 'plugins/' . $plugin;
+  }
+}
+
+/**
  * Constructs a descriptive page.
  *
  * Our menu maps this function to the path 'examples/page_example'.
@@ -774,4 +783,19 @@ function _ark_convert_data_to_human_readable($timestamp = null){
     $result = $dt->format('Y-m-d H:i:sP');
   }
   return $result;
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function pece_ark_form_node_form_alter(&$form, &$form_state) {
+
+  if (!isset($form['field_ark_enabled']))
+    return;
+
+  global $user;
+
+  if ($user->uid != 1 && (!in_array('administrator', $user->roles) || !in_array($form['#bundle'], variable_get('ark_node_types')))) {
+    unset($form['field_ark_enabled']);
+  }
 }

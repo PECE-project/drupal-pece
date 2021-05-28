@@ -109,7 +109,6 @@ function _pece_groups_hide_edit_form_fields(&$form, $fields = array()) {
       'field_pece_artifacts',
       'og_roles_permissions',
       'group_content_access',
-      'field_pece_project_ref',
       'field_pece_file_format',
       'field_pece_website_url',
       'field_pece_bibliography',
@@ -149,24 +148,11 @@ function _pece_groups_edit_form_fields_invisible(&$form, $fields = array()) {
 }
 
 /**
- * Hide the field_pece_project_ref (deprecated) to keep its records for future use if needed.
- * @param $form
- * @param array $fields
- */
-function _pece_groups_hide_project_ref_field(&$form, $fields = array()) {
-  if (isset($form['field_pece_project_ref'])) {
-    $form['field_pece_project_ref']['#access'] = FALSE;
-  }
-}
-
-/**
  * Implements hook_form_alter().
  */
 function pece_groups_form_alter(&$form, &$form_state, $form_id) {
 
   if (strpos($form_id,'_node_form') !== FALSE) {
-    // Hide Project field (deprecated).
-    _pece_groups_hide_project_ref_field($form);
 
     if (isset($form_state['pece_groups_edit_group_field']) && $form_state['pece_groups_edit_group_field'] === TRUE) {
       $req_fields = array(

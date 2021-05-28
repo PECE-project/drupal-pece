@@ -191,6 +191,11 @@ projects[total_control][subdir] = contrib
 
 projects[node_access_rebuild_bonus][version] = 1.1
 projects[node_access_rebuild_bonus][subdir] = contrib
+// Analytics Matomo
+projects[matomo][version] = 2.12
+projects[matomo][subdir] = contrib
+projects[piwik_noscript][version] = 1.4
+projects[piwik_noscript][subdir] = contrib
 
 ; =====================
 ; Configuration Management
@@ -575,6 +580,7 @@ projects[pdf_reader][patch][] = "./patches/pdf_reader-keydown_event_page_error.p
 projects[amber][subdir] = contrib
 projects[amber][version] = 1.x-dev
 projects[amber][patch][2945946] = "https://www.drupal.org/files/issues/amber-mysql5.7_compatibility-2945946-4.patch"
+projects[amber][patch][] = "./patches/amber_fix-AmberPDO-class-issue.patch"
 
 ; Backup and Migrate
 projects[backup_migrate][subdir] = contrib

@@ -475,6 +475,29 @@ function pece_essay_panelizer_defaults() {
   $pane->uuid = '40e19591-cf88-4d25-9830-0443bfd0b68d';
   $display->content['new-40e19591-cf88-4d25-9830-0443bfd0b68d'] = $pane;
   $display->panels['sidebar'][4] = 'new-40e19591-cf88-4d25-9830-0443bfd0b68d';
+  $pane = new stdClass();
+  $pane->pid = 'new-15203b6a-643e-4768-b6fe-dd68ef0a2e68';
+  $pane->panel = 'sidebar';
+  $pane->type = 'citation';
+  $pane->subtype = 'citation';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'override_title' => 1,
+    'override_title_text' => 'Cite as',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 5;
+  $pane->locks = array();
+  $pane->uuid = '15203b6a-643e-4768-b6fe-dd68ef0a2e68';
+  $display->content['new-15203b6a-643e-4768-b6fe-dd68ef0a2e68'] = $pane;
+  $display->panels['sidebar'][5] = 'new-15203b6a-643e-4768-b6fe-dd68ef0a2e68';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $panelizer->display = $display;
