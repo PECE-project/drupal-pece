@@ -21,22 +21,36 @@ process:
   created: created
   changed: changed
   field_pece_full_name: field_pece_full_name
-  field_pece_biography: field_pece_biography
+  field_pece_biography:
+      plugin: default_value
+      source: field_pece_biography
+      default_value:
   field_pece_email:
-    plugin: extract
-    source: field_pece_email
-    index:
-      - 0
-      - email
+    -
+      plugin: default_value
+      source: field_gpg_key
+      default_value: ''
+    -
+      plugin: extract
+      source: field_pece_email
+      index:
+        - 0
+        - email
+      default: null
   field_pece_institution: field_pece_institution
   field_pece_position: field_pece_position
   field_pece_tags: field_pece_tags
   field_pgp_key/target_id:
-    plugin: extract
-    source: field_gpg_key
-    index:
-      - 0
-      - fid
+    -
+      plugin: default_value
+      source: field_gpg_key
+      default_value:
+        - fid: 0
+    -
+      plugin: extract
+      index:
+        - 0
+        - fid
   field_pece_location:
     plugin: location_to_address
     source: field_pece_location

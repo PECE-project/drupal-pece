@@ -1,0 +1,82 @@
+id: v1_essay
+label: Migrate PECE Essays
+audit: true
+migration_group: pece
+migration_tags:
+  - "PECE v1"
+  - "Drupal 7"
+  - Content
+class: Drupal\node\Plugin\migrate\D7NodeTranslation
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node_complete
+  bundle: pece_essay
+  constants:
+    slash: '/'
+process:
+  nid: tnid
+  vid: vid
+  #  langcode:
+  #    plugin: default_value
+  #    source: language
+  #    default_value: "und"
+  type:
+    plugin: default_value
+    default_value: pece_essay
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: "und"
+  title: title
+  uid: node_uid
+  status: status
+  created: created
+  changed: timestamp
+  promote: promote
+  path/pathauto:
+    plugin: default_value
+    default_value: 0 # Disable pathauto
+  path/alias:
+    plugin: concat
+    source:
+      - constants/slash
+      - url
+  sticky: sticky
+  revision_uid: revision_uid
+  revision_log: log
+  revision_timestamp: timestamp
+  content_translation_source: source_langcode
+  field_essay_contributors:
+    plugin: default_value
+    source: field_pece_contributors
+    default_value:
+  'body/format':
+    plugin: default_value
+    default_value: html
+  'body/value':
+    plugin: extract
+    source: body
+    index:
+      - 0
+      - value
+    default: ''
+  'body/summary':
+    plugin: extract
+    source: body
+    index:
+      - 0
+      - summary
+    default: ''
+  field_essay_thumbnail: field_thumbnail
+  field_essay_uri: field_pece_uri
+  field_pece_tags: field_pece_tags
+destination:
+  plugin: entity_complete:node
+  translations: true
+migration_dependencies:
+  required:
+    - v1_user
+    - v1_file
+  optional:
+    - d7_field_instance
+    - d7_comment_field_instance
