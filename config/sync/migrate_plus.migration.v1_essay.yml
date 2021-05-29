@@ -61,7 +61,18 @@ process:
       - 0
       - summary
     default: ''
-  field_essay_thumbnail: field_thumbnail
+  field_essay_thumbnail/target_id:
+    -
+      plugin: default_value
+      source: field_thumbnail
+      default_value:
+        - fid: 0
+    -
+      plugin: extract
+      index:
+        - 0
+        - fid
+      default: null
   field_essay_uri: field_pece_uri
   field_pece_tags: field_pece_tags
 destination:
