@@ -9,10 +9,8 @@ migration_tags:
 class: Drupal\node\Plugin\migrate\D7NodeTranslation
 deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
 source:
-  plugin: d7_node_complete
+  plugin: v1_node
   bundle: pece_essay
-  constants:
-    slash: '/'
 process:
   nid: tnid
   vid: vid
@@ -33,14 +31,10 @@ process:
   created: created
   changed: timestamp
   promote: promote
-  path/pathauto:
+  'path/pathauto':
     plugin: default_value
     default_value: 0 # Disable pathauto
-  path/alias:
-    plugin: concat
-    source:
-      - constants/slash
-      - url
+  'path/alias': alias
   sticky: sticky
   revision_uid: revision_uid
   revision_log: log
