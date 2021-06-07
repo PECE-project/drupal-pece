@@ -42,10 +42,8 @@ function _citation_render($node) {
   // Prepare response block.
   $block = new stdClass();
   $ark_link = _citation_get_ark_link($node);
-  // Define creators
-  $creator = pece_get_fullname_or_name(user_load($node->uid));
   $contributors = isset($node->field_pece_contributors[LANGUAGE_NONE]) ? $node->field_pece_contributors[LANGUAGE_NONE] : array();
-  $creator = _citation_create_many_names($contributors, $creator);
+  $creator = _citation_create_many_names($contributors);
   $projectId = isset($node->field_pece_project_ref[LANGUAGE_NONE]) ? $node->field_pece_project_ref[LANGUAGE_NONE][0]['target_id'] : null;
   $projectName = '';
   if ($projectId) {
@@ -88,10 +86,9 @@ function _artifact_citation_render($node) {
 
   if (count($creators)) {
     $creators = _citation_create_many_names_authors($creators);
-    $contributor = pece_get_fullname_or_name(user_load($node->uid));
   }
   else {
-    $creators = pece_get_fullname_or_name(user_load($node->uid));
+    $creators = t('Anonymous');
   }
 
   $contributors = isset($node->field_pece_contributors[LANGUAGE_NONE]) ? $node->field_pece_contributors[LANGUAGE_NONE] : array();
