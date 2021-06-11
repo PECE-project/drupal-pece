@@ -1084,7 +1084,6 @@ li {
 
 @media (min-width: 992px) {
   .photo-essay-slider-arrow {
-    top: 0;
     width: 5%;
     height: 100%;
     opacity: 0.5;
@@ -2634,6 +2633,40 @@ body.uad a.edit-mini-panel-link {
       padding: 0 12px; }
     .page-home #main-content .pane-tagclouds-3 .more-link {
       display: none; }
+  .page-home #main-content .view-frontpage-image-slider .slick-prev,
+  .page-home #main-content .view-frontpage-image-slider .slick-next {
+    height: 100%;
+    width: 40px;
+    z-index: 99999;
+    border: none; }
+    .page-home #main-content .view-frontpage-image-slider .slick-prev::before,
+    .page-home #main-content .view-frontpage-image-slider .slick-next::before {
+      color: black;
+      background: white;
+      font-size: 3rem;
+      padding: 3px;
+      border-radius: 100%; }
+  .page-home #main-content .view-frontpage-image-slider .slick-prev {
+    left: 0 !important;
+    background: linear-gradient(to right, rgba(85, 85, 85, 0.8), transparent 40%);
+    border-radius: 0 100% 100% 0; }
+  .page-home #main-content .view-frontpage-image-slider .slick-next {
+    right: 0 !important;
+    background: linear-gradient(to left, rgba(85, 85, 85, 0.8), transparent 40%);
+    border-radius: 100% 0 0 100%; }
+  .page-home #main-content .view-frontpage-image-slider .slick-dots {
+    color: transparent; }
+    .page-home #main-content .view-frontpage-image-slider .slick-dots li {
+      height: 15px;
+      width: 15px;
+      border-radius: 100%;
+      background-color: #eeeeee;
+      border: 1px inset whitesmoke; }
+    .page-home #main-content .view-frontpage-image-slider .slick-dots .slick-active {
+      border: 1px inset #777777;
+      background-color: white; }
+    .page-home #main-content .view-frontpage-image-slider .slick-dots button {
+      visibility: hidden; }
   .page-home #main-content .pece-douby-double .pane-title {
     margin: 0 0 30px;
     text-align: center; }
@@ -2782,40 +2815,6 @@ body.uad a.edit-mini-panel-link {
     font-size: 18px; }
     .page-home #main-content .pece-douby-double .pane-tagclouds-3 .pane-content {
       width: 90%; }
-  .page-home #main-content .pece-douby-double .slick-prev,
-  .page-home #main-content .pece-douby-double .slick-next {
-    height: 100%;
-    width: 40px;
-    z-index: 99999;
-    border: none; }
-    .page-home #main-content .pece-douby-double .slick-prev::before,
-    .page-home #main-content .pece-douby-double .slick-next::before {
-      color: black;
-      background: white;
-      font-size: 3rem;
-      padding: 3px;
-      border-radius: 100%; }
-  .page-home #main-content .pece-douby-double .slick-prev {
-    left: 0 !important;
-    background: linear-gradient(to right, rgba(85, 85, 85, 0.8), transparent 40%);
-    border-radius: 0 100% 100% 0; }
-  .page-home #main-content .pece-douby-double .slick-next {
-    right: 0 !important;
-    background: linear-gradient(to left, rgba(85, 85, 85, 0.8), transparent 40%);
-    border-radius: 100% 0 0 100%; }
-  .page-home #main-content .pece-douby-double .slick-dots {
-    color: transparent; }
-    .page-home #main-content .pece-douby-double .slick-dots li {
-      height: 15px;
-      width: 15px;
-      border-radius: 100%;
-      background-color: #eeeeee;
-      border: 1px inset whitesmoke; }
-    .page-home #main-content .pece-douby-double .slick-dots .slick-active {
-      border: 1px inset #777777;
-      background-color: white; }
-    .page-home #main-content .pece-douby-double .slick-dots button {
-      visibility: hidden; }
   .page-home #main-content .pece-single-column .pane-title {
     margin: 0 0 80px;
     text-align: center; }
@@ -3100,6 +3099,11 @@ body {
   -webkit-user-select: text;
   -ms-user-select: text;
   user-select: text; }
+
+.photo-essay-modal .slick-prev::before,
+.photo-essay-modal .slick-next::before {
+  content: '';
+  background: none; }
 
 #header-top {
   background-color: #7851A9; }
