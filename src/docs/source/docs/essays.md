@@ -22,23 +22,72 @@ a web form to create the content. Enter the relevant fields (explained
 in other parts of this document). Save the content.
 
 ### How do I create a photo essay?
-For an overview of how to create photo essays, see this YouTube video.
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Z2K9nrp4j74" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-Navigate to your ‘Dashboard’. This link will be listed in the main menu.
-Under the ‘Add Content’ heading, select ‘Photo Essay’. You will be
-directed to a web form to create the content.
-
-In the ‘image artifact’ field, begin typing the name of the artifact you
-would like to link into the photo essay. In the ‘text’ field, enter the
-essay text that you wish to display with the image artifact. Click the
-‘Create Item’ button. ![](media/addphotoessay.png)
-
-To add another photo essay slide, click the ‘Add New Item’ button. Once
-done, fill out the remaining fields (explained in other parts of this
-document), and save the content.
 
 For an overview of how to create photo essays, see [*this YouTube video*](https://www.youtube.com/watch?v=Z2K9nrp4j74).
+
+Step-by-step
+
+1. Begin by logging into the PECE platform and navigating to your Dashboard.
+    ![](media/photo_essay_1.png)
+
+2. Click “Photo Essay”
+
+    ![](media/photo_essay_2.png)
+
+3. You should now have access to all of the fields you need to fill out in order to create a new Photo Essay.
+    * First, type the title in the “Title” pane.</li>
+    * Next, write out your project description in the “Description” section. </li>
+    ![](media/photo_essay_3.png)
+
+4. Next Choose a “thumbnail” image to represent your essay.
+    * You can edit this image later </li>
+    * Click “Next” to upload the image. Type in Alt Text and/or Title Text as desired (you can simply leave these blank), and click save. <br/> You are now ready to upload your image artifacts into your Photo Essay. </li>
+
+5. Begin by typing the title of the image artifact into the “Image Artifact” pane. Your Image Artifact should pop up as an option to select.
+    * Click on the title of your Image Artifact to select it. </li>
+    * Next, type in the “Substantive Caption” into the “Text” pane. </li>
+    * Click “Create Item”. </li>
+
+    ![](media/photo_essay_4.png)
+
+
+6. Once this artifact is added, click “Add New Item.” Repeat Step 5 for your remaining Image Artifacts.
+
+    ![](media/photo_essay_5.png)
+
+7. If you would like this essay to appear in a group, be sure to select the Group Audience.
+    * Select “Public” to make it accessible to all viewers</li>
+    * Select “Private” to limit visibility to Group Members</li>
+
+
+
+8. Select a license for the content. (See [licensing](./licensing.md) for more information)
+
+    ![](media/photo_essay_6.png)
+
+9. Next, add yourself as a contributor by typing the first few letters of your name into the “contributor” field. Your screen name should pop up. Select your name.
+
+    * Repeat this process with the names of any other group members who you would like to grant access to editing the image or caption. </li>
+
+
+    ![](media/photo_essay_7.png)
+
+10. Tag the Essay with any tags that you find appropriate.
+    <br> If the essay is not ready to be made public, you can alter the permissions of the image. </br>
+
+    * Select “Private” to limit visibility to yourself and other contributors.</li>
+    * Select “Restricted” to limit visibility to PECE users.</li>
+    * Select “Open” to make the essay visible to all internet users.</li>
+
+
+11. Finally, scroll back up to the top of the page and click “Save” to save your work.
+
+    ![](media/photo_essay_8.png)
+
+Congratulations! You’ve created your Photo Essay!
+
+
+
 
 ### How do I reorder photos in a photo essay?
 
