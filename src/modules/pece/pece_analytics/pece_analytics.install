@@ -29,3 +29,11 @@ function pece_analytics_update_7003() {
   module_load_include('inc', 'pece', 'pece.functions');
   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_analytics');
 }
+
+/**
+ * Fix Analytics list page not keeping previously set order.
+ */
+function pece_analytics_update_7004() {
+  if (!module_exists('features')) return;
+  features_revert(array('pece_analytics' => 'views_view'));
+}
