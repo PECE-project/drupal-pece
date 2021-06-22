@@ -12,7 +12,7 @@ drush:
 	docker exec $(shell docker-compose ps | grep _dev_ | cut -d" " -f 1) bash -c 'cd build && drush $(argument)'
 
 up:
-	docker-compose up -d
+	docker-compose up -d --remove-orphans
 
 stop:
 	docker-compose stop
