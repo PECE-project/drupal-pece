@@ -1,0 +1,28 @@
+uuid: d99a90b2-6cd8-4667-85f0-8da62cccfbc3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_slideshow_image.field_pece_description
+    - field.field.node.pece_slideshow_image.field_pece_slideshowimage_image
+    - field.field.node.pece_slideshow_image.field_pece_slideshowimage_link
+    - node.type.pece_slideshow_image
+  module:
+    - user
+id: node.pece_slideshow_image.teaser
+targetEntityType: node
+bundle: pece_slideshow_image
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_pece_description: true
+  field_pece_slideshowimage_image: true
+  field_pece_slideshowimage_link: true
+  langcode: true
+  search_api_excerpt: true

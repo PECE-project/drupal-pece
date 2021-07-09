@@ -1,0 +1,29 @@
+uuid: fd8bc744-dae0-46c4-a407-d7cce06cd0ba
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.pece_frontpage_image_slider
+  module:
+    - system
+    - views
+  theme:
+    - claro
+id: views_block__pece_frontpage_image_slider_block_1
+theme: claro
+region: highlighted
+weight: -3
+provider: null
+plugin: 'views_block:pece_frontpage_image_slider-block_1'
+settings:
+  id: 'views_block:pece_frontpage_image_slider-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false

@@ -1,0 +1,15 @@
+extend type Query {
+  peceFrontpageSlideshows (
+    offset: Int = 0
+    limit: Int = 10
+    filters: [Filter] = []
+  ): PeceFrontpageSlideshowConnection!
+
+  peceFrontpageSlideshow (id: Int!) : PeceFrontpageSlideshow
+}
+
+extend type Mutation {
+  createPeceFrontpageSlideshow(data: FrontpageSlideshowInput):PeceFrontpageSlideshow
+  deletePeceFrontpageSlideshow(id: Int): PeceFrontpageSlideshow
+  updatePeceFrontpageSlideshow(id:Int, data: FrontpageSlideshowInput): PeceFrontpageSlideshow
+}

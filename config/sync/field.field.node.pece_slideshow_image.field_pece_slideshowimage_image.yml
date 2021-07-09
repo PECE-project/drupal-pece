@@ -1,0 +1,38 @@
+uuid: 7d165c44-528a-485e-8207-093407fcbd65
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_slideshowimage_image
+    - node.type.pece_slideshow_image
+  module:
+    - image
+id: node.pece_slideshow_image.field_pece_slideshowimage_image
+field_name: field_pece_slideshowimage_image
+entity_type: node
+bundle: pece_slideshow_image
+label: pece_slideshowimage_image
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: slideshow_image
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: 1920x460
+  min_resolution: 960x230
+  alt_field: true
+  alt_field_required: true
+  title_field: true
+  title_field_required: true
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image
