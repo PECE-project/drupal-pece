@@ -4,12 +4,13 @@ status: true
 dependencies:
   module:
     - node
+    - user
 id: node.field_pece_contributors
 field_name: field_pece_contributors
 entity_type: node
 type: entity_reference
 settings:
-  target_type: entity_view_display
+  target_type: user
 module: core
 locked: false
 cardinality: -1
