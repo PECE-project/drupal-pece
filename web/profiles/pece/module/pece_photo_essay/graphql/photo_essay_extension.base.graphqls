@@ -1,0 +1,44 @@
+type PecePhotoEssay implements NodeInterface {
+  id: Int!
+  title: String!
+  uuid: String!
+  body: String
+  contents: [PhotoEssayContents]
+  contributors: [User]
+  tags: [EssayTags]
+  thumbnail: Thumbnail
+  uri: String
+  author: User
+  created: String
+}
+
+type PecePhotoEssayConnection {
+  total: Int!
+  items: [PeceEssay!]
+}
+
+input PhotoEssayInput {
+  title: String!
+  body: String
+  uri: String
+  tags: [Int]
+  contents: [Int]
+  thumbnail: [Int]
+}
+
+type PhotoEssayContents {
+  id: Int!
+  title: String
+  type: String
+  audio: Audio
+  image: Image
+  link: String
+  video: Video
+  content: [EssayContents]
+}
+
+type PhotoEssayTags {
+  id: Int!
+  title: String
+  type: String
+}

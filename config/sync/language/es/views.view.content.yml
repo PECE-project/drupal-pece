@@ -1,0 +1,21 @@
+display:
+  default:
+    display_options:
+      fields:
+        status:
+          label: Status
+          settings:
+            format_custom_true: Published
+            format_custom_false: Unpublished
+        operations:
+          label: Operations
+      filters:
+        status:
+          expose:
+            label: Status
+          group_info:
+            group_items:
+              1:
+                title: Published
+              2:
+                title: Unpublished

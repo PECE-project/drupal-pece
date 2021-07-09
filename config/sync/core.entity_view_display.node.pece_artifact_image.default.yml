@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.pece_artifact_image.field_image_location
     - field.field.node.pece_artifact_image.field_image_permission
     - field.field.node.pece_artifact_image.field_image_source
+    - field.field.node.pece_artifact_image.field_image_tags
     - field.field.node.pece_artifact_image.field_image_uri
     - node.type.pece_artifact_image
   module:
@@ -126,9 +127,9 @@ content:
     region: content
   links:
     weight: 100
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   field_image_tags: true
   langcode: true

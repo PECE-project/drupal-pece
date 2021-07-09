@@ -1,0 +1,35 @@
+uuid: e658c677-ecf7-4057-a494-15ad9cb4401a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pbc_ref_user
+    - node.type.pece_photo_essay
+  module:
+    - pbf
+id: node.pece_photo_essay.field_pbc_ref_user
+field_name: field_pbc_ref_user
+entity_type: node
+bundle: pece_photo_essay
+label: 'Permission by User'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+  synchronized_by: ''
+  synchronized_with: ''
+  synchronized_from_target: 0
+  priority: -1
+  user_method: user
+field_type: pbf

@@ -1,0 +1,36 @@
+uuid: 0ea6ffee-f6b6-4eeb-b1fd-f164c3d04394
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_photo_essay_item.field_pece_description
+    - field.field.paragraph.paragraph_photo_essay_item.field_pece_image_artifact
+    - paragraphs.paragraphs_type.paragraph_photo_essay_item
+  module:
+    - text
+id: paragraph.paragraph_photo_essay_item.default
+targetEntityType: paragraph
+bundle: paragraph_photo_essay_item
+mode: default
+content:
+  field_pece_description:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_pece_image_artifact:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden:
+  created: true
+  status: true

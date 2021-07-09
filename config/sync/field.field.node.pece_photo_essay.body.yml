@@ -1,0 +1,23 @@
+uuid: 62107f97-547f-482d-8ab0-81289505a22f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.pece_photo_essay
+  module:
+    - text
+id: node.pece_photo_essay.body
+field_name: body
+entity_type: node
+bundle: pece_photo_essay
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

@@ -1,0 +1,54 @@
+uuid: 398d2a3a-3131-4b4e-b131-9c8839550eb8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.pece_image_artifact
+    - field.field.node.pece_artifact_image.body
+    - field.field.node.pece_artifact_image.field_image_authors
+    - field.field.node.pece_artifact_image.field_image_contributors
+    - field.field.node.pece_artifact_image.field_image_crit_commentary
+    - field.field.node.pece_artifact_image.field_image_fieldsite
+    - field.field.node.pece_artifact_image.field_image_fieldsite_local
+    - field.field.node.pece_artifact_image.field_image_images
+    - field.field.node.pece_artifact_image.field_image_language
+    - field.field.node.pece_artifact_image.field_image_location
+    - field.field.node.pece_artifact_image.field_image_permission
+    - field.field.node.pece_artifact_image.field_image_source
+    - field.field.node.pece_artifact_image.field_image_tags
+    - field.field.node.pece_artifact_image.field_image_uri
+    - node.type.pece_artifact_image
+  module:
+    - image
+    - user
+id: node.pece_artifact_image.pece_image_artifact
+targetEntityType: node
+bundle: pece_artifact_image
+mode: pece_image_artifact
+content:
+  field_image_images:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden:
+  body: true
+  field_image_authors: true
+  field_image_contributors: true
+  field_image_crit_commentary: true
+  field_image_fieldsite: true
+  field_image_fieldsite_local: true
+  field_image_language: true
+  field_image_location: true
+  field_image_permission: true
+  field_image_source: true
+  field_image_tags: true
+  field_image_uri: true
+  langcode: true
+  links: true
+  og_audience: true
+  search_api_excerpt: true
