@@ -1,0 +1,23 @@
+uuid: 456452c8-1f46-42d1-aa5d-79a48dfce8eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_slideshowimage_link
+    - node.type.pece_slideshow_image
+  module:
+    - link
+id: node.pece_slideshow_image.field_pece_slideshowimage_link
+field_name: field_pece_slideshowimage_link
+entity_type: node
+bundle: pece_slideshow_image
+label: pece_slideshowimage_link
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

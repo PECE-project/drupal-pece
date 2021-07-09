@@ -1,0 +1,56 @@
+uuid: abc947a7-8580-45de-9610-d6bf70fd13d4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_slideshow_image.field_pece_description
+    - field.field.node.pece_slideshow_image.field_pece_slideshowimage_image
+    - field.field.node.pece_slideshow_image.field_pece_slideshowimage_link
+    - image.style.pece_frontpage_image_style
+    - node.type.pece_slideshow_image
+  module:
+    - image
+    - link
+    - text
+    - user
+id: node.pece_slideshow_image.default
+targetEntityType: node
+bundle: pece_slideshow_image
+mode: default
+content:
+  field_pece_description:
+    weight: 103
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_pece_slideshowimage_image:
+    weight: 102
+    label: hidden
+    settings:
+      image_style: pece_frontpage_image_style
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_pece_slideshowimage_link:
+    weight: 104
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  search_api_excerpt: true
