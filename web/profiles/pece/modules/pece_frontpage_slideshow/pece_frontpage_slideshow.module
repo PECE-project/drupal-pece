@@ -1,7 +1,15 @@
 <?php
+
+use Drupal\views\ViewExecutable;
+
 /**
  * @file
  * Code for the PECE Essay.
  */
 
 
+function pece_frontpage_slideshow_views_pre_render(ViewExecutable $view) {
+  if (isset($view) && ($view->storage->id() == 'pece_frontpage_image_slider')) {
+    $view->element['#attached']['library'][] = 'pece_frontpage_slideshow/slider';
+  }
+}
