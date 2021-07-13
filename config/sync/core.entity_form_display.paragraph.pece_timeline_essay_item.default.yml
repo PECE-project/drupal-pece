@@ -1,0 +1,71 @@
+uuid: 94c740c6-ba91-4d40-b2b5-6c04bb8b43bd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.pece_timeline_essay_item.field_description
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_start_end_date
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_artifact
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_background
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_color
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_type
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.pece_timeline_essay_item
+  module:
+    - color_field
+    - datetime_range
+    - image
+id: paragraph.pece_timeline_essay_item.default
+targetEntityType: paragraph
+bundle: pece_timeline_essay_item
+mode: default
+content:
+  field_description:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_pece_start_end_date:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_pece_timeline_artifact:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_pece_timeline_background:
+    weight: 4
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_pece_timeline_color:
+    weight: 5
+    settings:
+      placeholder_color: ''
+      placeholder_opacity: ''
+    third_party_settings: {  }
+    type: color_field_widget_default
+    region: content
+  field_pece_timeline_type:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  status: true
