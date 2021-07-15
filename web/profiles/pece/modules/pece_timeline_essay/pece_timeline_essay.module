@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function pece_timeline_essay_theme() {
+
+  return [
+    'timeline_essay_view' => [
+      'render element' => 'element',
+      'variables' => [
+        'content' => NULL,
+      ],
+    ],
+    'node__pece_timeline_essay__full' => [
+      'base hook' => 'node',
+    ]
+  ];
+}

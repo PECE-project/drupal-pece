@@ -1,0 +1,22 @@
+uuid: 985446e0-fdaf-4c32-9f74-9a7c62abc66d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_pece_timeline_color
+    - paragraphs.paragraphs_type.pece_timeline_essay_item
+  module:
+    - color_field
+id: paragraph.pece_timeline_essay_item.field_pece_timeline_color
+field_name: field_pece_timeline_color
+entity_type: paragraph
+bundle: pece_timeline_essay_item
+label: 'Background color'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  opacity: 1
+field_type: color_field_type

@@ -1,0 +1,29 @@
+uuid: a2fb4ab1-aa63-4253-96de-40854fbaae19
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_project_ref
+    - node.type.pece_project
+    - node.type.pece_timeline_essay
+id: node.pece_timeline_essay.field_pece_project_ref
+field_name: field_pece_project_ref
+entity_type: node
+bundle: pece_timeline_essay
+label: 'Cite as part of...'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_project: pece_project
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

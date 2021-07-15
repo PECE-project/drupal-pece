@@ -1,0 +1,29 @@
+uuid: 57482dec-6148-4309-9a7f-f3bebbd7ad7b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_media_image
+    - media.type.image
+    - node.type.pece_artifact_image
+id: node.pece_artifact_image.field_pece_media_image
+field_name: field_pece_media_image
+entity_type: node
+bundle: pece_artifact_image
+label: Image
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

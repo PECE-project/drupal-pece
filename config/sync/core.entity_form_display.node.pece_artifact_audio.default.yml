@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_audio.body
-    - field.field.node.pece_artifact_audio.field_audio_audios
     - field.field.node.pece_artifact_audio.field_audio_authors
     - field.field.node.pece_artifact_audio.field_audio_contributors
     - field.field.node.pece_artifact_audio.field_audio_crit_commentary
@@ -13,13 +12,15 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_audio_location
     - field.field.node.pece_artifact_audio.field_audio_permission
     - field.field.node.pece_artifact_audio.field_audio_source
+    - field.field.node.pece_artifact_audio.field_audio_tags
     - field.field.node.pece_artifact_audio.field_audio_uri
     - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
+    - field.field.node.pece_artifact_audio.field_pece_media_audio
     - node.type.pece_artifact_audio
   module:
     - address
-    - file
     - languagefield
+    - media_library
     - path
     - text
 id: node.pece_artifact_audio.default
@@ -34,6 +35,7 @@ content:
       rows: 9
       summary_rows: 3
       placeholder: ''
+      show_summary: false
     third_party_settings: {  }
     region: content
   created:
@@ -42,13 +44,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_audio_audios:
-    weight: 132
-    settings:
-      progress_indicator: throbber
-    third_party_settings: {  }
-    type: file_generic
-    region: content
   field_audio_authors:
     weight: 124
     settings:
@@ -129,6 +124,13 @@ content:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
+    region: content
+  field_pece_media_audio:
+    weight: 132
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    type: media_library_widget
     region: content
   langcode:
     type: language_select

@@ -5,6 +5,18 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.artifact_video.body
+    - field.field.node.artifact_video.field_pece_media_video
+    - field.field.node.artifact_video.field_video_authors
+    - field.field.node.artifact_video.field_video_contributors
+    - field.field.node.artifact_video.field_video_crit_commentary
+    - field.field.node.artifact_video.field_video_fieldsite
+    - field.field.node.artifact_video.field_video_language
+    - field.field.node.artifact_video.field_video_location
+    - field.field.node.artifact_video.field_video_permission
+    - field.field.node.artifact_video.field_video_source
+    - field.field.node.artifact_video.field_video_tags
+    - field.field.node.artifact_video.field_video_uri
+    - field.field.node.artifact_video.field_video_use_fieldsite_local
     - node.type.artifact_video
   module:
     - text
@@ -28,6 +40,7 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_pece_media_video: true
   field_video_authors: true
   field_video_contributors: true
   field_video_crit_commentary: true

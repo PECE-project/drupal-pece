@@ -1,0 +1,21 @@
+uuid: afabc210-b38f-46ac-b41d-c61d72a78467
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_pece_start_end_date
+    - paragraphs.paragraphs_type.pece_timeline_essay_item
+  module:
+    - datetime_range
+id: paragraph.pece_timeline_essay_item.field_pece_start_end_date
+field_name: field_pece_start_end_date
+entity_type: paragraph
+bundle: pece_timeline_essay_item
+label: 'Start and End Date'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_audio.body
-    - field.field.node.pece_artifact_audio.field_audio_audios
     - field.field.node.pece_artifact_audio.field_audio_authors
     - field.field.node.pece_artifact_audio.field_audio_contributors
     - field.field.node.pece_artifact_audio.field_audio_crit_commentary
@@ -13,12 +12,13 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_audio_location
     - field.field.node.pece_artifact_audio.field_audio_permission
     - field.field.node.pece_artifact_audio.field_audio_source
+    - field.field.node.pece_artifact_audio.field_audio_tags
     - field.field.node.pece_artifact_audio.field_audio_uri
     - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
+    - field.field.node.pece_artifact_audio.field_pece_media_audio
     - node.type.pece_artifact_audio
   module:
     - address
-    - file
     - languagefield
     - options
     - text
@@ -34,14 +34,6 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
-    region: content
-  field_audio_audios:
-    weight: 112
-    label: above
-    settings:
-      use_description_as_link_text: true
-    third_party_settings: {  }
-    type: file_default
     region: content
   field_audio_authors:
     weight: 104
@@ -122,6 +114,15 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     type: boolean
+    region: content
+  field_pece_media_audio:
+    type: entity_reference_entity_view
+    weight: 112
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
     region: content
   links:
     weight: 100

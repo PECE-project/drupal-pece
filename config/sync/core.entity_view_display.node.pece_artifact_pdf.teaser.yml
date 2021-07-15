@@ -5,6 +5,18 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_artifact_pdf.body
+    - field.field.node.pece_artifact_pdf.field_pdf_authors
+    - field.field.node.pece_artifact_pdf.field_pdf_contributors
+    - field.field.node.pece_artifact_pdf.field_pdf_crit_commentary
+    - field.field.node.pece_artifact_pdf.field_pdf_fieldsite
+    - field.field.node.pece_artifact_pdf.field_pdf_language
+    - field.field.node.pece_artifact_pdf.field_pdf_location
+    - field.field.node.pece_artifact_pdf.field_pdf_permission
+    - field.field.node.pece_artifact_pdf.field_pdf_source
+    - field.field.node.pece_artifact_pdf.field_pdf_tags
+    - field.field.node.pece_artifact_pdf.field_pdf_uri
+    - field.field.node.pece_artifact_pdf.field_pdf_use_fieldsite_local
+    - field.field.node.pece_artifact_pdf.field_pece_media_pdf
     - node.type.pece_artifact_pdf
   module:
     - text
@@ -31,7 +43,6 @@ hidden:
   field_pdf_authors: true
   field_pdf_contributors: true
   field_pdf_crit_commentary: true
-  field_pdf_document: true
   field_pdf_fieldsite: true
   field_pdf_language: true
   field_pdf_location: true
@@ -40,6 +51,7 @@ hidden:
   field_pdf_tags: true
   field_pdf_uri: true
   field_pdf_use_fieldsite_local: true
+  field_pece_media_pdf: true
   langcode: true
   og_audience: true
   search_api_excerpt: true

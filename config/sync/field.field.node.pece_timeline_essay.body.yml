@@ -1,0 +1,23 @@
+uuid: e575b520-3a4d-48af-9cf1-32a51790d69f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.pece_timeline_essay
+  module:
+    - text
+id: node.pece_timeline_essay.body
+field_name: body
+entity_type: node
+bundle: pece_timeline_essay
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+field_type: text_with_summary

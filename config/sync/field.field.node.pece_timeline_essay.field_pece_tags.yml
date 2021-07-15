@@ -1,0 +1,29 @@
+uuid: 02a5cfea-a796-4ed8-bb87-0b833059356e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_tags
+    - node.type.pece_timeline_essay
+    - taxonomy.vocabulary.tags
+id: node.pece_timeline_essay.field_pece_tags
+field_name: field_pece_tags
+entity_type: node
+bundle: pece_timeline_essay
+label: Tags
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

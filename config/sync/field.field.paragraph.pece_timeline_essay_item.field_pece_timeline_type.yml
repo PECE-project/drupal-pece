@@ -1,0 +1,21 @@
+uuid: 7c33509a-56c0-4294-9fab-4d29019e637e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_pece_timeline_type
+    - paragraphs.paragraphs_type.pece_timeline_essay_item
+  module:
+    - options
+id: paragraph.pece_timeline_essay_item.field_pece_timeline_type
+field_name: field_pece_timeline_type
+entity_type: paragraph
+bundle: pece_timeline_essay_item
+label: Type
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

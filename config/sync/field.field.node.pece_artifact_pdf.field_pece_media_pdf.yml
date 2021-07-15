@@ -1,0 +1,29 @@
+uuid: 89ce92aa-416d-479b-a220-6b4f8d208ca5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_media_pdf
+    - media.type.pdf_document
+    - node.type.pece_artifact_pdf
+id: node.pece_artifact_pdf.field_pece_media_pdf
+field_name: field_pece_media_pdf
+entity_type: node
+bundle: pece_artifact_pdf
+label: 'PDF Document'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      pdf_document: pdf_document
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,30 +1,30 @@
-uuid: 00287ad1-fd2b-4e9c-b2b7-dc2264204c81
+uuid: 14edc296-8478-44ea-a5ba-1031d814233d
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_image_images
-    - node.type.pece_artifact_image
+    - field.storage.node.field_timeline_essay_thumbnail
+    - node.type.pece_timeline_essay
   module:
     - image
-id: node.pece_artifact_image.field_image_images
-field_name: field_image_images
+id: node.pece_timeline_essay.field_timeline_essay_thumbnail
+field_name: field_timeline_essay_thumbnail
 entity_type: node
-bundle: pece_artifact_image
-label: Image
+bundle: pece_timeline_essay
+label: Thumbnail
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: '[date:custom:Y]-[date:custom:m]'
-  file_extensions: 'png gif jpg jpeg svg'
+  file_directory: timeline_essay
+  file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
   max_resolution: ''
   min_resolution: ''
-  alt_field: true
-  alt_field_required: true
+  alt_field: false
+  alt_field_required: false
   title_field: false
   title_field_required: false
   default_image:

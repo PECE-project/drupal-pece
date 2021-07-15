@@ -1,0 +1,33 @@
+uuid: 4e34593c-6e33-4e4d-a697-f3b3313f8e8d
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_pece_timeline_type
+field_name: field_pece_timeline_type
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: title
+      label: Title
+    -
+      value: event
+      label: Event
+    -
+      value: era
+      label: Era
+    -
+      value: scale
+      label: Scale
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
