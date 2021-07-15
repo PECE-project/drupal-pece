@@ -3,10 +3,10 @@
 namespace Drupal\pece_timeline_essay;
 
 use Drupal\Core\Url;
+use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
+use Drupal\media\Entity\Media;
 use Drupal\paragraphs\Entity\Paragraph;
-use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\entity_reference_revisions\Plugin\Field\FieldType\EntityReferenceRevisionsItem;
 
 /**
  * {@inheritdoc}
@@ -21,57 +21,46 @@ class TimelineFormatter {
   /**
    * {@inheritdoc}
    */
-  protected $tlMediaObjAttr = [
-    'url',
-    'caption',
-    'credit',
-    'thumbnail',
-    'alt',
-    'title',
-    'link',
-    'link_target',
-  ];
-
-  /**
-   * {@inheritdoc}
-   */
   public function __construct() {
     $this->formattedTimeline = [];
   }
 
   /**
-   * {@inheritdoc}
+   * Receives the Timeline Essay Node and returns a string in the JSON format.
+   *
+   * @param \Drupal\node\Entity\Node $timelineEssay
+   *   A node object of type Timeline Essay.
+   *
+   * @return string
+   *   A string in the JSON format.
    */
   public function formatTimeline(Node $timelineEssay) {
     $timelineArray = [];
-    $timelineArray['events'] = $this->formatTimelineEvents($timelineEssay);
+    $timelineArray['events'] = [];
 
-    $obj = (object) $timelineArray;
+    $timelineItems = $timelineEssay->field_pece_timeline_essay_items->referencedEntities();
+    foreach ($timelineItems as $timelineItem) {
+      $timelineArray['events'][] = $this->formatSlide($timelineItem);
+    }
 
     return json_encode($timelineArray);
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function formatTimelineEvents(Node $timelineEssay) {
-
-    $events = [];
-    $timelineItems = $timelineEssay->field_pece_timeline_essay_items->referencedEntities();
-    foreach ($timelineItems as $timelineItem) {
-      $events[] = $this->formatSlide($timelineItem);
-    }
-    return $events;
-  }
-
-  /**
-   * {@inheritdoc}
+   * Receives Timeline Essay Item and returns an array.
+   *
+   * @param \Drupal\paragraphs\Entity\Paragraph $timelineItem
+   *   A paragraph entity object with information about the timeline slide.
+   *
+   * @return array
+   *   An array with unique_id, text, media, start_date, end_date and background
+   *   keys.
    */
   public function formatSlide(Paragraph $timelineItem) {
     return [
       'unique_id' => $timelineItem->uuid(),
       'text' => $this->formatText($timelineItem, $this->appendArtifactLink($timelineItem, $timelineItem->field_description->first()->getValue()['value'])),
-      'media' => $this->formatMedia($this->prepareMediaFileObj($timelineItem)),
+      'media' => $this->formatMedia($this->prepareMediaField($timelineItem)),
       'start_date' => $this->formatDate($timelineItem->field_pece_start_end_date->first()->getValue()['value']),
       'end_date' => $this->formatDate($timelineItem->field_pece_start_end_date->first()->getValue()['end_value']),
       'background' => $this->formatBgColor($timelineItem),
@@ -79,24 +68,29 @@ class TimelineFormatter {
   }
 
   /**
-   * {@inheritdoc}
+   * Receives artifact and returns its media field or false if no media field.
+   *
+   * @param \Drupal\node\Entity\Node $artifact
+   *   Artifact Node of type audio, image, pdf, text, video or website.
+   *
+   * @return \Drupal\Core\Field\EntityReferenceFieldItemList|bool
+   *   Returns the Media Entity reference that was on the artifact. Or false,
+   *   if there are no Media Entity referenced.
    */
-  public function getArtifactMediaFile(Node $artifactReference) {
-    $artifactType = $artifactReference->getType();
+  public function getArtifactMediaField(Node $artifact) {
     $artifact_field = [
-      'pece_artifact_audio' => 'field_audio_audios',
-      'pece_artifact_image' => 'field_image_images',
-      'pece_artifact_video' => 'field_video_source',
-      'pece_artifact_website' => 'field_website_url',
-      'pece_artifact_pdf' => 'field_pdf_document',
-      'pece_artifact_text' => 'body',
+      'pece_artifact_audio' => 'field_pece_media_audio',
+      'pece_artifact_image' => 'field_pece_media_image',
+      'artifact_video' => 'field_pece_media_video',
+      // 'pece_artifact_website' => 'field_website_url',
+      'pece_artifact_pdf' => 'field_pece_media_pdf',
+      // 'pece_artifact_text' => 'body',
     ];
-    if (!in_array($artifactReference->getType(), array_keys($artifact_field))) {
-      return '';
+    if (!in_array($artifact->getType(), array_keys($artifact_field))) {
+      return FALSE;
     }
-    $field = $artifact_field[$artifactReference->getType()];
-
-    return $artifactReference->get($field)->first()->getValue()['value'];
+    $field = $artifact_field[$artifact->getType()];
+    return $artifact->get($field);
   }
 
   /**
@@ -105,16 +99,15 @@ class TimelineFormatter {
    * @param Drupal\paragraphs\Entity\Paragraph $timelineItem
    *   Timeline Essay Item entity reference.
    *
-   * @return array
-   *   Array containing "file" as key and the artifacts as value.
+   * @return \Drupal\Core\Field\EntityReferenceFieldItemList|false
+   *   Returns the Media Entity reference that was on the artifact. Or false,
+   *   if there are no Media Entity referenced.
    */
-  public function prepareMediaFileObj(Paragraph $timelineItem) {
+  public function prepareMediaField(Paragraph $timelineItem) {
     $artifactId = $timelineItem->field_pece_timeline_artifact->first()->getValue()['target_id'];
     $artifact = Node::load($artifactId);
-    $media = [
-      'file' => $this->getArtifactMediaFile($artifact),
-    ];
-    return $media;
+
+    return $this->getArtifactMediaField($artifact);
   }
 
   /**
@@ -202,8 +195,10 @@ class TimelineFormatter {
       $bgColor = $this->formatTlField('color', $timelineItem->field_pece_timeline_color->first()->getValue()['color']);
     }
     if (!$timelineItem->field_pece_timeline_background->isEmpty()) {
-      $field_data = $timelineItem->field_pece_timeline_background->first()->getValue();
-      $bgImg = $this->formatTlField('url', file_create_url($field_data['uri']));
+      $fileId = $timelineItem->field_pece_timeline_background->first()->getValue()['target_id'];
+      $file = File::load($fileId);
+      $fileUrl = \Drupal::request()->getSchemeAndHttpHost() . $file->createFileUrl();
+      $bgImg = $this->formatTlField("url", $fileUrl);
       $bgColor = array_merge($bgColor, $bgImg);
     }
 
@@ -211,58 +206,68 @@ class TimelineFormatter {
   }
 
   /**
-   * Format text to TimelineJS text object structure.
+   * Formats text and headline to be inserted in the slide's text key.
+   *
+   * @param \Drupal\paragraph\Entity\Paragraph $timelineItem
+   *   The timeline item to be formatted as a slide.
+   * @param string $content
+   *   The string content to be inserted as text.
+   *
+   * @return array
+   *   An array with headline and text keys
    */
-  public function formatText(Paragraph $timelineItem, $content) {
+  public function formatText(Paragraph $timelineItem, string $content) {
     $text_obj = $this->formatTlField('text', $content);
     $text_obj['headline'] = $timelineItem->field_title->first()->getValue()["value"];
     return $text_obj;
   }
 
   /**
-   * Format media to TimelineJS media object structure.
+   * Format Media Entity to TimelineJS media object structure.
+   *
+   * @param mixed $media
+   *   Receives Media Entity from the Artifact node.
+   *
+   * @return array
+   *   Returns an array with url of the media object or empty if there is no
+   *   media object.
    */
-  public function formatMedia($media_settings = []) {
-    $media = $this->mapMediaFields($media_settings);
-
-    if (isset($media_settings['file']) && isset($media_settings['file']['uri'])) {
-      $media['url'] = file_create_url($media_settings['file']['uri']);
-      $media['alt'] = $media_settings['file']['alt'];
-      $media['title'] = $media_settings['file']['title'];
+  public function formatMedia($media) {
+    $rtn = [];
+    if ($media) {
+      $mediaId = $media->first()->getValue()["target_id"];
+      $file = $this->getFileFromMediaId($mediaId);
+      $rtn["url"] = \Drupal::request()->getSchemeAndHttpHost() . $file->createFileUrl();
+    }
+    else {
+      $rtn["url"] = "";
     }
 
-    if (isset($media_settings['thumbnail']) && isset($media_settings['thumbnail']['uri'])) {
-      $media['thumbnail'] = file_create_url($media_settings['thumbnail']['uri']);
-      $media['alt'] = $media_settings['thumbnail']['alt'];
-      $media['title'] = $media_settings['thumbnail']['title'];
-    }
-
-    // Add mandatory url attr. on Timeline media object if still not present.
-    $media = (isset($media['url'])) ? $media : array_merge(['url' => ''], $media);
-    return (isset($media)) ? $media : FALSE;
+    return $rtn;
   }
 
   /**
-   * Map TimelineJS media object structure to Timeline Essay Item media fields.
+   * Returns the file object from the Media Entity ID.
    *
-   * @param array $media_fields
+   * @param int $mediaId
    *   Media Fields.
    *
-   * @return array|bool
+   * @return \Drupal\file\Entity\File
    *   Fields array or false if no fields.
    */
-  private function mapMediaFields(array $media_fields) {
-    $fields = [];
-    foreach ($this->tlMediaObjAttr as $field) {
-      if (
-        !isset($media_fields[$field])
-        || (isset($media_fields[$field]) && empty($media_fields[$field]))
-      ) {
-        continue;
-      }
-      $fields[$field] = $media_fields[$field];
-    }
-    return (isset($fields)) ? $fields : FALSE;
+  private function getFileFromMediaId(int $mediaId) {
+    $mediaTypeMapping = [
+      'audio' => 'field_media_audio_file',
+      'image' => 'field_media_image',
+      'video' => 'field_media_video_file',
+      'pdf_document' => 'field_media_file',
+    ];
+
+    $media = Media::load($mediaId);
+    $field = $mediaTypeMapping[$media->bundle()];
+    $fileId = $media->get($field)->first()->getValue()['target_id'];
+
+    return File::load($fileId);
   }
 
 }

@@ -24,9 +24,6 @@ class PeceTimelineEssayController extends ControllerBase {
     $timeline = Node::load($node);
     $timelineFormatter = new TimelineFormatter();
     $formattedTimeline = $timelineFormatter->formatTimeline($timeline);
-
-    dump($formattedTimeline);
-
     $build = [
       '#theme' => 'timeline_essay_view',
       '#content' => [
