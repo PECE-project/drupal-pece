@@ -9,6 +9,7 @@ dependencies:
     - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_background
     - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_color
     - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_type
+    - field.field.paragraph.pece_timeline_essay_item.field_title
     - image.style.thumbnail
     - paragraphs.paragraphs_type.pece_timeline_essay_item
   module:
@@ -21,7 +22,7 @@ bundle: pece_timeline_essay_item
 mode: default
 content:
   field_description:
-    weight: 1
+    weight: 3
     settings:
       rows: 5
       placeholder: ''
@@ -29,13 +30,13 @@ content:
     type: string_textarea
     region: content
   field_pece_start_end_date:
-    weight: 2
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     type: daterange_default
     region: content
   field_pece_timeline_artifact:
-    weight: 3
+    weight: 4
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -45,7 +46,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_pece_timeline_background:
-    weight: 4
+    weight: 5
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -53,18 +54,25 @@ content:
     type: image_image
     region: content
   field_pece_timeline_color:
-    weight: 5
+    weight: 6
     settings:
-      placeholder_color: ''
-      placeholder_opacity: ''
+      default_colors: '#ac725e,#d06b64,#f83a22,#fa573c,#ff7537,#ffad46,#42d692,#16a765,#7bd148,#b3dc6c,#fbe983,#92e1c0,#9fe1e7,#9fc6e7,#4986e7,#9a9cff,#b99aff,#c2c2c2,#cabdbf,#cca6ac,#f691b2,#cd74e6,#a47ae2'
     third_party_settings: {  }
-    type: color_field_widget_default
+    type: color_field_widget_box
     region: content
   field_pece_timeline_type:
-    weight: 0
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
 hidden:
   created: true

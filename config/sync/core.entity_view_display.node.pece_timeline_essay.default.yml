@@ -15,9 +15,6 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_timeline_essay_thumbnail
     - node.type.pece_timeline_essay
   module:
-    - entity_reference_revisions
-    - image
-    - pbf
     - text
     - user
 id: node.pece_timeline_essay.default
@@ -28,89 +25,20 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 101
-    settings: {  }
-    third_party_settings: {  }
-    region: content
-  field_pbc_ref_group:
-    weight: 108
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: pbf_formatter_default
-    region: content
-  field_pbc_ref_role:
-    weight: 109
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: pbf_formatter_default
-    region: content
-  field_pbc_ref_user:
-    weight: 110
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: pbf_formatter_default
-    region: content
-  field_pece_contributors:
-    weight: 104
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_pece_project_ref:
-    weight: 103
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_pece_tags:
-    weight: 107
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_pece_timeline_essay_items:
-    type: entity_reference_revisions_entity_view
-    weight: 106
-    label: above
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    region: content
-  field_pece_uri:
-    weight: 102
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_timeline_essay_thumbnail:
-    weight: 105
-    label: above
-    settings:
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
-    type: image
-    region: content
-  links:
-    weight: 100
+    weight: 0
     settings: {  }
     third_party_settings: {  }
     region: content
 hidden:
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
+  field_pece_contributors: true
+  field_pece_project_ref: true
+  field_pece_tags: true
+  field_pece_timeline_essay_items: true
+  field_pece_uri: true
+  field_timeline_essay_thumbnail: true
   langcode: true
+  links: true
   search_api_excerpt: true
