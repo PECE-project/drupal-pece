@@ -5,6 +5,18 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_artifact_image.body
+    - field.field.node.pece_artifact_image.field_image_authors
+    - field.field.node.pece_artifact_image.field_image_contributors
+    - field.field.node.pece_artifact_image.field_image_crit_commentary
+    - field.field.node.pece_artifact_image.field_image_fieldsite
+    - field.field.node.pece_artifact_image.field_image_fieldsite_local
+    - field.field.node.pece_artifact_image.field_image_language
+    - field.field.node.pece_artifact_image.field_image_location
+    - field.field.node.pece_artifact_image.field_image_permission
+    - field.field.node.pece_artifact_image.field_image_source
+    - field.field.node.pece_artifact_image.field_image_tags
+    - field.field.node.pece_artifact_image.field_image_uri
+    - field.field.node.pece_artifact_image.field_pece_media_image
     - node.type.pece_artifact_image
   module:
     - text
@@ -40,6 +52,7 @@ hidden:
   field_image_source: true
   field_image_tags: true
   field_image_uri: true
+  field_pece_media_image: true
   langcode: true
   og_audience: true
   search_api_excerpt: true

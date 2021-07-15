@@ -5,6 +5,18 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_artifact_audio.body
+    - field.field.node.pece_artifact_audio.field_audio_authors
+    - field.field.node.pece_artifact_audio.field_audio_contributors
+    - field.field.node.pece_artifact_audio.field_audio_crit_commentary
+    - field.field.node.pece_artifact_audio.field_audio_fieldsite
+    - field.field.node.pece_artifact_audio.field_audio_language
+    - field.field.node.pece_artifact_audio.field_audio_location
+    - field.field.node.pece_artifact_audio.field_audio_permission
+    - field.field.node.pece_artifact_audio.field_audio_source
+    - field.field.node.pece_artifact_audio.field_audio_tags
+    - field.field.node.pece_artifact_audio.field_audio_uri
+    - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
+    - field.field.node.pece_artifact_audio.field_pece_media_audio
     - node.type.pece_artifact_audio
   module:
     - text
@@ -40,6 +52,7 @@ hidden:
   field_audio_tags: true
   field_audio_uri: true
   field_audio_use_fieldsite_local: true
+  field_pece_media_audio: true
   langcode: true
   og_audience: true
   search_api_excerpt: true

@@ -9,18 +9,18 @@ dependencies:
     - field.field.node.pece_artifact_image.field_image_crit_commentary
     - field.field.node.pece_artifact_image.field_image_fieldsite
     - field.field.node.pece_artifact_image.field_image_fieldsite_local
-    - field.field.node.pece_artifact_image.field_image_images
     - field.field.node.pece_artifact_image.field_image_language
     - field.field.node.pece_artifact_image.field_image_location
     - field.field.node.pece_artifact_image.field_image_permission
     - field.field.node.pece_artifact_image.field_image_source
+    - field.field.node.pece_artifact_image.field_image_tags
     - field.field.node.pece_artifact_image.field_image_uri
-    - image.style.thumbnail
+    - field.field.node.pece_artifact_image.field_pece_media_image
     - node.type.pece_artifact_image
   module:
     - address
-    - image
     - languagefield
+    - media_library
     - path
     - text
 id: node.pece_artifact_image.default
@@ -35,6 +35,7 @@ content:
       rows: 9
       summary_rows: 3
       placeholder: ''
+      show_summary: false
     third_party_settings: {  }
     region: content
   created:
@@ -88,14 +89,6 @@ content:
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
-  field_image_images:
-    weight: 133
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
-    region: content
   field_image_language:
     weight: 127
     settings:
@@ -131,6 +124,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_pece_media_image:
+    weight: 133
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    type: media_library_widget
     region: content
   langcode:
     type: language_select
