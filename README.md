@@ -163,7 +163,7 @@ Special thanks to our contributors \([emoji key](https://allcontributors.org/doc
     <a href="#contributors" title="Documentation">📖</a>  
     <a href="#contributors" title="Ideas and Planning">🤔</a>
     <a href="#contributors" title="Research">🔬</a> </td>
-    <td align="center" valign= "top"> <b> PECE Lead Software <br/>Developer <b/> <br /> <br /> <br /> <a href="https://worldpece.org/users/renato-vasconcellos-gomes">
+    <td align="center" valign= "top"> <b> PECE Lead Software <br/>Developer <b/> <br /> <b /> <br /> <a href="https://worldpece.org/users/renato-vasconcellos-gomes">
     <img src="https://drive.google.com/thumbnail?id=1pSo8S6b7w-Tm2FJH8rPLVD4SJfI_Dtty" width="100px;" alt=""/> <br />
     <b>Renato Gomes</b>
     </a> <br />
