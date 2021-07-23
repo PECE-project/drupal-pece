@@ -35,5 +35,6 @@ function pece_analytics_update_7003() {
  */
 function pece_analytics_update_7004() {
   if (!module_exists('features')) return;
-  features_revert(array('pece_analytics' => 'views_view'));
+  features_revert(array('pece_analytics' => array('views_view')));
+  drupal_set_message('Analytics list ordering config. successfully updated.');
 }
