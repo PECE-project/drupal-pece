@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_essay.body
+    - field.field.node.pece_essay.field_ark_enabled
     - field.field.node.pece_essay.field_essay_contents
     - field.field.node.pece_essay.field_essay_contributors
     - field.field.node.pece_essay.field_essay_tags
@@ -12,6 +13,7 @@ dependencies:
     - field.field.node.pece_essay.field_pbc_ref_group
     - field.field.node.pece_essay.field_pbc_ref_role
     - field.field.node.pece_essay.field_pbc_ref_user
+    - field.field.node.pece_essay.field_pece_project_ref
     - image.style.thumbnail
     - node.type.pece_essay
   module:
@@ -41,6 +43,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_ark_enabled:
+    weight: 28
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_essay_contents:
     type: entity_reference_paragraphs
     weight: 13
@@ -133,6 +142,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: pbf_widget
+    region: content
+  field_pece_project_ref:
+    weight: 27
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   langcode:
     type: language_select

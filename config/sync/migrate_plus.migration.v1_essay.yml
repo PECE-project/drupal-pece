@@ -66,7 +66,7 @@ process:
       plugin: default_value
       source: field_thumbnail
       default_value:
-        - fid: 0
+        - fid:
     -
       plugin: extract
       index:
@@ -75,6 +75,14 @@ process:
       default: null
   field_essay_uri: field_pece_uri
   field_pece_tags: field_pece_tags
+  field_ark_enabled:
+    plugin: default_value
+    source: field_ark_enabled
+    default_value:
+  field_pece_project_ref:
+    plugin: default_value
+    source: field_pece_project_ref
+    default_value:
 destination:
   plugin: entity_complete:node
   translations: true
