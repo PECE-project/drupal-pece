@@ -1,4 +1,4 @@
-100px# **Platform for Experimental and Collaborative Ethnography (PECE)**
+**Platform for Experimental and Collaborative Ethnography (PECE)**
 
 ## Table of Contents
 1. [About](#about)
