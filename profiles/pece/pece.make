@@ -84,12 +84,12 @@ libraries[gifresizer][download][url] = https://github.com/revagomes/gifresizer.g
 ; =====================
 
 ; Overrides Panopoly's Ctools to apply custom patches.
-projects[ctools][version] = 1.15
+projects[ctools][version] = 1.19
 projects[ctools][subdir] = contrib
 ; Edit text of "More Link" from Panel config.
 projects[ctools][patch][1000146] = "https://www.drupal.org/files/issues/2018-03-26/views_panes-more_link_text-1000146-28.patch"
 ; Fix PECE Annotation Save&Continue issue.
-projects[ctools][patch][1907256] = "https://www.drupal.org/files/issues/2018-05-23/ctools-modal-1907256-9.patch"
+;projects[ctools][patch][1907256] = "https://www.drupal.org/files/issues/2018-05-23/ctools-modal-1907256-9.patch"
 ; @TODO: Update and reapply the following patch if needed. @see https://www.drupal.org/project/ctools/issues/2671150
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
 
