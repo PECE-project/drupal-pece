@@ -417,9 +417,21 @@ projects[download_file][subdir] = contrib
 ; =====================
 
 ; Overrides Panopoly's date.
-projects[date][version] =  2.10
+projects[date][version] =  2.11
 projects[date][subdir] = contrib
 projects[date][patch][1143680] = https://www.drupal.org/files/issues/2020-08-04/date-beforeShowDay-eval-1143680-28.patch
+;  PHP 7.1 no longer converts string to arrays the first time a value is assigned with square bracket notation
+;projects[date][patch][2995679] = https://www.drupal.org/files/issues/2018-08-28/date-array_conversion-2995679-2-D7.patch
+; expects an array, not a scalar - Fatal error: Cannot create references to/from string offsets
+projects[date][patch][2449261] = https://www.drupal.org/files/issues/2018-08-30/date-cannot_create_references_to_from_string_offsets-2449261-14.patch
+; String Offset errors on edit page using PHP 7.1.0
+projects[date][patch][2843367] = https://www.drupal.org/files/issues/2019-01-16/2843367-php71-string-offset-47.patch
+;projects[date][patch][2843367] = https://www.drupal.org/files/issues/2843367-php71-string-offset-26.patch
+; Curly brace syntax for accessing array elements and string offsets has been deprecated in PHP 7.4
+;projects[date][patch][3145639] = https://www.drupal.org/files/issues/2020-06-04/date-php74-3145639-2.patch
+; Exposed Date Filter - PHP 7 Error
+;projects[date][patch][2889759] = https://www.drupal.org/files/issues/date-php7Offset-2889759-1.patch
+
 
 ; Overrides Panopoly's link.
 projects[link][version] = 1.7
