@@ -417,9 +417,9 @@ projects[download_file][subdir] = contrib
 ; =====================
 
 ; Overrides Panopoly's date.
-projects[date][version] =  2.10
+projects[date][version] =  2.11
 projects[date][subdir] = contrib
-projects[date][patch][1143680] = https://www.drupal.org/files/issues/2020-08-04/date-beforeShowDay-eval-1143680-28.patch
+
 
 ; Overrides Panopoly's link.
 projects[link][version] = 1.7
