@@ -396,9 +396,6 @@ projects[manualcrop][subdir] = contrib
 projects[mimedetect][version] = 1.1
 projects[mimedetect][subdir] = contrib
 
-; Overrides panopoly's media.
-projects[media][version] = 2.26
-projects[media][subdir] = contrib
 
 ; Overrides panopoly's media_youtube.
 projects[media_youtube][version] = 3.10
