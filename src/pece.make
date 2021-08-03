@@ -419,8 +419,6 @@ projects[download_file][subdir] = contrib
 ; Overrides Panopoly's date.
 projects[date][version] =  2.11
 projects[date][subdir] = contrib
-projects[date][patch][1143680] = https://www.drupal.org/files/issues/2020-08-04/date-beforeShowDay-eval-1143680-28.patch
-projects[date][patch][2449261] = https://www.drupal.org/files/issues/2018-08-30/date-cannot_create_references_to_from_string_offsets-2449261-14.patch
 
 
 ; Overrides Panopoly's link.
