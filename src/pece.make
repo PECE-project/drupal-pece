@@ -482,7 +482,7 @@ projects[search_api_db][version] = 1.8
 ; =====================
 
 projects[radix][type] = theme
-projects[radix][version] = 3.7
+projects[radix][version] = 3.8
 projects[radix][subdir] = contrib
 
 ; Adminimal Theme for admin
