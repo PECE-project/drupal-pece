@@ -6,7 +6,6 @@ Feature: Add image widget
   @api @javascript @panopoly_widgets @local_files
   Scenario: Add a image
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
@@ -43,7 +42,6 @@ Feature: Add image widget
   @api @javascript @panopoly_widgets @local_files
   Scenario: Add an image with link
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And I am viewing a landing page
     # Switch to Bryant layout so image isn't stretched so big.
     When I change layout with the Panels IPE
@@ -88,7 +86,6 @@ Feature: Add image widget
   @api @javascript @panopoly_widgets @panopoly_wysiwyg
   Scenario: Add an image with Linkit support
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"

@@ -40,7 +40,6 @@ Feature: Search
   @api @javascript @panopoly_search
   Scenario: Search for content in widgets (not in the body)
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And I am viewing a "panopoly_test_page" with the title "Abracadabra"
     # Put a text widget on our test node.
     When I customize this page with the Panels IPE
@@ -67,7 +66,6 @@ Feature: Search
   @api @panopoly_search
   Scenario: New content should be indexed immediately
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
     When I visit "/node/add/panopoly-test-page"
       And I fill in the following:
         | Title               | Searchable page |

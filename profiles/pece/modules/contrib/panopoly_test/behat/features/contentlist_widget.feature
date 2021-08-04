@@ -6,7 +6,6 @@ Feature: Add content list widget
   @api @javascript @panopoly_widgets
   Scenario: Add a content list
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And "panopoly_test_page" content:
       | title       | body      | created            | status |
       | Test Page 3 | Test body | 01/01/2001 11:00am |      1 |

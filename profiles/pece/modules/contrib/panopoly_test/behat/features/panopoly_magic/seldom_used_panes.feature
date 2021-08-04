@@ -6,7 +6,6 @@ Feature: Panopoly Magic allows the admin to toggle displaying seldom used pane s
   @api @javascript @panopoly_magic
   Scenario: Enable viewing seldom used pane styles
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And I run drush "vset" "panopoly_magic_show_panels_styles 1"
       And I am viewing a landing page
     When I customize this page with the Panels IPE
@@ -29,7 +28,6 @@ Feature: Panopoly Magic allows the admin to toggle displaying seldom used pane s
   @api @javascript @panopoly_magic
   Scenario: Disable viewing seldom used pane styles
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And I run drush "vset" "panopoly_magic_show_panels_styles 0"
       And I am viewing a landing page
     When I customize this page with the Panels IPE

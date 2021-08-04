@@ -13,7 +13,7 @@ function panopoly_test_views_default_views() {
 
   $view = new view();
   $view->name = 'panopoly_test_magic_display_content';
-  $view->description = '';
+  $view->description = 'Test entity view mode pane display configuration options.';
   $view->tag = 'default';
   $view->base_table = 'node';
   $view->human_name = 'Magic Display Content';
@@ -98,7 +98,7 @@ function panopoly_test_views_default_views() {
 
   $view = new view();
   $view->name = 'panopoly_test_magic_display_type';
-  $view->description = '';
+  $view->description = 'Test views pane display configuration options.';
   $view->tag = 'default';
   $view->base_table = 'node';
   $view->human_name = 'Magic Display Type';
@@ -175,7 +175,7 @@ function panopoly_test_views_default_views() {
 
   $view = new view();
   $view->name = 'panopoly_test_magic_view_modes';
-  $view->description = '';
+  $view->description = 'Test view mode configuration options.';
   $view->tag = 'default';
   $view->base_table = 'node';
   $view->human_name = 'Magic View Modes';

@@ -5,7 +5,6 @@ Feature: Test pathauto for editor users
 
   Background:
     Given I am logged in as a user with the "editor" role
-      And Panopoly magic live previews are disabled
     When I visit "/node/add/panopoly-test-page"
       And I fill in the following:
         | Title  | Testing title |

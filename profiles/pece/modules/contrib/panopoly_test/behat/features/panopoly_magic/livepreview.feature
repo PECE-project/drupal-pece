@@ -128,6 +128,7 @@ Feature: Live preview
       And I click "Add new pane"
       And I click "Panopoly Test" in the "CTools modal" region
       And I click "View: Magic Views Cache: Cached Content" in the "CTools modal" region
+      And I click "Add View: Magic Views Cache: Cached Content" in the "Live preview" region
       And I fill in "widget_title" with "Test Cached Content"
       And I wait for live preview to finish
     Then I should see "Test Cached Content" in the "Live preview" region

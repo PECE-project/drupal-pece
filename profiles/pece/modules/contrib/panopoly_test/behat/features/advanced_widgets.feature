@@ -6,7 +6,6 @@ Feature: Hide/show advanced widgets
   @api @javascript @panopoly_admin
   Scenario: Configure "Use Advanced Panel Plugins"
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And Panopoly admin "Use Advanced Panel Plugins" is disabled
       And I am viewing a landing page
     When I customize this page with the Panels IPE

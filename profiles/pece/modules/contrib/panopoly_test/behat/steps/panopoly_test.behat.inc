@@ -53,16 +53,16 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   protected $files = array();
 
   /**
-   * Set to TRUE if we overrid the private files path during this scenario.
-   *
-   * @var bool
-   */
-  protected $private_path_overridden = FALSE;
-
-  /**
    * Set to TRUE after the window has been resized.
    */
   protected $window_resized = FALSE;
+
+  /**
+   * Store variables so they can be reset to previous values.
+   *
+   * @var array
+   */
+  protected $configVariables = array();
 
   const PANOPOLY_BEHAT_FLAG_PHP_NOTICES_OFF = 0;
   const PANOPOLY_BEHAT_FLAG_PHP_NOTICES_PRINT = 1;
@@ -91,6 +91,37 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
       throw new \Exception(sprintf('No region "%s" found on the page %s.', $region, $session->getCurrentUrl()));
     }
     return $regionObj;
+  }
+
+  /**
+   * Save existing preview configurations.
+   *
+   * @BeforeScenario @api
+   */
+  public function saveConfig() {
+    $this->configVariables['panopoly_magic_live_preview'] = variable_get('panopoly_magic_live_preview', 'not set');
+    $this->configVariables['panopoly_magic_pane_add_preview'] = variable_get('panopoly_magic_pane_add_preview', 'not set');
+    variable_set('panopoly_magic_live_preview', 0);
+    variable_set('panopoly_magic_pane_add_preview', PANOPOLY_ADD_PREVIEW_SINGLE); // 3.
+  }
+
+  /**
+   * Restore saved preview configurations or other variables.
+   *
+   * @AfterScenario @api
+   */
+  public function restoreConfig() {
+    if (count($this->configVariables) > 0) {
+      foreach ($this->configVariables as $key => $value) {
+        if ($value === 'not set') {
+          variable_del($key);
+        }
+        else {
+          variable_set($key, $value);
+        }
+        unset($this->configVariables[$key]);
+      }
+    }
   }
 
   /**
@@ -244,30 +275,15 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @BeforeScenario @api&&@drupal_private_files
    */
   public function configurePrivateFiles($event) {
-    $file_private_path = variable_get('file_private_path', '');
-    if (empty($file_private_path)) {
+    $this->configVariables['file_private_path'] = variable_get('file_private_path', 'not set');
+    if ($this->configVariables['file_private_path'] !== 'not set') {
       $file_public_path = variable_get('file_public_path', conf_path() . '/files');
       if (empty($file_public_path)) {
         throw new \Exception('Files must be configured for @drupal_private_files tests to work!');
       }
-
-      // Set flag for later cleanup.
-      $this->private_path_overridden = TRUE;
-
       // Create and setup the private path.
       $file_private_path = $file_public_path . '/' . 'private';
       variable_set('file_private_path', $file_private_path);
-    }
-  }
-
-  /**
-   * Clean up our temporary private files path.
-   *
-   * @AfterScenario @api&&@drupal_private_files
-   */
-  public function cleanupPrivateFiles($event) {
-    if ($this->private_path_overridden) {
-      variable_del('file_private_path');
     }
   }
 
@@ -562,7 +578,6 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly magic live previews are disabled
    */
   public function disablePanopolyMagicLivePreview() {
-    //$this->getDriver('drush')->vset('panopoly_magic_live_preview 0 --yes');
     variable_set('panopoly_magic_live_preview', 0);
   }
 
@@ -572,7 +587,6 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly magic live previews are automatic
    */
   public function enableAutomaticPanopolyMagicLivePreview() {
-    //$this->getDriver('drush')->vset('panopoly_magic_live_preview 1 --yes');
     variable_set('panopoly_magic_live_preview', 1);
   }
 
@@ -582,7 +596,6 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly magic live previews are manual
    */
   public function enableManualPanopolyMagicLivePreview() {
-    //$this->getDriver('drush')->vset('panopoly_magic_live_preview 2 --yes');
     variable_set('panopoly_magic_live_preview', 2);
   }
 
@@ -628,6 +641,9 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly admin "Use Advanced Panel Plugins" is disabled
    */
   public function disablePanopolyAdminAdvanacedPanelPlugins() {
+    if (empty($this->configVariables['panopoly_admin_advanced_plugins'])) {
+      $this->configVariables['panopoly_admin_advanced_plugins'] = variable_get('panopoly_admin_advanced_plugins', 'not set');
+    }
     variable_set('panopoly_admin_advanced_plugins', FALSE);
   }
 
@@ -637,6 +653,9 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly admin "Use Advanced Panel Plugins" is enabled
    */
   public function enablePanopolyAdminAdvanacedPanelPlugins() {
+    if (empty($this->configVariables['panopoly_admin_advanced_plugins'])) {
+      $this->configVariables['panopoly_admin_advanced_plugins'] = variable_get('panopoly_admin_advanced_plugins', 'not set');
+    }
     variable_set('panopoly_admin_advanced_plugins', TRUE);
   }
 

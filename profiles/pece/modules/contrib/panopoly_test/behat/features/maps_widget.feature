@@ -6,7 +6,6 @@ Feature: Add map widget
   @api @javascript @panopoly_widgets
   Scenario: Add map to a page
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"

@@ -5,7 +5,6 @@ Feature: Panopoly Magic respects entity view configuration
 
   Background:
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And Panopoly magic add content previews are disabled
       And I am viewing a landing page
     When I customize this page with the Panels IPE

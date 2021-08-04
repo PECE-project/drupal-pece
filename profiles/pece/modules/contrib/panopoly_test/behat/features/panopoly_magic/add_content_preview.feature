@@ -6,8 +6,6 @@ Feature: Preview of widgets on 'Add content' dialog
   @api @javascript @panopoly_magic
   Scenario: Single previews on the 'Add content' dialog
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
-      And Panopoly magic add content previews are single
       And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
@@ -17,7 +15,7 @@ Feature: Preview of widgets on 'Add content' dialog
       And I should not see "Abracadabra! Here is a simple pane."
     When I click "Simple Pane" in the "CTools modal" region
     Then I should see "Abracadabra! Here is a simple pane."
-    When I click "A simple pane for testing." in the "CTools modal" region
+    When I click "Add Simple Pane" in the "Live preview" region
       And I press "Add" in the "CTools modal" region
       And I press "Save"
       And I wait for the Panels IPE to deactivate
@@ -26,7 +24,6 @@ Feature: Preview of widgets on 'Add content' dialog
   @api @javascript @panopoly_magic
   Scenario: Automatic previews on the 'Add content' dialog
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And Panopoly magic add content previews are automatic
       And I am viewing a landing page
     When I customize this page with the Panels IPE
@@ -42,7 +39,6 @@ Feature: Preview of widgets on 'Add content' dialog
   @api @javascript @panopoly_magic
   Scenario: Manual previews on the 'Add content' dialog
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And Panopoly magic add content previews are manual
       And I am viewing a landing page
     When I customize this page with the Panels IPE
@@ -61,7 +57,6 @@ Feature: Preview of widgets on 'Add content' dialog
   @api @javascript @panopoly_magic
   Scenario: Previews on the 'Add content' dialog can be disabled
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And Panopoly magic add content previews are disabled
       And I am viewing a landing page
     When I customize this page with the Panels IPE
@@ -83,7 +78,6 @@ Feature: Preview of widgets on 'Add content' dialog
   @api @javascript @panopoly_magic
   Scenario: Add Content link text for categories with multiple options contains widget labels
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And Panopoly magic add content previews are automatic
       And I am viewing a landing page
     When I customize this page with the Panels IPE
