@@ -129,7 +129,10 @@ function pece_core_defaultconfig_user_default_permissions() {
   // Exported permission: 'skip comment approval'.
   $permissions['skip comment approval'] = array(
     'name' => 'skip comment approval',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'comment',
   );
 
