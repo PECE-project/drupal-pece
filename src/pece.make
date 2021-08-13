@@ -84,12 +84,12 @@ libraries[gifresizer][download][url] = https://github.com/revagomes/gifresizer.g
 ; =====================
 
 ; Overrides Panopoly's Ctools to apply custom patches.
-projects[ctools][version] = 1.15
+projects[ctools][version] = 1.19
 projects[ctools][subdir] = contrib
 ; Edit text of "More Link" from Panel config.
 projects[ctools][patch][1000146] = "https://www.drupal.org/files/issues/2018-03-26/views_panes-more_link_text-1000146-28.patch"
 ; Fix PECE Annotation Save&Continue issue.
-projects[ctools][patch][1907256] = "https://www.drupal.org/files/issues/2018-05-23/ctools-modal-1907256-9.patch"
+;projects[ctools][patch][1907256] = "https://www.drupal.org/files/issues/2018-05-23/ctools-modal-1907256-9.patch"
 ; @TODO: Update and reapply the following patch if needed. @see https://www.drupal.org/project/ctools/issues/2671150
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
 
@@ -284,40 +284,40 @@ projects[panels_mini_ipe][subdir] = contrib
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_admin][version] = 1.79
+projects[panopoly_admin][version] = 1.83
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_core][version] = 1.79
+projects[panopoly_core][version] = 1.83
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.79
+projects[panopoly_images][version] = 1.83
 projects[panopoly_images][subdir] = contrib
 
-projects[panopoly_magic][version] = 1.79
+projects[panopoly_magic][version] = 1.83
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_theme][version] = 1.79
+projects[panopoly_theme][version] = 1.83
 projects[panopoly_theme][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.79
+projects[panopoly_widgets][version] = 1.83
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_users][version] = 1.79
+projects[panopoly_users][version] = 1.83
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.79
+projects[panopoly_pages][version] = 1.83
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_search][version] = 1.79
+projects[panopoly_search][version] = 1.83
 projects[panopoly_search][subdir] = contrib
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
 
-projects[panopoly_wysiwyg][version] = 1.79
+projects[panopoly_wysiwyg][version] = 1.83
 projects[panopoly_wysiwyg][subdir] = contrib
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.79
+projects[panopoly_test][version] = 1.83
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
@@ -396,9 +396,6 @@ projects[manualcrop][subdir] = contrib
 projects[mimedetect][version] = 1.1
 projects[mimedetect][subdir] = contrib
 
-; Overrides panopoly's media.
-projects[media][version] = 2.26
-projects[media][subdir] = contrib
 
 ; Overrides panopoly's media_youtube.
 projects[media_youtube][version] = 3.10
@@ -420,9 +417,9 @@ projects[download_file][subdir] = contrib
 ; =====================
 
 ; Overrides Panopoly's date.
-projects[date][version] =  2.10
+projects[date][version] =  2.11
 projects[date][subdir] = contrib
-projects[date][patch][1143680] = https://www.drupal.org/files/issues/2020-08-04/date-beforeShowDay-eval-1143680-28.patch
+
 
 ; Overrides Panopoly's link.
 projects[link][version] = 1.7
@@ -460,7 +457,7 @@ projects[color_field][version] = 1.8
 ; Search API
 ; Overrides panopoly's search_api settings.
 projects[search_api][subdir] = contrib
-projects[search_api][version] = 1.26
+projects[search_api][version] = 1.27
 projects[search_api][patch][] = ./patches/search_api_fix-composer-friendly-dependecies-issue.patch
 
 ; Search API DB
@@ -473,7 +470,7 @@ projects[search_api_db][version] = 1.8
 ; =====================
 
 projects[radix][type] = theme
-projects[radix][version] = 3.7
+projects[radix][version] = 3.8
 projects[radix][subdir] = contrib
 
 ; Adminimal Theme for admin
