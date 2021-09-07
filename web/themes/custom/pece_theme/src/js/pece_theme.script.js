@@ -1,14 +1,14 @@
 import 'popper.js';
 import 'bootstrap';
 
-(function () {
+// (function () {
 
-  'use strict';
+//   'use strict';
 
-  Drupal.behaviors.helloWorld = {
-    attach: function (context) {
-      console.log('Hello World');
-    }
-  };
+//   Drupal.behaviors.helloWorld = {
+//     attach: function (context) {
+//       console.log('Hello World');
+//     }
+//   };
 
-})(jQuery, Drupal);
+// })(jQuery, Drupal);
