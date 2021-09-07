@@ -1,0 +1,22 @@
+uuid: f56e0375-729a-4fa4-9f95-d8314b969373
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - pece_theme
+_core:
+  default_config_hash: iIy-YIc9d9s1isAtTIKWDBKd6kd2r6LxoYz_-hkLJco
+id: pece_theme_messages
+theme: pece_theme
+region: navbar_branding
+weight: -2
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }
