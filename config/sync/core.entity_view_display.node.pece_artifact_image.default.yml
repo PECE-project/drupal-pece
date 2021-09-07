@@ -9,16 +9,16 @@ dependencies:
     - field.field.node.pece_artifact_image.field_image_crit_commentary
     - field.field.node.pece_artifact_image.field_image_fieldsite
     - field.field.node.pece_artifact_image.field_image_fieldsite_local
-    - field.field.node.pece_artifact_image.field_image_images
     - field.field.node.pece_artifact_image.field_image_language
     - field.field.node.pece_artifact_image.field_image_location
     - field.field.node.pece_artifact_image.field_image_permission
     - field.field.node.pece_artifact_image.field_image_source
+    - field.field.node.pece_artifact_image.field_image_tags
     - field.field.node.pece_artifact_image.field_image_uri
+    - field.field.node.pece_artifact_image.field_pece_media_image
     - node.type.pece_artifact_image
   module:
     - address
-    - image
     - languagefield
     - options
     - text
@@ -76,15 +76,6 @@ content:
     third_party_settings: {  }
     type: boolean
     region: content
-  field_image_images:
-    weight: 113
-    label: above
-    settings:
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
-    type: image
-    region: content
   field_image_language:
     weight: 107
     label: above
@@ -123,6 +114,15 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_pece_media_image:
+    type: entity_reference_entity_view
+    weight: 113
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
     region: content
   links:
     weight: 100

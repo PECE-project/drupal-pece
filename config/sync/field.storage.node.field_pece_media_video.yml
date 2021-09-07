@@ -1,0 +1,20 @@
+uuid: 50a48f18-6add-48e9-a34f-c8b4dd45994f
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - node
+id: node.field_pece_media_video
+field_name: field_pece_media_video
+entity_type: node
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

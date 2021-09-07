@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.artifact_video.body
+    - field.field.node.artifact_video.field_pece_media_video
     - field.field.node.artifact_video.field_video_authors
     - field.field.node.artifact_video.field_video_contributors
     - field.field.node.artifact_video.field_video_crit_commentary
@@ -12,6 +13,7 @@ dependencies:
     - field.field.node.artifact_video.field_video_location
     - field.field.node.artifact_video.field_video_permission
     - field.field.node.artifact_video.field_video_source
+    - field.field.node.artifact_video.field_video_tags
     - field.field.node.artifact_video.field_video_uri
     - field.field.node.artifact_video.field_video_use_fieldsite_local
     - node.type.artifact_video
@@ -31,6 +33,15 @@ content:
     type: text_default
     weight: 101
     settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_pece_media_video:
+    type: entity_reference_entity_view
+    weight: 112
+    label: above
+    settings:
+      view_mode: default
+      link: false
     third_party_settings: {  }
     region: content
   field_video_authors:
