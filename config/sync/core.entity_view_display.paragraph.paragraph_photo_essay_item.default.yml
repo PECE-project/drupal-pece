@@ -15,18 +15,19 @@ mode: default
 content:
   field_pece_description:
     weight: 1
-    label: above
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
   field_pece_image_artifact:
     weight: 0
-    label: above
+    label: visually_hidden
     settings:
-      link: true
+      view_mode: pece_image_artifact
+      link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
     region: content
 hidden:
   search_api_excerpt: true

@@ -1,0 +1,20 @@
+<?php
+/**
+ * @file
+ * Code for the PECE Photo Essay.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function pece_photo_essay_theme() {
+  $theme['field__field_pece_photo_essay_items'] = [
+    'base hook' => 'field',
+  ];
+
+  $theme['paragraph__paragraph_photo_essay_item'] = [
+    'base hook' => 'paragraph',
+  ];
+
+  return $theme;
+}

@@ -1,0 +1,50 @@
+{#
+/**
+ * @file
+ * Default template for a field.
+ */
+#}
+{%
+  set classes = [
+  bundle|clean_class ~ '__' ~ field_name_clean|clean_class,
+  label_display == 'inline' ? 'd-flex',
+]
+%}
+{%
+  set title_classes = [
+  'field__label',
+  'font-weight-bold',
+  label_display == 'visually_hidden' ? 'visually-hidden',
+]
+%}
+
+{{ attach_library('pece_photo_essay/modal-slider') }}
+
+<div{{title_attributes.addClass(title_classes)}}>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photoItemsModal">
+    {{ label }}
+  </button>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade photo-essay-modal" id="photoItemsModal" tabindex="-1" role="dialog" aria-labelledby="photoItemsModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div>
+        <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div{{attributes.addClass(classes)}}>
+        <div class="field__items owl-carousel owl-theme">
+          {% for item in items %}
+            <div{{item.attributes.addClass('field__item')}}>{{ item.content }}</div>
+          {% endfor %}
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
