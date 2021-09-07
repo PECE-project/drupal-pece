@@ -1,0 +1,40 @@
+uuid: 045a74bc-0462-4cdf-a314-7f44cceb2cb6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_photo_essay_items
+    - node.type.pece_photo_essay
+    - paragraphs.paragraphs_type.paragraph_photo_essay_item
+  module:
+    - entity_reference_revisions
+id: node.pece_photo_essay.field_pece_photo_essay_items
+field_name: field_pece_photo_essay_items
+entity_type: node
+bundle: pece_photo_essay
+label: Items
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      paragraph_photo_essay_item: paragraph_photo_essay_item
+    target_bundles_drag_drop:
+      paragraph_content_reference:
+        weight: 5
+        enabled: false
+      paragraph_custom_reference:
+        weight: 6
+        enabled: false
+      paragraph_member:
+        weight: 7
+        enabled: false
+      paragraph_photo_essay_item:
+        enabled: true
+        weight: 8
+field_type: entity_reference_revisions
