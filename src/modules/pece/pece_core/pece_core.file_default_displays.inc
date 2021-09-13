@@ -17,8 +17,8 @@ function pece_core_file_default_displays() {
   $file_display->weight = 0;
   $file_display->status = TRUE;
   $file_display->settings = array(
-    'image_style' => 'pece_mini_teaser',
     'image_link' => '',
+    'image_style' => 'pece_mini_teaser',
   );
   $export['image__mini_teaser__file_field_image'] = $file_display;
 
