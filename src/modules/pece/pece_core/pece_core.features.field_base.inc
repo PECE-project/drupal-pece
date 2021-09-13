@@ -277,6 +277,9 @@ function pece_core_field_default_field_bases() {
       'handler' => 'views',
       'handler_settings' => array(
         'behaviors' => array(
+          'er_viewmode_behavior' => array(
+            'status' => 0,
+          ),
           'views-select-list' => array(
             'status' => 0,
           ),
@@ -287,6 +290,7 @@ function pece_core_field_default_field_bases() {
           'view_name' => 'users_field_ref',
         ),
       ),
+      'profile2_private' => FALSE,
       'target_type' => 'user',
     ),
     'translatable' => 0,
@@ -300,7 +304,11 @@ function pece_core_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_pece_created',
-    'indexes' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
     'locked' => 0,
     'module' => 'date',
     'settings' => array(

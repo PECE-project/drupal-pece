@@ -93,21 +93,21 @@ function pece_core_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__pece_fieldsite';
   $strongarm->value = array(
-    'view_modes' => array(),
     'extra_fields' => array(
+      'display' => array(),
       'form' => array(
-        'title' => array(
-          'weight' => '-5',
+        'locations' => array(
+          'weight' => '30',
         ),
         'path' => array(
           'weight' => '30',
         ),
-        'locations' => array(
-          'weight' => '30',
+        'title' => array(
+          'weight' => '-5',
         ),
       ),
-      'display' => array(),
     ),
+    'view_modes' => array(),
   );
   $export['field_bundle_settings_node__pece_fieldsite'] = $strongarm;
 
@@ -136,7 +136,7 @@ function pece_core_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'gmap_marker_file';
-  $strongarm->value = '29';
+  $strongarm->value = '1';
   $export['gmap_marker_file'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -1958,59 +1958,59 @@ function pece_core_strongarm() {
   $strongarm->value = array(
     'status' => 1,
     'view modes' => array(
-      'page_manager' => array(
-        'status' => 1,
-        'substitute' => '',
-        'default' => 1,
+      'card' => array(
         'choice' => 0,
+        'default' => 0,
+        'status' => 0,
+        'substitute' => 0,
       ),
       'default' => array(
+        'choice' => 0,
+        'default' => 0,
         'status' => 0,
         'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'teaser' => array(
-        'status' => 0,
-        'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
       ),
       'featured' => array(
+        'choice' => 0,
+        'default' => 0,
         'status' => 0,
         'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'mini_teaser' => array(
-        'status' => 0,
-        'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'most_recent' => array(
-        'status' => 0,
-        'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
       ),
       'free_panel' => array(
+        'choice' => 0,
+        'default' => 0,
         'status' => 0,
         'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'card' => array(
-        'status' => 0,
-        'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
       ),
       'meta_content' => array(
+        'choice' => 0,
+        'default' => 0,
         'status' => 0,
         'substitute' => 0,
-        'default' => 0,
+      ),
+      'mini_teaser' => array(
         'choice' => 0,
+        'default' => 0,
+        'status' => 0,
+        'substitute' => 0,
+      ),
+      'most_recent' => array(
+        'choice' => 0,
+        'default' => 0,
+        'status' => 0,
+        'substitute' => 0,
+      ),
+      'page_manager' => array(
+        'choice' => 0,
+        'default' => 1,
+        'status' => 1,
+        'substitute' => '',
+      ),
+      'teaser' => array(
+        'choice' => 0,
+        'default' => 0,
+        'status' => 0,
+        'substitute' => 0,
       ),
     ),
   );
