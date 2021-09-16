@@ -102,6 +102,8 @@ function pece_essay_views_default_views() {
   $handler->display->display_options['filters']['field_permissions_value']['table'] = 'field_data_field_permissions';
   $handler->display->display_options['filters']['field_permissions_value']['field'] = 'field_permissions_value';
   $handler->display->display_options['filters']['field_permissions_value']['value'] = array(
+    'private' => 'private',
+    'restricted' => 'restricted',
     'open' => 'open',
   );
 
