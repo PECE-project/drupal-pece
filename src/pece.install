@@ -561,3 +561,22 @@ function pece_update_7121() {
     }
   }
 }
+
+/**
+ * Enable Multiform and Plupload modules.
+ */
+function pece_update_7122() {
+  module_enable(array(
+    'multiform',
+    'plupload',
+    'pece_importer',
+    'pece_imp_artifacts_audio',
+    'pece_imp_artifacts_image',
+    'pece_imp_artifacts_pdf',
+    'pece_imp_artifacts_tabular',
+    'pece_imp_artifacts_text',
+    'pece_imp_artifacts_video',
+    'pece_imp_artifacts_website',
+  ));
+}
+
