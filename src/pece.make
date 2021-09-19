@@ -402,6 +402,8 @@ projects[manualcrop][subdir] = contrib
 projects[mimedetect][version] = 1.1
 projects[mimedetect][subdir] = contrib
 
+projects[remote_stream_wrapper][version] = 1.0
+projects[remote_stream_wrapper][subdir] = contrib
 
 ; Overrides panopoly's media_youtube.
 projects[media_youtube][version] = 3.10
