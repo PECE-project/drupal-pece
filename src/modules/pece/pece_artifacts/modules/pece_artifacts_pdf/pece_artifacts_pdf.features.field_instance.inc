@@ -24,6 +24,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -105,6 +111,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
     'description' => 'Who created this artifact?',
     'display' => array(
       'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
+      'card_full_text' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -198,6 +210,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 10,
+      ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
       ),
       'default' => array(
         'label' => 'above',
@@ -355,10 +373,17 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'date',
         'settings' => array(
+          'custom_date_format' => '',
           'format_type' => 'long',
           'fromto' => 'both',
           'multiple_from' => '',
@@ -474,6 +499,13 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'smart_trim_format',
         'weight' => 0,
       ),
+      'card_full_text' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -569,6 +601,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 12,
       ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 16,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'entityreference',
@@ -662,6 +700,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 8,
+      ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
       ),
       'default' => array(
         'label' => 'above',
@@ -757,6 +801,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 14,
       ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'creative_commons',
@@ -839,6 +889,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
+      ),
+      'card_full_text' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -928,6 +984,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 1,
+      ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
       ),
       'default' => array(
         'label' => 'above',
@@ -1057,6 +1119,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'entityreference',
@@ -1160,6 +1228,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 7,
       ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1254,6 +1328,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 9,
       ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -1343,6 +1423,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 4,
+      ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
       ),
       'default' => array(
         'label' => 'above',
@@ -1444,6 +1530,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 3,
       ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -1536,6 +1628,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 2,
       ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -1625,6 +1723,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 5,
+      ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
       ),
       'default' => array(
         'label' => 'above',
@@ -1720,6 +1824,12 @@ function pece_artifacts_pdf_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 6,
+      ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
       ),
       'default' => array(
         'label' => 'above',
