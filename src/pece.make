@@ -189,7 +189,8 @@ projects[total_control][subdir] = contrib
 
 projects[node_access_rebuild_bonus][version] = 1.1
 projects[node_access_rebuild_bonus][subdir] = contrib
-// Analytics Matomo
+
+; Analytics Matomo
 projects[matomo][version] = 2.12
 projects[matomo][subdir] = contrib
 projects[piwik_noscript][version] = 1.4
