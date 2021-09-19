@@ -35,9 +35,9 @@ function pece_artifacts_text_panelizer_defaults() {
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
-      'default' => NULL,
       'column1' => NULL,
       'column2' => NULL,
+      'default' => NULL,
     ),
   );
   $display->cache = array();
@@ -55,16 +55,16 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'above',
-    'formatter' => 'text_default',
+    'context' => 'panelizer',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'text_default',
     'formatter_settings' => array(),
-    'context' => 'panelizer',
+    'label' => 'above',
     'override_title' => 0,
-    'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'override_title_text' => '',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -85,13 +85,13 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'above',
-    'formatter' => 'creative_commons_small_image',
+    'context' => 'panelizer',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'creative_commons_small_image',
     'formatter_settings' => array(),
-    'context' => 'panelizer',
+    'label' => 'above',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -112,12 +112,12 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'override_title' => FALSE,
-    'override_title_text' => '',
     'build_mode' => 'page_manager',
+    'context' => 'panelizer',
     'identifier' => '',
     'link' => TRUE,
-    'context' => 'panelizer',
+    'override_title' => FALSE,
+    'override_title_text' => '',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -141,62 +141,17 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->access = array();
   $pane->configuration = array(
     'map' => array(
-      'path' => 'panels/ajax',
-      'load_functions' => '',
-      'to_arg_functions' => '',
-      'access_callback' => 'user_access',
-      'access_arguments' => 'a:1:{i:0;s:14:"access content";}',
-      'page_callback' => 'panels_ajax_router',
-      'page_arguments' => array(
-        0 => 'editor',
-        1 => 'add-pane',
-        2 => 'panelizer:default:node:pece_artifact_text.page_manager:default',
-        3 => 'column1',
-        4 => 'annotation',
-        5 => 'annotation',
-        6 => 'form',
-      ),
-      'delivery_callback' => 'ajax_deliver',
-      'fit' => '3',
-      'number_parts' => '2',
-      'context' => '0',
-      'tab_parent' => '',
-      'tab_root' => 'panels/ajax',
-      'title' => '',
-      'title_callback' => 't',
-      'title_arguments' => '',
-      'theme_callback' => 'ajax_base_page_theme',
-      'theme_arguments' => array(
-        0 => 'editor',
-        1 => 'add-pane',
-        2 => 'panelizer:default:node:pece_artifact_text.page_manager:default',
-        3 => 'column1',
-        4 => 'annotation',
-        5 => 'annotation',
-        6 => 'form',
-      ),
-      'type' => '0',
-      'description' => '',
-      'position' => '',
-      'weight' => '0',
-      'include_file' => '',
-      'href' => 'panels/ajax',
-      'tab_root_href' => 'panels/ajax',
-      'tab_parent_href' => '',
-      'options' => array(),
       'access' => TRUE,
+      'access_arguments' => 'a:1:{i:0;s:14:"access content";}',
+      'access_callback' => 'user_access',
+      'context' => '0',
+      'delivery_callback' => 'ajax_deliver',
+      'description' => '',
+      'fit' => '3',
+      'href' => 'panels/ajax',
+      'include_file' => '',
+      'load_functions' => '',
       'localized_options' => array(),
-      'original_map' => array(
-        0 => 'panels',
-        1 => 'ajax',
-        2 => 'editor',
-        3 => 'add-pane',
-        4 => 'panelizer:default:node:pece_artifact_text.page_manager:default',
-        5 => 'column1',
-        6 => 'annotation',
-        7 => 'annotation',
-        8 => 'form',
-      ),
       'map' => array(
         0 => 'panels',
         1 => 'ajax',
@@ -208,10 +163,55 @@ function pece_artifacts_text_panelizer_defaults() {
         7 => 'annotation',
         8 => 'form',
       ),
+      'number_parts' => '2',
+      'options' => array(),
+      'original_map' => array(
+        0 => 'panels',
+        1 => 'ajax',
+        2 => 'editor',
+        3 => 'add-pane',
+        4 => 'panelizer:default:node:pece_artifact_text.page_manager:default',
+        5 => 'column1',
+        6 => 'annotation',
+        7 => 'annotation',
+        8 => 'form',
+      ),
+      'page_arguments' => array(
+        0 => 'editor',
+        1 => 'add-pane',
+        2 => 'panelizer:default:node:pece_artifact_text.page_manager:default',
+        3 => 'column1',
+        4 => 'annotation',
+        5 => 'annotation',
+        6 => 'form',
+      ),
+      'page_callback' => 'panels_ajax_router',
+      'path' => 'panels/ajax',
+      'position' => '',
+      'tab_parent' => '',
+      'tab_parent_href' => '',
+      'tab_root' => 'panels/ajax',
+      'tab_root_href' => 'panels/ajax',
+      'theme_arguments' => array(
+        0 => 'editor',
+        1 => 'add-pane',
+        2 => 'panelizer:default:node:pece_artifact_text.page_manager:default',
+        3 => 'column1',
+        4 => 'annotation',
+        5 => 'annotation',
+        6 => 'form',
+      ),
+      'theme_callback' => 'ajax_base_page_theme',
+      'title' => '',
+      'title_arguments' => '',
+      'title_callback' => 't',
+      'to_arg_functions' => '',
+      'type' => '0',
+      'weight' => '0',
     ),
     'override_title' => 0,
-    'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'override_title_text' => '',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -234,8 +234,8 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->configuration = array(
     'inherit_path' => 1,
     'override_title' => 0,
-    'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'override_title_text' => '',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -256,9 +256,9 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'view_settings' => 'fields',
     'header_type' => 'none',
     'view_mode' => 'teaser',
+    'view_settings' => 'fields',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -279,13 +279,13 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'above',
-    'formatter' => 'taxonomy_term_reference_link',
+    'context' => 'panelizer',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'taxonomy_term_reference_link',
     'formatter_settings' => array(),
-    'context' => 'panelizer',
+    'label' => 'above',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -306,23 +306,23 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'title',
-    'formatter' => 'date_default',
+    'context' => array(),
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'date_default',
     'formatter_settings' => array(
       'format_type' => 'medium',
-      'multiple_number' => '',
-      'multiple_from' => '',
-      'multiple_to' => '',
       'fromto' => 'both',
+      'multiple_from' => '',
+      'multiple_number' => '',
+      'multiple_to' => '',
       'show_remaining_days' => 0,
     ),
-    'context' => array(),
+    'label' => 'title',
     'override_title' => 0,
-    'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'override_title_text' => '',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -343,18 +343,18 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'above',
-    'formatter' => 'og_list_default',
+    'context' => 'panelizer',
     'delta_limit' => '0',
     'delta_offset' => '0',
     'delta_reversed' => 0,
+    'formatter' => 'og_list_default',
     'formatter_settings' => array(
       'link' => FALSE,
     ),
-    'context' => 'panelizer',
+    'label' => 'above',
     'override_title' => 0,
-    'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'override_title_text' => '',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -375,11 +375,11 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'format' => 'medium',
     'context' => 'panelizer',
+    'format' => 'medium',
     'override_title' => 1,
-    'override_title_text' => 'Contributed date',
     'override_title_heading' => 'h3',
+    'override_title_text' => 'Contributed date',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -400,18 +400,18 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'above',
-    'formatter' => 'og_list_default',
+    'context' => 'panelizer',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'og_list_default',
     'formatter_settings' => array(
       'link' => FALSE,
     ),
-    'context' => 'panelizer',
+    'label' => 'above',
     'override_title' => 0,
-    'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'override_title_text' => '',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -432,13 +432,13 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'above',
-    'formatter' => 'text_default',
+    'context' => 'panelizer',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'text_default',
     'formatter_settings' => array(),
-    'context' => 'panelizer',
+    'label' => 'above',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -459,16 +459,16 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'title',
-    'formatter' => 'text_default',
+    'context' => array(),
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'text_default',
     'formatter_settings' => array(),
-    'context' => array(),
+    'label' => 'title',
     'override_title' => 0,
-    'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'override_title_text' => '',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -489,22 +489,22 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'title',
-    'formatter' => 'language_default',
+    'context' => array(),
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'language_default',
     'formatter_settings' => array(
       'format' => array(
-        'name' => 'name',
         'iso' => 0,
+        'name' => 'name',
         'name_native' => 0,
       ),
     ),
-    'context' => array(),
+    'label' => 'title',
     'override_title' => 0,
-    'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'override_title_text' => '',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -525,16 +525,16 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'title',
-    'formatter' => 'og_list_default',
+    'context' => 'panelizer',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'og_list_default',
     'formatter_settings' => array(),
-    'context' => 'panelizer',
+    'label' => 'title',
     'override_title' => 1,
-    'override_title_text' => 'Group Audience',
     'override_title_heading' => 'h2',
+    'override_title_text' => 'Group Audience',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -555,13 +555,13 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'above',
-    'formatter' => 'taxonomy_term_reference_link',
+    'context' => 'panelizer',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'taxonomy_term_reference_link',
     'formatter_settings' => array(),
-    'context' => 'panelizer',
+    'label' => 'above',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -582,13 +582,13 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'above',
-    'formatter' => 'location_default',
+    'context' => 'panelizer',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'location_default',
     'formatter_settings' => array(),
-    'context' => 'panelizer',
+    'label' => 'above',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -610,8 +610,8 @@ function pece_artifacts_text_panelizer_defaults() {
   $pane->access = array();
   $pane->configuration = array(
     'override_title' => 1,
-    'override_title_text' => 'Cite as',
     'override_title_heading' => 'h2',
+    'override_title_text' => 'Cite as',
   );
   $pane->cache = array();
   $pane->style = array(
