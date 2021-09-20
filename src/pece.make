@@ -428,7 +428,6 @@ projects[download_file][subdir] = contrib
 projects[date][version] =  2.11
 projects[date][subdir] = contrib
 
-
 ; Overrides Panopoly's link.
 projects[link][version] = 1.7
 projects[link][subdir] = contrib
@@ -452,7 +451,6 @@ projects[languagefield][subdir] = contrib
 projects[nodeaccess_userreference][subdir] = contrib
 projects[nodeaccess_userreference][version] = 3.10
 projects[nodeaccess_userreference][patch][] = ./patches/nodeaccess_userreference-fix_install_phase_requirement_error.patch
-
 
 ; Color field
 projects[color_field][subdir] = contrib
@@ -630,6 +628,10 @@ projects[feeds][version] = 2.0-beta5
 ; Feeds Tamper
 projects[feeds_tamper][subdir] = contrib
 projects[feeds_tamper][version] = 1.2
+
+; Feeds Preview
+projects[feedspreview][subdir] = contrib
+projects[feedspreview][version] = 1.x-dev
 
 ; Bibliography
 projects[biblio][subdir] = contrib
