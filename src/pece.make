@@ -420,6 +420,9 @@ projects[image_resize_filter][patch][] = ./patches/image_resize_filter-dblog_ima
 projects[download_file][version] = 2.1
 projects[download_file][subdir] = contrib
 
+projects[pack_upload][version] = 1.2
+projects[pack_upload][subdir] = contrib
+
 ; =====================
 ; Fields
 ; =====================
