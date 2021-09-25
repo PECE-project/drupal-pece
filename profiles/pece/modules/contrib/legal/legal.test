@@ -148,13 +148,6 @@ class LegalPasswordResetTestCase extends LegalTestCase {
     // Accept the T&Cs.
     $this->drupalPost(NULL, $edit, t('Confirm'));
 
-    // Don't use assertUrl() as that requires us to match up the tokens in the
-    // query too.
-    $url = $this->getUrl();
-    $path = parse_url($url, PHP_URL_PATH);
-    $expected_path = url("user/{$this->user->uid}/edit");
-    $this->assertEqual($path, $expected_path, "The user is redirected to the user edit page.");
-
     $this->assertText(t("You have just used your one-time login link. It is no longer necessary to use this link to log in. Please change your password."), "The user is shown the message to reset their password.");
   }
 
