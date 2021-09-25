@@ -420,6 +420,9 @@ projects[image_resize_filter][patch][] = ./patches/image_resize_filter-dblog_ima
 projects[download_file][version] = 2.1
 projects[download_file][subdir] = contrib
 
+projects[pack_upload][version] = 1.2
+projects[pack_upload][subdir] = contrib
+
 ; =====================
 ; Fields
 ; =====================
@@ -427,7 +430,6 @@ projects[download_file][subdir] = contrib
 ; Overrides Panopoly's date.
 projects[date][version] =  2.11
 projects[date][subdir] = contrib
-
 
 ; Overrides Panopoly's link.
 projects[link][version] = 1.7
@@ -452,7 +454,6 @@ projects[languagefield][subdir] = contrib
 projects[nodeaccess_userreference][subdir] = contrib
 projects[nodeaccess_userreference][version] = 3.10
 projects[nodeaccess_userreference][patch][] = ./patches/nodeaccess_userreference-fix_install_phase_requirement_error.patch
-
 
 ; Color field
 projects[color_field][subdir] = contrib
