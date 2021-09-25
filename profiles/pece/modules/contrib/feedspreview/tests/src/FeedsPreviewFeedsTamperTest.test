@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * Tests in combination with Feeds Tamper.
+ */
+class FeedsPreviewFeedsTamperTest extends FeedsPreviewTestCase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Feeds Tamper integration',
+      'description' => 'Tests compatibility with Feeds Tamper.',
+      'group' => 'FeedsPreview',
+      'dependencies' => array('feeds_tamper'),
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp($modules = array()) {
+    $modules[] = 'feeds_tamper';
+    parent::setUp($modules);
+
+    // Create content type.
+    $content_type = $this->drupalCreateContentType(array());
+
+    // Create and configure importer.
+    $this->createImporterConfiguration('Syndication', 'syndication');
+    $this->setPlugin('syndication', 'FeedsHTTPFetcher');
+    $this->setSettings('syndication', 'FeedsNodeProcessor', array(
+      'bundle' => $content_type->type,
+    ));
+  }
+
+  /**
+   * Tests previewing with blank sources and temporary targets.
+   */
+  public function testBlankSourcesAndTemporaryTargets() {
+    // Add three blank sources and temporary targets.
+    $this->addMappings('syndication', array(
+      0 => array(
+        'source' => 'Blank source 1',
+        'target' => 'Temporary target 1',
+      ),
+      1 => array(
+        'source' => 'Blank source 2',
+        'target' => 'Temporary target 2',
+      ),
+      2 => array(
+        'source' => 'Blank source 3',
+        'target' => 'Temporary target 3',
+      ),
+    ));
+
+    $url = $GLOBALS['base_url'] . '/' . drupal_get_path('module', 'feedspreview') . '/tests/resources/drupalplanet.rss2';
+    $this->previewImportUrl('import/syndication', $url);
+
+    // Assert that all sources are displayed in the UI.
+    $this->assertText('Blank source 1');
+    $this->assertText('Blank source 2');
+    $this->assertText('Blank source 3');
+
+    // Assert that all targets are displayed in the UI.
+    $this->assertText('Temporary target 1');
+    $this->assertText('Temporary target 2');
+    $this->assertText('Temporary target 3');
+
+    // Assert that no targets are missing.
+    $this->assertNoText('Missing');
+  }
+
+}

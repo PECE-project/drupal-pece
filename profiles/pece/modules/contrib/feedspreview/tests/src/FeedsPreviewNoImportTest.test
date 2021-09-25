@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ * Contains FeedsPreviewNoImportTest.
+ */
+
+/**
+ * Tests if previewing import doesn't trigger an import on cron.
+ */
+class FeedsPreviewNoImportTest extends FeedsPreviewTestCase {
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'No import on cron',
+      'description' => 'Tests if previewing import doesn\'t trigger an import on cron.',
+      'group' => 'FeedsPreview',
+    );
+  }
+
+  /**
+   * Tests if no nodes are imported after cron run, after preview.
+   */
+  public function test() {
+    // Create content type.
+    $content_type = $this->drupalCreateContentType(array());
+
+    // Create and configure importer.
+    // Set to run import process as often as possible.
+    $this->createImporterConfiguration('Content CSV', 'csv');
+    $this->setSettings('csv', NULL, array(
+      'content_type' => '',
+      'import_period' => 0,
+    ));
+    $this->setPlugin('csv', 'FeedsFileFetcher');
+    $this->setPlugin('csv', 'FeedsCSVParser');
+    $this->setSettings('csv', 'FeedsNodeProcessor', array(
+      'bundle' => $content_type->type,
+    ));
+    $this->addMappings('csv', array(
+      0 => array(
+        'source' => 'title',
+        'target' => 'title',
+      ),
+      1 => array(
+        'source' => 'created',
+        'target' => 'created',
+      ),
+      2 => array(
+        'source' => 'body',
+        'target' => 'body',
+      ),
+    ));
+
+    // Trigger an import preview.
+    $this->previewImportFile('admin/structure/feeds/csv/preview', NULL, array(), 'Preview import');
+
+    // Run cron.
+    drupal_cron_run();
+
+    // Assert that no nodes were created.
+    $this->assertNodeCount(0, 'No nodes were imported (actual: @actual).');
+  }
+}

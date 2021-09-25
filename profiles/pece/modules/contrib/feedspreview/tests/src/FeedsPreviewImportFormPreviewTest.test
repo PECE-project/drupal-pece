@@ -1,0 +1,215 @@
+<?php
+
+/**
+ * @file
+ * Contains FeedsPreviewPreviewTest.
+ */
+
+/**
+ * Tests previewing on the import form.
+ */
+class FeedsPreviewImportFormPreviewTest extends FeedsPreviewTestCase {
+  /**
+   * The content type that is selected on the processor.
+   *
+   * @var object
+   */
+  private $contentType;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Import form preview',
+      'description' => 'Tests if an import can be previewed on the import form.',
+      'group' => 'FeedsPreview',
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp($modules = array()) {
+    parent::setUp($modules);
+
+    // Create content type.
+    $this->contentType = $this->drupalCreateContentType(array());
+
+    // Create and configure importer.
+    // Set to run import process as often as possible.
+    $this->createImporterConfiguration('Content CSV', 'csv');
+    $this->setSettings('csv', NULL, array(
+      'content_type' => '',
+      'import_period' => 0,
+    ));
+    $this->setPlugin('csv', 'FeedsFileFetcher');
+    $this->setPlugin('csv', 'FeedsCSVParser');
+    $this->setSettings('csv', 'FeedsNodeProcessor', array(
+      'bundle' => $this->contentType->type,
+    ));
+    $this->addMappings('csv', array(
+      0 => array(
+        'source' => 'guid',
+        'target' => 'guid',
+        'unique' => TRUE,
+      ),
+      1 => array(
+        'source' => 'title',
+        'target' => 'title',
+      ),
+      2 => array(
+        'source' => 'created',
+        'target' => 'created',
+      ),
+      3 => array(
+        'source' => 'body',
+        'target' => 'body',
+      ),
+    ));
+  }
+
+  /**
+   * Tests previewing on the import form using the file fetcher.
+   */
+  public function testStandaloneImporterWithFileFetcher() {
+    // Preview file using the file fetcher.
+    $this->previewImportFile('import/csv');
+
+    // Assert that no nodes have been created yet.
+    $this->assertNodeCount(0, 'No nodes have been created yet.');
+
+    // And import.
+    $this->drupalPost(NULL, array(), 'Import');
+
+    // Assert that nodes have been created.
+    $this->assertText('Created 2 nodes');
+    $this->assertNodeCount(2, 'Two nodes have been created.');
+  }
+
+  /**
+   * Tests previewing on the import form using the http fetcher.
+   */
+  public function testStandaloneImporterWithHTTPFetcher() {
+    // Preview file using the http fetcher.
+    $this->setPlugin('csv', 'FeedsHTTPFetcher');
+    $this->previewImportUrl('import/csv');
+
+    // Assert that no nodes have been created yet.
+    $this->assertNodeCount(0, 'No nodes have been created yet.');
+
+    // And import.
+    $this->drupalPost(NULL, array(), 'Import');
+
+    // Assert that nodes have been created.
+    $this->assertText('Created 2 nodes');
+    $this->assertNodeCount(2, 'Two nodes have been created.');
+  }
+
+  /**
+   * Tests previewing a source when there is already an existing source using
+   * the file fetcher.
+   *
+   * Ensured is that:
+   * - The existing source is kept when only previewing a new source.
+   * - The existing source is still being imported on cron runs while previewing
+   *   a new source.
+   */
+  public function testStandaloneImporterWithExistingSourceWithFileFetcher() {
+    // Set to import as often as possible.
+    $this->setSettings('csv', NULL, array(
+      'import_period' => 0,
+    ));
+    // Change settings to update existing nodes and ignore the hash check.
+    $this->setSettings('csv', 'FeedsNodeProcessor', array(
+      'update_existing' => FEEDS_UPDATE_EXISTING,
+      'skip_hash_check' => TRUE,
+    ));
+
+    // Import a source.
+    $edit = array(
+      'files[feeds]' => $this->absolutePath() . '/tests/resources/content.csv',
+    );
+    $this->drupalPost('import/csv', $edit, 'Import');
+    $this->assertText('Created 2 nodes');
+
+    // Change the titles of the nodes so we can check if the existing source
+    // keeps updating these nodes.
+    $node = node_load(1);
+    $node->title = 'Dolor sit amet';
+    node_save($node);
+    $node = node_load(2);
+    $node->title = 'Quis nostrud exerci';
+    node_save($node);
+
+    // Preview the content2.csv in which all values except guid were changed.
+    $file = $this->absolutePath() . '/tests/resources/content2.csv';
+    $this->previewImportFile('import/csv', $file);
+    $this->assertText('Nam liber tempor');
+
+    // Run cron and ensure content.csv is imported (not content2.csv).
+    $this->cronRun();
+
+    $node = node_load(1, NULL, TRUE);
+    $this->assertEqual('Lorem ipsum', $node->title);
+    $node = node_load(2, NULL, TRUE);
+    $this->assertEqual('Ut wisi enim ad minim veniam', $node->title);
+
+    // Reload the form and ensure the existing source is displayed.
+    $this->drupalGet('import/csv');
+    $this->assertText('content.csv');
+  }
+
+  /**
+   * Tests previewing a source when there is already an existing source using
+   * the http fetcher.
+   *
+   * @see testStandaloneImporterWithExistingSourceWithFileFetcher()
+   */
+  public function testStandaloneImporterWithExistingSourceWithHttpFetcher() {
+    // Preview file using the http fetcher.
+    $this->setPlugin('csv', 'FeedsHTTPFetcher');
+    // Set to import as often as possible.
+    $this->setSettings('csv', NULL, array(
+      'import_period' => 0,
+    ));
+    // Change settings to update existing nodes and ignore the hash check.
+    $this->setSettings('csv', 'FeedsNodeProcessor', array(
+      'update_existing' => FEEDS_UPDATE_EXISTING,
+      'skip_hash_check' => TRUE,
+    ));
+
+    // Import a source.
+    $edit = array(
+      'feeds[FeedsHTTPFetcher][source]' => $GLOBALS['base_url'] . '/' . drupal_get_path('module', 'feedspreview') . '/tests/resources/content.csv',
+    );
+    $this->drupalPost('import/csv', $edit, 'Import');
+    $this->assertText('Created 2 nodes');
+
+    // Change the titles of the nodes so we can check if the existing source
+    // keeps updating these nodes.
+    $node = node_load(1);
+    $node->title = 'Dolor sit amet';
+    node_save($node);
+    $node = node_load(2);
+    $node->title = 'Quis nostrud exerci';
+    node_save($node);
+
+    // Preview the content2.csv in which all values except guid were changed.
+    $url = $GLOBALS['base_url'] . '/' . drupal_get_path('module', 'feedspreview') . '/tests/resources/content2.csv';
+    $this->previewImportUrl('import/csv', $url);
+    $this->assertText('Nam liber tempor');
+
+    // Run cron and ensure content.csv is imported (not content2.csv).
+    $this->cronRun();
+
+    $node = node_load(1, NULL, TRUE);
+    $this->assertEqual('Lorem ipsum', $node->title);
+    $node = node_load(2, NULL, TRUE);
+    $this->assertEqual('Ut wisi enim ad minim veniam', $node->title);
+
+    // Reload the form and ensure the existing source is displayed.
+    $this->drupalGet('import/csv');
+    $this->assertFieldByName('feeds[FeedsHTTPFetcher][source]', $GLOBALS['base_url'] . '/' . drupal_get_path('module', 'feedspreview') . '/tests/resources/content.csv');
+  }
+}

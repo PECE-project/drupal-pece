@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Feeds Import Preview module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function feedspreview_schema() {
+  $schema = array();
+
+  $schema['feedspreview_source'] = array(
+    'description' => 'Source definitions for feeds.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Id of the feed configuration.',
+      ),
+      'config' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => FALSE,
+        'description' => 'Configuration of the source.',
+        'serialize' => TRUE,
+      ),
+      'source' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => 'Main source resource identifier. E. g. a path or a URL.',
+      ),
+      'state' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => FALSE,
+        'description' => 'State of import or clearing batches.',
+        'serialize' => TRUE,
+      ),
+      'fetcher_result' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => FALSE,
+        'description' => 'Cache for fetcher result.',
+        'serialize' => TRUE,
+      ),
+      'imported' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'unsigned' => TRUE,
+        'description' => 'Timestamp when this source was imported last.',
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}

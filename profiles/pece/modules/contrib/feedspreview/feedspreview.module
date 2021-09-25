@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * @file
+ * Feeds Import Preview module.
+ *
+ * Preview the feeds source content before importing.
+ */
+
+/**
+ * Location of Feeds importer id in path on feeds importer configuration pages.
+ *
+ * @var int
+ */
+define('FEEDSPREVIEW_IMPORTER_ARG', 3);
+
+/**
+ * Location of active "menu item" in path on feeds importer configuration pages.
+ *
+ * @var int
+ */
+define('FEEDSPREVIEW_ACTIVE_ARG', 4);
+
+/**
+ * Implements hook_preprocess_HOOK() for feeds_ui_edit_page().
+ *
+ * Adds "Preview" section to Feeds edit page.
+ */
+function feedspreview_preprocess_feeds_ui_edit_page(&$variables) {
+  $importer = feeds_importer_load(arg(FEEDSPREVIEW_IMPORTER_ARG));
+  $active = arg(FEEDSPREVIEW_ACTIVE_ARG);
+  $path = 'admin/structure/feeds/' . $importer->id;
+
+  switch ($active) {
+    case 'preview':
+      module_load_include('pages.inc', 'feedspreview');
+      $variables['active']['title'] = t('Import preview');
+      $variables['active']['body'] = drupal_get_form('feedspreview_form', $importer->id);
+      break;
+  }
+
+  $variables['info']['preview'] = array(
+    'class' => array('config-set'),
+    'title' => t('Preview'),
+    'body' => array(
+      array(
+        'body' => t('Show a preview of the import.'),
+        'actions' => array(
+          l(t('Import preview'), $path . '/preview'),
+        ),
+      ),
+    ),
+    'actions' => array(),
+  );
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for form feeds_import_form().
+ *
+ * Adds preview button to the form.
+ */
+function feedspreview_form_feeds_import_form_alter(&$form, &$form_state) {
+  // Load feedspreview.pages.inc along with the form.
+  form_load_include($form_state, 'inc', 'feedspreview', 'feedspreview.pages');
+
+  if (isset($form_state['feeds_parser_result'])) {
+    $form['feedspreview'] = feedspreview_show_result_on_form($form['#importer_id'], $form_state['feeds_parser_result']);
+
+    // Replace source form to support file fetcher.
+    $source = FeedsPreviewSource::instance($form['#importer_id'], 0);
+    $source_form = $source->configForm($form_state);
+    $form['feeds'] = array_merge($form['feeds'], $source_form);
+  }
+
+  $form['actions']['preview'] = array(
+    '#type' => 'submit',
+    '#value' => t('Preview'),
+    '#submit' => array('feedspreview_form_submit'),
+  );
+}

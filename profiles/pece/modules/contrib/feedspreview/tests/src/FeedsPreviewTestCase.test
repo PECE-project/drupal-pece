@@ -1,0 +1,111 @@
+<?php
+
+/**
+ * @file
+ * Contains FeedsPreviewTestCase.
+ */
+
+/**
+ * Base class for FeedsPreview tests.
+ */
+abstract class FeedsPreviewTestCase extends FeedsWebTestCase {
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp($modules = array()) {
+    $modules[] = 'feedspreview';
+    $modules = array_unique($modules);
+    parent::setUp($modules);
+
+    // Include FeedsProcessor.inc so processor related constants are available.
+    module_load_include('inc', 'feeds', 'plugins/FeedsProcessor');
+  }
+
+  /**
+   * Overrides FeedsWebTestCase::absolutePath().
+   *
+   * Returns absolute path to FeedsPreview module instead.
+   */
+  public function absolutePath() {
+    return $this->absolute() . '/' . drupal_get_path('module', 'feedspreview');
+  }
+
+  /**
+   * Preview the import of a file using the file fetcher.
+   *
+   * @param string $path
+   *   The path to submit to.
+   * @param string $file
+   *   (optional) The path to the file to upload.
+   * @param array $edit
+   *   (optional) Additional values to fill in on the form.
+   * @param string $submit
+   *   (optional) The name of the button.
+   *   Defaults to "Preview".
+   */
+  protected function previewImportFile($path, $file = NULL, $edit = array(), $submit = 'Preview') {
+    if (is_null($file)) {
+      $file = $this->absolutePath() . '/tests/resources/content.csv';
+    }
+
+    $this->assertTrue(file_exists($file), format_string('Source file @file exists', array(
+      '@file' => $file,
+    )));
+    $edit += array(
+      'files[feeds]' => $file,
+    );
+    $this->drupalPost($path, $edit, $submit);
+
+    // Assert that a preview is shown.
+    $this->assertRaw('feeds-preview-table');
+  }
+
+  /**
+   * Preview the import of an url using the http fetcher.
+   *
+   * @param string $path
+   *   The path to submit to.
+   * @param string $url
+   *   (optional) The url to preview.
+   * @param array $edit
+   *   (optional) Additional values to fill in on the form.
+   * @param string $submit
+   *   (optional) The name of the button.
+   *   Defaults to "Preview".
+   */
+  protected function previewImportUrl($path, $url = NULL, $edit = array(), $submit = 'Preview') {
+    if (is_null($url)) {
+      $url = $GLOBALS['base_url'] . '/' . drupal_get_path('module', 'feedspreview') . '/tests/resources/content.csv';
+    }
+
+    $edit += array(
+      'feeds[FeedsHTTPFetcher][source]' => $url,
+    );
+    $this->drupalPost($path, $edit, $submit);
+
+    // Assert that a preview is shown.
+    $this->assertRaw('feeds-preview-table');
+  }
+
+  /**
+   * Asserts number of nodes.
+   */
+  public function assertNodeCount($expected, $message = NULL) {
+    if (is_null($message)) {
+      $message = 'There are @expected nodes (actual: @actual).';
+    }
+
+    $actual = db_select('node')
+      ->fields('node', array('nid'))
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+
+    $message = format_string($message, array(
+      '@expected' => $expected,
+      '@actual' => $actual,
+    ));
+
+    $this->assertEqual($expected, $actual, $message);
+  }
+}

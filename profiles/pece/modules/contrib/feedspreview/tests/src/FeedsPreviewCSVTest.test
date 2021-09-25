@@ -1,0 +1,102 @@
+<?php
+
+/**
+ * Tests previewing data when using the CSV parser.
+ */
+class FeedsPreviewCSVTest extends FeedsPreviewTestCase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Preview CSV files',
+      'description' => 'Tests previewing data using the CSV parser.',
+      'group' => 'FeedsPreview',
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp($modules = array()) {
+    parent::setUp($modules);
+
+    // Create content type.
+    $content_type = $this->drupalCreateContentType(array());
+
+    // Create and configure importer.
+    // Set to run import process as often as possible.
+    $this->createImporterConfiguration('Content CSV', 'csv');
+    $this->setSettings('csv', NULL, array(
+      'content_type' => '',
+      'import_period' => 0,
+    ));
+    $this->setPlugin('csv', 'FeedsFileFetcher');
+    $this->setPlugin('csv', 'FeedsCSVParser');
+    $this->setSettings('csv', 'FeedsNodeProcessor', array(
+      'bundle' => $content_type->type,
+    ));
+  }
+
+  /**
+   * Tests previewing when uppercase characters are used as mapping sources.
+   *
+   * The CSV parser converts keys of mapping sources to lowercase, so this test
+   * ensures that Feeds Import Preview takes that behavior into account.
+   */
+  public function testCSVWithUppercaseColumnNames() {
+    $this->addMappings('csv', array(
+      0 => array(
+        'source' => 'Guid',
+        'target' => 'guid',
+        'unique' => TRUE,
+      ),
+      1 => array(
+        'source' => 'Title',
+        'target' => 'title',
+      ),
+      2 => array(
+        'source' => 'Created',
+        'target' => 'created',
+      ),
+      3 => array(
+        'source' => 'Body',
+        'target' => 'body',
+      ),
+    ));
+
+    // Preview file using the file fetcher.
+    $this->previewImportFile('import/csv', $this->absolutePath() . '/tests/resources/content_uppercase_cols.csv');
+
+    // Assert that everything has a value and no targets are missing.
+    $this->assertNoText('Missing');
+    $this->assertNoText('None');
+    $this->assertNoText('Not mapped');
+
+    // And assert expected values.
+    $this->assertPreviewValue('1', 1);
+    $this->assertPreviewValue('Lorem ipsum', 2);
+    $this->assertPreviewValue('1251936720', 3);
+
+    // Assert expected body value.
+    $result = $this->xpath('(//td[@class="feeds-preview-table-value-column"])[4]');
+    $data = reset($result);
+    $this->assertEqual('Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.', (string) $data->div->pre);
+  }
+
+  /**
+   * Asserts a certain preview value shown.
+   *
+   * @param string $value
+   *   The expected value.
+   * @param int $row_number
+   *   The row in which the value is expected.
+   */
+  protected function assertPreviewValue($value, $row_number) {
+    $result = $this->xpath('(//td[@class="feeds-preview-table-value-column"])[' . $row_number . ']');
+    $data = reset($result);
+    $this->assertEqual($value, (string) $data->pre);
+  }
+
+}

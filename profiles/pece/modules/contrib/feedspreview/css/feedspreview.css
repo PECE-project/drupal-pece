@@ -1,0 +1,47 @@
+/**
+ * @file
+ * CSS for Feeds Preview.
+ */
+
+.feeds-preview-table-source-column,
+.feeds-preview-table-target-column {
+  width: 100px;
+  vertical-align: top;
+}
+
+.feeds-preview-table-value-column {
+  max-width: 400px;
+  overflow-x: auto;
+}
+.feeds-preview-table-value-column pre {
+  margin: 0;
+}
+
+.feeds-preview-table {
+  display: none;
+}
+.feeds-preview-table.active {
+  display: table;
+}
+
+.feeds-preview-long-content.collapsed {
+  height: 40px;
+  overflow: hidden;
+}
+
+.feeds-preview-controls-previous,
+.feeds-preview-controls-next {
+  display: inline-block;
+  margin-right: 5px;
+  border: 1px solid #b4b4b4;
+  padding: 3px 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.feeds-preview-table-row-not-mapped td.feeds-preview-table-target-column {
+  background-image: url('../images/message-16-warning.png');
+  background-repeat: no-repeat;
+  background-position: right 9px;
+}
