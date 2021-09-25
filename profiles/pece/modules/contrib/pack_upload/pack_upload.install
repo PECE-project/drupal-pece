@@ -1,0 +1,21 @@
+<?php
+/**
+ * @file
+ * This is the installation file pack & upload module.
+ *
+ * All hooks related module installation and cleanup are mentioned here.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function pack_upload_uninstall() {
+  variable_del('pack_upload_bulk_media_path');
+}
+
+/**
+ * Implements hook_install().
+ */
+function pack_upload_install() {
+  variable_set('pack_upload_bulk_media_path', 'public://bulk_media');
+}
