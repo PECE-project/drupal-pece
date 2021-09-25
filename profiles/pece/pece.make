@@ -382,6 +382,13 @@ projects[better_formats][subdir] = contrib
 projects[smart_trim][version] = 1.6
 projects[smart_trim][subdir] = contrib
 
+projects[multiform][version] = 1.6
+projects[multiform][subdir] = contrib
+
+projects[plupload][version] = 1.7
+projects[plupload][subdir] = contrib
+projects[plupload][patch][1903850] = https://www.drupal.org/files/issues/plupload-1_5_8-rm_examples-1903850-33.patch
+
 ; =====================
 ; Files
 ; =====================
