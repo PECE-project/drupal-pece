@@ -28,6 +28,7 @@ function pece_artifacts_pdf_defaultconfig_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
+      'platform-director' => 'platform-director',
     ),
     'module' => 'node',
   );
@@ -37,6 +38,7 @@ function pece_artifacts_pdf_defaultconfig_user_default_permissions() {
     'name' => 'delete any pece_artifact_pdf content',
     'roles' => array(
       'administrator' => 'administrator',
+      'platform-director' => 'platform-director',
     ),
     'module' => 'node',
   );
@@ -47,6 +49,7 @@ function pece_artifacts_pdf_defaultconfig_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
+      'platform-director' => 'platform-director',
     ),
     'module' => 'node',
   );
@@ -56,6 +59,7 @@ function pece_artifacts_pdf_defaultconfig_user_default_permissions() {
     'name' => 'edit any pece_artifact_pdf content',
     'roles' => array(
       'administrator' => 'administrator',
+      'platform-director' => 'platform-director',
     ),
     'module' => 'node',
   );
@@ -66,6 +70,7 @@ function pece_artifacts_pdf_defaultconfig_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
+      'platform-director' => 'platform-director',
     ),
     'module' => 'node',
   );
