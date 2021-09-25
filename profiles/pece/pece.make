@@ -632,6 +632,13 @@ projects[feeds][version] = 2.0-beta5
 projects[feeds_tamper][subdir] = contrib
 projects[feeds_tamper][version] = 1.2
 
+; Feeds Preview
+projects[feedspreview][subdir] = contrib
+projects[feedspreview][version] = 1.x-dev
+
+projects[feeds_tamper_string2id][subdir] = contrib
+projects[feeds_tamper_string2id][version] = 1.1
+
 ; Bibliography
 projects[biblio][subdir] = contrib
 projects[biblio][version] = 1.4
