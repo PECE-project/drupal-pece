@@ -31,6 +31,7 @@ function pece_panels_field_default_field_bases() {
           'er_viewmode_behavior' => array(
             'enabled_viewmodes' => array(
               'card' => 'card',
+              'card_full_text' => 'card_full_text',
               'diff_standard' => 0,
               'featured' => 'featured',
               'free_panel' => 0,
