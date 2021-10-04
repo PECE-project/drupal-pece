@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_artifact_audio.body
+    - field.field.node.pece_artifact_audio.field_ark_enabled
     - field.field.node.pece_artifact_audio.field_audio_authors
     - field.field.node.pece_artifact_audio.field_audio_contributors
     - field.field.node.pece_artifact_audio.field_audio_crit_commentary
@@ -16,7 +17,16 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_audio_tags
     - field.field.node.pece_artifact_audio.field_audio_uri
     - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
+    - field.field.node.pece_artifact_audio.field_pbc_ref_group
+    - field.field.node.pece_artifact_audio.field_pbc_ref_role
+    - field.field.node.pece_artifact_audio.field_pbc_ref_user
+    - field.field.node.pece_artifact_audio.field_pece_created
+    - field.field.node.pece_artifact_audio.field_pece_file_format
+    - field.field.node.pece_artifact_audio.field_pece_group_ref
+    - field.field.node.pece_artifact_audio.field_pece_license
     - field.field.node.pece_artifact_audio.field_pece_media_audio
+    - field.field.node.pece_artifact_audio.field_pece_media_duration
+    - field.field.node.pece_artifact_audio.field_pece_project_ref
     - node.type.pece_artifact_audio
   module:
     - text
@@ -40,6 +50,7 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_ark_enabled: true
   field_audio_audios: true
   field_audio_authors: true
   field_audio_contributors: true
@@ -52,7 +63,16 @@ hidden:
   field_audio_tags: true
   field_audio_uri: true
   field_audio_use_fieldsite_local: true
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
+  field_pece_created: true
+  field_pece_file_format: true
+  field_pece_group_ref: true
+  field_pece_license: true
   field_pece_media_audio: true
+  field_pece_media_duration: true
+  field_pece_project_ref: true
   langcode: true
   og_audience: true
   search_api_excerpt: true
