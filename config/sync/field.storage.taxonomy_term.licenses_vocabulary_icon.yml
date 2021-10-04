@@ -1,0 +1,35 @@
+uuid: 9e52f33a-81a2-42e0-8623-887258c18b0c
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - licenses_vocabulary
+  module:
+    - file
+    - image
+    - taxonomy
+_core:
+  default_config_hash: IkTdY6vaGfnE0r6DESK7nVy3N2iGARpMEUvgHk5fIuo
+id: taxonomy_term.licenses_vocabulary_icon
+field_name: licenses_vocabulary_icon
+entity_type: taxonomy_term
+type: image
+settings:
+  default_image:
+    uuid: null
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  target_type: file
+  display_field: false
+  display_default: false
+  uri_scheme: public
+module: image
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

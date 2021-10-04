@@ -1,0 +1,28 @@
+uuid: 8c3aa13f-e35f-4bf1-90f8-2d6bb684eece
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.licenses_vocabulary_link
+    - taxonomy.vocabulary.licenses_vocabulary_licenses
+  enforced:
+    module:
+      - licenses_vocabulary
+  module:
+    - link
+_core:
+  default_config_hash: TbrxbiGHY3WuilagqbCCaq67X6KLubwe4C4Ej8zOxXI
+id: taxonomy_term.licenses_vocabulary_licenses.licenses_vocabulary_link
+field_name: licenses_vocabulary_link
+entity_type: taxonomy_term
+bundle: licenses_vocabulary_licenses
+label: 'License link'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link
