@@ -1,21 +1,19 @@
-uuid: 2aab57b5-7268-4b34-9413-4038a2ac4abd
+uuid: 82bb59a3-cb20-4f67-9b5c-871313705710
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_image_permission
+    - field.storage.node.field_pece_file_format
     - node.type.pece_artifact_image
-  module:
-    - options
-id: node.pece_artifact_image.field_image_permission
-field_name: field_image_permission
+id: node.pece_artifact_image.field_pece_file_format
+field_name: field_pece_file_format
 entity_type: node
 bundle: pece_artifact_image
-label: Permission
+label: Format
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: list_string
+field_type: string

@@ -4,21 +4,31 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_bundle.body
+    - field.field.node.pece_artifact_bundle.field_ark_enabled
     - field.field.node.pece_artifact_bundle.field_bundle_authors
     - field.field.node.pece_artifact_bundle.field_bundle_contributors
     - field.field.node.pece_artifact_bundle.field_bundle_crit_commentary
     - field.field.node.pece_artifact_bundle.field_bundle_fieldsite
     - field.field.node.pece_artifact_bundle.field_bundle_language
     - field.field.node.pece_artifact_bundle.field_bundle_location
-    - field.field.node.pece_artifact_bundle.field_bundle_permission
-    - field.field.node.pece_artifact_bundle.field_bundle_source
+    - field.field.node.pece_artifact_bundle.field_bundle_tags
     - field.field.node.pece_artifact_bundle.field_bundle_uri
     - field.field.node.pece_artifact_bundle.field_bundle_use_fieldsite_local
+    - field.field.node.pece_artifact_bundle.field_pbc_ref_group
+    - field.field.node.pece_artifact_bundle.field_pbc_ref_role
+    - field.field.node.pece_artifact_bundle.field_pbc_ref_user
+    - field.field.node.pece_artifact_bundle.field_pece_artifacts
+    - field.field.node.pece_artifact_bundle.field_pece_created
+    - field.field.node.pece_artifact_bundle.field_pece_group_ref
+    - field.field.node.pece_artifact_bundle.field_pece_license
+    - field.field.node.pece_artifact_bundle.field_pece_project_ref
     - node.type.pece_artifact_bundle
   module:
     - address
+    - datetime
     - languagefield
     - path
+    - pbf
     - text
 id: node.pece_artifact_bundle.default
 targetEntityType: node
@@ -40,6 +50,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_ark_enabled:
+    weight: 134
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_bundle_authors:
     weight: 123
     settings:
@@ -92,20 +109,6 @@ content:
     third_party_settings: {  }
     type: address_default
     region: content
-  field_bundle_permission:
-    weight: 128
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
-  field_bundle_source:
-    weight: 129
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textarea
-    region: content
   field_bundle_uri:
     weight: 130
     settings:
@@ -120,6 +123,97 @@ content:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
+    region: content
+  field_pbc_ref_group:
+    weight: 135
+    settings:
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: pbf_widget
+    region: content
+  field_pbc_ref_role:
+    weight: 136
+    settings:
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: pbf_widget
+    region: content
+  field_pbc_ref_user:
+    weight: 137
+    settings:
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: pbf_widget
+    region: content
+  field_pece_artifacts:
+    weight: 140
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_pece_created:
+    weight: 133
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_pece_group_ref:
+    weight: 139
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_pece_license:
+    weight: 138
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_pece_project_ref:
+    weight: 132
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   langcode:
     type: language_select
