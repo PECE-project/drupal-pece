@@ -4,21 +4,30 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_bundle.body
+    - field.field.node.pece_artifact_bundle.field_ark_enabled
     - field.field.node.pece_artifact_bundle.field_bundle_authors
     - field.field.node.pece_artifact_bundle.field_bundle_contributors
     - field.field.node.pece_artifact_bundle.field_bundle_crit_commentary
     - field.field.node.pece_artifact_bundle.field_bundle_fieldsite
     - field.field.node.pece_artifact_bundle.field_bundle_language
     - field.field.node.pece_artifact_bundle.field_bundle_location
-    - field.field.node.pece_artifact_bundle.field_bundle_permission
-    - field.field.node.pece_artifact_bundle.field_bundle_source
+    - field.field.node.pece_artifact_bundle.field_bundle_tags
     - field.field.node.pece_artifact_bundle.field_bundle_uri
     - field.field.node.pece_artifact_bundle.field_bundle_use_fieldsite_local
+    - field.field.node.pece_artifact_bundle.field_pbc_ref_group
+    - field.field.node.pece_artifact_bundle.field_pbc_ref_role
+    - field.field.node.pece_artifact_bundle.field_pbc_ref_user
+    - field.field.node.pece_artifact_bundle.field_pece_artifacts
+    - field.field.node.pece_artifact_bundle.field_pece_created
+    - field.field.node.pece_artifact_bundle.field_pece_group_ref
+    - field.field.node.pece_artifact_bundle.field_pece_license
+    - field.field.node.pece_artifact_bundle.field_pece_project_ref
     - node.type.pece_artifact_bundle
   module:
     - address
+    - datetime
     - languagefield
-    - options
+    - pbf
     - text
     - user
 id: node.pece_artifact_bundle.default
@@ -32,6 +41,16 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_ark_enabled:
+    weight: 114
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_bundle_authors:
     weight: 103
@@ -81,20 +100,6 @@ content:
     third_party_settings: {  }
     type: address_default
     region: content
-  field_bundle_permission:
-    weight: 108
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_bundle_source:
-    weight: 109
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: basic_string
-    region: content
   field_bundle_uri:
     weight: 110
     label: above
@@ -112,6 +117,71 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     type: boolean
+    region: content
+  field_pbc_ref_group:
+    weight: 115
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
+    region: content
+  field_pbc_ref_role:
+    weight: 116
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
+    region: content
+  field_pbc_ref_user:
+    weight: 117
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
+    region: content
+  field_pece_artifacts:
+    weight: 120
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_pece_created:
+    weight: 113
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_pece_group_ref:
+    weight: 119
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_pece_license:
+    weight: 118
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_pece_project_ref:
+    weight: 112
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   links:
     weight: 100
