@@ -491,7 +491,7 @@ function pece_ark_node_view($node, $view_mode, $langcode) {
   foreach ($extra['node'][$node->type]['display'] as $field_name => $field_info) {
     // Check to make sure this field is visible in this view mode.
     // If the current view mode doesn't have custom settings, default applies.
-    $check_view_mode = $config['view_modes'][$view_mode]['custom_settings'] ? $view_mode : 'default';
+    $check_view_mode = ((isset($config['view_modes'][$view_mode]) && ($config['view_modes'][$view_mode]['custom_settings']))) ? $view_mode : 'default';
     if (empty($config['extra_fields']['display'][$field_name][$check_view_mode]['visible'])) {
       continue;
     }
