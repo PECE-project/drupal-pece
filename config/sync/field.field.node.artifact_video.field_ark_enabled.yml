@@ -1,0 +1,23 @@
+uuid: 737f22cf-b871-4bbc-83b3-2e1a5a869a8d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ark_enabled
+    - node.type.artifact_video
+id: node.artifact_video.field_ark_enabled
+field_name: field_ark_enabled
+entity_type: node
+bundle: artifact_video
+label: 'ARK Enabled'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

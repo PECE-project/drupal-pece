@@ -4,9 +4,16 @@ status: true
 dependencies:
   config:
     - field.field.node.artifact_video.body
+    - field.field.node.artifact_video.field_ark_enabled
+    - field.field.node.artifact_video.field_pbc_ref_group
+    - field.field.node.artifact_video.field_pbc_ref_role
+    - field.field.node.artifact_video.field_pbc_ref_user
+    - field.field.node.artifact_video.field_pece_license
     - field.field.node.artifact_video.field_pece_media_video
+    - field.field.node.artifact_video.field_pece_project_ref
     - field.field.node.artifact_video.field_video_authors
     - field.field.node.artifact_video.field_video_contributors
+    - field.field.node.artifact_video.field_video_created_date
     - field.field.node.artifact_video.field_video_crit_commentary
     - field.field.node.artifact_video.field_video_fieldsite
     - field.field.node.artifact_video.field_video_language
@@ -14,14 +21,15 @@ dependencies:
     - field.field.node.artifact_video.field_video_permission
     - field.field.node.artifact_video.field_video_source
     - field.field.node.artifact_video.field_video_tags
-    - field.field.node.artifact_video.field_video_uri
     - field.field.node.artifact_video.field_video_use_fieldsite_local
     - node.type.artifact_video
   module:
     - address
+    - datetime
     - languagefield
     - media_library
     - path
+    - pbf
     - text
 id: node.artifact_video.default
 targetEntityType: node
@@ -44,12 +52,84 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_ark_enabled:
+    weight: 139
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_pbc_ref_group:
+    weight: 136
+    settings:
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: pbf_widget
+    region: content
+  field_pbc_ref_role:
+    weight: 137
+    settings:
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: pbf_widget
+    region: content
+  field_pbc_ref_user:
+    weight: 138
+    settings:
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: pbf_widget
+    region: content
+  field_pece_license:
+    weight: 135
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_pece_media_video:
     weight: 132
     settings:
       media_types: {  }
     third_party_settings: {  }
     type: media_library_widget
+    region: content
+  field_pece_project_ref:
+    weight: 133
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_video_authors:
     weight: 126
@@ -70,6 +150,12 @@ content:
       match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_video_created_date:
+    weight: 140
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_video_crit_commentary:
     weight: 124
@@ -116,14 +202,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
-    region: content
-  field_video_uri:
-    weight: 122
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
     region: content
   field_video_use_fieldsite_local:
     weight: 129

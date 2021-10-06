@@ -1,18 +1,17 @@
-uuid: 1303d633-7d13-4d0d-8f2b-ac43376c59f0
+uuid: 56114a01-d460-47b0-9b33-284f5a425c84
 langcode: en
 status: true
 dependencies:
   module:
+    - datetime
     - node
-id: node.field_video_uri
-field_name: field_video_uri
+id: node.field_video_created_date
+field_name: field_video_created_date
 entity_type: node
-type: string
+type: datetime
 settings:
-  max_length: 255
-  is_ascii: false
-  case_sensitive: false
-module: core
+  datetime_type: date
+module: datetime
 locked: false
 cardinality: 1
 translatable: true
