@@ -1,0 +1,174 @@
+uuid: 564f368c-60a0-4b28-b333-bc3fc80a58d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_artifact_fieldnote.body
+    - field.field.node.pece_artifact_fieldnote.field_ark_enabled
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_authors
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_contributors
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_created_date
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_fieldsite
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_fieldsite_local
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_language
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_location
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_source
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_tags
+    - field.field.node.pece_artifact_fieldnote.field_pbc_ref_group
+    - field.field.node.pece_artifact_fieldnote.field_pbc_ref_role
+    - field.field.node.pece_artifact_fieldnote.field_pbc_ref_user
+    - field.field.node.pece_artifact_fieldnote.field_pece_license
+    - field.field.node.pece_artifact_fieldnote.field_pece_project_ref
+    - node.type.pece_artifact_fieldnote
+  module:
+    - address
+    - datetime
+    - languagefield
+    - pbf
+    - text
+    - user
+id: node.pece_artifact_fieldnote.default
+targetEntityType: node
+bundle: pece_artifact_fieldnote
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_ark_enabled:
+    weight: 105
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_fieldnote_authors:
+    weight: 112
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_fieldnote_contributors:
+    weight: 109
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_fieldnote_created_date:
+    weight: 110
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_fieldnote_fieldsite:
+    weight: 114
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_fieldnote_fieldsite_local:
+    weight: 115
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_fieldnote_language:
+    weight: 113
+    label: above
+    settings:
+      link_to_entity: false
+      format:
+        name: name
+    third_party_settings: {  }
+    type: languagefield_default
+    region: content
+  field_fieldnote_location:
+    weight: 116
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_fieldnote_source:
+    weight: 111
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_fieldnote_tags:
+    weight: 117
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_pbc_ref_group:
+    weight: 106
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
+    region: content
+  field_pbc_ref_role:
+    weight: 107
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
+    region: content
+  field_pbc_ref_user:
+    weight: 108
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
+    region: content
+  field_pece_license:
+    weight: 104
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_pece_project_ref:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true
