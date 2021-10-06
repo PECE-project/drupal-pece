@@ -1,0 +1,23 @@
+uuid: 69fd3f6a-739c-4910-a05c-0b2be773ccb4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tabular_fieldsite_local
+    - node.type.artifact_tabular_data
+id: node.artifact_tabular_data.field_tabular_fieldsite_local
+field_name: field_tabular_fieldsite_local
+entity_type: node
+bundle: artifact_tabular_data
+label: 'Use fieldsite''s location'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

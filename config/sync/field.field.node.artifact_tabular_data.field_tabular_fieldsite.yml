@@ -1,0 +1,29 @@
+uuid: 35486864-f92d-4c59-9deb-817602a261c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tabular_fieldsite
+    - node.type.artifact_tabular_data
+    - node.type.pece_fieldsite
+id: node.artifact_tabular_data.field_tabular_fieldsite
+field_name: field_tabular_fieldsite
+entity_type: node
+bundle: artifact_tabular_data
+label: Fieldsite
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_fieldsite: pece_fieldsite
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
