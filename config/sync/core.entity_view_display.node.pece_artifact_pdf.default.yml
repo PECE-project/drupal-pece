@@ -4,23 +4,30 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_pdf.body
+    - field.field.node.pece_artifact_pdf.field_pbc_ref_group
+    - field.field.node.pece_artifact_pdf.field_pbc_ref_role
+    - field.field.node.pece_artifact_pdf.field_pbc_ref_user
     - field.field.node.pece_artifact_pdf.field_pdf_authors
     - field.field.node.pece_artifact_pdf.field_pdf_contributors
+    - field.field.node.pece_artifact_pdf.field_pdf_created_date
     - field.field.node.pece_artifact_pdf.field_pdf_crit_commentary
     - field.field.node.pece_artifact_pdf.field_pdf_fieldsite
     - field.field.node.pece_artifact_pdf.field_pdf_language
     - field.field.node.pece_artifact_pdf.field_pdf_location
+    - field.field.node.pece_artifact_pdf.field_pdf_media
     - field.field.node.pece_artifact_pdf.field_pdf_permission
     - field.field.node.pece_artifact_pdf.field_pdf_source
     - field.field.node.pece_artifact_pdf.field_pdf_tags
-    - field.field.node.pece_artifact_pdf.field_pdf_uri
     - field.field.node.pece_artifact_pdf.field_pdf_use_fieldsite_local
-    - field.field.node.pece_artifact_pdf.field_pece_media_pdf
+    - field.field.node.pece_artifact_pdf.field_pece_license
+    - field.field.node.pece_artifact_pdf.field_pece_project_ref
     - node.type.pece_artifact_pdf
   module:
     - address
+    - datetime
     - languagefield
     - options
+    - pbf
     - text
     - user
 id: node.pece_artifact_pdf.default
@@ -34,6 +41,30 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_pbc_ref_group:
+    weight: 118
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
+    region: content
+  field_pbc_ref_role:
+    weight: 119
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
+    region: content
+  field_pbc_ref_user:
+    weight: 120
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
     region: content
   field_pdf_authors:
     weight: 105
@@ -50,6 +81,15 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_pdf_created_date:
+    weight: 121
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_pdf_crit_commentary:
     weight: 106
@@ -83,6 +123,15 @@ content:
     third_party_settings: {  }
     type: address_default
     region: content
+  field_pdf_media:
+    type: entity_reference_entity_view
+    weight: 122
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
   field_pdf_permission:
     weight: 110
     label: above
@@ -97,14 +146,6 @@ content:
     third_party_settings: {  }
     type: basic_string
     region: content
-  field_pdf_uri:
-    weight: 102
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
   field_pdf_use_fieldsite_local:
     weight: 112
     label: above
@@ -115,14 +156,21 @@ content:
     third_party_settings: {  }
     type: boolean
     region: content
-  field_pece_media_pdf:
-    type: entity_reference_entity_view
-    weight: 114
+  field_pece_license:
+    weight: 117
     label: above
     settings:
-      view_mode: default
-      link: false
+      link: true
     third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_pece_project_ref:
+    weight: 116
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   links:
     weight: 100
