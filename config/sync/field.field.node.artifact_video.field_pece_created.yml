@@ -1,0 +1,24 @@
+uuid: ff64a7c9-b560-4ff0-a501-be4439c55a8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_created
+    - node.type.artifact_video
+  module:
+    - datetime
+id: node.artifact_video.field_pece_created
+field_name: field_pece_created
+entity_type: node
+bundle: artifact_video
+label: 'Created Date'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime
