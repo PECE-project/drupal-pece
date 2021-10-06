@@ -4,8 +4,15 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_website.body
+    - field.field.node.pece_artifact_website.field_ark_enabled
+    - field.field.node.pece_artifact_website.field_pbc_ref_group
+    - field.field.node.pece_artifact_website.field_pbc_ref_role
+    - field.field.node.pece_artifact_website.field_pbc_ref_user
+    - field.field.node.pece_artifact_website.field_pece_license
+    - field.field.node.pece_artifact_website.field_pece_project_ref
     - field.field.node.pece_artifact_website.field_website_authors
     - field.field.node.pece_artifact_website.field_website_contributors
+    - field.field.node.pece_artifact_website.field_website_created_date
     - field.field.node.pece_artifact_website.field_website_crit_commentary
     - field.field.node.pece_artifact_website.field_website_fieldsite
     - field.field.node.pece_artifact_website.field_website_fieldsite_local
@@ -13,14 +20,16 @@ dependencies:
     - field.field.node.pece_artifact_website.field_website_location
     - field.field.node.pece_artifact_website.field_website_permission
     - field.field.node.pece_artifact_website.field_website_source
-    - field.field.node.pece_artifact_website.field_website_uri
+    - field.field.node.pece_artifact_website.field_website_tags
     - field.field.node.pece_artifact_website.field_website_url
     - node.type.pece_artifact_website
   module:
     - address
+    - datetime
     - languagefield
     - link
     - path
+    - pbf
     - text
 id: node.pece_artifact_website.default
 targetEntityType: node
@@ -42,6 +51,78 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_ark_enabled:
+    weight: 142
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_pbc_ref_group:
+    weight: 138
+    settings:
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: pbf_widget
+    region: content
+  field_pbc_ref_role:
+    weight: 139
+    settings:
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: pbf_widget
+    region: content
+  field_pbc_ref_user:
+    weight: 140
+    settings:
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: pbf_widget
+    region: content
+  field_pece_license:
+    weight: 141
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_pece_project_ref:
+    weight: 136
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_website_authors:
     weight: 129
     settings:
@@ -61,6 +142,12 @@ content:
       match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_website_created_date:
+    weight: 143
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_website_crit_commentary:
     weight: 127
@@ -114,14 +201,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
-    region: content
-  field_website_uri:
-    weight: 125
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
     region: content
   field_website_url:
     weight: 126

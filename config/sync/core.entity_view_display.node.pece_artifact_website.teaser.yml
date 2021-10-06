@@ -5,6 +5,24 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_artifact_website.body
+    - field.field.node.pece_artifact_website.field_ark_enabled
+    - field.field.node.pece_artifact_website.field_pbc_ref_group
+    - field.field.node.pece_artifact_website.field_pbc_ref_role
+    - field.field.node.pece_artifact_website.field_pbc_ref_user
+    - field.field.node.pece_artifact_website.field_pece_license
+    - field.field.node.pece_artifact_website.field_pece_project_ref
+    - field.field.node.pece_artifact_website.field_website_authors
+    - field.field.node.pece_artifact_website.field_website_contributors
+    - field.field.node.pece_artifact_website.field_website_created_date
+    - field.field.node.pece_artifact_website.field_website_crit_commentary
+    - field.field.node.pece_artifact_website.field_website_fieldsite
+    - field.field.node.pece_artifact_website.field_website_fieldsite_local
+    - field.field.node.pece_artifact_website.field_website_language
+    - field.field.node.pece_artifact_website.field_website_location
+    - field.field.node.pece_artifact_website.field_website_permission
+    - field.field.node.pece_artifact_website.field_website_source
+    - field.field.node.pece_artifact_website.field_website_tags
+    - field.field.node.pece_artifact_website.field_website_url
     - node.type.pece_artifact_website
   module:
     - text
@@ -28,8 +46,15 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_ark_enabled: true
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
+  field_pece_license: true
+  field_pece_project_ref: true
   field_website_authors: true
   field_website_contributors: true
+  field_website_created_date: true
   field_website_crit_commentary: true
   field_website_fieldsite: true
   field_website_fieldsite_local: true
@@ -38,7 +63,6 @@ hidden:
   field_website_permission: true
   field_website_source: true
   field_website_tags: true
-  field_website_uri: true
   field_website_url: true
   langcode: true
   og_audience: true
