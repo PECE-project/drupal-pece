@@ -1,0 +1,24 @@
+uuid: af0164d7-5240-4cd6-8f8f-d600e6965a4d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tabular_created_date
+    - node.type.artifact_tabular_data
+  module:
+    - datetime
+id: node.artifact_tabular_data.field_tabular_created_date
+field_name: field_tabular_created_date
+entity_type: node
+bundle: artifact_tabular_data
+label: 'Created Date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime
