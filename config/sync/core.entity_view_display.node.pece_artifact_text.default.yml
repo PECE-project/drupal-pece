@@ -8,25 +8,22 @@ dependencies:
     - field.field.node.pece_artifact_text.field_pbc_ref_group
     - field.field.node.pece_artifact_text.field_pbc_ref_role
     - field.field.node.pece_artifact_text.field_pbc_ref_user
-    - field.field.node.pece_artifact_text.field_pece_authors
-    - field.field.node.pece_artifact_text.field_pece_contributors
-    - field.field.node.pece_artifact_text.field_pece_created
-    - field.field.node.pece_artifact_text.field_pece_crit_commentary
-    - field.field.node.pece_artifact_text.field_pece_fieldsite
-    - field.field.node.pece_artifact_text.field_pece_language
     - field.field.node.pece_artifact_text.field_pece_license
-    - field.field.node.pece_artifact_text.field_pece_location
     - field.field.node.pece_artifact_text.field_pece_project_ref
-    - field.field.node.pece_artifact_text.field_pece_researchers
-    - field.field.node.pece_artifact_text.field_pece_source
-    - field.field.node.pece_artifact_text.field_pece_tags
-    - field.field.node.pece_artifact_text.field_pece_thumbnail
-    - field.field.node.pece_artifact_text.field_pece_uri
-    - field.field.node.pece_artifact_text.field_pece_use_fieldsite_local
+    - field.field.node.pece_artifact_text.field_text_authors
+    - field.field.node.pece_artifact_text.field_text_contributors
+    - field.field.node.pece_artifact_text.field_text_created_date
+    - field.field.node.pece_artifact_text.field_text_crit_commentary
+    - field.field.node.pece_artifact_text.field_text_fieldsite
+    - field.field.node.pece_artifact_text.field_text_language
+    - field.field.node.pece_artifact_text.field_text_location
+    - field.field.node.pece_artifact_text.field_text_source
+    - field.field.node.pece_artifact_text.field_text_tags
+    - field.field.node.pece_artifact_text.field_text_use_fieldsite_local
     - node.type.pece_artifact_text
   module:
+    - address
     - datetime
-    - image
     - languagefield
     - pbf
     - text
@@ -77,32 +74,6 @@ content:
     third_party_settings: {  }
     type: pbf_formatter_default
     region: content
-  field_pece_created:
-    weight: 114
-    label: above
-    settings:
-      format_type: medium
-      timezone_override: ''
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
-  field_pece_crit_commentary:
-    weight: 103
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: basic_string
-    region: content
-  field_pece_language:
-    weight: 105
-    label: above
-    settings:
-      link_to_entity: false
-      format:
-        name: name
-    third_party_settings: {  }
-    type: languagefield_default
-    region: content
   field_pece_license:
     weight: 115
     label: above
@@ -119,32 +90,80 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_pece_source:
-    weight: 104
+  field_text_authors:
+    weight: 119
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_text_contributors:
+    weight: 116
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_text_created_date:
+    weight: 120
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_text_crit_commentary:
+    weight: 117
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
-  field_pece_thumbnail:
-    weight: 108
+  field_text_fieldsite:
+    weight: 122
     label: above
     settings:
-      image_style: ''
-      image_link: ''
+      link: true
     third_party_settings: {  }
-    type: image
+    type: entity_reference_label
     region: content
-  field_pece_uri:
-    weight: 102
+  field_text_language:
+    weight: 121
     label: above
     settings:
       link_to_entity: false
+      format:
+        name: name
     third_party_settings: {  }
-    type: string
+    type: languagefield_default
     region: content
-  field_pece_use_fieldsite_local:
-    weight: 106
+  field_text_location:
+    weight: 124
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_text_source:
+    weight: 118
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_text_tags:
+    weight: 125
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_text_use_fieldsite_local:
+    weight: 123
     label: above
     settings:
       format: default
@@ -159,12 +178,6 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
-  field_pece_authors: true
-  field_pece_contributors: true
-  field_pece_fieldsite: true
-  field_pece_location: true
-  field_pece_researchers: true
-  field_pece_tags: true
   langcode: true
   og_audience: true
   search_api_excerpt: true
