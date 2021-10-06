@@ -1,21 +1,19 @@
-uuid: 6a612f4a-ad87-4efa-9fb9-db3832cdcce4
+uuid: 91eb1b8a-e330-4e22-9836-be67941ed161
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_audio_permission
+    - field.storage.node.field_audio_file_format
     - node.type.pece_artifact_audio
-  module:
-    - options
-id: node.pece_artifact_audio.field_audio_permission
-field_name: field_audio_permission
+id: node.pece_artifact_audio.field_audio_file_format
+field_name: field_audio_file_format
 entity_type: node
 bundle: pece_artifact_audio
-label: Permission
+label: 'File format'
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: list_string
+field_type: string

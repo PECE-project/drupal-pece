@@ -1,18 +1,18 @@
-uuid: 75812180-e731-4ff0-bccd-1d90bfaae853
+uuid: 20b2532b-517d-4b53-ac62-42bcc3cf4c47
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_pece_media_audio
+    - field.storage.node.field_audio_media
     - media.type.audio
     - node.type.pece_artifact_audio
-id: node.pece_artifact_audio.field_pece_media_audio
-field_name: field_pece_media_audio
+id: node.pece_artifact_audio.field_audio_media
+field_name: field_audio_media
 entity_type: node
 bundle: pece_artifact_audio
 label: Audio
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -24,6 +24,6 @@ settings:
     sort:
       field: _none
       direction: ASC
-    auto_create: true
+    auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

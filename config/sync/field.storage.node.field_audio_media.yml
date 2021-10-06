@@ -1,19 +1,19 @@
-uuid: e1ddb05f-5da2-440f-82d8-99ec7ed976c4
+uuid: 6dac0635-9d74-4a99-8e39-15394c6e19eb
 langcode: en
 status: true
 dependencies:
   module:
+    - media
     - node
-    - taxonomy
-id: node.field_audio_authors
-field_name: field_audio_authors
+id: node.field_audio_media
+field_name: field_audio_media
 entity_type: node
 type: entity_reference
 settings:
-  target_type: taxonomy_term
+  target_type: media
 module: core
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false
