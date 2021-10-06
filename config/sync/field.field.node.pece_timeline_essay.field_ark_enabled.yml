@@ -1,0 +1,23 @@
+uuid: eef86d0b-5c1b-4b0f-8222-a93dc75fab75
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ark_enabled
+    - node.type.pece_timeline_essay
+id: node.pece_timeline_essay.field_ark_enabled
+field_name: field_ark_enabled
+entity_type: node
+bundle: pece_timeline_essay
+label: 'ARK Enabled'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
