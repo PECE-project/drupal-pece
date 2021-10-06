@@ -9,10 +9,10 @@ dependencies:
     - field.field.node.pece_essay.field_essay_contributors
     - field.field.node.pece_essay.field_essay_tags
     - field.field.node.pece_essay.field_essay_thumbnail
-    - field.field.node.pece_essay.field_essay_uri
     - field.field.node.pece_essay.field_pbc_ref_group
     - field.field.node.pece_essay.field_pbc_ref_role
     - field.field.node.pece_essay.field_pbc_ref_user
+    - field.field.node.pece_essay.field_pece_license
     - field.field.node.pece_essay.field_pece_project_ref
     - image.style.thumbnail
     - node.type.pece_essay
@@ -90,14 +90,6 @@ content:
     third_party_settings: {  }
     type: image_image
     region: content
-  field_essay_uri:
-    weight: 9
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_pbc_ref_group:
     weight: 26
     settings:
@@ -142,6 +134,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: pbf_widget
+    region: content
+  field_pece_license:
+    weight: 29
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_pece_project_ref:
     weight: 27
