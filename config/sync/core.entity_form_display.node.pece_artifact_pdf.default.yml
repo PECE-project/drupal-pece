@@ -4,24 +4,31 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_pdf.body
+    - field.field.node.pece_artifact_pdf.field_pbc_ref_group
+    - field.field.node.pece_artifact_pdf.field_pbc_ref_role
+    - field.field.node.pece_artifact_pdf.field_pbc_ref_user
     - field.field.node.pece_artifact_pdf.field_pdf_authors
     - field.field.node.pece_artifact_pdf.field_pdf_contributors
+    - field.field.node.pece_artifact_pdf.field_pdf_created_date
     - field.field.node.pece_artifact_pdf.field_pdf_crit_commentary
     - field.field.node.pece_artifact_pdf.field_pdf_fieldsite
     - field.field.node.pece_artifact_pdf.field_pdf_language
     - field.field.node.pece_artifact_pdf.field_pdf_location
+    - field.field.node.pece_artifact_pdf.field_pdf_media
     - field.field.node.pece_artifact_pdf.field_pdf_permission
     - field.field.node.pece_artifact_pdf.field_pdf_source
     - field.field.node.pece_artifact_pdf.field_pdf_tags
-    - field.field.node.pece_artifact_pdf.field_pdf_uri
     - field.field.node.pece_artifact_pdf.field_pdf_use_fieldsite_local
-    - field.field.node.pece_artifact_pdf.field_pece_media_pdf
+    - field.field.node.pece_artifact_pdf.field_pece_license
+    - field.field.node.pece_artifact_pdf.field_pece_project_ref
     - node.type.pece_artifact_pdf
   module:
     - address
+    - datetime
     - languagefield
     - media_library
     - path
+    - pbf
     - text
 id: node.pece_artifact_pdf.default
 targetEntityType: node
@@ -44,6 +51,51 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_pbc_ref_group:
+    weight: 138
+    settings:
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: pbf_widget
+    region: content
+  field_pbc_ref_role:
+    weight: 139
+    settings:
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: pbf_widget
+    region: content
+  field_pbc_ref_user:
+    weight: 140
+    settings:
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: pbf_widget
+    region: content
   field_pdf_authors:
     weight: 125
     settings:
@@ -63,6 +115,12 @@ content:
       match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_pdf_created_date:
+    weight: 141
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_pdf_crit_commentary:
     weight: 126
@@ -96,6 +154,13 @@ content:
     third_party_settings: {  }
     type: address_default
     region: content
+  field_pdf_media:
+    type: media_library_widget
+    weight: 142
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    region: content
   field_pdf_permission:
     weight: 130
     settings: {  }
@@ -110,14 +175,6 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
-  field_pdf_uri:
-    weight: 122
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_pdf_use_fieldsite_local:
     weight: 132
     settings:
@@ -125,12 +182,25 @@ content:
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
-  field_pece_media_pdf:
-    weight: 134
+  field_pece_license:
+    weight: 137
     settings:
-      media_types: {  }
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: media_library_widget
+    type: entity_reference_autocomplete
+    region: content
+  field_pece_project_ref:
+    weight: 136
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   langcode:
     type: language_select

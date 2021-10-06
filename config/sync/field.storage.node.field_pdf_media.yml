@@ -1,17 +1,16 @@
-uuid: ff6c67b1-b7d3-4c7a-93fc-b560c9d009fd
+uuid: f5e2c326-6f4b-46b5-aa65-de5b89cbbdce
 langcode: en
 status: true
 dependencies:
   module:
+    - media
     - node
-id: node.field_pdf_uri
-field_name: field_pdf_uri
+id: node.field_pdf_media
+field_name: field_pdf_media
 entity_type: node
-type: string
+type: entity_reference
 settings:
-  max_length: 255
-  is_ascii: false
-  case_sensitive: false
+  target_type: media
 module: core
 locked: false
 cardinality: 1
