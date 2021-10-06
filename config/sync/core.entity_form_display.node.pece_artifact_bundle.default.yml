@@ -7,26 +7,22 @@ dependencies:
     - field.field.node.pece_artifact_bundle.field_ark_enabled
     - field.field.node.pece_artifact_bundle.field_bundle_authors
     - field.field.node.pece_artifact_bundle.field_bundle_contributors
+    - field.field.node.pece_artifact_bundle.field_bundle_created_date
     - field.field.node.pece_artifact_bundle.field_bundle_crit_commentary
     - field.field.node.pece_artifact_bundle.field_bundle_fieldsite
-    - field.field.node.pece_artifact_bundle.field_bundle_language
     - field.field.node.pece_artifact_bundle.field_bundle_location
     - field.field.node.pece_artifact_bundle.field_bundle_tags
-    - field.field.node.pece_artifact_bundle.field_bundle_uri
     - field.field.node.pece_artifact_bundle.field_bundle_use_fieldsite_local
     - field.field.node.pece_artifact_bundle.field_pbc_ref_group
     - field.field.node.pece_artifact_bundle.field_pbc_ref_role
     - field.field.node.pece_artifact_bundle.field_pbc_ref_user
     - field.field.node.pece_artifact_bundle.field_pece_artifacts
-    - field.field.node.pece_artifact_bundle.field_pece_created
-    - field.field.node.pece_artifact_bundle.field_pece_group_ref
     - field.field.node.pece_artifact_bundle.field_pece_license
     - field.field.node.pece_artifact_bundle.field_pece_project_ref
     - node.type.pece_artifact_bundle
   module:
     - address
     - datetime
-    - languagefield
     - path
     - pbf
     - text
@@ -77,6 +73,12 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_bundle_created_date:
+    weight: 141
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
   field_bundle_crit_commentary:
     weight: 124
     settings:
@@ -95,27 +97,11 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_bundle_language:
-    weight: 126
-    settings:
-      format:
-        name: name
-    third_party_settings: {  }
-    type: languagefield_select
-    region: content
   field_bundle_location:
     weight: 127
     settings: {  }
     third_party_settings: {  }
     type: address_default
-    region: content
-  field_bundle_uri:
-    weight: 130
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
     region: content
   field_bundle_use_fieldsite_local:
     weight: 131
@@ -171,22 +157,6 @@ content:
     region: content
   field_pece_artifacts:
     weight: 140
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  field_pece_created:
-    weight: 133
-    settings: {  }
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
-  field_pece_group_ref:
-    weight: 139
     settings:
       match_operator: CONTAINS
       match_limit: 10
