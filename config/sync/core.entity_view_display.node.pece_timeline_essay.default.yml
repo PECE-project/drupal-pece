@@ -4,17 +4,21 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_timeline_essay.body
+    - field.field.node.pece_timeline_essay.field_ark_enabled
     - field.field.node.pece_timeline_essay.field_pbc_ref_group
     - field.field.node.pece_timeline_essay.field_pbc_ref_role
     - field.field.node.pece_timeline_essay.field_pbc_ref_user
-    - field.field.node.pece_timeline_essay.field_pece_contributors
+    - field.field.node.pece_timeline_essay.field_pece_geolocation
+    - field.field.node.pece_timeline_essay.field_pece_license
     - field.field.node.pece_timeline_essay.field_pece_project_ref
-    - field.field.node.pece_timeline_essay.field_pece_tags
-    - field.field.node.pece_timeline_essay.field_pece_timeline_essay_items
-    - field.field.node.pece_timeline_essay.field_pece_uri
+    - field.field.node.pece_timeline_essay.field_timeline_essay_contributor
+    - field.field.node.pece_timeline_essay.field_timeline_essay_items
+    - field.field.node.pece_timeline_essay.field_timeline_essay_tags
     - field.field.node.pece_timeline_essay.field_timeline_essay_thumbnail
     - node.type.pece_timeline_essay
   module:
+    - entity_reference_revisions
+    - geolocation
     - text
     - user
 id: node.pece_timeline_essay.default
@@ -29,15 +33,61 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  field_ark_enabled:
+    weight: 2
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_pece_geolocation:
+    weight: 8
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_latlng
+    region: content
+  field_pece_license:
+    weight: 1
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_timeline_essay_contributor:
+    weight: 5
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_timeline_essay_items:
+    type: entity_reference_revisions_entity_view
+    weight: 7
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_timeline_essay_tags:
+    weight: 6
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
 hidden:
   field_pbc_ref_group: true
   field_pbc_ref_role: true
   field_pbc_ref_user: true
-  field_pece_contributors: true
   field_pece_project_ref: true
-  field_pece_tags: true
-  field_pece_timeline_essay_items: true
-  field_pece_uri: true
   field_timeline_essay_thumbnail: true
   langcode: true
   links: true
