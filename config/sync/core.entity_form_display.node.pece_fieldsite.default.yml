@@ -8,10 +8,11 @@ dependencies:
     - field.field.node.pece_fieldsite.field_fieldsite_location
     - field.field.node.pece_fieldsite.field_fieldsite_project
     - field.field.node.pece_fieldsite.field_fieldsite_researcher
-    - field.field.node.pece_fieldsite.field_fieldsite_uri
+    - field.field.node.pece_fieldsite.field_pece_geolocation
     - node.type.pece_fieldsite
   module:
     - address
+    - geolocation
     - path
     - text
 _core:
@@ -70,13 +71,11 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_fieldsite_uri:
-    weight: 122
-    settings:
-      size: 60
-      placeholder: ''
+  field_pece_geolocation:
+    weight: 127
+    settings: {  }
     third_party_settings: {  }
-    type: string_textfield
+    type: geolocation_latlng
     region: content
   langcode:
     type: language_select
