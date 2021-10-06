@@ -7,19 +7,20 @@ dependencies:
     - field.field.node.pece_artifact_image.field_ark_enabled
     - field.field.node.pece_artifact_image.field_image_authors
     - field.field.node.pece_artifact_image.field_image_contributors
+    - field.field.node.pece_artifact_image.field_image_created_date
     - field.field.node.pece_artifact_image.field_image_crit_commentary
     - field.field.node.pece_artifact_image.field_image_fieldsite
     - field.field.node.pece_artifact_image.field_image_fieldsite_local
+    - field.field.node.pece_artifact_image.field_image_file_format
     - field.field.node.pece_artifact_image.field_image_language
     - field.field.node.pece_artifact_image.field_image_location
     - field.field.node.pece_artifact_image.field_image_source
     - field.field.node.pece_artifact_image.field_image_tags
-    - field.field.node.pece_artifact_image.field_image_uri
     - field.field.node.pece_artifact_image.field_pbc_ref_group
     - field.field.node.pece_artifact_image.field_pbc_ref_role
     - field.field.node.pece_artifact_image.field_pbc_ref_user
-    - field.field.node.pece_artifact_image.field_pece_created
     - field.field.node.pece_artifact_image.field_pece_file_format
+    - field.field.node.pece_artifact_image.field_pece_geolocation
     - field.field.node.pece_artifact_image.field_pece_license
     - field.field.node.pece_artifact_image.field_pece_media_image
     - field.field.node.pece_artifact_image.field_pece_project_ref
@@ -27,6 +28,7 @@ dependencies:
   module:
     - address
     - datetime
+    - geolocation
     - languagefield
     - media_library
     - path
@@ -80,6 +82,12 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_image_created_date:
+    weight: 142
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
   field_image_crit_commentary:
     weight: 124
     settings:
@@ -105,6 +113,14 @@ content:
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
+  field_image_file_format:
+    weight: 143
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_image_language:
     weight: 127
     settings:
@@ -126,14 +142,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
-    region: content
-  field_image_uri:
-    weight: 122
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
     region: content
   field_pbc_ref_group:
     weight: 137
@@ -180,12 +188,6 @@ content:
     third_party_settings: {  }
     type: pbf_widget
     region: content
-  field_pece_created:
-    weight: 135
-    settings: {  }
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
   field_pece_file_format:
     weight: 141
     settings:
@@ -193,6 +195,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_pece_geolocation:
+    weight: 144
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_latlng
     region: content
   field_pece_license:
     weight: 136

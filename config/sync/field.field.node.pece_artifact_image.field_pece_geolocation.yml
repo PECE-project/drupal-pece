@@ -1,19 +1,21 @@
-uuid: 6972e713-b760-4f39-b2c5-86b1c090de8a
+uuid: 3e77b302-de85-4ca0-bd2c-f953a1134d69
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_image_uri
+    - field.storage.node.field_pece_geolocation
     - node.type.pece_artifact_image
-id: node.pece_artifact_image.field_image_uri
-field_name: field_image_uri
+  module:
+    - geolocation
+id: node.pece_artifact_image.field_pece_geolocation
+field_name: field_pece_geolocation
 entity_type: node
 bundle: pece_artifact_image
-label: URI
+label: Location
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: string
+field_type: geolocation

@@ -1,0 +1,24 @@
+uuid: 0a083770-886e-448c-8e8d-8dff2e11271f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image_created_date
+    - node.type.pece_artifact_image
+  module:
+    - datetime
+id: node.pece_artifact_image.field_image_created_date
+field_name: field_image_created_date
+entity_type: node
+bundle: pece_artifact_image
+label: 'Created Date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime
