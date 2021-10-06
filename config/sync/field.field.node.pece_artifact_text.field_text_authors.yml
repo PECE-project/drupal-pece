@@ -1,16 +1,16 @@
-uuid: b3ce6f49-08e1-4c97-865b-807040b4ffb7
+uuid: 7ed9e2e4-1d62-4f28-b470-9672f8d12090
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_pece_tags
+    - field.storage.node.field_text_authors
     - node.type.pece_artifact_text
-    - taxonomy.vocabulary.tags
-id: node.pece_artifact_text.field_pece_tags
-field_name: field_pece_tags
+    - taxonomy.vocabulary.pece_authors
+id: node.pece_artifact_text.field_text_authors
+field_name: field_text_authors
 entity_type: node
 bundle: pece_artifact_text
-label: Tags
+label: Creator(s)
 description: ''
 required: false
 translatable: false
@@ -20,10 +20,10 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      tags: tags
+      pece_authors: pece_authors
     sort:
       field: name
       direction: asc
-    auto_create: true
+    auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

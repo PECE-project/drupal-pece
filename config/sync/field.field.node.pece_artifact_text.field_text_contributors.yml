@@ -1,15 +1,15 @@
-uuid: 550cda37-765b-4583-a39a-9c4b0c95d726
+uuid: f64c62d6-583d-4696-8201-61bfd37bb8ba
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_pece_researchers
+    - field.storage.node.field_text_contributors
     - node.type.pece_artifact_text
-id: node.pece_artifact_text.field_pece_researchers
-field_name: field_pece_researchers
+id: node.pece_artifact_text.field_text_contributors
+field_name: field_text_contributors
 entity_type: node
 bundle: pece_artifact_text
-label: Researchers
+label: Contributors
 description: ''
 required: false
 translatable: false
@@ -18,15 +18,12 @@ default_value_callback: ''
 settings:
   handler: 'default:user'
   handler_settings:
-    include_anonymous: false
+    include_anonymous: true
     filter:
-      type: role
-      role:
-        contributor: contributor
-        researcher: researcher
-        administrator: '0'
+      type: _none
     target_bundles: null
     sort:
       field: _none
+      direction: ASC
     auto_create: false
 field_type: entity_reference

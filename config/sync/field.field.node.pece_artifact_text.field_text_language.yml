@@ -1,19 +1,21 @@
-uuid: 4c29903b-7a9a-432f-95ed-0b06c4b3e66a
+uuid: 84d262e6-2bcb-4ebc-8e4e-4d80c098bf92
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_pece_crit_commentary
+    - field.storage.node.field_text_language
     - node.type.pece_artifact_text
-id: node.pece_artifact_text.field_pece_crit_commentary
-field_name: field_pece_crit_commentary
+  module:
+    - languagefield
+id: node.pece_artifact_text.field_text_language
+field_name: field_text_language
 entity_type: node
 bundle: pece_artifact_text
-label: 'Critical Commentary'
+label: Language
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: string_long
+field_type: language_field
