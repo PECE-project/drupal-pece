@@ -347,7 +347,13 @@ function pece_ark_get_when_values_from_node($node = null) {
       $result = _ark_get_default_when($node);
     } else {
       $date = $node->{$when_field_value};
-      $date = (isset($date[$node->language])) ? $date[$node->language][0] : $date[LANGUAGE_NONE][0];
+      if (isset($date[$node->language]))
+        $date = $date[$node->language][0];
+      elseif (isset($date[LANGUAGE_NONE]))
+        $date = $date[LANGUAGE_NONE][0];
+      else
+        $date = null;
+
       if ($date) {
         $date_when = strtotime($date['value']);
       }
