@@ -1,40 +1,40 @@
+uuid: 336e3c7c-4597-42db-8f5e-a170a609e241
+langcode: en
+status: true
+dependencies: {  }
 id: v1_essay
-label: Migrate PECE Essays
-audit: true
-migration_group: pece
-migration_tags:
-  - "PECE v1"
-  - "Drupal 7"
-  - Content
 class: Drupal\node\Plugin\migrate\D7NodeTranslation
-deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'PECE v1'
+  - 'Drupal 7'
+  - Content
+migration_group: pece
+label: 'Migrate PECE Essays'
 source:
   plugin: v1_node
   bundle: pece_essay
 process:
   nid: tnid
   vid: vid
-  #  langcode:
-  #    plugin: default_value
-  #    source: language
-  #    default_value: "und"
   type:
     plugin: default_value
     default_value: pece_essay
   langcode:
     plugin: default_value
     source: language
-    default_value: "und"
+    default_value: und
   title: title
   uid: node_uid
   status: status
   created: created
   changed: timestamp
   promote: promote
-  'path/pathauto':
+  path/pathauto:
     plugin: default_value
-    default_value: 0 # Disable pathauto
-  'path/alias': alias
+    default_value: 0
+  path/alias: alias
   sticky: sticky
   revision_uid: revision_uid
   revision_log: log
@@ -43,18 +43,18 @@ process:
   field_essay_contributors:
     plugin: default_value
     source: field_pece_contributors
-    default_value:
-  'body/format':
+    default_value: null
+  body/format:
     plugin: default_value
     default_value: html
-  'body/value':
+  body/value:
     plugin: extract
     source: body
     index:
       - 0
       - value
     default: ''
-  'body/summary':
+  body/summary:
     plugin: extract
     source: body
     index:
@@ -66,7 +66,8 @@ process:
       plugin: default_value
       source: field_thumbnail
       default_value:
-        - fid:
+        -
+          fid: null
     -
       plugin: extract
       index:
@@ -78,13 +79,13 @@ process:
   field_ark_enabled:
     plugin: default_value
     source: field_ark_enabled
-    default_value:
+    default_value: null
   field_pece_project_ref:
     plugin: default_value
     source: field_pece_project_ref
-    default_value:
+    default_value: null
 destination:
-  plugin: entity_complete:node
+  plugin: 'entity_complete:node'
   translations: true
 migration_dependencies:
   required:

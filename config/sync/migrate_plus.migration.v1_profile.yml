@@ -1,12 +1,17 @@
+uuid: e08346b7-4594-426c-9b47-237285666f1f
+langcode: en
+status: true
+dependencies: {  }
 id: v1_profile
-label: User accounts profile
-audit: true
-migration_group: pece
+class: null
+field_plugin_method: null
+cck_plugin_method: null
 migration_tags:
-  - "PECE v1"
-  - "Drupal 7"
+  - 'PECE v1'
+  - 'Drupal 7'
   - Content
-deriver: Drupal\profile\Plugin\migrate\D7Profile2Deriver
+migration_group: pece
+label: 'User accounts profile'
 source:
   plugin: d7_profile2
   constants:
@@ -16,15 +21,15 @@ process:
   profile_id: pid
   type: type
   uid: uid
-  status: 'constants/status'
-  is_default: 'constants/is_default'
+  status: constants/status
+  is_default: constants/is_default
   created: created
   changed: changed
   field_pece_full_name: field_pece_full_name
   field_pece_biography:
-      plugin: default_value
-      source: field_pece_biography
-      default_value:
+    plugin: default_value
+    source: field_pece_biography
+    default_value: null
   field_pece_email:
     -
       plugin: default_value
@@ -45,7 +50,8 @@ process:
       plugin: default_value
       source: field_gpg_key
       default_value:
-        - fid: 0
+        -
+          fid: 0
     -
       plugin: extract
       index:
@@ -55,7 +61,7 @@ process:
     plugin: location_to_address
     source: field_pece_location
 destination:
-  plugin: entity:profile
+  plugin: 'entity:profile'
 migration_dependencies:
   required:
     - v1_user

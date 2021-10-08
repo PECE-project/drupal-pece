@@ -18,7 +18,6 @@ dependencies:
     - field.field.node.pece_artifact_website.field_website_fieldsite_local
     - field.field.node.pece_artifact_website.field_website_language
     - field.field.node.pece_artifact_website.field_website_location
-    - field.field.node.pece_artifact_website.field_website_permission
     - field.field.node.pece_artifact_website.field_website_source
     - field.field.node.pece_artifact_website.field_website_tags
     - field.field.node.pece_artifact_website.field_website_url
@@ -28,7 +27,6 @@ dependencies:
     - datetime
     - languagefield
     - link
-    - options
     - pbf
     - text
     - user
@@ -161,13 +159,6 @@ content:
     third_party_settings: {  }
     type: address_default
     region: content
-  field_website_permission:
-    weight: 115
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
   field_website_source:
     weight: 108
     label: above
@@ -193,6 +184,7 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_pece_created: true
   field_website_tags: true
   langcode: true
   og_audience: true
