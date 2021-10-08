@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Drupal\pece_essay\Plugin\GraphQL\SchemaExtension;
+namespace Drupal\pece_frontpage_slideshow\Plugin\GraphQL\SchemaExtension;
 
 
 use Drupal\Core\Extension\ModuleHandlerInterface;
