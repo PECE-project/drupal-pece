@@ -36,6 +36,13 @@ services:
 #    volumes:
 #      - codebase:/var/www/html
 
+  composer:
+    image: composer:1.9
+    command: composer install --ignore-platform-reqs -vvv
+    volumes:
+      - ./:/app
+      - ~/.composer:/tmp
+
 #volumes:
 #  codebase:
 
