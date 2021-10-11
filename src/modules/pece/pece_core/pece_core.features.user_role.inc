@@ -29,5 +29,11 @@ function pece_core_user_default_roles() {
     'weight' => 6,
   );
 
+  // Exported role: data-importer.
+  $roles['data-importer'] = array(
+    'name' => 'Data Importer',
+    'weight' => 7,
+  );
+
   return $roles;
 }
