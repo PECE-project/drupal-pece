@@ -1,0 +1,29 @@
+uuid: 3e86c6e2-0362-4af9-a6b2-24af49f22efb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_struct_analytics
+    - node.type.pece_project
+    - taxonomy.vocabulary.pece_structured_analytics
+id: node.pece_project.field_project_struct_analytics
+field_name: field_project_struct_analytics
+entity_type: node
+bundle: pece_project
+label: 'Structured Analytics'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      pece_structured_analytics: pece_structured_analytics
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.pece_project.field_pece_geolocation
     - field.field.node.pece_project.field_project_consent_form_file
     - field.field.node.pece_project.field_project_contributors
+    - field.field.node.pece_project.field_project_design_group
     - field.field.node.pece_project.field_project_featured_essays
     - field.field.node.pece_project.field_project_fund_agency_link
     - field.field.node.pece_project.field_project_image
@@ -20,6 +21,7 @@ dependencies:
     - field.field.node.pece_project.field_project_lead
     - field.field.node.pece_project.field_project_open_notes
     - field.field.node.pece_project.field_project_start_end_date
+    - field.field.node.pece_project.field_project_struct_analytics
     - field.field.node.pece_project.field_project_subst_logic
     - field.field.node.pece_project.field_project_tags
     - image.style.thumbnail
@@ -128,6 +130,16 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_project_design_group:
+    weight: 149
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_project_featured_essays:
     weight: 147
     settings:
@@ -200,6 +212,16 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: daterange_default
+    region: content
+  field_project_struct_analytics:
+    weight: 148
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_project_subst_logic:
     weight: 136
