@@ -1,20 +1,19 @@
-uuid: 076fd15f-8617-4c4f-93ec-e9e8e0a5d5b2
+uuid: 7866c1df-c0a8-433f-8b93-168c1d4f080f
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_project_uri
-field_name: field_project_uri
+    - taxonomy
+id: node.field_project_tags
+field_name: field_project_tags
 entity_type: node
-type: string
+type: entity_reference
 settings:
-  max_length: 255
-  is_ascii: false
-  case_sensitive: false
+  target_type: taxonomy_term
 module: core
 locked: false
-cardinality: 1
+cardinality: -1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false
