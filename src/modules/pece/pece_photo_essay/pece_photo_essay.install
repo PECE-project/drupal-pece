@@ -154,3 +154,14 @@ function pece_photo_essay_update_7005() {
   );
   pece_set_permissions(array('editor' => $editor_perms));
 }
+
+/**
+ * Add 'edit any pece_photo_essay content' permission for Administrator user role.
+ */
+function pece_photo_essay_update_7006() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  $administrator_perms = array(
+    'edit any pece_photo_essay content' => FALSE,
+  );
+  pece_set_permissions(array('administrator' => $administrator_perms));
+}

@@ -53,6 +53,15 @@ function pece_photo_essay_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any pece_photo_essay content'.
+  $permissions['edit any pece_photo_essay content'] = array(
+    'name' => 'edit any pece_photo_essay content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'set pece_photo_essay published on date'.
   $permissions['set pece_photo_essay published on date'] = array(
     'name' => 'set pece_photo_essay published on date',
