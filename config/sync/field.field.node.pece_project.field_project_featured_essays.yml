@@ -1,0 +1,33 @@
+uuid: 18fefe8e-32c9-4c60-98e9-4ac4efcdcf70
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_featured_essays
+    - node.type.pece_essay
+    - node.type.pece_photo_essay
+    - node.type.pece_project
+    - node.type.pece_timeline_essay
+id: node.pece_project.field_project_featured_essays
+field_name: field_project_featured_essays
+entity_type: node
+bundle: pece_project
+label: 'Featured Essays'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_essay: pece_essay
+      pece_photo_essay: pece_photo_essay
+      pece_timeline_essay: pece_timeline_essay
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: pece_essay
+field_type: entity_reference

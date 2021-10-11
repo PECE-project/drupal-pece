@@ -4,20 +4,32 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_project.body
+    - field.field.node.pece_project.field_ark_enabled
+    - field.field.node.pece_project.field_pbc_ref_group
+    - field.field.node.pece_project.field_pbc_ref_role
+    - field.field.node.pece_project.field_pbc_ref_user
+    - field.field.node.pece_project.field_pece_geolocation
     - field.field.node.pece_project.field_project_consent_form_file
+    - field.field.node.pece_project.field_project_contributors
+    - field.field.node.pece_project.field_project_featured_essays
     - field.field.node.pece_project.field_project_fund_agency_link
     - field.field.node.pece_project.field_project_image
+    - field.field.node.pece_project.field_project_image_banner
     - field.field.node.pece_project.field_project_institution_link
     - field.field.node.pece_project.field_project_intv_request_file
+    - field.field.node.pece_project.field_project_lead
+    - field.field.node.pece_project.field_project_open_notes
     - field.field.node.pece_project.field_project_start_end_date
     - field.field.node.pece_project.field_project_subst_logic
-    - field.field.node.pece_project.field_project_uri
+    - field.field.node.pece_project.field_project_tags
     - node.type.pece_project
   module:
     - datetime_range
     - file
+    - geolocation
     - image
     - link
+    - pbf
     - text
     - user
 id: node.pece_project.default
@@ -32,6 +44,47 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  field_ark_enabled:
+    weight: 118
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_pbc_ref_group:
+    weight: 119
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
+    region: content
+  field_pbc_ref_role:
+    weight: 120
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
+    region: content
+  field_pbc_ref_user:
+    weight: 121
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: pbf_formatter_default
+    region: content
+  field_pece_geolocation:
+    weight: 117
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_latlng
+    region: content
   field_project_consent_form_file:
     weight: 113
     label: above
@@ -39,6 +92,22 @@ content:
       use_description_as_link_text: true
     third_party_settings: {  }
     type: file_default
+    region: content
+  field_project_contributors:
+    weight: 122
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_project_featured_essays:
+    weight: 127
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_project_fund_agency_link:
     weight: 114
@@ -54,6 +123,15 @@ content:
     region: content
   field_project_image:
     weight: 115
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_project_image_banner:
+    weight: 123
     label: above
     settings:
       image_style: ''
@@ -81,6 +159,21 @@ content:
     third_party_settings: {  }
     type: file_default
     region: content
+  field_project_lead:
+    weight: 124
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_project_open_notes:
+    weight: 125
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
   field_project_start_end_date:
     weight: 107
     label: above
@@ -99,13 +192,13 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_project_uri:
-    weight: 110
+  field_project_tags:
+    weight: 126
     label: above
     settings:
-      link_to_entity: false
+      link: true
     third_party_settings: {  }
-    type: string
+    type: entity_reference_label
     region: content
   links:
     weight: 100
