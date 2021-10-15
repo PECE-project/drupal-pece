@@ -35,5 +35,11 @@ function pece_core_user_default_roles() {
     'weight' => 7,
   );
 
+  // Exported role: Manager.
+  $roles['Manager'] = array(
+    'name' => 'Manager',
+    'weight' => 7,
+  );
+
   return $roles;
 }
