@@ -1,0 +1,71 @@
+uuid:
+langcode: en
+status: true
+dependencies: {  }
+id: v1_text
+class: Drupal\node\Plugin\migrate\D7NodeTranslation
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Text v1'
+  - 'PECE v1'
+  - 'Drupal 7'
+  - Content
+migration_group: pece
+label: 'Migrate Artifact Text'
+source:
+  plugin: v1_node
+  node_type: pece_artifact_text
+process:
+  nid: nid
+  vid: vid
+  uid: node_uid
+  title: title
+  type:
+    plugin: default_value
+    default_value: pece_artifact_text
+  field_pece_project_ref:
+    plugin: default_value
+    source: field_pece_project_ref
+    default_value: null
+  field_text_contributors:
+    plugin: default_value
+    source: field_pece_contributors
+    default_value: null
+  field_text_tags: field_pece_tags
+  field_text_license: field_pece_license
+  body/format:
+    plugin: default_value
+    default_value: html
+  body/value:
+    plugin: extract
+    source: body
+    index:
+      - 0
+      - value
+    default: ''
+  body/summary:
+    plugin: extract
+    source: body
+    index:
+      - 0
+      - summary
+    default: ''
+  field_ark_enabled:
+    plugin: default_value
+    source: field_ark_enabled
+    default_value: null
+  field_text_crit_commentary: field_pece_crit_commentary
+  field_text_source: field_pece_source
+  field_text_authors:
+    plugin: default_value
+    source: field_pece_authors
+    default_value: null
+  field_text_language: field_pece_language
+  field_text_use_fieldsite_local: field_pece_use_fieldsite_local
+  field_text_fieldsite: field_pece_fieldsite
+  field_text_created_date: field_pece_created
+  field_text_location: field_pece_location
+destination:
+  plugin: 'entity_complete:node'
+  translations: true
