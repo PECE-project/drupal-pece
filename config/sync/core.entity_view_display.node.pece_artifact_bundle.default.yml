@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.pece_artifact_bundle.body
     - field.field.node.pece_artifact_bundle.field_ark_enabled
     - field.field.node.pece_artifact_bundle.field_bundle_authors
     - field.field.node.pece_artifact_bundle.field_bundle_contributors
@@ -24,20 +23,12 @@ dependencies:
     - address
     - datetime
     - pbf
-    - text
     - user
 id: node.pece_artifact_bundle.default
 targetEntityType: node
 bundle: pece_artifact_bundle
 mode: default
 content:
-  body:
-    label: hidden
-    type: text_default
-    weight: 101
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   field_ark_enabled:
     weight: 114
     label: above

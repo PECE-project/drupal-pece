@@ -1,0 +1,53 @@
+uuid:
+langcode: en
+status: true
+dependencies: {  }
+id: v1_bundle
+class: Drupal\node\Plugin\migrate\D7NodeTranslation
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Bundle v1'
+  - 'PECE v1'
+  - 'Drupal 7'
+  - Content
+migration_group: pece
+label: 'Migrate Artifact Bundle'
+source:
+  plugin: v1_node
+  node_type: pece_artifact_bundle
+process:
+  nid: nid
+  vid: vid
+  uid: node_uid
+  title: title
+  type:
+    plugin: default_value
+    default_value: pece_artifact_bundle
+  field_bundle_contributors:
+    plugin: default_value
+    source: field_pece_contributors
+    default_value: null
+  field_bundle_authors:
+    plugin: default_value
+    source: field_pece_authors
+    default_value: null
+  field_pece_project_ref:
+    plugin: default_value
+    source: field_pece_project_ref
+    default_value: null
+  field_bundle_crit_commentary: field_pece_crit_commentary
+  field_pece_artifacts: field_pece_artifacts
+  field_bundle_created_date: field_pece_created
+  field_bundle_use_fieldsite_local: field_pece_use_fieldsite_local
+  field_bundle_fieldsite: field_pece_fieldsite
+  field_bundle_location: field_pece_location
+  field_pece_license: field_pece_license
+  field_bundle_tags: field_pece_tags
+  field_ark_enabled:
+    plugin: default_value
+    source: field_ark_enabled
+    default_value: null
+destination:
+  plugin: 'entity_complete:node'
+  translations: true

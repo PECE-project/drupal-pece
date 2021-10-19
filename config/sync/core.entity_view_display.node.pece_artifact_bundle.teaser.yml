@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.pece_artifact_bundle.body
     - field.field.node.pece_artifact_bundle.field_ark_enabled
     - field.field.node.pece_artifact_bundle.field_bundle_authors
     - field.field.node.pece_artifact_bundle.field_bundle_contributors
@@ -22,21 +21,12 @@ dependencies:
     - field.field.node.pece_artifact_bundle.field_pece_project_ref
     - node.type.pece_artifact_bundle
   module:
-    - text
     - user
 id: node.pece_artifact_bundle.teaser
 targetEntityType: node
 bundle: pece_artifact_bundle
 mode: teaser
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 101
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    region: content
   links:
     weight: 100
     settings: {  }
