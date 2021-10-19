@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.pece_artifact_audio.body
     - field.field.node.pece_artifact_audio.field_ark_enabled
     - field.field.node.pece_artifact_audio.field_audio_authors
     - field.field.node.pece_artifact_audio.field_audio_contributors
@@ -29,20 +28,12 @@ dependencies:
     - datetime
     - languagefield
     - pbf
-    - text
     - user
 id: node.pece_artifact_audio.default
 targetEntityType: node
 bundle: pece_artifact_audio
 mode: default
 content:
-  body:
-    label: hidden
-    type: text_default
-    weight: 101
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   field_ark_enabled:
     weight: 120
     label: above
