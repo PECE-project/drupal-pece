@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_fieldsite.body
-    - field.field.node.pece_fieldsite.field_fieldsite_description
     - field.field.node.pece_fieldsite.field_fieldsite_location
     - field.field.node.pece_fieldsite.field_fieldsite_project
     - field.field.node.pece_fieldsite.field_fieldsite_researcher
@@ -37,14 +36,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_fieldsite_description:
-    weight: 123
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_fieldsite_location:
     weight: 126
     settings: {  }
