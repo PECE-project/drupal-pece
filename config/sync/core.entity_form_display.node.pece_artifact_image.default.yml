@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.pece_artifact_image.body
     - field.field.node.pece_artifact_image.field_ark_enabled
     - field.field.node.pece_artifact_image.field_image_authors
     - field.field.node.pece_artifact_image.field_image_contributors
@@ -19,7 +18,6 @@ dependencies:
     - field.field.node.pece_artifact_image.field_pbc_ref_group
     - field.field.node.pece_artifact_image.field_pbc_ref_role
     - field.field.node.pece_artifact_image.field_pbc_ref_user
-    - field.field.node.pece_artifact_image.field_pece_file_format
     - field.field.node.pece_artifact_image.field_pece_geolocation
     - field.field.node.pece_artifact_image.field_pece_license
     - field.field.node.pece_artifact_image.field_pece_media_image
@@ -33,22 +31,11 @@ dependencies:
     - media_library
     - path
     - pbf
-    - text
 id: node.pece_artifact_image.default
 targetEntityType: node
 bundle: pece_artifact_image
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 121
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
-    region: content
   created:
     type: datetime_timestamp
     weight: 10
@@ -187,14 +174,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: pbf_widget
-    region: content
-  field_pece_file_format:
-    weight: 141
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
     region: content
   field_pece_geolocation:
     weight: 144
