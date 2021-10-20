@@ -3,25 +3,30 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.artifact_tabular_data.body
     - field.field.node.artifact_tabular_data.field_ark_enabled
     - field.field.node.artifact_tabular_data.field_pbc_ref_group
     - field.field.node.artifact_tabular_data.field_pbc_ref_role
     - field.field.node.artifact_tabular_data.field_pbc_ref_user
     - field.field.node.artifact_tabular_data.field_pece_license
     - field.field.node.artifact_tabular_data.field_pece_project_ref
+    - field.field.node.artifact_tabular_data.field_tabular_attachment
     - field.field.node.artifact_tabular_data.field_tabular_authors
     - field.field.node.artifact_tabular_data.field_tabular_contributors
     - field.field.node.artifact_tabular_data.field_tabular_created_date
+    - field.field.node.artifact_tabular_data.field_tabular_crit_commentary
     - field.field.node.artifact_tabular_data.field_tabular_fieldsite
     - field.field.node.artifact_tabular_data.field_tabular_fieldsite_local
+    - field.field.node.artifact_tabular_data.field_tabular_language
     - field.field.node.artifact_tabular_data.field_tabular_location
+    - field.field.node.artifact_tabular_data.field_tabular_media
     - field.field.node.artifact_tabular_data.field_tabular_source
     - field.field.node.artifact_tabular_data.field_tabular_tags
     - node.type.artifact_tabular_data
   module:
     - address
     - datetime
+    - file
+    - languagefield
     - path
     - pbf
     - text
@@ -30,16 +35,6 @@ targetEntityType: node
 bundle: artifact_tabular_data
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 121
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
-    region: content
   created:
     type: datetime_timestamp
     weight: 10
@@ -118,6 +113,13 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_tabular_attachment:
+    weight: 136
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
   field_tabular_authors:
     weight: 132
     settings:
@@ -144,6 +146,14 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
+  field_tabular_crit_commentary:
+    weight: 138
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
   field_tabular_fieldsite:
     weight: 133
     settings:
@@ -161,11 +171,26 @@ content:
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
+  field_tabular_language:
+    weight: 139
+    settings:
+      format:
+        name: name
+    third_party_settings: {  }
+    type: languagefield_select
+    region: content
   field_tabular_location:
     weight: 135
     settings: {  }
     third_party_settings: {  }
     type: address_default
+    region: content
+  field_tabular_media:
+    weight: 137
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
     region: content
   field_tabular_source:
     weight: 131
