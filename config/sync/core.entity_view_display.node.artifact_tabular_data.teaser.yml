@@ -4,38 +4,32 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.artifact_tabular_data.body
     - field.field.node.artifact_tabular_data.field_ark_enabled
     - field.field.node.artifact_tabular_data.field_pbc_ref_group
     - field.field.node.artifact_tabular_data.field_pbc_ref_role
     - field.field.node.artifact_tabular_data.field_pbc_ref_user
     - field.field.node.artifact_tabular_data.field_pece_license
     - field.field.node.artifact_tabular_data.field_pece_project_ref
+    - field.field.node.artifact_tabular_data.field_tabular_attachment
     - field.field.node.artifact_tabular_data.field_tabular_authors
     - field.field.node.artifact_tabular_data.field_tabular_contributors
     - field.field.node.artifact_tabular_data.field_tabular_created_date
+    - field.field.node.artifact_tabular_data.field_tabular_crit_commentary
     - field.field.node.artifact_tabular_data.field_tabular_fieldsite
     - field.field.node.artifact_tabular_data.field_tabular_fieldsite_local
+    - field.field.node.artifact_tabular_data.field_tabular_language
     - field.field.node.artifact_tabular_data.field_tabular_location
+    - field.field.node.artifact_tabular_data.field_tabular_media
     - field.field.node.artifact_tabular_data.field_tabular_source
     - field.field.node.artifact_tabular_data.field_tabular_tags
     - node.type.artifact_tabular_data
   module:
-    - text
     - user
 id: node.artifact_tabular_data.teaser
 targetEntityType: node
 bundle: artifact_tabular_data
 mode: teaser
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 101
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    region: content
   links:
     weight: 100
     settings: {  }
@@ -48,12 +42,16 @@ hidden:
   field_pbc_ref_user: true
   field_pece_license: true
   field_pece_project_ref: true
+  field_tabular_attachment: true
   field_tabular_authors: true
   field_tabular_contributors: true
   field_tabular_created_date: true
+  field_tabular_crit_commentary: true
   field_tabular_fieldsite: true
   field_tabular_fieldsite_local: true
+  field_tabular_language: true
   field_tabular_location: true
+  field_tabular_media: true
   field_tabular_source: true
   field_tabular_tags: true
   langcode: true

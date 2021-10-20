@@ -1,0 +1,21 @@
+uuid: 5eb4c378-0eba-490e-9d1d-3bf7b928667e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tabular_language
+    - node.type.artifact_tabular_data
+  module:
+    - languagefield
+id: node.artifact_tabular_data.field_tabular_language
+field_name: field_tabular_language
+entity_type: node
+bundle: artifact_tabular_data
+label: Language
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: language_field
