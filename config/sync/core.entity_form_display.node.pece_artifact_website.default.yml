@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.pece_artifact_website.body
     - field.field.node.pece_artifact_website.field_ark_enabled
     - field.field.node.pece_artifact_website.field_pbc_ref_group
     - field.field.node.pece_artifact_website.field_pbc_ref_role
@@ -29,21 +28,11 @@ dependencies:
     - link
     - path
     - pbf
-    - text
 id: node.pece_artifact_website.default
 targetEntityType: node
 bundle: pece_artifact_website
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 121
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-    third_party_settings: {  }
-    region: content
   created:
     type: datetime_timestamp
     weight: 10
