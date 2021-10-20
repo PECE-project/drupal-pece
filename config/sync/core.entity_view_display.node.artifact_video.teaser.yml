@@ -4,42 +4,34 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.artifact_video.body
     - field.field.node.artifact_video.field_ark_enabled
     - field.field.node.artifact_video.field_pbc_ref_group
     - field.field.node.artifact_video.field_pbc_ref_role
     - field.field.node.artifact_video.field_pbc_ref_user
     - field.field.node.artifact_video.field_pece_license
-    - field.field.node.artifact_video.field_pece_media_video
     - field.field.node.artifact_video.field_pece_project_ref
     - field.field.node.artifact_video.field_video_authors
     - field.field.node.artifact_video.field_video_contributors
     - field.field.node.artifact_video.field_video_created_date
     - field.field.node.artifact_video.field_video_crit_commentary
+    - field.field.node.artifact_video.field_video_duration
     - field.field.node.artifact_video.field_video_fieldsite
+    - field.field.node.artifact_video.field_video_format
     - field.field.node.artifact_video.field_video_language
     - field.field.node.artifact_video.field_video_location
+    - field.field.node.artifact_video.field_video_media
     - field.field.node.artifact_video.field_video_permission
     - field.field.node.artifact_video.field_video_source
     - field.field.node.artifact_video.field_video_tags
     - field.field.node.artifact_video.field_video_use_fieldsite_local
     - node.type.artifact_video
   module:
-    - text
     - user
 id: node.artifact_video.teaser
 targetEntityType: node
 bundle: artifact_video
 mode: teaser
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 101
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    region: content
   links:
     weight: 100
     settings: {  }
@@ -51,15 +43,17 @@ hidden:
   field_pbc_ref_role: true
   field_pbc_ref_user: true
   field_pece_license: true
-  field_pece_media_video: true
   field_pece_project_ref: true
   field_video_authors: true
   field_video_contributors: true
   field_video_created_date: true
   field_video_crit_commentary: true
+  field_video_duration: true
   field_video_fieldsite: true
+  field_video_format: true
   field_video_language: true
   field_video_location: true
+  field_video_media: true
   field_video_permission: true
   field_video_source: true
   field_video_tags: true

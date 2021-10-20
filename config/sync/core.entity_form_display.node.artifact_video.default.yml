@@ -3,21 +3,22 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.artifact_video.body
     - field.field.node.artifact_video.field_ark_enabled
     - field.field.node.artifact_video.field_pbc_ref_group
     - field.field.node.artifact_video.field_pbc_ref_role
     - field.field.node.artifact_video.field_pbc_ref_user
     - field.field.node.artifact_video.field_pece_license
-    - field.field.node.artifact_video.field_pece_media_video
     - field.field.node.artifact_video.field_pece_project_ref
     - field.field.node.artifact_video.field_video_authors
     - field.field.node.artifact_video.field_video_contributors
     - field.field.node.artifact_video.field_video_created_date
     - field.field.node.artifact_video.field_video_crit_commentary
+    - field.field.node.artifact_video.field_video_duration
     - field.field.node.artifact_video.field_video_fieldsite
+    - field.field.node.artifact_video.field_video_format
     - field.field.node.artifact_video.field_video_language
     - field.field.node.artifact_video.field_video_location
+    - field.field.node.artifact_video.field_video_media
     - field.field.node.artifact_video.field_video_permission
     - field.field.node.artifact_video.field_video_source
     - field.field.node.artifact_video.field_video_tags
@@ -26,26 +27,15 @@ dependencies:
   module:
     - address
     - datetime
+    - file
     - languagefield
-    - media_library
     - path
     - pbf
-    - text
 id: node.artifact_video.default
 targetEntityType: node
 bundle: artifact_video
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 121
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
-    region: content
   created:
     type: datetime_timestamp
     weight: 10
@@ -114,13 +104,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_pece_media_video:
-    weight: 132
-    settings:
-      media_types: {  }
-    third_party_settings: {  }
-    type: media_library_widget
-    region: content
   field_pece_project_ref:
     weight: 133
     settings:
@@ -165,6 +148,14 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
+  field_video_duration:
+    weight: 141
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_video_fieldsite:
     weight: 128
     settings:
@@ -174,6 +165,14 @@ content:
       match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_video_format:
+    weight: 142
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   field_video_language:
     weight: 127
@@ -188,6 +187,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: address_default
+    region: content
+  field_video_media:
+    weight: 143
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
     region: content
   field_video_permission:
     weight: 131
