@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.pece_artifact_pdf.body
     - field.field.node.pece_artifact_pdf.field_pbc_ref_group
     - field.field.node.pece_artifact_pdf.field_pbc_ref_role
     - field.field.node.pece_artifact_pdf.field_pbc_ref_user
@@ -28,20 +27,12 @@ dependencies:
     - languagefield
     - options
     - pbf
-    - text
     - user
 id: node.pece_artifact_pdf.default
 targetEntityType: node
 bundle: pece_artifact_pdf
 mode: default
 content:
-  body:
-    label: hidden
-    type: text_default
-    weight: 101
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   field_pbc_ref_group:
     weight: 118
     label: above

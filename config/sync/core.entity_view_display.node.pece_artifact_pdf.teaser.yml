@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.pece_artifact_pdf.body
     - field.field.node.pece_artifact_pdf.field_pbc_ref_group
     - field.field.node.pece_artifact_pdf.field_pbc_ref_role
     - field.field.node.pece_artifact_pdf.field_pbc_ref_user
@@ -24,21 +23,12 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_pece_project_ref
     - node.type.pece_artifact_pdf
   module:
-    - text
     - user
 id: node.pece_artifact_pdf.teaser
 targetEntityType: node
 bundle: pece_artifact_pdf
 mode: teaser
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 101
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    region: content
   links:
     weight: 100
     settings: {  }
