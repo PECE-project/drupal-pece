@@ -4,17 +4,25 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.pece_image_artifact
-    - field.field.node.pece_artifact_image.body
+    - field.field.node.pece_artifact_image.field_ark_enabled
     - field.field.node.pece_artifact_image.field_image_authors
     - field.field.node.pece_artifact_image.field_image_contributors
+    - field.field.node.pece_artifact_image.field_image_created_date
     - field.field.node.pece_artifact_image.field_image_crit_commentary
     - field.field.node.pece_artifact_image.field_image_fieldsite
     - field.field.node.pece_artifact_image.field_image_fieldsite_local
+    - field.field.node.pece_artifact_image.field_image_file_format
     - field.field.node.pece_artifact_image.field_image_language
     - field.field.node.pece_artifact_image.field_image_location
     - field.field.node.pece_artifact_image.field_image_source
     - field.field.node.pece_artifact_image.field_image_tags
+    - field.field.node.pece_artifact_image.field_pbc_ref_group
+    - field.field.node.pece_artifact_image.field_pbc_ref_role
+    - field.field.node.pece_artifact_image.field_pbc_ref_user
+    - field.field.node.pece_artifact_image.field_pece_geolocation
+    - field.field.node.pece_artifact_image.field_pece_license
     - field.field.node.pece_artifact_image.field_pece_media_image
+    - field.field.node.pece_artifact_image.field_pece_project_ref
     - node.type.pece_artifact_image
   module:
     - user
@@ -32,7 +40,6 @@ content:
       link: true
     third_party_settings: {  }
 hidden:
-  body: true
   field_ark_enabled: true
   field_image_authors: true
   field_image_contributors: true
