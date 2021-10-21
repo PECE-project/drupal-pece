@@ -4,7 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.node.group.body
+    - field.field.node.group.field_group_subst_logic
     - field.field.node.group.field_group_visibility
+    - field.field.node.group.field_pece_project_ref
     - node.type.group
   module:
     - path
@@ -30,11 +32,31 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_group_subst_logic:
+    weight: 124
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_group_visibility:
     weight: 122
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_pece_project_ref:
+    weight: 123
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   langcode:
     type: language_select
