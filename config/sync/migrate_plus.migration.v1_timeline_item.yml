@@ -15,10 +15,16 @@ migration_group: pece
 label: 'Migrate Timeline Essays Item'
 source:
   plugin: d7_eck_entity
+  entity_type: pece_timeline_essay_item
+  bundle: pece_timeline_essay_item
 process:
-  nid: nid
-  vid: vid
-  title: title
+  id: id
+  field_title: title
+  field_description: field_description
+  field_pece_timeline_artifact: field_pece_timeline_artifact
+  field_pece_timeline_background: field_pece_timeline_background
+  field_pece_timeline_color: field_pece_timeline_color
+  field_pece_timeline_type: field_pece_timeline_type
 destination:
   plugin: 'entity_reference_revisions:paragraph'
   default_bundle: pece_timeline_essay_item
