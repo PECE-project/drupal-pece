@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.pece_image_artifact
+    - field.field.node.pece_artifact_image.body
     - field.field.node.pece_artifact_image.field_ark_enabled
     - field.field.node.pece_artifact_image.field_image_authors
     - field.field.node.pece_artifact_image.field_image_contributors
@@ -19,6 +20,8 @@ dependencies:
     - field.field.node.pece_artifact_image.field_pbc_ref_group
     - field.field.node.pece_artifact_image.field_pbc_ref_role
     - field.field.node.pece_artifact_image.field_pbc_ref_user
+    - field.field.node.pece_artifact_image.field_pece_created
+    - field.field.node.pece_artifact_image.field_pece_file_format
     - field.field.node.pece_artifact_image.field_pece_geolocation
     - field.field.node.pece_artifact_image.field_pece_license
     - field.field.node.pece_artifact_image.field_pece_media_image
@@ -35,11 +38,13 @@ content:
     type: entity_reference_label
     weight: 0
     region: content
-    label: above
+    label: hidden
     settings:
-      link: true
+      view_mode: pece_image_artifact
+      link: false
     third_party_settings: {  }
 hidden:
+  body: true
   field_ark_enabled: true
   field_image_authors: true
   field_image_contributors: true
@@ -55,10 +60,10 @@ hidden:
   field_pbc_ref_group: true
   field_pbc_ref_role: true
   field_pbc_ref_user: true
+  field_pece_created: true
   field_pece_file_format: true
   field_pece_geolocation: true
   field_pece_license: true
-  field_pece_media_image: true
   field_pece_project_ref: true
   langcode: true
   links: true
