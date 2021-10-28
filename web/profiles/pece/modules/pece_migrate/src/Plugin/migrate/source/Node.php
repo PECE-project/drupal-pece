@@ -28,7 +28,7 @@ class Node extends D7Node {
    */
   public function fields() {
     $fields = parent::fields() + ['alias' => $this->t('Path alias')];
-    $fields += ['permission_by_group_view' => $this->t('Permissão para grupos')];
+    $fields += ['permission_by_group_view' => $this->t('Permission by group')];
     $fields += ['permission_by_user' => $this->t('Permission by user')];
     return $fields;
   }
@@ -46,11 +46,12 @@ class Node extends D7Node {
     if (!empty($alias)) {
       $row->setSourceProperty('alias', '/' . $alias);
     }
+
+    // Get all permission in the table og_membership.
     $query = $this->select('og_membership', 'ogm')
       ->fields('ogm', ['gid']);
     $query->condition('ogm.etid', $nid);
-
-    // Get all permission in the table og_membership.
+    // Get all permission by group
     $permission_by_group_view = $query->execute()->fetchCol();
     foreach ($permission_by_group_view as $key => $item) {
       $permission_by_group_view[$key] = [
@@ -60,7 +61,6 @@ class Node extends D7Node {
         'grant_delete' => 0,
       ];
     }
-
     // Set the permission in the row.
     $row->setSourceProperty('permission_by_group_view', $permission_by_group_view);
 
