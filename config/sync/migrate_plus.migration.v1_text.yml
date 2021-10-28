@@ -69,7 +69,11 @@ process:
   field_pbc_ref_group:
     plugin: default_value
     source: permission_by_group_view
-    default_value: 13
+    default_value: null
+  field_pbc_ref_user:
+    plugin: default_value
+    source: permission_by_user
+    default_value: null
 destination:
   plugin: 'entity_complete:node'
   translations: true

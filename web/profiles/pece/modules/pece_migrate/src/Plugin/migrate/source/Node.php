@@ -29,6 +29,7 @@ class Node extends D7Node {
   public function fields() {
     $fields = parent::fields() + ['alias' => $this->t('Path alias')];
     $fields += ['permission_by_group_view' => $this->t('Permissão para grupos')];
+    $fields += ['permission_by_user' => $this->t('Permission by user')];
     return $fields;
   }
 
@@ -62,6 +63,24 @@ class Node extends D7Node {
 
     // Set the permission in the row.
     $row->setSourceProperty('permission_by_group_view', $permission_by_group_view);
+
+    // Get all contributors
+    $query = $this->select('field_data_field_pece_contributors', 'contributors')
+      ->fields('contributors', ['field_pece_contributors_target_id']);
+    $query->condition('contributors.entity_id', $nid);
+    // Get all permission by contributors
+    $permission_by_user = $query->execute()->fetchCol();
+    foreach ($permission_by_user as $key => $item) {
+      $permission_by_user[$key] = [
+        'target_id' => $item,
+        'grant_view' => 1,
+        'grant_update' => 1,
+        'grant_delete' => 0,
+      ];
+    }
+    // Set the permission in the row.
+    $row->setSourceProperty('permission_by_user', $permission_by_user);
+
     return parent::prepareRow($row);
   }
 }
