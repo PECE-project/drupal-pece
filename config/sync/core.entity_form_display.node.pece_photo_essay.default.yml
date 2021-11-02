@@ -4,17 +4,21 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_photo_essay.body
+    - field.field.node.pece_photo_essay.field_ark_enabled
     - field.field.node.pece_photo_essay.field_pbc_ref_group
     - field.field.node.pece_photo_essay.field_pbc_ref_role
     - field.field.node.pece_photo_essay.field_pbc_ref_user
-    - field.field.node.pece_photo_essay.field_pece_contributors
-    - field.field.node.pece_photo_essay.field_pece_photo_essay_items
-    - field.field.node.pece_photo_essay.field_pece_photo_essay_thumbnail
-    - field.field.node.pece_photo_essay.field_pece_tags
-    - field.field.node.pece_photo_essay.field_pece_uri
+    - field.field.node.pece_photo_essay.field_pece_geolocation
+    - field.field.node.pece_photo_essay.field_pece_license
+    - field.field.node.pece_photo_essay.field_pece_project_ref
+    - field.field.node.pece_photo_essay.field_photo_essay_contributor
+    - field.field.node.pece_photo_essay.field_photo_essay_items
+    - field.field.node.pece_photo_essay.field_photo_essay_tags
+    - field.field.node.pece_photo_essay.field_photo_essay_thumbnail
     - image.style.thumbnail
     - node.type.pece_photo_essay
   module:
+    - geolocation
     - image
     - paragraphs
     - path
@@ -41,6 +45,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_ark_enabled:
+    weight: 28
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_pbc_ref_group:
     weight: 7
     settings:
@@ -86,8 +97,14 @@ content:
     third_party_settings: {  }
     type: pbf_widget
     region: content
-  field_pece_contributors:
-    weight: 6
+  field_pece_geolocation:
+    weight: 32
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_latlng
+    region: content
+  field_pece_license:
+    weight: 30
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -96,9 +113,29 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_pece_photo_essay_items:
+  field_pece_project_ref:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_photo_essay_contributor:
+    weight: 27
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_photo_essay_items:
     type: entity_reference_paragraphs
-    weight: 3
+    weight: 33
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -108,16 +145,8 @@ content:
       default_paragraph_type: ''
     third_party_settings: {  }
     region: content
-  field_pece_photo_essay_thumbnail:
-    weight: 1
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
-    region: content
-  field_pece_tags:
-    weight: 5
+  field_photo_essay_tags:
+    weight: 29
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -126,13 +155,13 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_pece_uri:
-    weight: 4
+  field_photo_essay_thumbnail:
+    weight: 31
     settings:
-      size: 60
-      placeholder: ''
+      progress_indicator: throbber
+      preview_image_style: thumbnail
     third_party_settings: {  }
-    type: string_textfield
+    type: image_image
     region: content
   langcode:
     type: language_select

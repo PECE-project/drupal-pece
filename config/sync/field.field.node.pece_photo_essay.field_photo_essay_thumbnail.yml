@@ -1,14 +1,14 @@
-uuid: d67613ff-3e88-40d7-84b1-ee30315dc8d8
+uuid: 41a5d742-b9d5-49eb-a20c-250755ce68f3
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_pece_photo_essay_thumbnail
+    - field.storage.node.field_photo_essay_thumbnail
     - node.type.pece_photo_essay
   module:
     - image
-id: node.pece_photo_essay.field_pece_photo_essay_thumbnail
-field_name: field_pece_photo_essay_thumbnail
+id: node.pece_photo_essay.field_photo_essay_thumbnail
+field_name: field_photo_essay_thumbnail
 entity_type: node
 bundle: pece_photo_essay
 label: Thumbnail
@@ -18,7 +18,7 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: 'pece_photo_essay/[date:custom:Y]-[date:custom:m]'
+  file_directory: 'photo_essay/[date:custom:Y]-[date:custom:m]'
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
   max_resolution: ''
