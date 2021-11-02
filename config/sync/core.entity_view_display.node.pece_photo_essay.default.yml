@@ -4,17 +4,21 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_photo_essay.body
+    - field.field.node.pece_photo_essay.field_ark_enabled
     - field.field.node.pece_photo_essay.field_pbc_ref_group
     - field.field.node.pece_photo_essay.field_pbc_ref_role
     - field.field.node.pece_photo_essay.field_pbc_ref_user
-    - field.field.node.pece_photo_essay.field_pece_contributors
-    - field.field.node.pece_photo_essay.field_pece_photo_essay_items
-    - field.field.node.pece_photo_essay.field_pece_photo_essay_thumbnail
-    - field.field.node.pece_photo_essay.field_pece_tags
-    - field.field.node.pece_photo_essay.field_pece_uri
+    - field.field.node.pece_photo_essay.field_pece_geolocation
+    - field.field.node.pece_photo_essay.field_pece_license
+    - field.field.node.pece_photo_essay.field_pece_project_ref
+    - field.field.node.pece_photo_essay.field_photo_essay_contributor
+    - field.field.node.pece_photo_essay.field_photo_essay_items
+    - field.field.node.pece_photo_essay.field_photo_essay_tags
+    - field.field.node.pece_photo_essay.field_photo_essay_thumbnail
     - node.type.pece_photo_essay
   module:
     - entity_reference_revisions
+    - geolocation
     - image
     - pbf
     - text
@@ -30,6 +34,16 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_ark_enabled:
+    weight: 113
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_pbc_ref_group:
     weight: 106
@@ -55,47 +69,62 @@ content:
     third_party_settings: {  }
     type: pbf_formatter_default
     region: content
-  field_pece_contributors:
-    weight: 103
+  field_pece_geolocation:
+    weight: 117
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_latlng
+    region: content
+  field_pece_license:
+    weight: 115
     label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_pece_photo_essay_items:
+  field_pece_project_ref:
+    weight: 111
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_photo_essay_contributor:
+    weight: 112
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_photo_essay_items:
     type: entity_reference_revisions_entity_view
-    weight: 110
+    weight: 118
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
     region: content
-  field_pece_photo_essay_thumbnail:
-    weight: 104
-    label: above
-    settings:
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
-    type: image
-    region: content
-  field_pece_tags:
-    weight: 105
+  field_photo_essay_tags:
+    weight: 114
     label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_pece_uri:
-    weight: 102
+  field_photo_essay_thumbnail:
+    weight: 116
     label: above
     settings:
-      link_to_entity: false
+      image_style: ''
+      image_link: ''
     third_party_settings: {  }
-    type: string
+    type: image
     region: content
   links:
     weight: 100
