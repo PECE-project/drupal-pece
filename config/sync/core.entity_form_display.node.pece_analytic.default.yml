@@ -3,12 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.pece_analytic.body
     - field.field.node.pece_analytic.field_analytic_question_set
     - field.field.node.pece_analytic.field_analytic_tags
-    - field.field.node.pece_analytic.field_analytic_uri
+    - field.field.node.pece_analytic.field_ark_enabled
+    - field.field.node.pece_analytic.field_pece_geolocation
     - node.type.pece_analytic
   module:
+    - geolocation
     - path
 _core:
   default_config_hash: QbOOGG0EnZCOje7NF58KkPxA4lRSCvhmKnT3zB8gTHI
@@ -43,13 +44,18 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_analytic_uri:
-    weight: 8
+  field_ark_enabled:
+    weight: 27
     settings:
-      size: 60
-      placeholder: ''
+      display_label: true
     third_party_settings: {  }
-    type: string_textfield
+    type: boolean_checkbox
+    region: content
+  field_pece_geolocation:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_latlng
     region: content
   langcode:
     type: language_select
@@ -103,5 +109,4 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden:
-  body: true
+hidden: {  }
