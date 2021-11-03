@@ -7,12 +7,15 @@ dependencies:
     - field.field.node.pece_annotation.field_annotation_analytic
     - field.field.node.pece_annotation.field_annotation_artifact
     - field.field.node.pece_annotation.field_annotation_tags
-    - field.field.node.pece_annotation.field_annotation_uri
+    - field.field.node.pece_annotation.field_ark_enabled
     - field.field.node.pece_annotation.field_pbc_ref_group
     - field.field.node.pece_annotation.field_pbc_ref_role
     - field.field.node.pece_annotation.field_pbc_ref_user
+    - field.field.node.pece_annotation.field_pece_geolocation
+    - field.field.node.pece_annotation.field_pece_license
     - node.type.pece_annotation
   module:
+    - geolocation
     - pbf
     - text
     - user
@@ -52,13 +55,15 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_annotation_uri:
-    weight: 102
+  field_ark_enabled:
+    weight: 109
     label: above
     settings:
-      link_to_entity: false
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
     third_party_settings: {  }
-    type: string
+    type: boolean
     region: content
   field_pbc_ref_group:
     weight: 108
@@ -83,6 +88,21 @@ content:
       link: true
     third_party_settings: {  }
     type: pbf_formatter_default
+    region: content
+  field_pece_geolocation:
+    weight: 111
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_latlng
+    region: content
+  field_pece_license:
+    weight: 110
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   links:
     weight: 100

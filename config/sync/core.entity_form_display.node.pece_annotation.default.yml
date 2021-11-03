@@ -7,13 +7,16 @@ dependencies:
     - field.field.node.pece_annotation.field_annotation_analytic
     - field.field.node.pece_annotation.field_annotation_artifact
     - field.field.node.pece_annotation.field_annotation_tags
-    - field.field.node.pece_annotation.field_annotation_uri
+    - field.field.node.pece_annotation.field_ark_enabled
     - field.field.node.pece_annotation.field_pbc_ref_group
     - field.field.node.pece_annotation.field_pbc_ref_role
     - field.field.node.pece_annotation.field_pbc_ref_user
+    - field.field.node.pece_annotation.field_pece_geolocation
+    - field.field.node.pece_annotation.field_pece_license
     - node.type.pece_annotation
   module:
     - field_group
+    - geolocation
     - path
     - pbf
     - text
@@ -126,13 +129,12 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_annotation_uri:
-    weight: 4
+  field_ark_enabled:
+    weight: 26
     settings:
-      size: 60
-      placeholder: ''
+      display_label: true
     third_party_settings: {  }
-    type: string_textfield
+    type: boolean_checkbox
     region: content
   field_pbc_ref_group:
     weight: 22
@@ -178,6 +180,22 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: pbf_widget
+    region: content
+  field_pece_geolocation:
+    weight: 28
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_latlng
+    region: content
+  field_pece_license:
+    weight: 27
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   langcode:
     type: language_select

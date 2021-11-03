@@ -1,0 +1,29 @@
+uuid: e9bb929e-c930-4030-8cf9-9f56384d32b9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_license
+    - node.type.pece_annotation
+    - taxonomy.vocabulary.licenses_vocabulary_licenses
+id: node.pece_annotation.field_pece_license
+field_name: field_pece_license
+entity_type: node
+bundle: pece_annotation
+label: License
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      licenses_vocabulary_licenses: licenses_vocabulary_licenses
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
