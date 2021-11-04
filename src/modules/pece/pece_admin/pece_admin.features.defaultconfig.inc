@@ -27,7 +27,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'access administration menu',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'admin_menu',
   );
@@ -37,7 +37,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'access administration pages',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'system',
   );
@@ -47,7 +47,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'administer feeds',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'feeds',
   );
@@ -57,7 +57,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'administer mini panels',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'panels_mini',
   );
@@ -67,7 +67,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'administer panelizer user user breadcrumbs',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'panelizer',
   );
@@ -78,7 +78,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'editor' => 'editor',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'panelizer',
   );
@@ -88,7 +88,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'administer panelizer user user context',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'panelizer',
   );
@@ -98,7 +98,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'administer panelizer user user defaults',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'panelizer',
   );
@@ -109,7 +109,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'editor' => 'editor',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'panelizer',
   );
@@ -119,7 +119,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'administer panelizer user user overview',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'panelizer',
   );
@@ -129,7 +129,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'administer panelizer user user settings',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'panelizer',
   );
@@ -139,7 +139,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'administer taxonomy',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'taxonomy',
   );
@@ -149,7 +149,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'administer themes',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'system',
   );
@@ -159,7 +159,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'administer users',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'user',
   );
@@ -169,7 +169,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'assign all roles',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'role_delegation',
   );
@@ -179,7 +179,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'bypass node access',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'node',
   );
@@ -189,7 +189,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'create mini panels',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'panels_mini',
   );
@@ -199,7 +199,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'create url aliases',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'path',
   );
@@ -209,7 +209,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'create site notices',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'site_notice',
   );
@@ -219,7 +219,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'delete any site notices',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'site_notice',
   );
@@ -229,7 +229,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'edit any site notices',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'site_notice',
   );
@@ -239,7 +239,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'have total control',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'total_control',
   );
@@ -249,7 +249,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'name' => 'revert revisions',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'node',
   );
@@ -260,7 +260,7 @@ function pece_admin_defaultconfig_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'node',
   );

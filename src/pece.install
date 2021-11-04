@@ -584,3 +584,22 @@ function pece_update_7122() {
   ));
 }
 
+/**
+ * Rebuild Default permissions for Administrator, Platform Director and Data Importer user role.
+ */
+function pece_update_7123() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  module_load_include('inc', 'pece_core', 'pece_core.functions');
+  module_load_include('inc', 'pece_core', 'pece_core.functions.admin');
+  // Delete previously created "platform-director" user role to recreate via features.
+  user_role_delete('platform-director');
+  if (module_exists('features')) {
+    features_revert(array('pece_core' => array('user_role')));
+  }
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_core');
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_admin');
+  // Rebuild administrator role permissions.
+  pece_core_rebuild_administrator_perms();
+  // Assign required permission to Data Importer role.
+  pece_set_permissions(pece_core_get_data_importer_role_perms());
+}
