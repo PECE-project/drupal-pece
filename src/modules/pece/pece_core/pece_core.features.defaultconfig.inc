@@ -28,7 +28,7 @@ function pece_core_defaultconfig_user_default_permissions() {
     'name' => 'access comments',
     'roles' => array(
       'authenticated user' => 'authenticated user',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'comment',
   );
@@ -38,7 +38,7 @@ function pece_core_defaultconfig_user_default_permissions() {
     'name' => 'administer comments',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'comment',
   );
@@ -48,7 +48,7 @@ function pece_core_defaultconfig_user_default_permissions() {
     'name' => 'cancel account',
     'roles' => array(
       'authenticated user' => 'authenticated user',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'user',
   );
@@ -59,7 +59,7 @@ function pece_core_defaultconfig_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'file_entity',
   );
@@ -70,7 +70,7 @@ function pece_core_defaultconfig_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'node',
   );
@@ -80,7 +80,7 @@ function pece_core_defaultconfig_user_default_permissions() {
     'name' => 'delete any pece_fieldsite content',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'node',
   );
@@ -91,7 +91,7 @@ function pece_core_defaultconfig_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'node',
   );
@@ -101,7 +101,7 @@ function pece_core_defaultconfig_user_default_permissions() {
     'name' => 'edit any pece_fieldsite content',
     'roles' => array(
       'administrator' => 'administrator',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'node',
   );
@@ -111,7 +111,7 @@ function pece_core_defaultconfig_user_default_permissions() {
     'name' => 'edit own comments',
     'roles' => array(
       'authenticated user' => 'authenticated user',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'comment',
   );
@@ -122,7 +122,7 @@ function pece_core_defaultconfig_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'node',
   );
@@ -132,7 +132,7 @@ function pece_core_defaultconfig_user_default_permissions() {
     'name' => 'post comments',
     'roles' => array(
       'authenticated user' => 'authenticated user',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'comment',
   );
@@ -143,7 +143,7 @@ function pece_core_defaultconfig_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'comment',
   );
@@ -154,7 +154,7 @@ function pece_core_defaultconfig_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-      'platform-director' => 'platform-director',
+      'Platform Director' => 'Platform Director',
     ),
     'module' => 'filter',
   );
