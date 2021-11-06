@@ -400,8 +400,6 @@ function pece_ark_operation_for_local_ark_data_creation_finished($success, $resu
  */
 function pece_ark_operation_for_remote_ark_data_update_finished($success, $results, $operations) {
   if ($success) {
-    dd('$results: ');
-    dd(print_r($results));
     // Here we could do something meaningful with the results.
     // We just display the number of nodes we processed...
     drupal_set_message(t('@count results processed in @requests HTTP requests.', array('@count' => count($results), '@requests' => _batch_ark_get_http_requests())));
