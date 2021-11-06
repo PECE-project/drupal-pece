@@ -101,8 +101,8 @@ class SearchApiViewsHandlerFilterFulltext extends SearchApiViewsHandlerFilterTex
     }
 
     // Don't validate on form reset.
-    if (!empty($form_state['triggering_element'])
-        && !empty($form['reset'])
+    if (!empty($form_state['triggering_element']['#value'])
+        && !empty($form['reset']['#value'])
         && $form_state['triggering_element']['#value'] === $form['reset']['#value']) {
       return;
     }
