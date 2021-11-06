@@ -53,6 +53,18 @@ function pece_core_defaultconfig_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'administer files'.
+  $permissions['administer files'] = array(
+    'name' => 'administer files',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'Platform Director' => 'Platform Director',
+      'Data Importer' => 'Data Importer',
+      'Manager' => 'Manager',
+    ),
+    'module' => 'file_entity',
+  );
+
   // Exported permission: 'create files'.
   $permissions['create files'] = array(
     'name' => 'create files',
