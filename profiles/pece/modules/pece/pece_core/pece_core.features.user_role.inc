@@ -24,9 +24,21 @@ function pece_core_user_default_roles() {
   );
 
   // Exported role: platform-director.
-  $roles['platform-director'] = array(
-    'name' => 'platform-director',
+  $roles['Platform Director'] = array(
+    'name' => 'Platform Director',
     'weight' => 6,
+  );
+
+  // Exported role: data-importer.
+  $roles['Data Importer'] = array(
+    'name' => 'Data Importer',
+    'weight' => 7,
+  );
+
+  // Exported role: Manager.
+  $roles['Manager'] = array(
+    'name' => 'Manager',
+    'weight' => 7,
   );
 
   return $roles;
