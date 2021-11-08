@@ -319,8 +319,11 @@ class SearchApiViewsQuery extends views_plugin_query {
       $this->query->setOption('search_api_bypass_access', TRUE);
     }
 
-    // Store the Views base path.
-    $this->query->setOption('search_api_base_path', $this->view->get_path());
+    // If the View and the Panel conspire to provide an overridden path then
+    // pass that through as the base path.
+    if (!empty($this->view->override_path) && strpos(current_path(), $this->view->override_path) !== 0) {
+      $this->query->setOption('search_api_base_path', $this->view->override_path);
+    }
 
     // Save query information for Views UI.
     $view->build_info['query'] = (string) $this->query;
