@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_video_tags
     - node.type.artifact_video
-    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.pece_tags
 id: node.artifact_video.field_video_tags
 field_name: field_video_tags
 entity_type: node
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      tags: tags
+      pece_tags: pece_tags
     sort:
       field: name
       direction: asc

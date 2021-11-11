@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_website_tags
     - node.type.pece_artifact_website
-    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.pece_tags
 id: node.pece_artifact_website.field_website_tags
 field_name: field_website_tags
 entity_type: node
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      tags: tags
+      pece_tags: pece_tags
     sort:
       field: name
       direction: asc

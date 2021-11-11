@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_photo_essay_tags
     - node.type.pece_photo_essay
-    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.pece_tags
 id: node.pece_photo_essay.field_photo_essay_tags
 field_name: field_photo_essay_tags
 entity_type: node
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      tags: tags
+      pece_tags: pece_tags
     sort:
       field: name
       direction: asc
