@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_analytic_tags
     - node.type.pece_analytic
-    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.pece_tags
 _core:
   default_config_hash: nCBlXW_jtPpOyfTwb8wc_hkayTR3FbA0VinbSkDLCqM
 id: node.pece_analytic.field_analytic_tags
@@ -22,7 +22,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      tags: tags
+      pece_tags: pece_tags
     sort:
       field: name
       direction: asc

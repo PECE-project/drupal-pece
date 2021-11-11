@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_pdf_tags
     - node.type.pece_artifact_pdf
-    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.pece_tags
   module:
     - entity_reference_revisions
 id: node.pece_artifact_pdf.field_pdf_tags
@@ -22,7 +22,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      tags: tags
+      pece_tags: pece_tags
     sort:
       field: name
       direction: asc
