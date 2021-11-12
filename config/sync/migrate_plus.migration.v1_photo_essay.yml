@@ -1,0 +1,87 @@
+uuid: 336e3c7c-4597-42db-8f5e-a170a609e241
+langcode: en
+status: true
+dependencies: {  }
+id: v1_photo_essay
+class: Drupal\node\Plugin\migrate\D7NodeTranslation
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Photo Essay v1'
+  - 'PECE v1'
+  - 'Drupal 7'
+  - Content
+migration_group: pece
+label: 'Migrate PECE Photo Essays'
+source:
+  plugin: v1_node
+  node_type: pece_photo_essay
+process:
+  nid: tnid
+  vid: vid
+  uid: node_uid
+  type:
+    plugin: default_value
+    default_value: pece_photo_essay
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: und
+  title: title
+  field_pece_project_ref:
+    plugin: default_value
+    source: field_pece_project_ref
+    default_value: null
+  field_photo_essay_contributor:
+    plugin: default_value
+    source: field_pece_contributors
+    default_value: null
+  body/format:
+    plugin: default_value
+    default_value: html
+  body/value:
+    plugin: extract
+    source: body
+    index:
+      - 0
+      - value
+    default: ''
+  body/summary:
+    plugin: extract
+    source: body
+    index:
+      - 0
+      - summary
+    default: ''
+  field_essay_thumbnail/target_id:
+    -
+      plugin: default_value
+      source: field_thumbnail
+      default_value:
+        -
+          fid: null
+    -
+      plugin: extract
+      index:
+        - 0
+        - fid
+      default: null
+  field_photo_essay_items: field_pece_photo_essay_items
+  field_pece_geolocation: locations
+  field_pece_license: field_pece_license
+  field_ark_enabled:
+    plugin: default_value
+    source: field_ark_enabled
+    default_value: null
+  field_photo_essay_tags: field_pece_tags
+destination:
+  plugin: 'entity_complete:node'
+  translations: true
+migration_dependencies:
+  required:
+    - v1_user
+    - v1_file
+    - v1_taxonomy_term_tags
+  optional:
+    - d7_field_instance
+    - d7_comment_field_instance
