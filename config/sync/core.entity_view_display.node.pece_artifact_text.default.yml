@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.pece_artifact_text.field_pbc_ref_group
     - field.field.node.pece_artifact_text.field_pbc_ref_role
     - field.field.node.pece_artifact_text.field_pbc_ref_user
+    - field.field.node.pece_artifact_text.field_pece_all_can_view
     - field.field.node.pece_artifact_text.field_pece_license
     - field.field.node.pece_artifact_text.field_pece_project_ref
     - field.field.node.pece_artifact_text.field_text_authors
@@ -73,6 +74,16 @@ content:
       link: true
     third_party_settings: {  }
     type: pbf_formatter_default
+    region: content
+  field_pece_all_can_view:
+    weight: 126
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_pece_license:
     weight: 115
