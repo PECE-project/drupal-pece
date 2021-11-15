@@ -57,3 +57,55 @@ function pece_access_node_access_records_alter(&$grants, NodeInterface $node) {
     }
   }
 }
+
+//- create hook records
+// - create hook grants
+
+/**
+ * Implements hook_access_node_grants().
+ * @param \Drupal\Core\Session\AccountInterface $account
+ * @param $op
+ *
+ * @return array
+ */
+function pece_access_node_grants(AccountInterface $account, $op) {
+  $grants = [];
+  $grants['pbf_field_pbc_ref_group'] = [];
+  $grants['pbf_role_id'] = [];
+  $grants['pbf_field_pbc_ref_group'] = pbf_get_user_group($account);
+  $grants['pbf_role_id'] = pbf_get_user_role($account);
+  return $grants;
+}
+/**
+ * Implements hook_node_access_records().
+ */
+function pece_access_node_access_records(NodeInterface $node) {
+  $records = [];
+  $records['pbf_field_pbc_ref_group'] = [
+    'group_id' => [
+      'type' => 'int',
+      'not null' => TRUE,
+      'description' => 'The group id.',
+    ],
+    'group_name' => [
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => TRUE,
+      'description' => 'The group name.',
+    ],
+  ];
+  $records['pbf_role_id'] = [
+    'role_id' => [
+      'type' => 'int',
+      'not null' => TRUE,
+      'description' => 'The role id.',
+    ],
+    'role_name' => [
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => TRUE,
+      'description' => 'The role name.',
+    ],
+  ];
+  return $records;
+}
