@@ -66,70 +66,70 @@ class Node extends D7Node {
       ->condition('fdfp.entity_id', $nid);
     $permission = $query->execute()->fetchField();
     $groups = $this->getGroupsByContent($nid);
+
     if ($permission == self::PERMISSION_RESTRICTED) {
-      // Check if content belongs to a group
+      // Check if content belongs to any group
       if (count($groups) == 0) {
         // Set permission by role Researchers (only owner and researchers can view).
         $this->setPermissionByRole($row, self::ROLE_RESEARCHER);
       }
       else {
-        // Check group access
-        $groupAccess = $this->checkGroupVisibility($groups);
+        // Check group access (public = 0, private = 1)
+        $groupAccess = $this->checkGroupsAccess($groups);
         // Get group content visibility
-        $groupContentVisibility = $this->checkContentGroupVisibility($nid);
+        $groupContentVisibility = $this->checkGroupsContentVisibility($groups);
 
-        // public == 0
         if ($groupAccess == 0) {
           if ($groupContentVisibility == 2)
+            // Set permission by group (only group members that are researchers can view).
             $this->setPermissionByGroup($row, $nid);
-
+          // Set permission by role Researchers
           $this->setPermissionByRole($row, self::ROLE_RESEARCHER);
         }
-        //private == 1
-        if ($groupAccess == 1) {
-          // default == 0, private == 2
-          if ($groupContentVisibility == 0 || $groupContentVisibility == 2)
-            $this->setPermissionByGroup($row, $nid);
 
+        if ($groupAccess == 1) {
+          if ($groupContentVisibility == 0 || $groupContentVisibility == 2)
+            // Set permission by group (only group members that are researchers can view).
+            $this->setPermissionByGroup($row, $nid);
+          // Set permission by role Researchers
           $this->setPermissionByRole($row, self::ROLE_RESEARCHER);
         }
       }
     }
 
     if ($permission == self::PERMISSION_OPEN) {
-      // Check if content belongs to a group
+      // Check if content belongs to any group
       if (count($groups) > 0) {
-        // Check group access
-        $groupAccess = $this->checkGroupVisibility($groups);
+        // Check group access (public = 0, private = 1)
+        $groupAccess = $this->checkGroupsAccess($groups);
         // Get group content visibility
-        $groupContentVisibility = $this->checkContentGroupVisibility($nid);
+        $groupContentVisibility = $this->checkGroupsContentVisibility($groups);
 
-        // group public == 0
         if ($groupAccess == 0) {
-          //group visibility private == 2
           if ($groupContentVisibility == 2)
+            // Only group members can see the content
             $this->setPermissionByGroup($row, $nid);
           else
-            // Set permission for all users see content
+            // All users can see the content
             $row->setSourceProperty('permission_all_user_view', true);
         }
-        //group private == 1
+
         if ($groupAccess == 1) {
-          // group visibility default == 0, private == 2
           if ($groupContentVisibility == 0 || $groupContentVisibility == 2)
+            // Only group members can see the content
             $this->setPermissionByGroup($row, $nid);
           else
-            // Set permission for all users see content
+            // All users can see the content
             $row->setSourceProperty('permission_all_user_view', true);
         }
       }
       else
-        // Set permission for all users see content
+        // All users see the content
         $row->setSourceProperty('permission_all_user_view', true);
     }
 
+    // Only owner can see content
     if ($permission == self::PERMISSION_PRIVATE) {
-      // Only owner can view
       $query = $this->select('node')
         ->fields('node', ['uid'])
         ->condition('node.nid', $nid);
@@ -142,7 +142,8 @@ class Node extends D7Node {
       ];
     }
 
-    $this->setPermissionByUser($row, $nid);
+    // Set permission for contributing user
+    $this->setPermissionContributor($row, $nid);
 
     // Set the permission in the row.
     $row->setSourceProperty('permission_by_user_view', $this->permissionByUserView);
@@ -152,14 +153,13 @@ class Node extends D7Node {
   }
 
   /**
+   * Add permission for group.
    * @throws Exception
    */
   private function setPermissionByGroup(&$row, $nid) {
-    // Get all permission in the table og_membership.
     $query = $this->select('og_membership', 'ogm')
       ->fields('ogm', ['gid']);
     $query->condition('ogm.etid', $nid);
-    // Get all permission by group
     $permissionByGroupView = $query->execute()->fetchCol();
     foreach ($permissionByGroupView as $key => $item) {
       $permissionByGroupView[$key] = [
@@ -174,21 +174,20 @@ class Node extends D7Node {
   }
 
   /**
+   * Add permission for contributors.
    * @throws Exception
    */
-  public function setPermissionByUser(&$row, $nid) {
-    // Get all contributors
+  public function setPermissionContributor(&$row, $nid) {
     $query = $this->select('field_data_field_pece_contributors', 'contributors')
       ->fields('contributors', ['field_pece_contributors_target_id']);
     $query->condition('contributors.entity_id', $nid);
-    // Get all permission by contributors
     $users = $query->execute()->fetchCol();
     foreach ($users as $key => $item) {
       if (array_search($item, array_column($this->permissionByUserView, 'target_id')) === false) {
         $this->permissionByUserView[] = [
           'target_id' => $item,
           'grant_view' => 1,
-          'grant_update' => 0,
+          'grant_update' => 1,
           'grant_delete' => 0,
         ];
       }
@@ -196,6 +195,7 @@ class Node extends D7Node {
   }
 
   /**
+   * Add permission by role
    * @throws Exception
    */
   public function setPermissionByRole(&$row, $role) {
@@ -209,28 +209,52 @@ class Node extends D7Node {
     $row->setSourceProperty('permission_by_role_view', $permissionByRoleView);
   }
 
-
   /**
+   * Check groups access.
    * @throws Exception
    */
-  public function checkGroupVisibility($groups): int
+  public function checkGroupsAccess($groups): int
   {
-    $visibility = 0;
+    $access = 0;
     foreach ($groups as $key => $item) {
       $query = $this->select('field_data_group_access', 'fdga')
         ->fields('fdga', ['group_access_value'])
         ->condition('fdga.entity_id', $item);
+      $access = $query->execute()->fetchField();
+      //"What was once Public cannot be hidden by mistake" by Reva
+      if ($access == 0)
+        break;
+    }
+    return $access;
+  }
+
+  /**
+   * Check groups visibility.
+   * @throws Exception
+   */
+  public function checkGroupsContentVisibility($groups): int
+  {
+    $visibility = 0;
+    foreach ($groups as $key => $item) {
+      $query = $this->select('field_data_group_content_access', 'fdgca')
+        ->fields('fdgca', ['group_content_access_value'])
+        ->condition('fdgca.entity_id', $item);
+      //default == 0, public == 1, private == 2
       $visibility = $query->execute()->fetchField();
       //"What was once Public cannot be hidden by mistake" by Reva
-      if ($visibility == 0)
+      if ($visibility == 1)
         break;
     }
     return $visibility;
   }
 
-  public function checkContentGroupVisibility($nid): int
+  /**
+   * TODO: Check 'Group content visibility' field functionality in content (not in group) with Reva
+   * Check the 'Group content visibility' field by content id
+   * @throws Exception
+   */
+  public function checkGroupContentVisibility($nid): int
   {
-    // Check group content visibility field.
     $query = $this->select('field_data_group_content_access', 'fdgca')
       ->fields('fdgca', ['group_content_access_value'])
       ->condition('fdgca.entity_id', $nid);
@@ -238,6 +262,10 @@ class Node extends D7Node {
     return $query->execute()->fetchField();
   }
 
+  /**
+   * Get the content groups
+   * @throws Exception
+   */
   public function getGroupsByContent($nid)
   {
     $query = $this->select('og_membership', 'ogm')
