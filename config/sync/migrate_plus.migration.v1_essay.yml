@@ -84,6 +84,18 @@ process:
     plugin: default_value
     source: field_pece_project_ref
     default_value: null
+  field_pbc_ref_user:
+    plugin: default_value
+    source: permission_by_user_view
+    default_value: null
+  field_pbc_ref_role:
+    plugin: default_value
+    source: permission_by_role_view
+    default_value: null
+  field_pece_all_can_view:
+    plugin: default_value
+    source: permission_all_user_view
+    default_value: false
 destination:
   plugin: 'entity_complete:node'
   translations: true
