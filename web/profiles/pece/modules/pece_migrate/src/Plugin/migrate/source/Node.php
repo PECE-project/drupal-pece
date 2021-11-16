@@ -41,6 +41,7 @@ class Node extends D7Node {
     $fields += ['permission_by_group_view' => $this->t('Permission by group')];
     $fields += ['permission_by_user_view' => $this->t('Permission by user')];
     $fields += ['permission_by_role_view' => $this->t('Permission by role')];
+    $fields += ['permission_all_user_view' => $this->t('Permission for all users')];
     return $fields;
   }
 
@@ -103,19 +104,28 @@ class Node extends D7Node {
         // Get group content visibility
         $groupContentVisibility = $this->checkContentGroupVisibility($nid);
 
-        // public == 0
+        // group public == 0
         if ($groupAccess == 0) {
-          //private == 2
+          //group visibility private == 2
           if ($groupContentVisibility == 2)
             $this->setPermissionByGroup($row, $nid);
+          else
+            // Set permission for all users see content
+            $row->setSourceProperty('permission_all_user_view', true);
         }
-        //private == 1
+        //group private == 1
         if ($groupAccess == 1) {
-          // default == 0, private == 2
+          // group visibility default == 0, private == 2
           if ($groupContentVisibility == 0 || $groupContentVisibility == 2)
             $this->setPermissionByGroup($row, $nid);
+          else
+            // Set permission for all users see content
+            $row->setSourceProperty('permission_all_user_view', true);
         }
       }
+      else
+        // Set permission for all users see content
+        $row->setSourceProperty('permission_all_user_view', true);
     }
 
     if ($permission == self::PERMISSION_PRIVATE) {
