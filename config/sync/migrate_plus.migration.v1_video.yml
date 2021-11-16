@@ -52,6 +52,18 @@ process:
   field_video_duration: field_pece_media_duration
   field_video_format: field_pece_file_format
   field_video_media: field_pece_media_video
+  field_pbc_ref_user:
+    plugin: default_value
+    source: permission_by_user_view
+    default_value: null
+  field_pbc_ref_role:
+    plugin: default_value
+    source: permission_by_role_view
+    default_value: null
+  field_pece_all_can_view:
+    plugin: default_value
+    source: permission_all_user_view
+    default_value: false
 destination:
   plugin: 'entity_complete:node'
   translations: true

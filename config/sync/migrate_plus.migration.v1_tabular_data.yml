@@ -51,6 +51,18 @@ process:
   field_tabular_media: field_pece_media_tabular
   field_tabular_attachment: field_pece_media_tablr_attach
   field_tabular_tags: field_pece_tags
+  field_pbc_ref_user:
+    plugin: default_value
+    source: permission_by_user_view
+    default_value: null
+  field_pbc_ref_role:
+    plugin: default_value
+    source: permission_by_role_view
+    default_value: null
+  field_pece_all_can_view:
+    plugin: default_value
+    source: permission_all_user_view
+    default_value: false
 destination:
   plugin: 'entity_complete:node'
   translations: true
