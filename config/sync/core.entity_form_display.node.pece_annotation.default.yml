@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.pece_annotation.field_pbc_ref_group
     - field.field.node.pece_annotation.field_pbc_ref_role
     - field.field.node.pece_annotation.field_pbc_ref_user
+    - field.field.node.pece_annotation.field_pece_all_can_view
     - field.field.node.pece_annotation.field_pece_geolocation
     - field.field.node.pece_annotation.field_pece_license
     - node.type.pece_annotation
@@ -24,24 +25,27 @@ third_party_settings:
   field_group:
     group_permissions:
       children:
-        - group_conditions_permission
+        - field_pece_all_can_view
+        - group_or_permission
+        - group_and_permission
       parent_name: ''
       weight: 13
       format_type: details
       region: content
       format_settings:
         description: 'Set permissions to view, update and delete this content.'
+        open: true
         id: permissions
         classes: ''
-        open: false
+        show_empty_fields: false
         required_fields: false
       label: Permissions
     group_or_permission:
       children:
         - field_pbc_ref_user
-      parent_name: group_conditions_permission
-      weight: 21
-      format_type: accordion_item
+      parent_name: group_permissions
+      weight: 24
+      format_type: details
       region: content
       format_settings:
         id: ''
@@ -49,14 +53,16 @@ third_party_settings:
         formatter: closed
         required_fields: false
         description: ''
+        effect: none
+        open: false
       label: OR
     group_and_permission:
       children:
         - field_pbc_ref_group
         - field_pbc_ref_role
-      parent_name: group_conditions_permission
-      weight: 22
-      format_type: accordion_item
+      parent_name: group_permissions
+      weight: 25
+      format_type: details
       region: content
       format_settings:
         id: ''
@@ -64,20 +70,9 @@ third_party_settings:
         formatter: closed
         required_fields: true
         description: ''
+        effect: none
+        open: false
       label: AND
-    group_conditions_permission:
-      children:
-        - group_or_permission
-        - group_and_permission
-      parent_name: group_permissions
-      weight: 20
-      format_type: accordion
-      region: content
-      format_settings:
-        id: ''
-        classes: ''
-        effect: bounceslide
-      label: Conditions
 id: node.pece_annotation.default
 targetEntityType: node
 bundle: pece_annotation
@@ -152,7 +147,7 @@ content:
     type: pbf_widget
     region: content
   field_pbc_ref_role:
-    weight: 23
+    weight: 24
     settings:
       grant_global: 0
       grant_public: 1
@@ -180,6 +175,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: pbf_widget
+    region: content
+  field_pece_all_can_view:
+    weight: 23
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_pece_geolocation:
     weight: 28

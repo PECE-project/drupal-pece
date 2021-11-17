@@ -17,16 +17,68 @@ dependencies:
     - field.field.node.pece_artifact_fieldnote.field_pbc_ref_group
     - field.field.node.pece_artifact_fieldnote.field_pbc_ref_role
     - field.field.node.pece_artifact_fieldnote.field_pbc_ref_user
+    - field.field.node.pece_artifact_fieldnote.field_pece_all_can_view
     - field.field.node.pece_artifact_fieldnote.field_pece_license
     - field.field.node.pece_artifact_fieldnote.field_pece_project_ref
     - node.type.pece_artifact_fieldnote
   module:
     - address
     - datetime
+    - field_group
     - languagefield
     - path
     - pbf
     - text
+third_party_settings:
+  field_group:
+    group_permissions:
+      children:
+        - field_pece_all_can_view
+        - group_or
+        - group_and
+      parent_name: ''
+      weight: 15
+      format_type: details
+      region: content
+      format_settings:
+        show_empty_fields: false
+        id: ''
+        classes: ''
+        description: ''
+        open: true
+        required_fields: true
+      label: Permissions
+    group_or:
+      children:
+        - field_pbc_ref_user
+      parent_name: group_permissions
+      weight: 25
+      format_type: details
+      region: content
+      format_settings:
+        show_empty_fields: false
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+      label: OR
+    group_and:
+      children:
+        - field_pbc_ref_group
+        - field_pbc_ref_role
+      parent_name: group_permissions
+      weight: 26
+      format_type: details
+      region: content
+      format_settings:
+        show_empty_fields: false
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+      label: AND
 id: node.pece_artifact_fieldnote.default
 targetEntityType: node
 bundle: pece_artifact_fieldnote
@@ -34,7 +86,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 121
+    weight: 8
     settings:
       rows: 9
       summary_rows: 3
@@ -44,19 +96,19 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   field_ark_enabled:
-    weight: 125
+    weight: 11
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_fieldnote_authors:
-    weight: 132
+    weight: 19
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -66,7 +118,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_fieldnote_contributors:
-    weight: 129
+    weight: 16
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -76,13 +128,13 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_fieldnote_created_date:
-    weight: 130
+    weight: 17
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
     region: content
   field_fieldnote_fieldsite:
-    weight: 134
+    weight: 21
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -92,14 +144,14 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_fieldnote_fieldsite_local:
-    weight: 135
+    weight: 22
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_fieldnote_language:
-    weight: 133
+    weight: 20
     settings:
       format:
         name: name
@@ -107,13 +159,13 @@ content:
     type: languagefield_select
     region: content
   field_fieldnote_location:
-    weight: 136
+    weight: 23
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
   field_fieldnote_source:
-    weight: 131
+    weight: 18
     settings:
       rows: 5
       placeholder: ''
@@ -121,7 +173,7 @@ content:
     type: string_textarea
     region: content
   field_fieldnote_tags:
-    weight: 137
+    weight: 24
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -131,7 +183,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_pbc_ref_group:
-    weight: 126
+    weight: 12
     settings:
       grant_global: 0
       grant_public: 1
@@ -146,7 +198,7 @@ content:
     type: pbf_widget
     region: content
   field_pbc_ref_role:
-    weight: 127
+    weight: 13
     settings:
       grant_global: 0
       grant_public: 1
@@ -161,7 +213,7 @@ content:
     type: pbf_widget
     region: content
   field_pbc_ref_user:
-    weight: 128
+    weight: 14
     settings:
       grant_global: 0
       grant_public: 1
@@ -175,8 +227,15 @@ content:
     third_party_settings: {  }
     type: pbf_widget
     region: content
+  field_pece_all_can_view:
+    weight: 24
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_pece_license:
-    weight: 124
+    weight: 10
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -186,7 +245,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_pece_project_ref:
-    weight: 122
+    weight: 9
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -197,14 +256,14 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 2
+    weight: 1
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -212,26 +271,26 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 4
     region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 120
+    weight: 7
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 16
+    weight: 5
     region: content
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
@@ -239,7 +298,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 2
     settings:
       match_operator: CONTAINS
       size: 60

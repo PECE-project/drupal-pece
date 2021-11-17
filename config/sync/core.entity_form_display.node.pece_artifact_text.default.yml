@@ -35,13 +35,27 @@ third_party_settings:
     group_permissions:
       children:
         - field_pece_all_can_view
-        - field_pbc_ref_group
-        - field_pbc_ref_role
-        - field_pbc_ref_user
+        - group_or
+        - group_and
       parent_name: ''
-      weight: 13
-      format_type: fieldset
+      weight: 10
+      format_type: details
       region: content
+      format_settings:
+        description: ''
+        open: true
+        required_fields: true
+        id: ''
+        classes: ''
+        show_empty_fields: false
+      label: Permissions
+    group_or:
+      children:
+        - field_pbc_ref_user
+      parent_name: group_permissions
+      weight: 11
+      format_type: details
+      region: hidden
       format_settings:
         show_empty_fields: false
         id: ''
@@ -49,8 +63,23 @@ third_party_settings:
         description: ''
         open: false
         required_fields: true
-        weight: 0
-      label: Permissions
+      label: OR
+    group_and:
+      children:
+        - field_pbc_ref_group
+        - field_pbc_ref_role
+      parent_name: group_permissions
+      weight: 12
+      format_type: details
+      region: hidden
+      format_settings:
+        show_empty_fields: false
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+      label: AND
 id: node.pece_artifact_text.default
 targetEntityType: node
 bundle: pece_artifact_text
@@ -73,14 +102,14 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_ark_enabled:
-    weight: 15
+    weight: 11
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_pbc_ref_group:
-    weight: 11
+    weight: 13
     settings:
       grant_global: 0
       grant_public: 1
@@ -95,7 +124,7 @@ content:
     type: pbf_widget
     region: content
   field_pbc_ref_role:
-    weight: 12
+    weight: 14
     settings:
       grant_global: 0
       grant_public: 1
@@ -110,7 +139,7 @@ content:
     type: pbf_widget
     region: content
   field_pbc_ref_user:
-    weight: 13
+    weight: 15
     settings:
       grant_global: 0
       grant_public: 1
@@ -132,7 +161,7 @@ content:
     type: boolean_checkbox
     region: content
   field_pece_license:
-    weight: 16
+    weight: 12
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -152,7 +181,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_text_authors:
-    weight: 20
+    weight: 16
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -162,7 +191,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_text_contributors:
-    weight: 17
+    weight: 13
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -172,13 +201,13 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_text_created_date:
-    weight: 21
+    weight: 17
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
     region: content
   field_text_crit_commentary:
-    weight: 18
+    weight: 14
     settings:
       rows: 5
       placeholder: ''
@@ -186,7 +215,7 @@ content:
     type: string_textarea
     region: content
   field_text_fieldsite:
-    weight: 23
+    weight: 20
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -196,7 +225,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_text_language:
-    weight: 22
+    weight: 18
     settings:
       format:
         name: name
@@ -204,13 +233,13 @@ content:
     type: languagefield_select
     region: content
   field_text_location:
-    weight: 25
+    weight: 22
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
   field_text_source:
-    weight: 19
+    weight: 15
     settings:
       rows: 5
       placeholder: ''
@@ -218,7 +247,7 @@ content:
     type: string_textarea
     region: content
   field_text_tags:
-    weight: 26
+    weight: 23
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -228,7 +257,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_text_use_fieldsite_local:
-    weight: 24
+    weight: 21
     settings:
       display_label: true
     third_party_settings: {  }
