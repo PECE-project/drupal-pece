@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.pece_photo_essay.field_pbc_ref_group
     - field.field.node.pece_photo_essay.field_pbc_ref_role
     - field.field.node.pece_photo_essay.field_pbc_ref_user
+    - field.field.node.pece_photo_essay.field_pece_all_can_view
     - field.field.node.pece_photo_essay.field_pece_geolocation
     - field.field.node.pece_photo_essay.field_pece_license
     - field.field.node.pece_photo_essay.field_pece_project_ref
@@ -18,12 +19,63 @@ dependencies:
     - image.style.thumbnail
     - node.type.pece_photo_essay
   module:
+    - field_group
     - geolocation
     - image
     - paragraphs
     - path
     - pbf
     - text
+third_party_settings:
+  field_group:
+    group_permissions:
+      children:
+        - field_pece_all_can_view
+        - group_or
+        - group_and
+      parent_name: ''
+      weight: 5
+      format_type: details
+      region: content
+      format_settings:
+        show_empty_fields: false
+        id: ''
+        classes: ''
+        description: ''
+        open: true
+        required_fields: true
+      label: Permissions
+    group_or:
+      children:
+        - field_pbc_ref_user
+      parent_name: group_permissions
+      weight: 22
+      format_type: details
+      region: content
+      format_settings:
+        show_empty_fields: false
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+      label: OR
+    group_and:
+      children:
+        - field_pbc_ref_group
+        - field_pbc_ref_role
+      parent_name: group_permissions
+      weight: 23
+      format_type: details
+      region: hidden
+      format_settings:
+        show_empty_fields: false
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+      label: AND
 id: node.pece_photo_essay.default
 targetEntityType: node
 bundle: pece_photo_essay
@@ -31,7 +83,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 2
+    weight: 1
     settings:
       rows: 9
       summary_rows: 3
@@ -41,19 +93,19 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 14
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   field_ark_enabled:
-    weight: 28
+    weight: 15
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_pbc_ref_group:
-    weight: 7
+    weight: 2
     settings:
       grant_global: 0
       grant_public: 1
@@ -68,7 +120,7 @@ content:
     type: pbf_widget
     region: content
   field_pbc_ref_role:
-    weight: 8
+    weight: 3
     settings:
       grant_global: 0
       grant_public: 1
@@ -83,7 +135,7 @@ content:
     type: pbf_widget
     region: content
   field_pbc_ref_user:
-    weight: 9
+    weight: 4
     settings:
       grant_global: 0
       grant_public: 1
@@ -97,14 +149,21 @@ content:
     third_party_settings: {  }
     type: pbf_widget
     region: content
+  field_pece_all_can_view:
+    weight: 21
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_pece_geolocation:
-    weight: 32
+    weight: 18
     settings: {  }
     third_party_settings: {  }
     type: geolocation_latlng
     region: content
   field_pece_license:
-    weight: 30
+    weight: 16
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -114,7 +173,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_pece_project_ref:
-    weight: 26
+    weight: 13
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -124,7 +183,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_photo_essay_contributor:
-    weight: 27
+    weight: 14
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -135,7 +194,7 @@ content:
     region: content
   field_photo_essay_items:
     type: entity_reference_paragraphs
-    weight: 33
+    weight: 19
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -146,7 +205,7 @@ content:
     third_party_settings: {  }
     region: content
   field_photo_essay_tags:
-    weight: 29
+    weight: 20
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -156,7 +215,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_photo_essay_thumbnail:
-    weight: 31
+    weight: 17
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -165,14 +224,14 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 16
+    weight: 12
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 12
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -180,21 +239,21 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 13
+    weight: 9
     region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 11
+    weight: 7
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 10
+    weight: 6
     region: content
     third_party_settings: {  }
   title:
@@ -207,7 +266,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 15
+    weight: 11
     settings:
       match_operator: CONTAINS
       size: 60

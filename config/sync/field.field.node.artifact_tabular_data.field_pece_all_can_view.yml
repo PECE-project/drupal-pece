@@ -1,0 +1,23 @@
+uuid: 5c7b6d48-7601-4810-8182-358ace3049ba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_all_can_view
+    - node.type.artifact_tabular_data
+id: node.artifact_tabular_data.field_pece_all_can_view
+field_name: field_pece_all_can_view
+entity_type: node
+bundle: artifact_tabular_data
+label: 'All user can view this content'
+description: 'If you check this option, then all users (including anonymous users) can see this content.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

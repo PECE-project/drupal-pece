@@ -8,10 +8,10 @@ dependencies:
     - field.field.node.pece_memo.field_pbc_ref_group
     - field.field.node.pece_memo.field_pbc_ref_role
     - field.field.node.pece_memo.field_pbc_ref_user
+    - field.field.node.pece_memo.field_pece_all_can_view
     - field.field.node.pece_memo.field_pece_contributors
     - field.field.node.pece_memo.field_pece_tags
     - field.field.node.pece_memo.field_pece_uri
-    - field.field.node.pece_memo.field_permissions
     - node.type.pece_memo
   module:
     - text
@@ -38,9 +38,9 @@ hidden:
   field_pbc_ref_group: true
   field_pbc_ref_role: true
   field_pbc_ref_user: true
+  field_pece_all_can_view: true
   field_pece_contributors: true
   field_pece_tags: true
   field_pece_uri: true
-  field_permissions: true
   langcode: true
   search_api_excerpt: true

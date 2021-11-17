@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_pbc_ref_group
     - field.field.node.pece_timeline_essay.field_pbc_ref_role
     - field.field.node.pece_timeline_essay.field_pbc_ref_user
+    - field.field.node.pece_timeline_essay.field_pece_all_can_view
     - field.field.node.pece_timeline_essay.field_pece_geolocation
     - field.field.node.pece_timeline_essay.field_pece_license
     - field.field.node.pece_timeline_essay.field_pece_project_ref
@@ -35,6 +36,16 @@ content:
     region: content
   field_ark_enabled:
     weight: 2
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_pece_all_can_view:
+    weight: 9
     label: above
     settings:
       format: default

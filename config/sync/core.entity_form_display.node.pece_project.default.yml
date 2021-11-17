@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.pece_project.field_pbc_ref_group
     - field.field.node.pece_project.field_pbc_ref_role
     - field.field.node.pece_project.field_pbc_ref_user
+    - field.field.node.pece_project.field_pece_all_can_view
     - field.field.node.pece_project.field_pece_geolocation
     - field.field.node.pece_project.field_project_consent_form_file
     - field.field.node.pece_project.field_project_contributors
@@ -28,6 +29,7 @@ dependencies:
     - node.type.pece_project
   module:
     - datetime_range
+    - field_group
     - file
     - geolocation
     - image
@@ -35,6 +37,56 @@ dependencies:
     - path
     - pbf
     - text
+third_party_settings:
+  field_group:
+    group_permissions:
+      children:
+        - field_pece_all_can_view
+        - group_or
+        - group_and
+      parent_name: ''
+      weight: 22
+      format_type: details
+      region: content
+      format_settings:
+        show_empty_fields: false
+        id: ''
+        classes: ''
+        description: ''
+        open: true
+        required_fields: true
+      label: Permissions
+    group_or:
+      children:
+        - field_pbc_ref_user
+      parent_name: group_permissions
+      weight: 32
+      format_type: details
+      region: content
+      format_settings:
+        show_empty_fields: false
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+      label: OR
+    group_and:
+      children:
+        - field_pbc_ref_group
+        - field_pbc_ref_role
+      parent_name: group_permissions
+      weight: 33
+      format_type: details
+      region: content
+      format_settings:
+        show_empty_fields: false
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+      label: AND
 id: node.pece_project.default
 targetEntityType: node
 bundle: pece_project
@@ -42,28 +94,29 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 121
+    weight: 9
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
+      show_summary: false
     third_party_settings: {  }
     region: content
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
   field_ark_enabled:
-    weight: 138
+    weight: 18
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_pbc_ref_group:
-    weight: 139
+    weight: 19
     settings:
       grant_global: 0
       grant_public: 1
@@ -78,7 +131,7 @@ content:
     type: pbf_widget
     region: content
   field_pbc_ref_role:
-    weight: 140
+    weight: 20
     settings:
       grant_global: 0
       grant_public: 1
@@ -93,7 +146,7 @@ content:
     type: pbf_widget
     region: content
   field_pbc_ref_user:
-    weight: 141
+    weight: 21
     settings:
       grant_global: 0
       grant_public: 1
@@ -107,21 +160,28 @@ content:
     third_party_settings: {  }
     type: pbf_widget
     region: content
+  field_pece_all_can_view:
+    weight: 31
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_pece_geolocation:
-    weight: 137
+    weight: 17
     settings: {  }
     third_party_settings: {  }
     type: geolocation_latlng
     region: content
   field_project_consent_form_file:
-    weight: 133
+    weight: 13
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
     region: content
   field_project_contributors:
-    weight: 142
+    weight: 23
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -131,7 +191,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_project_design_group:
-    weight: 149
+    weight: 29
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -141,7 +201,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_project_featured_essays:
-    weight: 147
+    weight: 27
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -151,7 +211,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_project_fund_agency_link:
-    weight: 134
+    weight: 14
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -159,7 +219,7 @@ content:
     type: link_default
     region: content
   field_project_image:
-    weight: 135
+    weight: 15
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -167,7 +227,7 @@ content:
     type: image_image
     region: content
   field_project_image_banner:
-    weight: 143
+    weight: 24
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -175,7 +235,7 @@ content:
     type: image_image
     region: content
   field_project_institution_link:
-    weight: 128
+    weight: 11
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -183,14 +243,14 @@ content:
     type: link_default
     region: content
   field_project_intv_request_file:
-    weight: 132
+    weight: 12
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
     region: content
   field_project_lead:
-    weight: 144
+    weight: 25
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -200,7 +260,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_project_open_notes:
-    weight: 145
+    weight: 26
     settings:
       rows: 5
       placeholder: ''
@@ -208,13 +268,13 @@ content:
     type: string_textarea
     region: content
   field_project_start_end_date:
-    weight: 127
+    weight: 10
     settings: {  }
     third_party_settings: {  }
     type: daterange_default
     region: content
   field_project_struct_analytics:
-    weight: 148
+    weight: 28
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -224,7 +284,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_project_subst_logic:
-    weight: 136
+    weight: 16
     settings:
       match_operator: CONTAINS
       size: 60
@@ -234,7 +294,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_project_tags:
-    weight: 146
+    weight: 30
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -245,14 +305,14 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 2
+    weight: 1
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -260,39 +320,39 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 5
     region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 120
+    weight: 8
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 16
+    weight: 6
     region: content
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 3
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 2
     settings:
       match_operator: CONTAINS
       size: 60

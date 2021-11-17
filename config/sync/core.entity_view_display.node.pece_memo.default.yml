@@ -7,13 +7,12 @@ dependencies:
     - field.field.node.pece_memo.field_pbc_ref_group
     - field.field.node.pece_memo.field_pbc_ref_role
     - field.field.node.pece_memo.field_pbc_ref_user
+    - field.field.node.pece_memo.field_pece_all_can_view
     - field.field.node.pece_memo.field_pece_contributors
     - field.field.node.pece_memo.field_pece_tags
     - field.field.node.pece_memo.field_pece_uri
-    - field.field.node.pece_memo.field_permissions
     - node.type.pece_memo
   module:
-    - options
     - pbf
     - text
     - user
@@ -53,6 +52,16 @@ content:
     third_party_settings: {  }
     type: pbf_formatter_default
     region: content
+  field_pece_all_can_view:
+    weight: 8
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
   field_pece_contributors:
     weight: 2
     label: above
@@ -76,13 +85,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
-    region: content
-  field_permissions:
-    weight: 3
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
     region: content
 hidden:
   langcode: true

@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_pdf_source
     - field.field.node.pece_artifact_pdf.field_pdf_tags
     - field.field.node.pece_artifact_pdf.field_pdf_use_fieldsite_local
+    - field.field.node.pece_artifact_pdf.field_pece_all_can_view
     - field.field.node.pece_artifact_pdf.field_pece_license
     - field.field.node.pece_artifact_pdf.field_pece_project_ref
     - node.type.pece_artifact_pdf
@@ -139,6 +140,16 @@ content:
     region: content
   field_pdf_use_fieldsite_local:
     weight: 112
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_pece_all_can_view:
+    weight: 123
     label: above
     settings:
       format: default
