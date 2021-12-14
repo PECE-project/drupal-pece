@@ -12,9 +12,80 @@ dependencies:
     - node.type.pece_substantive_logic
   module:
     - image
+    - layout_builder
     - link
     - text
     - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          column_widths: 75-25
+          context_mapping: {  }
+        components:
+          52beb0a0-a6f1-4784-86a6-b5df40e533fb:
+            uuid: 52beb0a0-a6f1-4784-86a6-b5df40e533fb
+            region: first
+            configuration:
+              id: 'field_block:node:pece_substantive_logic:body'
+              label: Body
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          cfac6a25-23a0-4b7a-bc6a-ba2bb57d894c:
+            uuid: cfac6a25-23a0-4b7a-bc6a-ba2bb57d894c
+            region: second
+            configuration:
+              id: 'field_block:node:pece_substantive_logic:field_subst_logic_thumbnail'
+              label: Thumbnail
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: image
+                settings:
+                  image_style: ''
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          b79ff468-8490-481e-a82d-35c28a340148:
+            uuid: b79ff468-8490-481e-a82d-35c28a340148
+            region: second
+            configuration:
+              id: 'field_block:node:pece_substantive_logic:field_subst_logic_tags'
+              label: Tags
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
+        third_party_settings: {  }
 _core:
   default_config_hash: 0Nq5eY0mzek0D3DERvG8qF0Ld0E6bTJVVKiYq1fAjpU
 id: node.pece_substantive_logic.default

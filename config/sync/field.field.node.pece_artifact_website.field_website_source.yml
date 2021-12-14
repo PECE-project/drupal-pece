@@ -1,10 +1,12 @@
-uuid: ad4c91e5-ed78-4aae-9b7d-7f8eb554fd80
+uuid: c9e6da2f-cfb1-44c3-833c-2f25036ceb24
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_website_source
     - node.type.pece_artifact_website
+  module:
+    - text
 id: node.pece_artifact_website.field_website_source
 field_name: field_website_source
 entity_type: node
@@ -16,4 +18,4 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: string_long
+field_type: text_long

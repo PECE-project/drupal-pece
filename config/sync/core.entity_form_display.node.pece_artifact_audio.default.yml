@@ -32,6 +32,7 @@ dependencies:
     - media_library
     - path
     - pbf
+    - text
 third_party_settings:
   field_group:
     group_permissions:
@@ -127,12 +128,12 @@ content:
     type: datetime_default
     region: content
   field_audio_crit_commentary:
-    weight: 10
+    weight: 27
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: string_textarea
+    type: text_textarea
     region: content
   field_audio_duration:
     weight: 23
@@ -182,12 +183,12 @@ content:
     third_party_settings: {  }
     region: content
   field_audio_source:
-    weight: 11
+    weight: 28
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: string_textarea
+    type: text_textarea
     region: content
   field_audio_tags:
     type: entity_reference_autocomplete

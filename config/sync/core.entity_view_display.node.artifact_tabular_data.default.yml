@@ -28,9 +28,259 @@ dependencies:
     - datetime
     - file
     - languagefield
+    - layout_builder
     - pbf
     - text
     - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          column_widths: 50-50
+          context_mapping: {  }
+        components:
+          59ac16d9-9bde-46cf-a7ce-3e5484ec09e6:
+            uuid: 59ac16d9-9bde-46cf-a7ce-3e5484ec09e6
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_tabular_media'
+              label: 'Tabular data Document'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: file_default
+                settings:
+                  use_description_as_link_text: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          8d85f440-9494-4bbb-ba35-3a5b0ecee3b7:
+            uuid: 8d85f440-9494-4bbb-ba35-3a5b0ecee3b7
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_tabular_attachment'
+              label: Attachment
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: file_default
+                settings:
+                  use_description_as_link_text: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
+          ba2e4e2e-2d96-4641-8286-1893226dd85d:
+            uuid: ba2e4e2e-2d96-4641-8286-1893226dd85d
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_pece_license'
+              label: License
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
+          d61b3427-3a63-4e06-a4c6-8208d0100490:
+            uuid: d61b3427-3a63-4e06-a4c6-8208d0100490
+            region: first
+            configuration:
+              id: 'extra_field_block:node:artifact_tabular_data:links'
+              label: Links
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 3
+          919adb6e-9c6c-4bd6-a6c7-ba6688c7bbc7:
+            uuid: 919adb6e-9c6c-4bd6-a6c7-ba6688c7bbc7
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_tabular_authors'
+              label: Creator(s)
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          5d74738d-9125-45c7-aa57-f91c7c735524:
+            uuid: 5d74738d-9125-45c7-aa57-f91c7c735524
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_tabular_created_date'
+              label: 'Created Date'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: datetime_default
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
+          37580eb9-fa4c-49b2-bc3d-cf6ee6292ea6:
+            uuid: 37580eb9-fa4c-49b2-bc3d-cf6ee6292ea6
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_tabular_contributors'
+              label: Contributors
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
+          8e8d044f-c3a5-446f-ab6b-144cc9b01d93:
+            uuid: 8e8d044f-c3a5-446f-ab6b-144cc9b01d93
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_tabular_fieldsite'
+              label: Fieldsite
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 3
+          f80d71ee-b2c9-49f3-bb2e-d4957a282e0d:
+            uuid: f80d71ee-b2c9-49f3-bb2e-d4957a282e0d
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:langcode'
+              label: Language
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: language
+                settings:
+                  link_to_entity: false
+                  native_language: false
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 6
+          2559331f-e3ce-4172-a031-3fe07bc73754:
+            uuid: 2559331f-e3ce-4172-a031-3fe07bc73754
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_tabular_tags'
+              label: Tags
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 7
+          361390d2-e88d-45f6-823e-9df66712af9d:
+            uuid: 361390d2-e88d-45f6-823e-9df66712af9d
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_tabular_location'
+              label: Location
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: address_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 8
+          07b9984d-d876-44c2-92dc-5d4a20e32721:
+            uuid: 07b9984d-d876-44c2-92dc-5d4a20e32721
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:artifact_tabular_data:field_tabular_crit_commentary'
+              formatter:
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+                type: text_default
+            additional: {  }
+            weight: 4
+          03c41cb1-260d-4b29-8560-24ae14e0a00f:
+            uuid: 03c41cb1-260d-4b29-8560-24ae14e0a00f
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:artifact_tabular_data:field_tabular_source'
+              formatter:
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+                type: text_default
+            additional: {  }
+            weight: 5
+        third_party_settings: {  }
 id: node.artifact_tabular_data.default
 targetEntityType: node
 bundle: artifact_tabular_data
@@ -130,12 +380,12 @@ content:
     type: datetime_default
     region: content
   field_tabular_crit_commentary:
-    weight: 118
+    weight: 121
     label: above
     settings: {  }
     third_party_settings: {  }
     type: text_default
-    region: content
+    region: first
   field_tabular_fieldsite:
     weight: 113
     label: above
@@ -180,12 +430,12 @@ content:
     type: file_default
     region: content
   field_tabular_source:
-    weight: 111
+    weight: 122
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
-    region: content
+    type: text_default
+    region: first
   field_tabular_tags:
     weight: 109
     label: above

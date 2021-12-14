@@ -1,16 +1,16 @@
-uuid: 8a3742fe-6ee3-4c92-a610-d287735621d9
+uuid: 05e7fe11-aea4-4c9d-810b-228ab1ac146f
 langcode: en
 status: true
 dependencies:
   module:
     - node
+    - text
 id: node.field_audio_source
 field_name: field_audio_source
 entity_type: node
-type: string_long
-settings:
-  case_sensitive: false
-module: core
+type: text_long
+settings: {  }
+module: text
 locked: false
 cardinality: 1
 translatable: true

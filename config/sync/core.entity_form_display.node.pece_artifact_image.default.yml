@@ -33,6 +33,7 @@ dependencies:
     - media_library
     - path
     - pbf
+    - text
 third_party_settings:
   field_group:
     group_permissions:
@@ -128,12 +129,12 @@ content:
     type: datetime_default
     region: content
   field_image_crit_commentary:
-    weight: 9
+    weight: 29
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: string_textarea
+    type: text_textarea
     region: content
   field_image_fieldsite:
     weight: 13
@@ -175,12 +176,12 @@ content:
     type: address_default
     region: content
   field_image_source:
-    weight: 10
+    weight: 30
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: string_textarea
+    type: text_textarea
     region: content
   field_image_tags:
     type: entity_reference_autocomplete

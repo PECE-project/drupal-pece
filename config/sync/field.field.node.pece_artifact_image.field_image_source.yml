@@ -1,10 +1,12 @@
-uuid: 7bae2273-e25a-4db9-a50c-3b66ec05aade
+uuid: d4476b9f-cb07-49c9-bbaf-006df5003e3d
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_image_source
     - node.type.pece_artifact_image
+  module:
+    - text
 id: node.pece_artifact_image.field_image_source
 field_name: field_image_source
 entity_type: node
@@ -16,4 +18,4 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: string_long
+field_type: text_long

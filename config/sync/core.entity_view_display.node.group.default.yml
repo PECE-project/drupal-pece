@@ -9,9 +9,79 @@ dependencies:
     - field.field.node.group.field_pece_project_ref
     - node.type.group
   module:
+    - layout_builder
     - options
     - text
     - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          column_widths: 50-50
+          context_mapping: {  }
+        components:
+          3030c47a-891c-4b0a-a401-e32a2d2004be:
+            uuid: 3030c47a-891c-4b0a-a401-e32a2d2004be
+            region: first
+            configuration:
+              id: 'field_block:node:group:body'
+              label: Body
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          5a0981e4-6970-4e88-b272-b86c41b9f192:
+            uuid: 5a0981e4-6970-4e88-b272-b86c41b9f192
+            region: second
+            configuration:
+              id: 'field_block:node:group:field_pece_project_ref'
+              label: 'Cite as part of...'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          c071ea80-d91b-4700-8633-376abd1fbd85:
+            uuid: c071ea80-d91b-4700-8633-376abd1fbd85
+            region: second
+            configuration:
+              id: 'field_block:node:group:field_group_subst_logic'
+              label: 'Substantive Logic'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
+        third_party_settings: {  }
 id: node.group.default
 targetEntityType: node
 bundle: group
