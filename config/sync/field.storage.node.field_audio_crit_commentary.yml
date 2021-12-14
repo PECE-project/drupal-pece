@@ -1,16 +1,16 @@
-uuid: c4d847ce-4ca6-47fc-9cb9-a6a546ec1f0d
+uuid: 2f0a8d85-6bb0-4fe8-a4e1-50e658392831
 langcode: en
 status: true
 dependencies:
   module:
     - node
+    - text
 id: node.field_audio_crit_commentary
 field_name: field_audio_crit_commentary
 entity_type: node
-type: string_long
-settings:
-  case_sensitive: false
-module: core
+type: text_long
+settings: {  }
+module: text
 locked: false
 cardinality: 1
 translatable: true

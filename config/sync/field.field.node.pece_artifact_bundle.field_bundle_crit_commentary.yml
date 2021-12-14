@@ -1,19 +1,21 @@
-uuid: 1faf7efb-bc5f-4587-ab20-e35393e9b0be
+uuid: 84c00df7-2ee7-4ec3-8970-81fe8b2a2f2d
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_bundle_crit_commentary
     - node.type.pece_artifact_bundle
+  module:
+    - text
 id: node.pece_artifact_bundle.field_bundle_crit_commentary
 field_name: field_bundle_crit_commentary
 entity_type: node
 bundle: pece_artifact_bundle
 label: 'Critical Commentary'
-description: 'Why is this artifact important? How is it relevant to this project?'
+description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: string_long
+field_type: text_long

@@ -1,10 +1,12 @@
-uuid: a6d22007-89ac-47f4-80bf-c19e300e4a9b
+uuid: f28e3e7b-6386-44d0-9f46-ff6f2bcf1d57
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_tabular_source
     - node.type.artifact_tabular_data
+  module:
+    - text
 id: node.artifact_tabular_data.field_tabular_source
 field_name: field_tabular_source
 entity_type: node
@@ -16,4 +18,4 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: string_long
+field_type: text_long

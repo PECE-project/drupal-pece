@@ -1,16 +1,16 @@
-uuid: 6502fdfd-28fa-44f9-b502-01e5e489f6bc
+uuid: 702d1f15-4bc8-452c-b61f-155fba7ea6dc
 langcode: en
 status: true
 dependencies:
   module:
     - node
+    - text
 id: node.field_video_source
 field_name: field_video_source
 entity_type: node
-type: string_long
-settings:
-  case_sensitive: false
-module: core
+type: text_long
+settings: {  }
+module: text
 locked: false
 cardinality: 1
 translatable: true

@@ -1,16 +1,16 @@
-uuid: 9e2c6b2f-1aa7-41d5-96c0-9894fbe67f00
+uuid: f97ff6e6-d429-4756-8f1a-24e574d1b1af
 langcode: en
 status: true
 dependencies:
   module:
     - node
+    - text
 id: node.field_website_crit_commentary
 field_name: field_website_crit_commentary
 entity_type: node
-type: string_long
-settings:
-  case_sensitive: false
-module: core
+type: text_long
+settings: {  }
+module: text
 locked: false
 cardinality: 1
 translatable: true
