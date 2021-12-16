@@ -1,0 +1,54 @@
+_core:
+  default_config_hash: hZFO5lzkiqrE1do8gYXMrZ_9LrlYoqiUGY7FkghPRqA
+format: bibtex
+types:
+  article: journal_article
+  book: book
+  booklet: null
+  conference: conference_paper
+  inbook: book_chapter
+  incollection: null
+  inproceedings: conference_paper
+  manual: null
+  mastersthesis: null
+  misc: miscellaneous
+  phdthesis: thesis
+  proceedings: conference_proceedings
+  techreport: null
+  unpublished: unpublished
+fields:
+  author: author
+  title: title
+  type: type
+  keywords: keywords
+  abstract: bibcite_abst_e
+  year: bibcite_year
+  booktitle: null
+  journal: bibcite_secondary_title
+  series: null
+  volume: bibcite_volume
+  edition: bibcite_edition
+  chapter: bibcite_section
+  number: bibcite_number
+  pages: bibcite_pages
+  month: bibcite_date
+  institution: null
+  organization: null
+  publisher: bibcite_publisher
+  school: null
+  address: bibcite_place_published
+  issn: bibcite_issn
+  isbn: bibcite_isbn
+  url: bibcite_url
+  doi: bibcite_doi
+  note: bibcite_notes
+  language: bibcite_lang
+  annote: null
+  crossref: null
+  editor: null
+  howpublished: null
+  key: null
+dependencies:
+  enforced:
+    module:
+      - bibcite_bibtex

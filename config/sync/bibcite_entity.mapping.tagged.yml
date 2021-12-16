@@ -1,0 +1,113 @@
+_core:
+  default_config_hash: QecME4Xwf5Ypvfi-61WgZcCZQioUj1kkx-oXO-66TFg
+format: tagged
+types:
+  Artwork: ''
+  'Audiovisual Material': audiovisual
+  Bill: bill
+  Book: book
+  'Book Section': book_chapter
+  Case: case
+  'Chart or Table': chart
+  'Classical Work': classical
+  'Conference Paper': conference_paper
+  'Conference Proceedings': conference_proceedings
+  'Edited Book': book
+  'Film or Broadcast': film
+  Generic: ''
+  'Government Document': government_report
+  Hearing: hearing
+  'Journal Article': journal_article
+  'Legal Rule or Regulation': legal_ruling
+  'Magazine Article': magazine_article
+  Manuscript: manuscript
+  Map: map
+  'Newspaper Article': newspaper_article
+  'Online Database': database
+  Patent: patent
+  'Personal Communication': personal
+  Report: report
+  Statute: statute
+  Thesis: thesis
+  'Unpublished Work': unpublished
+  'Web Page': website
+fields:
+  type: type
+  'secondary title': bibcite_secondary_title
+  'place published': bibcite_place_published
+  year: bibcite_year
+  label: bibcite_label
+  lang: bibcite_lang
+  publisher: bibcite_publisher
+  keywords: keywords
+  'call number': bibcite_call_number
+  'accession number': bibcite_accession_number
+  issue: bibcite_issue
+  pages: bibcite_pages
+  doi: bibcite_doi
+  'tertiary title': bibcite_tertiary_title
+  title: title
+  url: bibcite_url
+  volume: bibcite_volume
+  custom1: bibcite_custom1
+  custom2: bibcite_custom2
+  custom3: bibcite_custom3
+  custom4: bibcite_custom4
+  custom5: bibcite_custom5
+  custom6: bibcite_custom6
+  custom7: bibcite_custom7
+  'number of volumes': bibcite_number_of_volumes
+  edition: bibcite_edition
+  date: bibcite_date
+  type_of_work: bibcite_type_of_work
+  'subsidiary author': ''
+  bibcite_isbn: bibcite_isbn
+  'research notes': bibcite_research_notes
+  'short title': bibcite_short_title
+  section: bibcite_section
+  'original publication': bibcite_original_publication
+  'reprint edition': bibcite_reprint_edition
+  'reviewed item': ''
+  'author address': ''
+indexes:
+  type: '%0'
+  'secondary title': '%B'
+  'place published': '%C'
+  year: '%D'
+  label: '%F'
+  lang: '%G'
+  publisher: '%I'
+  keywords: '%K'
+  'call number': '%L'
+  'accession number': '%M'
+  issue: '%N'
+  pages: '%P'
+  doi: '%R'
+  'tertiary title': '%S'
+  title: '%T'
+  url: '%U'
+  volume: '%V'
+  custom1: '%1'
+  custom2: '%2'
+  custom3: '%3'
+  custom4: '%4'
+  custom5: '%#'
+  custom6: '%$'
+  custom7: '%]'
+  'number of volumes': '%6'
+  edition: '%7'
+  date: '%8'
+  type_of_work: '%9'
+  'subsidiary author': '%?'
+  bibcite_isbn: '%@'
+  'research notes': '%<'
+  'short title': '%!'
+  section: '%&'
+  'original publication': '%('
+  'reprint edition': '%)'
+  'reviewed item': '%*'
+  'author address': '%+'
+dependencies:
+  enforced:
+    module:
+      - bibcite_endnote

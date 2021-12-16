@@ -1,0 +1,80 @@
+uuid: 5a43fc93-5036-4026-b2ac-d4de695d9e53
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.journal
+    - core.entity_view_mode.bibcite_reference.citation
+  enforced:
+    config:
+      - core.entity_view_mode.bibcite_reference.citation
+      - bibcite_entity.bibcite_reference_type.journal
+    module:
+      - bibcite_entity
+_core:
+  default_config_hash: x6VthI1EK99eDtjKcs2eOL1iQwWxQJnMiT6JyVQ9sl0
+id: bibcite_reference.journal.citation
+targetEntityType: bibcite_reference
+bundle: journal
+mode: citation
+content:
+  citation:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  author: true
+  bibcite_abst_e: true
+  bibcite_abst_f: true
+  bibcite_access_date: true
+  bibcite_accession_number: true
+  bibcite_alternate_title: true
+  bibcite_auth_address: true
+  bibcite_call_number: true
+  bibcite_citekey: true
+  bibcite_custom1: true
+  bibcite_custom2: true
+  bibcite_custom3: true
+  bibcite_custom4: true
+  bibcite_custom5: true
+  bibcite_custom6: true
+  bibcite_custom7: true
+  bibcite_date: true
+  bibcite_doi: true
+  bibcite_edition: true
+  bibcite_isbn: true
+  bibcite_issn: true
+  bibcite_issue: true
+  bibcite_label: true
+  bibcite_lang: true
+  bibcite_links: true
+  bibcite_notes: true
+  bibcite_number: true
+  bibcite_number_of_volumes: true
+  bibcite_original_publication: true
+  bibcite_other_author_affiliations: true
+  bibcite_other_number: true
+  bibcite_pages: true
+  bibcite_place_published: true
+  bibcite_pmid: true
+  bibcite_publisher: true
+  bibcite_refereed: true
+  bibcite_remote_db_name: true
+  bibcite_remote_db_provider: true
+  bibcite_reprint_edition: true
+  bibcite_research_notes: true
+  bibcite_secondary_title: true
+  bibcite_section: true
+  bibcite_short_title: true
+  bibcite_tertiary_title: true
+  bibcite_translated_title: true
+  bibcite_type: true
+  bibcite_type_of_work: true
+  bibcite_url: true
+  bibcite_volume: true
+  bibcite_year: true
+  keywords: true
+  langcode: true
+  search_api_excerpt: true
+  uid: true

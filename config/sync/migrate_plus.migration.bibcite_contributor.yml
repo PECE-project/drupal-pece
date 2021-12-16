@@ -1,0 +1,15 @@
+id: bibcite_contributor
+langcode: en
+status: true
+migration_group: pece
+label: 'Migrate Bibliography Contributor'
+migration_tags:
+  - Bibcite_Contributor v1
+  - Drupal 6
+  - Drupal 7
+source:
+  plugin: bibcite_contributor
+destination:
+  plugin: entity:bibcite_contributor
+process:
+  name: name
