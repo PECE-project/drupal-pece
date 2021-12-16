@@ -1,0 +1,14 @@
+id: bibcite_keyword
+langcode: en
+status: true
+migration_group: pece
+label: 'Migrate Bibliography Keyword'
+migration_tags:
+  - Drupal 6
+  - Drupal 7
+source:
+  plugin: bibcite_keyword
+destination:
+  plugin: entity:bibcite_keyword
+process:
+  name: word

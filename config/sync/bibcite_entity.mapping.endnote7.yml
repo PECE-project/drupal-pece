@@ -1,0 +1,100 @@
+_core:
+  default_config_hash: Eb8r5tLyRMhf2s9w4AYnk46Pn4SljmfAWwsZLRnMuo0
+format: endnote7
+types:
+  Artwork: artwork
+  'Audiovisual Material': audiovisual
+  Bill: bill
+  Book: book
+  'Book Section': book_chapter
+  Case: case
+  'Chart or Table': chart
+  'Computer Program': software
+  'Conference Proceedings': conference_proceedings
+  'Edited Book': book
+  'Electronic Source': web_article
+  'Film or Broadcast': film
+  Generic: miscellaneous
+  Hearing: hearing
+  'Journal Article': journal_article
+  'Legal Rule or Regulation': legal_ruling
+  'Magazine Article': magazine_article
+  Manuscript: manuscript
+  Map: map
+  'Newspaper Article': newspaper_article
+  Patent: patent
+  'Personal Communication': personal
+  Report: report
+  Statute: statute
+  Thesis: thesis
+fields:
+  AUTHORS: author
+  TITLE: title
+  REFERENCE_TYPE: type
+  REFNUM: ''
+  YEAR: bibcite_year
+  SECONDARY_TITLE: bibcite_secondary_title
+  PLACE_PUBLISHED: bibcite_place_published
+  LANGUAGE: bibcite_lang
+  PUBLISHER: bibcite_publisher
+  VOLUME: bibcite_volume
+  ISSUE: bibcite_issue
+  NUMBER_OF_VOLUMES: bibcite_number_of_volumes
+  NUMBER: bibcite_number
+  PAGES: bibcite_pages
+  SECTION: bibcite_section
+  TERTIARY_TITLE: bibcite_tertiary_title
+  EDITION: bibcite_edition
+  DATE: bibcite_date
+  TYPE_OF_WORK: bibcite_type_of_work
+  SHORT_TITLE: bibcite_short_title
+  ALTERNATE_TITLE: bibcite_alternate_title
+  ISBN: bibcite_isbn
+  ORIGINAL_PUB: bibcite_original_publication
+  REPRINT_EDITION: bibcite_reprint_edition
+  REVIEWED_ITEM: ''
+  CUSTOM1: bibcite_custom1
+  CUSTOM2: bibcite_custom2
+  CUSTOM3: bibcite_custom3
+  CUSTOM4: bibcite_custom4
+  CUSTOM5: bibcite_custom5
+  CUSTOM6: bibcite_custom6
+  ACCESSION_NUMBER: bibcite_accession_number
+  CALL_NUMBER: bibcite_call_number
+  LABEL: bibcite_label
+  KEYWORD: keywords
+  ABSTRACT: bibcite_abst_e
+  NOTES: bibcite_notes
+  URL: bibcite_url
+  AUTHOR_ADDRESS: ''
+  IMAGE: ''
+  CAPTION: ''
+indexes:
+  'Journal Article': '0'
+  Book: '1'
+  Thesis: '2'
+  'Conference Proceedings': '3'
+  'Personal Communication': '4'
+  'NewsPaper Article': '5'
+  'Computer Program': '6'
+  'Book Section': '7'
+  'Magazine Article': '8'
+  'Edited Book': '9'
+  Report: '10'
+  Map: '11'
+  'Audiovisual Material': '12'
+  Artwork: '13'
+  Patent: '15'
+  'Electronic Source': '16'
+  Bill: '17'
+  Case: '18'
+  Hearing: '19'
+  Manuscript: '20'
+  'Film or Broadcast': '21'
+  Statute: '22'
+  'Chart or Table': '26'
+  Generic: '31'
+dependencies:
+  enforced:
+    module:
+      - bibcite_endnote

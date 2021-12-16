@@ -1,0 +1,49 @@
+_core:
+  default_config_hash: EpipWvbtAOH9IhXg_v7V1LgaNYHwabB7S7zi6IjKajI
+format: csl
+types:
+  bill: bill
+  book: book
+  chapter: book_chapter
+  broadcast: broadcast
+  paper-conference: conference_paper
+  motion_picture: film
+  article-journal: journal_article
+  legal_case: legal_ruling
+  article-magazine: magazine_article
+  manuscript: manuscript
+  map: map
+  article-newspaper: newspaper_article
+  patent: patent
+  personal_communication: personal
+  report: report
+  legislation: statute
+  thesis: thesis
+  webpage: web_article
+fields:
+  issued: bibcite_year
+  accessed: bibcite_access_date
+  abstract: bibcite_abst_e
+  container-title: bibcite_secondary_title
+  volume: bibcite_volume
+  edition: bibcite_edition
+  section: bibcite_section
+  issue: bibcite_issue
+  number-of-volumes: bibcite_number_of_volumes
+  number: bibcite_number
+  page: bibcite_pages
+  original-date: bibcite_date
+  publisher: bibcite_publisher
+  publisher-place: bibcite_place_published
+  ISSN: bibcite_issn
+  ISBN: bibcite_isbn
+  call-number: bibcite_call_number
+  citation-label: bibcite_citekey
+  URL: bibcite_url
+  DOI: bibcite_doi
+  note: bibcite_notes
+  original-title: bibcite_alternate_title
+dependencies:
+  enforced:
+    module:
+      - bibcite_entity
