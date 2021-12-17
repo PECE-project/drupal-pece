@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.pece_artifact_website.field_pece_license
     - field.field.node.pece_artifact_website.field_pece_project_ref
     - field.field.node.pece_artifact_website.field_website_authors
+    - field.field.node.pece_artifact_website.field_website_bibliography
     - field.field.node.pece_artifact_website.field_website_contributors
     - field.field.node.pece_artifact_website.field_website_created_date
     - field.field.node.pece_artifact_website.field_website_crit_commentary
@@ -31,9 +32,9 @@ bundle: pece_artifact_website
 mode: teaser
 content:
   links:
-    weight: 100
     settings: {  }
     third_party_settings: {  }
+    weight: 100
     region: content
 hidden:
   field_ark_enabled: true
@@ -45,6 +46,7 @@ hidden:
   field_pece_license: true
   field_pece_project_ref: true
   field_website_authors: true
+  field_website_bibliography: true
   field_website_contributors: true
   field_website_created_date: true
   field_website_crit_commentary: true
