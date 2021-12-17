@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_pbc_ref_role
     - field.field.node.pece_artifact_pdf.field_pbc_ref_user
     - field.field.node.pece_artifact_pdf.field_pdf_authors
+    - field.field.node.pece_artifact_pdf.field_pdf_bibliography
     - field.field.node.pece_artifact_pdf.field_pdf_contributors
     - field.field.node.pece_artifact_pdf.field_pdf_created_date
     - field.field.node.pece_artifact_pdf.field_pdf_crit_commentary
@@ -33,8 +34,8 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: true
+    allow_custom: false
     sections:
       -
         layout_id: layout_onecol
@@ -45,261 +46,261 @@ third_party_settings:
             uuid: bae6bae0-b9bd-428d-9bc0-1bf4284c088a
             region: content
             configuration:
+              id: 'extra_field_block:node:pece_artifact_pdf:links'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'extra_field_block:node:pece_artifact_pdf:links'
-            additional: {  }
             weight: 0
+            additional: {  }
           4a72c6ae-00e8-4345-9e50-49df506f6d7f:
             uuid: 4a72c6ae-00e8-4345-9e50-49df506f6d7f
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_contributors'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_contributors'
               formatter:
+                type: entity_reference_label
                 label: above
                 settings:
                   link: true
                 third_party_settings: {  }
-                type: entity_reference_label
-            additional: {  }
             weight: 1
+            additional: {  }
           96002ef5-1dd9-4efd-b74f-cc12f69d833e:
             uuid: 96002ef5-1dd9-4efd-b74f-cc12f69d833e
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_authors'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_authors'
               formatter:
+                type: entity_reference_label
                 label: above
                 settings:
                   link: true
                 third_party_settings: {  }
-                type: entity_reference_label
-            additional: {  }
             weight: 2
+            additional: {  }
           dee57660-1058-4a63-8f8c-13522208721d:
             uuid: dee57660-1058-4a63-8f8c-13522208721d
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_crit_commentary'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_crit_commentary'
               formatter:
+                type: basic_string
                 label: above
                 settings: {  }
                 third_party_settings: {  }
-                type: basic_string
-            additional: {  }
             weight: 3
+            additional: {  }
           4579941b-7a93-4029-b4a1-76d8b04c3bdf:
             uuid: 4579941b-7a93-4029-b4a1-76d8b04c3bdf
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_fieldsite'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_fieldsite'
               formatter:
+                type: entity_reference_label
                 label: above
                 settings:
                   link: true
                 third_party_settings: {  }
-                type: entity_reference_label
-            additional: {  }
             weight: 4
+            additional: {  }
           60468699-b8fd-4ab8-a029-12a18883e675:
             uuid: 60468699-b8fd-4ab8-a029-12a18883e675
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_language'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_language'
               formatter:
+                type: languagefield_default
                 label: above
                 settings:
                   link_to_entity: false
                   format:
                     name: name
                 third_party_settings: {  }
-                type: languagefield_default
-            additional: {  }
             weight: 5
+            additional: {  }
           f9a6495c-80f6-43d7-8f97-8de4cb81cb38:
             uuid: f9a6495c-80f6-43d7-8f97-8de4cb81cb38
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_location'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_location'
               formatter:
+                type: address_default
                 label: above
                 settings: {  }
                 third_party_settings: {  }
-                type: address_default
-            additional: {  }
             weight: 6
+            additional: {  }
           db1328dc-f30a-4fe5-b036-9bf74a674993:
             uuid: db1328dc-f30a-4fe5-b036-9bf74a674993
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_permission'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_permission'
               formatter:
+                type: list_default
                 label: above
                 settings: {  }
                 third_party_settings: {  }
-                type: list_default
-            additional: {  }
             weight: 7
+            additional: {  }
           c3dba129-6eef-4038-aed8-8fcc5e064bd2:
             uuid: c3dba129-6eef-4038-aed8-8fcc5e064bd2
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_source'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_source'
               formatter:
+                type: basic_string
                 label: above
                 settings: {  }
                 third_party_settings: {  }
-                type: basic_string
-            additional: {  }
             weight: 8
+            additional: {  }
           2eeb99cb-dade-4397-96ef-5d312211fc89:
             uuid: 2eeb99cb-dade-4397-96ef-5d312211fc89
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_use_fieldsite_local'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_use_fieldsite_local'
               formatter:
+                type: boolean
                 label: above
                 settings:
                   format: default
                   format_custom_false: ''
                   format_custom_true: ''
                 third_party_settings: {  }
-                type: boolean
-            additional: {  }
             weight: 9
+            additional: {  }
           89ad8afa-6554-4027-8369-d1fb6c99d328:
             uuid: 89ad8afa-6554-4027-8369-d1fb6c99d328
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pece_project_ref'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pece_project_ref'
               formatter:
+                type: entity_reference_label
                 label: above
                 settings:
                   link: true
                 third_party_settings: {  }
-                type: entity_reference_label
-            additional: {  }
             weight: 10
+            additional: {  }
           165e3451-3879-4726-9c1f-75d2c77dd247:
             uuid: 165e3451-3879-4726-9c1f-75d2c77dd247
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pece_license'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pece_license'
               formatter:
+                type: entity_reference_label
                 label: above
                 settings:
                   link: true
                 third_party_settings: {  }
-                type: entity_reference_label
-            additional: {  }
             weight: 11
+            additional: {  }
           ff07edc5-e554-45a0-96af-f1d798bf8fdd:
             uuid: ff07edc5-e554-45a0-96af-f1d798bf8fdd
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_group'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_group'
               formatter:
+                type: pbf_formatter_default
                 label: above
                 settings:
                   link: true
                 third_party_settings: {  }
-                type: pbf_formatter_default
-            additional: {  }
             weight: 12
+            additional: {  }
           62f72fc3-c403-4596-be57-668d7ac223c7:
             uuid: 62f72fc3-c403-4596-be57-668d7ac223c7
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_role'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_role'
               formatter:
+                type: pbf_formatter_default
                 label: above
                 settings:
                   link: true
                 third_party_settings: {  }
-                type: pbf_formatter_default
-            additional: {  }
             weight: 13
+            additional: {  }
           94bbcf99-9188-4697-98ca-8dbe34104e8d:
             uuid: 94bbcf99-9188-4697-98ca-8dbe34104e8d
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_user'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_user'
               formatter:
+                type: pbf_formatter_default
                 label: above
                 settings:
                   link: true
                 third_party_settings: {  }
-                type: pbf_formatter_default
-            additional: {  }
             weight: 14
+            additional: {  }
           7ca5a84c-b535-4d33-a966-4e3fd52a28bb:
             uuid: 7ca5a84c-b535-4d33-a966-4e3fd52a28bb
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_created_date'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_created_date'
               formatter:
+                type: datetime_default
                 label: above
                 settings:
-                  format_type: medium
                   timezone_override: ''
+                  format_type: medium
                 third_party_settings: {  }
-                type: datetime_default
-            additional: {  }
             weight: 15
+            additional: {  }
           e29bd5c3-4da5-48f3-ace9-61557cc9f6ef:
             uuid: e29bd5c3-4da5-48f3-ace9-61557cc9f6ef
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_media'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_media'
               formatter:
                 type: entity_reference_entity_view
                 label: above
@@ -307,26 +308,328 @@ third_party_settings:
                   view_mode: default
                   link: false
                 third_party_settings: {  }
-            additional: {  }
             weight: 16
+            additional: {  }
           7e9bcd4b-9346-411c-a2fd-b38b96f547cf:
             uuid: 7e9bcd4b-9346-411c-a2fd-b38b96f547cf
             region: content
             configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pece_all_can_view'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_pdf:field_pece_all_can_view'
               formatter:
+                type: boolean
                 label: above
                 settings:
                   format: default
                   format_custom_false: ''
                   format_custom_true: ''
                 third_party_settings: {  }
-                type: boolean
-            additional: {  }
             weight: 17
+            additional: {  }
+          536a64c7-5d91-42cf-b5dc-3c67054e4070:
+            uuid: 536a64c7-5d91-42cf-b5dc-3c67054e4070
+            region: content
+            configuration:
+              id: 'extra_field_block:node:pece_artifact_pdf:links'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 18
+            additional: {  }
+          a0bb195f-d575-4264-b495-0e6a63f3b83b:
+            uuid: a0bb195f-d575-4264-b495-0e6a63f3b83b
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_contributors'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 19
+            additional: {  }
+          4f9f0209-6544-493d-9d5d-8f8401663afd:
+            uuid: 4f9f0209-6544-493d-9d5d-8f8401663afd
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_authors'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 20
+            additional: {  }
+          5de93825-b0cc-47ee-a4ee-9cfd41a64bb2:
+            uuid: 5de93825-b0cc-47ee-a4ee-9cfd41a64bb2
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_crit_commentary'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: basic_string
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 21
+            additional: {  }
+          09ba7658-2c6c-4ca2-92eb-86aa3f532778:
+            uuid: 09ba7658-2c6c-4ca2-92eb-86aa3f532778
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_fieldsite'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 22
+            additional: {  }
+          32affc79-a910-4143-aa98-dcfec18acbf9:
+            uuid: 32affc79-a910-4143-aa98-dcfec18acbf9
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_language'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: languagefield_default
+                label: above
+                settings:
+                  link_to_entity: false
+                  format:
+                    name: name
+                third_party_settings: {  }
+            weight: 23
+            additional: {  }
+          2514285b-6deb-4abc-9b95-24213d63a6b2:
+            uuid: 2514285b-6deb-4abc-9b95-24213d63a6b2
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_location'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: address_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 24
+            additional: {  }
+          197f5c1c-7077-4ede-a15e-bfe8270d3287:
+            uuid: 197f5c1c-7077-4ede-a15e-bfe8270d3287
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_permission'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: list_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 25
+            additional: {  }
+          7fa7094b-fb29-48ae-b287-61f12e5190b8:
+            uuid: 7fa7094b-fb29-48ae-b287-61f12e5190b8
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_source'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: basic_string
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 26
+            additional: {  }
+          b436fe05-4c0d-40ed-94a6-cdcdd54a4fdb:
+            uuid: b436fe05-4c0d-40ed-94a6-cdcdd54a4fdb
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_use_fieldsite_local'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 27
+            additional: {  }
+          0fdecb18-5f29-423c-aa26-d9934c9887cf:
+            uuid: 0fdecb18-5f29-423c-aa26-d9934c9887cf
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pece_project_ref'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 28
+            additional: {  }
+          bfc9797c-526f-4530-b583-a18a9bce587e:
+            uuid: bfc9797c-526f-4530-b583-a18a9bce587e
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pece_license'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 29
+            additional: {  }
+          c6caf5f4-c202-41f3-b1ad-05682f675909:
+            uuid: c6caf5f4-c202-41f3-b1ad-05682f675909
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_group'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: pbf_formatter_default
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 30
+            additional: {  }
+          316c58a7-970b-4588-b1fc-5b45f359eb75:
+            uuid: 316c58a7-970b-4588-b1fc-5b45f359eb75
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_role'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: pbf_formatter_default
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 31
+            additional: {  }
+          c7be2902-b577-455f-859a-4b7870f6aa90:
+            uuid: c7be2902-b577-455f-859a-4b7870f6aa90
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_user'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: pbf_formatter_default
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 32
+            additional: {  }
+          4ea234e2-1fbd-49e5-b212-db50f0be5ab0:
+            uuid: 4ea234e2-1fbd-49e5-b212-db50f0be5ab0
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_created_date'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings: {  }
+            weight: 33
+            additional: {  }
+          b12e09d2-3613-40c4-9920-9df98a689c79:
+            uuid: b12e09d2-3613-40c4-9920-9df98a689c79
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_media'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                  link: false
+                third_party_settings: {  }
+            weight: 34
+            additional: {  }
+          ef4fa9d8-9c02-4fd2-a70a-9ff6b63baa45:
+            uuid: ef4fa9d8-9c02-4fd2-a70a-9ff6b63baa45
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pece_all_can_view'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 35
+            additional: {  }
+          4f14c71a-55fc-4221-a2dc-b138755ca92d:
+            uuid: 4f14c71a-55fc-4221-a2dc-b138755ca92d
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_bibliography'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 36
+            additional: {  }
         third_party_settings: {  }
 id: node.pece_artifact_pdf.default
 targetEntityType: node
@@ -334,149 +637,157 @@ bundle: pece_artifact_pdf
 mode: default
 content:
   field_pbc_ref_group:
-    weight: 118
+    type: pbf_formatter_default
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: pbf_formatter_default
+    weight: 118
     region: content
   field_pbc_ref_role:
-    weight: 119
+    type: pbf_formatter_default
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: pbf_formatter_default
+    weight: 119
     region: content
   field_pbc_ref_user:
-    weight: 120
+    type: pbf_formatter_default
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: pbf_formatter_default
+    weight: 120
     region: content
   field_pdf_authors:
-    weight: 105
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
+    weight: 105
+    region: content
+  field_pdf_bibliography:
     type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 124
     region: content
   field_pdf_contributors:
-    weight: 104
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 104
     region: content
   field_pdf_created_date:
-    weight: 121
+    type: datetime_default
     label: above
     settings:
-      format_type: medium
       timezone_override: ''
+      format_type: medium
     third_party_settings: {  }
-    type: datetime_default
+    weight: 121
     region: content
   field_pdf_crit_commentary:
-    weight: 106
+    type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    weight: 106
     region: content
   field_pdf_fieldsite:
-    weight: 107
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 107
     region: content
   field_pdf_language:
-    weight: 108
+    type: languagefield_default
     label: above
     settings:
       link_to_entity: false
       format:
         name: name
     third_party_settings: {  }
-    type: languagefield_default
+    weight: 108
     region: content
   field_pdf_location:
-    weight: 109
+    type: address_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: address_default
+    weight: 109
     region: content
   field_pdf_media:
     type: entity_reference_entity_view
-    weight: 122
     label: above
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
+    weight: 122
     region: content
   field_pdf_permission:
-    weight: 110
+    type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    weight: 110
     region: content
   field_pdf_source:
-    weight: 111
+    type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    weight: 111
     region: content
   field_pdf_use_fieldsite_local:
-    weight: 112
+    type: boolean
     label: above
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 112
     region: content
   field_pece_all_can_view:
-    weight: 123
+    type: boolean
     label: above
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 123
     region: content
   field_pece_license:
-    weight: 117
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 117
     region: content
   field_pece_project_ref:
-    weight: 116
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 116
     region: content
   links:
-    weight: 100
     settings: {  }
     third_party_settings: {  }
+    weight: 100
     region: content
 hidden:
   field_pdf_tags: true

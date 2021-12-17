@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_pbc_ref_role
     - field.field.node.pece_artifact_pdf.field_pbc_ref_user
     - field.field.node.pece_artifact_pdf.field_pdf_authors
+    - field.field.node.pece_artifact_pdf.field_pdf_bibliography
     - field.field.node.pece_artifact_pdf.field_pdf_contributors
     - field.field.node.pece_artifact_pdf.field_pdf_created_date
     - field.field.node.pece_artifact_pdf.field_pdf_crit_commentary
@@ -31,15 +32,16 @@ bundle: pece_artifact_pdf
 mode: teaser
 content:
   links:
-    weight: 100
     settings: {  }
     third_party_settings: {  }
+    weight: 100
     region: content
 hidden:
   field_pbc_ref_group: true
   field_pbc_ref_role: true
   field_pbc_ref_user: true
   field_pdf_authors: true
+  field_pdf_bibliography: true
   field_pdf_contributors: true
   field_pdf_created_date: true
   field_pdf_crit_commentary: true
