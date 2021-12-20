@@ -13,6 +13,7 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
   private $authenticatedUserInGroup;
   private $researcherUser;
   private $researcherUserInGroup;
+  private $contentTypes;
 
   // Create getInfo method
   public static function getInfo() {
@@ -134,6 +135,9 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
     $this->drupalLogin($this->adminUser);
     $this->drupalGet('/admin/content');
     $this->assertResponse(200);
+    //TODO: Create array with all content types
+
+
     $nodes = node_load_multiple(array(), array('type' => 'pece_artifact_text'));
     // if not exist folder with name pece_artifact_text, then create
     if (!file_exists($module_path . '/files/pece_artifact_text')) {
@@ -155,17 +159,20 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
           'authenticated' => array(
             'view' => $this->viewContentWithUser($node, $this->authenticatedUser)
           ),
-          'authenticatedInGroup' => array(
-            'view' => $this->viewContentWithUser($node, $this->authenticatedUserInGroup)
-          ),
           'researcher' => array(
             'view' => $this->viewContentWithUser($node, $this->researcherUser)
           ),
-          'researcherInGroup' => array(
-            'view' => $this->viewContentWithUser($node, $this->researcherUserInGroup)
-          ),
         ),
       );
+
+      // check this if this content has a group
+      if ($node->og_group_ref) {
+        // add user in content's group
+
+        $data['permissions']['authenticatedInGroup']['view'] = $this->viewContentWithUser($node, $this->authenticatedUserInGroup);
+        $data['permissions']['researcherInGroup']['view'] = $this->viewContentWithUser($node, $this->researcherUserInGroup);
+      }
+
       $file_content = json_encode($data, JSON_PRETTY_PRINT);
       file_put_contents($file_name, $file_content);
 
@@ -207,5 +214,34 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
   private function getResponseCode() {
     $curl_code = curl_getinfo($this->curlHandle, CURLINFO_HTTP_CODE);
     return $curl_code;
+  }
+
+  /**
+   * Get all available content types.
+   * @return array types
+   */
+  private function getContentTypes() {
+    $artifacts = [
+      'pece_artifact_audio',
+      'pece_artifact_bundle',
+      'pece_artifact_fieldnote',
+      'pece_artifact_image',
+      'pece_artifact_pdf',
+      'pece_artifact_tabular',
+      'pece_artifact_text',
+      'pece_artifact_video',
+      'pece_artifact_website',
+    ];
+    $essays = [
+      'pece_essay',
+      'pece_photo_essay',
+      'pece_timeline_essay',
+    ];
+    $miscContentTypes = [
+      'pece_project',
+      'pece_annotation',
+    ]
+    $contentTypes = $artifacts + $essays + $miscContentTypes;
+    return $contentTypes;
   }
 }
