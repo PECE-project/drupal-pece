@@ -126,28 +126,38 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
   }
 
   /**
-   * Show count nodes.
+   * Check Access Permissions of all content types available on the platform.
    */
-  public function testListAllArtifactText() {
-
-    $module_path = drupal_realpath(drupal_get_path('module', 'pece_access'));
-
+  public function testContentTypesAccessPerms() {
     $this->drupalLogin($this->adminUser);
     $this->drupalGet('/admin/content');
     $this->assertResponse(200);
-    //TODO: Create array with all content types
-
-
-    $nodes = node_load_multiple(array(), array('type' => 'pece_artifact_text'));
-    // if not exist folder with name pece_artifact_text, then create
-    if (!file_exists($module_path . '/files/pece_artifact_text')) {
-      mkdir($module_path . '/files/pece_artifact_text', 0766, TRUE);
+    // Get full list of all content types to validate its permissions.
+    foreach ($contentTypes = $this->getAllContentTypes() as $contentType) {
+      $this->validateAccessPermsByType($contentType);
     }
-    $this->assertTrue(file_exists($module_path . '/files/pece_artifact_text'), 'Folder pece_artifact_text created');
+  }
+
+  /**
+   * Helper function to map and validate the access permission matrix for all nodes of a given content type.
+   *
+   * @param String $contentTypeName
+   * @return void
+   */
+  private function validateAccessPermsByType($contentTypeName) {
+    $module_path = drupal_realpath(drupal_get_path('module', 'pece_access'));
+    $nodes = node_load_multiple(array(), array('type' => $contentType));
+
+    // If there is no directory named with $contentType, then create it.
+    if (!file_exists($module_path . '/files/' . $contentType)) {
+      mkdir($module_path . "/files/$contentType", 0766, TRUE);
+    }
+    $this->assertTrue(file_exists($module_path . "/files/$contentType"), "Folder $contentType created");
     $this->drupalLogout();
-    // create json file with id node to each node
+
+    // Create JSON file with Node ID for each and every node.
     foreach ($nodes as $node) {
-      $file_name = $module_path . '/files/pece_artifact_text/' . $node->nid . '.json';
+      $file_name = $module_path . "/files/$contentType/" . $node->nid . '.json';
       // create object to salve in json file
       $data = array(
         'nid' => $node->nid,
@@ -165,10 +175,9 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
         ),
       );
 
-      // check this if this content has a group
+      // Check if this content is assigned to a group.
       if ($node->og_group_ref) {
-        // add user in content's group
-
+        // Add user into the same group as the content is assigned to.
         $data['permissions']['authenticatedInGroup']['view'] = $this->viewContentWithUser($node, $this->authenticatedUserInGroup);
         $data['permissions']['researcherInGroup']['view'] = $this->viewContentWithUser($node, $this->researcherUserInGroup);
       }
@@ -177,11 +186,12 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
       file_put_contents($file_name, $file_content);
 
       $this->assertTrue(file_exists($file_name), 'File exists');
-
     }
   }
+
   /**
    *  Create user with role.
+   *
    * @param $role
    */
   protected function drupalCreateUserWithRole($prefixname = '', $role) {
@@ -199,7 +209,7 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
   public function viewContentWithUser($node, $user = null) {
     if ($user)
       $this->drupalLogin($user);
-    $this->drupalGet("/node/" . $node->nid);
+    $this->drupalGet('/node/' . $node->nid);
     // get the response code
     $testView = $this->getResponseCode() == 200 ? TRUE : FALSE;
     $this->drupalLogout();
@@ -220,7 +230,7 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
    * Get all available content types.
    * @return array types
    */
-  private function getContentTypes() {
+  private function getAllContentTypes() {
     $artifactsTypes = [
       'pece_artifact_audio',
       'pece_artifact_bundle',
@@ -240,8 +250,7 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
     $miscContentTypes = [
       'pece_project',
       'pece_annotation',
-    ]
-    $contentTypes = $artifacts + $essays + $miscContentTypes;
-    return $contentTypes;
+    ];
+    return $artifactsTypes + $essaysTypes + $miscContentTypes;
   }
 }
