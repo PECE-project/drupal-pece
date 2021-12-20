@@ -221,7 +221,7 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
    * @return array types
    */
   private function getContentTypes() {
-    $artifacts = [
+    $artifactsTypes = [
       'pece_artifact_audio',
       'pece_artifact_bundle',
       'pece_artifact_fieldnote',
@@ -232,7 +232,7 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
       'pece_artifact_video',
       'pece_artifact_website',
     ];
-    $essays = [
+    $essaysTypes = [
       'pece_essay',
       'pece_photo_essay',
       'pece_timeline_essay',
