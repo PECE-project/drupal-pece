@@ -10,9 +10,9 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
 
   private $adminUser;
   private $authenticatedUser;
-  private $authenticatedInGroupUser;
+  private $authenticatedUserInGroup;
   private $researcherUser;
-  private $researcherInGroupUser;
+  private $researcherUserInGroup;
 
   // Create getInfo method
   public static function getInfo() {
@@ -39,7 +39,9 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
   protected function tearDown () {
     user_delete($this->adminUser->uid);
     user_delete($this->authenticatedUser->uid);
-    user_delete($this->authenticatedInGroupUser->uid);
+    user_delete($this->authenticatedUserInGroup->uid);
+    user_delete($this->researcherUser->uid);
+    user_delete($this->researcherUserInGroup->uid);
   }
 
   /**
@@ -117,8 +119,9 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
     // Create a new user object.
     $this->adminUser = $this->drupalCreateUserWithRole('migrate_','administrator');
     $this->authenticatedUser = $this->drupalCreateUserWithRole('migrate_','authenticated user');
-    $this->authenticatedInGroupUser = $this->drupalCreateUserWithRole('migrate_','authenticated user');
-
+    $this->authenticatedUserInGroup = $this->drupalCreateUserWithRole('migrate_','authenticated user');
+    $this->researcherUser = $this->drupalCreateUserWithRole('migrate_','Researcher');
+    $this->researcherUserInGroup = $this->drupalCreateUserWithRole('migrate_','Researcher');
   }
 
   /**
@@ -151,6 +154,15 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
           ),
           'authenticated' => array(
             'view' => $this->viewContentWithUser($node, $this->authenticatedUser)
+          ),
+          'authenticatedInGroup' => array(
+            'view' => $this->viewContentWithUser($node, $this->authenticatedUserInGroup)
+          ),
+          'researcher' => array(
+            'view' => $this->viewContentWithUser($node, $this->researcherUser)
+          ),
+          'researcherInGroup' => array(
+            'view' => $this->viewContentWithUser($node, $this->researcherUserInGroup)
           ),
         ),
       );
