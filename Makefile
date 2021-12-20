@@ -46,5 +46,14 @@ stop-prod:
 in-prod:
 	docker-compose -f docker-compose-prod.yml exec php_v1 /bin/bash
 
+log-prod-nginx:
+	docker-compose -f docker-compose-prod.yml logs nginx_v1
+
+log-prod-php:
+	docker-compose -f docker-compose-prod.yml logs php_v1
+
+log-prod-mysql:
+	docker-compose -f docker-compose-prod.yml logs db_v1
+
 run-matrix-permissions:
 	docker-compose -f docker-compose-prod.yml exec php_v1 sh -c "cd build && php ./scripts/run-tests.sh --url http://v1.pece.local PECE"
