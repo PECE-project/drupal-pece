@@ -146,18 +146,21 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
    */
   private function validateAccessPermsByType($contentTypeName) {
     $module_path = drupal_realpath(drupal_get_path('module', 'pece_access'));
-    $nodes = node_load_multiple(array(), array('type' => $contentType));
+    $nodes = node_load_multiple(array(), array('type' => $contentTypeName));
 
-    // If there is no directory named with $contentType, then create it.
-    if (!file_exists($module_path . '/files/' . $contentType)) {
-      mkdir($module_path . "/files/$contentType", 0766, TRUE);
+    if (empty($nodes)) {
+      return;
     }
-    $this->assertTrue(file_exists($module_path . "/files/$contentType"), "Folder $contentType created");
+    // If there is no directory named with $contentType, then create it.
+    if (!file_exists($module_path . '/files/' . $contentTypeName)) {
+      mkdir($module_path . "/files/$contentTypeName", 0766, TRUE);
+    }
+    $this->assertTrue(file_exists($module_path . "/files/$contentTypeName"), "Folder $contentTypeName created");
     $this->drupalLogout();
 
     // Create JSON file with Node ID for each and every node.
     foreach ($nodes as $node) {
-      $file_name = $module_path . "/files/$contentType/" . $node->nid . '.json';
+      $file_name = $module_path . "/files/$contentTypeName/" . $node->nid . '.json';
       // create object to salve in json file
       $data = array(
         'nid' => $node->nid,
@@ -176,10 +179,17 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
       );
 
       // Check if this content is assigned to a group.
-      if ($node->og_group_ref) {
+      if (count($node->og_group_ref) > 0) {
+        $groupId = $this->getMorePublicGroup($node->og_group_ref[LANGUAGE_NONE]);
+        $authenticatedUserInGroup = user_load($this->authenticatedUserInGroup->uid);
+        $researcherUserInGroup = user_load($this->researcherUserInGroup->uid);
+        $authenticatedUserInGroup->og_user_node[LANGUAGE_NONE][] = $groupId;
+        $researcherUserInGroup->og_user_node[LANGUAGE_NONE][] = $groupId;
+        $user = user_save($authenticatedUserInGroup);
+        $user = user_save($researcherUserInGroup);
         // Add user into the same group as the content is assigned to.
-        $data['permissions']['authenticatedInGroup']['view'] = $this->viewContentWithUser($node, $this->authenticatedUserInGroup);
-        $data['permissions']['researcherInGroup']['view'] = $this->viewContentWithUser($node, $this->researcherUserInGroup);
+        $data['permissions']['authenticatedInGroup']['view'] = $this->viewContentWithUser($node, $authenticatedUserInGroup);
+        $data['permissions']['researcherInGroup']['view'] = $this->viewContentWithUser($node, $researcherUserInGroup);
       }
 
       $file_content = json_encode($data, JSON_PRETTY_PRINT);
@@ -252,5 +262,34 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
       'pece_annotation',
     ];
     return $artifactsTypes + $essaysTypes + $miscContentTypes;
+  }
+
+  /**
+   * Get groups and check the permission in group. The group with more public content return the id.
+   * @param $groups
+   *
+   * @return array
+   */
+  private function getMorePublicGroup($groups) {
+    /**
+     *  Structure of $groups based on content visibility.
+     */
+    $privateVisibility = [
+      0 => [],
+      1 => [],
+    ];
+    foreach ($groups as $groupId) {
+      // load group by id
+      $group = node_load($groupId['target_id']);
+      // get group content visibility
+      if ($group->group_content_access[LANGUAGE_NONE][0]['value'] == '1')
+        return $groupId['target_id'];
+
+      if($group->group_content_access[LANGUAGE_NONE][0]['value'] == '0' && $group->group_access[LANGUAGE_NONE][0]['value'] == '0')
+        return $groupId['target_id'];
+
+      $privateVisibility[$group->group_access[LANGUAGE_NONE][0]['value']][] = $groupId['target_id'];
+    }
+    return count($privateVisibility[0]) ? reset($privateVisibility[0]) : reset($privateVisibility[1]);
   }
 }
