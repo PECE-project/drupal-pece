@@ -40,9 +40,9 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
   protected function tearDown () {
     user_delete($this->adminUser->uid);
     user_delete($this->authenticatedUser->uid);
-    user_delete($this->authenticatedUserInGroup->uid);
+//    user_delete($this->authenticatedUserInGroup->uid);
     user_delete($this->researcherUser->uid);
-    user_delete($this->researcherUserInGroup->uid);
+//    user_delete($this->researcherUserInGroup->uid);
   }
 
   /**
@@ -181,12 +181,18 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
       // Check if this content is assigned to a group.
       if (count($node->og_group_ref) > 0) {
         $groupId = $this->getMorePublicGroup($node->og_group_ref[LANGUAGE_NONE]);
+
+        $group_type = 'pece_group';
+        // Ungroup user, in case they were already registered.
         $authenticatedUserInGroup = user_load($this->authenticatedUserInGroup->uid);
+        og_ungroup($group_type, $groupId, 'user', $authenticatedUserInGroup);
+        $og_membership_simple_user = og_membership_create($group_type, $groupId, 'og_membership', $authenticatedUserInGroup->uid, 'og_user_node');
+
         $researcherUserInGroup = user_load($this->researcherUserInGroup->uid);
-        $authenticatedUserInGroup->og_user_node[LANGUAGE_NONE][] = $groupId;
-        $researcherUserInGroup->og_user_node[LANGUAGE_NONE][] = $groupId;
-        $user = user_save($authenticatedUserInGroup);
-        $user = user_save($researcherUserInGroup);
+        og_ungroup($group_type, $groupId, 'user', $researcherUserInGroup);
+        $og_membership_researcher_user = og_membership_create($group_type, $groupId, 'og_membership', $researcherUserInGroup->uid, 'og_user_node');
+        // Add researcher grant user to group, the number 5.
+        og_role_grant($group_type, $groupId, $og_membership_researcher_user->etid, 5);
         // Add user into the same group as the content is assigned to.
         $data['permissions']['authenticatedInGroup']['view'] = $this->viewContentWithUser($node, $authenticatedUserInGroup);
         $data['permissions']['researcherInGroup']['view'] = $this->viewContentWithUser($node, $researcherUserInGroup);
@@ -291,5 +297,22 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
       $privateVisibility[$group->group_access[LANGUAGE_NONE][0]['value']][] = $groupId['target_id'];
     }
     return count($privateVisibility[0]) ? reset($privateVisibility[0]) : reset($privateVisibility[1]);
+  }
+
+  private function createOgMembership($group_type, $group_id, $entity_type, $entity_id) {
+
+    $og_membership = new OgMembership();
+    $og_membership->etid = $entity_type;
+    $og_membership->entity_id = $entity_id;
+    $og_membership->gid = $group_id;
+    $og_membership->etid = $entity_type;
+    $og_membership->entity_id = $entity_id;
+    $og_membership->gid = $group_id;
+    $wrapper = entity_property_values_create_entity('og_membership', $values);
+    $wrapper->save();
+    /*
+     {"type":"og_membership_type_default","is_new":true,"group_type":"node","gid":"13","entity_type":"user","etid":"706","state":1,"created":1640119803,"field_name":"og_user_node","language":"en","og_membership_request":{"und":[]}}
+     */
+    return $og_membership;
   }
 }
