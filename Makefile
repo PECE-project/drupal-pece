@@ -38,7 +38,7 @@ run-php7:
 	docker-compose -f docker-compose-php7.2.yml run --rm -p 8080:80 dev_pece
 
 run-prod:
-	docker-compose -f docker-compose-prod.yml up -d
+	docker-compose -f docker-compose-prod.yml -f docker-compose-prod.override.yml up -d
 
 stop-prod:
 	docker-compose -f docker-compose-prod.yml stop
