@@ -181,18 +181,33 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
       // Check if this content is assigned to a group.
       if (count($node->og_group_ref) > 0) {
         $groupId = $this->getMorePublicGroup($node->og_group_ref[LANGUAGE_NONE]);
-
-        $group_type = 'pece_group';
+        $group_type = 'node';
         // Ungroup user, in case they were already registered.
         $authenticatedUserInGroup = user_load($this->authenticatedUserInGroup->uid);
-        og_ungroup($group_type, $groupId, 'user', $authenticatedUserInGroup);
-        $og_membership_simple_user = og_membership_create($group_type, $groupId, 'og_membership', $authenticatedUserInGroup->uid, 'og_user_node');
+        // Add the user to the group
+        og_group($group_type, $groupId, array(
+          "entity_type"       => "user",
+          "entity"        => $authenticatedUserInGroup,
+          'state' => OG_STATE_ACTIVE,
+          "membership_type"   => OG_MEMBERSHIP_TYPE_DEFAULT,
+          "field_name"   => 'og_user_node',
+        ));
+
+        // Changes the users role in the group (1 = non-member, 2 = member, 3 = administrator member)
+        og_role_grant($group_type, $groupId, $authenticatedUserInGroup->uid, 3);
 
         $researcherUserInGroup = user_load($this->researcherUserInGroup->uid);
         og_ungroup($group_type, $groupId, 'user', $researcherUserInGroup);
-        $og_membership_researcher_user = og_membership_create($group_type, $groupId, 'og_membership', $researcherUserInGroup->uid, 'og_user_node');
+        // Add the user to the group
+        og_group($group_type, $groupId, array(
+          "entity_type"       => "user",
+          "entity"        => $researcherUserInGroup,
+          'state' => OG_STATE_ACTIVE,
+          "membership_type"   => OG_MEMBERSHIP_TYPE_DEFAULT,
+          "field_name"   => 'og_user_node',
+        ));
         // Add researcher grant user to group, the number 5.
-        og_role_grant($group_type, $groupId, $og_membership_researcher_user->etid, 5);
+        og_role_grant($group_type, $groupId, $researcherUserInGroup->uid, 5);
         // Add user into the same group as the content is assigned to.
         $data['permissions']['authenticatedInGroup']['view'] = $this->viewContentWithUser($node, $authenticatedUserInGroup);
         $data['permissions']['researcherInGroup']['view'] = $this->viewContentWithUser($node, $researcherUserInGroup);
@@ -228,7 +243,8 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
     $this->drupalGet('/node/' . $node->nid);
     // get the response code
     $testView = $this->getResponseCode() == 200 ? TRUE : FALSE;
-    $this->drupalLogout();
+    if ($user)
+      $this->drupalLogout();
     return $testView;
   }
 
