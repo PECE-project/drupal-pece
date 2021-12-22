@@ -40,9 +40,9 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
   protected function tearDown () {
     user_delete($this->adminUser->uid);
     user_delete($this->authenticatedUser->uid);
-//    user_delete($this->authenticatedUserInGroup->uid);
+    user_delete($this->authenticatedUserInGroup->uid);
     user_delete($this->researcherUser->uid);
-//    user_delete($this->researcherUserInGroup->uid);
+    user_delete($this->researcherUserInGroup->uid);
   }
 
   /**
@@ -120,18 +120,15 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
     // Create a new user object.
     $this->adminUser = $this->drupalCreateUserWithRole('migrate_','administrator');
     $this->authenticatedUser = $this->drupalCreateUserWithRole('migrate_','authenticated user');
-    $this->authenticatedUserInGroup = $this->drupalCreateUserWithRole('migrate_','authenticated user');
+    $this->authenticatedUserInGroup = $this->drupalCreateUserWithRole('migrate_group_','authenticated user');
     $this->researcherUser = $this->drupalCreateUserWithRole('migrate_','Researcher');
-    $this->researcherUserInGroup = $this->drupalCreateUserWithRole('migrate_','Researcher');
+    $this->researcherUserInGroup = $this->drupalCreateUserWithRole('migrate_group_','Researcher');
   }
 
   /**
    * Check Access Permissions of all content types available on the platform.
    */
   public function testContentTypesAccessPerms() {
-    $this->drupalLogin($this->adminUser);
-    $this->drupalGet('/admin/content');
-    $this->assertResponse(200);
     // Get full list of all content types to validate its permissions.
     foreach ($contentTypes = $this->getAllContentTypes() as $contentType) {
       $this->validateAccessPermsByType($contentType);
@@ -145,9 +142,9 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
    * @return void
    */
   private function validateAccessPermsByType($contentTypeName) {
+
     $module_path = drupal_realpath(drupal_get_path('module', 'pece_access'));
     $nodes = node_load_multiple(array(), array('type' => $contentTypeName));
-
     if (empty($nodes)) {
       return;
     }
@@ -156,7 +153,7 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
       mkdir($module_path . "/files/$contentTypeName", 0766, TRUE);
     }
     $this->assertTrue(file_exists($module_path . "/files/$contentTypeName"), "Folder $contentTypeName created");
-    $this->drupalLogout();
+
 
     // Create JSON file with Node ID for each and every node.
     foreach ($nodes as $node) {
@@ -193,8 +190,8 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
           "field_name"   => 'og_user_node',
         ));
 
-        // Changes the users role in the group (1 = non-member, 2 = member, 3 = administrator member)
-        og_role_grant($group_type, $groupId, $authenticatedUserInGroup->uid, 3);
+        // Add contribuitor grant user to group, the number 5.
+        og_role_grant($group_type, $groupId, $authenticatedUserInGroup->uid, 4);
 
         $researcherUserInGroup = user_load($this->researcherUserInGroup->uid);
         og_ungroup($group_type, $groupId, 'user', $researcherUserInGroup);
@@ -209,8 +206,8 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
         // Add researcher grant user to group, the number 5.
         og_role_grant($group_type, $groupId, $researcherUserInGroup->uid, 5);
         // Add user into the same group as the content is assigned to.
-        $data['permissions']['authenticatedInGroup']['view'] = $this->viewContentWithUser($node, $authenticatedUserInGroup);
-        $data['permissions']['researcherInGroup']['view'] = $this->viewContentWithUser($node, $researcherUserInGroup);
+        $data['permissions']['authenticatedInGroup']['view'] = $this->viewContentWithUser($node, $this->authenticatedUserInGroup);
+        $data['permissions']['researcherInGroup']['view'] = $this->viewContentWithUser($node, $this->researcherUserInGroup);
       }
 
       $file_content = json_encode($data, JSON_PRETTY_PRINT);
@@ -273,17 +270,14 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
       'pece_artifact_text',
       'pece_artifact_video',
       'pece_artifact_website',
-    ];
-    $essaysTypes = [
       'pece_essay',
       'pece_photo_essay',
       'pece_timeline_essay',
-    ];
-    $miscContentTypes = [
       'pece_project',
       'pece_annotation',
     ];
-    return $artifactsTypes + $essaysTypes + $miscContentTypes;
+
+    return $artifactsTypes;
   }
 
   /**
@@ -313,22 +307,5 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
       $privateVisibility[$group->group_access[LANGUAGE_NONE][0]['value']][] = $groupId['target_id'];
     }
     return count($privateVisibility[0]) ? reset($privateVisibility[0]) : reset($privateVisibility[1]);
-  }
-
-  private function createOgMembership($group_type, $group_id, $entity_type, $entity_id) {
-
-    $og_membership = new OgMembership();
-    $og_membership->etid = $entity_type;
-    $og_membership->entity_id = $entity_id;
-    $og_membership->gid = $group_id;
-    $og_membership->etid = $entity_type;
-    $og_membership->entity_id = $entity_id;
-    $og_membership->gid = $group_id;
-    $wrapper = entity_property_values_create_entity('og_membership', $values);
-    $wrapper->save();
-    /*
-     {"type":"og_membership_type_default","is_new":true,"group_type":"node","gid":"13","entity_type":"user","etid":"706","state":1,"created":1640119803,"field_name":"og_user_node","language":"en","og_membership_request":{"und":[]}}
-     */
-    return $og_membership;
   }
 }
