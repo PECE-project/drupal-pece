@@ -2,18 +2,13 @@
 
 /**
  * Test PECE access.
- * Need administrator has all permissions.
- * Need simpletes module installed
+ * Need simpletest module installed
  *
  */
 class PeceAccessMatrix  extends DrupalWebTestCase {
 
-  private $adminUser;
-  private $authenticatedUser;
-  private $authenticatedUserInGroup;
-  private $researcherUser;
-  private $researcherUserInGroup;
-  private $contentTypes;
+  protected $user;
+  protected $userRole = NULL;
 
   // Create getInfo method
   public static function getInfo() {
@@ -38,11 +33,7 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
    * @return void
    */
   protected function tearDown () {
-    user_delete($this->adminUser->uid);
-    user_delete($this->authenticatedUser->uid);
-    user_delete($this->authenticatedUserInGroup->uid);
-    user_delete($this->researcherUser->uid);
-    user_delete($this->researcherUserInGroup->uid);
+    //user_delete($this->user->uid);
   }
 
   /**
@@ -116,13 +107,6 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
     $this->public_files_directory = $this->originalFileDirectory . '/simpletest/' . substr($this->databasePrefix, 10);
     $this->private_files_directory = $this->public_files_directory . '/private';
     $this->temp_files_directory = $this->private_files_directory . '/temp';
-
-    // Create a new user object.
-    $this->adminUser = $this->drupalCreateUserWithRole('migrate_','administrator');
-    $this->authenticatedUser = $this->drupalCreateUserWithRole('migrate_','authenticated user');
-    $this->authenticatedUserInGroup = $this->drupalCreateUserWithRole('migrate_group_','authenticated user');
-    $this->researcherUser = $this->drupalCreateUserWithRole('migrate_','Researcher');
-    $this->researcherUserInGroup = $this->drupalCreateUserWithRole('migrate_group_','Researcher');
   }
 
   /**
@@ -141,7 +125,7 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
    * @param String $contentTypeName
    * @return void
    */
-  private function validateAccessPermsByType($contentTypeName) {
+  protected function validateAccessPermsByType($contentTypeName) {
 
     $module_path = drupal_realpath(drupal_get_path('module', 'pece_access'));
     $nodes = node_load_multiple(array(), array('type' => $contentTypeName));
@@ -154,67 +138,24 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
     }
     $this->assertTrue(file_exists($module_path . "/files/$contentTypeName"), "Folder $contentTypeName created");
 
-
+    $data = array(
+      'role' => $this->userRole,
+      'size' => count($nodes),
+      'access' => array(),
+    );
+    if ($this->user)
+      $this->drupalLogin($this->user);
     // Create JSON file with Node ID for each and every node.
     foreach ($nodes as $node) {
-      $file_name = $module_path . "/files/$contentTypeName/" . $node->nid . '.json';
+      $file_name = $module_path . "/files/$contentTypeName/" . $this->userRole . '.json';
       // create object to salve in json file
-      $data = array(
-        'nid' => $node->nid,
-        'url' => "/node/$node->nid",
-        'permissions' => array(
-          'anonymous' => array(
-            'view' => $this->viewContentWithUser($node)
-          ),
-          'authenticated' => array(
-            'view' => $this->viewContentWithUser($node, $this->authenticatedUser)
-          ),
-          'researcher' => array(
-            'view' => $this->viewContentWithUser($node, $this->researcherUser)
-          ),
-        ),
-      );
-
-      // Check if this content is assigned to a group.
-      if (count($node->og_group_ref) > 0) {
-        $groupId = $this->getMorePublicGroup($node->og_group_ref[LANGUAGE_NONE]);
-        $group_type = 'node';
-        // Ungroup user, in case they were already registered.
-        $authenticatedUserInGroup = user_load($this->authenticatedUserInGroup->uid);
-        // Add the user to the group
-        og_group($group_type, $groupId, array(
-          "entity_type"       => "user",
-          "entity"        => $authenticatedUserInGroup,
-          'state' => OG_STATE_ACTIVE,
-          "membership_type"   => OG_MEMBERSHIP_TYPE_DEFAULT,
-          "field_name"   => 'og_user_node',
-        ));
-
-        // Add contribuitor grant user to group, the number 5.
-        og_role_grant($group_type, $groupId, $authenticatedUserInGroup->uid, 4);
-
-        $researcherUserInGroup = user_load($this->researcherUserInGroup->uid);
-        og_ungroup($group_type, $groupId, 'user', $researcherUserInGroup);
-        // Add the user to the group
-        og_group($group_type, $groupId, array(
-          "entity_type"       => "user",
-          "entity"        => $researcherUserInGroup,
-          'state' => OG_STATE_ACTIVE,
-          "membership_type"   => OG_MEMBERSHIP_TYPE_DEFAULT,
-          "field_name"   => 'og_user_node',
-        ));
-        // Add researcher grant user to group, the number 5.
-        og_role_grant($group_type, $groupId, $researcherUserInGroup->uid, 5);
-        // Add user into the same group as the content is assigned to.
-        $data['permissions']['authenticatedInGroup']['view'] = $this->viewContentWithUser($node, $this->authenticatedUserInGroup);
-        $data['permissions']['researcherInGroup']['view'] = $this->viewContentWithUser($node, $this->researcherUserInGroup);
-      }
-
+      $data['access'][$node->nid] = $this->viewContentWithUser($node, $this->user);
       $file_content = json_encode($data, JSON_PRETTY_PRINT);
       file_put_contents($file_name, $file_content);
-
-      $this->assertTrue(file_exists($file_name), 'File exists');
     }
+    $this->assertTrue(file_exists($file_name), 'File exists');
+    if ($this->user)
+      $this->drupalLogout();
   }
 
   /**
@@ -235,8 +176,6 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
    * Check view content with user.
    */
   public function viewContentWithUser($node, $user = null) {
-    if ($user)
-      $this->drupalLogin($user);
     $this->drupalGet('/node/' . $node->nid);
     // get the response code
     $testView = $this->getResponseCode() == 200 ? TRUE : FALSE;
@@ -250,7 +189,7 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
    * @return value
    *
    */
-  private function getResponseCode() {
+  protected function getResponseCode() {
     $curl_code = curl_getinfo($this->curlHandle, CURLINFO_HTTP_CODE);
     return $curl_code;
   }
@@ -259,7 +198,7 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
    * Get all available content types.
    * @return array types
    */
-  private function getAllContentTypes() {
+  protected function getAllContentTypes() {
     $artifactsTypes = [
       'pece_artifact_audio',
       'pece_artifact_bundle',
@@ -281,31 +220,25 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
   }
 
   /**
-   * Get groups and check the permission in group. The group with more public content return the id.
-   * @param $groups
-   *
-   * @return array
+   * Add user in all groups.
+   * @param $user user
+   * @param $role int
    */
-  private function getMorePublicGroup($groups) {
-    /**
-     *  Structure of $groups based on content visibility.
-     */
-    $privateVisibility = [
-      0 => [],
-      1 => [],
-    ];
-    foreach ($groups as $groupId) {
-      // load group by id
-      $group = node_load($groupId['target_id']);
-      // get group content visibility
-      if ($group->group_content_access[LANGUAGE_NONE][0]['value'] == '1')
-        return $groupId['target_id'];
-
-      if($group->group_content_access[LANGUAGE_NONE][0]['value'] == '0' && $group->group_access[LANGUAGE_NONE][0]['value'] == '0')
-        return $groupId['target_id'];
-
-      $privateVisibility[$group->group_access[LANGUAGE_NONE][0]['value']][] = $groupId['target_id'];
+  protected function addUserInAllGroups($user, $role = 4) {
+    $groups = node_load_multiple([], ['type' => 'pece_group']);
+    $group_type = 'node';
+    foreach ($groups as $group) {
+      // Add the user to the group
+      og_group($group_type, $group->nid, [
+        "entity_type" => "user",
+        "entity" => $user,
+        'state' => OG_STATE_ACTIVE,
+        "membership_type" => OG_MEMBERSHIP_TYPE_DEFAULT,
+        "field_name" => 'og_user_node',
+      ]);
+      // Add researcher grant user to group, the number 5.
+      og_role_grant($group_type, $group->nid, $user->uid, $role);
     }
-    return count($privateVisibility[0]) ? reset($privateVisibility[0]) : reset($privateVisibility[1]);
   }
+
 }

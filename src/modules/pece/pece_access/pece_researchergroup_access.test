@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Test PECE access matrix from Researcher.
+ * Need simpletest module installed
+ *
+ */
+class PeceResearcherGroupAccessMatrix extends PeceAccessMatrix {
+
+  // Create getInfo method
+  public static function getInfo() {
+    return array(
+      'name' => 'Pece Researcher Access Matrix  in Group',
+      'description' => 'Create Access Matrix to researcher user in groups',
+      'group' => 'PECE',
+    );
+  }
+
+  /**
+   * Override this function to use the same file folders.
+   * @return void
+   */
+  // Create setUp method
+  function setUp() {
+
+    parent::setUp();
+    $this->userRole = 'researcher_group';
+    $this->user = $this->drupalCreateUserWithRole('migrate_group_','Researcher');
+    $this->addUserInAllGroups($this->user,5);
+  }
+
+}
