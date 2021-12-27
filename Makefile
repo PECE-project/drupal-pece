@@ -56,4 +56,4 @@ log-prod-mysql:
 	docker-compose -f docker-compose-prod.yml logs db_v1
 
 run-matrix-permissions:
-	docker-compose -f docker-compose-prod.yml exec php_v1 sh -c "cd build && php ./scripts/run-tests.sh --url http://v1.pece.local PECE"
+	docker-compose -f docker-compose-prod.yml exec php_v1 sh -c "cd build && php ./scripts/run-tests.sh --concurrency 3 --url http://v1.pece.local PECE"

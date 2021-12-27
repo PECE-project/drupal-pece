@@ -10,4 +10,9 @@ dependencies[] = pece_core
 features[defaultconfig][] = strongarm:og_group_manager_full_access
 features[features_api][] = api:2
 ; Test files
-files[] = pece_access.test
+files[] = PeceAccessMatrix.php
+files[] = pece_authenticated_access.test
+files[] = pece_authenticatedgroup_access.test
+files[] = pece_researcher_access.test
+files[] = pece_researchergroup_access.test
+files[] = pece_anonymous_access.test
