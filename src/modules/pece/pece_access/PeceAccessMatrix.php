@@ -33,7 +33,7 @@ class PeceAccessMatrix  extends DrupalWebTestCase {
    * @return void
    */
   protected function tearDown () {
-    //user_delete($this->user->uid);
+    user_delete($this->user->uid);
   }
 
   /**
