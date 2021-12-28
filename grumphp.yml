@@ -1,0 +1,23 @@
+grumphp:
+    tasks:
+        phpcs:
+            standard: ['PSR12']
+        phpmd:
+            whitelist_patterns: []
+            exclude: []
+            report_format: text
+            ruleset: ['cleancode', 'codesize', 'naming']
+            triggered_by: ['php']
+        phpmnd:
+            directory: .
+            whitelist_patterns: []
+            exclude: []
+            exclude_name: []
+            exclude_path: []
+            extensions: []
+            hint: false
+            ignore_funcs: []
+            ignore_numbers: []
+            ignore_strings: []
+            strings: false
+            triggered_by: ['php']
