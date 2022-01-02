@@ -9,13 +9,13 @@ use Drupal\Tests\node\Kernel\NodeAccessTestBase;
  */
 class AccessMatrix extends NodeAccessTestBase {
 
+  protected $webUser = null;
   /**
    * {@inheritdoc}
    */
   protected static $modules = [
     'pece_access',
     'user',
-    'pece',
     'pece_migrate',
   ];
 
@@ -25,15 +25,6 @@ class AccessMatrix extends NodeAccessTestBase {
   protected function setUp(): void {
     parent::setUp();
     $this->installEntitySchema('user');
-  }
-
-  /**
-   * Test access matrix.
-   */
-  public function testAccessMatrix() {
-    $expected_node_access = ['view' => TRUE, 'update' => FALSE, 'delete' => FALSE];
-    $node = node_revision_load(1);
-    $this->assertNodeAccess($expected_node_access, $node, $this->webUser);
   }
 
 }
