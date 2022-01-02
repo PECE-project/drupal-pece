@@ -10,5 +10,14 @@ use Drupal\Tests\pece_migrate\Kernel\AccessMatrix\AccessMatrix;
  */
 class AnonymousAccess extends AccessMatrix {
 
+  /**
+   * Test access matrix.
+   */
+  public function testAccessMatrix() {
+    $expected_node_access = ['view' => TRUE, 'update' => FALSE, 'delete' => FALSE];
+    $node = $this->drupalCreateNode(['type' => 'page']);
+    $this->webUser = $this->drupalCreateUser(['access content']);
+    $this->assertNodeAccess($expected_node_access, $node, $this->webUser);
+  }
 
 }
