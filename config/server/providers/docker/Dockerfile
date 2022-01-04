@@ -1,4 +1,5 @@
-FROM    ubuntu:trusty-20190425
+FROM    ubuntu:trusty-20190515
+
 MAINTAINER Anatoly Bubenkov "bubenkoff@gmail.com"
 
 RUN apt-get update
