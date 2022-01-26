@@ -316,7 +316,7 @@ projects[panopoly_wysiwyg][version] = 1.85
 projects[panopoly_wysiwyg][subdir] = contrib
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.83
+projects[panopoly_test][version] = 1.85
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
