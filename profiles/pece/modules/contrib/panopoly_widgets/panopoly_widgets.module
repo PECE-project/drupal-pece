@@ -868,7 +868,7 @@ function panopoly_widgets_form_views_content_views_panes_content_type_edit_form_
  */
 function _panopoly_widgets_content_item_form_submit($form, &$form_state) {
   $exposed =& $form_state['values']['exposed'];
-  if ($exposed['title'] != $form_state['original_title']) {
+  if (!isset($form_state['original_title']) || $exposed['title'] != $form_state['original_title']) {
     // If the title has changed, we need to load the node with that title, set
     // the NID, and then clear out the title. We use the View itself to query
     // so that the result is consistent with autocomplete.
