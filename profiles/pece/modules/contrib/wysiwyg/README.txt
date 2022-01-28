@@ -50,6 +50,32 @@ CONFIGURATION
    » Wysiwyg.
 
 
+SECURITY
+--------
+
+Drupal normally stores all content created by users exactly as they input it
+and uses the text format system to filter out potentially malicious scripts or
+content during rendering, to avoid attacks like Cross-site scripting (XSS).
+
+Editing content posted by other users in WYSIWYG mode may mean, depending on
+the editor used and its current configuration, their potentially malicious
+content is rendered and executed by your browser.
+
+If the text format the editor profile has been attached to has known security
+filters enabled Wysiwyg will run those filters on content before passing it to
+an editor. If the text format used for a field is changed, filters from both
+text formats will be applied before passing the contents to the editor on the
+selected text format, if any, to keep only content allowed by both filters.
+Content not allowed by either filter will then be permanently lost.
+
+Wysiwyg lists the known security filters and their status on editor profiles.
+Hooks can be implemented to extend or alter the list of known security filters.
+There is also a hook specifically to extend the list of allowed tags used if the
+"Limit allowed tags" filter is enabled. See wysiwyg.api.php for information.
+If a module already implements the equivalent hooks from CKEditor module those
+will be called if no implementation for Wysiwyg module is found.
+
+
 SUPPORT REQUESTS
 ----------------
 

@@ -363,3 +363,67 @@ function hook_wysiwyg_editor_styles_alter(&$element, $context) {
     unset($element['#items']['sites/all/themes/omega/alpha/css/alpha-debug.css']);
   }
 }
+
+// The hooks below follow the pattern established by CKEditor module for dealing
+// with XSS filtering of user content upon loading a WYSIWYG editor.
+// Wysiwyg will try to use information presented to either module via the hooks.
+// If a module already supports CKEditor module there is no need for it to
+// also implement the corresponding hooks from Wysiwyg module unless it intends
+// to present other data only to Wysiwyg module.
+
+/**
+ * Hook to register Wysiwyg security filters.
+ *
+ * They would appear in the security filters list on the profile setting page.
+ *
+ * If a module does not implement this hook, Wysiwyg will attempt to invoke
+ * hook_ckeditor_security_filter() for that module instead.
+ */
+function hook_wysiwyg_security_filter() {
+  return array(
+    'security_filter_name' => array(
+      // Title of the security filter - it would be displayed in the security
+      // filters section of profile settings.
+      'title' => t('Security filter title'),
+      // Description of the security filter - it would be displayed in the
+      // security filters section of profile settings.
+      'description' => t('Security filter description'),
+    ),
+  );
+}
+
+/**
+ * Hook to alter Wysiwyg security filters.
+ *
+ * Wysiwyg will also invoke hook_ckeditor_security_filter_alter() before this
+ * hook, with the same parameters, allowing modules to implement either or both
+ * hooks while knowing which module is active.
+ *
+ * @param $security_filters
+ *   The list of security filters to alter.
+ * @param $reserved
+ *   Reserved in case ckeditor.module needs it later. Wysiwyg sets this to NULL.
+ *   CKEditor module does not currently pass this argument to
+ *   hook_ckeditor_security_filter_alter().
+ * @param $context
+ *   An array with a 'caller' key which can be used to tell which module is
+ *   invoking the hook. Wysiwyg sets 'caller' to 'wysiwyg'. CKEditor module does
+ *   not currently pass this argument to hook_ckeditor_security_filter_alter().
+ */
+function hook_wysiwyg_security_filter_alter(&$security_filters, $reserved = NULL, $context = array()) {
+  // Modify a security_filter.
+}
+
+/**
+ * Hook to extend the allowed tags list for the "Limit allowed tags" filter.
+ *
+ * This hook is invoked from wysiwyg_filter_xss() where text is filtered from
+ * potentially insecure tags.
+ *
+ * If a module does not implement this hook, Wysiwyg will attempt to invoke
+ * hook_ckeditor_security_filter() for that module instead.
+ */
+function hook_wysiwyg_filter_xss_allowed_tags() {
+  // Return an array of additional allowed tags.
+  return array('embed');
+}

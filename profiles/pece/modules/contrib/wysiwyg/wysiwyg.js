@@ -623,8 +623,52 @@ function attachToField(mainFieldId, context, params) {
   var internalInstance = new WysiwygInternalInstance(stateParams);
   _internalInstances[fieldId] = internalInstance;
   Drupal.wysiwyg.instances[fieldId] = internalInstance.publicInstance;
+  var $field = $('#' + fieldId);
+  var skipFiltering = false;
+  // Switch to using any pre-filtered content if it exists.
+  if ($field.attr('data-wysiwyg-value-filtered')) {
+    $field.val($field.attr('data-wysiwyg-value-filtered'));
+    skipFiltering = true;
+    // Pre-filtered content is only valid once.
+    $field.removeAttr('data-wysiwyg-value-filtered');
+  }
+  else if (enabled) {
+    // Store the unaltered content so it can be restored if no changes
+    // intentionally made by the user were detected, such as those caused by
+    // WYSIWYG editors when initially parsing and loading content.
+    $field.attr('data-wysiwyg-value-original', $field.val()).attr('data-wysiwyg-value-is-changed', 'false');
+  }
+  // Run filters if not told to skip them and there is something to be cleared.
+  var run_filter = enabled && !skipFiltering && $field.val().length > 0;
   // Attach editor, if enabled by default or last state was enabled.
-  Drupal.wysiwyg.editor.attach[editor].call(internalInstance, context, stateParams, clonedSettings);
+  if (run_filter) {
+    // Remove the Wysiwyg-only 'format' prefix.
+    var previousFormat = fieldInfo.previousFormat && fieldInfo.previousFormat !== fieldInfo.activeFormat ? fieldInfo.previousFormat.substr(6) : '';
+    $.ajax({
+      type: 'POST',
+      url: Drupal.settings.wysiwyg.xss_url,
+      async: true,
+      data: {
+        text: $field.val(),
+        input_format: fieldInfo.activeFormat.substr(6),
+        original_input_format: previousFormat,
+        token: Drupal.settings.wysiwyg.ajaxToken
+      },
+      dataType: 'json',
+      success: function (text) {
+        if (text !== false) {
+          $field.val(text);
+        }
+        if ($.isFunction(Drupal.wysiwyg.editor.attach[editor])) {
+          Drupal.wysiwyg.editor.attach[editor].call(internalInstance, context, stateParams, clonedSettings);
+        }
+      }
+    });
+  }
+  // No need to run the filters now, attach immediately.
+  else if ($.isFunction(Drupal.wysiwyg.editor.attach[editor])) {
+    Drupal.wysiwyg.editor.attach[editor].call(internalInstance, context, stateParams, clonedSettings);
+  }
 }
 
 /**
@@ -714,7 +758,7 @@ function detachFromField(mainFieldId, context, trigger, params) {
   if (jQuery.isFunction(Drupal.wysiwyg.editor.detach[editor])) {
     Drupal.wysiwyg.editor.detach[editor].call(_internalInstances[fieldId], context, stateParams, trigger);
   }
-  // Restore the original value of the user didn't make any changes yet.
+  // Restore the original value if the user didn't make any changes yet.
   if (enabled && $field.attr('data-wysiwyg-value-is-changed') === 'false') {
     $field.val($field.attr('data-wysiwyg-value-original'));
   }

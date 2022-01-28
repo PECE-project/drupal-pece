@@ -85,7 +85,8 @@ Drupal.wysiwyg.editor.attach.ckeditor = function(context, params, settings) {
       changed(ev);
     },
     contentDom: function (ev) {
-      if (CKEDITOR.version.split('.')[0] == '3') {
+      var version_parts = CKEDITOR.version.split('.');
+      if (version_parts[0] === '3' || (version_parts[0] === '4' && parseInt(version_parts[1], 10) < 2)) {
         ev.editor.on('key', function (ev) {
           // Do not capture modifiers.
           if (ev.data.ctrlKey || ev.data.metaKey)
@@ -329,6 +330,8 @@ Drupal.wysiwyg.editor.instance.ckeditor = {
             CKEDITOR.instances[this.field].insertHtml(item.getOuterHtml());
             skip++;
             break;
+          default:
+            skip++;
         }
       }
     }

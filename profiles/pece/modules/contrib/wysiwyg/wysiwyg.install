@@ -470,3 +470,12 @@ function wysiwyg_update_7205() {
     }
   }
 }
+
+/**
+ * Delete YUI profiles.
+ */
+function wysiwyg_update_7206() {
+  db_delete('wysiwyg')
+    ->condition('editor', 'yui')
+    ->execute();
+}

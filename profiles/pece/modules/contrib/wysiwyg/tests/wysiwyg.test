@@ -2,6 +2,467 @@
 
 /**
  * @file
- * Tests for Wysiwyg module.
+ * Tests for WYSIWYG module.
  */
 
+/**
+ * Test security aspects of the WYSIWYG module.
+ */
+class WysiwygXssTest extends DrupalWebTestCase {
+
+  /**
+   * The sample content to use in all tests.
+   */
+  protected static $sampleContent = '<p style="color: red">Hello, Dumbo Octopus!</p><script>alert(0)</script><embed type="image/svg+xml" src="image.svg" />';
+
+  /**
+   * The secured sample content to use in most tests.
+   */
+  protected static $sampleContentSecured = '<p>Hello, Dumbo Octopus!</p>alert(0)';
+
+  /**
+   * The secured sample content to use in tests when the <embed> tag is allowed.
+   */
+  protected static $sampleContentSecuredEmbedAllowed = '<p>Hello, Dumbo Octopus!</p>alert(0)<embed type="image/svg+xml" src="image.svg" />';
+
+  /**
+   * User with access to Restricted HTML text format without text editor.
+   */
+  protected $untrustedUser;
+
+  /**
+   * User with access to Restricted HTML text format with text editor.
+   */
+  protected $normalUser;
+
+  /**
+   * User with access to Restricted HTML text format, dangerous tags allowed
+   * with text editor.
+   */
+  protected $trustedUser;
+
+  /**
+   * User with access to all text formats and text editors.
+   */
+  protected $privilegedUser;
+
+  /**
+   * Define this test class.
+   */
+  public static function getinfo() {
+    return array(
+      'name' => 'Wysiwyg XSS filtering',
+      'description' => 'Ensure Wysiwyg runs the configured filters',
+      'group' => 'wysiwyg',
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp(array $modules = array()) {
+    $modules[] = 'wysiwyg_test';
+    parent::setUp($modules);
+
+    // Create 5 text formats, to cover all potential use cases:
+    //  1. restricted_without_editor (untrusted: anonymous)
+    //  2. restricted_with_editor (normal: authenticated)
+    //  3. restricted_plus_dangerous_tag_with_editor (privileged: trusted)
+    //  4. unrestricted_without_editor (privileged: admin)
+    //  5. unrestricted_with_editor (privileged: admin)
+    // With text formats 2, 3 and 5, we also associate a text editor that does
+    // not guarantee XSS safety. "restricted" means the text format has XSS
+    // filters on output, "unrestricted" means the opposite.
+    $format = new stdClass();
+    $format->format = 'restricted_without_editor';
+    $format->name = 'Restricted HTML, without text editor';
+    $format->filters = array(
+      'filter_html' => array(
+        'status' => 1,
+        'settings' => array(
+          'allowed_html' => '<h2> <h3> <h4> <h5> <h6> <p> <br> <strong> <a>',
+          'filter_html_help' => 1,
+          'filter_html_nofollow' => 0,
+        ),
+      ),
+    );
+    filter_format_save($format);
+    $format = new stdClass();
+    $format->format = 'restricted_with_editor';
+    $format->name = 'Restricted HTML, with text editor';
+    $format->filters = array(
+      'filter_html' => array(
+        'status' => 1,
+        'settings' => array(
+          'allowed_html' => '<h2> <h3> <h4> <h5> <h6> <p> <br> <strong> <a>',
+          'filter_html_help' => 1,
+          'filter_html_nofollow' => 0,
+        ),
+      ),
+    );
+    filter_format_save($format);
+    db_insert('wysiwyg')->fields(array(
+      'format' => 'restricted_with_editor',
+      'editor' => 'unicorn',
+      'settings' => serialize(array(
+        'default' => 1,
+      )),
+    ))->execute();
+
+    $format = new stdClass();
+    $format->format = 'restricted_plus_dangerous_tag_with_editor';
+    $format->name = 'Restricted HTML, dangerous tag allowed, with text editor';
+    $format->filters = array(
+      'filter_html' => array(
+        'status' => 1,
+        'settings' => array(
+          'allowed_html' => '<h2> <h3> <h4> <h5> <h6> <p> <br> <strong> <a> <embed>',
+          'filter_html_help' => 1,
+          'filter_html_nofollow' => 0,
+        ),
+      ),
+    );
+    filter_format_save($format);
+    db_insert('wysiwyg')->fields(array(
+      'format' => 'restricted_plus_dangerous_tag_with_editor',
+      'editor' => 'unicorn',
+      'settings' => serialize(array(
+        'default' => 1,
+      )),
+    ))->execute();
+
+    $format = new stdClass();
+    $format->format = 'unrestricted_without_editor';
+    $format->name = 'Unrestricted HTML, without text editor';
+    $format->filters = array();
+    filter_format_save($format);
+
+    $format = new stdClass();
+    $format->format = 'unrestricted_with_editor';
+    $format->name = 'Unrestricted HTML, with text editor';
+    $format->filters = array();
+    filter_format_save($format);
+    db_insert('wysiwyg')->fields(array(
+      'format' => 'unrestricted_with_editor',
+      'editor' => 'unicorn',
+      'settings' => serialize(array(
+        'default' => 1,
+      )),
+    ))->execute();
+
+    filter_formats_reset();
+    wysiwyg_profile_cache_clear();
+
+    // Create node type.
+    $this->drupalCreateContentType(array(
+      'type' => 'textblob',
+      'name' => 'Textblob',
+    ));
+
+    // Create 4 users, each with access to different text formats/editors:
+    // - "untrusted": restricted_without_editor
+    // - "normal": restricted_with_editor,
+    // - "trusted": restricted_plus_dangerous_tag_with_editor
+    // - "privileged": restricted_without_editor, restricted_with_editor,
+    //   restricted_plus_dangerous_tag_with_editor,
+    //   unrestricted_without_editor and unrestricted_with_editor.
+    $this->untrustedUser = $this->drupalCreateUser(array(
+      'create textblob content',
+      'edit any textblob content',
+      'use text format restricted_without_editor',
+    ));
+    $this->normalUser = $this->drupalCreateUser(array(
+      'create textblob content',
+      'edit any textblob content',
+      'use text format restricted_with_editor',
+    ));
+    $this->trustedUser = $this->drupalCreateUser(array(
+      'create textblob content',
+      'edit any textblob content',
+      'use text format restricted_plus_dangerous_tag_with_editor',
+    ));
+    $this->privilegedUser = $this->drupalCreateUser(array(
+      'create textblob content',
+      'edit any textblob content',
+      'use text format restricted_without_editor',
+      'use text format restricted_with_editor',
+      'use text format restricted_plus_dangerous_tag_with_editor',
+      'use text format unrestricted_without_editor',
+      'use text format unrestricted_with_editor',
+    ));
+
+    // Create an "textblob" node for each possible text format, with the same
+    // sample content, to do our tests on.
+    $samples = array(
+      array('author' => $this->untrustedUser->uid, 'format' => 'restricted_without_editor'),
+      array('author' => $this->normalUser->uid, 'format' => 'restricted_with_editor'),
+      array('author' => $this->trustedUser->uid, 'format' => 'restricted_plus_dangerous_tag_with_editor'),
+      array('author' => $this->privilegedUser->uid, 'format' => 'unrestricted_without_editor'),
+      array('author' => $this->privilegedUser->uid, 'format' => 'unrestricted_with_editor'),
+    );
+    foreach ($samples as $sample) {
+      $this->drupalCreateNode(array(
+        'type' => 'textblob',
+        'body' => array(
+          LANGUAGE_NONE => array(array('value' => self::$sampleContent, 'format' => $sample['format'])),
+        ),
+        'uid' => $sample['author'],
+      ));
+    }
+  }
+
+  /**
+   * Test filtering on the initial content loaded into the form fields.
+   */
+  public function testInitialSecurity() {
+    $expected = array(
+      array(
+        'node_id' => 1,
+        'format' => 'restricted_without_editor',
+        // No text editor => no XSS filtering.
+        'value' => '',
+        'users' => array(
+          $this->untrustedUser,
+          $this->privilegedUser,
+        ),
+      ),
+      array(
+        'node_id' => 2,
+        'format' => 'restricted_with_editor',
+        // Text editor => XSS filtering.
+        'value' => self::$sampleContentSecured,
+        'users' => array(
+          $this->normalUser,
+          $this->privilegedUser,
+        ),
+      ),
+      array(
+        'node_id' => 3,
+        'format' => 'restricted_plus_dangerous_tag_with_editor',
+        // Text editor => XSS filtering.
+        'value' => self::$sampleContentSecuredEmbedAllowed,
+        'users' => array(
+          $this->trustedUser,
+          $this->privilegedUser,
+        ),
+      ),
+      array(
+        'node_id' => 4,
+        'format' => 'unrestricted_without_editor',
+        // No text editor => no XSS filtering.
+        'value' => '',
+        'users' => array(
+          $this->privilegedUser,
+        ),
+      ),
+      array(
+        'node_id' => 5,
+        'format' => 'unrestricted_with_editor',
+        // Text editor, no security filter => no XSS filtering.
+        'value' => '',
+        'users' => array(
+          $this->privilegedUser,
+        ),
+      ),
+    );
+
+    // Log in as each user that may edit the content, and assert the value.
+    foreach ($expected as $case) {
+      foreach ($case['users'] as $account) {
+        $this->pass(format_string('Scenario: sample %sample_id, %format.', array(
+          '%sample_id' => $case['node_id'],
+          '%format' => $case['format'],
+        )));
+        $this->drupalLogin($account);
+        $this->drupalGet('node/' . $case['node_id'] . '/edit');
+        $dom_node = $this->xpath('//textarea[@id="edit-body-und-0-value"]');
+        // Verify the filtered attribute value. This is different from D8 which
+        // puts the original content in an attribute and filtered content as the
+        // field value. Wysiwyg does the opposite to not unintentionally modify
+        // the data if JavaScript is not there to swap it back before a save.
+        $this->assertIdentical($case['value'], (string) $dom_node[0]['data-wysiwyg-value-filtered'], 'The value was correctly filtered for XSS attack vectors.');
+      }
+    }
+  }
+
+  /**
+   * Tests administrator security: is the user safe when switching text formats?
+   *
+   * Tests 24 scenarios. Tests only with a text editor that is not XSS-safe.
+   *
+   * When changing from a more restrictive text format with a text editor (or a
+   * text format without a text editor) to a less restrictive text format, it is
+   * possible that a malicious user could trigger an XSS.
+   *
+   * E.g. when switching a piece of text that uses the Restricted HTML text
+   * format and contains a <script> tag to the Full HTML text format, the
+   * <script> tag would be executed. Unless we apply appropriate filtering.
+   */
+  public function testSwitchingSecurity() {
+    $expected = array(
+      array(
+        'node_id' => 1,
+        // No text editor => no XSS filtering.
+        'format' => 'restricted_without_editor',
+        'switch_to' => array(
+          'restricted_with_editor' => self::$sampleContentSecured,
+          // Intersection of restrictions => most strict XSS filtering.
+          'restricted_plus_dangerous_tag_with_editor' => self::$sampleContentSecured,
+          // No text editor => no XSS filtering.
+          'unrestricted_without_editor' => FALSE,
+          'unrestricted_with_editor' => self::$sampleContentSecured,
+        ),
+      ),
+      array(
+        'node_id' => 2,
+        // Text editor => XSS filtering.
+        'format' => 'restricted_with_editor',
+        'switch_to' => array(
+          // No text editor => no XSS filtering.
+          'restricted_without_editor' => FALSE,
+          // Intersection of restrictions => most strict XSS filtering.
+          'restricted_plus_dangerous_tag_with_editor' => self::$sampleContentSecured,
+          // No text editor => no XSS filtering.
+          'unrestricted_without_editor' => FALSE,
+          'unrestricted_with_editor' => self::$sampleContentSecured,
+        ),
+      ),
+      array(
+        'node_id' => 3,
+        // Text editor => XSS filtering.
+        'format' => 'restricted_plus_dangerous_tag_with_editor',
+        'switch_to' => array(
+          // No text editor => no XSS filtering.
+          'restricted_without_editor' => FALSE,
+          // Intersection of restrictions => most strict XSS filtering.
+          'restricted_with_editor' => self::$sampleContentSecured,
+          // No text editor => no XSS filtering.
+          'unrestricted_without_editor' => FALSE,
+          // Intersection of restrictions => most strict XSS filtering.
+          'unrestricted_with_editor' => self::$sampleContentSecuredEmbedAllowed,
+        ),
+      ),
+      array(
+        'node_id' => 4,
+        // No text editor => no XSS filtering.
+        'format' => 'unrestricted_without_editor',
+        'switch_to' => array(
+          // No text editor => no XSS filtering.
+          'restricted_without_editor' => FALSE,
+          'restricted_with_editor' => self::$sampleContentSecured,
+          // Intersection of restrictions => most strict XSS filtering.
+          'restricted_plus_dangerous_tag_with_editor' => self::$sampleContentSecuredEmbedAllowed,
+          // From no editor, no security filters, to editor, still no security
+          // filters: resulting content when viewed was already vulnerable, so
+          // it must be intentional.
+          'unrestricted_with_editor' => FALSE,
+        ),
+      ),
+      array(
+        'node_id' => 5,
+        // Text editor => XSS filtering.
+        'format' => 'unrestricted_with_editor',
+        'switch_to' => array(
+          // From editor, no security filters to security filters, no editor: no
+          // risk.
+          'restricted_without_editor' => FALSE,
+          'restricted_with_editor' => self::$sampleContentSecured,
+          // Intersection of restrictions => most strict XSS filtering.
+          'restricted_plus_dangerous_tag_with_editor' => self::$sampleContentSecuredEmbedAllowed,
+          // From no editor, no security filters, to editor, still no security
+          // filters: resulting content when viewed was already vulnerable, so
+          // it must be intentional.
+          'unrestricted_without_editor' => FALSE,
+        ),
+      ),
+    );
+
+    // Log in as the privileged user, and for every sample, do the following:
+    //  - switch to every other text format/editor
+    //  - assert the XSS-filtered values that we get from the server
+    $this->drupalLogin($this->privilegedUser);
+    $token = $this->getToken();
+    foreach ($expected as $case) {
+      $this->drupalGet('node/' . $case['node_id'] . '/edit');
+
+      // Verify the original value is intact. This is different from D8 which
+      // puts the original content in an attribute and filtered content as the
+      // field value. Wysiwyg does the opposite to not unintentionally modify
+      // the data if JavaScript is not there to swap it back before a save.
+      $dom_node = $this->xpath('//textarea[@id="edit-body-und-0-value"]');
+      $this->assertIdentical(self::$sampleContent, (string) $dom_node[0], 'The original value is intact.');
+
+      // Switch to every other text format/editor and verify the results.
+      foreach ($case['switch_to'] as $format => $expected_filtered_value) {
+        $this->pass(format_string('Scenario: sample %sample_id, switch from %original_format to %format.', array(
+          '%sample_id' => $case['node_id'],
+          '%original_format' => $case['format'],
+          '%format' => $format,
+        )));
+
+        $post = array(
+          'token' => $token,
+          'text' => self::$sampleContent,
+          'original_input_format' => $case['format'],
+          'input_format' => $format,
+        );
+        $response = $this->simplePost('wysiwyg/xss', 'application/json', array('post' => $post));
+        $this->assertResponse(200);
+        $json = drupal_json_decode($response);
+        $this->assertIdentical($json, $expected_filtered_value, 'The value was correctly filtered for XSS attack vectors.');
+      }
+    }
+  }
+
+  /**
+   * Get the users token needed to post filtering requests.
+   */
+  private function getToken() {
+    return $this->simplePost('wysiwyg-test-get-token', 'text/plain');
+  }
+
+  /**
+   * Make a simple Curl request to a path.
+   *
+   * Defaults to a simple GET request, returns the raw response body.
+   *
+   * @param $path
+   *   The path to request.
+   * @param $accept
+   *   The content-type to accept, defaults to 'application/json'.
+   * @param $options
+   *   An array with the following keys, all optional:
+   *   - 'curl': An associative array keyed by CURLOPT_* constants and values.
+   *   - 'headers': An associative array with HTTP header keys and values.
+   *   - 'post': An associative array with POST payload data as keys and values.
+   *      Setting this automatically adds the headers to switch to a POST
+   *      request with Content-Type 'application/x-www-form-urlencoded' as it
+   *      auto-encodes all POST keys and values.
+   *
+   * @return string
+   *   The response contents.
+   */
+  protected function simplePost($path, $accept = 'application/json', $options = array()) {
+    $curl_options = (!empty($options['curl']) ? $options['curl'] : array()) + array(
+      CURLOPT_URL => url($path, array('absolute' => TRUE)),
+    );
+    $headers = (!empty($options['headers']) ? $options['headers'] : array());
+    if (!empty($options['post'])) {
+      $post = array();
+      foreach ($options['post'] as $key => $value) {
+        $post[$key] = urlencode($key) . '=' . urlencode($value);
+      }
+      $post = implode('&', $post);
+      $curl_options = array(
+        CURLOPT_POST => TRUE,
+        CURLOPT_POSTFIELDS => $post,
+      ) + $curl_options;
+      $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    }
+    foreach ($headers as $name => $value) {
+      $curl_options[CURLOPT_HTTPHEADER][] = $name . ': ' . $value;
+    }
+    return $this->curlExec($curl_options);
+  }
+
+}

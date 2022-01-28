@@ -121,6 +121,13 @@ function wysiwyg_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
+  $items['wysiwyg/xss'] = array(
+    'title' => 'XSS Filter',
+    'description' => 'XSS Filter.',
+    'page callback' => 'wysiwyg_filter_xss_page_callback',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -223,6 +230,8 @@ function wysiwyg_element_info_alter(&$types) {
  * The element's #id is used as reference to attach client-side editors.
  */
 function wysiwyg_pre_render_text_format($element) {
+  global $user;
+  static $is_running = FALSE;
   // filter_process_format() copies properties to the expanded 'value' child
   // element. Skip this text format widget, if it contains no 'format' or when
   // the current user does not have access to edit the value.
@@ -283,6 +292,17 @@ function wysiwyg_pre_render_text_format($element) {
       if (isset($profile->preferences['show_toggle'])) {
         $settings[$format]['toggle'] = (int) $profile->preferences['show_toggle'];
       }
+      if (!$is_running) {
+        // By default sessions are not started automatically for anonymous
+        // users. Start one for editing content so that we have a consistent
+        // token that is used in XSS filtering.
+        if (empty($user->uid)) {
+          drupal_session_start();
+          $_SESSION['wysiwyg_anonymous_user'] = TRUE;
+          drupal_page_is_cacheable(FALSE);
+        }
+        $is_running = TRUE;
+      }
       // Check editor theme (and reset it if not/no longer available).
       $theme = wysiwyg_get_editor_themes($profile, (isset($profile->settings['theme']) ? $profile->settings['theme'] : ''));
 
@@ -293,6 +313,9 @@ function wysiwyg_pre_render_text_format($element) {
     }
   }
 
+  $format = filter_format_load($format_field['format']['#value']);
+  $active_format = 'format' . $format_field['format']['#value'];
+  $enabled = !empty($settings[$active_format]) && $settings[$active_format]['editor'] !== 'none' && !empty($settings[$active_format]['status']);
   // Store the unaltered content so it can be restored if no changes
   // intentionally made by the user were detected, such as those caused by
   // WYSIWYG editors when initially parsing and loading content.
@@ -300,11 +323,23 @@ function wysiwyg_pre_render_text_format($element) {
     $original = $element['value']['#value'];
     $element['value']['#attributes']['data-wysiwyg-value-original'] = $original;
     $element['value']['#attributes']['data-wysiwyg-value-is-changed'] = 'false';
+    if ($enabled) {
+      $filtered = wysiwyg_filter_xss($original, $format);
+      if ($filtered !== FALSE) {
+        $element['value']['#attributes']['data-wysiwyg-value-filtered'] = $filtered;
+      }
+    }
   }
   if (!empty($element['summary']['#value']) && $element['summary']['#type'] === 'textarea') {
     $original = $element['summary']['#value'];
     $element['summary']['#attributes']['data-wysiwyg-value-original'] = $original;
     $element['summary']['#attributes']['data-wysiwyg-value-is-changed'] = 'false';
+    if ($enabled && empty($settings[$active_format]['skip_summary'])) {
+      $filtered = wysiwyg_filter_xss($original, $format);
+      if ($filtered !== FALSE) {
+        $element['summary']['#attributes']['data-wysiwyg-value-filtered'] = $filtered;
+      }
+    }
   }
 
   $element['value']['#attributes']['class'][] = 'wysiwyg';
@@ -458,6 +493,8 @@ function wysiwyg_load_editor($profile) {
       'plugins' => array(),
       'disable' => t('Disable rich-text'),
       'enable' => t('Enable rich-text'),
+      'ajaxToken' => drupal_get_token('wysiwygAjaxCall'),
+      'xss_url' => url('wysiwyg/xss'),
     )), 'setting');
 
     // Initialize our namespaces in the *header* to do not force editor
@@ -1448,6 +1485,14 @@ function _wysiwyg_process_include($module, $identifier, $path, $hook) {
  */
 
 /**
+ * Return an install note about deprecation.
+ */
+function wysiwyg_deprecation_install_note($editor) {
+  $output = '<p class="warning">' . $editor['deprecation message'] . '</p>';
+  return $output;
+}
+
+/**
  * Implements hook_features_api().
  */
 function wysiwyg_features_api() {
@@ -1462,3 +1507,307 @@ function wysiwyg_features_api() {
   );
 }
 
+/**
+ * AJAX callback - XSS filter.
+ */
+function wysiwyg_filter_xss_page_callback() {
+  $GLOBALS['devel_shutdown'] = FALSE;
+
+  if (!isset($_POST['text']) || !is_string($_POST['text']) || !isset($_POST['input_format']) || !is_string($_POST['input_format']) || !isset($_POST['token']) || !drupal_valid_token($_POST['token'], 'wysiwygAjaxCall', FALSE)) {
+    drupal_add_http_header('Status', '403 Forbidden');
+    exit;
+  }
+
+  $format = filter_format_load($_POST['input_format']);
+  if ($format == FALSE || !is_object($format) || !filter_access($format)) {
+    drupal_add_http_header('Status', '403 Forbidden');
+    exit;
+  }
+
+  $original_format = !empty($_POST['original_input_format']) ? $_POST['original_input_format'] : NULL;
+  if ($original_format !== NULL) {
+    $original_format = filter_format_load($original_format);
+    if ($original_format == FALSE || !is_object($original_format) || !filter_access($original_format)) {
+      drupal_add_http_header('Status', '403 Forbidden');
+      exit;
+    }
+  }
+
+  return drupal_json_output(wysiwyg_filter_xss($_POST['text'], $format, $original_format));
+}
+
+/**
+ * Apply text editor XSS filtering.
+ *
+ * Based on ckeditor.module's ckeditor_filter_xss() and Editor module in D8.
+ * Invokes one of hook_[wysiwyg|ckeditor]_filter_xss_allowed_tags().
+ *
+ * @param $html
+ *   The HTML string that will be passed to the text editor.
+ * @param $format
+ *   The loaded text format object to get filters from.
+ * @param $original_format
+ *   An optional previous text format object being switched from.
+ *
+ * @return string|FALSE
+ *   The filtered HTML, or FALSE if no filtering was possible or needed.
+ */
+function wysiwyg_filter_xss($html, $format, $original_format = NULL) {
+  $editor = wysiwyg_get_profile($format->format);
+  // If no editor is attached with this format, there is no need to perform
+  // XSS filtering.
+  if (!$editor) {
+    return FALSE;
+  }
+  // If there was a previous format we must apply any security filters from
+  // it in case they were more restrictive than the current format. Otherwise
+  // an anonymous user could create content in Filtered HTML without an editor,
+  // an admin user edits it (then no XSS filtering is applied), and switches to
+  // Full HTML with an editor. Then XSS filtering must be applied to protect the
+  // admin user.
+  if ($original_format !== NULL) {
+    $filtered_original = _wysiwyg_apply_format_filters($html, $original_format);
+    // If filtering was needed for the previous format use its output as the
+    // input markup for the current format.
+    if ($filtered_original !== FALSE) {
+      $html = $filtered_original;
+    }
+    // Apply security filters from the current format.
+    $filtered_current = _wysiwyg_apply_format_filters($html, $format);
+    // If no filtering was needed for either format, just return FALSE.
+    if ($filtered_original === FALSE && $filtered_current === FALSE) {
+      return FALSE;
+    }
+    // If the current format did no filtering, use the result of the original.
+    if ($filtered_current === FALSE) {
+      return $filtered_original;
+    }
+    // Only the current format needed to apply filtering.
+    return $filtered_current;
+  }
+  // Only apply security filters from the current format.
+  return _wysiwyg_apply_format_filters($html, $format);
+}
+
+/**
+ * Apply security filters from a format on input markup.
+ *
+ * @param $html
+ *   The HTML string that will be passed to the text editor.
+ * @param $format
+ *   The loaded text format to get filters from.
+ *
+ * @return string|FALSE
+ *   The filtered HTML, or FALSE if no filtering was possible or needed.
+ */
+function _wysiwyg_apply_format_filters($html, $format) {
+  $filters = filter_get_filters();
+  $security_filters = wysiwyg_security_filters();
+  $format_filters = filter_list_format($format->format);
+  $cache_id = $format->format . '::' . hash('sha256', $html);
+  $did_filter = FALSE;
+
+  foreach ((array) $format_filters as $name => $object) {
+    // If the filter is not a security filter, does not exist, cannot be called
+    // or isn't enabled in the selected text format then skip it.
+    if (!isset($security_filters['filters'][$name]) || !isset($filters[$name]) || !isset($filters[$name]['process callback']) || $object->status == 0) {
+      continue;
+    }
+
+    // Built-in filter module, a special case where we would like to strip XSS
+    // and nothing more.
+    if ($name == 'filter_html' && $security_filters['filters']['filter_html'] == 1) {
+      preg_match_all("|</?([a-z][a-z0-9]*)(?:\b[^>]*)>|i", $html, $matches);
+      if ($matches[1]) {
+
+        // Sources of inspiration:
+        // https://www.w3.org/TR/html4/index/elements.html
+        // https://www.w3.org/TR/html-markup/elements.html
+        // https://developer.mozilla.org/en-US/docs/Web/HTML/Element
+        // https://drupal.org/project/ckeditor
+        $base_allowed_tags = array('a', 'abbr', 'acronym', 'address', 'area', 'article', 'aside', 'audio', 'b', 'base', 'basefont',
+          'bdi', 'bdo', 'big', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'center', 'cite', 'code', 'col', 'colgroup',
+          'command', 'datalist', 'dd', 'del', 'details', 'dfn', 'dialog', 'dir', 'div', 'dl', 'dt', 'em', 'fieldset', 'figcaption',
+          'figure', 'font', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hgroup', 'hr', 'html', 'i', 'img',
+          'input', 'ins', 'isindex', 'kbd', 'keygen', 'label', 'legend', 'li', 'main', 'map', 'mark', 'menu', 'menuitem', 'meter',
+          'nav', 'noframes', 'noscript', 'ol', 'optgroup', 'option', 'output', 'p', 'param', 'pre', 'progress', 'q', 'rp', 'rt',
+          'ruby', 's', 'samp', 'section', 'select', 'small', 'source', 'span', 'strike', 'strong', 'sub', 'summary', 'sup', 'table',
+          'tbody', 'td', 'textarea', 'tfoot', 'th', 'thead', 'time', 'title', 'tr', 'track', 'tt', 'u', 'ul', 'var', 'video', 'wbr',
+        );
+
+        // Get tags allowed in filter settings.
+        $filter_allowed_tags = preg_split('/\s+|<|>/', $object->settings['allowed_html'], -1, PREG_SPLIT_NO_EMPTY);
+
+        // Combine allowed tags.
+        $tags = array_merge($base_allowed_tags, $filter_allowed_tags);
+
+        // Tags provided by hook.
+        $hooks_allowed_tags = _wysiwyg_invoke_security_hook('filter_xss_allowed_tags');
+        if (!empty($hooks_allowed_tags) && is_array($hooks_allowed_tags)) {
+          foreach ($hooks_allowed_tags as $tag) {
+            if (!empty($tag) && is_string($tag) && !in_array($tag, $tags)) {
+              array_push($tags, $tag);
+            }
+          }
+        }
+        $html = filter_xss($html, $tags);
+        $did_filter = TRUE;
+      }
+      continue;
+    }
+    $html = $filters[$name]['process callback']($html, $format_filters[$name], $format, '', TRUE, $cache_id);
+    $did_filter = TRUE;
+  }
+
+  return ($did_filter ? $html : FALSE);
+}
+
+/**
+ * Return all modules that provide security filters.
+ *
+ * Based on ckeditor.module's ckeditor_security_filters().
+ */
+function wysiwyg_security_filters() {
+  $security_filters = array();
+
+  $security_filters['modules'] = array(
+    'htmLawed' => array(
+      'title' => 'htmLawed',
+      'project_page' => 'https://drupal.org/project/htmLawed',
+      'weight' => 0,
+      'installed' => FALSE,
+      'filters' => array(),
+    ),
+    'htmltidy' => array(
+      'title' => 'HTML Tidy',
+      'project_page' => 'https://drupal.org/project/htmltidy',
+      'weight' => 0,
+      'installed' => FALSE,
+      'filters' => array(),
+    ),
+    'htmlpurifier' => array(
+      'title' => 'HTML Purifier',
+      'project_page' => 'https://drupal.org/project/htmlpurifier',
+      'weight' => 0,
+      'installed' => FALSE,
+      'filters' => array(),
+    ),
+    'wysiwyg_filter' => array(
+      'title' => 'WYSIWYG Filter',
+      'project_page' => 'https://drupal.org/project/wysiwyg_filter',
+      'weight' => 0,
+      'installed' => FALSE,
+      'filters' => array(),
+    ),
+  );
+
+  $security_filters['filters'] = array();
+
+  foreach ($security_filters['modules'] as $module_name => $module_conf) {
+    if (module_exists($module_name)) {
+      $security_filters['modules'][$module_name]['installed'] = TRUE;
+      $module_filters = module_invoke($module_name, 'filter_info');
+      foreach ($module_filters as $module_filter_name => $module_filter_conf) {
+        $security_filters['modules'][$module_name]['filters'][$module_filter_name] = $module_filter_conf;
+        $security_filters['filters'][$module_filter_name] = TRUE;
+      }
+    }
+  }
+
+  // Add filters from Drupal Core.
+  $security_filters['modules']['__drupal'] = array(
+    'title' => t('Drupal core'),
+    'project_page' => FALSE,
+    'weight' => -1,
+    'installed' => TRUE,
+    'filters' => array(
+      'filter_html' => array(
+        'title' => t('Limit allowed HTML tags'),
+        'description' => t('Removes the attributes that the built-in "Limit allowed HTML tags"-filter does not allow inside HTML elements/tags.'),
+      ),
+    ),
+  );
+  $security_filters['filters']['filter_html'] = TRUE;
+
+  // Load security filters added via the ckeditor.module or wysiwyg module APIs.
+  $external_module_filters = _wysiwyg_invoke_security_hook('security_filter');
+  if (count($external_module_filters) > 0) {
+    $security_filters['modules']['__external'] = array(
+      'title' => t('External filters'),
+      'project_page' => FALSE,
+      'weight' => 1,
+      'installed' => TRUE,
+      'filters' => array(),
+    );
+    foreach ($external_module_filters as $module_filter_name => $module_filter_conf) {
+      $security_filters['modules']['__external']['filters'][$module_filter_name] = $module_filter_conf;
+      $security_filters['filters'][$module_filter_name] = TRUE;
+    }
+  }
+  // Pass along some context to let modules implementing both alter hooks know
+  // which module is calling them to allow separate alterations if needed.
+  $context = array(
+    'caller' => 'wysiwyg',
+  );
+  // Pass a dummy value in case ckeditor.module needs the second argument later.
+  $reserved = NULL;
+  drupal_alter('ckeditor_security_filter', $security_filters, $reserved, $context);
+  $reserved = NULL;
+  drupal_alter('wysiwyg_security_filter', $security_filters, $reserved, $context);
+
+  return $security_filters;
+}
+
+/**
+ * A custom version of module_invoke_all().
+ *
+ * Allows calling just one of hook_wysiwyg_FOO() and hook_ckeditor_FOO() for
+ * each implementing module. Wysiwyg hooks take precedence if defined.
+ *
+ * @param $hook_base
+ *   The base name of a hook to call, without module prefix.
+ *
+ * @see module_invoke_all()
+ */
+function _wysiwyg_invoke_security_hook($hook_base) {
+  $implements_wysiwyg = module_implements('wysiwyg_' . $hook_base);
+  $implements_ckeditor = module_implements('ckeditor_' . $hook_base);
+  // Ignore the hook_ckeditor_* implementation if a module also has a
+  // hook_wysiwyg_* implementation.
+  $implements_ckeditor = array_diff($implements_ckeditor, $implements_wysiwyg);
+  // Everything below is based on module_invoke_all().
+  $args = func_get_args();
+  // Remove $hook from the arguments.
+  unset($args[0]);
+  $return = array();
+  // Call ckeditor.module hooks.
+  $hook = 'ckeditor_' . $hook_base;
+  foreach ($implements_ckeditor as $module) {
+    $function = $module . '_' . $hook;
+    if (function_exists($function)) {
+      $result = call_user_func_array($function, $args);
+      if (isset($result) && is_array($result)) {
+        $return = array_merge_recursive($return, $result);
+      }
+      elseif (isset($result)) {
+        $return[] = $result;
+      }
+    }
+  }
+  // Call wysiwyg.module hooks.
+  $hook = 'wysiwyg_' . $hook_base;
+  foreach ($implements_wysiwyg as $module) {
+    $function = $module . '_' . $hook;
+    if (function_exists($function)) {
+      $result = call_user_func_array($function, $args);
+      if (isset($result) && is_array($result)) {
+        $return = array_merge_recursive($return, $result);
+      }
+      elseif (isset($result)) {
+        $return[] = $result;
+      }
+    }
+  }
+
+  return $return;
+}

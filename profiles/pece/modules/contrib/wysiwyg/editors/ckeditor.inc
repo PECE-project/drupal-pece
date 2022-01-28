@@ -32,7 +32,8 @@ function wysiwyg_ckeditor_editor() {
       ),
     ),
     'install note callback' => 'wysiwyg_ckeditor_install_note',
-    'verified version range' => array('3.0', '4.12.1.64749bb245'),
+    'deprecation message' => 'wysiwyg_ckeditor_deprecation_message',
+    'verified version range' => array('3.0', '4.17.1.f6dd30807a'),
     'migrate settings callback' => 'wysiwyg_ckeditor_migrate_settings',
     'version callback' => 'wysiwyg_ckeditor_version',
     'themes callback' => 'wysiwyg_ckeditor_themes',
@@ -147,7 +148,18 @@ function wysiwyg_ckeditor_migrate_settings(&$settings, $editor, $profile_version
 function wysiwyg_ckeditor_install_note() {
   $output = '<p class="warning">' . t('Do NOT download the "CKEditor for Drupal" edition.') . '</br>';
   $output .= t('Make sure you install the full package as not all plugins work with the standard package.') . '</p>';
+  $output .= '<p>' . t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', array('@editor' => 'CKEditor 3')) . '</p>';
   return $output;
+}
+
+/**
+ * Show a deprecation message.
+ */
+function wysiwyg_ckeditor_deprecation_message($editor) {
+  if (!empty($editor['installed version']) && version_compare($editor['installed version'], '4.0.0', '<')) {
+    return t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', array('@editor' => 'CKEditor 3'));
+  }
+  return NULL;
 }
 
 /**

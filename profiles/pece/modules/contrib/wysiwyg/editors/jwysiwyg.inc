@@ -20,6 +20,8 @@ function wysiwyg_jwysiwyg_editor() {
       ),
     ),
     'verified version range' => array('0.5', '0.97'),
+    'deprecation message' => t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', array('@editor' => 'jWYSIWYG')),
+    'install note callback' => 'wysiwyg_deprecation_install_note',
     'version callback' => 'wysiwyg_jwysiwyg_version',
     'settings form callback' => 'wysiwyg_jwysiwyg_settings_form',
     'settings callback' => 'wysiwyg_jwysiwyg_settings',

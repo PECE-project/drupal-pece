@@ -46,7 +46,7 @@ function _wysiwyg_delivery_dummy($page_callback_result) {
   if ($page_callback_result) {
     drupal_add_http_header('Status', '200 OK');
     // Make the client get the actual stylesheets.
-    $css = [];
+    $css = array();
     $cached = cache_get('wysiwyg_css');
     if ($cached && !empty($cached->data[$theme_key])) {
       $css = $cached->data[$theme_key]['files'];

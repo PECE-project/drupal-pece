@@ -24,6 +24,8 @@ function wysiwyg_wymeditor_editor() {
       ),
     ),
     'verified version range' => array('0.5', '1.1.1'),
+    'deprecation message' => t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', array('@editor' => 'WYMeditor')),
+    'install note callback' => 'wysiwyg_deprecation_install_note',
     'version callback' => 'wysiwyg_wymeditor_version',
     'themes callback' => 'wysiwyg_wymeditor_themes',
     'settings form callback' => 'wysiwyg_wymeditor_settings_form',
@@ -33,7 +35,7 @@ function wysiwyg_wymeditor_editor() {
       '0.5-rc1' => array(
         'js files' => array('wymeditor.js'),
       ),
-      '1.0.0a1' => array(
+      '1.0.0-rc1' => array(
         'js files' => array('wymeditor-1.js'),
         'css files' => array('wymeditor.css'),
       ),

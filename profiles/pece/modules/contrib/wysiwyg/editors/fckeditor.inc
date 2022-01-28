@@ -20,6 +20,8 @@ function wysiwyg_fckeditor_editor() {
       ),
     ),
     'verified version range' => array('2.6.0', '2.6.11'),
+    'deprecation message' => t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', array('@editor' => 'FCKeditor')),
+    'install note callback' => 'wysiwyg_deprecation_install_note',
     'version callback' => 'wysiwyg_fckeditor_version',
     'themes callback' => 'wysiwyg_fckeditor_themes',
     'settings form callback' => 'wysiwyg_fckeditor_settings_form',

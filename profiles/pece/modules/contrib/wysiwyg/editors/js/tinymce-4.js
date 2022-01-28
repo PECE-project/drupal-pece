@@ -62,7 +62,6 @@ Drupal.wysiwyg.editor.attach.tinymce = function (context, params, settings) {
   // stored, and the class only affects editing.
   var $field = $('#' + params.field);
   $field.val($field.val().replace(/(<.+?\s+class=['"][\w\s]*?)\bmceItem\b([\w\s]*?['"].*?>)/ig, '$1$2'));
-  var wysiwygInstance = this;
 
   // Attach editor.
   settings.selector = '#' + params.field;

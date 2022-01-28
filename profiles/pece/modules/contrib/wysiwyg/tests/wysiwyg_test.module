@@ -15,6 +15,17 @@ function wysiwyg_test_menu() {
     'page arguments' => array('wysiwyg_test_ajax_form'),
     'access callback' => TRUE,
   );
+  $items['wysiwyg-test-simple-xss-form'] = array(
+    'title' => 'Simple textarea form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('wysiwyg_test_simple_xss_form'),
+    'access callback' => TRUE,
+  );
+  $items['wysiwyg-test-get-token'] = array(
+    'title' => 'Get session id',
+    'page callback' => 'wysiwyg_test_get_token',
+    'access callback' => TRUE,
+  );
   return $items;
 }
 
@@ -38,6 +49,31 @@ function wysiwyg_test_ajax_form($form, &$form_state) {
 }
 
 /**
+ * Form builder for a very simple form with a textarea infected with XSS.
+ *
+ * Echoes the value submitted for the textarea.
+ */
+function wysiwyg_test_simple_xss_form($form, &$form_state) {
+  $form['data'] = array(
+    '#title' => 'Malicious data',
+    '#type' => 'text_format',
+    '#default_value' => '<script>alert("foo");</script>',
+  );
+  $form['actions']['send'] = array(
+    '#type' => 'submit',
+    '#value' => 'Send',
+  );
+  return $form;
+}
+
+/**
+ * Submit handler for XSS test form.
+ */
+function wysiwyg_test_simple_xss_form_submit($form, &$form_state) {
+  echo $form_state['values']['data'];
+}
+
+/**
  * #ajax callback for wysiwyg_test_ajax_form().
  */
 function wysiwyg_test_ajax_form_callback($form, &$form_state) {
@@ -47,4 +83,27 @@ function wysiwyg_test_ajax_form_callback($form, &$form_state) {
   );
   form_builder($form['form_id']['#value'], $form, $form_state);
   return $form['body'];
+}
+
+/**
+ * Page callback to get the authentication token for the current user.
+ *
+ * Starts a session if no user is currently logged in.
+ */
+function wysiwyg_test_get_token() {
+  header('Content-Type: text/plain; charset=utf-8');
+  global $user;
+  if (empty($user->uid)) {
+    drupal_session_start();
+    $_SESSION['wysiwyg_anonymous_user'] = TRUE;
+    drupal_page_is_cacheable(FALSE);
+  }
+  echo drupal_get_token('wysiwygAjaxCall');
+}
+
+/**
+ * Implements hook_wysiwyg_include_directory().
+ */
+function wysiwyg_test_wysiwyg_include_directory($type) {
+  return $type;
 }
