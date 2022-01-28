@@ -7,7 +7,8 @@ core = 7.x
 
 projects[ctools][version] = 1.19
 projects[ctools][subdir] = contrib
-projects[ctools][patch][1000146] = https://www.drupal.org/files/issues/2018-03-26/views_panes-more_link_text-1000146-28.patch
+projects[ctools][patch][1910608] = https://www.drupal.org/files/issues/2020-12-01/views_content-keyword-substitution-1910608-83.patch
+projects[ctools][patch][1000146] = https://www.drupal.org/files/issues/2019-01-07/views_panes-more_link_text-1000146-32.patch
 
 projects[panels][version] = 3.10
 projects[panels][subdir] = contrib
