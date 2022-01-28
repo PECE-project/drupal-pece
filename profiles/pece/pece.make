@@ -89,7 +89,7 @@ projects[ctools][subdir] = contrib
 ; Ajax + Allow settings: Allowed settings lost on ajax (exposed forms/pager)
 projects[ctools][patch][1910608] =  "https://www.drupal.org/files/issues/2020-12-01/views_content-keyword-substitution-1910608-83.patch"
 ; Edit text of "More Link" from Panel config.
-projects[ctools][patch][1000146] = "https://www.drupal.org/files/issues/2018-03-26/views_panes-more_link_text-1000146-28.patch"
+projects[ctools][patch][1000146] = "https://www.drupal.org/files/issues/2019-01-09/views_panes-more_link_text-1000146-33.patch"
 ; Fix PECE Annotation Save&Continue issue.
 ;projects[ctools][patch][1907256] = "https://www.drupal.org/files/issues/2018-05-23/ctools-modal-1907256-9.patch"
 ; @TODO: Update and reapply the following patch if needed. @see https://www.drupal.org/project/ctools/issues/2671150
