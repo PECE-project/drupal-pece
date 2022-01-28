@@ -297,10 +297,11 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
     if (isset($this->javascript) && $this->javascript) {
       $text = $event->getStep()->getText();
       if (preg_match('/(follow|press|click|submit|viewing|visit|reload|attach)/i', $text)) {
-        $this->iWaitForAjax();
-
-        // For whatever reason, the above isn't very accurate inside iframes.
-        if (!empty($this->iframe)) {
+        if (empty($this->iframe)) {
+          $this->iWaitForAjax();
+        } else {
+          // For whatever reason, the above isn't very accurate inside iframes,
+          // and can sometimes cause "Cannot find context with specified id" error.
           sleep(3);
         }
       }
