@@ -1070,7 +1070,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     $form['fields_override']['#title'] = t('Field Settings');
     $form['fields_override']['#collapsible'] = FALSE;
     foreach ($form['fields_override'] as &$field) {
-      if (is_array($field)) {
+      if (is_array($field) && !empty($field['#title'])) {
         $field['#title'] = t('Display') . ' ' . $field['#title'];
       }
     }
