@@ -86,6 +86,8 @@ libraries[gifresizer][download][url] = https://github.com/revagomes/gifresizer.g
 ; Overrides Panopoly's Ctools to apply custom patches.
 projects[ctools][version] = 1.19
 projects[ctools][subdir] = contrib
+; Ajax + Allow settings: Allowed settings lost on ajax (exposed forms/pager)
+projects[ctools][patch][1910608] =  "https://www.drupal.org/files/issues/2020-12-01/views_content-keyword-substitution-1910608-83.patch"
 ; Edit text of "More Link" from Panel config.
 projects[ctools][patch][1000146] = "https://www.drupal.org/files/issues/2018-03-26/views_panes-more_link_text-1000146-28.patch"
 ; Fix PECE Annotation Save&Continue issue.
@@ -316,7 +318,7 @@ projects[panopoly_wysiwyg][version] = 1.85
 projects[panopoly_wysiwyg][subdir] = contrib
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.83
+projects[panopoly_test][version] = 1.85
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
