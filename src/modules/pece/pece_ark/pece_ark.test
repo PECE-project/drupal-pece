@@ -15,6 +15,12 @@
  */
 class ArkTestCase extends DrupalWebTestCase {
   protected $webUser;
+  protected $arkAdmPages = array(
+    'admin/config/services/ark',
+    'admin/config/services/ark/ark',
+    'admin/config/services/ark/ark_module_settigns',
+    'admin/config/services/ark/remote_update_settings'
+  );
 
   /**
    * {@inheritdoc}
@@ -22,8 +28,8 @@ class ArkTestCase extends DrupalWebTestCase {
   public static function getInfo() {
     return array(
       'name' => 'ARK functionality',
-      'description' => 'Creates page and render the content based on the arguments passed in the URL.',
-      'group' => 'Examples',
+      'description' => 'Creates ARK ID to pages and sync data with configured Naming Assigning Authority Number (NAAN) institution.',
+      'group' => 'PECE',
     );
   }
 
@@ -52,7 +58,7 @@ class ArkTestCase extends DrupalWebTestCase {
   }
 
   /**
-   * Verify that current user has no access to page.
+   * Verify that current user has no access to given page.
    *
    * @param string $url
    *   URL to verify.
@@ -66,61 +72,32 @@ class ArkTestCase extends DrupalWebTestCase {
   /**
    * Functional test for various page types.
    */
-  public function testPageExampleBasic() {
+  public function testArkSettingsPage() {
+
 
     // Verify that anonymous user can't access the pages created by
-    // page_example module.
-    $this->pageExampleVerifyNoAccess('examples/page_example/simple');
-    $this->pageExampleVerifyNoAccess('examples/page_example/arguments/1/2');
+    // pece_ark module.
+    foreach ($this->arkAdmPages as $page) {
+      $this->arkVerifyNoAccess($page);
+    }
 
     // Create a regular user and login.
     $this->webUser = $this->drupalCreateUser();
     $this->drupalLogin($this->webUser);
 
     // Verify that regular user can't access the pages created by
-    // page_example module.
-    $this->pageExampleVerifyNoAccess('examples/page_example/simple');
-    $this->pageExampleVerifyNoAccess('examples/page_example/arguments/1/2');
+    // pece_ark module.
+    foreach ($this->arkAdmPages as $page) {
+      $this->arkVerifyNoAccess($page);
+    }
 
-    // Create a user with permissions to access 'simple' page and login.
-    $this->webUser = $this->drupalCreateUser(array('access simple page'));
+    // Create a user with permissions to access ARK Admin page and login.
+    $this->webUser = $this->drupalCreateUser(array('administer ark'));
     $this->drupalLogin($this->webUser);
 
-    // Verify that user can access simple content.
-    $this->drupalGet('examples/page_example/simple');
-    $this->assertResponse(200, 'simple content successfully accessed.');
-    $this->assertText(t('The quick brown fox jumps over the lazy dog.'), 'Simple content successfully verified.');
-
-    // Check if user can't access arguments page.
-    $this->pageExampleVerifyNoAccess('examples/page_example/arguments/1/2');
-
-    // Create a user with permissions to access 'simple' page and login.
-    $this->webUser = $this->drupalCreateUser(array('access arguments page'));
-    $this->drupalLogin($this->webUser);
-
-    // Verify that user can access simple content.
-    $first = $this->randomNumber(3);
-    $second = $this->randomNumber(3);
-    $this->drupalGet('examples/page_example/arguments/' . $first . '/' . $second);
-    $this->assertResponse(200, 'arguments content successfully accessed.');
-    // Verify argument usage.
-    $this->assertRaw(t("First number was @number.", array('@number' => $first)), 'arguments first argument successfully verified.');
-    $this->assertRaw(t("Second number was @number.", array('@number' => $second)), 'arguments second argument successfully verified.');
-    $this->assertRaw(t('The total was @number.', array('@number' => $first + $second)), 'arguments content successfully verified.');
-
-    // Verify incomplete argument call to arguments content.
-    $this->drupalGet('examples/page_example/arguments/' . $first . '/');
-    $this->assertText("provides two pages");
-
-    // Verify invalid argument call to arguments content.
-    $this->drupalGet('examples/page_example/arguments/' . $first . '/' . $this->randomString());
-    $this->assertResponse(403, 'Invalid argument for arguments content successfully verified');
-
-    // Verify invalid argument call to arguments content.
-    $this->drupalGet('examples/page_example/arguments/' . $this->randomString() . '/' . $second);
-    $this->assertResponse(403, 'Invalid argument for arguments content successfully verified');
-
-    // Check if user can't access simple page.
-    $this->pageExampleVerifyNoAccess('examples/page_example/simple');
+    // Verify that user can access ARK admin interface.
+    $this->drupalGet('admin/config/services/ark/ark');
+    $this->assertResponse(200, 'ARK Administrative interface successfully accessed.');
+    $this->assertText(t('Name Assigning Authority Number'), 'ARK Admin permission successfully verified.');
   }
 }
