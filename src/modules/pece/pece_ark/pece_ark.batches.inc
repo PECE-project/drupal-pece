@@ -36,19 +36,19 @@ function pece_ark_batches_form() {
   $username = variable_get('ark_ezid_user');
   $password = variable_get('ark_ezid_password');
   if (empty($nids)) {
-    drupal_set_message(t("You don't currently have any nodes for the selected ARK content types, and this batch requires at least one node to process. As a result, this form is disabled."));
+    drupal_set_message(t("You currently don't have any nodes for the selected ARK content types, and this batch requires at least one node to be processed. As a result, this form is disabled."), 'warning');
     $form['submit']['#disabled'] = TRUE;
   }
   if (empty($username)) {
-    drupal_set_message(t("You don't set the username to connect to the remote sever under the ") . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark') . ". As a result, this form is disabled.");
+    drupal_set_message(t("You have not set a username for connecting to the remote sever under the ") . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark') . ". As a result, this form is disabled." , 'warning');
     $form['submit']['#disabled'] = TRUE;
   }
   if (empty($password)) {
-    drupal_set_message(t("You don't set the password to connect to the remote sever under the ") . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark') . ". As a result, this form is disabled.");
+    drupal_set_message(t("You have not set a password for connecting to the remote sever under the ") . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark') . ". As a result, this form is disabled.", 'warning');
     $form['submit']['#disabled'] = TRUE;
   }
   if (empty($remote_status)) {
-    drupal_set_message(t("You don't set the default status to the new entries for the remote sever under the ") . l(t('Ark Module Settings page'), 'admin/config/services/ark/remote_update_settings') . ". As a result, this form is disabled.");
+    drupal_set_message(t("You have not set a default status for new entries to the remote sever under the ") . l(t('Ark Module Settings page'), 'admin/config/services/ark/remote_update_settings') . ". As a result, this form is disabled.", 'warning');
     $form['submit']['#disabled'] = TRUE;
   }
   return $form;
