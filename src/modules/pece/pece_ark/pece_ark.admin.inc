@@ -134,7 +134,7 @@ function pece_ark_settings($form, &$form_state) {
 }
 
 /**
- * Form validation logic for the contact form.
+ * Form validation logic for the ARK settings form.
  */
 function pece_ark_settings_validate($form, &$form_state) {
   if (!pece_ark_naan_format_valid($form_state['values']['ark_naan'])) {
