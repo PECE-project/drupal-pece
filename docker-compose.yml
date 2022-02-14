@@ -15,6 +15,7 @@ services:
 
   dev_pece:
     image: revagomes/pece:php7-alpha1
+    container_name: pece-dev-nginx
     build:
       context: ./
       dockerfile: ./docker/DockerfileDevelopment
@@ -33,6 +34,5 @@ services:
       - $PWD:/pece/drupal
       - $HOME/.ssh:/pece/.ssh
       - $HOME/.gitconfig:/pece/.gitconfig
-    container_name: pece-dev-nginx
     links:
       - db_mysql:pece-db
