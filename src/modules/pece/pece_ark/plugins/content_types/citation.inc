@@ -37,6 +37,22 @@ function pece_ark_citation_pane_render($subtype, $conf, $args, $context) {
     return _artifact_citation_render($node);
 }
 
+/**
+ * Retrieve current page URL
+ * @return string
+ */
+function _citation_get_curr_url() {
+  $page_url = '';
+  if (!empty(drupal_get_path_alias(current_path()))) {
+    $page_url = '<span class="citation-pg-url">' .
+      $GLOBALS['base_url'] .
+      base_path() .
+      drupal_get_path_alias(current_path()) .
+      '</span>';
+  }
+  return $page_url;
+}
+
 function _citation_render($node) {
   module_load_include('inc', 'pece_profile', 'pece_profile.functions');
   // Prepare response block.
@@ -50,12 +66,11 @@ function _citation_render($node) {
     $projectName = node_load($projectId);
     $projectName = $projectName->title . ',';
   }
-
   $block->content = array(
     'citation' => array(
       '#theme' => 'html_tag',
       '#tag' => 'p',
-      '#value' => t('@creator. @dateCreated, "@title", <i>@projectName @siteName, Platform for Experimental Collaborative Ethnography<i>, last modified @changed, accessed @accessed@ark', array(
+      '#value' => format_string('@creator. @dateCreated, "@title", <i>@projectName @siteName, Platform for Experimental Collaborative Ethnography<i>, last modified @changed, accessed @accessed@ark !url', array(
         '@creator' => $creator,
         '@projectName' => $projectName,
         '@dateCreated' => format_date($node->created, 'custom', 'j F Y'),
@@ -63,7 +78,8 @@ function _citation_render($node) {
         '@siteName' => variable_get('site_name'),
         '@ark' => $ark_link,
         '@changed' => format_date($node->changed, 'custom', 'j F Y'),
-        '@accessed' => date('j F Y')
+        '@accessed' => date('j F Y'),
+        '!url' => _citation_get_curr_url()
       )),
       '#attributes' => array(
         'class' => array('citation'),
@@ -106,7 +122,7 @@ function _artifact_citation_render($node) {
     'citation' => array(
       '#theme' => 'html_tag',
       '#tag' => 'p',
-      '#value' => t('@creator, @dateCreated "@title", contributed by @contributors, <i>@projectName @siteName, Platform for Experimental Collaborative Ethnography</i>, last modified @changed, accessed @accessed@ark', array(
+      '#value' => format_string('@creator, @dateCreated "@title", contributed by @contributors, <i>@projectName @siteName, Platform for Experimental Collaborative Ethnography</i>, last modified @changed, accessed @accessed@ark !url', array(
         '@creator' => $creators,
         '@projectName' => $projectName,
         '@title' => $node->title,
@@ -115,7 +131,8 @@ function _artifact_citation_render($node) {
         '@siteName' => variable_get('site_name'),
         '@ark' => $ark_link,
         '@changed' => format_date($node->changed, 'custom', 'j F Y'),
-        '@accessed' => date('j F Y')
+        '@accessed' => date('j F Y'),
+        '!url' = _citation_get_curr_url()
       )),
       '#attributes' => array(
         'class' => array('citation'),
