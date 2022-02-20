@@ -1,0 +1,41 @@
+imports:
+  - { resource: vendor/openeuropa/code-review/dist/drupal-conventions.yml }
+grumphp:
+  tasks:
+    phpcs:
+      ignore_patterns:
+        - vendor/
+        - tests/fixtures/
+      standard:
+        - PSR12 
+    phpmd:
+      exclude:
+        - vendor/
+        - tests/fixtures/
+      ruleset:
+        - ./resources/phpmd-ruleset.xml
+    phpcpd: ~ 
+    codeception: ~
+    securitychecker_symfony:
+      lockfile: ./composer.lock
+      format: ~
+      run_always: false
+    stylelint: ~
+    tester: ~
+    yamllint: ~
+    phpstan: ~
+    phplint: ~
+    phpmnd: ~
+    phing: ~
+    phpunit:
+      config_file: ~
+      testsuite: ~
+      group: []
+      always_execute: false
+      order: ~
+    gherkin: ~
+    behat: ~
+    clover_coverage: 
+      clover_file: /tmp/clover.xml
+      level: 100      
+
