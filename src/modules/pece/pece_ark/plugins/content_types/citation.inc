@@ -117,7 +117,6 @@ function _artifact_citation_render($node) {
     $projectName = node_load($projectId);
     $projectName = $projectName->title . ',';
   }
-
   $block->content = array(
     'citation' => array(
       '#theme' => 'html_tag',
@@ -132,7 +131,7 @@ function _artifact_citation_render($node) {
         '@ark' => $ark_link,
         '@changed' => format_date($node->changed, 'custom', 'j F Y'),
         '@accessed' => date('j F Y'),
-        '!url' = _citation_get_curr_url()
+        '!url' => _citation_get_curr_url()
       )),
       '#attributes' => array(
         'class' => array('citation'),
