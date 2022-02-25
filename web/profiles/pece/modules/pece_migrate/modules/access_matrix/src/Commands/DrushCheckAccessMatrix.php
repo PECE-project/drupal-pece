@@ -139,20 +139,36 @@ class DrushCheckAccessMatrix extends DrushCommands {
 
     //TODO: need test with user can view content.
     foreach ($filesCheck as $role => $file) {
-      //load_node($key)->access('view', NULL, TRUE);
-     // Node::load($id)->access('view', NULL, TRUE);
+      $csvFileName = $role . '.csv';
       $this->logger()->notice(dt('Checking file: @file', ['@file' => $file]));
-      $datas = $this->loadJson($file);
-      //TODO: foreach to check access.
-      foreach ($datas as $data) {
-        
+      $permissions = $this->loadJson($file);
+      foreach ($permissions['access'] as $key => $permission) {
+        $this->logger()->notice(dt('Checking permission: @permission', ['@permission' => $key]));
+        if ($node = Node::load($key)) {
+          $result = $node->access('view', NULL, FALSE);
+          if ($result == $permission) {
+            $this->logger()->notice(dt('OK to content @id for @role user.', ['@id' => $key, '@role' => $role]));
+            $this->saveToCsv([date('Y-m-d h:i:s'),'success', $key, 'Expect ' . $permission . 'for view and return ' . $result], $csvFileName);
+          }
+          else {
+            $this->logger()->error(dt('Fail to content @id for @role user.', ['@id' => $key, '@role' => $role]));
+            $this->saveToCsv([date('Y-m-d h:i:s'),'fail', $key, 'Expect ' . $permission . 'for view and return ' . $result], $csvFileName);
+          }
+        }
+        else {
+          $this->logger()->alert(dt("Content with id @id doesn't exist", ['@id' => $key]));
+          $this->saveToCsv([date('Y-m-d h:i:s'),'alert',$key, 'Content doesn\'t exist'], $csvFileName);
+        }
       }
-      //TODO: check in foreach if value in array is the same as the access value.
     }
-
-    $this->output()->writeln($path);
   }
 
+  /**
+   * Load json file with access test.
+   * @param $path
+   *
+   * @return mixed
+   */
   private function loadJson($path) {
     $json = file_get_contents($path);
     $data = json_decode($json, TRUE);
@@ -173,6 +189,27 @@ class DrushCheckAccessMatrix extends DrushCommands {
       }
     }
     return $filesCheck;
+  }
+
+  /**
+   * Function to save value in csv file
+   * @param $data array with line to save
+   * @param $fileName string with name of file
+   *
+   * @return void
+   */
+  private function saveToCsv(array $data, string $fileName) {
+    // create folder in public folder if not exist.
+    $folder = \Drupal::service('file_system')->realpath('public://') . '/access_matrix';
+    if (!file_exists($folder)) {
+      mkdir($folder);
+    }
+    // get file path in drupal
+    $filePath = \Drupal::service('file_system')->realpath('public://access_matrix/' . $fileName);
+    //create file if not exist with folder migrate-logs
+    $file = fopen($filePath, 'a');
+    fputcsv($file, $data);
+    fclose($file);
   }
 
 }
