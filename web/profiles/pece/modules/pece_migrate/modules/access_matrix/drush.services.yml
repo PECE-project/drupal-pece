@@ -1,0 +1,6 @@
+services:
+  access_matrix.commands:
+    class: \Drupal\access_matrix\Commands\DrushCheckAccessMatrix
+    arguments: ['@account_switcher']
+    tags:
+      - { name: drush.command }
