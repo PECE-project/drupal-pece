@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains access_matrix.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function access_matrix_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the access_matrix module.
+    case 'help.page.access_matrix':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Check permission access in the content after migrate') . '</p>';
+      return $output;
+
+    default:
+  }
+}
