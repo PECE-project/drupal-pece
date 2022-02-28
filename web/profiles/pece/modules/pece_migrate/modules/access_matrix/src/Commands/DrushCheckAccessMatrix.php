@@ -3,6 +3,7 @@
 namespace Drupal\access_matrix\Commands;
 
 use Drupal\Core\Extension\ExtensionPathResolver;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountSwitcherInterface;
 use Drupal\Core\Session\UserSession;
 use Drupal\node\Entity\Node;
@@ -24,6 +25,9 @@ class DrushCheckAccessMatrix extends DrushCommands {
   protected $accountSwitcher;
 
   protected $anonymousUser = NULL;
+  protected function anonymous() {
+    return $this->anonymousUser;
+  }
 
   /**
    * Authenticated user.
@@ -41,7 +45,7 @@ class DrushCheckAccessMatrix extends DrushCommands {
   protected function authenticated_group() {
     if (!$this->authenticatedGroupUser) {
       $this->authenticatedGroupUser = $this->createUser('migrate_');
-      addUserInGroups($this->authenticatedGroupUser);
+      $this->addUserInGroups($this->authenticatedGroupUser);
     }
     return $this->authenticatedGroupUser;
   }
@@ -65,15 +69,12 @@ class DrushCheckAccessMatrix extends DrushCommands {
       'mail' => $name . '@example.com',
       'pass' => $name . 'pass',
     ]);
-
-    // Add Role to user.
-    $role = \Drupal::entityTypeManager()
-      ->getStorage('user_role')
-      ->load($role);
-    // Mandatory.
-    $user->addRole($role->id());
     // Activate user.
     $user->activate();
+//    // Add Role to user.
+    if (!in_array($role, [AccountInterface::ANONYMOUS_ROLE, AccountInterface::AUTHENTICATED_ROLE])) {
+      $user->addRole($role);
+    }
 
     // Save user account.
     $user->save();
@@ -101,10 +102,8 @@ class DrushCheckAccessMatrix extends DrushCommands {
    * @param $user \Drupal\user\Entity\User
    */
   private function addUserInGroups(User $user) {
-    //TODO: need test this code
-    $groups = \Drupal::entityTypeManager()
-      ->getStorage('group')
-      ->loadMultiple();
+    $nids = \Drupal::entityQuery('node')->condition('type','group')->execute();
+    $groups =  \Drupal\node\Entity\Node::loadMultiple($nids);
     $user->set('field_pbc_ref_group', $groups);
     $user->save();
   }
@@ -137,7 +136,7 @@ class DrushCheckAccessMatrix extends DrushCommands {
       return;
     }
 
-    //TODO: need test with user can view content.
+//    //TODO: need test with user can view content.
     foreach ($filesCheck as $role => $file) {
       $csvFileName = $role . '.csv';
       $this->logger()->notice(dt('Checking file: @file', ['@file' => $file]));
@@ -145,7 +144,7 @@ class DrushCheckAccessMatrix extends DrushCommands {
       foreach ($permissions['access'] as $key => $permission) {
         $this->logger()->notice(dt('Checking permission: @permission', ['@permission' => $key]));
         if ($node = Node::load($key)) {
-          $result = $node->access('view', NULL, FALSE);
+          $result = $node->access('view', $this->{$role}, FALSE);
           if ($result == $permission) {
             $this->logger()->notice(dt('OK to content @id for @role user.', ['@id' => $key, '@role' => $role]));
             $this->saveToCsv([date('Y-m-d h:i:s'),'success', $key, 'Expect ' . $permission . 'for view and return ' . $result], $csvFileName);
