@@ -2,6 +2,13 @@
 
 /**
  * @file
+ * Code for the pece_ark feature.
+ */
+
+include_once 'pece_ark.features.inc';
+
+/**
+ * @file
  * Contains hook implementations and main functions for ARK module.
  */
 
@@ -114,6 +121,7 @@ function pece_ark_menu() {
     'access arguments' => array('administer ark'),
     'file' => 'pece_ark.admin.inc',
     'weight' => '1',
+    'type' => MENU_DEFAULT_LOCAL_TASK
   );
 
   $items['admin/config/services/ark/ark_module_settigns'] = array(
@@ -124,6 +132,7 @@ function pece_ark_menu() {
     'page arguments' => array('pece_ark_settings_form'),
     'file' => 'pece_ark.settings.inc',
     'weight' => '2',
+    'type' => MENU_LOCAL_TASK | MENU_NORMAL_ITEM
   );
 
   $items['admin/config/services/ark/remote_update_settings'] = array(
@@ -134,6 +143,7 @@ function pece_ark_menu() {
     'access arguments' => array('administer ark'),
     'file' => 'pece_ark.batches.inc',
     'weight' => '3',
+    'type' => MENU_LOCAL_TASK | MENU_NORMAL_ITEM
   );
 
   $items['admin/config/services/ark/batch_operations'] = array(
@@ -144,6 +154,7 @@ function pece_ark_menu() {
     'access arguments' => array('administer ark'),
     'file' => 'pece_ark.batches.inc',
     'weight' => '5',
+    'type' => MENU_LOCAL_TASK | MENU_NORMAL_ITEM
   );
 
   return $items;
