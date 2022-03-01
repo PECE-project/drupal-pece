@@ -19,17 +19,17 @@ content:
     region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   bibcite_abst_e:
     type: string_textarea
+    weight: 6
+    region: content
     settings:
       rows: 4
       placeholder: ''
-    weight: 6
-    region: content
     third_party_settings: {  }
   bibcite_accession_number:
     type: string_textfield
@@ -57,35 +57,35 @@ content:
     third_party_settings: {  }
   bibcite_custom1:
     type: string_textarea
+    weight: 9
+    region: content
     settings:
       rows: 1
       placeholder: ''
-    weight: 9
-    region: content
     third_party_settings: {  }
   bibcite_custom2:
     type: string_textarea
+    weight: 10
+    region: content
     settings:
       rows: 1
       placeholder: ''
-    weight: 10
-    region: content
     third_party_settings: {  }
   bibcite_custom4:
     type: string_textarea
+    weight: 12
+    region: content
     settings:
       rows: 1
       placeholder: ''
-    weight: 12
-    region: content
     third_party_settings: {  }
   bibcite_custom5:
     type: string_textarea
+    weight: 13
+    region: content
     settings:
       rows: 1
       placeholder: ''
-    weight: 13
-    region: content
     third_party_settings: {  }
   bibcite_date:
     type: string_textfield
@@ -209,12 +209,12 @@ content:
   keywords:
     type: entity_reference_autocomplete_tags
     weight: 4
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
   langcode:
     type: language_select
@@ -225,10 +225,10 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 120
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -241,12 +241,12 @@ content:
   uid:
     type: entity_reference_autocomplete
     weight: 100
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
 hidden:
   bibcite_abst_f: true

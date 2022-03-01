@@ -16,126 +16,12 @@ base_table: bibcite_reference
 base_field: id
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: perm
-        options:
-          perm: 'administer bibcite_reference'
-      cache:
-        type: tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          disable_sql_rewrite: false
-          distinct: false
-          replica: false
-          query_comment: ''
-          query_tags: {  }
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Filter
-          reset_button: true
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: full
-        options:
-          items_per_page: 50
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 9
-      style:
-        type: table
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          override: true
-          sticky: true
-          caption: ''
-          summary: ''
-          description: ''
-          columns:
-            bibcite_reference_bulk_form: bibcite_reference_bulk_form
-            title: title
-            type: type
-            uid: uid
-            status: status
-            changed: changed
-            operations: operations
-          info:
-            bibcite_reference_bulk_form:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            title:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            type:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            uid:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: priority-low
-            status:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            changed:
-              sortable: true
-              default_sort_order: desc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: priority-low
-            operations:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          default: changed
-          empty_table: true
-      row:
-        type: fields
+      title: References
       fields:
         bibcite_reference_bulk_form:
           id: bibcite_reference_bulk_form
@@ -144,6 +30,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: bibcite_reference
+          plugin_id: bulk_form
           label: 'Bulk update'
           exclude: false
           alter:
@@ -188,8 +76,6 @@ display:
           action_title: Action
           include_exclude: exclude
           selected_actions: {  }
-          entity_type: bibcite_reference
-          plugin_id: bulk_form
         title:
           id: title
           table: bibcite_reference
@@ -197,6 +83,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: null
+          entity_field: title
+          plugin_id: field
           label: Title
           exclude: false
           alter:
@@ -252,9 +141,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: null
-          entity_field: title
-          plugin_id: field
         type:
           id: type
           table: bibcite_reference
@@ -262,6 +148,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: bibcite_reference
+          entity_field: type
+          plugin_id: field
           label: Type
           exclude: false
           alter:
@@ -317,9 +206,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: bibcite_reference
-          entity_field: type
-          plugin_id: field
         uid:
           id: uid
           table: bibcite_reference
@@ -327,6 +213,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: bibcite_reference
+          entity_field: uid
+          plugin_id: field
           label: Author
           exclude: false
           alter:
@@ -382,9 +271,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: bibcite_reference
-          entity_field: uid
-          plugin_id: field
         status:
           id: status
           table: bibcite_reference
@@ -392,6 +278,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: bibcite_reference
+          entity_field: status
+          plugin_id: field
           label: Status
           exclude: false
           alter:
@@ -437,8 +326,8 @@ display:
           type: boolean
           settings:
             format: custom
-            format_custom_true: Published
             format_custom_false: Unpublished
+            format_custom_true: Published
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -449,9 +338,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: bibcite_reference
-          entity_field: status
-          plugin_id: field
         changed:
           id: changed
           table: bibcite_reference
@@ -459,6 +345,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: bibcite_reference
+          entity_field: changed
+          plugin_id: field
           label: Updated
           exclude: false
           alter:
@@ -516,9 +405,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: bibcite_reference
-          entity_field: changed
-          plugin_id: field
         operations:
           id: operations
           table: bibcite_reference
@@ -526,6 +412,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: bibcite_reference
+          plugin_id: entity_operations
           label: Operations
           exclude: false
           alter:
@@ -568,8 +456,58 @@ display:
           empty_zero: false
           hide_alter_empty: true
           destination: true
-          entity_type: bibcite_reference
-          plugin_id: entity_operations
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 50
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Filter
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: perm
+        options:
+          perm: 'administer bibcite_reference'
+      cache:
+        type: tag
+        options: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: true
+          content: 'No references available.'
+          tokenize: false
+      sorts: {  }
+      arguments: {  }
       filters:
         title:
           id: title
@@ -578,6 +516,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: bibcite_reference
+          entity_field: title
+          plugin_id: string
           operator: contains
           value: ''
           group: 1
@@ -588,6 +529,8 @@ display:
             description: ''
             use_operator: false
             operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: title
             required: false
             remember: false
@@ -596,8 +539,6 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -610,9 +551,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: bibcite_reference
-          entity_field: title
-          plugin_id: string
         type:
           id: type
           table: bibcite_reference
@@ -620,6 +558,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: bibcite_reference
+          entity_field: type
+          plugin_id: bundle
           operator: in
           value: {  }
           group: 1
@@ -630,6 +571,8 @@ display:
             description: ''
             use_operator: false
             operator: type_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: type
             required: false
             remember: false
@@ -639,8 +582,6 @@ display:
               anonymous: '0'
               administrator: '0'
             reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -653,9 +594,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: bibcite_reference
-          entity_field: type
-          plugin_id: bundle
         status:
           id: status
           table: bibcite_reference
@@ -663,6 +601,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: bibcite_reference
+          entity_field: status
+          plugin_id: boolean
           operator: '='
           value: ''
           group: 1
@@ -673,14 +614,14 @@ display:
             description: null
             use_operator: false
             operator: status_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: status
             required: true
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: true
           group_info:
             label: 'Published status'
@@ -705,29 +646,88 @@ display:
                 title: ''
                 operator: '='
                 value: ''
-          entity_type: bibcite_reference
-          entity_field: status
-          plugin_id: boolean
-      sorts: {  }
-      title: References
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            bibcite_reference_bulk_form: bibcite_reference_bulk_form
+            title: title
+            type: type
+            uid: uid
+            status: status
+            changed: changed
+            operations: operations
+          default: changed
+          info:
+            bibcite_reference_bulk_form:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            title:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            type:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            uid:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: priority-low
+            status:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            changed:
+              sortable: true
+              default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: priority-low
+            operations:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: true
+          summary: ''
+          empty_table: true
+          caption: ''
+          description: ''
+      row:
+        type: fields
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
+      relationships: {  }
+      show_admin_links: false
       header: {  }
       footer: {  }
-      empty:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content: 'No references available.'
-          plugin_id: text_custom
-      relationships: {  }
-      arguments: {  }
       display_extenders: {  }
-      show_admin_links: false
     cache_metadata:
       max-age: 0
       contexts:
@@ -738,9 +738,9 @@ display:
         - user.permissions
       tags: {  }
   page_1:
-    display_plugin: page
     id: page_1
     display_title: Page
+    display_plugin: page
     position: 1
     display_options:
       display_extenders: {  }

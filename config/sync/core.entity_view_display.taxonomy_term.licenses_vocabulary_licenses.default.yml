@@ -6,13 +6,13 @@ dependencies:
     - field.field.taxonomy_term.licenses_vocabulary_licenses.licenses_vocabulary_icon
     - field.field.taxonomy_term.licenses_vocabulary_licenses.licenses_vocabulary_link
     - taxonomy.vocabulary.licenses_vocabulary_licenses
-  enforced:
-    module:
-      - licenses_vocabulary
   module:
     - image
     - link
     - text
+  enforced:
+    module:
+      - licenses_vocabulary
 _core:
   default_config_hash: JgLCUi1BwS80s2Fm-Fg8ZESNoIyxfwFgvr2RjDxfb6U
 id: taxonomy_term.licenses_vocabulary_licenses.default
@@ -21,25 +21,23 @@ bundle: licenses_vocabulary_licenses
 mode: default
 content:
   description:
-    label: hidden
     type: text_default
-    weight: 1
-    region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 1
+    region: content
   licenses_vocabulary_icon:
-    weight: 2
+    type: image
     label: above
     settings:
-      image_style: ''
       image_link: ''
+      image_style: ''
     third_party_settings: {  }
-    type: image
+    weight: 2
     region: content
   licenses_vocabulary_link:
     type: link
-    weight: 0
-    region: content
     label: above
     settings:
       trim_length: 80
@@ -48,6 +46,8 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   langcode: true
   search_api_excerpt: true

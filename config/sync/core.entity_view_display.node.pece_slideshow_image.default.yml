@@ -19,23 +19,23 @@ bundle: pece_slideshow_image
 mode: default
 content:
   field_pece_description:
-    weight: 103
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 103
     region: content
   field_pece_slideshowimage_image:
-    weight: 102
+    type: image
     label: hidden
     settings:
-      image_style: pece_frontpage_image_style
       image_link: ''
+      image_style: pece_frontpage_image_style
     third_party_settings: {  }
-    type: image
+    weight: 102
     region: content
   field_pece_slideshowimage_link:
-    weight: 104
+    type: link
     label: hidden
     settings:
       trim_length: 80
@@ -44,13 +44,13 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 104
     region: content
   links:
-    weight: 100
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 100
+    region: content
 hidden:
   langcode: true
   search_api_excerpt: true
