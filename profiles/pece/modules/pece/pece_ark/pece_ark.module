@@ -2,6 +2,13 @@
 
 /**
  * @file
+ * Code for the pece_ark feature.
+ */
+
+include_once 'pece_ark.features.inc';
+
+/**
+ * @file
  * Contains hook implementations and main functions for ARK module.
  */
 
@@ -21,6 +28,15 @@ define('ARK_DEFAULT_REMOTE_EXPORT_ENTRY_VALUE'              , array('yes'));
 define('ARK_DEFAULT_REMOTE_UPDATE_IF_EXISTS'                , array('1'));
 define('ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS'         , 'https://n2t.net/');
 define('ARK_DEFAULT_PRE_PREFIX'                             , 'fk4');
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function pece_ark_ctools_plugin_directory($module, $plugin) {
+  if ($module === 'ctools' && $plugin === 'content_types') {
+    return 'plugins/' . $plugin;
+  }
+}
 
 /**
  * Implements hook_help().
@@ -105,6 +121,7 @@ function pece_ark_menu() {
     'access arguments' => array('administer ark'),
     'file' => 'pece_ark.admin.inc',
     'weight' => '1',
+    'type' => MENU_DEFAULT_LOCAL_TASK
   );
 
   $items['admin/config/services/ark/ark_module_settigns'] = array(
@@ -115,6 +132,7 @@ function pece_ark_menu() {
     'page arguments' => array('pece_ark_settings_form'),
     'file' => 'pece_ark.settings.inc',
     'weight' => '2',
+    'type' => MENU_LOCAL_TASK | MENU_NORMAL_ITEM
   );
 
   $items['admin/config/services/ark/remote_update_settings'] = array(
@@ -125,6 +143,7 @@ function pece_ark_menu() {
     'access arguments' => array('administer ark'),
     'file' => 'pece_ark.batches.inc',
     'weight' => '3',
+    'type' => MENU_LOCAL_TASK | MENU_NORMAL_ITEM
   );
 
   $items['admin/config/services/ark/batch_operations'] = array(
@@ -135,6 +154,7 @@ function pece_ark_menu() {
     'access arguments' => array('administer ark'),
     'file' => 'pece_ark.batches.inc',
     'weight' => '5',
+    'type' => MENU_LOCAL_TASK | MENU_NORMAL_ITEM
   );
 
   return $items;
@@ -147,10 +167,21 @@ function pece_ark_menu() {
  *
  * @param array $data
  * @return bool TRUE if ok | False if not saved
+ * @throws Exception
  */
 function pece_ark_remote_data_update(array $data = null) {
   $return = FALSE;
-  if ( !is_null($data) && is_array($data) && (isset($data['ark_name']) && isset($data['ark_who']) && isset($data['ark_when']) && isset($data['title']) && isset($data['nid'])) ) {
+  if (
+      !is_null($data) &&
+      is_array($data) &&
+      (
+        isset($data['ark_name']) &&
+        isset($data['ark_who']) &&
+        isset($data['ark_when']) &&
+        isset($data['title']) &&
+        isset($data['nid'])
+      )
+    ) {
     $username   = variable_get('ark_ezid_user');
     $password   = variable_get('ark_ezid_password');
     $ark_who    = $data['ark_who'];
@@ -169,7 +200,15 @@ function pece_ark_remote_data_update(array $data = null) {
     $ark_identifier = _ark_build_identifier($data['ark_name']);
     $create_url     = variable_get('ark_remote_server_address', ARK_DEFAULT_REMOTE_SERVER_ADDRESS) . '/id/' . $ark_identifier .  $ark_update_if_exists;
 
-    if (!empty($username) && !empty($password) && !empty($ark_who) && !empty($ark_when) && !empty($ark_what) && !empty($ark_remote_export_param) && !empty($ark_remote_status_param) && !empty($ark_remote_url) && !empty($create_url)) {
+    if (!empty($username) &&
+        !empty($password) &&
+        !empty($ark_who) &&
+        !empty($ark_when) &&
+        !empty($ark_what) &&
+        !empty($ark_remote_export_param) &&
+        !empty($ark_remote_status_param) &&
+        !empty($ark_remote_url) &&
+        !empty($create_url)) {
       $input = "_target: $ark_remote_url
 erc.who: $ark_who
 erc.what: $ark_what
@@ -177,38 +216,49 @@ erc.when: $ark_when
 _export: $ark_remote_export_param
 _status: $ark_remote_status_param";
 
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $create_url);
-      curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
-      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-      curl_setopt($ch, CURLOPT_HTTPHEADER,
-        array('Content-Type: text/plain; charset=UTF-8',
-          'Content-Length: ' . strlen($input)));
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $input);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      $output = curl_exec($ch);
-      $return_header = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+      try {
+        // Cancel ARK Remote Update if PHP CURL lib is not available.
+        if (!in_array('curl', get_loaded_extensions()))
+          return;
 
-      if ($output === false)
-      {
-        watchdog('error', 'Curl error: ' . curl_error($ch));
-      }
+        // Send updated data to ARK Provider.
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $create_url);
+        curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+        curl_setopt($ch, CURLOPT_HTTPHEADER,
+          array('Content-Type: text/plain; charset=UTF-8',
+            'Content-Length: ' . strlen($input)));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $input);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec($ch);
+        $return_header = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-      curl_close($ch);
+        if ($output === false) {
+          watchdog('error', 'Curl error: ' . curl_error($ch));
+        }
 
-      if ( (in_array($return_header, array(200, 201, 204))) && ($output == "success: $ark_identifier") ) {
-        $node = node_load($data['nid']);
-        $remote_ark_name = variable_get('ark_remote_identifier_site_address', ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS) . '/' . $ark_identifier;
-        $remote_ark_name = preg_replace('/([^:])(\/{2,})/', '$1/', $remote_ark_name);
-        $from_remote_data = array (
-          'remote_ark_name' => $remote_ark_name,
-          'request_time'    => REQUEST_TIME,
-        );
-        pece_ark_node_update($node, $from_remote_data);
-        $return = TRUE;
-      }
-      else {
-        watchdog('error', 'ARK error: ' . $output);
+        curl_close($ch);
+
+        if ( (in_array($return_header, array(200, 201, 204))) && ($output == "success: $ark_identifier") ) {
+          $node = node_load($data['nid']);
+          $remote_ark_name = variable_get('ark_remote_identifier_site_address', ARK_DEFAULT_REMOTE_IDENTIFIER_SITE_ADDRESS) . '/' . $ark_identifier;
+          $remote_ark_name = preg_replace('/([^:])(\/{2,})/', '$1/', $remote_ark_name);
+          $from_remote_data = array (
+            'remote_ark_name' => $remote_ark_name,
+            'request_time'    => REQUEST_TIME,
+          );
+          pece_ark_node_update($node, $from_remote_data);
+          $return = TRUE;
+        }
+        else {
+          watchdog('error', 'ARK error: ' . $output);
+        }
+      } catch (Exception $e) {
+        drupal_set_message('Something went wrong while processing your request. Please contact site administrator.','error');
+        watchdog('error', 'ARK (Update) error: ' . $ex->getMessage());
+        watchdog_exception('pece_ark', $e);
+        throw $e;
       }
     }
   }
@@ -235,27 +285,27 @@ function pece_ark_data_save($node, array $from_remote_data = null) {
   if (!$ark_data) {
     db_insert('ark_map')
       ->fields(array(
-        'ark_name'                => pece_ark_name_create(),
-        'entity_type'             => 'node',
-        'entity_id'               => $node->nid,
-        'ark_who'                 => $ark_who,
-        'ark_when'                => $ark_when,
-        'created'                 => REQUEST_TIME,
-        'changed'                 => REQUEST_TIME,
+        'ark_name'    => pece_ark_name_create(),
+        'entity_type' => 'node',
+        'entity_id'   => $node->nid,
+        'ark_who'     => $ark_who,
+        'ark_when'    => $ark_when,
+        'created'     => REQUEST_TIME,
+        'changed'     => REQUEST_TIME,
       ))->execute();
 
   } else {
     $fields_for_update = array();
     if (is_null($from_remote_data)) {
-      $fields_for_update['changed']     = REQUEST_TIME;
-      $fields_for_update['ark_who']     = (isset($ark_data['ark_who'])  && $ark_data['ark_who']   !== $ark_who)  ? $ark_who   : $ark_data['ark_who'];
-      $fields_for_update['ark_when']    = (isset($ark_data['ark_when']) && $ark_data['ark_when']  !== $ark_when) ? $ark_when  : $ark_data['ark_when'];
-      $fields_for_update['pending_remote_update']     = 1;
+      $fields_for_update['changed']  = REQUEST_TIME;
+      $fields_for_update['ark_who']  = (isset($ark_data['ark_who'])  && $ark_data['ark_who']   !== $ark_who)  ? $ark_who   : $ark_data['ark_who'];
+      $fields_for_update['ark_when'] = (isset($ark_data['ark_when']) && $ark_data['ark_when']  !== $ark_when) ? $ark_when  : $ark_data['ark_when'];
+      $fields_for_update['pending_remote_update'] = 1;
     } elseif (!is_null($from_remote_data) && is_array($from_remote_data) && ( isset($from_remote_data['remote_ark_name']) && isset($from_remote_data['request_time']) )) {
-      $fields_for_update['remote_ark_name']             = $from_remote_data['remote_ark_name'];
-      $fields_for_update['remote_created']              = (!empty($ark_data['remote_created']))        ? $ark_data['remote_created']         : $from_remote_data['request_time'];
-      $fields_for_update['remote_changed']              = (isset($from_remote_data['request_time']))   ? $from_remote_data['request_time']   : REQUEST_TIME;
-      $fields_for_update['pending_remote_update']     = 0;
+      $fields_for_update['remote_ark_name'] = $from_remote_data['remote_ark_name'];
+      $fields_for_update['remote_created']  = (!empty($ark_data['remote_created']))      ? $ark_data['remote_created']         : $from_remote_data['request_time'];
+      $fields_for_update['remote_changed']  = (isset($from_remote_data['request_time'])) ? $from_remote_data['request_time']   : REQUEST_TIME;
+      $fields_for_update['pending_remote_update']  = 0;
     }
 
     $ark_update_query = db_update('ark_map')
@@ -310,16 +360,13 @@ function pece_ark_get_who_values_from_node($node = null) {
     $who_field_value = variable_get($who_field_name);
 
     switch ($who_field_value) {
-      case ARK_SELECT_DEFAULT_WHO_OPTION_VALUE:
-        $result = _ark_get_default_who($node);
-        break;
-
       case ARK_SELECT_COMPOSITE_WHO_OPTION_VALUE:
         $composite_who = 'ark_' . $node->type . '_composite_who';
         $composite_who_fields_selected = !is_null(variable_get($composite_who, null)) ? array_values(variable_get($composite_who)) : null;
         $result = _ark_get_composite_who($node, $composite_who_fields_selected);
         break;
 
+      # Covers case ARK_SELECT_DEFAULT_WHO_OPTION_VALUE
       default:
         $result = _ark_get_default_who($node);
         break;
@@ -597,15 +644,6 @@ function pece_ark_extra_field_render_array($field_name, $node) {
       break;
   }
 
-}
-
-/**
- * Implements hook_ctools_plugin_directory().
- */
-function pece_ark_ctools_plugin_directory($module, $plugin) {
-  if ($module === 'ctools' && $plugin === 'content_types') {
-    return 'plugins/' . $plugin;
-  }
 }
 
 /**
