@@ -42,7 +42,7 @@ class DrushCheckAccessMatrix extends DrushCommands {
   }
 
   private $authenticatedGroupUser;
-  protected function authenticated_group() {
+  protected function authenticated_group() : User {
     if (!$this->authenticatedGroupUser) {
       $this->authenticatedGroupUser = $this->createUser('migrate_');
       $this->addUserInGroups($this->authenticatedGroupUser);
@@ -51,11 +51,22 @@ class DrushCheckAccessMatrix extends DrushCommands {
   }
 
   protected $researcherUser;
-  //TODO: need create function to create user with role researcher
+  protected function researcher() {
+    if (!$this->researcherUser) {
+      $this->researcherUser = $this->createUser('migrate_');
+      $this->addUserInGroups($this->researcherUser, 'researcher');
+    }
+    return $this->researcherUser;
+  }
 
   protected $researcherGroup;
-  //TODO: need create function to create user with role researcher in groups
-
+  protected function researcher_group() {
+    if (!$this->researcherGroup) {
+      $this->researcherGroup = $this->createUser('migrate_');
+      $this->addUserInGroups($this->researcherGroup, 'researcher');
+    }
+    return $this->researcherGroup;
+  }
 
   /**
    * @param $prefixName
@@ -78,6 +89,8 @@ class DrushCheckAccessMatrix extends DrushCommands {
 
     // Save user account.
     $user->save();
+    //add logger
+    $this->logger()->notice(dt('Created user: @name', ['@name' => $user->id()]));
     return $user;
   }
 
@@ -136,7 +149,6 @@ class DrushCheckAccessMatrix extends DrushCommands {
       return;
     }
 
-//    //TODO: need test with user can view content.
     foreach ($filesCheck as $role => $file) {
       $csvFileName = $role . '.csv';
       $this->logger()->notice(dt('Checking file: @file', ['@file' => $file]));
@@ -144,7 +156,7 @@ class DrushCheckAccessMatrix extends DrushCommands {
       foreach ($permissions['access'] as $key => $permission) {
         $this->logger()->notice(dt('Checking permission: @permission', ['@permission' => $key]));
         if ($node = Node::load($key)) {
-          $result = $node->access('view', $this->{$role}, FALSE);
+          $result = $node->access('view', $this->{$role}(), FALSE);
           if ($result == $permission) {
             $this->logger()->notice(dt('OK to content @id for @role user.', ['@id' => $key, '@role' => $role]));
             $this->saveToCsv([date('Y-m-d h:i:s'),'success', $key, 'Expect ' . $permission . 'for view and return ' . $result], $csvFileName);
@@ -159,6 +171,9 @@ class DrushCheckAccessMatrix extends DrushCommands {
           $this->saveToCsv([date('Y-m-d h:i:s'),'alert',$key, 'Content doesn\'t exist'], $csvFileName);
         }
       }
+      //delete the user in drupal
+      if($this->{$role})
+        $this->{$role}->delete();
     }
   }
 
