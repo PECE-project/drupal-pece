@@ -28,51 +28,51 @@ third_party_settings:
         - field_pece_all_can_view
         - group_or_permission
         - group_and_permission
+      label: Permissions
+      region: content
       parent_name: ''
       weight: 13
       format_type: details
-      region: content
       format_settings:
-        description: 'Set permissions to view, update and delete this content.'
-        open: true
-        id: permissions
         classes: ''
         show_empty_fields: false
+        id: permissions
+        open: true
+        description: 'Set permissions to view, update and delete this content.'
         required_fields: false
-      label: Permissions
     group_or_permission:
       children:
         - field_pbc_ref_user
+      label: OR
+      region: content
       parent_name: group_permissions
       weight: 24
       format_type: details
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        formatter: closed
-        required_fields: false
-        description: ''
-        effect: none
+        id: ''
         open: false
-      label: OR
+        description: ''
+        required_fields: false
+        formatter: closed
+        effect: none
     group_and_permission:
       children:
         - field_pbc_ref_group
         - field_pbc_ref_role
+      label: AND
+      region: content
       parent_name: group_permissions
       weight: 25
       format_type: details
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        formatter: closed
-        required_fields: true
-        description: ''
-        effect: none
+        id: ''
         open: false
-      label: AND
+        description: ''
+        required_fields: true
+        formatter: closed
+        effect: none
 id: node.pece_annotation.default
 targetEntityType: node
 bundle: pece_annotation
@@ -81,13 +81,13 @@ content:
   body:
     type: text_textarea_with_summary
     weight: 1
+    region: content
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
       show_summary: false
     third_party_settings: {  }
-    region: content
   created:
     type: datetime_timestamp
     weight: 8
@@ -95,44 +95,46 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_annotation_analytic:
+    type: entity_reference_autocomplete
     weight: 3
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_annotation_artifact:
+    type: entity_reference_autocomplete
     weight: 2
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_annotation_tags:
+    type: entity_reference_autocomplete
     weight: 5
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_ark_enabled:
+    type: boolean_checkbox
     weight: 26
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   field_pbc_ref_group:
+    type: pbf_widget
     weight: 22
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -144,61 +146,59 @@ content:
       grant_update: 0
       grant_delete: 0
     third_party_settings: {  }
-    type: pbf_widget
-    region: content
   field_pbc_ref_role:
+    type: pbf_widget
     weight: 24
+    region: content
     settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
       grant_global: 0
       grant_public: 1
       grant_view: 0
       grant_update: 0
       grant_delete: 0
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
     third_party_settings: {  }
-    type: pbf_widget
-    region: content
   field_pbc_ref_user:
+    type: pbf_widget
     weight: 21
+    region: content
     settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
       grant_global: 0
       grant_public: 1
       grant_view: 0
       grant_update: 0
       grant_delete: 0
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
     third_party_settings: {  }
-    type: pbf_widget
-    region: content
   field_pece_all_can_view:
+    type: boolean_checkbox
     weight: 23
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   field_pece_geolocation:
+    type: geolocation_latlng
     weight: 28
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: geolocation_latlng
-    region: content
   field_pece_license:
+    type: entity_reference_autocomplete
     weight: 27
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   langcode:
     type: language_select
     weight: 6
@@ -214,24 +214,24 @@ content:
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 9
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 12
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 10
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -244,11 +244,11 @@ content:
   uid:
     type: entity_reference_autocomplete
     weight: 7
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
 hidden: {  }

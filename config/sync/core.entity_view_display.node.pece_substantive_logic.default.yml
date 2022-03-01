@@ -18,15 +18,15 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: true
+    allow_custom: false
     sections:
       -
         layout_id: layout_twocol_section
         layout_settings:
           label: ''
-          column_widths: 75-25
           context_mapping: {  }
+          column_widths: 75-25
         components:
           52beb0a0-a6f1-4784-86a6-b5df40e533fb:
             uuid: 52beb0a0-a6f1-4784-86a6-b5df40e533fb
@@ -34,57 +34,57 @@ third_party_settings:
             configuration:
               id: 'field_block:node:pece_substantive_logic:body'
               label: Body
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: text_default
-                settings: {  }
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
             weight: 0
+            additional: {  }
           cfac6a25-23a0-4b7a-bc6a-ba2bb57d894c:
             uuid: cfac6a25-23a0-4b7a-bc6a-ba2bb57d894c
             region: second
             configuration:
               id: 'field_block:node:pece_substantive_logic:field_subst_logic_thumbnail'
               label: Thumbnail
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: image
-                settings:
-                  image_style: ''
-                  image_link: ''
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: image
+                label: above
+                settings:
+                  image_link: ''
+                  image_style: ''
+                third_party_settings: {  }
             weight: 0
+            additional: {  }
           b79ff468-8490-481e-a82d-35c28a340148:
             uuid: b79ff468-8490-481e-a82d-35c28a340148
             region: second
             configuration:
               id: 'field_block:node:pece_substantive_logic:field_subst_logic_tags'
               label: Tags
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: entity_reference_label
-                settings:
-                  link: true
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
             weight: 1
+            additional: {  }
         third_party_settings: {  }
 _core:
   default_config_hash: 0Nq5eY0mzek0D3DERvG8qF0Ld0E6bTJVVKiYq1fAjpU
@@ -94,22 +94,22 @@ bundle: pece_substantive_logic
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 101
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 101
     region: content
   field_subst_logic_contributors:
-    weight: 105
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 105
     region: content
   field_subst_logic_image_citation:
-    weight: 103
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -118,37 +118,37 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 103
     region: content
   field_subst_logic_tags:
-    weight: 107
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 107
     region: content
   field_subst_logic_thumbnail:
-    weight: 108
+    type: image
     label: above
     settings:
-      image_style: ''
       image_link: ''
+      image_style: ''
     third_party_settings: {  }
-    type: image
+    weight: 108
     region: content
   field_subst_logic_uri:
-    weight: 102
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 102
     region: content
   links:
-    weight: 100
     settings: {  }
     third_party_settings: {  }
+    weight: 100
     region: content
 hidden:
   langcode: true

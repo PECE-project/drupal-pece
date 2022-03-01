@@ -5,11 +5,11 @@ dependencies:
   config:
     - field.storage.taxonomy_term.licenses_vocabulary_icon
     - taxonomy.vocabulary.licenses_vocabulary_licenses
+  module:
+    - image
   enforced:
     module:
       - licenses_vocabulary
-  module:
-    - image
 _core:
   default_config_hash: ZLP82ZKGf3MN1yzcaG-XFjB4LEcDooIa59NJS_XuVlY
 id: taxonomy_term.licenses_vocabulary_licenses.licenses_vocabulary_icon
@@ -23,6 +23,8 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
+  handler: 'default:file'
+  handler_settings: {  }
   file_directory: '[date:custom:Y]-[date:custom:m]'
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
@@ -38,6 +40,4 @@ settings:
     title: ''
     width: null
     height: null
-  handler: 'default:file'
-  handler_settings: {  }
 field_type: image

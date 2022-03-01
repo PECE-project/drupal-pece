@@ -21,9 +21,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       pece_timeline_essay_item: pece_timeline_essay_item
+    negate: 0
     target_bundles_drag_drop:
       paragraph_content_reference:
         weight: 5
@@ -35,6 +35,6 @@ settings:
         weight: 7
         enabled: false
       pece_timeline_essay_item:
-        enabled: true
         weight: 8
+        enabled: true
 field_type: entity_reference_revisions

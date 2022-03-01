@@ -14,20 +14,20 @@ bundle: paragraph_photo_essay_item
 mode: default
 content:
   field_pece_description:
-    weight: 1
+    type: text_default
     label: visually_hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 1
     region: content
   field_pece_image_artifact:
-    weight: 0
+    type: entity_reference_entity_view
     label: visually_hidden
     settings:
       view_mode: pece_image_artifact
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 0
     region: content
 hidden:
   search_api_excerpt: true

@@ -34,15 +34,15 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: true
+    allow_custom: false
     sections:
       -
         layout_id: layout_twocol_section
         layout_settings:
           label: ''
-          column_widths: 50-50
           context_mapping: {  }
+          column_widths: 50-50
         components:
           476878dd-d9c3-4286-98c5-39adc9a5ef19:
             uuid: 476878dd-d9c3-4286-98c5-39adc9a5ef19
@@ -50,179 +50,182 @@ third_party_settings:
             configuration:
               id: 'field_block:node:pece_artifact_audio:field_audio_media'
               label: Audio
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: entity_reference_label
-                settings:
-                  link: true
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
             weight: 0
+            additional: {  }
           d08bb7ba-11e4-4289-b6f8-8e96a10529db:
             uuid: d08bb7ba-11e4-4289-b6f8-8e96a10529db
             region: first
             configuration:
               id: 'field_block:node:pece_artifact_audio:field_audio_file_format'
               label: Format
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: string
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
             weight: 1
+            additional: {  }
           42a3f173-8aa6-4535-a12e-580c15be9bf4:
             uuid: 42a3f173-8aa6-4535-a12e-580c15be9bf4
             region: first
             configuration:
               id: 'field_block:node:pece_artifact_audio:field_audio_duration'
               label: Duration
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: string
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
             weight: 2
+            additional: {  }
           a74cf72b-bc1e-4d2b-954e-d79a59d949df:
             uuid: a74cf72b-bc1e-4d2b-954e-d79a59d949df
             region: first
             configuration:
               id: 'field_block:node:pece_artifact_audio:field_pece_license'
               label: License
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: entity_reference_label
-                settings:
-                  link: true
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
             weight: 3
+            additional: {  }
           324b3e1e-44fa-4638-8be7-1d55a9738aba:
             uuid: 324b3e1e-44fa-4638-8be7-1d55a9738aba
             region: first
             configuration:
               id: 'extra_field_block:node:pece_artifact_audio:links'
               label: Links
-              provider: layout_builder
               label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-            additional: {  }
             weight: 4
+            additional: {  }
           99226499-96b5-4dc6-ad65-4cb1a2a24947:
             uuid: 99226499-96b5-4dc6-ad65-4cb1a2a24947
             region: second
             configuration:
               id: 'field_block:node:pece_artifact_audio:field_audio_authors'
               label: Creator(s)
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: entity_reference_label
-                settings:
-                  link: true
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
             weight: 0
+            additional: {  }
           4db33668-a4a0-4b12-bea7-f463bcb2b6f8:
             uuid: 4db33668-a4a0-4b12-bea7-f463bcb2b6f8
             region: second
             configuration:
               id: 'field_block:node:pece_artifact_audio:field_audio_created_date'
               label: 'Created Date'
-              provider: layout_builder
               label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
-                label: above
                 type: datetime_default
+                label: above
                 settings:
                   timezone_override: ''
                   format_type: medium
                 third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
             weight: 1
+            additional: {  }
           7e8d0b04-bc03-42cd-a378-56a2909999ff:
             uuid: 7e8d0b04-bc03-42cd-a378-56a2909999ff
             region: second
             configuration:
               id: 'field_block:node:pece_artifact_audio:field_audio_contributors'
               label: Contributors
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: entity_reference_label
-                settings:
-                  link: true
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
             weight: 2
+            additional: {  }
           d2bbd2da-5110-4888-bf0a-fc9c917159e9:
             uuid: d2bbd2da-5110-4888-bf0a-fc9c917159e9
             region: second
             configuration:
               id: 'field_block:node:pece_artifact_audio:field_audio_fieldsite'
               label: Fieldsite
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: entity_reference_label
-                settings:
-                  link: true
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
             weight: 3
+            additional: {  }
           aa962e91-cdc7-410c-9c4f-83985659f114:
             uuid: aa962e91-cdc7-410c-9c4f-83985659f114
             region: second
             configuration:
               id: 'field_block:node:pece_artifact_audio:field_audio_language'
               label: Language
-              provider: layout_builder
               label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
-                label: above
                 type: languagefield_default
+                label: above
                 settings:
                   link_to_entity: 0
                   format:
@@ -230,97 +233,94 @@ third_party_settings:
                     iso: 0
                     name_native: 0
                 third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
             weight: 6
+            additional: {  }
           098f24c0-0922-449b-8145-bd63301f0fd8:
             uuid: 098f24c0-0922-449b-8145-bd63301f0fd8
             region: second
             configuration:
               id: 'field_block:node:pece_artifact_audio:field_pbc_ref_group'
               label: 'Permission by Group'
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: pbf_formatter_default
-                settings:
-                  link: true
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: pbf_formatter_default
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
             weight: 7
+            additional: {  }
           ccd44f2e-cb07-45c5-aa16-c9b6b3372134:
             uuid: ccd44f2e-cb07-45c5-aa16-c9b6b3372134
             region: second
             configuration:
               id: 'field_block:node:pece_artifact_audio:field_audio_tags'
               label: Tags
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: entity_reference_label
-                settings:
-                  link: true
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
             weight: 8
+            additional: {  }
           406fcaef-44dc-47e4-a8f8-eb1a85427e80:
             uuid: 406fcaef-44dc-47e4-a8f8-eb1a85427e80
             region: second
             configuration:
               id: 'field_block:node:pece_artifact_audio:field_audio_location'
               label: Location
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: address_default
-                settings: {  }
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: address_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
             weight: 9
+            additional: {  }
           0351f6d0-4a3c-4b79-a1e9-50cdd86321d4:
             uuid: 0351f6d0-4a3c-4b79-a1e9-50cdd86321d4
             region: first
             configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_crit_commentary'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_audio:field_audio_crit_commentary'
               formatter:
+                type: text_default
                 label: above
                 settings: {  }
                 third_party_settings: {  }
-                type: text_default
-            additional: {  }
             weight: 5
+            additional: {  }
           adbd6c0c-0057-46b5-9021-fc7907ec5f3a:
             uuid: adbd6c0c-0057-46b5-9021-fc7907ec5f3a
             region: first
             configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_source'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:pece_artifact_audio:field_audio_source'
               formatter:
+                type: text_default
                 label: above
                 settings: {  }
                 third_party_settings: {  }
-                type: text_default
-            additional: {  }
             weight: 6
+            additional: {  }
         third_party_settings: {  }
 id: node.pece_artifact_audio.default
 targetEntityType: node
@@ -328,168 +328,168 @@ bundle: pece_artifact_audio
 mode: default
 content:
   field_ark_enabled:
-    weight: 120
+    type: boolean
     label: above
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 120
     region: content
   field_audio_authors:
-    weight: 104
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 104
     region: content
   field_audio_contributors:
-    weight: 103
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 103
     region: content
   field_audio_created_date:
-    weight: 122
+    type: datetime_default
     label: above
     settings:
-      format_type: medium
       timezone_override: ''
+      format_type: medium
     third_party_settings: {  }
-    type: datetime_default
+    weight: 122
     region: content
   field_audio_crit_commentary:
-    weight: 127
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 127
     region: first
   field_audio_duration:
-    weight: 124
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 124
     region: content
   field_audio_fieldsite:
-    weight: 109
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 109
     region: content
   field_audio_file_format:
-    weight: 123
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 123
     region: content
   field_audio_language:
-    weight: 107
+    type: languagefield_default
     label: above
     settings:
       link_to_entity: false
       format:
         name: name
     third_party_settings: {  }
-    type: languagefield_default
+    weight: 107
     region: content
   field_audio_location:
-    weight: 108
+    type: address_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: address_default
+    weight: 108
     region: content
   field_audio_media:
     type: entity_reference_entity_view
-    weight: 125
     label: above
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
+    weight: 125
     region: content
   field_audio_source:
-    weight: 128
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 128
     region: first
   field_audio_use_fieldsite_local:
-    weight: 110
+    type: boolean
     label: above
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 110
     region: content
   field_pbc_ref_group:
-    weight: 114
+    type: pbf_formatter_default
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: pbf_formatter_default
+    weight: 114
     region: content
   field_pbc_ref_role:
-    weight: 115
+    type: pbf_formatter_default
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: pbf_formatter_default
+    weight: 115
     region: content
   field_pbc_ref_user:
-    weight: 116
+    type: pbf_formatter_default
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: pbf_formatter_default
+    weight: 116
     region: content
   field_pece_all_can_view:
-    weight: 126
+    type: boolean
     label: above
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 126
     region: content
   field_pece_license:
-    weight: 119
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 119
     region: content
   field_pece_project_ref:
-    weight: 113
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 113
     region: content
   links:
-    weight: 100
     settings: {  }
     third_party_settings: {  }
+    weight: 100
     region: content
 hidden:
   field_audio_tags: true

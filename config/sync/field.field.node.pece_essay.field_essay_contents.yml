@@ -22,15 +22,15 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       paragraph_custom_reference: paragraph_custom_reference
       paragraph_content_reference: paragraph_content_reference
+    negate: 0
     target_bundles_drag_drop:
       paragraph_content_reference:
-        enabled: true
         weight: 4
-      paragraph_custom_reference:
         enabled: true
+      paragraph_custom_reference:
         weight: 3
+        enabled: true
 field_type: entity_reference_revisions
