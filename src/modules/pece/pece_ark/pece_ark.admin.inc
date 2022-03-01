@@ -129,6 +129,7 @@ function pece_ark_settings($form, &$form_state) {
   }
 
   $form['#validate'][] = 'pece_ark_settings_validate';
+  $form['#submit'][] = 'pece_ark_settings_submit';
 
   return system_settings_form($form);
 }
@@ -153,6 +154,24 @@ function pece_ark_settings_validate($form, &$form_state) {
       }
     }
   }
+}
+
+/**
+ * Form Submit logic for ARK settings form.
+ */
+function pece_ark_settings_submit($form, &$form_state) {
+  // @TODO: Find a good way to obfuscate the pwd.
+  /*
+  // This way doesn't work because Drupal uses a one way encryption method.
+  // There is no way to revert the hash.
+  require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
+  $hash = user_hash_password(trim($form_state['values']['ark_ezid_password']));
+  // Abort if the hashing failed and returned FALSE.
+  if (!$hash) {
+    return FALSE;
+  }
+  $form_state['values']['ark_ezid_password'] = $hash;
+  */
 }
 
 /**
