@@ -1004,7 +1004,7 @@ li {
         border: 1px solid #7851A9;
         color: white;
         background: #7851A9; }
-        .ui-tabs .ui-tabs-nav li.ui-state-active .ui-tabs-anchor:hover {
+        .ui-tabs .ui-tabs-nav li.ui-state-active .ui-tabs-anchor:hover, .ui-tabs .ui-tabs-nav li.ui-state-active .ui-tabs-anchor:focus {
           color: #7851A9;
           background: white; }
     .ui-tabs .ui-tabs-nav li .ui-tabs-anchor {
@@ -1023,7 +1023,7 @@ li {
       @media (min-width: 1024px) {
         .ui-tabs .ui-tabs-nav li .ui-tabs-anchor {
           padding: 15px; } }
-      .ui-tabs .ui-tabs-nav li .ui-tabs-anchor:hover {
+      .ui-tabs .ui-tabs-nav li .ui-tabs-anchor:hover, .ui-tabs .ui-tabs-nav li .ui-tabs-anchor:focus {
         color: white;
         border-bottom-color: #7851A9;
         background: #7851A9; }
@@ -1224,13 +1224,13 @@ html.js input.form-autocomplete {
   border-bottom: 2px solid #E1E1E1; }
   #autocomplete ul {
     border: none; }
-  #autocomplete li:hover {
+  #autocomplete li:hover, #autocomplete li:focus {
     background-color: #E1E1E1; }
   #autocomplete a {
     line-height: 1.5em;
     font-size: 1.5em;
     text-align: center; }
-    #autocomplete a:hover {
+    #autocomplete a:hover, #autocomplete a:focus {
       color: #FFF; }
 
 .field-type-taxonomy-term-reference {
@@ -1267,7 +1267,7 @@ html.js input.form-autocomplete {
   border-bottom: 2px solid #E1E1E1; }
   #autocomplete ul {
     border: none; }
-    #autocomplete ul li:hover {
+    #autocomplete ul li:hover, #autocomplete ul li:focus {
       background-color: #E1E1E1; }
     #autocomplete ul li a {
       line-height: 1.5em;
@@ -1692,7 +1692,7 @@ i.pece_timeline_essay::before {
     font-size: 15px;
     background: none;
     color: #337ab7; }
-    .field-name-field-pece-proj-struct-analytics .field-item a:hover {
+    .field-name-field-pece-proj-struct-analytics .field-item a:hover, .field-name-field-pece-proj-struct-analytics .field-item a:focus {
       background: none;
       color: #23527c; }
 
@@ -1777,8 +1777,9 @@ i.pece_timeline_essay::before {
 .view-mode-card-full-text .view-mode-meta-content .icon {
   background: none; }
 
-.view-mode-card a.icon:hover,
-.view-mode-card-full-text a.icon:hover {
+.view-mode-card a.icon:hover, .view-mode-card a.icon:focus,
+.view-mode-card-full-text a.icon:hover,
+.view-mode-card-full-text a.icon:focus {
   opacity: 0.8; }
 
 .view-mode-card .more-link,
@@ -2119,7 +2120,8 @@ body.uad a.edit-mini-panel-link {
         color: #7851A9;
         background: none; }
         .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list ul li a:hover, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics ul li a:hover,
-        .view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics ul li a:hover, .pane-node-field-pece-struct-analytics ul li a:hover {
+        .view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics ul li a:hover, .pane-node-field-pece-struct-analytics ul li a:hover, .view-display-id-pece_user_artifact_annotations > .view-content > .views-row .views-field-field-pece-struct-analytics .field-content .item-list ul li a:focus, .view-display-id-pece_question_annotations .field-name-field-pece-struct-analytics ul li a:focus,
+        .view-display-id-pece_question_artifact_annotions .field-name-field-pece-struct-analytics ul li a:focus, .pane-node-field-pece-struct-analytics ul li a:focus {
           background-color: #7851A9; }
 
 .node-type-pece-analytic h1,
@@ -2271,8 +2273,11 @@ body.uad a.edit-mini-panel-link {
     padding-right: 10px; }
 
 .view-display-id-pece_user_artifact_annotations .views-field-edit-node a:hover,
+.view-display-id-pece_user_artifact_annotations .views-field-edit-node a:focus,
 .view-display-id-pece_question_artifact_annotions .views-field-edit-node a:hover,
-.view-display-id-pece_question_annotations .views-field-edit-node a:hover {
+.view-display-id-pece_question_artifact_annotions .views-field-edit-node a:focus,
+.view-display-id-pece_question_annotations .views-field-edit-node a:hover,
+.view-display-id-pece_question_annotations .views-field-edit-node a:focus {
   text-decoration: none;
   background-color: #eee; }
 
@@ -2828,13 +2833,19 @@ body.uad a.edit-mini-panel-link {
       .page-home #main-content .pece-douby-double .pane-pece-recent-groups-groups-front-pane .more-link a::after {
         content: "\f061";
         vertical-align: text-bottom; }
-      .page-home #main-content .pece-douby-double .pane-pece-recent-essays-panel-pane-1 .more-link a:hover, .page-home #main-content .pece-douby-double .pane-pece-recent-essays-panel-pane-1 .more-link a:hover::after,
+      .page-home #main-content .pece-douby-double .pane-pece-recent-essays-panel-pane-1 .more-link a:hover, .page-home #main-content .pece-douby-double .pane-pece-recent-essays-panel-pane-1 .more-link a:focus, .page-home #main-content .pece-douby-double .pane-pece-recent-essays-panel-pane-1 .more-link a:hover::after, .page-home #main-content .pece-douby-double .pane-pece-recent-essays-panel-pane-1 .more-link a:focus::after,
       .page-home #main-content .pece-douby-double .pane-pece-recent-artifacts-artifatcs-front-pane .more-link a:hover,
+      .page-home #main-content .pece-douby-double .pane-pece-recent-artifacts-artifatcs-front-pane .more-link a:focus,
       .page-home #main-content .pece-douby-double .pane-pece-recent-artifacts-artifatcs-front-pane .more-link a:hover::after,
+      .page-home #main-content .pece-douby-double .pane-pece-recent-artifacts-artifatcs-front-pane .more-link a:focus::after,
       .page-home #main-content .pece-douby-double .pane-pece-users-users-front-pane .more-link a:hover,
+      .page-home #main-content .pece-douby-double .pane-pece-users-users-front-pane .more-link a:focus,
       .page-home #main-content .pece-douby-double .pane-pece-users-users-front-pane .more-link a:hover::after,
+      .page-home #main-content .pece-douby-double .pane-pece-users-users-front-pane .more-link a:focus::after,
       .page-home #main-content .pece-douby-double .pane-pece-recent-groups-groups-front-pane .more-link a:hover,
-      .page-home #main-content .pece-douby-double .pane-pece-recent-groups-groups-front-pane .more-link a:hover::after {
+      .page-home #main-content .pece-douby-double .pane-pece-recent-groups-groups-front-pane .more-link a:focus,
+      .page-home #main-content .pece-douby-double .pane-pece-recent-groups-groups-front-pane .more-link a:hover::after,
+      .page-home #main-content .pece-douby-double .pane-pece-recent-groups-groups-front-pane .more-link a:focus::after {
         font-size: bolder; }
   .page-home #main-content .pece-douby-double .pane-pece-about-about-pece-summary .pece-logo {
     float: left;
@@ -2972,7 +2983,7 @@ body {
   border: 1px solid #7851A9;
   color: #7851A9;
   background: none; }
-  .pane-node-field-pece-struct-analytics a:hover {
+  .pane-node-field-pece-struct-analytics a:hover, .pane-node-field-pece-struct-analytics a:focus {
     background-color: #7851A9; }
 
 .pane-node-field-pece-struct-analytics div.field-name-field-pece-struct-analytics {
