@@ -45,3 +45,36 @@ Feature: Crop image
       And I wait for the Panels IPE to deactivate
     Then I should see "Testing image widget title"
       And I should see "Testing caption"
+
+  @api @javascript @panopoly_widgets @local_files @drupal_private_files
+  Scenario: Remove crop on a manually uploaded image
+    Given I am logged in as a user with the "administrator" role
+	  And I visit "/file/add"
+    Then I attach the file "test-sm.png" to "files[upload]"
+      And I press "Next"
+    Then I should see "Destination"
+    When I select the radio button "Public local files served by the webserver."
+      And I press "Next"
+      And I wait 2 seconds
+    Then I should see a "#edit-submit" element
+      And I should see the "Crop" button
+      And I should not see the "Crop (cropped)" button
+    When I press "Crop"
+    Then I should see "Maximize selection" in the "Manual Crop" region
+    When I click "Maximize selection" in the "Manual Crop" region
+      And I click "Save" in the "Manual Crop" region
+    Then I should see the "Crop (cropped)" button
+	When I press "Save"
+	  And I click "Edit"
+    Then I should see the "Crop (cropped)" button
+    When I press the "Crop (cropped)" button
+    Then I should see "Remove selection" in the "Manual Crop" region
+    When I click "Remove selection" in the "Manual Crop" region
+      And I click "Save" in the "Manual Crop" region
+    Then I should see the "Crop" button
+      And I should not see the "Crop (cropped)" button
+    When I press "Save"
+	  And I click "Edit"
+    Then I should see the "Crop" button
+      And I should not see the "Crop (cropped)" button
+
