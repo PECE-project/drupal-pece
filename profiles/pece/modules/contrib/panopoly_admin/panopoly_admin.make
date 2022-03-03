@@ -29,13 +29,8 @@ projects[admin][version] = 2.0-beta3
 projects[admin][subdir] = contrib
 projects[admin][patch][1334804] = http://drupal.org/files/1334804-admin-jquery-updated-6.patch
 
-projects[navbar][version] = 1.x-dev
+projects[navbar][version] = 1.8
 projects[navbar][subdir] = contrib
-projects[navbar][download][type] = git
-projects[navbar][download][revision] = 455f81d
-projects[navbar][download][branch] = 7.x-1.x
-projects[navbar][patch][1757466] = http://drupal.org/files/navbar-conflict-1757466-14.patch
-projects[navbar][patch][2050559] = http://drupal.org/files/z-index-heart-cools-2050559-1.patch
 
 projects[breakpoints][version] = 1.6
 projects[breakpoints][subdir] = contrib
@@ -53,5 +48,10 @@ projects[jquery_update][subdir] = contrib
 libraries[backbone][download][type] = get
 libraries[backbone][download][url] = https://github.com/jashkenas/backbone/archive/1.0.0.tar.gz
 
+libraries[modernizr][download][type] = "get"
+libraries[modernizr][type] = "libraries"
+libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/archive/v2.7.1.tar.gz"
+
 libraries[underscore][download][type] = get
 libraries[underscore][download][url] = https://github.com/jashkenas/underscore/archive/1.5.2.zip
+
