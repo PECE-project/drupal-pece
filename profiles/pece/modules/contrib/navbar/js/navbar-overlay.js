@@ -11,15 +11,14 @@
 /**
  * Implements Drupal.behaviors.
  */
- Drupal.behaviors.NavbarOverlayOverrides = {
+Drupal.behaviors.NavbarOverlayOverrides = {
   attach: function (context, settings) {
-    // Attach the Drupal
     $(document)
       .bind('drupalViewportOffsetChange.navbar', $.proxy(Drupal.overlay, 'eventhandlerViewportOffsetChange'))
   }
- };
+};
 
- Drupal.overlay = Drupal.overlay || {};
+Drupal.overlay = Drupal.overlay || {};
 
 $.extend(Drupal.overlay, {
   /**
@@ -39,8 +38,8 @@ $.extend(Drupal.overlay, {
   },
 
   /**
-   * Event handler: resizes displaced elements so they won't overlap the scrollbar
-   * of overlay's iframe.
+   * Event handler: resizes displaced elements so they won't overlap the
+   * scrollbar of overlay's iframe.
    *
    * @param event
    *   Event being triggered, with the following restrictions:
@@ -57,7 +56,7 @@ $.extend(Drupal.overlay, {
 
     // Move the body of the iframe contentDocument inward a sufficient distance
     // to prevent it from appearing underneath displacing elements like the
-    // toolbar.
+    // navbar.
     var iframeBody = this.iframeWindow.document.body;
     $(iframeBody).css({
       'padding-top': offsets.top,
@@ -71,7 +70,7 @@ $.extend(Drupal.overlay, {
     iframeBody.style.display = 'block';
 
     // Constrain the width of offsetting top and bottom elements, such as the
-    // toolbar, so that a scroll in the overlay iframe won't be occluded.
+    // navbar, so that a scroll in the overlay iframe won't be occluded.
     var iframeBodyWidth = iframeBody.clientWidth;
     if (iframeBodyWidth > 0 && iframeBodyWidth < document.documentElement.clientWidth) {
       $('[data-offset-top], [data-offset-bottom]').css('max-width', iframeBodyWidth);
