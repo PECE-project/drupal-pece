@@ -1,0 +1,498 @@
+uuid: b3ebb1ee-dad8-4e8d-b26b-1f04385b611a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_artifact_audio.field_ark_enabled
+    - field.field.node.pece_artifact_audio.field_audio_authors
+    - field.field.node.pece_artifact_audio.field_audio_contributors
+    - field.field.node.pece_artifact_audio.field_audio_created_date
+    - field.field.node.pece_artifact_audio.field_audio_crit_commentary
+    - field.field.node.pece_artifact_audio.field_audio_duration
+    - field.field.node.pece_artifact_audio.field_audio_fieldsite
+    - field.field.node.pece_artifact_audio.field_audio_file_format
+    - field.field.node.pece_artifact_audio.field_audio_language
+    - field.field.node.pece_artifact_audio.field_audio_location
+    - field.field.node.pece_artifact_audio.field_audio_media
+    - field.field.node.pece_artifact_audio.field_audio_source
+    - field.field.node.pece_artifact_audio.field_audio_tags
+    - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
+    - field.field.node.pece_artifact_audio.field_pbc_ref_group
+    - field.field.node.pece_artifact_audio.field_pbc_ref_role
+    - field.field.node.pece_artifact_audio.field_pbc_ref_user
+    - field.field.node.pece_artifact_audio.field_pece_all_can_view
+    - field.field.node.pece_artifact_audio.field_pece_license
+    - field.field.node.pece_artifact_audio.field_pece_project_ref
+    - node.type.pece_artifact_audio
+  module:
+    - address
+    - datetime
+    - languagefield
+    - layout_builder
+    - pbf
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          column_widths: 50-50
+        components:
+          476878dd-d9c3-4286-98c5-39adc9a5ef19:
+            uuid: 476878dd-d9c3-4286-98c5-39adc9a5ef19
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_media'
+              label: Audio
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          d08bb7ba-11e4-4289-b6f8-8e96a10529db:
+            uuid: d08bb7ba-11e4-4289-b6f8-8e96a10529db
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_file_format'
+              label: Format
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          42a3f173-8aa6-4535-a12e-580c15be9bf4:
+            uuid: 42a3f173-8aa6-4535-a12e-580c15be9bf4
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_duration'
+              label: Duration
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          a74cf72b-bc1e-4d2b-954e-d79a59d949df:
+            uuid: a74cf72b-bc1e-4d2b-954e-d79a59d949df
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_pece_license'
+              label: License
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          324b3e1e-44fa-4638-8be7-1d55a9738aba:
+            uuid: 324b3e1e-44fa-4638-8be7-1d55a9738aba
+            region: first
+            configuration:
+              id: 'extra_field_block:node:pece_artifact_audio:links'
+              label: Links
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          99226499-96b5-4dc6-ad65-4cb1a2a24947:
+            uuid: 99226499-96b5-4dc6-ad65-4cb1a2a24947
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_authors'
+              label: Creator(s)
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          4db33668-a4a0-4b12-bea7-f463bcb2b6f8:
+            uuid: 4db33668-a4a0-4b12-bea7-f463bcb2b6f8
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_created_date'
+              label: 'Created Date'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          7e8d0b04-bc03-42cd-a378-56a2909999ff:
+            uuid: 7e8d0b04-bc03-42cd-a378-56a2909999ff
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_contributors'
+              label: Contributors
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          d2bbd2da-5110-4888-bf0a-fc9c917159e9:
+            uuid: d2bbd2da-5110-4888-bf0a-fc9c917159e9
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_fieldsite'
+              label: Fieldsite
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          aa962e91-cdc7-410c-9c4f-83985659f114:
+            uuid: aa962e91-cdc7-410c-9c4f-83985659f114
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_language'
+              label: Language
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: languagefield_default
+                label: above
+                settings:
+                  link_to_entity: 0
+                  format:
+                    name: name
+                    iso: 0
+                    name_native: 0
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+          098f24c0-0922-449b-8145-bd63301f0fd8:
+            uuid: 098f24c0-0922-449b-8145-bd63301f0fd8
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_pbc_ref_group'
+              label: 'Permission by Group'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: pbf_formatter_default
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
+          ccd44f2e-cb07-45c5-aa16-c9b6b3372134:
+            uuid: ccd44f2e-cb07-45c5-aa16-c9b6b3372134
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_tags'
+              label: Tags
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
+          406fcaef-44dc-47e4-a8f8-eb1a85427e80:
+            uuid: 406fcaef-44dc-47e4-a8f8-eb1a85427e80
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_location'
+              label: Location
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: address_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 9
+            additional: {  }
+          0351f6d0-4a3c-4b79-a1e9-50cdd86321d4:
+            uuid: 0351f6d0-4a3c-4b79-a1e9-50cdd86321d4
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_crit_commentary'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          adbd6c0c-0057-46b5-9021-fc7907ec5f3a:
+            uuid: adbd6c0c-0057-46b5-9021-fc7907ec5f3a
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_source'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+        third_party_settings: {  }
+id: node.pece_artifact_audio.default
+targetEntityType: node
+bundle: pece_artifact_audio
+mode: default
+content:
+  field_ark_enabled:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 120
+    region: content
+  field_audio_authors:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_audio_contributors:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_audio_created_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 122
+    region: content
+  field_audio_crit_commentary:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 127
+    region: first
+  field_audio_duration:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 124
+    region: content
+  field_audio_fieldsite:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  field_audio_file_format:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 123
+    region: content
+  field_audio_language:
+    type: languagefield_default
+    label: above
+    settings:
+      link_to_entity: false
+      format:
+        name: name
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_audio_location:
+    type: address_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_audio_media:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 125
+    region: content
+  field_audio_source:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 128
+    region: first
+  field_audio_use_fieldsite_local:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 110
+    region: content
+  field_pbc_ref_group:
+    type: pbf_formatter_default
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 114
+    region: content
+  field_pbc_ref_role:
+    type: pbf_formatter_default
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 115
+    region: content
+  field_pbc_ref_user:
+    type: pbf_formatter_default
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 116
+    region: content
+  field_pece_all_can_view:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 126
+    region: content
+  field_pece_license:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 119
+    region: content
+  field_pece_project_ref:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 113
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_audio_tags: true
+  langcode: true
+  og_audience: true
+  search_api_excerpt: true

@@ -1,0 +1,42 @@
+uuid: 8ec18426-1152-4448-9edc-f450b1f00ab3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_fieldsite.body
+    - field.field.node.pece_fieldsite.field_fieldsite_location
+    - field.field.node.pece_fieldsite.field_fieldsite_project
+    - field.field.node.pece_fieldsite.field_fieldsite_researcher
+    - field.field.node.pece_fieldsite.field_pece_geolocation
+    - node.type.pece_fieldsite
+  module:
+    - text
+    - user
+_core:
+  default_config_hash: GlSmcTQ9R58MBdaKlywgBIaGer7BKDmvKUkzkRR0zZI
+id: node.pece_fieldsite.teaser
+targetEntityType: node
+bundle: pece_fieldsite
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_fieldsite_location: true
+  field_fieldsite_project: true
+  field_fieldsite_researcher: true
+  field_pece_geolocation: true
+  langcode: true
+  search_api_excerpt: true

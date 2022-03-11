@@ -1,0 +1,61 @@
+uuid: 85fd267b-b91f-46cc-bba3-86f5cc12a1b9
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_artifact_pdf.field_pbc_ref_group
+    - field.field.node.pece_artifact_pdf.field_pbc_ref_role
+    - field.field.node.pece_artifact_pdf.field_pbc_ref_user
+    - field.field.node.pece_artifact_pdf.field_pdf_authors
+    - field.field.node.pece_artifact_pdf.field_pdf_bibliography
+    - field.field.node.pece_artifact_pdf.field_pdf_contributors
+    - field.field.node.pece_artifact_pdf.field_pdf_created_date
+    - field.field.node.pece_artifact_pdf.field_pdf_crit_commentary
+    - field.field.node.pece_artifact_pdf.field_pdf_fieldsite
+    - field.field.node.pece_artifact_pdf.field_pdf_language
+    - field.field.node.pece_artifact_pdf.field_pdf_location
+    - field.field.node.pece_artifact_pdf.field_pdf_media
+    - field.field.node.pece_artifact_pdf.field_pdf_permission
+    - field.field.node.pece_artifact_pdf.field_pdf_source
+    - field.field.node.pece_artifact_pdf.field_pdf_tags
+    - field.field.node.pece_artifact_pdf.field_pdf_use_fieldsite_local
+    - field.field.node.pece_artifact_pdf.field_pece_all_can_view
+    - field.field.node.pece_artifact_pdf.field_pece_license
+    - field.field.node.pece_artifact_pdf.field_pece_project_ref
+    - node.type.pece_artifact_pdf
+  module:
+    - user
+id: node.pece_artifact_pdf.teaser
+targetEntityType: node
+bundle: pece_artifact_pdf
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
+  field_pdf_authors: true
+  field_pdf_bibliography: true
+  field_pdf_contributors: true
+  field_pdf_created_date: true
+  field_pdf_crit_commentary: true
+  field_pdf_fieldsite: true
+  field_pdf_language: true
+  field_pdf_location: true
+  field_pdf_media: true
+  field_pdf_permission: true
+  field_pdf_source: true
+  field_pdf_tags: true
+  field_pdf_use_fieldsite_local: true
+  field_pece_all_can_view: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  langcode: true
+  og_audience: true
+  search_api_excerpt: true

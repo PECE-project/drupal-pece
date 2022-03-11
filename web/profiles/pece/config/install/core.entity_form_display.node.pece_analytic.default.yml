@@ -1,0 +1,112 @@
+uuid: 10d31d8a-65fe-49fe-b730-cf3d50d85b5e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_analytic.field_analytic_question_set
+    - field.field.node.pece_analytic.field_analytic_tags
+    - field.field.node.pece_analytic.field_ark_enabled
+    - field.field.node.pece_analytic.field_pece_geolocation
+    - node.type.pece_analytic
+  module:
+    - geolocation
+    - path
+_core:
+  default_config_hash: QbOOGG0EnZCOje7NF58KkPxA4lRSCvhmKnT3zB8gTHI
+id: node.pece_analytic.default
+targetEntityType: node
+bundle: pece_analytic
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_analytic_question_set:
+    type: entity_reference_autocomplete
+    weight: 10
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_analytic_tags:
+    type: entity_reference_autocomplete
+    weight: 9
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_ark_enabled:
+    type: boolean_checkbox
+    weight: 27
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_pece_geolocation:
+    type: geolocation_latlng
+    weight: 26
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 1
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 7
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

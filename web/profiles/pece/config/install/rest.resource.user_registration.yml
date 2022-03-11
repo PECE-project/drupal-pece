@@ -1,0 +1,20 @@
+uuid: a513dd1c-fbb7-4658-83e6-8bf482c5d376
+langcode: en
+status: false
+dependencies:
+  module:
+    - hal
+    - serialization
+    - simple_oauth
+    - user
+id: user_registration
+plugin_id: user_registration
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - hal_json
+    - json
+  authentication:
+    - oauth2

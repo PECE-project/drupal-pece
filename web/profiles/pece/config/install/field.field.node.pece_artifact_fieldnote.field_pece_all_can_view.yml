@@ -1,0 +1,23 @@
+uuid: 83648a9c-0522-4e0a-81bb-7eaf70edbf3c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_all_can_view
+    - node.type.pece_artifact_fieldnote
+id: node.pece_artifact_fieldnote.field_pece_all_can_view
+field_name: field_pece_all_can_view
+entity_type: node
+bundle: pece_artifact_fieldnote
+label: 'All user can view this content'
+description: 'If you check this option, then all users (including anonymous users) can see this content.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

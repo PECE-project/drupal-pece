@@ -1,0 +1,68 @@
+uuid: 2d982141-9b25-4355-afc7-0f9eeea74e0a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_artifact_text.body
+    - field.field.node.pece_artifact_text.field_ark_enabled
+    - field.field.node.pece_artifact_text.field_pbc_ref_group
+    - field.field.node.pece_artifact_text.field_pbc_ref_role
+    - field.field.node.pece_artifact_text.field_pbc_ref_user
+    - field.field.node.pece_artifact_text.field_pece_all_can_view
+    - field.field.node.pece_artifact_text.field_pece_license
+    - field.field.node.pece_artifact_text.field_pece_project_ref
+    - field.field.node.pece_artifact_text.field_text_authors
+    - field.field.node.pece_artifact_text.field_text_contributors
+    - field.field.node.pece_artifact_text.field_text_created_date
+    - field.field.node.pece_artifact_text.field_text_crit_commentary
+    - field.field.node.pece_artifact_text.field_text_fieldsite
+    - field.field.node.pece_artifact_text.field_text_language
+    - field.field.node.pece_artifact_text.field_text_location
+    - field.field.node.pece_artifact_text.field_text_source
+    - field.field.node.pece_artifact_text.field_text_tags
+    - field.field.node.pece_artifact_text.field_text_use_fieldsite_local
+    - node.type.pece_artifact_text
+  module:
+    - text
+    - user
+id: node.pece_artifact_text.teaser
+targetEntityType: node
+bundle: pece_artifact_text
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_ark_enabled: true
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
+  field_pece_access_permissions: true
+  field_pece_all_can_view: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  field_text_authors: true
+  field_text_contributors: true
+  field_text_created_date: true
+  field_text_crit_commentary: true
+  field_text_fieldsite: true
+  field_text_language: true
+  field_text_location: true
+  field_text_source: true
+  field_text_tags: true
+  field_text_use_fieldsite_local: true
+  langcode: true
+  og_audience: true
+  search_api_excerpt: true

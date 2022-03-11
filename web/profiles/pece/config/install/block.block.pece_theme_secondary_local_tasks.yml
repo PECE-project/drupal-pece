@@ -1,0 +1,22 @@
+uuid: 4dd2d827-49ba-4965-9187-cdcf41c43065
+langcode: en
+status: true
+dependencies:
+  theme:
+    - pece_theme
+_core:
+  default_config_hash: D_hUB_AW2IvKbVo3lVG-B2KfTsX6xJ-CxfOcRYUnL3E
+id: pece_theme_secondary_local_tasks
+theme: pece_theme
+region: header
+weight: -1
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Secondary tabs'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

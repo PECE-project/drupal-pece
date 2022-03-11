@@ -1,0 +1,21 @@
+uuid: eddf3cdc-b9a1-445a-9e16-aa37eba838bd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fieldnote_language
+    - node.type.pece_artifact_fieldnote
+  module:
+    - languagefield
+id: node.pece_artifact_fieldnote.field_fieldnote_language
+field_name: field_fieldnote_language
+entity_type: node
+bundle: pece_artifact_fieldnote
+label: Language
+description: 'In what language is this artifact?'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: language_field

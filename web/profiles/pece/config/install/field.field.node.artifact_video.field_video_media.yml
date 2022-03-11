@@ -1,0 +1,27 @@
+uuid: 66fe595c-91dc-41ed-9b64-f5b2947844c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_video_media
+    - node.type.artifact_video
+  module:
+    - file
+id: node.artifact_video.field_video_media
+field_name: field_video_media
+entity_type: node
+bundle: artifact_video
+label: Video
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'ogv ogg mp4 m4v webm'
+  max_filesize: ''
+  description_field: false
+field_type: file

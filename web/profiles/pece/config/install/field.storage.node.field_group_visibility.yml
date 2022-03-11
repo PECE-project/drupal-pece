@@ -1,0 +1,27 @@
+uuid: 3684cbf5-9a08-4356-8c3a-b77e2fb28d5a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_group_visibility
+field_name: field_group_visibility
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: public
+      label: 'Public - accessible to all site users'
+    -
+      value: private
+      label: 'Private - accessible only to group members'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

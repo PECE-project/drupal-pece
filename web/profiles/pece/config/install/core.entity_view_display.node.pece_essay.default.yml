@@ -1,0 +1,489 @@
+uuid: 29e82442-9e68-4024-82c9-10b8b702534a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_essay.body
+    - field.field.node.pece_essay.field_ark_enabled
+    - field.field.node.pece_essay.field_essay_contents
+    - field.field.node.pece_essay.field_essay_contributors
+    - field.field.node.pece_essay.field_essay_tags
+    - field.field.node.pece_essay.field_essay_thumbnail
+    - field.field.node.pece_essay.field_pbc_ref_group
+    - field.field.node.pece_essay.field_pbc_ref_role
+    - field.field.node.pece_essay.field_pbc_ref_user
+    - field.field.node.pece_essay.field_pece_all_can_view
+    - field.field.node.pece_essay.field_pece_license
+    - field.field.node.pece_essay.field_pece_project_ref
+    - node.type.pece_essay
+  module:
+    - entity_reference_revisions
+    - image
+    - layout_builder
+    - pbf
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: true
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          column_widths: 75-25
+        components:
+          ab6c85b3-f5fd-4b53-abe5-4f3716f3afbe:
+            uuid: ab6c85b3-f5fd-4b53-abe5-4f3716f3afbe
+            region: first
+            configuration:
+              id: 'field_block:node:pece_essay:body'
+              label: Description
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          2089f081-2869-41cf-97df-ff1a2ca3c9ba:
+            uuid: 2089f081-2869-41cf-97df-ff1a2ca3c9ba
+            region: first
+            configuration:
+              id: 'field_block:node:pece_essay:field_pece_license'
+              label: License
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          b5170c6c-3652-47c6-97bb-e3f100a15f1d:
+            uuid: b5170c6c-3652-47c6-97bb-e3f100a15f1d
+            region: first
+            configuration:
+              id: 'extra_field_block:node:pece_essay:links'
+              label: Links
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          3a4b3a38-997b-41db-bf58-b8413fc7733c:
+            uuid: 3a4b3a38-997b-41db-bf58-b8413fc7733c
+            region: second
+            configuration:
+              id: 'field_block:node:pece_essay:field_essay_thumbnail'
+              label: Thumbnail
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: image
+                label: above
+                settings:
+                  image_link: ''
+                  image_style: ''
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          ca062031-4b0f-46be-9c4c-6bfba8bd9f43:
+            uuid: ca062031-4b0f-46be-9c4c-6bfba8bd9f43
+            region: second
+            configuration:
+              id: 'field_block:node:pece_essay:field_essay_contributors'
+              label: Contributors
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          57881400-b64c-4f24-b684-04ae84528aa8:
+            uuid: 57881400-b64c-4f24-b684-04ae84528aa8
+            region: second
+            configuration:
+              id: 'field_block:node:pece_essay:field_pbc_ref_group'
+              label: 'Permission by Group'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: pbf_formatter_default
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          335e95f0-65c1-4141-bb3c-7e812e945ffd:
+            uuid: 335e95f0-65c1-4141-bb3c-7e812e945ffd
+            region: second
+            configuration:
+              id: 'field_block:node:pece_essay:field_essay_tags'
+              label: Tags
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          2100181c-3437-4fef-b143-2e2e480f8c11:
+            uuid: 2100181c-3437-4fef-b143-2e2e480f8c11
+            region: content
+            configuration:
+              id: 'extra_field_block:node:pece_essay:links'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 0
+            additional: {  }
+          2cb515e5-cba0-4d2c-8ca0-e9f2b13f0fee:
+            uuid: 2cb515e5-cba0-4d2c-8ca0-e9f2b13f0fee
+            region: content
+            configuration:
+              id: 'field_block:node:pece_essay:body'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          3cfd3dcc-04c3-46e0-bcc6-d64e6dda93cf:
+            uuid: 3cfd3dcc-04c3-46e0-bcc6-d64e6dda93cf
+            region: content
+            configuration:
+              id: 'field_block:node:pece_essay:field_essay_contributors'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          1f9ddd7a-952b-4d82-8458-4b83cfc43ac7:
+            uuid: 1f9ddd7a-952b-4d82-8458-4b83cfc43ac7
+            region: content
+            configuration:
+              id: 'field_block:node:pece_essay:field_essay_thumbnail'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: image
+                label: above
+                settings:
+                  image_link: ''
+                  image_style: ''
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          0f8dc9f0-c5af-48e8-9753-074a25c5039b:
+            uuid: 0f8dc9f0-c5af-48e8-9753-074a25c5039b
+            region: content
+            configuration:
+              id: 'field_block:node:pece_essay:field_essay_tags'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          fec1e11a-c25d-48da-8001-a8d27ca38781:
+            uuid: fec1e11a-c25d-48da-8001-a8d27ca38781
+            region: content
+            configuration:
+              id: 'field_block:node:pece_essay:field_essay_contents'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                  link: ''
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          2891974a-aaf2-4110-ae64-59f142d51ad1:
+            uuid: 2891974a-aaf2-4110-ae64-59f142d51ad1
+            region: content
+            configuration:
+              id: 'field_block:node:pece_essay:field_pbc_ref_user'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: pbf_formatter_default
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+          887ac7e0-c902-4ec0-bdb9-ad5b08aab2b4:
+            uuid: 887ac7e0-c902-4ec0-bdb9-ad5b08aab2b4
+            region: content
+            configuration:
+              id: 'field_block:node:pece_essay:field_pbc_ref_role'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: pbf_formatter_default
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
+          cc0130f4-5be1-4db8-9956-b910db922def:
+            uuid: cc0130f4-5be1-4db8-9956-b910db922def
+            region: content
+            configuration:
+              id: 'field_block:node:pece_essay:field_pbc_ref_group'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: pbf_formatter_default
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
+          9b8d935f-4448-4f3b-8acc-5e6fe170ab15:
+            uuid: 9b8d935f-4448-4f3b-8acc-5e6fe170ab15
+            region: content
+            configuration:
+              id: 'field_block:node:pece_essay:field_pece_project_ref'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 9
+            additional: {  }
+          53a1ac41-4c47-4017-a45a-cf5b6da15c7a:
+            uuid: 53a1ac41-4c47-4017-a45a-cf5b6da15c7a
+            region: content
+            configuration:
+              id: 'field_block:node:pece_essay:field_ark_enabled'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 10
+            additional: {  }
+          15df1865-5def-46a2-84e2-e702764a10bd:
+            uuid: 15df1865-5def-46a2-84e2-e702764a10bd
+            region: content
+            configuration:
+              id: 'field_block:node:pece_essay:field_pece_license'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 11
+            additional: {  }
+          9db6da15-715f-4407-9a7f-80d3ac3b0391:
+            uuid: 9db6da15-715f-4407-9a7f-80d3ac3b0391
+            region: content
+            configuration:
+              id: 'field_block:node:pece_essay:field_pece_all_can_view'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 12
+            additional: {  }
+        third_party_settings: {  }
+id: node.pece_essay.default
+targetEntityType: node
+bundle: pece_essay
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_ark_enabled:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 114
+    region: content
+  field_essay_contents:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  field_essay_contributors:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_essay_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_essay_thumbnail:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_pbc_ref_group:
+    type: pbf_formatter_default
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 112
+    region: content
+  field_pbc_ref_role:
+    type: pbf_formatter_default
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 111
+    region: content
+  field_pbc_ref_user:
+    type: pbf_formatter_default
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 110
+    region: content
+  field_pece_all_can_view:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 116
+    region: content
+  field_pece_license:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 115
+    region: content
+  field_pece_project_ref:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 113
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true
+  layout_builder__layout: true
+  search_api_excerpt: true

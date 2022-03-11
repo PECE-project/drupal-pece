@@ -1,0 +1,87 @@
+uuid: 0869ea94-9dae-470a-996f-4d5beca97f54
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.profile.pece_profile_main.field_pece_biography
+    - field.field.profile.pece_profile_main.field_pece_email
+    - field.field.profile.pece_profile_main.field_pece_full_name
+    - field.field.profile.pece_profile_main.field_pece_institution
+    - field.field.profile.pece_profile_main.field_pece_location
+    - field.field.profile.pece_profile_main.field_pece_position
+    - field.field.profile.pece_profile_main.field_pece_tags
+    - field.field.profile.pece_profile_main.field_pgp_key
+    - profile.type.pece_profile_main
+  module:
+    - address
+    - file
+id: profile.pece_profile_main.default
+targetEntityType: profile
+bundle: pece_profile_main
+mode: default
+content:
+  field_pece_biography:
+    type: string_textarea
+    weight: 30
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_pece_email:
+    type: email_default
+    weight: 27
+    region: content
+    settings:
+      placeholder: ''
+      size: 60
+    third_party_settings: {  }
+  field_pece_full_name:
+    type: string_textfield
+    weight: 26
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pece_institution:
+    type: string_textfield
+    weight: 28
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pece_location:
+    type: address_default
+    weight: 31
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_pece_position:
+    type: string_textfield
+    weight: 29
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pece_tags:
+    type: entity_reference_autocomplete
+    weight: 32
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pgp_key:
+    type: file_generic
+    weight: 33
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+hidden:
+  is_default: true

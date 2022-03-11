@@ -1,0 +1,75 @@
+uuid: 4555c113-a22d-43a3-bf2b-04ce3cb640ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_project.body
+    - field.field.node.pece_project.field_ark_enabled
+    - field.field.node.pece_project.field_pbc_ref_group
+    - field.field.node.pece_project.field_pbc_ref_role
+    - field.field.node.pece_project.field_pbc_ref_user
+    - field.field.node.pece_project.field_pece_all_can_view
+    - field.field.node.pece_project.field_pece_geolocation
+    - field.field.node.pece_project.field_project_consent_form_file
+    - field.field.node.pece_project.field_project_contributors
+    - field.field.node.pece_project.field_project_design_group
+    - field.field.node.pece_project.field_project_featured_essays
+    - field.field.node.pece_project.field_project_fund_agency_link
+    - field.field.node.pece_project.field_project_image
+    - field.field.node.pece_project.field_project_image_banner
+    - field.field.node.pece_project.field_project_institution_link
+    - field.field.node.pece_project.field_project_intv_request_file
+    - field.field.node.pece_project.field_project_lead
+    - field.field.node.pece_project.field_project_open_notes
+    - field.field.node.pece_project.field_project_start_end_date
+    - field.field.node.pece_project.field_project_struct_analytics
+    - field.field.node.pece_project.field_project_subst_logic
+    - field.field.node.pece_project.field_project_tags
+    - node.type.pece_project
+  module:
+    - text
+    - user
+id: node.pece_project.teaser
+targetEntityType: node
+bundle: pece_project
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_ark_enabled: true
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
+  field_pece_all_can_view: true
+  field_pece_geolocation: true
+  field_project_consent_form_file: true
+  field_project_contributors: true
+  field_project_design_group: true
+  field_project_featured_essays: true
+  field_project_fund_agency_link: true
+  field_project_image: true
+  field_project_image_banner: true
+  field_project_institution_link: true
+  field_project_intv_request_file: true
+  field_project_lead: true
+  field_project_open_notes: true
+  field_project_start_end_date: true
+  field_project_struct_analytics: true
+  field_project_subst_logic: true
+  field_project_tags: true
+  langcode: true
+  og_audience: true
+  search_api_excerpt: true

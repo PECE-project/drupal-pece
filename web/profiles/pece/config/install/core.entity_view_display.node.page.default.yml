@@ -1,0 +1,143 @@
+uuid: fd09afa2-d406-401b-b876-003f09f0817d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.page.body
+    - field.field.node.page.layout_builder__layout
+    - node.type.page
+  module:
+    - layout_builder
+    - layout_discovery
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: true
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          column_widths: 50-50
+        components:
+          397b7423-022b-43a8-85fe-f8954af0cc91:
+            uuid: 397b7423-022b-43a8-85fe-f8954af0cc91
+            region: first
+            configuration:
+              id: 'field_block:node:page:langcode'
+              label: Language
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: language
+                label: above
+                settings:
+                  link_to_entity: false
+                  native_language: false
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          5e8797ff-f1c2-492b-82f5-7734192acb1b:
+            uuid: 5e8797ff-f1c2-492b-82f5-7734192acb1b
+            region: second
+            configuration:
+              id: 'field_block:node:page:uid'
+              label: 'Authored by'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components:
+          f557f0cb-e6fc-416c-811d-cab3ff2c7539:
+            uuid: f557f0cb-e6fc-416c-811d-cab3ff2c7539
+            region: content
+            configuration:
+              id: 'field_block:node:page:type'
+              label: 'Content type'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          ba551273-5f9b-406a-8ee2-bd8be333d346:
+            uuid: ba551273-5f9b-406a-8ee2-bd8be333d346
+            region: content
+            configuration:
+              id: 'extra_field_block:node:page:links'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 0
+            additional: {  }
+          3151c4b8-5903-4221-a8ce-fb62daf98f3a:
+            uuid: 3151c4b8-5903-4221-a8ce-fb62daf98f3a
+            region: content
+            configuration:
+              id: 'field_block:node:page:body'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+        third_party_settings: {  }
+id: node.page.default
+targetEntityType: node
+bundle: page
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true
+  layout_builder__layout: true
+  search_api_excerpt: true

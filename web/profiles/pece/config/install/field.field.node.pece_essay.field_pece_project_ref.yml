@@ -1,0 +1,29 @@
+uuid: 1985442b-ab4e-431a-ba49-41f8916ce6e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_project_ref
+    - node.type.pece_essay
+    - node.type.pece_project
+id: node.pece_essay.field_pece_project_ref
+field_name: field_pece_project_ref
+entity_type: node
+bundle: pece_essay
+label: 'Cite as part of...'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_project: pece_project
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
