@@ -1,0 +1,309 @@
+uuid: 8ea90cec-ca92-487e-ae88-e5e7f021ba96
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_artifact_fieldnote.body
+    - field.field.node.pece_artifact_fieldnote.field_ark_enabled
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_authors
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_contributors
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_created_date
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_fieldsite
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_fieldsite_local
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_language
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_location
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_source
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_tags
+    - field.field.node.pece_artifact_fieldnote.field_pbc_ref_group
+    - field.field.node.pece_artifact_fieldnote.field_pbc_ref_role
+    - field.field.node.pece_artifact_fieldnote.field_pbc_ref_user
+    - field.field.node.pece_artifact_fieldnote.field_pece_all_can_view
+    - field.field.node.pece_artifact_fieldnote.field_pece_license
+    - field.field.node.pece_artifact_fieldnote.field_pece_project_ref
+    - node.type.pece_artifact_fieldnote
+  module:
+    - address
+    - datetime
+    - field_group
+    - languagefield
+    - path
+    - pbf
+    - text
+third_party_settings:
+  field_group:
+    group_permissions:
+      children:
+        - field_pece_all_can_view
+        - group_or
+        - group_and
+      label: Permissions
+      region: content
+      parent_name: ''
+      weight: 15
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+    group_or:
+      children:
+        - field_pbc_ref_user
+      label: OR
+      region: content
+      parent_name: group_permissions
+      weight: 25
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+    group_and:
+      children:
+        - field_pbc_ref_group
+        - field_pbc_ref_role
+      label: AND
+      region: content
+      parent_name: group_permissions
+      weight: 26
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+id: node.pece_artifact_fieldnote.default
+targetEntityType: node
+bundle: pece_artifact_fieldnote
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 8
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_ark_enabled:
+    type: boolean_checkbox
+    weight: 11
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_fieldnote_authors:
+    type: entity_reference_autocomplete
+    weight: 19
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_fieldnote_contributors:
+    type: entity_reference_autocomplete
+    weight: 16
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_fieldnote_created_date:
+    type: datetime_default
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_fieldnote_fieldsite:
+    type: entity_reference_autocomplete
+    weight: 21
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_fieldnote_fieldsite_local:
+    type: boolean_checkbox
+    weight: 22
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_fieldnote_language:
+    type: languagefield_select
+    weight: 20
+    region: content
+    settings:
+      format:
+        name: name
+    third_party_settings: {  }
+  field_fieldnote_location:
+    type: address_default
+    weight: 23
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_fieldnote_source:
+    type: text_textarea
+    weight: 27
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_fieldnote_tags:
+    type: entity_reference_autocomplete
+    weight: 24
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pbc_ref_group:
+    type: pbf_widget
+    weight: 12
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+    third_party_settings: {  }
+  field_pbc_ref_role:
+    type: pbf_widget
+    weight: 13
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+    third_party_settings: {  }
+  field_pbc_ref_user:
+    type: pbf_widget
+    weight: 14
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+    third_party_settings: {  }
+  field_pece_all_can_view:
+    type: boolean_checkbox
+    weight: 24
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_pece_license:
+    type: entity_reference_autocomplete
+    weight: 10
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pece_project_ref:
+    type: entity_reference_autocomplete
+    weight: 9
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 1
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 7
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

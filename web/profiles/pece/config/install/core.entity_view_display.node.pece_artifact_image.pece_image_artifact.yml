@@ -1,0 +1,68 @@
+uuid: 398d2a3a-3131-4b4e-b131-9c8839550eb8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.pece_image_artifact
+    - field.field.node.pece_artifact_image.field_ark_enabled
+    - field.field.node.pece_artifact_image.field_image_authors
+    - field.field.node.pece_artifact_image.field_image_contributors
+    - field.field.node.pece_artifact_image.field_image_created_date
+    - field.field.node.pece_artifact_image.field_image_crit_commentary
+    - field.field.node.pece_artifact_image.field_image_fieldsite
+    - field.field.node.pece_artifact_image.field_image_fieldsite_local
+    - field.field.node.pece_artifact_image.field_image_file_format
+    - field.field.node.pece_artifact_image.field_image_language
+    - field.field.node.pece_artifact_image.field_image_location
+    - field.field.node.pece_artifact_image.field_image_source
+    - field.field.node.pece_artifact_image.field_image_tags
+    - field.field.node.pece_artifact_image.field_pbc_ref_group
+    - field.field.node.pece_artifact_image.field_pbc_ref_role
+    - field.field.node.pece_artifact_image.field_pbc_ref_user
+    - field.field.node.pece_artifact_image.field_pece_all_can_view
+    - field.field.node.pece_artifact_image.field_pece_geolocation
+    - field.field.node.pece_artifact_image.field_pece_license
+    - field.field.node.pece_artifact_image.field_pece_media_image
+    - field.field.node.pece_artifact_image.field_pece_project_ref
+    - node.type.pece_artifact_image
+  module:
+    - user
+id: node.pece_artifact_image.pece_image_artifact
+targetEntityType: node
+bundle: pece_artifact_image
+mode: pece_image_artifact
+content:
+  field_pece_media_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: pece_image_artifact
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_ark_enabled: true
+  field_image_authors: true
+  field_image_contributors: true
+  field_image_created_date: true
+  field_image_crit_commentary: true
+  field_image_fieldsite: true
+  field_image_fieldsite_local: true
+  field_image_file_format: true
+  field_image_language: true
+  field_image_location: true
+  field_image_source: true
+  field_image_tags: true
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
+  field_pece_all_can_view: true
+  field_pece_created: true
+  field_pece_geolocation: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  langcode: true
+  links: true
+  og_audience: true
+  search_api_excerpt: true

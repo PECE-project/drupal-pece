@@ -1,0 +1,22 @@
+uuid: a148ae45-f369-4d68-8546-11efbe028811
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - pece_theme
+_core:
+  default_config_hash: b6mUaCq5YPapRUABXRHfNTT6fxWIj5lgf0Mg4HaRJ_I
+id: pece_theme_breadcrumbs
+theme: pece_theme
+region: header
+weight: -4
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

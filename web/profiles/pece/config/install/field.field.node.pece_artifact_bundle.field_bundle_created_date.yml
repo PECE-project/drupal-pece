@@ -1,0 +1,24 @@
+uuid: fd1b5476-570d-4732-a8cc-9e0f98015aba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_bundle_created_date
+    - node.type.pece_artifact_bundle
+  module:
+    - datetime
+id: node.pece_artifact_bundle.field_bundle_created_date
+field_name: field_bundle_created_date
+entity_type: node
+bundle: pece_artifact_bundle
+label: 'Created Date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

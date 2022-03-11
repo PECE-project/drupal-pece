@@ -1,0 +1,39 @@
+uuid: 39f260bd-aa27-4454-add4-95ba25938f6e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_pece_timeline_artifact
+    - node.type.artifact_video
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
+    - paragraphs.paragraphs_type.pece_timeline_essay_item
+id: paragraph.pece_timeline_essay_item.field_pece_timeline_artifact
+field_name: field_pece_timeline_artifact
+entity_type: paragraph
+bundle: pece_timeline_essay_item
+label: 'Timeline Artifact'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_artifact_audio: pece_artifact_audio
+      pece_artifact_image: pece_artifact_image
+      pece_artifact_pdf: pece_artifact_pdf
+      pece_artifact_text: pece_artifact_text
+      artifact_video: artifact_video
+      pece_artifact_website: pece_artifact_website
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: pece_artifact_audio
+field_type: entity_reference

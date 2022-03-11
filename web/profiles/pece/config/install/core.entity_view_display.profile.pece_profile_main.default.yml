@@ -1,0 +1,85 @@
+uuid: 0fab7d33-3500-4bbf-aa33-d9c00f20f992
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.profile.pece_profile_main.field_pece_biography
+    - field.field.profile.pece_profile_main.field_pece_email
+    - field.field.profile.pece_profile_main.field_pece_full_name
+    - field.field.profile.pece_profile_main.field_pece_institution
+    - field.field.profile.pece_profile_main.field_pece_location
+    - field.field.profile.pece_profile_main.field_pece_position
+    - field.field.profile.pece_profile_main.field_pece_tags
+    - field.field.profile.pece_profile_main.field_pgp_key
+    - profile.type.pece_profile_main
+  module:
+    - address
+    - file
+id: profile.pece_profile_main.default
+targetEntityType: profile
+bundle: pece_profile_main
+mode: default
+content:
+  field_pece_biography:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_pece_email:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_pece_full_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_pece_institution:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_pece_location:
+    type: address_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_pece_position:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_pece_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_pgp_key:
+    type: file_default
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+hidden:
+  search_api_excerpt: true

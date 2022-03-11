@@ -1,0 +1,21 @@
+uuid: 50ea4973-fc3c-47a4-8acc-5dd6fc511e1d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_geolocation
+    - node.type.pece_photo_essay
+  module:
+    - geolocation
+id: node.pece_photo_essay.field_pece_geolocation
+field_name: field_pece_geolocation
+entity_type: node
+bundle: pece_photo_essay
+label: Location
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: geolocation

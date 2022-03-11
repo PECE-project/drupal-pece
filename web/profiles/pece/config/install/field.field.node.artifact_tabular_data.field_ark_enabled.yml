@@ -1,0 +1,23 @@
+uuid: ba2e8339-c1bb-4c8f-8855-b002c5769c9b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ark_enabled
+    - node.type.artifact_tabular_data
+id: node.artifact_tabular_data.field_ark_enabled
+field_name: field_ark_enabled
+entity_type: node
+bundle: artifact_tabular_data
+label: 'ARK Enabled'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

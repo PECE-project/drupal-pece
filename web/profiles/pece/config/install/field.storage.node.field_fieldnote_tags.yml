@@ -1,0 +1,20 @@
+uuid: a28a883c-90dd-49a8-be83-2099feb7bb4c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_fieldnote_tags
+field_name: field_fieldnote_tags
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,29 @@
+uuid: cf5f733a-7428-4fbc-a378-04749188909f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_tags
+    - node.type.pece_project
+    - taxonomy.vocabulary.pece_tags
+id: node.pece_project.field_project_tags
+field_name: field_project_tags
+entity_type: node
+bundle: pece_project
+label: Tags
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      pece_tags: pece_tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

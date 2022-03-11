@@ -1,0 +1,21 @@
+uuid: 2d6b6d9a-61c8-4f34-97ff-76f0096dff28
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_group_visibility
+    - node.type.group
+  module:
+    - options
+id: node.group.field_group_visibility
+field_name: field_group_visibility
+entity_type: node
+bundle: group
+label: 'Group visibility'
+description: 'Add the visibility to this group.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

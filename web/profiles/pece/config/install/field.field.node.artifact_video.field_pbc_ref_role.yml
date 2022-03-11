@@ -1,0 +1,30 @@
+uuid: 1018959a-4a29-4046-9c51-ff941f1b79aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pbc_ref_role
+    - node.type.artifact_video
+  module:
+    - pbf
+id: node.artifact_video.field_pbc_ref_role
+field_name: field_pbc_ref_role
+entity_type: node
+bundle: artifact_video
+label: 'Permission by Roles'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user_role'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+  priority: 0
+  user_method: user
+  synchronized_with: ''
+  synchronized_by: ''
+  synchronized_from_target: 0
+field_type: pbf

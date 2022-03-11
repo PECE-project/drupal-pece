@@ -1,0 +1,74 @@
+uuid: 94c740c6-ba91-4d40-b2b5-6c04bb8b43bd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.pece_timeline_essay_item.field_description
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_start_end_date
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_artifact
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_background
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_color
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_type
+    - field.field.paragraph.pece_timeline_essay_item.field_title
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.pece_timeline_essay_item
+  module:
+    - color_field
+    - datetime_range
+    - image
+id: paragraph.pece_timeline_essay_item.default
+targetEntityType: paragraph
+bundle: pece_timeline_essay_item
+mode: default
+content:
+  field_description:
+    type: string_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_pece_start_end_date:
+    type: daterange_default
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_pece_timeline_artifact:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pece_timeline_background:
+    type: image_image
+    weight: 4
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  field_pece_timeline_color:
+    type: color_field_widget_box
+    weight: 5
+    region: content
+    settings:
+      default_colors: '#ac725e,#d06b64,#f83a22,#fa573c,#ff7537,#ffad46,#42d692,#16a765,#7bd148,#b3dc6c,#fbe983,#92e1c0,#9fe1e7,#9fc6e7,#4986e7,#9a9cff,#b99aff,#c2c2c2,#cabdbf,#cca6ac,#f691b2,#cd74e6,#a47ae2'
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_pece_timeline_type: true
+  status: true

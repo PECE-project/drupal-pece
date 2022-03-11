@@ -1,0 +1,21 @@
+uuid: 0c3e5140-6f0b-4d97-89e0-4584e7ec4eae
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - pbf
+    - user
+id: node.field_pbc_ref_user
+field_name: field_pbc_ref_user
+entity_type: node
+type: pbf
+settings:
+  target_type: user
+module: pbf
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

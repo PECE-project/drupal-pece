@@ -1,0 +1,62 @@
+uuid: afd13890-17ef-482f-9c0e-39cece4c105a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_audio
+    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_image
+    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_link
+    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_title
+    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_video
+    - paragraphs.paragraphs_type.paragraph_custom_reference
+  module:
+    - file
+    - image
+id: paragraph.paragraph_custom_reference.default
+targetEntityType: paragraph
+bundle: paragraph_custom_reference
+mode: default
+content:
+  field_custom_reference_audio:
+    type: file_default
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_custom_reference_image:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_custom_reference_link:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_custom_reference_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_custom_reference_video:
+    type: file_default
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden:
+  search_api_excerpt: true

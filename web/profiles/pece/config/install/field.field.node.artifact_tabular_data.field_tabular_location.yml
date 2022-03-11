@@ -1,0 +1,41 @@
+uuid: b1caa136-43dc-4a32-980d-3c96c299cbee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tabular_location
+    - node.type.artifact_tabular_data
+  module:
+    - address
+id: node.artifact_tabular_data.field_tabular_location
+field_name: field_tabular_location
+entity_type: node
+bundle: artifact_tabular_data
+label: Location
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  available_countries: {  }
+  langcode_override: ''
+  field_overrides:
+    givenName:
+      override: optional
+    additionalName:
+      override: hidden
+    familyName:
+      override: hidden
+    organization:
+      override: hidden
+    addressLine2:
+      override: hidden
+    sortingCode:
+      override: hidden
+    dependentLocality:
+      override: hidden
+    administrativeArea:
+      override: hidden
+  fields: {  }
+field_type: address

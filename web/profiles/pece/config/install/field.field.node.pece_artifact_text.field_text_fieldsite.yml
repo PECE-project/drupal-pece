@@ -1,0 +1,29 @@
+uuid: c8c4cf41-daa4-4d9d-8fcc-4b07e26cf93e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_text_fieldsite
+    - node.type.pece_artifact_text
+    - node.type.pece_fieldsite
+id: node.pece_artifact_text.field_text_fieldsite
+field_name: field_text_fieldsite
+entity_type: node
+bundle: pece_artifact_text
+label: Fieldsite
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_fieldsite: pece_fieldsite
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

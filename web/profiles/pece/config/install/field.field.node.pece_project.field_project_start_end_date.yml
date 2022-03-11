@@ -1,0 +1,21 @@
+uuid: 47297a16-be35-4d37-bd07-5b5a3caa397f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_start_end_date
+    - node.type.pece_project
+  module:
+    - datetime_range
+id: node.pece_project.field_project_start_end_date
+field_name: field_project_start_end_date
+entity_type: node
+bundle: pece_project
+label: 'Start and End Date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange
