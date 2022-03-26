@@ -160,3 +160,12 @@ function pece_ark_schema() {
 function pece_ark_update_7001() {
   pece_ark_set_default_vars();
 }
+
+/**
+ * Apply views feature ARK.
+ */
+function pece_ark_update_7002() {
+  if (module_exists('features')) {
+    features_revert(array('pece_ark' => array('views_view')));
+  }
+}
