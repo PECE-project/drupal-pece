@@ -1,0 +1,327 @@
+uuid: b3243190-529a-4cc3-a33a-ba6eee5a93b6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_photo_essay.body
+    - field.field.node.pece_photo_essay.field_ark_enabled
+    - field.field.node.pece_photo_essay.field_pbc_ref_group
+    - field.field.node.pece_photo_essay.field_pbc_ref_role
+    - field.field.node.pece_photo_essay.field_pbc_ref_user
+    - field.field.node.pece_photo_essay.field_pece_all_can_view
+    - field.field.node.pece_photo_essay.field_pece_geolocation
+    - field.field.node.pece_photo_essay.field_pece_license
+    - field.field.node.pece_photo_essay.field_pece_project_ref
+    - field.field.node.pece_photo_essay.field_photo_essay_contributor
+    - field.field.node.pece_photo_essay.field_photo_essay_items
+    - field.field.node.pece_photo_essay.field_photo_essay_tags
+    - field.field.node.pece_photo_essay.field_photo_essay_thumbnail
+    - node.type.pece_photo_essay
+  module:
+    - entity_reference_revisions
+    - geolocation
+    - image
+    - layout_builder
+    - pbf
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          column_widths: 75-25
+        components:
+          64d3a370-173b-4bf9-8d61-2960146cdd69:
+            uuid: 64d3a370-173b-4bf9-8d61-2960146cdd69
+            region: first
+            configuration:
+              id: 'field_block:node:pece_photo_essay:body'
+              label: Description
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          e8ae3e62-089d-4902-8e76-c2ffecc4fbb6:
+            uuid: e8ae3e62-089d-4902-8e76-c2ffecc4fbb6
+            region: first
+            configuration:
+              id: 'field_block:node:pece_photo_essay:field_photo_essay_items'
+              label: Items
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          2cebd863-b298-454e-9c45-84da28b9bd4b:
+            uuid: 2cebd863-b298-454e-9c45-84da28b9bd4b
+            region: first
+            configuration:
+              id: 'field_block:node:pece_photo_essay:field_pece_license'
+              label: License
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          fa161b24-5f35-4740-b61d-79d4323b9f0a:
+            uuid: fa161b24-5f35-4740-b61d-79d4323b9f0a
+            region: first
+            configuration:
+              id: 'extra_field_block:node:pece_photo_essay:links'
+              label: Links
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          e49518f9-3f7d-4c46-830e-43026bc12955:
+            uuid: e49518f9-3f7d-4c46-830e-43026bc12955
+            region: second
+            configuration:
+              id: 'field_block:node:pece_photo_essay:field_photo_essay_thumbnail'
+              label: Thumbnail
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: image
+                label: above
+                settings:
+                  image_link: ''
+                  image_style: ''
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          0c9f8a40-b80b-492f-a2dc-b33d2f6a1188:
+            uuid: 0c9f8a40-b80b-492f-a2dc-b33d2f6a1188
+            region: second
+            configuration:
+              id: 'field_block:node:pece_photo_essay:field_photo_essay_contributor'
+              label: Contributors
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          4ff20a14-0431-428e-8c5d-f9c7f3fbb724:
+            uuid: 4ff20a14-0431-428e-8c5d-f9c7f3fbb724
+            region: second
+            configuration:
+              id: 'field_block:node:pece_photo_essay:field_pbc_ref_group'
+              label: 'Permission by Group'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: pbf_formatter_default
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          413c8d2d-2dc5-4b2a-8da5-bb3207f1e341:
+            uuid: 413c8d2d-2dc5-4b2a-8da5-bb3207f1e341
+            region: second
+            configuration:
+              id: 'field_block:node:pece_photo_essay:field_photo_essay_tags'
+              label: Tags
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          7012449c-0108-45f4-b28a-2c4f1c199531:
+            uuid: 7012449c-0108-45f4-b28a-2c4f1c199531
+            region: second
+            configuration:
+              id: 'field_block:node:pece_photo_essay:field_pece_geolocation'
+              label: Location
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: geolocation_latlng
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+        third_party_settings: {  }
+id: node.pece_photo_essay.default
+targetEntityType: node
+bundle: pece_photo_essay
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_ark_enabled:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 113
+    region: content
+  field_pbc_ref_group:
+    type: pbf_formatter_default
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_pbc_ref_role:
+    type: pbf_formatter_default
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_pbc_ref_user:
+    type: pbf_formatter_default
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_pece_all_can_view:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 119
+    region: content
+  field_pece_geolocation:
+    type: geolocation_latlng
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 117
+    region: content
+  field_pece_license:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 115
+    region: content
+  field_pece_project_ref:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 111
+    region: content
+  field_photo_essay_contributor:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 112
+    region: content
+  field_photo_essay_items:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 118
+    region: content
+  field_photo_essay_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 114
+    region: content
+  field_photo_essay_thumbnail:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+    third_party_settings: {  }
+    weight: 116
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

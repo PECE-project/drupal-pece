@@ -1,0 +1,29 @@
+uuid: d3925bcb-4bc6-4011-a69f-f271d74d8d3b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tabular_authors
+    - node.type.artifact_tabular_data
+    - taxonomy.vocabulary.pece_authors
+id: node.artifact_tabular_data.field_tabular_authors
+field_name: field_tabular_authors
+entity_type: node
+bundle: artifact_tabular_data
+label: Creator(s)
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      pece_authors: pece_authors
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

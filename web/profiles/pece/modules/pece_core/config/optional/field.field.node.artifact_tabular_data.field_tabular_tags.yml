@@ -1,0 +1,29 @@
+uuid: de85d991-0b77-4153-9938-f627feac8415
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tabular_tags
+    - node.type.artifact_tabular_data
+    - taxonomy.vocabulary.pece_tags
+id: node.artifact_tabular_data.field_tabular_tags
+field_name: field_tabular_tags
+entity_type: node
+bundle: artifact_tabular_data
+label: Tags
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      pece_tags: pece_tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

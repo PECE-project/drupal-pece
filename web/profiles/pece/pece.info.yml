@@ -10,26 +10,33 @@ distribution:
 
 # Modules to install to support the profile.
 install:
+  - user
   - block_content
   - breakpoint
   - color
+  - color_field
   - config
   - comment
   - contextual
   - content_moderation
+  - content_translation
   - contact
   - ctools
   - dblog
+  - field_group
   - field_ui
+  - geolocation
   - help
   - history
   - image
+  - layout_builder
   - options
   - path
   - paragraphs
   - paragraphs_type_permissions
   - quickedit
   - rules
+  - rest
   - taxonomy
   - shortcut
   - toolbar
@@ -46,6 +53,7 @@ install:
   - nyx_recaptcha
   - graphql_people
   - pathauto
+  - pbf
   - pece_access
   - pece_subst_logic
   - pece_project
@@ -73,6 +81,7 @@ install:
   - metatag_open_graph
   - metatag_verification
   - metatag_views
+  - media_library
 
 dependencies:
   - node
@@ -89,3 +98,5 @@ themes:
   - bartik
   - seven
   - claro
+  - gin
+  - pece_theme

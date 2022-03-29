@@ -1,0 +1,21 @@
+uuid: d6131a25-655e-4bf7-8f78-6f253ecae8c5
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - node
+    - paragraphs
+id: node.field_timeline_essay_items
+field_name: field_timeline_essay_items
+entity_type: node
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

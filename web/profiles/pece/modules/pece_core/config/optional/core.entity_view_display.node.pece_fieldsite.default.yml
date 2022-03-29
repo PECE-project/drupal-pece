@@ -1,0 +1,68 @@
+uuid: 1d3e6e9a-8586-431e-bc13-5385947d32ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_fieldsite.body
+    - field.field.node.pece_fieldsite.field_fieldsite_location
+    - field.field.node.pece_fieldsite.field_fieldsite_project
+    - field.field.node.pece_fieldsite.field_fieldsite_researcher
+    - field.field.node.pece_fieldsite.field_pece_geolocation
+    - node.type.pece_fieldsite
+  module:
+    - address
+    - geolocation
+    - text
+    - user
+_core:
+  default_config_hash: i8N7GiGl6mXExcKzcRPq-EcsDAS_uJdbq3fEReRcHzE
+id: node.pece_fieldsite.default
+targetEntityType: node
+bundle: pece_fieldsite
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_fieldsite_location:
+    type: address_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_fieldsite_project:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_fieldsite_researcher:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_pece_geolocation:
+    type: geolocation_latlng
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

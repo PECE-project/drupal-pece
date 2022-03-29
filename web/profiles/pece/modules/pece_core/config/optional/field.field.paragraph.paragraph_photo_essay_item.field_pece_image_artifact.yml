@@ -1,0 +1,28 @@
+uuid: 08d9e123-9b66-475e-ba2c-e2a52de644f6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_pece_image_artifact
+    - node.type.pece_artifact_image
+    - paragraphs.paragraphs_type.paragraph_photo_essay_item
+id: paragraph.paragraph_photo_essay_item.field_pece_image_artifact
+field_name: field_pece_image_artifact
+entity_type: paragraph
+bundle: paragraph_photo_essay_item
+label: 'Image Artifact'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_artifact_image: pece_artifact_image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

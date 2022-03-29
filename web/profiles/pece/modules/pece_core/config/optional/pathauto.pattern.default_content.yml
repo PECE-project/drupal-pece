@@ -1,0 +1,36 @@
+uuid: 67e5d65a-36af-4be2-858e-33e33c943b6b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: default_content
+label: 'Default Content'
+type: 'canonical_entities:node'
+pattern: 'content/[node:title]'
+selection_criteria:
+  be7af5c3-a09e-4459-bc31-33b5bb754989:
+    id: node_type
+    negate: false
+    uuid: be7af5c3-a09e-4459-bc31-33b5bb754989
+    context_mapping:
+      node: node
+    bundles:
+      artifact_video: artifact_video
+      group: group
+      page: page
+      pece_analytic: pece_analytic
+      pece_annotation: pece_annotation
+      pece_artifact_audio: pece_artifact_audio
+      pece_artifact_bundle: pece_artifact_bundle
+      pece_artifact_image: pece_artifact_image
+      pece_artifact_pdf: pece_artifact_pdf
+      pece_artifact_text: pece_artifact_text
+      pece_artifact_website: pece_artifact_website
+      pece_essay: pece_essay
+      pece_fieldsite: pece_fieldsite
+      pece_project: pece_project
+      pece_substantive_logic: pece_substantive_logic
+selection_logic: and
+weight: -5
+relationships: {  }

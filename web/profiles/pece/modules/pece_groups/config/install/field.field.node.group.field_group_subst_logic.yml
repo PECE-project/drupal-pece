@@ -1,0 +1,29 @@
+uuid: 2bc8b46b-a91c-429d-a294-3a5c9941407b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_group_subst_logic
+    - node.type.group
+    - node.type.pece_substantive_logic
+id: node.group.field_group_subst_logic
+field_name: field_group_subst_logic
+entity_type: node
+bundle: group
+label: 'Substantive Logic'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_substantive_logic: pece_substantive_logic
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

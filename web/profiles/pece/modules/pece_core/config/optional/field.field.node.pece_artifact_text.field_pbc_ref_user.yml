@@ -1,0 +1,36 @@
+uuid: abe97c7b-ba13-4d32-a7bd-6182fa2ec409
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pbc_ref_user
+    - node.type.pece_artifact_text
+  module:
+    - pbf
+id: node.pece_artifact_text.field_pbc_ref_user
+field_name: field_pbc_ref_user
+entity_type: node
+bundle: pece_artifact_text
+label: 'Permission by User'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: true
+  priority: -1
+  user_method: user
+  synchronized_with: ''
+  synchronized_by: ''
+  synchronized_from_target: 0
+field_type: pbf

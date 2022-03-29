@@ -1,0 +1,20 @@
+uuid: aaf85b9a-c897-4198-9eb0-0712b5ffcb1d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - user
+id: node.field_timeline_essay_contributor
+field_name: field_timeline_essay_contributor
+entity_type: node
+type: entity_reference
+settings:
+  target_type: user
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

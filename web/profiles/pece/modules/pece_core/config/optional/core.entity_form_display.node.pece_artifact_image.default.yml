@@ -1,0 +1,334 @@
+uuid: fcbc31fe-e5d5-468a-850d-a0fd631e2017
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_artifact_image.field_ark_enabled
+    - field.field.node.pece_artifact_image.field_image_authors
+    - field.field.node.pece_artifact_image.field_image_contributors
+    - field.field.node.pece_artifact_image.field_image_created_date
+    - field.field.node.pece_artifact_image.field_image_crit_commentary
+    - field.field.node.pece_artifact_image.field_image_fieldsite
+    - field.field.node.pece_artifact_image.field_image_fieldsite_local
+    - field.field.node.pece_artifact_image.field_image_file_format
+    - field.field.node.pece_artifact_image.field_image_language
+    - field.field.node.pece_artifact_image.field_image_location
+    - field.field.node.pece_artifact_image.field_image_source
+    - field.field.node.pece_artifact_image.field_image_tags
+    - field.field.node.pece_artifact_image.field_pbc_ref_group
+    - field.field.node.pece_artifact_image.field_pbc_ref_role
+    - field.field.node.pece_artifact_image.field_pbc_ref_user
+    - field.field.node.pece_artifact_image.field_pece_all_can_view
+    - field.field.node.pece_artifact_image.field_pece_geolocation
+    - field.field.node.pece_artifact_image.field_pece_license
+    - field.field.node.pece_artifact_image.field_pece_media_image
+    - field.field.node.pece_artifact_image.field_pece_project_ref
+    - node.type.pece_artifact_image
+  module:
+    - address
+    - datetime
+    - field_group
+    - geolocation
+    - languagefield
+    - media_library
+    - path
+    - pbf
+    - text
+third_party_settings:
+  field_group:
+    group_permissions:
+      children:
+        - field_pece_all_can_view
+        - group_or
+        - group_and
+      label: Permissions
+      region: content
+      parent_name: ''
+      weight: 22
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+    group_or:
+      children:
+        - field_pbc_ref_user
+      label: OR
+      region: content
+      parent_name: group_permissions
+      weight: 27
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+    group_and:
+      children:
+        - field_pbc_ref_group
+        - field_pbc_ref_role
+      label: AND
+      region: content
+      parent_name: group_permissions
+      weight: 28
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+id: node.pece_artifact_image.default
+targetEntityType: node
+bundle: pece_artifact_image
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_ark_enabled:
+    type: boolean_checkbox
+    weight: 23
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_image_authors:
+    type: entity_reference_autocomplete
+    weight: 11
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_image_contributors:
+    type: entity_reference_autocomplete
+    weight: 8
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_image_created_date:
+    type: datetime_default
+    weight: 24
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_image_crit_commentary:
+    type: text_textarea
+    weight: 29
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_image_fieldsite:
+    type: entity_reference_autocomplete
+    weight: 13
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_image_fieldsite_local:
+    type: boolean_checkbox
+    weight: 14
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_image_file_format:
+    type: string_textfield
+    weight: 25
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_image_language:
+    type: languagefield_select
+    weight: 12
+    region: content
+    settings:
+      format:
+        name: name
+    third_party_settings: {  }
+  field_image_location:
+    type: address_default
+    weight: 15
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_image_source:
+    type: text_textarea
+    weight: 30
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_image_tags:
+    type: entity_reference_autocomplete
+    weight: 27
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pbc_ref_group:
+    type: pbf_widget
+    weight: 19
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+    third_party_settings: {  }
+  field_pbc_ref_role:
+    type: pbf_widget
+    weight: 20
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+    third_party_settings: {  }
+  field_pbc_ref_user:
+    type: pbf_widget
+    weight: 21
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: '60'
+      placeholder: ''
+      grant_global: 0
+      grant_public: 1
+      grant_view: 0
+      grant_update: 0
+      grant_delete: 0
+    third_party_settings: {  }
+  field_pece_all_can_view:
+    type: boolean_checkbox
+    weight: 26
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_pece_geolocation:
+    type: geolocation_latlng
+    weight: 26
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_pece_license:
+    type: entity_reference_autocomplete
+    weight: 18
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pece_media_image:
+    type: media_library_widget
+    weight: 16
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_pece_project_ref:
+    type: entity_reference_autocomplete
+    weight: 17
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 1
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 7
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  og_audience: true

@@ -1,0 +1,27 @@
+uuid: 3d222120-cfe2-4bbf-9a80-4dbc8d86c211
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tabular_attachment
+    - node.type.artifact_tabular_data
+  module:
+    - file
+id: node.artifact_tabular_data.field_tabular_attachment
+field_name: field_tabular_attachment
+entity_type: node
+bundle: artifact_tabular_data
+label: Attachment
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt csv xls xlsx ods xml json rdf doc docx pdf rmd ipynb html nb.html'
+  max_filesize: ''
+  description_field: false
+field_type: file

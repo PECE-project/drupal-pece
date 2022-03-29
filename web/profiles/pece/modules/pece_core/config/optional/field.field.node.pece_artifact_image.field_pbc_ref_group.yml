@@ -1,0 +1,36 @@
+uuid: 1cf04ed7-8a01-48e7-8aaa-b1d8ddf8d6c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pbc_ref_group
+    - node.type.group
+    - node.type.pece_artifact_image
+  module:
+    - pbf
+id: node.pece_artifact_image.field_pbc_ref_group
+field_name: field_pbc_ref_group
+entity_type: node
+bundle: pece_artifact_image
+label: 'Permission by Group'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      group: group
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+  priority: 0
+  user_method: user
+  synchronized_with: ''
+  synchronized_by: ''
+  synchronized_from_target: 0
+field_type: pbf

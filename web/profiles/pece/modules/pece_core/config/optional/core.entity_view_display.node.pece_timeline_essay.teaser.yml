@@ -1,0 +1,56 @@
+uuid: c0831376-36d8-454a-b814-29512e63b20f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_timeline_essay.body
+    - field.field.node.pece_timeline_essay.field_ark_enabled
+    - field.field.node.pece_timeline_essay.field_pbc_ref_group
+    - field.field.node.pece_timeline_essay.field_pbc_ref_role
+    - field.field.node.pece_timeline_essay.field_pbc_ref_user
+    - field.field.node.pece_timeline_essay.field_pece_all_can_view
+    - field.field.node.pece_timeline_essay.field_pece_geolocation
+    - field.field.node.pece_timeline_essay.field_pece_license
+    - field.field.node.pece_timeline_essay.field_pece_project_ref
+    - field.field.node.pece_timeline_essay.field_timeline_essay_contributor
+    - field.field.node.pece_timeline_essay.field_timeline_essay_items
+    - field.field.node.pece_timeline_essay.field_timeline_essay_tags
+    - field.field.node.pece_timeline_essay.field_timeline_essay_thumbnail
+    - node.type.pece_timeline_essay
+  module:
+    - text
+    - user
+id: node.pece_timeline_essay.teaser
+targetEntityType: node
+bundle: pece_timeline_essay
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_ark_enabled: true
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
+  field_pece_all_can_view: true
+  field_pece_geolocation: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  field_timeline_essay_contributor: true
+  field_timeline_essay_items: true
+  field_timeline_essay_tags: true
+  field_timeline_essay_thumbnail: true
+  langcode: true
+  search_api_excerpt: true

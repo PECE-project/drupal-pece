@@ -1,0 +1,25 @@
+uuid: f4925b26-f29b-452f-a035-4f2d7698a6e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_content_reference.field_content_reference_content
+    - paragraphs.paragraphs_type.paragraph_content_reference
+id: paragraph.paragraph_content_reference.default
+targetEntityType: paragraph
+bundle: paragraph_content_reference
+mode: default
+content:
+  field_content_reference_content:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

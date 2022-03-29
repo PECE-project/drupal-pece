@@ -1,0 +1,24 @@
+uuid: c88d712e-44eb-4182-b249-b817080be073
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_audio_created_date
+    - node.type.pece_artifact_audio
+  module:
+    - datetime
+id: node.pece_artifact_audio.field_audio_created_date
+field_name: field_audio_created_date
+entity_type: node
+bundle: pece_artifact_audio
+label: 'Created Date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

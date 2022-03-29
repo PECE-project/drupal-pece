@@ -1,0 +1,17 @@
+uuid: e5a9a981-f2fd-4c9c-aedd-0f7636bb3d35
+langcode: en
+status: false
+dependencies:
+  module:
+    - serialization
+    - simple_oauth
+id: entity.oauth2_token
+plugin_id: 'entity:oauth2_token'
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - json
+  authentication:
+    - oauth2

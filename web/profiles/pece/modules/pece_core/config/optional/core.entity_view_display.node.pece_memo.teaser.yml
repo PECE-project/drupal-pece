@@ -1,0 +1,46 @@
+uuid: 892542f3-95d4-41ee-be70-cc77449162c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_memo.body
+    - field.field.node.pece_memo.field_pbc_ref_group
+    - field.field.node.pece_memo.field_pbc_ref_role
+    - field.field.node.pece_memo.field_pbc_ref_user
+    - field.field.node.pece_memo.field_pece_all_can_view
+    - field.field.node.pece_memo.field_pece_contributors
+    - field.field.node.pece_memo.field_pece_tags
+    - field.field.node.pece_memo.field_pece_uri
+    - node.type.pece_memo
+  module:
+    - text
+    - user
+id: node.pece_memo.teaser
+targetEntityType: node
+bundle: pece_memo
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
+  field_pece_all_can_view: true
+  field_pece_contributors: true
+  field_pece_tags: true
+  field_pece_uri: true
+  langcode: true
+  search_api_excerpt: true

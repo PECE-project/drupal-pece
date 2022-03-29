@@ -1,0 +1,64 @@
+uuid: fe4549ae-3f06-4372-a212-fe3bcf334a79
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_artifact_fieldnote.body
+    - field.field.node.pece_artifact_fieldnote.field_ark_enabled
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_authors
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_contributors
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_created_date
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_fieldsite
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_fieldsite_local
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_language
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_location
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_source
+    - field.field.node.pece_artifact_fieldnote.field_fieldnote_tags
+    - field.field.node.pece_artifact_fieldnote.field_pbc_ref_group
+    - field.field.node.pece_artifact_fieldnote.field_pbc_ref_role
+    - field.field.node.pece_artifact_fieldnote.field_pbc_ref_user
+    - field.field.node.pece_artifact_fieldnote.field_pece_all_can_view
+    - field.field.node.pece_artifact_fieldnote.field_pece_license
+    - field.field.node.pece_artifact_fieldnote.field_pece_project_ref
+    - node.type.pece_artifact_fieldnote
+  module:
+    - text
+    - user
+id: node.pece_artifact_fieldnote.teaser
+targetEntityType: node
+bundle: pece_artifact_fieldnote
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_ark_enabled: true
+  field_fieldnote_authors: true
+  field_fieldnote_contributors: true
+  field_fieldnote_created_date: true
+  field_fieldnote_fieldsite: true
+  field_fieldnote_fieldsite_local: true
+  field_fieldnote_language: true
+  field_fieldnote_location: true
+  field_fieldnote_source: true
+  field_fieldnote_tags: true
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
+  field_pece_all_can_view: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  langcode: true
+  search_api_excerpt: true

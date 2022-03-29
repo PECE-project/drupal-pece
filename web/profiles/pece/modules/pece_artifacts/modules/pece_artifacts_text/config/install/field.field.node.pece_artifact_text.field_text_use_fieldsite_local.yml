@@ -1,0 +1,23 @@
+uuid: a313cb71-868b-4177-8d57-93b5e0f897da
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_text_use_fieldsite_local
+    - node.type.pece_artifact_text
+id: node.pece_artifact_text.field_text_use_fieldsite_local
+field_name: field_text_use_fieldsite_local
+entity_type: node
+bundle: pece_artifact_text
+label: 'Use fieldsite''s location'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
