@@ -7,14 +7,14 @@ grumphp:
         - vendor/
         - tests/fixtures/
       standard:
-        - PSR12 
+        - PSR12
     phpmd:
       exclude:
         - vendor/
         - tests/fixtures/
       ruleset:
         - ./resources/phpmd-ruleset.xml
-    phpcpd: ~ 
+    phpcpd: ~
     codeception: ~
     securitychecker_symfony:
       lockfile: ./composer.lock
@@ -35,7 +35,7 @@ grumphp:
       order: ~
     gherkin: ~
     behat: ~
-    clover_coverage: 
-      clover_file: /tmp/clover.xml
-      level: 100      
+    # clover_coverage:
+    #   clover_file: /tmp/clover.xml
+    #   level: 100
 
