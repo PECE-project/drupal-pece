@@ -56,7 +56,7 @@
         "drupal/config_filter": "^2.2",
         "drupal/config_partial_export": "^1.4",
         "drupal/config_split": "^2.0.0-beta4",
-        "drupal/console": "^1.0.2",
+        "drupal/console": "^1.9",
         "drupal/core": "^9.0.6",
         "drupal/core-composer-scaffold": "^9.0.6",
         "drupal/eck": "^1.0@beta",
@@ -97,6 +97,7 @@
     "require-dev": {
         "drupal/core-dev": "^9.0.6",
         "drupal/devel": "^4.0",
+        "drupal/drupalmoduleupgrader": "dev-1.x",
         "drupal/migrate_devel": "2.0-alpha2",
         "openeuropa/code-review": "*"
     },
@@ -113,7 +114,8 @@
             "phpro/grumphp": true,
             "drupal/console-extend-plugin": true,
             "drupal/core-composer-scaffold": true,
-            "zaporylie/composer-drupal-optimizations": true
+            "zaporylie/composer-drupal-optimizations": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "autoload": {
