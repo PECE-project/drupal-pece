@@ -1,0 +1,23 @@
+uuid: 713335ea-c282-4966-9b23-dcbf3926f365
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ark_enabled
+    - node.type.pece_photo_essay
+id: node.pece_photo_essay.field_ark_enabled
+field_name: field_ark_enabled
+entity_type: node
+bundle: pece_photo_essay
+label: 'ARK Enabled'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

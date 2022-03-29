@@ -1,0 +1,29 @@
+uuid: c1027fe9-419f-4f8a-8bce-9f95f84f8146
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_timeline_essay_contributor
+    - node.type.pece_timeline_essay
+id: node.pece_timeline_essay.field_timeline_essay_contributor
+field_name: field_timeline_essay_contributor
+entity_type: node
+bundle: pece_timeline_essay
+label: Contributors
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: true
+field_type: entity_reference

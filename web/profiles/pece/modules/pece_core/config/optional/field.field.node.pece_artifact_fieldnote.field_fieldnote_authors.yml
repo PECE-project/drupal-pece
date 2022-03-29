@@ -1,0 +1,29 @@
+uuid: 2355b96e-9998-47b6-b5a2-c8c76eee3616
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fieldnote_authors
+    - node.type.pece_artifact_fieldnote
+    - taxonomy.vocabulary.pece_authors
+id: node.pece_artifact_fieldnote.field_fieldnote_authors
+field_name: field_fieldnote_authors
+entity_type: node
+bundle: pece_artifact_fieldnote
+label: Creator(s)
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      pece_authors: pece_authors
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

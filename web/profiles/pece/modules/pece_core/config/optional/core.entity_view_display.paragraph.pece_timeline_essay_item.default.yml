@@ -1,0 +1,83 @@
+uuid: c04a7bce-3a49-4ed8-a0f1-48c35577e799
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.pece_timeline_essay_item.field_description
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_start_end_date
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_artifact
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_background
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_color
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_type
+    - field.field.paragraph.pece_timeline_essay_item.field_title
+    - paragraphs.paragraphs_type.pece_timeline_essay_item
+  module:
+    - color_field
+    - datetime_range
+    - image
+    - options
+id: paragraph.pece_timeline_essay_item.default
+targetEntityType: paragraph
+bundle: pece_timeline_essay_item
+mode: default
+content:
+  field_description:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_pece_start_end_date:
+    type: daterange_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+      separator: '-'
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_pece_timeline_artifact:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_pece_timeline_background:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_pece_timeline_color:
+    type: color_field_formatter_text
+    label: above
+    settings:
+      format: hex
+      opacity: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_pece_timeline_type:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+hidden:
+  search_api_excerpt: true

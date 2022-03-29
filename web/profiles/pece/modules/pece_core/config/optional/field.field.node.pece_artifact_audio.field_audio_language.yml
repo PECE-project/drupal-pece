@@ -1,0 +1,21 @@
+uuid: e8aeaf3d-c834-4ff1-a5f0-d4b15b4bc5c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_audio_language
+    - node.type.pece_artifact_audio
+  module:
+    - languagefield
+id: node.pece_artifact_audio.field_audio_language
+field_name: field_audio_language
+entity_type: node
+bundle: pece_artifact_audio
+label: Language
+description: 'In what language is this artifact?'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: language_field

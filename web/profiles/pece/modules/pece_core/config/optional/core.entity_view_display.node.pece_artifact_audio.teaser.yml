@@ -1,0 +1,64 @@
+uuid: 41cc6f7f-c714-4f6d-9ddb-4c7c09641572
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_artifact_audio.field_ark_enabled
+    - field.field.node.pece_artifact_audio.field_audio_authors
+    - field.field.node.pece_artifact_audio.field_audio_contributors
+    - field.field.node.pece_artifact_audio.field_audio_created_date
+    - field.field.node.pece_artifact_audio.field_audio_crit_commentary
+    - field.field.node.pece_artifact_audio.field_audio_duration
+    - field.field.node.pece_artifact_audio.field_audio_fieldsite
+    - field.field.node.pece_artifact_audio.field_audio_file_format
+    - field.field.node.pece_artifact_audio.field_audio_language
+    - field.field.node.pece_artifact_audio.field_audio_location
+    - field.field.node.pece_artifact_audio.field_audio_media
+    - field.field.node.pece_artifact_audio.field_audio_source
+    - field.field.node.pece_artifact_audio.field_audio_tags
+    - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
+    - field.field.node.pece_artifact_audio.field_pbc_ref_group
+    - field.field.node.pece_artifact_audio.field_pbc_ref_role
+    - field.field.node.pece_artifact_audio.field_pbc_ref_user
+    - field.field.node.pece_artifact_audio.field_pece_all_can_view
+    - field.field.node.pece_artifact_audio.field_pece_license
+    - field.field.node.pece_artifact_audio.field_pece_project_ref
+    - node.type.pece_artifact_audio
+  module:
+    - user
+id: node.pece_artifact_audio.teaser
+targetEntityType: node
+bundle: pece_artifact_audio
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_ark_enabled: true
+  field_audio_audios: true
+  field_audio_authors: true
+  field_audio_contributors: true
+  field_audio_created_date: true
+  field_audio_crit_commentary: true
+  field_audio_duration: true
+  field_audio_fieldsite: true
+  field_audio_file_format: true
+  field_audio_language: true
+  field_audio_location: true
+  field_audio_media: true
+  field_audio_source: true
+  field_audio_tags: true
+  field_audio_use_fieldsite_local: true
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
+  field_pece_all_can_view: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  langcode: true
+  og_audience: true
+  search_api_excerpt: true

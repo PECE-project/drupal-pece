@@ -11,24 +11,95 @@ use Drupal\Tests\pbf\Functional\PbfAccessByNodeRefTest;
  */
 class PECEAccessByNodeRefTest extends PbfAccessByNodeRefTest {
 
-  protected $profile = 'pece';
   /**
    * Modules to install.
    *
    * @var array
    */
   public static $modules = array(
-    'system',
-    'language',
-    'user',
-    'node',
+    'address',
+    'admin_toolbar',
+    'admin_toolbar_tools',
+    'bibcite',
+    'bibcite_entity',
+    'block',
+    'block_content',
+    'breakpoint',
+    'ckeditor',
+    'color',
+    'color_field',
+    'comment',
+    'components',
+    'config',
+    'config_filter',
+    'config_partial_export',
+    'config_translation',
+    'consumers',
+    'contact',
+    'content_moderation',
+    'content_translation',
+    'contextual',
+    'ctools',
+    'datetime',
+    'datetime_range',
+    'dblog',
+    'eck',
+    'entity',
+    'entity_browser',
+    'entity_browser_entity_form',
+    'entity_reference_revisions',
     'field',
     'field_ui',
-    'taxonomy',
-    'search',
+    'field_group',
+    'file',
+    'filter',
+    'geolocation',
+    'graphql',
+    'graphql_people',
+    'hal',
+    'help',
+    'history',
+    'image',
+    'inline_entity_form',
+    'language',
+    'locale',
+    'layout_builder',
+    'layout_discovery',
+    'link',
+    'locale',
+    'languagefield',
+    'location_migration',
+    'media',
+    'media_library',
+    'metatag',
+    'metatag_dc',
+    'metatag_dc_advanced',
+    'metatag_open_graph',
+    'metatag_verification',
+    'metatag_views',
+    'migrate',
+    'migrate_devel',
+    'migrate_drupal',
+    'migrate_plus',
+    'migrate_tools',
+    'node',
+    'nyx_graphql',
+    'options',
     'pbf',
+    'paragraphs_type_permissions',
+    'paragraphs',
+    'pathauto',
     'workflow',
+    'path',
+    'pece_analytics',
+    'path_alias',
     'pece_access',
+    'pece_artifacts_audio',
+    'pece_artifacts_bundle',
+    'pece_artifacts_fieldsite',
+    'pece_artifacts_image',
+    'pece_artifacts_text',
+    'pece_artifacts_video',
     'pece_core',
     'pece_annotations',
     'pece_artifacts',
@@ -37,11 +108,37 @@ class PECEAccessByNodeRefTest extends PbfAccessByNodeRefTest {
     'pece_groups',
     'pece_memo',
     'pece_migrate',
+    'pece_n8n',
+    'pece_oauth',
     'pece_photo_essay',
     'pece_project',
+    'pece_rules_webhook',
     'pece_timeline_essay',
     'pece_subst_logic',
+    'profile',
+    'quickedit',
+    'rdf',
+    'rest',
+    'restui',
+    'rules',
+    'search',
+    'serialization',
+    'shortcut',
+    'system',
+    'search_api',
+    'simple_oauth',
+    'taxonomy',
+    'text',
+    'toolbar',
+    'token',
+    'typed_data',
+    'update',
+    'user',
+    'views',
+    'views_ui',
+    'workflow'
   );
+  protected $profile = 'pece';
   /*
    * Field name to add.
    *
@@ -50,10 +147,9 @@ class PECEAccessByNodeRefTest extends PbfAccessByNodeRefTest {
   protected $fieldname;
 
   /**
-   * Setup and create content whith Pbf field.
+   * Setup and create content with Pbf field.
    */
   public function setUp() {
-    $this->configImporter();
     parent::setUp();
 
     $this->fieldname = 'field_pbf_group';
@@ -61,7 +157,6 @@ class PECEAccessByNodeRefTest extends PbfAccessByNodeRefTest {
 
     $this->article1 = $this->createSimpleArticle('Article 1', $this->fieldname, $this->group1->id(), 1, 0, 0, 0);
     $this->article2 = $this->createSimpleArticle('Article 2', $this->fieldname, $this->group1->id(), 0, 1, 0, 0);
-
   }
 
   /**

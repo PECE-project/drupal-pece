@@ -1,0 +1,29 @@
+uuid: 987298ab-0360-476e-a9a4-544172deacbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tabular_contributors
+    - node.type.artifact_tabular_data
+id: node.artifact_tabular_data.field_tabular_contributors
+field_name: field_tabular_contributors
+entity_type: node
+bundle: artifact_tabular_data
+label: Contributors
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: true
+field_type: entity_reference

@@ -1,0 +1,105 @@
+uuid: f797b170-092a-4260-bcb7-1751168bb2cb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_timeline_essay.body
+    - field.field.node.pece_timeline_essay.field_ark_enabled
+    - field.field.node.pece_timeline_essay.field_pbc_ref_group
+    - field.field.node.pece_timeline_essay.field_pbc_ref_role
+    - field.field.node.pece_timeline_essay.field_pbc_ref_user
+    - field.field.node.pece_timeline_essay.field_pece_all_can_view
+    - field.field.node.pece_timeline_essay.field_pece_geolocation
+    - field.field.node.pece_timeline_essay.field_pece_license
+    - field.field.node.pece_timeline_essay.field_pece_project_ref
+    - field.field.node.pece_timeline_essay.field_timeline_essay_contributor
+    - field.field.node.pece_timeline_essay.field_timeline_essay_items
+    - field.field.node.pece_timeline_essay.field_timeline_essay_tags
+    - field.field.node.pece_timeline_essay.field_timeline_essay_thumbnail
+    - node.type.pece_timeline_essay
+  module:
+    - entity_reference_revisions
+    - geolocation
+    - text
+    - user
+id: node.pece_timeline_essay.default
+targetEntityType: node
+bundle: pece_timeline_essay
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_ark_enabled:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_pece_all_can_view:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_pece_geolocation:
+    type: geolocation_latlng
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_pece_license:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_timeline_essay_contributor:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_timeline_essay_items:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_timeline_essay_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
+hidden:
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
+  field_pece_project_ref: true
+  field_timeline_essay_thumbnail: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

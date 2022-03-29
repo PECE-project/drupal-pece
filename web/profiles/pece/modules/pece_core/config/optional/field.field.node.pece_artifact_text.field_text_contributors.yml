@@ -1,0 +1,29 @@
+uuid: f64c62d6-583d-4696-8201-61bfd37bb8ba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_text_contributors
+    - node.type.pece_artifact_text
+id: node.pece_artifact_text.field_text_contributors
+field_name: field_text_contributors
+entity_type: node
+bundle: pece_artifact_text
+label: Contributors
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: true
+field_type: entity_reference

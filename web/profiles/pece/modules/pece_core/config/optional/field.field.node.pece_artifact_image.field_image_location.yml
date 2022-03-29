@@ -1,0 +1,37 @@
+uuid: ae6001ed-c594-49e0-b0ef-ea6f1fe8a076
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image_location
+    - node.type.pece_artifact_image
+  module:
+    - address
+id: node.pece_artifact_image.field_image_location
+field_name: field_image_location
+entity_type: node
+bundle: pece_artifact_image
+label: Location
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  available_countries: {  }
+  langcode_override: ''
+  field_overrides:
+    givenName:
+      override: optional
+    additionalName:
+      override: hidden
+    familyName:
+      override: hidden
+    organization:
+      override: hidden
+    addressLine2:
+      override: hidden
+    dependentLocality:
+      override: hidden
+  fields: {  }
+field_type: address

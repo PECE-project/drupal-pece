@@ -1,0 +1,127 @@
+uuid: 935679cb-672a-4a7c-9643-91731a0066c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.group.body
+    - field.field.node.group.field_group_subst_logic
+    - field.field.node.group.field_group_visibility
+    - field.field.node.group.field_pece_project_ref
+    - node.type.group
+  module:
+    - layout_builder
+    - options
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          column_widths: 50-50
+        components:
+          3030c47a-891c-4b0a-a401-e32a2d2004be:
+            uuid: 3030c47a-891c-4b0a-a401-e32a2d2004be
+            region: first
+            configuration:
+              id: 'field_block:node:group:body'
+              label: Body
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          5a0981e4-6970-4e88-b272-b86c41b9f192:
+            uuid: 5a0981e4-6970-4e88-b272-b86c41b9f192
+            region: second
+            configuration:
+              id: 'field_block:node:group:field_pece_project_ref'
+              label: 'Cite as part of...'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          c071ea80-d91b-4700-8633-376abd1fbd85:
+            uuid: c071ea80-d91b-4700-8633-376abd1fbd85
+            region: second
+            configuration:
+              id: 'field_block:node:group:field_group_subst_logic'
+              label: 'Substantive Logic'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+        third_party_settings: {  }
+id: node.group.default
+targetEntityType: node
+bundle: group
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_group_subst_logic:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_group_visibility:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_pece_project_ref:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

@@ -1,0 +1,29 @@
+uuid: 23ea68be-cf69-48f8-9473-a5fb036b44c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_design_group
+    - node.type.pece_project
+id: node.pece_project.field_project_design_group
+field_name: field_project_design_group
+entity_type: node
+bundle: pece_project
+label: 'Design Group'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: true
+field_type: entity_reference

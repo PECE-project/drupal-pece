@@ -1,0 +1,23 @@
+uuid: 26eb76c1-2e3e-4ef5-bd01-786f3d1e43fb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.pece_memo
+  module:
+    - text
+id: node.pece_memo.body
+field_name: body
+entity_type: node
+bundle: pece_memo
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

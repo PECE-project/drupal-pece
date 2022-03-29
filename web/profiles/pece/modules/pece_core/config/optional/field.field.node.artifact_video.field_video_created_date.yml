@@ -1,0 +1,24 @@
+uuid: 25f57be9-b6ef-4bf9-b71d-e79ac93b32cf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_video_created_date
+    - node.type.artifact_video
+  module:
+    - datetime
+id: node.artifact_video.field_video_created_date
+field_name: field_video_created_date
+entity_type: node
+bundle: artifact_video
+label: 'Created Date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

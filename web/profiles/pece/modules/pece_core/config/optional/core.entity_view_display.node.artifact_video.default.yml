@@ -1,0 +1,505 @@
+uuid: 29151b9b-e189-4b9c-8175-21c0d90af55f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.artifact_video.field_ark_enabled
+    - field.field.node.artifact_video.field_pbc_ref_group
+    - field.field.node.artifact_video.field_pbc_ref_role
+    - field.field.node.artifact_video.field_pbc_ref_user
+    - field.field.node.artifact_video.field_pece_all_can_view
+    - field.field.node.artifact_video.field_pece_license
+    - field.field.node.artifact_video.field_pece_project_ref
+    - field.field.node.artifact_video.field_video_authors
+    - field.field.node.artifact_video.field_video_contributors
+    - field.field.node.artifact_video.field_video_created_date
+    - field.field.node.artifact_video.field_video_crit_commentary
+    - field.field.node.artifact_video.field_video_duration
+    - field.field.node.artifact_video.field_video_fieldsite
+    - field.field.node.artifact_video.field_video_format
+    - field.field.node.artifact_video.field_video_location
+    - field.field.node.artifact_video.field_video_media
+    - field.field.node.artifact_video.field_video_permission
+    - field.field.node.artifact_video.field_video_source
+    - field.field.node.artifact_video.field_video_tags
+    - field.field.node.artifact_video.field_video_use_fieldsite_local
+    - node.type.artifact_video
+  module:
+    - address
+    - datetime
+    - file
+    - languagefield
+    - layout_builder
+    - options
+    - pbf
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          column_widths: 50-50
+        components:
+          56002ced-1be4-4bde-bffe-1b517cb25100:
+            uuid: 56002ced-1be4-4bde-bffe-1b517cb25100
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_video:field_video_media'
+              label: Video
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: file_video
+                label: above
+                settings:
+                  controls: false
+                  autoplay: false
+                  loop: false
+                  multiple_file_display_type: tags
+                  muted: false
+                  width: 640
+                  height: 480
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          0742d70b-04da-4f59-a86e-92ee65eb6b7c:
+            uuid: 0742d70b-04da-4f59-a86e-92ee65eb6b7c
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_video:field_video_format'
+              label: Format
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          670f6ed7-6879-4de7-94af-13db73437359:
+            uuid: 670f6ed7-6879-4de7-94af-13db73437359
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_video:field_video_duration'
+              label: Duration
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          41d1b100-9b81-4333-9889-8df0a72afe42:
+            uuid: 41d1b100-9b81-4333-9889-8df0a72afe42
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_video:field_pece_license'
+              label: License
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          106966e9-81f7-442b-82b0-65d572984a7b:
+            uuid: 106966e9-81f7-442b-82b0-65d572984a7b
+            region: first
+            configuration:
+              id: 'extra_field_block:node:artifact_video:links'
+              label: Links
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          399dfa52-1746-4098-b4dd-5f655a11e921:
+            uuid: 399dfa52-1746-4098-b4dd-5f655a11e921
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:field_video_authors'
+              label: Creator(s)
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          ffb462c4-7dcb-4384-afb6-ba500ea74d4c:
+            uuid: ffb462c4-7dcb-4384-afb6-ba500ea74d4c
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:field_video_created_date'
+              label: 'Created Date'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          a269d5b8-a8a9-4c2b-bc41-5f94150cf6fa:
+            uuid: a269d5b8-a8a9-4c2b-bc41-5f94150cf6fa
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:field_video_contributors'
+              label: Contributors
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          6395919c-9f27-4eda-bf00-e2d1a0871bac:
+            uuid: 6395919c-9f27-4eda-bf00-e2d1a0871bac
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:field_video_fieldsite'
+              label: Fieldsite
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          bf4cf4ac-4f6e-43f8-9ba9-bacb0d765468:
+            uuid: bf4cf4ac-4f6e-43f8-9ba9-bacb0d765468
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:field_video_crit_commentary'
+              label: 'Critical Commentary'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          0ad42f1c-e592-4ceb-b4a0-6d35c84a9c43:
+            uuid: 0ad42f1c-e592-4ceb-b4a0-6d35c84a9c43
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:field_video_source'
+              label: Source
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          0d043bb8-f7c2-47a0-8f56-2c7789e006b0:
+            uuid: 0d043bb8-f7c2-47a0-8f56-2c7789e006b0
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:langcode'
+              label: Language
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: language
+                label: above
+                settings:
+                  link_to_entity: false
+                  native_language: false
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+          89674a4d-a49a-407a-9847-342488722f46:
+            uuid: 89674a4d-a49a-407a-9847-342488722f46
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:field_pbc_ref_group'
+              label: 'Permission by Group'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: pbf_formatter_default
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
+          300bf1d2-2f3d-4ab9-883d-e8451d7b4a89:
+            uuid: 300bf1d2-2f3d-4ab9-883d-e8451d7b4a89
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:field_video_tags'
+              label: Tags
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
+          c5ea4664-13be-4009-8819-d823d61f152c:
+            uuid: c5ea4664-13be-4009-8819-d823d61f152c
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:field_video_location'
+              label: Location
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: address_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 9
+            additional: {  }
+        third_party_settings: {  }
+id: node.artifact_video.default
+targetEntityType: node
+bundle: artifact_video
+mode: default
+content:
+  field_ark_enabled:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 119
+    region: content
+  field_pbc_ref_group:
+    type: pbf_formatter_default
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 116
+    region: content
+  field_pbc_ref_role:
+    type: pbf_formatter_default
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 117
+    region: content
+  field_pbc_ref_user:
+    type: pbf_formatter_default
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 118
+    region: content
+  field_pece_all_can_view:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 124
+    region: content
+  field_pece_license:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 115
+    region: content
+  field_pece_project_ref:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 113
+    region: content
+  field_video_authors:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_video_contributors:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_video_created_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 120
+    region: content
+  field_video_crit_commentary:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 125
+    region: content
+  field_video_duration:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 121
+    region: content
+  field_video_fieldsite:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_video_format:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 122
+    region: content
+  field_video_location:
+    type: address_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 110
+    region: content
+  field_video_media:
+    type: file_default
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 123
+    region: content
+  field_video_permission:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 111
+    region: content
+  field_video_source:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 126
+    region: content
+  field_video_use_fieldsite_local:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_video_tags: true
+  langcode: true
+  og_audience: true
+  search_api_excerpt: true
