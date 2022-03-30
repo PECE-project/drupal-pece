@@ -21,6 +21,7 @@ class PeceArtifactTextTest extends BrowserTestBase {
    */
   public static $modules = array(
     'pece_artifacts_text',
+    'components',
     'token',
     'typed_data',
     'update',
@@ -44,7 +45,6 @@ class PeceArtifactTextTest extends BrowserTestBase {
    */
   public function testCreateContent() {
     $this->artifactText1 = $this->drupalCreateNode(['type' => 'pece_artifact_text', 'title' => 'Artifact Text 1']);
-    //$this->artifactText2 = $this->drupalCreateNode(['type' => 'pece_artifact_text', 'title' => 'Artifact Text 1']);
     // Verify view access.
     $this->drupalGet('node/'. $this->artifactText1->id());
     $this->assertSession()->statusCodeEquals(200);

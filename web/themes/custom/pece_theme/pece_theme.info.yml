@@ -6,6 +6,8 @@ core_version_requirement: ^8.7.7 || ^9.0
 engine: twig
 type: theme
 base theme: radix
+#dependencies:
+#   - drupal:components
 
 regions:
   navbar_branding: Navbar branding
@@ -26,10 +28,9 @@ libraries-override:
 ckeditor_stylesheets:
   - assets/css/pece_theme.style.css
 
-component-libraries:
-  pece_theme:
-    paths:
-      - ./src/components
+components:
+  namespaces:
+    pece_theme: src/components
 
 # Information added by Drupal.org packaging script on 2020-09-30
 version: '8.x-4.10'
