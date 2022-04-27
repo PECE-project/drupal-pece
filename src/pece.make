@@ -80,6 +80,10 @@ libraries[bgrins-spectrum][download][url] =  https://github.com/bgrins/spectrum/
 libraries[gifresizer][download][type] = git
 libraries[gifresizer][download][url] = https://github.com/revagomes/gifresizer.git
 
+; Monolog
+libraries[monolog][download][type] = file
+libraries[monolog][download][url] = https://github.com/Seldaek/monolog/archive/refs/tags/2.5.0.tar.gz
+
 ; =====================
 ; Utilities and APIs
 ; =====================
