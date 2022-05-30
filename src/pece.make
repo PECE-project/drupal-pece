@@ -597,7 +597,7 @@ projects[amber][patch][] = "./patches/amber_fix-AmberPDO-class-issue.patch"
 
 ; Backup and Migrate
 projects[backup_migrate][subdir] = contrib
-projects[backup_migrate][version] = 3.9
+projects[backup_migrate][version] = 3.10
 
 ; Node Expiration
 projects[node_expire][subdir] = contrib
