@@ -439,7 +439,7 @@ projects[date][version] =  2.12
 projects[date][subdir] = contrib
 
 ; Overrides Panopoly's link.
-projects[link][version] = 1.7
+projects[link][version] = 1.11
 projects[link][subdir] = contrib
 ; Fix URL validation rejects existing valid content after upgrade to 7.x-1.4.
 projects[link][patch][2666912] = https://www.drupal.org/files/issues/2019-11-18/link-fix-internal-validation-2666912-54.patch
