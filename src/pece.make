@@ -308,7 +308,7 @@ projects[panopoly_theme][subdir] = contrib
 projects[panopoly_widgets][version] = 1.88
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_users][version] = 1.87
+projects[panopoly_users][version] = 1.88
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
