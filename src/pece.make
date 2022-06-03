@@ -1,10 +1,9 @@
 core = 7.x
 api = 2
 
-project[default]subdir] = contrib
-project[default][type] = module
-
-library[default][type] = library
+defaults[projects][subdir] = contrib
+defaults[projects][type] = module
+defaults[libraries][type] = library
 
 ; =====================
 ; kraftwagen
