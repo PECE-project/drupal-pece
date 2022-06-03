@@ -84,6 +84,7 @@ libraries[bgrins-spectrum][download][url] =  https://github.com/bgrins/spectrum/
 ; Gif Resizer
 libraries[gifresizer][download][type] = git
 libraries[gifresizer][download][url] = https://github.com/revagomes/gifresizer.git
+libraries[gifresizer][download][subtree] = master
 
 ; Monolog
 libraries[monolog][download][type] = file
