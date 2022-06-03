@@ -87,8 +87,11 @@ libraries[gifresizer][download][url] = https://github.com/revagomes/gifresizer.g
 libraries[gifresizer][download][subtree] = master
 
 ; Monolog
-libraries[monolog][download][type] = file
-libraries[monolog][download][url] = https://github.com/Seldaek/monolog/archive/refs/tags/2.5.0.tar.gz
+libraries[monolog][download][type] = git
+libraries[monolog][download][url] = https://github.com/Seldaek/monolog.git
+libraries[monolog][download][branch] = main
+;libraries[monolog][download][revision] = 60ad5183b5e5d6c9d4047e9f3072d36071dcc161
+
 
 ; =====================
 ; Utilities and APIs
