@@ -457,11 +457,12 @@ projects[link][subdir] = contrib
 projects[link][patch][2666912] = https://www.drupal.org/files/issues/2019-11-18/link-fix-internal-validation-2666912-55.patch
 
 ; Menu blocks disappear when editing/saving in the Panels IPE
-projects[link][patch][3120382] = https://www.drupal.org/files/issues/2020-03-17/link-panopoly-magic-notice-3120382-2.patch
+;projects[link][patch][3120382] = https://www.drupal.org/files/issues/2020-03-17/link-panopoly-magic-notice-3120382-2.patch
 
 ; Overrides Panopoly's linkit.
 projects[linkit][version] = 3.6
 projects[linkit][subdir] = contrib
+
 ; Allow Linkit support for any eligible element type.
 projects[linkit][patch][2651404] = https://www.drupal.org/files/issues/linkit-add-to-any-element-2651404-3.patch
 
