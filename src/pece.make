@@ -520,7 +520,7 @@ projects[scholarly_lite][subdir] = contrib
 
 ; Rules
 projects[rules][subdir] = contrib
-projects[rules][version] = 2.12
+projects[rules][version] = 2.13
 projects[rules][patch][2189645] = https://www.drupal.org/files/issues/d7_component_caches.patch
 
 ; Translation
