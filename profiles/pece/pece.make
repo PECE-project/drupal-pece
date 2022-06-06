@@ -1,6 +1,10 @@
 core = 7.x
 api = 2
 
+defaults[projects][subdir] = contrib
+defaults[projects][type] = module
+defaults[libraries][type] = library
+
 ; =====================
 ; kraftwagen
 ; =====================
@@ -652,7 +656,8 @@ projects[biblio_zotero][version] = 1.0-alpha3
 ; =====================
 ; Imports
 ; =====================
-; At the end, so that overrides are possible.includes[] = modules/sandbox/taller_entity/taller_entity.make
+; At the end, so that overrides are possible.
+; e.g. includes[] = modules/sandbox/taller_entity/taller_entity.make
 includes[] = modules/sandbox/panels_packery/panels_packery.make
 
 ; =====================
