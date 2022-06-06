@@ -80,8 +80,17 @@ libraries[php-encryption][download][url] = https://github.com/defuse/php-encrypt
 libraries[bgrins-spectrum][download][type] = file
 libraries[bgrins-spectrum][download][url] =  https://github.com/bgrins/spectrum/archive/master.zip
 
+; Gif Resizer
 libraries[gifresizer][download][type] = git
 libraries[gifresizer][download][url] = https://github.com/revagomes/gifresizer.git
+libraries[gifresizer][download][subtree] = master
+
+; Monolog
+libraries[monolog][download][type] = git
+libraries[monolog][download][url] = https://github.com/Seldaek/monolog.git
+libraries[monolog][download][branch] = main
+;libraries[monolog][download][revision] = 60ad5183b5e5d6c9d4047e9f3072d36071dcc161
+
 
 ; =====================
 ; Utilities and APIs
