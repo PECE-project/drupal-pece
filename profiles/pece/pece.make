@@ -70,7 +70,7 @@ libraries[autopager][download][url] = https://bitbucket.org/luksak/jquery-autopa
 libraries[autopager][download][subtree] = autopager
 
 libraries[timelinejs][download][type] = file
-libraries[timelinejs][download][url] = https://github.com/NUKnightLab/TimelineJS3/archive/3.6.5.tar.gz
+libraries[timelinejs][download][url] = https://github.com/NUKnightLab/TimelineJS3/archive/3.8.20.tar.gz
 
 ; PHP encryption libraries (REAL AES module dependency)
 libraries[php-encryption][download][type] = file
