@@ -201,7 +201,7 @@ function biblio_style_mla($node) {
           !empty($node->biblio_secondary_title)) {
             $output .= ": ";
           }
-          // @todo: $output .= formatPageInfo($node->biblio_pages, $markupPatternsArray["endash"]); // function 'formatPageInfo()' is defined in 'cite.inc.php'.
+          // @todo $output .= formatPageInfo($node->biblio_pages, $markupPatternsArray["endash"]); // function 'formatPageInfo()' is defined in 'cite.inc.php'.
           $output .= theme('biblio_page_number', array('orig_page_info' => $node->biblio_pages));
         }
       }
@@ -530,12 +530,12 @@ function biblio_style_mla($node) {
 
       // Thesis (unpublished dissertation)
       if (!empty($node->thesis)) {
-        // @todo: a published dissertation needs to be formatted differently!
-        //       see e.g. example at: <http://web.csustan.edu/english/reuben/pal/append/AXI.HTML>
+        // @todo a published dissertation needs to be formatted differently!
+        //   see e.g. example at: <http://web.csustan.edu/english/reuben/pal/append/AXI.HTML>
         _period_if_needed($output);
 
-        // @todo: I've also seen MLA examples that separate thesis name, name of institution and year by dots. ?:-|
-        //       Also, do we need to use the abbreviation "Diss." instead of "Ph.D. thesis"? What about other thesis types then?
+        // @todo I've also seen MLA examples that separate thesis name, name of institution and year by dots. ?:-|
+        //   Also, do we need to use the abbreviation "Diss." instead of "Ph.D. thesis"? What about other thesis types then?
         //       see e.g. <http://www.english.uiuc.edu/cws/wworkshop/writer_resources/citation_styles/mla/unpublished_diss.htm>
         $output .= " " . $node->thesis;
         $output .= ", " . $node->biblio_publisher;

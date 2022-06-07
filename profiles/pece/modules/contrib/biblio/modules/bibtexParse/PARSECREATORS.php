@@ -10,9 +10,9 @@
  */
 class Creators extends PARSECREATORS {
   protected $authors = array();
-  private   $existing_authors = array();
+  private $existing_authors = array();
   protected $typeMap = array();
-  private   $md5 = array();
+  private $md5 = array();
 
   /**
    *

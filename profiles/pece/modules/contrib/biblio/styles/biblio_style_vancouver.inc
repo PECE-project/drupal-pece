@@ -17,7 +17,7 @@
  *          This isn't currently handled by this style
  *        - For conference proceedings, you'll currently need to add the place & date of the conference in the proceedings title field
  *          (e.g. "Proceedings of the 5th Germ Cell Tumour Conference; 2001 Sep 13-15; Leeds, UK").
- * @todo: - abstracts, newspaper/magazine articles, patents & reports?
+ * @todo abstracts, newspaper/magazine articles, patents & reports?
  *       - arrange references numerically
  *       - for newspaper articles, only the beginning page number of an article should be included (see: <https://www.ncbi.nlm.nih.gov/books/bv.fcgi?rid=citmed.section.41496#41607>)
  *       - where to put (and how to format) editors of whole books that also have an author?
@@ -308,7 +308,7 @@ function biblio_style_vancouver($node) {
           $output .= ".";
         }
 
-        // @todo: not sure whether this is correct.
+        // @todo not sure whether this is correct.
         $output .= " Vol " . $node->biblio_volume;
       }
 
@@ -412,7 +412,7 @@ function biblio_style_vancouver($node) {
         }
 
         if (!empty($node->biblio_volume) && !empty($node->biblio_issue)) {
-          // @todo: not sure whether this is correct.
+          // @todo not sure whether this is correct.
           $output .= "; ";
         }
 
@@ -433,7 +433,7 @@ function biblio_style_vancouver($node) {
 
     // All other types.
     default:
-      // @todo.
+      // @todo .
       // @code
       //        if (preg_match("[ \r\n]*\(ed\)", $node->author)) // single editor
       //          $author = $author . ", ed";
@@ -456,7 +456,7 @@ function biblio_style_vancouver($node) {
           $output .= " ";
         }
 
-        // @todo: book/volume/report/etc titles should be formatted in heading caps, however, this doesn't yet work correctly if the publication title contains HTML entities.
+        // @todo book/volume/report/etc titles should be formatted in heading caps, however, this doesn't yet work correctly if the publication title contains HTML entities.
         $output .= '<span class="biblio-title-vancouver">';
         $url = biblio_get_title_url_info($node);
         $output .= l($node->title, $url['link'], $url['options']);
@@ -479,7 +479,7 @@ function biblio_style_vancouver($node) {
           $output .= ".";
         }
 
-        // @todo: not sure whether this is correct.
+        // @todo not sure whether this is correct.
         $output .= " Vol " . $node->biblio_volume;
       }
 
@@ -554,7 +554,7 @@ function biblio_style_vancouver($node) {
 
       // Thesis.
       if (!empty($node->thesis)) {
-        // @todo: do we need to use the term "[dissertation]" instead of "[Ph.D. thesis]", etc? What about other thesis types then?
+        // @todo do we need to use the term "[dissertation]" instead of "[Ph.D. thesis]", etc? What about other thesis types then?
         $output .= " [" . $node->thesis;
 
         // This record refers to an online thesis.
@@ -643,7 +643,7 @@ function biblio_style_vancouver($node) {
         }
 
         if (!empty($node->biblio_volume) && !empty($node->biblio_issue)) {
-          // @todo: not sure whether this is correct.
+          // @todo not sure whether this is correct.
           $output .= "; ";
         }
 

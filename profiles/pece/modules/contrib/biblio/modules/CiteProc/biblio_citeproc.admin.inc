@@ -327,7 +327,7 @@ function _get_github_repo_tree($path = '') {
  *
  */
 function _install_csl($name = NULL, $csl = NULL, $sha = NULL, $all = FALSE, $update = FALSE) {
-  static  $installed = array();
+  static $installed = array();
 
   if (empty($installed)) {
     $result = db_select('biblio_citeproc_styles', 'csl')

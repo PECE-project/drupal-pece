@@ -25,15 +25,15 @@
  *
  */
 class citeproc {
-  public    $bibliography;
-  public    $citation;
-  public    $style;
+  public $bibliography;
+  public $citation;
+  public $style;
   protected $macros;
-  private   $info;
+  private $info;
   protected $locale;
   protected $style_locale;
-  public    $quash;
-  private   $mapper;
+  public $quash;
+  private $mapper;
 
   /**
    *
@@ -167,7 +167,7 @@ class csl_factory {
  *
  */
 class csl_collection {
-  protected  $elements = array();
+  protected $elements = array();
 
   /**
    *
@@ -2052,7 +2052,7 @@ class csl_locale {
   protected $style_locale_xmlstring = NULL;
   protected $locale = NULL;
   protected $style_locale = NULL;
-  private   $module_path;
+  private $module_path;
 
   /**
    *

@@ -93,7 +93,7 @@ function en8_add_titles(&$node) {
 function en8_add_urls(&$node) {
   global $base_path;
   $xml = '';
-  // @todo: fix URLS.
+  // @todo fix URLS.
   if (!empty($node->biblio_url)) {
     $xml .= "<web-urls>";
     $xml .= '<url><style face="normal" font="default" size="100%">' . htmlspecialchars($node->biblio_url) . "</style></url>";

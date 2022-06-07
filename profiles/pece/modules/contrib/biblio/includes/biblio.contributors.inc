@@ -180,7 +180,8 @@ function biblio_load_contributors_multiple($vids = array(), $auth_category = 0) 
  * @return TRUE if author was added, FALSE if "etal" was already there
  */
 function biblio_authors_add_etal(&$authors, $type) {
-  $etal = "et al"; $max_rank = 0;
+  $etal = "et al";
+  $max_rank = 0;
   // Et al author should be added only once per type.
   foreach ($authors as $author) {
     if ($author['auth_type'] != $type) {
@@ -640,8 +641,8 @@ function _grabFirstnameInitials($remainder) {
  */
 function _grabSurname($input) {
   $no_prefix = FALSE;
-  $surname = FALSE;
-  $prefix = FALSE;
+  $surname = [];
+  $prefix = [];
 
   $surname_array = explode(" ", $input);
 
@@ -658,8 +659,14 @@ function _grabSurname($input) {
   if (!empty($surname)) {
     $surname = implode(" ", $surname);
   }
+  else {
+    $surname = FALSE;
+  }
   if (!empty($prefix)) {
     $prefix = implode(" ", $prefix);
+  }
+  else {
+    $prefix = FALSE;
   }
   return array($surname, $prefix);
 }

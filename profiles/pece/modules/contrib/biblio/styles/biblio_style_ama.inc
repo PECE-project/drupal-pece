@@ -14,7 +14,7 @@
  *
  * based on 'cite_Chicago.php'
  *
- * @todo: - abstracts, conference proceedings, patents, reports
+ * @todo abstracts, conference proceedings, patents, reports
  *       - book/volume/report/etc titles should be formatted in heading caps
  *       - don't add a dot if the abbreviated journal (or series title) ends with a dot!
  *
@@ -305,7 +305,7 @@ function biblio_style_ama($node) {
           $output .= " In:";
         }
 
-        // @todo: container titles should be formatted in heading caps, however, this doesn't yet work correctly if the publication title contains HTML entities.
+        // @todo container titles should be formatted in heading caps, however, this doesn't yet work correctly if the publication title contains HTML entities.
         $output .= " <i>" . $publication . "</i>";
         // $output .= " " . $markupPatternsArray["italic-prefix"] . changeCase("heading", $publication) . $markupPatternsArray["italic-suffix"]; // function 'changeCase()' is defined in 'include.inc.php'.
       }
@@ -444,7 +444,7 @@ function biblio_style_ama($node) {
         }
 
         $output .= '<i>';
-        // @todo: book/volume/report/etc titles should be formatted in heading caps, however, this doesn't yet work correctly if the publication title contains HTML entities.
+        // @todo book/volume/report/etc titles should be formatted in heading caps, however, this doesn't yet work correctly if the publication title contains HTML entities.
         $output .= '<span class="biblio-title-ama">';
         $url = biblio_get_title_url_info($node);
         $output .= l($node->title, $url['link'], $url['options']);
@@ -536,7 +536,7 @@ function biblio_style_ama($node) {
 
       // Thesis.
       if (!empty($row['thesis'])) {
-        // @todo: do we need to use the term "[dissertation]" instead of "[Ph.D. thesis]", etc? What about other thesis types then?
+        // @todo do we need to use the term "[dissertation]" instead of "[Ph.D. thesis]", etc? What about other thesis types then?
         $output .= " [" . $row['thesis'] . "]";
       }
 

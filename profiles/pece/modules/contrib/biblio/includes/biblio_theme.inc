@@ -70,7 +70,7 @@ function biblio_openurl($node) {
  *
  * @deprecated This was the original output format which is not to flexable. It
  * will be removed.
- * @todo: Remove this function.
+ * @todo Remove this function.
  *
  * @param $node
  * @param $base
@@ -709,7 +709,7 @@ function theme_biblio_author_link($variables) {
  * - the function attempts to deal with page locators that contain letters (e.g. "A1 - A3" or "4a-4c") but, ATM, locator parts (e.g. "A1")
  * must contain at least one digit character & must not contain any whitespace.
  *
- * @todo: - should we only use Unicode-aware regex expressions (i.e. always use '$space', '$digit' or '$word' instead of ' ', '\d' or '\w', etc)?
+ * @todo should we only use Unicode-aware regex expressions (i.e. always use '$space', '$digit' or '$word' instead of ' ', '\d' or '\w', etc)?
  * - recognize & process total number of pages
  * - for '$shortenPageRangeEnd=TRUE', add support for page locators that contain letters (e.g. "A1 - A3" or "4a-4c")
  */
@@ -1217,7 +1217,7 @@ function theme_biblio_alpha_line($variables) {
     default:
   }
   $output = '<div class="biblio-alpha-line">';
-  // @todo   for Cyrillic use 1040 to 1071... e.g. &#1068;.
+  // @todo for Cyrillic use 1040 to 1071... e.g. &#1068;.
   for ($i = 65; $i <= 90; $i++) {
     if ($i == ord($current)) {
       $output .= '<b>[' . chr($i) . ']</b>&nbsp;';
@@ -1302,7 +1302,7 @@ function theme_biblio_admin_author_edit_merge_table($variables) {
  */
 function _biblio_keyword_links($keywords, $base = 'biblio') {
   $uri = drupal_parse_url(request_uri());
-  $uri['path'] = variable_get('biblio_base', 'biblio');;
+  $uri['path'] = variable_get('biblio_base', 'biblio');
   $uri['attributes'] = array('rel' => 'nofollow');
   $html = "";
   if (!is_array($keywords)) {
