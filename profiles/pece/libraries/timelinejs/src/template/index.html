@@ -1,0 +1,104 @@
+<html>
+
+<head>
+    <title>Bundled TimelineJS test page</title>
+    <!-- this is normally done by embed page -->
+    <script>
+        var options = {
+            language: 'es',
+            debug: true,
+            height: 650,
+            soundcite: true,
+            sheets_proxy: 'https://sheets-proxy.knightlab.com/proxy/'
+        }
+
+
+        function ready(fn) {
+            if (document.readyState != 'loading') {
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+
+        function timelineFromInput() {
+            document.getElementById('timeline-embed').innerHTML = ''
+            var dataUrl = document.getElementById('timeline-src').value
+            window.timeline = new TL.Timeline('timeline-embed', dataUrl, options)
+        }
+
+        ready(function() {
+
+            // sanitize test
+            // var dataUrl = 'https://docs.google.com/spreadsheets/d/1Q4-R3mlK7w1liCEl5_SGPaeLpfHDVdMtc83rjSTHBZo/edit#gid=0'
+
+            // Zander Work's exploit
+            // var dataUrl = 'https://docs.google.com/spreadsheets/d/1Jt5Csoku0W73100mnG_byVdvCFLXT8G5gG9lu1yggA0/edit#gid=0'
+
+            // women in computing:
+            var dataUrl = 'https://docs.google.com/spreadsheets/u/1/d/1xuY4upIooEeszZ_lCmeNx24eSFWe0rHe9ZdqH2xqVNk/pubhtml';
+
+            window.timeline = new TL.Timeline('timeline-embed', dataUrl, options)
+
+            window.timeline.on("ready", () => {
+                console.log("Timeline ready event fired")
+            })
+
+
+            document.getElementById('timeline-src').value = dataUrl
+            document.getElementById('timeline-src').addEventListener('keyup', (e) => {
+                e.preventDefault();
+                if (e.keyCode === 13) {
+                    timelineFromInput()
+                }
+            })
+
+            document.querySelectorAll('nav a').forEach(el => {
+                el.addEventListener('click', e => {
+                    e.preventDefault()
+                    let url = e.target.attributes['href'].value
+                    document.getElementById('timeline-src').value = url
+                    timelineFromInput()
+                })
+            })
+        })
+    </script>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #ddd;
+        }
+        
+        #timeline-embed {
+            margin: 1em 0;
+            height: 650px;
+        }
+        
+        input[type="text"] {
+            font-size: 12pt
+        }
+        
+        nav {
+            margin: 10px 0;
+        }
+        
+        nav a {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Timeline Development</h1>
+    <div>
+        <label for="timeline-src">data source URL:</label><input type="text" size="120" name="timeline-src" id="timeline-src">
+    </div>
+    <nav>
+        <a href='https://docs.google.com/spreadsheets/u/1/d/1xuY4upIooEeszZ_lCmeNx24eSFWe0rHe9ZdqH2xqVNk/pubhtml'>Women in Computing</a>
+        <a href="all-media-types.json">All Media Types</a>
+        <a href="eras.json">Eras</a>
+    </nav>
+    <div id='timeline-embed'></div>
+</body>
+
+</html>
