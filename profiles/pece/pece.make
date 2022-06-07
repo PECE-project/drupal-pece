@@ -666,6 +666,14 @@ projects[biblio_zotero][subdir] = contrib
 projects[biblio_zotero][version] = 1.0-alpha3
 
 ; =====================
+; Logging
+; =====================
+
+projects[monolog][subdir] = contrib
+projects[monolog][version] = 1.2
+
+
+; =====================
 ; Imports
 ; =====================
 ; At the end, so that overrides are possible.
