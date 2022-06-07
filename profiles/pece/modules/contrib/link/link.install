@@ -36,6 +36,7 @@ function link_update_7002() {
  */
 function link_uninstall() {
   variable_del('link_allowed_domains');
+  variable_del('link_default_protocol');
 }
 
 /**
@@ -141,4 +142,11 @@ function link_update_7001() {
       }
     }
   }
+}
+
+/**
+ * Rebuild the menu cache to make the settings page use the correct permission.
+ */
+function link_update_7100() {
+  variable_set('menu_rebuild_needed', TRUE);
 }
