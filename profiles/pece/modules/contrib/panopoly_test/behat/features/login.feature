@@ -24,7 +24,7 @@ I want to be able to login
     Then I should see "Request new password"
     When I fill in "TestUser" for "name"
       And press "E-mail new password"
-    Then I should see "Further instructions have been sent to your e-mail address."
+    Then I should see "If TestUser is a valid account, an email will be sent with instructions to reset your password."
       And I should see "Log in"
 
   @drush @standard_login

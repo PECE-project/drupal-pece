@@ -15,14 +15,14 @@ default:
       selenium2:
         browser: chrome
         capabilities:
-          browser: chrome
-          browserName: chrome
-          browserVersion: ANY
-          chrome:
-            switches:
-              - "--headless"
-              - "--disable-gpu"
-          version: ANY
+          marionette: true
+          extra_capabilities:
+            chromeOptions:
+              w3c: false
+              args:
+                # Try to prevent random crashes: https://stackoverflow.com/a/53970825/1949744
+                - "--no-sandbox"
+                - "--disable-dev-shm-usage"
       #base_url: http://mydrupalsite.com
       #files_path: './profiles/panopoly/modules/panopoly/panopoly_test/tests'
     Drupal\DrupalExtension:
