@@ -620,6 +620,11 @@ function menu_block_set_title($item = NULL) {
  *   The menu tree.
  */
 function menu_tree_add_active_path(array &$tree) {
+  // Return if there are no menu items.
+  if (!$tree) {
+    return;
+  }
+
   // Grab any menu item to find the menu_name for this tree.
   $menu_item = current($tree);
   $tree_with_trail = menu_tree_page_data($menu_item['link']['menu_name']);
@@ -855,7 +860,7 @@ function menu_block_tree_output(array &$tree, array $config = array()) {
     // the active class accordingly. But local tasks do not appear in menu
     // trees, so if the current path is a local task, and this link is its
     // tab root, then we have to set the class manually.
-    if ($data['link']['href'] == $router_item['tab_root_href'] && $data['link']['href'] != $_GET['q']) {
+    if ($router_item && $data['link']['href'] == $router_item['tab_root_href'] && $data['link']['href'] != $_GET['q']) {
       $data['link']['localized_options']['attributes']['class'][] = 'active';
     }
 
