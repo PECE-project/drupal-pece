@@ -9,9 +9,21 @@
  * Adds Matomo noscript tag to bottom of the page.
  */
 function piwik_noscript_preprocess_html(&$variables) {
+  global $user;
   // Return early if not configured.
   if (!piwik_noscript_configured()) {
     return;
+  }
+  // Respect Matomo module visibility settings.
+  foreach (array('matomo', 'piwik') as $module) {
+    $function = "_{$module}_visibility_pages";
+    if (function_exists($function) && !$function()) {
+      return;
+    }
+    $function = "_{$module}_visibility_user";
+    if (function_exists($function) && !$function($user)) {
+      return;
+    }
   }
   $options = piwik_noscript_options();
   // The head title needs to be un-HTML-encoded.
