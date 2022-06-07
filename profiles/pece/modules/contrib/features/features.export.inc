@@ -894,7 +894,7 @@ function features_get_storage($module_name) {
  * @return string|false
  *   An md5 signature, or FALSE if not found.
  */
-function features_get_signature($state = 'default', $module_name, $component, $reset = FALSE) {
+function features_get_signature($state, $module_name, $component, $reset = FALSE) {
   switch ($state) {
     case 'cache':
       // Load the last known stored signature from the database.
