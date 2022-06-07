@@ -97,7 +97,7 @@ libraries[monolog][download][branch] = main
 ; =====================
 
 ; Overrides Panopoly's Ctools to apply custom patches.
-projects[ctools][version] = 1.19
+projects[ctools][version] = 1.20
 projects[ctools][subdir] = contrib
 ; Ajax + Allow settings: Allowed settings lost on ajax (exposed forms/pager)
 projects[ctools][patch][1910608] =  "https://www.drupal.org/files/issues/2020-12-01/views_content-keyword-substitution-1910608-83.patch"
