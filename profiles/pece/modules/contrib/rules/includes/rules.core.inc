@@ -119,7 +119,7 @@ class RulesEntityController extends EntityAPIControllerExportable {
   /**
    * Overridden to work with Rules' custom export format.
    *
-   * @param $export
+   * @param string $export
    *   A serialized string in JSON format as produced by the
    *   RulesPlugin::export() method, or the PHP export as usual PHP array.
    * @param string $error_msg
@@ -347,10 +347,16 @@ abstract class RulesExtendable extends FacesExtendable {
 
   /**
    * The name of the item this class represents in the info hook.
+   *
+   * @var string
    */
   protected $itemName;
 
   protected $cache;
+
+  /**
+   * @var array
+   */
   protected $itemInfo = array();
 
   public function __construct() {
@@ -455,11 +461,15 @@ abstract class RulesPlugin extends RulesExtendable {
 
   /**
    * An array of settings for this element.
+   *
+   * @var array
    */
   public $settings = array();
 
   /**
    * Info about this element. Usage depends on the plugin.
+   *
+   * @var array
    */
   protected $info = array();
 
@@ -471,6 +481,10 @@ abstract class RulesPlugin extends RulesExtendable {
   protected $parent = NULL;
 
   protected $cache = NULL;
+
+  /**
+   * @var array
+   */
   protected $hook = 'plugin_info';
 
   /**
@@ -563,7 +577,7 @@ abstract class RulesPlugin extends RulesExtendable {
    * configuration. To iterate over the children only, just regularly iterate
    * over the object.
    *
-   * @param $mode
+   * @param int $mode
    *   (optional) The iteration mode used. See
    *   RecursiveIteratorIterator::construct(). Defaults to SELF_FIRST.
    *
@@ -654,7 +668,7 @@ abstract class RulesPlugin extends RulesExtendable {
   }
 
   /**
-   * Returns the about variables the plugin provides for later evaluated elements.
+   * Returns info about variables 'provided' by the plugin.
    *
    * Note that this method returns info about the provided variables as defined
    * by the plugin. Thus this resembles the original info, which may be
@@ -1050,6 +1064,10 @@ abstract class RulesPlugin extends RulesExtendable {
    *   be applied.
    */
   public function applyDataSelector($selector) {
+    // Prevent PHP errors when $selector parameter is not a string.
+    if (!is_string($selector)) {
+      return FALSE;
+    }
     $parts = explode(':', str_replace('-', '_', $selector), 2);
     if (($vars = $this->availableVariables()) && isset($vars[$parts[0]]['type'])) {
       $wrapper = rules_wrap_data(NULL, $vars[$parts[0]], TRUE);
@@ -1384,7 +1402,7 @@ abstract class RulesPlugin extends RulesExtendable {
    * @param string $prefix
    *   An optional prefix for each line.
    * @param bool $php
-   *   Optional. Set to TRUE to format the export using PHP arrays. By default
+   *   (optional) Set to TRUE to format the export using PHP arrays. By default
    *   JSON is used.
    *
    * @return
@@ -1447,7 +1465,7 @@ abstract class RulesPlugin extends RulesExtendable {
    * @param string $prefix
    *   An optional prefix for each line.
    * @param bool $php
-   *   Optional. Set to TRUE to format the export using PHP arrays. By default
+   *   (optional) Set to TRUE to format the export using PHP arrays. By default
    *   JSON is used.
    */
   protected function returnExport($export, $prefix = '', $php = FALSE) {
@@ -1512,7 +1530,7 @@ abstract class RulesAbstractPlugin extends RulesPlugin {
    * @param string $name
    *   The plugin implementation's name.
    * @param $settings
-   *   Further information provided about the plugin. Optional.
+   *   (optional) Further information provided about the plugin.
    * @throws RulesException
    *   If validation of the passed settings fails RulesExceptions are thrown.
    */
@@ -1556,7 +1574,7 @@ abstract class RulesAbstractPlugin extends RulesPlugin {
         }
       }
     }
-    elseif (!empty($this->itemInfo['faces_cache']) && function_exists($this->elementName)) {
+    elseif (!empty($this->itemInfo['faces_cache']) && isset($this->elementName) && function_exists($this->elementName)) {
       // We don't have any info, so just add the name as execution callback.
       $this->override(array('execute' => $this->elementName));
     }
@@ -2127,7 +2145,7 @@ abstract class RulesPluginHandlerBase extends FacesExtender implements RulesPlug
   }
 
   /**
-   * Implements RulesPluginImplInterface.
+   * Implements RulesPluginImplInterface::access().
    */
   public function access() {
     return TRUE;
@@ -2179,10 +2197,12 @@ class RulesAbstractPluginDefaults extends RulesPluginHandlerBase implements Rule
  */
 class RulesRecursiveElementIterator extends ArrayIterator implements RecursiveIterator {
 
+  #[\ReturnTypeWillChange]
   public function getChildren() {
     return $this->current()->getIterator();
   }
 
+  #[\ReturnTypeWillChange]
   public function hasChildren() {
     return $this->current() instanceof IteratorAggregate;
   }
@@ -2221,6 +2241,7 @@ abstract class RulesContainerPlugin extends RulesPlugin implements IteratorAggre
    *
    * @return RulesRecursiveElementIterator
    */
+  #[\ReturnTypeWillChange]
   public function getIterator() {
     return new RulesRecursiveElementIterator($this->children);
   }
@@ -2713,6 +2734,20 @@ class RulesLog {
   }
 
   /**
+   * Gets an array of logged messages.
+   */
+  public function get() {
+    return $this->log;
+  }
+
+  /**
+   * Clears the logged messages.
+   */
+  public function clear() {
+    $this->log = array();
+  }
+
+  /**
    * Checks the log and throws an exception if there were any problems.
    */
   public function checkLog($logLevel = self::WARN) {
@@ -2740,13 +2775,6 @@ class RulesLog {
       }
     }
     return FALSE;
-  }
-
-  /**
-   * Gets an array of logged messages.
-   */
-  public function get() {
-    return $this->log;
   }
 
   /**
@@ -2801,13 +2829,6 @@ class RulesLog {
       $line++;
     }
     return theme('item_list', array('items' => $output));
-  }
-
-  /**
-   * Clears the logged messages.
-   */
-  public function clear() {
-    $this->log = array();
   }
 
 }
