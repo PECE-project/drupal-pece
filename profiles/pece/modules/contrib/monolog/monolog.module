@@ -1,0 +1,294 @@
+<?php
+
+/**
+ * @file
+ * A Framework and UI for integrating with the Monolog library.
+ */
+
+use Drupal\Monolog\Logger;
+use Psr\Log\NullLogger;
+
+require_once __DIR__ . '/monolog.crud.inc';
+
+/**
+ * Implements hook_hook_info().
+ */
+function monolog_hook_info() {
+  return array(
+    'monolog_channel_info' => array(
+      'group' => 'monolog',
+    ),
+    'monolog_handler_info' => array(
+      'group' => 'monolog',
+    ),
+    'monolog_handler_path' => array(
+      'group' => 'monolog',
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function monolog_menu() {
+  $items = array();
+
+  $base_path = 'admin/config/development/monolog';
+  $base_item = array(
+    'access arguments' => array('administer site configuration'),
+    'file' => 'monolog.admin.inc',
+  );
+
+  $items[$base_path] = array(
+    'title' => 'Monolog',
+    'description' => 'Configure Monolog channels and profiles.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('monolog_channel_form'),
+  ) + $base_item;
+
+  $items[$base_path . '/channel'] = array(
+    'title' => 'Channels',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+  );
+
+  $items[$base_path . '/profile'] = array(
+    'title' => 'Logging Profiles',
+    'description' => 'Configure logging channels.',
+    'page callback' => 'monolog_profile_page',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => -5,
+  ) + $base_item;
+
+  $items[$base_path . '/profile/add'] = array(
+    'title' => 'Add profile',
+    'description' => 'Add a logging profile',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('monolog_profile_form'),
+    'type' => MENU_LOCAL_ACTION,
+  ) + $base_item;
+
+  $items[$base_path . '/profile/import'] = array(
+    'title' => 'Import profile',
+    'description' => 'Import a logging profile configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('monolog_profile_import_form'),
+    'type' => MENU_LOCAL_ACTION,
+  ) + $base_item;
+
+  $items[$base_path . '/profile/%monolog_profile'] = array(
+    'title' => 'Edit',
+    'description' => 'Edit a logging profile',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('monolog_profile_form', 5),
+    'weight' => -10,
+  ) + $base_item;
+
+  $items[$base_path . '/profile/%monolog_profile/edit'] = array(
+    'title' => 'Edit',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+  );
+
+  $items[$base_path . '/profile/%monolog_profile/export'] = array(
+    'title' => 'Export',
+    'description' => 'Export a logging profile configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('monolog_profile_export_form', 5),
+    'type' => MENU_LOCAL_TASK,
+  ) + $base_item;
+
+  $items[$base_path . '/profile/%monolog_profile/delete'] = array(
+    'title' => 'Delete',
+    'description' => 'Delete a logging profile',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('monolog_profile_delete_form', 5),
+  ) + $base_item;
+
+  $items[$base_path . '/profile/%monolog_profile/handler/add'] = array(
+    'title' => 'Add handler',
+    'description' => 'Add a logging handler to the profile.',
+    'page callback' => 'monolog_handler_page',
+    'page arguments' => array(5),
+  ) + $base_item;
+
+  $items[$base_path . '/profile/%monolog_profile/handler/add/%monolog_handler_info'] = array(
+    'title' => 'Configure handler',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('monolog_handler_form', 5),
+  ) + $base_item;
+
+  $items[$base_path . '/profile/%monolog_profile/handler/%monolog_handler/edit'] = array(
+    'title' => 'Configure handler',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('monolog_handler_form', 5, 7),
+    'load arguments' => array(5),
+  ) + $base_item;
+
+  $items[$base_path . '/profile/%monolog_profile/handler/%monolog_handler/delete'] = array(
+    'title' => 'Delete',
+    'description' => 'Remove a handler from the profile',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('monolog_handler_delete_form', 5, 7),
+    'load arguments' => array(5),
+  ) + $base_item;
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function monolog_theme() {
+  return array(
+    'monolog_channel_table' => array(
+      'render element' => 'element',
+      'file' => 'monolog.admin.inc',
+    ),
+    'monolog_handler_table' => array(
+      'render element' => 'element',
+      'file' => 'monolog.admin.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function monolog_ctools_plugin_api($owner, $api) {
+  if ('monolog' == $owner && 'monolog' == $api) {
+    return array('version' => 1);
+  }
+}
+
+/**
+ * Factory function for Monolog loggers.
+ *
+ * @param string $channel_name
+ *   The machine name the logging channel.
+ *
+ * @return Logger
+ *
+ * @throws \RuntimeException
+ */
+function monolog($channel_name) {
+  // We do not use drupal_static() since this is a high frequency function.
+  static $loggers = array();
+
+  if (!isset($loggers[$channel_name])) {
+    try {
+
+      if (function_exists('composer_manager_register_autoloader')) {
+        composer_manager_register_autoloader();
+      }
+      if (!class_exists('Drupal\Monolog\Logger')) {
+        $message = t('The Drupal\Monolog\Logger class was not found. Make sure the Monolog package is installed via Composer.');
+        throw new \RuntimeException($message);
+      }
+
+      $channel_profiles = variable_get('monolog_channel_profiles', array());
+      if (!isset($channel_profiles[$channel_name])) {
+        $channel_info = monolog_channel_info_load($channel_name);
+        $channel_profiles[$channel_name] = $channel_info['default profile'];
+      }
+
+      if (!$profile = monolog_profile_load($channel_profiles[$channel_name])) {
+        $message = t('Logging profile not valid: @profile', array('@profile' => $profile));
+        throw new \InvalidArgumentException($message);
+      }
+
+      $logger = new Logger($channel_name);
+      monolog_push_handlers($logger, $profile);
+      $loggers[$channel_name] = $logger;
+    }
+    catch (\InvalidArgumentException $e) {
+      $loggers[$channel_name] = new NullLogger();
+      // The user module might not be loaded if watchdog() is called too early.
+      // @see http://drupal.org/node/1997462
+      if (function_exists('user_access') && user_access('administer site configuration')) {
+        drupal_set_message($e->getMessage(), 'error');
+      }
+    }
+  }
+  return $loggers[$channel_name];
+}
+
+/**
+ * Pushes handlers onto the stack.
+ *
+ * @param Logger $logger
+ *   The logger that handlers are being pushed onto.
+ * @param stdClass $profile
+ *   The logging profile configuration.
+ *
+ * @throws \InvalidArgumentException
+ */
+function monolog_push_handlers(Logger $logger, stdClass $profile) {
+  // Reverse the handlers since they are pushed onto the stack. This allows
+  // handlers at the top of the table to be processed first.
+  $handlers = array_reverse($profile->options['handlers']);
+  foreach ($handlers as $handler_name => $handler_config) {
+
+    $handler_info = monolog_handler_info_load($handler_config['handler']);
+    if (!$handler_info) {
+      $message = t('Monolog handler not valid: @handler', array('@handler' => $handler_config['handler']));
+      throw new \InvalidArgumentException($message);
+    }
+
+    monolog_load_handler_include($handler_info);
+    if (!function_exists($handler_info['loader callback'])) {
+      $message = t('Function not defined: @function', array('@function' => $handler_info['loader callback']));
+      throw new \InvalidArgumentException($message);
+    }
+
+    $handler_config['bubble'] = (bool) $handler_config['bubble'];
+    $handler = $handler_info['loader callback']($handler_config);
+    $logger->pushHandler($handler);
+  }
+}
+
+/**
+ * Helper function that prepares a directory for logging.
+ *
+ * @param string $directory
+ *   The URI to the directory containing the log files.
+ *
+ * @throws \InvalidArgumentException
+ */
+function monolog_prepare_log_dir($directory) {
+  if (!file_prepare_directory($directory, FILE_CREATE_DIRECTORY)) {
+    throw new \InvalidArgumentException(t('Error creating directory: @dir', array('@dir' => $directory)));
+  }
+  if (0 === strpos($directory, 'public://')) {
+    file_create_htaccess($directory, TRUE);
+  }
+}
+
+/**
+ * Loads a "handler include" given the handler definition.
+ *
+ * @param array $handler_info
+ *   The handler's definition whose include file is being loaded.
+ */
+function monolog_load_handler_include(array $handler_info) {
+  static $loaded = array();
+  if ($handler_info['handler file'] && empty($loaded[$handler_info['handler file']])) {
+    $loaded[$handler_info['handler file']] = TRUE;
+    if ($handler_info['handler file'] && file_exists($handler_info['handler file'])) {
+      require $handler_info['handler file'];
+    }
+  }
+}
+
+/**
+ * Returns a unique identifier for the page request or PHP process.
+ *
+ * @return string
+ */
+function monolog_request_id() {
+  static $request_id = FALSE;
+  if (!$request_id) {
+    $request_id = uniqid();
+  }
+  return $request_id;
+}

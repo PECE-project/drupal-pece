@@ -1,0 +1,179 @@
+<?php
+
+/**
+ * @file
+ * Integrates Drupal's internal logging system with Monolog by routing watchdog
+ * messages to Monolog channels.
+ */
+
+use Monolog\Logger;
+
+/**
+ * Implements hook_menu().
+ */
+function monolog_logging_menu() {
+  $items = array();
+
+  $items['admin/config/development/monolog/watchdog'] = array(
+    'title' => 'Watchdog Settings',
+    'description' => 'Configure watchdog type mappings and context settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('monolog_logging_watchdog_settings_form'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'monolog_logging.admin.inc',
+    'weight' => 10,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function monolog_logging_theme() {
+  return array(
+    'monolog_logging_map_table' => array(
+      'render element' => 'element',
+      'file' => 'monolog_logging.admin.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_monolog_channel_info().
+ */
+function monolog_logging_monolog_channel_info() {
+  $channels = array();
+
+  $channels['watchdog'] = array(
+    'label' => t('Watchdog'),
+    'description' => t('The default channel that watchdog messages are routed through.'),
+    'default profile' => 'production',
+  );
+
+  return $channels;
+}
+
+/**
+ * Implements hook_watchdog().
+ */
+function monolog_logging_watchdog(array $log_entry) {
+  try {
+
+    // Perform a partial bootstrap if watchdog is called prior to the
+    // DRUPAL_BOOTSTRAP_FULL phase.
+    if (!function_exists('monolog')) {
+      monolog_logging_bootstrap();
+    }
+
+    // Check whether to use the watchdog type as the channel name.
+    // @see http://drupal.org/node/1990282
+    if (variable_get('monolog_type_as_channel', 1)) {
+      $logger = clone monolog('watchdog');
+      // If there was an error, the PSR-3 null logger is used which does not
+      // have a setName() method. There is no need to set a name since the
+      // message will be be sent to a black hole.
+      if ('Psr\Log\NullLogger' != get_class($logger)) {
+        $logger->setName($log_entry['type']);
+      }
+    }
+    else {
+      $logger = monolog('watchdog');
+    }
+
+    $enabled_contexts = monolog_logging_get_contexts();
+    $context = array_intersect_key($log_entry, $enabled_contexts);
+    if (isset($enabled_contexts['request_id'])) {
+      $context['request_id'] = monolog_request_id();
+    }
+
+    $message = strip_tags(!isset($log_entry['variables']) ? $log_entry['message'] : strtr($log_entry['message'], $log_entry['variables']));
+    $level = monolog_logging_map_severity_level($log_entry['severity']);
+    $logger->log($level, $message, $context);
+  }
+  catch (Exception $e) {
+    // Fail silently since we cannot log any messages or do anything that would
+    // trigger another watchdog call.
+  }
+}
+
+/**
+ * Ensure that required subsystems and modules are loaded if watchdog messages
+ * are logged prior to a full Drupal bootstrap.
+ *
+ * @see _drupal_bootstrap_full()
+ * @see http://drupal.org/node/1997462
+ */
+function monolog_logging_bootstrap() {
+  static $bootstrapped = FALSE;
+  if (!$bootstrapped) {
+    $bootstrapped = TRUE;
+
+    // CTools requires the drupal_get_path() and list_themes() functions.
+    require_once DRUPAL_ROOT . '/includes/common.inc';
+    require_once DRUPAL_ROOT . '/includes/theme.inc';
+    require_once DRUPAL_ROOT . '/includes/unicode.inc';
+
+    // Monolog requires the file_prepare_directory() function.
+    require_once DRUPAL_ROOT . '/includes/file.inc';
+
+    // Load the required modules.
+    drupal_load('module', 'system');
+    drupal_load('module', 'ctools');
+    if (module_exists('composer_manager')) {
+      drupal_load('module', 'composer_manager');
+    }
+    drupal_load('module', 'monolog');
+
+    // Detect string handling method.
+    unicode_check();
+
+    // Undo magic quotes.
+    fix_gpc_magic();
+
+    // file_get_stream_wrappers() is called during the normal application flow.
+  }
+}
+
+/**
+ * Maps a Watchdog severity level to Monolog severity levels.
+ *
+ * @param string $level
+ *   The Watchdog severity level.
+ *
+ * @return int
+ *   The Monolog severity level.
+ */
+function monolog_logging_map_severity_level($level) {
+  $levels = array(
+    WATCHDOG_DEBUG => Logger::DEBUG,
+    WATCHDOG_INFO => Logger::INFO,
+    WATCHDOG_NOTICE => Logger::NOTICE,
+    WATCHDOG_WARNING => Logger::WARNING,
+    WATCHDOG_ERROR => Logger::ERROR,
+    WATCHDOG_CRITICAL => Logger::CRITICAL,
+    WATCHDOG_ALERT => Logger::ALERT,
+    WATCHDOG_EMERGENCY => Logger::EMERGENCY,
+  );
+  return isset($levels[$level]) ? $levels[$level] : Logger::NOTICE;
+}
+
+/**
+ * Returns the selected event contexts.
+ *
+ * @return array
+ */
+function monolog_logging_get_contexts() {
+  static $contexts = array();
+  if (!$contexts) {
+    $contexts = array_filter(variable_get('monolog_logging_contexts', array(
+      'uid' => 'uid',
+      'request_uri' => 'request_uri',
+      'referer' => 'referer',
+      'ip' => 'ip',
+      'link' => 'link',
+    )));
+  }
+  return $contexts;
+}

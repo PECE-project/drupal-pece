@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the Monolog Logging module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function monolog_logging_uninstall() {
+  variable_del('monolog_logging_contexts');
+  variable_del('monolog_type_as_channel');
+}

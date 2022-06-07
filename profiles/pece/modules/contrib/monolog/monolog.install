@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the Monolog module.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function monolog_requirements($phase) {
+  $requirements = array();
+  if (!module_exists('composer_manager') && !class_exists('Drupal\Monolog\Logger')) {
+    $requirements['monolog_logger_class'] = array(
+      'title' => t('The Drupal\Monolog\Logger class was not found'),
+      'value' => t(
+        'Make sure the Monolog package is installed via Composer. This can be done using the <a href="!url">composer_manager</a> module.',
+        array('!url' => 'https://drupal.org/project/composer_manager')
+      ),
+      'severity' => REQUIREMENT_ERROR,
+    );
+  }
+  return $requirements;
+}
+
+/**
+ * Implements hook_schema().
+ */
+function monolog_schema() {
+  $schema = array();
+
+  $schema['monolog_profile'] = array(
+    'description' => 'Logging profiles for logging channels.',
+    'export' => array(
+      'key' => 'name',
+      'identifier' => 'profile',
+      'default hook' => 'default_monolog_profiles',
+      'api' => array(
+        'owner' => 'monolog',
+        'api' => 'monolog',
+        'minimum_version' => 1,
+        'current_version' => 1,
+      ),
+    ),
+    'fields' => array(
+      'name' => array(
+        'description' => 'The machine readable name of the profile.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'options' => array(
+        'description' => 'Serialized storage of profile options.',
+        'type' => 'blob',
+        'serialize' => TRUE,
+      ),
+    ),
+    'primary key' => array('name'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function monolog_uninstall() {
+  variable_del('monolog_channel_profiles');
+}
+
+/**
+ * Change the machine name of the "stream_handler" handler to "stream".
+ */
+function monolog_update_7100() {
+  $result = db_query('SELECT name, options FROM {monolog_profile}');
+  foreach ($result as $record) {
+    $options = unserialize($record->options);
+    foreach ($options['handlers'] as $handler_name => $handler_config) {
+      if ('stream_handler' == $handler_config['handler']) {
+        $options['handlers'][$handler_name]['handler'] = 'stream';
+      }
+    }
+    db_update('monolog_profile')
+      ->fields(array('options' => serialize($options)))
+      ->condition('name', $record->name)
+      ->execute();
+  }
+}

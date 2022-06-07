@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Logs records to a Graylog2 server.
+ */
+
+/**
+ * Implements hook_monolog_handler_info().
+ *
+ * The handler include is placed in the core module's handler directory so that
+ * we don't have multiple handler directories.
+ */
+function monolog_gelf_monolog_handler_info() {
+  $handlers = array();
+
+  $handlers['gelf'] = array(
+    'label' => t('GELF Handler'),
+    'description' => t('Logs records to a Graylog2 server.'),
+    'handler file' => drupal_get_path('module', 'monolog') . '/handlers/gelf.inc',
+    'group' => t('Servers and networked logging'),
+    'default settings' => array(
+      'hostname' => '',
+      'port' => 12201,
+      'chunk_size' => 1420,
+    ),
+  );
+
+  return $handlers;
+}
