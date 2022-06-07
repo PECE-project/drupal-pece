@@ -297,12 +297,12 @@ function l10n_update_requirements($phase) {
  *   if the import behaviour setting (admin/config/regional/language/update)
  *   allows that.
  *
+ * @param array $report
+ *   Array containing import results.
  * @param int $start
  *   The number of start.
  * @param int $length
  *   The length number.
- * @param array $report
- *   Array containing import results.
  *
  * @return bool
  *   Returns true conversion
@@ -310,7 +310,7 @@ function l10n_update_requirements($phase) {
  *   - message: Translated message
  *   - status: Message status. See drush_log() for supported values.
  */
-function l10n_update_d8_plural_conversion($start = 0, $length = 0, array &$report) {
+function l10n_update_d8_plural_conversion(array &$report, $start = 0, $length = 0) {
   module_load_include('inc', 'l10n_update', 'l10n_update.translation');
   require_once DRUPAL_ROOT . '/includes/locale.inc';
   $processed = array();
@@ -371,13 +371,12 @@ function l10n_update_d8_plural_conversion($start = 0, $length = 0, array &$repor
  * @param int $length
  *   Maximum number of records to load.
  *
- * @return array|bool
+ * @return array
  *   An array of data from source and translation strings of which the source
- *   string contains a Drupal 8 style plural delimiter. Returns false if not
- *   found.
+ *   string contains a Drupal 8 style plural delimiter.
  */
 function l10n_update_get_d8_plural_strings($start = 0, $length = 0) {
-  $translation_strings = FALSE;
+  $translation_strings = array();
 
   $query = db_select('locales_source', 'ls');
   $query->fields('ls', array(
@@ -596,7 +595,7 @@ function l10n_update_update_7207(&$sandbox) {
     return NULL;
   }
 
-  $finished = l10n_update_d8_plural_conversion($sandbox['progress'], $batch_size, $sandbox['report']);
+  $finished = l10n_update_d8_plural_conversion($sandbox['report'], $sandbox['progress'], $batch_size);
   $sandbox['progress'] += $batch_size;
 
   // Whether the batch is finished is determined by the result of
