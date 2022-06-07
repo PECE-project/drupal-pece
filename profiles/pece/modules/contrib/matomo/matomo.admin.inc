@@ -40,11 +40,6 @@ function matomo_admin_settings_form($form_state) {
     '#maxlength' => 255,
     '#description' => t('The URL to your Matomo base directory with SSL certificate installed. Required if you track a SSL enabled website. Example: "https://www.example.com/matomo/".'),
   );
-  // Required for automated form save testing only.
-  $form['account']['matomo_url_skiperror'] = array(
-    '#type' => 'hidden',
-    '#default_value' => FALSE,
-  );
 
   // Visibility settings.
   $form['tracking_title'] = array(
@@ -271,6 +266,12 @@ function matomo_admin_settings_form($form_state) {
     '#description' => t('If enabled and your Matomo server receives the <a href="@donottrack">Do-Not-Track</a> header from the client browser, the Matomo server will not track the user. Compliance with Do Not Track could be purely voluntary, enforced by industry self-regulation, or mandated by state or federal law. Please accept your visitors privacy. If they have opt-out from tracking and advertising, you should accept their personal decision.', array('@donottrack' => 'https://www.eff.org/issues/do-not-track')),
     '#default_value' => variable_get('matomo_privacy_donottrack', 1),
   );
+  $form['tracking']['privacy']['matomo_privacy_disable_cookies'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Disable Cookies'),
+    '#description' => t('Disables all first-party cookies. Existing Matomo cookies for this website will be deleted the next time you visit the site.'),
+    '#default_value' => variable_get('matomo_privacy_disable_cookies', 0),
+  );
 
   // Matomo page title tree view settings.
   $form['page_title_hierarchy'] = array(
@@ -457,10 +458,10 @@ function matomo_admin_settings_form_validate($form, &$form_state) {
     $matomo_url = $matomo_url . '/';
     $form_state['values']['matomo_url_http'] = $matomo_url;
   }
-  $url = $matomo_url . 'piwik.php';
+  $url = $matomo_url . 'matomo.php';
   $result = drupal_http_request($url);
-  if ($result->code != 200 && $form_state['values']['matomo_url_skiperror'] == FALSE) {
-    form_set_error('matomo_url_http', t('The validation of "@url" failed with error "@error" (HTTP code @code).', array('@url' => check_url($url), '@error' => $result->error, '@code' => $result->code)));
+  if ($result->code != 200) {
+    drupal_set_message(t('The validation of "@url" failed with error "@error" (HTTP code @code).', array('@url' => check_url($url), '@error' => $result->error, '@code' => $result->code)), 'warning');
   }
 
   if (!empty($form_state['values']['matomo_url_https'])) {
@@ -469,10 +470,10 @@ function matomo_admin_settings_form_validate($form, &$form_state) {
       $matomo_url = $matomo_url . '/';
       $form_state['values']['matomo_url_https'] = $matomo_url;
     }
-    $url = $matomo_url . 'piwik.php';
+    $url = $matomo_url . 'matomo.php';
     $result = drupal_http_request($url);
-    if ($result->code != 200 && $form_state['values']['matomo_url_skiperror'] == FALSE) {
-      form_set_error('matomo_url_https', t('The validation of "@url" failed with error "@error" (HTTP code @code).', array('@url' => check_url($url), '@error' => $result->error, '@code' => $result->code)));
+    if ($result->code != 200) {
+      drupal_set_message(t('The validation of "@url" failed with error "@error" (HTTP code @code).', array('@url' => check_url($url), '@error' => $result->error, '@code' => $result->code)), 'warning');
     }
   }
 

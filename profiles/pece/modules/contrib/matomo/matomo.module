@@ -244,7 +244,7 @@ function matomo_page_alter(&$page) {
     $script .= '(function(){';
     $script .= 'var u=(("https:" == document.location.protocol) ? "' . check_url($url_https) . '" : "' . check_url($url_http) . '");';
     $script .= '_paq.push(["setSiteId", ' . drupal_json_encode(variable_get('matomo_site_id', '')) . ']);';
-    $script .= '_paq.push(["setTrackerUrl", u+"piwik.php"]);';
+    $script .= '_paq.push(["setTrackerUrl", u+"matomo.php"]);';
 
     // Track logged in users across all devices.
     if (variable_get('matomo_trackuserid', 0) && user_is_logged_in()) {
@@ -271,6 +271,11 @@ function matomo_page_alter(&$page) {
     // Disable tracking for visitors who have opted out from tracking via DNT (Do-Not-Track) header.
     if (variable_get('matomo_privacy_donottrack', 1)) {
       $script .= '_paq.push(["setDoNotTrack", 1]);';
+    }
+
+    // Disable Cookies.
+    if (variable_get('matomo_privacy_disable_cookies', 0)) {
+      $script .= '_paq.push(["disableCookies"]);';
     }
 
     // Domain tracking type.
@@ -341,7 +346,7 @@ function matomo_page_alter(&$page) {
     $script .= 'g.async=true;';
 
     // Should a local cached copy of the tracking code be used?
-    if (variable_get('matomo_cache', 0) && $url = _matomo_cache($url_http . 'piwik.js')) {
+    if (variable_get('matomo_cache', 0) && $url = _matomo_cache($url_http . 'matomo.js')) {
       // A dummy query-string is added to filenames, to gain control over
       // browser-caching. The string changes on every update or full cache
       // flush, forcing browsers to load a new copy of the files, as the
@@ -351,7 +356,7 @@ function matomo_page_alter(&$page) {
       $script .= 'g.src="' . $url . $query_string . '";';
     }
     else {
-      $script .= 'g.src=u+"piwik.js";';
+      $script .= 'g.src=u+"matomo.js";';
     }
 
     $script .= 's.parentNode.insertBefore(g,s);';
@@ -454,9 +459,9 @@ function matomo_user_presave(&$edit, $account, $category) {
  * Implements hook_cron().
  */
 function matomo_cron() {
-  // Regenerate the piwik.js every day.
+  // Regenerate the matomo.js every day.
   if (REQUEST_TIME - variable_get('matomo_last_cache', 0) >= 86400 && variable_get('matomo_cache', 0)) {
-    _matomo_cache(variable_get('matomo_url_http', '') . 'piwik.js', TRUE);
+    _matomo_cache(variable_get('matomo_url_http', '') . 'matomo.js', TRUE);
     variable_set('matomo_last_cache', REQUEST_TIME);
   }
 }
@@ -471,7 +476,8 @@ function matomo_preprocess_search_results(&$variables) {
   // found. But the pager item mumber can tell the number of search results.
   global $pager_total_items;
 
-  drupal_add_js('window.matomo_search_results = ' . intval($pager_total_items[0]) . ';', array('type' => 'inline', 'group' => JS_LIBRARY-1));
+  $result_count = isset($pager_total_items) ? intval($pager_total_items[0]) : 0;
+  drupal_add_js('window.matomo_search_results = ' . $result_count . ';', array('type' => 'inline', 'group' => JS_LIBRARY-1));
 }
 
 /**
