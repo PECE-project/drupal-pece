@@ -6,7 +6,8 @@
   // Allow dropdown links to be clickable by showing dropdowns on hover/focus.
   Drupal.behaviors.radix_dropdown = {
     attach: function(context, setting) {
-      var dropdown_disabled = false;
+      var dropdown_disabled = false,
+          deferred_timeout = null;
 
       // Prevent the dropdown from re-opening if a menu link was focused before
       // the window was re-focused.
@@ -27,6 +28,15 @@
           }
         }
 
+        // Defer calling show() so that this happens after the click handler
+        // below (for Android support).
+        function deferredShow() {
+          clearTimeout(deferred_timeout);
+          deferred_timeout = setTimeout(function () {
+            show();
+          }, 0);
+        }
+
         // Helper function to hide the dropdown.
         function hide() {
           if ($(dropdown).hasClass('open')) {
@@ -36,13 +46,22 @@
 
         // Show dropdown on hover and focus.
         $(this).on('mouseenter.radix.dropdown', function(e) {
-          show();
+          deferredShow();
         });
         $(this).on('mouseleave.radix.dropdown', function() {
           hide();
         });
         $(this).on('focusin.radix.dropdown', function() {
-          show();
+          deferredShow();
+        });
+
+        // Fix for Android: only allow clicking the link after the dropdown menu has
+        // opened - the first click will just open the dropdown.
+        $('>a', this).on('click.radix.dropdown', function(e) {
+          if (!$(this).parent().hasClass('open')) {
+            show();
+            return false;
+          }
         });
 
         $(this).on('keydown.radix.dropdown', function(e) {
@@ -88,14 +107,32 @@
           $(dropdown).addClass('open');
         }
 
+        // Defer calling show() so that this happens after the click handler
+        // below (for Android support).
+        function deferredShow() {
+          clearTimeout(deferred_timeout);
+          deferred_timeout = setTimeout(function () {
+            show();
+          }, 0);
+        }
+
         function hide() {
           $(dropdown).removeClass('open');
         }
 
         $(dropdown)
-          .on('mouseenter.radix.dropdown', show)
+          .on('mouseenter.radix.dropdown', deferredShow)
           .on('mouseleave.radix.dropdown', hide)
-          .on('focusin.radix.dropdown', show);
+          .on('focusin.radix.dropdown', deferredShow);
+
+        // Fix for Android: only allow clicking the link after the dropdown menu has
+        // opened - the first click will just open the dropdown.
+        $('>a', this).on('click.radix.dropdown', function(e) {
+          if (!$(this).parent().hasClass('open')) {
+            show();
+            return false;
+          }
+        });
       });
 
       // Hide dropdowns when focus is lost.

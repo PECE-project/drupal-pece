@@ -100,6 +100,7 @@ function radix_menu_link($variables) {
   // Fix for active class.
   if (($element['#href'] == current_path() || ($element['#href'] == '<front>' && drupal_is_front_page())) && (empty($element['#localized_options']['language']) || $element['#localized_options']['language']->language == $language_url->language)) {
     $element['#attributes']['class'][] = 'active';
+    $element['#localized_options']['attributes']['aria-current'] = 'page';
   }
 
   // Add active class to li if active trail.
@@ -149,6 +150,7 @@ function radix_menu_link__dropdown($variables) {
   // Fix for active class.
   if (($element['#href'] == current_path() || ($element['#href'] == '<front>' && drupal_is_front_page())) && (empty($element['#localized_options']['language']) || $element['#localized_options']['language']->language == $language_url->language)) {
     $element['#attributes']['class'][] = 'active';
+    $element['#localized_options']['attributes']['aria-current'] = 'page';
   }
 
   // Add active class to li if active trail.
@@ -162,6 +164,28 @@ function radix_menu_link__dropdown($variables) {
 
   $output = l($element['#title'], $element['#href'], $element['#localized_options']);
   return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
+}
+
+/**
+ * Implements theme_menu_local_task().
+ */
+function radix_menu_local_task($variables) {
+  $link = $variables['element']['#link'];
+  $link_text = $link['title'];
+
+  if (!empty($variables['element']['#active'])) {
+    // Add aria-current attribute.
+    $link['localized_options']['attributes']['aria-current'] = 'page';
+
+    // If the link does not contain HTML already, check_plain() it now.
+    // After we set 'html'=TRUE the link will not be sanitized by l().
+    if (empty($link['localized_options']['html'])) {
+      $link_text = check_plain($link_text);
+    }
+    $link['localized_options']['html'] = TRUE;
+  }
+
+  return '<li' . (!empty($variables['element']['#active']) ? ' class="active"' : '') . '>' . l($link_text, $link['href'], $link['localized_options']) . "</li>\n";
 }
 
 /**
