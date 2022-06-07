@@ -381,6 +381,12 @@ projects[entityconnect][subdir] = contrib
 projects[inline_entity_form][version] = 1.9
 projects[inline_entity_form][subdir]  = contrib
 
+projects[media][version] = 2.28
+
+projects[menu_block][version] = 2.9
+
+projects[panels_breadcrumbs][version] = 2.6
+
 ; =====================
 ; Form & Form Elements
 ; =====================
