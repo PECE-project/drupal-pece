@@ -84,7 +84,7 @@ projects[field_group][subdir] = contrib
 projects[field_group][patch][3085340] = https://www.drupal.org/files/issues/2019-10-03/3085340-2.patch
 projects[field_group][patch][3083542] = https://www.drupal.org/files/issues/2020-06-09/field_group-php-7.2-compatible-3083542-5.patch
 
-projects[link][version] = 1.9
+projects[link][version] = 1.11
 projects[link][subdir] = contrib
 
 ; Harness the Power of Features and Apps with Default Content
