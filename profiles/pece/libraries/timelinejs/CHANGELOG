@@ -1,0 +1,153 @@
+3.6.1 (2018-10-10)
+* Correct translation of "July" in Slovenian.
+
+3.6.0 (2018-06-11)
+* Configure Google Analytics tracking to anonymize_ip for GDPR compliance
+
+3.5.4 (2017-12-15)
+* PR #331 fixes bug that was causing duplications of groups
+* Fix to allow missing media in JSON #565
+
+3.5.3 (2017-11-07)
+* Remove 1px offset that causes white line along top of Timeline
+
+3.5.2 (2017-10-26)
+* PR #554 adds direction to .tl-rtl
+
+3.5.1 (2017-05-03)
+* PR #522 use https in wistia
+
+3.5.0 (2017-05-03)
+* PR #510 Twitter image support
+* PR #520, #515 Imgur image support
+* PR #514 Wistia video support (URL only)
+* PR #508 Fixes to local previews for development
+
+3.4.9 (2017-04-10)
+------------------
+* PR #468 support audio and video files (.mp4, .mp3, .wav, .m4a)
+* PR #460 improve spotify documentation and support album and artist pages
+* PR #454 use the `lang` attribute set in the embed url as the lang for the iframe
+* PR #453 add support for title and alt tags on images
+
+3.4.8 (2017-03-31)
+------------------
+* Fix missing accent in French translation
+* Add additional Thai translation
+
+3.4.7 (2016-01-12)
+* PR #447 Enable Vimeo fullscreen controls
+
+3.4.6 (2016-12-12)
+* Revert PR #387 which was causing slide cutoff on small screens
+
+3.4.5 (2016-12-07)
+* PR #428 - Reinstate table display for IE. #427
+
+3.4.3 (2016-11-15)
+------------------------
+* Revert PR #374, reopen #277. Fix left black bar across full screen timelines.
+
+3.4.2 (2016-11-15)
+------------------------
+* PR #374 - Adds margin-top for large screen disply. Fixes #277
+* PR #401 - Adds Vietnamese translation
+* PR #419 - Removes year zero from the timeline. Fixes #328
+* PR #387 - Fixes background image scrolling on long slide. #360
+* PR #389 - Adds YouTube end-time feature. #388
+
+3.4.1 (2016-10-04)
+------------------------
+* PR #400 - pause Vine, DailyMotion, and Soundcloud media on slide exit (thanks @Hammman and @JustaBitDope)
+* PR #413 - French language support additions
+
+3.4.0 (2016-08-30)
+-------------------------
+* Complete (?) RTL language support, removed Urdu Unicode translation bugs
+
+3.3.17 (2016-08-22)
+-------------------------
+* #372 Italian translation for "Swipe to Navigate"
+* #376 Throw an error if URL is neither a Google Spreadsheet nor a source of parseable JSON
+* Chinese (traditional) (zh-cn) translation for "Swipe to Navigate"
+* Norwegian translation for "Swipe to Navigate"
+* added Burmese translation
+
+3.3.16 (2016-05-31)
+-------------------------
+* #365 Scope vcard styles to avoid impacting pages which embed timelines without iframe
+* #366 Fix headline problem with <p> tag
+
+3.3.15 (2016-05-11)
+-------------------------
+* Apply MediaType handling to thumbnails for the slider, so that people can use the same kinds of urls they use for regular media.
+* Establish correct indication of "BCE" in Swedish.
+* Establish correct indication of "BYA" abbreviations in Finnish and Hungarian.
+
+3.3.14 (2016-03-22)
+-------------------------
+* Fix bug in handling imgur URLs which were to an imgur page and not directly to an image.
+
+3.3.13 (2016-02-25)
+-------------------
+* Fix API calls for Soundcloud, DailyMotion, Instagram, Spotify and Vine which used http and thus would fail in cross-protocol situations.
+* #342 test for 'start at end' to support boolean true as well as 'true'
+* #340 docfix: syntax highlighting for code snippets on GitHub Markdown
+* #323 more careful for loop in case people extend the Array prototype; fix build problem for Linux user-select
+
+3.3.12 (2016-02-01)
+-------------------
+* translate "swipe_to_navigate" for German (de)
+* add Urdu (ur) translation
+
+3.3.11 (2015-12-03)
+-------------------
+* back out header validation, interfered with too many random changes in the wild
+
+3.3.10 (2015-12-02)
+-------------------
+* improved validation/messaging during authoring: changes to headers, eras without end dates (#287)
+* Improved support for PDF files from Dropbox
+
+3.3.9 (2015-10-26)
+----------------------
+* Make sure 'invalid_date_err' gets translated, esp so detail message gets displayed
+
+3.3.8 (2015-10-20)
+----------------------
+* Fix Document Cloud URL bug
+
+3.3.7 (2015-10-19)
+----------------------
+* Fix bug in Twitter embed (#282) (thanks @Newman101)
+* Support media-type image inference for background images (eg flickr, imgur, dropbox) (#268)
+
+3.3.6 (2015-10-12)
+------------------
+* Have TimelineConfig validate date parts as integers (#269)
+* Support Twitter embed markup in media (in addition to a direct URL to a tweet)
+* support flic.kr URLs for Flickr images in addition fo flickr.com
+* add Imgur to supported media types
+* don't duplicate tl-storyslider class (#223)
+* Improved support for error message I18N
+
+3.3.5 (2015-10-01)
+------------------
+* remove default target for links added by code.
+
+3.3.4 (2015-09-30)
+------------------
+* implement PDF media type (#205)
+
+3.3.3 (2015-09-30)
+------------------
+* Fix small offset in marker group alignment (#259)
+* Fix text-shadow appearing on slides with backgrounds (#260)
+* Added Bevan-PontanoSans font combo
+* Support for IE9 officially ruled out
+* Fixes to blockquote style
+* default TL.debug to false.
+
+3.3.2 (2015-09-23)
+------------------
+This version of Timeline officially replaces the previous one.

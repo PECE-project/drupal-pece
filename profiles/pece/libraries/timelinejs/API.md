@@ -38,7 +38,7 @@ timeline.on(event_name, function(data) {
 
 `dataloaded` _after data has been loaded_
 
-`hash_updated` _when the hashbookmark in the url bar is updated_
+`hash_updated` _when the hashbookmack in the url bar is updated_
 
 * unique_id:  string, id of the new current slide
 * hashbookmark: string, the hash
@@ -146,3 +146,4 @@ timeline.on(event_name, function(data) {
     "unique_id":         <string>    // optional
 };
 ```
+

@@ -41,7 +41,9 @@ settings = sys.modules[settings_module]
 
 app = Flask(__name__)
 
-dist_dir = os.path.join(settings.PROJECT_ROOT, 'dist')
+compiled_dir = os.path.join(settings.PROJECT_ROOT, 'compiled')
+build_dir = os.path.join(settings.PROJECT_ROOT, 'build')
+source_dir = os.path.join(settings.PROJECT_ROOT, 'source')
 
 @app.context_processor
 def inject_static_url():
@@ -61,12 +63,26 @@ def inject_index_data():
         return dict(examples=json.load(open(examples_json)),faqs=json.load(open(faq_json)))
 
 
-@app.route('/dist/<path:path>')
+@app.route('/compiled/<path:path>')
+def catch_compiled(path):
+    """
+    Serve /compiled/... urls from the compiled directory
+    """
+    return send_from_directory(compiled_dir, path)
+
+@app.route('/build/<path:path>')
 def catch_build(path):
     """
-    Serve /dist/... urls from the build directory
+    Serve /build/... urls from the build directory
     """
-    return send_from_directory(dist_dir, path)
+    return send_from_directory(build_dir, path)
+
+@app.route('/source/<path:path>')
+def catch_source(path):
+    """
+    Serve /source/... urls from the source directory
+    """
+    return send_from_directory(source_dir, path)
 
 @app.route('/')
 @app.route('/<path:path>')
