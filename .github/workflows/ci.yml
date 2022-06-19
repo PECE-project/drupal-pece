@@ -1,0 +1,152 @@
+on: [push, pull_request]
+name: Tests and code
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    container:
+      image: juampynr/drupal8ci:latest
+
+    services:
+      mariadb:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Update composer
+        run: composer self-update --2
+
+      - name: Build project
+        run: robo job:build
+
+      - name: Run PHPUnit tests
+        run: vendor/bin/robo job:unit-tests
+
+  code-standards:
+    runs-on: ubuntu-latest
+    container:
+      image: juampynr/drupal8ci:latest
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Update composer
+        run: composer self-update --2
+
+      - name: Build project
+        run: robo job:build
+
+      - name: Check coding standards
+        run: vendor/bin/robo job:coding-standards
+
+  code-coverage:
+    runs-on: ubuntu-latest
+    container:
+      image: juampynr/drupal8ci:latest
+
+    services:
+      mariadb:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Update composer
+        run: composer self-update --2
+
+      - name: Build project
+        run: robo job:build
+
+      - name: Assess code coverage
+        run: |
+          vendor/bin/robo job:coverage-report
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: coverage
+
+  behat:
+    runs-on: ubuntu-latest
+    container:
+      image: juampynr/drupal8ci:latest
+    services:
+      mariadb:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    env:
+      FOO: bar
+      # DB_DUMP_URL: "URL of DB dump"
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Update composer
+        run: composer self-update --2
+
+      - name: Build project
+        run: robo job:build
+
+      - name: Run Behat tests
+        run: |
+          vendor/bin/robo job:serve-drupal &
+          vendor/bin/robo job:behat-tests
+
+  cypress:
+    runs-on: ubuntu-latest
+    container:
+      image: juampynr/drupal8ci:latest
+    services:
+      mariadb:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    env:
+      FOO: bar
+      # DB_DUMP_URL: "URL of DB dump"
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Update composer
+        run: composer self-update --2
+
+      - name: Build project
+        run: robo job:build
+
+      # juampynr/drupal9ci:latest lands with PHP8 and node, so if your project is PHP8 you can remove this step.
+      - name: Setup node
+        run: |
+          curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+          apt install -y nodejs xvfb libgtk-3-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
+
+      - name: Run Cypress tests
+        run: |
+          vendor/bin/robo job:serve-drupal &
+          vendor/bin/robo job:cypress-tests
