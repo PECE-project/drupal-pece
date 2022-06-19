@@ -20,6 +20,12 @@ mysql:
   username: root
   encoding: utf8
 
+install:
+  # install drush
+  - pear channel-discover pear.drush.org
+  - pear install drush/drush-5.8.0
+  - phpenv rehash
+
 env:
   - TRAVIS_NODE_VERSION="4"
 
@@ -68,7 +74,7 @@ before_script:
   # reference and enable travis_ci_drupal_module_example in build site
   - ln -s $(readlink -e $(cd -)) pece/drupal/sites/all/modules
   - cd build
-  - drush --yes pm-enable pece_core
+  - drush --yes pm-enable pece_core pece_demo
 
   # start a web server on port 8080, run in the background
   - drush runserver 127.0.0.1:8080 &
