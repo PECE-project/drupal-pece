@@ -20,6 +20,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+          with:
+            node_version: 12
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -35,6 +38,11 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
+
+      - name: Setup Environment
+        run: |
+          npm install -g gulp
+          gulp build
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
