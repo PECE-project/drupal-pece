@@ -3,14 +3,13 @@
     "description": "Platform of Experimental Collaborative Ethnography",
     "type": "project",
     "license": "GPL-3.0-or-later",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
-        "php": ">=7.4",
+        "php": ">=7.2",
         "composer/installers": "^1.9",
         "cweagans/composer-patches": "^1.6",
         "ec-europa/toolkit": "3.*",
         "consolidation/robo": "^2",
+        "drupal/drupal": "7.90",
         "drupal/admin_menu": "3.0-rc6",
         "drupal/adminimal_admin_menu": "1.9",
         "drupal/admin_views": "1.7",
@@ -64,10 +63,8 @@
         "drupal/caption_filter": "1.3",
         "drupal/image_resize_filter": "1.16",
         "drupal/wysiwyg_filter": "1.6-rc9",
-        "drupal/kw_itemnames": "",
-        "drupal/kw_itemnames_entity": "",
-        "drupal/kw_itemnames_user_role": "",
-        "drupal/kw_manifests": "",
+        "drupal/kw_itemnames" : "1.0",
+        "drupal/kw_manifests" : "1.0",
         "drupal/gmap": "2.11",
         "drupal/location": "3.7",
         "drupal/smtp": "1.7",
@@ -109,7 +106,6 @@
         "drupal/nodeaccess_userreference": "3.10",
         "drupal/nodeorder": "1.5",
         "drupal/pack_upload": "1.2",
-        "drupal/panels_packery": "1.0",
         "drupal/password_policy": "1.16",
         "drupal/pathauto": "1.3",
         "drupal/pathauto_entity": "1.0",
@@ -121,7 +117,6 @@
         "drupal/realname": "1.4",
         "drupal/role_delegation": "1.3",
         "drupal/save_draft": "1.4",
-        "drupal/seeds": "",
         "drupal/simple_gmap": "1.5",
         "drupal/simplified_menu_admin": "1.0",
         "drupal/site_notice": "1.4",
@@ -155,54 +150,6 @@
         "drupal/panopoly_users": "1.88",
         "drupal/panopoly_widgets": "1.88",
         "drupal/panopoly_wysiwyg": "1.88",
-        "drupal/pece_about": "1.0",
-        "drupal/pece_access": "1.0",
-        "drupal/pece_admin": "1.1",
-        "drupal/pece_amber": "1.0",
-        "drupal/pece_analytics": "1.2",
-        "drupal/pece_annotations": "1.3",
-        "drupal/pece_api": "1.0",
-        "drupal/pece_ark": "",
-        "drupal/pece_artifacts": "1.1",
-        "drupal/pece_artifacts_audio": "1.4",
-        "drupal/pece_artifacts_bundle": "1.3",
-        "drupal/pece_artifacts_fieldnote": "1.3",
-        "drupal/pece_artifacts_image": "1.3",
-        "drupal/pece_artifacts_pdf": "1.5",
-        "drupal/pece_artifacts_text": "1.3",
-        "drupal/pece_artifacts_video": "1.4",
-        "drupal/pece_artifacts_website": "1.3",
-        "drupal/pece_backup": "1.0",
-        "drupal/pece_biblio": "1.1",
-        "drupal/pece_core": "1.2",
-        "drupal/pece_dashboard": "1.1",
-        "drupal/pece_demo": "1.0",
-        "drupal/pece_design_logic": "1.1",
-        "drupal/pece_essay": "1.6",
-        "drupal/pece_frontpage_slideshow": "1.0",
-        "drupal/pece_groups": "1.3",
-        "drupal/pece_homepage": "1.1",
-        "drupal/pece_imp_artifacts_audio": "1.0",
-        "drupal/pece_imp_artifacts_image": "1.0",
-        "drupal/pece_imp_artifacts_pdf": "1.0",
-        "drupal/pece_imp_artifacts_tabular": "1.0",
-        "drupal/pece_imp_artifacts_text": "1.0",
-        "drupal/pece_imp_artifacts_video": "1.0",
-        "drupal/pece_imp_artifacts_website": "1.0",
-        "drupal/pece_importer": "1.0",
-        "drupal/pece_memo": "1.1",
-        "drupal/pece_node_expiration": "1.0",
-        "drupal/pece_notifications": "1.0",
-        "drupal/pece_panels": "1.0",
-        "drupal/pece_photo_essay": "1.2",
-        "drupal/pece_profile": "1.0",
-        "drupal/pece_projects": "1.1",
-        "drupal/pece_repository": "1.0",
-        "drupal/pece_security": "1.1",
-        "drupal/pece_substantive_logic": "1.1",
-        "drupal/pece_tests": "1.0",
-        "drupal/pece_timeline_essay": "1.1",
-        "drupal/pece_notifications_user": "",
         "drupal/rules": "2.12",
         "drupal/rules_admin": "2.12",
         "drupal/search_api_db": "1.8",
@@ -230,27 +177,50 @@
         "drupal/views_infinite_scroll": "2.3",
         "drupal/views_ui": "3.25",
         "drupal/node_expire": "2.2",
-        "drupal/adminimal": "1.26",
-        "drupal/pece_scholarly_lite": ""
+        "drupal/adminimal": "1.26"
     },
     "require-dev": {
         "drush/drush": "~9",
-        "drupal/core-dev": "7.87",
         "drupal/drupal-driver": "2.1.1",
         "drupal/drupal-extension": "~4.0"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "post-install-cmd": "@toolkit-install",
         "post-update-cmd": "@toolkit-install",
         "toolkit-install": "PROJECT=$(pwd) composer run-script toolkit-install -d ./vendor/ec-europa/toolkit"
     },
-    "repositories": [{
+    "repositories": [
+        {
             "type": "composer",
-            "url": "https://packages.drupal.org/8"
+            "url": "https://packages.drupal.org/7"
         },
         {
-            "type": "vcs",
-            "url": "https://github.com/openeuropa/oe_dashboard_agent"
+          "type": "package",
+          "package": {
+            "name": "drupal/kw_itemnames",
+            "type": "drupal-module",
+            "version": "1.0",
+            "source": {
+              "url": "https://github.com/kraftwagen/kw-itemnames",
+              "type": "git",
+              "reference": "master"
+            }
+          }
+        },
+        {
+          "type": "package",
+          "package": {
+            "name": "drupal/kw_manifests",
+            "type": "drupal-module",
+            "version": "1.0",
+            "source": {
+              "url": "https://github.com/kraftwagen/kw-manifests",
+              "type": "git",
+              "reference": "master"
+            }
+          }
         },
         {
             "type": "path",
@@ -304,9 +274,6 @@
         "psr-4": {
             "OpenEuropa\\Site\\Tests\\": "./tests/"
         }
-    },
-    "conflict": {
-        "drupal/drupal": "*"
     },
     "config": {
         "sort-packages": true
