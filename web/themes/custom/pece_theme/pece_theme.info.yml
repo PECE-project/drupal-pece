@@ -1,22 +1,30 @@
 name: pece_theme
-description: A theme based on Radix.
+description: A Bootstrap theme based on Vartheme.
 screenshot: screenshot.png
 core_version_requirement: ^8.7.7 || ^9.0
 # version: VERSION
 engine: twig
 type: theme
-base theme: radix
-#dependencies:
-#   - drupal:components
+base theme: vartheme_bs5
+
+dependencies:
+   - drupal:components
 
 regions:
   navbar_branding: Navbar branding
   navbar_left:  Navbar left
   navbar_right: Navbar right
-  header: Header
-  content: Content
-  page_bottom: Page bottom
-  footer: Footer
+  navigation: "Navigation"
+  navigation_collapsible: "Navigation Collapsible"
+  header: "Top Bar"
+  highlighted: "Highlighted"
+  help: "Help"
+  content: "Content"
+  sidebar_first: "Primary"
+  sidebar_second: "Secondary"
+  footer: "Footer"
+  page_top: "Page top"
+  page_bottom: "Page bottom"
 
 libraries:
   - radix/style
@@ -28,11 +36,7 @@ libraries-override:
 ckeditor_stylesheets:
   - assets/css/pece_theme.style.css
 
-components:
-  namespaces:
-    pece_theme: src/components
-
-# Information added by Drupal.org packaging script on 2020-09-30
-version: '8.x-4.10'
-project: 'radix'
-datestamp: 1601449011
+component-libraries:
+  pece_theme:
+    paths:
+      - ./src/components
