@@ -49,8 +49,8 @@
         "drupal/admin_toolbar": "^2.0",
         "drupal/better_exposed_filters": "^5.0@beta",
         "drupal/bibcite": "^2.0.0",
-        "drupal/bibcite_migrate": "^2.0.0",
         "drupal/bibcite_crossref": "^2.0.0",
+        "drupal/bibcite_migrate": "^2.0.0",
         "drupal/color_field": "^2.4",
         "drupal/components": "^2.4",
         "drupal/config_filter": "^2.2",
@@ -86,6 +86,7 @@
         "drupal/rules": "3.x-dev",
         "drupal/search_api": "^1.14",
         "drupal/simple_oauth": "^5.0",
+        "drupal/vartheme_bs5": "^1.0@RC",
         "drupal/workflow": "^1.4",
         "drush/drush": "^10.3",
         "nyxtechnology/media_attribution": "1.0",
@@ -105,7 +106,15 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/console-extend-plugin": true,
+            "cweagans/composer-patches": true,
+            "drupal/core-composer-scaffold": true,
+            "zaporylie/composer-drupal-optimizations": true,
+            "oomphinc/composer-installers-extender": true
+        }
     },
     "autoload": {
         "classmap": [
