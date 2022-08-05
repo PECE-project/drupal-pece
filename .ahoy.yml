@@ -1,13 +1,5 @@
 ahoyapi: v2
 commands:
-  vup:
-    cmd: "vagrant up"
-    usage: Start the vagrant box if one exists.
-
-  vdown:
-    cmd: "vagrant down"
-    usage: Stop the vagrant box if one exists.
-
   ps:
     cmd: docker-compose ps "$@"
     usage: List the running docker-compose containers.
@@ -25,7 +17,7 @@ commands:
     usage: Restart the docker-compose containers.
 
   drush:
-    cmd: docker-compose run cli drush --root=docroot "$@"
+    cmd: docker-compose run php drush --root=web "$@"
     usage: Run drush commands in the cli service container.
 
   bash:
@@ -33,15 +25,15 @@ commands:
     usage: Start a shell in the container (like ssh without actual ssh).
 
   sqlc:
-    cmd: "docker-compose run cli drush --root=docroot sqlc"
+    cmd: "docker-compose run php drush --root=web sqlc"
     usage: Connect to the default mysql database. Supports piping of data into the command.
 
   behat:
-    cmd: docker-compose run cli bash -c "cd docroot/test && composer install --prefer-source --no-interaction && bin/behat -p docker $@"
+    cmd: docker-compose run php bash -c "cd test && composer install --prefer-source --no-interaction && bin/behat -p docker $@"
     usage: Run the behat tests within the container.
 
   behat-init:
-    cmd: 'docker-compose run cli bash -c "cd docroot/test && composer install --prefer-source --no-interaction"'
+    cmd: 'docker-compose run php bash -c "cd test && composer install --prefer-source --no-interaction"'
     usage: Use composer to install behat dependencies.
 
   #This command overrides the up command in the docker.ahoy.yml to test the "last in wins" feature of ahoy
