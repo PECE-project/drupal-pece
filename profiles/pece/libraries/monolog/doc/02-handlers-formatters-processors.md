@@ -51,7 +51,6 @@
   [php-amqplib](https://github.com/php-amqplib/php-amqplib) library.
 - [_GelfHandler_](https://github.com/Seldaek/monolog/blob/main/src/Monolog/Handler/GelfHandler.php): Logs records to a [Graylog2](http://www.graylog2.org) server.
   Requires package [graylog2/gelf-php](https://github.com/bzikarsky/gelf-php).
-- [_CubeHandler_](https://github.com/Seldaek/monolog/blob/main/src/Monolog/Handler/CubeHandler.php): Logs records to a [Cube](http://square.github.com/cube/) server.
 - [_ZendMonitorHandler_](https://github.com/Seldaek/monolog/blob/main/src/Monolog/Handler/ZendMonitorHandler.php): Logs records to the Zend Monitor present in Zend Server.
 - [_NewRelicHandler_](https://github.com/Seldaek/monolog/blob/main/src/Monolog/Handler/NewRelicHandler.php): Logs records to a [NewRelic](http://newrelic.com/) application.
 - [_LogglyHandler_](https://github.com/Seldaek/monolog/blob/main/src/Monolog/Handler/LogglyHandler.php): Logs records to a [Loggly](http://www.loggly.com/) account.
@@ -72,8 +71,6 @@
   inline `console` messages within Chrome.
 - [_BrowserConsoleHandler_](https://github.com/Seldaek/monolog/blob/main/src/Monolog/Handler/BrowserConsoleHandler.php): Handler to send logs to browser's Javascript `console` with
   no browser extension required. Most browsers supporting `console` API are supported.
-- [_PHPConsoleHandler_](https://github.com/Seldaek/monolog/blob/main/src/Monolog/Handler/PHPConsoleHandler.php): Handler for [PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef), providing
-  inline `console` and notification popup messages within Chrome.
 
 ### Log to databases
 
@@ -159,6 +156,8 @@
 - [_MongoDBFormatter_](https://github.com/Seldaek/monolog/blob/main/src/Monolog/Formatter/MongoDBFormatter.php): Converts \DateTime instances to \MongoDate and objects recursively to arrays, only useful with the MongoDBHandler.
 - [_LogmaticFormatter_](https://github.com/Seldaek/monolog/blob/main/src/Monolog/Formatter/LogmaticFormatter.php): Used to format log records to [Logmatic](http://logmatic.io/) messages, only useful for the LogmaticHandler.
 - [_FluentdFormatter_](https://github.com/Seldaek/monolog/blob/main/src/Monolog/Formatter/FluentdFormatter.php): Used to format log records to [Fluentd](https://www.fluentd.org/) logs, only useful with the SocketHandler.
+- [_GoogleCloudLoggingFormatter_](https://github.com/Seldaek/monolog/blob/main/src/Monolog/Formatter/GoogleCloudLoggingFormatter.php): Used to format log records for Google Cloud Logging. It works like a JsonFormatter with some minor tweaks.
+- [_SyslogFormatter_](https://github.com/Seldaek/monolog/blob/main/src/Monolog/Formatter/SyslogFormatter.php): Used to format log records in RFC 5424 / syslog format. This can be used to output a syslog-style file that can then be consumed by tools like [lnav](https://lnav.org/).
 
 ## Processors
 

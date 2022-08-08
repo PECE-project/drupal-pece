@@ -23,23 +23,6 @@ abstract class AbstractSyslogHandler extends AbstractProcessingHandler
     protected int $facility;
 
     /**
-     * Translates Monolog log levels to syslog log priorities.
-     */
-    protected function toSyslogPriority(Level $level): int
-    {
-        return match ($level) {
-            Level::Debug     => \LOG_DEBUG,
-            Level::Info      => \LOG_INFO,
-            Level::Notice    => \LOG_NOTICE,
-            Level::Warning   => \LOG_WARNING,
-            Level::Error     => \LOG_ERR,
-            Level::Critical  => \LOG_CRIT,
-            Level::Alert     => \LOG_ALERT,
-            Level::Emergency => \LOG_EMERG,
-        };
-    }
-
-    /**
      * List of valid log facility names.
      * @var array<string, int>
      */
@@ -56,6 +39,14 @@ abstract class AbstractSyslogHandler extends AbstractProcessingHandler
         'user'     => \LOG_USER,
         'uucp'     => \LOG_UUCP,
     ];
+
+    /**
+     * Translates Monolog log levels to syslog log priorities.
+     */
+    protected function toSyslogPriority(Level $level): int
+    {
+        return $level->toRFC5424Level();
+    }
 
     /**
      * @param string|int $facility Either one of the names of the keys in $this->facilities, or a LOG_* facility constant

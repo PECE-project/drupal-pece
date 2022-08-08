@@ -11,8 +11,8 @@
 
 namespace Monolog\Handler;
 
-use Monolog\Test\TestCase;
 use Monolog\Handler\SyslogUdp\UdpSocket;
+use Monolog\Test\TestCase;
 
 /**
  * @requires extension sockets

@@ -30,4 +30,15 @@ class NullHandlerTest extends TestCase
         $handler = new NullHandler(Level::Warning);
         $this->assertFalse($handler->handle($this->getRecord(Level::Debug)));
     }
+
+    public function testSerializeRestorePrivate()
+    {
+        $handler = new NullHandler(Level::Warning);
+        self::assertFalse($handler->handle($this->getRecord(Level::Debug)));
+        self::assertTrue($handler->handle($this->getRecord(Level::Warning)));
+
+        $handler = unserialize(serialize($handler));
+        self::assertFalse($handler->handle($this->getRecord(Level::Debug)));
+        self::assertTrue($handler->handle($this->getRecord(Level::Warning)));
+    }
 }
