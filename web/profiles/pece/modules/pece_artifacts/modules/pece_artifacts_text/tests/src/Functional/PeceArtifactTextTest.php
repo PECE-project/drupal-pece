@@ -70,7 +70,7 @@ class PeceArtifactTextTest extends BrowserTestBase {
 
     $values['field_pbc_ref_user'] = [
       'target_id' => $user->id(),
-      'grant_public' => 1,
+      'grant_public' => 0,
       'grant_view' => 1,
       'grant_update' => 1,
       'grant_delete' => 1,
