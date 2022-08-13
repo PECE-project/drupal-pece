@@ -356,9 +356,7 @@ services:
     command: --api.insecure=true --providers.docker
     networks:
       pece:
-        ipv4_address: 172.28.1.1
       peceV1:
-        ipv4_address: 172.26.1.1
     ports:
       - '80:80'
       - '8181:8080' # Dashboard
@@ -371,14 +369,11 @@ networks:
     driver: bridge
     ipam:
       driver: default
-      config:
-        - subnet: 172.28.1.0/16
+
   peceV1:
     name: pecev1
     ipam:
       driver: default
-      config:
-        - subnet: 172.26.1.0/16
 #volumes:
 ## Docker-sync for macOS users
 #  docker-sync:
