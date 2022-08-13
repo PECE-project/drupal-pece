@@ -22,10 +22,8 @@ class PeceAnonymousAccessMatrix extends PeceAccessMatrix {
    */
   // Create setUp method
   function setUp() {
-
-    parent::setUp();
     $this->userRole = 'anonymous';
     $this->user = NULL;
+    parent::setUp();
   }
-
 }

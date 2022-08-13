@@ -5,7 +5,7 @@
  * Need simpletest module installed
  *
  */
-class PeceResearcherGroupAccessMatrix extends PeceAccessMatrix {
+class PeceResearcherGroupAccessMatrix extends PeceResearcherAccessMatrix {
 
   // Create getInfo method
   public static function getInfo() {
@@ -16,16 +16,8 @@ class PeceResearcherGroupAccessMatrix extends PeceAccessMatrix {
     );
   }
 
-  /**
-   * Override this function to use the same file folders.
-   * @return void
-   */
-  // Create setUp method
   function setUp() {
-
     parent::setUp();
-    $this->userRole = 'researcher_group';
-    $this->user = $this->drupalCreateUserWithRole('migrate_group_','Researcher');
     $this->addUserInAllGroups($this->user,5);
   }
 
