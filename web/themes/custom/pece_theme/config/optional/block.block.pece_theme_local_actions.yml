@@ -1,0 +1,20 @@
+uuid: 656d3531-faf0-4cc5-a419-6b4f1f951a70
+langcode: en
+status: true
+dependencies:
+  theme:
+    - pece_theme
+_core:
+  default_config_hash: osZQ9lL2jTdH5am4LJiZ29RaivhzOf6vCpoRy6FZwIE
+id: pece_theme_local_actions
+theme: pece_theme
+region: content
+weight: -10
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }
