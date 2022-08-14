@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8508e9ae343c6f9472db0649b3509cfc",
+    "content-hash": "5e252e094f5b1af84e8d5c6fb39201e0",
     "packages": [
         {
             "name": "academicpuma/citeproc-php",
@@ -12876,6 +12876,70 @@
             "time": "2021-10-12T16:01:47+00:00"
         },
         {
+            "name": "cebe/markdown",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cebe/markdown.git",
+                "reference": "8efb4268c90add2eee0edacf503ae71f22ccc745"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/8efb4268c90add2eee0edacf503ae71f22ccc745",
+                "reference": "8efb4268c90add2eee0edacf503ae71f22ccc745",
+                "shasum": ""
+            },
+            "require": {
+                "lib-pcre": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "cebe/indent": "*",
+                "facebook/xhprof": "*@dev",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "bin": [
+                "bin/markdown"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "cebe\\markdown\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc",
+                    "homepage": "http://cebe.cc/",
+                    "role": "Creator"
+                }
+            ],
+            "description": "A super fast, highly extensible markdown parser for PHP",
+            "homepage": "https://github.com/cebe/markdown#readme",
+            "keywords": [
+                "extensible",
+                "fast",
+                "gfm",
+                "markdown",
+                "markdown-extra"
+            ],
+            "support": {
+                "issues": "https://github.com/cebe/markdown/issues",
+                "source": "https://github.com/cebe/markdown"
+            },
+            "time": "2018-03-26T11:15:02+00:00"
+        },
+        {
             "name": "composer/ca-bundle",
             "version": "1.3.1",
             "source": {
@@ -13829,6 +13893,136 @@
             }
         },
         {
+            "name": "drupal/drupalmoduleupgrader",
+            "version": "1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/drupalmoduleupgrader.git",
+                "reference": "8.x-1.9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/drupalmoduleupgrader-8.x-1.9.zip",
+                "reference": "8.x-1.9",
+                "shasum": "a0b4611a0452c7d5173146647883a07b4548a5d8"
+            },
+            "require": {
+                "cebe/markdown": "1.0.*@dev",
+                "doctrine/collections": "^1.4",
+                "drupal/core": "^8 || ^9",
+                "jcnventura/pharborist": "dev-master",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "^1.5"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.9",
+                    "datestamp": "1659619859",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                },
+                "drush": {
+                    "services": {
+                        "drush.services.yml": "^9 || ^10"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Drupal\\drupalmoduleupgrader\\": "src/"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "amitgoyal",
+                    "homepage": "https://www.drupal.org/user/56441"
+                },
+                {
+                    "name": "anshuljain2k8",
+                    "homepage": "https://www.drupal.org/user/463858"
+                },
+                {
+                    "name": "DamienMcKenna",
+                    "homepage": "https://www.drupal.org/user/108450"
+                },
+                {
+                    "name": "dstol",
+                    "homepage": "https://www.drupal.org/user/329570"
+                },
+                {
+                    "name": "eshta",
+                    "homepage": "https://www.drupal.org/user/1951462"
+                },
+                {
+                    "name": "Gábor Hojtsy",
+                    "homepage": "https://www.drupal.org/user/4166"
+                },
+                {
+                    "name": "HongPong",
+                    "homepage": "https://www.drupal.org/user/60005"
+                },
+                {
+                    "name": "japerry",
+                    "homepage": "https://www.drupal.org/user/45640"
+                },
+                {
+                    "name": "jcnventura",
+                    "homepage": "https://www.drupal.org/user/122464"
+                },
+                {
+                    "name": "joseph.olstad",
+                    "homepage": "https://www.drupal.org/user/1321830"
+                },
+                {
+                    "name": "joshi.rohit100",
+                    "homepage": "https://www.drupal.org/user/2504832"
+                },
+                {
+                    "name": "phenaproxima",
+                    "homepage": "https://www.drupal.org/user/205645"
+                },
+                {
+                    "name": "tim.plunkett",
+                    "homepage": "https://www.drupal.org/user/241634"
+                },
+                {
+                    "name": "webchick",
+                    "homepage": "https://www.drupal.org/user/24967"
+                },
+                {
+                    "name": "Wim Leers",
+                    "homepage": "https://www.drupal.org/user/99777"
+                },
+                {
+                    "name": "xjm",
+                    "homepage": "https://www.drupal.org/user/65776"
+                }
+            ],
+            "description": "A Drush command to update Drupal 7 modules to Drupal 8 or 9.",
+            "homepage": "https://www.drupal.org/project/drupalmoduleupgrader",
+            "keywords": [
+                "Drupal",
+                "PHP_CodeSniffer",
+                "phpcs",
+                "standards",
+                "update",
+                "upgrade"
+            ],
+            "support": {
+                "source": "https://drupal.org/project/drupalmoduleupgrader",
+                "issues": "https://drupal.org/project/issues/drupalmoduleupgrader"
+            }
+        },
+        {
             "name": "drupal/migrate_devel",
             "version": "2.0.0-alpha2",
             "source": {
@@ -14076,6 +14270,55 @@
                 "webtest"
             ],
             "time": "2021-10-14T03:25:34+00:00"
+        },
+        {
+            "name": "jcnventura/pharborist",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jcnventura/pharborist.git",
+                "reference": "f4315452d4d0e5ed1b83a67f368402453e0a2215"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jcnventura/pharborist/zipball/f4315452d4d0e5ed1b83a67f368402453e0a2215",
+                "reference": "f4315452d4d0e5ed1b83a67f368402453e0a2215",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0|^5.0"
+            },
+            "require-dev": {
+                "apigen/apigen": "2.8.*",
+                "phpunit/phpunit": "4.2.*"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Pharborist\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Cameron Zemek",
+                    "role": "lead"
+                }
+            ],
+            "description": "Pharborist builds a syntax tree for PHP that can be traversed and manipulated.",
+            "keywords": [
+                "standards",
+                "syntax"
+            ],
+            "support": {
+                "source": "https://github.com/jcnventura/pharborist/tree/master"
+            },
+            "time": "2020-11-22T12:21:00+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
