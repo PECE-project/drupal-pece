@@ -340,9 +340,9 @@ services:
 #      - 'traefik.frontend.rule=Host:xhprof.${PROJECT_BASE_URL}'
 
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer-ce
     container_name: "${PROJECT_NAME}_portainer"
-    command: --no-auth -H unix:///var/run/docker.sock
+    command: -H unix:///var/run/docker.sock
     networks:
       pece:
     volumes:
