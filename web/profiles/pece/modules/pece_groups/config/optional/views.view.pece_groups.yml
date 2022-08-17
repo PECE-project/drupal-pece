@@ -196,8 +196,8 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  groups_front:
-    id: groups_front
+  block_groups:
+    id: block_groups
     display_title: Block
     display_plugin: block
     position: 1
@@ -231,6 +231,42 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+  block_recent_groups:
+    id: block_recent_groups
+    display_title: 'Recent Groups Block'
+    display_plugin: block
+    position: 1
+    display_options:
+      style:
+        type: default
+        options: {  }
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: teaser
+      defaults:
+        use_more: false
+        use_more_always: false
+        use_more_text: false
+        style: false
+        row: false
+      display_description: ''
+      use_more: true
+      use_more_always: true
+      use_more_text: More
+      display_extenders:
+        metatag_display_extender: {  }
+      block_description: 'Recent Groups'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
   rest_export_1:
     id: rest_export_1
     display_title: 'REST export'
@@ -250,8 +286,9 @@ display:
       defaults:
         style: false
         row: false
-      display_extenders: {  }
-      path: /api/groups
+      display_extenders:
+        metatag_display_extender: {  }
+      path: api/group/recent
     cache_metadata:
       max-age: -1
       contexts:
