@@ -11,13 +11,16 @@ blocks:
         - name: 'Job #1'
           commands:
             - checkout
+            - pwd
+            - ls -lah
+            - make up
       prologue:
         commands:
-          - ls -lah
+          - git clone git@github.com:revagomes/drupal-pece.git
       epilogue:
         on_pass:
           commands:
             - echo 'Takalepau marko wèi!'
         on_fail:
           commands:
-            - 'echo ''Nooop :('''
+            - 'echo "Nooop :("'
