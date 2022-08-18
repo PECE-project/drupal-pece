@@ -29,4 +29,7 @@ blocks:
           commands:
             - 'echo "Nooop :("'
       secrets:
-        - name: PECE2.envfile
+        - name: PECE2-env
+      env_vars:
+        - name: ENVIRONMENT
+          value: prd
