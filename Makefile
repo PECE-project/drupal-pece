@@ -3,7 +3,7 @@ include docker.mk
 .PHONY: test build
 
 DRUPAL_VER ?= 8
-PHP_VER ?= 7.2
+PHP_VER ?= 7.4
 FILE_MATCH ?=
 
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
