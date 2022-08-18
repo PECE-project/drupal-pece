@@ -17,7 +17,7 @@ blocks:
             - docker-compose exec web drush cim -y
       prologue:
         commands:
-          - 'git clone git@github.com:revagomes/drupal-pece.git'
+          - 'git clone -b=pece2.0 git@github.com:revagomes/drupal-pece.git'
       epilogue:
         always:
           commands:
