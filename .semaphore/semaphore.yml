@@ -13,11 +13,8 @@ blocks:
             - checkout
       prologue:
         commands:
-          - docker-compose up -d
+          - ls -lah
       epilogue:
-        always:
-          commands:
-            - docker-compose stop
         on_pass:
           commands:
             - echo 'Takalepau marko wèi!'
