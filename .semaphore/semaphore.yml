@@ -31,6 +31,10 @@ blocks:
       env_vars:
         - name: ENVIRONMENT
           value: 'prd'
+        - name: PROJECT_NAME
+          value: 'pece2'
+        - name: PROJECT_BASE_URL
+          value: 'localhost'
         - name: DB_NAME
           value: 'drupal'
         - name: DB_USER
@@ -55,3 +59,5 @@ blocks:
           value: 'drupal8'
         - name: PHP_TAG
           value: '7.4-dev-4.14.9'
+        - name: NODE_TAG
+          value: '12.8'
