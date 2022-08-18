@@ -11,16 +11,23 @@ blocks:
         - name: 'Job #1'
           commands:
             - checkout
-            - pwd
-            - ls -lah
             - make up
+            - docker-compose exec web composer install
+            - docker-compose exec web drush updb -y
+            - docker-compose exec web drush cim -y
       prologue:
         commands:
-          - git clone git@github.com:revagomes/drupal-pece.git
+          - 'git clone git@github.com:revagomes/drupal-pece.git'
       epilogue:
+        always:
+          commands:
+            - make stop
+            - make prune
         on_pass:
           commands:
             - echo 'Takalepau marko wèi!'
         on_fail:
           commands:
             - 'echo "Nooop :("'
+      secrets:
+        - name: PECE2.envfile
