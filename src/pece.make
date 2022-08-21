@@ -670,6 +670,7 @@ projects[biblio][version] = 1.5
 ; Bibliography Zotero
 projects[biblio_zotero][subdir] = contrib
 projects[biblio_zotero][version] = 1.0-alpha3
+projects[biblio_zotero][patch][] = "./patches/biblio_zotero-3304957-2.patch"
 
 ; =====================
 ; Logging
