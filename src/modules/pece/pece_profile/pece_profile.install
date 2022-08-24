@@ -75,7 +75,10 @@ function pece_profile_update_7001() {
  */
 function pece_profile_update_7003() {
   if (module_exists('features')) {
-    features_revert(array('pece_profile' => array('field_base')));
+    features_revert(array('pece_profile' => array(
+      'field_base',
+      'field_instance',
+    )));
   }
   else {
     watchdog('pece_profile', 'Unable to revert pece_profile feature', 'error');

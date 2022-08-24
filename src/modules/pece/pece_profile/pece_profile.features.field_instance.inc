@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_profile.features.field_instance.inc
@@ -303,6 +304,51 @@ function pece_profile_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_pece_application_reason'.
+  $field_instances['user-user-field_pece_application_reason'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+      'featured' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'mini_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'user',
+    'field_name' => 'field_pece_application_reason',
+    'label' => 'Why are you applying for an account?',
+    'required' => FALSE,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => 1,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 3,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_user_about'.
   $field_instances['user-user-field_user_about'] = array(
     'bundle' => 'user',
@@ -437,7 +483,7 @@ function pece_profile_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 3,
+      'weight' => 7,
     ),
   );
 
@@ -453,6 +499,7 @@ function pece_profile_field_default_field_instances() {
   t('Picture');
   t('Position');
   t('Tags');
+  t('Why are you applying for an account?');
 
   return $field_instances;
 }
