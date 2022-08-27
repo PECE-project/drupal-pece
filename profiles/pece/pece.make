@@ -134,6 +134,9 @@ projects[site_notice][subdir] = contrib
 projects[yaml_parser][version] = 1.0
 projects[yaml_parser][subdir] = contrib
 
+projects[notify][version] = 1.8
+projects[notify][subdir] = contrib
+
 ; =====================
 ; Views
 ; =====================
