@@ -754,7 +754,7 @@ function views_bulk_operations_form_submit($form, &$form_state) {
 
   // Redirect.
   $query = drupal_get_query_parameters($_GET, array('q'));
-  $form_state['redirect'] = array('path' => $vbo->view->get_url(), array('query' => $query));
+  $form_state['redirect'] = array($vbo->view->get_url(), array('query' => $query));
 }
 
 /**
