@@ -16,18 +16,18 @@ projects[simple_gmap][patch][2902178] = https://www.drupal.org/files/issues/2021
 
 ; Panopoly - Contrib - Widgets
 
-projects[menu_block][version] = 2.8
+projects[menu_block][version] = 2.9
 projects[menu_block][subdir] = contrib
 
 ; Panopoly - Contrib - Files & Media
 
-projects[file_entity][version] = 2.30
+projects[file_entity][version] = 2.36
 projects[file_entity][subdir] = contrib
 
-projects[media][version] = 2.27
+projects[media][version] = 2.28
 projects[media][subdir] = contrib
 
-projects[media_youtube][version] = 3.10
+projects[media_youtube][version] = 3.11
 projects[media_youtube][subdir] = contrib
 
 projects[media_vimeo][version] = 2.1
