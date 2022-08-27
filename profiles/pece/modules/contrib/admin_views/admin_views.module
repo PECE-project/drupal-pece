@@ -14,3 +14,12 @@ function admin_views_views_api() {
   );
 }
 
+/**
+ * Implements hook_help().
+ */
+function admin_views_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#admin_views':
+      return t('This module replaces administrative overview/listing pages with actual views for superior usability. It allows a user to sort through large amounts of data more easily with exposed filters. It is also easier to perform bulk operations.');
+  }
+}

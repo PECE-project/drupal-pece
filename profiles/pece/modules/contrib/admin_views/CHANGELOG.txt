@@ -1,0 +1,148 @@
+Admin_Views 7.x-1.8, 2021-09-09
+-------------------------------
+#2569575 by sdstyles, zvse: Wrong module dependency declaration.
+#2411193 by DamienMcKenna, damiankloip: Move 'system' display plugin to a
+  submodule.
+#3101921 by DamienMcKenna: Add a CHANGELOG.txt file.
+#2919169 by dani3lr0se, DamienMcKenna, volkswagenchick: Add hook_help().
+#1698784 by damiankloip, mvc, DamienMcKenna, Stevel, sun: Missing handler: node
+  term_node_tid relationship.
+#2802533 by schifazl, DamienMcKenna, ann b, DigitalFrontiersMedia, Chris
+  Matthews, selvanathan: Sort By Updated Column Not Working (Content Page).
+#3096612 by fprevos2, DamienMcKenna, MrDaleSmith, oskylark, newaytech, GaëlG,
+  marameodesign: AJAX fails due to hardcoded permission.
+#2951251 by lachezar.valchev, DamienMcKenna, Chris Matthews: Support for Domain
+  Access.
+#2034717 by damiankloip, DamienMcKenna, Chris Matthews: Wildcards/regular
+  expression when searching.
+#2591539 by calebtr, DamienMcKenna, Chris Matthews, kiritoly, damiankloip,
+  Juterpillar: exposed filter descriptions are hidden by default.
+#2836511 by volkswagenchick, DamienMcKenna, loopduplicate, dhruveshdtripathi,
+  Stevel: Add README file.
+#1780004 by ron_s, DamienMcKenna, acbramley, damiankloip, tdurocher, antiorario,
+  giorgio79, drupalerocant, afoster, Dane Powell, kenorb, superjerms: Trying to
+  get property of non-object in user_access() with 2 admin views on the same
+  path.
+#3096612 by coranda, DamienMcKenna: Copy/pasta.
+#3133983 by DamienMcKenna, trong.nguyen.tcec: Undefined function:
+  admin_views_duplicate_path.
+
+
+Admin_Views 7.x-1.7, 2019-11-19
+-------------------------------
+By David_Rothstein, dsnopek, vijaycs85, mcdruid, dawehner, damiankloip, mglaman,
+  greggles, mlhess, rickmanelius, larowlan: Fix SA-CONTRIB-2019-076.
+#2545750 by Sam152, marcoscano: Allow modules to easily override existing views
+  provided by admin_views.
+
+
+Admin_Views 7.x-1.6, 2016-08-02
+-------------------------------
+By damiankloip: Check path is not empty before getting the menu item.
+#2358953 by xurizaemon: Admin Views tests fail (class view not defined).
+
+
+Admin_Views 7.x-1.5, 2015-07-08
+-------------------------------
+By damiankloip: Always use display configured path in access handler.
+
+
+Admin_Views 7.x-1.4, 2015-02-20
+-------------------------------
+#2425349 by Haza: Strings missings from translatables.
+#2425121 by Rob230, AdamPS, reallifedesign, damiankloip: Security flaw when used
+  with "Administer Users By Role" module.
+
+
+Admin_Views 7.x-1.3, 2014-05-29
+-------------------------------
+#2125683 by rooby, John Bickar | joshmelbs: Fixed Replace delete user with
+  cancel user action.
+#1940328 by damiankloip | kaizerking: Fixed Notice: Undefined index: module in
+  views_plugin_display_system().
+#1949786 by plach | sydneyshan: Fixed Call to undefined method
+  view::get_option() in views_plugin_access_menu().inc on line 28.
+
+
+Admin_Views 7.x-1.2, 2013-05-18
+-------------------------------
+#1974234 by damiankloip | hass: Added Table title 'Operations' is missing on
+  User view.
+#1787078 by damiankloip | Mazzhe: Fixed Notice : Undefined index:
+  admin/structure/taxonomy/% in
+  views_plugin_display_system()->execute_hook_menu().
+
+
+Admin_Views 7.x-1.1, 2012-12-17
+-------------------------------
+#1868510 by damiankloip: Tidy and reorder methods in
+  views_plugin_display_system().
+#1778058 by damiankloip, sun: Remove contextual links from admin views.
+#1868504 by damiankloip: Fixed No empty text for book view.
+#1787078 by damiankloip | Mazzhe: Fixed Notice : Undefined index:
+  admin/structure/taxonomy/% in
+   views_plugin_display_system()->execute_hook_menu().
+#1786522 by damiankloip | vulfox: Fixed Conflict with other modules.
+
+
+Admin_Views 7.x-1.0, 2012-09-09
+-------------------------------
+By damiankloip: Removed remember roles.
+By damiankloip: Added destination to link url, fixed typo, Added description
+  text in exposed filter.
+#1714690 by damiankloip: Added an admin view for books.
+#1714634 by damiankloip: Added 'Content: Has new content' field to content view.
+#1774354 by populist: Filter out Anonymous from People View.
+#1770206 by damiankloip: Fixed Comment view exposed filters don't remember last
+  selection like all other exposed filters.
+#1652724 by damiankloip: Added empty table and text when there are no results.
+#1673820 by damiankloip, alexweber | nikosnikos: Fixed Fatal error when there's
+  a views page with admin/content/xxx path.
+By damiankloip: Re-exported default views.
+#1701834 by damiankloip: Remove get_pager_text().
+#1697902 by damiankloip, sun: Fixed Access should be inherited from menu router
+  item, not view access plugin.
+#1603828 by damiankloip, dawehner: Fixed admin_views().css is not loaded for
+  Views live preview.
+#1627020 by mrfelton, damiankloip: Fixed No accessible menu item if only 'Access
+  the content overview page' permission is granted.
+#1691404 by damiankloip: Remove call to get_breadcrumb() in display handler.
+#1673636 by damiankloip: Fixed 'Member for' field should use raw time ago
+  formatter.
+#1650118 by damiankloip: Use autocomplete for Username/author on all views.
+#1647394 by damiankloip, dkingofpa: Added Change 'Name' filter field label to
+  'Username' on People view.
+#1630058 by damiankloip: Fixed Can't filter content by author.
+#1616324 by sun, damiankloip: Added view display for
+  admin/content/comment/approval.
+#1599148 by dawehner | giorgio79: Added 'Modify entity valuesr' VBO action to
+  every admin view.
+By damiankloip: Fixed machine-names in translatables.
+#1551194 by sun, damiankloip: Added e-mail field and filter to user view.
+#1559780 by sun: Fixed system_block_ip_action() blocks the current user.
+By damiankloip: Re-exported all default admin views (without changes).
+By damiankloip: Updated Taxonomy term view to D7 / Views 3.
+By damiankloip: Fixed Coder Review coding style violations.
+#1565720 by sun: Fixed User creation form, permissions, roles, tabs, and actions
+  on admin/people are broken.
+#1064928 by sun: Fixed Default views appear despite missing module dependency;
+  no way for other modules to provide default admin views.
+#1064928 by dawehner: Fixed Comments view link appears despite disabled Comment
+  module.
+#1557794 by damiankloip: Enqueue shouldn't be enabled by default.
+#1332238 by zambrey, dereine: Add distinct to the node view to fix duplicate
+  results.
+#1429692 by dereine: Bump views api version to 3.
+#1177202 by das-peter, dereine, sun: Fixed copying and re-injection of child
+  router items breaks badly.
+#1212064 by sun: Updated admin_views default views for VBO 3.x.
+#1196590 by sun: Fixed errors and notices for admin_views with Views 3.
+#1008380 by bdragon, sun: Updated admin_views for D7.
+By sun: Disabled admin_content_taxonomy view as it's not ready for prime-time
+  yet.
+#730156 by sun: Fixed Administration views.
+#730156 by sun: Fixed Administration views.
+#550132 by sun: Fixed (temporarily) admin_views menu items.
+By sun: Updated admin_views.info for D7.
+By sun: Added Administration views sub-module, converting all administrative
+  listing pages in Drupal core into real, ajaxified, and alterable views.

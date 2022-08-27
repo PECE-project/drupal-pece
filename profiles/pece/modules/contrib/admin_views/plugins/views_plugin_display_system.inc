@@ -63,7 +63,7 @@ class views_plugin_display_system extends views_plugin_display {
       // this gets cloned to a display of a different type.
       'default' => array(
         'type' => 'perm',
-        'perm' => 'access administration pages',
+        'perm' => 'use admin views system display ajax pages',
       ),
     );
 
@@ -107,7 +107,7 @@ class views_plugin_display_system extends views_plugin_display {
         $form['#title'] .= t('An existing menu path this view replaces');
         $form['path'] = array(
           '#type' => 'textfield',
-          '#description' => t('This view replaces this path on your site. You may use "%" in your URL to represent values that will be used for contextual filters. For example: "node/%/feed".'),
+          '#description' => t('This view replaces this path on your site. You may use "%" in your URL to represent values that will be used for contextual filters. For example: "node/%/feed". The path must not be used by another enabled system view, otherwise conflicts will occur and <em>user_access()</em> notices displayed.'),
           '#default_value' => $this->get_option('path'),
           '#field_prefix' => '<span dir="ltr">' . url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q='),
           '#field_suffix' => '</span>&lrm;',
@@ -134,6 +134,11 @@ class views_plugin_display_system extends views_plugin_display {
         }
         // Automatically remove '/' from path.
         $form_state['values']['path'] = trim($form_state['values']['path'], '/');
+
+        $system_view[$form_state['values']['path']] = array($this->view->name => $this->view->current_display);
+        if (admin_views_system_display_duplicate_path($system_view)) {
+          form_error($form['path'], t('Already used by another system view. Enter a different path.'));
+        }
         break;
     }
   }
@@ -341,7 +346,7 @@ class views_plugin_display_system extends views_plugin_display {
       return drupal_access_denied();
     }
 
-    drupal_add_css(drupal_get_path('module', 'admin_views') . '/admin_views.css');
+    drupal_add_css(drupal_get_path('module', 'admin_views_system_display') . '/admin_views_system_display.css');
 
     return $this->view->render();
   }
@@ -356,5 +361,4 @@ class views_plugin_display_system extends views_plugin_display {
       'description' => t('The contextual filter values is provided by the URL.'),
     );
   }
-
 }

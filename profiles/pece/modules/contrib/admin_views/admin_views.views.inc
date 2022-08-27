@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Views plugin handlers.
@@ -8,8 +7,8 @@
 /**
  * Implements hook_views_plugins().
  */
-function admin_views_views_plugins() {
-  $path = drupal_get_path('module', 'admin_views');
+function admin_views_system_display_views_plugins() {
+  $path = drupal_get_path('module', 'admin_views_system_display');
 
   $plugins = array(
     'module' => 'views', // This just tells our themes are elsewhere.

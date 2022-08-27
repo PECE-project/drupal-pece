@@ -21,6 +21,7 @@ $handler->display->display_options['title'] = 'Content';
 $handler->display->display_options['css_class'] = 'admin-views-view';
 $handler->display->display_options['use_ajax'] = TRUE;
 $handler->display->display_options['use_more_always'] = FALSE;
+$handler->display->display_options['group_by'] = TRUE;
 $handler->display->display_options['access']['type'] = 'perm';
 $handler->display->display_options['access']['perm'] = 'access administration pages';
 $handler->display->display_options['cache']['type'] = 'none';
@@ -114,13 +115,15 @@ $handler->display->display_options['relationships']['uid']['id'] = 'uid';
 $handler->display->display_options['relationships']['uid']['table'] = 'node';
 $handler->display->display_options['relationships']['uid']['field'] = 'uid';
 /* Relationship: Content: Taxonomy terms on node */
-$handler->display->display_options['relationships']['term_node_tid']['id'] = 'term_node_tid';
-$handler->display->display_options['relationships']['term_node_tid']['table'] = 'node';
-$handler->display->display_options['relationships']['term_node_tid']['field'] = 'term_node_tid';
-$handler->display->display_options['relationships']['term_node_tid']['vocabularies'] = array(
-  'forums' => 0,
-  'tags' => 0,
-);
+if (module_exists('taxonomy')) {
+  $handler->display->display_options['relationships']['term_node_tid']['id'] = 'term_node_tid';
+  $handler->display->display_options['relationships']['term_node_tid']['table'] = 'node';
+  $handler->display->display_options['relationships']['term_node_tid']['field'] = 'term_node_tid';
+  $handler->display->display_options['relationships']['term_node_tid']['vocabularies'] = array(
+    'forums' => 0,
+    'tags' => 0,
+  );
+}
 /* Field: Bulk operations: Content */
 $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
 $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
@@ -304,6 +307,7 @@ $handler->display->display_options['filters']['title']['operator'] = 'contains';
 $handler->display->display_options['filters']['title']['exposed'] = TRUE;
 $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
 $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+$handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
 $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
 $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
 $handler->display->display_options['filters']['title']['expose']['remember'] = TRUE;
@@ -340,17 +344,31 @@ $handler->display->display_options['filters']['status']['expose']['label'] = 'Pu
 $handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
 $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
 $handler->display->display_options['filters']['status']['expose']['remember'] = TRUE;
+if (module_exists('taxonomy')) {
 /* Filter criterion: Taxonomy term: Vocabulary */
-$handler->display->display_options['filters']['vid']['id'] = 'vid';
-$handler->display->display_options['filters']['vid']['table'] = 'taxonomy_term_data';
-$handler->display->display_options['filters']['vid']['field'] = 'vid';
-$handler->display->display_options['filters']['vid']['relationship'] = 'term_node_tid';
-$handler->display->display_options['filters']['vid']['exposed'] = TRUE;
-$handler->display->display_options['filters']['vid']['expose']['operator_id'] = 'vid_op';
-$handler->display->display_options['filters']['vid']['expose']['label'] = 'Vocabulary';
-$handler->display->display_options['filters']['vid']['expose']['operator'] = 'vid_op';
-$handler->display->display_options['filters']['vid']['expose']['identifier'] = 'vid';
-$handler->display->display_options['filters']['vid']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['vid']['id'] = 'vid';
+  $handler->display->display_options['filters']['vid']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['vid']['field'] = 'vid';
+  $handler->display->display_options['filters']['vid']['relationship'] = 'term_node_tid';
+  $handler->display->display_options['filters']['vid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['vid']['expose']['operator_id'] = 'vid_op';
+  $handler->display->display_options['filters']['vid']['expose']['label'] = 'Vocabulary';
+  $handler->display->display_options['filters']['vid']['expose']['operator'] = 'vid_op';
+  $handler->display->display_options['filters']['vid']['expose']['identifier'] = 'vid';
+  $handler->display->display_options['filters']['vid']['expose']['remember'] = TRUE;
+}
+if (module_exists('domain')) {
+  /* Filter criterion: Domain Access: Domain ID */
+  $handler->display->display_options['filters']['gid']['id'] = 'gid';
+  $handler->display->display_options['filters']['gid']['table'] = 'domain_access';
+  $handler->display->display_options['filters']['gid']['field'] = 'gid';
+  $handler->display->display_options['filters']['gid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['gid']['expose']['operator_id'] = 'gid_op';
+  $handler->display->display_options['filters']['gid']['expose']['label'] = 'Domain';
+  $handler->display->display_options['filters']['gid']['expose']['operator'] = 'gid_op';
+  $handler->display->display_options['filters']['gid']['expose']['identifier'] = 'gid';
+  $handler->display->display_options['filters']['gid']['expose']['remember'] = TRUE;
+}
 
 /* Display: System */
 $handler = $view->new_display('system', 'System', 'system_1');
@@ -394,5 +412,6 @@ $translatables['admin_views_node'] = array(
   t('Updated'),
   t('Operations'),
   t('Vocabulary'),
+  t('Domain'),
   t('System'),
 );

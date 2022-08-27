@@ -18,10 +18,12 @@ class AdminViewsWebTestCase extends DrupalWebTestCase {
     'taxonomy' => array('administer taxonomy'),
   );
 
-  function setUp() {
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp(array $modules = array()) {
     // Setup site and modules.
-    $modules = func_get_args();
-    $modules = isset($modules[0]) && is_array($modules[0]) ? $modules[0] : $modules;
+    $modules[] = 'admin_views_system_display';
     $modules[] = 'admin_views';
     parent::setUp($modules);
 
@@ -54,6 +56,23 @@ class AdminViewsWebTestCase extends DrupalWebTestCase {
     }
   }
 
+  /**
+   * Log in as user 1.
+   */
+  protected function loginUser1() {
+    $password = user_password();
+    // Reset the user 1 password.
+    $account = user_load(1);
+    $edit = array(
+      'pass' => $password,
+    );
+    $account = user_save($account, $edit);
+    $account->pass_raw = $password;
+
+    // Log in as user 1.
+    $this->drupalLogin($account);
+  }
+
   protected function assertOriginalRouterItem($module, $path) {
     // Retrieve the original router item definition.
     $items = module_invoke($module, 'menu');
@@ -72,12 +91,20 @@ class AdminViewsWebTestCase extends DrupalWebTestCase {
     $this->assertResponse(200);
     $this->assertText($original_item['title']);
   }
+
 }
 
 /**
  * Tests System display functionality.
  */
 class AdminViewsSystemDisplayTestCase extends AdminViewsWebTestCase {
+
+  /**
+   * Define this test class.
+   *
+   * @return array
+   *   The test's meta data.
+   */
   public static function getInfo() {
     return array(
       'name' => 'Views System display plugin',
@@ -86,14 +113,20 @@ class AdminViewsSystemDisplayTestCase extends AdminViewsWebTestCase {
     );
   }
 
-  function setUp() {
-    parent::setUp(array('node', 'comment', 'admin_views_test'));
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp(array $modules = array()) {
+    $modules[] = 'node';
+    $modules[] = 'comment';
+    $modules[] = 'admin_views_test';
+    parent::setUp($modules);
   }
 
   /**
    * Tests proper inheritance of router item properties.
    */
-  function testRouterItemInheritance() {
+  public function testRouterItemInheritance() {
     $this->drupalLogin($this->admin_user);
     $path = 'admin/people';
     $out = $this->drupalGet($path);
@@ -113,12 +146,20 @@ class AdminViewsSystemDisplayTestCase extends AdminViewsWebTestCase {
     $this->assertTitle('Administration views test | Drupal');
     $this->assertText('Administration views test page callback');
   }
+
 }
 
 /**
  * Tests default views.
  */
 class AdminViewsDefaultViewsTestCase extends AdminViewsWebTestCase {
+
+  /**
+   * Define this test class.
+   *
+   * @return array
+   *   The test's meta data.
+   */
   public static function getInfo() {
     return array(
       'name' => 'Default views',
@@ -127,14 +168,19 @@ class AdminViewsDefaultViewsTestCase extends AdminViewsWebTestCase {
     );
   }
 
-  function setUp() {
-    parent::setUp(array('node', 'comment'));
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp(array $modules = array()) {
+    $modules[] = 'node';
+    $modules[] = 'comment';
+    parent::setUp($modules);
   }
 
   /**
    * Tests basic appearance and behavior of built-in default views.
    */
-  function testComment() {
+  public function testComment() {
     $this->drupalLogin($this->admin_user);
 
     foreach (array('admin/content/comment', 'admin/content/comment/approval') as $path) {
@@ -153,6 +199,7 @@ class AdminViewsDefaultViewsTestCase extends AdminViewsWebTestCase {
       $this->assertFieldByXPath('//input[@type="submit"]', t('Reset'), 'Reset button found.');
     }
   }
+
 }
 
 /**
@@ -162,6 +209,13 @@ class AdminViewsDefaultViewsTestCase extends AdminViewsWebTestCase {
  * system view can otherwise inherit item properties they don't want.
  */
 class AdminViewsPageDisplayTestCase extends AdminViewsWebTestCase {
+
+  /**
+   * Define this test class.
+   *
+   * @return array
+   *   The test's meta data.
+   */
   public static function getInfo() {
     return array(
       'name' => 'Views Page display plugin',
@@ -170,8 +224,12 @@ class AdminViewsPageDisplayTestCase extends AdminViewsWebTestCase {
     );
   }
 
-  function setUp() {
-    parent::setUp(array('node'));
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp(array $modules = array()) {
+    $modules[] = 'node';
+    parent::setUp($modules);
 
     // Save the test page view.
     $this->normalPageView()->save();
@@ -187,7 +245,7 @@ class AdminViewsPageDisplayTestCase extends AdminViewsWebTestCase {
   /**
    * Tests creation of a view page display that is a child of "admin/content".
    */
-  function testAddPageViewAdminContent() {
+  public function testAddPageViewAdminContent() {
     $this->drupalLogin($this->admin_user);
 
     // Test the child view exists by checking for the page title.
@@ -249,6 +307,7 @@ class AdminViewsPageDisplayTestCase extends AdminViewsWebTestCase {
 
     return $view;
   }
+
 }
 
 /**
@@ -256,6 +315,12 @@ class AdminViewsPageDisplayTestCase extends AdminViewsWebTestCase {
  */
 class AdminViewsAccessHandlerTestCase extends AdminViewsWebTestCase {
 
+  /**
+   * Define this test class.
+   *
+   * @return array
+   *   The test's meta data.
+   */
   public static function getInfo() {
     return array(
       'name' => 'Access handler',
@@ -264,14 +329,18 @@ class AdminViewsAccessHandlerTestCase extends AdminViewsWebTestCase {
     );
   }
 
-  function setUp() {
-    parent::setUp(array('node'));
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp(array $modules = array()) {
+    $modules[] = 'node';
+    parent::setUp($modules);
   }
 
   /**
    * Tests access handler via views/ajax.
    */
-  function testAjaxAccess() {
+  public function testAjaxAccess() {
     $params = array(
       'view_name' => 'admin_views_user',
       'view_display_id' => 'system_1',
@@ -297,4 +366,58 @@ class AdminViewsAccessHandlerTestCase extends AdminViewsWebTestCase {
     // rendered view.
     $this->assertTrue(empty($response_data[1]));
   }
+
+}
+
+/**
+ * Tests the bundled node admin page.
+ */
+class AdminViewsNodeAdminTestCase extends AdminViewsWebTestCase {
+
+  /**
+   * Define this test class.
+   *
+   * @return array
+   *   The test's meta data.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Node admin',
+      'description' => 'Tests the bundled node admin page.',
+      'group' => 'Administration views',
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp(array $modules = array()) {
+    $modules[] = 'node';
+    $modules[] = 'taxonomy';
+    parent::setUp($modules);
+
+    // Log in as user 1, so permissions won't matter.
+    $this->loginUser1();
+
+    // Create some sample content.
+    for ($x = 0; $x <= 50; $x++) {
+      $this->drupalCreateNode(array(
+        'type' => 'article',
+      ));
+    }
+  }
+
+  /**
+   * Tests the node admin page.
+   */
+  public function testAdminPage() {
+    $this->drupalGet('admin/content');
+    $this->assertResponse(200);
+    $this->assertRaw('view-admin-views-node');
+    $this->assertRaw('view-id-admin_views_node');
+    $this->assertRaw('view-display-id-system_1');
+    $this->assertRaw('admin-views-view');
+    $this->assertRaw('id="views-exposed-form-admin-views-node-system-1"');
+  }
+
 }

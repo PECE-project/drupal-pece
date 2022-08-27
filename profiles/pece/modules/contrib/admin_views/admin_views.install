@@ -2,17 +2,12 @@
 
 /**
  * @file
- * Administration views installation functions.
+ * Update scripts for Admin Views.
  */
 
 /**
- * Implementation of hook_install().
+ * Implementations of hook_update_N().
  */
-function admin_views_install() {
-  // We need to run after Views module's hook_menu_alter() to fix the router
-  // item properties of overridden pages.
-  db_query("UPDATE {system} SET weight = 12 WHERE name = 'admin_views'");
-}
 
 /**
  * Remove deprecated views_plugin_access_menu plugin.
@@ -36,3 +31,21 @@ function admin_views_update_7100() {
   }
 }
 
+/**
+ * Enable the new system display submodule.
+ */
+function admin_views_update_7101() {
+  if (module_enable(array('admin_views_system_display'))) {
+    return t('Enabled the new Admin Views System Display submodule.');
+  }
+  else {
+    throw new DrupalUpdateException('Unable to enable the new Admin Views System Display submodule.');
+  }
+}
+
+/**
+ * Reset this module's weight.
+ */
+function admin_views_update_7102() {
+  db_query("UPDATE {system} SET weight = 0 WHERE name = 'admin_views'");
+}
