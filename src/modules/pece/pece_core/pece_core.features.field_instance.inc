@@ -58,6 +58,12 @@ function pece_core_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -156,6 +162,12 @@ function pece_core_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'location_cck',
@@ -236,6 +248,12 @@ function pece_core_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'card_full_text' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -333,6 +351,12 @@ function pece_core_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'card_full_text' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
