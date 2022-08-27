@@ -1,0 +1,895 @@
+<?php
+
+/**
+ * @file
+ * Notify module sends e-mail digests of new content and comments.
+ *
+ * The Notify module allows users to subscribe to periodic e-mails which
+ * include all new or revised content and/or comments much like the daily news
+ * letters sent by some websites.  Even if this feature is not configured for
+ * normal site users, it can be a useful feature for an administrator of a site
+ * to monitor content submissions and comment posts.
+ */
+
+define('NOTIFY_NODE_TYPE', 'notify_node_type_');
+
+/**
+ * Implements hook_help().
+ */
+function notify_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#notify':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Notify module allows users to subscribe to periodic e-mails which notify about new or revised content and/or comments.  Even if this feature is not configured for normal site users, it can be a useful feature for an administrator of a site to monitor content submissions and comment posts.') . '</p>';
+
+       $output .= '<p>' . t('The administrator sets the frequency of the e-mails in the notify administration interface. They can also set how many e-mail failures should occur before notify stops sending notifications.  Note that cron must be enabled for notifications to be sent out. For more information, see the online documentation for the <a href="@notify">Notify module</a>.', array('@notify' => 'https://www.drupal.org/docs/7/modules/notify')) . '</p>';
+
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('Site monitoring;') . '</dt>';
+      $output .= '<dd>' . t('Lets the administrator monitor new content on a site without having to log on to the site to check. Useful if you are the administrator of a fairly static site that only rarely gets user generated content.') . '</dd>';
+      $output .= '<dt>' . t('Notification subscriptions:') . '</dt>';
+      $output .= '<dd>' . t('Lets users subscribe for email notifications about new content posted on the site. Subscriptions are per content type. When new contents are posted, notifications are sent to users subscring for notifications about content of that type.') . '</dd>';
+      if (function_exists('advanced_help_hint_docs')) {
+        $output .= '<p>' . advanced_help_hint_docs('notify', 'https://www.drupal.org/docs/7/modules/notify', TRUE) . '</p>';
+      }
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_cron().
+ *
+ */
+function notify_cron() {
+
+  $period = variable_get("notify_period", 86400);
+  if (-2 == $period) {
+    return;
+  }
+
+  if (-1 == $period) {
+    return; // Never notify.
+  }
+
+  $send_last = variable_get('notify_send_last', 0);
+  $cron_next = variable_get('notify_cron_next', 0);
+  $doitp = variable_get('notify_users', array());
+
+  if ($period >= 86400) {
+    if ($doitp || ($cron_next < REQUEST_TIME)) {
+      $doitp = TRUE;
+    }
+    else {
+      return;
+    }
+  }
+  $next = _notify_next_notificaton($send_last);
+
+  if ((REQUEST_TIME > $next) || $doitp) {
+    list($num_sent, $num_fail) = _notify_send();
+    $num_sent += variable_get('notify_num_sent', 0);
+    $num_fail += variable_get('notify_num_failed', 0);
+    variable_set('notify_num_sent', $num_sent);
+    variable_set('notify_num_failed', $num_fail);
+    $next = _notify_next_notificaton(REQUEST_TIME);
+    variable_set('notify_cron_next', $next);
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function notify_user_cancel($edit, $account, $method) {
+  global $user;
+  db_delete('notify')
+  ->condition('uid', $user->uid)
+  ->execute();
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function notify_form_user_register_form_alter(&$form, &$form_state, $form_id) {
+  $form += _notify_user_reg_fields();
+}
+
+/**
+ * Implements hook_user_insert().
+ *
+ * The notify_decision comes from the registration form, unless the
+ * user is imported, when there is no data from the form.
+ */
+function notify_user_insert(&$edit, $account, $category) {
+  if ((isset($edit['notify_decision']) && $edit['notify_decision'] == 1) ||
+    (!isset($edit['notify_decision']) && variable_get('notify_import', 0))) {
+    db_insert('notify')
+      ->fields(array(
+      'uid' => $account->uid,
+      'status' => 1,
+      'node' => variable_get('notify_def_node', 1),
+      'comment' => variable_get('notify_def_comment', 0),
+      'attempts' => 0,
+    ))
+      ->execute();
+    $edit['notify_decision'] = NULL;
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function notify_permission() {
+  return array(
+    'access notify' => array(
+      'title' => t('access notify'),
+      'description' => t('Allow user to setup and receive notifications when there is new content.  Enable this for the anonymous user role if you want notification enabled by default for new users.'),
+    ),
+    'administer notify' => array(
+      'title' => t('administer notify'),
+      'description' => t('Administer the notify module general settings, default settings and users'),
+    ),
+    'administer notify queue' => array(
+      'title' => t('administer notify queue'),
+      'description' => t('Administer the notify queue'),
+    ),
+    'administer notify skip flags' => array(
+      'title' => t('administer notify skip flags'),
+      'description' => t('Administer the notify skip flags'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function notify_menu() {
+  $items = array();
+  $items['admin/config/people/notify'] = array(
+    'title' => 'Notification settings',
+    'description' => 'Adjust settings for new content notifications sent by e-mail.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('notify_admin_settings'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer notify'),
+    'file' => 'notify.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/config/people/notify/settings'] = array(
+    'title' => 'Settings',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+  $items['admin/config/people/notify/queue'] = array(
+    'title' => 'Queue',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('notify_admin_queue'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer notify queue'),
+    'file' => 'notify.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+  );
+  $items['admin/config/people/notify/skip'] = array(
+    'title' => 'Skip flags',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('notify_admin_skip'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer notify skip flags'),
+    'file' => 'notify.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+  );
+  $items['admin/config/people/notify/defaults'] = array(
+    'title' => 'Defaults',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('notify_admin_defaults'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer notify'),
+    'file' => 'notify.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 3,
+  );
+  $items['admin/config/people/notify/users'] = array(
+    'title' => 'Users',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('notify_admin_users'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer notify'),
+    'file' => 'notify.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 4,
+  );
+  $items['user/%user/notify'] = array(
+    'title' => 'Notification settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('notify_user_settings_form', 1),
+    'access callback' => 'notify_user_access',
+    'access arguments' => array(1),
+    'file' => 'notify.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_mail().
+ */
+function notify_mail($key, &$message, $params) {
+  $username = format_username($params['user']);
+  $useruid = $params['user']->uid;
+  $sitename = variable_get('site_name', 'Drupal');
+  $upl = user_preferred_language($params['user']);
+
+  $message['headers']['MIME-Version'] = '1.0';
+  $message['headers']['Content-Type'] = 'text/plain;charset=utf-8';
+  $message['subject'] = t('New content notification for !username from !sitename', array(
+    '!username' => $username,
+    '!sitename' => $sitename,
+      ), array('langcode' => $upl->language));
+  $message['body'][] = t('Greetings !user, this is a notification about new content from !sitename.', array(
+    '!user' => $username,
+    '!sitename' => $sitename,
+  ), array('langcode' => $upl->language));
+  $fulltext = t('Click on the links below to see the whole node/comment.', array(), array('langcode' => $upl->language));
+  $message['body'][] = t('This e-mail only lists the titles.', array(), array('langcode' => $upl->language)) . ' ' . $fulltext;
+  $message['body'][] = $params['content'];
+  $message['body'][] = "-- \n" .
+    t('This is an automatic e-mail from !sitename.',
+      array('!sitename' => variable_get('site_name', 'Drupal')), array('langcode' => $upl->language)) . "\n" .
+    t('To stop receiving these e-mails, change your notification preferences at !notify-url', array(
+      '!notify-url' => url('user/' . $useruid . '/notify', array('absolute' => TRUE)),
+    ), array('langcode' => $upl->language));
+}
+
+
+/* Hooks for unpublished content handling. */
+
+/**
+ * Implementation of hook_node_insert().
+ *
+ * Add tracked newly created unpublished nodes to the unpublished queue.
+ */
+function notify_node_insert($node) {
+  if ($node->status == NODE_NOT_PUBLISHED) {
+    db_query('INSERT INTO {notify_unpublished_queue} (cid, nid) VALUES (:cid, :nid)', array(':cid' => 0, ':nid' => $node->nid));
+  }
+}
+
+/**
+ * Implementation of hook_comment_insert().
+ *
+ * Add tracked newly created unpublished comments to the unpublished queue.
+ */
+function notify_comment_insert($comment) {
+  if ($comment->status == COMMENT_NOT_PUBLISHED) {
+    db_query('INSERT INTO {notify_unpublished_queue} (cid, nid) VALUES (:cid, :nid)', array(':cid' => $comment->cid, ':nid' => $comment->nid));
+  }
+}
+
+/**
+ * Implementation of hook_node_delete().
+ *
+ * Delete any unpublished contents in the queue associated with the
+ * node being deleted.
+ */
+function notify_node_delete($node) {
+  db_query('DELETE FROM {notify_unpublished_queue} WHERE nid = :nid', array(':nid' => $node->nid));
+}
+
+/**
+ * Implementation of hook_comment_delete().
+ *
+ * Delete the unpublished comment in the queue when the
+ * comment itself is deleted.
+ */
+function notify_comment_delete($comment) {
+  db_query('DELETE FROM {notify_unpublished_queue} WHERE cid = :cid', array(':cid' => $comment->cid));
+}
+
+
+/**
+ * Implements hook_theme
+ *
+ * Register the form data theme into a table at admin/user/user/notify.
+ *
+ * @return array
+ *   form data theme.
+ */
+function notify_theme() {
+  return array(
+    'notify_admin_users' => array(
+      'render element' => 'form',
+    ),
+    'notify_admin_skip' => array(
+      'render element' => 'form',
+    ),
+  );
+}
+
+// Helper functions
+
+function _notify_cron_next($next_time_to_send) {
+  $send_hour  = variable_get('notify_send_hour',  9);
+  // Compute the next as the sending hour today.
+  $cron_next = strtotime(date('Y-m-d ', $next_time_to_send) . $send_hour . ':00:00');
+  return $cron_next;
+}
+
+/**
+ * Compute the next time a notification shall be sent by adding to
+ * $send_last if required.  Update $cron_next if it is has been reset
+ * (= 0), otherwise leave it to caller.
+ * 
+ * @param int $send_last
+ *   timestamp of last notification
+ *
+ * @return int
+ *   -1 never, 0 send instantly, else next time to notify.
+ */
+function _notify_next_notificaton($send_last) {
+  $period = variable_get('notify_period', 86400);
+  // Two special cases: Never and instantly.
+  if ($period < 0) {
+    return(-1);
+  }
+  elseif (!$period) {
+    return(0);
+  }
+  $next_time_to_send = $send_last + $period;
+  if ($period < 86400) {
+    if (REQUEST_TIME >= $next_time_to_send) {
+      return(0);
+    }
+    else {
+      return($next_time_to_send);
+    }
+  }
+
+  // Interval >= 1 day.
+
+  $cron_next = variable_get('notify_cron_next', 0);
+  if (!$cron_next) {
+    $cron_next = _notify_cron_next($next_time_to_send);
+    variable_set('notify_cron_next', $cron_next);
+  }
+  return($cron_next);
+}
+
+/**
+ * Returns form fields to be added to User Regsitration form.
+ */
+function _notify_user_reg_fields() {
+  if (!user_access('access notify')) {
+    return array();
+  }
+
+  // Get the variable for how often the notifications are sent out.
+  $period = variable_get("notify_period", 86400);
+
+  // Add a fieldset containing a checkbox for users to accept
+  // getting updates on the registration form.
+  $fields['notify_agree'] = array(
+    '#weight' => variable_get('notify_weightur', 0),
+    '#type' => 'fieldset',
+    '#title' => t('E-mail Notifications'),
+  );
+
+  // Add the checkbox to the fieldset.
+  $fields['notify_agree']['notify_decision'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Receive e-mail notifications of new content posted to this site. Notifications are sent every @interval.', array('@interval' => format_interval($period))),
+    '#return_value' => 1,
+    '#default_value' => variable_get('notify_reg_default', 1),
+  );
+
+  return $fields;
+}
+
+
+/**
+ * Checks access to notifications settings tab.
+ *
+ * Do not start callback function with an underscore.
+ */
+function notify_user_access($account = NULL) {
+  return $account->uid &&
+    (
+      // Always let users view their own profile.
+      ($GLOBALS['user']->uid == $account->uid && user_access('access notify'))  ||
+      // Administrators can view all accounts.
+      user_access('administer notify')
+    );
+}
+
+
+/**
+ * Helper function to check whether user has custom subscriptions.
+ */
+function _notify_user_has_subscriptions($uid) {
+  $field = db_query('SELECT uid FROM {notify_subscriptions} WHERE uid = :uid', array(':uid' => $uid))->fetchObject();
+  $subscriber = $field ? TRUE : FALSE;
+  return $subscriber;
+}
+
+/**
+ * Helper function to get array of tracked types.
+ *
+ * @param array $ntype
+ *   Reference to array with tracked types.
+ *
+ * @param bool $foop
+ *   TRUE if we return full list if empty,
+ *
+ */
+function _notify_get_content_types(&$ntype, $foop) {
+  $ntype = array();
+  foreach (node_type_get_types() as $type => $name) {
+    if (variable_get(NOTIFY_NODE_TYPE . $type, 0)) {
+      $ntype[] = $type;
+    }
+  }
+  if ($foop && count($ntype) < 1) {
+    foreach (node_type_get_types() as $type => $name) {
+      $ntype[] = $type;
+    }
+  }
+}
+
+/**
+ * Count the carious types of content.
+ */
+function _notify_count() {
+  $np = $cp = $nn = $cn = $bu = $cu = 0; // Just in case.
+  list ($res_nodes, $res_comms, $res_nopub, $res_copub, $res_nounp, $res_counp) = _notify_select_content();
+  if ($res_nodes) $np = $res_nodes->rowCount();
+  if ($res_comms) $cp = $res_comms->rowCount();
+  if ($res_nopub) $nn = $res_nopub->rowCount();
+  if ($res_copub) $cn = $res_copub->rowCount();
+  if ($res_nounp) $nu = $res_nounp->rowCount();
+  if ($res_counp) $cu = $res_counp->rowCount();
+  return array($np, $cp, $nn, $cn, $nu, $cu);
+}
+
+/**
+ * Helper function to set up query objects to select content for
+ * counting and sending.
+ *
+ * Return array has six values:
+ * - ordinary published entities: nodes, comments;
+ * - in unpublished queue:
+ *     published nodes, published comments,
+ *     unpublished nodes, unpublished comments,
+ *
+ * @return array
+ *   res_nodes, res_comms, res_nopub, res_copub, res_nounp, res_counp
+ */
+function _notify_select_content() {
+  $batch_remain = count(variable_get('notify_users', array()));
+  $since = variable_get('notify_send_last', 0);
+  if ($batch_remain) {
+    $send_start = variable_get('notify_send_start', 0);
+  }
+  else {
+    $send_start = REQUEST_TIME;
+  }
+  if (!$since) {
+    $period = variable_get('notify_period', 86400);
+    if ($period > 0) {
+      $since = $send_start - $period;
+    }
+  }
+
+  $all = node_type_get_types();
+  $ntype = array();
+  foreach ($all as $obj) {
+    $ntype[] = $obj->type;
+  }
+
+  // Build query object to fetch new nodes.
+  $q = db_select('node', 'n');
+  $q->fields('n', array('nid'));
+  if (count($ntype) >= 1) {
+    $q->condition('n.type', $ntype, 'IN');
+  }
+  if (variable_get('notify_include_updates', 0)) {
+    $q->condition(db_or()->condition(db_and()->condition('n.created', $since, '>')->condition('n.created', $send_start, '<='))
+                         ->condition(db_and()->condition('n.changed', $since, '>')->condition('n.changed', $send_start, '<=')));
+  }
+  else {
+    $q->condition('n.created', $since, '>');
+    $q->condition('n.created', $send_start, '<=');
+  }
+  $q->orderBy('n.created', 'asc');
+  $res_nodes = $q->execute();
+
+  // Get published nodes in unpublished queue
+  $res_nopub = db_query('SELECT q.nid
+    FROM {notify_unpublished_queue} q
+    INNER JOIN {node} n
+    ON q.nid = n.nid
+    WHERE q.cid = :cid AND n.status = :status
+    ORDER BY q.nid asc',
+    array(':cid' => 0, ':status' => NODE_PUBLISHED));
+
+  // Get unpublished nodes in unpublished queue
+  $res_nounp = db_query('SELECT q.nid
+    FROM {notify_unpublished_queue} q
+    INNER JOIN {node} n
+    ON q.nid = n.nid
+    WHERE q.cid = :cid AND n.status = :status
+    ORDER BY q.nid asc',
+    array(':cid' => 0, ':status' => NODE_NOT_PUBLISHED));
+
+  if (module_exists('comment')) {
+    // Fetch new published comments.
+    $q = db_select('comment', 'c');
+    $q->join('node', 'n', 'c.nid = n.nid');
+    $q->fields('c', array('cid'));
+    if (count($ntype) >= 1) {
+      $q->condition('n.type', $ntype, 'IN');
+    }
+    if (variable_get('notify_include_updates', 0)) {
+      $q->condition(db_or()->condition(db_and()->condition('c.created', $since, '>')->condition('c.created', $send_start, '<='))
+                           ->condition(db_and()->condition('c.changed', $since, '>')->condition('c.changed', $send_start, '<=')));
+    }
+    else {
+      $q->condition('c.created', $since, '>');
+      $q->condition('c.created', $send_start, '<=');
+    }
+    $q->orderBy('c.created', 'asc');
+    $res_comms = $q->execute();
+
+
+    // Get published comments in unpublished queue
+    $res_copub = db_query('SELECT q.nid, q.cid
+      FROM {notify_unpublished_queue} q
+      INNER JOIN {comment} c
+      ON q.cid = c.cid
+      WHERE c.status = :status
+      ORDER BY q.cid asc',
+      array(':status' => COMMENT_PUBLISHED));
+
+    // Get unpublished comments in unpublished queue
+    $res_counp = db_query('SELECT q.nid, q.cid
+      FROM {notify_unpublished_queue} q
+      INNER JOIN {comment} c
+      ON q.cid = c.cid
+      WHERE c.status = :status
+      ORDER BY q.cid asc',
+      array(':status' => COMMENT_NOT_PUBLISHED));
+  }
+  else {
+    $res_comms = $res_copub = $res_counp = NULL;
+  }
+
+  return array($res_nodes, $res_comms, $res_nopub, $res_copub, $res_nounp, $res_counp);
+}
+
+/**
+ * Helper function to send the notification e-mail batch.
+ */
+function _notify_send() {
+  global $user;
+
+  $separator = "------------------------------------------------------------------------------\n";
+  $mini_separator = "----\n";
+
+  $send_start = variable_get('notify_send_start', 0);
+  $num_sent = 0;
+  $num_fail = 0;
+  list ($res_nodes, $res_comms, $res_nopub, $res_copub, $res_nounp, $res_counp) = _notify_select_content();
+
+  _notify_get_content_types($defaultlist, TRUE);
+
+  // Get the nodes and comments queued.
+  $count = 0;
+  $nodes = $comments = array();
+  // Ordinary nodes
+  foreach ($res_nodes as $row) {
+    $nodes[$row->nid] = node_load($row->nid);
+    $count++;
+  }
+  // Ordinary comments
+  if ($res_comms) {
+    foreach ($res_nopub as $row) {
+      if (!isset($nodes[$row->nid])) {
+        $nodes[$row->nid] = node_load($row->nid);
+        $count++;
+      }
+    }
+    foreach ($res_comms as $row) {
+      $comment = comment_load($row->cid);
+      $comments[$comment->nid][$row->cid] = $comment;
+      $count++;
+    }
+    foreach ($res_copub as $row) {
+      if (!isset($comments[$row->nid][$row->cid])) {
+        $comments[$row->nid][$row->cid] = comment_load($row->cid);
+        $count++;
+      }
+    }
+  }
+  // Published nodes in unpublished queue
+  foreach ($res_nopub as $row) {
+    if (!isset($nodes[$row->nid])) {
+      $nodes[$row->nid] = node_load($row->nid);
+      $count++;
+    }
+  }
+  // Unpublished nodes in unpublished queue
+  foreach ($res_nounp as $row) {
+    if (!isset($nodes[$row->nid])) {
+      $nodes[$row->nid] = node_load($row->nid);
+      $count++;
+    }
+  }
+
+  if ($count) {
+    $uresult = variable_get('notify_users', array());
+    if (empty($uresult)) {
+      // Set up for sending a new batch. Init all variables.
+      $sql = 'SELECT u.uid, u.name, u.mail, u.language, n.status, n.node, n.comment
+        FROM {notify} n
+        INNER JOIN {users} u
+        ON n.uid = u.uid
+        WHERE (n.status = :nstatus) AND (u.status = :ustatus) AND (n.attempts <= :attempts)
+        ORDER BY u.uid asc';
+      $uresult = db_query($sql, array(':nstatus' => 1, 'ustatus' => 1, ':attempts' => 5))->fetchAll(PDO::FETCH_ASSOC);
+      variable_set('notify_send_start', REQUEST_TIME);
+      variable_set('notify_users', $uresult);
+      variable_set('notify_num_sent', 0);
+      variable_set('notify_num_failed', 0);
+    }
+
+    $batchlimit = variable_get('notify_batchsize', 100);
+    $batchcount = 0;
+
+    //$s1 = t('Never', array(), array('langcode' => 'nb'));
+
+    // Allow to safely impersonate the recipient so that the node is rendered
+    // with correct field permissions.
+    $original_user = $user;
+    $old_state = drupal_save_session();
+    drupal_save_session(FALSE);
+
+    $notify_skip_nodes = variable_get('notify_skip_nodes', array());
+    $notify_skip_comments = variable_get('notify_skip_comments', array());
+
+    foreach ($uresult as $index => $userrow) {
+      if (++$batchcount > $batchlimit) {
+        break;
+      }
+      $userobj = user_load($userrow['uid']);
+
+      // Intentionally replacing the Global $user.
+      $user = $userobj;
+      $upl = user_preferred_language($user);
+
+      $node_body = $comment_body = '';
+
+      // Consider new node content if user has permissions and nodes are ready.
+      // $userrow['node']: user subscribes to nodes.
+      // user_access('access content', $userobj): user allowed to view published
+      // count($nodes): nodes are queued
+      if ($userrow['node'] && user_access('access content', $userobj) && count($nodes)) {
+
+        $node_count = 0;
+        // Look at the node
+        foreach ($nodes as $node) {
+          // Skip to next if skip flag set for node.
+          if (in_array($node->nid, $notify_skip_nodes)){
+	    continue;
+	  }
+          // Skip to next if user is not allowed to view this node.
+          if (!user_access('administer nodes', $userobj) && NODE_NOT_PUBLISHED == $node->status) {
+            continue;
+          }
+	  if (!user_access('administer nodes', $userobj) && !in_array($node->type, $defaultlist)) {
+            continue;
+          }
+	  if (!variable_get('notify_unpublished', 1) && NODE_NOT_PUBLISHED == $node->status) {
+            continue;
+          }
+          if (!node_access('view', $node, $userobj)) {
+            continue;
+          }
+
+	  if (_notify_user_has_subscriptions($userrow['uid'])) {
+	    // Custom subscriptions exists, use those.
+	    $field = db_query('SELECT uid FROM {notify_subscriptions} WHERE (uid = :uid) AND (type = :type)', array(':uid' => $userrow['uid'], ':type' => $node->type))->fetchObject();
+	    $default = $field ? TRUE : FALSE;
+	    if (!$default) {
+              continue;
+	    }
+          }
+
+          $ml_level = variable_get('notify_multilingual', 1);
+          if (!user_access('administer notify')) {
+            if ($ml_level && $node->tnid) {
+	      if ($node->language != $upl->language) {
+	        continue;
+              }
+	    }
+	    if ((2 == $ml_level) && (0 == $node->tnid) && (LANGUAGE_NONE != $node->language)) {
+	      continue;
+            }
+	    $ignore_unverified = variable_get('notify_unverified', 0);
+  	    if ($ignore_unverified && !$node->uid) {
+	      continue;
+ 	    }
+	  }
+          
+
+          $node_revs_list = node_revision_list($node);
+          $nrl_vals = array_values($node_revs_list);
+          $vers = array_shift($nrl_vals);
+
+          if ($node_count > 0) {
+            $node_body .= $mini_separator;
+          }
+          $node_body .= ++$node_count . '. ' . $node->title . '. ';
+          if (count($node_revs_list) > 1) {
+            $update = '(' . t('last updated by !author', array(
+              '!author' => (format_username($vers) ? format_username($vers) : variable_get('anonymous', 'Anonymous')),
+            ), array('langcode' => $upl->language)) . ') ';
+          }
+          else {
+            $update = '';
+          }
+          if (user_access('administer nodes', $userobj)) {
+            $status = $node->status == NODE_PUBLISHED ? t('[Published]', array(), array('langcode' => $upl->language)) : t('[Unpublished]', array(), array('langcode' => $upl->language));
+          }
+          else {
+            $status = '';
+          }
+          $node_body .= t('!type by !author !update!status', array(
+            '!type' => node_type_get_name($node),
+            '!author' => (format_username($node) ? format_username($node) : variable_get('anonymous', 'Anonymous')),
+            '!update' => $update,
+            '!status' => $status,
+          ), array('langcode' => $upl->language)) . "\n";
+
+	  $alias = drupal_multilingual() ? TRUE : FALSE;
+	  $node_body .= '   [ ' . url('node/' . $node->nid, array(
+            'absolute' => TRUE,
+            'alias' => $alias,
+	    'language' => (object)array('language' => FALSE),
+          )) . " ]\n"; 
+
+        }
+
+        // Prepend node e-mail header as long as user could access at
+        // least one node.
+        if ($node_count > 0) {
+          $node_body = $separator . t('Recent nodes - !count', array(
+            '!count' => format_plural($node_count, '1 new post', '@count new posts', array(), array('langcode' => $upl->language)),
+          ), array('langcode' => $upl->language)) . "\n" . $separator . $node_body;
+        }
+      }
+      // Consider new comments if user has permissions and comments are ready.
+      // $userrow['comment']: user subscribes to nodes.
+      // user_access('access comments', $userobj): user allowed to view published
+      // count($comments): comments are queued
+      if ($userrow['comment'] && user_access('access comments', $userobj) && count($comments)) {
+        $total_comment_count = 0;
+        // Look at the comment
+        foreach ($comments as $nid => $value) {
+          // If we don't already have the node, fetch it.
+          if (isset($nodes[$nid])) {
+            $node = $nodes[$nid];
+          }
+          else {
+            $node = node_load($nid);
+          }
+          if (!node_access('view', $node, $userobj)) {
+            continue;
+          }
+
+          $comment_count = 0;
+	  $onecomment = '';
+          // Look at the comment
+          foreach ($value as $commobj) {
+            if (in_array($commobj->cid, $notify_skip_comments)){
+	      continue;
+	    }
+	    if (!user_access('administer comments', $userobj) && COMMENT_NOT_PUBLISHED == $commobj->status) {
+              continue;
+            }
+  	    if (!user_access('administer comments', $userobj) && !in_array($node->type, $defaultlist)) {
+              continue;
+            }
+            if (!variable_get('notify_unpublished', 1) && COMMENT_NOT_PUBLISHED == $commobj->status) {
+              continue;
+            }
+            // Determine whether to show comment status.
+            if (user_access('administer comments', $userobj)) {
+              $status = $commobj->status == COMMENT_PUBLISHED ? t('[Published]', array(), array('langcode' => $upl->language)) : t('[Unpublished]', array(), array('langcode' => $upl->language));
+            }
+            else {
+              $status = '';
+            }
+            $onecomment .= '   ' . ++$comment_count . '. ' . t('!title by !author !status', array(
+              '!title' => $commobj->subject,
+              '!author' => (format_username($commobj) ? format_username($commobj) : variable_get('anonymous', 'Anonymous')),
+              '!status' => $status,
+            ), array('langcode' => $upl->language)) . "\n"
+              . '      [ ' . url('node/' . $nid, array('fragment' => 'comment-' . $commobj->cid, 'absolute' => TRUE)) . " ]\n\n";
+
+            $total_comment_count++;
+          }
+
+	  if ($comment_count) {
+            if ($comment_body) {
+              $comment_body .= $mini_separator;
+            }
+            $comment_body .= t('!count attached to !type posted by !author: !title', array(
+              '!count' => format_plural($comment_count, '1 new comment', '@count new comments'),
+              '!title' => $node->title,
+              '!type'  => node_type_get_name($node),
+              '!author' => format_username($node) ? format_username($node) : variable_get('anonymous', 'Anonymous'),
+            ), array('langcode' => $upl->language)) . "\n\n" . $onecomment;
+          }
+        }
+
+        if ($total_comment_count > 0) {
+          $comment_body = $separator . t('Recent comments - !count', array(
+            '!count' => format_plural($total_comment_count, '1 new comment', '@count new comments'),
+          ), array('langcode' => $upl->language)) . "\n" . $separator . $comment_body;
+        }
+      }
+
+      $body = $node_body . $comment_body;
+
+      //if (variable_get('notify_unpublished', 1)) {}
+
+      // If there was anything new, send mail.
+      if ($body) {
+        $watchdog_level = variable_get('notify_watchdog', 0);
+        if (drupal_mail('notify', 'send', $userrow['mail'], user_preferred_language($userrow), array('content' => $body, 'user' => $userobj))) {
+          if ($watchdog_level == 0) {
+            watchdog('notify', 'User %name (%mail) notified successfully.', array('%name' => $userrow['name'], '%mail' => $userrow['mail']), WATCHDOG_INFO);
+          }
+	  $num_sent++;
+        }
+        else {
+          $num_fail++;
+          db_update('notify')
+          ->expression('attempts', 'attempts + 1')
+          ->condition('uid', $userrow['uid'])
+          ->execute();
+          if ($watchdog_level <= 2) {
+            watchdog('notify', 'User %name (%mail) could not be notified. Mail error.', array('%name' => $userrow['name'], '%mail' => $userrow['mail']), WATCHDOG_ERROR);
+          }
+        }
+      }
+      unset($uresult[$index]);
+      variable_set('notify_users', $uresult);
+    }
+    // Restore the original user session.
+    $user = $original_user;
+    drupal_save_session($old_state);
+  }
+  else {
+    variable_del('notify_users');
+  }
+  $rest = count(variable_get('notify_users', array()));
+  // If $rest is empty, then set notify_send_last.
+  if (!$rest) {
+    $send_start = variable_get('notify_send_start', 0);	
+    variable_set('notify_send_last', $send_start);
+    variable_set('notify_cron_next', 0); // Force reset
+    list ($res_nodes, $res_comms, $res_nopub, $res_copub, $res_nounp, $res_counp) = _notify_select_content();
+    foreach ($res_nopub as $row) {
+      db_query('DELETE FROM {notify_unpublished_queue} WHERE cid = :cid AND nid = :nid', array(':cid' => 0, ':nid' => $row->nid));
+    }
+    if ($res_copub) {
+      foreach ($res_copub as $row) {
+        db_query('DELETE FROM {notify_unpublished_queue} WHERE cid = :cid AND nid = :nid', array(':cid' => $row->cid, ':nid' => $row->nid));
+      }
+    }
+  }
+  return array($num_sent, $num_fail);
+}
