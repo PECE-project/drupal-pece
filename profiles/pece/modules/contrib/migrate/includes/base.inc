@@ -736,7 +736,7 @@ abstract class MigrationBase {
    *   An array that points to the active symbol table at the point the error
    *   occurred.
    */
-  public function errorHandler($error_level, $message, $filename, $line, $context) {
+  public function errorHandler($error_level, $message, $filename, $line, $context = array()) {
     if ($error_level & error_reporting()) {
       $message .= "\n" . t('File !file, line !line',
           array('!line' => $line, '!file' => $filename));
