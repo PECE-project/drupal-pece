@@ -110,7 +110,7 @@ function legacy__gmap_base_js() {
     'v' => variable_get('gmap_api_version', GMAP_API_VERSION),
     'language' => $langcode,
     'sensor' => 'false',
-    'libraries' => implode(array_merge(variable_get('gmap_api_libraries', array()), legacy_gmap_module_invoke('libraries', $m)), ','),
+    'libraries' => implode(',', array_merge(variable_get('gmap_api_libraries', array()), legacy_gmap_module_invoke('libraries', $m))),
   );
   if ($key = legacy_gmap_get_key()) {
     $query['key'] = $key;

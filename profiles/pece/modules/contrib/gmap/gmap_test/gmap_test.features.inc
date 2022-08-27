@@ -20,7 +20,7 @@ function gmap_test_node_info() {
       'name' => t('GMapPerson'),
       'base' => 'node_content',
       'description' => t('Defines a \'person\', which has a refernce to a GMapLocation.
-Thi si sused to thest the Gmap via referenced entities'),
+This is used to test the Gmap via referenced entities'),
       'has_title' => '1',
       'title_label' => t('Person name'),
       'help' => '',
@@ -28,7 +28,7 @@ Thi si sused to thest the Gmap via referenced entities'),
     'gmapplace' => array(
       'name' => t('GmapPlace'),
       'base' => 'node_content',
-      'description' => t('A node type that contains locations, in 3 different field types: 
+      'description' => t('A node type that contains locations, in 3 different field types:
 - location
 - geofield
 - normal fields'),
