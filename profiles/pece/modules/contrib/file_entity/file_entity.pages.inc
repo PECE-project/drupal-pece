@@ -36,9 +36,22 @@ function file_entity_download_page($file) {
     return MENU_NOT_FOUND;
   }
   // @todo Why basename? Why not drupal_basename which was working up until recently.
+  $content_type = '';
+  if (isset($file->filemime)) {
+    $content_type = mime_header_encode($file->filemime);
+    // Strip new lines for php 8.0 compatibility with headers.
+    $content_type = str_replace(array("\n\r", "\n", "\r"), '', $content_type);
+  }
+  $disposition = '';
+  if (isset($file->uri)) {
+    $disposition = mime_header_encode(basename($file->uri));
+    // Strip new lines for php 8.0 compatibility with headers.
+    $disposition = str_replace(array("\n\r", "\n", "\r"), '', $disposition);
+  }
+
   $headers = array(
-    'Content-Type' => mime_header_encode($file->filemime),
-    'Content-Disposition' => 'attachment; filename="' . mime_header_encode(basename($file->uri)) . '"',
+    'Content-Type' => $content_type,
+    'Content-Disposition' => 'attachment; filename="' . $disposition . '"',
     'Content-Length' => $file->filesize,
     'Content-Transfer-Encoding' => 'binary',
     'Pragma' => 'no-cache',
@@ -136,8 +149,13 @@ function file_entity_add_upload_step_upload($form, &$form_state, array $options 
 
   $form['upload']['#description'] = t('Files must be less than !size.', array('!size' => '<strong>' . format_size($form['upload']['#upload_validators']['file_entity_validate_size_extensions'][0]) . '</strong>'));
 
+  $file_entity_max_filesize = variable_get('file_entity_max_filesize_extensions');
+  if (is_null($file_entity_max_filesize)) {
+    // PHP 8.1 does not accept NULL for a second param in explode().
+    $file_entity_max_filesize = '';
+  }
   // Get list of extensions.
-  $extensions = explode("\n", variable_get('file_entity_max_filesize_extensions'));
+  $extensions = explode("\n", $file_entity_max_filesize);
 
   if (!empty($extensions)) {
     $limits = array();
@@ -214,7 +232,12 @@ function file_entity_validate_size_extensions(stdClass $file, $file_limit = 0, $
   $current_extension = pathinfo($file->filename, PATHINFO_EXTENSION);
 
   // Get list of extensions.
-  $extensions = explode("\n", variable_get('file_entity_max_filesize_extensions'));
+  $file_entity_max_filesize = variable_get('file_entity_max_filesize_extensions');
+  if (is_null($file_entity_max_filesize)) {
+    // PHP 8.1 does not accept NULL for a second param in explode().
+    $file_entity_max_filesize = '';
+  }
+  $extensions = explode("\n", $file_entity_max_filesize);
 
   if ($extensions) {
     foreach ($extensions as $position => $text) {
@@ -371,7 +394,7 @@ function file_entity_usage_page($file) {
 
   // Determine all of the locations where a file is used, then loop through the
   // occurrences and filter out any duplicates.
-  foreach (file_usage_list($file) as $type) {
+  foreach (file_usage_list($file) as $module => $type) {
     foreach ($type as $entity_type => $entity_ids) {
       // There are cases where the actual entity doesn't exist.
       // We have to handle this.
@@ -421,6 +444,11 @@ function file_entity_usage_page($file) {
               }
             }
           }
+        }
+        // For file_lock module, display relevant usage information.
+        elseif ($module == 'file_lock') {
+          $entity_label = t('File lock');
+          $entity_id = '--';
         }
         else {
           $entity_label = check_plain($label);
