@@ -147,7 +147,7 @@ function panopoly_magic_theme($existing, $type, $theme, $path) {
  * Implements hook_menu_alter().
  */
 function panopoly_magic_menu_alter(&$items) {
-  // Include entity_field.inc from ctools to ensure that files can be properly removed 
+  // Include entity_field.inc from ctools to ensure that files can be properly removed
   // from within the panelizer edit forms.
   $items['file/ajax']['file'] = 'entity_field.inc';
   $items['file/ajax']['file path'] = drupal_get_path('module', 'ctools') . '/plugins/content_types/entity_context';
@@ -300,11 +300,6 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
     // Do some special processing for stylizer settings forms to ensure previews work correctly.
     if ($form_id == 'panels_edit_style_settings_form') {
-
-      if (!empty($form_state['style']) && is_array($form_state['style'])) {
-        $form_state['style'] = $form_state['style']['name'];
-      }
-
       if (!empty($form_state['values']['settings'])) {
         $form_state['conf'] = $form_state['values']['settings'];
       }
@@ -325,7 +320,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       $style = ($form_state['rebuild'] && $form_id == 'panels_edit_style_type_form') ? panels_get_style($form_state['input']['style']) : panels_get_style($form_state['style']);
     }
     elseif ($form_id == 'panels_edit_style_settings_form') {
-      $style = panels_get_style($form_state['style']);
+      $style = is_array($form_state['style']) ? $form_state['style'] : panels_get_style($form_state['style']);
     }
     else {
       $style = NULL;
@@ -359,7 +354,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
         else {
           $form_state['values'] = $default_values;
         }
-        
+
         //
         // This code is copied from fieldable_panels_panes_entity_edit_form_submit():
         //
@@ -443,7 +438,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     else {
       $configuration = $form_state['input'];
     }
-   
+
     $keywords = array();
     $args = array();
     if (!empty($form_state['contexts'])) {
@@ -455,7 +450,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     else {
       $context = array();
     }
-   
+
     // Special case for panelizer fields being edited through the IPE. For some reason images are not being fully loaded
     if (!empty($pane->configuration['formatter']) && $pane->configuration['formatter'] == 'image') {
       list($entity_type, $field_name) = explode(':', $pane->subtype);
@@ -530,7 +525,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     // Convert any other #ajax enabled buttons to use system/panopoly-magic.
     _panopoly_magic_add_path_to_ajax($form);
   }
-  
+
   /**
    * Globally improve the buttons for the Chaos Tools Content Type Settings Forms
    */
@@ -564,7 +559,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
   drupal_alter('panopoly_magic_forms_to_improve', $forms_to_improve);
 
   if (in_array($form_id, $forms_to_improve)) {
-  
+
     // Grab child elements and create the fieldset.
     $children = element_children($form);
     if (count($children) > 1) {
@@ -588,7 +583,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       }
 
       // Don't show the context when it is the only one
-      if (!empty($form['general_settings']['context']) && count($form['general_settings']['context']['#options']) == 1) { 
+      if (!empty($form['general_settings']['context']) && count($form['general_settings']['context']['#options']) == 1) {
         $form['general_settings']['context']['#type'] = 'value';
         $form['general_settings']['context']['#value'] = $form['general_settings']['context']['#default_value'];
       }
@@ -835,7 +830,7 @@ function panopoly_magic_autosubmit_configure(&$element) {
   }
 
   $children = element_children($element);
-  
+
   if (!empty($children) && is_array($children)) {
     foreach ($children as $child) {
       panopoly_magic_autosubmit_configure($element[$child]);
@@ -843,16 +838,16 @@ function panopoly_magic_autosubmit_configure(&$element) {
   }
 }
 
-/** 
+/**
  * Implementation of hook_form_FORM_ID_alter()
  */
 function panopoly_magic_form_fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form_alter(&$form, &$form_state, $form_id) {
 
-  // Setup the live preview 
+  // Setup the live preview
   if (variable_get('panopoly_magic_live_preview', 1)) {
     panopoly_magic_autosubmit_configure($form);
 
-    // Special case exclusions for tablefield specific elements. 
+    // Special case exclusions for tablefield specific elements.
     if ($form_state['entity']->bundle == 'table') {
       $form['field_basic_table_table'][LANGUAGE_NONE][0]['tablefield']['rebuild']['count_cols']['#attributes']['class'] = array('ctools-auto-submit-exclude');
       $form['field_basic_table_table'][LANGUAGE_NONE][0]['tablefield']['rebuild']['count_rows']['#attributes']['class'] = array('ctools-auto-submit-exclude');
@@ -877,7 +872,7 @@ function panopoly_magic_form_fieldable_panels_panes_fieldable_panels_pane_conten
   if (!empty($form['widget_settings']['title'])) {
     $form['widget_settings']['title']['#size'] = '';
   }
-  
+
   // Improving the link Options
   if (!empty($form['widget_settings']['link'])) {
     $form['widget_settings']['link']['path']['#size'] = '';
@@ -886,7 +881,7 @@ function panopoly_magic_form_fieldable_panels_panes_fieldable_panels_pane_conten
     $form['widget_settings']['link']['path']['#description'] = t('The URL or Drupal path from which to build the link.');
     $form['widget_settings']['link']['link']['#description'] = '';
   }
-  
+
   // Move the reusable option to the general settings
   if (!empty($form['reusable'])) {
     $form['reusable']['#type'] = '';
@@ -920,7 +915,7 @@ function _panopoly_magic_visible_element_children($element) {
   return $children;
 }
 
-/** 
+/**
  * Implementation of hook_form_FORM_ID_alter()
  *
  * Provides customizations to the views content type settings form
@@ -929,7 +924,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
 
   // Get the configuration
   $conf = $form_state['conf'];
-  
+
   // Add a widget title setting if views allows this to be customized
   if (!empty($form['override_title'])) {
     $form['override_title_markup']['#access'] = FALSE;
@@ -959,8 +954,8 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     $form['exposed']['link_to_view'] = $form['link_to_view'];
     $form['exposed']['link_to_view']['#parents'] = array('link_to_view');
     unset($form['link_to_view']);
-  } 
-  
+  }
+
   // Add an option to make the more link available if views allows this to happen
   if (!empty($form['more_link'])) {
     $form['more_link']['#id'] = 'more-link';
@@ -992,7 +987,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     unset($form['use_pager']);
     unset($form['pager_id']);
   }
-  
+
   // Handle the path value that views gives us
   if (!empty($form['path'])) {
     $form['path']['#description'] = t('The URL path used for linking and paging purposes. Leave blank to use the current page.');
@@ -1002,7 +997,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     $form['exposed']['path']['#parents'] = array('path');
     unset($form['path']);
   }
-  
+
   // Adjust the items per page and offset settings
   if (!empty($form['items_per_page']) && !empty($form['offset'])) {
     $form['items_per_page']['#field_prefix'] = t('Items to Show');
@@ -1036,7 +1031,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     $form['display_settings']['offset'] = $form['offset'];
     unset($form['offset']);
   }
-  
+
   // Adjust the sort ordering and sort by options
   if (!empty($form['exposed']['sort_order']) && !empty($form['exposed']['sort_by'])) {
     $form['exposed']['sort_order']['#title'] = t('Sort order');
@@ -1212,7 +1207,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     $form['content_settings']['#title'] = t('Content Settings');
     $form['content_settings']['#weight'] = -27;
   }
-  
+
   // Define a display settings fieldset if we have display options
   if (!empty($form['display_settings']) && count(_panopoly_magic_visible_element_children($form['display_settings'])) > 0) {
     $form['display_settings']['#type'] = 'fieldset';
@@ -1285,13 +1280,13 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_options_
     $field_name = $form_state['field_instance']['field_name'];
     $field_type = $form_state['field_instance']['widget']['module'];
     $entity = $form_state['entity'];
- 
+
     // Reset the #default_value to the (currently) unsaved entity value.
     if ($field_type == 'image' && !empty($form[$field_name])) {
       $field = $entity->$field_name;
       foreach ($field[LANGUAGE_NONE] as $delta => $value) {
         $form[$field_name][LANGUAGE_NONE][$delta]['#default_value'] = $value;
-      } 
+      }
     }
   }
 
@@ -1342,7 +1337,7 @@ function panopoly_magic_panelizer_pre_render($element) {
 
 function panopoly_magic_form_ctools_entity_field_content_type_formatter_styles_alter(&$form, &$form_state, $form_id) {
   // Push the panopoly magic submitter onto the front of the submit array.
-  // We need it at the beginning so the entity is saved before the IPE 
+  // We need it at the beginning so the entity is saved before the IPE
   // reloads pane content.
   if (!empty($form_state['entity'])) {
     $form['#submit'][] = 'panopoly_magic_fape_submit';
@@ -1366,7 +1361,7 @@ function panopoly_magic_fape_submit(&$form, &$form_state) {
   }
 }
 
-/** 
+/**
  * Implementation of hook_form_FORM_ID_alter().
  *
  * Provides customization to panel pane style form
@@ -1461,7 +1456,7 @@ function theme_panopoly_magic_stylizer_preview_form($vars) {
   }
   else {
     $base_types = ctools_get_style_base_types();
- 
+
     if (!empty($base_types[$plugin['module']][$plugin['type']]['preview'])) {
       $preview = $base_types[$plugin['module']][$plugin['type']]['preview'];
     }
@@ -1529,11 +1524,11 @@ function panopoly_magic_views_content_type_modal_submit(&$form, &$form_state) {
 function panopoly_magic_views_pre_view(&$view) {
   if (isset($view->display_handler->options['pane_conf'])) {
     $conf = $view->display_handler->options['pane_conf'];
-  
+
     if (isset($conf['widget_title'])) {
       $view->display_handler->options['defaults']['title'] = FALSE;
-      $view->display_handler->options['title'] = $conf['widget_title']; 
-      $view->build_info['title'] = $conf['widget_title']; 
+      $view->display_handler->options['title'] = $conf['widget_title'];
+      $view->build_info['title'] = $conf['widget_title'];
     }
 
     // Deal with legacy 'nodes' and others (such as 'files') view settings so
@@ -1836,7 +1831,7 @@ function template_preprocess_panopoly_magic_preview_link(&$vars) {
   $vars['classes_array'][] = 'clearfix';
 }
 
-/** 
+/**
  * Returns HTML for a preview link.
  */
 function theme_panopoly_magic_preview_link($vars) {
