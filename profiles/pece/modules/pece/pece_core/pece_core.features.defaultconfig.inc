@@ -27,51 +27,73 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['access comments'] = array(
     'name' => 'access comments',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
       'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
+  );
+
+  // Exported permission: 'access notify'.
+  $permissions['access notify'] = array(
+    'name' => 'access notify',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'notify',
   );
 
   // Exported permission: 'administer comments'.
   $permissions['administer comments'] = array(
     'name' => 'administer comments',
     'roles' => array(
-      'administrator' => 'administrator',
       'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
     ),
     'module' => 'comment',
-  );
-
-  // Exported permission: 'cancel account'.
-  $permissions['cancel account'] = array(
-    'name' => 'cancel account',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
-      'Platform Director' => 'Platform Director',
-    ),
-    'module' => 'user',
   );
 
   // Exported permission: 'administer files'.
   $permissions['administer files'] = array(
     'name' => 'administer files',
     'roles' => array(
-      'administrator' => 'administrator',
-      'Platform Director' => 'Platform Director',
       'Data Importer' => 'Data Importer',
       'Manager' => 'Manager',
+      'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
     ),
     'module' => 'file_entity',
+  );
+
+  // Exported permission: 'administer notify'.
+  $permissions['administer notify'] = array(
+    'name' => 'administer notify',
+    'roles' => array(
+      'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'notify',
+  );
+
+  // Exported permission: 'cancel account'.
+  $permissions['cancel account'] = array(
+    'name' => 'cancel account',
+    'roles' => array(
+      'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'user',
   );
 
   // Exported permission: 'create files'.
   $permissions['create files'] = array(
     'name' => 'create files',
     'roles' => array(
+      'Data Importer' => 'Data Importer',
+      'Platform Director' => 'Platform Director',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-      'Platform Director' => 'Platform Director',
     ),
     'module' => 'file_entity',
   );
@@ -80,9 +102,9 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['create pece_fieldsite content'] = array(
     'name' => 'create pece_fieldsite content',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-      'Platform Director' => 'Platform Director',
     ),
     'module' => 'node',
   );
@@ -91,8 +113,8 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['delete any pece_fieldsite content'] = array(
     'name' => 'delete any pece_fieldsite content',
     'roles' => array(
-      'administrator' => 'administrator',
       'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -101,9 +123,9 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['delete own pece_fieldsite content'] = array(
     'name' => 'delete own pece_fieldsite content',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-      'Platform Director' => 'Platform Director',
     ),
     'module' => 'node',
   );
@@ -112,8 +134,8 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['edit any pece_fieldsite content'] = array(
     'name' => 'edit any pece_fieldsite content',
     'roles' => array(
-      'administrator' => 'administrator',
       'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -122,8 +144,9 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['edit own comments'] = array(
     'name' => 'edit own comments',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
       'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
   );
@@ -132,9 +155,9 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['edit own pece_fieldsite content'] = array(
     'name' => 'edit own pece_fieldsite content',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-      'Platform Director' => 'Platform Director',
     ),
     'module' => 'node',
   );
@@ -143,8 +166,9 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['post comments'] = array(
     'name' => 'post comments',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
       'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
   );
@@ -153,9 +177,9 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['skip comment approval'] = array(
     'name' => 'skip comment approval',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-      'Platform Director' => 'Platform Director',
     ),
     'module' => 'comment',
   );
@@ -164,9 +188,9 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['use text format panopoly_wysiwyg_text'] = array(
     'name' => 'use text format panopoly_wysiwyg_text',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
-      'Platform Director' => 'Platform Director',
     ),
     'module' => 'filter',
   );

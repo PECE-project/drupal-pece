@@ -1954,6 +1954,216 @@ function pece_core_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'notify_cron_next';
+  $strongarm->value = 50400;
+  $export['notify_cron_next'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_def_comment';
+  $strongarm->value = '0';
+  $export['notify_def_comment'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_def_node';
+  $strongarm->value = '1';
+  $export['notify_def_node'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_biblio';
+  $strongarm->value = 0;
+  $export['notify_node_type_biblio'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_forum';
+  $strongarm->value = 0;
+  $export['notify_node_type_forum'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_frontpage_image_slideshow';
+  $strongarm->value = 0;
+  $export['notify_node_type_frontpage_image_slideshow'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_panopoly_landing_page';
+  $strongarm->value = 0;
+  $export['notify_node_type_panopoly_landing_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_panopoly_page';
+  $strongarm->value = 0;
+  $export['notify_node_type_panopoly_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_about_page';
+  $strongarm->value = 0;
+  $export['notify_node_type_pece_about_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_analytic';
+  $strongarm->value = 1;
+  $export['notify_node_type_pece_analytic'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_annotation';
+  $strongarm->value = 1;
+  $export['notify_node_type_pece_annotation'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_artifact_audio';
+  $strongarm->value = 1;
+  $export['notify_node_type_pece_artifact_audio'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_artifact_bundle';
+  $strongarm->value = 1;
+  $export['notify_node_type_pece_artifact_bundle'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_artifact_fieldnote';
+  $strongarm->value = 1;
+  $export['notify_node_type_pece_artifact_fieldnote'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_artifact_image';
+  $strongarm->value = 1;
+  $export['notify_node_type_pece_artifact_image'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_artifact_pdf';
+  $strongarm->value = 1;
+  $export['notify_node_type_pece_artifact_pdf'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_artifact_tabular';
+  $strongarm->value = 1;
+  $export['notify_node_type_pece_artifact_tabular'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_artifact_text';
+  $strongarm->value = 1;
+  $export['notify_node_type_pece_artifact_text'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_artifact_video';
+  $strongarm->value = 1;
+  $export['notify_node_type_pece_artifact_video'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_artifact_website';
+  $strongarm->value = 1;
+  $export['notify_node_type_pece_artifact_website'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_essay';
+  $strongarm->value = 1;
+  $export['notify_node_type_pece_essay'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_fieldsite';
+  $strongarm->value = 0;
+  $export['notify_node_type_pece_fieldsite'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_group';
+  $strongarm->value = 0;
+  $export['notify_node_type_pece_group'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_memo';
+  $strongarm->value = 0;
+  $export['notify_node_type_pece_memo'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_photo_essay';
+  $strongarm->value = 1;
+  $export['notify_node_type_pece_photo_essay'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_project';
+  $strongarm->value = 0;
+  $export['notify_node_type_pece_project'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_sub_logic';
+  $strongarm->value = 0;
+  $export['notify_node_type_pece_sub_logic'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_pece_timeline_essay';
+  $strongarm->value = 1;
+  $export['notify_node_type_pece_timeline_essay'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_node_type_zotero_feed';
+  $strongarm->value = 0;
+  $export['notify_node_type_zotero_feed'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'notify_reg_default';
+  $strongarm->value = 1;
+  $export['notify_reg_default'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'panelizer_defaults_node_pece_fieldsite';
   $strongarm->value = array(
     'status' => 1,
