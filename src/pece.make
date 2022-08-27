@@ -430,7 +430,7 @@ projects[remote_stream_wrapper][version] = 1.0
 projects[remote_stream_wrapper][subdir] = contrib
 
 ; Overrides panopoly's media_youtube.
-projects[media_youtube][version] = 3.10
+projects[media_youtube][version] = 3.11
 projects[media_youtube][subdir] = contrib
 // projects[media_youtube][patch][1572550] = https://www.drupal.org/files/issues/2020-12-15/the_youtube_video_id_is_invalid_or_the_video_was_deleted-1572550-076.patch
 
