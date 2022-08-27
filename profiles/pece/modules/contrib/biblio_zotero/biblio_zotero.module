@@ -180,9 +180,11 @@ function biblio_zotero_get_default_mappings() {
     $filename = "mappings/" . $itemType . ".mapping";
     module_load_include('inc', 'biblio_zotero', $filename);
     $function_name = "biblio_zotero_get_field_mappings__$itemType";
-    $item_type_mappings = call_user_func($function_name);
-    biblio_zotero_remove_empty_targets($item_type_mappings);
-    $all_mappings = array_merge($all_mappings, $item_type_mappings);
+    if (function_exists($function_name)) {
+      $item_type_mappings = call_user_func($function_name);
+      biblio_zotero_remove_empty_targets($item_type_mappings);
+      $all_mappings = array_merge($all_mappings, $item_type_mappings);
+    }
   }
   $other_mappings = array(
     array(
