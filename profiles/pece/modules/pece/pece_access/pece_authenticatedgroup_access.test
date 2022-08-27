@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * Test PECE access.
+ * Need simpletest module installed
+ *
+ */
+class PeceAuthenticatedGroupAccessMatrix extends PeceAccessMatrix {
+
+  // Create getInfo method
+  public static function getInfo() {
+    return array(
+      'name' => 'PECE Authenticated Access Matrix in group',
+      'description' => 'Creates PECE Access Matrix to Authenticated user in group',
+      'group' => 'PECE',
+    );
+  }
+
+  /**
+   * Override this function to use the same file folders.
+   * @return void
+   */
+  // Create setUp method
+  function setUp() {
+    parent::setUp();
+    $this->userRole = 'authenticated_group';
+    $this->user = $this->drupalCreateUserWithRole('migrate_group_','authenticated user');
+    $this->addUserInAllGroups($this->user,4);
+  }
+}
