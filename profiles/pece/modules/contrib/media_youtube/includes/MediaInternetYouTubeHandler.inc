@@ -96,7 +96,6 @@ class MediaInternetYouTubeHandler extends MediaInternetBaseHandler {
     }
     else {
       throw new Exception("Error Processing Request. (Error: {$response->code}, {$response->error})");
-      return;
     }
   }
 
@@ -124,12 +123,19 @@ class MediaInternetYouTubeHandler extends MediaInternetBaseHandler {
           $error_data = $response->data;
         }
         throw new MediaInternetValidationException("The YouTube video ID is invalid, video was deleted or is disabled for embedding. Error: {$error_data}");
-        return;
       }
     }
+    elseif ($response->code == 401) {
+      $message = t("There was an error, please check the video settings. Embedding, and playback on other websites, may have been disabled by the video owner. (Error: @code, @error)", ['@code' => $response->code, '@error' => $response->error]);
+      throw new MediaInternetValidationException($message);
+    }
+    elseif ($response->code == 403) {
+      $message = t("There was an error, please check the video settings. The video may be private, disabled or unavailable. (Error: @code, @error)", ['@code' => $response->code, '@error' => $response->error]);
+      throw new MediaInternetValidationException($message);
+    }
     else {
-      throw new Exception("Error Processing Request. (Error: {$response->code}, {$response->error})");
-      return;
+      $message = t("There was an error with this YouTube video. Please check the URL and video settings and try again. (Error: @code, @error)", ['@code' => $response->code, '@error' => $response->error]);
+      throw new MediaInternetValidationException($message);
     }
   }
 }
