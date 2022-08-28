@@ -577,7 +577,7 @@ function pece_groups_views_default_views() {
     t('PECE'),
     t('Attachment'),
     t('<div class="pece-group-admins">
-<h3>Admins</h3>
+<h3>Owners</h3>
 </div>'),
     t('OG Roles from OG membership'),
   );
