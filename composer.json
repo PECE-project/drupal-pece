@@ -228,6 +228,23 @@
             "url": "./src/*/*"
         }
     ],
+    "autoload": {
+      "classmap": [
+        "scripts/composer/SetupWizard.php"
+      ]
+    },
+    "autoload-dev": {
+      "psr-4": {
+        "OpenEuropa\\Site\\Tests\\": "./tests/"
+      }
+    },
+    "config": {
+      "sort-packages": true,
+      "allow-plugins": {
+        "composer/installers": true,
+        "cweagans/composer-patches": true
+      }
+    },
     "extra": {
         "drupal-scaffold": {
             "allowed-packages": [
@@ -252,94 +269,77 @@
             "build/profiles/custom/{$name}": ["type:drupal-custom-profile"],
             "build/profiles/pece/themes/contrib/{$name}": ["type:drupal-theme"],
             "build/profiles/pece/themes/custom/{$name}": ["type:drupal-custom-theme"]
-        }
-    },
-    "autoload": {
-        "classmap": [
-            "scripts/composer/SetupWizard.php"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "OpenEuropa\\Site\\Tests\\": "./tests/"
-        }
-    },
-    "patches": {
-      "drupal/core": {
-        "1087250 - Fix Custom logo and favicon stored in private filesystem if it is the default.": "https://www.drupal.org/files/issues/1087250.logo-public-filesystem.057-b.patch"
-      },
-      "drupal/ctools": {
-        "1910608 - Ajax + Allow settings: Allowed settings lost on ajax (exposed forms/pager)" : "https://www.drupal.org/files/issues/2020-12-01/views_content-keyword-substitution-1910608-83.patch",
-        "1000146 - Edit text of 'More Link' from Panel config." : "https://www.drupal.org/files/issues/2019-01-09/views_panes-more_link_text-1000146-33.patch"
-      },
-      "drupal/views": {
-        "2977851 - PHP 7.2: count() on non-Countable in views_many_to_one_helper." : "https://www.drupal.org/files/issues/2019-09-23/2977851-views-php72-count-14_0.patch",
-        "2885660 - Warning: A non-numeric value encountered in views_plugin_pager_full->query()." : "https://www.drupal.org/files/issues/2018-06-28/2885660-13.patch",
-        "2284423 - Having the same sort twice doesn't work correctly." : "https://www.drupal.org/files/issues/2019-04-29/views-same_sort_twice-2284423-3.patch"
-      },
-      "drupal/panelizer": {
-        "2812807 - Add entity object to hook_panelizer_access." : "https://www.drupal.org/files/issues/panelizer--2812807--provide-entity-on-access-hooks.patch",
-        "1549608 - Cannot import exported Panelizer permissions using Features/defaultconfig if handler cache is stale." : "https://www.drupal.org/files/issues/panelizer-n1549608-26.patch",
-        "2788851 - Allow anyone with 'administer panelizer' to edit Panelizer defaults." : "https://www.drupal.org/files/issues/panelizer-administer-panelizer-2788851-2.patch"
-      },
-      "drupal/fieldable_panels_panes": {
-        "2814117 - Access hook" : "https://www.drupal.org/files/issues/fieldable_panels_panes--access_hook--2814117-1.patch"
-      },
-      "drupal/panopoly_search": {
-        "Remove panelizer_data_alter callback" : "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
-      },
-      "drupal/entityreference": {
-        "1423778 - Fix Fatal error loading EntityReference_SelectionHandler_Broken" : "https://www.drupal.org/files/issues/entityreference-1423778-brokenhandler.diff"
-      },
-      "drupal/plupload": {
-        "1903850 - [meta] Remove plupload library examples folder" : "https://www.drupal.org/files/issues/plupload-1_5_8-rm_examples-1903850-33.patch"
-      },
-      "drupal/image_resize_filter": {
-        "Fix  dblog image resize threshold error" : "./patches/image_resize_filter-dblog_image_resize_threshold_error.patch"
-      },
-      "drupal/link": {
-        "2666912 - Fix URL validation rejects existing valid content after upgrade to 7.x-1.4." : "https://www.drupal.org/files/issues/2019-11-18/link-fix-internal-validation-2666912-55.patch"
-      },
-      "drupal/nodeaccess_userreference": {
-        "Fix install phase requirement error" : "./patches/nodeaccess_userreference-fix_install_phase_requirement_error.patch"
-      },
-      "drupal/search_api": {
-        "Fix Composer friendly dependencies" : "./patches/search_api_fix-composer-friendly-dependencies-issue.patch"
-      },
-      "drupal/rules": {
-        "2189645 - Avoid full cache clear whenever a rules component or reaction rule is edited" : "https://www.drupal.org/files/issues/d7_component_caches.patch"
-      },
-      "drupal/og": {
-        "3159453 - Fix OG ignore the grants permission API" : "https://www.drupal.org/files/issues/2020-07-15/og-ignore-grants-permissions-3159453-2.patch",
-        "Fix Membership pending message" : "./patches/og_ui-membership-pending-request-msg.patch"
-      },
-      "drupal/profile2": {
-        "1273026 - Profile2 context from relationship doesn't work" : "https://www.drupal.org/files/ctools-profile2_from_user-1273026-10_0.patch",
-        "1273026 - Fix Ctools new file" : "https://www.drupal.org/files/ctools-new-file-1273026-10.patch",
-        "1307538 - Fix entity_info failure during install" : "https://www.drupal.org/files/issues/profile2-fix_entity_info_failure_during_install-1307538-10-7.x-1.x-dev.patch"
-      },
-      "drupal/gmap": {
-        "3118279 - Fix PHP 7.4 compatibility issues": "https://www.drupal.org/files/issues/2020-12-04/gmap-php74-3118279-6.patch"
-      },
-      "drupal/tagclouds": {
-        "Fix Composer friendly dependencies issue": "./patches/tagclouds_fix-composer-friendly-dependecies-issue.patch"
-      },
-      "drupal/pdf_reader": {
-        "Fix keydown event error": "./patches/pdf_reader-keydown_event_page_error.patch"
-      },
-      "drupal/amber" : {
-        "2945946 - Installation problem with MySQL 5.7 : All parts of a PRIMARY KEY must be NOT NULL" : "https://www.drupal.org/files/issues/amber-mysql5.7_compatibility-2945946-4.patch",
-        "Fix error on AmberPDO class.": "./patches/amber_fix-AmberPDO-class-issue.patch"
-      },
-      "drupal/biblio_zotero": {
-        "3304957 - Errors on missing Biblio Item Types.": "./patches/biblio_zotero-3304957-2.patch"
-      }
-    },
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "composer/installers": true,
-            "cweagans/composer-patches": true
+        },
+        "patches": {
+          "drupal/core": {
+            "1087250 - Fix Custom logo and favicon stored in private filesystem if it is the default.": "https://www.drupal.org/files/issues/1087250.logo-public-filesystem.057-b.patch"
+          },
+          "drupal/ctools": {
+            "1910608 - Ajax + Allow settings: Allowed settings lost on ajax (exposed forms/pager)" : "https://www.drupal.org/files/issues/2020-12-01/views_content-keyword-substitution-1910608-83.patch",
+            "1000146 - Edit text of 'More Link' from Panel config." : "https://www.drupal.org/files/issues/2019-01-09/views_panes-more_link_text-1000146-33.patch"
+          },
+          "drupal/views": {
+            "2977851 - PHP 7.2: count() on non-Countable in views_many_to_one_helper." : "https://www.drupal.org/files/issues/2019-09-23/2977851-views-php72-count-14_0.patch",
+            "2885660 - Warning: A non-numeric value encountered in views_plugin_pager_full->query()." : "https://www.drupal.org/files/issues/2018-06-28/2885660-13.patch",
+            "2284423 - Having the same sort twice doesn't work correctly." : "https://www.drupal.org/files/issues/2019-04-29/views-same_sort_twice-2284423-3.patch"
+          },
+          "drupal/panelizer": {
+            "2812807 - Add entity object to hook_panelizer_access." : "https://www.drupal.org/files/issues/panelizer--2812807--provide-entity-on-access-hooks.patch",
+            "1549608 - Cannot import exported Panelizer permissions using Features/defaultconfig if handler cache is stale." : "https://www.drupal.org/files/issues/panelizer-n1549608-26.patch",
+            "2788851 - Allow anyone with 'administer panelizer' to edit Panelizer defaults." : "https://www.drupal.org/files/issues/panelizer-administer-panelizer-2788851-2.patch"
+          },
+          "drupal/fieldable_panels_panes": {
+            "2814117 - Access hook" : "https://www.drupal.org/files/issues/fieldable_panels_panes--access_hook--2814117-1.patch"
+          },
+          "drupal/panopoly_search": {
+            "Remove panelizer_data_alter callback" : "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
+          },
+          "drupal/entityreference": {
+            "1423778 - Fix Fatal error loading EntityReference_SelectionHandler_Broken" : "https://www.drupal.org/files/issues/entityreference-1423778-brokenhandler.diff"
+          },
+          "drupal/plupload": {
+            "1903850 - [meta] Remove plupload library examples folder" : "https://www.drupal.org/files/issues/plupload-1_5_8-rm_examples-1903850-33.patch"
+          },
+          "drupal/image_resize_filter": {
+            "Fix  dblog image resize threshold error" : "./patches/image_resize_filter-dblog_image_resize_threshold_error.patch"
+          },
+          "drupal/link": {
+            "2666912 - Fix URL validation rejects existing valid content after upgrade to 7.x-1.4." : "https://www.drupal.org/files/issues/2019-11-18/link-fix-internal-validation-2666912-55.patch"
+          },
+          "drupal/nodeaccess_userreference": {
+            "Fix install phase requirement error" : "./patches/nodeaccess_userreference-fix_install_phase_requirement_error.patch"
+          },
+          "drupal/search_api": {
+            "Fix Composer friendly dependencies" : "./patches/search_api_fix-composer-friendly-dependencies-issue.patch"
+          },
+          "drupal/rules": {
+            "2189645 - Avoid full cache clear whenever a rules component or reaction rule is edited" : "https://www.drupal.org/files/issues/d7_component_caches.patch"
+          },
+          "drupal/og": {
+            "3159453 - Fix OG ignore the grants permission API" : "https://www.drupal.org/files/issues/2020-07-15/og-ignore-grants-permissions-3159453-2.patch",
+            "Fix Membership pending message" : "./patches/og_ui-membership-pending-request-msg.patch"
+          },
+          "drupal/profile2": {
+            "1273026 - Profile2 context from relationship doesn't work" : "https://www.drupal.org/files/ctools-profile2_from_user-1273026-10_0.patch",
+            "1273026 - Fix Ctools new file" : "https://www.drupal.org/files/ctools-new-file-1273026-10.patch",
+            "1307538 - Fix entity_info failure during install" : "https://www.drupal.org/files/issues/profile2-fix_entity_info_failure_during_install-1307538-10-7.x-1.x-dev.patch"
+          },
+          "drupal/gmap": {
+            "3118279 - Fix PHP 7.4 compatibility issues": "https://www.drupal.org/files/issues/2020-12-04/gmap-php74-3118279-6.patch"
+          },
+          "drupal/tagclouds": {
+            "Fix Composer friendly dependencies issue": "./patches/tagclouds_fix-composer-friendly-dependecies-issue.patch"
+          },
+          "drupal/pdf_reader": {
+            "Fix keydown event error": "./patches/pdf_reader-keydown_event_page_error.patch"
+          },
+          "drupal/amber" : {
+            "2945946 - Installation problem with MySQL 5.7 : All parts of a PRIMARY KEY must be NOT NULL" : "https://www.drupal.org/files/issues/amber-mysql5.7_compatibility-2945946-4.patch",
+            "Fix error on AmberPDO class.": "./patches/amber_fix-AmberPDO-class-issue.patch"
+          },
+          "drupal/biblio_zotero": {
+            "3304957 - Errors on missing Biblio Item Types.": "./patches/biblio_zotero-3304957-2.patch"
+          }
         }
     }
 }
