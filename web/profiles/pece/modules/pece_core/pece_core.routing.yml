@@ -1,0 +1,7 @@
+pece_core.admin_config_pece:
+  path: '/admin/config/pece'
+  defaults:
+    _controller: '\Drupal\pece_core\Controller\PeceConfigController::overview'
+    _title: 'PECE Settings'
+  requirements:
+    _permission: 'access administration pages'

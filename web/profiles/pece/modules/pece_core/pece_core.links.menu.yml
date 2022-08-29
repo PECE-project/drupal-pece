@@ -1,0 +1,15 @@
+# PECE defaults menu items definition
+pece_core.admin_config_pece:
+  title: 'PECE'
+  route_name: pece_core.admin_config_pece
+  description: 'Configure PECE platform defaults.'
+  parent: system.admin_config
+  weight: 100
+
+pece_core.settings:
+  title: 'Settings'
+  description: 'Configure PECE defaults.'
+  route_name: pece_core.admin_config_pece
+  parent: pece_core.admin_config_pece
+
+
