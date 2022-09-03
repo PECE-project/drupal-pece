@@ -19,9 +19,23 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'card' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'smart_trim',
+        'settings' => array(
+           'more_link' => 2,
+           'more_text' => 'Read more',
+           'summary_handler' => 'ignore',
+           'trim_length' => 300,
+           'trim_suffix' => '...',
+           'trim_type' => 'chars',
+        ),
+        'type' => 'smart_trim_format',
+        'weight' => 1,
+      ),
+      'card_full_text' => array(
+        'label' => 'hidden',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 0,
       ),
       'default' => array(
@@ -457,7 +471,7 @@ function pece_artifacts_fieldnote_field_default_field_instances() {
         'label' => 'above',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'short',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
