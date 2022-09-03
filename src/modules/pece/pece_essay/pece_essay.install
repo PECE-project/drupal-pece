@@ -109,3 +109,10 @@ function pece_essay_update_7007() {
   );
   pece_set_permissions(array('editor' => $editor_perms));
 }
+
+/**
+ * Allow adding Field note to an Essay.
+ */
+function pece_essay_update_7008() {
+  features_revert(array('pece_essay' => array('views_view')));
+}
