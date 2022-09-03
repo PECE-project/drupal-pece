@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_annotations.panelizer.inc
@@ -34,8 +35,8 @@ function pece_annotations_panelizer_defaults() {
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
-      'default' => NULL,
       'center' => NULL,
+      'default' => NULL,
     ),
   );
   $display->cache = array();
@@ -53,13 +54,13 @@ function pece_annotations_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'above',
-    'formatter' => 'text_default',
+    'context' => 'panelizer',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'text_default',
     'formatter_settings' => array(),
-    'context' => 'panelizer',
+    'label' => 'above',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -80,13 +81,13 @@ function pece_annotations_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'above',
-    'formatter' => 'taxonomy_term_reference_link',
+    'context' => 'panelizer',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'taxonomy_term_reference_link',
     'formatter_settings' => array(),
-    'context' => 'panelizer',
+    'label' => 'above',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -107,18 +108,18 @@ function pece_annotations_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'hidden',
-    'formatter' => 'entityreference_label',
+    'context' => 'panelizer',
     'delta_limit' => '0',
     'delta_offset' => '0',
     'delta_reversed' => 0,
+    'formatter' => 'entityreference_label',
     'formatter_settings' => array(
       'link' => 1,
     ),
-    'context' => 'panelizer',
+    'label' => 'hidden',
     'override_title' => 0,
-    'override_title_text' => 'Structured Analytic',
     'override_title_heading' => 'h2',
+    'override_title_text' => 'Structured Analytic',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -139,12 +140,12 @@ function pece_annotations_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'override_title' => FALSE,
-    'override_title_text' => '',
     'build_mode' => 'page_manager',
+    'context' => 'panelizer',
     'identifier' => '',
     'link' => TRUE,
-    'context' => 'panelizer',
+    'override_title' => FALSE,
+    'override_title_text' => '',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -167,9 +168,9 @@ function pece_annotations_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'view_settings' => 'fields',
     'header_type' => 'none',
     'view_mode' => 'teaser',
+    'view_settings' => 'fields',
   );
   $pane->cache = array();
   $pane->style = array(
