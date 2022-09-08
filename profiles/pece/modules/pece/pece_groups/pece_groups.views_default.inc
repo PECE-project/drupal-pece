@@ -510,7 +510,7 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['content'] = '<div class="pece-group-admins">
-<h3>Admins</h3>
+<h3>Group owners</h3>
 </div>';
   $handler->display->display_options['header']['area']['format'] = 'panopoly_wysiwyg_text';
   $handler->display->display_options['defaults']['footer'] = FALSE;
@@ -577,7 +577,7 @@ function pece_groups_views_default_views() {
     t('PECE'),
     t('Attachment'),
     t('<div class="pece-group-admins">
-<h3>Owners</h3>
+<h3>Group owners</h3>
 </div>'),
     t('OG Roles from OG membership'),
   );
