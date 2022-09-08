@@ -86,7 +86,6 @@ function pece_essay_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'pece_about_page' => 'pece_about_page',
     'pece_analytic' => 'pece_analytic',
-    'pece_artifact_fieldnote' => 'pece_artifact_fieldnote',
     'biblio' => 'biblio',
     'panopoly_page' => 'panopoly_page',
     'pece_fieldsite' => 'pece_fieldsite',
