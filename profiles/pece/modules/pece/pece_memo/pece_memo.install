@@ -15,3 +15,10 @@ function pece_memo_update_7001() {
    }
  }
 }
+
+/**
+ * Rebuild memo presentation settings.
+ */
+function pece_memo_update_7002() {
+  features_revert(array('pece_memo' => array('field_instance')));
+}

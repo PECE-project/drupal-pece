@@ -37,6 +37,13 @@ function pece_memo_field_default_field_instances() {
         'type' => 'smart_trim_format',
         'weight' => 0,
       ),
+      'card_full_text' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
