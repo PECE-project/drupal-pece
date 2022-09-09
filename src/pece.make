@@ -91,6 +91,13 @@ libraries[monolog][download][url] = https://github.com/Seldaek/monolog.git
 libraries[monolog][download][branch] = main
 ;libraries[monolog][download][revision] = 60ad5183b5e5d6c9d4047e9f3072d36071dcc161
 
+libraries[speedreader][download][type] = git
+libraries[speedreader][download][url] = https://github.com/revagomes/speedreader
+
+libraries[mespeak][download][type] = "get"
+libraries[mespeak][download][url] = "https://github.com/btopro/mespeak/archive/master.zip"
+libraries[mespeak][directory_name] = "mespeak"
+
 
 ; =====================
 ; Utilities and APIs
@@ -623,6 +630,9 @@ projects[backup_migrate][version] = 3.10
 ; Node Expiration
 projects[node_expire][subdir] = contrib
 projects[node_expire][version] = 2.2
+
+;projects[speedreader][version] = 1.1
+;projects[mespeak][version] = 1.x
 
 ; =====================
 ; Development Modules
