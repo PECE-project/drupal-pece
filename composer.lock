@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe7a84ab99503b71f15748da3fa390e7",
+    "content-hash": "69a4f5d22419e9c5a9fd7e9fbb07b071",
     "packages": [
         {
             "name": "academicpuma/citeproc-php",
@@ -4025,6 +4025,59 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/ctools",
                 "issues": "https://www.drupal.org/project/issues/ctools"
+            }
+        },
+        {
+            "name": "drupal/dashboards",
+            "version": "2.1.0-beta3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/dashboards.git",
+                "reference": "2.1.0-beta3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/dashboards-2.1.0-beta3.zip",
+                "reference": "2.1.0-beta3",
+                "shasum": "a7851264bfdfc6ac9d8b84ef292619d66af644c1"
+            },
+            "require": {
+                "drupal/core": "^9.4 || ^10"
+            },
+            "require-dev": {
+                "drupal/matomo": "*",
+                "drupal/matomo_reporting_api": "*",
+                "drupal/webform": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.1.0-beta3",
+                    "datestamp": "1659354116",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Erik Seifert",
+                    "homepage": "https://www.drupal.org/user/161429"
+                }
+            ],
+            "description": "Dashboards based on Layout Builder.",
+            "homepage": "https://www.drupal.org/project/dashboards",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/dashboards",
+                "issues": "https://www.drupal.org/project/issues/dashboards"
             }
         },
         {
@@ -19384,6 +19437,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/better_exposed_filters": 10,
+        "drupal/dashboards": 10,
         "drupal/default_content": 15,
         "drupal/eck": 10,
         "drupal/gin": 15,
