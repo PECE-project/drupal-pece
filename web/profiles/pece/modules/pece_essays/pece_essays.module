@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains pece_essays.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function pece_essays_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the pece_essays module.
+    case 'help.page.pece_essays':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Provide common functionalities among Essays') . '</p>';
+      return $output;
+
+    default:
+  }
+}
