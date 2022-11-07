@@ -51,7 +51,7 @@ shell-node:
 ## drush	:	Executes `drush` command in a specified `DRUPAL_ROOT` directory (default is `/var/www/html/web`).
 ## 		Doesn't support --flag arguments.
 drush:
-	docker exec $(shell docker ps --filter name='^/$(PROJECT_NAME)_php' --format "{{ .ID }}") drush -r $(DRUPAL_ROOT) $(filter-out $@,$(MAKECMDGOALS))
+	docker exec -t $(shell docker ps --filter name='^/$(PROJECT_NAME)_php' --format "{{ .ID }}") drush -r $(DRUPAL_ROOT) $(filter-out $@,$(MAKECMDGOALS))
 
 ## exec	:	Executes any command in PHP container WORKDIR (default is `/var/www/html`).
 ## 		Doesn't support --flag arguments unless command is wrapped by quotes.
