@@ -53,6 +53,12 @@ shell-node:
 drush:
 	docker exec $(shell docker ps --filter name='^/$(PROJECT_NAME)_php' --format "{{ .ID }}") drush -r $(DRUPAL_ROOT) $(filter-out $@,$(MAKECMDGOALS))
 
+## exec	:	Executes any command in PHP container WORKDIR (default is `/var/www/html`).
+## 		Doesn't support --flag arguments unless command is wrapped by quotes.
+exec:
+	docker exec $(shell docker ps --filter name='^/$(PROJECT_NAME)_php' --format "{{ .ID }}") $(filter-out $@,$(MAKECMDGOALS))
+
+
 ## logs	:	View containers logs.
 ##		You can optinally pass an argument with the service name to limit logs
 ##		logs php	: View `php` container logs.
