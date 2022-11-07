@@ -56,7 +56,7 @@ drush:
 ## exec	:	Executes any command in PHP container WORKDIR (default is `/var/www/html`).
 ## 		Doesn't support --flag arguments unless command is wrapped by quotes.
 exec:
-	docker exec $(shell docker ps --filter name='^/$(PROJECT_NAME)_php' --format "{{ .ID }}") $(filter-out $@,$(MAKECMDGOALS))
+	docker exec -it $(shell docker ps --filter name='^/$(PROJECT_NAME)_php' --format "{{ .ID }}") $(filter-out $@,$(MAKECMDGOALS))
 
 
 ## logs	:	View containers logs.
