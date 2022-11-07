@@ -218,6 +218,8 @@ projects[node_access_rebuild_bonus][subdir] = contrib
 
 projects[disable_messages][version] = 1.2
 
+projects[user_restrictions][version] = 1.1
+
 ; Analytics Matomo
 projects[matomo][version] = 2.13
 projects[matomo][subdir] = contrib

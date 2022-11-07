@@ -616,3 +616,12 @@ function pece_update_7124() {
   // Revert default config permission component for PECE Core.
   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_core');
 }
+
+/**
+ * Install User Restrictions module.
+ */
+function pece_update_7125() {
+  module_enable(array(
+    'user_restrictions',
+  ));
+}
