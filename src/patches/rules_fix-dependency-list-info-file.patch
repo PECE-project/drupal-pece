@@ -1,0 +1,24 @@
+From 261a9b9015ac4216ee01a1cced73c79ed84d9fc0 Mon Sep 17 00:00:00 2001
+From: Reva Gomes <revagomes@gmail.com>
+Date: Thu, 10 Nov 2022 02:05:10 +0100
+Subject: [PATCH] Fix compatibility issue in rules dependency list.
+
+---
+ rules.info | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/rules.info b/rules.info
+index 94ddefac..1f433be1 100644
+--- a/rules.info
++++ b/rules.info
+@@ -26,5 +26,5 @@ files[] = tests/rules.test
+ files[] = tests/rules_test.rules.inc
+ 
+ dependencies[] = system (>= 7.40)
+-dependencies[] = entity:entity
+-dependencies[] = entity:entity_token
++dependencies[] = entity
++dependencies[] = entity_token
+-- 
+2.25.1
+
