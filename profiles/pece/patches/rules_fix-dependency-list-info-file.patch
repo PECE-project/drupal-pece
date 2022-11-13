@@ -1,0 +1,38 @@
+From 12ea5fdad47bf445b34908c7f762adc4b612b3d8 Mon Sep 17 00:00:00 2001
+From: Reva Gomes <revagomes@gmail.com>
+Date: Thu, 10 Nov 2022 02:05:10 +0100
+Subject: [PATCH] Fix compatibility issue in rules dependency list.
+
+---
+ rules.info                   | 4 ++--
+ rules_admin/rules_admin.info | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/rules.info b/rules.info
+index 94ddefac..1f433be1 100644
+--- a/rules.info
++++ b/rules.info
+@@ -26,5 +26,5 @@ files[] = tests/rules.test
+ files[] = tests/rules_test.rules.inc
+ 
+ dependencies[] = system (>= 7.40)
+-dependencies[] = entity:entity
+-dependencies[] = entity:entity_token
++dependencies[] = entity
++dependencies[] = entity_token
+diff --git a/rules_admin/rules_admin.info b/rules_admin/rules_admin.info
+index 72257037..c8c3120d 100644
+--- a/rules_admin/rules_admin.info
++++ b/rules_admin/rules_admin.info
+@@ -2,7 +2,7 @@ name = Rules UI
+ description = Administrative interface for managing rules.
+ package = Rules
+ core = 7.x
+-dependencies[] = rules:rules
++dependencies[] = rules
+ configure = admin/config/workflow/rules
+ 
+ ; Test cases
+-- 
+2.25.1
+

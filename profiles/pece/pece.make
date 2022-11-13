@@ -531,6 +531,7 @@ projects[scholarly_lite][subdir] = contrib
 projects[rules][subdir] = contrib
 projects[rules][version] = 2.13
 projects[rules][patch][2189645] = https://www.drupal.org/files/issues/d7_component_caches.patch
+projects[rules][patch][] = ./patches/rules_fix-dependency-list-info-file.patch
 
 ; Translation
 projects[l10n_update][subdir] = contrib
