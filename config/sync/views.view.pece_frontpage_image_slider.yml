@@ -4,11 +4,13 @@ dependencies:
   config:
     - field.storage.node.field_pece_slideshowimage_image
     - field.storage.node.field_pece_slideshowimage_link
+    - image.style.pece_frontpage_image_style
     - node.type.pece_slideshow_image
   module:
     - image
     - link
     - node
+    - slick
     - user
 id: pece_frontpage_image_slider
 label: 'PECE Frontpage Image Slider'
@@ -143,10 +145,10 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: image
+          type: slick_image
           settings:
+            image_style: pece_frontpage_image_style
             image_link: ''
-            image_style: ''
             image_loading:
               attribute: lazy
           group_column: ''
