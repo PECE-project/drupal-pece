@@ -1,4 +1,3 @@
-uuid: 29e82442-9e68-4024-82c9-10b8b702534a
 langcode: en
 status: true
 dependencies:
@@ -371,6 +370,25 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 12
             additional: {  }
+          47281139-0c6c-4ca8-af09-7de557c3eacc:
+            uuid: 47281139-0c6c-4ca8-af09-7de557c3eacc
+            region: content
+            configuration:
+              id: 'field_block:node:pece_essay:field_essay_thumbnail'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: image
+                label: above
+                settings:
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings: {  }
+            weight: 13
+            additional: {  }
         third_party_settings: {  }
 id: node.pece_essay.default
 targetEntityType: node
@@ -425,6 +443,8 @@ content:
     settings:
       image_link: ''
       image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 104
     region: content

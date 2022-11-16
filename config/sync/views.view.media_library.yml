@@ -1,4 +1,3 @@
-uuid: 014f54ce-e20e-46c4-b078-02e340627a7a
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ dependencies:
   enforced:
     module:
       - media_library
-_core:
-  default_config_hash: dHOSWSHbMJNke0ZBGh1O5KrnwynSOCOpQycITW-pwfs
 id: media_library
 label: 'Media library'
 module: views
@@ -1132,6 +1129,8 @@ display:
           settings:
             image_link: ''
             image_style: media_library
+            image_loading:
+              attribute: lazy
         name:
           id: name
           table: media_field_data

@@ -1,4 +1,3 @@
-uuid: e39f4557-7dda-4d7a-adb6-6b5c45e7decf
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ dependencies:
   enforced:
     module:
       - licenses_vocabulary
-_core:
-  default_config_hash: JgLCUi1BwS80s2Fm-Fg8ZESNoIyxfwFgvr2RjDxfb6U
 id: taxonomy_term.licenses_vocabulary_licenses.default
 targetEntityType: taxonomy_term
 bundle: licenses_vocabulary_licenses
@@ -33,6 +30,8 @@ content:
     settings:
       image_link: ''
       image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 2
     region: content

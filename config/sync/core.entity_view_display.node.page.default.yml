@@ -1,4 +1,3 @@
-uuid: fd09afa2-d406-401b-b876-003f09f0817d
 langcode: en
 status: true
 dependencies:
@@ -61,6 +60,31 @@ third_party_settings:
                   link: true
                 third_party_settings: {  }
             weight: 0
+            additional: {  }
+          0b83c811-68d9-4b9d-b128-ebc154d5096b:
+            uuid: 0b83c811-68d9-4b9d-b128-ebc154d5096b
+            region: content
+            configuration:
+              id: 'extra_field_block:node:page:links'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 0
+            additional: {  }
+          6e1477e1-0d77-45eb-86c6-ed02220144fb:
+            uuid: 6e1477e1-0d77-45eb-86c6-ed02220144fb
+            region: content
+            configuration:
+              id: 'field_block:node:page:body'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 1
             additional: {  }
         third_party_settings: {  }
       -
