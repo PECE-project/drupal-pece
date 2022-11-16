@@ -1,4 +1,3 @@
-uuid:
 langcode: en
 status: true
 dependencies: {  }
@@ -48,14 +47,16 @@ process:
   path/pathauto:
     plugin: default_value
     default_value: 0
-    path/alias:
-      alias
+    path/alias: alias
   field_project_image_banner/target_id:
-    - plugin: default_value
+    -
+      plugin: default_value
       source: field_pece_proj_img
       default_value:
-        - fid: null
-    - plugin: extract
+        -
+          fid: null
+    -
+      plugin: extract
       index:
         - 0
         - fid
@@ -68,21 +69,27 @@ process:
     source: field_pece_design_group
     default_value: null
   field_project_intv_request_file:
-    - plugin: default_value
+    -
+      plugin: default_value
       source: field_basic_file_file
       default_value:
-        - fid: null
-    - plugin: extract
+        -
+          fid: null
+    -
+      plugin: extract
       index:
         - 0
         - fid
       default: null
   field_project_consent_form_file:
-    - plugin: default_value
+    -
+      plugin: default_value
       source: field_pece_consent_form
       default_value:
-        - fid: null
-    - plugin: extract
+        -
+          fid: null
+    -
+      plugin: extract
       index:
         - 0
         - fid
@@ -97,11 +104,14 @@ process:
   field_project_open_notes: field_pece_proj_notes
   field_project_tags: field_pece_tags
   field_project_image/target_id:
-    - plugin: default_value
+    -
+      plugin: default_value
       source: field_basic_image_image
       default_value:
-        - fid: null
-    - plugin: extract
+        -
+          fid: null
+    -
+      plugin: extract
       index:
         - 0
         - fid

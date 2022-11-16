@@ -1,4 +1,3 @@
-uuid: c8ec1e42-520b-48f3-a08d-a78d086bc0c3
 langcode: en
 status: true
 dependencies:
@@ -67,6 +66,44 @@ third_party_settings:
                   image_style: ''
                 third_party_settings: {  }
             weight: 0
+            additional: {  }
+          15b1c454-1bca-4a5f-81ba-8fe356fc92bd:
+            uuid: 15b1c454-1bca-4a5f-81ba-8fe356fc92bd
+            region: content
+            configuration:
+              id: 'field_block:node:pece_project:field_project_image'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: image
+                label: above
+                settings:
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          4aa61282-5259-4479-a663-88b39c4ce9a1:
+            uuid: 4aa61282-5259-4479-a663-88b39c4ce9a1
+            region: content
+            configuration:
+              id: 'field_block:node:pece_project:field_project_image_banner'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: image
+                label: above
+                settings:
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings: {  }
+            weight: 2
             additional: {  }
         third_party_settings: {  }
       -
@@ -483,6 +520,8 @@ content:
     settings:
       image_link: ''
       image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 115
     region: content
@@ -492,6 +531,8 @@ content:
     settings:
       image_link: ''
       image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 123
     region: content
