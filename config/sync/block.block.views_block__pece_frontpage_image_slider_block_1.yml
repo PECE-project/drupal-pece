@@ -1,0 +1,48 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.pece_frontpage_image_slider
+  module:
+    - context
+    - system
+    - views
+  theme:
+    - pece_theme
+id: views_block__pece_frontpage_image_slider_block_1
+theme: pece_theme
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'views_block:pece_frontpage_image_slider-block_1'
+settings:
+  id: 'views_block:pece_frontpage_image_slider-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  context:
+    id: context
+    negate: null
+    values: ''
+  context_all:
+    id: context_all
+    negate: null
+    values: ''
+  user_status:
+    id: user_status
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    user_status:
+      viewing_profile: '0'
+      logged_viewing_profile: '0'
+      own_page_true: '0'
+      field_value: '0'
+    user_fields: uid
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'
