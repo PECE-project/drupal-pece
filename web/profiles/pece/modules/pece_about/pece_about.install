@@ -1,0 +1,54 @@
+<?php
+/**
+ * @file
+ * Installation code for the PECE About feature.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function pece_about_install() {
+  _pece_about_install_default_page();
+}
+
+/**
+ * Implements hook_content_import_entity_alter().
+ */
+function pece_about_content_import_entity_alter(array $content, FieldableEntityInterface $entity) {
+  dpm([$content, $entity], 'About Entity');
+}
+
+/**
+ * Configures a default about page.
+ */
+function _pece_about_install_default_page() {
+  if (!($default_page_info = _pece_about_default_page_info())) {
+    return FALSE;
+  }
+
+  $file_path =  \Drupal::service('extension.path.resolver')
+      ->getPath('module', 'pece_about') . '/defaults/node-about_page-f96a5626-f779-42a3-85fb-b3c14dd7cf82.yml';
+  \Drupal::service('single_content_sync.importer')->importFromFile($file_path);
+}
+
+/**
+ * Load about page default info.
+ */
+function _pece_about_default_page_info() {
+  \Drupal::moduleHandler()->loadInclude('pece', 'inc', 'pece.functions');
+
+  $path_to_module = \Drupal::service('extension.path.resolver')
+    ->getPath('module', 'pece_about');
+  $path_to_defaults = \Drupal::service("file_system")
+    ->realpath($path_to_module . '/defaults');
+
+  $path_to_about_info_file = "{$path_to_defaults}/about.yml";
+
+  if (file_exists($path_to_about_info_file)) {
+    $about_info_raw = file_get_contents($path_to_about_info_file);
+    return pece_parse_yaml($about_info_raw);
+  }
+
+  return FALSE;
+}
+
