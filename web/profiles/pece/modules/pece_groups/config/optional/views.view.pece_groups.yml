@@ -267,6 +267,34 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
+    position: 2
+    display_options:
+      title: Collaborate
+      defaults:
+        title: false
+      display_extenders: {  }
+      path: collaborate
+      menu:
+        type: normal
+        title: Collaborate
+        description: ''
+        weight: 1
+        expanded: false
+        menu_name: main
+        parent: ''
+        context: '0'
+    cache_metadata:
+      max-age: 0
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
   rest_export_1:
     id: rest_export_1
     display_title: 'REST export'
