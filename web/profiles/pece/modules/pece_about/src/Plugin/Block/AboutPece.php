@@ -18,7 +18,11 @@ class AboutPece extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    return _theme('about_pece');
+    $twigFilePath = \Drupal::service('extension.path.resolver')
+      ->getPath('module', 'pece_about') . '/templates/pece-about-block.html.twig';
+    $twigService = \Drupal::service('twig');
+    $template = $twigService->loadTemplate($twigFilePath);
+    return $template->render();
   }
 
 }
