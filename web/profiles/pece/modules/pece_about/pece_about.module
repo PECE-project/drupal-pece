@@ -6,6 +6,8 @@
 
 Use \Drupal\Core\Link;
 
+use function Drupal\eck\Entity\t;
+
 /**
  * Implements hook_theme().
  */
@@ -42,7 +44,8 @@ function pece_about_trim_summary($summary, $more = TRUE, $alter = []) {
   }
 
   if ($more !== FALSE) {
-    $read_more_link = Link::fromTextAndUrl(t('Read more'), '/about');
+    $url = Drupal\Core\Url::fromUserInput('/about');
+    $read_more_link = Link::fromTextAndUrl(t('Read more'), $url);
     $read_more = $read_more_link->toRenderable();
     $read_more['#attribules']['class'] = 'read-mode';
     $content .= $read_more;
