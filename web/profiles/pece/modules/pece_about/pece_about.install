@@ -4,6 +4,8 @@
  * Installation code for the PECE About feature.
  */
 
+use Drupal\node\Entity\Node;
+
 /**
  * Implements hook_install().
  */
@@ -14,7 +16,7 @@ function pece_about_install() {
 /**
  * Implements hook_content_import_entity_alter().
  */
-function pece_about_content_import_entity_alter(array $content, FieldableEntityInterface $entity) {
+function _pece_about_content_import_entity_alter(array $content, Node $entity) {
   dpm([$content, $entity], 'About Entity');
 }
 
