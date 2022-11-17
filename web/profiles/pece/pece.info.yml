@@ -2,7 +2,7 @@ name: PECE
 type: profile
 description: 'Platform of Experimental Collaborative Ethnography'
 core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^8 || ^9 || ^10
 version: 2.0.0-alpha
 
 distribution:
@@ -11,12 +11,18 @@ distribution:
 
 # Modules to install to support the profile.
 install:
-  - user
-  - block_content
+  - admin_toolbar
+  - automated_cron
+  - better_exposed_filters
+  - big_pipe
+  - block
+  - block_content  
   - breakpoint
   - color
   - color_field
   - config
+  - config_split
+  - config_translation
   - comment
   - components
   - context
@@ -24,37 +30,44 @@ install:
   - content_moderation
   - content_translation
   - contact
+  - ckeditor
   - ctools
+  - datetime
   - dblog
+  - dynamic_page_cache
+  - editor
   - field_group
   - field_ui
+  - file
   - geolocation
+  - graphql_people
   - help
   - history
   - image
-  - layout_builder
-  - options
-  - path
-  - paragraphs
-  - paragraphs_type_permissions
-  - quickedit
-  - rules
-  - rest
-  - taxonomy
-  - shortcut
-  - toolbar
-  - file
-  - rdf
-  - views
-  - views_ui
-  - editor
-  - ckeditor
-  - config_split
-  - better_exposed_filters
+  - language
   - languagefield
+  - layout_builder
+  - layout_discovery
+  - locale
+  - media
+  - media_library
+  - menu_ui
+  - menu_link_content
+  - metatag
+  - metatag_dc
+  - metatag_dc_advanced
+  - metatag_open_graph
+  - metatag_verification
+  - metatag_views
+  - mysql
+  - node
   - nyx_graphql
   - nyx_recaptcha
-  - graphql_people
+  - options
+  - page_cache
+  - paragraphs
+  - paragraphs_type_permissions
+  - path
   - pathauto
   - pbf
   - pece_access
@@ -76,19 +89,22 @@ install:
   - pece_rules_webhook
   - pece_n8n
   - profile
-  - simple_oauth
-  - admin_toolbar
-  - mysql
-  - metatag
-  - metatag_dc
-  - metatag_dc_advanced
-  - metatag_open_graph
-  - metatag_verification
-  - metatag_views
-  - media_library
-  - single_content_sync
+  - rdf
   - responsive_image
+  - rest
+  - rules
+  - search
+  - shortcut
+  - simple_oauth
+  - single_content_sync
+  - taxonomy
+  - tour
+  - toolbar
   - user_restrictions
+  - user
+  - views
+  - views_ui
+  - workflows
 
 dependencies:
   - node
@@ -102,8 +118,6 @@ dependencies:
   - pece_analytics
 
 themes:
-  - bartik
-  - seven
   - claro
   - gin
   - pece_theme
