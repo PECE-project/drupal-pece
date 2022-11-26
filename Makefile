@@ -34,9 +34,6 @@ prod:
 distro: distro-clean
 	docker-compose run --rm production gulp pack-distro
 
-run-php7:
-	docker-compose -f docker-compose-php7.2.yml run --rm -p 8080:80 dev_pece
-
 run-prod:
 	docker-compose -f docker-compose-prod.yml -f docker-compose-prod.override.yml up -d
 
