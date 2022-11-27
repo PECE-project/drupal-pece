@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_artifacts.field_group.inc
@@ -20,20 +21,20 @@ function pece_artifacts_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Group settings',
-    'weight' => '3',
     'children' => array(
       0 => 'og_group_ref',
     ),
-    'format_type' => 'fieldset',
     'format_settings' => array(
       'formatter' => 'collapsible',
       'instance_settings' => array(
-        'description' => '',
         'classes' => 'group-settings field-group-fieldset',
+        'description' => '',
         'required_fields' => 1,
       ),
     ),
+    'format_type' => 'fieldset',
+    'label' => 'Group settings',
+    'weight' => '3',
   );
   $field_groups['group_settings|node|pece_artifact|form'] = $field_group;
 

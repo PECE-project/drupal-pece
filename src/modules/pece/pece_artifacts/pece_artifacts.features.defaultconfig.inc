@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_artifacts.features.defaultconfig.inc
@@ -27,50 +28,50 @@ function pece_artifacts_defaultconfig_strongarm() {
   $strongarm->name = 'node_expire_ntypes';
   $strongarm->value = array(
     'pece_artifact_audio' => array(
-      'enabled' => 1,
       'default' => '',
+      'enabled' => 1,
       'max' => '',
       'required' => 0,
     ),
     'pece_artifact_bundle' => array(
-      'enabled' => 1,
       'default' => '',
+      'enabled' => 1,
       'max' => '',
       'required' => 0,
     ),
     'pece_artifact_fieldnote' => array(
-      'enabled' => 1,
       'default' => '',
+      'enabled' => 1,
       'max' => '',
       'required' => 0,
     ),
     'pece_artifact_image' => array(
-      'enabled' => 1,
       'default' => '',
+      'enabled' => 1,
       'max' => '',
       'required' => 0,
     ),
     'pece_artifact_pdf' => array(
-      'enabled' => 1,
       'default' => '',
+      'enabled' => 1,
       'max' => '',
       'required' => 0,
     ),
     'pece_artifact_text' => array(
-      'enabled' => 1,
       'default' => '',
+      'enabled' => 1,
       'max' => '',
       'required' => 0,
     ),
     'pece_artifact_video' => array(
-      'enabled' => 1,
       'default' => '',
+      'enabled' => 1,
       'max' => '',
       'required' => 0,
     ),
     'pece_artifact_website' => array(
-      'enabled' => 1,
       'default' => '',
+      'enabled' => 1,
       'max' => '',
       'required' => 0,
     ),
