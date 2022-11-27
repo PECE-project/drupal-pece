@@ -21,24 +21,24 @@ function pece_essay_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Group settings',
-    'weight' => '6',
     'children' => array(
       0 => 'group_content_access',
       1 => 'og_group_ref',
     ),
-    'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Group settings',
+      'formatter' => 'collapsible',
       'instance_settings' => array(
-        'required_fields' => 1,
-        'id' => '',
         'classes' => 'group-settings field-group-fieldset',
         'description' => 'Be aware that this content might become <strong>Visible</strong> to anyone if you assign it to an <strong>Open Group</strong>.
 ',
+        'id' => '',
+        'required_fields' => 1,
       ),
-      'formatter' => 'collapsible',
+      'label' => 'Group settings',
     ),
+    'format_type' => 'fieldset',
+    'label' => 'Group settings',
+    'weight' => '6',
   );
   $field_groups['group_settings|node|pece_essay|form'] = $field_group;
 

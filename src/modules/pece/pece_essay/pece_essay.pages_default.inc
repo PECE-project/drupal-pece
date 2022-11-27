@@ -18,21 +18,21 @@ function pece_essay_default_page_manager_pages() {
   $page->admin_description = 'PECE Essay items page.';
   $page->path = 'node/%node/essay';
   $page->access = array(
-    'type' => 'none',
-    'settings' => NULL,
     'plugins' => array(
       0 => array(
-        'name' => 'node_access',
-        'settings' => array(
-          'type' => 'view',
-        ),
         'context' => array(
           0 => 'logged-in-user',
           1 => 'argument_entity_id:node_1',
         ),
+        'name' => 'node_access',
         'not' => FALSE,
+        'settings' => array(
+          'type' => 'view',
+        ),
       ),
     ),
+    'settings' => NULL,
+    'type' => 'none',
   );
   $page->menu = array();
   $page->arguments = array(
@@ -56,24 +56,24 @@ function pece_essay_default_page_manager_pages() {
   $handler->handler = 'panel_context';
   $handler->weight = 0;
   $handler->conf = array(
-    'title' => 'Panel',
+    'body_classes_to_add' => '',
+    'body_classes_to_remove' => '',
+    'contexts' => array(),
+    'css' => '',
+    'css_id' => '',
+    'name' => 'panel',
     'no_blocks' => 0,
     'pipeline' => 'standard',
-    'body_classes_to_remove' => '',
-    'body_classes_to_add' => '',
-    'css_id' => '',
-    'css' => '',
-    'contexts' => array(),
     'relationships' => array(),
-    'name' => 'panel',
+    'title' => 'Panel',
   );
   $display = new panels_display();
   $display->layout = 'pece_single_column';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
-      'default' => NULL,
       'contentmain' => NULL,
+      'default' => NULL,
     ),
   );
   $display->cache = array();
@@ -91,11 +91,11 @@ function pece_essay_default_page_manager_pages() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'view_mode' => 'free_panel',
     'context' => 'argument_entity_id:node_1',
     'override_title' => 0,
-    'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'override_title_text' => '',
+    'view_mode' => 'free_panel',
   );
   $pane->cache = array();
   $pane->style = array(
