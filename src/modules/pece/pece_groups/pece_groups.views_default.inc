@@ -705,7 +705,7 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Content: Project (field_pece_project_ref) */
+  /* Contextual filter: Content: Cite as part of... (field_pece_project_ref) */
   $handler->display->display_options['arguments']['field_pece_project_ref_target_id']['id'] = 'field_pece_project_ref_target_id';
   $handler->display->display_options['arguments']['field_pece_project_ref_target_id']['table'] = 'field_data_field_pece_project_ref';
   $handler->display->display_options['arguments']['field_pece_project_ref_target_id']['field'] = 'field_pece_project_ref_target_id';
@@ -777,6 +777,14 @@ function pece_groups_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'node';
   $handler->display->display_options['row_options']['view_mode'] = 'most_recent';
   $handler->display->display_options['row_options']['links'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No results';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No groups are available.';
+  $handler->display->display_options['empty']['area']['format'] = 'panopoly_wysiwyg_text';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -844,6 +852,8 @@ function pece_groups_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
+    t('No results'),
+    t('No groups are available.'),
     t('Content pane'),
     t('View panes'),
     t('Groups front pane'),

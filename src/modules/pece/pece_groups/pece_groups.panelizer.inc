@@ -38,17 +38,17 @@ function pece_groups_panelizer_defaults() {
     ),
   );
   $display->panel_settings = array(
+    'content' => array(
+      'style' => 'tabs',
+    ),
     'style_settings' => array(
-      'default' => NULL,
-      'sidebar' => NULL,
-      'contentheader' => NULL,
+      'content' => NULL,
       'contentcolumn1' => NULL,
       'contentcolumn2' => NULL,
       'contentfooter' => NULL,
-      'content' => NULL,
-    ),
-    'content' => array(
-      'style' => 'tabs',
+      'contentheader' => NULL,
+      'default' => NULL,
+      'sidebar' => NULL,
     ),
   );
   $display->cache = array();
@@ -66,16 +66,16 @@ function pece_groups_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'title',
-    'formatter' => 'text_default',
+    'context' => 'panelizer',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'text_default',
     'formatter_settings' => array(),
-    'context' => 'panelizer',
+    'label' => 'title',
     'override_title' => 0,
-    'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'override_title_text' => '',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -99,9 +99,9 @@ function pece_groups_panelizer_defaults() {
     'context' => array(
       0 => 'panelizer',
     ),
-    'view_settings' => 'fields',
     'header_type' => 'none',
     'view_mode' => 'teaser',
+    'view_settings' => 'fields',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -122,20 +122,20 @@ function pece_groups_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'title',
-    'formatter' => 'entityreference_entity_view',
+    'context' => array(),
     'delta_limit' => '0',
     'delta_offset' => '0',
     'delta_reversed' => 0,
+    'formatter' => 'entityreference_entity_view',
     'formatter_settings' => array(
       'link' => 1,
-      'view_mode' => 'mini_teaser',
       'links' => 0,
+      'view_mode' => 'mini_teaser',
     ),
-    'context' => array(),
+    'label' => 'title',
     'override_title' => 1,
-    'override_title_text' => 'Parent groups',
     'override_title_heading' => 'h3',
+    'override_title_text' => 'Parent groups',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -156,9 +156,9 @@ function pece_groups_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'view_settings' => 'fields',
     'header_type' => 'none',
     'view_mode' => 'teaser',
+    'view_settings' => 'fields',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -182,9 +182,9 @@ function pece_groups_panelizer_defaults() {
     'context' => array(
       0 => 'panelizer',
     ),
-    'view_settings' => 'fields',
     'header_type' => 'none',
     'view_mode' => 'teaser',
+    'view_settings' => 'fields',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -205,9 +205,9 @@ function pece_groups_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'view_settings' => 'fields',
     'header_type' => 'none',
     'view_mode' => 'teaser',
+    'view_settings' => 'fields',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -228,9 +228,9 @@ function pece_groups_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'view_settings' => 'rendered_entity',
     'header_type' => 'none',
     'view_mode' => 'mini_teaser',
+    'view_settings' => 'rendered_entity',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -251,18 +251,18 @@ function pece_groups_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'hidden',
-    'formatter' => 'og_group_subscribe',
+    'context' => 'panelizer',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'og_group_subscribe',
     'formatter_settings' => array(
       'field_name' => 'og_user_node',
     ),
-    'context' => 'panelizer',
+    'label' => 'hidden',
     'override_title' => 0,
-    'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'override_title_text' => '',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -283,20 +283,20 @@ function pece_groups_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'hidden',
-    'formatter' => 'file_rendered',
+    'context' => 'panelizer',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'file_rendered',
     'formatter_settings' => array(
+      'file_view_mode' => 'default',
       'image_link' => '',
       'image_style' => '',
-      'file_view_mode' => 'default',
     ),
-    'context' => 'panelizer',
+    'label' => 'hidden',
     'override_title' => 0,
-    'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'override_title_text' => '',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -317,18 +317,18 @@ function pece_groups_panelizer_defaults() {
   $pane->shown = FALSE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'hidden',
-    'formatter' => 'entityreference_label',
+    'context' => array(),
     'delta_limit' => '0',
     'delta_offset' => '0',
     'delta_reversed' => 0,
+    'formatter' => 'entityreference_label',
     'formatter_settings' => array(
       'link' => 1,
     ),
-    'context' => array(),
+    'label' => 'hidden',
     'override_title' => 1,
-    'override_title_text' => 'Projects',
     'override_title_heading' => 'h2',
+    'override_title_text' => 'Projects',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -349,16 +349,16 @@ function pece_groups_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'title',
-    'formatter' => 'group_email',
+    'context' => 'panelizer',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'group_email',
     'formatter_settings' => array(),
-    'context' => 'panelizer',
+    'label' => 'title',
     'override_title' => 0,
-    'override_title_text' => 'Email',
     'override_title_heading' => 'h2',
+    'override_title_text' => 'Email',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -379,16 +379,16 @@ function pece_groups_panelizer_defaults() {
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'label' => 'title',
-    'formatter' => 'og_list_default',
+    'context' => array(),
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
+    'formatter' => 'og_list_default',
     'formatter_settings' => array(),
-    'context' => array(),
+    'label' => 'title',
     'override_title' => 0,
-    'override_title_text' => '',
     'override_title_heading' => 'h2',
+    'override_title_text' => '',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -412,12 +412,12 @@ function pece_groups_panelizer_defaults() {
     'context' => array(
       0 => 'panelizer',
     ),
-    'override_title' => '',
-    'override_title_text' => '',
-    'override_title_heading' => 'h2',
-    'view_settings' => 'rendered_entity',
     'header_type' => 'none',
+    'override_title' => '',
+    'override_title_heading' => 'h2',
+    'override_title_text' => '',
     'view_mode' => 'mini_teaser',
+    'view_settings' => 'rendered_entity',
     'widget_title' => 'Members',
   );
   $pane->cache = array();

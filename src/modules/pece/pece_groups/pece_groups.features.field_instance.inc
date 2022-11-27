@@ -24,6 +24,12 @@ function pece_groups_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -116,6 +122,12 @@ function pece_groups_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'card_full_text' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -257,6 +269,12 @@ function pece_groups_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'entityreference',
@@ -353,6 +371,12 @@ function pece_groups_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'card_full_text' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -459,6 +483,12 @@ function pece_groups_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'card_full_text' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -553,6 +583,12 @@ function pece_groups_field_default_field_instances() {
     'description' => 'Determine if this is an OG group.',
     'display' => array(
       'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'card_full_text' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -655,6 +691,12 @@ function pece_groups_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'card_full_text' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -777,6 +819,12 @@ function pece_groups_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'card_full_text' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
