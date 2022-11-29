@@ -1,12 +1,13 @@
-From 12ea5fdad47bf445b34908c7f762adc4b612b3d8 Mon Sep 17 00:00:00 2001
+From 94f45a14bfcfe6c7a790d7051777394de718f154 Mon Sep 17 00:00:00 2001
 From: Reva Gomes <revagomes@gmail.com>
 Date: Thu, 10 Nov 2022 02:05:10 +0100
 Subject: [PATCH] Fix compatibility issue in rules dependency list.
 
 ---
- rules.info                   | 4 ++--
- rules_admin/rules_admin.info | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ rules.info                           | 4 ++--
+ rules_admin/rules_admin.info         | 2 +-
+ rules_scheduler/rules_scheduler.info | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/rules.info b/rules.info
 index 94ddefac..1f433be1 100644
@@ -33,6 +34,18 @@ index 72257037..c8c3120d 100644
  configure = admin/config/workflow/rules
  
  ; Test cases
+diff --git a/rules_scheduler/rules_scheduler.info b/rules_scheduler/rules_scheduler.info
+index a0af20cf..a48ae29f 100644
+--- a/rules_scheduler/rules_scheduler.info
++++ b/rules_scheduler/rules_scheduler.info
+@@ -1,6 +1,6 @@
+ name = Rules Scheduler
+ description = Schedule the execution of Rules components using actions.
+-dependencies[] = rules:rules
++dependencies[] = rules
+ package = Rules
+ core = 7.x
+ files[] = includes/rules_scheduler.handler.inc
 -- 
 2.25.1
 
