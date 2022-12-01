@@ -1,13 +1,14 @@
 name: 'PECE About'
 description: 'Feature that exports the about page properties.'
 type: module
-core: 8.x
 core_version_requirement: ^8 || ^9 | ^10
 package: PECE
+
 dependencies:
   - 'pece_project'
   - 'pece_subst_logic'
-  - 'views'
-  - 'views_infinite_scroll'
-  - 'single_content_sync'
-project: 'pece_about'
+  - 'drupal:views'
+  - 'drupal:views_content'
+  - 'drupal:views_infinite_scroll'
+  - 'drupal:single_content_sync'
+  # - 'pece_design_logic:pece_design_logic'

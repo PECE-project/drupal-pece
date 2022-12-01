@@ -4,6 +4,7 @@
  * Installation code for the PECE About feature.
  */
 
+use Spyc;
 use Drupal\node\Entity\Node;
 
 /**
@@ -17,7 +18,7 @@ function pece_about_install() {
  * Implements hook_content_import_entity_alter().
  */
 function _pece_about_content_import_entity_alter(array $content, Node $entity) {
-  dpm([$content, $entity], 'About Entity');
+  // dpm([$content, $entity], 'About Entity');
 }
 
 /**
@@ -47,8 +48,11 @@ function _pece_about_default_page_info() {
   $path_to_about_info_file = "{$path_to_defaults}/about.yml";
 
   if (file_exists($path_to_about_info_file)) {
+    $spyc = new Spyc();
     $about_info_raw = file_get_contents($path_to_about_info_file);
-    return pece_parse_yaml($about_info_raw);
+    // pece_parse_yaml($about_info_raw);
+    $parsed = $spyc->load($about_info_raw);
+    return $parsed;
   }
 
   return FALSE;

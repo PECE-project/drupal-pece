@@ -4,8 +4,7 @@
  * Code for the PECE About feature.
  */
 
-Use \Drupal\Core\Link;
-
+use Drupal\Core\Link;
 use function Drupal\eck\Entity\t;
 
 /**
@@ -44,7 +43,7 @@ function pece_about_trim_summary($summary, $more = TRUE, $alter = []) {
   }
 
   if ($more !== FALSE) {
-    $url = Drupal\Core\Url::fromUserInput('/about');
+    $url = \Drupal\Core\Url::fromUserInput('/about');
     $read_more_link = Link::fromTextAndUrl(t('Read more'), $url);
     $read_more = $read_more_link->toRenderable();
     $read_more['#attribules']['class'] = 'read-mode';
