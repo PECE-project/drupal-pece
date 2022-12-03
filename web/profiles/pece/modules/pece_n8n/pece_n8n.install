@@ -13,6 +13,7 @@ use Drupal\user\Entity\User as UserPECE;
  * Implements hook_install().
  */
 function pece_n8n_install() {
+  $random = new Random();
   $consumers = \Drupal::entityTypeManager()->getStorage('consumer')
     ->loadByProperties(['label' => 'n8n']);
   $consumers ? reset($consumers) : FALSE;
@@ -23,7 +24,7 @@ function pece_n8n_install() {
       'is_default' => FALSE,
       'confidential' => TRUE,
       'third_party' => TRUE,
-      'secret' => getenv('N8N_CLIENT_SECRET') ?? Random::string(10),
+      'secret' => getenv('N8N_CLIENT_SECRET') ?? $random->string(10),
     ])->save();
 
   //@TODO: Get values from .env, but getenv doesn't work here
@@ -33,6 +34,6 @@ function pece_n8n_install() {
       'mail' => 'n8n@pece.automation',
       'roles' => ['authenticated', 'r_api'],
       'status' => TRUE,
-      'pass' => Random::string(10),
+      'pass' => $random->string(10),
     ])->save();
 }
