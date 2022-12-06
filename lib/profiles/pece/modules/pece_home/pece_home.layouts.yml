@@ -1,0 +1,45 @@
+pece_home_two_column:
+  label: "Two columns (PECE)"
+  category: "Layouts"
+  class: '\Drupal\lbl\BaseLayout'
+  template: templates/pece-home-two-column
+  default_region: left-center
+  icon_map:
+    - [left-top, left-center, left-bottom, right-top, right-bottom]
+  variants:
+    default:
+      title: "Default"
+      map:
+        - [left-top, left-center, left-bottom, right-top, right-bottom]
+    first_big:
+      title: "Tables devices"
+      map:
+        - [left-top, right-top]
+        - [left-bottom, right-bottom]
+    left_two:
+      title: "Left Two"
+      map:
+        - [left-top, left-bottom, right-top]
+    right_two:
+      title: "Right Two"
+      map:
+        - [left-top, right-top, right-bottom]
+    below:
+      title: "Small Devices"
+      map:
+        - [left-top]
+        - [left-center]
+        - [left-bottom]
+        - [right-top]
+        - [right-bottom]
+  regions:
+    left-top:
+      label: Left Top
+    left-center:
+      label: Left Center
+    left-bottom:
+      label: Left Bottom
+    right-top:
+      label: Right Top
+    right-bottom:
+      label: Right Bottom
