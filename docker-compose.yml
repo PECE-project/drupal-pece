@@ -18,7 +18,7 @@ services:
       - ./docker/database/data:/var/lib/mysql # Use bind mount
 
   php:
-    image: wodby/drupal-php:$DRUPAL_TAG
+    image: wodby/drupal-php:$PHP_TAG
     container_name: "${PROJECT_NAME}_php"
     networks:
       pece:
