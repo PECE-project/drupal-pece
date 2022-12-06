@@ -1,162 +1,75 @@
-# Composer template for Drupal projects with docker
+<img alt="Drupal Logo" src="https://www.drupal.org/files/Wordmark_blue_RGB.png" height="60px">
 
-This project is based from https://github.com/drupal-composer/drupal-project and https://github.com/wodby/docker4drupal
+Drupal is an open source content management platform supporting a variety of
+websites ranging from personal weblogs to large community-driven websites. For
+more information, visit the Drupal website, [Drupal.org][Drupal.org], and join
+the [Drupal community][Drupal community].
 
-## Depedencies
-- Docker
-- Docker Compose
-- Make
-- Composer
+## Contributing
+
+Drupal is developed on [Drupal.org][Drupal.org], the home of the international
+Drupal community since 2001!
+
+[Drupal.org][Drupal.org] hosts Drupal's [GitLab repository][GitLab repository],
+its [issue queue][issue queue], and its [documentation][documentation]. Before
+you start working on code, be sure to search the [issue queue][issue queue] and
+create an issue if your aren't able to find an existing issue.
+
+Every issue on Drupal.org automatically creates a new community-accessible fork
+that you can contribute to. Learn more about the code contribution process on
+the [Issue forks & merge requests page][issue forks].
 
 ## Usage
 
-1- Install Docker
+For a brief introduction, see [USAGE.txt](/core/USAGE.txt). You can also find
+guides, API references, and more by visiting Drupal's [documentation
+page][documentation].
 
-2- Install docker-compose
+You can quickly extend Drupal's core feature set by installing any of its
+[thousands of free and open source modules][modules]. With Drupal and its
+module ecosystem, you can often build most or all of what your project needs
+before writing a single line of code.
 
-3- Rename .env.example to .env and if necessary, change the variables.
+## Changelog
 
-#### 3.1 - Only Mac users
+Drupal keeps detailed [change records][changelog]. You can search Drupal's
+changes for a record of every notable breaking change and new feature since
+2011.
 
-Update this lines
+## Security
 
-.env file
+For a list of security announcements, see the [Security advisories
+page][Security advisories] (available as [an RSS feed][security RSS]). This
+page also describes how to subscribe to these announcements via email.
 
-`Change PHP_TAG to use macos images.`
+For information about the Drupal security process, or to find out how to report
+a potential security issue to the Drupal security team, see the [Security team
+page][security team].
 
-In docker-compose.override.yml, search for `For macOS users` comment.
+## Need a helping hand?
 
-More information: https://wodby.com/docs/stacks/drupal/local/#docker-for-mac for you choice between cache or docker-sync
+Visit the [Support page][support] or browse [over a thousand Drupal
+providers][service providers] offering design, strategy, development, and
+hosting services.
 
----
+## Legal matters
 
-4- Run command `make up`
+Know your rights when using Drupal by reading Drupal core's
+[license](/core/LICENSE.txt).
 
-5- Run command `make shell`
+Learn about the [Drupal trademark and logo policy here][trademark].
 
-6- Run command `composer install`
-
-7- Try access http://drupal.docker.local
-
-8- If you need GraphQl, after drupal installation, enable the graphql module in http://drupal.docker.local/admin/modules
-
-Look docker.mk to see others make commands and read .env about database settings
-
-```
-cd some-dir
-composer require drupal/devel:~1.0
-```
-
-The `composer create-project` command passes ownership of all files to the 
-project that is created. You should create a new git repository, and commit 
-all files not excluded by the .gitignore file.
-
-## What does the template do?
-
-When installing the given `composer.json` some tasks are taken care of:
-
-* Drupal will be installed in the `web`-directory.
-* Autoloader is implemented to use the generated composer autoloader in `vendor/autoload.php`,
-  instead of the one provided by Drupal (`web/vendor/autoload.php`).
-* Modules (packages of type `drupal-module`) will be placed in `web/modules/contrib/`
-* Theme (packages of type `drupal-theme`) will be placed in `web/themes/contrib/`
-* Profiles (packages of type `drupal-profile`) will be placed in `web/profiles/contrib/`
-* Creates default writable versions of `settings.php` and `services.yml`.
-* Creates `web/sites/default/files`-directory.
-* Latest version of drush is installed locally for use at `vendor/bin/drush`.
-* Latest version of DrupalConsole is installed locally for use at `vendor/bin/drupal`.
-* Creates environment variables based on your .env file. See [.env.example](.env.example).
-* Graphql module
-
-## Updating Drupal Core
-
-This project will attempt to keep all of your Drupal Core files up-to-date; the 
-project [drupal-composer/drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold) 
-is used to ensure that your scaffold files are updated every time drupal/core is 
-updated. If you customize any of the "scaffolding" files (commonly .htaccess), 
-you may need to merge conflicts if any of your modified files are updated in a 
-new release of Drupal core.
-
-Follow the steps below to update your core files.
-
-1. Run `composer update drupal/core webflo/drupal-core-require-dev "symfony/*" --with-dependencies` to update Drupal Core and its dependencies.
-1. Run `git diff` to determine if any of the scaffolding files have changed. 
-   Review the files for any changes and restore any customizations to 
-  `.htaccess` or `robots.txt`.
-1. Commit everything all together in a single commit, so `web` will remain in
-   sync with the `core` when checking out branches or running `git bisect`.
-1. In the event that there are non-trivial conflicts in step 2, you may wish 
-   to perform these steps on a branch, and use `git merge` to combine the 
-   updated core files with your customized files. This facilitates the use 
-   of a [three-way merge tool such as kdiff3](http://www.gitshah.com/2010/12/how-to-setup-kdiff-as-diff-tool-for-git.html). This setup is not necessary if your changes are simple; 
-   keeping all of your modifications at the beginning or end of the file is a 
-   good strategy to keep merges easy.
-
-## Generate composer.json from existing project
-
-With using [the "Composer Generate" drush extension](https://www.drupal.org/project/composer_generate)
-you can now generate a basic `composer.json` file from an existing project. Note
-that the generated `composer.json` might differ from this project's file.
-
-
-## FAQ
-
-### Should I commit the contrib modules I download?
-
-Composer recommends **no**. They provide [argumentation against but also 
-workrounds if a project decides to do it anyway](https://getcomposer.org/doc/faqs/should-i-commit-the-dependencies-in-my-vendor-directory.md).
-
-### Should I commit the scaffolding files?
-
-The [drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold) plugin can download the scaffold files (like
-index.php, update.php, …) to the web/ directory of your project. If you have not customized those files you could choose
-to not check them into your version control system (e.g. git). If that is the case for your project it might be
-convenient to automatically run the drupal-scaffold plugin after every install or update of your project. You can
-achieve that by registering `@composer drupal:scaffold` as post-install and post-update command in your composer.json:
-
-```json
-"scripts": {
-    "post-install-cmd": [
-        "@composer drupal:scaffold",
-        "..."
-    ],
-    "post-update-cmd": [
-        "@composer drupal:scaffold",
-        "..."
-    ]
-},
-```
-### How can I apply patches to downloaded modules?
-
-If you need to apply patches (depending on the project being modified, a pull 
-request is often a better solution), you can do so with the 
-[composer-patches](https://github.com/cweagans/composer-patches) plugin.
-
-To add a patch to drupal module foobar insert the patches section in the extra 
-section of composer.json:
-```json
-"extra": {
-    "patches": {
-        "drupal/foobar": {
-            "Patch description": "URL or local path to patch"
-        }
-    }
-}
-```
-### How do I switch from packagist.drupal-composer.org to packages.drupal.org?
-
-Follow the instructions in the [documentation on drupal.org](https://www.drupal.org/docs/develop/using-composer/using-packagesdrupalorg).
-
-### How do I specify a PHP version ?
-
-This project supports PHP 5.6 as minimum version (see [Drupal 8 PHP requirements](https://www.drupal.org/docs/8/system-requirements/drupal-8-php-requirements)), however it's possible that a `composer update` will upgrade some package that will then require PHP 7+.
-
-To prevent this you can add this code to specify the PHP version you want to use in the `config` section of `composer.json`:
-```json
-"config": {
-    "sort-packages": true,
-    "platform": {
-        "php": "5.6.40"
-    }
-},
-```
+[Drupal.org]: https://www.drupal.org
+[Drupal community]: https://www.drupal.org/community
+[GitLab repository]: https://git.drupalcode.org/project/drupal
+[issue queue]: https://www.drupal.org/project/issues/drupal
+[issue forks]: https://www.drupal.org/drupalorg/docs/gitlab-integration/issue-forks-merge-requests
+[documentation]: https://www.drupal.org/documentation
+[changelog]: https://www.drupal.org/list-changes/drupal
+[modules]: https://www.drupal.org/project/project_module
+[security advisories]: https://www.drupal.org/security
+[security RSS]: https://www.drupal.org/security/rss.xml
+[security team]: https://www.drupal.org/drupal-security-team
+[service providers]: https://www.drupal.org/drupal-services
+[support]: https://www.drupal.org/support
+[trademark]: https://www.drupal.com/trademark
