@@ -1,0 +1,36 @@
+drupal:
+    root: web
+    base_url: '${env.DRUPAL_BASE_URL}'
+    site:
+        profile: token_project_profile
+        name: token_project_name
+        generate_db_url: false
+        default_theme: subsite
+        mail: token_project_email
+    account:
+        name: '${env.DRUPAL_ACCOUNT_USERNAME}'
+        password: '${env.DRUPAL_ACCOUNT_PASSWORD}'
+        mail: token_project_email
+behat:
+    tags: ~@wip
+selenium:
+    host: 'http://selenium'
+    port: '4444'
+    browser: chrome
+toolkit:
+    project_id: token_project_id
+    build:
+        dist:
+            commands:
+                - { task: copy, from: lib/modules, to: 'dist/${drupal.root}/modules/custom' }
+                - { task: copy, from: lib/themes, to: 'dist/${drupal.root}/themes/custom' }
+                - { task: copy, from: lib/profiles, to: 'dist/${drupal.root}/profiles/custom' }
+        dev:
+            commands:
+                - { task: "symlink", from: "../../lib/modules", to: "${drupal.root}/modules/custom" }
+                - { task: "symlink", from: "../../lib/themes", to: "${drupal.root}/themes/custom" }
+                - { task: "symlink", from: "../../lib/profiles", to: "${drupal.root}/profiles/custom" }
+                - { task: run, command: 'drupal:setup-test' }
+commands:
+  drupal:setup-test:
+  - { task: "process", source: "behat.yml.dist", destination: "behat.yml" }
