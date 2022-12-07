@@ -2,15 +2,15 @@ drupal:
     root: web
     base_url: '${env.DRUPAL_BASE_URL}'
     site:
-        profile: token_project_profile
-        name: token_project_name
+        profile: pece
+        name: pece2
         generate_db_url: false
-        default_theme: subsite
-        mail: token_project_email
+        default_theme: pece_theme
+        mail: email@example.com
     account:
         name: '${env.DRUPAL_ACCOUNT_USERNAME}'
         password: '${env.DRUPAL_ACCOUNT_PASSWORD}'
-        mail: token_project_email
+        mail: email@example.com
 behat:
     tags: ~@wip
 selenium:
@@ -18,7 +18,7 @@ selenium:
     port: '4444'
     browser: chrome
 toolkit:
-    project_id: token_project_id
+    project_id: pece2
     build:
         dist:
             commands:
