@@ -40,7 +40,8 @@ services:
 #      - codebase:/var/www/html
 
   composer:
-    image: composer:1.9
+    image: composer:2.4.4
+    container_name: "${PROJECT_NAME}_composer"
     command: composer install --ignore-platform-reqs -vvv
     volumes:
       - ./:/app
