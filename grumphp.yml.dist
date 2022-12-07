@@ -1,0 +1,19 @@
+imports:
+  - { resource: vendor/ec-europa/qa-automation/dist/qa-conventions.yml }
+
+parameters:
+  tasks.phpcs.ignore_patterns:
+    - vendor/
+    - web/
+    - config
+  tasks.phpcs.triggered_by:
+    - php
+    - module
+    - inc
+    - theme
+    - install
+    - yml
+
+grumphp:
+  extensions:
+    - EcEuropa\QaAutomation\ExtraTasksExtension
