@@ -15,6 +15,14 @@
             "url": "https://packages.drupal.org/8"
         },
         {
+            "type": "vcs",
+            "url": "https://github.com/ec-europa/task-runner"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/ec-europa/robo-config"
+        },
+        {
             "type": "package",
             "package": {
                 "name": "nyxtechnology/media_attribution",
@@ -48,6 +56,7 @@
     "require": {
         "php": ">=7.3",
         "composer/installers": "^v1.9",
+        "consolidation/robo": "^3",
         "cweagans/composer-patches": "^1.6.5",
         "drupal/address": "^1.7",
         "drupal/admin_toolbar": "^2.0",
@@ -128,9 +137,11 @@
         "drupal/config_devel": "^1.8",
         "drupal/core-dev": "^9.3",
         "drupal/devel": "^4.0",
+        "drupal/drupal-driver": "^2.1.1",
         "drupal/migrate_devel": "2.0-alpha2",
         "drupal/drupalmoduleupgrader": "^1.9",
         "drupal/layout_builder_operation_link": "^2.0",
+        "ec-europa/toolkit": "^9",
         "phpspec/prophecy-phpunit": "^2.0"
     },
     "conflict": {
@@ -146,24 +157,35 @@
             "cweagans/composer-patches": true,
             "drupal/core-composer-scaffold": true,
             "oomphinc/composer-installers-extender": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpro/grumphp": true,
+            "phpstan/extension-installer": true
         }
     },
     "autoload": {
         "classmap": [
-            "scripts/composer/ScriptHandler.php"
+            "scripts/composer/SetupWizard.php"
         ],
         "files": ["load.environment.php"]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "OpenEuropa\\Site\\Tests\\": "./tests/"
+        }
+    },
     "scripts": {
+        "post-root-package-install": [
+            "Subsite\\composer\\SetupWizard::setup"
+        ],
+        "post-install-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
+            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+        ],
         "pre-install-cmd": [
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
         ],
         "pre-update-cmd": [
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
         ],
         "post-update-cmd": [
             "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
@@ -186,6 +208,13 @@
             "initial": {
                 ".editorconfig": "../.editorconfig",
                 ".gitattributes": "../.gitattributes"
+            },
+            "allowed-packages": [
+                "drupal/core",
+                "drupal/ui_patterns_layout_builder"
+            ],
+            "locations": {
+              "web-root": "./web"
             }
         },
         "patches": {
