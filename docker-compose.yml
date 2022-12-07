@@ -34,6 +34,8 @@ services:
       PHP_FPM_USER: wodby
       PHP_FPM_GROUP: wodby
       COLUMNS: 80 # Set 80 columns for docker exec -it.
+    env_file:
+      - .env
     volumes:
       - ./:/var/www/html
 
