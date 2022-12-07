@@ -9,15 +9,15 @@ FILE_MATCH ?=
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 PHP_CONTAINER = $(shell docker ps --filter name='^/$(PROJECT_NAME)_php' --format "{{ .ID }}")
 
-## hlp	:	Print commands help.
+##	hlp	:	Print commands help.
 hlp : Makefile
 	@sed -n 's/^##//p' $<
 
-## test	: 	Run test automation.
+##	test	: 	Run test automation.
 test:
 	cd ./tests/$(DRUPAL_VER) && PHP_VER=$(PHP_VER) ./run.sh
 
-## install	:	Install project dependencies.
+##	install	:	Install project dependencies.
 ##		Set ENVIRONMENT variable as prod to skip development dependencies.
 ##		By default it will install dev dependencies if ENVIRONMENT is not set. 
 install:
@@ -29,7 +29,7 @@ else
 endif
 	@echo "Finished installing $(PROJECT_NAME) dependencies..."
 
-## build	:	Build the project.
+##	build	:	Build the project.
 build:
 	@echo "Build $(PROJECT_NAME)..."
 	@make install
@@ -37,19 +37,32 @@ build:
 	docker exec -t $(PHP_CONTAINER) bash -c 'vendor/bin/drush updb -y'
 	@echo "Finished building $(PROJECT_NAME)"
 
-## build-dev	:	Build development environment.
+##	build-dev	:	Build development environment.
 ##		Setup settings.php and copy profiles, modules and themes into web/. 
 build-dev:
-	@echo "Build $(PROJECT_NAME) Development environment..."
+	@echo "Building $(PROJECT_NAME) Development environment..."
 	@make install
 	docker exec -t $(PHP_CONTAINER) bash -c 'vendor/bin/run toolkit:build-dev'
-	@echo "Finished build development $(PROJECT_NAME)"
+	@echo "Finished development setup."
 
-## site-install	:	(Re)Install PECE profile.
+##	site-install	:	(Re)Install PECE profile.
 site-install:
 	@echo "Starting $(PROJECT_NAME) install phase..."
-	docker exec -t $(PHP_CONTAINER) bash -c 'vendor/bin/drush si -y'
-	@echo "Finish $(PROJECT_NAME) Install phase"
+	docker exec -t $(PHP_CONTAINER) bash -c 'vendor/bin/drush si pece -y'
+	@echo "Finish $(PROJECT_NAME) Install phase."
+
+##	config-import	:	Import configuration and run update process.
+config-import:
+	@echo "Importing configuration for $(PROJECT_NAME)..."
+	docker exec -t $(PHP_CONTAINER) bash -c 'vendor/bin/drush cim --partial -y'
+	@echo "Finished importing configuration."
+	@make update
+
+##	update	:	Run update process	
+update:
+	@echo "Starting update process for $(PROJECT_NAME)..."
+	docker exec -t $(PHP_CONTAINER) bash -c 'vendor/bin/drush updb -y'
+	@echo "Finish $(PROJECT_NAME) update."
 
 distro-install:
 	docker-compose -f services-drupal.yml run --rm install
@@ -66,5 +79,6 @@ nuxt-lint:
 nuxt-run:
 	cd $(FRONT_DIR) && make run
 
+##	start-automation	:	Start automation workflows.
 start-automation:
 	docker exec $(shell docker ps --filter name='^/$(PROJECT_NAME)_n8n' --format "{{ .ID }}") python /root/.pece/startWorkflows.py
