@@ -1,6 +1,6 @@
 <?php
 
-Use \Spyc;
+Use Symfony\Component\Yaml\Yaml;
 /**
  * Parse a YAML stream.
  *
@@ -22,8 +22,7 @@ function pece_parse_yaml(String $input = '') {
   }
 
   try {
-    $spyc = new Spyc();
-    $parsed = $spyc->load($input);
+    $parsed = Yaml::parse($input);
   }
   catch (Exception $exception) {
     \Drupal::messenger()->addError('Failed parsing YAML stream.');

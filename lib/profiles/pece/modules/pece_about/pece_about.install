@@ -4,7 +4,7 @@
  * Installation code for the PECE About feature.
  */
 
-use Spyc;
+use Symfony\Component\Yaml\Yaml;
 use Drupal\node\Entity\Node;
 
 /**
@@ -48,10 +48,9 @@ function _pece_about_default_page_info() {
   $path_to_about_info_file = "{$path_to_defaults}/about.yml";
 
   if (file_exists($path_to_about_info_file)) {
-    $spyc = new Spyc;
     $about_info_raw = file_get_contents($path_to_about_info_file);
     // pece_parse_yaml($about_info_raw);
-    $parsed = $spyc->load($about_info_raw);
+    $parsed = Yaml::parse($about_info_raw);
     return $parsed;
   }
 
