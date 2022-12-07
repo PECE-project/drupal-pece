@@ -48,7 +48,7 @@ build-dev:
 ##	site-install	:	(Re)Install PECE profile.
 site-install:
 	@echo "Starting $(PROJECT_NAME) install phase..."
-	docker exec -t $(PHP_CONTAINER) bash -c 'vendor/bin/drush si pece -y'
+	docker exec -t $(PHP_CONTAINER) bash -c 'vendor/bin/drush si pece install_configure_form.site_name=PECE2 -y'
 	@echo "Finish $(PROJECT_NAME) Install phase."
 
 ##	config-import	:	Import configuration and run update process.
