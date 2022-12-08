@@ -40,6 +40,7 @@ More information: https://wodby.com/docs/stacks/drupal/local/#docker-for-mac for
 ...
 
 8- Run command `make up`
+Make sure the port 80 is free (generally the apache2 service using it)
 
 9- When the command above finished, verify and wait if the composer is executing:
 `make logs composer`
