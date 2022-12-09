@@ -3,7 +3,7 @@ version: "3.7"
 services:
 
   php:
-    image: wodby/drupal-php:$PHP_TAG
+#    image: wodby/drupal-php:$PHP_TAG
     environment:
       PHP_FPM_CLEAR_ENV: "no"
       PHP_XDEBUG: 1
@@ -42,7 +42,7 @@ services:
   composer:
     image: composer:2.4.4
     container_name: "${PROJECT_NAME}_composer"
-    command: composer install --ignore-platform-reqs -vvv
+#    command: composer install --ignore-platform-reqs -vvv
     volumes:
       - ./:/app
       - ~/.composer:/tmp
