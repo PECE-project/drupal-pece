@@ -3,6 +3,8 @@
 namespace Drupal\pece_home\Controller;
 
 use \Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Render\RendererInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -40,6 +42,7 @@ class HomeController extends ControllerBase {
    */
   public function buildPage() {
     return [
+      '#type' => 'markup',
       '#markup' => 'Home page',
     ];
   }
@@ -63,4 +66,21 @@ class HomeController extends ControllerBase {
 
     return $output;
   }
+
+  /**
+   * Checks access for a specific request.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Run access checks for this account.
+   *
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
+   */
+  public function access(AccountInterface $account) {
+    // Check permissions. Pass forward parameters from the route and/or request
+    // as needed.
+    return AccessResult::allowedIf($account->hasPermission('access content'));
+  }
+
 }
+
