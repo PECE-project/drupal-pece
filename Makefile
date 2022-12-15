@@ -43,12 +43,14 @@ build-dev:
 	@echo "Building $(PROJECT_NAME) Development environment..."
 	@make install
 	docker exec -t $(PHP_CONTAINER) bash -c 'vendor/bin/run toolkit:build-dev'
+	@make perm-fix
 	@echo "Finished development setup."
 
 ##	site-install	:	(Re)Install PECE profile.
 site-install:
 	@echo "Starting $(PROJECT_NAME) install phase..."
 	docker exec -t $(PHP_CONTAINER) bash -c 'vendor/bin/drush si pece install_configure_form.site_name=PECE2 -y'
+	@make perm-fix
 	@echo "Finish $(PROJECT_NAME) Install phase."
 
 ##	config-import	:	Import configuration and run update process.
@@ -63,6 +65,10 @@ update:
 	@echo "Starting update process for $(PROJECT_NAME)..."
 	docker exec -t $(PHP_CONTAINER) bash -c 'vendor/bin/drush updb -y'
 	@echo "Finish $(PROJECT_NAME) update."
+
+##	perm-fix	:	Fix permission for web/sites/default/files dir	
+perm-fix:
+	docker exec -t $(PHP_CONTAINER) bash -c 'chown -R wodby:www-data web/sites/default/files'
 
 distro-install:
 	docker-compose -f services-drupal.yml run --rm install
