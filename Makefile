@@ -43,6 +43,7 @@ build-dev:
 	@echo "Building $(PROJECT_NAME) Development environment..."
 	@make install
 	docker exec -t $(PHP_CONTAINER) bash -c 'vendor/bin/run toolkit:build-dev'
+	docker exec -t $(PHP_CONTAINER) bash -c 'cp web/sites/example.settings.local.php web/sites/default/settings.override.php'
 	@make perm-fix
 	@echo "Finished development setup."
 
