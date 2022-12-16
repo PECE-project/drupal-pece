@@ -44,7 +44,7 @@ services:
     networks:
       pece:
         aliases:
-          - admin.${PROJECT_BASE_URL}
+          - ${PROJECT_BASE_URL}
       peceV1:
     container_name: "${PROJECT_NAME}_nginx"
     depends_on:
@@ -62,7 +62,7 @@ services:
 #      - ./:/var/www/html:cached # User-guided caching
 #      - docker-sync:/var/www/html # Docker-sync
     labels:
-      - "traefik.http.routers.${PROJECT_NAME}_nginx.rule=Host(`admin.${PROJECT_BASE_URL}`)"
+      - "traefik.http.routers.${PROJECT_NAME}_nginx.rule=Host(`${PROJECT_BASE_URL}`)"
 
   mailhog:
     image: mailhog/mailhog
