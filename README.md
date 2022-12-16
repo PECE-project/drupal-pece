@@ -3,6 +3,7 @@
 This project is based from https://github.com/drupal-composer/drupal-project and https://github.com/wodby/docker4drupal
 
 ## Depedencies
+- Git
 - Docker
 - Docker Compose
 - Make
@@ -10,13 +11,16 @@ This project is based from https://github.com/drupal-composer/drupal-project and
 
 ## Usage
 
-1- Install Docker
+1- Run `git clone git@github.com:PECE-project/drupal-pece.git --branch pece2.0`
 
-2- Install docker-compose
+2- Run `cd drupal-pece`
 
-3- Rename .env.example to .env and if necessary, change the variables.
+3- Run `cp .env.example .env` 
+(if necessary, change the variables).
 
-#### 3.1 - Only Mac users
+4- Run `cp docker-compose.override.yml.example docker-compose.override.yml`.
+
+#### Only for Mac users
 
 Update this lines
 
@@ -28,17 +32,27 @@ In docker-compose.override.yml, search for `For macOS users` comment.
 
 More information: https://wodby.com/docs/stacks/drupal/local/#docker-for-mac for you choice between cache or docker-sync
 
----
+#### Continuing
 
-4- Run `make up`
+5- Run `make up` 
+(make sure the port 80 is free, generally used by apache)
 
-5- Run `make build-dev`
+6- Run `make build-dev`
 
-6- Run `make site-install`
+7- Run `make site-install`
+(save the User name and User password which appears in your terminal in the final of execution)
 
-7- Run `sudo echo '127.0.0.1  pece.local' >> /etc/hosts` and try to access http://pece.local
+8- Run `sudo echo '127.0.0.1       pece.local' >> /etc/hosts` 
 
-8- If you need GraphQl, after drupal installation, enable the graphql module with `make drush en graphql` or in http://pece.local/admin/modules
+9- try to access http://pece.local on your browser
+(use the User name and User password saved on 7 step)
+
+
+#### If you need GraphQl
+
+After drupal installation, enable the graphql module with 
+`make drush en graphql` 
+or in http://pece.local/admin/modules
 
 See docker.mk file for more details and others 'make' commands . Also check out .env file for more info on database settings.
 
