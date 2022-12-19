@@ -133,16 +133,20 @@ services:
   #    labels:
   #      - "traefik.http.routers.${PROJECT_NAME}_adminer.rule=Host(`adminer.${PROJECT_BASE_URL}`)"
 
-  #  pma:
-  #    image: phpmyadmin/phpmyadmin
-  #    container_name: "${PROJECT_NAME}_pma"
-  #    environment:
-  #      PMA_HOST: $DB_HOST
-  #      PMA_USER: $DB_USER
-  #      PMA_PASSWORD: $DB_PASSWORD
-  #      UPLOAD_LIMIT: 1G
-  #    labels:
-  #      - "traefik.http.routers.${PROJECT_NAME}_pma.rule=Host(`pma.${PROJECT_BASE_URL}`)"
+  # pma:
+  #   image: phpmyadmin/phpmyadmin
+  #   container_name: "${PROJECT_NAME}_pma"
+  #   environment:
+  #     PMA_HOST: $DB_HOST
+  #     PMA_USER: $DB_USER
+  #     PMA_PASSWORD: $DB_PASSWORD
+  #     MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+  #     MYSQL_PASSWORD: $DB_PASSWORD
+  #     PMA_HOSTS: mariadb
+  #     PMA_CONTROLPASS: $DB_PASSWORD
+  #     UPLOAD_LIMIT: 1G
+  #   labels:
+  #     - "traefik.http.routers.${PROJECT_NAME}_pma.rule=Host(`pma.${PROJECT_BASE_URL}`)"
 
   #  solr:
   #    image: wodby/solr:$SOLR_TAG
