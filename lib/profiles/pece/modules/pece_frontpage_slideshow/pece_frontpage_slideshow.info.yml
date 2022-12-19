@@ -3,6 +3,8 @@ description: "PECE's Slideshow Image functionalities."
 core: 8.x
 core_version_requirement: ^8 || ^9
 package: 'PECE'
-version: 8.x-1.0
-project: 'pece_slideshow'
 type: module
+dependencies:
+  - 'drupal:slick'
+  - 'drupal:slick_ui'
+  - 'drupal:slick_views'
