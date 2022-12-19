@@ -1,3 +1,4 @@
+uuid: 81622068-572d-4620-bdf1-f803da0fe9a7
 langcode: en
 status: true
 dependencies:
@@ -81,6 +82,8 @@ third_party_settings:
         open: false
         description: ''
         required_fields: true
+_core:
+  default_config_hash: SFLKZ0SKDDxY1XDckLsr9voijGcrXAGp8lkPjUnu2IQ
 id: node.artifact_tabular_data.default
 targetEntityType: node
 bundle: artifact_tabular_data
@@ -206,7 +209,7 @@ content:
     third_party_settings: {  }
   field_tabular_crit_commentary:
     type: text_textarea
-    weight: 32
+    weight: 22
     region: content
     settings:
       rows: 5
@@ -214,7 +217,7 @@ content:
     third_party_settings: {  }
   field_tabular_fieldsite:
     type: entity_reference_autocomplete
-    weight: 16
+    weight: 15
     region: content
     settings:
       match_operator: CONTAINS
@@ -224,14 +227,14 @@ content:
     third_party_settings: {  }
   field_tabular_fieldsite_local:
     type: boolean_checkbox
-    weight: 17
+    weight: 16
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_tabular_language:
     type: languagefield_select
-    weight: 22
+    weight: 20
     region: content
     settings:
       format:
@@ -239,20 +242,20 @@ content:
     third_party_settings: {  }
   field_tabular_location:
     type: address_default
-    weight: 18
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   field_tabular_media:
     type: file_generic
-    weight: 20
+    weight: 18
     region: content
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
   field_tabular_source:
     type: text_textarea
-    weight: 33
+    weight: 23
     region: content
     settings:
       rows: 5
@@ -260,7 +263,7 @@ content:
     third_party_settings: {  }
   field_tabular_tags:
     type: entity_reference_autocomplete
-    weight: 23
+    weight: 21
     region: content
     settings:
       match_operator: CONTAINS
