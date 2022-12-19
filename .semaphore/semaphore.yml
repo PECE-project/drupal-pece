@@ -5,23 +5,20 @@ agent:
     type: e1-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: 'Block #1'
+  - name: Setup
     task:
       jobs:
-        - name: 'Job #1'
+        - name: Containers setup
           commands:
             - checkout
             - make up
-            - docker-compose exec web composer install
-            - docker-compose exec web drush updb -y
-            - docker-compose exec web drush cim -y
       prologue:
         commands:
           - 'git clone -b pece2.0 git@github.com:revagomes/drupal-pece.git'
       epilogue:
         always:
           commands:
-            - echo 'Starting new job...'
+            - echo 'Starting...'
         on_pass:
           commands:
             - echo 'Takalepau marko wèi!'
@@ -30,36 +27,109 @@ blocks:
             - 'echo "Nooop :("'
       env_vars:
         - name: ENVIRONMENT
-          value: 'prd'
+          value: prd
         - name: PROJECT_NAME
-          value: 'pece2'
+          value: pece2
         - name: PROJECT_BASE_URL
-          value: 'localhost'
+          value: localhost
         - name: DB_NAME
-          value: 'drupal'
+          value: drupal
         - name: DB_USER
-          value: 'drupal'
+          value: drupal
         - name: DB_PASSWORD
-          value: 'password'
+          value: password
         - name: DB_ROOT_PASSWORD
-          value: 'password'
+          value: password
         - name: DB_HOST
-          value: 'mariadb'
+          value: mariadb
         - name: DB_DRIVER
-          value: 'mysql'
+          value: mysql
         - name: DB_PORT
           value: '3306'
         - name: MARIADB_TAG
-          value: '10.4-3.8.1'
+          value: 10.9-3.23.0
         - name: DRUPAL_TAG
-          value: '7.4-dev-4.31.0'
+          value: '8'
         - name: NGINX_TAG
-          value: '1.17-5.8.13'
+          value: 1.23-5.27.0
         - name: NGINX_VHOST_PRESET
-          value: 'drupal8'
+          value: drupal8
         - name: PHP_TAG
-          value: '7.4-dev-4.14.9'
+          value: '8.1'
         - name: NODE_TAG
           value: '12.8'
         - name: FRONT_DIR
-        - value: './src/front'
+          value: ./src/front
+    dependencies: []
+  - name: Build
+    dependencies:
+      - Setup
+    task:
+      epilogue:
+        always:
+          commands:
+            - echo 'Starting...'
+        on_pass:
+          commands:
+            - echo 'Takalepau marko wèi!'
+        on_fail:
+          commands:
+            - 'echo "Nooop :("'
+      jobs:
+        - name: Building project
+          commands:
+            - make build-dev
+  - name: Installation
+    dependencies:
+      - Build
+    task:
+      epilogue:
+        always:
+          commands:
+            - echo 'Starting...'
+        on_pass:
+          commands:
+            - echo 'Takalepau marko wèi!'
+        on_fail:
+          commands:
+            - 'echo "Nooop :("'
+      jobs:
+        - name: Installing PECE distro
+          commands:
+            - make site-install
+  - name: DB Updates
+    dependencies:
+      - Installation
+    task:
+      epilogue:
+        always:
+          commands:
+            - echo 'Starting...'
+        on_pass:
+          commands:
+            - echo 'Takalepau marko wèi!'
+        on_fail:
+          commands:
+            - 'echo "Nooop :("'
+      jobs:
+        - name: Starting DB updates
+          commands:
+            - make drush "updb -y"
+  - name: Configuratino Sync
+    dependencies:
+      - DB Updates
+    task:
+      epilogue:
+        always:
+          commands:
+            - echo 'Starting...'
+        on_pass:
+          commands:
+            - echo 'Takalepau marko wèi!'
+        on_fail:
+          commands:
+            - 'echo "Nooop :("'
+      jobs:
+        - name: 'Importing configuration '
+          commands:
+            - make drush "cim -y"
