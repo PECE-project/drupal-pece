@@ -1,3 +1,4 @@
+uuid: 292fda29-0b90-4f50-82cc-3bd4daf0af02
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - node.type.artifact_tabular_data
   module:
     - file
+_core:
+  default_config_hash: xg0Rn_uogtl4hQiAmNtaethJEb_AdVZd_zvWcK0tKVA
 id: node.artifact_tabular_data.field_tabular_media
 field_name: field_tabular_media
 entity_type: node
@@ -20,7 +23,7 @@ settings:
   handler: 'default:file'
   handler_settings: {  }
   file_directory: '[date:custom:Y]-[date:custom:m]'
-  file_extensions: 'txt csv xls xlsx ods xml json rdf zip'
+  file_extensions: 'txt csv xls xml json rdf zip'
   max_filesize: ''
   description_field: false
 field_type: file
