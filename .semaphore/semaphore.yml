@@ -73,10 +73,13 @@ blocks:
       jobs:
         - name: Building project
           commands:
-            - ls -lah
-            - docker-compose exec php composer install
-            - docker-compose exec php vendor/bin/run toolkit:build-dev
+            - checkout
+            - cp .env.example .env
+            - make up
             - make build-dev
+      prologue:
+        commands:
+          - 'git clone -b pece2.0 git@github.com:revagomes/drupal-pece.git'
   - name: Installation
     dependencies:
       - Build
@@ -91,7 +94,14 @@ blocks:
       jobs:
         - name: Installing PECE distro
           commands:
+            - checkout
+            - cp .env.example .env
+            - make up
+            - make build-dev
             - make site-install
+      prologue:
+        commands:
+          - 'git clone -b pece2.0 git@github.com:revagomes/drupal-pece.git'
   - name: DB Updates
     dependencies:
       - Installation
@@ -106,7 +116,15 @@ blocks:
       jobs:
         - name: Starting DB updates
           commands:
+            - checkout
+            - cp .env.example .env
+            - make up
+            - make build-dev
+            - make site-install
             - make drush "updb -y"
+      prologue:
+        commands:
+          - 'git clone -b pece2.0 git@github.com:revagomes/drupal-pece.git'
   - name: Configuratino Sync
     dependencies:
       - DB Updates
@@ -121,4 +139,13 @@ blocks:
       jobs:
         - name: 'Importing configuration '
           commands:
+            - checkout
+            - cp .env.example .env
+            - make up
+            - make build-dev
+            - make site-install
+            - make drush "updb -y"
             - make drush "cim -y"
+      prologue:
+        commands:
+          - 'git clone -b pece2.0 git@github.com:revagomes/drupal-pece.git'
