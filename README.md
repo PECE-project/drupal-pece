@@ -1,8 +1,29 @@
+[![Build Status](https://pece-project.semaphoreci.com/badges/drupal-pece/branches/master.svg?style=shields&key=119b30d1-6e7f-49de-89be-45389fb5d9f4)](https://pece-project.semaphoreci.com/projects/drupal-pece)
+
+# Platform for Experimental and Collaborative Ethnography (PECE)
+
+PECE is a Free and Open Source (Drupal-based) digital platform that supports
+multi-sited, cross-scale ethnographic and historical research. PECE is built
+as a [Drupal distribution](https://www.drupal.org/documentation/build/distributions)
+to be improved and extended like any other Drupal project.
+
+This repository contains the **development code** for PECE. It has work in progress which
+is intended to be used by developers to suggest bug fixes and improvements,
+as well as a starting point for customizations of the platform. If you are a
+developer wishing to contribute to the development process, this is the
+repository you must use.
+
+If you are an end-user looking for stable PECE releases, please access the repository
+[PECE-distro](https://github.com/PECE-project/pece-distro), which contains our
+installation package with the latest stable version. If you have general questions about
+the platform, please refer to our [complete documentation](http://pece.readthedocs.io/en/latest/).
+
 # Composer template for Drupal projects with docker
 
 This project is based from https://github.com/drupal-composer/drupal-project and https://github.com/wodby/docker4drupal
 
 ## Depedencies
+
 - Git
 - Docker
 - Docker Compose
