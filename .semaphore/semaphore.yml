@@ -11,17 +11,15 @@ blocks:
         - name: Containers setup
           commands:
             - checkout
+            - cp .env.example .env
             - make up
       prologue:
         commands:
           - 'git clone -b pece2.0 git@github.com:revagomes/drupal-pece.git'
       epilogue:
-        always:
-          commands:
-            - echo 'Starting...'
         on_pass:
           commands:
-            - echo 'Takalepau marko wèi!'
+            - echo 'Takalepaw marko wèi!'
         on_fail:
           commands:
             - 'echo "Nooop :("'
@@ -66,12 +64,9 @@ blocks:
       - Setup
     task:
       epilogue:
-        always:
-          commands:
-            - echo 'Starting...'
         on_pass:
           commands:
-            - echo 'Takalepau marko wèi!'
+            - echo 'Takalepau nuzetap marko wèi!'
         on_fail:
           commands:
             - 'echo "Nooop :("'
@@ -84,12 +79,9 @@ blocks:
       - Build
     task:
       epilogue:
-        always:
-          commands:
-            - echo 'Starting...'
         on_pass:
           commands:
-            - echo 'Takalepau marko wèi!'
+            - echo 'Takalepau nuzinztaw marko wèi!'
         on_fail:
           commands:
             - 'echo "Nooop :("'
@@ -102,12 +94,9 @@ blocks:
       - Installation
     task:
       epilogue:
-        always:
-          commands:
-            - echo 'Starting...'
         on_pass:
           commands:
-            - echo 'Takalepau marko wèi!'
+            - echo 'Takalepau naz hatwalizazaum marko wèi!'
         on_fail:
           commands:
             - 'echo "Nooop :("'
@@ -120,12 +109,9 @@ blocks:
       - DB Updates
     task:
       epilogue:
-        always:
-          commands:
-            - echo 'Starting...'
         on_pass:
           commands:
-            - echo 'Takalepau marko wèi!'
+            - echo 'Takalepau nazkonphig marko wèi!'
         on_fail:
           commands:
             - 'echo "Nooop :("'
