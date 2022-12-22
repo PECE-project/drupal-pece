@@ -14,7 +14,7 @@ repository you must use.
 If you are an end-user looking for stable PECE releases, please access the repository
 [PECE-distro](https://github.com/PECE-project/pece-distro), which contains our
 installation package with the latest stable version. If you have general questions about
-the platform, please refer to our [complete documentation](http://pece.readthedocs.io/en/latest/).
+the platform, please refer to our [complete documentation](https://pece-project.github.io/drupal-pece/).
 
 ## Prerequisites
 
