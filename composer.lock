@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3905c4b8dadabdcee96cca547f40e4ca",
+    "content-hash": "8723d8de5bae4abd0c06393508b3f0f0",
     "packages": [
         {
             "name": "academicpuma/citeproc-php",
@@ -3260,6 +3260,78 @@
                 "source": "http://cgit.drupalcode.org/bricks",
                 "issues": "https://www.drupal.org/project/issues/bricks",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
+            }
+        },
+        {
+            "name": "drupal/cer",
+            "version": "4.0.0-alpha3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/cer.git",
+                "reference": "8.x-4.0-alpha3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/cer-8.x-4.0-alpha3.zip",
+                "reference": "8.x-4.0-alpha3",
+                "shasum": "3c508e842a2c17235e4c9909ab64ef1aeb9d3ebe"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-4.0-alpha3",
+                    "datestamp": "1620240213",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Anybody",
+                    "homepage": "https://www.drupal.org/user/291091"
+                },
+                {
+                    "name": "bmcclure",
+                    "homepage": "https://www.drupal.org/user/278485"
+                },
+                {
+                    "name": "chertzog",
+                    "homepage": "https://www.drupal.org/user/806366"
+                },
+                {
+                    "name": "gcb",
+                    "homepage": "https://www.drupal.org/user/1682976"
+                },
+                {
+                    "name": "gregcube",
+                    "homepage": "https://www.drupal.org/user/336930"
+                },
+                {
+                    "name": "Grevil",
+                    "homepage": "https://www.drupal.org/user/3668491"
+                },
+                {
+                    "name": "jrglasgow",
+                    "homepage": "https://www.drupal.org/user/36590"
+                },
+                {
+                    "name": "phenaproxima",
+                    "homepage": "https://www.drupal.org/user/205645"
+                }
+            ],
+            "description": "Allows user to create two-way references between entities.",
+            "homepage": "https://www.drupal.org/project/cer",
+            "support": {
+                "source": "https://git.drupalcode.org/project/cer"
             }
         },
         {
@@ -22901,6 +22973,7 @@
     "stability-flags": {
         "drupal/better_exposed_filters": 10,
         "drupal/blocktabs": 10,
+        "drupal/cer": 15,
         "drupal/config_sync": 10,
         "drupal/dashboards": 10,
         "drupal/default_content": 15,

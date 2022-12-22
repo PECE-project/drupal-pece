@@ -1,19 +1,19 @@
-uuid: da036394-0cd8-4e84-a042-9578409603f2
+uuid: 78651fef-65e8-4554-9cee-b38e047f6b17
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_fieldsite_project
+    - field.storage.node.field_fieldsites
     - node.type.pece_fieldsite
     - node.type.pece_project
-id: node.pece_project.field_fieldsite_project
-field_name: field_fieldsite_project
+id: node.pece_project.field_fieldsites
+field_name: field_fieldsites
 entity_type: node
 bundle: pece_project
-label: Fieldsite
+label: Fieldsites
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
@@ -25,5 +25,5 @@ settings:
       field: _none
       direction: ASC
     auto_create: false
-    auto_create_bundle: ''
+    auto_create_bundle: pece_fieldsite
 field_type: entity_reference

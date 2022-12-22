@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_project.body
     - field.field.node.pece_project.field_ark_enabled
-    - field.field.node.pece_project.field_fieldsite_project
+    - field.field.node.pece_project.field_fieldsites
     - field.field.node.pece_project.field_pbc_ref_group
     - field.field.node.pece_project.field_pbc_ref_role
     - field.field.node.pece_project.field_pbc_ref_user
@@ -96,7 +96,7 @@ third_party_settings:
         layout_settings:
           label: ''
           context_mapping: {  }
-          column_widths: 25-50-25
+          column_widths: 33-34-33
         components:
           7bb1f3c8-1ca5-4978-ad42-f7c2c197bef9:
             uuid: 7bb1f3c8-1ca5-4978-ad42-f7c2c197bef9
@@ -200,7 +200,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 9
+            weight: 10
             additional: {  }
           4882f7c8-3f48-4b00-bf47-c1857ecc2f87:
             uuid: 4882f7c8-3f48-4b00-bf47-c1857ecc2f87
@@ -334,6 +334,22 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 0
             additional: {  }
+          9eb4ca4a-9a9e-4d8d-8163-4e078c1cbf0c:
+            uuid: 9eb4ca4a-9a9e-4d8d-8163-4e078c1cbf0c
+            region: first
+            configuration:
+              id: 'field_block:node:pece_project:field_fieldsites'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 9
+            additional: {  }
         third_party_settings: {  }
 id: node.pece_project.default
 targetEntityType: node
@@ -357,7 +373,7 @@ content:
     third_party_settings: {  }
     weight: 118
     region: content
-  field_fieldsite_project:
+  field_fieldsites:
     type: entity_reference_label
     label: above
     settings:

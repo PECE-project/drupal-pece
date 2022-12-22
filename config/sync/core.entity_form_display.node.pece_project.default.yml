@@ -1,9 +1,11 @@
+uuid: 35fd061c-ec8a-4bef-a610-44eb048d49d4
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.node.pece_project.body
     - field.field.node.pece_project.field_ark_enabled
+    - field.field.node.pece_project.field_fieldsites
     - field.field.node.pece_project.field_pbc_ref_group
     - field.field.node.pece_project.field_pbc_ref_role
     - field.field.node.pece_project.field_pbc_ref_user
@@ -46,7 +48,7 @@ third_party_settings:
       label: Permissions
       region: content
       parent_name: ''
-      weight: 22
+      weight: 19
       format_type: details
       format_settings:
         classes: ''
@@ -113,6 +115,16 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_fieldsites:
+    type: entity_reference_autocomplete
+    weight: 27
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_pbc_ref_group:
     type: pbf_widget
@@ -181,7 +193,7 @@ content:
     third_party_settings: {  }
   field_project_contributors:
     type: entity_reference_autocomplete
-    weight: 23
+    weight: 20
     region: content
     settings:
       match_operator: CONTAINS
@@ -191,7 +203,7 @@ content:
     third_party_settings: {  }
   field_project_design_group:
     type: entity_reference_autocomplete
-    weight: 29
+    weight: 26
     region: content
     settings:
       match_operator: CONTAINS
@@ -201,7 +213,7 @@ content:
     third_party_settings: {  }
   field_project_featured_essays:
     type: entity_reference_autocomplete
-    weight: 27
+    weight: 24
     region: content
     settings:
       match_operator: CONTAINS
@@ -227,7 +239,7 @@ content:
     third_party_settings: {  }
   field_project_image_banner:
     type: image_image
-    weight: 24
+    weight: 21
     region: content
     settings:
       progress_indicator: throbber
@@ -250,7 +262,7 @@ content:
     third_party_settings: {  }
   field_project_lead:
     type: entity_reference_autocomplete
-    weight: 25
+    weight: 22
     region: content
     settings:
       match_operator: CONTAINS
@@ -260,7 +272,7 @@ content:
     third_party_settings: {  }
   field_project_open_notes:
     type: string_textarea
-    weight: 26
+    weight: 23
     region: content
     settings:
       rows: 5
@@ -274,7 +286,7 @@ content:
     third_party_settings: {  }
   field_project_struct_analytics:
     type: entity_reference_autocomplete
-    weight: 28
+    weight: 25
     region: content
     settings:
       match_operator: CONTAINS
@@ -294,7 +306,7 @@ content:
     third_party_settings: {  }
   field_project_tags:
     type: entity_reference_autocomplete
-    weight: 30
+    weight: 28
     region: content
     settings:
       match_operator: CONTAINS
