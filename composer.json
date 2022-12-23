@@ -49,13 +49,14 @@
             }
         },
         {
-            "type": "vcs",
-            "url": "https://github.com/mustangostang/spyc"
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         }
     ],
     "require": {
         "php": ">=7.3",
         "composer/installers": "^v1.9",
+        "oomphinc/composer-installers-extender": "~1.0 || ~2.0",
         "consolidation/robo": "^3",
         "cweagans/composer-patches": "^1.6.5",
         "drupal/address": "^1.7",
@@ -201,11 +202,39 @@
         },
         "installer-paths": {
             "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/libraries/slick": ["npm-asset/slick-carousel"],
+            "web/libraries/ace": ["npm-asset/ace-builds"],
+            "web/libraries/jquery-ui-touch-punch": ["bower-asset/jqueryui-touch-punch"],
+            "web/libraries/swagger-ui/dist": ["npm-asset/swagger-ui-dist"],
+            "web/libraries/{$name}": [
+              "type:drupal-library",
+              "type:bower-asset",
+              "type:npm-asset"
+            ],
             "web/modules/contrib/{$name}": ["type:drupal-module"],
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/Commands/{$name}": ["type:drupal-drush"]
+        },
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
+        "drupal-libraries": {
+            "library-directory": "web/libraries",
+            "libraries": [
+              {"name": "objectfitpolyfill", "package": "bower-asset/objectfitpolyfill"},
+              {"name": "chartjs", "package": "bower-asset/chartjs"},
+              {"name": "c3","package": "bower-asset/c3"},
+              {"name": "d3", "package": "bower-asset/d3"},
+              {"name": "dropzone","package": "npm-asset/dropzone"},
+              {"name": "blazy", "package": "npm-asset/blazy"},
+              {"name": "slick", "package": "npm-asset/slick-carousel"},
+              {"name": "ace", "package": "npm-asset/ace-builds"},
+              {"name": "jquery-ui-touch-punch", "package": "bower-asset/jqueryui-touch-punch"},
+              {"name": "imagesloaded", "package": "npm-asset/imagesloaded"},
+              {"name": "swagger-ui", "package": "npm-asset/swagger-ui-dist"}
+            ]
         },
         "drupal-scaffold": {
             "initial": {
