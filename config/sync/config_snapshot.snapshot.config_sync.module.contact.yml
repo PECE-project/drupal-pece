@@ -1,0 +1,38 @@
+uuid: 7e6758d4-7687-4594-9b39-520176db7e35
+langcode: en
+status: true
+dependencies:
+  module:
+    - contact
+id: config_sync.module.contact
+snapshotSet: config_sync
+extensionType: module
+extensionName: contact
+items:
+  -
+    collection: ''
+    name: contact.form.personal
+    data:
+      langcode: en
+      status: true
+      dependencies: {  }
+      id: personal
+      label: 'Personal contact form'
+      recipients: {  }
+      reply: ''
+      weight: 0
+      message: 'Your message has been sent.'
+      redirect: ''
+      _core:
+        default_config_hash: jonvgt3CkUM2eMLTFwWfHileWWDC4YtXCuIlCahTk_I
+  -
+    collection: ''
+    name: contact.settings
+    data:
+      default_form: feedback
+      flood:
+        limit: 5
+        interval: 3600
+      user_default_enabled: true
+      _core:
+        default_config_hash: U69DBeuvXuNVOC15rVNaBjDPK2fWFbo9v4takdYSSO8

@@ -1,0 +1,108 @@
+uuid: 7bd77901-36cb-4aec-bae3-137d8f2983ca
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+id: config_sync.module.language
+snapshotSet: config_sync
+extensionType: module
+extensionName: language
+items:
+  -
+    collection: ''
+    name: language.entity.en
+    data:
+      langcode: en
+      status: true
+      dependencies: {  }
+      id: en
+      label: English
+      direction: ltr
+      weight: 0
+      locked: false
+      _core:
+        default_config_hash: lBXDpdDPXQtrfTJQhr6MjRJJEEyYSoRJ0acdvHLsWeA
+  -
+    collection: ''
+    name: language.entity.und
+    data:
+      langcode: en
+      status: true
+      dependencies: {  }
+      id: und
+      label: 'Not specified'
+      direction: ltr
+      weight: 2
+      locked: true
+      _core:
+        default_config_hash: eNX6lLCKDaY83nCMh20My---y03KbiFlv802DKCCpvg
+  -
+    collection: ''
+    name: language.entity.zxx
+    data:
+      langcode: en
+      status: true
+      dependencies: {  }
+      id: zxx
+      label: 'Not applicable'
+      direction: ltr
+      weight: 3
+      locked: true
+      _core:
+        default_config_hash: 35CefWbnzaiytcg3acexxz_GTvuwIjYd_ZTcmmR-tXA
+  -
+    collection: ''
+    name: language.mappings
+    data:
+      map:
+        'no': nb
+        pt: pt-pt
+        zh: zh-hans
+        zh-tw: zh-hant
+        zh-hk: zh-hant
+        zh-mo: zh-hant
+        zh-cht: zh-hant
+        zh-cn: zh-hans
+        zh-sg: zh-hans
+        zh-chs: zh-hans
+      _core:
+        default_config_hash: EMWe7Yu4Q5eD-NUfNuQAWGBvYUNZPIinztEtONSmsDc
+  -
+    collection: ''
+    name: language.negotiation
+    data:
+      session:
+        parameter: language
+      url:
+        source: path_prefix
+        prefixes:
+          en: ''
+        domains:
+          en: ''
+      selected_langcode: site_default
+      _core:
+        default_config_hash: uEePITI9tV6WqzmsTb7MfPCi5yPWXSxAN1xeLcYFQbM
+  -
+    collection: ''
+    name: language.types
+    data:
+      all:
+        - language_interface
+        - language_content
+        - language_url
+      configurable:
+        - language_interface
+      negotiation:
+        language_content:
+          enabled:
+            language-interface: 0
+        language_url:
+          enabled:
+            language-url: 0
+            language-url-fallback: 1
+        language_interface:
+          enabled:
+            language-url: 0
+      _core:
+        default_config_hash: dqouFqVseNJNvEjsoYKxbinFOITuCxYhi4y2OTNQP_8

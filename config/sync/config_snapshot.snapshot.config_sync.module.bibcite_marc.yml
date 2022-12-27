@@ -1,0 +1,66 @@
+uuid: 9529a3a7-2ad9-4bd1-8023-a2ecdc199c1e
+langcode: en
+status: true
+dependencies:
+  module:
+    - bibcite_marc
+id: config_sync.module.bibcite_marc
+snapshotSet: config_sync
+extensionType: module
+extensionName: bibcite_marc
+items:
+  -
+    collection: ''
+    name: bibcite_entity.mapping.marc
+    data:
+      format: marc
+      types:
+        book: book
+        misc: miscellaneous
+      fields:
+        title: title
+        sort-title: ''
+        edition: bibcite_edition
+        authors: author
+        urls: bibcite_url
+        type: type
+        year: bibcite_year
+        date: bibcite_date
+        keywords: keywords
+        pages: bibcite_pages
+        volume: bibcite_volume
+        other_number: bibcite_other_number
+        number: bibcite_number
+        call_number: bibcite_call_number
+        abstract: bibcite_abst_e
+        issn: bibcite_issn
+        isbn: bibcite_isbn
+        publisher: bibcite_publisher
+        pub-location: bibcite_place_published
+        language: bibcite_lang
+      indexes:
+        title: 245_0_0_a
+        sort-title: '210_0_#_a'
+        edition: 250___a
+        authors: '100_1_#_a'
+        urls: 856___u
+        type: ''
+        year: ''
+        date: 260___c
+        keywords: 653_1_0_a
+        pages: 300___a
+        volume: 490_0__v
+        other_number: 024___a
+        call_number: 050___a
+        abstract: '520_3_#_a'
+        issn: 022___a
+        isbn: 020___a
+        publisher: 260___b
+        pub-location: 260___a
+        language: ''
+      dependencies:
+        enforced:
+          module:
+            - bibcite_marc
+      _core:
+        default_config_hash: dFc1EMNdZ_uj9Jtc_9c4D07GXHE1dUIWSc-8W_XE-co

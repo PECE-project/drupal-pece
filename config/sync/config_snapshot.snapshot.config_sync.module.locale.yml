@@ -1,0 +1,30 @@
+uuid: 350edfc3-e148-4f27-beee-0667014c84e0
+langcode: en
+status: true
+dependencies:
+  module:
+    - locale
+id: config_sync.module.locale
+snapshotSet: config_sync
+extensionType: module
+extensionName: locale
+items:
+  -
+    collection: ''
+    name: locale.settings
+    data:
+      cache_strings: true
+      translate_english: false
+      javascript:
+        directory: languages
+      translation:
+        use_source: remote_and_local
+        default_filename: '%project-%version.%language.po'
+        default_server_pattern: 'https://ftp.drupal.org/files/translations/%core/%project/%project-%version.%language.po'
+        overwrite_customized: false
+        overwrite_not_customized: true
+        update_interval_days: 0
+        path: ''
+        import_enabled: true
+      _core:
+        default_config_hash: cSdYeE-_AQETCNZnl8BMFS9-sVn5--VzAYILkpPBUbM

@@ -1,0 +1,34 @@
+uuid: 8028e51f-e309-4af2-a473-d836c627fe27
+langcode: en
+status: true
+dependencies:
+  module:
+    - rdf
+id: config_sync.module.rdf
+snapshotSet: config_sync
+extensionType: module
+extensionName: rdf
+items:
+  -
+    collection: ''
+    name: rdf.mapping.user.user
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        module:
+          - user
+        enforced:
+          module:
+            - user
+      id: user.user
+      targetEntityType: user
+      bundle: user
+      types:
+        - 'schema:Person'
+      fieldMappings:
+        name:
+          properties:
+            - 'schema:name'
+      _core:
+        default_config_hash: xtzuACq4Fn0ail4YD8cO_eMnn_g2DBlfI9W5oSpcRWI
