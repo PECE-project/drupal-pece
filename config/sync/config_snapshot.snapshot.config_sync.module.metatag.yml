@@ -1,0 +1,113 @@
+uuid: 8b5ad7e7-713a-4fa6-a7c2-c4cadf10aaff
+langcode: en
+status: true
+dependencies:
+  module:
+    - metatag
+id: config_sync.module.metatag
+snapshotSet: config_sync
+extensionType: module
+extensionName: metatag
+items:
+  -
+    collection: ''
+    name: metatag.metatag_defaults.403
+    data:
+      langcode: en
+      status: true
+      dependencies: {  }
+      id: '403'
+      label: '403 access denied'
+      tags:
+        robots: noindex
+        canonical_url: '[site:url]'
+        shortlink: '[site:url]'
+      _core:
+        default_config_hash: RDCkFL0NDt75Gwioooxo1iuA1S50xTVsBOgX__c6wTw
+  -
+    collection: ''
+    name: metatag.metatag_defaults.404
+    data:
+      langcode: en
+      status: true
+      dependencies: {  }
+      id: '404'
+      label: '404 page not found'
+      tags:
+        canonical_url: '[site:url]'
+        shortlink: '[site:url]'
+      _core:
+        default_config_hash: puBstSLDz8mbaWU357zaqQDBGMGsJzG0j-TQNQkjg20
+  -
+    collection: ''
+    name: metatag.metatag_defaults.front
+    data:
+      langcode: en
+      status: true
+      dependencies: {  }
+      id: front
+      label: 'Front page'
+      tags:
+        canonical_url: '[site:url]'
+        shortlink: '[site:url]'
+      _core:
+        default_config_hash: 1noCXlegCr5HFehQRF1ViXy1jhU1jZ_sNN99a8Sj5jo
+  -
+    collection: ''
+    name: metatag.metatag_defaults.global
+    data:
+      langcode: en
+      status: true
+      dependencies: {  }
+      id: global
+      label: Global
+      tags:
+        canonical_url: '[current-page:url]'
+        title: '[current-page:title] | [site:name]'
+      _core:
+        default_config_hash: sL588ui1E_8-2c_UupwyYxcqX2OVyMFp3HTLbbFqvPc
+  -
+    collection: ''
+    name: metatag.metatag_defaults.node
+    data:
+      langcode: en
+      status: true
+      dependencies: {  }
+      id: node
+      label: Content
+      tags:
+        title: '[node:title] | [site:name]'
+        description: '[node:summary]'
+        canonical_url: '[node:url]'
+      _core:
+        default_config_hash: rpwvgyEURXLz_JjgMCrkS1rUv-0k3L79BpO-ReN7fDI
+  -
+    collection: ''
+    name: metatag.metatag_defaults.taxonomy_term
+    data:
+      langcode: en
+      status: true
+      dependencies: {  }
+      id: taxonomy_term
+      label: 'Taxonomy term'
+      tags:
+        canonical_url: '[term:url]'
+        description: '[term:description]'
+        title: '[term:name] | [site:name]'
+      _core:
+        default_config_hash: 92bXZdyYJ5xqukdfmGRr_CYcwm1vfuS8b8aJ7X_G7E0
+  -
+    collection: ''
+    name: metatag.metatag_defaults.user
+    data:
+      langcode: en
+      status: true
+      dependencies: {  }
+      id: user
+      label: User
+      tags:
+        canonical_url: '[user:url]'
+        description: '[site:name]'
+        title: '[user:display-name] | [site:name]'
+      _core:
+        default_config_hash: MvQPTbQx0Vxwy0ordSHyixdZmLCMpvMdLD69dlwkrKc

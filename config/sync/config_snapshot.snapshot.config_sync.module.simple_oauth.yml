@@ -1,0 +1,60 @@
+uuid: cd98e8f5-b31b-443c-b9da-3ebb65f7c6af
+langcode: en
+status: true
+dependencies:
+  module:
+    - simple_oauth
+id: config_sync.module.simple_oauth
+snapshotSet: config_sync
+extensionType: module
+extensionName: simple_oauth
+items:
+  -
+    collection: ''
+    name: simple_oauth.oauth2_token.bundle.access_token
+    data:
+      langcode: en
+      status: true
+      id: access_token
+      label: 'Access Token'
+      description: 'The access token type.'
+      locked: true
+      _core:
+        default_config_hash: z9ULI9nj9yt73YKI3ZE8v9yXhkVfvQsDJToEDzijcxY
+  -
+    collection: ''
+    name: simple_oauth.oauth2_token.bundle.auth_code
+    data:
+      langcode: en
+      status: true
+      id: auth_code
+      label: 'Auth code'
+      description: 'The auth code type.'
+      locked: true
+      _core:
+        default_config_hash: zYKaSl4QZrKMFj7aIhSGDRcBy4SoNjvY2EZlT7amrBk
+  -
+    collection: ''
+    name: simple_oauth.oauth2_token.bundle.refresh_token
+    data:
+      langcode: en
+      status: true
+      id: refresh_token
+      label: 'Refresh token'
+      description: 'The refresh token type.'
+      locked: true
+      _core:
+        default_config_hash: YWMv3Do9fsPFhylyFkOwcqcFP4jSU6DLRootOlgrC0M
+  -
+    collection: ''
+    name: simple_oauth.settings
+    data:
+      access_token_expiration: 300
+      authorization_code_expiration: 300
+      refresh_token_expiration: 1209600
+      remember_clients: true
+      token_cron_batch_size: 0
+      use_implicit: false
+      disable_openid_connect: false
+      _core:
+        default_config_hash: KsPFWSp6mgXIQgjBJEShfKUGn6VLRlbpIJ2EysXvXWM

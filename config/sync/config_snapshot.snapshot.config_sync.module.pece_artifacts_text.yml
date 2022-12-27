@@ -1,0 +1,649 @@
+uuid: 965ac38f-b17b-49b6-bc57-360a8aff65e2
+langcode: en
+status: true
+dependencies:
+  module:
+    - pece_artifacts_text
+id: config_sync.module.pece_artifacts_text
+snapshotSet: config_sync
+extensionType: module
+extensionName: pece_artifacts_text
+items:
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.body
+    data:
+      uuid: e8c815ef-1d42-422c-9f89-ea369e7dd354
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.body
+          - node.type.pece_artifact_text
+        module:
+          - text
+      id: node.pece_artifact_text.body
+      field_name: body
+      entity_type: node
+      bundle: pece_artifact_text
+      label: Body
+      description: ''
+      required: false
+      translatable: true
+      default_value: {  }
+      default_value_callback: ''
+      settings:
+        display_summary: true
+        required_summary: false
+      field_type: text_with_summary
+      _core:
+        default_config_hash: XKPxR4m5VtAQA8fBXNG39qZDmIxOBzv933xTogDLs18
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_ark_enabled
+    data:
+      uuid: 65c47546-8708-4c13-b5bb-4b36a61296aa
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_ark_enabled
+          - node.type.pece_artifact_text
+      id: node.pece_artifact_text.field_ark_enabled
+      field_name: field_ark_enabled
+      entity_type: node
+      bundle: pece_artifact_text
+      label: 'ARK Enabled'
+      description: 'Enable to create ARK for this content.'
+      required: false
+      translatable: true
+      default_value:
+        -
+          value: 0
+      default_value_callback: ''
+      settings:
+        on_label: 'On'
+        off_label: 'Off'
+      field_type: boolean
+      _core:
+        default_config_hash: kPZw8i2OIAATEU5bHDtX35-KKj6uGwKiFfFUbkx2jGI
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_pbc_ref_group
+    data:
+      uuid: 79fe0c94-0692-4027-95fc-5b7fe54dcb9f
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_pbc_ref_group
+          - node.type.group
+          - node.type.pece_artifact_text
+        module:
+          - pbf
+      id: node.pece_artifact_text.field_pbc_ref_group
+      field_name: field_pbc_ref_group
+      entity_type: node
+      bundle: pece_artifact_text
+      label: 'Permission by Group'
+      description: ''
+      required: false
+      translatable: true
+      default_value: {  }
+      default_value_callback: ''
+      settings:
+        handler: 'default:node'
+        handler_settings:
+          target_bundles:
+            group: group
+          sort:
+            field: title
+            direction: ASC
+          auto_create: false
+          auto_create_bundle: ''
+        priority: 0
+        user_method: user
+        synchronized_with: ''
+        synchronized_by: ''
+        synchronized_from_target: 0
+      field_type: pbf
+      _core:
+        default_config_hash: OWD9PGqSbwnJV4PNyAUywO0SeosDHL_J9WJSPyrps4g
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_pbc_ref_role
+    data:
+      uuid: 7e5becc0-c8b4-48f7-8e08-879130d1e239
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_pbc_ref_role
+          - node.type.pece_artifact_text
+        module:
+          - pbf
+      id: node.pece_artifact_text.field_pbc_ref_role
+      field_name: field_pbc_ref_role
+      entity_type: node
+      bundle: pece_artifact_text
+      label: 'Permission by Roles'
+      description: ''
+      required: false
+      translatable: true
+      default_value: {  }
+      default_value_callback: ''
+      settings:
+        handler: 'default:user_role'
+        handler_settings:
+          target_bundles: null
+          auto_create: false
+        priority: 0
+        user_method: user
+        synchronized_with: ''
+        synchronized_by: ''
+        synchronized_from_target: 0
+      field_type: pbf
+      _core:
+        default_config_hash: TScVs5v9uVcrCdEc1uimeljonevoC1Fe_Kewudot_TI
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_pbc_ref_user
+    data:
+      uuid: abe97c7b-ba13-4d32-a7bd-6182fa2ec409
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_pbc_ref_user
+          - node.type.pece_artifact_text
+        module:
+          - pbf
+      id: node.pece_artifact_text.field_pbc_ref_user
+      field_name: field_pbc_ref_user
+      entity_type: node
+      bundle: pece_artifact_text
+      label: 'Permission by User'
+      description: ''
+      required: false
+      translatable: true
+      default_value: {  }
+      default_value_callback: ''
+      settings:
+        handler: 'default:user'
+        handler_settings:
+          target_bundles: null
+          sort:
+            field: _none
+            direction: ASC
+          auto_create: false
+          filter:
+            type: _none
+          include_anonymous: true
+        priority: -1
+        user_method: user
+        synchronized_with: ''
+        synchronized_by: ''
+        synchronized_from_target: 0
+      field_type: pbf
+      _core:
+        default_config_hash: gXO2zNjepmOcMsMH46eiCcdYzdLo7FX_X0JGQuJp8WI
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_pece_all_can_view
+    data:
+      uuid: 80a9efe6-b6df-4302-b6b2-664496e53b03
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_pece_all_can_view
+          - node.type.pece_artifact_text
+      id: node.pece_artifact_text.field_pece_all_can_view
+      field_name: field_pece_all_can_view
+      entity_type: node
+      bundle: pece_artifact_text
+      label: 'All user can view this content'
+      description: 'If you check this option, then all users (including anonymous users) can see this content.'
+      required: false
+      translatable: false
+      default_value:
+        -
+          value: 0
+      default_value_callback: ''
+      settings:
+        on_label: 'On'
+        off_label: 'Off'
+      field_type: boolean
+      _core:
+        default_config_hash: YoL5crHvU4_6dkXsJhIkN5bbIlgCPZvFmYyBMPm0J6k
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_pece_license
+    data:
+      uuid: af32bf6a-bdc5-4df0-9341-b8d34ad1921b
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_pece_license
+          - node.type.pece_artifact_text
+          - taxonomy.vocabulary.licenses_vocabulary_licenses
+        content:
+          - 'taxonomy_term:licenses_vocabulary_licenses:3ea37e48-1144-4120-81b8-09852c096d04'
+      id: node.pece_artifact_text.field_pece_license
+      field_name: field_pece_license
+      entity_type: node
+      bundle: pece_artifact_text
+      label: License
+      description: ''
+      required: true
+      translatable: false
+      default_value:
+        -
+          target_uuid: 3ea37e48-1144-4120-81b8-09852c096d04
+      default_value_callback: ''
+      settings:
+        handler: 'default:taxonomy_term'
+        handler_settings:
+          target_bundles:
+            licenses_vocabulary_licenses: licenses_vocabulary_licenses
+          sort:
+            field: name
+            direction: asc
+          auto_create: false
+          auto_create_bundle: ''
+      field_type: entity_reference
+      _core:
+        default_config_hash: DW4teQM0SDkCXUsLlAuKw8_tulH3M9SRMX8NB3FkJVw
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_pece_project_ref
+    data:
+      uuid: 5753340e-47e2-4731-b6c1-693b2cf79ccf
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_pece_project_ref
+          - node.type.pece_artifact_text
+          - node.type.pece_project
+      id: node.pece_artifact_text.field_pece_project_ref
+      field_name: field_pece_project_ref
+      entity_type: node
+      bundle: pece_artifact_text
+      label: 'Cite as part of...'
+      description: ''
+      required: false
+      translatable: true
+      default_value: {  }
+      default_value_callback: ''
+      settings:
+        handler: 'default:node'
+        handler_settings:
+          target_bundles:
+            pece_project: pece_project
+          sort:
+            field: title
+            direction: ASC
+          auto_create: false
+          auto_create_bundle: ''
+      field_type: entity_reference
+      _core:
+        default_config_hash: gCpKcf5FGsc8GMkshHZ1w1SSKaxSwj_OO2PqVc4Pc6U
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_text_authors
+    data:
+      uuid: 7ed9e2e4-1d62-4f28-b470-9672f8d12090
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_text_authors
+          - node.type.pece_artifact_text
+          - taxonomy.vocabulary.pece_authors
+      id: node.pece_artifact_text.field_text_authors
+      field_name: field_text_authors
+      entity_type: node
+      bundle: pece_artifact_text
+      label: Creator(s)
+      description: ''
+      required: false
+      translatable: false
+      default_value: {  }
+      default_value_callback: ''
+      settings:
+        handler: 'default:taxonomy_term'
+        handler_settings:
+          target_bundles:
+            pece_authors: pece_authors
+          sort:
+            field: name
+            direction: asc
+          auto_create: false
+          auto_create_bundle: ''
+      field_type: entity_reference
+      _core:
+        default_config_hash: SBYUfvMRPopKLYHKAWme3qGf9A175wR1SoWztQ5TIZI
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_text_contributors
+    data:
+      uuid: f64c62d6-583d-4696-8201-61bfd37bb8ba
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_text_contributors
+          - node.type.pece_artifact_text
+      id: node.pece_artifact_text.field_text_contributors
+      field_name: field_text_contributors
+      entity_type: node
+      bundle: pece_artifact_text
+      label: Contributors
+      description: ''
+      required: false
+      translatable: false
+      default_value: {  }
+      default_value_callback: ''
+      settings:
+        handler: 'default:user'
+        handler_settings:
+          target_bundles: null
+          sort:
+            field: _none
+            direction: ASC
+          auto_create: false
+          filter:
+            type: _none
+          include_anonymous: true
+      field_type: entity_reference
+      _core:
+        default_config_hash: RROmfKiV_hjmPMIkw--PE8mj3Ss5tid9XqZ3Snm5VaU
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_text_created_date
+    data:
+      uuid: 58e07b9c-ccb9-4343-a933-76a9ddc39b20
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_text_created_date
+          - node.type.pece_artifact_text
+        module:
+          - datetime
+      id: node.pece_artifact_text.field_text_created_date
+      field_name: field_text_created_date
+      entity_type: node
+      bundle: pece_artifact_text
+      label: 'Created Date'
+      description: ''
+      required: false
+      translatable: false
+      default_value:
+        -
+          default_date_type: now
+          default_date: now
+      default_value_callback: ''
+      settings: {  }
+      field_type: datetime
+      _core:
+        default_config_hash: JkvbVGsdii1HPr-9SC3kxhIJTeCK5_RHSZ5aUED-Fz0
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_text_crit_commentary
+    data:
+      uuid: 1b270367-2de5-45e3-8f82-0ac6db2793c2
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_text_crit_commentary
+          - node.type.pece_artifact_text
+        module:
+          - text
+      id: node.pece_artifact_text.field_text_crit_commentary
+      field_name: field_text_crit_commentary
+      entity_type: node
+      bundle: pece_artifact_text
+      label: 'Critical Commentary'
+      description: ''
+      required: true
+      translatable: false
+      default_value: {  }
+      default_value_callback: ''
+      settings: {  }
+      field_type: text_long
+      _core:
+        default_config_hash: K2sRqiH6Ym57B8bXNsb5R4N6r6DE0GVoA0dWAD7_rao
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_text_fieldsite
+    data:
+      uuid: c8c4cf41-daa4-4d9d-8fcc-4b07e26cf93e
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_text_fieldsite
+          - node.type.pece_artifact_text
+          - node.type.pece_fieldsite
+      id: node.pece_artifact_text.field_text_fieldsite
+      field_name: field_text_fieldsite
+      entity_type: node
+      bundle: pece_artifact_text
+      label: Fieldsite
+      description: ''
+      required: false
+      translatable: false
+      default_value: {  }
+      default_value_callback: ''
+      settings:
+        handler: 'default:node'
+        handler_settings:
+          target_bundles:
+            pece_fieldsite: pece_fieldsite
+          sort:
+            field: _none
+            direction: ASC
+          auto_create: false
+          auto_create_bundle: ''
+      field_type: entity_reference
+      _core:
+        default_config_hash: VQibqpT7DUsOMMeG5B5yIDABMMxgN7aZFFIKrYYCDCA
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_text_language
+    data:
+      uuid: 84d262e6-2bcb-4ebc-8e4e-4d80c098bf92
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_text_language
+          - node.type.pece_artifact_text
+        module:
+          - languagefield
+      id: node.pece_artifact_text.field_text_language
+      field_name: field_text_language
+      entity_type: node
+      bundle: pece_artifact_text
+      label: Language
+      description: ''
+      required: false
+      translatable: false
+      default_value: {  }
+      default_value_callback: ''
+      settings: {  }
+      field_type: language_field
+      _core:
+        default_config_hash: vTKchcvz3m8rR_vEWsVE_22drlkelItJUmAmihsTOQw
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_text_location
+    data:
+      uuid: e5137a29-51d5-4776-90ac-a893466e6b30
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_text_location
+          - node.type.pece_artifact_text
+        module:
+          - address
+      id: node.pece_artifact_text.field_text_location
+      field_name: field_text_location
+      entity_type: node
+      bundle: pece_artifact_text
+      label: Location
+      description: ''
+      required: false
+      translatable: false
+      default_value: {  }
+      default_value_callback: ''
+      settings:
+        available_countries: {  }
+        langcode_override: ''
+        field_overrides:
+          givenName:
+            override: optional
+          additionalName:
+            override: hidden
+          familyName:
+            override: hidden
+          organization:
+            override: hidden
+          addressLine2:
+            override: hidden
+          dependentLocality:
+            override: hidden
+        fields: {  }
+      field_type: address
+      _core:
+        default_config_hash: ZdmrdN7MU5N18RQJu3vDOCl5StT7LuEPcmAFmYcCYQ8
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_text_source
+    data:
+      uuid: 708c0a06-98ed-41b6-99e1-9ecfa285ddf1
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_text_source
+          - node.type.pece_artifact_text
+        module:
+          - text
+      id: node.pece_artifact_text.field_text_source
+      field_name: field_text_source
+      entity_type: node
+      bundle: pece_artifact_text
+      label: Source
+      description: ''
+      required: false
+      translatable: false
+      default_value: {  }
+      default_value_callback: ''
+      settings: {  }
+      field_type: text_long
+      _core:
+        default_config_hash: wgfDf73vnbV_i2tGg4qhbmqDzosOtnqHoF3fcCit4Iw
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_text_tags
+    data:
+      uuid: 0e9fbbf3-3d92-420c-8d38-617911be7b84
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_text_tags
+          - node.type.pece_artifact_text
+          - taxonomy.vocabulary.pece_tags
+      id: node.pece_artifact_text.field_text_tags
+      field_name: field_text_tags
+      entity_type: node
+      bundle: pece_artifact_text
+      label: Tags
+      description: ''
+      required: false
+      translatable: false
+      default_value: {  }
+      default_value_callback: ''
+      settings:
+        handler: 'default:taxonomy_term'
+        handler_settings:
+          target_bundles:
+            pece_tags: pece_tags
+          sort:
+            field: name
+            direction: asc
+          auto_create: false
+          auto_create_bundle: ''
+      field_type: entity_reference
+      _core:
+        default_config_hash: 05P0c_HY5Pm5DrHMiHYa2yMrPmDZ8LXE8Ye_ORQVE-w
+  -
+    collection: ''
+    name: field.field.node.pece_artifact_text.field_text_use_fieldsite_local
+    data:
+      uuid: a313cb71-868b-4177-8d57-93b5e0f897da
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - field.storage.node.field_text_use_fieldsite_local
+          - node.type.pece_artifact_text
+      id: node.pece_artifact_text.field_text_use_fieldsite_local
+      field_name: field_text_use_fieldsite_local
+      entity_type: node
+      bundle: pece_artifact_text
+      label: 'Use fieldsite''s location'
+      description: ''
+      required: false
+      translatable: false
+      default_value:
+        -
+          value: 0
+      default_value_callback: ''
+      settings:
+        on_label: 'On'
+        off_label: 'Off'
+      field_type: boolean
+      _core:
+        default_config_hash: 4Ok9iTn7Y8J9WLbz8A6J9EiSSOOjgaXEdRh6elql3vs
+  -
+    collection: ''
+    name: language.content_settings.node.pece_artifact_text
+    data:
+      uuid: a706bca5-f10c-4281-aed8-cc7118bdd1ef
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - node.type.pece_artifact_text
+      id: node.pece_artifact_text
+      target_entity_type_id: node
+      target_bundle: pece_artifact_text
+      default_langcode: site_default
+      language_alterable: false
+      _core:
+        default_config_hash: SDWOI1Avkn0ATaVpx5xOUuA-Jab1lZjJcqMCKbl4GyE
+  -
+    collection: ''
+    name: node.type.pece_artifact_text
+    data:
+      uuid: b64474c7-9742-4d86-b6f9-1275f46b9475
+      langcode: en
+      status: true
+      dependencies: {  }
+      name: 'Artifact - Text'
+      type: pece_artifact_text
+      description: ''
+      help: ''
+      new_revision: true
+      preview_mode: 1
+      display_submitted: true
+      _core:
+        default_config_hash: MliB2X7DpeYK0eKD-f2tzbHUTtgGtditNerWZXYcW7E

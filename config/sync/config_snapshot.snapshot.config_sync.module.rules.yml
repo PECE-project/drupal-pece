@@ -1,0 +1,23 @@
+uuid: 14f07ac6-2324-493a-86f5-fca388fa9148
+langcode: en
+status: true
+dependencies:
+  module:
+    - rules
+id: config_sync.module.rules
+snapshotSet: config_sync
+extensionType: module
+extensionName: rules
+items:
+  -
+    collection: ''
+    name: rules.settings
+    data:
+      system_log:
+        log_level: warning
+      debug_log:
+        enabled: false
+        system_debug: false
+        log_level: debug
+      _core:
+        default_config_hash: ZKaBtyYFEhfwE4xVP-khSsZabdsN3NSjwOfzaZksez0

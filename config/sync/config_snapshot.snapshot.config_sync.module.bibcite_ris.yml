@@ -1,0 +1,158 @@
+uuid: 86b0c5b0-2e31-48a1-81da-c6b1aa91f0a3
+langcode: en
+status: true
+dependencies:
+  module:
+    - bibcite_ris
+id: config_sync.module.bibcite_ris
+snapshotSet: config_sync
+extensionType: module
+extensionName: bibcite_ris
+items:
+  -
+    collection: ''
+    name: bibcite_entity.mapping.ris
+    data:
+      format: ris
+      types:
+        ABST: journal_article
+        ADVS: audiovisual
+        AGGR: database
+        ANCIENT: miscellaneous
+        ART: artwork
+        BILL: bill
+        BLOG: miscellaneous
+        BOOK: book
+        CASE: case
+        CHAP: book_chapter
+        CHART: chart
+        CLSWK: classical
+        COMP: software
+        CONF: conference_proceedings
+        CPAPER: conference_paper
+        CTLG: miscellaneous
+        DATA: software
+        DBASE: database
+        DICT: book
+        EBOOK: book
+        ECHAP: book_chapter
+        EDBOOK: book
+        EJOUR: journal_article
+        ELEC: web_project_page
+        ENCYC: book
+        EQUA: miscellaneous
+        FIGURE: miscellaneous
+        GEN: miscellaneous
+        GOVDOC: government_report
+        GRANT: miscellaneous
+        HEAR: hearing
+        ICOMM: web_article
+        INPR: journal_article
+        JFULL: journal
+        JOUR: journal_article
+        LEGAL: legal_ruling
+        MANSCPT: manuscript
+        MAP: map
+        MGZN: magazine_article
+        MPCT: film
+        MULTI: audiovisual
+        MUSIC: miscellaneous
+        NEWS: newspaper_article
+        PAMP: miscellaneous
+        PAT: patent
+        PCOMM: personal
+        RPRT: report
+        SER: book
+        SLIDE: presentation
+        SOUND: miscellaneous
+        STAND: miscellaneous
+        STAT: statute
+        THES: thesis
+        UNPB: unpublished
+        VIDEO: film
+      fields:
+        TY: type
+        A1: ''
+        A2: ''
+        A3: ''
+        A4: ''
+        AB: bibcite_abst_e
+        AD: bibcite_auth_address
+        AN: bibcite_accession_number
+        AU: author
+        AV: ''
+        BT: bibcite_secondary_title
+        C1: bibcite_custom1
+        C2: bibcite_custom2
+        C3: bibcite_custom3
+        C4: bibcite_custom4
+        C5: bibcite_custom5
+        C6: bibcite_custom6
+        C7: bibcite_custom7
+        C8: ''
+        CA: ''
+        CN: bibcite_call_number
+        CP: ''
+        CT: ''
+        CY: bibcite_place_published
+        DA: bibcite_date
+        DB: bibcite_remote_db_name
+        DO: bibcite_doi
+        DP: bibcite_remote_db_provider
+        ED: ''
+        EP: ''
+        ET: bibcite_edition
+        ID: ''
+        IS: bibcite_issue
+        J1: ''
+        J2: bibcite_alternate_title
+        JA: ''
+        JF: ''
+        JO: ''
+        KW: keywords
+        L1: ''
+        L2: ''
+        L3: ''
+        L4: ''
+        LA: bibcite_lang
+        LB: bibcite_label
+        LK: ''
+        M1: bibcite_number
+        M2: ''
+        M3: bibcite_type_of_work
+        N1: bibcite_notes
+        N2: bibcite_abst_e
+        NV: bibcite_number_of_volumes
+        OP: bibcite_original_publication
+        PB: bibcite_publisher
+        PP: bibcite_place_published
+        PY: bibcite_year
+        RI: ''
+        RN: bibcite_research_notes
+        RP: bibcite_reprint_edition
+        SE: bibcite_section
+        SN: bibcite_isbn
+        SP: bibcite_pages
+        ST: bibcite_short_title
+        T1: ''
+        T2: bibcite_secondary_title
+        T3: bibcite_tertiary_title
+        TA: ''
+        TI: title
+        TT: bibcite_translated_title
+        U1: ''
+        U2: ''
+        U3: ''
+        U4: ''
+        U5: ''
+        UR: bibcite_url
+        VL: bibcite_volume
+        VO: ''
+        Y1: ''
+        Y2: bibcite_access_date
+      dependencies:
+        enforced:
+          module:
+            - bibcite_ris
+      _core:
+        default_config_hash: VMi4zNIuyO5SDxmmKGgwcb7rPBCcu698Cz_221eYXXA

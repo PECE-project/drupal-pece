@@ -1,0 +1,610 @@
+uuid: 6bc7cc31-0963-495a-8452-d6c8ef55b1d8
+langcode: en
+status: true
+dependencies:
+  module:
+    - pece
+id: config_sync.module.pece
+snapshotSet: config_sync
+extensionType: module
+extensionName: pece
+items:
+  -
+    collection: ''
+    name: blocktabs.blocktabs.pece_home_recent_content
+    data:
+      langcode: en
+      status: true
+      dependencies: {  }
+      name: pece_home_recent_content
+      label: 'Home Recent Content'
+      event: click
+      style: default
+      tabs:
+        66931b2c-e56a-468b-bc3b-6bd1fc7292fc:
+          id: views_tab
+          title: 'Recent Artifacts'
+          data:
+            view_name: pece_artifacts
+            view_display: pece_artifacts
+            view_arg: recent-artifacts
+          weight: 1
+          uuid: 66931b2c-e56a-468b-bc3b-6bd1fc7292fc
+        ebe01541-1a47-4500-a334-aa130483ed02:
+          id: views_tab
+          title: 'Recent  Essays'
+          data:
+            view_name: pece_essays
+            view_display: block_2
+            view_arg: recent-essays
+          weight: 2
+          uuid: ebe01541-1a47-4500-a334-aa130483ed02
+      _core:
+        default_config_hash: yrhpr5tmoTKmZW_qsjbB5Gs_DHYb16SNN9ZtBKPR2JM
+  -
+    collection: ''
+    name: gin.settings
+    data:
+      favicon:
+        use_default: true
+      features:
+        comment_user_picture: true
+        comment_user_verification: true
+        favicon: true
+        node_user_picture: true
+      logo:
+        use_default: true
+      third_party_settings:
+        shortcut:
+          module_link: true
+      preset_accent_color: blue
+      preset_focus_color: gin
+      enable_darkmode: '0'
+      classic_toolbar: horizontal
+      secondary_toolbar_frontend: true
+      high_contrast_mode: false
+      accent_color: ''
+      focus_color: ''
+      layout_density: small
+      show_description_toggle: false
+      show_user_theme_settings: false
+      _core:
+        default_config_hash: ZXozqC__ic9HCF1uJYq5ghJaXpSu1K5-SQuY9Hty6aI
+  -
+    collection: ''
+    name: pathauto.pattern.about_page
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        module:
+          - node
+      id: about_page
+      label: About_page
+      type: 'canonical_entities:node'
+      pattern: '[node:title]'
+      selection_criteria:
+        db99bf3d-8b3d-4e46-b330-ee31e97d7af3:
+          id: node_type
+          negate: false
+          uuid: db99bf3d-8b3d-4e46-b330-ee31e97d7af3
+          context_mapping:
+            node: node
+          bundles:
+            about_page: about_page
+      selection_logic: and
+      weight: -5
+      relationships: {  }
+      _core:
+        default_config_hash: LF8iGqQf_P2f9Q20yeJ5vbNKlhw4O71FH2BOr1xwY9A
+  -
+    collection: ''
+    name: pece_theme.settings
+    data:
+      favicon:
+        use_default: true
+      features:
+        comment_user_picture: true
+        comment_user_verification: true
+        favicon: true
+        node_user_picture: true
+      logo:
+        use_default: true
+      bootstrap_barrio_source: bootstrap_barrio/bootstrap_cdn
+      bootstrap_barrio_fluid_container: 0
+      bootstrap_barrio_region_clean_navbar_branding: 0
+      bootstrap_barrio_region_class_navbar_branding: row
+      bootstrap_barrio_region_clean_navbar_left: 0
+      bootstrap_barrio_region_class_navbar_left: row
+      bootstrap_barrio_region_clean_navbar_right: 0
+      bootstrap_barrio_region_class_navbar_right: row
+      bootstrap_barrio_region_clean_navigation: 0
+      bootstrap_barrio_region_class_navigation: row
+      bootstrap_barrio_region_clean_navigation_collapsible: 0
+      bootstrap_barrio_region_class_navigation_collapsible: row
+      bootstrap_barrio_region_clean_header: 1
+      bootstrap_barrio_region_class_header: ''
+      bootstrap_barrio_region_clean_highlighted: 1
+      bootstrap_barrio_region_class_highlighted: ''
+      bootstrap_barrio_region_clean_help: 0
+      bootstrap_barrio_region_class_help: row
+      bootstrap_barrio_region_clean_content: 1
+      bootstrap_barrio_region_class_content: ''
+      bootstrap_barrio_region_clean_sidebar_first: 1
+      bootstrap_barrio_region_class_sidebar_first: ''
+      bootstrap_barrio_region_clean_sidebar_second: 1
+      bootstrap_barrio_region_class_sidebar_second: ''
+      bootstrap_barrio_region_clean_footer: 0
+      bootstrap_barrio_region_class_footer: row
+      bootstrap_barrio_region_clean_page_top: 0
+      bootstrap_barrio_region_class_page_top: row
+      bootstrap_barrio_region_clean_page_bottom: 0
+      bootstrap_barrio_region_class_page_bottom: row
+      bootstrap_barrio_sidebar_position: left
+      bootstrap_barrio_content_offset: '0'
+      bootstrap_barrio_sidebar_collapse: 0
+      bootstrap_barrio_sidebar_first_width: '3'
+      bootstrap_barrio_sidebar_first_offset: '0'
+      bootstrap_barrio_sidebar_second_width: '3'
+      bootstrap_barrio_sidebar_second_offset: '0'
+      bootstrap_barrio_hide_node_label: 0
+      bootstrap_barrio_button: 0
+      bootstrap_barrio_button_size: ''
+      bootstrap_barrio_button_outline: 0
+      bootstrap_barrio_image_fluid: 0
+      bootstrap_barrio_navbar_container: 0
+      bootstrap_barrio_navbar_toggle: navbar-toggleable-xl
+      bootstrap_barrio_navbar_top_navbar: 0
+      bootstrap_barrio_navbar_top_position: ''
+      bootstrap_barrio_navbar_top_color: ''
+      bootstrap_barrio_navbar_top_background: ''
+      bootstrap_barrio_navbar_position: ''
+      bootstrap_barrio_navbar_color: ''
+      bootstrap_barrio_navbar_background: ''
+      bootstrap_barrio_navbar_top_class: ''
+      bootstrap_barrio_navbar_class: ''
+      bootstrap_barrio_navbar_offcanvas: ''
+      bootstrap_barrio_navbar_flyout: 0
+      bootstrap_barrio_navbar_slide: 0
+      bootstrap_barrio_tabs_style: ''
+      bootstrap_barrio_messages_widget: default
+      bootstrap_barrio_navbar_top_affix: 0
+      bootstrap_barrio_navbar_affix: 0
+      bootstrap_barrio_sidebar_first_affix: 0
+      bootstrap_barrio_sidebar_second_affix: 0
+      bootstrap_barrio_scroll_spy: ''
+      bootstrap_barrio_google_fonts: ''
+      bootstrap_barrio_bootstrap_icons: 1
+      bootstrap_barrio_icons: fontawesome
+      bootstrap_barrio_system_messages: ''
+      bootstrap_barrio_table_style: ''
+      bootstrap_barrio_table_hover: 0
+      bootstrap_barrio_table_head: ''
+      email_logo_default: 1
+      email_logo_path: ''
+      email_logo_upload: {  }
+      _core:
+        default_config_hash: mysLTconieWzFA6DZbhU1VmhzWO96MK-9P6wONXTRCA
+  -
+    collection: ''
+    name: system.theme
+    data:
+      admin: gin
+      default: pece_theme
+      _core:
+        default_config_hash: 5zetQjDBYX5nC4iiUZLDRrLrIuIDthu9CnMtT-Ii9OQ
+  -
+    collection: ''
+    name: system.theme.global
+    data:
+      favicon:
+        mimetype: image/vnd.microsoft.icon
+        path: core/profiles/pece/themes/pece_theme/favicon.ico
+        url: ''
+        use_default: false
+      features:
+        comment_user_picture: true
+        comment_user_verification: true
+        favicon: true
+        node_user_picture: true
+      logo:
+        path: ''
+        url: ''
+        use_default: true
+      _core:
+        default_config_hash: D1LjTnJgkNqQWDM9PtbWJkNHLf541x5rQLSzurLSVDg
+  -
+    collection: ''
+    name: taxonomy.vocabulary.licenses_vocabulary_licenses
+    data:
+      uuid: 2ba312da-cc52-4320-b0a5-72f6c9b62eaf
+      langcode: en
+      status: true
+      dependencies: null
+      _core:
+        default_config_hash: 0ldfqvYOP6k6-4LwFb1WauUWhmGvB5pZeOZy9lMPgwA
+      name: Licenses
+      vid: licenses_vocabulary_licenses
+      description: 'Licenses for content and attribution.'
+      weight: 0
+  -
+    collection: ''
+    name: taxonomy.vocabulary.pece_authors
+    data:
+      uuid: c3d37096-e90d-498d-8fb1-d6586705cd50
+      langcode: en
+      status: true
+      dependencies: {  }
+      _core:
+        default_config_hash: RqGsydiEZtYA1_YGhPHmNPEZvanMmhD5A5wJkCXEJpE
+      name: Authors
+      vid: pece_authors
+      description: 'The list of PECE''s contribution authors.'
+      weight: 0
+  -
+    collection: ''
+    name: taxonomy.vocabulary.pece_structured_analytics
+    data:
+      uuid: 0a25d941-f660-4dd5-be0f-24d8c448758a
+      langcode: en
+      status: true
+      dependencies: {  }
+      name: 'Structured Analytics (Questions set)'
+      vid: pece_structured_analytics
+      description: 'PECE''s collection of questions'
+      weight: 0
+      _core:
+        default_config_hash: p7m6SyU5YuCC0EFr-QECV-SEWOc02Qy8uQIEWLO6QHM
+  -
+    collection: ''
+    name: taxonomy.vocabulary.pece_tags
+    data:
+      uuid: cc9d54dd-70c9-443d-8f86-fdcfaac9a5a9
+      langcode: en
+      status: true
+      dependencies: {  }
+      name: Tags
+      vid: pece_tags
+      description: 'Tags for PECE contents'
+      weight: 0
+      _core:
+        default_config_hash: F3chK4zVhU-zXZHdReWuJdzpo00GSgHSrs4ECZp1B6w
+  -
+    collection: ''
+    name: user.role.administrator
+    data:
+      uuid: f3edc68b-0205-48f7-85b8-d6557c36a7f2
+      langcode: en
+      status: true
+      dependencies: {  }
+      id: administrator
+      label: Administrator
+      weight: 4
+      is_admin: null
+      permissions:
+        - 'access administration pages'
+        - 'access content overview'
+        - 'access contextual links'
+        - 'access files overview'
+        - 'access in-place editing'
+        - 'access media overview'
+        - 'access rules debug'
+        - 'access shortcuts'
+        - 'access site in maintenance mode'
+        - 'access site reports'
+        - 'access site-wide contact form'
+        - 'access taxonomy overview'
+        - 'access toolbar'
+        - 'access user contact forms'
+        - 'access user profiles'
+        - 'administer account settings'
+        - 'administer block_content display'
+        - 'administer block_content form display'
+        - 'administer blocks'
+        - 'administer comment display'
+        - 'administer comment form display'
+        - 'administer contact forms'
+        - 'administer contact_message display'
+        - 'administer contact_message form display'
+        - 'administer content translation'
+        - 'administer content types'
+        - 'administer display modes'
+        - 'administer image styles'
+        - 'administer languages'
+        - 'administer media display'
+        - 'administer media form display'
+        - 'administer menu'
+        - 'administer migrations'
+        - 'administer modules'
+        - 'administer node display'
+        - 'administer node form display'
+        - 'administer nodes'
+        - 'administer paragraph display'
+        - 'administer paragraph form display'
+        - 'administer paragraphs settings'
+        - 'administer paragraphs types'
+        - 'administer pathauto'
+        - 'administer rules'
+        - 'administer rules components'
+        - 'administer rules reactions'
+        - 'administer search_api'
+        - 'administer shortcuts'
+        - 'administer taxonomy'
+        - 'administer taxonomy_term display'
+        - 'administer taxonomy_term form display'
+        - 'administer themes'
+        - 'administer url aliases'
+        - 'administer user display'
+        - 'administer user form display'
+        - 'administer users'
+        - 'administer views'
+        - 'administer workflow'
+        - 'administer workflow_transition display'
+        - 'administer workflow_transition form display'
+        - 'administer workflows'
+        - 'bypass node access'
+        - 'bypass paragraphs type content access'
+        - 'bypass rules access'
+        - 'create artifact_video content'
+        - 'create content translations'
+        - 'create group content'
+        - 'create media'
+        - 'create page content'
+        - 'create paragraph content paragraph_content_reference'
+        - 'create paragraph content paragraph_custom_reference'
+        - 'create paragraph content paragraph_member'
+        - 'create pece_analytic content'
+        - 'create pece_annotation content'
+        - 'create pece_artifact_audio content'
+        - 'create pece_artifact_bundle content'
+        - 'create pece_artifact_image content'
+        - 'create pece_artifact_pdf content'
+        - 'create pece_artifact_text content'
+        - 'create pece_artifact_website content'
+        - 'create pece_essay content'
+        - 'create pece_fieldsite content'
+        - 'create pece_project content'
+        - 'create pece_substantive_logic content'
+        - 'create terms in pece_authors'
+        - 'create terms in pece_structured_analytics'
+        - 'create terms in tags'
+        - 'create url aliases'
+        - 'customize shortcut links'
+        - 'delete all revisions'
+        - 'delete any artifact_video content'
+        - 'delete any group content'
+        - 'delete any media'
+        - 'delete any page content'
+        - 'delete any pece_analytic content'
+        - 'delete any pece_annotation content'
+        - 'delete any pece_artifact_audio content'
+        - 'delete any pece_artifact_bundle content'
+        - 'delete any pece_artifact_image content'
+        - 'delete any pece_artifact_pdf content'
+        - 'delete any pece_artifact_text content'
+        - 'delete any pece_artifact_website content'
+        - 'delete any pece_essay content'
+        - 'delete any pece_fieldsite content'
+        - 'delete any pece_project content'
+        - 'delete any pece_substantive_logic content'
+        - 'delete artifact_video revisions'
+        - 'delete content translations'
+        - 'delete group revisions'
+        - 'delete media'
+        - 'delete orphan revisions'
+        - 'delete own artifact_video content'
+        - 'delete own group content'
+        - 'delete own page content'
+        - 'delete own pece_analytic content'
+        - 'delete own pece_annotation content'
+        - 'delete own pece_artifact_audio content'
+        - 'delete own pece_artifact_bundle content'
+        - 'delete own pece_artifact_image content'
+        - 'delete own pece_artifact_pdf content'
+        - 'delete own pece_artifact_text content'
+        - 'delete own pece_artifact_website content'
+        - 'delete own pece_essay content'
+        - 'delete own pece_fieldsite content'
+        - 'delete own pece_project content'
+        - 'delete own pece_substantive_logic content'
+        - 'delete page revisions'
+        - 'delete paragraph content paragraph_content_reference'
+        - 'delete paragraph content paragraph_custom_reference'
+        - 'delete paragraph content paragraph_member'
+        - 'delete pece_analytic revisions'
+        - 'delete pece_annotation revisions'
+        - 'delete pece_artifact_audio revisions'
+        - 'delete pece_artifact_bundle revisions'
+        - 'delete pece_artifact_image revisions'
+        - 'delete pece_artifact_pdf revisions'
+        - 'delete pece_artifact_text revisions'
+        - 'delete pece_artifact_website revisions'
+        - 'delete pece_essay revisions'
+        - 'delete pece_fieldsite revisions'
+        - 'delete pece_project revisions'
+        - 'delete pece_substantive_logic revisions'
+        - 'delete terms in pece_authors'
+        - 'delete terms in pece_structured_analytics'
+        - 'delete terms in tags'
+        - 'edit any artifact_video content'
+        - 'edit any group content'
+        - 'edit any page content'
+        - 'edit any pece_analytic content'
+        - 'edit any pece_annotation content'
+        - 'edit any pece_artifact_audio content'
+        - 'edit any pece_artifact_bundle content'
+        - 'edit any pece_artifact_image content'
+        - 'edit any pece_artifact_pdf content'
+        - 'edit any pece_artifact_text content'
+        - 'edit any pece_artifact_website content'
+        - 'edit any pece_essay content'
+        - 'edit any pece_fieldsite content'
+        - 'edit any pece_project content'
+        - 'edit any pece_substantive_logic content'
+        - 'edit behavior plugin settings'
+        - 'edit own artifact_video content'
+        - 'edit own group content'
+        - 'edit own page content'
+        - 'edit own pece_analytic content'
+        - 'edit own pece_annotation content'
+        - 'edit own pece_artifact_audio content'
+        - 'edit own pece_artifact_bundle content'
+        - 'edit own pece_artifact_image content'
+        - 'edit own pece_artifact_pdf content'
+        - 'edit own pece_artifact_text content'
+        - 'edit own pece_artifact_website content'
+        - 'edit own pece_essay content'
+        - 'edit own pece_fieldsite content'
+        - 'edit own pece_project content'
+        - 'edit own pece_substantive_logic content'
+        - 'edit terms in pece_authors'
+        - 'edit terms in pece_structured_analytics'
+        - 'edit terms in tags'
+        - 'notify of path changes'
+        - 'restful post lost_password_reset'
+        - 'restful post lost_password_resource'
+        - 'revert all revisions'
+        - 'revert artifact_video revisions'
+        - 'revert group revisions'
+        - 'revert page revisions'
+        - 'revert pece_analytic revisions'
+        - 'revert pece_annotation revisions'
+        - 'revert pece_artifact_audio revisions'
+        - 'revert pece_artifact_bundle revisions'
+        - 'revert pece_artifact_image revisions'
+        - 'revert pece_artifact_pdf revisions'
+        - 'revert pece_artifact_text revisions'
+        - 'revert pece_artifact_website revisions'
+        - 'revert pece_essay revisions'
+        - 'revert pece_fieldsite revisions'
+        - 'revert pece_project revisions'
+        - 'revert pece_substantive_logic revisions'
+        - 'switch shortcut sets'
+        - 'translate any entity'
+        - 'translate pece_project node'
+        - 'update any media'
+        - 'update content translations'
+        - 'update media'
+        - 'update paragraph content paragraph_content_reference'
+        - 'update paragraph content paragraph_custom_reference'
+        - 'update paragraph content paragraph_member'
+        - 'use text format html'
+        - 'view all media revisions'
+        - 'view all revisions'
+        - 'view any unpublished content'
+        - 'view artifact_video revisions'
+        - 'view group revisions'
+        - 'view latest version'
+        - 'view media'
+        - 'view own unpublished content'
+        - 'view own unpublished media'
+        - 'view page revisions'
+        - 'view paragraph content paragraph_content_reference'
+        - 'view paragraph content paragraph_custom_reference'
+        - 'view paragraph content paragraph_member'
+        - 'view pece_analytic revisions'
+        - 'view pece_annotation revisions'
+        - 'view pece_artifact_audio revisions'
+        - 'view pece_artifact_bundle revisions'
+        - 'view pece_artifact_image revisions'
+        - 'view pece_artifact_pdf revisions'
+        - 'view pece_artifact_text revisions'
+        - 'view pece_artifact_website revisions'
+        - 'view pece_essay revisions'
+        - 'view pece_fieldsite revisions'
+        - 'view pece_project revisions'
+        - 'view pece_substantive_logic revisions'
+        - 'view the administration theme'
+        - 'view unpublished paragraphs'
+      _core:
+        default_config_hash: '-jHjmyYZv6_HjWvk1cHM0gQfOzuLpfoj9M5I5rbs_Ec'
+  -
+    collection: ''
+    name: user.role.anonymous
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - filter.format.restricted_html
+        module:
+          - contact
+          - filter
+          - media
+          - search
+          - system
+      id: anonymous
+      label: 'Anonymous user'
+      weight: 0
+      is_admin: false
+      permissions:
+        - 'access content'
+        - 'access site-wide contact form'
+        - 'search content'
+        - 'use text format restricted_html'
+        - 'view media'
+      _core:
+        default_config_hash: Gl1lr_RJQ9pMz_DZhY6pNX94k874Gqh15Gm8Du1EepQ
+  -
+    collection: ''
+    name: user.role.authenticated
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        config:
+          - filter.format.basic_html
+        module:
+          - contact
+          - filter
+          - media
+          - search
+          - shortcut
+          - system
+      id: authenticated
+      label: 'Authenticated user'
+      weight: 1
+      is_admin: false
+      permissions:
+        - 'access content'
+        - 'access shortcuts'
+        - 'access site-wide contact form'
+        - 'search content'
+        - 'use text format basic_html'
+        - 'view media'
+      _core:
+        default_config_hash: PhpjKGbPRzHm1FDviTaPLu3g-svxhir96cooP-e8wSM
+  -
+    collection: ''
+    name: user.role.contributor
+    data:
+      uuid: 81f743c7-1076-4ec7-aae5-15cf05f60aab
+      langcode: en
+      status: true
+      dependencies: {  }
+      id: contributor
+      label: Contributor
+      weight: 2
+      is_admin: null
+      permissions:
+        - 'use text format html'
+      _core:
+        default_config_hash: hSmBg40ELvKwka4dVDb9UCrhQGDsFaQPv3IYk3j0BF0
+  -
+    collection: ''
+    name: user.role.researcher
+    data:
+      uuid: 7087e853-720e-4a8c-b506-a5ca7b4d2e99
+      langcode: en
+      status: true
+      dependencies: {  }
+      id: researcher
+      label: Researcher
+      weight: 3
+      is_admin: null
+      permissions:
+        - 'create groups entities'
+        - 'create paragraph content paragraph_groups'
+        - 'use text format html'
+      _core:
+        default_config_hash: K23hbuwpUKRpB_BOxf5lErviTdG4TTet-ol395XFjhQ

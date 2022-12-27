@@ -1,0 +1,27 @@
+uuid: 8442ea26-6710-427a-83c6-64dd6004e77e
+langcode: en
+status: true
+dependencies:
+  module:
+    - bibcite_export
+id: config_sync.module.bibcite_export
+snapshotSet: config_sync
+extensionType: module
+extensionName: bibcite_export
+items:
+  -
+    collection: ''
+    name: system.action.bibcite_export_multiple
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        module:
+          - bibcite_entity
+      id: bibcite_export_multiple
+      label: 'Export reference'
+      type: bibcite_reference
+      plugin: bibcite_export_multiple
+      configuration: {  }
+      _core:
+        default_config_hash: ZaQwxjk0VAgqQ8PV1rPcec8g4hfeATgPpcXap5MNSdM
