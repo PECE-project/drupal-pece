@@ -1,0 +1,29 @@
+uuid: d82c3aaa-7d58-4e1d-8971-be76514f52f0
+langcode: en
+status: true
+dependencies: {  }
+id: pece_user_dashboard
+admin_label: 'User Dashboard'
+category: PECE
+frontend: true
+weight: 0
+sections:
+  -
+    layout_id: layout_twocol_section
+    layout_settings:
+      label: ''
+      context_mapping: {  }
+      column_widths: 75-25
+    components:
+      d5350ebe-7184-4382-ba8e-ef3f0ac9e113:
+        uuid: d5350ebe-7184-4382-ba8e-ef3f0ac9e113
+        region: first
+        configuration:
+          id: 'blocktabs_block:user_dashboard_content'
+          label: 'Blocktabs:User Dashboard Content'
+          label_display: '0'
+          provider: blocktabs
+          context_mapping: {  }
+        weight: 0
+        additional: {  }
+    third_party_settings: {  }
