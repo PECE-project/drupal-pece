@@ -61,23 +61,43 @@ class DashboardCreateContent extends BlockBase {
    */
   public function buildRenderArray(array $types = null) {
 
-    $block['content'] = [
+    $artifactsItems = [
       '#theme' => 'item_list',
       '#list_type' => 'ul',
       '#items' => [],
-      '#attributes' => ['class' => 'mylist'],
+      '#attributes' => ['class' => ['artifacts_items', 'hide']],
+      '#wrapper_attributes' => ['id' => 'artifacts_menu'],
+      '#prefix' => '<a href="#" class="pece_dashboards_artifacts_title">' . $this->t('Artifacts') . '</a>',
+    ];
+
+    $block['content'] = [
+      '#theme' => 'item_list',
+      '#list_type' => 'ul',
+      '#items' => ['Artifacts' => $artifactsItems],
       '#wrapper_attributes' => ['class' => 'container'],
+      '#attached' => [
+        'library' => [
+          'pece_dashboards/dashboard',
+        ],
+      ],
     ];
 
     foreach ($types as $key => $value) {
 
+      $isArtifact = str_contains($types[$key], 'Artifact - ');
+      $typeName = $isArtifact ? str_replace('Artifact - ', '', $types[$key]) : $types[$key];
+
       $addProjectLink = [
-          '#title' => $this->t($types[$key]),
-          '#type' => 'link',
-          '#url' => \Drupal\Core\Url::fromRoute('node.add', ['node_type' => $key]),
-        ];
-  
-      array_push($block['content']['#items'], $addProjectLink);
+        '#title' => $this->t($typeName),
+        '#type' => 'link',
+        '#url' => \Drupal\Core\Url::fromRoute('node.add', ['node_type' => $key]),
+      ];
+
+      if ($isArtifact) {
+        array_push($block['content']['#items']['Artifacts']['#items'], $addProjectLink);
+      } else {
+        array_push($block['content']['#items'], $addProjectLink);
+      }
     }
 
     return $block;
@@ -85,10 +105,6 @@ class DashboardCreateContent extends BlockBase {
 
   private function sortContentTypesList(array $contentTypes) {
     
-    foreach ($contentTypes as $key => $value) {
-      $contentTypes[$key] = str_replace('Artifact - ', '', $contentTypes[$key]);
-    }
-
     $contentTypes = array_flip($contentTypes);
     ksort($contentTypes);
 
