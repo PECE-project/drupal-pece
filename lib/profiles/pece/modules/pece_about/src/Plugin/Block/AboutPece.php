@@ -3,8 +3,8 @@
 namespace Drupal\pece_about\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Session\AccountProxy;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -39,11 +39,11 @@ class AboutPece extends BlockBase implements ContainerFactoryPluginInterface {
    * @param array $configuration
    * @param string $plugin_id
    * @param mixed $plugin_definition
-   * @param \Drupal\Core\Extension\ExtensionPathResolver $path_resolver
+   * @param  $account
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ExtensionPathResolver $path_resolver) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, AccountProxy $account) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->pathResolver = $path_resolver;
+    $this->currentUser = $account;
   }
 
   /**
