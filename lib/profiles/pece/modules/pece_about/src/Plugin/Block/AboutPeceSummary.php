@@ -26,10 +26,18 @@ class AboutPeceSummary extends BlockBase {
     //
     //
     // @see https://www.drupal.org/node/2195739
-    $summary = text_summary(_theme('about_pece'), 'panopoly_wysiwyg_text', 800);
+    $summary = [
+      '#theme' => 'about_pece',
+      '#markup' => '',
+    ];
 
-    // Add ellipsis and read more link.
-    return pece_about_trim_summary($summary, TRUE);
+    return [
+      '#type' => 'inline_template',
+      '#template' => '{{ summary }}',
+      '#context' => [
+        'sommary' => $summary,
+      ],
+    ];
   }
 
 }
