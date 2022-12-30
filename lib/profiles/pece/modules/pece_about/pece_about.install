@@ -49,7 +49,6 @@ function _pece_about_default_page_info() {
 
   if (file_exists($path_to_about_info_file)) {
     $about_info_raw = file_get_contents($path_to_about_info_file);
-    // pece_parse_yaml($about_info_raw);
     $parsed = Yaml::parse($about_info_raw);
     return $parsed;
   }
