@@ -54,7 +54,11 @@ class AboutPece extends BlockBase implements ContainerFactoryPluginInterface {
       ->getPath('module', 'pece_about') . '/templates/pece-about-block.html.twig';
     $twigService = \Drupal::service('twig');
     $template = $twigService->loadTemplate($twigFilePath);
-    return $template->render();
+    // return $template->render([
+    //   'default' => '',
+    // ]);
+
+    return [];
   }
 
 }
