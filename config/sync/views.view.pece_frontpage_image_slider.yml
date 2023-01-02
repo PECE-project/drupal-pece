@@ -1,3 +1,4 @@
+uuid: 5bbe2e49-0674-4e33-87b3-c07d154ca72a
 langcode: en
 status: true
 dependencies:
@@ -11,6 +12,7 @@ dependencies:
     - link
     - node
     - slick
+    - slick_views
     - user
 id: pece_frontpage_image_slider
 label: 'PECE Frontpage Image Slider'
@@ -296,11 +298,44 @@ display:
             operator_limit_selection: false
             operator_list: {  }
       style:
-        type: default
+        type: slick
         options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
+          caption:
+            field_pece_slideshowimage_link_1: '0'
+            field_pece_slideshowimage_image: '0'
+            field_pece_slideshowimage_link: '0'
+          optionset: default
+          class: ''
+          id: ''
+          image: ''
+          link: ''
+          overlay: ''
+          title: ''
+          vanilla: false
+          layout: ''
+          cache: 0
+          skin: ''
+          style: ''
+          grid: ''
+          grid_medium: ''
+          grid_small: ''
+          overridables:
+            arrows: '0'
+            autoplay: '0'
+            dots: '0'
+            draggable: '0'
+            infinite: '0'
+            mouseWheel: '0'
+            randomize: '0'
+            variableWidth: '0'
+          thumbnail: ''
+          optionset_thumbnail: ''
+          skin_thumbnail: ''
+          thumbnail_effect: ''
+          thumbnail_position: ''
+          override: false
+          preserve_keys: false
+          visible_items: null
       row:
         type: fields
       query:
