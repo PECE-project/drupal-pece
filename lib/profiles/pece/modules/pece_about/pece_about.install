@@ -15,6 +15,13 @@ function pece_about_install() {
 }
 
 /**
+ * Implements hook_uninstall().
+ */
+function pece_about_uninstall() {
+  \Drupal::configFactory()->getEditable('about.settings')->delete();
+}
+
+/**
  * Implements hook_content_import_entity_alter().
  */
 function _pece_about_content_import_entity_alter(array $content, Node $entity) {
