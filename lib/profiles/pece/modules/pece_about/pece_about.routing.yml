@@ -1,0 +1,7 @@
+pece_about.admin_config_pece_about:
+  path: '/admin/config/pece/about'
+  defaults:
+    _form: '\Drupal\pece_about\Form\CreateAboutBodyForm'
+    _title: 'PECE about'
+  requirements:
+    _permission: 'access administration pages'

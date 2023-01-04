@@ -25,12 +25,8 @@ function _pece_about_content_import_entity_alter(array $content, Node $entity) {
  * Configures a default about page.
  */
 function _pece_about_install_default_page() {
-  if (!($default_page_info = _pece_about_default_page_info())) {
-    return FALSE;
-  }
-
   $file_path =  \Drupal::service('extension.path.resolver')
-      ->getPath('module', 'pece_about') . '/defaults/node-about_page-f96a5626-f779-42a3-85fb-b3c14dd7cf82.yml';
+      ->getPath('module', 'pece_about') . '/defaults/node-page-4806dbb2-39dc-4d1f-9b71-15eaaeaf5ac8.yml';
   \Drupal::service('single_content_sync.importer')->importFromFile($file_path);
 }
 

@@ -19,9 +19,11 @@ class About extends BlockBase {
    */
   public function build() {
 
+    $config = \Drupal::service('config.factory')->getEditable('about.settings');
+
     return [
       '#type' => 'container',
-      '#markup' => 'PECE About block',
+      '#markup' => $config->get('body'),
     ];
   }
 
