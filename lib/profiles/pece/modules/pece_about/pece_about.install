@@ -6,12 +6,20 @@
 
 use Symfony\Component\Yaml\Yaml;
 use Drupal\node\Entity\Node;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
 
 /**
  * Implements hook_install().
  */
 function pece_about_install() {
-  _pece_about_install_default_page();
+  $nid = _pece_about_install_default_page();
+  $menu_link = MenuLinkContent::create([
+      'title' => 'About',
+      'link' => ['uri' => 'internal:/node/' . $nid],
+      'menu_name' => 'main',
+      'expanded' => TRUE,
+    ]);
+  $menu_link->save();
 }
 
 /**
@@ -34,7 +42,8 @@ function _pece_about_content_import_entity_alter(array $content, Node $entity) {
 function _pece_about_install_default_page() {
   $file_path =  \Drupal::service('extension.path.resolver')
       ->getPath('module', 'pece_about') . '/defaults/node-page-4806dbb2-39dc-4d1f-9b71-15eaaeaf5ac8.yml';
-  \Drupal::service('single_content_sync.importer')->importFromFile($file_path);
+  $node = \Drupal::service('single_content_sync.importer')->importFromFile($file_path);
+  return $node->id();
 }
 
 /**
