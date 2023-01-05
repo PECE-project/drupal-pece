@@ -5,7 +5,6 @@ namespace Drupal\pece_home\Form;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
-use Exception;
 
 /**
  * Builds the form to create PECE front page.
@@ -78,16 +77,16 @@ class CreateHomepageForm extends ConfirmFormBase
       $form_state->setRedirectUrl($this->getCancelUrl());
       return;
     }
-
-    try {
-      \Drupal::service('single_content_sync.importer')->importFromFile($file_path);
-      $link = $aliasManager->getPathByAlias('/home');
-      $this->messenger()->addStatus(
-        $this->t('PECE front page was successfully created.', [])
-      );
-    } catch (Exception $e) {
-      throw new Exception("Error Processing Request", 1);
-    }
+    $home_page = \Drupal::service('single_content_sync.importer')->importFromFile($file_path);
+    $link = $aliasManager->getPathByAlias('/home');
+    \Drupal::service('config.factory')->getEditable('system.site')
+      ->set('page.front', $link)
+      ->save();
+    $this->messenger()->addStatus(
+      $this->t('PECE front page was successfully created! <a href="@link">View home page</a>', [
+        '@link' => $link,
+      ])
+    );
     $form_state->setRedirectUrl($this->getCancelUrl());
   }
 
