@@ -16,7 +16,7 @@ install:
   - better_exposed_filters
   - big_pipe
   - block
-  - block_content  
+  - block_content
   - breakpoint
   - blocktabs
   - color
@@ -85,6 +85,7 @@ install:
   - pece_analytics
   - pece_annotations
   - pece_essay
+  - pece_home
   - pece_subst_logic
   - pece_n8n
   - pece_oauth
@@ -111,15 +112,18 @@ install:
   - workflows
 
 dependencies:
+  - ctools
+  - system
+  - action
+  - user
   - node
   - block
+  - block_content
+  - datetime
+  - help
+  - image
   - views
-  - ctools
-  - pece_essay
-  - pece_subst_logic
-  - pece_artifacts
-  - pece_artifacts_fieldsite
-  - pece_analytics
+  - file
 
 themes:
   - claro
