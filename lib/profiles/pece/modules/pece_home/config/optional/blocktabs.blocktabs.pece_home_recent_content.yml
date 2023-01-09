@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies: {  }
+name: pece_home_recent_content
+label: 'Home Recent Content'
+event: click
+style: default
+tabs:
+  66931b2c-e56a-468b-bc3b-6bd1fc7292fc:
+    id: views_tab
+    title: 'Recent Artifacts'
+    data:
+      view_name: pece_artifacts
+      view_display: pece_artifacts
+      view_arg: recent-artifacts
+    weight: 1
+    uuid: 66931b2c-e56a-468b-bc3b-6bd1fc7292fc
+  ebe01541-1a47-4500-a334-aa130483ed02:
+    id: views_tab
+    title: 'Recent Essays'
+    data:
+      view_name: pece_essays
+      view_display: block_2
+      view_arg: recent-essays
+    weight: 2
+    uuid: ebe01541-1a47-4500-a334-aa130483ed02
