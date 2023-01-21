@@ -1,3 +1,5 @@
+@import "base/reset";
+
 // Bootstrap
 // -----------------------------------------------------------------------------
 @import "~bootstrap/scss/functions";
@@ -38,11 +40,12 @@
 // Base
 // -----------------------------------------------------------------------------
 @import "base/mixins";
-@import "base/functions";
+@import "base/mixins";
 @import "base/helpers";
 @import "base/elements";
 @import "base/typography";
-
+@import "base/icons";
+@import "base/index";
 // Layout
 // -----------------------------------------------------------------------------
 @import "layout/page.header";
@@ -58,3 +61,4 @@
 @import "block/block";
 @import "content/node.page";
 @import "content/node.article";
+@import "main";
