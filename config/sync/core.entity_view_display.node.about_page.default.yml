@@ -1,0 +1,60 @@
+uuid: 0a1363a9-bd2b-4590-9570-bddafacc43ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - blocktabs.blocktabs.pece_about_page
+    - node.type.about_page
+  module:
+    - blocktabs
+    - layout_builder
+    - layout_discovery
+    - layout_library
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          f8e64bef-3fac-4d1e-9719-4329fd80e0bd:
+            uuid: f8e64bef-3fac-4d1e-9719-4329fd80e0bd
+            region: content
+            configuration:
+              id: 'extra_field_block:node:about_page:links'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 0
+            additional: {  }
+          d138224c-fa45-4de5-9305-abd289265f32:
+            uuid: d138224c-fa45-4de5-9305-abd289265f32
+            region: content
+            configuration:
+              id: 'blocktabs_block:pece_about_page'
+              label: 'Blocktabs:About Page'
+              label_display: '0'
+              provider: blocktabs
+              context_mapping: {  }
+            weight: 6
+            additional: {  }
+        third_party_settings: {  }
+  layout_library:
+    enable: false
+id: node.about_page.default
+targetEntityType: node
+bundle: about_page
+mode: default
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

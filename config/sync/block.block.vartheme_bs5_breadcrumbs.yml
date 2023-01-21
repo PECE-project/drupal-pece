@@ -1,0 +1,22 @@
+uuid: dacd5863-7f2c-4797-a2d2-d7df5b483377
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - vartheme_bs5
+_core:
+  default_config_hash: 4RpiE2vqbeND1s4p4FxDl8rBVmD2EkkVUlblK2dCaJM
+id: vartheme_bs5_breadcrumbs
+theme: vartheme_bs5
+region: header
+weight: -4
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

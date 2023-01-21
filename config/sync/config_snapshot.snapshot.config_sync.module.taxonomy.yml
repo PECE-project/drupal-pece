@@ -26,6 +26,38 @@ items:
         default_config_hash: '-PPKjsNQPvoIDjOuUAvlLocYD976MNjb9Zpgyz5_BWE'
   -
     collection: ''
+    name: system.action.taxonomy_term_publish_action
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        module:
+          - taxonomy
+      id: taxonomy_term_publish_action
+      label: 'Publish taxonomy term'
+      type: taxonomy_term
+      plugin: 'entity:publish_action:taxonomy_term'
+      configuration: {  }
+      _core:
+        default_config_hash: DoVt_VGgVLcDD4XmVbSFzr0K17SJy9imFiYusKkJBgY
+  -
+    collection: ''
+    name: system.action.taxonomy_term_unpublish_action
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        module:
+          - taxonomy
+      id: taxonomy_term_unpublish_action
+      label: 'Unpublish taxonomy term'
+      type: taxonomy_term
+      plugin: 'entity:unpublish_action:taxonomy_term'
+      configuration: {  }
+      _core:
+        default_config_hash: z2sNRM3ECa7FPCGnSNje_9SmZJQgwhD_6fG_L4Mr8zI
+  -
+    collection: ''
     name: taxonomy.settings
     data:
       maintain_index_table: true

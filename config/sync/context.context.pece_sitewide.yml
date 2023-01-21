@@ -1,9 +1,12 @@
+uuid: 88310b45-2157-4e23-8d13-b9a5509164d1
 langcode: en
 status: true
 dependencies:
   config:
+    - system.menu.account
     - system.menu.main
   module:
+    - menu_block
     - system
 label: 'PECE Site wide'
 name: pece_sitewide
@@ -40,6 +43,30 @@ reactions:
         level: '1'
         depth: '0'
         expand_all_items: 0
+        third_party_settings: {  }
+      7bcd7cf3-4690-4ee7-baff-7fdbc31b6d44:
+        uuid: 7bcd7cf3-4690-4ee7-baff-7fdbc31b6d44
+        id: 'menu_block:account'
+        label: 'User account menu'
+        provider: menu_block
+        label_display: '0'
+        region: navigation_collapsible
+        weight: '0'
+        custom_id: menu_block_account
+        theme: pece_theme
+        css_class: ''
+        unique: 0
+        context_id: pece_sitewide
+        context_mapping: {  }
+        follow: 0
+        follow_parent: child
+        level: '1'
+        depth: '0'
+        expand_all_items: false
+        parent: 'account:'
+        suggestion: account
+        label_type: block
+        label_link: 0
         third_party_settings: {  }
     include_default_blocks: 0
     saved: false
