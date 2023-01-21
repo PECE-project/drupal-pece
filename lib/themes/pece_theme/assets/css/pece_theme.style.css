@@ -9574,3 +9574,22 @@ a.text-dark:hover, a.text-dark:focus {
 .invisible {
   visibility: hidden !important;
 }
+
+.header-bg{
+  width:100%;
+  height:14rem;
+  position:absolute;
+  left:0;
+  top:0;
+  background-position:50%;
+  background-repeat:no-repeat;
+  background-image:url(/themes/custom/pece_theme/assets/images/bg-header.svg);
+}
+.header-bg--logged{
+  margin-top:3rem
+}
+@media (min-width:1024px){
+  .header-bg{
+    background-position:top
+  }
+}

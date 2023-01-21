@@ -1,0 +1,32 @@
+/**
+* Main
+*/
+
+@import "base/index";
+@import "globals/index";
+@import "settings/index";
+@import "utilities/index";
+
+body {
+	@apply text-gray-900 tracking-wide antialiased;
+	font-family: $font-stack;
+}
+
+.header-bg{
+  width:100%;
+  height:14rem;
+  position:absolute;
+  left:0;
+  top:0;
+  background-position:50%;
+  background-repeat:no-repeat;
+  background-image:url(/themes/custom/pece_theme/assets/images/bg-header.svg);
+}
+.header-bg--logged{
+  margin-top:3rem;
+}
+@media (min-width:1024px){
+  .header-bg{
+    background-position:top;
+  }
+}
