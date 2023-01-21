@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3443bc119593da91602463ff0037bcf3",
+    "content-hash": "d2d3737c0537e23a6b141200c75d277c",
     "packages": [
         {
             "name": "academicpuma/citeproc-php",
@@ -7321,6 +7321,58 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/location_migration",
                 "issues": "https://www.drupal.org/project/issues/location_migration"
+            }
+        },
+        {
+            "name": "drupal/m4032404",
+            "version": "1.0.0-alpha5",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/m4032404.git",
+                "reference": "8.x-1.0-alpha5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/m4032404-8.x-1.0-alpha5.zip",
+                "reference": "8.x-1.0-alpha5",
+                "shasum": "a8034b14e52389bfaa614f06f6b4b8b937654778"
+            },
+            "require": {
+                "drupal/core": "^8.7.7 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-alpha5",
+                    "datestamp": "1598275744",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "skwashd",
+                    "homepage": "https://www.drupal.org/user/116305"
+                },
+                {
+                    "name": "suzymasri",
+                    "homepage": "https://www.drupal.org/user/2428842"
+                },
+                {
+                    "name": "timaholt",
+                    "homepage": "https://www.drupal.org/user/371450"
+                }
+            ],
+            "description": "Emit a 404 response for access denied pages",
+            "homepage": "https://www.drupal.org/project/m4032404",
+            "support": {
+                "source": "https://git.drupalcode.org/project/m4032404"
             }
         },
         {
@@ -23232,6 +23284,7 @@
         "drupal/layout_library": 10,
         "drupal/licenses_vocabulary": 15,
         "drupal/location_migration": 10,
+        "drupal/m4032404": 15,
         "drupal/media_entity_browser": 15,
         "drupal/page_sections": 20,
         "drupal/rules": 20,
