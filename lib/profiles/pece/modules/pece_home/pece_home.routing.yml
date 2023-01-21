@@ -12,4 +12,5 @@ pece_home.home:
     _controller: '\Drupal\pece_home\Controller\HomeController::defaultHome'
     _title: 'Platform for Experimental, Collaborative Ethnography'
   requirements:
-    _custom_access: '\Drupal\pece_home\Controller\HomeController::access'
+    _permission: 'access content'
+#    _custom_access: '\Drupal\pece_home\Controller\HomeController::accessCheck'
