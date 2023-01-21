@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="PECE Distro">
+  <description>Default PHP CodeSniffer configuration for PECE Distro.</description>
+  <!-- Standards. -->
+  <rule ref="./vendor/drupal/coder/coder_sniffer/Drupal"/>
+  <rule ref="./vendor/drupal/coder/coder_sniffer/DrupalPractice"/>
+  <rule ref="./vendor/ec-europa/qa-automation/phpcs/QualityAssurance"/>
+  <!-- Arguments. -->
+  <arg name="extensions" value="php,module,inc,theme,profile,install,yml"/>
+  <arg name="report" value="full"/>
+  <arg name="colors"/>
+  <arg value="p"/>
+  <!-- Files to check. -->
+  <file>./lib</file>
+  <file>./resources</file>
+  <file>./src</file>
+  <!-- Exclude patterns. -->
+  <exclude-pattern>vendor/</exclude-pattern>
+  <exclude-pattern>web/</exclude-pattern>
+  <exclude-pattern>node_modules/</exclude-pattern>
+  <exclude-pattern>config/</exclude-pattern>
+  <exclude-pattern>*.min.css</exclude-pattern>
+  <exclude-pattern>*.min.js</exclude-pattern>
+  <!-- Add your custom rules after this line. -->
+</ruleset>

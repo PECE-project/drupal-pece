@@ -1,0 +1,14 @@
+parameters:
+  level: '1'
+  paths:
+    - lib
+    - src
+  excludePaths:
+    - vendor
+    - tests
+    - resources
+    - node_modules
+    - config
+  ignoreErrors:
+    # new static() is a best practice in Drupal, so we cannot fix that.
+    - "#^Unsafe usage of new static#"
