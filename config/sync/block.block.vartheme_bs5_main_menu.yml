@@ -1,0 +1,27 @@
+uuid: a52dfcac-e6e5-4acd-94f8-9b75e18634b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - vartheme_bs5
+_core:
+  default_config_hash: eUdFCkIi0hbQT6Zgzk5q8JND4BgPJPbttbCXxXpTTxw
+id: vartheme_bs5_main_menu
+theme: vartheme_bs5
+region: navigation_collapsible
+weight: -5
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 2
+  expand_all_items: false
+visibility: {  }

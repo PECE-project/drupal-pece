@@ -117,6 +117,24 @@ items:
         default_config_hash: 2OMXCScXUOLSYID9-phjO4q36nnnaMWNUlDxEqZzG1U
   -
     collection: ''
+    name: search.page.node_search
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        module:
+          - node
+      id: node_search
+      label: Content
+      path: node
+      weight: -10
+      plugin: node_search
+      configuration:
+        rankings: {  }
+      _core:
+        default_config_hash: 97tvtzGOa8_flb22CzSjgtm_YkiGMHvEBO-6q2K9V_U
+  -
+    collection: ''
     name: system.action.node_delete_action
     data:
       langcode: en
