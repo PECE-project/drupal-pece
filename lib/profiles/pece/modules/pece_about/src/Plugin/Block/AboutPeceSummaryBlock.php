@@ -5,14 +5,14 @@ namespace Drupal\pece_about\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 
 /**
- * Provides the AboutPeceSummary block.
+ * Provides the About PECE Summary block.
  *
  * @Block(
  *   id = "pece_about_about_pece_summary",
  *   admin_label = @Translation("About PECE Summary")
  * )
  */
-class AboutPeceSummary extends BlockBase {
+class AboutPeceSummaryBlock extends BlockBase {
 
   /**
    * {@inheritdoc}
