@@ -8,14 +8,14 @@ use Drupal\Core\Session\AccountProxy;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides the AboutPece block.
+ * Provides the AboutPeceBlock block.
  *
  * @Block(
  *   id = "pece_about_about_pece",
  *   admin_label = @Translation("About PECE")
  * )
  */
-class AboutPece extends BlockBase implements ContainerFactoryPluginInterface {
+class AboutPeceBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
    /**
    * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
