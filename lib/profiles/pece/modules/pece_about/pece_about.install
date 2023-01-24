@@ -4,29 +4,39 @@
  * Installation code for the PECE About feature.
  */
 
-use Symfony\Component\Yaml\Yaml;
 use Drupal\node\Entity\Node;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 
 /**
  * Implements hook_install().
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function pece_about_install() {
-  $nid = _pece_about_install_default_page();
-  $menu_link = MenuLinkContent::create([
+  $nid = pece_about_install_default_page();
+  if ($nid) {
+    $menu_link = MenuLinkContent::create([
       'title' => 'About',
       'link' => ['uri' => 'internal:/node/' . $nid],
       'menu_name' => 'main',
       'expanded' => TRUE,
+      'weight' => 1,
     ]);
-  $menu_link->save();
+    $menu_link->save();
+  }
 }
 
 /**
  * Implements hook_uninstall().
  */
 function pece_about_uninstall() {
-  \Drupal::configFactory()->getEditable('about.settings')->delete();
+  \Drupal::configFactory()->getEditable('pece_about.settings')->delete();
+  $blocktab_about = \Drupal::entityTypeManager()->getStorage('blocktabs')->loadByProperties(
+    ['name' => 'pece_about_page']
+  );
+  if (!empty($blocktab_about)) {
+    \Drupal::entityTypeManager()->getStorage('blocktabs')->delete($blocktab_about);
+  }
 }
 
 /**
@@ -38,33 +48,14 @@ function _pece_about_content_import_entity_alter(array $content, Node $entity) {
 
 /**
  * Configures a default about page.
+ *
+ * @return int
+ *   Node id.
  */
-function _pece_about_install_default_page() {
-  $file_path =  \Drupal::service('extension.path.resolver')
-      ->getPath('module', 'pece_about') . '/defaults/node-page-4806dbb2-39dc-4d1f-9b71-15eaaeaf5ac8.yml';
-  $node = \Drupal::service('single_content_sync.importer')->importFromFile($file_path);
-  return $node->id();
+function pece_about_install_default_page() {
+  $file_path = \Drupal::service('extension.path.resolver')
+    ->getPath('module', 'pece_about') . '/defaults/node-page-4806dbb2-39dc-4d1f-9b71-15eaaeaf5ac8.yml';
+  $node = \Drupal::service('single_content_sync.importer')
+    ->importFromFile($file_path);
+  return $node->get('nid')->value;
 }
-
-/**
- * Load about page default info.
- */
-function _pece_about_default_page_info() {
-  \Drupal::moduleHandler()->loadInclude('pece', 'inc', 'pece.functions');
-
-  $path_to_module = \Drupal::service('extension.path.resolver')
-    ->getPath('module', 'pece_about');
-  $path_to_defaults = \Drupal::service("file_system")
-    ->realpath($path_to_module . '/defaults');
-
-  $path_to_about_info_file = "{$path_to_defaults}/about.yml";
-
-  if (file_exists($path_to_about_info_file)) {
-    $about_info_raw = file_get_contents($path_to_about_info_file);
-    $parsed = Yaml::parse($about_info_raw);
-    return $parsed;
-  }
-
-  return FALSE;
-}
-
