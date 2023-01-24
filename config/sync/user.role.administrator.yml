@@ -1,6 +1,58 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.html
+    - node.type.artifact_video
+    - node.type.group
+    - node.type.page
+    - node.type.pece_analytic
+    - node.type.pece_annotation
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
+    - node.type.pece_essay
+    - node.type.pece_fieldsite
+    - node.type.pece_project
+    - node.type.pece_substantive_logic
+    - rest.resource.lost_password_reset
+    - rest.resource.lost_password_resource
+    - taxonomy.vocabulary.pece_authors
+    - taxonomy.vocabulary.pece_structured_analytics
+  module:
+    - block
+    - block_content
+    - comment
+    - contact
+    - content_moderation
+    - content_translation
+    - contextual
+    - entity_reference_revisions
+    - field_ui
+    - file
+    - filter
+    - image
+    - language
+    - media
+    - migrate_tools
+    - node
+    - paragraphs
+    - paragraphs_type_permissions
+    - path
+    - pathauto
+    - quickedit
+    - rest
+    - rules
+    - search_api
+    - shortcut
+    - system
+    - taxonomy
+    - toolbar
+    - views_ui
+    - workflows
 id: administrator
 label: Administrator
 weight: 4

@@ -1,6 +1,13 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - rest.resource.lost_password_reset
+    - rest.resource.lost_password_resource
+  module:
+    - graphql
+    - rest
+    - system
 id: anonymous
 label: 'Anonymous user'
 weight: 0

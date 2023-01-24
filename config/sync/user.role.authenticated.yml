@@ -1,6 +1,12 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.basic_html
+  module:
+    - filter
+    - graphql
+    - system
 id: authenticated
 label: 'Authenticated user'
 weight: 1
@@ -9,4 +15,4 @@ permissions:
   - 'access content'
   - 'execute entities_api arbitrary graphql requests'
   - 'execute entities_api persisted graphql requests'
-  - 'use text format html'
+  - 'use text format basic_html'
