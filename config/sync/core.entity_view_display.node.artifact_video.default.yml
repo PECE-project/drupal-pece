@@ -1,8 +1,10 @@
+uuid: 29151b9b-e189-4b9c-8175-21c0d90af55f
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.node.artifact_video.field_ark_enabled
+    - field.field.node.artifact_video.field_contributed_date
     - field.field.node.artifact_video.field_pbc_ref_group
     - field.field.node.artifact_video.field_pbc_ref_role
     - field.field.node.artifact_video.field_pbc_ref_user
@@ -16,7 +18,6 @@ dependencies:
     - field.field.node.artifact_video.field_video_duration
     - field.field.node.artifact_video.field_video_fieldsite
     - field.field.node.artifact_video.field_video_format
-    - field.field.node.artifact_video.field_video_language
     - field.field.node.artifact_video.field_video_location
     - field.field.node.artifact_video.field_video_media
     - field.field.node.artifact_video.field_video_permission
@@ -28,8 +29,8 @@ dependencies:
     - address
     - datetime
     - file
-    - languagefield
     - layout_builder
+    - layout_discovery
     - options
     - pbf
     - text
@@ -40,43 +41,17 @@ third_party_settings:
     allow_custom: false
     sections:
       -
-        layout_id: layout_twocol_section
+        layout_id: layout_onecol
         layout_settings:
           label: ''
           context_mapping: {  }
-          column_widths: 50-50
         components:
-          56002ced-1be4-4bde-bffe-1b517cb25100:
-            uuid: 56002ced-1be4-4bde-bffe-1b517cb25100
-            region: first
+          17074c0c-1703-407b-924a-b3e40b41ea1c:
+            uuid: 17074c0c-1703-407b-924a-b3e40b41ea1c
+            region: content
             configuration:
-              id: 'field_block:node:artifact_video:field_video_media'
-              label: Video
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: file_video
-                label: above
-                settings:
-                  controls: false
-                  autoplay: false
-                  loop: false
-                  multiple_file_display_type: tags
-                  muted: false
-                  width: 640
-                  height: 480
-                third_party_settings: {  }
-            weight: 0
-            additional: {  }
-          0742d70b-04da-4f59-a86e-92ee65eb6b7c:
-            uuid: 0742d70b-04da-4f59-a86e-92ee65eb6b7c
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_video:field_video_format'
-              label: Format
+              id: 'field_block:node:artifact_video:title'
+              label: Title
               label_display: '0'
               provider: layout_builder
               context_mapping:
@@ -88,14 +63,22 @@ third_party_settings:
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            weight: 1
+            weight: 0
             additional: {  }
-          670f6ed7-6879-4de7-94af-13db73437359:
-            uuid: 670f6ed7-6879-4de7-94af-13db73437359
+        third_party_settings: {  }
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          column_widths: 50-50
+        components:
+          0742d70b-04da-4f59-a86e-92ee65eb6b7c:
+            uuid: 0742d70b-04da-4f59-a86e-92ee65eb6b7c
             region: first
             configuration:
-              id: 'field_block:node:artifact_video:field_video_duration'
-              label: Duration
+              id: 'field_block:node:artifact_video:field_video_format'
+              label: Format
               label_display: '0'
               provider: layout_builder
               context_mapping:
@@ -125,21 +108,6 @@ third_party_settings:
                 label: above
                 settings:
                   link: true
-                third_party_settings: {  }
-            weight: 3
-            additional: {  }
-          106966e9-81f7-442b-82b0-65d572984a7b:
-            uuid: 106966e9-81f7-442b-82b0-65d572984a7b
-            region: first
-            configuration:
-              id: 'extra_field_block:node:artifact_video:links'
-              label: Links
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                settings: {  }
                 third_party_settings: {  }
             weight: 4
             additional: {  }
@@ -201,25 +169,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 2
             additional: {  }
-          6395919c-9f27-4eda-bf00-e2d1a0871bac:
-            uuid: 6395919c-9f27-4eda-bf00-e2d1a0871bac
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_video:field_video_fieldsite'
-              label: Fieldsite
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 3
-            additional: {  }
           bf4cf4ac-4f6e-43f8-9ba9-bacb0d765468:
             uuid: bf4cf4ac-4f6e-43f8-9ba9-bacb0d765468
             region: second
@@ -236,7 +185,7 @@ third_party_settings:
                 label: above
                 settings: {  }
                 third_party_settings: {  }
-            weight: 4
+            weight: 5
             additional: {  }
           0ad42f1c-e592-4ceb-b4a0-6d35c84a9c43:
             uuid: 0ad42f1c-e592-4ceb-b4a0-6d35c84a9c43
@@ -254,46 +203,7 @@ third_party_settings:
                 label: above
                 settings: {  }
                 third_party_settings: {  }
-            weight: 5
-            additional: {  }
-          0d043bb8-f7c2-47a0-8f56-2c7789e006b0:
-            uuid: 0d043bb8-f7c2-47a0-8f56-2c7789e006b0
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_video:langcode'
-              label: Language
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: language
-                label: above
-                settings:
-                  link_to_entity: false
-                  native_language: false
-                third_party_settings: {  }
             weight: 6
-            additional: {  }
-          89674a4d-a49a-407a-9847-342488722f46:
-            uuid: 89674a4d-a49a-407a-9847-342488722f46
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_video:field_pbc_ref_group'
-              label: 'Permission by Group'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: pbf_formatter_default
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 7
             additional: {  }
           300bf1d2-2f3d-4ab9-883d-e8451d7b4a89:
             uuid: 300bf1d2-2f3d-4ab9-883d-e8451d7b4a89
@@ -312,27 +222,66 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 8
+            weight: 7
             additional: {  }
-          c5ea4664-13be-4009-8819-d823d61f152c:
-            uuid: c5ea4664-13be-4009-8819-d823d61f152c
-            region: second
+          bfeac0a5-746e-4a0f-9526-32ec4fba41fd:
+            uuid: bfeac0a5-746e-4a0f-9526-32ec4fba41fd
+            region: first
             configuration:
-              id: 'field_block:node:artifact_video:field_video_location'
-              label: Location
+              id: 'field_block:node:artifact_video:field_video_media'
+              label: Video
               label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: address_default
+                type: file_default
                 label: above
-                settings: {  }
+                settings:
+                  use_description_as_link_text: true
                 third_party_settings: {  }
-            weight: 9
+            weight: 0
+            additional: {  }
+          f5bd0782-96ef-406b-8cd9-e18e98cfe39d:
+            uuid: f5bd0782-96ef-406b-8cd9-e18e98cfe39d
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:field_pece_project_ref'
+              label: 'Cite as part of...'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
+          90099ae2-07c6-48bc-8bdc-530c720f65c1:
+            uuid: 90099ae2-07c6-48bc-8bdc-530c720f65c1
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:field_contributed_date'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings: {  }
+            weight: 4
             additional: {  }
         third_party_settings: {  }
+_core:
+  default_config_hash: UDvZGwGX2P3PzWjfdCQ9m1albNJQCXfzkfYCXLEYilM
 id: node.artifact_video.default
 targetEntityType: node
 bundle: artifact_video
@@ -347,6 +296,15 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 119
+    region: content
+  field_contributed_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 127
     region: content
   field_pbc_ref_group:
     type: pbf_formatter_default
@@ -453,16 +411,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 122
-    region: content
-  field_video_language:
-    type: languagefield_default
-    label: above
-    settings:
-      link_to_entity: false
-      format:
-        name: name
-    third_party_settings: {  }
-    weight: 107
     region: content
   field_video_location:
     type: address_default
