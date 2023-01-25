@@ -1,3 +1,4 @@
+uuid: 41cc6f7f-c714-4f6d-9ddb-4c7c09641572
 langcode: en
 status: true
 dependencies:
@@ -17,6 +18,7 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_audio_source
     - field.field.node.pece_artifact_audio.field_audio_tags
     - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
+    - field.field.node.pece_artifact_audio.field_contributed_date
     - field.field.node.pece_artifact_audio.field_pbc_ref_group
     - field.field.node.pece_artifact_audio.field_pbc_ref_role
     - field.field.node.pece_artifact_audio.field_pbc_ref_user
@@ -26,6 +28,8 @@ dependencies:
     - node.type.pece_artifact_audio
   module:
     - user
+_core:
+  default_config_hash: 80SU_3UxErXBeIT0N2QOKdt06FF_hLeSpuBfyVLz_wU
 id: node.pece_artifact_audio.teaser
 targetEntityType: node
 bundle: pece_artifact_audio
@@ -52,6 +56,7 @@ hidden:
   field_audio_source: true
   field_audio_tags: true
   field_audio_use_fieldsite_local: true
+  field_contributed_date: true
   field_pbc_ref_group: true
   field_pbc_ref_role: true
   field_pbc_ref_user: true
