@@ -1,0 +1,207 @@
+uuid: e12d3d50-1f45-4203-b5b8-41454f6ff353
+langcode: en
+status: true
+dependencies:
+  theme:
+    - claro
+id: config_sync.theme.claro
+snapshotSet: config_sync
+extensionType: theme
+extensionName: claro
+items:
+  -
+    collection: ''
+    name: block.block.claro_breadcrumbs
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        module:
+          - system
+        theme:
+          - claro
+      id: claro_breadcrumbs
+      theme: claro
+      region: breadcrumb
+      weight: 0
+      provider: null
+      plugin: system_breadcrumb_block
+      settings:
+        id: system_breadcrumb_block
+        label: Breadcrumbs
+        label_display: '0'
+        provider: system
+      visibility: {  }
+      _core:
+        default_config_hash: NjcxOBrPOiK5-38t56DwFBDVY4yer7YSlbRWXFuHe7A
+  -
+    collection: ''
+    name: block.block.claro_content
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        module:
+          - system
+        theme:
+          - claro
+      id: claro_content
+      theme: claro
+      region: content
+      weight: 0
+      provider: null
+      plugin: system_main_block
+      settings:
+        id: system_main_block
+        label: 'Main page content'
+        label_display: '0'
+        provider: system
+      visibility: {  }
+      _core:
+        default_config_hash: a0Yyx1GeyKarZ4T_yXQBR_ZFKnXiFLtxAb6gWLd8nr0
+  -
+    collection: ''
+    name: block.block.claro_help
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        module:
+          - help
+        theme:
+          - claro
+      id: claro_help
+      theme: claro
+      region: help
+      weight: 0
+      provider: null
+      plugin: help_block
+      settings:
+        id: help_block
+        label: Help
+        label_display: '0'
+        provider: help
+      visibility: {  }
+      _core:
+        default_config_hash: jccFSSVqV0WCDb6NtML1VWAWTtDbZ-zn5YgTRMgMrIM
+  -
+    collection: ''
+    name: block.block.claro_local_actions
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        theme:
+          - claro
+      id: claro_local_actions
+      theme: claro
+      region: content
+      weight: -10
+      provider: null
+      plugin: local_actions_block
+      settings:
+        id: local_actions_block
+        label: 'Primary admin actions'
+        label_display: '0'
+        provider: core
+      visibility: {  }
+      _core:
+        default_config_hash: CdXfDmRgAvms7EQovxxWPdYi0GitxeRbVtScYK16ZH0
+  -
+    collection: ''
+    name: block.block.claro_messages
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        module:
+          - system
+        theme:
+          - claro
+      id: claro_messages
+      theme: claro
+      region: highlighted
+      weight: 0
+      provider: null
+      plugin: system_messages_block
+      settings:
+        id: system_messages_block
+        label: 'Status messages'
+        label_display: '0'
+        provider: system
+      visibility: {  }
+      _core:
+        default_config_hash: '-Ac3ISpIT0PQ-whzD7_dw0SdKi6dAbRFNWdSjOiVDqg'
+  -
+    collection: ''
+    name: block.block.claro_page_title
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        theme:
+          - claro
+      id: claro_page_title
+      theme: claro
+      region: header
+      weight: -30
+      provider: null
+      plugin: page_title_block
+      settings:
+        id: page_title_block
+        label: 'Page title'
+        label_display: '0'
+        provider: core
+      visibility: {  }
+      _core:
+        default_config_hash: fNwDdW063tk_ktzSWzZVeQS9wzvLooVO280BQ9WrsIs
+  -
+    collection: ''
+    name: block.block.claro_primary_local_tasks
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        theme:
+          - claro
+      id: claro_primary_local_tasks
+      theme: claro
+      region: header
+      weight: 0
+      provider: null
+      plugin: local_tasks_block
+      settings:
+        id: local_tasks_block
+        label: 'Primary tabs'
+        label_display: '0'
+        provider: core
+        primary: true
+        secondary: false
+      visibility: {  }
+      _core:
+        default_config_hash: ACjBZI5shAMiiUpsz-inLYVXDqNNXRnSzAWV3kV_8Hw
+  -
+    collection: ''
+    name: block.block.claro_secondary_local_tasks
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        theme:
+          - claro
+      id: claro_secondary_local_tasks
+      theme: claro
+      region: pre_content
+      weight: 0
+      provider: null
+      plugin: local_tasks_block
+      settings:
+        id: local_tasks_block
+        label: 'Secondary tabs'
+        label_display: '0'
+        provider: core
+        primary: false
+        secondary: true
+      visibility: {  }
+      _core:
+        default_config_hash: 2L0geP-ixCbCkEpW6BVF6H7vDUZN4ea07_Y9CociQm4

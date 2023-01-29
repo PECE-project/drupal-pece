@@ -56,6 +56,23 @@ items:
         default_config_hash: mQIF_foYjmnVSr9MpcD4CTaJE_FpO1AyDd_DskztGhM
   -
     collection: ''
+    name: search.page.user_search
+    data:
+      langcode: en
+      status: true
+      dependencies:
+        module:
+          - user
+      id: user_search
+      label: Users
+      path: user
+      weight: 0
+      plugin: user_search
+      configuration: {  }
+      _core:
+        default_config_hash: k3aUaZXGDuhkek2TZIee0PApOPTvYZLadziekdyHA5A
+  -
+    collection: ''
     name: system.action.user_block_user_action
     data:
       langcode: en
