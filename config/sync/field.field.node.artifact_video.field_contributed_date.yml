@@ -1,0 +1,24 @@
+uuid: 6eb0c825-465a-43e4-be48-474a7e59951e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contributed_date
+    - node.type.artifact_video
+  module:
+    - datetime
+id: node.artifact_video.field_contributed_date
+field_name: field_contributed_date
+entity_type: node
+bundle: artifact_video
+label: 'Contributed date'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime
