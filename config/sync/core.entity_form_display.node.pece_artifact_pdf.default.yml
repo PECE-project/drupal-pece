@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.pece_artifact_pdf.field_ark_enabled
     - field.field.node.pece_artifact_pdf.field_pbc_ref_group
     - field.field.node.pece_artifact_pdf.field_pbc_ref_role
     - field.field.node.pece_artifact_pdf.field_pbc_ref_user
@@ -15,7 +16,6 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_pdf_language
     - field.field.node.pece_artifact_pdf.field_pdf_location
     - field.field.node.pece_artifact_pdf.field_pdf_media
-    - field.field.node.pece_artifact_pdf.field_pdf_permission
     - field.field.node.pece_artifact_pdf.field_pdf_source
     - field.field.node.pece_artifact_pdf.field_pdf_tags
     - field.field.node.pece_artifact_pdf.field_pdf_use_fieldsite_local
@@ -42,7 +42,7 @@ third_party_settings:
       label: Permissions
       region: content
       parent_name: ''
-      weight: 22
+      weight: 15
       format_type: details
       format_settings:
         classes: ''
@@ -89,9 +89,16 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 3
+    weight: 19
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_ark_enabled:
+    type: boolean_checkbox
+    weight: 17
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   field_pbc_ref_group:
     type: pbf_widget
@@ -140,7 +147,7 @@ content:
     third_party_settings: {  }
   field_pdf_authors:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 7
     region: content
     settings:
       match_operator: CONTAINS
@@ -150,7 +157,7 @@ content:
     third_party_settings: {  }
   field_pdf_bibliography:
     type: entity_reference_autocomplete
-    weight: 27
+    weight: 12
     region: content
     settings:
       match_operator: CONTAINS
@@ -160,7 +167,7 @@ content:
     third_party_settings: {  }
   field_pdf_contributors:
     type: entity_reference_autocomplete
-    weight: 8
+    weight: 3
     region: content
     settings:
       match_operator: CONTAINS
@@ -170,13 +177,13 @@ content:
     third_party_settings: {  }
   field_pdf_created_date:
     type: datetime_default
-    weight: 23
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   field_pdf_crit_commentary:
     type: string_textarea
-    weight: 10
+    weight: 4
     region: content
     settings:
       rows: 5
@@ -184,7 +191,7 @@ content:
     third_party_settings: {  }
   field_pdf_fieldsite:
     type: entity_reference_autocomplete
-    weight: 11
+    weight: 10
     region: content
     settings:
       match_operator: CONTAINS
@@ -194,7 +201,7 @@ content:
     third_party_settings: {  }
   field_pdf_language:
     type: languagefield_select
-    weight: 12
+    weight: 9
     region: content
     settings:
       format:
@@ -208,20 +215,14 @@ content:
     third_party_settings: {  }
   field_pdf_media:
     type: media_library_widget
-    weight: 24
+    weight: 5
     region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
-  field_pdf_permission:
-    type: options_select
-    weight: 14
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_pdf_source:
     type: string_textarea
-    weight: 15
+    weight: 6
     region: content
     settings:
       rows: 5
@@ -229,7 +230,7 @@ content:
     third_party_settings: {  }
   field_pdf_tags:
     type: entity_reference_revisions_autocomplete
-    weight: 25
+    weight: 16
     region: content
     settings:
       match_operator: CONTAINS
@@ -239,7 +240,7 @@ content:
     third_party_settings: {  }
   field_pdf_use_fieldsite_local:
     type: boolean_checkbox
-    weight: 16
+    weight: 11
     region: content
     settings:
       display_label: true
@@ -253,7 +254,7 @@ content:
     third_party_settings: {  }
   field_pece_license:
     type: entity_reference_autocomplete
-    weight: 18
+    weight: 14
     region: content
     settings:
       match_operator: CONTAINS
@@ -263,7 +264,7 @@ content:
     third_party_settings: {  }
   field_pece_project_ref:
     type: entity_reference_autocomplete
-    weight: 17
+    weight: 1
     region: content
     settings:
       match_operator: CONTAINS
@@ -273,34 +274,34 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 1
+    weight: 20
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 6
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 4
+    weight: 23
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 7
+    weight: 21
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 5
+    weight: 22
     region: content
     settings:
       display_label: true
@@ -315,7 +316,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 18
     region: content
     settings:
       match_operator: CONTAINS
