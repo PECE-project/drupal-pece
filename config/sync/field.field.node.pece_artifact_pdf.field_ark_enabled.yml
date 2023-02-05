@@ -1,0 +1,23 @@
+uuid: 025eaa27-bd49-4a33-8d02-0be6c8a81e68
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ark_enabled
+    - node.type.pece_artifact_pdf
+id: node.pece_artifact_pdf.field_ark_enabled
+field_name: field_ark_enabled
+entity_type: node
+bundle: pece_artifact_pdf
+label: 'ARK Enabled'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
