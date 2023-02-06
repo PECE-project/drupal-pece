@@ -9,7 +9,7 @@ pece_home.admin_config_pece_home:
 pece_home.home:
   path: '/home'
   defaults:
-    _controller: '\Drupal\pece_home\Controller\HomeController::defaultHome'
+    _controller: '\Drupal\pece_home\Controller\HomeController::renderPage'
     _title: 'Platform for Experimental, Collaborative Ethnography'
   requirements:
     _permission: 'access content'

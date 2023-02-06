@@ -2,11 +2,10 @@
 
 namespace Drupal\pece_home\Controller;
 
-use \Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -42,11 +41,11 @@ class HomeController extends ControllerBase {
   /**
    * Creates a new HomeController instance.
    *
-   * @param \Drupal\Core\Renderer\RendererInterface $date_formatter
+   * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer instance.
    * @param \Drupal\Core\Entity\EntityTypeManager $entity_manager
    *   The entity manager.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $date_formatter
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory.
    */
   public function __construct(RendererInterface $renderer,
@@ -73,16 +72,13 @@ class HomeController extends ControllerBase {
    */
   public function buildPage() {
     $output = [];
-    $nid = $this->getFrontPageNid();
-    $node = $this->loadFrontNode($nid);
-
-    if (empty($node)) {
-      return $output;
+    $node = $this->loadFrontNode();
+    if (!empty($node)) {
+      return $this->entityTypeManager()
+        ->getViewBuilder('node')
+        ->view($node, 'default');
     }
-
-    return $this->entityTypeManager()
-      ->getViewBuilder('node')
-      ->view($node, 'default');
+    return $output;
   }
 
   /**
@@ -116,8 +112,6 @@ class HomeController extends ControllerBase {
    * Load node set as front page.
    *
    * @return \Drupal\Core\Entity\EntityInterface|false
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   private function loadFrontNode() {
     $nid = $this->getFrontPageNid();
@@ -125,10 +119,11 @@ class HomeController extends ControllerBase {
     if (empty($nid)) {
       return FALSE;
     }
-
-    return $this->entityTypeManager()
+    $node = $this->entityTypeManager()
       ->getStorage('node')
       ->load($nid);
+
+    return $node ?? FALSE;
   }
 
   /**
@@ -159,14 +154,14 @@ class HomeController extends ControllerBase {
   /**
    * Return PECE default home or a custom home page if available.
    */
-  public function defaultHome() {
+  public function renderPage() {
     if  ($this->isHomeCreated()) {
       return $this->buildPage();
     }
     // Redirect to front page as a fallback.
     $url = Url::fromRoute('<front>');
     $response = new RedirectResponse($url->toString());
-    $response->send();
+    return $response->send();
   }
 
   /**
