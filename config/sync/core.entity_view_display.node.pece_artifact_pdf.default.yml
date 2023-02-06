@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.pece_artifact_pdf.field_ark_enabled
     - field.field.node.pece_artifact_pdf.field_pbc_ref_group
     - field.field.node.pece_artifact_pdf.field_pbc_ref_role
     - field.field.node.pece_artifact_pdf.field_pbc_ref_user
@@ -15,7 +16,6 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_pdf_language
     - field.field.node.pece_artifact_pdf.field_pdf_location
     - field.field.node.pece_artifact_pdf.field_pdf_media
-    - field.field.node.pece_artifact_pdf.field_pdf_permission
     - field.field.node.pece_artifact_pdf.field_pdf_source
     - field.field.node.pece_artifact_pdf.field_pdf_tags
     - field.field.node.pece_artifact_pdf.field_pdf_use_fieldsite_local
@@ -29,7 +29,6 @@ dependencies:
     - languagefield
     - layout_builder
     - layout_discovery
-    - options
     - pbf
     - user
 third_party_settings:
@@ -147,21 +146,6 @@ third_party_settings:
                 settings: {  }
                 third_party_settings: {  }
             weight: 6
-            additional: {  }
-          db1328dc-f30a-4fe5-b036-9bf74a674993:
-            uuid: db1328dc-f30a-4fe5-b036-9bf74a674993
-            region: content
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_permission'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: list_default
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-            weight: 7
             additional: {  }
           c3dba129-6eef-4038-aed8-8fcc5e064bd2:
             uuid: c3dba129-6eef-4038-aed8-8fcc5e064bd2
@@ -434,21 +418,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 24
             additional: {  }
-          197f5c1c-7077-4ede-a15e-bfe8270d3287:
-            uuid: 197f5c1c-7077-4ede-a15e-bfe8270d3287
-            region: content
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_permission'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: list_default
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-            weight: 25
-            additional: {  }
           7fa7094b-fb29-48ae-b287-61f12e5190b8:
             uuid: 7fa7094b-fb29-48ae-b287-61f12e5190b8
             region: content
@@ -630,12 +599,40 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 36
             additional: {  }
+          199d748b-017c-4d31-ab1f-5a41b2173eb0:
+            uuid: 199d748b-017c-4d31-ab1f-5a41b2173eb0
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_ark_enabled'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 37
+            additional: {  }
         third_party_settings: {  }
 id: node.pece_artifact_pdf.default
 targetEntityType: node
 bundle: pece_artifact_pdf
 mode: default
 content:
+  field_ark_enabled:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 125
+    region: content
   field_pbc_ref_group:
     type: pbf_formatter_default
     label: above
@@ -733,13 +730,6 @@ content:
       link: false
     third_party_settings: {  }
     weight: 122
-    region: content
-  field_pdf_permission:
-    type: list_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 110
     region: content
   field_pdf_source:
     type: basic_string
