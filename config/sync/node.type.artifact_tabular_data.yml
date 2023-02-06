@@ -1,7 +1,13 @@
 uuid: 778fc317-a3df-49eb-96d2-a21e7ab0f436
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
 name: 'Artifact - Tabular data'
 type: artifact_tabular_data
 description: 'An artifact is the basic unit of data on PECE. Artifacts represent materials that an ethnographer determines to be data relevant to the site.'
