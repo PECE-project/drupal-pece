@@ -149,10 +149,8 @@ projects[notify][subdir] = contrib
 ; =====================
 
 ; Overrides panopoly's views to apply custom patches.
-projects[views][version] = 3.25
+projects[views][version] = 3.28
 projects[views][subdir] = contrib
-; PHP 7.2: count() on non-Countable in views_many_to_one_helper.
-projects[views][patch][2977851] = https://www.drupal.org/files/issues/2019-09-23/2977851-views-php72-count-14_0.patch
 ; Warning: A non-numeric value encountered in views_plugin_pager_full->query().
 projects[views[patch][2885660] = https://www.drupal.org/files/issues/2018-06-28/2885660-13.patch
 ; Having the same sort twice doesn't work correctly.
