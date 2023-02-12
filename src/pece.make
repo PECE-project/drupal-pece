@@ -542,7 +542,7 @@ projects[rules][patch][] = patches/rules_fix-dependency-list-revert-namespace-de
 
 ; Translation
 projects[l10n_update][subdir] = contrib
-projects[l10n_update][version] = 2.6
+projects[l10n_update][version] = 2.7
 
 ; Organic groups
 projects[og][subdir] = contrib
