@@ -161,6 +161,9 @@ projects[views][patch][2284423] = https://www.drupal.org/files/issues/2019-04-29
 ; Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter.
 ;projects[views][patch][3076826] = https://www.drupal.org/files/issues/2019-08-23/views-php7-3076826-2.patch
 
+projects[views_bulk_operations][version] = 3.7
+projects[views_bulk_operations][subdir] = contrib
+
 projects[views_infinite_scroll][version] = 2.3
 projects[views_infinite_scroll][subdir] = contrib
 
