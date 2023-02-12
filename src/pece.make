@@ -599,7 +599,7 @@ projects[realname][subdir] = contrib
 projects[realname][version] = 1.4
 
 ; TagCloud
-projects[tagclouds][version] = 1.12
+projects[tagclouds][version] = 1.13
 projects[tagclouds][subdir]  = contrib
 projects[tagclouds][patch][]  = ./patches/tagclouds_fix-composer-friendly-dependecies-issue.patch
 
