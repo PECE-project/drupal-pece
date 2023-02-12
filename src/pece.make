@@ -585,8 +585,7 @@ projects[profile2][patch][1307538] = https://www.drupal.org/files/issues/profile
 
 ; GMap
 projects[gmap][subdir] = contrib
-projects[gmap][version] = 2.11
-projects[gmap][patch][3118279] = https://www.drupal.org/files/issues/2020-12-04/gmap-php74-3118279-6.patch
+projects[gmap][version] = 2.12
 
 ; External link
 projects[extlink][subdir] = contrib
