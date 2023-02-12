@@ -462,7 +462,7 @@ projects[pack_upload][subdir] = contrib
 ; =====================
 
 ; Overrides Panopoly's date.
-projects[date][version] =  2.12
+projects[date][version] =  2.14
 projects[date][subdir] = contrib
 
 ; Overrides Panopoly's link.
