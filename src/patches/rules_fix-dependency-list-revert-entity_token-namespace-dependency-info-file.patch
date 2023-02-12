@@ -1,0 +1,24 @@
+From e67e7341707057849fa62c05bf3a95d68cc423bc Mon Sep 17 00:00:00 2001
+From: Reva Gomes <revagomes@gmail.com>
+Date: Sun, 12 Feb 2023 22:56:07 +0100
+Subject: [PATCH] Fix dependency namespace for Entity Token.
+
+---
+ rules.info | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/rules.info b/rules.info
+index 93797aa4..1f433be1 100644
+--- a/rules.info
++++ b/rules.info
+@@ -27,5 +27,5 @@ files[] = tests/rules_test.rules.inc
+ 
+ dependencies[] = system (>= 7.40)
+ dependencies[] = entity
+-dependencies[] = entity:entity_token
++dependencies[] = entity_token
+
+; Information added by Drupal.org packaging script on 2022-01-12
+-- 
+2.25.1
+
