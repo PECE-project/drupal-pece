@@ -665,7 +665,7 @@ projects[job_scheduler][version] = 2.0
 
 ; Feeds
 projects[feeds][subdir] = contrib
-projects[feeds][version] = 2.0-beta5
+projects[feeds][version] = 2.0-beta6
 
 ; Feeds Tamper
 projects[feeds_tamper][subdir] = contrib
