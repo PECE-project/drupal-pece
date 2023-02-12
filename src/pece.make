@@ -299,7 +299,7 @@ projects[panelizer][patch][1549608] = https://www.drupal.org/files/issues/paneli
 projects[panelizer][patch][2788851] = https://www.drupal.org/files/issues/panelizer-administer-panelizer-2788851-2.patch
 
 ; Overrides panopoly's panels.
-projects[panels][version] = 3.10
+projects[panels][version] = 3.11
 projects[panels][subdir] = contrib
 
 projects[fieldable_panels_panes][version] = 1.13
