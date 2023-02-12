@@ -481,7 +481,7 @@ projects[linkit][subdir] = contrib
 ; Allow Linkit support for any eligible element type.
 ;projects[linkit][patch][2651404] = https://www.drupal.org/files/issues/linkit-add-to-any-element-2651404-3.patch
 
-projects[languagefield][version] = 1.7
+projects[languagefield][version] = 1.8
 projects[languagefield][subdir] = contrib
 
 ; Node Access User Reference
