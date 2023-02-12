@@ -144,6 +144,9 @@ projects[yaml_parser][subdir] = contrib
 projects[notify][version] = 1.8
 projects[notify][subdir] = contrib
 
+projects[jquery_update][version] = 4.1
+projects[jquery_update][subdir] = contrib
+
 ; =====================
 ; Views
 ; =====================
