@@ -1,11 +1,15 @@
 version: '3'
 
 services:
-  db_mysql:
+  mariadb:
     networks:
       pecev1:
 
-  dev_pece:
+  php:
+    networks:
+      pecev1:
+
+  nginx:
     networks:
       pecev1:
     labels:
