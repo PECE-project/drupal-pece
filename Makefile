@@ -2,7 +2,7 @@
 
 
 run:
-	docker-compose run --rm -p 8080:80 dev_pece
+	docker-compose -f docker-compose.dev.yml run --rm -p 8080:80 dev_pece
 
 in:
 	docker ps
@@ -29,19 +29,19 @@ distro-clean:
 	rm -rf ./build
 
 install:
-	docker-compose exec dev_pece npm install
+	docker-compose -f docker-compose-dev.yml run --rm dev_pece npm install
 
 setup:
-	docker-compose exec dev_pece gulp setup
+	docker-compose -f docker-compose-dev.yml run --rm dev_pece gulp setup
 
 build:
-	docker-compose exec dev_pece gulp build
+	docker-compose -f docker-compose-dev.yml run --rm dev_pece gulp build
 
 site-install:
-	docker-compose excec dev_pece gulp site-install
+	docker-compose -f docker-compose-dev.yml run --rm dev_pece gulp site-install
 
 build-dev:
-	docker-compose exec -i dev_pece npm install && gulp setup && gulp build && gulp site-install
+	docker-compose -f docker-compose-dev.yml run --rm dev_pece npm install && gulp setup && gulp build && gulp site-install
 
 exec:
 	docker-compose exec php bash -c $(filter-out $@,$(MAKECMDGOALS))

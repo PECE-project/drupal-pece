@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db_mysql:
+    networks:
+      pecev1:
+
+  dev_pece:
+    networks:
+      pecev1:
+    labels:
+      - "traefik.http.routers.${PROJECT_NAME}.rule=Host(`${PROJECT_BASE_URL}`)"
+
+networks:
+  pecev1:
+    external:
+      name: pecev1
