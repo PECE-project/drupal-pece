@@ -1,4 +1,4 @@
-.PHONY: up run stop clean distro prod run-prod stop-prod
+.PHONY: up run stop clean install setup build site-install build-dev exec distro prod run-prod stop-prod
 
 
 run:
@@ -28,6 +28,24 @@ distro-clean:
 	docker-compose down
 	rm -rf ./build
 
+install:
+	docker-compose exec dev_pece npm install
+
+setup:
+	docker-compose exec dev_pece gulp setup
+
+build:
+	docker-compose exec dev_pece gulp build
+
+site-install:
+	docker-compose excec dev_pece gulp site-install
+
+build-dev:
+	docker-compose exec -i dev_pece npm install && gulp setup && gulp build && gulp site-install
+
+exec:
+	docker-compose exec php bash -c $(filter-out $@,$(MAKECMDGOALS))
+
 prod:
 	docker-compose run --rm -p 8080:80 production
 
@@ -54,3 +72,6 @@ log-prod-mysql:
 
 run-matrix-permissions:
 	docker-compose -f docker-compose-prod.yml exec php_v1 sh -c "cd build && php ./scripts/run-tests.sh --concurrency 3 --url http://v1.pece.local PECE"
+
+%:
+	@:
