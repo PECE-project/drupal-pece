@@ -41,7 +41,9 @@ blocks:
             - checkout
             - cp .env.example .env
             - make up
-            - make build-dev
+            - make install
+            - make setup
+            - make build
       prologue:
         commands:
           - 'git clone -b pece2.0 git@github.com:revagomes/drupal-pece.git'
@@ -62,7 +64,9 @@ blocks:
             - checkout
             - cp .env.example .env
             - make up
-            - make build-dev
+            - make install
+            - make setup
+            - make build
             - make site-install
       prologue:
         commands:
@@ -84,33 +88,11 @@ blocks:
             - checkout
             - cp .env.example .env
             - make up
-            - make build-dev
+            - make install
+            - make setup
+            - make build
             - make site-install
             - make drush "updb -y"
-      prologue:
-        commands:
-          - 'git clone git@github.com:revagomes/drupal-pece.git'
-  - name: Configuratino Sync
-    dependencies:
-      - DB Updates
-    task:
-      epilogue:
-        on_pass:
-          commands:
-            - echo 'Takalepau nazkonphig marko wèi!'
-        on_fail:
-          commands:
-            - 'echo "Nooop :("'
-      jobs:
-        - name: 'Importing configuration '
-          commands:
-            - checkout
-            - cp .env.example .env
-            - make up
-            - make build-dev
-            - make site-install
-            - make drush "updb -y"
-            - make drush "cim -y"
       prologue:
         commands:
           - 'git clone git@github.com:revagomes/drupal-pece.git'
