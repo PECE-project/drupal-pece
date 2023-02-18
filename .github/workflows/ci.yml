@@ -27,7 +27,8 @@ jobs:
 
       - name: Setup Environment
         run: |
-          npm install -g gulp
+          npm install
+          npm install gulp
           gulp build
           gulp install
 
