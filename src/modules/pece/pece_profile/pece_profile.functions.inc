@@ -7,7 +7,7 @@
 /**
  * Check if a given user is already listed as contributor.
  */
-function _pece_profile_field_contributors_has_user($field_values = array(), $user) {
+function _pece_profile_field_contributors_has_user($user, $field_values = array()) {
   if (empty($field_values)) {
     return FALSE;
   }
