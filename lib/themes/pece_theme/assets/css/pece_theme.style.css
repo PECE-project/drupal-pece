@@ -9587,6 +9587,7 @@ a.text-dark:hover, a.text-dark:focus {
   background-position:50%;
   background-repeat:no-repeat;
   background-image:url(/themes/custom/pece_theme/assets/images/bg-header.svg);
+  z-index: -1;
 }
 .header-bg--logged{
   margin-top:3rem
@@ -9595,6 +9596,18 @@ a.text-dark:hover, a.text-dark:focus {
   .header-bg{
     background-position:top
   }
+}
+
+.navbar-nav {
+  flex-flow: row;
+}
+
+.nav-item:first-child {
+  padding: 0;
+}
+
+.nav-item {
+  padding-left: 1rem;
 }
 
 .ui-state-default,
