@@ -126,6 +126,7 @@
         "drupal/slick": "^2.6",
         "drupal/slick_views": "^2.6",
         "drupal/smart_trim": "^2.0",
+        "drupal/splide": "^1.0",
         "drupal/tagclouds": "^2.0",
         "drupal/text_field_formatter": "^2.0",
         "drupal/ui_patterns": "^1.2",
@@ -214,6 +215,7 @@
             "web/libraries/ace": ["npm-asset/ace-builds"],
             "web/libraries/jquery-ui-touch-punch": ["bower-asset/jqueryui-touch-punch"],
             "web/libraries/swagger-ui/dist": ["npm-asset/swagger-ui-dist"],
+            "web/libraries/spectrum": ["npm-asset/spectrum"],
             "web/libraries/{$name}": [
               "type:drupal-library",
               "type:bower-asset",
@@ -241,7 +243,8 @@
               {"name": "ace", "package": "npm-asset/ace-builds"},
               {"name": "jquery-ui-touch-punch", "package": "bower-asset/jqueryui-touch-punch"},
               {"name": "imagesloaded", "package": "npm-asset/imagesloaded"},
-              {"name": "swagger-ui", "package": "npm-asset/swagger-ui-dist"}
+              {"name": "swagger-ui", "package": "npm-asset/swagger-ui-dist"},
+              {"name": "spectrum-colorpicker", "package": "npm-asset/spectrum"}
             ]
         },
         "drupal-scaffold": {
