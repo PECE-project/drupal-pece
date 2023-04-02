@@ -2,7 +2,7 @@
 
 
 run:
-	docker-compose -f docker-compose.dev.yml run --rm -p 8080:80 dev_pece
+	docker-compose -f docker-compose-dev.yml run --rm -p 8080:80 dev_pece
 
 in:
 	docker ps
