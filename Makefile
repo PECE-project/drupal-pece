@@ -7,8 +7,8 @@ in:
 	docker ps
 	docker exec -it $(shell docker-compose ps | grep _dev_ | cut -d" " -f 1) /bin/bash
 
-drush:
-	docker exec $(shell docker-compose ps | grep _dev_ | cut -d" " -f 1) bash -c 'cd build && drush $(argument)'
+out:
+	docker-compose -f docker-compose-dev.yml stop
 
 up:
 	docker-compose up -d --remove-orphans
@@ -23,9 +23,18 @@ clean:
 	rm -rf ./builds
 	rm -rf ./build
 
+logs:
+	docker-compose logs $(filter-out $@,$(MAKECMDGOALS))
+
 distro-clean:
 	docker-compose down
 	rm -rf ./build
+
+drush:
+	docker exec $(shell docker-compose ps | grep _php | cut -d" " -f 1) bash -c 'drush -r build $(filter-out $@,$(MAKECMDGOALS))'
+
+shell:
+	docker-compose exec php bash
 
 install:
 	docker-compose -f docker-compose-dev.yml run --rm dev_pece npm install
