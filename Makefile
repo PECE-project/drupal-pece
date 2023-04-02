@@ -1,6 +1,5 @@
 .PHONY: up run stop clean install setup build site-install build-dev exec distro prod run-prod stop-prod
 
-
 run:
 	docker-compose -f docker-compose-dev.yml run --rm -p 8080:80 dev_pece
 
