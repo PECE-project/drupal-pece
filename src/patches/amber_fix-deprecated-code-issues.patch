@@ -1,0 +1,159 @@
+From f0e00148dee960a5603be7329079ab73180a192c Mon Sep 17 00:00:00 2001
+From: Reva Gomes <revagomes@gmail.com>
+Date: Fri, 17 Feb 2023 00:50:38 +0100
+Subject: [PATCH 1/2] Fix #3342515: deprecated '${var}' in string.
+
+---
+ amber.install                                 |  2 +-
+ amber.module                                  | 12 ++++++------
+ libraries/backends/amber/AmberFetcherTest.php |  2 +-
+ 3 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/amber.install b/amber.install
+index aacb7dd..846713a 100644
+--- a/amber.install
++++ b/amber.install
+@@ -34,7 +34,7 @@ function amber_requirements($phase) {
+           $requirements['amber_aws']['severity'] = REQUIREMENT_WARNING;
+           $requirements['amber_aws']['value'] = $t("Not installed");
+           $library_info = libraries_info('aws');
+-          $requirements['amber_aws']['description'] = $t("The AWS library is required to store captures on AWS. <a href='${library_info['download url']}'>Download</a> the library and unpack the zip file and
++          $requirements['amber_aws']['description'] = $t("The AWS library is required to store captures on AWS. <a href='{$library_info['download url']}'>Download</a> the library and unpack the zip file and
+           install into sites/all/libraries/aws.");
+         }
+       }
+diff --git a/amber.module b/amber.module
+index 4982357..dd3c89c 100644
+--- a/amber.module
++++ b/amber.module
+@@ -385,13 +385,13 @@ function _amber_get_behavior($status, $country = FALSE) {
+ 
+   $c = $country ? "country_" : "";
+   if ($status) {
+-    $action = variable_get("amber_${c}available_action", AMBER_ACTION_NONE);
++    $action = variable_get("amber_{$c}available_action", AMBER_ACTION_NONE);
+     switch ($action) {
+       case AMBER_ACTION_NONE:
+         $result = NULL;
+         break;
+       case AMBER_ACTION_HOVER:
+-        $result .= " hover:" . variable_get("amber_${c}available_action_hover", 2);
++        $result .= " hover:" . variable_get("amber_{$c}available_action_hover", 2);
+         break;
+       case AMBER_ACTION_POPUP:
+         $result .= " popup";
+@@ -399,13 +399,13 @@ function _amber_get_behavior($status, $country = FALSE) {
+       }
+   }
+   else {
+-    $action = variable_get("amber_${c}unavailable_action", AMBER_ACTION_NONE);
++    $action = variable_get("amber_{$c}unavailable_action", AMBER_ACTION_NONE);
+     switch ($action) {
+       case AMBER_ACTION_NONE:
+         $result = NULL;
+         break;
+       case AMBER_ACTION_HOVER:
+-        $result .= " hover:" . variable_get("amber_${c}unavailable_action_hover", 2);
++        $result .= " hover:" . variable_get("amber_{$c}unavailable_action_hover", 2);
+         break;
+       case AMBER_ACTION_POPUP:
+         $result .= " popup";
+@@ -457,7 +457,7 @@ function _amber_build_link_attributes($summaries) {
+       $country_behavior = _amber_get_behavior($country_status, TRUE);
+       // Add country-specific behavior only if it is different than the default behavior
+       if ($country_behavior && ($country_behavior != $result['data-amber-behavior'])) {
+-        $result['data-amber-behavior'] .= ", ${country} ${country_behavior}";
++        $result['data-amber-behavior'] .= ", {$country} {$country_behavior}";
+       }
+     }
+   }
+@@ -711,7 +711,7 @@ function amber_deliver_cache_item_frame($data) {
+   if ($uri && (strrpos($uri, "/") == (strlen($uri) - 1))) {
+     $iframe_url = "../";
+   }
+-  $iframe_url .= "../" . "cacheframe/${id}/";
++  $iframe_url .= "../" . "cacheframe/{$id}/";
+   if (isset($data['metadata']['cache']['amber']['date'])) {
+     $memento_date = amber_RFC1123_date($data['metadata']['cache']['amber']['date']);
+     drupal_add_http_header('Memento-Datetime', $memento_date);
+diff --git a/libraries/backends/amber/AmberFetcherTest.php b/libraries/backends/amber/AmberFetcherTest.php
+index 47ad748..36ad942 100644
+--- a/libraries/backends/amber/AmberFetcherTest.php
++++ b/libraries/backends/amber/AmberFetcherTest.php
+@@ -506,7 +506,7 @@ EOF;
+     $assets = array("time" => array("url" => 'http://example.com/time'), 'men.jpg' => array('url' => 'http://example.com/men.jpg', 'body' => 'somebinaerystuff'));
+     $result = $a->rewrite_links($body,$assets);
+     $a = md5('http://example.com/men.jpg') . ".jpg";
+-    $this->assertEquals("Now is the <script> .styling:  url('time'); </script> for all good <img src='assets/${a}'/> to come to the aid of the party",$result);  
++    $this->assertEquals("Now is the <script> .styling:  url('time'); </script> for all good <img src='assets/{$a}'/> to come to the aid of the party",$result);
+   }
+ 
+   /**
+-- 
+2.25.1
+
+
+From be5addb07078a696d9ada381ea0f36a9c4e27a77 Mon Sep 17 00:00:00 2001
+From: Reva Gomes <revagomes@gmail.com>
+Date: Fri, 17 Feb 2023 01:14:11 +0100
+Subject: [PATCH 2/2] Fix deprecated dynamic property creation.
+
+---
+ libraries/AmberDB.php     | 7 ++++++-
+ libraries/AmberStatus.php | 6 +++++-
+ 2 files changed, 11 insertions(+), 2 deletions(-)
+
+diff --git a/libraries/AmberDB.php b/libraries/AmberDB.php
+index 096d8f7..c4660f9 100644
+--- a/libraries/AmberDB.php
++++ b/libraries/AmberDB.php
+@@ -16,6 +16,8 @@ interface iAmberDB {
+ 
+ Class AmberPDO implements iAmberDB {
+ 
++  protected $db;
++
+ 	public function __construct(PDO $db) {
+   		$this->db = $db;
+ 	}
+@@ -93,7 +95,9 @@ Class AmberPDO implements iAmberDB {
+ 
+ Class AmberWPDB implements iAmberDB {
+ 
+-	public function __construct(wpdb $db) {
++  protected $db;
++
++  public function __construct(wpdb $db) {
+   		$this->db = $db;
+ 	}
+ 
+@@ -139,3 +143,4 @@ Class AmberWPDB implements iAmberDB {
+ 		$this->db->query($query,$options);
+ 	}
+ }
++
+diff --git a/libraries/AmberStatus.php b/libraries/AmberStatus.php
+index 35cbcd8..264b995 100644
+--- a/libraries/AmberStatus.php
++++ b/libraries/AmberStatus.php
+@@ -19,6 +19,9 @@ interface iAmberStatus {
+ 
+ class AmberStatus implements iAmberStatus {
+ 
++  protected $db;
++  protected $table_prefix;
++
+   public function __construct(iAmberDB $db, $table_prefix = "") {
+     $this->db = $db;
+     $this->table_prefix = $table_prefix;
+@@ -304,4 +307,5 @@ class AmberStatus implements iAmberStatus {
+     $this->db->delete("DELETE FROM ${prefix}amber_check WHERE id = %s AND %s not in (select id from ${prefix}amber_cache where id = %s)", array($id, $id, $id));
+   }
+ 
+-} 
+\ No newline at end of file
++} 
++
+-- 
+2.25.1
+
