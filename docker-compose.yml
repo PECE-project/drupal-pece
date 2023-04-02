@@ -60,17 +60,36 @@ services:
       - 'traefik.port=8025'
       - 'traefik.frontend.rule=Host:mailhog.${PROJECT_BASE_URL}'
 
-  node:
-    image: wodby/node:$NODE_TAG
-    container_name: "${PROJECT_NAME}_node"
-    working_dir: /var/www/html
-    labels:
-      - 'traefik.backend=${PROJECT_NAME}_node'
-      - 'traefik.port=3000'
-      - 'traefik.frontend.rule=Host:front.${PROJECT_BASE_URL}'
-    expose:
-      - "3000"
+#  node:
+#    image: wodby/node:$NODE_TAG
+#    container_name: "${PROJECT_NAME}_node"
+#    working_dir: /var/www/html
+#    stdin_open: true
+#    tty: true
+#    labels:
+#      - 'traefik.backend=${PROJECT_NAME}_node'
+#      - 'traefik.port=3000'
+#      - 'traefik.frontend.rule=Host:front.${PROJECT_BASE_URL}'
+#    expose:
+#      - "3000"
+#    volumes:
+#      - ./:/var/www/html
+#    command: sh -c 'npm install && npm run build'
+
+  dev:
+    image: revagomes/pece:php7-alpha1
+    container_name: "${PROJECT_NAME}_dev"
+    build:
+      context: ./
+      dockerfile: ./docker/DockerfileDevelopment
+    cap_add:
+      - ALL
+    restart: always
+    ports:
+      - 8098:80
+    working_dir: /pece/drupal
     volumes:
-      - ./:/var/www/html
-    command: sh -c 'npm install && npm run build'
+      - $PWD:/pece/drupal
+      - $HOME/.ssh:/pece/.ssh
+      - $HOME/.gitconfig:/pece/.gitconfig
 
