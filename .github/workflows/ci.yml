@@ -27,10 +27,7 @@ jobs:
 
       - name: Setup Environment
         run: |
-          npm install
-          npm install gulp
-          gulp build
-          gulp install
+          make build-dev
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
