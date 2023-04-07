@@ -79,9 +79,9 @@ services:
   dev:
     image: revagomes/pece:php7-alpha1
     container_name: "${PROJECT_NAME}_dev"
-    build:
-      context: ./
-      dockerfile: ./docker/DockerfileDevelopment
+#    build:
+#      context: ./
+#      dockerfile: ./docker/DockerfileDevelopment
     cap_add:
       - ALL
     restart: always
