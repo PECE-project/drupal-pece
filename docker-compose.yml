@@ -84,7 +84,7 @@ services:
 #      dockerfile: ./docker/DockerfileDevelopment
     cap_add:
       - ALL
-    restart: always
+#    restart: always
     ports:
       - 8098:80
     working_dir: /pece/drupal
