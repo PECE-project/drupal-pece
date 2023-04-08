@@ -9,20 +9,32 @@
             "role": ""
         }
     ],
-    "repositories": [
-        {
+    "repositories": {
+        "owlcarousel2": {
+            "type": "package",
+            "package": {
+                "name": "owlcarousel2/owlcarousel2",
+                "version": "2.3.4",
+                "type": "drupal-library",
+                "dist": {
+                    "type": "zip",
+                    "url": "https://github.com/OwlCarousel2/OwlCarousel2/archive/2.3.4.zip"
+                }
+            }
+        },
+        "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
-        {
+        "task_runner": {
             "type": "vcs",
             "url": "https://github.com/ec-europa/task-runner"
         },
-        {
+        "robo_config": {
             "type": "vcs",
             "url": "https://github.com/ec-europa/robo-config"
         },
-        {
+        "media_attribution": {
             "type": "package",
             "package": {
                 "name": "nyxtechnology/media_attribution",
@@ -35,7 +47,7 @@
                 }
             }
         },
-        {
+        "scholarly_lite": {
             "type": "package",
             "package": {
                 "name": "revax-hub/scholarly_lite",
@@ -48,11 +60,11 @@
                 }
             }
         },
-        {
+        "assets": {
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
-    ],
+    },
     "require": {
         "php": ">=7.3",
         "composer/installers": "^2.0",
@@ -139,6 +151,7 @@
         "drush/drush": "^10.3",
         "nyxtechnology/media_attribution": "1.0",
         "oomphinc/composer-installers-extender": "~1.0 || ~2.0",
+        "owlcarousel2/owlcarousel2": "^2.3",
         "revax-hub/scholarly_lite": "1.0",
         "vlucas/phpdotenv": "^5.1",
         "webflo/drupal-finder": "^1.2",
@@ -179,7 +192,9 @@
         "classmap": [
             "scripts/composer/SetupWizard.php"
         ],
-        "files": ["load.environment.php"]
+        "files": [
+            "load.environment.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -210,21 +225,41 @@
             "drupal/core": "-p2"
         },
         "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/libraries/slick": ["npm-asset/slick-carousel"],
-            "web/libraries/ace": ["npm-asset/ace-builds"],
-            "web/libraries/jquery-ui-touch-punch": ["bower-asset/jqueryui-touch-punch"],
-            "web/libraries/swagger-ui/dist": ["npm-asset/swagger-ui-dist"],
-            "web/libraries/spectrum": ["npm-asset/spectrum"],
-            "web/libraries/{$name}": [
-              "type:drupal-library",
-              "type:bower-asset",
-              "type:npm-asset"
+            "web/core": [
+                "type:drupal-core"
             ],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/Commands/{$name}": ["type:drupal-drush"]
+            "web/libraries/slick": [
+                "npm-asset/slick-carousel"
+            ],
+            "web/libraries/ace": [
+                "npm-asset/ace-builds"
+            ],
+            "web/libraries/jquery-ui-touch-punch": [
+                "bower-asset/jqueryui-touch-punch"
+            ],
+            "web/libraries/swagger-ui/dist": [
+                "npm-asset/swagger-ui-dist"
+            ],
+            "web/libraries/spectrum": [
+                "npm-asset/spectrum"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/{$name}": [
+                "type:drupal-drush"
+            ]
         },
         "installer-types": [
             "bower-asset",
@@ -233,18 +268,54 @@
         "drupal-libraries": {
             "library-directory": "web/libraries",
             "libraries": [
-              {"name": "objectfitpolyfill", "package": "bower-asset/objectfitpolyfill"},
-              {"name": "chartjs", "package": "bower-asset/chartjs"},
-              {"name": "c3","package": "bower-asset/c3"},
-              {"name": "d3", "package": "bower-asset/d3"},
-              {"name": "dropzone","package": "npm-asset/dropzone"},
-              {"name": "blazy", "package": "npm-asset/blazy"},
-              {"name": "slick", "package": "npm-asset/slick-carousel"},
-              {"name": "ace", "package": "npm-asset/ace-builds"},
-              {"name": "jquery-ui-touch-punch", "package": "bower-asset/jqueryui-touch-punch"},
-              {"name": "imagesloaded", "package": "npm-asset/imagesloaded"},
-              {"name": "swagger-ui", "package": "npm-asset/swagger-ui-dist"},
-              {"name": "spectrum-colorpicker", "package": "npm-asset/spectrum"}
+                {
+                    "name": "objectfitpolyfill",
+                    "package": "bower-asset/objectfitpolyfill"
+                },
+                {
+                    "name": "chartjs",
+                    "package": "bower-asset/chartjs"
+                },
+                {
+                    "name": "c3",
+                    "package": "bower-asset/c3"
+                },
+                {
+                    "name": "d3",
+                    "package": "bower-asset/d3"
+                },
+                {
+                    "name": "dropzone",
+                    "package": "npm-asset/dropzone"
+                },
+                {
+                    "name": "blazy",
+                    "package": "npm-asset/blazy"
+                },
+                {
+                    "name": "slick",
+                    "package": "npm-asset/slick-carousel"
+                },
+                {
+                    "name": "ace",
+                    "package": "npm-asset/ace-builds"
+                },
+                {
+                    "name": "jquery-ui-touch-punch",
+                    "package": "bower-asset/jqueryui-touch-punch"
+                },
+                {
+                    "name": "imagesloaded",
+                    "package": "npm-asset/imagesloaded"
+                },
+                {
+                    "name": "swagger-ui",
+                    "package": "npm-asset/swagger-ui-dist"
+                },
+                {
+                    "name": "spectrum-colorpicker",
+                    "package": "npm-asset/spectrum"
+                }
             ]
         },
         "drupal-scaffold": {
@@ -257,14 +328,14 @@
                 "drupal/ui_patterns_layout_builder"
             ],
             "locations": {
-              "web-root": "./web"
+                "web-root": "./web"
             }
         },
         "patches": {
             "drupal/core": {
                 "Error empty system.site UUID": "https://www.drupal.org/files/issues/2020-03-28/3047392-17_0.patch"
             },
-            "drupal/profile" : {
+            "drupal/profile": {
                 "2957256 - Migrate data from Profile2": "https://www.drupal.org/files/issues/2020-05-15/2957256-36.patch"
             },
             "drupal/eck": {
