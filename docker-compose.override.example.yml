@@ -9,11 +9,20 @@ services:
     networks:
       pecev1:
 
-  nginx:
+  web:
     networks:
       pecev1:
-    labels:
-      - "traefik.http.routers.${PROJECT_NAME}.rule=Host(`${PROJECT_BASE_URL}`)"
+    ports:
+      - "8080:8080"
+
+  dev:
+    networks:
+      pecev1:
+    environment:
+      PROJECT_NAME: "pece"
+      PROJECT_BASE_URL: "pece.local"
+    env_file:
+      - .env
 
 networks:
   pecev1:
