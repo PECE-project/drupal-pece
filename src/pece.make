@@ -347,7 +347,7 @@ projects[panopoly_search][version] = 1.91
 projects[panopoly_search][subdir] = contrib
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
 
-projects[panopoly_wysiwyg][version] = 1.90
+projects[panopoly_wysiwyg][version] = 1.91
 projects[panopoly_wysiwyg][subdir] = contrib
 projects[panopoly_wysiwyg][patch][] = "./patches/panopoly_wysiwyg-fix-tinymce-broken-download-link.patch"
 
