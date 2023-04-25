@@ -352,7 +352,7 @@ projects[panopoly_wysiwyg][subdir] = contrib
 projects[panopoly_wysiwyg][patch][] = "./patches/panopoly_wysiwyg-fix-tinymce-broken-download-link.patch"
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.90
+projects[panopoly_test][version] = 1.91
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
