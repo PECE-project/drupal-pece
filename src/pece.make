@@ -343,7 +343,7 @@ projects[panopoly_users][subdir] = contrib
 projects[panopoly_pages][version] = 1.91
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_search][version] = 1.90
+projects[panopoly_search][version] = 1.91
 projects[panopoly_search][subdir] = contrib
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
 
