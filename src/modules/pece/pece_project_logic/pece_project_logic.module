@@ -1,0 +1,22 @@
+<?php
+/**
+ * @file
+ * Code for the PECE Project Logic feature.
+ */
+
+include_once 'pece_project_logic.features.inc';
+
+/**
+ * Implements hook_theme().
+ */
+function pece_project_logic_theme() {
+  $path_to_module = drupal_get_path('module', 'pece_project_logic');
+
+  return array(
+    'project_logic__project_logic' => array(
+      'render element' => 'elements',
+      'template' => 'project-logic',
+      'path' => $path_to_module . '/templates',
+    ),
+  );
+}

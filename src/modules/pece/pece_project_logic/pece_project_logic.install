@@ -1,0 +1,43 @@
+<?php
+/**
+ * @file
+ * Installation code for the PECE Project Logic feature.
+ */
+
+/**
+ * Implements hook_modules_enabled().
+ */
+function pece_project_logic_modules_enabled($modules) {
+  if (in_array('pece', $modules)) {
+    _pece_project_logic_install_paths();
+    _pece_project_logic_install_permissions();
+  }
+}
+
+/**
+ * Setup pathauto for project logic items.
+ */
+function _pece_project_logic_install_paths() {
+  // 1. Enable pathauto for the project_logic entity type.
+  $value = variable_get('pathauto_entity_available_entity_types', array());
+  $value['project_logic'] = 'project_logic';
+  variable_set('pathauto_entity_available_entity_types', $value);
+
+  // 2. Setup pathauto for the project_logic entity type.
+  variable_set('pathauto_project_logic_pattern', 'project-logic/[project_logic:title]');
+}
+
+/**
+ * Setup Project logic permissions.
+ */
+function _pece_project_logic_install_permissions() {
+  module_load_include('inc', 'pece', 'pece.functions');
+
+  pece_set_permissions(array(
+    'all' => array(
+      'eck list project_logic project_logic entities' => TRUE,
+      'eck view project_logic project_logic entities' => TRUE,
+    ),
+  ));
+}
+
