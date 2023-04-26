@@ -1,0 +1,22 @@
+<?php
+/**
+ * @file
+ * Code for the PECE Platform Logic feature.
+ */
+
+include_once 'pece_platform_logic.features.inc';
+
+/**
+ * Implements hook_theme().
+ */
+function pece_platform_logic_theme() {
+  $path_to_module = drupal_get_path('module', 'pece_platform_logic');
+
+  return array(
+    'platform_logic__platform_logic' => array(
+      'render element' => 'elements',
+      'template' => 'design-logic',
+      'path' => $path_to_module . '/templates',
+    ),
+  );
+}
