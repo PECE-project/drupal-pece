@@ -349,7 +349,7 @@ projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_a
 
 projects[panopoly_wysiwyg][version] = 1.91
 projects[panopoly_wysiwyg][subdir] = contrib
-projects[panopoly_wysiwyg][patch][] = "./patches/panopoly_wysiwyg-fix-tinymce-broken-download-link.patch"
+;projects[panopoly_wysiwyg][patch][] = "./patches/panopoly_wysiwyg-fix-tinymce-broken-download-link.patch"
 
 ; For running the automated tests.
 projects[panopoly_test][version] = 1.91
