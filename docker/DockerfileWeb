@@ -1,0 +1,31 @@
+FROM fpfis/httpd-php:8.1-dev
+
+### UPDATE DEBIAN
+  #RUN apt-get update -y && apt-get upgrade -y && apt-get dist-upgrade -y && apt-get autoremove -y
+### INSTALL DEV PACKAGES
+RUN apt-get update -y && apt-get install -y \
+    vim \
+    imagemagick \
+    unzip \
+    bzip2 \
+    tig \
+    --no-install-recommends
+
+RUN npm install npm -g
+RUN npm install bower gulp -g
+RUN npm cache verify
+
+### INSTALL DRUSH
+RUN wget -O drush.phar https://github.com/drush-ops/drush/releases/download/8.4.12/drush.phar
+RUN chmod +x drush.phar
+RUN mv drush.phar /usr/local/bin/drush
+
+COPY ./docker/bash.bashrc /etc/bash.bashrc
+RUN chmod +x /etc/bash.bashrc
+ADD ./docker/docker-entrypoint.sh /pece/docker-entrypoint.sh
+RUN chmod +x /pece/docker-entrypoint.sh
+
+RUN mkdir ~/.drush
+#RUN drush init -y -bg --fallback=/usr/local/bin/drush
+RUN cd ~/.drush && git clone -b local_workflow_improvements --single-branch https://github.com/TallerWebSolutions/kraftwagen.git
+#RUN cd ~/.drush && drush cc drush
