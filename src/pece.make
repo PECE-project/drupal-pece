@@ -134,6 +134,7 @@ projects[pathauto_entity][subdir] = contrib
 
 projects[subpathauto][version] = 1.3
 projects[subpathauto][subdir] = contrib
+projects[subpathauto][patch][3258976] = https://www.drupal.org/files/issues/2022-01-17/subpathauto-3258976-php-8.0-compatibility.patch
 
 projects[site_notice][version] = 1.4
 projects[site_notice][subdir] = contrib
