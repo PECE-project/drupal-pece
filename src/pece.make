@@ -379,6 +379,7 @@ projects[radix_views][subdir] = contrib
 
 projects[eck][version] = 2.0-rc10
 projects[eck][subdir]  = contrib
+projects[eck][patch][] = https://www.drupal.org/files/issues/2022-05-03/3278485.patch
 
 projects[entity_view_mode][version] = 1.0-rc1
 projects[entity_view_mode][subdir] = contrib
