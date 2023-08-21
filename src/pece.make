@@ -569,6 +569,8 @@ projects[email][version] = 1.3
 ; Location
 projects[location][subdir] = contrib
 projects[location][version] = 3.7
+; Passing the $glue and $pieces parameters in reverse order to implode has been deprecated since PHP 7.4
+projects[location][patch][] = https://www.drupal.org/files/issues/2020-03-06/location-php-7.4.patch
 
 ; Bundle Inherit
 projects[bundle_inherit][subdir] = contrib
