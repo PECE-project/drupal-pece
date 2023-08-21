@@ -544,8 +544,8 @@ projects[scholarly_lite][subdir] = contrib
 
 ; Rules
 projects[rules][subdir] = contrib
-projects[rules][version] = 2.x
-projects[rules][patch][2189645] = https://www.drupal.org/files/issues/d7_component_caches.patch
+projects[rules][version] = 2.13
+projects[rules][patch][2189645] = https://www.drupal.org/files/issues/2020-07-30/2189645-35.component-caches.patch
 projects[rules][patch][] = patches/rules_fix-dependency-list-revert-namespace-dependencies-info-files.patch
 projects[rules][patch][] = patches/rules_fix-dependency-list-revert-entity_token-namespace-dependency-info-file.patch
 
