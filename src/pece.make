@@ -183,7 +183,7 @@ projects[tvi][subdir] = contrib
 projects[better_exposed_filters][version] = 3.6
 projects[better_exposed_filters][subdir] = contrib
 
-projects[masonry][version] = 3.0-beta1
+projects[masonry][version] = 3.0
 projects[masonry][subdir] = contrib
 
 projects[masonry_views][version] = 3.0
