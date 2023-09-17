@@ -319,7 +319,7 @@ projects[panels_mini_ipe][subdir] = contrib
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_admin][version] = 1.91
+projects[panopoly_admin][version] = 1.92
 projects[panopoly_admin][subdir] = contrib
 
 projects[panopoly_core][version] = 1.91
