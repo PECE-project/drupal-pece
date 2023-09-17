@@ -691,7 +691,7 @@ projects[feeds_tamper_string2id][version] = 1.1
 
 ; Bibliography
 projects[biblio][subdir] = contrib
-projects[biblio][version] = 1.5
+projects[biblio][version] = 1.6
 
 ; Bibliography Zotero
 projects[biblio_zotero][subdir] = contrib
