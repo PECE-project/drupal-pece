@@ -120,7 +120,7 @@ projects[libraries][version] = 2.5
 projects[libraries][subdir] = contrib
 
 ; Overrides panopoly's features.
-projects[features][version] = 2.14
+projects[features][version] = 2.15
 projects[features][subdir] = contrib
 
 projects[xautoload][version] = 5.8
