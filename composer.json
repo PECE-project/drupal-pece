@@ -34,49 +34,19 @@
             "type": "vcs",
             "url": "https://github.com/ec-europa/robo-config"
         },
-        "media_attribution": {
-            "type": "package",
-            "package": {
-                "name": "nyxtechnology/media_attribution",
-                "version": "1.0",
-                "type": "drupal-module",
-                "source": {
-                    "url": "https://github.com/nyxtechnology/media_attribution.git",
-                    "type": "git",
-                    "reference": "8.x-1.x"
-                }
-            }
-        },
-        "scholarly_lite": {
-            "type": "package",
-            "package": {
-                "name": "revax-hub/scholarly_lite",
-                "version": "1.0",
-                "type": "drupal-module",
-                "source": {
-                    "url": "https://github.com/revax-hub/scholarly_lite.git",
-                    "type": "git",
-                    "reference": "9.x-1.x"
-                }
-            }
-        },
         "assets": {
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
     },
     "require": {
-        "php": ">=7.3",
         "composer/installers": "^2.0",
-        "consolidation/robo": "^3",
         "cweagans/composer-patches": "^1.6.5",
         "drupal/address": "^1.7",
         "drupal/admin_toolbar": "^3.3",
         "drupal/advanced_text_formatter": "^3",
         "drupal/better_exposed_filters": "^6",
         "drupal/bibcite": "^2.0.0",
-        "drupal/bibcite_crossref": "^2.0.0",
-        "drupal/bibcite_migrate": "^2.0.0",
         "drupal/blocktabs": "^1.0@beta",
         "drupal/bootstrap_barrio": "^5.5",
         "drupal/bootstrap_layout_builder": "^2.0",
@@ -85,12 +55,12 @@
         "drupal/color_field": "^3",
         "drupal/components": "^3",
         "drupal/config_filter": "^2.2",
-        "drupal/config_partial_export": "^1.4",
+        "drupal/config_partial_export": "^2",
         "drupal/config_split": "^2.0.0-beta4",
         "drupal/config_sync": "^3",
         "drupal/config_update": "^2",
         "drupal/context": "^5",
-        "drupal/core": "^9.3",
+        "drupal/core": "^10",
         "drupal/core-composer-scaffold": "^9.3",
         "drupal/ctools": "^3.11-rc1",
         "drupal/dashboards": "^2.1@beta",
@@ -114,14 +84,12 @@
         "drupal/lb_tabs": "3.0.x-dev",
         "drupal/lbl": "^1.0",
         "drupal/licenses_vocabulary": "^2.0@alpha",
-        "drupal/location_migration": "^1.0@beta",
         "drupal/m4032404": "^1.0@alpha",
         "drupal/matomo": "^1.11",
         "drupal/media_entity_browser": "^2.0@alpha",
         "drupal/menu_block": "^1.10",
         "drupal/metatag": "^1.10",
-        "drupal/migrate_tools": "^5.0",
-        "drupal/page_sections": "1.x-dev",
+        "drupal/migrate_tools": "^6",
         "drupal/paragraphs": "^1.9",
         "drupal/pathauto": "^1.4",
         "drupal/pbf": "^1.0",
@@ -148,25 +116,21 @@
         "drupal/vartheme_bs5": "^2.0",
         "drupal/views_infinite_scroll": "^2.0",
         "drupal/workflow": "^1.4",
-        "drush/drush": "^10.3",
-        "nyxtechnology/media_attribution": "1.0",
+        "drush/drush": "^11",
         "oomphinc/composer-installers-extender": "~1.0 || ~2.0",
         "owlcarousel2/owlcarousel2": "^2.3",
-        "revax-hub/scholarly_lite": "1.0",
         "vlucas/phpdotenv": "^5.1",
         "webflo/drupal-finder": "^1.2",
         "webmozart/path-util": "^2.3"
     },
     "require-dev": {
-        "codeception/codeception": "^4.2",
+        "codeception/codeception": "^5",
         "codeception/module-asserts": "^2.0",
-        "codeception/module-phpbrowser": "^1.0",
         "drupal/config_devel": "^1.8",
-        "drupal/core-dev": "^9.3",
+        "drupal/core-dev": "^10",
         "drupal/devel": "^5.0",
         "drupal/drupal-driver": "^2.1.1",
-        "drupal/drupalmoduleupgrader": "^1.9",
-        "drupal/migrate_devel": "2.0-alpha2",
+        "drupal/migrate_devel": "^2",
         "ec-europa/toolkit": "^9",
         "phpspec/prophecy-phpunit": "^2.0"
     },
