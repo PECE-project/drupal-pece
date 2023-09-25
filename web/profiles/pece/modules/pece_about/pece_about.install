@@ -4,48 +4,6 @@
  * Installation code for the PECE About feature.
  */
 
-use Drupal\node\Entity\Node;
-use Drupal\menu_link_content\Entity\MenuLinkContent;
-
-/**
- * Implements hook_install().
- *
- * @throws \Drupal\Core\Entity\EntityStorageException
- */
-function pece_about_install() {
-  $nid = pece_about_install_default_page();
-  if ($nid) {
-    $menu_link = MenuLinkContent::create([
-      'title' => 'About',
-      'link' => ['uri' => 'internal:/node/' . $nid],
-      'menu_name' => 'main',
-      'expanded' => TRUE,
-      'weight' => 1,
-    ]);
-    $menu_link->save();
-  }
-}
-
-/**
- * Implements hook_uninstall().
- */
-function pece_about_uninstall() {
-  \Drupal::configFactory()->getEditable('pece_about.settings')->delete();
-  $blocktab_about = \Drupal::entityTypeManager()->getStorage('blocktabs')->loadByProperties(
-    ['name' => 'pece_about_page']
-  );
-  if (!empty($blocktab_about)) {
-    \Drupal::entityTypeManager()->getStorage('blocktabs')->delete($blocktab_about);
-  }
-}
-
-/**
- * Implements hook_content_import_entity_alter().
- */
-function _pece_about_content_import_entity_alter(array $content, Node $entity) {
-  // dpm([$content, $entity], 'About Entity');
-}
-
 /**
  * Configures a default about page.
  *
