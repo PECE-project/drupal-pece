@@ -1,5 +1,3 @@
-[![Build Status](https://pece-project.semaphoreci.com/badges/drupal-pece/branches/master.svg?style=shields&key=119b30d1-6e7f-49de-89be-45389fb5d9f4)](https://pece-project.semaphoreci.com/projects/drupal-pece)
-
 # Platform for Experimental and Collaborative Ethnography (PECE)
 
 PECE is a Free and Open Source (Drupal-based) digital platform that supports
