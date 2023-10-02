@@ -509,8 +509,9 @@ projects[color_field][version] = 1.8
 ; Search API
 ; Overrides panopoly's search_api settings.
 projects[search_api][subdir] = contrib
-projects[search_api][version] = 1.28
+projects[search_api][version] = 1.27
 projects[search_api][patch][] = ./patches/search_api_fix-composer-friendly-dependencies-issue.patch
+;projects[search_api][patch][] = https://www.drupal.org/files/issues/2021-08-31/2159827-35--facet_paths.patch
 
 ; Search API DB
 ; Overrides panopoly's search_api_db version.
