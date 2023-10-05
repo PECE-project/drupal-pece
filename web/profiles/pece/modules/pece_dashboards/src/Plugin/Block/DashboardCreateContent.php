@@ -90,7 +90,7 @@ class DashboardCreateContent extends BlockBase {
       $addProjectLink = [
         '#title' => $this->t($typeName),
         '#type' => 'link',
-        '#url' => \Drupal\Core\Url::fromRoute('node.add', ['node_type' => $key]),
+        '#url' => \Drupal\Core\Url::fromRoute('node.add', ['entity_bundle:node' => $key]),
       ];
 
       if ($isArtifact) {
@@ -104,7 +104,7 @@ class DashboardCreateContent extends BlockBase {
   }
 
   private function sortContentTypesList(array $contentTypes) {
-    
+
     $contentTypes = array_flip($contentTypes);
     ksort($contentTypes);
 
