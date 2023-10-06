@@ -1,27 +1,35 @@
-uuid: 325cd28b-5029-4850-b358-5c56d5f85d07
+uuid: 649bf9e0-5349-4b2e-a059-beb908318853
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: yrhpr5tmoTKmZW_qsjbB5Gs_DHYb16SNN9ZtBKPR2JM
 name: pece_home_recent_content
 label: 'Home Recent Content'
-event: click
-style: default
 tabs:
   66931b2c-e56a-468b-bc3b-6bd1fc7292fc:
+    uuid: 66931b2c-e56a-468b-bc3b-6bd1fc7292fc
     id: views_tab
     title: 'Recent Artifacts'
+    weight: 1
     data:
       view_name: pece_artifacts
       view_display: pece_artifacts
       view_arg: recent-artifacts
-    weight: 1
-    uuid: 66931b2c-e56a-468b-bc3b-6bd1fc7292fc
+      check_access: false
+      display_tab: null
+      tab_css_id: null
   ebe01541-1a47-4500-a334-aa130483ed02:
+    uuid: ebe01541-1a47-4500-a334-aa130483ed02
     id: views_tab
-    title: 'Recent Essays'
+    title: 'Recent  Essays'
+    weight: 2
     data:
       view_name: pece_essays
       view_display: block_2
       view_arg: recent-essays
-    weight: 2
-    uuid: ebe01541-1a47-4500-a334-aa130483ed02
+      check_access: false
+      display_tab: null
+      tab_css_id: null
+event: click
+style: default
