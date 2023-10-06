@@ -16,7 +16,7 @@ use GuzzleHttp\Exception\RequestException;
  *   id = "RulesWebhookPost",
  *   label = @Translation("Webhook POST"),
  *   category = @Translation("Data"),
- *   context = {
+ *   context_definitions = {
  *     "url" = @ContextDefinition("string",
  *       label = @Translation("URL"),
  *       description = @Translation("The Url address to the webhook request send. <br><b>Example:</b> https://example.com/webhook/service/token "),

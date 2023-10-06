@@ -12,12 +12,15 @@ use Drupal\Tests\BrowserTestBase;
  */
 class LoadTest extends BrowserTestBase {
 
+
+  protected $defaultTheme = 'stable9';
+
   /**
    * Modules to enable.
    *
    * @var array
    */
-  public static $modules = ['pece_migrate'];
+  protected static $modules = ['pece_migrate'];
 
   /**
    * A user with permission to administer site configuration.
@@ -29,7 +32,7 @@ class LoadTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp() : void {
     parent::setUp();
     $this->user = $this->drupalCreateUser(['administer site configuration']);
     $this->drupalLogin($this->user);

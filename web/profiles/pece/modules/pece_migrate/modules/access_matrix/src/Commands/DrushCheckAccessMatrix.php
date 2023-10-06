@@ -115,7 +115,7 @@ class DrushCheckAccessMatrix extends DrushCommands {
    * @param $user \Drupal\user\Entity\User
    */
   private function addUserInGroups(User $user) {
-    $nids = \Drupal::entityQuery('node')->condition('type','group')->execute();
+    $nids = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type','group')->execute();
     $groups =  \Drupal\node\Entity\Node::loadMultiple($nids);
     $user->set('field_pbc_ref_group', $groups);
     $user->save();

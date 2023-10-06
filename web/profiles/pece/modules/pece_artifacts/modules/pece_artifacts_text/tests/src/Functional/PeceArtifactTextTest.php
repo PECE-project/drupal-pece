@@ -19,7 +19,7 @@ class PeceArtifactTextTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = array(
+  protected static $modules = array(
     'pece_artifacts_text',
     'components',
     'token',
@@ -37,7 +37,7 @@ class PeceArtifactTextTest extends BrowserTestBase {
   /**
    * Setup.
    */
-  public function setUp() {
+  public function setUp() : void {
     parent::setUp();
   }
 
