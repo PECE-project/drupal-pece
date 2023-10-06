@@ -3,12 +3,12 @@
 namespace Drupal\pece_oauth\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 class AddXLoginAttemptEvent implements EventSubscriberInterface {
 
-  public function AddXLoginAttempt(FilterResponseEvent $event) {
+  public function AddXLoginAttempt(ResponseEvent $event) {
     $response = $event->getResponse();
 
     if ($event->getRequest()->getPathInfo() == '/oauth/token' && !$response->isSuccessful()) {
