@@ -1,11 +1,13 @@
-uuid: 8a07d3ff-beaa-4f38-9909-6c032387e61e
+uuid: 802aeadc-5d5c-494e-a14a-5b376afc9bb8
 langcode: en
 status: true
 dependencies:
   module:
     - user
+_core:
+  default_config_hash: suDsVMgawXoQt4rfmdfpr05EVX3z3KyfDDTYgeSM898
 id: who_s_online
-label: 'Who''s online block'
+label: "Who's online block"
 module: user
 description: 'Shows the user names of the most recently active users, and the total number of active users.'
 tag: default
@@ -14,11 +16,11 @@ base_field: uid
 display:
   default:
     id: default
-    display_title: Master
+    display_title: Default
     display_plugin: default
     position: 0
     display_options:
-      title: 'Who''s online'
+      title: "Who's online"
       fields:
         name:
           id: name
@@ -208,13 +210,13 @@ display:
       tags: {  }
   who_s_online_block:
     id: who_s_online_block
-    display_title: 'Who''s online'
+    display_title: "Who's online"
     display_plugin: block
     position: 1
     display_options:
       display_description: 'A list of users that are currently logged in.'
       display_extenders: {  }
-      block_description: 'Who''s online'
+      block_description: "Who's online"
     cache_metadata:
       max-age: -1
       contexts:

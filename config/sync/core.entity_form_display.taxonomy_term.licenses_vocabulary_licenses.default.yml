@@ -1,4 +1,4 @@
-uuid: d039437f-b890-4e00-9538-24bb659900a9
+uuid: 06188f46-dba6-4061-afdb-8b71b1b80bb0
 langcode: en
 status: true
 dependencies:
@@ -14,6 +14,8 @@ dependencies:
   enforced:
     module:
       - licenses_vocabulary
+_core:
+  default_config_hash: cjm36Ry5lluIF16ub_cSI6I0JoO_vc93H36jYy_kpbU
 id: taxonomy_term.licenses_vocabulary_licenses.default
 targetEntityType: taxonomy_term
 bundle: licenses_vocabulary_licenses
@@ -24,8 +26,8 @@ content:
     weight: 3
     region: content
     settings:
-      rows: 5
       placeholder: ''
+      rows: 5
     third_party_settings: {  }
   langcode:
     type: language_select
@@ -39,16 +41,16 @@ content:
     weight: 2
     region: content
     settings:
-      progress_indicator: throbber
       preview_image_style: thumbnail
+      progress_indicator: throbber
     third_party_settings: {  }
   licenses_vocabulary_link:
-    type: link_default
     weight: 1
-    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
+    type: link_default
+    region: content
     third_party_settings: {  }
   name:
     type: string_textfield
@@ -60,10 +62,10 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 100
-    region: content
     settings:
       display_label: true
+    weight: 100
+    region: content
     third_party_settings: {  }
 hidden:
   path: true

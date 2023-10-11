@@ -23,7 +23,7 @@ base_field: mid
 display:
   default:
     id: default
-    display_title: Master
+    display_title: Default
     display_plugin: default
     position: 0
     display_options:
@@ -1131,7 +1131,7 @@ display:
             image_link: ''
             image_style: media_library
             image_loading:
-              attribute: lazy
+              attribute: eager
         name:
           id: name
           table: media_field_data
@@ -1170,6 +1170,15 @@ display:
             date_format: short
             custom_date_format: ''
             timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
       access:
         type: perm
         options:
