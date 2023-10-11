@@ -5,14 +5,14 @@ dependencies:
   config:
     - field.storage.node.field_pece_slideshowimage_image
     - field.storage.node.field_pece_slideshowimage_link
-    - image.style.pece_frontpage_image_style
     - node.type.pece_slideshow_image
   module:
     - image
     - link
     - node
-    - slick
     - user
+_core:
+  default_config_hash: vXFG7mqvxoMaihYmZS2XUTyk8og5qvN-49HaAR3qvak
 id: pece_frontpage_image_slider
 label: 'PECE Frontpage Image Slider'
 module: views
@@ -146,12 +146,10 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: slick_image
+          type: image
           settings:
-            image_style: pece_frontpage_image_style
             image_link: ''
-            image_loading:
-              attribute: lazy
+            image_style: ''
           group_column: ''
           group_columns: {  }
           group_rows: true

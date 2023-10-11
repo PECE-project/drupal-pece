@@ -1,9 +1,7 @@
-uuid: 7be50f9a-e376-4ab5-b5e6-b6705f09bd25
+uuid: fe2ed2f9-f532-47e4-839f-d560e425daa4
 langcode: en
 status: true
 dependencies:
-  module:
-    - slick
   enforced:
     module:
       - filter
@@ -36,11 +34,3 @@ filters:
     weight: 0
     settings:
       filter_url_length: 72
-  slick_filter:
-    id: slick_filter
-    provider: slick
-    status: false
-    weight: 4
-    settings:
-      optionset: default
-      media_switch: ''
