@@ -1,19 +1,26 @@
-uuid: 3d534ae6-3632-46ab-a463-ece468a46433
+uuid: 40646899-bfbf-4873-abeb-ca5cc32e62f0
 langcode: en
 status: true
 dependencies:
   config:
     - filter.format.basic_html
   module:
+    - contact
     - filter
-    - graphql
+    - media
+    - search
+    - shortcut
     - system
+_core:
+  default_config_hash: PhpjKGbPRzHm1FDviTaPLu3g-svxhir96cooP-e8wSM
 id: authenticated
 label: 'Authenticated user'
 weight: 1
 is_admin: false
 permissions:
   - 'access content'
-  - 'execute entities_api arbitrary graphql requests'
-  - 'execute entities_api persisted graphql requests'
+  - 'access shortcuts'
+  - 'access site-wide contact form'
+  - 'search content'
   - 'use text format basic_html'
+  - 'view media'

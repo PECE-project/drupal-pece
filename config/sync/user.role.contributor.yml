@@ -1,9 +1,16 @@
 uuid: 81f743c7-1076-4ec7-aae5-15cf05f60aab
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.html
+  module:
+    - filter
+_core:
+  default_config_hash: vtQpFaZ27VFgT1APh5SpQP_kehinFMJF1qkbhY4VxOg
 id: contributor
 label: Contributor
 weight: 2
 is_admin: null
-permissions: {  }
+permissions:
+  - 'use text format html'
