@@ -1,4 +1,4 @@
-uuid: e20f304a-dbd4-4acc-899c-4486f611e80f
+uuid: 755e8d4b-fbba-4af2-91cf-293f507a5ea6
 langcode: en
 status: true
 dependencies:
@@ -10,6 +10,8 @@ dependencies:
   enforced:
     module:
       - licenses_vocabulary
+_core:
+  default_config_hash: ZLP82ZKGf3MN1yzcaG-XFjB4LEcDooIa59NJS_XuVlY
 id: taxonomy_term.licenses_vocabulary_licenses.licenses_vocabulary_icon
 field_name: licenses_vocabulary_icon
 entity_type: taxonomy_term
@@ -21,8 +23,6 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:file'
-  handler_settings: {  }
   file_directory: '[date:custom:Y]-[date:custom:m]'
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
@@ -38,4 +38,6 @@ settings:
     title: ''
     width: null
     height: null
+  handler: 'default:file'
+  handler_settings: {  }
 field_type: image

@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.pece_essay.field_pece_all_can_view
     - field.field.node.pece_essay.field_pece_license
     - field.field.node.pece_essay.field_pece_project_ref
+    - field.field.node.pece_essay.layout_builder__layout
     - node.type.pece_essay
   module:
     - entity_reference_revisions
@@ -32,8 +33,8 @@ third_party_settings:
         layout_id: layout_twocol_section
         layout_settings:
           label: ''
-          context_mapping: {  }
           column_widths: 75-25
+          context_mapping: {  }
         components:
           ab6c85b3-f5fd-4b53-abe5-4f3716f3afbe:
             uuid: ab6c85b3-f5fd-4b53-abe5-4f3716f3afbe
@@ -391,6 +392,8 @@ third_party_settings:
             weight: 13
             additional: {  }
         third_party_settings: {  }
+_core:
+  default_config_hash: HMSXo2f0tj9lPu_qSfMVAOMgO9tTZLm53p6zRWL1WgM
 id: node.pece_essay.default
 targetEntityType: node
 bundle: pece_essay

@@ -1,4 +1,4 @@
-uuid: 61d7b3fe-ad4c-48ea-96a4-fdcd9dc87bef
+uuid: 474d9055-1d43-4bea-9f37-f9fd5a3e0626
 langcode: en
 status: true
 dependencies:
@@ -7,10 +7,10 @@ dependencies:
   theme:
     - vartheme_bs5
 _core:
-  default_config_hash: qB6wWkWLVKZHZZ01D2Up0Lht9TdDAzejPX5J6ZRvqeg
+  default_config_hash: nuHJ2IMvwXFtVmcm95Ivaae8jPJ_Hs97lv4eNiwIDi8
 id: vartheme_bs5_local_tasks
 theme: vartheme_bs5
-region: header
+region: content_above
 weight: 0
 provider: null
 plugin: local_tasks_block
@@ -24,6 +24,6 @@ settings:
 visibility:
   request_path:
     id: request_path
+    pages: '/node/*'
     negate: true
     context_mapping: {  }
-    pages: '/node/*'

@@ -1,16 +1,18 @@
-uuid: ccf01e13-3e4a-47e6-9783-2488928e8a56
+uuid: d9cd3d44-7f3b-489a-9586-64d041253e69
 langcode: en
 status: true
 dependencies:
   module:
     - node
+_core:
+  default_config_hash: RV0PZ_MznswaFQlVy69KGAWrjKuOGvhaHSSgtu5r-iw
 id: about_page
 label: About_page
 type: 'canonical_entities:node'
 pattern: '[node:title]'
 selection_criteria:
   db99bf3d-8b3d-4e46-b330-ee31e97d7af3:
-    id: node_type
+    id: 'entity_bundle:node'
     negate: false
     uuid: db99bf3d-8b3d-4e46-b330-ee31e97d7af3
     context_mapping:

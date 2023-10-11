@@ -1,27 +1,35 @@
-uuid: 4f5f8aef-d063-4aba-9b56-c41ab5963d70
+uuid: 5d231682-aba9-4aac-b410-3c1764496586
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: 1W1SR40-k5-HiCB4FK9XQfplEc4lGBbCBtjoxASp08w
 name: home_sidebar
 label: 'Home Content Sidebar'
-event: click
-style: default
 tabs:
   06e84c26-a01b-4600-a83f-0e0a8146d070:
+    uuid: 06e84c26-a01b-4600-a83f-0e0a8146d070
     id: views_tab
     title: Groups
+    weight: 1
     data:
       view_name: pece_groups
       view_display: block_recent_groups
       view_arg: ''
-    weight: 1
-    uuid: 06e84c26-a01b-4600-a83f-0e0a8146d070
+      check_access: false
+      display_tab: null
+      tab_css_id: null
   c1307b3e-c17e-49ca-9c20-b6b8f86f98f0:
+    uuid: c1307b3e-c17e-49ca-9c20-b6b8f86f98f0
     id: views_tab
     title: People
+    weight: 2
     data:
       view_name: pece_people
       view_display: block_1
       view_arg: ''
-    weight: 2
-    uuid: c1307b3e-c17e-49ca-9c20-b6b8f86f98f0
+      check_access: false
+      display_tab: null
+      tab_css_id: null
+event: click
+style: default

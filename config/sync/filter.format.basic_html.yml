@@ -1,11 +1,11 @@
-uuid: 2855e8fe-2fbb-4343-bd05-8675a860224d
+uuid: 5cca5e49-a0bc-436c-a6c4-909856840953
 langcode: en
 status: true
 dependencies:
   module:
-    - blazy
     - editor
-    - slick
+_core:
+  default_config_hash: P8ddpAIKtawJDi5SzOwCzVnnNYqONewSTJ6Xn0dW_aQ
 name: 'Basic HTML'
 format: basic_html
 weight: 0
@@ -43,49 +43,3 @@ filters:
     status: true
     weight: 11
     settings: {  }
-  slick_filter:
-    id: slick_filter
-    provider: slick
-    status: false
-    weight: 4
-    settings:
-      optionset: default
-      layout: ''
-      skin: ''
-      background: false
-      loading: ''
-      preload: false
-      responsive_image_style: ''
-      image_style: ''
-      media_switch: ''
-      ratio: ''
-      thumbnail_style: ''
-      overridables:
-        arrows: '0'
-        autoplay: '0'
-        dots: '0'
-        draggable: '0'
-        infinite: '0'
-        mouseWheel: '0'
-        randomize: '0'
-        variableWidth: '0'
-      optionset_thumbnail: ''
-      skin_thumbnail: ''
-      thumbnail_caption: ''
-      thumbnail_effect: ''
-      thumbnail_position: ''
-      override: false
-  blazy_filter:
-    id: blazy_filter
-    provider: blazy
-    status: false
-    weight: 3
-    settings:
-      media_switch: ''
-      hybrid_style: ''
-      box_style: ''
-      box_caption: ''
-      filter_tags:
-        img: img
-        iframe: iframe
-      use_data_uri: '0'

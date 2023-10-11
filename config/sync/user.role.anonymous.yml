@@ -1,21 +1,24 @@
-uuid: f3969819-17d4-4e3b-9623-7fc8e8b30389
+uuid: 13713153-eb82-4cc1-9137-8d4e78cc4186
 langcode: en
 status: true
 dependencies:
   config:
-    - rest.resource.lost_password_reset
-    - rest.resource.lost_password_resource
+    - filter.format.restricted_html
   module:
-    - graphql
-    - rest
+    - contact
+    - filter
+    - media
+    - search
     - system
+_core:
+  default_config_hash: Gl1lr_RJQ9pMz_DZhY6pNX94k874Gqh15Gm8Du1EepQ
 id: anonymous
 label: 'Anonymous user'
 weight: 0
 is_admin: false
 permissions:
   - 'access content'
-  - 'execute entities_api arbitrary graphql requests'
-  - 'execute entities_api persisted graphql requests'
-  - 'restful post lost_password_reset'
-  - 'restful post lost_password_resource'
+  - 'access site-wide contact form'
+  - 'search content'
+  - 'use text format restricted_html'
+  - 'view media'

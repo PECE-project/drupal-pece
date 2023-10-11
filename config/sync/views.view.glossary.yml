@@ -1,4 +1,4 @@
-uuid: fd2ba8e0-fe21-4c8c-8733-cb9453a74aee
+uuid: 594c6b82-51e4-4f68-8324-4dc6df2c7572
 langcode: en
 status: false
 dependencies:
@@ -7,6 +7,8 @@ dependencies:
   module:
     - node
     - user
+_core:
+  default_config_hash: 0mU55pEUCMGcMhBRpyMqjal173jNwZh0hrvImj4HVWU
 id: glossary
 label: Glossary
 module: node
@@ -17,7 +19,7 @@ base_field: nid
 display:
   default:
     id: default
-    display_title: Master
+    display_title: Default
     display_plugin: default
     position: 0
     display_options:
@@ -181,6 +183,15 @@ display:
             date_format: long
             custom_date_format: ''
             timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
       pager:
         type: mini
         options:
@@ -253,6 +264,19 @@ display:
           transform_dash: false
           break_phrase: false
       filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
         langcode:
           id: langcode
           table: node_field_data
@@ -352,7 +376,7 @@ display:
       footer: {  }
       display_extenders: {  }
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -420,7 +444,7 @@ display:
         page_1: page_1
       inherit_arguments: false
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -447,7 +471,7 @@ display:
         menu_name: main
         parent: ''
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'

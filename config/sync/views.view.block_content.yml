@@ -1,25 +1,27 @@
-uuid: 85b92aa1-c5ed-4a62-964e-0f2cf93b302f
+uuid: b9f4c5f7-e63e-491b-be7e-b5fb7c5aa997
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
     - user
+_core:
+  default_config_hash: AcOE_1RLjX4okjWSOk7Pen1IdtPsY0Nbn0HXWG3zMqc
 id: block_content
-label: 'Custom block library'
+label: 'Content blocks'
 module: views
-description: 'Find and manage custom blocks.'
+description: 'Find and manage content blocks.'
 tag: default
 base_table: block_content_field_data
 base_field: id
 display:
   default:
     id: default
-    display_title: Master
+    display_title: Default
     display_plugin: default
     position: 0
     display_options:
-      title: 'Custom block library'
+      title: 'Content blocks'
       fields:
         info:
           id: info
@@ -207,6 +209,15 @@ display:
             date_format: short
             custom_date_format: ''
             timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
         operations:
           id: operations
           table: block_content
@@ -280,7 +291,7 @@ display:
         type: basic
         options:
           submit_button: Apply
-          reset_button: false
+          reset_button: true
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
@@ -289,7 +300,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'administer blocks'
+          perm: 'access block library'
       cache:
         type: tag
         options: {  }
@@ -303,7 +314,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: 'There are no custom blocks available.'
+          content: 'There are no content blocks available.'
           tokenize: false
         block_content_listing_empty:
           id: block_content_listing_empty
@@ -506,7 +517,7 @@ display:
       footer: {  }
       display_extenders: {  }
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -521,17 +532,17 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: admin/structure/block/block-content
+      path: admin/content/block
       menu:
         type: tab
-        title: 'Custom block library'
-        description: ''
+        title: Blocks
+        description: 'Create and edit content blocks.'
         weight: 0
         menu_name: admin
-        parent: block.admin_display
+        parent: system.admin_content
         context: '0'
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'

@@ -1,4 +1,4 @@
-uuid: 0bda358c-720b-4005-b27d-e77b107893d8
+uuid: 23527908-250a-462e-8037-bbfdf5476b44
 langcode: en
 status: true
 dependencies:
@@ -9,7 +9,7 @@ dependencies:
     module:
       - content_moderation
 _core:
-  default_config_hash: upi3_YaKY1MjDALjDauLNPXfHakisQNehC9Dj6icMPQ
+  default_config_hash: 7olvKOaJNf15B-Bj4eD1wJyaz4BR7CNA9cEjWBssa2Y
 id: moderated_content
 label: 'Moderated content'
 module: views
@@ -341,6 +341,15 @@ display:
             date_format: short
             custom_date_format: ''
             timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
           group_column: value
           group_columns: {  }
           group_rows: true
