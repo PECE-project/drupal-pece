@@ -72,8 +72,6 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: profile
-          plugin_id: rendered_entity
           label: ''
           exclude: false
           alter:
@@ -116,6 +114,8 @@ display:
           empty_zero: false
           hide_alter_empty: true
           view_mode: default
+          entity_type: profile
+          plugin_id: rendered_entity
         operations:
           id: operations
           table: profile
@@ -123,8 +123,6 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: profile
-          plugin_id: entity_operations
           label: ''
           exclude: false
           alter:
