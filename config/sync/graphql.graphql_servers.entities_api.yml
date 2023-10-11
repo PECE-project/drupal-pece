@@ -4,15 +4,15 @@ status: true
 dependencies: {  }
 name: entities_api
 label: 'Entities Base'
+schema: entity
+schema_configuration:
+  composable:
+    extensions: {  }
+persisted_queries_settings: {  }
 endpoint: /v1
 debug_flag: 0
-schema: entity
 caching: true
 batching: true
 disable_introspection: false
 query_depth: null
 query_complexity: null
-schema_configuration:
-  composable:
-    extensions: {  }
-persisted_queries_settings: {  }
