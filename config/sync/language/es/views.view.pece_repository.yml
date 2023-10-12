@@ -1,0 +1,74 @@
+display:
+  default:
+    display_title: 'Por defecto'
+    display_options:
+      fields:
+        type:
+          separator: ', '
+        field_essay_thumbnail:
+          separator: ', '
+        field_timeline_essay_thumbnail:
+          separator: ', '
+        field_project_image:
+          separator: ', '
+        field_photo_essay_thumbnail:
+          separator: ', '
+        title:
+          separator: ', '
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« Primero'
+            last: 'Último »'
+          expose:
+            items_per_page_label: 'Elementos por página'
+            items_per_page_options_all_label: '- Todo -'
+            offset_label: Desplazamiento
+      exposed_form:
+        options:
+          submit_button: Aplicar
+          reset_button_label: Restablecer
+          exposed_sorts_label: 'Ordenar por'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: 'Seleccione cualquier filtro y pulse Aplicar para ver los resultados'
+          bef:
+            general:
+              secondary_label: 'Opciones avanzadas'
+      filters:
+        type:
+          expose:
+            label: 'Tipo de contenido'
+        type_1:
+          expose:
+            label: 'Filtrar por'
+  feed_1:
+    display_title: 'Canal de noticias'
+  page_artifacts:
+    display_options:
+      filters:
+        type_1:
+          expose:
+            label: 'Filtrar por'
+  page_discover:
+    display_options:
+      filters:
+        type_1:
+          expose:
+            label: 'Filtrar por'
+  page_groups:
+    display_title: Grupos
+    display_options:
+      fields:
+        type:
+          separator: ', '
+        title:
+          separator: ', '
+      filters:
+        type:
+          expose:
+            label: 'Tipo de contenido'
+  rest_export_1:
+    display_title: 'Exportacion REST'
