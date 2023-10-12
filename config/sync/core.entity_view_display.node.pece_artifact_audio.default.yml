@@ -17,7 +17,6 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_audio_source
     - field.field.node.pece_artifact_audio.field_audio_tags
     - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
-    - field.field.node.pece_artifact_audio.field_contributed_date
     - field.field.node.pece_artifact_audio.field_pbc_ref_group
     - field.field.node.pece_artifact_audio.field_pbc_ref_role
     - field.field.node.pece_artifact_audio.field_pbc_ref_user
@@ -255,26 +254,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 12
             additional: {  }
-          c504a6c7-86bd-40ee-aca5-f7a7816ffd78:
-            uuid: c504a6c7-86bd-40ee-aca5-f7a7816ffd78
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_audio:field_contributed_date'
-              label: 'Contributed date'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: datetime_default
-                label: above
-                settings:
-                  timezone_override: ''
-                  format_type: medium
-                third_party_settings: {  }
-            weight: 8
-            additional: {  }
         third_party_settings: {  }
 _core:
   default_config_hash: YA3wnxDOZ-LIiIao_puSchAgdet2Bgeisov89GBW1GE
@@ -449,7 +428,6 @@ content:
     region: content
 hidden:
   field_audio_tags: true
-  field_contributed_date: true
   langcode: true
   og_audience: true
   search_api_excerpt: true
