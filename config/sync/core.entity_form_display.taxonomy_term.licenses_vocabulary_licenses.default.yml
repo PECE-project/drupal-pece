@@ -26,8 +26,8 @@ content:
     weight: 3
     region: content
     settings:
-      placeholder: ''
       rows: 5
+      placeholder: ''
     third_party_settings: {  }
   langcode:
     type: language_select
@@ -41,16 +41,16 @@ content:
     weight: 2
     region: content
     settings:
-      preview_image_style: thumbnail
       progress_indicator: throbber
+      preview_image_style: thumbnail
     third_party_settings: {  }
   licenses_vocabulary_link:
+    type: link_default
     weight: 1
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
-    type: link_default
-    region: content
     third_party_settings: {  }
   name:
     type: string_textfield
@@ -62,10 +62,10 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 100
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
 hidden:
   path: true
