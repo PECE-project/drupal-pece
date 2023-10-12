@@ -135,36 +135,7 @@
             "phpstan/extension-installer": true
         }
     },
-    "autoload": {
-        "classmap": [
-            "scripts/composer/SetupWizard.php"
-        ],
-        "files": [
-            "load.environment.php"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "OpenEuropa\\Site\\Tests\\": "./tests/"
-        }
-    },
     "scripts": {
-        "post-root-package-install": [
-            "Subsite\\composer\\SetupWizard::setup"
-        ],
-        "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
-            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
-        ],
-        "pre-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "pre-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ]
     },
     "extra": {
         "composer-exit-on-patch-failure": true,
