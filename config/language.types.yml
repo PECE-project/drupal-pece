@@ -16,5 +16,12 @@ negotiation:
       language-url-fallback: 1
   language_interface:
     enabled:
+      language-selected: 12
+    method_weights:
       language-graphql-operation: -999
-      language-url: 0
+      language-user-admin: -10
+      language-url: -8
+      language-session: -6
+      language-user: -4
+      language-browser: -2
+      language-selected: 12
