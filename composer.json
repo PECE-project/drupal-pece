@@ -278,6 +278,10 @@
                 "web-root": "./web"
             }
         },
+        "file-mapping": {
+            "[web-root]/profiles/.gitignore": false,
+            "[web-root]/profiles/README.txt": false
+        },
         "patches": {
             "drupal/core": {
                 "Error empty system.site UUID": "https://git.drupalcode.org/project/drupal/-/merge_requests/4133.diff"
