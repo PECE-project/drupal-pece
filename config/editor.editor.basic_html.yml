@@ -41,6 +41,8 @@ settings:
         - heading4
         - heading5
         - heading6
+    ckeditor5_imageResize:
+      allow_resize: true
     ckeditor5_list:
       reversed: false
       startIndex: true
@@ -50,15 +52,20 @@ settings:
         - '<dl>'
         - '<dt>'
         - '<dd>'
-        - '<span>'
         - '<a hreflang>'
         - '<blockquote cite>'
         - '<ul type>'
-        - '<ol type>'
-        - '<img src alt height width data-entity-type data-entity-uuid data-align data-caption>'
+        - '<ol start type>'
         - '<h2 id>'
         - '<h3 id>'
         - '<h4 id>'
         - '<h5 id>'
         - '<h6 id>'
-image_upload: {  }
+image_upload:
+  status: true
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: 0
+    height: 0
