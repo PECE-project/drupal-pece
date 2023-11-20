@@ -1,4 +1,4 @@
-uuid: bddc9788-fa84-407c-8a6b-f2ebba53e4df
+uuid: 975b6c82-a5de-4bba-9508-8af75d9b487d
 langcode: en
 status: true
 dependencies:
@@ -8,7 +8,7 @@ dependencies:
   module:
     - file
 _core:
-  default_config_hash: pq-jPNHzECgU4xgNtdtP6REyhFzMqZ8XwlCtT37uJac
+  default_config_hash: 6kMMjmk2r_csGQ52qI9BUaO8r_oAzNLbxlclaj-JlDQ
 id: media.video.field_media_video_file
 field_name: field_media_video_file
 entity_type: media
@@ -22,7 +22,7 @@ default_value_callback: ''
 settings:
   handler: 'default:file'
   handler_settings: {  }
-  file_directory: media_video
+  file_directory: '[date:custom:Y]-[date:custom:m]'
   file_extensions: mp4
   max_filesize: ''
   description_field: false
