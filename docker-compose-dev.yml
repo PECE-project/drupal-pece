@@ -16,9 +16,9 @@ services:
   dev_pece:
     image: revagomes/pece:php7-alpha1
     container_name: pece-dev-nginx
-    build:
-      context: ./
-      dockerfile: ./docker/DockerfileDevelopment
+#    build:
+#      context: ./
+#      dockerfile: ./docker/DockerfileDevelopment
     cap_add:
       - ALL
     restart: always
