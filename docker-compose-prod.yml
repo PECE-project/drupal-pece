@@ -1,4 +1,3 @@
-# @TODO: Need to do install kraftwagen service
 # @TODO: Need to do install gulp service
 
 version: "3"
@@ -20,7 +19,10 @@ services:
       - ./docker/database/datav1:/var/lib/mysql # Use bind mount
 
   php_v1:
-    image: wodby/drupal-php:$PHP_TAG
+#    image: wodby/drupal-php:$PHP_TAG
+    build:
+      context: ./
+      dockerfile: ./docker/DockerfileWodbyPHP
     container_name: "${PROJECT_NAME}_php"
     networks:
       pecev1:

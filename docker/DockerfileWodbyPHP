@@ -1,0 +1,6 @@
+ARG PHP_TAG=8.2
+
+FROM wodby/drupal-php:$PHP_TAG
+
+### INSTALL KRAFTWAGEN
+RUN cd ~/.drush && git clone -b local_workflow_improvements --single-branch https://github.com/revagomes/kraftwagen.git
