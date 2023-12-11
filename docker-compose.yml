@@ -79,7 +79,7 @@ services:
   traefik:
     image: traefik
     container_name: "${PROJECT_NAME}_traefik"
-    # command: -c /dev/null --web --docker --logLevel=INFO
+    command:  --api.insecure=true --providers.docker --web --log.level=INFO
     ports:
       - '80:80'
       - '8081:8080' # Dashboard
