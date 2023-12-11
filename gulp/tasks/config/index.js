@@ -1,6 +1,10 @@
 var gulp = require('gulp');
-var sequence = require('gulp-sequence');
 
-gulp.task('config', function(done) {
-  sequence('config:environment', 'config:settings', done);
-});
+var configEnvironment = require('./environment').configEnvironment;
+var configSettings = require('./settings').configSettings;
+
+function config(done) {
+  gulp.series(configEnvironment, configSettings, done)(done);
+};
+
+exports.config = config;

@@ -4,20 +4,20 @@ var spawn = require('child_process').spawn;
 var webdriverPath = process.cwd() + '/node_modules/.bin/webdriver-manager';
 var webdriver;
 
-gulp.task('webdriver:start', function (done) {
+function webdriverStart(done) {
   var tryAgain = null;
   var fuser;
 
   // Check if port 4444 is already in use. In this case, probably the
   // developer has already started a webdriver-manager instance.
   util.isPortTaken(4444, function (err, used) {
-    err || used ? done(err) : webdriverStart();
+    err || used ? done(err) : doWebdriverStart();
   });
 
   /**
    * Webdriver starter. Encapsulated so we can try again.
    */
-  function webdriverStart() {
+  function doWebdriverStart() {
     webdriver = spawn(webdriverPath, ['start']);
     webdriver.stdout.on('data', onMessage);
     webdriver.stderr.on('data', onMessage);
@@ -31,7 +31,7 @@ gulp.task('webdriver:start', function (done) {
     if (tryAgain) {
       tryAgain = false;
       fuser = spawn('fuser', ['-k', '4444/tcp']);
-      return fuser.on('close', webdriverStart);
+      return fuser.on('close', doWebdriverStart);
     }
 
     done('Could not initiate webdriver. Make sure this machine has an available display (either real or xfvb).');
@@ -56,4 +56,8 @@ gulp.task('webdriver:start', function (done) {
       }
     });
   }
-});
+}
+
+gulp.task('webdriver:start', webdriverStart);
+
+exports.default = webdriverStart;

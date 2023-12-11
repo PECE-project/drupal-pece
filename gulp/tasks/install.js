@@ -1,3 +1,3 @@
 var gulp = require('gulp');
 
-gulp.task('install', ['bower:install']);
+gulp.task('install', gulp.series('bower:install'));

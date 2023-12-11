@@ -6,7 +6,7 @@ var util = require('../../lib/util');
 var cwd = process.cwd(), command = '', env, environmentMakePath;
 var profilePath = cwd + '/build/profiles/pece';
 
-gulp.task('drush:kw-b', function (done) {
+function drushKw_b(done) {
   shell.exec('drush kw-b');
 
   getEnvironmentMakePath(function (err, makeFile) {
@@ -26,7 +26,9 @@ gulp.task('drush:kw-b', function (done) {
 
     done();
   });
-});
+}
+
+gulp.task('drush:kw-b', drushKw_b);
 
 /**
  * Helper method to retrieve an environment make path.
@@ -40,3 +42,5 @@ function getEnvironmentMakePath(callback) {
     });
   });
 }
+
+exports.default = drushKw_b;

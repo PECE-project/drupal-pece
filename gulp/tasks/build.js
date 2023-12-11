@@ -1,6 +1,9 @@
 var gulp = require('gulp');
-var sequence = require('gulp-sequence');
 
-gulp.task('build', function (done) {
-  sequence('bower:install', 'styles', 'drush:kw-b', done);
-});
+function build(done) {
+  gulp.series('bower:install', 'styles', 'drush:kw-b', done)(done);
+}
+
+gulp.task('build', build);
+
+exports.default = build;
