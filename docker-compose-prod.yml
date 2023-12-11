@@ -195,19 +195,33 @@ services:
 #      WEAVER_WORKER_TIMEOUT: 90
 #      WEAVER_CONVERSION_FALLBACK: "false"
 
-#  node:
+  node:
+    image: wodby/node:$NODE_TAG
+    container_name: "${PROJECT_NAME}_node"
+    working_dir: /var/www/html
+    stdin_open: true
+    tty: true
+    labels:
+      - 'traefik.backend=${PROJECT_NAME}_node'
+    volumes:
+      - ./:/var/www/html
+    command: sh -c 'npm install && npm run build'
+
+#  node_app:
 #    image: wodby/node:$NODE_TAG
-#    container_name: "${PROJECT_NAME}_node"
-#    working_dir: /var/www/html/path/to/theme/to/build
+#    container_name: "${PROJECT_NAME}_node_app"
+#    working_dir: /var/www/html
+#    stdin_open: true
+#    tty: true
 #    labels:
-#      - 'traefik.backend=${PROJECT_NAME}_node'
+#      - 'traefik.backend=${PROJECT_NAME}_node_app'
 #      - 'traefik.port=3000'
 #      - 'traefik.frontend.rule=Host:front.${PROJECT_BASE_URL}'
 #    expose:
 #      - "3000"
 #    volumes:
 #      - ./:/var/www/html
-#    command: sh -c 'yarn install && yarn run start'
+#    command: sh -c 'npm install && npm run build'
 
 #  blackfire:
 #    image: blackfire/blackfire
