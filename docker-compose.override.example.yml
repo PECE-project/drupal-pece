@@ -6,23 +6,11 @@ services:
       pecev1:
 
   php:
-    networks:
-      pecev1:
-
-  web:
-    networks:
-      pecev1:
-    ports:
-      - "8080:8080"
-
-  dev:
-    networks:
-      pecev1:
     environment:
-      PROJECT_NAME: "pece"
-      PROJECT_BASE_URL: "pece.local"
-    env_file:
-      - .env
+      PHP_FPM_CLEAR_ENV: "no"
+      PHP_XDEBUG: 1
+      PHP_XDEBUG_DEFAULT_ENABLE: 1
+      PHP_XDEBUG_REMOTE_CONNECT_BACK: 1
 
 networks:
   pecev1:

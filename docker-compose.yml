@@ -15,7 +15,9 @@ services:
       - ./docker/database/pecedb:/var/lib/mysql # Use bind mount
 
   php:
-    image: wodby/drupal-php:$PHP_TAG
+    build:
+      context: ./
+      dockerfile: ./docker/DockerfileWodbyPHP
     container_name: "${PROJECT_NAME}_php"
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
@@ -60,14 +62,26 @@ services:
       - 'traefik.port=8025'
       - 'traefik.frontend.rule=Host:mailhog.${PROJECT_BASE_URL}'
 
-#  node:
+  node:
+    image: wodby/node:$NODE_TAG
+    container_name: "${PROJECT_NAME}_node"
+    working_dir: /var/www/html
+    stdin_open: true
+    tty: true
+    labels:
+      - 'traefik.backend=${PROJECT_NAME}_node'
+    volumes:
+      - ./:/var/www/html
+    command: sh -c 'npm install && npm run build'
+
+#  node_app:
 #    image: wodby/node:$NODE_TAG
-#    container_name: "${PROJECT_NAME}_node"
+#    container_name: "${PROJECT_NAME}_node_app"
 #    working_dir: /var/www/html
 #    stdin_open: true
 #    tty: true
 #    labels:
-#      - 'traefik.backend=${PROJECT_NAME}_node'
+#      - 'traefik.backend=${PROJECT_NAME}_node_app'
 #      - 'traefik.port=3000'
 #      - 'traefik.frontend.rule=Host:front.${PROJECT_BASE_URL}'
 #    expose:
@@ -79,7 +93,7 @@ services:
   traefik:
     image: traefik
     container_name: "${PROJECT_NAME}_traefik"
-    command:  --api.insecure=true --providers.docker --web --log.level=INFO
+    command:  --api.insecure=true --providers.docker --log.level=INFO
     ports:
       - '80:80'
       - '8081:8080' # Dashboard
