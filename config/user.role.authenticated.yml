@@ -5,14 +5,17 @@ dependencies:
   config:
     - filter.format.basic_html
   module:
+    - admin_toolbar_search
     - comment
     - contact
     - file
     - filter
     - media
+    - profile
     - search
     - shortcut
     - system
+    - toolbar
 _core:
   default_config_hash: cFrlqjtkTfvY3RGccjJkPf1SGIfJ942IrxTLWAO4mgA
 id: authenticated
@@ -20,13 +23,18 @@ label: 'Authenticated user'
 weight: 1
 is_admin: false
 permissions:
+  - 'access administration pages'
   - 'access comments'
   - 'access content'
   - 'access shortcuts'
   - 'access site-wide contact form'
+  - 'access toolbar'
   - 'delete own files'
   - 'post comments'
   - 'search content'
   - 'skip comment approval'
+  - 'use admin toolbar search'
   - 'use text format basic_html'
   - 'view media'
+  - 'view own profile'
+  - 'view the administration theme'
