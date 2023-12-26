@@ -1,0 +1,20 @@
+uuid: f6845380-a0da-4d9a-8b54-0e4eabb13994
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - user
+id: node.field_users_with_edit_access
+field_name: field_users_with_edit_access
+entity_type: node
+type: entity_reference
+settings:
+  target_type: user
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

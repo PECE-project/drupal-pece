@@ -7,6 +7,8 @@ dependencies:
     - field.field.node.group.field_group_subst_logic
     - field.field.node.group.field_group_visibility
     - field.field.node.group.field_pece_project_ref
+    - field.field.node.group.field_users_with_edit_access
+    - field.field.node.group.field_users_with_view_access
     - node.type.group
   module:
     - layout_builder
@@ -81,6 +83,38 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 1
             additional: {  }
+          4dbe9522-d9b5-4974-8f97-78aa01a5c490:
+            uuid: 4dbe9522-d9b5-4974-8f97-78aa01a5c490
+            region: first
+            configuration:
+              id: 'field_block:node:group:field_users_with_edit_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          b3424e1e-23c3-4e37-b6e4-08cdceeee3da:
+            uuid: b3424e1e-23c3-4e37-b6e4-08cdceeee3da
+            region: first
+            configuration:
+              id: 'field_block:node:group:field_users_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
         third_party_settings: {  }
 _core:
   default_config_hash: xCViyPgb-1ac2x7urlqJ96ee3J8U6BaFCI8wZ8Hjwq8
@@ -119,6 +153,22 @@ content:
     third_party_settings: {  }
     weight: 103
     region: content
+  field_users_with_edit_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 105
+    region: first
+  field_users_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 106
+    region: first
   links:
     settings: {  }
     third_party_settings: {  }

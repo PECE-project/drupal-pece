@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - filter.format.basic_html
+    - node.type.group
   module:
     - admin_toolbar_search
     - comment
@@ -12,6 +13,7 @@ dependencies:
     - filter
     - help
     - media
+    - node
     - profile
     - search
     - shortcut
@@ -32,6 +34,7 @@ permissions:
   - 'access site-wide contact form'
   - 'access toolbar'
   - 'delete own files'
+  - 'edit any group content'
   - 'post comments'
   - 'search content'
   - 'skip comment approval'

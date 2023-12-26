@@ -1,0 +1,79 @@
+uuid: 7c08c5d0-6263-4721-8476-eba124af6464
+langcode: en
+status: true
+dependencies: {  }
+id: me_only
+label: 'Me only'
+description: 'Only you and the users below have access to this content.'
+weight: 0
+access_rules:
+  is_own:
+    id: is_own
+    group: node
+    plugin_id: is_own
+    field: uid
+    entity_type: node
+    settings:
+      admin_label: ''
+      query: true
+    required: true
+  field_users_with_edit_access_user_reference:
+    id: field_users_with_edit_access_user_reference
+    group: node
+    plugin_id: entity_field_standard
+    field: field_users_with_edit_access
+    entity_type: node
+    settings:
+      admin_label: ''
+      query: true
+      operator: '='
+      value:
+        field: uid
+      empty_behavior: deny
+      widget:
+        show: 1
+        settings:
+          field_widget: entity_reference_autocomplete
+          hide_original_field: 1
+      operations:
+        - view
+        - update
+    required: false
+  field_users_with_view_access_user_reference_1:
+    id: field_users_with_view_access_user_reference_1
+    group: node
+    plugin_id: entity_field_standard
+    field: field_users_with_view_access
+    entity_type: node
+    settings:
+      admin_label: ''
+      query: true
+      operator: '='
+      value:
+        field: uid
+      empty_behavior: deny
+      widget:
+        show: 1
+        settings:
+          field_widget: entity_reference_autocomplete
+          hide_original_field: 1
+      operations:
+        - view
+    required: false
+access_rule_operator: OR
+query: true
+target_entity_type_id: node
+type: private
+http_403_response: {  }
+selection_rules:
+  is_own:
+    id: is_own
+    group: node
+    plugin_id: is_own
+    field: uid
+    entity_type: node
+    settings:
+      admin_label: ''
+    required: true
+selection_rule_operator: AND
+selection_set: {  }
