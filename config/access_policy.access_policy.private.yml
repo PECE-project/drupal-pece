@@ -31,7 +31,7 @@ access_rules:
         field: uid
       empty_behavior: deny
       widget:
-        show: 1
+        show: 0
         settings:
           field_widget: entity_reference_autocomplete
           hide_original_field: 1
@@ -53,7 +53,7 @@ access_rules:
         field: uid
       empty_behavior: deny
       widget:
-        show: 1
+        show: 0
         settings:
           field_widget: entity_reference_autocomplete
           hide_original_field: 1
@@ -74,9 +74,29 @@ access_rules:
       operator: in
       empty_behavior: deny
       widget:
-        show: 1
+        show: 0
         settings:
           field_widget: entity_reference_autocomplete
+          hide_original_field: 1
+      operations:
+        - view
+    required: false
+  field_pece_all_can_view:
+    id: field_pece_all_can_view
+    group: node
+    plugin_id: entity_field_boolean
+    field: field_pece_all_can_view
+    entity_type: node
+    settings:
+      admin_label: ''
+      query: true
+      operator: '='
+      value: 'true'
+      empty_behavior: deny
+      widget:
+        show: 0
+        settings:
+          field_widget: boolean_checkbox
           hide_original_field: 1
       operations:
         - view
