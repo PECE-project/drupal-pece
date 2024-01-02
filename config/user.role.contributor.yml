@@ -4,8 +4,18 @@ status: true
 dependencies:
   config:
     - filter.format.html
+    - node.type.artifact_tabular_data
+    - node.type.artifact_video
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_fieldnote
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
   module:
     - filter
+    - node
 _core:
   default_config_hash: vtQpFaZ27VFgT1APh5SpQP_kehinFMJF1qkbhY4VxOg
 id: contributor
@@ -13,4 +23,13 @@ label: Contributor
 weight: 2
 is_admin: null
 permissions:
+  - 'edit any artifact_tabular_data content'
+  - 'edit any artifact_video content'
+  - 'edit any pece_artifact_audio content'
+  - 'edit any pece_artifact_bundle content'
+  - 'edit any pece_artifact_fieldnote content'
+  - 'edit any pece_artifact_image content'
+  - 'edit any pece_artifact_pdf content'
+  - 'edit any pece_artifact_text content'
+  - 'edit any pece_artifact_website content'
   - 'use text format html'
