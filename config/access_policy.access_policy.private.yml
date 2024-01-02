@@ -116,5 +116,38 @@ selection_rules:
     settings:
       admin_label: ''
     required: true
+  type:
+    id: type
+    group: node
+    plugin_id: bundle
+    field: type
+    entity_type: node
+    settings:
+      id: type
+      operator: or
+      value:
+        artifact_tabular_data: artifact_tabular_data
+        artifact_video: artifact_video
+        pece_artifact_audio: pece_artifact_audio
+        pece_artifact_bundle: pece_artifact_bundle
+        pece_artifact_fieldnote: pece_artifact_fieldnote
+        pece_artifact_image: pece_artifact_image
+        pece_artifact_pdf: pece_artifact_pdf
+        pece_artifact_text: pece_artifact_text
+        pece_artifact_website: pece_artifact_website
+        group: 0
+        page: 0
+        pece_analytic: 0
+        pece_annotation: 0
+        pece_essay: 0
+        pece_fieldsite: 0
+        pece_memo: 0
+        pece_photo_essay: 0
+        pece_project: 0
+        pece_slideshow_image: 0
+        pece_substantive_logic: 0
+        pece_timeline_essay: 0
+      admin_label: ''
+    required: false
 selection_rule_operator: AND
 selection_set: {  }
