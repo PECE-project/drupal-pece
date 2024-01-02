@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.user.register
+    - field.field.user.user.field_groups_joined
     - field.field.user.user.field_pbc_ref_group
     - field.field.user.user.field_user_picture
     - field.field.user.user.field_zotero
@@ -81,5 +82,6 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_groups_joined: true
   field_user_picture: true
   langcode: true

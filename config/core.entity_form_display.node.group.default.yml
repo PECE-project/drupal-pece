@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.group.body
     - field.field.node.group.field_group_subst_logic
     - field.field.node.group.field_group_visibility
+    - field.field.node.group.field_groups_with_view_access
     - field.field.node.group.field_pece_project_ref
     - field.field.node.group.field_users_with_edit_access
     - field.field.node.group.field_users_with_view_access
@@ -51,6 +52,16 @@ content:
     weight: 122
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_groups_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 127
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_pece_project_ref:
     type: entity_reference_autocomplete

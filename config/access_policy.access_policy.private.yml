@@ -2,9 +2,9 @@ uuid: 7c08c5d0-6263-4721-8476-eba124af6464
 langcode: en
 status: true
 dependencies: {  }
-id: me_only
-label: 'Me only'
-description: 'Only you and the users below have access to this content.'
+id: private
+label: Private
+description: 'Only specified users and specified groups have access to this content.'
 weight: 0
 access_rules:
   is_own:
@@ -51,6 +51,27 @@ access_rules:
       operator: '='
       value:
         field: uid
+      empty_behavior: deny
+      widget:
+        show: 1
+        settings:
+          field_widget: entity_reference_autocomplete
+          hide_original_field: 1
+      operations:
+        - view
+    required: false
+  match_field_groups_with_view_access:
+    id: match_field_groups_with_view_access
+    group: node
+    plugin_id: entity_field_entity_reference
+    field: field_groups_with_view_access
+    entity_type: node
+    settings:
+      admin_label: ''
+      query: true
+      value:
+        field: field_groups_joined
+      operator: in
       empty_behavior: deny
       widget:
         show: 1

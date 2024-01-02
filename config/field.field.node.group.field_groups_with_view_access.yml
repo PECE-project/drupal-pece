@@ -1,0 +1,29 @@
+uuid: 5962f7fd-1a14-4473-96b8-bf3ed46f2cc7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_groups_with_view_access
+    - node.type.group
+    - taxonomy.vocabulary.groups_vocab
+id: node.group.field_groups_with_view_access
+field_name: field_groups_with_view_access
+entity_type: node
+bundle: group
+label: 'Groups with view access'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      groups_vocab: groups_vocab
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
