@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - access_policy.access_policy.private
     - filter.format.html
     - node.type.artifact_tabular_data
     - node.type.artifact_video
@@ -14,6 +15,7 @@ dependencies:
     - node.type.pece_artifact_text
     - node.type.pece_artifact_website
   module:
+    - access_policy
     - filter
     - node
 _core:
@@ -23,6 +25,7 @@ label: Researcher
 weight: 3
 is_admin: null
 permissions:
+  - 'assign private access policy'
   - 'edit any artifact_tabular_data content'
   - 'edit any artifact_video content'
   - 'edit any pece_artifact_audio content'
