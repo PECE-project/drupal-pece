@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_artifact_text.body
     - field.field.node.pece_artifact_text.field_ark_enabled
+    - field.field.node.pece_artifact_text.field_groups_with_view_access
     - field.field.node.pece_artifact_text.field_pbc_ref_group
     - field.field.node.pece_artifact_text.field_pbc_ref_role
     - field.field.node.pece_artifact_text.field_pbc_ref_user
@@ -21,6 +22,8 @@ dependencies:
     - field.field.node.pece_artifact_text.field_text_source
     - field.field.node.pece_artifact_text.field_text_tags
     - field.field.node.pece_artifact_text.field_text_use_fieldsite_local
+    - field.field.node.pece_artifact_text.field_users_with_edit_access
+    - field.field.node.pece_artifact_text.field_users_with_view_access
     - node.type.pece_artifact_text
   module:
     - address
@@ -265,6 +268,54 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 8
             additional: {  }
+          262fef5f-93d6-4c73-92bf-68c06dd4a905:
+            uuid: 262fef5f-93d6-4c73-92bf-68c06dd4a905
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_text:field_users_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          6118ca1d-07f5-48e5-bda9-ed960da3e00f:
+            uuid: 6118ca1d-07f5-48e5-bda9-ed960da3e00f
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_text:field_users_with_edit_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          5f34f853-43a7-4f8a-8a27-5505247525b1:
+            uuid: 5f34f853-43a7-4f8a-8a27-5505247525b1
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_text:field_groups_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
         third_party_settings: {  }
 _core:
   default_config_hash: sv49-4TtgHZEBsRaDy_zCl8TMr3fsl0fxqIcirsi8ts
@@ -290,6 +341,14 @@ content:
     third_party_settings: {  }
     weight: 113
     region: content
+  field_groups_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 131
+    region: first
   field_pbc_ref_group:
     type: pbf_formatter_default
     label: above
@@ -422,6 +481,22 @@ content:
     third_party_settings: {  }
     weight: 123
     region: content
+  field_users_with_edit_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 130
+    region: first
+  field_users_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 129
+    region: first
   links:
     settings: {  }
     third_party_settings: {  }

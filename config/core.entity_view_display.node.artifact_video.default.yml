@@ -4,12 +4,15 @@ status: true
 dependencies:
   config:
     - field.field.node.artifact_video.field_ark_enabled
+    - field.field.node.artifact_video.field_groups_with_view_access
     - field.field.node.artifact_video.field_pbc_ref_group
     - field.field.node.artifact_video.field_pbc_ref_role
     - field.field.node.artifact_video.field_pbc_ref_user
     - field.field.node.artifact_video.field_pece_all_can_view
     - field.field.node.artifact_video.field_pece_license
     - field.field.node.artifact_video.field_pece_project_ref
+    - field.field.node.artifact_video.field_users_with_edit_access
+    - field.field.node.artifact_video.field_users_with_view_access
     - field.field.node.artifact_video.field_video_authors
     - field.field.node.artifact_video.field_video_contributors
     - field.field.node.artifact_video.field_video_created_date
@@ -20,6 +23,7 @@ dependencies:
     - field.field.node.artifact_video.field_video_language
     - field.field.node.artifact_video.field_video_location
     - field.field.node.artifact_video.field_video_media
+    - field.field.node.artifact_video.field_video_permission
     - field.field.node.artifact_video.field_video_source
     - field.field.node.artifact_video.field_video_tags
     - field.field.node.artifact_video.field_video_use_fieldsite_local
@@ -331,6 +335,54 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 9
             additional: {  }
+          af3f2f18-9f92-4c1a-b4e2-22e9b1cfe556:
+            uuid: af3f2f18-9f92-4c1a-b4e2-22e9b1cfe556
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_video:field_users_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          6a1395de-cee8-443c-96d3-29cc31d73ed7:
+            uuid: 6a1395de-cee8-443c-96d3-29cc31d73ed7
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_video:field_users_with_edit_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+          e20e7806-7f88-4b74-9388-59bc8111dc9c:
+            uuid: e20e7806-7f88-4b74-9388-59bc8111dc9c
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_video:field_groups_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
         third_party_settings: {  }
 id: node.artifact_video.default
 targetEntityType: node
@@ -347,6 +399,14 @@ content:
     third_party_settings: {  }
     weight: 119
     region: content
+  field_groups_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 129
+    region: first
   field_pbc_ref_group:
     type: pbf_formatter_default
     label: above
@@ -397,6 +457,22 @@ content:
     third_party_settings: {  }
     weight: 113
     region: content
+  field_users_with_edit_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 128
+    region: first
+  field_users_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 127
+    region: first
   field_video_authors:
     type: entity_reference_label
     label: above

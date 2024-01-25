@@ -5,12 +5,15 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_artifact_website.field_ark_enabled
+    - field.field.node.pece_artifact_website.field_groups_with_view_access
     - field.field.node.pece_artifact_website.field_pbc_ref_group
     - field.field.node.pece_artifact_website.field_pbc_ref_role
     - field.field.node.pece_artifact_website.field_pbc_ref_user
     - field.field.node.pece_artifact_website.field_pece_all_can_view
     - field.field.node.pece_artifact_website.field_pece_license
     - field.field.node.pece_artifact_website.field_pece_project_ref
+    - field.field.node.pece_artifact_website.field_users_with_edit_access
+    - field.field.node.pece_artifact_website.field_users_with_view_access
     - field.field.node.pece_artifact_website.field_website_authors
     - field.field.node.pece_artifact_website.field_website_bibliography
     - field.field.node.pece_artifact_website.field_website_contributors
@@ -38,6 +41,7 @@ content:
     region: content
 hidden:
   field_ark_enabled: true
+  field_groups_with_view_access: true
   field_pbc_ref_group: true
   field_pbc_ref_role: true
   field_pbc_ref_user: true
@@ -45,6 +49,8 @@ hidden:
   field_pece_created: true
   field_pece_license: true
   field_pece_project_ref: true
+  field_users_with_edit_access: true
+  field_users_with_view_access: true
   field_website_authors: true
   field_website_bibliography: true
   field_website_contributors: true

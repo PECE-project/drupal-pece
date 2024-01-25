@@ -1,0 +1,29 @@
+uuid: 7a34cc83-91c8-4424-a47e-5ecc04195836
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_users_with_edit_access
+    - node.type.pece_artifact_website
+id: node.pece_artifact_website.field_users_with_edit_access
+field_name: field_users_with_edit_access
+entity_type: node
+bundle: pece_artifact_website
+label: 'Users with edit access'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: false
+field_type: entity_reference

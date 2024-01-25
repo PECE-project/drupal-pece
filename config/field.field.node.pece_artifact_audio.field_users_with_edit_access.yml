@@ -1,0 +1,29 @@
+uuid: aa407b1a-f0d8-4eae-9167-4e3ed4fac746
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_users_with_edit_access
+    - node.type.pece_artifact_audio
+id: node.pece_artifact_audio.field_users_with_edit_access
+field_name: field_users_with_edit_access
+entity_type: node
+bundle: pece_artifact_audio
+label: 'Users with edit access'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: false
+field_type: entity_reference

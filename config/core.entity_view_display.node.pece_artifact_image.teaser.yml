@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_artifact_image.field_ark_enabled
+    - field.field.node.pece_artifact_image.field_groups_with_view_access
     - field.field.node.pece_artifact_image.field_image_authors
     - field.field.node.pece_artifact_image.field_image_contributors
     - field.field.node.pece_artifact_image.field_image_created_date
@@ -24,6 +25,8 @@ dependencies:
     - field.field.node.pece_artifact_image.field_pece_license
     - field.field.node.pece_artifact_image.field_pece_media_image
     - field.field.node.pece_artifact_image.field_pece_project_ref
+    - field.field.node.pece_artifact_image.field_users_with_edit_access
+    - field.field.node.pece_artifact_image.field_users_with_view_access
     - node.type.pece_artifact_image
   module:
     - user
@@ -41,6 +44,7 @@ content:
     region: content
 hidden:
   field_ark_enabled: true
+  field_groups_with_view_access: true
   field_image_authors: true
   field_image_contributors: true
   field_image_created_date: true
@@ -61,6 +65,8 @@ hidden:
   field_pece_license: true
   field_pece_media_image: true
   field_pece_project_ref: true
+  field_users_with_edit_access: true
+  field_users_with_view_access: true
   langcode: true
   og_audience: true
   search_api_excerpt: true

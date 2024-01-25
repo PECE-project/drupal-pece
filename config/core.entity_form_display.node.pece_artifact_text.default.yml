@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_artifact_text.body
     - field.field.node.pece_artifact_text.field_ark_enabled
+    - field.field.node.pece_artifact_text.field_groups_with_view_access
     - field.field.node.pece_artifact_text.field_pbc_ref_group
     - field.field.node.pece_artifact_text.field_pbc_ref_role
     - field.field.node.pece_artifact_text.field_pbc_ref_user
@@ -21,6 +22,8 @@ dependencies:
     - field.field.node.pece_artifact_text.field_text_source
     - field.field.node.pece_artifact_text.field_text_tags
     - field.field.node.pece_artifact_text.field_text_use_fieldsite_local
+    - field.field.node.pece_artifact_text.field_users_with_edit_access
+    - field.field.node.pece_artifact_text.field_users_with_view_access
     - node.type.pece_artifact_text
   module:
     - address
@@ -28,15 +31,15 @@ dependencies:
     - field_group
     - languagefield
     - path
-    - pbf
     - text
 third_party_settings:
   field_group:
     group_permissions:
       children:
         - field_pece_all_can_view
-        - group_or
-        - group_and
+        - field_groups_with_view_access
+        - field_users_with_view_access
+        - field_users_with_edit_access
       label: Permissions
       region: content
       parent_name: ''
@@ -53,9 +56,9 @@ third_party_settings:
       children:
         - field_pbc_ref_user
       label: OR
-      region: content
-      parent_name: group_permissions
-      weight: 17
+      region: hidden
+      parent_name: ''
+      weight: 26
       format_type: details
       format_settings:
         classes: ''
@@ -69,9 +72,9 @@ third_party_settings:
         - field_pbc_ref_group
         - field_pbc_ref_role
       label: AND
-      region: content
-      parent_name: group_permissions
-      weight: 19
+      region: hidden
+      parent_name: ''
+      weight: 27
       format_type: details
       format_settings:
         classes: ''
@@ -108,50 +111,15 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_pbc_ref_group:
-    type: pbf_widget
-    weight: 18
+  field_groups_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 17
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
-      size: '60'
+      size: 60
       placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
-    third_party_settings: {  }
-  field_pbc_ref_role:
-    type: pbf_widget
-    weight: 19
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
-    third_party_settings: {  }
-  field_pbc_ref_user:
-    type: pbf_widget
-    weight: 19
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
     third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
@@ -263,6 +231,26 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  field_users_with_edit_access:
+    type: entity_reference_autocomplete
+    weight: 19
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_users_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 18
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 9
@@ -316,4 +304,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
   og_audience: true
