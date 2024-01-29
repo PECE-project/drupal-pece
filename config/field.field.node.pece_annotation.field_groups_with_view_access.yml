@@ -1,0 +1,29 @@
+uuid: 2ef3ed78-e191-481f-a986-e570b47927e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_groups_with_view_access
+    - node.type.pece_annotation
+    - taxonomy.vocabulary.groups_vocab
+id: node.pece_annotation.field_groups_with_view_access
+field_name: field_groups_with_view_access
+entity_type: node
+bundle: pece_annotation
+label: 'Groups with view access'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      groups_vocab: groups_vocab
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

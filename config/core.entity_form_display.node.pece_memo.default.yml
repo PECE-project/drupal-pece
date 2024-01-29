@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_memo.body
+    - field.field.node.pece_memo.field_groups_with_view_access
     - field.field.node.pece_memo.field_pbc_ref_group
     - field.field.node.pece_memo.field_pbc_ref_role
     - field.field.node.pece_memo.field_pbc_ref_user
@@ -11,19 +12,21 @@ dependencies:
     - field.field.node.pece_memo.field_pece_contributors
     - field.field.node.pece_memo.field_pece_tags
     - field.field.node.pece_memo.field_pece_uri
+    - field.field.node.pece_memo.field_users_with_edit_access
+    - field.field.node.pece_memo.field_users_with_view_access
     - node.type.pece_memo
   module:
     - field_group
     - path
-    - pbf
     - text
 third_party_settings:
   field_group:
     group_permissions:
       children:
         - field_pece_all_can_view
-        - group_or
-        - group_and
+        - field_groups_with_view_access
+        - field_users_with_view_access
+        - field_users_with_edit_access
       label: Permissions
       region: content
       parent_name: ''
@@ -40,9 +43,9 @@ third_party_settings:
       children:
         - field_pbc_ref_user
       label: OR
-      region: content
-      parent_name: group_permissions
-      weight: 17
+      region: hidden
+      parent_name: ''
+      weight: 16
       format_type: details
       format_settings:
         classes: ''
@@ -56,9 +59,9 @@ third_party_settings:
         - field_pbc_ref_group
         - field_pbc_ref_role
       label: AND
-      region: content
-      parent_name: group_permissions
-      weight: 18
+      region: hidden
+      parent_name: ''
+      weight: 17
       format_type: details
       format_settings:
         classes: ''
@@ -88,50 +91,15 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_pbc_ref_group:
-    type: pbf_widget
-    weight: 13
+  field_groups_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 17
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
-      size: '60'
+      size: 60
       placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
-    third_party_settings: {  }
-  field_pbc_ref_role:
-    type: pbf_widget
-    weight: 14
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
-    third_party_settings: {  }
-  field_pbc_ref_user:
-    type: pbf_widget
-    weight: 15
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
     third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
@@ -165,6 +133,26 @@ content:
     weight: 2
     region: content
     settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_users_with_edit_access:
+    type: entity_reference_autocomplete
+    weight: 19
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_users_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 18
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
@@ -220,4 +208,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true

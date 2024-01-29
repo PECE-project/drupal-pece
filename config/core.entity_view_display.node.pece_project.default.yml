@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.pece_project.body
     - field.field.node.pece_project.field_ark_enabled
     - field.field.node.pece_project.field_fieldsites
+    - field.field.node.pece_project.field_groups_with_view_access
     - field.field.node.pece_project.field_pbc_ref_group
     - field.field.node.pece_project.field_pbc_ref_role
     - field.field.node.pece_project.field_pbc_ref_user
@@ -26,6 +27,8 @@ dependencies:
     - field.field.node.pece_project.field_project_struct_analytics
     - field.field.node.pece_project.field_project_subst_logic
     - field.field.node.pece_project.field_project_tags
+    - field.field.node.pece_project.field_users_with_edit_access
+    - field.field.node.pece_project.field_users_with_view_access
     - node.type.pece_project
   module:
     - datetime_range
@@ -89,6 +92,54 @@ third_party_settings:
                   link_to_entity: false
                 third_party_settings: {  }
             weight: 0
+            additional: {  }
+          a925f79e-ddf5-487a-a1f5-79cbc991f460:
+            uuid: a925f79e-ddf5-487a-a1f5-79cbc991f460
+            region: content
+            configuration:
+              id: 'field_block:node:pece_project:field_groups_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          4700eb8f-9c50-45f7-a7ce-ee6ef2019e66:
+            uuid: 4700eb8f-9c50-45f7-a7ce-ee6ef2019e66
+            region: content
+            configuration:
+              id: 'field_block:node:pece_project:field_users_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          419a8ac7-16b4-47db-9668-09955b247ed3:
+            uuid: 419a8ac7-16b4-47db-9668-09955b247ed3
+            region: content
+            configuration:
+              id: 'field_block:node:pece_project:field_users_with_edit_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 4
             additional: {  }
         third_party_settings: {  }
       -
@@ -381,6 +432,14 @@ content:
     third_party_settings: {  }
     weight: 131
     region: content
+  field_groups_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 132
+    region: content
   field_pbc_ref_group:
     type: pbf_formatter_default
     label: above
@@ -556,6 +615,22 @@ content:
       link: true
     third_party_settings: {  }
     weight: 126
+    region: content
+  field_users_with_edit_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 134
+    region: content
+  field_users_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 133
     region: content
   links:
     settings: {  }

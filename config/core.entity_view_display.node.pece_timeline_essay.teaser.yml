@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_timeline_essay.body
     - field.field.node.pece_timeline_essay.field_ark_enabled
+    - field.field.node.pece_timeline_essay.field_groups_with_view_access
     - field.field.node.pece_timeline_essay.field_pbc_ref_group
     - field.field.node.pece_timeline_essay.field_pbc_ref_role
     - field.field.node.pece_timeline_essay.field_pbc_ref_user
@@ -17,6 +18,8 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_timeline_essay_items
     - field.field.node.pece_timeline_essay.field_timeline_essay_tags
     - field.field.node.pece_timeline_essay.field_timeline_essay_thumbnail
+    - field.field.node.pece_timeline_essay.field_users_with_edit_access
+    - field.field.node.pece_timeline_essay.field_users_with_view_access
     - node.type.pece_timeline_essay
   module:
     - text
@@ -43,6 +46,7 @@ content:
     region: content
 hidden:
   field_ark_enabled: true
+  field_groups_with_view_access: true
   field_pbc_ref_group: true
   field_pbc_ref_role: true
   field_pbc_ref_user: true
@@ -54,5 +58,7 @@ hidden:
   field_timeline_essay_items: true
   field_timeline_essay_tags: true
   field_timeline_essay_thumbnail: true
+  field_users_with_edit_access: true
+  field_users_with_view_access: true
   langcode: true
   search_api_excerpt: true

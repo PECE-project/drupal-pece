@@ -6,6 +6,8 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_project.body
     - field.field.node.pece_project.field_ark_enabled
+    - field.field.node.pece_project.field_fieldsites
+    - field.field.node.pece_project.field_groups_with_view_access
     - field.field.node.pece_project.field_pbc_ref_group
     - field.field.node.pece_project.field_pbc_ref_role
     - field.field.node.pece_project.field_pbc_ref_user
@@ -26,6 +28,8 @@ dependencies:
     - field.field.node.pece_project.field_project_struct_analytics
     - field.field.node.pece_project.field_project_subst_logic
     - field.field.node.pece_project.field_project_tags
+    - field.field.node.pece_project.field_users_with_edit_access
+    - field.field.node.pece_project.field_users_with_view_access
     - node.type.pece_project
   module:
     - text
@@ -53,6 +57,7 @@ content:
 hidden:
   field_ark_enabled: true
   field_fieldsites: true
+  field_groups_with_view_access: true
   field_pbc_ref_group: true
   field_pbc_ref_role: true
   field_pbc_ref_user: true
@@ -73,6 +78,8 @@ hidden:
   field_project_struct_analytics: true
   field_project_subst_logic: true
   field_project_tags: true
+  field_users_with_edit_access: true
+  field_users_with_view_access: true
   langcode: true
   og_audience: true
   search_api_excerpt: true

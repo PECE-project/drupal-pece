@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_timeline_essay.body
     - field.field.node.pece_timeline_essay.field_ark_enabled
+    - field.field.node.pece_timeline_essay.field_groups_with_view_access
     - field.field.node.pece_timeline_essay.field_pbc_ref_group
     - field.field.node.pece_timeline_essay.field_pbc_ref_role
     - field.field.node.pece_timeline_essay.field_pbc_ref_user
@@ -16,6 +17,8 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_timeline_essay_items
     - field.field.node.pece_timeline_essay.field_timeline_essay_tags
     - field.field.node.pece_timeline_essay.field_timeline_essay_thumbnail
+    - field.field.node.pece_timeline_essay.field_users_with_edit_access
+    - field.field.node.pece_timeline_essay.field_users_with_view_access
     - node.type.pece_timeline_essay
   module:
     - entity_reference_revisions
@@ -45,6 +48,14 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 2
+    region: content
+  field_groups_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 10
     region: content
   field_pece_all_can_view:
     type: boolean
@@ -95,6 +106,22 @@ content:
       link: true
     third_party_settings: {  }
     weight: 6
+    region: content
+  field_users_with_edit_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_users_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 11
     region: content
 hidden:
   field_pbc_ref_group: true

@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_photo_essay.body
     - field.field.node.pece_photo_essay.field_ark_enabled
+    - field.field.node.pece_photo_essay.field_groups_with_view_access
     - field.field.node.pece_photo_essay.field_pbc_ref_group
     - field.field.node.pece_photo_essay.field_pbc_ref_role
     - field.field.node.pece_photo_essay.field_pbc_ref_user
@@ -16,6 +17,8 @@ dependencies:
     - field.field.node.pece_photo_essay.field_photo_essay_items
     - field.field.node.pece_photo_essay.field_photo_essay_tags
     - field.field.node.pece_photo_essay.field_photo_essay_thumbnail
+    - field.field.node.pece_photo_essay.field_users_with_edit_access
+    - field.field.node.pece_photo_essay.field_users_with_view_access
     - node.type.pece_photo_essay
   module:
     - entity_reference_revisions
@@ -222,6 +225,54 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 0
             additional: {  }
+          f9e1e5c2-0e44-4d03-8881-7304c29d3172:
+            uuid: f9e1e5c2-0e44-4d03-8881-7304c29d3172
+            region: first
+            configuration:
+              id: 'field_block:node:pece_photo_essay:field_groups_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          74671ef9-23bb-4cdd-b531-8a3f63c5cf67:
+            uuid: 74671ef9-23bb-4cdd-b531-8a3f63c5cf67
+            region: first
+            configuration:
+              id: 'field_block:node:pece_photo_essay:field_users_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          44fa5628-b828-418f-9395-dba6ba202f20:
+            uuid: 44fa5628-b828-418f-9395-dba6ba202f20
+            region: first
+            configuration:
+              id: 'field_block:node:pece_photo_essay:field_users_with_edit_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
         third_party_settings: {  }
 _core:
   default_config_hash: ZuzVWCgO_W_iehkfkdJmLPf9kpj4qteTeTxUW9hfMkM
@@ -247,6 +298,14 @@ content:
     third_party_settings: {  }
     weight: 113
     region: content
+  field_groups_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 120
+    region: first
   field_pbc_ref_group:
     type: pbf_formatter_default
     label: above
@@ -340,6 +399,22 @@ content:
     third_party_settings: {  }
     weight: 116
     region: content
+  field_users_with_edit_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 122
+    region: first
+  field_users_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 121
+    region: first
   links:
     settings: {  }
     third_party_settings: {  }

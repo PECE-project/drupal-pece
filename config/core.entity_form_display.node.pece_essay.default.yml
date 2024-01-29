@@ -9,12 +9,15 @@ dependencies:
     - field.field.node.pece_essay.field_essay_contributors
     - field.field.node.pece_essay.field_essay_tags
     - field.field.node.pece_essay.field_essay_thumbnail
+    - field.field.node.pece_essay.field_groups_with_view_access
     - field.field.node.pece_essay.field_pbc_ref_group
     - field.field.node.pece_essay.field_pbc_ref_role
     - field.field.node.pece_essay.field_pbc_ref_user
     - field.field.node.pece_essay.field_pece_all_can_view
     - field.field.node.pece_essay.field_pece_license
     - field.field.node.pece_essay.field_pece_project_ref
+    - field.field.node.pece_essay.field_users_with_edit_access
+    - field.field.node.pece_essay.field_users_with_view_access
     - field.field.node.pece_essay.layout_builder__layout
     - image.style.thumbnail
     - node.type.pece_essay
@@ -23,15 +26,15 @@ dependencies:
     - image
     - paragraphs
     - path
-    - pbf
     - text
 third_party_settings:
   field_group:
     group_permissions:
       children:
         - field_pece_all_can_view
-        - group_or
-        - group_and
+        - field_groups_with_view_access
+        - field_users_with_view_access
+        - field_users_with_edit_access
       label: Permissions
       region: content
       parent_name: ''
@@ -48,9 +51,9 @@ third_party_settings:
       children:
         - field_pbc_ref_user
       label: OR
-      region: content
-      parent_name: group_permissions
-      weight: 21
+      region: hidden
+      parent_name: ''
+      weight: 20
       format_type: details
       format_settings:
         classes: ''
@@ -64,9 +67,9 @@ third_party_settings:
         - field_pbc_ref_role
         - field_pbc_ref_group
       label: AND
-      region: content
-      parent_name: group_permissions
-      weight: 22
+      region: hidden
+      parent_name: ''
+      weight: 21
       format_type: details
       format_settings:
         classes: ''
@@ -145,50 +148,15 @@ content:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-  field_pbc_ref_group:
-    type: pbf_widget
-    weight: 16
+  field_groups_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 21
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
-      size: '60'
+      size: 60
       placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
-    third_party_settings: {  }
-  field_pbc_ref_role:
-    type: pbf_widget
-    weight: 15
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
-    third_party_settings: {  }
-  field_pbc_ref_user:
-    type: pbf_widget
-    weight: 14
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
     third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
@@ -210,6 +178,26 @@ content:
   field_pece_project_ref:
     type: entity_reference_autocomplete
     weight: 12
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_users_with_edit_access:
+    type: entity_reference_autocomplete
+    weight: 23
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_users_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 22
     region: content
     settings:
       match_operator: CONTAINS
@@ -270,4 +258,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  field_pbc_ref_group: true
+  field_pbc_ref_role: true
+  field_pbc_ref_user: true
   layout_builder__layout: true

@@ -1,0 +1,29 @@
+uuid: f0a722b0-1b99-4258-bfa0-248553dbd818
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_groups_with_view_access
+    - node.type.pece_photo_essay
+    - taxonomy.vocabulary.groups_vocab
+id: node.pece_photo_essay.field_groups_with_view_access
+field_name: field_groups_with_view_access
+entity_type: node
+bundle: pece_photo_essay
+label: 'Groups with view access'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      groups_vocab: groups_vocab
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

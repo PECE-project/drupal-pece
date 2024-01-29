@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_memo.body
+    - field.field.node.pece_memo.field_groups_with_view_access
     - field.field.node.pece_memo.field_pbc_ref_group
     - field.field.node.pece_memo.field_pbc_ref_role
     - field.field.node.pece_memo.field_pbc_ref_user
@@ -11,6 +12,8 @@ dependencies:
     - field.field.node.pece_memo.field_pece_contributors
     - field.field.node.pece_memo.field_pece_tags
     - field.field.node.pece_memo.field_pece_uri
+    - field.field.node.pece_memo.field_users_with_edit_access
+    - field.field.node.pece_memo.field_users_with_view_access
     - node.type.pece_memo
   module:
     - pbf
@@ -29,6 +32,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_groups_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 9
     region: content
   field_pbc_ref_group:
     type: pbf_formatter_default
@@ -87,6 +98,22 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_users_with_edit_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_users_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 10
     region: content
 hidden:
   langcode: true
