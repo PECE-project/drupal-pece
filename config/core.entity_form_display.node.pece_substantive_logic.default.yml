@@ -10,7 +10,7 @@ dependencies:
     - field.field.node.pece_substantive_logic.field_subst_logic_tags
     - field.field.node.pece_substantive_logic.field_subst_logic_thumbnail
     - field.field.node.pece_substantive_logic.field_subst_logic_uri
-    - field.field.node.pece_substantive_logic.field_users_with_edit_access
+    - field.field.node.pece_substantive_logic.field_contributors
     - image.style.thumbnail
     - node.type.pece_substantive_logic
   module:
@@ -23,7 +23,7 @@ third_party_settings:
   field_group:
     group_permissions:
       children:
-        - field_users_with_edit_access
+        - field_contributors
       label: Permissions
       region: content
       parent_name: ''
@@ -103,7 +103,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_users_with_edit_access:
+  field_contributors:
     type: entity_reference_autocomplete
     weight: 8
     region: content

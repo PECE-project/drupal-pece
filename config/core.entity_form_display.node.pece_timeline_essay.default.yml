@@ -17,7 +17,7 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_timeline_essay_items
     - field.field.node.pece_timeline_essay.field_timeline_essay_tags
     - field.field.node.pece_timeline_essay.field_timeline_essay_thumbnail
-    - field.field.node.pece_timeline_essay.field_users_with_edit_access
+    - field.field.node.pece_timeline_essay.field_contributors
     - field.field.node.pece_timeline_essay.field_users_with_view_access
     - image.style.thumbnail
     - node.type.pece_timeline_essay
@@ -35,7 +35,7 @@ third_party_settings:
         - field_pece_all_can_view
         - field_groups_with_view_access
         - field_users_with_view_access
-        - field_users_with_edit_access
+        - field_contributors
       label: Permissions
       region: content
       parent_name: ''
@@ -192,7 +192,7 @@ content:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-  field_users_with_edit_access:
+  field_contributors:
     type: entity_reference_autocomplete
     weight: 26
     region: content

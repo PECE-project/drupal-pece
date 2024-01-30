@@ -27,7 +27,7 @@ dependencies:
     - field.field.node.pece_project.field_project_struct_analytics
     - field.field.node.pece_project.field_project_subst_logic
     - field.field.node.pece_project.field_project_tags
-    - field.field.node.pece_project.field_users_with_edit_access
+    - field.field.node.pece_project.field_contributors
     - field.field.node.pece_project.field_users_with_view_access
     - node.type.pece_project
   module:
@@ -129,7 +129,7 @@ third_party_settings:
             uuid: 419a8ac7-16b4-47db-9668-09955b247ed3
             region: content
             configuration:
-              id: 'field_block:node:pece_project:field_users_with_edit_access'
+              id: 'field_block:node:pece_project:field_contributors'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -616,7 +616,7 @@ content:
     third_party_settings: {  }
     weight: 126
     region: content
-  field_users_with_edit_access:
+  field_contributors:
     type: entity_reference_label
     label: above
     settings:

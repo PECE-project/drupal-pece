@@ -11,7 +11,7 @@ dependencies:
     - field.field.node.pece_artifact_website.field_pece_all_can_view
     - field.field.node.pece_artifact_website.field_pece_license
     - field.field.node.pece_artifact_website.field_pece_project_ref
-    - field.field.node.pece_artifact_website.field_users_with_edit_access
+    - field.field.node.pece_artifact_website.field_contributors
     - field.field.node.pece_artifact_website.field_users_with_view_access
     - field.field.node.pece_artifact_website.field_website_authors
     - field.field.node.pece_artifact_website.field_website_bibliography
@@ -317,7 +317,7 @@ third_party_settings:
             uuid: 6ac5489a-8f6d-4bd5-8bcf-d502b465fbda
             region: first
             configuration:
-              id: 'field_block:node:pece_artifact_website:field_users_with_edit_access'
+              id: 'field_block:node:pece_artifact_website:field_contributors'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -419,7 +419,7 @@ content:
     third_party_settings: {  }
     weight: 116
     region: content
-  field_users_with_edit_access:
+  field_contributors:
     type: entity_reference_label
     label: above
     settings:
