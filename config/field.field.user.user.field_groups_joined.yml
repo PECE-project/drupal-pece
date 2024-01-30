@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.user.field_groups_joined
-    - taxonomy.vocabulary.groups_vocab
+    - taxonomy.vocabulary.groups
   module:
     - user
 id: user.user.field_groups_joined
@@ -21,7 +21,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      groups_vocab: groups_vocab
+      groups: groups
     sort:
       field: name
       direction: asc

@@ -3,16 +3,16 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.groups_vocab.field_group_visibility
-    - field.field.taxonomy_term.groups_vocab.field_pece_project_ref
-    - field.field.taxonomy_term.groups_vocab.field_substantive_logic
-    - taxonomy.vocabulary.groups_vocab
+    - field.field.taxonomy_term.groups.field_group_visibility
+    - field.field.taxonomy_term.groups.field_pece_project_ref
+    - field.field.taxonomy_term.groups.field_substantive_logic
+    - taxonomy.vocabulary.groups
   module:
     - options
     - text
-id: taxonomy_term.groups_vocab.default
+id: taxonomy_term.groups.default
 targetEntityType: taxonomy_term
-bundle: groups_vocab
+bundle: groups
 mode: default
 content:
   description:

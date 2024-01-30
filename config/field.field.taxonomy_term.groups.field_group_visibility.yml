@@ -4,13 +4,13 @@ status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_group_visibility
-    - taxonomy.vocabulary.groups_vocab
+    - taxonomy.vocabulary.groups
   module:
     - options
-id: taxonomy_term.groups_vocab.field_group_visibility
+id: taxonomy_term.groups.field_group_visibility
 field_name: field_group_visibility
 entity_type: taxonomy_term
-bundle: groups_vocab
+bundle: groups
 label: 'Group visibility'
 description: 'This determines whether the group can be viewed by all site visitors or only by its own members. It does not determine the visibility of group content.'
 required: true
