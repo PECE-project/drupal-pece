@@ -24,7 +24,7 @@ dependencies:
     - field.field.node.artifact_tabular_data.field_tabular_source
     - field.field.node.artifact_tabular_data.field_tabular_tags
     - field.field.node.artifact_tabular_data.field_contributors
-    - field.field.node.artifact_tabular_data.field_users_with_view_access
+    - field.field.node.artifact_tabular_data.field_people_with_view_access
     - node.type.artifact_tabular_data
   module:
     - address
@@ -40,7 +40,7 @@ third_party_settings:
       children:
         - field_pece_all_can_view
         - field_groups_with_view_access
-        - field_users_with_view_access
+        - field_people_with_view_access
         - field_contributors
       label: Permissions
       region: content
@@ -249,7 +249,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_users_with_view_access:
+  field_people_with_view_access:
     type: entity_reference_autocomplete
     weight: 29
     region: content

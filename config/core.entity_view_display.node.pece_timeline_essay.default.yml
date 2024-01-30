@@ -18,7 +18,7 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_timeline_essay_tags
     - field.field.node.pece_timeline_essay.field_timeline_essay_thumbnail
     - field.field.node.pece_timeline_essay.field_contributors
-    - field.field.node.pece_timeline_essay.field_users_with_view_access
+    - field.field.node.pece_timeline_essay.field_people_with_view_access
     - node.type.pece_timeline_essay
   module:
     - entity_reference_revisions
@@ -115,7 +115,7 @@ content:
     third_party_settings: {  }
     weight: 12
     region: content
-  field_users_with_view_access:
+  field_people_with_view_access:
     type: entity_reference_label
     label: above
     settings:

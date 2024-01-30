@@ -9,7 +9,7 @@ dependencies:
     - field.field.node.group.field_groups_with_view_access
     - field.field.node.group.field_pece_project_ref
     - field.field.node.group.field_contributors
-    - field.field.node.group.field_users_with_view_access
+    - field.field.node.group.field_people_with_view_access
     - node.type.group
   module:
     - layout_builder
@@ -104,7 +104,7 @@ third_party_settings:
             uuid: b3424e1e-23c3-4e37-b6e4-08cdceeee3da
             region: first
             configuration:
-              id: 'field_block:node:group:field_users_with_view_access'
+              id: 'field_block:node:group:field_people_with_view_access'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -186,7 +186,7 @@ content:
     third_party_settings: {  }
     weight: 105
     region: first
-  field_users_with_view_access:
+  field_people_with_view_access:
     type: entity_reference_label
     label: above
     settings:

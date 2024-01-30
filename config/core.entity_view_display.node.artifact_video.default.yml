@@ -12,7 +12,7 @@ dependencies:
     - field.field.node.artifact_video.field_pece_license
     - field.field.node.artifact_video.field_pece_project_ref
     - field.field.node.artifact_video.field_contributors
-    - field.field.node.artifact_video.field_users_with_view_access
+    - field.field.node.artifact_video.field_people_with_view_access
     - field.field.node.artifact_video.field_video_authors
     - field.field.node.artifact_video.field_video_contributors
     - field.field.node.artifact_video.field_video_created_date
@@ -339,7 +339,7 @@ third_party_settings:
             uuid: af3f2f18-9f92-4c1a-b4e2-22e9b1cfe556
             region: first
             configuration:
-              id: 'field_block:node:artifact_video:field_users_with_view_access'
+              id: 'field_block:node:artifact_video:field_people_with_view_access'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -465,7 +465,7 @@ content:
     third_party_settings: {  }
     weight: 128
     region: first
-  field_users_with_view_access:
+  field_people_with_view_access:
     type: entity_reference_label
     label: above
     settings:

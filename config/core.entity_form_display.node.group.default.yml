@@ -9,7 +9,7 @@ dependencies:
     - field.field.node.group.field_groups_with_view_access
     - field.field.node.group.field_pece_project_ref
     - field.field.node.group.field_contributors
-    - field.field.node.group.field_users_with_view_access
+    - field.field.node.group.field_people_with_view_access
     - node.type.group
   module:
     - path
@@ -83,7 +83,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_users_with_view_access:
+  field_people_with_view_access:
     type: entity_reference_autocomplete
     weight: 14
     region: content

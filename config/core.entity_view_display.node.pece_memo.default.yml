@@ -13,7 +13,7 @@ dependencies:
     - field.field.node.pece_memo.field_pece_tags
     - field.field.node.pece_memo.field_pece_uri
     - field.field.node.pece_memo.field_contributors
-    - field.field.node.pece_memo.field_users_with_view_access
+    - field.field.node.pece_memo.field_people_with_view_access
     - node.type.pece_memo
   module:
     - pbf
@@ -107,7 +107,7 @@ content:
     third_party_settings: {  }
     weight: 11
     region: content
-  field_users_with_view_access:
+  field_people_with_view_access:
     type: entity_reference_label
     label: above
     settings:

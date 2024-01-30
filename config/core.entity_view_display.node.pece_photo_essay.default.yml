@@ -18,7 +18,7 @@ dependencies:
     - field.field.node.pece_photo_essay.field_photo_essay_tags
     - field.field.node.pece_photo_essay.field_photo_essay_thumbnail
     - field.field.node.pece_photo_essay.field_contributors
-    - field.field.node.pece_photo_essay.field_users_with_view_access
+    - field.field.node.pece_photo_essay.field_people_with_view_access
     - node.type.pece_photo_essay
   module:
     - entity_reference_revisions
@@ -245,7 +245,7 @@ third_party_settings:
             uuid: 74671ef9-23bb-4cdd-b531-8a3f63c5cf67
             region: first
             configuration:
-              id: 'field_block:node:pece_photo_essay:field_users_with_view_access'
+              id: 'field_block:node:pece_photo_essay:field_people_with_view_access'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -407,7 +407,7 @@ content:
     third_party_settings: {  }
     weight: 122
     region: first
-  field_users_with_view_access:
+  field_people_with_view_access:
     type: entity_reference_label
     label: above
     settings:

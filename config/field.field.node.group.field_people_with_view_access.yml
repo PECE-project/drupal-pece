@@ -1,14 +1,14 @@
-uuid: 7bcb1f23-6a7d-4c80-8d60-bfc55876e958
+uuid: 9d893367-86e0-45cc-a562-ebbb57cf686d
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_users_with_view_access
-    - node.type.pece_artifact_text
-id: node.pece_artifact_text.field_users_with_view_access
-field_name: field_users_with_view_access
+    - field.storage.node.field_people_with_view_access
+    - node.type.group
+id: node.group.field_people_with_view_access
+field_name: field_people_with_view_access
 entity_type: node
-bundle: pece_artifact_text
+bundle: group
 label: 'People with view access'
 description: ''
 required: false

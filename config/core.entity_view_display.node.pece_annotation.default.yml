@@ -16,7 +16,7 @@ dependencies:
     - field.field.node.pece_annotation.field_pece_geolocation
     - field.field.node.pece_annotation.field_pece_license
     - field.field.node.pece_annotation.field_contributors
-    - field.field.node.pece_annotation.field_users_with_view_access
+    - field.field.node.pece_annotation.field_people_with_view_access
     - node.type.pece_annotation
   module:
     - geolocation
@@ -134,7 +134,7 @@ content:
     third_party_settings: {  }
     weight: 115
     region: content
-  field_users_with_view_access:
+  field_people_with_view_access:
     type: entity_reference_label
     label: above
     settings:

@@ -23,7 +23,7 @@ dependencies:
     - field.field.node.pece_artifact_text.field_text_tags
     - field.field.node.pece_artifact_text.field_text_use_fieldsite_local
     - field.field.node.pece_artifact_text.field_contributors
-    - field.field.node.pece_artifact_text.field_users_with_view_access
+    - field.field.node.pece_artifact_text.field_people_with_view_access
     - node.type.pece_artifact_text
   module:
     - address
@@ -272,7 +272,7 @@ third_party_settings:
             uuid: 262fef5f-93d6-4c73-92bf-68c06dd4a905
             region: first
             configuration:
-              id: 'field_block:node:pece_artifact_text:field_users_with_view_access'
+              id: 'field_block:node:pece_artifact_text:field_people_with_view_access'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -489,7 +489,7 @@ content:
     third_party_settings: {  }
     weight: 130
     region: first
-  field_users_with_view_access:
+  field_people_with_view_access:
     type: entity_reference_label
     label: above
     settings:

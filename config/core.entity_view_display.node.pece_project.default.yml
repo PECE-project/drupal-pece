@@ -28,7 +28,7 @@ dependencies:
     - field.field.node.pece_project.field_project_subst_logic
     - field.field.node.pece_project.field_project_tags
     - field.field.node.pece_project.field_contributors
-    - field.field.node.pece_project.field_users_with_view_access
+    - field.field.node.pece_project.field_people_with_view_access
     - node.type.pece_project
   module:
     - datetime_range
@@ -113,7 +113,7 @@ third_party_settings:
             uuid: 4700eb8f-9c50-45f7-a7ce-ee6ef2019e66
             region: content
             configuration:
-              id: 'field_block:node:pece_project:field_users_with_view_access'
+              id: 'field_block:node:pece_project:field_people_with_view_access'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -624,7 +624,7 @@ content:
     third_party_settings: {  }
     weight: 134
     region: content
-  field_users_with_view_access:
+  field_people_with_view_access:
     type: entity_reference_label
     label: above
     settings:

@@ -23,7 +23,7 @@ dependencies:
     - field.field.node.pece_artifact_text.field_text_tags
     - field.field.node.pece_artifact_text.field_text_use_fieldsite_local
     - field.field.node.pece_artifact_text.field_contributors
-    - field.field.node.pece_artifact_text.field_users_with_view_access
+    - field.field.node.pece_artifact_text.field_people_with_view_access
     - node.type.pece_artifact_text
   module:
     - address
@@ -38,7 +38,7 @@ third_party_settings:
       children:
         - field_pece_all_can_view
         - field_groups_with_view_access
-        - field_users_with_view_access
+        - field_people_with_view_access
         - field_contributors
       label: Permissions
       region: content
@@ -241,7 +241,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_users_with_view_access:
+  field_people_with_view_access:
     type: entity_reference_autocomplete
     weight: 18
     region: content

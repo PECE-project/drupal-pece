@@ -16,7 +16,7 @@ dependencies:
     - field.field.node.pece_annotation.field_pece_geolocation
     - field.field.node.pece_annotation.field_pece_license
     - field.field.node.pece_annotation.field_contributors
-    - field.field.node.pece_annotation.field_users_with_view_access
+    - field.field.node.pece_annotation.field_people_with_view_access
     - node.type.pece_annotation
   module:
     - field_group
@@ -29,7 +29,7 @@ third_party_settings:
       children:
         - field_pece_all_can_view
         - field_groups_with_view_access
-        - field_users_with_view_access
+        - field_people_with_view_access
         - field_contributors
       label: Permissions
       region: content
@@ -177,7 +177,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_users_with_view_access:
+  field_people_with_view_access:
     type: entity_reference_autocomplete
     weight: 25
     region: content
