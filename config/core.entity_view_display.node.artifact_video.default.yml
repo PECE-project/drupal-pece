@@ -399,6 +399,14 @@ content:
     third_party_settings: {  }
     weight: 119
     region: content
+  field_contributors:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 128
+    region: first
   field_groups_with_view_access:
     type: entity_reference_label
     label: above
@@ -457,14 +465,6 @@ content:
     third_party_settings: {  }
     weight: 113
     region: content
-  field_contributors:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 128
-    region: first
   field_people_with_view_access:
     type: entity_reference_label
     label: above

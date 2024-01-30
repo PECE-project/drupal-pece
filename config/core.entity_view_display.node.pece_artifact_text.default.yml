@@ -341,6 +341,14 @@ content:
     third_party_settings: {  }
     weight: 113
     region: content
+  field_contributors:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 130
+    region: first
   field_groups_with_view_access:
     type: entity_reference_label
     label: above
@@ -399,6 +407,14 @@ content:
     third_party_settings: {  }
     weight: 109
     region: content
+  field_people_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 129
+    region: first
   field_text_authors:
     type: entity_reference_label
     label: above
@@ -481,22 +497,6 @@ content:
     third_party_settings: {  }
     weight: 123
     region: content
-  field_contributors:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 130
-    region: first
-  field_people_with_view_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 129
-    region: first
   links:
     settings: {  }
     third_party_settings: {  }

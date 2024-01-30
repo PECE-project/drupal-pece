@@ -298,6 +298,14 @@ content:
     third_party_settings: {  }
     weight: 113
     region: content
+  field_contributors:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 122
+    region: first
   field_groups_with_view_access:
     type: entity_reference_label
     label: above
@@ -363,6 +371,14 @@ content:
     third_party_settings: {  }
     weight: 111
     region: content
+  field_people_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 121
+    region: first
   field_photo_essay_contributor:
     type: entity_reference_label
     label: above
@@ -399,22 +415,6 @@ content:
     third_party_settings: {  }
     weight: 116
     region: content
-  field_contributors:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 122
-    region: first
-  field_people_with_view_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 121
-    region: first
   links:
     settings: {  }
     third_party_settings: {  }

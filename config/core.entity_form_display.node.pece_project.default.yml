@@ -119,6 +119,16 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  field_contributors:
+    type: entity_reference_autocomplete
+    weight: 30
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_fieldsites:
     type: entity_reference_autocomplete
     weight: 17
@@ -196,6 +206,16 @@ content:
     weight: 18
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_people_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 29
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_project_consent_form_file:
     type: file_generic
@@ -320,26 +340,6 @@ content:
   field_project_tags:
     type: entity_reference_autocomplete
     weight: 20
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_contributors:
-    type: entity_reference_autocomplete
-    weight: 30
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_people_with_view_access:
-    type: entity_reference_autocomplete
-    weight: 29
     region: content
     settings:
       match_operator: CONTAINS
