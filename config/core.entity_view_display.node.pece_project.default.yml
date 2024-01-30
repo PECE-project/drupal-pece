@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_project.body
     - field.field.node.pece_project.field_ark_enabled
+    - field.field.node.pece_project.field_contributors
     - field.field.node.pece_project.field_fieldsites
     - field.field.node.pece_project.field_groups_with_view_access
     - field.field.node.pece_project.field_pbc_ref_group
@@ -12,8 +13,8 @@ dependencies:
     - field.field.node.pece_project.field_pbc_ref_user
     - field.field.node.pece_project.field_pece_all_can_view
     - field.field.node.pece_project.field_pece_geolocation
+    - field.field.node.pece_project.field_people_with_view_access
     - field.field.node.pece_project.field_project_consent_form_file
-    - field.field.node.pece_project.field_project_contributors
     - field.field.node.pece_project.field_project_design_group
     - field.field.node.pece_project.field_project_featured_essays
     - field.field.node.pece_project.field_project_fund_agency_link
@@ -27,8 +28,6 @@ dependencies:
     - field.field.node.pece_project.field_project_struct_analytics
     - field.field.node.pece_project.field_project_subst_logic
     - field.field.node.pece_project.field_project_tags
-    - field.field.node.pece_project.field_contributors
-    - field.field.node.pece_project.field_people_with_view_access
     - node.type.pece_project
   module:
     - datetime_range
@@ -328,25 +327,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 5
             additional: {  }
-          2a1be2d5-9734-440b-88d9-4168fdd0f42c:
-            uuid: 2a1be2d5-9734-440b-88d9-4168fdd0f42c
-            region: first
-            configuration:
-              id: 'field_block:node:pece_project:field_project_contributors'
-              label: Contributors
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 3
-            additional: {  }
           92052ba4-6d01-4ba8-b429-02e4e09e6462:
             uuid: 92052ba4-6d01-4ba8-b429-02e4e09e6462
             region: third
@@ -504,14 +484,6 @@ content:
       use_description_as_link_text: true
     third_party_settings: {  }
     weight: 113
-    region: content
-  field_project_contributors:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 122
     region: content
   field_project_design_group:
     type: entity_reference_label

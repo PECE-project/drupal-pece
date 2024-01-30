@@ -5,8 +5,8 @@ dependencies:
   config:
     - field.field.node.pece_essay.body
     - field.field.node.pece_essay.field_ark_enabled
+    - field.field.node.pece_essay.field_contributors
     - field.field.node.pece_essay.field_essay_contents
-    - field.field.node.pece_essay.field_essay_contributors
     - field.field.node.pece_essay.field_essay_tags
     - field.field.node.pece_essay.field_essay_thumbnail
     - field.field.node.pece_essay.field_groups_with_view_access
@@ -16,7 +16,6 @@ dependencies:
     - field.field.node.pece_essay.field_pece_all_can_view
     - field.field.node.pece_essay.field_pece_license
     - field.field.node.pece_essay.field_pece_project_ref
-    - field.field.node.pece_essay.field_contributors
     - field.field.node.pece_essay.field_people_with_view_access
     - field.field.node.pece_essay.layout_builder__layout
     - node.type.pece_essay
@@ -111,25 +110,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 0
             additional: {  }
-          ca062031-4b0f-46be-9c4c-6bfba8bd9f43:
-            uuid: ca062031-4b0f-46be-9c4c-6bfba8bd9f43
-            region: second
-            configuration:
-              id: 'field_block:node:pece_essay:field_essay_contributors'
-              label: Contributors
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 1
-            additional: {  }
           57881400-b64c-4f24-b684-04ae84528aa8:
             uuid: 57881400-b64c-4f24-b684-04ae84528aa8
             region: second
@@ -192,22 +172,6 @@ third_party_settings:
                 settings: {  }
                 third_party_settings: {  }
             weight: 1
-            additional: {  }
-          3cfd3dcc-04c3-46e0-bcc6-d64e6dda93cf:
-            uuid: 3cfd3dcc-04c3-46e0-bcc6-d64e6dda93cf
-            region: content
-            configuration:
-              id: 'field_block:node:pece_essay:field_essay_contributors'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 2
             additional: {  }
           1f9ddd7a-952b-4d82-8458-4b83cfc43ac7:
             uuid: 1f9ddd7a-952b-4d82-8458-4b83cfc43ac7
@@ -483,14 +447,6 @@ content:
       link: ''
     third_party_settings: {  }
     weight: 109
-    region: content
-  field_essay_contributors:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 103
     region: content
   field_essay_tags:
     type: entity_reference_label

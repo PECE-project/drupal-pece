@@ -4,9 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_image.field_ark_enabled
+    - field.field.node.pece_artifact_image.field_contributors
     - field.field.node.pece_artifact_image.field_groups_with_view_access
     - field.field.node.pece_artifact_image.field_image_authors
-    - field.field.node.pece_artifact_image.field_image_contributors
     - field.field.node.pece_artifact_image.field_image_created_date
     - field.field.node.pece_artifact_image.field_image_crit_commentary
     - field.field.node.pece_artifact_image.field_image_fieldsite
@@ -24,7 +24,6 @@ dependencies:
     - field.field.node.pece_artifact_image.field_pece_license
     - field.field.node.pece_artifact_image.field_pece_media_image
     - field.field.node.pece_artifact_image.field_pece_project_ref
-    - field.field.node.pece_artifact_image.field_contributors
     - field.field.node.pece_artifact_image.field_people_with_view_access
     - node.type.pece_artifact_image
   module:
@@ -128,16 +127,6 @@ content:
   field_image_authors:
     type: entity_reference_autocomplete
     weight: 9
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_image_contributors:
-    type: entity_reference_autocomplete
-    weight: 3
     region: content
     settings:
       match_operator: CONTAINS

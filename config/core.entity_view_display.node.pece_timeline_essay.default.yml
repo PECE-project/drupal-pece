@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_timeline_essay.body
     - field.field.node.pece_timeline_essay.field_ark_enabled
+    - field.field.node.pece_timeline_essay.field_contributors
     - field.field.node.pece_timeline_essay.field_groups_with_view_access
     - field.field.node.pece_timeline_essay.field_pbc_ref_group
     - field.field.node.pece_timeline_essay.field_pbc_ref_role
@@ -13,12 +14,10 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_pece_geolocation
     - field.field.node.pece_timeline_essay.field_pece_license
     - field.field.node.pece_timeline_essay.field_pece_project_ref
-    - field.field.node.pece_timeline_essay.field_timeline_essay_contributor
+    - field.field.node.pece_timeline_essay.field_people_with_view_access
     - field.field.node.pece_timeline_essay.field_timeline_essay_items
     - field.field.node.pece_timeline_essay.field_timeline_essay_tags
     - field.field.node.pece_timeline_essay.field_timeline_essay_thumbnail
-    - field.field.node.pece_timeline_essay.field_contributors
-    - field.field.node.pece_timeline_essay.field_people_with_view_access
     - node.type.pece_timeline_essay
   module:
     - entity_reference_revisions
@@ -97,14 +96,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 11
-    region: content
-  field_timeline_essay_contributor:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 5
     region: content
   field_timeline_essay_items:
     type: entity_reference_revisions_entity_view

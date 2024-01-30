@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.artifact_video.field_ark_enabled
+    - field.field.node.artifact_video.field_contributors
     - field.field.node.artifact_video.field_groups_with_view_access
     - field.field.node.artifact_video.field_pbc_ref_group
     - field.field.node.artifact_video.field_pbc_ref_role
@@ -11,10 +12,8 @@ dependencies:
     - field.field.node.artifact_video.field_pece_all_can_view
     - field.field.node.artifact_video.field_pece_license
     - field.field.node.artifact_video.field_pece_project_ref
-    - field.field.node.artifact_video.field_contributors
     - field.field.node.artifact_video.field_people_with_view_access
     - field.field.node.artifact_video.field_video_authors
-    - field.field.node.artifact_video.field_video_contributors
     - field.field.node.artifact_video.field_video_created_date
     - field.field.node.artifact_video.field_video_crit_commentary
     - field.field.node.artifact_video.field_video_duration
@@ -165,16 +164,6 @@ content:
   field_video_authors:
     type: entity_reference_autocomplete
     weight: 9
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_video_contributors:
-    type: entity_reference_autocomplete
-    weight: 4
     region: content
     settings:
       match_operator: CONTAINS

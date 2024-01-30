@@ -4,13 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_substantive_logic.body
+    - field.field.node.pece_substantive_logic.field_contributors
     - field.field.node.pece_substantive_logic.field_pece_all_can_view
-    - field.field.node.pece_substantive_logic.field_subst_logic_contributors
     - field.field.node.pece_substantive_logic.field_subst_logic_image_citation
     - field.field.node.pece_substantive_logic.field_subst_logic_tags
     - field.field.node.pece_substantive_logic.field_subst_logic_thumbnail
     - field.field.node.pece_substantive_logic.field_subst_logic_uri
-    - field.field.node.pece_substantive_logic.field_contributors
     - node.type.pece_substantive_logic
   module:
     - image
@@ -173,14 +172,6 @@ content:
     third_party_settings: {  }
     weight: 109
     region: first
-  field_subst_logic_contributors:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 105
-    region: content
   field_subst_logic_image_citation:
     type: link
     label: above

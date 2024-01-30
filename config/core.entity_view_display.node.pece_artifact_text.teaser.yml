@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_artifact_text.body
     - field.field.node.pece_artifact_text.field_ark_enabled
+    - field.field.node.pece_artifact_text.field_contributors
     - field.field.node.pece_artifact_text.field_groups_with_view_access
     - field.field.node.pece_artifact_text.field_pbc_ref_group
     - field.field.node.pece_artifact_text.field_pbc_ref_role
@@ -13,8 +14,8 @@ dependencies:
     - field.field.node.pece_artifact_text.field_pece_all_can_view
     - field.field.node.pece_artifact_text.field_pece_license
     - field.field.node.pece_artifact_text.field_pece_project_ref
+    - field.field.node.pece_artifact_text.field_people_with_view_access
     - field.field.node.pece_artifact_text.field_text_authors
-    - field.field.node.pece_artifact_text.field_text_contributors
     - field.field.node.pece_artifact_text.field_text_created_date
     - field.field.node.pece_artifact_text.field_text_crit_commentary
     - field.field.node.pece_artifact_text.field_text_fieldsite
@@ -23,8 +24,6 @@ dependencies:
     - field.field.node.pece_artifact_text.field_text_source
     - field.field.node.pece_artifact_text.field_text_tags
     - field.field.node.pece_artifact_text.field_text_use_fieldsite_local
-    - field.field.node.pece_artifact_text.field_contributors
-    - field.field.node.pece_artifact_text.field_people_with_view_access
     - node.type.pece_artifact_text
   module:
     - text
@@ -62,7 +61,6 @@ hidden:
   field_pece_project_ref: true
   field_people_with_view_access: true
   field_text_authors: true
-  field_text_contributors: true
   field_text_created_date: true
   field_text_crit_commentary: true
   field_text_fieldsite: true

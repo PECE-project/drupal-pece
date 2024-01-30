@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_artifact_audio.field_ark_enabled
     - field.field.node.pece_artifact_audio.field_audio_authors
-    - field.field.node.pece_artifact_audio.field_audio_contributors
     - field.field.node.pece_artifact_audio.field_audio_created_date
     - field.field.node.pece_artifact_audio.field_audio_crit_commentary
     - field.field.node.pece_artifact_audio.field_audio_duration
@@ -18,6 +17,7 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_audio_source
     - field.field.node.pece_artifact_audio.field_audio_tags
     - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
+    - field.field.node.pece_artifact_audio.field_contributors
     - field.field.node.pece_artifact_audio.field_groups_with_view_access
     - field.field.node.pece_artifact_audio.field_pbc_ref_group
     - field.field.node.pece_artifact_audio.field_pbc_ref_role
@@ -25,7 +25,6 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_pece_all_can_view
     - field.field.node.pece_artifact_audio.field_pece_license
     - field.field.node.pece_artifact_audio.field_pece_project_ref
-    - field.field.node.pece_artifact_audio.field_contributors
     - field.field.node.pece_artifact_audio.field_people_with_view_access
     - node.type.pece_artifact_audio
   module:
@@ -46,7 +45,6 @@ hidden:
   field_ark_enabled: true
   field_audio_audios: true
   field_audio_authors: true
-  field_audio_contributors: true
   field_audio_created_date: true
   field_audio_crit_commentary: true
   field_audio_duration: true

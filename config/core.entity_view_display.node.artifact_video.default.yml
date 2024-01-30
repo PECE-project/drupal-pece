@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.artifact_video.field_ark_enabled
+    - field.field.node.artifact_video.field_contributors
     - field.field.node.artifact_video.field_groups_with_view_access
     - field.field.node.artifact_video.field_pbc_ref_group
     - field.field.node.artifact_video.field_pbc_ref_role
@@ -11,10 +12,8 @@ dependencies:
     - field.field.node.artifact_video.field_pece_all_can_view
     - field.field.node.artifact_video.field_pece_license
     - field.field.node.artifact_video.field_pece_project_ref
-    - field.field.node.artifact_video.field_contributors
     - field.field.node.artifact_video.field_people_with_view_access
     - field.field.node.artifact_video.field_video_authors
-    - field.field.node.artifact_video.field_video_contributors
     - field.field.node.artifact_video.field_video_created_date
     - field.field.node.artifact_video.field_video_crit_commentary
     - field.field.node.artifact_video.field_video_duration
@@ -184,25 +183,6 @@ third_party_settings:
                   format_type: medium
                 third_party_settings: {  }
             weight: 1
-            additional: {  }
-          a269d5b8-a8a9-4c2b-bc41-5f94150cf6fa:
-            uuid: a269d5b8-a8a9-4c2b-bc41-5f94150cf6fa
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_video:field_video_contributors'
-              label: Contributors
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 2
             additional: {  }
           6395919c-9f27-4eda-bf00-e2d1a0871bac:
             uuid: 6395919c-9f27-4eda-bf00-e2d1a0871bac
@@ -480,14 +460,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 106
-    region: content
-  field_video_contributors:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 103
     region: content
   field_video_created_date:
     type: datetime_default

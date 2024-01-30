@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.field.node.pece_artifact_audio.field_ark_enabled
     - field.field.node.pece_artifact_audio.field_audio_authors
-    - field.field.node.pece_artifact_audio.field_audio_contributors
     - field.field.node.pece_artifact_audio.field_audio_created_date
     - field.field.node.pece_artifact_audio.field_audio_crit_commentary
     - field.field.node.pece_artifact_audio.field_audio_duration
@@ -17,6 +16,7 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_audio_source
     - field.field.node.pece_artifact_audio.field_audio_tags
     - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
+    - field.field.node.pece_artifact_audio.field_contributors
     - field.field.node.pece_artifact_audio.field_groups_with_view_access
     - field.field.node.pece_artifact_audio.field_pbc_ref_group
     - field.field.node.pece_artifact_audio.field_pbc_ref_role
@@ -24,7 +24,6 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_pece_all_can_view
     - field.field.node.pece_artifact_audio.field_pece_license
     - field.field.node.pece_artifact_audio.field_pece_project_ref
-    - field.field.node.pece_artifact_audio.field_contributors
     - field.field.node.pece_artifact_audio.field_people_with_view_access
     - node.type.pece_artifact_audio
   module:
@@ -218,25 +217,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 1
             additional: {  }
-          7e8d0b04-bc03-42cd-a378-56a2909999ff:
-            uuid: 7e8d0b04-bc03-42cd-a378-56a2909999ff
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_audio:field_audio_contributors'
-              label: Contributors
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 2
-            additional: {  }
           ccd44f2e-cb07-45c5-aa16-c9b6b3372134:
             uuid: ccd44f2e-cb07-45c5-aa16-c9b6b3372134
             region: second
@@ -330,14 +310,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 104
-    region: content
-  field_audio_contributors:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 103
     region: content
   field_audio_created_date:
     type: datetime_default

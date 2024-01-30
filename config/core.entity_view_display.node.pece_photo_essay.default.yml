@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_photo_essay.body
     - field.field.node.pece_photo_essay.field_ark_enabled
+    - field.field.node.pece_photo_essay.field_contributors
     - field.field.node.pece_photo_essay.field_groups_with_view_access
     - field.field.node.pece_photo_essay.field_pbc_ref_group
     - field.field.node.pece_photo_essay.field_pbc_ref_role
@@ -13,12 +14,10 @@ dependencies:
     - field.field.node.pece_photo_essay.field_pece_geolocation
     - field.field.node.pece_photo_essay.field_pece_license
     - field.field.node.pece_photo_essay.field_pece_project_ref
-    - field.field.node.pece_photo_essay.field_photo_essay_contributor
+    - field.field.node.pece_photo_essay.field_people_with_view_access
     - field.field.node.pece_photo_essay.field_photo_essay_items
     - field.field.node.pece_photo_essay.field_photo_essay_tags
     - field.field.node.pece_photo_essay.field_photo_essay_thumbnail
-    - field.field.node.pece_photo_essay.field_contributors
-    - field.field.node.pece_photo_essay.field_people_with_view_access
     - node.type.pece_photo_essay
   module:
     - entity_reference_revisions
@@ -130,25 +129,6 @@ third_party_settings:
                   image_style: ''
                 third_party_settings: {  }
             weight: 0
-            additional: {  }
-          0c9f8a40-b80b-492f-a2dc-b33d2f6a1188:
-            uuid: 0c9f8a40-b80b-492f-a2dc-b33d2f6a1188
-            region: second
-            configuration:
-              id: 'field_block:node:pece_photo_essay:field_photo_essay_contributor'
-              label: Contributors
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 1
             additional: {  }
           4ff20a14-0431-428e-8c5d-f9c7f3fbb724:
             uuid: 4ff20a14-0431-428e-8c5d-f9c7f3fbb724
@@ -379,14 +359,6 @@ content:
     third_party_settings: {  }
     weight: 121
     region: first
-  field_photo_essay_contributor:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 112
-    region: content
   field_photo_essay_items:
     type: entity_reference_revisions_entity_view
     label: above

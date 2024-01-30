@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_artifact_text.body
     - field.field.node.pece_artifact_text.field_ark_enabled
+    - field.field.node.pece_artifact_text.field_contributors
     - field.field.node.pece_artifact_text.field_groups_with_view_access
     - field.field.node.pece_artifact_text.field_pbc_ref_group
     - field.field.node.pece_artifact_text.field_pbc_ref_role
@@ -12,8 +13,8 @@ dependencies:
     - field.field.node.pece_artifact_text.field_pece_all_can_view
     - field.field.node.pece_artifact_text.field_pece_license
     - field.field.node.pece_artifact_text.field_pece_project_ref
+    - field.field.node.pece_artifact_text.field_people_with_view_access
     - field.field.node.pece_artifact_text.field_text_authors
-    - field.field.node.pece_artifact_text.field_text_contributors
     - field.field.node.pece_artifact_text.field_text_created_date
     - field.field.node.pece_artifact_text.field_text_crit_commentary
     - field.field.node.pece_artifact_text.field_text_fieldsite
@@ -22,8 +23,6 @@ dependencies:
     - field.field.node.pece_artifact_text.field_text_source
     - field.field.node.pece_artifact_text.field_text_tags
     - field.field.node.pece_artifact_text.field_text_use_fieldsite_local
-    - field.field.node.pece_artifact_text.field_contributors
-    - field.field.node.pece_artifact_text.field_people_with_view_access
     - node.type.pece_artifact_text
   module:
     - address
@@ -135,25 +134,6 @@ third_party_settings:
                   format_type: medium
                 third_party_settings: {  }
             weight: 1
-            additional: {  }
-          b29df1af-e0b9-4363-9243-d753ae567306:
-            uuid: b29df1af-e0b9-4363-9243-d753ae567306
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_text:field_text_contributors'
-              label: Contributors
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 2
             additional: {  }
           5592a3d8-4bc8-4e3f-ad22-26e2f60d9c66:
             uuid: 5592a3d8-4bc8-4e3f-ad22-26e2f60d9c66
@@ -422,14 +402,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 119
-    region: content
-  field_text_contributors:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 116
     region: content
   field_text_created_date:
     type: datetime_default

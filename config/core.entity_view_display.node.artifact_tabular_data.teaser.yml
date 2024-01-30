@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.artifact_tabular_data.field_ark_enabled
+    - field.field.node.artifact_tabular_data.field_contributors
     - field.field.node.artifact_tabular_data.field_groups_with_view_access
     - field.field.node.artifact_tabular_data.field_pbc_ref_group
     - field.field.node.artifact_tabular_data.field_pbc_ref_role
@@ -12,9 +13,9 @@ dependencies:
     - field.field.node.artifact_tabular_data.field_pece_all_can_view
     - field.field.node.artifact_tabular_data.field_pece_license
     - field.field.node.artifact_tabular_data.field_pece_project_ref
+    - field.field.node.artifact_tabular_data.field_people_with_view_access
     - field.field.node.artifact_tabular_data.field_tabular_attachment
     - field.field.node.artifact_tabular_data.field_tabular_authors
-    - field.field.node.artifact_tabular_data.field_tabular_contributors
     - field.field.node.artifact_tabular_data.field_tabular_created_date
     - field.field.node.artifact_tabular_data.field_tabular_crit_commentary
     - field.field.node.artifact_tabular_data.field_tabular_fieldsite
@@ -24,8 +25,6 @@ dependencies:
     - field.field.node.artifact_tabular_data.field_tabular_media
     - field.field.node.artifact_tabular_data.field_tabular_source
     - field.field.node.artifact_tabular_data.field_tabular_tags
-    - field.field.node.artifact_tabular_data.field_contributors
-    - field.field.node.artifact_tabular_data.field_people_with_view_access
     - node.type.artifact_tabular_data
   module:
     - user
@@ -54,7 +53,6 @@ hidden:
   field_people_with_view_access: true
   field_tabular_attachment: true
   field_tabular_authors: true
-  field_tabular_contributors: true
   field_tabular_created_date: true
   field_tabular_crit_commentary: true
   field_tabular_fieldsite: true

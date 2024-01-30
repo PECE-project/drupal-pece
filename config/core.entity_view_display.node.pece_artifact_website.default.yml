@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_website.field_ark_enabled
+    - field.field.node.pece_artifact_website.field_contributors
     - field.field.node.pece_artifact_website.field_groups_with_view_access
     - field.field.node.pece_artifact_website.field_pbc_ref_group
     - field.field.node.pece_artifact_website.field_pbc_ref_role
@@ -11,11 +12,9 @@ dependencies:
     - field.field.node.pece_artifact_website.field_pece_all_can_view
     - field.field.node.pece_artifact_website.field_pece_license
     - field.field.node.pece_artifact_website.field_pece_project_ref
-    - field.field.node.pece_artifact_website.field_contributors
     - field.field.node.pece_artifact_website.field_people_with_view_access
     - field.field.node.pece_artifact_website.field_website_authors
     - field.field.node.pece_artifact_website.field_website_bibliography
-    - field.field.node.pece_artifact_website.field_website_contributors
     - field.field.node.pece_artifact_website.field_website_created_date
     - field.field.node.pece_artifact_website.field_website_crit_commentary
     - field.field.node.pece_artifact_website.field_website_fieldsite
@@ -161,25 +160,6 @@ third_party_settings:
                   format_type: medium
                 third_party_settings: {  }
             weight: 1
-            additional: {  }
-          a05dd07d-2447-4999-a982-2b526c905c57:
-            uuid: a05dd07d-2447-4999-a982-2b526c905c57
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_website:field_website_contributors'
-              label: Contributors
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 2
             additional: {  }
           45b7363b-ec82-4e7b-a3af-fb50acc81705:
             uuid: 45b7363b-ec82-4e7b-a3af-fb50acc81705
@@ -451,14 +431,6 @@ content:
     third_party_settings: {  }
     weight: 127
     region: first
-  field_website_contributors:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 104
-    region: content
   field_website_created_date:
     type: datetime_default
     label: above

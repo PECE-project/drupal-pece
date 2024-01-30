@@ -4,15 +4,14 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_memo.body
+    - field.field.node.pece_memo.field_contributors
     - field.field.node.pece_memo.field_groups_with_view_access
     - field.field.node.pece_memo.field_pbc_ref_group
     - field.field.node.pece_memo.field_pbc_ref_role
     - field.field.node.pece_memo.field_pbc_ref_user
     - field.field.node.pece_memo.field_pece_all_can_view
-    - field.field.node.pece_memo.field_pece_contributors
     - field.field.node.pece_memo.field_pece_tags
     - field.field.node.pece_memo.field_pece_uri
-    - field.field.node.pece_memo.field_contributors
     - field.field.node.pece_memo.field_people_with_view_access
     - node.type.pece_memo
   module:
@@ -117,16 +116,6 @@ content:
     region: content
     settings:
       display_label: true
-    third_party_settings: {  }
-  field_pece_contributors:
-    type: entity_reference_autocomplete
-    weight: 1
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   field_pece_tags:
     type: entity_reference_autocomplete
