@@ -1,0 +1,50 @@
+uuid: d11deb4e-d300-4cfe-a7d8-ef6d16bd0ea7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.groups_vocab.field_group_visibility
+    - field.field.taxonomy_term.groups_vocab.field_pece_project_ref
+    - field.field.taxonomy_term.groups_vocab.field_substantive_logic
+    - taxonomy.vocabulary.groups_vocab
+  module:
+    - options
+    - text
+id: taxonomy_term.groups_vocab.default
+targetEntityType: taxonomy_term
+bundle: groups_vocab
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_group_visibility:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_pece_project_ref:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_substantive_logic:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

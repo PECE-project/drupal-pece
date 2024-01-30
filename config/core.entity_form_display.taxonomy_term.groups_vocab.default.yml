@@ -1,0 +1,80 @@
+uuid: 2c489e82-e196-421a-9bb5-a9a4e2e1eba7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.groups_vocab.field_group_visibility
+    - field.field.taxonomy_term.groups_vocab.field_pece_project_ref
+    - field.field.taxonomy_term.groups_vocab.field_substantive_logic
+    - taxonomy.vocabulary.groups_vocab
+  module:
+    - path
+    - text
+id: taxonomy_term.groups_vocab.default
+targetEntityType: taxonomy_term
+bundle: groups_vocab
+mode: default
+content:
+  description:
+    type: text_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_group_visibility:
+    type: options_select
+    weight: 102
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_pece_project_ref:
+    type: entity_reference_autocomplete
+    weight: 101
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_substantive_logic:
+    type: entity_reference_autocomplete
+    weight: 103
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 100
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden: {  }
