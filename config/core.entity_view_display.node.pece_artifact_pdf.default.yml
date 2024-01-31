@@ -6,9 +6,6 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_ark_enabled
     - field.field.node.pece_artifact_pdf.field_contributors
     - field.field.node.pece_artifact_pdf.field_groups_with_view_access
-    - field.field.node.pece_artifact_pdf.field_pbc_ref_group
-    - field.field.node.pece_artifact_pdf.field_pbc_ref_role
-    - field.field.node.pece_artifact_pdf.field_pbc_ref_user
     - field.field.node.pece_artifact_pdf.field_pdf_authors
     - field.field.node.pece_artifact_pdf.field_pdf_bibliography
     - field.field.node.pece_artifact_pdf.field_pdf_created_date
@@ -31,7 +28,6 @@ dependencies:
     - languagefield
     - layout_builder
     - layout_discovery
-    - pbf
     - user
 third_party_settings:
   layout_builder:
@@ -197,54 +193,6 @@ third_party_settings:
                   link: true
                 third_party_settings: {  }
             weight: 11
-            additional: {  }
-          ff07edc5-e554-45a0-96af-f1d798bf8fdd:
-            uuid: ff07edc5-e554-45a0-96af-f1d798bf8fdd
-            region: content
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_group'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: pbf_formatter_default
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 12
-            additional: {  }
-          62f72fc3-c403-4596-be57-668d7ac223c7:
-            uuid: 62f72fc3-c403-4596-be57-668d7ac223c7
-            region: content
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_role'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: pbf_formatter_default
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 13
-            additional: {  }
-          94bbcf99-9188-4697-98ca-8dbe34104e8d:
-            uuid: 94bbcf99-9188-4697-98ca-8dbe34104e8d
-            region: content
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_user'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: pbf_formatter_default
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 14
             additional: {  }
           7ca5a84c-b535-4d33-a966-4e3fd52a28bb:
             uuid: 7ca5a84c-b535-4d33-a966-4e3fd52a28bb
@@ -453,54 +401,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 29
             additional: {  }
-          c6caf5f4-c202-41f3-b1ad-05682f675909:
-            uuid: c6caf5f4-c202-41f3-b1ad-05682f675909
-            region: content
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_group'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: pbf_formatter_default
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 30
-            additional: {  }
-          316c58a7-970b-4588-b1fc-5b45f359eb75:
-            uuid: 316c58a7-970b-4588-b1fc-5b45f359eb75
-            region: content
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_role'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: pbf_formatter_default
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 31
-            additional: {  }
-          c7be2902-b577-455f-859a-4b7870f6aa90:
-            uuid: c7be2902-b577-455f-859a-4b7870f6aa90
-            region: content
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_pbc_ref_user'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: pbf_formatter_default
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 32
-            additional: {  }
           4ea234e2-1fbd-49e5-b212-db50f0be5ab0:
             uuid: 4ea234e2-1fbd-49e5-b212-db50f0be5ab0
             region: content
@@ -666,30 +566,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 128
-    region: content
-  field_pbc_ref_group:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 118
-    region: content
-  field_pbc_ref_role:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 119
-    region: content
-  field_pbc_ref_user:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 120
     region: content
   field_pdf_authors:
     type: entity_reference_label

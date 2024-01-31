@@ -8,14 +8,11 @@ dependencies:
     - field.field.node.pece_annotation.field_annotation_artifact
     - field.field.node.pece_annotation.field_annotation_tags
     - field.field.node.pece_annotation.field_ark_enabled
+    - field.field.node.pece_annotation.field_contributors
     - field.field.node.pece_annotation.field_groups_with_view_access
-    - field.field.node.pece_annotation.field_pbc_ref_group
-    - field.field.node.pece_annotation.field_pbc_ref_role
-    - field.field.node.pece_annotation.field_pbc_ref_user
     - field.field.node.pece_annotation.field_pece_all_can_view
     - field.field.node.pece_annotation.field_pece_geolocation
     - field.field.node.pece_annotation.field_pece_license
-    - field.field.node.pece_annotation.field_contributors
     - field.field.node.pece_annotation.field_people_with_view_access
     - node.type.pece_annotation
   module:
@@ -239,7 +236,4 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden:
-  field_pbc_ref_group: true
-  field_pbc_ref_role: true
-  field_pbc_ref_user: true
+hidden: {  }

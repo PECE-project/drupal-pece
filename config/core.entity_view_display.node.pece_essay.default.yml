@@ -10,9 +10,6 @@ dependencies:
     - field.field.node.pece_essay.field_essay_tags
     - field.field.node.pece_essay.field_essay_thumbnail
     - field.field.node.pece_essay.field_groups_with_view_access
-    - field.field.node.pece_essay.field_pbc_ref_group
-    - field.field.node.pece_essay.field_pbc_ref_role
-    - field.field.node.pece_essay.field_pbc_ref_user
     - field.field.node.pece_essay.field_pece_all_can_view
     - field.field.node.pece_essay.field_pece_license
     - field.field.node.pece_essay.field_pece_project_ref
@@ -23,7 +20,6 @@ dependencies:
     - entity_reference_revisions
     - image
     - layout_builder
-    - pbf
     - text
     - user
 third_party_settings:
@@ -109,25 +105,6 @@ third_party_settings:
                   image_style: ''
                 third_party_settings: {  }
             weight: 0
-            additional: {  }
-          57881400-b64c-4f24-b684-04ae84528aa8:
-            uuid: 57881400-b64c-4f24-b684-04ae84528aa8
-            region: second
-            configuration:
-              id: 'field_block:node:pece_essay:field_pbc_ref_group'
-              label: 'Permission by Group'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: pbf_formatter_default
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 2
             additional: {  }
           335e95f0-65c1-4141-bb3c-7e812e945ffd:
             uuid: 335e95f0-65c1-4141-bb3c-7e812e945ffd
@@ -222,54 +199,6 @@ third_party_settings:
                   link: ''
                 third_party_settings: {  }
             weight: 5
-            additional: {  }
-          2891974a-aaf2-4110-ae64-59f142d51ad1:
-            uuid: 2891974a-aaf2-4110-ae64-59f142d51ad1
-            region: content
-            configuration:
-              id: 'field_block:node:pece_essay:field_pbc_ref_user'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: pbf_formatter_default
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 6
-            additional: {  }
-          887ac7e0-c902-4ec0-bdb9-ad5b08aab2b4:
-            uuid: 887ac7e0-c902-4ec0-bdb9-ad5b08aab2b4
-            region: content
-            configuration:
-              id: 'field_block:node:pece_essay:field_pbc_ref_role'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: pbf_formatter_default
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 7
-            additional: {  }
-          cc0130f4-5be1-4db8-9956-b910db922def:
-            uuid: cc0130f4-5be1-4db8-9956-b910db922def
-            region: content
-            configuration:
-              id: 'field_block:node:pece_essay:field_pbc_ref_group'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: pbf_formatter_default
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 8
             additional: {  }
           9b8d935f-4448-4f3b-8acc-5e6fe170ab15:
             uuid: 9b8d935f-4448-4f3b-8acc-5e6fe170ab15
@@ -475,30 +404,6 @@ content:
     third_party_settings: {  }
     weight: 117
     region: first
-  field_pbc_ref_group:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 112
-    region: content
-  field_pbc_ref_role:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 111
-    region: content
-  field_pbc_ref_user:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 110
-    region: content
   field_pece_all_can_view:
     type: boolean
     label: above

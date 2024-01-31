@@ -8,9 +8,6 @@ dependencies:
     - field.field.node.pece_project.field_contributors
     - field.field.node.pece_project.field_fieldsites
     - field.field.node.pece_project.field_groups_with_view_access
-    - field.field.node.pece_project.field_pbc_ref_group
-    - field.field.node.pece_project.field_pbc_ref_role
-    - field.field.node.pece_project.field_pbc_ref_user
     - field.field.node.pece_project.field_pece_all_can_view
     - field.field.node.pece_project.field_pece_geolocation
     - field.field.node.pece_project.field_people_with_view_access
@@ -38,7 +35,6 @@ dependencies:
     - image
     - link
     - path
-    - pbf
     - text
 third_party_settings:
   field_group:
@@ -147,51 +143,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_pbc_ref_group:
-    type: pbf_widget
-    weight: 19
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
-    third_party_settings: {  }
-  field_pbc_ref_role:
-    type: pbf_widget
-    weight: 20
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
-    third_party_settings: {  }
-  field_pbc_ref_user:
-    type: pbf_widget
-    weight: 21
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
     third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox

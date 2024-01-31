@@ -8,9 +8,6 @@ dependencies:
     - field.field.node.pece_project.field_contributors
     - field.field.node.pece_project.field_fieldsites
     - field.field.node.pece_project.field_groups_with_view_access
-    - field.field.node.pece_project.field_pbc_ref_group
-    - field.field.node.pece_project.field_pbc_ref_role
-    - field.field.node.pece_project.field_pbc_ref_user
     - field.field.node.pece_project.field_pece_all_can_view
     - field.field.node.pece_project.field_pece_geolocation
     - field.field.node.pece_project.field_people_with_view_access
@@ -37,7 +34,6 @@ dependencies:
     - layout_builder
     - layout_discovery
     - link
-    - pbf
     - text
     - user
 third_party_settings:
@@ -427,30 +423,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 132
-    region: content
-  field_pbc_ref_group:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 119
-    region: content
-  field_pbc_ref_role:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 120
-    region: content
-  field_pbc_ref_user:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 121
     region: content
   field_pece_all_can_view:
     type: boolean

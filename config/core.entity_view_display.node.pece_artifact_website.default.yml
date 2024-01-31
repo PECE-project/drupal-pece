@@ -6,9 +6,6 @@ dependencies:
     - field.field.node.pece_artifact_website.field_ark_enabled
     - field.field.node.pece_artifact_website.field_contributors
     - field.field.node.pece_artifact_website.field_groups_with_view_access
-    - field.field.node.pece_artifact_website.field_pbc_ref_group
-    - field.field.node.pece_artifact_website.field_pbc_ref_role
-    - field.field.node.pece_artifact_website.field_pbc_ref_user
     - field.field.node.pece_artifact_website.field_pece_all_can_view
     - field.field.node.pece_artifact_website.field_pece_license
     - field.field.node.pece_artifact_website.field_pece_project_ref
@@ -31,7 +28,6 @@ dependencies:
     - languagefield
     - layout_builder
     - link
-    - pbf
     - text
     - user
 third_party_settings:
@@ -239,25 +235,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 6
             additional: {  }
-          04988bca-e25f-4712-8f8f-5ba5b22f9f1a:
-            uuid: 04988bca-e25f-4712-8f8f-5ba5b22f9f1a
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_website:field_pbc_ref_group'
-              label: 'Permission by Group'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: pbf_formatter_default
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 7
-            additional: {  }
           f32495c1-1558-49bd-98c1-8af5d2fc7973:
             uuid: f32495c1-1558-49bd-98c1-8af5d2fc7973
             region: second
@@ -357,30 +334,6 @@ content:
     third_party_settings: {  }
     weight: 130
     region: first
-  field_pbc_ref_group:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 118
-    region: content
-  field_pbc_ref_role:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 119
-    region: content
-  field_pbc_ref_user:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 120
-    region: content
   field_pece_all_can_view:
     type: boolean
     label: above
