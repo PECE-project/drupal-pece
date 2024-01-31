@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.user.user.field_groups_joined
+    - field.field.user.user.field_groups_managed
     - field.field.user.user.field_user_picture
     - field.field.user.user.field_zotero
     - image.style.thumbnail
@@ -31,6 +32,16 @@ content:
   field_groups_joined:
     type: entity_reference_autocomplete
     weight: 34
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_groups_managed:
+    type: entity_reference_autocomplete
+    weight: 35
     region: content
     settings:
       match_operator: CONTAINS

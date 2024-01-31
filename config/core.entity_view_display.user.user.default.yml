@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.user.user.field_groups_joined
+    - field.field.user.user.field_groups_managed
     - field.field.user.user.field_user_picture
     - field.field.user.user.field_zotero
   module:
@@ -23,6 +24,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 9
+    region: content
+  field_groups_managed:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 10
     region: content
   field_user_picture:
     type: image
