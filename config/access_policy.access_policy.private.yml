@@ -67,7 +67,7 @@ access_rules:
     field: field_groups_with_view_access
     entity_type: node
     settings:
-      admin_label: ''
+      admin_label: 'Compare Groups with view access with user (groups joined)'
       query: true
       value:
         field: field_groups_joined
@@ -98,6 +98,22 @@ access_rules:
         settings:
           field_widget: boolean_checkbox
           hide_original_field: 1
+      operations:
+        - view
+    required: false
+  match_field_groups_with_view_access_1:
+    id: match_field_groups_with_view_access_1
+    group: node
+    plugin_id: entity_field_entity_reference
+    field: field_groups_with_view_access
+    entity_type: node
+    settings:
+      admin_label: 'Compare Groups with view access with user (groups managed)'
+      query: true
+      value:
+        field: field_groups_managed
+      operator: in
+      empty_behavior: deny
       operations:
         - view
     required: false
