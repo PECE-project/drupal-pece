@@ -40,39 +40,6 @@ third_party_settings:
         open: true
         description: 'Set permissions to view, update and delete this content.'
         required_fields: false
-    group_or_permission:
-      children:
-        - field_pbc_ref_user
-      label: OR
-      region: hidden
-      parent_name: ''
-      weight: 19
-      format_type: details
-      format_settings:
-        classes: ''
-        id: ''
-        open: false
-        description: ''
-        required_fields: false
-        formatter: closed
-        effect: none
-    group_and_permission:
-      children:
-        - field_pbc_ref_group
-        - field_pbc_ref_role
-      label: AND
-      region: hidden
-      parent_name: ''
-      weight: 20
-      format_type: details
-      format_settings:
-        classes: ''
-        id: ''
-        open: false
-        description: ''
-        required_fields: true
-        formatter: closed
-        effect: none
 id: node.pece_annotation.default
 targetEntityType: node
 bundle: pece_annotation
