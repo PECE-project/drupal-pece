@@ -1,0 +1,29 @@
+uuid: 9fcae1c8-6279-4d15-b0a2-fb228715e500
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_group_managers
+    - taxonomy.vocabulary.groups
+id: taxonomy_term.groups.field_group_managers
+field_name: field_group_managers
+entity_type: taxonomy_term
+bundle: groups
+label: 'Group managers'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: false
+field_type: entity_reference

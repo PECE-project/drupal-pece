@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.groups.field_group_managers
     - field.field.taxonomy_term.groups.field_group_members
     - field.field.taxonomy_term.groups.field_group_visibility
     - field.field.taxonomy_term.groups.field_pece_project_ref
@@ -22,6 +23,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_group_managers:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
     region: content
   field_group_members:
     type: entity_reference_label
