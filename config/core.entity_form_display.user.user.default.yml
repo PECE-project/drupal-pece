@@ -20,38 +20,18 @@ bundle: user
 mode: default
 content:
   account:
-    weight: -10
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
   contact:
-    weight: 5
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_groups_joined:
-    type: entity_reference_autocomplete
-    weight: 34
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_groups_managed:
-    type: entity_reference_autocomplete
-    weight: 35
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_user_picture:
     type: image_image
-    weight: 33
+    weight: 6
     region: content
     settings:
       progress_indicator: throbber
@@ -59,25 +39,25 @@ content:
     third_party_settings: {  }
   field_zotero:
     type: string_textfield
-    weight: 31
+    weight: 5
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   language:
-    weight: 0
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
   timezone:
-    weight: 6
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -87,5 +67,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_groups_joined: true
+  field_groups_managed: true
   langcode: true
   pece_profile_main_profiles: true
