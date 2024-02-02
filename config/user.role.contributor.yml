@@ -21,10 +21,12 @@ dependencies:
     - node.type.pece_project
     - node.type.pece_substantive_logic
     - node.type.pece_timeline_essay
+    - taxonomy.vocabulary.groups
   module:
     - access_policy
     - filter
     - node
+    - taxonomy
 _core:
   default_config_hash: vtQpFaZ27VFgT1APh5SpQP_kehinFMJF1qkbhY4VxOg
 id: contributor
@@ -50,6 +52,7 @@ permissions:
   - 'create pece_project content'
   - 'create pece_substantive_logic content'
   - 'create pece_timeline_essay content'
+  - 'create terms in groups'
   - 'edit any artifact_tabular_data content'
   - 'edit any artifact_video content'
   - 'edit any pece_annotation content'
@@ -66,4 +69,5 @@ permissions:
   - 'edit any pece_project content'
   - 'edit any pece_substantive_logic content'
   - 'edit any pece_timeline_essay content'
+  - 'edit terms in groups'
   - 'use text format html'
