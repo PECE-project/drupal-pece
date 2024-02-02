@@ -1,0 +1,15 @@
+uuid: 27e71e39-00bc-423c-ba69-6da895a72729
+langcode: en
+status: true
+dependencies: {  }
+id: group_membership
+label: 'Group membership'
+enabled: true
+first_field: field_group_members
+second_field: field_groups_joined
+add_direction: append
+bundles:
+  taxonomy_term:
+    - groups
+  user:
+    - user
