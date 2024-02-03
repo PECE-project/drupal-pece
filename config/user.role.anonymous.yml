@@ -3,8 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - access_policy.access_policy.group_policy
     - filter.format.restricted_html
   module:
+    - access_policy
     - contact
     - filter
     - media
@@ -21,4 +23,5 @@ permissions:
   - 'access site-wide contact form'
   - 'search content'
   - 'use text format restricted_html'
+  - 'view group_policy taxonomy term'
   - 'view media'

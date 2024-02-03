@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - access_policy.access_policy.group_policy
     - access_policy.access_policy.private
     - filter.format.html
     - node.type.artifact_tabular_data
@@ -35,6 +36,7 @@ weight: 3
 is_admin: null
 permissions:
   - 'access content overview'
+  - 'assign group_policy access policy'
   - 'assign private access policy'
   - 'create artifact_tabular_data content'
   - 'create artifact_video content'
@@ -69,5 +71,7 @@ permissions:
   - 'edit any pece_project content'
   - 'edit any pece_substantive_logic content'
   - 'edit any pece_timeline_essay content'
+  - 'edit group_policy taxonomy term'
   - 'edit terms in groups'
   - 'use text format html'
+  - 'view group_policy taxonomy term'
