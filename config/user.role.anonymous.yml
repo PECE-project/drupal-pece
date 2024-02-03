@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - access_policy.access_policy.group_policy
+    - access_policy.access_policy.pece_group
     - filter.format.restricted_html
   module:
     - access_policy
@@ -23,5 +23,5 @@ permissions:
   - 'access site-wide contact form'
   - 'search content'
   - 'use text format restricted_html'
-  - 'view group_policy taxonomy term'
   - 'view media'
+  - 'view pece_group taxonomy term'
