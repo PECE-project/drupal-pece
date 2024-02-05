@@ -3,8 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - access_policy.access_policy.pece_group
     - filter.format.restricted_html
   module:
+    - access_policy
     - contact
     - filter
     - media
@@ -22,3 +24,4 @@ permissions:
   - 'search content'
   - 'use text format restricted_html'
   - 'view media'
+  - 'view pece_group taxonomy term'

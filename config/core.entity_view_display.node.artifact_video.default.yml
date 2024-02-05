@@ -4,14 +4,13 @@ status: true
 dependencies:
   config:
     - field.field.node.artifact_video.field_ark_enabled
-    - field.field.node.artifact_video.field_pbc_ref_group
-    - field.field.node.artifact_video.field_pbc_ref_role
-    - field.field.node.artifact_video.field_pbc_ref_user
+    - field.field.node.artifact_video.field_people_with_edit_access
+    - field.field.node.artifact_video.field_groups_with_view_access
     - field.field.node.artifact_video.field_pece_all_can_view
     - field.field.node.artifact_video.field_pece_license
     - field.field.node.artifact_video.field_pece_project_ref
+    - field.field.node.artifact_video.field_people_with_view_access
     - field.field.node.artifact_video.field_video_authors
-    - field.field.node.artifact_video.field_video_contributors
     - field.field.node.artifact_video.field_video_created_date
     - field.field.node.artifact_video.field_video_crit_commentary
     - field.field.node.artifact_video.field_video_duration
@@ -20,6 +19,7 @@ dependencies:
     - field.field.node.artifact_video.field_video_language
     - field.field.node.artifact_video.field_video_location
     - field.field.node.artifact_video.field_video_media
+    - field.field.node.artifact_video.field_video_permission
     - field.field.node.artifact_video.field_video_source
     - field.field.node.artifact_video.field_video_tags
     - field.field.node.artifact_video.field_video_use_fieldsite_local
@@ -30,7 +30,6 @@ dependencies:
     - file
     - languagefield
     - layout_builder
-    - pbf
     - text
     - user
 third_party_settings:
@@ -181,25 +180,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 1
             additional: {  }
-          a269d5b8-a8a9-4c2b-bc41-5f94150cf6fa:
-            uuid: a269d5b8-a8a9-4c2b-bc41-5f94150cf6fa
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_video:field_video_contributors'
-              label: Contributors
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 2
-            additional: {  }
           6395919c-9f27-4eda-bf00-e2d1a0871bac:
             uuid: 6395919c-9f27-4eda-bf00-e2d1a0871bac
             region: second
@@ -275,25 +255,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 6
             additional: {  }
-          89674a4d-a49a-407a-9847-342488722f46:
-            uuid: 89674a4d-a49a-407a-9847-342488722f46
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_video:field_pbc_ref_group'
-              label: 'Permission by Group'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: pbf_formatter_default
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 7
-            additional: {  }
           300bf1d2-2f3d-4ab9-883d-e8451d7b4a89:
             uuid: 300bf1d2-2f3d-4ab9-883d-e8451d7b4a89
             region: second
@@ -331,6 +292,54 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 9
             additional: {  }
+          af3f2f18-9f92-4c1a-b4e2-22e9b1cfe556:
+            uuid: af3f2f18-9f92-4c1a-b4e2-22e9b1cfe556
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_video:field_people_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          6a1395de-cee8-443c-96d3-29cc31d73ed7:
+            uuid: 6a1395de-cee8-443c-96d3-29cc31d73ed7
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_video:field_people_with_edit_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+          e20e7806-7f88-4b74-9388-59bc8111dc9c:
+            uuid: e20e7806-7f88-4b74-9388-59bc8111dc9c
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_video:field_groups_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
         third_party_settings: {  }
 id: node.artifact_video.default
 targetEntityType: node
@@ -347,30 +356,14 @@ content:
     third_party_settings: {  }
     weight: 119
     region: content
-  field_pbc_ref_group:
-    type: pbf_formatter_default
+  field_groups_with_view_access:
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    weight: 116
-    region: content
-  field_pbc_ref_role:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 117
-    region: content
-  field_pbc_ref_user:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 118
-    region: content
+    weight: 129
+    region: first
   field_pece_all_can_view:
     type: boolean
     label: above
@@ -397,6 +390,22 @@ content:
     third_party_settings: {  }
     weight: 113
     region: content
+  field_people_with_edit_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 128
+    region: first
+  field_people_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 127
+    region: first
   field_video_authors:
     type: entity_reference_label
     label: above
@@ -404,14 +413,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 106
-    region: content
-  field_video_contributors:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 103
     region: content
   field_video_created_date:
     type: datetime_default

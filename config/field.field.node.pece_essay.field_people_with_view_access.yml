@@ -1,0 +1,29 @@
+uuid: 12e671f1-f215-4a4f-8616-19053919bd3c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_people_with_view_access
+    - node.type.pece_essay
+id: node.pece_essay.field_people_with_view_access
+field_name: field_people_with_view_access
+entity_type: node
+bundle: pece_essay
+label: 'People with view access'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: false
+field_type: entity_reference

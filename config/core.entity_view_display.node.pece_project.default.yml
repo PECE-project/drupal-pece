@@ -5,14 +5,13 @@ dependencies:
   config:
     - field.field.node.pece_project.body
     - field.field.node.pece_project.field_ark_enabled
+    - field.field.node.pece_project.field_people_with_edit_access
     - field.field.node.pece_project.field_fieldsites
-    - field.field.node.pece_project.field_pbc_ref_group
-    - field.field.node.pece_project.field_pbc_ref_role
-    - field.field.node.pece_project.field_pbc_ref_user
+    - field.field.node.pece_project.field_groups_with_view_access
     - field.field.node.pece_project.field_pece_all_can_view
     - field.field.node.pece_project.field_pece_geolocation
+    - field.field.node.pece_project.field_people_with_view_access
     - field.field.node.pece_project.field_project_consent_form_file
-    - field.field.node.pece_project.field_project_contributors
     - field.field.node.pece_project.field_project_design_group
     - field.field.node.pece_project.field_project_featured_essays
     - field.field.node.pece_project.field_project_fund_agency_link
@@ -35,7 +34,6 @@ dependencies:
     - layout_builder
     - layout_discovery
     - link
-    - pbf
     - text
     - user
 third_party_settings:
@@ -89,6 +87,54 @@ third_party_settings:
                   link_to_entity: false
                 third_party_settings: {  }
             weight: 0
+            additional: {  }
+          a925f79e-ddf5-487a-a1f5-79cbc991f460:
+            uuid: a925f79e-ddf5-487a-a1f5-79cbc991f460
+            region: content
+            configuration:
+              id: 'field_block:node:pece_project:field_groups_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          4700eb8f-9c50-45f7-a7ce-ee6ef2019e66:
+            uuid: 4700eb8f-9c50-45f7-a7ce-ee6ef2019e66
+            region: content
+            configuration:
+              id: 'field_block:node:pece_project:field_people_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          419a8ac7-16b4-47db-9668-09955b247ed3:
+            uuid: 419a8ac7-16b4-47db-9668-09955b247ed3
+            region: content
+            configuration:
+              id: 'field_block:node:pece_project:field_people_with_edit_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 4
             additional: {  }
         third_party_settings: {  }
       -
@@ -277,25 +323,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 5
             additional: {  }
-          2a1be2d5-9734-440b-88d9-4168fdd0f42c:
-            uuid: 2a1be2d5-9734-440b-88d9-4168fdd0f42c
-            region: first
-            configuration:
-              id: 'field_block:node:pece_project:field_project_contributors'
-              label: Contributors
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 3
-            additional: {  }
           92052ba4-6d01-4ba8-b429-02e4e09e6462:
             uuid: 92052ba4-6d01-4ba8-b429-02e4e09e6462
             region: third
@@ -381,29 +408,13 @@ content:
     third_party_settings: {  }
     weight: 131
     region: content
-  field_pbc_ref_group:
-    type: pbf_formatter_default
+  field_groups_with_view_access:
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    weight: 119
-    region: content
-  field_pbc_ref_role:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 120
-    region: content
-  field_pbc_ref_user:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 121
+    weight: 132
     region: content
   field_pece_all_can_view:
     type: boolean
@@ -422,6 +433,22 @@ content:
     third_party_settings: {  }
     weight: 117
     region: content
+  field_people_with_edit_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 134
+    region: content
+  field_people_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 133
+    region: content
   field_project_consent_form_file:
     type: file_default
     label: above
@@ -429,14 +456,6 @@ content:
       use_description_as_link_text: true
     third_party_settings: {  }
     weight: 113
-    region: content
-  field_project_contributors:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 122
     region: content
   field_project_design_group:
     type: entity_reference_label

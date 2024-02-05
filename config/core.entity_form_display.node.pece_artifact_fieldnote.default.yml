@@ -5,8 +5,8 @@ dependencies:
   config:
     - field.field.node.pece_artifact_fieldnote.body
     - field.field.node.pece_artifact_fieldnote.field_ark_enabled
+    - field.field.node.pece_artifact_fieldnote.field_people_with_edit_access
     - field.field.node.pece_artifact_fieldnote.field_fieldnote_authors
-    - field.field.node.pece_artifact_fieldnote.field_fieldnote_contributors
     - field.field.node.pece_artifact_fieldnote.field_fieldnote_created_date
     - field.field.node.pece_artifact_fieldnote.field_fieldnote_fieldsite
     - field.field.node.pece_artifact_fieldnote.field_fieldnote_fieldsite_local
@@ -14,12 +14,11 @@ dependencies:
     - field.field.node.pece_artifact_fieldnote.field_fieldnote_location
     - field.field.node.pece_artifact_fieldnote.field_fieldnote_source
     - field.field.node.pece_artifact_fieldnote.field_fieldnote_tags
-    - field.field.node.pece_artifact_fieldnote.field_pbc_ref_group
-    - field.field.node.pece_artifact_fieldnote.field_pbc_ref_role
-    - field.field.node.pece_artifact_fieldnote.field_pbc_ref_user
+    - field.field.node.pece_artifact_fieldnote.field_groups_with_view_access
     - field.field.node.pece_artifact_fieldnote.field_pece_all_can_view
     - field.field.node.pece_artifact_fieldnote.field_pece_license
     - field.field.node.pece_artifact_fieldnote.field_pece_project_ref
+    - field.field.node.pece_artifact_fieldnote.field_people_with_view_access
     - node.type.pece_artifact_fieldnote
   module:
     - address
@@ -27,56 +26,25 @@ dependencies:
     - field_group
     - languagefield
     - path
-    - pbf
     - text
 third_party_settings:
   field_group:
     group_permissions:
       children:
         - field_pece_all_can_view
-        - group_or
-        - group_and
+        - field_groups_with_view_access
+        - field_people_with_view_access
+        - field_people_with_edit_access
       label: Permissions
       region: content
       parent_name: ''
-      weight: 13
+      weight: 15
       format_type: details
       format_settings:
         classes: ''
         show_empty_fields: false
         id: ''
         open: true
-        description: ''
-        required_fields: true
-    group_or:
-      children:
-        - field_pbc_ref_user
-      label: OR
-      region: content
-      parent_name: group_permissions
-      weight: 25
-      format_type: details
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        open: false
-        description: ''
-        required_fields: true
-    group_and:
-      children:
-        - field_pbc_ref_group
-        - field_pbc_ref_role
-      label: AND
-      region: content
-      parent_name: group_permissions
-      weight: 26
-      format_type: details
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        open: false
         description: ''
         required_fields: true
 id: node.pece_artifact_fieldnote.default
@@ -96,13 +64,13 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 17
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
   field_ark_enabled:
     type: boolean_checkbox
-    weight: 15
+    weight: 17
     region: content
     settings:
       display_label: true
@@ -110,16 +78,6 @@ content:
   field_fieldnote_authors:
     type: entity_reference_autocomplete
     weight: 6
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_fieldnote_contributors:
-    type: entity_reference_autocomplete
-    weight: 2
     region: content
     settings:
       match_operator: CONTAINS
@@ -174,7 +132,7 @@ content:
     third_party_settings: {  }
   field_fieldnote_tags:
     type: entity_reference_autocomplete
-    weight: 14
+    weight: 16
     region: content
     settings:
       match_operator: CONTAINS
@@ -182,50 +140,15 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_pbc_ref_group:
-    type: pbf_widget
-    weight: 12
+  field_groups_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 25
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
-      size: '60'
+      size: 60
       placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
-    third_party_settings: {  }
-  field_pbc_ref_role:
-    type: pbf_widget
-    weight: 13
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
-    third_party_settings: {  }
-  field_pbc_ref_user:
-    type: pbf_widget
-    weight: 14
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
     third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
@@ -236,7 +159,7 @@ content:
     third_party_settings: {  }
   field_pece_license:
     type: entity_reference_autocomplete
-    weight: 12
+    weight: 13
     region: content
     settings:
       match_operator: CONTAINS
@@ -254,9 +177,29 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_people_with_edit_access:
+    type: entity_reference_autocomplete
+    weight: 27
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_people_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 26
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 19
+    weight: 21
     region: content
     settings:
       include_locked: true
@@ -269,21 +212,21 @@ content:
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 21
+    weight: 23
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 18
+    weight: 20
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 20
+    weight: 22
     region: content
     settings:
       display_label: true
@@ -298,7 +241,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 16
+    weight: 18
     region: content
     settings:
       match_operator: CONTAINS

@@ -1,0 +1,169 @@
+uuid: 7c08c5d0-6263-4721-8476-eba124af6464
+langcode: en
+status: true
+dependencies: {  }
+id: pece_content
+label: 'PECE default content policy'
+description: 'Only specified users and specified groups have access to this content.'
+weight: 0
+access_rules:
+  is_own:
+    id: is_own
+    group: node
+    plugin_id: is_own
+    field: uid
+    entity_type: node
+    settings:
+      admin_label: ''
+      query: true
+    required: true
+  field_people_with_edit_access_user_reference:
+    id: field_people_with_edit_access_user_reference
+    group: node
+    plugin_id: entity_field_standard
+    field: field_people_with_edit_access
+    entity_type: node
+    settings:
+      admin_label: ''
+      query: true
+      operator: '='
+      value:
+        field: uid
+      empty_behavior: deny
+      widget:
+        show: 0
+        settings:
+          field_widget: entity_reference_autocomplete
+          hide_original_field: 1
+      operations:
+        - view
+        - update
+    required: false
+  field_people_with_view_access_user_reference:
+    id: field_people_with_view_access_user_reference
+    group: node
+    plugin_id: entity_field_standard
+    field: field_people_with_view_access
+    entity_type: node
+    settings:
+      admin_label: ''
+      query: true
+      operator: '='
+      value:
+        field: uid
+      empty_behavior: deny
+      widget:
+        show: 0
+        settings:
+          field_widget: entity_reference_autocomplete
+          hide_original_field: 1
+      operations:
+        - view
+    required: false
+  match_field_groups_with_view_access:
+    id: match_field_groups_with_view_access
+    group: node
+    plugin_id: entity_field_entity_reference
+    field: field_groups_with_view_access
+    entity_type: node
+    settings:
+      admin_label: 'Compare Groups with view access with user (groups joined)'
+      query: true
+      value:
+        field: field_groups_joined
+      operator: in
+      empty_behavior: deny
+      widget:
+        show: 0
+        settings:
+          field_widget: entity_reference_autocomplete
+          hide_original_field: 1
+      operations:
+        - view
+    required: false
+  field_pece_all_can_view:
+    id: field_pece_all_can_view
+    group: node
+    plugin_id: entity_field_boolean
+    field: field_pece_all_can_view
+    entity_type: node
+    settings:
+      admin_label: ''
+      query: true
+      operator: '='
+      value: 'true'
+      empty_behavior: deny
+      widget:
+        show: 0
+        settings:
+          field_widget: boolean_checkbox
+          hide_original_field: 1
+      operations:
+        - view
+    required: false
+  match_field_groups_with_view_access_1:
+    id: match_field_groups_with_view_access_1
+    group: node
+    plugin_id: entity_field_entity_reference
+    field: field_groups_with_view_access
+    entity_type: node
+    settings:
+      admin_label: 'Compare Groups with view access with user (groups managed)'
+      query: true
+      value:
+        field: field_groups_managed
+      operator: in
+      empty_behavior: deny
+      operations:
+        - view
+    required: false
+access_rule_operator: OR
+query: true
+target_entity_type_id: node
+type: private
+http_403_response: {  }
+selection_rules:
+  is_own:
+    id: is_own
+    group: node
+    plugin_id: is_own
+    field: uid
+    entity_type: node
+    settings:
+      admin_label: ''
+    required: true
+  type:
+    id: type
+    group: node
+    plugin_id: bundle
+    field: type
+    entity_type: node
+    settings:
+      id: type
+      operator: or
+      value:
+        artifact_tabular_data: artifact_tabular_data
+        artifact_video: artifact_video
+        pece_annotation: pece_annotation
+        pece_artifact_audio: pece_artifact_audio
+        pece_artifact_bundle: pece_artifact_bundle
+        pece_artifact_fieldnote: pece_artifact_fieldnote
+        pece_artifact_image: pece_artifact_image
+        pece_artifact_pdf: pece_artifact_pdf
+        pece_artifact_text: pece_artifact_text
+        pece_artifact_website: pece_artifact_website
+        pece_essay: pece_essay
+        pece_memo: pece_memo
+        pece_photo_essay: pece_photo_essay
+        pece_project: pece_project
+        pece_substantive_logic: pece_substantive_logic
+        pece_timeline_essay: pece_timeline_essay
+        group: 0
+        page: 0
+        pece_analytic: 0
+        pece_fieldsite: 0
+        pece_slideshow_image: 0
+      admin_label: ''
+    required: false
+selection_rule_operator: AND
+selection_set: {  }

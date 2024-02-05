@@ -5,26 +5,24 @@ dependencies:
   config:
     - field.field.node.pece_artifact_bundle.field_ark_enabled
     - field.field.node.pece_artifact_bundle.field_bundle_authors
-    - field.field.node.pece_artifact_bundle.field_bundle_contributors
     - field.field.node.pece_artifact_bundle.field_bundle_created_date
     - field.field.node.pece_artifact_bundle.field_bundle_crit_commentary
     - field.field.node.pece_artifact_bundle.field_bundle_fieldsite
     - field.field.node.pece_artifact_bundle.field_bundle_location
     - field.field.node.pece_artifact_bundle.field_bundle_tags
     - field.field.node.pece_artifact_bundle.field_bundle_use_fieldsite_local
-    - field.field.node.pece_artifact_bundle.field_pbc_ref_group
-    - field.field.node.pece_artifact_bundle.field_pbc_ref_role
-    - field.field.node.pece_artifact_bundle.field_pbc_ref_user
+    - field.field.node.pece_artifact_bundle.field_people_with_edit_access
+    - field.field.node.pece_artifact_bundle.field_groups_with_view_access
     - field.field.node.pece_artifact_bundle.field_pece_all_can_view
     - field.field.node.pece_artifact_bundle.field_pece_artifacts
     - field.field.node.pece_artifact_bundle.field_pece_license
     - field.field.node.pece_artifact_bundle.field_pece_project_ref
+    - field.field.node.pece_artifact_bundle.field_people_with_view_access
     - node.type.pece_artifact_bundle
   module:
     - address
     - datetime
     - layout_builder
-    - pbf
     - text
     - user
 third_party_settings:
@@ -131,25 +129,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 1
             additional: {  }
-          72ad81ee-45f9-483b-afad-ebafb30fcd88:
-            uuid: 72ad81ee-45f9-483b-afad-ebafb30fcd88
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_bundle:field_bundle_contributors'
-              label: Contributors
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 2
-            additional: {  }
           8e41cedc-cec5-4d4e-a309-b770884f2145:
             uuid: 8e41cedc-cec5-4d4e-a309-b770884f2145
             region: second
@@ -188,25 +167,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 6
             additional: {  }
-          149fead7-c681-4db5-bc2f-2eb8f6ba2415:
-            uuid: 149fead7-c681-4db5-bc2f-2eb8f6ba2415
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_bundle:field_pbc_ref_group'
-              label: 'Permission by Group'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: pbf_formatter_default
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 5
-            additional: {  }
           5cfebd63-e6bd-43d8-8de8-8d600cdf45e8:
             uuid: 5cfebd63-e6bd-43d8-8de8-8d600cdf45e8
             region: first
@@ -221,6 +181,54 @@ third_party_settings:
                 settings: {  }
                 third_party_settings: {  }
             weight: 3
+            additional: {  }
+          cdeeede7-f718-4d49-9869-2e48dbaeda50:
+            uuid: cdeeede7-f718-4d49-9869-2e48dbaeda50
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_bundle:field_people_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          7ddca62d-9fad-430f-8b82-022709b1010e:
+            uuid: 7ddca62d-9fad-430f-8b82-022709b1010e
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_bundle:field_people_with_edit_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          e746e7e1-311f-42f3-a2c6-49fc5c0669ff:
+            uuid: e746e7e1-311f-42f3-a2c6-49fc5c0669ff
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_bundle:field_groups_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 6
             additional: {  }
         third_party_settings: {  }
 id: node.pece_artifact_bundle.default
@@ -245,14 +253,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 103
-    region: content
-  field_bundle_contributors:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 102
     region: content
   field_bundle_created_date:
     type: datetime_default
@@ -295,30 +295,14 @@ content:
     third_party_settings: {  }
     weight: 111
     region: content
-  field_pbc_ref_group:
-    type: pbf_formatter_default
+  field_groups_with_view_access:
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    weight: 115
-    region: content
-  field_pbc_ref_role:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 116
-    region: content
-  field_pbc_ref_user:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 117
-    region: content
+    weight: 126
+    region: first
   field_pece_all_can_view:
     type: boolean
     label: above
@@ -353,6 +337,22 @@ content:
     third_party_settings: {  }
     weight: 112
     region: content
+  field_people_with_edit_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 125
+    region: first
+  field_people_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 124
+    region: first
   links:
     settings: {  }
     third_party_settings: {  }

@@ -1,0 +1,29 @@
+uuid: c34f88c7-610c-49a5-a198-a9259b5e0cb4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_groups_with_view_access
+    - node.type.pece_artifact_website
+    - taxonomy.vocabulary.groups
+id: node.pece_artifact_website.field_groups_with_view_access
+field_name: field_groups_with_view_access
+entity_type: node
+bundle: pece_artifact_website
+label: 'Groups with view access'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      groups: groups
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

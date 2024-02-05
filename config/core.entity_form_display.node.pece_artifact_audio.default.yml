@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.field.node.pece_artifact_audio.field_ark_enabled
     - field.field.node.pece_artifact_audio.field_audio_authors
-    - field.field.node.pece_artifact_audio.field_audio_contributors
     - field.field.node.pece_artifact_audio.field_audio_created_date
     - field.field.node.pece_artifact_audio.field_audio_crit_commentary
     - field.field.node.pece_artifact_audio.field_audio_duration
@@ -17,12 +16,12 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_audio_source
     - field.field.node.pece_artifact_audio.field_audio_tags
     - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
-    - field.field.node.pece_artifact_audio.field_pbc_ref_group
-    - field.field.node.pece_artifact_audio.field_pbc_ref_role
-    - field.field.node.pece_artifact_audio.field_pbc_ref_user
+    - field.field.node.pece_artifact_audio.field_people_with_edit_access
+    - field.field.node.pece_artifact_audio.field_groups_with_view_access
     - field.field.node.pece_artifact_audio.field_pece_all_can_view
     - field.field.node.pece_artifact_audio.field_pece_license
     - field.field.node.pece_artifact_audio.field_pece_project_ref
+    - field.field.node.pece_artifact_audio.field_people_with_view_access
     - node.type.pece_artifact_audio
   module:
     - address
@@ -31,56 +30,25 @@ dependencies:
     - languagefield
     - media_library
     - path
-    - pbf
     - text
 third_party_settings:
   field_group:
     group_permissions:
       children:
         - field_pece_all_can_view
-        - group_or
-        - group_and
+        - field_groups_with_view_access
+        - field_people_with_view_access
+        - field_people_with_edit_access
       label: Permissions
       region: content
       parent_name: ''
-      weight: 15
+      weight: 17
       format_type: details
       format_settings:
         classes: ''
         show_empty_fields: false
         id: ''
         open: true
-        description: ''
-        required_fields: true
-    group_or:
-      children:
-        - field_pbc_ref_user
-      label: OR
-      region: content
-      parent_name: group_permissions
-      weight: 26
-      format_type: details
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        open: false
-        description: ''
-        required_fields: true
-    group_and:
-      children:
-        - field_pbc_ref_group
-        - field_pbc_ref_role
-      label: AND
-      region: content
-      parent_name: group_permissions
-      weight: 27
-      format_type: details
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        open: false
         description: ''
         required_fields: true
 id: node.pece_artifact_audio.default
@@ -90,13 +58,13 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 20
+    weight: 22
     region: content
     settings: {  }
     third_party_settings: {  }
   field_ark_enabled:
     type: boolean_checkbox
-    weight: 18
+    weight: 20
     region: content
     settings:
       display_label: true
@@ -104,16 +72,6 @@ content:
   field_audio_authors:
     type: entity_reference_autocomplete
     weight: 9
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_audio_contributors:
-    type: entity_reference_autocomplete
-    weight: 3
     region: content
     settings:
       match_operator: CONTAINS
@@ -171,7 +129,7 @@ content:
     third_party_settings: {  }
   field_audio_location:
     type: address_default
-    weight: 14
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -192,7 +150,7 @@ content:
     third_party_settings: {  }
   field_audio_tags:
     type: entity_reference_autocomplete
-    weight: 17
+    weight: 19
     region: content
     settings:
       match_operator: CONTAINS
@@ -202,55 +160,20 @@ content:
     third_party_settings: {  }
   field_audio_use_fieldsite_local:
     type: boolean_checkbox
-    weight: 13
+    weight: 14
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
-  field_pbc_ref_group:
-    type: pbf_widget
+  field_groups_with_view_access:
+    type: entity_reference_autocomplete
     weight: 26
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
-      size: '60'
+      size: 60
       placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
-    third_party_settings: {  }
-  field_pbc_ref_role:
-    type: pbf_widget
-    weight: 27
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
-    third_party_settings: {  }
-  field_pbc_ref_user:
-    type: pbf_widget
-    weight: 25
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
     third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
@@ -261,7 +184,7 @@ content:
     third_party_settings: {  }
   field_pece_license:
     type: entity_reference_autocomplete
-    weight: 16
+    weight: 18
     region: content
     settings:
       match_operator: CONTAINS
@@ -279,9 +202,29 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_people_with_edit_access:
+    type: entity_reference_autocomplete
+    weight: 28
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_people_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 27
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 22
+    weight: 24
     region: content
     settings:
       include_locked: true
@@ -294,21 +237,21 @@ content:
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 23
+    weight: 25
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 21
+    weight: 23
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 24
+    weight: 26
     region: content
     settings:
       display_label: true
@@ -323,7 +266,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 19
+    weight: 21
     region: content
     settings:
       match_operator: CONTAINS

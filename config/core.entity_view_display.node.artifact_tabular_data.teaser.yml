@@ -5,15 +5,14 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.artifact_tabular_data.field_ark_enabled
-    - field.field.node.artifact_tabular_data.field_pbc_ref_group
-    - field.field.node.artifact_tabular_data.field_pbc_ref_role
-    - field.field.node.artifact_tabular_data.field_pbc_ref_user
+    - field.field.node.artifact_tabular_data.field_people_with_edit_access
+    - field.field.node.artifact_tabular_data.field_groups_with_view_access
     - field.field.node.artifact_tabular_data.field_pece_all_can_view
     - field.field.node.artifact_tabular_data.field_pece_license
     - field.field.node.artifact_tabular_data.field_pece_project_ref
+    - field.field.node.artifact_tabular_data.field_people_with_view_access
     - field.field.node.artifact_tabular_data.field_tabular_attachment
     - field.field.node.artifact_tabular_data.field_tabular_authors
-    - field.field.node.artifact_tabular_data.field_tabular_contributors
     - field.field.node.artifact_tabular_data.field_tabular_created_date
     - field.field.node.artifact_tabular_data.field_tabular_crit_commentary
     - field.field.node.artifact_tabular_data.field_tabular_fieldsite
@@ -40,15 +39,14 @@ content:
     region: content
 hidden:
   field_ark_enabled: true
-  field_pbc_ref_group: true
-  field_pbc_ref_role: true
-  field_pbc_ref_user: true
+  field_groups_with_view_access: true
   field_pece_all_can_view: true
   field_pece_license: true
   field_pece_project_ref: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
   field_tabular_attachment: true
   field_tabular_authors: true
-  field_tabular_contributors: true
   field_tabular_created_date: true
   field_tabular_crit_commentary: true
   field_tabular_fieldsite: true

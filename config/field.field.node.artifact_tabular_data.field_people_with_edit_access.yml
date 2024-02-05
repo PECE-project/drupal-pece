@@ -1,0 +1,29 @@
+uuid: 61cacade-e682-4eb3-bda3-86fce8c5c188
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_people_with_edit_access
+    - node.type.artifact_tabular_data
+id: node.artifact_tabular_data.field_people_with_edit_access
+field_name: field_people_with_edit_access
+entity_type: node
+bundle: artifact_tabular_data
+label: 'People with edit access'
+description: 'People added here will be listed as contributors in addition to receiving update capability.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: false
+field_type: entity_reference

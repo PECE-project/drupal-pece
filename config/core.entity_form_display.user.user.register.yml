@@ -4,12 +4,12 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.user.register
-    - field.field.user.user.field_pbc_ref_group
+    - field.field.user.user.field_groups_joined
+    - field.field.user.user.field_groups_managed
     - field.field.user.user.field_user_picture
     - field.field.user.user.field_zotero
   module:
     - path
-    - pbf
     - profile
     - user
 _core:
@@ -28,21 +28,6 @@ content:
     weight: 5
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_pbc_ref_group:
-    type: pbf_widget
-    weight: 32
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
     third_party_settings: {  }
   field_zotero:
     type: string_textfield
@@ -81,5 +66,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_groups_joined: true
+  field_groups_managed: true
   field_user_picture: true
   langcode: true

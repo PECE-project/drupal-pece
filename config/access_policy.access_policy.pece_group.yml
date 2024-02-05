@@ -1,0 +1,85 @@
+uuid: b776cdc4-e091-4dbc-87f2-be730804b18d
+langcode: en
+status: true
+dependencies: {  }
+id: pece_group
+label: 'PECE default group (term) policy'
+description: null
+weight: 0
+access_rules:
+  field_group_visibility:
+    id: field_group_visibility
+    group: taxonomy_term
+    plugin_id: entity_field_list
+    field: field_group_visibility
+    entity_type: taxonomy_term
+    settings:
+      admin_label: ''
+      query: true
+      value:
+        public: public
+      operator: or
+      filter_allowed_values: false
+      empty_behavior: deny
+      operations:
+        - view
+    required: false
+  field_group_members_user_reference:
+    id: field_group_members_user_reference
+    group: taxonomy_term
+    plugin_id: entity_field_standard
+    field: field_group_members
+    entity_type: taxonomy_term
+    settings:
+      admin_label: ''
+      query: true
+      operator: '='
+      value:
+        field: uid
+      empty_behavior: deny
+      operations:
+        - view
+    required: false
+  field_group_managers_user_reference_1:
+    id: field_group_managers_user_reference_1
+    group: taxonomy_term
+    plugin_id: entity_field_standard
+    field: field_group_managers
+    entity_type: taxonomy_term
+    settings:
+      admin_label: ''
+      query: true
+      operator: '='
+      value:
+        field: uid
+      empty_behavior: deny
+      operations:
+        - view
+        - update
+        - 'view unpublished'
+    required: false
+access_rule_operator: OR
+query: true
+target_entity_type_id: taxonomy_term
+type: group
+http_403_response: {  }
+selection_rules:
+  vid:
+    id: vid
+    group: taxonomy_term
+    plugin_id: bundle
+    field: vid
+    entity_type: taxonomy_term
+    settings:
+      id: 'taxonomy_term:vid'
+      operator: or
+      value:
+        groups: groups
+        licenses_vocabulary_licenses: 0
+        pece_authors: 0
+        pece_structured_analytics: 0
+        pece_tags: 0
+      admin_label: ''
+    required: false
+selection_rule_operator: AND
+selection_set: {  }

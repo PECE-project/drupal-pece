@@ -1,0 +1,29 @@
+uuid: 06349356-58fa-4eca-b8aa-fcb3028532d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_people_with_view_access
+    - node.type.pece_artifact_image
+id: node.pece_artifact_image.field_people_with_view_access
+field_name: field_people_with_view_access
+entity_type: node
+bundle: pece_artifact_image
+label: 'People with view access'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: false
+field_type: entity_reference

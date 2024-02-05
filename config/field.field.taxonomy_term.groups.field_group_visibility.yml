@@ -1,0 +1,21 @@
+uuid: 50fd693c-406b-4e10-829a-000ea8099816
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_group_visibility
+    - taxonomy.vocabulary.groups
+  module:
+    - options
+id: taxonomy_term.groups.field_group_visibility
+field_name: field_group_visibility
+entity_type: taxonomy_term
+bundle: groups
+label: 'Group visibility'
+description: 'This determines whether the group can be viewed by all site visitors or only by its own members. It does not determine the visibility of group content.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

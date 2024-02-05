@@ -1,0 +1,29 @@
+uuid: a72b367f-2067-4400-897f-5b58d7db9a5d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_groups_with_view_access
+    - node.type.artifact_video
+    - taxonomy.vocabulary.groups
+id: node.artifact_video.field_groups_with_view_access
+field_name: field_groups_with_view_access
+entity_type: node
+bundle: artifact_video
+label: 'Groups with view access'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      groups: groups
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

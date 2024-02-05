@@ -1,0 +1,29 @@
+uuid: cf2abf50-3db9-4d55-b114-b3cefaddeefc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_people_with_edit_access
+    - node.type.pece_annotation
+id: node.pece_annotation.field_people_with_edit_access
+field_name: field_people_with_edit_access
+entity_type: node
+bundle: pece_annotation
+label: 'People with edit access'
+description: 'People added here will be listed as contributors in addition to receiving update capability.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: false
+field_type: entity_reference

@@ -8,16 +8,15 @@ dependencies:
     - field.field.node.pece_annotation.field_annotation_artifact
     - field.field.node.pece_annotation.field_annotation_tags
     - field.field.node.pece_annotation.field_ark_enabled
-    - field.field.node.pece_annotation.field_pbc_ref_group
-    - field.field.node.pece_annotation.field_pbc_ref_role
-    - field.field.node.pece_annotation.field_pbc_ref_user
+    - field.field.node.pece_annotation.field_people_with_edit_access
+    - field.field.node.pece_annotation.field_groups_with_view_access
     - field.field.node.pece_annotation.field_pece_all_can_view
     - field.field.node.pece_annotation.field_pece_geolocation
     - field.field.node.pece_annotation.field_pece_license
+    - field.field.node.pece_annotation.field_people_with_view_access
     - node.type.pece_annotation
   module:
     - geolocation
-    - pbf
     - text
     - user
 id: node.pece_annotation.default
@@ -66,29 +65,13 @@ content:
     third_party_settings: {  }
     weight: 109
     region: content
-  field_pbc_ref_group:
-    type: pbf_formatter_default
+  field_groups_with_view_access:
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    weight: 108
-    region: content
-  field_pbc_ref_role:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 107
-    region: content
-  field_pbc_ref_user:
-    type: pbf_formatter_default
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 106
+    weight: 113
     region: content
   field_pece_all_can_view:
     type: boolean
@@ -114,6 +97,22 @@ content:
       link: true
     third_party_settings: {  }
     weight: 110
+    region: content
+  field_people_with_edit_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 115
+    region: content
+  field_people_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 114
     region: content
   links:
     settings: {  }

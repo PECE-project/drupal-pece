@@ -1,0 +1,15 @@
+uuid: 7cd41aa3-0dfd-4b74-a81d-03a66e568213
+langcode: en
+status: true
+dependencies: {  }
+id: group_managementship
+label: 'Group managementship'
+enabled: true
+first_field: field_group_managers
+second_field: field_groups_managed
+add_direction: append
+bundles:
+  taxonomy_term:
+    - groups
+  user:
+    - user

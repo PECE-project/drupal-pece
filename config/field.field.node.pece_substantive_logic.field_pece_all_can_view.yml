@@ -1,0 +1,23 @@
+uuid: 1f922897-99d5-4914-b92f-926c2aad4be2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_all_can_view
+    - node.type.pece_substantive_logic
+id: node.pece_substantive_logic.field_pece_all_can_view
+field_name: field_pece_all_can_view
+entity_type: node
+bundle: pece_substantive_logic
+label: 'Everyone can view this content'
+description: 'If you check this option, then all users (including anonymous users) can see this content.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

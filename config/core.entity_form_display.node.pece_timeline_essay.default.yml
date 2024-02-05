@@ -5,14 +5,13 @@ dependencies:
   config:
     - field.field.node.pece_timeline_essay.body
     - field.field.node.pece_timeline_essay.field_ark_enabled
-    - field.field.node.pece_timeline_essay.field_pbc_ref_group
-    - field.field.node.pece_timeline_essay.field_pbc_ref_role
-    - field.field.node.pece_timeline_essay.field_pbc_ref_user
+    - field.field.node.pece_timeline_essay.field_people_with_edit_access
+    - field.field.node.pece_timeline_essay.field_groups_with_view_access
     - field.field.node.pece_timeline_essay.field_pece_all_can_view
     - field.field.node.pece_timeline_essay.field_pece_geolocation
     - field.field.node.pece_timeline_essay.field_pece_license
     - field.field.node.pece_timeline_essay.field_pece_project_ref
-    - field.field.node.pece_timeline_essay.field_timeline_essay_contributor
+    - field.field.node.pece_timeline_essay.field_people_with_view_access
     - field.field.node.pece_timeline_essay.field_timeline_essay_items
     - field.field.node.pece_timeline_essay.field_timeline_essay_tags
     - field.field.node.pece_timeline_essay.field_timeline_essay_thumbnail
@@ -24,19 +23,19 @@ dependencies:
     - image
     - paragraphs
     - path
-    - pbf
     - text
 third_party_settings:
   field_group:
     group_permissions:
       children:
         - field_pece_all_can_view
-        - group_or
-        - group_and
+        - field_groups_with_view_access
+        - field_people_with_view_access
+        - field_people_with_edit_access
       label: Permissions
       region: content
       parent_name: ''
-      weight: 14
+      weight: 11
       format_type: details
       format_settings:
         classes: ''
@@ -49,9 +48,9 @@ third_party_settings:
       children:
         - field_pbc_ref_user
       label: OR
-      region: content
-      parent_name: group_permissions
-      weight: 21
+      region: hidden
+      parent_name: ''
+      weight: 22
       format_type: details
       format_settings:
         classes: ''
@@ -66,8 +65,8 @@ third_party_settings:
         - field_pbc_ref_role
       label: AND
       region: hidden
-      parent_name: group_permissions
-      weight: 22
+      parent_name: ''
+      weight: 21
       format_type: details
       format_settings:
         classes: ''
@@ -101,72 +100,37 @@ content:
     third_party_settings: {  }
   field_ark_enabled:
     type: boolean_checkbox
-    weight: 16
+    weight: 13
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
-  field_pbc_ref_group:
-    type: pbf_widget
-    weight: 11
+  field_groups_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 24
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
-      size: '60'
+      size: 60
       placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
-    third_party_settings: {  }
-  field_pbc_ref_role:
-    type: pbf_widget
-    weight: 12
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
-    third_party_settings: {  }
-  field_pbc_ref_user:
-    type: pbf_widget
-    weight: 13
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: '60'
-      placeholder: ''
-      grant_global: 0
-      grant_public: 1
-      grant_view: 0
-      grant_update: 0
-      grant_delete: 0
     third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
-    weight: 20
+    weight: 23
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_pece_geolocation:
     type: geolocation_latlng
-    weight: 19
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   field_pece_license:
     type: entity_reference_autocomplete
-    weight: 15
+    weight: 12
     region: content
     settings:
       match_operator: CONTAINS
@@ -184,9 +148,19 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_timeline_essay_contributor:
+  field_people_with_edit_access:
     type: entity_reference_autocomplete
-    weight: 17
+    weight: 26
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_people_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 25
     region: content
     settings:
       match_operator: CONTAINS
@@ -196,7 +170,7 @@ content:
     third_party_settings: {  }
   field_timeline_essay_items:
     type: entity_reference_paragraphs
-    weight: 18
+    weight: 15
     region: content
     settings:
       title: Paragraph
@@ -208,7 +182,7 @@ content:
     third_party_settings: {  }
   field_timeline_essay_tags:
     type: entity_reference_autocomplete
-    weight: 20
+    weight: 17
     region: content
     settings:
       match_operator: CONTAINS

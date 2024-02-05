@@ -6,13 +6,13 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_project.body
     - field.field.node.pece_project.field_ark_enabled
-    - field.field.node.pece_project.field_pbc_ref_group
-    - field.field.node.pece_project.field_pbc_ref_role
-    - field.field.node.pece_project.field_pbc_ref_user
+    - field.field.node.pece_project.field_people_with_edit_access
+    - field.field.node.pece_project.field_fieldsites
+    - field.field.node.pece_project.field_groups_with_view_access
     - field.field.node.pece_project.field_pece_all_can_view
     - field.field.node.pece_project.field_pece_geolocation
+    - field.field.node.pece_project.field_people_with_view_access
     - field.field.node.pece_project.field_project_consent_form_file
-    - field.field.node.pece_project.field_project_contributors
     - field.field.node.pece_project.field_project_design_group
     - field.field.node.pece_project.field_project_featured_essays
     - field.field.node.pece_project.field_project_fund_agency_link
@@ -53,13 +53,12 @@ content:
 hidden:
   field_ark_enabled: true
   field_fieldsites: true
-  field_pbc_ref_group: true
-  field_pbc_ref_role: true
-  field_pbc_ref_user: true
+  field_groups_with_view_access: true
   field_pece_all_can_view: true
   field_pece_geolocation: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
   field_project_consent_form_file: true
-  field_project_contributors: true
   field_project_design_group: true
   field_project_featured_essays: true
   field_project_fund_agency_link: true

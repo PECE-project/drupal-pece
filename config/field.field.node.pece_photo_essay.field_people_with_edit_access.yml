@@ -1,0 +1,29 @@
+uuid: b66de39a-21af-4d58-8178-06b260953798
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_people_with_edit_access
+    - node.type.pece_photo_essay
+id: node.pece_photo_essay.field_people_with_edit_access
+field_name: field_people_with_edit_access
+entity_type: node
+bundle: pece_photo_essay
+label: 'People with edit access'
+description: 'People added here will be listed as contributors in addition to receiving update capability.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: false
+field_type: entity_reference
