@@ -73,16 +73,6 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_people_with_edit_access:
-    type: entity_reference_autocomplete
-    weight: 23
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_essay_contents:
     type: entity_reference_paragraphs
     weight: 11
@@ -143,6 +133,16 @@ content:
   field_pece_project_ref:
     type: entity_reference_autocomplete
     weight: 12
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_people_with_edit_access:
+    type: entity_reference_autocomplete
+    weight: 23
     region: content
     settings:
       match_operator: CONTAINS

@@ -84,16 +84,6 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_people_with_edit_access:
-    type: entity_reference_autocomplete
-    weight: 34
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_fieldsites:
     type: entity_reference_autocomplete
     weight: 16
@@ -126,6 +116,16 @@ content:
     weight: 17
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_people_with_edit_access:
+    type: entity_reference_autocomplete
+    weight: 34
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_people_with_view_access:
     type: entity_reference_autocomplete

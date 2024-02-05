@@ -154,14 +154,6 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
-  field_people_with_edit_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 110
-    region: first
   field_pece_all_can_view:
     type: boolean
     label: above
@@ -171,6 +163,14 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 109
+    region: first
+  field_people_with_edit_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 110
     region: first
   field_subst_logic_image_citation:
     type: link

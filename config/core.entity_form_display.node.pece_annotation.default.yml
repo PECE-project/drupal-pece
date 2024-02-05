@@ -98,16 +98,6 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_people_with_edit_access:
-    type: entity_reference_autocomplete
-    weight: 26
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete
     weight: 24
@@ -134,6 +124,16 @@ content:
   field_pece_license:
     type: entity_reference_autocomplete
     weight: 14
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_people_with_edit_access:
+    type: entity_reference_autocomplete
+    weight: 26
     region: content
     settings:
       match_operator: CONTAINS
