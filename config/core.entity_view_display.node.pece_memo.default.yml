@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_memo.body
-    - field.field.node.pece_memo.field_contributors
+    - field.field.node.pece_memo.field_people_with_edit_access
     - field.field.node.pece_memo.field_groups_with_view_access
     - field.field.node.pece_memo.field_pece_all_can_view
     - field.field.node.pece_memo.field_pece_tags
@@ -28,7 +28,7 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_contributors:
+  field_people_with_edit_access:
     type: entity_reference_label
     label: above
     settings:

@@ -1,14 +1,14 @@
-uuid: 007ca149-9aee-475b-8343-41d227a2606c
+uuid: bf924031-e11d-412c-bfcb-5c464d7c10e5
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_contributors
-    - node.type.pece_artifact_image
-id: node.pece_artifact_image.field_contributors
-field_name: field_contributors
+    - field.storage.node.field_people_with_edit_access
+    - node.type.pece_artifact_fieldnote
+id: node.pece_artifact_fieldnote.field_people_with_edit_access
+field_name: field_people_with_edit_access
 entity_type: node
-bundle: pece_artifact_image
+bundle: pece_artifact_fieldnote
 label: Contributors
 description: ''
 required: false

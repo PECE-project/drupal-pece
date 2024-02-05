@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_project.body
     - field.field.node.pece_project.field_ark_enabled
-    - field.field.node.pece_project.field_contributors
+    - field.field.node.pece_project.field_people_with_edit_access
     - field.field.node.pece_project.field_fieldsites
     - field.field.node.pece_project.field_groups_with_view_access
     - field.field.node.pece_project.field_pece_all_can_view
@@ -43,7 +43,7 @@ third_party_settings:
         - field_pece_all_can_view
         - field_groups_with_view_access
         - field_people_with_view_access
-        - field_contributors
+        - field_people_with_edit_access
       label: Permissions
       region: content
       parent_name: ''
@@ -84,7 +84,7 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_contributors:
+  field_people_with_edit_access:
     type: entity_reference_autocomplete
     weight: 34
     region: content

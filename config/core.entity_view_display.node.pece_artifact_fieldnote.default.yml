@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_artifact_fieldnote.body
     - field.field.node.pece_artifact_fieldnote.field_ark_enabled
-    - field.field.node.pece_artifact_fieldnote.field_contributors
+    - field.field.node.pece_artifact_fieldnote.field_people_with_edit_access
     - field.field.node.pece_artifact_fieldnote.field_fieldnote_authors
     - field.field.node.pece_artifact_fieldnote.field_fieldnote_created_date
     - field.field.node.pece_artifact_fieldnote.field_fieldnote_fieldsite
@@ -210,7 +210,7 @@ third_party_settings:
             uuid: 26226562-2e28-43dc-b31f-0c8a8f62f7fa
             region: first
             configuration:
-              id: 'field_block:node:pece_artifact_fieldnote:field_contributors'
+              id: 'field_block:node:pece_artifact_fieldnote:field_people_with_edit_access'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -279,7 +279,7 @@ content:
     third_party_settings: {  }
     weight: 105
     region: content
-  field_contributors:
+  field_people_with_edit_access:
     type: entity_reference_label
     label: above
     settings:

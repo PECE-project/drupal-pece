@@ -5,7 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.pece_image_artifact
     - field.field.node.pece_artifact_image.field_ark_enabled
-    - field.field.node.pece_artifact_image.field_contributors
+    - field.field.node.pece_artifact_image.field_people_with_edit_access
     - field.field.node.pece_artifact_image.field_groups_with_view_access
     - field.field.node.pece_artifact_image.field_image_authors
     - field.field.node.pece_artifact_image.field_image_created_date
@@ -44,7 +44,7 @@ content:
     region: content
 hidden:
   field_ark_enabled: true
-  field_contributors: true
+  field_people_with_edit_access: true
   field_groups_with_view_access: true
   field_image_authors: true
   field_image_created_date: true

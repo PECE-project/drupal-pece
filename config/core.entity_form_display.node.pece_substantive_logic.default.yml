@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_substantive_logic.body
-    - field.field.node.pece_substantive_logic.field_contributors
+    - field.field.node.pece_substantive_logic.field_people_with_edit_access
     - field.field.node.pece_substantive_logic.field_pece_all_can_view
     - field.field.node.pece_substantive_logic.field_subst_logic_image_citation
     - field.field.node.pece_substantive_logic.field_subst_logic_tags
@@ -22,7 +22,7 @@ third_party_settings:
   field_group:
     group_permissions:
       children:
-        - field_contributors
+        - field_people_with_edit_access
       label: Permissions
       region: content
       parent_name: ''
@@ -58,7 +58,7 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_contributors:
+  field_people_with_edit_access:
     type: entity_reference_autocomplete
     weight: 8
     region: content

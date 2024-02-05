@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_image.field_ark_enabled
-    - field.field.node.pece_artifact_image.field_contributors
+    - field.field.node.pece_artifact_image.field_people_with_edit_access
     - field.field.node.pece_artifact_image.field_groups_with_view_access
     - field.field.node.pece_artifact_image.field_image_authors
     - field.field.node.pece_artifact_image.field_image_created_date
@@ -234,7 +234,7 @@ third_party_settings:
             uuid: b5aa6906-08df-4d55-b495-215f46e6bf41
             region: first
             configuration:
-              id: 'field_block:node:pece_artifact_image:field_contributors'
+              id: 'field_block:node:pece_artifact_image:field_people_with_edit_access'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -280,7 +280,7 @@ content:
     third_party_settings: {  }
     weight: 120
     region: content
-  field_contributors:
+  field_people_with_edit_access:
     type: entity_reference_label
     label: above
     settings:

@@ -16,7 +16,7 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_audio_source
     - field.field.node.pece_artifact_audio.field_audio_tags
     - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
-    - field.field.node.pece_artifact_audio.field_contributors
+    - field.field.node.pece_artifact_audio.field_people_with_edit_access
     - field.field.node.pece_artifact_audio.field_groups_with_view_access
     - field.field.node.pece_artifact_audio.field_pece_all_can_view
     - field.field.node.pece_artifact_audio.field_pece_license
@@ -81,7 +81,7 @@ third_party_settings:
             uuid: a7bbbe85-10cf-41af-ab2d-d13f01a4bae7
             region: content
             configuration:
-              id: 'field_block:node:pece_artifact_audio:field_contributors'
+              id: 'field_block:node:pece_artifact_audio:field_people_with_edit_access'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -390,7 +390,7 @@ content:
     third_party_settings: {  }
     weight: 110
     region: content
-  field_contributors:
+  field_people_with_edit_access:
     type: entity_reference_label
     label: above
     settings:

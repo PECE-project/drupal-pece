@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_pdf.field_ark_enabled
-    - field.field.node.pece_artifact_pdf.field_contributors
+    - field.field.node.pece_artifact_pdf.field_people_with_edit_access
     - field.field.node.pece_artifact_pdf.field_groups_with_view_access
     - field.field.node.pece_artifact_pdf.field_pdf_authors
     - field.field.node.pece_artifact_pdf.field_pdf_bibliography
@@ -507,7 +507,7 @@ third_party_settings:
             uuid: fcd78d7e-ab25-4480-a9bc-01b34dd9dc54
             region: content
             configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_contributors'
+              id: 'field_block:node:pece_artifact_pdf:field_people_with_edit_access'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -551,7 +551,7 @@ content:
     third_party_settings: {  }
     weight: 125
     region: content
-  field_contributors:
+  field_people_with_edit_access:
     type: entity_reference_label
     label: above
     settings:

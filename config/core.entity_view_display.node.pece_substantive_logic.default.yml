@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_substantive_logic.body
-    - field.field.node.pece_substantive_logic.field_contributors
+    - field.field.node.pece_substantive_logic.field_people_with_edit_access
     - field.field.node.pece_substantive_logic.field_pece_all_can_view
     - field.field.node.pece_substantive_logic.field_subst_logic_image_citation
     - field.field.node.pece_substantive_logic.field_subst_logic_tags
@@ -127,7 +127,7 @@ third_party_settings:
             uuid: 45f80af5-4a35-41bc-8cb4-4c2ab7fddffc
             region: first
             configuration:
-              id: 'field_block:node:pece_substantive_logic:field_contributors'
+              id: 'field_block:node:pece_substantive_logic:field_people_with_edit_access'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -154,7 +154,7 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
-  field_contributors:
+  field_people_with_edit_access:
     type: entity_reference_label
     label: above
     settings:

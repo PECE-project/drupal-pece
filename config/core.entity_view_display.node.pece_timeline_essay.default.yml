@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_timeline_essay.body
     - field.field.node.pece_timeline_essay.field_ark_enabled
-    - field.field.node.pece_timeline_essay.field_contributors
+    - field.field.node.pece_timeline_essay.field_people_with_edit_access
     - field.field.node.pece_timeline_essay.field_groups_with_view_access
     - field.field.node.pece_timeline_essay.field_pece_all_can_view
     - field.field.node.pece_timeline_essay.field_pece_geolocation
@@ -45,7 +45,7 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
-  field_contributors:
+  field_people_with_edit_access:
     type: entity_reference_label
     label: above
     settings:

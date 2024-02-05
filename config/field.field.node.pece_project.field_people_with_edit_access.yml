@@ -1,14 +1,14 @@
-uuid: 61cacade-e682-4eb3-bda3-86fce8c5c188
+uuid: 3b7a18cd-2cbf-41e9-bc22-c228c0a345bc
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_contributors
-    - node.type.artifact_tabular_data
-id: node.artifact_tabular_data.field_contributors
-field_name: field_contributors
+    - field.storage.node.field_people_with_edit_access
+    - node.type.pece_project
+id: node.pece_project.field_people_with_edit_access
+field_name: field_people_with_edit_access
 entity_type: node
-bundle: artifact_tabular_data
+bundle: pece_project
 label: Contributors
 description: ''
 required: false

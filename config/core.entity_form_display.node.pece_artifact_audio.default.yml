@@ -16,7 +16,7 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_audio_source
     - field.field.node.pece_artifact_audio.field_audio_tags
     - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
-    - field.field.node.pece_artifact_audio.field_contributors
+    - field.field.node.pece_artifact_audio.field_people_with_edit_access
     - field.field.node.pece_artifact_audio.field_groups_with_view_access
     - field.field.node.pece_artifact_audio.field_pece_all_can_view
     - field.field.node.pece_artifact_audio.field_pece_license
@@ -38,7 +38,7 @@ third_party_settings:
         - field_pece_all_can_view
         - field_groups_with_view_access
         - field_people_with_view_access
-        - field_contributors
+        - field_people_with_edit_access
       label: Permissions
       region: content
       parent_name: ''
@@ -165,7 +165,7 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_contributors:
+  field_people_with_edit_access:
     type: entity_reference_autocomplete
     weight: 28
     region: content
