@@ -4,10 +4,13 @@ status: true
 dependencies:
   module:
     - menu_ui
+    - type_tray
 third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
+  type_tray:
+    existing_nodes_link_text: 'View existing <em class="placeholder">Artifact - Tabular data</em> content'
 name: 'Artifact - Tabular data'
 type: artifact_tabular_data
 description: 'An artifact is the basic unit of data on PECE. Artifacts represent materials that an ethnographer determines to be data relevant to the site.'

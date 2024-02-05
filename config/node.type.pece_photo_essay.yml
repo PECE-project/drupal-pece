@@ -1,7 +1,12 @@
 uuid: 8711fe95-2fba-49d7-9e76-1462a3d137a7
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - type_tray
+third_party_settings:
+  type_tray:
+    existing_nodes_link_text: 'View existing <em class="placeholder">Photo Essay</em> content'
 _core:
   default_config_hash: low8KlyjPa7S4wprTpiSJTjwlIqXgP0peilxxPa2oGk
 name: 'Photo Essay'

@@ -4,10 +4,13 @@ status: true
 dependencies:
   module:
     - menu_ui
+    - type_tray
 third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
+  type_tray:
+    existing_nodes_link_text: 'View existing <em class="placeholder">Artifact - Bundle</em> content'
 name: 'Artifact - Bundle'
 type: pece_artifact_bundle
 description: 'An artifact is the basic unit of data on PECE. Artifacts represent materials that an ethnographer determines to be data relevant to the site; this can include documents, images, audio, videos, and web sites, which could include field notes, interviews, news articles, journal articles, films, etc.'

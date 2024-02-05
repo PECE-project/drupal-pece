@@ -4,11 +4,14 @@ status: true
 dependencies:
   module:
     - menu_ui
+    - type_tray
 third_party_settings:
   menu_ui:
     available_menus:
       - main
     parent: 'main:'
+  type_tray:
+    existing_nodes_link_text: 'View existing <em class="placeholder">Annotation</em> content'
 name: Annotation
 type: pece_annotation
 description: ''

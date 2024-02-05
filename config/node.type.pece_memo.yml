@@ -1,7 +1,12 @@
 uuid: 0d4fd63d-4b7f-4351-9d52-43568e45917e
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - type_tray
+third_party_settings:
+  type_tray:
+    existing_nodes_link_text: 'View existing <em class="placeholder">Memo</em> content'
 _core:
   default_config_hash: TIqBTHDG_LgQPxjPME0_lqIl6lN-CEPh14QhNIAjrOc
 name: Memo

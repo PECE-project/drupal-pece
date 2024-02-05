@@ -1,7 +1,12 @@
 uuid: a261e934-0546-47cd-b01b-522d3368f9d4
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - type_tray
+third_party_settings:
+  type_tray:
+    existing_nodes_link_text: 'View existing <em class="placeholder">Slideshow Image</em> content'
 _core:
   default_config_hash: vPL-a3iO1zN-MAEK4kvq3QBEGHL-tqSOJLaIb82CQzE
 name: 'Slideshow Image'

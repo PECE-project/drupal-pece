@@ -1,7 +1,12 @@
 uuid: 96a18294-564c-4e96-a89b-2d30fb86018a
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - type_tray
+third_party_settings:
+  type_tray:
+    existing_nodes_link_text: 'View existing <em class="placeholder">PECE Essay</em> content'
 _core:
   default_config_hash: vjJUcnavZHrqxjSLYzZcE8EdwskHyy4vlLN9Dy84QUo
 name: 'PECE Essay'

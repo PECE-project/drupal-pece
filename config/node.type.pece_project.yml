@@ -1,7 +1,12 @@
 uuid: 026d1919-ff37-4376-ba58-96f4f2c63033
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - type_tray
+third_party_settings:
+  type_tray:
+    existing_nodes_link_text: 'View existing <em class="placeholder">Project</em> content'
 _core:
   default_config_hash: qq-Fh1zFLFI08TQnqyS8BANDv3JAgjsvtokRTWA6Igc
 name: Project

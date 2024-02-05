@@ -4,10 +4,13 @@ status: true
 dependencies:
   module:
     - menu_ui
+    - type_tray
 third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
+  type_tray:
+    existing_nodes_link_text: 'View existing <em class="placeholder">Artifact - Audio</em> content'
 name: 'Artifact - Audio'
 type: pece_artifact_audio
 description: "An artifact is the basic unit of data on PECE. Artifacts represent materials that an ethnographer determines to be data relevant to the site; \r\nUse this one for adding audio."
