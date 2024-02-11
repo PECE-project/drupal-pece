@@ -102,20 +102,20 @@ shell-prod: in-prod
 drush-prod:
 	docker exec $(shell docker-compose ps | grep _php_v1 | cut -d" " -f 1) bash -c 'drush -r build $(filter-out $@,$(MAKECMDGOALS))'
 
-.PHONY: log-prod
-log-prod:
+.PHONY: logs-prod
+logs-prod:
 	docker-compose -f docker-compose-prod.yml logs $(filter-out $@,$(MAKECMDGOALS))
 
-.PHONY: log-prod-nginx
-log-prod-nginx:
+.PHONY: logs-prod-nginx
+logs-prod-nginx:
 	docker-compose -f docker-compose-prod.yml logs nginx_v1
 
-.PHONY: log-prod-php
-log-prod-php:
+.PHONY: logs-prod-php
+logs-prod-php:
 	docker-compose -f docker-compose-prod.yml logs php_v1
 
-.PHONY: log-prod-mysql
-log-prod-mysql:
+.PHONY: logs-prod-mysql
+logs-prod-mysql:
 	docker-compose -f docker-compose-prod.yml logs db_v1
 
 .PHONY: run-matrix-permissions
