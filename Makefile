@@ -27,6 +27,10 @@ clean:
 	rm -rf ./builds
 	rm -rf ./build
 
+.PHONY: ps
+ps:
+	docker-compose ps
+
 .PHONY: logs
 logs:
 	docker-compose logs $(filter-out $@,$(MAKECMDGOALS))
@@ -75,6 +79,10 @@ prod:
 distro: distro-clean
 	docker-compose run --rm production gulp pack-distro
 
+.PHONY: ps-prod
+ps-prod:
+	docker-compose -f docker-compose-prod.yml -f docker-compose-prod.override.yml ps
+
 .PHONY: run-prod
 run-prod:
 	docker-compose -f docker-compose-prod.yml -f docker-compose-prod.override.yml up -d --remove-orphans
@@ -93,6 +101,10 @@ shell-prod: in-prod
 .PHONY: drush-prod
 drush-prod:
 	docker exec $(shell docker-compose ps | grep _php_v1 | cut -d" " -f 1) bash -c 'drush -r build $(filter-out $@,$(MAKECMDGOALS))'
+
+.PHONY: log-prod
+log-prod:
+	docker-compose -f docker-compose-prod.yml logs $(filter-out $@,$(MAKECMDGOALS))
 
 .PHONY: log-prod-nginx
 log-prod-nginx:
