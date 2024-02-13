@@ -390,7 +390,9 @@ Was this change in machine name intentional?
 
 
 ## Group `pece_group`
-- Group `taxonomy_term__group`
+
+This *content type* is going to migrate to a *vocabulary*, `groups`, so all fields here are moving from Content (`node__`) to to Taxonomy Term (`taxonomy_term__`).
+
 ### URL path settings	`path`
 ### Title	`title`
 ### Description	`body`
