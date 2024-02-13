@@ -1,9 +1,129 @@
 uuid: 5f84f51d-4729-4082-a879-d2e0e533fe41
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - access_policy.access_policy.pece_content
+    - access_policy.access_policy.pece_group
+    - filter.format.html
+    - node.type.artifact_tabular_data
+    - node.type.artifact_video
+    - node.type.page
+    - node.type.pece_analytic
+    - node.type.pece_annotation
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_fieldnote
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
+    - node.type.pece_essay
+    - node.type.pece_fieldsite
+    - node.type.pece_memo
+    - node.type.pece_photo_essay
+    - node.type.pece_project
+    - node.type.pece_slideshow_image
+    - node.type.pece_substantive_logic
+    - node.type.pece_timeline_essay
+    - taxonomy.vocabulary.groups
+  module:
+    - access_policy
+    - filter
+    - node
+    - taxonomy
 id: platform_manager
 label: 'Platform manager'
 weight: -5
 is_admin: null
-permissions: {  }
+permissions:
+  - 'access content overview'
+  - 'administer nodes'
+  - 'assign pece_content access policy'
+  - 'assign pece_group access policy'
+  - 'bypass node access'
+  - 'create artifact_tabular_data content'
+  - 'create artifact_video content'
+  - 'create page content'
+  - 'create pece_analytic content'
+  - 'create pece_annotation content'
+  - 'create pece_artifact_audio content'
+  - 'create pece_artifact_bundle content'
+  - 'create pece_artifact_fieldnote content'
+  - 'create pece_artifact_image content'
+  - 'create pece_artifact_pdf content'
+  - 'create pece_artifact_text content'
+  - 'create pece_artifact_website content'
+  - 'create pece_essay content'
+  - 'create pece_fieldsite content'
+  - 'create pece_memo content'
+  - 'create pece_photo_essay content'
+  - 'create pece_project content'
+  - 'create pece_substantive_logic content'
+  - 'create pece_timeline_essay content'
+  - 'create terms in groups'
+  - 'edit any artifact_tabular_data content'
+  - 'edit any artifact_video content'
+  - 'edit any page content'
+  - 'edit any pece_analytic content'
+  - 'edit any pece_annotation content'
+  - 'edit any pece_artifact_audio content'
+  - 'edit any pece_artifact_bundle content'
+  - 'edit any pece_artifact_fieldnote content'
+  - 'edit any pece_artifact_image content'
+  - 'edit any pece_artifact_pdf content'
+  - 'edit any pece_artifact_text content'
+  - 'edit any pece_artifact_website content'
+  - 'edit any pece_essay content'
+  - 'edit any pece_fieldsite content'
+  - 'edit any pece_memo content'
+  - 'edit any pece_photo_essay content'
+  - 'edit any pece_project content'
+  - 'edit any pece_substantive_logic content'
+  - 'edit any pece_timeline_essay content'
+  - 'edit pece_group taxonomy term'
+  - 'edit terms in groups'
+  - 'revert all revisions'
+  - 'revert artifact_tabular_data revisions'
+  - 'revert artifact_video revisions'
+  - 'revert page revisions'
+  - 'revert pece_analytic revisions'
+  - 'revert pece_annotation revisions'
+  - 'revert pece_artifact_audio revisions'
+  - 'revert pece_artifact_bundle revisions'
+  - 'revert pece_artifact_fieldnote revisions'
+  - 'revert pece_artifact_image revisions'
+  - 'revert pece_artifact_pdf revisions'
+  - 'revert pece_artifact_text revisions'
+  - 'revert pece_artifact_website revisions'
+  - 'revert pece_essay revisions'
+  - 'revert pece_fieldsite revisions'
+  - 'revert pece_memo revisions'
+  - 'revert pece_photo_essay revisions'
+  - 'revert pece_project revisions'
+  - 'revert pece_slideshow_image revisions'
+  - 'revert pece_substantive_logic revisions'
+  - 'revert pece_timeline_essay revisions'
+  - 'use text format html'
+  - 'view all revisions'
+  - 'view artifact_tabular_data revisions'
+  - 'view artifact_video revisions'
+  - 'view own unpublished content'
+  - 'view page revisions'
+  - 'view pece_analytic revisions'
+  - 'view pece_annotation revisions'
+  - 'view pece_artifact_audio revisions'
+  - 'view pece_artifact_bundle revisions'
+  - 'view pece_artifact_fieldnote revisions'
+  - 'view pece_artifact_image revisions'
+  - 'view pece_artifact_pdf revisions'
+  - 'view pece_artifact_text revisions'
+  - 'view pece_artifact_website revisions'
+  - 'view pece_essay revisions'
+  - 'view pece_fieldsite revisions'
+  - 'view pece_group taxonomy term'
+  - 'view pece_memo revisions'
+  - 'view pece_photo_essay revisions'
+  - 'view pece_project revisions'
+  - 'view pece_substantive_logic revisions'
+  - 'view pece_timeline_essay revisions'
