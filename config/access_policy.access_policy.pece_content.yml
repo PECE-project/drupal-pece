@@ -38,6 +38,7 @@ access_rules:
       operations:
         - view_unpublished
         - view
+        - view_all_revisions
         - edit
     required: false
   field_people_with_view_access_user_reference:
@@ -59,7 +60,6 @@ access_rules:
           field_widget: entity_reference_autocomplete
           hide_original_field: 1
       operations:
-        - view_unpublished
         - view
     required: false
   match_field_groups_with_view_access:
@@ -81,7 +81,6 @@ access_rules:
           field_widget: entity_reference_autocomplete
           hide_original_field: 1
       operations:
-        - view_unpublished
         - view
     required: false
   field_pece_all_can_view:
@@ -102,7 +101,6 @@ access_rules:
           field_widget: boolean_checkbox
           hide_original_field: 1
       operations:
-        - view_unpublished
         - view
     required: false
   match_field_groups_with_view_access_1:
@@ -119,7 +117,6 @@ access_rules:
       operator: in
       empty_behavior: deny
       operations:
-        - view_unpublished
         - view
     required: false
 access_rule_operator: OR
