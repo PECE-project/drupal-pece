@@ -498,7 +498,8 @@ $settings['update_free_access'] = FALSE;
  *
  * Remove the leading hash signs to disable.
  */
-# $settings['allow_authorize_operations'] = FALSE;
+// We never want to allow people to install a module except via composer.
+$settings['allow_authorize_operations'] = FALSE;
 
 /**
  * Default mode for directories and files written by Drupal.
@@ -875,9 +876,6 @@ $databases['migration']['default']['password'] = $databases['default']['default'
 $databases['migration']['default']['host'] = $databases['default']['default']['host'];
 $databases['migration']['default']['driver'] = $databases['default']['default']['driver'];
 $databases['migration']['default']['port'] = $databases['default']['default']['port'];
-
-// We never want to allow people to install a module except via composer.
-$conf['allow_authorize_operations'] = FALSE;
 
 /**
  * Load local development override configuration, if available.
