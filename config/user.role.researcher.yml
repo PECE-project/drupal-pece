@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - access_policy.access_policy.pece_group
     - access_policy.access_policy.pece_content
+    - access_policy.access_policy.pece_group
     - filter.format.html
     - node.type.artifact_tabular_data
     - node.type.artifact_video
@@ -32,7 +32,7 @@ _core:
   default_config_hash: Run75_Zs4VfJelFQJudyM8vQXjKqSOD0vkAqf1sRFCs
 id: researcher
 label: Researcher
-weight: 3
+weight: -6
 is_admin: null
 permissions:
   - 'access content overview'

@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - access_policy.access_policy.pece_group
     - access_policy.access_policy.pece_content
+    - access_policy.access_policy.pece_group
     - filter.format.html
     - node.type.artifact_tabular_data
     - node.type.artifact_video
@@ -32,7 +32,7 @@ _core:
   default_config_hash: vtQpFaZ27VFgT1APh5SpQP_kehinFMJF1qkbhY4VxOg
 id: contributor
 label: Contributor
-weight: 2
+weight: -7
 is_admin: null
 permissions:
   - 'access content overview'
