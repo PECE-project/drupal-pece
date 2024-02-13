@@ -27,6 +27,7 @@ the platform, please refer to our [complete documentation](https://pece-project.
 ```bash
 git clone git@github.com:PECE-project/drupal-pece.git --branch 2.x
 cd drupal-pece
+ddev composer install
 ddev drush -y si pece --existing-config
 ```
 
