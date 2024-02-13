@@ -16,7 +16,7 @@ access_rules:
     settings:
       admin_label: ''
       query: true
-    required: true
+    required: false
   field_people_with_edit_access_user_reference:
     id: field_people_with_edit_access_user_reference
     group: node
@@ -36,8 +36,9 @@ access_rules:
           field_widget: entity_reference_autocomplete
           hide_original_field: 1
       operations:
+        - view_unpublished
         - view
-        - update
+        - edit
     required: false
   field_people_with_view_access_user_reference:
     id: field_people_with_view_access_user_reference
@@ -58,6 +59,7 @@ access_rules:
           field_widget: entity_reference_autocomplete
           hide_original_field: 1
       operations:
+        - view_unpublished
         - view
     required: false
   match_field_groups_with_view_access:
@@ -79,6 +81,7 @@ access_rules:
           field_widget: entity_reference_autocomplete
           hide_original_field: 1
       operations:
+        - view_unpublished
         - view
     required: false
   field_pece_all_can_view:
@@ -99,6 +102,7 @@ access_rules:
           field_widget: boolean_checkbox
           hide_original_field: 1
       operations:
+        - view_unpublished
         - view
     required: false
   match_field_groups_with_view_access_1:
@@ -115,11 +119,37 @@ access_rules:
       operator: in
       empty_behavior: deny
       operations:
+        - view_unpublished
         - view
     required: false
 access_rule_operator: OR
 query: true
 target_entity_type_id: node
+operations:
+  view_unpublished:
+    permission: false
+    access_rules: true
+    show_column: true
+  view:
+    permission: false
+    access_rules: true
+    show_column: true
+  view_all_revisions:
+    permission: false
+    access_rules: true
+    show_column: true
+  edit:
+    permission: false
+    access_rules: true
+    show_column: true
+  delete:
+    permission: false
+    access_rules: true
+    show_column: true
+  manage_access:
+    permission: true
+    access_rules: false
+    show_column: false
 type: private
 http_403_response: {  }
 selection_rules:
@@ -131,7 +161,7 @@ selection_rules:
     entity_type: node
     settings:
       admin_label: ''
-    required: true
+    required: false
   type:
     id: type
     group: node

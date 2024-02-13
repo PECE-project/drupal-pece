@@ -55,12 +55,28 @@ access_rules:
       empty_behavior: deny
       operations:
         - view
-        - update
-        - 'view unpublished'
+        - edit
     required: false
 access_rule_operator: OR
 query: true
 target_entity_type_id: taxonomy_term
+operations:
+  view:
+    permission: true
+    access_rules: true
+    show_column: true
+  edit:
+    permission: true
+    access_rules: true
+    show_column: true
+  delete:
+    permission: true
+    access_rules: true
+    show_column: true
+  manage_access:
+    permission: true
+    access_rules: true
+    show_column: false
 type: group
 http_403_response: {  }
 selection_rules:
