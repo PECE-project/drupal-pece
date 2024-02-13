@@ -8,6 +8,7 @@ dependencies:
     - field.field.taxonomy_term.groups.field_group_visibility
     - field.field.taxonomy_term.groups.field_pece_project_ref
     - field.field.taxonomy_term.groups.field_substantive_logic
+    - field.field.taxonomy_term.groups.field_tags
     - taxonomy.vocabulary.groups
   module:
     - options
@@ -62,6 +63,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 3
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
     region: content
 hidden:
   langcode: true
