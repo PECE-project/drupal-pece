@@ -876,6 +876,9 @@ $databases['migration']['default']['host'] = $databases['default']['default']['h
 $databases['migration']['default']['driver'] = $databases['default']['default']['driver'];
 $databases['migration']['default']['port'] = $databases['default']['default']['port'];
 
+// We never want to allow people to install a module except via composer.
+$conf['allow_authorize_operations'] = FALSE;
+
 /**
  * Load local development override configuration, if available.
  *
