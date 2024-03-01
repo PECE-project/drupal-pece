@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - search_api.server.drupal_search
+    - core.entity_view_mode.node.search_index
   module:
     - node
     - taxonomy
@@ -17,6 +18,41 @@ field_settings:
     label: 'Entity type'
     property_path: search_api_entity_type
     type: string
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        - anonymous
+      view_mode:
+        'entity:node':
+          artifact_tabular_data: search_index
+          artifact_video: search_index
+          page: search_index
+          pece_analytic: search_index
+          pece_annotation: search_index
+          pece_artifact_audio: search_index
+          pece_artifact_bundle: search_index
+          pece_artifact_fieldnote: search_index
+          pece_artifact_image: search_index
+          pece_artifact_pdf: search_index
+          pece_artifact_text: search_index
+          pece_artifact_website: search_index
+          pece_essay: search_index
+          pece_fieldsite: search_index
+          pece_memo: search_index
+          pece_photo_essay: search_index
+          pece_project: search_index
+          pece_slideshow_image: search_index
+          pece_substantive_logic: search_index
+          pece_timeline_essay: search_index
+        'entity:taxonomy_term':
+          groups: default
+          licenses_vocabulary_licenses: default
+          pece_authors: default
+          pece_structured_analytics: default
+          pece_tags: default
   type:
     label: 'Content type'
     datasource_id: 'entity:node'
