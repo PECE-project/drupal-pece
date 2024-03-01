@@ -1,0 +1,15 @@
+uuid: 8bb4324f-f07e-474c-b361-b7bb37700573
+langcode: en
+status: true
+dependencies:
+  module:
+    - search_api_db
+id: drupal_search
+name: Drupal_search
+description: 'Database backed search for Drupal Pece'
+backend: search_api_db
+backend_config:
+  database: 'default:default'
+  min_chars: 2
+  matching: partial
+  phrase: bigram

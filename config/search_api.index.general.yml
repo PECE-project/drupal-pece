@@ -1,0 +1,65 @@
+uuid: 6b6f85cb-779f-4fd6-bd61-c1f4a0e070e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.server.drupal_search
+  module:
+    - node
+    - taxonomy
+    - search_api
+id: general
+name: General
+description: 'Content + Taxonomies'
+read_only: false
+field_settings:
+  entity_type:
+    label: 'Entity type'
+    property_path: search_api_entity_type
+    type: string
+  type:
+    label: 'Content type'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+    dependencies:
+      module:
+        - node
+  vid:
+    label: Vocabulary
+    datasource_id: 'entity:taxonomy_term'
+    property_path: vid
+    type: string
+    dependencies:
+      module:
+        - taxonomy
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+  'entity:taxonomy_term':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  custom_value: {  }
+  entity_type: {  }
+  language_with_fallback: {  }
+  rendered_item: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 50
+  index_directly: true
+  track_changes_in_references: true
+server: drupal_search
