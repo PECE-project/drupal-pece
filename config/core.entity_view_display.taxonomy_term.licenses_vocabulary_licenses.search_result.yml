@@ -1,0 +1,59 @@
+uuid: b1ea6d96-03da-416a-b3d6-4626ef1c9043
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.search_result
+    - field.field.taxonomy_term.licenses_vocabulary_licenses.licenses_vocabulary_icon
+    - field.field.taxonomy_term.licenses_vocabulary_licenses.licenses_vocabulary_link
+    - taxonomy.vocabulary.licenses_vocabulary_licenses
+  module:
+    - image
+    - layout_builder
+    - link
+    - text
+  enforced:
+    module:
+      - licenses_vocabulary
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: taxonomy_term.licenses_vocabulary_licenses.search_result
+targetEntityType: taxonomy_term
+bundle: licenses_vocabulary_licenses
+mode: search_result
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  licenses_vocabulary_icon:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  licenses_vocabulary_link:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

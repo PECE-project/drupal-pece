@@ -1,0 +1,29 @@
+uuid: ef2e30aa-9911-4660-9b75-f7264ec816c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.search_result
+    - taxonomy.vocabulary.pece_tags
+  module:
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: taxonomy_term.pece_tags.search_result
+targetEntityType: taxonomy_term
+bundle: pece_tags
+mode: search_result
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

@@ -1,0 +1,29 @@
+uuid: 38c58f0b-bf6f-4a8e-8c2a-4dead8a56ac8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.search_result
+    - taxonomy.vocabulary.pece_authors
+  module:
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: taxonomy_term.pece_authors.search_result
+targetEntityType: taxonomy_term
+bundle: pece_authors
+mode: search_result
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

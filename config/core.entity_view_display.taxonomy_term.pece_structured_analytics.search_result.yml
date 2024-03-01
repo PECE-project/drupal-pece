@@ -1,0 +1,29 @@
+uuid: 8d3b893c-f0a3-40b7-aa48-3e5ffc3b4258
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.search_result
+    - taxonomy.vocabulary.pece_structured_analytics
+  module:
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: taxonomy_term.pece_structured_analytics.search_result
+targetEntityType: taxonomy_term
+bundle: pece_structured_analytics
+mode: search_result
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true
