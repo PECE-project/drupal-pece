@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.node.field_pece_license
     - search_api.server.drupal_search
     - core.entity_view_mode.node.search_index
   module:
@@ -18,6 +19,14 @@ field_settings:
     label: 'Entity type'
     property_path: search_api_entity_type
     type: string
+  field_pece_license:
+    label: License
+    datasource_id: 'entity:node'
+    property_path: field_pece_license
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_pece_license
   rendered_item:
     label: 'Rendered HTML output'
     property_path: rendered_item

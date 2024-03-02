@@ -1,4 +1,4 @@
-uuid: bd08f099-65a1-48fc-a21a-cbaeeb8b9f66
+uuid: 436d913d-001c-4dc1-bf20-ee05bb8d86e2
 langcode: en
 status: true
 dependencies:
@@ -7,15 +7,15 @@ dependencies:
     - views.view.search
   module:
     - search_api
-id: content_type
-name: 'Content type'
+id: license
+name: License
 weight: 0
 min_count: 1
 missing: false
 missing_label: others
-url_alias: content_type
+url_alias: license
 facet_source_id: 'search_api:views_page__search__page_1'
-field_identifier: type
+field_identifier: field_pece_license
 query_operator: or
 hard_limit: 0
 exclude: false
@@ -29,7 +29,7 @@ enable_parent_when_child_gets_disabled: true
 widget:
   type: links
   config:
-    show_numbers: true
+    show_numbers: false
     soft_limit: 0
     show_reset_link: false
     reset_text: 'Show all'
@@ -53,6 +53,11 @@ processor_configs:
     processor_id: hierarchy_processor
     weights:
       build: 100
+    settings: {  }
+  translate_entity:
+    processor_id: translate_entity
+    weights:
+      build: 5
     settings: {  }
   url_processor_handler:
     processor_id: url_processor_handler
