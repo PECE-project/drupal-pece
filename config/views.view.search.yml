@@ -116,66 +116,6 @@ display:
       sorts: {  }
       arguments: {  }
       filters:
-        type:
-          id: type
-          table: search_api_index_general
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_options
-          operator: or
-          value:
-            artifact_tabular_data: artifact_tabular_data
-            artifact_video: artifact_video
-            page: page
-            pece_analytic: pece_analytic
-            pece_annotation: pece_annotation
-            pece_artifact_audio: pece_artifact_audio
-            pece_artifact_bundle: pece_artifact_bundle
-            pece_artifact_fieldnote: pece_artifact_fieldnote
-            pece_artifact_image: pece_artifact_image
-            pece_artifact_pdf: pece_artifact_pdf
-            pece_artifact_text: pece_artifact_text
-            pece_artifact_website: pece_artifact_website
-            pece_essay: pece_essay
-            pece_fieldsite: pece_fieldsite
-            pece_memo: pece_memo
-            pece_photo_essay: pece_photo_essay
-            pece_project: pece_project
-            pece_slideshow_image: pece_slideshow_image
-            pece_substantive_logic: pece_substantive_logic
-            pece_timeline_essay: pece_timeline_essay
-          group: 2
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
         search_api_fulltext:
           id: search_api_fulltext
           table: search_api_index_general
@@ -227,47 +167,6 @@ display:
           parse_mode: terms
           min_length: null
           fields: {  }
-        vid:
-          id: vid
-          table: search_api_index_general
-          field: vid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_options
-          operator: or
-          value:
-            groups: groups
-          group: 2
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
         facets:
           id: facets
           table: search_api_index_general
