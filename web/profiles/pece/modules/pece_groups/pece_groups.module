@@ -3,3 +3,18 @@
  * @file
  * Code for the PECE Groups.
  */
+
+/**
+ * Implements hook_form_FORM_ID_alter() for your specific node form.
+ *
+ * Set the default value of group managers field to the current user.
+ */
+function pece_groups_form_taxonomy_term_groups_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_state->getFormObject()->getEntity()->isNew()) {
+    $current_user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+    // Append an empty second value to the multivalue field
+    $form['field_group_managers']['widget'][1] = $form['field_group_managers']['widget'][0];
+
+    $form['field_group_managers']['widget'][0]['target_id']['#default_value'] = $current_user;
+  }
+}
