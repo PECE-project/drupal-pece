@@ -1,0 +1,18 @@
+uuid: 4d94bd05-db2d-4843-80dc-30a0276443a0
+langcode: en
+status: true
+dependencies:
+  module:
+    - layout_paragraphs
+id: layout
+label: Layout
+icon_uuid: null
+icon_default: null
+description: 'Design the layout of other paragraphs.'
+behavior_plugins:
+  layout_paragraphs:
+    enabled: true
+    available_layouts:
+      layout_twocol_section: 'Two column'
+      layout_threecol_section: 'Three column'
+      layout_fourcol_section: 'Four column'
