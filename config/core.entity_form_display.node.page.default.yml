@@ -4,9 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
-    - field.field.node.page.layout_builder__layout
+    - field.field.node.page.field_body_paragraph
     - node.type.page
   module:
+    - layout_paragraphs
     - path
     - text
 _core:
@@ -31,6 +32,16 @@ content:
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_body_paragraph:
+    type: layout_paragraphs
+    weight: 122
+    region: content
+    settings:
+      preview_view_mode: default
+      nesting_depth: 0
+      require_layouts: 0
+      empty_message: ''
     third_party_settings: {  }
   langcode:
     type: language_select
@@ -84,5 +95,4 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden:
-  layout_builder__layout: true
+hidden: {  }
