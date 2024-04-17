@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d71f830b9c7ca04e45f363622f658092",
+    "content-hash": "406a9137cbb5dceefa9af87700fadc13",
     "packages": [
         {
             "name": "academicpuma/citeproc-php",
@@ -5028,20 +5028,14 @@
         },
         {
             "name": "drupal/foundation_sites",
-            "version": "2.0.0",
+            "version": "dev-2.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/foundation_sites.git",
-                "reference": "2.0.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/foundation_sites-2.0.0.zip",
-                "reference": "2.0.0",
-                "shasum": "0d9012ff2984b837c628154aa524a94ee1569393"
+                "reference": "f99abc9d9eabd729b86a8242eb9a042cfaa5b4b1"
             },
             "require": {
-                "drupal/core": "^8.9 || ^9 || ^10"
+                "drupal/core": "^8.9 || ^9 || ^10 || ^11"
             },
             "suggest": {
                 "npm-asset/foundation-sites": "Required to use the drupal/foundation_sites module. Expected version: ^6.7",
@@ -5049,12 +5043,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
                 "drupal": {
-                    "version": "2.0.0",
-                    "datestamp": "1670575367",
+                    "version": "2.0.0+1-dev",
+                    "datestamp": "1710743541",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -23255,6 +23252,7 @@
         "drupal/default_content": 15,
         "drupal/elasticsearch_connector": 15,
         "drupal/facets": 10,
+        "drupal/foundation_sites": 20,
         "drupal/gin": 15,
         "drupal/gin_type_tray": 10,
         "drupal/graphql": 20,
