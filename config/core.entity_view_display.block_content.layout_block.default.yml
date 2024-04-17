@@ -1,0 +1,28 @@
+uuid: a659c757-8fc9-4aec-be15-fbaaf3c3305e
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.layout_block
+    - field.field.block_content.layout_block.body
+    - field.field.block_content.layout_block.field_body_paragraph
+  module:
+    - layout_paragraphs
+id: block_content.layout_block.default
+targetEntityType: block_content
+bundle: layout_block
+mode: default
+content:
+  field_body_paragraph:
+    type: layout_paragraphs
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  langcode: true
+  search_api_excerpt: true

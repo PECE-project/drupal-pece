@@ -1,0 +1,51 @@
+uuid: 4bc4c014-b59c-4b30-87e0-46573b4c2833
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.layout_block
+    - field.storage.block_content.field_body_paragraph
+    - paragraphs.paragraphs_type.icon_link
+    - paragraphs.paragraphs_type.layout
+  module:
+    - entity_reference_revisions
+id: block_content.layout_block.field_body_paragraph
+field_name: field_body_paragraph
+entity_type: block_content
+bundle: layout_block
+label: 'Body paragraph'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      icon_link: icon_link
+      layout: layout
+    negate: 0
+    target_bundles_drag_drop:
+      icon_link:
+        weight: 8
+        enabled: true
+      layout:
+        weight: 9
+        enabled: true
+      paragraph_content_reference:
+        weight: 10
+        enabled: false
+      paragraph_custom_reference:
+        weight: 11
+        enabled: false
+      paragraph_member:
+        weight: 12
+        enabled: false
+      paragraph_photo_essay_item:
+        weight: 13
+        enabled: false
+      pece_timeline_essay_item:
+        weight: 14
+        enabled: false
+field_type: entity_reference_revisions
