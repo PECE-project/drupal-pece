@@ -5,12 +5,13 @@ dependencies:
   config:
     - field.storage.paragraph.field_media_icon
     - media.type.icon
-    - paragraphs.paragraphs_type.icon_link
-id: paragraph.icon_link.field_media_icon
+    - media.type.image
+    - paragraphs.paragraphs_type.image_with_link
+id: paragraph.image_with_link.field_media_icon
 field_name: field_media_icon
 entity_type: paragraph
-bundle: icon_link
-label: 'Media icon'
+bundle: image_with_link
+label: 'Media image'
 description: ''
 required: false
 translatable: false
@@ -21,6 +22,7 @@ settings:
   handler_settings:
     target_bundles:
       icon: icon
+      image: image
     sort:
       field: _none
       direction: ASC
