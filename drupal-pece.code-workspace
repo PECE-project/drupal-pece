@@ -6,5 +6,27 @@
   ],
   "settings": {
     "intelephense.environment.phpVersion": "8.1"
+  },
+  "tasks": {
+    "tasks": [
+      {
+        "label": "DDEV: Enable Xdebug",
+        "type": "shell",
+        "command": "ddev xdebug on",
+        "presentation": {
+          "reveal": "silent",
+          "close": true
+        }
+      },
+      {
+        "label": "DDEV: Disable Xdebug",
+        "type": "shell",
+        "command": "ddev xdebug off",
+        "presentation": {
+          "reveal": "silent",
+          "close": true
+        }
+      }
+    ]
   }
 }
