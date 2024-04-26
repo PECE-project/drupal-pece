@@ -3,14 +3,14 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.icon_link.field_link
-    - field.field.paragraph.icon_link.field_media_icon
-    - paragraphs.paragraphs_type.icon_link
+    - field.field.paragraph.image_with_link.field_link
+    - field.field.paragraph.image_with_link.field_media_icon
+    - paragraphs.paragraphs_type.image_with_link
   module:
     - link
-id: paragraph.icon_link.default
+id: paragraph.image_with_link.default
 targetEntityType: paragraph
-bundle: icon_link
+bundle: image_with_link
 mode: default
 content:
   field_link:
