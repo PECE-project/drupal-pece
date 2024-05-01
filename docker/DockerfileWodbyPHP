@@ -1,11 +1,11 @@
-ARG PHP_TAG=8.2
+ARG PHP_TAG=8.3
 ARG NODE_VERSION=18.17.0
 
 FROM node:${NODE_VERSION}-alpine AS node
 FROM wodby/drupal-php:$PHP_TAG
 
 ### INSTALL KRAFTWAGEN
-RUN cd ~/.drush && git clone -b local_workflow_improvements --single-branch https://github.com/revagomes/kraftwagen.git
+RUN git clone -b local_workflow_improvements --single-branch https://github.com/revagomes/kraftwagen.git ~/.drush/kraftwagen
 RUN echo 'Finished Kraftwagen install.'
 
 ### INSTALL NODE
