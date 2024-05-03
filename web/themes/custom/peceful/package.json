@@ -2,6 +2,11 @@
   "name": "peceful",
   "version": "1.0.0",
   "dependencies": {
+    "sass": "^1.76.0",
     "bulma": "^1.0.0"
+  },
+  "scripts": {
+    "build-bulma": "sass --load-path=node_modules skins/default/scss/main.scss skins/default/css/main.css",
+    "start": "npm run build-bulma -- --watch"
   }
 }
