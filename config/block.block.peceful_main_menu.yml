@@ -1,0 +1,27 @@
+uuid: 41b34dd6-f94f-4240-8d2e-c2d2099aab61
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - peceful
+_core:
+  default_config_hash: q9K0LS21F7XLuNT68ck1R3U5if0oqI0ZyyIVhfCXdN8
+id: peceful_main_menu
+theme: peceful
+region: primary_menu
+weight: 1
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

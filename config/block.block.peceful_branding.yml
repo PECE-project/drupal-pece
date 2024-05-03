@@ -1,0 +1,25 @@
+uuid: 969ea5a2-57c8-4225-81ff-723436dcd6f9
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - peceful
+_core:
+  default_config_hash: 5nFquolsBvfMODac4talrrzlz8UQuLwL4tsU2fXxuNw
+id: peceful_branding
+theme: peceful
+region: header
+weight: -5
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

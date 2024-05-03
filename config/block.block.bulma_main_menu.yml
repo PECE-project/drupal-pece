@@ -1,0 +1,27 @@
+uuid: bf4c63f9-f4fd-4a07-be60-585dd8991a76
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - bulma
+_core:
+  default_config_hash: q9K0LS21F7XLuNT68ck1R3U5if0oqI0ZyyIVhfCXdN8
+id: bulma_main_menu
+theme: bulma
+region: primary_menu
+weight: 1
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

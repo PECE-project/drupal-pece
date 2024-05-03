@@ -1,0 +1,22 @@
+uuid: 6329c444-ab5c-4c64-8de3-93e402abab7e
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - peceful
+_core:
+  default_config_hash: e_Xh9DIa3ZyP3C0BZayzu0bpWKwWH3Uz0afzQXOGVx8
+id: peceful_powered
+theme: peceful
+region: footer
+weight: -10
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

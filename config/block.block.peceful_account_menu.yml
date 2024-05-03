@@ -1,0 +1,27 @@
+uuid: 5ffe4107-391c-46f2-bc6b-ff23a05452e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - system
+  theme:
+    - peceful
+_core:
+  default_config_hash: ivRfdXcG0y7oqxOSNtZVZoHjqp4UiRzqxBkeWu-td7w
+id: peceful_account_menu
+theme: peceful
+region: sidebar_second
+weight: -5
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: 'User account menu'
+  label_display: '1'
+  provider: system
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

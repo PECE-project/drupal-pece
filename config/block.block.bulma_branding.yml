@@ -1,0 +1,25 @@
+uuid: 8844f70c-d3fe-4889-b0fc-648515da8e57
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - bulma
+_core:
+  default_config_hash: 5nFquolsBvfMODac4talrrzlz8UQuLwL4tsU2fXxuNw
+id: bulma_branding
+theme: bulma
+region: navbar_branding
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

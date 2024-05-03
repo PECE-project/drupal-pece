@@ -1,0 +1,27 @@
+uuid: 2cd91a8c-55b7-4887-9b51-5747d3dde5c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.tools
+  module:
+    - system
+  theme:
+    - bulma
+_core:
+  default_config_hash: QJJjJ6HJDvVZazsyjBAOMao6Ffxnior9KqgZxZqPh2E
+id: bulma_tools
+theme: bulma
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'system_menu_block:tools'
+settings:
+  id: 'system_menu_block:tools'
+  label: Tools
+  label_display: visible
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

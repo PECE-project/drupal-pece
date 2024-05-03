@@ -1,0 +1,23 @@
+uuid: 2e4a73fa-2e60-4a82-9a18-f690a20d8e6c
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - peceful
+_core:
+  default_config_hash: 5-457pUt-rFUz0Fewv4gSJiOZ25RpXMH-0Ipj1hOuWs
+id: peceful_search
+theme: peceful
+region: header
+weight: -3
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Search
+  label_display: '0'
+  provider: search
+  page_id: ''
+visibility: {  }
