@@ -1,15 +1,15 @@
-$purple: #8a4d76;
-$pink: #fa7c91;
-$brown: #757763;
+$sts-green: #2E5B60;
+$sts-green-light: #33656B;
+$sts-green-dark: #214044;
 $beige-light: #d0d1cd;
 $beige-lighter: #eff0eb;
 
 @use "../../../node_modules/bulma/sass" with (
   $family-primary: '"Nunito", sans-serif',
-  $grey-dark: $brown,
+  $grey-dark: $sts-green-dark,
   $grey-light: $beige-light,
-  $primary: $purple,
-  $link: $pink,
+  $primary: $sts-green,
+  $link: $sts-green-light,
   $control-border-width: 2px,
   $input-shadow: none
 );
