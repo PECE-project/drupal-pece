@@ -5,3 +5,12 @@ core_version_requirement: ^10
 version: 1.0.0
 description: ''
 generator: 'bulma_starterkit:1.0.0'
+
+libraries:
+  - peceful/bulma
+
+libraries-override:
+  bulma/global:
+    css:
+      theme:
+        assets/bulma.style.css: false
