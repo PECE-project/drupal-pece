@@ -16,6 +16,14 @@ targetEntityType: bibcite_reference
 bundle: web_service
 mode: citation
 content:
+  bibcite_pmcid:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 52
+    region: content
   citation:
     settings: {  }
     third_party_settings: {  }
