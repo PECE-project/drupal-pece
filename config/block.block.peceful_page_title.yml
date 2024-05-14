@@ -2,9 +2,6 @@ uuid: 172fe7ca-1b26-4f55-8929-4c75dae6bf1f
 langcode: en
 status: true
 dependencies:
-  module:
-    - block_class
-    - system
   theme:
     - peceful
 _core:
@@ -20,8 +17,4 @@ settings:
   label: 'Page title'
   label_display: '0'
   provider: core
-visibility:
-  request_path:
-    id: request_path
-    negate: true
-    pages: '<front>'
+visibility: {  }
