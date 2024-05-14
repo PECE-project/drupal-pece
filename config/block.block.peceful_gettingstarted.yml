@@ -1,24 +1,24 @@
-uuid: 7ccd068a-1b38-485b-ba91-5eaf181abfd2
+uuid: 00c6fbe7-4ec8-4c45-88e2-ea7251bc9c43
 langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:layout_block:45e96444-e8f8-42d5-99e7-5be9fa0d8ab6'
+    - 'block_content:layout_block:4e1dfda0-7376-47a0-9a6b-332b40cc1da8'
   module:
     - block_content
     - system
     - user
   theme:
     - peceful
-id: peceful_learnaboutthisresearchinfrastructure
+id: peceful_gettingstarted
 theme: peceful
 region: content
-weight: -6
+weight: -5
 provider: null
-plugin: 'block_content:45e96444-e8f8-42d5-99e7-5be9fa0d8ab6'
+plugin: 'block_content:4e1dfda0-7376-47a0-9a6b-332b40cc1da8'
 settings:
-  id: 'block_content:45e96444-e8f8-42d5-99e7-5be9fa0d8ab6'
-  label: 'Learn about this Research Infrastructure'
+  id: 'block_content:4e1dfda0-7376-47a0-9a6b-332b40cc1da8'
+  label: 'Getting Started'
   label_display: visible
   provider: block_content
   status: true
@@ -35,4 +35,4 @@ visibility:
     context_mapping:
       user: '@user.current_user_context:current_user'
     roles:
-      anonymous: anonymous
+      authenticated: authenticated
