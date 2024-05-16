@@ -20,6 +20,7 @@ options:
   settings:
     destroy: false
     type: slide
+    mediaQuery: max
     rewind: false
     rewindByDrag: false
     speed: 400
@@ -44,8 +45,8 @@ options:
     arrows: 'true'
     arrowPath: ''
     pagination: 'true'
-    paginationKeyboard: true
     paginationDirection: ltr
+    paginationKeyboard: true
     omitEnd: false
     autoplay: false
     interval: 5000
@@ -63,7 +64,6 @@ options:
     flickMaxPages: 1
     direction: ltr
     cover: false
-    mediaQuery: max
     slideFocus: false
     focusableNodes: 'a, button, textarea, input, select, iframe'
     isNavigation: false
@@ -79,11 +79,11 @@ options:
     downTarget: ''
     downOffset: 0
     easingOverride: ''
-    fullscreen: false
     randomize: false
+    fullscreen: false
     wheel: false
     releaseWheel: false
-    wheelSleep: 0
     wheelMinThreshold: 0
+    wheelSleep: 0
     zoom: ''
     animation: ''
