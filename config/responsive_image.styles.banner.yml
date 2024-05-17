@@ -1,0 +1,44 @@
+uuid: 5ce38b13-d66c-4596-b11f-53ba7b4a0ed6
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.pece_frontpage_image_replace_mobile
+    - image.style.pece_frontpage_image_short
+  theme:
+    - bulma
+id: banner
+label: Banner
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: pece_frontpage_image_short
+    breakpoint_id: bulma.fullhd
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: pece_frontpage_image_short
+    breakpoint_id: bulma.widescreen
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: pece_frontpage_image_short
+    breakpoint_id: bulma.desktop
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: pece_frontpage_image_short
+    breakpoint_id: bulma.tablet
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: pece_frontpage_image_replace_mobile
+    breakpoint_id: bulma.mobile
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: pece_frontpage_image_replace_mobile
+    breakpoint_id: bulma.all
+    multiplier: 1x
+breakpoint_group: bulma
+fallback_image_style: pece_frontpage_image_replace_mobile

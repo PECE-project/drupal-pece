@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.media.splide
     - field.field.media.slide_image.field_link
     - field.field.media.slide_image.field_media_image
+    - field.field.media.slide_image.field_media_image_mobile_replace
     - field.field.media.slide_image.field_text
     - image.style.large
     - media.type.slide_image
@@ -55,6 +56,7 @@ content:
     region: content
 hidden:
   created: true
+  field_media_image_mobile_replace: true
   langcode: true
   name: true
   search_api_excerpt: true

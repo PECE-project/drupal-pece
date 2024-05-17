@@ -5,8 +5,8 @@ dependencies:
   config:
     - field.field.media.slide_image.field_link
     - field.field.media.slide_image.field_media_image
+    - field.field.media.slide_image.field_media_image_mobile_replace
     - field.field.media.slide_image.field_text
-    - image.style.large
     - media.type.slide_image
   module:
     - image
@@ -38,6 +38,17 @@ content:
         attribute: lazy
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_media_image_mobile_replace:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 3
     region: content
   field_text:
     type: string
