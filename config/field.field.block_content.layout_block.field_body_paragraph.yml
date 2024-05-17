@@ -7,6 +7,7 @@ dependencies:
     - field.storage.block_content.field_body_paragraph
     - paragraphs.paragraphs_type.image_with_link
     - paragraphs.paragraphs_type.layout
+    - paragraphs.paragraphs_type.slideshow
   module:
     - entity_reference_revisions
 id: block_content.layout_block.field_body_paragraph
@@ -25,6 +26,7 @@ settings:
     target_bundles:
       image_with_link: image_with_link
       layout: layout
+      slideshow: slideshow
     negate: 0
     target_bundles_drag_drop:
       image_with_link:
@@ -48,4 +50,7 @@ settings:
       pece_timeline_essay_item:
         weight: 14
         enabled: false
+      slideshow:
+        weight: 16
+        enabled: true
 field_type: entity_reference_revisions

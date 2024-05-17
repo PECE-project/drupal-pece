@@ -1,0 +1,20 @@
+uuid: f901dded-e8f1-4bbd-acf9-9974a298bdb0
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - paragraphs
+id: paragraph.field_slides
+field_name: field_slides
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 10
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

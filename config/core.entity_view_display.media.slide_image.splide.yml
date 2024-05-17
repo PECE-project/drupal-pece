@@ -1,0 +1,62 @@
+uuid: 407606e6-631b-4103-b474-3aaba70023cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.splide
+    - field.field.media.slide_image.field_link
+    - field.field.media.slide_image.field_media_image
+    - field.field.media.slide_image.field_text
+    - image.style.large
+    - media.type.slide_image
+  module:
+    - image
+    - layout_builder
+    - link
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.slide_image.splide
+targetEntityType: media
+bundle: slide_image
+mode: splide
+content:
+  field_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_media_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: large
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_text:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

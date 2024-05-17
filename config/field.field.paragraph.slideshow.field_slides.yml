@@ -1,0 +1,29 @@
+uuid: a2111fa4-4f0c-4380-a4a7-92106821940f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_slides
+    - media.type.slide_image
+    - paragraphs.paragraphs_type.slideshow
+id: paragraph.slideshow.field_slides
+field_name: field_slides
+entity_type: paragraph
+bundle: slideshow
+label: Slides
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      slide_image: slide_image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
