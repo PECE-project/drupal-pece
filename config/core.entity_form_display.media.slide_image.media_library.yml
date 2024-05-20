@@ -20,7 +20,7 @@ mode: media_library
 content:
   field_link:
     type: link_default
-    weight: 2
+    weight: 3
     region: content
     settings:
       placeholder_url: ''
@@ -34,9 +34,17 @@ content:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
+  field_media_image_mobile_replace:
+    type: image_image
+    weight: 2
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
   field_text:
     type: string_textfield
-    weight: 3
+    weight: 4
     region: content
     settings:
       size: 255
@@ -52,7 +60,6 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
-  field_media_image_mobile_replace: true
   langcode: true
   path: true
   status: true
