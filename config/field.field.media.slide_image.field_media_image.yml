@@ -7,6 +7,12 @@ dependencies:
     - media.type.slide_image
   module:
     - image
+    - image_replace
+third_party_settings:
+  image_replace:
+    image_style_map:
+      pece_frontpage_image_replace_mobile:
+        source_field: field_media_image_mobile_replace
 id: media.slide_image.field_media_image
 field_name: field_media_image
 entity_type: media
@@ -30,7 +36,7 @@ settings:
   title_field: false
   title_field_required: false
   default_image:
-    uuid: null
+    uuid: ''
     alt: ''
     title: ''
     width: null
