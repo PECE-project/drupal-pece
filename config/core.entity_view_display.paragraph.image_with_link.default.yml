@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.image_with_link.field_link
-    - field.field.paragraph.image_with_link.field_media_icon
+    - field.field.paragraph.image_with_link.field_media_image
     - paragraphs.paragraphs_type.image_with_link
   module:
     - link
@@ -25,7 +25,7 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_media_icon:
+  field_media_image:
     type: entity_reference_entity_view
     label: hidden
     settings:

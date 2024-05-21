@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.image_with_link.field_link
-    - field.field.paragraph.image_with_link.field_media_icon
+    - field.field.paragraph.image_with_link.field_media_image
     - paragraphs.paragraphs_type.image_with_link
   module:
     - link
@@ -22,7 +22,7 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-  field_media_icon:
+  field_media_image:
     type: media_library_widget
     weight: 1
     region: content
