@@ -5,12 +5,12 @@ $beige-light: #d0d1cd;
 $beige-lighter: #eff0eb;
 
 @use "../../../node_modules/bulma/sass" with (
+  $control-border-width: 2px,
   $family-primary: '"Nunito", sans-serif',
   $grey-dark: $sts-green-dark,
   $grey-light: $beige-light,
-  $primary: $sts-green,
+  $input-shadow: none,
   $link: $sts-green-light,
   $menu-item-radius: 0,
-  $control-border-width: 2px,
-  $input-shadow: none
+  $primary: $sts-green
 );
