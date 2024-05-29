@@ -1,0 +1,30 @@
+uuid: 877bb8d1-5cbd-4d45-a6e6-2e5d7e61bc19
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:layout_block:bdb712b5-b0dc-4ef9-ad84-4c6c6512ebaa'
+  module:
+    - block_content
+    - system
+  theme:
+    - peceful
+id: peceful_exploreaproject
+theme: peceful
+region: content
+weight: -4
+provider: null
+plugin: 'block_content:bdb712b5-b0dc-4ef9-ad84-4c6c6512ebaa'
+settings:
+  id: 'block_content:bdb712b5-b0dc-4ef9-ad84-4c6c6512ebaa'
+  label: 'Explore a Project'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'
