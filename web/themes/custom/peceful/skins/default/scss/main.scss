@@ -14,3 +14,20 @@ $beige-lighter: #eff0eb;
   $menu-item-radius: 0,
   $primary: $sts-green
 );
+
+.featured-projects {
+  background-color: $beige-light;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  .layout {
+    margin: 0 10rem;
+
+    .paragraph--type--image-with-link {
+      div:has(img), div:has(a) {
+        text-align: center;
+      }
+
+    }
+  }
+}
