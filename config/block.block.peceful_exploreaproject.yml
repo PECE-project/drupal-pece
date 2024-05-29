@@ -5,13 +5,17 @@ dependencies:
   content:
     - 'block_content:layout_block:bdb712b5-b0dc-4ef9-ad84-4c6c6512ebaa'
   module:
+    - block_class
     - block_content
     - system
   theme:
     - peceful
+third_party_settings:
+  block_class:
+    classes: 'featured-projects is-full'
 id: peceful_exploreaproject
 theme: peceful
-region: content
+region: bottom
 weight: -4
 provider: null
 plugin: 'block_content:bdb712b5-b0dc-4ef9-ad84-4c6c6512ebaa'

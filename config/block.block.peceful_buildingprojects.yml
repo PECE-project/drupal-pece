@@ -2,15 +2,18 @@ uuid: 0a1c1895-c3b4-4076-8aa2-0c3f2bf90ace
 langcode: en
 status: true
 dependencies:
+  content:
+    - 'block_content:layout_block:52222dc3-22dc-4c2a-9218-fc02aea730e8'
   module:
+    - block_content
     - system
     - user
   theme:
     - peceful
 id: peceful_buildingprojects
 theme: peceful
-region: tile_three
-weight: -6
+region: bottom
+weight: -5
 provider: null
 plugin: 'block_content:52222dc3-22dc-4c2a-9218-fc02aea730e8'
 settings:
