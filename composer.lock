@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aebe1f69476c19162b9ddd02deafcfa1",
+    "content-hash": "84053184ace8bf895784c6e6e31866a5",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -2009,6 +2009,55 @@
             "homepage": "https://www.drupal.org/project/advanced_text_formatter",
             "support": {
                 "source": "https://git.drupalcode.org/project/advanced_text_formatter"
+            }
+        },
+        {
+            "name": "drupal/asset_injector",
+            "version": "2.20.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/asset_injector.git",
+                "reference": "8.x-2.20"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/asset_injector-8.x-2.20.zip",
+                "reference": "8.x-2.20",
+                "shasum": "dc60e96bd4873419be591e8b28f75a8f869f59b5"
+            },
+            "require": {
+                "drupal/core": "^9.3 || ^10.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.20",
+                    "datestamp": "1714727611",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Decker",
+                    "homepage": "https://www.drupal.org/u/pookmish"
+                },
+                {
+                    "name": "Axel Rutz",
+                    "homepage": "https://www.drupal.org/u/axelrutz"
+                }
+            ],
+            "description": "Adds CSS or JS to the page output based on configurable rules.",
+            "homepage": "http://drupal.org/project/asset_injector",
+            "support": {
+                "source": "https://git.drupalcode.org/project/asset_injector",
+                "issues": "https://www.drupal.org/project/issues/asset_injector"
             }
         },
         {
@@ -5893,26 +5942,26 @@
         },
         {
             "name": "drupal/jquery_ui",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/jquery_ui.git",
-                "reference": "8.x-1.6"
+                "reference": "8.x-1.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/jquery_ui-8.x-1.6.zip",
-                "reference": "8.x-1.6",
-                "shasum": "0ddccdcf35a066de1843e1d9670677ee1a2faac0"
+                "url": "https://ftp.drupal.org/files/projects/jquery_ui-8.x-1.7.zip",
+                "reference": "8.x-1.7",
+                "shasum": "3f893843ec30fed18fa1b0cb326e51880b0cb686"
             },
             "require": {
-                "drupal/core": "^9.2 || ^10"
+                "drupal/core": "^9.2 || ^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.6",
-                    "datestamp": "1668521197",
+                    "version": "8.x-1.7",
+                    "datestamp": "1717002098",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
