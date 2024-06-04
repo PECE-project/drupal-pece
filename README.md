@@ -60,3 +60,13 @@ section of composer.json:
 ```
 
 If the patch URL does not contain the Drupal.org node ID (AKA issue ID
+
+### How do I compile SCSS to CSS?
+
+From `web/themes/custom/peceful`, run `npm run build-bulma` or use this DDEV command:
+
+```
+ddev css
+```
+
+See more about Bulma's Sass in `web/themes/custom/peceful/README.md`
