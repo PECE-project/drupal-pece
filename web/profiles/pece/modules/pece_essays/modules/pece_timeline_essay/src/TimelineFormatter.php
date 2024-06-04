@@ -38,7 +38,7 @@ class TimelineFormatter {
     $timelineArray = [];
     $timelineArray['events'] = [];
 
-    $timelineItems = $timelineEssay->field_pece_timeline_essay_items->referencedEntities();
+    $timelineItems = $timelineEssay->field_timeline_essay_items->referencedEntities();
     foreach ($timelineItems as $timelineItem) {
       $timelineArray['events'][] = $this->formatSlide($timelineItem);
     }
