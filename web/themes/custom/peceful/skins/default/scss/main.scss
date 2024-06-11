@@ -15,12 +15,41 @@ $beige-lighter: #eff0eb;
   $primary: $sts-green
 );
 
+@use "bulma/sass/utilities/mixins";
+
+
+
+/* Full Width
+-----------------------------------------------------------
+*/
+
+@mixin full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
+  max-height: inherit;
+  overflow: hidden;
+}
+
+/* Blocks
+-----------------------------------------------------------
+*/
+
 .featured-projects {
+  @include full-width;
   background-color: $beige-light;
   padding-top: 1rem;
   padding-bottom: 1rem;
 
   .layout {
-    margin: 0 10rem;
+    @include mixins.tablet {
+      margin: 0 5rem;
+    }
+    @include mixins.desktop {
+      margin: 0 10rem;
+    }
   }
 }
