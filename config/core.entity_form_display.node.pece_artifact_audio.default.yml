@@ -148,16 +148,6 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_tags:
-    type: entity_reference_autocomplete
-    weight: 19
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_audio_use_fieldsite_local:
     type: boolean_checkbox
     weight: 14
@@ -215,6 +205,16 @@ content:
   field_people_with_view_access:
     type: entity_reference_autocomplete
     weight: 27
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_tags:
+    type: entity_reference_autocomplete
+    weight: 19
     region: content
     settings:
       match_operator: CONTAINS

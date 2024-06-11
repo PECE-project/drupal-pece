@@ -34,16 +34,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_tags:
-    type: entity_reference_autocomplete
-    weight: 9
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_ark_enabled:
     type: boolean_checkbox
     weight: 27
@@ -56,6 +46,16 @@ content:
     weight: 26
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_tags:
+    type: entity_reference_autocomplete
+    weight: 9
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   langcode:
     type: language_select

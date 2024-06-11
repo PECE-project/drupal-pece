@@ -76,16 +76,6 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-  field_tags:
-    type: entity_reference_autocomplete
-    weight: 13
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_subst_logic_thumbnail:
     type: image_image
     weight: 14
@@ -99,6 +89,16 @@ content:
     weight: 9
     region: content
     settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_tags:
+    type: entity_reference_autocomplete
+    weight: 13
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }

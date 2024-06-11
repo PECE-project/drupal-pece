@@ -94,6 +94,14 @@ content:
     third_party_settings: {  }
     weight: 11
     region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
   field_timeline_essay_items:
     type: entity_reference_revisions_entity_view
     label: above
@@ -102,14 +110,6 @@ content:
       link: ''
     third_party_settings: {  }
     weight: 7
-    region: content
-  field_tags:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 6
     region: content
 hidden:
   field_pece_project_ref: true

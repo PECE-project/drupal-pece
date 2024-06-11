@@ -168,6 +168,16 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_tags:
+    type: entity_reference_autocomplete
+    weight: 17
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_timeline_essay_items:
     type: entity_reference_paragraphs
     weight: 15
@@ -179,16 +189,6 @@ content:
       add_mode: dropdown
       form_display_mode: default
       default_paragraph_type: ''
-    third_party_settings: {  }
-  field_tags:
-    type: entity_reference_autocomplete
-    weight: 17
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   field_timeline_essay_thumbnail:
     type: image_image

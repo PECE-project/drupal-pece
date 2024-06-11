@@ -149,6 +149,14 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
+  field_photo_essay_thumbnail:
+    type: image_image
+    weight: 14
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
     weight: 17
@@ -158,14 +166,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_photo_essay_thumbnail:
-    type: image_image
-    weight: 14
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
     third_party_settings: {  }
   langcode:
     type: language_select

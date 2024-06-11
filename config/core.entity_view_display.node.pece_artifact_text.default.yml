@@ -348,6 +348,14 @@ content:
     third_party_settings: {  }
     weight: 129
     region: first
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 125
+    region: content
   field_text_authors:
     type: entity_reference_label
     label: above
@@ -404,14 +412,6 @@ content:
     third_party_settings: {  }
     weight: 128
     region: first
-  field_tags:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 125
-    region: content
   field_text_use_fieldsite_local:
     type: boolean
     label: above

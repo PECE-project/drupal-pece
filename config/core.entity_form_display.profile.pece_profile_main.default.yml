@@ -68,6 +68,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_pgp_key:
+    type: file_generic
+    weight: 33
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
     weight: 32
@@ -77,13 +84,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_pgp_key:
-    type: file_generic
-    weight: 33
-    region: content
-    settings:
-      progress_indicator: throbber
     third_party_settings: {  }
 hidden:
   is_default: true
