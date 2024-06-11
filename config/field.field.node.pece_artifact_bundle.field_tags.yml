@@ -1,17 +1,15 @@
-uuid: 84f37617-38a8-45b8-8728-1170a98c2d14
+uuid: 9c6dc772-cfb1-4ad8-8a28-a804079f758c
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_pdf_tags
-    - node.type.pece_artifact_pdf
-    - taxonomy.vocabulary.pece_tags
-  module:
-    - entity_reference_revisions
-id: node.pece_artifact_pdf.field_pdf_tags
-field_name: field_pdf_tags
+    - field.storage.node.field_tags
+    - node.type.pece_artifact_bundle
+    - taxonomy.vocabulary.tags
+id: node.pece_artifact_bundle.field_tags
+field_name: field_tags
 entity_type: node
-bundle: pece_artifact_pdf
+bundle: pece_artifact_bundle
 label: Tags
 description: ''
 required: false
@@ -22,10 +20,10 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      pece_tags: pece_tags
+      tags: tags
     sort:
       field: name
       direction: asc
     auto_create: true
     auto_create_bundle: ''
-field_type: entity_reference_revisions
+field_type: entity_reference

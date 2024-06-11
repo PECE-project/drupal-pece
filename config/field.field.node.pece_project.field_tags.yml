@@ -1,17 +1,17 @@
-uuid: e771181a-77f3-4ff7-8647-ab3ba36a18a8
+uuid: cf5f733a-7428-4fbc-a378-04749188909f
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_timeline_essay_tags
-    - node.type.pece_timeline_essay
-    - taxonomy.vocabulary.pece_tags
+    - field.storage.node.field_tags
+    - node.type.pece_project
+    - taxonomy.vocabulary.tags
 _core:
-  default_config_hash: Hj65Nu5Fsau3bLNbFW4EI4mJkIYbw4d7PgfCVdpjauA
-id: node.pece_timeline_essay.field_timeline_essay_tags
-field_name: field_timeline_essay_tags
+  default_config_hash: D2ZRTovatgteh1AxrrNl99Pj_5tp55Gw8HWO5d9OW6I
+id: node.pece_project.field_tags
+field_name: field_tags
 entity_type: node
-bundle: pece_timeline_essay
+bundle: pece_project
 label: Tags
 description: ''
 required: false
@@ -22,7 +22,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      pece_tags: pece_tags
+      tags: tags
     sort:
       field: name
       direction: asc

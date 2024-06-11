@@ -15,7 +15,7 @@ dependencies:
     - field.field.node.pece_artifact_image.field_image_language
     - field.field.node.pece_artifact_image.field_image_location
     - field.field.node.pece_artifact_image.field_image_source
-    - field.field.node.pece_artifact_image.field_image_tags
+    - field.field.node.pece_artifact_image.field_tags
     - field.field.node.pece_artifact_image.field_pece_all_can_view
     - field.field.node.pece_artifact_image.field_pece_geolocation
     - field.field.node.pece_artifact_image.field_pece_license
@@ -199,7 +199,7 @@ third_party_settings:
             uuid: 10497f48-49c4-4ccc-89cc-9d45580d5654
             region: second
             configuration:
-              id: 'field_block:node:pece_artifact_image:field_image_tags'
+              id: 'field_block:node:pece_artifact_image:field_tags'
               label: Tags
               label_display: '0'
               provider: layout_builder
@@ -426,7 +426,7 @@ content:
     weight: 100
     region: content
 hidden:
-  field_image_tags: true
+  field_tags: true
   langcode: true
   og_audience: true
   search_api_excerpt: true

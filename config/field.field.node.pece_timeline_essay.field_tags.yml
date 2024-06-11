@@ -1,28 +1,28 @@
-uuid: f939b452-d5ef-48bc-9681-7797349be8e0
+uuid: e771181a-77f3-4ff7-8647-ab3ba36a18a8
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_pece_tags
-    - node.type.pece_memo
-    - taxonomy.vocabulary.pece_tags
+    - field.storage.node.field_tags
+    - node.type.pece_timeline_essay
+    - taxonomy.vocabulary.tags
 _core:
-  default_config_hash: iXnR590kaiwvuY0N7e2HZ6zEaLtSL1n8jDd9f5_qCXo
-id: node.pece_memo.field_pece_tags
-field_name: field_pece_tags
+  default_config_hash: Hj65Nu5Fsau3bLNbFW4EI4mJkIYbw4d7PgfCVdpjauA
+id: node.pece_timeline_essay.field_tags
+field_name: field_tags
 entity_type: node
-bundle: pece_memo
+bundle: pece_timeline_essay
 label: Tags
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      pece_tags: pece_tags
+      tags: tags
     sort:
       field: name
       direction: asc

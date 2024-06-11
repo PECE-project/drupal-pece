@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.taxonomy_term.search_result
-    - taxonomy.vocabulary.pece_tags
+    - taxonomy.vocabulary.tags
   module:
     - layout_builder
     - text
@@ -12,9 +12,9 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-id: taxonomy_term.pece_tags.search_result
+id: taxonomy_term.tags.search_result
 targetEntityType: taxonomy_term
-bundle: pece_tags
+bundle: tags
 mode: search_result
 content:
   description:

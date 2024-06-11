@@ -9,7 +9,7 @@ dependencies:
     - field.field.node.pece_artifact_bundle.field_bundle_crit_commentary
     - field.field.node.pece_artifact_bundle.field_bundle_fieldsite
     - field.field.node.pece_artifact_bundle.field_bundle_location
-    - field.field.node.pece_artifact_bundle.field_bundle_tags
+    - field.field.node.pece_artifact_bundle.field_tags
     - field.field.node.pece_artifact_bundle.field_bundle_use_fieldsite_local
     - field.field.node.pece_artifact_bundle.field_people_with_edit_access
     - field.field.node.pece_artifact_bundle.field_groups_with_view_access
@@ -152,7 +152,7 @@ third_party_settings:
             uuid: 7027391f-df78-474d-a4df-cab83725a4c8
             region: second
             configuration:
-              id: 'field_block:node:pece_artifact_bundle:field_bundle_tags'
+              id: 'field_block:node:pece_artifact_bundle:field_tags'
               label: Tags
               label_display: '0'
               provider: layout_builder
@@ -359,7 +359,7 @@ content:
     weight: 100
     region: content
 hidden:
-  field_bundle_tags: true
+  field_tags: true
   langcode: true
   og_audience: true
   search_api_excerpt: true

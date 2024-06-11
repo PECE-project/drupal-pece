@@ -1,19 +1,21 @@
-uuid: 5b531616-9990-4ec9-b429-adb7d4d14295
+uuid: f939b452-d5ef-48bc-9681-7797349be8e0
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.taxonomy_term.field_tags
-    - taxonomy.vocabulary.groups
+    - field.storage.node.field_tags
+    - node.type.pece_memo
     - taxonomy.vocabulary.tags
-id: taxonomy_term.groups.field_tags
+_core:
+  default_config_hash: iXnR590kaiwvuY0N7e2HZ6zEaLtSL1n8jDd9f5_qCXo
+id: node.pece_memo.field_tags
 field_name: field_tags
-entity_type: taxonomy_term
-bundle: groups
+entity_type: node
+bundle: pece_memo
 label: Tags
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
@@ -24,6 +26,6 @@ settings:
     sort:
       field: name
       direction: asc
-    auto_create: true
+    auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

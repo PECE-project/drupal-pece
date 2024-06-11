@@ -21,7 +21,7 @@ dependencies:
     - field.field.node.artifact_video.field_video_media
     - field.field.node.artifact_video.field_video_permission
     - field.field.node.artifact_video.field_video_source
-    - field.field.node.artifact_video.field_video_tags
+    - field.field.node.artifact_video.field_tags
     - field.field.node.artifact_video.field_video_use_fieldsite_local
     - node.type.artifact_video
   module:
@@ -259,7 +259,7 @@ third_party_settings:
             uuid: 300bf1d2-2f3d-4ab9-883d-e8451d7b4a89
             region: second
             configuration:
-              id: 'field_block:node:artifact_video:field_video_tags'
+              id: 'field_block:node:artifact_video:field_tags'
               label: Tags
               label_display: '0'
               provider: layout_builder
@@ -503,7 +503,7 @@ content:
     region: content
 hidden:
   field_video_permission: true
-  field_video_tags: true
+  field_tags: true
   langcode: true
   og_audience: true
   search_api_excerpt: true

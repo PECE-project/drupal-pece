@@ -1,17 +1,15 @@
-uuid: cf5f733a-7428-4fbc-a378-04749188909f
+uuid: ab1f1a0f-90e7-435d-892b-e371307ec85b
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_project_tags
-    - node.type.pece_project
-    - taxonomy.vocabulary.pece_tags
-_core:
-  default_config_hash: D2ZRTovatgteh1AxrrNl99Pj_5tp55Gw8HWO5d9OW6I
-id: node.pece_project.field_project_tags
-field_name: field_project_tags
+    - field.storage.node.field_tags
+    - node.type.pece_artifact_website
+    - taxonomy.vocabulary.tags
+id: node.pece_artifact_website.field_tags
+field_name: field_tags
 entity_type: node
-bundle: pece_project
+bundle: pece_artifact_website
 label: Tags
 description: ''
 required: false
@@ -22,10 +20,10 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      pece_tags: pece_tags
+      tags: tags
     sort:
       field: name
       direction: asc
-    auto_create: false
+    auto_create: true
     auto_create_bundle: ''
 field_type: entity_reference

@@ -25,7 +25,7 @@ dependencies:
     - field.field.node.pece_project.field_project_start_end_date
     - field.field.node.pece_project.field_project_struct_analytics
     - field.field.node.pece_project.field_project_subst_logic
-    - field.field.node.pece_project.field_project_tags
+    - field.field.node.pece_project.field_tags
     - node.type.pece_project
   module:
     - datetime_range
@@ -238,7 +238,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_project_tags:
+  field_tags:
     type: entity_reference_autocomplete
     weight: 18
     region: content

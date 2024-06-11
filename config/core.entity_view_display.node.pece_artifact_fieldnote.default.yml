@@ -13,7 +13,7 @@ dependencies:
     - field.field.node.pece_artifact_fieldnote.field_fieldnote_language
     - field.field.node.pece_artifact_fieldnote.field_fieldnote_location
     - field.field.node.pece_artifact_fieldnote.field_fieldnote_source
-    - field.field.node.pece_artifact_fieldnote.field_fieldnote_tags
+    - field.field.node.pece_artifact_fieldnote.field_tags
     - field.field.node.pece_artifact_fieldnote.field_groups_with_view_access
     - field.field.node.pece_artifact_fieldnote.field_pece_all_can_view
     - field.field.node.pece_artifact_fieldnote.field_pece_license
@@ -191,7 +191,7 @@ third_party_settings:
             uuid: 3e92c60f-bb34-42e1-be0a-5cfc3f0381ef
             region: second
             configuration:
-              id: 'field_block:node:pece_artifact_fieldnote:field_fieldnote_tags'
+              id: 'field_block:node:pece_artifact_fieldnote:field_tags'
               label: Tags
               label_display: '0'
               provider: layout_builder
@@ -338,7 +338,7 @@ content:
     third_party_settings: {  }
     weight: 119
     region: content
-  field_fieldnote_tags:
+  field_tags:
     type: entity_reference_label
     label: above
     settings:

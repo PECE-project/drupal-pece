@@ -1,17 +1,17 @@
-uuid: 5f98e14d-f06f-4f06-b8fd-eb06dc3762c0
+uuid: aac111fb-8ab1-41dd-8890-d78d844f654f
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_audio_tags
-    - node.type.pece_artifact_audio
-    - taxonomy.vocabulary.pece_tags
+    - field.storage.node.field_tags
+    - node.type.pece_substantive_logic
+    - taxonomy.vocabulary.tags
 _core:
-  default_config_hash: oJNdD2e9duHBbQ2YjZ0fDph6g6gtt0qcb1hls4dvlTs
-id: node.pece_artifact_audio.field_audio_tags
-field_name: field_audio_tags
+  default_config_hash: Y0AkqvZeSu_kn-wTqZytVAt88Vx47lKkYVD8qr-Pq8o
+id: node.pece_substantive_logic.field_tags
+field_name: field_tags
 entity_type: node
-bundle: pece_artifact_audio
+bundle: pece_substantive_logic
 label: Tags
 description: ''
 required: false
@@ -22,7 +22,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      pece_tags: pece_tags
+      tags: tags
     sort:
       field: name
       direction: asc

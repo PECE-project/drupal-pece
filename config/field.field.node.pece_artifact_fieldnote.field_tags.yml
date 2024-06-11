@@ -1,17 +1,17 @@
-uuid: 9d444b93-6748-4c7b-a736-259e9b76f182
+uuid: 0b543440-452e-43a1-ba62-efd3d4b5f88f
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_photo_essay_tags
-    - node.type.pece_photo_essay
-    - taxonomy.vocabulary.pece_tags
+    - field.storage.node.field_tags
+    - node.type.pece_artifact_fieldnote
+    - taxonomy.vocabulary.tags
 _core:
-  default_config_hash: pBJdtsa2RCgYOIbGcSwZGWxODhIe8Ghf7m2yQh1SiVE
-id: node.pece_photo_essay.field_photo_essay_tags
-field_name: field_photo_essay_tags
+  default_config_hash: tpztrG8YvTg3_Fg7zW0FY2-yyYzmnG9jmAKddlaeNzQ
+id: node.pece_artifact_fieldnote.field_tags
+field_name: field_tags
 entity_type: node
-bundle: pece_photo_essay
+bundle: pece_artifact_fieldnote
 label: Tags
 description: ''
 required: false
@@ -22,7 +22,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      pece_tags: pece_tags
+      tags: tags
     sort:
       field: name
       direction: asc

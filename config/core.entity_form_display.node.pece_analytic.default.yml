@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_analytic.field_analytic_question_set
-    - field.field.node.pece_analytic.field_analytic_tags
+    - field.field.node.pece_analytic.field_tags
     - field.field.node.pece_analytic.field_ark_enabled
     - field.field.node.pece_analytic.field_pece_geolocation
     - node.type.pece_analytic
@@ -34,7 +34,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_analytic_tags:
+  field_tags:
     type: entity_reference_autocomplete
     weight: 9
     region: content

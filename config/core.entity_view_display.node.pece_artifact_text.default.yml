@@ -18,7 +18,7 @@ dependencies:
     - field.field.node.pece_artifact_text.field_text_language
     - field.field.node.pece_artifact_text.field_text_location
     - field.field.node.pece_artifact_text.field_text_source
-    - field.field.node.pece_artifact_text.field_text_tags
+    - field.field.node.pece_artifact_text.field_tags
     - field.field.node.pece_artifact_text.field_text_use_fieldsite_local
     - node.type.pece_artifact_text
   module:
@@ -210,7 +210,7 @@ third_party_settings:
             uuid: 8a3c5f40-25a5-4583-b771-af53d6ba1cee
             region: second
             configuration:
-              id: 'field_block:node:pece_artifact_text:field_text_tags'
+              id: 'field_block:node:pece_artifact_text:field_tags'
               label: Tags
               label_display: '0'
               provider: layout_builder
@@ -404,7 +404,7 @@ content:
     third_party_settings: {  }
     weight: 128
     region: first
-  field_text_tags:
+  field_tags:
     type: entity_reference_label
     label: above
     settings:

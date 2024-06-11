@@ -1,17 +1,17 @@
-uuid: 85bcb6fc-c89b-46c9-b88c-58d5bbeb3f58
+uuid: 0e9fbbf3-3d92-420c-8d38-617911be7b84
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_image_tags
-    - node.type.pece_artifact_image
-    - taxonomy.vocabulary.pece_tags
+    - field.storage.node.field_tags
+    - node.type.pece_artifact_text
+    - taxonomy.vocabulary.tags
 _core:
-  default_config_hash: hUfZfI-vkni4xumKzsZ7cgzrwv4gzqNhPUS530i9NFY
-id: node.pece_artifact_image.field_image_tags
-field_name: field_image_tags
+  default_config_hash: 05P0c_HY5Pm5DrHMiHYa2yMrPmDZ8LXE8Ye_ORQVE-w
+id: node.pece_artifact_text.field_tags
+field_name: field_tags
 entity_type: node
-bundle: pece_artifact_image
+bundle: pece_artifact_text
 label: Tags
 description: ''
 required: false
@@ -22,10 +22,10 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      pece_tags: pece_tags
+      tags: tags
     sort:
       field: name
       direction: asc
-    auto_create: true
+    auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

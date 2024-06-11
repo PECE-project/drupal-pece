@@ -19,7 +19,7 @@ dependencies:
     - field.field.node.pece_artifact_website.field_website_language
     - field.field.node.pece_artifact_website.field_website_location
     - field.field.node.pece_artifact_website.field_website_source
-    - field.field.node.pece_artifact_website.field_website_tags
+    - field.field.node.pece_artifact_website.field_tags
     - field.field.node.pece_artifact_website.field_website_url
     - node.type.pece_artifact_website
   module:
@@ -198,7 +198,7 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_website_tags:
+  field_tags:
     type: entity_reference_autocomplete
     weight: 16
     region: content

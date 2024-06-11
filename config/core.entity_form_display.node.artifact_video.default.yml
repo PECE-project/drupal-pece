@@ -21,7 +21,7 @@ dependencies:
     - field.field.node.artifact_video.field_video_media
     - field.field.node.artifact_video.field_video_permission
     - field.field.node.artifact_video.field_video_source
-    - field.field.node.artifact_video.field_video_tags
+    - field.field.node.artifact_video.field_tags
     - field.field.node.artifact_video.field_video_use_fieldsite_local
     - node.type.artifact_video
   module:
@@ -206,7 +206,7 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_video_tags:
+  field_tags:
     type: entity_reference_autocomplete
     weight: 17
     region: content

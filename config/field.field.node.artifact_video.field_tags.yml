@@ -1,15 +1,17 @@
-uuid: e6312262-3266-4681-bf78-cbf81bfdf5c7
+uuid: 280d2750-b9aa-42a5-a4d5-879d623ed533
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_annotation_tags
-    - node.type.pece_annotation
-    - taxonomy.vocabulary.pece_tags
-id: node.pece_annotation.field_annotation_tags
-field_name: field_annotation_tags
+    - field.storage.node.field_tags
+    - node.type.artifact_video
+    - taxonomy.vocabulary.tags
+_core:
+  default_config_hash: Uizv834jKeAsNOx7KtY4B249o9mg1C4cEGHyTUl1Zxo
+id: node.artifact_video.field_tags
+field_name: field_tags
 entity_type: node
-bundle: pece_annotation
+bundle: artifact_video
 label: Tags
 description: ''
 required: false
@@ -20,7 +22,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      pece_tags: pece_tags
+      tags: tags
     sort:
       field: name
       direction: asc

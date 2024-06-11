@@ -20,7 +20,7 @@ dependencies:
     - field.field.node.artifact_tabular_data.field_tabular_location
     - field.field.node.artifact_tabular_data.field_tabular_media
     - field.field.node.artifact_tabular_data.field_tabular_source
-    - field.field.node.artifact_tabular_data.field_tabular_tags
+    - field.field.node.artifact_tabular_data.field_tags
     - node.type.artifact_tabular_data
   module:
     - address
@@ -204,7 +204,7 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_tabular_tags:
+  field_tags:
     type: entity_reference_autocomplete
     weight: 19
     region: content

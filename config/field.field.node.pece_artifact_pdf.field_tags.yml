@@ -1,15 +1,17 @@
-uuid: 5b531616-9990-4ec9-b429-adb7d4d14295
+uuid: 84f37617-38a8-45b8-8728-1170a98c2d14
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.taxonomy_term.field_tags
-    - taxonomy.vocabulary.groups
+    - field.storage.node.field_tags
+    - node.type.pece_artifact_pdf
     - taxonomy.vocabulary.tags
-id: taxonomy_term.groups.field_tags
+  module:
+    - entity_reference_revisions
+id: node.pece_artifact_pdf.field_tags
 field_name: field_tags
-entity_type: taxonomy_term
-bundle: groups
+entity_type: node
+bundle: pece_artifact_pdf
 label: Tags
 description: ''
 required: false
@@ -26,4 +28,4 @@ settings:
       direction: asc
     auto_create: true
     auto_create_bundle: ''
-field_type: entity_reference
+field_type: entity_reference_revisions

@@ -19,7 +19,7 @@ dependencies:
     - field.field.node.pece_artifact_website.field_website_language
     - field.field.node.pece_artifact_website.field_website_location
     - field.field.node.pece_artifact_website.field_website_source
-    - field.field.node.pece_artifact_website.field_website_tags
+    - field.field.node.pece_artifact_website.field_tags
     - field.field.node.pece_artifact_website.field_website_url
     - node.type.pece_artifact_website
   module:
@@ -239,7 +239,7 @@ third_party_settings:
             uuid: f32495c1-1558-49bd-98c1-8af5d2fc7973
             region: second
             configuration:
-              id: 'field_block:node:pece_artifact_website:field_website_tags'
+              id: 'field_block:node:pece_artifact_website:field_tags'
               label: Tags
               label_display: '0'
               provider: layout_builder
@@ -461,7 +461,7 @@ content:
     region: content
 hidden:
   field_pece_created: true
-  field_website_tags: true
+  field_tags: true
   langcode: true
   og_audience: true
   search_api_excerpt: true

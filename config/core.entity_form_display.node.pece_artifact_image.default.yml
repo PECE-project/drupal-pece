@@ -15,7 +15,7 @@ dependencies:
     - field.field.node.pece_artifact_image.field_image_language
     - field.field.node.pece_artifact_image.field_image_location
     - field.field.node.pece_artifact_image.field_image_source
-    - field.field.node.pece_artifact_image.field_image_tags
+    - field.field.node.pece_artifact_image.field_tags
     - field.field.node.pece_artifact_image.field_pece_all_can_view
     - field.field.node.pece_artifact_image.field_pece_geolocation
     - field.field.node.pece_artifact_image.field_pece_license
@@ -151,7 +151,7 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_image_tags:
+  field_tags:
     type: entity_reference_autocomplete
     weight: 20
     region: content

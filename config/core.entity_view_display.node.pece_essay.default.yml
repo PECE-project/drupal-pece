@@ -7,7 +7,7 @@ dependencies:
     - field.field.node.pece_essay.field_ark_enabled
     - field.field.node.pece_essay.field_people_with_edit_access
     - field.field.node.pece_essay.field_essay_contents
-    - field.field.node.pece_essay.field_essay_tags
+    - field.field.node.pece_essay.field_tags
     - field.field.node.pece_essay.field_essay_thumbnail
     - field.field.node.pece_essay.field_groups_with_view_access
     - field.field.node.pece_essay.field_pece_all_can_view
@@ -110,7 +110,7 @@ third_party_settings:
             uuid: 335e95f0-65c1-4141-bb3c-7e812e945ffd
             region: second
             configuration:
-              id: 'field_block:node:pece_essay:field_essay_tags'
+              id: 'field_block:node:pece_essay:field_tags'
               label: Tags
               label_display: '0'
               provider: layout_builder
@@ -171,7 +171,7 @@ third_party_settings:
             uuid: 0f8dc9f0-c5af-48e8-9753-074a25c5039b
             region: content
             configuration:
-              id: 'field_block:node:pece_essay:field_essay_tags'
+              id: 'field_block:node:pece_essay:field_tags'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -369,7 +369,7 @@ content:
     third_party_settings: {  }
     weight: 109
     region: content
-  field_essay_tags:
+  field_tags:
     type: entity_reference_label
     label: above
     settings:
