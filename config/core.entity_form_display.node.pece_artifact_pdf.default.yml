@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_pdf.field_ark_enabled
-    - field.field.node.pece_artifact_pdf.field_people_with_edit_access
     - field.field.node.pece_artifact_pdf.field_groups_with_view_access
     - field.field.node.pece_artifact_pdf.field_pdf_authors
     - field.field.node.pece_artifact_pdf.field_pdf_bibliography
@@ -15,17 +14,17 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_pdf_location
     - field.field.node.pece_artifact_pdf.field_pdf_media
     - field.field.node.pece_artifact_pdf.field_pdf_source
-    - field.field.node.pece_artifact_pdf.field_tags
     - field.field.node.pece_artifact_pdf.field_pdf_use_fieldsite_local
     - field.field.node.pece_artifact_pdf.field_pece_all_can_view
     - field.field.node.pece_artifact_pdf.field_pece_license
     - field.field.node.pece_artifact_pdf.field_pece_project_ref
+    - field.field.node.pece_artifact_pdf.field_people_with_edit_access
     - field.field.node.pece_artifact_pdf.field_people_with_view_access
+    - field.field.node.pece_artifact_pdf.field_tags
     - node.type.pece_artifact_pdf
   module:
     - address
     - datetime
-    - entity_reference_revisions
     - field_group
     - languagefield
     - media_library
@@ -206,7 +205,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_tags:
-    type: entity_reference_revisions_autocomplete
+    type: entity_reference_autocomplete
     weight: 19
     region: content
     settings:

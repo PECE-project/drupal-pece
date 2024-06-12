@@ -1,4 +1,4 @@
-uuid: 84f37617-38a8-45b8-8728-1170a98c2d14
+uuid: 5cb49e80-5d0a-462b-9599-967ec0b7a475
 langcode: en
 status: true
 dependencies:
@@ -6,8 +6,6 @@ dependencies:
     - field.storage.node.field_tags
     - node.type.pece_artifact_pdf
     - taxonomy.vocabulary.tags
-  module:
-    - entity_reference_revisions
 id: node.pece_artifact_pdf.field_tags
 field_name: field_tags
 entity_type: node
@@ -28,4 +26,4 @@ settings:
       direction: asc
     auto_create: true
     auto_create_bundle: ''
-field_type: entity_reference_revisions
+field_type: entity_reference
