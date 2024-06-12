@@ -32,6 +32,8 @@ ddev drush -y si pece --existing-config
 ddev content-import-all
 ```
 
+Note that the "[warning] … was not found" messages are addressed by the necessarily later `content-import-all` step.
+
 ## Updating Drupal Core
 
 This project will attempt to keep all of your Drupal Core files up-to-date; the
