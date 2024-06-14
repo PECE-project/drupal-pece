@@ -56,7 +56,7 @@
 {% block navbar %}
 {% if page.navbar_branding or page.navbar_social or page.primary_menu %}
 {# Top navbar #}
-<nav class="navbar has-shadow is-primary">
+<nav class="navbar">
   <div class="container">
     <div class="navbar-brand">
       <div id="js-navbar-burger" class="navbar-burger burger" data-target="navbar-menu">
@@ -84,7 +84,7 @@
 {% endif %}
 {% endblock navbar %}
 {% block header %}
-<section class="hero is-primary">
+<section class="hero">
   {% block header_and_search %}
   {% if page.header or page.header_search %}
   {# Header hero region + search #}
