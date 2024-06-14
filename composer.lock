@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0ed4ffdfb42be1a75b1697cbde18bd21",
+    "content-hash": "9b0e8e033ea7fb94454584a7a922d1ee",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -5524,27 +5524,27 @@
         },
         {
             "name": "drupal/gin",
-            "version": "3.0.0-rc10",
+            "version": "3.0.0-rc11",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/gin.git",
-                "reference": "8.x-3.0-rc10"
+                "reference": "8.x-3.0-rc11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/gin-8.x-3.0-rc10.zip",
-                "reference": "8.x-3.0-rc10",
-                "shasum": "f79fd895dd1f16c3af457bfaed5527f5b5bc752c"
+                "url": "https://ftp.drupal.org/files/projects/gin-8.x-3.0-rc11.zip",
+                "reference": "8.x-3.0-rc11",
+                "shasum": "532000cb8497412fb4b26efc362c7fc9efc44546"
             },
             "require": {
-                "drupal/core": "^9 || ^10",
+                "drupal/core": "^9 || ^10 || ^11",
                 "drupal/gin_toolbar": "^1.0@beta"
             },
             "type": "drupal-theme",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.0-rc10",
-                    "datestamp": "1712686345",
+                    "version": "8.x-3.0-rc11",
+                    "datestamp": "1718354743",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "RC releases are not covered by Drupal security advisories."
@@ -5645,26 +5645,26 @@
         },
         {
             "name": "drupal/gin_toolbar",
-            "version": "1.0.0-rc5",
+            "version": "1.0.0-rc6",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/gin_toolbar.git",
-                "reference": "8.x-1.0-rc5"
+                "reference": "8.x-1.0-rc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/gin_toolbar-8.x-1.0-rc5.zip",
-                "reference": "8.x-1.0-rc5",
-                "shasum": "523b565244440a16fa447065a98841770992bd2e"
+                "url": "https://ftp.drupal.org/files/projects/gin_toolbar-8.x-1.0-rc6.zip",
+                "reference": "8.x-1.0-rc6",
+                "shasum": "542def14b9a5435efb4e021d384fa3f7b0fc6e78"
             },
             "require": {
-                "drupal/core": "^9 || ^10"
+                "drupal/core": "^9 || ^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0-rc5",
-                    "datestamp": "1702727588",
+                    "version": "8.x-1.0-rc6",
+                    "datestamp": "1718368950",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "RC releases are not covered by Drupal security advisories."
@@ -8595,6 +8595,47 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/splide",
                 "issues": "https://drupal.org/project/issues/splide"
+            }
+        },
+        {
+            "name": "drupal/style_guide",
+            "version": "dev-1.0.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/style_guide.git",
+                "reference": "99e2f0035c846654a60e2ff0c77930aff288185b"
+            },
+            "require": {
+                "drupal/core": "^9.2 || ^10 || ^11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.0.x": "1.0.x-dev"
+                },
+                "drupal": {
+                    "version": "1.0.x-dev",
+                    "datestamp": "1711473343",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "2dareis2do",
+                    "homepage": "https://www.drupal.org/user/676472"
+                }
+            ],
+            "description": "Simple Style Guide for your custom theme",
+            "homepage": "https://www.drupal.org/project/style_guide",
+            "support": {
+                "source": "https://git.drupalcode.org/project/style_guide"
             }
         },
         {
@@ -23306,7 +23347,8 @@
         "drupal/media_entity_browser": 15,
         "drupal/media_library_media_modify": 10,
         "drupal/profile": 20,
-        "drupal/rules": 20
+        "drupal/rules": 20,
+        "drupal/style_guide": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
