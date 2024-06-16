@@ -22463,12 +22463,38 @@ has-background-danger.is-hoverable:active {
   }
 }
 
-.navbar-menu a {
+.navbar-menu li {
+  margin: 0 0.25rem;
+}
+.navbar-menu li a {
   border-left: var(--bulma-primary-light) 5px solid;
   padding: 1rem 3rem;
   text-align: center;
   border-right: transparent 4px solid;
-  margin: 0 0.25rem;
+}
+.navbar-menu li a.is-active {
+  border-left-color: var(--bulma-primary);
+}
+.navbar-menu li a:hover {
+  --bulma-menu-item-h: var(--bulma-menu-item-selected-h);
+  --bulma-menu-item-s: var(--bulma-menu-item-selected-s);
+}
+
+/*
+.menu-list a.is-active,
+.menu-list a.is-selected {
+  --bulma-menu-item-background-l: var();
+  --bulma-menu-item-color-l: var();
+}
+*/
+.menu {
+  --bulma-menu-item-selected-background-l: var(--bulma-menu-item-background-l);
+  --bulma-menu-item-selected-color-l: var(--bulma-text-dark-l);
+}
+
+.form-search {
+  border: 0;
+  box-shadow: 0 6px 4px #f7fafc;
 }
 
 /*# sourceMappingURL=main.css.map */
