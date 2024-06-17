@@ -91,3 +91,20 @@ $beige-lighter: #eff0eb;
   border: 0;
   box-shadow: 0 6px 4px #f7fafc;
 }
+
+.dialog-off-canvas-main-canvas {
+  position: relative;
+  z-index: 0;
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    background-color: var(--bulma-primary-light);
+    mask-image: url(../../../images/curve.svg);
+    mask-repeat: no-repeat;
+  }
+}
