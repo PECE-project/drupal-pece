@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b0e8e033ea7fb94454584a7a922d1ee",
+    "content-hash": "b24e524e099be7b60f17887b07946b4e",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -324,16 +324,16 @@
         },
         {
             "name": "citation-style-language/styles",
-            "version": "v0.0.434",
+            "version": "v0.0.436",
             "source": {
                 "type": "git",
                 "url": "https://github.com/citation-style-language/styles.git",
-                "reference": "6dd5144f52bac3c1588d52505cafc14667b23579"
+                "reference": "48ca7a2086d0969802eaa70d9b2d2b4ed849b1cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/citation-style-language/styles/zipball/6dd5144f52bac3c1588d52505cafc14667b23579",
-                "reference": "6dd5144f52bac3c1588d52505cafc14667b23579",
+                "url": "https://api.github.com/repos/citation-style-language/styles/zipball/48ca7a2086d0969802eaa70d9b2d2b4ed849b1cf",
+                "reference": "48ca7a2086d0969802eaa70d9b2d2b4ed849b1cf",
                 "shasum": ""
             },
             "type": "library",
@@ -351,7 +351,7 @@
             "homepage": "http://citationstyles.org/",
             "support": {
                 "issues": "https://github.com/citation-style-language/styles/issues",
-                "source": "https://github.com/citation-style-language/styles/tree/v0.0.434"
+                "source": "https://github.com/citation-style-language/styles/tree/v0.0.436"
             },
             "funding": [
                 {
@@ -359,7 +359,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-22T03:42:22+00:00"
+            "time": "2024-06-09T02:10:25+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -3862,6 +3862,58 @@
             "homepage": "https://www.drupal.org/project/config_update",
             "support": {
                 "source": "https://git.drupalcode.org/project/config_update"
+            }
+        },
+        {
+            "name": "drupal/configurable_views_filter_block",
+            "version": "1.0.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/configurable_views_filter_block.git",
+                "reference": "1.0.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/configurable_views_filter_block-1.0.0-beta1.zip",
+                "reference": "1.0.0-beta1",
+                "shasum": "3d9661700b6073031deda21ee57689b4430ab107"
+            },
+            "require": {
+                "drupal/core": "^9 || ^10"
+            },
+            "suggest": {
+                "drupal/better_exposed_filters": "Provides advanced options (e.g. links, checkboxes, or other widgets) to exposed Views elements."
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.0-beta1",
+                    "datestamp": "1706443750",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Manuel Adan (manuel.adan)",
+                    "homepage": "https://www.drupal.org/u/manueladan",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Allow multiple instances of Views exposed filters block with a custom set of form fields per instance.",
+            "homepage": "https://www.drupal.org/project/configurable_views_filter_block",
+            "keywords": [
+                "Drupal",
+                "views"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/configurable_views_filter_block"
             }
         },
         {
@@ -8267,17 +8319,17 @@
         },
         {
             "name": "drupal/search_api",
-            "version": "1.34.0",
+            "version": "1.35.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/search_api.git",
-                "reference": "8.x-1.34"
+                "reference": "8.x-1.35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/search_api-8.x-1.34.zip",
-                "reference": "8.x-1.34",
-                "shasum": "dd08166888f90adaf01cc1a759266097709efe7c"
+                "url": "https://ftp.drupal.org/files/projects/search_api-8.x-1.35.zip",
+                "reference": "8.x-1.35",
+                "shasum": "d119726e870f793c6470d2a4fa9286662c5eb45d"
             },
             "require": {
                 "drupal/core": "^10.1 || ^11"
@@ -8298,8 +8350,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.34",
-                    "datestamp": "1714899074",
+                    "version": "8.x-1.35",
+                    "datestamp": "1718551025",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -8599,23 +8651,26 @@
         },
         {
             "name": "drupal/style_guide",
-            "version": "dev-1.0.x",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/style_guide.git",
-                "reference": "99e2f0035c846654a60e2ff0c77930aff288185b"
+                "reference": "1.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/style_guide-1.0.0.zip",
+                "reference": "1.0.0",
+                "shasum": "da7c00d34a1019ef227494a95fbde5c7075eb9ce"
             },
             "require": {
                 "drupal/core": "^9.2 || ^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.0.x": "1.0.x-dev"
-                },
                 "drupal": {
-                    "version": "1.0.x-dev",
-                    "datestamp": "1711473343",
+                    "version": "1.0.0",
+                    "datestamp": "1718623080",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -20756,16 +20811,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.4",
+            "version": "1.11.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "9100a76ce8015b9aa7125b9171ae3a76887b6c82"
+                "reference": "490f0ae1c92b082f154681d7849aee776a7c1443"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9100a76ce8015b9aa7125b9171ae3a76887b6c82",
-                "reference": "9100a76ce8015b9aa7125b9171ae3a76887b6c82",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/490f0ae1c92b082f154681d7849aee776a7c1443",
+                "reference": "490f0ae1c92b082f154681d7849aee776a7c1443",
                 "shasum": ""
             },
             "require": {
@@ -20810,7 +20865,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-06T12:19:22+00:00"
+            "time": "2024-06-17T15:10:54+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -23329,6 +23384,7 @@
         "drupal/bibcite_migrate": 10,
         "drupal/blocktabs": 10,
         "drupal/bulma": 20,
+        "drupal/configurable_views_filter_block": 10,
         "drupal/dashboards": 10,
         "drupal/default_content": 15,
         "drupal/elasticsearch_connector": 15,
