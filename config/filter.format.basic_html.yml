@@ -3,13 +3,31 @@ langcode: en
 status: true
 dependencies:
   module:
+    - blazy
     - editor
+    - linkit
+    - splide
 _core:
   default_config_hash: P8ddpAIKtawJDi5SzOwCzVnnNYqONewSTJ6Xn0dW_aQ
 name: 'Basic HTML'
 format: basic_html
 weight: 0
 filters:
+  blazy_filter:
+    id: blazy_filter
+    provider: blazy
+    status: false
+    weight: 3
+    settings:
+      media_switch: ''
+      hybrid_style: ''
+      box_style: ''
+      box_media_style: ''
+      box_caption: ''
+      filter_tags:
+        img: img
+        iframe: iframe
+      use_data_uri: '0'
   editor_file_reference:
     id: editor_file_reference
     provider: editor
@@ -34,7 +52,7 @@ filters:
     status: true
     weight: -10
     settings:
-      allowed_html: '<br> <p class="text-align-left text-align-center text-align-right text-align-justify"> <h2 id class="text-align-left text-align-center text-align-right text-align-justify"> <h3 id class="text-align-left text-align-center text-align-right text-align-justify"> <h4 id class="text-align-left text-align-center text-align-right text-align-justify"> <h5 id class="text-align-left text-align-center text-align-right text-align-justify"> <h6 id class="text-align-left text-align-center text-align-right text-align-justify"> <cite> <dl> <dt> <dd> <span> <a hreflang href> <blockquote cite> <ul type> <ol type start> <img src alt height width data-entity-type data-entity-uuid data-align data-caption> <strong> <em> <u> <code> <s> <li>'
+      allowed_html: '<br> <p class="text-align-left text-align-center text-align-right text-align-justify"> <h2 id class="text-align-left text-align-center text-align-right text-align-justify"> <h3 id class="text-align-left text-align-center text-align-right text-align-justify"> <h4 id class="text-align-left text-align-center text-align-right text-align-justify"> <h5 id class="text-align-left text-align-center text-align-right text-align-justify"> <h6 id class="text-align-left text-align-center text-align-right text-align-justify"> <cite> <dl> <dt> <dd> <a hreflang href data-entity-type data-entity-uuid data-entity-substitution> <blockquote cite> <ul type> <ol type start> <strong> <em> <u> <code> <s> <li>'
       filter_html_help: false
       filter_html_nofollow: false
   filter_html_image_secure:
@@ -49,3 +67,57 @@ filters:
     status: true
     weight: 15
     settings: {  }
+  linkit:
+    id: linkit
+    provider: linkit
+    status: true
+    weight: 0
+    settings:
+      title: true
+  splide_filter:
+    id: splide_filter
+    provider: splide
+    status: false
+    weight: 4
+    settings:
+      caption:
+        alt: '0'
+        title: '0'
+      optionset: default
+      by_delta: null
+      layout: ''
+      admin_uri: '/admin/config/content/formats/manage/basic_html?destination=/admin/config/content/formats&ajax_form=1&_wrapper_format=drupal_ajax'
+      background: false
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      loading: ''
+      responsive_image_style: ''
+      box_style: ''
+      image_style: ''
+      media_switch: ''
+      ratio: ''
+      thumbnail_style: ''
+      grid: ''
+      grid_medium: ''
+      grid_small: ''
+      style: ''
+      skin: ''
+      overridables:
+        arrows: '0'
+        pagination: '0'
+        autoplay: '0'
+        autoWidth: '0'
+        autoHeight: '0'
+        drag: '0'
+        wheel: '0'
+        randomize: '0'
+      optionset_nav: ''
+      skin_nav: ''
+      nav_caption: ''
+      thumbnail_effect: ''
+      navpos: ''
+      override: false
+      pagination_pos: ''
+      preserve_keys: false
+      visible_items: null
