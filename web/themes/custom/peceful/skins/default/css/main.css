@@ -22471,13 +22471,19 @@ has-background-danger.is-hoverable:active {
   margin: 0 0.25rem;
 }
 .navbar-menu li a {
+  background-color: transparent;
   border-left: var(--bulma-primary-light) 5px solid;
   padding: 1rem 3rem;
   text-align: center;
-  border-right: transparent 4px solid;
+  border-right: transparent 5px solid;
 }
 .navbar-menu li a.is-active {
   border-left-color: var(--bulma-primary);
+  background-color: transparent;
+}
+.navbar-menu li a.is-active:hover {
+  cursor: default;
+  pointer-events: none;
 }
 .navbar-menu li a:hover {
   --bulma-menu-item-h: var(--bulma-menu-item-selected-h);
@@ -22513,7 +22519,7 @@ has-background-danger.is-hoverable:active {
   left: 0;
   right: 0;
   height: 400px;
-  background-color: var(--bulma-primary-light);
+  background-color: var(--bulma-primary-95);
   mask-image: url(../../../images/curve.svg);
   mask-repeat: no-repeat;
 }
