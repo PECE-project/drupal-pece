@@ -64,12 +64,21 @@ $beige-lighter: #eff0eb;
 .navbar-menu li {
   margin: 0 .25rem;
   a {
+    --bulma-menu-item-h: var(--bulma-primary-95-h);
+    --bulma-menu-item-s: var(--bulma-primary-95-s);
+    --bulma-menu-item-l: var(--bulma-primary-95-l);
+    // background-color: var(--bulma-primary-95);
     border-left: var(--bulma-primary-light) 5px solid;
     padding: 1rem 3rem;
     text-align: center;
     border-right: transparent 5px solid;
     &.is-active {
       border-left-color: var(--bulma-primary);
+      background-color: transparent;
+      &:hover {
+        cursor: default;
+        pointer-events: none;
+      }
     }
     &:hover {
       // 'selected' color is prettier & can be reused as bar indicates selected.
@@ -108,7 +117,7 @@ $beige-lighter: #eff0eb;
     left: 0;
     right: 0;
     height: 400px;
-    background-color: var(--bulma-primary-light);
+    background-color: var(--bulma-primary-95);
     mask-image: url(../../../images/curve.svg);
     mask-repeat: no-repeat;
   }
