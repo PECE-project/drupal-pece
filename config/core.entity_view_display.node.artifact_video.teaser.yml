@@ -5,12 +5,13 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.artifact_video.field_ark_enabled
-    - field.field.node.artifact_video.field_people_with_edit_access
     - field.field.node.artifact_video.field_groups_with_view_access
     - field.field.node.artifact_video.field_pece_all_can_view
     - field.field.node.artifact_video.field_pece_license
     - field.field.node.artifact_video.field_pece_project_ref
+    - field.field.node.artifact_video.field_people_with_edit_access
     - field.field.node.artifact_video.field_people_with_view_access
+    - field.field.node.artifact_video.field_tags
     - field.field.node.artifact_video.field_video_authors
     - field.field.node.artifact_video.field_video_created_date
     - field.field.node.artifact_video.field_video_crit_commentary
@@ -20,9 +21,7 @@ dependencies:
     - field.field.node.artifact_video.field_video_language
     - field.field.node.artifact_video.field_video_location
     - field.field.node.artifact_video.field_video_media
-    - field.field.node.artifact_video.field_video_permission
     - field.field.node.artifact_video.field_video_source
-    - field.field.node.artifact_video.field_tags
     - field.field.node.artifact_video.field_video_use_fieldsite_local
     - node.type.artifact_video
   module:
@@ -57,7 +56,6 @@ hidden:
   field_video_language: true
   field_video_location: true
   field_video_media: true
-  field_video_permission: true
   field_video_source: true
   field_video_use_fieldsite_local: true
   langcode: true
