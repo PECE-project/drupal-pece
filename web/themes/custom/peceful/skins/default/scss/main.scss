@@ -64,10 +64,12 @@ $beige-lighter: #eff0eb;
 .navbar-menu li {
   margin: 0 .25rem;
   a {
+    // The variables i am using here do not even exist as far as i can tell,
+    // however they allow the way Bulma does hover to still work whereas
+    // background-color: transparent does not.  :shrug:
     --bulma-menu-item-h: var(--bulma-primary-95-h);
     --bulma-menu-item-s: var(--bulma-primary-95-s);
     --bulma-menu-item-l: var(--bulma-primary-95-l);
-    // background-color: var(--bulma-primary-95);
     border-left: var(--bulma-primary-light) 5px solid;
     padding: 1rem 3rem;
     text-align: center;
