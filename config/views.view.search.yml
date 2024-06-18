@@ -103,10 +103,10 @@ display:
         type: basic
         options:
           submit_button: Apply
-          reset_button: false
+          reset_button: true
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
+          expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
@@ -279,7 +279,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      exposed_block: false
+      exposed_block: true
       display_extenders:
         metatag_display_extender:
           metatags: {  }
