@@ -1,0 +1,30 @@
+uuid: 0068fc06-8c3e-4846-ba68-e306072d758c
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:928e3566-d5af-4426-8c9b-6df754b71afe'
+  module:
+    - block_content
+    - system
+  theme:
+    - peceful
+id: peceful_learnaboutpece
+theme: peceful
+region: bottom
+weight: 0
+provider: null
+plugin: 'block_content:928e3566-d5af-4426-8c9b-6df754b71afe'
+settings:
+  id: 'block_content:928e3566-d5af-4426-8c9b-6df754b71afe'
+  label: 'Learn about PECE'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'
