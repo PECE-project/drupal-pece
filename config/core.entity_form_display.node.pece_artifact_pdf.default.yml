@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_artifact_pdf.field_ark_enabled
     - field.field.node.pece_artifact_pdf.field_groups_with_view_access
+    - field.field.node.pece_artifact_pdf.field_pdf_artifact_document
     - field.field.node.pece_artifact_pdf.field_pdf_authors
     - field.field.node.pece_artifact_pdf.field_pdf_bibliography
     - field.field.node.pece_artifact_pdf.field_pdf_created_date
@@ -12,7 +13,6 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_pdf_fieldsite
     - field.field.node.pece_artifact_pdf.field_pdf_language
     - field.field.node.pece_artifact_pdf.field_pdf_location
-    - field.field.node.pece_artifact_pdf.field_pdf_media
     - field.field.node.pece_artifact_pdf.field_pdf_source
     - field.field.node.pece_artifact_pdf.field_pdf_use_fieldsite_local
     - field.field.node.pece_artifact_pdf.field_pece_all_can_view
@@ -26,8 +26,8 @@ dependencies:
     - address
     - datetime
     - field_group
+    - file
     - languagefield
-    - media_library
     - path
 third_party_settings:
   field_group:
@@ -40,7 +40,7 @@ third_party_settings:
       label: Permissions
       region: content
       parent_name: ''
-      weight: 18
+      weight: 15
       format_type: details
       format_settings:
         classes: ''
@@ -56,13 +56,13 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 22
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
   field_ark_enabled:
     type: boolean_checkbox
-    weight: 20
+    weight: 17
     region: content
     settings:
       display_label: true
@@ -77,6 +77,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_pdf_artifact_document:
+    type: file_generic
+    weight: 5
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
   field_pdf_authors:
     type: entity_reference_autocomplete
     weight: 7
@@ -89,7 +96,7 @@ content:
     third_party_settings: {  }
   field_pdf_bibliography:
     type: entity_reference_autocomplete
-    weight: 13
+    weight: 12
     region: content
     settings:
       match_operator: CONTAINS
@@ -105,7 +112,7 @@ content:
     third_party_settings: {  }
   field_pdf_crit_commentary:
     type: string_textarea
-    weight: 4
+    weight: 3
     region: content
     settings:
       rows: 5
@@ -131,16 +138,9 @@ content:
     third_party_settings: {  }
   field_pdf_location:
     type: address_default
-    weight: 14
+    weight: 13
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_pdf_media:
-    type: media_library_widget
-    weight: 5
-    region: content
-    settings:
-      media_types: {  }
     third_party_settings: {  }
   field_pdf_source:
     type: string_textarea
@@ -166,7 +166,7 @@ content:
     third_party_settings: {  }
   field_pece_license:
     type: entity_reference_autocomplete
-    weight: 16
+    weight: 14
     region: content
     settings:
       match_operator: CONTAINS
@@ -206,7 +206,7 @@ content:
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
-    weight: 19
+    weight: 16
     region: content
     settings:
       match_operator: CONTAINS
@@ -216,7 +216,7 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 23
+    weight: 20
     region: content
     settings:
       include_locked: true
@@ -229,21 +229,21 @@ content:
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 26
+    weight: 23
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 24
+    weight: 21
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 25
+    weight: 22
     region: content
     settings:
       display_label: true
@@ -258,7 +258,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 21
+    weight: 18
     region: content
     settings:
       match_operator: CONTAINS
