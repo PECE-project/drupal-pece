@@ -1,0 +1,34 @@
+uuid: 96a581cc-960e-4350-9e47-ebb24e811c2d
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.search
+  module:
+    - configurable_views_filter_block
+    - system
+  theme:
+    - peceful
+id: peceful_search_form_text
+theme: peceful
+region: sidebar_second
+weight: -7
+provider: null
+plugin: 'configurable_views_filter_block_block:search-page'
+settings:
+  id: 'configurable_views_filter_block_block:search-page'
+  label: ''
+  label_display: visible
+  provider: configurable_views_filter_block
+  views_label: ''
+  visible_filters:
+    search_api_fulltext: search_api_fulltext
+  no_groups: true
+  no_reset: false
+  no_sort: false
+  no_pager: false
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /search
