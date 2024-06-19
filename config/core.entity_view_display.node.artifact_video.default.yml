@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.artifact_video.field_people_with_edit_access
     - field.field.node.artifact_video.field_people_with_view_access
     - field.field.node.artifact_video.field_tags
+    - field.field.node.artifact_video.field_video_artifact_video
     - field.field.node.artifact_video.field_video_authors
     - field.field.node.artifact_video.field_video_created_date
     - field.field.node.artifact_video.field_video_crit_commentary
@@ -19,7 +20,6 @@ dependencies:
     - field.field.node.artifact_video.field_video_format
     - field.field.node.artifact_video.field_video_language
     - field.field.node.artifact_video.field_video_location
-    - field.field.node.artifact_video.field_video_media
     - field.field.node.artifact_video.field_video_source
     - field.field.node.artifact_video.field_video_use_fieldsite_local
     - node.type.artifact_video
@@ -43,31 +43,6 @@ third_party_settings:
           context_mapping: {  }
           column_widths: 50-50
         components:
-          56002ced-1be4-4bde-bffe-1b517cb25100:
-            uuid: 56002ced-1be4-4bde-bffe-1b517cb25100
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_video:field_video_media'
-              label: Video
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: file_video
-                label: above
-                settings:
-                  controls: false
-                  autoplay: false
-                  loop: false
-                  multiple_file_display_type: tags
-                  muted: false
-                  width: 640
-                  height: 480
-                third_party_settings: {  }
-            weight: 0
-            additional: {  }
           0742d70b-04da-4f59-a86e-92ee65eb6b7c:
             uuid: 0742d70b-04da-4f59-a86e-92ee65eb6b7c
             region: first
@@ -85,7 +60,7 @@ third_party_settings:
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            weight: 1
+            weight: 2
             additional: {  }
           670f6ed7-6879-4de7-94af-13db73437359:
             uuid: 670f6ed7-6879-4de7-94af-13db73437359
@@ -104,7 +79,7 @@ third_party_settings:
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            weight: 2
+            weight: 3
             additional: {  }
           41d1b100-9b81-4333-9889-8df0a72afe42:
             uuid: 41d1b100-9b81-4333-9889-8df0a72afe42
@@ -123,7 +98,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 3
+            weight: 4
             additional: {  }
           106966e9-81f7-442b-82b0-65d572984a7b:
             uuid: 106966e9-81f7-442b-82b0-65d572984a7b
@@ -138,7 +113,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 4
+            weight: 5
             additional: {  }
           399dfa52-1746-4098-b4dd-5f655a11e921:
             uuid: 399dfa52-1746-4098-b4dd-5f655a11e921
@@ -305,7 +280,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 5
+            weight: 6
             additional: {  }
           6a1395de-cee8-443c-96d3-29cc31d73ed7:
             uuid: 6a1395de-cee8-443c-96d3-29cc31d73ed7
@@ -321,7 +296,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 6
+            weight: 7
             additional: {  }
           e20e7806-7f88-4b74-9388-59bc8111dc9c:
             uuid: e20e7806-7f88-4b74-9388-59bc8111dc9c
@@ -337,7 +312,34 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 7
+            weight: 8
+            additional: {  }
+          40864c80-b547-4f72-9b77-ab5290b8e795:
+            uuid: 40864c80-b547-4f72-9b77-ab5290b8e795
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_video:field_video_artifact_video'
+              label: Video
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: file_video
+                label: above
+                settings:
+                  controls: false
+                  autoplay: false
+                  loop: false
+                  multiple_file_display_type: tags
+                  muted: false
+                  width: 640
+                  height: 480
+                third_party_settings:
+                  blazy:
+                    blazy: false
+            weight: 1
             additional: {  }
         third_party_settings: {  }
 id: node.artifact_video.default
@@ -405,6 +407,14 @@ content:
     third_party_settings: {  }
     weight: 127
     region: first
+  field_video_artifact_video:
+    type: file_default
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 130
+    region: first
   field_video_authors:
     type: entity_reference_label
     label: above
@@ -469,14 +479,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 110
-    region: content
-  field_video_media:
-    type: file_default
-    label: above
-    settings:
-      use_description_as_link_text: true
-    third_party_settings: {  }
-    weight: 123
     region: content
   field_video_source:
     type: text_default
