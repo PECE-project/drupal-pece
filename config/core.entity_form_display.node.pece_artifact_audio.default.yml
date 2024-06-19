@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_audio.field_ark_enabled
+    - field.field.node.pece_artifact_audio.field_audio_artifact_audio
     - field.field.node.pece_artifact_audio.field_audio_authors
     - field.field.node.pece_artifact_audio.field_audio_created_date
     - field.field.node.pece_artifact_audio.field_audio_crit_commentary
@@ -12,9 +13,7 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_audio_file_format
     - field.field.node.pece_artifact_audio.field_audio_language
     - field.field.node.pece_artifact_audio.field_audio_location
-    - field.field.node.pece_artifact_audio.field_audio_media
     - field.field.node.pece_artifact_audio.field_audio_source
-    - field.field.node.pece_artifact_audio.field_tags
     - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
     - field.field.node.pece_artifact_audio.field_groups_with_view_access
     - field.field.node.pece_artifact_audio.field_pece_all_can_view
@@ -22,13 +21,14 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_pece_project_ref
     - field.field.node.pece_artifact_audio.field_people_with_edit_access
     - field.field.node.pece_artifact_audio.field_people_with_view_access
+    - field.field.node.pece_artifact_audio.field_tags
     - node.type.pece_artifact_audio
   module:
     - address
     - datetime
     - field_group
+    - file
     - languagefield
-    - media_library
     - path
     - text
 third_party_settings:
@@ -42,7 +42,7 @@ third_party_settings:
       label: Permissions
       region: content
       parent_name: ''
-      weight: 17
+      weight: 15
       format_type: details
       format_settings:
         classes: ''
@@ -58,16 +58,23 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 22
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }
   field_ark_enabled:
     type: boolean_checkbox
-    weight: 20
+    weight: 18
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_audio_artifact_audio:
+    type: file_generic
+    weight: 4
+    region: content
+    settings:
+      progress_indicator: throbber
     third_party_settings: {  }
   field_audio_authors:
     type: entity_reference_autocomplete
@@ -87,7 +94,7 @@ content:
     third_party_settings: {  }
   field_audio_crit_commentary:
     type: text_textarea
-    weight: 4
+    weight: 3
     region: content
     settings:
       rows: 5
@@ -129,16 +136,9 @@ content:
     third_party_settings: {  }
   field_audio_location:
     type: address_default
-    weight: 15
+    weight: 14
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_audio_media:
-    type: media_library_widget
-    weight: 5
-    region: content
-    settings:
-      media_types: {  }
     third_party_settings: {  }
   field_audio_source:
     type: text_textarea
@@ -150,7 +150,7 @@ content:
     third_party_settings: {  }
   field_audio_use_fieldsite_local:
     type: boolean_checkbox
-    weight: 14
+    weight: 13
     region: content
     settings:
       display_label: true
@@ -174,7 +174,7 @@ content:
     third_party_settings: {  }
   field_pece_license:
     type: entity_reference_autocomplete
-    weight: 18
+    weight: 16
     region: content
     settings:
       match_operator: CONTAINS
@@ -214,7 +214,7 @@ content:
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
-    weight: 19
+    weight: 17
     region: content
     settings:
       match_operator: CONTAINS
@@ -224,7 +224,7 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 24
+    weight: 22
     region: content
     settings:
       include_locked: true
@@ -237,21 +237,21 @@ content:
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 25
+    weight: 23
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 23
+    weight: 21
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 26
+    weight: 24
     region: content
     settings:
       display_label: true
@@ -266,7 +266,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 21
+    weight: 19
     region: content
     settings:
       match_operator: CONTAINS

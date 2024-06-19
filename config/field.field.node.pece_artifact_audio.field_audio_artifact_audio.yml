@@ -1,0 +1,27 @@
+uuid: f9eb5244-a79c-4682-8747-d0c07bb2a3e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_audio_artifact_audio
+    - node.type.pece_artifact_audio
+  module:
+    - file
+id: node.pece_artifact_audio.field_audio_artifact_audio
+field_name: field_audio_artifact_audio
+entity_type: node
+bundle: pece_artifact_audio
+label: Audio
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'mp3 wav aac'
+  max_filesize: ''
+  description_field: false
+field_type: file

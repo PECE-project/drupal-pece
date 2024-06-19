@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_audio.field_ark_enabled
+    - field.field.node.pece_artifact_audio.field_audio_artifact_audio
     - field.field.node.pece_artifact_audio.field_audio_authors
     - field.field.node.pece_artifact_audio.field_audio_created_date
     - field.field.node.pece_artifact_audio.field_audio_crit_commentary
@@ -12,7 +13,6 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_audio_file_format
     - field.field.node.pece_artifact_audio.field_audio_language
     - field.field.node.pece_artifact_audio.field_audio_location
-    - field.field.node.pece_artifact_audio.field_audio_media
     - field.field.node.pece_artifact_audio.field_audio_source
     - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
     - field.field.node.pece_artifact_audio.field_groups_with_view_access
@@ -26,9 +26,11 @@ dependencies:
   module:
     - address
     - datetime
+    - file
     - languagefield
     - layout_builder
     - layout_discovery
+    - layout_library
     - text
     - user
 third_party_settings:
@@ -117,25 +119,6 @@ third_party_settings:
           context_mapping: {  }
           column_widths: 50-50
         components:
-          476878dd-d9c3-4286-98c5-39adc9a5ef19:
-            uuid: 476878dd-d9c3-4286-98c5-39adc9a5ef19
-            region: first
-            configuration:
-              id: 'field_block:node:pece_artifact_audio:field_audio_media'
-              label: Audio
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 0
-            additional: {  }
           d08bb7ba-11e4-4289-b6f8-8e96a10529db:
             uuid: d08bb7ba-11e4-4289-b6f8-8e96a10529db
             region: first
@@ -153,7 +136,7 @@ third_party_settings:
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            weight: 1
+            weight: 2
             additional: {  }
           a74cf72b-bc1e-4d2b-954e-d79a59d949df:
             uuid: a74cf72b-bc1e-4d2b-954e-d79a59d949df
@@ -281,7 +264,33 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 12
             additional: {  }
+          0cfc4a38-5ff4-4fa3-89a1-122bc25f6da8:
+            uuid: 0cfc4a38-5ff4-4fa3-89a1-122bc25f6da8
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_audio_artifact_audio'
+              label: Audio
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: file_audio
+                label: above
+                settings:
+                  controls: true
+                  autoplay: false
+                  loop: false
+                  multiple_file_display_type: tags
+                third_party_settings:
+                  blazy:
+                    blazy: false
+            weight: 0
+            additional: {  }
         third_party_settings: {  }
+  layout_library:
+    enable: false
 _core:
   default_config_hash: YA3wnxDOZ-LIiIao_puSchAgdet2Bgeisov89GBW1GE
 id: node.pece_artifact_audio.default
@@ -298,6 +307,14 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 120
+    region: content
+  field_audio_artifact_audio:
+    type: file_default
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 132
     region: content
   field_audio_authors:
     type: entity_reference_label
@@ -363,15 +380,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 108
-    region: content
-  field_audio_media:
-    type: entity_reference_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 125
     region: content
   field_audio_source:
     type: text_default
