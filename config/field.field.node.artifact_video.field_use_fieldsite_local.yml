@@ -1,14 +1,16 @@
-uuid: 39c9a764-9ed0-4745-b084-d2c8ab6b3f8c
+uuid: 7769d374-b376-482d-8ae1-101499189e8d
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_bundle_use_fieldsite_local
-    - node.type.pece_artifact_bundle
-id: node.pece_artifact_bundle.field_bundle_use_fieldsite_local
-field_name: field_bundle_use_fieldsite_local
+    - field.storage.node.field_use_fieldsite_local
+    - node.type.artifact_video
+_core:
+  default_config_hash: gpGN4hXaRx80qHPmD-_o0FSbfKtoxWruKODI6l9dYa8
+id: node.artifact_video.field_use_fieldsite_local
+field_use_fieldsite_local
 entity_type: node
-bundle: pece_artifact_bundle
+bundle: artifact_video
 label: "Use fieldsite's location"
 description: 'Check this to copy the location from the referenced fieldsite, if any.'
 required: false

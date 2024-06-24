@@ -14,7 +14,7 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_pdf_language
     - field.field.node.pece_artifact_pdf.field_pdf_location
     - field.field.node.pece_artifact_pdf.field_pdf_source
-    - field.field.node.pece_artifact_pdf.field_pdf_use_fieldsite_local
+    - field.field.node.pece_artifact_pdf.field_use_fieldsite_local
     - field.field.node.pece_artifact_pdf.field_pece_all_can_view
     - field.field.node.pece_artifact_pdf.field_pece_license
     - field.field.node.pece_artifact_pdf.field_pece_project_ref
@@ -150,7 +150,7 @@ third_party_settings:
             uuid: 030f8338-c3c3-44dc-a977-7228fb178d8b
             region: content
             configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_use_fieldsite_local'
+              id: 'field_block:node:pece_artifact_pdf:field_use_fieldsite_local'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -448,7 +448,7 @@ content:
     third_party_settings: {  }
     weight: 111
     region: content
-  field_pdf_use_fieldsite_local:
+  field_use_fieldsite_local:
     type: boolean
     label: above
     settings:

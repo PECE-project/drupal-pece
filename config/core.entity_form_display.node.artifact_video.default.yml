@@ -22,7 +22,7 @@ dependencies:
     - field.field.node.artifact_video.field_video_language
     - field.field.node.artifact_video.field_video_location
     - field.field.node.artifact_video.field_video_source
-    - field.field.node.artifact_video.field_video_use_fieldsite_local
+    - field.field.node.artifact_video.field_use_fieldsite_local
     - node.type.artifact_video
   module:
     - address
@@ -226,7 +226,7 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_video_use_fieldsite_local:
+  field_use_fieldsite_local:
     type: boolean_checkbox
     weight: 12
     region: content
