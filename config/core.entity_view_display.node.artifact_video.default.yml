@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.artifact_video.field_ark_enabled
+    - field.field.node.artifact_video.field_file_format
     - field.field.node.artifact_video.field_groups_with_view_access
     - field.field.node.artifact_video.field_pece_all_can_view
     - field.field.node.artifact_video.field_pece_license
@@ -341,6 +342,22 @@ third_party_settings:
                     blazy: false
             weight: 1
             additional: {  }
+          366e50ee-2da2-4b68-8d13-1222edfac975:
+            uuid: 366e50ee-2da2-4b68-8d13-1222edfac975
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_video:field_file_format'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 9
+            additional: {  }
         third_party_settings: {  }
 id: node.artifact_video.default
 targetEntityType: node
@@ -357,6 +374,14 @@ content:
     third_party_settings: {  }
     weight: 119
     region: content
+  field_file_format:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 131
+    region: first
   field_groups_with_view_access:
     type: entity_reference_label
     label: above

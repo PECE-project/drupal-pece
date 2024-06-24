@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.artifact_video.field_ark_enabled
+    - field.field.node.artifact_video.field_file_format
     - field.field.node.artifact_video.field_groups_with_view_access
     - field.field.node.artifact_video.field_pece_all_can_view
     - field.field.node.artifact_video.field_pece_license
@@ -68,6 +69,16 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_file_format:
+    type: entity_reference_autocomplete
+    weight: 30
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete

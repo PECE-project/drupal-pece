@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_image.field_ark_enabled
+    - field.field.node.pece_artifact_image.field_file_format
     - field.field.node.pece_artifact_image.field_groups_with_view_access
     - field.field.node.pece_artifact_image.field_image_artifact_image
     - field.field.node.pece_artifact_image.field_image_authors
@@ -263,6 +264,22 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 0
             additional: {  }
+          29afa146-34af-420d-b36e-af66221d1164:
+            uuid: 29afa146-34af-420d-b36e-af66221d1164
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_image:field_file_format'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
         third_party_settings: {  }
 _core:
   default_config_hash: MuovIFk4ECq7flqV4TYjRCZIRISXsXHgLOIbeNcreKs
@@ -281,6 +298,14 @@ content:
     third_party_settings: {  }
     weight: 120
     region: content
+  field_file_format:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 132
+    region: first
   field_groups_with_view_access:
     type: entity_reference_label
     label: above

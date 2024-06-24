@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_audio_location
     - field.field.node.pece_artifact_audio.field_audio_source
     - field.field.node.pece_artifact_audio.field_audio_use_fieldsite_local
+    - field.field.node.pece_artifact_audio.field_file_format
     - field.field.node.pece_artifact_audio.field_groups_with_view_access
     - field.field.node.pece_artifact_audio.field_pece_all_can_view
     - field.field.node.pece_artifact_audio.field_pece_license
@@ -110,6 +111,22 @@ third_party_settings:
                   link: true
                 third_party_settings: {  }
             weight: 3
+            additional: {  }
+          55652fee-a0d8-4e6b-8540-5ef75d7f087a:
+            uuid: 55652fee-a0d8-4e6b-8540-5ef75d7f087a
+            region: content
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_file_format'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 4
             additional: {  }
         third_party_settings: {  }
       -
@@ -397,6 +414,14 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 110
+    region: content
+  field_file_format:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 133
     region: content
   field_groups_with_view_access:
     type: entity_reference_label
