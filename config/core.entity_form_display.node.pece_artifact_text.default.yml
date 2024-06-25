@@ -11,7 +11,7 @@ dependencies:
     - field.field.node.pece_artifact_text.field_pece_license
     - field.field.node.pece_artifact_text.field_pece_project_ref
     - field.field.node.pece_artifact_text.field_people_with_view_access
-    - field.field.node.pece_artifact_text.field_text_authors
+    - field.field.node.pece_artifact_text.field_authors
     - field.field.node.pece_artifact_text.field_text_created_date
     - field.field.node.pece_artifact_text.field_crit_commentary
     - field.field.node.pece_artifact_text.field_fieldsite
@@ -143,7 +143,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_text_authors:
+  field_authors:
     type: entity_reference_autocomplete
     weight: 7
     region: content

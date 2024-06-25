@@ -7,7 +7,7 @@ dependencies:
     - field.field.node.pece_artifact_image.field_file_format
     - field.field.node.pece_artifact_image.field_groups_with_view_access
     - field.field.node.pece_artifact_image.field_image_artifact_image
-    - field.field.node.pece_artifact_image.field_image_authors
+    - field.field.node.pece_artifact_image.field_authors
     - field.field.node.pece_artifact_image.field_image_created_date
     - field.field.node.pece_artifact_image.field_crit_commentary
     - field.field.node.pece_artifact_image.field_fieldsite
@@ -100,7 +100,7 @@ content:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-  field_image_authors:
+  field_authors:
     type: entity_reference_autocomplete
     weight: 8
     region: content

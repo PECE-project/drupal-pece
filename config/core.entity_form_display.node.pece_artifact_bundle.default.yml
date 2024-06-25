@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_bundle.field_ark_enabled
-    - field.field.node.pece_artifact_bundle.field_bundle_authors
+    - field.field.node.pece_artifact_bundle.field_authors
     - field.field.node.pece_artifact_bundle.field_bundle_created_date
     - field.field.node.pece_artifact_bundle.field_crit_commentary
     - field.field.node.pece_artifact_bundle.field_fieldsite
@@ -63,7 +63,7 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_bundle_authors:
+  field_authors:
     type: entity_reference_autocomplete
     weight: 6
     region: content
