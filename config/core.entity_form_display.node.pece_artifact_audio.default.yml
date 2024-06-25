@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_artifact_audio.field_ark_enabled
     - field.field.node.pece_artifact_audio.field_audio_artifact_audio
-    - field.field.node.pece_artifact_audio.field_audio_authors
+    - field.field.node.pece_artifact_audio.field_authors
     - field.field.node.pece_artifact_audio.field_audio_created_date
     - field.field.node.pece_artifact_audio.field_crit_commentary
     - field.field.node.pece_artifact_audio.field_audio_duration
@@ -77,7 +77,7 @@ content:
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
-  field_audio_authors:
+  field_authors:
     type: entity_reference_autocomplete
     weight: 9
     region: content
