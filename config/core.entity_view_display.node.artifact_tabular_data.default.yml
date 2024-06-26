@@ -15,7 +15,7 @@ dependencies:
     - field.field.node.artifact_tabular_data.field_created_date
     - field.field.node.artifact_tabular_data.field_crit_commentary
     - field.field.node.artifact_tabular_data.field_fieldsite
-    - field.field.node.artifact_tabular_data.field_tabular_fieldsite_local
+    - field.field.node.artifact_tabular_data.field_use_fieldsite_local
     - field.field.node.artifact_tabular_data.field_language
     - field.field.node.artifact_tabular_data.field_location
     - field.field.node.artifact_tabular_data.field_tabular_media
@@ -388,7 +388,7 @@ third_party_settings:
             uuid: 4e8668d2-5f42-4a51-8bbe-dbdcc17968fc
             region: content
             configuration:
-              id: 'field_block:node:artifact_tabular_data:field_tabular_fieldsite_local'
+              id: 'field_block:node:artifact_tabular_data:field_use_fieldsite_local'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -671,7 +671,7 @@ content:
     third_party_settings: {  }
     weight: 113
     region: content
-  field_tabular_fieldsite_local:
+  field_use_fieldsite_local:
     type: boolean
     label: above
     settings:
