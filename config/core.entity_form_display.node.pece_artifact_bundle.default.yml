@@ -97,19 +97,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_location:
-    type: address_default
-    weight: 10
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_use_fieldsite_local:
-    type: boolean_checkbox
-    weight: 9
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete
     weight: 18
@@ -119,6 +106,12 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_location:
+    type: address_default
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
@@ -186,6 +179,13 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_use_fieldsite_local:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   langcode:
     type: language_select

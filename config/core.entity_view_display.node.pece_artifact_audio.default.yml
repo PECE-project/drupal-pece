@@ -333,6 +333,14 @@ content:
     third_party_settings: {  }
     weight: 132
     region: content
+  field_audio_file_format:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 123
+    region: content
   field_authors:
     type: entity_reference_label
     label: above
@@ -373,13 +381,21 @@ content:
     third_party_settings: {  }
     weight: 109
     region: content
-  field_audio_file_format:
-    type: string
+  field_file_format:
+    type: entity_reference_label
     label: above
     settings:
-      link_to_entity: false
+      link: true
     third_party_settings: {  }
-    weight: 123
+    weight: 133
+    region: content
+  field_groups_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 131
     region: content
   field_language:
     type: languagefield_default
@@ -397,39 +413,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 108
-    region: content
-  field_source:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 128
-    region: first
-  field_use_fieldsite_local:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 110
-    region: content
-  field_file_format:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 133
-    region: content
-  field_groups_with_view_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 131
     region: content
   field_pece_all_can_view:
     type: boolean
@@ -472,6 +455,23 @@ content:
       link: true
     third_party_settings: {  }
     weight: 129
+    region: content
+  field_source:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 128
+    region: first
+  field_use_fieldsite_local:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 110
     region: content
   links:
     settings: {  }

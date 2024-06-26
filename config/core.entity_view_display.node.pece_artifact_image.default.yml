@@ -4,25 +4,25 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_image.field_ark_enabled
-    - field.field.node.pece_artifact_image.field_file_format
-    - field.field.node.pece_artifact_image.field_groups_with_view_access
-    - field.field.node.pece_artifact_image.field_image_artifact_image
     - field.field.node.pece_artifact_image.field_authors
     - field.field.node.pece_artifact_image.field_created_date
     - field.field.node.pece_artifact_image.field_crit_commentary
     - field.field.node.pece_artifact_image.field_fieldsite
-    - field.field.node.pece_artifact_image.field_use_fieldsite_local
+    - field.field.node.pece_artifact_image.field_file_format
+    - field.field.node.pece_artifact_image.field_groups_with_view_access
+    - field.field.node.pece_artifact_image.field_image_artifact_image
     - field.field.node.pece_artifact_image.field_image_file_format
     - field.field.node.pece_artifact_image.field_language
     - field.field.node.pece_artifact_image.field_location
-    - field.field.node.pece_artifact_image.field_source
     - field.field.node.pece_artifact_image.field_pece_all_can_view
     - field.field.node.pece_artifact_image.field_pece_geolocation
     - field.field.node.pece_artifact_image.field_pece_license
     - field.field.node.pece_artifact_image.field_pece_project_ref
     - field.field.node.pece_artifact_image.field_people_with_edit_access
     - field.field.node.pece_artifact_image.field_people_with_view_access
+    - field.field.node.pece_artifact_image.field_source
     - field.field.node.pece_artifact_image.field_tags
+    - field.field.node.pece_artifact_image.field_use_fieldsite_local
     - node.type.pece_artifact_image
   module:
     - address
@@ -83,25 +83,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 3
             additional: {  }
-          b78e2a9f-e8c7-4b94-8c9b-75d9052ae859:
-            uuid: b78e2a9f-e8c7-4b94-8c9b-75d9052ae859
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_image:field_image_authors'
-              label: Creator(s)
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 0
-            additional: {  }
           788b1410-c494-433e-8d2f-395e80470d42:
             uuid: 788b1410-c494-433e-8d2f-395e80470d42
             region: second
@@ -120,7 +101,7 @@ third_party_settings:
                   timezone_override: ''
                   format_type: medium
                 third_party_settings: {  }
-            weight: 1
+            weight: 2
             additional: {  }
           bb9c7517-c6eb-4df6-a70b-1f5623a1d06a:
             uuid: bb9c7517-c6eb-4df6-a70b-1f5623a1d06a
@@ -195,7 +176,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 7
+            weight: 6
             additional: {  }
           288fd080-cd17-4d33-9be0-89bd87cc3332:
             uuid: 288fd080-cd17-4d33-9be0-89bd87cc3332
@@ -280,6 +261,25 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 7
             additional: {  }
+          3ab75f80-8135-4798-b2cf-22775b575b1a:
+            uuid: 3ab75f80-8135-4798-b2cf-22775b575b1a
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_image:field_authors'
+              label: Creator(s)
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
         third_party_settings: {  }
 _core:
   default_config_hash: MuovIFk4ECq7flqV4TYjRCZIRISXsXHgLOIbeNcreKs
@@ -298,33 +298,6 @@ content:
     third_party_settings: {  }
     weight: 120
     region: content
-  field_file_format:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 132
-    region: first
-  field_groups_with_view_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 130
-    region: first
-  field_image_artifact_image:
-    type: image
-    label: above
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: 131
-    region: first
   field_authors:
     type: entity_reference_label
     label: above
@@ -357,16 +330,33 @@ content:
     third_party_settings: {  }
     weight: 108
     region: content
-  field_use_fieldsite_local:
-    type: boolean
+  field_file_format:
+    type: entity_reference_label
     label: above
     settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
+      link: true
     third_party_settings: {  }
-    weight: 109
-    region: content
+    weight: 132
+    region: first
+  field_groups_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 130
+    region: first
+  field_image_artifact_image:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 131
+    region: first
   field_image_file_format:
     type: string
     label: above
@@ -391,13 +381,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 110
-    region: content
-  field_source:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 127
     region: content
   field_pece_all_can_view:
     type: boolean
@@ -448,6 +431,23 @@ content:
     third_party_settings: {  }
     weight: 128
     region: first
+  field_source:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 127
+    region: content
+  field_use_fieldsite_local:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 109
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }

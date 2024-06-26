@@ -36,12 +36,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_location:
-    type: address_default
-    weight: 126
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_fieldsite_project:
     type: entity_reference_autocomplete
     weight: 125
@@ -61,6 +55,12 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_location:
+    type: address_default
+    weight: 126
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_pece_geolocation:
     type: geolocation_latlng

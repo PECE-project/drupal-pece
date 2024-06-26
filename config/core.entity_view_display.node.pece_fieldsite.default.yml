@@ -28,13 +28,6 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
-  field_location:
-    type: address_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 106
-    region: content
   field_fieldsite_project:
     type: entity_reference_label
     label: above
@@ -50,6 +43,13 @@ content:
       link: true
     third_party_settings: {  }
     weight: 104
+    region: content
+  field_location:
+    type: address_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 106
     region: content
   field_pece_geolocation:
     type: geolocation_latlng
