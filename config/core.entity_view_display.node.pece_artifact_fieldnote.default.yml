@@ -304,16 +304,14 @@ content:
     third_party_settings: {  }
     weight: 114
     region: content
-  field_use_fieldsite_local:
-    type: boolean
+  field_groups_with_view_access:
+    type: entity_reference_label
     label: above
     settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
+      link: true
     third_party_settings: {  }
-    weight: 115
-    region: content
+    weight: 122
+    region: first
   field_language:
     type: languagefield_default
     label: above
@@ -331,21 +329,6 @@ content:
     third_party_settings: {  }
     weight: 116
     region: content
-  field_source:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 119
-    region: content
-  field_groups_with_view_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 122
-    region: first
   field_pece_all_can_view:
     type: boolean
     label: above
@@ -388,6 +371,13 @@ content:
     third_party_settings: {  }
     weight: 121
     region: first
+  field_source:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 119
+    region: content
   field_tags:
     type: entity_reference_label
     label: above
@@ -395,6 +385,16 @@ content:
       link: true
     third_party_settings: {  }
     weight: 117
+    region: content
+  field_use_fieldsite_local:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 115
     region: content
   links:
     settings: {  }

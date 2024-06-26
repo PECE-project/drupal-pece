@@ -68,6 +68,40 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  field_authors:
+    type: entity_reference_autocomplete
+    weight: 7
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_created_date:
+    type: datetime_default
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_crit_commentary:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_fieldsite:
+    type: entity_reference_autocomplete
+    weight: 10
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete
     weight: 25
@@ -77,6 +111,20 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_language:
+    type: languagefield_select
+    weight: 9
+    region: content
+    settings:
+      format:
+        name: name
+    third_party_settings: {  }
+  field_location:
+    type: address_default
+    weight: 13
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
@@ -125,53 +173,17 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_tags:
-    type: entity_reference_autocomplete
-    weight: 16
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_authors:
-    type: entity_reference_autocomplete
-    weight: 7
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_website_bibliography:
-    type: entity_reference_autocomplete
-    weight: 12
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_created_date:
-    type: datetime_default
-    weight: 8
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_crit_commentary:
+  field_source:
     type: text_textarea
-    weight: 4
+    weight: 6
     region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_fieldsite:
+  field_tags:
     type: entity_reference_autocomplete
-    weight: 10
+    weight: 16
     region: content
     settings:
       match_operator: CONTAINS
@@ -186,26 +198,14 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_language:
-    type: languagefield_select
-    weight: 9
+  field_website_bibliography:
+    type: entity_reference_autocomplete
+    weight: 12
     region: content
     settings:
-      format:
-        name: name
-    third_party_settings: {  }
-  field_location:
-    type: address_default
-    weight: 13
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_source:
-    type: text_textarea
-    weight: 6
-    region: content
-    settings:
-      rows: 5
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
       placeholder: ''
     third_party_settings: {  }
   field_website_url:

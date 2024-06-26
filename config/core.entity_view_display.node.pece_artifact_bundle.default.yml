@@ -278,23 +278,6 @@ content:
     third_party_settings: {  }
     weight: 105
     region: content
-  field_location:
-    type: address_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 107
-    region: content
-  field_use_fieldsite_local:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 111
-    region: content
   field_groups_with_view_access:
     type: entity_reference_label
     label: above
@@ -303,6 +286,13 @@ content:
     third_party_settings: {  }
     weight: 126
     region: first
+  field_location:
+    type: address_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 107
+    region: content
   field_pece_all_can_view:
     type: boolean
     label: above
@@ -353,6 +343,16 @@ content:
     third_party_settings: {  }
     weight: 124
     region: first
+  field_use_fieldsite_local:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 111
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }

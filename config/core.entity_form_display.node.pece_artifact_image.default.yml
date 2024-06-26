@@ -72,34 +72,6 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_file_format:
-    type: entity_reference_autocomplete
-    weight: 30
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_groups_with_view_access:
-    type: entity_reference_autocomplete
-    weight: 27
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_image_artifact_image:
-    type: image_image
-    weight: 4
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
   field_authors:
     type: entity_reference_autocomplete
     weight: 8
@@ -134,12 +106,33 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_use_fieldsite_local:
-    type: boolean_checkbox
-    weight: 12
+  field_file_format:
+    type: entity_reference_autocomplete
+    weight: 30
     region: content
     settings:
-      display_label: true
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_groups_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 27
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_image_artifact_image:
+    type: image_image
+    weight: 4
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
     third_party_settings: {  }
   field_image_file_format:
     type: string_textfield
@@ -162,14 +155,6 @@ content:
     weight: 5
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_source:
-    type: text_textarea
-    weight: 7
-    region: content
-    settings:
-      rows: 5
-      placeholder: ''
     third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
@@ -224,6 +209,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_source:
+    type: text_textarea
+    weight: 7
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
     weight: 16
@@ -233,6 +226,13 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_use_fieldsite_local:
+    type: boolean_checkbox
+    weight: 12
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   langcode:
     type: language_select

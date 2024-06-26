@@ -73,14 +73,6 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_uri:
-    type: string_textfield
-    weight: 2
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_people_with_edit_access:
     type: entity_reference_autocomplete
     weight: 19
@@ -108,6 +100,14 @@ content:
     settings:
       match_operator: CONTAINS
       match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_uri:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
