@@ -7,15 +7,15 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_ark_enabled
     - field.field.node.pece_artifact_pdf.field_groups_with_view_access
     - field.field.node.pece_artifact_pdf.field_pdf_artifact_document
-    - field.field.node.pece_artifact_pdf.field_pdf_authors
+    - field.field.node.pece_artifact_pdf.field_authors
     - field.field.node.pece_artifact_pdf.field_pdf_bibliography
-    - field.field.node.pece_artifact_pdf.field_pdf_created_date
-    - field.field.node.pece_artifact_pdf.field_pdf_crit_commentary
-    - field.field.node.pece_artifact_pdf.field_pdf_fieldsite
-    - field.field.node.pece_artifact_pdf.field_pdf_language
-    - field.field.node.pece_artifact_pdf.field_pdf_location
-    - field.field.node.pece_artifact_pdf.field_pdf_source
-    - field.field.node.pece_artifact_pdf.field_pdf_use_fieldsite_local
+    - field.field.node.pece_artifact_pdf.field_created_date
+    - field.field.node.pece_artifact_pdf.field_crit_commentary
+    - field.field.node.pece_artifact_pdf.field_fieldsite
+    - field.field.node.pece_artifact_pdf.field_language
+    - field.field.node.pece_artifact_pdf.field_location
+    - field.field.node.pece_artifact_pdf.field_source
+    - field.field.node.pece_artifact_pdf.field_use_fieldsite_local
     - field.field.node.pece_artifact_pdf.field_pece_all_can_view
     - field.field.node.pece_artifact_pdf.field_pece_license
     - field.field.node.pece_artifact_pdf.field_pece_project_ref
@@ -37,23 +37,23 @@ content:
     region: content
 hidden:
   field_ark_enabled: true
+  field_authors: true
+  field_created_date: true
+  field_crit_commentary: true
+  field_fieldsite: true
   field_groups_with_view_access: true
+  field_language: true
+  field_location: true
   field_pdf_artifact_document: true
-  field_pdf_authors: true
   field_pdf_bibliography: true
-  field_pdf_created_date: true
-  field_pdf_crit_commentary: true
-  field_pdf_fieldsite: true
-  field_pdf_language: true
-  field_pdf_location: true
-  field_pdf_source: true
-  field_pdf_use_fieldsite_local: true
   field_pece_all_can_view: true
   field_pece_license: true
   field_pece_project_ref: true
   field_people_with_edit_access: true
   field_people_with_view_access: true
+  field_source: true
   field_tags: true
+  field_use_fieldsite_local: true
   langcode: true
   og_audience: true
   search_api_excerpt: true

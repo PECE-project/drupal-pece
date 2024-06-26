@@ -6,13 +6,13 @@ dependencies:
     - field.field.node.pece_artifact_fieldnote.body
     - field.field.node.pece_artifact_fieldnote.field_ark_enabled
     - field.field.node.pece_artifact_fieldnote.field_people_with_edit_access
-    - field.field.node.pece_artifact_fieldnote.field_fieldnote_authors
-    - field.field.node.pece_artifact_fieldnote.field_fieldnote_created_date
-    - field.field.node.pece_artifact_fieldnote.field_fieldnote_fieldsite
-    - field.field.node.pece_artifact_fieldnote.field_fieldnote_fieldsite_local
-    - field.field.node.pece_artifact_fieldnote.field_fieldnote_language
-    - field.field.node.pece_artifact_fieldnote.field_fieldnote_location
-    - field.field.node.pece_artifact_fieldnote.field_fieldnote_source
+    - field.field.node.pece_artifact_fieldnote.field_authors
+    - field.field.node.pece_artifact_fieldnote.field_created_date
+    - field.field.node.pece_artifact_fieldnote.field_fieldsite
+    - field.field.node.pece_artifact_fieldnote.field_use_fieldsite_local
+    - field.field.node.pece_artifact_fieldnote.field_language
+    - field.field.node.pece_artifact_fieldnote.field_location
+    - field.field.node.pece_artifact_fieldnote.field_source
     - field.field.node.pece_artifact_fieldnote.field_tags
     - field.field.node.pece_artifact_fieldnote.field_groups_with_view_access
     - field.field.node.pece_artifact_fieldnote.field_pece_all_can_view
@@ -279,7 +279,7 @@ content:
     third_party_settings: {  }
     weight: 105
     region: content
-  field_fieldnote_authors:
+  field_authors:
     type: entity_reference_label
     label: above
     settings:
@@ -287,7 +287,7 @@ content:
     third_party_settings: {  }
     weight: 112
     region: content
-  field_fieldnote_created_date:
+  field_created_date:
     type: datetime_default
     label: above
     settings:
@@ -296,47 +296,13 @@ content:
     third_party_settings: {  }
     weight: 110
     region: content
-  field_fieldnote_fieldsite:
+  field_fieldsite:
     type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
     weight: 114
-    region: content
-  field_fieldnote_fieldsite_local:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 115
-    region: content
-  field_fieldnote_language:
-    type: languagefield_default
-    label: above
-    settings:
-      link_to_entity: 0
-      format:
-        name: name
-    third_party_settings: {  }
-    weight: 113
-    region: content
-  field_fieldnote_location:
-    type: address_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 116
-    region: content
-  field_fieldnote_source:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 119
     region: content
   field_groups_with_view_access:
     type: entity_reference_label
@@ -346,6 +312,23 @@ content:
     third_party_settings: {  }
     weight: 122
     region: first
+  field_language:
+    type: languagefield_default
+    label: above
+    settings:
+      link_to_entity: 0
+      format:
+        name: name
+    third_party_settings: {  }
+    weight: 113
+    region: content
+  field_location:
+    type: address_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 116
+    region: content
   field_pece_all_can_view:
     type: boolean
     label: above
@@ -388,6 +371,13 @@ content:
     third_party_settings: {  }
     weight: 121
     region: first
+  field_source:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 119
+    region: content
   field_tags:
     type: entity_reference_label
     label: above
@@ -395,6 +385,16 @@ content:
       link: true
     third_party_settings: {  }
     weight: 117
+    region: content
+  field_use_fieldsite_local:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 115
     region: content
   links:
     settings: {  }

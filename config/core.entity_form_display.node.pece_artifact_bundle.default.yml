@@ -4,13 +4,13 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_bundle.field_ark_enabled
-    - field.field.node.pece_artifact_bundle.field_bundle_authors
-    - field.field.node.pece_artifact_bundle.field_bundle_created_date
-    - field.field.node.pece_artifact_bundle.field_bundle_crit_commentary
-    - field.field.node.pece_artifact_bundle.field_bundle_fieldsite
-    - field.field.node.pece_artifact_bundle.field_bundle_location
+    - field.field.node.pece_artifact_bundle.field_authors
+    - field.field.node.pece_artifact_bundle.field_created_date
+    - field.field.node.pece_artifact_bundle.field_crit_commentary
+    - field.field.node.pece_artifact_bundle.field_fieldsite
+    - field.field.node.pece_artifact_bundle.field_location
     - field.field.node.pece_artifact_bundle.field_tags
-    - field.field.node.pece_artifact_bundle.field_bundle_use_fieldsite_local
+    - field.field.node.pece_artifact_bundle.field_use_fieldsite_local
     - field.field.node.pece_artifact_bundle.field_people_with_edit_access
     - field.field.node.pece_artifact_bundle.field_groups_with_view_access
     - field.field.node.pece_artifact_bundle.field_pece_all_can_view
@@ -63,7 +63,7 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_bundle_authors:
+  field_authors:
     type: entity_reference_autocomplete
     weight: 6
     region: content
@@ -73,13 +73,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_bundle_created_date:
+  field_created_date:
     type: datetime_default
     weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_bundle_crit_commentary:
+  field_crit_commentary:
     type: text_textarea
     weight: 4
     region: content
@@ -87,7 +87,7 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_bundle_fieldsite:
+  field_fieldsite:
     type: entity_reference_autocomplete
     weight: 8
     region: content
@@ -96,19 +96,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_bundle_location:
-    type: address_default
-    weight: 10
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_bundle_use_fieldsite_local:
-    type: boolean_checkbox
-    weight: 9
-    region: content
-    settings:
-      display_label: true
     third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete
@@ -119,6 +106,12 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_location:
+    type: address_default
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
@@ -186,6 +179,13 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_use_fieldsite_local:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   langcode:
     type: language_select

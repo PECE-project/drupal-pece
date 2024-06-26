@@ -12,15 +12,15 @@ dependencies:
     - field.field.node.artifact_tabular_data.field_pece_project_ref
     - field.field.node.artifact_tabular_data.field_people_with_view_access
     - field.field.node.artifact_tabular_data.field_tabular_attachment
-    - field.field.node.artifact_tabular_data.field_tabular_authors
-    - field.field.node.artifact_tabular_data.field_tabular_created_date
-    - field.field.node.artifact_tabular_data.field_tabular_crit_commentary
-    - field.field.node.artifact_tabular_data.field_tabular_fieldsite
-    - field.field.node.artifact_tabular_data.field_tabular_fieldsite_local
-    - field.field.node.artifact_tabular_data.field_tabular_language
-    - field.field.node.artifact_tabular_data.field_tabular_location
+    - field.field.node.artifact_tabular_data.field_authors
+    - field.field.node.artifact_tabular_data.field_created_date
+    - field.field.node.artifact_tabular_data.field_crit_commentary
+    - field.field.node.artifact_tabular_data.field_fieldsite
+    - field.field.node.artifact_tabular_data.field_use_fieldsite_local
+    - field.field.node.artifact_tabular_data.field_language
+    - field.field.node.artifact_tabular_data.field_location
     - field.field.node.artifact_tabular_data.field_tabular_media
-    - field.field.node.artifact_tabular_data.field_tabular_source
+    - field.field.node.artifact_tabular_data.field_source
     - field.field.node.artifact_tabular_data.field_tags
     - node.type.artifact_tabular_data
   module:
@@ -39,22 +39,22 @@ content:
     region: content
 hidden:
   field_ark_enabled: true
+  field_authors: true
+  field_created_date: true
+  field_crit_commentary: true
+  field_fieldsite: true
   field_groups_with_view_access: true
+  field_language: true
+  field_location: true
   field_pece_all_can_view: true
   field_pece_license: true
   field_pece_project_ref: true
   field_people_with_edit_access: true
   field_people_with_view_access: true
+  field_source: true
   field_tabular_attachment: true
-  field_tabular_authors: true
-  field_tabular_created_date: true
-  field_tabular_crit_commentary: true
-  field_tabular_fieldsite: true
-  field_tabular_fieldsite_local: true
-  field_tabular_language: true
-  field_tabular_location: true
   field_tabular_media: true
-  field_tabular_source: true
   field_tags: true
+  field_use_fieldsite_local: true
   langcode: true
   search_api_excerpt: true

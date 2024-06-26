@@ -8,15 +8,15 @@ dependencies:
     - field.field.node.pece_artifact_image.field_file_format
     - field.field.node.pece_artifact_image.field_groups_with_view_access
     - field.field.node.pece_artifact_image.field_image_artifact_image
-    - field.field.node.pece_artifact_image.field_image_authors
-    - field.field.node.pece_artifact_image.field_image_created_date
-    - field.field.node.pece_artifact_image.field_image_crit_commentary
-    - field.field.node.pece_artifact_image.field_image_fieldsite
-    - field.field.node.pece_artifact_image.field_image_fieldsite_local
+    - field.field.node.pece_artifact_image.field_authors
+    - field.field.node.pece_artifact_image.field_created_date
+    - field.field.node.pece_artifact_image.field_crit_commentary
+    - field.field.node.pece_artifact_image.field_fieldsite
+    - field.field.node.pece_artifact_image.field_use_fieldsite_local
     - field.field.node.pece_artifact_image.field_image_file_format
-    - field.field.node.pece_artifact_image.field_image_language
-    - field.field.node.pece_artifact_image.field_image_location
-    - field.field.node.pece_artifact_image.field_image_source
+    - field.field.node.pece_artifact_image.field_language
+    - field.field.node.pece_artifact_image.field_location
+    - field.field.node.pece_artifact_image.field_source
     - field.field.node.pece_artifact_image.field_pece_all_can_view
     - field.field.node.pece_artifact_image.field_pece_geolocation
     - field.field.node.pece_artifact_image.field_pece_license
@@ -41,26 +41,26 @@ content:
     region: content
 hidden:
   field_ark_enabled: true
+  field_authors: true
+  field_created_date: true
+  field_crit_commentary: true
+  field_fieldsite: true
   field_file_format: true
   field_groups_with_view_access: true
   field_image_artifact_image: true
-  field_image_authors: true
-  field_image_created_date: true
-  field_image_crit_commentary: true
-  field_image_fieldsite: true
-  field_image_fieldsite_local: true
   field_image_file_format: true
   field_image_images: true
-  field_image_language: true
-  field_image_location: true
-  field_image_source: true
+  field_language: true
+  field_location: true
   field_pece_all_can_view: true
   field_pece_geolocation: true
   field_pece_license: true
   field_pece_project_ref: true
   field_people_with_edit_access: true
   field_people_with_view_access: true
+  field_source: true
   field_tags: true
+  field_use_fieldsite_local: true
   langcode: true
   og_audience: true
   search_api_excerpt: true

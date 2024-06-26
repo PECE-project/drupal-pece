@@ -11,15 +11,15 @@ dependencies:
     - field.field.node.artifact_tabular_data.field_pece_project_ref
     - field.field.node.artifact_tabular_data.field_people_with_view_access
     - field.field.node.artifact_tabular_data.field_tabular_attachment
-    - field.field.node.artifact_tabular_data.field_tabular_authors
-    - field.field.node.artifact_tabular_data.field_tabular_created_date
-    - field.field.node.artifact_tabular_data.field_tabular_crit_commentary
-    - field.field.node.artifact_tabular_data.field_tabular_fieldsite
-    - field.field.node.artifact_tabular_data.field_tabular_fieldsite_local
-    - field.field.node.artifact_tabular_data.field_tabular_language
-    - field.field.node.artifact_tabular_data.field_tabular_location
+    - field.field.node.artifact_tabular_data.field_authors
+    - field.field.node.artifact_tabular_data.field_created_date
+    - field.field.node.artifact_tabular_data.field_crit_commentary
+    - field.field.node.artifact_tabular_data.field_fieldsite
+    - field.field.node.artifact_tabular_data.field_use_fieldsite_local
+    - field.field.node.artifact_tabular_data.field_language
+    - field.field.node.artifact_tabular_data.field_location
     - field.field.node.artifact_tabular_data.field_tabular_media
-    - field.field.node.artifact_tabular_data.field_tabular_source
+    - field.field.node.artifact_tabular_data.field_source
     - field.field.node.artifact_tabular_data.field_tags
     - node.type.artifact_tabular_data
   module:
@@ -388,7 +388,7 @@ third_party_settings:
             uuid: 4e8668d2-5f42-4a51-8bbe-dbdcc17968fc
             region: content
             configuration:
-              id: 'field_block:node:artifact_tabular_data:field_tabular_fieldsite_local'
+              id: 'field_block:node:artifact_tabular_data:field_use_fieldsite_local'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -581,6 +581,38 @@ content:
     third_party_settings: {  }
     weight: 103
     region: content
+  field_authors:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 112
+    region: content
+  field_created_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_crit_commentary:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 121
+    region: first
+  field_fieldsite:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 113
+    region: content
   field_groups_with_view_access:
     type: entity_reference_label
     label: above
@@ -589,6 +621,23 @@ content:
     third_party_settings: {  }
     weight: 125
     region: first
+  field_language:
+    type: languagefield_default
+    label: above
+    settings:
+      link_to_entity: 0
+      format:
+        name: name
+    third_party_settings: {  }
+    weight: 119
+    region: content
+  field_location:
+    type: address_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 115
+    region: content
   field_pece_all_can_view:
     type: boolean
     label: above
@@ -631,6 +680,13 @@ content:
     third_party_settings: {  }
     weight: 123
     region: first
+  field_source:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 122
+    region: first
   field_tabular_attachment:
     type: file_default
     label: above
@@ -638,65 +694,6 @@ content:
       use_description_as_link_text: true
     third_party_settings: {  }
     weight: 116
-    region: content
-  field_tabular_authors:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 112
-    region: content
-  field_tabular_created_date:
-    type: datetime_default
-    label: above
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 108
-    region: content
-  field_tabular_crit_commentary:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 121
-    region: first
-  field_tabular_fieldsite:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 113
-    region: content
-  field_tabular_fieldsite_local:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 114
-    region: content
-  field_tabular_language:
-    type: languagefield_default
-    label: above
-    settings:
-      link_to_entity: 0
-      format:
-        name: name
-    third_party_settings: {  }
-    weight: 119
-    region: content
-  field_tabular_location:
-    type: address_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 115
     region: content
   field_tabular_media:
     type: file_default
@@ -706,13 +703,6 @@ content:
     third_party_settings: {  }
     weight: 117
     region: content
-  field_tabular_source:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 122
-    region: first
   field_tags:
     type: entity_reference_label
     label: above
@@ -720,6 +710,16 @@ content:
       link: true
     third_party_settings: {  }
     weight: 109
+    region: content
+  field_use_fieldsite_local:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 114
     region: content
   links:
     settings: {  }
