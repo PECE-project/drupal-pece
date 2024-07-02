@@ -58,14 +58,14 @@
 {# Top navbar #}
 <nav class="navbar">
   <div class="container">
-    <div class="navbar-brand">
-      <div id="js-navbar-burger" class="navbar-burger burger" data-target="navbar-menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-    <div id="js-navbar-menu" class="columns is-flex-grow-1">
+    <input class="menu-btn-checkbox" type="checkbox" id="menu-btn-checkbox">
+    <label class="menu-btn navbar-brand" for="menu-btn-checkbox">
+      <span class="menu-btn-inside">
+        <span class="navicon navbar-burger burger"></span>
+        <span class="menu-btn-text">Menu</span>
+      </span>
+    </label>
+    <div id="navbar-menu" class="columns is-flex-grow-1">
       <div class="column is-three-quarters">
       {% block primary_menu %}
       {% if page.primary_menu %}

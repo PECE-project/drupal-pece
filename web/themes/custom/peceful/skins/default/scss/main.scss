@@ -124,3 +124,77 @@ $beige-lighter: #eff0eb;
     mask-repeat: no-repeat;
   }
 }
+
+// Note that because the CSS trick for opening/closing the megamenu region
+// with a checkbox works with the sibling selector, all the button styles
+// must remain *outside* the .region-megamenu class
+// Always hide the checkbox itself.
+.menu-btn-checkbox {
+  display: none;
+}
+.menu-btn {
+  &:hover {
+    cursor: pointer;
+  }
+  .navicon {
+    background: black; // sass.$navbar-burger-color;
+    display: inline-block;
+    height: 2px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 18px;
+    margin-right: .5rem;
+    top: -.275rem;
+    &:before, &:after {
+      background: black; // sass.$navbar-burger-color;
+      content: '';
+      display: block;
+      height: 100%;
+      position: absolute;
+      transition: all .2s ease-out;
+      width: 100%;
+    }
+    &:before {
+      top: 5px;
+    }
+    &:after {
+      top: -5px;
+    }
+  }
+}
+
+.menu-btn-checkbox:checked~.menu-btn .navicon {
+  background: transparent;
+  &:before {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+  &:after {
+    transform: rotate(45deg);
+    top: 0;
+  }
+}
+
+#navbar-menu {
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  top: 7.1rem;
+  background-color: yellow; // .$navbar-background-color;
+  z-index: 999;
+  overflow: hidden;
+  // Do not show when closed; see .menu-btn-checkbox:checked ~ #navbar-menu for opening.
+  height: 0;
+  opacity: 0;
+  // Close quickly.
+  transition-duration: .5s;
+}
+
+// Show megamenu region when open.
+.menu-btn-checkbox:checked~#navbar-menu {
+  height: 100vh;
+  opacity: 1;
+  transition-property: opacity;
+  transition-timing-function: linear;
+  transition-duration: .75s;
+}
