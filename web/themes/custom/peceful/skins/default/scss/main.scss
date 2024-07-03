@@ -5,6 +5,7 @@ $beige-light: #d0d1cd;
 $beige-lighter: #eff0eb;
 
 @use "../../../node_modules/bulma/sass" as bulma with (
+  $cssvars-prefix: "",
   $control-border-width: 2px,
   $family-primary: "'Open Sans', Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif",
   $family-secondary: "'Open Sans', Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif",
@@ -40,7 +41,7 @@ $beige-lighter: #eff0eb;
 
 .featured-projects {
   @include full-width;
-  background-color: var(--bulma-grey-light);
+  background-color: var(--grey-light);
   padding-top: 1rem;
   padding-bottom: 1rem;
 
@@ -66,15 +67,15 @@ $beige-lighter: #eff0eb;
     // The variables i am using here do not even exist as far as i can tell,
     // however they allow the way Bulma does hover to still work whereas
     // background-color: transparent does not.  :shrug:
-    --bulma-menu-item-h: var(--bulma-primary-95-h);
-    --bulma-menu-item-s: var(--bulma-primary-95-s);
-    --bulma-menu-item-l: var(--bulma-primary-95-l);
-    border-left: var(--bulma-primary-light) 5px solid;
+    --menu-item-h: var(--primary-95-h);
+    --menu-item-s: var(--primary-95-s);
+    --menu-item-l: var(--primary-95-l);
+    border-left: var(--primary-light) 5px solid;
     padding: 1rem 3rem;
     text-align: center;
     border-right: transparent 5px solid;
     &.is-active {
-      border-left-color: var(--bulma-primary);
+      border-left-color: var(--primary);
       background-color: transparent;
       &:hover {
         cursor: default;
@@ -83,8 +84,8 @@ $beige-lighter: #eff0eb;
     }
     &:hover {
       // 'selected' color is prettier & can be reused as bar indicates selected.
-      --bulma-menu-item-h: var(--bulma-menu-item-selected-h);
-      --bulma-menu-item-s: var(--bulma-menu-item-selected-s);
+      --menu-item-h: var(--menu-item-selected-h);
+      --menu-item-s: var(--menu-item-selected-s);
     }
   }
 }
@@ -92,14 +93,14 @@ $beige-lighter: #eff0eb;
 /*
 .menu-list a.is-active,
 .menu-list a.is-selected {
-  --bulma-menu-item-background-l: var();
-  --bulma-menu-item-color-l: var();
+  --menu-item-background-l: var();
+  --menu-item-color-l: var();
 }
 */
 
 .menu {
-  --bulma-menu-item-selected-background-l: var(--bulma-menu-item-background-l);
-  --bulma-menu-item-selected-color-l: var(--bulma-text-dark-l);
+  --menu-item-selected-background-l: var(--menu-item-background-l);
+  --menu-item-selected-color-l: var(--text-dark-l);
 }
 
 .form-search {
@@ -118,7 +119,7 @@ $beige-lighter: #eff0eb;
     left: 0;
     right: 0;
     height: 400px;
-    background-color: var(--bulma-primary-95);
+    background-color: var(--primary-95);
     mask-image: url(../../../images/curve.svg);
     mask-repeat: no-repeat;
   }
@@ -131,13 +132,16 @@ $beige-lighter: #eff0eb;
 .menu-btn-checkbox {
   display: none;
 }
+.menu-btn, .menu-btn-checkbox {
+  float: right;
+}
 .menu-btn {
   &:hover {
     cursor: pointer;
   }
   // We do not use navbar-burger because we do not want the styles Bulma adds.
   .navicon {
-    background: black; // bulma.$navbar-burger-color;
+    background: bulma.$body-color;
     display: inline-block;
     height: 2px;
     position: relative;
@@ -146,7 +150,7 @@ $beige-lighter: #eff0eb;
     margin-right: .5rem;
     top: -.275rem;
     &:before, &:after {
-      background: black; // bulma.$navbar-burger-color;
+      background: bulma.$body-color;
       content: '';
       display: block;
       height: 100%;
@@ -181,31 +185,31 @@ $beige-lighter: #eff0eb;
   }
 }
 
-#navbar-menu {
-  width: 100vw;
-  position: absolute;
-  left: 0;
-  top: 7.1rem;
-  background-color: yellow; // .$navbar-background-color;
-  z-index: 999;
-  overflow: hidden;
-  // Do not show when closed; see .menu-btn-checkbox:checked ~ #navbar-menu for opening.
-  height: 0;
-  opacity: 0;
-  // Close quickly.
-  transition-duration: .5s;
-}
-
-// Show megamenu region when open.
-.menu-btn-checkbox:checked~#navbar-menu {
-  height: 100vh;
-  opacity: 1;
-  transition-property: opacity;
-  transition-timing-function: linear;
-  transition-duration: .75s;
-}
-
-// Override .#{iv.$class-prefix}navbar-menu { display: none } in bulma/sass/components/navbar.scss
-.navbar-menu {
-  display: block;
+@include mx.until(bulma.$navbar-breakpoint) {
+  // Override .#{iv.$class-prefix}navbar-menu { display: none } in bulma/sass/components/navbar.scss
+  .navbar-menu {
+    display: block;
+  }
+  #navbar-menu {
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    top: .1rem;
+    background-color: bulma.$navbar-background-color;
+    z-index: 999;
+    overflow: hidden;
+    // Do not show when closed; see .menu-btn-checkbox:checked ~ #navbar-menu for opening.
+    height: 0;
+    opacity: 0;
+    // Close quickly.
+    transition-duration: .5s;
+  }
+  // Show megamenu region when open.
+  .menu-btn-checkbox:checked~#navbar-menu {
+    height: 100vh;
+    opacity: 1;
+    transition-property: opacity;
+    transition-timing-function: linear;
+    transition-duration: .75s;
+  }
 }
