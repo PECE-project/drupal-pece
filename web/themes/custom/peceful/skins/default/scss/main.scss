@@ -4,7 +4,7 @@ $sts-green-dark: #214044;
 $beige-light: #d0d1cd;
 $beige-lighter: #eff0eb;
 
-@use "../../../node_modules/bulma/sass" with (
+@use "../../../node_modules/bulma/sass" as bulma with (
   $control-border-width: 2px,
   $family-primary: "'Open Sans', Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif",
   $family-secondary: "'Open Sans', Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif",
@@ -16,8 +16,7 @@ $beige-lighter: #eff0eb;
   $primary: $sts-green
 );
 
-@use "bulma/sass/utilities/mixins";
-
+@use "bulma/sass/utilities/mixins" as mx;
 
 
 /* Full Width
@@ -46,10 +45,10 @@ $beige-lighter: #eff0eb;
   padding-bottom: 1rem;
 
   .layout {
-    @include mixins.tablet {
+    @include mx.tablet {
       margin: 0 5rem;
     }
-    @include mixins.desktop {
+    @include mx.desktop {
       margin: 0 10rem;
     }
   }
@@ -136,8 +135,9 @@ $beige-lighter: #eff0eb;
   &:hover {
     cursor: pointer;
   }
+  // We do not use navbar-burger because we do not want the styles Bulma adds.
   .navicon {
-    background: black; // sass.$navbar-burger-color;
+    background: black; // bulma.$navbar-burger-color;
     display: inline-block;
     height: 2px;
     position: relative;
@@ -146,7 +146,7 @@ $beige-lighter: #eff0eb;
     margin-right: .5rem;
     top: -.275rem;
     &:before, &:after {
-      background: black; // sass.$navbar-burger-color;
+      background: black; // bulma.$navbar-burger-color;
       content: '';
       display: block;
       height: 100%;
@@ -163,7 +163,13 @@ $beige-lighter: #eff0eb;
   }
 }
 
-.menu-btn-checkbox:checked~.menu-btn .navicon {
+@include mx.from(bulma.$navbar-breakpoint) {
+  .menu-btn {
+    display: none;
+  }
+}
+
+.menu-btn-checkbox:checked ~ .menu-btn .navicon {
   background: transparent;
   &:before {
     transform: rotate(-45deg);
@@ -197,4 +203,9 @@ $beige-lighter: #eff0eb;
   transition-property: opacity;
   transition-timing-function: linear;
   transition-duration: .75s;
+}
+
+// Override .#{iv.$class-prefix}navbar-menu { display: none } in bulma/sass/components/navbar.scss
+.navbar-menu {
+  display: block;
 }
