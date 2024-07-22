@@ -20,10 +20,16 @@ $beige-lighter: #eff0eb;
 @use "bulma/sass/utilities/mixins" as mx;
 
 
-/* Full Width
------------------------------------------------------------
-*/
+// Typography
+a:hover {
+  text-decoration: underline;
+  .facet-item__count {
+    text-decoration: none;
+  }
+}
 
+
+// Full Width
 @mixin full-width {
   width: 100vw;
   position: relative;
@@ -214,6 +220,8 @@ $beige-lighter: #eff0eb;
   }
 }
 
+// Search & Facets
+
 .block-configurable-views-filter-block-blocksearch-page {
   .form-item {
     width: 70%;
@@ -223,6 +231,26 @@ $beige-lighter: #eff0eb;
     width: auto;
     display: inline-block;
   }
+}
+
+.facets-widget-links ul li.facet-item {
+  position: relative;
+  a.is-active {
+    &::before {
+      font-size: 0.777rem;
+      content: "● ";
+      position: absolute;
+      left: -.8rem;
+      top: .2rem;
+    }
+    &:hover::before {
+     content: "𝗑 ";
+    }
+  }
+}
+
+.facet-item__status {
+  display: none;
 }
 
 // Useful for administrators only, keep article contextual link out of way of
