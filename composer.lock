@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "90fc987d572b087e2977ce5dc05bedb7",
+    "content-hash": "0478d01e51c4d62e09a82c8c96344739",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -3867,36 +3867,16 @@
         },
         {
             "name": "drupal/configurable_views_filter_block",
-            "version": "1.0.0-beta1",
+            "version": "dev-3463012-provide-option-to",
             "source": {
                 "type": "git",
-                "url": "https://git.drupalcode.org/project/configurable_views_filter_block.git",
-                "reference": "1.0.0-beta1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/configurable_views_filter_block-1.0.0-beta1.zip",
-                "reference": "1.0.0-beta1",
-                "shasum": "3d9661700b6073031deda21ee57689b4430ab107"
-            },
-            "require": {
-                "drupal/core": "^9 || ^10"
+                "url": "git@git.drupal.org:issue/configurable_views_filter_block-3463012.git",
+                "reference": "f95565b172cd5f15afb9ac2613878e258a8733a9"
             },
             "suggest": {
                 "drupal/better_exposed_filters": "Provides advanced options (e.g. links, checkboxes, or other widgets) to exposed Views elements."
             },
             "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "1.0.0-beta1",
-                    "datestamp": "1706443750",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
                 "GPL-2.0-or-later"
             ],
@@ -3908,14 +3888,11 @@
                 }
             ],
             "description": "Allow multiple instances of Views exposed filters block with a custom set of form fields per instance.",
-            "homepage": "https://www.drupal.org/project/configurable_views_filter_block",
             "keywords": [
                 "Drupal",
                 "views"
             ],
-            "support": {
-                "source": "https://git.drupalcode.org/project/configurable_views_filter_block"
-            }
+            "time": "2024-07-22T04:45:37+00:00"
         },
         {
             "name": "drupal/consumers",
@@ -23401,14 +23378,21 @@
             "time": "2022-06-03T18:03:27+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "drupal/configurable_views_filter_block",
+            "version": "dev-3463012-provide-option-to",
+            "alias": "1.x-dev",
+            "alias_normalized": "1.9999999.9999999.9999999-dev"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/access_policy": 10,
         "drupal/bibcite_migrate": 10,
         "drupal/blocktabs": 10,
         "drupal/bulma": 20,
-        "drupal/configurable_views_filter_block": 10,
+        "drupal/configurable_views_filter_block": 20,
         "drupal/dashboards": 10,
         "drupal/default_content": 15,
         "drupal/elasticsearch_connector": 15,
