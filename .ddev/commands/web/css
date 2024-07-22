@@ -2,3 +2,4 @@
 cd web/themes/custom/peceful
 [[ "$(npm la sass --depth=0 --parseable=true)" =~ /var/www/html/web/themes/custom/peceful/node_modules/sass:sass@* ]] || npm install
 npm run build-bulma
+drush cr
