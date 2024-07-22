@@ -22433,9 +22433,13 @@ has-background-danger.is-hoverable:active {
   pointer-events: all !important;
 }
 
-/* Full Width
------------------------------------------------------------
-*/
+a:hover {
+  text-decoration: underline;
+}
+a:hover .facet-item__count {
+  text-decoration: none;
+}
+
 /* Blocks
 -----------------------------------------------------------
 */
@@ -22611,6 +22615,18 @@ has-background-danger.is-hoverable:active {
 .block-configurable-views-filter-block-blocksearch-page .form-actions {
   width: auto;
   display: inline-block;
+}
+
+.facets-widget-links ul li.facet-item a.is-active::before {
+  font-size: 0.777rem;
+  content: "● ";
+}
+.facets-widget-links ul li.facet-item a.is-active:hover::before {
+  content: "𝗑 ";
+}
+
+.facet-item__status {
+  display: none;
 }
 
 article .contextual {
