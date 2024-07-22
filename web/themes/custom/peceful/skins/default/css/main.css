@@ -22617,9 +22617,15 @@ a:hover .facet-item__count {
   display: inline-block;
 }
 
+.facets-widget-links ul li.facet-item {
+  position: relative;
+}
 .facets-widget-links ul li.facet-item a.is-active::before {
   font-size: 0.777rem;
   content: "● ";
+  position: absolute;
+  left: -0.8rem;
+  top: 0.2rem;
 }
 .facets-widget-links ul li.facet-item a.is-active:hover::before {
   content: "𝗑 ";
