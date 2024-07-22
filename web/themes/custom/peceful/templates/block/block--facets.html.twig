@@ -1,0 +1,22 @@
+{% extends "@stable9/block/block.html.twig" %}
+{# Child templates can override the default classes. #}
+{%
+  set classes = classes ?? [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    'clearfix',
+  ]
+%}
+{%
+  set title_classes = [
+    'subtitle',
+    'is-5',
+  ]
+%}
+{% set attributes = attributes.addClass(classes) %}
+{% set title_attributes = title_attributes.addClass(title_classes) %}
+{# Override the content block to conditionally add a panel wrapper. #}
+{% block content %}
+  {{ content }}
+{% endblock %}
