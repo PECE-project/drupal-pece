@@ -870,12 +870,12 @@ if (getenv('IS_DDEV_PROJECT') == 'true' && file_exists(__DIR__ . '/settings.ddev
   include __DIR__ . '/settings.ddev.php';
 }
 
-$databases['migration']['default']['database'] = "sts7";
-$databases['migration']['default']['username'] = $databases['default']['default']['username'];
-$databases['migration']['default']['password'] = $databases['default']['default']['password'];
-$databases['migration']['default']['host'] = $databases['default']['default']['host'];
-$databases['migration']['default']['driver'] = $databases['default']['default']['driver'];
-$databases['migration']['default']['port'] = $databases['default']['default']['port'];
+$databases['migrate']['default']['database'] = "sts7";
+$databases['migrate']['default']['username'] = $databases['default']['default']['username'];
+$databases['migrate']['default']['password'] = $databases['default']['default']['password'];
+$databases['migrate']['default']['host'] = $databases['default']['default']['host'];
+$databases['migrate']['default']['driver'] = $databases['default']['default']['driver'];
+$databases['migrate']['default']['port'] = $databases['default']['default']['port'];
 
 /**
  * Load local development override configuration, if available.
