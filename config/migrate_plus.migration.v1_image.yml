@@ -64,7 +64,14 @@ process:
   field_tags: field_pece_tags
   field_crit_commentary: field_pece_crit_commentary
   field_image_artifact_image: field_pece_media_image
-  field_image_file_format: field_pece_file_format
+  field_file_format:
+    plugin: entity_generate
+    entity_type: taxonomy_term
+    ignore_case: true
+    bundle: format_image
+    bundle_key: vid
+    value_key: name
+    source: field_pece_file_format
 destination:
   plugin: 'entity_complete:node'
   translations: true
