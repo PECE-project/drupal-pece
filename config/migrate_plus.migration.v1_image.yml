@@ -39,9 +39,13 @@ process:
     source: field_pece_contributors
     default_value: null
   field_authors:
-    plugin: default_value
+    plugin: sub_process
     source: field_pece_authors
-    default_value: null
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: v1_taxonomy_term_authors
+        source: tid
   field_source: field_pece_source
   field_created_date: field_pece_created
   field_language: field_pece_language
@@ -61,7 +65,14 @@ process:
   #   source: licence
   #   values:
   #     name: licence
-  field_tags: field_pece_tags
+  field_tags:
+    plugin: sub_process
+    source: field_pece_tags
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: v1_taxonomy_term_tags
+        source: tid
   field_crit_commentary: field_pece_crit_commentary
   field_image_artifact_image: field_pece_media_image
   field_file_format:
