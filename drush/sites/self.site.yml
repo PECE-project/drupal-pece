@@ -12,3 +12,15 @@
 #  user: www-admin
 #  root: /path/to/drupal
 #  uri: http://stage.example.com
+#
+
+demo:
+  host: demo-pece.drutopia.org
+  paths:
+    drush: /home/demo_pece/site/vendor/drush
+    drush-script: /home/demo_pece/site/vendor/bin/drush
+  root: /home/demo_pece/site/web
+  uri: 'https://demo-pece.drutopia.org'
+  user: demo_pece
+  env-vars:
+    PATH: /home/demo_pece/bin:/usr/local/bin:/usr/bin:/bin
