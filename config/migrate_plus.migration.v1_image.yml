@@ -28,6 +28,12 @@ process:
     plugin: default_value
     source: field_pece_project_ref
     default_value: null
+  # field_groups_with_view_access:
+  #   plugin: entity_generate
+  #   entity_type: taxonomy_term
+  #   bundle: groups
+  #   source: og_group_ref
+  #   value_key: title
   field_people_with_edit_access:
     plugin: default_value
     source: field_pece_contributors
@@ -46,7 +52,15 @@ process:
     plugin: default_value
     source: field_ark_enabled
     default_value: null
-  field_pece_license: field_pece_license
+  # field_pece_license:
+  #   plugin: entity_generate
+  #   entity_type: taxonomy_term
+  #   bundle_key: vid
+  #   bundle: licenses_vocabulary_licenses
+  #   value_key: name
+  #   source: licence
+  #   values:
+  #     name: licence
   field_tags: field_pece_tags
   field_crit_commentary: field_pece_crit_commentary
   field_image_images: field_pece_media_image
