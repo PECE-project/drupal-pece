@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0478d01e51c4d62e09a82c8c96344739",
+    "content-hash": "3f01078ebf2edc55ce826df28b977bf5",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -3896,26 +3896,26 @@
         },
         {
             "name": "drupal/consumers",
-            "version": "1.17.0",
+            "version": "1.19.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/consumers.git",
-                "reference": "8.x-1.17"
+                "reference": "8.x-1.19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/consumers-8.x-1.17.zip",
-                "reference": "8.x-1.17",
-                "shasum": "8e7efc2c8386ead8ca459a1a5e0558fb66cde142"
+                "url": "https://ftp.drupal.org/files/projects/consumers-8.x-1.19.zip",
+                "reference": "8.x-1.19",
+                "shasum": "3af0f9866524c40e78924343c319720e1d17c2ef"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10"
+                "drupal/core": "^9.5 || ^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.17",
-                    "datestamp": "1679920063",
+                    "version": "8.x-1.19",
+                    "datestamp": "1721753030",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3924,7 +3924,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -3936,7 +3936,7 @@
                     "homepage": "https://www.drupal.org/user/79230"
                 }
             ],
-            "description": "Declare all the consumers of your API",
+            "description": "Declare all the consumers of your API.",
             "homepage": "https://www.drupal.org/project/consumers",
             "support": {
                 "source": "https://git.drupalcode.org/project/consumers"
@@ -5013,6 +5013,55 @@
             "homepage": "https://www.drupal.org/project/entity_browser",
             "support": {
                 "source": "https://git.drupalcode.org/project/entity_browser"
+            }
+        },
+        {
+            "name": "drupal/entity_form_field_label",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/entity_form_field_label.git",
+                "reference": "2.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/entity_form_field_label-2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": "b2304fcf9c0e32713fc6bc6196f8495e40a54e80"
+            },
+            "require": {
+                "drupal/core": "^9.2 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.1",
+                    "datestamp": "1697924348",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Sineok",
+                    "homepage": "https://www.drupal.org/user/3426613",
+                    "email": "n.sineok@gmail.com"
+                }
+            ],
+            "description": "Add an ability to change a displayed label for a entity field.",
+            "homepage": "https://www.drupal.org/project/entity_form_field_label",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/entity_form_field_label",
+                "issues": "https://www.drupal.org/project/issues/entity_form_field_label"
             }
         },
         {
@@ -7597,17 +7646,17 @@
         },
         {
             "name": "drupal/migrate_plus",
-            "version": "6.0.3",
+            "version": "6.0.4",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/migrate_plus.git",
-                "reference": "6.0.3"
+                "reference": "6.0.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/migrate_plus-6.0.3.zip",
-                "reference": "6.0.3",
-                "shasum": "08feb88178a45d8354862b03fd7fcf9b47ae14e1"
+                "url": "https://ftp.drupal.org/files/projects/migrate_plus-6.0.4.zip",
+                "reference": "6.0.4",
+                "shasum": "0357c416d2a9fd3f4211dd13c6585ed8072fabe7"
             },
             "require": {
                 "drupal/core": ">=9.1",
@@ -7624,8 +7673,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "6.0.3",
-                    "datestamp": "1721333111",
+                    "version": "6.0.4",
+                    "datestamp": "1721745585",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -8043,10 +8092,10 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/profile.git",
-                "reference": "832344ae78eb0d3a3e1e51f107013e3c546f0bf9"
+                "reference": "b8193457f4d6ffc87ad30929742cff408c707f23"
             },
             "require": {
-                "drupal/core": "^9 || ^10",
+                "drupal/core": "^9 || ^10 || ^11",
                 "drupal/entity": "^1.0",
                 "php": "^7.4 || ^8.0"
             },
@@ -8060,8 +8109,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.9+1-dev",
-                    "datestamp": "1711545287",
+                    "version": "8.x-1.10+1-dev",
+                    "datestamp": "1721735467",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -11339,16 +11388,16 @@
         },
         {
             "name": "mck89/peast",
-            "version": "v1.16.2",
+            "version": "v1.16.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mck89/peast.git",
-                "reference": "2791b08ffcc1862fe18eef85675da3aa58c406fe"
+                "reference": "645ec21b650bc2aced18285c85f220d22afc1430"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mck89/peast/zipball/2791b08ffcc1862fe18eef85675da3aa58c406fe",
-                "reference": "2791b08ffcc1862fe18eef85675da3aa58c406fe",
+                "url": "https://api.github.com/repos/mck89/peast/zipball/645ec21b650bc2aced18285c85f220d22afc1430",
+                "reference": "645ec21b650bc2aced18285c85f220d22afc1430",
                 "shasum": ""
             },
             "require": {
@@ -11361,7 +11410,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.16.2-dev"
+                    "dev-master": "1.16.3-dev"
                 }
             },
             "autoload": {
@@ -11382,9 +11431,9 @@
             "description": "Peast is PHP library that generates AST for JavaScript code",
             "support": {
                 "issues": "https://github.com/mck89/peast/issues",
-                "source": "https://github.com/mck89/peast/tree/v1.16.2"
+                "source": "https://github.com/mck89/peast/tree/v1.16.3"
             },
-            "time": "2024-03-05T09:16:03+00:00"
+            "time": "2024-07-23T14:00:32+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -18914,16 +18963,16 @@
         },
         {
             "name": "ec-europa/qa-automation",
-            "version": "9.2.0",
+            "version": "9.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ec-europa/qa-automation.git",
-                "reference": "82fc9ced87c45b0201faf581f06dea7f7231ecce"
+                "reference": "92c3b71b2c43e29fd46592661ef75e90ebb8389c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ec-europa/qa-automation/zipball/82fc9ced87c45b0201faf581f06dea7f7231ecce",
-                "reference": "82fc9ced87c45b0201faf581f06dea7f7231ecce",
+                "url": "https://api.github.com/repos/ec-europa/qa-automation/zipball/92c3b71b2c43e29fd46592661ef75e90ebb8389c",
+                "reference": "92c3b71b2c43e29fd46592661ef75e90ebb8389c",
                 "shasum": ""
             },
             "require": {
@@ -18934,7 +18983,7 @@
                 "phpcompatibility/php-compatibility": "^9.1",
                 "phpmd/phpmd": "^2.12",
                 "squizlabs/php_codesniffer": "^3.6",
-                "symfony/yaml": "^4.4 || ^5.0 || ^6.0"
+                "symfony/yaml": "^5.0 || ^6.0 || ^7.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.0"
@@ -18961,7 +19010,7 @@
                 "issues": "https://github.com/ec-europa/qa-automation/issues",
                 "source": "https://github.com/ec-europa/qa-automation"
             },
-            "time": "2023-12-15T16:40:47+00:00"
+            "time": "2024-07-17T06:26:41+00:00"
         },
         {
             "name": "ec-europa/toolkit",
@@ -19031,16 +19080,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v3.25.3",
+            "version": "v3.25.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "983a87f4f8798a90ca3a25b0f300b8fda38df643"
+                "reference": "749f6c8e99a7fe51d096c2db656a4af9a46a6b5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/983a87f4f8798a90ca3a25b0f300b8fda38df643",
-                "reference": "983a87f4f8798a90ca3a25b0f300b8fda38df643",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/749f6c8e99a7fe51d096c2db656a4af9a46a6b5e",
+                "reference": "749f6c8e99a7fe51d096c2db656a4af9a46a6b5e",
                 "shasum": ""
             },
             "require": {
@@ -19069,9 +19118,9 @@
                 "proto"
             ],
             "support": {
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.25.3"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.25.4"
             },
-            "time": "2024-02-15T21:11:49+00:00"
+            "time": "2024-07-24T17:10:25+00:00"
         },
         {
             "name": "jakeasmith/http_build_url",
@@ -20812,16 +20861,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.7",
+            "version": "1.11.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "52d2bbfdcae7f895915629e4694e9497d0f8e28d"
+                "reference": "6adbd118e6c0515dd2f36b06cde1d6da40f1b8ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/52d2bbfdcae7f895915629e4694e9497d0f8e28d",
-                "reference": "52d2bbfdcae7f895915629e4694e9497d0f8e28d",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/6adbd118e6c0515dd2f36b06cde1d6da40f1b8ec",
+                "reference": "6adbd118e6c0515dd2f36b06cde1d6da40f1b8ec",
                 "shasum": ""
             },
             "require": {
@@ -20866,7 +20915,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-06T11:17:41+00:00"
+            "time": "2024-07-24T07:01:22+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
