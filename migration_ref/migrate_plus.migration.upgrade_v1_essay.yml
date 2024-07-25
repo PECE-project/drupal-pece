@@ -1,0 +1,168 @@
+uuid: fceba53c-52f3-445e-a457-64344808cbec
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_v1_essay
+class: Drupal\node\Plugin\migrate\D7NodeTranslation
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'PECE v1'
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Migrate PECE Essays'
+source:
+  plugin: v1_node
+  node_type: pece_essay
+process:
+  nid:
+    -
+      plugin: get
+      source: tnid
+  vid:
+    -
+      plugin: get
+      source: vid
+  type:
+    -
+      plugin: default_value
+      default_value: pece_essay
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  path/pathauto:
+    -
+      plugin: default_value
+      default_value: 0
+  path/alias:
+    -
+      plugin: get
+      source: alias
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  content_translation_source:
+    -
+      plugin: get
+      source: source_langcode
+  field_people_with_edit_access:
+    -
+      plugin: default_value
+      source: field_pece_contributors
+      default_value: null
+  body/format:
+    -
+      plugin: default_value
+      default_value: html
+  body/value:
+    -
+      plugin: extract
+      source: body
+      index:
+        - 0
+        - value
+      default: ''
+  body/summary:
+    -
+      plugin: extract
+      source: body
+      index:
+        - 0
+        - summary
+      default: ''
+  field_essay_thumbnail/target_id:
+    -
+      plugin: default_value
+      source: field_thumbnail
+      default_value:
+        -
+          fid: null
+    -
+      plugin: extract
+      index:
+        - 0
+        - fid
+      default: null
+  field_tags:
+    -
+      plugin: get
+      source: field_pece_tags
+  field_uri:
+    -
+      plugin: get
+      source: field_pece_uri
+  field_ark_enabled:
+    -
+      plugin: default_value
+      source: field_ark_enabled
+      default_value: null
+  field_pece_project_ref:
+    -
+      plugin: default_value
+      source: field_pece_project_ref
+      default_value: null
+  field_pbc_ref_user:
+    -
+      plugin: default_value
+      source: permission_by_user_view
+      default_value: null
+  field_pbc_ref_role:
+    -
+      plugin: default_value
+      source: permission_by_role_view
+      default_value: null
+  field_pece_all_can_view:
+    -
+      plugin: default_value
+      source: permission_all_user_view
+      default_value: false
+destination:
+  plugin: 'entity_complete:node'
+  translations: true
+migration_dependencies:
+  required:
+    - upgrade_v1_user
+    - upgrade_v1_file
+  optional:
+    - upgrade_d7_field_instance
+    - upgrade_d7_comment_field_instance

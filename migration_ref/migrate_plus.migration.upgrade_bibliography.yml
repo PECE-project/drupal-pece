@@ -1,0 +1,304 @@
+uuid: 1c934c21-d041-40e5-875d-1fbba99d1419
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_bibliography
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Bibliography v1'
+  - 'Drupal 6'
+  - 'Drupal 7'
+migration_group: migrate_drupal_7
+label: 'Migrate Bibliography'
+source:
+  plugin: bibcite_reference
+process:
+  title:
+    -
+      plugin: get
+      source: title
+  bibcite_year:
+    -
+      source: biblio_year
+      plugin: static_map
+      map:
+        9999: null
+        9998: null
+      bypass: true
+  bibcite_volume:
+    -
+      plugin: get
+      source: biblio_volume
+  bibcite_pages:
+    -
+      plugin: get
+      source: biblio_pages
+  bibcite_number:
+    -
+      plugin: get
+      source: biblio_number
+  bibcite_other_number:
+    -
+      plugin: get
+      source: biblio_other_number
+  bibcite_secondary_title:
+    -
+      plugin: get
+      source: biblio_secondary_title
+  bibcite_tertiary_title:
+    -
+      plugin: get
+      source: biblio_tertiary_title
+  bibcite_edition:
+    -
+      plugin: get
+      source: biblio_edition
+  bibcite_publisher:
+    -
+      plugin: get
+      source: biblio_publisher
+  bibcite_place_published:
+    -
+      plugin: get
+      source: biblio_place_published
+  bibcite_date:
+    -
+      plugin: get
+      source: biblio_date
+  bibcite_isbn:
+    -
+      plugin: get
+      source: biblio_isbn
+  bibcite_lang:
+    -
+      plugin: get
+      source: biblio_lang
+  bibcite_abst_e:
+    -
+      plugin: get
+      source: biblio_abst_e
+  bibcite_abst_f:
+    -
+      plugin: get
+      source: biblio_abst_f
+  bibcite_url:
+    -
+      plugin: get
+      source: biblio_url
+  bibcite_issue:
+    -
+      plugin: get
+      source: biblio_issue
+  bibcite_type_of_work:
+    -
+      plugin: get
+      source: biblio_type_of_work
+  bibcite_accession_number:
+    -
+      plugin: get
+      source: biblio_accession_number
+  bibcite_call_number:
+    -
+      plugin: get
+      source: biblio_call_number
+  bibcite_notes:
+    -
+      plugin: get
+      source: biblio_notes
+  bibcite_custom1:
+    -
+      plugin: get
+      source: biblio_custom1
+  bibcite_custom2:
+    -
+      plugin: get
+      source: biblio_custom2
+  bibcite_custom3:
+    -
+      plugin: get
+      source: biblio_custom3
+  bibcite_custom4:
+    -
+      plugin: get
+      source: biblio_custom4
+  bibcite_custom5:
+    -
+      plugin: get
+      source: biblio_custom5
+  bibcite_custom6:
+    -
+      plugin: get
+      source: biblio_custom6
+  bibcite_custom7:
+    -
+      plugin: get
+      source: biblio_custom7
+  bibcite_research_notes:
+    -
+      plugin: get
+      source: biblio_research_notes
+  bibcite_number_of_volumes:
+    -
+      plugin: get
+      source: biblio_number_of_volumes
+  bibcite_short_title:
+    -
+      plugin: get
+      source: biblio_short_title
+  bibcite_alternate_title:
+    -
+      plugin: get
+      source: biblio_alternate_title
+  bibcite_original_publication:
+    -
+      plugin: get
+      source: biblio_original_publication
+  bibcite_reprint_edition:
+    -
+      plugin: get
+      source: biblio_reprint_edition
+  bibcite_translated_title:
+    -
+      plugin: get
+      source: biblio_translated_title
+  bibcite_section:
+    -
+      plugin: get
+      source: biblio_section
+  bibcite_citekey:
+    -
+      plugin: get
+      source: biblio_citekey
+  bibcite_doi:
+    -
+      plugin: get
+      source: biblio_doi
+  bibcite_issn:
+    -
+      plugin: get
+      source: biblio_issn
+  bibcite_auth_address:
+    -
+      plugin: get
+      source: biblio_auth_address
+  bibcite_remote_db_name:
+    -
+      plugin: get
+      source: biblio_remote_db_name
+  bibcite_remote_db_provider:
+    -
+      plugin: get
+      source: biblio_remote_db_provider
+  bibcite_label:
+    -
+      plugin: get
+      source: biblio_label
+  bibcite_access_date:
+    -
+      plugin: get
+      source: biblio_access_date
+  bibcite_refereed:
+    -
+      plugin: get
+      source: biblio_refereed
+  keywords:
+    -
+      plugin: sub_process
+      source: keywords
+      process:
+        target_id:
+          plugin: migration_lookup
+          migration: upgrade_bibcite_keyword
+          source: kid
+  author:
+    -
+      plugin: sub_process
+      source: author
+      process:
+        target_id:
+          plugin: migration_lookup
+          migration: upgrade_bibcite_contributor
+          source: cid
+        role:
+          plugin: static_map
+          source: auth_type
+          map:
+            1: author
+            2: secondary_author
+            3: tertiary_author
+            4: subsidiary_author
+            5: corporate_author
+            10: series_editor
+            11: performers
+            12: sponsor
+            13: translator
+            14: editor
+            15: counsel
+            16: series_director
+            17: producer
+            18: department
+            19: issuing_organization
+            20: international_author
+            21: recipient
+            22: advisor
+        category:
+          plugin: static_map
+          source: auth_category
+          map:
+            1: primary
+            2: secondary
+            3: tertiary
+            4: subsidiary
+            5: corporate_institutional
+  type:
+    -
+      plugin: static_map
+      source: biblio_type
+      map:
+        112: artwork
+        114: audiovisual
+        117: bill
+        100: book
+        101: book_chapter
+        111: broadcast
+        116: case
+        123: chart
+        127: classical
+        103: conference_paper
+        104: conference_proceedings
+        125: database
+        110: film
+        126: government_report
+        115: hearing
+        131: journal
+        102: journal_article
+        128: legal_ruling
+        106: magazine_article
+        121: manuscript
+        122: map
+        129: miscellaneous
+        130: miscellaneous_section
+        105: newspaper_article
+        119: patent
+        120: personal
+        135: presentation
+        109: report
+        113: software
+        118: statute
+        108: thesis
+        124: unpublished
+        132: website
+        107: web_article
+        134: web_project_page
+        133: web_service
+destination:
+  plugin: 'entity:bibcite_reference'
+migration_dependencies:
+  required:
+    - upgrade_bibcite_keyword
+    - upgrade_bibcite_contributor
+  optional:
+    - upgrade_bibcite_keyword
+    - upgrade_bibcite_contributor

@@ -1,0 +1,38 @@
+uuid: e759d882-bea2-4033-9205-2168afad3297
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_shortcut_set_users
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+migration_group: migrate_drupal_7
+label: 'Shortcut set user mapping'
+source:
+  plugin: d7_shortcut_set_users
+process:
+  uid:
+    -
+      plugin: migration_lookup
+      migration: upgrade_d7_user
+      source: uid
+    -
+      plugin: skip_on_empty
+      method: row
+  set_name:
+    -
+      plugin: migration_lookup
+      migration: upgrade_d7_shortcut_set
+      source: set_name
+destination:
+  plugin: shortcut_set_users
+migration_dependencies:
+  required:
+    - upgrade_d7_shortcut_set
+    - upgrade_d7_user
+  optional:
+    - upgrade_d7_user
+    - upgrade_d7_shortcut_set

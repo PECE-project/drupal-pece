@@ -1,0 +1,77 @@
+uuid: 0f42c90f-4e89-46df-b1f1-606b0421464b
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_field_location_widget_node_pece_artifact_pdf
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+  - 'Location Field'
+migration_group: migrate_drupal_7
+label: 'Geolocation field instance widget configuration for Location (node, pece_artifact_pdf)'
+source:
+  plugin: d7_field_widget_settings_location
+  constants:
+    form_mode: default
+    settings: {  }
+    third_party_settings: {  }
+  entity_type: node
+  bundle: pece_artifact_pdf
+process:
+  entity_type:
+    0:
+      plugin: get
+      source: entity_type
+    profile:
+      plugin: static_map
+      map:
+        profile2: profile
+      bypass: true
+    1:
+      plugin: static_map
+      map:
+        field_collection_item: paragraph
+        paragraphs_item: paragraph
+      bypass: true
+  bundle:
+    -
+      plugin: get
+      source: bundle
+  field_name:
+    -
+      plugin: get
+      source: field_name
+  form_mode:
+    -
+      plugin: get
+      source: constants/form_mode
+  options/weight:
+    -
+      plugin: get
+      source: widget/weight
+  options/type:
+    -
+      plugin: get
+      source: widget_type
+  options/settings:
+    -
+      plugin: get
+      source: constants/settings
+  options/third_party_settings:
+    -
+      plugin: get
+      source: constants/third_party_settings
+  hidden:
+    -
+      plugin: get
+      source: widget_hidden
+destination:
+  plugin: component_entity_form_display
+migration_dependencies:
+  required:
+    - upgrade_d7_field_location_instance_node_pece_artifact_pdf
+  optional:
+    - upgrade_d7_profile2_type

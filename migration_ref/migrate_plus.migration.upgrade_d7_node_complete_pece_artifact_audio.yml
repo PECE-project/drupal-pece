@@ -1,0 +1,210 @@
+uuid: d23164d7-de93-451b-af47-05eb8deeb437
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_node_complete_pece_artifact_audio
+class: Drupal\node\Plugin\migrate\D7NodeTranslation
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Node complete (Artifact - Audio)'
+source:
+  plugin: d7_node_complete
+  node_type: pece_artifact_audio
+process:
+  nid:
+    -
+      plugin: get
+      source: tnid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  content_translation_source:
+    -
+      plugin: get
+      source: source_langcode
+  comment_node_pece_artifact_audio/0/status:
+    -
+      plugin: get
+      source: comment
+  field_pece_authors:
+    -
+      plugin: sub_process
+      source: field_pece_authors
+      process:
+        target_id: tid
+  field_pece_contributors:
+    -
+      plugin: get
+      source: field_pece_contributors
+  field_pece_crit_commentary:
+    -
+      plugin: get
+      source: field_pece_crit_commentary
+  field_pece_fieldsite:
+    -
+      plugin: get
+      source: field_pece_fieldsite
+  field_pece_file_format:
+    -
+      plugin: get
+      source: field_pece_file_format
+  field_pece_license:
+    -
+      plugin: get
+      source: field_pece_license
+  field_pece_location:
+    -
+      plugin: location_to_address
+      source: field_pece_location
+  field_pece_location_geoloc:
+    -
+      plugin: location_to_geolocation
+      source: field_pece_location
+  field_pece_location_email:
+    -
+      plugin: location_email_to_email
+      source: field_pece_location
+  field_pece_location_fax:
+    -
+      plugin: location_fax_to_telephone
+      source: field_pece_location
+  field_pece_location_phone:
+    -
+      plugin: location_phone_to_telephone
+      source: field_pece_location
+  field_pece_location_url:
+    -
+      plugin: location_www_to_link
+      source: field_pece_location
+  field_pece_media_audio:
+    -
+      plugin: sub_process
+      source: field_pece_media_audio
+      process:
+        target_id: fid
+        display: display
+        description: description
+  field_pece_media_duration:
+    -
+      plugin: get
+      source: field_pece_media_duration
+  field_pece_tags:
+    -
+      plugin: sub_process
+      source: field_pece_tags
+      process:
+        target_id: tid
+  field_pece_uri:
+    -
+      plugin: get
+      source: field_pece_uri
+  field_pece_use_fieldsite_local:
+    -
+      plugin: get
+      source: field_pece_use_fieldsite_local
+  field_permissions:
+    -
+      plugin: get
+      source: field_permissions
+  group_content_access:
+    -
+      plugin: get
+      source: group_content_access
+  og_group_ref:
+    -
+      plugin: get
+      source: og_group_ref
+  field_pece_source:
+    -
+      plugin: get
+      source: field_pece_source
+  field_pece_language:
+    -
+      plugin: get
+      source: field_pece_language
+  field_pece_created:
+    -
+      plugin: sub_process
+      source: field_pece_created
+      process:
+        value:
+          plugin: format_date
+          from_format: 'Y-m-d\TH:i:s'
+          to_format: 'Y-m-d\TH:i:s'
+          source: value
+  field_pece_project_ref:
+    -
+      plugin: get
+      source: field_pece_project_ref
+  field_ark_enabled:
+    -
+      plugin: get
+      source: field_ark_enabled
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_complete:node'
+  translations: true
+  default_bundle: pece_artifact_audio
+migration_dependencies:
+  required:
+    - upgrade_d7_user
+    - upgrade_d7_node_type
+    - upgrade_language
+    - upgrade_d7_field_location_node
+    - upgrade_d7_field_location_instance_node_pece_artifact_audio
+  optional:
+    - upgrade_d7_field_instance
+    - upgrade_d7_comment_field_instance

@@ -1,0 +1,86 @@
+uuid: b09a9add-8722-4143-907f-3c5e9ae95a62
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_field_location_instance_node_pece_artifact_bundle
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+  - 'Location Field'
+migration_group: migrate_drupal_7
+label: 'Geolocation field instance for Location (node, pece_artifact_bundle)'
+source:
+  plugin: d7_field_location_instance
+  constants:
+    status: true
+    langcode: und
+    default_value: {  }
+  entity_type: node
+  bundle: pece_artifact_bundle
+process:
+  type:
+    -
+      plugin: get
+      source: type
+  entity_type:
+    0:
+      plugin: get
+      source: entity_type
+    profile:
+      plugin: static_map
+      map:
+        profile2: profile
+      bypass: true
+    1:
+      plugin: static_map
+      map:
+        field_collection_item: paragraph
+        paragraphs_item: paragraph
+      bypass: true
+  field_name:
+    -
+      plugin: get
+      source: field_name
+  bundle:
+    -
+      plugin: get
+      source: bundle
+  label:
+    -
+      plugin: get
+      source: field_label
+  required:
+    -
+      plugin: get
+      source: required
+  status:
+    -
+      plugin: get
+      source: constants/status
+  settings:
+    -
+      plugin: default_value
+      source: field_instance_settings
+      default_value: {  }
+  default_value_function:
+    -
+      plugin: get
+      source: ''
+  default_value:
+    -
+      plugin: get
+      source: constants/default_value
+  translatable:
+    -
+      plugin: get
+      source: translatable
+destination:
+  plugin: 'entity:field_config'
+migration_dependencies:
+  required:
+    - upgrade_d7_field_location_node
+  optional:
+    - upgrade_d7_profile2_type

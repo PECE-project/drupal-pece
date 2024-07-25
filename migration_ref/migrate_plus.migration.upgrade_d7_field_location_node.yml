@@ -1,0 +1,62 @@
+uuid: 856b0b63-0bb8-40f8-a9f5-9d2b1ccf34a7
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_field_location_node
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+  - 'Location Field'
+migration_group: migrate_drupal_7
+label: 'Geolocation field storage for Location (node)'
+source:
+  plugin: d7_field_location
+  constants:
+    status: true
+    langcode: und
+  entity_type: node
+process:
+  entity_type:
+    0:
+      plugin: get
+      source: entity_type
+    profile:
+      plugin: static_map
+      map:
+        profile2: profile
+      bypass: true
+    1:
+      plugin: static_map
+      map:
+        field_collection_item: paragraph
+        paragraphs_item: paragraph
+      bypass: true
+  field_name:
+    -
+      plugin: get
+      source: field_name
+  type:
+    -
+      plugin: get
+      source: type
+  status:
+    -
+      plugin: get
+      source: constants/status
+  langcode:
+    -
+      plugin: get
+      source: constants/langcode
+  cardinality:
+    -
+      plugin: get
+      source: cardinality
+destination:
+  plugin: 'entity:field_storage_config'
+migration_dependencies:
+  required: {  }
+  optional:
+    - upgrade_d7_profile2_type

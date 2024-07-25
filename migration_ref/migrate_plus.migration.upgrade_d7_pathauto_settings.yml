@@ -1,0 +1,229 @@
+uuid: 4442275a-b9f0-4dbc-8945-43d97f23ca9d
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_pathauto_settings
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+migration_group: migrate_drupal_7
+label: 'Pathauto configuration'
+source:
+  plugin: variable
+  variables:
+    - pathauto_punctuation_ampersand
+    - pathauto_punctuation_asterisk
+    - pathauto_punctuation_at
+    - pathauto_punctuation_backtick
+    - pathauto_punctuation_back_slash
+    - pathauto_punctuation_caret
+    - pathauto_punctuation_colon
+    - pathauto_punctuation_comma
+    - pathauto_punctuation_dollar
+    - pathauto_punctuation_double_quotes
+    - pathauto_punctuation_equal
+    - pathauto_punctuation_exclamation
+    - pathauto_punctuation_greater_than
+    - pathauto_punctuation_hash
+    - pathauto_punctuation_hyphen
+    - pathauto_punctuation_left_curly
+    - pathauto_punctuation_left_parenthesis
+    - pathauto_punctuation_left_square
+    - pathauto_punctuation_less_than
+    - pathauto_punctuation_percent
+    - pathauto_punctuation_period
+    - pathauto_punctuation_pipe
+    - pathauto_punctuation_plus
+    - pathauto_punctuation_question_mark
+    - pathauto_punctuation_quotes
+    - pathauto_punctuation_right_curly
+    - pathauto_punctuation_right_parenthesis
+    - pathauto_punctuation_right_square
+    - pathauto_punctuation_semicolon
+    - pathauto_punctuation_slash
+    - pathauto_punctuation_tilde
+    - pathauto_punctuation_underscore
+    - pathauto_verbose
+    - pathauto_separator
+    - pathauto_max_length
+    - pathauto_max_component_length
+    - pathauto_transliterate
+    - pathauto_reduce_ascii
+    - pathauto_ignore_words
+    - pathauto_case
+    - pathauto_update_action
+  source_module: pathauto
+process:
+  punctuation/ampersand:
+    -
+      plugin: get
+      source: pathauto_punctuation_ampersand
+  punctuation/asterisk:
+    -
+      plugin: get
+      source: pathauto_punctuation_asterisk
+  punctuation/at:
+    -
+      plugin: get
+      source: pathauto_punctuation_at
+  punctuation/backtick:
+    -
+      plugin: get
+      source: pathauto_punctuation_backtick
+  punctuation/back_slash:
+    -
+      plugin: get
+      source: pathauto_punctuation_back_slash
+  punctuation/caret:
+    -
+      plugin: get
+      source: pathauto_punctuation_caret
+  punctuation/colon:
+    -
+      plugin: get
+      source: pathauto_punctuation_colon
+  punctuation/comma:
+    -
+      plugin: get
+      source: pathauto_punctuation_comma
+  punctuation/dollar:
+    -
+      plugin: get
+      source: pathauto_punctuation_dollar
+  punctuation/double_quotes:
+    -
+      plugin: get
+      source: pathauto_punctuation_double_quotes
+  punctuation/equal:
+    -
+      plugin: get
+      source: pathauto_punctuation_equal
+  punctuation/exclamation:
+    -
+      plugin: get
+      source: pathauto_punctuation_exclamation
+  punctuation/greater_than:
+    -
+      plugin: get
+      source: pathauto_punctuation_greater_than
+  punctuation/hash:
+    -
+      plugin: get
+      source: pathauto_punctuation_hash
+  punctuation/hyphen:
+    -
+      plugin: get
+      source: pathauto_punctuation_hyphen
+  punctuation/left_curly:
+    -
+      plugin: get
+      source: pathauto_punctuation_left_curly
+  punctuation/left_parenthesis:
+    -
+      plugin: get
+      source: pathauto_punctuation_left_parenthesis
+  punctuation/left_square:
+    -
+      plugin: get
+      source: pathauto_punctuation_left_square
+  punctuation/less_than:
+    -
+      plugin: get
+      source: pathauto_punctuation_less_than
+  punctuation/percent:
+    -
+      plugin: get
+      source: pathauto_punctuation_percent
+  punctuation/period:
+    -
+      plugin: get
+      source: pathauto_punctuation_period
+  punctuation/pipe:
+    -
+      plugin: get
+      source: pathauto_punctuation_pipe
+  punctuation/plus:
+    -
+      plugin: get
+      source: pathauto_punctuation_plus
+  punctuation/question_mark:
+    -
+      plugin: get
+      source: pathauto_punctuation_question_mark
+  punctuation/quotes:
+    -
+      plugin: get
+      source: pathauto_punctuation_quotes
+  punctuation/right_curly:
+    -
+      plugin: get
+      source: pathauto_punctuation_right_curly
+  punctuation/right_parenthesis:
+    -
+      plugin: get
+      source: pathauto_punctuation_right_parenthesis
+  punctuation/right_square:
+    -
+      plugin: get
+      source: pathauto_punctuation_right_square
+  punctuation/semicolon:
+    -
+      plugin: get
+      source: pathauto_punctuation_semicolon
+  punctuation/slash:
+    -
+      plugin: get
+      source: pathauto_punctuation_slash
+  punctuation/tilde:
+    -
+      plugin: get
+      source: pathauto_punctuation_tilde
+  punctuation/underscore:
+    -
+      plugin: get
+      source: pathauto_punctuation_underscore
+  verbose:
+    -
+      plugin: get
+      source: pathauto_verbose
+  separator:
+    -
+      plugin: get
+      source: pathauto_separator
+  max_length:
+    -
+      plugin: get
+      source: pathauto_max_length
+  max_component_length:
+    -
+      plugin: get
+      source: pathauto_max_component_length
+  transliterate:
+    -
+      plugin: get
+      source: pathauto_transliterate
+  reduce_ascii:
+    -
+      plugin: get
+      source: pathauto_reduce_ascii
+  ignore_words:
+    -
+      plugin: get
+      source: pathauto_ignore_words
+  case:
+    -
+      plugin: get
+      source: pathauto_case
+  update_action:
+    -
+      plugin: get
+      source: pathauto_update_action
+destination:
+  plugin: config
+  config_name: pathauto.settings
+migration_dependencies:
+  required: {  }
+  optional: {  }

@@ -1,0 +1,168 @@
+uuid: ce5f9780-6bcd-4260-8176-ab5ffc745a6f
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_field_instance
+class: Drupal\migrate_drupal\Plugin\migrate\FieldMigration
+field_plugin_method: alterFieldInstanceMigration
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+migration_group: migrate_drupal_7
+label: 'Field instance configuration'
+source:
+  plugin: d7_field_instance
+  constants:
+    status: true
+    comment_node: comment_node_
+process:
+  type:
+    -
+      plugin: process_field
+      source: type
+      method: getFieldType
+  entity_type:
+    0:
+      plugin: get
+      source: entity_type
+    profile:
+      plugin: static_map
+      map:
+        profile2: profile
+      bypass: true
+    1:
+      plugin: static_map
+      map:
+        field_collection_item: paragraph
+        paragraphs_item: paragraph
+      bypass: true
+  field_name:
+    -
+      plugin: get
+      source: field_name
+  bundle_mapped:
+    -
+      plugin: static_map
+      source: bundle
+      bypass: true
+      map:
+        comment_node_forum: comment_forum
+    -
+      plugin: paragraphs_process_on_value
+      source_value: entity_type
+      expected_value: field_collection_item
+      process:
+        plugin: paragraphs_strip_field_prefix
+  _comment_type:
+    -
+      plugin: explode
+      source: bundle
+      delimiter: comment_node_
+    -
+      plugin: extract
+      index:
+        - 1
+      default: false
+    -
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: migration_lookup
+      migration: upgrade_d7_comment_type
+  bundle:
+    -
+      plugin: field_bundle
+      source:
+        - entity_type
+        - '@bundle_mapped'
+  label:
+    -
+      plugin: get
+      source: label
+  description:
+    -
+      plugin: get
+      source: description
+  required:
+    -
+      plugin: get
+      source: required
+  status:
+    -
+      plugin: get
+      source: constants/status
+  allowed_values:
+    -
+      plugin: sub_process
+      source: allowed_vid
+      process:
+        -
+          plugin: migration_lookup
+          migration: upgrade_d7_taxonomy_vocabulary
+          source: vid
+  settings:
+    0:
+      plugin: d7_field_instance_settings
+      source:
+        - settings
+        - widget
+        - field_definition
+    inline_entity_form:
+      plugin: inline_entity_form_field_instance_settings
+    1:
+      plugin: location_to_address_field_settings
+    2:
+      plugin: location_to_address_field_settings
+    3:
+      plugin: location_to_address_field_settings
+    4:
+      plugin: location_to_address_field_settings
+    5:
+      plugin: location_to_address_field_settings
+    6:
+      plugin: location_to_address_field_settings
+    7:
+      plugin: location_to_address_field_settings
+    8:
+      plugin: location_to_address_field_settings
+    9:
+      plugin: location_to_address_field_settings
+    10:
+      plugin: location_to_address_field_settings
+    11:
+      plugin: location_to_address_field_settings
+  default_value_function:
+    -
+      plugin: get
+      source: ''
+  default_value:
+    -
+      plugin: d7_field_instance_defaults
+      source:
+        - default_value
+        - widget
+  translatable:
+    -
+      plugin: get
+      source: translatable
+  settings/title:
+    -
+      plugin: static_map
+      source: settings/title
+      bypass: true
+      map:
+        disabled: 0
+        optional: 1
+        required: 2
+destination:
+  plugin: 'entity:field_config'
+migration_dependencies:
+  required:
+    - upgrade_d7_field
+    - upgrade_d7_eck_bundle
+  optional:
+    - upgrade_d7_node_type
+    - upgrade_d7_comment_type
+    - upgrade_d7_taxonomy_vocabulary
+    - upgrade_d7_profile2_type

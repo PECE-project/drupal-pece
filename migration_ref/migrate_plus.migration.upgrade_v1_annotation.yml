@@ -1,0 +1,104 @@
+uuid: 9155bdcd-f2f1-49e4-953c-2aed818c1931
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_v1_annotation
+class: Drupal\node\Plugin\migrate\D7NodeTranslation
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Annotation v1'
+  - 'PECE v1'
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Migrate Annotation'
+source:
+  plugin: v1_node
+  node_type: pece_annotation
+process:
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  title:
+    -
+      plugin: get
+      source: title
+  type:
+    -
+      plugin: default_value
+      default_value: pece_annotation
+  field_pece_license:
+    -
+      plugin: get
+      source: field_pece_license
+  body/format:
+    -
+      plugin: default_value
+      default_value: html
+  body/value:
+    -
+      plugin: extract
+      source: body
+      index:
+        - 0
+        - value
+      default: ''
+  body/summary:
+    -
+      plugin: extract
+      source: body
+      index:
+        - 0
+        - summary
+      default: ''
+  field_tags:
+    -
+      plugin: get
+      source: field_pece_tags
+  field_ark_enabled:
+    -
+      plugin: default_value
+      source: field_ark_enabled
+      default_value: null
+  field_annotation_analytic:
+    -
+      plugin: default_value
+      source: field_pece_analytic
+      default_value: null
+  field_annotation_artifact:
+    -
+      plugin: default_value
+      source: field_pece_artifact
+      default_value: null
+  field_pbc_ref_user:
+    -
+      plugin: default_value
+      source: permission_by_user_view
+      default_value: null
+  field_pbc_ref_role:
+    -
+      plugin: default_value
+      source: permission_by_role_view
+      default_value: null
+  field_pece_all_can_view:
+    -
+      plugin: default_value
+      source: permission_all_user_view
+      default_value: false
+destination:
+  plugin: 'entity_complete:node'
+  translations: true
+migration_dependencies:
+  required:
+    - upgrade_v1_taxonomy_term_tags
+  optional: {  }

@@ -1,0 +1,128 @@
+uuid: 8b192543-46f7-459b-9f89-c2780d0271a1
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_v1_video
+class: Drupal\node\Plugin\migrate\D7NodeTranslation
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Video v1'
+  - 'PECE v1'
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Migrate Artifact Video'
+source:
+  plugin: v1_node
+  node_type: pece_artifact_video
+process:
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  title:
+    -
+      plugin: get
+      source: title
+  type:
+    -
+      plugin: default_value
+      default_value: artifact_video
+  field_pece_project_ref:
+    -
+      plugin: default_value
+      source: field_pece_project_ref
+      default_value: null
+  field_people_with_edit_access:
+    -
+      plugin: default_value
+      source: field_pece_contributors
+      default_value: null
+  field_authors:
+    -
+      plugin: default_value
+      source: field_pece_authors
+      default_value: null
+  field_created_date:
+    -
+      plugin: get
+      source: field_pece_created
+  field_source:
+    -
+      plugin: get
+      source: field_pece_source
+  field_language:
+    -
+      plugin: get
+      source: field_pece_language
+  field_crit_commentary:
+    -
+      plugin: get
+      source: field_pece_crit_commentary
+  field_video_use_fieldsite_local:
+    -
+      plugin: get
+      source: field_pece_use_fieldsite_local
+  field_fieldsite:
+    -
+      plugin: get
+      source: field_pece_fieldsite
+  field_location:
+    -
+      plugin: get
+      source: field_pece_location
+  field_pece_license:
+    -
+      plugin: get
+      source: field_pece_license
+  field_tags:
+    -
+      plugin: get
+      source: field_pece_tags
+  field_ark_enabled:
+    -
+      plugin: default_value
+      source: field_ark_enabled
+      default_value: null
+  field_duration:
+    -
+      plugin: get
+      source: field_pece_media_duration
+  field_video_format:
+    -
+      plugin: get
+      source: field_pece_file_format
+  field_video_media:
+    -
+      plugin: get
+      source: field_pece_media_video
+  field_pbc_ref_user:
+    -
+      plugin: default_value
+      source: permission_by_user_view
+      default_value: null
+  field_pbc_ref_role:
+    -
+      plugin: default_value
+      source: permission_by_role_view
+      default_value: null
+  field_pece_all_can_view:
+    -
+      plugin: default_value
+      source: permission_all_user_view
+      default_value: false
+destination:
+  plugin: 'entity_complete:node'
+  translations: true
+migration_dependencies:
+  required: {  }
+  optional: {  }

@@ -1,0 +1,44 @@
+uuid: f94a7bb5-37c0-43df-8bbd-6436b4beb7c4
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_shortcut
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Shortcut links'
+source:
+  plugin: d7_shortcut
+  constants:
+    uri_scheme: 'internal:/'
+process:
+  shortcut_set:
+    -
+      plugin: migration_lookup
+      migration: upgrade_d7_shortcut_set
+      source: menu_name
+  title:
+    -
+      plugin: get
+      source: link_title
+  weight:
+    -
+      plugin: get
+      source: weight
+  link:
+    -
+      plugin: concat
+      source:
+        - constants/uri_scheme
+        - link_path
+destination:
+  plugin: 'entity:shortcut'
+migration_dependencies:
+  required:
+    - upgrade_d7_shortcut_set
+  optional:
+    - upgrade_d7_shortcut_set

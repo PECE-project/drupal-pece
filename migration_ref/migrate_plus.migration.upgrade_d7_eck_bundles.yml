@@ -1,0 +1,34 @@
+uuid: fe37ae96-74a8-4490-9c66-c08e38ec8712
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_eck_bundles
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+migration_group: migrate_drupal_7
+label: 'ECK Entity type bundles'
+source:
+  plugin: d7_eck_entity_bundle
+process:
+  name:
+    -
+      plugin: get
+      source: label
+  type:
+    -
+      plugin: get
+      source: name
+  description:
+    -
+      plugin: get
+      source: label
+destination:
+  plugin: 'entity:eck_entity_bundle'
+migration_dependencies:
+  required:
+    - upgrade_d7_eck_types
+  optional: {  }

@@ -1,0 +1,79 @@
+uuid: f27a5ff8-ff55-49cd-8b77-9587da1ac14c
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_field_location_formatter_node_pece_artifact_image
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+  - 'Location Field'
+migration_group: migrate_drupal_7
+label: 'Geolocation field formatter configuration for Location (node, pece_artifact_image)'
+source:
+  plugin: d7_field_formatter_settings_location
+  constants:
+    settings: {  }
+    third_party_settings: {  }
+  entity_type: node
+  bundle: pece_artifact_image
+process:
+  entity_type:
+    0:
+      plugin: get
+      source: entity_type
+    profile:
+      plugin: static_map
+      map:
+        profile2: profile
+      bypass: true
+    1:
+      plugin: static_map
+      map:
+        field_collection_item: paragraph
+        paragraphs_item: paragraph
+      bypass: true
+  bundle:
+    -
+      plugin: get
+      source: bundle
+  field_name:
+    -
+      plugin: get
+      source: field_name
+  view_mode:
+    -
+      plugin: get
+      source: view_mode
+  options/weight:
+    -
+      plugin: get
+      source: widget/weight
+  options/type:
+    -
+      plugin: get
+      source: formatter_type
+  options/settings:
+    -
+      plugin: get
+      source: constants/settings
+  options/third_party_settings:
+    -
+      plugin: get
+      source: constants/third_party_settings
+  hidden:
+    -
+      plugin: static_map
+      source: '@options/type'
+      map:
+        hidden: true
+      default_value: display_hidden
+destination:
+  plugin: component_entity_display
+migration_dependencies:
+  required:
+    - upgrade_d7_field_location_instance_node_pece_artifact_image
+  optional:
+    - upgrade_d7_profile2_type

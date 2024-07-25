@@ -1,0 +1,53 @@
+uuid: 4f2d67a0-d9e8-49e3-b54d-4e54d3933d58
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_comment_type
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+migration_group: migrate_drupal_7
+label: 'Comment type'
+source:
+  plugin: comment_type
+  constants:
+    entity_type: node
+    id_prefix: comment_node_
+    label_suffix: comment
+process:
+  target_entity_type_id:
+    -
+      plugin: get
+      source: constants/entity_type
+  id:
+    -
+      plugin: concat
+      source:
+        - constants/id_prefix
+        - type
+    -
+      plugin: static_map
+      bypass: true
+      map:
+        comment_node_forum: comment_forum
+    -
+      plugin: make_unique_entity_field
+      entity_type: comment_type
+      field: id
+      length: 30
+      migrated: true
+  label:
+    -
+      plugin: concat
+      source:
+        - name
+        - constants/label_suffix
+      delimiter: ' '
+destination:
+  plugin: 'entity:comment_type'
+migration_dependencies:
+  required: {  }
+  optional: {  }

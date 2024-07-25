@@ -1,0 +1,105 @@
+uuid: bfa5406e-8ae3-444b-b9d9-433868404ed5
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_v1_profile
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'PECE v1'
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'User accounts profile'
+source:
+  plugin: d7_profile2
+  constants:
+    status: 1
+    is_default: 1
+process:
+  profile_id:
+    -
+      plugin: get
+      source: pid
+  type:
+    -
+      plugin: get
+      source: type
+  uid:
+    -
+      plugin: get
+      source: uid
+  status:
+    -
+      plugin: get
+      source: constants/status
+  is_default:
+    -
+      plugin: get
+      source: constants/is_default
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: changed
+  field_pece_full_name:
+    -
+      plugin: get
+      source: field_pece_full_name
+  field_pece_biography:
+    -
+      plugin: default_value
+      source: field_pece_biography
+      default_value: null
+  field_pece_email:
+    -
+      plugin: default_value
+      source: field_pece_email
+      default_value: ''
+    -
+      plugin: extract
+      source: field_pece_email
+      index:
+        - 0
+        - email
+      default: null
+  field_pece_institution:
+    -
+      plugin: get
+      source: field_pece_institution
+  field_pece_position:
+    -
+      plugin: get
+      source: field_pece_position
+  field_tags:
+    -
+      plugin: get
+      source: field_pece_tags
+  field_pgp_key/target_id:
+    -
+      plugin: default_value
+      source: field_gpg_key
+      default_value:
+        -
+          fid: 0
+    -
+      plugin: extract
+      index:
+        - 0
+        - fid
+  field_location:
+    -
+      plugin: location_to_address
+      source: field_pece_location
+destination:
+  plugin: 'entity:profile'
+migration_dependencies:
+  required:
+    - upgrade_v1_user
+    - upgrade_v1_file
+  optional:
+    - upgrade_d7_field_instance

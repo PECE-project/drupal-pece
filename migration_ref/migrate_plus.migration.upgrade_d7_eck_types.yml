@@ -1,0 +1,49 @@
+uuid: b4858d2f-8b21-4aa0-a146-12a0d77f95d3
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_eck_types
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+migration_group: migrate_drupal_7
+label: 'ECK Entity type configuration'
+source:
+  plugin: d7_eck_entity_type
+process:
+  id:
+    -
+      plugin: get
+      source: name
+  label:
+    -
+      plugin: get
+      source: label
+  uid:
+    -
+      plugin: default_value
+      source: uid
+      default_value: false
+  created:
+    -
+      plugin: default_value
+      source: created
+      default_value: false
+  changed:
+    -
+      plugin: default_value
+      source: changed
+      default_value: false
+  title:
+    -
+      plugin: default_value
+      source: title
+      default_value: false
+destination:
+  plugin: 'entity:eck_entity_type'
+migration_dependencies:
+  required: {  }
+  optional: {  }

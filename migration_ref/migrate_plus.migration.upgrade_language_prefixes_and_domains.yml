@@ -1,0 +1,38 @@
+uuid: 1a26f68c-52b9-4848-8e66-f137619984ee
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_language_prefixes_and_domains
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 6'
+  - 'Drupal 7'
+  - Configuration
+migration_group: migrate_drupal_7
+label: 'Language prefixes and domains'
+source:
+  plugin: language
+  fetch_all: true
+  domain_negotiation: true
+process:
+  url/prefixes:
+    -
+      plugin: array_build
+      source: languages
+      key: language
+      value: prefix
+  url/domains:
+    -
+      plugin: language_domains
+      source: languages
+      key: language
+      value: domain
+destination:
+  plugin: config
+  config_name: language.negotiation
+migration_dependencies:
+  required:
+    - upgrade_language
+  optional: {  }

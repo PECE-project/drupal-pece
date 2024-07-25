@@ -1,0 +1,142 @@
+uuid: 10033daf-0515-4fc8-8835-999c04ca1e92
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_menu_links
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Menu links'
+source:
+  plugin: menu_link
+  constants:
+    bundle: menu_link_content
+process:
+  skip_translation:
+    -
+      plugin: skip_on_empty
+      method: row
+      source: skip_translation
+  id:
+    -
+      plugin: get
+      source: mlid
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  bundle:
+    -
+      plugin: get
+      source: constants/bundle
+  title:
+    -
+      plugin: get
+      source: link_title
+  description:
+    -
+      plugin: get
+      source: description
+  menu_name:
+    -
+      plugin: migration_lookup
+      migration: upgrade_d7_menu
+      source: menu_name
+    -
+      plugin: skip_on_empty
+      method: row
+  link/uri:
+    -
+      plugin: link_uri
+      source: link_path
+  link/options:
+    -
+      plugin: get
+      source: options
+  route:
+    -
+      plugin: route
+      source:
+        - link_path
+        - options
+  route_name:
+    -
+      plugin: get
+      source: '@route/route_name'
+  route_parameters:
+    -
+      plugin: get
+      source: '@route/route_parameters'
+  url:
+    -
+      plugin: get
+      source: '@route/url'
+  options:
+    -
+      plugin: get
+      source: '@route/options'
+  external:
+    -
+      plugin: get
+      source: external
+  weight:
+    -
+      plugin: get
+      source: weight
+  expanded:
+    -
+      plugin: get
+      source: expanded
+  enabled:
+    -
+      plugin: get
+      source: enabled
+  parent:
+    -
+      plugin: menu_link_parent
+      source:
+        - plid
+        - '@menu_name'
+        - parent_link_path
+  changed:
+    -
+      plugin: get
+      source: updated
+destination:
+  plugin: 'entity:menu_link_content'
+  no_stub: true
+migration_dependencies:
+  required:
+    - upgrade_d7_menu
+  optional:
+    - upgrade_d7_node_complete_biblio
+    - upgrade_d7_node_complete_frontpage_image_slideshow
+    - upgrade_d7_node_complete_panopoly_landing_page
+    - upgrade_d7_node_complete_panopoly_page
+    - upgrade_d7_node_complete_pece_about_page
+    - upgrade_d7_node_complete_pece_analytic
+    - upgrade_d7_node_complete_pece_annotation
+    - upgrade_d7_node_complete_pece_artifact_audio
+    - upgrade_d7_node_complete_pece_artifact_bundle
+    - upgrade_d7_node_complete_pece_artifact_fieldnote
+    - upgrade_d7_node_complete_pece_artifact_image
+    - upgrade_d7_node_complete_pece_artifact_pdf
+    - upgrade_d7_node_complete_pece_artifact_tabular
+    - upgrade_d7_node_complete_pece_artifact_text
+    - upgrade_d7_node_complete_pece_artifact_video
+    - upgrade_d7_node_complete_pece_artifact_website
+    - upgrade_d7_node_complete_pece_essay
+    - upgrade_d7_node_complete_pece_fieldsite
+    - upgrade_d7_node_complete_pece_group
+    - upgrade_d7_node_complete_pece_memo
+    - upgrade_d7_node_complete_pece_photo_essay
+    - upgrade_d7_node_complete_pece_project
+    - upgrade_d7_node_complete_pece_sub_logic
+    - upgrade_d7_node_complete_pece_timeline_essay
+    - upgrade_d7_node_complete_zotero_feed
+    - upgrade_d7_menu

@@ -1,0 +1,59 @@
+uuid: 0151c87f-044d-442a-b730-37a757e9ac7f
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_v1_taxonomy_term_authors
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Taxonomy Authors v1'
+  - 'PECE v1'
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Taxonomy Terms Authors'
+source:
+  plugin: d7_taxonomy_term
+  bundle: pece_authors
+process:
+  tid:
+    -
+      plugin: get
+      source: tid
+  vid:
+    -
+      plugin: default_value
+      default_value: pece_authors
+  name:
+    -
+      plugin: get
+      source: name
+  description/value:
+    -
+      plugin: get
+      source: description
+  description/format:
+    -
+      plugin: get
+      source: format
+  weight:
+    -
+      plugin: get
+      source: weight
+  langcode:
+    -
+      plugin: get
+      source: language
+  parent:
+    -
+      plugin: default_value
+      default_value: 0
+destination:
+  plugin: 'entity:taxonomy_term'
+  default_bundle: pece_authors
+migration_dependencies:
+  required:
+    - upgrade_d7_taxonomy_vocabulary
+  optional:
+    - upgrade_d7_field_instance

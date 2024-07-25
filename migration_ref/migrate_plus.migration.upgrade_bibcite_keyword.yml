@@ -1,0 +1,25 @@
+uuid: eed30ae5-2fba-4ac1-9ff5-34e8d5285185
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_bibcite_keyword
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 6'
+  - 'Drupal 7'
+migration_group: migrate_drupal_7
+label: 'Migrate Bibliography Keyword'
+source:
+  plugin: bibcite_keyword
+process:
+  name:
+    -
+      plugin: get
+      source: word
+destination:
+  plugin: 'entity:bibcite_keyword'
+migration_dependencies:
+  required: {  }
+  optional: {  }

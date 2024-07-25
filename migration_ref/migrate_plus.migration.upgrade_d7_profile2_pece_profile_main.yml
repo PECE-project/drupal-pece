@@ -1,0 +1,120 @@
+uuid: ae067dab-7997-43bf-bb82-08eab2562061
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_profile2_pece_profile_main
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Profile2 ()'
+source:
+  plugin: d7_profile2
+  constants:
+    status: 1
+    is_default: 1
+  bundle: pece_profile_main
+process:
+  profile_id:
+    -
+      plugin: get
+      source: pid
+  type:
+    -
+      plugin: get
+      source: type
+  uid:
+    -
+      plugin: get
+      source: uid
+  status:
+    -
+      plugin: get
+      source: constants/status
+  is_default:
+    -
+      plugin: get
+      source: constants/is_default
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: changed
+  field_gpg_key:
+    -
+      plugin: sub_process
+      source: field_gpg_key
+      process:
+        target_id: fid
+        display: display
+        description: description
+  field_pece_biography:
+    -
+      plugin: get
+      source: field_pece_biography
+  field_pece_email:
+    -
+      plugin: sub_process
+      source: field_pece_email
+      process:
+        value: email
+  field_pece_full_name:
+    -
+      plugin: get
+      source: field_pece_full_name
+  field_pece_institution:
+    -
+      plugin: get
+      source: field_pece_institution
+  field_pece_location:
+    -
+      plugin: location_to_address
+      source: field_pece_location
+  field_pece_location_geoloc:
+    -
+      plugin: location_to_geolocation
+      source: field_pece_location
+  field_pece_location_email:
+    -
+      plugin: location_email_to_email
+      source: field_pece_location
+  field_pece_location_fax:
+    -
+      plugin: location_fax_to_telephone
+      source: field_pece_location
+  field_pece_location_phone:
+    -
+      plugin: location_phone_to_telephone
+      source: field_pece_location
+  field_pece_location_url:
+    -
+      plugin: location_www_to_link
+      source: field_pece_location
+  field_pece_position:
+    -
+      plugin: get
+      source: field_pece_position
+  field_pece_tags:
+    -
+      plugin: sub_process
+      source: field_pece_tags
+      process:
+        target_id: tid
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity:profile'
+  default_bundle: pece_profile_main
+migration_dependencies:
+  required:
+    - upgrade_d7_profile2_type
+  optional:
+    - upgrade_d7_field_instance

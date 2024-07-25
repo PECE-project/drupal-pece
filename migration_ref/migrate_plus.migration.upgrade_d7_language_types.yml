@@ -1,0 +1,59 @@
+uuid: 0c14a418-a4d9-4216-bcc3-a9abf0c1bb46
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_language_types
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+migration_group: migrate_drupal_7
+label: 'Language types'
+source:
+  plugin: variable
+  variables:
+    - language_types
+    - language_negotiation_language
+    - language_negotiation_language_content
+    - language_negotiation_language_url
+    - locale_language_providers_weight_language
+    - locale_language_providers_weight_language_content
+    - locale_language_providers_weight_language_url
+  source_module: locale
+process:
+  all:
+    -
+      plugin: language_types
+      source: language_types
+  configurable:
+    -
+      plugin: language_types
+      source: language_types
+      filter_configurable: true
+  negotiation/language_content:
+    -
+      plugin: language_negotiation
+      source:
+        - language_negotiation_language_content
+        - locale_language_providers_weight_language_content
+  negotiation/language_url:
+    -
+      plugin: language_negotiation
+      source:
+        - language_negotiation_language_url
+        - locale_language_providers_weight_language_url
+  negotiation/language_interface:
+    -
+      plugin: language_negotiation
+      source:
+        - language_negotiation_language
+        - locale_language_providers_weight_language
+destination:
+  plugin: config
+  config_name: language.types
+migration_dependencies:
+  required:
+    - upgrade_language
+  optional: {  }

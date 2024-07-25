@@ -1,0 +1,225 @@
+uuid: 23846626-4669-424e-8bde-e70e31c24eb4
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_comment
+class: Drupal\comment\Plugin\migrate\D7Comment
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: Comments
+source:
+  plugin: d7_comment
+  constants:
+    entity_type: node
+process:
+  cid:
+    -
+      plugin: get
+      source: cid
+  pid:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: pid
+    -
+      plugin: migration_lookup
+      migration: upgrade_d7_comment
+  entity_id:
+    -
+      plugin: migration_lookup
+      migration:
+        - upgrade_d7_node_complete_biblio
+        - upgrade_d7_node_complete_frontpage_image_slideshow
+        - upgrade_d7_node_complete_panopoly_landing_page
+        - upgrade_d7_node_complete_panopoly_page
+        - upgrade_d7_node_complete_pece_about_page
+        - upgrade_d7_node_complete_pece_analytic
+        - upgrade_d7_node_complete_pece_annotation
+        - upgrade_d7_node_complete_pece_artifact_audio
+        - upgrade_d7_node_complete_pece_artifact_bundle
+        - upgrade_d7_node_complete_pece_artifact_fieldnote
+        - upgrade_d7_node_complete_pece_artifact_image
+        - upgrade_d7_node_complete_pece_artifact_pdf
+        - upgrade_d7_node_complete_pece_artifact_tabular
+        - upgrade_d7_node_complete_pece_artifact_text
+        - upgrade_d7_node_complete_pece_artifact_video
+        - upgrade_d7_node_complete_pece_artifact_website
+        - upgrade_d7_node_complete_pece_essay
+        - upgrade_d7_node_complete_pece_fieldsite
+        - upgrade_d7_node_complete_pece_group
+        - upgrade_d7_node_complete_pece_memo
+        - upgrade_d7_node_complete_pece_photo_essay
+        - upgrade_d7_node_complete_pece_project
+        - upgrade_d7_node_complete_pece_sub_logic
+        - upgrade_d7_node_complete_pece_timeline_essay
+        - upgrade_d7_node_complete_zotero_feed
+      source: nid
+    -
+      plugin: node_complete_node_lookup
+    -
+      plugin: skip_on_empty
+      method: row
+  entity_type:
+    0:
+      plugin: get
+      source: constants/entity_type
+    profile:
+      plugin: static_map
+      map:
+        profile2: profile
+      bypass: true
+    1:
+      plugin: static_map
+      map:
+        field_collection_item: paragraph
+        paragraphs_item: paragraph
+      bypass: true
+  comment_type:
+    -
+      plugin: migration_lookup
+      source: node_type
+      migration: upgrade_d7_comment_type
+    -
+      plugin: skip_on_empty
+      method: row
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  field_name:
+    -
+      plugin: get
+      source: '@comment_type'
+  subject:
+    -
+      plugin: get
+      source: subject
+  uid:
+    -
+      plugin: get
+      source: uid
+  name:
+    -
+      plugin: get
+      source: name
+  mail:
+    -
+      plugin: get
+      source: mail
+  homepage:
+    -
+      plugin: get
+      source: homepage
+  hostname:
+    -
+      plugin: get
+      source: hostname
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: changed
+  status:
+    -
+      plugin: get
+      source: status
+  thread:
+    -
+      plugin: get
+      source: thread
+  comment_body:
+    -
+      plugin: get
+      source: comment_body
+destination:
+  plugin: 'entity:comment'
+migration_dependencies:
+  required:
+    - upgrade_d7_node_complete_biblio
+    - upgrade_d7_node_complete_frontpage_image_slideshow
+    - upgrade_d7_node_complete_panopoly_landing_page
+    - upgrade_d7_node_complete_panopoly_page
+    - upgrade_d7_node_complete_pece_about_page
+    - upgrade_d7_node_complete_pece_analytic
+    - upgrade_d7_node_complete_pece_annotation
+    - upgrade_d7_node_complete_pece_artifact_audio
+    - upgrade_d7_node_complete_pece_artifact_bundle
+    - upgrade_d7_node_complete_pece_artifact_fieldnote
+    - upgrade_d7_node_complete_pece_artifact_image
+    - upgrade_d7_node_complete_pece_artifact_pdf
+    - upgrade_d7_node_complete_pece_artifact_tabular
+    - upgrade_d7_node_complete_pece_artifact_text
+    - upgrade_d7_node_complete_pece_artifact_video
+    - upgrade_d7_node_complete_pece_artifact_website
+    - upgrade_d7_node_complete_pece_essay
+    - upgrade_d7_node_complete_pece_fieldsite
+    - upgrade_d7_node_complete_pece_group
+    - upgrade_d7_node_complete_pece_memo
+    - upgrade_d7_node_complete_pece_photo_essay
+    - upgrade_d7_node_complete_pece_project
+    - upgrade_d7_node_complete_pece_sub_logic
+    - upgrade_d7_node_complete_pece_timeline_essay
+    - upgrade_d7_node_complete_zotero_feed
+    - upgrade_d7_comment_type
+  optional:
+    - upgrade_d7_node_complete_biblio
+    - upgrade_d7_node_complete_frontpage_image_slideshow
+    - upgrade_d7_node_complete_panopoly_landing_page
+    - upgrade_d7_node_complete_panopoly_page
+    - upgrade_d7_node_complete_pece_about_page
+    - upgrade_d7_node_complete_pece_analytic
+    - upgrade_d7_node_complete_pece_annotation
+    - upgrade_d7_node_complete_pece_artifact_audio
+    - upgrade_d7_node_complete_pece_artifact_bundle
+    - upgrade_d7_node_complete_pece_artifact_fieldnote
+    - upgrade_d7_node_complete_pece_artifact_image
+    - upgrade_d7_node_complete_pece_artifact_pdf
+    - upgrade_d7_node_complete_pece_artifact_tabular
+    - upgrade_d7_node_complete_pece_artifact_text
+    - upgrade_d7_node_complete_pece_artifact_video
+    - upgrade_d7_node_complete_pece_artifact_website
+    - upgrade_d7_node_complete_pece_essay
+    - upgrade_d7_node_complete_pece_fieldsite
+    - upgrade_d7_node_complete_pece_group
+    - upgrade_d7_node_complete_pece_memo
+    - upgrade_d7_node_complete_pece_photo_essay
+    - upgrade_d7_node_complete_pece_project
+    - upgrade_d7_node_complete_pece_sub_logic
+    - upgrade_d7_node_complete_pece_timeline_essay
+    - upgrade_d7_node_complete_zotero_feed
+    - upgrade_d7_profile2_type
+    - upgrade_d7_comment
+    - upgrade_d7_comment_type
+    - upgrade_d7_node_complete_biblio
+    - upgrade_d7_node_complete_frontpage_image_slideshow
+    - upgrade_d7_node_complete_panopoly_landing_page
+    - upgrade_d7_node_complete_panopoly_page
+    - upgrade_d7_node_complete_pece_about_page
+    - upgrade_d7_node_complete_pece_analytic
+    - upgrade_d7_node_complete_pece_annotation
+    - upgrade_d7_node_complete_pece_artifact_audio
+    - upgrade_d7_node_complete_pece_artifact_bundle
+    - upgrade_d7_node_complete_pece_artifact_fieldnote
+    - upgrade_d7_node_complete_pece_artifact_image
+    - upgrade_d7_node_complete_pece_artifact_pdf
+    - upgrade_d7_node_complete_pece_artifact_tabular
+    - upgrade_d7_node_complete_pece_artifact_text
+    - upgrade_d7_node_complete_pece_artifact_video
+    - upgrade_d7_node_complete_pece_artifact_website
+    - upgrade_d7_node_complete_pece_essay
+    - upgrade_d7_node_complete_pece_fieldsite
+    - upgrade_d7_node_complete_pece_group
+    - upgrade_d7_node_complete_pece_memo
+    - upgrade_d7_node_complete_pece_photo_essay
+    - upgrade_d7_node_complete_pece_project
+    - upgrade_d7_node_complete_pece_sub_logic
+    - upgrade_d7_node_complete_pece_timeline_essay
+    - upgrade_d7_node_complete_zotero_feed

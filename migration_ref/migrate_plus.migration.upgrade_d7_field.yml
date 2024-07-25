@@ -1,0 +1,90 @@
+uuid: 563e5e69-79cb-49f8-8148-4d5220018df1
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_field
+class: Drupal\migrate_drupal\Plugin\migrate\FieldMigration
+field_plugin_method: alterFieldMigration
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+migration_group: migrate_drupal_7
+label: 'Field configuration'
+source:
+  plugin: d7_field
+  constants:
+    status: true
+    langcode: und
+process:
+  entity_type:
+    0:
+      plugin: get
+      source: entity_type
+    profile:
+      plugin: static_map
+      map:
+        profile2: profile
+      bypass: true
+    1:
+      plugin: static_map
+      map:
+        field_collection_item: paragraph
+        paragraphs_item: paragraph
+      bypass: true
+  status:
+    -
+      plugin: get
+      source: constants/status
+  langcode:
+    -
+      plugin: get
+      source: constants/langcode
+  field_name:
+    -
+      plugin: get
+      source: field_name
+  type:
+    -
+      plugin: process_field
+      source: type
+      method: getFieldType
+      map:
+        d7_text:
+          d7_text: d7_text
+        link_field:
+          link_field: link_field
+        taxonomy_term_reference:
+          taxonomy_term_reference: taxonomy_term_reference
+        image:
+          image: image
+        list:
+          list: list
+        location:
+          location: location
+        entityreference:
+          entityreference: entityreference
+        file:
+          file: file
+        datetime:
+          datetime: datetime
+        number_default:
+          number_default: number_default
+        email:
+          email: email
+        color_field:
+          color_field: color_field
+  cardinality:
+    -
+      plugin: get
+      source: cardinality
+  settings:
+    -
+      plugin: d7_field_settings
+destination:
+  plugin: 'entity:field_storage_config'
+migration_dependencies:
+  required:
+    - upgrade_d7_eck_type
+  optional:
+    - upgrade_d7_profile2_type

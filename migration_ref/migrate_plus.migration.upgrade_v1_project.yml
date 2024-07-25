@@ -1,0 +1,186 @@
+uuid: e4aa6f46-6466-4cc7-bdc8-85fe697f0bbc
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_v1_project
+class: Drupal\node\Plugin\migrate\D7NodeTranslation
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Project v1'
+  - 'PECE v1'
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Migrate Project'
+source:
+  plugin: v1_node
+  node_type: pece_project
+process:
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  title:
+    -
+      plugin: get
+      source: title
+  type:
+    -
+      plugin: default_value
+      default_value: pece_project
+  field_people_with_edit_access:
+    -
+      plugin: default_value
+      source: field_pece_contributors
+      default_value: null
+  body/format:
+    -
+      plugin: default_value
+      default_value: html
+  body/value:
+    -
+      plugin: extract
+      source: body
+      index:
+        - 0
+        - value
+      default: ''
+  body/summary:
+    -
+      plugin: extract
+      source: body
+      index:
+        - 0
+        - summary
+      default: ''
+  path/pathauto:
+    -
+      plugin: default_value
+      default_value: 0
+      path/alias: alias
+  field_project_image_banner/target_id:
+    -
+      plugin: default_value
+      source: field_pece_proj_img
+      default_value:
+        -
+          fid: null
+    -
+      plugin: extract
+      index:
+        - 0
+        - fid
+      default: null
+  field_project_institution_link:
+    -
+      plugin: get
+      source: field_pece_multiple_link
+  field_project_fund_agency_link:
+    -
+      plugin: get
+      source: field_pece_funding_agency
+  field_project_lead:
+    -
+      plugin: get
+      source: field_pece_proj_lead
+  field_project_design_group:
+    -
+      plugin: default_value
+      source: field_pece_design_group
+      default_value: null
+  field_project_intv_request_file:
+    -
+      plugin: default_value
+      source: field_basic_file_file
+      default_value:
+        -
+          fid: null
+    -
+      plugin: extract
+      index:
+        - 0
+        - fid
+      default: null
+  field_project_consent_form_file:
+    -
+      plugin: default_value
+      source: field_pece_consent_form
+      default_value:
+        -
+          fid: null
+    -
+      plugin: extract
+      index:
+        - 0
+        - fid
+      default: null
+  field_ark_enabled:
+    -
+      plugin: default_value
+      source: field_ark_enabled
+      default_value: null
+  field_project_featured_essays:
+    -
+      plugin: get
+      source: field_pece_featured_essays
+  field_project_struct_analytics:
+    -
+      plugin: get
+      source: field_pece_proj_struct_analytics
+  field_project_subst_logic:
+    -
+      plugin: get
+      source: field_pece_substantive_logic
+  field_project_open_notes:
+    -
+      plugin: get
+      source: field_pece_proj_notes
+  field_tags:
+    -
+      plugin: get
+      source: field_pece_tags
+  field_project_image/target_id:
+    -
+      plugin: default_value
+      source: field_basic_image_image
+      default_value:
+        -
+          fid: null
+    -
+      plugin: extract
+      index:
+        - 0
+        - fid
+      default: null
+  field_pbc_ref_user:
+    -
+      plugin: default_value
+      source: permission_by_user_view
+      default_value: null
+  field_pbc_ref_role:
+    -
+      plugin: default_value
+      source: permission_by_role_view
+      default_value: null
+  field_pece_all_can_view:
+    -
+      plugin: default_value
+      source: permission_all_user_view
+      default_value: false
+destination:
+  plugin: 'entity_complete:node'
+  translations: true
+migration_dependencies:
+  required:
+    - upgrade_v1_user
+    - upgrade_v1_file
+  optional: {  }
