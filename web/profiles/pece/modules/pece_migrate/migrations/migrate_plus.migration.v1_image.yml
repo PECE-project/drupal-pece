@@ -1,0 +1,88 @@
+uuid: 45413c43-55d6-4a5a-86cc-39ef799550ea
+langcode: en
+status: true
+dependencies: {  }
+id: v1_image
+class: Drupal\node\Plugin\migrate\D7NodeTranslation
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Image v1'
+  - 'PECE v1'
+  - 'Drupal 7'
+  - Content
+migration_group: pece
+label: 'Migrate Artifact Image'
+source:
+  plugin: v1_node
+  node_type: pece_artifact_image
+process:
+  nid: nid
+  vid: vid
+  uid: node_uid
+  title: title
+  type:
+    plugin: default_value
+    default_value: pece_artifact_image
+  # field_pece_project_ref:
+  #   plugin: default_value
+  #   source: field_pece_project_ref
+  #   default_value: null
+  # field_groups_with_view_access:
+  #   plugin: entity_generate
+  #   entity_type: taxonomy_term
+  #   bundle: groups
+  #   source: og_group_ref
+  #   value_key: title
+  field_people_with_edit_access:
+    plugin: default_value
+    source: field_pece_contributors
+    default_value: null
+  field_authors:
+    plugin: sub_process
+    source: field_pece_authors
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: v1_taxonomy_term_authors
+        source: tid
+  field_source: field_pece_source
+  field_created_date: field_pece_created
+  field_language: field_pece_language
+  field_fieldsite: field_pece_fieldsite
+  field_use_fieldsite_local: field_pece_use_fieldsite_local
+  field_location: field_pece_location
+  field_ark_enabled:
+    plugin: default_value
+    source: field_ark_enabled
+    default_value: null
+  # field_pece_license:
+  #   plugin: entity_generate
+  #   entity_type: taxonomy_term
+  #   bundle_key: vid
+  #   bundle: licenses_vocabulary_licenses
+  #   value_key: name
+  #   source: licence
+  #   values:
+  #     name: licence
+  field_tags:
+    plugin: sub_process
+    source: field_pece_tags
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: v1_taxonomy_term_tags
+        source: tid
+  field_crit_commentary: field_pece_crit_commentary
+  field_image_artifact_image: field_pece_media_image
+destination:
+  plugin: 'entity_complete:node'
+  translations: true
+migration_dependencies:
+  required:
+    - v1_user
+    - v1_taxonomy_term_tags
+    - v1_taxonomy_term_authors
+    - v1_file
+    - v1_project
+    - v1_fieldsite
