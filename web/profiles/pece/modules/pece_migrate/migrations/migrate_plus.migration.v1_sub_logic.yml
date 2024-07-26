@@ -19,47 +19,20 @@ process:
   type:
     plugin: default_value
     default_value: pece_substantive_logic
-  nid:
-    -
-      plugin: get
-      source: tnid
-  vid:
-    -
-      plugin: get
-      source: vid
+  nid: tnid
+  vid: vid
   langcode:
     -
       plugin: default_value
       source: language
       default_value: und
-  title:
-    -
-      plugin: get
-      source: title
-  uid:
-    -
-      plugin: get
-      source: node_uid
-  status:
-    -
-      plugin: get
-      source: status
-  created:
-    -
-      plugin: get
-      source: created
-  changed:
-    -
-      plugin: get
-      source: timestamp
-  promote:
-    -
-      plugin: get
-      source: promote
-  sticky:
-    -
-      plugin: get
-      source: sticky
+  title: title
+  uid: node_uid
+  status: status
+  created: created
+  changed: timestamp
+  promote: promote
+  sticky: sticky
   # revision_uid:
   #   -
   #     plugin: get
@@ -110,10 +83,7 @@ process:
   #       title: title
   #       width: width
   #       height: height
-  field_people_with_edit_access:
-    -
-      plugin: get
-      source: field_pece_contributors
+  field_people_with_edit_access: field_pece_contributors
   field_subst_logic_image_citation:
     -
       plugin: field_link
@@ -124,10 +94,7 @@ process:
       source: field_pece_tags
       process:
         target_id: tid
-  field_uri:
-    -
-      plugin: get
-      source: field_pece_uri
+  field_uri: field_pece_uri
   # field_metatag:
   #   -
   #     plugin: d7_metatag_entities
