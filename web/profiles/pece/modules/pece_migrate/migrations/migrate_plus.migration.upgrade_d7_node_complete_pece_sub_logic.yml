@@ -2,17 +2,18 @@ uuid: 963b3e79-da30-4f10-ac9a-d5a1e89d1e51
 langcode: en
 status: true
 dependencies: {  }
-id: upgrade_d7_node_complete_pece_sub_logic
+id: v1_sub_logic
 class: Drupal\node\Plugin\migrate\D7NodeTranslation
 field_plugin_method: null
 cck_plugin_method: null
 migration_tags:
+  - 'PECE v1'
   - 'Drupal 7'
   - Content
-migration_group: migrate_drupal_7
-label: 'Node complete (Substantive Logic)'
+migration_group: pece
+label: 'Migrate Substantive Logic'
 source:
-  plugin: d7_node_complete
+  plugin: v1_node
   node_type: pece_sub_logic
 process:
   nid:
@@ -56,62 +57,62 @@ process:
     -
       plugin: get
       source: sticky
-  revision_uid:
-    -
-      plugin: get
-      source: revision_uid
-  revision_log:
-    -
-      plugin: get
-      source: log
-  revision_timestamp:
-    -
-      plugin: get
-      source: timestamp
-  content_translation_source:
-    -
-      plugin: get
-      source: source_langcode
-  comment_node_pece_sub_logic/0/status:
-    -
-      plugin: get
-      source: comment
+  # revision_uid:
+  #   -
+  #     plugin: get
+  #     source: revision_uid
+  # revision_log:
+  #   -
+  #     plugin: get
+  #     source: log
+  # revision_timestamp:
+  #   -
+  #     plugin: get
+  #     source: timestamp
+  # content_translation_source:
+  #   -
+  #     plugin: get
+  #     source: source_langcode
+  # comment_node_pece_sub_logic/0/status:
+  #   -
+  #     plugin: get
+  #     source: comment
   body:
     -
       plugin: get
       source: body
-  field_basic_image_image:
-    -
-      plugin: sub_process
-      source: field_basic_image_image
-      process:
-        target_id: fid
-        alt: alt
-        title: title
-        width: width
-        height: height
-  field_pece_contributors:
+  # field_basic_image_image:
+  #   -
+  #     plugin: sub_process
+  #     source: field_basic_image_image
+  #     process:
+  #       target_id: fid
+  #       alt: alt
+  #       title: title
+  #       width: width
+  #       height: height
+  field_people_with_edit_access:
     -
       plugin: get
       source: field_pece_contributors
-  field_pece_sub_logic_cit_link:
+  field_subst_logic_image_citation:
     -
       plugin: field_link
       source: field_pece_sub_logic_cit_link
-  field_pece_tags:
+  field_tags:
     -
       plugin: sub_process
       source: field_pece_tags
       process:
         target_id: tid
-  field_pece_uri:
+  field_uri:
     -
       plugin: get
       source: field_pece_uri
-  field_metatag:
-    -
-      plugin: d7_metatag_entities
-      source: pseudo_metatag_entities
+  # field_metatag:
+  #   -
+  #     plugin: d7_metatag_entities
+  #     source: pseudo_metatag_entities
 destination:
   plugin: 'entity_complete:node'
   translations: true
