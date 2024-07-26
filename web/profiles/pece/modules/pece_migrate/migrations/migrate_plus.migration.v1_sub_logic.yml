@@ -80,10 +80,26 @@ process:
   #   -
   #     plugin: get
   #     source: comment
-  body:
+  body/format:
     -
-      plugin: get
+      plugin: default_value
+      default_value: basic_html
+  body/value:
+    -
+      plugin: extract
       source: body
+      index:
+        - 0
+        - value
+      default: ''
+  body/summary:
+    -
+      plugin: extract
+      source: body
+      index:
+        - 0
+        - summary
+      default: ''
   # field_basic_image_image:
   #   -
   #     plugin: sub_process
