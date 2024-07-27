@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.node.field_annotation_artifact
     - field.storage.node.field_people_with_edit_access
     - field.storage.node.field_file_format
     - field.storage.node.field_pece_license
@@ -21,6 +22,14 @@ field_settings:
     label: 'Entity type'
     property_path: search_api_entity_type
     type: string
+  field_annotation_artifact:
+    label: Artifact
+    datasource_id: 'entity:node'
+    property_path: field_annotation_artifact
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_annotation_artifact
   field_file_format:
     label: 'File format'
     datasource_id: 'entity:node'
