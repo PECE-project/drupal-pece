@@ -1,0 +1,149 @@
+uuid: 69efa965-9edc-4597-9fa8-b8318ac30590
+langcode: en
+status: true
+dependencies: {  }
+id: v1_url_alias
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Project v1'
+  - 'PECE v1'
+  - 'Drupal 7'
+  - Content
+migration_group: pece
+label: 'URL aliases'
+source:
+  plugin: d7_url_alias
+  constants:
+    slash: /
+process:
+  id:
+    -
+      plugin: get
+      source: pid
+  _path:
+    -
+      plugin: concat
+      source:
+        - constants/slash
+        - source
+  alias:
+    -
+      plugin: concat
+      source:
+        - constants/slash
+        - alias
+  # The following is only needed if translations need to be migrated, in which case it also needs to be updated.
+  # node_translation:
+  #   -
+  #     plugin: explode
+  #     source: source
+  #     delimiter: /
+  #   -
+  #     plugin: extract
+  #     default: INVALID_NID
+  #     index:
+  #       - 1
+  #   -
+  #     plugin: migration_lookup
+  #     migration:
+  #       - upgrade_d7_node_complete_biblio
+  #       - upgrade_d7_node_complete_frontpage_image_slideshow
+  #       - upgrade_d7_node_complete_panopoly_landing_page
+  #       - upgrade_d7_node_complete_panopoly_page
+  #       - upgrade_d7_node_complete_pece_about_page
+  #       - upgrade_d7_node_complete_pece_analytic
+  #       - upgrade_d7_node_complete_pece_annotation
+  #       - upgrade_d7_node_complete_pece_artifact_audio
+  #       - upgrade_d7_node_complete_pece_artifact_bundle
+  #       - upgrade_d7_node_complete_pece_artifact_fieldnote
+  #       - upgrade_d7_node_complete_pece_artifact_image
+  #       - upgrade_d7_node_complete_pece_artifact_pdf
+  #       - upgrade_d7_node_complete_pece_artifact_tabular
+  #       - upgrade_d7_node_complete_pece_artifact_text
+  #       - upgrade_d7_node_complete_pece_artifact_video
+  #       - upgrade_d7_node_complete_pece_artifact_website
+  #       - upgrade_d7_node_complete_pece_essay
+  #       - upgrade_d7_node_complete_pece_fieldsite
+  #       - upgrade_d7_node_complete_pece_group
+  #       - upgrade_d7_node_complete_pece_memo
+  #       - upgrade_d7_node_complete_pece_photo_essay
+  #       - upgrade_d7_node_complete_pece_project
+  #       - upgrade_d7_node_complete_pece_sub_logic
+  #       - upgrade_d7_node_complete_pece_timeline_essay
+  #       - upgrade_d7_node_complete_zotero_feed
+  #   -
+  #     plugin: node_complete_node_translation_lookup
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  path:
+    -
+      # If translations are needed, switch the plugin below and uncomment the @node_translation parameter
+      plugin: get
+      # plugin: path_set_translated
+      source:
+        - '@_path'
+        # - '@node_translation'
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity:path_alias'
+migration_dependencies:
+  required: {  }
+  optional:
+    # - upgrade_d7_node_complete_biblio
+    # - upgrade_d7_node_complete_frontpage_image_slideshow
+    # - upgrade_d7_node_complete_panopoly_landing_page
+    # - upgrade_d7_node_complete_panopoly_page
+    # - upgrade_d7_node_complete_pece_about_page
+    # - upgrade_d7_node_complete_pece_analytic
+    # - upgrade_d7_node_complete_pece_annotation
+    # - upgrade_d7_node_complete_pece_artifact_audio
+    # - upgrade_d7_node_complete_pece_artifact_bundle
+    # - upgrade_d7_node_complete_pece_artifact_fieldnote
+    # - upgrade_d7_node_complete_pece_artifact_image
+    # - upgrade_d7_node_complete_pece_artifact_pdf
+    # - upgrade_d7_node_complete_pece_artifact_tabular
+    # - upgrade_d7_node_complete_pece_artifact_text
+    # - upgrade_d7_node_complete_pece_artifact_video
+    # - upgrade_d7_node_complete_pece_artifact_website
+    # - upgrade_d7_node_complete_pece_essay
+    # - upgrade_d7_node_complete_pece_fieldsite
+    # - upgrade_d7_node_complete_pece_group
+    # - upgrade_d7_node_complete_pece_memo
+    # - upgrade_d7_node_complete_pece_photo_essay
+    # - upgrade_d7_node_complete_pece_project
+    # - upgrade_d7_node_complete_pece_sub_logic
+    # - upgrade_d7_node_complete_pece_timeline_essay
+    # - upgrade_d7_node_complete_zotero_feed
+    # - upgrade_d7_node_complete_biblio
+    # - upgrade_d7_node_complete_frontpage_image_slideshow
+    # - upgrade_d7_node_complete_panopoly_landing_page
+    # - upgrade_d7_node_complete_panopoly_page
+    # - upgrade_d7_node_complete_pece_about_page
+    # - upgrade_d7_node_complete_pece_analytic
+    # - upgrade_d7_node_complete_pece_annotation
+    # - upgrade_d7_node_complete_pece_artifact_audio
+    # - upgrade_d7_node_complete_pece_artifact_bundle
+    # - upgrade_d7_node_complete_pece_artifact_fieldnote
+    # - upgrade_d7_node_complete_pece_artifact_image
+    # - upgrade_d7_node_complete_pece_artifact_pdf
+    # - upgrade_d7_node_complete_pece_artifact_tabular
+    # - upgrade_d7_node_complete_pece_artifact_text
+    # - upgrade_d7_node_complete_pece_artifact_video
+    # - upgrade_d7_node_complete_pece_artifact_website
+    # - upgrade_d7_node_complete_pece_essay
+    # - upgrade_d7_node_complete_pece_fieldsite
+    # - upgrade_d7_node_complete_pece_group
+    # - upgrade_d7_node_complete_pece_memo
+    # - upgrade_d7_node_complete_pece_photo_essay
+    # - upgrade_d7_node_complete_pece_project
+    # - upgrade_d7_node_complete_pece_sub_logic
+    # - upgrade_d7_node_complete_pece_timeline_essay
+    # - upgrade_d7_node_complete_zotero_feed
