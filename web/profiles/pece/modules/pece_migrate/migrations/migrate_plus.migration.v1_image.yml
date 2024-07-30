@@ -47,7 +47,16 @@ process:
     source: field_pece_authors
     process:
       target_id: tid
-  field_source: field_pece_source
+  field_source/format:
+    plugin: default_value
+    default_value: basic_html
+  field_source/value:
+    plugin: extract
+    source: field_pece_source
+    index:
+      - 0
+      - value
+    default: ''
   # field_created_date:
   #   plugin: sub_process
   #   source: field_pece_created
@@ -79,7 +88,16 @@ process:
     source: field_pece_tags
     process:
       target_id: tid
-  field_crit_commentary: field_pece_crit_commentary
+  field_crit_commentary/format:
+    plugin: default_value
+    default_value: basic_html
+  field_crit_commentary/value:
+    plugin: extract
+    source: field_pece_crit_commentary
+    index:
+      - 0
+      - value
+    default: ''
   field_image_artifact_image: field_pece_media_image
 destination:
   plugin: 'entity_complete:node'
