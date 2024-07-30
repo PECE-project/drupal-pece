@@ -1,0 +1,22 @@
+uuid: ee7eb12a-425f-44a1-ae21-ecfb3be6e120
+langcode: en
+status: true
+dependencies:
+  module:
+    - bibcite_entity
+    - node
+_core:
+  default_config_hash: QbX33FFiD5XFpmxijUDlGFbZhZ9D6lieO_Y6oWTjNpY
+id: node.field_cite_as
+field_name: field_cite_as
+entity_type: node
+type: entity_reference
+settings:
+  target_type: bibcite_reference
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: true
+custom_storage: false

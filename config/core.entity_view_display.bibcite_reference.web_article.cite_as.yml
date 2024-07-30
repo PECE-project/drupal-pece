@@ -1,0 +1,144 @@
+uuid: 42dd5eb8-55ca-4f54-b0d9-728a0816adaf
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.web_article
+    - core.entity_view_mode.bibcite_reference.cite_as
+  module:
+    - bibcite_entity
+  enforced:
+    config:
+      - bibcite_entity.bibcite_reference_type.web_article
+    module:
+      - bibcite_entity
+_core:
+  default_config_hash: 4t6DRAAk8_NGN5W3gWaL4AtmIULqavSqSoP7AHC_-_E
+id: bibcite_reference.web_article.cite_as
+targetEntityType: bibcite_reference
+bundle: web_article
+mode: cite_as
+content:
+  author:
+    type: bibcite_contributor_label
+    label: hidden
+    settings:
+      role: false
+      category: false
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  bibcite_number:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  bibcite_place_published:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  bibcite_publisher:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  bibcite_secondary_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  bibcite_short_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  bibcite_type_of_work:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  bibcite_url:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  bibcite_year:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  bibcite_abst_e: true
+  bibcite_abst_f: true
+  bibcite_access_date: true
+  bibcite_accession_number: true
+  bibcite_alternate_title: true
+  bibcite_auth_address: true
+  bibcite_call_number: true
+  bibcite_citekey: true
+  bibcite_custom1: true
+  bibcite_custom2: true
+  bibcite_custom3: true
+  bibcite_custom4: true
+  bibcite_custom5: true
+  bibcite_custom6: true
+  bibcite_custom7: true
+  bibcite_date: true
+  bibcite_doi: true
+  bibcite_edition: true
+  bibcite_isbn: true
+  bibcite_issn: true
+  bibcite_issue: true
+  bibcite_label: true
+  bibcite_lang: true
+  bibcite_links: true
+  bibcite_notes: true
+  bibcite_number_of_volumes: true
+  bibcite_original_publication: true
+  bibcite_other_author_affiliations: true
+  bibcite_other_number: true
+  bibcite_pages: true
+  bibcite_pmcid: true
+  bibcite_pmid: true
+  bibcite_refereed: true
+  bibcite_remote_db_name: true
+  bibcite_remote_db_provider: true
+  bibcite_reprint_edition: true
+  bibcite_research_notes: true
+  bibcite_section: true
+  bibcite_tertiary_title: true
+  bibcite_translated_title: true
+  bibcite_type: true
+  bibcite_volume: true
+  citation: true
+  keywords: true
+  langcode: true
+  search_api_excerpt: true
+  uid: true
