@@ -39,7 +39,7 @@ class SeeAnnotationsLink extends ExtraFieldPlusDisplayBase {
       '#template' => '<a href="{{ url }}" title="{{ tooltip }}" class="is-primary is-medium">{{ label}}</a>',
       '#context' => [
         'url' => $url,
-        'label' => $this->t('See annotations'),
+        'label' => $this->t('See all Annotations of this Artifact'),
         'tooltip' => $this->t('Filter content to that which annotates this :content_type', [':content_type' => $content_type]),
       ],
     ];
