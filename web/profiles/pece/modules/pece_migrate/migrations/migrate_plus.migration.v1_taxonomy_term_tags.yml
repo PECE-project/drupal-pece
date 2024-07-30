@@ -23,7 +23,13 @@ process:
     default_value: tags
   name: name
   description/value: description
-  description/format: format
+  description/format:
+    plugin: default_value
+    default_value: basic_html
+  path/pathauto:
+    plugin: default_value
+    default_value: 0
+    path/alias: alias
   weight: weight
   langcode: language
   parent:
