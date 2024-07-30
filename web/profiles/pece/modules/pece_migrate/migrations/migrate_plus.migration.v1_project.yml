@@ -115,6 +115,20 @@ process:
         - 0
         - fid
       default: null
+  field_project_start_end_date:
+    plugin: sub_process
+    source: field_pece_start_end_date
+    process:
+      value:
+        plugin: format_date
+        from_format: 'Y-m-d H:i:s'
+        to_format: Y-m-d
+        source: value
+      end_value:
+        plugin: format_date
+        from_format: 'Y-m-d H:i:s'
+        to_format: Y-m-d
+        source: value2
   field_ark_enabled:
     plugin: default_value
     source: field_ark_enabled
