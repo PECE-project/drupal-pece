@@ -39,10 +39,11 @@ process:
     plugin: default_value
     default_value: 0
     path/alias: alias
-  # field_pece_struct_analytics:
-  #   -
-  #     plugin: get
-  #     source: field_pece_struct_analytics
+  field_analytic_question_set:
+      plugin: sub_process
+      source: field_pece_struct_analytics
+      process:
+        target_id: tid
   field_tags:
     -
       plugin: sub_process

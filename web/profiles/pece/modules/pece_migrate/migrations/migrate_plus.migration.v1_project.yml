@@ -134,7 +134,11 @@ process:
     source: field_ark_enabled
     default_value: null
   field_project_featured_essays: field_pece_featured_essays
-  field_project_struct_analytics: field_pece_proj_struct_analytics
+  field_project_struct_analytics:
+      plugin: sub_process
+      source: field_pece_proj_struct_analytics
+      process:
+        target_id: tid
   field_project_subst_logic: field_pece_substantive_logic
   field_project_open_notes: field_pece_proj_notes
   field_tags:
