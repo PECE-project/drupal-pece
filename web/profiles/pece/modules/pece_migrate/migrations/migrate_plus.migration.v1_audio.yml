@@ -33,37 +33,52 @@ process:
     source: field_pece_contributors
     default_value: null
   field_authors:
-    plugin: default_value
+    plugin: sub_process
     source: field_pece_authors
+    process:
+      target_id: tid
     default_value: null
   field_pece_project_ref:
     plugin: default_value
     source: field_pece_project_ref
     default_value: null
-  field_crit_commentary: field_pece_crit_commentary
+  field_crit_commentary/format:
+    plugin: default_value
+    default_value: basic_html
+  field_crit_commentary/value:
+    plugin: extract
+    source: field_pece_crit_commentary
+    index:
+      - 0
+      - value
+    default: ''
   field_language: field_pece_language
-  field_audio_use_fieldsite_local: field_pece_use_fieldsite_local
+  field_use_fieldsite_local: field_pece_use_fieldsite_local
   field_fieldsite: field_pece_fieldsite
   field_created_date: field_pece_created
   field_location: field_pece_location
   field_pece_license: field_pece_license
-  field_tags: field_pece_tags
+  field_tags:
+    plugin: sub_process
+    source: field_pece_tags
+    process:
+      target_id: tid
   field_ark_enabled:
     plugin: default_value
     source: field_ark_enabled
     default_value: null
-  field_source: field_pece_source
+  field_source/format:
+    plugin: default_value
+    default_value: basic_html
+  field_source/value:
+    plugin: extract
+    source: field_pece_source
+    index:
+      - 0
+      - value
+    default: ''
   field_duration: field_pece_media_duration
-  field_audio_file_format: field_pece_file_format
   field_audio_media: field_pece_media_audio
-  field_pbc_ref_user:
-    plugin: default_value
-    source: permission_by_user_view
-    default_value: null
-  field_pbc_ref_role:
-    plugin: default_value
-    source: permission_by_role_view
-    default_value: null
   field_pece_all_can_view:
     plugin: default_value
     source: permission_all_user_view
