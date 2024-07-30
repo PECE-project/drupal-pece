@@ -72,7 +72,12 @@ process:
         - 0
         - fid
       default: null
-  field_project_institution_link: field_pece_multiple_link
+  field_project_institution_link:
+    plugin: sub_process
+    source: field_pece_multiple_link
+    process:
+      uri: url
+      title: title
   field_project_fund_agency_link:
     plugin: sub_process
     source: field_pece_funding_agency
