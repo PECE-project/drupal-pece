@@ -1,0 +1,21 @@
+uuid: 9f6f1db4-cbd3-430b-97df-fa3c6568b26b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cite_as
+    - node.type.pece_artifact_website
+id: node.pece_artifact_website.field_cite_as
+field_name: field_cite_as
+entity_type: node
+bundle: pece_artifact_website
+label: 'Cite as'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:bibcite_reference'
+  handler_settings: {  }
+field_type: entity_reference

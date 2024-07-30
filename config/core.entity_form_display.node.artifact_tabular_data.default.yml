@@ -4,23 +4,24 @@ status: true
 dependencies:
   config:
     - field.field.node.artifact_tabular_data.field_ark_enabled
-    - field.field.node.artifact_tabular_data.field_people_with_edit_access
-    - field.field.node.artifact_tabular_data.field_groups_with_view_access
-    - field.field.node.artifact_tabular_data.field_pece_all_can_view
-    - field.field.node.artifact_tabular_data.field_pece_license
-    - field.field.node.artifact_tabular_data.field_pece_project_ref
-    - field.field.node.artifact_tabular_data.field_people_with_view_access
-    - field.field.node.artifact_tabular_data.field_tabular_attachment
     - field.field.node.artifact_tabular_data.field_authors
+    - field.field.node.artifact_tabular_data.field_cite_as
     - field.field.node.artifact_tabular_data.field_created_date
     - field.field.node.artifact_tabular_data.field_crit_commentary
     - field.field.node.artifact_tabular_data.field_fieldsite
-    - field.field.node.artifact_tabular_data.field_use_fieldsite_local
+    - field.field.node.artifact_tabular_data.field_groups_with_view_access
     - field.field.node.artifact_tabular_data.field_language
     - field.field.node.artifact_tabular_data.field_location
-    - field.field.node.artifact_tabular_data.field_tabular_media
+    - field.field.node.artifact_tabular_data.field_pece_all_can_view
+    - field.field.node.artifact_tabular_data.field_pece_license
+    - field.field.node.artifact_tabular_data.field_pece_project_ref
+    - field.field.node.artifact_tabular_data.field_people_with_edit_access
+    - field.field.node.artifact_tabular_data.field_people_with_view_access
     - field.field.node.artifact_tabular_data.field_source
+    - field.field.node.artifact_tabular_data.field_tabular_attachment
+    - field.field.node.artifact_tabular_data.field_tabular_media
     - field.field.node.artifact_tabular_data.field_tags
+    - field.field.node.artifact_tabular_data.field_use_fieldsite_local
     - node.type.artifact_tabular_data
   module:
     - address
@@ -74,6 +75,16 @@ content:
     type: entity_reference_autocomplete
     weight: 8
     region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_cite_as:
+    type: entity_reference_autocomplete
+    weight: 31
+    region: hidden
     settings:
       match_operator: CONTAINS
       match_limit: 10

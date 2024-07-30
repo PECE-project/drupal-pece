@@ -1,0 +1,21 @@
+uuid: 96da905b-61c7-40d4-8cf1-d76a6c3e8741
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cite_as
+    - node.type.pece_photo_essay
+id: node.pece_photo_essay.field_cite_as
+field_name: field_cite_as
+entity_type: node
+bundle: pece_photo_essay
+label: 'Cite as'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:bibcite_reference'
+  handler_settings: {  }
+field_type: entity_reference

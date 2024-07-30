@@ -5,24 +5,25 @@ dependencies:
   config:
     - field.field.node.pece_artifact_audio.field_ark_enabled
     - field.field.node.pece_artifact_audio.field_audio_artifact_audio
+    - field.field.node.pece_artifact_audio.field_audio_file_format
     - field.field.node.pece_artifact_audio.field_authors
+    - field.field.node.pece_artifact_audio.field_cite_as
     - field.field.node.pece_artifact_audio.field_created_date
     - field.field.node.pece_artifact_audio.field_crit_commentary
     - field.field.node.pece_artifact_audio.field_duration
     - field.field.node.pece_artifact_audio.field_fieldsite
-    - field.field.node.pece_artifact_audio.field_audio_file_format
-    - field.field.node.pece_artifact_audio.field_language
-    - field.field.node.pece_artifact_audio.field_location
-    - field.field.node.pece_artifact_audio.field_source
-    - field.field.node.pece_artifact_audio.field_use_fieldsite_local
     - field.field.node.pece_artifact_audio.field_file_format
     - field.field.node.pece_artifact_audio.field_groups_with_view_access
+    - field.field.node.pece_artifact_audio.field_language
+    - field.field.node.pece_artifact_audio.field_location
     - field.field.node.pece_artifact_audio.field_pece_all_can_view
     - field.field.node.pece_artifact_audio.field_pece_license
     - field.field.node.pece_artifact_audio.field_pece_project_ref
     - field.field.node.pece_artifact_audio.field_people_with_edit_access
     - field.field.node.pece_artifact_audio.field_people_with_view_access
+    - field.field.node.pece_artifact_audio.field_source
     - field.field.node.pece_artifact_audio.field_tags
+    - field.field.node.pece_artifact_audio.field_use_fieldsite_local
     - node.type.pece_artifact_audio
   module:
     - address
@@ -89,6 +90,16 @@ content:
     type: entity_reference_autocomplete
     weight: 9
     region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_cite_as:
+    type: entity_reference_autocomplete
+    weight: 31
+    region: hidden
     settings:
       match_operator: CONTAINS
       match_limit: 10

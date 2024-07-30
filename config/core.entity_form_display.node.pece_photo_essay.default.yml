@@ -5,16 +5,17 @@ dependencies:
   config:
     - field.field.node.pece_photo_essay.body
     - field.field.node.pece_photo_essay.field_ark_enabled
-    - field.field.node.pece_photo_essay.field_people_with_edit_access
+    - field.field.node.pece_photo_essay.field_cite_as
     - field.field.node.pece_photo_essay.field_groups_with_view_access
     - field.field.node.pece_photo_essay.field_pece_all_can_view
     - field.field.node.pece_photo_essay.field_pece_geolocation
     - field.field.node.pece_photo_essay.field_pece_license
     - field.field.node.pece_photo_essay.field_pece_project_ref
+    - field.field.node.pece_photo_essay.field_people_with_edit_access
     - field.field.node.pece_photo_essay.field_people_with_view_access
     - field.field.node.pece_photo_essay.field_photo_essay_items
-    - field.field.node.pece_photo_essay.field_tags
     - field.field.node.pece_photo_essay.field_photo_essay_thumbnail
+    - field.field.node.pece_photo_essay.field_tags
     - image.style.thumbnail
     - node.type.pece_photo_essay
   module:
@@ -73,6 +74,16 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_cite_as:
+    type: entity_reference_autocomplete
+    weight: 28
+    region: hidden
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete

@@ -1,0 +1,21 @@
+uuid: 34c0d2c1-83ca-4c36-9ba0-0f34a4bc1b8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cite_as
+    - node.type.pece_timeline_essay
+id: node.pece_timeline_essay.field_cite_as
+field_name: field_cite_as
+entity_type: node
+bundle: pece_timeline_essay
+label: 'Cite as'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:bibcite_reference'
+  handler_settings: {  }
+field_type: entity_reference

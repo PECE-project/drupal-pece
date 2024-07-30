@@ -4,12 +4,13 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_memo.body
-    - field.field.node.pece_memo.field_people_with_edit_access
+    - field.field.node.pece_memo.field_cite_as
     - field.field.node.pece_memo.field_groups_with_view_access
     - field.field.node.pece_memo.field_pece_all_can_view
+    - field.field.node.pece_memo.field_people_with_edit_access
+    - field.field.node.pece_memo.field_people_with_view_access
     - field.field.node.pece_memo.field_tags
     - field.field.node.pece_memo.field_uri
-    - field.field.node.pece_memo.field_people_with_view_access
     - node.type.pece_memo
   module:
     - field_group
@@ -55,6 +56,16 @@ content:
     weight: 7
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_cite_as:
+    type: entity_reference_autocomplete
+    weight: 26
+    region: hidden
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete

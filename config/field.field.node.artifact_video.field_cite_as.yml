@@ -1,0 +1,21 @@
+uuid: bed84e08-000c-4ad3-a6d9-9b4ee64f4a16
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cite_as
+    - node.type.artifact_video
+id: node.artifact_video.field_cite_as
+field_name: field_cite_as
+entity_type: node
+bundle: artifact_video
+label: 'Cite as'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:bibcite_reference'
+  handler_settings: {  }
+field_type: entity_reference
