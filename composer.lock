@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6596a7abd629114b94a6d212feff37da",
+    "content-hash": "4e72a5dd70c90993f77f9234f4850ee5",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -324,16 +324,16 @@
         },
         {
             "name": "citation-style-language/styles",
-            "version": "v0.0.439",
+            "version": "v0.0.442",
             "source": {
                 "type": "git",
                 "url": "https://github.com/citation-style-language/styles.git",
-                "reference": "3674fcfb11197f8a7bfaedadaf8ea147e34feedd"
+                "reference": "e111543b181950a1db5d4fcf91d50467eb825925"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/citation-style-language/styles/zipball/3674fcfb11197f8a7bfaedadaf8ea147e34feedd",
-                "reference": "3674fcfb11197f8a7bfaedadaf8ea147e34feedd",
+                "url": "https://api.github.com/repos/citation-style-language/styles/zipball/e111543b181950a1db5d4fcf91d50467eb825925",
+                "reference": "e111543b181950a1db5d4fcf91d50467eb825925",
                 "shasum": ""
             },
             "type": "library",
@@ -351,7 +351,7 @@
             "homepage": "http://citationstyles.org/",
             "support": {
                 "issues": "https://github.com/citation-style-language/styles/issues",
-                "source": "https://github.com/citation-style-language/styles/tree/v0.0.439"
+                "source": "https://github.com/citation-style-language/styles/tree/v0.0.442"
             },
             "funding": [
                 {
@@ -359,7 +359,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-12T13:04:59+00:00"
+            "time": "2024-07-23T09:15:55+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -2979,6 +2979,41 @@
             }
         },
         {
+            "name": "drupal/cite",
+            "version": "dev-3464149-modern-drupal-version",
+            "source": {
+                "type": "git",
+                "url": "git@git.drupal.org:issue/cite-3464149.git",
+                "reference": "48774c4208e50b5dc74faff23ae09ee36b90f137"
+            },
+            "require": {
+                "drupal/bibcite": "^3",
+                "drupal/extra_field": "^2"
+            },
+            "suggest": {
+                "drupal/bibcite_altmetric": "Adds Altmetric badges to BibCite reference entities",
+                "drupal/bibcite_crossref": "Provides DOI lookup functionality",
+                "drupal/bibcite_pubmed": "Provides PubMed import and lookup functionality"
+            },
+            "type": "drupal-module",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Automatically create references for work published on your website.",
+            "homepage": "https://www.drupal.org/project/cite",
+            "keywords": [
+                "Bibliography",
+                "Citation",
+                "Cite",
+                "Drupal"
+            ],
+            "support": {
+                "issues": "https://www.drupal.org/project/issues/cite",
+                "source": "https://git.drupalcode.org/project/cite"
+            },
+            "time": "2024-07-30T21:57:25+00:00"
+        },
+        {
             "name": "drupal/color_field",
             "version": "3.0.1",
             "source": {
@@ -5495,17 +5530,17 @@
         },
         {
             "name": "drupal/geocoder",
-            "version": "4.24.0",
+            "version": "4.25.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/geocoder.git",
-                "reference": "8.x-4.24"
+                "reference": "8.x-4.25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/geocoder-8.x-4.24.zip",
-                "reference": "8.x-4.24",
-                "shasum": "b3aafd2d6f0dcda14e383286b23a5bc6fd62fc10"
+                "url": "https://ftp.drupal.org/files/projects/geocoder-8.x-4.25.zip",
+                "reference": "8.x-4.25",
+                "shasum": "f62dcbdb3c27a266aed92f78c6b861ffaa391ff0"
             },
             "require": {
                 "davedevelopment/stiphle": "^0.9.2",
@@ -5549,8 +5584,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-4.24",
-                    "datestamp": "1719606014",
+                    "version": "8.x-4.25",
+                    "datestamp": "1722204762",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5591,17 +5626,17 @@
         },
         {
             "name": "drupal/geofield",
-            "version": "1.59.0",
+            "version": "1.60.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/geofield.git",
-                "reference": "8.x-1.59"
+                "reference": "8.x-1.60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/geofield-8.x-1.59.zip",
-                "reference": "8.x-1.59",
-                "shasum": "1469ff78a551fe559f14ea80fb2d9756a99903f2"
+                "url": "https://ftp.drupal.org/files/projects/geofield-8.x-1.60.zip",
+                "reference": "8.x-1.60",
+                "shasum": "ffb1891148b343208e7a190c8cc606a339c74ee1"
             },
             "require": {
                 "drupal/core": "^9 || ^10 || ^11",
@@ -5614,8 +5649,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.59",
-                    "datestamp": "1718892670",
+                    "version": "8.x-1.60",
+                    "datestamp": "1722078200",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -9098,26 +9133,29 @@
         },
         {
             "name": "drupal/token",
-            "version": "1.14.0",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/token.git",
-                "reference": "8.x-1.14"
+                "reference": "8.x-1.15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/token-8.x-1.14.zip",
-                "reference": "8.x-1.14",
-                "shasum": "df3cae709fcc1a99ac1111ce67a0d6af56d287d7"
+                "url": "https://ftp.drupal.org/files/projects/token-8.x-1.15.zip",
+                "reference": "8.x-1.15",
+                "shasum": "5916fbccc86458a5f51e71f832ac70ff4c84ebdf"
             },
             "require": {
-                "drupal/core": "^9.2 || ^10"
+                "drupal/core": "^9.2 || ^10 || ^11"
+            },
+            "require-dev": {
+                "drupal/book": "*"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.14",
-                    "datestamp": "1713009399",
+                    "version": "8.x-1.15",
+                    "datestamp": "1722206211",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -23633,6 +23671,7 @@
         "drupal/bibcite_migrate": 10,
         "drupal/blocktabs": 10,
         "drupal/bulma": 20,
+        "drupal/cite": 20,
         "drupal/configurable_views_filter_block": 20,
         "drupal/dashboards": 10,
         "drupal/default_content": 15,
