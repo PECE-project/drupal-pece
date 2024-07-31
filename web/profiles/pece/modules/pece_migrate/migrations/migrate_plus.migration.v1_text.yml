@@ -19,8 +19,18 @@ source:
 process:
   nid: nid
   vid: vid
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
   uid: node_uid
   title: title
+  status: status
+  created: created
+  changed: timestamp
+  promote: promote
+  sticky: sticky
   type:
     plugin: default_value
     default_value: pece_artifact_text
