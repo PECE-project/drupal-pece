@@ -41,7 +41,7 @@ process:
   field_pece_license: field_pece_license
   body/format:
     plugin: default_value
-    default_value: html
+    default_value: basic_html
   body/value:
     plugin: extract
     source: body
@@ -56,7 +56,11 @@ process:
       - 0
       - summary
     default: ''
-  field_tags: field_pece_tags
+  field_tags:
+    plugin: sub_process
+    source: field_pece_tags
+    process:
+      target_id: tid
   field_ark_enabled:
     plugin: default_value
     source: field_ark_enabled
@@ -68,14 +72,6 @@ process:
   field_annotation_artifact:
     plugin: default_value
     source: field_pece_artifact
-    default_value: null
-  field_pbc_ref_user:
-    plugin: default_value
-    source: permission_by_user_view
-    default_value: null
-  field_pbc_ref_role:
-    plugin: default_value
-    source: permission_by_role_view
     default_value: null
   field_pece_all_can_view:
     plugin: default_value
