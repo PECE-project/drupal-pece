@@ -46,12 +46,30 @@ process:
     plugin: default_value
     source: field_pece_contributors
     default_value: null
-  field_source: field_pece_source
-  field_authors:
+  field_source/format:
     plugin: default_value
+    default_value: basic_html
+  field_source/value:
+    plugin: extract
+    source: field_pece_source
+    index:
+      - 0
+      - value
+    default: ''
+  field_authors:
+    plugin: sub_process
     source: field_pece_authors
-    default_value: null
-  field_created_date: field_pece_created
+    process:
+      target_id: tid
+  # field_created_date:
+  #   plugin: sub_process
+  #   source: field_pece_created
+  #   process:
+  #     value:
+  #       plugin: format_date
+  #       from_format: 'Y-m-d H:i:s'
+  #       to_format: Y-m-d
+  #       source: value
   field_use_fieldsite_local: field_pece_use_fieldsite_local
   field_fieldsite: field_pece_fieldsite
   field_language: field_pece_language
@@ -61,18 +79,23 @@ process:
     plugin: default_value
     source: field_ark_enabled
     default_value: null
-  field_crit_commentary: field_pece_crit_commentary
+  field_crit_commentary/format:
+    plugin: default_value
+    default_value: basic_html
+  field_crit_commentary/value:
+    plugin: extract
+    source: field_pece_crit_commentary
+    index:
+      - 0
+      - value
+    default: ''
   field_tabular_media: field_pece_media_tabular
   field_tabular_attachment: field_pece_media_tablr_attach
-  field_tags: field_pece_tags
-  field_pbc_ref_user:
-    plugin: default_value
-    source: permission_by_user_view
-    default_value: null
-  field_pbc_ref_role:
-    plugin: default_value
-    source: permission_by_role_view
-    default_value: null
+  field_tags:
+    plugin: sub_process
+    source: field_pece_tags
+    process:
+      target_id: tid
   field_pece_all_can_view:
     plugin: default_value
     source: permission_all_user_view
