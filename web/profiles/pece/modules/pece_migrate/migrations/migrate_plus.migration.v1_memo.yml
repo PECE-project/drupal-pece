@@ -1,0 +1,87 @@
+uuid: 86123cc5-374b-4c30-8c2d-63407ab385b9
+langcode: en
+status: true
+dependencies: {  }
+id: v1_memo
+class: Drupal\node\Plugin\migrate\D7NodeTranslation
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Memo v1'
+  - 'PECE v1'
+  - 'Drupal 7'
+  - Content
+migration_group: pece
+label: 'Migrate Memo'
+source:
+  plugin: v1_node
+  node_type: pece_memo
+process:
+  nid: nid
+  vid: vid
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  uid: node_uid
+  title: title
+  status: status
+  created: created
+  changed: timestamp
+  promote: promote
+  sticky: sticky
+  type:
+    plugin: default_value
+    default_value: pece_memo
+  # comment_node_pece_memo/0/status:
+  #   -
+  #     plugin: get
+  #     source: comment
+  body/format:
+    plugin: default_value
+    default_value: html
+  body/value:
+    plugin: extract
+    source: body
+    index:
+      - 0
+      - value
+    default: ''
+  body/summary:
+    plugin: extract
+    source: body
+    index:
+      - 0
+      - summary
+    default: ''
+  field_people_with_edit_access:
+    plugin: default_value
+    source: field_pece_contributors
+    default_value: null
+  field_pece_license: field_pece_license
+  field_tags:
+    plugin: sub_process
+    source: field_pece_tags
+    process:
+      target_id: tid
+  field_uri: field_pece_uri
+  # og_group_ref:
+  #   -
+  #     plugin: get
+  #     source: og_group_ref
+  # field_metatag:
+  #   -
+  #     plugin: d7_metatag_entities
+  #     source: pseudo_metatag_entities
+  field_pece_all_can_view:
+    plugin: default_value
+    source: permission_all_user_view
+    default_value: false
+destination:
+  plugin: 'entity_complete:node'
+  translations: true
+  default_bundle: pece_memo
+migration_dependencies:
+  required:
+    - v1_user
