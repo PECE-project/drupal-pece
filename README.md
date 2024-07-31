@@ -72,3 +72,7 @@ ddev css
 ```
 
 See more about Bulma's Sass in `web/themes/custom/peceful/README.md`
+
+## Deployment
+
+Deploy to https://demo-pece.agaric.coop/ using Drutopia hosting.
