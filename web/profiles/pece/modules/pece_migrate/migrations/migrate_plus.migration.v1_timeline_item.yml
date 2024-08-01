@@ -18,13 +18,26 @@ source:
   entity_type: pece_timeline_essay_item
   bundle: pece_timeline_essay_item
 process:
-  id: id
   field_title: title
   field_description: field_description
   field_pece_timeline_artifact: field_pece_timeline_artifact
   field_pece_timeline_background: field_pece_timeline_background
   field_pece_timeline_color: field_pece_timeline_color
   field_pece_timeline_type: field_pece_timeline_type
+  field_pece_start_end_date:
+    plugin: sub_process
+    source: field_pece_start_end_date
+    process:
+      value:
+        plugin: format_date
+        from_format: 'Y-m-d H:i:s'
+        to_format: Y-m-d
+        source: value
+      end_value:
+        plugin: format_date
+        from_format: 'Y-m-d H:i:s'
+        to_format: Y-m-d
+        source: value2
 destination:
   plugin: 'entity_reference_revisions:paragraph'
   default_bundle: pece_timeline_essay_item
