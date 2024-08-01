@@ -22,7 +22,14 @@ process:
   field_description: field_description
   field_pece_timeline_artifact: field_pece_timeline_artifact
   field_pece_timeline_background: field_pece_timeline_background
-  field_pece_timeline_color: field_pece_timeline_color
+  field_pece_timeline_color:
+    plugin: sub_process
+    source: field_pece_timeline_color
+    process:
+      color: rgb
+      opacity:
+        plugin: default_value
+        default_value: 1
   field_pece_timeline_type: field_pece_timeline_type
   field_pece_start_end_date:
     plugin: sub_process
