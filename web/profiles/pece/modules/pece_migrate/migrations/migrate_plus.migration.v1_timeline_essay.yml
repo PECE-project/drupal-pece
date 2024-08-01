@@ -59,7 +59,11 @@ process:
       - 0
       - summary
     default: ''
-  field_timeline_tags: field_pece_tags
+  field_tags:
+    plugin: sub_process
+    source: field_pece_tags
+    process:
+      target_id: tid
   field_ark_enabled:
     plugin: default_value
     source: field_ark_enabled
@@ -70,14 +74,6 @@ process:
     default_value: null
   field_pece_license: field_pece_license
   field_timeline_essay_items: field_pece_timeline_essay_items
-  field_pbc_ref_user:
-    plugin: default_value
-    source: permission_by_user_view
-    default_value: null
-  field_pbc_ref_role:
-    plugin: default_value
-    source: permission_by_role_view
-    default_value: null
   field_pece_all_can_view:
     plugin: default_value
     source: permission_all_user_view
