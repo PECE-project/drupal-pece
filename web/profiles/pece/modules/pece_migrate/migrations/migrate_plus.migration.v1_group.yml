@@ -14,40 +14,44 @@ migration_tags:
 migration_group: pece
 label: 'Migrate Group'
 source:
-  plugin: v1_node
+  plugin: v1_group_node
   node_type: pece_group
 process:
-  nid: nid
-  vid: vid
-  uid: node_uid
-  title: title
-  type:
+  # nid: nid
+  name: title
+  vid:
     plugin: default_value
-    default_value: group
-  path/pathauto:
-    plugin: default_value
-    default_value: 0
-    path/alias: alias
-  body/format:
-    plugin: default_value
-    default_value: html
-  body/value:
-    plugin: extract
-    source: body
-    index:
-      - 0
-      - value
-    default: ''
-  body/summary:
-    plugin: extract
-    source: body
-    index:
-      - 0
-      - summary
-    default: ''
-  field_pece_geolocation: locations
-  field_group_subst_logic: field_pece_substantive_logic
+    default_value: groups
+  # uid: node_uid
+  # title: title
+  # type:
+  #   plugin: default_value
+  #   default_value: group
+  # path/pathauto:
+  #   plugin: default_value
+  #   default_value: 0
+  #   path/alias: alias
+  # body/format:
+  #   plugin: default_value
+  #   default_value: html
+  # body/value:
+  #   plugin: extract
+  #   source: body
+  #   index:
+  #     - 0
+  #     - value
+  #   default: ''
+  # body/summary:
+  #   plugin: extract
+  #   source: body
+  #   index:
+  #     - 0
+  #     - summary
+  #   default: ''
+  # field_pece_geolocation: locations
+  field_substantive_logic: field_pece_substantive_logic
+  field_group_members: d7_group_members
 destination:
-  plugin: 'entity_complete:node'
+  plugin: 'entity:taxonomy_term'
   translations: true
 migration_dependencies: null
