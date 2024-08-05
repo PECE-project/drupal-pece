@@ -14,7 +14,7 @@ dependencies:
     - field.field.node.pece_photo_essay.field_people_with_view_access
     - field.field.node.pece_photo_essay.field_photo_essay_items
     - field.field.node.pece_photo_essay.field_tags
-    - field.field.node.pece_photo_essay.field_photo_essay_thumbnail
+    - field.field.node.pece_photo_essay.field_thumbnail
     - node.type.pece_photo_essay
   module:
     - entity_reference_revisions
@@ -110,7 +110,7 @@ third_party_settings:
             uuid: e49518f9-3f7d-4c46-830e-43026bc12955
             region: second
             configuration:
-              id: 'field_block:node:pece_photo_essay:field_photo_essay_thumbnail'
+              id: 'field_block:node:pece_photo_essay:field_thumbnail'
               label: Thumbnail
               label_display: '0'
               provider: layout_builder
@@ -167,7 +167,7 @@ third_party_settings:
             uuid: 925bd257-6680-4605-9a32-55dfbc8f3d8b
             region: content
             configuration:
-              id: 'field_block:node:pece_photo_essay:field_photo_essay_thumbnail'
+              id: 'field_block:node:pece_photo_essay:field_thumbnail'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -321,7 +321,7 @@ content:
     third_party_settings: {  }
     weight: 118
     region: content
-  field_photo_essay_thumbnail:
+  field_thumbnail:
     type: image
     label: above
     settings:

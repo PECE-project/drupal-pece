@@ -7,7 +7,7 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_groups_with_view_access
     - field.field.node.pece_artifact_pdf.field_pdf_artifact_document
     - field.field.node.pece_artifact_pdf.field_authors
-    - field.field.node.pece_artifact_pdf.field_pdf_bibliography
+    - field.field.node.pece_artifact_pdf.field_bibliography
     - field.field.node.pece_artifact_pdf.field_created_date
     - field.field.node.pece_artifact_pdf.field_crit_commentary
     - field.field.node.pece_artifact_pdf.field_fieldsite
@@ -235,7 +235,7 @@ third_party_settings:
             uuid: 3af6da10-6660-421b-9b3e-b2f876b8ed36
             region: content
             configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_bibliography'
+              id: 'field_block:node:pece_artifact_pdf:field_bibliography'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -433,7 +433,7 @@ content:
     third_party_settings: {  }
     weight: 129
     region: content
-  field_pdf_bibliography:
+  field_bibliography:
     type: entity_reference_label
     label: above
     settings:

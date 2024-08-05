@@ -20,7 +20,7 @@ dependencies:
     - field.field.node.pece_artifact_website.field_source
     - field.field.node.pece_artifact_website.field_tags
     - field.field.node.pece_artifact_website.field_use_fieldsite_local
-    - field.field.node.pece_artifact_website.field_website_bibliography
+    - field.field.node.pece_artifact_website.field_bibliography
     - field.field.node.pece_artifact_website.field_website_url
     - node.type.pece_artifact_website
   module:
@@ -209,7 +209,7 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_website_bibliography:
+  field_bibliography:
     type: entity_reference_autocomplete
     weight: 12
     region: content

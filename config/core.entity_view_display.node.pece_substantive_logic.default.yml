@@ -8,7 +8,7 @@ dependencies:
     - field.field.node.pece_substantive_logic.field_pece_all_can_view
     - field.field.node.pece_substantive_logic.field_subst_logic_image_citation
     - field.field.node.pece_substantive_logic.field_tags
-    - field.field.node.pece_substantive_logic.field_subst_logic_thumbnail
+    - field.field.node.pece_substantive_logic.field_thumbnail
     - field.field.node.pece_substantive_logic.field_uri
     - node.type.pece_substantive_logic
   module:
@@ -51,7 +51,7 @@ third_party_settings:
             uuid: cfac6a25-23a0-4b7a-bc6a-ba2bb57d894c
             region: second
             configuration:
-              id: 'field_block:node:pece_substantive_logic:field_subst_logic_thumbnail'
+              id: 'field_block:node:pece_substantive_logic:field_thumbnail'
               label: Thumbnail
               label_display: '0'
               provider: layout_builder
@@ -90,7 +90,7 @@ third_party_settings:
             uuid: 85590f9d-11fd-4f76-b577-55e0483caf9f
             region: content
             configuration:
-              id: 'field_block:node:pece_substantive_logic:field_subst_logic_thumbnail'
+              id: 'field_block:node:pece_substantive_logic:field_thumbnail'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -184,7 +184,7 @@ content:
     third_party_settings: {  }
     weight: 103
     region: content
-  field_subst_logic_thumbnail:
+  field_thumbnail:
     type: image
     label: above
     settings:

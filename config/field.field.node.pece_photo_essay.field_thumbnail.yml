@@ -1,18 +1,18 @@
-uuid: 4b4cd203-e3dc-4547-9cf8-74c0bb9a434e
+uuid: 41a5d742-b9d5-49eb-a20c-250755ce68f3
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_essay_thumbnail
-    - node.type.pece_essay
+    - field.storage.node.field_thumbnail
+    - node.type.pece_photo_essay
   module:
     - image
 _core:
-  default_config_hash: cIC9YjLxp5wtoMHsLA5x8NkGddIjOInxpT0Vn_Rjtjg
-id: node.pece_essay.field_essay_thumbnail
-field_name: field_essay_thumbnail
+  default_config_hash: AaT7iywSZ2QdmU3UQmqFx9X-5SLUxiotqBJNhBYwoUo
+id: node.pece_photo_essay.field_thumbnail
+field_name: field_thumbnail
 entity_type: node
-bundle: pece_essay
+bundle: pece_photo_essay
 label: Thumbnail
 description: ''
 required: false
@@ -22,7 +22,7 @@ default_value_callback: ''
 settings:
   handler: 'default:file'
   handler_settings: {  }
-  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_directory: 'photo_essay/[date:custom:Y]-[date:custom:m]'
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
   max_resolution: ''

@@ -1,18 +1,18 @@
-uuid: 14edc296-8478-44ea-a5ba-1031d814233d
+uuid: e37815c7-0edc-4d2f-b9cb-b6545a3f3aad
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_timeline_essay_thumbnail
-    - node.type.pece_timeline_essay
+    - field.storage.node.field_thumbnail
+    - node.type.pece_project
   module:
     - image
 _core:
-  default_config_hash: ESQ9Y2g5IRnFfb-l7AEmN4DlruSCWoyHapeveVg9ZIw
-id: node.pece_timeline_essay.field_timeline_essay_thumbnail
-field_name: field_timeline_essay_thumbnail
+  default_config_hash: vUmEQNFLMXC_XnZxDULqPN7-8qhDul81JZXuP9X-PwM
+id: node.pece_project.field_thumbnail
+field_name: field_thumbnail
 entity_type: node
-bundle: pece_timeline_essay
+bundle: pece_project
 label: Thumbnail
 description: ''
 required: false
@@ -22,13 +22,13 @@ default_value_callback: ''
 settings:
   handler: 'default:file'
   handler_settings: {  }
-  file_directory: timeline_essay
+  file_directory: '[date:custom:Y]-[date:custom:m]'
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
   max_resolution: ''
   min_resolution: ''
-  alt_field: false
-  alt_field_required: false
+  alt_field: true
+  alt_field_required: true
   title_field: false
   title_field_required: false
   default_image:
