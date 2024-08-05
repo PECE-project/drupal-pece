@@ -53,7 +53,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 101
+    weight: 1
     region: content
   field_ark_enabled:
     type: boolean
@@ -63,7 +63,7 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 118
+    weight: 10
     region: content
   field_fieldsites:
     type: entity_reference_label
@@ -71,32 +71,14 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 131
-    region: content
-  field_groups_with_view_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 132
-    region: content
-  field_pece_all_can_view:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 130
+    weight: 18
     region: content
   field_pece_geolocation:
     type: geolocation_latlng
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 117
+    weight: 9
     region: content
   field_pece_media_image:
     type: entity_reference_entity_view
@@ -105,7 +87,7 @@ content:
       view_mode: pece_image_artifact
       link: false
     third_party_settings: {  }
-    weight: 135
+    weight: 20
     region: content
   field_people_with_edit_access:
     type: entity_reference_label
@@ -113,15 +95,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 134
-    region: content
-  field_people_with_view_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 133
+    weight: 19
     region: content
   field_project_consent_form_file:
     type: file_default
@@ -129,7 +103,7 @@ content:
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
-    weight: 113
+    weight: 5
     region: content
   field_project_design_group:
     type: entity_reference_label
@@ -137,7 +111,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 129
+    weight: 17
     region: content
   field_project_featured_essays:
     type: entity_reference_label
@@ -145,7 +119,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 127
+    weight: 15
     region: content
   field_project_fund_agency_link:
     type: link
@@ -157,7 +131,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 114
+    weight: 6
     region: content
   field_project_image:
     type: image
@@ -168,7 +142,7 @@ content:
       image_loading:
         attribute: lazy
     third_party_settings: {  }
-    weight: 115
+    weight: 7
     region: content
   field_project_image_banner:
     type: image
@@ -179,7 +153,7 @@ content:
       image_loading:
         attribute: lazy
     third_party_settings: {  }
-    weight: 123
+    weight: 11
     region: content
   field_project_institution_link:
     type: link
@@ -191,7 +165,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 108
+    weight: 3
     region: content
   field_project_intv_request_file:
     type: file_default
@@ -199,7 +173,7 @@ content:
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
-    weight: 112
+    weight: 4
     region: content
   field_project_lead:
     type: entity_reference_label
@@ -207,14 +181,14 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 124
+    weight: 12
     region: content
   field_project_open_notes:
     type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 125
+    weight: 13
     region: content
   field_project_start_end_date:
     type: daterange_default
@@ -225,7 +199,7 @@ content:
       from_to: both
       separator: '-'
     third_party_settings: {  }
-    weight: 107
+    weight: 2
     region: content
   field_project_struct_analytics:
     type: entity_reference_label
@@ -233,7 +207,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 128
+    weight: 16
     region: content
   field_project_subst_logic:
     type: entity_reference_label
@@ -241,7 +215,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 116
+    weight: 8
     region: content
   field_tags:
     type: entity_reference_label
@@ -249,15 +223,18 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 126
+    weight: 14
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  field_groups_with_view_access: true
+  field_pece_all_can_view: true
+  field_people_with_view_access: true
   langcode: true
   search_api_excerpt: true

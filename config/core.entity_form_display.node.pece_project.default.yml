@@ -40,9 +40,6 @@ third_party_settings:
   field_group:
     group_permissions:
       children:
-        - field_pece_all_can_view
-        - field_groups_with_view_access
-        - field_people_with_view_access
         - field_people_with_edit_access
       label: Permissions
       region: content
@@ -94,23 +91,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_groups_with_view_access:
-    type: entity_reference_autocomplete
-    weight: 32
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_pece_all_can_view:
-    type: boolean_checkbox
-    weight: 31
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
   field_pece_geolocation:
     type: geolocation_latlng
     weight: 16
@@ -127,16 +107,6 @@ content:
   field_people_with_edit_access:
     type: entity_reference_autocomplete
     weight: 34
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_people_with_view_access:
-    type: entity_reference_autocomplete
-    weight: 33
     region: content
     settings:
       match_operator: CONTAINS
@@ -306,5 +276,8 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  field_groups_with_view_access: true
+  field_pece_all_can_view: true
+  field_people_with_view_access: true
   field_project_image: true
   field_project_image_banner: true
