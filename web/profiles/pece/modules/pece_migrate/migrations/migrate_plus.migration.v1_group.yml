@@ -17,36 +17,23 @@ source:
   plugin: v1_group_node
   node_type: pece_group
 process:
-  # nid: nid
   name: title
   vid:
     plugin: default_value
     default_value: groups
-  # uid: node_uid
-  # title: title
-  # type:
-  #   plugin: default_value
-  #   default_value: group
   # path/pathauto:
   #   plugin: default_value
   #   default_value: 0
   #   path/alias: alias
-  # body/format:
+  # description/format:
   #   plugin: default_value
-  #   default_value: html
-  # body/value:
+  #   default_value: basic_html
+  # description/value:
   #   plugin: extract
   #   source: body
   #   index:
   #     - 0
   #     - value
-  #   default: ''
-  # body/summary:
-  #   plugin: extract
-  #   source: body
-  #   index:
-  #     - 0
-  #     - summary
   #   default: ''
   # field_pece_geolocation: locations
   field_substantive_logic: field_pece_substantive_logic
