@@ -43,4 +43,7 @@ process:
 destination:
   plugin: 'entity:taxonomy_term'
   translations: true
-migration_dependencies: null
+migration_dependencies:
+  required:
+    - v1_sub_logic
+    - v1_user
