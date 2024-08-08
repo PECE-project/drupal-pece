@@ -79,6 +79,8 @@ class GroupNode extends D7Node {
     $row->setSourceProperty('d7_group_managers', $this->groupManagers);
     $this->groupMembers = [];
     $this->groupManagers = [];
+
+    return parent::prepareRow($row);
   }
 
   public function buildFieldDataByRoles($gid, Array $d7_group_roles) {
