@@ -7,7 +7,7 @@ namespace  Drupal\pece_migrate\Plugin\migrate\source;
 // use Drupal\migrate\Row;
 
 use Drupal\migrate\Row;
-use Drupal\node\Plugin\migrate\source\d7\NodeComplete as D7Node;
+use Drupal\node\Plugin\migrate\source\d7\Node as D7Node;
 // use Drupal\Tests\Component\Annotation\Doctrine\Ticket\Doctrine\ORM\Entity;
 // use Exception;
 
