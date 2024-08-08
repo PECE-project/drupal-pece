@@ -37,16 +37,16 @@ class GroupNode extends D7Node {
   public function prepareRow(Row $row) {
     $gid = $row->getSourceProperty('nid');
 
-    $this->groupManagers = $this->buildRoleFieldData($gid, self::GROUP_MANAGER_ROLES);
+    $this->groupManagers = $this->buildFieldDataByRoles($gid, self::GROUP_MANAGER_ROLES);
     $row->setSourceProperty('d7_group_managers', $this->groupManagers);
     $this->groupManagers = [];
 
-    $this->groupMembers = $this->buildRoleFieldData($gid, self::GROUP_MEMBER_ROLES);
+    $this->groupMembers = $this->buildFieldDataByRoles($gid, self::GROUP_MEMBER_ROLES);
     $row->setSourceProperty('d7_group_members', $this->groupMembers);
     $this->groupMembers = [];
   }
 
-  public function buildRoleFieldData($gid, Array $d7_group_roles) {
+  public function buildFieldDataByRoles($gid, Array $d7_group_roles) {
     // Collect role ids (of this group) for selected roles
     $role_ids_query = $this->select('og_role', 'r')
     ->fields('r', array('rid'))
