@@ -18,7 +18,7 @@ use Drupal\node\Plugin\migrate\source\d7\Node as D7Node;
  */
 class GroupNode extends D7Node {
 
-  const GROUP_MEMBER_ROLES = ['Researcher', 'Contributor', 'member'];
+  // const GROUP_MEMBER_ROLES = ['Researcher', 'Contributor', 'member'];
   const GROUP_MANAGER_ROLES = ['administrator member', 'group administrator'];
 
   protected $groupMembers = [];
@@ -37,13 +37,38 @@ class GroupNode extends D7Node {
   public function prepareRow(Row $row) {
     $gid = $row->getSourceProperty('nid');
 
-    $this->groupManagers = $this->buildFieldDataByRoles($gid, self::GROUP_MANAGER_ROLES);
-    $row->setSourceProperty('d7_group_managers', $this->groupManagers);
-    $this->groupManagers = [];
+    $managers = $this->buildFieldDataByRoles($gid, self::GROUP_MANAGER_ROLES);
 
-    $this->groupMembers = $this->buildFieldDataByRoles($gid, self::GROUP_MEMBER_ROLES);
+    // Query to get user IDs based on group membership.
+    // For the case of members, we cannot build the data based on roles, since the member role is  implicit, and not actually present in the og_users_roles table at all
+    $members_query = $this->select('og_membership', 'ogm')
+      ->fields('ogm', array('etid'))
+      ->condition('ogm.entity_type', 'user')
+      ->condition('ogm.gid', $gid);
+
+    if (!empty($managers)) {
+      $members_query = $members_query->condition('ogm.etid', $managers, 'NOT IN');
+    }
+
+    $members = $members_query
+    ->execute()
+    ->fetchCol();
+
+    foreach ($members as $key => $item) {
+      $this->groupMembers[] = [
+        'target_id' => $item
+      ];
+    }
+
+    foreach ($managers as $key => $item) {
+      $this->groupManagers[] = [
+        'target_id' => $item
+      ];
+    }
     $row->setSourceProperty('d7_group_members', $this->groupMembers);
+    $row->setSourceProperty('d7_group_managers', $this->groupManagers);
     $this->groupMembers = [];
+    $this->groupManagers = [];
   }
 
   public function buildFieldDataByRoles($gid, Array $d7_group_roles) {
@@ -54,21 +79,11 @@ class GroupNode extends D7Node {
     ->condition('r.name', $d7_group_roles, 'IN');
 
     // Get users with at least one of these role ids
-    $users = $this->select('og_users_roles', 'ur')
+    return $this->select('og_users_roles', 'ur')
       ->fields('ur', array('uid'))
       ->distinct()
       ->condition('ur.rid', $role_ids_query, 'IN')
       ->execute()
       ->fetchCol();
-
-    $group_users = [];
-
-    foreach ($users as $key => $item) {
-      $group_users[] = [
-        'target_id' => $item
-      ];
-    }
-
-    return $group_users;
   }
 }
