@@ -22,19 +22,44 @@ the platform, please refer to our [complete documentation](https://pece-project.
 0. [Install Docker](https://ddev.readthedocs.io/en/stable/users/install/docker-installation/) if you have not yet.
 1. [Install DDEV](https://ddev.readthedocs.io/en/stable/users/install/ddev-installation/)
 
-## Usage
+## Installation quickstart
 
 ```bash
 git clone git@github.com:PECE-project/drupal-pece.git --branch 2.x
 cd drupal-pece
-ddev composer install
-ddev drush -y si pece --existing-config
+ddev pece-install
 ddev content-import-all
 ```
 
 Note that the "[warning] … was not found" messages are addressed by the necessarily later `content-import-all` step.
 
-## Updating Drupal Core
+## Usage
+
+Those last two steps of installation can be re-run to do a **re-**install of PECE.
+This will wipe out any content and configuration you have.
+
+Broken down into the component steps, get up to speed (destructively) with other developers:
+
+```bash
+git pull
+ddev composer install
+ddev drush -y si pece --existing-config
+ddev content-import-all
+```
+
+## Updating Drupal core and contrib
+
+To update Drupal core and contributed modules, make sure your configuration is clean (exported and committed, or imported from an up-to-date and clean git repository) and then run:
+
+```
+ddev composer update
+ddev drush -y updb
+ddev drush -y cex
+```
+
+And commit any updates Drupal made to configuration as part of the updates (there may be no update hooks that are run, and even if there are some, they may not change configuration.)
+
+### Scaffolding files
 
 This project will attempt to keep all of your Drupal Core files up-to-date; the
 project [drupal-composer/drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold)
