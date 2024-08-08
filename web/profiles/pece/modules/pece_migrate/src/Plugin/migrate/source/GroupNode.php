@@ -45,7 +45,7 @@ class GroupNode extends D7Node {
       ->execute()
       ->fetchField();
 
-    $managers = $this->buildFieldDataByRoles($gid, self::GROUP_MANAGER_ROLES);
+    $managers = $this->getUsersByRoles($gid, self::GROUP_MANAGER_ROLES);
 
     // Query to get user IDs based on group membership.
     // For the case of members, we cannot build the data based on roles, since the member role is  implicit, and not actually present in the og_users_roles table at all
@@ -83,7 +83,7 @@ class GroupNode extends D7Node {
     return parent::prepareRow($row);
   }
 
-  public function buildFieldDataByRoles($gid, Array $d7_group_roles) {
+  public function getUsersByRoles($gid, Array $d7_group_roles) {
     // Collect role ids (of this group) for selected roles
     $role_ids_query = $this->select('og_role', 'r')
     ->fields('r', array('rid'))
