@@ -18,12 +18,11 @@ use Drupal\node\Plugin\migrate\source\d7\Node as D7Node;
  */
 class GroupNode extends D7Node {
 
-  // const ROLE_RESEARCHER = 'researcher';
-  // const ROLE_CONTRIBUTOR = 'contributor';
-  const ROLE_ADMIN_MEMBER = 'administrator member';
-  const ROLE_GROUP_ADMIN = 'group administrator';
+  const GROUP_MEMBER_ROLES = ['Researcher', 'Contributor', 'member'];
+  const GROUP_MANAGER_ROLES = ['administrator member', 'group administrator'];
 
-  protected $groupUsers = [];
+  protected $groupMembers = [];
+  protected $groupManagers = [];
 
   /**
    * {@inheritdoc}
@@ -38,27 +37,38 @@ class GroupNode extends D7Node {
   public function prepareRow(Row $row) {
     $gid = $row->getSourceProperty('nid');
 
-    // Collect role ids (of this group) for group administrator or member administrator roles
-    $admin_role_ids_query = $this->select('og_role', 'r')
-      ->fields('r', array('rid'))
-      ->condition('r.gid', $gid)
-      ->condition('r.name', [self::ROLE_ADMIN_MEMBER, self::ROLE_GROUP_ADMIN], 'IN');
+    $this->groupManagers = $this->buildRoleFieldData($gid, self::GROUP_MANAGER_ROLES);
+    $row->setSourceProperty('d7_group_managers', $this->groupManagers);
+    $this->groupManagers = [];
+
+    $this->groupMembers = $this->buildRoleFieldData($gid, self::GROUP_MEMBER_ROLES);
+    $row->setSourceProperty('d7_group_members', $this->groupMembers);
+    $this->groupMembers = [];
+  }
+
+  public function buildRoleFieldData($gid, Array $d7_group_roles) {
+    // Collect role ids (of this group) for selected roles
+    $role_ids_query = $this->select('og_role', 'r')
+    ->fields('r', array('rid'))
+    ->condition('r.gid', $gid)
+    ->condition('r.name', $d7_group_roles, 'IN');
 
     // Get users with at least one of these role ids
     $users = $this->select('og_users_roles', 'ur')
       ->fields('ur', array('uid'))
       ->distinct()
-      ->condition('ur.rid', $admin_role_ids_query, 'IN')
+      ->condition('ur.rid', $role_ids_query, 'IN')
       ->execute()
       ->fetchCol();
 
+    $group_users = [];
+
     foreach ($users as $key => $item) {
-      $this->groupUsers[] = [
+      $group_users[] = [
         'target_id' => $item
       ];
     }
 
-    $row->setSourceProperty('d7_group_managers', $this->groupUsers);
-    $this->groupUsers = [];
+    return $group_users;
   }
 }
