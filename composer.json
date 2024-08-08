@@ -169,6 +169,9 @@
         }
     },
     "scripts": {
+        "install-pece": {
+            "composer install && drush -y si pece --existing-config && content-import-all"
+        }
     },
     "extra": {
         "composer-exit-on-patch-failure": true,
