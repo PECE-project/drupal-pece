@@ -41,6 +41,12 @@ process:
   field_substantive_logic: field_pece_substantive_logic
   field_group_members: d7_group_members
   field_group_managers: d7_group_managers
+  field_group_visibility:
+    plugin: static_map
+    source: d7_group_access
+    map:
+      0: public
+      1: private
 destination:
   plugin: 'entity:taxonomy_term'
   translations: true

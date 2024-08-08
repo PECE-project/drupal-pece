@@ -31,11 +31,19 @@ class GroupNode extends D7Node {
     $fields = parent::fields() + ['alias' => $this->t('Path alias')];
     $fields += ['d7_group_members' => $this->t('Group members')];
     $fields += ['d7_group_managers' => $this->t('Group managers')];
+    $fields += ['d7_group_access' => $this->t('Group access')];
     return $fields;
   }
 
   public function prepareRow(Row $row) {
     $gid = $row->getSourceProperty('nid');
+
+    // Get the group access setting
+    $group_access = $this->select('field_data_group_access', 'fdga')
+      ->fields('fdga', ['group_access_value'])
+      ->condition('fdga.entity_id', $gid)
+      ->execute()
+      ->fetchField();
 
     $managers = $this->buildFieldDataByRoles($gid, self::GROUP_MANAGER_ROLES);
 
@@ -65,6 +73,8 @@ class GroupNode extends D7Node {
         'target_id' => $item
       ];
     }
+
+    $row->setSourceProperty('d7_group_access', $group_access);
     $row->setSourceProperty('d7_group_members', $this->groupMembers);
     $row->setSourceProperty('d7_group_managers', $this->groupManagers);
     $this->groupMembers = [];
