@@ -78,6 +78,16 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_bibliography:
+    type: entity_reference_autocomplete
+    weight: 12
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_cite_as:
     type: entity_reference_autocomplete
     weight: 28
@@ -142,16 +152,6 @@ content:
     region: content
     settings:
       progress_indicator: throbber
-    third_party_settings: {  }
-  field_bibliography:
-    type: entity_reference_autocomplete
-    weight: 12
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox

@@ -326,6 +326,14 @@ content:
     third_party_settings: {  }
     weight: 109
     region: content
+  field_bibliography:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 127
+    region: first
   field_created_date:
     type: datetime_default
     label: above
@@ -434,14 +442,6 @@ content:
     third_party_settings: {  }
     weight: 112
     region: content
-  field_bibliography:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 127
-    region: first
   field_website_url:
     type: link
     label: above

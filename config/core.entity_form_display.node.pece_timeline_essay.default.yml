@@ -189,6 +189,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_thumbnail:
+    type: image_image
+    weight: 10
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
   field_timeline_essay_items:
     type: entity_reference_paragraphs
     weight: 15
@@ -200,14 +208,6 @@ content:
       add_mode: dropdown
       form_display_mode: default
       default_paragraph_type: ''
-    third_party_settings: {  }
-  field_thumbnail:
-    type: image_image
-    weight: 10
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
     third_party_settings: {  }
   langcode:
     type: language_select
