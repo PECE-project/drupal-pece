@@ -22,6 +22,8 @@ the platform, please refer to our [complete documentation](https://pece-project.
 0. [Install Docker](https://ddev.readthedocs.io/en/stable/users/install/docker-installation/) if you have not yet.
 1. [Install DDEV](https://ddev.readthedocs.io/en/stable/users/install/ddev-installation/)
 
+You will also need to put your public key on your profile on https://git.drupalcode.org
+
 ## Installation quickstart
 
 ```bash
