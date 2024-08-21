@@ -4,23 +4,24 @@ status: true
 dependencies:
   config:
     - field.field.node.artifact_tabular_data.field_ark_enabled
-    - field.field.node.artifact_tabular_data.field_people_with_edit_access
-    - field.field.node.artifact_tabular_data.field_groups_with_view_access
-    - field.field.node.artifact_tabular_data.field_pece_all_can_view
-    - field.field.node.artifact_tabular_data.field_pece_license
-    - field.field.node.artifact_tabular_data.field_pece_project_ref
-    - field.field.node.artifact_tabular_data.field_people_with_view_access
-    - field.field.node.artifact_tabular_data.field_tabular_attachment
     - field.field.node.artifact_tabular_data.field_authors
+    - field.field.node.artifact_tabular_data.field_cite_as
     - field.field.node.artifact_tabular_data.field_created_date
     - field.field.node.artifact_tabular_data.field_crit_commentary
     - field.field.node.artifact_tabular_data.field_fieldsite
-    - field.field.node.artifact_tabular_data.field_use_fieldsite_local
+    - field.field.node.artifact_tabular_data.field_groups_with_view_access
     - field.field.node.artifact_tabular_data.field_language
     - field.field.node.artifact_tabular_data.field_location
-    - field.field.node.artifact_tabular_data.field_tabular_media
+    - field.field.node.artifact_tabular_data.field_pece_all_can_view
+    - field.field.node.artifact_tabular_data.field_pece_license
+    - field.field.node.artifact_tabular_data.field_pece_project_ref
+    - field.field.node.artifact_tabular_data.field_people_with_edit_access
+    - field.field.node.artifact_tabular_data.field_people_with_view_access
     - field.field.node.artifact_tabular_data.field_source
+    - field.field.node.artifact_tabular_data.field_tabular_attachment
+    - field.field.node.artifact_tabular_data.field_tabular_media
     - field.field.node.artifact_tabular_data.field_tags
+    - field.field.node.artifact_tabular_data.field_use_fieldsite_local
     - node.type.artifact_tabular_data
   module:
     - address
@@ -28,6 +29,7 @@ dependencies:
     - file
     - languagefield
     - layout_builder
+    - layout_discovery
     - text
     - user
 third_party_settings:
@@ -36,11 +38,40 @@ third_party_settings:
     allow_custom: false
     sections:
       -
+        layout_id: layout_onecol
+        layout_settings:
+          label: header
+          context_mapping: {  }
+        components:
+          02054644-d178-497d-96ed-459e0a83df73:
+            uuid: 02054644-d178-497d-96ed-459e0a83df73
+            region: content
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:title'
+              label: Title
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+      -
         layout_id: layout_twocol_section
         layout_settings:
           label: ''
           context_mapping: {  }
-          column_widths: 75-25
+          column_widths: 50-50
         components:
           59ac16d9-9bde-46cf-a7ce-3e5484ec09e6:
             uuid: 59ac16d9-9bde-46cf-a7ce-3e5484ec09e6
@@ -60,204 +91,6 @@ third_party_settings:
                   use_description_as_link_text: true
                 third_party_settings: {  }
             weight: 0
-            additional: {  }
-          8d85f440-9494-4bbb-ba35-3a5b0ecee3b7:
-            uuid: 8d85f440-9494-4bbb-ba35-3a5b0ecee3b7
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_tabular_data:field_tabular_attachment'
-              label: Attachment
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: file_default
-                label: above
-                settings:
-                  use_description_as_link_text: true
-                third_party_settings: {  }
-            weight: 1
-            additional: {  }
-          ba2e4e2e-2d96-4641-8286-1893226dd85d:
-            uuid: ba2e4e2e-2d96-4641-8286-1893226dd85d
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_tabular_data:field_pece_license'
-              label: License
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 2
-            additional: {  }
-          d61b3427-3a63-4e06-a4c6-8208d0100490:
-            uuid: d61b3427-3a63-4e06-a4c6-8208d0100490
-            region: first
-            configuration:
-              id: 'extra_field_block:node:artifact_tabular_data:links'
-              label: Links
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                settings: {  }
-                third_party_settings: {  }
-            weight: 3
-            additional: {  }
-          919adb6e-9c6c-4bd6-a6c7-ba6688c7bbc7:
-            uuid: 919adb6e-9c6c-4bd6-a6c7-ba6688c7bbc7
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_tabular_data:field_tabular_authors'
-              label: Creator(s)
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 0
-            additional: {  }
-          5d74738d-9125-45c7-aa57-f91c7c735524:
-            uuid: 5d74738d-9125-45c7-aa57-f91c7c735524
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_tabular_data:field_tabular_created_date'
-              label: 'Created Date'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: datetime_default
-                label: above
-                settings:
-                  timezone_override: ''
-                  format_type: medium
-                third_party_settings: {  }
-            weight: 1
-            additional: {  }
-          8e8d044f-c3a5-446f-ab6b-144cc9b01d93:
-            uuid: 8e8d044f-c3a5-446f-ab6b-144cc9b01d93
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_tabular_data:field_tabular_fieldsite'
-              label: Fieldsite
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 3
-            additional: {  }
-          f80d71ee-b2c9-49f3-bb2e-d4957a282e0d:
-            uuid: f80d71ee-b2c9-49f3-bb2e-d4957a282e0d
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_tabular_data:langcode'
-              label: Language
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: language
-                label: above
-                settings:
-                  link_to_entity: false
-                  native_language: false
-                third_party_settings: {  }
-            weight: 6
-            additional: {  }
-          2559331f-e3ce-4172-a031-3fe07bc73754:
-            uuid: 2559331f-e3ce-4172-a031-3fe07bc73754
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_tabular_data:field_tags'
-              label: Tags
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 7
-            additional: {  }
-          361390d2-e88d-45f6-823e-9df66712af9d:
-            uuid: 361390d2-e88d-45f6-823e-9df66712af9d
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_tabular_data:field_tabular_location'
-              label: Location
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: address_default
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-            weight: 8
-            additional: {  }
-          07b9984d-d876-44c2-92dc-5d4a20e32721:
-            uuid: 07b9984d-d876-44c2-92dc-5d4a20e32721
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_tabular_data:field_tabular_crit_commentary'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-            weight: 4
-            additional: {  }
-          03c41cb1-260d-4b29-8560-24ae14e0a00f:
-            uuid: 03c41cb1-260d-4b29-8560-24ae14e0a00f
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_tabular_data:field_tabular_source'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-            weight: 5
             additional: {  }
           2e6bf4d2-3af5-4694-a153-fc26d18e4c07:
             uuid: 2e6bf4d2-3af5-4694-a153-fc26d18e4c07
@@ -485,60 +318,17 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 17
             additional: {  }
-          be1afd63-5fed-4f00-9c7b-3796fb10c9f2:
-            uuid: be1afd63-5fed-4f00-9c7b-3796fb10c9f2
-            region: first
+          ba2e4e2e-2d96-4641-8286-1893226dd85d:
+            uuid: ba2e4e2e-2d96-4641-8286-1893226dd85d
+            region: second
             configuration:
-              id: 'field_block:node:artifact_tabular_data:field_tabular_crit_commentary'
+              id: 'field_block:node:artifact_tabular_data:field_pece_license'
+              label: License
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-            weight: 6
-            additional: {  }
-          e4efca82-5e7a-4b1b-bdb3-949166fd7b41:
-            uuid: e4efca82-5e7a-4b1b-bdb3-949166fd7b41
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_tabular_data:field_tabular_source'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-            weight: 7
-            additional: {  }
-          e3f89310-7aad-4d8f-ad87-0a0d98820a8e:
-            uuid: e3f89310-7aad-4d8f-ad87-0a0d98820a8e
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_tabular_data:field_people_with_view_access'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 8
-            additional: {  }
-          8f118cd1-2e40-4e15-bf00-51b73b6bc810:
-            uuid: 8f118cd1-2e40-4e15-bf00-51b73b6bc810
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_tabular_data:field_people_with_edit_access'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
                 type: entity_reference_label
                 label: above
@@ -547,21 +337,339 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 9
             additional: {  }
-          78a0cb55-ec4b-4e9d-b472-764a9e650401:
-            uuid: 78a0cb55-ec4b-4e9d-b472-764a9e650401
-            region: first
+          8f118cd1-2e40-4e15-bf00-51b73b6bc810:
+            uuid: 8f118cd1-2e40-4e15-bf00-51b73b6bc810
+            region: second
             configuration:
-              id: 'field_block:node:artifact_tabular_data:field_groups_with_view_access'
+              id: 'field_block:node:artifact_tabular_data:field_people_with_edit_access'
+              label: 'People with edit access'
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: Contributor(s)
+                    rewrite_label: 1
+            weight: 3
+            additional: {  }
+          78a0cb55-ec4b-4e9d-b472-764a9e650401:
+            uuid: 78a0cb55-ec4b-4e9d-b472-764a9e650401
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_groups_with_view_access'
+              label: 'Groups with view access'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: 'Group audience'
+                    rewrite_label: 1
+            weight: 6
+            additional: {  }
+          2e2af360-fe78-438c-92c8-36a8707da1b4:
+            uuid: 2e2af360-fe78-438c-92c8-36a8707da1b4
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:uid'
+              label: 'Authored by'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: Creator(s)
+                    rewrite_label: 1
+            weight: 2
+            additional: {  }
+          d9a99c6f-9659-4ac9-a610-eea5f1024d16:
+            uuid: d9a99c6f-9659-4ac9-a610-eea5f1024d16
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:created'
+              label: 'Authored on'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: timestamp
+                label: above
+                settings:
+                  date_format: medium
+                  custom_date_format: ''
+                  timezone: ''
+                  tooltip:
+                    date_format: long
+                    custom_date_format: ''
+                  time_diff:
+                    enabled: false
+                    future_format: '@interval hence'
+                    past_format: '@interval ago'
+                    granularity: 2
+                    refresh: 60
+                    description: ''
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: 'Created date'
+                    rewrite_label: 1
+            weight: 3
+            additional: {  }
+          a71c7796-7eaf-4365-83b3-d108c9874b63:
+            uuid: a71c7796-7eaf-4365-83b3-d108c9874b63
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_fieldsite'
+              label: Fieldsite
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 7
+            additional: {  }
+          4b8ee1ff-13f2-4f22-a2e9-0f44eee70aa4:
+            uuid: 4b8ee1ff-13f2-4f22-a2e9-0f44eee70aa4
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_source'
+              label: Source
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 4
+            additional: {  }
+          8d85f440-9494-4bbb-ba35-3a5b0ecee3b7:
+            uuid: 8d85f440-9494-4bbb-ba35-3a5b0ecee3b7
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_tabular_attachment'
+              label: Attachment
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: file_default
+                label: above
+                settings:
+                  use_description_as_link_text: true
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+          55e01662-15e5-4fe9-b8db-347251f010b8:
+            uuid: 55e01662-15e5-4fe9-b8db-347251f010b8
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_location'
+              label: Location
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: address_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 5
+            additional: {  }
+          5288e2ad-e9fd-4f7c-a041-0b0d0d8ec82d:
+            uuid: 5288e2ad-e9fd-4f7c-a041-0b0d0d8ec82d
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_crit_commentary'
+              label: 'Critical Commentary'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 8
+            additional: {  }
+          592557d9-50a2-4258-8431-a852be5ef485:
+            uuid: 592557d9-50a2-4258-8431-a852be5ef485
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_cite_as'
+              label: 'Cite as'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 10
+            additional: {  }
+          47001468-ae83-4cdd-9856-7fd9499f06e3:
+            uuid: 47001468-ae83-4cdd-9856-7fd9499f06e3
+            region: second
+            configuration:
+              id: 'extra_field_block:node:artifact_tabular_data:extra_field_pece_annotations_annotate_button'
+              label: 'Annotate button'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 12
+            additional:
+              extra_field_plus_settings: {  }
+          675d900d-6bd5-42d4-9260-50abba997d5f:
+            uuid: 675d900d-6bd5-42d4-9260-50abba997d5f
+            region: second
+            configuration:
+              id: 'extra_field_block:node:artifact_tabular_data:extra_field_pece_annotations_see_annotations_link'
+              label: 'Link to see all related annotations'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 13
+            additional:
+              extra_field_plus_settings: {  }
+          2559331f-e3ce-4172-a031-3fe07bc73754:
+            uuid: 2559331f-e3ce-4172-a031-3fe07bc73754
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_tags'
+              label: Tags
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
                 type: entity_reference_label
                 label: above
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 10
+            weight: 11
+            additional: {  }
+          e1c44fb8-231b-4beb-875f-2e77c150bf2d:
+            uuid: e1c44fb8-231b-4beb-875f-2e77c150bf2d
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:revision_timestamp'
+              label: 'Revision create time'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: timestamp
+                label: above
+                settings:
+                  date_format: medium
+                  custom_date_format: ''
+                  timezone: ''
+                  tooltip:
+                    date_format: long
+                    custom_date_format: ''
+                  time_diff:
+                    enabled: false
+                    future_format: '@interval hence'
+                    past_format: '@interval ago'
+                    granularity: 2
+                    refresh: 60
+                    description: ''
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 5
+            additional: {  }
+          14cbfb92-c368-4ae8-8b60-8fe51f8abbcf:
+            uuid: 14cbfb92-c368-4ae8-8b60-8fe51f8abbcf
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_created_date'
+              label: 'Created Date'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: 'Created date'
+                    rewrite_label: 1
+            weight: 4
             additional: {  }
         third_party_settings: {  }
 _core:

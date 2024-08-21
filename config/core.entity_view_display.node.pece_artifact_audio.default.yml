@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_audio_artifact_audio
     - field.field.node.pece_artifact_audio.field_audio_file_format
     - field.field.node.pece_artifact_audio.field_authors
+    - field.field.node.pece_artifact_audio.field_cite_as
     - field.field.node.pece_artifact_audio.field_created_date
     - field.field.node.pece_artifact_audio.field_crit_commentary
     - field.field.node.pece_artifact_audio.field_duration
@@ -72,63 +73,6 @@ third_party_settings:
           context_mapping: {  }
           column_widths: 50-50
         components:
-          a74cf72b-bc1e-4d2b-954e-d79a59d949df:
-            uuid: a74cf72b-bc1e-4d2b-954e-d79a59d949df
-            region: first
-            configuration:
-              id: 'field_block:node:pece_artifact_audio:field_pece_license'
-              label: License
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 4
-            additional: {  }
-          99226499-96b5-4dc6-ad65-4cb1a2a24947:
-            uuid: 99226499-96b5-4dc6-ad65-4cb1a2a24947
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_audio:field_audio_authors'
-              label: Creator(s)
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 1
-            additional: {  }
-          ccd44f2e-cb07-45c5-aa16-c9b6b3372134:
-            uuid: ccd44f2e-cb07-45c5-aa16-c9b6b3372134
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_audio:field_tags'
-              label: Tags
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 11
-            additional: {  }
           0cfc4a38-5ff4-4fa3-89a1-122bc25f6da8:
             uuid: 0cfc4a38-5ff4-4fa3-89a1-122bc25f6da8
             region: first
@@ -169,7 +113,7 @@ third_party_settings:
                 label: above
                 settings: {  }
                 third_party_settings: {  }
-            weight: 8
+            weight: 11
             additional: {  }
           3cddf468-f490-41a6-a088-204bf2e9f534:
             uuid: 3cddf468-f490-41a6-a088-204bf2e9f534
@@ -188,23 +132,7 @@ third_party_settings:
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            weight: 3
-            additional: {  }
-          55652fee-a0d8-4e6b-8540-5ef75d7f087a:
-            uuid: 55652fee-a0d8-4e6b-8540-5ef75d7f087a
-            region: first
-            configuration:
-              id: 'field_block:node:pece_artifact_audio:field_file_format'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 2
+            weight: 12
             additional: {  }
           c6f2757d-a045-412f-8c48-d1ea3ca18ea5:
             uuid: c6f2757d-a045-412f-8c48-d1ea3ca18ea5
@@ -222,47 +150,6 @@ third_party_settings:
                 label: above
                 settings:
                   link: true
-                third_party_settings: {  }
-            weight: 7
-            additional: {  }
-          807badda-0c82-4277-a1a2-1ea175fff9ff:
-            uuid: 807badda-0c82-4277-a1a2-1ea175fff9ff
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_audio:field_source'
-              label: Source
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-            weight: 9
-            additional: {  }
-          b09cc7f5-2c5c-49ae-817c-5e6929f44f02:
-            uuid: b09cc7f5-2c5c-49ae-817c-5e6929f44f02
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_audio:field_language'
-              label: 'Language (this one)'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: languagefield_default
-                label: above
-                settings:
-                  link_to_entity: 0
-                  format:
-                    name: name
-                    iso: '0'
-                    name_native: '0'
                 third_party_settings: {  }
             weight: 10
             additional: {  }
@@ -303,28 +190,11 @@ third_party_settings:
                 label: above
                 settings:
                   link: true
-                third_party_settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: Contributor(s)
+                    rewrite_label: 1
             weight: 5
-            additional: {  }
-          4db33668-a4a0-4b12-bea7-f463bcb2b6f8:
-            uuid: 4db33668-a4a0-4b12-bea7-f463bcb2b6f8
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_audio:field_audio_created_date'
-              label: 'Created Date'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: datetime_default
-                label: above
-                settings:
-                  timezone_override: ''
-                  format_type: medium
-                third_party_settings: {  }
-            weight: 4
             additional: {  }
           6698eb1c-4d31-4795-8ee6-22bceb1b8b60:
             uuid: 6698eb1c-4d31-4795-8ee6-22bceb1b8b60
@@ -342,8 +212,294 @@ third_party_settings:
                 label: above
                 settings:
                   link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: 'Group audience'
+                    rewrite_label: 1
+            weight: 9
+            additional: {  }
+          f4e0fc4e-ff07-4942-b403-a41951a47fb6:
+            uuid: f4e0fc4e-ff07-4942-b403-a41951a47fb6
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_cite_as'
+              label: 'Cite as'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 14
+            additional: {  }
+          807badda-0c82-4277-a1a2-1ea175fff9ff:
+            uuid: 807badda-0c82-4277-a1a2-1ea175fff9ff
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_source'
+              label: Source
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
                 third_party_settings: {  }
-            weight: 6
+            weight: 9
+            additional: {  }
+          55652fee-a0d8-4e6b-8540-5ef75d7f087a:
+            uuid: 55652fee-a0d8-4e6b-8540-5ef75d7f087a
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_file_format'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 10
+            additional: {  }
+          b09cc7f5-2c5c-49ae-817c-5e6929f44f02:
+            uuid: b09cc7f5-2c5c-49ae-817c-5e6929f44f02
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_language'
+              label: 'Language (this one)'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: languagefield_default
+                label: above
+                settings:
+                  link_to_entity: 0
+                  format:
+                    name: name
+                    iso: '0'
+                    name_native: '0'
+                third_party_settings: {  }
+            weight: 11
+            additional: {  }
+          90cb1d99-63e4-42f1-a3bd-ab4c38311f6a:
+            uuid: 90cb1d99-63e4-42f1-a3bd-ab4c38311f6a
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_location'
+              label: Location
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: address_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 13
+            additional: {  }
+          eadc22a4-3b30-4c35-a0db-52fa405c1f90:
+            uuid: eadc22a4-3b30-4c35-a0db-52fa405c1f90
+            region: second
+            configuration:
+              id: 'extra_field_block:node:pece_artifact_audio:extra_field_pece_annotations_annotate_button'
+              label: 'Annotate button'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 16
+            additional:
+              extra_field_plus_settings: {  }
+          91613887-4135-4093-b5e2-e758587d2b5d:
+            uuid: 91613887-4135-4093-b5e2-e758587d2b5d
+            region: second
+            configuration:
+              id: 'extra_field_block:node:pece_artifact_audio:extra_field_pece_annotations_see_annotations_link'
+              label: 'Link to see all related annotations'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 17
+            additional:
+              extra_field_plus_settings: {  }
+          a74cf72b-bc1e-4d2b-954e-d79a59d949df:
+            uuid: a74cf72b-bc1e-4d2b-954e-d79a59d949df
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_pece_license'
+              label: License
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 13
+            additional: {  }
+          ccd44f2e-cb07-45c5-aa16-c9b6b3372134:
+            uuid: ccd44f2e-cb07-45c5-aa16-c9b6b3372134
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_tags'
+              label: Tags
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 15
+            additional: {  }
+          c51386a4-99b1-450b-bf36-e384120f9344:
+            uuid: c51386a4-99b1-450b-bf36-e384120f9344
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:uid'
+              label: 'Authored by'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: Creator(s)
+                    rewrite_label: 1
+            weight: 5
+            additional: {  }
+          97c8b9b5-faae-427c-add2-d3a9abceeafe:
+            uuid: 97c8b9b5-faae-427c-add2-d3a9abceeafe
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:created'
+              label: 'Authored on'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: timestamp
+                label: above
+                settings:
+                  date_format: medium
+                  custom_date_format: ''
+                  timezone: ''
+                  tooltip:
+                    date_format: long
+                    custom_date_format: ''
+                  time_diff:
+                    enabled: false
+                    future_format: '@interval hence'
+                    past_format: '@interval ago'
+                    granularity: 2
+                    refresh: 60
+                    description: ''
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: 'Contributed date'
+                    rewrite_label: 1
+            weight: 8
+            additional: {  }
+          6315b024-5a14-4409-ade8-f992b9e17cbc:
+            uuid: 6315b024-5a14-4409-ade8-f992b9e17cbc
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_created_date'
+              label: 'Created Date'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: 'Contributed date'
+                    rewrite_label: 1
+            weight: 7
+            additional: {  }
+          ffd6197e-33e5-4278-ad58-9bf2ebc9833e:
+            uuid: ffd6197e-33e5-4278-ad58-9bf2ebc9833e
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:revision_timestamp'
+              label: 'Revision create time'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: timestamp
+                label: above
+                settings:
+                  date_format: medium
+                  custom_date_format: ''
+                  timezone: ''
+                  tooltip:
+                    date_format: long
+                    custom_date_format: ''
+                  time_diff:
+                    enabled: false
+                    future_format: '@interval hence'
+                    past_format: '@interval ago'
+                    granularity: 2
+                    refresh: 60
+                    description: ''
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: 'Revision date'
+                    rewrite_label: 1
+            weight: 8
             additional: {  }
         third_party_settings: {  }
   layout_library:
