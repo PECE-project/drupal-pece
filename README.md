@@ -17,7 +17,7 @@ the platform, please refer to our [complete documentation](https://pece-project.
 
 ## Recommended setup
 
-(Some later commands will reference DDEV; substitute the development environment
+(Some later commands will reference DDEV; substitute the development environment of your choice at your own risk.)
 
 0. [Install Docker](https://ddev.readthedocs.io/en/stable/users/install/docker-installation/) if you have not yet.
 1. [Install DDEV](https://ddev.readthedocs.io/en/stable/users/install/ddev-installation/)
