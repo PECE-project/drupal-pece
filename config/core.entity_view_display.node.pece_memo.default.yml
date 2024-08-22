@@ -51,6 +51,119 @@ third_party_settings:
                     rewrite_label: 0
             weight: 0
             additional: {  }
+          423b51a8-7ce7-469a-8015-97fe31f2f49a:
+            uuid: 423b51a8-7ce7-469a-8015-97fe31f2f49a
+            region: content
+            configuration:
+              id: 'field_block:node:pece_memo:body'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          4688caee-52f6-4330-85e1-da0209aee17e:
+            uuid: 4688caee-52f6-4330-85e1-da0209aee17e
+            region: content
+            configuration:
+              id: 'field_block:node:pece_memo:field_uri'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          750e2157-79b3-4d96-8377-8fdacec8682b:
+            uuid: 750e2157-79b3-4d96-8377-8fdacec8682b
+            region: content
+            configuration:
+              id: 'field_block:node:pece_memo:field_tags'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          c0bcdd0f-0de1-452d-8bf7-960fb74b026d:
+            uuid: c0bcdd0f-0de1-452d-8bf7-960fb74b026d
+            region: content
+            configuration:
+              id: 'field_block:node:pece_memo:field_pece_all_can_view'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          eb23a9d8-01ae-418e-866a-d0cce4678ad9:
+            uuid: eb23a9d8-01ae-418e-866a-d0cce4678ad9
+            region: content
+            configuration:
+              id: 'field_block:node:pece_memo:field_groups_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          5ee76138-f863-4834-9c53-004bb8cc05a6:
+            uuid: 5ee76138-f863-4834-9c53-004bb8cc05a6
+            region: content
+            configuration:
+              id: 'field_block:node:pece_memo:field_people_with_view_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+          d451b78c-f5c4-4f65-9501-f53797d397b0:
+            uuid: d451b78c-f5c4-4f65-9501-f53797d397b0
+            region: content
+            configuration:
+              id: 'field_block:node:pece_memo:field_people_with_edit_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
         third_party_settings: {  }
       -
         layout_id: layout_twocol_section
@@ -384,6 +497,7 @@ hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_cite_as: true
+  field_pece_license: true
   langcode: true
   links: true
   search_api_excerpt: true
