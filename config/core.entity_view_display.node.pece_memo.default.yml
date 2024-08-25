@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.pece_memo.field_cite_as
     - field.field.node.pece_memo.field_groups_with_view_access
     - field.field.node.pece_memo.field_pece_all_can_view
+    - field.field.node.pece_memo.field_pece_license
     - field.field.node.pece_memo.field_people_with_edit_access
     - field.field.node.pece_memo.field_people_with_view_access
     - field.field.node.pece_memo.field_tags
@@ -50,119 +51,6 @@ third_party_settings:
                     new_label: ''
                     rewrite_label: 0
             weight: 0
-            additional: {  }
-          423b51a8-7ce7-469a-8015-97fe31f2f49a:
-            uuid: 423b51a8-7ce7-469a-8015-97fe31f2f49a
-            region: content
-            configuration:
-              id: 'field_block:node:pece_memo:body'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: text_default
-                label: hidden
-                settings: {  }
-                third_party_settings: {  }
-            weight: 1
-            additional: {  }
-          4688caee-52f6-4330-85e1-da0209aee17e:
-            uuid: 4688caee-52f6-4330-85e1-da0209aee17e
-            region: content
-            configuration:
-              id: 'field_block:node:pece_memo:field_uri'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: string
-                label: above
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
-            weight: 2
-            additional: {  }
-          750e2157-79b3-4d96-8377-8fdacec8682b:
-            uuid: 750e2157-79b3-4d96-8377-8fdacec8682b
-            region: content
-            configuration:
-              id: 'field_block:node:pece_memo:field_tags'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 3
-            additional: {  }
-          c0bcdd0f-0de1-452d-8bf7-960fb74b026d:
-            uuid: c0bcdd0f-0de1-452d-8bf7-960fb74b026d
-            region: content
-            configuration:
-              id: 'field_block:node:pece_memo:field_pece_all_can_view'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: boolean
-                label: above
-                settings:
-                  format: default
-                  format_custom_false: ''
-                  format_custom_true: ''
-                third_party_settings: {  }
-            weight: 4
-            additional: {  }
-          eb23a9d8-01ae-418e-866a-d0cce4678ad9:
-            uuid: eb23a9d8-01ae-418e-866a-d0cce4678ad9
-            region: content
-            configuration:
-              id: 'field_block:node:pece_memo:field_groups_with_view_access'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 5
-            additional: {  }
-          5ee76138-f863-4834-9c53-004bb8cc05a6:
-            uuid: 5ee76138-f863-4834-9c53-004bb8cc05a6
-            region: content
-            configuration:
-              id: 'field_block:node:pece_memo:field_people_with_view_access'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 6
-            additional: {  }
-          d451b78c-f5c4-4f65-9501-f53797d397b0:
-            uuid: d451b78c-f5c4-4f65-9501-f53797d397b0
-            region: content
-            configuration:
-              id: 'field_block:node:pece_memo:field_people_with_edit_access'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 7
             additional: {  }
         third_party_settings: {  }
       -
@@ -370,8 +258,40 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 4
+            weight: 6
             additional: {  }
+          6ed7478b-1581-47f6-a592-6b9caed527f3:
+            uuid: 6ed7478b-1581-47f6-a592-6b9caed527f3
+            region: second
+            configuration:
+              id: 'extra_field_block:node:pece_memo:extra_field_pece_annotations_annotate_button'
+              label: 'Annotate button'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 7
+            additional:
+              extra_field_plus_settings: {  }
+          3aabc6b7-6472-4cc8-a1cc-4c1473f16dad:
+            uuid: 3aabc6b7-6472-4cc8-a1cc-4c1473f16dad
+            region: second
+            configuration:
+              id: 'extra_field_block:node:pece_memo:extra_field_pece_annotations_see_annotations_link'
+              label: 'Link to see all related annotations'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 8
+            additional:
+              extra_field_plus_settings: {  }
           c8bf01f1-b6c0-40e5-a23d-40ca9e79e423:
             uuid: c8bf01f1-b6c0-40e5-a23d-40ca9e79e423
             region: second
@@ -394,38 +314,28 @@ third_party_settings:
                     rewrite_label: 0
             weight: 5
             additional: {  }
-          6ed7478b-1581-47f6-a592-6b9caed527f3:
-            uuid: 6ed7478b-1581-47f6-a592-6b9caed527f3
+          4c8fdef9-7399-454f-8274-243004a01ce3:
+            uuid: 4c8fdef9-7399-454f-8274-243004a01ce3
             region: second
             configuration:
-              id: 'extra_field_block:node:pece_memo:extra_field_pece_annotations_annotate_button'
-              label: 'Annotate button'
+              id: 'field_block:node:pece_memo:field_pece_license'
+              label: License
               label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
-                settings: {  }
-                third_party_settings: {  }
-            weight: 6
-            additional:
-              extra_field_plus_settings: {  }
-          3aabc6b7-6472-4cc8-a1cc-4c1473f16dad:
-            uuid: 3aabc6b7-6472-4cc8-a1cc-4c1473f16dad
-            region: second
-            configuration:
-              id: 'extra_field_block:node:pece_memo:extra_field_pece_annotations_see_annotations_link'
-              label: 'Link to see all related annotations'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                settings: {  }
-                third_party_settings: {  }
-            weight: 7
-            additional:
-              extra_field_plus_settings: {  }
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 4
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false

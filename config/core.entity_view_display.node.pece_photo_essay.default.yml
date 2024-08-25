@@ -5,12 +5,13 @@ dependencies:
   config:
     - field.field.node.pece_photo_essay.body
     - field.field.node.pece_photo_essay.field_ark_enabled
-    - field.field.node.pece_photo_essay.field_people_with_edit_access
+    - field.field.node.pece_photo_essay.field_cite_as
     - field.field.node.pece_photo_essay.field_groups_with_view_access
     - field.field.node.pece_photo_essay.field_pece_all_can_view
     - field.field.node.pece_photo_essay.field_pece_geolocation
     - field.field.node.pece_photo_essay.field_pece_license
     - field.field.node.pece_photo_essay.field_pece_project_ref
+    - field.field.node.pece_photo_essay.field_people_with_edit_access
     - field.field.node.pece_photo_essay.field_people_with_view_access
     - field.field.node.pece_photo_essay.field_photo_essay_items
     - field.field.node.pece_photo_essay.field_tags
@@ -21,6 +22,8 @@ dependencies:
     - geolocation
     - image
     - layout_builder
+    - layout_discovery
+    - layout_library
     - text
     - user
 third_party_settings:
@@ -29,55 +32,47 @@ third_party_settings:
     allow_custom: false
     sections:
       -
+        layout_id: layout_onecol
+        layout_settings:
+          label: header
+          context_mapping: {  }
+        components:
+          bd261edb-d6aa-4cd4-bd8d-b1f3eefc0435:
+            uuid: bd261edb-d6aa-4cd4-bd8d-b1f3eefc0435
+            region: content
+            configuration:
+              id: 'field_block:node:pece_photo_essay:title'
+              label: Title
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+      -
         layout_id: layout_twocol_section
         layout_settings:
           label: ''
           context_mapping: {  }
           column_widths: 75-25
         components:
-          64d3a370-173b-4bf9-8d61-2960146cdd69:
-            uuid: 64d3a370-173b-4bf9-8d61-2960146cdd69
-            region: first
+          7ab4dc7c-af98-402b-815e-06147180282a:
+            uuid: 7ab4dc7c-af98-402b-815e-06147180282a
+            region: second
             configuration:
-              id: 'field_block:node:pece_photo_essay:body'
-              label: Description
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-            weight: 0
-            additional: {  }
-          e8ae3e62-089d-4902-8e76-c2ffecc4fbb6:
-            uuid: e8ae3e62-089d-4902-8e76-c2ffecc4fbb6
-            region: first
-            configuration:
-              id: 'field_block:node:pece_photo_essay:field_photo_essay_items'
-              label: Items
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_revisions_entity_view
-                label: above
-                settings:
-                  view_mode: default
-                third_party_settings: {  }
-            weight: 1
-            additional: {  }
-          2cebd863-b298-454e-9c45-84da28b9bd4b:
-            uuid: 2cebd863-b298-454e-9c45-84da28b9bd4b
-            region: first
-            configuration:
-              id: 'field_block:node:pece_photo_essay:field_pece_license'
-              label: License
+              id: 'field_block:node:pece_photo_essay:field_people_with_edit_access'
+              label: 'People with edit access'
               label_display: '0'
               provider: layout_builder
               context_mapping:
@@ -88,26 +83,14 @@ third_party_settings:
                 label: above
                 settings:
                   link: true
-                third_party_settings: {  }
-            weight: 2
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 1
             additional: {  }
-          fa161b24-5f35-4740-b61d-79d4323b9f0a:
-            uuid: fa161b24-5f35-4740-b61d-79d4323b9f0a
-            region: first
-            configuration:
-              id: 'extra_field_block:node:pece_photo_essay:links'
-              label: Links
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                settings: {  }
-                third_party_settings: {  }
-            weight: 3
-            additional: {  }
-          e49518f9-3f7d-4c46-830e-43026bc12955:
-            uuid: e49518f9-3f7d-4c46-830e-43026bc12955
+          4b76e621-20c3-4120-8e3f-e579149f732a:
+            uuid: 4b76e621-20c3-4120-8e3f-e579149f732a
             region: second
             configuration:
               id: 'field_block:node:pece_photo_essay:field_thumbnail'
@@ -123,11 +106,60 @@ third_party_settings:
                 settings:
                   image_link: ''
                   image_style: ''
-                third_party_settings: {  }
+                  image_loading:
+                    attribute: lazy
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
             weight: 0
             additional: {  }
-          413c8d2d-2dc5-4b2a-8da5-bb3207f1e341:
-            uuid: 413c8d2d-2dc5-4b2a-8da5-bb3207f1e341
+          97e349b2-a3a0-44f8-bb6b-5016a30d093a:
+            uuid: 97e349b2-a3a0-44f8-bb6b-5016a30d093a
+            region: second
+            configuration:
+              id: 'field_block:node:pece_photo_essay:field_pece_license'
+              label: License
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 5
+            additional: {  }
+          85125088-04a8-4df9-b485-71372a3f71e9:
+            uuid: 85125088-04a8-4df9-b485-71372a3f71e9
+            region: second
+            configuration:
+              id: 'field_block:node:pece_photo_essay:field_cite_as'
+              label: 'Cite as'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 7
+            additional: {  }
+          b5c74e3d-b718-429a-9840-5a57b039ad8a:
+            uuid: b5c74e3d-b718-429a-9840-5a57b039ad8a
             region: second
             configuration:
               id: 'field_block:node:pece_photo_essay:field_tags'
@@ -142,95 +174,159 @@ third_party_settings:
                 label: above
                 settings:
                   link: true
-                third_party_settings: {  }
-            weight: 3
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 6
             additional: {  }
-          7012449c-0108-45f4-b28a-2c4f1c199531:
-            uuid: 7012449c-0108-45f4-b28a-2c4f1c199531
+          71d691fb-9de1-4152-b8cd-3636f5b14af4:
+            uuid: 71d691fb-9de1-4152-b8cd-3636f5b14af4
             region: second
             configuration:
-              id: 'field_block:node:pece_photo_essay:field_pece_geolocation'
-              label: Location
+              id: 'field_block:node:pece_photo_essay:field_groups_with_view_access'
+              label: 'Groups with view access'
               label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: geolocation_latlng
+                type: entity_reference_label
                 label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 4
+            additional: {  }
+          60977533-37b1-4e7d-a2e8-e73a077977a7:
+            uuid: 60977533-37b1-4e7d-a2e8-e73a077977a7
+            region: second
+            configuration:
+              id: 'extra_field_block:node:pece_photo_essay:extra_field_pece_annotations_annotate_button'
+              label: 'Annotate button'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 4
-            additional: {  }
-          925bd257-6680-4605-9a32-55dfbc8f3d8b:
-            uuid: 925bd257-6680-4605-9a32-55dfbc8f3d8b
-            region: content
+            weight: 8
+            additional:
+              extra_field_plus_settings: {  }
+          d27e3c9f-7595-47a9-b97c-7a9dc59e4c09:
+            uuid: d27e3c9f-7595-47a9-b97c-7a9dc59e4c09
+            region: second
             configuration:
-              id: 'field_block:node:pece_photo_essay:field_thumbnail'
+              id: 'extra_field_block:node:pece_photo_essay:extra_field_pece_annotations_see_annotations_link'
+              label: 'Link to see all related annotations'
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
               formatter:
-                type: image
+                settings: {  }
+                third_party_settings: {  }
+            weight: 9
+            additional:
+              extra_field_plus_settings: {  }
+          1c2907c1-a1af-4491-9b98-1a1546808bd7:
+            uuid: 1c2907c1-a1af-4491-9b98-1a1546808bd7
+            region: second
+            configuration:
+              id: 'field_block:node:pece_photo_essay:revision_timestamp'
+              label: 'Revision create time'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: timestamp
                 label: above
                 settings:
-                  image_link: ''
-                  image_style: ''
-                  image_loading:
-                    attribute: lazy
-                third_party_settings: {  }
+                  date_format: medium
+                  custom_date_format: ''
+                  timezone: ''
+                  tooltip:
+                    date_format: long
+                    custom_date_format: ''
+                  time_diff:
+                    enabled: false
+                    future_format: '@interval hence'
+                    past_format: '@interval ago'
+                    granularity: 2
+                    refresh: 60
+                    description: ''
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 3
+            additional: {  }
+          fa3aabda-5e1b-4a0f-b255-b0040c1bfe76:
+            uuid: fa3aabda-5e1b-4a0f-b255-b0040c1bfe76
+            region: first
+            configuration:
+              id: 'field_block:node:pece_photo_essay:uid'
+              label: 'Authored by'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
             weight: 0
             additional: {  }
-          f9e1e5c2-0e44-4d03-8881-7304c29d3172:
-            uuid: f9e1e5c2-0e44-4d03-8881-7304c29d3172
+          bca33ce7-35ee-4f3a-9a1f-aff24a5cbb0f:
+            uuid: bca33ce7-35ee-4f3a-9a1f-aff24a5cbb0f
             region: first
             configuration:
-              id: 'field_block:node:pece_photo_essay:field_groups_with_view_access'
+              id: 'field_block:node:pece_photo_essay:created'
+              label: 'Authored on'
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
-                type: entity_reference_label
+                type: timestamp
                 label: above
                 settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 4
-            additional: {  }
-          74671ef9-23bb-4cdd-b531-8a3f63c5cf67:
-            uuid: 74671ef9-23bb-4cdd-b531-8a3f63c5cf67
-            region: first
-            configuration:
-              id: 'field_block:node:pece_photo_essay:field_people_with_view_access'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 5
-            additional: {  }
-          44fa5628-b828-418f-9395-dba6ba202f20:
-            uuid: 44fa5628-b828-418f-9395-dba6ba202f20
-            region: first
-            configuration:
-              id: 'field_block:node:pece_photo_essay:field_people_with_edit_access'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 6
+                  date_format: medium
+                  custom_date_format: ''
+                  timezone: ''
+                  tooltip:
+                    date_format: long
+                    custom_date_format: ''
+                  time_diff:
+                    enabled: false
+                    future_format: '@interval hence'
+                    past_format: '@interval ago'
+                    granularity: 2
+                    refresh: 60
+                    description: ''
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 1
             additional: {  }
         third_party_settings: {  }
+  layout_library:
+    enable: false
 _core:
   default_config_hash: ZuzVWCgO_W_iehkfkdJmLPf9kpj4qteTeTxUW9hfMkM
 id: node.pece_photo_essay.default

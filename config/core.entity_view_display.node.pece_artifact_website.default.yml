@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_artifact_website.field_ark_enabled
     - field.field.node.pece_artifact_website.field_authors
+    - field.field.node.pece_artifact_website.field_bibliography
     - field.field.node.pece_artifact_website.field_cite_as
     - field.field.node.pece_artifact_website.field_created_date
     - field.field.node.pece_artifact_website.field_crit_commentary
@@ -20,7 +21,6 @@ dependencies:
     - field.field.node.pece_artifact_website.field_source
     - field.field.node.pece_artifact_website.field_tags
     - field.field.node.pece_artifact_website.field_use_fieldsite_local
-    - field.field.node.pece_artifact_website.field_bibliography
     - field.field.node.pece_artifact_website.field_website_url
     - node.type.pece_artifact_website
   module:
@@ -29,6 +29,7 @@ dependencies:
     - languagefield
     - layout_builder
     - layout_discovery
+    - layout_library
     - link
     - text
     - user
@@ -113,7 +114,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 5
+            weight: 6
             additional: {  }
           20d1efd8-59be-4199-95ab-dacbbff594a0:
             uuid: 20d1efd8-59be-4199-95ab-dacbbff594a0
@@ -132,7 +133,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 4
+            weight: 5
             additional: {  }
           6ac5489a-8f6d-4bd5-8bcf-d502b465fbda:
             uuid: 6ac5489a-8f6d-4bd5-8bcf-d502b465fbda
@@ -238,7 +239,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 6
+            weight: 7
             additional:
               extra_field_plus_settings: {  }
           c1689da5-7018-43a8-bbb7-ca668f138038:
@@ -254,7 +255,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 7
+            weight: 8
             additional:
               extra_field_plus_settings: {  }
           b86f9986-5612-4422-98ba-b5927c86d36c:
@@ -276,9 +277,34 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
+            weight: 4
+            additional: {  }
+          ea740909-61f4-45c9-98d6-418849fcfd1c:
+            uuid: ea740909-61f4-45c9-98d6-418849fcfd1c
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_website:field_created_date'
+              label: 'Created Date'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
             weight: 3
             additional: {  }
         third_party_settings: {  }
+  layout_library:
+    enable: false
 id: node.pece_artifact_website.default
 targetEntityType: node
 bundle: pece_artifact_website
