@@ -13,7 +13,7 @@ migration_tags:
 migration_group: pece
 label: 'User accounts'
 source:
-  plugin: d7_user
+  plugin: v1_user_source
 process:
   uid: uid
   name: name
@@ -37,10 +37,7 @@ process:
     source: language
     fallback_to_site_default: true
   init: init
-  roles:
-    plugin: migration_lookup
-    migration: d7_user_role
-    source: roles
+  roles: d7_merged_roles
   field_user_picture: field_user_picture
   field_zotero: field_zotero_username
 destination:
