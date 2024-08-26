@@ -161,8 +161,7 @@ process:
       default: null
   field_pece_all_can_view:
     plugin: default_value
-    source: permission_all_user_view
-    default_value: false
+    default_value: true
 destination:
   plugin: 'entity_complete:node'
   translations: true
