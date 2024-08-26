@@ -94,7 +94,14 @@ process:
     plugin: default_value
     source: field_ark_enabled
     default_value: null
-  field_pdf_artifact_document: field_pece_media_pdf
+  field_pdf_artifact_document:
+    plugin: sub_process
+    source: field_pece_media_pdf
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: v1_file
+        source: fid
   field_pece_all_can_view:
     plugin: default_value
     source: permission_all_user_view
