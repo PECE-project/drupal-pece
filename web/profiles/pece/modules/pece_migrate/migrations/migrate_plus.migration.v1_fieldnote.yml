@@ -108,4 +108,10 @@ process:
 destination:
   plugin: 'entity_complete:node'
   translations: true
-migration_dependencies: null
+migration_dependencies:
+  required:
+    - v1_user
+    - v1_taxonomy_term_authors
+    - v1_taxonomy_term_tags
+    - v1_fieldsite
+    - v1_project

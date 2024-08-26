@@ -81,4 +81,9 @@ process:
 destination:
   plugin: 'entity_complete:node'
   translations: true
-migration_dependencies: null
+migration_dependencies:
+  required:
+    - v1_user
+    - v1_timeline_item
+    - v1_project
+    - v1_taxonomy_term_tags

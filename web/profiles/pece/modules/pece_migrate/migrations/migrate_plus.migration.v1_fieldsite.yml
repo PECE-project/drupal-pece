@@ -72,4 +72,7 @@ process:
 destination:
   plugin: 'entity_complete:node'
   translations: true
-migration_dependencies: null
+migration_dependencies:
+  required:
+    - v1_user
+    - v1_project
