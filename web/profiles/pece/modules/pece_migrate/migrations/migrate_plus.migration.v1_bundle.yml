@@ -53,7 +53,7 @@ process:
   field_crit_commentary: field_pece_crit_commentary
   field_pece_artifacts: field_pece_artifacts
   field_created_date: field_pece_created
-  field_bundle_use_fieldsite_local: field_pece_use_fieldsite_local
+  field_use_fieldsite_local: field_pece_use_fieldsite_local
   field_fieldsite: field_pece_fieldsite
   field_location: field_pece_location
   field_pece_license: field_pece_license
@@ -62,14 +62,6 @@ process:
     plugin: default_value
     source: field_ark_enabled
     default_value: null
-  field_pbc_ref_user:
-    plugin: default_value
-    source: permission_by_user_view
-    default_value: null
-  field_pbc_ref_role:
-    plugin: default_value
-    source: permission_by_role_view
-    default_value: null
   field_pece_all_can_view:
     plugin: default_value
     source: permission_all_user_view
@@ -77,4 +69,20 @@ process:
 destination:
   plugin: 'entity_complete:node'
   translations: true
-migration_dependencies: null
+migration_dependencies:
+  required:
+    - v1_file
+    - v1_file_private
+    - v1_user
+    - v1_taxonomy_term_tags
+    - v1_taxonomy_term_authors
+    - v1_fieldsite
+    - v1_audio
+    - v1_fieldnote
+    - v1_image
+    - v1_pdf
+    - v1_text
+    - v1_video
+    - v1_website
+    - v1_tabular_data
+
