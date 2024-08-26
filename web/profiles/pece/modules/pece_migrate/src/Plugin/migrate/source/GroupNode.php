@@ -46,6 +46,9 @@ class GroupNode extends D7Node {
       ->fetchField();
 
     $managers = $this->getUsersByRoles($gid, self::GROUP_MANAGER_ROLES);
+    $owner = $row->getSourceProperty('node_uid');
+    array_push($managers, $owner);
+    $managers = array_unique($managers);
 
     // Query to get user IDs based on group membership.
     // For the case of members, we cannot build the data based on roles, since the member role is  implicit, and not actually present in the og_users_roles table at all
