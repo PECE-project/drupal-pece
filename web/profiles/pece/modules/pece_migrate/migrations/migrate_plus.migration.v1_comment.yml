@@ -1,0 +1,155 @@
+uuid: 23846626-4669-424e-8bde-e70e31c24eb4
+langcode: en
+status: true
+dependencies: {  }
+id: v1_comment
+class: Drupal\comment\Plugin\migrate\D7Comment
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - 'PECE v1'
+  - Content
+migration_group: pece
+label: Comments
+source:
+  plugin: d7_comment
+  constants:
+    entity_type: node
+process:
+  cid:
+    -
+      plugin: get
+      source: cid
+  pid:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: pid
+    -
+      plugin: migration_lookup
+      migration: v1_comment
+  entity_id:
+    -
+      plugin: migration_lookup
+      migration:
+        - v1_analytic
+        - v1_annotation
+        - v1_audio
+        - v1_bundle
+        - v1_fieldnote
+        - v1_image
+        - v1_pdf
+        - v1_tabular
+        - v1_text
+        - v1_video
+        - v1_website
+        - v1_essay
+        - v1_fieldsite
+        - v1_group
+        - v1_memo
+        - v1_photo_essay
+        - v1_project
+        - v1_sub_logic
+        - v1_timeline_essay
+      source: nid
+    -
+      plugin: node_complete_node_lookup
+    -
+      plugin: skip_on_empty
+      method: row
+  entity_type:
+    0:
+      plugin: get
+      source: constants/entity_type
+    profile:
+      plugin: static_map
+      map:
+        profile2: profile
+      bypass: true
+    1:
+      plugin: static_map
+      map:
+        field_collection_item: paragraph
+        paragraphs_item: paragraph
+      bypass: true
+  comment_type:
+    -
+      plugin: default_value
+      default_value: comment
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  field_name:
+    -
+      plugin: get
+      source: '@comment_type'
+  subject:
+    -
+      plugin: get
+      source: subject
+  uid:
+    -
+      plugin: get
+      source: uid
+  name:
+    -
+      plugin: get
+      source: name
+  mail:
+    -
+      plugin: get
+      source: mail
+  homepage:
+    -
+      plugin: get
+      source: homepage
+  hostname:
+    -
+      plugin: get
+      source: hostname
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: changed
+  status:
+    -
+      plugin: get
+      source: status
+  thread:
+    -
+      plugin: get
+      source: thread
+  comment_body:
+    -
+      plugin: get
+      source: comment_body
+destination:
+  plugin: 'entity:comment'
+migration_dependencies:
+  required:
+    - v1_analytic
+    - v1_annotation
+    - v1_audio
+    - v1_bundle
+    - v1_fieldnote
+    - v1_image
+    - v1_pdf
+    - v1_tabular
+    - v1_text
+    - v1_video
+    - v1_website
+    - v1_essay
+    - v1_fieldsite
+    - v1_group
+    - v1_memo
+    - v1_photo_essay
+    - v1_project
+    - v1_sub_logic
+    - v1_timeline_essay
