@@ -85,7 +85,11 @@ process:
       - 0
       - value
     default: ''
-  field_website_url: field_pece_website_url
+  field_website_url:
+    plugin: sub_process
+    source: field_pece_website_url
+    process:
+      uri: url
   field_tags:
     plugin: sub_process
     source: field_pece_tags
