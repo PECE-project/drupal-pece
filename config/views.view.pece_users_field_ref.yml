@@ -5,7 +5,6 @@ dependencies:
   config:
     - user.role.administrator
     - user.role.contributor
-    - user.role.researcher
   module:
     - user
 _core:
@@ -177,86 +176,6 @@ display:
       tags: {  }
   block_1:
     id: block_1
-    display_title: Researcher
-    display_plugin: block
-    position: 1
-    display_options:
-      filters:
-        status:
-          id: status
-          table: users_field_data
-          field: status
-          entity_type: user
-          entity_field: status
-          plugin_id: boolean
-          value: '1'
-          group: 1
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-        roles_target_id:
-          id: roles_target_id
-          table: user__roles
-          field: roles_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: user
-          entity_field: roles
-          plugin_id: user_roles
-          operator: or
-          value:
-            researcher: researcher
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      defaults:
-        filters: false
-        filter_groups: false
-      display_description: ''
-      display_extenders: {  }
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url.query_args
-        - user.permissions
-      tags: {  }
-  block_2:
-    id: block_2
     display_title: Contributor
     display_plugin: block
     position: 2
@@ -328,7 +247,10 @@ display:
         filters: false
         filter_groups: false
       display_description: ''
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -337,91 +259,8 @@ display:
         - url.query_args
         - user.permissions
       tags: {  }
-  block_3:
-    id: block_3
-    display_title: 'Contributor & Researcher'
-    display_plugin: block
-    position: 3
-    display_options:
-      title: 'Contributor & Researcher'
-      filters:
-        status:
-          id: status
-          table: users_field_data
-          field: status
-          entity_type: user
-          entity_field: status
-          plugin_id: boolean
-          value: '1'
-          group: 1
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-        roles_target_id:
-          id: roles_target_id
-          table: user__roles
-          field: roles_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: user
-          entity_field: roles
-          plugin_id: user_roles
-          operator: or
-          value:
-            contributor: contributor
-            researcher: researcher
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      defaults:
-        title: false
-        filters: false
-        filter_groups: false
-      display_description: ''
-      display_extenders: {  }
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url.query_args
-        - user.permissions
-      tags: {  }
-  block_4:
-    id: block_4
+  block_2:
+    id: block_2
     display_title: 'All Users'
     display_plugin: block
     position: 4
@@ -453,9 +292,8 @@ display:
           plugin_id: user_roles
           operator: or
           value:
-            contributor: contributor
-            researcher: researcher
             administrator: administrator
+            contributor: contributor
           group: 1
           exposed: false
           expose:
@@ -495,7 +333,10 @@ display:
         filters: false
         filter_groups: false
       display_description: ''
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
     cache_metadata:
       max-age: -1
       contexts:
