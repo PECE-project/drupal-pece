@@ -71,15 +71,15 @@ process:
     source: field_pece_authors
     process:
       target_id: tid
-  # field_created_date:
-  #   plugin: sub_process
-  #   source: field_pece_created
-  #   process:
-  #     value:
-  #       plugin: format_date
-  #       from_format: 'Y-m-d H:i:s'
-  #       to_format: Y-m-d
-  #       source: value
+  field_created_date:
+    plugin: sub_process
+    source: field_pece_created
+    process:
+      value:
+        plugin: format_date
+        from_format: 'Y-m-d H:i:s'
+        to_format: Y-m-d
+        source: value
   field_language: field_pece_language
   field_use_fieldsite_local: field_pece_use_fieldsite_local
   field_fieldsite: field_pece_fieldsite

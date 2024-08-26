@@ -27,16 +27,16 @@ process:
   #   plugin: default_value
   #   default_value: 0
   #   path/alias: alias
-  # description/format:
-  #   plugin: default_value
-  #   default_value: basic_html
-  # description/value:
-  #   plugin: extract
-  #   source: body
-  #   index:
-  #     - 0
-  #     - value
-  #   default: ''
+  description/format:
+    plugin: default_value
+    default_value: basic_html
+  description/value:
+    plugin: extract
+    source: body
+    index:
+      - 0
+      - value
+    default: ''
   # field_pece_geolocation: locations
   field_substantive_logic: field_pece_substantive_logic
   field_group_members: d7_group_members
