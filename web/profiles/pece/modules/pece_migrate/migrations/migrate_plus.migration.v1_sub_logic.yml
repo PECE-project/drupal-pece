@@ -78,16 +78,16 @@ process:
         - 0
         - summary
       default: ''
-  # field_basic_image_image:
-  #   -
-  #     plugin: sub_process
-  #     source: field_basic_image_image
-  #     process:
-  #       target_id: fid
-  #       alt: alt
-  #       title: title
-  #       width: width
-  #       height: height
+  field_thumbnail:
+    -
+      plugin: sub_process
+      source: field_basic_image_image
+      process:
+        target_id: fid
+        alt: alt
+        title: title
+        width: width
+        height: height
   field_people_with_edit_access: field_pece_contributors
   field_subst_logic_image_citation:
     -

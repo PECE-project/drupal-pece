@@ -95,7 +95,14 @@ process:
     source: field_ark_enabled
     default_value: null
   field_duration: field_pece_media_duration
-  field_video_artifact_video: field_pece_media_video
+  field_video_artifact_video:
+    plugin: sub_process
+    source: field_pece_media_video
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: v1_file
+        source: fid
   field_pece_all_can_view:
     plugin: default_value
     source: permission_all_user_view

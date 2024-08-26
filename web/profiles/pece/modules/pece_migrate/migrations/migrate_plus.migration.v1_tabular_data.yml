@@ -89,8 +89,22 @@ process:
       - 0
       - value
     default: ''
-  field_tabular_media: field_pece_media_tabular
-  field_tabular_attachment: field_pece_media_tablr_attach
+  field_tabular_media:
+    plugin: sub_process
+    source: field_pece_media_tabular
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: v1_file
+        source: fid
+  field_tabular_attachment:
+    plugin: sub_process
+    source: field_pece_media_tablr_attach
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: v1_file
+        source: fid
   field_tags:
     plugin: sub_process
     source: field_pece_tags
