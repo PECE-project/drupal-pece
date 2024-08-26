@@ -19,8 +19,6 @@ use Exception;
  */
 class Node extends D7Node {
 
-  const ROLE_RESEARCHER = 'researcher';
-  const ROLE_CONTRIBUTOR = 'contributor';
   const PERMISSION_RESTRICTED = 'restricted';
   const PERMISSION_PRIVATE = 'private';
   const PERMISSION_OPEN = 'open';
@@ -38,10 +36,8 @@ class Node extends D7Node {
    */
   public function fields() {
     $fields = parent::fields() + ['alias' => $this->t('Path alias')];
-    $fields += ['permission_by_group_view' => $this->t('Permission by group')];
-    $fields += ['permission_by_user_view' => $this->t('Permission by user')];
-    $fields += ['permission_by_role_view' => $this->t('Permission by role')];
     $fields += ['permission_all_user_view' => $this->t('Permission for all users')];
+    $fields += ['groups_with_view_access' => $this->t('Groups with view access')];
     return $fields;
   }
 
@@ -66,36 +62,13 @@ class Node extends D7Node {
       ->condition('fdfp.entity_id', $nid);
     $permission = $query->execute()->fetchField();
     $groups = $this->getGroupsByContent($nid);
-
-    if ($permission == self::PERMISSION_RESTRICTED) {
-      // Check if content belongs to any group
-      if (count($groups) == 0) {
-        // Set permission by role Researchers (only owner and researchers can view).
-        $this->setPermissionByRole($row, self::ROLE_RESEARCHER);
-      }
-      else {
-        // Check group access (public = 0, private = 1)
-        $groupAccess = $this->checkGroupsAccess($groups);
-        // Get group content visibility
-        $groupContentVisibility = $this->checkGroupsContentVisibility($groups);
-
-        if ($groupAccess == 0) {
-          if ($groupContentVisibility == 2)
-            // Set permission by group (only group members that are researchers can view).
-            $this->setPermissionByGroup($row, $nid);
-          // Set permission by role Researchers
-          $this->setPermissionByRole($row, self::ROLE_RESEARCHER);
-        }
-
-        if ($groupAccess == 1) {
-          if ($groupContentVisibility == 0 || $groupContentVisibility == 2)
-            // Set permission by group (only group members that are researchers can view).
-            $this->setPermissionByGroup($row, $nid);
-          // Set permission by role Researchers
-          $this->setPermissionByRole($row, self::ROLE_RESEARCHER);
-        }
-      }
-    }
+    // $group_terms = [];
+    // foreach ($groups as $key => $item) {
+    //   $group_terms[] = [
+    //     'id' => $item
+    //   ];
+    // }
+    $row->setSourceProperty('groups_with_view_access', $groups);
 
     if ($permission == self::PERMISSION_OPEN) {
       // Check if content belongs to any group
@@ -105,22 +78,13 @@ class Node extends D7Node {
         // Get group content visibility
         $groupContentVisibility = $this->checkGroupsContentVisibility($groups);
 
-        if ($groupAccess == 0) {
-          if ($groupContentVisibility == 2)
-            // Only group members can see the content
-            $this->setPermissionByGroup($row, $nid);
-          else
-            // All users can see the content
-            $row->setSourceProperty('permission_all_user_view', true);
+        if ($groupAccess == 0 && $groupContentVisibility !== 2) {
+          // All users can see the content
+          $row->setSourceProperty('permission_all_user_view', true);
         }
 
-        if ($groupAccess == 1) {
-          if ($groupContentVisibility == 0 || $groupContentVisibility == 2)
-            // Only group members can see the content
-            $this->setPermissionByGroup($row, $nid);
-          else
-            // All users can see the content
-            $row->setSourceProperty('permission_all_user_view', true);
+        if ($groupAccess == 1 && $groupContentVisibility == 1) {
+          $row->setSourceProperty('permission_all_user_view', true);
         }
       }
       else
@@ -128,85 +92,7 @@ class Node extends D7Node {
         $row->setSourceProperty('permission_all_user_view', true);
     }
 
-    // Only owner can see content
-    if ($permission == self::PERMISSION_PRIVATE) {
-      $query = $this->select('node')
-        ->fields('node', ['uid'])
-        ->condition('node.nid', $nid);
-      $owner = $query->execute()->fetchField();
-      $this->permissionByUserView[] = [
-        'target_id' => $owner,
-        'grant_view' => 1,
-        'grant_update' => 1,
-        'grant_delete' => 1,
-      ];
-    }
-
-    // Set permission for contributing user
-    $this->setPermissionContributor($row, $nid);
-
-    // Set the permission in the row.
-    $row->setSourceProperty('permission_by_user_view', $this->permissionByUserView);
-    $this->permissionByUserView = [];
-
     return parent::prepareRow($row);
-  }
-
-  /**
-   * Add permission for group.
-   * @throws Exception
-   */
-  private function setPermissionByGroup(&$row, $nid) {
-    $query = $this->select('og_membership', 'ogm')
-      ->fields('ogm', ['gid']);
-    $query->condition('ogm.etid', $nid);
-    $permissionByGroupView = $query->execute()->fetchCol();
-    foreach ($permissionByGroupView as $key => $item) {
-      $permissionByGroupView[$key] = [
-        'target_id' => $item,
-        'grant_view' => 1,
-        'grant_update' => 0,
-        'grant_delete' => 0,
-      ];
-    }
-    // Set the permission in the row.
-    $row->setSourceProperty('permission_by_group_view', $permissionByGroupView);
-  }
-
-  /**
-   * Add permission for contributors.
-   * @throws Exception
-   */
-  public function setPermissionContributor(&$row, $nid) {
-    $query = $this->select('field_data_field_pece_contributors', 'contributors')
-      ->fields('contributors', ['field_pece_contributors_target_id']);
-    $query->condition('contributors.entity_id', $nid);
-    $users = $query->execute()->fetchCol();
-    foreach ($users as $key => $item) {
-      if (array_search($item, array_column($this->permissionByUserView, 'target_id')) === false) {
-        $this->permissionByUserView[] = [
-          'target_id' => $item,
-          'grant_view' => 1,
-          'grant_update' => 1,
-          'grant_delete' => 0,
-        ];
-      }
-    }
-  }
-
-  /**
-   * Add permission by role
-   * @throws Exception
-   */
-  public function setPermissionByRole(&$row, $role) {
-    $permissionByRoleView = [
-      'target_id' => $role,
-      'grant_view' => 1,
-      'grant_update' => 0,
-      'grant_delete' => 0,
-    ];
-    // Set the permission in the row.
-    $row->setSourceProperty('permission_by_role_view', $permissionByRoleView);
   }
 
   /**
