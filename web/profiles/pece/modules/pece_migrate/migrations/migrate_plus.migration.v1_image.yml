@@ -112,7 +112,14 @@ process:
       - 0
       - value
     default: ''
-  field_image_artifact_image: field_pece_media_image
+  field_image_artifact_image:
+    plugin: sub_process
+    source: field_pece_media_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: v1_file
+        source: fid
 destination:
   plugin: 'entity_complete:node'
   translations: true
