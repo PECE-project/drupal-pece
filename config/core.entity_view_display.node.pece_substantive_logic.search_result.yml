@@ -11,11 +11,12 @@ dependencies:
     - field.field.node.pece_substantive_logic.field_tags
     - field.field.node.pece_substantive_logic.field_thumbnail
     - field.field.node.pece_substantive_logic.field_uri
+    - image.style.thumbnail
     - node.type.pece_substantive_logic
   module:
+    - entity_form_field_label
     - image
     - layout_builder
-    - link
     - text
     - user
 third_party_settings:
@@ -30,76 +31,39 @@ bundle: pece_substantive_logic
 mode: search_result
 content:
   body:
-    type: text_default
+    type: text_summary_or_trimmed
     label: hidden
-    settings: {  }
+    settings:
+      trim_length: 600
     third_party_settings: {  }
     weight: 101
     region: content
-  field_pece_all_can_view:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 109
-    region: first
-  field_people_with_edit_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 110
-    region: first
-  field_subst_logic_image_citation:
-    type: link
-    label: above
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    weight: 103
-    region: content
-  field_tags:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 107
-    region: content
   field_thumbnail:
     type: image
-    label: above
+    label: hidden
     settings:
-      image_link: ''
-      image_style: ''
+      image_link: content
+      image_style: thumbnail
       image_loading:
         attribute: lazy
-    third_party_settings: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
     weight: 108
-    region: content
-  field_uri:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 102
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 200
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  field_pece_all_can_view: true
+  field_people_with_edit_access: true
+  field_subst_logic_image_citation: true
+  field_tags: true
+  field_uri: true
   langcode: true
   search_api_excerpt: true

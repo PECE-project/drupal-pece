@@ -25,10 +25,8 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_use_fieldsite_local
     - node.type.pece_artifact_pdf
   module:
-    - address
     - datetime
     - file
-    - languagefield
     - layout_builder
     - layout_library
     - user
@@ -43,147 +41,30 @@ targetEntityType: node
 bundle: pece_artifact_pdf
 mode: search_result
 content:
-  field_ark_enabled:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 125
-    region: content
   field_authors:
     type: entity_reference_label
-    label: above
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
     weight: 105
     region: content
-  field_bibliography:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 124
-    region: content
   field_created_date:
     type: datetime_default
-    label: above
+    label: inline
     settings:
       timezone_override: ''
       format_type: medium
     third_party_settings: {  }
     weight: 121
     region: content
-  field_crit_commentary:
-    type: basic_string
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 106
-    region: content
-  field_fieldsite:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 107
-    region: content
-  field_groups_with_view_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 128
-    region: content
-  field_language:
-    type: languagefield_default
-    label: above
-    settings:
-      link_to_entity: 0
-      format:
-        name: name
-    third_party_settings: {  }
-    weight: 108
-    region: content
-  field_location:
-    type: address_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 109
-    region: content
   field_pdf_artifact_document:
     type: file_default
-    label: above
+    label: hidden
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
     weight: 129
-    region: content
-  field_pece_all_can_view:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 123
-    region: content
-  field_pece_license:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 117
-    region: content
-  field_pece_project_ref:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 116
-    region: content
-  field_people_with_edit_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 127
-    region: content
-  field_people_with_view_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 126
-    region: content
-  field_source:
-    type: basic_string
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 111
-    region: content
-  field_use_fieldsite_local:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 112
     region: content
   links:
     settings: {  }
@@ -193,8 +74,22 @@ content:
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  field_ark_enabled: true
+  field_bibliography: true
   field_cite_as: true
+  field_crit_commentary: true
+  field_fieldsite: true
+  field_groups_with_view_access: true
+  field_language: true
+  field_location: true
+  field_pece_all_can_view: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
+  field_source: true
   field_tags: true
+  field_use_fieldsite_local: true
   langcode: true
   og_audience: true
   search_api_excerpt: true

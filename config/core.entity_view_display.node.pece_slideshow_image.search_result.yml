@@ -27,9 +27,10 @@ bundle: pece_slideshow_image
 mode: search_result
 content:
   field_pece_description:
-    type: text_default
-    label: above
-    settings: {  }
+    type: text_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
     third_party_settings: {  }
     weight: 103
     region: content
@@ -59,7 +60,7 @@ content:
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 200
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true

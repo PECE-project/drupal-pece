@@ -22,11 +22,9 @@ dependencies:
     - field.field.node.pece_artifact_bundle.field_use_fieldsite_local
     - node.type.pece_artifact_bundle
   module:
-    - address
     - datetime
     - layout_builder
     - layout_library
-    - text
     - user
 third_party_settings:
   layout_builder:
@@ -39,19 +37,9 @@ targetEntityType: node
 bundle: pece_artifact_bundle
 mode: search_result
 content:
-  field_ark_enabled:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 114
-    region: content
   field_authors:
     type: entity_reference_label
-    label: above
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
@@ -59,52 +47,12 @@ content:
     region: content
   field_created_date:
     type: datetime_default
-    label: above
+    label: inline
     settings:
       timezone_override: ''
       format_type: medium
     third_party_settings: {  }
     weight: 121
-    region: content
-  field_crit_commentary:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 123
-    region: first
-  field_fieldsite:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 105
-    region: content
-  field_groups_with_view_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 126
-    region: first
-  field_location:
-    type: address_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 107
-    region: content
-  field_pece_all_can_view:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 122
     region: content
   field_pece_artifacts:
     type: entity_reference_label
@@ -114,58 +62,27 @@ content:
     third_party_settings: {  }
     weight: 120
     region: content
-  field_pece_license:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 118
-    region: content
-  field_pece_project_ref:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 112
-    region: content
-  field_people_with_edit_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 125
-    region: first
-  field_people_with_view_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 124
-    region: first
-  field_use_fieldsite_local:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 111
-    region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 500
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  field_ark_enabled: true
   field_cite_as: true
+  field_crit_commentary: true
+  field_fieldsite: true
+  field_groups_with_view_access: true
+  field_location: true
+  field_pece_all_can_view: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
   field_tags: true
+  field_use_fieldsite_local: true
   langcode: true
   og_audience: true
   search_api_excerpt: true
