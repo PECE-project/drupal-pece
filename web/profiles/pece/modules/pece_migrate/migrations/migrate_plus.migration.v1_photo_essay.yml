@@ -77,34 +77,17 @@ process:
         - fid
       default: null
   field_photo_essay_items:
-    -
-      plugin: sub_process
-      source: field_pece_photo_essay_items
-      process:
-        target_id:
-          -
-            plugin: migration_lookup
-            migration: v1_photo_item
-            source: target_id
-            no_stub: TRUE
-          -
-            plugin: skip_on_empty
-            method: process
-          -
-            plugin: extract
-            index: [0]
-        target_revision_id:
-          -
-            plugin: migration_lookup
-            migration: v1_photo_item
-            source: target_id
-            no_stub: TRUE
-          -
-            plugin: skip_on_empty
-            method: process
-          -
-            plugin: extract
-            index: [1]
+  field_photo_essay_items:
+    plugin: sub_process
+    source: field_pece_photo_essay_items
+    process:
+      _paragraph_lookup:
+        plugin: migration_lookup
+        migration: v1_photo_item
+        source: target_id
+        no_stub: TRUE
+      target_id: '@_paragraph_lookup/0'
+      target_revision_id: '@_paragraph_lookup/1'
   field_pece_geolocation: locations
   field_pece_license: field_pece_license
   field_ark_enabled:
