@@ -1,0 +1,27 @@
+uuid: edfafa1d-99cf-42da-bd2e-f5d250af8fc6
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: temporary_fixes_to_be_changed_in_the_files
+label: 'Temporary fixes to be changed in the files'
+code: |-
+  /* TODO change in themes/custom/peceful/skins/default/scss/main.scss */
+  .block-configurable-views-filter-block-blocksearch-page .form-actions {
+    width: 25%;
+  }
+
+  /* this *is* in css/bulma.css but maybe not anymore in the one we build on our own */
+  .has-text-centered {
+    text-align: center !important;
+  }
+media: all
+preprocess: true
+conditions:
+  current_theme:
+    id: current_theme
+    negate: false
+    theme: peceful
+contexts: {  }
+conditions_require_all: true
