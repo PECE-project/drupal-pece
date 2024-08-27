@@ -1,0 +1,46 @@
+uuid: f60d1342-777f-415b-9c75-450a7ef97363
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.pece_analytic.field_analytic_question_set
+    - field.field.node.pece_analytic.field_ark_enabled
+    - field.field.node.pece_analytic.field_pece_geolocation
+    - field.field.node.pece_analytic.field_tags
+    - node.type.pece_analytic
+  module:
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: Esl4KeTzB4pQNNUlfS9dqYnMj92sMJptrRaJqYQVFJI
+id: node.pece_analytic.search_result
+targetEntityType: node
+bundle: pece_analytic
+mode: search_result
+content:
+  field_analytic_question_set:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 20
+    region: content
+hidden:
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  field_ark_enabled: true
+  field_pece_geolocation: true
+  field_tags: true
+  langcode: true
+  search_api_excerpt: true

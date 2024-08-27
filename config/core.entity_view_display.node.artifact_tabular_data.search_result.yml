@@ -1,0 +1,77 @@
+uuid: 452acb10-bb7d-429c-82d8-ce2476c2f1e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.artifact_tabular_data.field_ark_enabled
+    - field.field.node.artifact_tabular_data.field_authors
+    - field.field.node.artifact_tabular_data.field_cite_as
+    - field.field.node.artifact_tabular_data.field_created_date
+    - field.field.node.artifact_tabular_data.field_crit_commentary
+    - field.field.node.artifact_tabular_data.field_fieldsite
+    - field.field.node.artifact_tabular_data.field_groups_with_view_access
+    - field.field.node.artifact_tabular_data.field_language
+    - field.field.node.artifact_tabular_data.field_location
+    - field.field.node.artifact_tabular_data.field_pece_all_can_view
+    - field.field.node.artifact_tabular_data.field_pece_license
+    - field.field.node.artifact_tabular_data.field_pece_project_ref
+    - field.field.node.artifact_tabular_data.field_people_with_edit_access
+    - field.field.node.artifact_tabular_data.field_people_with_view_access
+    - field.field.node.artifact_tabular_data.field_source
+    - field.field.node.artifact_tabular_data.field_tabular_attachment
+    - field.field.node.artifact_tabular_data.field_tabular_media
+    - field.field.node.artifact_tabular_data.field_tags
+    - field.field.node.artifact_tabular_data.field_use_fieldsite_local
+    - node.type.artifact_tabular_data
+  module:
+    - file
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: ZYRbvgpK73gU2ZYpD36sh0tA8YW5ptCG7V34MwKdSpg
+id: node.artifact_tabular_data.search_result
+targetEntityType: node
+bundle: artifact_tabular_data
+mode: search_result
+content:
+  field_tabular_media:
+    type: file_default
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 117
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  field_ark_enabled: true
+  field_authors: true
+  field_cite_as: true
+  field_created_date: true
+  field_crit_commentary: true
+  field_fieldsite: true
+  field_groups_with_view_access: true
+  field_language: true
+  field_location: true
+  field_pece_all_can_view: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
+  field_source: true
+  field_tabular_attachment: true
+  field_tags: true
+  field_use_fieldsite_local: true
+  langcode: true
+  search_api_excerpt: true

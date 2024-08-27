@@ -1,0 +1,54 @@
+uuid: d96ce895-5623-46c3-b804-740df621d1a0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.page.body
+    - field.field.node.page.field_body_paragraph
+    - node.type.page
+  module:
+    - layout_builder
+    - layout_library
+    - paragraphs
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_library:
+    enable: false
+_core:
+  default_config_hash: iyxf06gHOu8lYj3A9fhTyN3PSRQU5KSzPya2YElM5tE
+id: node.page.search_result
+targetEntityType: node
+bundle: page
+mode: search_result
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_body_paragraph:
+    type: paragraph_summary
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  langcode: true
+  layout_builder__layout: true
+  search_api_excerpt: true
