@@ -3,10 +3,19 @@ langcode: en
 status: true
 dependencies:
   module:
+    - menu_ui
     - type_tray
 third_party_settings:
   type_tray:
+    type_category: _none
+    type_thumbnail: ''
+    type_icon: ''
+    type_description: ''
     existing_nodes_link_text: 'View existing <em class="placeholder">PECE Essay</em> content'
+    type_weight: 0
+  menu_ui:
+    available_menus: {  }
+    parent: ''
 _core:
   default_config_hash: vjJUcnavZHrqxjSLYzZcE8EdwskHyy4vlLN9Dy84QUo
 name: 'PECE Essay'
@@ -14,5 +23,5 @@ type: pece_essay
 description: null
 help: null
 new_revision: true
-preview_mode: 1
-display_submitted: true
+preview_mode: 0
+display_submitted: false

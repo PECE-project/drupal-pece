@@ -1,0 +1,23 @@
+uuid: 7f9c99c0-910b-48ca-8add-7331a1a575c1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: intro_page
+label: 'Introduction page'
+type: 'canonical_entities:node'
+pattern: /%/intro
+view_mode: intro_page
+selection_criteria:
+  1897f598-5659-47f9-95e2-6d1e166a4617:
+    id: 'entity_bundle:node'
+    bundles:
+      pece_essay: pece_essay
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 1897f598-5659-47f9-95e2-6d1e166a4617
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,144 @@
+uuid: 26c95ea8-8040-4c5c-9c9e-d5e18cdb87ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.intro_page
+    - field.field.node.pece_essay.body
+    - field.field.node.pece_essay.field_ark_enabled
+    - field.field.node.pece_essay.field_cite_as
+    - field.field.node.pece_essay.field_essay_contents
+    - field.field.node.pece_essay.field_groups_with_view_access
+    - field.field.node.pece_essay.field_pece_all_can_view
+    - field.field.node.pece_essay.field_pece_license
+    - field.field.node.pece_essay.field_pece_project_ref
+    - field.field.node.pece_essay.field_people_with_edit_access
+    - field.field.node.pece_essay.field_people_with_view_access
+    - field.field.node.pece_essay.field_tags
+    - field.field.node.pece_essay.field_thumbnail
+    - field.field.node.pece_essay.layout_builder__layout
+    - node.type.pece_essay
+  module:
+    - entity_reference_revisions
+    - image
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: HMSXo2f0tj9lPu_qSfMVAOMgO9tTZLm53p6zRWL1WgM
+id: node.pece_essay.intro_page
+targetEntityType: node
+bundle: pece_essay
+mode: intro_page
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_ark_enabled:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 114
+    region: content
+  field_essay_contents:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  field_groups_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 117
+    region: first
+  field_pece_all_can_view:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 116
+    region: content
+  field_pece_license:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 115
+    region: content
+  field_pece_project_ref:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 113
+    region: content
+  field_people_with_edit_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 119
+    region: first
+  field_people_with_view_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 118
+    region: first
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_thumbnail:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  field_cite_as: true
+  langcode: true
+  layout_builder__layout: true
+  search_api_excerpt: true
