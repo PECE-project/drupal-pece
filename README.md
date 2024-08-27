@@ -52,13 +52,21 @@ ddev content-import-all
 
 To update Drupal core and contributed modules, make sure your configuration is clean (exported and committed, or imported from an up-to-date and clean git repository) and then run:
 
-```
+```shell
 ddev composer update
 ddev drush -y updb
 ddev drush -y cex
 ```
 
 And commit any updates Drupal made to configuration as part of the updates (there may be no update hooks that are run, and even if there are some, they may not change configuration.)
+
+## Importing Drupal 7 database to work on migration
+
+```shell
+ddev import-db --database=sts7 --file=backups/CFE_20240825b.sql.gz
+```
+
+(Change that filename to match the backup you are using, the key info here is targeting the database.)
 
 ### Scaffolding files
 
