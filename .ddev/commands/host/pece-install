@@ -1,0 +1,6 @@
+#!/bin/bash
+
+git pull
+ddev composer install
+ddev drush -y si pece --existing-config
+ddev content-import-all
