@@ -30,14 +30,13 @@ You will also need to put your public key on your profile on https://git.drupalc
 git clone git@github.com:PECE-project/drupal-pece.git --branch 2.x
 cd drupal-pece
 ddev pece-install
-ddev content-import-all
 ```
 
-Note that the "[warning] … was not found" messages are addressed by the necessarily later `content-import-all` step.
+Note that the "[warning] … was not found" messages are addressed by the necessarily later `content-import-all` step (which is run for you in `pece-install`).
 
 ## Usage
 
-Those last two steps of installation can be re-run to do a **re-**install of PECE.
+The `ddev pece-install` line can be re-run to do a **re-**installation of PECE.
 This will wipe out any content and configuration you have.
 
 Broken down into the component steps, get up to speed (destructively) with other developers:
