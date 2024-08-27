@@ -5,7 +5,6 @@ dependencies:
   config:
     - views.view.search
   module:
-    - block_class
     - configurable_views_filter_block
     - system
   theme:
@@ -28,6 +27,7 @@ settings:
   no_reset: true
   no_sort: false
   no_pager: false
+  no_submit: false
 visibility:
   request_path:
     id: request_path
