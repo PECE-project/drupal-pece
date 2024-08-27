@@ -73,7 +73,35 @@ process:
     source: field_pece_project_ref
     default_value: null
   field_pece_license: field_pece_license
-  field_timeline_essay_items: field_pece_timeline_essay_items
+  field_timeline_essay_items:
+    -
+      plugin: sub_process
+      source: field_pece_timeline_essay_items
+      process:
+        target_id:
+          -
+            plugin: migration_lookup
+            migration: v1_timeline_item
+            source: target_id
+            no_stub: TRUE
+          -
+            plugin: skip_on_empty
+            method: process
+          -
+            plugin: extract
+            index: [0]
+        target_revision_id:
+          -
+            plugin: migration_lookup
+            migration: v1_timeline_item
+            source: target_id
+            no_stub: TRUE
+          -
+            plugin: skip_on_empty
+            method: process
+          -
+            plugin: extract
+            index: [1]
   field_pece_all_can_view:
     plugin: default_value
     source: permission_all_user_view
