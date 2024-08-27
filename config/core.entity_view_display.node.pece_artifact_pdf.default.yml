@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.pece_artifact_pdf.field_ark_enabled
     - field.field.node.pece_artifact_pdf.field_authors
+    - field.field.node.pece_artifact_pdf.field_bibliography
     - field.field.node.pece_artifact_pdf.field_cite_as
     - field.field.node.pece_artifact_pdf.field_created_date
     - field.field.node.pece_artifact_pdf.field_crit_commentary
@@ -13,7 +14,6 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_language
     - field.field.node.pece_artifact_pdf.field_location
     - field.field.node.pece_artifact_pdf.field_pdf_artifact_document
-    - field.field.node.pece_artifact_pdf.field_bibliography
     - field.field.node.pece_artifact_pdf.field_pece_all_can_view
     - field.field.node.pece_artifact_pdf.field_pece_license
     - field.field.node.pece_artifact_pdf.field_pece_project_ref
@@ -85,10 +85,16 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: file_default
-                label: above
+                type: pdf_default
+                label: hidden
                 settings:
-                  use_description_as_link_text: true
+                  keep_pdfjs: 0
+                  width: 100%
+                  height: ''
+                  page: ''
+                  zoom: ''
+                  custom_zoom: ''
+                  pagemode: ''
                 third_party_settings:
                   entity_form_field_label:
                     new_label: ''
