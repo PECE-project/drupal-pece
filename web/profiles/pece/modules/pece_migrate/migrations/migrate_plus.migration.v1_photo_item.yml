@@ -18,12 +18,20 @@ source:
   entity_type: pece_photo_essay_item
   bundle: pece_photo_essay_item
 process:
-  field_title: title
-  field_description: field_description
+  field_pece_description/format:
+    plugin: default_value
+    default_value: basic_html
+  field_pece_description/value:
+    plugin: extract
+    source: field_description
+    index:
+      - 0
+      - value
+    default: ''
   field_pece_image_artifact: field_image_artifact
 destination:
   plugin: 'entity_reference_revisions:paragraph'
-  default_bundle: pece_photo_essay_item
+  default_bundle: paragraph_photo_essay_item
 migration_dependencies:
   required:
     - v1_image
