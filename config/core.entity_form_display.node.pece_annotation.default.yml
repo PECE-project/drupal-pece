@@ -6,19 +6,21 @@ dependencies:
     - field.field.node.pece_annotation.body
     - field.field.node.pece_annotation.field_annotation_analytic
     - field.field.node.pece_annotation.field_annotation_artifact
-    - field.field.node.pece_annotation.field_tags
     - field.field.node.pece_annotation.field_ark_enabled
-    - field.field.node.pece_annotation.field_people_with_edit_access
     - field.field.node.pece_annotation.field_groups_with_view_access
     - field.field.node.pece_annotation.field_pece_all_can_view
     - field.field.node.pece_annotation.field_pece_geolocation
     - field.field.node.pece_annotation.field_pece_license
+    - field.field.node.pece_annotation.field_people_with_edit_access
     - field.field.node.pece_annotation.field_people_with_view_access
+    - field.field.node.pece_annotation.field_tags
     - node.type.pece_annotation
   module:
+    - entity_form_field_label
     - field_group
     - geolocation
     - path
+    - readonly_field_widget
     - text
 third_party_settings:
   field_group:
@@ -72,15 +74,22 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_annotation_artifact:
-    type: entity_reference_autocomplete
+    type: readonly_field_widget
     weight: 2
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+      label: above
+      formatter_type: entity_reference_label
+      formatter_settings:
+        entity_reference_entity_view:
+          view_mode: default
+        entity_reference_label:
+          link: false
+      show_description: false
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
   field_ark_enabled:
     type: boolean_checkbox
     weight: 13
