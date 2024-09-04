@@ -30,6 +30,18 @@
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
+        "mozilla-pdf": {
+            "type": "package",
+            "package": {
+                "name": "mozilla/pdf.js",
+                "version": "2.6.347",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/mozilla/pdf.js/releases/download/v2.6.347/pdfjs-2.6.347-dist.zip",
+                    "type": "zip"
+                }
+            }
+        },
         "assets": {
             "type": "composer",
             "url": "https://asset-packagist.org"
@@ -137,6 +149,7 @@
         "drupal/views_infinite_scroll": "^2.0",
         "drupal/workflow": "^1.4",
         "drush/drush": "*",
+        "mozilla/pdf.js": "*",
         "npm-asset/blazy": "^1.8",
         "npm-asset/splidejs--splide": "^4.1",
         "oomphinc/composer-installers-extender": "~1.0 || ~2.0"
