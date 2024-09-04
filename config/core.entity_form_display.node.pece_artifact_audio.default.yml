@@ -96,16 +96,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_cite_as:
-    type: entity_reference_autocomplete
-    weight: 31
-    region: hidden
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_created_date:
     type: datetime_default
     weight: 10
@@ -297,4 +287,5 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  field_cite_as: true
   og_audience: true
