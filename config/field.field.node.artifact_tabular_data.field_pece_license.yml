@@ -6,19 +6,15 @@ dependencies:
     - field.storage.node.field_pece_license
     - node.type.artifact_tabular_data
     - taxonomy.vocabulary.licenses_vocabulary_licenses
-  content:
-    - 'taxonomy_term:licenses_vocabulary_licenses:3ea37e48-1144-4120-81b8-09852c096d04'
 id: node.artifact_tabular_data.field_pece_license
 field_name: field_pece_license
 entity_type: node
 bundle: artifact_tabular_data
 label: License
-description: ''
-required: false
+description: 'This field indicates how the content should be licensed. Descriptions of available creative commons licenses can be found <a href="https://creativecommons.org/share-your-work/cclicenses/">here</a>. If you are applying a license to found content that was previously licensed with a Creative Commons Share-Alike license, be sure that you are sharing the content under the same terms as the original.'
+required: true
 translatable: true
-default_value:
-  -
-    target_uuid: 3ea37e48-1144-4120-81b8-09852c096d04
+default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'

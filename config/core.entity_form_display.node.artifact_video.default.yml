@@ -43,14 +43,92 @@ third_party_settings:
         - field_people_with_edit_access
       label: Permissions
       region: content
-      parent_name: ''
-      weight: 16
+      parent_name: group_contribution_metadata
+      weight: 14
       format_type: details
       format_settings:
         classes: ''
         show_empty_fields: false
         id: ''
         open: true
+        description: ''
+        required_fields: true
+    group_metadata:
+      children:
+        - group_creation_metadata
+        - group_contribution_metadata
+        - group_custom_citation
+      label: Metadata
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: vertical
+        width_breakpoint: 640
+    group_creation_metadata:
+      children:
+        - field_authors
+        - field_created_date
+        - field_source
+        - field_video_format
+        - field_duration
+        - field_language
+        - langcode
+        - field_location
+      label: 'Creation Metadata'
+      region: content
+      parent_name: group_metadata
+      weight: 27
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_contribution_metadata:
+      children:
+        - group_permissions
+        - field_crit_commentary
+        - field_fieldsite
+        - field_use_fieldsite_local
+        - field_pece_license
+        - field_tags
+      label: 'Contribution Metadata'
+      region: content
+      parent_name: group_metadata
+      weight: 28
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_custom_citation:
+      children:
+        - field_pece_project_ref
+        - field_ark_enabled
+      label: 'Custom Citation'
+      region: content
+      parent_name: group_metadata
+      weight: 29
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
         description: ''
         required_fields: true
 id: node.artifact_video.default
@@ -60,7 +138,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 20
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -73,7 +151,7 @@ content:
     third_party_settings: {  }
   field_authors:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 7
     region: content
     settings:
       match_operator: CONTAINS
@@ -83,13 +161,13 @@ content:
     third_party_settings: {  }
   field_created_date:
     type: datetime_default
-    weight: 10
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   field_crit_commentary:
     type: text_textarea
-    weight: 3
+    weight: 15
     region: content
     settings:
       rows: 5
@@ -97,7 +175,7 @@ content:
     third_party_settings: {  }
   field_duration:
     type: string_textfield
-    weight: 7
+    weight: 11
     region: content
     settings:
       size: 60
@@ -105,7 +183,7 @@ content:
     third_party_settings: {  }
   field_fieldsite:
     type: entity_reference_autocomplete
-    weight: 11
+    weight: 16
     region: content
     settings:
       match_operator: CONTAINS
@@ -115,7 +193,7 @@ content:
     third_party_settings: {  }
   field_file_format:
     type: entity_reference_autocomplete
-    weight: 30
+    weight: 23
     region: content
     settings:
       match_operator: CONTAINS
@@ -135,7 +213,7 @@ content:
     third_party_settings: {  }
   field_language:
     type: languagefield_select
-    weight: 13
+    weight: 12
     region: content
     settings:
       format:
@@ -155,18 +233,14 @@ content:
       display_label: true
     third_party_settings: {  }
   field_pece_license:
-    type: entity_reference_autocomplete
-    weight: 15
+    type: options_select
+    weight: 18
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_pece_project_ref:
     type: entity_reference_autocomplete
-    weight: 1
+    weight: 17
     region: content
     settings:
       match_operator: CONTAINS
@@ -196,7 +270,7 @@ content:
     third_party_settings: {  }
   field_source:
     type: text_textarea
-    weight: 8
+    weight: 9
     region: content
     settings:
       rows: 5
@@ -204,7 +278,7 @@ content:
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
-    weight: 17
+    weight: 19
     region: content
     settings:
       match_operator: CONTAINS
@@ -214,21 +288,21 @@ content:
     third_party_settings: {  }
   field_use_fieldsite_local:
     type: boolean_checkbox
-    weight: 12
+    weight: 17
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_video_artifact_video:
     type: file_generic
-    weight: 4
+    weight: 1
     region: content
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
   field_video_format:
     type: string_textfield
-    weight: 6
+    weight: 10
     region: content
     settings:
       size: 60
@@ -236,34 +310,34 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 21
+    weight: 13
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 2
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 23
+    weight: 21
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 24
+    weight: 22
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 22
+    weight: 20
     region: content
     settings:
       display_label: true
@@ -278,7 +352,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 19
+    weight: 17
     region: content
     settings:
       match_operator: CONTAINS

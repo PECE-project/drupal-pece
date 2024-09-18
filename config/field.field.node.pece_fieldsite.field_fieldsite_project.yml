@@ -13,7 +13,7 @@ field_name: field_fieldsite_project
 entity_type: node
 bundle: pece_fieldsite
 label: Project
-description: ''
+description: 'This field indicates which projects are associated with this fieldsite.'
 required: false
 translatable: false
 default_value: {  }
@@ -25,6 +25,7 @@ settings:
       pece_project: pece_project
     sort:
       field: _none
+      direction: ASC
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

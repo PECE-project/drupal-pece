@@ -14,8 +14,8 @@ dependencies:
     - field.field.node.pece_photo_essay.field_people_with_edit_access
     - field.field.node.pece_photo_essay.field_people_with_view_access
     - field.field.node.pece_photo_essay.field_photo_essay_items
-    - field.field.node.pece_photo_essay.field_thumbnail
     - field.field.node.pece_photo_essay.field_tags
+    - field.field.node.pece_photo_essay.field_thumbnail
     - image.style.thumbnail
     - node.type.pece_photo_essay
   module:
@@ -36,7 +36,7 @@ third_party_settings:
       label: Permissions
       region: content
       parent_name: ''
-      weight: 2
+      weight: 5
       format_type: details
       format_settings:
         classes: ''
@@ -54,7 +54,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 1
+    weight: 2
     region: content
     settings:
       rows: 9
@@ -64,26 +64,16 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 7
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
   field_ark_enabled:
     type: boolean_checkbox
-    weight: 12
+    weight: 16
     region: content
     settings:
       display_label: true
-    third_party_settings: {  }
-  field_cite_as:
-    type: entity_reference_autocomplete
-    weight: 28
-    region: hidden
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete
@@ -104,13 +94,13 @@ content:
     third_party_settings: {  }
   field_pece_geolocation:
     type: geolocation_latlng
-    weight: 15
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   field_pece_license:
     type: entity_reference_autocomplete
-    weight: 13
+    weight: 7
     region: content
     settings:
       match_operator: CONTAINS
@@ -120,7 +110,7 @@ content:
     third_party_settings: {  }
   field_pece_project_ref:
     type: entity_reference_autocomplete
-    weight: 10
+    weight: 15
     region: content
     settings:
       match_operator: CONTAINS
@@ -150,7 +140,7 @@ content:
     third_party_settings: {  }
   field_photo_essay_items:
     type: entity_reference_paragraphs
-    weight: 16
+    weight: 4
     region: content
     settings:
       title: Paragraph
@@ -162,7 +152,7 @@ content:
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
-    weight: 17
+    weight: 8
     region: content
     settings:
       match_operator: CONTAINS
@@ -172,7 +162,7 @@ content:
     third_party_settings: {  }
   field_thumbnail:
     type: image_image
-    weight: 14
+    weight: 3
     region: content
     settings:
       progress_indicator: throbber
@@ -180,34 +170,34 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 9
+    weight: 1
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 5
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 6
+    weight: 12
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 4
+    weight: 10
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 3
+    weight: 9
     region: content
     settings:
       display_label: true
@@ -222,7 +212,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 8
+    weight: 14
     region: content
     settings:
       match_operator: CONTAINS
@@ -230,4 +220,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_cite_as: true

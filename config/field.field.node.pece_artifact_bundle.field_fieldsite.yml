@@ -11,7 +11,7 @@ field_name: field_fieldsite
 entity_type: node
 bundle: pece_artifact_bundle
 label: Fieldsite
-description: ''
+description: 'You can create fieldsites in the platform that designates a location or setting where research gets conducted. This field designates that an artifact is associated with that fieldsite. '
 required: false
 translatable: false
 default_value: {  }
@@ -23,6 +23,7 @@ settings:
       pece_fieldsite: pece_fieldsite
     sort:
       field: _none
+      direction: ASC
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

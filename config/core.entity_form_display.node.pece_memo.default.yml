@@ -76,14 +76,10 @@ content:
       display_label: true
     third_party_settings: {  }
   field_pece_license:
-    type: entity_reference_autocomplete
-    weight: 5
+    type: options_select
+    weight: 4
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_people_with_edit_access:
     type: entity_reference_autocomplete
@@ -107,7 +103,7 @@ content:
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS

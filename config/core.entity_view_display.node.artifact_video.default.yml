@@ -31,7 +31,6 @@ dependencies:
     - file
     - languagefield
     - layout_builder
-    - layout_discovery
     - text
     - user
 third_party_settings:
@@ -39,35 +38,6 @@ third_party_settings:
     enabled: true
     allow_custom: false
     sections:
-      -
-        layout_id: layout_onecol
-        layout_settings:
-          label: header
-          context_mapping: {  }
-        components:
-          0740bbb8-5a05-4d69-8685-c44019bad35f:
-            uuid: 0740bbb8-5a05-4d69-8685-c44019bad35f
-            region: content
-            configuration:
-              id: 'field_block:node:artifact_video:title'
-              label: Title
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: string
-                label: above
-                settings:
-                  link_to_entity: false
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 0
-            additional: {  }
-        third_party_settings: {  }
       -
         layout_id: layout_twocol_section
         layout_settings:
@@ -92,7 +62,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 16
+            weight: 18
             additional: {  }
           40864c80-b547-4f72-9b77-ab5290b8e795:
             uuid: 40864c80-b547-4f72-9b77-ab5290b8e795
@@ -141,7 +111,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: Contributor(s)
                     rewrite_label: 1
-            weight: 8
+            weight: 9
             additional: {  }
           e20e7806-7f88-4b74-9388-59bc8111dc9c:
             uuid: e20e7806-7f88-4b74-9388-59bc8111dc9c
@@ -161,31 +131,9 @@ third_party_settings:
                   link: true
                 third_party_settings:
                   entity_form_field_label:
-                    new_label: 'Group audience'
+                    new_label: 'Group Audience'
                     rewrite_label: 1
-            weight: 10
-            additional: {  }
-          4330f72a-6432-4d89-817c-693de9a90c1d:
-            uuid: 4330f72a-6432-4d89-817c-693de9a90c1d
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_video:field_duration'
-              label: Duration
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: string
-                label: above
-                settings:
-                  link_to_entity: false
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 15
+            weight: 13
             additional: {  }
           0d043bb8-f7c2-47a0-8f56-2c7789e006b0:
             uuid: 0d043bb8-f7c2-47a0-8f56-2c7789e006b0
@@ -205,14 +153,72 @@ third_party_settings:
                   link_to_entity: false
                   native_language: false
                 third_party_settings: {  }
-            weight: 14
+            weight: 17
             additional: {  }
-          abc010b7-b62c-4867-8363-27ca14b83dd8:
-            uuid: abc010b7-b62c-4867-8363-27ca14b83dd8
+          e56bfc1c-6d4e-4075-b148-fcf9e9352396:
+            uuid: e56bfc1c-6d4e-4075-b148-fcf9e9352396
             region: first
             configuration:
-              id: 'field_block:node:artifact_video:uid'
-              label: 'Authored by'
+              id: 'field_block:node:artifact_video:field_source'
+              label: Source
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 14
+            additional: {  }
+          366e50ee-2da2-4b68-8d13-1222edfac975:
+            uuid: 366e50ee-2da2-4b68-8d13-1222edfac975
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_video:field_file_format'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 15
+            additional: {  }
+          bad90a86-9cb6-4b9b-9557-8eb3caf0b89a:
+            uuid: bad90a86-9cb6-4b9b-9557-8eb3caf0b89a
+            region: first
+            configuration:
+              id: 'field_block:node:artifact_video:field_location'
+              label: Location
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: address_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 18
+            additional: {  }
+          beba5908-c812-46f8-a0cb-43a73d2b106e:
+            uuid: beba5908-c812-46f8-a0cb-43a73d2b106e
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:field_fieldsite'
+              label: Fieldsite
               label_display: '0'
               provider: layout_builder
               context_mapping:
@@ -225,13 +231,86 @@ third_party_settings:
                   link: true
                 third_party_settings:
                   entity_form_field_label:
-                    new_label: Creator(s)
-                    rewrite_label: 1
-            weight: 10
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 15
             additional: {  }
+          41d1b100-9b81-4333-9889-8df0a72afe42:
+            uuid: 41d1b100-9b81-4333-9889-8df0a72afe42
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:field_pece_license'
+              label: License
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 16
+            additional: {  }
+          25839e15-7230-4697-b708-094ba27238c6:
+            uuid: 25839e15-7230-4697-b708-094ba27238c6
+            region: second
+            configuration:
+              id: 'field_block:node:artifact_video:field_cite_as'
+              label: 'Cite as'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 17
+            additional: {  }
+          36bc59fa-ebc1-4994-85f9-a0f378ed5b7e:
+            uuid: 36bc59fa-ebc1-4994-85f9-a0f378ed5b7e
+            region: second
+            configuration:
+              id: 'extra_field_block:node:artifact_video:extra_field_pece_annotations_annotate_button'
+              label: 'Annotate button'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 19
+            additional:
+              extra_field_plus_settings: {  }
+          79f23e03-2b9e-44c6-ab17-398010f5542d:
+            uuid: 79f23e03-2b9e-44c6-ab17-398010f5542d
+            region: second
+            configuration:
+              id: 'extra_field_block:node:artifact_video:extra_field_pece_annotations_see_annotations_link'
+              label: 'Link to see all related annotations'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 20
+            additional:
+              extra_field_plus_settings: {  }
           2f24016a-a3ed-496c-9f75-d22dd174e09f:
             uuid: 2f24016a-a3ed-496c-9f75-d22dd174e09f
-            region: first
+            region: second
             configuration:
               id: 'field_block:node:artifact_video:created'
               label: 'Authored on'
@@ -263,67 +342,9 @@ third_party_settings:
                     rewrite_label: 1
             weight: 11
             additional: {  }
-          e56bfc1c-6d4e-4075-b148-fcf9e9352396:
-            uuid: e56bfc1c-6d4e-4075-b148-fcf9e9352396
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_video:field_source'
-              label: Source
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 12
-            additional: {  }
-          366e50ee-2da2-4b68-8d13-1222edfac975:
-            uuid: 366e50ee-2da2-4b68-8d13-1222edfac975
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_video:field_file_format'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 13
-            additional: {  }
-          bad90a86-9cb6-4b9b-9557-8eb3caf0b89a:
-            uuid: bad90a86-9cb6-4b9b-9557-8eb3caf0b89a
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_video:field_location'
-              label: Location
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: address_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 16
-            additional: {  }
           777f4b3d-5a76-4693-b294-58d53b9114d1:
             uuid: 777f4b3d-5a76-4693-b294-58d53b9114d1
-            region: second
+            region: first
             configuration:
               id: 'field_block:node:artifact_video:field_created_date'
               label: 'Created Date'
@@ -342,14 +363,14 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 9
+            weight: 13
             additional: {  }
-          beba5908-c812-46f8-a0cb-43a73d2b106e:
-            uuid: beba5908-c812-46f8-a0cb-43a73d2b106e
-            region: second
+          d4f1f332-27dd-4b17-a1ba-c7d2c9031f01:
+            uuid: d4f1f332-27dd-4b17-a1ba-c7d2c9031f01
+            region: first
             configuration:
-              id: 'field_block:node:artifact_video:field_fieldsite'
-              label: Fieldsite
+              id: 'field_block:node:artifact_video:field_authors'
+              label: Creator(s)
               label_display: '0'
               provider: layout_builder
               context_mapping:
@@ -364,31 +385,29 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 11
+            weight: 12
             additional: {  }
-          df732d31-2a7f-4408-94d4-021a87a89fca:
-            uuid: df732d31-2a7f-4408-94d4-021a87a89fca
-            region: second
+          4330f72a-6432-4d89-817c-693de9a90c1d:
+            uuid: 4330f72a-6432-4d89-817c-693de9a90c1d
+            region: first
             configuration:
-              id: 'field_block:node:artifact_video:field_use_fieldsite_local'
-              label: "Use fieldsite's location"
+              id: 'field_block:node:artifact_video:field_duration'
+              label: Duration
               label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: boolean
+                type: string
                 label: above
                 settings:
-                  format: default
-                  format_custom_false: ''
-                  format_custom_true: ''
+                  link_to_entity: false
                 third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 12
+            weight: 16
             additional: {  }
           f3444695-08db-4ce9-b397-18ec27197455:
             uuid: f3444695-08db-4ce9-b397-18ec27197455
@@ -409,81 +428,42 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 13
-            additional: {  }
-          41d1b100-9b81-4333-9889-8df0a72afe42:
-            uuid: 41d1b100-9b81-4333-9889-8df0a72afe42
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_video:field_pece_license'
-              label: License
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
             weight: 14
             additional: {  }
-          25839e15-7230-4697-b708-094ba27238c6:
-            uuid: 25839e15-7230-4697-b708-094ba27238c6
+          2cec37f9-855b-45dc-a9d7-d5ebc4b2bc00:
+            uuid: 2cec37f9-855b-45dc-a9d7-d5ebc4b2bc00
             region: second
             configuration:
-              id: 'field_block:node:artifact_video:field_cite_as'
-              label: 'Cite as'
+              id: 'field_block:node:artifact_video:revision_timestamp'
+              label: 'Revision create time'
               label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: entity_reference_label
+                type: timestamp
                 label: above
                 settings:
-                  link: true
+                  date_format: medium
+                  custom_date_format: ''
+                  timezone: ''
+                  tooltip:
+                    date_format: long
+                    custom_date_format: ''
+                  time_diff:
+                    enabled: false
+                    future_format: '@interval hence'
+                    past_format: '@interval ago'
+                    granularity: 2
+                    refresh: 60
+                    description: ''
                 third_party_settings:
                   entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 15
+                    new_label: 'Last Revision Date'
+                    rewrite_label: 1
+            weight: 12
             additional: {  }
-          36bc59fa-ebc1-4994-85f9-a0f378ed5b7e:
-            uuid: 36bc59fa-ebc1-4994-85f9-a0f378ed5b7e
-            region: second
-            configuration:
-              id: 'extra_field_block:node:artifact_video:extra_field_pece_annotations_annotate_button'
-              label: 'Annotate button'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                settings: {  }
-                third_party_settings: {  }
-            weight: 17
-            additional:
-              extra_field_plus_settings: {  }
-          79f23e03-2b9e-44c6-ab17-398010f5542d:
-            uuid: 79f23e03-2b9e-44c6-ab17-398010f5542d
-            region: second
-            configuration:
-              id: 'extra_field_block:node:artifact_video:extra_field_pece_annotations_see_annotations_link'
-              label: 'Link to see all related annotations'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                settings: {  }
-                third_party_settings: {  }
-            weight: 18
-            additional:
-              extra_field_plus_settings: {  }
         third_party_settings: {  }
 id: node.artifact_video.default
 targetEntityType: node

@@ -75,7 +75,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 13
+            weight: 15
             additional: {  }
           1bb1c7b7-cb49-49f7-afe4-dd82a8ed11ca:
             uuid: 1bb1c7b7-cb49-49f7-afe4-dd82a8ed11ca
@@ -107,25 +107,9 @@ third_party_settings:
                     description: ''
                 third_party_settings:
                   entity_form_field_label:
-                    new_label: 'Contributed date'
+                    new_label: 'Contributed Date'
                     rewrite_label: 1
             weight: 7
-            additional: {  }
-          cdeeede7-f718-4d49-9869-2e48dbaeda50:
-            uuid: cdeeede7-f718-4d49-9869-2e48dbaeda50
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_bundle:field_people_with_view_access'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 10
             additional: {  }
           e746e7e1-311f-42f3-a2c6-49fc5c0669ff:
             uuid: e746e7e1-311f-42f3-a2c6-49fc5c0669ff
@@ -145,9 +129,9 @@ third_party_settings:
                   link: true
                 third_party_settings:
                   entity_form_field_label:
-                    new_label: 'Group audience'
+                    new_label: 'Group Audience'
                     rewrite_label: 1
-            weight: 8
+            weight: 9
             additional: {  }
           0243c9f3-43a3-4084-a7d7-00812e6a80d5:
             uuid: 0243c9f3-43a3-4084-a7d7-00812e6a80d5
@@ -162,7 +146,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 15
+            weight: 16
             additional:
               extra_field_plus_settings: {  }
           93683717-6adb-4263-a7bc-6ec31a8acc49:
@@ -178,7 +162,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 16
+            weight: 17
             additional:
               extra_field_plus_settings: {  }
           fcf3467f-3eec-4140-860e-6c7f9e45b9b9:
@@ -220,7 +204,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 12
+            weight: 13
             additional: {  }
           9c333cd2-10b2-44ec-ba50-42699d73d154:
             uuid: 9c333cd2-10b2-44ec-ba50-42699d73d154
@@ -242,6 +226,62 @@ third_party_settings:
                     new_label: ''
                     rewrite_label: 0
             weight: 11
+            additional: {  }
+          75844e9e-cf7c-4095-95ec-5243868979fa:
+            uuid: 75844e9e-cf7c-4095-95ec-5243868979fa
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_bundle:revision_timestamp'
+              label: 'Revision create time'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: timestamp
+                label: above
+                settings:
+                  date_format: medium
+                  custom_date_format: ''
+                  timezone: ''
+                  tooltip:
+                    date_format: long
+                    custom_date_format: ''
+                  time_diff:
+                    enabled: false
+                    future_format: '@interval hence'
+                    past_format: '@interval ago'
+                    granularity: 2
+                    refresh: 60
+                    description: ''
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: 'Last Revision Date'
+                    rewrite_label: 1
+            weight: 8
+            additional: {  }
+          1d0dbefd-d1f9-4d5a-9a58-2c732d991da4:
+            uuid: 1d0dbefd-d1f9-4d5a-9a58-2c732d991da4
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_bundle:field_fieldsite'
+              label: Fieldsite
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 12
             additional: {  }
           7212e31d-58d4-4622-be43-66c9786d7f2d:
             uuid: 7212e31d-58d4-4622-be43-66c9786d7f2d

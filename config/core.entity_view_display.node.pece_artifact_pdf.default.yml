@@ -29,7 +29,6 @@ dependencies:
     - file
     - languagefield
     - layout_builder
-    - layout_discovery
     - layout_library
     - user
 third_party_settings:
@@ -37,35 +36,6 @@ third_party_settings:
     enabled: true
     allow_custom: false
     sections:
-      -
-        layout_id: layout_onecol
-        layout_settings:
-          label: header
-          context_mapping: {  }
-        components:
-          5012ae68-737b-4369-b038-6d7de3ec58f0:
-            uuid: 5012ae68-737b-4369-b038-6d7de3ec58f0
-            region: content
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:title'
-              label: Title
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: string
-                label: above
-                settings:
-                  link_to_entity: false
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 0
-            additional: {  }
-        third_party_settings: {  }
       -
         layout_id: layout_twocol_section
         layout_settings:
@@ -101,62 +71,6 @@ third_party_settings:
                     rewrite_label: 0
             weight: 0
             additional: {  }
-          9144d706-dc2e-4ace-9f8f-fe3e8e085b6e:
-            uuid: 9144d706-dc2e-4ace-9f8f-fe3e8e085b6e
-            region: first
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:uid'
-              label: 'Authored by'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: Creator(s)
-                    rewrite_label: 1
-            weight: 1
-            additional: {  }
-          b50a10dc-492d-4f08-8432-c2ad1b224f1d:
-            uuid: b50a10dc-492d-4f08-8432-c2ad1b224f1d
-            region: first
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:created'
-              label: 'Authored on'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: timestamp
-                label: above
-                settings:
-                  date_format: medium
-                  custom_date_format: ''
-                  timezone: ''
-                  tooltip:
-                    date_format: long
-                    custom_date_format: ''
-                  time_diff:
-                    enabled: false
-                    future_format: '@interval hence'
-                    past_format: '@interval ago'
-                    granularity: 2
-                    refresh: 60
-                    description: ''
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: 'Created date'
-                    rewrite_label: 1
-            weight: 2
-            additional: {  }
           fa5fd7b5-85d1-4e23-83a0-b64403079754:
             uuid: fa5fd7b5-85d1-4e23-83a0-b64403079754
             region: first
@@ -176,7 +90,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 3
+            weight: 5
             additional: {  }
           2f1ad401-456b-418f-98b7-7237cab732ad:
             uuid: 2f1ad401-456b-418f-98b7-7237cab732ad
@@ -202,7 +116,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 4
+            weight: 6
             additional: {  }
           c87f4b16-dbcf-4c0c-8e5a-fd819bb75389:
             uuid: c87f4b16-dbcf-4c0c-8e5a-fd819bb75389
@@ -225,29 +139,6 @@ third_party_settings:
                     new_label: Contributor(s)
                     rewrite_label: 1
             weight: 0
-            additional: {  }
-          95e9e14c-471a-423e-bfeb-e5146a9c1d72:
-            uuid: 95e9e14c-471a-423e-bfeb-e5146a9c1d72
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_created_date'
-              label: 'Created Date'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: datetime_default
-                label: above
-                settings:
-                  timezone_override: ''
-                  format_type: medium
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 1
             additional: {  }
           c4f722eb-2949-42c3-adf2-71df1dbb76de:
             uuid: c4f722eb-2949-42c3-adf2-71df1dbb76de
@@ -279,9 +170,9 @@ third_party_settings:
                     description: ''
                 third_party_settings:
                   entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 2
+                    new_label: 'Last Revision Date'
+                    rewrite_label: 1
+            weight: 3
             additional: {  }
           07ac90cc-a8e1-47a9-a557-22078bfeb7cc:
             uuid: 07ac90cc-a8e1-47a9-a557-22078bfeb7cc
@@ -301,9 +192,9 @@ third_party_settings:
                   link: true
                 third_party_settings:
                   entity_form_field_label:
-                    new_label: 'Group audience'
+                    new_label: 'Group Audience'
                     rewrite_label: 1
-            weight: 3
+            weight: 4
             additional: {  }
           2180a5a0-fee2-41dc-b066-1ad486f4a308:
             uuid: 2180a5a0-fee2-41dc-b066-1ad486f4a308
@@ -321,51 +212,6 @@ third_party_settings:
                 label: above
                 settings:
                   link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 4
-            additional: {  }
-          bfcc1d19-4ce7-4a36-8e3f-b06e9a525223:
-            uuid: bfcc1d19-4ce7-4a36-8e3f-b06e9a525223
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_crit_commentary'
-              label: 'Critical Commentary'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: basic_string
-                label: above
-                settings: {  }
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 5
-            additional: {  }
-          f42506cf-e5f3-422f-86ae-a2a35875f2de:
-            uuid: f42506cf-e5f3-422f-86ae-a2a35875f2de
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_use_fieldsite_local'
-              label: "Use fieldsite's location"
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: boolean
-                label: above
-                settings:
-                  format: default
-                  format_custom_false: ''
-                  format_custom_true: ''
                 third_party_settings:
                   entity_form_field_label:
                     new_label: ''
@@ -392,7 +238,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 7
+            weight: 8
             additional: {  }
           48cfefe9-76bd-4dcf-9435-c40c4d196e66:
             uuid: 48cfefe9-76bd-4dcf-9435-c40c4d196e66
@@ -414,7 +260,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 8
+            weight: 9
             additional: {  }
           3c1a1dea-cce4-457c-9432-5e84b5c15bf6:
             uuid: 3c1a1dea-cce4-457c-9432-5e84b5c15bf6
@@ -436,7 +282,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 9
+            weight: 10
             additional: {  }
           468487c4-fea8-428e-bc29-e2bea63dfbdc:
             uuid: 468487c4-fea8-428e-bc29-e2bea63dfbdc
@@ -451,7 +297,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 10
+            weight: 11
             additional:
               extra_field_plus_settings: {  }
           987f9187-3dc3-4826-b506-a4e065d8fc81:
@@ -467,9 +313,130 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 11
+            weight: 12
             additional:
               extra_field_plus_settings: {  }
+          b50a10dc-492d-4f08-8432-c2ad1b224f1d:
+            uuid: b50a10dc-492d-4f08-8432-c2ad1b224f1d
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:created'
+              label: 'Authored on'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: timestamp
+                label: above
+                settings:
+                  date_format: medium
+                  custom_date_format: ''
+                  timezone: ''
+                  tooltip:
+                    date_format: long
+                    custom_date_format: ''
+                  time_diff:
+                    enabled: false
+                    future_format: '@interval hence'
+                    past_format: '@interval ago'
+                    granularity: 2
+                    refresh: 60
+                    description: ''
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: 'Created date'
+                    rewrite_label: 1
+            weight: 1
+            additional: {  }
+          95e9e14c-471a-423e-bfeb-e5146a9c1d72:
+            uuid: 95e9e14c-471a-423e-bfeb-e5146a9c1d72
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_created_date'
+              label: 'Created Date'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 4
+            additional: {  }
+          1711f54c-2332-4113-abe1-599b0aac7331:
+            uuid: 1711f54c-2332-4113-abe1-599b0aac7331
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_authors'
+              label: Creator(s)
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 3
+            additional: {  }
+          3aa05470-55de-4dca-91c1-3dd55c679274:
+            uuid: 3aa05470-55de-4dca-91c1-3dd55c679274
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_location'
+              label: Location
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: address_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 7
+            additional: {  }
+          bfcc1d19-4ce7-4a36-8e3f-b06e9a525223:
+            uuid: bfcc1d19-4ce7-4a36-8e3f-b06e9a525223
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_crit_commentary'
+              label: 'Critical Commentary'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: basic_string
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 5
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false

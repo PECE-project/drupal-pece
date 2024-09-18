@@ -27,7 +27,6 @@ dependencies:
     - datetime
     - languagefield
     - layout_builder
-    - layout_discovery
     - text
     - user
 third_party_settings:
@@ -35,35 +34,6 @@ third_party_settings:
     enabled: true
     allow_custom: false
     sections:
-      -
-        layout_id: layout_onecol
-        layout_settings:
-          label: header
-          context_mapping: {  }
-        components:
-          ed6a313b-773c-4968-aaec-67b5f62ddf48:
-            uuid: ed6a313b-773c-4968-aaec-67b5f62ddf48
-            region: content
-            configuration:
-              id: 'field_block:node:pece_artifact_text:title'
-              label: Title
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: string
-                label: above
-                settings:
-                  link_to_entity: false
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 0
-            additional: {  }
-        third_party_settings: {  }
       -
         layout_id: layout_twocol_section
         layout_settings:
@@ -106,7 +76,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 18
+            weight: 17
             additional: {  }
           9a60f406-c73d-4f4d-8576-544d7f1dfd9d:
             uuid: 9a60f406-c73d-4f4d-8576-544d7f1dfd9d
@@ -126,7 +96,7 @@ third_party_settings:
                   link_to_entity: false
                   native_language: false
                 third_party_settings: {  }
-            weight: 4
+            weight: 6
             additional: {  }
           54e3abf1-5df3-44c8-b061-4a3812bed9ac:
             uuid: 54e3abf1-5df3-44c8-b061-4a3812bed9ac
@@ -145,7 +115,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 16
+            weight: 15
             additional: {  }
           6118ca1d-07f5-48e5-bda9-ed960da3e00f:
             uuid: 6118ca1d-07f5-48e5-bda9-ed960da3e00f
@@ -187,9 +157,9 @@ third_party_settings:
                   link: true
                 third_party_settings:
                   entity_form_field_label:
-                    new_label: 'Group audience'
+                    new_label: 'Group Audience'
                     rewrite_label: 1
-            weight: 11
+            weight: 12
             additional: {  }
           23ea5c1d-13c8-43a3-ad7b-89622131deac:
             uuid: 23ea5c1d-13c8-43a3-ad7b-89622131deac
@@ -210,7 +180,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 3
+            weight: 5
             additional: {  }
           b39d7030-6cc6-41a3-962e-2550fbc29e37:
             uuid: b39d7030-6cc6-41a3-962e-2550fbc29e37
@@ -231,86 +201,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 5
-            additional: {  }
-          cc27455c-cc2c-43d8-8a03-332fa1e07319:
-            uuid: cc27455c-cc2c-43d8-8a03-332fa1e07319
-            region: first
-            configuration:
-              id: 'field_block:node:pece_artifact_text:uid'
-              label: 'Authored by'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: Creator(s)
-                    rewrite_label: 1
-            weight: 1
-            additional: {  }
-          d7b31a44-0c1d-4245-be98-4017896ade9d:
-            uuid: d7b31a44-0c1d-4245-be98-4017896ade9d
-            region: first
-            configuration:
-              id: 'field_block:node:pece_artifact_text:created'
-              label: 'Authored on'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: timestamp
-                label: above
-                settings:
-                  date_format: medium
-                  custom_date_format: ''
-                  timezone: ''
-                  tooltip:
-                    date_format: long
-                    custom_date_format: ''
-                  time_diff:
-                    enabled: false
-                    future_format: '@interval hence'
-                    past_format: '@interval ago'
-                    granularity: 2
-                    refresh: 60
-                    description: ''
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: 'Created date'
-                    rewrite_label: 1
-            weight: 2
-            additional: {  }
-          bad8854d-4230-4cb0-882a-6dcb2ee6db6f:
-            uuid: bad8854d-4230-4cb0-882a-6dcb2ee6db6f
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_text:field_created_date'
-              label: 'Created Date'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: datetime_default
-                label: above
-                settings:
-                  timezone_override: ''
-                  format_type: medium
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 9
+            weight: 7
             additional: {  }
           e4dbe08f-236e-4a3e-90ee-fc57d600379a:
             uuid: e4dbe08f-236e-4a3e-90ee-fc57d600379a
@@ -342,30 +233,9 @@ third_party_settings:
                     description: ''
                 third_party_settings:
                   entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 10
-            additional: {  }
-          aa91ae6c-a961-45a5-b0dd-65febb8ab4c8:
-            uuid: aa91ae6c-a961-45a5-b0dd-65febb8ab4c8
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_text:field_crit_commentary'
-              label: 'Critical Commentary'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 15
+                    new_label: 'Last Revision Date'
+                    rewrite_label: 1
+            weight: 11
             additional: {  }
           804f067b-d8e3-43e9-a725-96250daf77de:
             uuid: 804f067b-d8e3-43e9-a725-96250daf77de
@@ -383,30 +253,6 @@ third_party_settings:
                 label: above
                 settings:
                   link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 13
-            additional: {  }
-          f04e8936-1e6e-4ff9-aef1-4a6a3ec7f0b7:
-            uuid: f04e8936-1e6e-4ff9-aef1-4a6a3ec7f0b7
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_text:field_use_fieldsite_local'
-              label: "Use fieldsite's location"
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: boolean
-                label: above
-                settings:
-                  format: default
-                  format_custom_false: ''
-                  format_custom_true: ''
                 third_party_settings:
                   entity_form_field_label:
                     new_label: ''
@@ -433,7 +279,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 17
+            weight: 16
             additional: {  }
           f05088d0-d65f-4866-a54f-b684e2d9ed53:
             uuid: f05088d0-d65f-4866-a54f-b684e2d9ed53
@@ -448,7 +294,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 19
+            weight: 18
             additional:
               extra_field_plus_settings: {  }
           bf563081-915d-40ac-b893-2c0bb5db9e9f:
@@ -464,9 +310,109 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 20
+            weight: 19
             additional:
               extra_field_plus_settings: {  }
+          d7b31a44-0c1d-4245-be98-4017896ade9d:
+            uuid: d7b31a44-0c1d-4245-be98-4017896ade9d
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_text:created'
+              label: 'Authored on'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: timestamp
+                label: above
+                settings:
+                  date_format: medium
+                  custom_date_format: ''
+                  timezone: ''
+                  tooltip:
+                    date_format: long
+                    custom_date_format: ''
+                  time_diff:
+                    enabled: false
+                    future_format: '@interval hence'
+                    past_format: '@interval ago'
+                    granularity: 2
+                    refresh: 60
+                    description: ''
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: 'Created date'
+                    rewrite_label: 1
+            weight: 9
+            additional: {  }
+          bad8854d-4230-4cb0-882a-6dcb2ee6db6f:
+            uuid: bad8854d-4230-4cb0-882a-6dcb2ee6db6f
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_text:field_created_date'
+              label: 'Created Date'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 4
+            additional: {  }
+          42faacdc-41d0-4b3f-b086-eb9e2e911018:
+            uuid: 42faacdc-41d0-4b3f-b086-eb9e2e911018
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_text:field_authors'
+              label: Creator(s)
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 3
+            additional: {  }
+          aa91ae6c-a961-45a5-b0dd-65febb8ab4c8:
+            uuid: aa91ae6c-a961-45a5-b0dd-65febb8ab4c8
+            region: second
+            configuration:
+              id: 'field_block:node:pece_artifact_text:field_crit_commentary'
+              label: 'Critical Commentary'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 13
+            additional: {  }
         third_party_settings: {  }
 _core:
   default_config_hash: sv49-4TtgHZEBsRaDy_zCl8TMr3fsl0fxqIcirsi8ts

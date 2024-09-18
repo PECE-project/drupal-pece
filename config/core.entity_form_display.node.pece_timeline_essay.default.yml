@@ -14,8 +14,8 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_people_with_edit_access
     - field.field.node.pece_timeline_essay.field_people_with_view_access
     - field.field.node.pece_timeline_essay.field_tags
-    - field.field.node.pece_timeline_essay.field_timeline_essay_items
     - field.field.node.pece_timeline_essay.field_thumbnail
+    - field.field.node.pece_timeline_essay.field_timeline_essay_items
     - image.style.thumbnail
     - node.type.pece_timeline_essay
   module:
@@ -46,12 +46,11 @@ third_party_settings:
         description: ''
         required_fields: true
     group_or:
-      children:
-        - field_pbc_ref_user
+      children: {  }
       label: OR
       region: hidden
       parent_name: ''
-      weight: 22
+      weight: 18
       format_type: details
       format_settings:
         classes: ''
@@ -61,13 +60,11 @@ third_party_settings:
         description: ''
         required_fields: true
     group_and:
-      children:
-        - field_pbc_ref_group
-        - field_pbc_ref_role
+      children: {  }
       label: AND
       region: hidden
       parent_name: ''
-      weight: 21
+      weight: 17
       format_type: details
       format_settings:
         classes: ''
@@ -101,20 +98,10 @@ content:
     third_party_settings: {  }
   field_ark_enabled:
     type: boolean_checkbox
-    weight: 13
+    weight: 16
     region: content
     settings:
       display_label: true
-    third_party_settings: {  }
-  field_cite_as:
-    type: entity_reference_autocomplete
-    weight: 27
-    region: hidden
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete
@@ -135,13 +122,13 @@ content:
     third_party_settings: {  }
   field_pece_geolocation:
     type: geolocation_latlng
-    weight: 16
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   field_pece_license:
     type: entity_reference_autocomplete
-    weight: 12
+    weight: 13
     region: content
     settings:
       match_operator: CONTAINS
@@ -151,7 +138,7 @@ content:
     third_party_settings: {  }
   field_pece_project_ref:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 15
     region: content
     settings:
       match_operator: CONTAINS
@@ -181,7 +168,7 @@ content:
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
-    weight: 17
+    weight: 14
     region: content
     settings:
       match_operator: CONTAINS
@@ -191,7 +178,7 @@ content:
     third_party_settings: {  }
   field_thumbnail:
     type: image_image
-    weight: 10
+    weight: 9
     region: content
     settings:
       progress_indicator: throbber
@@ -199,7 +186,7 @@ content:
     third_party_settings: {  }
   field_timeline_essay_items:
     type: entity_reference_paragraphs
-    weight: 15
+    weight: 10
     region: content
     settings:
       title: Paragraph
@@ -261,4 +248,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_cite_as: true

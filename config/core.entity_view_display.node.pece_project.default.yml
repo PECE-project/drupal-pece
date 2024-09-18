@@ -28,6 +28,7 @@ dependencies:
     - field.field.node.pece_project.field_thumbnail
     - node.type.pece_project
   module:
+    - dashboards
     - datetime_range
     - file
     - geolocation
@@ -44,23 +45,14 @@ third_party_settings:
     allow_custom: false
     sections:
       -
-        layout_id: layout_onecol
+        layout_id: layout_2
         layout_settings:
-          label: ''
+          label: Project
+          context_mapping: {  }
         components:
-          ecd573fb-4ed9-4bd7-b0e1-ab85fb8d9b77:
-            uuid: ecd573fb-4ed9-4bd7-b0e1-ab85fb8d9b77
-            region: content
-            configuration:
-              id: 'extra_field_block:node:pece_project:links'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-            weight: 0
-            additional: {  }
           51ba1cc0-8356-488e-b025-a93f7c50fbe6:
             uuid: 51ba1cc0-8356-488e-b025-a93f7c50fbe6
-            region: content
+            region: one
             configuration:
               id: 'field_block:node:pece_project:body'
               label_display: '0'
@@ -71,11 +63,11 @@ third_party_settings:
                 label: hidden
                 settings: {  }
                 third_party_settings: {  }
-            weight: 1
+            weight: 0
             additional: {  }
           31699fb3-2142-4ee7-97f1-f2ace48fa325:
             uuid: 31699fb3-2142-4ee7-97f1-f2ace48fa325
-            region: content
+            region: one
             configuration:
               id: 'field_block:node:pece_project:field_project_start_end_date'
               label_display: '0'
@@ -90,11 +82,11 @@ third_party_settings:
                   from_to: both
                   separator: '-'
                 third_party_settings: {  }
-            weight: 2
+            weight: 1
             additional: {  }
           c2f541e4-5ece-4411-9cc4-86eb19cd30ef:
             uuid: c2f541e4-5ece-4411-9cc4-86eb19cd30ef
-            region: content
+            region: one
             configuration:
               id: 'field_block:node:pece_project:field_project_institution_link'
               label_display: '0'
@@ -110,11 +102,11 @@ third_party_settings:
                   rel: ''
                   target: ''
                 third_party_settings: {  }
-            weight: 3
+            weight: 2
             additional: {  }
           209d71e0-c649-4d5e-9428-04d197b08469:
             uuid: 209d71e0-c649-4d5e-9428-04d197b08469
-            region: content
+            region: two
             configuration:
               id: 'field_block:node:pece_project:field_project_intv_request_file'
               label_display: '0'
@@ -126,11 +118,11 @@ third_party_settings:
                 settings:
                   use_description_as_link_text: true
                 third_party_settings: {  }
-            weight: 4
+            weight: 0
             additional: {  }
           e9dfd9dc-9dd3-4939-a6f8-beec831087ab:
             uuid: e9dfd9dc-9dd3-4939-a6f8-beec831087ab
-            region: content
+            region: two
             configuration:
               id: 'field_block:node:pece_project:field_project_consent_form_file'
               label_display: '0'
@@ -142,11 +134,11 @@ third_party_settings:
                 settings:
                   use_description_as_link_text: true
                 third_party_settings: {  }
-            weight: 5
+            weight: 1
             additional: {  }
           1c04c9ea-97f2-4c9e-a8d1-67771da44e72:
             uuid: 1c04c9ea-97f2-4c9e-a8d1-67771da44e72
-            region: content
+            region: one
             configuration:
               id: 'field_block:node:pece_project:field_project_fund_agency_link'
               label_display: '0'
@@ -162,8 +154,141 @@ third_party_settings:
                   rel: ''
                   target: ''
                 third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          8a441b3a-8457-409c-be07-fe0a0f7285c0:
+            uuid: 8a441b3a-8457-409c-be07-fe0a0f7285c0
+            region: three
+            configuration:
+              id: 'field_block:node:pece_project:field_project_subst_logic'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          acca0855-51a8-42fe-afc7-424c0ba1eccd:
+            uuid: acca0855-51a8-42fe-afc7-424c0ba1eccd
+            region: one
+            configuration:
+              id: 'field_block:node:pece_project:field_project_lead'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          f792bf69-f72a-4066-8e1c-eaef44f67992:
+            uuid: f792bf69-f72a-4066-8e1c-eaef44f67992
+            region: one
+            configuration:
+              id: 'field_block:node:pece_project:field_project_design_group'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          d2654f21-9412-465c-bee6-69c9fcb656ab:
+            uuid: d2654f21-9412-465c-bee6-69c9fcb656ab
+            region: one
+            configuration:
+              id: 'field_block:node:pece_project:field_tags'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
             weight: 6
             additional: {  }
+          c92bb53a-217c-4d99-b5bc-2dafa98bee37:
+            uuid: c92bb53a-217c-4d99-b5bc-2dafa98bee37
+            region: two
+            configuration:
+              id: 'field_block:node:pece_project:field_project_open_notes'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: basic_string
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          4a384211-d552-4c9c-a9b3-c5afb4ec2ed4:
+            uuid: 4a384211-d552-4c9c-a9b3-c5afb4ec2ed4
+            region: three
+            configuration:
+              id: 'field_block:node:pece_project:field_project_featured_essays'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          2d81b1ab-681d-417a-b266-62d4ee4d8a0c:
+            uuid: 2d81b1ab-681d-417a-b266-62d4ee4d8a0c
+            region: three
+            configuration:
+              id: 'field_block:node:pece_project:field_fieldsites'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          e00686f7-be4c-4dae-8d45-653f7156274b:
+            uuid: e00686f7-be4c-4dae-8d45-653f7156274b
+            region: three
+            configuration:
+              id: 'field_block:node:pece_project:field_project_struct_analytics'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
           cc85a23d-056c-4cd8-bdf9-d31894270a26:
             uuid: cc85a23d-056c-4cd8-bdf9-d31894270a26
             region: content
@@ -183,55 +308,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 7
             additional: {  }
-          8a441b3a-8457-409c-be07-fe0a0f7285c0:
-            uuid: 8a441b3a-8457-409c-be07-fe0a0f7285c0
-            region: content
-            configuration:
-              id: 'field_block:node:pece_project:field_project_subst_logic'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 8
-            additional: {  }
-          5446d294-36ad-4445-ba98-a1a96ac49eaf:
-            uuid: 5446d294-36ad-4445-ba98-a1a96ac49eaf
-            region: content
-            configuration:
-              id: 'field_block:node:pece_project:field_pece_geolocation'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: geolocation_latlng
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-            weight: 9
-            additional: {  }
-          d458701f-f03a-4716-8dfe-7b8e6b42b98a:
-            uuid: d458701f-f03a-4716-8dfe-7b8e6b42b98a
-            region: content
-            configuration:
-              id: 'field_block:node:pece_project:field_ark_enabled'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: boolean
-                label: above
-                settings:
-                  format: default
-                  format_custom_false: ''
-                  format_custom_true: ''
-                third_party_settings: {  }
-            weight: 10
-            additional: {  }
           3e482b6e-92b7-4015-abc4-3545ab5fd2c6:
             uuid: 3e482b6e-92b7-4015-abc4-3545ab5fd2c6
             region: content
@@ -250,133 +326,6 @@ third_party_settings:
                     attribute: lazy
                 third_party_settings: {  }
             weight: 11
-            additional: {  }
-          acca0855-51a8-42fe-afc7-424c0ba1eccd:
-            uuid: acca0855-51a8-42fe-afc7-424c0ba1eccd
-            region: content
-            configuration:
-              id: 'field_block:node:pece_project:field_project_lead'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 12
-            additional: {  }
-          c92bb53a-217c-4d99-b5bc-2dafa98bee37:
-            uuid: c92bb53a-217c-4d99-b5bc-2dafa98bee37
-            region: content
-            configuration:
-              id: 'field_block:node:pece_project:field_project_open_notes'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: basic_string
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-            weight: 13
-            additional: {  }
-          d2654f21-9412-465c-bee6-69c9fcb656ab:
-            uuid: d2654f21-9412-465c-bee6-69c9fcb656ab
-            region: content
-            configuration:
-              id: 'field_block:node:pece_project:field_tags'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 14
-            additional: {  }
-          4a384211-d552-4c9c-a9b3-c5afb4ec2ed4:
-            uuid: 4a384211-d552-4c9c-a9b3-c5afb4ec2ed4
-            region: content
-            configuration:
-              id: 'field_block:node:pece_project:field_project_featured_essays'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 15
-            additional: {  }
-          e00686f7-be4c-4dae-8d45-653f7156274b:
-            uuid: e00686f7-be4c-4dae-8d45-653f7156274b
-            region: content
-            configuration:
-              id: 'field_block:node:pece_project:field_project_struct_analytics'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 16
-            additional: {  }
-          f792bf69-f72a-4066-8e1c-eaef44f67992:
-            uuid: f792bf69-f72a-4066-8e1c-eaef44f67992
-            region: content
-            configuration:
-              id: 'field_block:node:pece_project:field_project_design_group'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 17
-            additional: {  }
-          2d81b1ab-681d-417a-b266-62d4ee4d8a0c:
-            uuid: 2d81b1ab-681d-417a-b266-62d4ee4d8a0c
-            region: content
-            configuration:
-              id: 'field_block:node:pece_project:field_fieldsites'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 18
-            additional: {  }
-          6da1cf7a-84ae-4bd7-9c19-962d7787668f:
-            uuid: 6da1cf7a-84ae-4bd7-9c19-962d7787668f
-            region: content
-            configuration:
-              id: 'field_block:node:pece_project:field_people_with_edit_access'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 19
             additional: {  }
           994066b7-19e2-4152-9218-8214c61c1586:
             uuid: 994066b7-19e2-4152-9218-8214c61c1586
