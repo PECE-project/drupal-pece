@@ -79,6 +79,10 @@ new release of Drupal core.
 
 ## FAQ
 
+### How can I customize the look and feel?
+
+PECE is based on [Bulma](https://bulma.io/) using [CSS variables](https://bulma.io/documentation/features/css-variables/) plus CSS overrides for lightweight changes, especially to color, (at `/admin/config/development/asset-injector/css`).
+
 ### How can I apply patches to downloaded modules?
 
 We use the [composer-patches](https://github.com/cweagans/composer-patches) plugin.
