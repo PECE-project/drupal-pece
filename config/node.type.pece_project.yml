@@ -3,15 +3,25 @@ langcode: en
 status: true
 dependencies:
   module:
+    - menu_ui
     - type_tray
 third_party_settings:
   type_tray:
+    type_category: conceptualize
+    type_thumbnail: ''
+    type_icon: ''
+    type_description: ''
     existing_nodes_link_text: 'View existing <em class="placeholder">Project</em> content'
+    type_weight: 0
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
 _core:
   default_config_hash: qq-Fh1zFLFI08TQnqyS8BANDv3JAgjsvtokRTWA6Igc
 name: Project
 type: pece_project
-description: null
+description: 'A project designates a research project that the platform is being used to scaffold. You can use this content type to describe when a project starts and ends, its institutional affiliation, and its funding source. You can also associated certain logics, fieldsites, and platform users with a project.'
 help: null
 new_revision: true
 preview_mode: 1

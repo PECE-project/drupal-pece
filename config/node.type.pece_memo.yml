@@ -3,15 +3,25 @@ langcode: en
 status: true
 dependencies:
   module:
+    - menu_ui
     - type_tray
 third_party_settings:
   type_tray:
+    type_category: analyze
+    type_thumbnail: ''
+    type_icon: ''
+    type_description: ''
     existing_nodes_link_text: 'View existing <em class="placeholder">Memo</em> content'
+    type_weight: 0
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
 _core:
   default_config_hash: TIqBTHDG_LgQPxjPME0_lqIl6lN-CEPh14QhNIAjrOc
 name: Memo
 type: pece_memo
-description: "PECE's memo content type."
+description: 'A memo is a first draft of a piece of writing, meant to synthesize ideas generated throughout data analysis. Upon publishing a memo, that memo is opened for comments from the platform’s community.'
 help: null
 new_revision: true
 preview_mode: 1

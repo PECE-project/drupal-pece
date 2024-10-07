@@ -31,11 +31,10 @@ third_party_settings:
         - field_pece_all_can_view
         - field_groups_with_view_access
         - field_people_with_view_access
-        - field_people_with_edit_access
       label: Permissions
       region: content
       parent_name: ''
-      weight: 11
+      weight: 10
       format_type: details
       format_settings:
         classes: ''
@@ -53,7 +52,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 8
+    weight: 1
     region: content
     settings:
       rows: 9
@@ -63,7 +62,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 3
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -76,7 +75,7 @@ content:
     third_party_settings: {  }
   field_essay_contents:
     type: entity_reference_paragraphs
-    weight: 10
+    weight: 7
     region: content
     settings:
       title: Paragraph
@@ -104,14 +103,10 @@ content:
       display_label: true
     third_party_settings: {  }
   field_pece_license:
-    type: entity_reference_autocomplete
-    weight: 12
+    type: options_select
+    weight: 8
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_pece_project_ref:
     type: entity_reference_autocomplete
@@ -125,7 +120,7 @@ content:
     third_party_settings: {  }
   field_people_with_edit_access:
     type: entity_reference_autocomplete
-    weight: 23
+    weight: 9
     region: content
     settings:
       match_operator: CONTAINS
@@ -155,42 +150,35 @@ content:
     third_party_settings: {  }
   field_thumbnail:
     type: image_image
-    weight: 9
+    weight: 2
     region: content
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-  langcode:
-    type: language_select
-    weight: 1
-    region: content
-    settings:
-      include_locked: true
-    third_party_settings: {  }
   path:
     type: path
-    weight: 6
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 4
+    weight: 11
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 7
+    weight: 6
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 5
+    weight: 12
     region: content
     settings:
       display_label: true
@@ -205,7 +193,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 3
     region: content
     settings:
       match_operator: CONTAINS
@@ -215,4 +203,5 @@ content:
     third_party_settings: {  }
 hidden:
   field_cite_as: true
+  langcode: true
   layout_builder__layout: true

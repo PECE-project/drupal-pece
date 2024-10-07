@@ -3,15 +3,25 @@ langcode: en
 status: true
 dependencies:
   module:
+    - menu_ui
     - type_tray
 third_party_settings:
   type_tray:
+    type_category: create
+    type_thumbnail: ''
+    type_icon: ''
+    type_description: ''
     existing_nodes_link_text: 'View existing <em class="placeholder">Timeline Essay</em> content'
+    type_weight: 0
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
 _core:
   default_config_hash: KCCGkI9HIZZRUjG1ed_bOMX2YIfOPgpIRp-ivPTRZq8
 name: 'Timeline Essay'
 type: pece_timeline_essay
-description: null
+description: 'A timeline essay is a collection of artifacts, ordered into a timeline, with text added for context.'
 help: null
 new_revision: true
 preview_mode: 1

@@ -4,9 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_analytic.field_analytic_question_set
-    - field.field.node.pece_analytic.field_tags
     - field.field.node.pece_analytic.field_ark_enabled
     - field.field.node.pece_analytic.field_pece_geolocation
+    - field.field.node.pece_analytic.field_tags
     - node.type.pece_analytic
   module:
     - geolocation
@@ -20,13 +20,13 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 3
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
   field_analytic_question_set:
     type: entity_reference_autocomplete
-    weight: 10
+    weight: 8
     region: content
     settings:
       match_operator: CONTAINS
@@ -36,20 +36,20 @@ content:
     third_party_settings: {  }
   field_ark_enabled:
     type: boolean_checkbox
-    weight: 27
+    weight: 10
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_pece_geolocation:
     type: geolocation_latlng
-    weight: 26
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 7
     region: content
     settings:
       match_operator: CONTAINS
@@ -57,36 +57,29 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  langcode:
-    type: language_select
-    weight: 1
-    region: content
-    settings:
-      include_locked: true
-    third_party_settings: {  }
   path:
     type: path
-    weight: 6
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 4
+    weight: 3
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 7
+    weight: 6
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 5
+    weight: 4
     region: content
     settings:
       display_label: true
@@ -101,7 +94,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 1
     region: content
     settings:
       match_operator: CONTAINS
@@ -109,4 +102,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  langcode: true

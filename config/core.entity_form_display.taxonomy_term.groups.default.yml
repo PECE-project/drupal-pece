@@ -19,16 +19,16 @@ bundle: groups
 mode: default
 content:
   description:
-    type: text_textfield
-    weight: 0
+    type: text_textarea
+    weight: 1
     region: content
     settings:
-      size: 60
+      rows: 5
       placeholder: ''
     third_party_settings: {  }
   field_group_managers:
     type: entity_reference_autocomplete
-    weight: 105
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS
@@ -38,7 +38,7 @@ content:
     third_party_settings: {  }
   field_group_members:
     type: entity_reference_autocomplete
-    weight: 104
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -48,23 +48,13 @@ content:
     third_party_settings: {  }
   field_group_visibility:
     type: options_select
-    weight: 102
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_pece_project_ref:
-    type: entity_reference_autocomplete
-    weight: 101
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_substantive_logic:
     type: entity_reference_autocomplete
-    weight: 103
+    weight: 3
     region: content
     settings:
       match_operator: CONTAINS
@@ -74,7 +64,7 @@ content:
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
-    weight: 106
+    weight: 6
     region: content
     settings:
       match_operator: CONTAINS
@@ -82,16 +72,9 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings:
-      include_locked: true
-    third_party_settings: {  }
   name:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
@@ -99,15 +82,11 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
-  status:
-    type: boolean_checkbox
-    weight: 100
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_pece_project_ref: true
+  langcode: true
+  status: true

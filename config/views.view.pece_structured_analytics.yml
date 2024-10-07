@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.taxonomy_term.search_result
     - system.menu.main
     - taxonomy.vocabulary.pece_structured_analytics
   module:
@@ -143,8 +144,15 @@ display:
             operator_list: {  }
       style:
         type: default
+        options:
+          row_class: content
+          default_row_class: true
+          uses_fields: false
       row:
         type: 'entity:taxonomy_term'
+        options:
+          relationship: none
+          view_mode: search_result
       query:
         type: views_query
         options:
@@ -180,7 +188,7 @@ display:
         type: normal
         title: Analyze
         description: ''
-        weight: -48
+        weight: -47
         expanded: false
         menu_name: main
         parent: ''
