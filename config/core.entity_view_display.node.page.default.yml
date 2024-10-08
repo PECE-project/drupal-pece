@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.page.body
     - field.field.node.page.field_body_paragraph
+    - field.field.node.page.layout_builder__layout
     - node.type.page
   module:
     - layout_builder
@@ -14,8 +15,57 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    enabled: false
-    allow_custom: false
+    enabled: true
+    allow_custom: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          77c4da36-4a11-4951-8340-cc07a9744f5b:
+            uuid: 77c4da36-4a11-4951-8340-cc07a9744f5b
+            region: content
+            configuration:
+              id: 'extra_field_block:node:page:links'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 0
+            additional: {  }
+          979f8887-5f95-412e-a924-4569b14fbf8f:
+            uuid: 979f8887-5f95-412e-a924-4569b14fbf8f
+            region: content
+            configuration:
+              id: 'field_block:node:page:body'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          d2ea3e0e-34ae-474d-9636-6e2ac840ed7e:
+            uuid: d2ea3e0e-34ae-474d-9636-6e2ac840ed7e
+            region: content
+            configuration:
+              id: 'field_block:node:page:field_body_paragraph'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: layout_paragraphs
+                label: hidden
+                settings:
+                  view_mode: default
+                  link: ''
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+        third_party_settings: {  }
   layout_library:
     enable: false
 _core:
