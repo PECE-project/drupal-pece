@@ -32,7 +32,10 @@
 <div{{ attributes }}>
   {{ title_suffix.contextual_links }}
 
-  <a href={{ media.field_link.0.url }}>
-    {{ content|without('field_link') }}
+  <a href={{ media.field_link.0.url }} class="is-relative">
+    {{ content|without('field_link', 'field_text') }}
+    <div class="p-1 has-text-centered" style="position: absolute; bottom: 0; background-color: #ffffffb2; width: 100%;" >
+      {{ content.field_text }}
+    </div>
   </a>
 </div>
