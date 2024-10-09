@@ -79,11 +79,11 @@ class TimelineFormatter {
    */
   public function getArtifactMediaField(Node $artifact) {
     $artifact_field = [
-      'pece_artifact_audio' => 'field_pece_media_audio',
-      'pece_artifact_image' => 'field_pece_media_image',
-      'artifact_video' => 'field_pece_media_video',
+      'pece_artifact_audio' => 'field_audio_artifact_audio',
+      'pece_artifact_image' => 'field_image_artifact_image',
+      'artifact_video' => 'field_video_artifact_video',
       // 'pece_artifact_website' => 'field_website_url',
-      'pece_artifact_pdf' => 'field_pece_media_pdf',
+      'pece_artifact_pdf' => 'field_pdf_artifact_document ',
       // 'pece_artifact_text' => 'body',
     ];
     if (!in_array($artifact->getType(), array_keys($artifact_field))) {
@@ -236,7 +236,7 @@ class TimelineFormatter {
     $rtn = [];
     if ($media) {
       $mediaId = $media->first()->getValue()["target_id"];
-      $file = $this->getFileFromMediaId($mediaId);
+      $file = File::load($mediaId);
       $rtn["url"] = \Drupal::request()->getSchemeAndHttpHost() . $file->createFileUrl();
     }
     else {
@@ -245,29 +245,4 @@ class TimelineFormatter {
 
     return $rtn;
   }
-
-  /**
-   * Returns the file object from the Media Entity ID.
-   *
-   * @param int $mediaId
-   *   Media Fields.
-   *
-   * @return \Drupal\file\Entity\File
-   *   Fields array or false if no fields.
-   */
-  private function getFileFromMediaId(int $mediaId) {
-    $mediaTypeMapping = [
-      'audio' => 'field_media_audio_file',
-      'image' => 'field_media_image',
-      'video' => 'field_media_video_file',
-      'pdf_document' => 'field_media_file',
-    ];
-
-    $media = Media::load($mediaId);
-    $field = $mediaTypeMapping[$media->bundle()];
-    $fileId = $media->get($field)->first()->getValue()['target_id'];
-
-    return File::load($fileId);
-  }
-
 }
