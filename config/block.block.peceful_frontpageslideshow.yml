@@ -1,0 +1,31 @@
+uuid: f9fbbe1e-f19a-44d9-89f2-64930f6863bc
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:slideshow:84349579-fcec-4fda-99be-01e82381e108'
+  module:
+    - block_class
+    - block_content
+    - system
+  theme:
+    - peceful
+id: peceful_frontpageslideshow
+theme: peceful
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:84349579-fcec-4fda-99be-01e82381e108'
+settings:
+  id: 'block_content:84349579-fcec-4fda-99be-01e82381e108'
+  label: 'Frontpage slideshow'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'
