@@ -153,7 +153,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 15
+            weight: 16
             additional: {  }
           807badda-0c82-4277-a1a2-1ea175fff9ff:
             uuid: 807badda-0c82-4277-a1a2-1ea175fff9ff
@@ -246,7 +246,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 17
+            weight: 18
             additional:
               extra_field_plus_settings: {  }
           91613887-4135-4093-b5e2-e758587d2b5d:
@@ -262,7 +262,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 18
+            weight: 19
             additional:
               extra_field_plus_settings: {  }
           a74cf72b-bc1e-4d2b-954e-d79a59d949df:
@@ -282,7 +282,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 14
+            weight: 15
             additional: {  }
           ccd44f2e-cb07-45c5-aa16-c9b6b3372134:
             uuid: ccd44f2e-cb07-45c5-aa16-c9b6b3372134
@@ -301,7 +301,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 16
+            weight: 17
             additional: {  }
           ffd6197e-33e5-4278-ad58-9bf2ebc9833e:
             uuid: ffd6197e-33e5-4278-ad58-9bf2ebc9833e
@@ -453,6 +453,36 @@ third_party_settings:
                     rewrite_label: 0
             weight: 8
             additional: {  }
+          748b3487-b45a-4d4b-8505-766a7632caae:
+            uuid: 748b3487-b45a-4d4b-8505-766a7632caae
+            region: first
+            configuration:
+              id: 'extra_field_block:node:pece_artifact_audio:extra_field_create_referencing_content_button:annotate_button'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 16
+            additional: {  }
+          77d41aec-f330-4086-92c3-060cd4ef747f:
+            uuid: 77d41aec-f330-4086-92c3-060cd4ef747f
+            region: second
+            configuration:
+              id: 'extra_field_block:node:pece_artifact_audio:extra_field_create_referencing_content_button:annotate_button'
+              label: 'Annotate button'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 14
+            additional:
+              extra_field_plus_settings:
+                label: Annotate
+                tooltip: ''
+                classes: 'button is-primary is-medium'
+                target_field: node.pece_annotation.field_annotation_artifact
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -463,6 +493,11 @@ targetEntityType: node
 bundle: pece_artifact_audio
 mode: default
 content:
+  'extra_field_create_referencing_content_button:annotate_button':
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: first
   field_ark_enabled:
     type: boolean
     label: above
