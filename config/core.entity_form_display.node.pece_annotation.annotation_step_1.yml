@@ -1,0 +1,81 @@
+uuid: 8ba2c31a-35ae-480d-a3e3-ca1416b65a5f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.node.annotation_step_1
+    - field.field.node.pece_annotation.body
+    - field.field.node.pece_annotation.field_annotation_analytic
+    - field.field.node.pece_annotation.field_annotation_artifact
+    - field.field.node.pece_annotation.field_ark_enabled
+    - field.field.node.pece_annotation.field_groups_with_view_access
+    - field.field.node.pece_annotation.field_pece_all_can_view
+    - field.field.node.pece_annotation.field_pece_geolocation
+    - field.field.node.pece_annotation.field_pece_license
+    - field.field.node.pece_annotation.field_people_with_edit_access
+    - field.field.node.pece_annotation.field_people_with_view_access
+    - field.field.node.pece_annotation.field_tags
+    - node.type.pece_annotation
+  module:
+    - field_group
+    - readonly_field_widget
+third_party_settings:
+  field_group:
+    group_permissions:
+      children:
+        - field_groups_with_view_access
+        - field_pece_all_can_view
+        - field_people_with_view_access
+      label: Permissions
+      region: hidden
+      parent_name: ''
+      weight: 16
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: permissions
+        open: true
+        description: 'Set permissions to view, update and delete this content.'
+        required_fields: false
+id: node.pece_annotation.annotation_step_1
+targetEntityType: node
+bundle: pece_annotation
+mode: annotation_step_1
+content:
+  field_annotation_artifact:
+    type: readonly_field_widget
+    weight: 1
+    region: content
+    settings:
+      label: above
+      formatter_type: null
+      formatter_settings: {  }
+      show_description: false
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  field_annotation_analytic: true
+  field_ark_enabled: true
+  field_groups_with_view_access: true
+  field_pece_all_can_view: true
+  field_pece_geolocation: true
+  field_pece_license: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
+  field_tags: true
+  langcode: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true
