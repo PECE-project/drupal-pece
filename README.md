@@ -114,3 +114,9 @@ See more about Bulma's Sass in `web/themes/custom/peceful/README.md`
 ## Deployment
 
 Deploy to https://demo-pece.agaric.coop/ using Drutopia hosting.
+
+## License
+
+PECE is licensed to the public under the [General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.txt) ("GPLv3"). Your use of the software constitutes acceptance of those terms.
+
+Drupal and all drupal.org files are licensed under the [General Public License, version 2](https://www.drupal.org/about/licensing).
