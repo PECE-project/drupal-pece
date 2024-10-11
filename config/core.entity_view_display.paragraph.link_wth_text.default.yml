@@ -1,0 +1,28 @@
+uuid: 8c98c8ba-018d-4370-bb0d-ac08ebd983c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.link_wth_text.field_url
+    - paragraphs.paragraphs_type.link_wth_text
+  module:
+    - link
+id: paragraph.link_wth_text.default
+targetEntityType: paragraph
+bundle: link_wth_text
+mode: default
+content:
+  field_url:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

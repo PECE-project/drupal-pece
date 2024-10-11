@@ -7,6 +7,7 @@ dependencies:
     - field.storage.block_content.field_body_paragraph
     - paragraphs.paragraphs_type.image_with_link
     - paragraphs.paragraphs_type.layout
+    - paragraphs.paragraphs_type.link_wth_text
     - paragraphs.paragraphs_type.slideshow
   module:
     - entity_reference_revisions
@@ -26,6 +27,7 @@ settings:
     target_bundles:
       image_with_link: image_with_link
       layout: layout
+      link_wth_text: link_wth_text
       slideshow: slideshow
     negate: 0
     target_bundles_drag_drop:
@@ -34,6 +36,9 @@ settings:
         enabled: true
       layout:
         weight: 9
+        enabled: true
+      link_wth_text:
+        weight: 12
         enabled: true
       paragraph_content_reference:
         weight: 10
