@@ -1,22 +1,16 @@
-uuid: 8d3b893c-f0a3-40b7-aa48-3e5ffc3b4258
+uuid: dde96dbb-f858-41ca-a027-8c7d33c5a184
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.taxonomy_term.search_result
     - field.field.taxonomy_term.pece_structured_analytics.field_questions
     - taxonomy.vocabulary.pece_structured_analytics
   module:
-    - layout_builder
     - text
-third_party_settings:
-  layout_builder:
-    enabled: false
-    allow_custom: false
-id: taxonomy_term.pece_structured_analytics.search_result
+id: taxonomy_term.pece_structured_analytics.default
 targetEntityType: taxonomy_term
 bundle: pece_structured_analytics
-mode: search_result
+mode: default
 content:
   description:
     type: text_default
@@ -25,7 +19,14 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  field_questions:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
-  field_questions: true
   langcode: true
   search_api_excerpt: true
