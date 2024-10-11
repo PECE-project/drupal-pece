@@ -17,7 +17,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: -2
     region: content
   'extra_field_create_referencing_content_button:add_question_button':
     type: 'extra_field_create_referencing_content_button:add_question_button'
@@ -27,7 +27,7 @@ content:
       classes: 'button is-primary is-medium'
       target_field: node.pece_analytic.field_analytic_question_set
     third_party_settings: {  }
-    weight: 2
+    weight: 49
     region: content
   field_questions:
     type: entity_reference_label
@@ -35,7 +35,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 1
+    weight: -1
     region: content
 hidden:
   langcode: true
