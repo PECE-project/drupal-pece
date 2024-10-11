@@ -6,6 +6,11 @@ dependencies:
     - field.storage.node.field_analytic_question_set
     - node.type.pece_analytic
     - taxonomy.vocabulary.pece_structured_analytics
+  module:
+    - epp
+third_party_settings:
+  epp:
+    value: '[current-page:query:analytic_question_set]'
 _core:
   default_config_hash: p7IvvYA1DwHzQzI9bOtOgG4jgUEY9WHgAzZ2nPJzXuI
 id: node.pece_analytic.field_analytic_question_set

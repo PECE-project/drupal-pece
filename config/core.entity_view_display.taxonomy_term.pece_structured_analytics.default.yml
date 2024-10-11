@@ -19,6 +19,16 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  'extra_field_create_referencing_content_button:add_question_button':
+    type: 'extra_field_create_referencing_content_button:add_question_button'
+    settings:
+      label: 'Add analytic'
+      tooltip: 'Create a question (analytic) in this question set (structured analytics).'
+      classes: 'button is-primary is-medium'
+      target_field: node.pece_analytic.field_analytic_question_set
+    third_party_settings: {  }
+    weight: 2
+    region: content
   field_questions:
     type: entity_reference_label
     label: above
