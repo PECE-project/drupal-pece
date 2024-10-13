@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fb26a9ef6178f2f88290f93e888d401",
+    "content-hash": "1759c0ebc37f6f7e1f20660738060fb7",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -7328,6 +7328,47 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/layout_builder_operation_link",
                 "issues": "https://drupal.org/project/issues/layout_builder_operation_link"
+            }
+        },
+        {
+            "name": "drupal/layout_collapse",
+            "version": "dev-1.0.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/layout_collapse.git",
+                "reference": "f4ff44148b2b9eabaafc3d96493366d398bc3b0c"
+            },
+            "require": {
+                "drupal/core": "^10 || ^11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.0.x": "1.0.x-dev"
+                },
+                "drupal": {
+                    "version": "1.0.x-dev",
+                    "datestamp": "1728834048",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "mlncn",
+                    "homepage": "https://www.drupal.org/user/64383"
+                }
+            ],
+            "description": "Provides layouts for use in Layout Builder that have regions (AKA slots) that can be configured to be collapsed or collapsible (with the details HTML element, no JavaScript needed).",
+            "homepage": "https://www.drupal.org/project/layout_collapse",
+            "support": {
+                "source": "https://git.drupalcode.org/project/layout_collapse"
             }
         },
         {
@@ -24571,6 +24612,7 @@
         "drupal/gin_type_tray": 10,
         "drupal/graphql": 20,
         "drupal/languagefield": 20,
+        "drupal/layout_collapse": 20,
         "drupal/layout_library": 10,
         "drupal/licenses_vocabulary": 20,
         "drupal/location_migration": 20,
