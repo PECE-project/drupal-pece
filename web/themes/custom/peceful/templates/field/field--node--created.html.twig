@@ -28,8 +28,8 @@
 <{{ label_tag|default('div') }}{{ title_attributes.addClass('label') }}>
   {{ label }}
 </{{ label_tag|default('div') }}>
-<span{{ attributes }}>
+<div{{ attributes }}>
   {%- for item in items -%}
     {{ item.content }}
   {%- endfor -%}
-</span>
+</div>
