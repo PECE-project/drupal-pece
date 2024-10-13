@@ -160,14 +160,14 @@ third_party_settings:
             configuration:
               id: 'field_block:node:pece_artifact_website:created'
               label: 'Authored on'
-              label_display: visible
+              label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
                 type: timestamp
-                label: hidden
+                label: above
                 settings:
                   date_format: medium
                   custom_date_format: ''
