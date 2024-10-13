@@ -25,10 +25,6 @@
  * @todo Delete as part of https://www.drupal.org/node/3015623
  */
 #}
-{% if not is_inline %}
-ummmm
-  {% include "field.html.twig" %}
-{% else %}
 <{{ label_tag|default('div') }}{{ title_attributes.addClass('label') }}>
   {{ label }}
 </{{ label_tag|default('div') }}>
@@ -37,4 +33,3 @@ ummmm
     {{ item.content }}
   {%- endfor -%}
 </span>
-{% endif %}
