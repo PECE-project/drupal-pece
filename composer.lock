@@ -7336,10 +7336,11 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/layout_collapse.git",
-                "reference": "f4ff44148b2b9eabaafc3d96493366d398bc3b0c"
+                "reference": "c1f8245d25f85d979b8eeb8f14235255eb5b1c53"
             },
             "require": {
-                "drupal/core": "^10 || ^11"
+                "drupal/core": "^10 || ^11",
+                "drupal/layout_options": "^1.6"
             },
             "type": "drupal-module",
             "extra": {
@@ -7348,7 +7349,7 @@
                 },
                 "drupal": {
                     "version": "1.0.x-dev",
-                    "datestamp": "1728834048",
+                    "datestamp": "1728836497",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -7361,14 +7362,28 @@
             ],
             "authors": [
                 {
-                    "name": "mlncn",
-                    "homepage": "https://www.drupal.org/user/64383"
+                    "name": "benjamin melançon (mlncn)",
+                    "homepage": "https://www.drupal.org/u/mlncn",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Keegan Rankin (megakeegman)",
+                    "homepage": "https://www.drupal.org/u/megakeegman",
+                    "role": "Maintainer"
                 }
             ],
-            "description": "Provides layouts for use in Layout Builder that have regions (AKA slots) that can be configured to be collapsed or collapsible (with the details HTML element, no JavaScript needed).",
+            "description": "Layout Collapse (sections with HTML details as regions)",
             "homepage": "https://www.drupal.org/project/layout_collapse",
+            "keywords": [
+                "Drupal",
+                "HTML details element",
+                "Layout Builder",
+                "collpsible",
+                "layouts"
+            ],
             "support": {
-                "source": "https://git.drupalcode.org/project/layout_collapse"
+                "source": "https://git.drupalcode.org/project/layout_collapse",
+                "issues": "https://drupal.org/project/issues/layout_collapse"
             }
         },
         {
@@ -7433,6 +7448,62 @@
             "homepage": "https://www.drupal.org/project/layout_library",
             "support": {
                 "source": "https://git.drupalcode.org/project/layout_library"
+            }
+        },
+        {
+            "name": "drupal/layout_options",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/layout_options.git",
+                "reference": "8.x-1.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/layout_options-8.x-1.6.zip",
+                "reference": "8.x-1.6",
+                "shasum": "67396bc40dd3e8f597c80add69d27e1fbbee9b7d"
+            },
+            "require": {
+                "drupal/core": "^10 || ^11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.6",
+                    "datestamp": "1724921946",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "cgmonroe",
+                    "homepage": "https://www.drupal.org/user/563114"
+                },
+                {
+                    "name": "g4mbini",
+                    "homepage": "https://www.drupal.org/user/2533498"
+                },
+                {
+                    "name": "grimreaper",
+                    "homepage": "https://www.drupal.org/user/2388214"
+                },
+                {
+                    "name": "pdureau",
+                    "homepage": "https://www.drupal.org/user/1903334"
+                }
+            ],
+            "description": "Provides a layout plugin that allows for styling options to be added to layouts via YAML files.",
+            "homepage": "https://www.drupal.org/project/layout_options",
+            "support": {
+                "source": "https://git.drupalcode.org/project/layout_options"
             }
         },
         {
@@ -21737,16 +21808,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.32.0",
+            "version": "1.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "6ca22b154efdd9e3c68c56f5d94670920a1c19a4"
+                "reference": "82a311fd3690fb2bf7b64d5c98f912b3dd746140"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/6ca22b154efdd9e3c68c56f5d94670920a1c19a4",
-                "reference": "6ca22b154efdd9e3c68c56f5d94670920a1c19a4",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/82a311fd3690fb2bf7b64d5c98f912b3dd746140",
+                "reference": "82a311fd3690fb2bf7b64d5c98f912b3dd746140",
                 "shasum": ""
             },
             "require": {
@@ -21778,9 +21849,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.32.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.33.0"
             },
-            "time": "2024-09-26T07:23:32+00:00"
+            "time": "2024-10-13T11:25:22+00:00"
         },
         {
             "name": "phpstan/phpstan",
