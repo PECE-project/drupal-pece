@@ -113,7 +113,9 @@ See more about Bulma's Sass in `web/themes/custom/peceful/README.md`
 
 ## Deployment
 
-Deploy to https://demo-pece.agaric.coop/ using Drutopia hosting.
+Deployed to https://demo-pece.agaric.coop/ using Drutopia hosting.
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for more about deploying.
 
 ## License
 
