@@ -9,7 +9,6 @@ dependencies:
     - field.field.node.pece_analytic.field_tags
     - node.type.pece_analytic
   module:
-    - geolocation
     - path
 _core:
   default_config_hash: 9F7Dh_2CeSnFxkyVAoOHLUB_-pEVYVmJyH2zRZh_CUA
@@ -36,16 +35,10 @@ content:
     third_party_settings: {  }
   field_ark_enabled:
     type: boolean_checkbox
-    weight: 10
+    weight: 9
     region: content
     settings:
       display_label: true
-    third_party_settings: {  }
-  field_pece_geolocation:
-    type: geolocation_latlng
-    weight: 9
-    region: content
-    settings: {  }
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
@@ -103,4 +96,5 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  field_pece_geolocation: true
   langcode: true

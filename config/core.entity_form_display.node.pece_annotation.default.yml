@@ -40,6 +40,65 @@ third_party_settings:
         open: true
         description: 'Set permissions to view, update and delete this content.'
         required_fields: false
+    group_metadata:
+      children: {  }
+      label: Metadata
+      region: hidden
+      parent_name: ''
+      weight: 20
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: vertical
+        width_breakpoint: 640
+    group_contribution_metadata:
+      children: {  }
+      label: 'Contribution Metadata'
+      region: hidden
+      parent_name: ''
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_permissions_authorship_an:
+      children: {  }
+      label: 'Permissions, Authorship, and Groups'
+      region: hidden
+      parent_name: ''
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_custom_citation:
+      children: {  }
+      label: 'Custom Citation'
+      region: hidden
+      parent_name: ''
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
 id: node.pece_annotation.default
 targetEntityType: node
 bundle: pece_annotation
