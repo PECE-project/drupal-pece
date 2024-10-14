@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1759c0ebc37f6f7e1f20660738060fb7",
+    "content-hash": "513db95f6e5b317bf6df2d07d3a1e2cb",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -9202,6 +9202,111 @@
             "homepage": "https://www.drupal.org/project/restui",
             "support": {
                 "source": "https://git.drupalcode.org/project/restui"
+            }
+        },
+        {
+            "name": "drupal/schemadotorg",
+            "version": "1.0.0-alpha26",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/schemadotorg.git",
+                "reference": "1.0.0-alpha26"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/schemadotorg-1.0.0-alpha26.zip",
+                "reference": "1.0.0-alpha26",
+                "shasum": "034dac06d80a6f76517f5332a3f8d560fe5b9df9"
+            },
+            "require": {
+                "drupal/core": "^10.3",
+                "drush/drush": "^12.0 || ^13.0"
+            },
+            "require-dev": {
+                "drupal/address": "^2.0",
+                "drupal/allowed_formats": "^3.0",
+                "drupal/auto_entitylabel": "^3.0",
+                "drupal/cer": "^5.0",
+                "drupal/ckeditor5_embedded_content": "^1.0",
+                "drupal/config_rewrite": "^1.0",
+                "drupal/content_browser": "^1.0",
+                "drupal/content_model_documentation": "^1.0",
+                "drupal/custom_field": "^3.0",
+                "drupal/devel": "^5.0",
+                "drupal/embed": "^1.0",
+                "drupal/entity_browser": "^2.0",
+                "drupal/entity_reference_override": "^2.0",
+                "drupal/entity_usage": "^2.0",
+                "drupal/epp": "^1.0",
+                "drupal/existing_values_autocomplete_widget": "^2.0",
+                "drupal/field_group": "^3.0",
+                "drupal/field_validation": "^3.0",
+                "drupal/focal_point": "^2.0",
+                "drupal/geolocation": "^3.0",
+                "drupal/inline_entity_form": "^3.0",
+                "drupal/jsonapi_extras": "^3.0",
+                "drupal/layout_paragraphs": "^2.0",
+                "drupal/markup": "^2.0",
+                "drupal/media_library_media_modify": "^1.0",
+                "drupal/mercury_editor": "^2.0",
+                "drupal/metatag": "^1.0",
+                "drupal/office_hours": "^1.0",
+                "drupal/paragraphs": "^1.0",
+                "drupal/pathauto": "^1.0",
+                "drupal/range": "^1.0",
+                "drupal/rdf": "^2.0",
+                "drupal/scheduler": "^2.0",
+                "drupal/schemadotorg_jsonapi": "*",
+                "drupal/schemadotorg_jsonld": "*",
+                "drupal/schemadotorg_layout_paragraphs": "*",
+                "drupal/schemadotorg_media": "*",
+                "drupal/schemadotorg_node": "*",
+                "drupal/schemadotorg_paragraphs": "*",
+                "drupal/simple_sitemap": "^4.0",
+                "drupal/smart_date": "^4.1",
+                "drupal/token": "^1.0",
+                "drupal/type_tray": "^1.0",
+                "league/commonmark": "^2.0"
+            },
+            "suggest": {
+                "drupal/address": "Provides functionality for storing, validating and displaying international postal addresses.",
+                "drupal/field_group": "Provides the ability to group your fields on both form and display.",
+                "drupal/inline_entity_form": "Provides a widget for inline management (creation, modification, removal) of referenced entities.",
+                "drupal/jsonapi_extras": "Builds on top of JSON:API to deliver extra functionality.",
+                "drupal/paragraphs": "Enables the creation of paragraphs (i.e. component) entities.",
+                "league/commonmark": "Improve display of Markdown-format text in the help system."
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.0-alpha26",
+                    "datestamp": "1726607456",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Jacob Rockowitz (jrockowitz)",
+                    "homepage": "https://www.drupal.org/u/jrockowitz",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "jrockowitz",
+                    "homepage": "https://www.drupal.org/user/371407"
+                }
+            ],
+            "description": "Uses Schema.org types and properties as the content architecture foundation for Drupal website.",
+            "homepage": "https://drupal.org/project/schemadotorg",
+            "support": {
+                "source": "https://git.drupalcode.org/project/schemadotorg",
+                "issues": "https://drupal.org/project/issues/schemadotorg"
             }
         },
         {
@@ -24691,6 +24796,7 @@
         "drupal/media_entity_browser": 15,
         "drupal/media_library_media_modify": 10,
         "drupal/profile": 20,
+        "drupal/schemadotorg": 15,
         "drupal/style_guide": 20
     },
     "prefer-stable": true,
