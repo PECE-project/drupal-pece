@@ -188,7 +188,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 10
+            weight: 11
             additional: {  }
           7f438dfa-80cc-4403-8fcb-85d3f83b2c1f:
             uuid: 7f438dfa-80cc-4403-8fcb-85d3f83b2c1f
@@ -345,29 +345,6 @@ third_party_settings:
                     rewrite_label: 0
             weight: 5
             additional: {  }
-          c8de3caa-a34e-4bb9-8b65-2ddcaafed1fd:
-            uuid: c8de3caa-a34e-4bb9-8b65-2ddcaafed1fd
-            region: first
-            configuration:
-              id: 'field_block:node:pece_artifact_image:langcode'
-              label: Language
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: language
-                label: above
-                settings:
-                  link_to_entity: false
-                  native_language: false
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 9
-            additional: {  }
           0a478764-9027-4531-b962-b940ccf91c72:
             uuid: 0a478764-9027-4531-b962-b940ccf91c72
             region: second
@@ -444,6 +421,32 @@ third_party_settings:
                     new_label: ''
                     rewrite_label: 0
             weight: 4
+            additional: {  }
+          2edd8dcb-cd04-45df-8a4d-66af846ec1ff:
+            uuid: 2edd8dcb-cd04-45df-8a4d-66af846ec1ff
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_image:field_language'
+              label: Language
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: languagefield_default
+                label: above
+                settings:
+                  link_to_entity: 0
+                  format:
+                    name: name
+                    iso: '0'
+                    name_native: '0'
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 10
             additional: {  }
         third_party_settings: {  }
   layout_library:
