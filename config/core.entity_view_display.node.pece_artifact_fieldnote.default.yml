@@ -212,26 +212,6 @@ third_party_settings:
                     rewrite_label: 1
             weight: 4
             additional: {  }
-          4a1651dc-4bf3-4d1c-9872-b25c4c117ba8:
-            uuid: 4a1651dc-4bf3-4d1c-9872-b25c4c117ba8
-            region: first
-            configuration:
-              id: 'field_block:node:pece_artifact_fieldnote:langcode'
-              label: Language
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: language
-                label: above
-                settings:
-                  link_to_entity: false
-                  native_language: false
-                third_party_settings: {  }
-            weight: 5
-            additional: {  }
           9f356b7e-c62d-4412-882e-36082f023fdb:
             uuid: 9f356b7e-c62d-4412-882e-36082f023fdb
             region: first
@@ -296,7 +276,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 6
+            weight: 7
             additional: {  }
           6d3fdc13-0319-4f5c-ba6c-c8479b1712f1:
             uuid: 6d3fdc13-0319-4f5c-ba6c-c8479b1712f1
@@ -406,6 +386,32 @@ third_party_settings:
                     new_label: ''
                     rewrite_label: 0
             weight: 9
+            additional: {  }
+          315d7409-bfe8-4f77-961c-069f7abef898:
+            uuid: 315d7409-bfe8-4f77-961c-069f7abef898
+            region: first
+            configuration:
+              id: 'field_block:node:pece_artifact_fieldnote:field_language'
+              label: Language
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: languagefield_default
+                label: above
+                settings:
+                  link_to_entity: 0
+                  format:
+                    name: name
+                    iso: '0'
+                    name_native: '0'
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 6
             additional: {  }
         third_party_settings: {  }
   layout_library:
