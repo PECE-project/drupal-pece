@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac2b659e9709f48ac8f40e6ae9f89ab2",
+    "content-hash": "db6f3554fe7f4654899db632a8bedeb4",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -2022,6 +2022,61 @@
             "homepage": "https://www.drupal.org/project/advanced_text_formatter",
             "support": {
                 "source": "https://git.drupalcode.org/project/advanced_text_formatter"
+            }
+        },
+        {
+            "name": "drupal/agreement",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/agreement.git",
+                "reference": "3.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/agreement-3.0.1.zip",
+                "reference": "3.0.1",
+                "shasum": "b996ffe4593d8aeb616a52656ef7657517c545c7"
+            },
+            "require": {
+                "drupal/core": "^10.2 || ^11"
+            },
+            "require-dev": {
+                "jangregor/phpstan-prophecy": "^1"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "3.0.1",
+                    "datestamp": "1720202025",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "mradcliffe",
+                    "homepage": "https://www.drupal.org/user/157079"
+                },
+                {
+                    "name": "pagaille",
+                    "homepage": "https://www.drupal.org/user/189691"
+                },
+                {
+                    "name": "yuriy.babenko",
+                    "homepage": "https://www.drupal.org/user/212855"
+                }
+            ],
+            "description": "Allows administrators to create agreement pages that users must agree to before accessing other pages.",
+            "homepage": "https://www.drupal.org/project/agreement",
+            "support": {
+                "source": "https://git.drupalcode.org/project/agreement"
             }
         },
         {
