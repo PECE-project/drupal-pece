@@ -22,7 +22,6 @@ third_party_settings:
     group_permissions:
       children:
         - field_pece_all_can_view
-        - field_groups_with_view_access
         - field_people_with_view_access
       label: Permissions
       region: content
@@ -59,7 +58,7 @@ content:
     third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete
-    weight: 17
+    weight: 7
     region: content
     settings:
       match_operator: CONTAINS
@@ -67,22 +66,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings:
-      conditional_fields:
-        9d930c3a-a9de-42ed-a7ae-1208b0651cce:
-          entity_type: node
-          bundle: pece_memo
-          dependee: field_pece_all_can_view
-          settings:
-            state: '!visible'
-            condition: checked
-            grouping: AND
-            values_set: 1
-            value: ''
-            values: {  }
-            value_form: {  }
-            effect: show
-            effect_options: {  }
-            selector: ''
+      conditional_fields: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
     weight: 16
