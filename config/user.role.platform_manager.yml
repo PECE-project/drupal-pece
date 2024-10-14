@@ -5,6 +5,8 @@ dependencies:
   config:
     - access_policy.access_policy.pece_content
     - access_policy.access_policy.pece_group
+    - core.entity_view_display.node.page.default
+    - core.entity_view_display.node.pece_essay.default
     - filter.format.html
     - node.type.artifact_tabular_data
     - node.type.artifact_video
@@ -27,10 +29,20 @@ dependencies:
     - node.type.pece_substantive_logic
     - node.type.pece_timeline_essay
     - taxonomy.vocabulary.groups
+    - workflows.workflow.editorial
   module:
     - access_policy
+    - asset_injector
+    - block
+    - block_class
+    - content_moderation
+    - contextual
     - filter
+    - layout_builder
+    - legal
     - node
+    - pathauto
+    - single_content_sync
     - taxonomy
 id: platform_manager
 label: 'Platform manager'
@@ -38,10 +50,20 @@ weight: -5
 is_admin: null
 permissions:
   - 'access content overview'
+  - 'access contextual links'
+  - 'access user profiles'
+  - 'administer Terms and Conditions'
+  - 'administer block classes'
+  - 'administer blocks'
+  - 'administer css assets injector'
   - 'administer nodes'
+  - 'administer users'
   - 'assign pece_content access policy'
   - 'assign pece_group access policy'
   - 'bypass node access'
+  - 'configure all page node layout overrides'
+  - 'configure all pece_essay node layout overrides'
+  - 'configure any layout'
   - 'create artifact_tabular_data content'
   - 'create artifact_video content'
   - 'create page content'
@@ -83,6 +105,9 @@ permissions:
   - 'edit any pece_timeline_essay content'
   - 'edit pece_group taxonomy term'
   - 'edit terms in groups'
+  - 'export single content'
+  - 'import single content'
+  - 'notify of path changes'
   - 'revert all revisions'
   - 'revert artifact_tabular_data revisions'
   - 'revert artifact_video revisions'
@@ -104,10 +129,18 @@ permissions:
   - 'revert pece_slideshow_image revisions'
   - 'revert pece_substantive_logic revisions'
   - 'revert pece_timeline_essay revisions'
+  - 'use editorial transition archive'
+  - 'use editorial transition archived_draft'
+  - 'use editorial transition archived_published'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition publish'
   - 'use text format html'
   - 'view all revisions'
+  - 'view all taxonomy revisions'
+  - 'view any unpublished content'
   - 'view artifact_tabular_data revisions'
   - 'view artifact_video revisions'
+  - 'view latest version'
   - 'view own unpublished content'
   - 'view page revisions'
   - 'view pece_analytic revisions'
@@ -127,3 +160,4 @@ permissions:
   - 'view pece_project revisions'
   - 'view pece_substantive_logic revisions'
   - 'view pece_timeline_essay revisions'
+  - 'view user email addresses'

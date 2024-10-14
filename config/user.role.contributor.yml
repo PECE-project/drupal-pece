@@ -5,9 +5,13 @@ dependencies:
   config:
     - access_policy.access_policy.pece_content
     - access_policy.access_policy.pece_group
+    - core.entity_view_display.node.page.default
+    - core.entity_view_display.node.pece_essay.default
     - filter.format.html
     - node.type.artifact_tabular_data
     - node.type.artifact_video
+    - node.type.page
+    - node.type.pece_analytic
     - node.type.pece_annotation
     - node.type.pece_artifact_audio
     - node.type.pece_artifact_bundle
@@ -17,15 +21,19 @@ dependencies:
     - node.type.pece_artifact_text
     - node.type.pece_artifact_website
     - node.type.pece_essay
+    - node.type.pece_fieldsite
     - node.type.pece_memo
     - node.type.pece_photo_essay
     - node.type.pece_project
+    - node.type.pece_slideshow_image
     - node.type.pece_substantive_logic
     - node.type.pece_timeline_essay
     - taxonomy.vocabulary.groups
   module:
     - access_policy
+    - contextual
     - filter
+    - layout_builder
     - node
     - taxonomy
 _core:
@@ -36,8 +44,11 @@ weight: -7
 is_admin: null
 permissions:
   - 'access content overview'
+  - 'access contextual links'
   - 'assign pece_content access policy'
   - 'assign pece_group access policy'
+  - 'configure editable page node layout overrides'
+  - 'configure editable pece_essay node layout overrides'
   - 'create artifact_tabular_data content'
   - 'create artifact_video content'
   - 'create pece_annotation content'
@@ -71,6 +82,26 @@ permissions:
   - 'edit any pece_project content'
   - 'edit any pece_substantive_logic content'
   - 'edit any pece_timeline_essay content'
+  - 'edit own artifact_tabular_data content'
+  - 'edit own artifact_video content'
+  - 'edit own page content'
+  - 'edit own pece_analytic content'
+  - 'edit own pece_annotation content'
+  - 'edit own pece_artifact_audio content'
+  - 'edit own pece_artifact_bundle content'
+  - 'edit own pece_artifact_fieldnote content'
+  - 'edit own pece_artifact_image content'
+  - 'edit own pece_artifact_pdf content'
+  - 'edit own pece_artifact_text content'
+  - 'edit own pece_artifact_website content'
+  - 'edit own pece_essay content'
+  - 'edit own pece_fieldsite content'
+  - 'edit own pece_memo content'
+  - 'edit own pece_photo_essay content'
+  - 'edit own pece_project content'
+  - 'edit own pece_slideshow_image content'
+  - 'edit own pece_substantive_logic content'
+  - 'edit own pece_timeline_essay content'
   - 'edit pece_group taxonomy term'
   - 'edit terms in groups'
   - 'use text format html'
