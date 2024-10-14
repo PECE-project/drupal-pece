@@ -89,12 +89,12 @@ third_party_settings:
         required_fields: true
     group_contribution_metadata:
       children:
+        - field_groups_with_view_access
         - field_people_with_edit_access
         - field_crit_commentary
         - field_fieldsite
         - field_pece_license
         - field_use_fieldsite_local
-        - field_groups_with_view_access
         - group_permissions
       label: 'Contribution Metadata'
       region: content
@@ -182,7 +182,7 @@ content:
     third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete
-    weight: 26
+    weight: 35
     region: content
     settings:
       match_operator: CONTAINS
