@@ -15,7 +15,7 @@ $beige-lighter: #eff0eb;
   $link: $sts-green-light,
   $menu-item-radius: 0,
   $primary: $sts-green
-);
+  );
 
 @use "bulma/sass/utilities/mixins" as mx;
 
@@ -288,5 +288,8 @@ article .contextual {
 
 // hide pagination 
 .splide .splide__pagination {
-  display: none;
+  position: unset;
+  .is-active {
+    filter: brightness(50%);
+  }
 }
