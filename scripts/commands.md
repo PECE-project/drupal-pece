@@ -26,7 +26,7 @@ $ export $SESSKEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 # When that completes, get extra information about classes:
 
-1. Report the classes used in each essay:  
+1. Report the classes used in each essay (note this will take some time). If running this a second time, remove class.list beforehand:  
 `find -iname 'essay-*' -exec report-classes.py {} >> class.list \;`
 1. Count the combined class usage:  
 `sort class.list | uniq -c > counted-classes.txt`
