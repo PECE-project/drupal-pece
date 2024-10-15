@@ -1,0 +1,33 @@
+uuid: 641c5ac1-ca7b-453c-81ea-418c81bc27a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_conceptualize
+    - node.type.pece_essay
+    - node.type.pece_fieldsite
+    - node.type.pece_project
+    - node.type.pece_substantive_logic
+id: node.pece_essay.field_conceptualize
+field_name: field_conceptualize
+entity_type: node
+bundle: pece_essay
+label: Conceptualize
+description: 'Choose fieldsites, projects, and substantive logics to include in this essay by typing part of a title and pressing enter to select the one you want.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_fieldsite: pece_fieldsite
+      pece_project: pece_project
+      pece_substantive_logic: pece_substantive_logic
+    sort:
+      field: changed
+      direction: DESC
+    auto_create: false
+    auto_create_bundle: pece_fieldsite
+field_type: entity_reference

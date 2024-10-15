@@ -1,0 +1,45 @@
+uuid: d3cc8a5e-4590-470c-a6ce-d321643addaf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_artifacts
+    - node.type.artifact_tabular_data
+    - node.type.artifact_video
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_fieldnote
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
+    - node.type.pece_essay
+id: node.pece_essay.field_pece_artifacts
+field_name: field_pece_artifacts
+entity_type: node
+bundle: pece_essay
+label: Archive
+description: 'Choose artifacts to include in this essay by typing part of the artifact name and pressing enter to select the one you want.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_artifact_audio: pece_artifact_audio
+      pece_artifact_bundle: pece_artifact_bundle
+      pece_artifact_fieldnote: pece_artifact_fieldnote
+      pece_artifact_image: pece_artifact_image
+      pece_artifact_pdf: pece_artifact_pdf
+      artifact_tabular_data: artifact_tabular_data
+      pece_artifact_text: pece_artifact_text
+      artifact_video: artifact_video
+      pece_artifact_website: pece_artifact_website
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: artifact_video
+field_type: entity_reference
