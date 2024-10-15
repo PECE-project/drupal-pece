@@ -39,22 +39,24 @@ third_party_settings:
   field_group:
     group_permissions:
       children:
-        - field_pece_all_can_view
-        - field_people_with_view_access
-      label: Permissions
+        - group_edit_permissions_and_autho
+        - group_view_permissions_and_group
+      label: 'Permissions, Authorship, and Groups'
       region: content
-      parent_name: group_contribution_metadata
+      parent_name: group_metadata
       weight: 34
-      format_type: details
+      format_type: tab
       format_settings:
         classes: ''
         show_empty_fields: false
         id: ''
-        open: true
+        label_as_html: false
+        formatter: closed
         description: ''
         required_fields: true
     group_metadata:
       children:
+        - group_permissions
         - group_creation_metadata
         - group_contribution_metadata
         - group_custom_citation
@@ -79,10 +81,10 @@ third_party_settings:
         - field_language
         - field_pece_geolocation
         - field_location
-      label: 'Creation Metadata'
+      label: 'Source Metadata'
       region: content
       parent_name: group_metadata
-      weight: 27
+      weight: 35
       format_type: tab
       format_settings:
         classes: ''
@@ -94,18 +96,15 @@ third_party_settings:
         required_fields: true
     group_contribution_metadata:
       children:
-        - field_people_with_edit_access
+        - field_pece_license
         - field_crit_commentary
         - field_fieldsite
         - field_use_fieldsite_local
-        - field_pece_license
-        - field_groups_with_view_access
-        - group_permissions
         - field_tags
       label: 'Contribution Metadata'
       region: content
       parent_name: group_metadata
-      weight: 28
+      weight: 36
       format_type: tab
       format_settings:
         classes: ''
@@ -122,7 +121,7 @@ third_party_settings:
       label: 'Custom Citation'
       region: content
       parent_name: group_metadata
-      weight: 29
+      weight: 37
       format_type: tab
       format_settings:
         classes: ''
@@ -130,6 +129,38 @@ third_party_settings:
         id: ''
         label_as_html: false
         formatter: closed
+        description: ''
+        required_fields: true
+    group_edit_permissions_and_autho:
+      children:
+        - field_people_with_edit_access
+      label: 'Edit Permissions and Authorship'
+      region: content
+      parent_name: group_permissions
+      weight: 34
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true
+    group_view_permissions_and_group:
+      children:
+        - field_pece_all_can_view
+        - field_people_with_view_access
+        - field_groups_with_view_access
+      label: 'View Permissions and Groups'
+      region: content
+      parent_name: group_permissions
+      weight: 35
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
         description: ''
         required_fields: true
 id: node.pece_artifact_image.default
@@ -168,7 +199,7 @@ content:
     third_party_settings: {  }
   field_crit_commentary:
     type: text_textarea
-    weight: 30
+    weight: 35
     region: content
     settings:
       rows: 5
@@ -176,7 +207,7 @@ content:
     third_party_settings: {  }
   field_fieldsite:
     type: entity_reference_autocomplete
-    weight: 31
+    weight: 36
     region: content
     settings:
       match_operator: CONTAINS
@@ -237,7 +268,7 @@ content:
     third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
-    weight: 26
+    weight: 32
     region: content
     settings:
       display_label: true
@@ -250,7 +281,7 @@ content:
     third_party_settings: {  }
   field_pece_license:
     type: options_select
-    weight: 33
+    weight: 34
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -266,7 +297,7 @@ content:
     third_party_settings: {  }
   field_people_with_edit_access:
     type: entity_reference_autocomplete
-    weight: 29
+    weight: 33
     region: content
     settings:
       match_operator: CONTAINS
@@ -276,7 +307,7 @@ content:
     third_party_settings: {  }
   field_people_with_view_access:
     type: entity_reference_autocomplete
-    weight: 28
+    weight: 33
     region: content
     settings:
       match_operator: CONTAINS
@@ -310,7 +341,7 @@ content:
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
-    weight: 35
+    weight: 38
     region: content
     settings:
       match_operator: CONTAINS
@@ -320,7 +351,7 @@ content:
     third_party_settings: {  }
   field_use_fieldsite_local:
     type: boolean_checkbox
-    weight: 32
+    weight: 37
     region: content
     settings:
       display_label: true

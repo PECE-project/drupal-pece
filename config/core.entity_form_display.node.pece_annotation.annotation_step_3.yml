@@ -23,9 +23,9 @@ third_party_settings:
   field_group:
     group_permissions:
       children:
-        - field_groups_with_view_access
         - field_pece_all_can_view
         - field_people_with_view_access
+        - field_groups_with_view_access
       label: Permissions
       region: content
       parent_name: ''
@@ -55,7 +55,7 @@ content:
     third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete
-    weight: 0
+    weight: 2
     region: content
     settings:
       match_operator: CONTAINS
@@ -82,7 +82,7 @@ content:
     third_party_settings: {  }
   field_people_with_view_access:
     type: entity_reference_autocomplete
-    weight: 0
+    weight: 1
     region: content
     settings:
       match_operator: CONTAINS

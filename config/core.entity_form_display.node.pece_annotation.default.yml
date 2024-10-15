@@ -24,28 +24,15 @@ dependencies:
     - text
 third_party_settings:
   field_group:
-    group_permissions:
+    group_metadata:
       children:
-        - field_pece_all_can_view
-        - field_people_with_view_access
-      label: Permissions
+        - group_permissions_authorship_an
+        - group_contribution_metadata
+        - group_custom_citation
+      label: Metadata
       region: content
       parent_name: ''
-      weight: 8
-      format_type: details
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: permissions
-        open: true
-        description: 'Set permissions to view, update and delete this content.'
-        required_fields: false
-    group_metadata:
-      children: {  }
-      label: Metadata
-      region: hidden
-      parent_name: ''
-      weight: 20
+      weight: 4
       format_type: tabs
       format_settings:
         classes: ''
@@ -55,11 +42,14 @@ third_party_settings:
         direction: vertical
         width_breakpoint: 640
     group_contribution_metadata:
-      children: {  }
+      children:
+        - field_pece_license
+        - field_pece_geolocation
+        - field_tags
       label: 'Contribution Metadata'
-      region: hidden
-      parent_name: ''
-      weight: 20
+      region: content
+      parent_name: group_metadata
+      weight: 21
       format_type: tab
       format_settings:
         classes: ''
@@ -70,10 +60,12 @@ third_party_settings:
         description: ''
         required_fields: true
     group_permissions_authorship_an:
-      children: {  }
+      children:
+        - group_edit_permissions_and_autho
+        - group_view_permissions_and_group
       label: 'Permissions, Authorship, and Groups'
-      region: hidden
-      parent_name: ''
+      region: content
+      parent_name: group_metadata
       weight: 20
       format_type: tab
       format_settings:
@@ -85,11 +77,12 @@ third_party_settings:
         description: ''
         required_fields: true
     group_custom_citation:
-      children: {  }
+      children:
+        - field_ark_enabled
       label: 'Custom Citation'
-      region: hidden
-      parent_name: ''
-      weight: 20
+      region: content
+      parent_name: group_metadata
+      weight: 22
       format_type: tab
       format_settings:
         classes: ''
@@ -97,6 +90,39 @@ third_party_settings:
         id: ''
         label_as_html: false
         formatter: closed
+        description: ''
+        required_fields: true
+    group_edit_permissions_and_autho:
+      children:
+        - field_people_with_edit_access
+      label: 'Edit Permissions and Authorship'
+      region: content
+      parent_name: group_permissions_authorship_an
+      weight: 20
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true
+        formatter: closed
+    group_view_permissions_and_group:
+      children:
+        - field_people_with_view_access
+        - field_pece_all_can_view
+        - field_groups_with_view_access
+      label: 'View Permissions and Groups'
+      region: content
+      parent_name: group_permissions_authorship_an
+      weight: 21
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
         description: ''
         required_fields: true
 id: node.pece_annotation.default
@@ -116,7 +142,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -149,14 +175,14 @@ content:
         rewrite_label: 0
   field_ark_enabled:
     type: boolean_checkbox
-    weight: 15
+    weight: 17
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete
-    weight: 8
+    weight: 24
     region: content
     settings:
       match_operator: CONTAINS
@@ -174,21 +200,11 @@ content:
     third_party_settings: {  }
   field_pece_geolocation:
     type: geolocation_latlng
-    weight: 13
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   field_pece_license:
-    type: entity_reference_autocomplete
-    weight: 6
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_people_with_edit_access:
     type: entity_reference_autocomplete
     weight: 7
     region: content
@@ -198,9 +214,19 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_people_with_edit_access:
+    type: entity_reference_autocomplete
+    weight: 21
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_people_with_view_access:
     type: entity_reference_autocomplete
-    weight: 25
+    weight: 22
     region: content
     settings:
       match_operator: CONTAINS
@@ -226,7 +252,7 @@ content:
             selector: ''
   field_tags:
     type: entity_reference_autocomplete
-    weight: 14
+    weight: 9
     region: content
     settings:
       match_operator: CONTAINS
@@ -236,27 +262,27 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 4
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 11
+    weight: 13
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 5
+    weight: 6
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 12
+    weight: 14
     region: content
     settings:
       display_label: true
@@ -271,7 +297,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 11
     region: content
     settings:
       match_operator: CONTAINS
