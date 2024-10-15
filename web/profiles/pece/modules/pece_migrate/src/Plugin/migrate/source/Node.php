@@ -62,13 +62,13 @@ class Node extends D7Node {
       ->condition('fdfp.entity_id', $nid);
     $permission = $query->execute()->fetchField();
     $groups = $this->getGroupsByContent($nid);
-    // $group_terms = [];
-    // foreach ($groups as $key => $item) {
-    //   $group_terms[] = [
-    //     'id' => $item
-    //   ];
-    // }
-    $row->setSourceProperty('groups_with_view_access', $groups);
+    $group_terms = [];
+    foreach ($groups as $key => $item) {
+      $group_terms[] = [
+        'target_id' => $item
+      ];
+    }
+    $row->setSourceProperty('groups_with_view_access', $group_terms);
 
     if ($permission == self::PERMISSION_OPEN) {
       // Check if content belongs to any group
