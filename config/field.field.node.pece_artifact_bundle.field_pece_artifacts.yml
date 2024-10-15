@@ -4,9 +4,11 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_pece_artifacts
+    - node.type.artifact_tabular_data
     - node.type.artifact_video
     - node.type.pece_artifact_audio
     - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_fieldnote
     - node.type.pece_artifact_image
     - node.type.pece_artifact_pdf
     - node.type.pece_artifact_text
@@ -16,7 +18,7 @@ field_name: field_pece_artifacts
 entity_type: node
 bundle: pece_artifact_bundle
 label: Artifacts
-description: ''
+description: 'Choose artifacts to include in this bundle by typing part of the artifact name and pressing enter to select the one you want.'
 required: true
 translatable: false
 default_value: {  }
@@ -26,8 +28,10 @@ settings:
   handler_settings:
     target_bundles:
       pece_artifact_audio: pece_artifact_audio
+      pece_artifact_fieldnote: pece_artifact_fieldnote
       pece_artifact_image: pece_artifact_image
       pece_artifact_pdf: pece_artifact_pdf
+      artifact_tabular_data: artifact_tabular_data
       pece_artifact_text: pece_artifact_text
       artifact_video: artifact_video
       pece_artifact_website: pece_artifact_website
