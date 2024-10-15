@@ -2,9 +2,11 @@
  'layout-collapse',
  'layout--twocol-section',
  'layout--twocol-section--50-50',
- 'is-flex-tablet',
  'is-block-mobile',
 ] %}
+
+{{ attach_library('dashboards/core') }}
+
 {% if content %}
   <div{{ attributes.addClass(classes)}}>
     <div class="layout__region layout__region--first layout-collapse--column-one">
