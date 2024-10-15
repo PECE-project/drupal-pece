@@ -4,9 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_essay.body
+    - field.field.node.pece_essay.field_analyze
     - field.field.node.pece_essay.field_ark_enabled
     - field.field.node.pece_essay.field_cite_as
     - field.field.node.pece_essay.field_conceptualize
+    - field.field.node.pece_essay.field_curate
     - field.field.node.pece_essay.field_essay_contents
     - field.field.node.pece_essay.field_groups_with_view_access
     - field.field.node.pece_essay.field_pece_all_can_view
@@ -488,6 +490,38 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 4
             additional: {  }
+          91a35d26-cf76-4666-a78d-7ac36d1d0fa7:
+            uuid: 91a35d26-cf76-4666-a78d-7ac36d1d0fa7
+            region: first
+            configuration:
+              id: 'field_block:node:pece_essay:field_curate'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          8c9daea4-3275-4a36-ba3d-790ccd9f8899:
+            uuid: 8c9daea4-3275-4a36-ba3d-790ccd9f8899
+            region: first
+            configuration:
+              id: 'field_block:node:pece_essay:field_analyze'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
         third_party_settings: {  }
 _core:
   default_config_hash: HMSXo2f0tj9lPu_qSfMVAOMgO9tTZLm53p6zRWL1WgM
@@ -503,6 +537,14 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  field_analyze:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 123
+    region: first
   field_ark_enabled:
     type: boolean
     label: above
@@ -520,6 +562,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 121
+    region: first
+  field_curate:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 122
     region: first
   field_essay_contents:
     type: entity_reference_revisions_entity_view
