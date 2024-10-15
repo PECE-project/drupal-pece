@@ -19877,7 +19877,10 @@ article .contextual {
   justify-content: space-evenly;
 }
 .layout--twocol-section.layout--twocol-section--50-50 > div[class^=layout__region] {
-  flex: 0 1 auto;
+  flex: 0 1 50%;
+}
+.layout--twocol-section.layout--twocol-section--50-50.layout-collapse {
+  gap: 3rem;
 }
 
 .splide .splide__pagination {

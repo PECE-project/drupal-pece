@@ -1,0 +1,91 @@
+{% set classes = [
+ 'layout-collapse',
+ 'layout--twocol-section',
+ 'layout--twocol-section--50-50',
+ 'is-flex-tablet',
+ 'is-block-mobile',
+] %}
+{% if content %}
+  <div{{ attributes.addClass(classes)}}>
+    <div class="layout__region layout__region--first layout-collapse--column-one">
+      {# You cannot tell if there's anything in a region until you render it,
+         so we do that here (over and over again, because when we do it in the
+         SDC we risk "Unable to encode schema array as JSON: Recursion detected
+         in JsonSchema\Constraints\BaseConstraint::arrayToObjectRecursive()
+         and if we use slots instead we cannot evaluate it inside the SDC.
+      #}
+      {% set content_one_a = content.one_a|render %}
+      {% if content_one_a %}
+        {{ include('layout_collapse:layout-collapse-region', {
+          attributes: region_attributes.one_a,
+          content: content_one_a
+        })}}
+      {% endif %}
+      {% set content_one_b = content.one_b|render %}
+      {% if content_one_b %}
+        {{ include('layout_collapse:layout-collapse-region', {
+          attributes: region_attributes.one_b,
+          content: content_one_b
+        })}}
+      {% endif %}
+      {% set content_one_c = content.one_c|render %}
+      {% if content_one_c %}
+        {{ include('layout_collapse:layout-collapse-region', {
+          attributes: region_attributes.one_c,
+          content: content_one_c
+        })}}
+      {% endif %}
+      {% set content_one_d = content.one_d|render %}
+      {% if content_one_d %}
+        {{ include('layout_collapse:layout-collapse-region', {
+          attributes: region_attributes.one_d,
+          content: content_one_d
+        })}}
+      {% endif %}
+      {% set content_one_e = content.one_e|render %}
+      {% if content_one_e %}
+        {{ include('layout_collapse:layout-collapse-region', {
+          attributes: region_attributes.one_e,
+          content: content_one_e
+        })}}
+      {% endif %}
+    </div>
+    <div class="layout__region layout__region--second layout-collapse--column-two">
+      {% set content_two_a = content.two_a|render %}
+      {% if content_two_a %}
+        {{ include('layout_collapse:layout-collapse-region', {
+          attributes: region_attributes.two_a,
+          content: content_two_a
+        })}}
+      {% endif %}
+      {% set content_two_b = content.two_b|render %}
+      {% if content_two_b %}
+        {{ include('layout_collapse:layout-collapse-region', {
+          attributes: region_attributes.two_b,
+          content: content_two_b
+        })}}
+      {% endif %}
+      {% set content_two_c = content.two_c|render %}
+      {% if content_two_c %}
+        {{ include('layout_collapse:layout-collapse-region', {
+          attributes: region_attributes.two_c,
+          content: content_two_c
+        })}}
+      {% endif %}
+      {% set content_two_d = content.two_d|render %}
+      {% if content_two_d %}
+        {{ include('layout_collapse:layout-collapse-region', {
+          attributes: region_attributes.two_d,
+          content: content_two_d
+        })}}
+      {% endif %}
+      {% set content_two_e = content.two_e|render %}
+      {% if content_two_e %}
+        {{ include('layout_collapse:layout-collapse-region', {
+          attributes: region_attributes.two_e,
+          content: content_two_e
+        })}}
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
