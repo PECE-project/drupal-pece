@@ -10060,11 +10060,15 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/type_tray_icon_display.git",
-                "reference": "987bc9c2bf7f76d1106499f2b2f8a0a19f59deb0"
+                "reference": "3c7c5c1d59f4c1a9a50744ed4014f313272e5022"
             },
             "require": {
                 "drupal/core": "^9.2 || ^10 || ^11",
-                "drupal/type_tray": "^1.3"
+                "drupal/extra_field": "^2",
+                "drupal/extra_field_configuration": "^1.1",
+                "drupal/extra_field_plus": "*",
+                "drupal/type_tray": "^1.3",
+                "palmiot/twig-extensions": "^1"
             },
             "type": "drupal-module",
             "extra": {
@@ -10073,7 +10077,7 @@
                 },
                 "drupal": {
                     "version": "1.0.x-dev",
-                    "datestamp": "1729001180",
+                    "datestamp": "1729022938",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -12500,6 +12504,130 @@
             "time": "2024-03-31T07:05:07+00:00"
         },
         {
+            "name": "matthiasmullie/minify",
+            "version": "1.3.73",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/matthiasmullie/minify.git",
+                "reference": "cb7a9297b4ab070909cefade30ee95054d4ae87a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/matthiasmullie/minify/zipball/cb7a9297b4ab070909cefade30ee95054d4ae87a",
+                "reference": "cb7a9297b4ab070909cefade30ee95054d4ae87a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pcre": "*",
+                "matthiasmullie/path-converter": "~1.1",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": ">=2.0",
+                "matthiasmullie/scrapbook": ">=1.3",
+                "phpunit/phpunit": ">=4.8",
+                "squizlabs/php_codesniffer": ">=3.0"
+            },
+            "suggest": {
+                "psr/cache-implementation": "Cache implementation to use with Minify::cache"
+            },
+            "bin": [
+                "bin/minifycss",
+                "bin/minifyjs"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MatthiasMullie\\Minify\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthias Mullie",
+                    "email": "minify@mullie.eu",
+                    "homepage": "https://www.mullie.eu",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CSS & JavaScript minifier, in PHP. Removes whitespace, strips comments, combines files (incl. @import statements and small assets in CSS files), and optimizes/shortens a few common programming patterns.",
+            "homepage": "https://github.com/matthiasmullie/minify",
+            "keywords": [
+                "JS",
+                "css",
+                "javascript",
+                "minifier",
+                "minify"
+            ],
+            "support": {
+                "issues": "https://github.com/matthiasmullie/minify/issues",
+                "source": "https://github.com/matthiasmullie/minify/tree/1.3.73"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/matthiasmullie",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-03-15T10:27:10+00:00"
+        },
+        {
+            "name": "matthiasmullie/path-converter",
+            "version": "1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/matthiasmullie/path-converter.git",
+                "reference": "e7d13b2c7e2f2268e1424aaed02085518afa02d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/matthiasmullie/path-converter/zipball/e7d13b2c7e2f2268e1424aaed02085518afa02d9",
+                "reference": "e7d13b2c7e2f2268e1424aaed02085518afa02d9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pcre": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MatthiasMullie\\PathConverter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthias Mullie",
+                    "email": "pathconverter@mullie.eu",
+                    "homepage": "http://www.mullie.eu",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Relative path converter",
+            "homepage": "http://github.com/matthiasmullie/path-converter",
+            "keywords": [
+                "converter",
+                "path",
+                "paths",
+                "relative"
+            ],
+            "support": {
+                "issues": "https://github.com/matthiasmullie/path-converter/issues",
+                "source": "https://github.com/matthiasmullie/path-converter/tree/1.1.3"
+            },
+            "time": "2019-02-05T23:41:09+00:00"
+        },
+        {
             "name": "mck89/peast",
             "version": "v1.16.3",
             "source": {
@@ -13226,6 +13354,55 @@
                 "source": "https://github.com/oomphinc/composer-installers-extender/tree/2.0.1"
             },
             "time": "2021-12-15T12:32:42+00:00"
+        },
+        {
+            "name": "palmiot/twig-extensions",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/palmiot/twig-extensions.git",
+                "reference": "cf9e23be92a9c7ef48db69651c2e09f6cb752e79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/palmiot/twig-extensions/zipball/cf9e23be92a9c7ef48db69651c2e09f6cb752e79",
+                "reference": "cf9e23be92a9c7ef48db69651c2e09f6cb752e79",
+                "shasum": ""
+            },
+            "require": {
+                "matthiasmullie/minify": ">=1.3.63",
+                "php": ">=5.3.0",
+                "tholu/php-packer": ">=0.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Palmiot\\Twig\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Palmero",
+                    "homepage": "https://github.com/palmiot/"
+                }
+            ],
+            "description": "A number of useful filters for Twig.",
+            "homepage": "https://github.com/palmiot/twig-extensions",
+            "keywords": [
+                "class",
+                "extensions",
+                "symfony",
+                "twig"
+            ],
+            "support": {
+                "issues": "https://github.com/palmiot/twig-extensions/issues",
+                "source": "https://github.com/palmiot/twig-extensions/tree/1.0.0"
+            },
+            "time": "2020-10-27T19:39:44+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -17668,6 +17845,61 @@
             },
             "abandoned": true,
             "time": "2012-03-14T16:36:15+00:00"
+        },
+        {
+            "name": "tholu/php-packer",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tholu/php-packer.git",
+                "reference": "b6f63a6e1112a27db048353fbab50539a4a75764"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tholu/php-packer/zipball/b6f63a6e1112a27db048353fbab50539a4a75764",
+                "reference": "b6f63a6e1112a27db048353fbab50539a4a75764",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tholu\\Packer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Lutz",
+                    "email": "thomaslutz.de@gmail.com"
+                },
+                {
+                    "name": "Dean Edwards"
+                },
+                {
+                    "name": "Nicolas Martin"
+                }
+            ],
+            "description": "A PHP version of Packer, JavaScript obfuscation library originally created by Dean Edwards",
+            "homepage": "https://github.com/tholu/php-packer",
+            "keywords": [
+                "JS",
+                "javascript",
+                "minification",
+                "minify",
+                "obfuscate",
+                "uglify"
+            ],
+            "support": {
+                "issues": "https://github.com/tholu/php-packer/issues",
+                "source": "https://github.com/tholu/php-packer/tree/master"
+            },
+            "time": "2016-04-19T10:33:55+00:00"
         },
         {
             "name": "tubalmartin/cssmin",
