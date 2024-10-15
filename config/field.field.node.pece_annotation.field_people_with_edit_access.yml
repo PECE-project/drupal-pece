@@ -5,6 +5,12 @@ dependencies:
   config:
     - field.storage.node.field_people_with_edit_access
     - node.type.pece_annotation
+  module:
+    - epp
+third_party_settings:
+  epp:
+    value: '[current-user:uid]'
+    on_update: 0
 id: node.pece_annotation.field_people_with_edit_access
 field_name: field_people_with_edit_access
 entity_type: node
