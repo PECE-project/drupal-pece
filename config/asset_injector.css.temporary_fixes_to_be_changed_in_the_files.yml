@@ -25,11 +25,28 @@ code: |-
 
   .layout-collapse summary {
   	font-size:1.5rem;
-  	margin-top:10px;
-  	color: var(--content-heading-color);
-    font-weight: var(--content-heading-weight);
-    line-height: var(--content-heading-line-height);
+  	color: var(--subtitle-heading-color);
+    font-weight: var(--subtitle-heading-weight);
+    line-height: var(--subtitle-heading-line-height);
     text-transform: uppercase !important;
+    background-color: var(--primary-light);
+    padding:5px 5px 5px 0px;
+  }
+
+  .layout-collapse--closed {
+  	margin-bottom:20px;
+  }
+
+  .layout-collapse--open {
+  	margin-bottom:20px;
+  }
+
+  .layout-collapse--none {
+  	margin-bottom:20px;
+  }
+
+  .layout-collapse details .block:first-of-type{
+  	margin-top:20px;
   }
 media: all
 preprocess: true
