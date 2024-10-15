@@ -29,18 +29,104 @@ third_party_settings:
   field_group:
     group_permissions:
       children:
-        - field_pece_all_can_view
-        - field_people_with_view_access
-      label: Permissions
+        - group_edit_permissions_and_autho
+        - group_view_permissions_and_group
+      label: 'Permissions, Authorship, and Groups'
       region: content
-      parent_name: ''
-      weight: 7
-      format_type: details
+      parent_name: group_metadata
+      weight: 24
+      format_type: tab
       format_settings:
         classes: ''
         show_empty_fields: false
         id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
         open: true
+    group_metadata:
+      children:
+        - group_permissions
+        - group_contribution_metadata
+        - group_custom_citation
+      label: Metadata
+      region: content
+      parent_name: ''
+      weight: 4
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: vertical
+        width_breakpoint: 640
+    group_edit_permissions_and_autho:
+      children:
+        - field_people_with_edit_access
+      label: 'Edit Permissions and Authorship'
+      region: content
+      parent_name: group_permissions
+      weight: 21
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true
+    group_view_permissions_and_group:
+      children:
+        - field_pece_all_can_view
+        - field_people_with_view_access
+        - field_groups_with_view_access
+      label: 'View Permissions and Groups'
+      region: content
+      parent_name: group_permissions
+      weight: 22
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true
+    group_contribution_metadata:
+      children:
+        - field_pece_license
+        - field_pece_geolocation
+        - field_tags
+      label: 'Contribution Metadata'
+      region: content
+      parent_name: group_metadata
+      weight: 25
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_custom_citation:
+      children:
+        - field_ark_enabled
+        - field_pece_project_ref
+      label: 'Custom Citation'
+      region: content
+      parent_name: group_metadata
+      weight: 26
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
         description: ''
         required_fields: true
 _core:
@@ -62,20 +148,20 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   field_ark_enabled:
     type: boolean_checkbox
-    weight: 16
+    weight: 18
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete
-    weight: 7
+    weight: 26
     region: content
     settings:
       match_operator: CONTAINS
@@ -93,13 +179,13 @@ content:
     third_party_settings: {  }
   field_pece_geolocation:
     type: geolocation_latlng
-    weight: 5
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   field_pece_license:
     type: entity_reference_autocomplete
-    weight: 6
+    weight: 7
     region: content
     settings:
       match_operator: CONTAINS
@@ -109,7 +195,7 @@ content:
     third_party_settings: {  }
   field_pece_project_ref:
     type: entity_reference_autocomplete
-    weight: 12
+    weight: 19
     region: content
     settings:
       match_operator: CONTAINS
@@ -119,7 +205,7 @@ content:
     third_party_settings: {  }
   field_people_with_edit_access:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 23
     region: content
     settings:
       match_operator: CONTAINS
@@ -129,7 +215,7 @@ content:
     third_party_settings: {  }
   field_people_with_view_access:
     type: entity_reference_autocomplete
-    weight: 26
+    weight: 25
     region: content
     settings:
       match_operator: CONTAINS
@@ -167,7 +253,7 @@ content:
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
-    weight: 15
+    weight: 9
     region: content
     settings:
       match_operator: CONTAINS
@@ -185,27 +271,27 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 8
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 13
+    weight: 15
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 11
+    weight: 13
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 14
+    weight: 16
     region: content
     settings:
       display_label: true
@@ -220,7 +306,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 11
     region: content
     settings:
       match_operator: CONTAINS

@@ -31,7 +31,6 @@ dependencies:
     - datetime_range
     - field_group
     - file
-    - geolocation
     - link
     - media_library
     - path
@@ -43,25 +42,7 @@ third_party_settings:
         - field_people_with_edit_access
       label: Permissions
       region: content
-      parent_name: ''
-      weight: 1
-      format_type: details
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        open: true
-        description: ''
-        required_fields: true
-    group_metadata:
-      children:
-        - group_project_metadata
-        - group_project_files
-        - group_project_pece_content
-        - group_project_notes
-      label: Metadata
-      region: content
-      parent_name: ''
+      parent_name: group_metadata
       weight: 2
       format_type: tab
       format_settings:
@@ -72,6 +53,30 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+        open: true
+    group_metadata:
+      children:
+        - group_permissions
+        - group_project_metadata
+        - group_project_files
+        - group_project_pece_content
+        - group_project_notes
+        - group_custom_citation
+      label: Metadata
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+        direction: vertical
+        width_breakpoint: 640
     group_project_metadata:
       children:
         - field_pece_media_image
@@ -85,7 +90,7 @@ third_party_settings:
       label: 'Project Metadata'
       region: content
       parent_name: group_metadata
-      weight: 32
+      weight: 3
       format_type: tab
       format_settings:
         classes: ''
@@ -102,7 +107,7 @@ third_party_settings:
       label: 'Project Files'
       region: content
       parent_name: group_metadata
-      weight: 33
+      weight: 4
       format_type: tab
       format_settings:
         classes: ''
@@ -121,7 +126,7 @@ third_party_settings:
       label: 'Project PECE Content'
       region: content
       parent_name: group_metadata
-      weight: 34
+      weight: 5
       format_type: tab
       format_settings:
         classes: ''
@@ -137,7 +142,23 @@ third_party_settings:
       label: 'Project Notes'
       region: content
       parent_name: group_metadata
-      weight: 35
+      weight: 6
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_custom_citation:
+      children:
+        - field_ark_enabled
+      label: 'Custom Citation'
+      region: content
+      parent_name: group_metadata
+      weight: 7
       format_type: tab
       format_settings:
         classes: ''
@@ -164,7 +185,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 6
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -184,12 +205,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_pece_geolocation:
-    type: geolocation_latlng
-    weight: 4
-    region: content
-    settings: {  }
     third_party_settings: {  }
   field_pece_media_image:
     type: media_library_widget
@@ -314,27 +329,27 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 3
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 8
+    weight: 6
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 7
+    weight: 5
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 9
+    weight: 7
     region: content
     settings:
       display_label: true
@@ -354,7 +369,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 3
     region: content
     settings:
       match_operator: CONTAINS
@@ -365,6 +380,7 @@ content:
 hidden:
   field_groups_with_view_access: true
   field_pece_all_can_view: true
+  field_pece_geolocation: true
   field_people_with_view_access: true
   field_project_image_banner: true
   field_thumbnail: true
