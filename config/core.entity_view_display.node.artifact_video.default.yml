@@ -31,6 +31,7 @@ dependencies:
     - file
     - languagefield
     - layout_builder
+    - layout_collapse
     - text
     - user
 third_party_settings:
@@ -39,34 +40,54 @@ third_party_settings:
     allow_custom: false
     sections:
       -
-        layout_id: layout_twocol_section
+        layout_id: layout_collapse_twocol_section
         layout_settings:
           label: ''
           context_mapping: {  }
-          column_widths: 50-50
+          one_a:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
+          one_b:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
+          one_c:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
+          one_d:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
+          one_e:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
+          two_a:
+            layout_collapse_element: layout-collapse--open
+            layout_collapse_classes: ''
+            layout_collapse_summary: 'Contribution Metadata'
+          two_b:
+            layout_collapse_element: layout-collapse--closed
+            layout_collapse_classes: ''
+            layout_collapse_summary: 'Source Metadata'
+          two_c:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
+          two_d:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
+          two_e:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
         components:
-          300bf1d2-2f3d-4ab9-883d-e8451d7b4a89:
-            uuid: 300bf1d2-2f3d-4ab9-883d-e8451d7b4a89
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_video:field_tags'
-              label: Tags
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 18
-            additional: {  }
           40864c80-b547-4f72-9b77-ab5290b8e795:
             uuid: 40864c80-b547-4f72-9b77-ab5290b8e795
-            region: first
+            region: one_a
             configuration:
               id: 'field_block:node:artifact_video:field_video_artifact_video'
               label: Video
@@ -92,11 +113,162 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
+            weight: 0
+            additional: {  }
+          d4f1f332-27dd-4b17-a1ba-c7d2c9031f01:
+            uuid: d4f1f332-27dd-4b17-a1ba-c7d2c9031f01
+            region: two_b
+            configuration:
+              id: 'field_block:node:artifact_video:field_authors'
+              label: Creator(s)
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 0
+            additional: {  }
+          777f4b3d-5a76-4693-b294-58d53b9114d1:
+            uuid: 777f4b3d-5a76-4693-b294-58d53b9114d1
+            region: two_b
+            configuration:
+              id: 'field_block:node:artifact_video:field_created_date'
+              label: 'Created Date'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
             weight: 1
+            additional: {  }
+          e56bfc1c-6d4e-4075-b148-fcf9e9352396:
+            uuid: e56bfc1c-6d4e-4075-b148-fcf9e9352396
+            region: two_b
+            configuration:
+              id: 'field_block:node:artifact_video:field_source'
+              label: Source
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 2
+            additional: {  }
+          366e50ee-2da2-4b68-8d13-1222edfac975:
+            uuid: 366e50ee-2da2-4b68-8d13-1222edfac975
+            region: two_b
+            configuration:
+              id: 'field_block:node:artifact_video:field_file_format'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          4330f72a-6432-4d89-817c-693de9a90c1d:
+            uuid: 4330f72a-6432-4d89-817c-693de9a90c1d
+            region: two_b
+            configuration:
+              id: 'field_block:node:artifact_video:field_duration'
+              label: Duration
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 4
+            additional: {  }
+          15032880-5b86-42fb-829b-51032357739d:
+            uuid: 15032880-5b86-42fb-829b-51032357739d
+            region: two_b
+            configuration:
+              id: 'field_block:node:artifact_video:field_language'
+              label: Language
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: languagefield_default
+                label: above
+                settings:
+                  link_to_entity: 0
+                  format:
+                    name: name
+                    iso: '0'
+                    name_native: '0'
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 5
+            additional: {  }
+          bad90a86-9cb6-4b9b-9557-8eb3caf0b89a:
+            uuid: bad90a86-9cb6-4b9b-9557-8eb3caf0b89a
+            region: two_b
+            configuration:
+              id: 'field_block:node:artifact_video:field_location'
+              label: Location
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: address_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 6
             additional: {  }
           6a1395de-cee8-443c-96d3-29cc31d73ed7:
             uuid: 6a1395de-cee8-443c-96d3-29cc31d73ed7
-            region: second
+            region: two_a
             configuration:
               id: 'field_block:node:artifact_video:field_people_with_edit_access'
               label: 'People with edit access'
@@ -114,165 +286,11 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: Contributor(s)
                     rewrite_label: 1
-            weight: 9
+            weight: 0
             additional: {  }
-          e20e7806-7f88-4b74-9388-59bc8111dc9c:
-            uuid: e20e7806-7f88-4b74-9388-59bc8111dc9c
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_video:field_groups_with_view_access'
-              label: 'Groups to show this to'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: 'Group Audience'
-                    rewrite_label: 1
-            weight: 13
-            additional: {  }
-          e56bfc1c-6d4e-4075-b148-fcf9e9352396:
-            uuid: e56bfc1c-6d4e-4075-b148-fcf9e9352396
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_video:field_source'
-              label: Source
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 14
-            additional: {  }
-          366e50ee-2da2-4b68-8d13-1222edfac975:
-            uuid: 366e50ee-2da2-4b68-8d13-1222edfac975
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_video:field_file_format'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 15
-            additional: {  }
-          beba5908-c812-46f8-a0cb-43a73d2b106e:
-            uuid: beba5908-c812-46f8-a0cb-43a73d2b106e
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_video:field_fieldsite'
-              label: Fieldsite
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 15
-            additional: {  }
-          41d1b100-9b81-4333-9889-8df0a72afe42:
-            uuid: 41d1b100-9b81-4333-9889-8df0a72afe42
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_video:field_pece_license'
-              label: License
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 16
-            additional: {  }
-          25839e15-7230-4697-b708-094ba27238c6:
-            uuid: 25839e15-7230-4697-b708-094ba27238c6
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_video:field_cite_as'
-              label: 'Cite as'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 17
-            additional: {  }
-          36bc59fa-ebc1-4994-85f9-a0f378ed5b7e:
-            uuid: 36bc59fa-ebc1-4994-85f9-a0f378ed5b7e
-            region: second
-            configuration:
-              id: 'extra_field_block:node:artifact_video:extra_field_pece_annotations_annotate_button'
-              label: 'Annotate button'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                settings: {  }
-                third_party_settings: {  }
-            weight: 19
-            additional:
-              extra_field_plus_settings: {  }
-          79f23e03-2b9e-44c6-ab17-398010f5542d:
-            uuid: 79f23e03-2b9e-44c6-ab17-398010f5542d
-            region: second
-            configuration:
-              id: 'extra_field_block:node:artifact_video:extra_field_pece_annotations_see_annotations_link'
-              label: 'Link to see all related annotations'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                settings: {  }
-                third_party_settings: {  }
-            weight: 20
-            additional:
-              extra_field_plus_settings: {  }
           2f24016a-a3ed-496c-9f75-d22dd174e09f:
             uuid: 2f24016a-a3ed-496c-9f75-d22dd174e09f
-            region: second
+            region: two_a
             configuration:
               id: 'field_block:node:artifact_video:created'
               label: 'Authored on'
@@ -300,101 +318,13 @@ third_party_settings:
                     description: ''
                 third_party_settings:
                   entity_form_field_label:
-                    new_label: 'Created date'
+                    new_label: 'Contributed date'
                     rewrite_label: 1
-            weight: 11
-            additional: {  }
-          777f4b3d-5a76-4693-b294-58d53b9114d1:
-            uuid: 777f4b3d-5a76-4693-b294-58d53b9114d1
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_video:field_created_date'
-              label: 'Created Date'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: datetime_default
-                label: above
-                settings:
-                  timezone_override: ''
-                  format_type: medium
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 13
-            additional: {  }
-          d4f1f332-27dd-4b17-a1ba-c7d2c9031f01:
-            uuid: d4f1f332-27dd-4b17-a1ba-c7d2c9031f01
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_video:field_authors'
-              label: Creator(s)
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 12
-            additional: {  }
-          4330f72a-6432-4d89-817c-693de9a90c1d:
-            uuid: 4330f72a-6432-4d89-817c-693de9a90c1d
-            region: first
-            configuration:
-              id: 'field_block:node:artifact_video:field_duration'
-              label: Duration
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: string
-                label: above
-                settings:
-                  link_to_entity: false
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 16
-            additional: {  }
-          f3444695-08db-4ce9-b397-18ec27197455:
-            uuid: f3444695-08db-4ce9-b397-18ec27197455
-            region: second
-            configuration:
-              id: 'field_block:node:artifact_video:field_crit_commentary'
-              label: 'Critical Commentary'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 14
+            weight: 1
             additional: {  }
           2cec37f9-855b-45dc-a9d7-d5ebc4b2bc00:
             uuid: 2cec37f9-855b-45dc-a9d7-d5ebc4b2bc00
-            region: second
+            region: two_a
             configuration:
               id: 'field_block:node:artifact_video:revision_timestamp'
               label: 'Revision create time'
@@ -424,55 +354,165 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: 'Last Revision Date'
                     rewrite_label: 1
-            weight: 12
+            weight: 2
             additional: {  }
-          bad90a86-9cb6-4b9b-9557-8eb3caf0b89a:
-            uuid: bad90a86-9cb6-4b9b-9557-8eb3caf0b89a
-            region: first
+          e20e7806-7f88-4b74-9388-59bc8111dc9c:
+            uuid: e20e7806-7f88-4b74-9388-59bc8111dc9c
+            region: two_a
             configuration:
-              id: 'field_block:node:artifact_video:field_location'
-              label: Location
+              id: 'field_block:node:artifact_video:field_groups_with_view_access'
+              label: 'Groups to show this to'
               label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: address_default
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: 'Group Audience'
+                    rewrite_label: 1
+            weight: 3
+            additional: {  }
+          f3444695-08db-4ce9-b397-18ec27197455:
+            uuid: f3444695-08db-4ce9-b397-18ec27197455
+            region: two_a
+            configuration:
+              id: 'field_block:node:artifact_video:field_crit_commentary'
+              label: 'Critical Commentary'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
                 label: above
                 settings: {  }
                 third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 19
+            weight: 5
             additional: {  }
-          15032880-5b86-42fb-829b-51032357739d:
-            uuid: 15032880-5b86-42fb-829b-51032357739d
-            region: first
+          beba5908-c812-46f8-a0cb-43a73d2b106e:
+            uuid: beba5908-c812-46f8-a0cb-43a73d2b106e
+            region: two_a
             configuration:
-              id: 'field_block:node:artifact_video:field_language'
-              label: Language
+              id: 'field_block:node:artifact_video:field_fieldsite'
+              label: Fieldsite
               label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: languagefield_default
+                type: entity_reference_label
                 label: above
                 settings:
-                  link_to_entity: 0
-                  format:
-                    name: name
-                    iso: '0'
-                    name_native: '0'
+                  link: true
                 third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 18
+            weight: 6
             additional: {  }
+          41d1b100-9b81-4333-9889-8df0a72afe42:
+            uuid: 41d1b100-9b81-4333-9889-8df0a72afe42
+            region: two_a
+            configuration:
+              id: 'field_block:node:artifact_video:field_pece_license'
+              label: License
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          25839e15-7230-4697-b708-094ba27238c6:
+            uuid: 25839e15-7230-4697-b708-094ba27238c6
+            region: two_c
+            configuration:
+              id: 'field_block:node:artifact_video:field_cite_as'
+              label: 'Cite as'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 0
+            additional: {  }
+          300bf1d2-2f3d-4ab9-883d-e8451d7b4a89:
+            uuid: 300bf1d2-2f3d-4ab9-883d-e8451d7b4a89
+            region: two_a
+            configuration:
+              id: 'field_block:node:artifact_video:field_tags'
+              label: Tags
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
+          36bc59fa-ebc1-4994-85f9-a0f378ed5b7e:
+            uuid: 36bc59fa-ebc1-4994-85f9-a0f378ed5b7e
+            region: two_d
+            configuration:
+              id: 'extra_field_block:node:artifact_video:extra_field_pece_annotations_annotate_button'
+              label: 'Annotate button'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional:
+              extra_field_plus_settings: {  }
+          79f23e03-2b9e-44c6-ab17-398010f5542d:
+            uuid: 79f23e03-2b9e-44c6-ab17-398010f5542d
+            region: two_d
+            configuration:
+              id: 'extra_field_block:node:artifact_video:extra_field_pece_annotations_see_annotations_link'
+              label: 'Link to see all related annotations'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 1
+            additional:
+              extra_field_plus_settings: {  }
         third_party_settings: {  }
 id: node.artifact_video.default
 targetEntityType: node

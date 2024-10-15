@@ -42,7 +42,7 @@ third_party_settings:
           one_c:
             layout_collapse_element: layout-collapse--closed
             layout_collapse_classes: ''
-            layout_collapse_summary: 'Group Field Noes'
+            layout_collapse_summary: 'Group Field Notes'
           one_d:
             layout_collapse_element: layout-collapse--closed
             layout_collapse_classes: ''
@@ -52,9 +52,9 @@ third_party_settings:
             layout_collapse_classes: ''
             layout_collapse_summary: 'Group Essays'
           two_a:
-            layout_collapse_element: layout-collapse--none
+            layout_collapse_element: layout-collapse--open
             layout_collapse_classes: ''
-            layout_collapse_summary: ''
+            layout_collapse_summary: 'Group Manager(s)'
           two_b:
             layout_collapse_element: layout-collapse--closed
             layout_collapse_classes: ''
@@ -78,7 +78,7 @@ third_party_settings:
             configuration:
               id: 'field_block:taxonomy_term:groups:description'
               label: Description
-              label_display: visible
+              label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
@@ -173,7 +173,7 @@ third_party_settings:
             configuration:
               id: 'field_block:taxonomy_term:groups:field_group_managers'
               label: 'Group manager(s)'
-              label_display: visible
+              label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity

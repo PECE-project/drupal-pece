@@ -32,6 +32,7 @@ dependencies:
     - image
     - languagefield
     - layout_builder
+    - layout_collapse
     - layout_library
     - text
     - user
@@ -41,53 +42,54 @@ third_party_settings:
     allow_custom: false
     sections:
       -
-        layout_id: layout_twocol_section
+        layout_id: layout_collapse_twocol_section
         layout_settings:
           label: ''
           context_mapping: {  }
-          column_widths: 50-50
+          one_a:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
+          one_b:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
+          one_c:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
+          one_d:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
+          one_e:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
+          two_a:
+            layout_collapse_element: layout-collapse--open
+            layout_collapse_classes: ''
+            layout_collapse_summary: 'Contribution Metadata'
+          two_b:
+            layout_collapse_element: layout-collapse--closed
+            layout_collapse_classes: ''
+            layout_collapse_summary: 'Source Metadata'
+          two_c:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
+          two_d:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
+          two_e:
+            layout_collapse_element: layout-collapse--none
+            layout_collapse_classes: ''
+            layout_collapse_summary: ''
         components:
-          76ad9361-c648-4705-9c22-c663a3b7a0d9:
-            uuid: 76ad9361-c648-4705-9c22-c663a3b7a0d9
-            region: first
-            configuration:
-              id: 'field_block:node:pece_artifact_image:field_image_file_format'
-              label: 'File format'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: string
-                label: above
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
-            weight: 8
-            additional: {  }
-          10497f48-49c4-4ccc-89cc-9d45580d5654:
-            uuid: 10497f48-49c4-4ccc-89cc-9d45580d5654
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_image:field_tags'
-              label: Tags
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 11
-            additional: {  }
           cea2b565-0248-4502-8681-5c0aa6061786:
             uuid: cea2b565-0248-4502-8681-5c0aa6061786
-            region: first
+            region: one_a
             configuration:
               id: 'field_block:node:pece_artifact_image:field_image_artifact_image'
               label_display: '0'
@@ -102,14 +104,14 @@ third_party_settings:
                   image_loading:
                     attribute: lazy
                 third_party_settings: {  }
-            weight: 1
+            weight: 0
             additional: {  }
-          1932432e-9b81-4d2d-9d85-58ae6019411c:
-            uuid: 1932432e-9b81-4d2d-9d85-58ae6019411c
-            region: second
+          b5aa6906-08df-4d55-b495-215f46e6bf41:
+            uuid: b5aa6906-08df-4d55-b495-215f46e6bf41
+            region: two_a
             configuration:
-              id: 'field_block:node:pece_artifact_image:field_groups_with_view_access'
-              label: Groups
+              id: 'field_block:node:pece_artifact_image:field_people_with_edit_access'
+              label: Contributors
               label_display: '0'
               provider: layout_builder
               context_mapping:
@@ -122,77 +124,47 @@ third_party_settings:
                   link: true
                 third_party_settings:
                   entity_form_field_label:
-                    new_label: 'Group Audience'
+                    new_label: Contributor(s)
                     rewrite_label: 1
-            weight: 6
+            weight: 0
             additional: {  }
-          7650afc7-8acb-426e-9403-3b5e72d8ee5d:
-            uuid: 7650afc7-8acb-426e-9403-3b5e72d8ee5d
-            region: first
+          1aeab4f5-efd4-49e5-8c48-a7a582807c25:
+            uuid: 1aeab4f5-efd4-49e5-8c48-a7a582807c25
+            region: two_a
             configuration:
-              id: 'field_block:node:pece_artifact_image:field_source'
-              label: Source
+              id: 'field_block:node:pece_artifact_image:created'
+              label: 'Authored on'
               label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 6
-            additional: {  }
-          0f8c18d0-570d-4d4d-9ed8-e9899d30eda9:
-            uuid: 0f8c18d0-570d-4d4d-9ed8-e9899d30eda9
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_image:field_pece_license'
-              label: License
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
+                type: timestamp
                 label: above
                 settings:
-                  link: true
+                  date_format: medium
+                  custom_date_format: ''
+                  timezone: ''
+                  tooltip:
+                    date_format: long
+                    custom_date_format: ''
+                  time_diff:
+                    enabled: false
+                    future_format: '@interval hence'
+                    past_format: '@interval ago'
+                    granularity: 2
+                    refresh: 60
+                    description: ''
                 third_party_settings:
                   entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 9
-            additional: {  }
-          51c7f94d-bbdc-4e0c-b0a3-e96b5fc5605f:
-            uuid: 51c7f94d-bbdc-4e0c-b0a3-e96b5fc5605f
-            region: first
-            configuration:
-              id: 'field_block:node:pece_artifact_image:field_pece_geolocation'
-              label: Location
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: geolocation_latlng
-                label: above
-                settings: {  }
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 11
+                    new_label: 'Contributed date'
+                    rewrite_label: 1
+            weight: 1
             additional: {  }
           7f438dfa-80cc-4403-8fcb-85d3f83b2c1f:
             uuid: 7f438dfa-80cc-4403-8fcb-85d3f83b2c1f
-            region: second
+            region: two_a
             configuration:
               id: 'field_block:node:pece_artifact_image:revision_timestamp'
               label: 'Revision create time'
@@ -222,14 +194,14 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: 'Last Revision Date'
                     rewrite_label: 1
-            weight: 5
+            weight: 2
             additional: {  }
-          b5aa6906-08df-4d55-b495-215f46e6bf41:
-            uuid: b5aa6906-08df-4d55-b495-215f46e6bf41
-            region: second
+          1932432e-9b81-4d2d-9d85-58ae6019411c:
+            uuid: 1932432e-9b81-4d2d-9d85-58ae6019411c
+            region: two_a
             configuration:
-              id: 'field_block:node:pece_artifact_image:field_people_with_edit_access'
-              label: Contributors
+              id: 'field_block:node:pece_artifact_image:field_groups_with_view_access'
+              label: Groups
               label_display: '0'
               provider: layout_builder
               context_mapping:
@@ -242,13 +214,34 @@ third_party_settings:
                   link: true
                 third_party_settings:
                   entity_form_field_label:
-                    new_label: Contributor(s)
+                    new_label: 'Group Audience'
                     rewrite_label: 1
-            weight: 1
+            weight: 3
+            additional: {  }
+          70b7ded2-c8b4-46eb-9034-9167320a6970:
+            uuid: 70b7ded2-c8b4-46eb-9034-9167320a6970
+            region: two_a
+            configuration:
+              id: 'field_block:node:pece_artifact_image:field_crit_commentary'
+              label: 'Critical Commentary'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 5
             additional: {  }
           667b2f35-0ae1-476e-9a20-793c31b8411d:
             uuid: 667b2f35-0ae1-476e-9a20-793c31b8411d
-            region: second
+            region: two_a
             configuration:
               id: 'field_block:node:pece_artifact_image:field_fieldsite'
               label: Fieldsite
@@ -266,11 +259,55 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 8
+            weight: 6
+            additional: {  }
+          0f8c18d0-570d-4d4d-9ed8-e9899d30eda9:
+            uuid: 0f8c18d0-570d-4d4d-9ed8-e9899d30eda9
+            region: two_a
+            configuration:
+              id: 'field_block:node:pece_artifact_image:field_pece_license'
+              label: License
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 4
+            additional: {  }
+          0a478764-9027-4531-b962-b940ccf91c72:
+            uuid: 0a478764-9027-4531-b962-b940ccf91c72
+            region: two_c
+            configuration:
+              id: 'field_block:node:pece_artifact_image:field_cite_as'
+              label: 'Cite as'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 0
             additional: {  }
           e0a3cfc3-d461-482b-b994-30ad3885ce18:
             uuid: e0a3cfc3-d461-482b-b994-30ad3885ce18
-            region: second
+            region: two_d
             configuration:
               id: 'extra_field_block:node:pece_artifact_image:extra_field_pece_annotations_annotate_button'
               label: 'Annotate button'
@@ -281,12 +318,12 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 12
+            weight: 0
             additional:
               extra_field_plus_settings: {  }
           ed7c9541-d104-4da7-91be-672ec1750054:
             uuid: ed7c9541-d104-4da7-91be-672ec1750054
-            region: second
+            region: two_d
             configuration:
               id: 'extra_field_block:node:pece_artifact_image:extra_field_pece_annotations_see_annotations_link'
               label: 'Link to see all related annotations'
@@ -297,12 +334,31 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 13
+            weight: 1
             additional:
               extra_field_plus_settings: {  }
+          10497f48-49c4-4ccc-89cc-9d45580d5654:
+            uuid: 10497f48-49c4-4ccc-89cc-9d45580d5654
+            region: two_a
+            configuration:
+              id: 'field_block:node:pece_artifact_image:field_tags'
+              label: Tags
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
           052baae1-aac8-4605-9628-b0518f155de5:
             uuid: 052baae1-aac8-4605-9628-b0518f155de5
-            region: first
+            region: two_b
             configuration:
               id: 'field_block:node:pece_artifact_image:field_authors'
               label: Creator(s)
@@ -320,11 +376,11 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 2
+            weight: 0
             additional: {  }
           057e71e8-4e28-4f8e-8929-a53473a5d466:
             uuid: 057e71e8-4e28-4f8e-8929-a53473a5d466
-            region: first
+            region: two_b
             configuration:
               id: 'field_block:node:pece_artifact_image:field_created_date'
               label: 'Created Date'
@@ -343,36 +399,14 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 5
+            weight: 1
             additional: {  }
-          0a478764-9027-4531-b962-b940ccf91c72:
-            uuid: 0a478764-9027-4531-b962-b940ccf91c72
-            region: second
+          7650afc7-8acb-426e-9403-3b5e72d8ee5d:
+            uuid: 7650afc7-8acb-426e-9403-3b5e72d8ee5d
+            region: two_b
             configuration:
-              id: 'field_block:node:pece_artifact_image:field_cite_as'
-              label: 'Cite as'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 10
-            additional: {  }
-          70b7ded2-c8b4-46eb-9034-9167320a6970:
-            uuid: 70b7ded2-c8b4-46eb-9034-9167320a6970
-            region: second
-            configuration:
-              id: 'field_block:node:pece_artifact_image:field_crit_commentary'
-              label: 'Critical Commentary'
+              id: 'field_block:node:pece_artifact_image:field_source'
+              label: Source
               label_display: '0'
               provider: layout_builder
               context_mapping:
@@ -386,45 +420,30 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 7
+            weight: 2
             additional: {  }
-          1aeab4f5-efd4-49e5-8c48-a7a582807c25:
-            uuid: 1aeab4f5-efd4-49e5-8c48-a7a582807c25
-            region: second
+          76ad9361-c648-4705-9c22-c663a3b7a0d9:
+            uuid: 76ad9361-c648-4705-9c22-c663a3b7a0d9
+            region: two_b
             configuration:
-              id: 'field_block:node:pece_artifact_image:created'
-              label: 'Authored on'
+              id: 'field_block:node:pece_artifact_image:field_image_file_format'
+              label: 'File format'
               label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: timestamp
+                type: string
                 label: above
                 settings:
-                  date_format: medium
-                  custom_date_format: ''
-                  timezone: ''
-                  tooltip:
-                    date_format: long
-                    custom_date_format: ''
-                  time_diff:
-                    enabled: false
-                    future_format: '@interval hence'
-                    past_format: '@interval ago'
-                    granularity: 2
-                    refresh: 60
-                    description: ''
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 4
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 3
             additional: {  }
           2edd8dcb-cd04-45df-8a4d-66af846ec1ff:
             uuid: 2edd8dcb-cd04-45df-8a4d-66af846ec1ff
-            region: first
+            region: two_b
             configuration:
               id: 'field_block:node:pece_artifact_image:field_language'
               label: Language
@@ -446,7 +465,28 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 10
+            weight: 4
+            additional: {  }
+          51c7f94d-bbdc-4e0c-b0a3-e96b5fc5605f:
+            uuid: 51c7f94d-bbdc-4e0c-b0a3-e96b5fc5605f
+            region: two_b
+            configuration:
+              id: 'field_block:node:pece_artifact_image:field_pece_geolocation'
+              label: Location
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: geolocation_latlng
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 5
             additional: {  }
         third_party_settings: {  }
   layout_library:
