@@ -114,6 +114,23 @@ process:
     plugin: default_value
     source: permission_all_user_view
     default_value: false
+  field_groups_with_view_access:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: groups_with_view_access
+    -
+      plugin: sub_process
+      process:
+        target_id:
+          -
+            plugin: migration_lookup
+            migration: v1_group
+            source: target_id
+          -
+            plugin: extract
+            index:
+              - 0
 destination:
   plugin: 'entity_complete:node'
   translations: true
