@@ -53,8 +53,6 @@ class User extends D7User {
 
     $rolesByNewName = array_map([$this, 'callbackRidToName'], $roles);
     $roles = array_unique($rolesByNewName);
-    // Remove the 'remove' role, see callback for background.
-    $roles = array_diff($roles, array('remove'));
     $row->setSourceProperty('d7_merged_roles', $roles);
 
     return parent::prepareRow($row);
@@ -63,10 +61,10 @@ class User extends D7User {
   public function callbackRidToName($id) {
     $roleMap = [
       3 => "administrator", // Administrator
-      4 => "contributor", // Editor
+      4 => "editor", // Editor
       5 => "contributor", // Contributor
       6 => "contributor", // Researcher
-      8 => "remove", // Data Importer
+      8 => "data_manager", // Data Importer
       9 => "platform_manager", // Platform Director
       10 => "platform_manager", // Manager
     ];
