@@ -493,6 +493,16 @@ third_party_settings:
             weight: 0
             additional:
               extra_field_plus_settings: {  }
+          931ca818-7157-4704-8094-53132e32aeaa:
+            uuid: 931ca818-7157-4704-8094-53132e32aeaa
+            region: one_a
+            configuration:
+              id: 'extra_field_block:node:pece_artifact_pdf:extra_field_type_tray_icon_display:icons'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 2
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -501,6 +511,11 @@ targetEntityType: node
 bundle: pece_artifact_pdf
 mode: default
 content:
+  'extra_field_type_tray_icon_display:icons':
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: one_a
   field_ark_enabled:
     type: boolean
     label: above

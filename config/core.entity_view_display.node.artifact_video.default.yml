@@ -513,12 +513,27 @@ third_party_settings:
             weight: 1
             additional:
               extra_field_plus_settings: {  }
+          54b58b9b-c0d6-403d-bffd-1d95625ddcd6:
+            uuid: 54b58b9b-c0d6-403d-bffd-1d95625ddcd6
+            region: one_a
+            configuration:
+              id: 'extra_field_block:node:artifact_video:extra_field_type_tray_icon_display:icons'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 1
+            additional: {  }
         third_party_settings: {  }
 id: node.artifact_video.default
 targetEntityType: node
 bundle: artifact_video
 mode: default
 content:
+  'extra_field_type_tray_icon_display:icons':
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: one_a
   field_ark_enabled:
     type: boolean
     label: above

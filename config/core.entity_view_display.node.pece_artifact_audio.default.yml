@@ -493,6 +493,16 @@ third_party_settings:
             weight: 0
             additional:
               extra_field_plus_settings: {  }
+          d1dc2f4f-067e-4ce8-95d8-1ee982734846:
+            uuid: d1dc2f4f-067e-4ce8-95d8-1ee982734846
+            region: one_a
+            configuration:
+              id: 'extra_field_block:node:pece_artifact_audio:extra_field_type_tray_icon_display:icons'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 1
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -503,6 +513,11 @@ targetEntityType: node
 bundle: pece_artifact_audio
 mode: default
 content:
+  'extra_field_type_tray_icon_display:icons':
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: one_a
   field_ark_enabled:
     type: boolean
     label: above

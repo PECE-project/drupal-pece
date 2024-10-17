@@ -459,6 +459,16 @@ third_party_settings:
             weight: 1
             additional:
               extra_field_plus_settings: {  }
+          413a0160-1779-489f-8ac8-da888762e19a:
+            uuid: 413a0160-1779-489f-8ac8-da888762e19a
+            region: one_a
+            configuration:
+              id: 'extra_field_block:node:pece_artifact_text:extra_field_type_tray_icon_display:icons'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 1
+            additional: {  }
         third_party_settings: {  }
 _core:
   default_config_hash: sv49-4TtgHZEBsRaDy_zCl8TMr3fsl0fxqIcirsi8ts
@@ -474,6 +484,11 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  'extra_field_type_tray_icon_display:icons':
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: one_a
   field_ark_enabled:
     type: boolean
     label: above
