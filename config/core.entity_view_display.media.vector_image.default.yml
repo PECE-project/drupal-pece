@@ -6,6 +6,7 @@ dependencies:
     - field.field.media.vector_image.field_media_svg
     - media.type.vector_image
   module:
+    - entity_form_field_label
     - svg_image_field
 _core:
   default_config_hash: azf-4JsCR_6x5XHzGMZOHv2Lko5YtmzttxsHVD4Aik8
@@ -15,18 +16,24 @@ bundle: vector_image
 mode: default
 content:
   field_media_svg:
+    type: svg_image_field_formatter
     label: hidden
-    weight: 0
     settings:
+      inline: true
       apply_dimensions: true
-      width: 400
-      height: 400
+      width: 100
+      height: 100
       enable_alt: true
       enable_title: true
       link: ''
-      inline: false
-    third_party_settings: {  }
-    type: svg_image_field_formatter
+      force_fill: false
+      sanitize: true
+      sanitize_remote: false
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 0
     region: content
 hidden:
   created: true
