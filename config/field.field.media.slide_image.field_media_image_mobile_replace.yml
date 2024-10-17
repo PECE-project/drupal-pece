@@ -7,12 +7,18 @@ dependencies:
     - media.type.slide_image
   module:
     - image
+    - image_replace
+third_party_settings:
+  image_replace:
+    image_style_map:
+      pece_frontpage_image_replace_mobile:
+        source_field: '0'
 id: media.slide_image.field_media_image_mobile_replace
 field_name: field_media_image_mobile_replace
 entity_type: media
 bundle: slide_image
 label: 'Narrow image'
-description: ''
+description: "This image (2:1 width to height ratio) is shown to people on mobile devices or other narrow screens; please do not re-upload the wide image you uploaded in the previous step!\r\n\r\nIt should be at least 700 pixels wide and 350 pixels tall; larger images will be re-sized to be the correct size, as needed."
 required: false
 translatable: false
 default_value: {  }
@@ -20,11 +26,11 @@ default_value_callback: ''
 settings:
   handler: 'default:file'
   handler_settings: {  }
-  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_directory: 'slide/[date:custom:Y]'
   file_extensions: 'png gif jpg jpeg webp'
   max_filesize: ''
   max_resolution: ''
-  min_resolution: ''
+  min_resolution: 500x250
   alt_field: true
   alt_field_required: true
   title_field: false
