@@ -1,0 +1,41 @@
+uuid: b527e936-a4da-46e2-9bda-d2edc5670688
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.intro_page
+    - field.field.node.pece_design_logic.body
+    - field.field.node.pece_design_logic.field_subst_logic_image_citation
+    - field.field.node.pece_design_logic.field_thumbnail
+    - node.type.pece_design_logic
+  module:
+    - image
+    - user
+id: node.pece_design_logic.intro_page
+targetEntityType: node
+bundle: pece_design_logic
+mode: intro_page
+content:
+  field_thumbnail:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  body: true
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  field_subst_logic_image_citation: true
+  langcode: true
+  search_api_excerpt: true

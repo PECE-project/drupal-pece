@@ -1,0 +1,23 @@
+uuid: 445fe937-4362-4e17-8918-0d31f15aa210
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subst_logic_image_citation
+    - node.type.pece_design_logic
+  module:
+    - link
+id: node.pece_design_logic.field_subst_logic_image_citation
+field_name: field_subst_logic_image_citation
+entity_type: node
+bundle: pece_design_logic
+label: 'Image Citation'
+description: 'This field indicates the source of the thumbnail image.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

@@ -1,0 +1,49 @@
+uuid: bf3d7ae2-e131-4c45-accc-66841a8d69fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.pece_design_logic.body
+    - field.field.node.pece_design_logic.field_subst_logic_image_citation
+    - field.field.node.pece_design_logic.field_thumbnail
+    - image.style.thumbnail
+    - node.type.pece_design_logic
+  module:
+    - entity_form_field_label
+    - image
+    - text
+    - user
+id: node.pece_design_logic.search_result
+targetEntityType: node
+bundle: pece_design_logic
+mode: search_result
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: content
+      image_style: thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 0
+    region: content
+hidden:
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  field_subst_logic_image_citation: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

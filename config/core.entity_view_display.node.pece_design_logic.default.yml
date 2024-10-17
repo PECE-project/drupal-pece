@@ -1,0 +1,137 @@
+uuid: 33e95396-fc93-4dd5-9460-846a206e4852
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_design_logic.body
+    - field.field.node.pece_design_logic.field_subst_logic_image_citation
+    - field.field.node.pece_design_logic.field_thumbnail
+    - node.type.pece_design_logic
+  module:
+    - entity_form_field_label
+    - image
+    - layout_builder
+    - layout_library
+    - link
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          column_widths: 75-25
+        components:
+          41b418c1-2f7a-4413-869f-2dfd5dcb83ad:
+            uuid: 41b418c1-2f7a-4413-869f-2dfd5dcb83ad
+            region: first
+            configuration:
+              id: 'field_block:node:pece_design_logic:body'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          32184706-fae3-4c3f-a9f8-bf196ceffa74:
+            uuid: 32184706-fae3-4c3f-a9f8-bf196ceffa74
+            region: second
+            configuration:
+              id: 'field_block:node:pece_design_logic:field_thumbnail'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: image
+                label: above
+                settings:
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          ebfd974e-7411-4f14-a0e4-5520bd95e06b:
+            uuid: ebfd974e-7411-4f14-a0e4-5520bd95e06b
+            region: second
+            configuration:
+              id: 'field_block:node:pece_design_logic:field_subst_logic_image_citation'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: link
+                label: above
+                settings:
+                  trim_length: 80
+                  url_only: false
+                  url_plain: false
+                  rel: '0'
+                  target: _blank
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 1
+            additional: {  }
+        third_party_settings: {  }
+  layout_library:
+    enable: false
+id: node.pece_design_logic.default
+targetEntityType: node
+bundle: pece_design_logic
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_subst_logic_image_citation:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: _blank
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 102
+    region: content
+  field_thumbnail:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  langcode: true
+  search_api_excerpt: true

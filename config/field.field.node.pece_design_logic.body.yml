@@ -1,0 +1,24 @@
+uuid: 717dfdad-354a-461a-9b18-7765e9207948
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.pece_design_logic
+  module:
+    - text
+id: node.pece_design_logic.body
+field_name: body
+entity_type: node
+bundle: pece_design_logic
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary
