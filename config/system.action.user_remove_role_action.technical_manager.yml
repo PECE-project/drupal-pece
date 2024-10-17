@@ -1,0 +1,14 @@
+uuid: da6e2f7f-63c9-4b6d-bae7-149c2d35bcb9
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.technical_manager
+  module:
+    - user
+id: user_remove_role_action.technical_manager
+label: 'Remove the Technical manager role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: technical_manager
