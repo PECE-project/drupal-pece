@@ -27,7 +27,6 @@ dependencies:
     - entity_form_field_label
     - image
     - layout_builder
-    - paragraphs
     - text
     - user
 third_party_settings:
@@ -47,14 +46,13 @@ content:
     settings:
       trim_length: 600
     third_party_settings: {  }
-    weight: 101
+    weight: 1
     region: content
-  field_essay_contents:
-    type: paragraph_summary
-    label: hidden
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
-    weight: 109
+    weight: 0
     region: content
   field_thumbnail:
     type: image
@@ -68,12 +66,7 @@ content:
       entity_form_field_label:
         new_label: ''
         rewrite_label: 0
-    weight: 104
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 200
+    weight: 2
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
@@ -83,6 +76,7 @@ hidden:
   field_cite_as: true
   field_conceptualize: true
   field_curate: true
+  field_essay_contents: true
   field_groups_with_view_access: true
   field_pece_all_can_view: true
   field_pece_artifacts: true
@@ -93,4 +87,5 @@ hidden:
   field_tags: true
   langcode: true
   layout_builder__layout: true
+  links: true
   search_api_excerpt: true

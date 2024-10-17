@@ -21,7 +21,6 @@ dependencies:
   module:
     - layout_builder
     - layout_library
-    - paragraphs
     - text
     - user
 third_party_settings:
@@ -43,19 +42,13 @@ content:
     settings:
       trim_length: 600
     third_party_settings: {  }
+    weight: 1
+    region: content
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
+    settings: {  }
+    third_party_settings: {  }
     weight: 0
-    region: content
-  field_timeline_essay_items:
-    type: paragraph_summary
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 7
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 400
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
@@ -71,5 +64,7 @@ hidden:
   field_people_with_view_access: true
   field_tags: true
   field_thumbnail: true
+  field_timeline_essay_items: true
   langcode: true
+  links: true
   search_api_excerpt: true

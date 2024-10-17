@@ -23,7 +23,6 @@ dependencies:
     - field.field.node.pece_artifact_fieldnote.field_use_fieldsite_local
     - node.type.pece_artifact_fieldnote
   module:
-    - datetime
     - layout_builder
     - layout_library
     - text
@@ -47,35 +46,21 @@ content:
     settings:
       trim_length: 600
     third_party_settings: {  }
-    weight: 101
+    weight: 1
     region: content
-  field_authors:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 112
-    region: content
-  field_created_date:
-    type: datetime_default
-    label: inline
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 110
-    region: content
-  links:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_ark_enabled: true
+  field_authors: true
   field_cite_as: true
+  field_created_date: true
   field_fieldsite: true
   field_groups_with_view_access: true
   field_language: true
@@ -89,4 +74,5 @@ hidden:
   field_tags: true
   field_use_fieldsite_local: true
   langcode: true
+  links: true
   search_api_excerpt: true

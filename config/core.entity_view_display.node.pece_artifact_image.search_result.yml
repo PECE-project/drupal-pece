@@ -25,14 +25,11 @@ dependencies:
     - field.field.node.pece_artifact_image.field_source
     - field.field.node.pece_artifact_image.field_tags
     - field.field.node.pece_artifact_image.field_use_fieldsite_local
-    - image.style.thumbnail
     - node.type.pece_artifact_image
   module:
-    - datetime
-    - entity_form_field_label
-    - image
     - layout_builder
     - layout_library
+    - text
     - user
 third_party_settings:
   layout_builder:
@@ -47,51 +44,31 @@ targetEntityType: node
 bundle: pece_artifact_image
 mode: search_result
 content:
-  field_authors:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 106
-    region: content
-  field_created_date:
-    type: datetime_default
-    label: inline
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 122
-    region: content
-  field_image_artifact_image:
-    type: image
-    label: hidden
-    settings:
-      image_link: content
-      image_style: thumbnail
-      image_loading:
-        attribute: lazy
-    third_party_settings:
-      entity_form_field_label:
-        new_label: ''
-        rewrite_label: 0
-    weight: 131
-    region: content
-  links:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
-    weight: 500
+    weight: 0
+    region: content
+  field_crit_commentary:
+    type: text_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_ark_enabled: true
+  field_authors: true
   field_cite_as: true
-  field_crit_commentary: true
+  field_created_date: true
   field_fieldsite: true
   field_file_format: true
   field_groups_with_view_access: true
+  field_image_artifact_image: true
   field_image_file_format: true
   field_language: true
   field_location: true
@@ -105,5 +82,6 @@ hidden:
   field_tags: true
   field_use_fieldsite_local: true
   langcode: true
+  links: true
   og_audience: true
   search_api_excerpt: true

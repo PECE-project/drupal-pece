@@ -24,7 +24,6 @@ dependencies:
     - field.field.node.pece_artifact_text.field_use_fieldsite_local
     - node.type.pece_artifact_text
   module:
-    - datetime
     - layout_builder
     - text
     - user
@@ -39,42 +38,28 @@ targetEntityType: node
 bundle: pece_artifact_text
 mode: search_result
 content:
-  body:
-    type: text_summary_or_trimmed
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_crit_commentary:
+    type: text_trimmed
     label: hidden
     settings:
       trim_length: 600
     third_party_settings: {  }
-    weight: 121
-    region: content
-  field_authors:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 119
-    region: content
-  field_created_date:
-    type: datetime_default
-    label: inline
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 120
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 200
+    weight: 1
     region: content
 hidden:
+  body: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_ark_enabled: true
+  field_authors: true
   field_cite_as: true
-  field_crit_commentary: true
+  field_created_date: true
   field_fieldsite: true
   field_groups_with_view_access: true
   field_language: true
@@ -88,5 +73,6 @@ hidden:
   field_tags: true
   field_use_fieldsite_local: true
   langcode: true
+  links: true
   og_audience: true
   search_api_excerpt: true

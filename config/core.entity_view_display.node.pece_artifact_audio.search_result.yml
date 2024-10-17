@@ -28,7 +28,6 @@ dependencies:
     - node.type.pece_artifact_audio
   module:
     - entity_form_field_label
-    - file
     - layout_builder
     - layout_library
     - text
@@ -46,14 +45,9 @@ targetEntityType: node
 bundle: pece_artifact_audio
 mode: search_result
 content:
-  field_audio_artifact_audio:
-    type: file_audio
-    label: hidden
-    settings:
-      controls: true
-      autoplay: false
-      loop: false
-      multiple_file_display_type: tags
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
+    settings: {  }
     third_party_settings: {  }
     weight: 0
     region: content
@@ -61,33 +55,18 @@ content:
     type: text_trimmed
     label: hidden
     settings:
-      trim_length: 300
+      trim_length: 598
     third_party_settings:
       entity_form_field_label:
         new_label: ''
         rewrite_label: 0
-    weight: 2
-    region: content
-  field_people_with_edit_access:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings:
-      entity_form_field_label:
-        new_label: 'Contributed by'
-        rewrite_label: 1
     weight: 1
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 3
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_ark_enabled: true
+  field_audio_artifact_audio: true
   field_audio_file_format: true
   field_authors: true
   field_cite_as: true
@@ -101,10 +80,12 @@ hidden:
   field_pece_all_can_view: true
   field_pece_license: true
   field_pece_project_ref: true
+  field_people_with_edit_access: true
   field_people_with_view_access: true
   field_source: true
   field_tags: true
   field_use_fieldsite_local: true
   langcode: true
+  links: true
   og_audience: true
   search_api_excerpt: true

@@ -38,15 +38,13 @@ content:
     settings:
       trim_length: 600
     third_party_settings: {  }
-    weight: 0
-    region: content
-  field_uri:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
     weight: 1
+    region: content
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
@@ -58,6 +56,7 @@ hidden:
   field_people_with_edit_access: true
   field_people_with_view_access: true
   field_tags: true
+  field_uri: true
   langcode: true
   links: true
   search_api_excerpt: true

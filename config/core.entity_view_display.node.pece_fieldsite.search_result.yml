@@ -31,33 +31,21 @@ content:
     settings:
       trim_length: 600
     third_party_settings: {  }
-    weight: 101
+    weight: 1
     region: content
-  field_fieldsite_project:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 105
-    region: content
-  field_fieldsite_researcher:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 104
-    region: content
-  links:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
-    weight: 300
+    weight: 0
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  field_fieldsite_project: true
+  field_fieldsite_researcher: true
   field_location: true
   field_pece_geolocation: true
   langcode: true
+  links: true
   search_api_excerpt: true

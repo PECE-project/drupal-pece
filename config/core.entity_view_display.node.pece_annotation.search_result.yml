@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.pece_annotation.field_tags
     - node.type.pece_annotation
   module:
+    - entity_form_field_label
     - layout_builder
     - text
     - user
@@ -33,17 +34,26 @@ content:
     type: text_summary_or_trimmed
     label: hidden
     settings:
-      trim_length: 600
+      trim_length: 300
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 3
+    region: content
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
+    settings: {  }
     third_party_settings: {  }
-    weight: 101
+    weight: 0
     region: content
   field_annotation_analytic:
     type: entity_reference_label
-    label: above
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
-    weight: 104
+    weight: 1
     region: content
   field_annotation_artifact:
     type: entity_reference_label
@@ -51,12 +61,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 103
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 500
+    weight: 2
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
@@ -70,4 +75,5 @@ hidden:
   field_people_with_view_access: true
   field_tags: true
   langcode: true
+  links: true
   search_api_excerpt: true
