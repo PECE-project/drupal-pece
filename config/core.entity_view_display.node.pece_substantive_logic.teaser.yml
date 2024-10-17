@@ -5,15 +5,15 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_substantive_logic.body
-    - field.field.node.pece_substantive_logic.field_people_with_edit_access
     - field.field.node.pece_substantive_logic.field_pece_all_can_view
+    - field.field.node.pece_substantive_logic.field_people_with_edit_access
     - field.field.node.pece_substantive_logic.field_subst_logic_image_citation
     - field.field.node.pece_substantive_logic.field_tags
     - field.field.node.pece_substantive_logic.field_thumbnail
     - field.field.node.pece_substantive_logic.field_uri
     - node.type.pece_substantive_logic
   module:
-    - text
+    - image
     - user
 _core:
   default_config_hash: Gygi1Y7_ICbEXciBNeWveAJptgr6RAnfpQtkxmItOM0
@@ -22,27 +22,32 @@ targetEntityType: node
 bundle: pece_substantive_logic
 mode: teaser
 content:
-  body:
-    type: text_summary_or_trimmed
-    label: hidden
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    weight: 101
-    region: content
-  links:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
+    region: content
+  field_thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
+  body: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_pece_all_can_view: true
   field_people_with_edit_access: true
   field_subst_logic_image_citation: true
   field_tags: true
-  field_thumbnail: true
   field_uri: true
   langcode: true
+  links: true
   search_api_excerpt: true

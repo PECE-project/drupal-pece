@@ -23,7 +23,7 @@ dependencies:
     - field.field.node.pece_essay.layout_builder__layout
     - node.type.pece_essay
   module:
-    - text
+    - image
     - user
 _core:
   default_config_hash: TEL7aR8Bj3k9ajtgH1TR0QmBzrOz19D-yhSRAKUNUxc
@@ -32,20 +32,25 @@ targetEntityType: node
 bundle: pece_essay
 mode: teaser
 content:
-  body:
-    type: text_summary_or_trimmed
-    label: hidden
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    weight: 101
-    region: content
-  links:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
+    region: content
+  field_thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
+  body: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_analyze: true
@@ -62,8 +67,8 @@ hidden:
   field_people_with_edit_access: true
   field_people_with_view_access: true
   field_tags: true
-  field_thumbnail: true
   langcode: true
   layout_builder__layout: true
+  links: true
   og_audience: true
   search_api_excerpt: true

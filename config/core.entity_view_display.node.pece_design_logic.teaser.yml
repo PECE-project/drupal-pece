@@ -9,30 +9,29 @@ dependencies:
     - field.field.node.pece_design_logic.field_thumbnail
     - node.type.pece_design_logic
   module:
-    - text
+    - image
     - user
 id: node.pece_design_logic.teaser
 targetEntityType: node
 bundle: pece_design_logic
 mode: teaser
 content:
-  body:
-    type: text_summary_or_trimmed
+  field_thumbnail:
+    type: image
     label: hidden
     settings:
-      trim_length: 600
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
-    weight: 101
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
+  body: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_subst_logic_image_citation: true
-  field_thumbnail: true
   langcode: true
+  links: true
   search_api_excerpt: true

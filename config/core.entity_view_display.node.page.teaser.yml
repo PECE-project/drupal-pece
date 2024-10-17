@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.page.layout_builder__layout
     - node.type.page
   module:
+    - entity_form_field_label
     - text
     - user
 _core:
@@ -22,8 +23,11 @@ content:
     type: text_summary_or_trimmed
     label: hidden
     settings:
-      trim_length: 600
-    third_party_settings: {  }
+      trim_length: 300
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
     weight: 1
     region: content
   'extra_field_type_tray_icon_display:icons':

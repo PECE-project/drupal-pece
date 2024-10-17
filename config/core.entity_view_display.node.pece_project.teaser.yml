@@ -17,7 +17,6 @@ dependencies:
     - field.field.node.pece_project.field_project_design_group
     - field.field.node.pece_project.field_project_featured_essays
     - field.field.node.pece_project.field_project_fund_agency_link
-    - field.field.node.pece_project.field_thumbnail
     - field.field.node.pece_project.field_project_image_banner
     - field.field.node.pece_project.field_project_institution_link
     - field.field.node.pece_project.field_project_intv_request_file
@@ -27,9 +26,9 @@ dependencies:
     - field.field.node.pece_project.field_project_struct_analytics
     - field.field.node.pece_project.field_project_subst_logic
     - field.field.node.pece_project.field_tags
+    - field.field.node.pece_project.field_thumbnail
     - node.type.pece_project
   module:
-    - text
     - user
 _core:
   default_config_hash: '-6-EiQny4jWjHb2O1kEuyUGtQsy0Jgh0soRECSqTVrA'
@@ -38,20 +37,14 @@ targetEntityType: node
 bundle: pece_project
 mode: teaser
 content:
-  body:
-    type: text_summary_or_trimmed
-    label: hidden
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    weight: 101
-    region: content
-  links:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
+  body: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_ark_enabled: true
@@ -77,5 +70,6 @@ hidden:
   field_tags: true
   field_thumbnail: true
   langcode: true
+  links: true
   og_audience: true
   search_api_excerpt: true

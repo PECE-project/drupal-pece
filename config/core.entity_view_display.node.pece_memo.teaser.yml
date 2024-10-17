@@ -15,7 +15,6 @@ dependencies:
     - field.field.node.pece_memo.field_uri
     - node.type.pece_memo
   module:
-    - text
     - user
 _core:
   default_config_hash: 0FRZtQvXH25OOlbAmRno1YN-VoCpor2-gjL1QUV5KnI
@@ -24,20 +23,14 @@ targetEntityType: node
 bundle: pece_memo
 mode: teaser
 content:
-  body:
-    type: text_summary_or_trimmed
-    label: hidden
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    weight: 101
-    region: content
-  links:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
+  body: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_cite_as: true
@@ -49,4 +42,5 @@ hidden:
   field_tags: true
   field_uri: true
   langcode: true
+  links: true
   search_api_excerpt: true

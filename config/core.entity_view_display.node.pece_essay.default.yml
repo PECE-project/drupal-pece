@@ -4,15 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_essay.body
-    - field.field.node.pece_essay.field_analyze
     - field.field.node.pece_essay.field_ark_enabled
     - field.field.node.pece_essay.field_cite_as
-    - field.field.node.pece_essay.field_conceptualize
-    - field.field.node.pece_essay.field_curate
     - field.field.node.pece_essay.field_essay_contents
     - field.field.node.pece_essay.field_groups_with_view_access
     - field.field.node.pece_essay.field_pece_all_can_view
-    - field.field.node.pece_essay.field_pece_artifacts
     - field.field.node.pece_essay.field_pece_license
     - field.field.node.pece_essay.field_pece_project_ref
     - field.field.node.pece_essay.field_people_with_edit_access
@@ -366,8 +362,8 @@ third_party_settings:
                     description: ''
                 third_party_settings:
                   entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
+                    new_label: 'Contributed date'
+                    rewrite_label: 1
             weight: 5
             additional: {  }
           55b10702-88b0-4754-b7ed-91e5b6499ab7:
@@ -458,70 +454,6 @@ third_party_settings:
             weight: 12
             additional:
               extra_field_plus_settings: {  }
-          d2ee9b94-7f36-460d-a6cd-28adde77f0ac:
-            uuid: d2ee9b94-7f36-460d-a6cd-28adde77f0ac
-            region: first
-            configuration:
-              id: 'field_block:node:pece_essay:field_pece_artifacts'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 3
-            additional: {  }
-          9d89fed9-d0f8-4951-ae22-9f501105cd12:
-            uuid: 9d89fed9-d0f8-4951-ae22-9f501105cd12
-            region: first
-            configuration:
-              id: 'field_block:node:pece_essay:field_conceptualize'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 4
-            additional: {  }
-          91a35d26-cf76-4666-a78d-7ac36d1d0fa7:
-            uuid: 91a35d26-cf76-4666-a78d-7ac36d1d0fa7
-            region: first
-            configuration:
-              id: 'field_block:node:pece_essay:field_curate'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 5
-            additional: {  }
-          8c9daea4-3275-4a36-ba3d-790ccd9f8899:
-            uuid: 8c9daea4-3275-4a36-ba3d-790ccd9f8899
-            region: first
-            configuration:
-              id: 'field_block:node:pece_essay:field_analyze'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 6
-            additional: {  }
         third_party_settings: {  }
 _core:
   default_config_hash: HMSXo2f0tj9lPu_qSfMVAOMgO9tTZLm53p6zRWL1WgM
@@ -537,14 +469,6 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
-  field_analyze:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 123
-    region: first
   field_ark_enabled:
     type: boolean
     label: above
@@ -555,22 +479,6 @@ content:
     third_party_settings: {  }
     weight: 114
     region: content
-  field_conceptualize:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 121
-    region: first
-  field_curate:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 122
-    region: first
   field_essay_contents:
     type: entity_reference_revisions_entity_view
     label: above
@@ -598,14 +506,6 @@ content:
     third_party_settings: {  }
     weight: 116
     region: content
-  field_pece_artifacts:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 120
-    region: first
   field_pece_license:
     type: entity_reference_label
     label: above
