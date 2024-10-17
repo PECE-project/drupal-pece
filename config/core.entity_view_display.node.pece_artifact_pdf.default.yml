@@ -26,11 +26,13 @@ dependencies:
   module:
     - address
     - datetime
+    - entity_form_field_label
     - file
     - languagefield
     - layout_builder
     - layout_collapse
     - layout_library
+    - text
     - user
 third_party_settings:
   layout_builder:
@@ -336,27 +338,6 @@ third_party_settings:
                     rewrite_label: 1
             weight: 3
             additional: {  }
-          bfcc1d19-4ce7-4a36-8e3f-b06e9a525223:
-            uuid: bfcc1d19-4ce7-4a36-8e3f-b06e9a525223
-            region: two_a
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_crit_commentary'
-              label: 'Critical Commentary'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: basic_string
-                label: above
-                settings: {  }
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 5
-            additional: {  }
           3ee306fc-1894-4068-bcd9-49b18d3f8de2:
             uuid: 3ee306fc-1894-4068-bcd9-49b18d3f8de2
             region: two_a
@@ -493,8 +474,8 @@ third_party_settings:
             weight: 0
             additional:
               extra_field_plus_settings: {  }
-          931ca818-7157-4704-8094-53132e32aeaa:
-            uuid: 931ca818-7157-4704-8094-53132e32aeaa
+          6c134c19-66b9-4322-96a3-b5a4eb646a1b:
+            uuid: 6c134c19-66b9-4322-96a3-b5a4eb646a1b
             region: one_a
             configuration:
               id: 'extra_field_block:node:pece_artifact_pdf:extra_field_type_tray_icon_display:icons'
@@ -502,6 +483,24 @@ third_party_settings:
               context_mapping:
                 entity: layout_builder.entity
             weight: 2
+            additional: {  }
+          f2395b5a-5120-4d80-9edb-8233a97a0614:
+            uuid: f2395b5a-5120-4d80-9edb-8233a97a0614
+            region: one_a
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_crit_commentary'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 3
             additional: {  }
         third_party_settings: {  }
   layout_library:
@@ -552,12 +551,15 @@ content:
     weight: 121
     region: content
   field_crit_commentary:
-    type: basic_string
+    type: text_default
     label: above
     settings: {  }
-    third_party_settings: {  }
-    weight: 106
-    region: content
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 130
+    region: one_a
   field_fieldsite:
     type: entity_reference_label
     label: above

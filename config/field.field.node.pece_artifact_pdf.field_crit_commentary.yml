@@ -1,10 +1,12 @@
-uuid: 430cf78e-bbdb-47d7-8511-938ffa12e8c3
+uuid: 14d7adb9-085a-4e91-b606-c2c3800f0d5f
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_crit_commentary
     - node.type.pece_artifact_pdf
+  module:
+    - text
 id: node.pece_artifact_pdf.field_crit_commentary
 field_name: field_crit_commentary
 entity_type: node
@@ -17,4 +19,4 @@ default_value: {  }
 default_value_callback: ''
 settings:
   allowed_formats: {  }
-field_type: string_long
+field_type: text_long

@@ -25,8 +25,10 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_use_fieldsite_local
     - node.type.pece_artifact_pdf
   module:
+    - entity_form_field_label
     - layout_builder
     - layout_library
+    - text
     - user
 third_party_settings:
   layout_builder:
@@ -46,10 +48,14 @@ content:
     weight: 0
     region: content
   field_crit_commentary:
-    type: basic_string
+    type: text_trimmed
     label: hidden
-    settings: {  }
-    third_party_settings: {  }
+    settings:
+      trim_length: 600
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
     weight: 1
     region: content
 hidden:
