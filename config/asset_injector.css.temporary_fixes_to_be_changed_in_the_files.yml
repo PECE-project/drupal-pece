@@ -6,7 +6,7 @@ dependencies:
     - system
 id: temporary_fixes_to_be_changed_in_the_files
 label: 'Temporary fixes to be changed in the files'
-code: |-
+code: |
   /* TODO change in themes/custom/peceful/skins/default/scss/main.scss */
   .block-configurable-views-filter-block-blocksearch-page .form-actions {
     width: 25%;
@@ -36,14 +36,22 @@ code: |-
 
   .layout-collapse--closed {
   	margin-bottom:20px;
-  	border: 1px solid #eee;
+  	border: 1px solid var(--primary-light);
   	border-top: none;
   }
 
   .layout-collapse--open {
   	margin-bottom:20px;
-  	border: 1px solid #eee;
+  	border: 1px solid var(--primary-light);
   	border-top: none;
+  }
+
+  .layout-collapse--closed .block {
+  	padding:0 20px 0 20px;
+  }
+
+  .layout-collapse--open .block {
+  	padding:0 20px 0 20px;
   }
 
   .layout-collapse--none {
@@ -52,6 +60,27 @@ code: |-
 
   .layout-collapse details .block:first-of-type{
   	margin-top:20px;
+  }
+
+  .type-tray__icon--vector svg {
+  	padding: 25px;
+  	fill: white;
+  	background-color: var(--link-text);
+  	float: left;
+  	margin-right: 20px;
+  }
+
+  /* When stacking fields with inline labels in the Search Result Highlighter, the labels had a bottom margin of 8px. This was set via 
+
+  .label:not(:last-child) {
+      margin-bottom: var(--label-spacing);
+  }
+
+  When displayed, the field label right below each field label did not clear this bottom margin, and because they were also set to float left, the next field label was indenting to after the previous field label. 
+  There may be a better way of fixing this problem, but this works for now.*/
+
+  .label.is-pulled-left {
+  	margin-bottom: 0 !important;
   }
 media: all
 preprocess: true
