@@ -6,19 +6,20 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_artifact_bundle.field_ark_enabled
     - field.field.node.pece_artifact_bundle.field_authors
+    - field.field.node.pece_artifact_bundle.field_cite_as
     - field.field.node.pece_artifact_bundle.field_created_date
     - field.field.node.pece_artifact_bundle.field_crit_commentary
     - field.field.node.pece_artifact_bundle.field_fieldsite
-    - field.field.node.pece_artifact_bundle.field_location
-    - field.field.node.pece_artifact_bundle.field_tags
-    - field.field.node.pece_artifact_bundle.field_use_fieldsite_local
-    - field.field.node.pece_artifact_bundle.field_people_with_edit_access
     - field.field.node.pece_artifact_bundle.field_groups_with_view_access
+    - field.field.node.pece_artifact_bundle.field_location
     - field.field.node.pece_artifact_bundle.field_pece_all_can_view
     - field.field.node.pece_artifact_bundle.field_pece_artifacts
     - field.field.node.pece_artifact_bundle.field_pece_license
     - field.field.node.pece_artifact_bundle.field_pece_project_ref
+    - field.field.node.pece_artifact_bundle.field_people_with_edit_access
     - field.field.node.pece_artifact_bundle.field_people_with_view_access
+    - field.field.node.pece_artifact_bundle.field_tags
+    - field.field.node.pece_artifact_bundle.field_use_fieldsite_local
     - node.type.pece_artifact_bundle
   module:
     - user
@@ -27,10 +28,11 @@ targetEntityType: node
 bundle: pece_artifact_bundle
 mode: teaser
 content:
-  links:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
@@ -52,5 +54,6 @@ hidden:
   field_tags: true
   field_use_fieldsite_local: true
   langcode: true
+  links: true
   og_audience: true
   search_api_excerpt: true

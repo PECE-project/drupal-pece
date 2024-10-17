@@ -5,23 +5,24 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.artifact_tabular_data.field_ark_enabled
-    - field.field.node.artifact_tabular_data.field_people_with_edit_access
-    - field.field.node.artifact_tabular_data.field_groups_with_view_access
-    - field.field.node.artifact_tabular_data.field_pece_all_can_view
-    - field.field.node.artifact_tabular_data.field_pece_license
-    - field.field.node.artifact_tabular_data.field_pece_project_ref
-    - field.field.node.artifact_tabular_data.field_people_with_view_access
-    - field.field.node.artifact_tabular_data.field_tabular_attachment
     - field.field.node.artifact_tabular_data.field_authors
+    - field.field.node.artifact_tabular_data.field_cite_as
     - field.field.node.artifact_tabular_data.field_created_date
     - field.field.node.artifact_tabular_data.field_crit_commentary
     - field.field.node.artifact_tabular_data.field_fieldsite
-    - field.field.node.artifact_tabular_data.field_use_fieldsite_local
+    - field.field.node.artifact_tabular_data.field_groups_with_view_access
     - field.field.node.artifact_tabular_data.field_language
     - field.field.node.artifact_tabular_data.field_location
-    - field.field.node.artifact_tabular_data.field_tabular_media
+    - field.field.node.artifact_tabular_data.field_pece_all_can_view
+    - field.field.node.artifact_tabular_data.field_pece_license
+    - field.field.node.artifact_tabular_data.field_pece_project_ref
+    - field.field.node.artifact_tabular_data.field_people_with_edit_access
+    - field.field.node.artifact_tabular_data.field_people_with_view_access
     - field.field.node.artifact_tabular_data.field_source
+    - field.field.node.artifact_tabular_data.field_tabular_attachment
+    - field.field.node.artifact_tabular_data.field_tabular_media
     - field.field.node.artifact_tabular_data.field_tags
+    - field.field.node.artifact_tabular_data.field_use_fieldsite_local
     - node.type.artifact_tabular_data
   module:
     - user
@@ -32,10 +33,11 @@ targetEntityType: node
 bundle: artifact_tabular_data
 mode: teaser
 content:
-  links:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
@@ -60,4 +62,5 @@ hidden:
   field_tags: true
   field_use_fieldsite_local: true
   langcode: true
+  links: true
   search_api_excerpt: true

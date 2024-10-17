@@ -5,23 +5,24 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_artifact_pdf.field_ark_enabled
-    - field.field.node.pece_artifact_pdf.field_groups_with_view_access
-    - field.field.node.pece_artifact_pdf.field_pdf_artifact_document
     - field.field.node.pece_artifact_pdf.field_authors
     - field.field.node.pece_artifact_pdf.field_bibliography
+    - field.field.node.pece_artifact_pdf.field_cite_as
     - field.field.node.pece_artifact_pdf.field_created_date
     - field.field.node.pece_artifact_pdf.field_crit_commentary
     - field.field.node.pece_artifact_pdf.field_fieldsite
+    - field.field.node.pece_artifact_pdf.field_groups_with_view_access
     - field.field.node.pece_artifact_pdf.field_language
     - field.field.node.pece_artifact_pdf.field_location
-    - field.field.node.pece_artifact_pdf.field_source
-    - field.field.node.pece_artifact_pdf.field_use_fieldsite_local
+    - field.field.node.pece_artifact_pdf.field_pdf_artifact_document
     - field.field.node.pece_artifact_pdf.field_pece_all_can_view
     - field.field.node.pece_artifact_pdf.field_pece_license
     - field.field.node.pece_artifact_pdf.field_pece_project_ref
     - field.field.node.pece_artifact_pdf.field_people_with_edit_access
     - field.field.node.pece_artifact_pdf.field_people_with_view_access
+    - field.field.node.pece_artifact_pdf.field_source
     - field.field.node.pece_artifact_pdf.field_tags
+    - field.field.node.pece_artifact_pdf.field_use_fieldsite_local
     - node.type.pece_artifact_pdf
   module:
     - user
@@ -30,10 +31,11 @@ targetEntityType: node
 bundle: pece_artifact_pdf
 mode: teaser
 content:
-  links:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
@@ -58,5 +60,6 @@ hidden:
   field_tags: true
   field_use_fieldsite_local: true
   langcode: true
+  links: true
   og_audience: true
   search_api_excerpt: true
