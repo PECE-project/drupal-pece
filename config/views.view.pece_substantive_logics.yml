@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.search_result
+    - core.entity_view_mode.node.teaser
     - node.type.pece_substantive_logic
   module:
     - node
@@ -154,7 +154,7 @@ display:
         type: 'entity:node'
         options:
           relationship: none
-          view_mode: search_result
+          view_mode: teaser
       query:
         type: views_query
         options:
