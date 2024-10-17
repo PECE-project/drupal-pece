@@ -1,0 +1,37 @@
+uuid: 6b962ec4-8649-4410-8d1e-80518e38a5d3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.vector_image.field_media_svg
+    - media.type.vector_image
+  module:
+    - svg_image_field
+_core:
+  default_config_hash: azf-4JsCR_6x5XHzGMZOHv2Lko5YtmzttxsHVD4Aik8
+id: media.vector_image.default
+targetEntityType: media
+bundle: vector_image
+mode: default
+content:
+  field_media_svg:
+    label: hidden
+    weight: 0
+    settings:
+      apply_dimensions: true
+      width: 400
+      height: 400
+      enable_alt: true
+      enable_title: true
+      link: ''
+      inline: false
+    third_party_settings: {  }
+    type: svg_image_field_formatter
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true
