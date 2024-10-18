@@ -17,24 +17,43 @@ source:
   plugin: d7_file
   scheme: public
   constants:
-    source_base_path: ''
+    source_base_path: '/var/www/html/web'
+    TARGET_SCHEME: 'private'
 process:
   fid: fid
   filename: filename
+  # Skip rows that contain files of filesize 0
+  # DO NOT use this for vimeo and youtube scheme migrations
+  _filesize:
+    plugin: skip_on_empty
+    method: row
+    message: 'Row skipped due to missing or corrupt file'
+    source: filesize
   source_full_path:
     -
-      plugin: concat_env
+      plugin: concat
       delimiter: /
       source:
-        - env/MIGRATE_V1_URL
+        - constants/source_base_path
         - filepath
     -
       plugin: urlencode
+  _stripped_public_uri:
+    plugin: substr
+    source: uri
+    start: 6
+  _private_uri:
+    plugin: concat
+    delimiter: ''
+    source:
+      - constants/TARGET_SCHEME
+      - '@_stripped_public_uri'
   uri:
     plugin: file_copy
     source:
       - '@source_full_path'
-      - uri
+      - '@_private_uri'
+    file_exists: 'rename'
   filemime: filemime
   status: status
   created: timestamp
