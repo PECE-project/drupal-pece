@@ -23,10 +23,10 @@ process:
     default_value: groups
   status: status
   changed: changed
-  # path/pathauto:
-  #   plugin: default_value
-  #   default_value: 0
-  #   path/alias: alias
+  path/pathauto:
+    plugin: default_value
+    default_value: 0
+    path/alias: alias
   description/format:
     plugin: default_value
     default_value: basic_html
@@ -54,7 +54,6 @@ destination:
 migration_dependencies:
   required:
     - v1_sub_logic
-    - v1_project
     - v1_user
     - v1_file
     - v1_file_private
