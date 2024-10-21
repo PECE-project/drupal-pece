@@ -38,26 +38,26 @@ process:
     plugin: default_value
     default_value: 0
     path/alias: alias
-  # revision_uid:
-  #   -
-  #     plugin: get
-  #     source: revision_uid
-  # revision_log:
-  #   -
-  #     plugin: get
-  #     source: log
-  # revision_timestamp:
-  #   -
-  #     plugin: get
-  #     source: timestamp
-  # content_translation_source:
-  #   -
-  #     plugin: get
-  #     source: source_langcode
-  # comment_node_pece_sub_logic/0/status:
-  #   -
-  #     plugin: get
-  #     source: comment
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  content_translation_source:
+    -
+      plugin: get
+      source: source_langcode
+  comment_node_pece_sub_logic/0/status:
+    -
+      plugin: get
+      source: comment
   body/format:
     -
       plugin: default_value
