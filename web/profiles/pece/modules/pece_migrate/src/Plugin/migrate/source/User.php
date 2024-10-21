@@ -61,7 +61,7 @@ class User extends D7User {
   public function callbackRidToName($id) {
     $roleMap = [
       3 => "administrator", // Administrator
-      4 => "editor", // Editor
+      4 => "contributor", // Editor
       5 => "contributor", // Contributor
       6 => "contributor", // Researcher
       8 => "data_manager", // Data Importer
