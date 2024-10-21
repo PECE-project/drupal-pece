@@ -38,6 +38,7 @@ class Node extends D7Node {
     $fields = parent::fields() + ['alias' => $this->t('Path alias')];
     $fields += ['permission_all_user_view' => $this->t('Permission for all users')];
     $fields += ['groups_with_view_access' => $this->t('Groups with view access')];
+    $fields += ['people_with_edit_access' => $this->t('People with edit access')];
     return $fields;
   }
 
@@ -92,6 +93,16 @@ class Node extends D7Node {
         $row->setSourceProperty('permission_all_user_view', true);
     }
 
+    $collaborators = $this->select('field_data_field_pece_contributors', 'collab')
+      ->fields('collab', ['field_pece_contributors_target_id'])
+      ->condition('collab.entity_id', $nid)
+      ->execute()->fetchCol();
+    // $people_with_edit_access = $row->getSourceProperty('field_pece_contributors') ?? [];
+    $author = $row->getSourceProperty('node_uid');
+    array_push($collaborators, $author);
+    $people_with_edit_access = array_unique($collaborators);
+
+    $row->setSourceProperty('people_with_edit_access', $people_with_edit_access);
     return parent::prepareRow($row);
   }
 
