@@ -7,16 +7,6 @@ label: 'PECE default content policy'
 description: 'Only specified users and specified groups have access to this content.'
 weight: 0
 access_rules:
-  is_own:
-    id: is_own
-    group: node
-    plugin_id: is_own
-    field: uid
-    entity_type: node
-    settings:
-      admin_label: ''
-      query: true
-    required: false
   field_people_with_edit_access_user_reference:
     id: field_people_with_edit_access_user_reference
     group: node
