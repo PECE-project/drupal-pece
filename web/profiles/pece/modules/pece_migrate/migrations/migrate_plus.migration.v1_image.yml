@@ -46,7 +46,7 @@ process:
     plugin: default_value
     source: permission_all_user_view
     default_value: false
-  field_groups_with_view_access:
+  _lookup_groups_with_view_access:
     -
       plugin: skip_on_empty
       method: process
@@ -63,6 +63,16 @@ process:
             plugin: extract
             index:
               - 0
+  _empty_groups_lookup_fallback:
+    plugin: default_value
+    source: '@_lookup_groups_with_view_access'
+    default_value: []
+  field_groups_with_view_access:
+    -
+      plugin: restricted_group_append
+      source:
+        - '@_empty_groups_lookup_fallback'
+        - restricted_content_group
   field_people_with_edit_access: people_with_edit_access
   field_authors:
     plugin: sub_process
