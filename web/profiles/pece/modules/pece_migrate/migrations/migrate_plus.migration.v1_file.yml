@@ -54,6 +54,7 @@ process:
       - '@source_full_path'
       - '@_private_uri'
     file_exists: 'rename'
+    move: TRUE
   filemime: filemime
   status: status
   created: timestamp
@@ -61,4 +62,6 @@ process:
   uid: uid
 destination:
   plugin: 'entity:file'
-migration_dependencies: null
+migration_dependencies:
+  required:
+    - v1_file_private
