@@ -9,7 +9,110 @@ dependencies:
     - field.field.user.user.field_zotero
   module:
     - image
+    - layout_builder
+    - layout_discovery
+    - layout_library
     - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          column_widths: 75-25
+        components:
+          6034ab5e-3d08-47e2-ae5c-2d3e393f6c25:
+            uuid: 6034ab5e-3d08-47e2-ae5c-2d3e393f6c25
+            region: second
+            configuration:
+              id: 'field_block:user:user:field_user_picture'
+              label: 'User picture'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: image
+                label: hidden
+                settings:
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 0
+            additional: {  }
+          3d5847f9-5d3d-4c00-8586-cdd94a53c563:
+            uuid: 3d5847f9-5d3d-4c00-8586-cdd94a53c563
+            region: second
+            configuration:
+              id: 'field_block:user:user:field_groups_joined'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          856e6f8d-ad9d-404a-8b49-93e6cbee3ec6:
+            uuid: 856e6f8d-ad9d-404a-8b49-93e6cbee3ec6
+            region: second
+            configuration:
+              id: 'field_block:user:user:field_groups_managed'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          c32870d2-f336-4788-9a0c-d961597cfbbe:
+            uuid: c32870d2-f336-4788-9a0c-d961597cfbbe
+            region: first
+            configuration:
+              id: 'field_block:user:user:pece_profile_main_profiles'
+              label: 'profile profiles'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: '@user.current_user_context:current_user'
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components: {  }
+        third_party_settings: {  }
+  layout_library:
+    enable: false
 _core:
   default_config_hash: k_VxXHR09rj1jQWuUXOof935-JMdDGejLaRdVYaGzXg
 id: user.user.default
