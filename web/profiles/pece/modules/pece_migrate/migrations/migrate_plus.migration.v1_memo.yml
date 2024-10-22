@@ -55,10 +55,7 @@ process:
       - 0
       - summary
     default: ''
-  field_people_with_edit_access:
-    plugin: default_value
-    source: field_pece_contributors
-    default_value: null
+  field_people_with_edit_access: people_with_edit_access
   field_pece_license:
     -
       plugin: static_map
