@@ -64,12 +64,6 @@ class Node extends D7Node {
     $permission = $query->execute()->fetchField();
     $groups = $this->getGroupsByContent($nid);
     $group_terms = [];
-    foreach ($groups as $key => $item) {
-      $group_terms[] = [
-        'target_id' => $item
-      ];
-    }
-    $row->setSourceProperty('groups_with_view_access', $group_terms);
 
     if ($permission == self::PERMISSION_OPEN) {
       // Check if content belongs to any group
@@ -92,6 +86,21 @@ class Node extends D7Node {
         // All users see the content
         $row->setSourceProperty('permission_all_user_view', true);
     }
+
+    if ($permission == self::PERMISSION_RESTRICTED) {
+      // If permission restricted, give the PECE v1 Restricted Content group view access
+      // All legacy users are members of this group (see v1_user migration)
+      $restricted_content_group_array = \Drupal::entityTypeManager()->getStorage('taxonomy_term')
+        ->loadByProperties(['name' => 'PECE v1 Restricted Content', 'vid' => 'groups']);
+      $restricted_content_group_id = $restricted_content_group_array ? reset($restricted_content_group_array)->id() : NULL;
+      array_push($groups, $restricted_content_group_id);
+    }
+    foreach ($groups as $key => $item) {
+      $group_terms[] = [
+        'target_id' => $item
+      ];
+    }
+    $row->setSourceProperty('groups_with_view_access', $group_terms);
 
     $collaborators = $this->select('field_data_field_pece_contributors', 'collab')
       ->fields('collab', ['field_pece_contributors_target_id'])

@@ -39,6 +39,16 @@ process:
   init: init
   roles: d7_merged_roles
   field_user_picture: field_user_picture
+  field_groups_joined:
+    -
+      plugin: default_value
+      default_value: PECE v1 Restricted Content
+    -
+      plugin: entity_lookup
+      entity_type: taxonomy_term
+      bundle_key: vid
+      bundle: groups
+      value_key: name
   field_zotero: field_zotero_username
 destination:
   plugin: 'entity:user'
