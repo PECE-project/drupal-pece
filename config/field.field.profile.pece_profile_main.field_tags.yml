@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.profile.field_tags
     - profile.type.pece_profile_main
+    - taxonomy.vocabulary.tags
 _core:
   default_config_hash: MDNDmzbshJI5sbo9usCzM8IUeYpJLW3uHFK-k222KPc
 id: profile.pece_profile_main.field_tags
@@ -20,7 +21,8 @@ default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
   handler_settings:
-    target_bundles: {  }
+    target_bundles:
+      tags: tags
     sort:
       field: name
       direction: asc
