@@ -6,6 +6,7 @@ dependencies:
     - blazy
     - editor
     - linkit
+    - media
     - splide
 _core:
   default_config_hash: HvAE4vD_4-nvhwLobIN3k5rTE9zq9AQG8UScfnwuKQo
@@ -74,6 +75,18 @@ filters:
     weight: 0
     settings:
       title: true
+  media_embed:
+    id: media_embed
+    provider: media
+    status: true
+    weight: 100
+    settings:
+      default_view_mode: default
+      allowed_view_modes: {  }
+      allowed_media_types:
+        image: image
+        remote_video: remote_video
+        video: video
   splide_filter:
     id: splide_filter
     provider: splide
