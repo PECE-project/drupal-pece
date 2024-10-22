@@ -22,14 +22,14 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_media_svg:
+    type: svg_image_field_widget
     weight: 0
+    region: content
     settings:
       progress_indicator: throbber
       preview_image_max_width: 300
       preview_image_max_height: 300
     third_party_settings: {  }
-    type: svg_image_field_widget
-    region: content
   langcode:
     type: language_select
     weight: 2
@@ -45,20 +45,20 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 3
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
     weight: 1
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
 hidden:
   name: true

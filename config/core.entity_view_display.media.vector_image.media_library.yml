@@ -17,18 +17,18 @@ mode: media_library
 content:
   field_media_svg:
     type: svg_image_field_formatter
-    weight: 0
-    region: content
     label: hidden
     settings:
+      inline: false
       apply_dimensions: true
       width: 200
       height: 200
       enable_alt: true
       enable_title: true
       link: ''
-      inline: false
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   created: true
   langcode: true
