@@ -537,3 +537,10 @@ This *content type* is going to migrate to a *vocabulary*, `groups`, so all fiel
 - Assuming I am using CER, and I migrate "Group members" into the field on a Group term, will CER ensure that the Group being migrated is referenced from the "Groups joined" field on the user when the migration is run?
 - When a node of a type that is allowed to use an access policy is migrated, does an access policy datapoint need to be created manually during the migration (see db table node__access_policy)? I don't expect they will be created automatically, since the original author is not the one saving them during the migration, which is required to apply the access policy.
 - Lots of machine names have the "pece" prefix. We should standardize, and either remove it in many places, or add it in many places. Which will it be? Let's just let it be inconsistent.
+
+## Process (draft)
+- Install the upgraded version of the site
+- bump the sql auto-incrementers
+- import default content
+- rsync the files directory to wherever the migration will run (prevent timeout of video files moving during migration, and required for private files anyway)
+- run the migration
