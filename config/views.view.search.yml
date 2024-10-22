@@ -6,7 +6,7 @@ dependencies:
     - search_api.index.general
   module:
     - better_exposed_filters
-    - facets
+    - facets_exposed_filters
     - search_api
 id: search
 label: Search
@@ -135,15 +135,76 @@ display:
                   collapsible: false
                   collapsible_disable_automatic_open: false
                   is_secondary: false
-              facets:
-                plugin_id: facets
+              facets_field_people_with_edit_access:
+                plugin_id: bef_links
                 advanced:
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
                   collapsible: false
                   collapsible_disable_automatic_open: false
-                  is_secondary: true
+                  is_secondary: false
+                select_all_none: false
+              facets_field_annotation_artifact:
+                plugin_id: bef_links
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  is_secondary: false
+                select_all_none: false
+              facets_field_pece_license:
+                plugin_id: bef_links
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  is_secondary: false
+                select_all_none: false
+              facets_field_file_format:
+                plugin_id: bef_links
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  is_secondary: false
+                select_all_none: false
+              facets_entity_type:
+                plugin_id: bef_links
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  is_secondary: false
+                select_all_none: true
+              facets_type:
+                plugin_id: bef_links
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  is_secondary: false
+                select_all_none: false
+              facets_vid:
+                plugin_id: bef_links
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  is_secondary: false
+                select_all_none: false
       access:
         type: none
         options: {  }
@@ -164,7 +225,7 @@ display:
           plugin_id: search_api_fulltext
           operator: and
           value: ''
-          group: 2
+          group: 1
           exposed: true
           expose:
             operator_id: search_api_fulltext_op
@@ -204,10 +265,10 @@ display:
           parse_mode: terms
           min_length: null
           fields: {  }
-        facets:
-          id: facets
+        facets_field_people_with_edit_access:
+          id: facets_field_people_with_edit_access
           table: search_api_index_general
-          field: facets
+          field: facets_field_people_with_edit_access
           relationship: none
           group_type: group
           admin_label: ''
@@ -218,18 +279,24 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: ''
-            description: ''
+            label: Contributor
+            description: 'People who added this content and can edit it.'
             use_operator: false
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: facet_kR6zRaFM
+            identifier: contributor
             required: false
-            remember: false
-            multiple: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
+              anonymous: '0'
+              contributor: '0'
+              data_manager: '0'
+              technical_manager: '0'
+              platform_manager: '0'
+              administrator: '0'
+              r_api: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -242,15 +309,374 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          facets:
-            annotated_artifact: annotated_artifact
-            content_type: content_type
-            contributor: contributor
-            entity_type: entity_type
-            file_format: file_format
-            license: license
-            vocabulary: vocabulary
+          hierarchy: false
           label_display: visible
+          facet:
+            query_operator: or
+            min_count: 1
+            show_numbers: true
+            processor_configs:
+              uid_to_username_callback:
+                weights:
+                  build: 5
+                settings: {  }
+              count_widget_order:
+                weights:
+                  sort: 30
+                settings:
+                  sort: DESC
+        facets_field_annotation_artifact:
+          id: facets_field_annotation_artifact
+          table: search_api_index_general
+          field: facets_field_annotation_artifact
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Annotated Artifact'
+            description: 'Show annotations that have been made on the selected artifacts.'
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: annotated_artifact
+            required: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributor: '0'
+              data_manager: '0'
+              technical_manager: '0'
+              platform_manager: '0'
+              administrator: '0'
+              r_api: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: false
+          label_display: visible
+          facet:
+            query_operator: or
+            min_count: 1
+            show_numbers: true
+            processor_configs:
+              translate_entity:
+                weights:
+                  build: 5
+                settings: {  }
+              count_widget_order:
+                weights:
+                  sort: 30
+                settings:
+                  sort: DESC
+        facets_field_pece_license:
+          id: facets_field_pece_license
+          table: search_api_index_general
+          field: facets_field_pece_license
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: License
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: license
+            required: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributor: '0'
+              data_manager: '0'
+              technical_manager: '0'
+              platform_manager: '0'
+              administrator: '0'
+              r_api: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: false
+          label_display: visible
+          facet:
+            query_operator: or
+            min_count: 1
+            show_numbers: true
+            processor_configs:
+              translate_entity:
+                weights:
+                  build: 5
+                settings: {  }
+              count_widget_order:
+                weights:
+                  sort: 30
+                settings:
+                  sort: DESC
+        facets_field_file_format:
+          id: facets_field_file_format
+          table: search_api_index_general
+          field: facets_field_file_format
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'File format'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: file_format
+            required: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributor: '0'
+              data_manager: '0'
+              technical_manager: '0'
+              platform_manager: '0'
+              administrator: '0'
+              r_api: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: false
+          label_display: visible
+          facet:
+            query_operator: or
+            min_count: 1
+            show_numbers: true
+            processor_configs:
+              translate_entity:
+                weights:
+                  build: 5
+                settings: {  }
+              count_widget_order:
+                weights:
+                  sort: 30
+                settings:
+                  sort: DESC
+        facets_entity_type:
+          id: facets_entity_type
+          table: search_api_index_general
+          field: facets_entity_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Entity type'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: entity
+            required: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributor: '0'
+              data_manager: '0'
+              technical_manager: '0'
+              platform_manager: '0'
+              administrator: '0'
+              r_api: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: false
+          label_display: visible
+          facet:
+            query_operator: or
+            min_count: 1
+            show_numbers: false
+            processor_configs:
+              count_widget_order:
+                weights:
+                  sort: 30
+                settings:
+                  sort: DESC
+        facets_type:
+          id: facets_type
+          table: search_api_index_general
+          field: facets_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Content type'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: type
+            required: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributor: '0'
+              data_manager: '0'
+              technical_manager: '0'
+              platform_manager: '0'
+              administrator: '0'
+              r_api: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: false
+          label_display: visible
+          facet:
+            query_operator: or
+            min_count: 1
+            show_numbers: false
+            processor_configs:
+              count_widget_order:
+                weights:
+                  sort: 30
+                settings:
+                  sort: DESC
+        facets_vid:
+          id: facets_vid
+          table: search_api_index_general
+          field: facets_vid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Vocabulary
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: vid
+            required: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributor: '0'
+              data_manager: '0'
+              technical_manager: '0'
+              platform_manager: '0'
+              administrator: '0'
+              r_api: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: false
+          label_display: visible
+          facet:
+            query_operator: or
+            min_count: 1
+            show_numbers: true
+            processor_configs:
+              translate_entity:
+                weights:
+                  build: 5
+                settings: {  }
+              count_widget_order:
+                weights:
+                  sort: 30
+                settings:
+                  sort: DESC
       filter_groups:
         operator: OR
         groups:
@@ -323,7 +749,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      exposed_block: true
+      exposed_block: false
       display_extenders:
         metatag_display_extender:
           metatags: {  }
