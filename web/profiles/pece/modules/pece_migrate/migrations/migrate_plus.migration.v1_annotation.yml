@@ -38,7 +38,26 @@ process:
     plugin: default_value
     default_value: 0
     path/alias: alias
-  field_pece_license: field_pece_license
+  field_pece_license:
+    -
+      plugin: static_map
+      source: field_pece_license
+      map:
+        1: Copyright All Rights Reserved
+        2: CC0 1.0 Universal (CC0 1.0)
+        3: Public Domain
+        4: Attribution 4.0 International (CC BY 4.0)
+        5: Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+        6: Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)
+        7: Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+        8: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+        9: Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+    -
+      plugin: entity_lookup
+      entity_type: taxonomy_term
+      bundle_key: vid
+      bundle: licenses_vocabulary_licenses
+      value_key: name
   body/format:
     plugin: default_value
     default_value: basic_html
