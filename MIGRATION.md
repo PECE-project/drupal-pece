@@ -544,5 +544,6 @@ This *content type* is going to migrate to a *vocabulary*, `groups`, so all fiel
 - import default content
 - rsync the files directory to wherever the migration will run (prevent timeout of video files moving during migration, and required for private files anyway)
 - scrape/collect the essay pages
+- rebuild the cache
 - run the migration
 - bulk update url aliases (assuming that they were migrated in as pathauto-generated aliases)
