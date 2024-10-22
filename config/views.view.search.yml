@@ -141,8 +141,8 @@ display:
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: false
-                  collapsible_disable_automatic_open: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: true
                   is_secondary: false
                 select_all_none: false
               facets_field_annotation_artifact:
@@ -554,8 +554,13 @@ display:
           facet:
             query_operator: or
             min_count: 1
-            show_numbers: false
+            show_numbers: true
             processor_configs:
+              replace:
+                weights:
+                  post_query: 50
+                settings:
+                  replacements: "node|Content\r\ntaxonomy_term|Taxonomy term"
               count_widget_order:
                 weights:
                   sort: 30
@@ -610,8 +615,12 @@ display:
           facet:
             query_operator: or
             min_count: 1
-            show_numbers: false
+            show_numbers: true
             processor_configs:
+              translate_entity:
+                weights:
+                  build: 5
+                settings: {  }
               count_widget_order:
                 weights:
                   sort: 30
