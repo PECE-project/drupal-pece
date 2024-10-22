@@ -47,6 +47,9 @@ process:
     plugin: default_value
     source: field_pece_project_ref
     default_value: null
+  field_crit_commentary/format:
+    plugin: default_value
+    default_value: basic_html
   field_crit_commentary/value:
     plugin: extract
     source: field_pece_crit_commentary
