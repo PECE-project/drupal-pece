@@ -292,6 +292,16 @@ third_party_settings:
                     rewrite_label: 0
             weight: 2
             additional: {  }
+          18f8fd66-b4e6-4d73-ab44-46f64f00b6c1:
+            uuid: 18f8fd66-b4e6-4d73-ab44-46f64f00b6c1
+            region: first
+            configuration:
+              id: 'extra_field_block:node:pece_timeline_essay:extra_field_type_tray_icon_display:icons'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 1
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -309,6 +319,11 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  'extra_field_type_tray_icon_display:icons':
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: first
   field_ark_enabled:
     type: boolean
     label: above

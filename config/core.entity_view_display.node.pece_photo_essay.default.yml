@@ -293,6 +293,16 @@ third_party_settings:
                     rewrite_label: 0
             weight: 0
             additional: {  }
+          4197df1c-bb0f-4b52-ae52-d3ffc302ce03:
+            uuid: 4197df1c-bb0f-4b52-ae52-d3ffc302ce03
+            region: first
+            configuration:
+              id: 'extra_field_block:node:pece_photo_essay:extra_field_type_tray_icon_display:icons'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 1
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -310,6 +320,11 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  'extra_field_type_tray_icon_display:icons':
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: first
   field_ark_enabled:
     type: boolean
     label: above
