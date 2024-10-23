@@ -40,7 +40,7 @@ process:
         - v1_fieldnote
         - v1_image
         - v1_pdf
-        - v1_tabular
+        - v1_tabular_data
         - v1_text
         - v1_video
         - v1_website
@@ -52,6 +52,7 @@ process:
         - v1_project
         - v1_sub_logic
         - v1_timeline_essay
+        - v1_profile
       source: nid
     -
       plugin: node_complete_node_lookup
@@ -141,7 +142,7 @@ migration_dependencies:
     - v1_fieldnote
     - v1_image
     - v1_pdf
-    - v1_tabular
+    - v1_tabular_data
     - v1_text
     - v1_video
     - v1_website
@@ -153,3 +154,4 @@ migration_dependencies:
     - v1_project
     - v1_sub_logic
     - v1_timeline_essay
+    - v1_profile
