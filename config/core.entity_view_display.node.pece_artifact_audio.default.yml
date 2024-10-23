@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_language
     - field.field.node.pece_artifact_audio.field_location
     - field.field.node.pece_artifact_audio.field_pece_all_can_view
+    - field.field.node.pece_artifact_audio.field_pece_geolocation
     - field.field.node.pece_artifact_audio.field_pece_license
     - field.field.node.pece_artifact_audio.field_pece_project_ref
     - field.field.node.pece_artifact_audio.field_people_with_edit_access
@@ -28,7 +29,9 @@ dependencies:
   module:
     - address
     - datetime
+    - entity_form_field_label
     - file
+    - geolocation
     - languagefield
     - layout_builder
     - layout_collapse
@@ -503,6 +506,24 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: 1
             additional: {  }
+          1438be7d-d97d-42e6-81d8-3a365a9f4efb:
+            uuid: 1438be7d-d97d-42e6-81d8-3a365a9f4efb
+            region: one_a
+            configuration:
+              id: 'field_block:node:pece_artifact_audio:field_pece_geolocation'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: geolocation_latlng
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 2
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -627,6 +648,16 @@ content:
     third_party_settings: {  }
     weight: 126
     region: content
+  field_pece_geolocation:
+    type: geolocation_latlng
+    label: above
+    settings: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 134
+    region: one_a
   field_pece_license:
     type: entity_reference_label
     label: above

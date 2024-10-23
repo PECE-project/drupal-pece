@@ -7,6 +7,7 @@ dependencies:
     - field.field.profile.pece_profile_main.field_pece_biography
     - field.field.profile.pece_profile_main.field_pece_email
     - field.field.profile.pece_profile_main.field_pece_full_name
+    - field.field.profile.pece_profile_main.field_pece_geolocation
     - field.field.profile.pece_profile_main.field_pece_institution
     - field.field.profile.pece_profile_main.field_pece_position
     - field.field.profile.pece_profile_main.field_pgp_key
@@ -14,6 +15,7 @@ dependencies:
     - profile.type.pece_profile_main
   module:
     - address
+    - geolocation
     - layout_builder
     - layout_discovery
     - layout_library
@@ -140,6 +142,21 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 6
             additional: {  }
+          9664a543-c24f-4c00-b736-30403c3f87e4:
+            uuid: 9664a543-c24f-4c00-b736-30403c3f87e4
+            region: content
+            configuration:
+              id: 'field_block:profile:pece_profile_main:field_pece_geolocation'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: geolocation_latlng
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -181,6 +198,13 @@ content:
         new_label: ''
         rewrite_label: 0
     weight: 0
+    region: content
+  field_pece_geolocation:
+    type: geolocation_latlng
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
     region: content
   field_pece_institution:
     type: string

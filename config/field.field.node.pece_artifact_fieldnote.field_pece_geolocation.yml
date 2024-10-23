@@ -1,0 +1,21 @@
+uuid: ae2852ef-3796-4194-b655-bf3c3c9be7a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_geolocation
+    - node.type.pece_artifact_fieldnote
+  module:
+    - geolocation
+id: node.pece_artifact_fieldnote.field_pece_geolocation
+field_name: field_pece_geolocation
+entity_type: node
+bundle: pece_artifact_fieldnote
+label: Location
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: geolocation

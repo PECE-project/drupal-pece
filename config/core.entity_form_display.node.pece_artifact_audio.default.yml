@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.pece_artifact_audio.field_language
     - field.field.node.pece_artifact_audio.field_location
     - field.field.node.pece_artifact_audio.field_pece_all_can_view
+    - field.field.node.pece_artifact_audio.field_pece_geolocation
     - field.field.node.pece_artifact_audio.field_pece_license
     - field.field.node.pece_artifact_audio.field_pece_project_ref
     - field.field.node.pece_artifact_audio.field_people_with_edit_access
@@ -30,6 +31,7 @@ dependencies:
     - datetime
     - field_group
     - file
+    - geolocation
     - languagefield
     - path
     - text
@@ -277,6 +279,12 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_pece_geolocation:
+    type: geolocation_latlng
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_pece_license:
     type: options_select

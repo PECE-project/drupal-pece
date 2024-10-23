@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.pece_artifact_website.field_language
     - field.field.node.pece_artifact_website.field_location
     - field.field.node.pece_artifact_website.field_pece_all_can_view
+    - field.field.node.pece_artifact_website.field_pece_geolocation
     - field.field.node.pece_artifact_website.field_pece_license
     - field.field.node.pece_artifact_website.field_pece_project_ref
     - field.field.node.pece_artifact_website.field_people_with_edit_access
@@ -27,6 +28,7 @@ dependencies:
     - address
     - datetime
     - field_group
+    - geolocation
     - languagefield
     - link
     - path
@@ -252,6 +254,12 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_pece_geolocation:
+    type: geolocation_latlng
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_pece_license:
     type: options_select

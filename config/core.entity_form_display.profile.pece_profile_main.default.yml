@@ -7,6 +7,7 @@ dependencies:
     - field.field.profile.pece_profile_main.field_pece_biography
     - field.field.profile.pece_profile_main.field_pece_email
     - field.field.profile.pece_profile_main.field_pece_full_name
+    - field.field.profile.pece_profile_main.field_pece_geolocation
     - field.field.profile.pece_profile_main.field_pece_institution
     - field.field.profile.pece_profile_main.field_pece_position
     - field.field.profile.pece_profile_main.field_pgp_key
@@ -15,6 +16,7 @@ dependencies:
   module:
     - address
     - file
+    - geolocation
     - text
 _core:
   default_config_hash: KByRMZzVXeiCfw--Ti4jO1-CErBHQlprd7DwL54vNew
@@ -54,6 +56,12 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_pece_geolocation:
+    type: geolocation_latlng
+    weight: 26
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_pece_institution:
     type: string_textfield

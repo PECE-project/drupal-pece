@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.artifact_tabular_data.field_language
     - field.field.node.artifact_tabular_data.field_location
     - field.field.node.artifact_tabular_data.field_pece_all_can_view
+    - field.field.node.artifact_tabular_data.field_pece_geolocation
     - field.field.node.artifact_tabular_data.field_pece_license
     - field.field.node.artifact_tabular_data.field_pece_project_ref
     - field.field.node.artifact_tabular_data.field_people_with_edit_access
@@ -26,7 +27,9 @@ dependencies:
   module:
     - address
     - datetime
+    - entity_form_field_label
     - file
+    - geolocation
     - languagefield
     - layout_builder
     - layout_collapse
@@ -488,6 +491,24 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: 2
             additional: {  }
+          3ebb9e14-5d82-44a7-8c8a-034efaa118e2:
+            uuid: 3ebb9e14-5d82-44a7-8c8a-034efaa118e2
+            region: one_a
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_pece_geolocation'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: geolocation_latlng
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 3
+            additional: {  }
         third_party_settings: {  }
 _core:
   default_config_hash: ZYRbvgpK73gU2ZYpD36sh0tA8YW5ptCG7V34MwKdSpg
@@ -578,6 +599,16 @@ content:
     third_party_settings: {  }
     weight: 120
     region: content
+  field_pece_geolocation:
+    type: geolocation_latlng
+    label: above
+    settings: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 126
+    region: one_a
   field_pece_license:
     type: entity_reference_label
     label: above
