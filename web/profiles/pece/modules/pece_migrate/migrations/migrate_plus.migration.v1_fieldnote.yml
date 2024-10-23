@@ -87,7 +87,30 @@ process:
   field_language: field_pece_language
   field_fieldsite: field_pece_fieldsite
   field_use_fieldsite_local: field_pece_use_fieldsite_local
-  field_location: field_pece_location
+  field_location:
+    -
+      plugin: location_to_address
+      source: field_pece_location
+  field_pece_geolocation:
+    -
+      plugin: location_to_geolocation
+      source: field_pece_location
+  field_location_email:
+    -
+      plugin: location_email_to_email
+      source: field_pece_location
+  field_location_fax:
+    -
+      plugin: location_fax_to_telephone
+      source: field_pece_location
+  field_location_phone:
+    -
+      plugin: location_phone_to_telephone
+      source: field_pece_location
+  field_location_url:
+    -
+      plugin: location_www_to_link
+      source: field_pece_location
   field_ark_enabled:
     plugin: default_value
     source: field_ark_enabled
