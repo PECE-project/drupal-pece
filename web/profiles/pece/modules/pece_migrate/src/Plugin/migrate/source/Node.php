@@ -64,7 +64,6 @@ class Node extends D7Node {
       ->condition('fdfp.entity_id', $nid);
     $permission = $query->execute()->fetchField();
     $groups = $this->getGroupsByContent($nid);
-    $group_terms = [];
 
     if ($permission == self::PERMISSION_OPEN) {
       // Check if content belongs to any group
@@ -101,6 +100,7 @@ class Node extends D7Node {
         ]
       ];
     }
+    $group_terms = [];
     foreach ($groups as $key => $item) {
       $group_terms[] = [
         'target_id' => $item
