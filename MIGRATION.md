@@ -540,10 +540,10 @@ This *content type* is going to migrate to a *vocabulary*, `groups`, so all fiel
 
 ## Process (draft)
 - Install the upgraded version of the site
-- bump the sql auto-incrementers
-- import default content
-- rsync the files directory to wherever the migration will run (prevent timeout of video files moving during migration, and required for private files anyway)
-- scrape/collect the essay pages
-- rebuild the cache
-- run the migration
+- bump the sql auto-incrementers `ddev mysql < alter.sql`
+- import default content `ddev import-content-all`
+- rsync the files directory to wherever the migration will run (prevent timeout of video files moving during migration, and required for private files anyway) `rsync -av user@example.com:/var/www/html/sites/default/files/ web/sites/default/files`
+- scrape/collect the essay pages (see scripts/commands.md)
+- rebuild the cache `ddev drush cr`
+- run the migration `ddev drush mim --tag='PECE v1'`
 - bulk update url aliases (assuming that they were migrated in as pathauto-generated aliases)
