@@ -1,0 +1,42 @@
+uuid: d64714bc-462e-4c53-af0c-91a3c9f06280
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.search
+  module:
+    - configurable_views_filter_block
+    - system
+  theme:
+    - peceful
+id: search_page_facets
+theme: peceful
+region: sidebar_second
+weight: 0
+provider: null
+plugin: 'configurable_views_filter_block_block:search-page'
+settings:
+  id: 'configurable_views_filter_block_block:search-page'
+  label: ''
+  label_display: '0'
+  provider: configurable_views_filter_block
+  views_label: ''
+  visible_filters:
+    search_api_fulltext: search_api_fulltext
+    contributor: contributor
+    annotated_artifact: annotated_artifact
+    license: license
+    file_format: file_format
+    entity: entity
+    type: type
+    vid: vid
+  no_groups: false
+  no_reset: false
+  no_sort: false
+  no_pager: false
+  no_submit: false
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /search
