@@ -26,10 +26,16 @@ process:
   created: created
   changed: changed
   field_pece_full_name: field_pece_full_name
-  field_pece_biography:
+  field_pece_biography/format:
     plugin: default_value
+    default_value: basic_html
+  field_pece_biography/value:
+    plugin: extract
     source: field_pece_biography
-    default_value: null
+    index:
+      - 0
+      - value
+    default: ''
   field_pece_email:
     -
       plugin: default_value
@@ -57,6 +63,9 @@ process:
       index:
         - 0
         - fid
+    -
+      plugin: skip_on_empty
+      method: process
   field_location:
     plugin: location_to_address
     source: field_pece_location
