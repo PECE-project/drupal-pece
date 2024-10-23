@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d08b2155f7f56d5f7e7f0a133ca723fa",
+    "content-hash": "4ed0838a753dea92c882b9cf7965b44b",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -9855,6 +9855,51 @@
             "homepage": "https://www.drupal.org/project/token",
             "support": {
                 "source": "https://git.drupalcode.org/project/token"
+            }
+        },
+        {
+            "name": "drupal/tomselect",
+            "version": "dev-1.0.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/tomselect.git",
+                "reference": "745ac18bc0ff358574891e875026923dcae563b8"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.0.x": "1.0.x-dev"
+                },
+                "drupal": {
+                    "version": "1.0.0-alpha1+1-dev",
+                    "datestamp": "1704733540",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "lelkneralfaro",
+                    "homepage": "https://www.drupal.org/user/3577260"
+                },
+                {
+                    "name": "mlncn",
+                    "homepage": "https://www.drupal.org/user/64383"
+                }
+            ],
+            "description": "Development helper for including Tom Select JavaScript library.",
+            "homepage": "https://www.drupal.org/project/tomselect",
+            "support": {
+                "source": "https://git.drupalcode.org/project/tomselect"
             }
         },
         {
@@ -25131,6 +25176,7 @@
         "drupal/profile": 20,
         "drupal/schemadotorg": 15,
         "drupal/style_guide": 20,
+        "drupal/tomselect": 20,
         "drupal/type_tray_icon_display": 20
     },
     "prefer-stable": true,
