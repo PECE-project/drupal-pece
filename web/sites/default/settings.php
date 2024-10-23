@@ -612,7 +612,7 @@ $settings['allow_authorize_operations'] = FALSE;
  * See https://www.drupal.org/documentation/modules/file for more information
  * about securing private files.
  */
-$settings['file_private_path'] = $app_root . '/sites/default/files/private';
+$settings['file_private_path'] = $app_root . '/../private-files';
 
 /**
  * Temporary file path:
