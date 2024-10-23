@@ -148,6 +148,17 @@ display:
                   is_secondary: false
                   hide_label: false
                 select_all_none: false
+              facets_artifact_type:
+                plugin_id: bef_links
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  is_secondary: false
+                  hide_label: false
+                select_all_none: false
               facets_field_annotation_artifact:
                 plugin_id: bef_links
                 advanced:
@@ -334,6 +345,62 @@ display:
                   sort: 30
                 settings:
                   sort: DESC
+        facets_artifact_type:
+          id: facets_artifact_type
+          table: search_api_index_general
+          field: facets_artifact_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Annotated artifact type'
+            description: 'Show annotations that have been made on artifacts of the selected content types.'
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: artifact_type
+            required: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              0: '0'
+              anonymous: '0'
+              contributor: '0'
+              data_manager: '0'
+              technical_manager: '0'
+              platform_manager: '0'
+              administrator: '0'
+              r_api: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: false
+          label_display: visible
+          facet:
+            query_operator: or
+            min_count: 1
+            show_numbers: true
+            processor_configs:
+              translate_entity:
+                weights:
+                  build: 5
+                settings: {  }
         facets_field_annotation_artifact:
           id: facets_field_annotation_artifact
           table: search_api_index_general
@@ -348,7 +415,7 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: 'Annotated Artifact'
+            label: 'Annotated artifact'
             description: 'Show annotations that have been made on the selected artifacts.'
             use_operator: false
             operator: ''
