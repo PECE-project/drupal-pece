@@ -4,12 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_analytic.field_analytic_question_set
-    - field.field.node.pece_analytic.field_tags
     - field.field.node.pece_analytic.field_ark_enabled
-    - field.field.node.pece_analytic.field_pece_geolocation
+    - field.field.node.pece_analytic.field_tags
     - node.type.pece_analytic
   module:
-    - geolocation
     - user
 _core:
   default_config_hash: Esl4KeTzB4pQNNUlfS9dqYnMj92sMJptrRaJqYQVFJI
@@ -40,13 +38,6 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 5
-    region: content
-  field_pece_geolocation:
-    type: geolocation_latlng
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 4
     region: content
   field_tags:
     type: entity_reference_label

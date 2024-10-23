@@ -8,7 +8,6 @@ dependencies:
     - field.field.node.pece_project.field_fieldsites
     - field.field.node.pece_project.field_groups_with_view_access
     - field.field.node.pece_project.field_pece_all_can_view
-    - field.field.node.pece_project.field_pece_geolocation
     - field.field.node.pece_project.field_pece_media_image
     - field.field.node.pece_project.field_people_with_edit_access
     - field.field.node.pece_project.field_people_with_view_access
@@ -31,7 +30,6 @@ dependencies:
     - dashboards
     - datetime_range
     - file
-    - geolocation
     - image
     - layout_builder
     - layout_discovery
@@ -391,13 +389,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 18
-    region: content
-  field_pece_geolocation:
-    type: geolocation_latlng
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 9
     region: content
   field_pece_media_image:
     type: entity_reference_entity_view

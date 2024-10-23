@@ -8,7 +8,6 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_cite_as
     - field.field.node.pece_timeline_essay.field_groups_with_view_access
     - field.field.node.pece_timeline_essay.field_pece_all_can_view
-    - field.field.node.pece_timeline_essay.field_pece_geolocation
     - field.field.node.pece_timeline_essay.field_pece_license
     - field.field.node.pece_timeline_essay.field_pece_project_ref
     - field.field.node.pece_timeline_essay.field_people_with_edit_access
@@ -20,7 +19,6 @@ dependencies:
     - node.type.pece_timeline_essay
   module:
     - field_group
-    - geolocation
     - image
     - paragraphs
     - path
@@ -202,12 +200,6 @@ content:
     region: content
     settings:
       display_label: true
-    third_party_settings: {  }
-  field_pece_geolocation:
-    type: geolocation_latlng
-    weight: 16
-    region: content
-    settings: {  }
     third_party_settings: {  }
   field_pece_license:
     type: options_select

@@ -9,7 +9,6 @@ dependencies:
     - field.field.node.pece_annotation.field_ark_enabled
     - field.field.node.pece_annotation.field_groups_with_view_access
     - field.field.node.pece_annotation.field_pece_all_can_view
-    - field.field.node.pece_annotation.field_pece_geolocation
     - field.field.node.pece_annotation.field_pece_license
     - field.field.node.pece_annotation.field_people_with_edit_access
     - field.field.node.pece_annotation.field_people_with_view_access
@@ -18,7 +17,6 @@ dependencies:
   module:
     - entity_form_field_label
     - field_group
-    - geolocation
     - path
     - readonly_field_widget
     - text
@@ -197,12 +195,6 @@ content:
     region: content
     settings:
       display_label: true
-    third_party_settings: {  }
-  field_pece_geolocation:
-    type: geolocation_latlng
-    weight: 8
-    region: content
-    settings: {  }
     third_party_settings: {  }
   field_pece_license:
     type: entity_reference_autocomplete
