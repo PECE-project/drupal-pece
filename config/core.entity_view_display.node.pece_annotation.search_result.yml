@@ -47,11 +47,15 @@ content:
     weight: 0
     region: content
   field_annotation_analytic:
-    type: entity_reference_label
-    label: inline
+    type: entity_reference_entity_view
+    label: hidden
     settings:
-      link: true
-    third_party_settings: {  }
+      view_mode: mini_teaser
+      link: false
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
     weight: 1
     region: content
   field_annotation_artifact:

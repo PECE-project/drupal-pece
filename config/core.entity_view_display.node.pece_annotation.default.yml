@@ -30,16 +30,21 @@ content:
     weight: 101
     region: content
   'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
     weight: 0
     region: content
   field_annotation_analytic:
-    type: entity_reference_label
-    label: above
+    type: entity_reference_entity_view
+    label: hidden
     settings:
-      link: true
-    third_party_settings: {  }
+      view_mode: mini_teaser
+      link: false
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
     weight: 104
     region: content
   field_annotation_artifact:
