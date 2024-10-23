@@ -18,6 +18,16 @@ name: General
 description: 'Content + Taxonomies'
 read_only: false
 field_settings:
+  artifact_type:
+    label: 'Artifact » Content » Content type'
+    datasource_id: 'entity:node'
+    property_path: 'field_annotation_artifact:entity:type'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_annotation_artifact
+      module:
+        - node
   entity_type:
     label: 'Entity type'
     property_path: search_api_entity_type
