@@ -86,7 +86,6 @@
 {% block header %}
 <section class="hero">
   {% block header_and_search %}
-  {% if page.header or page.header_search %}
   {# Header hero region + search #}
   <div class="hero-body">
     <div class="container">
@@ -108,7 +107,6 @@
       </div>
     </div>
   </div>
-  {% endif %}
   {% endblock header_and_search %}
   {% block tabs %}
   {# Drupal tabs #}
