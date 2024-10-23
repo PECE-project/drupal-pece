@@ -5,6 +5,7 @@ dependencies:
   config:
     - views.view.search
   module:
+    - block_class
     - configurable_views_filter_block
     - system
   theme:
@@ -24,6 +25,7 @@ settings:
   visible_filters:
     search_api_fulltext: search_api_fulltext
     contributor: contributor
+    artifact_type: artifact_type
     annotated_artifact: annotated_artifact
     license: license
     file_format: file_format
