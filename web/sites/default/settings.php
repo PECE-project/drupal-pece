@@ -877,6 +877,9 @@ $databases['migrate']['default']['host'] = $databases['default']['default']['hos
 $databases['migrate']['default']['driver'] = $databases['default']['default']['driver'];
 $databases['migrate']['default']['port'] = $databases['default']['default']['port'];
 
+$settings['migrate_source_version'] = '7';
+$settings['migrate_source_connection'] = 'migrate';
+$settings['media_migration_embed_token_transform_destination_filter_plugin'] = 'media_embed';
 /**
  * Load local development override configuration, if available.
  *
