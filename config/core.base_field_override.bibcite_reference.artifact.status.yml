@@ -1,0 +1,22 @@
+uuid: ce3837d2-c87d-40ed-950e-a31859c61914
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.artifact
+id: bibcite_reference.artifact.status
+field_name: status
+entity_type: bibcite_reference
+bundle: artifact
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
