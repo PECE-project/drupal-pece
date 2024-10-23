@@ -118,13 +118,13 @@ display:
               autosubmit: false
               autosubmit_exclude_textfield: false
               autosubmit_textfield_delay: 500
+              autosubmit_textfield_minimum_length: 3
               autosubmit_hide: false
               input_required: false
               allow_secondary: false
               secondary_label: ''
               secondary_open: true
               reset_button_always_show: false
-              autosubmit_textfield_minimum_length: 3
             filter:
               search_api_fulltext:
                 plugin_id: default
@@ -767,7 +767,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      exposed_block: false
+      exposed_block: true
       display_extenders:
         metatag_display_extender:
           metatags: {  }
