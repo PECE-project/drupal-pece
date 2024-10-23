@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6caf6d0a4142df5df9bc654c03f1491",
+    "content-hash": "8fee136e667389344e0732f862672951",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -8962,14 +8962,13 @@
         },
         {
             "name": "drupal/profile",
-            "version": "dev-1.x",
+            "version": "dev-2900573-make-profile-label",
             "source": {
                 "type": "git",
-                "url": "https://git.drupalcode.org/project/profile.git",
-                "reference": "b8193457f4d6ffc87ad30929742cff408c707f23"
+                "url": "git@git.drupal.org:issue/profile-2900573.git",
+                "reference": "7b3527cb60c1919fc622fb62638ed55df0412ca8"
             },
             "require": {
-                "drupal/core": "^9 || ^10 || ^11",
                 "drupal/entity": "^1.0",
                 "php": "^7.4 || ^8.0"
             },
@@ -8978,54 +8977,12 @@
                 "drupal/token": "^1.7"
             },
             "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.10+1-dev",
-                    "datestamp": "1721735467",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
                 "GPL-2.0-or-later"
             ],
-            "authors": [
-                {
-                    "name": "bojanz",
-                    "homepage": "https://www.drupal.org/user/86106"
-                },
-                {
-                    "name": "daggerhart",
-                    "homepage": "https://www.drupal.org/user/167806"
-                },
-                {
-                    "name": "fago",
-                    "homepage": "https://www.drupal.org/user/16747"
-                },
-                {
-                    "name": "jsacksick",
-                    "homepage": "https://www.drupal.org/user/972218"
-                },
-                {
-                    "name": "mglaman",
-                    "homepage": "https://www.drupal.org/user/2416470"
-                },
-                {
-                    "name": "pcambra",
-                    "homepage": "https://www.drupal.org/user/122101"
-                }
-            ],
             "description": "Provides configurable user profiles.",
             "homepage": "https://drupal.org/project/profile",
-            "support": {
-                "source": "https://git.drupalcode.org/project/profile"
-            }
+            "time": "2024-10-23T03:09:30+00:00"
         },
         {
             "name": "drupal/radix",
@@ -21542,16 +21499,16 @@
         },
         {
             "name": "open-telemetry/sdk",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opentelemetry-php/sdk.git",
-                "reference": "126319e6b3996c609fded69f1e3e9dc1582c64af"
+                "reference": "fb0ff8d8279a3776bd604791e2531dd0cc147e8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opentelemetry-php/sdk/zipball/126319e6b3996c609fded69f1e3e9dc1582c64af",
-                "reference": "126319e6b3996c609fded69f1e3e9dc1582c64af",
+                "url": "https://api.github.com/repos/opentelemetry-php/sdk/zipball/fb0ff8d8279a3776bd604791e2531dd0cc147e8b",
+                "reference": "fb0ff8d8279a3776bd604791e2531dd0cc147e8b",
                 "shasum": ""
             },
             "require": {
@@ -21628,7 +21585,7 @@
                 "issues": "https://github.com/open-telemetry/opentelemetry-php/issues",
                 "source": "https://github.com/open-telemetry/opentelemetry-php"
             },
-            "time": "2024-10-15T22:42:37+00:00"
+            "time": "2024-10-18T21:01:35+00:00"
         },
         {
             "name": "open-telemetry/sem-conv",
@@ -25349,6 +25306,12 @@
         {
             "package": "drupal/configurable_views_filter_block",
             "version": "dev-3463012-provide-option-to",
+            "alias": "1.x-dev",
+            "alias_normalized": "1.9999999.9999999.9999999-dev"
+        },
+        {
+            "package": "drupal/profile",
+            "version": "dev-2900573-make-profile-label",
             "alias": "1.x-dev",
             "alias_normalized": "1.9999999.9999999.9999999-dev"
         }
