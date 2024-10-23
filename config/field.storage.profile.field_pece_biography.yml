@@ -1,18 +1,16 @@
-uuid: df854a67-92ae-4c6a-a162-35aa93241de8
+uuid: aa4e308f-b49b-4897-b9e0-cdee8f06e95f
 langcode: en
 status: true
 dependencies:
   module:
     - profile
-_core:
-  default_config_hash: JgnNZF2ywSKMBHb4mZCVUY_zlnCg_mnP0c30OCkuiUo
+    - text
 id: profile.field_pece_biography
 field_name: field_pece_biography
 entity_type: profile
-type: string_long
-settings:
-  case_sensitive: false
-module: core
+type: text_with_summary
+settings: {  }
+module: text
 locked: false
 cardinality: 1
 translatable: true

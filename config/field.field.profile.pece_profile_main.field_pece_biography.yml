@@ -1,12 +1,13 @@
-uuid: 2e532902-df86-423f-80d6-c2a40d8df651
+uuid: a083adb6-9ed4-416f-9bef-d8b528e13b06
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.profile.field_pece_biography
+    - filter.format.basic_html
     - profile.type.pece_profile_main
-_core:
-  default_config_hash: 93WxcFCIQ5KloJEqGHxmXInb3ZEcbuJ40kC7BSTI2S4
+  module:
+    - text
 id: profile.pece_profile_main.field_pece_biography
 field_name: field_pece_biography
 entity_type: profile
@@ -17,5 +18,9 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings: {  }
-field_type: string_long
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - basic_html
+field_type: text_with_summary

@@ -17,6 +17,7 @@ dependencies:
     - layout_builder
     - layout_discovery
     - layout_library
+    - text
 third_party_settings:
   layout_builder:
     enabled: true
@@ -93,8 +94,8 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 3
             additional: {  }
-          66496ea7-50f9-4904-a360-e6a7f9ce4a8a:
-            uuid: 66496ea7-50f9-4904-a360-e6a7f9ce4a8a
+          14a4d9e7-ebca-4944-b7cf-1f55fad79b6b:
+            uuid: 14a4d9e7-ebca-4944-b7cf-1f55fad79b6b
             region: content
             configuration:
               id: 'field_block:profile:pece_profile_main:field_pece_biography'
@@ -102,22 +103,7 @@ third_party_settings:
               context_mapping:
                 entity: layout_builder.entity
               formatter:
-                type: basic_string
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-            weight: 4
-            additional: {  }
-          72b5e9c6-98df-4006-9967-b123b060870f:
-            uuid: 72b5e9c6-98df-4006-9967-b123b060870f
-            region: content
-            configuration:
-              id: 'field_block:profile:pece_profile_main:field_location'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: address_default
+                type: text_default
                 label: above
                 settings: {  }
                 third_party_settings: {  }
@@ -136,6 +122,21 @@ third_party_settings:
                 label: above
                 settings:
                   link: true
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
+          72b5e9c6-98df-4006-9967-b123b060870f:
+            uuid: 72b5e9c6-98df-4006-9967-b123b060870f
+            region: content
+            configuration:
+              id: 'field_block:profile:pece_profile_main:field_location'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: address_default
+                label: above
+                settings: {  }
                 third_party_settings: {  }
             weight: 6
             additional: {  }
@@ -157,11 +158,11 @@ content:
     weight: 5
     region: content
   field_pece_biography:
-    type: basic_string
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 7
     region: content
   field_pece_email:
     type: basic_string
