@@ -106,7 +106,7 @@ display:
         options:
           submit_button: Search
           reset_button: true
-          reset_button_label: Reset
+          reset_button_label: 'Clear filters'
           exposed_sorts_label: 'Sort by'
           expose_sort_order: false
           sort_asc_label: Asc
@@ -123,7 +123,7 @@ display:
               allow_secondary: false
               secondary_label: ''
               secondary_open: true
-              reset_button_always_show: true
+              reset_button_always_show: false
             filter:
               search_api_fulltext:
                 plugin_id: default
@@ -142,7 +142,7 @@ display:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
                   collapsible: true
-                  collapsible_disable_automatic_open: true
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
                 select_all_none: false
               facets_field_annotation_artifact:
@@ -151,7 +151,7 @@ display:
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: false
+                  collapsible: true
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                 select_all_none: false
@@ -161,7 +161,7 @@ display:
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: false
+                  collapsible: true
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                 select_all_none: false
@@ -171,7 +171,7 @@ display:
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: false
+                  collapsible: true
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                 select_all_none: false
@@ -181,17 +181,17 @@ display:
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: false
+                  collapsible: true
                   collapsible_disable_automatic_open: false
                   is_secondary: false
-                select_all_none: true
+                select_all_none: false
               facets_type:
                 plugin_id: bef_links
                 advanced:
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: false
+                  collapsible: true
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                 select_all_none: false
@@ -201,7 +201,7 @@ display:
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: false
+                  collapsible: true
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                 select_all_none: false
