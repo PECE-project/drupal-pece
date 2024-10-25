@@ -22,3 +22,24 @@ function pece_essays_help($route_name, RouteMatchInterface $route_match) {
     default:
   }
 }
+
+/**
+ * Implements hook_form_alter() for the pece essay edit form.
+ *
+ * We will *always* hide the legacy HTML toggle on the add form.
+ */
+function pece_essays_form_node_pece_essay_edit_form_alter(&$form, $form_state, $form_id) {
+  $node = $form_state->getFormObject()->getEntity();
+  if (!$node->field_legacy_rendered_html->value) {
+    unset($form['field_override_legacy_with_new']);
+  }
+}
+
+/**
+ * Implements hook_form_alter() for the pece essay form (meaning add/create).
+ *
+ * On the condition form, we only hide the legacy HTML toggle conditionally.
+ */
+function pece_essays_form_node_pece_essay_form_alter(&$form, $form_state, $form_id) {
+  unset($form['field_override_legacy_with_new']);
+}
