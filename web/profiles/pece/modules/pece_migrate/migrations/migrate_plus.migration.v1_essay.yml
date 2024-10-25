@@ -112,6 +112,14 @@ process:
       source:
         - '@_empty_groups_lookup_fallback'
         - restricted_content_group
+  field_override_legacy_with_new:
+    plugin: default_value
+    default_value: FALSE
+  field_legacy_rendered_html:
+    plugin: skip_on_empty
+    source: static_legacy_content
+    method: process
+    message:
 destination:
   plugin: 'entity_complete:node'
   translations: true

@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains \Drupal\pece_migrate\Plugin\migrate\source\Node.
+ * Contains \Drupal\pece_migrate\Plugin\migrate\source\Node
  */
 namespace  Drupal\pece_migrate\Plugin\migrate\source;
 use Drupal\migrate\Row;
@@ -40,6 +40,7 @@ class Node extends D7Node {
     $fields += ['groups_with_view_access' => $this->t('Groups with view access')];
     $fields += ['people_with_edit_access' => $this->t('People with edit access')];
     $fields += ['restricted_content_group' => $this->t('Pece v1 Restricted Content')];
+    $fields += ['static_legacy_content' => $this->t('Static legacy content')];
     return $fields;
   }
 
@@ -119,6 +120,17 @@ class Node extends D7Node {
     $people_with_edit_access = array_unique($collaborators);
 
     $row->setSourceProperty('people_with_edit_access', $people_with_edit_access);
+
+    $content_type = $row->getSourceProperty('type');
+    if ($content_type === 'pece_essay') {
+      $html = $this->select('essay_content', 'ec')
+        ->fields('ec', ['content'])
+        ->condition('ec.nodeid', $nid)
+        ->execute()->fetchField();
+
+      $row->setSourceProperty('static_legacy_content', $html);
+    }
+
     return parent::prepareRow($row);
   }
 
