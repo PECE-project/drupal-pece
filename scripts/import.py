@@ -12,7 +12,7 @@ try:
         password="db",
         host="127.0.0.1",
         port=int(os.environ['DB_PORT']),
-        database="disastersts"
+        database=os.environ['DB_NAME']
 
     )
 except mariadb.Error as e:
