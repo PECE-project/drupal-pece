@@ -1,0 +1,24 @@
+uuid: 38f6ac64-2c3f-4574-9fca-3a549e21182f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_caption
+    - filter.format.basic_html
+    - media.type.image_with_caption_and_link
+  module:
+    - text
+id: media.image_with_caption_and_link.field_caption
+field_name: field_caption
+entity_type: media
+bundle: image_with_caption_and_link
+label: Caption
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long
