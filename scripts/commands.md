@@ -23,6 +23,8 @@ $ export $SESSKEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 1. Make the script executable and run it:
 `$ chmod +x script.sh && ./script.sh`
+1. Get your DB_PORT from `ddev describe`. You want the port for localhost/127.0.0.1.
+2. Import files into your DB: `DB_PORT={localhostport} ./import.py <directory path to essays>`
 
 # When that completes, get extra information about classes:
 
