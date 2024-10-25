@@ -3,25 +3,43 @@ Memo
 
 Steps to Create an Memo
 ---------------------------------------
-1. The process of adding any variety of content to PECE begins by logging in with your screen name and password and clicking “DASHBOARD” in the top right corner.
+1. The process of adding any variety of content to PECE begins by logging in with your screen name and password and clicking “Create Content” in the top right corner.
 
-    ![](media/artifacts1.png)
+    ![](media/memo_1.png)
 
-2. You should now see your Dashboard page.
+2. You should now see the "Add content" page.
 
-    ![](media/artifacts2.png)
+    ![](media/memo_2.png)
 
-    Across the top of the page, in the different tabs you can find the groups to which you currently belong, along with any artifacts or essays that you have created. Along the right side of the page, you will find a list of options for creating different forms of new content. “Artifacts” are one type of content. An artifact is the basic working unit of PECE; once, created, artifacts are then used in photo essays (for image artifacts only), timelines, or PECE Essays (both of which accept images, video, documents, and any other type of artifact)
+    As you scroll down the page, you can find thumbnails 
+    for creating different forms of new content. Each is organised under a category. "Memo" can be found under the category "Analyze". "Memo" is one of the type of content. A memo is a first draft of a piece of writing, meant to synthesize ideas generated throughout data analysis. Upon publishing a memo, that memo is opened for comments from the platform's community.
 
-3. You can add many types of artifacts, including audio files, video, images, pdf, text, and websites. Click the “Artifacts” drop-down menu (the third option in the “Add Content” column) to see the list of options.
+    ![](media/memo_3.png)
 
-    ![](media/artifacts3.png)
+3. To create a memo, click on the "Memo" thumbnail. 
 
-    Next, click the type of artifact you want to create.
+    ![](media/memo_4.png)
 
-    ![](media/artifacts4.png)
+4. This takes you to the "Create Memo" page. You should now have access to all of the fields you need to fill out in order to create a new memo. First, type the title of your memo in the “Title” field.
 
-4. You should now have access to all of the fields you need to fill out in order to create a new image artifact. First, type the title of your image in the “Title” pane.
+5. Type your memo into the "Body" field.
+    To provide a summary of your memo, click the "Edit summary" link next to "Body".
+
+6. Next are two tabs: "Permissions, Authorship, and Groups" and "Contribution Metadata". The "Permissions, Authorship, and Groups" should be automatically opened. 
+
+    In the "Edit Permissions and Authorship" section, you should be automatically added as a contributor as your username. If there are any other contributors, add them by typing the first few letters of their name into the field. Their screen name should pop up. Select their name. To add more than one contributor other than yourself, click the "Add another item" button and repeat the same process.
+
+7. Next, in the "View Permissions and Groups", toggle the "Everyone can view this content" on or off to determine who can view the content.
+
+    If you choose on, complete the "Group association and view access" by adding groups by typing in its name into the field. 
+
+    If you choose off, add the people who have access to this memo by adding typing in their screen name and clicking it. Continue to completing the "Group association and view access" field just as instructed above.
+
+8. Next, click on the "Contribution Metadata" tab.
+
+9. Complete the "License" field by selecting a license from the drop down menu. This indicates how the content should be licensed.
+
+10. Next, add optional keyword tags to your memo. Type in a keyword into the search bar to tag to your memo. Select it from the list that pops up. You can add several keyword tags by clicking the "Add another item" button and repeating the above instructions.
 
 5. Add yourself as a contributor by typing the first few letters of your name into the
 “contributor” field. Your screen name should pop up. Select your name. Repeat this process with the names of any other project members who you would
