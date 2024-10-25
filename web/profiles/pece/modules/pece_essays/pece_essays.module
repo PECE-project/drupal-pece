@@ -5,6 +5,8 @@
  * Contains pece_essays.module.
  */
 
+use Drupal\node\NodeInterface;
+use Drupal\Core\Url;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
@@ -42,4 +44,49 @@ function pece_essays_form_node_pece_essay_edit_form_alter(&$form, $form_state, $
  */
 function pece_essays_form_node_pece_essay_form_alter(&$form, $form_state, $form_id) {
   unset($form['field_override_legacy_with_new']);
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ *
+ * This and the next several functions are to
+ */
+function pece_essays_entity_type_alter(array &$entity_types) {
+
+  // Unset the canonical link template for node content type and
+  // replace with a uri callback.
+  // Unsetting the uri template is necessary for the uri callbacks to work.
+  $entity_types['node']->setUriCallback('pece_essays_node_uri');
+  $links = $entity_types['node']->get('links');
+  unset($links['canonical']);
+  $entity_types['node']->set('links', $links);
+}
+
+/**
+ * Implements hook_entity_bundle_info_alter().
+ */
+function pece_essays_entity_bundle_info_alter(&$bundles) {
+
+  // Set the uri callback for the redirect content type.
+  if (isset($bundles['node']['pece_essay'])) {
+    $bundles['node']['pece_essay']['uri_callback'] = 'pece_essays_redirect_uri';
+  }
+}
+
+/**
+ * Bundle URI callback for the PECE Essay content type.
+ */
+function pece_essays_redirect_uri(NodeInterface $node) {
+  return new Url('view_mode_page.display_entity', [
+    'view_mode' => 'intro',
+    'entity_type' => 'node',
+    'entity_id' => $node->id()
+  ]);
+}
+
+/**
+ * Bundle URI callback, all other content types outside of PECE Essay.
+ */
+function pece_essays_node_uri(NodeInterface $node) {
+  return new Url('entity.node.canonical', ['node' => $node->id()]);
 }
