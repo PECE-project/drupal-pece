@@ -1,4 +1,4 @@
-uuid: 404661fd-e95e-454c-80e3-f36a9cf3878c
+uuid: d6276ee7-06c9-40c3-830d-fdc2f9ab507e
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     - core.entity_form_mode.media.media_library
     - field.field.media.image_with_caption_and_link.field_caption
     - field.field.media.image_with_caption_and_link.field_link
-    - field.field.media.image_with_caption_and_link.field_media_image
+    - field.field.media.image_with_caption_and_link.field_private_media_image
     - image.style.thumbnail
     - media.type.image_with_caption_and_link
   module:
@@ -25,9 +25,9 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-  field_media_image:
+  field_private_media_image:
     type: image_image
-    weight: 5
+    weight: -50
     region: content
     settings:
       progress_indicator: throbber

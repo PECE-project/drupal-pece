@@ -1,11 +1,11 @@
-uuid: fa13e27c-721d-4986-a4f0-68035e508b3b
+uuid: aca70b5c-da26-4a98-a2aa-a851d4ff3bd0
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.media.image_with_caption_and_link.field_caption
     - field.field.media.image_with_caption_and_link.field_link
-    - field.field.media.image_with_caption_and_link.field_media_image
+    - field.field.media.image_with_caption_and_link.field_private_media_image
     - image.style.large
     - media.type.image_with_caption_and_link
   module:
@@ -36,7 +36,7 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_media_image:
+  field_private_media_image:
     type: image
     label: visually_hidden
     settings:

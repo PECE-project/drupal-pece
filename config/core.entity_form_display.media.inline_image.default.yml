@@ -1,21 +1,17 @@
-uuid: 49bd326d-7063-48fb-bee2-03db834c48b9
+uuid: 96f9985e-9dbd-4c3a-b709-80834f8574ec
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.media.image_with_caption_and_link.field_caption
-    - field.field.media.image_with_caption_and_link.field_link
-    - field.field.media.image_with_caption_and_link.field_private_media_image
+    - field.field.media.inline_image.field_private_media_image
     - image.style.thumbnail
-    - media.type.image_with_caption_and_link
+    - media.type.inline_image
   module:
     - image
-    - link
     - path
-    - text
-id: media.image_with_caption_and_link.default
+id: media.inline_image.default
 targetEntityType: media
-bundle: image_with_caption_and_link
+bundle: inline_image
 mode: default
 content:
   created:
@@ -23,22 +19,6 @@ content:
     weight: 10
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_caption:
-    type: text_textfield
-    weight: 101
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_link:
-    type: link_default
-    weight: 8
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
     third_party_settings: {  }
   field_private_media_image:
     type: image_image

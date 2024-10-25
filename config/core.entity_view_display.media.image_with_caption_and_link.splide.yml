@@ -1,4 +1,4 @@
-uuid: 07977a60-aac0-4dec-bf6f-4fb13069af86
+uuid: 2c867ae0-75ab-4e94-a540-a0d5481ae5e1
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     - core.entity_view_mode.media.splide
     - field.field.media.image_with_caption_and_link.field_caption
     - field.field.media.image_with_caption_and_link.field_link
-    - field.field.media.image_with_caption_and_link.field_media_image
+    - field.field.media.image_with_caption_and_link.field_private_media_image
     - image.style.thumbnail
     - media.type.image_with_caption_and_link
   module:
@@ -69,7 +69,7 @@ content:
     region: content
 hidden:
   field_caption: true
-  field_media_image: true
+  field_private_media_image: true
   langcode: true
   name: true
   search_api_excerpt: true

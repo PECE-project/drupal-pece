@@ -1,19 +1,17 @@
-uuid: db6d2db7-e4f6-4674-8c48-382664fdc1c3
+uuid: f0c3939c-3b2c-4b30-bdda-9b106dbe8bab
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.media.media_library
-    - field.field.media.image_with_caption_and_link.field_caption
-    - field.field.media.image_with_caption_and_link.field_link
-    - field.field.media.image_with_caption_and_link.field_private_media_image
+    - field.field.media.inline_image.field_private_media_image
     - image.style.medium
-    - media.type.image_with_caption_and_link
+    - media.type.inline_image
   module:
     - image
-id: media.image_with_caption_and_link.media_library
+id: media.inline_image.media_library
 targetEntityType: media
-bundle: image_with_caption_and_link
+bundle: inline_image
 mode: media_library
 content:
   thumbnail:
@@ -29,8 +27,6 @@ content:
     region: content
 hidden:
   created: true
-  field_caption: true
-  field_link: true
   field_private_media_image: true
   langcode: true
   name: true
