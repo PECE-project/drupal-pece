@@ -1,0 +1,21 @@
+uuid: b24ac581-3e64-4ad9-8443-78eaa38980a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_override_legacy_with_new
+    - node.type.pece_essay
+id: node.pece_essay.field_override_legacy_with_new
+field_name: field_override_legacy_with_new
+entity_type: node
+bundle: pece_essay
+label: 'Override legacy essay'
+description: 'When turned on, the legacy display of the essay will be replaced with the new customizable essay layout. When turned off, legacy content from PECE version 1 will be displayed when viewing the essay.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

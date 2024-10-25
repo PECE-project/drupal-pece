@@ -11,6 +11,8 @@ dependencies:
     - field.field.node.pece_essay.field_curate
     - field.field.node.pece_essay.field_essay_contents
     - field.field.node.pece_essay.field_groups_with_view_access
+    - field.field.node.pece_essay.field_legacy_rendered_html
+    - field.field.node.pece_essay.field_override_legacy_with_new
     - field.field.node.pece_essay.field_pece_all_can_view
     - field.field.node.pece_essay.field_pece_artifacts
     - field.field.node.pece_essay.field_pece_license
@@ -37,7 +39,7 @@ third_party_settings:
       label: Permissions
       region: content
       parent_name: ''
-      weight: 10
+      weight: 12
       format_type: details
       format_settings:
         classes: ''
@@ -65,13 +67,13 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 4
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   field_analyze:
     type: entity_reference_autocomplete
-    weight: 28
+    weight: 20
     region: content
     settings:
       match_operator: CONTAINS
@@ -81,14 +83,14 @@ content:
     third_party_settings: {  }
   field_ark_enabled:
     type: boolean_checkbox
-    weight: 15
+    weight: 17
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_conceptualize:
     type: entity_reference_autocomplete
-    weight: 26
+    weight: 18
     region: content
     settings:
       match_operator: CONTAINS
@@ -98,7 +100,7 @@ content:
     third_party_settings: {  }
   field_curate:
     type: entity_reference_autocomplete
-    weight: 27
+    weight: 19
     region: content
     settings:
       match_operator: CONTAINS
@@ -108,7 +110,7 @@ content:
     third_party_settings: {  }
   field_essay_contents:
     type: entity_reference_paragraphs
-    weight: 7
+    weight: 8
     region: content
     settings:
       title: Paragraph
@@ -120,7 +122,7 @@ content:
     third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete
-    weight: 10
+    weight: 11
     region: content
     settings:
       match_operator: CONTAINS
@@ -129,6 +131,13 @@ content:
       placeholder: ''
     third_party_settings:
       conditional_fields: {  }
+  field_override_legacy_with_new:
+    type: boolean_checkbox
+    weight: 26
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
     weight: 20
@@ -138,7 +147,7 @@ content:
     third_party_settings: {  }
   field_pece_artifacts:
     type: entity_reference_autocomplete
-    weight: 1
+    weight: 2
     region: content
     settings:
       match_operator: CONTAINS
@@ -148,13 +157,13 @@ content:
     third_party_settings: {  }
   field_pece_license:
     type: options_select
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   field_pece_project_ref:
     type: entity_reference_autocomplete
-    weight: 14
+    weight: 16
     region: content
     settings:
       match_operator: CONTAINS
@@ -164,7 +173,7 @@ content:
     third_party_settings: {  }
   field_people_with_edit_access:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 10
     region: content
     settings:
       match_operator: CONTAINS
@@ -200,7 +209,7 @@ content:
             selector: ''
   field_tags:
     type: entity_reference_autocomplete
-    weight: 13
+    weight: 15
     region: content
     settings:
       match_operator: CONTAINS
@@ -210,7 +219,7 @@ content:
     third_party_settings: {  }
   field_thumbnail:
     type: image_image
-    weight: 2
+    weight: 3
     region: content
     settings:
       progress_indicator: throbber
@@ -218,27 +227,27 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 11
+    weight: 13
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 6
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 12
+    weight: 14
     region: content
     settings:
       display_label: true
@@ -253,7 +262,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 3
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -263,5 +272,6 @@ content:
     third_party_settings: {  }
 hidden:
   field_cite_as: true
+  field_legacy_rendered_html: true
   langcode: true
   layout_builder__layout: true
