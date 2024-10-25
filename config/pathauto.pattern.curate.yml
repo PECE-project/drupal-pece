@@ -1,0 +1,24 @@
+uuid: 4ff4feea-68fe-4d8e-bc6c-b7ae146241cb
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: curate
+label: Curate
+type: 'canonical_entities:node'
+pattern: 'curate/[node:content-type]/[node:title]'
+selection_criteria:
+  f2276e8f-943a-4185-b5c4-7cd07995369d:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: f2276e8f-943a-4185-b5c4-7cd07995369d
+    context_mapping:
+      node: node
+    bundles:
+      pece_essay: pece_essay
+      pece_photo_essay: pece_photo_essay
+      pece_timeline_essay: pece_timeline_essay
+selection_logic: and
+weight: -5
+relationships: {  }
