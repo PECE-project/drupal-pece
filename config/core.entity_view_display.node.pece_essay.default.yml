@@ -470,6 +470,22 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: 3
             additional: {  }
+          61f0dbe0-f67e-4188-8380-e5d8051d081a:
+            uuid: 61f0dbe0-f67e-4188-8380-e5d8051d081a
+            region: first
+            configuration:
+              id: 'extra_field_block:node:pece_essay:extra_field_pece_essays_intro_link'
+              label: 'Link to view introduction'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 4
+            additional:
+              extra_field_plus_settings: {  }
         third_party_settings: {  }
 _core:
   default_config_hash: HMSXo2f0tj9lPu_qSfMVAOMgO9tTZLm53p6zRWL1WgM
@@ -603,6 +619,8 @@ content:
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  extra_field_pece_essays_essay_link: true
+  extra_field_pece_essays_intro_link: true
   field_analyze: true
   field_cite_as: true
   field_conceptualize: true

@@ -47,10 +47,17 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  'extra_field_type_tray_icon_display:icons':
+  extra_field_pece_essays_essay_link:
+    type: extra_field_pece_essays_essay_link
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 7
+    region: content
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
     region: content
   field_ark_enabled:
     type: boolean
@@ -60,7 +67,7 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 4
+    weight: 5
     region: content
   field_pece_license:
     type: entity_reference_label
@@ -68,7 +75,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 5
+    weight: 6
     region: content
   field_pece_project_ref:
     type: entity_reference_label
@@ -76,7 +83,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   field_tags:
     type: entity_reference_label
@@ -84,7 +91,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   field_thumbnail:
     type: image
@@ -95,11 +102,12 @@ content:
       image_loading:
         attribute: lazy
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  extra_field_pece_essays_intro_link: true
   field_analyze: true
   field_cite_as: true
   field_conceptualize: true
