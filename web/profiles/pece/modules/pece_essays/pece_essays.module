@@ -77,7 +77,7 @@ function pece_essays_entity_bundle_info_alter(&$bundles) {
  * Bundle URI callback for the PECE Essay content type.
  */
 function pece_essays_redirect_uri(NodeInterface $node) {
-  return new Url('view_mode_page.display_entity', [
+  return Url::fromRoute('view_mode_page.display_entity', [
     'view_mode' => 'intro',
     'entity_type' => 'node',
     'entity_id' => $node->id()
@@ -88,5 +88,5 @@ function pece_essays_redirect_uri(NodeInterface $node) {
  * Bundle URI callback, all other content types outside of PECE Essay.
  */
 function pece_essays_node_uri(NodeInterface $node) {
-  return new Url('entity.node.canonical', ['node' => $node->id()]);
+  return Url::fromRoute('entity.node.canonical', ['node' => $node->id()]);
 }
