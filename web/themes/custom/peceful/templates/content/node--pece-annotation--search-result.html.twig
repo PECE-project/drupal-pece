@@ -73,8 +73,10 @@
  */
 #}
 {% set classes = [
-'embedded-content',
+'content',
 node.bundle|clean_class,
+node.isPromoted() ? 'is-promoted',
+node.isSticky() ? 'is-sticky',
 not node.isPublished() ? 'is-unpublished',
 view_mode ? view_mode|clean_class,
 'clearfix',
@@ -82,11 +84,21 @@ view_mode ? view_mode|clean_class,
 <article{{ attributes.addClass(classes) }}>
 
   {{ content.extra_field_icons }}
+  {{ author_name }}
   {{ title_prefix }}
-  <h3{{ title_attributes }}>
-    <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-  </h3>
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
   {{ title_suffix }}
+
+  {% if display_submitted %}
+    <footer>
+      <div{{ author_attributes }}>
+        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        {{ metadata }}
+      </div>
+    </footer>
+  {% endif %}
 
   <div{{ content_attributes }}>
     {{ content|without('extra_field_icons') }}
