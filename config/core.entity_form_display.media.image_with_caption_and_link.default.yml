@@ -9,6 +9,7 @@ dependencies:
     - image.style.thumbnail
     - media.type.image_with_caption_and_link
   module:
+    - entity_form_field_label
     - image
     - link
     - path
@@ -29,9 +30,12 @@ content:
     weight: 101
     region: content
     settings:
-      size: 60
+      size: 2048
       placeholder: ''
-    third_party_settings: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
   field_link:
     type: link_default
     weight: 8
