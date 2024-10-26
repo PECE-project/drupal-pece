@@ -103,11 +103,13 @@ If the patch URL does not contain the Drupal.org node ID (AKA issue ID
 
 ### How do I compile SCSS to CSS?
 
-From `web/themes/custom/peceful`, run `npm run build-bulma` or use this DDEV command:
+From `web/themes/custom/peceful`, run `npm run build-bulma` or use this DDEV command to generate the .css file from the .sass file:
 
 ```
 ddev css
 ```
+
+Please commit the changes to both, in separate commits.
 
 See more about Bulma's Sass in `web/themes/custom/peceful/README.md`
 
