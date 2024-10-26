@@ -1,0 +1,84 @@
+id: v1_fpp_image
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Fieldable Panels Pane Migration'
+  - 'Media Migration'
+  - 'PECE v1'
+migration_group: pece
+label: 'Fieldable Panels Pane Image Migration'
+source:
+  plugin: v1_fpp
+  bundle: image
+
+process:
+  bundle:
+    plugin: default_value
+    default_value: image_with_caption_and_link
+  name:
+    -
+      plugin: get
+      source: title
+  created:
+    -
+      plugin: get
+      source: timestamp
+
+
+  field_private_media_image:
+    plugin: sub_process
+    source: field_basic_image_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration:
+          - v1_file
+          - v1_file_private
+        source: fid
+      width: width
+      height: height
+
+  _alt_from_media:
+    -
+      plugin: skip_on_empty
+      source: field_file_image_alt_text
+      method: process
+    -
+      plugin: default_value
+      default_value: null
+
+  _alt_from_fpp:
+    plugin: static_map
+    source: alt
+    bypass: TRUE
+    map:
+      '':
+      'NULL':
+
+  field_private_media_image/0/alt:
+    plugin: null_coalesce
+    source:
+      - '@_alt_from_fpp'
+      - '@_alt_from_media'
+
+
+  field_caption/value:
+    plugin: extract
+    source: field_basic_image_caption
+    index:
+      - 0
+      - value
+    default: ''
+  field_caption/format:
+    plugin: default_value
+    default_value: basic_html
+
+destination:
+  plugin: 'entity:media'
+migration_dependencies:
+  required:
+    - v1_file
+    - v1_private_file
+  optional: {  }
