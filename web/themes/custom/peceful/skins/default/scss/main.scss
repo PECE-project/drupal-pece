@@ -251,9 +251,9 @@ a:hover {
   }
 }
 
-.facets-widget-links ul li.facet-item {
+.bef-links ul li {
   position: relative;
-  a.is-active {
+  a.bef-link--selected {
     &::before {
       font-size: 0.777rem;
       content: "● ";
@@ -267,11 +267,8 @@ a:hover {
   }
 }
 
-.facet-item__status {
-  display: none;
-}
-
-.block-facet--links .subtitle {
+.bef-exposed-form summary {
+  font-weight: 700;
   margin-bottom: 0.6rem;
 }
 
