@@ -3,16 +3,15 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.search_index
     - field.storage.node.field_annotation_artifact
-    - field.storage.node.field_people_with_edit_access
     - field.storage.node.field_file_format
     - field.storage.node.field_pece_license
+    - field.storage.node.field_people_with_edit_access
     - search_api.server.drupal_search
-    - core.entity_view_mode.node.search_index
   module:
     - node
     - taxonomy
-    - search_api
 id: general
 name: General
 description: 'Content + Taxonomies'
