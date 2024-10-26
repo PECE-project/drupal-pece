@@ -30,6 +30,7 @@ class EssayLink extends ExtraFieldDisplayBase {
       '#props' => [
         'url' => Url::fromRoute('entity.node.canonical', ['node' => $entity->id()])->toString(),
         'label' => t('View essay'),
+        'classes' => ['button'],
       ],
     ];
     return $build;

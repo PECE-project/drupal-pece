@@ -23,10 +23,17 @@ class IntroLink extends ExtraFieldDisplayBase {
    * {@inheritdoc}
    */
   public function view(ContentEntityInterface $entity) {
-    // This successfully gets our OutboundPathProcessor to make it go to '/intro'.
-    $link_array = $entity->toLink()->toRenderable();
-    $link_array['#title'] = t('View introduction');
-    return $link_array;
+    $build['link'] = [
+      '#type' => 'component',
+      '#component' => 'pece:link-button',
+      '#props' => [
+         // Our OutboundPathProcessor makes this get the '/intro' suffix.
+        'url' => $entity->toUrl()->toString(),
+        'label' => t('View introduction'),
+        'classes' => ['button'],
+      ],
+    ];
+    return $build;
   }
 
 }
