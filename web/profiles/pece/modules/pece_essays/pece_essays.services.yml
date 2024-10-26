@@ -1,0 +1,5 @@
+services:
+  pece_essays.path_processor_outbound:
+    class: Drupal\pece_essays\PathProcessor\OutboundPathProcessor
+    tags:
+      - { name: path_processor_outbound, priority: 250 }
