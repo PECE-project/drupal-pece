@@ -19847,25 +19847,29 @@ a:hover .facet-item__count {
   display: inline-block;
 }
 
-.facets-widget-links ul li.facet-item {
+details {
+  margin-left: 1rem;
+}
+details summary {
+  margin-left: -1rem;
+}
+
+.bef-links ul li {
   position: relative;
 }
-.facets-widget-links ul li.facet-item a.is-active::before {
+.bef-links ul li a.bef-link--selected::before {
   font-size: 0.777rem;
   content: "● ";
   position: absolute;
   left: -0.8rem;
   top: 0.2rem;
 }
-.facets-widget-links ul li.facet-item a.is-active:hover::before {
+.bef-links ul li a.bef-link--selected:hover::before {
   content: "𝗑 ";
 }
 
-.facet-item__status {
-  display: none;
-}
-
-.block-facet--links .subtitle {
+.bef-exposed-form summary {
+  font-weight: 700;
   margin-bottom: 0.6rem;
 }
 
