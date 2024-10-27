@@ -255,6 +255,20 @@ details {
   margin-left: 1rem;
   summary {
     margin-left: -1rem;
+    font-size: 1rem;
+  }
+  // This is quite ridiculous, but to target the help text (more information)
+  // we need to target the entire div and then undo it, because it is not
+  // wrapped in any element at all.
+  font-size: 0.8rem;
+  .form-item {
+    // And somehow the help text will wrap and push the facets below to indent
+    // if we do not take preventative measures here.
+    width: 100%;
+  }
+  .bef-links {
+    font-size: 1rem;
+    margin-top: 0.5rem;
   }
 }
 
@@ -276,7 +290,6 @@ details {
 
 .bef-exposed-form summary {
   font-weight: 700;
-  margin-bottom: 0.6rem;
 }
 
 // Useful for administrators only, keep article contextual link out of way of
