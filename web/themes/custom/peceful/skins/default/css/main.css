@@ -19838,13 +19838,16 @@ a:hover .facet-item__count {
     transition-duration: 0.75s;
   }
 }
-.block-configurable-views-filter-block-blocksearch-page .form-item {
+#block-global-text-search .form-item {
   width: 70%;
   display: inline-block;
 }
-.block-configurable-views-filter-block-blocksearch-page .form-actions {
+#block-global-text-search .form-actions {
   width: auto;
   display: inline-block;
+}
+#block-global-text-search div[id$=-collapsible] {
+  display: none !important;
 }
 
 details {
