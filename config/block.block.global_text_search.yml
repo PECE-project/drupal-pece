@@ -1,4 +1,4 @@
-uuid: d64714bc-462e-4c53-af0c-91a3c9f06280
+uuid: 0e818047-3868-4533-9b13-339bf3bd1901
 langcode: en
 status: true
 dependencies:
@@ -6,12 +6,11 @@ dependencies:
     - views.view.search
   module:
     - configurable_views_filter_block
-    - system
   theme:
     - peceful
-id: search_page_facets
+id: global_text_search
 theme: peceful
-region: sidebar_second
+region: header_search
 weight: 0
 provider: null
 plugin: 'configurable_views_filter_block_block:search-page'
@@ -23,21 +22,9 @@ settings:
   views_label: ''
   visible_filters:
     search_api_fulltext: search_api_fulltext
-    contributor: contributor
-    artifact_type: artifact_type
-    annotated_artifact: annotated_artifact
-    license: license
-    file_format: file_format
-    entity: entity
-    type: type
-    vid: vid
   no_groups: false
   no_reset: false
   no_sort: false
   no_pager: false
   no_submit: false
-visibility:
-  request_path:
-    id: request_path
-    negate: false
-    pages: /search
+visibility: {  }
