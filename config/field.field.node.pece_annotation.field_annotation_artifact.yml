@@ -12,6 +12,12 @@ dependencies:
     - node.type.pece_artifact_pdf
     - node.type.pece_artifact_text
     - node.type.pece_artifact_website
+  module:
+    - epp
+third_party_settings:
+  epp:
+    value: '[current-page:query:artifact]'
+    on_update: 0
 id: node.pece_annotation.field_annotation_artifact
 field_name: field_annotation_artifact
 entity_type: node
@@ -35,6 +41,7 @@ settings:
       pece_artifact_website: pece_artifact_website
     sort:
       field: _none
+      direction: ASC
     auto_create: false
     auto_create_bundle: pece_artifact_audio
 field_type: entity_reference

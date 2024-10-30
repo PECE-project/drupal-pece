@@ -33,7 +33,7 @@ class AnnotateButton extends ExtraFieldPlusDisplayBase {
 
     $content_type = \Drupal::entityTypeManager()->getStorage('node_type')->load($entity->bundle())->label();
 
-    $url = base_path() . 'node/add/pece_annotation?edit[field_annotation_artifact][widget][0][target_id]=' . $entity->id();
+    $url = base_path() . 'node/pece_annotation/step_1?artifact=' . $entity->id();
     $build = [
       '#type' => 'inline_template',
       '#template' => '<a href="{{ url }}" title="{{ tooltip }}" class="button is-primary is-medium">{{ label}}</a>',
