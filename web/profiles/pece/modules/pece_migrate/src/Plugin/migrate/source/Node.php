@@ -125,7 +125,7 @@ class Node extends D7Node {
           // All researchers can see the content
           $set_researchers_group = $researchers_group;
         } else {
-          $row->setSourceProperty('unpublish_content', 1);
+          $row->setSourceProperty('unpublish_content', 0);
         }
 
       } else {
@@ -134,7 +134,7 @@ class Node extends D7Node {
     }
 
     if ($permission == self::PERMISSION_PRIVATE) {
-      $row->setSourceProperty('unpublish_content', 1);
+      $row->setSourceProperty('unpublish_content', 0);
     }
 
     $row->setSourceProperty('pece_researchers_group', $set_researchers_group);
