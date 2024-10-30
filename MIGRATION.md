@@ -542,7 +542,7 @@ This *content type* is going to migrate to a *vocabulary*, `groups`, so all fiel
 - Install the upgraded version of the site
 - Make sure the queue table exists (I just `ddev drush uli` and click uli)
 - bump the sql auto-incrementers `ddev mysql < alter.sql`
-- import default content `ddev import-content-all`
+- import default content `ddev content-import-all`
 - import the source database `ddev import-db --database=sts7 --file=backups/yourbackup.sql.gz`
 - run the sql helpers: `ddev mysql sts7 < scripts/panel_mapper.sql` and `ddev mysql sts7 < scripts/token_parser.sql`
 - rsync the files directory to wherever the migration will run (prevent timeout of video files moving during migration, and required for private files anyway) `rsync -av user@example.com:/var/www/html/sites/default/files/ web/sites/default/files`
