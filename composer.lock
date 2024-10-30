@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "50e358ad22109db0b188c3eccd9c7a63",
+    "content-hash": "ba8cd1091ecb4b11c455829d372c9a00",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -9525,6 +9525,47 @@
             "homepage": "https://www.drupal.org/project/simple_oauth",
             "support": {
                 "source": "https://git.drupalcode.org/project/simple_oauth"
+            }
+        },
+        {
+            "name": "drupal/simplify_media_ui",
+            "version": "dev-1.0.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/simplify_media_ui.git",
+                "reference": "fb3de1e950b33ceea39b9450a2c45908e8e9fefa"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9 || ^10 || ^11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.0.x": "1.0.x-dev"
+                },
+                "drupal": {
+                    "version": "1.0.x-dev",
+                    "datestamp": "1730269821",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "mlncn",
+                    "homepage": "https://www.drupal.org/user/64383"
+                }
+            ],
+            "description": "Fixit.",
+            "homepage": "https://www.drupal.org/project/simplify_media_ui",
+            "support": {
+                "source": "https://git.drupalcode.org/project/simplify_media_ui"
             }
         },
         {
@@ -25404,6 +25445,7 @@
         "drupal/profile": 20,
         "drupal/schemadotorg": 15,
         "drupal/search_api": 20,
+        "drupal/simplify_media_ui": 20,
         "drupal/style_guide": 20,
         "drupal/tomselect": 20,
         "drupal/type_tray_icon_display": 20
