@@ -143,7 +143,9 @@ process:
     process:
       target_id:
         plugin: migration_lookup
-        migration: v1_file
+        migration:
+          - v1_file
+          - v1_file_private
         source: fid
   field_pece_all_can_view:
     plugin: default_value
