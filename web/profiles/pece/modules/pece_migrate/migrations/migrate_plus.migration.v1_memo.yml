@@ -46,12 +46,10 @@ process:
     plugin: default_value
     default_value: basic_html
   body/value:
-    plugin: extract
-    source: body
-    index:
-      - 0
-      - value
-    default: ''
+    plugin: media_wysiwyg_filter
+    source: body/0/value
+    media_migrations:
+      - v1_inline_image
   body/summary:
     plugin: extract
     source: body
@@ -128,5 +126,6 @@ destination:
 migration_dependencies:
   required:
     - v1_user
+    - v1_inline_image
     - v1_group
     - v1_taxonomy_term_tags

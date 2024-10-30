@@ -51,12 +51,10 @@ process:
     plugin: default_value
     default_value: basic_html
   field_source/value:
-    plugin: extract
-    source: field_pece_source
-    index:
-      - 0
-      - value
-    default: ''
+    plugin: media_wysiwyg_filter
+    source: field_pece_source/0/value
+    media_migrations:
+      - v1_inline_image
   field_authors:
     plugin: sub_process
     source: field_pece_authors
@@ -126,12 +124,10 @@ process:
     plugin: default_value
     default_value: basic_html
   field_crit_commentary/value:
-    plugin: extract
-    source: field_pece_crit_commentary
-    index:
-      - 0
-      - value
-    default: ''
+    plugin: media_wysiwyg_filter
+    source: field_pece_crit_commentary/0/value
+    media_migrations:
+      - v1_inline_image
   field_tabular_media:
     plugin: sub_process
     source: field_pece_media_tabular
@@ -191,6 +187,7 @@ migration_dependencies:
   required:
     - v1_file
     - v1_file_private
+    - v1_inline_image
     - v1_user
     - v1_group
     - v1_taxonomy_term_tags
