@@ -540,6 +540,7 @@ This *content type* is going to migrate to a *vocabulary*, `groups`, so all fiel
 
 ## Process (draft)
 - Install the upgraded version of the site
+- Make sure the queue table exists (I just `ddev drush uli` and click uli)
 - bump the sql auto-incrementers `ddev mysql < alter.sql`
 - import default content `ddev import-content-all`
 - import the source database `ddev import-db --database=sts7 --file=backups/yourbackup.sql.gz`
