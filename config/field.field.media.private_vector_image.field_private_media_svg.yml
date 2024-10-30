@@ -1,0 +1,34 @@
+uuid: 0ede7381-c6d5-4852-b871-e08c30fd3dd2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_private_media_svg
+    - media.type.private_vector_image
+  module:
+    - svg_image_field
+id: media.private_vector_image.field_private_media_svg
+field_name: field_private_media_svg
+entity_type: media
+bundle: private_vector_image
+label: SVG
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: svg
+  max_filesize: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: null
+    alt: ''
+    title: ''
+field_type: svg_image_field

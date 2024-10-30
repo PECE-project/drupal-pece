@@ -1,0 +1,28 @@
+uuid: 64019f58-6de0-4d2c-82cc-194b53f023c7
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - media
+    - svg_image_field
+id: media.field_private_media_svg
+field_name: field_private_media_svg
+entity_type: media
+type: svg_image_field
+settings:
+  target_type: file
+  display_field: false
+  display_default: false
+  uri_scheme: private
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+module: svg_image_field
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

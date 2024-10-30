@@ -1,0 +1,21 @@
+uuid: a253daa0-4aa3-470b-887d-5d6dfb6e0f4b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.private_vector_image.field_private_media_svg
+    - media.type.private_vector_image
+id: media.private_vector_image.media_library
+targetEntityType: media
+bundle: private_vector_image
+mode: media_library
+content: {  }
+hidden:
+  created: true
+  field_private_media_svg: true
+  langcode: true
+  name: true
+  path: true
+  status: true
+  uid: true
