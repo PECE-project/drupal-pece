@@ -6,6 +6,7 @@ dependencies:
     - field.field.taxonomy_term.groups.field_group_managers
     - field.field.taxonomy_term.groups.field_group_members
     - field.field.taxonomy_term.groups.field_group_visibility
+    - field.field.taxonomy_term.groups.field_image
     - field.field.taxonomy_term.groups.field_pece_project_ref
     - field.field.taxonomy_term.groups.field_substantive_logic
     - field.field.taxonomy_term.groups.field_tags
@@ -227,6 +228,23 @@ third_party_settings:
                     rewrite_label: 0
             weight: 0
             additional: {  }
+          f08f2174-cecf-4227-8e3d-5930f7fc0181:
+            uuid: f08f2174-cecf-4227-8e3d-5930f7fc0181
+            region: one_a
+            configuration:
+              id: 'field_block:taxonomy_term:groups:field_image'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                  link: false
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -265,6 +283,15 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
+  field_image:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 7
+    region: one_a
   field_pece_project_ref:
     type: entity_reference_label
     label: above

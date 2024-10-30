@@ -6,11 +6,15 @@ dependencies:
     - field.field.taxonomy_term.groups.field_group_managers
     - field.field.taxonomy_term.groups.field_group_members
     - field.field.taxonomy_term.groups.field_group_visibility
+    - field.field.taxonomy_term.groups.field_image
     - field.field.taxonomy_term.groups.field_pece_project_ref
     - field.field.taxonomy_term.groups.field_substantive_logic
     - field.field.taxonomy_term.groups.field_tags
     - taxonomy.vocabulary.groups
   module:
+    - entity_form_field_label
+    - media_library
+    - media_library_edit
     - path
     - text
 id: taxonomy_term.groups.default
@@ -20,7 +24,7 @@ mode: default
 content:
   description:
     type: text_textarea
-    weight: 1
+    weight: 2
     region: content
     settings:
       rows: 5
@@ -28,7 +32,7 @@ content:
     third_party_settings: {  }
   field_group_managers:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 6
     region: content
     settings:
       match_operator: CONTAINS
@@ -38,7 +42,7 @@ content:
     third_party_settings: {  }
   field_group_members:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS
@@ -48,13 +52,28 @@ content:
     third_party_settings: {  }
   field_group_visibility:
     type: options_select
-    weight: 2
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_image:
+    type: media_library_widget
+    weight: 1
+    region: content
+    settings:
+      media_types:
+        - private_image
+        - private_vector_image
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_substantive_logic:
     type: entity_reference_autocomplete
-    weight: 3
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -64,7 +83,7 @@ content:
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
-    weight: 6
+    weight: 7
     region: content
     settings:
       match_operator: CONTAINS
@@ -82,7 +101,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
