@@ -894,7 +894,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'view media'
+          perm: 'access media overview'
       arguments:
         bundle:
           id: bundle
@@ -1091,7 +1091,10 @@ display:
           empty: true
           display_id: widget_table
       rendering_language: '***LANGUAGE_language_interface***'
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
       path: admin/content/media-widget
     cache_metadata:
       max-age: -1
@@ -1184,7 +1187,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'view media'
+          perm: 'access media overview'
       arguments:
         bundle:
           id: bundle
@@ -1389,7 +1392,10 @@ display:
           empty: true
           display_id: widget_table
       rendering_language: '***LANGUAGE_language_interface***'
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
       path: admin/content/media-widget-table
     cache_metadata:
       max-age: -1
