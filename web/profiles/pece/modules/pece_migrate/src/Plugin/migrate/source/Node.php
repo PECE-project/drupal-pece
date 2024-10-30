@@ -22,6 +22,11 @@ class Node extends D7Node {
   const PERMISSION_RESTRICTED = 'restricted';
   const PERMISSION_PRIVATE = 'private';
   const PERMISSION_OPEN = 'open';
+  const GROUP_PUBLIC = 0;
+  const GROUP_PRIVATE = 1;
+  const CONTENT_VISIBILITY_DEFAULT = 0;
+  const CONTENT_VISIBILITY_PUBLIC = 1;
+  const CONTENT_VISIBILITY_PRIVATE = 1;
 
   protected $permissionByUserView = [];
 
@@ -39,8 +44,9 @@ class Node extends D7Node {
     $fields += ['permission_all_user_view' => $this->t('Permission for all users')];
     $fields += ['groups_with_view_access' => $this->t('Groups with view access')];
     $fields += ['people_with_edit_access' => $this->t('People with edit access')];
-    $fields += ['restricted_content_group' => $this->t('Pece v1 Restricted Content')];
+    $fields += ['pece_researchers_group' => $this->t('Pece v1 Researchers')];
     $fields += ['static_legacy_content' => $this->t('Static legacy content')];
+    $fields += ['unpublish_content' => $this->t('Unpublish content')];
     return $fields;
   }
 
@@ -64,7 +70,15 @@ class Node extends D7Node {
       ->fields('fdfp', ['field_permissions_value'])
       ->condition('fdfp.entity_id', $nid);
     $permission = $query->execute()->fetchField();
+
     $groups = $this->getGroupsByContent($nid);
+    $group_terms = [];
+    foreach ($groups as $key => $item) {
+      $group_terms[] = [
+        'target_id' => $item
+      ];
+    }
+    $row->setSourceProperty('groups_with_view_access', $group_terms);
 
     if ($permission == self::PERMISSION_OPEN) {
       // Check if content belongs to any group
@@ -74,41 +88,56 @@ class Node extends D7Node {
         // Get group content visibility
         $groupContentVisibility = $this->checkGroupsContentVisibility($groups);
 
-        if ($groupAccess == 0 && $groupContentVisibility !== 2) {
+        if ($groupAccess == self::GROUP_PUBLIC && $groupContentVisibility !== self::CONTENT_VISIBILITY_PRIVATE) {
           // All users can see the content
           $row->setSourceProperty('permission_all_user_view', true);
         }
 
-        if ($groupAccess == 1 && $groupContentVisibility == 1) {
+        if ($groupAccess == self::GROUP_PRIVATE && $groupContentVisibility == self::CONTENT_VISIBILITY_PUBLIC) {
           $row->setSourceProperty('permission_all_user_view', true);
         }
-      }
-      else
+      } else {
         // All users see the content
         $row->setSourceProperty('permission_all_user_view', true);
+      }
     }
 
-    $restricted_group = [];
+    $set_researchers_group = [];
     if ($permission == self::PERMISSION_RESTRICTED) {
-      // If permission restricted, give the PECE v1 Restricted Content group view access
+      // If permission restricted, prepare the PECE v1 Restricted Content group
       // All legacy users are members of this group (see v1_user migration)
-      $restricted_content_group_array = \Drupal::entityTypeManager()->getStorage('taxonomy_term')
-        ->loadByProperties(['name' => 'PECE v1 Restricted Content', 'vid' => 'groups']);
-      $restricted_content_group_id = $restricted_content_group_array ? reset($restricted_content_group_array)->id() : NULL;
-      $restricted_group = [
+      $legacy_researchers_group_array = \Drupal::entityTypeManager()->getStorage('taxonomy_term')
+        ->loadByProperties(['name' => 'PECE v1 Researchers', 'vid' => 'groups']);
+      $legacy_researchers_group_id = $legacy_researchers_group_array ? reset($legacy_researchers_group_array)->id() : NULL;
+      $researchers_group = [
         [
-          'target_id' => $restricted_content_group_id
+          'target_id' => $legacy_researchers_group_id
         ]
       ];
+      // Check if content belongs to any group
+      if (count($groups) > 0) {
+
+        $groupAccess = $this->checkGroupsAccess($groups);
+        // Get group content visibility
+        $groupContentVisibility = $this->checkGroupsContentVisibility($groups);
+
+        if (($groupAccess == self::GROUP_PUBLIC && $groupContentVisibility !== self::CONTENT_VISIBILITY_PRIVATE) || ($groupAccess == self::GROUP_PRIVATE && $groupContentVisibility == self::CONTENT_VISIBILITY_PUBLIC)) {
+          // All researchers can see the content
+          $set_researchers_group = $researchers_group;
+        } else {
+          $row->setSourceProperty('unpublish_content', 1);
+        }
+
+      } else {
+        $set_researchers_group = $researchers_group;
+      }
     }
-    $group_terms = [];
-    foreach ($groups as $key => $item) {
-      $group_terms[] = [
-        'target_id' => $item
-      ];
+
+    if ($permission == self::PERMISSION_PRIVATE) {
+      $row->setSourceProperty('unpublish_content', 1);
     }
-    $row->setSourceProperty('restricted_content_group', $restricted_group);
-    $row->setSourceProperty('groups_with_view_access', $group_terms);
+
+    $row->setSourceProperty('pece_researchers_group', $set_researchers_group);
 
     $collaborators = $this->select('field_data_field_pece_contributors', 'collab')
       ->fields('collab', ['field_pece_contributors_target_id'])

@@ -26,7 +26,11 @@ process:
       default_value: und
   title: title
   uid: node_uid
-  status: status
+  status:
+    plugin: null_coalesce
+    source:
+      - unpublish_content
+      - status
   created: created
   changed: timestamp
   promote: promote

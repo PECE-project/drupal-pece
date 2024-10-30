@@ -27,7 +27,11 @@ process:
     default_value: und
   title: title
   uid: node_uid
-  status: status
+  status:
+    plugin: null_coalesce
+    source:
+      - unpublish_content
+      - status
   created: created
   changed: timestamp
   promote: promote
@@ -111,7 +115,7 @@ process:
       plugin: restricted_group_append
       source:
         - '@_empty_groups_lookup_fallback'
-        - restricted_content_group
+        - pece_researchers_group
   field_override_legacy_with_new:
     plugin: default_value
     default_value: FALSE
