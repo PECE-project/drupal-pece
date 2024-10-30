@@ -4,6 +4,19 @@ status: true
 dependencies:
   config:
     - filter.format.basic_html
+    - media.type.audio
+    - media.type.document
+    - media.type.icon
+    - media.type.image
+    - media.type.image_with_caption_and_link
+    - media.type.inline_image
+    - media.type.pdf_document
+    - media.type.private_image
+    - media.type.private_vector_image
+    - media.type.remote_video
+    - media.type.slide_image
+    - media.type.vector_image
+    - media.type.video
   module:
     - admin_toolbar_search
     - comment
@@ -31,7 +44,33 @@ permissions:
   - 'access help pages'
   - 'access shortcuts'
   - 'access toolbar'
+  - 'create audio media'
+  - 'create document media'
+  - 'create icon media'
+  - 'create image media'
+  - 'create image_with_caption_and_link media'
+  - 'create inline_image media'
+  - 'create pdf_document media'
+  - 'create private_image media'
+  - 'create private_vector_image media'
+  - 'create remote_video media'
+  - 'create slide_image media'
+  - 'create vector_image media'
+  - 'create video media'
   - 'delete own files'
+  - 'edit own audio media'
+  - 'edit own document media'
+  - 'edit own icon media'
+  - 'edit own image media'
+  - 'edit own image_with_caption_and_link media'
+  - 'edit own inline_image media'
+  - 'edit own pdf_document media'
+  - 'edit own private_image media'
+  - 'edit own private_vector_image media'
+  - 'edit own remote_video media'
+  - 'edit own slide_image media'
+  - 'edit own vector_image media'
+  - 'edit own video media'
   - 'post comments'
   - 'skip comment approval'
   - 'use admin toolbar search'
