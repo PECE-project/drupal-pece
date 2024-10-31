@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.profile.pece_profile_main.field_image
     - field.field.profile.pece_profile_main.field_location
     - field.field.profile.pece_profile_main.field_pece_biography
     - field.field.profile.pece_profile_main.field_pece_email
@@ -157,6 +158,23 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 8
             additional: {  }
+          f6c88718-3887-4bdf-a5f2-7778761c7d43:
+            uuid: f6c88718-3887-4bdf-a5f2-7778761c7d43
+            region: content
+            configuration:
+              id: 'field_block:profile:pece_profile_main:field_image'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                  link: false
+                third_party_settings: {  }
+            weight: 9
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -167,6 +185,15 @@ targetEntityType: profile
 bundle: pece_profile_main
 mode: default
 content:
+  field_image:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
   field_location:
     type: address_default
     label: above

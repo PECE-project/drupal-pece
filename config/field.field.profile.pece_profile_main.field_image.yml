@@ -1,0 +1,35 @@
+uuid: c044026c-4053-47dd-9c6e-7aaa6e5e7335
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_image
+    - media.type.image
+    - media.type.vector_image
+    - profile.type.pece_profile_main
+  content:
+    - 'media:vector_image:7e1c8a49-765f-4ff3-ac69-ba9a453db2a3'
+id: profile.pece_profile_main.field_image
+field_name: field_image
+entity_type: profile
+bundle: pece_profile_main
+label: Image
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: 7e1c8a49-765f-4ff3-ac69-ba9a453db2a3
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+      vector_image: vector_image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference
