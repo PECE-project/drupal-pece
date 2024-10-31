@@ -56,7 +56,7 @@ sections:
     components:
       05c3292c-129a-4f95-9628-bccc859533ba:
         uuid: 05c3292c-129a-4f95-9628-bccc859533ba
-        region: one_a
+        region: two_a
         configuration:
           id: 'menu_block:key-contributor-links'
           label: 'Key contributor links'
@@ -74,6 +74,36 @@ sections:
           render_parent: false
           suggestion: key_contributor_links
           hide_on_nonactive: false
+        weight: 0
+        additional: {  }
+      9c6017a8-0ed6-4d80-a670-c65dae074797:
+        uuid: 9c6017a8-0ed6-4d80-a670-c65dae074797
+        region: one_a
+        configuration:
+          id: pece_dashboards_content_contributed_to
+          label: 'Link to content the current user has contributed to'
+          label_display: '0'
+          provider: pece_dashboards
+          context_mapping: {  }
+        weight: 0
+        additional: {  }
+      86e4af15-7de8-42c8-8e28-1cbfcd8afef3:
+        uuid: 86e4af15-7de8-42c8-8e28-1cbfcd8afef3
+        region: one_e
+        configuration:
+          id: 'configurable_views_filter_block_block:search-page'
+          label: ''
+          label_display: visible
+          provider: configurable_views_filter_block
+          context_mapping: {  }
+          views_label: 'Search the site, then filter'
+          visible_filters:
+            search_api_fulltext: search_api_fulltext
+          no_groups: true
+          no_reset: true
+          no_sort: false
+          no_pager: false
+          no_submit: false
         weight: 0
         additional: {  }
     third_party_settings: {  }
