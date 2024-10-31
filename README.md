@@ -60,6 +60,23 @@ ddev drush -y cex
 
 And commit any updates Drupal made to configuration as part of the updates (there may be no update hooks that are run, and even if there are some, they may not change configuration.)
 
+## Exporting configuration
+
+```shell
+ddev drush -y cex
+```
+
+## Exporting content
+
+You can make selected content (including taxonomy terms, blocks, and menu links) part of the default distribution with the [Single Content Sync](https://www.drupal.org/project/single_content_sync) module (that can in fact sync a lot more than one at a time).
+
+For example:
+
+```shell
+ddev drush content:export shortcut ../content/
+ddev drush content:export menu_link_content ../content/
+```
+
 ## Importing Drupal 7 database to work on migration
 
 ```shell
