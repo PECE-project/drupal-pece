@@ -18,9 +18,9 @@ sections:
         layout_collapse_classes: ''
         layout_collapse_summary: ''
       one_b:
-        layout_collapse_element: layout-collapse--none
+        layout_collapse_element: layout-collapse--closed
         layout_collapse_classes: ''
-        layout_collapse_summary: ''
+        layout_collapse_summary: 'Content I directly authored'
       one_c:
         layout_collapse_element: layout-collapse--none
         layout_collapse_classes: ''
@@ -38,9 +38,9 @@ sections:
         layout_collapse_classes: ''
         layout_collapse_summary: ''
       two_b:
-        layout_collapse_element: layout-collapse--none
+        layout_collapse_element: layout-collapse--open
         layout_collapse_classes: ''
-        layout_collapse_summary: ''
+        layout_collapse_summary: 'Unpublished content I directly authored'
       two_c:
         layout_collapse_element: layout-collapse--none
         layout_collapse_classes: ''
@@ -104,6 +104,32 @@ sections:
           no_sort: false
           no_pager: false
           no_submit: false
+        weight: 0
+        additional: {  }
+      50ef50c9-7933-4039-a9ca-df8393cda939:
+        uuid: 50ef50c9-7933-4039-a9ca-df8393cda939
+        region: one_b
+        configuration:
+          id: 'views_block:current_user_authored_content-block_1'
+          label: ''
+          label_display: '0'
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 0
+        additional: {  }
+      96726426-fc87-4247-9aca-9849ed49fdf2:
+        uuid: 96726426-fc87-4247-9aca-9849ed49fdf2
+        region: two_b
+        configuration:
+          id: 'views_block:current_user_authored_content-block_unpublished'
+          label: ''
+          label_display: '0'
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
         weight: 0
         additional: {  }
     third_party_settings: {  }
