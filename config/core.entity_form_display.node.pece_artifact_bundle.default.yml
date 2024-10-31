@@ -22,7 +22,7 @@ dependencies:
     - field.field.node.pece_artifact_bundle.field_use_fieldsite_local
     - node.type.pece_artifact_bundle
   module:
-    - datetime
+    - address
     - field_group
     - geolocation
     - path
@@ -152,22 +152,6 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_authors:
-    type: entity_reference_autocomplete
-    weight: 6
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_created_date:
-    type: datetime_default
-    weight: 7
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_crit_commentary:
     type: text_textarea
     weight: 32
@@ -197,6 +181,12 @@ content:
       placeholder: ''
     third_party_settings:
       conditional_fields: {  }
+  field_location:
+    type: address_default
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
     weight: 21
@@ -340,7 +330,8 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_authors: true
   field_cite_as: true
-  field_location: true
+  field_created_date: true
   langcode: true
   og_audience: true
