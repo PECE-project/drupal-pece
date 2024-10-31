@@ -109,7 +109,20 @@ display:
       cache:
         type: tag
         options: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: '<p class="text-align-center">No content yet. <a href="/node/add">Create some!</a></p>'
+            format: basic_html
+          tokenize: false
       sorts:
         changed:
           id: changed
@@ -300,6 +313,20 @@ display:
         type: none
         options:
           offset: 0
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: '<p class="text-align-center">No unpublished content!</a></p>'
+            format: basic_html
+          tokenize: false
       sorts:
         changed:
           id: changed
@@ -379,6 +406,7 @@ display:
         groups:
           1: AND
       defaults:
+        empty: false
         title: false
         pager: false
         use_more: false
