@@ -1,0 +1,22 @@
+uuid: 004864d8-7b36-4e8f-af93-820c4ca238c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.pece_fieldsite
+id: node.pece_fieldsite.promote
+field_name: promote
+entity_type: node
+bundle: pece_fieldsite
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
