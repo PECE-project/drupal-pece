@@ -1,0 +1,79 @@
+uuid: 95a3ca97-8a1d-4bcb-a53a-94d9c3f45257
+langcode: en
+status: true
+dependencies: {  }
+id: pece
+admin_label: PECE
+category: Contributor
+frontend: false
+weight: -50
+sections:
+  -
+    layout_id: layout_collapse_twocol_section
+    layout_settings:
+      label: 'Main dashboard'
+      context_mapping: {  }
+      one_a:
+        layout_collapse_element: layout-collapse--none
+        layout_collapse_classes: ''
+        layout_collapse_summary: ''
+      one_b:
+        layout_collapse_element: layout-collapse--none
+        layout_collapse_classes: ''
+        layout_collapse_summary: ''
+      one_c:
+        layout_collapse_element: layout-collapse--none
+        layout_collapse_classes: ''
+        layout_collapse_summary: ''
+      one_d:
+        layout_collapse_element: layout-collapse--none
+        layout_collapse_classes: ''
+        layout_collapse_summary: ''
+      one_e:
+        layout_collapse_element: layout-collapse--none
+        layout_collapse_classes: ''
+        layout_collapse_summary: ''
+      two_a:
+        layout_collapse_element: layout-collapse--none
+        layout_collapse_classes: ''
+        layout_collapse_summary: ''
+      two_b:
+        layout_collapse_element: layout-collapse--none
+        layout_collapse_classes: ''
+        layout_collapse_summary: ''
+      two_c:
+        layout_collapse_element: layout-collapse--none
+        layout_collapse_classes: ''
+        layout_collapse_summary: ''
+      two_d:
+        layout_collapse_element: layout-collapse--none
+        layout_collapse_classes: ''
+        layout_collapse_summary: ''
+      two_e:
+        layout_collapse_element: layout-collapse--none
+        layout_collapse_classes: ''
+        layout_collapse_summary: ''
+    components:
+      05c3292c-129a-4f95-9628-bccc859533ba:
+        uuid: 05c3292c-129a-4f95-9628-bccc859533ba
+        region: one_a
+        configuration:
+          id: 'menu_block:key-contributor-links'
+          label: 'Key contributor links'
+          label_display: '0'
+          provider: menu_block
+          context_mapping: {  }
+          follow: false
+          follow_parent: child
+          label_link: false
+          label_type: block
+          level: 1
+          depth: 0
+          expand_all_items: false
+          parent: 'key-contributor-links:'
+          render_parent: false
+          suggestion: key_contributor_links
+          hide_on_nonactive: false
+        weight: 0
+        additional: {  }
+    third_party_settings: {  }
