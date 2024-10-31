@@ -37,6 +37,15 @@ process:
       - 0
       - value
     default: ''
+  field_image:
+    plugin: sub_process
+    source: field_pece_media_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        source: fid
+        migration:
+          - v1_media_group_image
   field_pece_project_ref: field_pece_project_ref
   field_substantive_logic: field_pece_substantive_logic
   field_group_members: d7_group_members
@@ -53,6 +62,7 @@ destination:
 migration_dependencies:
   required:
     - v1_sub_logic
+    - v1_media_group_image
     - v1_user
     - v1_file
     - v1_file_private
