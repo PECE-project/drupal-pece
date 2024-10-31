@@ -1,0 +1,68 @@
+id: v1_media_user_image
+class: Drupal\migrate\Plugin\Migration
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - media
+  - 'PECE v1'
+migration_group: pece
+label: 'Media (User image)'
+source:
+  constants:
+    source_base_path: null
+  plugin: v1_file_media
+  file_type: image
+  source_entity_type: user
+  source_bundle: user
+  source_field: field_user_picture
+process:
+  name: filename
+  status: status
+  created: timestamp
+  changed: timestamp
+
+  _alt_from_media:
+    -
+      plugin: skip_on_empty
+      source: alt_text
+      method: process
+    -
+      plugin: default_value
+      default_value: null
+  field_media_image/alt:
+    plugin: null_coalesce
+    source:
+      - '@_alt_from_media'
+      - filename
+  field_media_image/target_id:
+    - plugin: migration_lookup
+      source: fid
+      migration:
+        - v1_file
+        - v1_file_private
+      no_stub: true
+    - plugin: skip_on_empty
+      method: row
+      message: 'The file was not found.'
+
+  uid:
+    - plugin: get
+      source: uid
+      migration: v1_user
+      no_stub: true
+    - plugin: default_value
+      default_value: 1
+
+  langcode:
+    plugin: default_value
+    default_value: en
+
+destination:
+  plugin: 'entity:media'
+  default_bundle: image
+migration_dependencies:
+  required: {  }
+  optional:
+    - v1_file
+    - v1_file_private
+    - v1_user

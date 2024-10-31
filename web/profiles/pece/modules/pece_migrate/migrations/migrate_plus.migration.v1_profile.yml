@@ -13,7 +13,7 @@ migration_tags:
 migration_group: pece
 label: 'User accounts profile'
 source:
-  plugin: d7_profile2
+  plugin: v1_profile_source
   constants:
     status: 1
     is_default: 1
@@ -90,6 +90,11 @@ process:
     -
       plugin: location_www_to_link
       source: field_pece_location
+  field_image/target_id:
+      plugin: migration_lookup
+      source: user_picture
+      migration:
+        - v1_media_user_image
 destination:
   plugin: 'entity:profile'
 migration_dependencies:
@@ -97,3 +102,4 @@ migration_dependencies:
     - v1_user
     - v1_file
     - v1_file_private
+    - v1_media_user_image
