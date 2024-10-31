@@ -1,0 +1,49 @@
+# This is so your IDE knows about the syntax for fixes and autocomplete.
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+
+# The human readable name.
+name: Create Referencing Content button
+
+# Status can be: "experimental", "stable", "deprecated", "obsolete".
+status: stable
+
+# Use this key to organize components together.
+group: Navigation
+
+# Schema for the props. We support JSON Schema. Learn more about the
+# syntax at https://json-schema.org
+# The props section is currently required. See Components without
+# Properties section below.
+props:
+  # Props are always an object with keys. Each key is a variable in your
+  # component template.
+  type: object
+
+  # If your component has required properties, you list them here.
+  required:
+    - url
+    - label
+
+  properties:
+    # The key is the name of the variable in the template.
+    url:
+      type: string
+      # Human-readable name for prop.
+      title: URL
+      description: An internal, webroot-relative path.
+    label:
+      type: string
+      title: Button label
+      description: The anchor text, already translated.
+    classes:
+      # This variable is an array of strings: ['foo', 'bar', 'baz'].
+      type: array
+      title: Classes
+      description: Classes to apply for the HTML anchor tag.
+      items:
+        type: string
+      default: ['button is-primary is-medium']
+    tooltip:
+      type: string
+      title: Tooltip
+      description: Text for the link tooltip, already translated.
