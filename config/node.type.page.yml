@@ -3,10 +3,20 @@ langcode: en
 status: true
 dependencies:
   module:
+    - menu_ui
     - type_tray
 third_party_settings:
   type_tray:
+    type_category: _none
+    type_thumbnail: ''
+    type_icon: ''
+    type_description: ''
     existing_nodes_link_text: 'View existing <em class="placeholder">Basic page</em> content'
+    type_weight: 0
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
 _core:
   default_config_hash: KuyA4NHPXcmKAjRtwa0vQc2ZcyrUJy6IlS2TAyMNRbc
 name: 'Basic page'
