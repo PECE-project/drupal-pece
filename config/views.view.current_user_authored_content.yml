@@ -111,6 +111,22 @@ display:
         options: {  }
       empty: {  }
       sorts:
+        changed:
+          id: changed
+          table: node_field_data
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: changed
+          plugin_id: date
+          order: DESC
+          expose:
+            label: Changed
+            field_identifier: changed
+          exposed: false
+          granularity: second
         created:
           id: created
           table: node_field_data
@@ -191,8 +207,8 @@ display:
           query_tags: {  }
       relationships: {  }
       use_more: true
-      use_more_always: false
-      use_more_text: more
+      use_more_always: true
+      use_more_text: 'See and sort all content I directly authored'
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -207,8 +223,8 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  block_1:
-    id: block_1
+  block:
+    id: block
     display_title: Block
     display_plugin: block
     position: 2
@@ -218,8 +234,46 @@ display:
         options:
           offset: 0
           items_per_page: 20
+      sorts:
+        changed:
+          id: changed
+          table: node_field_data
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: changed
+          plugin_id: date
+          order: DESC
+          expose:
+            label: Changed
+            field_identifier: changed
+          exposed: false
+          granularity: second
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
       defaults:
         pager: false
+        link_display: false
+        link_url: false
+        sorts: false
+      link_display: page
+      link_url: ''
       display_extenders:
         metatag_display_extender:
           metatags: {  }
@@ -240,10 +294,44 @@ display:
     display_plugin: block
     position: 3
     display_options:
+      title: 'Unpublished content I directly authored'
       pager:
         type: none
         options:
           offset: 0
+      sorts:
+        changed:
+          id: changed
+          table: node_field_data
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: changed
+          plugin_id: date
+          order: DESC
+          expose:
+            label: Changed
+            field_identifier: changed
+          exposed: false
+          granularity: second
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
       filters:
         status:
           id: status
@@ -290,10 +378,12 @@ display:
         groups:
           1: AND
       defaults:
+        title: false
         pager: false
         use_more: false
         use_more_always: false
         use_more_text: false
+        sorts: false
         filters: false
         filter_groups: false
       display_description: 'Content that has not been published yet, or is currently unpublished.'
@@ -320,11 +410,53 @@ display:
     display_plugin: page
     position: 1
     display_options:
+      sorts:
+        changed:
+          id: changed
+          table: node_field_data
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: changed
+          plugin_id: date
+          order: DESC
+          expose:
+            label: Changed
+            field_identifier: changed
+          exposed: true
+          granularity: second
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
+          expose:
+            label: 'Authored on'
+            field_identifier: created
+          exposed: true
+          granularity: second
+      defaults:
+        use_more: false
+        use_more_always: false
+        use_more_text: false
+        sorts: false
+      use_more: false
+      use_more_always: true
+      use_more_text: 'See and sort all content I directly authored'
       display_extenders:
         metatag_display_extender:
           metatags: {  }
           tokenize: false
       path: dashboard/pece/directly-authored-content
+      use_admin_theme: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -332,6 +464,8 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'url.query_args:sort_by'
+        - 'url.query_args:sort_order'
         - user
         - 'user.node_grants:view'
         - user.permissions
