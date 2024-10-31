@@ -19,7 +19,8 @@ use Drupal\file\Plugin\migrate\source\d7\File as D7File;
  * source:
  *   plugin: v1_file
  *   scheme: public
- *   is_cv: TRUE
+ *   file_type: image
+ *   inline_media: TRUE
  * @endcode
  *
  * In this example, public file values, that are CV files, are retrieved from the source database.
@@ -43,13 +44,15 @@ class FileForMedia extends D7File {
    * {@inheritdoc}
    */
   public function query() {
+    $query = parent::query()->condition('f.type', $this->configuration['file_type']);
 
-    $fid_query = $this->select('fid_locator', 'fidl')
-      ->fields('fidl', ['fid'])
-      ->distinct();
-    $query = parent::query();
-    $query->condition('f.type', $this->configuration['file_type'])
-      ->condition('f.fid', $fid_query, 'IN');
+    if ($this->configuration['inline_media']) {
+      // fid_locator is a custom table that collects file ids of embedded files, see scripts/token_parser.sql
+      $fid_query = $this->select('fid_locator', 'fidl')
+        ->fields('fidl', ['fid'])
+        ->distinct();
+      $query->condition('f.fid', $fid_query, 'IN');
+    }
 
     return $query;
   }
