@@ -20,9 +20,10 @@ bundle: pece_design_logic
 mode: search_result
 content:
   body:
-    type: text_default
+    type: text_summary_or_trimmed
     label: hidden
-    settings: {  }
+    settings:
+      trim_length: 600
     third_party_settings: {  }
     weight: 1
     region: content
