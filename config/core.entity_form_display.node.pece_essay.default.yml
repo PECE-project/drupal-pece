@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.pece_essay.field_essay_contents
     - field.field.node.pece_essay.field_groups_with_view_access
     - field.field.node.pece_essay.field_legacy_rendered_html
+    - field.field.node.pece_essay.field_media_thumbnail
     - field.field.node.pece_essay.field_override_legacy_with_new
     - field.field.node.pece_essay.field_pece_all_can_view
     - field.field.node.pece_essay.field_pece_artifacts
@@ -22,11 +23,12 @@ dependencies:
     - field.field.node.pece_essay.field_tags
     - field.field.node.pece_essay.field_thumbnail
     - field.field.node.pece_essay.layout_builder__layout
-    - image.style.thumbnail
     - node.type.pece_essay
   module:
+    - entity_form_field_label
     - field_group
-    - image
+    - media_library
+    - media_library_edit
     - paragraphs
     - path
     - text
@@ -131,9 +133,22 @@ content:
       placeholder: ''
     third_party_settings:
       conditional_fields: {  }
+  field_media_thumbnail:
+    type: media_library_widget
+    weight: 3
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_override_legacy_with_new:
     type: boolean_checkbox
-    weight: 26
+    weight: 21
     region: content
     settings:
       display_label: true
@@ -217,14 +232,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_thumbnail:
-    type: image_image
-    weight: 3
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
   path:
     type: path
     weight: 6
@@ -271,12 +278,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 22
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   field_cite_as: true
   field_legacy_rendered_html: true
+  field_thumbnail: true
   langcode: true
   layout_builder__layout: true

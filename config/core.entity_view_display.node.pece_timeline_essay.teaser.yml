@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_ark_enabled
     - field.field.node.pece_timeline_essay.field_cite_as
     - field.field.node.pece_timeline_essay.field_groups_with_view_access
+    - field.field.node.pece_timeline_essay.field_media_thumbnail
     - field.field.node.pece_timeline_essay.field_pece_all_can_view
     - field.field.node.pece_timeline_essay.field_pece_license
     - field.field.node.pece_timeline_essay.field_pece_project_ref
@@ -18,7 +19,7 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_timeline_essay_items
     - node.type.pece_timeline_essay
   module:
-    - image
+    - entity_form_field_label
     - user
 _core:
   default_config_hash: 19kTjlxRWAhBJL3QEvOcU_3nDYnXXklTEmkMW8CnNg0
@@ -33,15 +34,16 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_thumbnail:
-    type: image
+  field_media_thumbnail:
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
+      view_mode: default
+      link: false
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
     weight: 1
     region: content
 hidden:
@@ -57,6 +59,7 @@ hidden:
   field_people_with_edit_access: true
   field_people_with_view_access: true
   field_tags: true
+  field_thumbnail: true
   field_timeline_essay_items: true
   langcode: true
   links: true

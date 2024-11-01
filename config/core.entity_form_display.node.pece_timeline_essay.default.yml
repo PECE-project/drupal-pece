@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_ark_enabled
     - field.field.node.pece_timeline_essay.field_cite_as
     - field.field.node.pece_timeline_essay.field_groups_with_view_access
+    - field.field.node.pece_timeline_essay.field_media_thumbnail
     - field.field.node.pece_timeline_essay.field_pece_all_can_view
     - field.field.node.pece_timeline_essay.field_pece_license
     - field.field.node.pece_timeline_essay.field_pece_project_ref
@@ -15,11 +16,12 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_tags
     - field.field.node.pece_timeline_essay.field_thumbnail
     - field.field.node.pece_timeline_essay.field_timeline_essay_items
-    - image.style.thumbnail
     - node.type.pece_timeline_essay
   module:
+    - entity_form_field_label
     - field_group
-    - image
+    - media_library
+    - media_library_edit
     - paragraphs
     - path
     - text
@@ -46,7 +48,7 @@ third_party_settings:
       label: OR
       region: hidden
       parent_name: ''
-      weight: 22
+      weight: 16
       format_type: details
       format_settings:
         classes: ''
@@ -60,7 +62,7 @@ third_party_settings:
       label: AND
       region: hidden
       parent_name: ''
-      weight: 21
+      weight: 15
       format_type: details
       format_settings:
         classes: ''
@@ -89,7 +91,6 @@ third_party_settings:
     group_contribution_metadata:
       children:
         - field_pece_license
-        - field_pece_geolocation
         - field_tags
       label: 'Contribution Metadata'
       region: content
@@ -172,7 +173,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 9
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -194,6 +195,19 @@ content:
       placeholder: ''
     third_party_settings:
       conditional_fields: {  }
+  field_media_thumbnail:
+    type: media_library_widget
+    weight: 2
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_pece_all_can_view:
     type: boolean_checkbox
     weight: 27
@@ -263,14 +277,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_thumbnail:
-    type: image_image
-    weight: 2
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
   field_timeline_essay_items:
     type: entity_reference_paragraphs
     weight: 3
@@ -285,27 +291,27 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 12
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 10
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 13
+    weight: 10
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 11
+    weight: 8
     region: content
     settings:
       display_label: true
@@ -320,7 +326,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 8
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS
@@ -329,10 +335,11 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   field_cite_as: true
+  field_thumbnail: true
   langcode: true

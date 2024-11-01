@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.pece_photo_essay.field_ark_enabled
     - field.field.node.pece_photo_essay.field_cite_as
     - field.field.node.pece_photo_essay.field_groups_with_view_access
+    - field.field.node.pece_photo_essay.field_media_thumbnail
     - field.field.node.pece_photo_essay.field_pece_all_can_view
     - field.field.node.pece_photo_essay.field_pece_license
     - field.field.node.pece_photo_essay.field_pece_project_ref
@@ -18,7 +19,6 @@ dependencies:
     - field.field.node.pece_photo_essay.field_thumbnail
     - node.type.pece_photo_essay
   module:
-    - image
     - user
 _core:
   default_config_hash: raU08YYWxOQNncfbqi93VZWvUKvVexKrWn5AUay3f2g
@@ -33,14 +33,12 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_thumbnail:
-    type: image
+  field_media_thumbnail:
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
+      view_mode: default
+      link: true
     third_party_settings: {  }
     weight: 1
     region: content
@@ -58,6 +56,7 @@ hidden:
   field_people_with_view_access: true
   field_photo_essay_items: true
   field_tags: true
+  field_thumbnail: true
   langcode: true
   links: true
   search_api_excerpt: true

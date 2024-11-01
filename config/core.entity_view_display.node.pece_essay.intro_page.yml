@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.pece_essay.field_essay_contents
     - field.field.node.pece_essay.field_groups_with_view_access
     - field.field.node.pece_essay.field_legacy_rendered_html
+    - field.field.node.pece_essay.field_media_thumbnail
     - field.field.node.pece_essay.field_override_legacy_with_new
     - field.field.node.pece_essay.field_pece_all_can_view
     - field.field.node.pece_essay.field_pece_artifacts
@@ -25,7 +26,6 @@ dependencies:
     - field.field.node.pece_essay.layout_builder__layout
     - node.type.pece_essay
   module:
-    - image
     - layout_builder
     - text
     - user
@@ -69,6 +69,14 @@ content:
     third_party_settings: {  }
     weight: 5
     region: content
+  field_media_thumbnail:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
   field_pece_license:
     type: entity_reference_label
     label: above
@@ -93,17 +101,6 @@ content:
     third_party_settings: {  }
     weight: 3
     region: content
-  field_thumbnail:
-    type: image
-    label: above
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: 2
-    region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
@@ -120,6 +117,7 @@ hidden:
   field_pece_artifacts: true
   field_people_with_edit_access: true
   field_people_with_view_access: true
+  field_thumbnail: true
   langcode: true
   layout_builder__layout: true
   links: true

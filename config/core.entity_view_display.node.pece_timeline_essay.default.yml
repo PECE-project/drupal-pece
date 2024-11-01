@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_ark_enabled
     - field.field.node.pece_timeline_essay.field_cite_as
     - field.field.node.pece_timeline_essay.field_groups_with_view_access
+    - field.field.node.pece_timeline_essay.field_media_thumbnail
     - field.field.node.pece_timeline_essay.field_pece_all_can_view
     - field.field.node.pece_timeline_essay.field_pece_license
     - field.field.node.pece_timeline_essay.field_pece_project_ref
@@ -54,7 +55,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: Contributor(s)
                     rewrite_label: 1
-            weight: 1
+            weight: 3
             additional: {  }
           a2b2c12a-d187-4a32-a603-daac02de66d7:
             uuid: a2b2c12a-d187-4a32-a603-daac02de66d7
@@ -76,7 +77,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: 'Group Audience'
                     rewrite_label: 1
-            weight: 4
+            weight: 6
             additional: {  }
           92413f7f-e401-4dcc-a02e-2a287c63c62f:
             uuid: 92413f7f-e401-4dcc-a02e-2a287c63c62f
@@ -98,7 +99,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 5
+            weight: 7
             additional: {  }
           eed9cf5f-8e70-41c4-996f-bd91361e200e:
             uuid: eed9cf5f-8e70-41c4-996f-bd91361e200e
@@ -120,7 +121,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 7
+            weight: 9
             additional: {  }
           342eb86d-328d-4601-a23e-f52757aaef06:
             uuid: 342eb86d-328d-4601-a23e-f52757aaef06
@@ -135,7 +136,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 8
+            weight: 10
             additional:
               extra_field_plus_settings: {  }
           bdc00dd9-1f44-46c1-af41-246b344409a6:
@@ -170,7 +171,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: 'Last Revision Date'
                     rewrite_label: 1
-            weight: 3
+            weight: 5
             additional: {  }
           b798a8ef-59e9-4ff3-ba14-11b4ebca3def:
             uuid: b798a8ef-59e9-4ff3-ba14-11b4ebca3def
@@ -185,7 +186,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 9
+            weight: 11
             additional:
               extra_field_plus_settings: {  }
           36a59125-23d5-4fc8-aec9-51f909c40c65:
@@ -229,32 +230,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 6
-            additional: {  }
-          709eabbc-8442-4e9f-9751-d3f29dccc4ed:
-            uuid: 709eabbc-8442-4e9f-9751-d3f29dccc4ed
-            region: second
-            configuration:
-              id: 'field_block:node:pece_timeline_essay:field_thumbnail'
-              label: Thumbnail
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: image
-                label: above
-                settings:
-                  image_link: ''
-                  image_style: ''
-                  image_loading:
-                    attribute: lazy
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 0
+            weight: 8
             additional: {  }
           8d265d51-c5ad-46c9-aafc-a8a1001f297c:
             uuid: 8d265d51-c5ad-46c9-aafc-a8a1001f297c
@@ -288,7 +264,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 2
+            weight: 4
             additional: {  }
           18f8fd66-b4e6-4d73-ab44-46f64f00b6c1:
             uuid: 18f8fd66-b4e6-4d73-ab44-46f64f00b6c1
@@ -299,6 +275,23 @@ third_party_settings:
               context_mapping:
                 entity: layout_builder.entity
             weight: 1
+            additional: {  }
+          d38f88e2-a83a-4030-923d-9ffe612c3c43:
+            uuid: d38f88e2-a83a-4030-923d-9ffe612c3c43
+            region: second
+            configuration:
+              id: 'field_block:node:pece_timeline_essay:field_media_thumbnail'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                  link: false
+                third_party_settings: {  }
+            weight: 2
             additional: {  }
         third_party_settings: {  }
   layout_library:
@@ -340,6 +333,15 @@ content:
     third_party_settings: {  }
     weight: 10
     region: content
+  field_media_thumbnail:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 13
+    region: first
   field_pece_all_can_view:
     type: boolean
     label: above

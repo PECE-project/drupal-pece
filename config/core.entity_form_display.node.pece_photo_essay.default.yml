@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.pece_photo_essay.field_ark_enabled
     - field.field.node.pece_photo_essay.field_cite_as
     - field.field.node.pece_photo_essay.field_groups_with_view_access
+    - field.field.node.pece_photo_essay.field_media_thumbnail
     - field.field.node.pece_photo_essay.field_pece_all_can_view
     - field.field.node.pece_photo_essay.field_pece_license
     - field.field.node.pece_photo_essay.field_pece_project_ref
@@ -20,6 +21,7 @@ dependencies:
   module:
     - field_group
     - image
+    - media_library
     - paragraphs
     - path
     - text
@@ -168,6 +170,13 @@ content:
       placeholder: ''
     third_party_settings:
       conditional_fields: {  }
+  field_media_thumbnail:
+    type: media_library_widget
+    weight: 51
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
     weight: 24

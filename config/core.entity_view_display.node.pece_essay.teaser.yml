@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.pece_essay.field_essay_contents
     - field.field.node.pece_essay.field_groups_with_view_access
     - field.field.node.pece_essay.field_legacy_rendered_html
+    - field.field.node.pece_essay.field_media_thumbnail
     - field.field.node.pece_essay.field_override_legacy_with_new
     - field.field.node.pece_essay.field_pece_all_can_view
     - field.field.node.pece_essay.field_pece_artifacts
@@ -25,7 +26,6 @@ dependencies:
     - field.field.node.pece_essay.layout_builder__layout
     - node.type.pece_essay
   module:
-    - image
     - user
 _core:
   default_config_hash: TEL7aR8Bj3k9ajtgH1TR0QmBzrOz19D-yhSRAKUNUxc
@@ -40,14 +40,12 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_thumbnail:
-    type: image
+  field_media_thumbnail:
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
+      view_mode: default
+      link: true
     third_party_settings: {  }
     weight: 1
     region: content
@@ -73,6 +71,7 @@ hidden:
   field_people_with_edit_access: true
   field_people_with_view_access: true
   field_tags: true
+  field_thumbnail: true
   langcode: true
   layout_builder__layout: true
   links: true
