@@ -1,7 +1,7 @@
 Memo
 =====================
 
-Steps to Create an Memo
+Steps to Create a Memo
 ---------------------------------------
 1. The process of adding any variety of content to PECE begins by logging in with your screen name and password and clicking “Create Content” in the top right corner.
 
