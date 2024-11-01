@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.node.annotation_step_1
     - field.field.node.pece_annotation.body
     - field.field.node.pece_annotation.field_annotation_analytic
     - field.field.node.pece_annotation.field_annotation_artifact
@@ -17,6 +18,7 @@ dependencies:
   module:
     - entity_form_field_label
     - field_group
+    - inline_entity_form
     - path
     - readonly_field_widget
     - text
@@ -144,15 +146,26 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_annotation_analytic:
-    type: entity_reference_autocomplete
+    type: inline_entity_form_complex
     weight: 3
     region: content
     settings:
+      form_mode: annotation_step_1
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: true
+      removed_reference: keep
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
   field_annotation_artifact:
     type: readonly_field_widget
     weight: 2

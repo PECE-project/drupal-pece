@@ -10,25 +10,13 @@ progress_steps_links_saved_only_next: false
 redirection_policy: ''
 redirection_target: ''
 steps:
-  step_1:
-    label: 'Step 1'
-    weight: 0
-    entity_type: node
-    entity_bundle: pece_annotation
-    form_mode: node.annotation_step_1
-    url: /node/pece_annotation/step_1
-    submitLabel: Next
-    cancelLabel: ''
-    hideDelete: 0
-    deleteLabel: null
-    displayPrevious: 0
   step_2:
-    label: 'Step 2'
+    label: 'Step 1'
     weight: 1
     entity_type: node
     entity_bundle: pece_annotation
     form_mode: node.annotation_step_2
-    url: /node/pece_annotation/step_2
+    url: /node/pece_annotation/step_1
     submitLabel: Next
     cancelLabel: ''
     previousLabel: Previous
@@ -36,12 +24,12 @@ steps:
     deleteLabel: null
     displayPrevious: 1
   step_3:
-    label: 'Step 3'
+    label: 'Step 2'
     weight: 2
     entity_type: node
     entity_bundle: pece_annotation
     form_mode: node.annotation_step_3
-    url: /node/pece_annotation/step_3
+    url: /node/pece_annotation/step_2
     submitLabel: ''
     cancelLabel: ''
     previousLabel: Previous
