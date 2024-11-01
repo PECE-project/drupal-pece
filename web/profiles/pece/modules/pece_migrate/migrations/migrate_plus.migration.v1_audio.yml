@@ -135,14 +135,15 @@ process:
     media_migrations:
       - v1_inline_image
   field_duration: field_pece_media_duration
-  field_audio_artifact_audio:
+  field_audio_artifact_media_audio:
     plugin: sub_process
     source: field_pece_media_audio
     process:
       target_id:
         plugin: migration_lookup
-        migration: v1_file
         source: fid
+        migration:
+          - v1_media_audio_artifact_audio
   field_pece_all_can_view:
     plugin: default_value
     source: permission_all_user_view
@@ -187,3 +188,4 @@ migration_dependencies:
     - v1_taxonomy_term_tags
     - v1_project
     - v1_taxonomy_term_authors
+    - v1_media_audio_artifact_audio
