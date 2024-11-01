@@ -141,19 +141,6 @@ process:
     source: field_pece_tags
     process:
       target_id: tid
-  field_thumbnail/target_id:
-    -
-      plugin: default_value
-      source: field_basic_image_image
-      default_value:
-        -
-          fid: null
-    -
-      plugin: extract
-      index:
-        - 0
-        - fid
-      default: null
   field_pece_all_can_view:
     plugin: default_value
     default_value: true
@@ -184,6 +171,15 @@ process:
       source:
         - '@_empty_groups_lookup_fallback'
         - pece_researchers_group
+  field_media_thumbnail:
+    plugin: sub_process
+    source: field_basic_image_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        source: fid
+        migration:
+          - v1_media_project_thumbnail
 destination:
   plugin: 'entity_complete:node'
   translations: true
@@ -197,3 +193,4 @@ migration_dependencies:
     - v1_sub_logic
     - v1_taxonomy_term_tags
     - v1_taxonomy_term_structured_analytics
+    - v1_media_project_thumbnail
