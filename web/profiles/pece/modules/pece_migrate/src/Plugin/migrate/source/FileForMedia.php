@@ -50,7 +50,10 @@ class FileForMedia extends D7File {
    * {@inheritdoc}
    */
   public function query() {
-    $query = parent::query()->condition('f.type', $this->configuration['file_type']);
+    $query = parent::query();
+    if ($this->configuration['file_type']) {
+      $query->condition('f.type', $this->configuration['file_type']);
+    }
 
     if ($this->configuration['inline_media']) {
       // fid_locator is a custom table, a collection of data about embedded files, see scripts/token_parser.sql
