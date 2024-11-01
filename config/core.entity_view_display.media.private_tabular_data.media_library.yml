@@ -1,0 +1,34 @@
+uuid: 0046e092-8e98-43ec-85c0-41be32bcd003
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.private_tabular_data.field_private_tabular_data
+    - image.style.medium
+    - media.type.private_tabular_data
+  module:
+    - image
+id: media.private_tabular_data.media_library
+targetEntityType: media
+bundle: private_tabular_data
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: medium
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_private_tabular_data: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  uid: true

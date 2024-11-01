@@ -1,0 +1,21 @@
+uuid: 2ebaa707-a9ec-4ad8-8b6a-e4998c1bf8ac
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.private_tabular_data.field_private_tabular_data
+    - media.type.private_tabular_data
+id: media.private_tabular_data.media_library
+targetEntityType: media
+bundle: private_tabular_data
+mode: media_library
+content: {  }
+hidden:
+  created: true
+  field_private_tabular_data: true
+  langcode: true
+  name: true
+  path: true
+  status: true
+  uid: true
