@@ -33,7 +33,7 @@ Steps to Create a Memo
 
     If you choose to leave the toggle on, you can still associate the content with a particular group. To do so, complete the "Group association and view access." You can select a group with which to associate the content by typing in its name into the field. 
 
-    If you choose off, add the people who have access to this memo by adding typing in their screen name and clicking it. Continue to completing the "Group association and view access" field just as instructed above.
+    If you choose to restrict access to the content, you can designate specific people or groups that will have view access. Add the people who should have view access to this memo by typing their screen name into the "People with view access" field. Add groups whose members should have view access to this memo by typing the group name into the "Group association and view access" field. **Note that if you give a group view access, it will also associate the content with that group. This means the content will appear on the group's page.**
 
 8. Next, click on the "Contribution Metadata" tab.
 
