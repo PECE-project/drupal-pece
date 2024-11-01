@@ -1,0 +1,21 @@
+uuid: 2d7883fb-68f1-4e26-be39-e880cf8d1994
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.private_document.field_private_media_document
+    - media.type.private_document
+id: media.private_document.media_library
+targetEntityType: media
+bundle: private_document
+mode: media_library
+content: {  }
+hidden:
+  created: true
+  field_private_media_document: true
+  langcode: true
+  name: true
+  path: true
+  status: true
+  uid: true
