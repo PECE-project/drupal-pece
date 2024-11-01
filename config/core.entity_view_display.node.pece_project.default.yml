@@ -303,16 +303,21 @@ third_party_settings:
             region: content
             configuration:
               id: 'field_block:node:pece_project:field_pece_media_image'
+              label: Image
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
                 type: entity_reference_entity_view
-                label: above
+                label: hidden
                 settings:
                   view_mode: pece_image_artifact
-                  link: false
-                third_party_settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
             weight: 11
             additional: {  }
           094aea3d-39d7-4127-9e12-4c2303d1bb15:

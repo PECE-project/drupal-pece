@@ -1,0 +1,29 @@
+uuid: 794feee5-6359-4359-8013-31a264a80f8c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media_image_banner
+    - media.type.image
+    - node.type.pece_project
+id: node.pece_project.field_media_image_banner
+field_name: field_media_image_banner
+entity_type: node
+bundle: pece_project
+label: 'Media image banner'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
