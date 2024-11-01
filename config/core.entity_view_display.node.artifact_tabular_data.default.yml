@@ -8,11 +8,11 @@ dependencies:
     - field.field.node.artifact_tabular_data.field_cite_as
     - field.field.node.artifact_tabular_data.field_created_date
     - field.field.node.artifact_tabular_data.field_crit_commentary
-    - field.field.node.artifact_tabular_data.field_field_media_tabular_data
     - field.field.node.artifact_tabular_data.field_fieldsite
     - field.field.node.artifact_tabular_data.field_groups_with_view_access
     - field.field.node.artifact_tabular_data.field_language
     - field.field.node.artifact_tabular_data.field_location
+    - field.field.node.artifact_tabular_data.field_media_tabular_data
     - field.field.node.artifact_tabular_data.field_pece_all_can_view
     - field.field.node.artifact_tabular_data.field_pece_geolocation
     - field.field.node.artifact_tabular_data.field_pece_license
@@ -35,6 +35,7 @@ dependencies:
     - languagefield
     - layout_builder
     - layout_collapse
+    - layout_library
     - text
     - user
 third_party_settings:
@@ -453,7 +454,7 @@ third_party_settings:
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-            weight: 4
+            weight: 3
             additional: {  }
           3ebb9e14-5d82-44a7-8c8a-034efaa118e2:
             uuid: 3ebb9e14-5d82-44a7-8c8a-034efaa118e2
@@ -471,24 +472,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 5
-            additional: {  }
-          0219e12e-788e-495e-8039-c33c47970484:
-            uuid: 0219e12e-788e-495e-8039-c33c47970484
-            region: one_a
-            configuration:
-              id: 'field_block:node:artifact_tabular_data:field_field_media_tabular_data'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_entity_view
-                label: above
-                settings:
-                  view_mode: default
-                  link: false
-                third_party_settings: {  }
-            weight: 0
+            weight: 4
             additional: {  }
           5fb0f5b0-10bb-427b-9d1d-1a51dbcc0cb6:
             uuid: 5fb0f5b0-10bb-427b-9d1d-1a51dbcc0cb6
@@ -505,9 +489,28 @@ third_party_settings:
                   view_mode: default
                   link: false
                 third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          738a1239-196b-45fc-ba28-0416c4889ff3:
+            uuid: 738a1239-196b-45fc-ba28-0416c4889ff3
+            region: one_a
+            configuration:
+              id: 'field_block:node:artifact_tabular_data:field_media_tabular_data'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                  link: false
+                third_party_settings: {  }
             weight: 1
             additional: {  }
         third_party_settings: {  }
+  layout_library:
+    enable: false
 _core:
   default_config_hash: ZYRbvgpK73gU2ZYpD36sh0tA8YW5ptCG7V34MwKdSpg
 id: node.artifact_tabular_data.default
@@ -554,15 +557,6 @@ content:
     third_party_settings: {  }
     weight: 121
     region: first
-  field_field_media_tabular_data:
-    type: entity_reference_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 127
-    region: one_a
   field_fieldsite:
     type: entity_reference_label
     label: above
@@ -596,6 +590,15 @@ content:
     third_party_settings: {  }
     weight: 115
     region: content
+  field_media_tabular_data:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 129
+    region: one_a
   field_pece_all_can_view:
     type: boolean
     label: above
