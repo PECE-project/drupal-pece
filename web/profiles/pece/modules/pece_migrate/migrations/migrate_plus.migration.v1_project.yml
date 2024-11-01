@@ -54,19 +54,6 @@ process:
       - 0
       - summary
     default: ''
-  field_project_image_banner/target_id:
-    -
-      plugin: default_value
-      source: field_pece_proj_img
-      default_value:
-        -
-          fid: null
-    -
-      plugin: extract
-      index:
-        - 0
-        - fid
-      default: null
   field_project_institution_link:
     plugin: sub_process
     source: field_pece_multiple_link
@@ -180,6 +167,15 @@ process:
         source: fid
         migration:
           - v1_media_project_thumbnail
+  field_media_banner:
+    plugin: sub_process
+    source: field_pece_proj_img
+    process:
+      target_id:
+        plugin: migration_lookup
+        source: fid
+        migration:
+          - v1_media_project_banner
 destination:
   plugin: 'entity_complete:node'
   translations: true
@@ -194,3 +190,4 @@ migration_dependencies:
     - v1_taxonomy_term_tags
     - v1_taxonomy_term_structured_analytics
     - v1_media_project_thumbnail
+    - v1_media_project_banner
