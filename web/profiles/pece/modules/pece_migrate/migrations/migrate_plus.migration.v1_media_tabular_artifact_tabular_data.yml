@@ -1,0 +1,55 @@
+id: v1_media_tabular_artifact_tabular_data
+class: Drupal\migrate\Plugin\Migration
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - media
+  - 'PECE v1'
+migration_group: pece
+label: 'Media (Tabular data)'
+source:
+  constants:
+    source_base_path: null
+  plugin: v1_file_media
+  file_type: null
+  source_entity_type: node
+  source_bundle: pece_artifact_tabular
+  source_field: field_pece_media_tabular
+process:
+  name: filename
+  status: status
+  created: timestamp
+  changed: timestamp
+
+  uid:
+    - plugin: get
+      source: uid
+      migration: v1_user
+      no_stub: true
+    - plugin: default_value
+      default_value: 1
+
+  langcode:
+    plugin: default_value
+    default_value: en
+
+  field_private_tabular_data/target_id:
+    - plugin: migration_lookup
+      source: fid
+      migration:
+        - v1_file
+        - v1_file_private
+      no_stub: true
+    - plugin: skip_on_empty
+      method: row
+      message: 'The file was not found.'
+
+destination:
+  plugin: 'entity:media'
+  default_bundle: private_tabular_data
+migration_dependencies:
+  required: {  }
+  optional:
+    - v1_file
+    - v1_file_private
+    - v1_user

@@ -128,22 +128,24 @@ process:
     source: field_pece_crit_commentary/0/value
     media_migrations:
       - v1_inline_image
-  field_tabular_media:
+  field_media_tabular_data:
     plugin: sub_process
     source: field_pece_media_tabular
     process:
       target_id:
         plugin: migration_lookup
-        migration: v1_file
         source: fid
-  field_tabular_attachment:
+        migration:
+          - v1_media_tabular_artifact_tabular_data
+  field_tablr_media_attachments:
     plugin: sub_process
     source: field_pece_media_tablr_attach
     process:
       target_id:
         plugin: migration_lookup
-        migration: v1_file
         source: fid
+        migration:
+          - v1_media_tabular_artifact_attachment
   field_tags:
     plugin: sub_process
     source: field_pece_tags
@@ -193,3 +195,5 @@ migration_dependencies:
     - v1_taxonomy_term_tags
     - v1_taxonomy_term_authors
     - v1_fieldsite
+    - v1_media_tabular_artifact_tabular_data
+    - v1_media_tabular_artifact_attachment
