@@ -1,0 +1,32 @@
+uuid: 813d5086-9cff-4b52-9776-9b68c18c3f41
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.private_audio.field_media_private_audio_file
+    - media.type.private_audio
+  module:
+    - file
+id: media.private_audio.default
+targetEntityType: media
+bundle: private_audio
+mode: default
+content:
+  field_media_private_audio_file:
+    type: file_audio
+    label: visually_hidden
+    settings:
+      controls: true
+      autoplay: false
+      loop: false
+      multiple_file_display_type: tags
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

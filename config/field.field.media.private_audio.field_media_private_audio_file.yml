@@ -1,0 +1,27 @@
+uuid: 2ec47ec3-f1f6-460d-adb1-e6f4ee6b36ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_private_audio_file
+    - media.type.private_audio
+  module:
+    - file
+id: media.private_audio.field_media_private_audio_file
+field_name: field_media_private_audio_file
+entity_type: media
+bundle: private_audio
+label: 'Audio file'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'mp3 mp4 aac wav m4a ogg oga weba webm'
+  max_filesize: ''
+  description_field: false
+field_type: file
