@@ -1,7 +1,7 @@
 Memo
 =====================
 
-Steps to Create an Memo
+Steps to Create a Memo
 ---------------------------------------
 1. The process of adding any variety of content to PECE begins by logging in with your screen name and password and clicking “Create Content” in the top right corner.
 
@@ -27,13 +27,13 @@ Steps to Create an Memo
 
 6. Next are two tabs: "Permissions, Authorship, and Groups" and "Contribution Metadata". The "Permissions, Authorship, and Groups" should be automatically opened. 
 
-    In the "Edit Permissions and Authorship" section, you should be automatically added as a contributor as your username. If there are any other contributors, add them by typing the first few letters of their name into the field. Their screen name should pop up. Select their name. To add more than one contributor other than yourself, click the "Add another item" button and repeat the same process.
+    In the "Edit Permissions and Authorship" section, you should be automatically added as a contributor as your username. Listed contributors have the ability to edit the content, and are also credited as content contributors when the content is published. If there are any other contributors, add them by typing the first few letters of their name into the field. Their screen name should pop up. Select their name. To add more than one contributor other than yourself, click the "Add another item" button and repeat the same process.
 
-7. Next, in the "View Permissions and Groups", toggle the "Everyone can view this content" on or off to determine who can view the content.
+7. Next, in the "View Permissions and Groups", you will come across the "Everyone can view this content" toggle. By default, the toggle will be set to on, meaning everyone on the Web can view the content. If you want to restrict access to the content, turn this off. 
 
-    If you choose on, complete the "Group association and view access" by adding groups by typing in its name into the field. 
+    If you choose to leave the toggle on, you can still associate the content with a particular group. To do so, complete the "Group association and view access." You can select a group with which to associate the content by typing in its name into the field. 
 
-    If you choose off, add the people who have access to this memo by adding typing in their screen name and clicking it. Continue to completing the "Group association and view access" field just as instructed above.
+    If you choose to restrict access to the content, you can designate specific people or groups that will have view access. Add the people who should have view access to this memo by typing their screen name into the "People with view access" field. Add groups whose members should have view access to this memo by typing the group name into the "Group association and view access" field. **Note that if you give a group view access, it will also associate the content with that group. This means the content will appear on the group's page.**
 
 8. Next, click on the "Contribution Metadata" tab.
 
