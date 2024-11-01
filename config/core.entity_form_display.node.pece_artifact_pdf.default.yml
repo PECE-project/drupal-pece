@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_language
     - field.field.node.pece_artifact_pdf.field_location
     - field.field.node.pece_artifact_pdf.field_pdf_artifact_document
+    - field.field.node.pece_artifact_pdf.field_pdf_artifact_media_doc
     - field.field.node.pece_artifact_pdf.field_pece_all_can_view
     - field.field.node.pece_artifact_pdf.field_pece_geolocation
     - field.field.node.pece_artifact_pdf.field_pece_license
@@ -27,10 +28,12 @@ dependencies:
   module:
     - address
     - datetime
+    - entity_form_field_label
     - field_group
-    - file
     - geolocation
     - languagefield
+    - media_library
+    - media_library_edit
     - path
     - text
 third_party_settings:
@@ -248,13 +251,19 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_pdf_artifact_document:
-    type: file_generic
+  field_pdf_artifact_media_doc:
+    type: media_library_widget
     weight: 1
     region: content
     settings:
-      progress_indicator: throbber
-    third_party_settings: {  }
+      media_types: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_pece_all_can_view:
     type: boolean_checkbox
     weight: 22
@@ -264,7 +273,7 @@ content:
     third_party_settings: {  }
   field_pece_geolocation:
     type: geolocation_latlng
-    weight: 10
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -391,11 +400,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   field_cite_as: true
+  field_pdf_artifact_document: true
   langcode: true
   og_audience: true

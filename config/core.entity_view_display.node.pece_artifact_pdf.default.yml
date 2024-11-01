@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_language
     - field.field.node.pece_artifact_pdf.field_location
     - field.field.node.pece_artifact_pdf.field_pdf_artifact_document
+    - field.field.node.pece_artifact_pdf.field_pdf_artifact_media_doc
     - field.field.node.pece_artifact_pdf.field_pece_all_can_view
     - field.field.node.pece_artifact_pdf.field_pece_geolocation
     - field.field.node.pece_artifact_pdf.field_pece_license
@@ -87,34 +88,6 @@ third_party_settings:
             layout_collapse_classes: ''
             layout_collapse_summary: ''
         components:
-          6c004230-e112-4f0b-925e-4226281a4fa5:
-            uuid: 6c004230-e112-4f0b-925e-4226281a4fa5
-            region: one_a
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_pdf_artifact_document'
-              label: 'PDF Document'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: pdf_default
-                label: hidden
-                settings:
-                  keep_pdfjs: 1
-                  width: 100%
-                  height: ''
-                  page: ''
-                  zoom: ''
-                  custom_zoom: ''
-                  pagemode: ''
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 1
-            additional: {  }
           1711f54c-2332-4113-abe1-599b0aac7331:
             uuid: 1711f54c-2332-4113-abe1-599b0aac7331
             region: two_b
@@ -484,7 +457,7 @@ third_party_settings:
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-            weight: 2
+            weight: 3
             additional: {  }
           f2395b5a-5120-4d80-9edb-8233a97a0614:
             uuid: f2395b5a-5120-4d80-9edb-8233a97a0614
@@ -502,7 +475,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 3
+            weight: 4
             additional: {  }
           1c2b8205-e48a-4235-968c-4fc2537061cf:
             uuid: 1c2b8205-e48a-4235-968c-4fc2537061cf
@@ -520,7 +493,29 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 4
+            weight: 5
+            additional: {  }
+          526d367b-0b4a-4adc-8333-e4c2d21dc7b4:
+            uuid: 526d367b-0b4a-4adc-8333-e4c2d21dc7b4
+            region: one_a
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pdf_artifact_media_doc'
+              label: 'PDF Document'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 1
             additional: {  }
         third_party_settings: {  }
   layout_library:
@@ -621,6 +616,15 @@ content:
     third_party_settings: {  }
     weight: 129
     region: content
+  field_pdf_artifact_media_doc:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 132
+    region: one_a
   field_pece_all_can_view:
     type: boolean
     label: above
