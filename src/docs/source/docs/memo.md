@@ -27,7 +27,7 @@ Steps to Create a Memo
 
 6. Next are two tabs: "Permissions, Authorship, and Groups" and "Contribution Metadata". The "Permissions, Authorship, and Groups" should be automatically opened. 
 
-    In the "Edit Permissions and Authorship" section, you should be automatically added as a contributor as your username. If there are any other contributors, add them by typing the first few letters of their name into the field. Their screen name should pop up. Select their name. To add more than one contributor other than yourself, click the "Add another item" button and repeat the same process.
+    In the "Edit Permissions and Authorship" section, you should be automatically added as a contributor as your username. Listed contributors have the ability to edit the content, and are also credited as content contributors when the content is published. If there are any other contributors, add them by typing the first few letters of their name into the field. Their screen name should pop up. Select their name. To add more than one contributor other than yourself, click the "Add another item" button and repeat the same process.
 
 7. Next, in the "View Permissions and Groups", toggle the "Everyone can view this content" on or off to determine who can view the content.
 
