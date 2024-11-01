@@ -1,0 +1,31 @@
+uuid: ff0faabc-5eaf-4c5f-bc90-3e647000c0e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_video_artifact_media_video
+    - media.type.private_video
+    - media.type.remote_video
+    - node.type.artifact_video
+id: node.artifact_video.field_video_artifact_media_video
+field_name: field_video_artifact_media_video
+entity_type: node
+bundle: artifact_video
+label: Video
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      private_video: private_video
+      remote_video: remote_video
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: private_video
+field_type: entity_reference

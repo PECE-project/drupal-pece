@@ -23,6 +23,7 @@ dependencies:
     - field.field.node.artifact_video.field_source
     - field.field.node.artifact_video.field_tags
     - field.field.node.artifact_video.field_use_fieldsite_local
+    - field.field.node.artifact_video.field_video_artifact_media_video
     - field.field.node.artifact_video.field_video_artifact_video
     - field.field.node.artifact_video.field_video_format
     - node.type.artifact_video
@@ -88,36 +89,6 @@ third_party_settings:
             layout_collapse_classes: ''
             layout_collapse_summary: ''
         components:
-          40864c80-b547-4f72-9b77-ab5290b8e795:
-            uuid: 40864c80-b547-4f72-9b77-ab5290b8e795
-            region: one_a
-            configuration:
-              id: 'field_block:node:artifact_video:field_video_artifact_video'
-              label: Video
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: file_video
-                label: above
-                settings:
-                  controls: true
-                  autoplay: false
-                  loop: false
-                  multiple_file_display_type: tags
-                  muted: false
-                  width: 640
-                  height: 480
-                third_party_settings:
-                  blazy:
-                    blazy: false
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 0
-            additional: {  }
           d4f1f332-27dd-4b17-a1ba-c7d2c9031f01:
             uuid: d4f1f332-27dd-4b17-a1ba-c7d2c9031f01
             region: two_b
@@ -524,7 +495,7 @@ third_party_settings:
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-            weight: 1
+            weight: 3
             additional: {  }
           54c03b88-f5ff-4657-88b4-7babe055622c:
             uuid: 54c03b88-f5ff-4657-88b4-7babe055622c
@@ -538,6 +509,28 @@ third_party_settings:
                 type: geolocation_latlng
                 label: above
                 settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 4
+            additional: {  }
+          1a4ca90c-4163-42c6-b8ee-59d119f4765f:
+            uuid: 1a4ca90c-4163-42c6-b8ee-59d119f4765f
+            region: one_a
+            configuration:
+              id: 'field_block:node:artifact_video:field_video_artifact_media_video'
+              label: Video
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
                 third_party_settings:
                   entity_form_field_label:
                     new_label: ''
@@ -707,6 +700,15 @@ content:
     third_party_settings: {  }
     weight: 109
     region: content
+  field_video_artifact_media_video:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 133
+    region: one_a
   field_video_artifact_video:
     type: file_default
     label: above
