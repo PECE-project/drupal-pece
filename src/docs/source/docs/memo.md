@@ -91,7 +91,7 @@ protections). Selecting “Open” make the artifact visible to all internet use
 Frequently Asked Questions
 ---------------------------------------
 
-### What is the difference between a text artifact and a field note?
+### What is the difference between a text artifact and a memo?
 
 A text artifact and a fieldnote are technically very similar. However,
 unlike a text artifact, a fieldnote will not have a title; the date the
@@ -99,6 +99,12 @@ fieldnote was created will become the title. Also a fieldnote will
 appear in the field diary on user’s dashboard. If associated with a
 group, a fieldnote will also appear under the Field Diary tab of the
 group’s page, ordered by the date created.
+
+Memo - first draft writing to medidiate on findings and data anlysis 
+commented on - architectual
+Text Artifact - a piece of data thtat will be analaysed
+annotated - architectual
+
 
 ### What is an artifact bundle, and why would I use it?
 
