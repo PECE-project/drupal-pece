@@ -1,0 +1,21 @@
+uuid: 8fcaec14-2714-49be-bd8e-592cbf043df4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.private_video.field_private_media_video_file
+    - media.type.private_video
+id: media.private_video.media_library
+targetEntityType: media
+bundle: private_video
+mode: media_library
+content: {  }
+hidden:
+  created: true
+  field_private_media_video_file: true
+  langcode: true
+  name: true
+  path: true
+  status: true
+  uid: true
