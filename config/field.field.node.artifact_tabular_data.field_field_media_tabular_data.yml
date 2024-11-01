@@ -1,0 +1,29 @@
+uuid: 030e472a-d0b0-4d31-970d-8e5aeb6e00c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_field_media_tabular_data
+    - media.type.private_tabular_data
+    - node.type.artifact_tabular_data
+id: node.artifact_tabular_data.field_field_media_tabular_data
+field_name: field_field_media_tabular_data
+entity_type: node
+bundle: artifact_tabular_data
+label: 'Tabular data'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      private_tabular_data: private_tabular_data
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

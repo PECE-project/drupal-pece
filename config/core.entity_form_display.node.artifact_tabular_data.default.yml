@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.artifact_tabular_data.field_cite_as
     - field.field.node.artifact_tabular_data.field_created_date
     - field.field.node.artifact_tabular_data.field_crit_commentary
+    - field.field.node.artifact_tabular_data.field_field_media_tabular_data
     - field.field.node.artifact_tabular_data.field_fieldsite
     - field.field.node.artifact_tabular_data.field_groups_with_view_access
     - field.field.node.artifact_tabular_data.field_language
@@ -19,6 +20,7 @@ dependencies:
     - field.field.node.artifact_tabular_data.field_people_with_edit_access
     - field.field.node.artifact_tabular_data.field_people_with_view_access
     - field.field.node.artifact_tabular_data.field_source
+    - field.field.node.artifact_tabular_data.field_tablr_media_attachments
     - field.field.node.artifact_tabular_data.field_tabular_attachment
     - field.field.node.artifact_tabular_data.field_tabular_media
     - field.field.node.artifact_tabular_data.field_tags
@@ -27,10 +29,12 @@ dependencies:
   module:
     - address
     - datetime
+    - entity_form_field_label
     - field_group
-    - file
     - geolocation
     - languagefield
+    - media_library
+    - media_library_edit
     - path
     - text
 third_party_settings:
@@ -204,6 +208,19 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_field_media_tabular_data:
+    type: media_library_widget
+    weight: 1
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_fieldsite:
     type: entity_reference_autocomplete
     weight: 36
@@ -312,20 +329,19 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_tabular_attachment:
-    type: file_generic
+  field_tablr_media_attachments:
+    type: media_library_widget
     weight: 2
     region: content
     settings:
-      progress_indicator: throbber
-    third_party_settings: {  }
-  field_tabular_media:
-    type: file_generic
-    weight: 1
-    region: content
-    settings:
-      progress_indicator: throbber
-    third_party_settings: {  }
+      media_types: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_tags:
     type: entity_reference_autocomplete
     weight: 39
@@ -389,10 +405,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   field_cite_as: true
+  field_tabular_attachment: true
+  field_tabular_media: true
   langcode: true
