@@ -29,7 +29,7 @@ Steps to Create a Memo
 
     In the "Edit Permissions and Authorship" section, you should be automatically added as a contributor as your username. Listed contributors have the ability to edit the content, and are also credited as content contributors when the content is published. If there are any other contributors, add them by typing the first few letters of their name into the field. Their screen name should pop up. Select their name. To add more than one contributor other than yourself, click the "Add another item" button and repeat the same process.
 
-7. Next, in the "View Permissions and Groups", toggle the "Everyone can view this content" on or off to determine who can view the content.
+7. Next, in the "View Permissions and Groups", you will come across the "Everyone can view this content" toggle. By default, the toggle will be set to on, meaning everyone on the Web can view the content. If you want to restrict access to the content, turn this off. 
 
     If you choose on, complete the "Group association and view access" by adding groups by typing in its name into the field. 
 
