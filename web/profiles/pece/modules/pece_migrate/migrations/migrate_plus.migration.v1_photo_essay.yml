@@ -62,20 +62,6 @@ process:
       - 0
       - summary
     default: ''
-  field_essay_thumbnail/target_id:
-    -
-      plugin: default_value
-      source: field_thumbnail
-      default_value:
-        -
-          fid: null
-    -
-      plugin: extract
-      index:
-        - 0
-        - fid
-      default: null
-  field_photo_essay_items:
   field_photo_essay_items:
     plugin: sub_process
     source: field_pece_photo_essay_items
@@ -143,6 +129,15 @@ process:
       source:
         - '@_empty_groups_lookup_fallback'
         - pece_researchers_group
+  field_media_thumbnail:
+    plugin: sub_process
+    source: field_thumbnail
+    process:
+      target_id:
+        plugin: migration_lookup
+        source: fid
+        migration:
+          - v1_media_pece_photo_essay_thumbnail
 destination:
   plugin: 'entity_complete:node'
   translations: true
@@ -155,3 +150,4 @@ migration_dependencies:
     - v1_group
     - v1_taxonomy_term_tags
     - v1_photo_items
+    - v1_media_pece_photo_essay_thumbnail
