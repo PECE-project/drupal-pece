@@ -1,0 +1,31 @@
+uuid: ab5c7deb-7d5b-442c-b7a9-4234f6490d37
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.analytics
+  module:
+    - views
+name: analytic_browser
+label: 'Analytic browser'
+display: iframe
+display_configuration:
+  width: '650'
+  height: '500'
+  link_text: 'Select entities'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  0464de06-ff59-4078-a93b-2ab2330e6fa3:
+    id: view
+    uuid: 0464de06-ff59-4078-a93b-2ab2330e6fa3
+    label: view
+    weight: 2
+    settings:
+      submit_text: 'Select entities'
+      auto_select: false
+      view: analytics
+      view_display: entity_browser_1
