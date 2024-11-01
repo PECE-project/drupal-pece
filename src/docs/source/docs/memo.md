@@ -31,7 +31,7 @@ Steps to Create a Memo
 
 7. Next, in the "View Permissions and Groups", you will come across the "Everyone can view this content" toggle. By default, the toggle will be set to on, meaning everyone on the Web can view the content. If you want to restrict access to the content, turn this off. 
 
-    If you choose on, complete the "Group association and view access" by adding groups by typing in its name into the field. 
+    If you choose to leave the toggle on, you can still associate the content with a particular group. To do so, complete the "Group association and view access." You can select a group with which to associate the content by typing in its name into the field. 
 
     If you choose off, add the people who have access to this memo by adding typing in their screen name and clicking it. Continue to completing the "Group association and view access" field just as instructed above.
 
