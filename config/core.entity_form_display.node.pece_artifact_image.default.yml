@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.pece_artifact_image.field_file_format
     - field.field.node.pece_artifact_image.field_groups_with_view_access
     - field.field.node.pece_artifact_image.field_image_artifact_image
+    - field.field.node.pece_artifact_image.field_image_artifact_media_image
     - field.field.node.pece_artifact_image.field_image_file_format
     - field.field.node.pece_artifact_image.field_language
     - field.field.node.pece_artifact_image.field_location
@@ -24,15 +25,16 @@ dependencies:
     - field.field.node.pece_artifact_image.field_source
     - field.field.node.pece_artifact_image.field_tags
     - field.field.node.pece_artifact_image.field_use_fieldsite_local
-    - image.style.thumbnail
     - node.type.pece_artifact_image
   module:
     - address
     - datetime
+    - entity_form_field_label
     - field_group
     - geolocation
-    - image
     - languagefield
+    - media_library
+    - media_library_edit
     - path
     - text
 third_party_settings:
@@ -236,14 +238,19 @@ content:
       placeholder: ''
     third_party_settings:
       conditional_fields: {  }
-  field_image_artifact_image:
-    type: image_image
+  field_image_artifact_media_image:
+    type: media_library_widget
     weight: 1
     region: content
     settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
+      media_types: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_image_file_format:
     type: string_textfield
     weight: 7
@@ -402,11 +409,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   field_cite_as: true
+  field_image_artifact_image: true
   langcode: true
   og_audience: true

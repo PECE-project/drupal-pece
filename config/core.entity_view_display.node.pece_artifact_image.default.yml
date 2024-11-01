@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.pece_artifact_image.field_file_format
     - field.field.node.pece_artifact_image.field_groups_with_view_access
     - field.field.node.pece_artifact_image.field_image_artifact_image
+    - field.field.node.pece_artifact_image.field_image_artifact_media_image
     - field.field.node.pece_artifact_image.field_image_file_format
     - field.field.node.pece_artifact_image.field_language
     - field.field.node.pece_artifact_image.field_location
@@ -87,25 +88,6 @@ third_party_settings:
             layout_collapse_classes: ''
             layout_collapse_summary: ''
         components:
-          cea2b565-0248-4502-8681-5c0aa6061786:
-            uuid: cea2b565-0248-4502-8681-5c0aa6061786
-            region: one_a
-            configuration:
-              id: 'field_block:node:pece_artifact_image:field_image_artifact_image'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: image
-                label: above
-                settings:
-                  image_link: ''
-                  image_style: ''
-                  image_loading:
-                    attribute: lazy
-                third_party_settings: {  }
-            weight: 0
-            additional: {  }
           b5aa6906-08df-4d55-b495-215f46e6bf41:
             uuid: b5aa6906-08df-4d55-b495-215f46e6bf41
             region: two_a
@@ -496,6 +478,28 @@ third_party_settings:
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
+            weight: 2
+            additional: {  }
+          fa9f736f-3856-4edc-a066-c465632a60b3:
+            uuid: fa9f736f-3856-4edc-a066-c465632a60b3
+            region: one_a
+            configuration:
+              id: 'field_block:node:pece_artifact_image:field_image_artifact_media_image'
+              label: Image
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
             weight: 1
             additional: {  }
         third_party_settings: {  }
@@ -582,6 +586,15 @@ content:
     third_party_settings: {  }
     weight: 131
     region: first
+  field_image_artifact_media_image:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 133
+    region: one_a
   field_image_file_format:
     type: string
     label: above

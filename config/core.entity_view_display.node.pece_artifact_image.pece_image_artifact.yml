@@ -5,28 +5,29 @@ dependencies:
   config:
     - core.entity_view_mode.node.pece_image_artifact
     - field.field.node.pece_artifact_image.field_ark_enabled
-    - field.field.node.pece_artifact_image.field_file_format
-    - field.field.node.pece_artifact_image.field_groups_with_view_access
-    - field.field.node.pece_artifact_image.field_image_artifact_image
     - field.field.node.pece_artifact_image.field_authors
+    - field.field.node.pece_artifact_image.field_cite_as
     - field.field.node.pece_artifact_image.field_created_date
     - field.field.node.pece_artifact_image.field_crit_commentary
     - field.field.node.pece_artifact_image.field_fieldsite
-    - field.field.node.pece_artifact_image.field_use_fieldsite_local
+    - field.field.node.pece_artifact_image.field_file_format
+    - field.field.node.pece_artifact_image.field_groups_with_view_access
+    - field.field.node.pece_artifact_image.field_image_artifact_image
+    - field.field.node.pece_artifact_image.field_image_artifact_media_image
     - field.field.node.pece_artifact_image.field_image_file_format
     - field.field.node.pece_artifact_image.field_language
     - field.field.node.pece_artifact_image.field_location
-    - field.field.node.pece_artifact_image.field_source
     - field.field.node.pece_artifact_image.field_pece_all_can_view
     - field.field.node.pece_artifact_image.field_pece_geolocation
     - field.field.node.pece_artifact_image.field_pece_license
     - field.field.node.pece_artifact_image.field_pece_project_ref
     - field.field.node.pece_artifact_image.field_people_with_edit_access
     - field.field.node.pece_artifact_image.field_people_with_view_access
+    - field.field.node.pece_artifact_image.field_source
     - field.field.node.pece_artifact_image.field_tags
+    - field.field.node.pece_artifact_image.field_use_fieldsite_local
     - node.type.pece_artifact_image
   module:
-    - image
     - user
 _core:
   default_config_hash: bfLJmQpGoG-Uz1b_f4gcrEXsk2N_g8WWK0Dz53xbjuQ
@@ -35,14 +36,18 @@ targetEntityType: node
 bundle: pece_artifact_image
 mode: pece_image_artifact
 content:
-  field_image_artifact_image:
-    type: image
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_image_artifact_media_image:
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
+      view_mode: default
+      link: true
     third_party_settings: {  }
     weight: 0
     region: content
@@ -57,6 +62,7 @@ hidden:
   field_fieldsite: true
   field_file_format: true
   field_groups_with_view_access: true
+  field_image_artifact_image: true
   field_image_file_format: true
   field_language: true
   field_location: true
