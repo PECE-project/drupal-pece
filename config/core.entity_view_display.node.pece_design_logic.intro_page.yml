@@ -5,37 +5,35 @@ dependencies:
   config:
     - core.entity_view_mode.node.intro_page
     - field.field.node.pece_design_logic.body
+    - field.field.node.pece_design_logic.field_media_thumbnail
     - field.field.node.pece_design_logic.field_subst_logic_image_citation
     - field.field.node.pece_design_logic.field_thumbnail
     - node.type.pece_design_logic
   module:
-    - image
     - user
 id: node.pece_design_logic.intro_page
 targetEntityType: node
 bundle: pece_design_logic
 mode: intro_page
 content:
-  field_thumbnail:
-    type: image
+  field_media_thumbnail:
+    type: entity_reference_label
     label: above
     settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
+      link: true
     third_party_settings: {  }
-    weight: 1
+    weight: 0
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 1
     region: content
 hidden:
   body: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_subst_logic_image_citation: true
+  field_thumbnail: true
   langcode: true
   search_api_excerpt: true

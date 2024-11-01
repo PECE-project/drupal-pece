@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_design_logic.body
+    - field.field.node.pece_design_logic.field_media_thumbnail
     - field.field.node.pece_design_logic.field_subst_logic_image_citation
     - field.field.node.pece_design_logic.field_thumbnail
     - node.type.pece_design_logic
@@ -42,25 +43,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 0
             additional: {  }
-          32184706-fae3-4c3f-a9f8-bf196ceffa74:
-            uuid: 32184706-fae3-4c3f-a9f8-bf196ceffa74
-            region: second
-            configuration:
-              id: 'field_block:node:pece_design_logic:field_thumbnail'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: image
-                label: above
-                settings:
-                  image_link: ''
-                  image_style: ''
-                  image_loading:
-                    attribute: lazy
-                third_party_settings: {  }
-            weight: 0
-            additional: {  }
           ebfd974e-7411-4f14-a0e4-5520bd95e06b:
             uuid: ebfd974e-7411-4f14-a0e4-5520bd95e06b
             region: second
@@ -82,7 +64,29 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 1
+            weight: 2
+            additional: {  }
+          699cef29-71e7-408f-9c3e-8358ad22010a:
+            uuid: 699cef29-71e7-408f-9c3e-8358ad22010a
+            region: second
+            configuration:
+              id: 'field_block:node:pece_design_logic:field_media_thumbnail'
+              label: 'Media thumbnail'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 0
             additional: {  }
         third_party_settings: {  }
   layout_library:
@@ -99,6 +103,18 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  field_media_thumbnail:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 104
+    region: first
   field_subst_logic_image_citation:
     type: link
     label: above
