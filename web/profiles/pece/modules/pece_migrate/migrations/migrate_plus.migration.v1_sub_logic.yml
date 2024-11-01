@@ -75,16 +75,6 @@ process:
         - 0
         - summary
       default: ''
-  field_thumbnail:
-    -
-      plugin: sub_process
-      source: field_basic_image_image
-      process:
-        target_id: fid
-        alt: alt
-        title: title
-        width: width
-        height: height
   field_people_with_edit_access: people_with_edit_access
   field_subst_logic_image_citation:
     -
@@ -97,10 +87,15 @@ process:
       process:
         target_id: tid
   field_uri: field_pece_uri
-  # field_metatag:
-  #   -
-  #     plugin: d7_metatag_entities
-  #     source: pseudo_metatag_entities
+  field_media_thumbnail:
+    plugin: sub_process
+    source: field_basic_image_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        source: fid
+        migration:
+          - v1_media_sub_logic_thumbnail
 destination:
   plugin: 'entity_complete:node'
   translations: true
@@ -110,3 +105,4 @@ migration_dependencies:
     - v1_user
     - v1_inline_image
     - v1_taxonomy_term_tags
+    - v1_media_sub_logic_thumbnail
