@@ -1,0 +1,20 @@
+uuid: fba45318-f57f-4e5c-8e59-9c5e638a08a2
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - node
+id: node.field_audio_artifact_media_audio
+field_name: field_audio_artifact_media_audio
+entity_type: node
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
