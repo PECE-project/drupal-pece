@@ -1,9 +1,9 @@
-uuid: 0630720e-e7fa-438c-ba97-2d76f10cd63e
+uuid: c58b4537-45f2-4b85-855a-21b62c309bc2
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.intro_page
     - field.field.node.pece_substantive_logic.body
     - field.field.node.pece_substantive_logic.field_media_thumbnail
     - field.field.node.pece_substantive_logic.field_pece_all_can_view
@@ -15,12 +15,10 @@ dependencies:
     - node.type.pece_substantive_logic
   module:
     - user
-_core:
-  default_config_hash: Gygi1Y7_ICbEXciBNeWveAJptgr6RAnfpQtkxmItOM0
-id: node.pece_substantive_logic.teaser
+id: node.pece_substantive_logic.intro_page
 targetEntityType: node
 bundle: pece_substantive_logic
-mode: teaser
+mode: intro_page
 content:
   'extra_field_type_tray_icon_display:icons':
     type: 'extra_field_type_tray_icon_display:icons'
@@ -28,12 +26,8 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_media_thumbnail:
-    type: entity_reference_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: true
+  links:
+    settings: {  }
     third_party_settings: {  }
     weight: 1
     region: content
@@ -41,6 +35,7 @@ hidden:
   body: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  field_media_thumbnail: true
   field_pece_all_can_view: true
   field_people_with_edit_access: true
   field_subst_logic_image_citation: true
@@ -48,5 +43,4 @@ hidden:
   field_thumbnail: true
   field_uri: true
   langcode: true
-  links: true
   search_api_excerpt: true

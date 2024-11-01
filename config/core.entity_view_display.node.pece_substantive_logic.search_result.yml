@@ -5,17 +5,16 @@ dependencies:
   config:
     - core.entity_view_mode.node.search_result
     - field.field.node.pece_substantive_logic.body
+    - field.field.node.pece_substantive_logic.field_media_thumbnail
     - field.field.node.pece_substantive_logic.field_pece_all_can_view
     - field.field.node.pece_substantive_logic.field_people_with_edit_access
     - field.field.node.pece_substantive_logic.field_subst_logic_image_citation
     - field.field.node.pece_substantive_logic.field_tags
     - field.field.node.pece_substantive_logic.field_thumbnail
     - field.field.node.pece_substantive_logic.field_uri
-    - image.style.thumbnail
     - node.type.pece_substantive_logic
   module:
     - entity_form_field_label
-    - image
     - layout_builder
     - text
     - user
@@ -44,14 +43,12 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_thumbnail:
-    type: image
+  field_media_thumbnail:
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      image_link: content
-      image_style: thumbnail
-      image_loading:
-        attribute: lazy
+      view_mode: default
+      link: false
     third_party_settings:
       entity_form_field_label:
         new_label: ''
@@ -65,6 +62,7 @@ hidden:
   field_people_with_edit_access: true
   field_subst_logic_image_citation: true
   field_tags: true
+  field_thumbnail: true
   field_uri: true
   langcode: true
   links: true

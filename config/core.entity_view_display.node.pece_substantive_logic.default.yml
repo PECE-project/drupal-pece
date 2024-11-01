@@ -4,14 +4,16 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_substantive_logic.body
+    - field.field.node.pece_substantive_logic.field_media_thumbnail
     - field.field.node.pece_substantive_logic.field_pece_all_can_view
     - field.field.node.pece_substantive_logic.field_people_with_edit_access
     - field.field.node.pece_substantive_logic.field_subst_logic_image_citation
-    - field.field.node.pece_substantive_logic.field_thumbnail
     - field.field.node.pece_substantive_logic.field_tags
+    - field.field.node.pece_substantive_logic.field_thumbnail
     - field.field.node.pece_substantive_logic.field_uri
     - node.type.pece_substantive_logic
   module:
+    - entity_form_field_label
     - image
     - layout_builder
     - link
@@ -44,26 +46,6 @@ third_party_settings:
                 type: text_default
                 label: above
                 settings: {  }
-                third_party_settings: {  }
-            weight: 0
-            additional: {  }
-          cfac6a25-23a0-4b7a-bc6a-ba2bb57d894c:
-            uuid: cfac6a25-23a0-4b7a-bc6a-ba2bb57d894c
-            region: second
-            configuration:
-              id: 'field_block:node:pece_substantive_logic:field_thumbnail'
-              label: Thumbnail
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: image
-                label: above
-                settings:
-                  image_link: ''
-                  image_style: ''
                 third_party_settings: {  }
             weight: 0
             additional: {  }
@@ -106,7 +88,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: Contributor(s)
                     rewrite_label: 1
-            weight: 2
+            weight: 3
             additional: {  }
           8117439b-ab17-491a-9c87-653dd66fbe7c:
             uuid: 8117439b-ab17-491a-9c87-653dd66fbe7c
@@ -140,7 +122,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: 'Created date'
                     rewrite_label: 1
-            weight: 3
+            weight: 4
             additional: {  }
           b7b21b6e-ff7e-4124-9cb1-0bf4e31903bd:
             uuid: b7b21b6e-ff7e-4124-9cb1-0bf4e31903bd
@@ -166,7 +148,39 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
+            weight: 2
+            additional: {  }
+          c56154f9-e535-4998-98bc-5b2951bf8dd0:
+            uuid: c56154f9-e535-4998-98bc-5b2951bf8dd0
+            region: first
+            configuration:
+              id: 'extra_field_block:node:pece_substantive_logic:extra_field_type_tray_icon_display:icons'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
             weight: 1
+            additional: {  }
+          6b6e3858-8d08-4bd8-84cd-3abf150eb72b:
+            uuid: 6b6e3858-8d08-4bd8-84cd-3abf150eb72b
+            region: second
+            configuration:
+              id: 'field_block:node:pece_substantive_logic:field_media_thumbnail'
+              label: 'Media thumbnail'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 0
             additional: {  }
         third_party_settings: {  }
 _core:
@@ -183,6 +197,23 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  'extra_field_type_tray_icon_display:icons':
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: first
+  field_media_thumbnail:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 111
+    region: first
   field_pece_all_can_view:
     type: boolean
     label: above
