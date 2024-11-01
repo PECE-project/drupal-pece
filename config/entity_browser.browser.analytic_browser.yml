@@ -5,6 +5,7 @@ dependencies:
   config:
     - views.view.analytics
   module:
+    - entity_browser_entity_form
     - views
 name: analytic_browser
 label: 'Analytic browser'
@@ -22,10 +23,20 @@ widgets:
   0464de06-ff59-4078-a93b-2ab2330e6fa3:
     id: view
     uuid: 0464de06-ff59-4078-a93b-2ab2330e6fa3
-    label: view
-    weight: 2
+    label: 'Select question'
+    weight: -10
     settings:
       submit_text: 'Select entities'
       auto_select: false
       view: analytics
       view_display: entity_browser_1
+  3b040900-c388-4eb3-bec1-c08b2dcfb879:
+    id: entity_form
+    uuid: 3b040900-c388-4eb3-bec1-c08b2dcfb879
+    label: 'Add question'
+    weight: -9
+    settings:
+      submit_text: 'Save entity'
+      entity_type: node
+      bundle: pece_analytic
+      form_mode: default
