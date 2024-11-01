@@ -297,15 +297,20 @@ display:
             default_group_multiple: {  }
             group_items: {  }
       style:
-        type: default
+        type: grid
         options:
           grouping:
             -
               field: field_analytic_question_set
               rendered: false
               rendered_strip: true
-          row_class: ''
-          default_row_class: true
+          columns: 1
+          automatic_width: true
+          alignment: horizontal
+          row_class_custom: ''
+          row_class_default: true
+          col_class_custom: ''
+          col_class_default: true
       row:
         type: fields
         options:
