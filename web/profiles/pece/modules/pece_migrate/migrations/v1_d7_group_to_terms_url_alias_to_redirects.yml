@@ -1,0 +1,53 @@
+id: v1_d7_group_to_terms_url_alias_to_redirects
+class: Drupal\migrate\Plugin\Migration
+migration_tags:
+  - 'Drupal 7'
+  - 'PECE v1'
+label: 'URL aliases group to taxonomy term Redirects'
+migration_group: pece
+
+source:
+  plugin: v1_node_url_alias
+  bundle: pece_group
+  constants:
+    uri_prefix: 'internal:/taxonomy/term/'
+    status_code: 301
+
+process:
+  _d7_group_nid:
+    plugin: str_replace
+    source: source
+    search: 'node/'
+    replace: ''
+
+  _d10_group_tid:
+    process: migration_lookup
+    source: '@_d7_group_nid'
+    migration: v1_group
+    no_stub: TRUE
+
+  uid:
+    plugin: default_value
+    default_value: 0
+  type:
+    plugin: default_value
+    default_value: redirect
+  redirect_source/path: alias
+  redirect_redirect/uri:
+    plugin: concat
+    source:
+      - constants/uri_prefix
+      - '@_d10_group_tid'
+  language:
+    plugin: default_value
+    source: language
+    default_value: und
+  status_code: constants/status_code
+
+destination:
+  plugin: 'entity:redirect'
+
+migration_dependencies:
+  required:
+    - v1_group
+  optional: {  }
