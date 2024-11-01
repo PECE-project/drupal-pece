@@ -1,9 +1,9 @@
-uuid: 4555c113-a22d-43a3-bf2b-04ce3cb640ee
+uuid: 1236d5a5-6e32-4cee-b01c-c0b910dc88dc
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.intro_page
     - field.field.node.pece_project.body
     - field.field.node.pece_project.field_ark_enabled
     - field.field.node.pece_project.field_fieldsites
@@ -30,18 +30,21 @@ dependencies:
     - node.type.pece_project
   module:
     - user
-_core:
-  default_config_hash: '-6-EiQny4jWjHb2O1kEuyUGtQsy0Jgh0soRECSqTVrA'
-id: node.pece_project.teaser
+id: node.pece_project.intro_page
 targetEntityType: node
 bundle: pece_project
-mode: teaser
+mode: intro_page
 content:
   'extra_field_type_tray_icon_display:icons':
     type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   body: true
@@ -70,6 +73,4 @@ hidden:
   field_tags: true
   field_thumbnail: true
   langcode: true
-  links: true
-  og_audience: true
   search_api_excerpt: true
