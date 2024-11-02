@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.field.node.pece_artifact_audio.field_ark_enabled
     - field.field.node.pece_artifact_audio.field_audio_artifact_media_audio
-    - field.field.node.pece_artifact_audio.field_audio_file_format
     - field.field.node.pece_artifact_audio.field_authors
     - field.field.node.pece_artifact_audio.field_cite_as
     - field.field.node.pece_artifact_audio.field_created_date
@@ -555,14 +554,6 @@ content:
     third_party_settings: {  }
     weight: 135
     region: one_a
-  field_audio_file_format:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 123
-    region: content
   field_authors:
     type: entity_reference_label
     label: above

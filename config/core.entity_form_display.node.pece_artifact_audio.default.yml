@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.field.node.pece_artifact_audio.field_ark_enabled
     - field.field.node.pece_artifact_audio.field_audio_artifact_media_audio
-    - field.field.node.pece_artifact_audio.field_audio_file_format
     - field.field.node.pece_artifact_audio.field_authors
     - field.field.node.pece_artifact_audio.field_cite_as
     - field.field.node.pece_artifact_audio.field_created_date
@@ -210,14 +209,6 @@ content:
       media_library_edit:
         show_edit: '1'
         edit_form_mode: default
-  field_audio_file_format:
-    type: string_textfield
-    weight: 24
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_authors:
     type: entity_reference_autocomplete
     weight: 21
