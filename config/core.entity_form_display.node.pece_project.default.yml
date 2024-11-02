@@ -10,14 +10,12 @@ dependencies:
     - field.field.node.pece_project.field_media_image_banner
     - field.field.node.pece_project.field_media_thumbnail
     - field.field.node.pece_project.field_pece_all_can_view
-    - field.field.node.pece_project.field_pece_media_image
     - field.field.node.pece_project.field_people_with_edit_access
     - field.field.node.pece_project.field_people_with_view_access
     - field.field.node.pece_project.field_project_consent_form_file
     - field.field.node.pece_project.field_project_design_group
     - field.field.node.pece_project.field_project_featured_essays
     - field.field.node.pece_project.field_project_fund_agency_link
-    - field.field.node.pece_project.field_project_image_banner
     - field.field.node.pece_project.field_project_institution_link
     - field.field.node.pece_project.field_project_intv_request_file
     - field.field.node.pece_project.field_project_lead
@@ -26,16 +24,12 @@ dependencies:
     - field.field.node.pece_project.field_project_struct_analytics
     - field.field.node.pece_project.field_project_subst_logic
     - field.field.node.pece_project.field_tags
-    - field.field.node.pece_project.field_thumbnail
     - node.type.pece_project
   module:
     - datetime_range
-    - entity_form_field_label
     - field_group
     - file
     - link
-    - media_library
-    - media_library_edit
     - path
     - text
 third_party_settings:
@@ -209,19 +203,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_pece_media_image:
-    type: media_library_widget
-    weight: 18
-    region: content
-    settings:
-      media_types: {  }
-    third_party_settings:
-      entity_form_field_label:
-        new_label: ''
-        rewrite_label: 0
-      media_library_edit:
-        show_edit: '1'
-        edit_form_mode: default
   field_people_with_edit_access:
     type: entity_reference_autocomplete
     weight: 34
@@ -397,6 +378,4 @@ hidden:
   field_media_thumbnail: true
   field_pece_all_can_view: true
   field_people_with_view_access: true
-  field_project_image_banner: true
-  field_thumbnail: true
   langcode: true

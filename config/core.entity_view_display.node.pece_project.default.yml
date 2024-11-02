@@ -7,16 +7,15 @@ dependencies:
     - field.field.node.pece_project.field_ark_enabled
     - field.field.node.pece_project.field_fieldsites
     - field.field.node.pece_project.field_groups_with_view_access
+    - field.field.node.pece_project.field_media_image_banner
     - field.field.node.pece_project.field_media_thumbnail
     - field.field.node.pece_project.field_pece_all_can_view
-    - field.field.node.pece_project.field_pece_media_image
     - field.field.node.pece_project.field_people_with_edit_access
     - field.field.node.pece_project.field_people_with_view_access
     - field.field.node.pece_project.field_project_consent_form_file
     - field.field.node.pece_project.field_project_design_group
     - field.field.node.pece_project.field_project_featured_essays
     - field.field.node.pece_project.field_project_fund_agency_link
-    - field.field.node.pece_project.field_project_image_banner
     - field.field.node.pece_project.field_project_institution_link
     - field.field.node.pece_project.field_project_intv_request_file
     - field.field.node.pece_project.field_project_lead
@@ -25,13 +24,12 @@ dependencies:
     - field.field.node.pece_project.field_project_struct_analytics
     - field.field.node.pece_project.field_project_subst_logic
     - field.field.node.pece_project.field_tags
-    - field.field.node.pece_project.field_thumbnail
     - node.type.pece_project
   module:
     - dashboards
     - datetime_range
+    - entity_form_field_label
     - file
-    - image
     - layout_builder
     - layout_discovery
     - layout_library
@@ -298,28 +296,6 @@ third_party_settings:
         layout_settings:
           label: ''
         components:
-          994066b7-19e2-4152-9218-8214c61c1586:
-            uuid: 994066b7-19e2-4152-9218-8214c61c1586
-            region: content
-            configuration:
-              id: 'field_block:node:pece_project:field_pece_media_image'
-              label: Image
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_entity_view
-                label: hidden
-                settings:
-                  view_mode: pece_image_artifact
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 11
-            additional: {  }
           094aea3d-39d7-4127-9e12-4c2303d1bb15:
             uuid: 094aea3d-39d7-4127-9e12-4c2303d1bb15
             region: content
@@ -392,15 +368,6 @@ content:
         rewrite_label: 0
     weight: 21
     region: one
-  field_pece_media_image:
-    type: entity_reference_entity_view
-    label: above
-    settings:
-      view_mode: pece_image_artifact
-      link: false
-    third_party_settings: {  }
-    weight: 20
-    region: content
   field_people_with_edit_access:
     type: entity_reference_label
     label: above
@@ -444,17 +411,6 @@ content:
       target: ''
     third_party_settings: {  }
     weight: 6
-    region: content
-  field_project_image_banner:
-    type: image
-    label: above
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: 11
     region: content
   field_project_institution_link:
     type: link
@@ -525,17 +481,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 14
-    region: content
-  field_thumbnail:
-    type: image
-    label: above
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: 7
     region: content
   links:
     settings: {  }
