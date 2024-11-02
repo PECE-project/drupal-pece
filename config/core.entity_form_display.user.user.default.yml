@@ -5,11 +5,8 @@ dependencies:
   config:
     - field.field.user.user.field_groups_joined
     - field.field.user.user.field_groups_managed
-    - field.field.user.user.field_user_picture
     - field.field.user.user.field_zotero
-    - image.style.thumbnail
   module:
-    - image
     - path
     - user
 _core:
@@ -28,14 +25,6 @@ content:
     weight: 2
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_user_picture:
-    type: image_image
-    weight: 6
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
     third_party_settings: {  }
   field_zotero:
     type: string_textfield

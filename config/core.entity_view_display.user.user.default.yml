@@ -5,10 +5,8 @@ dependencies:
   config:
     - field.field.user.user.field_groups_joined
     - field.field.user.user.field_groups_managed
-    - field.field.user.user.field_user_picture
     - field.field.user.user.field_zotero
   module:
-    - image
     - layout_builder
     - layout_discovery
     - layout_library
@@ -25,31 +23,6 @@ third_party_settings:
           context_mapping: {  }
           column_widths: 75-25
         components:
-          6034ab5e-3d08-47e2-ae5c-2d3e393f6c25:
-            uuid: 6034ab5e-3d08-47e2-ae5c-2d3e393f6c25
-            region: second
-            configuration:
-              id: 'field_block:user:user:field_user_picture'
-              label: 'User picture'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: image
-                label: hidden
-                settings:
-                  image_link: ''
-                  image_style: ''
-                  image_loading:
-                    attribute: lazy
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 0
-            additional: {  }
           3d5847f9-5d3d-4c00-8586-cdd94a53c563:
             uuid: 3d5847f9-5d3d-4c00-8586-cdd94a53c563
             region: second
@@ -135,17 +108,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 10
-    region: content
-  field_user_picture:
-    type: image
-    label: above
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: 8
     region: content
   field_zotero:
     type: string
