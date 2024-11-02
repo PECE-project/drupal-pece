@@ -9,12 +9,10 @@ dependencies:
     - field.field.node.pece_substantive_logic.field_people_with_edit_access
     - field.field.node.pece_substantive_logic.field_subst_logic_image_citation
     - field.field.node.pece_substantive_logic.field_tags
-    - field.field.node.pece_substantive_logic.field_thumbnail
     - field.field.node.pece_substantive_logic.field_uri
     - node.type.pece_substantive_logic
   module:
     - entity_form_field_label
-    - image
     - layout_builder
     - link
     - text
@@ -46,25 +44,6 @@ third_party_settings:
                 type: text_default
                 label: above
                 settings: {  }
-                third_party_settings: {  }
-            weight: 0
-            additional: {  }
-          85590f9d-11fd-4f76-b577-55e0483caf9f:
-            uuid: 85590f9d-11fd-4f76-b577-55e0483caf9f
-            region: content
-            configuration:
-              id: 'field_block:node:pece_substantive_logic:field_thumbnail'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: image
-                label: above
-                settings:
-                  image_link: ''
-                  image_style: ''
-                  image_loading:
-                    attribute: lazy
                 third_party_settings: {  }
             weight: 0
             additional: {  }
@@ -251,17 +230,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 107
-    region: content
-  field_thumbnail:
-    type: image
-    label: above
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: 108
     region: content
   field_uri:
     type: string
