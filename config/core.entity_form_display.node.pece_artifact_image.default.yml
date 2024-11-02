@@ -11,9 +11,7 @@ dependencies:
     - field.field.node.pece_artifact_image.field_fieldsite
     - field.field.node.pece_artifact_image.field_file_format
     - field.field.node.pece_artifact_image.field_groups_with_view_access
-    - field.field.node.pece_artifact_image.field_image_artifact_image
     - field.field.node.pece_artifact_image.field_image_artifact_media_image
-    - field.field.node.pece_artifact_image.field_image_file_format
     - field.field.node.pece_artifact_image.field_language
     - field.field.node.pece_artifact_image.field_location
     - field.field.node.pece_artifact_image.field_pece_all_can_view
@@ -251,14 +249,6 @@ content:
       media_library_edit:
         show_edit: '1'
         edit_form_mode: default
-  field_image_file_format:
-    type: string_textfield
-    weight: 7
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_language:
     type: languagefield_select
     weight: 8
@@ -415,6 +405,5 @@ content:
     third_party_settings: {  }
 hidden:
   field_cite_as: true
-  field_image_artifact_image: true
   langcode: true
   og_audience: true
