@@ -22,12 +22,18 @@ Steps to Create a Memo
 
 4. This takes you to the "Create Memo" page. You should now have access to all of the fields you need to fill out in order to create a new memo. First, type the title of your memo in the “Title” field.
 
+    ![](media/memo_5.png)
+
 5. Type your memo into the "Body" field.
     To provide a summary of your memo, click the "Edit summary" link next to "Body".
+
+    ![](media/memo_6.png)
 
 6. Next are two tabs: "Permissions, Authorship, and Groups" and "Contribution Metadata". The "Permissions, Authorship, and Groups" should be automatically opened. 
 
     In the "Edit Permissions and Authorship" section, you should be automatically added as a contributor as your username. Listed contributors have the ability to edit the content, and are also credited as content contributors when the content is published. If there are any other contributors, add them by typing the first few letters of their name into the field. Their screen name should pop up. Select their name. To add more than one contributor other than yourself, click the "Add another item" button and repeat the same process.
+
+    ![](media/memo_7.png)
 
 7. Next, in the "View Permissions and Groups", you will come across the "Everyone can view this content" toggle. By default, the toggle will be set to on, meaning everyone on the Web can view the content. If you want to restrict access to the content, turn this off. 
 
@@ -41,9 +47,7 @@ Steps to Create a Memo
 
 10. Next, add optional keyword tags to your memo. Tag the content. As you type, suggested tags will be automatically generated if they exist already in the system. We recommend following theses suggestions and using existing tags if they are not too different from what you were intending, but feel free to make up new tags!
 
-11. To designate the content as part of a group, select the group's name in the Group Audience field. Select “Public” to make it accessible to all viewers; this is the setting we generally recommend. Select “Private” to limit visibility to Group Members.
-
-12. Finally, scroll back up to the top of the page and click “Save” to save your work. And remember: all of these settings can be revised at time: private artifacts can be made public later, and vice versa, for example.
+11. Finally, scroll back up to the top of the page and click “Save” to save your work. And remember: all of these settings can be revised at time: private artifacts can be made public later, and vice versa, for example.
 
 
 Frequently Asked Questions
