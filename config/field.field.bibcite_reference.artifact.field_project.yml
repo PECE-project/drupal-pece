@@ -1,0 +1,29 @@
+uuid: 2aaaf72b-c959-426d-984d-02970984540d
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.artifact
+    - field.storage.bibcite_reference.field_project
+    - node.type.pece_project
+id: bibcite_reference.artifact.field_project
+field_name: field_project
+entity_type: bibcite_reference
+bundle: artifact
+label: Project
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_project: pece_project
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

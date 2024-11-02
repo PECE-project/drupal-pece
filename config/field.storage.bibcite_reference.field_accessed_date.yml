@@ -1,0 +1,20 @@
+uuid: 122fa261-5a12-4af3-a59a-025f187f3bbf
+langcode: en
+status: true
+dependencies:
+  module:
+    - bibcite_entity
+    - datetime
+id: bibcite_reference.field_accessed_date
+field_name: field_accessed_date
+entity_type: bibcite_reference
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
