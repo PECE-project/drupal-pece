@@ -1,0 +1,48 @@
+id: v1_essay_intro_url_alias_to_redirects
+class: Drupal\migrate\Plugin\Migration
+migration_tags:
+  - 'Drupal 7'
+  - 'PECE v1'
+label: 'URL aliases essay intro page Redirects'
+migration_group: pece
+
+source:
+  plugin: v1_node_url_alias
+  bundle:
+    - pece_essay
+    - pece_timeline_essay
+    - pece_photo_essay
+  constants:
+    uri_prefix: 'internal:/'
+    status_code: 301
+    pece_v2_suffix: '/intro'
+
+process:
+  uid:
+    plugin: default_value
+    default_value: 0
+  type:
+    plugin: default_value
+    default_value: redirect
+  redirect_source/path: alias
+  redirect_redirect/uri:
+    plugin: concat
+    source:
+      - constants/uri_prefix
+      - source
+      - pece_v2_suffix
+  language:
+    plugin: default_value
+    source: language
+    default_value: und
+  status_code: constants/status_code
+
+destination:
+  plugin: 'entity:redirect'
+
+migration_dependencies:
+  required:
+    - v1_essay
+    - v1_timeline_essay
+    - v1_photo_essay
+  optional: {  }

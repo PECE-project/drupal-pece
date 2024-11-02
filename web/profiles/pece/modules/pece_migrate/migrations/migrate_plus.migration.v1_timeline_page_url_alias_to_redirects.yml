@@ -1,0 +1,46 @@
+id: v1_pece_timeline_page_url_alias_to_redirects
+class: Drupal\migrate\Plugin\Migration
+migration_tags:
+  - 'Drupal 7'
+  - 'PECE v1'
+label: 'URL aliases timeline essay page Redirects'
+migration_group: pece
+
+source:
+  plugin: v1_node_url_alias
+  bundle: pece_timeline_essay
+  constants:
+    uri_prefix: 'internal:/'
+    status_code: 301
+    pece_v1_suffix: '/timeline'
+
+process:
+  uid:
+    plugin: default_value
+    default_value: 0
+  type:
+    plugin: default_value
+    default_value: redirect
+  redirect_source/path:
+    plugin: concat
+    source:
+      - alias
+      - constants/pece_v1_suffix
+  redirect_redirect/uri:
+    plugin: concat
+    source:
+      - constants/uri_prefix
+      - source
+  language:
+    plugin: default_value
+    source: language
+    default_value: und
+  status_code: constants/status_code
+
+destination:
+  plugin: 'entity:redirect'
+
+migration_dependencies:
+  required:
+    - v1_timeline_essay
+  optional: {  }
