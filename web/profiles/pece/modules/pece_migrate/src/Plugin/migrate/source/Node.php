@@ -27,6 +27,10 @@ class Node extends D7Node {
   const CONTENT_VISIBILITY_DEFAULT = 0;
   const CONTENT_VISIBILITY_PUBLIC = 1;
   const CONTENT_VISIBILITY_PRIVATE = 1;
+  const CONCEPTUALIZE = 'conceptualize';
+  const CURATE = 'curate';
+  const ARCHIVE = 'archive';
+  const ANALYZE = 'analyze';
 
   protected $permissionByUserView = [];
 
@@ -47,6 +51,10 @@ class Node extends D7Node {
     $fields += ['pece_researchers_group' => $this->t('Pece v1 Researchers')];
     $fields += ['static_legacy_content' => $this->t('Static legacy content')];
     $fields += ['unpublish_content' => $this->t('Unpublish content')];
+    $fields += ['curate' => $this->t('Curate')];
+    $fields += ['conceptualize' => $this->t('Conceptualize')];
+    $fields += ['analyze' => $this->t('Analyze')];
+    $fields += ['archive' => $this->t('Archive')];
     return $fields;
   }
 
@@ -152,12 +160,90 @@ class Node extends D7Node {
 
     $content_type = $row->getSourceProperty('type');
     if ($content_type === 'pece_essay') {
+      // Get the static legacy content of the essay
       $html = $this->select('essay_content', 'ec')
         ->fields('ec', ['content'])
         ->condition('ec.nodeid', $nid)
         ->execute()->fetchField();
 
       $row->setSourceProperty('static_legacy_content', $html);
+
+      // Get the Display ID for the node in its current revision.
+      $did = $this->select('panelizer_entity', 'pe')
+        ->fields('pe', ['did'])
+        ->condition('pe.revision_id', $row->getSourceProperty('vid'));
+
+      // Note that panes_map is a custom table, that must be created before the migration.
+      // Collect the fpid of all fieldable panel panes of the node bundle.
+      $node_fpid = $this->select('panes_map', 'pm')
+        ->fields('pm', ['entity_id'])
+        ->condition('pm.did', $did, 'IN')
+        ->condition('pm.bundle', 'node');
+
+      $referenced_nids = $this->select('field_data_field_node', 'fn')
+        ->fields('fn', ['field_node_target_id'])
+        ->condition('fn.entity_id', $node_fpid, 'IN')
+        ->distinct();
+
+      $referenced_nodes = $this->select('node', 'n')
+        ->fields('n', ['nid', 'type'])
+        ->condition('n.nid', $referenced_nids, 'IN')
+        ->execute()->fetchAllKeyed();
+
+
+      $node_category_map = [
+        'pece_fieldsite' => self::CONCEPTUALIZE,
+        'pece_project' => self::CONCEPTUALIZE,
+        'pece_sub_logic' => self::CONCEPTUALIZE,
+        // 'design logic' => self::CONCEPTUALIZE,
+        'pece_artifact_tabular' => self::ARCHIVE,
+        'pece_artifact_video' => self::ARCHIVE,
+        'pece_artifact_audio' => self::ARCHIVE,
+        'pece_artifact_fieldnote' => self::ARCHIVE,
+        'pece_artifact_image' => self::ARCHIVE,
+        'pece_artifact_pdf' => self::ARCHIVE,
+        'pece_artifact_text' => self::ARCHIVE,
+        'pece_artifact_website' => self::ARCHIVE,
+        'pece_artifact_bundle' => self::ARCHIVE,
+        'pece_analytic' => self::ANALYZE,
+        'pece_annotation' => self::ANALYZE,
+        'pece_memo' => self::ANALYZE,
+        'pece_essay' => self::CURATE,
+        'pece_timeline_essay' => self::CURATE,
+        'pece_photo_essay' => self::CURATE,
+      ];
+
+      $curate = [];
+      $conceptualize = [];
+      $analyze = [];
+      $archive = [];
+      foreach ($referenced_nodes as $nid => $bundle) {
+        if ($node_category_map[$bundle] === self::CONCEPTUALIZE) {
+          $conceptualize[] = [
+            'target_id' => $nid
+          ];
+        }
+        if ($node_category_map[$bundle] === self::CURATE) {
+          $curate[] = [
+            'target_id' => $nid
+          ];
+        }
+        if ($node_category_map[$bundle] === self::ANALYZE) {
+          $analyze[] = [
+            'target_id' => $nid
+          ];
+        }
+        if ($node_category_map[$bundle] === self::ARCHIVE) {
+          $archive[] = [
+            'target_id' => $nid
+          ];
+        }
+      }
+
+      $row->setSourceProperty(self::CONCEPTUALIZE, $conceptualize);
+      $row->setSourceProperty(self::CURATE, $curate);
+      $row->setSourceProperty(self::ANALYZE, $analyze);
+      $row->setSourceProperty(self::ARCHIVE, $archive);
     }
 
     return parent::prepareRow($row);
