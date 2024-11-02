@@ -21,12 +21,10 @@ dependencies:
     - field.field.node.pece_essay.field_people_with_edit_access
     - field.field.node.pece_essay.field_people_with_view_access
     - field.field.node.pece_essay.field_tags
-    - field.field.node.pece_essay.field_thumbnail
     - field.field.node.pece_essay.layout_builder__layout
     - node.type.pece_essay
   module:
     - entity_reference_revisions
-    - image
     - layout_builder
     - text
     - user
@@ -118,23 +116,6 @@ third_party_settings:
                 settings: {  }
                 third_party_settings: {  }
             weight: 1
-            additional: {  }
-          1f9ddd7a-952b-4d82-8458-4b83cfc43ac7:
-            uuid: 1f9ddd7a-952b-4d82-8458-4b83cfc43ac7
-            region: content
-            configuration:
-              id: 'field_block:node:pece_essay:field_thumbnail'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: image
-                label: above
-                settings:
-                  image_link: ''
-                  image_style: ''
-                third_party_settings: {  }
-            weight: 3
             additional: {  }
           0f8dc9f0-c5af-48e8-9753-074a25c5039b:
             uuid: 0f8dc9f0-c5af-48e8-9753-074a25c5039b
@@ -236,25 +217,6 @@ third_party_settings:
                   format_custom_true: ''
                 third_party_settings: {  }
             weight: 12
-            additional: {  }
-          47281139-0c6c-4ca8-af09-7de557c3eacc:
-            uuid: 47281139-0c6c-4ca8-af09-7de557c3eacc
-            region: content
-            configuration:
-              id: 'field_block:node:pece_essay:field_thumbnail'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: image
-                label: above
-                settings:
-                  image_link: ''
-                  image_style: ''
-                  image_loading:
-                    attribute: lazy
-                third_party_settings: {  }
-            weight: 13
             additional: {  }
           2089f081-2869-41cf-97df-ff1a2ca3c9ba:
             uuid: 2089f081-2869-41cf-97df-ff1a2ca3c9ba
@@ -611,17 +573,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 105
-    region: content
-  field_thumbnail:
-    type: image
-    label: above
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: 104
     region: content
   links:
     settings: {  }
