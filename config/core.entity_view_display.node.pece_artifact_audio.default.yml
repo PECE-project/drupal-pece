@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.pece_artifact_audio.field_ark_enabled
-    - field.field.node.pece_artifact_audio.field_audio_artifact_audio
     - field.field.node.pece_artifact_audio.field_audio_artifact_media_audio
     - field.field.node.pece_artifact_audio.field_audio_file_format
     - field.field.node.pece_artifact_audio.field_authors
@@ -31,7 +30,6 @@ dependencies:
     - address
     - datetime
     - entity_form_field_label
-    - file
     - geolocation
     - languagefield
     - layout_builder
@@ -547,14 +545,6 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 120
-    region: content
-  field_audio_artifact_audio:
-    type: file_default
-    label: above
-    settings:
-      use_description_as_link_text: true
-    third_party_settings: {  }
-    weight: 132
     region: content
   field_audio_artifact_media_audio:
     type: entity_reference_entity_view
