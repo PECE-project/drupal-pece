@@ -1,0 +1,23 @@
+uuid: 28782473-670a-47e6-998c-ce5c36dfb94e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_filesize
+    - media.type.private_image
+id: media.private_image.field_filesize
+field_name: field_filesize
+entity_type: media
+bundle: private_image
+label: Filesize
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

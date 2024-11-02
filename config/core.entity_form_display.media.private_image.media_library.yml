@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.media.media_library
+    - field.field.media.private_image.field_filesize
+    - field.field.media.private_image.field_mimetype
     - field.field.media.private_image.field_private_media_image
     - image.style.thumbnail
     - media.type.private_image
@@ -24,6 +26,8 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_filesize: true
+  field_mimetype: true
   langcode: true
   name: true
   path: true

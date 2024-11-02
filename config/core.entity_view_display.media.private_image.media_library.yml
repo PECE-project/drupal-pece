@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.media_library
+    - field.field.media.private_image.field_filesize
+    - field.field.media.private_image.field_mimetype
     - field.field.media.private_image.field_private_media_image
     - image.style.medium
     - media.type.private_image
@@ -27,6 +29,8 @@ content:
     region: content
 hidden:
   created: true
+  field_filesize: true
+  field_mimetype: true
   field_private_media_image: true
   langcode: true
   name: true
