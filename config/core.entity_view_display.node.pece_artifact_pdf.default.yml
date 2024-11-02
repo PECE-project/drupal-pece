@@ -13,7 +13,6 @@ dependencies:
     - field.field.node.pece_artifact_pdf.field_groups_with_view_access
     - field.field.node.pece_artifact_pdf.field_language
     - field.field.node.pece_artifact_pdf.field_location
-    - field.field.node.pece_artifact_pdf.field_pdf_artifact_document
     - field.field.node.pece_artifact_pdf.field_pdf_artifact_media_doc
     - field.field.node.pece_artifact_pdf.field_pece_all_can_view
     - field.field.node.pece_artifact_pdf.field_pece_geolocation
@@ -29,7 +28,6 @@ dependencies:
     - address
     - datetime
     - entity_form_field_label
-    - file
     - geolocation
     - languagefield
     - layout_builder
@@ -607,14 +605,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 109
-    region: content
-  field_pdf_artifact_document:
-    type: file_default
-    label: above
-    settings:
-      use_description_as_link_text: true
-    third_party_settings: {  }
-    weight: 129
     region: content
   field_pdf_artifact_media_doc:
     type: entity_reference_entity_view
