@@ -37,7 +37,7 @@ Steps to Create a Memo
 
 8. Next, click on the "Contribution Metadata" tab.
 
-9. Complete the "License" field by selecting a license from the drop down menu. This indicates how the content should be licensed. We encourage you to leave it as Attribution, Share Alike CC BY-SA, but you can choose any of the other Creative Commons license as you see fit. Please refer to the [*Licensing*](../licensing) section for more information.
+9. Complete the "License" field by selecting a license from the drop down menu. This indicates how the content should be licensed. We encourage you to leave it as Attribution, Share Alike CC BY-SA, but you can choose any of the other Creative Commons license as you see fit. Please refer to the [*Licensing*](https://creativecommons.org/share-your-work/cclicenses/) section for more information.
 
 10. Next, add optional keyword tags to your memo. Tag the content. As you type, suggested tags will be automatically generated if they exist already in the system. We recommend following theses suggestions and using existing tags if they are not too different from what you were intending, but feel free to make up new tags!
 
