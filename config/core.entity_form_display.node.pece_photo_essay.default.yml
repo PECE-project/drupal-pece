@@ -15,12 +15,9 @@ dependencies:
     - field.field.node.pece_photo_essay.field_people_with_view_access
     - field.field.node.pece_photo_essay.field_photo_essay_items
     - field.field.node.pece_photo_essay.field_tags
-    - field.field.node.pece_photo_essay.field_thumbnail
-    - image.style.thumbnail
     - node.type.pece_photo_essay
   module:
     - field_group
-    - image
     - media_library
     - paragraphs
     - path
@@ -261,14 +258,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_thumbnail:
-    type: image_image
-    weight: 2
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
     third_party_settings: {  }
   path:
     type: path

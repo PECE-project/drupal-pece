@@ -15,11 +15,9 @@ dependencies:
     - field.field.node.pece_photo_essay.field_people_with_view_access
     - field.field.node.pece_photo_essay.field_photo_essay_items
     - field.field.node.pece_photo_essay.field_tags
-    - field.field.node.pece_photo_essay.field_thumbnail
     - node.type.pece_photo_essay
   module:
     - entity_reference_revisions
-    - image
     - layout_builder
     - layout_library
     - text
@@ -406,17 +404,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 114
-    region: content
-  field_thumbnail:
-    type: image
-    label: above
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: 116
     region: content
   links:
     settings: {  }
