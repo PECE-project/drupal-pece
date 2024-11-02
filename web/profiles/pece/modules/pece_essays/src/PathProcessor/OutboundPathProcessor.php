@@ -12,7 +12,10 @@ class OutboundPathProcessor implements OutboundPathProcessorInterface {
    * {@inheritdoc}
    */
   public function processOutbound($path, &$options = [], Request $request = NULL, BubbleableMetadata $bubbleable_metadata = NULL) {
-    if (!isset($options['entity']) || $options['route']->getPath() !== "/node/{node}" || ! $options['entity'] instanceof \Drupal\node\NodeInterface) {
+    if (!isset($options['entity'])
+      || $options['route']->getPath() !== "/node/{node}"
+      || ! $options['entity'] instanceof \Drupal\node\NodeInterface
+    ) {
       return $path;
     }
     // We are linking to a node at its canonical path.
