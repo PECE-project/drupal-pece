@@ -21,7 +21,10 @@ class OutboundPathProcessor implements OutboundPathProcessorInterface {
     // We are linking to a node at its canonical path.
     /** @var Drupal\node\NodeInterface $node */
     $node = $options['entity'];
-    if ($node->bundle() === "pece_essay") {
+    if ($node->bundle() === "pece_essay"
+      || $node->bundle() === "pece_photo_essay"
+      || $node->bundle() === "pece_timeline_essay"
+    ) {
       return $path . '/intro';
     }
     return $path;
