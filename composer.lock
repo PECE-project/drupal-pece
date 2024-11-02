@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "80a84ebc910e6fe1627d05399a75e714",
+    "content-hash": "e6841cbe30382ac3773bc913bd7f344c",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -2203,6 +2203,57 @@
             "homepage": "https://www.drupal.org/project/bartik",
             "support": {
                 "source": "https://git.drupalcode.org/project/bartik"
+            }
+        },
+        {
+            "name": "drupal/bef_links_filter",
+            "version": "dev-1.0.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/bef_links_filter.git",
+                "reference": "46d53b34ce4d4a038885d41ae85b4400d49000d6"
+            },
+            "require": {
+                "drupal/better_exposed_filters": "^7",
+                "drupal/core": "^8 || ^9 || ^10 || ^11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.0.x": "1.0.x-dev"
+                },
+                "drupal": {
+                    "version": "1.0.x-dev",
+                    "datestamp": "1730518145",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "benjamin melançon (mlncn)",
+                    "homepage": "https://www.drupal.org/u/mlncn"
+                },
+                {
+                    "name": "megakeegman",
+                    "homepage": "https://www.drupal.org/user/3620027"
+                },
+                {
+                    "name": "mlncn",
+                    "homepage": "https://www.drupal.org/user/64383"
+                }
+            ],
+            "description": "Adds a new Better Exposed Filters plugin that allows to filter the available facet links.",
+            "homepage": "http://drupal.org/project/bef_links_filter",
+            "support": {
+                "source": "https://git.drupalcode.org/project/bef_links_filter",
+                "issues": "https://www.drupal.org/project/issues/bef_links_filter"
             }
         },
         {
@@ -25406,6 +25457,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/access_policy": 10,
+        "drupal/bef_links_filter": 20,
         "drupal/bibcite_migrate": 10,
         "drupal/blocktabs": 10,
         "drupal/bulma": 20,
