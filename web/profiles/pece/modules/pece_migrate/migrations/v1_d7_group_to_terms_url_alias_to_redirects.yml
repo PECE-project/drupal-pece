@@ -21,7 +21,7 @@ process:
     replace: ''
 
   _d10_group_tid:
-    process: migration_lookup
+    plugin: migration_lookup
     source: '@_d7_group_nid'
     migration: v1_group
     no_stub: TRUE
