@@ -8,6 +8,9 @@ migration_group: pece
 
 source:
   plugin: v1_node_url_alias
+  bundle:
+    - pece_project
+# Don't put group here, only items in type tray categories
   constants:
     uri_prefix: 'internal:/'
     status_code: 301
