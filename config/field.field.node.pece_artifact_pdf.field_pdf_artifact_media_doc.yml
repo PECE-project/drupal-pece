@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_pdf_artifact_media_doc
-    - media.type.private_document
+    - media.type.private_pdf
     - node.type.pece_artifact_pdf
 id: node.pece_artifact_pdf.field_pdf_artifact_media_doc
 field_name: field_pdf_artifact_media_doc
@@ -20,10 +20,10 @@ settings:
   handler: 'default:media'
   handler_settings:
     target_bundles:
-      private_document: private_document
+      private_pdf: private_pdf
     sort:
       field: _none
       direction: ASC
     auto_create: false
-    auto_create_bundle: ''
+    auto_create_bundle: private_document
 field_type: entity_reference

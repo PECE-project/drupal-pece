@@ -1,0 +1,21 @@
+uuid: c57c0e13-a04c-4a02-a253-c30f4c70b1f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.private_pdf.field_private_media_document
+    - media.type.private_pdf
+id: media.private_pdf.media_library
+targetEntityType: media
+bundle: private_pdf
+mode: media_library
+content: {  }
+hidden:
+  created: true
+  field_private_media_document: true
+  langcode: true
+  name: true
+  path: true
+  status: true
+  uid: true

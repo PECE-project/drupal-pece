@@ -1,0 +1,39 @@
+uuid: bda76a69-71fe-4154-a2d7-e3b9edb7e1b1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.private_pdf.field_private_media_document
+    - media.type.private_pdf
+  module:
+    - entity_form_field_label
+    - pdf
+id: media.private_pdf.default
+targetEntityType: media
+bundle: private_pdf
+mode: default
+content:
+  field_private_media_document:
+    type: pdf_default
+    label: visually_hidden
+    settings:
+      keep_pdfjs: '1'
+      width: 100%
+      height: 600px
+      page: ''
+      zoom: ''
+      custom_zoom: ''
+      pagemode: ''
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

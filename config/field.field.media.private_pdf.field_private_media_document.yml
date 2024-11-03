@@ -1,0 +1,27 @@
+uuid: a25d9b32-1bd4-4299-8d8a-88134e3b2eeb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_private_media_document
+    - media.type.private_pdf
+  module:
+    - file
+id: media.private_pdf.field_private_media_document
+field_name: field_private_media_document
+entity_type: media
+bundle: private_pdf
+label: File
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: pdf
+  max_filesize: ''
+  description_field: false
+field_type: file
