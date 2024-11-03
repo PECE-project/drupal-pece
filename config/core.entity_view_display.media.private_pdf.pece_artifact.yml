@@ -1,0 +1,45 @@
+uuid: 41dd90e9-c5ef-4741-8a6d-b4449ed2e72c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.pece_artifact
+    - field.field.media.private_pdf.field_private_media_document
+    - media.type.private_pdf
+  module:
+    - entity_form_field_label
+    - layout_builder
+    - pdf
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.private_pdf.pece_artifact
+targetEntityType: media
+bundle: private_pdf
+mode: pece_artifact
+content:
+  field_private_media_document:
+    type: pdf_default
+    label: hidden
+    settings:
+      keep_pdfjs: '1'
+      width: 100%
+      height: 600px
+      page: ''
+      zoom: ''
+      custom_zoom: ''
+      pagemode: ''
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

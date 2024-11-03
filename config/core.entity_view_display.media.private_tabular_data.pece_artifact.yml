@@ -1,0 +1,35 @@
+uuid: aedcff16-8594-4d60-b1f8-bca054744fc5
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.pece_artifact
+    - field.field.media.private_tabular_data.field_private_tabular_data
+    - media.type.private_tabular_data
+  module:
+    - file
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.private_tabular_data.pece_artifact
+targetEntityType: media
+bundle: private_tabular_data
+mode: pece_artifact
+content:
+  field_private_tabular_data:
+    type: file_default
+    label: visually_hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

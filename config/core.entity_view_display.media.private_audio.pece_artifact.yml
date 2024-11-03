@@ -1,0 +1,38 @@
+uuid: b57be142-04a2-4448-9657-8c354b26485c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.pece_artifact
+    - field.field.media.private_audio.field_media_private_audio_file
+    - media.type.private_audio
+  module:
+    - file
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.private_audio.pece_artifact
+targetEntityType: media
+bundle: private_audio
+mode: pece_artifact
+content:
+  field_media_private_audio_file:
+    type: file_audio
+    label: visually_hidden
+    settings:
+      controls: true
+      autoplay: false
+      loop: false
+      multiple_file_display_type: tags
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

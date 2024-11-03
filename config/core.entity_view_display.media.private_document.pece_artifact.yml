@@ -1,0 +1,35 @@
+uuid: 61e904ca-b128-49f3-8b36-2a53d6d7170f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.pece_artifact
+    - field.field.media.private_document.field_private_media_document
+    - media.type.private_document
+  module:
+    - file
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.private_document.pece_artifact
+targetEntityType: media
+bundle: private_document
+mode: pece_artifact
+content:
+  field_private_media_document:
+    type: file_default
+    label: visually_hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

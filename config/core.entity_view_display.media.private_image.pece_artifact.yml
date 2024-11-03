@@ -1,0 +1,61 @@
+uuid: c4b7d4bd-71d7-4fbf-b1af-35e4b334f3da
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.pece_artifact
+    - field.field.media.private_image.field_filesize
+    - field.field.media.private_image.field_mimetype
+    - field.field.media.private_image.field_private_media_image
+    - image.style.large
+    - media.type.private_image
+  module:
+    - entity_form_field_label
+    - file
+    - image
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.private_image.pece_artifact
+targetEntityType: media
+bundle: private_image
+mode: pece_artifact
+content:
+  field_filesize:
+    type: file_size
+    label: above
+    settings: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 2
+    region: content
+  field_mimetype:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_private_media_image:
+    type: image
+    label: visually_hidden
+    settings:
+      image_link: ''
+      image_style: large
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true
