@@ -1,0 +1,23 @@
+uuid: 315ec2e2-6426-4a5d-897b-51321ed20217
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_filesize
+    - media.type.private_audio
+id: media.private_audio.field_filesize
+field_name: field_filesize
+entity_type: media
+bundle: private_audio
+label: Filesize
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

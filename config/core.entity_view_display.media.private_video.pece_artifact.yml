@@ -4,9 +4,12 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.pece_artifact
+    - field.field.media.private_video.field_filesize
+    - field.field.media.private_video.field_mimetype
     - field.field.media.private_video.field_private_media_video_file
     - media.type.private_video
   module:
+    - entity_form_field_label
     - file
     - layout_builder
 third_party_settings:
@@ -18,9 +21,27 @@ targetEntityType: media
 bundle: private_video
 mode: pece_artifact
 content:
+  field_filesize:
+    type: file_size
+    label: above
+    settings: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 2
+    region: content
+  field_mimetype:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
   field_private_media_video_file:
     type: file_video
-    label: visually_hidden
+    label: hidden
     settings:
       controls: true
       autoplay: false

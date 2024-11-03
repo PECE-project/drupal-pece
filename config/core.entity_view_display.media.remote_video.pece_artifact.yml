@@ -5,12 +5,10 @@ dependencies:
   config:
     - core.entity_view_mode.media.pece_artifact
     - field.field.media.remote_video.field_media_oembed_video
-    - image.style.thumbnail
     - media.type.remote_video
   module:
-    - image
     - layout_builder
-    - user
+    - media
 third_party_settings:
   layout_builder:
     enabled: false
@@ -20,45 +18,21 @@ targetEntityType: media
 bundle: remote_video
 mode: pece_artifact
 content:
-  created:
-    type: timestamp
+  field_media_oembed_video:
+    type: oembed
     label: hidden
     settings:
-      date_format: medium
-      custom_date_format: ''
-      timezone: ''
-      tooltip:
-        date_format: long
-        custom_date_format: ''
-      time_diff:
-        enabled: false
-        future_format: '@interval hence'
-        past_format: '@interval ago'
-        granularity: 2
-        refresh: 60
-    third_party_settings: {  }
-    weight: 0
-    region: content
-  thumbnail:
-    type: image
-    label: hidden
-    settings:
-      image_link: ''
-      image_style: thumbnail
-      image_loading:
+      max_width: 0
+      max_height: 0
+      loading:
         attribute: lazy
-    third_party_settings: {  }
-    weight: 5
-    region: content
-  uid:
-    type: author
-    label: hidden
-    settings: {  }
     third_party_settings: {  }
     weight: 0
     region: content
 hidden:
-  field_media_oembed_video: true
+  created: true
   langcode: true
   name: true
   search_api_excerpt: true
+  thumbnail: true
+  uid: true

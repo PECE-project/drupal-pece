@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.private_video.field_filesize
+    - field.field.media.private_video.field_mimetype
     - field.field.media.private_video.field_private_media_video_file
     - media.type.private_video
   module:
@@ -18,6 +20,21 @@ content:
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_filesize:
+    type: number
+    weight: 102
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_mimetype:
+    type: string_textfield
+    weight: 101
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_private_media_video_file:
     type: file_generic

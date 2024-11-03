@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.media.media_library
+    - field.field.media.private_pdf.field_filesize
+    - field.field.media.private_pdf.field_mimetype
     - field.field.media.private_pdf.field_private_media_document
     - media.type.private_pdf
 id: media.private_pdf.media_library
@@ -13,6 +15,8 @@ mode: media_library
 content: {  }
 hidden:
   created: true
+  field_filesize: true
+  field_mimetype: true
   field_private_media_document: true
   langcode: true
   name: true

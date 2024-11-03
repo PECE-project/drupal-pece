@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.media_library
+    - field.field.media.private_tabular_data.field_filesize
+    - field.field.media.private_tabular_data.field_mimetype
     - field.field.media.private_tabular_data.field_private_tabular_data
     - image.style.medium
     - media.type.private_tabular_data
@@ -27,6 +29,8 @@ content:
     region: content
 hidden:
   created: true
+  field_filesize: true
+  field_mimetype: true
   field_private_tabular_data: true
   langcode: true
   name: true

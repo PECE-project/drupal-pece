@@ -3,7 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.private_audio.field_filesize
     - field.field.media.private_audio.field_media_private_audio_file
+    - field.field.media.private_audio.field_mimetype
     - media.type.private_audio
   module:
     - file
@@ -19,12 +21,27 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_filesize:
+    type: number
+    weight: 102
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
   field_media_private_audio_file:
     type: file_generic
     weight: 0
     region: content
     settings:
       progress_indicator: throbber
+    third_party_settings: {  }
+  field_mimetype:
+    type: string_textfield
+    weight: 101
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   langcode:
     type: language_select

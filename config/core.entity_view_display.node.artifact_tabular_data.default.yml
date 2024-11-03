@@ -493,16 +493,21 @@ third_party_settings:
             region: one_a
             configuration:
               id: 'field_block:node:artifact_tabular_data:field_media_tabular_data'
+              label: 'Tabular data'
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
                 type: entity_reference_entity_view
                 label: above
                 settings:
-                  view_mode: default
-                  link: false
-                third_party_settings: {  }
+                  view_mode: pece_artifact
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
             weight: 1
             additional: {  }
         third_party_settings: {  }

@@ -1,0 +1,23 @@
+uuid: 83c3f918-1037-41c3-909a-817be3243367
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_filesize
+    - media.type.private_pdf
+id: media.private_pdf.field_filesize
+field_name: field_filesize
+entity_type: media
+bundle: private_pdf
+label: Filesize
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

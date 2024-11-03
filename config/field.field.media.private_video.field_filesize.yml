@@ -1,0 +1,23 @@
+uuid: da06a8f8-f70f-4527-b7f7-dfecc5c354a4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_filesize
+    - media.type.private_video
+id: media.private_video.field_filesize
+field_name: field_filesize
+entity_type: media
+bundle: private_video
+label: Filesize
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

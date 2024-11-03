@@ -4,10 +4,13 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.pece_artifact
+    - field.field.media.private_pdf.field_filesize
+    - field.field.media.private_pdf.field_mimetype
     - field.field.media.private_pdf.field_private_media_document
     - media.type.private_pdf
   module:
     - entity_form_field_label
+    - file
     - layout_builder
     - pdf
 third_party_settings:
@@ -19,6 +22,24 @@ targetEntityType: media
 bundle: private_pdf
 mode: pece_artifact
 content:
+  field_filesize:
+    type: file_size
+    label: above
+    settings: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 2
+    region: content
+  field_mimetype:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
   field_private_media_document:
     type: pdf_default
     label: hidden
