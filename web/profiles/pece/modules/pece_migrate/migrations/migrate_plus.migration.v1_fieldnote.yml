@@ -149,24 +149,18 @@ process:
       plugin: sub_process
       process:
         target_id:
-          -
-            plugin: migration_lookup
-            migration: v1_group
-            source: target_id
-          -
-            plugin: extract
-            index:
-              - 0
+          plugin: migration_lookup
+          migration: v1_group
+          source: target_id
   _empty_groups_lookup_fallback:
     plugin: default_value
     source: '@_lookup_groups_with_view_access'
     default_value: []
   field_groups_with_view_access:
-    -
-      plugin: restricted_group_append
-      source:
-        - '@_empty_groups_lookup_fallback'
-        - pece_researchers_group
+    plugin: restricted_group_append
+    source:
+      - '@_empty_groups_lookup_fallback'
+      - pece_researchers_group
 destination:
   plugin: 'entity_complete:node'
   translations: true
