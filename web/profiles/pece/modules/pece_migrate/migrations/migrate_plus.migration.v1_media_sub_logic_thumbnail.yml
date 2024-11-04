@@ -41,6 +41,8 @@ process:
       migration:
         - v1_file
         - v1_file_private
+        - v1_file_essay
+        - v1_file_private_essay
       no_stub: true
     - plugin: skip_on_empty
       method: row
@@ -66,4 +68,6 @@ migration_dependencies:
   optional:
     - v1_file
     - v1_file_private
+    - v1_file_essay
+    - v1_file_private_essay
     - v1_user

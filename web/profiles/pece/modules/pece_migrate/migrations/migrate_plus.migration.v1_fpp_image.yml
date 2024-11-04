@@ -36,6 +36,8 @@ process:
         migration:
           - v1_file
           - v1_file_private
+          - v1_file_essay
+          - v1_file_private_essay
         source: fid
       width: width
       height: height
@@ -80,5 +82,7 @@ destination:
 migration_dependencies:
   required:
     - v1_file
-    - v1_private_file
+    - v1_file_private
+    - v1_file_essay
+    - v1_file_private_essay
   optional: {  }
