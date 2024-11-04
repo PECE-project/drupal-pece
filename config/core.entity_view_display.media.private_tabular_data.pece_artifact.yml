@@ -9,7 +9,7 @@ dependencies:
     - field.field.media.private_tabular_data.field_private_tabular_data
     - media.type.private_tabular_data
   module:
-    - entity_form_field_label
+    - digital_size_formatter
     - file
     - layout_builder
 third_party_settings:
@@ -22,13 +22,10 @@ bundle: private_tabular_data
 mode: pece_artifact
 content:
   field_filesize:
-    type: file_size
+    type: digital_size
     label: above
     settings: {  }
-    third_party_settings:
-      entity_form_field_label:
-        new_label: ''
-        rewrite_label: 0
+    third_party_settings: {  }
     weight: 2
     region: content
   field_mimetype:

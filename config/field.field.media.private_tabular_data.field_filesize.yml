@@ -1,10 +1,12 @@
-uuid: 83fbf5c0-311a-4b78-81d9-076689a5be6d
+uuid: f9981a85-f39f-4abf-af01-f66db10528c1
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.media.field_filesize
     - media.type.private_tabular_data
+  module:
+    - bigint
 id: media.private_tabular_data.field_filesize
 field_name: field_filesize
 entity_type: media
@@ -20,4 +22,4 @@ settings:
   max: null
   prefix: ''
   suffix: ''
-field_type: integer
+field_type: bigint

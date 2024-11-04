@@ -8,6 +8,7 @@ dependencies:
     - field.field.media.private_document.field_private_media_document
     - media.type.private_document
   module:
+    - bigint
     - file
     - path
 id: media.private_document.default
@@ -22,7 +23,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_filesize:
-    type: number
+    type: bigint
     weight: 102
     region: content
     settings:

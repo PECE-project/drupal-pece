@@ -9,34 +9,15 @@ dependencies:
     - media.type.private_pdf
   module:
     - entity_form_field_label
-    - file
     - pdf
 id: media.private_pdf.default
 targetEntityType: media
 bundle: private_pdf
 mode: default
 content:
-  field_filesize:
-    type: file_size
-    label: above
-    settings: {  }
-    third_party_settings:
-      entity_form_field_label:
-        new_label: ''
-        rewrite_label: 0
-    weight: 2
-    region: content
-  field_mimetype:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 1
-    region: content
   field_private_media_document:
     type: pdf_default
-    label: visually_hidden
+    label: hidden
     settings:
       keep_pdfjs: '1'
       width: 100%
@@ -53,6 +34,8 @@ content:
     region: content
 hidden:
   created: true
+  field_filesize: true
+  field_mimetype: true
   langcode: true
   name: true
   search_api_excerpt: true

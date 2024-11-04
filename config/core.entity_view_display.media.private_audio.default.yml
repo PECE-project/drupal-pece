@@ -8,26 +8,15 @@ dependencies:
     - field.field.media.private_audio.field_mimetype
     - media.type.private_audio
   module:
-    - entity_form_field_label
     - file
 id: media.private_audio.default
 targetEntityType: media
 bundle: private_audio
 mode: default
 content:
-  field_filesize:
-    type: file_size
-    label: above
-    settings: {  }
-    third_party_settings:
-      entity_form_field_label:
-        new_label: ''
-        rewrite_label: 0
-    weight: 2
-    region: content
   field_media_private_audio_file:
     type: file_audio
-    label: visually_hidden
+    label: hidden
     settings:
       controls: true
       autoplay: false
@@ -36,16 +25,10 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_mimetype:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 1
-    region: content
 hidden:
   created: true
+  field_filesize: true
+  field_mimetype: true
   langcode: true
   name: true
   search_api_excerpt: true
