@@ -18,8 +18,8 @@ SELECT CONCAT('wget --header "cookie: $SESSID=$SESSKEY" -O page-', nid, '.htm ht
 `ddev mysql databasename < dump_essays.sql > script.sh`
 1. Ensure your environment contains the SESSID and SESSKEY from your logged in user in Drupal to retrieve any private pages (view storage->cookies in FireFox in DevTools).
 ```shell
-$ export $SESSID=SSESSxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-$ export $SESSKEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+$ export SESSID=SSESSxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+$ export SESSKEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 1. Make the script executable and run it:
 `$ chmod +x script.sh && ./script.sh`
