@@ -1,8 +1,7 @@
-uuid: f22f0669-0487-44ce-965c-6f62421079df
 langcode: en
 status: true
 dependencies: {  }
-id: v1_file_private
+id: v1_file_private_essay
 class: Drupal\migrate\Plugin\Migration
 field_plugin_method: null
 cck_plugin_method: null
@@ -15,7 +14,7 @@ label: 'Private files'
 source:
   plugin: v1_file
   scheme: private
-  pece_essay: FALSE
+  pece_essay: TRUE
   constants:
     source_base_path: /var/www/html/web
 process:
@@ -49,7 +48,6 @@ process:
       source:
         - '@source_full_path'
         - uri
-      move: TRUE
   filemime:
     -
       plugin: get

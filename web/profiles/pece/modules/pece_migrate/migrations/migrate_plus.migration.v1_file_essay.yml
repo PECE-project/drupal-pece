@@ -1,8 +1,7 @@
-uuid: 37bff229-b01e-4e77-b891-a4b8bf96df31
 langcode: en
 status: true
 dependencies: {  }
-id: v1_file
+id: v1_file_essay
 class: null
 field_plugin_method: null
 cck_plugin_method: null
@@ -16,7 +15,7 @@ label: 'Public files'
 source:
   plugin: v1_file
   scheme: public
-  pece_essay: FALSE
+  pece_essay: TRUE
   constants:
     source_base_path: '/var/www/html/web'
     TARGET_SCHEME: 'private'
@@ -55,7 +54,6 @@ process:
       - '@source_full_path'
       - '@_private_uri'
     file_exists: 'rename'
-    move: TRUE
   filemime: filemime
   status: status
   created: timestamp
