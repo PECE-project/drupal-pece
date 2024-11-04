@@ -1,7 +1,10 @@
 <?php
+
 /**
- * @file
- * Code for the PECE Annotations.
+ * Implements hook_form_alter().
  */
-
-
+function pece_annotations_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+    if ($form_id == 'entity_browser_analytic_browser_form') {
+        $form['#attached']['library'][] = 'pece_annotations/pece_annotations';
+    }
+}
