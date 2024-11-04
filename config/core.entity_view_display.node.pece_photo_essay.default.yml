@@ -17,287 +17,16 @@ dependencies:
     - field.field.node.pece_photo_essay.field_tags
     - node.type.pece_photo_essay
   module:
-    - entity_reference_revisions
+    - entity_form_field_label
     - layout_builder
     - layout_library
+    - splide
     - text
     - user
 third_party_settings:
   layout_builder:
-    enabled: true
+    enabled: false
     allow_custom: false
-    sections:
-      -
-        layout_id: layout_twocol_section
-        layout_settings:
-          label: ''
-          context_mapping: {  }
-          column_widths: 75-25
-        components:
-          7ab4dc7c-af98-402b-815e-06147180282a:
-            uuid: 7ab4dc7c-af98-402b-815e-06147180282a
-            region: second
-            configuration:
-              id: 'field_block:node:pece_photo_essay:field_people_with_edit_access'
-              label: 'People with edit access'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 3
-            additional: {  }
-          97e349b2-a3a0-44f8-bb6b-5016a30d093a:
-            uuid: 97e349b2-a3a0-44f8-bb6b-5016a30d093a
-            region: second
-            configuration:
-              id: 'field_block:node:pece_photo_essay:field_pece_license'
-              label: License
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 7
-            additional: {  }
-          85125088-04a8-4df9-b485-71372a3f71e9:
-            uuid: 85125088-04a8-4df9-b485-71372a3f71e9
-            region: second
-            configuration:
-              id: 'field_block:node:pece_photo_essay:field_cite_as'
-              label: 'Cite as'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 9
-            additional: {  }
-          b5c74e3d-b718-429a-9840-5a57b039ad8a:
-            uuid: b5c74e3d-b718-429a-9840-5a57b039ad8a
-            region: second
-            configuration:
-              id: 'field_block:node:pece_photo_essay:field_tags'
-              label: Tags
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 8
-            additional: {  }
-          71d691fb-9de1-4152-b8cd-3636f5b14af4:
-            uuid: 71d691fb-9de1-4152-b8cd-3636f5b14af4
-            region: second
-            configuration:
-              id: 'field_block:node:pece_photo_essay:field_groups_with_view_access'
-              label: 'Groups to show this to'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 6
-            additional: {  }
-          60977533-37b1-4e7d-a2e8-e73a077977a7:
-            uuid: 60977533-37b1-4e7d-a2e8-e73a077977a7
-            region: second
-            configuration:
-              id: 'extra_field_block:node:pece_photo_essay:extra_field_pece_annotations_annotate_button'
-              label: 'Annotate button'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                settings: {  }
-                third_party_settings: {  }
-            weight: 10
-            additional:
-              extra_field_plus_settings: {  }
-          d27e3c9f-7595-47a9-b97c-7a9dc59e4c09:
-            uuid: d27e3c9f-7595-47a9-b97c-7a9dc59e4c09
-            region: second
-            configuration:
-              id: 'extra_field_block:node:pece_photo_essay:extra_field_pece_annotations_see_annotations_link'
-              label: 'Link to see all related annotations'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                settings: {  }
-                third_party_settings: {  }
-            weight: 11
-            additional:
-              extra_field_plus_settings: {  }
-          1c2907c1-a1af-4491-9b98-1a1546808bd7:
-            uuid: 1c2907c1-a1af-4491-9b98-1a1546808bd7
-            region: second
-            configuration:
-              id: 'field_block:node:pece_photo_essay:revision_timestamp'
-              label: 'Revision create time'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: timestamp
-                label: above
-                settings:
-                  date_format: medium
-                  custom_date_format: ''
-                  timezone: ''
-                  tooltip:
-                    date_format: long
-                    custom_date_format: ''
-                  time_diff:
-                    enabled: false
-                    future_format: '@interval hence'
-                    past_format: '@interval ago'
-                    granularity: 2
-                    refresh: 60
-                    description: ''
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 5
-            additional: {  }
-          bca33ce7-35ee-4f3a-9a1f-aff24a5cbb0f:
-            uuid: bca33ce7-35ee-4f3a-9a1f-aff24a5cbb0f
-            region: second
-            configuration:
-              id: 'field_block:node:pece_photo_essay:created'
-              label: 'Authored on'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: timestamp
-                label: above
-                settings:
-                  date_format: medium
-                  custom_date_format: ''
-                  timezone: ''
-                  tooltip:
-                    date_format: long
-                    custom_date_format: ''
-                  time_diff:
-                    enabled: false
-                    future_format: '@interval hence'
-                    past_format: '@interval ago'
-                    granularity: 2
-                    refresh: 60
-                    description: ''
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 4
-            additional: {  }
-          e0fbbad6-21d3-41c2-a2d0-2ff773980fb2:
-            uuid: e0fbbad6-21d3-41c2-a2d0-2ff773980fb2
-            region: first
-            configuration:
-              id: 'field_block:node:pece_photo_essay:body'
-              label: Description
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 0
-            additional: {  }
-          4197df1c-bb0f-4b52-ae52-d3ffc302ce03:
-            uuid: 4197df1c-bb0f-4b52-ae52-d3ffc302ce03
-            region: first
-            configuration:
-              id: 'extra_field_block:node:pece_photo_essay:extra_field_type_tray_icon_display:icons'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-            weight: 1
-            additional: {  }
-          4f92ef1b-8d34-4a75-984a-d39d1cc8bf1f:
-            uuid: 4f92ef1b-8d34-4a75-984a-d39d1cc8bf1f
-            region: second
-            configuration:
-              id: 'field_block:node:pece_photo_essay:field_media_thumbnail'
-              label: 'Media thumbnail'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_entity_view
-                label: above
-                settings:
-                  view_mode: default
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 2
-            additional: {  }
-        third_party_settings: {  }
   layout_library:
     enable: false
 _core:
@@ -312,107 +41,90 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 101
-    region: content
-  'extra_field_type_tray_icon_display:icons':
-    settings: {  }
-    third_party_settings: {  }
     weight: 0
-    region: first
-  field_ark_enabled:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 113
     region: content
-  field_groups_with_view_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 120
-    region: first
-  field_media_thumbnail:
-    type: entity_reference_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 123
-    region: first
-  field_pece_all_can_view:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 119
-    region: content
-  field_pece_license:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 115
-    region: content
-  field_pece_project_ref:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 111
-    region: content
-  field_people_with_edit_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 122
-    region: first
-  field_people_with_view_access:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 121
-    region: first
   field_photo_essay_items:
-    type: entity_reference_revisions_entity_view
+    type: splide_entityreference
     label: above
     settings:
-      view_mode: default
+      caption: {  }
+      optionset: default
+      class: ''
+      image: ''
       link: ''
-    third_party_settings: {  }
-    weight: 118
-    region: content
-  field_tags:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 114
+      overlay: ''
+      title: ''
+      vanilla: false
+      by_delta: -1
+      layout: ''
+      view_mode: default
+      cache: 0
+      admin_uri: '/admin/structure/types/manage/pece_photo_essay/display/default?ajax_form=1&_wrapper_format=drupal_ajax&_wrapper_format=drupal_ajax'
+      use_lb: false
+      background: false
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      loading: lazy
+      preload: false
+      responsive_image_style: ''
+      use_theme_field: false
+      box_style: ''
+      image_style: ''
+      media_switch: ''
+      ratio: ''
+      thumbnail_style: ''
+      grid: ''
+      grid_medium: ''
+      grid_small: ''
+      style: ''
+      skin: ''
+      overridables:
+        arrows: '0'
+        pagination: '0'
+        autoplay: '0'
+        autoWidth: '0'
+        autoHeight: '0'
+        drag: '0'
+        wheel: '0'
+        randomize: '0'
+      thumbnail: ''
+      pagination_text: ''
+      optionset_nav: ''
+      skin_nav: ''
+      nav_caption: ''
+      thumbnail_effect: ''
+      navpos: ''
+      override: false
+      skin_arrows: ''
+      skin_dots: ''
+      pagination_pos: ''
+      preserve_keys: false
+      visible_items: null
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 1
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 2
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  'extra_field_type_tray_icon_display:icons': true
+  field_ark_enabled: true
   field_cite_as: true
+  field_groups_with_view_access: true
+  field_media_thumbnail: true
+  field_pece_all_can_view: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
+  field_tags: true
   langcode: true
   search_api_excerpt: true
