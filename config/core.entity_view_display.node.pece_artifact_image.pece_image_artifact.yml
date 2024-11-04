@@ -34,12 +34,6 @@ targetEntityType: node
 bundle: pece_artifact_image
 mode: pece_image_artifact
 content:
-  'extra_field_type_tray_icon_display:icons':
-    type: 'extra_field_type_tray_icon_display:icons'
-    settings: {  }
-    third_party_settings: {  }
-    weight: 1
-    region: content
   field_image_artifact_media_image:
     type: entity_reference_entity_view
     label: hidden
@@ -52,6 +46,7 @@ content:
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  'extra_field_type_tray_icon_display:icons': true
   field_ark_enabled: true
   field_authors: true
   field_cite_as: true
