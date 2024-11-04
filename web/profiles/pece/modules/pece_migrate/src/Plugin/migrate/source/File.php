@@ -52,12 +52,13 @@ class File extends D7File {
       ->condition('fidl.entity_type', 'fieldable_panels_pane');
     // Get all files that appear in an image panes image field
     $fppi_query = $this->select('field_data_field_basic_image_image', 'fbii')
-      ->fields('fbii', ['field_data_field_basic_image_image_fid']);
+      ->fields('fbii', ['field_basic_image_image_fid']);
 
     if ($this->configuration['pece_essay']) {
-      $query->orConditionGroup()
+      $orGroup = $query->orConditionGroup()
         ->condition('f.fid', $fidl_query, 'IN')
         ->condition('f.fid', $fppi_query, 'IN');
+      $query->condition($orGroup);
     } else {
       $query
         ->condition('f.fid', $fidl_query, 'NOT IN')
