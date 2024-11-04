@@ -1,13 +1,17 @@
 {% extends 'paragraph.html.twig' %}
 
+{% set imagepath = path('entity.node.canonical', {'node':  content.field_pece_image_artifact.0['#node'].id}) %}
+
 {% block content %}
-  <div class="row">
-    <div class="col-md-9 bg-black img-container">
+  <div class="columns">
+    <div class="column is-two-thirds bg-black img-container">
       {{content.field_pece_image_artifact}}
     </div>
-    <div class="col-md-3">
+    <div class="column is-one-third">
+     <h2{{ title_attributes }}>
+      <a href="{{ imagepath }}" rel="bookmark">{{ content.field_pece_image_artifact.0['#node'].label }}</a>
+    </h2>
       {{content.field_pece_description}}
     </div>
   </div>
 {% endblock %}
-
