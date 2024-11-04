@@ -1,0 +1,24 @@
+<?php
+
+
+/**
+ * Increase the length of "field_mimetype" to 255 characters.
+ */
+function pece_migrate_update_8001() {
+  $database = \Drupal::database();
+  $database->query("ALTER TABLE media__field_mimetype MODIFY field_mimetype_value VARCHAR(255)");
+  $database->query("ALTER TABLE media_revision__field_mimetype MODIFY field_mimetype_value VARCHAR(255)");
+
+  $storage_key = 'media.field_schema_data.field_one_liner';
+  $storage_schema = \Drupal::keyValue('entity.storage_schema.sql');
+  $field_schema = $storage_schema->get($storage_key);
+  $field_schema['media__field_mimetype']['fields']['field_mimetype_value']['length'] = 255;
+  $field_schema['media_revision__field_mimetype']['fields']['field_mimetype']['length'] = 255;
+  $storage_schema->set($storage_key, $field_schema);
+
+  // Update field configuration.
+  $config = \Drupal::configFactory()
+    ->getEditable('field.storage.media.field_mimetype');
+  $config->set('settings.max_length', 255);
+  $config->save(TRUE);
+}
