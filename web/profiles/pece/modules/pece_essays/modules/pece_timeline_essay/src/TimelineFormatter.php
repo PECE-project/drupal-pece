@@ -83,7 +83,7 @@ class TimelineFormatter {
       'pece_artifact_image' => 'field_image_artifact_media_image',
       'artifact_video' => 'field_video_artifact_media_video',
       // 'pece_artifact_website' => 'field_website_url',
-      'pece_artifact_pdf' => 'field_pdf_artifact_media_doc ',
+      'pece_artifact_pdf' => 'field_pdf_artifact_media_doc',
       // 'pece_artifact_text' => 'body',
     ];
     if (!in_array($artifact->getType(), array_keys($artifact_field))) {
@@ -234,13 +234,13 @@ class TimelineFormatter {
    */
   public function formatMedia($media) {
     $rtn = [];
+    $rtn["url"] = "";
     if ($media) {
       $mediaId = $media->first()->getValue()["target_id"];
       $file = $this->getFileFromMediaId($mediaId);
-      $rtn["url"] = \Drupal::request()->getSchemeAndHttpHost() . $file->createFileUrl();
-    }
-    else {
-      $rtn["url"] = "";
+      if ($file) {
+        $rtn["url"] = \Drupal::request()->getSchemeAndHttpHost() . $file->createFileUrl();
+      }
     }
 
     return $rtn;
@@ -262,10 +262,16 @@ class TimelineFormatter {
       'private_video' => 'field_private_media_video_file',
       'remote_video' => 'field_media_oembed_video',
       'private_document' => 'field_private_media_document',
+      'private_pdf' => 'field_private_media_document'
     ];
 
     $media = Media::load($mediaId);
-    $field = $mediaTypeMapping[$media->bundle()];
+    $field = $mediaTypeMapping[$media->bundle()] ?? NULL;
+
+    if (!$field) {
+      \Drupal::logger('pece_timeline_essay')->error('No field mapping for media bundle: %bundle.', ['%bundle' => $media->bundle()]);
+      return;
+    }
     if ($field === 'field_media_oembed_video') {
       $fileId = $media->thumbnail->target_id;
     } else {

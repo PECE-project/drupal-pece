@@ -25,25 +25,11 @@ class Timeline extends ExtraFieldDisplayBase {
    * {@inheritdoc}
    */
   public function view(ContentEntityInterface $entity) {
-    $timeline = Node::load($entity);
+    $timeline = $entity;
     $timelineFormatter = new TimelineFormatter();
     $formattedTimeline = $timelineFormatter->formatTimeline($timeline);
     $build = [
       '#theme' => 'timeline_essay_view',
-      '#content' => [
-        'title' => $timeline->getTitle(),
-        'button' => [
-          '#type' => 'link',
-          '#title' => $this->t('Return to Timeline Essay Landing Page'),
-          '#url' => $timeline->toUrl(),
-          '#attributes' => [
-            'class' => [
-              'btn',
-              'btn-primary',
-            ],
-          ],
-        ],
-      ],
       '#attached' => [
         'library' => 'pece_timeline_essay/pece-timeline',
         'drupalSettings' => [
