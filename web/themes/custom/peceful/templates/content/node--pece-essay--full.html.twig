@@ -104,6 +104,7 @@ view_mode ? view_mode|clean_class,
       {{ content }}
     </div>
   {% else %}
+    {{ attach_library('peceful/legacy') }}
     <div class="legacy-rendered-html">
       {{ node.field_legacy_rendered_html.value|raw }}
     </div>
