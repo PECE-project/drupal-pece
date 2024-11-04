@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8835f572c7e7baec8b1da99eb00948cf",
+    "content-hash": "5b4e3c7b34f47a746743bfa1dfae29fb",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -2529,6 +2529,66 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/bibcite_migrate",
                 "issues": "https://www.drupal.org/project/issues/bibcite_migrate"
+            }
+        },
+        {
+            "name": "drupal/bigint",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/bigint.git",
+                "reference": "2.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/bigint-2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": "f402e69a59c90729aaa2ad444e2c3c05b40b7717"
+            },
+            "require": {
+                "drupal/core": "^9 || ^10 || ^11"
+            },
+            "require-dev": {
+                "drupal/feeds": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.1",
+                    "datestamp": "1710874223",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "alansaviolobo",
+                    "homepage": "https://www.drupal.org/user/2190830"
+                },
+                {
+                    "name": "crystaldawn",
+                    "homepage": "https://www.drupal.org/user/364638"
+                },
+                {
+                    "name": "tim-diels",
+                    "homepage": "https://www.drupal.org/user/2915097"
+                }
+            ],
+            "description": "Defines a numeric field type equivalent to a bigint db field (19) vs (10) of the default int field.",
+            "homepage": "https://drupal.org/project/bigint",
+            "keywords": [
+                "Drupal",
+                "field"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/bigint",
+                "issues": "https://drupal.org/project/issues/bigint"
             }
         },
         {
