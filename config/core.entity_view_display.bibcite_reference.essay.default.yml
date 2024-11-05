@@ -1,28 +1,26 @@
-uuid: 9cc6350f-60a5-452c-8362-d6f3e859fbbe
+uuid: 2d00c425-e152-47e7-b8c2-83eb763616a9
 langcode: en
 status: true
 dependencies:
   config:
-    - bibcite_entity.bibcite_reference_type.artifact
-    - field.field.bibcite_reference.artifact.field_accessed_date
-    - field.field.bibcite_reference.artifact.field_ark
-    - field.field.bibcite_reference.artifact.field_contributors
-    - field.field.bibcite_reference.artifact.field_created_date
-    - field.field.bibcite_reference.artifact.field_creator_s
-    - field.field.bibcite_reference.artifact.field_last_updated
-    - field.field.bibcite_reference.artifact.field_pece
-    - field.field.bibcite_reference.artifact.field_platform_name
-    - field.field.bibcite_reference.artifact.field_project
-    - field.field.bibcite_reference.artifact.field_title
-    - field.field.bibcite_reference.artifact.field_url
+    - bibcite_entity.bibcite_reference_type.essay
+    - field.field.bibcite_reference.essay.field_accessed_date
+    - field.field.bibcite_reference.essay.field_ark
+    - field.field.bibcite_reference.essay.field_contributors
+    - field.field.bibcite_reference.essay.field_last_updated
+    - field.field.bibcite_reference.essay.field_pece
+    - field.field.bibcite_reference.essay.field_platform_name
+    - field.field.bibcite_reference.essay.field_project
+    - field.field.bibcite_reference.essay.field_title
+    - field.field.bibcite_reference.essay.field_url
   module:
     - bibcite_entity
     - datetime
     - link
     - text
-id: bibcite_reference.artifact.default
+id: bibcite_reference.essay.default
 targetEntityType: bibcite_reference
-bundle: artifact
+bundle: essay
 mode: default
 content:
   author:
@@ -452,23 +450,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 101
-    region: content
-  field_created_date:
-    type: datetime_default
-    label: above
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 104
-    region: content
-  field_creator_s:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 102
     region: content
   field_last_updated:
     type: datetime_default

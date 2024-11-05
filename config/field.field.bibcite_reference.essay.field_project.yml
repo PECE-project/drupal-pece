@@ -1,0 +1,29 @@
+uuid: 014384be-042b-4b68-82f2-1403daebbccd
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.essay
+    - field.storage.bibcite_reference.field_project
+    - node.type.pece_project
+id: bibcite_reference.essay.field_project
+field_name: field_project
+entity_type: bibcite_reference
+bundle: essay
+label: Project
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_project: pece_project
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

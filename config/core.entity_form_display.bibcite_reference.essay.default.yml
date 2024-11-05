@@ -1,28 +1,26 @@
-uuid: 1c1c89b0-b11f-4a7e-9c30-23a28baef6b9
+uuid: adbc0b43-aae4-4b06-bdbb-9d74075835ae
 langcode: en
 status: true
 dependencies:
   config:
-    - bibcite_entity.bibcite_reference_type.artifact
-    - field.field.bibcite_reference.artifact.field_accessed_date
-    - field.field.bibcite_reference.artifact.field_ark
-    - field.field.bibcite_reference.artifact.field_contributors
-    - field.field.bibcite_reference.artifact.field_created_date
-    - field.field.bibcite_reference.artifact.field_creator_s
-    - field.field.bibcite_reference.artifact.field_last_updated
-    - field.field.bibcite_reference.artifact.field_pece
-    - field.field.bibcite_reference.artifact.field_platform_name
-    - field.field.bibcite_reference.artifact.field_project
-    - field.field.bibcite_reference.artifact.field_title
-    - field.field.bibcite_reference.artifact.field_url
+    - bibcite_entity.bibcite_reference_type.essay
+    - field.field.bibcite_reference.essay.field_accessed_date
+    - field.field.bibcite_reference.essay.field_ark
+    - field.field.bibcite_reference.essay.field_contributors
+    - field.field.bibcite_reference.essay.field_last_updated
+    - field.field.bibcite_reference.essay.field_pece
+    - field.field.bibcite_reference.essay.field_platform_name
+    - field.field.bibcite_reference.essay.field_project
+    - field.field.bibcite_reference.essay.field_title
+    - field.field.bibcite_reference.essay.field_url
   module:
     - bibcite_entity
     - datetime
     - link
     - text
-id: bibcite_reference.artifact.default
+id: bibcite_reference.essay.default
 targetEntityType: bibcite_reference
-bundle: artifact
+bundle: essay
 mode: default
 content:
   author:
@@ -435,22 +433,6 @@ content:
   field_contributors:
     type: entity_reference_autocomplete
     weight: 121
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_created_date:
-    type: datetime_default
-    weight: 124
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_creator_s:
-    type: entity_reference_autocomplete
-    weight: 122
     region: content
     settings:
       match_operator: CONTAINS
