@@ -3,8 +3,8 @@
 {% set imagepath = path('entity.node.canonical', {'node':  content.field_pece_image_artifact.0['#node'].id}) %}
 
 {% block content %}
-  <div class="columns">
-    <div class="column is-two-thirds bg-black img-container">
+  <div class="columns is-justify-content-center">
+    <div class="column is-half img-container">
       {{content.field_pece_image_artifact}}
     </div>
     <div class="column is-one-third">
