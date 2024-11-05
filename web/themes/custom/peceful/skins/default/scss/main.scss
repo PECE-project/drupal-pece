@@ -41,9 +41,7 @@ a:hover {
   overflow: hidden;
 }
 
-/* Blocks
------------------------------------------------------------
-*/
+// Blocks
 
 .featured-projects {
   @include full-width;
@@ -80,6 +78,7 @@ a:hover {
 }
 
 // Navbar
+
 .navbar {
   background-color: transparent;
 }
@@ -298,11 +297,15 @@ details {
   font-weight: 700;
 }
 
+// Admin
+
 // Useful for administrators only, keep article contextual link out of way of
 // view contextual link.
 article .contextual {
   right: 20px;
 }
+
+// Layout builder
 
 // Add a gap to layouts, @todo consider whether this same gap should ba pplied between all layouts
 .layout--twocol-section.layout--twocol-section--50-50{
