@@ -8,6 +8,7 @@ dependencies:
   module:
     - entity_browser
     - node
+    - pece_annotations
     - user
 id: analytics
 label: Analytics
@@ -297,20 +298,13 @@ display:
             default_group_multiple: {  }
             group_items: {  }
       style:
-        type: grid
+        type: analytic_entity_browser
         options:
           grouping:
             -
               field: field_analytic_question_set
               rendered: false
               rendered_strip: true
-          columns: 1
-          automatic_width: true
-          alignment: horizontal
-          row_class_custom: ''
-          row_class_default: true
-          col_class_custom: ''
-          col_class_default: true
       row:
         type: fields
         options:

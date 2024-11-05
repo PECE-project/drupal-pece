@@ -2,17 +2,23 @@
     display: block;
 }
 
-#entity-browser-analytic-browser-form .views-row .views-field-entity-browser-select {
+#entity-browser-analytic-browser-form .views-field-entity-browser-select {
     visibility: hidden;
 }
 
-#entity-browser-analytic-browser-form .views-row {
+#entity-browser-analytic-browser-form .analytic-row {
+    display: flex;
+    cursor: pointer;
+    padding: 0px 8px;
+    border: 1px solid var(--gin-border-color-layer2);
+    border-radius: var(--gin-border-m);
     margin: 8px 0px;
 }
 
-#entity-browser-analytic-browser-form .views-view-grid .views-col {
-    display: flex;
-    flex-direction: column-reverse;
-    cursor: pointer;
-    padding: 0px 8px;
+#entity-browser-analytic-browser-form .form-item {
+    margin-block: unset;
+}
+
+.analytic-entity-browser-rows {
+    padding-top: 16px;
 }

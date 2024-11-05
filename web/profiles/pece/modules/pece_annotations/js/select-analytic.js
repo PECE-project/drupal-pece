@@ -1,4 +1,4 @@
-const entities = document.querySelectorAll(".views-row");
+const entities = document.querySelectorAll(".analytic-row");
 const submitButtton = document.querySelector('#edit-submit');
 entities.forEach((entity) => {
     entity.onclick = function () {
