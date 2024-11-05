@@ -1,15 +1,15 @@
-(function ($, Drupal, once) {
-  Drupal.behaviors.peceTabsLegacy = {
-    attach: function (context, settings) {
-      $(once('peceTabsLegacy', '.legacy-rendered-html')).each(function (element) {
-        $(this).find('#tabs-0-column1 a').on('click', function(e) {
-          let href = $(this).attr("href");
-          alert(href);
-        })
-      })
-    }
-  }
-})(jQuery, Drupal, once);
+// (function ($, Drupal, once) {
+//   Drupal.behaviors.peceTabsLegacy = {
+//     attach: function (context, settings) {
+//       $(once('peceTabsLegacy', '.legacy-rendered-html')).each(function (element) {
+//         $(this).find('#tabs-0-column1 a').on('click', function(e) {
+//           let href = $(this).attr("href");
+//           alert(href);
+//         })
+//       })
+//     }
+//   }
+// })(jQuery, Drupal, once);
 
 
 // function h() {
