@@ -15,6 +15,8 @@ use Drupal\Core\Url;
  *   description = @Translation("Displays a button link to view the actual PECE Essay from the intro page."),
  *   bundles = {
  *     "node.pece_essay",
+ *     "node.pece_timeline_essay",
+ *     "node.pece_photo_essay",
  *   }
  * )
  */

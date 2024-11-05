@@ -14,6 +14,8 @@ use Drupal\extra_field\Plugin\ExtraFieldDisplayBase;
  *   description = @Translation("Displays a button link to view the introduction of the current PECE Essay."),
  *   bundles = {
  *     "node.pece_essay",
+ *     "node.pece_timeline_essay",
+ *     "node.pece_photo_essay",
  *   }
  * )
  */
