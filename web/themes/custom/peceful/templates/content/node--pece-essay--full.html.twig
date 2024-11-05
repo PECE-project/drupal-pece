@@ -81,6 +81,9 @@ not node.isPublished() ? 'is-unpublished',
 view_mode ? view_mode|clean_class,
 'clearfix',
 ] %}
+
+{{ attach_library('peceful/tabber') }}
+
 <article{{ attributes.addClass(classes) }}>
   {% if node.field_override_legacy_with_new.value == TRUE %}
     {{ title_prefix }}
