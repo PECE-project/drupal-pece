@@ -23,10 +23,12 @@ dependencies:
     - field.field.node.pece_essay.field_people_with_view_access
     - field.field.node.pece_essay.field_tags
     - field.field.node.pece_essay.layout_builder__layout
+    - image.style.pece_thumbnail
     - node.type.pece_essay
   module:
     - entity_form_field_label
     - layout_builder
+    - media
     - text
     - user
 third_party_settings:
@@ -46,7 +48,7 @@ content:
     settings:
       trim_length: 200
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   'extra_field_type_tray_icon_display:icons':
     type: 'extra_field_type_tray_icon_display:icons'
@@ -55,16 +57,18 @@ content:
     weight: 0
     region: content
   field_media_thumbnail:
-    type: entity_reference_entity_view
+    type: media_thumbnail
     label: hidden
     settings:
-      view_mode: default
-      link: false
+      image_link: ''
+      image_style: pece_thumbnail
+      image_loading:
+        attribute: lazy
     third_party_settings:
       entity_form_field_label:
         new_label: ''
         rewrite_label: 0
-    weight: 2
+    weight: 1
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
