@@ -267,20 +267,23 @@ a:hover {
   }
 }
 
-details {
-  margin-left: 1rem;
-  summary {
-    margin-left: -1rem;
-    font-size: 1rem;
-  }
-  // This is quite ridiculous, but to target the help text (more information)
-  // we need to target the entire div and then undo it, because it is not
-  // wrapped in any element at all.
-  font-size: 0.8rem;
-  .form-item {
-    // And somehow the help text will wrap and push the facets below to indent
-    // if we do not take preventative measures here.
-    width: 100%;
+.bef-exposed-form {
+  details {
+    margin-left: 1rem;
+    summary {
+      font-weight: 700;
+      margin-left: -1rem;
+      font-size: 1rem;
+    }
+    // This is quite ridiculous, but to target the help text (more information)
+    // we need to target the entire div and then undo it, because it is not
+    // wrapped in any element at all.
+    font-size: 0.8rem;
+    .form-item {
+      // And somehow the help text will wrap and push the facets below to indent
+      // if we do not take preventative measures here.
+      width: 100%;
+    }
   }
   .bef-links {
     font-size: 1rem;
@@ -288,27 +291,22 @@ details {
     // Hanging indent.
     text-indent: -1rem;
     padding-left: 1rem;
-  }
-}
-
-.bef-links ul li {
-  position: relative;
-  a.bef-link--selected {
-    &::before {
-      font-size: 0.777rem;
-      content: "● ";
-      position: absolute;
-      left: -.8rem;
-      top: .2rem;
+    ul li {
+      position: relative;
+      a.bef-link--selected {
+        &::before {
+          font-size: 0.777rem;
+          content: "● ";
+          position: absolute;
+          left: -.8rem;
+          top: .2rem;
+        }
+        &:hover::before {
+         content: "𝗑 ";
+        }
+      }
     }
-    &:hover::before {
-     content: "𝗑 ";
-    }
   }
-}
-
-.bef-exposed-form summary {
-  font-weight: 700;
 }
 
 // Admin
