@@ -99,9 +99,7 @@ view_mode ? view_mode|clean_class,
         </div>
       </div> {# end column one #}
       <div class="layout__region layout__region--second layout-collapse--column-two">
-        <div class="layout-collapse--none">
-          {{ content.field_media_thumbnail }}
-        </div>
+        {{ content.field_media_thumbnail }}
         <details class="layout-collapse--open" data-component-id="layout_collapse:layout-collapse-region" open="">
           <summary>{% trans %}Contribution Metadata{% endtrans %}</summary>
           {% if display_submitted %}
