@@ -309,7 +309,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: 'Group Audience'
                     rewrite_label: 1
-            weight: 3
+            weight: 5
             additional: {  }
           3ee306fc-1894-4068-bcd9-49b18d3f8de2:
             uuid: 3ee306fc-1894-4068-bcd9-49b18d3f8de2
@@ -331,7 +331,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 4
+            weight: 7
             additional: {  }
           2180a5a0-fee2-41dc-b066-1ad486f4a308:
             uuid: 2180a5a0-fee2-41dc-b066-1ad486f4a308
@@ -353,7 +353,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 6
+            weight: 8
             additional: {  }
           48cfefe9-76bd-4dcf-9435-c40c4d196e66:
             uuid: 48cfefe9-76bd-4dcf-9435-c40c4d196e66
@@ -397,7 +397,7 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 7
+            weight: 9
             additional: {  }
           468487c4-fea8-428e-bc29-e2bea63dfbdc:
             uuid: 468487c4-fea8-428e-bc29-e2bea63dfbdc
@@ -431,22 +431,6 @@ third_party_settings:
             weight: 1
             additional:
               extra_field_plus_settings: {  }
-          3c1320c8-41fd-4c0a-ac7d-c2e7916d99da:
-            uuid: 3c1320c8-41fd-4c0a-ac7d-c2e7916d99da
-            region: one_a
-            configuration:
-              id: 'extra_field_block:node:pece_artifact_pdf:extra_field_type_tray_icon_display:icons'
-              label: 'Icon from Type Tray'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                settings: {  }
-                third_party_settings: {  }
-            weight: 0
-            additional:
-              extra_field_plus_settings: {  }
           6c134c19-66b9-4322-96a3-b5a4eb646a1b:
             uuid: 6c134c19-66b9-4322-96a3-b5a4eb646a1b
             region: one_a
@@ -455,43 +439,7 @@ third_party_settings:
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-            weight: 3
-            additional: {  }
-          f2395b5a-5120-4d80-9edb-8233a97a0614:
-            uuid: f2395b5a-5120-4d80-9edb-8233a97a0614
-            region: one_a
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_crit_commentary'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
             weight: 4
-            additional: {  }
-          1c2b8205-e48a-4235-968c-4fc2537061cf:
-            uuid: 1c2b8205-e48a-4235-968c-4fc2537061cf
-            region: one_a
-            configuration:
-              id: 'field_block:node:pece_artifact_pdf:field_pece_geolocation'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: geolocation_latlng
-                label: above
-                settings: {  }
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 5
             additional: {  }
           526d367b-0b4a-4adc-8333-e4c2d21dc7b4:
             uuid: 526d367b-0b4a-4adc-8333-e4c2d21dc7b4
@@ -515,6 +463,58 @@ third_party_settings:
                     rewrite_label: 0
             weight: 1
             additional: {  }
+          f2395b5a-5120-4d80-9edb-8233a97a0614:
+            uuid: f2395b5a-5120-4d80-9edb-8233a97a0614
+            region: two_a
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_crit_commentary'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 6
+            additional: {  }
+          1c2b8205-e48a-4235-968c-4fc2537061cf:
+            uuid: 1c2b8205-e48a-4235-968c-4fc2537061cf
+            region: two_b
+            configuration:
+              id: 'field_block:node:pece_artifact_pdf:field_pece_geolocation'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: geolocation_latlng
+                label: above
+                settings: {  }
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 5
+            additional: {  }
+          3c1320c8-41fd-4c0a-ac7d-c2e7916d99da:
+            uuid: 3c1320c8-41fd-4c0a-ac7d-c2e7916d99da
+            region: one_a
+            configuration:
+              id: 'extra_field_block:node:pece_artifact_pdf:extra_field_type_tray_icon_display:icons'
+              label: 'Icon from Type Tray'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 3
+            additional:
+              extra_field_plus_settings: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
