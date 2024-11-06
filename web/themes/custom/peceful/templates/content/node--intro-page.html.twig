@@ -81,9 +81,8 @@ not node.isPublished() ? 'is-unpublished',
 view_mode ? view_mode|clean_class,
 'clearfix',
 ] %}
-
 <article{{ attributes.addClass(classes) }}>
-  {{ content.extra_field_type_tray_icon_display }}
+  {{ content.extra_field_icons }}
   {{ title_prefix }}
   {{ title_suffix }}
   <div{{ content_attributes }}>
@@ -110,7 +109,7 @@ view_mode ? view_mode|clean_class,
               </div>
             </footer>
           {% endif %}
-          {{ content }}
+          {{ content|without('body', 'extra_field_icons', 'extra_field_pece_essays_essay_link') }}
         </details>
       </div> {# end column two #}
     </div>
