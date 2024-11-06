@@ -24,3 +24,14 @@ demo:
   user: demo_pece
   env-vars:
     PATH: /home/demo_pece/bin:/usr/local/bin:/usr/bin:/bin
+
+cfe:
+  host: demo-cfe.drutopia.org
+  paths:
+    drush: /home/pece_demo/site/vendor/drush
+    drush-script: /home/pece_demo/site/vendor/bin/drush
+  root: /home/pece_demo/site/web
+  uri: 'https://demo-cfe.drutopia.org'
+  user: pece_demo
+  env-vars:
+    PATH: /home/pece_demo/bin:/usr/local/bin:/usr/bin:/bin
