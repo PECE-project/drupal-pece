@@ -19652,9 +19652,6 @@ a:hover .facet-item__count {
   text-decoration: none;
 }
 
-/* Blocks
------------------------------------------------------------
-*/
 .featured-projects {
   width: 100vw;
   position: relative;
@@ -19684,8 +19681,7 @@ a:hover .facet-item__count {
 }
 
 .front-page-block {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 1rem;
 }
 
 .front-page-block .paragraph--type--image-with-link {
@@ -19695,6 +19691,20 @@ a:hover .facet-item__count {
 .front-page-block .subtitle {
   font-size: 32px;
   margin-bottom: 50px;
+}
+
+.paragraph.paragraph--type--layout {
+  margin-bottom: 2rem;
+}
+
+.paragraph--type--image-with-link svg {
+  padding: 30px;
+  background-color: #ededed;
+  border-radius: 25px;
+  box-sizing: border-box;
+  width: 120px;
+  margin-bottom: 20px;
+  fill: var(--link-text);
 }
 
 .navbar {
@@ -19850,40 +19860,36 @@ a:hover .facet-item__count {
   display: none !important;
 }
 
-details {
+.bef-exposed-form details {
   margin-left: 1rem;
   font-size: 0.8rem;
 }
-details summary {
+.bef-exposed-form details summary {
+  font-weight: 700;
   margin-left: -1rem;
   font-size: 1rem;
 }
-details .form-item {
+.bef-exposed-form details .form-item {
   width: 100%;
 }
-details .bef-links {
+.bef-exposed-form .bef-links {
   font-size: 1rem;
   margin-top: 0.5rem;
   text-indent: -1rem;
   padding-left: 1rem;
 }
-
-.bef-links ul li {
+.bef-exposed-form .bef-links ul li {
   position: relative;
 }
-.bef-links ul li a.bef-link--selected::before {
+.bef-exposed-form .bef-links ul li a.bef-link--selected::before {
   font-size: 0.777rem;
   content: "● ";
   position: absolute;
   left: -0.8rem;
   top: 0.2rem;
 }
-.bef-links ul li a.bef-link--selected:hover::before {
+.bef-exposed-form .bef-links ul li a.bef-link--selected:hover::before {
   content: "𝗑 ";
-}
-
-.bef-exposed-form summary {
-  font-weight: 700;
 }
 
 article .contextual {
