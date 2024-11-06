@@ -40,7 +40,7 @@ third_party_settings:
       label: Permissions
       region: content
       parent_name: ''
-      weight: 12
+      weight: 13
       format_type: details
       format_settings:
         classes: ''
@@ -68,13 +68,13 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 5
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   field_analyze:
     type: entity_reference_autocomplete
-    weight: 20
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS
@@ -84,14 +84,14 @@ content:
     third_party_settings: {  }
   field_ark_enabled:
     type: boolean_checkbox
-    weight: 17
+    weight: 15
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_conceptualize:
     type: entity_reference_autocomplete
-    weight: 18
+    weight: 3
     region: content
     settings:
       match_operator: CONTAINS
@@ -101,7 +101,7 @@ content:
     third_party_settings: {  }
   field_curate:
     type: entity_reference_autocomplete
-    weight: 19
+    weight: 6
     region: content
     settings:
       match_operator: CONTAINS
@@ -111,7 +111,7 @@ content:
     third_party_settings: {  }
   field_essay_contents:
     type: entity_reference_paragraphs
-    weight: 8
+    weight: 9
     region: content
     settings:
       title: Paragraph
@@ -123,7 +123,7 @@ content:
     third_party_settings: {  }
   field_groups_with_view_access:
     type: entity_reference_autocomplete
-    weight: 11
+    weight: 12
     region: content
     settings:
       match_operator: CONTAINS
@@ -134,7 +134,7 @@ content:
       conditional_fields: {  }
   field_media_thumbnail:
     type: media_library_widget
-    weight: 3
+    weight: 2
     region: content
     settings:
       media_types: {  }
@@ -147,7 +147,7 @@ content:
         edit_form_mode: default
   field_override_legacy_with_new:
     type: boolean_checkbox
-    weight: 21
+    weight: 17
     region: content
     settings:
       display_label: true
@@ -161,7 +161,7 @@ content:
     third_party_settings: {  }
   field_pece_artifacts:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -171,13 +171,13 @@ content:
     third_party_settings: {  }
   field_pece_license:
     type: options_select
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   field_pece_project_ref:
     type: entity_reference_autocomplete
-    weight: 16
+    weight: 14
     region: content
     settings:
       match_operator: CONTAINS
@@ -187,7 +187,7 @@ content:
     third_party_settings: {  }
   field_people_with_edit_access:
     type: entity_reference_autocomplete
-    weight: 10
+    weight: 11
     region: content
     settings:
       match_operator: CONTAINS
@@ -223,7 +223,7 @@ content:
             selector: ''
   field_tags:
     type: entity_reference_autocomplete
-    weight: 15
+    weight: 16
     region: content
     settings:
       match_operator: CONTAINS
@@ -233,27 +233,20 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 6
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 13
+    weight: 19
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 7
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  sticky:
-    type: boolean_checkbox
-    weight: 14
+    weight: 18
     region: content
     settings:
       display_label: true
@@ -268,7 +261,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 7
     region: content
     settings:
       match_operator: CONTAINS
@@ -277,7 +270,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 22
+    weight: 21
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -286,3 +279,4 @@ hidden:
   field_legacy_rendered_html: true
   langcode: true
   layout_builder__layout: true
+  sticky: true
