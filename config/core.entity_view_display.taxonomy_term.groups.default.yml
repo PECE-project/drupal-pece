@@ -53,17 +53,17 @@ third_party_settings:
             layout_collapse_classes: ''
             layout_collapse_summary: 'Group Essays'
           two_a:
-            layout_collapse_element: layout-collapse--open
-            layout_collapse_classes: ''
-            layout_collapse_summary: 'Group Manager(s)'
-          two_b:
-            layout_collapse_element: layout-collapse--closed
-            layout_collapse_classes: ''
-            layout_collapse_summary: 'Group Members'
-          two_c:
             layout_collapse_element: layout-collapse--none
             layout_collapse_classes: ''
             layout_collapse_summary: ''
+          two_b:
+            layout_collapse_element: layout-collapse--open
+            layout_collapse_classes: ''
+            layout_collapse_summary: 'Group Manager(s)'
+          two_c:
+            layout_collapse_element: layout-collapse--closed
+            layout_collapse_classes: ''
+            layout_collapse_summary: 'Group Members'
           two_d:
             layout_collapse_element: layout-collapse--none
             layout_collapse_classes: ''
@@ -168,31 +168,9 @@ third_party_settings:
               items_per_page: none
             weight: 6
             additional: {  }
-          bff48c25-c89e-4435-8803-0902ef07a55f:
-            uuid: bff48c25-c89e-4435-8803-0902ef07a55f
-            region: two_a
-            configuration:
-              id: 'field_block:taxonomy_term:groups:field_group_managers'
-              label: 'Group manager(s)'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: hidden
-                settings:
-                  link: true
-                third_party_settings:
-                  entity_form_field_label:
-                    new_label: ''
-                    rewrite_label: 0
-            weight: 0
-            additional: {  }
           84a50b24-da53-4e9f-82f3-84f885836f8b:
             uuid: 84a50b24-da53-4e9f-82f3-84f885836f8b
-            region: two_c
+            region: two_d
             configuration:
               id: 'field_block:taxonomy_term:groups:field_tags'
               label_display: '0'
@@ -204,11 +182,11 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 2
+            weight: 0
             additional: {  }
           9858f00b-3c92-4fa1-a006-1f66a40aea35:
             uuid: 9858f00b-3c92-4fa1-a006-1f66a40aea35
-            region: two_b
+            region: two_c
             configuration:
               id: 'field_block:taxonomy_term:groups:field_group_members'
               label: 'Group members'
@@ -228,22 +206,49 @@ third_party_settings:
                     rewrite_label: 0
             weight: 0
             additional: {  }
-          f08f2174-cecf-4227-8e3d-5930f7fc0181:
-            uuid: f08f2174-cecf-4227-8e3d-5930f7fc0181
-            region: one_a
+          bff48c25-c89e-4435-8803-0902ef07a55f:
+            uuid: bff48c25-c89e-4435-8803-0902ef07a55f
+            region: two_b
             configuration:
-              id: 'field_block:taxonomy_term:groups:field_image'
+              id: 'field_block:taxonomy_term:groups:field_group_managers'
+              label: 'Group manager(s)'
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: hidden
+                settings:
+                  link: true
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 0
+            additional: {  }
+          f08f2174-cecf-4227-8e3d-5930f7fc0181:
+            uuid: f08f2174-cecf-4227-8e3d-5930f7fc0181
+            region: two_a
+            configuration:
+              id: 'field_block:taxonomy_term:groups:field_image'
+              label: Image
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
                 type: entity_reference_entity_view
-                label: above
+                label: hidden
                 settings:
                   view_mode: default
-                  link: false
-                third_party_settings: {  }
-            weight: 3
+                third_party_settings:
+                  entity_form_field_label:
+                    new_label: ''
+                    rewrite_label: 0
+            weight: 0
             additional: {  }
         third_party_settings: {  }
   layout_library:
