@@ -350,3 +350,40 @@ article .contextual {
     }
   }
 }
+
+// Layouts
+
+.layout-collapse summary {
+  font-size: 1.5rem;
+  color: var(--subtitle-heading-color);
+  font-weight: var(--subtitle-heading-weight);
+  line-height: var(--subtitle-heading-line-height);
+  text-transform: uppercase !important;
+  border-left: var(--primary-light) 5px solid;
+  background-color: hsl(186deg, 35%,calc(100% + -5%));
+  padding: 5px 5px 5px 5px;
+}
+
+.layout-collapse--closed {
+  margin-bottom: 20px;
+}
+
+.layout-collapse--open {
+  margin-bottom: 20px;
+}
+
+.layout-collapse--closed .block {
+  padding: 0 20px 0 20px;
+}
+
+.layout-collapse--open .block {
+  padding: 0 20px 0 20px;
+}
+
+.layout-collapse--none {
+  margin-bottom: 20px;
+}
+
+.layout-collapse details .block:first-of-type{
+  margin-top: 20px;
+}
