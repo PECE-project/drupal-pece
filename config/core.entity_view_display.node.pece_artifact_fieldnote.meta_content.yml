@@ -1,0 +1,72 @@
+uuid: 8f0d682d-c086-4123-90fe-47de4ab05519
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.meta_content
+    - field.field.node.pece_artifact_fieldnote.body
+    - field.field.node.pece_artifact_fieldnote.field_ark_enabled
+    - field.field.node.pece_artifact_fieldnote.field_authors
+    - field.field.node.pece_artifact_fieldnote.field_cite_as
+    - field.field.node.pece_artifact_fieldnote.field_created_date
+    - field.field.node.pece_artifact_fieldnote.field_fieldsite
+    - field.field.node.pece_artifact_fieldnote.field_groups_with_view_access
+    - field.field.node.pece_artifact_fieldnote.field_language
+    - field.field.node.pece_artifact_fieldnote.field_location
+    - field.field.node.pece_artifact_fieldnote.field_pece_all_can_view
+    - field.field.node.pece_artifact_fieldnote.field_pece_geolocation
+    - field.field.node.pece_artifact_fieldnote.field_pece_license
+    - field.field.node.pece_artifact_fieldnote.field_pece_project_ref
+    - field.field.node.pece_artifact_fieldnote.field_people_with_edit_access
+    - field.field.node.pece_artifact_fieldnote.field_people_with_view_access
+    - field.field.node.pece_artifact_fieldnote.field_source
+    - field.field.node.pece_artifact_fieldnote.field_tags
+    - field.field.node.pece_artifact_fieldnote.field_use_fieldsite_local
+    - node.type.pece_artifact_fieldnote
+  module:
+    - layout_builder
+    - layout_library
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_library:
+    enable: false
+_core:
+  default_config_hash: pxCZ44Y10HUY6XD65BZsnzCOLzh-s7OHXqJfrJ5YY98
+id: node.pece_artifact_fieldnote.meta_content
+targetEntityType: node
+bundle: pece_artifact_fieldnote
+mode: meta_content
+content:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  field_ark_enabled: true
+  field_authors: true
+  field_cite_as: true
+  field_created_date: true
+  field_fieldsite: true
+  field_groups_with_view_access: true
+  field_language: true
+  field_location: true
+  field_pece_all_can_view: true
+  field_pece_geolocation: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
+  field_source: true
+  field_tags: true
+  field_use_fieldsite_local: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

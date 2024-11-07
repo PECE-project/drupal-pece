@@ -1,0 +1,79 @@
+uuid: 82804e0f-4cec-4344-b72b-19157e3e2b93
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.mini_teaser
+    - field.field.node.pece_artifact_audio.field_ark_enabled
+    - field.field.node.pece_artifact_audio.field_audio_artifact_media_audio
+    - field.field.node.pece_artifact_audio.field_authors
+    - field.field.node.pece_artifact_audio.field_cite_as
+    - field.field.node.pece_artifact_audio.field_created_date
+    - field.field.node.pece_artifact_audio.field_crit_commentary
+    - field.field.node.pece_artifact_audio.field_duration
+    - field.field.node.pece_artifact_audio.field_fieldsite
+    - field.field.node.pece_artifact_audio.field_file_format
+    - field.field.node.pece_artifact_audio.field_groups_with_view_access
+    - field.field.node.pece_artifact_audio.field_language
+    - field.field.node.pece_artifact_audio.field_location
+    - field.field.node.pece_artifact_audio.field_pece_all_can_view
+    - field.field.node.pece_artifact_audio.field_pece_geolocation
+    - field.field.node.pece_artifact_audio.field_pece_license
+    - field.field.node.pece_artifact_audio.field_pece_project_ref
+    - field.field.node.pece_artifact_audio.field_people_with_edit_access
+    - field.field.node.pece_artifact_audio.field_people_with_view_access
+    - field.field.node.pece_artifact_audio.field_source
+    - field.field.node.pece_artifact_audio.field_tags
+    - field.field.node.pece_artifact_audio.field_use_fieldsite_local
+    - node.type.pece_artifact_audio
+  module:
+    - layout_builder
+    - layout_library
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_library:
+    enable: false
+_core:
+  default_config_hash: YA3wnxDOZ-LIiIao_puSchAgdet2Bgeisov89GBW1GE
+id: node.pece_artifact_audio.mini_teaser
+targetEntityType: node
+bundle: pece_artifact_audio
+mode: mini_teaser
+content:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  field_ark_enabled: true
+  field_audio_artifact_media_audio: true
+  field_authors: true
+  field_cite_as: true
+  field_created_date: true
+  field_crit_commentary: true
+  field_duration: true
+  field_fieldsite: true
+  field_file_format: true
+  field_groups_with_view_access: true
+  field_language: true
+  field_location: true
+  field_pece_all_can_view: true
+  field_pece_geolocation: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
+  field_source: true
+  field_tags: true
+  field_use_fieldsite_local: true
+  langcode: true
+  links: true
+  og_audience: true
+  search_api_excerpt: true

@@ -1,9 +1,9 @@
-uuid: 3aaab4d0-1865-4782-a7bf-653503720a6f
+uuid: 6975d06c-62c7-411a-8991-18914dce9d8a
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.mini_teaser
     - field.field.node.pece_annotation.body
     - field.field.node.pece_annotation.field_annotation_analytic
     - field.field.node.pece_annotation.field_annotation_artifact
@@ -16,11 +16,16 @@ dependencies:
     - field.field.node.pece_annotation.field_tags
     - node.type.pece_annotation
   module:
+    - layout_builder
     - user
-id: node.pece_annotation.teaser
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.pece_annotation.mini_teaser
 targetEntityType: node
 bundle: pece_annotation
-mode: teaser
+mode: mini_teaser
 content:
   'extra_field_type_tray_icon_display:icons':
     type: 'extra_field_type_tray_icon_display:icons'
@@ -34,7 +39,6 @@ hidden:
   extra_field_pece_annotations_see_annotations_link: true
   field_annotation_analytic: true
   field_annotation_artifact: true
-  field_annotation_permissions: true
   field_ark_enabled: true
   field_groups_with_view_access: true
   field_pece_all_can_view: true

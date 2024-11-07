@@ -1,0 +1,66 @@
+uuid: 95768eab-8af8-4889-b251-369a412ff76f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.meta_content
+    - field.field.node.pece_analytic.field_analytic_question_set
+    - field.field.node.pece_analytic.field_ark_enabled
+    - field.field.node.pece_analytic.field_tags
+    - node.type.pece_analytic
+  module:
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: Esl4KeTzB4pQNNUlfS9dqYnMj92sMJptrRaJqYQVFJI
+id: node.pece_analytic.meta_content
+targetEntityType: node
+bundle: pece_analytic
+mode: meta_content
+content:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_analytic_question_set:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_ark_enabled:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  langcode: true
+  search_api_excerpt: true

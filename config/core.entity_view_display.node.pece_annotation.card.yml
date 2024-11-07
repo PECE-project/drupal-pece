@@ -1,0 +1,108 @@
+uuid: f9ed87fc-3844-42ed-beb8-c275106175b6
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card
+    - field.field.node.pece_annotation.body
+    - field.field.node.pece_annotation.field_annotation_analytic
+    - field.field.node.pece_annotation.field_annotation_artifact
+    - field.field.node.pece_annotation.field_ark_enabled
+    - field.field.node.pece_annotation.field_groups_with_view_access
+    - field.field.node.pece_annotation.field_pece_all_can_view
+    - field.field.node.pece_annotation.field_pece_license
+    - field.field.node.pece_annotation.field_people_with_edit_access
+    - field.field.node.pece_annotation.field_people_with_view_access
+    - field.field.node.pece_annotation.field_tags
+    - node.type.pece_annotation
+  module:
+    - entity_form_field_label
+    - fences
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.pece_annotation.card
+targetEntityType: node
+bundle: pece_annotation
+mode: card
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 200
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    weight: 0
+    region: content
+  field_annotation_analytic:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: meta_content
+      link: false
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    weight: 2
+    region: content
+  field_annotation_artifact:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: meta_content
+      link: false
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    weight: 1
+    region: content
+hidden:
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  'extra_field_type_tray_icon_display:icons': true
+  field_ark_enabled: true
+  field_groups_with_view_access: true
+  field_pece_all_can_view: true
+  field_pece_license: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
+  field_tags: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
