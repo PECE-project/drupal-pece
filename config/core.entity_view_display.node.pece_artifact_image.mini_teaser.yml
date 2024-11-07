@@ -1,9 +1,9 @@
-uuid: 30de4b85-2823-45e9-aa86-65cf099e973e
+uuid: 37ded269-5407-4bc9-b40a-ba58adbfa985
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.meta_content
+    - core.entity_view_mode.node.mini_teaser
     - field.field.node.pece_artifact_image.field_ark_enabled
     - field.field.node.pece_artifact_image.field_authors
     - field.field.node.pece_artifact_image.field_cite_as
@@ -37,10 +37,10 @@ third_party_settings:
     enable: false
 _core:
   default_config_hash: MuovIFk4ECq7flqV4TYjRCZIRISXsXHgLOIbeNcreKs
-id: node.pece_artifact_image.meta_content
+id: node.pece_artifact_image.mini_teaser
 targetEntityType: node
 bundle: pece_artifact_image
-mode: meta_content
+mode: mini_teaser
 content:
   'extra_field_type_tray_icon_display:icons':
     type: 'extra_field_type_tray_icon_display:icons'

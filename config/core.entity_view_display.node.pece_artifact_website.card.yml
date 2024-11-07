@@ -1,9 +1,9 @@
-uuid: 78d6cb60-649e-44e7-a868-6cde5bb85189
+uuid: 05411ff8-aab1-4af6-a938-2193023455d8
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.meta_content
+    - core.entity_view_mode.node.card
     - field.field.node.pece_artifact_website.field_ark_enabled
     - field.field.node.pece_artifact_website.field_authors
     - field.field.node.pece_artifact_website.field_bibliography
@@ -26,8 +26,11 @@ dependencies:
     - field.field.node.pece_artifact_website.field_website_url
     - node.type.pece_artifact_website
   module:
+    - entity_form_field_label
+    - fences
     - layout_builder
     - layout_library
+    - link
     - user
 third_party_settings:
   layout_builder:
@@ -35,20 +38,39 @@ third_party_settings:
     allow_custom: false
   layout_library:
     enable: false
-id: node.pece_artifact_website.meta_content
+id: node.pece_artifact_website.card
 targetEntityType: node
 bundle: pece_artifact_website
-mode: meta_content
+mode: card
 content:
-  'extra_field_type_tray_icon_display:icons':
-    type: 'extra_field_type_tray_icon_display:icons'
-    settings: {  }
-    third_party_settings: {  }
+  field_website_url:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 0
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  'extra_field_type_tray_icon_display:icons': true
   field_ark_enabled: true
   field_authors: true
   field_bibliography: true
@@ -69,7 +91,6 @@ hidden:
   field_source: true
   field_tags: true
   field_use_fieldsite_local: true
-  field_website_url: true
   langcode: true
   links: true
   og_audience: true

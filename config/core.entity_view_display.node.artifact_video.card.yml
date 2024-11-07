@@ -1,9 +1,9 @@
-uuid: 432c208c-c678-46dd-b039-2dde4bc0eb9c
+uuid: 26c1eca4-8395-4d7d-820f-bcf7336323bd
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.meta_content
+    - core.entity_view_mode.node.card
     - field.field.node.artifact_video.field_ark_enabled
     - field.field.node.artifact_video.field_authors
     - field.field.node.artifact_video.field_cite_as
@@ -33,20 +33,24 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-id: node.artifact_video.meta_content
+id: node.artifact_video.card
 targetEntityType: node
 bundle: artifact_video
-mode: meta_content
+mode: card
 content:
-  'extra_field_type_tray_icon_display:icons':
-    type: 'extra_field_type_tray_icon_display:icons'
-    settings: {  }
+  field_video_artifact_media_video:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: true
     third_party_settings: {  }
     weight: 0
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  'extra_field_type_tray_icon_display:icons': true
   field_ark_enabled: true
   field_authors: true
   field_cite_as: true
@@ -67,7 +71,6 @@ hidden:
   field_source: true
   field_tags: true
   field_use_fieldsite_local: true
-  field_video_artifact_media_video: true
   langcode: true
   links: true
   og_audience: true

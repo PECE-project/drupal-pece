@@ -1,9 +1,9 @@
-uuid: fae324a0-9162-47bc-a447-897cd283e3ed
+uuid: e28d47fe-95e4-47fd-881a-b3fa2fb0a5bb
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.meta_content
+    - core.entity_view_mode.node.card
     - field.field.node.pece_artifact_text.body
     - field.field.node.pece_artifact_text.field_ark_enabled
     - field.field.node.pece_artifact_text.field_authors
@@ -26,6 +26,7 @@ dependencies:
     - node.type.pece_artifact_text
   module:
     - layout_builder
+    - text
     - user
 third_party_settings:
   layout_builder:
@@ -33,21 +34,22 @@ third_party_settings:
     allow_custom: false
 _core:
   default_config_hash: sv49-4TtgHZEBsRaDy_zCl8TMr3fsl0fxqIcirsi8ts
-id: node.pece_artifact_text.meta_content
+id: node.pece_artifact_text.card
 targetEntityType: node
 bundle: pece_artifact_text
-mode: meta_content
+mode: card
 content:
-  'extra_field_type_tray_icon_display:icons':
-    type: 'extra_field_type_tray_icon_display:icons'
+  body:
+    type: text_default
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 0
     region: content
 hidden:
-  body: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  'extra_field_type_tray_icon_display:icons': true
   field_ark_enabled: true
   field_authors: true
   field_cite_as: true

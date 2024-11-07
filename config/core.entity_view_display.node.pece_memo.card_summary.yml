@@ -1,0 +1,71 @@
+uuid: 8df948b0-0653-42b9-a77f-f36db6b769c3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card_summary
+    - field.field.node.pece_memo.body
+    - field.field.node.pece_memo.field_cite_as
+    - field.field.node.pece_memo.field_groups_with_view_access
+    - field.field.node.pece_memo.field_pece_all_can_view
+    - field.field.node.pece_memo.field_pece_license
+    - field.field.node.pece_memo.field_people_with_edit_access
+    - field.field.node.pece_memo.field_people_with_view_access
+    - field.field.node.pece_memo.field_tags
+    - field.field.node.pece_memo.field_uri
+    - node.type.pece_memo
+  module:
+    - entity_form_field_label
+    - fences
+    - layout_builder
+    - layout_library
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_library:
+    enable: false
+_core:
+  default_config_hash: UeKAQPwpMxYoGI0L4UgwHYqpM70gRbXyIyzF7tdmd5c
+id: node.pece_memo.card_summary
+targetEntityType: node
+bundle: pece_memo
+mode: card_summary
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 200
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    weight: 0
+    region: content
+hidden:
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  'extra_field_type_tray_icon_display:icons': true
+  field_cite_as: true
+  field_groups_with_view_access: true
+  field_pece_all_can_view: true
+  field_pece_license: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
+  field_tags: true
+  field_uri: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

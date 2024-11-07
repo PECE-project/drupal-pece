@@ -1,9 +1,9 @@
-uuid: fae324a0-9162-47bc-a447-897cd283e3ed
+uuid: 263f663b-7edd-4bd9-87e5-238274ba7cec
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.meta_content
+    - core.entity_view_mode.node.card_summary
     - field.field.node.pece_artifact_text.body
     - field.field.node.pece_artifact_text.field_ark_enabled
     - field.field.node.pece_artifact_text.field_authors
@@ -25,7 +25,10 @@ dependencies:
     - field.field.node.pece_artifact_text.field_use_fieldsite_local
     - node.type.pece_artifact_text
   module:
+    - entity_form_field_label
+    - fences
     - layout_builder
+    - text
     - user
 third_party_settings:
   layout_builder:
@@ -33,21 +36,35 @@ third_party_settings:
     allow_custom: false
 _core:
   default_config_hash: sv49-4TtgHZEBsRaDy_zCl8TMr3fsl0fxqIcirsi8ts
-id: node.pece_artifact_text.meta_content
+id: node.pece_artifact_text.card_summary
 targetEntityType: node
 bundle: pece_artifact_text
-mode: meta_content
+mode: card_summary
 content:
-  'extra_field_type_tray_icon_display:icons':
-    type: 'extra_field_type_tray_icon_display:icons'
-    settings: {  }
-    third_party_settings: {  }
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 200
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 0
     region: content
 hidden:
-  body: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  'extra_field_type_tray_icon_display:icons': true
   field_ark_enabled: true
   field_authors: true
   field_cite_as: true

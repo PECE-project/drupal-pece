@@ -1,9 +1,9 @@
-uuid: 5246afc5-cbda-4a89-b05c-76ce720e576b
+uuid: 34791e93-a86e-4fc4-b9cf-28e716814db4
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.meta_content
+    - core.entity_view_mode.node.card
     - field.field.node.artifact_tabular_data.field_ark_enabled
     - field.field.node.artifact_tabular_data.field_authors
     - field.field.node.artifact_tabular_data.field_cite_as
@@ -37,20 +37,45 @@ third_party_settings:
     enable: false
 _core:
   default_config_hash: ZYRbvgpK73gU2ZYpD36sh0tA8YW5ptCG7V34MwKdSpg
-id: node.artifact_tabular_data.meta_content
+id: node.artifact_tabular_data.card
 targetEntityType: node
 bundle: artifact_tabular_data
-mode: meta_content
+mode: card
 content:
-  'extra_field_type_tray_icon_display:icons':
-    type: 'extra_field_type_tray_icon_display:icons'
-    settings: {  }
-    third_party_settings: {  }
+  field_media_tabular_data:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 0
+    region: content
+  field_tablr_media_attachments:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  'extra_field_type_tray_icon_display:icons': true
   field_ark_enabled: true
   field_authors: true
   field_cite_as: true
@@ -60,7 +85,6 @@ hidden:
   field_groups_with_view_access: true
   field_language: true
   field_location: true
-  field_media_tabular_data: true
   field_pece_all_can_view: true
   field_pece_geolocation: true
   field_pece_license: true
@@ -68,7 +92,6 @@ hidden:
   field_people_with_edit_access: true
   field_people_with_view_access: true
   field_source: true
-  field_tablr_media_attachments: true
   field_tags: true
   field_use_fieldsite_local: true
   langcode: true

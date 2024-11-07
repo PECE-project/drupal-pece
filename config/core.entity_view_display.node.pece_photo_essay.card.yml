@@ -1,8 +1,9 @@
-uuid: b3243190-529a-4cc3-a33a-ba6eee5a93b6
+uuid: e5e867f1-0f00-4c71-ae6e-d7064c800f99
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.card
     - field.field.node.pece_photo_essay.body
     - field.field.node.pece_photo_essay.field_ark_enabled
     - field.field.node.pece_photo_essay.field_cite_as
@@ -18,9 +19,9 @@ dependencies:
     - node.type.pece_photo_essay
   module:
     - entity_form_field_label
+    - fences
     - layout_builder
     - layout_library
-    - splide
     - text
     - user
 third_party_settings:
@@ -31,102 +32,61 @@ third_party_settings:
     enable: false
 _core:
   default_config_hash: ZuzVWCgO_W_iehkfkdJmLPf9kpj4qteTeTxUW9hfMkM
-id: node.pece_photo_essay.default
+id: node.pece_photo_essay.card
 targetEntityType: node
 bundle: pece_photo_essay
-mode: default
+mode: card
 content:
   body:
-    type: text_default
+    type: text_summary_or_trimmed
     label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 0
-    region: content
-  field_photo_essay_items:
-    type: splide_entityreference
-    label: above
     settings:
-      caption: {  }
-      optionset: default
-      class: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      by_delta: -1
-      layout: ''
-      view_mode: default
-      cache: 0
-      admin_uri: '/admin/structure/types/manage/pece_photo_essay/display/default?ajax_form=1&_wrapper_format=drupal_ajax&_wrapper_format=drupal_ajax'
-      use_lb: false
-      background: false
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      loading: lazy
-      preload: false
-      responsive_image_style: ''
-      use_theme_field: false
-      box_style: ''
-      image_style: ''
-      media_switch: ''
-      ratio: ''
-      thumbnail_style: ''
-      grid: ''
-      grid_medium: ''
-      grid_small: ''
-      style: ''
-      skin: ''
-      overridables:
-        arrows: '0'
-        pagination: '0'
-        autoplay: '0'
-        autoWidth: '0'
-        autoHeight: '0'
-        drag: '0'
-        wheel: '0'
-        randomize: '0'
-      thumbnail: ''
-      pagination_text: ''
-      optionset_nav: ''
-      skin_nav: ''
-      nav_caption: ''
-      thumbnail_effect: ''
-      navpos: ''
-      override: false
-      skin_arrows: ''
-      skin_dots: ''
-      pagination_pos: ''
-      preserve_keys: false
-      visible_items: null
+      trim_length: 200
     third_party_settings:
       entity_form_field_label:
         new_label: ''
         rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 1
     region: content
-  links:
+  extra_field_pece_essays_essay_link:
+    type: extra_field_pece_essays_essay_link
     settings: {  }
     third_party_settings: {  }
     weight: 2
     region: content
+  field_media_thumbnail:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
-  extra_field_pece_essays_essay_link: true
   extra_field_pece_essays_intro_link: true
   'extra_field_type_tray_icon_display:icons': true
   field_ark_enabled: true
   field_cite_as: true
   field_groups_with_view_access: true
-  field_media_thumbnail: true
   field_pece_all_can_view: true
   field_pece_license: true
   field_pece_project_ref: true
   field_people_with_edit_access: true
   field_people_with_view_access: true
+  field_photo_essay_items: true
   field_tags: true
   langcode: true
+  links: true
   search_api_excerpt: true

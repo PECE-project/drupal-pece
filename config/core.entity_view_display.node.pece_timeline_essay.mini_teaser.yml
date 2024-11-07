@@ -1,8 +1,9 @@
-uuid: f797b170-092a-4260-bcb7-1751168bb2cb
+uuid: c5a798ef-aab0-4205-894c-61163cb4dd47
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.mini_teaser
     - field.field.node.pece_timeline_essay.body
     - field.field.node.pece_timeline_essay.field_ark_enabled
     - field.field.node.pece_timeline_essay.field_cite_as
@@ -28,13 +29,13 @@ third_party_settings:
     enable: false
 _core:
   default_config_hash: JYM6QTW2DqfOfcNZg-5SDOsdslQQ7gQn1x2wZJVjptA
-id: node.pece_timeline_essay.default
+id: node.pece_timeline_essay.mini_teaser
 targetEntityType: node
 bundle: pece_timeline_essay
-mode: default
+mode: mini_teaser
 content:
-  extra_field_pece_timeline_essay:
-    type: extra_field_pece_timeline_essay
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
     weight: 0
@@ -45,7 +46,7 @@ hidden:
   extra_field_pece_annotations_see_annotations_link: true
   extra_field_pece_essays_essay_link: true
   extra_field_pece_essays_intro_link: true
-  'extra_field_type_tray_icon_display:icons': true
+  extra_field_pece_timeline_essay: true
   field_ark_enabled: true
   field_cite_as: true
   field_groups_with_view_access: true

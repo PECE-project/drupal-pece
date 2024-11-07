@@ -1,9 +1,9 @@
-uuid: 26d72d77-cd51-4b69-b498-373bdc66ef99
+uuid: ec08ac0e-5ebe-4227-8c0b-d13f165860d8
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.card
+    - core.entity_view_mode.node.card_summary
     - field.field.node.pece_artifact_fieldnote.body
     - field.field.node.pece_artifact_fieldnote.field_ark_enabled
     - field.field.node.pece_artifact_fieldnote.field_authors
@@ -38,15 +38,16 @@ third_party_settings:
     enable: false
 _core:
   default_config_hash: pxCZ44Y10HUY6XD65BZsnzCOLzh-s7OHXqJfrJ5YY98
-id: node.pece_artifact_fieldnote.card
+id: node.pece_artifact_fieldnote.card_summary
 targetEntityType: node
 bundle: pece_artifact_fieldnote
-mode: card
+mode: card_summary
 content:
   body:
-    type: text_default
+    type: text_summary_or_trimmed
     label: hidden
-    settings: {  }
+    settings:
+      trim_length: 200
     third_party_settings:
       entity_form_field_label:
         new_label: ''

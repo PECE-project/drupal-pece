@@ -1,9 +1,9 @@
-uuid: fae324a0-9162-47bc-a447-897cd283e3ed
+uuid: 1816fbca-0242-4d99-ab92-abf70e2f17dc
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.meta_content
+    - core.entity_view_mode.node.mini_teaser
     - field.field.node.pece_artifact_text.body
     - field.field.node.pece_artifact_text.field_ark_enabled
     - field.field.node.pece_artifact_text.field_authors
@@ -33,10 +33,10 @@ third_party_settings:
     allow_custom: false
 _core:
   default_config_hash: sv49-4TtgHZEBsRaDy_zCl8TMr3fsl0fxqIcirsi8ts
-id: node.pece_artifact_text.meta_content
+id: node.pece_artifact_text.mini_teaser
 targetEntityType: node
 bundle: pece_artifact_text
-mode: meta_content
+mode: mini_teaser
 content:
   'extra_field_type_tray_icon_display:icons':
     type: 'extra_field_type_tray_icon_display:icons'

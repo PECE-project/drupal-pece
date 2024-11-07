@@ -1,9 +1,9 @@
-uuid: 78d6cb60-649e-44e7-a868-6cde5bb85189
+uuid: 3ccc2d87-0a81-44dc-b084-c23577692768
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.meta_content
+    - core.entity_view_mode.node.mini_teaser
     - field.field.node.pece_artifact_website.field_ark_enabled
     - field.field.node.pece_artifact_website.field_authors
     - field.field.node.pece_artifact_website.field_bibliography
@@ -35,10 +35,10 @@ third_party_settings:
     allow_custom: false
   layout_library:
     enable: false
-id: node.pece_artifact_website.meta_content
+id: node.pece_artifact_website.mini_teaser
 targetEntityType: node
 bundle: pece_artifact_website
-mode: meta_content
+mode: mini_teaser
 content:
   'extra_field_type_tray_icon_display:icons':
     type: 'extra_field_type_tray_icon_display:icons'

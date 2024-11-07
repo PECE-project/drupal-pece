@@ -1,9 +1,9 @@
-uuid: 432c208c-c678-46dd-b039-2dde4bc0eb9c
+uuid: acffe253-4d63-427a-9ce0-3cf8391695b2
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.meta_content
+    - core.entity_view_mode.node.mini_teaser
     - field.field.node.artifact_video.field_ark_enabled
     - field.field.node.artifact_video.field_authors
     - field.field.node.artifact_video.field_cite_as
@@ -33,10 +33,10 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-id: node.artifact_video.meta_content
+id: node.artifact_video.mini_teaser
 targetEntityType: node
 bundle: artifact_video
-mode: meta_content
+mode: mini_teaser
 content:
   'extra_field_type_tray_icon_display:icons':
     type: 'extra_field_type_tray_icon_display:icons'
