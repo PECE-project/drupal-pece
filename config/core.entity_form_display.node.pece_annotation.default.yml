@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.pece_annotation.field_tags
     - node.type.pece_annotation
   module:
+    - entity_browser_entity_form
     - entity_form_field_label
     - field_group
     - inline_entity_form
@@ -151,9 +152,9 @@ content:
     region: content
     settings:
       form_mode: annotation_step_1
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
+      override_labels: true
+      label_singular: 'Structured Analytic (Question Set) and Analytic (Question)'
+      label_plural: 'Structured Analytics (Question Sets) and Analytics (Questions)'
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
@@ -163,9 +164,11 @@ content:
       revision: true
       removed_reference: keep
     third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
       entity_form_field_label:
-        new_label: ''
-        rewrite_label: 0
+        new_label: 'Structured Analytic (Question Set) and Analytic (Question)'
+        rewrite_label: 1
   field_annotation_artifact:
     type: readonly_field_widget
     weight: 2
