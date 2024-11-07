@@ -395,24 +395,40 @@ article .contextual {
 }
 
 
-article.card {
+.card {
   box-shadow: none;
 }
 
-article.content.meta-content {
-  padding-bottom: 0;
-}
 .meta-content {
+  padding-bottom: 0;
+  h3 {
+    margin: 0;
+    &:not(:first-child) {
+      margin-top: 0;
+    }
+  }
   .type-tray__icon--vector svg {
     padding: 10px;
     fill: var(--link-text);
     background-color: white;
     border: var(--link-text) solid 2px;
     border-radius: 15px;
+    height: 3em;
+    width: 3em;
   }
+}
 
+.mini-teaser {
+  padding-bottom: 2rem;
+  h2 {
+    margin: 0;
+    &:not(:first-child) {
+      margin-top: 0;
+    }
+  }
   .type-tray__icon--vector svg {
-    height: 50px;
-    width: 50px;
+    height: 3em;
+    width: 3em;
+    padding: 10px;
   }
 }
