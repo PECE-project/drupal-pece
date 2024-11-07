@@ -18,6 +18,8 @@ dependencies:
     - field.field.node.pece_timeline_essay.field_timeline_essay_items
     - node.type.pece_timeline_essay
   module:
+    - entity_form_field_label
+    - fences
     - layout_builder
     - layout_library
     - text
@@ -83,11 +85,24 @@ content:
     weight: 7
     region: content
   field_media_thumbnail:
-    type: entity_reference_label
-    label: above
+    type: entity_reference_entity_view
+    label: hidden
     settings:
-      link: true
-    third_party_settings: {  }
+      view_mode: card
+      link: false
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
     weight: 2
     region: content
   field_pece_license:
