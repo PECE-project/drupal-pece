@@ -101,15 +101,17 @@ view_mode ? view_mode|clean_class,
         {{ content.field_media_thumbnail }}
         <details class="layout-collapse--open" data-component-id="layout_collapse:layout-collapse-region" open="">
           <summary>{% trans %}Contribution Metadata{% endtrans %}</summary>
-          {% if display_submitted %}
-            <footer>
-              <div{{ author_attributes }}>
-                {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-                {{ metadata }}
-              </div>
-            </footer>
-          {% endif %}
-          {{ content|without('body', 'extra_field_icons', 'extra_field_pece_essays_essay_link', 'field_media_thumbnail') }}
+          <div class="block block-layout-builder clearfix"
+            {% if display_submitted %}
+              <footer>
+                <div{{ author_attributes }}>
+                  {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+                  {{ metadata }}
+                </div>
+              </footer>
+            {% endif %}
+            {{ content|without('body', 'extra_field_icons', 'extra_field_pece_essays_essay_link', 'field_media_thumbnail') }}
+          </div>
         </details>
       </div> {# end column two #}
     </div>
