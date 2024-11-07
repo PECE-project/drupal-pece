@@ -9,3 +9,9 @@ For example, using the inspector you will find that menu items have their radius
 ```
 npm run build-bulma
 ```
+
+When using this in DDEV, use:
+
+```
+ddev css
+```
