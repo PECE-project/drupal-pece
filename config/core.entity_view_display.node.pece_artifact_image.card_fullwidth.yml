@@ -1,0 +1,94 @@
+uuid: f9fd7895-f6f5-4b0c-a881-d5718fe494f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card_fullwidth
+    - field.field.node.pece_artifact_image.field_ark_enabled
+    - field.field.node.pece_artifact_image.field_authors
+    - field.field.node.pece_artifact_image.field_cite_as
+    - field.field.node.pece_artifact_image.field_created_date
+    - field.field.node.pece_artifact_image.field_crit_commentary
+    - field.field.node.pece_artifact_image.field_fieldsite
+    - field.field.node.pece_artifact_image.field_file_format
+    - field.field.node.pece_artifact_image.field_groups_with_view_access
+    - field.field.node.pece_artifact_image.field_image_artifact_media_image
+    - field.field.node.pece_artifact_image.field_language
+    - field.field.node.pece_artifact_image.field_location
+    - field.field.node.pece_artifact_image.field_pece_all_can_view
+    - field.field.node.pece_artifact_image.field_pece_geolocation
+    - field.field.node.pece_artifact_image.field_pece_license
+    - field.field.node.pece_artifact_image.field_pece_project_ref
+    - field.field.node.pece_artifact_image.field_people_with_edit_access
+    - field.field.node.pece_artifact_image.field_people_with_view_access
+    - field.field.node.pece_artifact_image.field_source
+    - field.field.node.pece_artifact_image.field_tags
+    - field.field.node.pece_artifact_image.field_use_fieldsite_local
+    - node.type.pece_artifact_image
+  module:
+    - entity_form_field_label
+    - fences
+    - layout_builder
+    - layout_library
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_library:
+    enable: false
+_core:
+  default_config_hash: MuovIFk4ECq7flqV4TYjRCZIRISXsXHgLOIbeNcreKs
+id: node.pece_artifact_image.card_fullwidth
+targetEntityType: node
+bundle: pece_artifact_image
+mode: card_fullwidth
+content:
+  field_image_artifact_media_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: full
+      link: false
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    weight: 0
+    region: content
+hidden:
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  'extra_field_type_tray_icon_display:icons': true
+  field_ark_enabled: true
+  field_authors: true
+  field_cite_as: true
+  field_created_date: true
+  field_crit_commentary: true
+  field_fieldsite: true
+  field_file_format: true
+  field_groups_with_view_access: true
+  field_language: true
+  field_location: true
+  field_pece_all_can_view: true
+  field_pece_geolocation: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
+  field_source: true
+  field_tags: true
+  field_use_fieldsite_local: true
+  langcode: true
+  links: true
+  og_audience: true
+  search_api_excerpt: true
