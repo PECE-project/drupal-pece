@@ -56,30 +56,36 @@
 {% block navbar %}
 {% if page.navbar_branding or page.navbar_social or page.primary_menu %}
 {# Top navbar #}
-<nav class="navbar">
-  <div class="container">
+<nav class="navbar column">
+  <div class="container is-flex">
+    {% block primary_menu %}
+      {% if page.primary_menu %}
+        {{ page.primary_menu }}
+      {% endif %}
+    {% endblock primary_menu %}
     <input class="menu-btn-checkbox" type="checkbox" id="menu-btn-checkbox">
-    <label class="menu-btn navbar-brand" for="menu-btn-checkbox">
+    <label class="menu-btn is-flex-touch is-align-items-start pt-4" for="menu-btn-checkbox">
       <span class="menu-btn-inside ">
         <span class="navicon"></span>
         <span class="menu-btn-text">Menu</span>
       </span>
     </label>
-    <div id="navbar-menu" class="columns is-flex-grow-1">
-      <div class="column is-three-quarters">
-      {% block primary_menu %}
-      {% if page.primary_menu %}
-      {{ page.primary_menu }}
-      {% endif %}
-      {% endblock primary_menu %}
+
+    <div id="navbar-menu" class="columns is-desktop is-flex-grow-1">
+
+      <div class="navbar-menu is-hidden-desktop">
+        {{ page.navbar_social }}
+      </div>
+
       {% if page.header_search %}
-      </div>
-      <div class="column is-one-quarter">
-      {{ page.header_search }}
-      </div>
+        <div class="is-hidden-touch pt-4">
+          {{ page.header_search }}
+        </div>
       {% endif %}
+
     </div>
-  </div>
+
+  </div> <!-- end container -->
 </nav>
 {% endif %}
 {% endblock navbar %}
@@ -92,15 +98,16 @@
       <div class="columns is-vcentered">
         <div class="column">
           {% block navbar_branding %}
-          {% if page.navbar_branding %}
-          {{ page.navbar_branding }}
-          {% endif %}
+            {% if page.navbar_branding %}
+            {{ page.navbar_branding }}
+            {% endif %}
           {% endblock navbar_branding %}
+          {{ page.header }}
           {% if is_front and site_slogan %}
             <h1 class="title">{{ site_slogan }}</h1>
           {% endif %}
         </div>
-        <div class="column is-narrow">
+        <div class="column is-narrow is-hidden-touch">
           {# actually user account menu #}
           {{ page.navbar_social }}
         </div>

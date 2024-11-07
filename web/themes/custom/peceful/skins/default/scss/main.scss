@@ -42,6 +42,23 @@ a:hover {
   overflow: hidden;
 }
 
+.dialog-off-canvas-main-canvas {
+  position: relative;
+  z-index: 0;
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    background-color: var(--primary-95);
+    mask-image: url(../../../images/curve.svg);
+    mask-repeat: no-repeat;
+  }
+}
+
 // Content
 
 .links.inline.bulma {
@@ -104,32 +121,54 @@ a:hover {
 }
 
 // Main menu links
-.navbar-menu li {
-  margin: 0 .25rem;
-  a {
-    // The variables i am using here do not even exist as far as i can tell,
-    // however they allow the way Bulma does hover to still work whereas
-    // background-color: transparent does not.  :shrug:
-    --menu-item-h: var(--primary-95-h);
-    --menu-item-s: var(--primary-95-s);
-    --menu-item-l: var(--primary-95-l);
-    border-left: var(--primary-light) 5px solid;
-    padding: 1rem 3rem;
-    text-align: center;
-    border-right: transparent 5px solid;
-    &.is-active {
-      border-left-color: var(--primary);
-      background-color: transparent;
+.main-menu,
+.account-menu {
+  display: flex;
+
+  li {
+    margin: 0 .25rem;
+    a {
+      // The variables i am using here do not even exist as far as i can tell,
+      // however they allow the way Bulma does hover to still work whereas
+      // background-color: transparent does not.  :shrug:
+      --menu-item-h: var(--primary-95-h);
+      --menu-item-s: var(--primary-95-s);
+      --menu-item-l: var(--primary-95-l);
+      border-left: var(--primary-light) 5px solid;
+      padding: 1rem 3rem;
+      text-align: center;
+      border-right: transparent 5px solid;
+      &.is-active {
+        border-left-color: var(--primary);
+        background-color: transparent;
+        &:hover {
+          cursor: default;
+          pointer-events: none;
+        }
+      }
       &:hover {
-        cursor: default;
-        pointer-events: none;
+        // 'selected' color is prettier & can be reused as bar indicates selected.
+        --menu-item-h: var(--menu-item-selected-h);
+        --menu-item-s: var(--menu-item-selected-s);
+      }
+
+      @include mx.until(touch) {
+        padding: 1rem 4vw;
       }
     }
-    &:hover {
-      // 'selected' color is prettier & can be reused as bar indicates selected.
-      --menu-item-h: var(--menu-item-selected-h);
-      --menu-item-s: var(--menu-item-selected-s);
-    }
+  }
+}
+
+.main-menu {
+  @include mx.until(bulma.$navbar-breakpoint) {
+    flex-wrap: wrap;
+  }
+}
+
+
+#block-global-text-search {
+  @include mx.touch {
+    display: none;
   }
 }
 
@@ -151,23 +190,6 @@ a:hover {
   box-shadow: 0 6px 4px #f7fafc;
 }
 
-.dialog-off-canvas-main-canvas {
-  position: relative;
-  z-index: 0;
-  &::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 400px;
-    background-color: var(--primary-95);
-    mask-image: url(../../../images/curve.svg);
-    mask-repeat: no-repeat;
-  }
-}
-
 // Note that because the CSS trick for opening/closing the megamenu region
 // with a checkbox works with the sibling selector, all the button styles
 // must remain *outside* the .region-megamenu class
@@ -179,9 +201,8 @@ a:hover {
   float: right;
 }
 .menu-btn {
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
+ 
   // We do not use navbar-burger because we do not want the styles Bulma adds.
   .navicon {
     background: bulma.$body-color;
@@ -246,15 +267,28 @@ a:hover {
     opacity: 0;
     // Close quickly.
     transition-duration: .5s;
+
+    .account-menu {
+      flex-direction: column;
+    }
   }
   // Show megamenu region when open.
-  .menu-btn-checkbox:checked~#navbar-menu {
-    height: 100vh;
-    opacity: 1;
-    transition-property: opacity;
-    transition-timing-function: linear;
-    transition-duration: .75s;
+  .menu-btn-checkbox:checked {
+    &~#navbar-menu {
+      height: 100vh;
+      opacity: 1;
+      transition-property: opacity;
+      transition-timing-function: linear;
+      transition-duration: .75s;
+    }
+    + label {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1001;
+    }
   }
+  
 }
 
 // Search & Facets

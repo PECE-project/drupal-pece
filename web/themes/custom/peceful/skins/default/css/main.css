@@ -19652,6 +19652,23 @@ a:hover .facet-item__count {
   text-decoration: none;
 }
 
+.dialog-off-canvas-main-canvas {
+  position: relative;
+  z-index: 0;
+}
+.dialog-off-canvas-main-canvas::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  background-color: var(--primary-95);
+  mask-image: url(../../../images/curve.svg);
+  mask-repeat: no-repeat;
+}
+
 .links.inline.bulma {
   padding-top: 0;
 }
@@ -19714,10 +19731,16 @@ a:hover .facet-item__count {
   background-color: transparent;
 }
 
-.navbar-menu li {
+.main-menu,
+.account-menu {
+  display: flex;
+}
+.main-menu li,
+.account-menu li {
   margin: 0 0.25rem;
 }
-.navbar-menu li a {
+.main-menu li a,
+.account-menu li a {
   --menu-item-h: var(--primary-95-h);
   --menu-item-s: var(--primary-95-s);
   --menu-item-l: var(--primary-95-l);
@@ -19726,17 +19749,38 @@ a:hover .facet-item__count {
   text-align: center;
   border-right: transparent 5px solid;
 }
-.navbar-menu li a.is-active {
+.main-menu li a.is-active,
+.account-menu li a.is-active {
   border-left-color: var(--primary);
   background-color: transparent;
 }
-.navbar-menu li a.is-active:hover {
+.main-menu li a.is-active:hover,
+.account-menu li a.is-active:hover {
   cursor: default;
   pointer-events: none;
 }
-.navbar-menu li a:hover {
+.main-menu li a:hover,
+.account-menu li a:hover {
   --menu-item-h: var(--menu-item-selected-h);
   --menu-item-s: var(--menu-item-selected-s);
+}
+@media screen and (max-width: touch-1px) {
+  .main-menu li a,
+  .account-menu li a {
+    padding: 1rem 4vw;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .main-menu {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  #block-global-text-search {
+    display: none;
+  }
 }
 
 /*
@@ -19756,23 +19800,6 @@ a:hover .facet-item__count {
   box-shadow: 0 6px 4px #f7fafc;
 }
 
-.dialog-off-canvas-main-canvas {
-  position: relative;
-  z-index: 0;
-}
-.dialog-off-canvas-main-canvas::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 400px;
-  background-color: var(--primary-95);
-  mask-image: url(../../../images/curve.svg);
-  mask-repeat: no-repeat;
-}
-
 .menu-btn-checkbox {
   display: none;
 }
@@ -19781,7 +19808,7 @@ a:hover .facet-item__count {
   float: right;
 }
 
-.menu-btn:hover {
+.menu-btn {
   cursor: pointer;
 }
 .menu-btn .navicon {
@@ -19843,12 +19870,21 @@ a:hover .facet-item__count {
     opacity: 0;
     transition-duration: 0.5s;
   }
+  #navbar-menu .account-menu {
+    flex-direction: column;
+  }
   .menu-btn-checkbox:checked ~ #navbar-menu {
     height: 100vh;
     opacity: 1;
     transition-property: opacity;
     transition-timing-function: linear;
     transition-duration: 0.75s;
+  }
+  .menu-btn-checkbox:checked + label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1001;
   }
 }
 #block-global-text-search .form-item {
