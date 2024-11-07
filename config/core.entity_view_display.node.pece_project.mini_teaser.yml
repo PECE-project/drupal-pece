@@ -1,0 +1,76 @@
+uuid: bc4e2e14-b5e4-4c41-a4ed-29a5e7ffd431
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.mini_teaser
+    - field.field.node.pece_project.body
+    - field.field.node.pece_project.field_ark_enabled
+    - field.field.node.pece_project.field_fieldsites
+    - field.field.node.pece_project.field_groups_with_view_access
+    - field.field.node.pece_project.field_media_image_banner
+    - field.field.node.pece_project.field_media_thumbnail
+    - field.field.node.pece_project.field_pece_all_can_view
+    - field.field.node.pece_project.field_people_with_edit_access
+    - field.field.node.pece_project.field_people_with_view_access
+    - field.field.node.pece_project.field_project_consent_form_file
+    - field.field.node.pece_project.field_project_design_group
+    - field.field.node.pece_project.field_project_featured_essays
+    - field.field.node.pece_project.field_project_fund_agency_link
+    - field.field.node.pece_project.field_project_institution_link
+    - field.field.node.pece_project.field_project_intv_request_file
+    - field.field.node.pece_project.field_project_lead
+    - field.field.node.pece_project.field_project_open_notes
+    - field.field.node.pece_project.field_project_start_end_date
+    - field.field.node.pece_project.field_project_struct_analytics
+    - field.field.node.pece_project.field_project_subst_logic
+    - field.field.node.pece_project.field_tags
+    - node.type.pece_project
+  module:
+    - layout_builder
+    - layout_library
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_library:
+    enable: false
+id: node.pece_project.mini_teaser
+targetEntityType: node
+bundle: pece_project
+mode: mini_teaser
+content:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  field_ark_enabled: true
+  field_fieldsites: true
+  field_groups_with_view_access: true
+  field_media_image_banner: true
+  field_media_thumbnail: true
+  field_pece_all_can_view: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
+  field_project_consent_form_file: true
+  field_project_design_group: true
+  field_project_featured_essays: true
+  field_project_fund_agency_link: true
+  field_project_institution_link: true
+  field_project_intv_request_file: true
+  field_project_lead: true
+  field_project_open_notes: true
+  field_project_start_end_date: true
+  field_project_struct_analytics: true
+  field_project_subst_logic: true
+  field_tags: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
