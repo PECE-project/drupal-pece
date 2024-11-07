@@ -1,0 +1,41 @@
+uuid: a9916285-2ddc-4d44-903d-91f824d90ca0
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.fullwidth_1008
+    - image.style.fullwidth_112
+    - image.style.fullwidth_1120
+    - image.style.fullwidth_1232
+    - image.style.fullwidth_1344
+    - image.style.fullwidth_224
+    - image.style.fullwidth_336
+    - image.style.fullwidth_448
+    - image.style.fullwidth_560
+    - image.style.fullwidth_672
+    - image.style.fullwidth_784
+    - image.style.fullwidth_896
+id: fullwidth
+label: 'Full width'
+image_style_mappings:
+  -
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: '(min-width:1344px) 1344px, 99vw'
+      sizes_image_styles:
+        - fullwidth_1008
+        - fullwidth_112
+        - fullwidth_1120
+        - fullwidth_1232
+        - fullwidth_1344
+        - fullwidth_224
+        - fullwidth_336
+        - fullwidth_448
+        - fullwidth_560
+        - fullwidth_672
+        - fullwidth_784
+        - fullwidth_896
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: fullwidth_224
