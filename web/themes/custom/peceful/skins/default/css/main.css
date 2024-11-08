@@ -19645,6 +19645,29 @@ has-background-danger.is-hoverable:active {
   --shadow: 0 0.5em 1em -0.125em hsla(var(--shadow-h), var(--shadow-s), var(--shadow-l), 0.1), 0 0px 0 1px hsla(var(--shadow-h), var(--shadow-s), var(--shadow-l), 0.02);
 }
 
+.full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
+  max-height: inherit;
+  max-width: unset;
+}
+@media screen and (min-width: 1024px) and (max-width: 1215px) {
+  .full-width-desktop-only {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    max-height: inherit;
+    max-width: unset;
+  }
+}
+
 a:hover {
   text-decoration: underline;
 }
@@ -19681,7 +19704,7 @@ a:hover .facet-item__count {
   margin-left: -50vw !important;
   margin-right: -50vw !important;
   max-height: inherit;
-  overflow: hidden;
+  max-width: unset;
   background-color: var(--grey-light);
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -19947,6 +19970,17 @@ a:hover .facet-item__count {
   display: none !important;
 }
 
+#navbar-menu {
+  container-type: inline-size;
+  container-name: text-search;
+}
+
+@container text-search (max-width: 283px) {
+  #block-global-text-search .form-item {
+    width: 95%;
+    margin-bottom: 0.4rem;
+  }
+}
 .bef-exposed-form details {
   margin-left: 1rem;
   font-size: 0.8rem;

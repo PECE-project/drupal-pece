@@ -35,17 +35,6 @@ $beige-lighter: #eff0eb;
   }
 }
 
-
-// Typography
-
-a:hover {
-  text-decoration: underline;
-  .facet-item__count {
-    text-decoration: none;
-  }
-}
-
-
 // Full Width
 @mixin full-width {
   width: 100vw;
@@ -55,7 +44,26 @@ a:hover {
   margin-left: -50vw !important;
   margin-right: -50vw !important;
   max-height: inherit;
-  overflow: hidden;
+  max-width: unset; // this to overcome the bulma .container width
+  // overflow: hidden;
+}
+
+.full-width {
+  @include full-width();
+  &-desktop-only {
+    @include mx.desktop-only {
+      @include full-width();
+    }
+  }
+}
+
+// Typography
+
+a:hover {
+  text-decoration: underline;
+  .facet-item__count {
+    text-decoration: none;
+  }
 }
 
 .dialog-off-canvas-main-canvas {
@@ -328,9 +336,12 @@ a:hover {
 // Search & Facets
 
 #block-global-text-search {
+  
+  
   .form-item {
     width: 70%;
     display: inline-block;
+
   }
   .form-actions {
     width: auto;
@@ -339,7 +350,26 @@ a:hover {
   div[data-drupal-selector$="-collapsible"] {
     display: none !important;
   }
+  
+  // form {
+  //   container-type: inline-size;
+  //   container-name: text-search;
+  // }
+
 }
+
+#navbar-menu {
+  container-type: inline-size;
+  container-name: text-search;
+}
+
+@container text-search (max-width: 283px) {
+  #block-global-text-search .form-item {
+    width: 95%;
+    margin-bottom: .4rem;
+  }
+}
+
 
 .bef-exposed-form {
   details {

@@ -57,7 +57,7 @@
 {% if page.navbar_branding or page.navbar_social or page.primary_menu %}
 {# Top navbar #}
 <nav class="navbar column">
-  <div class="container is-flex is-justify-content-space-between">
+  <div class="container is-flex is-justify-content-space-between full-width-desktop-only">
     {% block primary_menu %}
       {% if page.primary_menu %}
         {{ page.primary_menu }}
@@ -84,7 +84,7 @@
       </div>
 
       {% if page.header_search %}
-        <div class="is-hidden-touch pt-4">
+        <div class="is-hidden-touch pt-4 ml-auto">
           {{ page.header_search }}
         </div>
       {% endif %}
@@ -101,7 +101,7 @@
   {# Header hero region + search #}
   <div class="hero-body">
     <div class="container">
-      <div class="columns is-vcentered">
+      <div class="columns is-vcentered full-width-desktop-only">
         <div class="column">
           {% block navbar_branding %}
             {% if page.navbar_branding %}
