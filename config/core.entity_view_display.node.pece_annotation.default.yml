@@ -28,12 +28,6 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 101
-    region: content
-  'extra_field_type_tray_icon_display:icons':
-    type: 'extra_field_type_tray_icon_display:icons'
-    settings: {  }
-    third_party_settings: {  }
     weight: 0
     region: content
   field_annotation_analytic:
@@ -46,7 +40,7 @@ content:
       entity_form_field_label:
         new_label: ''
         rewrite_label: 0
-    weight: 104
+    weight: 2
     region: content
   field_annotation_artifact:
     type: entity_reference_label
@@ -54,7 +48,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 103
+    weight: 1
     region: content
   field_ark_enabled:
     type: boolean
@@ -64,7 +58,7 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 109
+    weight: 4
     region: content
   field_groups_with_view_access:
     type: entity_reference_label
@@ -72,7 +66,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 113
+    weight: 7
     region: content
   field_pece_all_can_view:
     type: boolean
@@ -82,7 +76,7 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 112
+    weight: 6
     region: content
   field_pece_license:
     type: entity_reference_label
@@ -90,7 +84,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 110
+    weight: 5
     region: content
   field_people_with_edit_access:
     type: entity_reference_label
@@ -98,7 +92,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 115
+    weight: 9
     region: content
   field_people_with_view_access:
     type: entity_reference_label
@@ -106,7 +100,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 114
+    weight: 8
     region: content
   field_tags:
     type: entity_reference_label
@@ -114,15 +108,16 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 105
+    weight: 3
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 10
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  'extra_field_type_tray_icon_display:icons': true
   langcode: true
   search_api_excerpt: true

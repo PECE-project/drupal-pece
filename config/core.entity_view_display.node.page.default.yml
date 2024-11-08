@@ -9,6 +9,7 @@ dependencies:
     - node.type.page
   module:
     - layout_builder
+    - layout_discovery
     - layout_library
     - layout_paragraphs
     - text
@@ -123,6 +124,11 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 1
+    region: content
+  'extra_field_type_tray_icon_display:icons':
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
     region: content
   field_body_paragraph:
     type: layout_paragraphs
