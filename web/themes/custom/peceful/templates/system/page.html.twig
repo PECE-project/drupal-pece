@@ -57,7 +57,7 @@
 {% if page.navbar_branding or page.navbar_social or page.primary_menu %}
 {# Top navbar #}
 <nav class="navbar column">
-  <div class="container is-flex">
+  <div class="container is-flex is-justify-content-space-between">
     {% block primary_menu %}
       {% if page.primary_menu %}
         {{ page.primary_menu }}
