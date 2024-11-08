@@ -25,6 +25,9 @@ function pece_annotations_form_alter(&$form, \Drupal\Core\Form\FormStateInterfac
     if (isset($form["field_annotation_analytic"]["widget"]["current"]["items"][0]["replace_button"])) {
       $form["field_annotation_analytic"]["widget"]["current"]["items"][0]["replace_button"]["#attributes"]["class"] = [];
     }
+    if (isset($form["field_annotation_analytic"]["widget"]["current"]["items"][0]["remove_button"])) {
+        $form["field_annotation_analytic"]["widget"]["current"]["items"][0]["remove_button"]["#attributes"]["class"] = [];
+    }
 
   }
 }
