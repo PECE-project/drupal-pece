@@ -182,15 +182,18 @@
         "oomphinc/composer-installers-extender": "~1.0 || ~2.0"
     },
     "require-dev": {
+        "behat/behat": "^3.15",
         "codeception/codeception": "^5",
         "codeception/module-asserts": "^2.0",
         "drupal/config_devel": "^1.8",
         "drupal/core-dev": "^10",
         "drupal/devel": "^5.0",
         "drupal/drupal-driver": "^2.1.1",
+        "drupal/drupal-extension": "^5.1",
         "drupal/image_sizes": "^3.0",
         "drupal/migrate_devel": "^2",
         "ec-europa/toolkit": "^9",
+        "friends-of-behat/service-container-extension": "^1.1",
         "phpspec/prophecy-phpunit": "^2.0"
     },
     "conflict": {
@@ -218,6 +221,11 @@
             "composer install",
             "drush -y si pece --existing-config"
         ]
+    },
+    "autoload": {
+        "psr-4": {
+            "Drupal\\Tests\\pece_annotations\\": "web/profiles/pece/modules/pece_annotations/tests/"
+        }
     },
     "extra": {
         "composer-exit-on-patch-failure": true,
