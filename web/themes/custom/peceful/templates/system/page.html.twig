@@ -63,6 +63,7 @@
         {{ page.primary_menu }}
       {% endif %}
     {% endblock primary_menu %}
+    {% if logged_in %}
     <input class="menu-btn-checkbox" type="checkbox" id="menu-btn-checkbox">
     <label class="menu-btn is-flex-touch is-align-items-start pt-4" for="menu-btn-checkbox">
       <span class="menu-btn-inside ">
@@ -70,6 +71,11 @@
         <span class="menu-btn-text">Menu</span>
       </span>
     </label>
+    {% else %}
+      <div class="is-hidden-desktop">
+        {{ page.navbar_social }}
+      </div>
+    {% endif %}
 
     <div id="navbar-menu" class="columns is-desktop is-flex-grow-1">
 
@@ -102,7 +108,6 @@
             {{ page.navbar_branding }}
             {% endif %}
           {% endblock navbar_branding %}
-          {{ page.header }}
           {% if is_front and site_slogan %}
             <h1 class="title">{{ site_slogan }}</h1>
           {% endif %}
