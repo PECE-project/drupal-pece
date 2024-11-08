@@ -19966,10 +19966,10 @@ article .contextual {
   padding-bottom: 0;
 }
 .meta-content h3 {
-  margin: 0;
+  font-size: var(--body-font-size);
 }
 .meta-content h3:not(:first-child) {
-  margin-top: 0;
+  margin: 0;
 }
 .meta-content .type-tray__icon--vector svg {
   padding: 10px;
@@ -19985,10 +19985,10 @@ article .contextual {
   padding-bottom: 2rem;
 }
 .mini-teaser h2 {
-  margin: 0;
+  font-size: var(--body-font-size);
 }
 .mini-teaser h2:not(:first-child) {
-  margin-top: 0;
+  margin: 0;
 }
 .mini-teaser .type-tray__icon--vector svg {
   height: 3em;
@@ -19998,6 +19998,15 @@ article .contextual {
 
 .media-fullwidth img {
   width: 100%;
+}
+
+.type-tray__icon--vector svg {
+  padding: 20px;
+  fill: white;
+  background-color: var(--link-text);
+  float: left;
+  margin-right: 20px;
+  box-sizing: border-box;
 }
 
 /*# sourceMappingURL=main.css.map */
