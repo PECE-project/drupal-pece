@@ -1,0 +1,59 @@
+uuid: a8caa2b9-ed4a-47a1-abc9-f31bd14a2497
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.preview
+    - field.field.media.private_pdf.field_filesize
+    - field.field.media.private_pdf.field_mimetype
+    - field.field.media.private_pdf.field_private_media_document
+    - media.type.private_pdf
+  module:
+    - entity_form_field_label
+    - fences
+    - layout_builder
+    - pdfpreview
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.private_pdf.preview
+targetEntityType: media
+bundle: private_pdf
+mode: preview
+content:
+  field_private_media_document:
+    type: pdfpreview
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+      tag: span
+      fallback_formatter: file_default
+      image_loading:
+        attribute: lazy
+      show_description: 0
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_filesize: true
+  field_mimetype: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true
