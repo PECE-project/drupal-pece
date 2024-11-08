@@ -1,0 +1,24 @@
+uuid: 68635d63-86f5-4ebb-887d-073a4ae55521
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - type_tray_icon_display
+  theme:
+    - peceful
+third_party_settings:
+  block_class:
+    classes: 'column is-narrow'
+id: peceful_typetrayicondisplay
+theme: peceful
+region: header
+weight: 0
+provider: null
+plugin: type_tray_icon_display_block
+settings:
+  id: type_tray_icon_display_block
+  label: 'Type Tray Icon Display'
+  label_display: '0'
+  provider: type_tray_icon_display
+visibility: {  }
