@@ -91,20 +91,26 @@
     <div class="container">
       <div class="columns is-vcentered">
         <div class="column">
-      {% block navbar_branding %}
-      {% if page.navbar_branding %}
-      {{ page.navbar_branding }}
-      {% endif %}
-      {% endblock navbar_branding %}
-          {{ page.header }}
+          {% block navbar_branding %}
+          {% if page.navbar_branding %}
+          {{ page.navbar_branding }}
+          {% endif %}
+          {% endblock navbar_branding %}
           {% if is_front and site_slogan %}
             <h1 class="title">{{ site_slogan }}</h1>
           {% endif %}
         </div>
         <div class="column is-narrow">
+          {# actually user account menu #}
           {{ page.navbar_social }}
         </div>
       </div>
+      {% if not is_front %}
+      {# Neither the page title nor content type icon show on the front page. #}
+      <div class="columns is-vcentered">
+        {{ page.header }}
+      </div>
+      {% endif %}
     </div>
   </div>
   {% endblock header_and_search %}
