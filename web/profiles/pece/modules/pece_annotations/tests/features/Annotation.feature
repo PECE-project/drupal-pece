@@ -5,3 +5,5 @@ Feature: Home Page
     When I go to "/node/pece_annotation/step_1"
     Then I should see the heading "Step 1"
     And I should see the text "Select one Structured Analytic (Question Set) and Analytic (Question)"
+    And I should see the link "Select Question Set"
+    And I should see the link "Add question set"
