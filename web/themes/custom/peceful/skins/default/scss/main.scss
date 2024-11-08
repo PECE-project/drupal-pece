@@ -127,6 +127,9 @@ a:hover {
 
   li {
     margin: 0 .25rem;
+    @include mx.touch {
+      margin: 0;
+    }
     a {
       // The variables i am using here do not even exist as far as i can tell,
       // however they allow the way Bulma does hover to still work whereas
@@ -152,8 +155,8 @@ a:hover {
         --menu-item-s: var(--menu-item-selected-s);
       }
 
-      @include mx.until(touch) {
-        padding: 1rem 4vw;
+      @include mx.touch {
+        padding: 1rem 3vw;
       }
     }
   }
@@ -167,6 +170,9 @@ a:hover {
       [href="/search"]  {
         font-size: .001px;
         padding: 1rem 2rem;
+        @include mx.touch {
+          padding: 1rem calc(2vw - .25rem) 1rem 2vw;
+        }
         &::before {
           content: '';
           font-size: 1rem;

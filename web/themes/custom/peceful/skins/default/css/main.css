@@ -19739,6 +19739,12 @@ a:hover .facet-item__count {
 .account-menu li {
   margin: 0 0.25rem;
 }
+@media screen and (max-width: 1023px) {
+  .main-menu li,
+  .account-menu li {
+    margin: 0;
+  }
+}
 .main-menu li a,
 .account-menu li a {
   --menu-item-h: var(--primary-95-h);
@@ -19764,10 +19770,10 @@ a:hover .facet-item__count {
   --menu-item-h: var(--menu-item-selected-h);
   --menu-item-s: var(--menu-item-selected-s);
 }
-@media screen and (max-width: touch-1px) {
+@media screen and (max-width: 1023px) {
   .main-menu li a,
   .account-menu li a {
-    padding: 1rem 4vw;
+    padding: 1rem 3vw;
   }
 }
 
@@ -19780,6 +19786,14 @@ a:hover .facet-item__count {
     font-size: 0.001px;
     padding: 1rem 2rem;
   }
+}
+@media screen and (max-width: 1023px) and (max-width: 1023px) {
+  .main-menu li [data-drupal-link-system-path="<front>"],
+  .main-menu li [href="/search"] {
+    padding: 1rem calc(2vw - 0.25rem) 1rem 2vw;
+  }
+}
+@media screen and (max-width: 1023px) {
   .main-menu li [data-drupal-link-system-path="<front>"]::before,
   .main-menu li [href="/search"]::before {
     content: "";
