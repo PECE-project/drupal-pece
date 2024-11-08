@@ -3,14 +3,17 @@ default:
     default:
       paths:
         - '%paths.base%/tests/features'
+        - '%paths.base%/web/profiles/pece/modules/pece_annotations/tests/features/'
       contexts:
-        - Drupal\DrupalExtension\Context\MarkupContext
-        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\Tests\pece_annotations\FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
         - Drupal\DrupalExtension\Context\MinkContext
-      filters:
-        tags: "${behat.tags}"
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\MarkupContext
+        - Drupal\DrupalExtension\Context\DrushContext
   extensions:
     Drupal\MinkExtension:
+      browserkit_http: ~
       ajax_timeout: 10
       browser_name: '${selenium.browser}'
       javascript_session: 'selenium2'
@@ -24,6 +27,7 @@ default:
             switches:
               - "--headless"
               - "--disable-gpu"
+              - "--no-sandbox"
           extra_capabilities:
             unexpectedAlertBehaviour: accept
             goog:chromeOptions:

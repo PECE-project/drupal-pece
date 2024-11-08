@@ -7,4 +7,7 @@ function pece_annotations_form_alter(&$form, \Drupal\Core\Form\FormStateInterfac
     if ($form_id == 'entity_browser_analytic_browser_form') {
         $form['#attached']['library'][] = 'pece_annotations/pece_annotations';
     }
+    if ($form_id == 'node_pece_annotation_annotation_step_2_form') {
+        $form['field_annotation_analytic']['widget']['current']['#prefix'] = '<p>Select one Structured Analytic (Question Set) and Analytic (Question)</p>';
+    }
 }
