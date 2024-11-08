@@ -19775,6 +19775,27 @@ a:hover .facet-item__count {
   .main-menu {
     flex-wrap: wrap;
   }
+  .main-menu li [data-drupal-link-system-path="<front>"],
+  .main-menu li [href="/search"] {
+    font-size: 0.001px;
+    padding: 1rem 2rem;
+  }
+  .main-menu li [data-drupal-link-system-path="<front>"]::before,
+  .main-menu li [href="/search"]::before {
+    content: "";
+    font-size: 1rem;
+    width: 1.5rem;
+    aspect-ratio: 1;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: inline-block;
+  }
+  .main-menu li [data-drupal-link-system-path="<front>"]::before {
+    background-image: url(../../../icons/home.svg);
+  }
+  .main-menu li [href="/search"]::before {
+    background-image: url(../../../icons/search.svg);
+  }
 }
 
 @media screen and (max-width: 1023px) {
