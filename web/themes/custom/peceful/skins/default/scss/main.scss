@@ -19,6 +19,22 @@ $beige-lighter: #eff0eb;
 
 @use "bulma/sass/utilities/mixins" as mx;
 
+// Mixins
+
+@mixin icon($icon) {
+  font-size: .001px;
+  &::before {
+    content: '';
+    font-size: 1rem;
+    width: 1.5rem;
+    aspect-ratio: 1;
+    background-image: url(../../../icons/#{$icon});
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: inline-block;
+  }
+}
+
 
 // Typography
 
@@ -163,37 +179,26 @@ a:hover {
 }
 
 .main-menu { 
-  @include mx.until(bulma.$navbar-breakpoint) {
+  @include mx.touch {
     flex-wrap: wrap;
     li {
-      [data-drupal-link-system-path="<front>"],
-      [href="/search"]  {
-        font-size: .001px;
-        padding: 1rem 2rem;
-        @include mx.touch {
-          padding: 1rem calc(2vw - .25rem) 1rem 2vw;
-        }
-        &::before {
-          content: '';
-          font-size: 1rem;
-          width: 1.5rem;
-          aspect-ratio: 1;
-          background-size: cover;
-          background-repeat: no-repeat;
-          display: inline-block;
-        }
-
+      [data-drupal-link-system-path="<front>"] {
+        @include icon('home.svg');
       }
-      [data-drupal-link-system-path="<front>"]::before {
-        background-image: url(../../../icons/home.svg) ;
-      }
-      [href="/search"]::before {
-        background-image: url(../../../icons/search.svg) ;
+      [href="/search"] {
+        @include icon('search.svg');
       }
     }
   }
 }
 
+.account-menu {
+  @include mx.touch {
+    [href="/user/login"] {
+      @include icon('user.svg')
+    }
+  }
+}
 
 #block-global-text-search {
   @include mx.touch {
