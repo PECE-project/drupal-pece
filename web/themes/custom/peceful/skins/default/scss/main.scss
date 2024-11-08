@@ -402,9 +402,9 @@ article .contextual {
 .meta-content {
   padding-bottom: 0;
   h3 {
-    margin: 0;
+    font-size:var(--body-font-size);
     &:not(:first-child) {
-      margin-top: 0;
+      margin: 0;
     }
   }
   .type-tray__icon--vector svg {
@@ -421,9 +421,9 @@ article .contextual {
 .mini-teaser {
   padding-bottom: 2rem;
   h2 {
-    margin: 0;
+    font-size:var(--body-font-size);
     &:not(:first-child) {
-      margin-top: 0;
+      margin: 0;
     }
   }
   .type-tray__icon--vector svg {
@@ -437,4 +437,13 @@ article .contextual {
   img{
     width: 100%;
   }
+}
+
+.type-tray__icon--vector svg {
+	padding: 20px;
+	fill: white;
+	background-color: var(--link-text);
+	float: left;
+	margin-right: 20px;
+	box-sizing: border-box;
 }
