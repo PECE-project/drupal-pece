@@ -22,17 +22,23 @@ function pece_annotations_form_alter(&$form, \Drupal\Core\Form\FormStateInterfac
   if ($form_id == 'node_pece_annotation_annotation_step_2_form') {
     $form['#attached']['library'][] = 'pece_annotations/pece_annotations';
     $form['field_annotation_analytic']['widget']['current']['#prefix'] = '<p>Select one Structured Analytic (Question Set) and Analytic (Question)</p>';
-    if (isset($form["field_annotation_analytic"]["widget"]["current"]["items"][0]["replace_button"])) {
-      $form["field_annotation_analytic"]["widget"]["current"]["items"][0]["replace_button"]["#attributes"]["class"] = [];
-    }
-    if (isset($form["field_annotation_analytic"]["widget"]["current"]["items"][0]["remove_button"])) {
-        $form["field_annotation_analytic"]["widget"]["current"]["items"][0]["remove_button"]["#attributes"]["class"] = [];
-    }
-
+    unset_entity_browser_button_icon_classes_so_just_text_is_displayed($form);
   }
 }
 
 function pece_annotations_preprocess_node__pece_analytic__analytic_on_annotation_form(&$variables) {
   $variables['title'] = $variables['elements']['#node']->getTitle();
   $variables['question_set_title'] = $variables['elements']['#node']->field_analytic_question_set->entity->getName() ?? "";
+}
+
+/**
+ * Function for use in node_pece_annotation_annotation_step_2_form form alter
+ */
+function unset_entity_browser_button_icon_classes_so_just_text_is_displayed(&$form) {
+  if (isset($form["field_annotation_analytic"]["widget"]["current"]["items"][0]["replace_button"])) {
+    $form["field_annotation_analytic"]["widget"]["current"]["items"][0]["replace_button"]["#attributes"]["class"] = [];
+  }
+  if (isset($form["field_annotation_analytic"]["widget"]["current"]["items"][0]["remove_button"])) {
+      $form["field_annotation_analytic"]["widget"]["current"]["items"][0]["remove_button"]["#attributes"]["class"] = [];
+  }
 }
