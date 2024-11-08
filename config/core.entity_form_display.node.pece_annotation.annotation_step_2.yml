@@ -51,12 +51,13 @@ content:
     region: content
     settings:
       entity_browser: analytic_browser
-      field_widget_display: label
+      field_widget_display: rendered_entity
       field_widget_edit: false
       field_widget_remove: false
       field_widget_replace: true
       open: true
-      field_widget_display_settings: {  }
+      field_widget_display_settings:
+        view_mode: analytic_on_annotation_form
       selection_mode: selection_append
     third_party_settings:
       entity_form_field_label:
