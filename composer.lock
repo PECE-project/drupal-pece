@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7df05f31a3a20f2836072748ccb490c2",
+    "content-hash": "7dd1411d6ff5e36231f0b18f3028213b",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -3229,14 +3229,16 @@
         },
         {
             "name": "drupal/cite",
-            "version": "dev-3464149-modern-drupal-version",
+            "version": "dev-2.0.x",
             "source": {
                 "type": "git",
-                "url": "git@git.drupal.org:issue/cite-3464149.git",
+                "url": "https://git.drupalcode.org/project/cite.git",
                 "reference": "3d4cf8b9c219eb4afc807f452bad6d3824148d97"
             },
             "require": {
                 "drupal/bibcite": "^3",
+                "drupal/bibcite_entity": "*",
+                "drupal/core": "^8.8 || ^9 || ^10 || ^11",
                 "drupal/extra_field": "^2"
             },
             "suggest": {
@@ -3245,8 +3247,36 @@
                 "drupal/bibcite_pubmed": "Provides PubMed import and lookup functionality"
             },
             "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.0.x": "2.0.x-dev"
+                },
+                "drupal": {
+                    "version": "2.0.x-dev",
+                    "datestamp": "1731356043",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
                 "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "babbage",
+                    "homepage": "https://www.drupal.org/user/270434"
+                },
+                {
+                    "name": "ki",
+                    "homepage": "https://www.drupal.org/user/292047"
+                },
+                {
+                    "name": "mlncn",
+                    "homepage": "https://www.drupal.org/user/64383"
+                }
             ],
             "description": "Automatically create references for work published on your website.",
             "homepage": "https://www.drupal.org/project/cite",
@@ -3257,10 +3287,9 @@
                 "Drupal"
             ],
             "support": {
-                "issues": "https://www.drupal.org/project/issues/cite",
-                "source": "https://git.drupalcode.org/project/cite"
-            },
-            "time": "2024-11-05T17:40:49+00:00"
+                "source": "https://git.drupalcode.org/project/cite",
+                "issues": "https://www.drupal.org/project/issues/cite"
+            }
         },
         {
             "name": "drupal/ckeditor_media_embed",
@@ -10872,7 +10901,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/type_tray_icon_display.git",
-                "reference": "63b3bf3b03cf5756bc538373c1e0614f0578108f"
+                "reference": "c4749e96ed78adef796f7bc232113f28364b3581"
             },
             "require": {
                 "drupal/core": "^9.2 || ^10 || ^11",
@@ -10889,7 +10918,7 @@
                 },
                 "drupal": {
                     "version": "1.0.x-dev",
-                    "datestamp": "1731048089",
+                    "datestamp": "1731371832",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -26580,7 +26609,7 @@
     },
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": {},
-    "platform-dev": {},
+    "platform": [],
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
