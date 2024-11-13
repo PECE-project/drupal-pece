@@ -19,11 +19,18 @@ source:
 process:
   nid: tnid
   vid: vid
+  access_policy:
+    plugin: default_value
+    default_value: pece_content
   langcode:
     -
       plugin: default_value
       source: language
       default_value: und
+  field_pece_all_can_view:
+    plugin: default_value
+    default_value: true
+  field_people_with_edit_access: people_with_edit_access
   title: title
   uid: node_uid
   status:
