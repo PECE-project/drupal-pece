@@ -14,13 +14,13 @@ sections:
       label: 'Main dashboard'
       context_mapping: {  }
       one_a:
-        layout_collapse_element: layout-collapse--none
+        layout_collapse_element: layout-collapse--open
         layout_collapse_classes: ''
-        layout_collapse_summary: ''
+        layout_collapse_summary: 'Content I directly authored'
       one_b:
         layout_collapse_element: layout-collapse--closed
         layout_collapse_classes: ''
-        layout_collapse_summary: 'Content I directly authored'
+        layout_collapse_summary: 'Other content I contributed to'
       one_c:
         layout_collapse_element: layout-collapse--none
         layout_collapse_classes: ''
@@ -76,49 +76,6 @@ sections:
           hide_on_nonactive: false
         weight: 0
         additional: {  }
-      9c6017a8-0ed6-4d80-a670-c65dae074797:
-        uuid: 9c6017a8-0ed6-4d80-a670-c65dae074797
-        region: one_a
-        configuration:
-          id: pece_dashboards_content_contributed_to
-          label: 'Link to content the current user has contributed to'
-          label_display: '0'
-          provider: pece_dashboards
-          context_mapping: {  }
-        weight: 0
-        additional: {  }
-      86e4af15-7de8-42c8-8e28-1cbfcd8afef3:
-        uuid: 86e4af15-7de8-42c8-8e28-1cbfcd8afef3
-        region: one_e
-        configuration:
-          id: 'configurable_views_filter_block_block:search-page'
-          label: ''
-          label_display: visible
-          provider: configurable_views_filter_block
-          context_mapping: {  }
-          views_label: 'Search the site, then filter'
-          visible_filters:
-            search_api_fulltext: search_api_fulltext
-          no_groups: true
-          no_reset: true
-          no_sort: false
-          no_pager: false
-          no_submit: false
-        weight: 0
-        additional: {  }
-      50ef50c9-7933-4039-a9ca-df8393cda939:
-        uuid: 50ef50c9-7933-4039-a9ca-df8393cda939
-        region: one_b
-        configuration:
-          id: 'views_block:current_user_authored_content-block'
-          label: ''
-          label_display: '0'
-          provider: views
-          context_mapping: {  }
-          views_label: ''
-          items_per_page: none
-        weight: 0
-        additional: {  }
       96726426-fc87-4247-9aca-9849ed49fdf2:
         uuid: 96726426-fc87-4247-9aca-9849ed49fdf2
         region: two_b
@@ -158,39 +115,30 @@ sections:
           items_per_page: none
         weight: 1
         additional: {  }
-    third_party_settings: {  }
-  -
-    layout_id: layout_onecol
-    layout_settings:
-      label: Building
-      context_mapping: {  }
-    components:
-      d1931bd0-b5c4-4094-81b4-1e6b92e3b1b4:
-        uuid: d1931bd0-b5c4-4094-81b4-1e6b92e3b1b4
-        region: content
+      50ef50c9-7933-4039-a9ca-df8393cda939:
+        uuid: 50ef50c9-7933-4039-a9ca-df8393cda939
+        region: one_a
         configuration:
-          id: 'block_content:4e1dfda0-7376-47a0-9a6b-332b40cc1da8'
-          label: 'Building Content'
-          label_display: visible
-          provider: block_content
-          status: true
-          info: ''
-          view_mode: full
+          id: 'views_block:current_user_authored_content-block'
+          label: ''
+          label_display: '0'
+          provider: views
           context_mapping: {  }
+          views_label: ''
+          items_per_page: none
         weight: 0
         additional: {  }
-      685fdafb-fb89-473a-83ef-2c38505a5ae4:
-        uuid: 685fdafb-fb89-473a-83ef-2c38505a5ae4
-        region: content
+      801c7231-4a71-4d45-b684-f0f261218bcd:
+        uuid: 801c7231-4a71-4d45-b684-f0f261218bcd
+        region: one_b
         configuration:
-          id: 'block_content:52222dc3-22dc-4c2a-9218-fc02aea730e8'
-          label: 'Building Projects'
-          label_display: visible
-          provider: block_content
-          status: true
-          info: ''
-          view_mode: full
+          id: 'views_block:duplicate_of_content_i_directly_authored-block'
+          label: ''
+          label_display: '0'
+          provider: views
           context_mapping: {  }
-        weight: 1
+          views_label: ''
+          items_per_page: none
+        weight: 0
         additional: {  }
     third_party_settings: {  }
