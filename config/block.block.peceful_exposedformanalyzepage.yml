@@ -1,0 +1,42 @@
+uuid: cb38cc76-8698-49d7-ad7c-8259c39cbf69
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.analyze
+  module:
+    - block_class
+    - configurable_views_filter_block
+    - system
+  theme:
+    - peceful
+id: peceful_exposedformanalyzepage
+theme: peceful
+region: sidebar_second
+weight: 0
+provider: null
+plugin: 'configurable_views_filter_block_block:analyze-page'
+settings:
+  id: 'configurable_views_filter_block_block:analyze-page'
+  label: ''
+  label_display: '0'
+  provider: configurable_views_filter_block
+  views_label: ''
+  visible_filters:
+    search_api_fulltext: search_api_fulltext
+    type: type
+    contributor: contributor
+    artifact_type: artifact_type
+    annotated_artifact: annotated_artifact
+    field_annotation_analytic: field_annotation_analytic
+    field_analytic_question_set: field_analytic_question_set
+  no_groups: false
+  no_reset: false
+  no_sort: false
+  no_pager: false
+  no_submit: false
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /analyze

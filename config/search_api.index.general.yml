@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.search_index
+    - field.storage.node.field_analytic_question_set
+    - field.storage.node.field_annotation_analytic
     - field.storage.node.field_annotation_artifact
     - field.storage.node.field_file_format
     - field.storage.node.field_pece_license
@@ -64,6 +66,22 @@ field_settings:
     label: 'Entity type'
     property_path: search_api_entity_type
     type: string
+  field_analytic_question_set:
+    label: 'Question Set'
+    datasource_id: 'entity:node'
+    property_path: field_analytic_question_set
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_analytic_question_set
+  field_annotation_analytic:
+    label: 'Analytic (Question)'
+    datasource_id: 'entity:node'
+    property_path: field_annotation_analytic
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_annotation_analytic
   field_annotation_artifact:
     label: Artifact
     datasource_id: 'entity:node'
@@ -157,8 +175,11 @@ datasource_settings:
       selected: {  }
   'entity:taxonomy_term':
     bundles:
-      default: true
-      selected: {  }
+      default: false
+      selected:
+        - groups
+        - pece_structured_analytics
+        - tags
     languages:
       default: true
       selected: {  }
