@@ -6,7 +6,7 @@ dependencies:
     - system
 id: temporary_fixes_to_be_changed_in_the_files
 label: 'Temporary fixes to be changed in the files'
-code: |
+code: |-
   /* TODO change in themes/custom/peceful/skins/default/scss/main.scss */
   .block-configurable-views-filter-block-blocksearch-page .form-actions {
     width: 25%;
@@ -38,6 +38,66 @@ code: |
 
   .label.is-pulled-left {
   	margin-bottom: 0 !important;
+  }
+
+
+
+
+  .field--type-svg-image-field svg {
+      padding: 20px;
+      fill: white;
+      background-color: var(--link-text);
+      box-sizing: border-box;
+      width:100px;
+  }
+
+  .user-profile-image img{
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+  }
+
+  .front-page-block .paragraph--type--image-with-link svg {
+      padding: 1.875rem !important;
+      background-color: #ededed !important;
+      border-radius: 1.5625rem !important;
+      width: 7.5rem !important;
+      fill: var(--link-text) !important;
+  }
+
+  #block-peceful-exploreaproject svg {
+  	float:none !important;
+  }
+
+  .question-set {
+  	border: 1px solid var(--link-text);
+  	color: var(--link-text);
+  	background: none;
+  	width:fit-content;
+  	padding: 5px 10px;
+  	overflow: hidden;
+    margin-top: 20px;
+  }
+
+  .annotation-search-result-artifact {
+  	  align-items: center;
+      background-color: #f9f9f9;
+      border: 1px solid #eeeeee;
+      display: -ms-flexbox;
+      display: flex;
+      margin: 1.25rem 0;
+      padding: 1.25rem 1.5rem;
+  }
+
+  .annotation-search-result-analytic {
+  		align-items: center;
+      background-color: #f9f9f9;
+      border: 1px solid #eeeeee;
+      display: -ms-flexbox;
+      display: flex;
+      margin: 1.25rem 0;
+      padding: 1.25rem 1.5rem;
+  	
   }
 media: all
 preprocess: true
