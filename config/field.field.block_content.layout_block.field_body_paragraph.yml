@@ -5,6 +5,7 @@ dependencies:
   config:
     - block_content.type.layout_block
     - field.storage.block_content.field_body_paragraph
+    - paragraphs.paragraphs_type.featured_project
     - paragraphs.paragraphs_type.image_with_link
     - paragraphs.paragraphs_type.layout
     - paragraphs.paragraphs_type.link_wth_text
@@ -27,10 +28,14 @@ settings:
     target_bundles:
       image_with_link: image_with_link
       layout: layout
+      featured_project: featured_project
       link_wth_text: link_wth_text
       slideshow: slideshow
     negate: 0
     target_bundles_drag_drop:
+      featured_project:
+        weight: 11
+        enabled: true
       image_with_link:
         weight: 8
         enabled: true

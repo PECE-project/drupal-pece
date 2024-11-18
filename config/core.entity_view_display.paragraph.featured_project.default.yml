@@ -1,0 +1,38 @@
+uuid: 833d7c2f-677b-4113-9249-697eb29e4610
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_project.field_featured_project
+    - paragraphs.paragraphs_type.featured_project
+  module:
+    - entity_form_field_label
+    - fences
+id: paragraph.featured_project.default
+targetEntityType: paragraph
+bundle: featured_project
+mode: default
+content:
+  field_featured_project:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: has-text-centered
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,29 @@
+uuid: 296aefac-a6a3-4404-8d37-d45d8d179ea6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_featured_project
+    - node.type.pece_project
+    - paragraphs.paragraphs_type.featured_project
+id: paragraph.featured_project.field_featured_project
+field_name: field_featured_project
+entity_type: paragraph
+bundle: featured_project
+label: 'Featured Project'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pece_project: pece_project
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
