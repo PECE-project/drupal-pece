@@ -17,6 +17,7 @@ dependencies:
     - node.type.pece_annotation
   module:
     - entity_form_field_label
+    - fences
     - layout_builder
     - text
     - user
@@ -30,10 +31,9 @@ bundle: pece_annotation
 mode: search_result
 content:
   body:
-    type: text_summary_or_trimmed
+    type: text_default
     label: hidden
-    settings:
-      trim_length: 300
+    settings: {  }
     third_party_settings:
       entity_form_field_label:
         new_label: ''
@@ -48,23 +48,45 @@ content:
     region: content
   field_annotation_analytic:
     type: entity_reference_entity_view
-    label: hidden
+    label: inline
     settings:
-      view_mode: mini_teaser
+      view_mode: meta_content
       link: false
     third_party_settings:
       entity_form_field_label:
-        new_label: ''
-        rewrite_label: 0
-    weight: 1
+        new_label: 'In response to'
+        rewrite_label: 1
+      fences:
+        fences_field_tag: div
+        fences_field_classes: annotation-search-result-analytic
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: annotation-search-result-analytic-label
+    weight: 2
     region: content
   field_annotation_artifact:
-    type: entity_reference_label
+    type: entity_reference_entity_view
     label: inline
     settings:
-      link: true
-    third_party_settings: {  }
-    weight: 2
+      view_mode: meta_content
+      link: false
+    third_party_settings:
+      entity_form_field_label:
+        new_label: 'Annotation of'
+        rewrite_label: 1
+      fences:
+        fences_field_tag: div
+        fences_field_classes: annotation-search-result-artifact
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: annotation-search-result-artifact-label
+    weight: 1
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
