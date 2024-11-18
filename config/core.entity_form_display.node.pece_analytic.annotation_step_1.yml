@@ -6,6 +6,9 @@ dependencies:
     - core.entity_form_mode.node.annotation_step_1
     - field.field.node.pece_analytic.field_analytic_question_set
     - field.field.node.pece_analytic.field_ark_enabled
+    - field.field.node.pece_analytic.field_pece_all_can_view
+    - field.field.node.pece_analytic.field_people_with_edit_access
+    - field.field.node.pece_analytic.field_people_with_view_access
     - field.field.node.pece_analytic.field_tags
     - node.type.pece_analytic
   module:
@@ -69,6 +72,9 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_pece_all_can_view: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
   langcode: true
   path: true
   promote: true

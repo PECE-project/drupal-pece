@@ -6,9 +6,14 @@ dependencies:
     - core.entity_view_mode.node.search_result
     - field.field.node.pece_analytic.field_analytic_question_set
     - field.field.node.pece_analytic.field_ark_enabled
+    - field.field.node.pece_analytic.field_pece_all_can_view
+    - field.field.node.pece_analytic.field_people_with_edit_access
+    - field.field.node.pece_analytic.field_people_with_view_access
     - field.field.node.pece_analytic.field_tags
     - node.type.pece_analytic
   module:
+    - entity_form_field_label
+    - fences
     - layout_builder
     - user
 third_party_settings:
@@ -26,20 +31,35 @@ content:
     type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
   field_analytic_question_set:
     type: entity_reference_label
-    label: inline
+    label: hidden
     settings:
       link: true
-    third_party_settings: {  }
-    weight: 1
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: question-set
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    weight: 0
     region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_ark_enabled: true
+  field_pece_all_can_view: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
   field_tags: true
   langcode: true
   links: true

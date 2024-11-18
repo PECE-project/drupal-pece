@@ -1,0 +1,29 @@
+uuid: 28560824-5a13-4a79-836b-8f3a98f340ae
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_people_with_edit_access
+    - node.type.pece_analytic
+id: node.pece_analytic.field_people_with_edit_access
+field_name: field_people_with_edit_access
+entity_type: node
+bundle: pece_analytic
+label: 'People with edit access (Contributors)'
+description: 'This field designates which users can edit the content. People added here will be listed as <b>contributors</b> in addition to receiving update capability. They will appear in the citation for the content. If you wish to be able to edit the content going forward, be sure to add your username here. '
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: false
+field_type: entity_reference

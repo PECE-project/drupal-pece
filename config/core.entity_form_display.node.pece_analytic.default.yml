@@ -5,6 +5,9 @@ dependencies:
   config:
     - field.field.node.pece_analytic.field_analytic_question_set
     - field.field.node.pece_analytic.field_ark_enabled
+    - field.field.node.pece_analytic.field_pece_all_can_view
+    - field.field.node.pece_analytic.field_people_with_edit_access
+    - field.field.node.pece_analytic.field_people_with_view_access
     - field.field.node.pece_analytic.field_tags
     - node.type.pece_analytic
   module:
@@ -39,6 +42,49 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  field_pece_all_can_view:
+    type: boolean_checkbox
+    weight: 22
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_people_with_edit_access:
+    type: entity_reference_autocomplete
+    weight: 34
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_people_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 23
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        22237ba7-4c6a-4704-a3a8-d76e9d3cb584:
+          entity_type: node
+          bundle: artifact_tabular_data
+          dependee: field_pece_all_can_view
+          settings:
+            state: '!visible'
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
   field_tags:
     type: entity_reference_autocomplete
     weight: 7

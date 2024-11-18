@@ -6,6 +6,9 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.pece_analytic.field_analytic_question_set
     - field.field.node.pece_analytic.field_ark_enabled
+    - field.field.node.pece_analytic.field_pece_all_can_view
+    - field.field.node.pece_analytic.field_people_with_edit_access
+    - field.field.node.pece_analytic.field_people_with_view_access
     - field.field.node.pece_analytic.field_tags
     - node.type.pece_analytic
   module:
@@ -32,6 +35,9 @@ hidden:
   extra_field_pece_annotations_see_annotations_link: true
   field_analytic_question_set: true
   field_ark_enabled: true
+  field_pece_all_can_view: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
   field_tags: true
   langcode: true
   search_api_excerpt: true

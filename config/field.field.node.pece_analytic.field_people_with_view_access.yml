@@ -1,0 +1,29 @@
+uuid: e5cca258-3834-4346-a7f3-828166a7acf5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_people_with_view_access
+    - node.type.pece_analytic
+id: node.pece_analytic.field_people_with_view_access
+field_name: field_people_with_view_access
+entity_type: node
+bundle: pece_analytic
+label: 'People with view access'
+description: 'This field designates which platform users can view this content. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: false
+field_type: entity_reference
