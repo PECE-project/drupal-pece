@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.mini_teaser
     - node.type.artifact_tabular_data
     - node.type.artifact_video
     - node.type.pece_artifact_audio
@@ -249,7 +249,7 @@ display:
         type: 'entity:node'
         options:
           relationship: none
-          view_mode: teaser
+          view_mode: mini_teaser
       query:
         type: views_query
         options:

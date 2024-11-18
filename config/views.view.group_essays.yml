@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.mini_teaser
     - node.type.pece_essay
     - node.type.pece_photo_essay
     - node.type.pece_timeline_essay
@@ -239,7 +239,7 @@ display:
         type: 'entity:node'
         options:
           relationship: none
-          view_mode: teaser
+          view_mode: mini_teaser
       query:
         type: views_query
         options:
