@@ -31,6 +31,13 @@ function pece_essays_help($route_name, RouteMatchInterface $route_match) {
  * We will *always* hide the legacy HTML toggle on the add form.
  */
 function pece_essays_form_node_pece_essay_edit_form_alter(&$form, $form_state, $form_id) {
+  // Feature save and edit layout button; move Save button into kebab menu.
+  // Except none of this does anything because Gin is bloody ridiculous.
+
+  $form['actions']['submit']['#button_type'] = 'secondary';
+  $form['actions']['layout_builder_save_and_edit_layout']['#button_type'] = 'primary';
+  $form['actions']['layout_builder_save_and_edit_layout']['#gin_action_item'] = TRUE;
+
   $node = $form_state->getFormObject()->getEntity();
   if (!$node->field_legacy_rendered_html->value) {
     unset($form['field_override_legacy_with_new']);
