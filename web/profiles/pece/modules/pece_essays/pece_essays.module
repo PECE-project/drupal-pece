@@ -32,7 +32,7 @@ function pece_essays_help($route_name, RouteMatchInterface $route_match) {
  *  - Hide legacy display toggle from essays without legacy HTML.
  */
 function pece_essays_form_node_pece_essay_edit_form_alter(&$form, $form_state, $form_id) {
-  pece_essays_emphasize_edit_layout_button(&$form);
+  pece_essays_emphasize_edit_layout_button($form);
 
   // Hides legacy display toggle from essays without legacy HTML on edit forms.
   // We will *always* hide the legacy HTML toggle on the add form.
@@ -49,7 +49,7 @@ function pece_essays_form_node_pece_essay_edit_form_alter(&$form, $form_state, $
  *  - Hide legacy display toggle from all new essays.
  */
 function pece_essays_form_node_pece_essay_form_alter(&$form, $form_state, $form_id) {
-  pece_essays_emphasize_edit_layout_button(&$form);
+  pece_essays_emphasize_edit_layout_button($form);
 
   // On the edit form, we only hide the legacy HTML toggle conditionally.
   unset($form['field_override_legacy_with_new']);
