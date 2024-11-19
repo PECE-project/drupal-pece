@@ -26,6 +26,7 @@ dependencies:
   module:
     - entity_reference_revisions
     - layout_builder
+    - layout_builder_restrictions
     - layout_library
     - text
     - user
@@ -445,6 +446,85 @@ third_party_settings:
         third_party_settings: {  }
   layout_library:
     enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts:
+        - layout_onecol
+        - layout_twocol_section
+        - layout_threecol_section
+        - layout_collapse_onecol_section
+        - layout_collapse_twocol_section
+      denylisted_blocks:
+        'Content fields':
+          - 'field_block:node:pece_essay:access_policy'
+          - 'field_block:node:pece_essay:revision_default'
+          - 'field_block:node:pece_essay:default_langcode'
+          - 'field_block:node:pece_essay:field_pece_all_can_view'
+          - 'field_block:node:pece_essay:nid'
+          - 'field_block:node:pece_essay:field_legacy_rendered_html'
+          - 'extra_field_block:node:pece_essay:extra_field_pece_annotations_see_annotations_link'
+          - 'extra_field_block:node:pece_essay:extra_field_pece_essays_essay_link'
+          - 'field_block:node:pece_essay:menu_link'
+          - 'field_block:node:pece_essay:field_override_legacy_with_new'
+          - 'field_block:node:pece_essay:promote'
+          - 'field_block:node:pece_essay:status'
+          - 'field_block:node:pece_essay:revision_timestamp'
+          - 'field_block:node:pece_essay:vid'
+          - 'field_block:node:pece_essay:revision_log'
+          - 'field_block:node:pece_essay:revision_translation_affected'
+          - 'field_block:node:pece_essay:revision_uid'
+          - 'extra_field_block:node:pece_essay:search_api_excerpt'
+          - 'field_block:node:pece_essay:sticky'
+          - 'field_block:user:user:changed'
+          - 'field_block:user:user:created'
+          - 'field_block:user:user:default_langcode'
+          - 'field_block:user:user:mail'
+          - 'field_block:user:user:field_groups_joined'
+          - 'field_block:user:user:field_groups_managed'
+          - 'field_block:user:user:init'
+          - 'field_block:user:user:langcode'
+          - 'field_block:user:user:access'
+          - 'field_block:user:user:login'
+          - 'extra_field_block:user:user:member_for'
+          - 'field_block:user:user:name'
+          - 'field_block:user:user:preferred_admin_langcode'
+          - 'field_block:user:user:preferred_langcode'
+          - 'field_block:user:user:pece_profile_main_profiles'
+          - 'field_block:user:user:roles'
+          - 'extra_field_block:user:user:search_api_excerpt'
+          - 'field_block:user:user:timezone'
+          - 'field_block:user:user:uid'
+          - 'field_block:user:user:status'
+          - 'field_block:user:user:field_zotero'
+        'Inline blocks':
+          - 'inline_block:layout_block'
+          - 'inline_block:slideshow'
+      allowlisted_blocks:
+        'Configurable Views Filter Block': {  }
+        'Lists (Views)': {  }
+        PECE: {  }
+      restricted_categories:
+        - 'Chaos Tools'
+        - 'Custom block types'
+        - 'Custom blocks'
+        - 'Dashboards: Extras'
+        - 'Dashboards: Navigation'
+        - 'Dashboards: Reports'
+        - 'Dashboards: System'
+        - 'Dashboards: User'
+        - 'Dashboards: Views'
+        - Forms
+        - Geolocation
+        - Help
+        - Menus
+        - 'PECE Essays'
+        - System
+        - 'Type Tray'
+        - User
+        - Views
+        - blocktabs
+        - core
 _core:
   default_config_hash: HMSXo2f0tj9lPu_qSfMVAOMgO9tTZLm53p6zRWL1WgM
 id: node.pece_essay.default
