@@ -7,10 +7,10 @@ dependencies:
     - access_policy.access_policy.pece_group
     - core.entity_view_display.node.page.default
     - core.entity_view_display.node.pece_essay.default
-    - filter.format.html
+    - dashboards.dashboard.pece
+    - entity_browser.browser.analytic_browser
     - node.type.artifact_tabular_data
     - node.type.artifact_video
-    - node.type.page
     - node.type.pece_analytic
     - node.type.pece_annotation
     - node.type.pece_artifact_audio
@@ -29,12 +29,18 @@ dependencies:
     - node.type.pece_substantive_logic
     - node.type.pece_timeline_essay
     - taxonomy.vocabulary.groups
+    - taxonomy.vocabulary.pece_authors
+    - taxonomy.vocabulary.pece_structured_analytics
+    - taxonomy.vocabulary.tags
   module:
     - access_policy
+    - bibcite_export
     - contextual
-    - filter
+    - dashboards
+    - entity_browser
     - layout_builder
     - node
+    - profile
     - taxonomy
 _core:
   default_config_hash: vtQpFaZ27VFgT1APh5SpQP_kehinFMJF1qkbhY4VxOg
@@ -43,14 +49,19 @@ label: Contributor
 weight: -8
 is_admin: null
 permissions:
+  - 'access analytic_browser entity browser pages'
+  - 'access bibcite export'
   - 'access content overview'
   - 'access contextual links'
   - 'assign pece_content access policy'
   - 'assign pece_group access policy'
+  - 'can view pece dashboard'
   - 'configure editable page node layout overrides'
   - 'configure editable pece_essay node layout overrides'
+  - 'create and edit custom blocks'
   - 'create artifact_tabular_data content'
   - 'create artifact_video content'
+  - 'create pece_analytic content'
   - 'create pece_annotation content'
   - 'create pece_artifact_audio content'
   - 'create pece_artifact_bundle content'
@@ -60,12 +71,17 @@ permissions:
   - 'create pece_artifact_text content'
   - 'create pece_artifact_website content'
   - 'create pece_essay content'
+  - 'create pece_fieldsite content'
   - 'create pece_memo content'
   - 'create pece_photo_essay content'
+  - 'create pece_profile_main profile'
   - 'create pece_project content'
   - 'create pece_substantive_logic content'
   - 'create pece_timeline_essay content'
   - 'create terms in groups'
+  - 'create terms in pece_authors'
+  - 'create terms in pece_structured_analytics'
+  - 'create terms in tags'
   - 'edit any artifact_tabular_data content'
   - 'edit any artifact_video content'
   - 'edit any pece_annotation content'
@@ -77,6 +93,7 @@ permissions:
   - 'edit any pece_artifact_text content'
   - 'edit any pece_artifact_website content'
   - 'edit any pece_essay content'
+  - 'edit any pece_fieldsite content'
   - 'edit any pece_memo content'
   - 'edit any pece_photo_essay content'
   - 'edit any pece_project content'
@@ -84,7 +101,6 @@ permissions:
   - 'edit any pece_timeline_essay content'
   - 'edit own artifact_tabular_data content'
   - 'edit own artifact_video content'
-  - 'edit own page content'
   - 'edit own pece_analytic content'
   - 'edit own pece_annotation content'
   - 'edit own pece_artifact_audio content'
@@ -102,7 +118,7 @@ permissions:
   - 'edit own pece_slideshow_image content'
   - 'edit own pece_substantive_logic content'
   - 'edit own pece_timeline_essay content'
-  - 'edit pece_group taxonomy term'
   - 'edit terms in groups'
-  - 'use text format html'
-  - 'view pece_group taxonomy term'
+  - 'revert all revisions'
+  - 'view all revisions'
+  - 'view all taxonomy revisions'

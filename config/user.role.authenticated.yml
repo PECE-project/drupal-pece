@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entity_browser.browser.analytic_browser
     - filter.format.basic_html
     - media.type.audio
     - media.type.document
@@ -11,8 +12,13 @@ dependencies:
     - media.type.image_with_caption_and_link
     - media.type.inline_image
     - media.type.pdf_document
+    - media.type.private_audio
+    - media.type.private_document
     - media.type.private_image
+    - media.type.private_pdf
+    - media.type.private_tabular_data
     - media.type.private_vector_image
+    - media.type.private_video
     - media.type.remote_video
     - media.type.slide_image
     - media.type.vector_image
@@ -20,13 +26,16 @@ dependencies:
   module:
     - admin_toolbar_search
     - comment
+    - contextual
     - empty_page
+    - entity_browser
     - file
     - filter
     - help
     - legal
     - media
     - node
+    - profile
     - shortcut
     - system
     - taxonomy
@@ -39,8 +48,10 @@ weight: -9
 is_admin: false
 permissions:
   - 'access administration pages'
+  - 'access analytic_browser entity browser pages'
   - 'access comments'
   - 'access content'
+  - 'access contextual links'
   - 'access help pages'
   - 'access shortcuts'
   - 'access toolbar'
@@ -51,8 +62,14 @@ permissions:
   - 'create image_with_caption_and_link media'
   - 'create inline_image media'
   - 'create pdf_document media'
+  - 'create pece_profile_main profile'
+  - 'create private_audio media'
+  - 'create private_document media'
   - 'create private_image media'
+  - 'create private_pdf media'
+  - 'create private_tabular_data media'
   - 'create private_vector_image media'
+  - 'create private_video media'
   - 'create remote_video media'
   - 'create slide_image media'
   - 'create vector_image media'
@@ -65,19 +82,28 @@ permissions:
   - 'edit own image_with_caption_and_link media'
   - 'edit own inline_image media'
   - 'edit own pdf_document media'
+  - 'edit own private_audio media'
+  - 'edit own private_document media'
   - 'edit own private_image media'
+  - 'edit own private_pdf media'
+  - 'edit own private_tabular_data media'
   - 'edit own private_vector_image media'
+  - 'edit own private_video media'
   - 'edit own remote_video media'
-  - 'edit own slide_image media'
   - 'edit own vector_image media'
   - 'edit own video media'
   - 'post comments'
   - 'skip comment approval'
+  - 'update media'
+  - 'update own pece_profile_main profile'
   - 'use admin toolbar search'
   - 'use text format basic_html'
   - 'view Terms and Conditions'
+  - 'view any profile'
   - 'view empty pages'
   - 'view media'
   - 'view own unpublished content'
+  - 'view own unpublished media'
+  - 'view own unpublished profile'
   - 'view the administration theme'
   - 'view vocabulary labels'

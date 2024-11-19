@@ -7,7 +7,8 @@ dependencies:
     - access_policy.access_policy.pece_group
     - core.entity_view_display.node.page.default
     - core.entity_view_display.node.pece_essay.default
-    - filter.format.html
+    - dashboards.dashboard.pece
+    - entity_browser.browser.analytic_browser
     - node.type.artifact_tabular_data
     - node.type.artifact_video
     - node.type.page
@@ -29,41 +30,67 @@ dependencies:
     - node.type.pece_substantive_logic
     - node.type.pece_timeline_essay
     - taxonomy.vocabulary.groups
+    - taxonomy.vocabulary.pece_authors
+    - taxonomy.vocabulary.pece_structured_analytics
+    - taxonomy.vocabulary.tags
     - workflows.workflow.editorial
   module:
     - access_policy
     - asset_injector
+    - bibcite
+    - bibcite_export
     - block
     - block_class
     - content_moderation
     - contextual
-    - filter
+    - dashboards
+    - entity_browser
+    - fences
+    - file
+    - languagefield
     - layout_builder
+    - layout_builder_component_attributes
     - legal
+    - menu_link_attributes
     - node
+    - path
     - pathauto
+    - profile
+    - redirect
+    - shortcut
     - single_content_sync
     - taxonomy
+    - user_restrictions
 id: platform_manager
 label: 'Platform manager'
 weight: -4
 is_admin: null
 permissions:
+  - 'access analytic_browser entity browser pages'
+  - 'access bibcite export'
   - 'access content overview'
   - 'access contextual links'
+  - 'access files overview'
+  - 'access profile overview'
   - 'access user profiles'
   - 'administer Terms and Conditions'
+  - 'administer bibcite'
   - 'administer block classes'
   - 'administer blocks'
   - 'administer css assets injector'
+  - 'administer languagefield'
   - 'administer nodes'
+  - 'administer redirects'
+  - 'administer user restrictions'
   - 'administer users'
   - 'assign pece_content access policy'
   - 'assign pece_group access policy'
   - 'bypass node access'
+  - 'can view pece dashboard'
   - 'configure all page node layout overrides'
   - 'configure all pece_essay node layout overrides'
   - 'configure any layout'
+  - 'create and edit custom blocks'
   - 'create artifact_tabular_data content'
   - 'create artifact_video content'
   - 'create page content'
@@ -84,6 +111,11 @@ permissions:
   - 'create pece_substantive_logic content'
   - 'create pece_timeline_essay content'
   - 'create terms in groups'
+  - 'create terms in pece_authors'
+  - 'create terms in pece_structured_analytics'
+  - 'create terms in tags'
+  - 'create url aliases'
+  - 'customize shortcut links'
   - 'edit any artifact_tabular_data content'
   - 'edit any artifact_video content'
   - 'edit any page content'
@@ -103,12 +135,16 @@ permissions:
   - 'edit any pece_project content'
   - 'edit any pece_substantive_logic content'
   - 'edit any pece_timeline_essay content'
-  - 'edit pece_group taxonomy term'
+  - 'edit fences formatter settings'
   - 'edit terms in groups'
+  - 'edit terms in pece_structured_analytics'
+  - 'edit terms in tags'
   - 'export single content'
   - 'import single content'
+  - 'manage layout builder component attributes'
   - 'notify of path changes'
   - 'revert all revisions'
+  - 'revert all taxonomy revisions'
   - 'revert artifact_tabular_data revisions'
   - 'revert artifact_video revisions'
   - 'revert page revisions'
@@ -134,7 +170,7 @@ permissions:
   - 'use editorial transition archived_published'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition publish'
-  - 'use text format html'
+  - 'use menu link attributes'
   - 'view all revisions'
   - 'view all taxonomy revisions'
   - 'view any unpublished content'
@@ -154,7 +190,6 @@ permissions:
   - 'view pece_artifact_website revisions'
   - 'view pece_essay revisions'
   - 'view pece_fieldsite revisions'
-  - 'view pece_group taxonomy term'
   - 'view pece_memo revisions'
   - 'view pece_photo_essay revisions'
   - 'view pece_project revisions'

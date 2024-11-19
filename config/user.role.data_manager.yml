@@ -1,9 +1,94 @@
 uuid: 20c0812a-5708-4065-8bc0-d80e9b17d69e
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - core.entity_view_display.node.page.default
+    - core.entity_view_display.node.pece_essay.default
+    - dashboards.dashboard.pece
+    - entity_browser.browser.analytic_browser
+    - node.type.artifact_tabular_data
+    - node.type.artifact_video
+    - node.type.pece_analytic
+    - node.type.pece_annotation
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_fieldnote
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
+    - node.type.pece_essay
+    - node.type.pece_fieldsite
+    - node.type.pece_memo
+    - node.type.pece_photo_essay
+    - node.type.pece_project
+    - node.type.pece_substantive_logic
+    - node.type.pece_timeline_essay
+    - taxonomy.vocabulary.groups
+    - taxonomy.vocabulary.pece_authors
+    - taxonomy.vocabulary.pece_structured_analytics
+    - taxonomy.vocabulary.tags
+  module:
+    - bibcite_export
+    - dashboards
+    - entity_browser
+    - file
+    - layout_builder
+    - node
+    - taxonomy
 id: data_manager
 label: 'Data manager'
 weight: -7
 is_admin: null
-permissions: {  }
+permissions:
+  - 'access analytic_browser entity browser pages'
+  - 'access bibcite export'
+  - 'access files overview'
+  - 'can view pece dashboard'
+  - 'configure editable page node layout overrides'
+  - 'configure editable pece_essay node layout overrides'
+  - 'create and edit custom blocks'
+  - 'create artifact_tabular_data content'
+  - 'create artifact_video content'
+  - 'create pece_analytic content'
+  - 'create pece_annotation content'
+  - 'create pece_artifact_audio content'
+  - 'create pece_artifact_bundle content'
+  - 'create pece_artifact_fieldnote content'
+  - 'create pece_artifact_image content'
+  - 'create pece_artifact_pdf content'
+  - 'create pece_artifact_text content'
+  - 'create pece_artifact_website content'
+  - 'create pece_essay content'
+  - 'create pece_fieldsite content'
+  - 'create pece_memo content'
+  - 'create pece_photo_essay content'
+  - 'create pece_project content'
+  - 'create pece_substantive_logic content'
+  - 'create pece_timeline_essay content'
+  - 'create terms in groups'
+  - 'create terms in pece_authors'
+  - 'create terms in pece_structured_analytics'
+  - 'create terms in tags'
+  - 'edit any artifact_tabular_data content'
+  - 'edit any artifact_video content'
+  - 'edit any pece_annotation content'
+  - 'edit any pece_artifact_audio content'
+  - 'edit any pece_artifact_bundle content'
+  - 'edit any pece_artifact_fieldnote content'
+  - 'edit any pece_artifact_image content'
+  - 'edit any pece_artifact_pdf content'
+  - 'edit any pece_artifact_text content'
+  - 'edit any pece_artifact_website content'
+  - 'edit any pece_essay content'
+  - 'edit any pece_fieldsite content'
+  - 'edit any pece_memo content'
+  - 'edit any pece_photo_essay content'
+  - 'edit any pece_project content'
+  - 'edit any pece_substantive_logic content'
+  - 'edit any pece_timeline_essay content'
+  - 'edit terms in groups'
+  - 'revert all revisions'
+  - 'view all revisions'
+  - 'view all taxonomy revisions'
