@@ -46,7 +46,9 @@ function pece_essays_form_node_pece_essay_form_alter(&$form, $form_state, $form_
   unset($form['field_override_legacy_with_new']);
 }
 
-
+/**
+ * Implements hook_entity_view_mode_alter().
+ */
 function pece_essays_entity_view_mode_alter(&$view_mode, $context) {
   $enabled_displays = [];
   $load_ids = [];
