@@ -26,18 +26,16 @@ function pece_essays_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
- * Implements hook_form_alter() for the pece essay edit form.
+ * Implements hook_form_alter() for the PECE essay edit form.
  *
- * We will *always* hide the legacy HTML toggle on the add form.
+ *  - Emphasize edit layout button
+ *  - Hide legacy display toggle from essays without legacy HTML.
  */
 function pece_essays_form_node_pece_essay_edit_form_alter(&$form, $form_state, $form_id) {
-  // Feature save and edit layout button; move Save button into kebab menu.
-  // Except none of this does anything because Gin is bloody ridiculous.
+  pece_essays_emphasize_edit_layout_button(&$form);
 
-  $form['actions']['submit']['#button_type'] = 'secondary';
-  $form['actions']['layout_builder_save_and_edit_layout']['#button_type'] = 'primary';
-  $form['actions']['layout_builder_save_and_edit_layout']['#gin_action_item'] = TRUE;
-
+  // Hides legacy display toggle from essays without legacy HTML on edit forms.
+  // We will *always* hide the legacy HTML toggle on the add form.
   $node = $form_state->getFormObject()->getEntity();
   if (!$node->field_legacy_rendered_html->value) {
     unset($form['field_override_legacy_with_new']);
@@ -47,9 +45,13 @@ function pece_essays_form_node_pece_essay_edit_form_alter(&$form, $form_state, $
 /**
  * Implements hook_form_alter() for the pece essay form (meaning add/create).
  *
- * On the condition form, we only hide the legacy HTML toggle conditionally.
+ *  - Emphasize edit layout button
+ *  - Hide legacy display toggle from all new essays.
  */
 function pece_essays_form_node_pece_essay_form_alter(&$form, $form_state, $form_id) {
+  pece_essays_emphasize_edit_layout_button(&$form);
+
+  // On the edit form, we only hide the legacy HTML toggle conditionally.
   unset($form['field_override_legacy_with_new']);
 }
 
@@ -80,4 +82,21 @@ function pece_essays_entity_view_mode_alter(&$view_mode, $context) {
   if ($view_mode !== 'full' && !in_array($view_mode, $enabled_displays)) {
     $view_mode = 'card';
   }
+}
+
+/**
+ * Helps node add & edit form alters feature a 'Save and edit layout' button.
+ *
+ * After a brief power struggle with the Gin theme.
+ */
+function pece_essays_emphasize_edit_layout_button(&$form) {
+  // Feature save and edit layout button; move Save button into kebab menu.
+  // `#gin_action_item` is what makes the change though it currently only works
+  // with patch from https://www.drupal.org/project/gin/issues/3486743
+  // See also https://www.drupal.org/project/gin/issues/3488023 (docs issue)
+
+  $form['actions']['submit']['#button_type'] = 'secondary';
+  $form['actions']['submit']['#button_type']['#gin_action_item'] = FALSE;
+  $form['actions']['layout_builder_save_and_edit_layout']['#button_type'] = 'primary';
+  $form['actions']['layout_builder_save_and_edit_layout']['#gin_action_item'] = TRUE;
 }
