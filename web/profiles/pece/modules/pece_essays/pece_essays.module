@@ -96,7 +96,7 @@ function pece_essays_emphasize_edit_layout_button(&$form) {
   // See also https://www.drupal.org/project/gin/issues/3488023 (docs issue)
 
   $form['actions']['submit']['#button_type'] = 'secondary';
-  $form['actions']['submit']['#button_type']['#gin_action_item'] = FALSE;
+  $form['actions']['submit']['#gin_action_item'] = FALSE;
   $form['actions']['layout_builder_save_and_edit_layout']['#button_type'] = 'primary';
   $form['actions']['layout_builder_save_and_edit_layout']['#gin_action_item'] = TRUE;
 }
