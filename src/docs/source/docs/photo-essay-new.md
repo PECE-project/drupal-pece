@@ -7,7 +7,7 @@ Steps to Create an a Photo Essay
 
 You should now see the "Add content" page.
 
-INSERT SCREENSHOT
+![](media/PECE-new-artifact-add-content-screenshot.png)
 
 On this page you will find a grid of options for creating different forms of new content followed by their brief descriptions. "Photo Essay" is one type of content. A photo essay is a collection of image artifacts, ordered into a slideshow, with text added for context.
 
