@@ -31,7 +31,7 @@ In the "Items" section, begin by typing the title of the image artifact into the
 Click on the title of your Image Artifact to select it.
 Next, type in the “Substantive Caption” into the “Text” pane.
 
-INSERT SCREENSHOT
+![](media/new-photo-essay-desc.png)
 
 5. Once this artifact is added, click “Add Photo essay item.” Repeat Step 4 for your remaining Image Artifacts.
 
