@@ -1,5 +1,5 @@
 
-Steps to Create an a Photo Essay
+Steps to Create a Photo Essay
 
 1. The process of adding any variety of content to PECE begins by logging in with your screen name and password and clicking “Create Content” in the top right corner.
 
@@ -21,7 +21,7 @@ You should now have access to all of the fields you need to fill out in order to
 3. First, type the title in the “Title” pane.
 Next, write out your project description in the “Description” section.
 
-INSERT SCREENSHOT
+![](media/new-photo-essay-title.png)
 
 4. You are now ready to upload your image artifacts into your Photo Essay.
 In the "Items" section, begin by typing the title of the image artifact into the “Image Artifact” pane. Your Image Artifact should pop up as an option to select.
