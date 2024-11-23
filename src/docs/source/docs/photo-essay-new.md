@@ -40,25 +40,24 @@ Next, type in the “Substantive Caption” into the “Text” pane.
 
 7. Next, scroll down to the "View Permission and Groups" section. The button switch will automatically set viewing permissions to "Everyone can view this content," making the artifact visible to all internet users. If you want to restrict access to the content, click the button switch to turn this off. If you choose to leave the toggle on, you can still associate the content with a particular group. To do so, complete the "Group association and view access." You can select a group with which to associate the content by typing its name into the field. If you choose to restrict access to the content, you can designate specific people or groups that will have view access. To allow specific people viewing access, in the field, "People with view access" type the first few letters of their name and select their username. Add groups whose members should have view access to this memo by typing the group name into the "Group association and view access" field. Note that if you give a group view access, it will also associate the content with that group. This means the content will appear on the group's page.
 
-INSERT SCREENSHOT
+![](media/new-photo-essay-permissions.png)
 
 
 8. Next, fill out the "Contribution Metadada" section, making sure to select the correct license and add any critical commentary. For the license, we encourage you to leave it as Attribution, Share Alike CC BY-SA, but you can choose any of the other Creative Commons license as you see fit. Descriptions of available creative commons licenses can be found here.
 
 Tag the content. As you type, suggested tags will be automatically generated if they exist already in the system. We recommend following theses suggestions and using existing tags if they are not too different from what you were intending, but feel free to make up new tags!
 
-INSERT SCREENSHOT
+![](media/new-photo-essay-contribution.png)
 
 9. Next, fill out the "Custom Citation" section, using your platform's preferred citation format.
 
-INSERT SCREENSHOT
 
 10. Next Choose a “thumbnail” image to represent your essay.
 
 You can edit this image later.
 Click "Add media" to upload the image. Type in Alt Text and/or Title Text as desired (you can simply leave these blank), and click "Save and Insert" tp upload.
 
-INSERT SCREENSHOT
+![](media/new-photo-essay-citation.png)
 
 Click save at the top to save your work. 
 Congratulations! You’ve created your Photo Essay!
