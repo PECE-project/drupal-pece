@@ -26,7 +26,7 @@ Next, write out your project description in the “Description” section.
 4. You are now ready to upload your image artifacts into your Photo Essay.
 In the "Items" section, begin by typing the title of the image artifact into the “Image Artifact” pane. Your Image Artifact should pop up as an option to select.
 
-INSERT SCREENSHOT
+![](media/new-photo-essay-artifact.png)
 
 Click on the title of your Image Artifact to select it.
 Next, type in the “Substantive Caption” into the “Text” pane.
