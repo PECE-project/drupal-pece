@@ -9,12 +9,12 @@ You should now see the "Add content" page.
 
 ![](media/PECE-new-artifact-add-content-screenshot.png)
 
-On this page you will find a grid of options for creating different forms of new content followed by their brief descriptions. "Photo Essay" is one type of content. A photo essay is a collection of image artifacts, ordered into a slideshow, with text added for context.
+On this page you will find a grid of options for creating different forms of new content followed by their brief descriptions. "Photo Essay" is one type of content, located in the "Curate" section. A photo essay is a collection of image artifacts, ordered into a slideshow, with text added for context.
 
 
 2. Click “Photo Essay”
 
-INSERT SCREENSHOT
+![](media/new-photo-essay-3.png)
 
 You should now have access to all of the fields you need to fill out in order to create a new Photo Essay.
 
