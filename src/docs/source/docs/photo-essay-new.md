@@ -1,9 +1,7 @@
 
-For an overview of how to create photo essays, see this YouTube video.
+Steps to Create an a Photo Essay
 
-Step-by-step
-
-Begin by logging into the PECE platform and navigating to your Dashboard. 
+The process of adding any variety of content to PECE begins by logging in with your screen name and password and clicking “Create Content” in the top right corner.
 
 Click “Photo Essay”
 
