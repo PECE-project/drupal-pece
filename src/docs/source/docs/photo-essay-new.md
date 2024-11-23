@@ -5,6 +5,8 @@ Steps to Create an a Photo Essay
 
 INSERT SCREENSHOT
 
+![](media/PECE-new-artifact-create-content-screenshot.png)
+
 You should now see the "Add content" page.
 
 INSERT SCREENSHOT
@@ -16,9 +18,9 @@ On this page you will find a grid of options for creating different forms of new
 
 INSERT SCREENSHOT
 
-3. You should now have access to all of the fields you need to fill out in order to create a new Photo Essay.
+You should now have access to all of the fields you need to fill out in order to create a new Photo Essay.
 
-First, type the title in the “Title” pane.
+3. First, type the title in the “Title” pane.
 Next, write out your project description in the “Description” section.
 
 INSERT SCREENSHOT
@@ -33,7 +35,7 @@ Next, type in the “Substantive Caption” into the “Text” pane.
 
 INSERT SCREENSHOT
 
-5. Once this artifact is added, click “Add New Item.” Repeat Step 4 for your remaining Image Artifacts.
+5. Once this artifact is added, click “Add Photo essay item.” Repeat Step 4 for your remaining Image Artifacts.
 
 
 6. Next, scroll down to the metadata fields. The menu bar on the left side will automatically be open to the "Permission, Authorship, and Groups" section. Your screen name should already appear in the first contributor field. Listed contributors have the ability to edit the content, and are also credited as content contributors when the content is published. To add the names of any other project members who you would like to grant access to editing the artifact, type the first few letters of their name into the other “contributor” field. To add more than one additional contributor, click the "add another item" button and enter their name in the new field.
@@ -43,7 +45,7 @@ INSERT SCREENSHOT
 INSERT SCREENSHOT
 
 
-8. Click Save. Next, fill out the "Contribution Metadada" section, making sure to select the correct license and add any critical commentary. For the license, we encourage you to leave it as Attribution, Share Alike CC BY-SA, but you can choose any of the other Creative Commons license as you see fit. Descriptions of available creative commons licenses can be found here.
+8. Next, fill out the "Contribution Metadada" section, making sure to select the correct license and add any critical commentary. For the license, we encourage you to leave it as Attribution, Share Alike CC BY-SA, but you can choose any of the other Creative Commons license as you see fit. Descriptions of available creative commons licenses can be found here.
 
 Tag the content. As you type, suggested tags will be automatically generated if they exist already in the system. We recommend following theses suggestions and using existing tags if they are not too different from what you were intending, but feel free to make up new tags!
 
@@ -56,12 +58,9 @@ INSERT SCREENSHOT
 10. Next Choose a “thumbnail” image to represent your essay.
 
 You can edit this image later.
-Click “Next” to upload the image. Type in Alt Text and/or Title Text as desired (you can simply leave these blank), and click save.
+Click "Add media" to upload the image. Type in Alt Text and/or Title Text as desired (you can simply leave these blank), and click "Save and Insert" tp upload.
 
 INSERT SCREENSHOT
 
 Click save at the top to save your work. 
 Congratulations! You’ve created your Photo Essay!
-
-How do I reorder photos in a photo essay?
-Once you’ve created photo essay items, you can reorder photos by clicking and holding on the ‘+’ symbol next to the item and dragging the item to a new order. double check this??????
