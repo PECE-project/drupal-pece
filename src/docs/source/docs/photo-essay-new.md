@@ -3,8 +3,6 @@ Steps to Create an a Photo Essay
 
 1. The process of adding any variety of content to PECE begins by logging in with your screen name and password and clicking “Create Content” in the top right corner.
 
-INSERT SCREENSHOT
-
 ![](media/PECE-new-artifact-create-content-screenshot.png)
 
 You should now see the "Add content" page.
