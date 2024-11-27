@@ -1,0 +1,62 @@
+uuid: a229f45e-c586-4777-b904-ef3a45377e9c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.meta_content
+    - field.field.node.pece_photo_essay.body
+    - field.field.node.pece_photo_essay.field_ark_enabled
+    - field.field.node.pece_photo_essay.field_cite_as
+    - field.field.node.pece_photo_essay.field_groups_with_view_access
+    - field.field.node.pece_photo_essay.field_media_thumbnail
+    - field.field.node.pece_photo_essay.field_pece_all_can_view
+    - field.field.node.pece_photo_essay.field_pece_license
+    - field.field.node.pece_photo_essay.field_pece_project_ref
+    - field.field.node.pece_photo_essay.field_people_with_edit_access
+    - field.field.node.pece_photo_essay.field_people_with_view_access
+    - field.field.node.pece_photo_essay.field_photo_essay_items
+    - field.field.node.pece_photo_essay.field_tags
+    - node.type.pece_photo_essay
+  module:
+    - layout_builder
+    - layout_library
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_library:
+    enable: false
+_core:
+  default_config_hash: ZuzVWCgO_W_iehkfkdJmLPf9kpj4qteTeTxUW9hfMkM
+id: node.pece_photo_essay.meta_content
+targetEntityType: node
+bundle: pece_photo_essay
+mode: meta_content
+content:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  extra_field_pece_essays_essay_link: true
+  extra_field_pece_essays_intro_link: true
+  field_ark_enabled: true
+  field_cite_as: true
+  field_groups_with_view_access: true
+  field_media_thumbnail: true
+  field_pece_all_can_view: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
+  field_photo_essay_items: true
+  field_tags: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

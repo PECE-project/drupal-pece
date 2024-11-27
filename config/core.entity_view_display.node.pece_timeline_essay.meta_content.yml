@@ -1,0 +1,63 @@
+uuid: a1aba253-50c8-4819-a4a1-10846cc5338a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.meta_content
+    - field.field.node.pece_timeline_essay.body
+    - field.field.node.pece_timeline_essay.field_ark_enabled
+    - field.field.node.pece_timeline_essay.field_cite_as
+    - field.field.node.pece_timeline_essay.field_groups_with_view_access
+    - field.field.node.pece_timeline_essay.field_media_thumbnail
+    - field.field.node.pece_timeline_essay.field_pece_all_can_view
+    - field.field.node.pece_timeline_essay.field_pece_license
+    - field.field.node.pece_timeline_essay.field_pece_project_ref
+    - field.field.node.pece_timeline_essay.field_people_with_edit_access
+    - field.field.node.pece_timeline_essay.field_people_with_view_access
+    - field.field.node.pece_timeline_essay.field_tags
+    - field.field.node.pece_timeline_essay.field_timeline_essay_items
+    - node.type.pece_timeline_essay
+  module:
+    - layout_builder
+    - layout_library
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_library:
+    enable: false
+_core:
+  default_config_hash: JYM6QTW2DqfOfcNZg-5SDOsdslQQ7gQn1x2wZJVjptA
+id: node.pece_timeline_essay.meta_content
+targetEntityType: node
+bundle: pece_timeline_essay
+mode: meta_content
+content:
+  'extra_field_type_tray_icon_display:icons':
+    type: 'extra_field_type_tray_icon_display:icons'
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  extra_field_pece_essays_essay_link: true
+  extra_field_pece_essays_intro_link: true
+  extra_field_pece_timeline_essay: true
+  field_ark_enabled: true
+  field_cite_as: true
+  field_groups_with_view_access: true
+  field_media_thumbnail: true
+  field_pece_all_can_view: true
+  field_pece_license: true
+  field_pece_project_ref: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
+  field_tags: true
+  field_timeline_essay_items: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
