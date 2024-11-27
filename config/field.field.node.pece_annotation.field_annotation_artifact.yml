@@ -4,14 +4,19 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_annotation_artifact
+    - node.type.artifact_tabular_data
     - node.type.artifact_video
     - node.type.pece_annotation
     - node.type.pece_artifact_audio
     - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_fieldnote
     - node.type.pece_artifact_image
     - node.type.pece_artifact_pdf
     - node.type.pece_artifact_text
     - node.type.pece_artifact_website
+    - node.type.pece_essay
+    - node.type.pece_photo_essay
+    - node.type.pece_timeline_essay
   module:
     - epp
 third_party_settings:
@@ -22,7 +27,7 @@ id: node.pece_annotation.field_annotation_artifact
 field_name: field_annotation_artifact
 entity_type: node
 bundle: pece_annotation
-label: Artifact
+label: 'Content to Annotate'
 description: ''
 required: false
 translatable: false
@@ -34,11 +39,16 @@ settings:
     target_bundles:
       pece_artifact_audio: pece_artifact_audio
       pece_artifact_bundle: pece_artifact_bundle
+      pece_artifact_fieldnote: pece_artifact_fieldnote
       pece_artifact_image: pece_artifact_image
       pece_artifact_pdf: pece_artifact_pdf
+      artifact_tabular_data: artifact_tabular_data
       pece_artifact_text: pece_artifact_text
       artifact_video: artifact_video
       pece_artifact_website: pece_artifact_website
+      pece_essay: pece_essay
+      pece_photo_essay: pece_photo_essay
+      pece_timeline_essay: pece_timeline_essay
     sort:
       field: _none
       direction: ASC

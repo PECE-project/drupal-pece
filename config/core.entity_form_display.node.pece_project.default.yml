@@ -30,6 +30,7 @@ dependencies:
     - field_group
     - file
     - link
+    - media_library
     - path
     - text
 third_party_settings:
@@ -40,7 +41,7 @@ third_party_settings:
       label: Permissions
       region: content
       parent_name: group_metadata
-      weight: 2
+      weight: 3
       format_type: tab
       format_settings:
         classes: ''
@@ -62,7 +63,7 @@ third_party_settings:
       label: Metadata
       region: content
       parent_name: ''
-      weight: 1
+      weight: 2
       format_type: tabs
       format_settings:
         classes: ''
@@ -76,7 +77,6 @@ third_party_settings:
         width_breakpoint: 640
     group_project_metadata:
       children:
-        - field_pece_media_image
         - body
         - field_project_lead
         - field_project_institution_link
@@ -87,7 +87,7 @@ third_party_settings:
       label: 'Project Metadata'
       region: content
       parent_name: group_metadata
-      weight: 3
+      weight: 4
       format_type: tab
       format_settings:
         classes: ''
@@ -104,7 +104,7 @@ third_party_settings:
       label: 'Project Files'
       region: content
       parent_name: group_metadata
-      weight: 4
+      weight: 5
       format_type: tab
       format_settings:
         classes: ''
@@ -123,7 +123,7 @@ third_party_settings:
       label: 'Project PECE Content'
       region: content
       parent_name: group_metadata
-      weight: 5
+      weight: 6
       format_type: tab
       format_settings:
         classes: ''
@@ -139,7 +139,7 @@ third_party_settings:
       label: 'Project Notes'
       region: content
       parent_name: group_metadata
-      weight: 6
+      weight: 7
       format_type: tab
       format_settings:
         classes: ''
@@ -182,7 +182,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 4
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -202,6 +202,13 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_media_thumbnail:
+    type: media_library_widget
+    weight: 1
+    region: content
+    settings:
+      media_types: {  }
     third_party_settings: {  }
   field_people_with_edit_access:
     type: entity_reference_autocomplete
@@ -319,27 +326,27 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 2
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 6
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 5
+    weight: 6
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 7
+    weight: 8
     region: content
     settings:
       display_label: true
@@ -359,7 +366,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 3
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -368,14 +375,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   field_groups_with_view_access: true
   field_media_image_banner: true
-  field_media_thumbnail: true
   field_pece_all_can_view: true
   field_people_with_view_access: true
   langcode: true

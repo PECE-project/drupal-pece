@@ -35,9 +35,12 @@ targetEntityType: node
 bundle: pece_project
 mode: teaser
 content:
-  'extra_field_type_tray_icon_display:icons':
-    type: 'extra_field_type_tray_icon_display:icons'
-    settings: {  }
+  field_media_thumbnail:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
     third_party_settings: {  }
     weight: 0
     region: content
@@ -45,11 +48,11 @@ hidden:
   body: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  'extra_field_type_tray_icon_display:icons': true
   field_ark_enabled: true
   field_fieldsites: true
   field_groups_with_view_access: true
   field_media_image_banner: true
-  field_media_thumbnail: true
   field_pece_all_can_view: true
   field_people_with_edit_access: true
   field_people_with_view_access: true

@@ -31,7 +31,6 @@ dependencies:
     - entity_form_field_label
     - file
     - layout_builder
-    - layout_discovery
     - layout_library
     - link
     - text
@@ -167,7 +166,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 0
+            weight: 1
             additional: {  }
           acca0855-51a8-42fe-afc7-424c0ba1eccd:
             uuid: acca0855-51a8-42fe-afc7-424c0ba1eccd
@@ -246,7 +245,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 3
+            weight: 4
             additional: {  }
           2d81b1ab-681d-417a-b266-62d4ee4d8a0c:
             uuid: 2d81b1ab-681d-417a-b266-62d4ee4d8a0c
@@ -262,7 +261,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 1
+            weight: 2
             additional: {  }
           e00686f7-be4c-4dae-8d45-653f7156274b:
             uuid: e00686f7-be4c-4dae-8d45-653f7156274b
@@ -278,17 +277,11 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 2
+            weight: 3
             additional: {  }
-        third_party_settings: {  }
-      -
-        layout_id: layout_onecol
-        layout_settings:
-          label: ''
-        components:
-          094aea3d-39d7-4127-9e12-4c2303d1bb15:
-            uuid: 094aea3d-39d7-4127-9e12-4c2303d1bb15
-            region: content
+          6832e7d5-fb00-437a-95d1-69e0af9b253d:
+            uuid: 6832e7d5-fb00-437a-95d1-69e0af9b253d
+            region: three
             configuration:
               id: 'field_block:node:pece_project:field_media_thumbnail'
               label: 'Media thumbnail'
@@ -306,7 +299,16 @@ third_party_settings:
                   entity_form_field_label:
                     new_label: ''
                     rewrite_label: 0
-            weight: 7
+                  fences:
+                    fences_field_tag: div
+                    fences_field_classes: ''
+                    fences_field_items_wrapper_tag: none
+                    fences_field_items_wrapper_classes: ''
+                    fences_field_item_tag: div
+                    fences_field_item_classes: ''
+                    fences_label_tag: div
+                    fences_label_classes: ''
+            weight: 0
             additional: {  }
         third_party_settings: {  }
   layout_library:

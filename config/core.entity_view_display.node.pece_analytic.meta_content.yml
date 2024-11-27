@@ -12,8 +12,6 @@ dependencies:
     - field.field.node.pece_analytic.field_tags
     - node.type.pece_analytic
   module:
-    - entity_form_field_label
-    - fences
     - layout_builder
     - user
 third_party_settings:
@@ -33,29 +31,10 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_analytic_question_set:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings:
-      entity_form_field_label:
-        new_label: ''
-        rewrite_label: 0
-      fences:
-        fences_field_tag: div
-        fences_field_classes: ''
-        fences_field_items_wrapper_tag: none
-        fences_field_items_wrapper_classes: ''
-        fences_field_item_tag: div
-        fences_field_item_classes: ''
-        fences_label_tag: div
-        fences_label_classes: ''
-    weight: 1
-    region: content
 hidden:
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  field_analytic_question_set: true
   field_ark_enabled: true
   field_pece_all_can_view: true
   field_people_with_edit_access: true
