@@ -26,8 +26,10 @@ class AnnotateButton extends ExtraFieldPlusDisplayBase {
    */
   public function view(ContentEntityInterface $entity) {
 
-    // These prepopulated reference links can only be provided to artifacts.
-    if (strpos($entity->bundle(), 'artifact') === FALSE) {
+    // These prepopulated reference links can only be provided to artifacts
+    // OR to essays (PECE, timeline, photo).
+    if (strpos($entity->bundle(), 'artifact') === FALSE
+      && strpos($entity->bundle(), 'essay') === FALSE) {
       return;
     }
 
