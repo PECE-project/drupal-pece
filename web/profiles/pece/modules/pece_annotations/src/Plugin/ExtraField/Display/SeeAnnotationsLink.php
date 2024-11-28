@@ -27,9 +27,10 @@ class SeeAnnotationsLink extends ExtraFieldPlusDisplayBase {
   public function view(ContentEntityInterface $entity) {
 
     // These prefilled facet links can only be provided to artifacts.
-    // OR to essays (PECE, timeline, photo).
+    // OR to essays (PECE, timeline, photo) OR memos.
     if (strpos($entity->bundle(), 'artifact') === FALSE
-      && strpos($entity->bundle(), 'essay') === FALSE) {
+      && strpos($entity->bundle(), 'essay') === FALSE
+      && $entity->bundle() !== 'pece_memo') {
       return;
     }
 
