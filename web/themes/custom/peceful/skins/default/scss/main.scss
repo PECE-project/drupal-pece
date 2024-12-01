@@ -19,6 +19,11 @@ $beige-lighter: #eff0eb;
 
 @use "bulma/sass/utilities/mixins" as mx;
 
+// Match Gin's --space-xs with a size smaller than Bulma provides on its own.
+:root {
+  --size-8: 0.5rem;
+}
+
 // Mixins
 
 @mixin icon($icon) {
@@ -81,6 +86,12 @@ a:hover {
     mask-image: url(../../../images/curve.svg);
     mask-repeat: no-repeat;
   }
+}
+
+// Forms
+
+.form-item__label[for] {
+  cursor: pointer;
 }
 
 // Content
@@ -544,6 +555,50 @@ article .contextual {
 	float: left;
 	margin-right: 20px;
 	box-sizing: border-box;
+}
+
+// Dashboard
+
+// Coping Gin for the most part here.
+.views-exposed-form {
+  display: flex;
+  flex-wrap: wrap;
+  margin-block: var(--size-4);
+  padding-block-start: .5rem;
+  padding: 1.5rem;
+  width: 100%;
+  background: var(--grey-light);
+  border: 1px solid var(--primary);
+  box-sizing: border-box;
+  margin-block-start: 0;
+  box-shadow: var(--menu-item-background-l);
+  border-radius: var(--radius-large);
+  .form-item {
+    max-width: 100%;
+    margin-block: var(--size-7) 0;
+    margin-inline: 0 var(--size-8);
+    .form-item__label {
+      display: table;
+      font-size: var(--size-small);
+      font-weight: var(--weight-semibold);
+      color: var(--black);
+      margin-block-start: 0;
+      margin-block-end: var(--size-8);
+      line-height: 1.125rem; // Gin does 16/18 rem
+    }
+    .control { // .form-select is nested pretty deep in here in Bulma but Gin starts there directly
+      max-width: 15rem; // Gin does 240px
+      padding-inline-end: calc(var(--size-8) + var(--size-3) - 1px);
+    }
+  }
+  .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-block: var(--size-7) 0;
+    align-self: flex-end;
+    margin-top: calc(var(--line-height-form-label) + var(--space-s) + var(--space-xs));
+  }
 }
 
 // More link
