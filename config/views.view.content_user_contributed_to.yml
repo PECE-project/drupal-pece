@@ -1,4 +1,4 @@
-uuid: 9e7d606a-a02b-4e66-9e60-517ce1071bb3
+uuid: 8faa92ec-ed1b-420a-83f9-2970aea51bb0
 langcode: en
 status: true
 dependencies:
@@ -7,7 +7,7 @@ dependencies:
   module:
     - node
     - user
-id: duplicate_of_content_i_directly_authored
+id: content_user_contributed_to
 label: 'Content I contributed to'
 module: views
 description: ''
@@ -120,7 +120,7 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: '<p class="text-align-center">No content yet. <a href="/node/add">Create some!</a></p>'
+            value: '<p class="text-align-center">No content you are credited as contributing to (but did not create directly) yet.</p>'
             format: basic_html
           tokenize: false
       sorts:
@@ -253,6 +253,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
+      css_class: dashboard-page
       use_more: true
       use_more_always: true
       use_more_text: 'See and sort all content I directly authored'
@@ -518,7 +519,6 @@ display:
           metatags: {  }
           tokenize: false
       path: dashboard/pece/contributed-to-content
-      use_admin_theme: true
     cache_metadata:
       max-age: -1
       contexts:
