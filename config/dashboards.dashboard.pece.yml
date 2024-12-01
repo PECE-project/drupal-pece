@@ -1,7 +1,17 @@
 uuid: 95a3ca97-8a1d-4bcb-a53a-94d9c3f45257
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - layout_builder_restrictions
+third_party_settings:
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      restricted_categories: {  }
+      whitelisted_blocks: {  }
+      blacklisted_blocks: {  }
 id: pece
 admin_label: 'PECE Dashboard'
 category: Contributor
