@@ -566,44 +566,46 @@ article .contextual {
 // Dashboard
 
 // Coping Gin for the most part here.
-.views-exposed-form {
-  display: flex;
-  flex-wrap: wrap;
-  margin-block: var(--size-4);
-  padding-block-start: .5rem;
-  padding: 0.25rem 1.5rem 1.5rem 1.5rem;
-  width: 100%;
-  background: var(--grey-light);
-  border: 1px solid var(--primary);
-  box-sizing: border-box;
-  margin-block-start: 0;
-  box-shadow: var(--menu-item-background-l);
-  border-radius: var(--radius-large);
-  .form-item {
-    max-width: 100%;
-    margin-block: var(--size-7) 0;
-    margin-inline: 0 var(--size-8);
-    .form-item__label {
-      display: table;
-      font-size: var(--size-small);
-      font-weight: var(--weight-semibold);
-      color: var(--black);
-      margin-block-start: 0;
-      margin-block-end: var(--size-8);
-      line-height: 1.125rem; // Gin does 16/18 rem
-    }
-    .control { // .form-select is nested pretty deep in here in Bulma but Gin starts there directly
-      max-width: 15rem; // Gin does 240px
-      padding-inline-end: calc(var(--size-8) + var(--size-3) - 1px);
-    }
-  }
-  .form-actions {
+.dashboard-page {
+  .views-exposed-form {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
-    margin-block: var(--size-7) 0;
-    align-self: flex-end;
-    margin-top: calc(var(--line-height-form-label) + var(--space-s) + var(--space-xs));
+    margin-block: var(--size-4);
+    padding-block-start: .5rem;
+    padding: 0.25rem 1.5rem 1.5rem 1.5rem;
+    width: 100%;
+    background: var(--grey-lightest);
+    border: 1px solid var(--primary);
+    box-sizing: border-box;
+    margin-block-start: 0;
+    box-shadow: var(--menu-item-background-l);
+    border-radius: var(--radius-large);
+    .form-item {
+      max-width: 100%;
+      margin-block: var(--size-7) 0;
+      margin-inline: 0 var(--size-8);
+      .form-item__label {
+        display: table;
+        font-size: var(--size-small);
+        font-weight: var(--weight-semibold);
+        color: var(--black);
+        margin-block-start: 0;
+        margin-block-end: var(--size-8);
+        line-height: 1.125rem; // Gin does 16/18 rem
+      }
+      .control { // .form-select is nested pretty deep in here in Bulma but Gin starts there directly
+        max-width: 15rem; // Gin does 240px
+        padding-inline-end: calc(var(--size-8) + var(--size-3) - 1px);
+      }
+    }
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      margin-block: var(--size-7) 0;
+      align-self: flex-end;
+      margin-top: calc(var(--line-height-form-label) + var(--space-s) + var(--space-xs));
+    }
   }
 }
 
