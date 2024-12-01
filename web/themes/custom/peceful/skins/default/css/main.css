@@ -19645,6 +19645,10 @@ has-background-danger.is-hoverable:active {
   --shadow: 0 0.5em 1em -0.125em hsla(var(--shadow-h), var(--shadow-s), var(--shadow-l), 0.1), 0 0px 0 1px hsla(var(--shadow-h), var(--shadow-s), var(--shadow-l), 0.02);
 }
 
+:root {
+  --size-8: 0.5rem;
+}
+
 .full-width {
   width: 100vw;
   position: relative;
@@ -19690,6 +19694,14 @@ a:hover .facet-item__count {
   background-color: var(--primary-95);
   mask-image: url(../../../images/curve.svg);
   mask-repeat: no-repeat;
+}
+
+.form-item__label[for] {
+  cursor: pointer;
+}
+
+.hero + .section {
+  padding-top: 0;
 }
 
 .links.inline.bulma {
@@ -20125,6 +20137,47 @@ article .contextual {
   float: left;
   margin-right: 20px;
   box-sizing: border-box;
+}
+
+.dashboard-page .views-exposed-form {
+  display: flex;
+  flex-wrap: wrap;
+  margin-block: var(--size-4);
+  padding-block-start: 0.5rem;
+  padding: 0.25rem 1.5rem 1.5rem 1.5rem;
+  width: 100%;
+  background: var(--grey-lightest);
+  border: 1px solid var(--primary);
+  box-sizing: border-box;
+  margin-block-start: 0;
+  box-shadow: var(--menu-item-background-l);
+  border-radius: var(--radius-large);
+}
+.dashboard-page .views-exposed-form .form-item {
+  max-width: 100%;
+  margin-block: var(--size-7) 0;
+  margin-inline: 0 var(--size-8);
+}
+.dashboard-page .views-exposed-form .form-item .form-item__label {
+  display: table;
+  font-size: var(--size-small);
+  font-weight: var(--weight-semibold);
+  color: var(--black);
+  margin-block-start: 0;
+  margin-block-end: var(--size-8);
+  line-height: 1.125rem;
+}
+.dashboard-page .views-exposed-form .form-item .control {
+  max-width: 15rem;
+  padding-inline-end: calc(var(--size-8) + var(--size-3) - 1px);
+}
+.dashboard-page .views-exposed-form .form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-block: var(--size-7) 0;
+  align-self: flex-end;
+  margin-top: calc(var(--line-height-form-label) + var(--space-s) + var(--space-xs));
 }
 
 .more-link {
