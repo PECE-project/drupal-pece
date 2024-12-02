@@ -438,18 +438,18 @@ article .contextual {
   right: 20px;
 }
 
-// Layout builder
+// Layouts
 
-// Add a gap to layouts, @todo consider whether this same gap should ba pplied between all layouts
-.layout--twocol-section.layout--twocol-section--50-50{
-  justify-content: space-evenly;
-  > div[class^="layout__region"] {
-    flex: 0 1 50%;
+// Add a gap between all columns in layouts.
+.layout--twocol-section {
+  .layout__region--first {
+    padding-right: 1.5rem;
   }
-  &.layout-collapse {
-    gap: 3rem;
+  .layout__region--second {
+    padding-left: 1.5rem;
   }
 }
+
 
 // hide pagination
 .splide .splide__pagination {
