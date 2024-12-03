@@ -19,6 +19,7 @@ dependencies:
     - entity_browser_entity_form
     - entity_form_field_label
     - field_group
+    - hide_revision_field
     - inline_entity_form
     - path
     - readonly_field_widget
@@ -142,7 +143,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 12
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -275,10 +276,23 @@ content:
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 13
+    weight: 9
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  revision_log:
+    type: hide_revision_field_log_widget
+    weight: 12
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
     third_party_settings: {  }
   status:
     type: boolean_checkbox
@@ -289,7 +303,7 @@ content:
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 14
+    weight: 10
     region: content
     settings:
       display_label: true
@@ -304,7 +318,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 11
+    weight: 7
     region: content
     settings:
       match_operator: CONTAINS
@@ -313,7 +327,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
