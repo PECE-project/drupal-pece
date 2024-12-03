@@ -17,7 +17,6 @@ dependencies:
     - node.type.pece_annotation
   module:
     - field_group
-    - text
 third_party_settings:
   field_group:
     group_metadata:
@@ -28,7 +27,7 @@ third_party_settings:
       label: Metadata
       region: content
       parent_name: ''
-      weight: 1
+      weight: 0
       format_type: tabs
       format_settings:
         classes: ''
@@ -124,16 +123,6 @@ targetEntityType: node
 bundle: pece_annotation
 mode: annotation_step_3
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 0
-    region: content
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
   field_ark_enabled:
     type: boolean_checkbox
     weight: 17
@@ -194,12 +183,21 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  url_redirects:
+  title:
+    type: string_textfield
     weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  body: true
   created: true
   field_annotation_analytic: true
   field_annotation_artifact: true
@@ -207,7 +205,7 @@ hidden:
   langcode: true
   path: true
   promote: true
+  revision_log: true
   status: true
   sticky: true
-  title: true
   uid: true

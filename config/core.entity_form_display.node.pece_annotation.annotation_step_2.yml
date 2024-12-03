@@ -31,7 +31,7 @@ third_party_settings:
       label: Permissions
       region: hidden
       parent_name: ''
-      weight: 16
+      weight: 17
       format_type: details
       format_settings:
         classes: ''
@@ -73,14 +73,6 @@ content:
       formatter_settings: {  }
       show_description: false
     third_party_settings: {  }
-  title:
-    type: string_textfield
-    weight: 2
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
 hidden:
   body: true
   created: true
@@ -94,7 +86,9 @@ hidden:
   langcode: true
   path: true
   promote: true
+  revision_log: true
   status: true
   sticky: true
+  title: true
   uid: true
   url_redirects: true
