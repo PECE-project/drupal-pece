@@ -50,7 +50,6 @@
 {% set title_attributes = title_attributes.addClass(title_classes) %}
 {# Child templates can specify classes to be added to items. #}
 {% set item_classes = item_classes ?? [] %}
-{% set item_classes = item_classes|merge(["has-text-centered"]) %}
 {# Child templates can specify whether items should be wrapped. #}
 {% set use_item_wrapper = use_item_wrapper is defined ? use_item_wrapper : true %}
 
