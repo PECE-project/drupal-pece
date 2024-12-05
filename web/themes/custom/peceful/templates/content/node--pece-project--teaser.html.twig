@@ -82,11 +82,22 @@ view_mode ? view_mode|clean_class,
 'px-3',
 'clearfix',
 ] %}
+
+{% set project_tray_icon = value %}
 <article{{ attributes.addClass(classes) }}>
   <div{{ content_attributes }}>
-    {{ content }}
+  {% if content.field_media_thumbnail|render %}
+    {{ content.field_media_thumbnail }}
+  {% else %}
+    <div class="icon-tray-icon p-4">
+      {{ source('/themes/custom/peceful/icons/newspaper.svg') }}
+    </div>
+  {% endif %}
+
   </div>
   <div class="has-text-centered">
     <a href="{{ url }}" rel="bookmark">{{ label }}</a>
   </div>
 </article>
+
+{# {{ dump(node)}} #}
