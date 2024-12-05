@@ -893,6 +893,11 @@ $settings['media_migration_embed_token_transform_destination_filter_plugin'] = '
  *
  * Keep this code block at the end of this file to take full effect.
  */
+
+if (file_exists('/var/www/conf/wodby.settings.php') && file_exists($app_root . '/' . $site_path . '/settings.wodby.php')) {
+  include '/var/www/conf/wodby.settings.php';
+  include $app_root . '/' . $site_path . '/settings.wodby.php';
+}
 #
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
