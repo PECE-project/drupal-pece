@@ -83,17 +83,21 @@ view_mode ? view_mode|clean_class,
 'clearfix',
 ] %}
 <article{{ attributes.addClass(classes) }}>
+{% if content.extra_field_icons %}
   <div class="type-tray-icon">
-  {{ content.extra_field_icons }}
+    {{ content.extra_field_icons }}
   </div>
+
+{% endif %}
+
   <div class="right">
     {{ title_prefix }}
+    {% if not page %}
       <h2{{ title_attributes }}>
         <a href="{{ url }}" rel="bookmark">{{ label }}</a>
       </h2>
+    {% endif %}
     {{ title_suffix }}
-
-    {{ author_name }}
 
     {% if display_submitted %}
       <footer>
