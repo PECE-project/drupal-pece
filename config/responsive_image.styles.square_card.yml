@@ -1,0 +1,35 @@
+uuid: c7396507-70ad-4cbb-8d2a-ded200bcf34d
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.square_216
+    - image.style.square_260
+    - image.style.square_320
+  theme:
+    - bulma
+id: square_card
+label: 'Square card'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: square_320
+    breakpoint_id: bulma.fullhd
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: square_260
+    breakpoint_id: bulma.widescreen
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: square_216
+    breakpoint_id: bulma.desktop
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: square_216
+    breakpoint_id: bulma.tablet
+    multiplier: 1x
+breakpoint_group: bulma
+fallback_image_style: square_320
