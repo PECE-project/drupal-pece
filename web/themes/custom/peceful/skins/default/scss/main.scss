@@ -115,12 +115,6 @@ a:hover {
   padding-bottom: 1rem;
 
   .layout {
-    @include mx.tablet {
-      margin: 0 5rem;
-    }
-    @include mx.desktop {
-      margin: 0 10rem;
-    }
   }
 }
 
@@ -128,18 +122,19 @@ a:hover {
   background-color:#ededed;
 }
 
-.front-page-block{
+.front-page-block {
   padding-bottom: 1rem;
+
+  .paragraph--view-mode--card {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
 }
 
-.front-page-block .paragraph--type--image-with-link {
-  font-size: 1.5rem;
-}
-
-.front-page-block .subtitle {
-  font-size: 2rem;
-  margin-bottom: 3rem;
-}
 
 .paragraph.paragraph--type--layout {
   margin-bottom: 2rem;
@@ -203,7 +198,7 @@ a:hover {
   }
 }
 
-.main-menu { 
+.main-menu {
   @include mx.touch {
     flex-wrap: wrap;
     li {
@@ -261,7 +256,7 @@ a:hover {
 }
 .menu-btn {
   cursor: pointer;
- 
+
   // We do not use navbar-burger because we do not want the styles Bulma adds.
   .navicon {
     background: bulma.$body-color;
@@ -347,14 +342,14 @@ a:hover {
       z-index: 1001;
     }
   }
-  
+
 }
 
 // Search & Facets
 
 #block-global-text-search {
-  
-  
+
+
   .form-item {
     width: 70%;
     display: inline-block;
@@ -367,7 +362,7 @@ a:hover {
   div[data-drupal-selector$="-collapsible"] {
     display: none !important;
   }
-  
+
   // form {
   //   container-type: inline-size;
   //   container-name: text-search;

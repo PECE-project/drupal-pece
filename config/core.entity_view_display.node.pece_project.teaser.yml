@@ -27,6 +27,8 @@ dependencies:
     - field.field.node.pece_project.field_tags
     - node.type.pece_project
   module:
+    - entity_form_field_label
+    - fences
     - user
 _core:
   default_config_hash: '-6-EiQny4jWjHb2O1kEuyUGtQsy0Jgh0soRECSqTVrA'
@@ -39,9 +41,21 @@ content:
     type: entity_reference_entity_view
     label: hidden
     settings:
-      view_mode: default
+      view_mode: square_card
       link: false
-    third_party_settings: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 0
     region: content
 hidden:
