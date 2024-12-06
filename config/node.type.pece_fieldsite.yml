@@ -1,3 +1,10 @@
+name: Fieldsite
+type: pece_fieldsite
+description: 'A fieldsite is a reference to a certain geographic location where research has been or will be conducted. You can link artifacts to fieldsites to document where the artifact was found. You can also associate fieldsites with projects on the platform.'
+help: null
+new_revision: true
+preview_mode: 0
+display_submitted: false
 uuid: 9927b74d-8c9f-4c33-9f9a-3189e08ac812
 langcode: en
 status: true
@@ -7,22 +14,15 @@ dependencies:
     - type_tray
 third_party_settings:
   type_tray:
-    type_category: conceptualize
+    type_category: _none
     type_thumbnail: ''
-    type_icon: ''
+    type_icon: /themes/custom/peceful/icons/location.svg
     type_description: ''
     existing_nodes_link_text: 'View existing <em class="placeholder">Fieldsite</em> content'
-    type_weight: 0
+    type_weight: '0'
   menu_ui:
     available_menus:
       - main
     parent: 'main:'
 _core:
   default_config_hash: 8Vl2AIO111k9dRvPR2ao8uEn5_U5cVYTOp-O90uK7J8
-name: Fieldsite
-type: pece_fieldsite
-description: 'A fieldsite is a reference to a certain geographic location where research has been or will be conducted. You can link artifacts to fieldsites to document where the artifact was found. You can also associate fieldsites with projects on the platform.'
-help: null
-new_revision: true
-preview_mode: 0
-display_submitted: false
