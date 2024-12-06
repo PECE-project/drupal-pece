@@ -1,0 +1,41 @@
+id: v1_ark_table
+class: Drupal\migrate\Plugin\Migration
+migration_tags:
+  - Content
+  - ARK
+  - 'PECE v1'
+migration_group: pece
+label: 'ARK module D7 to modern Drupal'
+source:
+  key: migrate
+  plugin: table # from migrate_plus
+  table_name: ark_map
+  id_fields:
+    ark_name:
+      type: string
+process:
+  ark_name: ark_name
+  remote_ark_name: remote_ark_name
+  entity_type: entity_type
+  entity_id: entity_id
+  ark_who: ark_who
+  ark_when: ark_when
+  created: created
+  remote_created: remote_created
+  changed: changed
+  remote_changed: remote_changed
+  data: data
+  remote_data: remote_data
+  pending_remote_update: pending_remote_update
+destination:
+  plugin: table # from migrate_plus
+  database_key: default
+  table_name: ark_map
+  # Maximum number of rows to insert in one query.
+  batch_size: 100
+  id_fields:
+    ark_name:
+      type: string
+finished:
+  7:
+    ark: ark
