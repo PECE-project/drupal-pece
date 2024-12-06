@@ -1,13 +1,3 @@
-uuid: 4709f645-1d63-4e82-bb1c-fdc407595f57
-langcode: en
-status: true
-dependencies:
-  config:
-    - search_api.index.general
-  module:
-    - better_exposed_filters
-    - facets_exposed_filters
-    - search_api
 id: analyze
 label: Analyze
 module: views
@@ -138,18 +128,16 @@ display:
                   is_secondary: false
                   hide_label: false
               facets_type:
-                plugin_id: bef
+                plugin_id: bef_links
                 advanced:
                   rewrite:
-                    filter_rewrite_values: ''
+                    filter_rewrite_values: "Content type|Choose focus for analysis\r\nAnnotation|Browse Annotations\r\nAnalytic (Question)|Browse Analytics (Questions)"
                     filter_rewrite_values_key: false
                   collapsible: false
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
                 select_all_none: false
-                select_all_none_nested: false
-                display_inline: false
               facets_field_people_with_edit_access:
                 plugin_id: bef_links_filter
                 advanced:
@@ -791,3 +779,13 @@ display:
       tags:
         - 'config:search_api.index.general'
         - 'search_api_list:general'
+uuid: 4709f645-1d63-4e82-bb1c-fdc407595f57
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.general
+  module:
+    - better_exposed_filters
+    - facets_exposed_filters
+    - search_api
