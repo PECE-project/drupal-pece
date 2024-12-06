@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ac278ce0341637a9073ac293a376884",
+    "content-hash": "2d00143658133190d70b2eb013c94fa9",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -2067,6 +2067,59 @@
             "homepage": "https://www.drupal.org/project/advanced_text_formatter",
             "support": {
                 "source": "https://git.drupalcode.org/project/advanced_text_formatter"
+            }
+        },
+        {
+            "name": "drupal/ark",
+            "version": "dev-2.0.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/ark.git",
+                "reference": "ceed4970d931cb719e0d8aaee1b6077af11ad238"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.0.x": "2.0.x-dev"
+                },
+                "drupal": {
+                    "version": "2.0.x-dev",
+                    "datestamp": "1733454335",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "dinarcon",
+                    "homepage": "https://www.drupal.org/user/909522"
+                },
+                {
+                    "name": "elkaro",
+                    "homepage": "https://www.drupal.org/user/3577260"
+                },
+                {
+                    "name": "megakeegman",
+                    "homepage": "https://www.drupal.org/user/3620027"
+                },
+                {
+                    "name": "mlncn",
+                    "homepage": "https://www.drupal.org/user/64383"
+                }
+            ],
+            "description": "Persistent Uniform Resource Locators (PURLs) with Archival Resource Key (ARK).",
+            "homepage": "https://www.drupal.org/project/ark",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ark"
             }
         },
         {
@@ -27236,6 +27289,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/access_policy": 10,
+        "drupal/ark": 20,
         "drupal/bef_links_filter": 20,
         "drupal/bibcite_migrate": 10,
         "drupal/blocktabs": 10,
