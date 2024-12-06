@@ -884,9 +884,8 @@ if (getenv('IS_DDEV_PROJECT') == 'true' && file_exists(__DIR__ . '/settings.ddev
  * Keep this code block at the end of this file to take full effect.
  */
 
-if (file_exists('/var/www/conf/wodby.settings.php') && file_exists($app_root . '/' . $site_path . '/settings.wodby.php')) {
+if (file_exists('/var/www/conf/wodby.settings.php')) {
   include '/var/www/conf/wodby.settings.php';
-  include $app_root . '/' . $site_path . '/settings.wodby.php';
 }
 #
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
