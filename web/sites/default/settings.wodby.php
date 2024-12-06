@@ -7,7 +7,7 @@ $databases['default']['default']['password'] = $wodby['db']['password'];
 $databases['default']['default']['host'] = $wodby['db']['host'];
 $databases['default']['default']['driver'] = $wodby['db']['driver'];
 $settings['hash_salt'] = $wodby['hash_salt'];
-
+$settings['file_private_path'] = $app_root . '/sites/default/files/private';
 #$wodby['redis']['host'] = '';
 #$wodby['redis']['port'] = '6379';
 #$wodby['redis']['password'] = '';
