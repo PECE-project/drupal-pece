@@ -1,34 +1,14 @@
-uuid: f9c8d100-5327-48fa-8ca3-351cbc8d8e20
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.media.square_card
-    - field.field.media.image.field_media_image
-    - media.type.image
-    - responsive_image.styles.square_card
-  module:
-    - entity_form_field_label
-    - fences
-    - layout_builder
-    - responsive_image
-third_party_settings:
-  layout_builder:
-    enabled: false
-    allow_custom: false
-_core:
-  default_config_hash: CZ2sAVtRjYmdPkY3Q9Lu0_dDj4YxubS-R70cyCGu8Es
 id: media.image.square_card
 targetEntityType: media
 bundle: image
 mode: square_card
 content:
   field_media_image:
-    type: responsive_image
-    label: visually_hidden
+    type: image
+    label: hidden
     settings:
-      responsive_image_style: square_card
       image_link: ''
+      image_style: square_120
       image_loading:
         attribute: lazy
     third_party_settings:
@@ -53,3 +33,23 @@ hidden:
   search_api_excerpt: true
   thumbnail: true
   uid: true
+uuid: f9c8d100-5327-48fa-8ca3-351cbc8d8e20
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.square_card
+    - field.field.media.image.field_media_image
+    - image.style.square_120
+    - media.type.image
+  module:
+    - entity_form_field_label
+    - fences
+    - image
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: CZ2sAVtRjYmdPkY3Q9Lu0_dDj4YxubS-R70cyCGu8Es
