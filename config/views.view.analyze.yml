@@ -1,13 +1,3 @@
-uuid: 4709f645-1d63-4e82-bb1c-fdc407595f57
-langcode: en
-status: true
-dependencies:
-  config:
-    - search_api.index.general
-  module:
-    - better_exposed_filters
-    - facets_exposed_filters
-    - search_api
 id: analyze
 label: Analyze
 module: views
@@ -793,3 +783,13 @@ display:
       tags:
         - 'config:search_api.index.general'
         - 'search_api_list:general'
+uuid: 4709f645-1d63-4e82-bb1c-fdc407595f57
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.general
+  module:
+    - better_exposed_filters
+    - facets_exposed_filters
+    - search_api
