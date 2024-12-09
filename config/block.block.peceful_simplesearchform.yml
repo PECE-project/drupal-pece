@@ -1,0 +1,36 @@
+id: peceful_simplesearchform
+theme: peceful
+region: header_search
+weight: 0
+provider: null
+plugin: simple_search_form_block
+settings:
+  id: simple_search_form_block
+  label: 'Simple search form'
+  label_display: '0'
+  provider: simple_search_form
+  action_path: /search
+  get_parameter: search_api_fulltext
+  input_type: search
+  search_api_autocomplete: {  }
+  input_label: Search
+  input_label_display: invisible
+  input_placeholder: ''
+  input_css_classes: ''
+  submit_display: true
+  submit_label: Search
+  input_keep_value: false
+  preserve_url_query_parameters: {  }
+visibility: {  }
+uuid: e652f6b5-1e49-4916-abf6-496f245abcbf
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - simple_search_form
+  theme:
+    - peceful
+third_party_settings:
+  block_class:
+    classes: 'is-hidden-touch ml-auto'
