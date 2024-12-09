@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Default theme implementation for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+set classes = [
+'input'
+]
+%}
+
+<div class="control{{ icon ? ' has-icons-left' }}">
+    <input{{ attributes.addClass(classes).removeClass('form-search').setAttribute('size', 30) }} />{{ children }}
+    {% if icon %}
+        <span class="icon is-left">
+            <i class="fa fa-{{ icon }}"></i>
+        </span>
+    {% endif %}
+</div>
