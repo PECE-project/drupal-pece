@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "59c368c6aca21327845f9a87757b0f17",
+    "content-hash": "b7d3f6300443fc32d8041586e0c31ff8",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -9781,6 +9781,54 @@
             "homepage": "https://www.drupal.org/project/simple_oauth",
             "support": {
                 "source": "https://git.drupalcode.org/project/simple_oauth"
+            }
+        },
+        {
+            "name": "drupal/simple_search_form",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/simple_search_form.git",
+                "reference": "8.x-1.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/simple_search_form-8.x-1.6.zip",
+                "reference": "8.x-1.6",
+                "shasum": "c0b4d75a8ea93a55aa6f6e55dc1d753bfb8227d4"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9 || ^10 || ^11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.6",
+                    "datestamp": "1731408948",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "a.dmitriiev",
+                    "homepage": "https://www.drupal.org/user/3235287"
+                },
+                {
+                    "name": "antonnavi",
+                    "homepage": "https://www.drupal.org/user/875410"
+                }
+            ],
+            "description": "Implements search form block for redirecting to a path with a parameter.",
+            "homepage": "https://www.drupal.org/project/simple_search_form",
+            "support": {
+                "source": "https://git.drupalcode.org/project/simple_search_form"
             }
         },
         {
@@ -26062,7 +26110,7 @@
     },
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
+    "platform": {},
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
