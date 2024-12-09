@@ -1,14 +1,3 @@
-uuid: 0e818047-3868-4533-9b13-339bf3bd1901
-langcode: en
-status: true
-dependencies:
-  config:
-    - views.view.search
-  module:
-    - block_class
-    - configurable_views_filter_block
-  theme:
-    - peceful
 id: global_text_search
 theme: peceful
 region: header_search
@@ -29,3 +18,13 @@ settings:
   no_pager: false
   no_submit: false
 visibility: {  }
+uuid: 0e818047-3868-4533-9b13-339bf3bd1901
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.search
+  module:
+    - configurable_views_filter_block
+  theme:
+    - peceful
