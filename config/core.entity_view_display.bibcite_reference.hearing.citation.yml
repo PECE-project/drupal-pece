@@ -1,16 +1,3 @@
-uuid: 3a8b68e8-36ff-463d-bea3-9ba02a7046b9
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.hearing
-    - core.entity_view_mode.bibcite_reference.citation
-  enforced:
-    config:
-      - core.entity_view_mode.bibcite_reference.citation
-      - bibcite_entity.bibcite_reference_type.hearing
-    module:
-      - bibcite_entity
 id: bibcite_reference.hearing.citation
 targetEntityType: bibcite_reference
 bundle: hearing
@@ -84,3 +71,16 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: 3a8b68e8-36ff-463d-bea3-9ba02a7046b9
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.hearing
+    - core.entity_view_mode.bibcite_reference.citation
+  enforced:
+    config:
+      - core.entity_view_mode.bibcite_reference.citation
+      - bibcite_entity.bibcite_reference_type.hearing
+    module:
+      - bibcite_entity

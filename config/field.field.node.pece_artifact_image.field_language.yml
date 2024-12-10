@@ -1,3 +1,15 @@
+id: node.pece_artifact_image.field_language
+label: Language
+field_name: field_language
+entity_type: node
+bundle: pece_artifact_image
+description: 'This field designates the language in which the artifact is written/spoken. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: language_field
 uuid: 5969d79b-daf4-486c-8fc9-b81e8ef838a5
 langcode: en
 status: true
@@ -9,15 +21,3 @@ dependencies:
     - languagefield
 _core:
   default_config_hash: DjcA-uiyN47L4PG3D4x3ZwG2vG1xKuZr9LNckB9BTog
-id: node.pece_artifact_image.field_language
-field_name: field_language
-entity_type: node
-bundle: pece_artifact_image
-label: Language
-description: 'This field designates the language in which the artifact is written/spoken. '
-required: false
-translatable: false
-default_value: {  }
-default_value_callback: ''
-settings: {  }
-field_type: language_field

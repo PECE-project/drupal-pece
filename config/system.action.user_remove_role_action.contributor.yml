@@ -1,3 +1,9 @@
+id: user_remove_role_action.contributor
+label: 'Remove the Contributor role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: contributor
 uuid: 8cd6e9ff-3f4b-43a6-b9c4-00b8f65eb90d
 langcode: en
 status: true
@@ -8,9 +14,3 @@ dependencies:
     - user
 _core:
   default_config_hash: T2k-9JvM5Lcw_isbWsq86H-HRJtQ3GOlzd3O_GRhNJA
-id: user_remove_role_action.contributor
-label: 'Remove the Contributor role from the selected user(s)'
-type: user
-plugin: user_remove_role_action
-configuration:
-  rid: contributor

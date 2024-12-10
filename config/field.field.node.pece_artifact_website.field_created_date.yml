@@ -1,17 +1,8 @@
-uuid: 03600433-fd6b-4b51-a163-bbc6bdda1d6e
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_created_date
-    - node.type.pece_artifact_website
-  module:
-    - datetime
 id: node.pece_artifact_website.field_created_date
+label: 'Created Date'
 field_name: field_created_date
 entity_type: node
 bundle: pece_artifact_website
-label: 'Created Date'
 description: 'This field designates the date this artifact was originally created.'
 required: true
 translatable: false
@@ -22,3 +13,12 @@ default_value:
 default_value_callback: ''
 settings: {  }
 field_type: datetime
+uuid: 03600433-fd6b-4b51-a163-bbc6bdda1d6e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_created_date
+    - node.type.pece_artifact_website
+  module:
+    - datetime

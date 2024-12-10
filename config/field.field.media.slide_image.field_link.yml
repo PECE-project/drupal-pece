@@ -1,17 +1,8 @@
-uuid: 1951c417-5332-49bf-a692-3bac6f58020d
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_link
-    - media.type.slide_image
-  module:
-    - link
 id: media.slide_image.field_link
+label: Link
 field_name: field_link
 entity_type: media
 bundle: slide_image
-label: Link
 description: ''
 required: false
 translatable: false
@@ -21,3 +12,12 @@ settings:
   title: 0
   link_type: 17
 field_type: link
+uuid: 1951c417-5332-49bf-a692-3bac6f58020d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_link
+    - media.type.slide_image
+  module:
+    - link

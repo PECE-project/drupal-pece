@@ -1,17 +1,8 @@
-uuid: 1f75123b-4d92-45ce-9ab3-9a970c590f7a
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.body
-    - node.type.pece_project
-  module:
-    - text
 id: node.pece_project.body
+label: 'About Project'
 field_name: body
 entity_type: node
 bundle: pece_project
-label: 'About Project'
 description: ''
 required: false
 translatable: true
@@ -22,3 +13,12 @@ settings:
   required_summary: false
   allowed_formats: {  }
 field_type: text_with_summary
+uuid: 1f75123b-4d92-45ce-9ab3-9a970c590f7a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.pece_project
+  module:
+    - text

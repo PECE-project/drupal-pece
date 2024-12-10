@@ -1,41 +1,3 @@
-uuid: 452acb10-bb7d-429c-82d8-ce2476c2f1e4
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.search_result
-    - field.field.node.artifact_tabular_data.field_ark_enabled
-    - field.field.node.artifact_tabular_data.field_authors
-    - field.field.node.artifact_tabular_data.field_cite_as
-    - field.field.node.artifact_tabular_data.field_created_date
-    - field.field.node.artifact_tabular_data.field_crit_commentary
-    - field.field.node.artifact_tabular_data.field_fieldsite
-    - field.field.node.artifact_tabular_data.field_groups_with_view_access
-    - field.field.node.artifact_tabular_data.field_language
-    - field.field.node.artifact_tabular_data.field_location
-    - field.field.node.artifact_tabular_data.field_media_tabular_data
-    - field.field.node.artifact_tabular_data.field_pece_all_can_view
-    - field.field.node.artifact_tabular_data.field_pece_geolocation
-    - field.field.node.artifact_tabular_data.field_pece_license
-    - field.field.node.artifact_tabular_data.field_pece_project_ref
-    - field.field.node.artifact_tabular_data.field_people_with_edit_access
-    - field.field.node.artifact_tabular_data.field_people_with_view_access
-    - field.field.node.artifact_tabular_data.field_source
-    - field.field.node.artifact_tabular_data.field_tablr_media_attachments
-    - field.field.node.artifact_tabular_data.field_tags
-    - field.field.node.artifact_tabular_data.field_use_fieldsite_local
-    - node.type.artifact_tabular_data
-  module:
-    - entity_form_field_label
-    - layout_builder
-    - text
-    - user
-third_party_settings:
-  layout_builder:
-    enabled: false
-    allow_custom: false
-_core:
-  default_config_hash: ZYRbvgpK73gU2ZYpD36sh0tA8YW5ptCG7V34MwKdSpg
 id: node.artifact_tabular_data.search_result
 targetEntityType: node
 bundle: artifact_tabular_data
@@ -83,3 +45,41 @@ hidden:
   langcode: true
   links: true
   search_api_excerpt: true
+uuid: 452acb10-bb7d-429c-82d8-ce2476c2f1e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.artifact_tabular_data.field_ark_enabled
+    - field.field.node.artifact_tabular_data.field_authors
+    - field.field.node.artifact_tabular_data.field_cite_as
+    - field.field.node.artifact_tabular_data.field_created_date
+    - field.field.node.artifact_tabular_data.field_crit_commentary
+    - field.field.node.artifact_tabular_data.field_fieldsite
+    - field.field.node.artifact_tabular_data.field_groups_with_view_access
+    - field.field.node.artifact_tabular_data.field_language
+    - field.field.node.artifact_tabular_data.field_location
+    - field.field.node.artifact_tabular_data.field_media_tabular_data
+    - field.field.node.artifact_tabular_data.field_pece_all_can_view
+    - field.field.node.artifact_tabular_data.field_pece_geolocation
+    - field.field.node.artifact_tabular_data.field_pece_license
+    - field.field.node.artifact_tabular_data.field_pece_project_ref
+    - field.field.node.artifact_tabular_data.field_people_with_edit_access
+    - field.field.node.artifact_tabular_data.field_people_with_view_access
+    - field.field.node.artifact_tabular_data.field_source
+    - field.field.node.artifact_tabular_data.field_tablr_media_attachments
+    - field.field.node.artifact_tabular_data.field_tags
+    - field.field.node.artifact_tabular_data.field_use_fieldsite_local
+    - node.type.artifact_tabular_data
+  module:
+    - entity_form_field_label
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: ZYRbvgpK73gU2ZYpD36sh0tA8YW5ptCG7V34MwKdSpg

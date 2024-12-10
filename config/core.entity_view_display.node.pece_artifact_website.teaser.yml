@@ -1,32 +1,3 @@
-uuid: 0581be93-fe6a-48ae-a7c6-2910cdf57661
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.teaser
-    - field.field.node.pece_artifact_website.field_ark_enabled
-    - field.field.node.pece_artifact_website.field_authors
-    - field.field.node.pece_artifact_website.field_bibliography
-    - field.field.node.pece_artifact_website.field_cite_as
-    - field.field.node.pece_artifact_website.field_created_date
-    - field.field.node.pece_artifact_website.field_crit_commentary
-    - field.field.node.pece_artifact_website.field_fieldsite
-    - field.field.node.pece_artifact_website.field_groups_with_view_access
-    - field.field.node.pece_artifact_website.field_language
-    - field.field.node.pece_artifact_website.field_location
-    - field.field.node.pece_artifact_website.field_pece_all_can_view
-    - field.field.node.pece_artifact_website.field_pece_geolocation
-    - field.field.node.pece_artifact_website.field_pece_license
-    - field.field.node.pece_artifact_website.field_pece_project_ref
-    - field.field.node.pece_artifact_website.field_people_with_edit_access
-    - field.field.node.pece_artifact_website.field_people_with_view_access
-    - field.field.node.pece_artifact_website.field_source
-    - field.field.node.pece_artifact_website.field_tags
-    - field.field.node.pece_artifact_website.field_use_fieldsite_local
-    - field.field.node.pece_artifact_website.field_website_url
-    - node.type.pece_artifact_website
-  module:
-    - user
 id: node.pece_artifact_website.teaser
 targetEntityType: node
 bundle: pece_artifact_website
@@ -66,3 +37,32 @@ hidden:
   links: true
   og_audience: true
   search_api_excerpt: true
+uuid: 0581be93-fe6a-48ae-a7c6-2910cdf57661
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_artifact_website.field_ark_enabled
+    - field.field.node.pece_artifact_website.field_authors
+    - field.field.node.pece_artifact_website.field_bibliography
+    - field.field.node.pece_artifact_website.field_cite_as
+    - field.field.node.pece_artifact_website.field_created_date
+    - field.field.node.pece_artifact_website.field_crit_commentary
+    - field.field.node.pece_artifact_website.field_fieldsite
+    - field.field.node.pece_artifact_website.field_groups_with_view_access
+    - field.field.node.pece_artifact_website.field_language
+    - field.field.node.pece_artifact_website.field_location
+    - field.field.node.pece_artifact_website.field_pece_all_can_view
+    - field.field.node.pece_artifact_website.field_pece_geolocation
+    - field.field.node.pece_artifact_website.field_pece_license
+    - field.field.node.pece_artifact_website.field_pece_project_ref
+    - field.field.node.pece_artifact_website.field_people_with_edit_access
+    - field.field.node.pece_artifact_website.field_people_with_view_access
+    - field.field.node.pece_artifact_website.field_source
+    - field.field.node.pece_artifact_website.field_tags
+    - field.field.node.pece_artifact_website.field_use_fieldsite_local
+    - field.field.node.pece_artifact_website.field_website_url
+    - node.type.pece_artifact_website
+  module:
+    - user

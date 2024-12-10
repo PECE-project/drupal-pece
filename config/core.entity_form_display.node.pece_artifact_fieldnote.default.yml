@@ -1,165 +1,8 @@
-uuid: 8ea90cec-ca92-487e-ae88-e5e7f021ba96
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.node.pece_artifact_fieldnote.body
-    - field.field.node.pece_artifact_fieldnote.field_ark_enabled
-    - field.field.node.pece_artifact_fieldnote.field_authors
-    - field.field.node.pece_artifact_fieldnote.field_cite_as
-    - field.field.node.pece_artifact_fieldnote.field_created_date
-    - field.field.node.pece_artifact_fieldnote.field_fieldsite
-    - field.field.node.pece_artifact_fieldnote.field_groups_with_view_access
-    - field.field.node.pece_artifact_fieldnote.field_language
-    - field.field.node.pece_artifact_fieldnote.field_location
-    - field.field.node.pece_artifact_fieldnote.field_pece_all_can_view
-    - field.field.node.pece_artifact_fieldnote.field_pece_geolocation
-    - field.field.node.pece_artifact_fieldnote.field_pece_license
-    - field.field.node.pece_artifact_fieldnote.field_pece_project_ref
-    - field.field.node.pece_artifact_fieldnote.field_people_with_edit_access
-    - field.field.node.pece_artifact_fieldnote.field_people_with_view_access
-    - field.field.node.pece_artifact_fieldnote.field_source
-    - field.field.node.pece_artifact_fieldnote.field_tags
-    - field.field.node.pece_artifact_fieldnote.field_use_fieldsite_local
-    - node.type.pece_artifact_fieldnote
-  module:
-    - address
-    - datetime
-    - field_group
-    - geolocation
-    - languagefield
-    - path
-    - text
-third_party_settings:
-  field_group:
-    group_permissions:
-      children:
-        - group_edit_permissions_and_auth
-        - group_view_permissions_and_group
-      label: 'Permissions, Authorship, and Groups'
-      region: content
-      parent_name: group_metadata
-      weight: 31
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-        open: '1'
-    group_metadata:
-      children:
-        - group_permissions
-        - group_creation_metadata
-        - group_contribution_metadata
-        - group_custom_citation
-      label: Metadata
-      region: content
-      parent_name: ''
-      weight: 2
-      format_type: tabs
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        direction: vertical
-        width_breakpoint: 640
-    group_creation_metadata:
-      children:
-        - field_authors
-        - field_created_date
-        - field_source
-        - field_language
-        - field_location
-      label: 'Source Metadata'
-      region: content
-      parent_name: group_metadata
-      weight: 32
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-    group_contribution_metadata:
-      children:
-        - field_pece_license
-        - field_fieldsite
-        - field_use_fieldsite_local
-        - field_tags
-      label: 'Contribution Metadata'
-      region: content
-      parent_name: group_metadata
-      weight: 33
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-    group_custom_citation:
-      children:
-        - field_pece_project_ref
-        - field_ark_enabled
-      label: 'Custom Citation'
-      region: content
-      parent_name: group_metadata
-      weight: 34
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-    group_edit_permissions_and_auth:
-      children:
-        - field_people_with_edit_access
-      label: 'Edit Permissions and Authorship'
-      region: content
-      parent_name: group_permissions
-      weight: 20
-      format_type: fieldset
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        description: ''
-        required_fields: true
-    group_view_permissions_and_group:
-      children:
-        - field_pece_all_can_view
-        - field_people_with_view_access
-        - field_groups_with_view_access
-      label: 'View Permissions and Groups'
-      region: content
-      parent_name: group_permissions
-      weight: 21
-      format_type: fieldset
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        description: ''
-        required_fields: true
 id: node.pece_artifact_fieldnote.default
 targetEntityType: node
 bundle: pece_artifact_fieldnote
 mode: default
+status: true
 content:
   body:
     type: text_textarea_with_summary
@@ -338,6 +181,19 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  revision_log:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 6
@@ -378,3 +234,160 @@ content:
 hidden:
   field_cite_as: true
   langcode: true
+uuid: 8ea90cec-ca92-487e-ae88-e5e7f021ba96
+langcode: en
+dependencies:
+  config:
+    - field.field.node.pece_artifact_fieldnote.body
+    - field.field.node.pece_artifact_fieldnote.field_ark_enabled
+    - field.field.node.pece_artifact_fieldnote.field_authors
+    - field.field.node.pece_artifact_fieldnote.field_cite_as
+    - field.field.node.pece_artifact_fieldnote.field_created_date
+    - field.field.node.pece_artifact_fieldnote.field_fieldsite
+    - field.field.node.pece_artifact_fieldnote.field_groups_with_view_access
+    - field.field.node.pece_artifact_fieldnote.field_language
+    - field.field.node.pece_artifact_fieldnote.field_location
+    - field.field.node.pece_artifact_fieldnote.field_pece_all_can_view
+    - field.field.node.pece_artifact_fieldnote.field_pece_geolocation
+    - field.field.node.pece_artifact_fieldnote.field_pece_license
+    - field.field.node.pece_artifact_fieldnote.field_pece_project_ref
+    - field.field.node.pece_artifact_fieldnote.field_people_with_edit_access
+    - field.field.node.pece_artifact_fieldnote.field_people_with_view_access
+    - field.field.node.pece_artifact_fieldnote.field_source
+    - field.field.node.pece_artifact_fieldnote.field_tags
+    - field.field.node.pece_artifact_fieldnote.field_use_fieldsite_local
+    - node.type.pece_artifact_fieldnote
+  module:
+    - address
+    - datetime
+    - field_group
+    - geolocation
+    - languagefield
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_permissions:
+      children:
+        - group_edit_permissions_and_auth
+        - group_view_permissions_and_group
+      label: 'Permissions, Authorship, and Groups'
+      region: content
+      parent_name: group_metadata
+      weight: 31
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+        open: '1'
+    group_metadata:
+      children:
+        - group_permissions
+        - group_creation_metadata
+        - group_contribution_metadata
+        - group_custom_citation
+      label: Metadata
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: vertical
+        width_breakpoint: 640
+    group_creation_metadata:
+      children:
+        - field_authors
+        - field_created_date
+        - field_source
+        - field_language
+        - field_location
+      label: 'Source Metadata'
+      region: content
+      parent_name: group_metadata
+      weight: 32
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_contribution_metadata:
+      children:
+        - field_pece_license
+        - field_fieldsite
+        - field_use_fieldsite_local
+        - field_tags
+      label: 'Contribution Metadata'
+      region: content
+      parent_name: group_metadata
+      weight: 33
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_custom_citation:
+      children:
+        - field_pece_project_ref
+        - field_ark_enabled
+      label: 'Custom Citation'
+      region: content
+      parent_name: group_metadata
+      weight: 34
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_edit_permissions_and_auth:
+      children:
+        - field_people_with_edit_access
+      label: 'Edit Permissions and Authorship'
+      region: content
+      parent_name: group_permissions
+      weight: 20
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true
+    group_view_permissions_and_group:
+      children:
+        - field_pece_all_can_view
+        - field_people_with_view_access
+        - field_groups_with_view_access
+      label: 'View Permissions and Groups'
+      region: content
+      parent_name: group_permissions
+      weight: 21
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true

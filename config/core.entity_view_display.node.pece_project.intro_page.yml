@@ -1,33 +1,3 @@
-uuid: 1236d5a5-6e32-4cee-b01c-c0b910dc88dc
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.intro_page
-    - field.field.node.pece_project.body
-    - field.field.node.pece_project.field_ark_enabled
-    - field.field.node.pece_project.field_fieldsites
-    - field.field.node.pece_project.field_groups_with_view_access
-    - field.field.node.pece_project.field_media_image_banner
-    - field.field.node.pece_project.field_media_thumbnail
-    - field.field.node.pece_project.field_pece_all_can_view
-    - field.field.node.pece_project.field_people_with_edit_access
-    - field.field.node.pece_project.field_people_with_view_access
-    - field.field.node.pece_project.field_project_consent_form_file
-    - field.field.node.pece_project.field_project_design_group
-    - field.field.node.pece_project.field_project_featured_essays
-    - field.field.node.pece_project.field_project_fund_agency_link
-    - field.field.node.pece_project.field_project_institution_link
-    - field.field.node.pece_project.field_project_intv_request_file
-    - field.field.node.pece_project.field_project_lead
-    - field.field.node.pece_project.field_project_open_notes
-    - field.field.node.pece_project.field_project_start_end_date
-    - field.field.node.pece_project.field_project_struct_analytics
-    - field.field.node.pece_project.field_project_subst_logic
-    - field.field.node.pece_project.field_tags
-    - node.type.pece_project
-  module:
-    - user
 id: node.pece_project.intro_page
 targetEntityType: node
 bundle: pece_project
@@ -70,3 +40,33 @@ hidden:
   field_tags: true
   langcode: true
   search_api_excerpt: true
+uuid: 1236d5a5-6e32-4cee-b01c-c0b910dc88dc
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.intro_page
+    - field.field.node.pece_project.body
+    - field.field.node.pece_project.field_ark_enabled
+    - field.field.node.pece_project.field_fieldsites
+    - field.field.node.pece_project.field_groups_with_view_access
+    - field.field.node.pece_project.field_media_image_banner
+    - field.field.node.pece_project.field_media_thumbnail
+    - field.field.node.pece_project.field_pece_all_can_view
+    - field.field.node.pece_project.field_people_with_edit_access
+    - field.field.node.pece_project.field_people_with_view_access
+    - field.field.node.pece_project.field_project_consent_form_file
+    - field.field.node.pece_project.field_project_design_group
+    - field.field.node.pece_project.field_project_featured_essays
+    - field.field.node.pece_project.field_project_fund_agency_link
+    - field.field.node.pece_project.field_project_institution_link
+    - field.field.node.pece_project.field_project_intv_request_file
+    - field.field.node.pece_project.field_project_lead
+    - field.field.node.pece_project.field_project_open_notes
+    - field.field.node.pece_project.field_project_start_end_date
+    - field.field.node.pece_project.field_project_struct_analytics
+    - field.field.node.pece_project.field_project_subst_logic
+    - field.field.node.pece_project.field_tags
+    - node.type.pece_project
+  module:
+    - user

@@ -1,3 +1,15 @@
+id: node.artifact_video.field_duration
+label: Duration
+field_name: field_duration
+entity_type: node
+bundle: artifact_video
+description: 'This field indicates the time duration of this artifact in hours, minutes and seconds (i.e. hh-mm-ss).'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
 uuid: 000ceaf4-d80e-4d0e-b915-5b49ee57ff46
 langcode: en
 status: true
@@ -7,15 +19,3 @@ dependencies:
     - node.type.artifact_video
 _core:
   default_config_hash: e5FdFWjxOGTxKHvqhJfbsFzUef9rpSxzo2q4FI-Rv4Q
-id: node.artifact_video.field_duration
-field_name: field_duration
-entity_type: node
-bundle: artifact_video
-label: Duration
-description: 'This field indicates the time duration of this artifact in hours, minutes and seconds (i.e. hh-mm-ss).'
-required: false
-translatable: false
-default_value: {  }
-default_value_callback: ''
-settings: {  }
-field_type: string

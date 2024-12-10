@@ -1,25 +1,3 @@
-uuid: 9cc6350f-60a5-452c-8362-d6f3e859fbbe
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.artifact
-    - field.field.bibcite_reference.artifact.field_accessed_date
-    - field.field.bibcite_reference.artifact.field_ark
-    - field.field.bibcite_reference.artifact.field_contributors
-    - field.field.bibcite_reference.artifact.field_created_date
-    - field.field.bibcite_reference.artifact.field_creator_s
-    - field.field.bibcite_reference.artifact.field_last_updated
-    - field.field.bibcite_reference.artifact.field_pece
-    - field.field.bibcite_reference.artifact.field_platform_name
-    - field.field.bibcite_reference.artifact.field_project
-    - field.field.bibcite_reference.artifact.field_title
-    - field.field.bibcite_reference.artifact.field_url
-  module:
-    - bibcite_entity
-    - datetime
-    - link
-    - text
 id: bibcite_reference.artifact.default
 targetEntityType: bibcite_reference
 bundle: artifact
@@ -535,3 +513,25 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: 9cc6350f-60a5-452c-8362-d6f3e859fbbe
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.artifact
+    - field.field.bibcite_reference.artifact.field_accessed_date
+    - field.field.bibcite_reference.artifact.field_ark
+    - field.field.bibcite_reference.artifact.field_contributors
+    - field.field.bibcite_reference.artifact.field_created_date
+    - field.field.bibcite_reference.artifact.field_creator_s
+    - field.field.bibcite_reference.artifact.field_last_updated
+    - field.field.bibcite_reference.artifact.field_pece
+    - field.field.bibcite_reference.artifact.field_platform_name
+    - field.field.bibcite_reference.artifact.field_project
+    - field.field.bibcite_reference.artifact.field_title
+    - field.field.bibcite_reference.artifact.field_url
+  module:
+    - bibcite_entity
+    - datetime
+    - link
+    - text

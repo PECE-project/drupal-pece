@@ -1,16 +1,3 @@
-uuid: 689332c3-eb6a-4182-8113-6628540254b1
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.media.media_library
-    - field.field.media.private_audio.field_filesize
-    - field.field.media.private_audio.field_media_private_audio_file
-    - field.field.media.private_audio.field_mimetype
-    - image.style.medium
-    - media.type.private_audio
-  module:
-    - image
 id: media.private_audio.media_library
 targetEntityType: media
 bundle: private_audio
@@ -36,3 +23,16 @@ hidden:
   name: true
   search_api_excerpt: true
   uid: true
+uuid: 689332c3-eb6a-4182-8113-6628540254b1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.private_audio.field_filesize
+    - field.field.media.private_audio.field_media_private_audio_file
+    - field.field.media.private_audio.field_mimetype
+    - image.style.medium
+    - media.type.private_audio
+  module:
+    - image

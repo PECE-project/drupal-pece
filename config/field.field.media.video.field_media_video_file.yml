@@ -1,19 +1,8 @@
-uuid: 975b6c82-a5de-4bba-9508-8af75d9b487d
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_media_video_file
-    - media.type.video
-  module:
-    - file
-_core:
-  default_config_hash: 6kMMjmk2r_csGQ52qI9BUaO8r_oAzNLbxlclaj-JlDQ
 id: media.video.field_media_video_file
+label: 'Video file'
 field_name: field_media_video_file
 entity_type: media
 bundle: video
-label: 'Video file'
 description: ''
 required: true
 translatable: true
@@ -27,3 +16,14 @@ settings:
   max_filesize: ''
   description_field: false
 field_type: file
+uuid: 975b6c82-a5de-4bba-9508-8af75d9b487d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_video_file
+    - media.type.video
+  module:
+    - file
+_core:
+  default_config_hash: 6kMMjmk2r_csGQ52qI9BUaO8r_oAzNLbxlclaj-JlDQ

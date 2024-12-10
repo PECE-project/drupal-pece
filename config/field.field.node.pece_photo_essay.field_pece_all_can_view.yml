@@ -1,17 +1,8 @@
-uuid: d32f5c76-9b07-4048-9e97-ecc9bfab3c00
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_pece_all_can_view
-    - node.type.pece_photo_essay
-_core:
-  default_config_hash: i-4Jpp9-k1Cn9Zby45tcu_AlQ_YEBSUF6zDTWdBpviY
 id: node.pece_photo_essay.field_pece_all_can_view
+label: 'Everyone can view this content'
 field_name: field_pece_all_can_view
 entity_type: node
 bundle: pece_photo_essay
-label: 'Everyone can view this content'
 description: 'If you check this option, then all users (including anonymous users) can see this content.'
 required: false
 translatable: true
@@ -23,3 +14,12 @@ settings:
   on_label: 'On'
   off_label: 'Off'
 field_type: boolean
+uuid: d32f5c76-9b07-4048-9e97-ecc9bfab3c00
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_all_can_view
+    - node.type.pece_photo_essay
+_core:
+  default_config_hash: i-4Jpp9-k1Cn9Zby45tcu_AlQ_YEBSUF6zDTWdBpviY

@@ -1,15 +1,8 @@
-uuid: 5ebd7321-dbec-466b-acd1-65f40564af4d
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_mimetype
-    - media.type.private_pdf
 id: media.private_pdf.field_mimetype
+label: Mimetype
 field_name: field_mimetype
 entity_type: media
 bundle: private_pdf
-label: Mimetype
 description: ''
 required: false
 translatable: false
@@ -17,3 +10,10 @@ default_value: {  }
 default_value_callback: ''
 settings: {  }
 field_type: string
+uuid: 5ebd7321-dbec-466b-acd1-65f40564af4d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_mimetype
+    - media.type.private_pdf

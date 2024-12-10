@@ -1,17 +1,8 @@
-uuid: 5c7b6d48-7601-4810-8182-358ace3049ba
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_pece_all_can_view
-    - node.type.artifact_tabular_data
-_core:
-  default_config_hash: IprPo3_HZ0cHfGtOmD1hxLfzL-LoQ9V7qhlFHH0ZHHo
 id: node.artifact_tabular_data.field_pece_all_can_view
+label: 'Everyone can view this content'
 field_name: field_pece_all_can_view
 entity_type: node
 bundle: artifact_tabular_data
-label: 'Everyone can view this content'
 description: 'If you check this option, then all users (including anonymous users) can see this content.'
 required: false
 translatable: true
@@ -23,3 +14,12 @@ settings:
   on_label: 'On'
   off_label: 'Off'
 field_type: boolean
+uuid: 5c7b6d48-7601-4810-8182-358ace3049ba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_all_can_view
+    - node.type.artifact_tabular_data
+_core:
+  default_config_hash: IprPo3_HZ0cHfGtOmD1hxLfzL-LoQ9V7qhlFHH0ZHHo

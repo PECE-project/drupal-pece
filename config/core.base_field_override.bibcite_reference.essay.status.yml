@@ -1,14 +1,8 @@
-uuid: 51887eb8-169a-4cac-8a6c-6a440528b526
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.essay
 id: bibcite_reference.essay.status
+label: Published
 field_name: status
 entity_type: bibcite_reference
 bundle: essay
-label: Published
 description: ''
 required: false
 translatable: false
@@ -20,3 +14,9 @@ settings:
   on_label: 'On'
   off_label: 'Off'
 field_type: boolean
+uuid: 51887eb8-169a-4cac-8a6c-6a440528b526
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.essay

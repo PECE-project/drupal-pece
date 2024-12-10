@@ -1,19 +1,8 @@
-uuid: ff183efc-2782-4f0d-b0b2-a8169b930b3e
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_location
-    - node.type.pece_fieldsite
-  module:
-    - address
-_core:
-  default_config_hash: t-jsNrs7wuWfX1N-Is5hRLpZZPlxPRFuPP2xsYgALe4
 id: node.pece_fieldsite.field_location
+label: Location
 field_name: field_location
 entity_type: node
 bundle: pece_fieldsite
-label: Location
 description: ''
 required: false
 translatable: false
@@ -37,3 +26,14 @@ settings:
       override: hidden
   fields: {  }
 field_type: address
+uuid: ff183efc-2782-4f0d-b0b2-a8169b930b3e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_location
+    - node.type.pece_fieldsite
+  module:
+    - address
+_core:
+  default_config_hash: t-jsNrs7wuWfX1N-Is5hRLpZZPlxPRFuPP2xsYgALe4

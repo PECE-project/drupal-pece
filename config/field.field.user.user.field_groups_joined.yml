@@ -1,17 +1,8 @@
-uuid: 857d5620-79dc-4bcb-8b14-eb86c881e1a9
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.user.field_groups_joined
-    - taxonomy.vocabulary.groups
-  module:
-    - user
 id: user.user.field_groups_joined
+label: 'Groups joined'
 field_name: field_groups_joined
 entity_type: user
 bundle: user
-label: 'Groups joined'
 description: ''
 required: false
 translatable: false
@@ -28,3 +19,12 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 857d5620-79dc-4bcb-8b14-eb86c881e1a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_groups_joined
+    - taxonomy.vocabulary.groups
+  module:
+    - user

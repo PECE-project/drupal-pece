@@ -1,23 +1,8 @@
-uuid: cf44d824-9b7b-4514-aa9e-507c2b8e433b
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_media_image_mobile_replace
-    - media.type.slide_image
-  module:
-    - image
-    - image_replace
-third_party_settings:
-  image_replace:
-    image_style_map:
-      pece_frontpage_image_replace_mobile:
-        source_field: '0'
 id: media.slide_image.field_media_image_mobile_replace
+label: 'Narrow image'
 field_name: field_media_image_mobile_replace
 entity_type: media
 bundle: slide_image
-label: 'Narrow image'
 description: "This image (2:1 width to height ratio) is shown to people on mobile devices or other narrow screens; please do not re-upload the wide image you uploaded in the previous step!\r\n\r\nIt should be at least 700 pixels wide and 350 pixels tall; larger images will be re-sized to be the correct size, as needed."
 required: false
 translatable: false
@@ -42,3 +27,18 @@ settings:
     width: null
     height: null
 field_type: image
+uuid: cf44d824-9b7b-4514-aa9e-507c2b8e433b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_image_mobile_replace
+    - media.type.slide_image
+  module:
+    - image
+    - image_replace
+third_party_settings:
+  image_replace:
+    image_style_map:
+      pece_frontpage_image_replace_mobile:
+        source_field: '0'

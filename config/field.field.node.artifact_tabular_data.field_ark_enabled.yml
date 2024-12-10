@@ -1,17 +1,8 @@
-uuid: ba2e8339-c1bb-4c8f-8855-b002c5769c9b
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_ark_enabled
-    - node.type.artifact_tabular_data
-_core:
-  default_config_hash: FrqVLs7lIpt_5r3Kil02e4ielJPCmnQIjcXGCaAfTPs
 id: node.artifact_tabular_data.field_ark_enabled
+label: 'ARK Enabled'
 field_name: field_ark_enabled
 entity_type: node
 bundle: artifact_tabular_data
-label: 'ARK Enabled'
 description: 'ARKs (Archival Resource Keys) serve as persistent identifiers, or stable, trusted references for an information object. They are like DOIs but are open, decentralized, and non-paywalled; you can assign an ARK to almost any content you create, but they should be used thoughtfully for content whose long-term accessibility is vital.'
 required: false
 translatable: true
@@ -23,3 +14,12 @@ settings:
   on_label: 'On'
   off_label: 'Off'
 field_type: boolean
+uuid: ba2e8339-c1bb-4c8f-8855-b002c5769c9b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ark_enabled
+    - node.type.artifact_tabular_data
+_core:
+  default_config_hash: FrqVLs7lIpt_5r3Kil02e4ielJPCmnQIjcXGCaAfTPs

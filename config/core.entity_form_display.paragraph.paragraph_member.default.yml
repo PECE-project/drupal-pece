@@ -1,17 +1,8 @@
-uuid: 2150cc84-ae81-4c06-b91c-1d57952ba638
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.paragraph.paragraph_member.field_member_function
-    - field.field.paragraph.paragraph_member.field_member_user
-    - paragraphs.paragraphs_type.paragraph_member
-_core:
-  default_config_hash: lXJIclNAxAjXSVuw_zkEkkwoULO9rdPDs7_Qty-7yVY
 id: paragraph.paragraph_member.default
 targetEntityType: paragraph
 bundle: paragraph_member
 mode: default
+status: true
 content:
   field_member_function:
     type: options_select
@@ -32,3 +23,12 @@ content:
 hidden:
   created: true
   status: true
+uuid: 2150cc84-ae81-4c06-b91c-1d57952ba638
+langcode: en
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_member.field_member_function
+    - field.field.paragraph.paragraph_member.field_member_user
+    - paragraphs.paragraphs_type.paragraph_member
+_core:
+  default_config_hash: lXJIclNAxAjXSVuw_zkEkkwoULO9rdPDs7_Qty-7yVY

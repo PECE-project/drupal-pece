@@ -1,3 +1,16 @@
+id: node.pece_artifact_text.field_crit_commentary
+label: 'Critical Commentary'
+field_name: field_crit_commentary
+entity_type: node
+bundle: pece_artifact_text
+description: 'This field designates how the contributor interprets the artifact and/or its significance and relevance to the project.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long
 uuid: 1b270367-2de5-45e3-8f82-0ac6db2793c2
 langcode: en
 status: true
@@ -9,16 +22,3 @@ dependencies:
     - text
 _core:
   default_config_hash: K2sRqiH6Ym57B8bXNsb5R4N6r6DE0GVoA0dWAD7_rao
-id: node.pece_artifact_text.field_crit_commentary
-field_name: field_crit_commentary
-entity_type: node
-bundle: pece_artifact_text
-label: 'Critical Commentary'
-description: 'This field designates how the contributor interprets the artifact and/or its significance and relevance to the project.'
-required: true
-translatable: false
-default_value: {  }
-default_value_callback: ''
-settings:
-  allowed_formats: {  }
-field_type: text_long

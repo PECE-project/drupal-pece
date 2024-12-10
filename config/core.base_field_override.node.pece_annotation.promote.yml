@@ -1,14 +1,8 @@
-uuid: 9a4ffec0-3511-44c6-bc07-556dad7f0520
-langcode: en
-status: true
-dependencies:
-  config:
-    - node.type.pece_annotation
 id: node.pece_annotation.promote
+label: 'Promoted to front page'
 field_name: promote
 entity_type: node
 bundle: pece_annotation
-label: 'Promoted to front page'
 description: ''
 required: false
 translatable: true
@@ -20,3 +14,9 @@ settings:
   on_label: 'On'
   off_label: 'Off'
 field_type: boolean
+uuid: 9a4ffec0-3511-44c6-bc07-556dad7f0520
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.pece_annotation

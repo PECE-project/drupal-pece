@@ -1,16 +1,8 @@
-uuid: fb0f30ae-7b0d-4600-9472-da399024def2
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_pece_license
-    - node.type.pece_essay
-    - taxonomy.vocabulary.licenses_vocabulary_licenses
 id: node.pece_essay.field_pece_license
+label: License
 field_name: field_pece_license
 entity_type: node
 bundle: pece_essay
-label: License
 description: 'This field indicates how the content should be licensed. Descriptions of available creative commons licenses can be found <a href="https://creativecommons.org/share-your-work/cclicenses/">here</a>. If you are applying a license to found content that was previously licensed with a Creative Commons Share-Alike license, be sure that you are sharing the content under the same terms as the original.'
 required: true
 translatable: true
@@ -27,3 +19,11 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: fb0f30ae-7b0d-4600-9472-da399024def2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_license
+    - node.type.pece_essay
+    - taxonomy.vocabulary.licenses_vocabulary_licenses

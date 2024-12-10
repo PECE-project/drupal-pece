@@ -1,135 +1,8 @@
-uuid: 39205809-4054-48de-b039-194c3bedfdbc
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_form_mode.node.annotation_step_1
-    - field.field.node.pece_annotation.body
-    - field.field.node.pece_annotation.field_annotation_analytic
-    - field.field.node.pece_annotation.field_annotation_artifact
-    - field.field.node.pece_annotation.field_ark_enabled
-    - field.field.node.pece_annotation.field_groups_with_view_access
-    - field.field.node.pece_annotation.field_pece_all_can_view
-    - field.field.node.pece_annotation.field_pece_license
-    - field.field.node.pece_annotation.field_people_with_edit_access
-    - field.field.node.pece_annotation.field_people_with_view_access
-    - field.field.node.pece_annotation.field_tags
-    - node.type.pece_annotation
-  module:
-    - entity_browser_entity_form
-    - entity_form_field_label
-    - field_group
-    - hide_revision_field
-    - inline_entity_form
-    - path
-    - readonly_field_widget
-    - text
-third_party_settings:
-  field_group:
-    group_metadata:
-      children:
-        - group_permissions_authorship_an
-        - group_contribution_metadata
-        - group_custom_citation
-      label: Metadata
-      region: content
-      parent_name: ''
-      weight: 4
-      format_type: tabs
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        direction: vertical
-        width_breakpoint: 640
-    group_contribution_metadata:
-      children:
-        - field_pece_license
-        - field_tags
-      label: 'Contribution Metadata'
-      region: content
-      parent_name: group_metadata
-      weight: 21
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-    group_permissions_authorship_an:
-      children:
-        - group_edit_permissions_and_autho
-        - group_view_permissions_and_group
-      label: 'Permissions, Authorship, and Groups'
-      region: content
-      parent_name: group_metadata
-      weight: 20
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-    group_custom_citation:
-      children:
-        - field_ark_enabled
-      label: 'Custom Citation'
-      region: content
-      parent_name: group_metadata
-      weight: 22
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-    group_edit_permissions_and_autho:
-      children:
-        - field_people_with_edit_access
-      label: 'Edit Permissions and Authorship'
-      region: content
-      parent_name: group_permissions_authorship_an
-      weight: 20
-      format_type: fieldset
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        description: ''
-        required_fields: true
-        formatter: closed
-    group_view_permissions_and_group:
-      children:
-        - field_people_with_view_access
-        - field_pece_all_can_view
-        - field_groups_with_view_access
-      label: 'View Permissions and Groups'
-      region: content
-      parent_name: group_permissions_authorship_an
-      weight: 21
-      format_type: fieldset
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        description: ''
-        required_fields: true
 id: node.pece_annotation.default
 targetEntityType: node
 bundle: pece_annotation
 mode: default
+status: true
 content:
   body:
     type: text_textarea_with_summary
@@ -333,3 +206,130 @@ content:
     third_party_settings: {  }
 hidden:
   langcode: true
+uuid: 39205809-4054-48de-b039-194c3bedfdbc
+langcode: en
+dependencies:
+  config:
+    - core.entity_form_mode.node.annotation_step_1
+    - field.field.node.pece_annotation.body
+    - field.field.node.pece_annotation.field_annotation_analytic
+    - field.field.node.pece_annotation.field_annotation_artifact
+    - field.field.node.pece_annotation.field_ark_enabled
+    - field.field.node.pece_annotation.field_groups_with_view_access
+    - field.field.node.pece_annotation.field_pece_all_can_view
+    - field.field.node.pece_annotation.field_pece_license
+    - field.field.node.pece_annotation.field_people_with_edit_access
+    - field.field.node.pece_annotation.field_people_with_view_access
+    - field.field.node.pece_annotation.field_tags
+    - node.type.pece_annotation
+  module:
+    - entity_browser_entity_form
+    - entity_form_field_label
+    - field_group
+    - hide_revision_field
+    - inline_entity_form
+    - path
+    - readonly_field_widget
+    - text
+third_party_settings:
+  field_group:
+    group_metadata:
+      children:
+        - group_permissions_authorship_an
+        - group_contribution_metadata
+        - group_custom_citation
+      label: Metadata
+      region: content
+      parent_name: ''
+      weight: 4
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: vertical
+        width_breakpoint: 640
+    group_contribution_metadata:
+      children:
+        - field_pece_license
+        - field_tags
+      label: 'Contribution Metadata'
+      region: content
+      parent_name: group_metadata
+      weight: 21
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_permissions_authorship_an:
+      children:
+        - group_edit_permissions_and_autho
+        - group_view_permissions_and_group
+      label: 'Permissions, Authorship, and Groups'
+      region: content
+      parent_name: group_metadata
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_custom_citation:
+      children:
+        - field_ark_enabled
+      label: 'Custom Citation'
+      region: content
+      parent_name: group_metadata
+      weight: 22
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_edit_permissions_and_autho:
+      children:
+        - field_people_with_edit_access
+      label: 'Edit Permissions and Authorship'
+      region: content
+      parent_name: group_permissions_authorship_an
+      weight: 20
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true
+        formatter: closed
+    group_view_permissions_and_group:
+      children:
+        - field_people_with_view_access
+        - field_pece_all_can_view
+        - field_groups_with_view_access
+      label: 'View Permissions and Groups'
+      region: content
+      parent_name: group_permissions_authorship_an
+      weight: 21
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true

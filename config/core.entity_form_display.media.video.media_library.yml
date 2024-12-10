@@ -1,18 +1,22 @@
-uuid: 46bbe6a9-5ebf-4607-a9d9-198fa6b67c2a
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_form_mode.media.media_library
-    - field.field.media.video.field_media_video_file
-    - media.type.video
-_core:
-  default_config_hash: EVjkriRZate-Id2G85qqKeBYUkQNc9rdbA33wmmhMIY
 id: media.video.media_library
 targetEntityType: media
 bundle: video
 mode: media_library
-content: {  }
+status: true
+content:
+  revision_log_message:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
 hidden:
   created: true
   field_media_video_file: true
@@ -21,3 +25,12 @@ hidden:
   path: true
   status: true
   uid: true
+uuid: 46bbe6a9-5ebf-4607-a9d9-198fa6b67c2a
+langcode: en
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.video.field_media_video_file
+    - media.type.video
+_core:
+  default_config_hash: EVjkriRZate-Id2G85qqKeBYUkQNc9rdbA33wmmhMIY

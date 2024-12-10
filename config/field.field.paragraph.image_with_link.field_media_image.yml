@@ -1,18 +1,8 @@
-uuid: 4fb3792e-d699-4d13-9edb-dc34c2c7d814
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.paragraph.field_media_image
-    - media.type.icon
-    - media.type.image
-    - media.type.vector_image
-    - paragraphs.paragraphs_type.image_with_link
 id: paragraph.image_with_link.field_media_image
+label: 'Media image'
 field_name: field_media_image
 entity_type: paragraph
 bundle: image_with_link
-label: 'Media image'
 description: ''
 required: false
 translatable: false
@@ -31,3 +21,13 @@ settings:
     auto_create: false
     auto_create_bundle: icon
 field_type: entity_reference
+uuid: 4fb3792e-d699-4d13-9edb-dc34c2c7d814
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media_image
+    - media.type.icon
+    - media.type.image
+    - media.type.vector_image
+    - paragraphs.paragraphs_type.image_with_link

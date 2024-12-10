@@ -1,15 +1,3 @@
-uuid: 2eb7ea07-7b01-40a2-b2f7-2a78db5db144
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.media.private_image.field_filesize
-    - field.field.media.private_image.field_mimetype
-    - field.field.media.private_image.field_private_media_image
-    - image.style.large
-    - media.type.private_image
-  module:
-    - image
 id: media.private_image.default
 targetEntityType: media
 bundle: private_image
@@ -35,3 +23,15 @@ hidden:
   search_api_excerpt: true
   thumbnail: true
   uid: true
+uuid: 2eb7ea07-7b01-40a2-b2f7-2a78db5db144
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.private_image.field_filesize
+    - field.field.media.private_image.field_mimetype
+    - field.field.media.private_image.field_private_media_image
+    - image.style.large
+    - media.type.private_image
+  module:
+    - image

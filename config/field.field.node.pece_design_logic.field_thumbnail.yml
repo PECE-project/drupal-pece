@@ -1,23 +1,8 @@
-uuid: 32d634ac-38bf-4f0a-b07c-22eaf7ae773d
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_thumbnail
-    - node.type.pece_design_logic
-  module:
-    - image
-    - image_replace
-third_party_settings:
-  image_replace:
-    image_style_map:
-      pece_frontpage_image_replace_mobile:
-        source_field: '0'
 id: node.pece_design_logic.field_thumbnail
+label: Thumbnail
 field_name: field_thumbnail
 entity_type: node
 bundle: pece_design_logic
-label: Thumbnail
 description: ''
 required: false
 translatable: false
@@ -42,3 +27,18 @@ settings:
     width: null
     height: null
 field_type: image
+uuid: 32d634ac-38bf-4f0a-b07c-22eaf7ae773d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_thumbnail
+    - node.type.pece_design_logic
+  module:
+    - image
+    - image_replace
+third_party_settings:
+  image_replace:
+    image_style_map:
+      pece_frontpage_image_replace_mobile:
+        source_field: '0'

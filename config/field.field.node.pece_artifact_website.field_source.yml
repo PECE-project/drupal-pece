@@ -1,3 +1,16 @@
+id: node.pece_artifact_website.field_source
+label: Source
+field_name: field_source
+entity_type: node
+bundle: pece_artifact_website
+description: 'This field indicates where the contributor sourced the original artifact. This may be a hyperlink, a citation, or a text description of how the artifact was sourced.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long
 uuid: 3d699c87-23ad-45f3-aedc-7dc37a336ec9
 langcode: en
 status: true
@@ -7,16 +20,3 @@ dependencies:
     - node.type.pece_artifact_website
   module:
     - text
-id: node.pece_artifact_website.field_source
-field_name: field_source
-entity_type: node
-bundle: pece_artifact_website
-label: Source
-description: 'This field indicates where the contributor sourced the original artifact. This may be a hyperlink, a citation, or a text description of how the artifact was sourced.'
-required: false
-translatable: false
-default_value: {  }
-default_value_callback: ''
-settings:
-  allowed_formats: {  }
-field_type: text_long

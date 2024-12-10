@@ -1,17 +1,8 @@
-uuid: 2ec47ec3-f1f6-460d-adb1-e6f4ee6b36ee
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_media_private_audio_file
-    - media.type.private_audio
-  module:
-    - file
 id: media.private_audio.field_media_private_audio_file
+label: 'Audio file'
 field_name: field_media_private_audio_file
 entity_type: media
 bundle: private_audio
-label: 'Audio file'
 description: ''
 required: true
 translatable: true
@@ -25,3 +16,12 @@ settings:
   max_filesize: ''
   description_field: false
 field_type: file
+uuid: 2ec47ec3-f1f6-460d-adb1-e6f4ee6b36ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_private_audio_file
+    - media.type.private_audio
+  module:
+    - file

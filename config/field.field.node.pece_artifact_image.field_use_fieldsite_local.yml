@@ -1,17 +1,8 @@
-uuid: eae735c9-5e79-4bc8-982c-bec4f3efd838
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_use_fieldsite_local
-    - node.type.pece_artifact_image
-_core:
-  default_config_hash: Mt8_TbuY53Vsb4AYUX7f0Rji5gXEtcak01U6rEgWSRA
 id: node.pece_artifact_image.field_use_fieldsite_local
+label: "Use fieldsite's location"
 field_name: field_use_fieldsite_local
 entity_type: node
 bundle: pece_artifact_image
-label: "Use fieldsite's location"
 description: 'Check this to copy the location from the referenced fieldsite, if any.'
 required: false
 translatable: false
@@ -23,3 +14,12 @@ settings:
   on_label: 'On'
   off_label: 'Off'
 field_type: boolean
+uuid: eae735c9-5e79-4bc8-982c-bec4f3efd838
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_use_fieldsite_local
+    - node.type.pece_artifact_image
+_core:
+  default_config_hash: Mt8_TbuY53Vsb4AYUX7f0Rji5gXEtcak01U6rEgWSRA

@@ -1,25 +1,3 @@
-uuid: 6b2bec2e-e074-4e14-b8df-bba1f4ac23d0
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.search_result
-    - field.field.node.pece_fieldsite.body
-    - field.field.node.pece_fieldsite.field_fieldsite_project
-    - field.field.node.pece_fieldsite.field_fieldsite_researcher
-    - field.field.node.pece_fieldsite.field_location
-    - field.field.node.pece_fieldsite.field_pece_geolocation
-    - node.type.pece_fieldsite
-  module:
-    - layout_builder
-    - text
-    - user
-third_party_settings:
-  layout_builder:
-    enabled: false
-    allow_custom: false
-_core:
-  default_config_hash: uy2aW_uCkkFsWXlhA-FQ095TbeJhlGQPgoEMGmKFsCc
 id: node.pece_fieldsite.search_result
 targetEntityType: node
 bundle: pece_fieldsite
@@ -49,3 +27,25 @@ hidden:
   langcode: true
   links: true
   search_api_excerpt: true
+uuid: 6b2bec2e-e074-4e14-b8df-bba1f4ac23d0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.pece_fieldsite.body
+    - field.field.node.pece_fieldsite.field_fieldsite_project
+    - field.field.node.pece_fieldsite.field_fieldsite_researcher
+    - field.field.node.pece_fieldsite.field_location
+    - field.field.node.pece_fieldsite.field_pece_geolocation
+    - node.type.pece_fieldsite
+  module:
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: uy2aW_uCkkFsWXlhA-FQ095TbeJhlGQPgoEMGmKFsCc

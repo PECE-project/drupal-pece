@@ -1,18 +1,3 @@
-uuid: fee7536c-b8f5-4f0e-80c1-dd05f57fbb39
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.hearing
-    - core.entity_view_mode.bibcite_reference.table
-  module:
-    - bibcite_entity
-  enforced:
-    config:
-      - core.entity_view_mode.bibcite_reference.table
-      - bibcite_entity.bibcite_reference_type.hearing
-    module:
-      - bibcite_entity
 id: bibcite_reference.hearing.table
 targetEntityType: bibcite_reference
 bundle: hearing
@@ -247,3 +232,18 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: fee7536c-b8f5-4f0e-80c1-dd05f57fbb39
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.hearing
+    - core.entity_view_mode.bibcite_reference.table
+  module:
+    - bibcite_entity
+  enforced:
+    config:
+      - core.entity_view_mode.bibcite_reference.table
+      - bibcite_entity.bibcite_reference_type.hearing
+    module:
+      - bibcite_entity

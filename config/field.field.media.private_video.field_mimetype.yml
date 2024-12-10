@@ -1,15 +1,8 @@
-uuid: 671eee25-44ee-4eb2-a6a1-ba8d438c27f8
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_mimetype
-    - media.type.private_video
 id: media.private_video.field_mimetype
+label: Mimetype
 field_name: field_mimetype
 entity_type: media
 bundle: private_video
-label: Mimetype
 description: ''
 required: false
 translatable: false
@@ -17,3 +10,10 @@ default_value: {  }
 default_value_callback: ''
 settings: {  }
 field_type: string
+uuid: 671eee25-44ee-4eb2-a6a1-ba8d438c27f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_mimetype
+    - media.type.private_video

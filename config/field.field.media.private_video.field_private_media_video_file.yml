@@ -1,17 +1,8 @@
-uuid: d2f0a718-f46f-47a4-aac1-d856f2eb25a7
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_private_media_video_file
-    - media.type.private_video
-  module:
-    - file
 id: media.private_video.field_private_media_video_file
+label: 'Video file'
 field_name: field_private_media_video_file
 entity_type: media
 bundle: private_video
-label: 'Video file'
 description: ''
 required: true
 translatable: true
@@ -25,3 +16,12 @@ settings:
   max_filesize: ''
   description_field: false
 field_type: file
+uuid: d2f0a718-f46f-47a4-aac1-d856f2eb25a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_private_media_video_file
+    - media.type.private_video
+  module:
+    - file

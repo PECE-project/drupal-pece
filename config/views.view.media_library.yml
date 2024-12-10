@@ -1,20 +1,3 @@
-uuid: 77ddbb71-6fc0-4937-92fe-a3e4cdd179ee
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.media.media_library
-    - image.style.media_library
-  module:
-    - image
-    - media
-    - media_library
-    - user
-  enforced:
-    module:
-      - media_library
-_core:
-  default_config_hash: 0WeWvFAfYGQRUX2FROBExMK5TQDkcqPpPnUZdT4Hy7k
 id: media_library
 label: 'Media library'
 module: views
@@ -1406,3 +1389,20 @@ display:
         - 'url.query_args:sort_by'
         - user.permissions
       tags: {  }
+uuid: 77ddbb71-6fc0-4937-92fe-a3e4cdd179ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - image.style.media_library
+  module:
+    - image
+    - media
+    - media_library
+    - user
+  enforced:
+    module:
+      - media_library
+_core:
+  default_config_hash: 0WeWvFAfYGQRUX2FROBExMK5TQDkcqPpPnUZdT4Hy7k

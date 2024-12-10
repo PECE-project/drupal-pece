@@ -1,17 +1,3 @@
-uuid: b48de894-8037-4620-ae02-5b2ef544cdd0
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.media.slide_image.field_link
-    - field.field.media.slide_image.field_media_image
-    - field.field.media.slide_image.field_media_image_mobile_replace
-    - field.field.media.slide_image.field_text
-    - image.style.large
-    - media.type.slide_image
-  module:
-    - image
-    - link
 id: media.slide_image.default
 targetEntityType: media
 bundle: slide_image
@@ -56,3 +42,17 @@ hidden:
   search_api_excerpt: true
   thumbnail: true
   uid: true
+uuid: b48de894-8037-4620-ae02-5b2ef544cdd0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.slide_image.field_link
+    - field.field.media.slide_image.field_media_image
+    - field.field.media.slide_image.field_media_image_mobile_replace
+    - field.field.media.slide_image.field_text
+    - image.style.large
+    - media.type.slide_image
+  module:
+    - image
+    - link

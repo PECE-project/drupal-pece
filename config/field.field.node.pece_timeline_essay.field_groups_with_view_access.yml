@@ -1,16 +1,8 @@
-uuid: 478125a0-ff95-41f9-afdb-8190fce382c5
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_groups_with_view_access
-    - node.type.pece_timeline_essay
-    - taxonomy.vocabulary.groups
 id: node.pece_timeline_essay.field_groups_with_view_access
+label: 'Group association and view access'
 field_name: field_groups_with_view_access
 entity_type: node
 bundle: pece_timeline_essay
-label: 'Group association and view access'
 description: "This field indicates groups associated with this content. Selecting a group here will display this content on the group's page. <b>Note that, if you select a group here, all group members will also have the ability to view this content.</b>"
 required: false
 translatable: false
@@ -27,3 +19,11 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 478125a0-ff95-41f9-afdb-8190fce382c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_groups_with_view_access
+    - node.type.pece_timeline_essay
+    - taxonomy.vocabulary.groups

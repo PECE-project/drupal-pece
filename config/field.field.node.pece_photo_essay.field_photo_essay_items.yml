@@ -1,20 +1,8 @@
-uuid: 442d43e8-f64b-44ac-a3b0-ca08a37b9c42
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_photo_essay_items
-    - node.type.pece_photo_essay
-    - paragraphs.paragraphs_type.paragraph_photo_essay_item
-  module:
-    - entity_reference_revisions
-_core:
-  default_config_hash: uVZsHyPWBnSt4fzaEuMvgtZughI_2911mILOAWiTV_w
 id: node.pece_photo_essay.field_photo_essay_items
+label: Items
 field_name: field_photo_essay_items
 entity_type: node
 bundle: pece_photo_essay
-label: Items
 description: ''
 required: true
 translatable: false
@@ -43,3 +31,15 @@ settings:
         weight: 10
         enabled: false
 field_type: entity_reference_revisions
+uuid: 442d43e8-f64b-44ac-a3b0-ca08a37b9c42
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_photo_essay_items
+    - node.type.pece_photo_essay
+    - paragraphs.paragraphs_type.paragraph_photo_essay_item
+  module:
+    - entity_reference_revisions
+_core:
+  default_config_hash: uVZsHyPWBnSt4fzaEuMvgtZughI_2911mILOAWiTV_w

@@ -1,15 +1,8 @@
-uuid: 7d777c8c-04f3-4620-b3c1-3cd7ec3cb9d8
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_people_with_view_access
-    - node.type.pece_artifact_bundle
 id: node.pece_artifact_bundle.field_people_with_view_access
+label: 'People with view access'
 field_name: field_people_with_view_access
 entity_type: node
 bundle: pece_artifact_bundle
-label: 'People with view access'
 description: 'This field designates which platform users can view this content. '
 required: false
 translatable: false
@@ -27,3 +20,10 @@ settings:
       type: _none
     include_anonymous: false
 field_type: entity_reference
+uuid: 7d777c8c-04f3-4620-b3c1-3cd7ec3cb9d8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_people_with_view_access
+    - node.type.pece_artifact_bundle

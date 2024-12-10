@@ -1,14 +1,8 @@
-uuid: 4d25b912-066c-4c57-907e-ddce9b9122a2
-langcode: en
-status: true
-dependencies:
-  config:
-    - node.type.pece_artifact_audio
 id: node.pece_artifact_audio.promote
+label: 'Promoted to front page'
 field_name: promote
 entity_type: node
 bundle: pece_artifact_audio
-label: 'Promoted to front page'
 description: ''
 required: false
 translatable: true
@@ -20,3 +14,9 @@ settings:
   on_label: 'On'
   off_label: 'Off'
 field_type: boolean
+uuid: 4d25b912-066c-4c57-907e-ddce9b9122a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.pece_artifact_audio

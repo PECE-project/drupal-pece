@@ -1,16 +1,8 @@
-uuid: a2111fa4-4f0c-4380-a4a7-92106821940f
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.paragraph.field_slides
-    - media.type.slide_image
-    - paragraphs.paragraphs_type.slideshow
 id: paragraph.slideshow.field_slides
+label: Slides
 field_name: field_slides
 entity_type: paragraph
 bundle: slideshow
-label: Slides
 description: ''
 required: true
 translatable: false
@@ -27,3 +19,11 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: a2111fa4-4f0c-4380-a4a7-92106821940f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_slides
+    - media.type.slide_image
+    - paragraphs.paragraphs_type.slideshow

@@ -1,25 +1,3 @@
-uuid: 542131cb-9f46-4830-bec2-e787ddc57078
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.analytic_on_annotation_form
-    - field.field.node.pece_analytic.field_analytic_question_set
-    - field.field.node.pece_analytic.field_ark_enabled
-    - field.field.node.pece_analytic.field_pece_all_can_view
-    - field.field.node.pece_analytic.field_people_with_edit_access
-    - field.field.node.pece_analytic.field_people_with_view_access
-    - field.field.node.pece_analytic.field_tags
-    - node.type.pece_analytic
-  module:
-    - layout_builder
-    - user
-third_party_settings:
-  layout_builder:
-    enabled: false
-    allow_custom: false
-_core:
-  default_config_hash: Esl4KeTzB4pQNNUlfS9dqYnMj92sMJptrRaJqYQVFJI
 id: node.pece_analytic.analytic_on_annotation_form
 targetEntityType: node
 bundle: pece_analytic
@@ -45,3 +23,25 @@ hidden:
   langcode: true
   links: true
   search_api_excerpt: true
+uuid: 542131cb-9f46-4830-bec2-e787ddc57078
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.analytic_on_annotation_form
+    - field.field.node.pece_analytic.field_analytic_question_set
+    - field.field.node.pece_analytic.field_ark_enabled
+    - field.field.node.pece_analytic.field_pece_all_can_view
+    - field.field.node.pece_analytic.field_people_with_edit_access
+    - field.field.node.pece_analytic.field_people_with_view_access
+    - field.field.node.pece_analytic.field_tags
+    - node.type.pece_analytic
+  module:
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: Esl4KeTzB4pQNNUlfS9dqYnMj92sMJptrRaJqYQVFJI

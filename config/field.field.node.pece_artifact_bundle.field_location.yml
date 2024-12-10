@@ -1,17 +1,8 @@
-uuid: 6e7c563b-d4db-4a3e-aab6-af7ee11bd8ba
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_location
-    - node.type.pece_artifact_bundle
-  module:
-    - address
 id: node.pece_artifact_bundle.field_location
+label: Location
 field_name: field_location
 entity_type: node
 bundle: pece_artifact_bundle
-label: Location
 description: 'This field designates the original location where the artifact was created.'
 required: false
 translatable: false
@@ -39,3 +30,12 @@ settings:
       override: hidden
   fields: {  }
 field_type: address
+uuid: 6e7c563b-d4db-4a3e-aab6-af7ee11bd8ba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_location
+    - node.type.pece_artifact_bundle
+  module:
+    - address

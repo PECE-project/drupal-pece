@@ -1,18 +1,8 @@
-uuid: 94585cac-1760-41a9-9a5e-dfa2705b32f3
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_fieldsite
-    - node.type.pece_artifact_fieldnote
-    - node.type.pece_fieldsite
-_core:
-  default_config_hash: Dn4dgCnAN534nI7XGQdBQVuUehQlUuRI1M4H-JY7AiY
 id: node.pece_artifact_fieldnote.field_fieldsite
+label: Fieldsite
 field_name: field_fieldsite
 entity_type: node
 bundle: pece_artifact_fieldnote
-label: Fieldsite
 description: 'You can create fieldsites in the platform that designates a location or setting where research gets conducted. This field designates that an artifact is associated with that fieldsite. '
 required: false
 translatable: false
@@ -29,3 +19,13 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 94585cac-1760-41a9-9a5e-dfa2705b32f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fieldsite
+    - node.type.pece_artifact_fieldnote
+    - node.type.pece_fieldsite
+_core:
+  default_config_hash: Dn4dgCnAN534nI7XGQdBQVuUehQlUuRI1M4H-JY7AiY

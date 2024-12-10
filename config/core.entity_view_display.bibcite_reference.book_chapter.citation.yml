@@ -1,16 +1,3 @@
-uuid: 9d6dd1da-9cbc-4f25-a7d2-745da866d1b4
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.book_chapter
-    - core.entity_view_mode.bibcite_reference.citation
-  enforced:
-    config:
-      - core.entity_view_mode.bibcite_reference.citation
-      - bibcite_entity.bibcite_reference_type.book_chapter
-    module:
-      - bibcite_entity
 id: bibcite_reference.book_chapter.citation
 targetEntityType: bibcite_reference
 bundle: book_chapter
@@ -84,3 +71,16 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: 9d6dd1da-9cbc-4f25-a7d2-745da866d1b4
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.book_chapter
+    - core.entity_view_mode.bibcite_reference.citation
+  enforced:
+    config:
+      - core.entity_view_mode.bibcite_reference.citation
+      - bibcite_entity.bibcite_reference_type.book_chapter
+    module:
+      - bibcite_entity

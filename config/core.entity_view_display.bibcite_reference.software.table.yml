@@ -1,18 +1,3 @@
-uuid: 60d02caf-9a5a-47a7-a984-79ea400b910d
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.software
-    - core.entity_view_mode.bibcite_reference.table
-  module:
-    - bibcite_entity
-  enforced:
-    config:
-      - core.entity_view_mode.bibcite_reference.table
-      - bibcite_entity.bibcite_reference_type.software
-    module:
-      - bibcite_entity
 id: bibcite_reference.software.table
 targetEntityType: bibcite_reference
 bundle: software
@@ -246,3 +231,18 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: 60d02caf-9a5a-47a7-a984-79ea400b910d
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.software
+    - core.entity_view_mode.bibcite_reference.table
+  module:
+    - bibcite_entity
+  enforced:
+    config:
+      - core.entity_view_mode.bibcite_reference.table
+      - bibcite_entity.bibcite_reference_type.software
+    module:
+      - bibcite_entity

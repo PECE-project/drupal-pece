@@ -1,18 +1,8 @@
-uuid: a2fb4ab1-aa63-4253-96de-40854fbaae19
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_pece_project_ref
-    - node.type.pece_project
-    - node.type.pece_timeline_essay
-_core:
-  default_config_hash: 9ZV4T-x-s4yqn2f4DM5f3Y5LBPao5weIhgHza2A9d5A
 id: node.pece_timeline_essay.field_pece_project_ref
+label: 'Cite as part of...'
 field_name: field_pece_project_ref
 entity_type: node
 bundle: pece_timeline_essay
-label: 'Cite as part of...'
 description: 'When you save this content, a suggested citation will be auto-created by the platform. If this content is generated from or associated with a particular project on the platform, this field indicates which project the content should be cited as part of. You may leave this field blank if the conent does not need to be cited as part of a particular project.'
 required: false
 translatable: false
@@ -29,3 +19,13 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: a2fb4ab1-aa63-4253-96de-40854fbaae19
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_project_ref
+    - node.type.pece_project
+    - node.type.pece_timeline_essay
+_core:
+  default_config_hash: 9ZV4T-x-s4yqn2f4DM5f3Y5LBPao5weIhgHza2A9d5A

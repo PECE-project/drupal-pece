@@ -1,137 +1,8 @@
-uuid: 8de341f0-fef6-4a69-aec5-b6226ff635c6
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.node.pece_photo_essay.body
-    - field.field.node.pece_photo_essay.field_ark_enabled
-    - field.field.node.pece_photo_essay.field_cite_as
-    - field.field.node.pece_photo_essay.field_groups_with_view_access
-    - field.field.node.pece_photo_essay.field_media_thumbnail
-    - field.field.node.pece_photo_essay.field_pece_all_can_view
-    - field.field.node.pece_photo_essay.field_pece_license
-    - field.field.node.pece_photo_essay.field_pece_project_ref
-    - field.field.node.pece_photo_essay.field_people_with_edit_access
-    - field.field.node.pece_photo_essay.field_people_with_view_access
-    - field.field.node.pece_photo_essay.field_photo_essay_items
-    - field.field.node.pece_photo_essay.field_tags
-    - node.type.pece_photo_essay
-  module:
-    - field_group
-    - media_library
-    - paragraphs
-    - path
-    - text
-third_party_settings:
-  field_group:
-    group_permissions:
-      children:
-        - group_edit_permissions_and_autho
-        - group_view_permissions_and_group
-      label: 'Permissions, Authorship, and Groups'
-      region: content
-      parent_name: group_metadata
-      weight: 24
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-        open: true
-    group_metadata:
-      children:
-        - group_permissions
-        - group_contribution_metadata
-        - group_custom_citation
-      label: Metadata
-      region: content
-      parent_name: ''
-      weight: 4
-      format_type: tabs
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        direction: vertical
-        width_breakpoint: 640
-    group_edit_permissions_and_autho:
-      children:
-        - field_people_with_edit_access
-      label: 'Edit Permissions and Authorship'
-      region: content
-      parent_name: group_permissions
-      weight: 21
-      format_type: fieldset
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        description: ''
-        required_fields: true
-    group_view_permissions_and_group:
-      children:
-        - field_pece_all_can_view
-        - field_people_with_view_access
-        - field_groups_with_view_access
-      label: 'View Permissions and Groups'
-      region: content
-      parent_name: group_permissions
-      weight: 22
-      format_type: fieldset
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        description: ''
-        required_fields: true
-    group_contribution_metadata:
-      children:
-        - field_pece_license
-        - field_pece_geolocation
-        - field_tags
-      label: 'Contribution Metadata'
-      region: content
-      parent_name: group_metadata
-      weight: 25
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-    group_custom_citation:
-      children:
-        - field_ark_enabled
-        - field_pece_project_ref
-      label: 'Custom Citation'
-      region: content
-      parent_name: group_metadata
-      weight: 26
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-_core:
-  default_config_hash: BDc_TikRfLRKp50jqrj2Z23u-K1UqdEugMD_fn9lRVM
 id: node.pece_photo_essay.default
 targetEntityType: node
 bundle: pece_photo_essay
 mode: default
+status: true
 content:
   body:
     type: text_textarea_with_summary
@@ -272,6 +143,19 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  revision_log:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 13
@@ -312,3 +196,132 @@ content:
 hidden:
   field_cite_as: true
   langcode: true
+uuid: 8de341f0-fef6-4a69-aec5-b6226ff635c6
+langcode: en
+dependencies:
+  config:
+    - field.field.node.pece_photo_essay.body
+    - field.field.node.pece_photo_essay.field_ark_enabled
+    - field.field.node.pece_photo_essay.field_cite_as
+    - field.field.node.pece_photo_essay.field_groups_with_view_access
+    - field.field.node.pece_photo_essay.field_media_thumbnail
+    - field.field.node.pece_photo_essay.field_pece_all_can_view
+    - field.field.node.pece_photo_essay.field_pece_license
+    - field.field.node.pece_photo_essay.field_pece_project_ref
+    - field.field.node.pece_photo_essay.field_people_with_edit_access
+    - field.field.node.pece_photo_essay.field_people_with_view_access
+    - field.field.node.pece_photo_essay.field_photo_essay_items
+    - field.field.node.pece_photo_essay.field_tags
+    - node.type.pece_photo_essay
+  module:
+    - field_group
+    - media_library
+    - paragraphs
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_permissions:
+      children:
+        - group_edit_permissions_and_autho
+        - group_view_permissions_and_group
+      label: 'Permissions, Authorship, and Groups'
+      region: content
+      parent_name: group_metadata
+      weight: 24
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+        open: true
+    group_metadata:
+      children:
+        - group_permissions
+        - group_contribution_metadata
+        - group_custom_citation
+      label: Metadata
+      region: content
+      parent_name: ''
+      weight: 4
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: vertical
+        width_breakpoint: 640
+    group_edit_permissions_and_autho:
+      children:
+        - field_people_with_edit_access
+      label: 'Edit Permissions and Authorship'
+      region: content
+      parent_name: group_permissions
+      weight: 21
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true
+    group_view_permissions_and_group:
+      children:
+        - field_pece_all_can_view
+        - field_people_with_view_access
+        - field_groups_with_view_access
+      label: 'View Permissions and Groups'
+      region: content
+      parent_name: group_permissions
+      weight: 22
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true
+    group_contribution_metadata:
+      children:
+        - field_pece_license
+        - field_pece_geolocation
+        - field_tags
+      label: 'Contribution Metadata'
+      region: content
+      parent_name: group_metadata
+      weight: 25
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_custom_citation:
+      children:
+        - field_ark_enabled
+        - field_pece_project_ref
+      label: 'Custom Citation'
+      region: content
+      parent_name: group_metadata
+      weight: 26
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+_core:
+  default_config_hash: BDc_TikRfLRKp50jqrj2Z23u-K1UqdEugMD_fn9lRVM

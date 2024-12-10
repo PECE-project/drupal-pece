@@ -1,37 +1,3 @@
-uuid: 6015e06b-6f47-4133-868f-9634451de6e9
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.card
-    - field.field.node.pece_timeline_essay.body
-    - field.field.node.pece_timeline_essay.field_ark_enabled
-    - field.field.node.pece_timeline_essay.field_cite_as
-    - field.field.node.pece_timeline_essay.field_groups_with_view_access
-    - field.field.node.pece_timeline_essay.field_media_thumbnail
-    - field.field.node.pece_timeline_essay.field_pece_all_can_view
-    - field.field.node.pece_timeline_essay.field_pece_license
-    - field.field.node.pece_timeline_essay.field_pece_project_ref
-    - field.field.node.pece_timeline_essay.field_people_with_edit_access
-    - field.field.node.pece_timeline_essay.field_people_with_view_access
-    - field.field.node.pece_timeline_essay.field_tags
-    - field.field.node.pece_timeline_essay.field_timeline_essay_items
-    - node.type.pece_timeline_essay
-  module:
-    - entity_form_field_label
-    - fences
-    - layout_builder
-    - layout_library
-    - text
-    - user
-third_party_settings:
-  layout_builder:
-    enabled: false
-    allow_custom: false
-  layout_library:
-    enable: false
-_core:
-  default_config_hash: JYM6QTW2DqfOfcNZg-5SDOsdslQQ7gQn1x2wZJVjptA
 id: node.pece_timeline_essay.card
 targetEntityType: node
 bundle: pece_timeline_essay
@@ -91,3 +57,37 @@ hidden:
   langcode: true
   links: true
   search_api_excerpt: true
+uuid: 6015e06b-6f47-4133-868f-9634451de6e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card
+    - field.field.node.pece_timeline_essay.body
+    - field.field.node.pece_timeline_essay.field_ark_enabled
+    - field.field.node.pece_timeline_essay.field_cite_as
+    - field.field.node.pece_timeline_essay.field_groups_with_view_access
+    - field.field.node.pece_timeline_essay.field_media_thumbnail
+    - field.field.node.pece_timeline_essay.field_pece_all_can_view
+    - field.field.node.pece_timeline_essay.field_pece_license
+    - field.field.node.pece_timeline_essay.field_pece_project_ref
+    - field.field.node.pece_timeline_essay.field_people_with_edit_access
+    - field.field.node.pece_timeline_essay.field_people_with_view_access
+    - field.field.node.pece_timeline_essay.field_tags
+    - field.field.node.pece_timeline_essay.field_timeline_essay_items
+    - node.type.pece_timeline_essay
+  module:
+    - entity_form_field_label
+    - fences
+    - layout_builder
+    - layout_library
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_library:
+    enable: false
+_core:
+  default_config_hash: JYM6QTW2DqfOfcNZg-5SDOsdslQQ7gQn1x2wZJVjptA

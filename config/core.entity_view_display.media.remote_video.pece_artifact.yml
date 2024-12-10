@@ -1,18 +1,3 @@
-uuid: 3aa64038-f608-4eea-9175-fecdc041063b
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.media.pece_artifact
-    - field.field.media.remote_video.field_media_oembed_video
-    - media.type.remote_video
-  module:
-    - layout_builder
-    - media
-third_party_settings:
-  layout_builder:
-    enabled: false
-    allow_custom: false
 id: media.remote_video.pece_artifact
 targetEntityType: media
 bundle: remote_video
@@ -36,3 +21,18 @@ hidden:
   search_api_excerpt: true
   thumbnail: true
   uid: true
+uuid: 3aa64038-f608-4eea-9175-fecdc041063b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.pece_artifact
+    - field.field.media.remote_video.field_media_oembed_video
+    - media.type.remote_video
+  module:
+    - layout_builder
+    - media
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false

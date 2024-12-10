@@ -1,16 +1,8 @@
-uuid: 1d7422b4-3907-40b3-9d80-d540a7227963
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_authors
-    - node.type.pece_artifact_website
-    - taxonomy.vocabulary.pece_authors
 id: node.pece_artifact_website.field_authors
+label: Creator(s)
 field_name: field_authors
 entity_type: node
 bundle: pece_artifact_website
-label: Creator(s)
 description: 'This field designates the persor or people who originally created this artifact.  Creators known to the system will autocomplete; if this does not happen type the full name of a new creator and it will be added when this artifact is saved.'
 required: true
 translatable: false
@@ -27,3 +19,11 @@ settings:
     auto_create: true
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 1d7422b4-3907-40b3-9d80-d540a7227963
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_authors
+    - node.type.pece_artifact_website
+    - taxonomy.vocabulary.pece_authors

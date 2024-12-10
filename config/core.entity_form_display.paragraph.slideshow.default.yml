@@ -1,17 +1,8 @@
-uuid: 1bd51aef-17ae-4e92-8893-ba5c3ef2b026
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.paragraph.slideshow.field_slides
-    - paragraphs.paragraphs_type.slideshow
-  module:
-    - media_library
-    - media_library_edit
 id: paragraph.slideshow.default
 targetEntityType: paragraph
 bundle: slideshow
 mode: default
+status: true
 content:
   field_slides:
     type: media_library_widget
@@ -25,3 +16,12 @@ content:
 hidden:
   created: true
   status: true
+uuid: 1bd51aef-17ae-4e92-8893-ba5c3ef2b026
+langcode: en
+dependencies:
+  config:
+    - field.field.paragraph.slideshow.field_slides
+    - paragraphs.paragraphs_type.slideshow
+  module:
+    - media_library
+    - media_library_edit

@@ -1,21 +1,8 @@
-uuid: cf2abf50-3db9-4d55-b114-b3cefaddeefc
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_people_with_edit_access
-    - node.type.pece_annotation
-  module:
-    - epp
-third_party_settings:
-  epp:
-    value: '[current-user:uid]'
-    on_update: 0
 id: node.pece_annotation.field_people_with_edit_access
+label: 'People with edit access'
 field_name: field_people_with_edit_access
 entity_type: node
 bundle: pece_annotation
-label: 'People with edit access'
 description: 'This field designates which users can edit the content. People added here will be listed as <b>contributors</b> in addition to receiving update capability. If you wish to be able to edit the content going forward, be sure to add your username here. '
 required: true
 translatable: false
@@ -33,3 +20,16 @@ settings:
       type: _none
     include_anonymous: false
 field_type: entity_reference
+uuid: cf2abf50-3db9-4d55-b114-b3cefaddeefc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_people_with_edit_access
+    - node.type.pece_annotation
+  module:
+    - epp
+third_party_settings:
+  epp:
+    value: '[current-user:uid]'
+    on_update: 0

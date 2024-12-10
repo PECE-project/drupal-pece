@@ -1,16 +1,3 @@
-uuid: 5ae84e8c-0b9c-4693-a4c2-330a42a0023d
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.patent
-    - core.entity_view_mode.bibcite_reference.citation
-  enforced:
-    config:
-      - core.entity_view_mode.bibcite_reference.citation
-      - bibcite_entity.bibcite_reference_type.patent
-    module:
-      - bibcite_entity
 id: bibcite_reference.patent.citation
 targetEntityType: bibcite_reference
 bundle: patent
@@ -84,3 +71,16 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: 5ae84e8c-0b9c-4693-a4c2-330a42a0023d
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.patent
+    - core.entity_view_mode.bibcite_reference.citation
+  enforced:
+    config:
+      - core.entity_view_mode.bibcite_reference.citation
+      - bibcite_entity.bibcite_reference_type.patent
+    module:
+      - bibcite_entity

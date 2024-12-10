@@ -1,3 +1,15 @@
+id: node.pece_project.field_project_start_end_date
+label: 'Start and End Date'
+field_name: field_project_start_end_date
+entity_type: node
+bundle: pece_project
+description: 'This field indicates the start date and end date for this project.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange
 uuid: 47297a16-be35-4d37-bd07-5b5a3caa397f
 langcode: en
 status: true
@@ -9,15 +21,3 @@ dependencies:
     - datetime_range
 _core:
   default_config_hash: 6D4obOoclCz6jGWPbZwhCJ99piIheHUipPyFZIUg31g
-id: node.pece_project.field_project_start_end_date
-field_name: field_project_start_end_date
-entity_type: node
-bundle: pece_project
-label: 'Start and End Date'
-description: 'This field indicates the start date and end date for this project.'
-required: false
-translatable: false
-default_value: {  }
-default_value_callback: ''
-settings: {  }
-field_type: daterange

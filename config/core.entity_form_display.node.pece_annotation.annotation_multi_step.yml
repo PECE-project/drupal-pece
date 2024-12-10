@@ -1,113 +1,8 @@
-uuid: fa24909e-6280-4070-9c59-197193fd85b9
-langcode: en
-status: false
-dependencies:
-  config:
-    - core.entity_form_mode.node.annotation_multi_step
-    - field.field.node.pece_annotation.body
-    - field.field.node.pece_annotation.field_annotation_analytic
-    - field.field.node.pece_annotation.field_annotation_artifact
-    - field.field.node.pece_annotation.field_ark_enabled
-    - field.field.node.pece_annotation.field_groups_with_view_access
-    - field.field.node.pece_annotation.field_pece_all_can_view
-    - field.field.node.pece_annotation.field_pece_license
-    - field.field.node.pece_annotation.field_people_with_edit_access
-    - field.field.node.pece_annotation.field_people_with_view_access
-    - field.field.node.pece_annotation.field_tags
-    - node.type.pece_annotation
-  module:
-    - entity_form_field_label
-    - field_group
-    - path
-    - readonly_field_widget
-    - text
-third_party_settings:
-  field_group:
-    group_permissions:
-      children:
-        - field_pece_all_can_view
-        - field_groups_with_view_access
-        - field_people_with_view_access
-      label: Permissions
-      region: content
-      parent_name: group_step_3
-      weight: 10
-      format_type: details
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: permissions
-        open: true
-        description: 'Set permissions to view, update and delete this content.'
-        required_fields: false
-    group_step_1:
-      children:
-        - field_annotation_artifact
-      label: 'Step 1'
-      region: content
-      parent_name: ''
-      weight: 0
-      format_type: form_step
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        show_step_title: true
-        step_description: ''
-        back_button_show: false
-        back_button_text: Back
-        next_button_text: Next
-        required_fields: true
-        step_help: ''
-    group_step_2:
-      children:
-        - field_annotation_analytic
-      label: 'Step 2'
-      region: content
-      parent_name: ''
-      weight: 1
-      format_type: form_step
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        show_step_title: true
-        step_description: ''
-        back_button_show: false
-        back_button_text: Back
-        next_button_text: Next
-        required_fields: true
-        step_help: ''
-    group_step_3:
-      children:
-        - title
-        - body
-        - field_pece_license
-        - field_tags
-        - group_permissions
-      label: 'Step 3'
-      region: content
-      parent_name: ''
-      weight: 2
-      format_type: form_step
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        show_step_title: true
-        step_description: ''
-        back_button_show: false
-        back_button_text: Back
-        next_button_text: Next
-        required_fields: true
-        step_help: ''
 id: node.pece_annotation.annotation_multi_step
 targetEntityType: node
 bundle: pece_annotation
 mode: annotation_multi_step
+status: false
 content:
   body:
     type: text_textarea_with_summary
@@ -229,6 +124,19 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  revision_log:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 8
@@ -268,3 +176,108 @@ content:
     third_party_settings: {  }
 hidden:
   langcode: true
+uuid: fa24909e-6280-4070-9c59-197193fd85b9
+langcode: en
+dependencies:
+  config:
+    - core.entity_form_mode.node.annotation_multi_step
+    - field.field.node.pece_annotation.body
+    - field.field.node.pece_annotation.field_annotation_analytic
+    - field.field.node.pece_annotation.field_annotation_artifact
+    - field.field.node.pece_annotation.field_ark_enabled
+    - field.field.node.pece_annotation.field_groups_with_view_access
+    - field.field.node.pece_annotation.field_pece_all_can_view
+    - field.field.node.pece_annotation.field_pece_license
+    - field.field.node.pece_annotation.field_people_with_edit_access
+    - field.field.node.pece_annotation.field_people_with_view_access
+    - field.field.node.pece_annotation.field_tags
+    - node.type.pece_annotation
+  module:
+    - entity_form_field_label
+    - field_group
+    - path
+    - readonly_field_widget
+    - text
+third_party_settings:
+  field_group:
+    group_permissions:
+      children:
+        - field_pece_all_can_view
+        - field_groups_with_view_access
+        - field_people_with_view_access
+      label: Permissions
+      region: content
+      parent_name: group_step_3
+      weight: 10
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: permissions
+        open: true
+        description: 'Set permissions to view, update and delete this content.'
+        required_fields: false
+    group_step_1:
+      children:
+        - field_annotation_artifact
+      label: 'Step 1'
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: form_step
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        show_step_title: true
+        step_description: ''
+        back_button_show: false
+        back_button_text: Back
+        next_button_text: Next
+        required_fields: true
+        step_help: ''
+    group_step_2:
+      children:
+        - field_annotation_analytic
+      label: 'Step 2'
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: form_step
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        show_step_title: true
+        step_description: ''
+        back_button_show: false
+        back_button_text: Back
+        next_button_text: Next
+        required_fields: true
+        step_help: ''
+    group_step_3:
+      children:
+        - title
+        - body
+        - field_pece_license
+        - field_tags
+        - group_permissions
+      label: 'Step 3'
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: form_step
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        show_step_title: true
+        step_description: ''
+        back_button_show: false
+        back_button_text: Back
+        next_button_text: Next
+        required_fields: true
+        step_help: ''

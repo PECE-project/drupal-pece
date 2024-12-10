@@ -1,135 +1,8 @@
-uuid: 024a6ac2-8c94-40a9-95f3-7f945d9f69d9
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.node.pece_artifact_text.body
-    - field.field.node.pece_artifact_text.field_ark_enabled
-    - field.field.node.pece_artifact_text.field_authors
-    - field.field.node.pece_artifact_text.field_cite_as
-    - field.field.node.pece_artifact_text.field_created_date
-    - field.field.node.pece_artifact_text.field_crit_commentary
-    - field.field.node.pece_artifact_text.field_fieldsite
-    - field.field.node.pece_artifact_text.field_groups_with_view_access
-    - field.field.node.pece_artifact_text.field_language
-    - field.field.node.pece_artifact_text.field_location
-    - field.field.node.pece_artifact_text.field_pece_all_can_view
-    - field.field.node.pece_artifact_text.field_pece_geolocation
-    - field.field.node.pece_artifact_text.field_pece_license
-    - field.field.node.pece_artifact_text.field_pece_project_ref
-    - field.field.node.pece_artifact_text.field_people_with_edit_access
-    - field.field.node.pece_artifact_text.field_people_with_view_access
-    - field.field.node.pece_artifact_text.field_source
-    - field.field.node.pece_artifact_text.field_tags
-    - field.field.node.pece_artifact_text.field_use_fieldsite_local
-    - node.type.pece_artifact_text
-  module:
-    - address
-    - datetime
-    - field_group
-    - geolocation
-    - languagefield
-    - path
-    - text
-third_party_settings:
-  field_group:
-    group_permissions:
-      children:
-        - field_pece_all_can_view
-        - field_people_with_view_access
-      label: Permissions
-      region: content
-      parent_name: group_contribution_metadata
-      weight: 24
-      format_type: details
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        open: true
-        description: ''
-        required_fields: true
-    group_metadata:
-      children:
-        - group_creation_metadata
-        - group_contribution_metadata
-        - group_custom_citation
-      label: Metadata
-      region: content
-      parent_name: ''
-      weight: 2
-      format_type: tabs
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        direction: vertical
-        width_breakpoint: 640
-    group_creation_metadata:
-      children:
-        - field_authors
-        - field_created_date
-        - field_source
-        - field_language
-        - field_location
-      label: 'Creation Metadata'
-      region: content
-      parent_name: group_metadata
-      weight: 6
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-    group_contribution_metadata:
-      children:
-        - field_people_with_edit_access
-        - field_crit_commentary
-        - field_fieldsite
-        - field_use_fieldsite_local
-        - field_pece_license
-        - field_groups_with_view_access
-        - group_permissions
-        - field_tags
-      label: 'Contribution Metadata'
-      region: content
-      parent_name: group_metadata
-      weight: 7
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-    group_custom_citation:
-      children:
-        - field_pece_project_ref
-        - field_ark_enabled
-      label: 'Custom Citation'
-      region: content
-      parent_name: group_metadata
-      weight: 8
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
 id: node.pece_artifact_text.default
 targetEntityType: node
 bundle: pece_artifact_text
 mode: default
+status: true
 content:
   body:
     type: text_textarea_with_summary
@@ -316,6 +189,19 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  revision_log:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 6
@@ -357,3 +243,130 @@ hidden:
   field_cite_as: true
   langcode: true
   og_audience: true
+uuid: 024a6ac2-8c94-40a9-95f3-7f945d9f69d9
+langcode: en
+dependencies:
+  config:
+    - field.field.node.pece_artifact_text.body
+    - field.field.node.pece_artifact_text.field_ark_enabled
+    - field.field.node.pece_artifact_text.field_authors
+    - field.field.node.pece_artifact_text.field_cite_as
+    - field.field.node.pece_artifact_text.field_created_date
+    - field.field.node.pece_artifact_text.field_crit_commentary
+    - field.field.node.pece_artifact_text.field_fieldsite
+    - field.field.node.pece_artifact_text.field_groups_with_view_access
+    - field.field.node.pece_artifact_text.field_language
+    - field.field.node.pece_artifact_text.field_location
+    - field.field.node.pece_artifact_text.field_pece_all_can_view
+    - field.field.node.pece_artifact_text.field_pece_geolocation
+    - field.field.node.pece_artifact_text.field_pece_license
+    - field.field.node.pece_artifact_text.field_pece_project_ref
+    - field.field.node.pece_artifact_text.field_people_with_edit_access
+    - field.field.node.pece_artifact_text.field_people_with_view_access
+    - field.field.node.pece_artifact_text.field_source
+    - field.field.node.pece_artifact_text.field_tags
+    - field.field.node.pece_artifact_text.field_use_fieldsite_local
+    - node.type.pece_artifact_text
+  module:
+    - address
+    - datetime
+    - field_group
+    - geolocation
+    - languagefield
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_permissions:
+      children:
+        - field_pece_all_can_view
+        - field_people_with_view_access
+      label: Permissions
+      region: content
+      parent_name: group_contribution_metadata
+      weight: 24
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+    group_metadata:
+      children:
+        - group_creation_metadata
+        - group_contribution_metadata
+        - group_custom_citation
+      label: Metadata
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: vertical
+        width_breakpoint: 640
+    group_creation_metadata:
+      children:
+        - field_authors
+        - field_created_date
+        - field_source
+        - field_language
+        - field_location
+      label: 'Creation Metadata'
+      region: content
+      parent_name: group_metadata
+      weight: 6
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_contribution_metadata:
+      children:
+        - field_people_with_edit_access
+        - field_crit_commentary
+        - field_fieldsite
+        - field_use_fieldsite_local
+        - field_pece_license
+        - field_groups_with_view_access
+        - group_permissions
+        - field_tags
+      label: 'Contribution Metadata'
+      region: content
+      parent_name: group_metadata
+      weight: 7
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_custom_citation:
+      children:
+        - field_pece_project_ref
+        - field_ark_enabled
+      label: 'Custom Citation'
+      region: content
+      parent_name: group_metadata
+      weight: 8
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true

@@ -1,30 +1,3 @@
-uuid: 114fb9f0-b1e1-41ac-9319-2f8b6a4e5cae
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.card_full
-    - field.field.node.pece_annotation.body
-    - field.field.node.pece_annotation.field_annotation_analytic
-    - field.field.node.pece_annotation.field_annotation_artifact
-    - field.field.node.pece_annotation.field_ark_enabled
-    - field.field.node.pece_annotation.field_groups_with_view_access
-    - field.field.node.pece_annotation.field_pece_all_can_view
-    - field.field.node.pece_annotation.field_pece_license
-    - field.field.node.pece_annotation.field_people_with_edit_access
-    - field.field.node.pece_annotation.field_people_with_view_access
-    - field.field.node.pece_annotation.field_tags
-    - node.type.pece_annotation
-  module:
-    - entity_form_field_label
-    - fences
-    - layout_builder
-    - text
-    - user
-third_party_settings:
-  layout_builder:
-    enabled: false
-    allow_custom: false
 id: node.pece_annotation.card_full
 targetEntityType: node
 bundle: pece_annotation
@@ -93,3 +66,30 @@ hidden:
   langcode: true
   links: true
   search_api_excerpt: true
+uuid: 114fb9f0-b1e1-41ac-9319-2f8b6a4e5cae
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card_full
+    - field.field.node.pece_annotation.body
+    - field.field.node.pece_annotation.field_annotation_analytic
+    - field.field.node.pece_annotation.field_annotation_artifact
+    - field.field.node.pece_annotation.field_ark_enabled
+    - field.field.node.pece_annotation.field_groups_with_view_access
+    - field.field.node.pece_annotation.field_pece_all_can_view
+    - field.field.node.pece_annotation.field_pece_license
+    - field.field.node.pece_annotation.field_people_with_edit_access
+    - field.field.node.pece_annotation.field_people_with_view_access
+    - field.field.node.pece_annotation.field_tags
+    - node.type.pece_annotation
+  module:
+    - entity_form_field_label
+    - fences
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false

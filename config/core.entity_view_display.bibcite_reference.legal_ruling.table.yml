@@ -1,18 +1,3 @@
-uuid: 557d5ad4-be7e-4b27-829c-c2c8bf4b2ee5
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.legal_ruling
-    - core.entity_view_mode.bibcite_reference.table
-  module:
-    - bibcite_entity
-  enforced:
-    config:
-      - core.entity_view_mode.bibcite_reference.table
-      - bibcite_entity.bibcite_reference_type.legal_ruling
-    module:
-      - bibcite_entity
 id: bibcite_reference.legal_ruling.table
 targetEntityType: bibcite_reference
 bundle: legal_ruling
@@ -247,3 +232,18 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: 557d5ad4-be7e-4b27-829c-c2c8bf4b2ee5
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.legal_ruling
+    - core.entity_view_mode.bibcite_reference.table
+  module:
+    - bibcite_entity
+  enforced:
+    config:
+      - core.entity_view_mode.bibcite_reference.table
+      - bibcite_entity.bibcite_reference_type.legal_ruling
+    module:
+      - bibcite_entity

@@ -1,24 +1,8 @@
-uuid: 9d86c02f-b897-4d91-a72a-7c832423395b
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.node.pece_design_logic.body
-    - field.field.node.pece_design_logic.field_media_thumbnail
-    - field.field.node.pece_design_logic.field_subst_logic_image_citation
-    - field.field.node.pece_design_logic.field_thumbnail
-    - node.type.pece_design_logic
-  module:
-    - entity_form_field_label
-    - link
-    - media_library
-    - media_library_edit
-    - path
-    - text
 id: node.pece_design_logic.default
 targetEntityType: node
 bundle: pece_design_logic
 mode: default
+status: true
 content:
   body:
     type: text_textarea_with_summary
@@ -77,6 +61,19 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  revision_log:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 10
@@ -116,3 +113,19 @@ content:
     third_party_settings: {  }
 hidden:
   field_thumbnail: true
+uuid: 9d86c02f-b897-4d91-a72a-7c832423395b
+langcode: en
+dependencies:
+  config:
+    - field.field.node.pece_design_logic.body
+    - field.field.node.pece_design_logic.field_media_thumbnail
+    - field.field.node.pece_design_logic.field_subst_logic_image_citation
+    - field.field.node.pece_design_logic.field_thumbnail
+    - node.type.pece_design_logic
+  module:
+    - entity_form_field_label
+    - link
+    - media_library
+    - media_library_edit
+    - path
+    - text

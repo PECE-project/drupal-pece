@@ -1,3 +1,15 @@
+id: node.artifact_video.field_pece_geolocation
+label: Location
+field_name: field_pece_geolocation
+entity_type: node
+bundle: artifact_video
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: geolocation
 uuid: b778072e-1330-4455-8f73-3b74d41e6d17
 langcode: en
 status: true
@@ -7,15 +19,3 @@ dependencies:
     - node.type.artifact_video
   module:
     - geolocation
-id: node.artifact_video.field_pece_geolocation
-field_name: field_pece_geolocation
-entity_type: node
-bundle: artifact_video
-label: Location
-description: ''
-required: false
-translatable: false
-default_value: {  }
-default_value_callback: ''
-settings: {  }
-field_type: geolocation

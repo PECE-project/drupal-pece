@@ -1,49 +1,3 @@
-uuid: 81f743c7-1076-4ec7-aae5-15cf05f60aab
-langcode: en
-status: true
-dependencies:
-  config:
-    - access_policy.access_policy.pece_content
-    - access_policy.access_policy.pece_group
-    - core.entity_view_display.node.page.default
-    - core.entity_view_display.node.pece_essay.default
-    - dashboards.dashboard.pece
-    - entity_browser.browser.analytic_browser
-    - node.type.artifact_tabular_data
-    - node.type.artifact_video
-    - node.type.pece_analytic
-    - node.type.pece_annotation
-    - node.type.pece_artifact_audio
-    - node.type.pece_artifact_bundle
-    - node.type.pece_artifact_fieldnote
-    - node.type.pece_artifact_image
-    - node.type.pece_artifact_pdf
-    - node.type.pece_artifact_text
-    - node.type.pece_artifact_website
-    - node.type.pece_essay
-    - node.type.pece_fieldsite
-    - node.type.pece_memo
-    - node.type.pece_photo_essay
-    - node.type.pece_project
-    - node.type.pece_slideshow_image
-    - node.type.pece_substantive_logic
-    - node.type.pece_timeline_essay
-    - taxonomy.vocabulary.groups
-    - taxonomy.vocabulary.pece_authors
-    - taxonomy.vocabulary.pece_structured_analytics
-    - taxonomy.vocabulary.tags
-  module:
-    - access_policy
-    - bibcite_export
-    - contextual
-    - dashboards
-    - entity_browser
-    - layout_builder
-    - node
-    - profile
-    - taxonomy
-_core:
-  default_config_hash: vtQpFaZ27VFgT1APh5SpQP_kehinFMJF1qkbhY4VxOg
 id: contributor
 label: Contributor
 weight: -8
@@ -122,3 +76,49 @@ permissions:
   - 'revert all revisions'
   - 'view all revisions'
   - 'view all taxonomy revisions'
+uuid: 81f743c7-1076-4ec7-aae5-15cf05f60aab
+langcode: en
+status: true
+dependencies:
+  config:
+    - access_policy.access_policy.pece_content
+    - access_policy.access_policy.pece_group
+    - core.entity_view_display.node.page.default
+    - core.entity_view_display.node.pece_essay.default
+    - dashboards.dashboard.pece
+    - entity_browser.browser.analytic_browser
+    - node.type.artifact_tabular_data
+    - node.type.artifact_video
+    - node.type.pece_analytic
+    - node.type.pece_annotation
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_fieldnote
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
+    - node.type.pece_essay
+    - node.type.pece_fieldsite
+    - node.type.pece_memo
+    - node.type.pece_photo_essay
+    - node.type.pece_project
+    - node.type.pece_slideshow_image
+    - node.type.pece_substantive_logic
+    - node.type.pece_timeline_essay
+    - taxonomy.vocabulary.groups
+    - taxonomy.vocabulary.pece_authors
+    - taxonomy.vocabulary.pece_structured_analytics
+    - taxonomy.vocabulary.tags
+  module:
+    - access_policy
+    - bibcite_export
+    - contextual
+    - dashboards
+    - entity_browser
+    - layout_builder
+    - node
+    - profile
+    - taxonomy
+_core:
+  default_config_hash: vtQpFaZ27VFgT1APh5SpQP_kehinFMJF1qkbhY4VxOg

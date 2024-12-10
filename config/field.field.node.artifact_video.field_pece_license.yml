@@ -1,16 +1,8 @@
-uuid: 83f9b4b3-bca3-42f8-a456-7009928f346b
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_pece_license
-    - node.type.artifact_video
-    - taxonomy.vocabulary.licenses_vocabulary_licenses
 id: node.artifact_video.field_pece_license
+label: License
 field_name: field_pece_license
 entity_type: node
 bundle: artifact_video
-label: License
 description: 'This field indicates how the content should be licensed. Descriptions of available creative commons licenses can be found <a href="https://creativecommons.org/share-your-work/cclicenses/">here</a>. If you are applying a license to found content that was previously licensed with a Creative Commons Share-Alike license, be sure that you are sharing the content under the same terms as the original.'
 required: true
 translatable: true
@@ -27,3 +19,11 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 83f9b4b3-bca3-42f8-a456-7009928f346b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_license
+    - node.type.artifact_video
+    - taxonomy.vocabulary.licenses_vocabulary_licenses

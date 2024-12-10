@@ -1,3 +1,9 @@
+id: user_remove_role_action.r_api
+label: 'Remove the Reading API role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: r_api
 uuid: 46fdb2f1-c7d9-48f0-93b1-ca291af767c1
 langcode: en
 status: true
@@ -8,9 +14,3 @@ dependencies:
     - user
 _core:
   default_config_hash: G4TZd0rIT57eIv3zjyEHVKAuGUp5vlrZKp_zS_vEz3M
-id: user_remove_role_action.r_api
-label: 'Remove the Reading API role from the selected user(s)'
-type: user
-plugin: user_remove_role_action
-configuration:
-  rid: r_api

@@ -1,17 +1,8 @@
-uuid: ff0faabc-5eaf-4c5f-bc90-3e647000c0e9
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_video_artifact_media_video
-    - media.type.private_video
-    - media.type.remote_video
-    - node.type.artifact_video
 id: node.artifact_video.field_video_artifact_media_video
+label: Video
 field_name: field_video_artifact_media_video
 entity_type: node
 bundle: artifact_video
-label: Video
 description: ''
 required: true
 translatable: false
@@ -29,3 +20,12 @@ settings:
     auto_create: false
     auto_create_bundle: private_video
 field_type: entity_reference
+uuid: ff0faabc-5eaf-4c5f-bc90-3e647000c0e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_video_artifact_media_video
+    - media.type.private_video
+    - media.type.remote_video
+    - node.type.artifact_video

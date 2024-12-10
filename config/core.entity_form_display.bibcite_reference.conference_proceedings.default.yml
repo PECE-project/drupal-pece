@@ -1,15 +1,8 @@
-uuid: bcb0f781-8051-496d-9a05-b068297d1e81
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.conference_proceedings
-  module:
-    - bibcite_entity
 id: bibcite_reference.conference_proceedings.default
 targetEntityType: bibcite_reference
 bundle: conference_proceedings
 mode: default
+status: true
 content:
   author:
     type: bibcite_contributor_widget
@@ -213,6 +206,19 @@ content:
     settings:
       include_locked: true
     third_party_settings: {  }
+  revision_log_message:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 120
@@ -265,3 +271,10 @@ hidden:
   bibcite_section: true
   bibcite_translated_title: true
   bibcite_type_of_work: true
+uuid: bcb0f781-8051-496d-9a05-b068297d1e81
+langcode: en
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.conference_proceedings
+  module:
+    - bibcite_entity

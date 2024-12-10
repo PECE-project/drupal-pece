@@ -1,16 +1,3 @@
-uuid: 2bad21ed-4a91-430b-b761-d6c37953521a
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.conference_paper
-    - core.entity_view_mode.bibcite_reference.citation
-  enforced:
-    config:
-      - core.entity_view_mode.bibcite_reference.citation
-      - bibcite_entity.bibcite_reference_type.conference_paper
-    module:
-      - bibcite_entity
 id: bibcite_reference.conference_paper.citation
 targetEntityType: bibcite_reference
 bundle: conference_paper
@@ -84,3 +71,16 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: 2bad21ed-4a91-430b-b761-d6c37953521a
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.conference_paper
+    - core.entity_view_mode.bibcite_reference.citation
+  enforced:
+    config:
+      - core.entity_view_mode.bibcite_reference.citation
+      - bibcite_entity.bibcite_reference_type.conference_paper
+    module:
+      - bibcite_entity

@@ -1,14 +1,8 @@
-uuid: c471751c-406e-44ec-a791-cadee52696e2
-langcode: en
-status: true
-dependencies:
-  config:
-    - node.type.artifact_video
 id: node.artifact_video.promote
+label: 'Promoted to front page'
 field_name: promote
 entity_type: node
 bundle: artifact_video
-label: 'Promoted to front page'
 description: ''
 required: false
 translatable: true
@@ -20,3 +14,9 @@ settings:
   on_label: 'On'
   off_label: 'Off'
 field_type: boolean
+uuid: c471751c-406e-44ec-a791-cadee52696e2
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.artifact_video

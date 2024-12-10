@@ -1,14 +1,5 @@
-uuid: ab5c7deb-7d5b-442c-b7a9-4234f6490d37
-langcode: en
-status: true
-dependencies:
-  config:
-    - views.view.analytics
-  module:
-    - entity_browser_entity_form
-    - views
-name: analytic_browser
 label: 'Analytic browser'
+name: analytic_browser
 display: iframe
 display_configuration:
   width: 100%
@@ -40,3 +31,12 @@ widgets:
       entity_type: node
       bundle: pece_analytic
       form_mode: annotation_step_1
+uuid: ab5c7deb-7d5b-442c-b7a9-4234f6490d37
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.analytics
+  module:
+    - entity_browser_entity_form
+    - views

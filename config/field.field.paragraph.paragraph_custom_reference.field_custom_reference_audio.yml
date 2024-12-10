@@ -1,19 +1,8 @@
-uuid: 021e9859-7605-4575-a581-b4f1729f8f68
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.paragraph.field_custom_reference_audio
-    - paragraphs.paragraphs_type.paragraph_custom_reference
-  module:
-    - file
-_core:
-  default_config_hash: qkMT0DkZr-mZodtdjJxatdp4RsO0OBR1fmcEoFh_g0w
 id: paragraph.paragraph_custom_reference.field_custom_reference_audio
+label: Audio
 field_name: field_custom_reference_audio
 entity_type: paragraph
 bundle: paragraph_custom_reference
-label: Audio
 description: ''
 required: false
 translatable: false
@@ -27,3 +16,14 @@ settings:
   max_filesize: ''
   description_field: false
 field_type: file
+uuid: 021e9859-7605-4575-a581-b4f1729f8f68
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_custom_reference_audio
+    - paragraphs.paragraphs_type.paragraph_custom_reference
+  module:
+    - file
+_core:
+  default_config_hash: qkMT0DkZr-mZodtdjJxatdp4RsO0OBR1fmcEoFh_g0w

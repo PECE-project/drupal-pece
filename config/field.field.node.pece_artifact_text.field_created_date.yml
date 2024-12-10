@@ -1,3 +1,18 @@
+id: node.pece_artifact_text.field_created_date
+label: 'Created Date'
+field_name: field_created_date
+entity_type: node
+bundle: pece_artifact_text
+description: 'This field designates the date this artifact was originally created.'
+required: true
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime
 uuid: 58e07b9c-ccb9-4343-a933-76a9ddc39b20
 langcode: en
 status: true
@@ -9,18 +24,3 @@ dependencies:
     - datetime
 _core:
   default_config_hash: JkvbVGsdii1HPr-9SC3kxhIJTeCK5_RHSZ5aUED-Fz0
-id: node.pece_artifact_text.field_created_date
-field_name: field_created_date
-entity_type: node
-bundle: pece_artifact_text
-label: 'Created Date'
-description: 'This field designates the date this artifact was originally created.'
-required: true
-translatable: false
-default_value:
-  -
-    default_date_type: now
-    default_date: now
-default_value_callback: ''
-settings: {  }
-field_type: datetime

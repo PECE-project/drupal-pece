@@ -1,14 +1,3 @@
-uuid: 2c2d89b3-97a5-4ec5-bea0-0eefdcd64cc1
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.media.media_library
-    - field.field.media.private_vector_image.field_private_media_svg
-    - image.style.medium
-    - media.type.private_vector_image
-  module:
-    - image
 id: media.private_vector_image.media_library
 targetEntityType: media
 bundle: private_vector_image
@@ -32,3 +21,14 @@ hidden:
   name: true
   search_api_excerpt: true
   uid: true
+uuid: 2c2d89b3-97a5-4ec5-bea0-0eefdcd64cc1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.private_vector_image.field_private_media_svg
+    - image.style.medium
+    - media.type.private_vector_image
+  module:
+    - image

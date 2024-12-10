@@ -1,3 +1,15 @@
+id: node.artifact_tabular_data.field_language
+label: Language
+field_name: field_language
+entity_type: node
+bundle: artifact_tabular_data
+description: 'This field designates the language in which the artifact is written/spoken. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: language_field
 uuid: 5eb4c378-0eba-490e-9d1d-3bf7b928667e
 langcode: en
 status: true
@@ -9,15 +21,3 @@ dependencies:
     - languagefield
 _core:
   default_config_hash: O6AzHZ_zXmAjYojys-4KiOwOWv79qumkPZ7BurFOO6Q
-id: node.artifact_tabular_data.field_language
-field_name: field_language
-entity_type: node
-bundle: artifact_tabular_data
-label: Language
-description: 'This field designates the language in which the artifact is written/spoken. '
-required: false
-translatable: false
-default_value: {  }
-default_value_callback: ''
-settings: {  }
-field_type: language_field

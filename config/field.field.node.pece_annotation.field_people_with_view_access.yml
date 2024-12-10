@@ -1,15 +1,8 @@
-uuid: 7244540b-7a41-4202-b538-c3c82697b08d
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_people_with_view_access
-    - node.type.pece_annotation
 id: node.pece_annotation.field_people_with_view_access
+label: 'People with view access'
 field_name: field_people_with_view_access
 entity_type: node
 bundle: pece_annotation
-label: 'People with view access'
 description: 'This field designates which platform users can view this content. '
 required: false
 translatable: false
@@ -27,3 +20,10 @@ settings:
       type: _none
     include_anonymous: false
 field_type: entity_reference
+uuid: 7244540b-7a41-4202-b538-c3c82697b08d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_people_with_view_access
+    - node.type.pece_annotation

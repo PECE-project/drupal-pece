@@ -1,16 +1,8 @@
-uuid: 5cb49e80-5d0a-462b-9599-967ec0b7a475
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_tags
-    - node.type.pece_artifact_pdf
-    - taxonomy.vocabulary.tags
 id: node.pece_artifact_pdf.field_tags
+label: Tags
 field_name: field_tags
 entity_type: node
 bundle: pece_artifact_pdf
-label: Tags
 description: 'This field designates tags for the content. Tagging content with keywords enables you to curate content with common tags.'
 required: false
 translatable: false
@@ -27,3 +19,11 @@ settings:
     auto_create: true
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 5cb49e80-5d0a-462b-9599-967ec0b7a475
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags
+    - node.type.pece_artifact_pdf
+    - taxonomy.vocabulary.tags

@@ -1,14 +1,8 @@
-uuid: e50ae171-d4c7-4ef7-b21b-bee80553646a
-langcode: en
-status: true
-dependencies:
-  config:
-    - node.type.pece_annotation
 id: node.pece_annotation.title
+label: 'Annotation title'
 field_name: title
 entity_type: node
 bundle: pece_annotation
-label: 'Annotation title'
 description: ''
 required: true
 translatable: true
@@ -16,3 +10,9 @@ default_value: {  }
 default_value_callback: ''
 settings: {  }
 field_type: string
+uuid: e50ae171-d4c7-4ef7-b21b-bee80553646a
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.pece_annotation

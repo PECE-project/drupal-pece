@@ -1,16 +1,8 @@
-uuid: ea0b6b46-c478-4fd9-ade1-a089e952783d
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_annotation_analytic
-    - node.type.pece_analytic
-    - node.type.pece_annotation
 id: node.pece_annotation.field_annotation_analytic
+label: 'Analytic (Question)'
 field_name: field_annotation_analytic
 entity_type: node
 bundle: pece_annotation
-label: 'Analytic (Question)'
 description: ''
 required: false
 translatable: false
@@ -26,3 +18,11 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: ea0b6b46-c478-4fd9-ade1-a089e952783d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_annotation_analytic
+    - node.type.pece_analytic
+    - node.type.pece_annotation

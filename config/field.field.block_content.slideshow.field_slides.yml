@@ -1,16 +1,8 @@
-uuid: 9c990cd2-4d6d-4449-8a4d-8ee355118b38
-langcode: en
-status: true
-dependencies:
-  config:
-    - block_content.type.slideshow
-    - field.storage.block_content.field_slides
-    - media.type.slide_image
 id: block_content.slideshow.field_slides
+label: Slides
 field_name: field_slides
 entity_type: block_content
 bundle: slideshow
-label: Slides
 description: ''
 required: false
 translatable: false
@@ -27,3 +19,11 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 9c990cd2-4d6d-4449-8a4d-8ee355118b38
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.slideshow
+    - field.storage.block_content.field_slides
+    - media.type.slide_image

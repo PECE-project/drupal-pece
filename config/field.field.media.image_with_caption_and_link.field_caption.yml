@@ -1,3 +1,17 @@
+id: media.image_with_caption_and_link.field_caption
+label: Caption
+field_name: field_caption
+entity_type: media
+bundle: image_with_caption_and_link
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text
 uuid: d67d713f-f610-4d0c-89a8-0fbdb0953659
 langcode: en
 status: true
@@ -8,17 +22,3 @@ dependencies:
     - media.type.image_with_caption_and_link
   module:
     - text
-id: media.image_with_caption_and_link.field_caption
-field_name: field_caption
-entity_type: media
-bundle: image_with_caption_and_link
-label: Caption
-description: ''
-required: false
-translatable: false
-default_value: {  }
-default_value_callback: ''
-settings:
-  allowed_formats:
-    - basic_html
-field_type: text

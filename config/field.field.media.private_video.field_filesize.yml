@@ -1,17 +1,8 @@
-uuid: 6fbaaced-ff62-4d97-88b9-047961c9a63b
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_filesize
-    - media.type.private_video
-  module:
-    - bigint
 id: media.private_video.field_filesize
+label: Filesize
 field_name: field_filesize
 entity_type: media
 bundle: private_video
-label: Filesize
 description: ''
 required: false
 translatable: false
@@ -23,3 +14,12 @@ settings:
   prefix: ''
   suffix: ''
 field_type: bigint
+uuid: 6fbaaced-ff62-4d97-88b9-047961c9a63b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_filesize
+    - media.type.private_video
+  module:
+    - bigint

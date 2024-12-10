@@ -1,17 +1,8 @@
-uuid: e6fbde73-2a7d-4cf1-9537-a6f48b0470ef
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.paragraph.field_link
-    - paragraphs.paragraphs_type.image_with_link
-  module:
-    - link
 id: paragraph.image_with_link.field_link
+label: Link
 field_name: field_link
 entity_type: paragraph
 bundle: image_with_link
-label: Link
 description: ''
 required: true
 translatable: false
@@ -21,3 +12,12 @@ settings:
   title: 2
   link_type: 17
 field_type: link
+uuid: e6fbde73-2a7d-4cf1-9537-a6f48b0470ef
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_link
+    - paragraphs.paragraphs_type.image_with_link
+  module:
+    - link

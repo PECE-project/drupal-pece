@@ -1,17 +1,8 @@
-uuid: e0e9ec67-7ffb-49af-81c6-fd5ac60e4053
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_use_fieldsite_local
-    - node.type.pece_artifact_audio
-_core:
-  default_config_hash: 6Xv4bowlyPmi1mUk3oled5vd-im_3ybGTkNUkXZNGtE
 id: node.pece_artifact_audio.field_use_fieldsite_local
+label: "Use fieldsite's location"
 field_name: field_use_fieldsite_local
 entity_type: node
 bundle: pece_artifact_audio
-label: "Use fieldsite's location"
 description: 'Check this to copy the location from the referenced fieldsite, if any.'
 required: false
 translatable: false
@@ -23,3 +14,12 @@ settings:
   on_label: 'On'
   off_label: 'Off'
 field_type: boolean
+uuid: e0e9ec67-7ffb-49af-81c6-fd5ac60e4053
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_use_fieldsite_local
+    - node.type.pece_artifact_audio
+_core:
+  default_config_hash: 6Xv4bowlyPmi1mUk3oled5vd-im_3ybGTkNUkXZNGtE

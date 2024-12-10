@@ -1,18 +1,3 @@
-uuid: 2c867ae0-75ab-4e94-a540-a0d5481ae5e1
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.media.splide
-    - field.field.media.image_with_caption_and_link.field_caption
-    - field.field.media.image_with_caption_and_link.field_link
-    - field.field.media.image_with_caption_and_link.field_private_media_image
-    - image.style.thumbnail
-    - media.type.image_with_caption_and_link
-  module:
-    - image
-    - link
-    - user
 id: media.image_with_caption_and_link.splide
 targetEntityType: media
 bundle: image_with_caption_and_link
@@ -73,3 +58,18 @@ hidden:
   langcode: true
   name: true
   search_api_excerpt: true
+uuid: 2c867ae0-75ab-4e94-a540-a0d5481ae5e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.splide
+    - field.field.media.image_with_caption_and_link.field_caption
+    - field.field.media.image_with_caption_and_link.field_link
+    - field.field.media.image_with_caption_and_link.field_private_media_image
+    - image.style.thumbnail
+    - media.type.image_with_caption_and_link
+  module:
+    - image
+    - link
+    - user

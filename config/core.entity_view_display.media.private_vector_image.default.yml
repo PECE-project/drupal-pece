@@ -1,12 +1,3 @@
-uuid: 1c1a1c3f-c7ea-40fa-a27a-e5123a5baa60
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.media.private_vector_image.field_private_media_svg
-    - media.type.private_vector_image
-  module:
-    - svg_image_field
 id: media.private_vector_image.default
 targetEntityType: media
 bundle: private_vector_image
@@ -36,3 +27,12 @@ hidden:
   search_api_excerpt: true
   thumbnail: true
   uid: true
+uuid: 1c1a1c3f-c7ea-40fa-a27a-e5123a5baa60
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.private_vector_image.field_private_media_svg
+    - media.type.private_vector_image
+  module:
+    - svg_image_field

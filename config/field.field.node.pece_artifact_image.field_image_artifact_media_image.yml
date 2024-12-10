@@ -1,16 +1,8 @@
-uuid: 7b8bc139-5854-4396-b160-2057daf8a638
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_image_artifact_media_image
-    - media.type.private_image
-    - node.type.pece_artifact_image
 id: node.pece_artifact_image.field_image_artifact_media_image
+label: Image
 field_name: field_image_artifact_media_image
 entity_type: node
 bundle: pece_artifact_image
-label: Image
 description: ''
 required: false
 translatable: false
@@ -27,3 +19,11 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 7b8bc139-5854-4396-b160-2057daf8a638
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image_artifact_media_image
+    - media.type.private_image
+    - node.type.pece_artifact_image

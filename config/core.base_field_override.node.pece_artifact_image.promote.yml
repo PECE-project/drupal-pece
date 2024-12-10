@@ -1,14 +1,8 @@
-uuid: e9731548-c69a-48b8-82fa-45f7d2a76cd8
-langcode: en
-status: true
-dependencies:
-  config:
-    - node.type.pece_artifact_image
 id: node.pece_artifact_image.promote
+label: 'Promoted to front page'
 field_name: promote
 entity_type: node
 bundle: pece_artifact_image
-label: 'Promoted to front page'
 description: ''
 required: false
 translatable: true
@@ -20,3 +14,9 @@ settings:
   on_label: 'On'
   off_label: 'Off'
 field_type: boolean
+uuid: e9731548-c69a-48b8-82fa-45f7d2a76cd8
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.pece_artifact_image

@@ -1,20 +1,8 @@
-uuid: ceee5bad-bb67-40a7-b30c-f35a1076d801
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_timeline_essay_items
-    - node.type.pece_timeline_essay
-    - paragraphs.paragraphs_type.pece_timeline_essay_item
-  module:
-    - entity_reference_revisions
-_core:
-  default_config_hash: oGeHTObM7n6sYmnU1VNDdgKi4j4zjPFC1e7LYwD7a30
 id: node.pece_timeline_essay.field_timeline_essay_items
+label: 'Timeline Entries'
 field_name: field_timeline_essay_items
 entity_type: node
 bundle: pece_timeline_essay
-label: 'Timeline Entries'
 description: ''
 required: false
 translatable: false
@@ -40,3 +28,15 @@ settings:
         weight: 8
         enabled: true
 field_type: entity_reference_revisions
+uuid: ceee5bad-bb67-40a7-b30c-f35a1076d801
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_timeline_essay_items
+    - node.type.pece_timeline_essay
+    - paragraphs.paragraphs_type.pece_timeline_essay_item
+  module:
+    - entity_reference_revisions
+_core:
+  default_config_hash: oGeHTObM7n6sYmnU1VNDdgKi4j4zjPFC1e7LYwD7a30

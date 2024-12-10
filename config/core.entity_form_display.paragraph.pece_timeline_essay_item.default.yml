@@ -1,27 +1,8 @@
-uuid: 94c740c6-ba91-4d40-b2b5-6c04bb8b43bd
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.paragraph.pece_timeline_essay_item.field_description
-    - field.field.paragraph.pece_timeline_essay_item.field_pece_start_end_date
-    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_artifact
-    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_background
-    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_color
-    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_type
-    - field.field.paragraph.pece_timeline_essay_item.field_title
-    - image.style.thumbnail
-    - paragraphs.paragraphs_type.pece_timeline_essay_item
-  module:
-    - color_field
-    - datetime_range
-    - image
-_core:
-  default_config_hash: i8H5IkVLvOn--DuUunOAsS0X8gLXDcdkE8OPNwmCaSU
 id: paragraph.pece_timeline_essay_item.default
 targetEntityType: paragraph
 bundle: pece_timeline_essay_item
 mode: default
+status: true
 content:
   field_description:
     type: string_textarea
@@ -74,3 +55,22 @@ hidden:
   created: true
   field_pece_timeline_type: true
   status: true
+uuid: 94c740c6-ba91-4d40-b2b5-6c04bb8b43bd
+langcode: en
+dependencies:
+  config:
+    - field.field.paragraph.pece_timeline_essay_item.field_description
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_start_end_date
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_artifact
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_background
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_color
+    - field.field.paragraph.pece_timeline_essay_item.field_pece_timeline_type
+    - field.field.paragraph.pece_timeline_essay_item.field_title
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.pece_timeline_essay_item
+  module:
+    - color_field
+    - datetime_range
+    - image
+_core:
+  default_config_hash: i8H5IkVLvOn--DuUunOAsS0X8gLXDcdkE8OPNwmCaSU
