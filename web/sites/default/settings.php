@@ -902,3 +902,8 @@ $databases['migrate']['default']['port'] = $databases['default']['default']['por
 $settings['migrate_source_version'] = '7';
 $settings['migrate_source_connection'] = 'migrate';
 $settings['media_migration_embed_token_transform_destination_filter_plugin'] = 'media_embed';
+
+// Include settings required for Redis cache.
+if ((file_exists(__DIR__ . '/settings.ddev.redis.php') && getenv('IS_DDEV_PROJECT') == 'true')) {
+  include __DIR__ . '/settings.ddev.redis.php';
+}
