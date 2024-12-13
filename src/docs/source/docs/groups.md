@@ -11,16 +11,27 @@ following YouTube video.
 Steps to Create Group
 --------------------------
 
-1. Navigate to ‘Dashboard’. This link is listed in the main menu.
+1. Navigate to ‘Create Group’. This link is listed in the main menu.
 
 2. Select to add a group. You will be directed to a web form to create your group.
 
-3. Enter the relevant fields (see Field glossary for explanation).
+3. Enter a title in the "Name" textbox for your new group.
 
-4. Note that in order to create a group as a child of another group, you should
-select the Parent Group in the Group Audience field.
+4. In the "Image" field, you can upload an image related to your group.
 
-5. Save the group. You are now the group administrator.
+5. Add a description related to your group, in the "Description" textbox.
+
+6. The "Group visibility" field, determines whether the group can be viewed by all site visitors or only by its own members. It does not determine the visibility of group content. Select whether you would like your group to be publicly or privately visible.
+
+7. Substantive logic
+
+8. 
+
+9. Next, add optional keyword tags to your timeline essay. Tag the content. As you type, suggested tags will be automatically generated if they exist already in the system. We recommend following these suggestions and using existing tags if they are not too different from what you intended, but feel free to make up new tags!
+
+10. Relations
+
+11. Finally, click “Save” at the top of the page to save your work. And remember: all of these settings can be revised at any time. You are now the group administrator.
 
 
 Steps to Join a Group
