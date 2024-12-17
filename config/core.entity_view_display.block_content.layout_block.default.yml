@@ -1,13 +1,3 @@
-uuid: a659c757-8fc9-4aec-be15-fbaaf3c3305e
-langcode: en
-status: true
-dependencies:
-  config:
-    - block_content.type.layout_block
-    - field.field.block_content.layout_block.body
-    - field.field.block_content.layout_block.field_body_paragraph
-  module:
-    - layout_paragraphs
 id: block_content.layout_block.default
 targetEntityType: block_content
 bundle: layout_block
@@ -26,3 +16,13 @@ hidden:
   body: true
   langcode: true
   search_api_excerpt: true
+uuid: a659c757-8fc9-4aec-be15-fbaaf3c3305e
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.layout_block
+    - field.field.block_content.layout_block.body
+    - field.field.block_content.layout_block.field_body_paragraph
+  module:
+    - layout_paragraphs

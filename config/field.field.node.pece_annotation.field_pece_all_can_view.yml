@@ -1,15 +1,8 @@
-uuid: e5f9c2a9-a903-4655-afa3-645f45203d02
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_pece_all_can_view
-    - node.type.pece_annotation
 id: node.pece_annotation.field_pece_all_can_view
+label: 'Everyone can view this content'
 field_name: field_pece_all_can_view
 entity_type: node
 bundle: pece_annotation
-label: 'Everyone can view this content'
 description: 'If you check this option, then all users (including anonymous users) can see this content.'
 required: false
 translatable: true
@@ -21,3 +14,10 @@ settings:
   on_label: 'On'
   off_label: 'Off'
 field_type: boolean
+uuid: e5f9c2a9-a903-4655-afa3-645f45203d02
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_all_can_view
+    - node.type.pece_annotation

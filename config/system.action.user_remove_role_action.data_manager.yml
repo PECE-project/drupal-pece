@@ -1,3 +1,9 @@
+id: user_remove_role_action.data_manager
+label: 'Remove the Data manager role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: data_manager
 uuid: d3c83789-4440-4666-9704-e15e7bae9f02
 langcode: en
 status: true
@@ -6,9 +12,3 @@ dependencies:
     - user.role.data_manager
   module:
     - user
-id: user_remove_role_action.data_manager
-label: 'Remove the Data manager role from the selected user(s)'
-type: user
-plugin: user_remove_role_action
-configuration:
-  rid: data_manager

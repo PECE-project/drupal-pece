@@ -1,12 +1,3 @@
-uuid: d56a811f-91d3-4309-89c1-bf3f15707fbc
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.paragraph.slideshow.field_slides
-    - paragraphs.paragraphs_type.slideshow
-  module:
-    - splide
 id: paragraph.slideshow.default
 targetEntityType: paragraph
 bundle: slideshow
@@ -83,3 +74,12 @@ content:
     region: content
 hidden:
   search_api_excerpt: true
+uuid: d56a811f-91d3-4309-89c1-bf3f15707fbc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.slideshow.field_slides
+    - paragraphs.paragraphs_type.slideshow
+  module:
+    - splide

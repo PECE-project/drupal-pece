@@ -1,17 +1,8 @@
-uuid: fa8c0195-b5d1-443d-8432-ef2ff90458ce
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_link
-    - media.type.image_with_caption_and_link
-  module:
-    - link
 id: media.image_with_caption_and_link.field_link
+label: Link
 field_name: field_link
 entity_type: media
 bundle: image_with_caption_and_link
-label: Link
 description: "Full URL or relative path (ex. <em>node/123</em>) to link the image to. If left blank, the image won't be a link."
 required: false
 translatable: false
@@ -21,3 +12,12 @@ settings:
   title: 0
   link_type: 17
 field_type: link
+uuid: fa8c0195-b5d1-443d-8432-ef2ff90458ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_link
+    - media.type.image_with_caption_and_link
+  module:
+    - link

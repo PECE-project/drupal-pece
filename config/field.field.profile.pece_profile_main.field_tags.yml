@@ -1,18 +1,8 @@
-uuid: fb11473d-06f8-4d8e-bce5-c4d4fea34a44
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.profile.field_tags
-    - profile.type.pece_profile_main
-    - taxonomy.vocabulary.tags
-_core:
-  default_config_hash: MDNDmzbshJI5sbo9usCzM8IUeYpJLW3uHFK-k222KPc
 id: profile.pece_profile_main.field_tags
+label: Tags
 field_name: field_tags
 entity_type: profile
 bundle: pece_profile_main
-label: Tags
 description: ''
 required: false
 translatable: false
@@ -29,3 +19,13 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: fb11473d-06f8-4d8e-bce5-c4d4fea34a44
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_tags
+    - profile.type.pece_profile_main
+    - taxonomy.vocabulary.tags
+_core:
+  default_config_hash: MDNDmzbshJI5sbo9usCzM8IUeYpJLW3uHFK-k222KPc

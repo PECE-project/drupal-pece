@@ -1,17 +1,8 @@
-uuid: 9a401b04-de6e-4265-970d-52ec1cb34fba
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_private_tabular_data
-    - media.type.private_tabular_data
-  module:
-    - file
 id: media.private_tabular_data.field_private_tabular_data
+label: File
 field_name: field_private_tabular_data
 entity_type: media
 bundle: private_tabular_data
-label: File
 description: ''
 required: true
 translatable: true
@@ -25,3 +16,12 @@ settings:
   max_filesize: ''
   description_field: false
 field_type: file
+uuid: 9a401b04-de6e-4265-970d-52ec1cb34fba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_private_tabular_data
+    - media.type.private_tabular_data
+  module:
+    - file

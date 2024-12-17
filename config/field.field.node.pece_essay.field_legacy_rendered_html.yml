@@ -1,15 +1,8 @@
-uuid: 2bd2eedb-7463-41e8-9bfc-563080057692
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_legacy_rendered_html
-    - node.type.pece_essay
 id: node.pece_essay.field_legacy_rendered_html
+label: 'Legacy rendered HTML'
 field_name: field_legacy_rendered_html
 entity_type: node
 bundle: pece_essay
-label: 'Legacy rendered HTML'
 description: 'This field is not meant to be edited. Its purpose is to display the rendered HTML of a PECE essay as it appeared before upgrading to PECE v2.'
 required: false
 translatable: false
@@ -17,3 +10,10 @@ default_value: {  }
 default_value_callback: ''
 settings: {  }
 field_type: string_long
+uuid: 2bd2eedb-7463-41e8-9bfc-563080057692
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_legacy_rendered_html
+    - node.type.pece_essay

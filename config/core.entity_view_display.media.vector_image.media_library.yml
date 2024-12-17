@@ -1,15 +1,3 @@
-uuid: 157dce21-f33d-4c00-860f-07f38e6a4124
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.media.media_library
-    - field.field.media.vector_image.field_media_svg
-    - media.type.vector_image
-  module:
-    - svg_image_field
-_core:
-  default_config_hash: oiLyCRmQOXzpbHaI2enAP2zaKfcyDLlQEuA43ohBjoc
 id: media.vector_image.media_library
 targetEntityType: media
 bundle: vector_image
@@ -36,3 +24,15 @@ hidden:
   search_api_excerpt: true
   thumbnail: true
   uid: true
+uuid: 157dce21-f33d-4c00-860f-07f38e6a4124
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.vector_image.field_media_svg
+    - media.type.vector_image
+  module:
+    - svg_image_field
+_core:
+  default_config_hash: oiLyCRmQOXzpbHaI2enAP2zaKfcyDLlQEuA43ohBjoc

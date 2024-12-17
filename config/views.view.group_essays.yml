@@ -1,16 +1,3 @@
-uuid: db1e8e33-a61c-429f-a17b-af1c39802ef2
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.mini_teaser
-    - node.type.pece_essay
-    - node.type.pece_photo_essay
-    - node.type.pece_timeline_essay
-    - taxonomy.vocabulary.groups
-  module:
-    - node
-    - user
 id: group_essays
 label: 'Group Essays'
 module: views
@@ -281,3 +268,16 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+uuid: db1e8e33-a61c-429f-a17b-af1c39802ef2
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.mini_teaser
+    - node.type.pece_essay
+    - node.type.pece_photo_essay
+    - node.type.pece_timeline_essay
+    - taxonomy.vocabulary.groups
+  module:
+    - node
+    - user

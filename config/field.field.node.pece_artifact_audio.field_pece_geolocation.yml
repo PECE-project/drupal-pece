@@ -1,3 +1,15 @@
+id: node.pece_artifact_audio.field_pece_geolocation
+label: Location
+field_name: field_pece_geolocation
+entity_type: node
+bundle: pece_artifact_audio
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: geolocation
 uuid: ae0ea1d2-a310-48b3-99cd-671d73ee8c28
 langcode: en
 status: true
@@ -7,15 +19,3 @@ dependencies:
     - node.type.pece_artifact_audio
   module:
     - geolocation
-id: node.pece_artifact_audio.field_pece_geolocation
-field_name: field_pece_geolocation
-entity_type: node
-bundle: pece_artifact_audio
-label: Location
-description: ''
-required: false
-translatable: false
-default_value: {  }
-default_value_callback: ''
-settings: {  }
-field_type: geolocation

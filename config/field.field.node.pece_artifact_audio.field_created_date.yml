@@ -1,3 +1,18 @@
+id: node.pece_artifact_audio.field_created_date
+label: 'Created Date'
+field_name: field_created_date
+entity_type: node
+bundle: pece_artifact_audio
+description: 'This field designates the date this artifact was originally created.'
+required: true
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime
 uuid: c88d712e-44eb-4182-b249-b817080be073
 langcode: en
 status: true
@@ -9,18 +24,3 @@ dependencies:
     - datetime
 _core:
   default_config_hash: VRhY8TyiQ4JNlEEMgLrvY22mPoaoaSC_E2E2imiuHkA
-id: node.pece_artifact_audio.field_created_date
-field_name: field_created_date
-entity_type: node
-bundle: pece_artifact_audio
-label: 'Created Date'
-description: 'This field designates the date this artifact was originally created.'
-required: true
-translatable: false
-default_value:
-  -
-    default_date_type: now
-    default_date: now
-default_value_callback: ''
-settings: {  }
-field_type: datetime

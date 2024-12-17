@@ -1,51 +1,8 @@
-uuid: 445b89ba-3091-461f-805f-ac4048d91f06
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.artwork
-    - bibcite_entity.bibcite_reference_type.audiovisual
-    - bibcite_entity.bibcite_reference_type.bill
-    - bibcite_entity.bibcite_reference_type.book
-    - bibcite_entity.bibcite_reference_type.book_chapter
-    - bibcite_entity.bibcite_reference_type.broadcast
-    - bibcite_entity.bibcite_reference_type.case
-    - bibcite_entity.bibcite_reference_type.chart
-    - bibcite_entity.bibcite_reference_type.classical
-    - bibcite_entity.bibcite_reference_type.conference_paper
-    - bibcite_entity.bibcite_reference_type.conference_proceedings
-    - bibcite_entity.bibcite_reference_type.database
-    - bibcite_entity.bibcite_reference_type.film
-    - bibcite_entity.bibcite_reference_type.government_report
-    - bibcite_entity.bibcite_reference_type.hearing
-    - bibcite_entity.bibcite_reference_type.journal
-    - bibcite_entity.bibcite_reference_type.journal_article
-    - bibcite_entity.bibcite_reference_type.legal_ruling
-    - bibcite_entity.bibcite_reference_type.magazine_article
-    - bibcite_entity.bibcite_reference_type.manuscript
-    - bibcite_entity.bibcite_reference_type.map
-    - bibcite_entity.bibcite_reference_type.miscellaneous
-    - bibcite_entity.bibcite_reference_type.miscellaneous_section
-    - bibcite_entity.bibcite_reference_type.newspaper_article
-    - bibcite_entity.bibcite_reference_type.patent
-    - bibcite_entity.bibcite_reference_type.personal
-    - bibcite_entity.bibcite_reference_type.presentation
-    - bibcite_entity.bibcite_reference_type.report
-    - bibcite_entity.bibcite_reference_type.software
-    - bibcite_entity.bibcite_reference_type.statute
-    - bibcite_entity.bibcite_reference_type.thesis
-    - bibcite_entity.bibcite_reference_type.unpublished
-    - bibcite_entity.bibcite_reference_type.web_article
-    - bibcite_entity.bibcite_reference_type.web_project_page
-    - bibcite_entity.bibcite_reference_type.web_service
-    - bibcite_entity.bibcite_reference_type.website
-    - field.storage.node.field_bibliography
-    - node.type.pece_artifact_website
 id: node.pece_artifact_website.field_bibliography
+label: Bibliography
 field_name: field_bibliography
 entity_type: node
 bundle: pece_artifact_website
-label: Bibliography
 description: 'This field references the Zotero feed associated with this platform in order to associate the artifact with a citation.'
 required: false
 translatable: false
@@ -97,3 +54,46 @@ settings:
     auto_create: false
     auto_create_bundle: artwork
 field_type: entity_reference
+uuid: 445b89ba-3091-461f-805f-ac4048d91f06
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.artwork
+    - bibcite_entity.bibcite_reference_type.audiovisual
+    - bibcite_entity.bibcite_reference_type.bill
+    - bibcite_entity.bibcite_reference_type.book
+    - bibcite_entity.bibcite_reference_type.book_chapter
+    - bibcite_entity.bibcite_reference_type.broadcast
+    - bibcite_entity.bibcite_reference_type.case
+    - bibcite_entity.bibcite_reference_type.chart
+    - bibcite_entity.bibcite_reference_type.classical
+    - bibcite_entity.bibcite_reference_type.conference_paper
+    - bibcite_entity.bibcite_reference_type.conference_proceedings
+    - bibcite_entity.bibcite_reference_type.database
+    - bibcite_entity.bibcite_reference_type.film
+    - bibcite_entity.bibcite_reference_type.government_report
+    - bibcite_entity.bibcite_reference_type.hearing
+    - bibcite_entity.bibcite_reference_type.journal
+    - bibcite_entity.bibcite_reference_type.journal_article
+    - bibcite_entity.bibcite_reference_type.legal_ruling
+    - bibcite_entity.bibcite_reference_type.magazine_article
+    - bibcite_entity.bibcite_reference_type.manuscript
+    - bibcite_entity.bibcite_reference_type.map
+    - bibcite_entity.bibcite_reference_type.miscellaneous
+    - bibcite_entity.bibcite_reference_type.miscellaneous_section
+    - bibcite_entity.bibcite_reference_type.newspaper_article
+    - bibcite_entity.bibcite_reference_type.patent
+    - bibcite_entity.bibcite_reference_type.personal
+    - bibcite_entity.bibcite_reference_type.presentation
+    - bibcite_entity.bibcite_reference_type.report
+    - bibcite_entity.bibcite_reference_type.software
+    - bibcite_entity.bibcite_reference_type.statute
+    - bibcite_entity.bibcite_reference_type.thesis
+    - bibcite_entity.bibcite_reference_type.unpublished
+    - bibcite_entity.bibcite_reference_type.web_article
+    - bibcite_entity.bibcite_reference_type.web_project_page
+    - bibcite_entity.bibcite_reference_type.web_service
+    - bibcite_entity.bibcite_reference_type.website
+    - field.storage.node.field_bibliography
+    - node.type.pece_artifact_website

@@ -1,26 +1,8 @@
-uuid: 2c489e82-e196-421a-9bb5-a9a4e2e1eba7
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.taxonomy_term.groups.field_group_managers
-    - field.field.taxonomy_term.groups.field_group_members
-    - field.field.taxonomy_term.groups.field_group_visibility
-    - field.field.taxonomy_term.groups.field_image
-    - field.field.taxonomy_term.groups.field_pece_project_ref
-    - field.field.taxonomy_term.groups.field_substantive_logic
-    - field.field.taxonomy_term.groups.field_tags
-    - taxonomy.vocabulary.groups
-  module:
-    - entity_form_field_label
-    - media_library
-    - media_library_edit
-    - path
-    - text
 id: taxonomy_term.groups.default
 targetEntityType: taxonomy_term
 bundle: groups
 mode: default
+status: true
 content:
   description:
     type: text_textarea
@@ -105,7 +87,43 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  revision_log_message:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
+  tvi:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_pece_project_ref: true
   langcode: true
   status: true
+uuid: 2c489e82-e196-421a-9bb5-a9a4e2e1eba7
+langcode: en
+dependencies:
+  config:
+    - field.field.taxonomy_term.groups.field_group_managers
+    - field.field.taxonomy_term.groups.field_group_members
+    - field.field.taxonomy_term.groups.field_group_visibility
+    - field.field.taxonomy_term.groups.field_image
+    - field.field.taxonomy_term.groups.field_pece_project_ref
+    - field.field.taxonomy_term.groups.field_substantive_logic
+    - field.field.taxonomy_term.groups.field_tags
+    - taxonomy.vocabulary.groups
+  module:
+    - entity_form_field_label
+    - media_library
+    - media_library_edit
+    - path
+    - text

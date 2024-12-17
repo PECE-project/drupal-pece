@@ -1,18 +1,8 @@
-uuid: 5753340e-47e2-4731-b6c1-693b2cf79ccf
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_pece_project_ref
-    - node.type.pece_artifact_text
-    - node.type.pece_project
-_core:
-  default_config_hash: gCpKcf5FGsc8GMkshHZ1w1SSKaxSwj_OO2PqVc4Pc6U
 id: node.pece_artifact_text.field_pece_project_ref
+label: 'Cite as part of...'
 field_name: field_pece_project_ref
 entity_type: node
 bundle: pece_artifact_text
-label: 'Cite as part of...'
 description: 'When you save this artifact, a suggested citation will be auto-created by the platform. If this artifact is generated from or associated with a particular project on the platform, this field indicates which project the artifact should be cited as part of. You may leave this field blank if the artifact does not need to be cited as part of a particular project.'
 required: false
 translatable: true
@@ -29,3 +19,13 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 5753340e-47e2-4731-b6c1-693b2cf79ccf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_project_ref
+    - node.type.pece_artifact_text
+    - node.type.pece_project
+_core:
+  default_config_hash: gCpKcf5FGsc8GMkshHZ1w1SSKaxSwj_OO2PqVc4Pc6U

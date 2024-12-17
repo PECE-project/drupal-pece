@@ -1,16 +1,3 @@
-uuid: 544b6016-f415-4453-9508-927854dd7671
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.legal_ruling
-    - core.entity_view_mode.bibcite_reference.citation
-  enforced:
-    config:
-      - core.entity_view_mode.bibcite_reference.citation
-      - bibcite_entity.bibcite_reference_type.legal_ruling
-    module:
-      - bibcite_entity
 id: bibcite_reference.legal_ruling.citation
 targetEntityType: bibcite_reference
 bundle: legal_ruling
@@ -84,3 +71,16 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: 544b6016-f415-4453-9508-927854dd7671
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.legal_ruling
+    - core.entity_view_mode.bibcite_reference.citation
+  enforced:
+    config:
+      - core.entity_view_mode.bibcite_reference.citation
+      - bibcite_entity.bibcite_reference_type.legal_ruling
+    module:
+      - bibcite_entity

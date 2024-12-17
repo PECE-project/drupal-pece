@@ -1,25 +1,8 @@
-uuid: 06188f46-dba6-4061-afdb-8b71b1b80bb0
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.taxonomy_term.licenses_vocabulary_licenses.licenses_vocabulary_icon
-    - field.field.taxonomy_term.licenses_vocabulary_licenses.licenses_vocabulary_link
-    - image.style.thumbnail
-    - taxonomy.vocabulary.licenses_vocabulary_licenses
-  module:
-    - image
-    - link
-    - text
-  enforced:
-    module:
-      - licenses_vocabulary
-_core:
-  default_config_hash: cjm36Ry5lluIF16ub_cSI6I0JoO_vc93H36jYy_kpbU
 id: taxonomy_term.licenses_vocabulary_licenses.default
 targetEntityType: taxonomy_term
 bundle: licenses_vocabulary_licenses
 mode: default
+status: true
 content:
   description:
     type: text_textarea
@@ -60,6 +43,19 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  revision_log_message:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 100
@@ -67,5 +63,27 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  tvi:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   path: true
+uuid: 06188f46-dba6-4061-afdb-8b71b1b80bb0
+langcode: en
+dependencies:
+  config:
+    - field.field.taxonomy_term.licenses_vocabulary_licenses.licenses_vocabulary_icon
+    - field.field.taxonomy_term.licenses_vocabulary_licenses.licenses_vocabulary_link
+    - image.style.thumbnail
+    - taxonomy.vocabulary.licenses_vocabulary_licenses
+  module:
+    - image
+    - link
+    - text
+  enforced:
+    module:
+      - licenses_vocabulary
+_core:
+  default_config_hash: cjm36Ry5lluIF16ub_cSI6I0JoO_vc93H36jYy_kpbU

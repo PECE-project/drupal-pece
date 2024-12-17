@@ -1,24 +1,8 @@
-uuid: 1f8388d2-b07f-4df5-a403-e113faccf7d9
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_audio
-    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_image
-    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_link
-    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_title
-    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_video
-    - image.style.thumbnail
-    - paragraphs.paragraphs_type.paragraph_custom_reference
-  module:
-    - file
-    - image
-_core:
-  default_config_hash: eGDv2j98KyIsSZSWh94dXl8ZI2NaDYsCnz1Q0uijSNY
 id: paragraph.paragraph_custom_reference.default
 targetEntityType: paragraph
 bundle: paragraph_custom_reference
 mode: default
+status: true
 content:
   field_custom_reference_audio:
     type: file_generic
@@ -61,3 +45,19 @@ content:
 hidden:
   created: true
   status: true
+uuid: 1f8388d2-b07f-4df5-a403-e113faccf7d9
+langcode: en
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_audio
+    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_image
+    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_link
+    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_title
+    - field.field.paragraph.paragraph_custom_reference.field_custom_reference_video
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.paragraph_custom_reference
+  module:
+    - file
+    - image
+_core:
+  default_config_hash: eGDv2j98KyIsSZSWh94dXl8ZI2NaDYsCnz1Q0uijSNY

@@ -1,9 +1,6 @@
-uuid: b776cdc4-e091-4dbc-87f2-be730804b18d
-langcode: en
-status: true
-dependencies: {  }
 id: pece_group
 label: 'PECE default group (term) policy'
+target_entity_type_id: taxonomy_term
 description: null
 weight: 0
 access_rules:
@@ -59,7 +56,6 @@ access_rules:
     required: false
 access_rule_operator: OR
 query: true
-target_entity_type_id: taxonomy_term
 operations:
   view:
     permission: true
@@ -99,3 +95,7 @@ selection_rules:
     required: false
 selection_rule_operator: AND
 selection_set: {  }
+uuid: b776cdc4-e091-4dbc-87f2-be730804b18d
+langcode: en
+status: true
+dependencies: {  }

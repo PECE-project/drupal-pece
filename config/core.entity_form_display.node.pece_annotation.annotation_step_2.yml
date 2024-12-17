@@ -1,49 +1,8 @@
-uuid: 934581cc-65ed-4668-87b2-6b0468a263c7
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_form_mode.node.annotation_step_2
-    - entity_browser.browser.analytic_browser
-    - field.field.node.pece_annotation.body
-    - field.field.node.pece_annotation.field_annotation_analytic
-    - field.field.node.pece_annotation.field_annotation_artifact
-    - field.field.node.pece_annotation.field_ark_enabled
-    - field.field.node.pece_annotation.field_groups_with_view_access
-    - field.field.node.pece_annotation.field_pece_all_can_view
-    - field.field.node.pece_annotation.field_pece_license
-    - field.field.node.pece_annotation.field_people_with_edit_access
-    - field.field.node.pece_annotation.field_people_with_view_access
-    - field.field.node.pece_annotation.field_tags
-    - node.type.pece_annotation
-  module:
-    - entity_browser
-    - entity_form_field_label
-    - field_group
-    - readonly_field_widget
-third_party_settings:
-  field_group:
-    group_permissions:
-      children:
-        - field_groups_with_view_access
-        - field_pece_all_can_view
-        - field_people_with_view_access
-      label: Permissions
-      region: hidden
-      parent_name: ''
-      weight: 17
-      format_type: details
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: permissions
-        open: true
-        description: 'Set permissions to view, update and delete this content.'
-        required_fields: false
 id: node.pece_annotation.annotation_step_2
 targetEntityType: node
 bundle: pece_annotation
 mode: annotation_step_2
+status: true
 content:
   field_annotation_analytic:
     type: entity_browser_entity_reference
@@ -92,3 +51,44 @@ hidden:
   title: true
   uid: true
   url_redirects: true
+uuid: 934581cc-65ed-4668-87b2-6b0468a263c7
+langcode: en
+dependencies:
+  config:
+    - core.entity_form_mode.node.annotation_step_2
+    - entity_browser.browser.analytic_browser
+    - field.field.node.pece_annotation.body
+    - field.field.node.pece_annotation.field_annotation_analytic
+    - field.field.node.pece_annotation.field_annotation_artifact
+    - field.field.node.pece_annotation.field_ark_enabled
+    - field.field.node.pece_annotation.field_groups_with_view_access
+    - field.field.node.pece_annotation.field_pece_all_can_view
+    - field.field.node.pece_annotation.field_pece_license
+    - field.field.node.pece_annotation.field_people_with_edit_access
+    - field.field.node.pece_annotation.field_people_with_view_access
+    - field.field.node.pece_annotation.field_tags
+    - node.type.pece_annotation
+  module:
+    - entity_browser
+    - entity_form_field_label
+    - field_group
+    - readonly_field_widget
+third_party_settings:
+  field_group:
+    group_permissions:
+      children:
+        - field_groups_with_view_access
+        - field_pece_all_can_view
+        - field_people_with_view_access
+      label: Permissions
+      region: hidden
+      parent_name: ''
+      weight: 17
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: permissions
+        open: true
+        description: 'Set permissions to view, update and delete this content.'
+        required_fields: false

@@ -1,3 +1,16 @@
+id: paragraph.pece_timeline_essay_item.field_pece_timeline_color
+label: 'Background color'
+field_name: field_pece_timeline_color
+entity_type: paragraph
+bundle: pece_timeline_essay_item
+description: 'This color will appear in the background of the timeline essay item. If you select a color, you should also set the background opacity to a value between 0 (transparent) and 1 (opaque). (e.g. 0.5 will set the background color to half opacity).'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  opacity: 1
+field_type: color_field_type
 uuid: 985446e0-fdaf-4c32-9f74-9a7c62abc66d
 langcode: en
 status: true
@@ -9,16 +22,3 @@ dependencies:
     - color_field
 _core:
   default_config_hash: YPotzyn7pInF_-1PwgFM8XPn9qA0AClb4Z8cXKh3_xo
-id: paragraph.pece_timeline_essay_item.field_pece_timeline_color
-field_name: field_pece_timeline_color
-entity_type: paragraph
-bundle: pece_timeline_essay_item
-label: 'Background color'
-description: 'This color will appear in the background of the timeline essay item. If you select a color, you should also set the background opacity to a value between 0 (transparent) and 1 (opaque). (e.g. 0.5 will set the background color to half opacity).'
-required: false
-translatable: false
-default_value: {  }
-default_value_callback: ''
-settings:
-  opacity: 1
-field_type: color_field_type

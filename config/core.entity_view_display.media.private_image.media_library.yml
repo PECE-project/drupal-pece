@@ -1,16 +1,3 @@
-uuid: ed3c9756-ff34-47e4-aa31-336effce9947
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.media.media_library
-    - field.field.media.private_image.field_filesize
-    - field.field.media.private_image.field_mimetype
-    - field.field.media.private_image.field_private_media_image
-    - image.style.medium
-    - media.type.private_image
-  module:
-    - image
 id: media.private_image.media_library
 targetEntityType: media
 bundle: private_image
@@ -36,3 +23,16 @@ hidden:
   name: true
   search_api_excerpt: true
   uid: true
+uuid: ed3c9756-ff34-47e4-aa31-336effce9947
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.private_image.field_filesize
+    - field.field.media.private_image.field_mimetype
+    - field.field.media.private_image.field_private_media_image
+    - image.style.medium
+    - media.type.private_image
+  module:
+    - image

@@ -1,15 +1,8 @@
-uuid: 29274602-5b30-4f70-b14c-a128232e0c0c
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_mimetype
-    - media.type.private_document
 id: media.private_document.field_mimetype
+label: Mimetype
 field_name: field_mimetype
 entity_type: media
 bundle: private_document
-label: Mimetype
 description: ''
 required: false
 translatable: false
@@ -17,3 +10,10 @@ default_value: {  }
 default_value_callback: ''
 settings: {  }
 field_type: string
+uuid: 29274602-5b30-4f70-b14c-a128232e0c0c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_mimetype
+    - media.type.private_document

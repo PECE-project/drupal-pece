@@ -1,15 +1,3 @@
-uuid: d64714bc-462e-4c53-af0c-91a3c9f06280
-langcode: en
-status: true
-dependencies:
-  config:
-    - views.view.search
-  module:
-    - block_class
-    - configurable_views_filter_block
-    - system
-  theme:
-    - peceful
 id: search_page_facets
 theme: peceful
 region: sidebar_second
@@ -39,3 +27,15 @@ visibility:
     id: request_path
     negate: false
     pages: /search
+uuid: d64714bc-462e-4c53-af0c-91a3c9f06280
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.search
+  module:
+    - block_class
+    - configurable_views_filter_block
+    - system
+  theme:
+    - peceful

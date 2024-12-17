@@ -1,20 +1,8 @@
-uuid: 93386637-c393-4c36-8368-44b09f6b0b18
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.user.user.field_groups_joined
-    - field.field.user.user.field_groups_managed
-    - field.field.user.user.field_zotero
-  module:
-    - path
-    - user
-_core:
-  default_config_hash: O3NK4ldVkwevh3lPrgFpQEa_Vl1zvQpZYzFlLEW1sEw
 id: user.user.default
 targetEntityType: user
 bundle: user
 mode: default
+status: true
 content:
   account:
     weight: 0
@@ -60,3 +48,15 @@ hidden:
   field_groups_managed: true
   langcode: true
   pece_profile_main_profiles: true
+uuid: 93386637-c393-4c36-8368-44b09f6b0b18
+langcode: en
+dependencies:
+  config:
+    - field.field.user.user.field_groups_joined
+    - field.field.user.user.field_groups_managed
+    - field.field.user.user.field_zotero
+  module:
+    - path
+    - user
+_core:
+  default_config_hash: O3NK4ldVkwevh3lPrgFpQEa_Vl1zvQpZYzFlLEW1sEw

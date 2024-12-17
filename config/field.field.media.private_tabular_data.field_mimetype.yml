@@ -1,15 +1,8 @@
-uuid: 9d7ffb02-a46e-4c6c-a72c-6b06efa876af
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_mimetype
-    - media.type.private_tabular_data
 id: media.private_tabular_data.field_mimetype
+label: Mimetype
 field_name: field_mimetype
 entity_type: media
 bundle: private_tabular_data
-label: Mimetype
 description: ''
 required: false
 translatable: false
@@ -17,3 +10,10 @@ default_value: {  }
 default_value_callback: ''
 settings: {  }
 field_type: string
+uuid: 9d7ffb02-a46e-4c6c-a72c-6b06efa876af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_mimetype
+    - media.type.private_tabular_data

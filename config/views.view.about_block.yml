@@ -1,13 +1,3 @@
-uuid: 7dae3742-e446-41b9-8363-d1ab362fd626
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.teaser
-    - node.type.page
-  module:
-    - node
-    - user
 id: about_block
 label: 'About block'
 module: views
@@ -218,3 +208,13 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+uuid: 7dae3742-e446-41b9-8363-d1ab362fd626
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - node.type.page
+  module:
+    - node
+    - user

@@ -1,15 +1,8 @@
-uuid: 1c3bafd8-eb87-4cc1-8b1f-31fa6e8f8039
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_mimetype
-    - media.type.private_audio
 id: media.private_audio.field_mimetype
+label: Mimetype
 field_name: field_mimetype
 entity_type: media
 bundle: private_audio
-label: Mimetype
 description: ''
 required: false
 translatable: false
@@ -17,3 +10,10 @@ default_value: {  }
 default_value_callback: ''
 settings: {  }
 field_type: string
+uuid: 1c3bafd8-eb87-4cc1-8b1f-31fa6e8f8039
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_mimetype
+    - media.type.private_audio

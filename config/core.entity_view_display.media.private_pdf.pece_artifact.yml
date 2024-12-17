@@ -1,21 +1,3 @@
-uuid: 41dd90e9-c5ef-4741-8a6d-b4449ed2e72c
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.media.pece_artifact
-    - field.field.media.private_pdf.field_filesize
-    - field.field.media.private_pdf.field_mimetype
-    - field.field.media.private_pdf.field_private_media_document
-    - media.type.private_pdf
-  module:
-    - entity_form_field_label
-    - layout_builder
-    - pdf
-third_party_settings:
-  layout_builder:
-    enabled: false
-    allow_custom: false
 id: media.private_pdf.pece_artifact
 targetEntityType: media
 bundle: private_pdf
@@ -47,3 +29,21 @@ hidden:
   search_api_excerpt: true
   thumbnail: true
   uid: true
+uuid: 41dd90e9-c5ef-4741-8a6d-b4449ed2e72c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.pece_artifact
+    - field.field.media.private_pdf.field_filesize
+    - field.field.media.private_pdf.field_mimetype
+    - field.field.media.private_pdf.field_private_media_document
+    - media.type.private_pdf
+  module:
+    - entity_form_field_label
+    - layout_builder
+    - pdf
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false

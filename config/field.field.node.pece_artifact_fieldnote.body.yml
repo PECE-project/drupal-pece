@@ -1,17 +1,8 @@
-uuid: c1fd2ade-033e-409c-a2e2-bd416de89496
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.body
-    - node.type.pece_artifact_fieldnote
-  module:
-    - text
 id: node.pece_artifact_fieldnote.body
+label: Text
 field_name: body
 entity_type: node
 bundle: pece_artifact_fieldnote
-label: Text
 description: ''
 required: false
 translatable: true
@@ -22,3 +13,12 @@ settings:
   required_summary: false
   allowed_formats: {  }
 field_type: text_with_summary
+uuid: c1fd2ade-033e-409c-a2e2-bd416de89496
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.pece_artifact_fieldnote
+  module:
+    - text

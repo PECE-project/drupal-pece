@@ -1,17 +1,8 @@
-uuid: 7c11d705-d250-4007-a791-9143809e96c9
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_created_date
-    - node.type.pece_artifact_pdf
-  module:
-    - datetime
 id: node.pece_artifact_pdf.field_created_date
+label: 'Created Date'
 field_name: field_created_date
 entity_type: node
 bundle: pece_artifact_pdf
-label: 'Created Date'
 description: 'This field designates the date this artifact was originally created.'
 required: true
 translatable: false
@@ -22,3 +13,12 @@ default_value:
 default_value_callback: ''
 settings: {  }
 field_type: datetime
+uuid: 7c11d705-d250-4007-a791-9143809e96c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_created_date
+    - node.type.pece_artifact_pdf
+  module:
+    - datetime

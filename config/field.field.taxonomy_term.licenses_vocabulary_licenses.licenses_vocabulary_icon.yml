@@ -1,22 +1,8 @@
-uuid: 755e8d4b-fbba-4af2-91cf-293f507a5ea6
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.taxonomy_term.licenses_vocabulary_icon
-    - taxonomy.vocabulary.licenses_vocabulary_licenses
-  module:
-    - image
-  enforced:
-    module:
-      - licenses_vocabulary
-_core:
-  default_config_hash: ZLP82ZKGf3MN1yzcaG-XFjB4LEcDooIa59NJS_XuVlY
 id: taxonomy_term.licenses_vocabulary_licenses.licenses_vocabulary_icon
+label: 'License Icon'
 field_name: licenses_vocabulary_icon
 entity_type: taxonomy_term
 bundle: licenses_vocabulary_licenses
-label: 'License Icon'
 description: 'Icon used to identify license rights, standardized by <a href="https://www.creativecommons.org/">Creative Commons.</a>.'
 required: false
 translatable: false
@@ -41,3 +27,17 @@ settings:
     width: null
     height: null
 field_type: image
+uuid: 755e8d4b-fbba-4af2-91cf-293f507a5ea6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.licenses_vocabulary_icon
+    - taxonomy.vocabulary.licenses_vocabulary_licenses
+  module:
+    - image
+  enforced:
+    module:
+      - licenses_vocabulary
+_core:
+  default_config_hash: ZLP82ZKGf3MN1yzcaG-XFjB4LEcDooIa59NJS_XuVlY

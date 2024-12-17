@@ -1,16 +1,8 @@
-uuid: 90d07482-2b68-4ab7-b27b-1ceb557800fb
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.media.remote_video.field_media_oembed_video
-    - media.type.remote_video
-  module:
-    - path
 id: media.remote_video.default
 targetEntityType: media
 bundle: remote_video
 mode: default
+status: true
 content:
   created:
     type: datetime_timestamp
@@ -47,6 +39,19 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  revision_log_message:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 6
@@ -65,3 +70,11 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden: {  }
+uuid: 90d07482-2b68-4ab7-b27b-1ceb557800fb
+langcode: en
+dependencies:
+  config:
+    - field.field.media.remote_video.field_media_oembed_video
+    - media.type.remote_video
+  module:
+    - path

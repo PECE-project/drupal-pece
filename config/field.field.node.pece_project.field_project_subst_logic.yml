@@ -1,17 +1,8 @@
-uuid: 1bdc2248-d639-44a1-9295-e809d6597a95
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_project_subst_logic
-    - node.type.pece_project
-_core:
-  default_config_hash: GFAGWygMCcqSZrcIDKGADEJ7IEZXEvL3oyo7q8MaYbw
 id: node.pece_project.field_project_subst_logic
+label: 'Substantive Logic'
 field_name: field_project_subst_logic
 entity_type: node
 bundle: pece_project
-label: 'Substantive Logic'
 description: 'This field indicates the substantive logics associated with this project.'
 required: false
 translatable: true
@@ -28,3 +19,12 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 1bdc2248-d639-44a1-9295-e809d6597a95
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_subst_logic
+    - node.type.pece_project
+_core:
+  default_config_hash: GFAGWygMCcqSZrcIDKGADEJ7IEZXEvL3oyo7q8MaYbw

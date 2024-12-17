@@ -1,3 +1,41 @@
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  field_groups_joined:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_groups_managed:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_zotero:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  member_for:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden:
+  langcode: true
+  pece_profile_main_profiles: true
+  search_api_excerpt: true
 uuid: 7b316203-aeeb-4c78-bffd-5cc3ea844bdd
 langcode: en
 status: true
@@ -20,8 +58,8 @@ third_party_settings:
         layout_id: layout_twocol_section
         layout_settings:
           label: ''
-          context_mapping: {  }
           column_widths: 75-25
+          context_mapping: {  }
         components:
           3d5847f9-5d3d-4c00-8586-cdd94a53c563:
             uuid: 3d5847f9-5d3d-4c00-8586-cdd94a53c563
@@ -88,41 +126,3 @@ third_party_settings:
     enable: false
 _core:
   default_config_hash: k_VxXHR09rj1jQWuUXOof935-JMdDGejLaRdVYaGzXg
-id: user.user.default
-targetEntityType: user
-bundle: user
-mode: default
-content:
-  field_groups_joined:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 9
-    region: content
-  field_groups_managed:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 10
-    region: content
-  field_zotero:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 6
-    region: content
-  member_for:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 5
-    region: content
-hidden:
-  langcode: true
-  pece_profile_main_profiles: true
-  search_api_excerpt: true

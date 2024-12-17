@@ -1,17 +1,8 @@
-uuid: 97f8ebaf-24dd-43ff-8092-98e000078004
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_filesize
-    - media.type.private_pdf
-  module:
-    - bigint
 id: media.private_pdf.field_filesize
+label: Filesize
 field_name: field_filesize
 entity_type: media
 bundle: private_pdf
-label: Filesize
 description: ''
 required: false
 translatable: false
@@ -23,3 +14,12 @@ settings:
   prefix: ''
   suffix: ''
 field_type: bigint
+uuid: 97f8ebaf-24dd-43ff-8092-98e000078004
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_filesize
+    - media.type.private_pdf
+  module:
+    - bigint

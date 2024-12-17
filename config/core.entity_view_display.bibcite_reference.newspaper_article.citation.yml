@@ -1,16 +1,3 @@
-uuid: f6d5f6b9-4b1d-4b59-a7a9-959099a0b9fd
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.newspaper_article
-    - core.entity_view_mode.bibcite_reference.citation
-  enforced:
-    config:
-      - core.entity_view_mode.bibcite_reference.citation
-      - bibcite_entity.bibcite_reference_type.newspaper_article
-    module:
-      - bibcite_entity
 id: bibcite_reference.newspaper_article.citation
 targetEntityType: bibcite_reference
 bundle: newspaper_article
@@ -84,3 +71,16 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: f6d5f6b9-4b1d-4b59-a7a9-959099a0b9fd
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.newspaper_article
+    - core.entity_view_mode.bibcite_reference.citation
+  enforced:
+    config:
+      - core.entity_view_mode.bibcite_reference.citation
+      - bibcite_entity.bibcite_reference_type.newspaper_article
+    module:
+      - bibcite_entity

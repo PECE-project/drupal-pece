@@ -1,20 +1,3 @@
-uuid: eca61b8e-9f6c-40b7-8a53-fc8b76199310
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.media.preview
-    - field.field.media.pdf_document.field_media_file
-    - media.type.pdf_document
-  module:
-    - file
-    - layout_builder
-third_party_settings:
-  layout_builder:
-    enabled: false
-    allow_custom: false
-_core:
-  default_config_hash: 9k0GYeCA0S3U23kPkccQftrVe5Wk7UUcM02L3-lN1lY
 id: media.pdf_document.preview
 targetEntityType: media
 bundle: pdf_document
@@ -35,3 +18,20 @@ hidden:
   search_api_excerpt: true
   thumbnail: true
   uid: true
+uuid: eca61b8e-9f6c-40b7-8a53-fc8b76199310
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.preview
+    - field.field.media.pdf_document.field_media_file
+    - media.type.pdf_document
+  module:
+    - file
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: 9k0GYeCA0S3U23kPkccQftrVe5Wk7UUcM02L3-lN1lY

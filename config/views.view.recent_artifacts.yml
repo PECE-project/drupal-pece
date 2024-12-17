@@ -1,20 +1,3 @@
-uuid: 25ead0b5-b868-4371-8a0b-794a1b00b8e0
-langcode: en
-status: true
-dependencies:
-  config:
-    - node.type.artifact_tabular_data
-    - node.type.artifact_video
-    - node.type.pece_artifact_audio
-    - node.type.pece_artifact_bundle
-    - node.type.pece_artifact_fieldnote
-    - node.type.pece_artifact_image
-    - node.type.pece_artifact_pdf
-    - node.type.pece_artifact_text
-    - node.type.pece_artifact_website
-  module:
-    - node
-    - user
 id: recent_artifacts
 label: 'Recent Artifacts'
 module: node
@@ -381,3 +364,20 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+uuid: 25ead0b5-b868-4371-8a0b-794a1b00b8e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.artifact_tabular_data
+    - node.type.artifact_video
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_fieldnote
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
+  module:
+    - node
+    - user

@@ -1,13 +1,3 @@
-uuid: 75b19553-47fd-4a14-a63a-1c854e27beea
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.teaser
-    - node.type.pece_substantive_logic
-  module:
-    - node
-    - user
 id: pece_substantive_logics
 label: 'PECE Substantive Logics'
 module: views
@@ -194,3 +184,13 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+uuid: 75b19553-47fd-4a14-a63a-1c854e27beea
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - node.type.pece_substantive_logic
+  module:
+    - node
+    - user

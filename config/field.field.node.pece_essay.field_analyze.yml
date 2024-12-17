@@ -1,18 +1,8 @@
-uuid: fa85353d-9cb5-457a-998b-06de40778cfa
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_analyze
-    - node.type.pece_analytic
-    - node.type.pece_annotation
-    - node.type.pece_essay
-    - node.type.pece_memo
 id: node.pece_essay.field_analyze
+label: Analyze
 field_name: field_analyze
 entity_type: node
 bundle: pece_essay
-label: Analyze
 description: 'Choose the Analytic (Question), Annotation, or Memo to include in this essay by typing part of the title for each and pressing enter to select the one you want.'
 required: false
 translatable: false
@@ -31,3 +21,13 @@ settings:
     auto_create: false
     auto_create_bundle: pece_analytic
 field_type: entity_reference
+uuid: fa85353d-9cb5-457a-998b-06de40778cfa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_analyze
+    - node.type.pece_analytic
+    - node.type.pece_annotation
+    - node.type.pece_essay
+    - node.type.pece_memo

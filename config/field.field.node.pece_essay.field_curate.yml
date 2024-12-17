@@ -1,17 +1,8 @@
-uuid: 945252cb-d6b9-4994-81b0-463433d8364f
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_curate
-    - node.type.pece_essay
-    - node.type.pece_photo_essay
-    - node.type.pece_timeline_essay
 id: node.pece_essay.field_curate
+label: Curate
 field_name: field_curate
 entity_type: node
 bundle: pece_essay
-label: Curate
 description: 'Choose the Photo Essay, Timeline Essay, or other PECE Essay to include in this essay by typing part of the title for each and pressing enter to select the one you want.'
 required: false
 translatable: false
@@ -30,3 +21,12 @@ settings:
     auto_create: false
     auto_create_bundle: pece_essay
 field_type: entity_reference
+uuid: 945252cb-d6b9-4994-81b0-463433d8364f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_curate
+    - node.type.pece_essay
+    - node.type.pece_photo_essay
+    - node.type.pece_timeline_essay

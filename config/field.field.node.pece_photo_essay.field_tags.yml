@@ -1,18 +1,8 @@
-uuid: 9d444b93-6748-4c7b-a736-259e9b76f182
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_tags
-    - node.type.pece_photo_essay
-    - taxonomy.vocabulary.tags
-_core:
-  default_config_hash: pBJdtsa2RCgYOIbGcSwZGWxODhIe8Ghf7m2yQh1SiVE
 id: node.pece_photo_essay.field_tags
+label: Tags
 field_name: field_tags
 entity_type: node
 bundle: pece_photo_essay
-label: Tags
 description: 'This field designates tags for the content. Tagging content with keywords enables you to curate content with common tags.'
 required: false
 translatable: false
@@ -29,3 +19,13 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 9d444b93-6748-4c7b-a736-259e9b76f182
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags
+    - node.type.pece_photo_essay
+    - taxonomy.vocabulary.tags
+_core:
+  default_config_hash: pBJdtsa2RCgYOIbGcSwZGWxODhIe8Ghf7m2yQh1SiVE

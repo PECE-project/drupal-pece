@@ -1,16 +1,3 @@
-uuid: cffa71cc-f1e3-4798-b442-93f1399a48fd
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.software
-    - core.entity_view_mode.bibcite_reference.citation
-  enforced:
-    config:
-      - core.entity_view_mode.bibcite_reference.citation
-      - bibcite_entity.bibcite_reference_type.software
-    module:
-      - bibcite_entity
 id: bibcite_reference.software.citation
 targetEntityType: bibcite_reference
 bundle: software
@@ -84,3 +71,16 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: cffa71cc-f1e3-4798-b442-93f1399a48fd
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.software
+    - core.entity_view_mode.bibcite_reference.citation
+  enforced:
+    config:
+      - core.entity_view_mode.bibcite_reference.citation
+      - bibcite_entity.bibcite_reference_type.software
+    module:
+      - bibcite_entity

@@ -1,17 +1,8 @@
-uuid: 23ca1abe-0af0-404d-834a-8a9391ce772f
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_ark_enabled
-    - node.type.pece_artifact_audio
-_core:
-  default_config_hash: IaQI2fxUE3zIR58vbGlwkIPyIes9BoINpiNR70Z5FWE
 id: node.pece_artifact_audio.field_ark_enabled
+label: 'ARK Enabled'
 field_name: field_ark_enabled
 entity_type: node
 bundle: pece_artifact_audio
-label: 'ARK Enabled'
 description: 'ARKs (Archival Resource Keys) serve as persistent identifiers, or stable, trusted references for an information object. They are like DOIs but are open, decentralized, and non-paywalled; you can assign an ARK to almost any content you create, but they should be used thoughtfully for content whose long-term accessibility is vital.'
 required: false
 translatable: true
@@ -23,3 +14,12 @@ settings:
   on_label: 'On'
   off_label: 'Off'
 field_type: boolean
+uuid: 23ca1abe-0af0-404d-834a-8a9391ce772f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ark_enabled
+    - node.type.pece_artifact_audio
+_core:
+  default_config_hash: IaQI2fxUE3zIR58vbGlwkIPyIes9BoINpiNR70Z5FWE

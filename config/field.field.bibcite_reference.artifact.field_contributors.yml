@@ -1,15 +1,8 @@
-uuid: ad8fbc8c-d971-4281-a651-8c9478a38626
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.artifact
-    - field.storage.bibcite_reference.field_contributors
 id: bibcite_reference.artifact.field_contributors
+label: Contributor(s)
 field_name: field_contributors
 entity_type: bibcite_reference
 bundle: artifact
-label: Contributor(s)
 description: ''
 required: false
 translatable: false
@@ -27,3 +20,10 @@ settings:
       type: _none
     include_anonymous: true
 field_type: entity_reference
+uuid: ad8fbc8c-d971-4281-a651-8c9478a38626
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.artifact
+    - field.storage.bibcite_reference.field_contributors

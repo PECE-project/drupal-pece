@@ -1,24 +1,3 @@
-uuid: 6c97fb72-a525-419a-97cc-4199aac720de
-langcode: en
-status: true
-dependencies:
-  config:
-    - node.type.artifact_tabular_data
-    - node.type.artifact_video
-    - node.type.pece_artifact_audio
-    - node.type.pece_artifact_bundle
-    - node.type.pece_artifact_fieldnote
-    - node.type.pece_artifact_image
-    - node.type.pece_artifact_pdf
-    - node.type.pece_artifact_text
-    - node.type.pece_artifact_website
-  module:
-    - node
-    - rest
-    - serialization
-    - user
-_core:
-  default_config_hash: O7X2LtzVvEf2qBGQrSpD1xbuG9BbdajRoKAO6zRBydM
 id: pece_artifacts
 label: 'PECE Artifacts'
 module: views
@@ -296,3 +275,24 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+uuid: 6c97fb72-a525-419a-97cc-4199aac720de
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.artifact_tabular_data
+    - node.type.artifact_video
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_fieldnote
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
+  module:
+    - node
+    - rest
+    - serialization
+    - user
+_core:
+  default_config_hash: O7X2LtzVvEf2qBGQrSpD1xbuG9BbdajRoKAO6zRBydM

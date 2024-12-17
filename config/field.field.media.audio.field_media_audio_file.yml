@@ -1,19 +1,8 @@
-uuid: 646cb93b-6a29-4146-bc21-a7d6244fbe02
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_media_audio_file
-    - media.type.audio
-  module:
-    - file
-_core:
-  default_config_hash: UlZPIbHcLyNqGY5bvydCTijGcKDmwn4Fo8oYZT85wlk
 id: media.audio.field_media_audio_file
+label: 'Audio file'
 field_name: field_media_audio_file
 entity_type: media
 bundle: audio
-label: 'Audio file'
 description: ''
 required: true
 translatable: true
@@ -27,3 +16,14 @@ settings:
   max_filesize: ''
   description_field: false
 field_type: file
+uuid: 646cb93b-6a29-4146-bc21-a7d6244fbe02
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_audio_file
+    - media.type.audio
+  module:
+    - file
+_core:
+  default_config_hash: UlZPIbHcLyNqGY5bvydCTijGcKDmwn4Fo8oYZT85wlk

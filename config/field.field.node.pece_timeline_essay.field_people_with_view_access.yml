@@ -1,15 +1,8 @@
-uuid: 5bc0c7dc-060a-4d40-ad35-9bd57721853e
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_people_with_view_access
-    - node.type.pece_timeline_essay
 id: node.pece_timeline_essay.field_people_with_view_access
+label: 'People with view access'
 field_name: field_people_with_view_access
 entity_type: node
 bundle: pece_timeline_essay
-label: 'People with view access'
 description: 'This field designates which platform users can view this content. '
 required: false
 translatable: false
@@ -27,3 +20,10 @@ settings:
       type: _none
     include_anonymous: false
 field_type: entity_reference
+uuid: 5bc0c7dc-060a-4d40-ad35-9bd57721853e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_people_with_view_access
+    - node.type.pece_timeline_essay

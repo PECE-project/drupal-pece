@@ -1,17 +1,8 @@
-uuid: f9981a85-f39f-4abf-af01-f66db10528c1
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_filesize
-    - media.type.private_tabular_data
-  module:
-    - bigint
 id: media.private_tabular_data.field_filesize
+label: Filesize
 field_name: field_filesize
 entity_type: media
 bundle: private_tabular_data
-label: Filesize
 description: ''
 required: false
 translatable: false
@@ -23,3 +14,12 @@ settings:
   prefix: ''
   suffix: ''
 field_type: bigint
+uuid: f9981a85-f39f-4abf-af01-f66db10528c1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_filesize
+    - media.type.private_tabular_data
+  module:
+    - bigint

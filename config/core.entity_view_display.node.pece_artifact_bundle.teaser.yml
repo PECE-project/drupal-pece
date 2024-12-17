@@ -1,29 +1,3 @@
-uuid: 1cc1fcc7-1ddf-4402-ade9-81b5d334721c
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.teaser
-    - field.field.node.pece_artifact_bundle.field_ark_enabled
-    - field.field.node.pece_artifact_bundle.field_authors
-    - field.field.node.pece_artifact_bundle.field_cite_as
-    - field.field.node.pece_artifact_bundle.field_created_date
-    - field.field.node.pece_artifact_bundle.field_crit_commentary
-    - field.field.node.pece_artifact_bundle.field_fieldsite
-    - field.field.node.pece_artifact_bundle.field_groups_with_view_access
-    - field.field.node.pece_artifact_bundle.field_location
-    - field.field.node.pece_artifact_bundle.field_pece_all_can_view
-    - field.field.node.pece_artifact_bundle.field_pece_artifacts
-    - field.field.node.pece_artifact_bundle.field_pece_geolocation
-    - field.field.node.pece_artifact_bundle.field_pece_license
-    - field.field.node.pece_artifact_bundle.field_pece_project_ref
-    - field.field.node.pece_artifact_bundle.field_people_with_edit_access
-    - field.field.node.pece_artifact_bundle.field_people_with_view_access
-    - field.field.node.pece_artifact_bundle.field_tags
-    - field.field.node.pece_artifact_bundle.field_use_fieldsite_local
-    - node.type.pece_artifact_bundle
-  module:
-    - user
 id: node.pece_artifact_bundle.teaser
 targetEntityType: node
 bundle: pece_artifact_bundle
@@ -59,3 +33,29 @@ hidden:
   links: true
   og_audience: true
   search_api_excerpt: true
+uuid: 1cc1fcc7-1ddf-4402-ade9-81b5d334721c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pece_artifact_bundle.field_ark_enabled
+    - field.field.node.pece_artifact_bundle.field_authors
+    - field.field.node.pece_artifact_bundle.field_cite_as
+    - field.field.node.pece_artifact_bundle.field_created_date
+    - field.field.node.pece_artifact_bundle.field_crit_commentary
+    - field.field.node.pece_artifact_bundle.field_fieldsite
+    - field.field.node.pece_artifact_bundle.field_groups_with_view_access
+    - field.field.node.pece_artifact_bundle.field_location
+    - field.field.node.pece_artifact_bundle.field_pece_all_can_view
+    - field.field.node.pece_artifact_bundle.field_pece_artifacts
+    - field.field.node.pece_artifact_bundle.field_pece_geolocation
+    - field.field.node.pece_artifact_bundle.field_pece_license
+    - field.field.node.pece_artifact_bundle.field_pece_project_ref
+    - field.field.node.pece_artifact_bundle.field_people_with_edit_access
+    - field.field.node.pece_artifact_bundle.field_people_with_view_access
+    - field.field.node.pece_artifact_bundle.field_tags
+    - field.field.node.pece_artifact_bundle.field_use_fieldsite_local
+    - node.type.pece_artifact_bundle
+  module:
+    - user

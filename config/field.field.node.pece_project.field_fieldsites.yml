@@ -1,16 +1,8 @@
-uuid: 78651fef-65e8-4554-9cee-b38e047f6b17
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_fieldsites
-    - node.type.pece_fieldsite
-    - node.type.pece_project
 id: node.pece_project.field_fieldsites
+label: Fieldsites
 field_name: field_fieldsites
 entity_type: node
 bundle: pece_project
-label: Fieldsites
 description: 'This field indicates which fieldsites are associated with this project.'
 required: false
 translatable: false
@@ -27,3 +19,11 @@ settings:
     auto_create: false
     auto_create_bundle: pece_fieldsite
 field_type: entity_reference
+uuid: 78651fef-65e8-4554-9cee-b38e047f6b17
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fieldsites
+    - node.type.pece_fieldsite
+    - node.type.pece_project

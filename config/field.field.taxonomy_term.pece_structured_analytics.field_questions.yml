@@ -1,16 +1,8 @@
-uuid: f48d84e3-a3b6-4be8-a1dc-4b10d05ff060
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.taxonomy_term.field_questions
-    - node.type.pece_analytic
-    - taxonomy.vocabulary.pece_structured_analytics
 id: taxonomy_term.pece_structured_analytics.field_questions
+label: Questions
 field_name: field_questions
 entity_type: taxonomy_term
 bundle: pece_structured_analytics
-label: Questions
 description: ''
 required: false
 translatable: false
@@ -27,3 +19,11 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: f48d84e3-a3b6-4be8-a1dc-4b10d05ff060
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_questions
+    - node.type.pece_analytic
+    - taxonomy.vocabulary.pece_structured_analytics

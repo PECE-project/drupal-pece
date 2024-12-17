@@ -1,18 +1,8 @@
-uuid: 96f9985e-9dbd-4c3a-b709-80834f8574ec
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.media.inline_image.field_private_media_image
-    - image.style.thumbnail
-    - media.type.inline_image
-  module:
-    - image
-    - path
 id: media.inline_image.default
 targetEntityType: media
 bundle: inline_image
 mode: default
+status: true
 content:
   created:
     type: datetime_timestamp
@@ -49,6 +39,19 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  revision_log_message:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 100
@@ -67,3 +70,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden: {  }
+uuid: 96f9985e-9dbd-4c3a-b709-80834f8574ec
+langcode: en
+dependencies:
+  config:
+    - field.field.media.inline_image.field_private_media_image
+    - image.style.thumbnail
+    - media.type.inline_image
+  module:
+    - image
+    - path

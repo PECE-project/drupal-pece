@@ -1,18 +1,8 @@
-uuid: 29d4d8be-15b1-4554-9776-bb5e0aaeae1f
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_fieldsite_project
-    - node.type.pece_fieldsite
-    - node.type.pece_project
-_core:
-  default_config_hash: Kum0HH1Scc0v3f0Y8ebzjAZu5NZrv3_jrAdw5sapPC8
 id: node.pece_fieldsite.field_fieldsite_project
+label: Project
 field_name: field_fieldsite_project
 entity_type: node
 bundle: pece_fieldsite
-label: Project
 description: 'This field indicates which projects are associated with this fieldsite.'
 required: false
 translatable: false
@@ -29,3 +19,13 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 29d4d8be-15b1-4554-9776-bb5e0aaeae1f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fieldsite_project
+    - node.type.pece_fieldsite
+    - node.type.pece_project
+_core:
+  default_config_hash: Kum0HH1Scc0v3f0Y8ebzjAZu5NZrv3_jrAdw5sapPC8

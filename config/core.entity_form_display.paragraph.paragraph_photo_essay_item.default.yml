@@ -1,19 +1,8 @@
-uuid: 0ea6ffee-f6b6-4eeb-b1fd-f164c3d04394
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.paragraph.paragraph_photo_essay_item.field_pece_description
-    - field.field.paragraph.paragraph_photo_essay_item.field_pece_image_artifact
-    - paragraphs.paragraphs_type.paragraph_photo_essay_item
-  module:
-    - text
-_core:
-  default_config_hash: 9lbE9inO4tm73LfXsfcXYfESA7zShtBUK0RAuhSSGLo
 id: paragraph.paragraph_photo_essay_item.default
 targetEntityType: paragraph
 bundle: paragraph_photo_essay_item
 mode: default
+status: true
 content:
   field_pece_description:
     type: text_textarea
@@ -36,3 +25,14 @@ content:
 hidden:
   created: true
   status: true
+uuid: 0ea6ffee-f6b6-4eeb-b1fd-f164c3d04394
+langcode: en
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_photo_essay_item.field_pece_description
+    - field.field.paragraph.paragraph_photo_essay_item.field_pece_image_artifact
+    - paragraphs.paragraphs_type.paragraph_photo_essay_item
+  module:
+    - text
+_core:
+  default_config_hash: 9lbE9inO4tm73LfXsfcXYfESA7zShtBUK0RAuhSSGLo

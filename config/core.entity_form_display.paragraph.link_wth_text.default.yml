@@ -1,16 +1,8 @@
-uuid: ede05066-f7b6-417b-9f66-400960a7f00b
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.paragraph.link_wth_text.field_url
-    - paragraphs.paragraphs_type.link_wth_text
-  module:
-    - link
 id: paragraph.link_wth_text.default
 targetEntityType: paragraph
 bundle: link_wth_text
 mode: default
+status: true
 content:
   field_url:
     type: link_default
@@ -23,3 +15,11 @@ content:
 hidden:
   created: true
   status: true
+uuid: ede05066-f7b6-417b-9f66-400960a7f00b
+langcode: en
+dependencies:
+  config:
+    - field.field.paragraph.link_wth_text.field_url
+    - paragraphs.paragraphs_type.link_wth_text
+  module:
+    - link

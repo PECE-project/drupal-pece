@@ -1,24 +1,3 @@
-uuid: 3841623e-f0c5-4ca3-8d2b-b43a2f9fbdd8
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.taxonomy_term.search_result
-    - field.field.taxonomy_term.groups.field_group_managers
-    - field.field.taxonomy_term.groups.field_group_members
-    - field.field.taxonomy_term.groups.field_group_visibility
-    - field.field.taxonomy_term.groups.field_image
-    - field.field.taxonomy_term.groups.field_pece_project_ref
-    - field.field.taxonomy_term.groups.field_substantive_logic
-    - field.field.taxonomy_term.groups.field_tags
-    - taxonomy.vocabulary.groups
-  module:
-    - layout_builder
-    - text
-third_party_settings:
-  layout_builder:
-    enabled: false
-    allow_custom: false
 id: taxonomy_term.groups.search_result
 targetEntityType: taxonomy_term
 bundle: groups
@@ -42,3 +21,24 @@ hidden:
   field_tags: true
   langcode: true
   search_api_excerpt: true
+uuid: 3841623e-f0c5-4ca3-8d2b-b43a2f9fbdd8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.search_result
+    - field.field.taxonomy_term.groups.field_group_managers
+    - field.field.taxonomy_term.groups.field_group_members
+    - field.field.taxonomy_term.groups.field_group_visibility
+    - field.field.taxonomy_term.groups.field_image
+    - field.field.taxonomy_term.groups.field_pece_project_ref
+    - field.field.taxonomy_term.groups.field_substantive_logic
+    - field.field.taxonomy_term.groups.field_tags
+    - taxonomy.vocabulary.groups
+  module:
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false

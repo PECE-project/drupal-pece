@@ -1,23 +1,8 @@
-uuid: 647c0f33-4168-4581-b011-7a840b716218
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_analytic_question_set
-    - node.type.pece_analytic
-    - taxonomy.vocabulary.pece_structured_analytics
-  module:
-    - epp
-third_party_settings:
-  epp:
-    value: '[current-page:query:analytic_question_set]'
-_core:
-  default_config_hash: p7IvvYA1DwHzQzI9bOtOgG4jgUEY9WHgAzZ2nPJzXuI
 id: node.pece_analytic.field_analytic_question_set
+label: 'Question Set'
 field_name: field_analytic_question_set
 entity_type: node
 bundle: pece_analytic
-label: 'Question Set'
 description: ''
 required: false
 translatable: false
@@ -34,3 +19,18 @@ settings:
     auto_create: true
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 647c0f33-4168-4581-b011-7a840b716218
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_analytic_question_set
+    - node.type.pece_analytic
+    - taxonomy.vocabulary.pece_structured_analytics
+  module:
+    - epp
+third_party_settings:
+  epp:
+    value: '[current-page:query:analytic_question_set]'
+_core:
+  default_config_hash: p7IvvYA1DwHzQzI9bOtOgG4jgUEY9WHgAzZ2nPJzXuI

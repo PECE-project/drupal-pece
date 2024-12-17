@@ -1,15 +1,3 @@
-uuid: 23527908-250a-462e-8037-bbfdf5476b44
-langcode: en
-status: true
-dependencies:
-  module:
-    - node
-    - user
-  enforced:
-    module:
-      - content_moderation
-_core:
-  default_config_hash: 7olvKOaJNf15B-Bj4eD1wJyaz4BR7CNA9cEjWBssa2Y
 id: moderated_content
 label: 'Moderated content'
 module: views
@@ -841,3 +829,15 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+uuid: 23527908-250a-462e-8037-bbfdf5476b44
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - user
+  enforced:
+    module:
+      - content_moderation
+_core:
+  default_config_hash: 7olvKOaJNf15B-Bj4eD1wJyaz4BR7CNA9cEjWBssa2Y

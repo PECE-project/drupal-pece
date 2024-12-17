@@ -1,17 +1,8 @@
-uuid: dd093b36-799b-4712-95b1-dbc7420b3de0
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.artifact
-    - field.storage.bibcite_reference.field_ark
-  module:
-    - link
 id: bibcite_reference.artifact.field_ark
+label: ark
 field_name: field_ark
 entity_type: bibcite_reference
 bundle: artifact
-label: ark
 description: ''
 required: false
 translatable: false
@@ -21,3 +12,12 @@ settings:
   title: 1
   link_type: 17
 field_type: link
+uuid: dd093b36-799b-4712-95b1-dbc7420b3de0
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.artifact
+    - field.storage.bibcite_reference.field_ark
+  module:
+    - link

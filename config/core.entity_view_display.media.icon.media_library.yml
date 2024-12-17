@@ -1,14 +1,3 @@
-uuid: cdd5e874-7228-4393-9a6c-280414b6b38d
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.media.media_library
-    - field.field.media.icon.field_media_image_1
-    - image.style.medium
-    - media.type.icon
-  module:
-    - image
 id: media.icon.media_library
 targetEntityType: media
 bundle: icon
@@ -32,3 +21,14 @@ hidden:
   name: true
   search_api_excerpt: true
   uid: true
+uuid: cdd5e874-7228-4393-9a6c-280414b6b38d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.icon.field_media_image_1
+    - image.style.medium
+    - media.type.icon
+  module:
+    - image

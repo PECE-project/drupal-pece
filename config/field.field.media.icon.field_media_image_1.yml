@@ -1,17 +1,8 @@
-uuid: 9d63dcd6-f6e6-42d8-b04f-1d733ac13629
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_media_image_1
-    - media.type.icon
-  module:
-    - image
 id: media.icon.field_media_image_1
+label: Icon
 field_name: field_media_image_1
 entity_type: media
 bundle: icon
-label: Icon
 description: ''
 required: true
 translatable: true
@@ -36,3 +27,12 @@ settings:
     width: null
     height: null
 field_type: image
+uuid: 9d63dcd6-f6e6-42d8-b04f-1d733ac13629
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_image_1
+    - media.type.icon
+  module:
+    - image

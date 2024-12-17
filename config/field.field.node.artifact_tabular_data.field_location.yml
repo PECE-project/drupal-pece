@@ -1,19 +1,8 @@
-uuid: b1caa136-43dc-4a32-980d-3c96c299cbee
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_location
-    - node.type.artifact_tabular_data
-  module:
-    - address
-_core:
-  default_config_hash: 6krYwsAl5x7QfslE9P8xK-G122XOzjdi-8Mv1XzI_lk
 id: node.artifact_tabular_data.field_location
+label: Location
 field_name: field_location
 entity_type: node
 bundle: artifact_tabular_data
-label: Location
 description: 'This field designates the original location where the artifact was created.'
 required: false
 translatable: false
@@ -41,3 +30,14 @@ settings:
       override: hidden
   fields: {  }
 field_type: address
+uuid: b1caa136-43dc-4a32-980d-3c96c299cbee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_location
+    - node.type.artifact_tabular_data
+  module:
+    - address
+_core:
+  default_config_hash: 6krYwsAl5x7QfslE9P8xK-G122XOzjdi-8Mv1XzI_lk

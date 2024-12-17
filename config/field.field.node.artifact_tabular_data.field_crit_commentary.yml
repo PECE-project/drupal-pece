@@ -1,3 +1,16 @@
+id: node.artifact_tabular_data.field_crit_commentary
+label: 'Critical Commentary'
+field_name: field_crit_commentary
+entity_type: node
+bundle: artifact_tabular_data
+description: 'This field designates how the contributor interprets the artifact and/or its significance and relevance to the project.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long
 uuid: 0b7f157e-dc28-4081-b60c-990f4ad72d34
 langcode: en
 status: true
@@ -9,16 +22,3 @@ dependencies:
     - text
 _core:
   default_config_hash: idxSUVJQKAXLVqqloa3H6N2PuDuRZpDlVrgPZBlpMQA
-id: node.artifact_tabular_data.field_crit_commentary
-field_name: field_crit_commentary
-entity_type: node
-bundle: artifact_tabular_data
-label: 'Critical Commentary'
-description: 'This field designates how the contributor interprets the artifact and/or its significance and relevance to the project.'
-required: true
-translatable: false
-default_value: {  }
-default_value_callback: ''
-settings:
-  allowed_formats: {  }
-field_type: text_long

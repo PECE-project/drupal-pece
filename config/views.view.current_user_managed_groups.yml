@@ -1,13 +1,3 @@
-uuid: 5751f77e-9291-43fe-b021-3cd50e0ba620
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.taxonomy_term.search_result
-    - taxonomy.vocabulary.groups
-  module:
-    - taxonomy
-    - user
 id: current_user_managed_groups
 label: 'Groups I manage'
 module: views
@@ -312,3 +302,13 @@ display:
         - user
         - user.permissions
       tags: {  }
+uuid: 5751f77e-9291-43fe-b021-3cd50e0ba620
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.search_result
+    - taxonomy.vocabulary.groups
+  module:
+    - taxonomy
+    - user

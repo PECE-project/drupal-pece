@@ -1,21 +1,8 @@
-uuid: d6276ee7-06c9-40c3-830d-fdc2f9ab507e
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_form_mode.media.media_library
-    - field.field.media.image_with_caption_and_link.field_caption
-    - field.field.media.image_with_caption_and_link.field_link
-    - field.field.media.image_with_caption_and_link.field_private_media_image
-    - image.style.thumbnail
-    - media.type.image_with_caption_and_link
-  module:
-    - image
-    - link
 id: media.image_with_caption_and_link.media_library
 targetEntityType: media
 bundle: image_with_caption_and_link
 mode: media_library
+status: true
 content:
   field_link:
     type: link_default
@@ -41,6 +28,19 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  revision_log_message:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
 hidden:
   created: true
   field_caption: true
@@ -48,3 +48,16 @@ hidden:
   path: true
   status: true
   uid: true
+uuid: d6276ee7-06c9-40c3-830d-fdc2f9ab507e
+langcode: en
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.image_with_caption_and_link.field_caption
+    - field.field.media.image_with_caption_and_link.field_link
+    - field.field.media.image_with_caption_and_link.field_private_media_image
+    - image.style.thumbnail
+    - media.type.image_with_caption_and_link
+  module:
+    - image
+    - link

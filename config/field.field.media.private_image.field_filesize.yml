@@ -1,17 +1,8 @@
-uuid: d1b50f88-a208-43bb-8a89-24b457c9684f
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_filesize
-    - media.type.private_image
-  module:
-    - bigint
 id: media.private_image.field_filesize
+label: Filesize
 field_name: field_filesize
 entity_type: media
 bundle: private_image
-label: Filesize
 description: ''
 required: false
 translatable: false
@@ -23,3 +14,12 @@ settings:
   prefix: ''
   suffix: ''
 field_type: bigint
+uuid: d1b50f88-a208-43bb-8a89-24b457c9684f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_filesize
+    - media.type.private_image
+  module:
+    - bigint

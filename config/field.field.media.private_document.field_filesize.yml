@@ -1,17 +1,8 @@
-uuid: b7846efd-ceff-4115-a47b-327db373805b
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_filesize
-    - media.type.private_document
-  module:
-    - bigint
 id: media.private_document.field_filesize
+label: Filesize
 field_name: field_filesize
 entity_type: media
 bundle: private_document
-label: Filesize
 description: ''
 required: false
 translatable: false
@@ -23,3 +14,12 @@ settings:
   prefix: ''
   suffix: ''
 field_type: bigint
+uuid: b7846efd-ceff-4115-a47b-327db373805b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_filesize
+    - media.type.private_document
+  module:
+    - bigint

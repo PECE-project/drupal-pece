@@ -1,17 +1,8 @@
-uuid: 40a6b1ac-66b6-4f86-97f7-df96c7e959d9
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_project_lead
-    - node.type.pece_project
-_core:
-  default_config_hash: alYqmQslg6ACwPbLioUf_-5ldt7x6JTurHE_wjl8TNk
 id: node.pece_project.field_project_lead
+label: 'Project Lead(s)'
 field_name: field_project_lead
 entity_type: node
 bundle: pece_project
-label: 'Project Lead(s)'
 description: 'This field indicates the platform user(s) that are leading this project.'
 required: false
 translatable: false
@@ -29,3 +20,12 @@ settings:
       type: _none
     include_anonymous: true
 field_type: entity_reference
+uuid: 40a6b1ac-66b6-4f86-97f7-df96c7e959d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_lead
+    - node.type.pece_project
+_core:
+  default_config_hash: alYqmQslg6ACwPbLioUf_-5ldt7x6JTurHE_wjl8TNk

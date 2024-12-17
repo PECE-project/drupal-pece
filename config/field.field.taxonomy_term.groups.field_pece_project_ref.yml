@@ -1,16 +1,8 @@
-uuid: 5f9600a5-e651-45c8-8d51-9201139f3b5c
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.taxonomy_term.field_pece_project_ref
-    - node.type.pece_project
-    - taxonomy.vocabulary.groups
 id: taxonomy_term.groups.field_pece_project_ref
+label: 'Cite as part of...'
 field_name: field_pece_project_ref
 entity_type: taxonomy_term
 bundle: groups
-label: 'Cite as part of...'
 description: ''
 required: false
 translatable: false
@@ -27,3 +19,11 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 5f9600a5-e651-45c8-8d51-9201139f3b5c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_pece_project_ref
+    - node.type.pece_project
+    - taxonomy.vocabulary.groups

@@ -1,15 +1,8 @@
-uuid: d3aace59-9202-4b46-91c3-8381b577e513
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.artifact
-    - field.storage.bibcite_reference.field_title
 id: bibcite_reference.artifact.field_title
+label: Title
 field_name: field_title
 entity_type: bibcite_reference
 bundle: artifact
-label: Title
 description: ''
 required: false
 translatable: false
@@ -17,3 +10,10 @@ default_value: {  }
 default_value_callback: ''
 settings: {  }
 field_type: string
+uuid: d3aace59-9202-4b46-91c3-8381b577e513
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.artifact
+    - field.storage.bibcite_reference.field_title

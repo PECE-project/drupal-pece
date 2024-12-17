@@ -1,18 +1,8 @@
-uuid: 962cdb98-995d-469f-84cb-91ab5ea5132d
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_file_format
-    - node.type.pece_artifact_image
-    - taxonomy.vocabulary.format_audio
-    - taxonomy.vocabulary.format_image
-    - taxonomy.vocabulary.format_video
 id: node.pece_artifact_image.field_file_format
+label: 'File format'
 field_name: field_file_format
 entity_type: node
 bundle: pece_artifact_image
-label: 'File format'
 description: 'This field designates the file format of the file uploaded for this artifact.'
 required: false
 translatable: false
@@ -31,3 +21,13 @@ settings:
     auto_create: false
     auto_create_bundle: format_audio
 field_type: entity_reference
+uuid: 962cdb98-995d-469f-84cb-91ab5ea5132d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_file_format
+    - node.type.pece_artifact_image
+    - taxonomy.vocabulary.format_audio
+    - taxonomy.vocabulary.format_image
+    - taxonomy.vocabulary.format_video

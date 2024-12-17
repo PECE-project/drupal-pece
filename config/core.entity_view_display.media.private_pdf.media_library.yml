@@ -1,16 +1,3 @@
-uuid: d319eb61-01fb-4d74-85e6-15ae2488e76f
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.media.media_library
-    - field.field.media.private_pdf.field_filesize
-    - field.field.media.private_pdf.field_mimetype
-    - field.field.media.private_pdf.field_private_media_document
-    - image.style.medium
-    - media.type.private_pdf
-  module:
-    - image
 id: media.private_pdf.media_library
 targetEntityType: media
 bundle: private_pdf
@@ -36,3 +23,16 @@ hidden:
   name: true
   search_api_excerpt: true
   uid: true
+uuid: d319eb61-01fb-4d74-85e6-15ae2488e76f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.private_pdf.field_filesize
+    - field.field.media.private_pdf.field_mimetype
+    - field.field.media.private_pdf.field_private_media_document
+    - image.style.medium
+    - media.type.private_pdf
+  module:
+    - image

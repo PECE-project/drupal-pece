@@ -1,13 +1,3 @@
-uuid: b7a4f516-4997-4957-80cf-1f9fc46e76d2
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.teaser
-    - node.type.pece_design_logic
-  module:
-    - node
-    - user
 id: pece_design_logics
 label: 'PECE Design Logics'
 module: views
@@ -227,3 +217,13 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+uuid: b7a4f516-4997-4957-80cf-1f9fc46e76d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - node.type.pece_design_logic
+  module:
+    - node
+    - user

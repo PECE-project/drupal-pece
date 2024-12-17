@@ -1,19 +1,8 @@
-uuid: 52cbbb5d-a6cb-412e-a9b7-644be12b5b08
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_body_paragraph
-    - node.type.page
-    - paragraphs.paragraphs_type.image_with_link
-    - paragraphs.paragraphs_type.layout
-  module:
-    - entity_reference_revisions
 id: node.page.field_body_paragraph
+label: 'Body paragraph'
 field_name: field_body_paragraph
 entity_type: node
 bundle: page
-label: 'Body paragraph'
 description: ''
 required: false
 translatable: false
@@ -49,3 +38,14 @@ settings:
         weight: 14
         enabled: false
 field_type: entity_reference_revisions
+uuid: 52cbbb5d-a6cb-412e-a9b7-644be12b5b08
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_body_paragraph
+    - node.type.page
+    - paragraphs.paragraphs_type.image_with_link
+    - paragraphs.paragraphs_type.layout
+  module:
+    - entity_reference_revisions

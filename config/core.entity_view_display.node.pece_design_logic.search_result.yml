@@ -1,18 +1,3 @@
-uuid: bf3d7ae2-e131-4c45-accc-66841a8d69fc
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.search_result
-    - field.field.node.pece_design_logic.body
-    - field.field.node.pece_design_logic.field_media_thumbnail
-    - field.field.node.pece_design_logic.field_subst_logic_image_citation
-    - field.field.node.pece_design_logic.field_thumbnail
-    - node.type.pece_design_logic
-  module:
-    - entity_form_field_label
-    - text
-    - user
 id: node.pece_design_logic.search_result
 targetEntityType: node
 bundle: pece_design_logic
@@ -46,3 +31,18 @@ hidden:
   langcode: true
   links: true
   search_api_excerpt: true
+uuid: bf3d7ae2-e131-4c45-accc-66841a8d69fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.pece_design_logic.body
+    - field.field.node.pece_design_logic.field_media_thumbnail
+    - field.field.node.pece_design_logic.field_subst_logic_image_citation
+    - field.field.node.pece_design_logic.field_thumbnail
+    - node.type.pece_design_logic
+  module:
+    - entity_form_field_label
+    - text
+    - user

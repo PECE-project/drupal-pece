@@ -1,16 +1,8 @@
-uuid: 5b531616-9990-4ec9-b429-adb7d4d14295
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.taxonomy_term.field_tags
-    - taxonomy.vocabulary.groups
-    - taxonomy.vocabulary.tags
 id: taxonomy_term.groups.field_tags
+label: Tags
 field_name: field_tags
 entity_type: taxonomy_term
 bundle: groups
-label: Tags
 description: ''
 required: false
 translatable: false
@@ -27,3 +19,11 @@ settings:
     auto_create: true
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 5b531616-9990-4ec9-b429-adb7d4d14295
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_tags
+    - taxonomy.vocabulary.groups
+    - taxonomy.vocabulary.tags

@@ -1,17 +1,8 @@
-uuid: 365f6f78-e180-457f-87fa-7b048944047f
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_fieldsite_researcher
-    - node.type.pece_fieldsite
-_core:
-  default_config_hash: tZm9iJoCbfMD17vDWmD7BWJYUB4nm22eBKek6kjdIvo
 id: node.pece_fieldsite.field_fieldsite_researcher
+label: Researchers
 field_name: field_fieldsite_researcher
 entity_type: node
 bundle: pece_fieldsite
-label: Researchers
 description: 'This field indicates which platform users are associated with this fieldsite.'
 required: false
 translatable: false
@@ -29,3 +20,12 @@ settings:
       type: _none
     include_anonymous: true
 field_type: entity_reference
+uuid: 365f6f78-e180-457f-87fa-7b048944047f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fieldsite_researcher
+    - node.type.pece_fieldsite
+_core:
+  default_config_hash: tZm9iJoCbfMD17vDWmD7BWJYUB4nm22eBKek6kjdIvo

@@ -1,26 +1,3 @@
-uuid: cb0fe749-c698-479d-8c8a-a4eec49cb541
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.search_result
-    - field.field.node.pece_slideshow_image.field_pece_description
-    - field.field.node.pece_slideshow_image.field_pece_slideshowimage_image
-    - field.field.node.pece_slideshow_image.field_pece_slideshowimage_link
-    - image.style.pece_frontpage_image_style
-    - node.type.pece_slideshow_image
-  module:
-    - image
-    - layout_builder
-    - link
-    - text
-    - user
-third_party_settings:
-  layout_builder:
-    enabled: false
-    allow_custom: false
-_core:
-  default_config_hash: 1_oqwHiGiai0QCdqnj7jAW9DGBPWsowbYy6lzZUfy8I
 id: node.pece_slideshow_image.search_result
 targetEntityType: node
 bundle: pece_slideshow_image
@@ -72,3 +49,26 @@ hidden:
   extra_field_pece_annotations_see_annotations_link: true
   langcode: true
   search_api_excerpt: true
+uuid: cb0fe749-c698-479d-8c8a-a4eec49cb541
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.pece_slideshow_image.field_pece_description
+    - field.field.node.pece_slideshow_image.field_pece_slideshowimage_image
+    - field.field.node.pece_slideshow_image.field_pece_slideshowimage_link
+    - image.style.pece_frontpage_image_style
+    - node.type.pece_slideshow_image
+  module:
+    - image
+    - layout_builder
+    - link
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: 1_oqwHiGiai0QCdqnj7jAW9DGBPWsowbYy6lzZUfy8I

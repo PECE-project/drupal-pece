@@ -1,143 +1,8 @@
-uuid: 86a17e9e-3ca5-4b3d-a504-3a8a9427f777
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.node.pece_artifact_bundle.field_ark_enabled
-    - field.field.node.pece_artifact_bundle.field_authors
-    - field.field.node.pece_artifact_bundle.field_cite_as
-    - field.field.node.pece_artifact_bundle.field_created_date
-    - field.field.node.pece_artifact_bundle.field_crit_commentary
-    - field.field.node.pece_artifact_bundle.field_fieldsite
-    - field.field.node.pece_artifact_bundle.field_groups_with_view_access
-    - field.field.node.pece_artifact_bundle.field_location
-    - field.field.node.pece_artifact_bundle.field_pece_all_can_view
-    - field.field.node.pece_artifact_bundle.field_pece_artifacts
-    - field.field.node.pece_artifact_bundle.field_pece_geolocation
-    - field.field.node.pece_artifact_bundle.field_pece_license
-    - field.field.node.pece_artifact_bundle.field_pece_project_ref
-    - field.field.node.pece_artifact_bundle.field_people_with_edit_access
-    - field.field.node.pece_artifact_bundle.field_people_with_view_access
-    - field.field.node.pece_artifact_bundle.field_tags
-    - field.field.node.pece_artifact_bundle.field_use_fieldsite_local
-    - node.type.pece_artifact_bundle
-  module:
-    - address
-    - field_group
-    - geolocation
-    - path
-    - text
-third_party_settings:
-  field_group:
-    group_permissions:
-      children:
-        - group_edit_permissions
-        - group_view_permissions
-      label: 'Permissions, Authorship, and Groups'
-      region: content
-      parent_name: group_metadata
-      weight: 23
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-    group_metadata:
-      children:
-        - group_permissions
-        - group_contribution_metadata
-        - group_custom_citation
-      label: Metadata
-      region: content
-      parent_name: ''
-      weight: 2
-      format_type: tabs
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        direction: vertical
-        width_breakpoint: 640
-    group_contribution_metadata:
-      children:
-        - field_pece_license
-        - field_crit_commentary
-        - field_fieldsite
-        - field_use_fieldsite_local
-        - field_tags
-      label: 'Contribution Metadata'
-      region: content
-      parent_name: group_metadata
-      weight: 25
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-    group_custom_citation:
-      children:
-        - field_pece_project_ref
-        - field_ark_enabled
-      label: 'Custom Citation'
-      region: content
-      parent_name: group_metadata
-      weight: 26
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-    group_view_permissions:
-      children:
-        - field_pece_all_can_view
-        - field_people_with_view_access
-        - field_groups_with_view_access
-      label: 'View Permissions and Groups'
-      region: content
-      parent_name: group_permissions
-      weight: 21
-      format_type: fieldset
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        description: ''
-        required_fields: true
-        open: true
-    group_edit_permissions:
-      children:
-        - field_people_with_edit_access
-      label: 'Edit Permissions and Authorship'
-      region: content
-      parent_name: group_permissions
-      weight: 20
-      format_type: fieldset
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        description: ''
-        required_fields: true
-        open: true
 id: node.pece_artifact_bundle.default
 targetEntityType: node
 bundle: pece_artifact_bundle
 mode: default
+status: true
 content:
   created:
     type: datetime_timestamp
@@ -292,6 +157,19 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  revision_log:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 6
@@ -335,3 +213,138 @@ hidden:
   field_created_date: true
   langcode: true
   og_audience: true
+uuid: 86a17e9e-3ca5-4b3d-a504-3a8a9427f777
+langcode: en
+dependencies:
+  config:
+    - field.field.node.pece_artifact_bundle.field_ark_enabled
+    - field.field.node.pece_artifact_bundle.field_authors
+    - field.field.node.pece_artifact_bundle.field_cite_as
+    - field.field.node.pece_artifact_bundle.field_created_date
+    - field.field.node.pece_artifact_bundle.field_crit_commentary
+    - field.field.node.pece_artifact_bundle.field_fieldsite
+    - field.field.node.pece_artifact_bundle.field_groups_with_view_access
+    - field.field.node.pece_artifact_bundle.field_location
+    - field.field.node.pece_artifact_bundle.field_pece_all_can_view
+    - field.field.node.pece_artifact_bundle.field_pece_artifacts
+    - field.field.node.pece_artifact_bundle.field_pece_geolocation
+    - field.field.node.pece_artifact_bundle.field_pece_license
+    - field.field.node.pece_artifact_bundle.field_pece_project_ref
+    - field.field.node.pece_artifact_bundle.field_people_with_edit_access
+    - field.field.node.pece_artifact_bundle.field_people_with_view_access
+    - field.field.node.pece_artifact_bundle.field_tags
+    - field.field.node.pece_artifact_bundle.field_use_fieldsite_local
+    - node.type.pece_artifact_bundle
+  module:
+    - address
+    - field_group
+    - geolocation
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_permissions:
+      children:
+        - group_edit_permissions
+        - group_view_permissions
+      label: 'Permissions, Authorship, and Groups'
+      region: content
+      parent_name: group_metadata
+      weight: 23
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_metadata:
+      children:
+        - group_permissions
+        - group_contribution_metadata
+        - group_custom_citation
+      label: Metadata
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: vertical
+        width_breakpoint: 640
+    group_contribution_metadata:
+      children:
+        - field_pece_license
+        - field_crit_commentary
+        - field_fieldsite
+        - field_use_fieldsite_local
+        - field_tags
+      label: 'Contribution Metadata'
+      region: content
+      parent_name: group_metadata
+      weight: 25
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_custom_citation:
+      children:
+        - field_pece_project_ref
+        - field_ark_enabled
+      label: 'Custom Citation'
+      region: content
+      parent_name: group_metadata
+      weight: 26
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_view_permissions:
+      children:
+        - field_pece_all_can_view
+        - field_people_with_view_access
+        - field_groups_with_view_access
+      label: 'View Permissions and Groups'
+      region: content
+      parent_name: group_permissions
+      weight: 21
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true
+        open: true
+    group_edit_permissions:
+      children:
+        - field_people_with_edit_access
+      label: 'Edit Permissions and Authorship'
+      region: content
+      parent_name: group_permissions
+      weight: 20
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true
+        open: true

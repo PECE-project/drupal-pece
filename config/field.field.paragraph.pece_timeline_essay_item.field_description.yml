@@ -1,3 +1,15 @@
+id: paragraph.pece_timeline_essay_item.field_description
+label: Description
+field_name: field_description
+entity_type: paragraph
+bundle: pece_timeline_essay_item
+description: 'Each timeline essay item has a title, description, date, and referenced artifact. This field designates the description of the timeline essay item.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
 uuid: 4937ad09-d4d3-4513-aeb6-cba40c90c535
 langcode: en
 status: true
@@ -7,15 +19,3 @@ dependencies:
     - paragraphs.paragraphs_type.pece_timeline_essay_item
 _core:
   default_config_hash: CU4OQoVKdwZGMojyMGOqH4IrGXsTJ_vk1bpyifZHr2Q
-id: paragraph.pece_timeline_essay_item.field_description
-field_name: field_description
-entity_type: paragraph
-bundle: pece_timeline_essay_item
-label: Description
-description: 'Each timeline essay item has a title, description, date, and referenced artifact. This field designates the description of the timeline essay item.'
-required: true
-translatable: false
-default_value: {  }
-default_value_callback: ''
-settings: {  }
-field_type: string_long

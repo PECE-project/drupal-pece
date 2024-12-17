@@ -1,13 +1,3 @@
-uuid: 4709f645-1d63-4e82-bb1c-fdc407595f57
-langcode: en
-status: true
-dependencies:
-  config:
-    - search_api.index.general
-  module:
-    - better_exposed_filters
-    - facets_exposed_filters
-    - search_api
 id: analyze
 label: Analyze
 module: views
@@ -138,7 +128,7 @@ display:
                   is_secondary: false
                   hide_label: false
               facets_type:
-                plugin_id: bef_links
+                plugin_id: bef_links_filter
                 advanced:
                   rewrite:
                     filter_rewrite_values: "Content type|Choose focus for analysis\r\nAnnotation|Browse Annotations\r\nAnalytic (Question)|Browse Analytics (Questions)"
@@ -147,7 +137,10 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
+                initial_shown: 10
+                allow_show_all: false
                 select_all_none: false
+                minimum_to_show_text_filter: '5'
               facets_field_people_with_edit_access:
                 plugin_id: bef_links_filter
                 advanced:
@@ -283,56 +276,6 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-        search_api_fulltext:
-          id: search_api_fulltext
-          table: search_api_index_general
-          field: search_api_fulltext
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_fulltext
-          operator: and
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: search_api_fulltext_op
-            label: ''
-            description: ''
-            use_operator: false
-            operator: search_api_fulltext_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: search_api_fulltext
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              contributor: '0'
-              platform_manager: '0'
-              r_api: '0'
-            expose_fields: false
-            placeholder: ''
-            searched_fields_id: search_api_fulltext_searched_fields
-            value_maxlength: 128
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          parse_mode: terms
-          min_length: null
-          fields: {  }
         facets_type:
           id: facets_type
           table: search_api_index_general
@@ -347,7 +290,7 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: 'Content type'
+            label: 'Choose focus for analysis'
             description: ''
             use_operator: false
             operator: ''
@@ -355,7 +298,8 @@ display:
             operator_list: {  }
             identifier: type
             required: false
-            multiple: false
+            remember: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
               0: '0'
@@ -381,7 +325,7 @@ display:
           hierarchy: false
           label_display: visible
           facet:
-            query_operator: or
+            query_operator: and
             min_count: 1
             show_numbers: true
             processor_configs:
@@ -701,6 +645,56 @@ display:
                 weights:
                   build: 5
                 settings: {  }
+        search_api_fulltext:
+          id: search_api_fulltext
+          table: search_api_index_general
+          field: search_api_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_fulltext
+          operator: and
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: search_api_fulltext_op
+            label: ''
+            description: ''
+            use_operator: false
+            operator: search_api_fulltext_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: search_api_fulltext
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              contributor: '0'
+              platform_manager: '0'
+              r_api: '0'
+            expose_fields: false
+            placeholder: ''
+            searched_fields_id: search_api_fulltext_searched_fields
+            value_maxlength: 128
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          parse_mode: terms
+          min_length: null
+          fields: {  }
       filter_groups:
         operator: OR
         groups:
@@ -789,3 +783,13 @@ display:
       tags:
         - 'config:search_api.index.general'
         - 'search_api_list:general'
+uuid: 4709f645-1d63-4e82-bb1c-fdc407595f57
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.general
+  module:
+    - better_exposed_filters
+    - facets_exposed_filters
+    - search_api

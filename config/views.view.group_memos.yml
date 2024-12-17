@@ -1,14 +1,3 @@
-uuid: f92a28df-fdd5-4a1a-9536-540e5c4e70f1
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.mini_teaser
-    - node.type.pece_memo
-    - taxonomy.vocabulary.groups
-  module:
-    - node
-    - user
 id: group_memos
 label: 'Group Memos'
 module: views
@@ -277,3 +266,14 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+uuid: f92a28df-fdd5-4a1a-9536-540e5c4e70f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.mini_teaser
+    - node.type.pece_memo
+    - taxonomy.vocabulary.groups
+  module:
+    - node
+    - user

@@ -1,3 +1,10 @@
+id: content_bulk_export
+label: 'Export content'
+type: node
+plugin: content_bulk_export
+configuration:
+  assets: true
+  translation: true
 uuid: 47db6bd5-95ed-4504-92f2-728438ec31e3
 langcode: en
 status: true
@@ -6,10 +13,3 @@ dependencies:
     - single_content_sync
 _core:
   default_config_hash: h64R0kZquzABmTQ3k2X7VbJJvANnn0p3ubKUYNtQj8s
-id: content_bulk_export
-label: 'Export content'
-type: node
-plugin: content_bulk_export
-configuration:
-  assets: true
-  translation: true

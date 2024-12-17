@@ -1,20 +1,3 @@
-uuid: 8f70c98e-2c9f-4dec-b56a-d888ab8ed76d
-langcode: en
-status: true
-dependencies:
-  config:
-    - node.type.artifact_tabular_data
-    - node.type.artifact_video
-    - node.type.pece_artifact_audio
-    - node.type.pece_artifact_bundle
-    - node.type.pece_artifact_fieldnote
-    - node.type.pece_artifact_image
-    - node.type.pece_artifact_pdf
-    - node.type.pece_artifact_text
-    - node.type.pece_artifact_website
-  module:
-    - node
-    - user
 id: my_artifacts
 label: 'My Artifacts'
 module: views
@@ -312,3 +295,20 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+uuid: 8f70c98e-2c9f-4dec-b56a-d888ab8ed76d
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.artifact_tabular_data
+    - node.type.artifact_video
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_fieldnote
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
+  module:
+    - node
+    - user

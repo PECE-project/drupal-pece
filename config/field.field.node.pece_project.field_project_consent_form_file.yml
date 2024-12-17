@@ -1,19 +1,8 @@
-uuid: 25f54514-7528-4999-a20b-5d46544e77bf
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_project_consent_form_file
-    - node.type.pece_project
-  module:
-    - file
-_core:
-  default_config_hash: yHh3zuHvqB4DJN7CkoGjEqEDKImxox10nACcCLfBpQ0
 id: node.pece_project.field_project_consent_form_file
+label: 'Consent Form'
 field_name: field_project_consent_form_file
 entity_type: node
 bundle: pece_project
-label: 'Consent Form'
 description: 'If there is a consent form for research participants in this project, it can be uploaded here.'
 required: false
 translatable: false
@@ -27,3 +16,14 @@ settings:
   max_filesize: '30 MB'
   description_field: false
 field_type: file
+uuid: 25f54514-7528-4999-a20b-5d46544e77bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_consent_form_file
+    - node.type.pece_project
+  module:
+    - file
+_core:
+  default_config_hash: yHh3zuHvqB4DJN7CkoGjEqEDKImxox10nACcCLfBpQ0

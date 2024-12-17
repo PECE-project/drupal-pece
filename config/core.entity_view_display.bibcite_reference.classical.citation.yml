@@ -1,16 +1,3 @@
-uuid: 51144ad0-cf59-450c-aea6-87b44f13d477
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.classical
-    - core.entity_view_mode.bibcite_reference.citation
-  enforced:
-    config:
-      - core.entity_view_mode.bibcite_reference.citation
-      - bibcite_entity.bibcite_reference_type.classical
-    module:
-      - bibcite_entity
 id: bibcite_reference.classical.citation
 targetEntityType: bibcite_reference
 bundle: classical
@@ -84,3 +71,16 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: 51144ad0-cf59-450c-aea6-87b44f13d477
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.classical
+    - core.entity_view_mode.bibcite_reference.citation
+  enforced:
+    config:
+      - core.entity_view_mode.bibcite_reference.citation
+      - bibcite_entity.bibcite_reference_type.classical
+    module:
+      - bibcite_entity

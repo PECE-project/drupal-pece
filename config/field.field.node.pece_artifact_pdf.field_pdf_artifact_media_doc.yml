@@ -1,16 +1,8 @@
-uuid: bce97e72-9c00-4170-98ee-632da2f55879
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_pdf_artifact_media_doc
-    - media.type.private_pdf
-    - node.type.pece_artifact_pdf
 id: node.pece_artifact_pdf.field_pdf_artifact_media_doc
+label: 'PDF Document'
 field_name: field_pdf_artifact_media_doc
 entity_type: node
 bundle: pece_artifact_pdf
-label: 'PDF Document'
 description: ''
 required: true
 translatable: false
@@ -27,3 +19,11 @@ settings:
     auto_create: false
     auto_create_bundle: private_document
 field_type: entity_reference
+uuid: bce97e72-9c00-4170-98ee-632da2f55879
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pdf_artifact_media_doc
+    - media.type.private_pdf
+    - node.type.pece_artifact_pdf

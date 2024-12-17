@@ -1,17 +1,8 @@
-uuid: 8138b2c8-cf11-4504-aa97-af34bea28f5b
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.paragraph.field_member_user
-    - paragraphs.paragraphs_type.paragraph_member
-_core:
-  default_config_hash: Kfp45sqZ0yt2fAqf3kE0ab74IdvLRdx9BwUKlqBMbHE
 id: paragraph.paragraph_member.field_member_user
+label: Member
 field_name: field_member_user
 entity_type: paragraph
 bundle: paragraph_member
-label: Member
 description: ''
 required: false
 translatable: false
@@ -28,3 +19,12 @@ settings:
       type: _none
     include_anonymous: true
 field_type: entity_reference
+uuid: 8138b2c8-cf11-4504-aa97-af34bea28f5b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_member_user
+    - paragraphs.paragraphs_type.paragraph_member
+_core:
+  default_config_hash: Kfp45sqZ0yt2fAqf3kE0ab74IdvLRdx9BwUKlqBMbHE

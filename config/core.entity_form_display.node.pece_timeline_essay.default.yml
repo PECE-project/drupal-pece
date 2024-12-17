@@ -1,6 +1,205 @@
+id: node.pece_timeline_essay.default
+targetEntityType: node
+bundle: pece_timeline_essay
+mode: default
+status: true
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 1
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_ark_enabled:
+    type: boolean_checkbox
+    weight: 20
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_groups_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 29
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields: {  }
+  field_media_thumbnail:
+    type: media_library_widget
+    weight: 2
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
+  field_pece_all_can_view:
+    type: boolean_checkbox
+    weight: 27
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_pece_license:
+    type: options_select
+    weight: 15
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_pece_project_ref:
+    type: entity_reference_autocomplete
+    weight: 19
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_people_with_edit_access:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_people_with_view_access:
+    type: entity_reference_autocomplete
+    weight: 28
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        22237ba7-4c6a-4704-a3a8-d76e9d3cb584:
+          entity_type: node
+          bundle: pece_timeline_essay
+          dependee: field_pece_all_can_view
+          settings:
+            state: '!visible'
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_tags:
+    type: entity_reference_autocomplete
+    weight: 17
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_timeline_essay_items:
+    type: entity_reference_paragraphs
+    weight: 3
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 7
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  revision_log:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 10
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 8
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_cite_as: true
+  langcode: true
 uuid: 0ed52661-25d8-4442-bd01-2bf53733a918
 langcode: en
-status: true
 dependencies:
   config:
     - field.field.node.pece_timeline_essay.body
@@ -155,189 +354,3 @@ third_party_settings:
         required_fields: true
 _core:
   default_config_hash: 7-aM3HZTmcRh82aT4iuoW2GrmX4eewJlOJRpmlnN7sM
-id: node.pece_timeline_essay.default
-targetEntityType: node
-bundle: pece_timeline_essay
-mode: default
-content:
-  body:
-    type: text_textarea_with_summary
-    weight: 1
-    region: content
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
-  created:
-    type: datetime_timestamp
-    weight: 6
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_ark_enabled:
-    type: boolean_checkbox
-    weight: 20
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  field_groups_with_view_access:
-    type: entity_reference_autocomplete
-    weight: 29
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings:
-      conditional_fields: {  }
-  field_media_thumbnail:
-    type: media_library_widget
-    weight: 2
-    region: content
-    settings:
-      media_types: {  }
-    third_party_settings:
-      entity_form_field_label:
-        new_label: ''
-        rewrite_label: 0
-      media_library_edit:
-        show_edit: '1'
-        edit_form_mode: default
-  field_pece_all_can_view:
-    type: boolean_checkbox
-    weight: 27
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  field_pece_license:
-    type: options_select
-    weight: 15
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_pece_project_ref:
-    type: entity_reference_autocomplete
-    weight: 19
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_people_with_edit_access:
-    type: entity_reference_autocomplete
-    weight: 5
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_people_with_view_access:
-    type: entity_reference_autocomplete
-    weight: 28
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings:
-      conditional_fields:
-        22237ba7-4c6a-4704-a3a8-d76e9d3cb584:
-          entity_type: node
-          bundle: pece_timeline_essay
-          dependee: field_pece_all_can_view
-          settings:
-            state: '!visible'
-            condition: checked
-            grouping: AND
-            values_set: 1
-            value: ''
-            values: {  }
-            value_form: {  }
-            effect: show
-            effect_options: {  }
-            selector: ''
-  field_tags:
-    type: entity_reference_autocomplete
-    weight: 17
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_timeline_essay_items:
-    type: entity_reference_paragraphs
-    weight: 3
-    region: content
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
-  path:
-    type: path
-    weight: 9
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  promote:
-    type: boolean_checkbox
-    weight: 7
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  status:
-    type: boolean_checkbox
-    weight: 10
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  sticky:
-    type: boolean_checkbox
-    weight: 8
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  title:
-    type: string_textfield
-    weight: 0
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  uid:
-    type: entity_reference_autocomplete
-    weight: 5
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  url_redirects:
-    weight: 11
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-hidden:
-  field_cite_as: true
-  langcode: true

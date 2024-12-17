@@ -1,17 +1,8 @@
-uuid: e73364cb-0a63-465a-a856-8f57ccf4f535
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_private_media_document
-    - media.type.private_document
-  module:
-    - file
 id: media.private_document.field_private_media_document
+label: File
 field_name: field_private_media_document
 entity_type: media
 bundle: private_document
-label: File
 description: ''
 required: true
 translatable: true
@@ -25,3 +16,12 @@ settings:
   max_filesize: ''
   description_field: false
 field_type: file
+uuid: e73364cb-0a63-465a-a856-8f57ccf4f535
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_private_media_document
+    - media.type.private_document
+  module:
+    - file

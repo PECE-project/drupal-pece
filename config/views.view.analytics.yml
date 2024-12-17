@@ -1,15 +1,3 @@
-uuid: 69cc3340-7b92-45aa-b0eb-c0715f603cdc
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_analytic_question_set
-    - node.type.pece_analytic
-  module:
-    - entity_browser
-    - node
-    - pece_annotations
-    - user
 id: analytics
 label: Analytics
 module: views
@@ -352,3 +340,15 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.field_analytic_question_set'
+uuid: 69cc3340-7b92-45aa-b0eb-c0715f603cdc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_analytic_question_set
+    - node.type.pece_analytic
+  module:
+    - entity_browser
+    - node
+    - pece_annotations
+    - user

@@ -1,33 +1,8 @@
-uuid: e79a2d16-375c-44c3-9bdd-69594940296b
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_annotation_artifact
-    - node.type.artifact_tabular_data
-    - node.type.artifact_video
-    - node.type.pece_annotation
-    - node.type.pece_artifact_audio
-    - node.type.pece_artifact_bundle
-    - node.type.pece_artifact_fieldnote
-    - node.type.pece_artifact_image
-    - node.type.pece_artifact_pdf
-    - node.type.pece_artifact_text
-    - node.type.pece_artifact_website
-    - node.type.pece_essay
-    - node.type.pece_photo_essay
-    - node.type.pece_timeline_essay
-  module:
-    - epp
-third_party_settings:
-  epp:
-    value: '[current-page:query:artifact]'
-    on_update: 0
 id: node.pece_annotation.field_annotation_artifact
+label: 'Content to Annotate'
 field_name: field_annotation_artifact
 entity_type: node
 bundle: pece_annotation
-label: 'Content to Annotate'
 description: ''
 required: false
 translatable: false
@@ -55,3 +30,28 @@ settings:
     auto_create: false
     auto_create_bundle: pece_artifact_audio
 field_type: entity_reference
+uuid: e79a2d16-375c-44c3-9bdd-69594940296b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_annotation_artifact
+    - node.type.artifact_tabular_data
+    - node.type.artifact_video
+    - node.type.pece_annotation
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_fieldnote
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
+    - node.type.pece_essay
+    - node.type.pece_photo_essay
+    - node.type.pece_timeline_essay
+  module:
+    - epp
+third_party_settings:
+  epp:
+    value: '[current-page:query:artifact]'
+    on_update: 0

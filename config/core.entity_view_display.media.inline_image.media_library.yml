@@ -1,14 +1,3 @@
-uuid: f0c3939c-3b2c-4b30-bdda-9b106dbe8bab
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.media.media_library
-    - field.field.media.inline_image.field_private_media_image
-    - image.style.medium
-    - media.type.inline_image
-  module:
-    - image
 id: media.inline_image.media_library
 targetEntityType: media
 bundle: inline_image
@@ -32,3 +21,14 @@ hidden:
   name: true
   search_api_excerpt: true
   uid: true
+uuid: f0c3939c-3b2c-4b30-bdda-9b106dbe8bab
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.inline_image.field_private_media_image
+    - image.style.medium
+    - media.type.inline_image
+  module:
+    - image

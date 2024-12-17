@@ -1,18 +1,8 @@
-uuid: 71e92143-2e79-4e1d-b148-265e7c05e14f
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_pece_license
-    - node.type.pece_annotation
-    - taxonomy.vocabulary.licenses_vocabulary_licenses
-  content:
-    - 'taxonomy_term:licenses_vocabulary_licenses:6a65065b-0db8-45bf-8435-902b8a2fbb26'
 id: node.pece_annotation.field_pece_license
+label: License
 field_name: field_pece_license
 entity_type: node
 bundle: pece_annotation
-label: License
 description: 'This field indicates how the content should be licensed. Descriptions of available creative commons licenses can be found <a href="https://creativecommons.org/share-your-work/cclicenses/">here</a>.'
 required: true
 translatable: true
@@ -31,3 +21,13 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 71e92143-2e79-4e1d-b148-265e7c05e14f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pece_license
+    - node.type.pece_annotation
+    - taxonomy.vocabulary.licenses_vocabulary_licenses
+  content:
+    - 'taxonomy_term:licenses_vocabulary_licenses:6a65065b-0db8-45bf-8435-902b8a2fbb26'

@@ -1,19 +1,8 @@
-uuid: 5969a8a3-cb43-45a8-a73c-9e437c03480a
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.taxonomy_term.field_image
-    - media.type.private_image
-    - media.type.private_vector_image
-    - taxonomy.vocabulary.groups
-  content:
-    - 'media:private_vector_image:01720295-7e8c-4c77-8a2c-e1cf6fad8f66'
 id: taxonomy_term.groups.field_image
+label: Image
 field_name: field_image
 entity_type: taxonomy_term
 bundle: groups
-label: Image
 description: ''
 required: false
 translatable: false
@@ -33,3 +22,14 @@ settings:
     auto_create: false
     auto_create_bundle: private_image
 field_type: entity_reference
+uuid: 5969a8a3-cb43-45a8-a73c-9e437c03480a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_image
+    - media.type.private_image
+    - media.type.private_vector_image
+    - taxonomy.vocabulary.groups
+  content:
+    - 'media:private_vector_image:01720295-7e8c-4c77-8a2c-e1cf6fad8f66'

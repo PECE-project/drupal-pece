@@ -53,7 +53,6 @@
         "drupal/access_policy": "^1.0@beta",
         "drupal/address": "^1.7",
         "drupal/admin_toolbar": "^3.3",
-        "drupal/advanced_text_formatter": "^3",
         "drupal/ark": "2.0.x-dev@dev",
         "drupal/asset_injector": "^2.20",
         "drupal/auto_entitylabel": "^3.3",
@@ -65,9 +64,6 @@
         "drupal/blazy": "^3",
         "drupal/block_class": "^2.0",
         "drupal/blocktabs": "^1.0@beta",
-        "drupal/bootstrap_barrio": "^5.5",
-        "drupal/bootstrap_layout_builder": "^2.0",
-        "drupal/bricks": "^2.0",
         "drupal/bulma": "3.0.x-dev@dev",
         "drupal/cer": "^5",
         "drupal/cite": "2.0.x-dev@dev",
@@ -86,9 +82,7 @@
         "drupal/create_referencing_content": "1.0.x-dev@dev",
         "drupal/ctools": "^4",
         "drupal/dashboards": "^2",
-        "drupal/default_content": "^2.0@alpha",
         "drupal/digital_size_formatter": "^2.2",
-        "drupal/dynamic_path_aliases": "^1.1",
         "drupal/eck": "^2",
         "drupal/elasticsearch_connector": "^7.0@alpha",
         "drupal/empty_page": "8.x-1.x-dev",
@@ -103,7 +97,6 @@
         "drupal/field_group": "^3.0",
         "drupal/file_resup": "^2.0",
         "drupal/forms_steps": "^1.6",
-        "drupal/foundation_sites": "dev-2.x@dev",
         "drupal/geocoder": "^4",
         "drupal/geofield": "^1.3",
         "drupal/geolocation": "^3.2",
@@ -125,15 +118,14 @@
         "drupal/layout_library": "^1.0@beta",
         "drupal/layout_paragraphs": "^2.0",
         "drupal/lb_direct_add": "^2.0",
-        "drupal/lbl": "^1.0",
         "drupal/legal": "^3.0",
         "drupal/licenses_vocabulary": "2.0.x-dev",
         "drupal/linkit": "^6.1",
         "drupal/location_migration": "1.0.x-dev",
-        "drupal/m4032404": "^1.0@alpha",
         "drupal/matomo": "^1.11",
         "drupal/media_entity_browser": "^2.0@alpha",
         "drupal/media_library_edit": "^3.0",
+        "drupal/media_library_form_element": "^2.1",
         "drupal/media_library_media_modify": "^1.0@beta",
         "drupal/media_migration": "^1.0@alpha",
         "drupal/menu_block": "^1.10",
@@ -150,7 +142,6 @@
         "drupal/piwik_noscript": "^1.5",
         "drupal/prepopulate": "^2.4",
         "drupal/profile": "dev-2900573-make-profile-label as 1.x-dev",
-        "drupal/radix": "^4.10",
         "drupal/readonly_field_widget": "^1.5",
         "drupal/redirect": "^1.6",
         "drupal/redis": "^1.8",
@@ -161,6 +152,7 @@
         "drupal/search_api_solr": "^4.3",
         "drupal/section_library": "^1.2",
         "drupal/simple_oauth": "^5.0",
+        "drupal/simple_search_form": "^1.6",
         "drupal/simplify_media_ui": "1.0.x-dev@dev",
         "drupal/single_content_sync": "^1.4",
         "drupal/smart_trim": "^2.0",
@@ -338,7 +330,8 @@
                 "MenuLinkContent menu_name max length is too long": "https://www.drupal.org/files/issues/2024-02-23/3087632-48.patch",
                 "More specific titles for term and vocabulary edit forms": "https://git.drupalcode.org/project/drupal/-/merge_requests/3883.diff",
                 "Provide single field values from multivalue fields as layout builder-friendly blocks": "https://www.drupal.org/files/issues/2024-10-27/3029830-56-layout_builder_field_limit.patch",
-                "EntityViewBuilder::getBuildDefaults doesn't respect the EntityInterface of the $entity parameter": "https://www.drupal.org/files/issues/2019-01-10/2951487_15_no-tests.patch"
+                "EntityViewBuilder::getBuildDefaults doesn't respect the EntityInterface of the $entity parameter": "https://www.drupal.org/files/issues/2019-01-10/2951487_15_no-tests.patch",
+                "Optimize render cache [#2888838]": "https://www.drupal.org/files/issues/2024-09-09/optimise-render-cache-2888838-61.patch"
             },
             "drupal/digital_size_formatter": {
                 "Support the bigint module for Big Integers [#3485326]": "https://git.drupalcode.org/project/digital_size_formatter/-/merge_requests/3.diff"
@@ -348,9 +341,6 @@
             },
             "drupal/facets": {
                 "Links widget uses checkbox widget library #3447859": "https://git.drupalcode.org/project/facets/-/merge_requests/209.diff"
-            },
-            "drupal/gin": {
-                "#3486743 Cannot opt out buttons using #gin_action_item = TRUE": "https://git.drupalcode.org/project/gin/-/merge_requests/531.diff"
             },
             "drupal/geocoder": {
                 "Have a text field that is not meant to use geocoder but cannot save widget due to geocoder_field error [#3457364]": "https://www.drupal.org/files/issues/2024-09-04/geocoder-readonly-workaround-3457364-7.patch"

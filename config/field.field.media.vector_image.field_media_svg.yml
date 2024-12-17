@@ -1,19 +1,8 @@
-uuid: 2dffaba7-f31c-4b55-b52f-62c987d2183a
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_media_svg
-    - media.type.vector_image
-  module:
-    - svg_image_field
-_core:
-  default_config_hash: 0rt0n09PdAQ3R0wLkPuQJByFC3w_z0prGIbOZIu809g
 id: media.vector_image.field_media_svg
+label: SVG
 field_name: field_media_svg
 entity_type: media
 bundle: vector_image
-label: SVG
 description: ''
 required: true
 translatable: true
@@ -34,3 +23,14 @@ settings:
     alt: ''
     title: ''
 field_type: svg_image_field
+uuid: 2dffaba7-f31c-4b55-b52f-62c987d2183a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_svg
+    - media.type.vector_image
+  module:
+    - svg_image_field
+_core:
+  default_config_hash: 0rt0n09PdAQ3R0wLkPuQJByFC3w_z0prGIbOZIu809g

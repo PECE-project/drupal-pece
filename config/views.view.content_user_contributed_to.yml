@@ -1,12 +1,3 @@
-uuid: 8faa92ec-ed1b-420a-83f9-2970aea51bb0
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.search_result
-  module:
-    - node
-    - user
 id: content_user_contributed_to
 label: 'Content I contributed to'
 module: views
@@ -532,3 +523,12 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+uuid: 8faa92ec-ed1b-420a-83f9-2970aea51bb0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+  module:
+    - node
+    - user

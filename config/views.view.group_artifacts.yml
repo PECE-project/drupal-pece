@@ -1,21 +1,3 @@
-uuid: 099c1cb5-307d-4e94-963d-c5922c79ded7
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.mini_teaser
-    - node.type.artifact_tabular_data
-    - node.type.artifact_video
-    - node.type.pece_artifact_audio
-    - node.type.pece_artifact_bundle
-    - node.type.pece_artifact_image
-    - node.type.pece_artifact_pdf
-    - node.type.pece_artifact_text
-    - node.type.pece_artifact_website
-    - taxonomy.vocabulary.groups
-  module:
-    - node
-    - user
 id: group_artifacts
 label: 'Group Artifacts'
 module: views
@@ -291,3 +273,21 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+uuid: 099c1cb5-307d-4e94-963d-c5922c79ded7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.mini_teaser
+    - node.type.artifact_tabular_data
+    - node.type.artifact_video
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
+    - taxonomy.vocabulary.groups
+  module:
+    - node
+    - user

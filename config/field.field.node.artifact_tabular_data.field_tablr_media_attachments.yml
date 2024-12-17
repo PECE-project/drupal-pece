@@ -1,16 +1,8 @@
-uuid: 081a50e2-52b5-4327-a686-76de2c77ca84
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_tablr_media_attachments
-    - media.type.private_document
-    - node.type.artifact_tabular_data
 id: node.artifact_tabular_data.field_tablr_media_attachments
+label: Attachments
 field_name: field_tablr_media_attachments
 entity_type: node
 bundle: artifact_tabular_data
-label: Attachments
 description: ''
 required: false
 translatable: false
@@ -27,3 +19,11 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 081a50e2-52b5-4327-a686-76de2c77ca84
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tablr_media_attachments
+    - media.type.private_document
+    - node.type.artifact_tabular_data

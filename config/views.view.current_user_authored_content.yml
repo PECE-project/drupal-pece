@@ -1,12 +1,3 @@
-uuid: bc3ef4c7-36b4-44cf-bc24-74999cf39a5e
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.search_result
-  module:
-    - node
-    - user
 id: current_user_authored_content
 label: 'Content I directly authored'
 module: views
@@ -499,3 +490,12 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+uuid: bc3ef4c7-36b4-44cf-bc24-74999cf39a5e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+  module:
+    - node
+    - user

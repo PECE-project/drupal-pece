@@ -1,15 +1,8 @@
-uuid: 54e5a867-7239-43c9-9fff-e5540261edbb
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_use_fieldsite_local
-    - node.type.pece_artifact_pdf
 id: node.pece_artifact_pdf.field_use_fieldsite_local
+label: "Use fieldsite's location"
 field_name: field_use_fieldsite_local
 entity_type: node
 bundle: pece_artifact_pdf
-label: "Use fieldsite's location"
 description: 'Check this to copy the location from the referenced fieldsite, if any.'
 required: false
 translatable: false
@@ -21,3 +14,10 @@ settings:
   on_label: 'On'
   off_label: 'Off'
 field_type: boolean
+uuid: 54e5a867-7239-43c9-9fff-e5540261edbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_use_fieldsite_local
+    - node.type.pece_artifact_pdf

@@ -1,18 +1,8 @@
-uuid: ea760feb-ac97-436b-99dc-e17e96cb7dc4
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_authors
-    - node.type.pece_artifact_audio
-    - taxonomy.vocabulary.pece_authors
-_core:
-  default_config_hash: saetGkxGRoFCJtYnE-zJxVflsRLZx-HQAZGws-1UZY4
 id: node.pece_artifact_audio.field_authors
+label: Creator(s)
 field_name: field_authors
 entity_type: node
 bundle: pece_artifact_audio
-label: Creator(s)
 description: 'This field designates the persor or people who originally created this artifact.  Creators known to the system will autocomplete; if this does not happen type the full name of a new creator and it will be added when this artifact is saved.'
 required: true
 translatable: false
@@ -29,3 +19,13 @@ settings:
     auto_create: true
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: ea760feb-ac97-436b-99dc-e17e96cb7dc4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_authors
+    - node.type.pece_artifact_audio
+    - taxonomy.vocabulary.pece_authors
+_core:
+  default_config_hash: saetGkxGRoFCJtYnE-zJxVflsRLZx-HQAZGws-1UZY4

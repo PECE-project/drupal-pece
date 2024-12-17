@@ -1,68 +1,3 @@
-uuid: 5f84f51d-4729-4082-a879-d2e0e533fe41
-langcode: en
-status: true
-dependencies:
-  config:
-    - access_policy.access_policy.pece_content
-    - access_policy.access_policy.pece_group
-    - core.entity_view_display.node.page.default
-    - core.entity_view_display.node.pece_essay.default
-    - dashboards.dashboard.pece
-    - entity_browser.browser.analytic_browser
-    - node.type.artifact_tabular_data
-    - node.type.artifact_video
-    - node.type.page
-    - node.type.pece_analytic
-    - node.type.pece_annotation
-    - node.type.pece_artifact_audio
-    - node.type.pece_artifact_bundle
-    - node.type.pece_artifact_fieldnote
-    - node.type.pece_artifact_image
-    - node.type.pece_artifact_pdf
-    - node.type.pece_artifact_text
-    - node.type.pece_artifact_website
-    - node.type.pece_essay
-    - node.type.pece_fieldsite
-    - node.type.pece_memo
-    - node.type.pece_photo_essay
-    - node.type.pece_project
-    - node.type.pece_slideshow_image
-    - node.type.pece_substantive_logic
-    - node.type.pece_timeline_essay
-    - taxonomy.vocabulary.groups
-    - taxonomy.vocabulary.pece_authors
-    - taxonomy.vocabulary.pece_structured_analytics
-    - taxonomy.vocabulary.tags
-    - workflows.workflow.editorial
-  module:
-    - access_policy
-    - asset_injector
-    - bibcite
-    - bibcite_export
-    - block
-    - block_class
-    - content_moderation
-    - contextual
-    - dashboards
-    - entity_browser
-    - fences
-    - file
-    - languagefield
-    - layout_builder
-    - layout_builder_component_attributes
-    - legal
-    - menu_link_attributes
-    - node
-    - path
-    - pathauto
-    - profile
-    - redirect
-    - shortcut
-    - single_content_sync
-    - smtp
-    - taxonomy
-    - toolbar
-    - user_restrictions
 id: platform_manager
 label: 'Platform manager'
 weight: -4
@@ -201,3 +136,68 @@ permissions:
   - 'view pece_substantive_logic revisions'
   - 'view pece_timeline_essay revisions'
   - 'view user email addresses'
+uuid: 5f84f51d-4729-4082-a879-d2e0e533fe41
+langcode: en
+status: true
+dependencies:
+  config:
+    - access_policy.access_policy.pece_content
+    - access_policy.access_policy.pece_group
+    - core.entity_view_display.node.page.default
+    - core.entity_view_display.node.pece_essay.default
+    - dashboards.dashboard.pece
+    - entity_browser.browser.analytic_browser
+    - node.type.artifact_tabular_data
+    - node.type.artifact_video
+    - node.type.page
+    - node.type.pece_analytic
+    - node.type.pece_annotation
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_fieldnote
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
+    - node.type.pece_essay
+    - node.type.pece_fieldsite
+    - node.type.pece_memo
+    - node.type.pece_photo_essay
+    - node.type.pece_project
+    - node.type.pece_slideshow_image
+    - node.type.pece_substantive_logic
+    - node.type.pece_timeline_essay
+    - taxonomy.vocabulary.groups
+    - taxonomy.vocabulary.pece_authors
+    - taxonomy.vocabulary.pece_structured_analytics
+    - taxonomy.vocabulary.tags
+    - workflows.workflow.editorial
+  module:
+    - access_policy
+    - asset_injector
+    - bibcite
+    - bibcite_export
+    - block
+    - block_class
+    - content_moderation
+    - contextual
+    - dashboards
+    - entity_browser
+    - fences
+    - file
+    - languagefield
+    - layout_builder
+    - layout_builder_component_attributes
+    - legal
+    - menu_link_attributes
+    - node
+    - path
+    - pathauto
+    - profile
+    - redirect
+    - shortcut
+    - single_content_sync
+    - smtp
+    - taxonomy
+    - toolbar
+    - user_restrictions

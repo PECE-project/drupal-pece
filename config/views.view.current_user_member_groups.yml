@@ -1,13 +1,3 @@
-uuid: acbae531-ea2b-4c0f-9260-5cb2885590ee
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.taxonomy_term.search_result
-    - taxonomy.vocabulary.groups
-  module:
-    - taxonomy
-    - user
 id: current_user_member_groups
 label: 'Groups I am part of'
 module: views
@@ -340,3 +330,13 @@ display:
         - user
         - user.permissions
       tags: {  }
+uuid: acbae531-ea2b-4c0f-9260-5cb2885590ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.search_result
+    - taxonomy.vocabulary.groups
+  module:
+    - taxonomy
+    - user

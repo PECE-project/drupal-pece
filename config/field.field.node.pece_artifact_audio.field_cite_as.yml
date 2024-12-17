@@ -1,15 +1,8 @@
-uuid: f67a27aa-dc62-46b9-a949-89937f8f8159
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_cite_as
-    - node.type.pece_artifact_audio
 id: node.pece_artifact_audio.field_cite_as
+label: 'Cite as'
 field_name: field_cite_as
 entity_type: node
 bundle: pece_artifact_audio
-label: 'Cite as'
 description: ''
 required: false
 translatable: true
@@ -19,3 +12,10 @@ settings:
   handler: 'default:bibcite_reference'
   handler_settings: {  }
 field_type: entity_reference
+uuid: f67a27aa-dc62-46b9-a949-89937f8f8159
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cite_as
+    - node.type.pece_artifact_audio

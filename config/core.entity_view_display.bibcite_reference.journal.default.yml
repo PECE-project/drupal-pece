@@ -1,16 +1,3 @@
-uuid: 71c82d6b-b522-4612-9b46-27f476703230
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.journal
-  module:
-    - bibcite_entity
-  enforced:
-    config:
-      - bibcite_entity.bibcite_reference_type.journal
-    module:
-      - bibcite_entity
 id: bibcite_reference.journal.default
 targetEntityType: bibcite_reference
 bundle: journal
@@ -161,3 +148,16 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: 71c82d6b-b522-4612-9b46-27f476703230
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.journal
+  module:
+    - bibcite_entity
+  enforced:
+    config:
+      - bibcite_entity.bibcite_reference_type.journal
+    module:
+      - bibcite_entity

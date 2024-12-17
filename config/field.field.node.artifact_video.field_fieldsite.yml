@@ -1,18 +1,8 @@
-uuid: fd9cf064-3f88-47ac-b24f-9ee284b11c96
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_fieldsite
-    - node.type.artifact_video
-    - node.type.pece_fieldsite
-_core:
-  default_config_hash: S-F_3oYAdtjxUENRqus-hSTkvlH4ACuSQe05X3ZNgdU
 id: node.artifact_video.field_fieldsite
+label: Fieldsite
 field_name: field_fieldsite
 entity_type: node
 bundle: artifact_video
-label: Fieldsite
 description: 'You can create fieldsites in the platform that designates a location or setting where research gets conducted. This field designates that an artifact is associated with that fieldsite. '
 required: false
 translatable: false
@@ -29,3 +19,13 @@ settings:
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: fd9cf064-3f88-47ac-b24f-9ee284b11c96
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fieldsite
+    - node.type.artifact_video
+    - node.type.pece_fieldsite
+_core:
+  default_config_hash: S-F_3oYAdtjxUENRqus-hSTkvlH4ACuSQe05X3ZNgdU

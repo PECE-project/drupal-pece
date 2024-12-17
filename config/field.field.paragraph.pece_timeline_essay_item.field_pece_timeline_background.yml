@@ -1,19 +1,8 @@
-uuid: 7609989d-7920-49e9-af3e-39e2854f2fa9
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.paragraph.field_pece_timeline_background
-    - paragraphs.paragraphs_type.pece_timeline_essay_item
-  module:
-    - image
-_core:
-  default_config_hash: 16N9EKVktQPMjgAAtYe6E0ngeIX08x9DPYVadZJixWM
 id: paragraph.pece_timeline_essay_item.field_pece_timeline_background
+label: 'Background Image'
 field_name: field_pece_timeline_background
 entity_type: paragraph
 bundle: pece_timeline_essay_item
-label: 'Background Image'
 description: ''
 required: false
 translatable: false
@@ -38,3 +27,14 @@ settings:
     width: null
     height: null
 field_type: image
+uuid: 7609989d-7920-49e9-af3e-39e2854f2fa9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_pece_timeline_background
+    - paragraphs.paragraphs_type.pece_timeline_essay_item
+  module:
+    - image
+_core:
+  default_config_hash: 16N9EKVktQPMjgAAtYe6E0ngeIX08x9DPYVadZJixWM

@@ -1,20 +1,8 @@
-uuid: 18fefe8e-32c9-4c60-98e9-4ac4efcdcf70
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_project_featured_essays
-    - node.type.pece_essay
-    - node.type.pece_photo_essay
-    - node.type.pece_project
-    - node.type.pece_timeline_essay
-_core:
-  default_config_hash: un6s90MDaq6NJvugc3d6IdOWx-GUmt2fbI6KCSpdHO8
 id: node.pece_project.field_project_featured_essays
+label: 'Featured Essays'
 field_name: field_project_featured_essays
 entity_type: node
 bundle: pece_project
-label: 'Featured Essays'
 description: ''
 required: false
 translatable: false
@@ -33,3 +21,15 @@ settings:
     auto_create: false
     auto_create_bundle: pece_essay
 field_type: entity_reference
+uuid: 18fefe8e-32c9-4c60-98e9-4ac4efcdcf70
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_featured_essays
+    - node.type.pece_essay
+    - node.type.pece_photo_essay
+    - node.type.pece_project
+    - node.type.pece_timeline_essay
+_core:
+  default_config_hash: un6s90MDaq6NJvugc3d6IdOWx-GUmt2fbI6KCSpdHO8

@@ -1,3 +1,15 @@
+id: node.artifact_video.field_language
+label: Language
+field_name: field_language
+entity_type: node
+bundle: artifact_video
+description: 'This field designates the language in which the artifact is written/spoken. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: language_field
 uuid: 3c35e1b3-7689-4500-8332-4883491a4b09
 langcode: en
 status: true
@@ -7,15 +19,3 @@ dependencies:
     - node.type.artifact_video
   module:
     - languagefield
-id: node.artifact_video.field_language
-field_name: field_language
-entity_type: node
-bundle: artifact_video
-label: Language
-description: 'This field designates the language in which the artifact is written/spoken. '
-required: false
-translatable: false
-default_value: {  }
-default_value_callback: ''
-settings: {  }
-field_type: language_field

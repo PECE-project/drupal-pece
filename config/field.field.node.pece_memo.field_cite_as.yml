@@ -1,15 +1,8 @@
-uuid: c7d2c8c8-7409-4eea-a561-15b84fcec41e
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_cite_as
-    - node.type.pece_memo
 id: node.pece_memo.field_cite_as
+label: 'Cite as'
 field_name: field_cite_as
 entity_type: node
 bundle: pece_memo
-label: 'Cite as'
 description: ''
 required: false
 translatable: true
@@ -19,3 +12,10 @@ settings:
   handler: 'default:bibcite_reference'
   handler_settings: {  }
 field_type: entity_reference
+uuid: c7d2c8c8-7409-4eea-a561-15b84fcec41e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cite_as
+    - node.type.pece_memo

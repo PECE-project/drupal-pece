@@ -1,3 +1,15 @@
+id: node.pece_artifact_audio.field_duration
+label: Duration
+field_name: field_duration
+entity_type: node
+bundle: pece_artifact_audio
+description: 'This field indicates the time duration of this artifact in hours, minutes and seconds (i.e. hh-mm-ss).'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
 uuid: c7dec0af-8224-4d03-b4bf-a7bfc914607f
 langcode: en
 status: true
@@ -7,15 +19,3 @@ dependencies:
     - node.type.pece_artifact_audio
 _core:
   default_config_hash: Kt71XraXstDkCYTkvuElUN90r9CkYCvtyFip52Uvm_Q
-id: node.pece_artifact_audio.field_duration
-field_name: field_duration
-entity_type: node
-bundle: pece_artifact_audio
-label: Duration
-description: 'This field indicates the time duration of this artifact in hours, minutes and seconds (i.e. hh-mm-ss).'
-required: false
-translatable: false
-default_value: {  }
-default_value_callback: ''
-settings: {  }
-field_type: string

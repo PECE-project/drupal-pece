@@ -1,17 +1,8 @@
-uuid: 23ea68be-cf69-48f8-9473-a5fb036b44c0
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_project_design_group
-    - node.type.pece_project
-_core:
-  default_config_hash: 1jH-Zw96FSa_0ka8YHRbBXVXYRgyfo6PWMdX110aI6I
 id: node.pece_project.field_project_design_group
+label: 'Design Group'
 field_name: field_project_design_group
 entity_type: node
 bundle: pece_project
-label: 'Design Group'
 description: ''
 required: false
 translatable: false
@@ -29,3 +20,12 @@ settings:
       type: _none
     include_anonymous: true
 field_type: entity_reference
+uuid: 23ea68be-cf69-48f8-9473-a5fb036b44c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_design_group
+    - node.type.pece_project
+_core:
+  default_config_hash: 1jH-Zw96FSa_0ka8YHRbBXVXYRgyfo6PWMdX110aI6I

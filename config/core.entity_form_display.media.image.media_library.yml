@@ -1,6 +1,39 @@
+id: media.image.media_library
+targetEntityType: media
+bundle: image
+mode: media_library
+status: true
+content:
+  field_media_image:
+    type: image_image
+    weight: -50
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  revision_log_message:
+    type: hide_revision_field_log_widget
+    weight: 80
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+      show: true
+      default: ''
+      permission_based: false
+      allow_user_settings: true
+      hide_revision: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  langcode: true
+  name: true
+  path: true
+  status: true
+  uid: true
 uuid: 46eb8762-60af-4e49-9b84-f84f69acc762
 langcode: en
-status: true
 dependencies:
   config:
     - core.entity_form_mode.media.media_library
@@ -11,23 +44,3 @@ dependencies:
     - image
 _core:
   default_config_hash: TAkB7apr46z0gILInt0SsiYgB7FRvrdPRah-Y_ghUr8
-id: media.image.media_library
-targetEntityType: media
-bundle: image
-mode: media_library
-content:
-  field_media_image:
-    type: image_image
-    weight: -50
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-hidden:
-  created: true
-  langcode: true
-  name: true
-  path: true
-  status: true
-  uid: true

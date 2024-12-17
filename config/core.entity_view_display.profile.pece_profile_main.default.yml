@@ -1,3 +1,83 @@
+id: profile.pece_profile_main.default
+targetEntityType: profile
+bundle: pece_profile_main
+mode: default
+content:
+  field_image:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_location:
+    type: address_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_pece_biography:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_pece_email:
+    type: basic_string
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_pece_full_name:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+    weight: 0
+    region: content
+  field_pece_geolocation:
+    type: geolocation_latlng
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_pece_institution:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_pece_position:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
+hidden:
+  field_pgp_key: true
+  search_api_excerpt: true
 uuid: 0fab7d33-3500-4bbf-aa33-d9c00f20f992
 langcode: en
 status: true
@@ -180,83 +260,3 @@ third_party_settings:
     enable: false
 _core:
   default_config_hash: ZY9k9DgUeBF9B-PbkZBbyL6YOitx67gpinQ_wuOVRPA
-id: profile.pece_profile_main.default
-targetEntityType: profile
-bundle: pece_profile_main
-mode: default
-content:
-  field_image:
-    type: entity_reference_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 9
-    region: content
-  field_location:
-    type: address_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 5
-    region: content
-  field_pece_biography:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 7
-    region: content
-  field_pece_email:
-    type: basic_string
-    label: inline
-    settings: {  }
-    third_party_settings: {  }
-    weight: 1
-    region: content
-  field_pece_full_name:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings:
-      entity_form_field_label:
-        new_label: ''
-        rewrite_label: 0
-    weight: 0
-    region: content
-  field_pece_geolocation:
-    type: geolocation_latlng
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 8
-    region: content
-  field_pece_institution:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  field_pece_position:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 3
-    region: content
-  field_tags:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 6
-    region: content
-hidden:
-  field_pgp_key: true
-  search_api_excerpt: true

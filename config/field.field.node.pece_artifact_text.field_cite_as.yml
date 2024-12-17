@@ -1,15 +1,8 @@
-uuid: 95f980c7-4011-4402-8759-f052b03beb69
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_cite_as
-    - node.type.pece_artifact_text
 id: node.pece_artifact_text.field_cite_as
+label: 'Cite as'
 field_name: field_cite_as
 entity_type: node
 bundle: pece_artifact_text
-label: 'Cite as'
 description: ''
 required: false
 translatable: true
@@ -19,3 +12,10 @@ settings:
   handler: 'default:bibcite_reference'
   handler_settings: {  }
 field_type: entity_reference
+uuid: 95f980c7-4011-4402-8759-f052b03beb69
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cite_as
+    - node.type.pece_artifact_text

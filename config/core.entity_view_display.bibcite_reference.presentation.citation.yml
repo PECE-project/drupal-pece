@@ -1,16 +1,3 @@
-uuid: 50c29fb4-3b71-442f-90ae-56e56c2da954
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.presentation
-    - core.entity_view_mode.bibcite_reference.citation
-  enforced:
-    config:
-      - core.entity_view_mode.bibcite_reference.citation
-      - bibcite_entity.bibcite_reference_type.presentation
-    module:
-      - bibcite_entity
 id: bibcite_reference.presentation.citation
 targetEntityType: bibcite_reference
 bundle: presentation
@@ -84,3 +71,16 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: 50c29fb4-3b71-442f-90ae-56e56c2da954
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.presentation
+    - core.entity_view_mode.bibcite_reference.citation
+  enforced:
+    config:
+      - core.entity_view_mode.bibcite_reference.citation
+      - bibcite_entity.bibcite_reference_type.presentation
+    module:
+      - bibcite_entity

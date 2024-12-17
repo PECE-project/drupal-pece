@@ -1,17 +1,8 @@
-uuid: 1e360304-d756-4ea0-b34f-f6d8c68f09bf
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.essay
-    - field.storage.bibcite_reference.field_accessed_date
-  module:
-    - datetime
 id: bibcite_reference.essay.field_accessed_date
+label: 'Accessed Date'
 field_name: field_accessed_date
 entity_type: bibcite_reference
 bundle: essay
-label: 'Accessed Date'
 description: ''
 required: false
 translatable: false
@@ -22,3 +13,12 @@ default_value:
 default_value_callback: ''
 settings: {  }
 field_type: datetime
+uuid: 1e360304-d756-4ea0-b34f-f6d8c68f09bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.essay
+    - field.storage.bibcite_reference.field_accessed_date
+  module:
+    - datetime

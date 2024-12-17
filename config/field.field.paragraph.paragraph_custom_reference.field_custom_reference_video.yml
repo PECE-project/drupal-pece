@@ -1,19 +1,8 @@
-uuid: 3610045d-0439-44dc-b776-0c4a00ee4c62
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.paragraph.field_custom_reference_video
-    - paragraphs.paragraphs_type.paragraph_custom_reference
-  module:
-    - file
-_core:
-  default_config_hash: i8x2V1KBWqZkHUn8SwHgYK7Z517ytfUI9Ho9xS1LJ4o
 id: paragraph.paragraph_custom_reference.field_custom_reference_video
+label: Video
 field_name: field_custom_reference_video
 entity_type: paragraph
 bundle: paragraph_custom_reference
-label: Video
 description: ''
 required: false
 translatable: false
@@ -27,3 +16,14 @@ settings:
   max_filesize: ''
   description_field: false
 field_type: file
+uuid: 3610045d-0439-44dc-b776-0c4a00ee4c62
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_custom_reference_video
+    - paragraphs.paragraphs_type.paragraph_custom_reference
+  module:
+    - file
+_core:
+  default_config_hash: i8x2V1KBWqZkHUn8SwHgYK7Z517ytfUI9Ho9xS1LJ4o

@@ -1,16 +1,8 @@
-uuid: e5dfa101-ba2b-49b7-a2aa-303aa32bf0a9
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_media_thumbnail
-    - media.type.image
-    - node.type.pece_project
 id: node.pece_project.field_media_thumbnail
+label: 'Media thumbnail'
 field_name: field_media_thumbnail
 entity_type: node
 bundle: pece_project
-label: 'Media thumbnail'
 description: ''
 required: false
 translatable: false
@@ -27,3 +19,11 @@ settings:
     auto_create: false
     auto_create_bundle: image
 field_type: entity_reference
+uuid: e5dfa101-ba2b-49b7-a2aa-303aa32bf0a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media_thumbnail
+    - media.type.image
+    - node.type.pece_project

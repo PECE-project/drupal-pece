@@ -1,9 +1,6 @@
-uuid: 7c08c5d0-6263-4721-8476-eba124af6464
-langcode: en
-status: true
-dependencies: {  }
 id: pece_content
 label: 'PECE default content policy'
+target_entity_type_id: node
 description: 'Only specified users and specified groups have access to this content.'
 weight: 0
 access_rules:
@@ -111,7 +108,6 @@ access_rules:
     required: false
 access_rule_operator: OR
 query: true
-target_entity_type_id: node
 operations:
   view_unpublished:
     permission: false
@@ -171,3 +167,7 @@ selection_rules:
     required: false
 selection_rule_operator: AND
 selection_set: {  }
+uuid: 7c08c5d0-6263-4721-8476-eba124af6464
+langcode: en
+status: true
+dependencies: {  }

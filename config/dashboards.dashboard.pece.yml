@@ -1,17 +1,3 @@
-uuid: 95a3ca97-8a1d-4bcb-a53a-94d9c3f45257
-langcode: en
-status: true
-dependencies:
-  module:
-    - layout_builder_restrictions
-third_party_settings:
-  layout_builder_restrictions:
-    allowed_block_categories: {  }
-    entity_view_mode_restriction:
-      allowed_layouts: {  }
-      restricted_categories: {  }
-      whitelisted_blocks: {  }
-      blacklisted_blocks: {  }
 id: pece
 admin_label: 'PECE Dashboard'
 category: Contributor
@@ -63,6 +49,8 @@ sections:
         layout_collapse_element: layout-collapse--none
         layout_collapse_classes: ''
         layout_collapse_summary: ''
+      layout_collapse_two_column_widths: layout--twocol-section--50-50
+      layout_collapse_classes: ''
     components:
       05c3292c-129a-4f95-9628-bccc859533ba:
         uuid: 05c3292c-129a-4f95-9628-bccc859533ba
@@ -152,3 +140,17 @@ sections:
         weight: 0
         additional: {  }
     third_party_settings: {  }
+uuid: 95a3ca97-8a1d-4bcb-a53a-94d9c3f45257
+langcode: en
+status: true
+dependencies:
+  module:
+    - layout_builder_restrictions
+third_party_settings:
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      restricted_categories: {  }
+      whitelisted_blocks: {  }
+      blacklisted_blocks: {  }

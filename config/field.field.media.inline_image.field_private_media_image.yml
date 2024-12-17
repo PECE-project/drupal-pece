@@ -1,17 +1,8 @@
-uuid: e102422d-330a-4aed-937a-c16bce7278c0
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_private_media_image
-    - media.type.inline_image
-  module:
-    - image
 id: media.inline_image.field_private_media_image
+label: Image
 field_name: field_private_media_image
 entity_type: media
 bundle: inline_image
-label: Image
 description: ''
 required: true
 translatable: true
@@ -36,3 +27,12 @@ settings:
     width: null
     height: null
 field_type: image
+uuid: e102422d-330a-4aed-937a-c16bce7278c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_private_media_image
+    - media.type.inline_image
+  module:
+    - image

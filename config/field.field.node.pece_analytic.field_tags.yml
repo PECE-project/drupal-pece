@@ -1,18 +1,8 @@
-uuid: 615b3fc5-6c3b-4d3e-a9a7-fbe44f3b3258
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_tags
-    - node.type.pece_analytic
-    - taxonomy.vocabulary.tags
-_core:
-  default_config_hash: oqfh2uS5qm5wLEx7MitItRB8AnglU2mZsXAEyyuPvAg
 id: node.pece_analytic.field_tags
+label: Tags
 field_name: field_tags
 entity_type: node
 bundle: pece_analytic
-label: Tags
 description: 'This field designates tags for the analytic. Tagging analytics with keywords enables you to curate content with common tags. '
 required: false
 translatable: false
@@ -29,3 +19,13 @@ settings:
     auto_create: true
     auto_create_bundle: ''
 field_type: entity_reference
+uuid: 615b3fc5-6c3b-4d3e-a9a7-fbe44f3b3258
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags
+    - node.type.pece_analytic
+    - taxonomy.vocabulary.tags
+_core:
+  default_config_hash: oqfh2uS5qm5wLEx7MitItRB8AnglU2mZsXAEyyuPvAg

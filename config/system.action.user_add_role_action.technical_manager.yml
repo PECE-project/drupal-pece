@@ -1,3 +1,9 @@
+id: user_add_role_action.technical_manager
+label: 'Add the Technical manager role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: technical_manager
 uuid: ae3328d4-94d6-46ee-8385-bc945d6eb991
 langcode: en
 status: true
@@ -6,9 +12,3 @@ dependencies:
     - user.role.technical_manager
   module:
     - user
-id: user_add_role_action.technical_manager
-label: 'Add the Technical manager role to the selected user(s)'
-type: user
-plugin: user_add_role_action
-configuration:
-  rid: technical_manager

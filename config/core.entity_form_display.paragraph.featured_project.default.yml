@@ -1,14 +1,8 @@
-uuid: 9287427d-63ac-495f-b9b0-bd7de8ea1280
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.paragraph.featured_project.field_featured_project
-    - paragraphs.paragraphs_type.featured_project
 id: paragraph.featured_project.default
 targetEntityType: paragraph
 bundle: featured_project
 mode: default
+status: true
 content:
   field_featured_project:
     type: entity_reference_autocomplete
@@ -23,3 +17,9 @@ content:
 hidden:
   created: true
   status: true
+uuid: 9287427d-63ac-495f-b9b0-bd7de8ea1280
+langcode: en
+dependencies:
+  config:
+    - field.field.paragraph.featured_project.field_featured_project
+    - paragraphs.paragraphs_type.featured_project

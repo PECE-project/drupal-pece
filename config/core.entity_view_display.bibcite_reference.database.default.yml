@@ -1,16 +1,3 @@
-uuid: bde6f30d-bc05-4aec-bf68-505fe69ef6ad
-langcode: en
-status: true
-dependencies:
-  config:
-    - bibcite_entity.bibcite_reference_type.database
-  module:
-    - bibcite_entity
-  enforced:
-    config:
-      - bibcite_entity.bibcite_reference_type.database
-    module:
-      - bibcite_entity
 id: bibcite_reference.database.default
 targetEntityType: bibcite_reference
 bundle: database
@@ -176,3 +163,16 @@ hidden:
   langcode: true
   search_api_excerpt: true
   uid: true
+uuid: bde6f30d-bc05-4aec-bf68-505fe69ef6ad
+langcode: en
+status: true
+dependencies:
+  config:
+    - bibcite_entity.bibcite_reference_type.database
+  module:
+    - bibcite_entity
+  enforced:
+    config:
+      - bibcite_entity.bibcite_reference_type.database
+    module:
+      - bibcite_entity

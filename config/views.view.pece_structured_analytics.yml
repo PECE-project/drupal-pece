@@ -1,18 +1,3 @@
-uuid: 85224997-9b9f-496e-b3ab-e7c87cc1d6dc
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.taxonomy_term.search_result
-    - system.menu.main
-    - taxonomy.vocabulary.pece_structured_analytics
-  module:
-    - rest
-    - serialization
-    - taxonomy
-    - user
-_core:
-  default_config_hash: '-Eee1u702csuVRgv8Dzru2A5imA_M_OzZ0cpYP9iwYU'
 id: pece_structured_analytics
 label: 'PECE Structured Analytics'
 module: views
@@ -231,3 +216,18 @@ display:
         - request_format
         - user.permissions
       tags: {  }
+uuid: 85224997-9b9f-496e-b3ab-e7c87cc1d6dc
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.search_result
+    - system.menu.main
+    - taxonomy.vocabulary.pece_structured_analytics
+  module:
+    - rest
+    - serialization
+    - taxonomy
+    - user
+_core:
+  default_config_hash: '-Eee1u702csuVRgv8Dzru2A5imA_M_OzZ0cpYP9iwYU'

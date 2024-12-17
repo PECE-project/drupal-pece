@@ -1,22 +1,8 @@
-uuid: aa3ae5ff-31b7-49d7-8457-1ae0e451bfc3
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_form_mode.user.register
-    - field.field.user.user.field_groups_joined
-    - field.field.user.user.field_groups_managed
-    - field.field.user.user.field_zotero
-  module:
-    - path
-    - profile
-    - user
-_core:
-  default_config_hash: 5QBZ76xiLDWmA7ZLSqAw5ez7KPmVboMU4uMJZ6Vh_LY
 id: user.user.register
 targetEntityType: user
 bundle: user
 mode: register
+status: true
 content:
   account:
     weight: -10
@@ -68,3 +54,17 @@ hidden:
   field_groups_joined: true
   field_groups_managed: true
   langcode: true
+uuid: aa3ae5ff-31b7-49d7-8457-1ae0e451bfc3
+langcode: en
+dependencies:
+  config:
+    - core.entity_form_mode.user.register
+    - field.field.user.user.field_groups_joined
+    - field.field.user.user.field_groups_managed
+    - field.field.user.user.field_zotero
+  module:
+    - path
+    - profile
+    - user
+_core:
+  default_config_hash: 5QBZ76xiLDWmA7ZLSqAw5ez7KPmVboMU4uMJZ6Vh_LY

@@ -1,18 +1,8 @@
-uuid: 3c3653a3-088f-410b-9b35-e53cec639f33
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.node.field_file_format
-    - node.type.artifact_video
-    - taxonomy.vocabulary.format_audio
-    - taxonomy.vocabulary.format_image
-    - taxonomy.vocabulary.format_video
 id: node.artifact_video.field_file_format
+label: 'File format'
 field_name: field_file_format
 entity_type: node
 bundle: artifact_video
-label: 'File format'
 description: 'This field designates the file format of the file uploaded for this artifact.'
 required: false
 translatable: false
@@ -31,3 +21,13 @@ settings:
     auto_create: false
     auto_create_bundle: format_audio
 field_type: entity_reference
+uuid: 3c3653a3-088f-410b-9b35-e53cec639f33
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_file_format
+    - node.type.artifact_video
+    - taxonomy.vocabulary.format_audio
+    - taxonomy.vocabulary.format_image
+    - taxonomy.vocabulary.format_video

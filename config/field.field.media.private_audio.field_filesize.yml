@@ -1,17 +1,8 @@
-uuid: 6cab50c3-3028-40bf-9e81-19ba39791820
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.media.field_filesize
-    - media.type.private_audio
-  module:
-    - bigint
 id: media.private_audio.field_filesize
+label: Filesize
 field_name: field_filesize
 entity_type: media
 bundle: private_audio
-label: Filesize
 description: ''
 required: false
 translatable: false
@@ -23,3 +14,12 @@ settings:
   prefix: ''
   suffix: ''
 field_type: bigint
+uuid: 6cab50c3-3028-40bf-9e81-19ba39791820
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_filesize
+    - media.type.private_audio
+  module:
+    - bigint
