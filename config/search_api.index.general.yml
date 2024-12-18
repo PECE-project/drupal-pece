@@ -171,10 +171,12 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  auto_aggregated_fulltext_field: {  }
   custom_value: {  }
   entity_type: {  }
   language_with_fallback: {  }
   rendered_item: {  }
+  solr_date_range: {  }
 tracker_settings:
   default:
     indexing_order: fifo
@@ -183,7 +185,7 @@ options:
   delete_on_fail: true
   index_directly: true
   track_changes_in_references: true
-server: drupal_search
+server: solr
 status: true
 langcode: en
 dependencies:
@@ -195,8 +197,56 @@ dependencies:
     - field.storage.node.field_file_format
     - field.storage.node.field_pece_license
     - field.storage.node.field_people_with_edit_access
-    - search_api.server.drupal_search
+    - search_api.server.solr
   module:
     - node
+    - search_api_solr
     - taxonomy
 uuid: 6b6f85cb-779f-4fd6-bd61-c1f4a0e070e4
+third_party_settings:
+  search_api_solr:
+    finalize: 0
+    commit_before_finalize: 0
+    commit_after_finalize: 0
+    debug_finalize: 0
+    multilingual:
+      limit_to_content_language: 0
+      include_language_independent: 1
+      use_language_undefined_as_fallback_language: 0
+      specific_languages:
+        en: 0
+      use_universal_collation: 0
+    highlighter:
+      maxAnalyzedChars: '51200'
+      fragmenter: gap
+      regex:
+        slop: '0.5'
+        pattern: blank
+        maxAnalyzedChars: '10000'
+      usePhraseHighlighter: 1
+      highlightMultiTerm: 1
+      preserveMulti: 0
+      highlight:
+        mergeContiguous: 0
+        requireFieldMatch: 0
+        snippets: '3'
+        fragsize: '0'
+    mlt:
+      mintf: '1'
+      mindf: '1'
+      maxdf: '0'
+      maxdfpct: '0'
+      minwl: '0'
+      maxwl: '0'
+      maxqt: '100'
+      maxntp: '2000'
+      boost: 0
+      interestingTerms: none
+    term_modifiers:
+      slop: '3'
+      fuzzy: '1'
+      fuzzy_analyzer: 1
+    advanced:
+      index_prefix: ''
+      collection: ''
+      timezone: ''
