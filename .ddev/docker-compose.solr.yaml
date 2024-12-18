@@ -1,0 +1,52 @@
+#ddev-generated
+
+services:
+  solr:
+    build: ./solr
+    container_name: ddev-${DDEV_SITENAME}-solr
+    expose:
+      - 8983
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: ${DDEV_APPROOT}
+    environment:
+      SOLR_HOST: ddev-${DDEV_SITENAME}-solr
+      SOLR_PORT: 8983
+      # The pre-trained OpenNLP models require a much bigger buffer.
+      SOLR_OPTS: -Djute.maxbuffer=50000000
+      #SOLR_HEAP: 1g
+      SOLR_AUTH_TYPE: basic
+      SOLR_AUTHENTICATION_OPTS: -Dbasicauth=solr:SolrRocks
+      VIRTUAL_HOST: ${DDEV_HOSTNAME}
+      HTTP_EXPOSE: 8983:8983
+      HTTPS_EXPOSE: 8943:8983
+    volumes:
+      - .:/mnt/ddev_config
+      - ./solr/lib:/opt/solr/modules/ddev/lib
+      - solr:/var/solr
+    command: bash -c "set -eu;
+      docker-entrypoint.sh solr start -c -Dlog4j.configurationFile=/opt/solr/server/resources/log4j2-console.xml;
+      solr zk cp file:/mnt/ddev_config/solr/security.json zk:/security.json -z localhost:9983;
+      cd /mnt/ddev_config/solr/configsets;
+      for dir in */; do
+        dir=$${dir%/};
+        if [[ \"$$dir\" != \"*\" ]]; then
+          echo \"uploading configset $$dir\";
+          solr zk upconfig -n \"$$dir\" -d \"$$dir\" -z localhost:9983;
+          echo \"creating collection $$dir\";
+          solr create -c \"$$dir\" -n \"$$dir\" -shards 1 -replicationFactor 1 || true;
+        fi;
+      done;
+      cd -;
+      solr stop > /dev/null;
+      exec solr-foreground -c -Dlog4j.configurationFile=/opt/solr/server/resources/log4j2.xml;
+      "
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail -s localhost:8983/solr/"]
+
+  web:
+    links:
+      - solr:solr
+
+volumes:
+  solr:
