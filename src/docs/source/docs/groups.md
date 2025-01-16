@@ -25,7 +25,7 @@ Steps to Create Group
 
 7. Substantive logic
 
-8. 
+8. If there are any other group members or managers, add them by typing the first few letters of their name into the field. Their screen name should pop up. Select their name. To add more than one contributor, click the "Add another item" button and repeat the same process.
 
 9. Next, add optional keyword tags to your timeline essay. Tag the content. As you type, suggested tags will be automatically generated if they exist already in the system. We recommend following these suggestions and using existing tags if they are not too different from what you intended, but feel free to make up new tags!
 
@@ -117,8 +117,11 @@ which will soon be listed on the group page.
 
 ### What do the different group membership roles mean?
 
+A group manager is the person responsible for stewarding the group on PECE. The manager has the ability to make edits to the group itself and to add or remove members. 
+Group members have access to view artifacts, essays, etc when the view permissions for that content have been restricted to the group. 
 Administrators can manage groups as described above. **There is no
 difference between a researcher and a contributor in a group.**
+
 
 ### I’m trying to approve a user’s request to join a group, and I keep getting an error. What’s going on?
 
