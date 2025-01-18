@@ -21,17 +21,23 @@ Steps to Create Group
 
 5. Add a description related to your group, in the "Description" textbox.
 
-6. The "Group visibility" field, determines whether the group can be viewed by all site visitors or only by its own members. It does not determine the visibility of group content. Select whether you would like your group to be publicly or privately visible.
+6. The "Group visibility" field, determines whether the group can be viewed by all site visitors or only by its own members. 
+It does not determine the visibility of group content. Select whether you would like your group to be publicly or privately visible.
 
-7. Substantive logic
+7. The "Substantive logic" provides the opportunity to describe the rational behind the creation of the group. 
+You may select a substantive logic by typing in the first few letters and making a selection from the drop-down menu.
 
-8. If there are any other group members or managers, add them by typing the first few letters of their name into the field. Their screen name should pop up. Select their name. To add more than one contributor, click the "Add another item" button and repeat the same process.
+8. If there are any other group members or managers, add them by typing the first few letters of their name into the field. 
+Their screen name should pop up. Select their name. To add more than one contributor, click the "Add another item" button and repeat the same process.
 
-9. Next, add optional keyword tags to your timeline essay. Tag the content. As you type, suggested tags will be automatically generated if they exist already in the system. We recommend following these suggestions and using existing tags if they are not too different from what you intended, but feel free to make up new tags!
+9. Next, add optional keyword tags to your timeline essay. Tag the content. As you type, suggested tags will be automatically generated if they exist already in the system. 
+We recommend following these suggestions and using existing tags if they are not too different from what you intended, but feel free to make up new tags!
 
-10. Relations
+10. The "Relations" field allows you to select group(s) that are related to the current sub-group being made. 
+Type in the first few letters and a drop-down menu of groups to choose from will appear.
 
-11. Finally, click “Save” at the top of the page to save your work. And remember: all of these settings can be revised at any time. You are now the group administrator.
+11. Finally, click “Save” at the top of the page to save your work. 
+And remember: all of these settings can be revised at any time. You are now the group administrator.
 
 
 Steps to Join a Group
