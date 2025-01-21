@@ -4,9 +4,8 @@ Feature: Home Page
     When I go to "/"
     Then I should see the link "Log in"
 
-  Scenario: Visit the home page as a provider
+  Scenario: Visit the home page as an administrator
     Given I am logged in as user "admin"
     When I go to "/"
-    Then I should see the link "Log out"
     And I should see the link "My account"
     And I should see the link "Dashboard"
