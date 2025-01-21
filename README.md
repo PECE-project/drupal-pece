@@ -48,6 +48,18 @@ ddev drush -y si pece --existing-config
 ddev content-import-all
 ```
 
+## Running tests
+
+### To run behat tests
+
+```shell
+ddev exec ./vendor/bin/behat /var/www/html/features
+```
+
+To run the tests of only a specific feature:
+```shell
+ddev exec ./vendor/bin/behat /var/www/html/features/homepage.feature
+
 ## Updating Drupal core and contrib
 
 To update Drupal core and contributed modules, make sure your configuration is clean (exported and committed, or imported from an up-to-date and clean git repository) and then run:
