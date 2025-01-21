@@ -1,60 +1,32 @@
 default:
   suites:
     default:
-      paths:
-        - '%paths.base%/tests/features'
-        - '%paths.base%/web/profiles/pece/modules/pece_annotations/tests/features/'
       contexts:
+        - FeatureContext
         - Drupal\DrupalExtension\Context\DrupalContext
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\MessageContext
-        - Drupal\DrupalExtension\Context\MarkupContext
         - Drupal\DrupalExtension\Context\DrushContext
   extensions:
     Drupal\MinkExtension:
       browserkit_http: ~
-      ajax_timeout: 10
-      browser_name: '${selenium.browser}'
-      javascript_session: 'selenium2'
+      base_url: http://drupal-pece.ddev.site/
       selenium2:
-        wd_host: '${selenium.host}:${selenium.port}/wd/hub'
-        browser: '${selenium.browser}'
+        browser: chrome
+        wd_host: http://selenium-chrome:4444/wd/hub
         capabilities:
-          browser: '${selenium.browser}'
-          marionette: true
+          extra_capabilities:
+            idle-timeout: 10
           chrome:
             switches:
-              - "--headless"
               - "--disable-gpu"
               - "--no-sandbox"
-          extra_capabilities:
-            unexpectedAlertBehaviour: accept
-            goog:chromeOptions:
-              w3c: false
-      base_url: http://web
+              - "--headless"
+              - "--disable-dev-shm-usage"
     Drupal\DrupalExtension:
       blackbox: ~
-      api_driver: "drupal"
+      api_driver: 'drupal'
       drush:
         alias: 'self'
       drupal:
-        drupal_root: web/
-      region_map:
-        page: "body"
-        header: ".ecl-site-header"
-        page header: ".ecl-page-header__body"
-        navigation: ".ecl-navigation-menu"
-        custom footer: ".ecl-footer__custom"
-        corporate top footer: ".ecl-footer__corporate-top"
-        corporate bottom footer: ".ecl-footer__corporate-bottom"
-      selectors:
-        message_selector: '.ecl-message,.messages'
-        error_message_selector: '.ecl-message--error,.messages--error'
-        success_message_selector: '.ecl-message--success,.messages--status'
-        warning_message_selector: '.ecl-message--warning,.messages--warning'
-        login_form_selector: '#user-login-form'
-      text:
-        log_in: 'Log in'
-        log_out: 'Log out'
-  formatters:
-    progress: ~
+        drupal_root: '/var/www/html/web'
