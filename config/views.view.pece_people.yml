@@ -1,3 +1,14 @@
+uuid: ed08f06b-9996-49e5-82f1-e94469fc8a62
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_image
+  module:
+    - profile
+    - rest
+    - serialization
+    - user
 id: pece_people
 label: 'PECE People'
 module: views
@@ -690,14 +701,3 @@ display:
         - request_format
         - user.permissions
       tags: {  }
-uuid: ed08f06b-9996-49e5-82f1-e94469fc8a62
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.storage.profile.field_image
-  module:
-    - profile
-    - rest
-    - serialization
-    - user
