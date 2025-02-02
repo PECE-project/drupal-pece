@@ -13,16 +13,24 @@ Steps to Create Group
 
 1. Navigate to ‘Create Group’. This link is listed in the main menu.
 
+    ![](media/group-1.png)
+
 2. Select to add a group. You will be directed to a web form to create your group.
 
 3. Enter a title in the "Name" textbox for your new group.
 
-4. In the "Image" field, you can upload an image related to your group.
+4. In the "Image" field, you can upload an image related to your group by first removing the placeholder image and clicking "Add media".
+
+    ![](media/group-2.png)
+
+    ![](media/group-3.png)
 
 5. Add a description related to your group, in the "Description" textbox.
 
 6. The "Group visibility" field, determines whether the group can be viewed by all site visitors or only by its own members. 
 It does not determine the visibility of group content. Select whether you would like your group to be publicly or privately visible.
+
+    ![](media/group-4.png)
 
 7. The "Substantive logic" provides the opportunity to describe the rational behind the creation of the group. 
 You may select a substantive logic by typing in the first few letters and making a selection from the drop-down menu.
@@ -35,6 +43,8 @@ We recommend following these suggestions and using existing tags if they are not
 
 10. The "Relations" field allows you to select group(s) that are related to the current sub-group being made. 
 Type in the first few letters and a drop-down menu of groups to choose from will appear.
+
+    ![](media/group-5.png)
 
 11. Finally, click “Save” at the top of the page to save your work. 
 And remember: all of these settings can be revised at any time. You are now the group administrator.
