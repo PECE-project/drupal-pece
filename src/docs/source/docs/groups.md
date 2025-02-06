@@ -3,11 +3,6 @@ Groups
 
 ### Overview
 
-For an overview of how to add and manage groups on PECE, please see the
-following YouTube video.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/aZusE6G1aFY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 Steps to Create Group
 --------------------------
 
@@ -56,26 +51,40 @@ Steps to Join a Group
 1. Navigate to ‘Collaborate’. This tab is listed on the main menu bar.
 Here, you will find all of the open groups.
 
+    ![](media/group-6)
+
 2. Navigate by clicking through the arrows on the bottom of the pages, or by searching if you know the
 name of the group.
 
+    ![](media/group-7)
+
 3. Once you locate the group, click on the link to navigate to the group page.
 
-4. Click ‘Subscribe to group’ on the right hand of the screen. The group administrator will
+4. [To be revised] Click ‘Subscribe to group’ on the right hand of the screen. The group administrator will
 have to approve your request before you are considered a member of a
 group, and this may take some time. Once you are listed as a member, you
 should be able to begin associating content with a group.
 
-Steps to Manage Group Memberships
+Steps to Manage Group Memberships 
 --------------------------
 
 1. If you created a group or have been appointed as an administrator of a
 group, navigate to the group’s page from your dashboard or from the “Collaborate” link.
 
-2. Click on the Group tab in the edit menu. (You will not see this tab if you are not a group owner.)
+    To do this from your dashboard, click the edit button next to your group's name or 
+    click "See and sort all my managed groups".
 
-3. Select the link ‘People.’ Here you can see a list of site users that have requested to join the group or that have already been approved. If a user has been approved, their State will be listed as "Active"; otherwise, their State will be listed as "Pending".
+    ![](media/group-8)
 
+    To do this from the "Collaborate" link, select your group to navigate to the group page. Click the "Edit" link where you can manage group memberships. Save your changes.
+
+    ![](media/group-9)
+
+2. [To be revised] Click on the Group tab in the edit menu. (You will not see this tab if you are not a group owner.)
+
+3. [To be revised] Select the link ‘People.’ Here you can see a list of site users that have requested to join the group or that have already been approved. If a user has been approved, their State will be listed as "Active"; otherwise, their State will be listed as "Pending".
+
+[The below is to be revised]
 ### Approving a Group Member
 
 1. To approve a group membership for a Pending user, click edit at the end of the row with their username.
@@ -86,7 +95,7 @@ group, navigate to the group’s page from your dashboard or from the “Collabo
 
 4. Click "Update Membership".
 
-### Changing a Group Member's roles
+### Changing a Group Member's roles 
 
 1. To change a group member's role, click edit at the end of the row with their username.
 
