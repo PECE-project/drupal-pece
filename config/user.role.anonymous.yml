@@ -1,3 +1,21 @@
+uuid: 13713153-eb82-4cc1-9137-8d4e78cc4186
+langcode: en
+status: true
+dependencies:
+  config:
+    - access_policy.access_policy.pece_group
+    - filter.format.restricted_html
+  module:
+    - access_policy
+    - empty_page
+    - filter
+    - legal
+    - media
+    - profile
+    - system
+    - taxonomy
+_core:
+  default_config_hash: Gl1lr_RJQ9pMz_DZhY6pNX94k874Gqh15Gm8Du1EepQ
 id: anonymous
 label: 'Anonymous user'
 weight: -10
@@ -9,20 +27,5 @@ permissions:
   - 'view any profile'
   - 'view empty pages'
   - 'view media'
+  - 'view pece_group taxonomy term'
   - 'view vocabulary labels'
-uuid: 13713153-eb82-4cc1-9137-8d4e78cc4186
-langcode: en
-status: true
-dependencies:
-  config:
-    - filter.format.restricted_html
-  module:
-    - empty_page
-    - filter
-    - legal
-    - media
-    - profile
-    - system
-    - taxonomy
-_core:
-  default_config_hash: Gl1lr_RJQ9pMz_DZhY6pNX94k874Gqh15Gm8Du1EepQ
