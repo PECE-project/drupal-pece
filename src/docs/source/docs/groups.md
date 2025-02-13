@@ -60,7 +60,7 @@ name of the group.
 
 3. Once you locate the group, click on the link to navigate to the group page.
 
-4. [To be revised] Click ‘Subscribe to group’ on the right hand of the screen. The group administrator will
+4. [To be revised, no current way to join a group] Click ‘Subscribe to group’ on the right hand of the screen. The group administrator will
 have to approve your request before you are considered a member of a
 group, and this may take some time. Once you are listed as a member, you
 should be able to begin associating content with a group.
@@ -84,8 +84,8 @@ group, navigate to the group’s page from your dashboard or from the “Collabo
 
 3. [To be revised] Select the link ‘People.’ Here you can see a list of site users that have requested to join the group or that have already been approved. If a user has been approved, their State will be listed as "Active"; otherwise, their State will be listed as "Pending".
 
-[The below is to be revised]
-### Approving a Group Member
+
+### Approving a Group Member [The below is to be revised, no current way to approve]
 
 1. To approve a group membership for a Pending user, click edit at the end of the row with their username.
 
@@ -97,20 +97,20 @@ group, navigate to the group’s page from your dashboard or from the “Collabo
 
 ### Changing a Group Member's roles 
 
-1. To change a group member's role, click edit at the end of the row with their username.
+1. To change a group member's role, navigate to the group's page and select "Edit".
 
-2. Select a new group user role for the user.
+2. Select "Remove" next to the group member's username under the category of their current role.
 
-3. Click "Update Membership".
+3. Add the group member by their username under the category of the new role.
 
 ### Deleting a Group Member
 
-1. To delete a group member, click remove at the end of the row with the user's username.
+1. To delete a group member, navigate to the group's page and select "Edit".
 
-2. Click "Remove".
+2. Scroll down to "Group members" and click "Remove" next to their name.
 
 
-Adding Artifacts to Groups
+Adding Artifacts to Groups [To be edited]
 -----
 
 1. Follow instructions to [add an artifact](../artifacts), and designate the Group Audience to which you would like the group added.
