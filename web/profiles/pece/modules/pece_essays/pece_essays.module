@@ -5,6 +5,7 @@
  * Contains pece_essays.module.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -82,6 +83,56 @@ function pece_essays_entity_view_mode_alter(&$view_mode, $context) {
   if ($view_mode !== 'full' && !in_array($view_mode, $enabled_displays)) {
     $view_mode = 'card';
   }
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Attach a process to the formatter.
+ */
+function pece_essays_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form_ids = ['layout_builder_update_block', 'layout_builder_add_block'];
+
+  if (!in_array($form_id, $form_ids)) {
+    return;
+  }
+
+  $form['settings']['formatter']['#process'][] = '_peceFormatterSettingsProcessCallback';
+}
+
+/**
+ * Process callback for layout builder block form.
+ *
+ * Limit formatter configuration options.
+ */
+function _peceFormatterSettingsProcessCallback(array $element, FormStateInterface $form_state) {
+  if (isset($element['type'])) {
+    unset($element['type']['#options']['blazy_entity']);
+    unset($element['type']['#options']['splide_entityreference']);
+    unset($element['type']['#options']['entity_reference_entity_id']);
+  }
+
+  if (isset($element['settings_wrapper']['settings']['view_mode'])) {
+    $invalid_view_modes = [
+      'default',
+      'full',
+      'intro_page',
+      'search_result',
+      'analytic_on_annotation_form',
+      'highlighted', // check this one
+      'rss',
+      'search_index',
+      'token'
+    ];
+    foreach($invalid_view_modes as $view_mode) {
+      unset($element['settings_wrapper']['settings']['view_mode']['#options'][$view_mode]);
+    }
+    if ($element['settings_wrapper']['settings']['view_mode']['#default_value'] == 'default') {
+      $element['settings_wrapper']['settings']['view_mode']['#default_value'] = 'card';
+    }
+  }
+
+  return $element;
 }
 
 /**
