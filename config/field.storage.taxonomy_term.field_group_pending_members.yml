@@ -1,0 +1,20 @@
+id: taxonomy_term.field_group_pending_members
+field_name: field_group_pending_members
+entity_type: taxonomy_term
+type: entity_reference
+settings:
+  target_type: user
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
+uuid: 1e82085e-6b7f-4ee7-af5c-cd7c93783cb0
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+    - user

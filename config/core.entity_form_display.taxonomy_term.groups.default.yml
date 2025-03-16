@@ -32,6 +32,16 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_group_pending_members:
+    type: entity_reference_autocomplete
+    weight: 101
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_group_visibility:
     type: options_select
     weight: 3
@@ -115,6 +125,7 @@ dependencies:
   config:
     - field.field.taxonomy_term.groups.field_group_managers
     - field.field.taxonomy_term.groups.field_group_members
+    - field.field.taxonomy_term.groups.field_group_pending_members
     - field.field.taxonomy_term.groups.field_group_visibility
     - field.field.taxonomy_term.groups.field_image
     - field.field.taxonomy_term.groups.field_pece_project_ref
@@ -123,6 +134,7 @@ dependencies:
     - taxonomy.vocabulary.groups
   module:
     - entity_form_field_label
+    - hide_revision_field
     - media_library
     - media_library_edit
     - path

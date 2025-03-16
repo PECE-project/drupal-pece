@@ -1,0 +1,29 @@
+id: taxonomy_term.groups.field_group_pending_members
+label: 'Pending members'
+field_name: field_group_pending_members
+entity_type: taxonomy_term
+bundle: groups
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: false
+field_type: entity_reference
+uuid: 5c8cdf82-986c-4b8a-a418-d49cd1fd4be6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_group_pending_members
+    - taxonomy.vocabulary.groups

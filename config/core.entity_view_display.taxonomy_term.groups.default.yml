@@ -26,6 +26,14 @@ content:
     third_party_settings: {  }
     weight: 4
     region: content
+  field_group_pending_members:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 8
+    region: one_a
   field_group_visibility:
     type: list_default
     label: above
@@ -76,6 +84,7 @@ dependencies:
   config:
     - field.field.taxonomy_term.groups.field_group_managers
     - field.field.taxonomy_term.groups.field_group_members
+    - field.field.taxonomy_term.groups.field_group_pending_members
     - field.field.taxonomy_term.groups.field_group_visibility
     - field.field.taxonomy_term.groups.field_image
     - field.field.taxonomy_term.groups.field_pece_project_ref
@@ -322,6 +331,22 @@ third_party_settings:
                     new_label: ''
                     rewrite_label: 0
             weight: 0
+            additional: {  }
+          797c5ef3-43e7-4869-b110-4da03586182a:
+            uuid: 797c5ef3-43e7-4869-b110-4da03586182a
+            region: one_a
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:taxonomy_term:groups:field_group_pending_members'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            weight: 3
             additional: {  }
         third_party_settings: {  }
   layout_library:
