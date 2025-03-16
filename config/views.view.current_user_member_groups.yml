@@ -102,37 +102,7 @@ display:
         type: tag
         options: {  }
       empty: {  }
-      sorts:
-        changed:
-          id: changed
-          table: taxonomy_term_field_data
-          field: changed
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: taxonomy_term
-          entity_field: changed
-          plugin_id: date
-          order: DESC
-          expose:
-            label: 'Updated date'
-            field_identifier: changed
-          exposed: false
-          granularity: second
-        created:
-          id: created
-          table: taxonomy_index
-          field: created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: date
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-          granularity: second
+      sorts: {  }
       arguments:
         field_group_members_target_id:
           id: field_group_members_target_id
@@ -172,13 +142,54 @@ display:
           id: vid
           table: taxonomy_term_field_data
           field: vid
+          relationship: none
+          group_type: group
+          admin_label: ''
           entity_type: taxonomy_term
           entity_field: vid
           plugin_id: bundle
+          operator: in
           value:
             groups: groups
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       style:
         type: html_list
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          uses_fields: true
+          type: ul
+          wrapper_class: item-list
+          class: ''
       row:
         type: 'entity:taxonomy_term'
         options:
@@ -193,6 +204,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
+      group_by: false
       link_display: page
       link_url: ''
       header: {  }
@@ -219,43 +231,12 @@ display:
         options:
           offset: 0
           items_per_page: 20
-      sorts:
-        changed:
-          id: changed
-          table: taxonomy_term_field_data
-          field: changed
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: taxonomy_term
-          entity_field: changed
-          plugin_id: date
-          order: DESC
-          expose:
-            label: 'Updated date'
-            field_identifier: changed
-          exposed: false
-          granularity: second
-        created:
-          id: created
-          table: taxonomy_index
-          field: created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: date
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-          granularity: second
       defaults:
         pager: false
         use_more: false
         use_more_always: false
         use_more_text: false
-        sorts: false
+        sorts: true
       use_more: true
       use_more_always: true
       use_more_text: 'See and sort all my joined groups'
