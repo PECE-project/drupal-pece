@@ -10,17 +10,17 @@ sections:
       label: 'Main dashboard'
       context_mapping: {  }
       one_a:
-        layout_collapse_element: layout-collapse--open
-        layout_collapse_classes: ''
-        layout_collapse_summary: 'Content I directly authored'
-      one_b:
-        layout_collapse_element: layout-collapse--closed
-        layout_collapse_classes: ''
-        layout_collapse_summary: 'Other content I contributed to'
-      one_c:
         layout_collapse_element: layout-collapse--none
         layout_collapse_classes: ''
         layout_collapse_summary: ''
+      one_b:
+        layout_collapse_element: layout-collapse--open
+        layout_collapse_classes: ''
+        layout_collapse_summary: 'Content I Contributed'
+      one_c:
+        layout_collapse_element: layout-collapse--closed
+        layout_collapse_classes: ''
+        layout_collapse_summary: 'Annotations of My Content'
       one_d:
         layout_collapse_element: layout-collapse--none
         layout_collapse_classes: ''
@@ -38,20 +38,93 @@ sections:
         layout_collapse_classes: ''
         layout_collapse_summary: 'Unpublished content I directly authored'
       two_c:
-        layout_collapse_element: layout-collapse--none
+        layout_collapse_element: layout-collapse--open
         layout_collapse_classes: ''
-        layout_collapse_summary: ''
+        layout_collapse_summary: 'Groups that I manage'
       two_d:
-        layout_collapse_element: layout-collapse--none
+        layout_collapse_element: layout-collapse--open
         layout_collapse_classes: ''
-        layout_collapse_summary: ''
+        layout_collapse_summary: 'Groups that I am a member of'
       two_e:
         layout_collapse_element: layout-collapse--none
         layout_collapse_classes: ''
         layout_collapse_summary: ''
-      layout_collapse_two_column_widths: layout--twocol-section--50-50
+      layout_collapse_two_column_widths: layout--twocol-section--67-33
       layout_collapse_classes: ''
     components:
+      96726426-fc87-4247-9aca-9849ed49fdf2:
+        uuid: 96726426-fc87-4247-9aca-9849ed49fdf2
+        region: two_b
+        configuration:
+          id: 'views_block:current_user_authored_content-block_unpublished'
+          label: ''
+          label_display: '0'
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 0
+        additional: {  }
+      1c2b0776-e7ce-4678-9a74-87e180946cf3:
+        uuid: 1c2b0776-e7ce-4678-9a74-87e180946cf3
+        region: two_c
+        configuration:
+          id: 'views_block:current_user_managed_groups-block'
+          label: ''
+          label_display: '0'
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 1
+        additional: {  }
+      c85c3f8d-0296-4b55-8bc2-a9ea8c277119:
+        uuid: c85c3f8d-0296-4b55-8bc2-a9ea8c277119
+        region: two_d
+        configuration:
+          id: 'views_block:current_user_member_groups-block'
+          label: ''
+          label_display: '0'
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 0
+        additional: {  }
+      8ef179ff-bd52-4f12-b4d9-e6f8f665619b:
+        uuid: 8ef179ff-bd52-4f12-b4d9-e6f8f665619b
+        region: one_b
+        configuration:
+          id: 'views_block:content_i_directly_authored_test-block_1'
+          label: ''
+          label_display: '0'
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 0
+        additional: {  }
+      fb7a259d-eadb-44bf-b6af-b27461dcadc3:
+        uuid: fb7a259d-eadb-44bf-b6af-b27461dcadc3
+        region: one_a
+        configuration:
+          id: 'configurable_views_filter_block_block:content_i_directly_authored_test-block_1'
+          label: ''
+          label_display: '0'
+          provider: configurable_views_filter_block
+          context_mapping: {  }
+          views_label: ''
+          visible_filters:
+            type: type
+            created: created
+            field_people_with_edit_access: field_people_with_edit_access
+          no_groups: false
+          no_reset: false
+          no_sort: false
+          no_pager: false
+          no_submit: true
+        weight: 2
+        additional: {  }
       05c3292c-129a-4f95-9628-bccc859533ba:
         uuid: 05c3292c-129a-4f95-9628-bccc859533ba
         region: two_a
@@ -74,63 +147,11 @@ sections:
           hide_on_nonactive: false
         weight: 0
         additional: {  }
-      96726426-fc87-4247-9aca-9849ed49fdf2:
-        uuid: 96726426-fc87-4247-9aca-9849ed49fdf2
-        region: two_b
+      cae1ac1f-3d15-4d80-9890-08bee09ddeb5:
+        uuid: cae1ac1f-3d15-4d80-9890-08bee09ddeb5
+        region: one_c
         configuration:
-          id: 'views_block:current_user_authored_content-block_unpublished'
-          label: ''
-          label_display: '0'
-          provider: views
-          context_mapping: {  }
-          views_label: ''
-          items_per_page: none
-        weight: 0
-        additional: {  }
-      61ea04e7-8ace-4530-9e34-4fa9b14dac09:
-        uuid: 61ea04e7-8ace-4530-9e34-4fa9b14dac09
-        region: two_c
-        configuration:
-          id: 'views_block:current_user_member_groups-block'
-          label: ''
-          label_display: visible
-          provider: views
-          context_mapping: {  }
-          views_label: ''
-          items_per_page: none
-        weight: 2
-        additional: {  }
-      1c2b0776-e7ce-4678-9a74-87e180946cf3:
-        uuid: 1c2b0776-e7ce-4678-9a74-87e180946cf3
-        region: two_c
-        configuration:
-          id: 'views_block:current_user_managed_groups-block'
-          label: ''
-          label_display: visible
-          provider: views
-          context_mapping: {  }
-          views_label: ''
-          items_per_page: none
-        weight: 1
-        additional: {  }
-      50ef50c9-7933-4039-a9ca-df8393cda939:
-        uuid: 50ef50c9-7933-4039-a9ca-df8393cda939
-        region: one_a
-        configuration:
-          id: 'views_block:current_user_authored_content-block'
-          label: ''
-          label_display: '0'
-          provider: views
-          context_mapping: {  }
-          views_label: ''
-          items_per_page: none
-        weight: 0
-        additional: {  }
-      fa372214-4a0a-4d16-a147-3f2a65e0f60d:
-        uuid: fa372214-4a0a-4d16-a147-3f2a65e0f60d
-        region: one_b
-        configuration:
-          id: 'views_block:content_user_contributed_to-block'
+          id: 'views_block:annotations_of_my_content-block_1'
           label: ''
           label_display: '0'
           provider: views

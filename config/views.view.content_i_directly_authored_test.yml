@@ -1,0 +1,517 @@
+id: content_i_directly_authored_test
+label: 'My content (with facets)'
+module: views
+description: ''
+tag: ''
+base_table: search_api_index_general
+base_field: search_api_id
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: 'My content (with facets)'
+      fields:
+        artifact_type:
+          id: artifact_type
+          table: search_api_index_general
+          field: artifact_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: null
+          entity_field: null
+          plugin_id: search_api_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings: {  }
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            display_methods: {  }
+      pager:
+        type: full
+        options:
+          offset: 0
+          pagination_heading_level: h4
+          items_per_page: 5
+          total_pages: null
+          id: 0
+          tags:
+            next: 'Next ›'
+            previous: '‹ Previous'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      exposed_form:
+        type: bef
+        options:
+          submit_button: Search
+          reset_button: true
+          reset_button_label: 'Clear filters'
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: basic_html
+          bef:
+            general:
+              autosubmit: false
+              autosubmit_exclude_textfield: false
+              autosubmit_textfield_delay: 500
+              autosubmit_textfield_minimum_length: 3
+              autosubmit_hide: false
+              input_required: false
+              allow_secondary: false
+              secondary_label: 'Advanced options'
+              secondary_open: false
+              reset_button_always_show: false
+            filter:
+              facets_type:
+                plugin_id: bef_links_filter
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  is_secondary: false
+                  hide_label: false
+                initial_shown: 10
+                allow_show_all: false
+                select_all_none: 0
+                minimum_to_show_text_filter: '5'
+              facets_created:
+                plugin_id: bef_links_filter
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  is_secondary: false
+                  hide_label: false
+                initial_shown: 10
+                allow_show_all: false
+                select_all_none: 0
+                minimum_to_show_text_filter: '5'
+              facets_field_people_with_edit_access:
+                plugin_id: bef_links_filter
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  is_secondary: false
+                  hide_label: false
+                initial_shown: 10
+                allow_show_all: false
+                select_all_none: 0
+                minimum_to_show_text_filter: '5'
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: search_api_tag
+        options: {  }
+      empty: {  }
+      sorts:
+        changed_node:
+          id: changed_node
+          table: search_api_index_general
+          field: changed_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: Changed
+            field_identifier: changed_node
+          exposed: false
+      arguments:
+        field_people_with_edit_access:
+          id: field_people_with_edit_access
+          table: search_api_index_general
+          field: field_people_with_edit_access
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          default_action: default
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: current_user
+          default_argument_options: {  }
+          summary_options: {  }
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
+      filters:
+        facets_type:
+          id: facets_type
+          table: search_api_index_general
+          field: facets_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Filter by content type'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: type
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              0: '0'
+              anonymous: '0'
+              contributor: '0'
+              data_manager: '0'
+              technical_manager: '0'
+              platform_manager: '0'
+              administrator: '0'
+              r_api: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: false
+          label_display: visible
+          facet:
+            query_operator: or
+            min_count: 1
+            show_numbers: true
+            processor_configs:
+              translate_entity:
+                weights:
+                  build: 5
+                settings: {  }
+        facets_created:
+          id: facets_created
+          table: search_api_index_general
+          field: facets_created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Filter by contributed date'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: created
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              0: '0'
+              anonymous: '0'
+              contributor: '0'
+              data_manager: '0'
+              technical_manager: '0'
+              platform_manager: '0'
+              administrator: '0'
+              r_api: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: true
+          label_display: visible
+          facet:
+            query_operator: or
+            min_count: 1
+            show_numbers: false
+            processor_configs:
+              date_item:
+                weights:
+                  build: 35
+                settings:
+                  date_display: actual_date
+                  granularity: '5'
+                  hierarchy: 1
+                  date_format: ''
+              hierarchy_processor:
+                weights:
+                  build: 100
+                settings: {  }
+              raw_value_widget_order:
+                weights:
+                  sort: 50
+                settings:
+                  sort: ASC
+            hierarchy: date_items
+            expand_hierarchy: 0
+        facets_field_people_with_edit_access:
+          id: facets_field_people_with_edit_access
+          table: search_api_index_general
+          field: facets_field_people_with_edit_access
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Filter by contributor'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_people_with_edit_access
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              contributor: '0'
+              data_manager: '0'
+              technical_manager: '0'
+              platform_manager: '0'
+              administrator: '0'
+              r_api: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: false
+          label_display: visible
+          facet:
+            query_operator: or
+            min_count: 1
+            show_numbers: false
+            processor_configs:
+              translate_entity:
+                weights:
+                  build: 5
+                settings: {  }
+              uid_to_username_callback:
+                weights:
+                  build: 5
+                settings: {  }
+      style:
+        type: html_list
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:node':
+              ':default': search_result
+              artifact_tabular_data: ':default'
+              artifact_video: ':default'
+              pece_analytic: ':default'
+              pece_annotation: ':default'
+              pece_artifact_audio: ':default'
+              pece_artifact_bundle: ':default'
+              pece_artifact_fieldnote: ':default'
+              pece_artifact_image: ':default'
+              pece_artifact_pdf: ':default'
+              pece_artifact_text: ':default'
+              pece_artifact_website: ':default'
+              pece_design_logic: ':default'
+              pece_essay: ':default'
+              pece_fieldsite: ':default'
+              pece_memo: ':default'
+              pece_photo_essay: ':default'
+              pece_project: ':default'
+              pece_slideshow_image: ':default'
+              pece_substantive_logic: ':default'
+              pece_timeline_essay: ':default'
+            'entity:taxonomy_term':
+              ':default': default
+              groups: ':default'
+              pece_structured_analytics: ':default'
+              tags: ':default'
+      query:
+        type: search_api_query
+        options:
+          bypass_access: false
+          skip_access: false
+          preserve_facet_query_args: false
+          query_tags: {  }
+      relationships: {  }
+      css_class: dashboard-page
+      use_more: false
+      use_more_always: true
+      use_more_text: 'See and sort all content I directly authored'
+      link_display: page_1
+      link_url: ''
+      header: {  }
+      footer: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:search_api.index.general'
+        - 'search_api_list:general'
+  block_1:
+    id: block_1
+    display_title: Block
+    display_plugin: block
+    position: 1
+    display_options:
+      exposed_block: true
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:search_api.index.general'
+        - 'search_api_list:general'
+uuid: 4690f440-d988-4518-953a-26ffffa1c69e
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.general
+  module:
+    - better_exposed_filters
+    - facets_exposed_filters
+    - search_api
+    - user

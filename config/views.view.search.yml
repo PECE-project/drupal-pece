@@ -127,6 +127,20 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
+              facets_type:
+                plugin_id: bef_links_filter
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  is_secondary: false
+                  hide_label: false
+                initial_shown: 10
+                allow_show_all: true
+                select_all_none: 0
+                minimum_to_show_text_filter: '5'
               facets_field_people_with_edit_access:
                 plugin_id: bef_links_filter
                 advanced:
@@ -197,35 +211,21 @@ display:
                 allow_show_all: true
                 select_all_none: 0
                 minimum_to_show_text_filter: '5'
-              facets_entity_type:
-                plugin_id: bef_links_filter
-                advanced:
-                  rewrite:
-                    filter_rewrite_values: ''
-                    filter_rewrite_values_key: false
-                  collapsible: true
-                  collapsible_disable_automatic_open: false
-                  is_secondary: false
-                  hide_label: false
-                initial_shown: 10
-                allow_show_all: true
-                select_all_none: 0
-                minimum_to_show_text_filter: '5'
-              facets_type:
-                plugin_id: bef_links_filter
-                advanced:
-                  rewrite:
-                    filter_rewrite_values: ''
-                    filter_rewrite_values_key: false
-                  collapsible: true
-                  collapsible_disable_automatic_open: false
-                  is_secondary: false
-                  hide_label: false
-                initial_shown: 10
-                allow_show_all: true
-                select_all_none: 0
-                minimum_to_show_text_filter: '5'
               facets_vid:
+                plugin_id: bef_links_filter
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  is_secondary: false
+                  hide_label: false
+                initial_shown: 10
+                allow_show_all: true
+                select_all_none: 0
+                minimum_to_show_text_filter: '5'
+              facets_created:
                 plugin_id: bef_links_filter
                 advanced:
                   rewrite:
@@ -257,8 +257,8 @@ display:
           plugin_id: search_api
           order: DESC
           expose:
-            label: ''
-            field_identifier: ''
+            label: 'Aggregated field'
+            field_identifier: changed
           exposed: false
       arguments: {  }
       filters:
@@ -820,6 +820,78 @@ display:
                   sort: 30
                 settings:
                   sort: DESC
+        facets_created:
+          id: facets_created
+          table: search_api_index_general
+          field: facets_created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Contributed date'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: created
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              0: '0'
+              anonymous: '0'
+              contributor: '0'
+              data_manager: '0'
+              technical_manager: '0'
+              platform_manager: '0'
+              administrator: '0'
+              r_api: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: true
+          label_display: visible
+          facet:
+            query_operator: or
+            min_count: 1
+            show_numbers: false
+            processor_configs:
+              date_item:
+                weights:
+                  build: 35
+                settings:
+                  date_display: actual_date
+                  granularity: '5'
+                  hierarchy: 1
+                  date_format: ''
+              hierarchy_processor:
+                weights:
+                  build: 100
+                settings: {  }
+              raw_value_widget_order:
+                weights:
+                  sort: 50
+                settings:
+                  sort: ASC
+            hierarchy: date_items
+            expand_hierarchy: 0
       filter_groups:
         operator: OR
         groups:
