@@ -10,10 +10,9 @@ try:
     conn = mariadb.connect(
         user="db",
         password="db",
-        host="127.0.0.1",
-        port=int(os.environ['DB_PORT']),
-        database=os.environ['DB_NAME']
-
+        host=os.getenv('DB_PORT', "localhost"),
+        port=int(os.getenv('DB_PORT', 3306),
+        database=os.getenv('DB_NAME', "db")
     )
 except mariadb.Error as e:
     print(f"Error connecting to MariaDB Platform: {e}")

@@ -1,1 +1,1 @@
-SELECT CONCAT('wget --header "cookie: $SESSID=$SESSKEY" -O page-', nid, '.htm https://disaster-sts-network.org/node/', nid, '/essay && ./sou.py page-', nid, '.htm > essay-', nid, '.htm') AS `#!/bin/env bash` FROM node WHERE type = 'pece_essay';
+SELECT CONCAT('wget --header "cookie: $SESSID=$SESSKEY" -O page-', nid, '.htm https://www.example.com/node/', nid, '/essay && ./sou.py page-', nid, '.htm > essay-', nid, '.htm') AS `#!/bin/env bash` FROM node WHERE type = 'pece_essay';

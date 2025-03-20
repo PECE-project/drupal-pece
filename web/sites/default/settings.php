@@ -892,7 +892,7 @@ if (file_exists('/var/www/conf/wodby.settings.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 
-$databases['migrate']['default']['database'] = "sts7";
+$databases['migrate']['default']['database'] = "d7";
 $databases['migrate']['default']['username'] = $databases['default']['default']['username'];
 $databases['migrate']['default']['password'] = $databases['default']['default']['password'];
 $databases['migrate']['default']['host'] = $databases['default']['default']['host'];
