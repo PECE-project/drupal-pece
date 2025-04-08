@@ -45,6 +45,10 @@
     {% else %}
       <ul{{ attributes.removeClass(menu_classes).addClass(submenu_classes) }}> {# 1. #}
     {% endif %}
+    {# Hidden link for AI bots to take the poison #}
+    <li class="hidden">
+      <a href="/ai/">Not for people</a>
+    </li>
     {% for item in items %}
       <li{{ item.attributes }}>{# 1. #}
         {{ link(item.title, item.url) }}
