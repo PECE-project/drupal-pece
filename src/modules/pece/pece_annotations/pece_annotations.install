@@ -108,3 +108,10 @@ function pece_annotations_update_7102() {
   module_load_include('inc', 'pece', 'pece.functions');
   pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_annotations');
 }
+
+/**
+ * Rebuild Annotation presentation settings.
+ */
+function pece_annotations_update_7103() {
+  features_revert(array('pece_annotations' => array('field_instance')));
+}

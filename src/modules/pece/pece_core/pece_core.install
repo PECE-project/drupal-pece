@@ -81,3 +81,13 @@ function pece_core_update_7007() {
   );
   pece_set_permissions(array('editor' => $editor_permissions));
 }
+
+/**
+ * Enable Disable Messages module.
+ */
+function pece_core_update_7008() {
+  module_enable(array(
+    'disable_messages'
+  ));
+}
+

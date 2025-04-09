@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_annotations.strongarm.inc
@@ -64,11 +65,55 @@ function pece_annotations_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__pece_annotation';
   $strongarm->value = array(
+    'extra_fields' => array(
+      'display' => array(
+        'card' => array(
+          'card' => array(
+            'visible' => TRUE,
+            'weight' => '1',
+          ),
+          'card_full_text' => array(
+            'visible' => TRUE,
+            'weight' => '1',
+          ),
+          'default' => array(
+            'visible' => TRUE,
+            'weight' => '1',
+          ),
+        ),
+      ),
+      'form' => array(
+        'locations' => array(
+          'weight' => '8',
+        ),
+        'path' => array(
+          'weight' => '7',
+        ),
+        'title' => array(
+          'weight' => '0',
+        ),
+      ),
+    ),
     'view_modes' => array(
-      'teaser' => array(
+      'card' => array(
         'custom_settings' => TRUE,
       ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
       'featured' => array(
+        'custom_settings' => TRUE,
+      ),
+      'free_panel' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'highlighted' => array(
+        'custom_settings' => TRUE,
+      ),
+      'meta_content' => array(
         'custom_settings' => TRUE,
       ),
       'mini_teaser' => array(
@@ -76,9 +121,6 @@ function pece_annotations_strongarm() {
       ),
       'most_recent' => array(
         'custom_settings' => TRUE,
-      ),
-      'full' => array(
-        'custom_settings' => FALSE,
       ),
       'rss' => array(
         'custom_settings' => FALSE,
@@ -89,48 +131,11 @@ function pece_annotations_strongarm() {
       'search_result' => array(
         'custom_settings' => FALSE,
       ),
-      'diff_standard' => array(
-        'custom_settings' => FALSE,
+      'teaser' => array(
+        'custom_settings' => TRUE,
       ),
       'token' => array(
         'custom_settings' => FALSE,
-      ),
-      'free_panel' => array(
-        'custom_settings' => TRUE,
-      ),
-      'card' => array(
-        'custom_settings' => TRUE,
-      ),
-      'meta_content' => array(
-        'custom_settings' => TRUE,
-      ),
-      'highlighted' => array(
-        'custom_settings' => TRUE,
-      ),
-    ),
-    'extra_fields' => array(
-      'form' => array(
-        'locations' => array(
-          'weight' => '8',
-        ),
-        'title' => array(
-          'weight' => '0',
-        ),
-        'path' => array(
-          'weight' => '7',
-        ),
-      ),
-      'display' => array(
-        'card' => array(
-          'card' => array(
-            'weight' => '1',
-            'visible' => TRUE,
-          ),
-          'default' => array(
-            'weight' => '1',
-            'visible' => TRUE,
-          ),
-        ),
       ),
     ),
   );
@@ -188,65 +193,65 @@ function pece_annotations_strongarm() {
   $strongarm->value = array(
     'status' => 1,
     'view modes' => array(
-      'page_manager' => array(
-        'status' => 1,
-        'substitute' => '',
-        'default' => 1,
+      'card' => array(
         'choice' => 0,
+        'default' => 0,
+        'status' => 0,
+        'substitute' => 0,
       ),
       'default' => array(
+        'choice' => 0,
+        'default' => 0,
         'status' => 0,
         'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'teaser' => array(
-        'status' => 0,
-        'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
       ),
       'featured' => array(
+        'choice' => 0,
+        'default' => 0,
         'status' => 0,
         'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'mini_teaser' => array(
-        'status' => 0,
-        'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'most_recent' => array(
-        'status' => 0,
-        'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
       ),
       'free_panel' => array(
+        'choice' => 0,
+        'default' => 0,
         'status' => 0,
         'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'card' => array(
-        'status' => 0,
-        'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'meta_content' => array(
-        'status' => 0,
-        'substitute' => 0,
-        'default' => 0,
-        'choice' => 0,
       ),
       'highlighted' => array(
+        'choice' => 0,
+        'default' => 0,
         'status' => 0,
         'substitute' => 0,
-        'default' => 0,
+      ),
+      'meta_content' => array(
         'choice' => 0,
+        'default' => 0,
+        'status' => 0,
+        'substitute' => 0,
+      ),
+      'mini_teaser' => array(
+        'choice' => 0,
+        'default' => 0,
+        'status' => 0,
+        'substitute' => 0,
+      ),
+      'most_recent' => array(
+        'choice' => 0,
+        'default' => 0,
+        'status' => 0,
+        'substitute' => 0,
+      ),
+      'page_manager' => array(
+        'choice' => 0,
+        'default' => 1,
+        'status' => 1,
+        'substitute' => '',
+      ),
+      'teaser' => array(
+        'choice' => 0,
+        'default' => 0,
+        'status' => 0,
+        'substitute' => 0,
       ),
     ),
   );

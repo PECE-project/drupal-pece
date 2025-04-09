@@ -56,7 +56,7 @@ dependencies[] = features
 dependencies[] = pece_about
 dependencies[] = pece_access
 dependencies[] = pece_admin
-dependencies[] = pece_amber
+;dependencies[] = pece_amber
 dependencies[] = pece_analytics
 dependencies[] = pece_annotations
 dependencies[] = pece_api
@@ -147,6 +147,7 @@ dependencies[] = tagclouds
 dependencies[] = views_infinite_scroll
 dependencies[] = login_security
 dependencies[] = animgif_support
+dependencies[] = notify
 
 ; Integrations
 dependencies[] = feeds
@@ -165,19 +166,33 @@ dependencies[] = og_ui
 dependencies[] = admin_views
 dependencies[] = admin_menu
 dependencies[] = adminimal_admin_menu
-dependencies[] = module_filter
-dependencies[] = simplified_menu_admin
-dependencies[] = views_ui
-dependencies[] = tvi
-dependencies[] = coffee
 dependencies[] = better_exposed_filters
-dependencies[] = views_autocomplete_filters
-dependencies[] = smtp
+dependencies[] = coffee
+dependencies[] = disable_messages
 dependencies[] = fpa
 dependencies[] = feeds_ui
 dependencies[] = feeds_import
+dependencies[] = module_filter
+dependencies[] = multiform
 dependencies[] = nodeaccess_userreference
 dependencies[] = node_access_rebuild_bonus
+dependencies[] = plupload
+dependencies[] = simplified_menu_admin
+dependencies[] = smtp
+dependencies[] = tvi
+dependencies[] = user_restrictions
+dependencies[] = views_ui
+dependencies[] = views_autocomplete_filters
+
+; Content import
+dependencies[] = pece_importer
+dependencies[] = pece_imp_artifacts_audio
+dependencies[] = pece_imp_artifacts_image
+dependencies[] = pece_imp_artifacts_pdf
+dependencies[] = pece_imp_artifacts_tabular
+dependencies[] = pece_imp_artifacts_text
+dependencies[] = pece_imp_artifacts_video
+dependencies[] = pece_imp_artifacts_website
 
 ; Development - contrib
 env_dependencies[development][] = devel

@@ -509,3 +509,119 @@ function pece_update_7119() {
   module_load_include('inc', 'pece', 'pece.functions');
   pece_batch_unassign_role('editor');
 }
+
+/**
+ *  Add pece project field in the nodes
+ */
+function pece_update_7120() {
+  if (module_exists('features')) {
+    $modules = array(
+      'pece_artifacts_audio',
+      'pece_artifacts_bundle',
+      'pece_artifacts_fieldnote',
+      'pece_artifacts_image',
+      'pece_artifacts_pdf',
+      'pece_artifacts_text',
+      'pece_artifacts_video',
+      'pece_artifacts_website',
+      'pece_projects',
+      'pece_essay',
+      'pece_photo_essay',
+      'pece_timeline_essay',
+    );
+
+    foreach ($modules as $module) {
+      features_revert_module($module);
+    }
+  }
+}
+
+/**
+ *  Delete pece_ark_enabled field in the database.
+ */
+function pece_update_7121() {
+  if (module_exists('features')) {
+    $modules = array(
+      'pece_artifacts_audio',
+      'pece_artifacts_bundle',
+      'pece_artifacts_fieldnote',
+      'pece_artifacts_image',
+      'pece_artifacts_pdf',
+      'pece_artifacts_tabular',
+      'pece_artifacts_text',
+      'pece_artifacts_video',
+      'pece_artifacts_website',
+      'pece_essay',
+      'pece_photo_essay',
+      'pece_timeline_essay',
+    );
+
+    foreach ($modules as $module) {
+      features_revert_module($module);
+    }
+  }
+}
+
+/**
+ * Enable Multiform, Plupload, PECE Importer Suite modules.
+ */
+function pece_update_7122() {
+  module_enable(array(
+    'multiform',
+    'plupload',
+    'feedspreview',
+    'pece_importer',
+    'pece_imp_artifacts_audio',
+    'pece_imp_artifacts_image',
+    'pece_imp_artifacts_pdf',
+    'pece_imp_artifacts_tabular',
+    'pece_imp_artifacts_text',
+    'pece_imp_artifacts_video',
+    'pece_imp_artifacts_website',
+    'remote_stream_wrapper',
+    'feeds_tamper_string2id',
+    'pack_upload',
+  ));
+}
+
+/**
+ * Rebuild Default permissions for Administrator, Platform Director and Data Importer user role.
+ */
+function pece_update_7123() {
+  module_load_include('inc', 'pece', 'pece.functions');
+  module_load_include('inc', 'pece_core', 'pece_core.functions');
+  module_load_include('inc', 'pece_core', 'pece_core.functions.admin');
+  // Delete previously created "platform-director" user role to recreate via features.
+  user_role_delete('platform-director');
+  if (module_exists('features')) {
+    features_revert(array('pece_core' => array('user_role')));
+  }
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_core');
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_admin');
+  // Rebuild administrator role permissions.
+  pece_core_rebuild_administrator_perms();
+  // Assign required permission to Data Importer role.
+  pece_set_permissions(pece_core_get_data_importer_role_perms());
+}
+
+/**
+ * Install Notify feature and set default configuration for content notification.
+ */
+function pece_update_7124() {
+  module_enable(array(
+    'notify',
+    'notify_viewsintegration',
+  ));
+  module_load_include('inc', 'pece', 'pece.functions');
+  // Revert default config permission component for PECE Core.
+  pece_defaultconfig_component_rebuild_by_name('user_default_permissions', 'pece_core');
+}
+
+/**
+ * Install User Restrictions module.
+ */
+function pece_update_7125() {
+  module_enable(array(
+    'user_restrictions',
+  ));
+}

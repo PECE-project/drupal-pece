@@ -1,6 +1,8 @@
 var fs = require('fs');
 var gulp = require('gulp');
-var inquirer = require('inquirer');
+
+//
+var inquirer;
 
 var cwd = process.cwd();
 
@@ -14,7 +16,10 @@ var questions = [{
   'choices': ['production', 'development']
 }];
 
-gulp.task('config:environment', function (done) {
+async function configEnvironment(done) {
+  if (!inquirer) {
+    inquirer = (await import('inquirer').default);
+  }
   if (isProduction) {
     return fs.writeFile(cwd + '/cnf/environment', 'production', done);
   }
@@ -26,4 +31,6 @@ gulp.task('config:environment', function (done) {
 
     done();
   });
-});
+}
+
+exports.configEnvironment = configEnvironment;

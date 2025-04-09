@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_annotations.views_default.inc
@@ -38,7 +39,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['relationships']['field_pece_artifact_target_id']['table'] = 'field_data_field_pece_artifact';
   $handler->display->display_options['relationships']['field_pece_artifact_target_id']['field'] = 'field_pece_artifact_target_id';
   $handler->display->display_options['relationships']['field_pece_artifact_target_id']['label'] = 'Artifact';
-  /* Relationship: Content: Author */
+  /* Relationship: Content: Content author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
@@ -106,7 +107,7 @@ function pece_annotations_views_default_views() {
     'pece_analytic' => 'pece_analytic',
   );
   $handler->display->display_options['arguments']['field_pece_analytic_target_id']['validate_options']['access'] = TRUE;
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -202,7 +203,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['title_1']['label'] = '';
   $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
-  /* Field: Field: Artifact */
+  /* Field: Content: Artifact */
   $handler->display->display_options['fields']['field_pece_artifact']['id'] = 'field_pece_artifact';
   $handler->display->display_options['fields']['field_pece_artifact']['table'] = 'field_data_field_pece_artifact';
   $handler->display->display_options['fields']['field_pece_artifact']['field'] = 'field_pece_artifact';
@@ -228,7 +229,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['body']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['body']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['body']['field_api_classes'] = TRUE;
-  /* Field: Content: Edit link */
+  /* Field: Content: Link to edit content */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
@@ -254,7 +255,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Content: Author */
+  /* Relationship: Content: Content author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
@@ -277,7 +278,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Field: Artifact (field_pece_artifact) */
+  /* Contextual filter: Content: Artifact (field_pece_artifact) */
   $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['id'] = 'field_pece_artifact_target_id_1';
   $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['table'] = 'field_data_field_pece_artifact';
   $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['field'] = 'field_pece_artifact_target_id';
@@ -305,7 +306,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['arguments']['field_pece_artifact_target_id_1']['validate_options']['access'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -343,7 +344,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['header']['area_1']['format'] = 'panopoly_wysiwyg_text';
   $handler->display->display_options['header']['area_1']['tokenize'] = TRUE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Content: Author */
+  /* Relationship: Content: Content author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
@@ -368,7 +369,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['relationship'] = 'field_pece_analytic_target_id';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
-  /* Field: Field: Artifact */
+  /* Field: Content: Artifact */
   $handler->display->display_options['fields']['field_pece_artifact']['id'] = 'field_pece_artifact';
   $handler->display->display_options['fields']['field_pece_artifact']['table'] = 'field_data_field_pece_artifact';
   $handler->display->display_options['fields']['field_pece_artifact']['field'] = 'field_pece_artifact';
@@ -452,7 +453,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['field_pece_tags']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_pece_tags']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_pece_tags']['field_api_classes'] = TRUE;
-  /* Field: Content: Edit link */
+  /* Field: Content: Link to edit content */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
@@ -470,7 +471,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
-  /* Contextual filter: Field: Artifact (field_pece_artifact) */
+  /* Contextual filter: Content: Artifact (field_pece_artifact) */
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['id'] = 'field_pece_artifact_target_id';
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['table'] = 'field_data_field_pece_artifact';
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['field'] = 'field_pece_artifact_target_id';
@@ -498,7 +499,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['validate_options']['access'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -540,7 +541,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['footer']['area']['format'] = 'panopoly_wysiwyg_text';
   $handler->display->display_options['footer']['area']['tokenize'] = TRUE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Content: Author */
+  /* Relationship: Content: Content author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
@@ -587,7 +588,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['created']['date_format'] = 'panopoly_day';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'panopoly_time';
-  /* Field: Field: Artifact */
+  /* Field: Content: Artifact */
   $handler->display->display_options['fields']['field_pece_artifact']['id'] = 'field_pece_artifact';
   $handler->display->display_options['fields']['field_pece_artifact']['table'] = 'field_data_field_pece_artifact';
   $handler->display->display_options['fields']['field_pece_artifact']['field'] = 'field_pece_artifact';
@@ -650,7 +651,7 @@ function pece_annotations_views_default_views() {
     'pece_analytic' => 'pece_analytic',
   );
   $handler->display->display_options['arguments']['field_pece_analytic_target_id']['validate_options']['access'] = TRUE;
-  /* Contextual filter: Field: Artifact (field_pece_artifact) */
+  /* Contextual filter: Content: Artifact (field_pece_artifact) */
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['id'] = 'field_pece_artifact_target_id';
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['table'] = 'field_data_field_pece_artifact';
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['field'] = 'field_pece_artifact_target_id';
@@ -678,7 +679,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['arguments']['field_pece_artifact_target_id']['validate_options']['access'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -838,7 +839,7 @@ function pece_annotations_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';

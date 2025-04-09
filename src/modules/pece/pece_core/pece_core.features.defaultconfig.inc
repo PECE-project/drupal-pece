@@ -27,24 +27,60 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['access comments'] = array(
     'name' => 'access comments',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
+  );
+
+  // Exported permission: 'access notify'.
+  $permissions['access notify'] = array(
+    'name' => 'access notify',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'notify',
   );
 
   // Exported permission: 'administer comments'.
   $permissions['administer comments'] = array(
     'name' => 'administer comments',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
       'administrator' => 'administrator',
     ),
     'module' => 'comment',
+  );
+
+  // Exported permission: 'administer files'.
+  $permissions['administer files'] = array(
+    'name' => 'administer files',
+    'roles' => array(
+      'Data Importer' => 'Data Importer',
+      'Manager' => 'Manager',
+      'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'file_entity',
+  );
+
+  // Exported permission: 'administer notify'.
+  $permissions['administer notify'] = array(
+    'name' => 'administer notify',
+    'roles' => array(
+      'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'notify',
   );
 
   // Exported permission: 'cancel account'.
   $permissions['cancel account'] = array(
     'name' => 'cancel account',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'user',
@@ -54,6 +90,8 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['create files'] = array(
     'name' => 'create files',
     'roles' => array(
+      'Data Importer' => 'Data Importer',
+      'Platform Director' => 'Platform Director',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
@@ -64,6 +102,7 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['create pece_fieldsite content'] = array(
     'name' => 'create pece_fieldsite content',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
@@ -74,6 +113,7 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['delete any pece_fieldsite content'] = array(
     'name' => 'delete any pece_fieldsite content',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -83,6 +123,7 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['delete own pece_fieldsite content'] = array(
     'name' => 'delete own pece_fieldsite content',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
@@ -93,6 +134,7 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['edit any pece_fieldsite content'] = array(
     'name' => 'edit any pece_fieldsite content',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -102,6 +144,8 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['edit own comments'] = array(
     'name' => 'edit own comments',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
@@ -111,6 +155,7 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['edit own pece_fieldsite content'] = array(
     'name' => 'edit own pece_fieldsite content',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
@@ -121,6 +166,8 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['post comments'] = array(
     'name' => 'post comments',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
@@ -129,7 +176,11 @@ function pece_core_defaultconfig_user_default_permissions() {
   // Exported permission: 'skip comment approval'.
   $permissions['skip comment approval'] = array(
     'name' => 'skip comment approval',
-    'roles' => array(),
+    'roles' => array(
+      'Platform Director' => 'Platform Director',
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'comment',
   );
 
@@ -137,6 +188,7 @@ function pece_core_defaultconfig_user_default_permissions() {
   $permissions['use text format panopoly_wysiwyg_text'] = array(
     'name' => 'use text format panopoly_wysiwyg_text',
     'roles' => array(
+      'Platform Director' => 'Platform Director',
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
@@ -213,12 +265,6 @@ function pece_core_defaultconfig_views_default_views() {
     5 => '5',
   );
   $handler->display->display_options['filters']['rid']['reduce_duplicates'] = TRUE;
-  /* Filter criterion: User: The user ID */
-  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
-  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['operator'] = '!=';
-  $handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
 
   /* Display: All users */
   $handler = $view->new_display('panel_pane', 'All users', 'all_users');

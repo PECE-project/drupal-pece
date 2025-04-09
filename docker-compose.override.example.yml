@@ -1,15 +1,16 @@
 version: '3'
 
 services:
-  db_mysql:
+  mariadb:
     networks:
       pecev1:
 
-  dev_pece:
-    networks:
-      pecev1:
-    labels:
-      - "traefik.http.routers.${PROJECT_NAME}.rule=Host(`${PROJECT_BASE_URL}`)"
+  php:
+    environment:
+      PHP_FPM_CLEAR_ENV: "no"
+      PHP_XDEBUG: 1
+      PHP_XDEBUG_DEFAULT_ENABLE: 1
+      PHP_XDEBUG_REMOTE_CONNECT_BACK: 1
 
 networks:
   pecev1:

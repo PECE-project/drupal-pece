@@ -1,38 +1,101 @@
 version: '3'
 
 services:
-  db_mysql:
-    image: mysql:5.7
-    container_name: pece-db-mysql
+  mariadb:
+    image: wodby/mariadb:$MARIADB_TAG
+    container_name: "${PROJECT_NAME}_mariadb"
+    stop_grace_period: 30s
     environment:
-      - MYSQL_USER=pece
-      - MYSQL_DATABASE=pece
-      - MYSQL_PASSWORD=ZwTuVZzQO90qwYzA
-      - MYSQL_ROOT_PASSWORD=Sk82jxYqqpx02jxT
-    # volumes:
-    #   - ../databases/pece:/var/lib/mysql
+      MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+      MYSQL_DATABASE: $DB_NAME
+      MYSQL_USER: $DB_USER
+      MYSQL_PASSWORD: $DB_PASSWORD
+      MYSQL_PORT: $DB_PORT
+    volumes:
+      - ./docker/database/pecedb:/var/lib/mysql # Use bind mount
 
-  dev_pece:
-    image: revagomes/pece:php7-alpha1
+  php:
     build:
       context: ./
-      dockerfile: ./docker/DockerfileDevelopment
-    cap_add:
-      - ALL
-    hostname: "dev"
-    restart: always
-    working_dir: /pece/drupal
+      dockerfile: ./docker/DockerfileWodbyPHP
+    container_name: "${PROJECT_NAME}_php"
     environment:
-      - DB_PORT=3306
-      - DB_HOST=pece-db
-      - DB_NAME=pece
-      - DB_DRIVER=mysql
-      - DB_USERNAME=pece
-      - DB_PASSWORD=ZwTuVZzQO90qwYzA
+      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
+      DB_HOST: $DB_HOST
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+      DB_DRIVER: $DB_DRIVER
+      PHP_FPM_USER: wodby
+      PHP_FPM_GROUP: wodby
+      COLUMNS: 80 # Set 80 columns for docker exec -it.
     volumes:
-      - $PWD:/pece/drupal
+      - ./:/var/www/html
       - $HOME/.ssh:/pece/.ssh
       - $HOME/.gitconfig:/pece/.gitconfig
-    container_name: pece-dev-nginx
-    links:
-      - db_mysql:pece-db
+
+  nginx:
+    image: wodby/nginx:$NGINX_TAG
+    container_name: "${PROJECT_NAME}_nginx"
+    depends_on:
+      - php
+    environment:
+      NGINX_STATIC_OPEN_FILE_CACHE: "off"
+      NGINX_ERROR_LOG_LEVEL: debug
+      NGINX_BACKEND_HOST: php
+      NGINX_SERVER_ROOT: /var/www/html/build
+      NGINX_VHOST_PRESET: $NGINX_VHOST_PRESET
+#      NGINX_DRUPAL_FILE_PROXY_URL: http://example.com
+    volumes:
+      - ./:/var/www/html
+# For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
+#      - ./:/var/www/html:cached # User-guided caching
+#      - docker-sync:/var/www/html # Docker-sync
+    labels:
+      - "traefik.http.routers.${PROJECT_NAME}_nginx.rule=Host(`${PROJECT_BASE_URL}`)"
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: "${PROJECT_NAME}_mailhog"
+    labels:
+      - 'traefik.backend=${PROJECT_NAME}_mailhog'
+      - 'traefik.port=8025'
+      - 'traefik.frontend.rule=Host:mailhog.${PROJECT_BASE_URL}'
+
+  node:
+    image: wodby/node:$NODE_TAG
+    container_name: "${PROJECT_NAME}_node"
+    working_dir: /var/www/html
+    stdin_open: true
+    tty: true
+    labels:
+      - 'traefik.backend=${PROJECT_NAME}_node'
+    volumes:
+      - ./:/var/www/html
+    command: sh -c 'npm install && npm run build'
+
+#  node_app:
+#    image: wodby/node:$NODE_TAG
+#    container_name: "${PROJECT_NAME}_node_app"
+#    working_dir: /var/www/html
+#    stdin_open: true
+#    tty: true
+#    labels:
+#      - 'traefik.backend=${PROJECT_NAME}_node_app'
+#      - 'traefik.port=3000'
+#      - 'traefik.frontend.rule=Host:front.${PROJECT_BASE_URL}'
+#    expose:
+#      - "3000"
+#    volumes:
+#      - ./:/var/www/html
+#    command: sh -c 'npm install && npm run build'
+
+  traefik:
+    image: traefik
+    container_name: "${PROJECT_NAME}_traefik"
+    command:  --api.insecure=true --providers.docker --log.level=INFO
+    ports:
+      - '80:80'
+      - '8081:8080' # Dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

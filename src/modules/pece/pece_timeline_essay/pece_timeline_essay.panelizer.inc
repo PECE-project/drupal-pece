@@ -499,6 +499,29 @@ function pece_timeline_essay_panelizer_defaults() {
   $pane->uuid = '0e0597c6-b425-45e2-afcd-6186d1c561ad';
   $display->content['new-0e0597c6-b425-45e2-afcd-6186d1c561ad'] = $pane;
   $display->panels['sidebar'][5] = 'new-0e0597c6-b425-45e2-afcd-6186d1c561ad';
+  $pane = new stdClass();
+  $pane->pid = 'new-f2bc9011-7bfa-4703-bf31-d93fa8a65b35';
+  $pane->panel = 'sidebar';
+  $pane->type = 'citation';
+  $pane->subtype = 'citation';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'override_title' => 1,
+    'override_title_text' => 'Cite as',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 6;
+  $pane->locks = array();
+  $pane->uuid = 'f2bc9011-7bfa-4703-bf31-d93fa8a65b35';
+  $display->content['new-f2bc9011-7bfa-4703-bf31-d93fa8a65b35'] = $pane;
+  $display->panels['sidebar'][6] = 'new-f2bc9011-7bfa-4703-bf31-d93fa8a65b35';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $panelizer->display = $display;

@@ -36,19 +36,19 @@ function pece_ark_batches_form() {
   $username = variable_get('ark_ezid_user');
   $password = variable_get('ark_ezid_password');
   if (empty($nids)) {
-    drupal_set_message(t("You don't currently have any nodes for the selected ARK content types, and this batch requires at least one node to process. As a result, this form is disabled."));
+    drupal_set_message(t("You currently don't have any nodes for the selected ARK content types, and this batch requires at least one node to be processed. As a result, this form is disabled."), 'warning');
     $form['submit']['#disabled'] = TRUE;
   }
   if (empty($username)) {
-    drupal_set_message(t("You don't set the username to connect to the remote sever under the ") . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark') . ". As a result, this form is disabled.");
+    drupal_set_message(t("You have not set a username for connecting to the remote sever under the ") . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark') . ". As a result, this form is disabled." , 'warning');
     $form['submit']['#disabled'] = TRUE;
   }
   if (empty($password)) {
-    drupal_set_message(t("You don't set the password to connect to the remote sever under the ") . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark') . ". As a result, this form is disabled.");
+    drupal_set_message(t("You have not set a password for connecting to the remote sever under the ") . l(t('Ark Module Settings page'), '/admin/config/services/ark/ark') . ". As a result, this form is disabled.", 'warning');
     $form['submit']['#disabled'] = TRUE;
   }
   if (empty($remote_status)) {
-    drupal_set_message(t("You don't set the default status to the new entries for the remote sever under the ") . l(t('Ark Module Settings page'), 'admin/config/services/ark/remote_update_settings') . ". As a result, this form is disabled.");
+    drupal_set_message(t("You have not set a default status for new entries to the remote sever under the ") . l(t('Ark Module Settings page'), 'admin/config/services/ark/remote_update_settings') . ". As a result, this form is disabled.", 'warning');
     $form['submit']['#disabled'] = TRUE;
   }
   return $form;
@@ -400,8 +400,6 @@ function pece_ark_operation_for_local_ark_data_creation_finished($success, $resu
  */
 function pece_ark_operation_for_remote_ark_data_update_finished($success, $results, $operations) {
   if ($success) {
-    dd('$results: ');
-    dd(print_r($results));
     // Here we could do something meaningful with the results.
     // We just display the number of nodes we processed...
     drupal_set_message(t('@count results processed in @requests HTTP requests.', array('@count' => count($results), '@requests' => _batch_ark_get_http_requests())));
@@ -479,6 +477,20 @@ function _get_all_node_ids_for_selected_ark_node_types() {
   return $result;
 }
 
+function _get_all_ark_enabled_content_nids() {
+  $result = array();
+  $were_ark_nodes = _get_were_clause_for_selected_ark_node_types();
+  $query = db_select('node', 'n');
+  $query->innerJoin('field_data_field_ark_enabled', 'fdata', 'fdata.entity_id = n.nid');
+  $query->fields('n'  , array('nid'));
+  $query->where("$were_ark_nodes");
+  $query->where("field_ark_enabled_value = 1");
+  $query->orderBy('n.nid', 'ASC');
+  $query->extend('PagerDefault');
+  $result = $query->execute()->fetchAllAssoc('nid',PDO::FETCH_ASSOC);
+  return $result;
+}
+
 function _get_all_node_data_for_remote_update() {
   $result = array();
   $query = db_select('ark_map', 'am');
@@ -489,5 +501,11 @@ function _get_all_node_data_for_remote_update() {
   $query->where('am.pending_remote_update = :cond', array(':cond' => 1));
   $query->extend('PagerDefault');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $enabledToArk = _get_all_ark_enabled_content_nids();
+  foreach ($result as $key => $data) {
+    // test if this content is with enable ark set with true.
+    if (!isset($enabledToArk[$data['nid']]))
+      unset($result[$key]);
+  }
   return $result;
 }

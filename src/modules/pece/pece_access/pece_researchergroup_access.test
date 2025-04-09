@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * Test PECE access matrix from Researcher.
+ * Need simpletest module installed
+ *
+ */
+class PeceResearcherGroupAccessMatrix extends PeceResearcherAccessMatrix {
+
+  // Create getInfo method
+  public static function getInfo() {
+    return array(
+      'name' => 'PECE Researcher Access Matrix  in Group',
+      'description' => 'Creates PECE Access Matrix to researcher user in groups',
+      'group' => 'PECE',
+    );
+  }
+
+  function setUp() {
+    parent::setUp();
+    $this->addUserInAllGroups($this->user,5);
+  }
+
+}

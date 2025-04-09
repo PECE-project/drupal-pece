@@ -516,6 +516,29 @@ function pece_artifacts_bundle_panelizer_defaults() {
   $pane->uuid = '92633101-e96f-4ec6-a623-9517242ed1e5';
   $display->content['new-92633101-e96f-4ec6-a623-9517242ed1e5'] = $pane;
   $display->panels['column2'][8] = 'new-92633101-e96f-4ec6-a623-9517242ed1e5';
+  $pane = new stdClass();
+  $pane->pid = 'new-84cc1349-ab38-4377-8b0d-91cc65ceca00';
+  $pane->panel = 'column2';
+  $pane->type = 'citation';
+  $pane->subtype = 'citation';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'override_title' => 1,
+    'override_title_text' => 'Cite as',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 9;
+  $pane->locks = array();
+  $pane->uuid = '84cc1349-ab38-4377-8b0d-91cc65ceca00';
+  $display->content['new-84cc1349-ab38-4377-8b0d-91cc65ceca00'] = $pane;
+  $display->panels['column2'][9] = 'new-84cc1349-ab38-4377-8b0d-91cc65ceca00';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-3c37459c-aea2-4ed9-87a0-e54ea998c66f';
   $panelizer->display = $display;

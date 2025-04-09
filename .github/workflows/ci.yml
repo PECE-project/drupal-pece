@@ -1,0 +1,49 @@
+name: PECEv1 CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: juampynr/drupal7ci:latest
+
+    services:
+      mariadb:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+      dev:
+        image: revagomes/pece:php7-alpha-1
+        env:
+          DB_NAME: pece
+          DB_USER: pece
+          DB_PASSWORD: pece
+          DB_ROOT_PASSWORD: root
+          DB_PORT: 3306
+          DB_HOST: mariadb
+
+        ports:
+          - 8098:80
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Setup Environment
+        run: |
+          docker exec pece_dev npm install && gulp setup && gulp build && gulp site-install
+
+    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
+    # Docs: https://getcomposer.org/doc/articles/scripts.md
+
+    #  - name: Run test suite
+    #    run: composer run-script test

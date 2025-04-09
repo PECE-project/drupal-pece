@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * Test PECE access matrix from Researcher.
+ * Need simpletest module installed
+ *
+ */
+class PeceAnonymousAccessMatrix extends PeceAccessMatrix {
+
+  // Create getInfo method
+  public static function getInfo() {
+    return array(
+      'name' => 'PECE Anonymous Access Matrix',
+      'description' => 'Creates PECE Access Matrix to anonymous user',
+      'group' => 'PECE',
+    );
+  }
+
+  /**
+   * Override this function to use the same file folders.
+   * @return void
+   */
+  // Create setUp method
+  function setUp() {
+    $this->userRole = 'anonymous';
+    $this->user = NULL;
+    parent::setUp();
+  }
+}

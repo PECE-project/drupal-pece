@@ -10,7 +10,8 @@ var defaults = {
   adaptiveHeight: true,
   autoplay: true,
   autoplaySpeed: 5000,
-  arrows: false,
+  arrows: true,
+  dots: true,
   speed: 700
 };
 

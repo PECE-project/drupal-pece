@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_profile.features.defaultconfig.inc
@@ -169,7 +170,7 @@ function pece_profile_defaultconfig_field_default_fields() {
           'label' => 'hidden',
           'module' => 'image',
           'settings' => array(
-            'image_link' => '',
+            'image_link' => 'content',
             'image_style' => 'pece_thumbnail',
           ),
           'type' => 'image',
@@ -213,7 +214,7 @@ function pece_profile_defaultconfig_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => 3,
+        'weight' => 7,
       ),
     ),
   );
@@ -322,6 +323,7 @@ function pece_profile_defaultconfig_user_default_permissions() {
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
     'roles' => array(
+      'administrator' => 'administrator',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),

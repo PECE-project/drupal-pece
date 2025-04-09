@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * pece_artifacts.strongarm.inc
@@ -66,25 +67,25 @@ function pece_artifacts_strongarm() {
   $strongarm->value = array(
     'status' => 1,
     'view modes' => array(
-      'page_manager' => array(
-        'status' => 1,
-        'default' => 1,
-        'choice' => 0,
-      ),
       'default' => array(
-        'status' => 0,
-        'default' => 0,
         'choice' => 0,
-      ),
-      'teaser' => array(
-        'status' => 0,
         'default' => 0,
-        'choice' => 0,
+        'status' => 0,
       ),
       'featured' => array(
-        'status' => 0,
-        'default' => 0,
         'choice' => 0,
+        'default' => 0,
+        'status' => 0,
+      ),
+      'page_manager' => array(
+        'choice' => 0,
+        'default' => 1,
+        'status' => 1,
+      ),
+      'teaser' => array(
+        'choice' => 0,
+        'default' => 0,
+        'status' => 0,
       ),
     ),
   );

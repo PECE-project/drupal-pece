@@ -16,7 +16,7 @@
         border: 1px solid $color-royal-purple
         color: $color-royal-purple
         background: none
-        &:hover
+        &:hover, &:focus
           background-color: $color-royal-purple
 
 .node-type-pece-analytic,
@@ -81,7 +81,8 @@
       content: "\f040"
       padding-right: 10px
 
-  .views-field-edit-node a:hover
+  .views-field-edit-node a:hover,
+  .views-field-edit-node a:focus
     text-decoration: none
     background-color: #eee
 
@@ -150,9 +151,9 @@
       height: 70px
       width: 70px
       background-color: $color-primary
-      content: ""
+      content: map-get($icon-node-type-selectors, '.node-pece-annotation')
       color: $color-gray-lighter
-      font-family: 'FontAwesome'
+      font-family: $font-family-icon
       font-size: 2rem
       line-height: 7rem
       position: absolute
@@ -177,7 +178,7 @@
       .field-content .item-list
         @extend %pece-struct-analytics-list
 
-.page-annotions-question-artifact
+.page-annotions-question-artifact,
 .view-display-id-pece_question_annotations,
 .view-display-id-pece_question_artifact_annotions
   .field-name-field-pece-struct-analytics
@@ -192,9 +193,9 @@
       height: 70px
       width: 70px
       background-color: $color-primary
-      content: ""
+      content: map-get($icon-node-type-selectors, '.node-pece-annotation')
       color: $color-gray-lighter
-      font-family: 'FontAwesome'
+      font-family: $font-family-icon
       font-size: 2rem
       line-height: 7rem
       position: absolute

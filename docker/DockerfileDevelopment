@@ -38,7 +38,7 @@ RUN apt-get update -y && apt-get install -y \
     --no-install-recommends
 
 ### INSTALL PHP-FPM AND EXTENSION
-## Add PHP7.2 source
+## Add PHP7.4 source
 RUN wget https://packages.sury.org/php/apt.gpg -O- | sudo apt-key add -
 RUN echo "deb https://packages.sury.org/php/ stretch main" | sudo tee /etc/apt/sources.list.d/php.list
 
@@ -46,20 +46,20 @@ RUN apt-get install -y \
     libmagickwand-dev
 
 RUN apt-get update -y && apt-get install -y \
-    php7.2-fpm \
-    php7.2-cli \
-    php7.2-common \
-    php7.2-curl \
-    php7.2-mbstring \
-    php7.2-mysql \
-    php7.2-xml \
-    php7.2-gd \
-    php7.2-json \
-    php7.2-ldap \
-    php7.2-sqlite3 \
-    php7.2-xmlrpc \
+    php7.4-fpm \
+    php7.4-cli \
+    php7.4-common \
+    php7.4-curl \
+    php7.4-mbstring \
+    php7.4-mysql \
+    php7.4-xml \
+    php7.4-gd \
+    php7.4-json \
+    php7.4-ldap \
+    php7.4-sqlite3 \
+    php7.4-xmlrpc \
     php-geoip \
-    php7.2-imagick \
+    php7.4-imagick \
     php-imap \
     php-xdebug \
     php-xml \
@@ -103,22 +103,21 @@ RUN mv drush.phar /usr/local/bin/drush
 RUN apt-get install unzip --yes
 
 ### CONFIGURE PHP-FPM
-RUN echo "xdebug.max_nesting_level=9999" >> /etc/php/7.2/mods-available/xdebug.ini
-RUN echo "xdebug.default_enable=1" >> /etc/php/7.2/mods-available/xdebug.ini
-RUN echo "xdebug.remote_connect_back=1" >> /etc/php/7.2/mods-available/xdebug.ini
-RUN echo "xdebug.remote_enable=1" >> /etc/php/7.2/mods-available/xdebug.ini
-RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php/7.2/fpm/php.ini && \
-    sed -i "s/memory_limit = 128M/memory_limit = 1256M/" /etc/php/7.2/fpm/php.ini && \
-    sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/7.2/fpm/php.ini && \
-    sed -i "s/display_errors = Off/display_errors = stderr/" /etc/php/7.2/fpm/php.ini && \
-    sed -i "s/post_max_size = 8M/post_max_size = 30M/" /etc/php/7.2/fpm/php.ini && \
-    sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 30M/" /etc/php/7.2/fpm/php.ini && \
-    sed -i "s/;opcache.enable=0/opcache.enable=1/" /etc/php/7.2/fpm/php.ini && \
-    sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.2/fpm/php-fpm.conf && \
-    sed -i '/^listen = /clisten = 9000' /etc/php/7.2/fpm/pool.d/www.conf && \
-    sed -i '/^listen.allowed_clients/c;listen.allowed_clients =' /etc/php/7.2/fpm/pool.d/www.conf && \
-    sed -i '/^;catch_workers_output/ccatch_workers_output = yes' /etc/php/7.2/fpm/pool.d/www.conf && \
-    sed -i '/^;env\[TEMP\] = .*/aenv[DB_PORT_3306_TCP_ADDR] = $DB_PORT_3306_TCP_ADDR' /etc/php/7.2/fpm/pool.d/www.conf
+RUN echo "xdebug.max_nesting_level=9999" >> /etc/php/7.4/mods-available/xdebug.ini
+RUN echo "xdebug.mode=debug" >> /etc/php/7.4/mods-available/xdebug.ini
+RUN echo "xdebug.discover_client_host=1" >> /etc/php/7.4/mods-available/xdebug.ini
+RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php/7.4/fpm/php.ini && \
+    sed -i "s/memory_limit = 128M/memory_limit = 1256M/" /etc/php/7.4/fpm/php.ini && \
+    sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/7.4/fpm/php.ini && \
+    sed -i "s/display_errors = Off/display_errors = stderr/" /etc/php/7.4/fpm/php.ini && \
+    sed -i "s/post_max_size = 8M/post_max_size = 30M/" /etc/php/7.4/fpm/php.ini && \
+    sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 30M/" /etc/php/7.4/fpm/php.ini && \
+    sed -i "s/;opcache.enable=0/opcache.enable=1/" /etc/php/7.4/fpm/php.ini && \
+    sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.4/fpm/php-fpm.conf && \
+    sed -i '/^listen = /clisten = 9000' /etc/php/7.4/fpm/pool.d/www.conf && \
+    sed -i '/^listen.allowed_clients/c;listen.allowed_clients =' /etc/php/7.4/fpm/pool.d/www.conf && \
+    sed -i '/^;catch_workers_output/ccatch_workers_output = yes' /etc/php/7.4/fpm/pool.d/www.conf && \
+    sed -i '/^;env\[TEMP\] = .*/aenv[DB_PORT_3306_TCP_ADDR] = $DB_PORT_3306_TCP_ADDR' /etc/php/7.4/fpm/pool.d/www.conf
 
 ### APPLY NGINX CONFIGURATION
 RUN mkdir -p /tmp/logs

@@ -1,0 +1,67 @@
+From 12ef635f216588cb589f8f3076722402eb04b704 Mon Sep 17 00:00:00 2001
+From: Reva Gomes <revagomes@gmail.com>
+Date: Sun, 12 Feb 2023 11:08:22 +0100
+Subject: [PATCH] Revert "Issue #3250518 by TR: Namespace dependencies in .info
+ files"
+
+This reverts commit 3c4e18d26e028facd0d26854fcd2de83bccbec5c.
+---
+ rules.info                           | 2 +-
+ rules_admin/rules_admin.info         | 2 +-
+ rules_i18n/rules_i18n.info           | 4 ++--
+ rules_scheduler/rules_scheduler.info | 2 +-
+ 4 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/rules.info b/rules.info
+index 94ddefac..93797aa4 100644
+--- a/rules.info
++++ b/rules.info
+@@ -26,5 +26,5 @@ files[] = tests/rules.test
+ files[] = tests/rules_test.rules.inc
+ 
+ dependencies[] = system (>= 7.40)
+-dependencies[] = entity:entity
++dependencies[] = entity
+ dependencies[] = entity:entity_token
+diff --git a/rules_admin/rules_admin.info b/rules_admin/rules_admin.info
+index 72257037..c8c3120d 100644
+--- a/rules_admin/rules_admin.info
++++ b/rules_admin/rules_admin.info
+@@ -2,7 +2,7 @@ name = Rules UI
+ description = Administrative interface for managing rules.
+ package = Rules
+ core = 7.x
+-dependencies[] = rules:rules
++dependencies[] = rules
+ configure = admin/config/workflow/rules
+ 
+ ; Test cases
+diff --git a/rules_i18n/rules_i18n.info b/rules_i18n/rules_i18n.info
+index d0fc614c..2867c079 100644
+--- a/rules_i18n/rules_i18n.info
++++ b/rules_i18n/rules_i18n.info
+@@ -1,7 +1,7 @@
+ name = Rules translation
+ description = Allows translating rules.
+-dependencies[] = rules:rules
+-dependencies[] = i18n:i18n_string
++dependencies[] = rules
++dependencies[] = i18n_string
+ package = Multilingual - Internationalization
+ core = 7.x
+ files[] = rules_i18n.i18n.inc
+diff --git a/rules_scheduler/rules_scheduler.info b/rules_scheduler/rules_scheduler.info
+index a0af20cf..a48ae29f 100644
+--- a/rules_scheduler/rules_scheduler.info
++++ b/rules_scheduler/rules_scheduler.info
+@@ -1,6 +1,6 @@
+ name = Rules Scheduler
+ description = Schedule the execution of Rules components using actions.
+-dependencies[] = rules:rules
++dependencies[] = rules
+ package = Rules
+ core = 7.x
+ files[] = includes/rules_scheduler.handler.inc
+-- 
+2.25.1
+

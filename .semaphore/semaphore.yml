@@ -1,0 +1,98 @@
+version: v1.0
+name: Initial Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Setup
+    task:
+      jobs:
+        - name: Containers setup
+          commands:
+            - checkout
+            - cp .env.example .env
+            - make up
+      prologue:
+        commands:
+          - 'git clone git@github.com:revagomes/drupal-pece.git'
+      epilogue:
+        on_pass:
+          commands:
+            - echo 'Takalepaw marko wèi!'
+        on_fail:
+          commands:
+            - 'echo "Nooop :("'
+    dependencies: []
+  - name: Build
+    dependencies:
+      - Setup
+    task:
+      epilogue:
+        on_pass:
+          commands:
+            - echo 'Takalepau nuzetap marko wèi!'
+        on_fail:
+          commands:
+            - 'echo "Nooop :("'
+      jobs:
+        - name: Building project
+          commands:
+            - checkout
+            - cp .env.example .env
+            - make up
+            - make install
+            - make setup
+            - make build
+      prologue:
+        commands:
+          - 'git clone -b pece2.0 git@github.com:revagomes/drupal-pece.git'
+  - name: Installation
+    dependencies:
+      - Build
+    task:
+      epilogue:
+        on_pass:
+          commands:
+            - echo 'Takalepau nuzinztaw marko wèi!'
+        on_fail:
+          commands:
+            - 'echo "Nooop :("'
+      jobs:
+        - name: Installing PECE distro
+          commands:
+            - checkout
+            - cp .env.example .env
+            - make up
+            - make install
+            - make setup
+            - make build
+            - make site-install
+      prologue:
+        commands:
+          - 'git clone -b pece2.0 git@github.com:revagomes/drupal-pece.git'
+  - name: DB Updates
+    dependencies:
+      - Installation
+    task:
+      epilogue:
+        on_pass:
+          commands:
+            - echo 'Takalepau naz hatwalizazaum marko wèi!'
+        on_fail:
+          commands:
+            - 'echo "Nooop :("'
+      jobs:
+        - name: Starting DB updates
+          commands:
+            - checkout
+            - cp .env.example .env
+            - make up
+            - make install
+            - make setup
+            - make build
+            - make site-install
+            - make drush "updb -y"
+      prologue:
+        commands:
+          - 'git clone git@github.com:revagomes/drupal-pece.git'

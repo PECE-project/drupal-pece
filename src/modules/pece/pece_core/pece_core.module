@@ -69,6 +69,11 @@ function pece_core_entity_info_alter(&$entity_info) {
     'custom settings' => TRUE,
   );
 
+  $entity_info['node']['view modes']['card_full_text'] = array(
+    'label' => t('Card - Full text'),
+    'custom settings' => TRUE,
+  );
+
   $entity_info['node']['view modes']['meta_content'] = array(
     'label' => t('Meta Content'),
     'custom settings' => TRUE,
@@ -115,8 +120,9 @@ function pece_core_er_viewmode_get_view_modes_alter(&$view_modes, $field, $insta
   unset($view_modes['full']);
   $card_title = $view_modes['card'];
   $view_modes = array(
-      'card' => $card_title,
-    ) + $view_modes;
+    'card' => $card_title,
+    'card_full_text' => 'Card - full text',
+  ) + $view_modes;
 }
 
 /**

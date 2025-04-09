@@ -651,6 +651,29 @@ function pece_artifacts_tabular_panelizer_defaults() {
   $pane->uuid = 'b69eb20f-9c51-4c67-9c58-b9d0660ef9ce';
   $display->content['new-b69eb20f-9c51-4c67-9c58-b9d0660ef9ce'] = $pane;
   $display->panels['sidebar'][10] = 'new-b69eb20f-9c51-4c67-9c58-b9d0660ef9ce';
+  $pane = new stdClass();
+  $pane->pid = 'new-b67ca15e-4113-45c7-b81d-ae1e47290f51';
+  $pane->panel = 'sidebar';
+  $pane->type = 'citation';
+  $pane->subtype = 'citation';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'override_title' => 1,
+    'override_title_text' => 'Cite as',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 11;
+  $pane->locks = array();
+  $pane->uuid = 'b67ca15e-4113-45c7-b81d-ae1e47290f51';
+  $display->content['new-b67ca15e-4113-45c7-b81d-ae1e47290f51'] = $pane;
+  $display->panels['sidebar'][11] = 'new-b67ca15e-4113-45c7-b81d-ae1e47290f51';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $panelizer->display = $display;

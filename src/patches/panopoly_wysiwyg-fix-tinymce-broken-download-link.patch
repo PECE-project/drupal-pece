@@ -1,0 +1,29 @@
+From 0be0d7fb237d8cc2acbf2fac52e5630e64d0b769 Mon Sep 17 00:00:00 2001
+From: Reva Gomes <revagomes@gmail.com>
+Date: Wed, 23 Nov 2022 00:24:11 +0100
+Subject: [PATCH] Fix broken download link of TinyMCE library.
+
+---
+ panopoly_wysiwyg.make | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/panopoly_wysiwyg.make b/panopoly_wysiwyg.make
+index a62ab4f..37d43fa 100644
+--- a/panopoly_wysiwyg.make
++++ b/panopoly_wysiwyg.make
+@@ -27,9 +27,9 @@ projects[caption_filter][subdir] = contrib
+ ; Include our Editors
+ 
+ libraries[tinymce][download][type] = get
+-libraries[tinymce][download][url] = http://download.moxiecode.com/tinymce/tinymce_3.5.11.zip
+-libraries[tinymce][patch][1561882] = http://drupal.org/files/1561882-cirkuit-theme-tinymce-3.5.8.patch
+-libraries[tinymce][patch][2876031] = https://www.drupal.org/files/issues/tinymce-chrome58-fix-2876031-5.patch
++libraries[tinymce][download][url] = https://download.tiny.cloud/tinymce/community/tinymce_3.5.12.zip
++libraries[tinymce][patch][1561882] = http://drupal.org/files/1561882-cirkuit-theme-tinymce-3.5.8.patch
++;libraries[tinymce][patch][2876031] = https://www.drupal.org/files/issues/tinymce-chrome58-fix-2876031-5.patch
+ 
+ libraries[markitup][download][type] = git
+ libraries[markitup][download][url] = https://github.com/markitup/1.x.git
+-- 
+2.25.1
+

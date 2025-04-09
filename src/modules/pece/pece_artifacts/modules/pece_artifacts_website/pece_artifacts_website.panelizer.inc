@@ -606,6 +606,29 @@ function pece_artifacts_website_panelizer_defaults() {
   $pane->uuid = '92633101-e96f-4ec6-a623-9517242ed1e5';
   $display->content['new-92633101-e96f-4ec6-a623-9517242ed1e5'] = $pane;
   $display->panels['column2'][10] = 'new-92633101-e96f-4ec6-a623-9517242ed1e5';
+  $pane = new stdClass();
+  $pane->pid = 'new-bc063ed6-2e6a-4d0c-8795-e3fce7615d2a';
+  $pane->panel = 'column2';
+  $pane->type = 'citation';
+  $pane->subtype = 'citation';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'override_title' => 1,
+    'override_title_text' => 'Cite as',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 11;
+  $pane->locks = array();
+  $pane->uuid = 'bc063ed6-2e6a-4d0c-8795-e3fce7615d2a';
+  $display->content['new-bc063ed6-2e6a-4d0c-8795-e3fce7615d2a'] = $pane;
+  $display->panels['column2'][11] = 'new-bc063ed6-2e6a-4d0c-8795-e3fce7615d2a';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-3c37459c-aea2-4ed9-87a0-e54ea998c66f';
   $panelizer->display = $display;

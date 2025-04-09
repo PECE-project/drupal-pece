@@ -21,8 +21,6 @@ function pece_groups_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Group settings',
-    'weight' => '3',
     'children' => array(
       0 => 'field_pece_media_image',
       1 => 'group_access',
@@ -31,18 +29,20 @@ function pece_groups_field_group_info() {
       4 => 'og_roles_permissions',
       5 => 'group_content_access',
     ),
-    'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Group settings',
+      'formatter' => 'collapsible',
       'instance_settings' => array(
-        'required_fields' => 1,
-        'id' => '',
         'classes' => 'group-fields field-group-fieldset',
         'description' => 'Be aware that this content might become <strong>Visible</strong> to anyone if you assign it to an <strong>Open Group</strong>.
 ',
+        'id' => '',
+        'required_fields' => 1,
       ),
-      'formatter' => 'collapsible',
+      'label' => 'Group settings',
     ),
+    'format_type' => 'fieldset',
+    'label' => 'Group settings',
+    'weight' => '3',
   );
   $field_groups['group_fields|node|pece_group|form'] = $field_group;
 

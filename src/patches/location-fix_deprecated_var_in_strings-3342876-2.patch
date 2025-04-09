@@ -1,0 +1,34 @@
+From 9d91f05c924cadcd5ffcb37479216c12ce58821c Mon Sep 17 00:00:00 2001
+From: Reva Gomes <revagomes@gmail.com>
+Date: Sat, 18 Feb 2023 13:12:25 +0100
+Subject: [PATCH] Fix deprecated ${var} in string.
+
+---
+ location.module | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/location.module b/location.module
+index d82963b..4b28f17 100644
+--- a/location.module
++++ b/location.module
+@@ -1887,7 +1887,7 @@ function theme_location_latitude_dms($variables) {
+   $latitude = $variables['latitude'];
+   $output = '';
+   list($degrees, $minutes, $seconds, $negative) = location_dd_to_dms($latitude);
+-  $output .= "${degrees}° ${minutes}' ${seconds}\" ";
++  $output .= "{$degrees}° {$minutes}' {$seconds}\" ";
+   if (!$negative) {
+     $output .= 'N';
+   }
+@@ -1905,7 +1905,7 @@ function theme_location_longitude_dms($variables) {
+   $longitude = $variables['longitude'];
+   $output = '';
+   list($degrees, $minutes, $seconds, $negative) = location_dd_to_dms($longitude);
+-  $output .= "${degrees}° ${minutes}' ${seconds}\" ";
++  $output .= "{$degrees}° {$minutes}' {$seconds}\" ";
+   if (!$negative) {
+     $output .= 'E';
+   }
+-- 
+2.25.1
+

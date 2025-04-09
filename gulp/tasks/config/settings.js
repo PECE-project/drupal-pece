@@ -1,9 +1,11 @@
 var fs = require('fs');
 var gulp = require('gulp');
 var slug = require('slug');
-var inquirer = require('inquirer');
 var rename = require('gulp-rename');
 var replace = require('gulp-replace');
+
+// change to dynamic import.
+var inquirer;
 
 var cwd = process.cwd();
 var isProduction = process.env.IS_PRODUCTION;
@@ -24,33 +26,6 @@ var questions = info.map(function (info) {
   info.filter = filter;
   info.validate = validation;
   return info;
-});
-
-gulp.task('config:settings', function () {
-  if (isProduction) {
-    return gulp.src('src/cnf/settings.local.base.php')
-      .pipe(replace('%SETTINGS_DATABASE_NAME%', process.env.DB_NAME))
-      .pipe(replace('%SETTINGS_DATABASE_USERNAME%', process.env.DB_USERNAME))
-      .pipe(replace('%SETTINGS_DATABASE_PASSWORD%', process.env.DB_PASSWORD))
-      .pipe(replace('%SETTINGS_DATABASE_HOST%', process.env.DB_HOST))
-      .pipe(replace('%SETTINGS_DATABASE_PORT%', process.env.DB_PORT))
-      .pipe(replace('%SETTINGS_DATABASE_DRIVER%', process.env.DB_DRIVER))
-      .pipe(replace('%SETTINGS_DATABASE_PREFIX%', ''))
-      .pipe(rename('settings.local.php'))
-      .pipe(gulp.dest('cnf'));
-  }
-  return inquirer.prompt(questions).then(function (answers) {
-    return gulp.src('src/cnf/settings.local.base.php')
-      .pipe(replace('%SETTINGS_DATABASE_NAME%', answers.name))
-      .pipe(replace('%SETTINGS_DATABASE_USERNAME%', answers.username))
-      .pipe(replace('%SETTINGS_DATABASE_PASSWORD%', answers.password))
-      .pipe(replace('%SETTINGS_DATABASE_HOST%', answers.host))
-      .pipe(replace('%SETTINGS_DATABASE_PORT%', answers.port))
-      .pipe(replace('%SETTINGS_DATABASE_DRIVER%', answers.driver))
-      .pipe(replace('%SETTINGS_DATABASE_PREFIX%', answers.prefix))
-      .pipe(rename('settings.local.php'))
-      .pipe(gulp.dest('cnf'));
-  });
 });
 
 var validateMap = {
@@ -79,5 +54,37 @@ function validation(value) {
     return info.name + ' cannot have invalid characters';
   }
 
-  return true
+  return true;
 }
+
+async function configSettings(done) {
+  if (isProduction) {
+    return gulp.src('src/cnf/settings.local.base.php')
+      .pipe(replace('%SETTINGS_DATABASE_NAME%', process.env.DB_NAME))
+      .pipe(replace('%SETTINGS_DATABASE_USERNAME%', process.env.DB_USERNAME))
+      .pipe(replace('%SETTINGS_DATABASE_PASSWORD%', process.env.DB_PASSWORD))
+      .pipe(replace('%SETTINGS_DATABASE_HOST%', process.env.DB_HOST))
+      .pipe(replace('%SETTINGS_DATABASE_PORT%', process.env.DB_PORT))
+      .pipe(replace('%SETTINGS_DATABASE_DRIVER%', process.env.DB_DRIVER))
+      .pipe(replace('%SETTINGS_DATABASE_PREFIX%', ''))
+      .pipe(rename('settings.local.php'))
+      .pipe(gulp.dest('cnf'));
+  }
+  if (!inquirer) {
+    inquirer = (await import('inquirer').default);
+  }
+  return inquirer.prompt(questions).then(function (answers) {
+    return gulp.src('src/cnf/settings.local.base.php')
+      .pipe(replace('%SETTINGS_DATABASE_NAME%', answers.name))
+      .pipe(replace('%SETTINGS_DATABASE_USERNAME%', answers.username))
+      .pipe(replace('%SETTINGS_DATABASE_PASSWORD%', answers.password))
+      .pipe(replace('%SETTINGS_DATABASE_HOST%', answers.host))
+      .pipe(replace('%SETTINGS_DATABASE_PORT%', answers.port))
+      .pipe(replace('%SETTINGS_DATABASE_DRIVER%', answers.driver))
+      .pipe(replace('%SETTINGS_DATABASE_PREFIX%', answers.prefix))
+      .pipe(rename('settings.local.php'))
+      .pipe(gulp.dest('cnf'));
+  });
+}
+
+exports.configSettings = configSettings;

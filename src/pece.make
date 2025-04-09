@@ -1,18 +1,22 @@
 core = 7.x
 api = 2
 
+defaults[projects][subdir] = contrib
+defaults[projects][type] = module
+defaults[libraries][type] = library
+
 ; =====================
 ; kraftwagen
 ; =====================
 
 projects[kw_manifests][type] = module
 projects[kw_manifests][download][type] = git
-projects[kw_manifests][download][url] = "git://github.com/kraftwagen/kw-manifests.git"
+projects[kw_manifests][download][url] = "https://github.com/kraftwagen/kw-manifests.git"
 projects[kw_manifests][subdir] = kraftwagen
 
 projects[kw_itemnames][type] = module
 projects[kw_itemnames][download][type] = git
-projects[kw_itemnames][download][url] = "git://github.com/kraftwagen/kw-itemnames.git"
+projects[kw_itemnames][download][url] = "https://github.com/kraftwagen/kw-itemnames.git"
 projects[kw_itemnames][subdir] = kraftwagen
 
 ; =====================
@@ -66,7 +70,7 @@ libraries[autopager][download][url] = https://bitbucket.org/luksak/jquery-autopa
 libraries[autopager][download][subtree] = autopager
 
 libraries[timelinejs][download][type] = file
-libraries[timelinejs][download][url] = https://github.com/NUKnightLab/TimelineJS3/archive/3.6.5.tar.gz
+libraries[timelinejs][download][url] = https://github.com/NUKnightLab/TimelineJS3/archive/3.6.1.tar.gz
 
 ; PHP encryption libraries (REAL AES module dependency)
 libraries[php-encryption][download][type] = file
@@ -76,20 +80,38 @@ libraries[php-encryption][download][url] = https://github.com/defuse/php-encrypt
 libraries[bgrins-spectrum][download][type] = file
 libraries[bgrins-spectrum][download][url] =  https://github.com/bgrins/spectrum/archive/master.zip
 
+; Gif Resizer
 libraries[gifresizer][download][type] = git
 libraries[gifresizer][download][url] = https://github.com/revagomes/gifresizer.git
+libraries[gifresizer][download][subtree] = master
+
+; Monolog
+libraries[monolog][download][type] = git
+libraries[monolog][download][url] = https://github.com/Seldaek/monolog.git
+libraries[monolog][download][branch] = main
+;libraries[monolog][download][revision] = 60ad5183b5e5d6c9d4047e9f3072d36071dcc161
+
+libraries[speedreader][download][type] = git
+libraries[speedreader][download][url] = https://github.com/revagomes/speedreader
+
+libraries[mespeak][download][type] = "get"
+libraries[mespeak][download][url] = "https://github.com/btopro/mespeak/archive/master.zip"
+libraries[mespeak][directory_name] = "mespeak"
+
 
 ; =====================
 ; Utilities and APIs
 ; =====================
 
 ; Overrides Panopoly's Ctools to apply custom patches.
-projects[ctools][version] = 1.15
+projects[ctools][version] = 1.21
 projects[ctools][subdir] = contrib
+; Ajax + Allow settings: Allowed settings lost on ajax (exposed forms/pager)
+projects[ctools][patch][1910608] =  "https://www.drupal.org/files/issues/2020-12-01/views_content-keyword-substitution-1910608-83.patch"
 ; Edit text of "More Link" from Panel config.
-projects[ctools][patch][1000146] = "https://www.drupal.org/files/issues/2018-03-26/views_panes-more_link_text-1000146-28.patch"
+projects[ctools][patch][1000146] = "https://www.drupal.org/files/issues/2019-01-09/views_panes-more_link_text-1000146-33.patch"
 ; Fix PECE Annotation Save&Continue issue.
-projects[ctools][patch][1907256] = "https://www.drupal.org/files/issues/2018-05-23/ctools-modal-1907256-9.patch"
+;projects[ctools][patch][1907256] = "https://www.drupal.org/files/issues/2018-05-23/ctools-modal-1907256-9.patch"
 ; @TODO: Update and reapply the following patch if needed. @see https://www.drupal.org/project/ctools/issues/2671150
 ; projects[ctools][patch][2671150] = "https://www.drupal.org/files/issues/ctools-2671150-1.patch"
 
@@ -98,10 +120,10 @@ projects[libraries][version] = 2.5
 projects[libraries][subdir] = contrib
 
 ; Overrides panopoly's features.
-projects[features][version] = 2.11
+projects[features][version] = 2.15
 projects[features][subdir] = contrib
 
-projects[xautoload][version] = 5.8
+projects[xautoload][version] = 5.9
 projects[xautoload][subdir]  = contrib
 
 projects[prevent_js_alerts][version] = 1.0
@@ -112,6 +134,7 @@ projects[pathauto_entity][subdir] = contrib
 
 projects[subpathauto][version] = 1.3
 projects[subpathauto][subdir] = contrib
+projects[subpathauto][patch][3258976] = https://www.drupal.org/files/issues/2022-01-17/subpathauto-3258976-php-8.0-compatibility.patch
 
 projects[site_notice][version] = 1.4
 projects[site_notice][subdir] = contrib
@@ -119,25 +142,31 @@ projects[site_notice][subdir] = contrib
 projects[yaml_parser][version] = 1.0
 projects[yaml_parser][subdir] = contrib
 
+projects[notify][version] = 1.8
+projects[notify][subdir] = contrib
+
+projects[jquery_update][version] = 4.1
+projects[jquery_update][subdir] = contrib
+
 ; =====================
 ; Views
 ; =====================
 
 ; Overrides panopoly's views to apply custom patches.
-projects[views][version] = 3.24
+projects[views][version] = 3.28
 projects[views][subdir] = contrib
-; Exposed Sort By and Sort Order view pane settings not retained.
-projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
-; PHP 7.2: count() on non-Countable in views_many_to_one_helper.
-projects[views][patch][2977851] = https://www.drupal.org/files/issues/2019-09-23/2977851-views-php72-count-14_0.patch
 ; Warning: A non-numeric value encountered in views_plugin_pager_full->query().
 projects[views[patch][2885660] = https://www.drupal.org/files/issues/2018-06-28/2885660-13.patch
-; Exposed Sort By and Sort Order view pane settings not retained.
-projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
 ; Having the same sort twice doesn't work correctly.
 projects[views][patch][2284423] = https://www.drupal.org/files/issues/2019-04-29/views-same_sort_twice-2284423-3.patch
+
+; Exposed Sort By and Sort Order view pane settings not retained.
+;projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
 ; Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter.
-projects[views][patch][3076826] = https://www.drupal.org/files/issues/2019-08-23/views-php7-3076826-2.patch
+;projects[views][patch][3076826] = https://www.drupal.org/files/issues/2019-08-23/views-php7-3076826-2.patch
+
+projects[views_bulk_operations][version] = 3.7
+projects[views_bulk_operations][subdir] = contrib
 
 projects[views_infinite_scroll][version] = 2.3
 projects[views_infinite_scroll][subdir] = contrib
@@ -154,7 +183,7 @@ projects[tvi][subdir] = contrib
 projects[better_exposed_filters][version] = 3.6
 projects[better_exposed_filters][subdir] = contrib
 
-projects[masonry][version] = 3.0-beta1
+projects[masonry][version] = 3.0
 projects[masonry][subdir] = contrib
 
 projects[masonry_views][version] = 3.0
@@ -167,7 +196,7 @@ projects[nodeorder][subdir] = contrib
 ; Administration
 ; =====================
 
-projects[admin_menu][version] = 3.0-rc6
+projects[admin_menu][version] = 3.0-rc7
 projects[admin_menu][subdir]  = contrib
 
 projects[adminimal_admin_menu][version] = 1.9
@@ -191,6 +220,16 @@ projects[total_control][subdir] = contrib
 
 projects[node_access_rebuild_bonus][version] = 1.1
 projects[node_access_rebuild_bonus][subdir] = contrib
+
+projects[disable_messages][version] = 1.2
+
+projects[user_restrictions][version] = 1.1
+
+; Analytics Matomo
+projects[matomo][version] = 2.13
+projects[matomo][subdir] = contrib
+projects[piwik_noscript][version] = 1.5
+projects[piwik_noscript][subdir] = contrib
 
 ; =====================
 ; Configuration Management
@@ -227,7 +266,7 @@ projects[honeypot][version] = 1.26
 
 ; Role Delegation
 projects[role_delegation][subdir] = contrib
-projects[role_delegation][version] = 1.2
+projects[role_delegation][version] = 1.3
 
 ; User Protect
 projects[userprotect][subdir] = contrib
@@ -239,11 +278,12 @@ projects[username_enumeration_prevention][version] = 1.3
 
 ; Two-Factor Authentication
 projects[tfa][subdir] = contrib
-projects[tfa][version] = 2.1
+projects[tfa][version] = 2.3
 
 # 2FA Plugins
-projects[tfa_basic][subdir] = contrib
 projects[tfa_basic][version] = 1.1
+projects[tfa_basic][subdir] = contrib
+;projects[tfa_basic][patch][3310662] = https://www.drupal.org/files/issues/2022-09-20/tfa_basic-3310662-2.patch
 
 ; Password Policy
 projects[password_policy][subdir] = contrib
@@ -264,7 +304,7 @@ projects[panelizer][patch][1549608] = https://www.drupal.org/files/issues/paneli
 projects[panelizer][patch][2788851] = https://www.drupal.org/files/issues/panelizer-administer-panelizer-2788851-2.patch
 
 ; Overrides panopoly's panels.
-projects[panels][version] = 3.10
+projects[panels][version] = 3.11
 projects[panels][subdir] = contrib
 
 projects[fieldable_panels_panes][version] = 1.13
@@ -279,40 +319,41 @@ projects[panels_mini_ipe][subdir] = contrib
 ; =====================
 
 ; The Panopoly Foundation
-projects[panopoly_admin][version] = 1.79
+projects[panopoly_admin][version] = 1.94
 projects[panopoly_admin][subdir] = contrib
 
-projects[panopoly_core][version] = 1.79
+projects[panopoly_core][version] = 1.94
 projects[panopoly_core][subdir] = contrib
 
-projects[panopoly_images][version] = 1.79
+projects[panopoly_images][version] = 1.94
 projects[panopoly_images][subdir] = contrib
 
-projects[panopoly_magic][version] = 1.79
+projects[panopoly_magic][version] = 1.94
 projects[panopoly_magic][subdir] = contrib
 
-projects[panopoly_theme][version] = 1.79
+projects[panopoly_theme][version] = 1.94
 projects[panopoly_theme][subdir] = contrib
 
-projects[panopoly_widgets][version] = 1.79
+projects[panopoly_widgets][version] = 1.94
 projects[panopoly_widgets][subdir] = contrib
 
-projects[panopoly_users][version] = 1.79
+projects[panopoly_users][version] = 1.94
 projects[panopoly_users][subdir] = contrib
 
 ; The Panopoly Toolset
-projects[panopoly_pages][version] = 1.79
+projects[panopoly_pages][version] = 1.94
 projects[panopoly_pages][subdir] = contrib
 
-projects[panopoly_search][version] = 1.79
+projects[panopoly_search][version] = 1.94
 projects[panopoly_search][subdir] = contrib
 projects[panopoly_search][patch][] = "./patches/panopoly-remove_panelizer_data_alter_callback.patch"
 
-projects[panopoly_wysiwyg][version] = 1.79
+projects[panopoly_wysiwyg][version] = 1.94
 projects[panopoly_wysiwyg][subdir] = contrib
+;projects[panopoly_wysiwyg][patch][] = "./patches/panopoly_wysiwyg-fix-tinymce-broken-download-link.patch"
 
 ; For running the automated tests.
-projects[panopoly_test][version] = 1.79
+projects[panopoly_test][version] = 1.94
 projects[panopoly_test][subdir] = contrib
 
 ; The Panopoly Radix
@@ -338,14 +379,14 @@ projects[radix_views][subdir] = contrib
 
 projects[eck][version] = 2.0-rc10
 projects[eck][subdir]  = contrib
+projects[eck][patch][] = https://www.drupal.org/files/issues/2022-05-03/3278485.patch
 
 projects[entity_view_mode][version] = 1.0-rc1
 projects[entity_view_mode][subdir] = contrib
 
 ; Overrides panopoly's entityreference.
-projects[entityreference][version] = 1.5
+projects[entityreference][version] = 1.6
 projects[entityreference][subdir] = contrib
-projects[entityreference][patch][1423778] = "https://www.drupal.org/files/issues/entityreference-1423778-brokenhandler.diff"
 
 projects[entityreference_view_widget][version] = 2.1
 projects[entityreference_view_widget][subdir] = contrib
@@ -358,6 +399,12 @@ projects[entityconnect][subdir] = contrib
 
 projects[inline_entity_form][version] = 1.9
 projects[inline_entity_form][subdir]  = contrib
+
+projects[media][version] = 2.30
+
+projects[menu_block][version] = 2.9
+
+projects[panels_breadcrumbs][version] = 2.6
 
 ; =====================
 ; Form & Form Elements
@@ -378,6 +425,13 @@ projects[better_formats][subdir] = contrib
 projects[smart_trim][version] = 1.6
 projects[smart_trim][subdir] = contrib
 
+projects[multiform][version] = 1.6
+projects[multiform][subdir] = contrib
+
+projects[plupload][version] = 1.7
+projects[plupload][subdir] = contrib
+projects[plupload][patch][1903850] = https://www.drupal.org/files/issues/plupload-1_5_8-rm_examples-1903850-33.patch
+
 ; =====================
 ; Files
 ; =====================
@@ -391,12 +445,11 @@ projects[manualcrop][subdir] = contrib
 projects[mimedetect][version] = 1.1
 projects[mimedetect][subdir] = contrib
 
-; Overrides panopoly's media.
-projects[media][version] = 2.26
-projects[media][subdir] = contrib
+projects[remote_stream_wrapper][version] = 1.0
+projects[remote_stream_wrapper][subdir] = contrib
 
 ; Overrides panopoly's media_youtube.
-projects[media_youtube][version] = 3.10
+projects[media_youtube][version] = 3.12
 projects[media_youtube][subdir] = contrib
 // projects[media_youtube][patch][1572550] = https://www.drupal.org/files/issues/2020-12-15/the_youtube_video_id_is_invalid_or_the_video_was_deleted-1572550-076.patch
 
@@ -410,39 +463,40 @@ projects[image_resize_filter][patch][] = ./patches/image_resize_filter-dblog_ima
 projects[download_file][version] = 2.1
 projects[download_file][subdir] = contrib
 
+projects[pack_upload][version] = 1.2
+projects[pack_upload][subdir] = contrib
+
 ; =====================
 ; Fields
 ; =====================
 
 ; Overrides Panopoly's date.
-projects[date][version] =  2.10
+projects[date][version] =  2.14
 projects[date][subdir] = contrib
-projects[date][patch][1143680] = https://www.drupal.org/files/issues/2020-08-04/date-beforeShowDay-eval-1143680-28.patch
 
 ; Overrides Panopoly's link.
-projects[link][version] = 1.7
+projects[link][version] = 1.11
 projects[link][subdir] = contrib
 ; Fix URL validation rejects existing valid content after upgrade to 7.x-1.4.
-projects[link][patch][2666912] = https://www.drupal.org/files/issues/2019-11-18/link-fix-internal-validation-2666912-54.patch
-projects[link][patch][2666912] = https://www.drupal.org/files/issues/2019-11-18/link-revert-url-validation-2666912-54.patch
+projects[link][patch][2666912] = https://www.drupal.org/files/issues/2019-11-18/link-fix-internal-validation-2666912-55.patch
 
 ; Menu blocks disappear when editing/saving in the Panels IPE
-projects[link][patch][3120382] = https://www.drupal.org/files/issues/2020-03-17/link-panopoly-magic-notice-3120382-2.patch
+;projects[link][patch][3120382] = https://www.drupal.org/files/issues/2020-03-17/link-panopoly-magic-notice-3120382-2.patch
 
 ; Overrides Panopoly's linkit.
-projects[linkit][version] = 3.5
+projects[linkit][version] = 3.6
 projects[linkit][subdir] = contrib
-; Allow Linkit support for any eligible element type.
-projects[linkit][patch][2651404] = https://www.drupal.org/files/issues/linkit-add-to-any-element-2651404-3.patch
 
-projects[languagefield][version] = 1.7
+; Allow Linkit support for any eligible element type.
+;projects[linkit][patch][2651404] = https://www.drupal.org/files/issues/linkit-add-to-any-element-2651404-3.patch
+
+projects[languagefield][version] = 1.8
 projects[languagefield][subdir] = contrib
 
 ; Node Access User Reference
 projects[nodeaccess_userreference][subdir] = contrib
 projects[nodeaccess_userreference][version] = 3.10
 projects[nodeaccess_userreference][patch][] = ./patches/nodeaccess_userreference-fix_install_phase_requirement_error.patch
-
 
 ; Color field
 projects[color_field][subdir] = contrib
@@ -455,8 +509,9 @@ projects[color_field][version] = 1.8
 ; Search API
 ; Overrides panopoly's search_api settings.
 projects[search_api][subdir] = contrib
-projects[search_api][version] = 1.26
-projects[search_api][patch][] = ./patches/search_api_fix-composer-friendly-dependecies-issue.patch
+projects[search_api][version] = 1.27
+projects[search_api][patch][] = ./patches/search_api_fix-composer-friendly-dependencies-issue.patch
+;projects[search_api][patch][] = https://www.drupal.org/files/issues/2021-08-31/2159827-35--facet_paths.patch
 
 ; Search API DB
 ; Overrides panopoly's search_api_db version.
@@ -468,7 +523,7 @@ projects[search_api_db][version] = 1.8
 ; =====================
 
 projects[radix][type] = theme
-projects[radix][version] = 3.7
+projects[radix][version] = 3.x
 projects[radix][subdir] = contrib
 
 ; Adminimal Theme for admin
@@ -491,12 +546,14 @@ projects[scholarly_lite][subdir] = contrib
 
 ; Rules
 projects[rules][subdir] = contrib
-projects[rules][version] = 2.12
-projects[rules][patch][2189645] = https://www.drupal.org/files/issues/d7_component_caches.patch
+projects[rules][version] = 2.14
+projects[rules][patch][2189645] = https://www.drupal.org/files/issues/2020-07-30/2189645-35.component-caches.patch
+projects[rules][patch][] = patches/rules_fix-dependency-list-revert-namespace-dependencies-info-files.patch
+projects[rules][patch][] = patches/rules_fix-dependency-list-revert-entity_token-namespace-dependency-info-file.patch
 
 ; Translation
 projects[l10n_update][subdir] = contrib
-projects[l10n_update][version] = 2.4
+projects[l10n_update][version] = 2.7
 
 ; Organic groups
 projects[og][subdir] = contrib
@@ -513,6 +570,8 @@ projects[email][version] = 1.3
 ; Location
 projects[location][subdir] = contrib
 projects[location][version] = 3.7
+; Passing the $glue and $pieces parameters in reverse order to implode has been deprecated since PHP 7.4
+projects[location][patch][] = https://www.drupal.org/files/issues/2020-03-06/location-php-7.4.patch
 
 ; Bundle Inherit
 projects[bundle_inherit][subdir] = contrib
@@ -528,18 +587,17 @@ projects[creative_commons][version] = 1.2
 
 ; Legal
 projects[legal][subdir] = contrib
-projects[legal][version] = 1.10
+projects[legal][version] = 1.11
 
 ; Profile 2
 projects[profile2][subdir] = contrib
 projects[profile2][version] = 1.7
-projects[profile2][patch][1273026] = https://www.drupal.org/files/ctools-profile2_from_user-1273026-10_0.patch
 projects[profile2][patch][1273026] = https://www.drupal.org/files/ctools-new-file-1273026-10.patch
 projects[profile2][patch][1307538] = https://www.drupal.org/files/issues/profile2-fix_entity_info_failure_during_install-1307538-10-7.x-1.x-dev.patch
 
 ; GMap
 projects[gmap][subdir] = contrib
-projects[gmap][version] = 2.11
+projects[gmap][version] = 2.12
 
 ; External link
 projects[extlink][subdir] = contrib
@@ -550,7 +608,7 @@ projects[realname][subdir] = contrib
 projects[realname][version] = 1.4
 
 ; TagCloud
-projects[tagclouds][version] = 1.12
+projects[tagclouds][version] = 1.13
 projects[tagclouds][subdir]  = contrib
 projects[tagclouds][patch][]  = ./patches/tagclouds_fix-composer-friendly-dependecies-issue.patch
 
@@ -575,14 +633,19 @@ projects[pdf_reader][patch][] = "./patches/pdf_reader-keydown_event_page_error.p
 projects[amber][subdir] = contrib
 projects[amber][version] = 1.x-dev
 projects[amber][patch][2945946] = "https://www.drupal.org/files/issues/amber-mysql5.7_compatibility-2945946-4.patch"
+projects[amber][patch][] = "./patches/amber_fix-AmberPDO-class-issue.patch"
+projects[abmer][patch][3342515] = "./patches/amber_fix-deprecated-code-issues.patch"
 
 ; Backup and Migrate
 projects[backup_migrate][subdir] = contrib
-projects[backup_migrate][version] = 3.9
+projects[backup_migrate][version] = 3.10
 
 ; Node Expiration
 projects[node_expire][subdir] = contrib
 projects[node_expire][version] = 2.2
+
+;projects[speedreader][version] = 1.1
+;projects[mespeak][version] = 1.x
 
 ; =====================
 ; Development Modules
@@ -594,11 +657,11 @@ projects[backup_migrate_sftp][version] = 1.0
 
 ; SMTP Mail
 projects[smtp][subdir] = contrib
-projects[smtp][version] = 1.7
+projects[smtp][version] = 1.9
 
 ; Services
 projects[services][subdir] = contrib
-projects[services][version] = 3.27
+projects[services][version] = 3.29
 
 ; Services Views
 projects[services_views][subdir] = contrib
@@ -614,24 +677,41 @@ projects[job_scheduler][version] = 2.0
 
 ; Feeds
 projects[feeds][subdir] = contrib
-projects[feeds][version] = 2.0-beta5
+projects[feeds][version] = 2.0-beta6
 
 ; Feeds Tamper
 projects[feeds_tamper][subdir] = contrib
 projects[feeds_tamper][version] = 1.2
 
+; Feeds Preview
+projects[feedspreview][subdir] = contrib
+projects[feedspreview][version] = 1.x-dev
+
+projects[feeds_tamper_string2id][subdir] = contrib
+projects[feeds_tamper_string2id][version] = 1.1
+
 ; Bibliography
 projects[biblio][subdir] = contrib
-projects[biblio][version] = 1.4
+projects[biblio][version] = 1.6
 
 ; Bibliography Zotero
 projects[biblio_zotero][subdir] = contrib
 projects[biblio_zotero][version] = 1.0-alpha3
+projects[biblio_zotero][patch][] = "./patches/biblio_zotero-3304957-2.patch"
+
+; =====================
+; Logging
+; =====================
+
+projects[monolog][subdir] = contrib
+projects[monolog][version] = 1.2
+
 
 ; =====================
 ; Imports
 ; =====================
-; At the end, so that overrides are possible.includes[] = modules/sandbox/taller_entity/taller_entity.make
+; At the end, so that overrides are possible.
+; e.g. includes[] = modules/sandbox/taller_entity/taller_entity.make
 includes[] = modules/sandbox/panels_packery/panels_packery.make
 
 ; =====================
