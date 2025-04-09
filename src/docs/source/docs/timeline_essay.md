@@ -92,13 +92,13 @@ Steps to Create a Timeline Essay
 
 12. Next, add optional keyword tags to your timeline essay. Tag the content. As you type, suggested tags will be automatically generated if they exist already in the system. We recommend following these suggestions and using existing tags if they are not too different from what you intended, but feel free to make up new tags!
 
-    ![](media/timeline_16.png)
+    ![](media/timeline_14.png)
     
 
 13. In the "Custom Citation" tab, you have the option to cite your timeline essay as a part of a particular project.
     When you save this content, a suggested citation will be auto-created by the platform. If this content is generated from or associated with a particular project on the platform, this field indicates which project the content should be cited as part of. You may leave this field blank if the content does not need to be cited as part of a particular project.
 
-    ![](media/timeline_14.png)
+    ![](media/timeline_15.png)
 
 
     There is also the option to enable ARK. ARKs (Archival Resource Keys) serve as persistent identifiers, or stable, trusted references for an information object. They are like DOIs but are open, decentralized, and non-paywalled; you can assign an ARK to almost any content you create, but they should be used thoughtfully for content whose long-term accessibility is vital. This is toggled off by default but you have the option to enable ARKs.
@@ -107,5 +107,4 @@ Steps to Create a Timeline Essay
 14. Finally, click “Save” at the top of the page to save your work. And remember: all of these settings can be revised at any time: private artifacts can be made public later, and vice versa, for example.
 
 
-    ![](media/timeline_.png)
 
