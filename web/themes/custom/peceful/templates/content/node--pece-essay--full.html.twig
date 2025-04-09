@@ -104,7 +104,7 @@ view_mode ? view_mode|clean_class,
     {% endif %}
 
     <div{{ content_attributes }}>
-      {{ content }}
+      {{ content|without('extra_field_icons') }}
     </div>
   {% else %}
     {{ attach_library('peceful/legacy') }}
