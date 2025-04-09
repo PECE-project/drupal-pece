@@ -64,12 +64,19 @@ Steps to Edit PECE Essay Layout
 
 1. Go to the "Layout" tab at the top of the page.
 
-2. Clear all previous configuration by clicking the delete button as identified below. You will be promted to confirm this action. Select remove to confirm changes.
+2. Clear all previous configurations by clicking the delete button as identified below. You will be prompted to confirm this action. Select remove to confirm changes.
 
 3. Now you can create your own layout from scratch! 
-Click "Add section". You may now select from a variety of column layouts. For each column layout, select the column width ratio you prefer from the drop-down menu. You will be asked for an administrative label. This is a label for your column layout. You may gnore this section or enter a descriptive label.
-Once you have finished your creating your column label, click "Add section" to confirm.
-Repeat the instructions above to continue configuring our PECE essay layout.
+Click "Add section". You may now select from a variety of column layouts. For each column layout, select the column width ratio you prefer from the drop-down menu. You will be asked for an administrative label. This is a label for your column layout. You may ignore this section or enter a descriptive label.
+Once you have finished creating your column label, click "Add section" to confirm.
+Repeat the instructions above to continue configuring your PECE essay layout.
 
-4. To save your changes, click "Save layout".
+4. To add content to your columns, click the "+" icon next to "Choose content to add to the essay".
+You will then be prompted to choose between a "Basic block" and "More..."
+
+    Selecting the "Basic block" option will open a pop-up. Here, you may add any general writing content. After entering a title and body content, confirm by clicking "Add block".
+
+    Selecting the "More..." option allows the option to create and add specialised content. Select from the list of content fields based on your needs.
+
+5. To save your changes, click "Save layout".
 
