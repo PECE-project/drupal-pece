@@ -33,7 +33,7 @@ You may select a substantive logic by typing in the first few letters and making
 8. If there are any other group members or managers, add them by typing the first few letters of their name into the field. 
 Their screen name should pop up. Select their name. To add more than one contributor, click the "Add another item" button and repeat the same process.
 
-9. Next, add optional keyword tags to your timeline essay. Tag the content. As you type, suggested tags will be automatically generated if they exist already in the system. 
+9. Next, add optional keyword tags to your timeline essay. Tag the content. As you type, suggested tags will be automatically generated if they already exist in the system. 
 We recommend following these suggestions and using existing tags if they are not too different from what you intended, but feel free to make up new tags!
 
 10. The "Relations" field allows you to select group(s) that are related to the current sub-group being made. 
