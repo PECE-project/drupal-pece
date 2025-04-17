@@ -60,11 +60,8 @@ name of the group.
 
 3. Once you locate the group, click on the link to navigate to the group page.
 
-4. [To be revised, no current way to join a group] 
-Click ‘Subscribe to group’ on the right hand of the screen. The group administrator will
-have to approve your request before you are considered a member of a
-group, and this may take some time. Once you are listed as a member, you
-should be able to begin associating content with a group.
+4. [To be revised, no current way to join a group from the website] 
+Contact the group manager to join the group.
 
 Steps to Manage Group Memberships 
 --------------------------
@@ -72,18 +69,13 @@ Steps to Manage Group Memberships
 1. If you created a group or have been appointed as an administrator of a
 group, navigate to the group’s page from your dashboard or from the “Collaborate” link.
 
-    To do this from your dashboard, click the edit button next to your group's name or 
-    click "See and sort all my managed groups".
+    To do this from your dashboard, click the edit button next to your group's name or click "See and sort all my managed groups".
 
     ![](media/group-8)
 
     To do this from the "Collaborate" link, select your group to navigate to the group page. Click the "Edit" link where you can manage group memberships. Save your changes.
 
     ![](media/group-9)
-
-2. [To be revised] Click on the Group tab in the edit menu. (You will not see this tab if you are not a group owner.)
-
-3. [To be revised] Select the link ‘People.’ Here you can see a list of site users that have requested to join the group or that have already been approved. If a user has been approved, their State will be listed as "Active"; otherwise, their State will be listed as "Pending".
 
 
 ### Approving a Group Member [The below is to be revised, no current way to approve]
@@ -111,20 +103,9 @@ group, navigate to the group’s page from your dashboard or from the “Collabo
 2. Scroll down to "Group members" and click "Remove" next to their name.
 
 
-Adding Artifacts to Groups [To be edited]
------
+Adding Artifacts to Groups [Link to be changed for the artifacts]
+-----------------------------------------
 
-1. Follow instructions to [add an artifact](../artifacts), and designate the Group Audience to which you would like the group added.
+1. Follow instructions to [add an artifact](../artifacts), and designate the group you would like to assocaite it with in the "View Permissions and Groups".
 
-
-Adding Artifacts Other Users Created to Groups
------
-
-1. Navigate to the content you’d like to add to a group.
-
-2. Click on the “Edit Group Audience” tab.
-
-3. Select the group to which you would like to add the content.
-
-4. Save the content.
 
