@@ -310,7 +310,8 @@ class Node extends D7Node {
   {
     $query = $this->select('og_membership', 'ogm')
       ->fields('ogm', ['gid'])
-      ->condition('ogm.etid', $nid);
+      ->condition('ogm.etid', $nid)
+      ->condition('field_name', 'og_group_ref');
     return $query->execute()->fetchCol();
   }
 }
