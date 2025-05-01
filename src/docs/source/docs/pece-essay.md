@@ -57,7 +57,7 @@ Steps to Create a PECE Essay
 
 11. Finally, click “Save” at the top of the page to save your work. And remember: all of these settings can be revised at any time: private artifacts can be made public later, and vice versa, for example.
 
-    ![](media/pece-essay-13.png)
+    
 
 Steps to Edit PECE Essay Layout
 ---------------------------------------
