@@ -64,7 +64,9 @@ function pece_migrate_deploy_remove_extra_group_refs() {
 
   // Replace all d7 group ids with d10 group ids
   array_walk($d7_memberships_for_removal, function(&$membership, $index, $migration_map) {
-    $membership['new_gid'] = $migration_map[(int) $membership['gid']];
+    if (isset($migration_map[$membership['gid']])) {
+      $membership['new_gid'] = $migration_map[$membership['gid']];
+    }
   }, $group_migration_map);
 
   // $referenced_groups_by_node is an array, keyed by the nodes that reference groups, with values corresponding to the group references that should be removed from each node.
@@ -74,7 +76,7 @@ function pece_migrate_deploy_remove_extra_group_refs() {
       }
       // Some groups may have been deleted prior to the migration, so make sure not to add null values to the array.
       // This is possible, apparently because og_membership entries in d7 were not deleted along with groups referenced in the table.
-      if (!empty($item['new_gid'])) {
+      if (isset($item['new_gid'])) {
         $carry[$item['etid']][] = $item['new_gid'];
       }
       return $carry;
@@ -89,10 +91,18 @@ function pece_migrate_deploy_remove_extra_group_refs() {
       continue;
     }
     $group_access_field_items = $node->field_groups_with_view_access;
-    foreach($group_access_field_items as $index => $field_item) {
-      if (in_array($field_item->target_id, $referenced_groups_by_node[$node_id])) {
-        unset($node->field_groups_with_view_access[$index]);
+    $duplicate_values = [];
+    for ($i = count($group_access_field_items) -1; $i >= 0; $i--) {
+      $field_item = $group_access_field_items[$i];
+      if (in_array($field_item->target_id, $referenced_groups_by_node[$node_id]) || in_array($field_item->target_id, $duplicate_values)) {
+        // remove the field item
+        unset($node->field_groups_with_view_access[$i]);
+        // remove the entry from $referenced_groups_by_node so that it does not try to delete any duplicate values.
+        $referenced_groups_by_node[$node_id] = array_diff($referenced_groups_by_node[$node_id], array($field_item->target_id));
         $save_needed = TRUE;
+      } else {
+        // collect possible duplicates to assess for removal
+        $duplicate_values[] = $field_item->target_id;
       }
     }
     if ($save_needed) {
