@@ -123,4 +123,5 @@ function pece_migrate_deploy_add_d7_users_to_v1_researchers() {
   $pece_v1_researchers_group = array_values($loaded_groups)[0];
   // Add every D7 user to the group
   $pece_v1_researchers_group->field_group_members = array_keys($user_migration_map);
+  $pece_v1_researchers_group->save();
 }
