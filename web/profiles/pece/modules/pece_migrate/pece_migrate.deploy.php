@@ -109,4 +109,18 @@ function pece_migrate_deploy_remove_extra_group_refs() {
       $node->save();
     }
   }
+
+  // should we now drop the table og_memberships right in the hook or do it manually afterward?
+}
+
+function pece_migrate_deploy_add_d7_users_to_v1_researchers() {
+  $db = \Drupal::database();
+
+  // Get d7 to d10 user migration map
+  $user_migration_map = $db->query('SELECT destid1 FROM migrate_map_v1_user')->fetchAllKeyed(0, 0);
+  // Get the PECE v1 Researchers group
+  $loaded_groups = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(["name" => "PECE v1 Researchers"]);
+  $pece_v1_researchers_group = array_values($loaded_groups)[0];
+  // Add every D7 user to the group
+  $pece_v1_researchers_group->field_group_members = array_keys($user_migration_map);
 }
