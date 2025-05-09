@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/usr/bin/env python
 import mariadb
 import os
 import sys
@@ -10,9 +10,9 @@ try:
     conn = mariadb.connect(
         user="db",
         password="db",
-        host=os.getenv('DB_PORT', "localhost"),
-        port=int(os.getenv('DB_PORT', 3306),
-        database=os.getenv('DB_NAME', "db")
+        host=os.getenv('DB_HOST', "db"),
+        port=int(os.getenv('DB_PORT', 3306)),
+        database=os.getenv('DB_NAME', "d7")
     )
 except mariadb.Error as e:
     print(f"Error connecting to MariaDB Platform: {e}")
