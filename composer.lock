@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "642a4db1b6bcd4d9e337f3a5004bb900",
+    "content-hash": "ccf7df24db19dcdc3eb2a7d47cb45898",
     "packages": [
         {
             "name": "adci/full-name-parser",
@@ -5370,6 +5370,81 @@
             "homepage": "https://www.drupal.org/project/entity_reference_revisions",
             "support": {
                 "source": "https://git.drupalcode.org/project/entity_reference_revisions"
+            }
+        },
+        {
+            "name": "drupal/entity_version",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/entity_version.git",
+                "reference": "8.x-1.5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/entity_version-8.x-1.5.zip",
+                "reference": "8.x-1.5",
+                "shasum": "f41254464ba7fc69f8c145631327ed3f2147adc6"
+            },
+            "require": {
+                "drupal/core": "^10 || ^11",
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "composer/installers": "^1.11",
+                "drupal/core-composer-scaffold": "^10 || ^11",
+                "drupal/core-dev": "^10 || ^11",
+                "drupal/core-recommended": "^10 || ^11",
+                "drupal/entity_version_workflows-entity_version_workflows": "*",
+                "phpspec/prophecy-phpunit": "^2"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.5",
+                    "datestamp": "1739782598",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                },
+                "composer-exit-on-patch-failure": true,
+                "enable-patching": true
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "ademarco",
+                    "homepage": "https://www.drupal.org/user/186696"
+                },
+                {
+                    "name": "hernani",
+                    "homepage": "https://www.drupal.org/user/448086"
+                },
+                {
+                    "name": "ieguskiza",
+                    "homepage": "https://www.drupal.org/user/2652665"
+                },
+                {
+                    "name": "joevagyok",
+                    "homepage": "https://www.drupal.org/user/2876343"
+                },
+                {
+                    "name": "sardara",
+                    "homepage": "https://www.drupal.org/user/2353864"
+                },
+                {
+                    "name": "upchuk",
+                    "homepage": "https://www.drupal.org/user/1885838"
+                }
+            ],
+            "description": "Entity Version.",
+            "homepage": "https://www.drupal.org/project/entity_version",
+            "support": {
+                "source": "https://git.drupalcode.org/project/entity_version"
             }
         },
         {
