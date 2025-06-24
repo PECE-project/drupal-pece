@@ -190,7 +190,6 @@
         "codeception/codeception": "^5",
         "codeception/module-asserts": "^2.0",
         "drupal/config_devel": "^1.8",
-        "drupal/core-dev": "^11",
         "drupal/devel": "^5.0",
         "drupal/drupal-driver": "^2.1.1",
         "drupal/drupal-extension": "^5.1",
@@ -332,6 +331,10 @@
             }
         },
         "patches": {
+            "drupal/bibcite_migrate": {
+                "drupal/bibcite_entity does not match your minimum-stability #3257044": "https://www.drupal.org/files/issues/2024-06-03/bibcite_migrate-n3257044-5.patch",
+                "Drupal 11 compatibility fixes #3428975 (simplest patch)": "https://www.drupal.org/files/issues/2024-03-16/bibcite_migrate.2.0.0-beta2.rector.patch"
+            },
             "drupal/blocktabs": {
                 "D11 compatibility #3429026": "https://git.drupalcode.org/project/blocktabs/-/merge_requests/8.diff"
             },
