@@ -1,3 +1,12 @@
+uuid: f5bed888-8c06-428c-9197-5e01fc36d66e
+langcode: en
+status: true
+dependencies:
+  module:
+    - legal
+    - user
+_core:
+  default_config_hash: TT0DNYq0LRxdnQMLkIawMKuQHOf8LELUQhQEaevzx8o
 id: legal_terms
 label: legal_terms
 module: views
@@ -524,6 +533,7 @@ display:
           empty_table: false
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
       query:
@@ -574,12 +584,3 @@ display:
         - url.query_args
         - user.permissions
       tags: {  }
-uuid: f5bed888-8c06-428c-9197-5e01fc36d66e
-langcode: en
-status: true
-dependencies:
-  module:
-    - legal
-    - user
-_core:
-  default_config_hash: TT0DNYq0LRxdnQMLkIawMKuQHOf8LELUQhQEaevzx8o

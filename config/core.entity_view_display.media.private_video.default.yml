@@ -1,3 +1,14 @@
+uuid: 75adb199-a7d0-47be-b94d-7cc10243f14e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.private_video.field_filesize
+    - field.field.media.private_video.field_mimetype
+    - field.field.media.private_video.field_private_media_video_file
+    - media.type.private_video
+  module:
+    - file
 id: media.private_video.default
 targetEntityType: media
 bundle: private_video
@@ -14,6 +25,7 @@ content:
       muted: false
       width: 640
       height: 480
+      playsinline: false
     third_party_settings: {  }
     weight: 0
     region: content
@@ -26,14 +38,3 @@ hidden:
   search_api_excerpt: true
   thumbnail: true
   uid: true
-uuid: 75adb199-a7d0-47be-b94d-7cc10243f14e
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.media.private_video.field_filesize
-    - field.field.media.private_video.field_mimetype
-    - field.field.media.private_video.field_private_media_video_file
-    - media.type.private_video
-  module:
-    - file

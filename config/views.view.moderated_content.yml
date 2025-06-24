@@ -1,3 +1,15 @@
+uuid: 23527908-250a-462e-8037-bbfdf5476b44
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - user
+  enforced:
+    module:
+      - content_moderation
+_core:
+  default_config_hash: 7olvKOaJNf15B-Bj4eD1wJyaz4BR7CNA9cEjWBssa2Y
 id: moderated_content
 label: 'Moderated content'
 module: views
@@ -520,8 +532,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -562,8 +572,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -606,8 +614,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
             reduce: true
           is_grouped: false
           group_info:
@@ -649,8 +655,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -764,6 +768,7 @@ display:
           empty_table: true
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
       query:
@@ -829,15 +834,3 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-uuid: 23527908-250a-462e-8037-bbfdf5476b44
-langcode: en
-status: true
-dependencies:
-  module:
-    - node
-    - user
-  enforced:
-    module:
-      - content_moderation
-_core:
-  default_config_hash: 7olvKOaJNf15B-Bj4eD1wJyaz4BR7CNA9cEjWBssa2Y

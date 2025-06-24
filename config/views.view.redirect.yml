@@ -1,3 +1,13 @@
+uuid: f3bf4437-776b-4f01-8666-0ea99f1063c2
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - redirect
+    - user
+_core:
+  default_config_hash: I9VqfbwK5ZyKzL7810d0fswaadU6riFT3kPL0yxcpLs
 id: redirect
 label: Redirect
 module: views
@@ -294,8 +304,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -336,8 +344,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -381,8 +387,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
           is_grouped: true
           group_info:
             label: 'Status code'
@@ -472,8 +476,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -554,6 +556,7 @@ display:
           empty_table: false
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
       query:
@@ -596,13 +599,3 @@ display:
         - user.permissions
       tags: {  }
       cacheable: false
-uuid: f3bf4437-776b-4f01-8666-0ea99f1063c2
-langcode: en
-status: true
-dependencies:
-  module:
-    - link
-    - redirect
-    - user
-_core:
-  default_config_hash: I9VqfbwK5ZyKzL7810d0fswaadU6riFT3kPL0yxcpLs

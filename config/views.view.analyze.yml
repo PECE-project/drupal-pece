@@ -1,3 +1,13 @@
+uuid: 4709f645-1d63-4e82-bb1c-fdc407595f57
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.general
+  module:
+    - better_exposed_filters
+    - facets_exposed_filters
+    - search_api
 id: analyze
 label: Analyze
 module: views
@@ -302,14 +312,6 @@ display:
             multiple: true
             remember_roles:
               authenticated: authenticated
-              0: '0'
-              anonymous: '0'
-              contributor: '0'
-              data_manager: '0'
-              technical_manager: '0'
-              platform_manager: '0'
-              administrator: '0'
-              r_api: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -363,13 +365,6 @@ display:
             multiple: true
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              contributor: '0'
-              data_manager: '0'
-              technical_manager: '0'
-              platform_manager: '0'
-              administrator: '0'
-              r_api: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -423,14 +418,6 @@ display:
             multiple: true
             remember_roles:
               authenticated: authenticated
-              0: '0'
-              anonymous: '0'
-              contributor: '0'
-              data_manager: '0'
-              technical_manager: '0'
-              platform_manager: '0'
-              administrator: '0'
-              r_api: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -488,13 +475,6 @@ display:
             multiple: true
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              contributor: '0'
-              data_manager: '0'
-              technical_manager: '0'
-              platform_manager: '0'
-              administrator: '0'
-              r_api: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -552,13 +532,6 @@ display:
             multiple: true
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              contributor: '0'
-              data_manager: '0'
-              technical_manager: '0'
-              platform_manager: '0'
-              administrator: '0'
-              r_api: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -611,13 +584,6 @@ display:
             multiple: true
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              contributor: '0'
-              data_manager: '0'
-              technical_manager: '0'
-              platform_manager: '0'
-              administrator: '0'
-              r_api: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -671,11 +637,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              contributor: '0'
-              platform_manager: '0'
-              r_api: '0'
             expose_fields: false
             placeholder: ''
             searched_fields_id: search_api_fulltext_searched_fields
@@ -784,13 +745,3 @@ display:
       tags:
         - 'config:search_api.index.general'
         - 'search_api_list:general'
-uuid: 4709f645-1d63-4e82-bb1c-fdc407595f57
-langcode: en
-status: true
-dependencies:
-  config:
-    - search_api.index.general
-  module:
-    - better_exposed_filters
-    - facets_exposed_filters
-    - search_api

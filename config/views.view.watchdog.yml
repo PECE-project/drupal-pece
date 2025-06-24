@@ -1,3 +1,12 @@
+uuid: 3a106b5b-196c-4e6a-8ca0-2ac36b4f5c88
+langcode: en
+status: true
+dependencies:
+  module:
+    - dblog
+    - user
+_core:
+  default_config_hash: j0txIxY4nkJT_dscmXckM-1vanygDkJAeHPawZKfyH0
 id: watchdog
 label: Watchdog
 module: views
@@ -517,8 +526,6 @@ display:
             multiple: true
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -558,8 +565,6 @@ display:
             multiple: true
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -652,6 +657,7 @@ display:
           empty_table: false
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
       query:
@@ -702,12 +708,3 @@ display:
         - url.query_args
         - user.permissions
       tags: {  }
-uuid: 3a106b5b-196c-4e6a-8ca0-2ac36b4f5c88
-langcode: en
-status: true
-dependencies:
-  module:
-    - dblog
-    - user
-_core:
-  default_config_hash: j0txIxY4nkJT_dscmXckM-1vanygDkJAeHPawZKfyH0
