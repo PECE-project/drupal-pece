@@ -1,3 +1,14 @@
+uuid: e1a5b5b2-02a9-40b1-82d4-cb201355227a
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.about_block
+  module:
+    - system
+    - views
+  theme:
+    - peceful
 id: peceful_views_block__about_block_block_about
 theme: peceful
 region: sidebar_first
@@ -10,20 +21,9 @@ settings:
   label_display: '0'
   provider: views
   views_label: ''
-  items_per_page: none
+  items_per_page: null
 visibility:
   request_path:
     id: request_path
     negate: false
     pages: '<front>'
-uuid: e1a5b5b2-02a9-40b1-82d4-cb201355227a
-langcode: en
-status: true
-dependencies:
-  config:
-    - views.view.about_block
-  module:
-    - system
-    - views
-  theme:
-    - peceful

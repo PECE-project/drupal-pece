@@ -1,3 +1,12 @@
+uuid: 54b83e7b-041e-4e4d-b190-0f35d0bebc1b
+langcode: en
+status: true
+dependencies:
+  module:
+    - bibcite_entity
+    - user
+_core:
+  default_config_hash: KaaEG6Bjy8V4TEGkUoZxYN0LxV3lxS_x8gn3poZqvzc
 id: bibcite_contributor_admin
 label: 'Contributors (Admin)'
 module: views
@@ -814,8 +823,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -932,6 +939,7 @@ display:
           empty_table: true
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
       query:
@@ -977,12 +985,3 @@ display:
         - 'url.query_args:sort_order'
         - user.permissions
       tags: {  }
-uuid: 54b83e7b-041e-4e4d-b190-0f35d0bebc1b
-langcode: en
-status: true
-dependencies:
-  module:
-    - bibcite_entity
-    - user
-_core:
-  default_config_hash: KaaEG6Bjy8V4TEGkUoZxYN0LxV3lxS_x8gn3poZqvzc
