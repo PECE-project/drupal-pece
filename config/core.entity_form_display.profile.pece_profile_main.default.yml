@@ -1,8 +1,32 @@
+uuid: 0869ea94-9dae-470a-996f-4d5beca97f54
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.profile.pece_profile_main.field_image
+    - field.field.profile.pece_profile_main.field_location
+    - field.field.profile.pece_profile_main.field_pece_biography
+    - field.field.profile.pece_profile_main.field_pece_email
+    - field.field.profile.pece_profile_main.field_pece_full_name
+    - field.field.profile.pece_profile_main.field_pece_geolocation
+    - field.field.profile.pece_profile_main.field_pece_institution
+    - field.field.profile.pece_profile_main.field_pece_position
+    - field.field.profile.pece_profile_main.field_pgp_key
+    - field.field.profile.pece_profile_main.field_tags
+    - profile.type.pece_profile_main
+  module:
+    - address
+    - file
+    - geolocation
+    - hide_revision_field
+    - media_library
+    - text
+_core:
+  default_config_hash: KByRMZzVXeiCfw--Ti4jO1-CErBHQlprd7DwL54vNew
 id: profile.pece_profile_main.default
 targetEntityType: profile
 bundle: pece_profile_main
 mode: default
-status: true
 content:
   field_image:
     type: media_library_widget
@@ -15,7 +39,8 @@ content:
     type: address_default
     weight: 5
     region: content
-    settings: {  }
+    settings:
+      wrapper_type: details
     third_party_settings: {  }
   field_pece_biography:
     type: text_textarea_with_summary
@@ -97,26 +122,3 @@ content:
     third_party_settings: {  }
 hidden:
   is_default: true
-uuid: 0869ea94-9dae-470a-996f-4d5beca97f54
-langcode: en
-dependencies:
-  config:
-    - field.field.profile.pece_profile_main.field_image
-    - field.field.profile.pece_profile_main.field_location
-    - field.field.profile.pece_profile_main.field_pece_biography
-    - field.field.profile.pece_profile_main.field_pece_email
-    - field.field.profile.pece_profile_main.field_pece_full_name
-    - field.field.profile.pece_profile_main.field_pece_geolocation
-    - field.field.profile.pece_profile_main.field_pece_institution
-    - field.field.profile.pece_profile_main.field_pece_position
-    - field.field.profile.pece_profile_main.field_pgp_key
-    - field.field.profile.pece_profile_main.field_tags
-    - profile.type.pece_profile_main
-  module:
-    - address
-    - file
-    - geolocation
-    - media_library
-    - text
-_core:
-  default_config_hash: KByRMZzVXeiCfw--Ti4jO1-CErBHQlprd7DwL54vNew

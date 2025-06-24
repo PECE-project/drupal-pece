@@ -1,8 +1,25 @@
+uuid: 1ba4164b-b3af-47f5-b767-d4029e0c97e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pece_fieldsite.body
+    - field.field.node.pece_fieldsite.field_fieldsite_project
+    - field.field.node.pece_fieldsite.field_fieldsite_researcher
+    - field.field.node.pece_fieldsite.field_location
+    - field.field.node.pece_fieldsite.field_pece_geolocation
+    - node.type.pece_fieldsite
+  module:
+    - address
+    - hide_revision_field
+    - path
+    - text
+_core:
+  default_config_hash: iNhNWSakJs8tOlHre7qEJixqh42lA6sPfwC7QgU9UPY
 id: node.pece_fieldsite.default
 targetEntityType: node
 bundle: pece_fieldsite
 mode: default
-status: true
 content:
   body:
     type: text_textarea_with_summary
@@ -44,7 +61,8 @@ content:
     type: address_default
     weight: 10
     region: content
-    settings: {  }
+    settings:
+      wrapper_type: details
     third_party_settings: {  }
   path:
     type: path
@@ -112,19 +130,3 @@ content:
 hidden:
   field_pece_geolocation: true
   langcode: true
-uuid: 1ba4164b-b3af-47f5-b767-d4029e0c97e3
-langcode: en
-dependencies:
-  config:
-    - field.field.node.pece_fieldsite.body
-    - field.field.node.pece_fieldsite.field_fieldsite_project
-    - field.field.node.pece_fieldsite.field_fieldsite_researcher
-    - field.field.node.pece_fieldsite.field_location
-    - field.field.node.pece_fieldsite.field_pece_geolocation
-    - node.type.pece_fieldsite
-  module:
-    - address
-    - path
-    - text
-_core:
-  default_config_hash: iNhNWSakJs8tOlHre7qEJixqh42lA6sPfwC7QgU9UPY
