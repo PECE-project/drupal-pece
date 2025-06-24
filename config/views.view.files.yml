@@ -1,3 +1,12 @@
+uuid: 1ae2700a-b301-4a05-867a-6649c9211f72
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - user
+_core:
+  default_config_hash: EmxYEy0jK7wy0LbjQukSaI5A_3klI0Fnl1lFj8qBWCw
 id: files
 label: Files
 module: file
@@ -583,8 +592,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -625,8 +632,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -667,8 +672,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -761,6 +764,7 @@ display:
           empty_table: true
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
       query:
@@ -1152,6 +1156,7 @@ display:
           empty_table: true
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
         options: {  }
@@ -1188,12 +1193,3 @@ display:
         - url.query_args
         - user.permissions
       tags: {  }
-uuid: 1ae2700a-b301-4a05-867a-6649c9211f72
-langcode: en
-status: true
-dependencies:
-  module:
-    - file
-    - user
-_core:
-  default_config_hash: EmxYEy0jK7wy0LbjQukSaI5A_3klI0Fnl1lFj8qBWCw

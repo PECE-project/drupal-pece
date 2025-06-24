@@ -1,3 +1,14 @@
+uuid: 594c6b82-51e4-4f68-8324-4dc6df2c7572
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - node
+    - user
+_core:
+  default_config_hash: 0mU55pEUCMGcMhBRpyMqjal173jNwZh0hrvImj4HVWU
 id: glossary
 label: Glossary
 module: node
@@ -335,6 +346,7 @@ display:
           summary: ''
           order: asc
           empty_table: false
+          class: ''
       row:
         type: fields
         options:
@@ -468,14 +480,3 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-uuid: 594c6b82-51e4-4f68-8324-4dc6df2c7572
-langcode: en
-status: false
-dependencies:
-  config:
-    - system.menu.main
-  module:
-    - node
-    - user
-_core:
-  default_config_hash: 0mU55pEUCMGcMhBRpyMqjal173jNwZh0hrvImj4HVWU

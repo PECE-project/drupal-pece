@@ -1,3 +1,14 @@
+uuid: 25282691-71c8-413c-8154-47ec355d8f75
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.administrator
+    - user.role.contributor
+  module:
+    - user
+_core:
+  default_config_hash: Rr7wGblg3dECnDjw46haX20Q8DZSDXsZW90OhIpEwSQ
 id: pece_users_field_ref
 label: 'Users (Entity Reference Field - User)'
 module: views
@@ -136,6 +147,7 @@ display:
           empty_table: false
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
         options:
@@ -334,14 +346,3 @@ display:
         - url.query_args
         - user.permissions
       tags: {  }
-uuid: 25282691-71c8-413c-8154-47ec355d8f75
-langcode: en
-status: true
-dependencies:
-  config:
-    - user.role.administrator
-    - user.role.contributor
-  module:
-    - user
-_core:
-  default_config_hash: Rr7wGblg3dECnDjw46haX20Q8DZSDXsZW90OhIpEwSQ

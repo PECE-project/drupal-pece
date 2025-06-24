@@ -1,3 +1,14 @@
+uuid: 25dc7c22-d88c-440c-906e-e319225dd442
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.video.field_media_video_file
+    - media.type.video
+  module:
+    - file
+_core:
+  default_config_hash: WTMRES4zLdmoWpeXAVdCTazEAhYqsFvdqjwFvEyJu-M
 id: media.video.default
 targetEntityType: media
 bundle: video
@@ -14,6 +25,7 @@ content:
       muted: false
       width: 640
       height: 480
+      playsinline: false
     third_party_settings: {  }
     weight: 0
     region: content
@@ -24,14 +36,3 @@ hidden:
   search_api_excerpt: true
   thumbnail: true
   uid: true
-uuid: 25dc7c22-d88c-440c-906e-e319225dd442
-langcode: en
-status: true
-dependencies:
-  config:
-    - field.field.media.video.field_media_video_file
-    - media.type.video
-  module:
-    - file
-_core:
-  default_config_hash: WTMRES4zLdmoWpeXAVdCTazEAhYqsFvdqjwFvEyJu-M
