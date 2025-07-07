@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+find ./content/essential -type f -exec drush content:import ../{} \;

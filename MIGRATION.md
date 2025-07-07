@@ -2,7 +2,10 @@
 - Install the upgraded version of the site
 - Make sure the queue table exists (I just `ddev drush uli` and click uli)
 - bump the sql auto-incrementers `ddev mysql < scripts/alter.sql`
-- import default content `ddev content-import-all`
+- import default content:
+  - `ddev import-demo-content`
+  - `ddev import-pre-migrate-content`
+  - `ddev import-essential-content`
 - import the source database `ddev import-db --database=d7 --file=backups/yourbackup.sql.gz`
 - run the sql helpers: `ddev mysql d7 < scripts/panel_mapper.sql` and `ddev mysql d7 < scripts/token_parser.sql`
 - rsync the files directory to wherever the migration will run (prevent timeout of video files moving during migration, and required for private files anyway) `rsync -av user@example.com:/var/www/html/sites/default/files/ web/sites/default/files`

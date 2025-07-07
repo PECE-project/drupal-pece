@@ -45,7 +45,8 @@ Broken down into the component steps, get up to speed (destructively) with other
 git pull
 ddev composer install
 ddev drush -y si pece --existing-config
-ddev content-import-all
+ddev import-demo-content
+ddev import-essential-content
 ```
 
 ## Running tests
