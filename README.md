@@ -79,16 +79,27 @@ And commit any updates Drupal made to configuration as part of the updates (ther
 ddev drush -y cex
 ```
 
-## Exporting content
+## Exporting and importing content
 
 You can make selected content (including taxonomy terms, blocks, and menu links) part of the default distribution with the [Single Content Sync](https://www.drupal.org/project/single_content_sync) module (that can in fact sync a lot more than one at a time).
 
 For example:
 
 ```shell
-ddev drush content:export shortcut ../content/
-ddev drush content:export menu_link_content ../content/
+ddev drush content:export shortcut ../content/essential/
+ddev drush content:export menu_link_content ../content/essential/
 ```
+
+You should be careful though. There are 3 directories under content:
+- essential (export content here that is essential and safe to re-import)
+- demo (export content here that is only intended to demonstrate curation of featured page elements)
+- pre-migrate (export content here that must be imported in order for the migration from Drupal 7 to run properly)
+
+Also note that exporting content locally may not work as expected, especially when it comes to content with images. Therefore, it is recommended that content is exported via the UI from a live site, and ideally one that we expect will be around for a while (worldpece.org may be a good candidate).
+
+Content in the demo and pre-migrate folder should only ever be imported once, usually at the start of the project. It is possible that new demo content is created, and importing new demo content may be useful for existing sites that are not utilizing that content yet. The reason is that content in these folders are expected to be updated, and so re-importing will wipe away those edits.
+
+Content in the essential folder should be safe to re-import. The reason you might want to re-import would be if there are changes made to that content.
 
 ## Importing Drupal 7 database to work on migration
 
