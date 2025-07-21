@@ -1,0 +1,67 @@
+id: node.pece_memo.card_full
+targetEntityType: node
+bundle: pece_memo
+mode: card_full
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  title:
+    type: title
+    label: hidden
+    settings:
+      link_to_entity: true
+      tag: h2
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  extra_field_pece_annotations_annotate_button: true
+  extra_field_pece_annotations_see_annotations_link: true
+  'extra_field_type_tray_icon_display:icons': true
+  field_cite_as: true
+  field_groups_with_view_access: true
+  field_pece_all_can_view: true
+  field_pece_license: true
+  field_people_with_edit_access: true
+  field_people_with_view_access: true
+  field_tags: true
+  field_uri: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  uid: true
+uuid: a0da19c4-299b-4405-9a08-9c809224170c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card_full
+    - field.field.node.pece_memo.body
+    - field.field.node.pece_memo.field_cite_as
+    - field.field.node.pece_memo.field_groups_with_view_access
+    - field.field.node.pece_memo.field_pece_all_can_view
+    - field.field.node.pece_memo.field_pece_license
+    - field.field.node.pece_memo.field_people_with_edit_access
+    - field.field.node.pece_memo.field_people_with_view_access
+    - field.field.node.pece_memo.field_tags
+    - field.field.node.pece_memo.field_uri
+    - node.type.pece_memo
+  module:
+    - layout_builder
+    - layout_library
+    - manage_display
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_library:
+    enable: false
+_core:
+  default_config_hash: UeKAQPwpMxYoGI0L4UgwHYqpM70gRbXyIyzF7tdmd5c
