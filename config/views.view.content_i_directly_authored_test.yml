@@ -1,14 +1,3 @@
-uuid: 4690f440-d988-4518-953a-26ffffa1c69e
-langcode: en
-status: true
-dependencies:
-  config:
-    - search_api.index.general
-  module:
-    - better_exposed_filters
-    - facets_exposed_filters
-    - search_api
-    - user
 id: content_i_directly_authored_test
 label: 'My content (with facets)'
 module: views
@@ -492,3 +481,14 @@ display:
       tags:
         - 'config:search_api.index.general'
         - 'search_api_list:general'
+uuid: 4690f440-d988-4518-953a-26ffffa1c69e
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.general
+  module:
+    - better_exposed_filters
+    - facets_exposed_filters
+    - search_api
+    - user
