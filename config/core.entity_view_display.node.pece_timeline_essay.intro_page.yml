@@ -8,25 +8,57 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
+    region: content
+  created:
+    type: timestamp
+    label: above
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: long
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+        description: ''
+    third_party_settings:
+      entity_form_field_label:
+        new_label: 'Created date'
+        rewrite_label: 1
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    weight: 7
     region: content
   extra_field_pece_annotations_annotate_button:
     type: extra_field_pece_annotations_annotate_button
     settings: {  }
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   extra_field_pece_annotations_see_annotations_link:
     type: extra_field_pece_annotations_see_annotations_link
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 5
     region: content
   extra_field_pece_essays_essay_link:
     type: extra_field_pece_essays_essay_link
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   field_cite_as:
     type: entity_reference_label
@@ -34,7 +66,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 9
+    weight: 11
     region: content
   field_groups_with_view_access:
     type: entity_reference_label
@@ -54,7 +86,7 @@ content:
         fences_field_item_classes: ''
         fences_label_tag: div
         fences_label_classes: ''
-    weight: 6
+    weight: 8
     region: content
   field_media_thumbnail:
     type: entity_reference_entity_view
@@ -75,7 +107,7 @@ content:
         fences_field_item_classes: ''
         fences_label_tag: none
         fences_label_classes: ''
-    weight: 1
+    weight: 2
     region: content
   field_pece_license:
     type: entity_reference_label
@@ -83,7 +115,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 7
+    weight: 9
     region: content
   field_people_with_edit_access:
     type: entity_reference_label
@@ -103,7 +135,7 @@ content:
         fences_field_item_classes: ''
         fences_label_tag: div
         fences_label_classes: ''
-    weight: 5
+    weight: 6
     region: content
   field_tags:
     type: entity_reference_label
@@ -111,7 +143,16 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 8
+    weight: 10
+    region: content
+  title:
+    type: title
+    label: hidden
+    settings:
+      link_to_entity: true
+      tag: h2
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   extra_field_pece_essays_intro_link: true
@@ -125,6 +166,7 @@ hidden:
   langcode: true
   links: true
   search_api_excerpt: true
+  uid: true
 uuid: 2eb9f8de-711b-429a-bf41-0d81e1f79c7d
 langcode: en
 status: true
@@ -149,8 +191,8 @@ dependencies:
     - fences
     - layout_builder
     - layout_library
+    - manage_display
     - text
-    - user
 third_party_settings:
   layout_builder:
     enabled: false
