@@ -15,7 +15,8 @@ content:
     type: address_default
     weight: 5
     region: content
-    settings: {  }
+    settings:
+      wrapper_type: details
     third_party_settings: {  }
   field_pece_biography:
     type: text_textarea_with_summary
@@ -116,6 +117,7 @@ dependencies:
     - address
     - file
     - geolocation
+    - hide_revision_field
     - media_library
     - text
 _core:
