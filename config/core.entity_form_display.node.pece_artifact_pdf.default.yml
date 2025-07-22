@@ -84,7 +84,8 @@ content:
     type: address_default
     weight: 11
     region: content
-    settings: {  }
+    settings:
+      wrapper_type: details
     third_party_settings: {  }
   field_pdf_artifact_media_doc:
     type: media_library_widget
@@ -287,6 +288,7 @@ dependencies:
     - entity_form_field_label
     - field_group
     - geolocation
+    - hide_revision_field
     - languagefield
     - media_library
     - media_library_edit

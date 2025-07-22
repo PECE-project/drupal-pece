@@ -105,7 +105,8 @@ content:
     type: address_default
     weight: 30
     region: content
-    settings: {  }
+    settings:
+      wrapper_type: details
     third_party_settings: {  }
   field_pece_all_can_view:
     type: boolean_checkbox
@@ -296,6 +297,7 @@ dependencies:
     - entity_form_field_label
     - field_group
     - geolocation
+    - hide_revision_field
     - languagefield
     - media_library
     - media_library_edit
