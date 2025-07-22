@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+find ./content/demo -type f -exec drush content:import ../{} \;

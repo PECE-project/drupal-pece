@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+find ./content/pre-migrate -type f -exec drush content:import ../{} \;
