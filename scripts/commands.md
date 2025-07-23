@@ -5,6 +5,7 @@ This process can be run inside of the DDEV container. If doing so, first install
 
 Initial setup
 ```shell
+$ cd scripts
 $ python3 -m virtualenv .venv
 $ source .venv/bin/activate
 $ pip install -r requirements.txt
