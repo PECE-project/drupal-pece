@@ -4,6 +4,7 @@ namespace Drupal\pece_timeline_essay;
 
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
 use Drupal\node\Entity\Node;
 use Drupal\media\Entity\Media;
 use Drupal\paragraphs\Entity\Paragraph;
@@ -238,7 +239,13 @@ class TimelineFormatter {
     if ($media) {
       $mediaId = $media->first()->getValue()["target_id"];
       $file = $this->getFileFromMediaId($mediaId);
-      if ($file) {
+      if ($file && str_contains($file->getMimeType(), "image")) {
+        $image_style = ImageStyle::load('fullwidth_784');
+        $image_uri = $file->getFileUri();
+        $destination_uri = $image_style->buildUri($file->uri->value);
+        $image_style->createDerivative($image_uri, $destination_uri);
+        $rtn["url"] = $image_style->buildUrl($destination_uri);
+      } elseif ($file) {
         $rtn["url"] = \Drupal::request()->getSchemeAndHttpHost() . $file->createFileUrl();
       }
     }
