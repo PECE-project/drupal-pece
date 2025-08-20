@@ -198,7 +198,11 @@ class TimelineFormatter {
     if (!$timelineItem->field_pece_timeline_background->isEmpty()) {
       $fileId = $timelineItem->field_pece_timeline_background->first()->getValue()['target_id'];
       $file = File::load($fileId);
-      $fileUrl = \Drupal::request()->getSchemeAndHttpHost() . $file->createFileUrl();
+      $image_style = ImageStyle::load('fullwidth_1344'); // should this be 2688 for double density displays?
+      $image_uri = $file->getFileUri();
+      $destination_uri = $image_style->buildUri($file->uri->value);
+      $image_style->createDerivative($image_uri, $destination_uri);
+      $fileUrl = $image_style->buildUrl($destination_uri);
       $bgImg = $this->formatTlField("url", $fileUrl);
       $bgColor = array_merge($bgColor, $bgImg);
     }
