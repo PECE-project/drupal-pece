@@ -21,12 +21,6 @@ content:
         fences_field_item_classes: ''
         fences_label_tag: div
         fences_label_classes: ''
-    weight: 1
-    region: content
-  extra_field_pece_essays_essay_link:
-    type: extra_field_pece_essays_essay_link
-    settings: {  }
-    third_party_settings: {  }
     weight: 2
     region: content
   field_media_thumbnail:
@@ -36,11 +30,22 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
+    weight: 1
+    region: content
+  title:
+    type: title
+    label: hidden
+    settings:
+      link_to_entity: true
+      tag: h2
+    third_party_settings: {  }
     weight: 0
     region: content
 hidden:
+  created: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
+  extra_field_pece_essays_essay_link: true
   extra_field_pece_essays_intro_link: true
   'extra_field_type_tray_icon_display:icons': true
   field_analyze: true
@@ -63,6 +68,7 @@ hidden:
   layout_builder__layout: true
   links: true
   search_api_excerpt: true
+  uid: true
 uuid: afc0b320-b4c1-48d3-b989-889cf2405e71
 langcode: en
 status: true
@@ -93,8 +99,8 @@ dependencies:
     - entity_form_field_label
     - fences
     - layout_builder
+    - manage_display
     - text
-    - user
 third_party_settings:
   layout_builder:
     enabled: false

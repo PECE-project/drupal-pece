@@ -22,10 +22,32 @@ content:
         fences_field_item_classes: ''
         fences_label_tag: div
         fences_label_classes: ''
+    weight: 1
+    region: content
+  title:
+    type: title
+    label: hidden
+    settings:
+      link_to_entity: true
+      tag: h2
+    third_party_settings:
+      entity_form_field_label:
+        new_label: ''
+        rewrite_label: 0
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 0
     region: content
 hidden:
   body: true
+  created: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   'extra_field_type_tray_icon_display:icons': true
@@ -52,6 +74,7 @@ hidden:
   links: true
   og_audience: true
   search_api_excerpt: true
+  uid: true
 uuid: 4555c113-a22d-43a3-bf2b-04ce3cb640ee
 langcode: en
 status: true
@@ -83,6 +106,6 @@ dependencies:
   module:
     - entity_form_field_label
     - fences
-    - user
+    - manage_display
 _core:
   default_config_hash: '-6-EiQny4jWjHb2O1kEuyUGtQsy0Jgh0soRECSqTVrA'

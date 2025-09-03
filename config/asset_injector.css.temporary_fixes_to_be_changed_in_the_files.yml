@@ -36,7 +36,6 @@ code: |-
 
 
 
-
   .field--type-svg-image-field svg {
       padding: 20px;
       fill: white;
@@ -96,15 +95,64 @@ code: |-
 
 
   .layout--threecol-section .layout__region--first {
-      padding-right: 1.5rem;
+      padding-right: 3rem;
   }
 
   .layout--threecol-section .layout__region--second {
-      padding-right: 1.5rem;
+      padding-right: 3rem;
+  }
+  p, time, a, .label, .field__item{
+  	font-size:20px;
+  }
+  .toolbar-menu-administration a {
+  	font-size: 13px !important;
+  }
+
+  .layout-collapse summary {
+      background-color: var(--primary-95);
   }
 
   .layout_block {
   	margin-bottom:10px;
+  }
+
+  .dialog-off-canvas-main-canvas::before {
+  	mask-image:none;
+  	background-color: transparent;
+  }
+
+  .navbar {
+  	background-color: var(--primary);
+  	border-image: 
+      linear-gradient(var(--primary),#ffffff) 0 0 100% 0/
+      0 0 3px 0/0 0 3px 0;
+  }
+
+  .main-menu li a,.account-menu li a {
+      border-left: 3px solid transparent;
+      padding: 1rem 1rem;
+      text-align: center;
+      border-right: none;
+  }
+
+  .main-menu li a {
+  	color: white;
+  }
+  .account-menu li a {
+  	color:black;
+  }
+
+  .main-menu li a.is-active,.account-menu li a.is-active {
+      background-color: transparent;
+      border-left-color: var(--primary-light);
+  }
+
+  .main-menu li a:hover,.account-menu li a:hover {
+      border-left-color: var(--primary-light);
+      text-decoration: none;
+  }
+  .main-menu li a:hover{
+      background-color: var(--primary-20);
   }
 media: all
 preprocess: true

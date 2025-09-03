@@ -11,13 +11,13 @@ content:
       entity_form_field_label:
         new_label: ''
         rewrite_label: 0
-    weight: 3
+    weight: 4
     region: content
   'extra_field_type_tray_icon_display:icons':
     type: 'extra_field_type_tray_icon_display:icons'
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
   field_annotation_analytic:
     type: entity_reference_entity_view
@@ -59,9 +59,19 @@ content:
         fences_field_item_classes: ''
         fences_label_tag: div
         fences_label_classes: annotation-search-result-artifact-label
-    weight: 1
+    weight: 3
+    region: content
+  title:
+    type: title
+    label: hidden
+    settings:
+      link_to_entity: true
+      tag: h2
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
+  created: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_ark_enabled: true
@@ -74,6 +84,7 @@ hidden:
   langcode: true
   links: true
   search_api_excerpt: true
+  uid: true
 uuid: 3c453368-a29c-4658-b81d-b866078c65c9
 langcode: en
 status: true
@@ -95,8 +106,8 @@ dependencies:
     - entity_form_field_label
     - fences
     - layout_builder
+    - manage_display
     - text
-    - user
 third_party_settings:
   layout_builder:
     enabled: false

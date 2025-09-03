@@ -3,12 +3,6 @@ targetEntityType: node
 bundle: pece_essay
 mode: teaser
 content:
-  'extra_field_type_tray_icon_display:icons':
-    type: 'extra_field_type_tray_icon_display:icons'
-    settings: {  }
-    third_party_settings: {  }
-    weight: 0
-    region: content
   field_media_thumbnail:
     type: entity_reference_entity_view
     label: hidden
@@ -18,12 +12,23 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  title:
+    type: title
+    label: hidden
+    settings:
+      link_to_entity: true
+      tag: h2
+    third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   body: true
+  created: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   extra_field_pece_essays_essay_link: true
   extra_field_pece_essays_intro_link: true
+  'extra_field_type_tray_icon_display:icons': true
   field_analyze: true
   field_ark_enabled: true
   field_cite_as: true
@@ -45,6 +50,7 @@ hidden:
   links: true
   og_audience: true
   search_api_excerpt: true
+  uid: true
 uuid: f77c8855-40d1-4fd4-9c94-e50b9587deab
 langcode: en
 status: true
@@ -72,6 +78,6 @@ dependencies:
     - field.field.node.pece_essay.layout_builder__layout
     - node.type.pece_essay
   module:
-    - user
+    - manage_display
 _core:
   default_config_hash: TEL7aR8Bj3k9ajtgH1TR0QmBzrOz19D-yhSRAKUNUxc

@@ -383,10 +383,10 @@ display:
                   sort: 30
                 settings:
                   sort: DESC
-        facets_artifact_type:
-          id: facets_artifact_type
+        facets_field_annotation_artifact:
+          id: facets_field_annotation_artifact
           table: search_api_index_general
-          field: facets_artifact_type
+          field: facets_field_annotation_artifact
           relationship: none
           group_type: group
           admin_label: ''
@@ -397,14 +397,15 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: 'Annotated artifact type'
-            description: 'Show annotations that have been made on artifacts of the selected content types.'
+            label: 'Annotated content'
+            description: 'Show annotations that have been made on the selected artifacts and essays..'
             use_operator: false
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: artifact_type
+            identifier: annotated_artifact
             required: false
+            remember: false
             multiple: true
             remember_roles:
               authenticated: authenticated
@@ -440,10 +441,10 @@ display:
                   sort: 30
                 settings:
                   sort: DESC
-        facets_field_annotation_artifact:
-          id: facets_field_annotation_artifact
+        facets_artifact_type:
+          id: facets_artifact_type
           table: search_api_index_general
-          field: facets_field_annotation_artifact
+          field: facets_artifact_type
           relationship: none
           group_type: group
           admin_label: ''
@@ -454,13 +455,13 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: 'Annotated artifact'
-            description: 'Show annotations that have been made on the selected artifacts.'
+            label: 'Annotated artifact type'
+            description: 'Show annotations that have been made on artifacts of the selected content types.'
             use_operator: false
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: annotated_artifact
+            identifier: artifact_type
             required: false
             multiple: true
             remember_roles:
