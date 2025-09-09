@@ -95,7 +95,8 @@ view_mode ? view_mode|clean_class,
   {% endif %}
 
   </div>
-  <div class="has-text-centered">
-    <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+  <div class={{ content.title_attributes.addClass(["has-text-centered"]) }}>
+    <a href="{{ url }}" rel="bookmark">{{ content.title[0]['#title'] }}</a>
+
   </div>
 </article>
