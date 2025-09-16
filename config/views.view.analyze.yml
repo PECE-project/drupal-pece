@@ -1,3 +1,13 @@
+uuid: 4709f645-1d63-4e82-bb1c-fdc407595f57
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.general
+  module:
+    - better_exposed_filters
+    - facets_exposed_filters
+    - search_api
 id: analyze
 label: Analyze
 module: views
@@ -325,11 +335,13 @@ display:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: translate_entity
               count_widget_order:
                 weights:
                   sort: 30
                 settings:
                   sort: DESC
+                processor_id: count_widget_order
         facets_field_people_with_edit_access:
           id: facets_field_people_with_edit_access
           table: search_api_index_general
@@ -378,6 +390,7 @@ display:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: uid_to_username_callback
               count_widget_order:
                 weights:
                   sort: 30
@@ -432,10 +445,12 @@ display:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: translate_entity
               dependent_processor:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: dependent_processor
               count_widget_order:
                 weights:
                   sort: 30
@@ -489,15 +504,18 @@ display:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: translate_entity
               dependent_processor:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: dependent_processor
               count_widget_order:
                 weights:
                   sort: 30
                 settings:
                   sort: DESC
+                processor_id: count_widget_order
         facets_field_annotation_analytic:
           id: facets_field_annotation_analytic
           table: search_api_index_general
@@ -546,10 +564,12 @@ display:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: translate_entity
               dependent_processor:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: dependent_processor
         facets_field_analytic_question_set:
           id: facets_field_analytic_question_set
           table: search_api_index_general
@@ -598,10 +618,12 @@ display:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: translate_entity
               dependent_processor:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: dependent_processor
         search_api_fulltext:
           id: search_api_fulltext
           table: search_api_index_general
@@ -736,13 +758,3 @@ display:
       tags:
         - 'config:search_api.index.general'
         - 'search_api_list:general'
-uuid: 4709f645-1d63-4e82-bb1c-fdc407595f57
-langcode: en
-status: true
-dependencies:
-  config:
-    - search_api.index.general
-  module:
-    - better_exposed_filters
-    - facets_exposed_filters
-    - search_api

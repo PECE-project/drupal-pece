@@ -1,3 +1,13 @@
+uuid: 5bdc99ed-10ff-43e5-8a34-258a7c89eec6
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.general
+  module:
+    - better_exposed_filters
+    - facets_exposed_filters
+    - search_api
 id: search
 label: Search
 module: views
@@ -442,11 +452,13 @@ display:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: translate_entity
               count_widget_order:
                 weights:
                   sort: 30
                 settings:
                   sort: DESC
+                processor_id: count_widget_order
         facets_field_people_with_edit_access:
           id: facets_field_people_with_edit_access
           table: search_api_index_general
@@ -495,11 +507,13 @@ display:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: uid_to_username_callback
               count_widget_order:
                 weights:
                   sort: 30
                 settings:
                   sort: DESC
+                processor_id: count_widget_order
         facets_field_pece_license:
           id: facets_field_pece_license
           table: search_api_index_general
@@ -548,11 +562,13 @@ display:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: translate_entity
               count_widget_order:
                 weights:
                   sort: 30
                 settings:
                   sort: DESC
+                processor_id: count_widget_order
         facets_field_file_format:
           id: facets_field_file_format
           table: search_api_index_general
@@ -601,11 +617,13 @@ display:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: translate_entity
               count_widget_order:
                 weights:
                   sort: 30
                 settings:
                   sort: DESC
+                processor_id: count_widget_order
         facets_vid:
           id: facets_vid
           table: search_api_index_general
@@ -654,11 +672,13 @@ display:
                 weights:
                   build: 5
                 settings: {  }
+                processor_id: translate_entity
               count_widget_order:
                 weights:
                   sort: 30
                 settings:
                   sort: DESC
+                processor_id: count_widget_order
         facets_created:
           id: facets_created
           table: search_api_index_general
@@ -712,15 +732,18 @@ display:
                   granularity: '5'
                   hierarchy: 1
                   date_format: ''
+                processor_id: date_item
               hierarchy_processor:
                 weights:
                   build: 100
                 settings: {  }
+                processor_id: hierarchy_processor
               raw_value_widget_order:
                 weights:
                   sort: 50
                 settings:
                   sort: ASC
+                processor_id: raw_value_widget_order
             hierarchy: date_items
             expand_hierarchy: 0
       filter_groups:
@@ -812,13 +835,3 @@ display:
       tags:
         - 'config:search_api.index.general'
         - 'search_api_list:general'
-uuid: 5bdc99ed-10ff-43e5-8a34-258a7c89eec6
-langcode: en
-status: true
-dependencies:
-  config:
-    - search_api.index.general
-  module:
-    - better_exposed_filters
-    - facets_exposed_filters
-    - search_api
