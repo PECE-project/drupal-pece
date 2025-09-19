@@ -58,14 +58,24 @@ class TimelineFormatter {
    *   keys.
    */
   public function formatSlide(Paragraph $timelineItem) {
-    return [
-      'unique_id' => $timelineItem->uuid(),
-      'text' => $this->formatText($timelineItem, $this->appendArtifactLink($timelineItem, $timelineItem->field_description->first()->getValue()['value'])),
-      'media' => $this->formatMedia($this->prepareMediaField($timelineItem)),
-      'start_date' => $this->formatDate($timelineItem->field_pece_start_end_date->first()->getValue()['value']),
-      'end_date' => $this->formatDate($timelineItem->field_pece_start_end_date->first()->getValue()['end_value']),
-      'background' => $this->formatBgColor($timelineItem),
-    ];
+      $slide = [
+        'unique_id' => $timelineItem->uuid(),
+        'start_date' => $this->formatDate($timelineItem->field_pece_start_end_date->first()->getValue()['value']),
+        'end_date' => $this->formatDate($timelineItem->field_pece_start_end_date->first()->getValue()['end_value']),
+        'background' => $this->formatBgColor($timelineItem),
+      ];
+      $artifactId = $timelineItem->field_pece_timeline_artifact->first()->getValue()['target_id'];
+      $artifact = Node::load($artifactId);
+      if ($artifact) {
+        $slide['media'] = $this->formatMedia($this->getArtifactMediaField($artifact));
+        $slide['text'] = $this->formatText($timelineItem, $this->appendArtifactLink($artifact, $timelineItem->field_description->first()->getValue()['value']));
+      } else {
+        // @todo Show a default image represtenting a missing artifact
+        // $slide['media'] = [];
+        $slide['text'] = $this->formatText($timelineItem, "This artifact has been removed from the platform and can no longer be accessed.");
+      }
+
+    return $slide;
   }
 
   /**
@@ -95,27 +105,10 @@ class TimelineFormatter {
   }
 
   /**
-   * Extracts TL Essay Item fields to build TimelineJS Media field JSON object.
-   *
-   * @param Drupal\paragraphs\Entity\Paragraph $timelineItem
-   *   Timeline Essay Item entity reference.
-   *
-   * @return \Drupal\Core\Field\EntityReferenceFieldItemList|false
-   *   Returns the Media Entity reference that was on the artifact. Or false,
-   *   if there are no Media Entity referenced.
-   */
-  public function prepareMediaField(Paragraph $timelineItem) {
-    $artifactId = $timelineItem->field_pece_timeline_artifact->first()->getValue()['target_id'];
-    $artifact = Node::load($artifactId);
-
-    return $this->getArtifactMediaField($artifact);
-  }
-
-  /**
    * Append node link to a given content.
    *
-   * @param Drupal\paragraphs\Entity\Paragraph $timelineItem
-   *   Timeline Item.
+   * @param Drupal\paragraphs\Entity\Node $artifact
+   *   Artifact node.
    * @param string $content
    *   Entity field value.
    *
@@ -124,11 +117,9 @@ class TimelineFormatter {
    *
    * @throws \Exception
    */
-  public function appendArtifactLink(Paragraph $timelineItem, $content) {
+  public function appendArtifactLink(Node $artifact, $content) {
     $renderer = \Drupal::service('renderer');
-    $artifactId = $timelineItem->field_pece_timeline_artifact->first()->getValue()['target_id'];
-    $artifact = Node::load($artifactId);
-    $pathAlias = '/node/' . $artifactId;
+    $pathAlias = '/node/' . $artifact->id();
     $artifactPath = \Drupal::service('path_alias.manager')->getAliasByPath($pathAlias);
     $artifactTitle = $artifact->getTitle();
 
