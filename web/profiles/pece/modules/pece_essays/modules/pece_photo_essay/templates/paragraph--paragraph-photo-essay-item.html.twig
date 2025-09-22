@@ -2,9 +2,15 @@
 
 {% block content %}
   <div class="columns is-justify-content-center">
-    <div class="column is-half img-container">
-      {{content.field_pece_image_artifact}}
-    </div>
+    {% if content.field_pece_image_artifact[0] %}
+      <div class="column is-half img-container">
+        {{ content.field_pece_image_artifact }}
+      </div>
+    {% else %}
+      <div class="column is-half img-container missing-content">
+        {% trans %}Referenced image artifact is not available.{% endtrans %}
+      </div>
+    {% endif %}
     <div class="column is-one-third">
       {{content.field_pece_description}}
     </div>
