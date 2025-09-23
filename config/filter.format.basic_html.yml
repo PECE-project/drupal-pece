@@ -41,7 +41,7 @@ filters:
     status: true
     weight: -10
     settings:
-      allowed_html: '<br> <p class="text-align-left text-align-center text-align-right text-align-justify"> <h2 id class="text-align-left text-align-center text-align-right text-align-justify"> <h3 id class="text-align-left text-align-center text-align-right text-align-justify"> <h4 id class="text-align-left text-align-center text-align-right text-align-justify"> <h5 id class="text-align-left text-align-center text-align-right text-align-justify"> <h6 id class="text-align-left text-align-center text-align-right text-align-justify"> <cite> <dl> <dt> <dd> <a hreflang href data-entity-type data-entity-uuid data-entity-substitution> <blockquote cite> <ul type> <ol type start> <strong> <em> <u> <code> <s> <li> <drupal-media data-entity-type data-entity-uuid alt data-caption data-align>'
+      allowed_html: '<br> <p class="text-align-left text-align-center text-align-right text-align-justify"> <h2 id class="text-align-left text-align-center text-align-right text-align-justify"> <h3 id class="text-align-left text-align-center text-align-right text-align-justify"> <h4 id class="text-align-left text-align-center text-align-right text-align-justify"> <h5 id class="text-align-left text-align-center text-align-right text-align-justify"> <h6 id class="text-align-left text-align-center text-align-right text-align-justify"> <cite> <dl> <dt> <dd> <a hreflang href data-entity-type data-entity-uuid data-entity-substitution> <blockquote cite> <ul type> <ol type start> <strong> <em> <u> <code> <s> <li> <hr> <drupal-media data-entity-type data-entity-uuid alt data-caption data-align>'
       filter_html_help: false
       filter_html_nofollow: false
   filter_html_image_secure:
@@ -76,6 +76,7 @@ filters:
     weight: 0
     settings:
       title: true
+      media_substitution: metadata
   media_embed:
     id: media_embed
     provider: media
@@ -95,7 +96,6 @@ filters:
         alt: '0'
         title: '0'
       optionset: default
-      by_delta: null
       layout: ''
       admin_uri: '/admin/config/content/formats/manage/basic_html?destination=/admin/config/content/formats&ajax_form=1&_wrapper_format=drupal_ajax'
       background: false
