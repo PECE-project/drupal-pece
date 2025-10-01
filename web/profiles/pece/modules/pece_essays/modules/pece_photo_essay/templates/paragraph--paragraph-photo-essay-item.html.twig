@@ -1,5 +1,10 @@
 {% extends 'paragraph.html.twig' %}
 
+{% if content.field_pece_image_artifact[0] %}
+  {% set imagepath = path('entity.node.canonical', {'node':  content.field_pece_image_artifact.0['#node'].id}) %}
+  {% set artifact_title = content.field_pece_image_artifact.0['#node'].label %}
+{% endif %}
+
 {% block content %}
   <div class="columns is-justify-content-center">
     {% if content.field_pece_image_artifact[0] %}
@@ -12,6 +17,13 @@
       </div>
     {% endif %}
     <div class="column is-one-third">
+      {% if content.field_pece_image_artifact[0] %}
+        <h2{{ title_attributes }}>
+          <a href="{{ imagepath }}" rel="bookmark">
+            {{ artifact_title }}
+          </a>
+        </h2>
+      {% endif %}
       {{content.field_pece_description}}
     </div>
   </div>
