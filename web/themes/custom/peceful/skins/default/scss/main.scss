@@ -634,3 +634,9 @@ article .contextual {
   color: white;
   font-size: 2em;
 }
+
+// Prevent content from exceeding container size
+// This was implemented due to display issues with photo essays
+.main-content, .layout__region {
+  max-width: 100%;
+}
