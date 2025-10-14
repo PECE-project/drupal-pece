@@ -11,6 +11,10 @@
       <div class="column is-half img-container">
         {{ content.field_pece_image_artifact }}
       </div>
+    {% elseif 'config:access_policy.access_policy.pece_content' in content.field_pece_image_artifact['#cache']['tags']%}
+      <div class="column is-half img-container missing-content">
+        {% trans %}You do not have access to this artifact.{% endtrans %}
+      </div>
     {% else %}
       <div class="column is-half img-container missing-content">
         {% trans %}This artifact has been removed from the platform and can no longer be accessed.{% endtrans %}
