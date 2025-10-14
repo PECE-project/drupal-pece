@@ -66,9 +66,12 @@ class TimelineFormatter {
       ];
       $artifactId = $timelineItem->field_pece_timeline_artifact->first()->getValue()['target_id'];
       $artifact = Node::load($artifactId);
-      if ($artifact) {
+      $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+      if ($artifact && $artifact->access('view', $user)) {
         $slide['media'] = $this->formatMedia($this->getArtifactMediaField($artifact));
         $slide['text'] = $this->formatText($timelineItem, $this->appendArtifactLink($artifact, $timelineItem->field_description->first()->getValue()['value']));
+      } elseif ($artifact) {
+        $slide['text'] = $this->formatText($timelineItem, "You do not have access to this artifact.");
       } else {
         // @todo Show a default image represtenting a missing artifact
         // $slide['media'] = [];
