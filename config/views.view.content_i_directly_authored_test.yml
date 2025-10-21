@@ -1,14 +1,3 @@
-uuid: 4690f440-d988-4518-953a-26ffffa1c69e
-langcode: en
-status: true
-dependencies:
-  config:
-    - search_api.index.general
-  module:
-    - better_exposed_filters
-    - facets_exposed_filters
-    - search_api
-    - user
 id: content_i_directly_authored_test
 label: 'My content (with facets)'
 module: views
@@ -285,10 +274,10 @@ display:
             show_numbers: true
             processor_configs:
               translate_entity:
+                processor_id: translate_entity
                 weights:
                   build: 5
                 settings: {  }
-                processor_id: translate_entity
         facets_created:
           id: facets_created
           table: search_api_index_general
@@ -330,32 +319,32 @@ display:
           hierarchy: true
           label_display: visible
           facet:
+            expand_hierarchy: false
+            hierarchy: date_items
             query_operator: or
             min_count: 1
             show_numbers: false
             processor_configs:
               date_item:
+                processor_id: date_item
                 weights:
                   build: 35
                 settings:
                   date_display: actual_date
-                  granularity: '5'
-                  hierarchy: 1
+                  granularity: 5
                   date_format: ''
-                processor_id: date_item
+                  hierarchy: true
               hierarchy_processor:
+                processor_id: hierarchy_processor
                 weights:
                   build: 100
                 settings: {  }
-                processor_id: hierarchy_processor
               raw_value_widget_order:
+                processor_id: raw_value_widget_order
                 weights:
                   sort: 50
                 settings:
                   sort: ASC
-                processor_id: raw_value_widget_order
-            hierarchy: date_items
-            expand_hierarchy: 0
         facets_field_people_with_edit_access:
           id: facets_field_people_with_edit_access
           table: search_api_index_general
@@ -402,15 +391,15 @@ display:
             show_numbers: false
             processor_configs:
               translate_entity:
-                weights:
-                  build: 5
-                settings: {  }
                 processor_id: translate_entity
-              uid_to_username_callback:
                 weights:
                   build: 5
                 settings: {  }
+              uid_to_username_callback:
                 processor_id: uid_to_username_callback
+                weights:
+                  build: 5
+                settings: {  }
       style:
         type: html_list
       row:
@@ -498,3 +487,14 @@ display:
       tags:
         - 'config:search_api.index.general'
         - 'search_api_list:general'
+uuid: 4690f440-d988-4518-953a-26ffffa1c69e
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.general
+  module:
+    - better_exposed_filters
+    - facets_exposed_filters
+    - search_api
+    - user
