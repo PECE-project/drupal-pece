@@ -1,48 +1,3 @@
-uuid: f0d981ed-4c9b-4aad-8a87-14f62dde7d86
-langcode: en
-status: true
-dependencies:
-  config:
-    - access_policy.access_policy.pece_group
-    - entity_browser.browser.analytic_browser
-    - filter.format.basic_html
-    - media.type.audio
-    - media.type.document
-    - media.type.icon
-    - media.type.image
-    - media.type.image_with_caption_and_link
-    - media.type.inline_image
-    - media.type.pdf_document
-    - media.type.private_audio
-    - media.type.private_document
-    - media.type.private_image
-    - media.type.private_pdf
-    - media.type.private_tabular_data
-    - media.type.private_vector_image
-    - media.type.private_video
-    - media.type.remote_video
-    - media.type.slide_image
-    - media.type.vector_image
-    - media.type.video
-  module:
-    - access_policy
-    - admin_toolbar_search
-    - comment
-    - contextual
-    - empty_page
-    - entity_browser
-    - file
-    - filter
-    - help
-    - legal
-    - media
-    - node
-    - profile
-    - shortcut
-    - system
-    - taxonomy
-_core:
-  default_config_hash: cFrlqjtkTfvY3RGccjJkPf1SGIfJ942IrxTLWAO4mgA
 id: authenticated
 label: 'Authenticated user'
 weight: -9
@@ -109,3 +64,48 @@ permissions:
   - 'view pece_group taxonomy term'
   - 'view the administration theme'
   - 'view vocabulary labels'
+uuid: f0d981ed-4c9b-4aad-8a87-14f62dde7d86
+langcode: en
+status: true
+dependencies:
+  config:
+    - access_policy.access_policy.pece_group
+    - entity_browser.browser.analytic_browser
+    - filter.format.basic_html
+    - media.type.audio
+    - media.type.document
+    - media.type.icon
+    - media.type.image
+    - media.type.image_with_caption_and_link
+    - media.type.inline_image
+    - media.type.pdf_document
+    - media.type.private_audio
+    - media.type.private_document
+    - media.type.private_image
+    - media.type.private_pdf
+    - media.type.private_tabular_data
+    - media.type.private_vector_image
+    - media.type.private_video
+    - media.type.remote_video
+    - media.type.slide_image
+    - media.type.vector_image
+    - media.type.video
+  module:
+    - access_policy
+    - admin_toolbar_search
+    - comment
+    - contextual
+    - empty_page
+    - entity_browser
+    - file
+    - filter
+    - help
+    - legal
+    - media
+    - node
+    - profile
+    - shortcut
+    - system
+    - taxonomy
+_core:
+  default_config_hash: cFrlqjtkTfvY3RGccjJkPf1SGIfJ942IrxTLWAO4mgA
