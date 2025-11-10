@@ -36,7 +36,7 @@ class SeeAnnotationsLink extends ExtraFieldPlusDisplayBase {
 
     $content_type = \Drupal::entityTypeManager()->getStorage('node_type')->load($entity->bundle())->label();
 
-    $url = base_path() . 'search?type[0]=pece_annotation&annotated_artifact[0]=' . $entity->id();
+    $url = base_path() . 'analyze?annotated_artifact[0]=' . $entity->id();
     $build = [
       '#type' => 'inline_template',
       '#template' => '<a href="{{ url }}" title="{{ tooltip }}" class="is-primary is-medium">{{ label}}</a>',
