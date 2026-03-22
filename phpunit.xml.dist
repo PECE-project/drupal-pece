@@ -14,9 +14,13 @@
     <testsuite name="unit">
       <directory>web/profiles/pece/modules</directory>
       <directory>web/modules/custom</directory>
+      <!-- Exclude non-unit test types at both top-level and nested module depth. -->
       <exclude>web/profiles/pece/modules/*/tests/src/Kernel</exclude>
       <exclude>web/profiles/pece/modules/*/tests/src/Functional</exclude>
       <exclude>web/profiles/pece/modules/*/tests/src/FunctionalJavascript</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/Kernel</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/Functional</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/FunctionalJavascript</exclude>
       <exclude>web/modules/custom/*/tests/src/Kernel</exclude>
       <exclude>web/modules/custom/*/tests/src/Functional</exclude>
       <exclude>web/modules/custom/*/tests/src/FunctionalJavascript</exclude>
@@ -28,6 +32,9 @@
       <exclude>web/profiles/pece/modules/*/tests/src/Unit</exclude>
       <exclude>web/profiles/pece/modules/*/tests/src/Functional</exclude>
       <exclude>web/profiles/pece/modules/*/tests/src/FunctionalJavascript</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/Unit</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/Functional</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/FunctionalJavascript</exclude>
       <exclude>web/modules/custom/*/tests/src/Unit</exclude>
       <exclude>web/modules/custom/*/tests/src/Functional</exclude>
       <exclude>web/modules/custom/*/tests/src/FunctionalJavascript</exclude>
@@ -39,6 +46,9 @@
       <exclude>web/profiles/pece/modules/*/tests/src/Unit</exclude>
       <exclude>web/profiles/pece/modules/*/tests/src/Kernel</exclude>
       <exclude>web/profiles/pece/modules/*/tests/src/FunctionalJavascript</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/Unit</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/Kernel</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/FunctionalJavascript</exclude>
       <exclude>web/modules/custom/*/tests/src/Unit</exclude>
       <exclude>web/modules/custom/*/tests/src/Kernel</exclude>
       <exclude>web/modules/custom/*/tests/src/FunctionalJavascript</exclude>
