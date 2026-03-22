@@ -228,6 +228,11 @@
             "Drupal\\Tests\\pece_annotations\\": "web/profiles/pece/modules/pece_annotations/tests/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "PECE\\Tests\\Behat\\": "tests/Behat/"
+        }
+    },
     "extra": {
         "composer-exit-on-patch-failure": true,
         "installer-paths": {
