@@ -1,6 +1,6 @@
 include docker.mk
 
-.PHONY: test install build build-dev site-install distro-install nuxt-install nuxt-build nuxt-lint nuxt-run start-automation
+.PHONY: test install build site-install distro-install nuxt-install nuxt-build nuxt-lint nuxt-run start-automation k8s-build k8s-deploy k8s-rollback k8s-status k8s-logs
 
 DRUPAL_VER ?= 8
 PHP_VER ?= 8.1
@@ -36,16 +36,6 @@ build:
 # TODO: Add drush config:import -y when there are settings files 
 	docker exec -t $(PHP_CONTAINER) bash -c 'vendor/bin/drush updb -y'
 	@echo "Finished building $(PROJECT_NAME)"
-
-##	build-dev	:	Build development environment.
-##		Setup settings.php and copy profiles, modules and themes into web/. 
-build-dev:
-	@echo "Building $(PROJECT_NAME) Development environment..."
-	@make install
-	docker exec -t $(PHP_CONTAINER) bash -c 'vendor/bin/run toolkit:build-dev'
-	docker exec -t $(PHP_CONTAINER) bash -c 'cp web/sites/example.settings.local.php web/sites/default/settings.override.php'
-	@make perm-fix
-	@echo "Finished development setup."
 
 ##	site-install	:	(Re)Install PECE profile.
 site-install:
