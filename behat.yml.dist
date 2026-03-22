@@ -9,46 +9,42 @@ default:
         - Drupal\DrupalExtension\Context\MinkContext
         - OpenEuropa\Site\Tests\Behat\DrupalContext
         - OpenEuropa\Site\Tests\Behat\FeatureContext
-      filters:
-        tags: "${behat.tags}"
   extensions:
     Drupal\MinkExtension:
       goutte: ~
       ajax_timeout: 10
-      browser_name: '${selenium.browser}'
+      browser_name: 'chrome'
       javascript_session: 'selenium2'
       selenium2:
-        wd_host: '${selenium.host}:${selenium.port}/wd/hub'
-        browser: '${selenium.browser}'
+        wd_host: 'http://localhost:4444/wd/hub'
+        browser: 'chrome'
         capabilities:
-          browser: '${selenium.browser}'
+          browser: 'chrome'
           marionette: true
           chrome:
             switches:
               - "--headless"
               - "--disable-gpu"
+              - "--no-sandbox"
+              - "--disable-dev-shm-usage"
           extra_capabilities:
             unexpectedAlertBehaviour: accept
-            goog:chromeOptions:
-              w3c: false
-      base_url: "${drupal.base_url}"
+      base_url: 'https://drupal-pece.ddev.site'
     Drupal\DrupalExtension:
-      api_driver: "drupal"
+      api_driver: 'drupal'
       drupal:
-        drupal_root: "${drupal.root}"
+        drupal_root: 'web'
       region_map:
-        page: "body"
-        header: ".ecl-site-header"
-        page header: ".ecl-page-header__body"
-        navigation: ".ecl-navigation-menu"
-        custom footer: ".ecl-footer__custom"
-        corporate top footer: ".ecl-footer__corporate-top"
-        corporate bottom footer: ".ecl-footer__corporate-bottom"
+        page: 'body'
+        header: 'header'
+        navigation: 'nav'
+        content: 'main'
+        footer: 'footer'
       selectors:
-        message_selector: '.ecl-message,.messages'
-        error_message_selector: '.ecl-message--error,.messages--error'
-        success_message_selector: '.ecl-message--success,.messages--status'
-        warning_message_selector: '.ecl-message--warning,.messages--warning'
+        message_selector: '.messages'
+        error_message_selector: '.messages--error'
+        success_message_selector: '.messages--status'
+        warning_message_selector: '.messages--warning'
         login_form_selector: '#user-login-form'
       text:
         log_in: 'Log in'
