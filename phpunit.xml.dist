@@ -10,20 +10,38 @@
          colors="true"
          cacheDirectory=".phpunit.cache">
   <testsuites>
+    <!-- Unit tests: fast, no database required. -->
     <testsuite name="unit">
-      <file>web/core/tests/TestSuites/UnitTestSuite.php</file>
+      <directory>web/profiles/pece/modules</directory>
+      <directory>web/modules/custom</directory>
+      <exclude>web/profiles/pece/modules/*/tests/src/Kernel</exclude>
+      <exclude>web/profiles/pece/modules/*/tests/src/Functional</exclude>
+      <exclude>web/profiles/pece/modules/*/tests/src/FunctionalJavascript</exclude>
+      <exclude>web/modules/custom/*/tests/src/Kernel</exclude>
+      <exclude>web/modules/custom/*/tests/src/Functional</exclude>
+      <exclude>web/modules/custom/*/tests/src/FunctionalJavascript</exclude>
     </testsuite>
+    <!-- Kernel tests: require a database, no web server. -->
     <testsuite name="kernel">
-      <file>web/core/tests/TestSuites/KernelTestSuite.php</file>
+      <directory>web/profiles/pece/modules</directory>
+      <directory>web/modules/custom</directory>
+      <exclude>web/profiles/pece/modules/*/tests/src/Unit</exclude>
+      <exclude>web/profiles/pece/modules/*/tests/src/Functional</exclude>
+      <exclude>web/profiles/pece/modules/*/tests/src/FunctionalJavascript</exclude>
+      <exclude>web/modules/custom/*/tests/src/Unit</exclude>
+      <exclude>web/modules/custom/*/tests/src/Functional</exclude>
+      <exclude>web/modules/custom/*/tests/src/FunctionalJavascript</exclude>
     </testsuite>
+    <!-- Functional tests: require a database and a running web server. -->
     <testsuite name="functional">
-      <file>web/core/tests/TestSuites/FunctionalTestSuite.php</file>
-    </testsuite>
-    <testsuite name="functional-javascript">
-      <file>web/core/tests/TestSuites/FunctionalJavascriptTestSuite.php</file>
-    </testsuite>
-    <testsuite name="build">
-      <file>web/core/tests/TestSuites/BuildTestSuite.php</file>
+      <directory>web/profiles/pece/modules</directory>
+      <directory>web/modules/custom</directory>
+      <exclude>web/profiles/pece/modules/*/tests/src/Unit</exclude>
+      <exclude>web/profiles/pece/modules/*/tests/src/Kernel</exclude>
+      <exclude>web/profiles/pece/modules/*/tests/src/FunctionalJavascript</exclude>
+      <exclude>web/modules/custom/*/tests/src/Unit</exclude>
+      <exclude>web/modules/custom/*/tests/src/Kernel</exclude>
+      <exclude>web/modules/custom/*/tests/src/FunctionalJavascript</exclude>
     </testsuite>
   </testsuites>
   <php>
@@ -37,19 +55,9 @@
     <env name="SIMPLETEST_DB" value=""/>
     <!-- Example BROWSERTEST_OUTPUT_DIRECTORY value: /path/to/webroot/sites/simpletest/browser_output -->
     <env name="BROWSERTEST_OUTPUT_DIRECTORY" value="sites/default/files/simpletest/browser_output"/>
-    <!-- To have browsertest output use an alternative base URL. For example if
-     SIMPLETEST_BASE_URL is an internal DDEV URL, you can set this to the
-     external DDEV URL so you can follow the links directly.
-    -->
     <env name="BROWSERTEST_OUTPUT_BASE_URL" value=""/>
-    <!-- Example for changing the driver class for mink tests MINK_DRIVER_CLASS value: 'Drupal\FunctionalJavascriptTests\DrupalSelenium2Driver' -->
     <env name="MINK_DRIVER_CLASS" value=""/>
-    <!-- Example for changing the driver args to mink tests MINK_DRIVER_ARGS value: '["http://127.0.0.1:8510"]' -->
     <env name="MINK_DRIVER_ARGS" value=""/>
-    <!-- Example for changing the driver args to webdriver tests MINK_DRIVER_ARGS_WEBDRIVER
-     value: '["chrome", { "chromeOptions": { "w3c": false } }, "http://localhost:4444/wd/hub"]'
-     For using the Firefox browser, replace "chrome" with "firefox".
-    -->
     <env name="MINK_DRIVER_ARGS_WEBDRIVER" value=""/>
   </php>
 </phpunit>

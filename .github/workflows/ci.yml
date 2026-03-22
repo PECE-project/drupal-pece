@@ -75,9 +75,6 @@ jobs:
 
       - name: Run unit tests
         run: vendor/bin/phpunit --testsuite=unit --no-coverage
-        env:
-          SIMPLETEST_BASE_URL: http://localhost
-          SIMPLETEST_DB: mysql://drupal:drupal@127.0.0.1/drupal
 
   # -----------------------------------------------------------------------
   # Job 3: Full Drupal install using existing config, then verify DB updates
