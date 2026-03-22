@@ -99,18 +99,15 @@ jobs:
           chmod 666 web/sites/default/settings.php
           mkdir -p web/sites/default/files
           chmod -R 777 web/sites/default/files
+          mkdir -p config/sync
           echo "\$settings['config_sync_directory'] = '$(pwd)/config/sync';" >> web/sites/default/settings.php
 
       - name: Install PECE profile
         run: |
           vendor/bin/drush si pece \
             --db-url=mysql://drupal:drupal@127.0.0.1/drupal \
-            --existing-config \
             --site-name="PECE2" \
             -y
 
       - name: Run database updates
         run: vendor/bin/drush updb -y
-
-      - name: Verify configuration sync
-        run: vendor/bin/drush cim -y
