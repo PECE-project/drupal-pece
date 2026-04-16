@@ -1,3 +1,11 @@
+uuid: c04173bc-ad43-48e3-8293-85ed9fb55d6a
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+  module:
+    - ckeditor5
 format: basic_html
 editor: ckeditor5
 settings:
@@ -39,6 +47,7 @@ settings:
       properties:
         reversed: false
         startIndex: true
+        styles: true
       multiBlock: true
     ckeditor5_sourceEditing:
       allowed_tags:
@@ -48,8 +57,6 @@ settings:
         - '<dd>'
         - '<a hreflang>'
         - '<blockquote cite>'
-        - '<ul type>'
-        - '<ol type>'
         - '<h2 id>'
         - '<h3 id>'
         - '<h4 id>'
@@ -68,11 +75,3 @@ image_upload:
   max_dimensions:
     width: null
     height: null
-uuid: c04173bc-ad43-48e3-8293-85ed9fb55d6a
-langcode: en
-status: true
-dependencies:
-  config:
-    - filter.format.basic_html
-  module:
-    - ckeditor5

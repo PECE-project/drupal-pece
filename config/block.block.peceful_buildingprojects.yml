@@ -1,29 +1,3 @@
-id: peceful_buildingprojects
-theme: peceful
-region: bottom
-weight: -5
-provider: null
-plugin: 'block_content:52222dc3-22dc-4c2a-9218-fc02aea730e8'
-settings:
-  id: 'block_content:52222dc3-22dc-4c2a-9218-fc02aea730e8'
-  label: 'Building Projects'
-  label_display: visible
-  provider: block_content
-  status: true
-  info: ''
-  view_mode: full
-visibility:
-  request_path:
-    id: request_path
-    negate: false
-    pages: '<front>'
-  user_role:
-    id: user_role
-    negate: false
-    context_mapping:
-      user: '@user.current_user_context:current_user'
-    roles:
-      authenticated: authenticated
 uuid: 0a1c1895-c3b4-4076-8aa2-0c3f2bf90ace
 langcode: en
 status: true
@@ -40,3 +14,27 @@ dependencies:
 third_party_settings:
   block_class:
     classes: front-page-block
+id: peceful_buildingprojects
+theme: peceful
+region: bottom
+weight: -5
+provider: null
+plugin: 'block_content:52222dc3-22dc-4c2a-9218-fc02aea730e8'
+settings:
+  id: 'block_content:52222dc3-22dc-4c2a-9218-fc02aea730e8'
+  label: 'Building Projects'
+  label_display: visible
+  provider: block_content
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated

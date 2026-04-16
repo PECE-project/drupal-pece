@@ -1,29 +1,3 @@
-id: peceful_learnaboutthisresearchinfrastructure
-theme: peceful
-region: bottom
-weight: -7
-provider: null
-plugin: 'block_content:45e96444-e8f8-42d5-99e7-5be9fa0d8ab6'
-settings:
-  id: 'block_content:45e96444-e8f8-42d5-99e7-5be9fa0d8ab6'
-  label: 'Learn about this Research Infrastructure'
-  label_display: visible
-  provider: block_content
-  status: true
-  info: ''
-  view_mode: full
-visibility:
-  request_path:
-    id: request_path
-    negate: false
-    pages: '<front>'
-  user_role:
-    id: user_role
-    negate: false
-    context_mapping:
-      user: '@user.current_user_context:current_user'
-    roles:
-      anonymous: anonymous
 uuid: 7ccd068a-1b38-485b-ba91-5eaf181abfd2
 langcode: en
 status: true
@@ -40,3 +14,27 @@ dependencies:
 third_party_settings:
   block_class:
     classes: front-page-block
+id: peceful_learnaboutthisresearchinfrastructure
+theme: peceful
+region: bottom
+weight: -7
+provider: null
+plugin: 'block_content:45e96444-e8f8-42d5-99e7-5be9fa0d8ab6'
+settings:
+  id: 'block_content:45e96444-e8f8-42d5-99e7-5be9fa0d8ab6'
+  label: 'Learn about this Research Infrastructure'
+  label_display: visible
+  provider: block_content
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      anonymous: anonymous

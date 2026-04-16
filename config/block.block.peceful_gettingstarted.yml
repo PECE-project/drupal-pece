@@ -1,29 +1,3 @@
-id: peceful_gettingstarted
-theme: peceful
-region: bottom
-weight: -6
-provider: null
-plugin: 'block_content:4e1dfda0-7376-47a0-9a6b-332b40cc1da8'
-settings:
-  id: 'block_content:4e1dfda0-7376-47a0-9a6b-332b40cc1da8'
-  label: 'Building Content'
-  label_display: visible
-  provider: block_content
-  status: true
-  info: ''
-  view_mode: full
-visibility:
-  request_path:
-    id: request_path
-    negate: false
-    pages: '<front>'
-  user_role:
-    id: user_role
-    negate: false
-    context_mapping:
-      user: '@user.current_user_context:current_user'
-    roles:
-      authenticated: authenticated
 uuid: 00c6fbe7-4ec8-4c45-88e2-ea7251bc9c43
 langcode: en
 status: true
@@ -40,3 +14,27 @@ dependencies:
 third_party_settings:
   block_class:
     classes: front-page-block
+id: peceful_gettingstarted
+theme: peceful
+region: bottom
+weight: -6
+provider: null
+plugin: 'block_content:4e1dfda0-7376-47a0-9a6b-332b40cc1da8'
+settings:
+  id: 'block_content:4e1dfda0-7376-47a0-9a6b-332b40cc1da8'
+  label: 'Building Content'
+  label_display: visible
+  provider: block_content
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated

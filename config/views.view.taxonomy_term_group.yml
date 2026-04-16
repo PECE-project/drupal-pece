@@ -1,3 +1,16 @@
+uuid: d94bc5e8-d7da-47a8-8f16-6e57194fe21e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.rss
+    - core.entity_view_mode.node.teaser
+  module:
+    - node
+    - taxonomy
+    - user
+_core:
+  default_config_hash: YKgw0f77GEmCu6_6Om9Mbig0mON9JdfVuMxTtd0WQaI
 id: taxonomy_term_group
 label: 'Group taxonomy term'
 module: taxonomy
@@ -389,7 +402,7 @@ display:
         type: node_rss
         options:
           relationship: none
-          view_mode: default
+          view_mode: rss
       query:
         type: views_query
         options: {  }
@@ -434,15 +447,3 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-uuid: d94bc5e8-d7da-47a8-8f16-6e57194fe21e
-langcode: en
-status: true
-dependencies:
-  config:
-    - core.entity_view_mode.node.teaser
-  module:
-    - node
-    - taxonomy
-    - user
-_core:
-  default_config_hash: YKgw0f77GEmCu6_6Om9Mbig0mON9JdfVuMxTtd0WQaI
