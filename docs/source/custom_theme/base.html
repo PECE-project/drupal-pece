@@ -42,8 +42,13 @@
   <script src="{{ 'js/modernizr-2.8.3.min.js'|url }}" defer></script>
   {%- if config.theme.highlightjs %}
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha384-ZeLYJ2PNSQjvogWP559CDAf02Qb8FE5OyQicqtz/+UhZutbrwyr87Be7NPH/RgyC" crossorigin="anonymous"></script>
+  {#- SRI hashes for highlight.js 9.12.0 language files. Add an entry here for each
+      language listed under theme.hljs_languages in mkdocs.yml before enabling it. #}
+  {%- set hljs_lang_sri = {} %}
   {%- for lang in config.theme.hljs_languages %}
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/{{lang}}.min.js"></script>
+  {%- if lang in hljs_lang_sri %}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/{{lang}}.min.js" integrity="{{ hljs_lang_sri[lang] }}" crossorigin="anonymous"></script>
+  {%- endif %}
   {%- endfor %}
   <script>hljs.initHighlightingOnLoad();</script>
   {%- endif %}
