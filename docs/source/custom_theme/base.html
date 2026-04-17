@@ -13,7 +13,7 @@
   {%- endblock %}
 
   {%- block htmltitle %}
-  <title>{% if page and page.title and not page.is_hompage %}{{ page.title }} - {% endif %}{{ config.site_name }}</title>
+  <title>{% if page and page.title and not page.is_homepage %}{{ page.title }} - {% endif %}{{ config.site_name }}</title>
   {%- endblock %}
 
   {%- block styles %}
@@ -98,7 +98,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
-      {# MOBILE NAV, TRIGGLES SIDE NAV ON TOGGLE #}
+      {# MOBILE NAV, TRIGGERS SIDE NAV ON TOGGLE #}
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
         <a href="{{ nav.homepage.url|url }}">{{ config.site_name }}</a>
