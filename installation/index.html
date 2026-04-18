@@ -189,7 +189,7 @@ your servers.</p>
 <li>SQLite 3.45+</li>
 </ul>
 </li>
-<li><p><strong>Web server</strong>: Apache 2.4+ (with <code>mod_rewrite</code> enabled) or Nginx 1.1+.</p></li>
+<li><p><strong>Web server</strong>: Apache 2.4+ (with <code>mod_rewrite</code> enabled) or a supported Nginx version; see the official Drupal system requirements page below for current Nginx version constraints.</p></li>
 <li><p><strong>Composer</strong> 2.x — required for dependency management.</p></li>
 <li><p><strong>Drush</strong> 13+ — recommended for command-line administration and updates.</p></li>
 </ul>
@@ -271,7 +271,9 @@ Select your web server and operating system to get tailored instructions.</p>
 <h2 id="ive-installed-pece-but-none-of-my-links-are-working-what-is-going-on">I've installed PECE, but none of my links are working. What is going on?</h2>
 <p>Your web server is not properly configured to support URL routing for Drupal.
 Make sure the <code>rewrite</code> module is enabled and your virtual host is configured
-to allow <code>.htaccess</code> overrides (<code>AllowOverride All</code>). For Apache, Drupal ships
+to allow <code>.htaccess</code> overrides (<code>AllowOverride All</code>). Configure Apache or Nginx
+to use <code>.../YOUR_PROJECT_NAME/web</code> as the document root (not the project root), so that
+files such as <code>vendor/</code> and <code>composer.json</code> are not exposed. For Apache, Drupal ships
 with a <code>.htaccess</code> file in the <code>web/</code> directory that handles URL rewriting
 automatically. For Nginx, follow the
 <a href="https://www.drupal.org/docs/getting-started/installing-drupal/nginx-and-drupal"><em>Drupal.org Nginx configuration guide</em></a>.</p>
