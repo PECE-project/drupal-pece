@@ -1,12 +1,21 @@
+uuid: 4ff4feea-68fe-4d8e-bc6c-b7ae146241cb
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.pece_essay
+    - node.type.pece_photo_essay
+    - node.type.pece_timeline_essay
+  module:
+    - node
 id: curate
 label: Curate
 type: 'canonical_entities:node'
-pattern: 'curate/[node:content-type]/[node:title]'
+pattern: '/curate/[node:content-type]/[node:title]'
 selection_criteria:
   eac810ff-c615-49bd-8ae4-30d0164422d5:
     id: 'entity_bundle:node'
     negate: false
-    uuid: eac810ff-c615-49bd-8ae4-30d0164422d5
     context_mapping:
       node: node
     bundles:
@@ -16,9 +25,3 @@ selection_criteria:
 selection_logic: and
 weight: -5
 relationships: {  }
-uuid: 4ff4feea-68fe-4d8e-bc6c-b7ae146241cb
-langcode: en
-status: true
-dependencies:
-  module:
-    - node

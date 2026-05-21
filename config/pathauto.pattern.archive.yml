@@ -1,12 +1,27 @@
+uuid: 750a2c2b-1dea-4489-8164-7af922b1d89c
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.artifact_tabular_data
+    - node.type.artifact_video
+    - node.type.pece_artifact_audio
+    - node.type.pece_artifact_bundle
+    - node.type.pece_artifact_fieldnote
+    - node.type.pece_artifact_image
+    - node.type.pece_artifact_pdf
+    - node.type.pece_artifact_text
+    - node.type.pece_artifact_website
+  module:
+    - node
 id: archive
 label: Archive
 type: 'canonical_entities:node'
-pattern: 'archive/[node:content-type]/[node:title]'
+pattern: '/archive/[node:content-type]/[node:title]'
 selection_criteria:
   724d5459-774e-4634-84a0-04fe7d0b8827:
     id: 'entity_bundle:node'
     negate: false
-    uuid: 724d5459-774e-4634-84a0-04fe7d0b8827
     context_mapping:
       node: node
     bundles:
@@ -22,9 +37,3 @@ selection_criteria:
 selection_logic: and
 weight: -7
 relationships: {  }
-uuid: 750a2c2b-1dea-4489-8164-7af922b1d89c
-langcode: en
-status: true
-dependencies:
-  module:
-    - node
