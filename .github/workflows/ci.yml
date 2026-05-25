@@ -105,9 +105,13 @@ jobs:
       - name: Install PECE profile
         run: |
           vendor/bin/drush si pece \
+            --existing-config \
             --db-url=mysql://drupal:drupal@127.0.0.1/drupal \
             --site-name="PECE2" \
             -y
 
       - name: Run database updates
         run: vendor/bin/drush updb -y
+
+      - name: Verify config is in sync
+        run: vendor/bin/drush cst 2>&1 | tee /tmp/cst.txt && [ ! -s /tmp/cst.txt ]
