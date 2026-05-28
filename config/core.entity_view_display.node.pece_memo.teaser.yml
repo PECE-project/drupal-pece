@@ -9,8 +9,18 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  title:
+    type: title
+    label: hidden
+    settings:
+      link_to_entity: true
+      tag: h2
+    third_party_settings: {  }
+    weight: -49
+    region: content
 hidden:
   body: true
+  created: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_cite_as: true
@@ -24,6 +34,7 @@ hidden:
   langcode: true
   links: true
   search_api_excerpt: true
+  uid: true
 uuid: 892542f3-95d4-41ee-be70-cc77449162c6
 langcode: en
 status: true

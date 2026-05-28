@@ -1,14 +1,3 @@
-uuid: 4690f440-d988-4518-953a-26ffffa1c69e
-langcode: en
-status: true
-dependencies:
-  config:
-    - search_api.index.general
-  module:
-    - better_exposed_filters
-    - facets_exposed_filters
-    - search_api
-    - user
 id: content_i_directly_authored_test
 label: 'My content (with facets)'
 module: views
@@ -143,8 +132,6 @@ display:
               secondary_label: 'Advanced options'
               secondary_open: false
               reset_button_always_show: false
-              autosubmit_breakpoint: ''
-              auto_submit_sort_only: false
             filter:
               facets_type:
                 plugin_id: bef_links_filter
@@ -156,10 +143,6 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
-                  field_classes: ''
-                  open_by_default: false
-                  sort_options_method: alphabetical_asc
-                  sort_options_natural: true
                 initial_shown: 10
                 allow_show_all: false
                 select_all_none: 0
@@ -174,10 +157,6 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
-                  field_classes: ''
-                  open_by_default: false
-                  sort_options_method: alphabetical_asc
-                  sort_options_natural: true
                 initial_shown: 10
                 allow_show_all: false
                 select_all_none: 0
@@ -192,10 +171,6 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
-                  field_classes: ''
-                  open_by_default: false
-                  sort_options_method: alphabetical_asc
-                  sort_options_natural: true
                 initial_shown: 10
                 allow_show_all: false
                 select_all_none: 0
@@ -512,3 +487,14 @@ display:
       tags:
         - 'config:search_api.index.general'
         - 'search_api_list:general'
+uuid: 4690f440-d988-4518-953a-26ffffa1c69e
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.general
+  module:
+    - better_exposed_filters
+    - facets_exposed_filters
+    - search_api
+    - user
