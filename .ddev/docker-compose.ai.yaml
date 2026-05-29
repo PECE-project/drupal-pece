@@ -1,0 +1,21 @@
+# .ddev/docker-compose.ai.yaml
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    entrypoint: ["/bin/sh", "-c",
+      "ollama serve & sleep 5 && ollama pull nomic-embed-text && wait"]
+
+volumes:
+  qdrant_storage:
+  ollama_models:
