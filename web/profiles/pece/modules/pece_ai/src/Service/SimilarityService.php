@@ -37,23 +37,28 @@ class SimilarityService {
         $groupIds[] = (string) $item->target_id;
       }
     }
-    $this->httpClient->request('PUT',
-      $config->get('qdrant_url') . '/collections/' . self::COLLECTION . '/points',
-      [
-        'json' => [
-          'points' => [[
-            'id' => (int) $entity->id(),
-            'vector' => $vector,
-            'payload' => [
-              'entity_type' => $entity->getEntityTypeId(),
-              'entity_id' => (int) $entity->id(),
-              'bundle' => $entity->bundle(),
-              'group_ids' => $groupIds,
-            ],
-          ]],
-        ],
-      ]
-    );
+    try {
+      $this->httpClient->request('PUT',
+        $config->get('qdrant_url') . '/collections/' . self::COLLECTION . '/points',
+        [
+          'json' => [
+            'points' => [[
+              'id' => (int) $entity->id(),
+              'vector' => $vector,
+              'payload' => [
+                'entity_type' => $entity->getEntityTypeId(),
+                'entity_id' => (int) $entity->id(),
+                'bundle' => $entity->bundle(),
+                'group_ids' => $groupIds,
+              ],
+            ]],
+          ],
+        ]
+      );
+    }
+    catch (GuzzleException $e) {
+      throw new \RuntimeException('Failed to upsert entity to Qdrant: ' . $e->getMessage(), 0, $e);
+    }
   }
 
   /**

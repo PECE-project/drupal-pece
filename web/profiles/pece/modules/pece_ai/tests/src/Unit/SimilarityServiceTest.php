@@ -144,6 +144,20 @@ class SimilarityServiceTest extends UnitTestCase {
     $this->service->upsert($entity, array_fill(0, 768, 0.1));
   }
 
+  public function testUpsertThrowsWhenQdrantUnavailable(): void {
+    $entity = $this->mockEntity(7);
+    $entity->method('getEntityTypeId')->willReturn('node');
+    $entity->method('bundle')->willReturn('pece_essay');
+    $entity->method('hasField')->with('field_groups')->willReturn(FALSE);
+
+    $this->httpClient->method('request')
+      ->willThrowException(new RequestException('Connection refused', new Request('PUT', '/')));
+
+    $this->expectException(\RuntimeException::class);
+    $this->expectExceptionMessageMatches('/Failed to upsert entity/');
+    $this->service->upsert($entity, array_fill(0, 768, 0.1));
+  }
+
   private function mockEntity(int $id): ContentEntityInterface {
     $entity = $this->createMock(ContentEntityInterface::class);
     $entity->method('id')->willReturn($id);
