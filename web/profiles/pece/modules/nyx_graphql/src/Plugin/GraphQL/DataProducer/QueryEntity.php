@@ -61,7 +61,7 @@ class QueryEntity extends DataProducerPluginBase implements ContainerFactoryPlug
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('entity.manager')
+      $container->get('entity_type.manager')
     );
   }
 
@@ -101,8 +101,9 @@ class QueryEntity extends DataProducerPluginBase implements ContainerFactoryPlug
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function resolve($bundle, $type, $offset, $limit, $filters = [], RefinableCacheableDependencyInterface $metadata) {
-    if (!$limit > static::MAX_LIMIT) {
+  public function resolve($bundle, $type, $offset, $limit, $filters, RefinableCacheableDependencyInterface $metadata) {
+    $filters = $filters ?? [];
+    if ($limit > static::MAX_LIMIT) {
       throw new UserError(sprintf('Exceeded maximum query limit: %s.', static::MAX_LIMIT));
     }
 
