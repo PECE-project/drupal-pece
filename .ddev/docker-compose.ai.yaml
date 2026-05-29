@@ -2,6 +2,9 @@
 services:
   qdrant:
     image: qdrant/qdrant:latest
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: $DDEV_APPROOT
     ports:
       - "6333:6333"
     volumes:
@@ -9,12 +12,15 @@ services:
 
   ollama:
     image: ollama/ollama:latest
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: $DDEV_APPROOT
     ports:
       - "11434:11434"
     volumes:
       - ollama_models:/root/.ollama
     entrypoint: ["/bin/sh", "-c",
-      "ollama serve & sleep 5 && ollama pull nomic-embed-text && wait"]
+      "ollama serve & sleep 15 && ollama pull nomic-embed-text && wait"]
 
 volumes:
   qdrant_storage:
