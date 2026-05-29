@@ -116,7 +116,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/PECE-project/drupal-pece/edit/main/installation-legacy/index.html"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/PECE-project/drupal-pece/edit/gh-pages/installation-legacy/index.html"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -136,7 +136,7 @@
                 <li class="third-level"><a href="#quick-install">Quick Install</a></li>
             <li class="second-level"><a href="#i-want-to-use-https-with-pece-how-can-i-do-that">I want to use HTTPS with PECE. How can I do that?</a></li>
                 
-            <li class="second-level"><a href="#ive-installed-pece-but-none-of-my-links-are-working-what-is-going-on">I’ve installed PECE, but none of my links are working. What is going on?</a></li>
+            <li class="second-level"><a href="#ive-installed-pece-but-none-of-my-links-are-working-what-is-going-on">I've installed PECE, but none of my links are working. What is going on?</a></li>
                 
             <li class="second-level"><a href="#i-get-an-error-about-a-yaml-parser-being-missing-how-can-i-fix-that">I get an error about a YAML parser being missing. How can I fix that?</a></li>
                 
@@ -180,11 +180,11 @@ supported by Drupal 7. PECE has been tested in virtual machines with
 256M allocated for PHP, being 128M the recommended minimum for Drupal 7
 distributions. Your configuration, of course, may vary considerably
 depending on the usage you are making of the platform. Refer to our data
-management guidelines under the “sustainability” section to learn about
+management guidelines under the "sustainability" section to learn about
 the recommended minimum specs for your servers.</p>
 <h3 id="downloading-the-distro">Downloading the Distro</h3>
 <p>Our distribution is currently being developed on Github. You can obtain
-the most updated version following the link “Releases” on the project’s
+the most updated version following the link "Releases" on the project's
 git repository:</p>
 <blockquote>
 <p>https://github.com/PECE-project/pece-distro</p>
@@ -220,7 +220,7 @@ Drupal 7 core:</p>
 <h3 id="quick-install">Quick Install</h3>
 <p>If you have the server backend already set-up, you can quickly install
 PECE following these steps:</p>
-<p>Clone the ‘’pece-distro’’ repository:</p>
+<p>Clone the ''pece-distro'' repository:</p>
 <blockquote>
 <p>git clone
 <a href="https://github.com/PECE-project/pece-distro.git"><em>https://github.com/PECE-project/pece-distro.git</em></a></p>
@@ -241,9 +241,9 @@ set the file permissions at sites/default/files/artifacts to 770 and
 sites/default/files/private to 770.)</p>
 <h2 id="i-want-to-use-https-with-pece-how-can-i-do-that">I want to use HTTPS with PECE. How can I do that?</h2>
 <p>A very simple tutorial for setting up HTTPS with Certbot on Ubuntu can be found <a href="https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04">here</a>.</p>
-<h2 id="ive-installed-pece-but-none-of-my-links-are-working-what-is-going-on">I’ve installed PECE, but none of my links are working. What is going on?</h2>
+<h2 id="ive-installed-pece-but-none-of-my-links-are-working-what-is-going-on">I've installed PECE, but none of my links are working. What is going on?</h2>
 <p>Your webserver is not properly configured to support what is called
-“Clean URLs” on Drupal. Make sure you have your httpd “rewrite” rules
+"Clean URLs" on Drupal. Make sure you have your httpd "rewrite" rules
 properly set-up. This configuration can be done in the vhost file of
 your nginx configuration, following the <a href="https://github.com/perusio/drupal-with-nginx"><em>Perusio guide</em></a> or using the <a href="https://github.com/PECE-project/drupal/blob/7.x/.htaccess"><em>default.htaccess file that is provided by default by Drupal</em></a> if you are running Apache.</p>
 <h2 id="i-get-an-error-about-a-yaml-parser-being-missing-how-can-i-fix-that">I get an error about a YAML parser being missing. How can I fix that?</h2>
@@ -259,12 +259,12 @@ login credentials should only be used to configure settings and to
 approve new users. The admin credentials should not be used to add
 content or comment on content.</p>
 <h2 id="how-do-i-update-the-site-information">How do I update the site information?</h2>
-<p>Go to “Administration » Configuration » System » Site information” and
+<p>Go to "Administration » Configuration » System » Site information" and
 fill out the information about your site name, the basic admin password,
 contact, timezone and other relevant info.</p>
 <h2 id="how-do-i-upload-the-terms-of-service">How do I upload the terms of service?</h2>
-<p>Go to “Administration » Configuration » People » Legal” and click “Add
-T&amp;C”, then fill-out the boxes with your custom text to be displayed to
+<p>Go to "Administration » Configuration » People » Legal" and click "Add
+T&amp;C", then fill-out the boxes with your custom text to be displayed to
 every user who requests an account on the system. </p>
 <h2 id="how-do-i-set-up-back-ups">How do I set up back-ups?</h2>
 <p>As explained in our data management guidelines, PECE is configured to
@@ -273,9 +273,9 @@ and set-up a SFTP connection to transfer your backup to another server
 and ensure that you have extra security when storing your encrypted
 backups. First, revise the settings we provided, changing whatever you
 think is needed (say, the most convenient time, when the site is not
-being used, to generate the backup). Go to “Configuration » System »
-Backup and Migrate” to perform this first step. Then, click on
-“Destinations” and “Add Destination” to set-up the SFTP connection with
+being used, to generate the backup). Go to "Configuration » System »
+Backup and Migrate" to perform this first step. Then, click on
+"Destinations" and "Add Destination" to set-up the SFTP connection with
 the credentials of your backup server. Please note that you have to use
 the port 22 (not 21) and password authentication, since ssh-key
 authentication is unfortunately not supported yet.</p>
@@ -283,8 +283,8 @@ authentication is unfortunately not supported yet.</p>
 <p>PECE uses Drupal notification for key events on the system. It has to be
 configured using a regular email address, provided you have all the mail
 server information. You just need your SMTP server info and credentials
-to get this done. Go to “Administration » Configuration » System » SMTP
-Authentication Support” and provide your SMTP server information,
+to get this done. Go to "Administration » Configuration » System » SMTP
+Authentication Support" and provide your SMTP server information,
 including username and password.</p>
 <h2 id="how-do-i-increase-the-file-upload-limit">How do I increase the file upload limit?</h2>
 <p>While logged-in as an administrator, navigate to Administration &gt;&gt;
@@ -303,10 +303,10 @@ updates are not handled differently, but sometimes issues have occurred.</p>
 <h2 id="other-post-installation-troubleshooting">Other Post-Installation Troubleshooting</h2>
 <ul>
 <li>
-<p>“Time Out” during installation: this issue is related to the usage of Drupal distributions in “shared hosting” environments which are very limited in terms of the resources allocated per client / user account. If the installation process is interrupted before it is finished, you will have to check your PHP configuration and increase the memory allocation and timeout configuration for the php scripts with the following directives: memory_limit and max_execution_time which can be found in your php.ini file. After doing so, you should not experience more “timeouts” during installation.</p>
+<p>"Time Out" during installation: this issue is related to the usage of Drupal distributions in "shared hosting" environments which are very limited in terms of the resources allocated per client / user account. If the installation process is interrupted before it is finished, you will have to check your PHP configuration and increase the memory allocation and timeout configuration for the php scripts with the following directives: memory_limit and max_execution_time which can be found in your php.ini file. After doing so, you should not experience more "timeouts" during installation.</p>
 </li>
 <li>
-<p>Links do not work: your webserver is not properly configured to support what is called “Clean URLs” on Drupal. Make sure you have your httpd “rewrite” rules properly set-up. This configuration can be done in the vhost file of your nginx configuration, following the <a href="https://github.com/perusio/drupal-with-nginx"><em>Perusio guide</em></a> or using the <a href="https://github.com/PECE-project/drupal/blob/7.x/.htaccess"><em>default.htaccess file that is provided by default by Drupal</em></a> if you are running Apache.</p>
+<p>Links do not work: your webserver is not properly configured to support what is called "Clean URLs" on Drupal. Make sure you have your httpd "rewrite" rules properly set-up. This configuration can be done in the vhost file of your nginx configuration, following the <a href="https://github.com/perusio/drupal-with-nginx"><em>Perusio guide</em></a> or using the <a href="https://github.com/PECE-project/drupal/blob/7.x/.htaccess"><em>default.htaccess file that is provided by default by Drupal</em></a> if you are running Apache.</p>
 </li>
 <li>
 <p>Permission denied when uploading content: your filesystem permissions must be set accordingly for the public and private directories, since PECE uses both extensively. <a href="https://www.drupal.org/node/244924"><em>Follow this official Drupal tutorial</em></a> to configure the permissions properly for both directories where you installed PECE.</p>
