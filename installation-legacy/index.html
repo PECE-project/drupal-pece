@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     
-    <title>System Admin's Guide - PECE Documentation</title>
+    <title>System Admin's Guide (Drupal 7 Legacy) - PECE Documentation</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" integrity="sha384-REHJTs1r2ErKBuJB0fCK99gCYsVjwxHrSU0N7I1zl9vZbggVJXRMsv/sLlOAGb4M" crossorigin="anonymous">
@@ -59,7 +59,7 @@
 
             <!-- Main title -->
 
-            <a class="navbar-brand" href="..">PECE Documentation</a>
+            <a class="navbar-brand" href="../..">PECE Documentation</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -69,7 +69,7 @@
                 
                 
                     <li >
-                        <a href="..">Home</a>
+                        <a href="../..">Home</a>
                     </li>
                 
                 
@@ -86,8 +86,8 @@
                 
                 
                 
-                    <li class="active">
-                        <a href="./">System Admin's Guide</a>
+                    <li>
+                        <a href="../installation/">System Admin's Guide (Drupal 11+)</a>
                     </li>
                 
                 
@@ -116,7 +116,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/PECE-project/drupal-pece/edit/main/installation/index.html"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/PECE-project/drupal-pece/edit/gh-pages/installation-legacy/index.html"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -131,13 +131,14 @@
         <li class="first-level active"><a href="#pece-system-administration">PECE System Administration</a></li>
             <li class="second-level"><a href="#how-do-i-install-pece">How do I install PECE?</a></li>
                 
-                <li class="third-level"><a href="#system-requirements">System Requirements</a></li>
                 <li class="third-level"><a href="#downloading-the-distro">Downloading the Distro</a></li>
                 <li class="third-level"><a href="#dependencies">Dependencies</a></li>
                 <li class="third-level"><a href="#quick-install">Quick Install</a></li>
             <li class="second-level"><a href="#i-want-to-use-https-with-pece-how-can-i-do-that">I want to use HTTPS with PECE. How can I do that?</a></li>
                 
-            <li class="second-level"><a href="#ive-installed-pece-but-none-of-my-links-are-working-what-is-going-on">I’ve installed PECE, but none of my links are working. What is going on?</a></li>
+            <li class="second-level"><a href="#ive-installed-pece-but-none-of-my-links-are-working-what-is-going-on">I've installed PECE, but none of my links are working. What is going on?</a></li>
+                
+            <li class="second-level"><a href="#i-get-an-error-about-a-yaml-parser-being-missing-how-can-i-fix-that">I get an error about a YAML parser being missing. How can I fix that?</a></li>
                 
             <li class="second-level"><a href="#when-should-the-admin-login-credentials-be-used">When should the admin login credentials be used?</a></li>
                 
@@ -155,194 +156,166 @@
                 
             <li class="second-level"><a href="#other-post-installation-troubleshooting">Other Post-Installation Troubleshooting</a></li>
                 
+        <li class="second-level"><a href="../installation/">&#x2190; Current Guide (Drupal 11+)</a></li>
+                
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
-
-<div class="alert" style="background-color:#d1ecf1;border:1px solid #bee5eb;border-radius:4px;padding:16px 20px;margin-bottom:24px;">
-  <strong>&#x2139;&#xFE0F; Drupal 11+ Documentation</strong><br>
-  This page covers installation and administration of PECE on <strong>Drupal 11</strong> (PECE 2.x).
-  If you are running an older PECE instance on <strong>Drupal 7</strong>, the
-  <a href="../installation-legacy/"><strong>legacy installation guide (Drupal 7)</strong></a> has been archived for reference.
+<div class="alert" style="background-color:#fff3cd;border:1px solid #ffc107;border-radius:4px;padding:16px 20px;margin-bottom:24px;">
+  <strong>&#x1F4C1; Archived — Drupal 7 Legacy Documentation</strong><br>
+  This page contains the original PECE installation instructions for <strong>Drupal 7</strong>, which is no longer maintained.
+  If you are setting up a new PECE instance, please use the
+  <a href="../installation/"><strong>current installation guide (Drupal 11+)</strong></a> instead.
 </div>
+
 
 <h1 id="pece-system-administration">PECE System Administration</h1>
 <h2 id="how-do-i-install-pece">How do I install PECE?</h2>
 <p>PECE is a Free Software-based Drupal distribution, therefore the
-<a href="https://www.drupal.org/docs/getting-started/installing-drupal"><em>standard installation procedure for Drupal</em></a> applies to PECE with a few
-extra dependencies. PECE now runs on Drupal 11 and requires a modern server stack.</p>
-<p>The following instructions have been tested on Debian 11 (Bullseye) and Debian 12 (Bookworm)
-servers, but they are not OS-dependent. PECE should run on any system
-supported by Drupal 11. A minimum of 256 MB of PHP memory is recommended;
-your configuration may vary considerably depending on the usage and content
-volume of your platform. Refer to our data management guidelines under the
-"sustainability" section to learn about the recommended minimum specs for
-your servers.</p>
-<h3 id="system-requirements">System Requirements</h3>
-<p>PECE 2.x (Drupal 11) requires the following minimum versions:</p>
-<ul>
-<li><p><strong>PHP</strong>: 8.1 or higher (8.3 recommended). Required extensions: <code>curl</code>, <code>gd</code>, <code>json</code>, <code>mbstring</code>, <code>openssl</code>, <code>pdo</code>, <code>xml</code>, <code>zip</code>.</p></li>
-<li><p><strong>Database</strong> (one of the following):</p>
-<ul>
-<li>MySQL 8.0.17+ or MariaDB 10.6.0+</li>
-<li>PostgreSQL 16.0+</li>
-<li>SQLite 3.45+</li>
-</ul>
-</li>
-<li><p><strong>Web server</strong>: Apache 2.4+ (with <code>mod_rewrite</code> enabled) or a supported Nginx version; see the official Drupal system requirements page below for current Nginx version constraints.</p></li>
-<li><p><strong>Composer</strong> 2.x — required for dependency management.</p></li>
-<li><p><strong>Drush</strong> 13+ — recommended for command-line administration and updates.</p></li>
-</ul>
-<p>For the full, up-to-date list of Drupal 11 system requirements, see the
-<a href="https://www.drupal.org/docs/getting-started/system-requirements"><em>official Drupal system requirements page</em></a>.</p>
+<a href="https://www.drupal.org/requirements"><em>standard installation procedure for Drupal 7</em></a> applies to PECE with a few
+extra dependencies.</p>
+<p>The following instructions have been tested on a Debian 8 (jessie)
+server, but they are not OS-dependent. PECE should run on any system
+supported by Drupal 7. PECE has been tested in virtual machines with
+256M allocated for PHP, being 128M the recommended minimum for Drupal 7
+distributions. Your configuration, of course, may vary considerably
+depending on the usage you are making of the platform. Refer to our data
+management guidelines under the "sustainability" section to learn about
+the recommended minimum specs for your servers.</p>
 <h3 id="downloading-the-distro">Downloading the Distro</h3>
-<p>Our distribution is developed on GitHub. You can obtain the most recent
-version by visiting the project's repository:</p>
+<p>Our distribution is currently being developed on Github. You can obtain
+the most updated version following the link "Releases" on the project's
+git repository:</p>
 <blockquote>
-<p><a href="https://github.com/PECE-project/drupal-pece">https://github.com/PECE-project/drupal-pece</a></p>
+<p>https://github.com/PECE-project/pece-distro</p>
 </blockquote>
-<p>To install PECE using Composer (recommended), run:</p>
+<p>Alternatively, you can obtain the source code and build the distro
+yourself if you intend to help our team by fixing bugs and extending the
+platform for your research purposes:</p>
 <blockquote>
-<p>composer create-project pece/pece-distro YOUR_PROJECT_NAME</p>
+<p>git clone
+https://github.com/PECE-project/drupal-pece.git</p>
 </blockquote>
-<p>Alternatively, you can clone the repository directly if you intend to
-contribute bug fixes or extend the platform for your research purposes:</p>
-<blockquote>
-<p>git clone https://github.com/PECE-project/drupal-pece.git</p>
-</blockquote>
-<p>If you are a developer who wants to contribute to PECE, consult the
-<a href="https://github.com/PECE-project/drupal-pece/blob/main/CONTRIBUTING.md"><em>Contributing Guide</em></a>
-in the repository for instructions on setting up a local development environment.</p>
+<p>If you are a developer who wants to contribute to PECE, you will need to
+follow special instructions to install and configure the tools for
+building the distro. Consult the sub-section <a href="http://pece.readthedocs.io/en/latest/installation.html#setting-up-the-development-environment"><em>Setting up the Development Environment</em></a>
+below for more information.</p>
 <h3 id="dependencies">Dependencies</h3>
-<p>PECE manages its PHP dependencies via Composer. After cloning or creating
-the project, install all dependencies by running:</p>
-<blockquote>
-<p>composer install</p>
-</blockquote>
-<p>Key server-side requirements beyond Drupal 11 core include:</p>
+<p>PECE has extra dependencies in addition to the ones you will need for
+Drupal 7 core:</p>
 <ul>
 <li>
-<p><strong>cURL</strong> — required for outbound HTTP requests.</p>
+<p>cURL</p>
 </li>
 <li>
-<p><strong>php-ssh2</strong> — optional; needed for SFTP-based backup destinations.</p>
+<p>php-mcrypt (for AES encryption support in backups and user passwords)</p>
 </li>
 <li>
-<p><strong>Composer 2.x</strong> — required for dependency management and site updates.</p>
+<p>php-ssh2 (for backup SFTP support, installed via PHP pear)</p>
+</li>
+<li>
+<p>pecl-yaml (for YAML parsing)</p>
 </li>
 </ul>
-<p><em>Note:</em> <code>php-mcrypt</code> is no longer required. It was removed from PHP 7.2+
-and is not needed by Drupal 11 or PECE 2.x.</p>
 <h3 id="quick-install">Quick Install</h3>
-<p>If your server stack (PHP 8.1+, a supported database, and a web server)
-is already set up, you can install PECE with the following steps:</p>
-<p>1. Create the project with Composer:</p>
+<p>If you have the server backend already set-up, you can quickly install
+PECE following these steps:</p>
+<p>Clone the ''pece-distro'' repository:</p>
 <blockquote>
-<p>composer create-project pece/pece-distro YOUR_PROJECT_NAME<br>
-cd YOUR_PROJECT_NAME</p>
+<p>git clone
+<a href="https://github.com/PECE-project/pece-distro.git"><em>https://github.com/PECE-project/pece-distro.git</em></a></p>
 </blockquote>
-<p>2. Create an empty database:</p>
+<p>Create an empty database:</p>
 <blockquote>
-<p>mysql -u $YOUR_USER -p -e "CREATE DATABASE $YOUR_DB_NAME CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"</p>
+<p>mysql -u $YOUR_USER -p -e "CREATE DATABASE $YOUR_DB_NAME
+CHARACTER SET utf8 COLLATE utf8_general_ci;"</p>
 </blockquote>
-<p>3. Run the Drupal installer by navigating to the URL where your site will
-reside (e.g. <code>https://worldpece.org</code>) and following the on-screen steps,
-or use Drush for a non-interactive install:</p>
-<blockquote>
-<p>drush site:install --db-url=mysql://USER:PASS@localhost/DB_NAME --account-name=admin --account-pass=CHANGEME</p>
-</blockquote>
-<p><strong>Important:</strong> Replace <code>CHANGEME</code> with a strong, unique password before running this command. Never use a weak or default password on a publicly accessible site.</p>
-<p>Follow the <a href="https://www.drupal.org/docs/getting-started/installing-drupal"><em>official Drupal installation documentation</em></a>
-if you need further help. The <a href="#other-post-installation-troubleshooting">Troubleshooting</a>
-section below describes common issues encountered when the backend
-dependencies, configuration, or filesystem permissions are not correct.</p>
-<p>One important note: please make sure to set the permissions on the
-filesystem properly. The <a href="https://www.drupal.org/docs/administering-a-drupal-site/security-in-drupal/securing-file-permissions-and-ownership"><em>official Drupal security documentation</em></a> explains
-how to do so. In our experience, the following directories need to be
-writable by the web server:</p>
-<ul>
-<li><code>web/sites/default/files</code> (public files) — permissions 755 or 775</li>
-<li><code>web/sites/default/files/private</code> (private files) — permissions 750 or 770</li>
-</ul>
+<p>Proceed to the URL in which your Drupal will reside, i.e.
+https://worldpece.org. From there, you can install PECE like any other
+Drupal site. Follow the Drupal.org <a href="https://www.drupal.org/documentation/install/"><em>official documentation if you need further help</em></a>. In the
+section <a href="http://pece.readthedocs.io/en/latest/installation.html#troubleshooting"><em>Troubleshooting</em></a> below we describe common issues users have when trying to install PECE without the proper backend dependencies, configurations, and permissions.</p>
+<p>One important note: please, make sure to set the permissions on the
+filesystem properly. We cannot emphasize this enough. The <a href="https://www.drupal.org/node/244924"><em>official Drupal documentation explains</em></a> how
+to do so, if you have questions. (In our experience, we have needed to
+set the file permissions at sites/default/files/artifacts to 770 and
+sites/default/files/private to 770.)</p>
 <h2 id="i-want-to-use-https-with-pece-how-can-i-do-that">I want to use HTTPS with PECE. How can I do that?</h2>
-<p>A simple tutorial for setting up HTTPS with Certbot (Let's Encrypt) on Ubuntu or Debian can be found
-<a href="https://certbot.eff.org/">on the official Certbot website</a>.
-Select your web server and operating system to get tailored instructions.</p>
+<p>A very simple tutorial for setting up HTTPS with Certbot on Ubuntu can be found <a href="https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04">here</a>.</p>
 <h2 id="ive-installed-pece-but-none-of-my-links-are-working-what-is-going-on">I've installed PECE, but none of my links are working. What is going on?</h2>
-<p>Your web server is not properly configured to support URL routing for Drupal.
-Make sure the <code>rewrite</code> module is enabled and your virtual host is configured
-to allow <code>.htaccess</code> overrides (<code>AllowOverride All</code>). Configure Apache or Nginx
-to use <code>.../YOUR_PROJECT_NAME/web</code> as the document root (not the project root), so that
-files such as <code>vendor/</code> and <code>composer.json</code> are not exposed. For Apache, Drupal ships
-with a <code>.htaccess</code> file in the <code>web/</code> directory that handles URL rewriting
-automatically. For Nginx, follow the
-<a href="https://www.drupal.org/docs/getting-started/installing-drupal/nginx-and-drupal"><em>Drupal.org Nginx configuration guide</em></a>.</p>
+<p>Your webserver is not properly configured to support what is called
+"Clean URLs" on Drupal. Make sure you have your httpd "rewrite" rules
+properly set-up. This configuration can be done in the vhost file of
+your nginx configuration, following the <a href="https://github.com/perusio/drupal-with-nginx"><em>Perusio guide</em></a> or using the <a href="https://github.com/PECE-project/drupal/blob/7.x/.htaccess"><em>default.htaccess file that is provided by default by Drupal</em></a> if you are running Apache.</p>
+<h2 id="i-get-an-error-about-a-yaml-parser-being-missing-how-can-i-fix-that">I get an error about a YAML parser being missing. How can I fix that?</h2>
+<p>Newer versions of PHP require you to install pecl-yaml for YAML parsing. You can find it <a href="https://pecl.php.net/package/yaml">here</a>.
+We recommend using the latest version, which is 2.0.4 at the time of writing. Follow the pecl-yaml instructions to build and install it.
+Then edit your php.ini file. For example, if you are using PHP 7.2, the file will be found at:
+/etc/php/7.2/apache2/php.ini</p>
+<p>Add the following line to php.ini:
+extension=yaml.so</p>
 <h2 id="when-should-the-admin-login-credentials-be-used">When should the admin login credentials be used?</h2>
 <p>Distribute admin login credentials to as few users as possible. Admin
 login credentials should only be used to configure settings and to
 approve new users. The admin credentials should not be used to add
 content or comment on content.</p>
 <h2 id="how-do-i-update-the-site-information">How do I update the site information?</h2>
-<p>Go to <strong>Administration &rarr; Configuration &rarr; System &rarr; Basic site settings</strong> and
-fill out the information about your site name, email address,
+<p>Go to "Administration » Configuration » System » Site information" and
+fill out the information about your site name, the basic admin password,
 contact, timezone and other relevant info.</p>
 <h2 id="how-do-i-upload-the-terms-of-service">How do I upload the terms of service?</h2>
-<p>Go to <strong>Administration &rarr; Configuration &rarr; People &rarr; Legal</strong> and click "Add
-T&amp;C", then fill out the boxes with your custom text to be displayed to
-every user who requests an account on the system.</p>
+<p>Go to "Administration » Configuration » People » Legal" and click "Add
+T&amp;C", then fill-out the boxes with your custom text to be displayed to
+every user who requests an account on the system. </p>
 <h2 id="how-do-i-set-up-back-ups">How do I set up back-ups?</h2>
 <p>As explained in our data management guidelines, PECE is configured to
 automatically generate backups. You should, however, revise the settings
-and set up an SFTP connection to transfer your backup to another server
-to ensure extra security when storing your encrypted backups. Go to
-<strong>Configuration &rarr; System &rarr; Backup and Migrate</strong> to review backup settings.
-Then click <strong>Destinations &rarr; Add Destination</strong> to configure the SFTP
-connection with the credentials of your backup server. Use port 22 and
-password authentication.</p>
+and set-up a SFTP connection to transfer your backup to another server
+and ensure that you have extra security when storing your encrypted
+backups. First, revise the settings we provided, changing whatever you
+think is needed (say, the most convenient time, when the site is not
+being used, to generate the backup). Go to "Configuration » System »
+Backup and Migrate" to perform this first step. Then, click on
+"Destinations" and "Add Destination" to set-up the SFTP connection with
+the credentials of your backup server. Please note that you have to use
+the port 22 (not 21) and password authentication, since ssh-key
+authentication is unfortunately not supported yet.</p>
 <h2 id="how-do-i-configure-smtp-so-that-emails-can-be-sent-from-the-platform">How do I configure SMTP so that emails can be sent from the platform?</h2>
-<p>PECE uses Drupal notifications for key events on the system. It has to be
+<p>PECE uses Drupal notification for key events on the system. It has to be
 configured using a regular email address, provided you have all the mail
-server information. Go to <strong>Administration &rarr; Configuration &rarr; System &rarr; SMTP
-Authentication Support</strong> and provide your SMTP server information,
+server information. You just need your SMTP server info and credentials
+to get this done. Go to "Administration » Configuration » System » SMTP
+Authentication Support" and provide your SMTP server information,
 including username and password.</p>
 <h2 id="how-do-i-increase-the-file-upload-limit">How do I increase the file upload limit?</h2>
-<p>While logged in as an administrator, navigate to <strong>Administration &rarr;
-Configuration &rarr; Media &rarr; File system</strong>. Under the <em>Maximum Upload Size</em>
-field, enter a new value (we use 2 GB). Click <em>Save Configuration</em>. You
-may also need to raise <code>upload_max_filesize</code> and <code>post_max_size</code> in your
-<code>php.ini</code> file and restart your web server.</p>
+<p>While logged-in as an administrator, navigate to Administration &gt;&gt;
+Configuration &gt;&gt; Media &gt;&gt; File Settings. Under the Maximum
+Upload Size field, enter a new value (we use 2GB). Click Save
+Configuration. You may also need to increase the upload limit on the
+server.</p>
 <h2 id="how-do-i-update-my-instance-when-a-new-version-of-the-pece-distro-is-released">How do I update my instance when a new version of the PECE distro is released?</h2>
-<p>Always back up your files and database before updating the platform.</p>
-<p>Put the site in maintenance mode via <strong>Administration &rarr; Configuration &rarr;
-Development &rarr; Maintenance mode</strong>, or with Drush:</p>
-<blockquote>
-<p>drush state:set system.maintenance_mode 1 --input-format=integer</p>
-</blockquote>
-<p>Pull the latest code and update dependencies with Composer:</p>
-<blockquote>
-<p>composer update<br>
-drush updatedb<br>
-drush cache:rebuild</p>
-</blockquote>
-<p>Disable maintenance mode when done:</p>
-<blockquote>
-<p>drush state:set system.maintenance_mode 0 --input-format=integer</p>
-</blockquote>
-<p>Refer to the <a href="https://www.drupal.org/docs/upgrading-drupal"><em>official Drupal upgrade documentation</em></a>
-for more details on major version upgrades.</p>
+<p>Always back-up your files and database before updating the platform.</p>
+<p>Put the site in maintenance mode. Under sites/default/, there is a file
+called settings.php. Search for $update_free_access = FALSE; and
+change FALSE to TRUE.</p>
+<p>Then, go to YourSite/update.php and follow the steps. In theory major
+updates are not handled differently, but sometimes issues have occurred.</p>
+<p>Be sure to turn off maintenance mode when you are done.</p>
 <h2 id="other-post-installation-troubleshooting">Other Post-Installation Troubleshooting</h2>
 <ul>
 <li>
-<p><strong>Time Out during installation:</strong> this issue is related to the usage of Drupal distributions in "shared hosting" environments which are very limited in terms of the resources allocated per client / user account. If the installation process is interrupted before it is finished, you will have to check your PHP configuration and increase the memory allocation and timeout configuration for PHP scripts with the following directives: <code>memory_limit</code> and <code>max_execution_time</code>, found in your <code>php.ini</code> file. After doing so, you should not experience more "timeouts" during installation.</p>
+<p>"Time Out" during installation: this issue is related to the usage of Drupal distributions in "shared hosting" environments which are very limited in terms of the resources allocated per client / user account. If the installation process is interrupted before it is finished, you will have to check your PHP configuration and increase the memory allocation and timeout configuration for the php scripts with the following directives: memory_limit and max_execution_time which can be found in your php.ini file. After doing so, you should not experience more "timeouts" during installation.</p>
 </li>
 <li>
-<p><strong>Links do not work:</strong> your web server is not properly configured to support Drupal's URL routing. Make sure your <code>rewrite</code> rules are set up correctly. For Apache, ensure <code>AllowOverride All</code> is set in your virtual host and the <code>.htaccess</code> file in the <code>web/</code> directory is present. For Nginx, follow the <a href="https://www.drupal.org/docs/getting-started/installing-drupal/nginx-and-drupal"><em>Drupal.org Nginx configuration guide</em></a>.</p>
+<p>Links do not work: your webserver is not properly configured to support what is called "Clean URLs" on Drupal. Make sure you have your httpd "rewrite" rules properly set-up. This configuration can be done in the vhost file of your nginx configuration, following the <a href="https://github.com/perusio/drupal-with-nginx"><em>Perusio guide</em></a> or using the <a href="https://github.com/PECE-project/drupal/blob/7.x/.htaccess"><em>default.htaccess file that is provided by default by Drupal</em></a> if you are running Apache.</p>
 </li>
 <li>
-<p><strong>Permission denied when uploading content:</strong> your filesystem permissions must be set correctly for the public and private file directories, since PECE uses both extensively. Follow the <a href="https://www.drupal.org/docs/administering-a-drupal-site/security-in-drupal/securing-file-permissions-and-ownership"><em>official Drupal security documentation</em></a> to configure permissions properly.</p>
+<p>Permission denied when uploading content: your filesystem permissions must be set accordingly for the public and private directories, since PECE uses both extensively. <a href="https://www.drupal.org/node/244924"><em>Follow this official Drupal tutorial</em></a> to configure the permissions properly for both directories where you installed PECE.</p>
 </li>
 <li>
-<p><strong>Permission denied after configuring filesystem permissions:</strong> make sure your system <code>/tmp</code> directory is also writable. If you are on a shared host without access to <code>/tmp</code>, configure Drupal to use a temporary directory inside your <code>sites/default/files</code> path via <strong>Administration &rarr; Configuration &rarr; Media &rarr; File system</strong>. There is a <a href="https://www.drupal.org/node/2140629"><em>discussion about this issue on Drupal.org that is helpful</em></a>.</p>
+<p>Permission denied when uploading content after configuring filesystem permissions: make sure your /tmp is also writable and, if you are on a shared host and cannot have access to it, configure Drupal to point to a temporary directory in your system/files path. There is a <a href="https://www.drupal.org/node/2140629"><em>discussion about this issue on Drupal.org that is helpful</em></a>.</p>
+</li>
+<li>
+<p>Cannot create users, server internal error: in our experience, php5-mcrypt is probably not installed in your system. Make sure it is properly installed and loaded, by running php -m in a shell and checking if it is listed.</p>
 </li>
 </ul></div>
         
