@@ -46,9 +46,29 @@
                 }
             }
         },
-        "assets": {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
+        "npm-blazy": {
+            "type": "package",
+            "package": {
+                "name": "npm-asset/blazy",
+                "version": "1.8.2",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://registry.npmjs.org/blazy/-/blazy-1.8.2.tgz",
+                    "type": "tar"
+                }
+            }
+        },
+        "npm-splide": {
+            "type": "package",
+            "package": {
+                "name": "npm-asset/splidejs--splide",
+                "version": "4.1.4",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://registry.npmjs.org/@splidejs/splide/-/splide-4.1.4.tgz",
+                    "type": "tar"
+                }
+            }
         }
     },
     "require": {
@@ -107,7 +127,7 @@
         "drupal/gin": "^5",
         "drupal/gin_login": "^2",
         "drupal/gin_type_tray": "^1.0@beta",
-        "drupal/graphql": "4.x-dev",
+        "drupal/graphql": "5.x-dev",
         "drupal/hide_revision_field": "^2.5",
         "drupal/image_replace": "^2.0",
         "drupal/inline_entity_form": "^3",
@@ -181,9 +201,8 @@
         "enshrined/svg-sanitize": "^0.22",
         "mglaman/composer-drupal-lenient": "^1.0",
         "mozilla/pdf.js": "*",
-        "npm-asset/blazy": "^1.8",
-        "npm-asset/splidejs--splide": "^4.1",
-        "oomphinc/composer-installers-extender": "~1.0 || ~2.0"
+        "npm-asset/blazy": "*",
+        "npm-asset/splidejs--splide": "*"
     },
     "require-dev": {
         "behat/behat": "^3.15",
@@ -198,6 +217,7 @@
         "drupal/migrate_devel": "^2",
         "friends-of-behat/service-container-extension": "^1.1",
         "palantirnet/drupal-rector": "^0.20.3",
+        "phpmd/phpmd": "^2.15",
         "phpspec/prophecy-phpunit": "^2.0"
     },
     "conflict": {
@@ -214,7 +234,6 @@
             "drupal/console-extend-plugin": true,
             "drupal/core-composer-scaffold": true,
             "mglaman/composer-drupal-lenient": true,
-            "oomphinc/composer-installers-extender": true,
             "php-http/discovery": true,
             "phpstan/extension-installer": true,
             "tbachert/spi": true
@@ -240,13 +259,8 @@
         "composer-exit-on-patch-failure": true,
         "installer-paths": {
             "web/core": ["type:drupal-core"],
-            "web/libraries/jquery-ui-touch-punch": [
-                "bower-asset/jqueryui-touch-punch"
-            ],
             "web/libraries/{$name}": [
-                "type:drupal-library",
-                "type:bower-asset",
-                "type:npm-asset"
+                "type:drupal-library"
             ],
             "web/modules/contrib/{$name}": ["type:drupal-module"],
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
@@ -255,67 +269,6 @@
             "web/modules/custom/{$name}": ["type:drupal-custom-module"],
             "web/profiles/custom/{$name}": ["type:drupal-custom-profile"],
             "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
-        },
-        "installer-types": [
-            "bower-asset",
-            "npm-asset"
-        ],
-        "drupal-libraries": {
-            "library-directory": "web/libraries",
-            "libraries": [
-                {
-                    "name": "objectfitpolyfill",
-                    "package": "bower-asset/objectfitpolyfill"
-                },
-                {
-                    "name": "chartjs",
-                    "package": "bower-asset/chartjs"
-                },
-                {
-                    "name": "c3",
-                    "package": "bower-asset/c3"
-                },
-                {
-                    "name": "d3",
-                    "package": "bower-asset/d3"
-                },
-                {
-                    "name": "dropzone",
-                    "package": "npm-asset/dropzone"
-                },
-                {
-                    "name": "blazy",
-                    "package": "npm-asset/blazy"
-                },
-                {
-                    "name": "slick",
-                    "package": "npm-asset/slick-carousel"
-                },
-                {
-                    "name": "splide",
-                    "package": "npm-asset/splide"
-                },
-                {
-                    "name": "ace",
-                    "package": "npm-asset/ace-builds"
-                },
-                {
-                    "name": "jquery-ui-touch-punch",
-                    "package": "bower-asset/jqueryui-touch-punch"
-                },
-                {
-                    "name": "imagesloaded",
-                    "package": "npm-asset/imagesloaded"
-                },
-                {
-                    "name": "swagger-ui",
-                    "package": "npm-asset/swagger-ui-dist"
-                },
-                {
-                    "name": "spectrum-colorpicker",
-                    "package": "npm-asset/spectrum"
-                }
-            ]
         },
         "drupal-scaffold": {
             "initial": {

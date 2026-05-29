@@ -13,7 +13,17 @@ content:
     third_party_settings: {  }
     weight: 100
     region: content
+  title:
+    type: title
+    label: hidden
+    settings:
+      link_to_entity: true
+      tag: h2
+    third_party_settings: {  }
+    weight: -49
+    region: content
 hidden:
+  created: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_analytic_question_set: true
@@ -24,6 +34,7 @@ hidden:
   field_tags: true
   langcode: true
   search_api_excerpt: true
+  uid: true
 uuid: 9a799311-d6d5-40b9-b9cc-9e900b5e73c3
 langcode: en
 status: true

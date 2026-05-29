@@ -123,7 +123,17 @@ content:
     third_party_settings: {  }
     weight: 100
     region: content
+  title:
+    type: title
+    label: hidden
+    settings:
+      link_to_entity: true
+      tag: h2
+    third_party_settings: {  }
+    weight: -49
+    region: first
 hidden:
+  created: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   extra_field_pece_essays_essay_link: true
@@ -136,6 +146,7 @@ hidden:
   langcode: true
   layout_builder__layout: true
   search_api_excerpt: true
+  uid: true
 uuid: 29e82442-9e68-4024-82c9-10b8b702534a
 langcode: en
 status: true
@@ -580,6 +591,23 @@ third_party_settings:
                     new_label: ''
                     rewrite_label: 0
             weight: 4
+            additional: {  }
+          0b332043-3ac2-4008-b058-f344f38dd26d:
+            uuid: 0b332043-3ac2-4008-b058-f344f38dd26d
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:pece_essay:title'
+              formatter:
+                type: title
+                label: hidden
+                settings:
+                  tag: h2
+                  link_to_entity: true
+                third_party_settings: {  }
+            weight: 5
             additional: {  }
         third_party_settings: {  }
   layout_library:

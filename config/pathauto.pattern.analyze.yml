@@ -1,12 +1,21 @@
+uuid: d49a3898-73a8-4ab5-a35e-39bed1a7359c
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.pece_analytic
+    - node.type.pece_annotation
+    - node.type.pece_memo
+  module:
+    - node
 id: analyze
 label: Analyze
 type: 'canonical_entities:node'
-pattern: 'analyze/[node:content-type]/[node:title]'
+pattern: '/analyze/[node:content-type]/[node:title]'
 selection_criteria:
   f253dacb-0442-4a4d-9d2c-69bf36b9672f:
     id: 'entity_bundle:node'
     negate: false
-    uuid: f253dacb-0442-4a4d-9d2c-69bf36b9672f
     context_mapping:
       node: node
     bundles:
@@ -16,9 +25,3 @@ selection_criteria:
 selection_logic: and
 weight: -6
 relationships: {  }
-uuid: d49a3898-73a8-4ab5-a35e-39bed1a7359c
-langcode: en
-status: true
-dependencies:
-  module:
-    - node

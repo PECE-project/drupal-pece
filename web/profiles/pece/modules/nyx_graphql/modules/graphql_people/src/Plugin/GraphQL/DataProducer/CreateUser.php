@@ -98,7 +98,7 @@ class CreateUser extends DataProducerPluginBase implements ContainerFactoryPlugi
    * @throws \Exception
    */
   public function resolve(array $data) {
-    if ($this->currentUser->hasPermission("administer users") || $this->currentUser->isAnonymous()) {
+    if ($this->currentUser->hasPermission("administer users")) {
       $values = [];
       $values['vid'] = 'user';
       foreach ($data as $key => $value) {

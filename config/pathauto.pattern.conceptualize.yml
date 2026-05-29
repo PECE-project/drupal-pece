@@ -1,12 +1,21 @@
+uuid: c2cfad9f-49e3-4d0c-99eb-d98796d0b5ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.pece_fieldsite
+    - node.type.pece_project
+    - node.type.pece_substantive_logic
+  module:
+    - node
 id: conceptualize
 label: Conceptualize
 type: 'canonical_entities:node'
-pattern: 'conceptualize/[node:content-type]/[node:title]'
+pattern: '/conceptualize/[node:content-type]/[node:title]'
 selection_criteria:
   31951eb0-1941-42b6-9b38-26750ef53691:
     id: 'entity_bundle:node'
     negate: false
-    uuid: 31951eb0-1941-42b6-9b38-26750ef53691
     context_mapping:
       node: node
     bundles:
@@ -16,9 +25,3 @@ selection_criteria:
 selection_logic: and
 weight: -8
 relationships: {  }
-uuid: c2cfad9f-49e3-4d0c-99eb-d98796d0b5ab
-langcode: en
-status: true
-dependencies:
-  module:
-    - node

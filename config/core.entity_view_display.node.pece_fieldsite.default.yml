@@ -9,8 +9,18 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  title:
+    type: title
+    label: hidden
+    settings:
+      link_to_entity: true
+      tag: h2
+    third_party_settings: {  }
+    weight: -49
+    region: first
 hidden:
   body: true
+  created: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   field_fieldsite_project: true
@@ -20,6 +30,7 @@ hidden:
   langcode: true
   links: true
   search_api_excerpt: true
+  uid: true
 uuid: 1d3e6e9a-8586-431e-bc13-5385947d32ab
 langcode: en
 status: true
@@ -176,6 +187,23 @@ third_party_settings:
               context_mapping:
                 entity: layout_builder.entity
             weight: 0
+            additional: {  }
+          c63ada98-087a-4f22-a4ee-ec902919f24d:
+            uuid: c63ada98-087a-4f22-a4ee-ec902919f24d
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:pece_fieldsite:title'
+              formatter:
+                type: title
+                label: hidden
+                settings:
+                  tag: h2
+                  link_to_entity: true
+                third_party_settings: {  }
+            weight: 3
             additional: {  }
         third_party_settings: {  }
   layout_library:
