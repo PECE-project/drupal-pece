@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- See phpunit.xml.dist for full options reference. -->
+<!-- SIMPLETEST_DB and SIMPLETEST_BASE_URL must be set as environment variables
+     (e.g. in CI or a local .env wrapper) — omitting them here prevents the
+     empty-string values from shadowing real env vars in CI. -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+         bootstrap="web/core/tests/bootstrap.php"
+         colors="true"
+         cacheDirectory=".phpunit.cache">
+  <testsuites>
+    <!-- Unit tests: fast, no database required. -->
+    <testsuite name="unit">
+      <directory>web/profiles/pece/modules</directory>
+      <directory>web/modules/custom</directory>
+      <exclude>web/profiles/pece/modules/*/tests/src/Kernel</exclude>
+      <exclude>web/profiles/pece/modules/*/tests/src/Functional</exclude>
+      <exclude>web/profiles/pece/modules/*/tests/src/FunctionalJavascript</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/Kernel</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/Functional</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/FunctionalJavascript</exclude>
+      <exclude>web/modules/custom/*/tests/src/Kernel</exclude>
+      <exclude>web/modules/custom/*/tests/src/Functional</exclude>
+      <exclude>web/modules/custom/*/tests/src/FunctionalJavascript</exclude>
+    </testsuite>
+    <!-- Kernel tests: require a database, no web server. -->
+    <testsuite name="kernel">
+      <directory>web/profiles/pece/modules</directory>
+      <directory>web/modules/custom</directory>
+      <exclude>web/profiles/pece/modules/*/tests/src/Unit</exclude>
+      <exclude>web/profiles/pece/modules/*/tests/src/Functional</exclude>
+      <exclude>web/profiles/pece/modules/*/tests/src/FunctionalJavascript</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/Unit</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/Functional</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/FunctionalJavascript</exclude>
+      <exclude>web/modules/custom/*/tests/src/Unit</exclude>
+      <exclude>web/modules/custom/*/tests/src/Functional</exclude>
+      <exclude>web/modules/custom/*/tests/src/FunctionalJavascript</exclude>
+    </testsuite>
+    <!-- Functional tests: require a database and a running web server. -->
+    <testsuite name="functional">
+      <directory>web/profiles/pece/modules</directory>
+      <directory>web/modules/custom</directory>
+      <exclude>web/profiles/pece/modules/*/tests/src/Unit</exclude>
+      <exclude>web/profiles/pece/modules/*/tests/src/Kernel</exclude>
+      <exclude>web/profiles/pece/modules/*/tests/src/FunctionalJavascript</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/Unit</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/Kernel</exclude>
+      <exclude>web/profiles/pece/modules/*/modules/*/tests/src/FunctionalJavascript</exclude>
+      <exclude>web/modules/custom/*/tests/src/Unit</exclude>
+      <exclude>web/modules/custom/*/tests/src/Kernel</exclude>
+      <exclude>web/modules/custom/*/tests/src/FunctionalJavascript</exclude>
+    </testsuite>
+  </testsuites>
+
+  <!-- Source paths for coverage reporting (PCOV/Xdebug). -->
+  <source>
+    <include>
+      <directory suffix=".php">web/profiles/pece/modules</directory>
+      <directory suffix=".php">web/modules/custom</directory>
+    </include>
+    <exclude>
+      <directory>web/profiles/pece/modules/*/tests</directory>
+      <directory>web/profiles/pece/modules/*/modules/*/tests</directory>
+      <directory>web/modules/custom/*/tests</directory>
+    </exclude>
+  </source>
+
+  <php>
+    <ini name="error_reporting" value="32767"/>
+    <ini name="memory_limit" value="-1"/>
+    <env name="BROWSERTEST_OUTPUT_DIRECTORY" value="sites/default/files/simpletest/browser_output"/>
+    <env name="BROWSERTEST_OUTPUT_BASE_URL" value=""/>
+    <env name="MINK_DRIVER_CLASS" value=""/>
+    <env name="MINK_DRIVER_ARGS" value=""/>
+    <env name="MINK_DRIVER_ARGS_WEBDRIVER" value=""/>
+  </php>
+</phpunit>

@@ -48,9 +48,6 @@ jobs:
   # -----------------------------------------------------------------------
   # Job 2: Full Drupal install using existing config, then verify DB updates
   # and config sync are clean.
-  # NOTE: PHPUnit tests require drupal/core-dev in require-dev to provide
-  # Drupal's PHPUnit compatibility traits. Add it and re-enable a unit-tests
-  # job once custom unit tests exist.
   # -----------------------------------------------------------------------
   install:
     name: Install & Config Sync
@@ -151,7 +148,90 @@ jobs:
             web/profiles/pece/modules/
 
   # -----------------------------------------------------------------------
-  # Job 4: Build the Bulma-based peceful theme to catch compilation errors.
+  # Job 4: PHPUnit Unit + Kernel tests with PCOV coverage.
+  # Runs in parallel with install and code-quality (both need: validate).
+  # Coverage report uploaded as a CI artifact (clover XML + JUnit XML).
+  # -----------------------------------------------------------------------
+  phpunit:
+    name: PHPUnit (Unit + Kernel)
+    runs-on: ubuntu-latest
+    needs: validate
+
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: drupal
+          MARIADB_USER: drupal
+          MARIADB_PASSWORD: drupal
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+        ports:
+          - 3306:3306
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP 8.3 with PCOV
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: gd, pdo_mysql, opcache, pcov
+          coverage: pcov
+
+      - name: Cache Composer packages
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Prepare settings.php
+        run: |
+          cp web/sites/default/default.settings.php web/sites/default/settings.php
+          chmod 666 web/sites/default/settings.php
+          mkdir -p web/sites/default/files
+          chmod -R 777 web/sites/default/files
+          mkdir -p config/sync
+          echo "\$settings['config_sync_directory'] = '$(pwd)/config/sync';" >> web/sites/default/settings.php
+
+      - name: Install PECE profile
+        run: |
+          vendor/bin/drush si pece \
+            --existing-config \
+            --db-url=mysql://drupal:drupal@127.0.0.1/drupal \
+            --site-name="PECE2" \
+            -y
+
+      - name: Run PHPUnit Unit + Kernel suites
+        env:
+          SIMPLETEST_DB: mysql://drupal:drupal@127.0.0.1/drupal
+          SIMPLETEST_BASE_URL: http://localhost
+        run: |
+          vendor/bin/phpunit \
+            --testsuite unit,kernel \
+            --coverage-clover coverage.xml \
+            --log-junit junit.xml \
+            -v
+
+      - name: Upload coverage and test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phpunit-results
+          path: |
+            coverage.xml
+            junit.xml
+
+  # -----------------------------------------------------------------------
+  # Job 5: Build the Bulma-based peceful theme to catch compilation errors.
   # -----------------------------------------------------------------------
   theme-build:
     name: Theme Build
