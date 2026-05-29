@@ -1,0 +1,19 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+
+function pece_ai_entity_insert(EntityInterface $entity): void {
+  \Drupal::service('pece_ai.entity_embed_subscriber')->onEntitySave($entity);
+}
+
+function pece_ai_entity_update(EntityInterface $entity): void {
+  \Drupal::service('pece_ai.entity_embed_subscriber')->onEntitySave($entity);
+}
+
+function pece_ai_theme(): array {
+  return [
+    'pece_ai_related_content' => [
+      'variables' => ['items' => [], 'scope_label' => NULL, 'toggle_url' => NULL],
+    ],
+  ];
+}

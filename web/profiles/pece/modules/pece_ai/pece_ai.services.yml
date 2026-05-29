@@ -1,0 +1,23 @@
+services:
+  pece_ai.embedding_service:
+    class: Drupal\pece_ai\Service\EmbeddingService
+    arguments: ['@http_client', '@config.factory']
+
+  pece_ai.similarity_service:
+    class: Drupal\pece_ai\Service\SimilarityService
+    arguments: ['@http_client', '@config.factory', '@entity_type.manager']
+
+  pece_ai.entity_embed_subscriber:
+    class: Drupal\pece_ai\EventSubscriber\EntityEmbedSubscriber
+    arguments: ['@queue', '@config.factory']
+
+  pece_ai.commands:
+    class: Drupal\pece_ai\Commands\PeceAiCommands
+    arguments:
+      - '@entity_type.manager'
+      - '@queue'
+      - '@pece_ai.embedding_service'
+      - '@pece_ai.similarity_service'
+      - '@config.factory'
+    tags:
+      - { name: drush.command }
