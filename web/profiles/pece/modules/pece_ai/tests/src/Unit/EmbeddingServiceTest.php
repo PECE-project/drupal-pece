@@ -97,4 +97,25 @@ class EmbeddingServiceTest extends UnitTestCase {
     $this->assertEquals('Title Only', $text);
   }
 
+  public function testEmbedThrowsWhenOllamaIsDown(): void {
+    $this->httpClient->method('request')
+      ->willThrowException(new \GuzzleHttp\Exception\RequestException(
+        'Connection refused',
+        new \GuzzleHttp\Psr7\Request('POST', '/api/embeddings')
+      ));
+
+    $this->expectException(\RuntimeException::class);
+    $this->expectExceptionMessageMatches('/Embedding service unavailable/');
+    $this->service->embed('some text');
+  }
+
+  public function testEmbedThrowsOnMalformedResponse(): void {
+    $this->httpClient->method('request')
+      ->willReturn(new Response(200, [], json_encode(['wrong_key' => []])));
+
+    $this->expectException(\RuntimeException::class);
+    $this->expectExceptionMessageMatches('/Invalid embedding response/');
+    $this->service->embed('some text');
+  }
+
 }

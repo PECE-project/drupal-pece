@@ -15,14 +15,28 @@ class EmbeddingService {
 
   public function embed(string $text): array {
     $config = $this->configFactory->get('pece_ai.settings');
-    $response = $this->httpClient->request('POST', $config->get('embedding_url') . '/api/embeddings', [
-      'json' => [
-        'model' => $config->get('embedding_model'),
-        'prompt' => $text,
-      ],
-    ]);
-    $data = json_decode($response->getBody()->getContents(), TRUE);
-    return $data['embedding'];
+    try {
+      $response = $this->httpClient->request('POST', $config->get('embedding_url') . '/api/embeddings', [
+        'json' => [
+          'model' => $config->get('embedding_model'),
+          'prompt' => $text,
+        ],
+      ]);
+      $data = json_decode($response->getBody()->getContents(), TRUE);
+      if (!is_array($data) || !isset($data['embedding'])) {
+        throw new \RuntimeException('Invalid embedding response: missing or malformed embedding field.');
+      }
+      return $data['embedding'];
+    }
+    catch (\GuzzleHttp\Exception\GuzzleException $e) {
+      throw new \RuntimeException('Embedding service unavailable: ' . $e->getMessage(), 0, $e);
+    }
+    catch (\RuntimeException $e) {
+      throw $e;
+    }
+    catch (\Exception $e) {
+      throw new \RuntimeException('Embedding service unavailable: ' . $e->getMessage(), 0, $e);
+    }
   }
 
   public function extractText(EntityInterface $entity): string {
