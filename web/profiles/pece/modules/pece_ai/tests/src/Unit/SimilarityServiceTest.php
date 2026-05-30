@@ -229,6 +229,50 @@ class SimilarityServiceTest extends UnitTestCase {
   }
 
   /**
+   * Tests that findSimilarByVector queries Qdrant with the provided vector.
+   */
+  public function testFindSimilarByVectorQueriesQdrantWithVector(): void {
+    $vector = array_fill(0, 768, 0.5);
+    $responseBody = json_encode([
+      'result' => [
+        [
+          'id' => 42,
+          'score' => 0.91,
+          'payload' => [
+            'entity_type' => 'node',
+            'entity_id' => 42,
+            'bundle' => 'pece_essay',
+            'group_ids' => [],
+          ],
+        ],
+      ],
+    ]);
+
+    $httpClient = $this->createMock(ClientInterface::class);
+    $httpClient->expects($this->once())
+      ->method('request')
+      ->with('POST', 'http://qdrant:6333/collections/pece_entities/points/search',
+        $this->callback(fn($opts) => $opts['json']['vector'] === $vector))
+      ->willReturn(new Response(200, [], $responseBody));
+
+    $config = $this->createMock(ImmutableConfig::class);
+    $config->method('get')->willReturnMap([
+      ['qdrant_url', 'http://qdrant:6333'],
+    ]);
+    $configFactory = $this->createMock(ConfigFactoryInterface::class);
+    $configFactory->method('get')->with('pece_ai.settings')->willReturn($config);
+
+    $entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
+    $service = new SimilarityService($httpClient, $configFactory, $entityTypeManager);
+
+    $results = $service->findSimilarByVector($vector, 5);
+
+    $this->assertCount(1, $results);
+    $this->assertEquals(91, $results[0]['score']);
+    $this->assertEquals(42, $results[0]['entity_id']);
+  }
+
+  /**
    * Creates a mock ContentEntityInterface with the given ID.
    *
    * @param int $id
