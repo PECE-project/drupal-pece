@@ -6,6 +6,8 @@
  */
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\pece_ai\Ajax\WritingCompanionCallback;
 
 /**
  * Implements hook_entity_insert().
@@ -30,4 +32,59 @@ function pece_ai_theme(): array {
       'variables' => ['items' => [], 'scope_label' => NULL, 'toggle_url' => NULL],
     ],
   ];
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function pece_ai_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
+  $targets = [
+    'node_pece_annotation_annotation_step_2_form',
+    'node_pece_essay_form',
+    'node_pece_essay_edit_form',
+    'node_pece_photo_essay_form',
+    'node_pece_photo_essay_edit_form',
+    'node_pece_timeline_essay_form',
+    'node_pece_timeline_essay_edit_form',
+  ];
+  if (!in_array($form_id, $targets, TRUE)) {
+    return;
+  }
+
+  $bodyWeight = $form['body']['#weight'] ?? 10;
+
+  $form['pece_ai_suggestions_placeholder'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'div',
+    '#attributes' => [
+      'id' => 'pece-ai-suggestions',
+      'class' => ['pece-ai-suggestions'],
+    ],
+    '#weight' => $bodyWeight + 0.1,
+  ];
+
+  $form['pece_ai_platform_wide'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Platform-wide'),
+    '#default_value' => FALSE,
+    '#weight' => $bodyWeight + 0.2,
+  ];
+
+  $form['pece_ai_suggest'] = [
+    '#type' => 'button',
+    '#value' => t('Find related content'),
+    '#weight' => $bodyWeight + 0.3,
+    '#ajax' => [
+      'callback' => [WritingCompanionCallback::class, 'suggest'],
+      'wrapper' => 'pece-ai-suggestions',
+      'effect' => 'fade',
+      'progress' => [
+        'type' => 'throbber',
+        'message' => t('Finding related content…'),
+      ],
+    ],
+    '#limit_validation_errors' => [],
+  ];
+
+  $form['#attached']['library'][] = 'pece_ai/writing_companion';
 }
