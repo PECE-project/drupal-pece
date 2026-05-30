@@ -13,7 +13,9 @@
   <div class="panel-heading is-flex is-justify-content-space-between is-align-items-center">
     <span>{{ 'Related Content'|t }}</span>
     {% if toggle_url %}
-      <a href="{{ toggle_url }}" class="is-size-7 has-text-link">
+      <a href="{{ toggle_url }}"
+         class="is-size-7 has-text-link"
+         aria-label="{{ scope_label == 'Platform-wide' ? 'Search within group'|t : 'Search platform-wide'|t }}">
         {% if scope_label == 'Platform-wide' %}
           {{ 'Within group'|t }}
         {% else %}
@@ -28,7 +30,9 @@
   {% endif %}
 
   {% for item in items %}
-    <a class="panel-block" href="{{ path('entity.node.canonical', {node: item.entity.id()}) }}">
+    <a class="panel-block"
+       href="{{ path('entity.node.canonical', {node: item.entity.id()}) }}"
+       title="{{ item.entity.label() }} — {{ item.score }}% {{ 'similarity'|t }}">
       <span class="panel-icon">
         <i class="fas fa-circle is-size-7" aria-hidden="true"></i>
       </span>
