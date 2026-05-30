@@ -13,8 +13,14 @@ use Drupal\node\Entity\NodeType;
  */
 class EntityEmbedSubscriberTest extends KernelTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = ['system', 'user', 'node', 'field', 'text', 'filter', 'pece_ai'];
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
     $this->installEntitySchema('user');
@@ -27,6 +33,9 @@ class EntityEmbedSubscriberTest extends KernelTestBase {
     NodeType::create(['type' => 'page', 'name' => 'Page'])->save();
   }
 
+  /**
+   * Tests that an enabled bundle queues an item on entity insert.
+   */
   public function testEnabledBundleQueuesItemOnInsert(): void {
     $queue = \Drupal::queue('pece_ai_embed');
     $this->assertEquals(0, $queue->numberOfItems());
@@ -38,6 +47,9 @@ class EntityEmbedSubscriberTest extends KernelTestBase {
     $this->assertEquals('node', $item->data['entity_type']);
   }
 
+  /**
+   * Tests that a disabled bundle does not queue an item.
+   */
   public function testDisabledBundleDoesNotQueue(): void {
     $queue = \Drupal::queue('pece_ai_embed');
 
@@ -46,6 +58,9 @@ class EntityEmbedSubscriberTest extends KernelTestBase {
     $this->assertEquals(0, $queue->numberOfItems());
   }
 
+  /**
+   * Tests that an entity update also queues an item.
+   */
   public function testUpdateAlsoQueuesItem(): void {
     $node = Node::create(['type' => 'pece_essay', 'title' => 'Original', 'uid' => 0]);
     $node->save();

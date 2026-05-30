@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\pece_ai\Unit;
 
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Exception\RequestException;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Core\Entity\ContentEntityInterface;
@@ -16,10 +18,30 @@ use GuzzleHttp\Psr7\Response;
  */
 class EmbeddingServiceTest extends UnitTestCase {
 
+  /**
+   * The embedding service under test.
+   *
+   * @var \Drupal\pece_ai\Service\EmbeddingService
+   */
   private EmbeddingService $service;
+
+  /**
+   * The mocked HTTP client.
+   *
+   * @var \GuzzleHttp\ClientInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private ClientInterface $httpClient;
+
+  /**
+   * The mocked config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private ConfigFactoryInterface $configFactory;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -38,6 +60,9 @@ class EmbeddingServiceTest extends UnitTestCase {
     $this->service = new EmbeddingService($this->httpClient, $this->configFactory);
   }
 
+  /**
+   * Tests that embed() returns a float array of the expected size.
+   */
   public function testEmbedReturnsFloatArray(): void {
     $vector = array_fill(0, 768, 0.1);
     $body = json_encode(['embedding' => $vector]);
@@ -49,6 +74,9 @@ class EmbeddingServiceTest extends UnitTestCase {
     $this->assertIsFloat($result[0]);
   }
 
+  /**
+   * Tests that embed() calls the correct endpoint with the right parameters.
+   */
   public function testEmbedCallsCorrectEndpoint(): void {
     $vector = array_fill(0, 768, 0.0);
     $this->httpClient->expects($this->once())
@@ -64,14 +92,36 @@ class EmbeddingServiceTest extends UnitTestCase {
     $this->service->embed('hello world');
   }
 
+  /**
+   * Tests that extractText() combines the entity title and body field.
+   */
   public function testExtractTextCombinesTitleAndBody(): void {
     $entity = $this->createMock(ContentEntityInterface::class);
     $entity->method('label')->willReturn('My Artifact');
 
-    $bodyField = new class {
+    $bodyField = new class () {
+
+      /**
+       * Whether the field is empty.
+       *
+       * @var bool
+       */
       public bool $isEmpty = FALSE;
+
+      /**
+       * The field value.
+       *
+       * @var string
+       */
       public string $value = 'Body content here.';
-      public function isEmpty(): bool { return $this->isEmpty; }
+
+      /**
+       * Returns whether the field is empty.
+       */
+      public function isEmpty(): bool {
+        return $this->isEmpty;
+      }
+
     };
 
     $entity->method('hasField')->willReturnMap([
@@ -87,6 +137,9 @@ class EmbeddingServiceTest extends UnitTestCase {
     $this->assertStringContainsString('Body content here.', $text);
   }
 
+  /**
+   * Tests that extractText() falls back to title when no text fields exist.
+   */
   public function testExtractTextFallsBackToTitleOnly(): void {
     $entity = $this->createMock(ContentEntityInterface::class);
     $entity->method('label')->willReturn('Title Only');
@@ -97,11 +150,14 @@ class EmbeddingServiceTest extends UnitTestCase {
     $this->assertEquals('Title Only', $text);
   }
 
+  /**
+   * Tests that embed() throws a RuntimeException when Ollama is unavailable.
+   */
   public function testEmbedThrowsWhenOllamaIsDown(): void {
     $this->httpClient->method('request')
-      ->willThrowException(new \GuzzleHttp\Exception\RequestException(
+      ->willThrowException(new RequestException(
         'Connection refused',
-        new \GuzzleHttp\Psr7\Request('POST', '/api/embeddings')
+        new Request('POST', '/api/embeddings')
       ));
 
     $this->expectException(\RuntimeException::class);
@@ -109,6 +165,9 @@ class EmbeddingServiceTest extends UnitTestCase {
     $this->service->embed('some text');
   }
 
+  /**
+   * Tests that embed() throws a RuntimeException on a malformed API response.
+   */
   public function testEmbedThrowsOnMalformedResponse(): void {
     $this->httpClient->method('request')
       ->willReturn(new Response(200, [], json_encode(['wrong_key' => []])));

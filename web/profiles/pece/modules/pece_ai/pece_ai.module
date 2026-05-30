@@ -7,14 +7,23 @@
 
 use Drupal\Core\Entity\EntityInterface;
 
+/**
+ * Implements hook_entity_insert().
+ */
 function pece_ai_entity_insert(EntityInterface $entity): void {
   \Drupal::service('pece_ai.entity_embed_subscriber')->onEntitySave($entity);
 }
 
+/**
+ * Implements hook_entity_update().
+ */
 function pece_ai_entity_update(EntityInterface $entity): void {
   \Drupal::service('pece_ai.entity_embed_subscriber')->onEntitySave($entity);
 }
 
+/**
+ * Implements hook_theme().
+ */
 function pece_ai_theme(): array {
   return [
     'pece_ai_related_content' => [

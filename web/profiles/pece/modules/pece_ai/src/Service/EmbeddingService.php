@@ -2,10 +2,14 @@
 
 namespace Drupal\pece_ai\Service;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
 use GuzzleHttp\ClientInterface;
 
+/**
+ * Service for generating text embeddings via an external embedding API.
+ */
 class EmbeddingService {
 
   public function __construct(
@@ -13,6 +17,18 @@ class EmbeddingService {
     private readonly ConfigFactoryInterface $configFactory,
   ) {}
 
+  /**
+   * Sends text to the embedding API and returns the embedding vector.
+   *
+   * @param string $text
+   *   The text to embed.
+   *
+   * @return array
+   *   The embedding vector as a float array.
+   *
+   * @throws \RuntimeException
+   *   When the embedding service is unavailable or returns an invalid response.
+   */
   public function embed(string $text): array {
     $config = $this->configFactory->get('pece_ai.settings');
     try {
@@ -28,7 +44,7 @@ class EmbeddingService {
       }
       return $data['embedding'];
     }
-    catch (\GuzzleHttp\Exception\GuzzleException $e) {
+    catch (GuzzleException $e) {
       throw new \RuntimeException('Embedding service unavailable: ' . $e->getMessage(), 0, $e);
     }
     catch (\RuntimeException $e) {
@@ -39,6 +55,15 @@ class EmbeddingService {
     }
   }
 
+  /**
+   * Extracts plain text from an entity's label and common text fields.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity to extract text from.
+   *
+   * @return string
+   *   The concatenated text content of the entity.
+   */
   public function extractText(EntityInterface $entity): string {
     $parts = [$entity->label()];
     foreach (['body', 'field_annotation_body', 'field_description'] as $field) {

@@ -1,5 +1,4 @@
 <?php
-// web/profiles/pece/modules/pece_ai/tests/src/Unit/SimilarityServiceTest.php
 
 namespace Drupal\Tests\pece_ai\Unit;
 
@@ -20,9 +19,23 @@ use GuzzleHttp\Psr7\Response;
  */
 class SimilarityServiceTest extends UnitTestCase {
 
+  /**
+   * The similarity service under test.
+   *
+   * @var \Drupal\pece_ai\Service\SimilarityService
+   */
   private SimilarityService $service;
+
+  /**
+   * The mocked HTTP client.
+   *
+   * @var \GuzzleHttp\ClientInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private ClientInterface $httpClient;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -40,6 +53,9 @@ class SimilarityServiceTest extends UnitTestCase {
     $this->service = new SimilarityService($this->httpClient, $configFactory, $entityTypeManager);
   }
 
+  /**
+   * Tests that findSimilar() returns the top matching results.
+   */
   public function testFindSimilarReturnsTopMatches(): void {
     $vector = array_fill(0, 768, 0.1);
     $getResponse = new Response(200, [], json_encode([
@@ -47,8 +63,26 @@ class SimilarityServiceTest extends UnitTestCase {
     ]));
     $searchResponse = new Response(200, [], json_encode([
       'result' => [
-        ['id' => 99, 'score' => 0.95, 'payload' => ['entity_type' => 'node', 'entity_id' => 99, 'bundle' => 'pece_essay', 'group_ids' => []]],
-        ['id' => 42, 'score' => 0.88, 'payload' => ['entity_type' => 'node', 'entity_id' => 42, 'bundle' => 'pece_artifact_pdf', 'group_ids' => []]],
+        [
+          'id' => 99,
+          'score' => 0.95,
+          'payload' => [
+            'entity_type' => 'node',
+            'entity_id' => 99,
+            'bundle' => 'pece_essay',
+            'group_ids' => [],
+          ],
+        ],
+        [
+          'id' => 42,
+          'score' => 0.88,
+          'payload' => [
+            'entity_type' => 'node',
+            'entity_id' => 42,
+            'bundle' => 'pece_artifact_pdf',
+            'group_ids' => [],
+          ],
+        ],
       ],
     ]));
 
@@ -63,13 +97,34 @@ class SimilarityServiceTest extends UnitTestCase {
     $this->assertEquals(95, $results[0]['score']);
   }
 
+  /**
+   * Tests that findSimilar() excludes the source entity from results.
+   */
   public function testFindSimilarExcludesSelf(): void {
     $vector = array_fill(0, 768, 0.1);
     $getResponse = new Response(200, [], json_encode(['result' => ['vector' => $vector]]));
     $searchResponse = new Response(200, [], json_encode([
       'result' => [
-        ['id' => 1, 'score' => 1.0, 'payload' => ['entity_type' => 'node', 'entity_id' => 1, 'bundle' => 'pece_essay', 'group_ids' => []]],
-        ['id' => 2, 'score' => 0.9, 'payload' => ['entity_type' => 'node', 'entity_id' => 2, 'bundle' => 'pece_essay', 'group_ids' => []]],
+        [
+          'id' => 1,
+          'score' => 1.0,
+          'payload' => [
+            'entity_type' => 'node',
+            'entity_id' => 1,
+            'bundle' => 'pece_essay',
+            'group_ids' => [],
+          ],
+        ],
+        [
+          'id' => 2,
+          'score' => 0.9,
+          'payload' => [
+            'entity_type' => 'node',
+            'entity_id' => 2,
+            'bundle' => 'pece_essay',
+            'group_ids' => [],
+          ],
+        ],
       ],
     ]));
 
@@ -83,6 +138,9 @@ class SimilarityServiceTest extends UnitTestCase {
     $this->assertEquals(2, $results[0]['entity_id']);
   }
 
+  /**
+   * Tests that findSimilar() applies a group filter when group IDs are given.
+   */
   public function testFindSimilarAppliesGroupFilter(): void {
     $vector = array_fill(0, 768, 0.1);
     $getResponse = new Response(200, [], json_encode(['result' => ['vector' => $vector]]));
@@ -90,7 +148,7 @@ class SimilarityServiceTest extends UnitTestCase {
     $entity = $this->mockEntity(5);
     $this->httpClient->expects($this->exactly(2))
       ->method('request')
-      ->willReturnCallback(function($method, $url, $opts) use ($getResponse) {
+      ->willReturnCallback(function ($method, $url, $opts) use ($getResponse) {
         if (str_contains($url, '/search')) {
           $this->assertArrayHasKey('filter', $opts['json']);
           return new Response(200, [], json_encode(['result' => []]));
@@ -101,6 +159,9 @@ class SimilarityServiceTest extends UnitTestCase {
     $this->service->findSimilar($entity, 5, ['10', '20']);
   }
 
+  /**
+   * Tests that findSimilar() returns an empty array when Qdrant is unavailable.
+   */
   public function testFindSimilarReturnsEmptyWhenQdrantUnavailable(): void {
     $entity = $this->mockEntity(1);
     $this->httpClient->method('request')->willThrowException(
@@ -112,6 +173,9 @@ class SimilarityServiceTest extends UnitTestCase {
     $this->assertSame([], $results);
   }
 
+  /**
+   * Tests that getVector() returns NULL when the entity is not found.
+   */
   public function testGetVectorReturnsNullWhenNotFound(): void {
     $entity = $this->mockEntity(1);
     $this->httpClient->method('request')->willThrowException(
@@ -123,6 +187,9 @@ class SimilarityServiceTest extends UnitTestCase {
     $this->assertNull($result);
   }
 
+  /**
+   * Tests that upsert() sends the correct payload to Qdrant.
+   */
   public function testUpsertSendsCorrectPayload(): void {
     $entity = $this->mockEntity(7);
     $entity->method('getEntityTypeId')->willReturn('node');
@@ -144,6 +211,9 @@ class SimilarityServiceTest extends UnitTestCase {
     $this->service->upsert($entity, array_fill(0, 768, 0.1));
   }
 
+  /**
+   * Tests that upsert() throws a RuntimeException when Qdrant is unavailable.
+   */
   public function testUpsertThrowsWhenQdrantUnavailable(): void {
     $entity = $this->mockEntity(7);
     $entity->method('getEntityTypeId')->willReturn('node');
@@ -158,6 +228,15 @@ class SimilarityServiceTest extends UnitTestCase {
     $this->service->upsert($entity, array_fill(0, 768, 0.1));
   }
 
+  /**
+   * Creates a mock ContentEntityInterface with the given ID.
+   *
+   * @param int $id
+   *   The entity ID to mock.
+   *
+   * @return \Drupal\Core\Entity\ContentEntityInterface|\PHPUnit\Framework\MockObject\MockObject
+   *   The mocked entity.
+   */
   private function mockEntity(int $id): ContentEntityInterface {
     $entity = $this->createMock(ContentEntityInterface::class);
     $entity->method('id')->willReturn($id);

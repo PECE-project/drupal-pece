@@ -51,7 +51,8 @@ class SimilarityService {
                 'bundle' => $entity->bundle(),
                 'group_ids' => $groupIds,
               ],
-            ]],
+            ],
+            ],
           ],
         ]
       );
