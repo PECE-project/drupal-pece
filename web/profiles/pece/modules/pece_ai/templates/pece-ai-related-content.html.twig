@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Template for the PECE AI Related Content sidebar block.
+ *
+ * Variables:
+ * - items: list of {entity, score} arrays.
+ * - scope_label: string label for current scope (e.g. "Within group").
+ * - toggle_url: URL to switch between group and platform-wide scope.
+ */
+#}
+<div class="panel pece-ai-related-content">
+  <div class="panel-heading is-flex is-justify-content-space-between is-align-items-center">
+    <span>{{ 'Related Content'|t }}</span>
+    {% if toggle_url %}
+      <a href="{{ toggle_url }}" class="is-size-7 has-text-link">
+        {% if scope_label == 'Platform-wide' %}
+          {{ 'Within group'|t }}
+        {% else %}
+          {{ 'Platform-wide'|t }} ↗
+        {% endif %}
+      </a>
+    {% endif %}
+  </div>
+
+  {% if scope_label %}
+    <p class="panel-block is-size-7 has-text-grey">{{ scope_label }}</p>
+  {% endif %}
+
+  {% for item in items %}
+    <a class="panel-block" href="{{ path('entity.node.canonical', {node: item.entity.id()}) }}">
+      <span class="panel-icon">
+        <i class="fas fa-circle is-size-7" aria-hidden="true"></i>
+      </span>
+      <span class="is-flex-grow-1">
+        {{ item.entity.label() }}
+        <span class="tag is-light is-pulled-right">{{ item.score }}%</span>
+      </span>
+    </a>
+  {% else %}
+    <div class="panel-block has-text-grey">
+      {{ 'No related content found.'|t }}
+    </div>
+  {% endfor %}
+</div>
