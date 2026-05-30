@@ -8,6 +8,7 @@ use Drupal\Core\Queue\QueueFactory;
 use Drupal\pece_ai\Service\EmbeddingService;
 use Drupal\pece_ai\Service\SimilarityService;
 use Drush\Commands\DrushCommands;
+use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * Drush commands for the pece_ai module.
@@ -54,7 +55,7 @@ class PeceAiCommands extends DrushCommands {
       ]);
       $this->output()->writeln('<info>Qdrant collection created successfully.</info>');
     }
-    catch (\Exception $e) {
+    catch (GuzzleException $e) {
       $this->output()->writeln('<error>Failed: ' . $e->getMessage() . '</error>');
     }
   }
