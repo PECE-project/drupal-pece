@@ -1,3 +1,13 @@
+uuid: 5bdc99ed-10ff-43e5-8a34-258a7c89eec6
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.general
+  module:
+    - better_exposed_filters
+    - facets_exposed_filters
+    - search_api
 id: search
 label: Search
 module: views
@@ -115,6 +125,8 @@ display:
               secondary_label: ''
               secondary_open: true
               reset_button_always_show: false
+              autosubmit_breakpoint: ''
+              auto_submit_sort_only: false
             filter:
               search_api_fulltext:
                 plugin_id: default
@@ -127,6 +139,10 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
+                  field_classes: ''
+                  open_by_default: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
               facets_type:
                 plugin_id: bef_links_filter
                 advanced:
@@ -137,6 +153,10 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
+                  field_classes: ''
+                  open_by_default: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
                 initial_shown: 10
                 allow_show_all: true
                 select_all_none: 0
@@ -151,6 +171,10 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
+                  field_classes: ''
+                  open_by_default: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
                 initial_shown: 10
                 allow_show_all: true
                 select_all_none: 0
@@ -165,6 +189,10 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
+                  field_classes: ''
+                  open_by_default: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
                 initial_shown: 10
                 allow_show_all: true
                 select_all_none: 0
@@ -179,6 +207,10 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
+                  field_classes: ''
+                  open_by_default: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
                 initial_shown: 10
                 allow_show_all: true
                 select_all_none: 0
@@ -193,6 +225,10 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
+                  field_classes: ''
+                  open_by_default: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
                 initial_shown: 10
                 allow_show_all: true
                 select_all_none: 0
@@ -207,6 +243,10 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
+                  field_classes: ''
+                  open_by_default: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
                 initial_shown: 10
                 allow_show_all: true
                 select_all_none: 0
@@ -221,6 +261,10 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
+                  field_classes: ''
+                  open_by_default: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
                 initial_shown: 10
                 allow_show_all: true
                 select_all_none: 0
@@ -235,6 +279,10 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
+                  field_classes: ''
+                  open_by_default: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
                 initial_shown: 10
                 allow_show_all: true
                 select_all_none: 0
@@ -825,13 +873,3 @@ display:
       tags:
         - 'config:search_api.index.general'
         - 'search_api_list:general'
-uuid: 5bdc99ed-10ff-43e5-8a34-258a7c89eec6
-langcode: en
-status: true
-dependencies:
-  config:
-    - search_api.index.general
-  module:
-    - better_exposed_filters
-    - facets_exposed_filters
-    - search_api

@@ -1,0 +1,22 @@
+id: node.pece_essay.promote
+label: 'Promoted to front page'
+field_name: promote
+entity_type: node
+bundle: pece_essay
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
+uuid: f4265139-f590-4edd-87ad-f1e58933e498
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.pece_essay
