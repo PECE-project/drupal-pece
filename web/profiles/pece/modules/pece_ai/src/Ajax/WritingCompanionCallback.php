@@ -138,7 +138,7 @@ class WritingCompanionCallback {
       '#scope_label' => $scopeLabel,
       '#toggle_url' => NULL,
       '#prefix' => '<div id="pece-ai-suggestions"'
-        . ' class="pece-ai-suggestions">',
+      . ' class="pece-ai-suggestions">',
       '#suffix' => '</div>',
     ];
     $response->addCommand(
