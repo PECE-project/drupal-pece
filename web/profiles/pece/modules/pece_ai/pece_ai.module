@@ -56,27 +56,17 @@ function pece_ai_form_alter(array &$form, FormStateInterface $form_state, string
   }
   $bodyWeight = $form['body']['#weight'] ?? 10;
 
-  $form['pece_ai_suggestions_placeholder'] = [
-    '#type' => 'html_tag',
-    '#tag' => 'div',
-    '#attributes' => [
-      'id' => 'pece-ai-suggestions',
-      'class' => ['pece-ai-suggestions'],
-    ],
-    '#weight' => $bodyWeight + 0.1,
-  ];
-
   $form['pece_ai_platform_wide'] = [
     '#type' => 'checkbox',
     '#title' => t('Platform-wide'),
     '#default_value' => FALSE,
-    '#weight' => $bodyWeight + 0.2,
+    '#weight' => $bodyWeight + 0.1,
   ];
 
   $form['pece_ai_suggest'] = [
     '#type' => 'button',
     '#value' => t('Find related content'),
-    '#weight' => $bodyWeight + 0.3,
+    '#weight' => $bodyWeight + 0.2,
     '#ajax' => [
       'callback' => [WritingCompanionCallback::class, 'suggest'],
       'wrapper' => 'pece-ai-suggestions',
@@ -87,6 +77,16 @@ function pece_ai_form_alter(array &$form, FormStateInterface $form_state, string
       ],
     ],
     '#limit_validation_errors' => [],
+  ];
+
+  $form['pece_ai_suggestions_placeholder'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'div',
+    '#attributes' => [
+      'id' => 'pece-ai-suggestions',
+      'class' => ['pece-ai-suggestions'],
+    ],
+    '#weight' => $bodyWeight + 0.3,
   ];
 
   $form['#attached']['library'][] = 'pece_ai/writing_companion';
