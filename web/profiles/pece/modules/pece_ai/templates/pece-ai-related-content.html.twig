@@ -38,7 +38,7 @@
       </span>
       <span class="is-flex-grow-1">
         {{ item.entity.label() }}
-        <span class="tag is-light is-pulled-right">{{ item.score }}%</span>
+        <span class="tag is-rounded is-pulled-right {% if item.score >= 80 %}is-success{% elseif item.score >= 60 %}is-warning{% else %}is-light{% endif %}">{{ item.score }}%</span>
       </span>
     </a>
   {% else %}
