@@ -34,6 +34,7 @@ class RelatedContentBlockTest extends KernelTestBase {
     $this->installSchema('node', ['node_access']);
     $this->installConfig(['system', 'user', 'node', 'filter', 'pece_ai']);
     NodeType::create(['type' => 'pece_essay', 'name' => 'PECE Essay'])->save();
+    user_role_grant_permissions('anonymous', ['access content']);
   }
 
   /**
