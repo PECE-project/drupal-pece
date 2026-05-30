@@ -115,8 +115,9 @@ class RelatedContentBlock extends BlockBase implements ContainerFactoryPluginInt
       '#scope_label' => $scopeLabel,
       '#toggle_url' => $toggleUrl,
       '#cache' => [
-        'tags' => $node->getCacheTags(),
+        'tags' => array_merge($node->getCacheTags(), ['node_list']),
         'contexts' => ['url.query_args:ai_scope'],
+        'max-age' => 3600,
       ],
     ];
   }
