@@ -118,7 +118,8 @@ class WritingCompanionCallbackTest extends UnitTestCase {
       'Coastal flooding',
       '<p>Observations on tidal changes.</p>'
     );
-    WritingCompanionCallback::suggest($form, $formState);
+    $response = WritingCompanionCallback::suggest($form, $formState);
+    $this->assertInstanceOf(AjaxResponse::class, $response);
   }
 
   /**

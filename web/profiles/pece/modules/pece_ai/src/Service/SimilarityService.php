@@ -125,6 +125,9 @@ class SimilarityService {
         if ($excludeId && (int) $hit['id'] === $excludeId) {
           continue;
         }
+        if (!isset($hit['payload']['entity_type'], $hit['payload']['entity_id'])) {
+          continue;
+        }
         $results[] = [
           'entity_type' => $hit['payload']['entity_type'],
           'entity_id' => (int) $hit['payload']['entity_id'],
