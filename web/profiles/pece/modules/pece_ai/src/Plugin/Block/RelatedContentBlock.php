@@ -76,8 +76,8 @@ class RelatedContentBlock extends BlockBase implements ContainerFactoryPluginInt
     $request = $this->requestStack->getCurrentRequest();
     $isGlobal = $request && $request->query->get('ai_scope') === 'global';
     $groupIds = [];
-    if (!$isGlobal && $node->hasField('field_groups') && !$node->get('field_groups')->isEmpty()) {
-      foreach ($node->get('field_groups') as $item) {
+    if (!$isGlobal && $node->hasField('field_groups_with_view_access') && !$node->get('field_groups_with_view_access')->isEmpty()) {
+      foreach ($node->get('field_groups_with_view_access') as $item) {
         $groupIds[] = (string) $item->target_id;
       }
     }
@@ -96,7 +96,7 @@ class RelatedContentBlock extends BlockBase implements ContainerFactoryPluginInt
       $entity = $this->entityTypeManager
         ->getStorage($result['entity_type'])
         ->load($result['entity_id']);
-      if ($entity) {
+      if ($entity && $entity->access('view')) {
         $items[] = ['entity' => $entity, 'score' => $result['score']];
       }
     }

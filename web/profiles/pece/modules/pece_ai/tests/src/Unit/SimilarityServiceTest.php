@@ -194,7 +194,7 @@ class SimilarityServiceTest extends UnitTestCase {
     $entity = $this->mockEntity(7);
     $entity->method('getEntityTypeId')->willReturn('node');
     $entity->method('bundle')->willReturn('pece_essay');
-    $entity->method('hasField')->with('field_groups')->willReturn(FALSE);
+    $entity->method('hasField')->with('field_groups_with_view_access')->willReturn(FALSE);
 
     $this->httpClient->expects($this->once())
       ->method('request')
@@ -218,7 +218,7 @@ class SimilarityServiceTest extends UnitTestCase {
     $entity = $this->mockEntity(7);
     $entity->method('getEntityTypeId')->willReturn('node');
     $entity->method('bundle')->willReturn('pece_essay');
-    $entity->method('hasField')->with('field_groups')->willReturn(FALSE);
+    $entity->method('hasField')->with('field_groups_with_view_access')->willReturn(FALSE);
 
     $this->httpClient->method('request')
       ->willThrowException(new RequestException('Connection refused', new Request('PUT', '/')));

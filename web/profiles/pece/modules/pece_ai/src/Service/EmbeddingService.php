@@ -66,11 +66,11 @@ class EmbeddingService {
    */
   public function extractText(EntityInterface $entity): string {
     $parts = [$entity->label()];
-    foreach (['body', 'field_annotation_body', 'field_description'] as $field) {
+    foreach (['body', 'field_description'] as $field) {
       if ($entity->hasField($field)) {
         $value = $entity->get($field);
         if (!$value->isEmpty()) {
-          $parts[] = $value->value;
+          $parts[] = trim(html_entity_decode(strip_tags($value->value)));
         }
       }
     }

@@ -32,8 +32,8 @@ class SimilarityService {
   public function upsert(EntityInterface $entity, array $vector): void {
     $config = $this->configFactory->get('pece_ai.settings');
     $groupIds = [];
-    if ($entity->hasField('field_groups') && !$entity->get('field_groups')->isEmpty()) {
-      foreach ($entity->get('field_groups') as $item) {
+    if ($entity->hasField('field_groups_with_view_access') && !$entity->get('field_groups_with_view_access')->isEmpty()) {
+      foreach ($entity->get('field_groups_with_view_access') as $item) {
         $groupIds[] = (string) $item->target_id;
       }
     }

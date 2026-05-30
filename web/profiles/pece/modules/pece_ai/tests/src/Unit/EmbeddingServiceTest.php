@@ -126,7 +126,6 @@ class EmbeddingServiceTest extends UnitTestCase {
 
     $entity->method('hasField')->willReturnMap([
       ['body', TRUE],
-      ['field_annotation_body', FALSE],
       ['field_description', FALSE],
     ]);
     $entity->method('get')->with('body')->willReturn($bodyField);
@@ -175,6 +174,45 @@ class EmbeddingServiceTest extends UnitTestCase {
     $this->expectException(\RuntimeException::class);
     $this->expectExceptionMessageMatches('/Invalid embedding response/');
     $this->service->embed('some text');
+  }
+
+  /**
+   * Tests that extractText() strips HTML tags from field values.
+   */
+  public function testExtractTextStripsHtmlFromBody(): void {
+    $entity = $this->createMock(ContentEntityInterface::class);
+    $entity->method('label')->willReturn('Title');
+
+    $bodyField = new class () {
+
+      /**
+       * The field value.
+       *
+       * @var string
+       */
+      public string $value = '<p>Body with <strong>HTML</strong> tags.</p>';
+
+      /**
+       * Returns whether the field is empty.
+       */
+      public function isEmpty(): bool {
+        return FALSE;
+      }
+
+    };
+
+    $entity->method('hasField')->willReturnMap([
+      ['body', TRUE],
+      ['field_description', FALSE],
+    ]);
+    $entity->method('get')->with('body')->willReturn($bodyField);
+
+    $text = $this->service->extractText($entity);
+
+    $this->assertStringNotContainsString('<p>', $text);
+    $this->assertStringNotContainsString('<strong>', $text);
+    $this->assertStringContainsString('Body with', $text);
+    $this->assertStringContainsString('HTML', $text);
   }
 
 }
