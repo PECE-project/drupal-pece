@@ -1,0 +1,22 @@
+pece_ai.settings:
+  type: config_object
+  label: 'PECE AI settings'
+  mapping:
+    qdrant_url:
+      type: string
+      label: 'Qdrant URL'
+    embedding_url:
+      type: string
+      label: 'Embedding service URL'
+    embedding_model:
+      type: string
+      label: 'Embedding model name'
+    sidebar_limit:
+      type: integer
+      label: 'Sidebar result limit'
+    enabled_bundles:
+      type: sequence
+      label: 'Enabled bundles'
+      sequence:
+        type: string
+        label: 'Bundle key (entity_type:bundle)'
