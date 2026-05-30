@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\pece_ai\Service\EmbeddingService;
 use Drupal\pece_ai\Service\SimilarityService;
+use Drush\Attributes as CLI;
 use Drush\Commands\DrushCommands;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -30,10 +31,9 @@ class PeceAiCommands extends DrushCommands {
 
   /**
    * Create the Qdrant collection for PECE entities. Run once after deploy.
-   *
-   * @command pece-ai:setup
-   * @aliases pece-ai-setup
    */
+  #[CLI\Command(name: 'pece-ai:setup', aliases: ['pece-ai-setup'])]
+  #[CLI\Help(description: 'Create the Qdrant collection for PECE entities. Run once after deploy.')]
   public function setup(): void {
     $config = $this->configFactory->get('pece_ai.settings');
     $qdrantUrl = $config->get('qdrant_url');
@@ -62,10 +62,9 @@ class PeceAiCommands extends DrushCommands {
 
   /**
    * Queue all existing enabled-bundle entities for embedding.
-   *
-   * @command pece-ai:backfill
-   * @aliases pece-ai-backfill
    */
+  #[CLI\Command(name: 'pece-ai:backfill', aliases: ['pece-ai-backfill'])]
+  #[CLI\Help(description: 'Queue all existing enabled-bundle entities for embedding.')]
   public function backfill(): void {
     $config = $this->configFactory->get('pece_ai.settings');
     $enabledBundles = $config->get('enabled_bundles') ?? [];
