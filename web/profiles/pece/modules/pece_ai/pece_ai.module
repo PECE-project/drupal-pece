@@ -51,6 +51,9 @@ function pece_ai_form_alter(array &$form, FormStateInterface $form_state, string
     return;
   }
 
+  if (!isset($form['body'])) {
+    return;
+  }
   $bodyWeight = $form['body']['#weight'] ?? 10;
 
   $form['pece_ai_suggestions_placeholder'] = [
