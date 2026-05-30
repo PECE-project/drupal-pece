@@ -13,6 +13,9 @@ use GuzzleHttp\Exception\GuzzleException;
  */
 class SimilarityService {
 
+  /**
+   * The Qdrant collection name used for all entity vectors.
+   */
   const COLLECTION = 'pece_entities';
 
   public function __construct(
@@ -96,14 +99,16 @@ class SimilarityService {
    * @param array $groupIds
    *   Optional list of group IDs to filter results by.
    * @param int $excludeId
-   *   Optional Qdrant point ID to exclude from results (use for self-exclusion).
+   *   Optional Qdrant point ID to exclude from results (use for
+   *   self-exclusion).
    *
    * @return array
    *   Array of result arrays with keys: entity_type, entity_id, score.
    */
   public function findSimilarByVector(array $vector, int $limit = 5, array $groupIds = [], int $excludeId = 0): array {
     $config = $this->configFactory->get('pece_ai.settings');
-    $payload = ['vector' => $vector, 'limit' => $limit + 1, 'with_payload' => TRUE];
+    $fetch = $excludeId !== 0 ? $limit + 1 : $limit;
+    $payload = ['vector' => $vector, 'limit' => $fetch, 'with_payload' => TRUE];
     if ($groupIds) {
       $payload['filter'] = [
         'must' => [['key' => 'group_ids', 'match' => ['any' => $groupIds]]],

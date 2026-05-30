@@ -248,24 +248,13 @@ class SimilarityServiceTest extends UnitTestCase {
       ],
     ]);
 
-    $httpClient = $this->createMock(ClientInterface::class);
-    $httpClient->expects($this->once())
+    $this->httpClient->expects($this->once())
       ->method('request')
       ->with('POST', 'http://qdrant:6333/collections/pece_entities/points/search',
         $this->callback(fn($opts) => $opts['json']['vector'] === $vector))
       ->willReturn(new Response(200, [], $responseBody));
 
-    $config = $this->createMock(ImmutableConfig::class);
-    $config->method('get')->willReturnMap([
-      ['qdrant_url', 'http://qdrant:6333'],
-    ]);
-    $configFactory = $this->createMock(ConfigFactoryInterface::class);
-    $configFactory->method('get')->with('pece_ai.settings')->willReturn($config);
-
-    $entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
-    $service = new SimilarityService($httpClient, $configFactory, $entityTypeManager);
-
-    $results = $service->findSimilarByVector($vector, 5);
+    $results = $this->service->findSimilarByVector($vector, 5);
 
     $this->assertCount(1, $results);
     $this->assertEquals(91, $results[0]['score']);
