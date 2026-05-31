@@ -6,54 +6,13 @@
  */
 
 /**
- * Creates the pece_ai_activity table and adds activity config on existing sites.
+ * Creates the pece_ai_activity table on existing sites.
  */
 function pece_ai_post_update_add_activity_table(): void {
   $schema = \Drupal::database()->schema();
   if (!$schema->tableExists('pece_ai_activity')) {
-    $table_spec = [
-      'description' => 'Tracks researcher activity for personalized discovery feed.',
-      'fields' => [
-        'id' => [
-          'type' => 'serial',
-          'unsigned' => TRUE,
-          'not null' => TRUE,
-        ],
-        'uid' => [
-          'type' => 'int',
-          'unsigned' => TRUE,
-          'not null' => TRUE,
-        ],
-        'entity_type' => [
-          'type' => 'varchar',
-          'length' => 32,
-          'not null' => TRUE,
-        ],
-        'entity_id' => [
-          'type' => 'int',
-          'unsigned' => TRUE,
-          'not null' => TRUE,
-        ],
-        'weight' => [
-          'type' => 'int',
-          'size' => 'tiny',
-          'unsigned' => TRUE,
-          'not null' => TRUE,
-          'default' => 1,
-        ],
-        'timestamp' => [
-          'type' => 'int',
-          'unsigned' => TRUE,
-          'not null' => TRUE,
-        ],
-      ],
-      'primary key' => ['id'],
-      'indexes' => [
-        'uid_timestamp' => ['uid', 'timestamp'],
-        'uid_entity' => ['uid', 'entity_type', 'entity_id'],
-      ],
-    ];
-    $schema->createTable('pece_ai_activity', $table_spec);
+    $module_schema = pece_ai_schema();
+    $schema->createTable('pece_ai_activity', $module_schema['pece_ai_activity']);
   }
 }
 
@@ -63,8 +22,14 @@ function pece_ai_post_update_add_activity_table(): void {
 function pece_ai_post_update_place_discovery_feed_block(): void {
   $config = \Drupal::configFactory()->getEditable('dashboards.dashboard.pece');
   $data = $config->getRawData();
-  if (empty($data)) {
+  if (empty($data) || empty($data['sections'][0])) {
     return;
+  }
+  // Check if already placed (e.g. via config import).
+  foreach ($data['sections'][0]['components'] ?? [] as $component) {
+    if (($component['configuration']['id'] ?? '') === 'pece_ai_discovery_feed') {
+      return;
+    }
   }
   $uuid = \Drupal::service('uuid')->generate();
   $data['sections'][0]['components'][$uuid] = [
