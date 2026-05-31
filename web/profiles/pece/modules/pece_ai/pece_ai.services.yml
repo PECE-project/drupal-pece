@@ -11,6 +11,17 @@ services:
     class: Drupal\pece_ai\EventSubscriber\EntityEmbedSubscriber
     arguments: ['@queue', '@config.factory']
 
+  pece_ai.activity_event_subscriber:
+    class: Drupal\pece_ai\EventSubscriber\ActivityEventSubscriber
+    arguments:
+      - '@current_user'
+      - '@current_route_match'
+      - '@config.factory'
+      - '@database'
+      - '@datetime.time'
+    tags:
+      - { name: event_subscriber }
+
   pece_ai.commands:
     class: Drupal\pece_ai\Commands\PeceAiCommands
     arguments:
