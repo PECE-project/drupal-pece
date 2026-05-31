@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the pece_ai module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function pece_ai_schema(): array {
+  return [
+    'pece_ai_activity' => [
+      'description' => 'Tracks researcher activity for personalized discovery feed.',
+      'fields' => [
+        'id' => [
+          'type' => 'serial',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+        'uid' => [
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+        'entity_type' => [
+          'type' => 'varchar',
+          'length' => 32,
+          'not null' => TRUE,
+        ],
+        'entity_id' => [
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+        'weight' => [
+          'type' => 'int',
+          'size' => 'tiny',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'default' => 1,
+        ],
+        'timestamp' => [
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+      ],
+      'primary key' => ['id'],
+      'indexes' => [
+        'uid_timestamp' => ['uid', 'timestamp'],
+        'uid_entity' => ['uid', 'entity_type', 'entity_id'],
+      ],
+    ],
+  ];
+}
+

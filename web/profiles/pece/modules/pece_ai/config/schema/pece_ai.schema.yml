@@ -20,3 +20,25 @@ pece_ai.settings:
       sequence:
         type: string
         label: 'Bundle key (entity_type:bundle)'
+    activity_limit:
+      type: integer
+      label: 'Activity seed limit'
+    feed_limit:
+      type: integer
+      label: 'Discovery feed result limit'
+    activity_retention:
+      type: integer
+      label: 'Activity retention in days'
+    activity_weights:
+      type: mapping
+      label: 'Activity signal weights'
+      mapping:
+        page_view:
+          type: integer
+          label: 'Page view weight'
+        entity_save:
+          type: integer
+          label: 'Entity save weight'
+        annotation_create:
+          type: integer
+          label: 'Annotation create weight'
