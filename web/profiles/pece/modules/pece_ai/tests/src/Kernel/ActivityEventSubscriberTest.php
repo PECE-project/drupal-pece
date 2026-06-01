@@ -7,7 +7,6 @@ use Drupal\KernelTests\KernelTestBase;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
 use Drupal\user\Entity\User;
-use Drupal\pece_ai\EventSubscriber\ActivityEventSubscriber;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\TerminateEvent;
@@ -49,7 +48,7 @@ class ActivityEventSubscriberTest extends KernelTestBase {
     $routeMatch->method('getParameter')->with('node')->willReturn($node);
     $this->container->set('current_route_match', $routeMatch);
 
-    $account = \Drupal\user\Entity\User::load($uid);
+    $account = User::load($uid);
     $this->container->get('current_user')->setAccount($account);
 
     $kernel = $this->createMock(HttpKernelInterface::class);
@@ -89,7 +88,6 @@ class ActivityEventSubscriberTest extends KernelTestBase {
     $routeMatch->method('getParameter')->with('node')->willReturn($node);
     $this->container->set('current_route_match', $routeMatch);
     // current_user remains anonymous (uid=0)
-
     $kernel = $this->createMock(HttpKernelInterface::class);
     $event = new TerminateEvent($kernel, Request::create('/'), new Response());
     $this->container->get('pece_ai.activity_event_subscriber')->onTerminate($event);
@@ -111,6 +109,29 @@ class ActivityEventSubscriberTest extends KernelTestBase {
     $node->save();
 
     $this->dispatchTerminate($node, (int) $user->id());
+
+    $count = \Drupal::database()
+      ->select('pece_ai_activity', 'a')
+      ->condition('a.uid', $user->id())
+      ->countQuery()->execute()->fetchField();
+    $this->assertEquals(0, $count);
+  }
+
+  /**
+   * Tests that a non-entity node route parameter does not fatal or insert rows.
+   */
+  public function testStringNodeParameterSkipped(): void {
+    $user = User::create(['name' => 'researcher3', 'status' => 1]);
+    $user->save();
+    $this->container->get('current_user')->setAccount($user);
+
+    $routeMatch = $this->createMock(RouteMatchInterface::class);
+    $routeMatch->method('getParameter')->with('node')->willReturn('42');
+    $this->container->set('current_route_match', $routeMatch);
+
+    $kernel = $this->createMock(HttpKernelInterface::class);
+    $event = new TerminateEvent($kernel, Request::create('/'), new Response());
+    $this->container->get('pece_ai.activity_event_subscriber')->onTerminate($event);
 
     $count = \Drupal::database()
       ->select('pece_ai_activity', 'a')

@@ -2,11 +2,12 @@
 
 namespace Drupal\pece_ai\EventSubscriber;
 
+use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountProxyInterface;
-use Drupal\Component\Datetime\TimeInterface;
+use Drupal\node\NodeInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\TerminateEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -42,7 +43,7 @@ class ActivityEventSubscriber implements EventSubscriberInterface {
       return;
     }
     $node = $this->routeMatch->getParameter('node');
-    if (!$node) {
+    if (!$node instanceof NodeInterface) {
       return;
     }
     $config = $this->configFactory->get('pece_ai.settings');
