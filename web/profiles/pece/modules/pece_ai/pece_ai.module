@@ -14,6 +14,7 @@ use Drupal\pece_ai\Ajax\WritingCompanionCallback;
  */
 function pece_ai_entity_insert(EntityInterface $entity): void {
   \Drupal::service('pece_ai.entity_embed_subscriber')->onEntitySave($entity);
+  _pece_ai_record_interaction($entity, TRUE);
 }
 
 /**
@@ -21,6 +22,19 @@ function pece_ai_entity_insert(EntityInterface $entity): void {
  */
 function pece_ai_entity_update(EntityInterface $entity): void {
   \Drupal::service('pece_ai.entity_embed_subscriber')->onEntitySave($entity);
+  _pece_ai_record_interaction($entity, FALSE);
+}
+
+/**
+ * Implements hook_cron().
+ */
+function pece_ai_cron(): void {
+  $config = \Drupal::config('pece_ai.settings');
+  $retention = (int) ($config->get('activity_retention') ?? 90);
+  $cutoff = \Drupal::time()->getRequestTime() - ($retention * 86400);
+  \Drupal::database()->delete('pece_ai_activity')
+    ->condition('timestamp', $cutoff, '<')
+    ->execute();
 }
 
 /**
@@ -90,4 +104,39 @@ function pece_ai_form_alter(array &$form, FormStateInterface $form_state, string
   ];
 
   $form['#attached']['library'][] = 'pece_ai/writing_companion';
+}
+
+/**
+ * Records an interaction activity row for the current user.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *   The entity being saved.
+ * @param bool $isNew
+ *   Whether this is an entity insert (TRUE) or update (FALSE).
+ */
+function _pece_ai_record_interaction(EntityInterface $entity, bool $isNew): void {
+  $currentUser = \Drupal::currentUser();
+  if ($currentUser->isAnonymous()) {
+    return;
+  }
+  $config = \Drupal::config('pece_ai.settings');
+  $enabledBundles = $config->get('enabled_bundles') ?? [];
+  $key = $entity->getEntityTypeId() . ':' . $entity->bundle();
+  if (!in_array($key, $enabledBundles, TRUE)) {
+    return;
+  }
+  $weights = $config->get('activity_weights') ?? [];
+  $weight = ($entity->bundle() === 'pece_annotation' && $isNew)
+    ? (int) ($weights['annotation_create'] ?? 5)
+    : (int) ($weights['entity_save'] ?? 3);
+
+  \Drupal::database()->insert('pece_ai_activity')
+    ->fields([
+      'uid' => (int) $currentUser->id(),
+      'entity_type' => $entity->getEntityTypeId(),
+      'entity_id' => (int) $entity->id(),
+      'weight' => $weight,
+      'timestamp' => \Drupal::time()->getRequestTime(),
+    ])
+    ->execute();
 }
