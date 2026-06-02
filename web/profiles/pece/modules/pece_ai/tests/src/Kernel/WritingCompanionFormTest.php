@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormState;
 use Drupal\KernelTests\KernelTestBase;
 
 /**
- * Tests that pece_ai_form_alter() wires the Writing Companion into target forms.
+ * Tests pece_ai_form_alter() wires the Writing Companion into target forms.
  *
  * @group pece_ai
  */

@@ -2,6 +2,7 @@
 
 namespace Drupal\pece_ai\EventSubscriber;
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Database\Connection;
@@ -62,6 +63,7 @@ class ActivityEventSubscriber implements EventSubscriberInterface {
         'timestamp' => $this->time->getRequestTime(),
       ])
       ->execute();
+    Cache::invalidateTags(['pece_ai_activity:' . $this->currentUser->id()]);
   }
 
 }

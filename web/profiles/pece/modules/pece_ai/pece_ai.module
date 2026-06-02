@@ -5,6 +5,7 @@
  * PECE AI semantic similarity sidebar module.
  */
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\pece_ai\Ajax\WritingCompanionCallback;
@@ -139,4 +140,5 @@ function _pece_ai_record_interaction(EntityInterface $entity, bool $isNew): void
       'timestamp' => \Drupal::time()->getRequestTime(),
     ])
     ->execute();
+  Cache::invalidateTags(['pece_ai_activity:' . $currentUser->id()]);
 }
