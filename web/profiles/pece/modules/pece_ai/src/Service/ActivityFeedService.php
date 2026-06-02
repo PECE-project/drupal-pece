@@ -35,17 +35,17 @@ class ActivityFeedService {
     $query = $this->database->select('pece_ai_activity', 'a')
       ->fields('a', ['entity_type', 'entity_id'])
       ->condition('a.uid', $uid)
-      ->orderBy('a.timestamp', 'DESC')
-      ->range(0, $activityLimit * 5);
+      ->range(0, $activityLimit);
     $query->addExpression('SUM(a.weight)', 'total_weight');
+    $query->addExpression('MAX(a.timestamp)', 'last_seen');
     $query->groupBy('a.entity_type');
     $query->groupBy('a.entity_id');
+    $query->orderBy('last_seen', 'DESC');
     $seeds = $query->execute()->fetchAll();
 
     if (empty($seeds)) {
       return [];
     }
-    $seeds = array_slice($seeds, 0, $activityLimit);
 
     $blended = array_fill(0, 768, 0.0);
     $totalWeight = 0.0;
