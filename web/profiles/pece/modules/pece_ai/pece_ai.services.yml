@@ -22,6 +22,14 @@ services:
     tags:
       - { name: event_subscriber }
 
+  pece_ai.activity_feed_service:
+    class: Drupal\pece_ai\Service\ActivityFeedService
+    arguments:
+      - '@database'
+      - '@config.factory'
+      - '@pece_ai.similarity_service'
+      - '@entity_type.manager'
+
   pece_ai.commands:
     class: Drupal\pece_ai\Commands\PeceAiCommands
     arguments:
