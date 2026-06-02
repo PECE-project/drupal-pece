@@ -83,10 +83,10 @@ class ActivityFeedService {
     $groupIds = [];
     $userEntity = $this->entityTypeManager->getStorage('user')->load($uid);
     if ($userEntity
-      && $userEntity->hasField('field_groups_with_view_access')
-      && !$userEntity->get('field_groups_with_view_access')->isEmpty()
+      && $userEntity->hasField('field_groups_joined')
+      && !$userEntity->get('field_groups_joined')->isEmpty()
     ) {
-      foreach ($userEntity->get('field_groups_with_view_access') as $item) {
+      foreach ($userEntity->get('field_groups_joined') as $item) {
         $groupIds[] = (string) $item->target_id;
       }
     }

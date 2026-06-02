@@ -53,6 +53,15 @@ class ActivityEventSubscriber implements EventSubscriberInterface {
     if (!in_array($key, $enabledBundles, TRUE)) {
       return;
     }
+    $exists = $this->database->select('pece_ai_activity', 'a')
+      ->condition('a.uid', (int) $this->currentUser->id())
+      ->condition('a.entity_type', $node->getEntityTypeId())
+      ->condition('a.entity_id', (int) $node->id())
+      ->condition('a.timestamp', $this->time->getRequestTime() - 3600, '>=')
+      ->countQuery()->execute()->fetchField();
+    if ($exists) {
+      return;
+    }
     $weights = $config->get('activity_weights') ?? [];
     $this->database->insert('pece_ai_activity')
       ->fields([
