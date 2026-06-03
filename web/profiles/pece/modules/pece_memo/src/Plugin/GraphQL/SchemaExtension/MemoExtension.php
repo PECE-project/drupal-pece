@@ -31,7 +31,7 @@ class MemoExtension extends EntityExtension {
     ];
   }
 
-  public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder) {
+  public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder, array $prefix = []) {
     parent::addFields($registry, $builder, ['memo_']);
     $registry->addFieldResolver('Mutation', 'createMemo',
       $builder->produce('create_memo')

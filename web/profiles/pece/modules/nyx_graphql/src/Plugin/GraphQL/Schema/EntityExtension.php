@@ -38,7 +38,7 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function registerResolvers(ResolverRegistryInterface $registry) {
+  public function registerResolvers(ResolverRegistryInterface $registry): void {
     $builder = new ResolverBuilder();
 
     $this->addQueryFields($registry, $builder);

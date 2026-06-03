@@ -31,7 +31,7 @@ class SubstantiveLogicExtension extends EntityExtension {
     ];
   }
 
-  public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder) {
+  public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder, array $prefix = []) {
     parent::addFields($registry, $builder, ['subst_logic_']);
     $registry->addFieldResolver('Mutation', 'createSubstantiveLogic',
       $builder->produce('create_audio')

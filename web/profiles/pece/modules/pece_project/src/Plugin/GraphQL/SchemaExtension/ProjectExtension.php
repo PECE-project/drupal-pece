@@ -31,7 +31,7 @@ class ProjectExtension extends EntityExtension {
     ];
   }
 
-  public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder) {
+  public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder, array $prefix = []) {
     parent::addFields($registry, $builder, ['project_']);
     $registry->addFieldResolver('Mutation', 'createProject',
       $builder->produce('create_audio')
