@@ -31,7 +31,7 @@ class AudioExtension extends EntityExtension {
     ];
   }
 
-  public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder) {
+  public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder, array $prefix = []) {
     parent::addFields($registry, $builder, ['audio_']);
     $registry->addFieldResolver('Mutation', 'createAudio',
       $builder->produce('create_audio')

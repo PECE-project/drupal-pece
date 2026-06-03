@@ -32,7 +32,7 @@ class UserExtension extends EntityExtension {
     ];
   }
 
-  public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder) {
+  public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder, array $prefix = []) {
     parent::addFields($registry, $builder);
 
     $registry->addFieldResolver('User', 'mail',

@@ -31,7 +31,7 @@ class PhotoEssayExtension extends EntityExtension {
     ];
   }
 
-  public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder) {
+  public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder, array $prefix = []) {
     parent::addFields($registry, $builder, ['photo_essay_']);
     $registry->addFieldResolver('Mutation', 'createPhotoEssay',
       $builder->produce('create_photo_essay')
