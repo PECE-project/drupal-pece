@@ -14,8 +14,16 @@ use Drupal\Tests\UnitTestCase;
  */
 class ContentContributedToTest extends UnitTestCase {
 
+  /**
+   * The block under test.
+   *
+   * @var \Drupal\pece_dashboards\Plugin\Block\ContentContributedTo
+   */
   protected ContentContributedTo $block;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -66,7 +74,12 @@ class ContentContributedToTest extends UnitTestCase {
 namespace Drupal\pece_dashboards\Plugin\Block;
 
 if (!function_exists('Drupal\pece_dashboards\Plugin\Block\base_path')) {
+
+  /**
+   * Stub for base_path() so unit tests can call it without a Drupal bootstrap.
+   */
   function base_path(): string {
     return '/';
   }
+
 }

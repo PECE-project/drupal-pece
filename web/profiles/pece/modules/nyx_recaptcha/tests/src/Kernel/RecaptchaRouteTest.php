@@ -11,6 +11,9 @@ use Drupal\KernelTests\KernelTestBase;
  */
 class RecaptchaRouteTest extends KernelTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = ['system', 'user', 'nyx_recaptcha'];
 
   /**

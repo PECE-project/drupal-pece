@@ -90,7 +90,7 @@ class RulesWebhookPost extends RulesActionBase implements ContainerFactoryPlugin
       if (method_exists($data, 'toArray')) {
         $dataValue = json_encode($data->toArray());
       }
-      if (method_exists($data, 'getValue')) {
+      elseif (method_exists($data, 'getValue')) {
         $dataValue = json_encode($data->getValue());
       }
       else {

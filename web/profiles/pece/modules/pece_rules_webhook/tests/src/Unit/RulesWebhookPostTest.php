@@ -1,35 +1,20 @@
 <?php
 
-// Stub RulesActionBase so the test can run without the drupal/rules module.
-namespace Drupal\rules\Core {
-  if (!class_exists('Drupal\rules\Core\RulesActionBase')) {
-    abstract class RulesActionBase {
-      public function __construct(array $configuration, $plugin_id, $plugin_definition) {}
-    }
-  }
-}
-
-namespace Drupal\Tests\pece_rules_webhook\Unit {
+namespace Drupal\Tests\pece_rules_webhook\Unit;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
-use Drupal\pece_rules_webhook\Plugin\RulesAction\RulesWebhookPost;
+use Drupal\Tests\pece_rules_webhook\Unit\Stubs\TestableRulesWebhookPost;
 use Drupal\Tests\UnitTestCase;
 use GuzzleHttp\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Log\LoggerInterface;
 
-/**
- * Exposes doExecute() for testing.
- */
-class TestableRulesWebhookPost extends RulesWebhookPost {
-
-  public function publicDoExecute($url, $data, $apiuser = NULL, $apipass = NULL, $apitoken = NULL) {
-    return $this->doExecute($url, $data, $apiuser, $apipass, $apitoken);
-  }
-
+// phpcs:ignore -- stub required because drupal/rules is not installed.
+if (!class_exists('Drupal\rules\Core\RulesActionBase')) {
+  require_once __DIR__ . '/Stubs/RulesActionBase.php';
 }
 
 /**
@@ -38,9 +23,23 @@ class TestableRulesWebhookPost extends RulesWebhookPost {
  */
 class RulesWebhookPostTest extends UnitTestCase {
 
+  /**
+   * The plugin under test.
+   *
+   * @var \Drupal\Tests\pece_rules_webhook\Unit\TestableRulesWebhookPost
+   */
   protected TestableRulesWebhookPost $plugin;
+
+  /**
+   * The mocked HTTP client.
+   *
+   * @var \GuzzleHttp\ClientInterface
+   */
   protected ClientInterface $httpClient;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -111,13 +110,16 @@ class RulesWebhookPostTest extends UnitTestCase {
         return $response;
       });
 
-    // The source encodes via getValue() when present (getValue() check is not
-    // an else-if of toArray(), so it always runs and overwrites toArray()
-    // result). Provide both methods returning the same array so the JSON body
-    // matches the expected value regardless of which branch runs last.
+    // Object with only toArray() — no getValue(). Proves the elseif fix works.
     $data = new class {
-      public function toArray(): array { return ['key' => 'value']; }
-      public function getValue(): array { return ['key' => 'value']; }
+
+      /**
+       * Returns the array representation of the data.
+       */
+      public function toArray(): array {
+        return ['key' => 'value'];
+      }
+
     };
 
     $this->plugin->publicDoExecute('https://example.com/hook', $data);
@@ -127,7 +129,7 @@ class RulesWebhookPostTest extends UnitTestCase {
   /**
    * @covers ::doExecute
    */
-  public function testApitokenAddsXCsrfTokenHeader(): void {
+  public function testApitokenAddsXcsrfTokenHeader(): void {
     $capturedOptions = NULL;
     $this->httpClient
       ->expects($this->once())
@@ -169,5 +171,3 @@ class RulesWebhookPostTest extends UnitTestCase {
   }
 
 }
-
-} // end namespace

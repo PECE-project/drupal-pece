@@ -13,8 +13,18 @@ use Drupal\Tests\UnitTestCase;
  */
 class DashboardCreateContentTest extends UnitTestCase {
 
+  /**
+   * The block under test.
+   *
+   * @var \Drupal\pece_dashboards\Plugin\Block\DashboardCreateContent
+   */
   protected DashboardCreateContent $block;
 
+  /**
+   * The full set of node bundles used to seed the bundle info mock.
+   *
+   * @var array
+   */
   protected array $allBundles = [
     'page'                => ['label' => 'Basic page'],
     'article'             => ['label' => 'Article'],
@@ -25,6 +35,9 @@ class DashboardCreateContentTest extends UnitTestCase {
     'pece_project'        => ['label' => 'Project'],
   ];
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
