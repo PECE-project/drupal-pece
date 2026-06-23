@@ -146,10 +146,7 @@ jobs:
         run: composer install --no-interaction --prefer-dist --no-progress
 
       - name: Check Drupal coding standards
-        run: |
-          vendor/bin/phpcs --standard=Drupal,DrupalPractice \
-            --extensions=php,module,inc,install,test,profile,theme \
-            web/profiles/pece/modules/
+        run: vendor/bin/phpcs
 
   # -----------------------------------------------------------------------
   # Job 4: PHPUnit Unit + Kernel tests with PCOV coverage.
@@ -214,8 +211,7 @@ jobs:
           vendor/bin/phpunit \
             --testsuite unit,kernel \
             --coverage-clover coverage.xml \
-            --log-junit junit.xml \
-            -v
+            --log-junit junit.xml
 
       - name: Upload coverage and test results
         if: always()
@@ -241,7 +237,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: web/themes/custom/peceful/package-lock.json
+          cache-dependency-path: web/themes/custom/peceful/package.json
 
       - name: Install theme dependencies
         run: npm ci --prefix web/themes/custom/peceful

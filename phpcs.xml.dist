@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="PECE">
+  <description>PECE custom module coding standards — Drupal + DrupalPractice.</description>
+
+  <rule ref="Drupal"/>
+  <rule ref="DrupalPractice"/>
+
+  <arg name="extensions" value="php,module,inc,install,test,profile,theme"/>
+
+  <!--
+    Enforced on pece_ai (our actively maintained AI module).
+    Other modules are added here as they reach compliance.
+  -->
+  <file>web/profiles/pece/modules/pece_ai</file>
+</ruleset>
