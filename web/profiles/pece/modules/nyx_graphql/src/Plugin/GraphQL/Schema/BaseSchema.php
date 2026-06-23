@@ -8,25 +8,28 @@ use Drupal\graphql\GraphQL\ResolverRegistry;
 use Drupal\graphql\Plugin\GraphQL\Schema\SdlSchemaPluginBase;
 use Drupal\nyx_graphql\Wrappers\QueryConnection;
 
-
+/**
+ *
+ */
 abstract class BaseSchema extends SdlSchemaPluginBase {
 
   /**
-   * Format field machine name to graphql name
+   * Format field machine name to graphql name.
+   *
    * @example field_project_name -> (remove field_) -> project_name -> (explode _)
    * [project, name] -> (ucfirst to second element onwards and merge) -> projectName
    * @param $fieldName
-   *  Field name
+   *   Field name
    * @param array $prefixs
-   *  if exist, will apply the replace
+   *   if exist, will apply the replace.
    *
    * @return string
    */
-  public static function formatFieldName ($fieldName, $prefixs = ['field_project_','field_']) {
+  public static function formatFieldName($fieldName, $prefixs = ['field_project_', 'field_']) {
     foreach ($prefixs as $prefix) {
-      $fieldName = str_replace($prefix,'',$fieldName);
+      $fieldName = str_replace($prefix, '', $fieldName);
     }
-    $nameArray = explode('_',$fieldName);
+    $nameArray = explode('_', $fieldName);
 
     $newName = $nameArray[0];
     unset($nameArray[0]);
@@ -36,8 +39,11 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
     return $newName;
   }
 
+  /**
+   *
+   */
   public static function addConfigField(ResolverRegistry $registry, ResolverBuilder $builder, FieldConfig $fieldConfig) {
-    //passar o bundle como parametro???
+    // Passar o bundle como parametro???
     if ($bundles = $fieldConfig->getSetting('handler_settings')['target_bundles']) {
       foreach ($bundles as $bundle) {
         self::addConfigFieldWithBundle($registry, $builder, $fieldConfig, $bundle);
@@ -45,6 +51,9 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
     }
   }
 
+  /**
+   *
+   */
   public static function addConfigFieldWithBundle(ResolverRegistry $registry, ResolverBuilder $builder, FieldConfig $fieldConfig, $bundle) {
     $fields = \Drupal::service('entity_field.manager')
       ->getFieldDefinitions($fieldConfig->getSetting('target_type'), $bundle);
@@ -66,7 +75,6 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
         )
       );
     }
-
 
     if (is_null($registry->getFieldResolver($type, 'type'))) {
       $registry->addFieldResolver($type, 'type',
@@ -107,11 +115,14 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
                 )
               );
 
-              if ($field->getType() == 'image')
+              if ($field->getType() == 'image') {
                 self::addMediaImageFields($registry, $builder, ucfirst($fieldName));
-              else
+              }
+              else {
                 self::addFileFields($registry, $builder, ucfirst($fieldName));
+              }
               break;
+
             case 'entity_reference_revisions':
             case 'entity_reference':
               $registry->addFieldResolver($type, $fieldName,
@@ -122,6 +133,7 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
 
               self::addConfigField($registry, $builder, $field);
               break;
+
             default:
               if ($fieldConfig->getTargetEntityTypeId() != 'user') {
                 $typeDefinition = 'entity:' . $field->getTargetEntityTypeId() . ':' . $field->getTargetBundle();
@@ -199,6 +211,9 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
     );
   }
 
+  /**
+   *
+   */
   public static function addMediaImageFields(ResolverRegistry $registry, ResolverBuilder $builder, $type) {
 
     $registry->addFieldResolver($type, 'url',
@@ -232,6 +247,9 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
     );
   }
 
+  /**
+   *
+   */
   public static function addFileFields(ResolverRegistry $registry, ResolverBuilder $builder, $type) {
 
     $registry->addFieldResolver($type, 'url',
@@ -255,6 +273,9 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
     );
   }
 
+  /**
+   *
+   */
   public static function mapImageStyleEnum($_, $args) {
     $map = [
       'LARGE_480x480' => 'large',
@@ -265,4 +286,5 @@ abstract class BaseSchema extends SdlSchemaPluginBase {
 
     return $map[$args['style']];
   }
+
 }

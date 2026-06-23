@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\nyx_graphql\Kernel;
 
+use GraphQL\Error\UserError;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\node\Entity\Node;
@@ -30,6 +31,9 @@ class QueryEntityTest extends KernelTestBase {
    */
   protected $plugin;
 
+  /**
+   *
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -93,7 +97,7 @@ class QueryEntityTest extends KernelTestBase {
     $metadata = new CacheableMetadata();
     $connection = $this->plugin->resolve('article', 'node', 2, 2, [], $metadata);
 
-    // total() counts all matching, ignoring offset/limit
+    // total() counts all matching, ignoring offset/limit.
     $this->assertEquals(5, $connection->total());
   }
 
@@ -116,7 +120,7 @@ class QueryEntityTest extends KernelTestBase {
    * @covers ::resolve
    */
   public function testMaxLimitThrowsUserError(): void {
-    $this->expectException(\GraphQL\Error\UserError::class);
+    $this->expectException(UserError::class);
     $metadata = new CacheableMetadata();
     $this->plugin->resolve('article', 'node', 0, 101, [], $metadata);
   }

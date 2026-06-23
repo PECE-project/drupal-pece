@@ -17,6 +17,9 @@ class ArrayValueTest extends KernelTestBase {
    */
   protected $plugin;
 
+  /**
+   *
+   */
   protected function setUp(): void {
     parent::setUp();
     $this->plugin = \Drupal::service('plugin.manager.graphql.data_producer')

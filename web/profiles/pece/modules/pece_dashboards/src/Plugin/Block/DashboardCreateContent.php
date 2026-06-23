@@ -2,6 +2,7 @@
 
 namespace Drupal\pece_dashboards\Plugin\Block;
 
+use Drupal\Core\Url;
 use Drupal\Core\Block\BlockBase;
 
 /**
@@ -24,7 +25,7 @@ class DashboardCreateContent extends BlockBase {
       'about_page',
       'pece_annotation',
       'page',
-      'pece_slideshow_image'
+      'pece_slideshow_image',
     ];
 
     $types = $this->getExistingContentTypes($skipTypes);
@@ -43,8 +44,8 @@ class DashboardCreateContent extends BlockBase {
 
     $contentTypes = array_map(function ($bundle_info) {
                       return $bundle_info['label'];
-                    }, \Drupal::service('entity_type.bundle.info')
-                        ->getBundleInfo('node'));
+    }, \Drupal::service('entity_type.bundle.info')
+      ->getBundleInfo('node'));
 
     foreach ($skipTypes as $skipType) {
       unset($contentTypes[$skipType]);
@@ -59,7 +60,7 @@ class DashboardCreateContent extends BlockBase {
    * @return array
    *   An array of content types.
    */
-  public function buildRenderArray(array $types = null) {
+  public function buildRenderArray(?array $types = NULL) {
 
     $artifactsItems = [
       '#theme' => 'item_list',
@@ -90,12 +91,13 @@ class DashboardCreateContent extends BlockBase {
       $addProjectLink = [
         '#title' => $this->t($typeName),
         '#type' => 'link',
-        '#url' => \Drupal\Core\Url::fromRoute('node.add', ['node_type' => $key]),
+        '#url' => Url::fromRoute('node.add', ['node_type' => $key]),
       ];
 
       if ($isArtifact) {
         array_push($block['content']['#items']['Artifacts']['#items'], $addProjectLink);
-      } else {
+      }
+      else {
         array_push($block['content']['#items'], $addProjectLink);
       }
     }
@@ -103,6 +105,9 @@ class DashboardCreateContent extends BlockBase {
     return $block;
   }
 
+  /**
+   *
+   */
   private function sortContentTypesList(array $contentTypes) {
 
     $contentTypes = array_flip($contentTypes);

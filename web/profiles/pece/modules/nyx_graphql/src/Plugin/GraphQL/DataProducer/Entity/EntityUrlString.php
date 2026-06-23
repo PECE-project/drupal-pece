@@ -2,10 +2,8 @@
 
 namespace Drupal\nyx_graphql\Plugin\GraphQL\DataProducer\Entity;
 
-use Drupal\Core\Cache\CacheableResponse;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
-use http\Env\Response;
 
 /**
  * @DataProducer(

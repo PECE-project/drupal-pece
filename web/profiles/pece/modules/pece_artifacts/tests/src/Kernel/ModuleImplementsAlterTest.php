@@ -13,6 +13,9 @@ class ModuleImplementsAlterTest extends KernelTestBase {
 
   protected static $modules = ['system', 'pece_artifacts'];
 
+  /**
+   *
+   */
   protected function setUp(): void {
     parent::setUp();
     if (!function_exists('pece_artifacts_module_implements_alter')) {

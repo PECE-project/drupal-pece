@@ -72,14 +72,15 @@ class DeleteEntity extends DataProducerPluginBase implements ContainerFactoryPlu
    * @param int $id
    *   The id to delete entity.
    * @param string $bundle
-   *   The bundle entity to delete
+   *   The bundle entity to delete.
+   *
    * @return \Drupal\Core\Entity\EntityBase|\Drupal\Core\Entity\EntityInterface|null
    *   The delete entity.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function resolve(int $id, string $bundle) {
-    // @TODO: Create permission
+    // @todo Create permission
     $content = Node::load($id);
     $content->delete();
     return $content;

@@ -8,6 +8,7 @@ use Drupal\migrate_drupal\Plugin\migrate\source\DrupalSqlBase;
  * Fetch node aliases filtered by content type.
  *
  * Modeled after core URL alias migration.
+ *
  * @see \Drupal\path\Plugin\migrate\source\d7\UrlAlias
  *
  * @MigrateSource(

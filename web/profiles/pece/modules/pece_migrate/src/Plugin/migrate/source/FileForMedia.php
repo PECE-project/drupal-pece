@@ -1,6 +1,6 @@
 <?php
 
-namespace  Drupal\pece_migrate\Plugin\migrate\source;
+namespace Drupal\pece_migrate\Plugin\migrate\source;
 
 use Drupal\file\Plugin\migrate\source\d7\File as D7File;
 use Drupal\migrate\Row;

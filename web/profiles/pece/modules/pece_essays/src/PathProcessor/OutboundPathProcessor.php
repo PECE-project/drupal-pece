@@ -2,20 +2,24 @@
 
 namespace Drupal\pece_essays\PathProcessor;
 
+use Drupal\node\NodeInterface;
 use Drupal\Core\PathProcessor\OutboundPathProcessorInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ *
+ */
 class OutboundPathProcessor implements OutboundPathProcessorInterface {
 
   /**
    * {@inheritdoc}
    */
-  public function processOutbound($path, &$options = [], Request $request = NULL, BubbleableMetadata $bubbleable_metadata = NULL) {
+  public function processOutbound($path, &$options = [], ?Request $request = NULL, ?BubbleableMetadata $bubbleable_metadata = NULL) {
     if (!isset($options['entity'])
       || $options['route']->getPath() !== "/node/{node}"
-      || ! $options['entity'] instanceof \Drupal\node\NodeInterface
-    ) {
+      || !$options['entity'] instanceof
+    NodeInterface) {
       return $path;
     }
     // We are linking to a node at its canonical path.
@@ -29,4 +33,5 @@ class OutboundPathProcessor implements OutboundPathProcessorInterface {
     }
     return $path;
   }
+
 }

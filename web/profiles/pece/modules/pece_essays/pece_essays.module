@@ -6,8 +6,6 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\node\NodeInterface;
-use Drupal\Core\Url;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
@@ -119,12 +117,13 @@ function _peceFormatterSettingsProcessCallback(array $element, FormStateInterfac
       'intro_page',
       'search_result',
       'analytic_on_annotation_form',
-      'highlighted', // check this one
+    // Check this one.
+      'highlighted',
       'rss',
       'search_index',
-      'token'
+      'token',
     ];
-    foreach($invalid_view_modes as $view_mode) {
+    foreach ($invalid_view_modes as $view_mode) {
       unset($element['settings_wrapper']['settings']['view_mode']['#options'][$view_mode]);
     }
     if ($element['settings_wrapper']['settings']['view_mode']['#default_value'] == 'default') {
@@ -145,7 +144,6 @@ function pece_essays_emphasize_edit_layout_button(&$form) {
   // `#gin_action_item` is what makes the change though it currently only works
   // with patch from https://www.drupal.org/project/gin/issues/3486743
   // See also https://www.drupal.org/project/gin/issues/3488023 (docs issue)
-
   $form['actions']['submit']['#button_type'] = 'secondary';
   // This does not work to remove buttons actually.
   $form['actions']['submit']['#gin_action_item'] = FALSE;

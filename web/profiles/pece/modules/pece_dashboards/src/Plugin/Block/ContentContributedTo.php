@@ -10,7 +10,6 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 /**
  * Provides a link to content you have contributed to.
  */
-
 #[Block(
   id: "pece_dashboards_content_contributed_to",
   admin_label: new TranslatableMarkup("Link to content the current user has contributed to"),

@@ -1,9 +1,6 @@
 <?php
-/**
- * @file
- * Contains \Drupal\pece_migrate\Plugin\migrate\source\GroupNode.
- */
-namespace  Drupal\pece_migrate\Plugin\migrate\source;
+
+namespace Drupal\pece_migrate\Plugin\migrate\source;
 
 use Drupal\migrate\Row;
 use Drupal\node\Plugin\migrate\source\d7\Node as D7Node;
@@ -18,7 +15,7 @@ use Drupal\node\Plugin\migrate\source\d7\Node as D7Node;
  */
 class GroupNode extends D7Node {
 
-  // const GROUP_MEMBER_ROLES = ['Researcher', 'Contributor', 'member'];
+  // Const GROUP_MEMBER_ROLES = ['Researcher', 'Contributor', 'member'];.
   const GROUP_MANAGER_ROLES = ['administrator member', 'group administrator'];
 
   protected $groupMembers = [];
@@ -35,10 +32,13 @@ class GroupNode extends D7Node {
     return $fields;
   }
 
+  /**
+   *
+   */
   public function prepareRow(Row $row) {
     $gid = $row->getSourceProperty('nid');
 
-    // Get the group access setting
+    // Get the group access setting.
     $group_access = $this->select('field_data_group_access', 'fdga')
       ->fields('fdga', ['group_access_value'])
       ->condition('fdga.entity_id', $gid)
@@ -51,9 +51,9 @@ class GroupNode extends D7Node {
     $managers = array_unique($managers);
 
     // Query to get user IDs based on group membership.
-    // For the case of members, we cannot build the data based on roles, since the member role is  implicit, and not actually present in the og_users_roles table at all
+    // For the case of members, we cannot build the data based on roles, since the member role is  implicit, and not actually present in the og_users_roles table at all.
     $members_query = $this->select('og_membership', 'ogm')
-      ->fields('ogm', array('etid'))
+      ->fields('ogm', ['etid'])
       ->condition('ogm.entity_type', 'user')
       ->condition('ogm.gid', $gid);
 
@@ -62,18 +62,18 @@ class GroupNode extends D7Node {
     }
 
     $members = $members_query
-    ->execute()
-    ->fetchCol();
+      ->execute()
+      ->fetchCol();
 
     foreach ($members as $key => $item) {
       $this->groupMembers[] = [
-        'target_id' => $item
+        'target_id' => $item,
       ];
     }
 
     foreach ($managers as $key => $item) {
       $this->groupManagers[] = [
-        'target_id' => $item
+        'target_id' => $item,
       ];
     }
 
@@ -86,19 +86,23 @@ class GroupNode extends D7Node {
     return parent::prepareRow($row);
   }
 
+  /**
+   *
+   */
   public function getUsersByRoles($gid, Array $d7_group_roles) {
-    // Collect role ids (of this group) for selected roles
+    // Collect role ids (of this group) for selected roles.
     $role_ids_query = $this->select('og_role', 'r')
-    ->fields('r', array('rid'))
-    ->condition('r.gid', $gid)
-    ->condition('r.name', $d7_group_roles, 'IN');
+      ->fields('r', ['rid'])
+      ->condition('r.gid', $gid)
+      ->condition('r.name', $d7_group_roles, 'IN');
 
-    // Get users with at least one of these role ids
+    // Get users with at least one of these role ids.
     return $this->select('og_users_roles', 'ur')
-      ->fields('ur', array('uid'))
+      ->fields('ur', ['uid'])
       ->distinct()
       ->condition('ur.rid', $role_ids_query, 'IN')
       ->execute()
       ->fetchCol();
   }
+
 }

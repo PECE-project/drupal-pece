@@ -34,10 +34,11 @@ use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
  */
 class CreateEntity extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
-  //@TODO: get this map dynamically
+  // @todo get this map dynamically
   /**
    * Map fields to Drupal
    * graphqlfield => drupalfield
+   *
    * @var string[]
    */
   protected $mapFields = [
@@ -86,7 +87,7 @@ class CreateEntity extends DataProducerPluginBase implements ContainerFactoryPlu
    * @param array $data
    *   The fields of the Entity.
    * @param string $entity
-   *   Type entity
+   *   Type entity.
    * @param array $fieldsMap
    *   Field map to entity.
    *
@@ -96,7 +97,7 @@ class CreateEntity extends DataProducerPluginBase implements ContainerFactoryPlu
    * @throws \Exception
    */
   public function resolve(array $data, $entity, array $fieldsMap) {
-    //@todo: set permission
+    // @todo set permission
     $values = ['type' => $entity];
     foreach ($data as $key => $value) {
       if (isset($fieldsMap[$key])) {
@@ -108,8 +109,10 @@ class CreateEntity extends DataProducerPluginBase implements ContainerFactoryPlu
       $content = Node::create($values);
       $content->save();
       return $content;
-    } catch (EntityStorageException $e) {
+    }
+    catch (EntityStorageException $e) {
       throw new \Exception($e->getMessage(), $e->getCode());
     }
   }
+
 }

@@ -16,7 +16,7 @@ class PECEAccessByNodeRefTest extends PbfAccessByNodeRefTest {
    *
    * @var array
    */
-  protected static $modules = array(
+  protected static $modules = [
     'address',
     'admin_toolbar',
     'admin_toolbar_tools',
@@ -136,14 +136,15 @@ class PECEAccessByNodeRefTest extends PbfAccessByNodeRefTest {
     'user',
     'views',
     'views_ui',
-    'workflow'
-  );
+    'workflow',
+  ];
   protected $profile = 'pece';
-  /*
+  /**
    * Field name to add.
    *
    * @var string
    */
+
   protected $fieldname;
 
   /**
@@ -208,8 +209,7 @@ class PECEAccessByNodeRefTest extends PbfAccessByNodeRefTest {
     $this->drupalGet("node/{$this->article2->id()}/edit");
     $this->assertSession()->statusCodeEquals(403);
 
-    //TODO: create test to check result in the search page. See PbfAccessByNodeRefTest.
-
+    // @todo create test to check result in the search page. See PbfAccessByNodeRefTest.
     // Set article2 as public without custom permission.
     $value = [
       'target_id' => $this->group1->id(),
@@ -221,8 +221,7 @@ class PECEAccessByNodeRefTest extends PbfAccessByNodeRefTest {
     $this->article2->set($this->fieldname, $value)->save();
     $this->drupalGet("node/{$this->article2->id()}");
     $this->assertSession()->statusCodeEquals(200);
-    //TODO: create test to check result in the search page with 2 results. See PbfAccessByNodeRefTest.
-
+    // @todo create test to check result in the search page with 2 results. See PbfAccessByNodeRefTest.
     $this->drupalGet("node/{$this->article2->id()}/edit");
     $this->assertSession()->statusCodeEquals(403);
 
@@ -240,8 +239,7 @@ class PECEAccessByNodeRefTest extends PbfAccessByNodeRefTest {
     $this->article2->set($this->fieldname, $value)->save();
     $this->drupalGet("node/{$this->article2->id()}");
     $this->assertSession()->statusCodeEquals(403);
-    //TODO: create test to check result in the search page with 1 result. See PbfAccessByNodeRefTest.
-
+    // @todo create test to check result in the search page with 1 result. See PbfAccessByNodeRefTest.
     // Associate normalUser with group1.
     $this->setUserField($this->normalUser->id(), $this->fieldname, ['target_id' => $this->group1->id()]);
 
@@ -255,7 +253,7 @@ class PECEAccessByNodeRefTest extends PbfAccessByNodeRefTest {
 
     // Check search.
     $this->container->get('cron')->run();
-    //TODO: create test to check result in the search page with 2 result. See PbfAccessByNodeRefTest.
+    // @todo create test to check result in the search page with 2 result. See PbfAccessByNodeRefTest.
     // Check view.
     $this->drupalGet("node/{$this->article2->id()}");
     $this->assertSession()->statusCodeEquals(200);

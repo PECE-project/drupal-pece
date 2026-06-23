@@ -5,6 +5,9 @@ namespace Drupal\nyx_graphql\Wrappers;
 use Drupal\Core\Entity\Query\QueryInterface;
 use GraphQL\Deferred;
 
+/**
+ *
+ */
 class QueryConnection {
 
   /**
@@ -45,4 +48,5 @@ class QueryConnection {
       return $callback();
     });
   }
+
 }

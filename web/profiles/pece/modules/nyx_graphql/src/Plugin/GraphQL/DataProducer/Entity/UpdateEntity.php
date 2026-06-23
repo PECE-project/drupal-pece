@@ -5,7 +5,6 @@ namespace Drupal\nyx_graphql\Plugin\GraphQL\DataProducer\Entity;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\graphql_people\Plugin\GraphQL\DataProducer\TraitUser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 
@@ -75,13 +74,13 @@ class UpdateEntity extends DataProducerPluginBase implements ContainerFactoryPlu
 
   /**
    * Update a user.
-
+   *
    * @param int $id
    *   The id to update entity.
    * @param array $data
    *   The fields of the Entity.
    * @param string $entity
-   *   Type entity
+   *   Type entity.
    * @param array $fieldsMap
    *   Field map to entity.
    *
@@ -91,15 +90,15 @@ class UpdateEntity extends DataProducerPluginBase implements ContainerFactoryPlu
    * @throws \Exception
    */
   public function resolve(int $id, array $data, string $entity, array $fieldsMap) {
-      $content = Node::load($id);
-      foreach ($data as $key => $value) {
-        if (isset($fieldsMap[$key])) {
-          $field = $fieldsMap[$key];
-          $content->set($field, $value);
-        }
+    $content = Node::load($id);
+    foreach ($data as $key => $value) {
+      if (isset($fieldsMap[$key])) {
+        $field = $fieldsMap[$key];
+        $content->set($field, $value);
       }
-      $content->save();
-      return $content;
+    }
+    $content->save();
+    return $content;
   }
 
 }

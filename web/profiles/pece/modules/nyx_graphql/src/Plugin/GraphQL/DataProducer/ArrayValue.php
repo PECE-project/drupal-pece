@@ -5,7 +5,6 @@ namespace Drupal\nyx_graphql\Plugin\GraphQL\DataProducer;
 use Drupal\graphql\Plugin\DataProducerPluginCachingInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 
-
 /**
  * @DataProducer(
  *   id = "array_value",

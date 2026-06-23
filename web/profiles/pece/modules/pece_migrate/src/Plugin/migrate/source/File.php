@@ -1,9 +1,8 @@
 <?php
 
-namespace  Drupal\pece_migrate\Plugin\migrate\source;
+namespace Drupal\pece_migrate\Plugin\migrate\source;
 
 use Drupal\file\Plugin\migrate\source\d7\File as D7File;
-use Drupal\migrate\Row;
 
 /**
  * Drupal 7 file source from database.
@@ -46,11 +45,11 @@ class File extends D7File {
     $query = parent::query();
 
     // fid_locator is a custom table, a collection of data about embedded files, see scripts/token_parser.sql
-    // Get all files that appear inline in panes
+    // Get all files that appear inline in panes.
     $fidl_query = $this->select('fid_locator', 'fidl')
       ->fields('fidl', ['fid'])
       ->condition('fidl.entity_type', 'fieldable_panels_pane');
-    // Get all files that appear in an image panes image field
+    // Get all files that appear in an image panes image field.
     $fppi_query = $this->select('field_data_field_basic_image_image', 'fbii')
       ->fields('fbii', ['field_basic_image_image_fid']);
 
@@ -59,7 +58,8 @@ class File extends D7File {
         ->condition('f.fid', $fidl_query, 'IN')
         ->condition('f.fid', $fppi_query, 'IN');
       $query->condition($orGroup);
-    } else {
+    }
+    else {
       $query
         ->condition('f.fid', $fidl_query, 'NOT IN')
         ->condition('f.fid', $fppi_query, 'NOT IN');

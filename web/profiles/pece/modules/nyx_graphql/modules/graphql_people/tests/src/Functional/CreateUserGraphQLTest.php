@@ -3,8 +3,6 @@
 namespace Drupal\Tests\graphql_people\Functional;
 
 use Drupal\Tests\BrowserTestBase;
-use Drupal\user\Entity\Role;
-use Drupal\user\Entity\User;
 
 /**
  * Test CreateUser GraphQL endpoint security.

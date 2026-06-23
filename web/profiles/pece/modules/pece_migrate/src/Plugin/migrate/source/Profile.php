@@ -1,9 +1,7 @@
 <?php
-/**
- * @file
- * Contains \Drupal\pece_migrate\Plugin\migrate\source\Profile.
- */
-namespace  Drupal\pece_migrate\Plugin\migrate\source;
+
+namespace Drupal\pece_migrate\Plugin\migrate\source;
+
 use Drupal\migrate\Row;
 use Drupal\profile\Plugin\migrate\source\d7\Profile2 as D7Profile;
 
@@ -47,5 +45,3 @@ class Profile extends D7Profile {
   }
 
 }
-
-

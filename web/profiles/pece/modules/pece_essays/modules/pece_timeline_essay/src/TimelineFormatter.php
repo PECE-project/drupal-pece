@@ -2,6 +2,7 @@
 
 namespace Drupal\pece_timeline_essay;
 
+use Drupal\user\Entity\User;
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
@@ -58,25 +59,27 @@ class TimelineFormatter {
    *   keys.
    */
   public function formatSlide(Paragraph $timelineItem) {
-      $slide = [
-        'unique_id' => $timelineItem->uuid(),
-        'start_date' => $this->formatDate($timelineItem->field_pece_start_end_date->first()->getValue()['value']),
-        'end_date' => $this->formatDate($timelineItem->field_pece_start_end_date->first()->getValue()['end_value']),
-        'background' => $this->formatBgColor($timelineItem),
-      ];
-      $artifactId = $timelineItem->field_pece_timeline_artifact->first()->getValue()['target_id'];
-      $artifact = Node::load($artifactId);
-      $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
-      if ($artifact && $artifact->access('view', $user)) {
-        $slide['media'] = $this->formatMedia($this->getArtifactMediaField($artifact));
-        $slide['text'] = $this->formatText($timelineItem, $this->appendArtifactLink($artifact, $timelineItem->field_description->first()->getValue()['value']));
-      } elseif ($artifact) {
-        $slide['text'] = $this->formatText($timelineItem, "You do not have access to this artifact.");
-      } else {
-        // @todo Show a default image represtenting a missing artifact
-        // $slide['media'] = [];
-        $slide['text'] = $this->formatText($timelineItem, "This artifact has been removed from the platform and can no longer be accessed.");
-      }
+    $slide = [
+      'unique_id' => $timelineItem->uuid(),
+      'start_date' => $this->formatDate($timelineItem->field_pece_start_end_date->first()->getValue()['value']),
+      'end_date' => $this->formatDate($timelineItem->field_pece_start_end_date->first()->getValue()['end_value']),
+      'background' => $this->formatBgColor($timelineItem),
+    ];
+    $artifactId = $timelineItem->field_pece_timeline_artifact->first()->getValue()['target_id'];
+    $artifact = Node::load($artifactId);
+    $user = User::load(\Drupal::currentUser()->id());
+    if ($artifact && $artifact->access('view', $user)) {
+      $slide['media'] = $this->formatMedia($this->getArtifactMediaField($artifact));
+      $slide['text'] = $this->formatText($timelineItem, $this->appendArtifactLink($artifact, $timelineItem->field_description->first()->getValue()['value']));
+    }
+    elseif ($artifact) {
+      $slide['text'] = $this->formatText($timelineItem, "You do not have access to this artifact.");
+    }
+    else {
+      // @todo Show a default image represtenting a missing artifact
+      // $slide['media'] = [];
+      $slide['text'] = $this->formatText($timelineItem, "This artifact has been removed from the platform and can no longer be accessed.");
+    }
 
     return $slide;
   }
@@ -171,6 +174,7 @@ class TimelineFormatter {
    *
    * @$type string TimelineJS field type
    * @$value string Content
+   *
    * @return array
    *   Array of formatted field.
    */
@@ -192,7 +196,8 @@ class TimelineFormatter {
     if (!$timelineItem->field_pece_timeline_background->isEmpty()) {
       $fileId = $timelineItem->field_pece_timeline_background->first()->getValue()['target_id'];
       $file = File::load($fileId);
-      $image_style = ImageStyle::load('fullwidth_1344'); // should this be 2688 for double density displays?
+      // Should this be 2688 for double density displays?
+      $image_style = ImageStyle::load('fullwidth_1344');
       $image_uri = $file->getFileUri();
       $destination_uri = $image_style->buildUri($file->uri->value);
       $image_style->createDerivative($image_uri, $destination_uri);
@@ -243,7 +248,8 @@ class TimelineFormatter {
         $destination_uri = $image_style->buildUri($file->uri->value);
         $image_style->createDerivative($image_uri, $destination_uri);
         $rtn["url"] = $image_style->buildUrl($destination_uri);
-      } elseif ($file) {
+      }
+      elseif ($file) {
         $rtn["url"] = \Drupal::request()->getSchemeAndHttpHost() . $file->createFileUrl();
       }
     }
@@ -253,13 +259,13 @@ class TimelineFormatter {
 
   /**
    * Returns the file object from the Media Entity ID.
-    *
-    * @param int $mediaId
-    *   Media Fields.
-    *
-    * @return \Drupal\file\Entity\File
-    *   Fields array or false if no fields.
-    */
+   *
+   * @param int $mediaId
+   *   Media Fields.
+   *
+   * @return \Drupal\file\Entity\File
+   *   Fields array or false if no fields.
+   */
   private function getFileFromMediaId(int $mediaId) {
     $mediaTypeMapping = [
       'private_audio' => 'field_media_private_audio_file',
@@ -267,7 +273,7 @@ class TimelineFormatter {
       'private_video' => 'field_private_media_video_file',
       'remote_video' => 'field_media_oembed_video',
       'private_document' => 'field_private_media_document',
-      'private_pdf' => 'field_private_media_document'
+      'private_pdf' => 'field_private_media_document',
     ];
 
     $media = Media::load($mediaId);
@@ -279,10 +285,12 @@ class TimelineFormatter {
     }
     if ($field === 'field_media_oembed_video') {
       $fileId = $media->thumbnail->target_id;
-    } else {
+    }
+    else {
       $fileId = $media->get($field)->first()->getValue()['target_id'];
     }
 
     return File::load($fileId);
   }
+
 }

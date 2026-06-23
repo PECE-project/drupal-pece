@@ -50,7 +50,6 @@ use GuzzleHttp\Exception\RequestException;
  *     )
  *   }
  * )
- *
  */
 class RulesWebhookPost extends RulesActionBase implements ContainerFactoryPluginInterface {
 
@@ -69,23 +68,22 @@ class RulesWebhookPost extends RulesActionBase implements ContainerFactoryPlugin
   protected $httpClient;
 
   /**
-   * Set up form variables
+   * Set up form variables.
    *
    * @param string $url
    *   Url addresses to Webhook post.
    * @param mixed $data
    *   Value to send the webhook.
    * @param string $apiuser
-   *   (optional) The User Name for webhook call
+   *   (optional) The User Name for webhook call.
    * @param string $apipass
-   *   (optional) The User Password for webhook call
+   *   (optional) The User Password for webhook call.
    * @param string $apitoken
-   *   (optional) The Session Token for webhook call
+   *   (optional) The Session Token for webhook call.
    */
-  protected function doExecute($url, $data, $apiuser = NULL, $apipass = NULL, $apitoken = NULL ) {
+  protected function doExecute($url, $data, $apiuser = NULL, $apipass = NULL, $apitoken = NULL) {
     $this->logger->info("Start webhook post");
-    // Logs a notice
-
+    // Logs a notice.
     if (is_object($data)) {
       if (method_exists($data, 'toArray')) {
         $dataValue = json_encode($data->toArray());
@@ -97,8 +95,9 @@ class RulesWebhookPost extends RulesActionBase implements ContainerFactoryPlugin
         $dataValue = json_encode($data);
       }
     }
-    else
+    else {
       $dataValue = $data;
+    }
 
     \Drupal::moduleHandler()->alter('value_to_webhook', $dataValue);
 
@@ -108,7 +107,7 @@ class RulesWebhookPost extends RulesActionBase implements ContainerFactoryPlugin
       'body' => $dataValue,
       'headers' => [
         'Content-Type' => 'application/json',
-        'Accept' => 'application/json'
+        'Accept' => 'application/json',
       ],
     ];
 
@@ -164,4 +163,5 @@ class RulesWebhookPost extends RulesActionBase implements ContainerFactoryPlugin
       $container->get('http_client')
     );
   }
+
 }

@@ -18,6 +18,9 @@ use Drupal\user\Entity\User;
  */
 class GroupManagerDefaultTest extends KernelTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = ['system', 'user', 'field', 'taxonomy'];
 
   /**
@@ -27,6 +30,9 @@ class GroupManagerDefaultTest extends KernelTestBase {
    */
   protected $currentUser;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -49,8 +55,7 @@ class GroupManagerDefaultTest extends KernelTestBase {
   }
 
   /**
-   * Tests that the current user is set as the first group manager widget value
-   * when creating a new taxonomy term.
+   * Tests that the current user is set as the default group manager.
    */
   public function testNewTermGetsCurrentUserAsDefaultManager(): void {
     $term = Term::create(['vid' => 'groups', 'name' => 'New Group']);

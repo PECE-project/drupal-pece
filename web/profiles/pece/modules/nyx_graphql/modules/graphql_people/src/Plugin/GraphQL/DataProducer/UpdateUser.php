@@ -3,10 +3,8 @@
 namespace Drupal\graphql_people\Plugin\GraphQL\DataProducer;
 
 use Drupal\user\Entity\User;
-use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\graphql_people\Plugin\GraphQL\DataProducer\TraitUser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 

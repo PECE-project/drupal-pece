@@ -83,7 +83,7 @@ class QueryEntity extends DataProducerPluginBase implements ContainerFactoryPlug
     array $configuration,
     $pluginId,
     $pluginDefinition,
-    EntityTypeManagerInterface $entityManager
+    EntityTypeManagerInterface $entityManager,
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
     $this->entityManager = $entityManager;
@@ -113,13 +113,14 @@ class QueryEntity extends DataProducerPluginBase implements ContainerFactoryPlug
       ->currentRevision()
       ->accessCheck();
 
-    if ($bundle)
+    if ($bundle) {
       $query->condition($type->getKey('bundle'), $bundle);
+    }
 
     if (count($filters)) {
       foreach ($filters as $filter) {
-        $filter['operator'] = key_exists('operator',$filter) ? $filter['operator'] : "=";
-        $query->condition($filter['key'],$filter['value'],$filter['operator']);
+        $filter['operator'] = key_exists('operator', $filter) ? $filter['operator'] : "=";
+        $query->condition($filter['key'], $filter['value'], $filter['operator']);
       }
     }
 
@@ -130,4 +131,5 @@ class QueryEntity extends DataProducerPluginBase implements ContainerFactoryPlug
 
     return new QueryConnection($query);
   }
+
 }

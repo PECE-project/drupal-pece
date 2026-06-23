@@ -8,7 +8,7 @@ use Drupal\extra_field_plus\Plugin\ExtraFieldPlusDisplayBase;
 /**
  * Annotate button pseudo-field display.
  *
- * @TODO restrict to artifact bundles?  Or too much risk of bug of not being available when new one added.
+ * @todo restrict to artifact bundles?  Or too much risk of bug of not being available when new one added.
  *
  * @ExtraFieldDisplay(
  *   id = "pece_annotations_annotate_button",

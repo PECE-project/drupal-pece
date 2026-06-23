@@ -21,6 +21,9 @@ class AnnotateButtonTest extends UnitTestCase {
    */
   protected $plugin;
 
+  /**
+   *
+   */
   protected function setUp(): void {
     parent::setUp();
 

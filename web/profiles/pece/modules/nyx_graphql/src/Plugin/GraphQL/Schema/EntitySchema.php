@@ -8,7 +8,7 @@ use Drupal\graphql\GraphQL\ResolverRegistry;
 use Drupal\node\NodeInterface;
 use Drupal\nyx_graphql\Wrappers\QueryConnection;
 
-//@TODO: Refactoring this class using BaseSchema
+// @todo Refactoring this class using BaseSchema
 /**
  * @Schema(
  *   id = "entity",
@@ -28,7 +28,8 @@ class EntitySchema extends BaseSchema {
     $registry->addTypeResolver('NodeInterface', function ($value) {
       if ($value instanceof NodeInterface) {
         switch ($value->bundle()) {
-          case 'page': return 'Page';
+          case 'page':
+            return 'Page';
         }
       }
       throw new \Error('Could not resolve content type.');
@@ -58,13 +59,13 @@ class EntitySchema extends BaseSchema {
               ->map('entity', $builder->fromParent())
               ->map('field', $builder->fromValue($field->getName()))
           );
-          BaseSchema::addConfigField($registry,$builder, $field);
+          BaseSchema::addConfigField($registry, $builder, $field);
         }
         elseif ($field->getType() == 'image') {
           $registry->addFieldResolver('Page', $fieldName,
             $builder->compose(
               $builder->produce('property_path')
-                ->map('type', $builder->fromValue('entity:'. $field->get('entity_type'). ':' . $field->get('bundle')))
+                ->map('type', $builder->fromValue('entity:' . $field->get('entity_type') . ':' . $field->get('bundle')))
                 ->map('value', $builder->fromParent())
                 ->map('path', $builder->fromValue($field->getName())),
               $builder->callback(function ($parent) {
@@ -170,4 +171,5 @@ class EntitySchema extends BaseSchema {
       })
     );
   }
+
 }

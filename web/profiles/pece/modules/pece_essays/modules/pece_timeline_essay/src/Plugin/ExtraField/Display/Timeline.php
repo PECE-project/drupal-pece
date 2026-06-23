@@ -4,7 +4,6 @@ namespace Drupal\pece_timeline_essay\Plugin\ExtraField\Display;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\extra_field\Plugin\ExtraFieldDisplayBase;
-use Drupal\node\Entity\Node;
 use Drupal\pece_timeline_essay\TimelineFormatter;
 
 /**
@@ -42,4 +41,3 @@ class Timeline extends ExtraFieldDisplayBase {
   }
 
 }
-

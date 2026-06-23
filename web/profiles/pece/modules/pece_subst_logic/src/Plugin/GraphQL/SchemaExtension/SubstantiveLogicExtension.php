@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Drupal\pece_subst_logic\Plugin\GraphQL\SchemaExtension;
-
 
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\graphql\GraphQL\ResolverBuilder;
@@ -20,17 +18,20 @@ use Drupal\nyx_graphql\Plugin\GraphQL\Schema\EntityExtension;
 class SubstantiveLogicExtension extends EntityExtension {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function __construct($configuration, $pluginId, $pluginDefinition, ModuleHandlerInterface $moduleHandler) {
     parent::__construct($configuration, $pluginId, $pluginDefinition, $moduleHandler);
     $this->entity = [
       'type' => 'node',
       'bundle' => 'pece_substantive_logic',
-      'plural' => 'peceSubstantiveLogics'
+      'plural' => 'peceSubstantiveLogics',
     ];
   }
 
+  /**
+   *
+   */
   public function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder, array $prefix = []) {
     parent::addFields($registry, $builder, ['subst_logic_']);
     $registry->addFieldResolver('Mutation', 'createSubstantiveLogic',

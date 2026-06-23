@@ -6,15 +6,24 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
+/**
+ * Adds X-Login-Attempt header to failed OAuth token responses.
+ */
 class AddXLoginAttemptEvent implements EventSubscriberInterface {
 
-  public function AddXLoginAttempt(ResponseEvent $event) {
+  /**
+   * Adds X-Login-Attempt header on failed OAuth token requests.
+   *
+   * @param \Symfony\Component\HttpKernel\Event\ResponseEvent $event
+   *   The response event.
+   */
+  public function addXLoginAttempt(ResponseEvent $event): void {
     $response = $event->getResponse();
 
     if ($event->getRequest()->getPathInfo() == '/oauth/token' && !$response->isSuccessful()) {
       \Drupal::flood()->register('user.failed_login_ip');
 
-      // Get number Attempt
+      // Get number Attempt.
       $number = \Drupal::database()->select('flood', 'f')
         ->condition('event', 'user.failed_login_ip')
         ->condition('identifier', $event->getRequest()->getClientIp())
@@ -26,8 +35,12 @@ class AddXLoginAttemptEvent implements EventSubscriberInterface {
     }
   }
 
-  public static function getSubscribedEvents() {
-    $events[KernelEvents::RESPONSE][] = array('AddXLoginAttempt', -10);
+  /**
+   * {@inheritdoc}
+   */
+  public static function getSubscribedEvents(): array {
+    $events[KernelEvents::RESPONSE][] = ['addXLoginAttempt', -10];
     return $events;
   }
+
 }

@@ -39,4 +39,3 @@ class IntroLink extends ExtraFieldDisplayBase {
   }
 
 }
-

@@ -7,16 +7,17 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\graphql\GraphQL\ResolverBuilder;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\graphql\Plugin\GraphQL\SchemaExtension\SdlSchemaExtensionPluginBase;
-use Drupal\nyx_graphql\Plugin\GraphQL\Schema\BaseSchema;
 use Drupal\nyx_graphql\Wrappers\QueryConnection;
 
-
+/**
+ *
+ */
 abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
 
   protected $entity = [
-      'type' => 'node',
-      'bundle' => 'entity',
-      'plural' => 'entities'
+    'type' => 'node',
+    'bundle' => 'entity',
+    'plural' => 'entities',
   ];
 
 
@@ -24,12 +25,12 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
 
   /**
    * Map fields to this entity.
+   *
    * @return array
    */
-  public function &getMapFields () {
+  public function &getMapFields() {
     return $this->mapFields;
   }
-
 
   public function __construct($configuration, $pluginId, $pluginDefinition, ModuleHandlerInterface $moduleHandler) {
     parent::__construct($configuration, $pluginId, $pluginDefinition, $moduleHandler);
@@ -44,7 +45,7 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
     $this->addQueryFields($registry, $builder);
     $this->addFields($registry, $builder);
     $baseEntityNameSingular = BaseSchema::formatFieldName($this->entity['bundle'], []);
-    $this->addConnectionFields(ucfirst($baseEntityNameSingular).'Connection', $registry, $builder);
+    $this->addConnectionFields(ucfirst($baseEntityNameSingular) . 'Connection', $registry, $builder);
   }
 
   /**
@@ -55,7 +56,7 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
    * @param array $entity
    */
   protected function addFields(ResolverRegistryInterface $registry, ResolverBuilder $builder, array $prefix = []) {
-    // Get all field informations about this entity
+    // Get all field informations about this entity.
     $fields = \Drupal::service('entity_field.manager')->getFieldDefinitions($this->entity['type'], $this->entity['bundle']);
     $baseEntityNameSingular = ucfirst(BaseSchema::formatFieldName($this->entity['bundle'], []));
 
@@ -77,7 +78,7 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
           $registry->addFieldResolver(ucfirst($baseEntityNameSingular), $fieldName,
             $builder->compose(
               $builder->produce('property_path')
-                ->map('type', $builder->fromValue('entity:'. $field->get('entity_type'). ':' . $field->get('bundle')))
+                ->map('type', $builder->fromValue('entity:' . $field->get('entity_type') . ':' . $field->get('bundle')))
                 ->map('value', $builder->fromParent())
                 ->map('path', $builder->fromValue($field->getName())),
               $builder->callback(function ($parent) {
@@ -86,10 +87,12 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
             )
           );
 
-          if ($field->getType() == 'image')
+          if ($field->getType() == 'image') {
             BaseSchema::addMediaImageFields($registry, $builder, ucfirst($fieldName));
-          else
+          }
+          else {
             BaseSchema::addFileFields($registry, $builder, ucfirst($fieldName));
+          }
 
         }
         else {
@@ -97,7 +100,7 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
 
           if ($field->getFieldStorageDefinition()->getCardinality() != 1) {
             $compose[] = $builder->produce('property_path')
-              ->map('type', $builder->fromValue(isset($this->entity['entity']) ? $this->entity['entity'] : 'entity:' . $this->entity['type'] . ':' . $this->entity['bundle']))
+              ->map('type', $builder->fromValue($this->entity['entity'] ?? 'entity:' . $this->entity['type'] . ':' . $this->entity['bundle']))
               ->map('value', $builder->fromParent())
               ->map('path', $builder->fromValue($field->getName()));
             $compose[] = $builder->produce('multi_value')
@@ -105,7 +108,7 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
           }
           else {
             $compose[] = $builder->produce('property_path')
-              ->map('type', $builder->fromValue(isset($this->entity['entity']) ? $this->entity['entity'] : 'entity:' . $this->entity['type'] . ':' . $this->entity['bundle']))
+              ->map('type', $builder->fromValue($this->entity['entity'] ?? 'entity:' . $this->entity['type'] . ':' . $this->entity['bundle']))
               ->map('value', $builder->fromParent())
               ->map('path', $builder->fromValue($field->getName() . '.value'));
           }
@@ -175,7 +178,8 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
   }
 
   /**
-   * Add queries fields to entities
+   * Add queries fields to entities.
+   *
    * @param \Drupal\graphql\GraphQL\ResolverRegistryInterface $registry
    * @param \Drupal\graphql\GraphQL\ResolverBuilder $builder
    */
@@ -223,4 +227,5 @@ abstract class EntityExtension extends SdlSchemaExtensionPluginBase {
       })
     );
   }
+
 }

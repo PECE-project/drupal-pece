@@ -1,12 +1,9 @@
 <?php
-/**
- * @file
- * Contains \Drupal\pece_migrate\Plugin\migrate\source\FPP
- */
-namespace  Drupal\pece_migrate\Plugin\migrate\source;
+
+namespace Drupal\pece_migrate\Plugin\migrate\source;
+
 use Drupal\migrate\Row;
 use Drupal\migrate_drupal\Plugin\migrate\source\d7\FieldableEntity;
-use Exception;
 
 /**
  * Gets all fieldable panels panes from the source.
@@ -46,7 +43,6 @@ class FPP extends FieldableEntity {
       ]);
     $query->innerJoin('fieldable_panels_panes', 'p', static::JOIN);
 
-
     if (isset($this->configuration['bundle'])) {
       $query->condition('p.bundle', (array) $this->configuration['bundle'], 'IN');
     }
@@ -82,8 +78,7 @@ class FPP extends FieldableEntity {
     // Make sure we always have a translation set.
     // if ($row->getSourceProperty('tnid') == 0) {
     //   $row->setSourceProperty('tnid', $row->getSourceProperty('nid'));
-    // }
-
+    // }.
     return parent::prepareRow($row);
   }
 
@@ -105,6 +100,7 @@ class FPP extends FieldableEntity {
     ];
     return $fields;
   }
+
   /**
    * {@inheritdoc}
    */
@@ -113,4 +109,5 @@ class FPP extends FieldableEntity {
     $ids['fpid']['alias'] = 'p';
     return $ids;
   }
+
 }

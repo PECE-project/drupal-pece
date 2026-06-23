@@ -6,7 +6,6 @@ use Drupal\Core\Entity\EntityStorageException;
 use Drupal\user\Entity\User;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\graphql_people\Plugin\GraphQL\DataProducer\TraitUser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 
@@ -77,7 +76,7 @@ class CreateUser extends DataProducerPluginBase implements ContainerFactoryPlugi
    *
    * @throws \Exception
    */
-  private function createAddresses ($addresses) {
+  private function createAddresses($addresses) {
     $paragraphs = [];
     foreach ($addresses as $address) {
       $paragraph = $this->newAddress($address);
@@ -110,11 +109,13 @@ class CreateUser extends DataProducerPluginBase implements ContainerFactoryPlugi
         $account = User::create($values);
         $account->save();
         return $account;
-      } catch (EntityStorageException $e) {
+      }
+      catch (EntityStorageException $e) {
         switch ($e->getCode()) {
           case 23000:
             throw new \Exception($this->t("User already registered."), $e->getCode());
-            break;
+
+          break;
           default:
             throw new \Exception($e->getMessage(), $e->getCode());
         }
@@ -123,4 +124,5 @@ class CreateUser extends DataProducerPluginBase implements ContainerFactoryPlugi
     }
     return NULL;
   }
+
 }

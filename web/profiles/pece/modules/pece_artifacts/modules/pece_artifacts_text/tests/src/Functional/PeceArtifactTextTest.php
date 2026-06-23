@@ -3,7 +3,7 @@
 namespace Drupal\Tests\pece_artifacts_text\Functional;
 
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\node\Functional\NodeTestBase;
+
 /**
  * Test create artifact text.
  *
@@ -19,7 +19,7 @@ class PeceArtifactTextTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = array(
+  protected static $modules = [
     'pece_artifacts_text',
     'components',
     'token',
@@ -29,7 +29,7 @@ class PeceArtifactTextTest extends BrowserTestBase {
     'views',
     'workflow',
     'pece_core',
-  );
+  ];
   protected $profile = 'pece';
   protected $strictConfigSchema = FALSE;
   protected $defaultTheme = "pece_theme";
@@ -48,7 +48,7 @@ class PeceArtifactTextTest extends BrowserTestBase {
     $this->artifactText1 = $this->drupalCreateNode(['type' => 'pece_artifact_text', 'title' => 'Artifact Text 1']);
     // Verify view access.
     $this->drupalLogout();
-    $this->drupalGet('node/'. $this->artifactText1->id());
+    $this->drupalGet('node/' . $this->artifactText1->id());
 
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->titleEquals('Artifact Text 1 | Drupal');
@@ -60,13 +60,13 @@ class PeceArtifactTextTest extends BrowserTestBase {
   public function testNodeAccess() {
     $user = $this->createUser();
 
-    $values = array(
+    $values = [
       'type' => 'pece_artifact_text',
       'title' => 'Artifact Text 2',
       'body' => [
         'value' => 'Content body for Artifact Text 2',
       ],
-    );
+    ];
 
     $values['field_pbc_ref_user'] = [
       'target_id' => $user->id(),
@@ -81,15 +81,15 @@ class PeceArtifactTextTest extends BrowserTestBase {
     $this->drupalLogin($this->createUser([
       'administer nodes',
       'create pece_artifact_text content',
-      'edit any pece_artifact_text content'
+      'edit any pece_artifact_text content',
     ]));
-    $this->drupalGet('node/'. $this->artifactText2->id() . '/edit');
+    $this->drupalGet('node/' . $this->artifactText2->id() . '/edit');
     $this->assertSession()->statusCodeEquals(200);
     $this->drupalLogout();
-    $this->drupalGet('node/'. $this->artifactText2->id());
+    $this->drupalGet('node/' . $this->artifactText2->id());
     $this->assertSession()->statusCodeEquals(403);
     $this->drupalLogin($user);
-    $this->drupalGet('node/'. $this->artifactText2->id());
+    $this->drupalGet('node/' . $this->artifactText2->id());
     $this->assertSession()->statusCodeEquals(200);
   }
 

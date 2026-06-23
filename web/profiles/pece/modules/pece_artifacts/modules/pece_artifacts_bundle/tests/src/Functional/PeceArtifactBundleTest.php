@@ -37,7 +37,7 @@ class PeceArtifactBundleTest extends BrowserTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    // workflow 8.x-1.8 has a PHP 8.x type incompatibility that causes 500
+    // Workflow 8.x-1.8 has a PHP 8.x type incompatibility that causes 500
     // errors when rendering node pages. Skip until workflow is updated.
     // @see https://www.drupal.org/project/workflow/issues/3331769
     $info = \Drupal::service('extension.list.module')->getExtensionInfo('workflow');

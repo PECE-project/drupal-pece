@@ -2,13 +2,9 @@
 
 namespace Drupal\graphql_people\Plugin\GraphQL\DataProducer\Entity;
 
-use Drupal\Core\Entity\EntityInterface;
-use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\Plugin\DataProducerPluginCachingInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
-use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
-use GraphQL\Type\Definition\ResolveInfo;
 
 /**
  * @DataProducer(

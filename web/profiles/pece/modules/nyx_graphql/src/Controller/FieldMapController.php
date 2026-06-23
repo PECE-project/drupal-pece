@@ -78,7 +78,7 @@ class FieldMapController implements ContainerInjectionInterface {
 
     return [
       '#type' => 'markup',
-      '#markup' => '<div id="graphql-field-maps"> ' . $print.'</div>',
+      '#markup' => '<div id="graphql-field-maps"> ' . $print . '</div>',
     ];
   }
 
