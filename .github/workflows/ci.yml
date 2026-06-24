@@ -237,7 +237,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: web/themes/custom/peceful/package.json
+          cache-dependency-path: web/themes/custom/peceful/package-lock.json
 
       - name: Install theme dependencies
         run: npm ci --prefix web/themes/custom/peceful
