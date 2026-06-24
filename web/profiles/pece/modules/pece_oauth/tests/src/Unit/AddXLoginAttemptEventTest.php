@@ -34,11 +34,11 @@ class AddXLoginAttemptEventTest extends UnitTestCase {
    */
   public function testHandlerMethodName(): void {
     $events = AddXLoginAttemptEvent::getSubscribedEvents();
-    $this->assertEquals('AddXLoginAttempt', $events[KernelEvents::RESPONSE][0][0]);
+    $this->assertEquals('addXLoginAttempt', $events[KernelEvents::RESPONSE][0][0]);
   }
 
   /**
-   * @covers ::AddXLoginAttempt
+   * @covers ::addXLoginAttempt
    */
   public function testNonOauthPathDoesNotModifyResponse(): void {
     $kernel = $this->createMock(HttpKernelInterface::class);
@@ -53,13 +53,13 @@ class AddXLoginAttemptEventTest extends UnitTestCase {
     );
 
     $subscriber = new AddXLoginAttemptEvent();
-    $subscriber->AddXLoginAttempt($event);
+    $subscriber->addXLoginAttempt($event);
 
     $this->assertFalse($response->headers->has('X-Login-Attempt'));
   }
 
   /**
-   * @covers ::AddXLoginAttempt
+   * @covers ::addXLoginAttempt
    */
   public function testSuccessfulOauthResponseDoesNotAddHeader(): void {
     $kernel = $this->createMock(HttpKernelInterface::class);
@@ -74,7 +74,7 @@ class AddXLoginAttemptEventTest extends UnitTestCase {
     );
 
     $subscriber = new AddXLoginAttemptEvent();
-    $subscriber->AddXLoginAttempt($event);
+    $subscriber->addXLoginAttempt($event);
 
     $this->assertFalse($response->headers->has('X-Login-Attempt'));
   }
@@ -82,7 +82,7 @@ class AddXLoginAttemptEventTest extends UnitTestCase {
   /**
    * Tests a failed /oauth/token request registers flood and sets the header.
    *
-   * @covers ::AddXLoginAttempt
+   * @covers ::addXLoginAttempt
    */
   public function testFailedOauthRequestRegistersFloodAndSetsHeader(): void {
     $flood = $this->createMock(FloodInterface::class);
@@ -130,7 +130,7 @@ class AddXLoginAttemptEventTest extends UnitTestCase {
     );
 
     $subscriber = new AddXLoginAttemptEvent();
-    $subscriber->AddXLoginAttempt($event);
+    $subscriber->addXLoginAttempt($event);
 
     $this->assertEquals('3', $response->headers->get('X-Login-Attempt'));
   }
