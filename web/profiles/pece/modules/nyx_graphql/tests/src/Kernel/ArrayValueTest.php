@@ -21,6 +21,11 @@ class ArrayValueTest extends KernelTestBase {
    *
    */
   protected function setUp(): void {
+    // drupal/graphql's file_upload service depends on file.validator which was
+    // removed in Drupal 11. Skip until the contrib module adds support.
+    if (version_compare(\Drupal::VERSION, '11.0', '>=')) {
+      $this->markTestSkipped('drupal/graphql file_upload service incompatible with Drupal 11 (file.validator removed).');
+    }
     parent::setUp();
     $this->plugin = \Drupal::service('plugin.manager.graphql.data_producer')
       ->createInstance('array_value');

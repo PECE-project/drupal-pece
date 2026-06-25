@@ -21,7 +21,7 @@ class GroupManagerDefaultTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['system', 'user', 'field', 'taxonomy'];
+  protected static $modules = ['system', 'user', 'field', 'filter', 'text', 'taxonomy'];
 
   /**
    * The test user set as the current session account.
