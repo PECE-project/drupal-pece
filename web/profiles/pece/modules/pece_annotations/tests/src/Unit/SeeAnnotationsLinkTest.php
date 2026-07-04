@@ -10,6 +10,8 @@ use Drupal\node\NodeTypeInterface;
 use Drupal\pece_annotations\Plugin\ExtraField\Display\SeeAnnotationsLink;
 use Drupal\Tests\UnitTestCase;
 
+require_once __DIR__ . '/base_path_stub.php';
+
 /**
  * @coversDefaultClass \Drupal\pece_annotations\Plugin\ExtraField\Display\SeeAnnotationsLink
  * @group pece_annotations
@@ -113,21 +115,6 @@ class SeeAnnotationsLinkTest extends UnitTestCase {
     $entity->method('bundle')->willReturn($bundle);
     $entity->method('id')->willReturn($id);
     return $entity;
-  }
-
-}
-
-// Define base_path() in the source class namespace so unit tests can call it
-// without a full Drupal bootstrap.
-namespace Drupal\pece_annotations\Plugin\ExtraField\Display;
-
-if (!function_exists('Drupal\pece_annotations\Plugin\ExtraField\Display\base_path')) {
-
-  /**
-   * Stub for base_path() so unit tests can call it without a Drupal bootstrap.
-   */
-  function base_path(): string {
-    return '/';
   }
 
 }
