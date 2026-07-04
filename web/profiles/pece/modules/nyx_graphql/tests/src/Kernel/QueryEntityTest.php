@@ -8,12 +8,15 @@ use Drupal\KernelTests\KernelTestBase;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
 use Drupal\nyx_graphql\Wrappers\QueryConnection;
+use Drupal\Tests\nyx_graphql\Traits\GraphqlDrupal11CompatibilityTrait;
 
 /**
  * @coversDefaultClass \Drupal\nyx_graphql\Plugin\GraphQL\DataProducer\QueryEntity
  * @group nyx_graphql
  */
 class QueryEntityTest extends KernelTestBase {
+
+  use GraphqlDrupal11CompatibilityTrait;
 
   protected static $modules = [
     'system',
@@ -35,11 +38,7 @@ class QueryEntityTest extends KernelTestBase {
    *
    */
   protected function setUp(): void {
-    // drupal/graphql's file_upload service depends on file.validator which was
-    // removed in Drupal 11. Skip until the contrib module adds support.
-    if (version_compare(\Drupal::VERSION, '11.0', '>=')) {
-      $this->markTestSkipped('drupal/graphql file_upload service incompatible with Drupal 11 (file.validator removed).');
-    }
+    $this->skipIfDrupal11FileUploadIncompatible();
     parent::setUp();
 
     $this->installEntitySchema('user');

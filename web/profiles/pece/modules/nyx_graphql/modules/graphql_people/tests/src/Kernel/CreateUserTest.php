@@ -5,6 +5,7 @@ namespace Drupal\Tests\graphql_people\Kernel;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\user\Entity\User;
 use Drupal\user\Entity\Role;
+use Drupal\Tests\nyx_graphql\Traits\GraphqlDrupal11CompatibilityTrait;
 
 /**
  * Test CreateUser GraphQL DataProducer security.
@@ -16,6 +17,8 @@ use Drupal\user\Entity\Role;
  * @group nyx_graphql
  */
 class CreateUserTest extends KernelTestBase {
+
+  use GraphqlDrupal11CompatibilityTrait;
 
   /**
    * {@inheritdoc}
@@ -38,11 +41,7 @@ class CreateUserTest extends KernelTestBase {
    * {@inheritdoc}
    */
   protected function setUp(): void {
-    // drupal/graphql's file_upload service depends on file.validator which was
-    // removed in Drupal 11. Skip until the contrib module adds support.
-    if (version_compare(\Drupal::VERSION, '11.0', '>=')) {
-      $this->markTestSkipped('drupal/graphql file_upload service incompatible with Drupal 11 (file.validator removed).');
-    }
+    $this->skipIfDrupal11FileUploadIncompatible();
     parent::setUp();
 
     $this->installEntitySchema('user');
