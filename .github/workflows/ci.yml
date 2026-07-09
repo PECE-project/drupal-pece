@@ -100,8 +100,7 @@ jobs:
           chmod 666 web/sites/default/settings.php
           mkdir -p web/sites/default/files
           chmod -R 777 web/sites/default/files
-          mkdir -p config/sync
-          echo "\$settings['config_sync_directory'] = '$(pwd)/config/sync';" >> web/sites/default/settings.php
+          echo "\$settings['config_sync_directory'] = '$(pwd)/config';" >> web/sites/default/settings.php
 
       - name: Install PECE profile
         run: |
@@ -200,8 +199,7 @@ jobs:
           chmod 666 web/sites/default/settings.php
           mkdir -p web/sites/default/files
           chmod -R 777 web/sites/default/files
-          mkdir -p config/sync
-          echo "\$settings['config_sync_directory'] = '$(pwd)/config/sync';" >> web/sites/default/settings.php
+          echo "\$settings['config_sync_directory'] = '$(pwd)/config';" >> web/sites/default/settings.php
 
       - name: Run PHPUnit Unit + Kernel suites
         env:
