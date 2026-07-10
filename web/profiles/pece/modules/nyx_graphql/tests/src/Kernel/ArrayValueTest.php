@@ -3,12 +3,15 @@
 namespace Drupal\Tests\nyx_graphql\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use Drupal\Tests\nyx_graphql\Traits\GraphqlDrupal11CompatibilityTrait;
 
 /**
  * @coversDefaultClass \Drupal\nyx_graphql\Plugin\GraphQL\DataProducer\ArrayValue
  * @group nyx_graphql
  */
 class ArrayValueTest extends KernelTestBase {
+
+  use GraphqlDrupal11CompatibilityTrait;
 
   protected static $modules = ['system', 'graphql', 'nyx_graphql'];
 
@@ -21,6 +24,7 @@ class ArrayValueTest extends KernelTestBase {
    *
    */
   protected function setUp(): void {
+    $this->skipIfDrupal11FileUploadIncompatible();
     parent::setUp();
     $this->plugin = \Drupal::service('plugin.manager.graphql.data_producer')
       ->createInstance('array_value');

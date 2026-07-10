@@ -6,12 +6,15 @@ use Drupal\KernelTests\KernelTestBase;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
 use Drupal\user\Entity\User;
+use Drupal\Tests\nyx_graphql\Traits\GraphqlDrupal11CompatibilityTrait;
 
 /**
  * @coversDefaultClass \Drupal\nyx_graphql\Plugin\GraphQL\DataProducer\Entity\CreateEntity
  * @group nyx_graphql
  */
 class CreateEntityTest extends KernelTestBase {
+
+  use GraphqlDrupal11CompatibilityTrait;
 
   protected static $modules = [
     'system',
@@ -33,6 +36,7 @@ class CreateEntityTest extends KernelTestBase {
    *
    */
   protected function setUp(): void {
+    $this->skipIfDrupal11FileUploadIncompatible();
     parent::setUp();
 
     $this->installEntitySchema('user');

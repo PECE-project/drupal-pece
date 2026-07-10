@@ -10,6 +10,8 @@ use Drupal\node\NodeTypeInterface;
 use Drupal\pece_annotations\Plugin\ExtraField\Display\SeeAnnotationsLink;
 use Drupal\Tests\UnitTestCase;
 
+require_once __DIR__ . '/base_path_stub.php';
+
 /**
  * @coversDefaultClass \Drupal\pece_annotations\Plugin\ExtraField\Display\SeeAnnotationsLink
  * @group pece_annotations

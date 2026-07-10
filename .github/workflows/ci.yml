@@ -100,8 +100,7 @@ jobs:
           chmod 666 web/sites/default/settings.php
           mkdir -p web/sites/default/files
           chmod -R 777 web/sites/default/files
-          mkdir -p config/sync
-          echo "\$settings['config_sync_directory'] = '$(pwd)/config/sync';" >> web/sites/default/settings.php
+          echo "\$settings['config_sync_directory'] = '$(pwd)/config';" >> web/sites/default/settings.php
 
       - name: Install PECE profile
         run: |
@@ -114,8 +113,14 @@ jobs:
       - name: Run database updates
         run: vendor/bin/drush updb -y
 
+      # drush cst can report an incomplete diff against a cold cache
+      # right after install/update; rebuild first so the check is
+      # deterministic.
+      - name: Rebuild cache
+        run: vendor/bin/drush cache:rebuild
+
       - name: Verify config is in sync
-        run: vendor/bin/drush cst 2>&1 | tee /tmp/cst.txt && [ ! -s /tmp/cst.txt ]
+        run: vendor/bin/drush cst | tee /tmp/cst.txt && [ ! -s /tmp/cst.txt ]
 
   # -----------------------------------------------------------------------
   # Job 3: Check Drupal coding standards on custom modules.
@@ -200,8 +205,7 @@ jobs:
           chmod 666 web/sites/default/settings.php
           mkdir -p web/sites/default/files
           chmod -R 777 web/sites/default/files
-          mkdir -p config/sync
-          echo "\$settings['config_sync_directory'] = '$(pwd)/config/sync';" >> web/sites/default/settings.php
+          echo "\$settings['config_sync_directory'] = '$(pwd)/config';" >> web/sites/default/settings.php
 
       - name: Run PHPUnit Unit + Kernel suites
         env:
@@ -237,7 +241,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: web/themes/custom/peceful/package.json
+          cache-dependency-path: web/themes/custom/peceful/package-lock.json
 
       - name: Install theme dependencies
         run: npm ci --prefix web/themes/custom/peceful

@@ -5,6 +5,7 @@ namespace Drupal\Tests\graphql_people\Kernel;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\user\Entity\User;
 use Drupal\user\Entity\Role;
+use Drupal\Tests\nyx_graphql\Traits\GraphqlDrupal11CompatibilityTrait;
 
 /**
  * Test CreateUser GraphQL DataProducer security.
@@ -16,6 +17,8 @@ use Drupal\user\Entity\Role;
  * @group nyx_graphql
  */
 class CreateUserTest extends KernelTestBase {
+
+  use GraphqlDrupal11CompatibilityTrait;
 
   /**
    * {@inheritdoc}
@@ -38,6 +41,7 @@ class CreateUserTest extends KernelTestBase {
    * {@inheritdoc}
    */
   protected function setUp(): void {
+    $this->skipIfDrupal11FileUploadIncompatible();
     parent::setUp();
 
     $this->installEntitySchema('user');
