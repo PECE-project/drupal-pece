@@ -113,12 +113,14 @@ jobs:
       - name: Run database updates
         run: vendor/bin/drush updb -y
 
-      # Known drift: config/ is currently ~156 objects behind a fresh
-      # install's active config (module updates, schema changes, etc.).
-      # Non-blocking until that drift is audited and reconciled.
+      # drush cst can report an incomplete diff against a cold cache
+      # right after install/update; rebuild first so the check is
+      # deterministic.
+      - name: Rebuild cache
+        run: vendor/bin/drush cache:rebuild
+
       - name: Verify config is in sync
-        continue-on-error: true
-        run: vendor/bin/drush cst 2>&1 | tee /tmp/cst.txt && [ ! -s /tmp/cst.txt ]
+        run: vendor/bin/drush cst | tee /tmp/cst.txt && [ ! -s /tmp/cst.txt ]
 
   # -----------------------------------------------------------------------
   # Job 3: Check Drupal coding standards on custom modules.
