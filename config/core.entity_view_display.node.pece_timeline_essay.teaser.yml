@@ -21,8 +21,18 @@ content:
         rewrite_label: 0
     weight: 1
     region: content
+  title:
+    type: title
+    label: hidden
+    settings:
+      link_to_entity: true
+      tag: h2
+    third_party_settings: {  }
+    weight: -49
+    region: content
 hidden:
   body: true
+  created: true
   extra_field_pece_annotations_annotate_button: true
   extra_field_pece_annotations_see_annotations_link: true
   extra_field_pece_essays_essay_link: true
@@ -41,6 +51,7 @@ hidden:
   langcode: true
   links: true
   search_api_excerpt: true
+  uid: true
 uuid: c0831376-36d8-454a-b814-29512e63b20f
 langcode: en
 status: true
